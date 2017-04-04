@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,10 +16,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -51,12 +49,12 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
-        resetData(toBeCopied);
+        setData(toBeCopied, true);
     }
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws IllegalValueException {
+    public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
         this.tasks.setTasks(tasks);
     }
 
@@ -64,10 +62,20 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
-    public void resetData(ReadOnlyTaskManager newData) {
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
         assert newData != null;
         try {
-            setTasks(newData.getTaskList());
+            if (clearPrevTasks) {
+                ArrayList<Task> tempTasks = new ArrayList<Task>();
+                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
+                    tempTasks.add(Task.createTask(readOnlyTask));
+                }
+                setTasks(tempTasks);
+            } else {
+                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
+                    tasks.add(Task.createTask(readOnlyTask));
+                }
+            }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";
         } catch (IllegalValueException e) {
@@ -110,22 +118,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws DuplicateTaskException {
-        assert editedReadOnlyTask != null;
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
+        assert editedTask != null;
 
-        Task editedTask = null;
-
-        if (editedReadOnlyTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
-                || editedReadOnlyTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
-            try {
-                editedTask = new TaskWithDeadline(editedReadOnlyTask);
-            } catch (IllegalValueException e) {
-            }
-        } else {
-            editedTask = new TaskWithoutDeadline(editedReadOnlyTask);
-        }
-
-        // syncMasterTagListWith(editedTask);
         // TODO: the tags master list will be updated even though the below line
         // fails.
         // This can cause the tags master list to have additional tags that are
@@ -166,6 +161,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
+    // @@author A0093999Y
     /**
      * After a tag is no longer found is in any task, ensure that it is removed
      * from the master tag list {@link #tags} - points to a Tag object in the
@@ -184,6 +180,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    // @@author
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             refreshMasterTagList();

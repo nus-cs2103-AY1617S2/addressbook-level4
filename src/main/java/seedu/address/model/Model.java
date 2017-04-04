@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.events.storage.ImportEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -15,6 +17,15 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    static final String MESSAGE_ON_DELETE = "Task deleted";
+    static final String MESSAGE_ON_ADD = "Task added";
+    static final String MESSAGE_ON_RESET = "Task list loaded";
+    static final String MESSAGE_ON_UPDATE = "Task updated";
+    static final String MESSAGE_ON_SAVETO = "Save location changed to ";
+    static final String MESSAGE_ON_EXPORT = "Data to be exported to ";
+    static final String MESSAGE_ON_USETHIS = "Reading data from ";
+    static final String MESSAGE_ON_IMPORT = "Importing data from ";
+
     /**
      * Show completed task list
      */
@@ -27,8 +38,9 @@ public interface Model {
 
     /**
      * Clears existing backing model and replaces with the provided new data.
+     * @param clearPrevTasks TODO
      */
-    void resetData(ReadOnlyTaskManager newData);
+    void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks);
 
     /** Returns the TaskManager */
     ReadOnlyTaskManager getTaskManager();
@@ -50,7 +62,7 @@ public interface Model {
      *             if {@code filteredTaskListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, Task editedTask) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Returns the filtered task list as an
@@ -61,6 +73,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    /** Updates the filter of the filtered task list to show all tasks */
+    void indicateTaskManagerChanged(String message);
+
     /**
      * Updates the filter of the filtered task list to filter by the given
      * keywords
@@ -69,6 +84,12 @@ public interface Model {
 
     /** Informs eventbus about the change in save location */
     void updateSaveLocation(String path);
+
+    /** Informs eventbus about the need to export data to specified path **/
+    void exportToLocation(String path);
+
+    /** Informs eventbus to read from new save location */
+    void useNewSaveLocation(String path);
 
     /**
      * Divides task lists by categories into three separate ObservableList which
@@ -127,4 +148,24 @@ public interface Model {
      * Clears the commands that were undone by the user
      */
     void clearRedoCommandHistory();
+
+    /**
+     * Resets data to the new set of read data
+     */
+    void handleReadFromNewFileEvent(ReadFromNewFileEvent event);
+
+    /**
+     * Prepare to import data and adds to existing set of tasks
+     */
+    void importFromLocation(String path);
+
+    /**
+     * Imports data and adds to existing set of tasks
+     */
+    void handleImportEvent(ImportEvent event);
+
+    /*
+     * Gets UI index by absolute index
+     */
+    public String getUIIndex(int index);
 }

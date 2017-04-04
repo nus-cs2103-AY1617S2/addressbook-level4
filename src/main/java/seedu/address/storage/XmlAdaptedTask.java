@@ -1,20 +1,19 @@
 package seedu.address.storage;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
 
 /**
  * JAXB-friendly version of the Task.
@@ -25,16 +24,19 @@ public class XmlAdaptedTask {
     private String name;
 
     @XmlElement(required = false)
-    private long startingTime;
+    private String startingTime;
 
     @XmlElement(required = false)
-    private long deadline;
+    private String deadline;
 
     @XmlElement(required = true)
     private String taskType;
 
     @XmlElement(required = true)
     private boolean done;
+
+    @XmlElement(required = true)
+    private boolean manualToday;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -46,6 +48,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask() {
     }
 
+    // @@author A0139388M
     /**
      * Converts a given Task into this class for JAXB use.
      *
@@ -54,31 +57,23 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
-        TaskType tempTaskType = source.getTaskType();
-        if (tempTaskType == null) {
-            taskType = TaskType.TaskWithNoDeadline.toString();
-        } else {
-            taskType = tempTaskType.toString();
-            switch (tempTaskType) {
-            case TaskWithNoDeadline:
-                break;
-            case TaskWithOnlyDeadline:
-                deadline = source.getDeadline().getDate().getTime();
-                break;
-            case TaskWithDeadlineAndStartingTime:
-                startingTime = source.getStartingTime().getDate().getTime();
-                deadline = source.getDeadline().getDate().getTime();
-            }
-        }
-
+        name = source.getName().toString();
         done = source.isDone();
+        manualToday = source.isManualToday();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
+
+        if (source.getStartingTime().isPresent()) {
+            startingTime = Long.toString(source.getStartingTime().get().getDate().getTime());
+        }
+        if (source.getDeadline().isPresent()) {
+            deadline = Long.toString(source.getDeadline().get().getDate().getTime());
+        }
     }
 
+    // @@author A0093999Y
     /**
      * Converts this jaxb-friendly adapted task object into the model's Task
      * object.
@@ -88,33 +83,23 @@ public class XmlAdaptedTask {
      *             task
      */
     public Task toModelType() throws IllegalValueException {
+
+        final Name name = new Name(this.name);
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        if (this.taskType == null) {
-            this.taskType = TaskType.TaskWithNoDeadline.toString();
+
+        Optional<DateTime> deadline = Optional.empty();
+        Optional<DateTime> startingTime = Optional.empty();
+        if (this.deadline != null) {
+            deadline = Optional.of(new DateTime(new Date(Long.parseLong(this.deadline))));
         }
-        final TaskType taskType = TaskType.valueOf(this.taskType);
-        final boolean done = this.done;
-        Task t = null;
-        switch (taskType) {
-        case TaskWithNoDeadline:
-            t = new TaskWithoutDeadline(name, tags, done);
-            break;
-        case TaskWithOnlyDeadline:
-            t = new TaskWithDeadline(name, tags, new Date(this.deadline), null, done);
-            break;
-        case TaskWithDeadlineAndStartingTime:
-            t = new TaskWithDeadline(name, tags, new Date(this.deadline), new Date(this.startingTime), done);
+        if (this.startingTime != null) {
+            startingTime = Optional.of(new DateTime(new Date(Long.parseLong(this.startingTime))));
         }
 
-        if (t == null) {
-            throw new IllegalValueException("Task type invalid");
-        }
-
-        return t;
+        return Task.createTask(name, tags, deadline, startingTime, done, manualToday);
     }
 }

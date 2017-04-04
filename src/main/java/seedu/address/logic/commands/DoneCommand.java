@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
+//@@author A0093999Y
 /**
  * Indicates an existing task is done in the task manager.
  */
@@ -17,13 +17,12 @@ public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Indicates that the task identified is done"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates that the task identified is done"
             + "by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) \n" + "Example: "
-            + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Task Done: %1$s";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task done successfully.";
 
     private final int filteredTaskListIndex;
 
@@ -42,34 +41,34 @@ public class DoneCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(
-                    Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         ReadOnlyTask taskToDone = lastShownList.get(filteredTaskListIndex);
-        Task doneTask = createDoneTask(taskToDone);
-
         try {
+            Task doneTask = createDoneTask(taskToDone);
             model.updateTask(filteredTaskListIndex, doneTask);
+            model.updateFilteredListToShowAll();
+            return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, doneTask), MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException e) {
+            // Should not Happen
+            throw new CommandException(e.getMessage());
         }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(
-                String.format(MESSAGE_DONE_TASK_SUCCESS, doneTask));
+
     }
 
     /**
      * Creates and returns a {@code Task} that is done
+     *
+     * @throws IllegalValueException
      */
-    private static Task createDoneTask(ReadOnlyTask taskToDone) {
+    private static Task createDoneTask(ReadOnlyTask taskToDone) throws IllegalValueException {
         assert taskToDone != null;
 
-        Name updatedName = taskToDone.getName();
-        UniqueTagList updatedTags = taskToDone.getTags();
         boolean updatedDone = true;
-        // TODO: Change Task constructor to TaskWithoutDeadline() or
-        // TaskWithDeadline() based on task type
-        return new Task(updatedName, updatedTags, updatedDone);
+        return Task.createTask(taskToDone.getName(), taskToDone.getTags(), taskToDone.getDeadline(),
+                taskToDone.getStartingTime(), updatedDone, taskToDone.isManualToday());
     }
 }

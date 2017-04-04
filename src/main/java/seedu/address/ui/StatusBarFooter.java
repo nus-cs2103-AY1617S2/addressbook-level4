@@ -22,8 +22,6 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @FXML
     private StatusBar syncStatus;
-    @FXML
-    private StatusBar messageStatus;
 
     private static final String FXML = "StatusBarFooter.fxml";
 
@@ -31,21 +29,12 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
-        setSaveLocation("./" + saveLocation);
         registerAsAnEventHandler(this);
     }
 
     private void addToPlaceholder(AnchorPane placeHolder) {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(getRoot());
-    }
-
-    private void setSaveLocation(String location) {
-        setMessageStatus(location);
-    }
-
-    private void setMessageStatus(String status) {
-        this.messageStatus.setText(status);
     }
 
     private void setSyncStatus(String status) {
@@ -57,6 +46,5 @@ public class StatusBarFooter extends UiPart<Region> {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
-        setMessageStatus(abce.message);
     }
 }

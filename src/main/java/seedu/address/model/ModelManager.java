@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,17 +10,26 @@ import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.TaskManagerChangedEvent;
+import seedu.address.commons.events.model.TaskManagerExportEvent;
+import seedu.address.commons.events.model.TaskManagerImportEvent;
 import seedu.address.commons.events.model.TaskManagerPathChangedEvent;
+import seedu.address.commons.events.model.TaskManagerUseNewPathEvent;
+import seedu.address.commons.events.storage.ImportEvent;
+import seedu.address.commons.events.storage.ReadFromNewFileEvent;
 import seedu.address.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.SaveToCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.model.exceptions.NoPreviousCommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
@@ -40,15 +50,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private Stack<String> commandHistory;
     private Stack<TaskManager> taskHistory;
-    private Stack<Predicate> predicateHistory;
+    private Stack<Predicate<? super ReadOnlyTask>> predicateHistory;
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
-
-    private static final String MESSAGE_ON_DELETE = "Task deleted";
-    private static final String MESSAGE_ON_ADD = "Task added";
-    private static final String MESSAGE_ON_RESET = "Task list loaded";
-    private static final String MESSAGE_ON_UPDATE = "Task updated";
-    private static final String MESSAGE_ON_SAVETO = "Save location changed to ";
 
     // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
@@ -57,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final HashMap<String, Integer> indexMap;
     private boolean completedViewOpen;
 
+    // @@author A0144315N
     /**
      * Compares two ReadOnlyTask by deadline. Tasks without deadline will be
      * deemed as the smallest. If both tasks have deadline, the result will be
@@ -69,6 +74,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     };
 
+    // @@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
@@ -83,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         commandHistory = new Stack<String>();
         taskHistory = new Stack<TaskManager>();
-        predicateHistory = new Stack<Predicate>();
+        predicateHistory = new Stack<Predicate<? super ReadOnlyTask>>();
         redoCommandHistory = new Stack<String>();
         completedViewHistory = new Stack<Boolean>();
         completedViewOpen = false;
@@ -106,8 +112,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyTaskManager newData) {
-        taskManager.resetData(newData);
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
+        taskManager.setData(newData, clearPrevTasks);
         indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
@@ -116,15 +122,44 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
+    // @@author A0139388M
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged(String message) {
-        raise(new TaskManagerChangedEvent(taskManager, message));
+    @Override
+    public void indicateTaskManagerChanged(String message) {
+        logger.fine(message);
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     /** Raises an event to indicate the path needs to be changed */
     private void indicateTaskManagerPathChanged(String message, String path) {
-        raise(new TaskManagerPathChangedEvent(taskManager, message, path));
+        logger.fine(message);
+        raise(new TaskManagerPathChangedEvent(taskManager, path));
     }
+
+    /** Raises an event to indicate the path needs to be changed */
+    private void indicateTaskManagerExport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerExportEvent(taskManager, path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should import data from
+     * specified path
+     */
+    private void indicateTaskManagerImport(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerImportEvent(path));
+    }
+
+    /**
+     * Raises an event to indicate that the task manager should read from a
+     * different path
+     */
+    private void indicateTaskManagerUseNewPath(String message, String path) {
+        logger.fine(message);
+        raise(new TaskManagerUseNewPathEvent(path));
+    }
+    // @@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -140,7 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int filteredTaskListIndex, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -148,6 +183,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(MESSAGE_ON_UPDATE);
     }
 
+    // @@author A0139388M
     @Override
     public void updateSaveLocation(String path) {
         assert path != null;
@@ -155,10 +191,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void exportToLocation(String path) {
+        assert path != null;
+        indicateTaskManagerExport(MESSAGE_ON_EXPORT + path, path);
+    }
+
+    @Override
+    public void importFromLocation(String path) {
+        assert path != null;
+        indicateTaskManagerImport(MESSAGE_ON_IMPORT + path, path);
+    }
+
+    @Override
+    public void useNewSaveLocation(String path) {
+        assert path != null;
+        indicateTaskManagerUseNewPath(MESSAGE_ON_USETHIS + path, path);
+    }
+
+    @Override
     public void saveCurrentState(String commandText) {
         TaskManager copiedTaskManager = new TaskManager(taskManager);
         taskHistory.add(copiedTaskManager);
-        predicateHistory.add(filteredTasks.getPredicate());
+        Predicate<? super ReadOnlyTask> predicate = filteredTasks.getPredicate();
+        predicateHistory.add(predicate);
         commandHistory.add(commandText);
         completedViewHistory.add(completedViewOpen);
     }
@@ -167,11 +222,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void discardCurrentState() {
         assert commandHistory.size() == taskHistory.size() && taskHistory.size() == predicateHistory.size()
                 && predicateHistory.size() == completedViewHistory.size();
-        assert (!commandHistory.isEmpty());
-        String toUndo = commandHistory.pop();
-        taskHistory.pop();
-        predicateHistory.pop();
-        completedViewHistory.pop();
+        if (!commandHistory.isEmpty()) {
+            commandHistory.pop();
+            taskHistory.pop();
+            predicateHistory.pop();
+            completedViewHistory.pop();
+        }
     }
 
     @Override
@@ -185,7 +241,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // Get previous command, taskManager and view
         String toUndo = commandHistory.pop();
-        taskManager.resetData(taskHistory.pop());
+        taskManager.setData(taskHistory.pop(), true);
         filteredTasks.setPredicate(predicateHistory.pop());
 
         // Set completed tasks view
@@ -200,6 +256,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         if (toUndo.startsWith(SaveToCommand.COMMAND_WORD)) {
             indicateTaskManagerPathChanged(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(UseThisCommand.COMMAND_WORD)) {
+            indicateTaskManagerUseNewPath(MESSAGE_ON_UNDO, null);
+        } else if (toUndo.startsWith(ExportCommand.COMMAND_WORD)) {
+            indicateTaskManagerExport(MESSAGE_ON_UNDO, null);
         } else {
             indicateTaskManagerChanged(MESSAGE_ON_UNDO);
         }
@@ -222,6 +282,21 @@ public class ModelManager extends ComponentManager implements Model {
         redoCommandHistory.clear();
     }
 
+    @Override
+    @Subscribe
+    public void handleReadFromNewFileEvent(ReadFromNewFileEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "New file data loaded into model"));
+        setData(event.data, true);
+    }
+
+    @Override
+    @Subscribe
+    public void handleImportEvent(ImportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Add file data into model"));
+        setData(event.data, false);
+    }
+    // @@author
+
     // =========== Filtered Task List Accessors
     // =============================================================
 
@@ -233,7 +308,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        indicateTaskManagerChanged(MESSAGE_ON_UPDATELIST);
     }
 
     @Override
@@ -276,43 +350,91 @@ public class ModelManager extends ComponentManager implements Model {
         };
     }
 
+    // @@author A0144315N
     @Override
-    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
+    public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
+            ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
         taskListFuture.clear();
         taskListCompleted.clear();
+        // All operations to be done in a temporary list to prevent
+        // ObservableList from refreshing UI multiple times
+        ArrayList<ReadOnlyTask> todayTempList = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> futureTempList = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> completedTempList = new ArrayList<ReadOnlyTask>();
+
+        splitTaskList(taskList, todayTempList, futureTempList, completedTempList);
+        sortTaskLists(todayTempList, futureTempList, completedTempList);
+        assignUiIndex(todayTempList, futureTempList, completedTempList);
+
+        // add local temporary lists back to ObservableList to update UI views
+        taskListToday.addAll(todayTempList);
+        taskListFuture.addAll(futureTempList);
+        taskListCompleted.addAll(completedTempList);
+    }
+
+    private void splitTaskList(ObservableList<ReadOnlyTask> taskList, ArrayList<ReadOnlyTask> todayTempList,
+            ArrayList<ReadOnlyTask> futureTempList, ArrayList<ReadOnlyTask> completedTempList) {
+        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
+        while (iter.hasNext()) {
+            ReadOnlyTask tmpTask = iter.next();
+            // set task id to be displayed, the id here is 1-based
+            if (tmpTask.isToday() && !tmpTask.isDone()) {
+                // absolute index here will be replace to relative index in
+                // assignUiIndex method
+                tmpTask.setID("" + (iter.nextIndex() - 1));
+                todayTempList.add(tmpTask);
+            } else if (!tmpTask.isDone()) {
+                tmpTask.setID("" + (iter.nextIndex() - 1));
+                futureTempList.add(tmpTask);
+            } else {
+                tmpTask.setID("" + (iter.nextIndex() - 1));
+                completedTempList.add(tmpTask);
+            }
+        }
+    }
+
+    private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList, ArrayList<ReadOnlyTask> futureTempList,
+            ArrayList<ReadOnlyTask> completedTempList) {
+        todayTempList.sort(TaskDatetimeComparator);
+        futureTempList.sort(TaskDatetimeComparator);
+        completedTempList.sort(TaskDatetimeComparator);
+    }
+
+    private void assignUiIndex(ArrayList<ReadOnlyTask> taskListToday, ArrayList<ReadOnlyTask> taskListFuture,
+            ArrayList<ReadOnlyTask> taskListCompleted) {
         // TODO potential performance bottleneck here
         indexMap.clear();
         // initialise displayed index
         int todayID = 1;
         int futureID = 1;
         int completedID = 1;
-        ListIterator<ReadOnlyTask> iter = taskList.listIterator();
-        while (iter.hasNext()) {
-            ReadOnlyTask tmpTask = iter.next();
-            // set task id to be displayed, the id here is 1-based
-            if (tmpTask.isToday() && !tmpTask.isDone()) {
-                tmpTask.setID("T" + todayID);
-                taskListToday.add(tmpTask);
-                indexMap.put("T" + todayID, iter.nextIndex() - 1);
-                todayID++;
-            } else if (!tmpTask.isDone()) {
-                tmpTask.setID("F" + futureID);
-                taskListFuture.add(tmpTask);
-                indexMap.put("F" + futureID, iter.nextIndex() - 1);
-                futureID++;
-            } else {
-                tmpTask.setID("C" + completedID);
-                taskListCompleted.add(tmpTask);
-                indexMap.put("C" + completedID, iter.nextIndex() - 1);
-                completedID++;
-            }
+        ListIterator<ReadOnlyTask> iterToday = taskListToday.listIterator();
+        ListIterator<ReadOnlyTask> iterFuture = taskListFuture.listIterator();
+        ListIterator<ReadOnlyTask> iterCompleted = taskListCompleted.listIterator();
+        while (iterToday.hasNext()) {
+            ReadOnlyTask tmpTask = iterToday.next();
+            indexMap.put("T" + todayID, Integer.valueOf(tmpTask.getID()));
+            tmpTask.setID("T" + todayID);
+            todayID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
         }
-        taskListToday.sort(TaskDatetimeComparator);
-        taskListFuture.sort(TaskDatetimeComparator);
-        taskListCompleted.sort(TaskDatetimeComparator);
+        while (iterFuture.hasNext()) {
+            ReadOnlyTask tmpTask = iterFuture.next();
+            indexMap.put("F" + futureID, Integer.valueOf(tmpTask.getID()));
+            tmpTask.setID("F" + futureID);
+            futureID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+        }
+        while (iterCompleted.hasNext()) {
+            ReadOnlyTask tmpTask = iterCompleted.next();
+            indexMap.put("C" + completedID, Integer.valueOf(tmpTask.getID()));
+            tmpTask.setID("C" + completedID);
+            completedID++;
+            logger.info(tmpTask.getAsText() + ">>> Assign ID:" + tmpTask.getID());
+        }
     }
 
     // For debugging
@@ -327,6 +449,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public int parseUIIndex(String uiIndex) {
+        uiIndex = uiIndex.toUpperCase();
+        assert isValidUIIndex(uiIndex);
         logger.info(">>>>>>>>>>>>query UI index:" + uiIndex);
         logger.info(">>>>>>>>>>>>Absolute index:" + (indexMap.get(uiIndex) + 1));
         assert uiIndex != null;
@@ -335,13 +459,28 @@ public class ModelManager extends ComponentManager implements Model {
         return indexMap.get(uiIndex) + 1;
     }
 
+    /*
+     * gets UI index by absolute index
+     */
+    @Override
+    public String getUIIndex(int index) {
+        return filteredTasks.get(index).getID();
+    }
+
     @Override
     public boolean isValidUIIndex(String uiIndex) {
+        uiIndex = uiIndex.toUpperCase();
         return indexMap.containsKey(uiIndex);
     }
 
+    // @@author A0093999Y
     public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
         assert date != null : "no date provided for a deadline search";
-        return t -> t.getDeadline().isSameDay(date);
+        return t -> {
+            if (t.getDeadline().isPresent()) {
+                return t.getDeadline().get().isSameDay(date);
+            }
+            return false;
+        };
     }
 }

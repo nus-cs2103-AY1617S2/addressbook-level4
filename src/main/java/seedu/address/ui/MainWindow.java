@@ -1,12 +1,25 @@
 package seedu.address.ui;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Logger;
+
+import org.controlsfx.control.textfield.TextFields;
+
+import com.google.common.eventbus.Subscribe;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -14,9 +27,14 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.commons.events.ui.UpdateStatusBarEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -25,6 +43,7 @@ import seedu.address.model.task.ReadOnlyTask;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(MainWindow.class);
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
@@ -33,6 +52,7 @@ public class MainWindow extends UiPart<Region> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Scene scene;
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
@@ -45,13 +65,16 @@ public class MainWindow extends UiPart<Region> {
     private ObservableList<ReadOnlyTask> taskListCompleted;
 
     @FXML
-    private AnchorPane commandBoxPlaceholder;
+    private Label titleDate;
+
+    @FXML
+    private Label titleDay;
+
+    // @FXML
+    // private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
-
-    @FXML
-    private MenuItem helpMenuItem;
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
@@ -62,6 +85,13 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane completedTaskListPlaceholder;
 
+    @FXML
+    private JFXTextField commandTextField;
+
+    @FXML
+    private Label commandResult;
+
+    // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -70,57 +100,56 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
 
+        // Set date
+        Calendar cal = Calendar.getInstance();
+        this.titleDate.setText(new SimpleDateFormat("dd MMM").format(cal.getTime()));
+        this.titleDay.setText(new SimpleDateFormat("EE").format(cal.getTime()));
+        this.commandTextField.setLabelFloat(true);
+        TextFields.bindAutoCompletion(commandTextField, "add", "clear", "delete", "deletetag", "done", "edit", "exit",
+                "find", "help", "list", "listcompleted", "notdone", "redo", "renametag", "undo", "saveto", "today");
+        this.commandResult.setText("");
+
         // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
         setWindowMinSize();
         setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
+        scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        registerAsAnEventHandler(this);
+    }
 
-        setAccelerators();
+    // @@author
+    /** Set hotkeys for today and future tasklists */
+    private void setHotKeys() {
+        KeyCodeCombination todayKey = new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_ANY);
+        KeyCodeCombination futureKey = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.CONTROL_ANY);
+        TitledPane todayPanel = taskListPanel.getTodayTaskListPanel();
+        TitledPane futurePanel = taskListPanel.getFutureTaskListPanel();
+
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(final KeyEvent keyEvent) {
+                if (todayKey.match(keyEvent)) {
+                    todayPanel.setExpanded(!(todayPanel.isExpanded()));
+                } else if (futureKey.match(keyEvent)) {
+                    futurePanel.setExpanded(!(futurePanel.isExpanded()));
+                }
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
-
     /**
-     * Sets the accelerator of a MenuItem.
-     *
-     * @param keyCombination
-     *            the KeyCombination value of the accelerator
+     * Sets hotkeys for tasklists to expand and minimize.
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
-         * version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea)
-         * will consume function-key events. Because CommandBox contains a
-         * TextField, and ResultDisplay contains a TextArea, thus some
-         * accelerators (e.g F1) will not work when the focus is in them because
-         * the key event is consumed by the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and
-         * open help window purposely so to support accelerators even when focus
-         * is in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
+    private void setHotKeyForTaskLists(TitledPane panel, KeyCombination k) {
     }
 
+    // @@author A0144315N
     void fillInnerParts() {
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
@@ -128,11 +157,13 @@ public class MainWindow extends UiPart<Region> {
         prepareTaskList();
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        // new CommandBox(getCommandBoxPlaceholder(), logic);
         // TODO: show completedTaskPanel when show completed command is
         // implemented
         new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
+
+        setHotKeys();
     }
 
     /*
@@ -148,10 +179,12 @@ public class MainWindow extends UiPart<Region> {
         logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
 
-    private AnchorPane getCommandBoxPlaceholder() {
-        return commandBoxPlaceholder;
-    }
+    /*
+     * private AnchorPane getCommandBoxPlaceholder() { return
+     * commandBoxPlaceholder; }
+     */
 
+    // @@author
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
     }
@@ -233,4 +266,32 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    @FXML
+    private void handleCommandInputChanged() {
+        try {
+            CommandResult commandResult = logic.execute(commandTextField.getText());
+            // process result of the command
+            commandTextField.setText("");
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
+        } catch (CommandException e) {
+            // handle command failure
+            raise(new NewResultAvailableEvent(e.getMessage()));
+            raise(new UpdateStatusBarEvent("Invalid command. Type \"Help\" to see format."));
+        }
+    }
+
+    // @@author A0144315N
+    @Subscribe
+    public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
+        this.commandResult.setText(event.getMessage());
+        JFXSnackbar toast = new JFXSnackbar(taskListPanelPlaceholder);
+        EventHandler handler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                toast.close();
+            }
+        };
+        toast.show(event.getMessage(), "OK", 4000, handler);
+    }
 }

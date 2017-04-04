@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -13,7 +15,12 @@ public class TaskBuilder {
     private TestTask task;
 
     public TaskBuilder() {
-        this.task = new TestTask();
+        try {
+            this.task = new TestTask();
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -28,11 +35,12 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        task.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            task.getTags().add(new Tag(tag));
+    public TaskBuilder withTags(String... tags) throws IllegalValueException {
+        HashSet<Tag> setTags = new HashSet<Tag>();
+        for (String tag : tags) {
+            setTags.add(new Tag(tag));
         }
+        task.setTags(new UniqueTagList(setTags));
         return this;
     }
 

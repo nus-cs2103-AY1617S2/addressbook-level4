@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.ReadOnlyTask.TaskType;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
@@ -21,8 +20,7 @@ import seedu.address.model.task.ReadOnlyTask.TaskType;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections
-            .observableArrayList();
+    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given
@@ -58,23 +56,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask)
-            throws DuplicateTaskException {
+    public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask)
-                && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
-        }
-        if (editedTask.getTaskType() == TaskType.TaskWithDeadlineAndStartingTime
-                || editedTask.getTaskType() == TaskType.TaskWithOnlyDeadline) {
-            try {
-                taskToUpdate = new TaskWithDeadline(editedTask);
-            } catch (IllegalValueException e) {
-            }
-        } else {
-            taskToUpdate = new TaskWithoutDeadline(editedTask);
         }
 
         // TODO: The code below is just a workaround to notify observers of the
@@ -83,7 +70,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // class.
         // Then, TaskCard should then bind its text labels to those observable
         // properties.
-        internalList.set(index, taskToUpdate);
+        internalList.set(index, editedTask);
     }
 
     /**
@@ -105,26 +92,10 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws IllegalValueException {
-        Task toAdd = null;
+    public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
         final UniqueTaskList replacement = new UniqueTaskList();
-        for (final ReadOnlyTask task : tasks) {
-            switch (task.getTaskType()) {
-            case TaskWithNoDeadline:
-                toAdd = new TaskWithoutDeadline(task);
-                break;
-            case TaskWithOnlyDeadline:
-                toAdd = new TaskWithDeadline(task);
-                break;
-            case TaskWithDeadlineAndStartingTime:
-                toAdd = new TaskWithDeadline(task);
-                break;
-            default:
-                throw new IllegalValueException("No valid task type provided");
-            }
-
-            replacement.add(toAdd);
+        for (final Task task : tasks) {
+            replacement.add(task);
         }
         setTasks(replacement);
     }
@@ -142,8 +113,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                        && this.internalList
-                                .equals(((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
 
     @Override

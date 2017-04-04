@@ -15,8 +15,10 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompletedCommand;
@@ -24,8 +26,9 @@ import seedu.address.logic.commands.NotDoneCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SaveToCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -62,8 +65,8 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments, logicManager);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments, logicManager);
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommandParser().parse(arguments, logicManager);
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments, logicManager);
@@ -94,6 +97,15 @@ public class Parser {
 
         case SaveToCommand.COMMAND_WORD:
             return new SaveToCommandParser().parse(arguments);
+
+        case UseThisCommand.COMMAND_WORD:
+            return new UseThisCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();

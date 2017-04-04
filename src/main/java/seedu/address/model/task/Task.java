@@ -1,32 +1,38 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents a Task in the task manager. not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
-    public static final int MAX_TIME_DIFF = 2 ^ 32 - 1;
+public abstract class Task implements ReadOnlyTask {
+
+    public static final String ONLY_STARTING_DATE_AVAILABLE_ERROR = "Task should not contain"
+            + " a starting time without a deadline";
 
     private Name name;
     private String id;
     private UniqueTagList tags;
 
     private boolean done;
-    protected boolean today = false;
+    private boolean isAnimated = false;
+    protected boolean manualToday = false;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags, boolean done) {
+    public Task(Name name, UniqueTagList tags, boolean done, boolean manualToday) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.done = done;
+        this.manualToday = manualToday;
         this.id = "";
     }
 
@@ -34,7 +40,38 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags(), source.isDone());
+        this(source.getName(), source.getTags(), source.isDone(), source.isManualToday());
+    }
+
+    // @@author A0093999Y
+    /**
+     * Selecting the Task to construct based on what dates is available
+     */
+    public static Task createTask(Name name, UniqueTagList tags, Optional<DateTime> deadline,
+            Optional<DateTime> startingTime, boolean done, boolean manualToday) throws IllegalValueException {
+        if (!deadline.isPresent() && !startingTime.isPresent()) {
+            return new FloatingTask(name, tags, done, manualToday);
+        } else if (deadline.isPresent() && !startingTime.isPresent()) {
+            return new DeadlineTask(name, tags, deadline.get().getDate(), done, manualToday);
+        } else if (deadline.isPresent() && startingTime.isPresent()) {
+            return new EventTask(name, tags, deadline.get().getDate(), startingTime.get().getDate(), done, manualToday);
+        } else {
+            throw new IllegalValueException(ONLY_STARTING_DATE_AVAILABLE_ERROR);
+        }
+    }
+
+    /**
+     * Selecting the Task to construct from a ReadOnlyTask
+     */
+    public static Task createTask(ReadOnlyTask readOnlyTask) throws IllegalValueException {
+        return createTask(readOnlyTask.getName(), readOnlyTask.getTags(), readOnlyTask.getDeadline(),
+                readOnlyTask.getStartingTime(), readOnlyTask.isDone(), readOnlyTask.isManualToday());
+    }
+
+    // @@author
+    @Override
+    public Name getName() {
+        return name;
     }
 
     public void setName(Name name) {
@@ -42,18 +79,13 @@ public class Task implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
     @Override
     public boolean isDone() {
         return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     @Override
@@ -68,16 +100,17 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
-    /**
-     * Updates this task with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setTags(replacement.getTags());
-        this.setDone(replacement.isDone());
+    public void setToday() {
+        manualToday = true;
     }
+
+    @Override
+    public boolean isManualToday() {
+        return manualToday;
+    }
+
+    @Override
+    public abstract boolean isToday();
 
     @Override
     public boolean equals(Object other) {
@@ -99,30 +132,12 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskType getTaskType() {
-        return null;
-    }
+    public abstract String getTaskDateTime();
 
     @Override
-    public String getTaskDateTime() {
-        return null;
-    }
+    public abstract Optional<DateTime> getDeadline();
 
-    @Override
-    public void setToday() {
-        today = true;
-    }
-
-    @Override
-    public boolean isToday() {
-        return today;
-    }
-
-    @Override
-    public DateTime getDeadline() {
-        return null;
-    }
-
+    // @@author A0144315N
     @Override
     public String getID() {
         return this.id;
@@ -134,18 +149,20 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public String getTaskAbsoluteDateTime() {
-        return null;
+    public void setAnimation(boolean flag) {
+        this.isAnimated = flag;
     }
 
     @Override
-    public DateTime getStartingTime() {
-        return null;
+    public boolean isAnimated() {
+        return this.isAnimated;
     }
 
+    // @@author
     @Override
-    public int compareTo(ReadOnlyTask task2) {
-        return 0;
-    }
+    public abstract String getTaskAbsoluteDateTime();
+
+    @Override
+    public abstract Optional<DateTime> getStartingTime();
 
 }

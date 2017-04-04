@@ -43,6 +43,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return command;
     }
 
+    // @@author A0139388M
     private CommandResult executeCommand(String commandText, Command toExecute) throws CommandException {
         try {
             if (!(toExecute instanceof UndoCommand)) {
@@ -67,6 +68,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throw e;
         }
     }
+    // @@author
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -87,5 +89,13 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public boolean isValidUIIndex(String uiIndex) {
         return model.isValidUIIndex(uiIndex);
+    }
+
+    /*
+     * Gets UI index by absolute index
+     */
+    @Override
+    public String getUIIndex(int index) {
+        return model.getUIIndex(index);
     }
 }

@@ -14,7 +14,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
-import seedu.address.model.task.TaskWithoutDeadline;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class XmlTaskManagerStorageTest {
@@ -80,14 +80,14 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addTask(new TaskWithoutDeadline(td.hoon));
-        original.removeTask(new TaskWithoutDeadline(td.mathAssgn));
+        original.addTask(new FloatingTask(td.hoon));
+        original.removeTask(new FloatingTask(td.mathAssgn));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         // Save and read without specifying file path
-        original.addTask(new TaskWithoutDeadline(td.ida));
+        original.addTask(new FloatingTask(td.ida));
         xmlTaskManagerStorage.saveTaskManager(original); // file path not
                                                          // specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path

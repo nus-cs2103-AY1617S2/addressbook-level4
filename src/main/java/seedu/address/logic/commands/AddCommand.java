@@ -8,10 +8,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithDeadline;
-import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -25,6 +26,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME [t/TAG]...\n" + "Example: " + COMMAND_WORD + " CS2103 Refactoring Task t/CS2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "New task added successfully.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
 
     private final Task toAdd;
@@ -40,7 +42,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithoutDeadline(new Name(name), new UniqueTagList(tagSet), false);
+        this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet), false, false);
+        this.toAdd.setAnimation(true);
     }
 
     /**
@@ -55,7 +58,8 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName.trim()));
         }
         System.out.print("deadline: " + deadline);
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), deadline, null, false);
+        this.toAdd = new DeadlineTask(new Name(name), new UniqueTagList(tagSet), deadline, false, false);
+        this.toAdd.setAnimation(true);
     }
 
     /**
@@ -69,7 +73,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName.trim()));
         }
-        this.toAdd = new TaskWithDeadline(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false);
+        this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet), deadline, startingTime, false, false);
+        this.toAdd.setAnimation(true);
     }
 
     @Override
@@ -77,11 +82,15 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            model.updateFilteredListToShowAll();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+    }
+
+    // For testing
+    public Task getTask() {
+        return toAdd;
     }
 
 }

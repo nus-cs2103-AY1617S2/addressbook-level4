@@ -12,6 +12,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
+//@@author A0093999Y
 /**
  * Deletes an existing tag in the task manager.
  */
@@ -19,11 +20,11 @@ public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = "deletetag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes an existing tag in the task manager "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing tag in the task manager "
             + "Parameters: <tag_name>\n" + "Example: " + COMMAND_WORD + " work";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Tag deleted successfully.";
 
     private final Tag oldTag;
 
@@ -56,21 +57,22 @@ public class DeleteTagCommand extends Command {
             }
 
             if (containsOldTag) {
-                // TODO: Change Task constructor to TaskWithoutDeadline() or
-                // TaskWithDeadline() based on task type
-                Task newTask = new Task(taskToEdit.getName(),
-                        new UniqueTagList(newTagList), taskToEdit.isDone());
                 try {
+                    Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
+                            taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
+                            taskToEdit.isManualToday());
                     model.updateTask(index, newTask);
                 } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                    throw new CommandException(
-                            EditCommand.MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
+                } catch (IllegalValueException e) {
+                    // Should not happen
+                    throw new CommandException(e.getMessage());
                 }
 
             }
         }
 
-        return new CommandResult(
-                String.format(MESSAGE_DELETE_TAG_SUCCESS, oldTag.getTagName()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, oldTag.getTagName()),
+                MESSAGE_SUCCESS_STATUS_BAR);
     }
 }

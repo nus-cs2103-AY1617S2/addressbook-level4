@@ -1,5 +1,8 @@
 package seedu.address.model.task;
 
+import java.util.Date;
+import java.util.Optional;
+
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -7,57 +10,46 @@ import seedu.address.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field
  * values are validated.
  */
-public interface ReadOnlyTask {
+public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
 
-    /**
-     * @return the title name of the task
-     */
+    // Returns Name of Task
     Name getName();
 
-    /**
-     *
-     * @return the completion status of the task
-     */
+    // Returns Completion status of Task
     boolean isDone();
 
-    /**
-     * make the task appear in the "Today" label
-     */
-    void setToday();
+    // Returns whether this task has been manually set to Today
+    boolean isManualToday();
 
-    /**
-     *
-     * @return whether the task should appear in the "Today" label
-     */
+    // Returns whether this task should appear in the today task list
     boolean isToday();
 
-    // id field reserved for UI to store temporary index
+    // Returns id field reserved for UI to store temporary index
     String getID();
 
-    void setID(String string);
+    // Sets id field reserved for UI to store temporary index
+    void setID(String id);
 
-    /**
-     *
-     * @return an enum task type: TaskWithNoDeadline, TaskWithOnlyDeadline,
-     *         TaskWithDeadlineAndStartingTime, RecurringTask
-     */
-    TaskType getTaskType();
+    // Sets animation flag
+    void setAnimation(boolean flag);
 
-    /**
-     *
-     * @return a natural relative representation of a datetime
-     */
+    // Gets animation flag
+    boolean isAnimated();
+
+    // Returns whether the task is overdue
+    boolean isOverdue();
+
+    // Returns a natural relative representation of a datetime
     String getTaskDateTime();
 
-    /**
-     *
-     * @return a natural absolute representation of a datetime
-     */
+    // Returns a natural absolute representation of a datetime
     String getTaskAbsoluteDateTime();
 
-    DateTime getDeadline();
+    // Returns copy of Deadline of Task
+    Optional<DateTime> getDeadline();
 
-    DateTime getStartingTime();
+    // Returns copy of Starting Time of Task
+    Optional<DateTime> getStartingTime();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -65,32 +57,15 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    // @@author A0093999Y
     /**
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
+        assert other != null;
         return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName())
-                        && hasSameDateTime(other)); // state
-        // checks
-        // here
-        // onwards
-    }
-
-    default boolean hasSameDateTime(ReadOnlyTask other) {
-        if ((this.getTaskType() == null
-                || this.getTaskType() == TaskType.TaskWithNoDeadline)
-                && (other.getTaskType() == null || other
-                        .getTaskType() == TaskType.TaskWithNoDeadline)) {
-            return true;
-        } else if (this.getTaskType() != other.getTaskType()) {
-            return false;
-        } else {
-            return this.getTaskAbsoluteDateTime()
-                    .equals(other.getTaskAbsoluteDateTime());
-        }
+                || (other.compareTo(this) == 0 && other.getName().equals(this.getName()));
     }
 
     /**
@@ -104,13 +79,23 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
-    enum TaskType {
-        TaskWithNoDeadline, TaskWithOnlyDeadline, TaskWithDeadlineAndStartingTime, RecurringTask;
-    }
-
     /**
-     * Allows comparison of tasks by deadline. Tasks without deadline will be
-     * deemed as the smallest
+     * Used for sorting tasks in lists
      */
-    int compareTo(ReadOnlyTask task2);
+    @Override
+    public default int compareTo(ReadOnlyTask other) {
+        DateTime minDateTime = new DateTime(new Date(Long.MIN_VALUE));
+        int compareEnd = this.getDeadline().orElse(minDateTime).compareTo(other.getDeadline().orElse(minDateTime));
+        int compareStart = this.getStartingTime().orElse(minDateTime)
+                .compareTo(other.getStartingTime().orElse(minDateTime));
+        if (this.isOverdue() && !other.isOverdue()) {
+            return -1;
+        } else if (!this.isOverdue() && other.isOverdue()) {
+            return 1;
+        } else if (compareEnd != 0) {
+            return compareEnd;
+        } else {
+            return compareStart;
+        }
+    }
 }

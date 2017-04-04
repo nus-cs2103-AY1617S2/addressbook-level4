@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-    </stylesheets>
-    <children>
-      <TitledPane animated="false" text="Today">
-        <content>
-          <AnchorPane>
-               <children>
-                    <ListView fx:id="todayTaskListView" prefHeight="200.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
+<!-- @@author A0144315N -->
+<ScrollPane fitToWidth="true" stylesheets="@Extensions.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+	<VBox prefWidth="550.0">
+	      <children>
+	      	<AnchorPane>
+
+	          <TitledPane fx:id="todayTaskListPanel" animated="false" prefWidth="550.0" text="Today" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+	               <content>
+	            		    <ListView fx:id="todayTaskListView" prefHeight="1000.0" prefWidth="550.0" />
+	               </content>
+	            </TitledPane>
+	        </AnchorPane>
+	        <AnchorPane>
+	          <TitledPane fx:id="futureTaskListPanel" animated="false" prefWidth="550.0" text="Future" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+	               <content>
+			              	<ListView fx:id="futureTaskListView" prefHeight="1000.0" prefWidth="550.0" />
+	               </content>
+	            </TitledPane>
             </AnchorPane>
-        </content>
-      </TitledPane>
-      <TitledPane animated="false" text="Future">
-        <content>
-          <AnchorPane>
-               <children>
-                  <ListView fx:id="futureTaskListView" prefHeight="200.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-    </children>
-</VBox>
+		</children>
+	</VBox>
+  </content>
+</ScrollPane>

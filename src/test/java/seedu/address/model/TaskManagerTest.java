@@ -15,9 +15,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskWithoutDeadline;
 import seedu.address.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -36,13 +36,13 @@ public class TaskManagerTest {
     @Test
     public void resetData_null_throwsAssertionError() {
         thrown.expect(AssertionError.class);
-        taskManager.resetData(null);
+        taskManager.setData(null, true);
     }
 
     @Test
     public void resetData_withValidReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
         assertEquals(newData, taskManager);
     }
 
@@ -50,20 +50,17 @@ public class TaskManagerTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(
-                new TaskWithoutDeadline(td.mathAssgn),
-                new TaskWithoutDeadline(td.mathAssgn));
+        List<Task> newTasks = Arrays.asList(new FloatingTask(td.mathAssgn), new FloatingTask(td.mathAssgn));
         List<Tag> newTags = td.mathAssgn.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
     }
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TaskManager typicalTaskManager = new TypicalTestTasks()
-                .getTypicalTaskManager();
+        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
         // Repeat the first tag twice
@@ -71,7 +68,7 @@ public class TaskManagerTest {
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);
-        taskManager.resetData(newData);
+        taskManager.setData(newData, true);
     }
 
     /**
@@ -79,13 +76,10 @@ public class TaskManagerTest {
      * interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
-        private final ObservableList<ReadOnlyTask> tasks = FXCollections
-                .observableArrayList();
-        private final ObservableList<Tag> tags = FXCollections
-                .observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks,
-                Collection<? extends Tag> tags) {
+        TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }

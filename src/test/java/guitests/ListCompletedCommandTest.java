@@ -13,23 +13,23 @@ public class ListCompletedCommandTest extends TaskManagerGuiTest {
     @Test
     public void openCompletedTask() throws InterruptedException {
         commandBox.runCommand(ListCompletedCommand.COMMAND_WORD);
-        assertTrue(completedTaskList.isWindowOpen());
+        assertTrue(completedTaskListPanel.isWindowOpen());
         assertResultMessage(ListCompletedCommand.MESSAGE_SUCCESS);
 
         commandBox.runCommand(ListCompletedCommand.COMMAND_WORD);
-        assertTrue(completedTaskList.isWindowOpen());
+        assertTrue(completedTaskListPanel.isWindowOpen());
         assertResultMessage(ListCompletedCommand.MESSAGE_SUCCESS);
 
         commandBox.runCommand(ListCommand.COMMAND_WORD);
-        assertFalse(completedTaskList.isWindowOpen());
+        assertFalse(completedTaskListPanel.isWindowOpen());
         assertResultMessage(ListCommand.MESSAGE_SUCCESS);
 
         commandBox.runCommand(ListCommand.COMMAND_WORD);
-        assertFalse(completedTaskList.isWindowOpen());
+        assertFalse(completedTaskListPanel.isWindowOpen());
         assertResultMessage(ListCommand.MESSAGE_SUCCESS);
 
         commandBox.runCommand(ListCompletedCommand.COMMAND_WORD);
-        assertTrue(completedTaskList.isWindowOpen());
+        assertTrue(completedTaskListPanel.isWindowOpen());
         assertResultMessage(ListCompletedCommand.MESSAGE_SUCCESS);
     }
 

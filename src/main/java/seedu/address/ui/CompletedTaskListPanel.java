@@ -25,17 +25,19 @@ public class CompletedTaskListPanel extends UiPart<Region> {
     private static final String FXML = "CompletedTaskListPanel.fxml";
 
     // Init parameters for completed panel animation
-    private static double COMPLETED_PANEL_HEIGHT = 400.0d;
+    private static double completedPanelHeight = 400.0d;
     private boolean flag = false;
 
     @FXML
     private ListView<ReadOnlyTask> completedTaskListView;
 
+    // @@author A0144315N
     public CompletedTaskListPanel(AnchorPane completedTaskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(completedTaskListPlaceholder);
         registerAsAnEventHandler(this);
+        completedTaskListView.toFront();
     }
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
@@ -44,6 +46,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
+    // @@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
@@ -82,6 +85,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         }
     }
 
+    // @@author A0144315N
     public void display(boolean show) {
         if (show) {
             // show completed task list panel
@@ -93,7 +97,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
                     .addAll(new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0),
                             new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
                             new KeyFrame(Duration.millis(300.0d),
-                                    new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
                                     new KeyValue(completedTaskListView.opacityProperty(), 1)));
             timeline.play();
         } else {
@@ -101,7 +105,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
                     .addAll(new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(), COMPLETED_PANEL_HEIGHT),
+                            new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
                             new KeyValue(completedTaskListView.opacityProperty(), 1)),
                             new KeyFrame(Duration.millis(200.0d),
                                     new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
