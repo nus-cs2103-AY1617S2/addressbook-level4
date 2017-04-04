@@ -24,10 +24,15 @@ import seedu.doist.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/icon_32.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+
+    private final String lightThemeUrl = getClass().getResource("/view/LightTheme.css").toExternalForm();
+    private final String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+
+    private final String[] themeUrls = {lightThemeUrl, darkThemeUrl};
 
     private Stage primaryStage;
     private Logic logic;
@@ -55,9 +60,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    private String gradientThemeUrl = getClass().getResource("/view/GradientTheme.css").toExternalForm();
-    private String darkThemeUrl = getClass().getResource("/view/DarkTheme.css").toExternalForm();
-
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -74,10 +76,10 @@ public class MainWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
 
-        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
-            scene.getStylesheets().add(gradientThemeUrl);
+        // Default stylesheet
+        if (!scene.getStylesheets().contains(lightThemeUrl)) {
+            scene.getStylesheets().add(lightThemeUrl);
         }
-
         setAccelerators();
     }
 
@@ -123,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
        // browserPanel = new BrowserPanel(browserPlaceholder);
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getTodoListFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getAbsoluteTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
@@ -202,24 +204,28 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    //@@author A0140887W
     @FXML
     private void handleDarkTheme() {
-        Scene scene = primaryStage.getScene();
-        scene.getStylesheets().remove(gradientThemeUrl);
-        if (!scene.getStylesheets().contains(darkThemeUrl)) {
-            scene.getStylesheets().add(darkThemeUrl);
-        }
+        changeToTheme(darkThemeUrl);
     }
 
     @FXML
-    private void handleGradientTheme() {
+    private void handleLightTheme() {
+        changeToTheme(lightThemeUrl);
+    }
+
+    private void changeToTheme(String themeUrl) {
         Scene scene = primaryStage.getScene();
-        scene.getStylesheets().remove(gradientThemeUrl);
-        if (!scene.getStylesheets().contains(gradientThemeUrl)) {
-            scene.getStylesheets().add(gradientThemeUrl);
+        // Remove all existing stylesheets
+        scene.getStylesheets().removeAll(themeUrls);
+        // Add the new stylesheet
+        if (!scene.getStylesheets().contains(themeUrl)) {
+            scene.getStylesheets().add(themeUrl);
         }
     }
 
+    //@@author
     public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }

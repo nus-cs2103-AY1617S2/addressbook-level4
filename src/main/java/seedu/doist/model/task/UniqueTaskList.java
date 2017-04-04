@@ -31,6 +31,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
+    //@@author A0140887W
     /**
      * Sorts the internal list with comparator
      */
@@ -39,6 +40,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.sort(comparator);
     }
 
+    //@@author
     /**
      * Adds a task to the list.
      *
@@ -71,7 +73,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // ALERT: check this out? how to bind text labels?
         // TODO: The code below is just a workaround to notify observers of the updated person.
         // The right way is to implement observable properties in the Person class.
         // Then, PersonCard should then bind its text labels to those observable properties.
@@ -93,33 +94,34 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
+    //@@author A0140887W
     /**
      * Changes the finish status of the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      * @throws TaskAlreadyFinishedException if task is already finished but trying to finish it
      * @throws TaskAlreadyUnfinishedException if task is already not finished but trying to unfinish it
+     * @returns true if finish status of task is successfully changed
      */
     public boolean changeFinishStatus(ReadOnlyTask toChangeFinish, boolean isToFinish) throws TaskNotFoundException,
             TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
         assert toChangeFinish != null;
+
+        // Find task in internal list
         final int taskIndex = internalList.indexOf(toChangeFinish);
         boolean taskExists = taskIndex < 0 ? false : true;
+
         if (!taskExists) {
             throw new TaskNotFoundException();
         } else {
-            Task task = internalList.get(taskIndex);
+            Task taskToUpdate = internalList.get(taskIndex);
             if (isToFinish) {
-                finishTask(task);
+                finishTask(taskToUpdate);
             } else {
-                unfinishTask(task);
+                unfinishTask(taskToUpdate);
             }
-            // the following line is to trigger person list view to update
-            // according to the api:
-            // All changes in the ObservableList are propagated immediately to the FilteredList.
-            // without the following line, only the task is changed, but the list is not
-            // so the person list view will not be updated, the isFinished field will remain "false"
-            internalList.set(taskIndex, task);
+            // Update the observable list so that UI can be updated too
+            internalList.set(taskIndex, taskToUpdate);
         }
         return taskExists;
     }
@@ -129,7 +131,7 @@ public class UniqueTaskList implements Iterable<Task> {
             logger.info("Attemping to finish task already finished, task details:\n" + toFinish.getAsText());
             throw new TaskAlreadyFinishedException();
         } else {
-            toFinish.setFinishedStatus(true);
+            toFinish.setFinishedStatus(new FinishedStatus(true));
         }
     }
 
@@ -139,10 +141,11 @@ public class UniqueTaskList implements Iterable<Task> {
                     + toUnfinish.getAsText());
             throw new TaskAlreadyUnfinishedException();
         } else {
-            toUnfinish.setFinishedStatus(false);
+            toUnfinish.setFinishedStatus(new FinishedStatus(false));
         }
     }
 
+    //@@author
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
@@ -192,6 +195,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {}
 
+    //@@author A0140887W
     /**
      * Signals that a task is already finished and you are trying to finish it again
      */
@@ -200,8 +204,6 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Signals that a task is already not finished and you are trying to unfinish it
      */
-    public static class TaskAlreadyUnfinishedException extends Exception {
-
-    }
+    public static class TaskAlreadyUnfinishedException extends Exception {}
 
 }

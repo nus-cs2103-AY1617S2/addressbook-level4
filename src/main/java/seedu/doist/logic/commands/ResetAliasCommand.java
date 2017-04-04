@@ -1,6 +1,7 @@
 package seedu.doist.logic.commands;
 
 
+//@@author A0147980U
 /**
  * Reset aliases to the default.
  */

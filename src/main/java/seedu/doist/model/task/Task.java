@@ -1,6 +1,5 @@
 package seedu.doist.model.task;
 
-import java.util.Date;
 import java.util.Objects;
 
 import seedu.doist.commons.util.CollectionUtil;
@@ -16,41 +15,35 @@ public class Task implements ReadOnlyTask {
     private Priority priority;
     private FinishedStatus finishedStatus;
     private UniqueTagList tags;
-    private Date startDate;
-    private Date endDate;
+    private TaskDate dates;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description name, Priority priority, FinishedStatus finishedStatus,
-            UniqueTagList tags, Date startDate, Date endDate) {
-        assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, tags);
+    public Task(Description name, Priority priority, FinishedStatus finishedStatus, TaskDate dates,
+            UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, finishedStatus, dates, tags);
         this.desc = name;
         this.priority = priority;
         this.finishedStatus = finishedStatus;
+        this.dates = dates;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public Task(Description name, Priority priority, FinishedStatus finishedStatus, UniqueTagList tags) {
-        this(name, priority, finishedStatus, tags, null, null);
     }
 
     public Task(Description name, Priority priority, UniqueTagList tags) {
-        this(name, priority, new FinishedStatus(), tags, null, null);
+        this(name, priority, new FinishedStatus(), new TaskDate(), tags);
     }
 
     public Task(Description name, UniqueTagList tags) {
-        this(name, new Priority(), new FinishedStatus(), tags, null, null);
+        this(name, new Priority(), new FinishedStatus(), new TaskDate(), tags);
     }
 
-    public Task(Description name, Date startDate, Date endDate) {
-        this(name, new Priority(), new FinishedStatus(), new UniqueTagList(), startDate, endDate);
+    public Task(Description name, TaskDate dates, UniqueTagList tags) {
+        this(name, new Priority(), new FinishedStatus(), dates, tags);
     }
 
-    public Task(Description name, UniqueTagList tags, Date startDate, Date endDate) {
-        this(name, new Priority(), new FinishedStatus(), tags, startDate, endDate);
+    public Task(Description name, Priority priority, TaskDate dates, UniqueTagList tags) {
+        this(name, priority, new FinishedStatus(), dates, tags);
     }
 
     /**
@@ -58,7 +51,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getDescription(), source.getPriority(), source.getFinishedStatus(),
-                source.getTags(), source.getStartDate(), source.getEndDate());
+                source.getDates(), source.getTags());
     }
 
     public void setDescription(Description desc) {
@@ -76,30 +69,17 @@ public class Task implements ReadOnlyTask {
         this.priority = priority;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setDates(TaskDate dates) {
+        this.dates = dates;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
+    public TaskDate getDates() {
+        return dates;
     }
 
     @Override
     public Priority getPriority() {
         return priority;
-    }
-
-    public void setFinishedStatus(boolean isFinished) {
-        assert finishedStatus != null;
-        this.finishedStatus.setIsFinished(isFinished);
     }
 
     public void setFinishedStatus(FinishedStatus status) {
@@ -134,8 +114,16 @@ public class Task implements ReadOnlyTask {
         this.setPriority(replacement.getPriority());
         this.setFinishedStatus(replacement.getFinishedStatus());
         this.setTags(replacement.getTags());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
+        this.setDates(replacement.getDates());
+    }
+
+    /**Function that returns true if this task is overdue i.e, not finished and past it's deadline **/
+    public boolean isOverdue() {
+        if (this.getFinishedStatus().getIsFinished()) {
+            return false;
+        } else {
+            return this.getDates().isPast();
+        }
     }
 
     @Override

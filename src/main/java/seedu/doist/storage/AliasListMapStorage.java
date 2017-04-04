@@ -6,15 +6,11 @@ import java.util.Optional;
 import seedu.doist.commons.exceptions.DataConversionException;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
+//@@author A0140887W-reused
 /**
  * Represents a storage for {@link seedu.doist.model.AliasListMap}.
  */
 public interface AliasListMapStorage {
-
-    /**
-     * Returns the file path of the data file.
-     */
-    String getAliasListMapFilePath();
 
     /**
      * Returns AliasListMap data as a {@link ReadOnlyAliasListMap}.
@@ -41,5 +37,15 @@ public interface AliasListMapStorage {
      * @see #saveAliasListMap(ReadOnlyAliasListMap)
      */
     void saveAliasListMap(ReadOnlyAliasListMap aliasList, String filePath) throws IOException;
+
+    /**
+     * Returns the file path of the data file.
+     */
+    String getAliasListMapFilePath();
+
+    /**
+     * Sets the file path of the data file.
+     */
+    void setAliasListMapFilePath(String path);
 
 }

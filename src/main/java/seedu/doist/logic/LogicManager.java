@@ -1,5 +1,8 @@
 package seedu.doist.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -43,5 +46,20 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();
+    }
+
+    //@@author A0147980U
+    public List<String> getAllCommandWords() {
+        ArrayList<String> allCommandWords = new ArrayList<String>();
+        Set<String> allDefaultCommandWords = model.getDefaultCommandWordSet();
+        for (String defaultCommandWords : allDefaultCommandWords) {
+            allCommandWords.addAll(model.getValidCommandList(defaultCommandWords));
+        }
+        return allCommandWords;
+    }
+
+    //@@author A0147620L
+    public ArrayList<String> getAllNames() {
+        return model.getAllNames();
     }
 }

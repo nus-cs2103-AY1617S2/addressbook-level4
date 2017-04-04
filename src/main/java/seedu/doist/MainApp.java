@@ -37,7 +37,7 @@ import seedu.doist.ui.UiManager;
  * The main entry point to the application.
  */
 public class MainApp extends Application {
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    protected static final Logger LOGGER = LogsCenter.getLogger(MainApp.class);
 
     public static final Version VERSION = new Version(1, 0, 0, true);
 
@@ -53,18 +53,18 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=========================[ Initializing " + APPLICATION_NAME + " ]=======================");
+        LOGGER.info("=========================[ Initializing " + APPLICATION_NAME + " ]=======================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTodoListFilePath(), config.getAliasListMapFilePath(),
-                                        config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getAbsoluteTodoListFilePath(), config.getAbsoluteAliasListMapFilePath(),
+                                        config.getAbsoluteUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, config);
 
         logic = new LogicManager(model, storage);
 
@@ -73,59 +73,59 @@ public class MainApp extends Application {
         initEventsCenter();
     }
 
-    private String getApplicationParameter(String parameterName) {
+    protected String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, Config config) {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
-        return new ModelManager(initialData, initialAliasData, userPrefs);
+        return new ModelManager(initialData, initialAliasData, userPrefs, config);
     }
 
-    private static ReadOnlyTodoList initTodoListData(Storage storage) {
+    protected static ReadOnlyTodoList initTodoListData(Storage storage) {
         Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyTodoList initialData;
         try {
             todoListOptional = storage.readTodoList();
             if (!todoListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample To-do List");
+                LOGGER.info("Data file not found. Will be starting with a sample To-do List");
             }
             initialData = todoListOptional.orElseGet(SampleDataUtil::getSampleTodoList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty To-do List");
+            LOGGER.warning("Data file not in the correct format. Will be starting with an empty To-do List");
             initialData = new TodoList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty To-do List");
+            LOGGER.warning("Problem while reading from the file. Will be starting with an empty To-do List");
             initialData = new TodoList();
         }
         return initialData;
     }
 
-    private static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
+    protected static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
         Optional<ReadOnlyAliasListMap> aliasListMapOptional;
         ReadOnlyAliasListMap initialAliasData;
         try {
             aliasListMapOptional = storage.readAliasListMap();
             if (!aliasListMapOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with the default alias list map");
+                LOGGER.info("Data file not found. Will be starting with the default alias list map");
                 initialAliasData = new AliasListMap();
             } else {
                 initialAliasData = aliasListMapOptional.get();
             }
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with the default alias list map");
+            LOGGER.warning("Data file not in the correct format. Will be starting with the default alias list map");
             initialAliasData = new AliasListMap();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with the default alias list map");
+            LOGGER.warning("Problem while reading from the file. Will be starting with the default alias list map");
             initialAliasData = new AliasListMap();
         }
         return initialAliasData;
     }
 
-    private void initLogging(Config config) {
+    protected void initLogging(Config config) {
         LogsCenter.init(config);
     }
 
@@ -136,17 +136,17 @@ public class MainApp extends Application {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
-            logger.info("Custom Config file specified " + configFilePath);
+            LOGGER.info("Custom Config file specified " + configFilePath);
             configFilePathUsed = configFilePath;
         }
 
-        logger.info("Using config file : " + configFilePathUsed);
+        LOGGER.info("Using config file : " + configFilePathUsed);
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
+            LOGGER.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
                     "Using default config properties");
             initializedConfig = new Config();
         }
@@ -155,7 +155,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            LOGGER.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
         return initializedConfig;
     }
@@ -164,18 +164,18 @@ public class MainApp extends Application {
         assert config != null;
 
         String prefsFilePath = config.getUserPrefsFilePath();
-        logger.info("Using prefs file : " + prefsFilePath);
+        LOGGER.info("Using prefs file : " + prefsFilePath);
 
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
+            LOGGER.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty To-do List");
+            LOGGER.warning("Problem while reading from the file. Will be starting with an empty To-do List");
             initializedPrefs = new UserPrefs();
         }
 
@@ -183,30 +183,30 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            LOGGER.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
         return initializedPrefs;
     }
 
-    private void initEventsCenter() {
+    protected void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting " + APPLICATION_NAME + " " + MainApp.VERSION);
+        LOGGER.info("Starting " + APPLICATION_NAME + " " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping " + APPLICATION_NAME + " ] =============================");
+        LOGGER.info("============================ [ Stopping " + APPLICATION_NAME + " ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            LOGGER.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
         Platform.exit();
         System.exit(0);
@@ -214,7 +214,7 @@ public class MainApp extends Application {
 
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        LOGGER.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
 

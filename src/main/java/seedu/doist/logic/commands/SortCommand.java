@@ -1,42 +1,46 @@
 package seedu.doist.logic.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
+//@@author A0140887W
 /**
  * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
  */
 public class SortCommand extends Command {
 
     public enum SortType {
-        PRIORITY
+        PRIORITY,
+        TIME,
+        ALPHA
     }
 
-    public SortType sortType;
+    public List<SortType> sortTypes = new ArrayList<SortType>();
 
     public static final String DEFAULT_COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ":\n" + "Sorts previously listed tasks." + "\n"
-            + "Can sort by priority for now. \n\t"
-            + "Parameters: SORTTYPE " + "\n\t"
+            + "You can sort by priority, alphabetical order or by time\n\t"
+            + "SORT_TYPE can be PRIORITY, TIME, or ALPHA\n"
+            + "Parameters: SORT_TYPE " + "\n\t"
             + "Example: " + DEFAULT_COMMAND_WORD
-            + " priority";
+            + "alpha";
 
     public static final String MESSAGE_SORT_CONSTRAINTS =
             "You can only " + DEFAULT_COMMAND_WORD + "\n"
-            + SortType.PRIORITY.toString();
+            + SortType.PRIORITY.toString() + " "
+            + SortType.ALPHA.toString() + " "
+            + SortType.TIME.toString();
 
-    public SortCommand(SortType type) {
-        this.sortType = type;
+    public SortCommand(List<SortType> list) {
+        this.sortTypes = list;
     }
 
     @Override
     public CommandResult execute() {
-        switch(sortType) {
-        case PRIORITY:
-            model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
-        default:
-            model.sortTasksByPriority();
-            return new CommandResult(getMessageForPersonListSortedSummary(sortType));
-        }
+        assert model != null;
+        model.sortTasks(sortTypes);
+        return new CommandResult(getMessageForTaskListSortedSummary(sortTypes));
     }
 }

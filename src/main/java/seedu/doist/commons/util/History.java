@@ -42,6 +42,7 @@ public class History<S> {
         }
     }
 
+    //@@author A0147980U
     /**
      * Method that returns the next state entered by the user, if it exists
      * Returns null if overflow is empty

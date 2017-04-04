@@ -72,4 +72,10 @@ public class XmlTodoListStorage implements TodoListStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTodoList(todoList));
     }
 
+  //@@author A0140887W
+    @Override
+    public void setTodoListFilePath(String path) {
+        this.filePath = path;
+    }
+
 }

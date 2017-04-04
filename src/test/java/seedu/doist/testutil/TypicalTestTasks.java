@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import guitests.DoistGUITest;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.exceptions.IllegalValueException;
 import seedu.doist.model.TodoList;
+import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
@@ -27,7 +29,7 @@ public class TypicalTestTasks {
             work = new TaskBuilder().withName("Schedule meeting with boss").withPriority("IMPORTANT").build();
             school = new TaskBuilder().withName("Submit chemistry assignment").build();
             groceries = new TaskBuilder().withName("Pick up milk").build();
-            shopping = new TaskBuilder().withName("Buy new clock").build();
+            shopping = new TaskBuilder().withName("Buy new clock").withDates(new Date(), new Date()).build();
 
             // Manually added
             email = new TaskBuilder().withName("Send emails to client").build();
@@ -57,11 +59,12 @@ public class TypicalTestTasks {
         }
     }
 
+    //@@author A0140887W
     public static void loadDoistWithSampleDataAllFinished(TodoList ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 Task newTask = new Task(task);
-                newTask.setFinishedStatus(true);
+                newTask.setFinishedStatus(new FinishedStatus(true));
                 ab.addTask(newTask);
             } catch (UniqueTaskList.DuplicateTaskException e) {
                 assert false : "not possible";
@@ -70,7 +73,9 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{laundry, homework, work, school, groceries, shopping};
+        TestTask[] tasks = new TestTask[]{laundry, homework, work, school, groceries, shopping};
+        DoistGUITest.sortTasksByDefault(tasks);
+        return tasks;
     }
 
     public TestTask[] getAllFinishedTypicalTasks() {
@@ -78,9 +83,11 @@ public class TypicalTestTasks {
         for (TestTask task : testTasks) {
             task.setFinishedStatus(true);
         }
+        DoistGUITest.sortTasksByDefault(testTasks);
         return testTasks;
     }
 
+    //@@author
     public TodoList getTypicalTodoList() {
         TodoList ab = new TodoList();
         loadDoistWithSampleData(ab);

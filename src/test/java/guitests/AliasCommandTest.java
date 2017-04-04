@@ -5,9 +5,15 @@ import org.junit.Test;
 import seedu.doist.logic.commands.AliasCommand;
 import seedu.doist.logic.parser.AliasCommandParser;
 
-
-
+//@@author A0147980U
 public class AliasCommandTest extends DoistGUITest {
+
+    @Test
+    public void testInputAliasSuccess() {
+        commandBox.runCommand("alias addeaais \\for add");
+        assertResultMessage(String.format(AliasCommand.MESSAGE_SUCCESS, "addeaais", "add"));
+    }
+
     @Test
     public void testInputAliasIsDefaultCommandWord() {
         commandBox.runCommand("alias add \\for edit");

@@ -1,6 +1,7 @@
 package seedu.doist.logic.commands;
 
 
+//@@author A0147980U
 /**
  * Undo commands that are done previously.
  */
@@ -15,10 +16,11 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        for (int i = 0; i < numSteps; i++) {
-            model.recoverPreviousTodoList();
+        int i = 0;
+        while (i < numSteps && model.recoverPreviousTodoList()) {
+            i++;
         }
-        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, numSteps));
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, i));
     }
 
     public UndoCommand(int numSteps) {

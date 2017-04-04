@@ -1,6 +1,5 @@
 package seedu.doist.logic.commands;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +14,7 @@ import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 import seedu.doist.model.task.UniqueTaskList;
 
 /**
@@ -65,13 +65,13 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            int index  = model.updateTask(filteredTaskListIndex, editedTask);
+            if (index >= 0) {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            }
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        model.updateFilteredListToShowAll();
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit), true);
     }
 
@@ -86,10 +86,9 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         FinishedStatus finishStatus = editTaskDescriptor.getFinishStatus().orElse(taskToEdit.getFinishedStatus());
-        Date startDate = editTaskDescriptor.getStartDate().orElse(taskToEdit.getStartDate());
-        Date endDate = editTaskDescriptor.getEndDate().orElse(taskToEdit.getEndDate());
+        TaskDate updatedDates = editTaskDescriptor.getDates().orElse(taskToEdit.getDates());
 
-        return new Task(updatedName, updatedPriority, finishStatus, updatedTags, startDate, endDate);
+        return new Task(updatedName, updatedPriority, finishStatus, updatedDates, updatedTags);
     }
 
     /**
@@ -101,8 +100,7 @@ public class EditCommand extends Command {
         private Optional<Priority> priority = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
         private Optional<FinishedStatus> finishStatus = Optional.empty();
-        private Optional<Date> startDate = Optional.empty();
-        private Optional<Date> endDate = Optional.empty();
+        private Optional<TaskDate> dates = Optional.empty();
 
         public EditTaskDescriptor() {
         }
@@ -112,8 +110,7 @@ public class EditCommand extends Command {
             this.priority = toCopy.getPriority();
             this.tags = toCopy.getTags();
             this.finishStatus = toCopy.getFinishStatus();
-            this.startDate = toCopy.getStartDate();
-            this.endDate = toCopy.getEndDate();
+            this.dates = toCopy.getDates();
         }
 
         /**
@@ -121,8 +118,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.desc, this.priority, this.tags,
-                    this.finishStatus, this.startDate, this.endDate);
-
+                    this.finishStatus, this.dates);
         }
 
         public void setDesc(Optional<Description> desc) {
@@ -135,14 +131,9 @@ public class EditCommand extends Command {
             this.priority = priority;
         }
 
-        public void setStartDate(Optional<Date> startDate) {
-            assert startDate != null;
-            this.startDate = startDate;
-        }
-
-        public void setEndDate(Optional<Date> endDate) {
-            assert endDate != null;
-            this.endDate = endDate;
+        public void setDates(Optional<TaskDate> dates) {
+            assert dates != null;
+            this.dates = dates;
         }
 
         public Optional<Description> getDesc() {
@@ -157,12 +148,8 @@ public class EditCommand extends Command {
             return priority;
         }
 
-        public Optional<Date> getStartDate() {
-            return startDate;
-        }
-
-        public Optional<Date> getEndDate() {
-            return endDate;
+        public Optional<TaskDate> getDates() {
+            return dates;
         }
 
         public void setTags(Optional<UniqueTagList> tags) {

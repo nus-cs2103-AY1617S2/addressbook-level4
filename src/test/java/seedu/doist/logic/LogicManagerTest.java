@@ -245,8 +245,8 @@ public class LogicManagerTest {
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list",
-                ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess("list all",
+                ListCommand.MESSAGE_ALL,
                 expectedAB,
                 expectedList);
     }
@@ -355,14 +355,17 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithDescription("KE Y");
+        Task p1 = helper.generateTaskWithDescription("should not Match");
         Task p2 = helper.generateTaskWithDescription("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TodoList expectedAB = helper.generateAddressBook(fourPersons);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourPersons);
 
+        // After the command, tasks will be auto sorted
+        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
@@ -382,6 +385,9 @@ public class LogicManagerTest {
         List<Task> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
 
+        // After the command, tasks will be auto sorted
+        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
@@ -401,6 +407,9 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourPersons);
 
+        // After the command, tasks will be auto sorted
+        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
         assertCommandSuccess("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
@@ -431,12 +440,11 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the person data field values
          */
+
+        // TODO: MAKE IT EASIER TO GENERATE RANDOM DATES
         protected Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Person " + seed),
-                    //new Phone("" + Math.abs(seed)),
-                    //new Email(seed + "@email"),
-                    //new Address("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -532,6 +540,7 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given description. Other fields will have some dummy values.
          */
+        // TODO: REFACTOR THIS
         protected Task generateTaskWithDescription(String name) throws Exception {
             return new Task(
                     new Description(name),

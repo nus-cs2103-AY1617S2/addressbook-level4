@@ -1,5 +1,15 @@
+/* @@author A0140887W */
+@import url("CommandBoxCss.css");
+@import url("Extensions.css");
+
 .background {
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
+    -fx-background-color: #000000;
+}
+
+.check-box>.box {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: #DFEFF0;
 }
 
 .label {
@@ -23,11 +33,6 @@
     -fx-opacity: 1;
 }
 
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }
@@ -38,58 +43,27 @@
     -fx-max-height: 0;
 }
 
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
+.list-view {
+    -fx-selection-bar:#A0C6DD;
+    -fx-selection-bar-non-focused: #A0C6DD;
+    -fx-background-insets: 0;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: transparent;
+.list-view .list-cell:even {
+    -fx-control-inner-background: #F5FAFA;
+    -fx-text-fill: black;
 }
 
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
-
-.split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
-}
-
-.split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
+.list-view .list-cell:odd {
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: black;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-color: transparent;
 }
 
 .list-cell .label {
@@ -107,22 +81,22 @@
 }
 
 .anchor-pane {
-     -fx-background-color:linear-gradient(to left, #00ccee, #003366);
+     -fx-background-color:#FFFFFF;
+     -fx-text-fill: #010504;
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: linear-gradient(to left, #00ccee, #003366);
-     -fx-border-color: linear-gradient(to left, #00ccee, #003366);
+     -fx-background-color: #FFFFFF;
+     -fx-border-color: #FFFFFF;
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
-    -fx-text-fill: black;
+    -fx-background-color: #000000;
 }
 
 .result-display {
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
+    -fx-background-color: #000000;
 }
 
 .result-display .label {
@@ -130,45 +104,48 @@
 }
 
 .status-bar .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .status-bar-with-border {
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
-    -fx-border-color: derive(#1d1d1d, 25%);
-    -fx-border-width: 1px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-border-width: 1px;
 }
 
 .grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #FFFFFF;
 }
 
 .context-menu {
-    -fx-background-color: linear-gradient(to left, #00ccee, #003366);
+    -fx-background-color: #FFFFFF;
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .menu-bar {
-    -fx-background-color:linear-gradient(to left, #00ccee, #003366);
+    -fx-background-color:#FFFFFF;
 }
 
+.menu-item:focused {
+    -fx-background-color:#F5FAFA;
+}
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
 
@@ -176,6 +153,12 @@
     -fx-background-color: black;
 }
 
+.menu:showing {
+    -fx-background-color: #F5FAFA;
+}
+.menu:hover {
+    -fx-background-color: #F5FAFA;
+}
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
@@ -250,8 +233,11 @@
     -fx-text-fill: white;
 }
 
+.scroll-bar .track-background {
+    -fx-background-color: #F5FAFA;
+}
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #6D929B;
     -fx-background-insets: 3;
 }
 
@@ -274,13 +260,54 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-width: 0 0 0 4;
+}
+
+/* for normal tasks in cardPane */
+.normal {
+    -fx-border-color: #76d7ea;
+}
+
+/* for overdue tasks in cardPane */
+.overdue {
+    -fx-border-color: #fc80a5;
+}
+
+/* for finished tasks in cardPane */
+.finished {
+    -fx-border-color: #99ff99;
 }
 
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
+}
+
+#sideBox {
+    -fx-border-color: transparent;
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: #F5FAFA;
+    -fx-text-fill: #005B9A;
+}
+
+.text-area .content {
+    -fx-background-color: #F5FAFA;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #F5FAFA;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+#taskBox {
+    -fx-border-color: #89CFF0;
+    -fx-border-width: 0 0 0 0;
 }
 
 #filterField, #personListPanel, #personWebpage {

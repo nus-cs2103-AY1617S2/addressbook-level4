@@ -1,12 +1,16 @@
 package seedu.doist.model;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.ListCommand.TaskType;
+import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
@@ -25,11 +29,11 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Finishes the given task. */
-    void finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+    int finishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
         UniqueTaskList.TaskAlreadyFinishedException;
 
     /** Unfinishes the given task. */
-    void unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
+    int unfinishTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException,
         UniqueTaskList.TaskAlreadyUnfinishedException;
 
     /** Adds the given task */
@@ -42,14 +46,14 @@ public interface Model {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedPerson)
+    int updateTask(int filteredTaskListIndex, ReadOnlyTask editedPerson)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredListToShowAll();
+    /** Updates the filter of the filtered task list to show the default listing of tasks */
+    void updateFilteredListToShowDefault();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
@@ -57,13 +61,25 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
 
-    /** Sorts the tasks by Priority */
-    void sortTasksByPriority();
+    /** Sorts the tasks according to the comparators defined in the list*/
+    void sortTasks(List<SortType> sortTypes);
+
+    /** Sorts the tasks according to the default sorting */
+    void sortTasksByDefault();
+
+    /** Returns default sorting */
+    List<SortType> getDefaultSorting();
+
+    /** Parses a list of sort types to a combined comparator for ReadOnlyTask */
+    ReadOnlyTaskCombinedComparator parseSortTypesToComparator(List<SortType> sortTypes);
+
+    /** Returns a list of task descriptions */
+    ArrayList<String> getAllNames();
 
     //========== handle undo and redo operation =================================================
     void saveCurrentToHistory();
-    void recoverPreviousTodoList();
-    void recoverNextTodoList();
+    boolean recoverPreviousTodoList();
+    boolean recoverNextTodoList();
 
     ///// Alias List Map
     /** Returns the AliasListMap */
@@ -83,4 +99,10 @@ public interface Model {
 
     /** Resets alias list to default */
     void resetToDefaultCommandWords();
+
+    /** Change absolute path in config */
+    void changeConfigAbsolutePath(Path path);
+
+    /** Remove the alias if it exists, otherwise nothing happens */
+    void removeAlias(String alias);
 }

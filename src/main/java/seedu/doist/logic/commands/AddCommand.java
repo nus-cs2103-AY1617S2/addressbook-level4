@@ -14,6 +14,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD + ": Adds a task to Doist\n"
             + "Parameters: TASK_DESCRIPTION  [\\from START_TIME] [\\to END_TIME] [\\as PRIORITY] [\\under TAG...]\n"
+            + "Parameters: TASK_DESCRIPTION  [\\by DEADLINE]\n"
             + "Example: " + DEFAULT_COMMAND_WORD + " Group meeting \\from 1600 \\to 1800 \\as IMPORTANT "
                     + "\\under school ";
 

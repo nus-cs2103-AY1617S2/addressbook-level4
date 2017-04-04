@@ -1,9 +1,9 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import java.util.Date;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_DATES;
 
 import org.junit.Test;
 
@@ -21,39 +21,49 @@ public class EditCommandTest extends DoistGUITest {
 
     // The list of persons in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedPersonsList = td.getTypicalTasks();
+    TestTask[] expectedTasks = td.getTypicalTasks();
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby";  // p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Buy mangoes \\under groceries \\from \\to \\as normal";
         int addressBookIndex = 1;
 
-        TestTask editedPerson = new TaskBuilder().withName("Bobby").build();  //.withTags("husband").build();
+        TestTask editedPerson = new TaskBuilder().withName("Buy mangoes").
+                withTags("groceries").withPriority("normal").build();
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
+
+    @Test
+    public void edit_notAllFieldsSpecified_success() throws Exception {
+        String detailsToEdit = "\\as very important";
+        int addressBookIndex = 2;
+
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withPriority("very important").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
 
-//    @Test
-//    public void edit_notAllFieldsSpecified_success() throws Exception {
-//        String detailsToEdit = "t/sweetie t/bestie";
-//        int addressBookIndex = 2;
-//
-//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
-//
-//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-//    }
+    @Test
+    public void edit_clearDates_success() throws Exception {
+        String detailsToEdit = "\\by";
+        int addressBookIndex = 1;
 
-//    @Test
-//    public void edit_clearTags_success() throws Exception {
-//        String detailsToEdit = "t/";
-//        int addressBookIndex = 2;
-//
-//        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
-//
-//        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-//    }
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withDates(null, null).build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
+
+    @Test
+    public void edit_clearTags_success() throws Exception {
+        String detailsToEdit = "\\under";
+        int addressBookIndex = 3;
+
+        TestTask personToEdit = expectedTasks[addressBookIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withTags().build();
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+    }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
@@ -61,12 +71,11 @@ public class EditCommandTest extends DoistGUITest {
 
         String detailsToEdit = "Complete chemistry homework";
         int filteredPersonListIndex = 1;
-        int addressBookIndex = 2;
+        int todoListIndex = 3;
 
-        TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework")
-                .withDates(new Date(), new Date()).build();
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        TestTask personToEdit = expectedTasks[todoListIndex - 1];
+        TestTask editedPerson = new TaskBuilder(personToEdit).withName("Complete chemistry homework").build();
+        assertEditSuccess(filteredPersonListIndex, todoListIndex, detailsToEdit, editedPerson, true);
     }
 
     @Test
@@ -106,8 +115,19 @@ public class EditCommandTest extends DoistGUITest {
     }
 
     @Test
+    public void edit_invalidDates_failure() {
+        commandBox.runCommand("edit 1 \\from tomorrow \\to today");
+        assertResultMessage(MESSAGE_INVALID_DATES);
+
+        //Date that can't be parsed
+        commandBox.runCommand("edit 1 \\by tomr");
+        assertResultMessage(MESSAGE_INVALID_DATES);
+
+    }
+
+    @Test
     public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Do laundry");
+        commandBox.runCommand("edit 3 Do laundry \\as normal");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -125,18 +145,34 @@ public class EditCommandTest extends DoistGUITest {
      *      Must refer to the same person as {@code filteredPersonListIndex}
      * @param detailsToEdit details to edit the person with as input to the edit command
      * @param editedPerson the expected person after editing the person's details
+     * @param isFindAndDisappear true if edit is done after a find and thus task will disappear after editing
      */
     private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedPerson) {
+                                    String detailsToEdit, TestTask editedPerson, boolean isFindAndDisappear) {
         commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
 
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getDescription().desc);
-        assertMatching(editedPerson, editedCard);
+        if (!isFindAndDisappear) {
+            // confirm the new card contains the right data
+            TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
+            assertMatching(editedPerson, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+            // confirm the list now contains all previous persons plus the person with updated details
+            expectedTasks[addressBookIndex - 1] = editedPerson;
+            assertTrue(taskListPanel.isListMatching(expectedTasks));
+            assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedPerson));
+        } else {
+            // Task is supposed to not exist after editing because of find
+            try {
+                TaskCardHandle editedCard = taskListPanel.navigateToTask(editedPerson.getDescription().desc);
+                fail();
+            } catch (IllegalStateException e) {
+                return;
+            }
+        }
+    }
+
+    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
+            String detailsToEdit, TestTask editedPerson) {
+        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson, false);
     }
 }

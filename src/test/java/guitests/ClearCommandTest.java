@@ -4,18 +4,21 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.doist.testutil.TestTask;
+
 public class ClearCommandTest extends DoistGUITest {
 
     @Test
     public void clear() {
-
+        // tasks will be auto sorted
+        TestTask[] expected = td.getTypicalTasks();
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(expected));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
         commandBox.runCommand(td.email.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.email));
+        assertTrue(taskListPanel.isListMatching(td.email));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

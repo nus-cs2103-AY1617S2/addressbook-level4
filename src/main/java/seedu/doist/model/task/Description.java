@@ -24,13 +24,13 @@ public class Description {
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Description(String name) throws IllegalValueException {
-        assert name != null;
-        String trimmedName = name.trim();
-        if (!isValidDescription(trimmedName)) {
+    public Description(String desc) throws IllegalValueException {
+        assert desc != null;
+        String trimmedDesc = desc.trim();
+        if (!isValidDescription(trimmedDesc)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.desc = trimmedName;
+        this.desc = trimmedDesc;
     }
 
     /**
@@ -57,5 +57,4 @@ public class Description {
     public int hashCode() {
         return desc.hashCode();
     }
-
 }

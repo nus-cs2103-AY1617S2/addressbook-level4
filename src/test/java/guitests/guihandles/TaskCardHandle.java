@@ -12,7 +12,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String DESC_FIELD_ID = "#desc";
@@ -77,13 +77,25 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getDesc().equals(person.getDescription().desc)
-                && getPriority().equals(person.getPriority().toString())
-                && getFinishStatus() == person.getFinishedStatus().getIsFinished()
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isStyleInStyleClass(String style) {
+        return node.getStyleClass().contains(style);
     }
 
+    //@@author A0140887W
+    public boolean isSameTask(ReadOnlyTask task) {
+
+        // Sort by alphabetical order
+        List<String> cardTags = getTags().stream().sorted().collect(Collectors.toList());
+        List<String> taskTags = getTags(task.getTags()).stream().sorted().collect(Collectors.toList());
+        return getDesc().equals(task.getDescription().desc)
+                && getPriority().equals(task.getPriority().toString())
+                && getFinishStatus() == task.getFinishedStatus().getIsFinished()
+                //&& getStartTime().equals(task.getStartDate().toString())
+                //&& getEndTime().equals(task.getEndDate().toString())
+                && cardTags.equals(taskTags);
+    }
+
+    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {

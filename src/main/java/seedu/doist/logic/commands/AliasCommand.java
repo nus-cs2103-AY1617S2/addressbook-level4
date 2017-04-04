@@ -2,6 +2,7 @@ package seedu.doist.logic.commands;
 
 import seedu.doist.logic.commands.exceptions.CommandException;
 
+//@@author A0147980U
 /**
  * Adds an alias for an existing command
  */

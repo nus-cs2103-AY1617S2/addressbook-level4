@@ -20,7 +20,9 @@ import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.RedoCommand;
+import seedu.doist.logic.commands.RemoveAliasCommand;
 import seedu.doist.logic.commands.ResetAliasCommand;
+import seedu.doist.logic.commands.SaveAtCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.SortCommand;
 import seedu.doist.logic.commands.UndoCommand;
@@ -50,6 +52,7 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
+    //@@author A0147980U
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -83,8 +86,12 @@ public class Parser {
             return new ExitCommand();
         } else if (doesTriggerSameCommand(commandWord, HelpCommand.DEFAULT_COMMAND_WORD)) {
             return new HelpCommand();
+        } else if (doesTriggerSameCommand(commandWord, SaveAtCommand.DEFAULT_COMMAND_WORD)) {
+            return new SaveAtCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, AliasCommand.DEFAULT_COMMAND_WORD)) {
             return new AliasCommandParser().parse(arguments);
+        } else if (doesTriggerSameCommand(commandWord, RemoveAliasCommand.DEFAULT_COMMAND_WORD)) {
+            return new RemoveAliasCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, ResetAliasCommand.DEFAULT_COMMAND_WORD)) {
             return new ResetAliasCommand();
         } else if (doesTriggerSameCommand(commandWord, UndoCommand.DEFAULT_COMMAND_WORD)) {

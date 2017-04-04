@@ -46,6 +46,12 @@ public class ListCommandTest extends DoistGUITest {
     }
 
     @Test
+    public void testListOverdue() {
+        commandBox.runCommand("list overdue");
+        assertListOverdue();
+    }
+
+    @Test
     public void testListFinishedUnderValidTagName() {
         try {
             commandBox.runCommand("list finished \\under health");
@@ -68,13 +74,14 @@ public class ListCommandTest extends DoistGUITest {
             tagList.add(new Tag("health"));
             assertListUnderTags(tagList);
             assertListPending();
+            assertResultMessage(ListCommand.getSuccessMessageListUnder(ListCommand.MESSAGE_PENDING, tagList));
         } catch (IllegalValueException exception) {
             fail();
         }
     }
 
     private void assertListUnderTags(UniqueTagList tagList) {
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             boolean doesContainAny = false;
             for (Tag tag : tagList) {
@@ -84,21 +91,26 @@ public class ListCommandTest extends DoistGUITest {
             }
             assertTrue(doesContainAny);
         }
-        assertResultMessage(ListCommand.getSuccessMessageListUnder(tagList));
     }
 
     private void assertListFinished() {
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
             assertTrue(task.getFinishedStatus().getIsFinished());
         }
     }
 
     private void assertListPending() {
-        // TODO: should add check for start time to differentiate between pending and overdue
-        List<ReadOnlyTask> displayedList = personListPanel.getListView().getItems();
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
-            assertTrue(!task.getFinishedStatus().getIsFinished());
+            assertTrue(!task.getFinishedStatus().getIsFinished() && !task.getDates().isPast());
+        }
+    }
+
+    private void assertListOverdue() {
+        List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
+        for (ReadOnlyTask task : displayedList) {
+            assertTrue(!task.getFinishedStatus().getIsFinished() && task.getDates().isPast());
         }
     }
 }

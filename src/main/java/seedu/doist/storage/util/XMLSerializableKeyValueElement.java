@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+//@@author A0140887W
 /**
  * An Immutable class with key and value that is serializable to XML format
  */

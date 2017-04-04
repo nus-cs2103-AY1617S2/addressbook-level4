@@ -1,5 +1,6 @@
 package seedu.doist.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -59,10 +60,12 @@ public class TodoList implements ReadOnlyTodoList {
         this.tasks.setTasks(tasks);
     }
 
+    //@@author A0140887W
     public void sortTasks(Comparator<ReadOnlyTask> comparator) {
         this.tasks.sort(comparator);
     }
 
+    //@@author
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -161,14 +164,33 @@ public class TodoList implements ReadOnlyTodoList {
         }
     }
 
-    public boolean changeTaskFinishStatus(ReadOnlyTask key, boolean isToFinish) throws TaskNotFoundException,
-            TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
-        return tasks.changeFinishStatus(key, isToFinish);
+    //@@author A0140887W
+    /**
+     * Changes finish status of a task
+     *  @param readOnlyTask task to have its finish status to be changed
+     *  @param isToFinish true if task is to be finished, else task will be unfinished
+     */
+    public boolean changeTaskFinishStatus(ReadOnlyTask readOnlyTask, boolean isToFinish)
+            throws TaskNotFoundException, TaskAlreadyFinishedException, TaskAlreadyUnfinishedException {
+        assert readOnlyTask != null;
+
+        Task taskToFinish = new Task(readOnlyTask);
+        return tasks.changeFinishStatus(taskToFinish, isToFinish);
+    }
+
+    //@@author A0147620L
+    public ArrayList<String> getTaskNames() {
+        ArrayList<String> names = new ArrayList<>();
+        for (ReadOnlyTask task: this.getTaskList()) {
+            names.add(task.getDescription().toString());
+        }
+        return names;
     }
 
 //// tag-level operations
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+    public void addTag(
+            Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 

@@ -9,41 +9,54 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Stores a hashmap of arraylists representing the alias list
+ * Stores a HashMap of ArrayLists representing the alias list
  */
 public class AliasListMap implements ReadOnlyAliasListMap {
 
     private HashMap<String, ArrayList<String>> commandAliases;
 
+    //@@author A0147980U
     /**
-     * Initializes the entire hashmap for all aliases, resets to default
+     * Initializes the entire HashMap for all aliases, resets to default
      */
-    public void setDefaultCommandWords() {
+    public void setDefaultAliasListMapping() {
+        HashMap<String, ArrayList<String>> defaultCommandAliases = getDefaultAliasListMapping();
         commandAliases = new HashMap<String, ArrayList<String>>();
-        commandAliases.put("add",  new ArrayList<>(Arrays.asList("do")));
-        commandAliases.put("clear",  new ArrayList<>());
-        commandAliases.put("delete",  new ArrayList<>(Arrays.asList("del")));
-        commandAliases.put("edit",  new ArrayList<>(Arrays.asList("update")));
-        commandAliases.put("exit",  new ArrayList<>());
-        commandAliases.put("find",  new ArrayList<>());
-        commandAliases.put("finish",  new ArrayList<>(Arrays.asList("fin")));
-        commandAliases.put("help",  new ArrayList<>());
-        commandAliases.put("list",  new ArrayList<>(Arrays.asList("ls")));
-        commandAliases.put("select",  new ArrayList<>());
-        commandAliases.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));
-        commandAliases.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));
-        commandAliases.put("alias",  new ArrayList<>());
-        commandAliases.put("reset_alias",  new ArrayList<>());
-        commandAliases.put("view_alias",  new ArrayList<>(Arrays.asList("list_alias", "ls_alias")));
-        commandAliases.put("undo",  new ArrayList<>());
-        commandAliases.put("redo",  new ArrayList<>());
+        for (String word : defaultCommandAliases.keySet()) {
+            commandAliases.put(word, defaultCommandAliases.get(word));
+        }
     }
 
+    private HashMap<String, ArrayList<String>> getDefaultAliasListMapping() {
+        HashMap<String, ArrayList<String>> aliasMap = new HashMap<String, ArrayList<String>>();
+        aliasMap.put("add",  new ArrayList<>(Arrays.asList("do")));
+        aliasMap.put("clear",  new ArrayList<>());
+        aliasMap.put("delete",  new ArrayList<>(Arrays.asList("del")));
+        aliasMap.put("edit",  new ArrayList<>(Arrays.asList("update")));
+        aliasMap.put("exit",  new ArrayList<>());
+        aliasMap.put("find",  new ArrayList<>());
+        aliasMap.put("finish",  new ArrayList<>(Arrays.asList("fin")));
+        aliasMap.put("help",  new ArrayList<>());
+        aliasMap.put("list",  new ArrayList<>(Arrays.asList("ls")));
+        aliasMap.put("save_at", new ArrayList<>(Arrays.asList("save")));
+        aliasMap.put("select",  new ArrayList<>());
+        aliasMap.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));
+        aliasMap.put("unfinish",  new ArrayList<>(Arrays.asList("unfin")));
+        aliasMap.put("alias",  new ArrayList<>());
+        aliasMap.put("remove_alias",  new ArrayList<>());
+        aliasMap.put("reset_alias",  new ArrayList<>());
+        aliasMap.put("view_alias",  new ArrayList<>(Arrays.asList("list_alias", "ls_alias")));
+        aliasMap.put("undo",  new ArrayList<>());
+        aliasMap.put("redo",  new ArrayList<>());
+        return aliasMap;
+    }
+
+    //@@author A0140887W
     /**
      * @return a set of strings which are the default command words
      */
     public Set<String> getDefaultCommandWordSet() {
-        return commandAliases.keySet();
+        return getDefaultAliasListMapping().keySet();
     }
 
     @Override
@@ -60,12 +73,12 @@ public class AliasListMap implements ReadOnlyAliasListMap {
 
     /**
      * Adds an alias to the alias list for that default command word
-     * Also removes any occurance of that alias in the alias list of other default command words
+     * Also removes any occurrence of that alias in the alias list of other default command words
      */
     public void setAlias(String alias, String commandWord) {
         assert(commandAliases.get(commandWord) != null);
         if (commandAliases == null) {
-            setDefaultCommandWords();
+            setDefaultAliasListMapping();
         }
         for (String word : commandAliases.keySet()) {
             commandAliases.get(word).remove(alias);
@@ -75,15 +88,29 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         commandAliases.replace(commandWord, aliases);
     }
 
+    /**
+     * remove the specified alias from the corresponding command word if such alias exists
+     * nothing happen it the input string is not an alias
+     * @param alias
+     */
+    public void removeAlias(String alias) {
+        for (String word : commandAliases.keySet()) {
+            commandAliases.get(word).remove(alias);
+        }
+    }
+
     public AliasListMap() {
-        setDefaultCommandWords();
+        setDefaultAliasListMapping();
     }
 
     public AliasListMap(ReadOnlyAliasListMap src) {
         commandAliases = new HashMap<String, ArrayList<String>>(src.getAliasListMapping());
+        if (commandAliases.size() < getDefaultAliasListMapping().size()) {
+            setDefaultAliasListMapping();
+        }
     }
 
-//// util methods
+    // utility methods
 
     @Override
     public String toString() {
