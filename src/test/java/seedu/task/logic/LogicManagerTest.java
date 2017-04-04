@@ -122,7 +122,6 @@ public class LogicManagerTest {
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-
 	    ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 	assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
 

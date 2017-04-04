@@ -6,6 +6,5 @@ public class TaskNameComparable implements TaskComparable {
 	public int compareTo(Task x, Task y) {
 		return x.getTaskName().compareTo(y.getTaskName());
 	}
-	
 
 }

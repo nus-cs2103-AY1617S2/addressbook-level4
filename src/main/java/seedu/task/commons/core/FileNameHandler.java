@@ -2,17 +2,15 @@ package seedu.task.commons.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Paths;
 
 //@@author A0163845X
 public class FileNameHandler {
 	private static String filePath = "fileName.txt";
 	public static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
+
 	public static String getFileName() {
 		try {
 			FileInputStream fis = new FileInputStream(filePath);
@@ -30,8 +28,9 @@ public class FileNameHandler {
 			System.out.println("IOException");
 			return DEFAULT_FILEPATH;
 		}
-		
+
 	}
+
 	public static void setFileName(String fileName) {
 		FileOutputStream fos;
 		try {
@@ -43,39 +42,12 @@ public class FileNameHandler {
 			System.out.println("IOException");
 		}
 	}
-	
-    public static boolean checkPath(String path) {
-        try {
-            Paths.get(path);
-        }catch (InvalidPathException |  NullPointerException ex) {
-            return false;
-        }
-        return true;
-      }
-    
-//  public static boolean checkPath(String file) {
-//	  File f = new File(file);
-//	  try {
-//	    f.getCanonicalPath();
-//	    return true;
-//	  } catch (IOException e) {
-//	    return false;
-//	  }
-//	}
-	
+
 	public static boolean isValid(String str) {
 		if (str.length() <= 4) {
 			return false;
 		}
 		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
-			return true;
-		}
-		if(checkPath(str) == true){
-			System.out.println("true");
-			return true;
-		}
-		if(checkPath(str) == false){
-			System.out.println("false");
 			return true;
 		}
 		return false;
