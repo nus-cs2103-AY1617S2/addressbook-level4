@@ -20,6 +20,7 @@ import static seedu.taskit.ui.MenuBarPanel.MENU_EVENT_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_DEADLINE_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_TODAY_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_OVERDUE_TASK;
+import static seedu.taskit.ui.MenuBarPanel.MENU_HOME;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -96,6 +97,9 @@ public class CommandBox extends UiPart<Region> {
 
     private String changeToCommandFormat(String parameter) {
         switch (parameter) {
+
+        case MENU_HOME:
+            return ListCommand.COMMAND_WORD + " all";
 
         case MENU_FLOATING_TASK:
             return ListCommand.COMMAND_WORD + " floating";
