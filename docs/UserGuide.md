@@ -103,9 +103,13 @@ Examples: `edit 2 m/Go to Ralphs`
 Clears all tasks from the task manager.<br>
 Format: `clear` 
 
-## Undoing a Task : `undo`
+## Undoing an Action : `undo`
 Undos the most recent action up to 10 times.
 Format: `undo`
+
+## Redoing an Action : `redo`
+Redos the most recent action up to 10 times.
+Format: `redo`
 
 ## Completing a Task : `done`
 Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
@@ -168,6 +172,8 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Clear** : `clear`
 
 * **Undo** : `undo` <br>
+
+* **Redo** : `redo` <br>
 
 * **Done** : `done` <br>
  e.g. `done 3`
