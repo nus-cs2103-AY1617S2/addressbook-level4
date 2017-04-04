@@ -73,9 +73,10 @@ public interface Model {
   //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
+    //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by floating task */
     void updateFilteredTaskListFloat();
-
+    //@@author
     /** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
 

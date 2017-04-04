@@ -357,7 +357,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    // @@author
+    // @@author A0139975J
     private class DateQualifier implements Qualifier {
 
         private Date date;
@@ -377,16 +377,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    //@@author A0139975J
     private class FloatDateQualifier implements Qualifier {
 
         private Date date;
 
-        // @@author A0139975J
-//        FloatDateQualifier(Date date) {
-//            this.date = date;
-//        }
-
-        // @@author A0139975J
+        
         @Override
         public boolean run(ReadOnlyTask task) {
             if (task.getEndDate().isNull() && task.getStartDate().isNull()) {
@@ -395,7 +391,8 @@ public class ModelManager extends ComponentManager implements Model {
             return false;
         }
     }
-
+    
+    //@@author A0139975J
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
@@ -408,7 +405,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            // return (this.value == task.isDone());
             if (this.value & task.isDone()) {
                 return true;
             } else if (!this.value & !task.isDone()) {
