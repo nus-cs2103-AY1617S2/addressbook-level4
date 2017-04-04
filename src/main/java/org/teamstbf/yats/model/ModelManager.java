@@ -157,6 +157,11 @@ public class ModelManager extends ComponentManager implements Model {
 	taskManager.resetData(redoTaskManager.pop());
 	indicateTaskManagerChanged();
     }
+    
+    public void scheduleEvent(Event event) {
+        saveImageOfCurrentTaskManager();
+        indicateTaskManagerChanged();
+    }    
 
     // @@author
 

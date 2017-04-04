@@ -115,4 +115,9 @@ public interface Model {
      */
     boolean checkEmptyRedoStack();
 
+    /**
+     * Method to check if the redo stack is empty - nothing to redo
+     */
+    void scheduleEvent(Event event);
+    
 }
