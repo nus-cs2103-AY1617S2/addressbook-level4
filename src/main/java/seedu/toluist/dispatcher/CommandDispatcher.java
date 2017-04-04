@@ -4,6 +4,7 @@ package seedu.toluist.dispatcher;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,9 +73,9 @@ public class CommandDispatcher extends Dispatcher {
 
         List<Function<String, SortedSet<String>>> getSuggestionMethods = Arrays.asList(
                 this::getCommandWordAndAliasSuggestions,
+                this::getSearchSuggestions,
                 this::getKeywordSuggestions,
-                this::getKeywordArgumentSuggestions,
-                this::getSearchSuggestions
+                this::getKeywordArgumentSuggestions
         );
 
         return getSuggestionMethods.stream()
@@ -152,10 +153,11 @@ public class CommandDispatcher extends Dispatcher {
         Controller bestFitController = getBestFitController(command);
         HashMap<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
         List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(command);
-        keywordValuePairs.remove(0);
-        if (keywordValuePairs.isEmpty()) {
+        if (keywordValuePairs.size() < 2) {
             return new TreeSet<>();
         }
+
+        keywordValuePairs.remove(0);
 
         Pair<String, String> lastKeywordTokenPair = keywordValuePairs.get(keywordValuePairs.size() - 1);
 
@@ -175,10 +177,14 @@ public class CommandDispatcher extends Dispatcher {
             return new TreeSet<>();
         }
 
+        Set<String> existingKeywords = new HashSet(Arrays.asList(bestFitController.tokenize(command)
+                .get(FindController.PARAMETER_KEYWORDS).split(StringUtil.WHITE_SPACE)));
+
         String lastComponentOfCommand = StringUtil.getLastComponent(command);
         return tokenHistoryList.retrieveTokens(bestFitController, FindController.PARAMETER_KEYWORDS).stream()
-                .map(keywords -> keywords.split("\\s+"))
+                .map(keywords -> keywords.split(StringUtil.WHITE_SPACE))
                 .flatMap(Arrays::stream)
+                .filter(value -> !existingKeywords.contains(value))
                 .filter(value -> StringUtil.startsWithIgnoreCase(value, lastComponentOfCommand))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
