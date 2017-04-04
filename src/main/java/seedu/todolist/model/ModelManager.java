@@ -2,17 +2,21 @@ package seedu.todolist.model;
 
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.todolist.commons.core.ComponentManager;
 import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.events.model.TodoListChangedEvent;
+import seedu.todolist.commons.events.storage.SaveFilePathChangedEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.model.tag.Tag;
@@ -127,6 +131,12 @@ public class ModelManager extends ComponentManager implements Model {
         resetData(previousTodoList);
     }
     //@@author
+
+    @Subscribe
+    public void handleSaveFileChangedEvent(SaveFilePathChangedEvent evt) {
+        this.todoList.resetData(evt.data);
+    }
+
     //=========== Filtered Todo List Accessors =============================================================
 
     @Override
