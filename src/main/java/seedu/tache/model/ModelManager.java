@@ -1,6 +1,7 @@
 package seedu.tache.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -175,13 +176,13 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139961U
     @Override
     public void updateFilteredListToShowDueToday() {
-        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
         updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
     }
 
     public void updateFilteredListToShowDueThisWeek() {
-        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
         updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
+        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
     }
 
     //@@author A0142255M
@@ -522,7 +523,18 @@ public class ModelManager extends ComponentManager implements Model {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < filteredTasks.size(); i++) {
             if (filteredTasks.get(i).getRecurringStatus()) {
-                Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
+                if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                    Collections.addAll(concatenated, filteredTasks.get(i)
+                                                .getUncompletedRecurList(new Date()).toArray());
+                } else if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                    Calendar dateThisWeek = Calendar.getInstance();
+                    dateThisWeek.setTime(new Date());
+                    dateThisWeek.add(Calendar.WEEK_OF_YEAR, 1);
+                    Collections.addAll(concatenated, filteredTasks.get(i)
+                                                .getUncompletedRecurList(dateThisWeek.getTime()).toArray());
+                } else {
+                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList(null).toArray());
+                }
             }
         }
         Collections.addAll(concatenated, filteredTasks.toArray());
@@ -533,7 +545,8 @@ public class ModelManager extends ComponentManager implements Model {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < taskManager.getTaskList().size(); i++) {
             if (taskManager.getTaskList().get(i).getRecurringStatus()) {
-                Collections.addAll(concatenated, taskManager.getTaskList().get(i).getUncompletedRecurList().toArray());
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                            .getUncompletedRecurList(null).toArray());
             }
         }
         return FXCollections.observableList(concatenated);

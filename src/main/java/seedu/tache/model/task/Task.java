@@ -195,21 +195,25 @@ public class Task implements ReadOnlyTask {
         this.recurCompletedList = recurCompletedList;
     }
 
-    public List<Task> getUncompletedRecurList() {
+    public List<Task> getUncompletedRecurList(Date endingRangeDate) {
         List<Task> uncompletedRecurList = new ArrayList<Task>();
         if (startDateTime.isPresent() && isRecurring) {
             Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
                                             + " " + startDateTime.get().getTimeOnly());
             Calendar calendarNow = Calendar.getInstance();
-            calendarNow.setTime(new Date());
-            if (interval.equals(RecurInterval.DAY)) {
-                calendarNow.add(Calendar.WEEK_OF_YEAR, 2);
-            } else if (interval.equals(RecurInterval.WEEK)) {
-                calendarNow.add(Calendar.MONTH, 2);
-            } else if (interval.equals(RecurInterval.MONTH)) {
-                calendarNow.add(Calendar.YEAR, 1);
-            } else if (interval.equals(RecurInterval.YEAR)) {
-                calendarNow.add(Calendar.YEAR, 5);
+            if (endingRangeDate == null) {
+                calendarNow.setTime(new Date());
+                if (interval.equals(RecurInterval.DAY)) {
+                    calendarNow.add(Calendar.WEEK_OF_YEAR, 2);
+                } else if (interval.equals(RecurInterval.WEEK)) {
+                    calendarNow.add(Calendar.MONTH, 2);
+                } else if (interval.equals(RecurInterval.MONTH)) {
+                    calendarNow.add(Calendar.YEAR, 1);
+                } else if (interval.equals(RecurInterval.YEAR)) {
+                    calendarNow.add(Calendar.YEAR, 5);
+                }
+            } else {
+                calendarNow.setTime(endingRangeDate);
             }
             while ((currentDate.before(calendarNow.getTime())
                     || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)

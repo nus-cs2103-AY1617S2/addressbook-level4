@@ -23,7 +23,7 @@ public interface ReadOnlyTask {
     RecurInterval getRecurInterval();
     boolean isWithinDate(Date date);
     List<Date> getRecurCompletedList();
-    List<Task> getUncompletedRecurList();
+    List<Task> getUncompletedRecurList(Date endingRangeDate);
     String getRecurDisplayDate();
     boolean isMasterRecurring();
 

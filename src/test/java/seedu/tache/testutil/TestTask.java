@@ -139,7 +139,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public List<Task> getUncompletedRecurList() {
+    public List<Task> getUncompletedRecurList(Date endingDateRange) {
         return null;
     }
 
