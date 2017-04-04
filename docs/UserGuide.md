@@ -108,7 +108,7 @@ Format: `edit INDEX [ta/TAG]`
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
-> * Edit with `t/` may replacce all the previous tags with new assigned tags.
+> * Edit with `t/` may replace all the previous tags with new assigned tags.
 
 Examples:
 
@@ -128,6 +128,7 @@ Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/M
 > * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
 > * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
 > * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
+> * You may enter "yesterday" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before today.
 * You may enter nothing for complete time to find all completed tasks (i.e. `find c/`)
 * You may enter "not" for complete time to find all uncompleted tasks (i.e. `find c/not`);
 > * Todos that do not have the specified parameters will not be included. e.g. if you specify start time, no floating todos will be included in the search results.
