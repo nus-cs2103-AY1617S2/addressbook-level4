@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -26,6 +28,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
+        Arrays.sort(currentList);
         commandBox.runCommand(td.meeting.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
@@ -48,6 +51,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        Arrays.sort(expectedList);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

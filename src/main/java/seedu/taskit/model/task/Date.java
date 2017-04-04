@@ -111,6 +111,16 @@ public class Date {
         }
         return true;
     }
+    
+    /**
+     * Comparison method for Task Comparable
+     */
+    public int compareTo(Date o) {
+        if (this.date == null || o.date == null) {
+            return 0;
+        }
+        return this.date.compareTo(o.date);
+    }
 
     //@@author A0141872E
     public boolean isEndTimePassCurrentTime() {

@@ -4,6 +4,7 @@ import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Title;
+import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Priority;
 
 
@@ -29,11 +30,25 @@ public class TaskBuilder {
         this.task.setTitle(new Title(title));
         return this;
     }
+    
+    // @@author A0163996J
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
         return this;
     }
+    
+    public TaskBuilder withStart(String start) throws IllegalValueException {
+        this.task.setStart(new Date(start));
+        return this;
+    }
+    
+    public TaskBuilder withEnd(String end) throws IllegalValueException {
+        this.task.setEnd(new Date(end));
+        return this;
+    }
+
+    //@@author A0141011J
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
