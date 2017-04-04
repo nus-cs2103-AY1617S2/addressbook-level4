@@ -104,14 +104,26 @@ public class TaskCard extends UiPart<Region> {
         Date dateSevenDaysInAdvance = createDateSevenDaysInAdvance();
 
         dueDate.setText(task.getDueDate().value);
-        setDueDateColor(dateSevenDaysInAdvance, CSS_ABOUT_TO_DUE_COLOR);
+        setAboutToDueDateColor(dateSevenDaysInAdvance, CSS_ABOUT_TO_DUE_COLOR);
         setDueDateColor(currentDate, CSS_OVERDUE_COLOR);
+    }
+
+    private void setAboutToDueDateColor(Date dateReference, String cssColor) {
+        try {
+            if (dateReference.after(DATE_FORMAT.parse(dueDate.getText()))) {
+                startDate.setStyle(null);
+                dueDate.setStyle(cssColor);
+            }
+        } catch (ParseException pe) {
+            // Do nothing as the due date is optional
+            // and cannot be parsed as Date object
+        }
     }
 
     private void setDueDateColor(Date dateReference, String cssColor) {
         try {
             if (dateReference.after(DATE_FORMAT.parse(dueDate.getText()))) {
-                startDate.setStyle(null);
+                startDate.setStyle(cssColor);
                 dueDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
