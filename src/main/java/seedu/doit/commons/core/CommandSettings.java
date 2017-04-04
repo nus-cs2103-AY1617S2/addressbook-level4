@@ -77,29 +77,6 @@ public class CommandSettings implements Serializable {
         this.unmark = UnmarkCommand.COMMAND_WORD;
     }
 
-    public void setCommandSettings(String add, String delete, String done, String edit, String clear, String exit,
-            String find, String help, String list, String load, String mark, String redo, String save, String select,
-            String set, String sort, String undo, String unmark) {
-        this.add = add;
-        this.delete = delete;
-        this.done = done;
-        this.edit = edit;
-        this.mark = mark;
-        this.clear = clear;
-        this.exit = exit;
-        this.find = find;
-        this.help = help;
-        this.list = list;
-        this.load = load;
-        this.redo = redo;
-        this.save = save;
-        this.select = select;
-        this.sort = sort;
-        this.undo = undo;
-        this.unmark = unmark;
-        this.set = set;
-    }
-
     // Getter
     public String getAdd() {
         return this.add;
@@ -296,6 +273,22 @@ public class CommandSettings implements Serializable {
     }
 
     public boolean doesCommandExist(String command) {
+        if (doesCommandExistInDefault(command)) {
+            return true;
+        }
+        if (doesCommandExistInAlias(command)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the command exist in default command words
+     *
+     * @param command
+     * @return true if it exists else false
+     */
+    public boolean doesCommandExistInDefault(String command) {
         switch (command) {
 
         case AddCommand.COMMAND_WORD:
@@ -318,40 +311,22 @@ public class CommandSettings implements Serializable {
         case SetCommand.COMMAND_WORD:
             return true;
         }
-        if (this.add.equals(command) || this.delete.equals(command) || this.edit.equals(command)
+        return false;
+    }
+
+    /**
+     * Checks if the command exist in CommandSettings
+     *
+     * @param command
+     * @return true if it exists else false
+     */
+    public boolean doesCommandExistInAlias(String command) {
+        return this.add.equals(command) || this.delete.equals(command) || this.edit.equals(command)
                 || this.done.equals(command) || this.clear.equals(command) || this.exit.equals(command)
                 || this.find.equals(command) || this.help.equals(command) || this.list.equals(command)
                 || this.load.equals(command) || this.mark.equals(command) || this.redo.equals(command)
                 || this.save.equals(command) || this.select.equals(command) || this.set.equals(command)
-                || this.sort.equals(command) || this.undo.equals(command) || this.unmark.equals(command)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((this.add == null) ? 0 : this.add.hashCode());
-        result = (prime * result) + ((this.clear == null) ? 0 : this.clear.hashCode());
-        result = (prime * result) + ((this.delete == null) ? 0 : this.delete.hashCode());
-        result = (prime * result) + ((this.done == null) ? 0 : this.done.hashCode());
-        result = (prime * result) + ((this.edit == null) ? 0 : this.edit.hashCode());
-        result = (prime * result) + ((this.exit == null) ? 0 : this.exit.hashCode());
-        result = (prime * result) + ((this.find == null) ? 0 : this.find.hashCode());
-        result = (prime * result) + ((this.help == null) ? 0 : this.help.hashCode());
-        result = (prime * result) + ((this.list == null) ? 0 : this.list.hashCode());
-        result = (prime * result) + ((this.load == null) ? 0 : this.load.hashCode());
-        result = (prime * result) + ((this.mark == null) ? 0 : this.mark.hashCode());
-        result = (prime * result) + ((this.redo == null) ? 0 : this.redo.hashCode());
-        result = (prime * result) + ((this.save == null) ? 0 : this.save.hashCode());
-        result = (prime * result) + ((this.select == null) ? 0 : this.select.hashCode());
-        result = (prime * result) + ((this.set == null) ? 0 : this.set.hashCode());
-        result = (prime * result) + ((this.sort == null) ? 0 : this.sort.hashCode());
-        result = (prime * result) + ((this.undo == null) ? 0 : this.undo.hashCode());
-        result = (prime * result) + ((this.unmark == null) ? 0 : this.unmark.hashCode());
-        return result;
+                || this.sort.equals(command) || this.undo.equals(command) || this.unmark.equals(command);
     }
 
     @Override

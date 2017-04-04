@@ -16,6 +16,8 @@ import seedu.doit.logic.commands.exceptions.CommandException;
  */
 public class SaveCommand extends Command {
 
+    public static final String XML_FILE_TYPE = ".xml";
+
     public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks to a new file location and name. "
@@ -54,7 +56,7 @@ public class SaveCommand extends Command {
             logger.info("Invalid File Name: " + this.saveFilePath);
             throw new CommandException(MESSAGE_INVALID_FILE_NAME);
         }
-        if (!this.saveFilePath.endsWith(".xml")) {
+        if (!this.saveFilePath.endsWith(XML_FILE_TYPE)) {
             logger.info("File not of type xml: " + this.saveFilePath);
             throw new CommandException(MESSAGE_NOT_XML_FILE);
         }
