@@ -54,7 +54,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[**list / l**](#33-listing-all-tasks--list--l)                  |List the tasks         |
 |[**edit / e**](#34-editing-a-task--edit--e)                     |Edit a task            |
 |[**find / f**](#35-finding-all-tasks-by-keywords-or-by-datetime--find--f)           |Find tasks by keywords or by datetime             |
-|[**delete / d**](#36-deleting-a-task--delete--d)                |Delete a task          |
+|[**delete / d**](#36-deleting-tasks--delete--d)                |Delete a task          |
 |[**clear / c**](#37-clearing-tasks-by-category--clear--c)       |Clear tasks in category|
 |[**view / v**](#38-viewing-a-task--view--v)                    |View a task            |
 |[**name / n**](#39-modifying-a-category-name--name--n)         |Rename a category      |
