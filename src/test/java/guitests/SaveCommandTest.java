@@ -39,13 +39,6 @@ public class SaveCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void save_inaccessibleLocation_messageLocationInaccessible() {
-        //inaccessible location
-        commandBox.runCommand("save " + inaccessibleLocation);
-        //assertResultMessage(SaveCommand.MESSAGE_LOCATION_INACCESSIBLE);
-    }
-
-    @Test
     public void save_fileExists_messageFileExists() throws IOException, FileDeletionException {
         //file exists
         FileUtil.createIfMissing(new File(validLocation));
