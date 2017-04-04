@@ -2,22 +2,30 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" styleClass="card">
+<!--@@author A0141011J -->
+
+<HBox id="cardPane" fx:id="cardPane" prefWidth="350.0" styleClass="card" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+        <Rectangle fx:id="overdue" arcHeight="5.0" arcWidth="5.0" fill="#FFFFFF" height="80.0" stroke="TRANSPARENT" strokeType="INSIDE" width="7.0" />
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" minHeight="80.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -27,22 +35,41 @@
                     </padding>
 
                     <children>
-                        <HBox spacing="5" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="title" text="\$first" styleClass="cell_big_label"/>
-                                   	<Label fx:id="margin"/>
-                                    <Label fx:id="priority" text="\$priority" />
+                                    <Label fx:id="id" styleClass="cell_big_label" />
+                                    <Label fx:id="title" prefHeight="20.0" styleClass="cell_big_label" text="\$first" />
+                                    <Label fx:id="margin" />
+                                    <FlowPane fx:id="tags" prefHeight="27.0" prefWidth="103.0" />
                                 </HBox>
                             </children>
                         </HBox>
                         <Label fx:id="start" styleClass="cell_small_label" text="\$start" />
                         <Label fx:id="end" styleClass="cell_small_label" text="\$end" />
-                        <FlowPane fx:id="tags"/>
                     </children>
                 </VBox>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
+      <StackPane prefHeight="25.0" prefWidth="35.0">
+         <children>
+              <Circle fx:id="priority_shape" fill="#ffffff00" radius="20.0" stroke="#000000" strokeType="INSIDE" strokeWidth="4.0" StackPane.alignment="CENTER">
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </Circle>
+            <Label fx:id="priority" contentDisplay="CENTER" text="\$priority" textAlignment="CENTER" StackPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </StackPane>
     </children>
 </HBox>

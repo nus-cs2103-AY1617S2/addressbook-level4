@@ -200,6 +200,6 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     }
 
     private boolean checkOverdue() {
-        return this.end.isEndTimePassCurrentTime();
-    }
+        return this.end.isEndTimePassCurrentTime()== true && isDone == false;
+    }//@@author
 }

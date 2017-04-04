@@ -1,8 +1,11 @@
 package seedu.taskit.model.tag;
 
 
+import java.util.Random;
+
 import seedu.taskit.commons.exceptions.IllegalValueException;
 
+//@@author A0141011J
 /**
  * Represents a Tag in TaskIt.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -13,6 +16,8 @@ public class Tag {
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    public final int tagColor;
+
 
     /**
      * Validates given tag name.
@@ -26,6 +31,10 @@ public class Tag {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
         this.tagName = trimmedName;
+
+        //assign a random color to a tag
+        Random random = new Random();
+        this.tagColor = random.nextInt(TagColor.numOfColors());
     }
 
     /**
@@ -54,4 +63,11 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Retrieve the color index of the tag
+     * For UI
+     */
+    public int getColor() {
+        return this.tagColor;
+    }
 }

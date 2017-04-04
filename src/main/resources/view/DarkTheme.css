@@ -98,12 +98,14 @@
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+  -fx-font-family: "Roboto Condensed";
+  -fx-font-size: 16px;
+  -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
+  -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
 
@@ -131,7 +133,7 @@
 }
 
 .status-bar .label {
-	-fx-font-family: "Lato";
+  -fx-font-family: "Lato";
     -fx-text-fill: black;
 }
 
@@ -275,21 +277,25 @@
 }
 
 .card.done .text {
-	-fx-strikethrough: true;
+  -fx-strikethrough: true;
     -fx-fill: #c9c9c9;
-}
-#cardPane {
-    -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
 }
 
 #menuBarCardPane {
-	-fx-background-color: transparent;
+  -fx-background-color: transparent;
 }
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
+}
+
+/* //@@author A0141011J */
+/*Styles for TaskCard */
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-color: #d6d6d6;
+    -fx-border-width: 1 1 1 1;
+
 }
 
 #tags {
@@ -307,20 +313,26 @@
 }
 
 #priority {
-	-fx-text-fill: white;
-	-fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+  -fx-font-size: 15;
+  -fx-font-weight: bold;
+}
+
+#priorityShape {
+    -fx-background-color: #FFFFFF00;
+}
+
+#overdue {
+
 }
 
 #margin {
-	-fx-padding: 5px;
+  -fx-padding: 5px;
 }
-	
+/* //@@author A0141872E*/
+
 /* Styles for menuBarView*/
 #menuBarView .list-cell {
-	-fx-label-padding: 0 0 0 0;
+  -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 10;
     -fx-padding: 0 0 0 0;
     -fx-background-color: derive(#9ad3de, 20%);

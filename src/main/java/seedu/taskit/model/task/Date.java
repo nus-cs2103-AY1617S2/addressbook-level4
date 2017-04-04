@@ -2,6 +2,7 @@
 
 package seedu.taskit.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -56,14 +57,14 @@ public class Date {
         }
     }
 
+    //@@author A0141011J
     @Override
     public String toString() {
-        if (date != null) {
-            return date.toString();
-        } else {
-            return "";
-        }
+        if (date == null) { return ""; }
+        SimpleDateFormat df = new SimpleDateFormat("EEE, dd MMM ''yy, hh:mm aaa");
+        return df.format(date);
     }
+    //@@author
 
     public String originalString() {
         if (dateString != null) {
