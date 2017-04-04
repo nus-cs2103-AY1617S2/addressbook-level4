@@ -9,12 +9,15 @@ import java.util.logging.Level;
 public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
+    public static final String DEFAULT_USER_PREFS_FILE = "preferences.json";
+    public static final String DEFAULT_SAVE_LOCATION = "data/opus.xml";
 
     // Config values customizable through config file
     private String appTitle = "Opus";
     private Level logLevel = Level.INFO;
-    private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/opus.xml";
+    private String userPrefsFilePath = DEFAULT_USER_PREFS_FILE;
+    private String taskManagerFilePath = DEFAULT_SAVE_LOCATION;
+    private String configFilePath = DEFAULT_CONFIG_FILE;
     private String appName = "Opus";
 
 
@@ -49,6 +52,16 @@ public class Config {
     public void setTaskManagerFilePath(String taskManagerFilePath) {
         this.taskManagerFilePath = taskManagerFilePath;
     }
+
+    //@@author A0148081H
+    public String getConfigFilePath() {
+        return configFilePath;
+    }
+
+    public void setConfigFilePath(String configFilePath) {
+        this.configFilePath = configFilePath;
+    }
+    //@@author
 
     public String getTaskManagerName() {
         return appName;
