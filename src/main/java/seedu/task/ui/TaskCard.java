@@ -46,7 +46,6 @@ public class TaskCard extends UiPart<Region> {
 
     private boolean status;
     //@@author A0139975J
-  //@@author A0142487Y-reused
     public TaskCard(ReadOnlyTask task, int displayedIndex, String...fxml) {
         super(fxml.length==0?FXML:fxml[0]);
 //        plane.setText(displayedIndex + ". " + task.getName().fullName);

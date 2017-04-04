@@ -13,7 +13,7 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask apply, buy, calculate, decide, eat, find, give, handle, identify, jump, kick, look, mark, neglect;
+    public TestTask apply, buy, calculate, decide, eat, find, give, handle, identify, jump, kick, look, mark, neglect, open, practice, queue;
 
     public TypicalTestTasks() {
         try {
@@ -54,6 +54,13 @@ public class TypicalTestTasks {
                     .withRemark("Tick the completed tasks").withLocation("").build();
             neglect = new TaskBuilder().withName("Neglect all warnings").withStartDate("").withEndDate("8-9-2017 23:59")
                     .withRemark("Neglect this remark please").withLocation("").build();
+            open = new TaskBuilder().withName("Open the gate for friends").withStartDate("").withEndDate("June 4 2018")
+                    .withRemark("Do not forget or they will be locked out.").withLocation("June's Place").build();;
+            practice =new TaskBuilder().withName("Practice Coding before New Year").withStartDate("").withEndDate("1/2/2018")
+                    .withRemark("").withLocation("NUS soc CereBro").build();;
+            queue = new TaskBuilder().withName("Queue for the openning of the restaurant on Christmas Day").withStartDate("").withEndDate("12/24/2017")
+                    .withRemark("").withLocation("").build();;
+                    
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

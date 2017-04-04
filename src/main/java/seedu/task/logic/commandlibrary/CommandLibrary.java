@@ -65,7 +65,6 @@ import seedu.task.logic.parser.UndoneCommandParser;
 public class CommandLibrary {
 
     private static CommandLibrary instance = null;
-    private static HashMap<String, CommandParser> commandParserTable;
     private static HashMap<String, CommandInstance> commandTable;
 
     protected CommandLibrary() {
@@ -83,80 +82,6 @@ public class CommandLibrary {
      * To initialize the hashmap and necessary variables
      */
     private static void init() {
-//    commandParserTable = new HashMap<>();
-//    // TODO Auto-generated method stub
-//    commandParserTable.put(AddCommand.COMMAND_WORD_1, new AddCommandParser());
-//
-//    commandParserTable.put(ClearCommand.COMMAND_WORD_1, new ClearCommandParser());
-//
-//    commandParserTable.put(DeleteCommand.COMMAND_WORD_1, new DeleteCommandParser());
-//
-//    commandParserTable.put(DoneCommand.COMMAND_WORD_1, new DoneCommandParser());
-//    commandParserTable.put(DoneCommand.COMMAND_WORD_2, new DoneCommandParser());
-//
-//    commandParserTable.put(EditCommand.COMMAND_WORD_1, new EditCommandParser());
-//
-//    commandParserTable.put(ExitCommand.COMMAND_WORD_1, new ExitCommandParser());
-//
-//    commandParserTable.put(FindCommand.COMMAND_WORD_1, new FindCommandParser());
-//    commandParserTable.put(FindCommand.COMMAND_WORD_2, new FindCommandParser());
-//
-//    commandParserTable.put(FindDateCommand.COMMAND_WORD_1, new FindDateCommandParser());
-//
-//    commandParserTable.put(FindExactCommand.COMMAND_WORD_1, new FindExactCommandParser());
-//    commandParserTable.put(FindExactCommand.COMMAND_WORD_2, new FindExactCommandParser());
-//    commandParserTable.put(FindExactCommand.COMMAND_WORD_3, new FindExactCommandParser());
-//    commandParserTable.put(FindExactCommand.COMMAND_WORD_4, new FindExactCommandParser());
-//
-//    commandParserTable.put(GetGoogleCalendarCommand.COMMAND_WORD_1, new GetGoogleCalendarCommandParser());
-//    commandParserTable.put(GetGoogleCalendarCommand.COMMAND_WORD_2, new GetGoogleCalendarCommandParser());
-//
-//    commandParserTable.put(HelpCommand.COMMAND_WORD_1, new HelpCommandParser());
-//    commandParserTable.put(HelpCommand.COMMAND_WORD_2, new HelpCommandParser());
-//    commandParserTable.put(HelpCommand.COMMAND_WORD_3, new HelpCommandParser());
-//    commandParserTable.put(HelpCommand.COMMAND_WORD_4, new HelpCommandParser());
-//
-//
-//    commandParserTable.put(HelpFormatCommand.COMMAND_WORD_1, new HelpFormatCommandParser());
-//    commandParserTable.put(HelpFormatCommand.COMMAND_WORD_2, new HelpFormatCommandParser());
-//    commandParserTable.put(HelpFormatCommand.COMMAND_WORD_3, new HelpFormatCommandParser());
-//    commandParserTable.put(HelpFormatCommand.COMMAND_WORD_4, new HelpFormatCommandParser());
-//
-//    commandParserTable.put(ListByDoneCommand.COMMAND_WORD_1, new ListByDoneCommandParser());
-//    commandParserTable.put(ListByDoneCommand.COMMAND_WORD_2, new ListByDoneCommandParser());
-//
-//    commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_1, new ListByNotDoneCommandParser());
-//    commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_2, new ListByNotDoneCommandParser());
-//    commandParserTable.put(ListByNotDoneCommand.COMMAND_WORD_3, new ListByNotDoneCommandParser());
-//
-//    commandParserTable.put(ListByTagCommand.COMMAND_WORD_1, new ListByTagCommandParser());
-//    commandParserTable.put(ListByTagCommand.COMMAND_WORD_2, new ListByTagCommandParser());
-//    commandParserTable.put(ListByTagCommand.COMMAND_WORD_3, new ListByTagCommandParser());
-//    commandParserTable.put(ListByTagCommand.COMMAND_WORD_4, new ListByTagCommandParser());
-//
-//    commandParserTable.put(ListCommand.COMMAND_WORD_1, new ListCommandParser());
-//    commandParserTable.put(ListCommand.COMMAND_WORD_2, new ListCommandParser());
-//    commandParserTable.put(ListCommand.COMMAND_WORD_3, new ListCommandParser());
-//
-//    commandParserTable.put(LoadCommand.COMMAND_WORD_1, new LoadCommandParser());
-//
-//    commandParserTable.put(PostGoogleCalendarCommand.COMMAND_WORD_1, new PostGoogleCalendarCommandParser());
-//    commandParserTable.put(PostGoogleCalendarCommand.COMMAND_WORD_2, new PostGoogleCalendarCommandParser());
-//
-//    commandParserTable.put(RedoCommand.COMMAND_WORD_1, new RedoCommandParser());
-//
-//    commandParserTable.put(SaveCommand.COMMAND_WORD_1, new SaveCommandParser());
-//
-//    commandParserTable.put(SelectCommand.COMMAND_WORD_1, new SelectCommandParser());
-//    commandParserTable.put(SelectCommand.COMMAND_WORD_2, new SelectCommandParser());
-//
-//    commandParserTable.put(ThemeChangeCommand.COMMAND_WORD_1, new ThemeChangeCommandParser());
-//
-//    commandParserTable.put(UndoCommand.COMMAND_WORD_1, new UndoCommandParser());
-//    commandParserTable.put(UndoCommand.COMMAND_WORD_2, new UndoCommandParser());
-//
-//    commandParserTable.put(UndoneCommand.COMMAND_WORD_1, new UndoneCommandParser());
-//    commandParserTable.put(UndoneCommand.COMMAND_WORD_2, new UndoneCommandParser());
 
         commandTable = new HashMap<>();
         commandTable.put(AddCommand.COMMAND_WORD_1, new CommandInstance(AddCommand.COMMAND_WORD_1,
@@ -300,7 +225,7 @@ public class CommandLibrary {
         if (!commandTable.containsKey(commandWord)) {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
-        return commandTable.get(commandWord).commandParser.parse(arguments);
+        return commandTable.get(commandWord).commandParser.parse(arguments.trim());
     }
 
     public String getCommandUsage(String commandWord) {
@@ -315,7 +240,6 @@ public class CommandLibrary {
         private String commandKey;
         private String commandUsage;
         private CommandParser commandParser;
-    // private String commandSuccessMessage;
 
         protected CommandInstance(String commandKey, CommandParser commandParser, String commandUsage) {
             this.commandKey = commandKey;
