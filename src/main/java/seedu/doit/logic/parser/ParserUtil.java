@@ -52,7 +52,7 @@ public class ParserUtil {
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Set<Integer> parseIndexes(String args) {
-        Pattern indexesPattern = Pattern.compile("(\\d+|\\d+-\\d+)");
+        Pattern indexesPattern = Pattern.compile("((\\d+|\\d+-\\d+)?[ ]*)+");
         Matcher matcher = indexesPattern.matcher(args.trim());
 
         Set<Integer> emptySet = new HashSet<>();

@@ -21,7 +21,7 @@ public class DeleteCommandParser implements CommandParser {
     @Override
     public Command parse(String args) {
 
-        Set<Integer> indexes = ParserUtil.parseIndexes(args);
+        Set<Integer> indexes = ParserUtil.parseIndexes(args.trim());
         if (indexes.isEmpty()) {
             return new IncorrectCommand(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
