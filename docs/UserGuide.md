@@ -223,14 +223,14 @@ Format: Down arrow key
 
 Saves the task manager data to the .xml file specified by you.<br>
 Format: `save PATH_TO_FILE/FILE_NAME.xml`
+> The path specified is relative to the directory that your `doTASK.jar` file is in.<br>
 > Your file name must have the extension `.xml`.<br>
 > Upon creating/deleting/editing a task, the task data will be automatically saved to the file specified by you.<br>
 > If you did not specify a path, the default path is `data/taskManager.xml`.<br>
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
 
 Examples:
-* `save data/myTasks.xml`
-* `save C:\Users\yourName\Documents\todo.xml`
+* `save todo/myTasks.xml`
 
 ## 4. FAQ
 
