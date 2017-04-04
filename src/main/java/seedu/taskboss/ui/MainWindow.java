@@ -119,10 +119,15 @@ public class MainWindow extends UiPart<Region> {
         new CategoryListPanel(getCategoryListPlaceholder(), logic.getFilteredTaskList());
     }
 
+    //@@author A0143157J
+    /**
+     * Loads tasks from the selected category
+     */
     public void loadCategorySelection(Category category) {
         logic.updateFilteredTaskListByCategory(category);
     }
 
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }

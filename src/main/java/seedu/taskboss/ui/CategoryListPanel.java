@@ -23,6 +23,7 @@ import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
+//@@author A0143157J
 public class CategoryListPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CategoryListPanel.class);
@@ -39,14 +40,19 @@ public class CategoryListPanel extends UiPart<Region> {
     public CategoryListPanel(AnchorPane categoryListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         tasks = taskList;
-        updateCategoryCount();
+        updateCategoryCountToHashMap();
+        initCategories();
         setConnections(categories);
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
         setEventHandlerForViewingChangeEvent();
     }
 
-    public void updateCategoryCount() {
+    /**
+     * Compute task counts in each category,
+     * and save them into {@code HashMap<Category, Integer>} categoryHm
+     */
+    public void updateCategoryCountToHashMap() {
         categoryHm = new HashMap<Category, Integer>();
 
         for (ReadOnlyTask task : tasks) {
@@ -58,23 +64,27 @@ public class CategoryListPanel extends UiPart<Region> {
                 }
             }
         }
-
-        initCategories(categoryHm);
     }
 
-    public void initCategories(HashMap<Category, Integer> categoryList) {
-        categories = getCategoryWithCount(categoryList);
-    }
-
-    private ObservableList<Category> getCategoryWithCount(HashMap<Category, Integer> categoryList) {
+    /**
+     * Initializes {@code ObservableList<Category>} categories
+     */
+    private void initCategories() {
         categories = FXCollections.observableArrayList();
-        for (Entry<Category, Integer> entry : categoryList.entrySet()) {
+        for (Entry<Category, Integer> entry : categoryHm.entrySet()) {
             if (entry.getValue() > 0) {
                 categories.add(entry.getKey());
             }
         }
-        Comparator<Category> categoryCmp;
-        categoryCmp = new Comparator<Category>() {
+        sortCategoryList();
+    }
+
+    /**
+     * Sort category list according to alphabetical order,
+     * but with Alltasks always on top, and Done always at the bottom.
+     */
+    private void sortCategoryList() {
+        Comparator<Category> categoryCmp = new Comparator<Category>() {
             @Override
             public int compare(Category o1, Category o2) {
                 if (o1.categoryName.equals("Alltasks"))
@@ -91,12 +101,16 @@ public class CategoryListPanel extends UiPart<Region> {
         };
 
         FXCollections.sort(categories, categoryCmp);
-        return categories;
     }
 
+    /**
+     * Subscribe to changes in TaskBoss and
+     * updates categories in the CategoryListPanel accordingly
+     */
     @Subscribe
     public void handleTaskBossChangedEvent(TaskBossChangedEvent tmce) {
-        updateCategoryCount();
+        updateCategoryCountToHashMap();
+        initCategories();
         setConnections(categories);
     }
 
@@ -116,7 +130,7 @@ public class CategoryListPanel extends UiPart<Region> {
         categoryListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Viewing in task list panel changed to : '" + newValue + "'");
+                        logger.fine("Viewing in category list panel changed to : '" + newValue + "'");
                         raise(new CategoryListPanelViewingChangedEvent(newValue));
                     }
                 });
