@@ -82,7 +82,6 @@ Sorts the list of tasks currently being shown according to the keyword.<br>
 Format: `sort KEYWORD`
 
 > Keywords
-> * `status` : Sorts the list according to status, with incomplete tasks at the top.
 > * `start` : Sorts the list according to start dates, with the earlier start dates at the top.
 > * `end` : Sorts the list according to end dates, with the earlier end dates at the top.
 > * `priority` : Sorts the list according to priorities, with the highest priorities at the top
@@ -90,13 +89,13 @@ Format: `sort KEYWORD`
 
 Examples:
 
-* `sort status` <br>
-Sorts the list of tasks according to status
+* `sort priority` <br>
+Sorts the list of tasks according to priority.
 
 ### 2.5. Editing a task : `edit`
 
 Edits an existing task in Opus.<br>
-Format: `edit INDEX [NAME] [n/NOTES] [b/STARTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
+Format: `edit INDEX [NAME] [n/NOTES] [p/PRIORITY] [t/TAG]...`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
