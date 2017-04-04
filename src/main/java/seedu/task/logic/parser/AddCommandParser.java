@@ -6,6 +6,7 @@ import static seedu.task.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_PRIORITY_LEVEL;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.text.ParseException;
 import java.util.NoSuchElementException;
 
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -20,8 +21,9 @@ public class AddCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     * @throws ParseException
      */
-    public Command parse(String args) {
+    public Command parse(String args) throws ParseException {
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_PRIORITY_LEVEL, PREFIX_ANY_INFO, PREFIX_TAG);
         argsTokenizer.tokenize(args);
