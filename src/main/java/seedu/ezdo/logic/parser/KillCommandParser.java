@@ -13,13 +13,16 @@ import seedu.ezdo.logic.commands.KillCommand;
  */
 public class KillCommandParser implements CommandParser {
 
+    private static final String INDEX_ZERO = "0";
+
     /**
      * Parses the given {@code String} of arguments in the context of the KillCommand
      * and returns a KillCommand object for execution.
      */
     @Override
     public Command parse(String args) {
-        if (args.isEmpty()) {
+        final boolean isIndexZero = args.trim().equals(INDEX_ZERO);
+        if (args.isEmpty() || isIndexZero) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, KillCommand.MESSAGE_USAGE));
         }
         ArrayList<Integer> indexes = ParserUtil.parseIndexes(args);
