@@ -43,26 +43,49 @@ public interface ReadOnlyTask {
      * Formats the event as text, showing all details.
      */
     default String getAsText() {
-        final StringBuilder builder = new StringBuilder();
-        String startTime = (getStartTime() != null) ? getStartTime().toString() : "None";
-        String endTime = (getDeadline() != null) ? getDeadline().toString() : "None";
+        final StringBuilder builder = new StringBuilder();;
 
-        builder.append(getName())
-               .append(" Priority: ")
-               .append(getPriority());
+        appendName(builder);
+        appendPriority(builder);
+        appendStartTime(builder);
+        appendEndTime(builder);
+        appendDescription(builder);
+        appendTags(builder);
+
+        return builder.toString();
+    }
+
+    default void appendName(StringBuilder builder) {
+        builder.append(getName());
+    }
+
+    default void appendPriority(StringBuilder builder) {
+        builder.append(" Priority: ");
+        builder.append(getPriority());
+    }
+
+    default void appendStartTime(StringBuilder builder) {
         if (hasStartTime()) {
             builder.append(" Start Time: ");
             builder.append(getStartTime());
         }
+    }
+
+    default void appendEndTime(StringBuilder builder) {
         if (hasEndTime()) {
             builder.append(" End Time: ");
             builder.append(getDeadline());
         }
-        builder.append(" Description: ")
-               .append(getDescription())
-               .append(" Tags: ");
+    }
+
+    default void appendDescription(StringBuilder builder) {
+        builder.append(" Description: ");
+        builder.append(getDescription());
+    }
+
+    default void appendTags(StringBuilder builder) {
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
-        return builder.toString();
     }
 
     boolean hasStartTime();
