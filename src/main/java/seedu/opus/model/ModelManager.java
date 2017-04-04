@@ -115,9 +115,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
-    //@@author A0148081H
-    //=========== Storage Methods ==========================================================================
+    //=========== Storage Method ==========================================================================
 
+    //@@author A0148081H
     @Override
     public synchronized void changeSaveLocation(String location) {
         assert StringUtil.isValidPathToFile(location);
