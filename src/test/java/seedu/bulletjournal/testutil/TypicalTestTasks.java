@@ -27,7 +27,7 @@ public class TypicalTestTasks {
             eatleftovers = new TaskBuilder().withTaskName("Eat leftovers").withDueDate("14th April 4pm")
                     .withStatus("done").withBeginDate("14th April 12pm").build();
             findsocks = new TaskBuilder().withTaskName("Find socks").withDueDate("14th April 4pm")
-                    .withStatus("undone").withBeginDate("little tokyo").build();
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
             getclothes = new TaskBuilder().withTaskName("Get clothes").withDueDate("14th April 4pm")
                     .withStatus("undone").withBeginDate("14th April 12pm").build();
 
@@ -38,14 +38,14 @@ public class TypicalTestTasks {
                     .withStatus("undone").withBeginDate("14th April 12pm").build();
             submitreport = new TaskBuilder().withTaskName("Submit FYP report").withDueDate("14th April 4pm")
                     .withStatus("undone").withBeginDate("14th April 12pm").build();
-            floatone = new TaskBuilder().withTaskName("Float task one").withDueDate("-")
-                    .withStatus("undone").withBeginDate("-").build();
-            floattwo = new TaskBuilder().withTaskName("Float task two").withDueDate("-")
-                    .withStatus("undone").withBeginDate("-").build();
-            deadone = new TaskBuilder().withTaskName("Deadline task one").withDueDate("210317")
-                    .withStatus("undone").withBeginDate("-").build();
-            deadtwo = new TaskBuilder().withTaskName("Deadline task two").withDueDate("210417")
-                    .withStatus("undone").withBeginDate("-").build();
+            floatone = new TaskBuilder().withTaskName("Float task one").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
+            floattwo = new TaskBuilder().withTaskName("Float task two").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
+            deadone = new TaskBuilder().withTaskName("Deadline task one").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
+            deadtwo = new TaskBuilder().withTaskName("Deadline task two").withDueDate("14th April 4pm")
+                    .withStatus("undone").withBeginDate("14th April 12pm").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

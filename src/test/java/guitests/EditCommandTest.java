@@ -26,11 +26,11 @@ public class EditCommandTest extends TodoListGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
 
-        String detailsToEdit = "Burn clothes d/91234567 s/undone b/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Burn clothes d/14th April 3pm s/undone b/14th April 1pm t/husband";
         int addressBookIndex = 1;
 
-        TestTask editedTask = new TaskBuilder().withTaskName("Burn clothes").withDueDate("91234567")
-                .withStatus("undone").withBeginDate("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withTaskName("Burn clothes").withDueDate("14th April 3pm")
+                .withStatus("undone").withBeginDate("14th April 1pm").withTags("husband").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
@@ -124,8 +124,8 @@ public class EditCommandTest extends TodoListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Assignment for CS2103 d/85355255 s/undone "
-                                + "b/123, Jurong West Ave 6, #08-111 t/friends");
+        commandBox.runCommand("edit 3 Assignment for CS2103 d/14th April 4pm s/undone "
+                                + "b/14th April 12pm t/friends");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 

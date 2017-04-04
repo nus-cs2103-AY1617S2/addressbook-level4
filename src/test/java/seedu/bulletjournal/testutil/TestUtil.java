@@ -75,15 +75,15 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new TaskName("Ali Muster"), new DueDate("9482424"), new Status("undone"), new BeginDate("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Boris Mueller"), new DueDate("87249245"), new Status("undone"), new BeginDate("81th street"), new UniqueTagList()),
-                new Task(new TaskName("Carl Kurz"), new DueDate("95352563"), new Status("undone"), new BeginDate("wall street"), new UniqueTagList()),
-                new Task(new TaskName("Daniel Meier"), new DueDate("87652533"), new Status("undone"), new BeginDate("10th street"), new UniqueTagList()),
-                new Task(new TaskName("Elle Meyer"), new DueDate("9482224"), new Status("undone"), new BeginDate("michegan ave"), new UniqueTagList()),
-                new Task(new TaskName("Fiona Kunz"), new DueDate("9482427"), new Status("undone"), new BeginDate("little tokyo"), new UniqueTagList()),
-                new Task(new TaskName("George Best"), new DueDate("9482442"), new Status("undone"), new BeginDate("4th street"), new UniqueTagList()),
-                new Task(new TaskName("Hoon Meier"), new DueDate("8482424"), new Status("undone"), new BeginDate("little india"), new UniqueTagList()),
-                new Task(new TaskName("Ida Mueller"), new DueDate("8482131"), new Status("undone"), new BeginDate("chicago ave"), new UniqueTagList())
+                new Task(new TaskName("Ali Muster"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Boris Mueller"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Carl Kurz"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Daniel Meier"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Elle Meyer"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Fiona Kunz"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("George Best"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Hoon Meier"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList()),
+                new Task(new TaskName("Ida Mueller"), new DueDate("14th April 4pm"), new Status("undone"), new BeginDate("14th April 12pm"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
