@@ -5,13 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
-import guitests.guihandles.TaskCardHandle;
-import seedu.taskit.commons.core.Messages;
-import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.logic.commands.ListCommand;
-import seedu.taskit.testutil.TaskBuilder;
 import seedu.taskit.testutil.TestTask;
-import seedu.taskit.testutil.TestUtil;
 
 //@@author A0097141H
 public class ListCommandTest extends AddressBookGuiTest {
@@ -46,7 +41,7 @@ public class ListCommandTest extends AddressBookGuiTest {
         assertListSize(2); //2 tasks added by today
         assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "today"));
 		
-		//list overdue tasksX
+		//list overdue tasks
 		commandBox.runCommand("add task3 by 04/04/17");
 		commandBox.runCommand("list overdue");
 		assertListSize(2); //because task1 has just been overdue.
