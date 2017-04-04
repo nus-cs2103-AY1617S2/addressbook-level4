@@ -86,10 +86,10 @@ public class TypicalTestEvents {
         }
     }
 
-    public static void loadWhatsLeftWithSampleData(WhatsLeft ab) {
+    public static void loadWhatsLeftWithSampleData(WhatsLeft wl) {
         for (TestEvent event : new TypicalTestEvents().getTypicalEvents()) {
             try {
-                ab.addEvent(new Event(event));
+                wl.addEvent(new Event(event));
             } catch (DuplicateEventException e) {
                 assert false : "not possible";
             }
@@ -101,8 +101,8 @@ public class TypicalTestEvents {
     }
 
     public WhatsLeft getTypicalWhatsLeft() {
-        WhatsLeft ab = new WhatsLeft();
-        loadWhatsLeftWithSampleData(ab);
-        return ab;
+        WhatsLeft wl = new WhatsLeft();
+        loadWhatsLeftWithSampleData(wl);
+        return wl;
     }
 }

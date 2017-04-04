@@ -56,7 +56,8 @@ public class EventListPanelHandle extends GuiHandle {
     public boolean isListMatching(int startPosition, ReadOnlyEvent... events) throws IllegalArgumentException {
         if (events.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " activities");
+                    "Expected " + (getListView().getItems().size() - 1) + " events.\n"
+                    + "Actually " + events.length + "events.");
         }
         assertTrue(this.containsInOrder(startPosition, events));
         for (int i = 0; i < events.length; i++) {

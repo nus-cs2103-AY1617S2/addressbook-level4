@@ -12,11 +12,6 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.ActivityListPanelHandle;
-
-//import guitests.guihandles.ActivityCardHandle;
-//import guitests.guihandles.ActivityListPanelHandle;
-
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.EventCardHandle;
@@ -35,7 +30,6 @@ import seedu.address.model.WhatsLeft;
 import seedu.address.model.person.ReadOnlyEvent;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestActivities;
 import seedu.address.testutil.TypicalTestEvents;
 import seedu.address.testutil.TypicalTestTasks;
 
@@ -50,7 +44,6 @@ public abstract class WhatsLeftGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestActivities td = new TypicalTestActivities();
     protected TypicalTestEvents te = new TypicalTestEvents();
     protected TypicalTestTasks tt = new TypicalTestTasks();
 
@@ -60,7 +53,6 @@ public abstract class WhatsLeftGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected ActivityListPanelHandle activityListPanel;
     protected EventListPanelHandle eventListPanel;
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
@@ -83,7 +75,8 @@ public abstract class WhatsLeftGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            activityListPanel = mainGui.getActivityListPanel();
+            eventListPanel = mainGui.getEventListPanel();
+            taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             this.stage = stage;
@@ -100,9 +93,10 @@ public abstract class WhatsLeftGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected WhatsLeft getInitialData() {
-        WhatsLeft ab = new WhatsLeft();
-        TypicalTestActivities.loadWhatsLeftWithSampleData(ab);
-        return ab;
+        WhatsLeft wl = new WhatsLeft();
+        TypicalTestEvents.loadWhatsLeftWithSampleData(wl);
+        TypicalTestTasks.loadWhatsLeftWithSampleData(wl);
+        return wl;
     }
 
     /**
@@ -118,14 +112,14 @@ public abstract class WhatsLeftGuiTest {
     }
 
     /**
-     * Asserts the event shown in the card is same as the given activity
+     * Asserts the event shown in the card is same as the given event
      */
     public void assertMatchingEvent(ReadOnlyEvent event, EventCardHandle card) {
         assertTrue(TestUtil.compareCardAndEvent(card, event));
     }
 
     /**
-     * Asserts the task shown in the card is same as the given activity
+     * Asserts the task shown in the card is same as the given task
      */
     public void assertMatchingTask(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));

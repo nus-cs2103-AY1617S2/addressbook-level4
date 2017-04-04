@@ -33,19 +33,6 @@ public class EventBuilder {
         return this;
     }
 
-    public EventBuilder withTags(String ... tags) throws IllegalValueException {
-        event.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            event.getTags().add(new Tag(tag));
-        }
-        return this;
-    }
-
-    public EventBuilder withLocation(String location) throws IllegalValueException {
-        this.event.setLocation(new Location(location));
-        return this;
-    }
-
     public EventBuilder withStartTime(String starttime) throws IllegalValueException {
         this.event.setStartTime(new StartTime(starttime));
         return this;
@@ -66,8 +53,21 @@ public class EventBuilder {
         return this;
     }
 
+    public EventBuilder withLocation(String location) throws IllegalValueException {
+        this.event.setLocation(new Location(location));
+        return this;
+    }
+
     public TestEvent build() {
         return this.event;
+    }
+
+    public EventBuilder withTags(String ... tags) throws IllegalValueException {
+        event.setTags(new UniqueTagList());
+        for (String tag: tags) {
+            event.getTags().add(new Tag(tag));
+        }
+        return this;
     }
 
 }

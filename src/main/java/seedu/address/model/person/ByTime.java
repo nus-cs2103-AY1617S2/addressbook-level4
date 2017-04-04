@@ -95,6 +95,7 @@ public class ByTime {
     public boolean isExisting() {
         return this.isExisting;
     }
+
     public int compareTo(ByTime o) {
         return this.getValue().compareTo(o.getValue());
     }
