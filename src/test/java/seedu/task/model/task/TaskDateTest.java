@@ -3,9 +3,6 @@ package seedu.task.model.task;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import seedu.task.model.task.TaskDate;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 
 public class TaskDateTest {

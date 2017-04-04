@@ -11,7 +11,7 @@ public class TaskTime {
 	private List<Date> dates;
 	private Date time;
 	private SimpleDateFormat formatter;
-	private final String OUTPUT_FORMAT = " hh:mm a ";
+	private final String OUTPUT_FORMAT = "HH:mm";
 
 	public final String value;
 	private int hour;
