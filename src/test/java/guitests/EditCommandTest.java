@@ -101,7 +101,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 2 title Do HW 1");
+        commandBox.runCommand("edit 3 title Do HW 1");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
