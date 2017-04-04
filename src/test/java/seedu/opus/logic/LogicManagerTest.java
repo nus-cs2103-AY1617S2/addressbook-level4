@@ -39,6 +39,7 @@ import seedu.opus.logic.commands.MarkCommand;
 import seedu.opus.logic.commands.RedoCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
+import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
 import seedu.opus.logic.commands.exceptions.CommandException;
 import seedu.opus.model.History;
@@ -643,6 +644,15 @@ public class LogicManagerTest {
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
         assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
+    }
+
+    @Test
+    public void executeSyncCommandWithValidOffArgumentSuccess() {
+        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS, new TaskManager(), Collections.emptyList());
+    }
+
+    public void executeSyncCommandWithInvalidArgumentException() {
+        assertCommandFailure("sync invalid", SyncCommand.MESSAGE_USAGE);
     }
     //@@author
 
