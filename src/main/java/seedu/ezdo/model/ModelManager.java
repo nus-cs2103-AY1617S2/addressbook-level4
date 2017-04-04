@@ -44,8 +44,8 @@ public class ModelManager extends ComponentManager implements Model {
     private SortCriteria currentSortCriteria;
     private Boolean currentIsSortedAscending;
 
-    private final FixedStack<ReadOnlyEzDo> undoStack;
-    private final FixedStack<ReadOnlyEzDo> redoStack;
+    private FixedStack<ReadOnlyEzDo> undoStack;
+    private FixedStack<ReadOnlyEzDo> redoStack;
 
     /**
      * Initializes a ModelManager with the given ezDo and userPrefs.
@@ -59,11 +59,19 @@ public class ModelManager extends ComponentManager implements Model {
         this.ezDo = new EzDo(ezDo);
         this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        initSortPrefs();
+        initStacks();
+        updateFilteredListToShowAll();
+    }
+
+    private void initSortPrefs() {
         currentSortCriteria = userPrefs.getSortCriteria();
         currentIsSortedAscending = userPrefs.getIsSortedAscending();
+    }
+
+    private void initStacks() {
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
-        updateFilteredListToShowAll();
     }
 
     public ModelManager() {
