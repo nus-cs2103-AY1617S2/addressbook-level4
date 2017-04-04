@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.tache.commons.core.EventsCenter;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.exceptions.CommandException;
 import seedu.tache.model.tag.Tag;
@@ -23,6 +25,7 @@ import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 public class AddCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "add";
+    public static final String SHORT_COMMAND_WORD = "a";
     public static final String TAG_SEPARATOR = "t/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
@@ -73,6 +76,7 @@ public class AddCommand extends Command implements Undoable {
             model.addTask(toAdd);
             commandSuccess = true;
             undoHistory.push(this);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskList().indexOf(toAdd)));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

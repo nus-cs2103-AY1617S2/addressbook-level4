@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
@@ -25,6 +27,7 @@ import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 public class EditCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String SHORT_COMMAND_WORD = "ed";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last tasks listing. "
@@ -87,6 +90,7 @@ public class EditCommand extends Command implements Undoable {
             model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {
             return new IncorrectCommand(e.getMessage()).execute();

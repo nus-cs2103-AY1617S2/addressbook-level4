@@ -122,6 +122,32 @@ public class CalendarPanel extends UiPart<Region> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             String referenceDate = sdf.format(today);
             changeReferenceDate(referenceDate);
+            if (taskListType.equals("Tasks Due Today")) {
+                changeView("day");
+            } else {
+                changeView("week");
+            }
+        } else {
+            changeView("month");
+        }
+    }
+
+    private void changeView(String view) {
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            engine.executeScript("change_view('" + view + "')");
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript("change_view('" + view + "')");
+                }
+            });
         }
     }
 

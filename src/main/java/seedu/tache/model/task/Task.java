@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -324,4 +325,26 @@ public class Task implements ReadOnlyTask {
         }
     }
 
+    public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
+
+        public int compare(Task task1, Task task2) {
+            Date lastComparableDate = new Date(0);
+            int result = 0;
+            //ascending order
+            if (!task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                result = lastComparableDate.compareTo(task2.getEndDateTime().get().getDate());
+                lastComparableDate = task2.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && !task2.getEndDateTime().isPresent()) {
+                result = task1.getEndDateTime().get().getDate().compareTo(lastComparableDate);
+                lastComparableDate = task1.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                return task1.getEndDateTime().get().getDate().compareTo(task2.getEndDateTime().get().getDate());
+            }
+            return (result);
+        }
+
+    };
+    //@@author
 }
