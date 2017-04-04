@@ -310,7 +310,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_select_jumpsToCorrectActivity() throws Exception {
+    public void execute_select_jumpsToCorrectEvent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Event> threeEvents = helper.generateEventList(3);
 

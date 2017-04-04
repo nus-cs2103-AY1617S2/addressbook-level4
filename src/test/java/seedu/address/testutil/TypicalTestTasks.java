@@ -77,10 +77,10 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadWhatsLeftWithSampleData(WhatsLeft ab) {
+    public static void loadWhatsLeftWithSampleData(WhatsLeft wl) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
-                ab.addTask(new Task(task));
+                wl.addTask(new Task(task));
             } catch (DuplicateTaskException e) {
                 assert false : "not possible";
             }
