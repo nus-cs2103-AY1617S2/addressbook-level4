@@ -33,25 +33,26 @@ public class MarkDoneCommand extends Command {
     public final ArrayList<ReadOnlyTask> tasksToMarkDone;
 
     public MarkDoneCommand(Set<Integer> targetIndex) {
-        this.filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
-        Collections.sort(this.filteredTaskListIndices);
-        this.tasksToMarkDone = new ArrayList<ReadOnlyTask>();
+        filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
+        Collections.sort(filteredTaskListIndices);
+        tasksToMarkDone = new ArrayList<ReadOnlyTask>();
     }
 
     @Override
     public CommandResult execute() throws CommandException, IllegalValueException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (this.filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
-                || this.filteredTaskListIndices.get(INDEX_ZERO) < 1) {
+        if (filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
+                || filteredTaskListIndices.get(INDEX_ZERO) < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        for (int index : this.filteredTaskListIndices) {
-            this.tasksToMarkDone.add(lastShownList.get(index - 1));
+        for (int index : filteredTaskListIndices) {
+            ReadOnlyTask taskToMarkDone = lastShownList.get(index - 1);
+            tasksToMarkDone.add(taskToMarkDone);
         }
 
-        model.markDone(this.filteredTaskListIndices, tasksToMarkDone);
+        model.markDone(filteredTaskListIndices, tasksToMarkDone);
 
         scrollToTask(tasksToMarkDone);
         return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));

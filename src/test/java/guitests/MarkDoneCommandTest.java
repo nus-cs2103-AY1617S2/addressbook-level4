@@ -141,7 +141,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     @Test
     public void markDone_findThenMarkDone_success() throws Exception {
-        commandBox.runCommand("find k/Clean house");
+        commandBox.runCommand("find Clean house");
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 1;
