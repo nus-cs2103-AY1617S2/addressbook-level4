@@ -26,6 +26,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private Stack<String> previousCommands = new Stack<String>();
     private Stack<String> refilledCommands = new Stack<String>();
+    public static final PseudoClass ERROR_PSEUDOCLASS = PseudoClass.getPseudoClass(ERROR_STYLE_CLASS);
 
     private final Logic logic;
 
@@ -76,8 +77,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box error pseudo-style based on command result.
      */
     private void setErrorStyleForCommandResult(boolean isError) {
-        PseudoClass errorPseudoClass = PseudoClass.getPseudoClass(ERROR_STYLE_CLASS);
-        commandTextField.pseudoClassStateChanged(errorPseudoClass, isError);
+        commandTextField.pseudoClassStateChanged(ERROR_PSEUDOCLASS, isError);
     }
 
     public void focus() {

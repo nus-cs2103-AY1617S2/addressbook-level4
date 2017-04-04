@@ -133,7 +133,7 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand(EditCommand.COMMAND_WORD + " e1 study at home s/tmr 9pm e/tmr 10pm");
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " e3 meet boss");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -153,7 +153,6 @@ public class EditCommandTest extends ToDoListGuiTest {
     private void assertEditSuccess(String filteredTaskListIndex, String detailsToEdit, TestTask editedTask,
             TestTask[] expected) {
         commandBox.runCommand(EditCommand.COMMAND_WORD + " " + filteredTaskListIndex + " " + detailsToEdit);
-
         int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
 
         // confirm the new card contains the right data

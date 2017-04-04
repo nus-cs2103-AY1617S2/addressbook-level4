@@ -1,9 +1,10 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
-import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import seedu.onetwodo.ui.CommandBox;
 
 /**
  * A handle to the Command Box in the GUI.
@@ -52,7 +53,13 @@ public class CommandBoxHandle extends GuiHandle {
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
-    public ObservableList<String> getStyleClass() {
-        return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
+    public boolean isErrorStyleApplied() {
+        return getNode(COMMAND_INPUT_FIELD_ID).getPseudoClassStates().contains(CommandBox.ERROR_PSEUDOCLASS);
     }
+
+    public void setErrorPseudoStyleClass() {
+        PseudoClass errorPseudoClass = PseudoClass.getPseudoClass(CommandBox.ERROR_STYLE_CLASS);
+        getNode(COMMAND_INPUT_FIELD_ID).pseudoClassStateChanged(errorPseudoClass, true);
+    }
+
 }
