@@ -16,6 +16,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
+    private static final int INDEX_END_DATE_POSITION = 4;
+    private static final int INDEX_START_DATE_POSITION = 6;
     private static final String NAME_FIELD_ID = "#name";
     private static final String INFORMATION_FIELD_ID = "#information";
     private static final String PRIORITY_FIELD_ID = "#priorityLevel";
@@ -58,13 +60,13 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getStartDateTime() {
         String value = getTextFromLabel(START_DATE_FIELD_ID);
-        String result = value.substring(6).trim();
+        String result = value.substring(INDEX_START_DATE_POSITION).trim();
         return result;
     }
 
     public String getEndDateTime() {
         String value = getTextFromLabel(END_DATE_FIELD_ID);
-        String result = value.substring(4).trim();
+        String result = value.substring(INDEX_END_DATE_POSITION).trim();
         return result;
     }
 
