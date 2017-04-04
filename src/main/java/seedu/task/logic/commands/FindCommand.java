@@ -3,17 +3,21 @@ package seedu.task.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all tasks in the task list whose name contains any of the argument keywords.
- * Keyword matching is case sensitive.
+ * Finds and lists all tasks in the task list whose name or information contains any of the argument keywords.
+ * Keyword matching is NOT case sensitive.
+ * Near match cases are allowed.
  */
+
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose task name or information contain"
-            + " any of the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks "
+            + "whose names or information contain any of "
+            + "the specified keywords (NOT case-sensitive) and displays them as a list with index numbers.\n"
+            + "Near match cases are allowed.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " eat sleep shit";
+            + "Example: " + COMMAND_WORD + " birthday homework picnic";
 
     private final Set<String> keywords;
 

@@ -22,7 +22,6 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
-import seedu.task.logic.commands.SearchCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -56,14 +55,14 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-            
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-          case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -71,9 +70,6 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
 
         //@@author A0139322L
         case FindTagCommand.COMMAND_WORD:
@@ -107,7 +103,7 @@ public class Parser {
 
         case DeleteCompleteCommand.COMMAND_WORD:
             return new DeleteCompleteCommandParser().parse(arguments);
-            
+
         //@@author A0141928B
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);

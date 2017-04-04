@@ -23,19 +23,19 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
     public void undoRedo_previousAdd() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.task8;
+        TestTask taskToAdd = td.task88;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //undo previous addition of task
         commandBox.runCommand("undo");
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
-        assertFindResult("find Task8");
+        assertFindResult("find Task88");
 
         //redo the previous undo
         commandBox.runCommand("redo");
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
-        assertFindResult("find Task8", td.task8);
+        assertFindResult("find Task88", td.task88);
     }
 
     @Test
@@ -55,24 +55,24 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
     @Test
     public void undoDelete() {
         commandBox.runCommand("delete 1");
-        assertFindResult("find Task1");
+        assertFindResult("find Task11");
         commandBox.runCommand("undo");
-        assertFindResult("find Task1", td.task1);
+        assertFindResult("find Task11", td.task11);
     }
 
     @Test
     public void undoEdit() throws IllegalValueException {
-        String detailsToEdit = "Task1 d/13-Mar-2017 p/1 i/Block 123, Bobby Street 3 t/husband";
+        String detailsToEdit = "Task11 d/15-Mar-2015 p/1 i/NUS t/School";
         int addressBookIndex = 1;
 
         TestTask originalTask = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder().withName("Task1").withDeadline("13-Mar-2017")
-                .withPriorityLevel("1").withInformation("Block 123, Bobby Street 3").withTags("husband").build();
+        TestTask editedTask = new TaskBuilder().withName("Task11").withDeadline("15-Mar-2015")
+                .withPriorityLevel("1").withInformation("NUS").withTags("School").build();
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
         commandBox.runCommand("undo");
-        assertFindResult("find Task1", originalTask);
+        assertFindResult("find Task11", originalTask);
         commandBox.runCommand("redo");
-        assertFindResult("find Task1", editedTask);
+        assertFindResult("find Task11", editedTask);
     }
 
     //@@author

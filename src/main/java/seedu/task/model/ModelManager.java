@@ -23,7 +23,7 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task manager data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -166,20 +166,6 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getAdvancedFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
-    }
-
-    @Override
-    public void updateAdvancedFilteredTaskList(Set<String> keywords) {
-        updateAdvancedFilteredTaskList(new PredicateExpression(new AdvancedQualifier(keywords)));
-    }
-
-    private void updateAdvancedFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    @Override
     public void updatePriorityTaskList() {
         Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
         filteredTasks.setPredicate(pred);
@@ -270,33 +256,9 @@ public class ModelManager extends ComponentManager implements Model {
             this.totalKeyWords = totalKeyWords;
         }
 
-        //@@author-A0139322L
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return totalKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getDate().value, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-        //@@author
-
-        @Override
-        public String toString() {
-            return "keywords =" + String.join(", ", totalKeyWords);
-        }
-    }
-
-    private class AdvancedQualifier implements Qualifier {
-        private Set<String> totalKeyWords;
-
-        AdvancedQualifier(Set<String> totalKeyWords) {
-            this.totalKeyWords = totalKeyWords;
-        }
-
         LevenshteinDistance result = new LevenshteinDistance();
 
+        //@@author-A0139322L
         @Override
         public boolean run(ReadOnlyTask task) {
             return totalKeyWords.stream()
@@ -305,6 +267,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .findAny()
                     .isPresent();
         }
+        //@@author
 
         @Override
         public String toString() {
