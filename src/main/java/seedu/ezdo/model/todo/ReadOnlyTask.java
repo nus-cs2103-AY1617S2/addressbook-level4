@@ -33,22 +33,23 @@ public interface ReadOnlyTask {
     }
   //@@author A0139248X
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all task details.
+     * Will only show what the task has. i.e. if task has no priority it won't show "Priority: "
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Task: ").append(getName());
+        builder.append(getName());
         if (!getPriority().toString().isEmpty()) {
-            builder.append(" Priority: ").append(getPriority());
+            builder.append(" | Priority: ").append(getPriority());
         }
         if (!getStartDate().toString().isEmpty()) {
-            builder.append(" StartDate: ").append(getStartDate());
+            builder.append(" | StartDate: ").append(getStartDate());
         }
         if (!getDueDate().toString().isEmpty()) {
-            builder.append(" DueDate: ").append(getDueDate());
+            builder.append(" | DueDate: ").append(getDueDate());
         }
         if (!getTags().toSet().isEmpty()) {
-            builder.append(" Tags: ");
+            builder.append(" | Tags: ");
             getTags().forEach(builder::append);
         }
         return builder.toString();
