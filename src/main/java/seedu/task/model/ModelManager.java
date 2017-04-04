@@ -219,6 +219,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
 
     }
+    
+    @Override 
+    public void updateFilteredTaskListFloat() {
+        updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
+    }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
@@ -371,7 +376,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    // @@author
+    // @@author A0139975J
     private class DateQualifier implements Qualifier {
 
         private Date date;
@@ -391,7 +396,23 @@ public class ModelManager extends ComponentManager implements Model {
             return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
         }
     }
+    
+    //@@author A0139975J
+    private class FloatDateQualifier implements Qualifier {
 
+        private Date date;
+
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDate().isNull() && task.getStartDate().isNull()) {
+                return true;
+            }
+            return false;
+        }
+    }
+    
+    //@@author A0139975J
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
@@ -404,7 +425,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            // return (this.value == task.isDone());
             if (this.value & task.isDone()) {
                 return true;
             } else if (!this.value & !task.isDone()) {

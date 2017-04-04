@@ -54,6 +54,8 @@ public class TaskCard extends UiPart<Region> {
      // plane.setAnimated(false);
         plane.setExpanded(false);
         this.status = false;
+        name.setWrapText(true);
+        name.setMaxWidth(1000);
         name.setText(displayedIndex + ". " + task.getName().fullName);
         //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
