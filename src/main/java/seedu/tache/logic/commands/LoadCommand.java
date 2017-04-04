@@ -19,7 +19,6 @@ import seedu.tache.model.util.SampleDataUtil;
 public class LoadCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "load";
-    public static final String SHORT_COMMAND_WORD = "lo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads the file specified.\n"
             + "Parameters: DIRECTORY \n"

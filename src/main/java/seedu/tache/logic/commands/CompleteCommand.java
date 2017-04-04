@@ -18,7 +18,7 @@ import seedu.tache.model.task.UniqueTaskList;
 public class CompleteCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "complete";
-    public static final String SHORT_COMMAND_WORD = "co";
+    public static final String SHORT_COMMAND_WORD = "c";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Completes the task identified "
             + "by the index number used in the last tasks listing. "
