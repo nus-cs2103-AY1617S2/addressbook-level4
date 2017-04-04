@@ -45,7 +45,6 @@ public class ArgumentTokenizer {
      * Returns false if prefix is not in Arguments
      */
     public boolean isEmpty(Prefix prefix) {
-        List<String> test = this.tokenizedArguments.get(prefix);
         if (this.tokenizedArguments.containsKey(prefix) && this.tokenizedArguments.get(prefix).get(0).equals("")) {
             return true;
         }

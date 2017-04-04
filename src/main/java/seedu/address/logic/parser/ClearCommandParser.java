@@ -3,28 +3,28 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
-import seedu.address.logic.commands.SortCommand;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class SortCommandParser {
+public class ClearCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns an SortCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ClearCommand
+     * and returns an ClearCommand object for execution.
      */
     public Command parse(String para) {
 
         para = para.trim();
-        if (!"name".equals(para) && !"deadline".equals(para)) {
+        if (!"done".equals(para) && !"all".equals(para)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
         }
 
-        return new SortCommand(para);
+        return new ClearCommand(para);
     }
 
 }

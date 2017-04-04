@@ -5,7 +5,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 
 /**
@@ -49,10 +48,12 @@ public class TaskBuilder {
         return this;
     }
 
+    /*
     public TaskBuilder withID(String id) throws IllegalValueException {
         this.task.setID(new IdentificationNumber(id));
         return this;
     }
+    */
 
     public TestTask build() {
         return this.task;

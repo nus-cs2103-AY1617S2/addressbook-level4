@@ -14,7 +14,7 @@ import seedu.address.logic.commands.ViewCommand;
 
 public class ViewCommandTest extends TaskManagerGuiTest {
 
-    protected final String TASK_LIST_FXML_ID = "#taskListView";
+    protected final String taskListFxamlId = "#taskListView";
 
     @Test
     public void viewDefault() {
@@ -43,7 +43,7 @@ public class ViewCommandTest extends TaskManagerGuiTest {
     }
 
     protected void assertGroupsDisplay(String... groupTitles) {
-        Node taskListView = mainGui.getNodeWithID(TASK_LIST_FXML_ID);
+        Node taskListView = mainGui.getNodeWithID(taskListFxamlId);
         Set<Node> taskGroupNodes = taskListView.lookupAll("#titledPane");
 
         int index = 0;

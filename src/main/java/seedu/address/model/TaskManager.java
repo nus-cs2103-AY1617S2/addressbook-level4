@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
@@ -22,7 +21,6 @@ import seedu.address.model.task.TaskList;
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
-    private IdentificationNumber nextAvailableID = IdentificationNumber.ONE;
     private final TaskList tasks;
     private final UniqueTagList tags;
 

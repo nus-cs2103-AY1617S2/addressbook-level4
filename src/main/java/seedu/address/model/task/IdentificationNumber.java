@@ -42,8 +42,8 @@ public class IdentificationNumber {
         }
     }
 
-    public IdentificationNumber(IdentificationNumber ID) {
-        this.value = ID.value;
+    public IdentificationNumber(IdentificationNumber iD) {
+        this.value = iD.value;
     }
 
     /** Increase value by 1 */

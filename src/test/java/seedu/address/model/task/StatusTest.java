@@ -28,7 +28,7 @@ public class StatusTest {
     }
 
     @Test
-    public void TestStatusToday() {
+    public void testStatusToday() {
         Date today = new Date();
         String todayString = " " + today.getDate() + "-"
                                 + (today.getMonth() + 1) + "-"
@@ -36,11 +36,11 @@ public class StatusTest {
         String todayBegining = todayString + " 00:00 am";
         String todayEnding = todayString;
 
-        TestStatus(todayString, todayBegining, todayEnding, Status.TODAY);
+        testStatus(todayString, todayBegining, todayEnding, Status.TODAY);
     }
 
     @Test
-    public void TestStatusOverdue() {
+    public void testStatusOverdue() {
         Date date = new Date(70, 1, 1);
         String dateString = " " + date.getDate() + "-"
                                 + (date.getMonth() + 1) + "-"
@@ -48,11 +48,11 @@ public class StatusTest {
         String dateBegining = dateString + " 11:59 am";
         String dateEnding = dateString + " 00:01 pm";
 
-        TestStatus(dateString, dateBegining, dateEnding, Status.OVERDUE);
+        testStatus(dateString, dateBegining, dateEnding, Status.OVERDUE);
     }
 
     @Test
-    public void TestStatusTomorrow() {
+    public void testStatusTomorrow() {
         GregorianCalendar tmr = new GregorianCalendar();
         tmr.add(Calendar.DATE, 1);
 
@@ -62,11 +62,11 @@ public class StatusTest {
         String dateBegining = dateString + " 11:59 am";
         String dateEnding = dateString + " 00:01 pm";
 
-        TestStatus(dateString, dateBegining, dateEnding, Status.TOMORROW);
+        testStatus(dateString, dateBegining, dateEnding, Status.TOMORROW);
     }
 
     @Test
-    public void TestStatusTimeUnassigned() {
+    public void testStatusTimeUnassigned() {
         try {
             Task task = new Task(new Name("YEs"));
             assertEquals(task.getStatus().toString(), Status.FLOATING);
@@ -76,7 +76,7 @@ public class StatusTest {
         }
     }
 
-    void TestStatus(String dateString, String dateBegining, String dateEnding, String expectedStatus) {
+    void testStatus(String dateString, String dateBegining, String dateEnding, String expectedStatus) {
         try {
             // TimePoint
             Task task = new Task(new Name("TestTask"), new Deadline(dateString));
