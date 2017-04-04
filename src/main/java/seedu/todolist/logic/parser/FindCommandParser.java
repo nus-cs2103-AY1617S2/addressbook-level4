@@ -94,7 +94,9 @@ public class FindCommandParser {
     }
 
     private Date parseDateParameter(String dateString) throws IllegalValueException {
-        if (dateString.equals("today")) {
+        if (dateString.equals("yesterday")) {
+            return getDateOffsetWithZeroTime(0);
+        } else if (dateString.equals("today")) {
             return getDateOffsetWithZeroTime(1);
         } else if (dateString.equals("tomorrow")) {
             return getDateOffsetWithZeroTime(2);
