@@ -102,6 +102,7 @@ public interface Model {
      * marks recurring tasks done
      * @throws CommandException
      */
-    void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException, CommandException;
+    void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException,
+                                                                                        CommandException;
 
 }
