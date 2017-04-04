@@ -190,11 +190,21 @@ public class ModelManager extends ComponentManager implements Model {
         //@@author A0163673Y
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)
-                            || UniqueTagList.containsWordIgnoreCase(task.getTags(), keyword))
-                    .findAny()
-                    .isPresent();
+            boolean continueToCheckTag = true;
+            boolean continueToCheckDescription = true;
+            for (String keyword : nameKeyWords) {
+                if (continueToCheckDescription) {
+                    if (!StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword)) {
+                        continueToCheckDescription = false;
+                    }
+                }
+                if (continueToCheckTag) {
+                    if (!UniqueTagList.containsWordIgnoreCase(task.getTags(), keyword)) {
+                        continueToCheckTag = false;
+                    }
+                }
+            }
+            return continueToCheckTag || continueToCheckDescription;
         }
         //@@author
 
