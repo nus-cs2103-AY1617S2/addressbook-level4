@@ -11,6 +11,7 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.logic.commands.DeleteCommand;
+import seedu.task.logic.commands.DeleteCompleteCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
@@ -53,17 +54,16 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        //Keep & Done
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-        //Keep & Done
+            
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-        // Keep & Done
-        case DeleteCommand.COMMAND_WORD:
+
+          case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -104,8 +104,10 @@ public class Parser {
 
         case UncompleteCommand.COMMAND_WORD:
             return new UncompleteCommandParser().parse(arguments);
-        //@@author
 
+        case DeleteCompleteCommand.COMMAND_WORD:
+            return new DeleteCompleteCommandParser().parse(arguments);
+            
         //@@author A0141928B
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
