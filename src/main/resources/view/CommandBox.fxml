@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!-- @@author A0160076L -->
+
+<!-- @@author A0160076L -->
+
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,6 +10,6 @@
 
 <AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." style="-fx-background-color: #ffccbb;" />
+       <TextField styleClass="command-box-text" fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." />
    </children>
 </AnchorPane>

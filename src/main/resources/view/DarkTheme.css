@@ -117,7 +117,7 @@
 }
 
 .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: black;
     -fx-padding: 0 0 0 0;
 }
 
@@ -187,6 +187,10 @@
 
 .menu .left-container {
     -fx-background-color: #002c54;
+}
+
+.command-box-text {
+    -fx-background-color: #ffccbb;
 }
 
 /*
