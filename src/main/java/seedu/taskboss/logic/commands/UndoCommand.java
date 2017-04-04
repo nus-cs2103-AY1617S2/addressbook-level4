@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
             + ": Undoes the most recent operation entered by user\n"
             + "Example: " + COMMAND_WORD + " || " + COMMAND_WORD_SHORT;
 
-    public static final String MESSAGE_SUCCESS = "The most recent operation has been undone!";
+    public static final String MESSAGE_SUCCESS = "The most recent operation has been undone";
 
     public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "Cannot undo.";
 
@@ -29,9 +29,10 @@ public class UndoCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         try {
+            String input = model.undoTaskbossInput();
             model.undoTaskboss();
             model.updateFilteredListToShowAll();
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(MESSAGE_SUCCESS + ":" + input);
         } catch (EmptyStackException ese) {
             return new CommandResult(MESSAGE_WITHOUT_PREVIOUS_OPERATION);
         } catch (IllegalValueException e) {
