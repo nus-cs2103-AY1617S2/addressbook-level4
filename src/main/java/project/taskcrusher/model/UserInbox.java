@@ -32,6 +32,7 @@ public class UserInbox implements ReadOnlyUserInbox {
     private final UniqueTagList tags;
     private final UniqueEventList events;
     private static ArrayList<UserInbox> tasks_history = new ArrayList<UserInbox>();
+    private static UserInbox initial_state = new UserInbox();
     private static int index = 0;
 
     {
@@ -126,6 +127,8 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    	if (index == 0)
+    		UserInbox.addState(this);
         syncMasterTagListWith(p);
         tasks.add(p);
         UserInbox.addState(this);
@@ -143,6 +146,8 @@ public class UserInbox implements ReadOnlyUserInbox {
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
+    	if (index == 0)
+    		UserInbox.addState(this);
 
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
@@ -154,6 +159,8 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    	if (index == 0)
+    		UserInbox.addState(this);
         if (tasks.remove(key)) {
         	UserInbox.addState(this);
             return true;
@@ -163,11 +170,15 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     public void markTask(int index, int markFlag) {
+    	if (index == 0)
+    		UserInbox.addState(this);
         tasks.markTask(index, markFlag);
         UserInbox.addState(this);
     }
 
     public void markEvent(int index, int markFlag) {
+    	if (index == 0)
+    		UserInbox.addState(this);
         events.markEvent(index, markFlag);
         UserInbox.addState(this);
     }
@@ -242,6 +253,8 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
+    	if (index == 0)
+    		UserInbox.addState(this);
         syncMasterTagListWith(e);
         events.add(e);
         UserInbox.addState(this);
@@ -259,6 +272,8 @@ public class UserInbox implements ReadOnlyUserInbox {
     public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
             throws UniqueEventList.DuplicateEventException {
         assert editedReadOnlyEvent != null;
+    	if (index == 0)
+    		UserInbox.addState(this);
         
         Event editedEvent = new Event(editedReadOnlyEvent);
         syncMasterTagListWith(editedEvent);
@@ -270,6 +285,8 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
+    	if (index == 0)
+    		UserInbox.addState(this);
     	if (events.remove(key)) {
         	UserInbox.addState(this);
             return true;
