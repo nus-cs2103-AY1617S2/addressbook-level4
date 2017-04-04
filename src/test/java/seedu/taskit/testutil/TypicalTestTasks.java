@@ -13,6 +13,9 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
+            interview = new TaskBuilder().withTitle("Interview for big company")
+                    .withPriority("high")
+                    .withTags("career").build();
             hw1 = new TaskBuilder().withTitle("Do HW 1")
                     .withPriority("medium")
                     .withTags("school").build();
@@ -22,9 +25,6 @@ public class TypicalTestTasks {
             lunch = new TaskBuilder().withTitle("Lunch with Bob")
                     .withPriority("low")
                     .withTags("leisure", "friends").build();
-            interview = new TaskBuilder().withTitle("Interview for big company")
-                    .withPriority("high")
-                    .withTags("career").build();
             shopping = new TaskBuilder().withTitle("Shopping with friends")
                     .withPriority("low")
                     .withTags("leisure", "friends").build();
@@ -39,10 +39,10 @@ public class TypicalTestTasks {
 
             // Manually added
             meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
-                    .withPriority("high")
+                    .withPriority("low")
                     .withTags("school").build();
             assignment = new TaskBuilder().withTitle("CS3230 Assignment")
-                    .withPriority("medium")
+                    .withPriority("low")
                     .withTags("school").build();
             golfing = new TaskBuilder().withTitle("Golf with Cher")
                     .withPriority("medium")

@@ -21,7 +21,7 @@ import seedu.taskit.model.task.Task;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -42,6 +42,8 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortTasks();
+
     }
 
     // @@author generated
@@ -66,6 +68,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        sortTasks();
     }
 
  // @@author A0163996J
@@ -81,15 +84,25 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
         }
+        sortTasks();
         return taskFoundAndDeleted;
+    }
+    
+    /**
+     * Sorts task using Comparable
+     */
+    public void sortTasks() {
+        FXCollections.sort(this.internalList);
     }
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
+        sortTasks();
+        
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
-        final UniqueTaskList replacement = new UniqueTaskList();
+        UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }

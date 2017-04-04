@@ -9,7 +9,7 @@ import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_START_DATE;
 
-public class Task implements ReadOnlyTask{
+public class Task implements ReadOnlyTask, Comparable<Task>{
 
     protected Title title;
     protected Date start;
@@ -116,6 +116,19 @@ public class Task implements ReadOnlyTask{
         this.setEnd(replacement.getEnd());
         this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
+    }
+    
+    @Override
+    public int compareTo(Task o) {
+        int priorityComparison = this.priority.compareTo(o.priority);
+        if (priorityComparison == 0) {
+            int startComparison = this.getStart().compareTo(o.getStart());
+            if (startComparison == 0) {
+                return this.getEnd().compareTo(o.getEnd());
+            }
+            return startComparison;
+        }
+        return priorityComparison;
     }
 
     public boolean equals(Object other) {

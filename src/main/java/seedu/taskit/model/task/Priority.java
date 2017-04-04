@@ -57,7 +57,26 @@ public class Priority {
         return null;
 
     }
+    
+    public int getPriorityNum() {
+        if (this.priority == PriorityEnum.HIGH) {
+            return 2;
+        }
+        else if (this.priority == PriorityEnum.MEDIUM) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 
+    /**
+     * Comparison method for Task Comparable
+     */
+    public int compareTo(Priority o) {
+        return o.getPriorityNum() - this.getPriorityNum();
+    }
+    
     @Override
     public String toString() {
         if (this.priority == PriorityEnum.HIGH) {

@@ -4,6 +4,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import seedu.taskit.testutil.TestTask;
@@ -17,15 +19,18 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         //delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
+        Arrays.sort(currentList);
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete the last in the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        Arrays.sort(currentList);
         targetIndex = currentList.length;
         assertDeleteSuccess(targetIndex, currentList);
 
         //delete from the middle of the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        Arrays.sort(currentList);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 

@@ -6,9 +6,10 @@ import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Priority;
 import seedu.taskit.model.task.ReadOnlyTask;
+import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 
-public class TestTask implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
     private Title title;
     private Date start;
     private Date end;
@@ -88,6 +89,19 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
+    public int compareTo(TestTask o) {
+        int priorityComparison = this.priority.compareTo(o.priority);
+        if (priorityComparison == 0) {
+            int startComparison = this.getStart().compareTo(o.getStart());
+            if (startComparison == 0) {
+                return this.getEnd().compareTo(o.getEnd());
+            }
+            return startComparison;
+        }
+        return priorityComparison;
+    }
+
+    @Override
     public String toString() {
         return getAsText();
     }
@@ -97,7 +111,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getTitle().title + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("tag " + s.tagName + " "));
         return sb.toString();
-    }// @@author
+    }
 
     //@@author A0141872E
     @Override

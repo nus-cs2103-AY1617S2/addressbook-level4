@@ -4,6 +4,8 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
@@ -21,10 +23,18 @@ public class EditCommandTest extends AddressBookGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    // @@author A0163996J
+    
+    public void sortTasksList() {
+        Arrays.sort(expectedTasksList);
+    }
+    
+    //@@author A0141872E
+    
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "title Do Homework";
-        int addressBookIndex = 1;
+        int addressBookIndex = 3;
 
         TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withPriority("medium").withTags("school").build();
 
@@ -34,7 +44,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "tag null";
-        int addressBookIndex = 2;
+        int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
@@ -45,10 +55,10 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Do HW 1");
-
+        
         String detailsToEdit = "title Homework due";
         int filteredTaskListIndex = 1;
-        int addressBookIndex = 1;
+        int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Homework due").build();
@@ -91,7 +101,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 1 title Do HW 1");
+        commandBox.runCommand("edit 2 title Do HW 1");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
@@ -111,8 +121,11 @@ public class EditCommandTest extends AddressBookGuiTest {
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
         assertMatching(editedTask, editedCard);
 
+        sortTasksList();
+        
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;
+        sortTasksList();
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
