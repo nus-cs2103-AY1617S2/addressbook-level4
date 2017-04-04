@@ -12,6 +12,8 @@ import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
+import seedu.taskmanager.logic.Logic;
+import seedu.taskmanager.logic.LogicManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -59,7 +61,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+        Logic logic = LogicManager.getInstance();
+        raise(new TaskManagerChangedEvent(taskManager, logic.getCommandText()));
     }
 
     // @@author A0131278H

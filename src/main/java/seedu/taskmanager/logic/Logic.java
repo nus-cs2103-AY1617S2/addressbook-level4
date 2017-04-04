@@ -3,7 +3,9 @@ package seedu.taskmanager.logic;
 import javafx.collections.ObservableList;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.storage.Storage;
 
 /**
  * API of the Logic component
@@ -20,4 +22,9 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    // @@author A0140032E
+    void init(Model model, Storage storage);
+
+    String getCommandText();
+    // @@author
 }

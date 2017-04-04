@@ -63,9 +63,13 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
+        // @@author A0140032E
         history = HistoryManager.createInstance(model);
 
-        logic = new LogicManager(model, storage);
+        logic = LogicManager.getInstance();
+
+        logic.init(model, storage);
+        // @@author
 
         ui = new UiManager(logic, config, userPrefs);
 

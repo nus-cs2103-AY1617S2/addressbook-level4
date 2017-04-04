@@ -9,6 +9,8 @@ import seedu.taskmanager.commons.core.ComponentManager;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.TaskManagerStorageDirectoryChangedEvent;
+import seedu.taskmanager.logic.commands.RedoCommand;
+import seedu.taskmanager.logic.commands.UndoCommand;
 import seedu.taskmanager.storage.StorageManager;
 
 // @@author A0140032E
@@ -22,6 +24,8 @@ public class HistoryManager extends ComponentManager {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ArrayList<ReadOnlyTaskManager> historyList;
     private ArrayList<ReadOnlyTaskManager> futureList;
+    private ArrayList<String> historyCommands;
+    private ArrayList<String> futureCommands;
 
     public static final String INITIALIZATION_ERROR = "HistoryManager has not been initialized with a Model yet";
 
@@ -31,7 +35,8 @@ public class HistoryManager extends ComponentManager {
 
         historyList = new ArrayList<ReadOnlyTaskManager>();
         futureList = new ArrayList<ReadOnlyTaskManager>();
-
+        historyCommands = new ArrayList<String>();
+        futureCommands = new ArrayList<String>();
         TaskManager taskManager = new TaskManager(model.getTaskManager());
         historyList.add(taskManager);
     }
@@ -51,7 +56,11 @@ public class HistoryManager extends ComponentManager {
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         TaskManager taskManager = new TaskManager(event.data);
+        String commandText = new String(event.commandText);
         historyList.add(taskManager);
+        if (!commandText.equals(RedoCommand.COMMAND_WORD) && !commandText.equals(UndoCommand.COMMAND_WORD)) {
+            historyCommands.add(commandText);
+        }
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 ("Local data changed, updating history manager. Histories = " + historyList.size() + " Futures = "
                         + futureList.size())));
@@ -66,30 +75,56 @@ public class HistoryManager extends ComponentManager {
                         + futureList.size())));
     }
 
-    private ReadOnlyTaskManager getMostRecentHistory() {
+    private HistoryItemPair getMostRecentHistory() {
         if (historyList.size() < 2) {
             throw new NullPointerException();
         }
-        ReadOnlyTaskManager t = historyList.remove(historyList.size() - 1);
-        futureList.add(new TaskManager(t));
-        return historyList.remove(historyList.size() - 1);
+        ReadOnlyTaskManager taskManager = historyList.remove(historyList.size() - 1);
+        futureList.add(new TaskManager(taskManager));
+        String commandText = historyCommands.remove(historyCommands.size() - 1);
+        futureCommands.add(new String(commandText));
+        HistoryItemPair history = new HistoryItemPair(historyList.remove(historyList.size() - 1), commandText);
+        return history;
     }
 
-    private ReadOnlyTaskManager getMostRecentFuture() {
+    private HistoryItemPair getMostRecentFuture() {
         if (futureList.size() < 1) {
             throw new NullPointerException();
         }
-        ReadOnlyTaskManager t = futureList.remove(futureList.size() - 1);
-        return t;
+        String commandText = futureCommands.remove(futureCommands.size() - 1);
+        historyCommands.add(new String(commandText));
+        HistoryItemPair history = new HistoryItemPair(futureList.remove(futureList.size() - 1),
+                commandText);
+        return history;
     }
 
-    public void undo() {
-        ReadOnlyTaskManager t = getMostRecentHistory();
-        model.resetData(t);
+    public String undo() {
+        HistoryItemPair t = getMostRecentHistory();
+        model.resetData(t.getTaskManager());
+        return t.getCommandText();
     }
 
-    public void redo() {
-        ReadOnlyTaskManager t = getMostRecentFuture();
-        model.resetData(t);
+    public String redo() {
+        HistoryItemPair t = getMostRecentFuture();
+        model.resetData(t.getTaskManager());
+        return t.getCommandText();
+    }
+}
+
+class HistoryItemPair {
+    private ReadOnlyTaskManager taskManager;
+    private String commandText;
+
+    public HistoryItemPair(ReadOnlyTaskManager tm, String text) {
+        taskManager = tm;
+        commandText = text;
+    }
+
+    public ReadOnlyTaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    public String getCommandText() {
+        return commandText;
     }
 }

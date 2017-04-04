@@ -7,9 +7,11 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
+    public final String commandText;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data, String commandText) {
         this.data = data;
+        this.commandText = commandText;
     }
 
     @Override
