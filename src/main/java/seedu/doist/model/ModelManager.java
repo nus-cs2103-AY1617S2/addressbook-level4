@@ -271,6 +271,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredTaskList(TaskDate dates) {
+        Qualifier[] qualifiers = {new DateQualifier(dates)};
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
+    }
+
+    @Override
     public void updateFilteredTaskList(TaskType type, UniqueTagList tags) {
         ArrayList<Qualifier> qualifiers = new ArrayList<Qualifier>();
         if (type != null) {
@@ -381,13 +387,21 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
-   /* 
-    private class DateTypeQualifier implements Qualifier {
+
+    private class DateQualifier implements Qualifier {
         private TaskDate dates;
-        
-        public 
+
+        public DateQualifier(TaskDate dates) {
+            this.dates = dates;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getDates().compareTo(dates) == 1);
+        }
+
     }
-*/
+
     //========== handle undo and re-do operation =================================================
     public void saveCurrentToHistory() {
         todoListHistory.forgetStatesAfter();

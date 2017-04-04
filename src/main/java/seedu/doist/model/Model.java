@@ -12,6 +12,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -57,6 +58,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(String keywords);
+
+    /** Updates the filter of the filtered task list to filter by the given pair of dates */
+    void updateFilteredTaskList(TaskDate dates);
 
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
@@ -105,4 +109,5 @@ public interface Model {
 
     /** Remove the alias if it exists, otherwise nothing happens */
     void removeAlias(String alias);
+
 }
