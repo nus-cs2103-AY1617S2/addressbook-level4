@@ -75,6 +75,7 @@ allprojects {
             exclude group: "junit", module: "junit"
         }
         testCompile "org.testfx:openjfx-monocle:$monocleVersion"
+        testCompile "org.mockito:mockito-core:1.+"
     }
 
     sourceSets {

@@ -32,9 +32,11 @@ import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
 public class SyncServiceGtask implements SyncService {
+
+    public static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
+
     private static HttpTransport httpTransport;
     private static FileDataStoreFactory dataStoreFactory;
-    private static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
     private static final String CLIENT_ID = "972603165301-kls9usprmd2fpaelvrd0937dlcj43g6f.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "07B1QJ73rQECWSoIjAPHMDNG";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -193,7 +195,7 @@ public class SyncServiceGtask implements SyncService {
      * @return
      * @throws SyncException
      */
-    public TaskList createOpusTaskList() throws SyncException {
+    private TaskList createOpusTaskList() throws SyncException {
         TaskList opusTaskList = new TaskList();
         opusTaskList.setTitle("Opus");
         try {
