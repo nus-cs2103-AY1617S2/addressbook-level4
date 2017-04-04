@@ -25,6 +25,7 @@ public interface ReadOnlyTask {
     List<Date> getRecurCompletedList();
     List<Task> getUncompletedRecurList();
     String getRecurDisplayDate();
+    boolean isMasterRecurring();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

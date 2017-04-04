@@ -187,6 +187,9 @@ public class CalendarPanel extends UiPart<Region> {
                     newTask.setEndDateTime(Optional.empty());
                     task = newTask;
                 }
+                if (task.isMasterRecurring()) {
+                    continue;
+                }
                 addCurrentEvent(task);
             }
         }

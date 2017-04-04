@@ -182,6 +182,11 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public boolean isMasterRecurring() {
+        return this.isRecurring && this.recurDisplayDate.equals("");
+    }
+
+    @Override
     public List<Date> getRecurCompletedList() {
         return this.recurCompletedList;
     }
@@ -197,6 +202,15 @@ public class Task implements ReadOnlyTask {
                                             + " " + startDateTime.get().getTimeOnly());
             Calendar calendarNow = Calendar.getInstance();
             calendarNow.setTime(new Date());
+            if (interval.equals(RecurInterval.DAY)) {
+                calendarNow.add(Calendar.WEEK_OF_YEAR, 2);
+            } else if (interval.equals(RecurInterval.WEEK)) {
+                calendarNow.add(Calendar.MONTH, 2);
+            } else if (interval.equals(RecurInterval.MONTH)) {
+                calendarNow.add(Calendar.YEAR, 1);
+            } else if (interval.equals(RecurInterval.YEAR)) {
+                calendarNow.add(Calendar.YEAR, 5);
+            }
             while ((currentDate.before(calendarNow.getTime())
                     || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
                     && currentDate.getMonth() == calendarNow.get(Calendar.MONTH)

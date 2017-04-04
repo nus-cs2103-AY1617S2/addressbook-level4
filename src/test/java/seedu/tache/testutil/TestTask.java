@@ -148,4 +148,9 @@ public class TestTask implements ReadOnlyTask {
         return "";
     }
 
+    @Override
+    public boolean isMasterRecurring() {
+        return false;
+    }
+
 }
