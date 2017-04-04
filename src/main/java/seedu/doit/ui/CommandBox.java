@@ -2,8 +2,6 @@ package seedu.doit.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -44,9 +42,10 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() {
+        String currentText = this.commandTextField.getText();
+        this.inputs.addToMainStack(currentText);
         try {
-            CommandResult commandResult = this.logic.execute(this.commandTextField.getText());
-
+            CommandResult commandResult = this.logic.execute(currentText);
             // process result of the command
             setStyleToIndicateCommandSuccess();
             setCommandBoxText("");
@@ -56,6 +55,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
+            setCommandBoxText("");
             this.logger.info("Invalid command: " + this.commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
@@ -83,7 +83,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandTextField.setText(text);
     }
 
-    @Subscribe
+    @FXML
     /**
      * Listens to keyEvents when command Box is focused
      */
@@ -100,12 +100,6 @@ public class CommandBox extends UiPart<Region> {
             this.output = this.inputs.pressedDown(this.output);
             setCommandBoxText(this.output);
             this.logger.info("DOWN pressed!!!!!!!!!!!!!!!!!!!!");
-            break;
-        case ENTER:
-            // down arrow
-            String currentText = this.commandTextField.getText();
-            this.inputs.addToMainStack(currentText);
-            this.logger.info("ENTER pressed!!!!!!!!!!!!!!!!!!!!");
             break;
         default:
             break;
