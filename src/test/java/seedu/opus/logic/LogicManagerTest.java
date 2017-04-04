@@ -57,7 +57,6 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Status;
 import seedu.opus.model.task.Task;
 import seedu.opus.storage.StorageManager;
-import seedu.opus.sync.SyncProviderGoogleTests;
 
 
 public class LogicManagerTest {
@@ -689,10 +688,8 @@ public class LogicManagerTest {
 
     @Test
     public void executeSyncCommandWithValidOnArgumentSuccess() {
-        SyncProviderGoogleTests.copyTestCredentials();
         assertCommandSuccess("sync on", SyncCommand.MESSAGE_SYNC_ON_SUCCESS,
                              new TaskManager(), Collections.emptyList());
-        SyncProviderGoogleTests.deleteCredential();
     }
 
 
