@@ -61,6 +61,10 @@ public class HistoryManager extends ComponentManager {
         if (!commandText.equals(RedoCommand.COMMAND_WORD) && !commandText.equals(UndoCommand.COMMAND_WORD)) {
             historyCommands.add(commandText);
         }
+        if (!(commandText.equals(RedoCommand.COMMAND_WORD) || commandText.equals(UndoCommand.COMMAND_WORD))) {
+            futureList.clear();
+            futureCommands.clear();
+        }
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 ("Local data changed, updating history manager. Histories = " + historyList.size() + " Futures = "
                         + futureList.size())));
@@ -68,10 +72,10 @@ public class HistoryManager extends ComponentManager {
 
     @Subscribe
     public void handleTaskManagerStorageDirectoryChangedEvent(TaskManagerStorageDirectoryChangedEvent event) {
-        historyList = new ArrayList<ReadOnlyTaskManager>();
-        futureList = new ArrayList<ReadOnlyTaskManager>();
-        historyCommands = new ArrayList<String>();
-        futureCommands = new ArrayList<String>();
+        historyList.clear();
+        futureList.clear();
+        historyCommands.clear();
+        futureCommands.clear();
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 ("Storage file location changed, resetting history. Histories = " + historyList.size() + " Futures = "
                         + futureList.size())));

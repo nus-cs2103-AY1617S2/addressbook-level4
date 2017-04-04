@@ -92,7 +92,10 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        // @@author A0140032E
+        logic = LogicManager.getInstance();
+        logic.init(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        // @@author
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last

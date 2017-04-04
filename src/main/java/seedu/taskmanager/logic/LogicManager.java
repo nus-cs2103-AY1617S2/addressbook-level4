@@ -21,14 +21,12 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     // @@author A0140032E
-    //Singleton pattern
     private static LogicManager instance = null;
     private Model model;
     private Parser parser;
     private Storage storage;
     private String commandText;
 
-    // @@author A0140032E
     //Singleton pattern
     private LogicManager() {
     }
