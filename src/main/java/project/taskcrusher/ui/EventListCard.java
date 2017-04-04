@@ -78,9 +78,9 @@ public class EventListCard extends UiPart<Region> {
 
     private void showDescription(ReadOnlyEvent event) {
         if (event.getDescription().hasDescription()) {
-            description.setText("// " + event.getDescription().toString());
+            description.setText("//" + event.getDescription().toString());
         } else {
-            description.setText("");
+            description.setVisible(false);
         }
     }
 

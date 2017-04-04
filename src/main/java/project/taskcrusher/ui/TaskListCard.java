@@ -18,7 +18,6 @@ public class TaskListCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
     private static final String MESSAGE_NO_DEADLINE = "no deadline";
     private static final String MESSAGE_DEADLINE_BY = "By ";
-    private static final String PRIORITY_PREPEND = " ";
     private static final String OVERDUE_STYLE_CLASS = "overdue";
 
     @FXML
@@ -74,9 +73,9 @@ public class TaskListCard extends UiPart<Region> {
 
     private void showDescription(ReadOnlyTask task) {
         if (task.getDescription().hasDescription()) {
-            description.setText("// " + task.getDescription().toString());
+            description.setText("//" + task.getDescription().toString());
         } else {
-            description.setText("");
+            description.setVisible(false);;
         }
     }
 

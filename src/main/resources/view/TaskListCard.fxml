@@ -33,7 +33,7 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="3">
+                        <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <Label fx:id="id" styleClass="cell_big_label" />
                                 <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">

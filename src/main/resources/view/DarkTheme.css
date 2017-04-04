@@ -319,8 +319,13 @@
     -fx-padding: -3 10 10 10;
 }
 
+#id {
+   -fx-min-width: 20px;
+}
+
 #name {
     -fx-padding: 0 10 0 5;
+    -fx-min-width: 150px;
 }
 
 #timeslots {
@@ -331,6 +336,7 @@
 #description {
     -fx-font-size: 13px;
     -fx-text-fill: #252c36;
+    -fx-padding: 0 0 0 5;
 }
 
 .priority {
@@ -339,18 +345,19 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 13;
+    -fx-min-width: 5px;
 }
 
 .priority-one {
-	-fx-background-color: derive(#fff54e, 30%);
+    -fx-background-color: derive(#fff54e, 30%);
 }
 
 .priority-two {
-	-fx-background-color: derive(#ffbd00, 30%);
+    -fx-background-color: derive(#ffbd00, 30%);
 }
 
 .priority-three {
-	-fx-background-color: derive(#ff3f36, 30%);
+    -fx-background-color: derive(#ff3f36, 30%);
 }
 
 #timeslots .label, #deadline {
