@@ -135,6 +135,10 @@
     -fx-font-size: 18px;
 }
 
+.commandbox-textfield:error {
+    -fx-background-color: red;
+}
+
 .status-bar {
     -fx-background-color: derive(#1D1D1D, 20%);
 }

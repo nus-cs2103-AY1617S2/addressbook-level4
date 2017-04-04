@@ -3,6 +3,7 @@ package seedu.onetwodo.ui;
 import java.util.Stack;
 import java.util.logging.Logger;
 
+import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
@@ -57,30 +58,24 @@ public class CommandBox extends UiPart<Region> {
             CommandResult commandResult = logic.execute(command);
             setKeyListenerForMutators(command);
             // process result of the command
-            setStyleToIndicateCommandSuccess();
+            setErrorStyleForCommandResult(false);
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException e) {
             // handle command failure
-            setStyleToIndicateCommandFailure();
+            setErrorStyleForCommandResult(true);
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
 
     /**
-     * Sets the command box style to indicate a successful command.
+     * Sets the command box error pseudo-style based on command result.
      */
-    private void setStyleToIndicateCommandSuccess() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-    }
-
-    /**
-     * Sets the command box style to indicate a failed command.
-     */
-    private void setStyleToIndicateCommandFailure() {
-        commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+    private void setErrorStyleForCommandResult(boolean isError) {
+        PseudoClass errorPseudoClass = PseudoClass.getPseudoClass(ERROR_STYLE_CLASS);
+        commandTextField.pseudoClassStateChanged(errorPseudoClass, isError);
     }
 
     public void focus() {
@@ -110,7 +105,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
-                setStyleToIndicateCommandSuccess();
+                setErrorStyleForCommandResult(false);
                 resetIfUpDownKey(ke);
             }
         });
@@ -119,8 +114,12 @@ public class CommandBox extends UiPart<Region> {
     private void resetIfUpDownKey(KeyEvent ke) {
         KeyCode keyCode = ke.getCode();
         switch (keyCode) {
-        case UP: undoTextArea();
-        case DOWN: redoTextArea();
+        case UP:
+            undoTextArea();
+            break;
+        case DOWN:
+            redoTextArea();
+            break;
         default: break;
         }
     }
