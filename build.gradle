@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.task.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -89,7 +89,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "taskmanager.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -124,8 +124,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class TaskManagerTest extends Test {
+    public TaskManagerTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -150,7 +150,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: TaskManagerTest) {
     include 'guitests/**'
 
     jacoco {
@@ -159,8 +159,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: TaskManagerTest) {
+    include 'seedu/task/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -168,7 +168,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: TaskManagerTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
