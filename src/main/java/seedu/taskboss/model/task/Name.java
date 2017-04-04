@@ -8,10 +8,12 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class Name {
 
+    public static final int MAX_LENGTH = 45;
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Task names should only contain alphanumeric characters,"
-            + " special characters and spaces, and it should not be blank";
+            "The length of a task name should not be longer than " + MAX_LENGTH
+            + " characters, and it should not be blank";
     public static final String EMPTY_STRING = "";
+
 
     /*
      * The first character of the information must not be a whitespace,
@@ -38,8 +40,9 @@ public class Name {
     /**
      * Returns true if a given string is a valid task name.
      */
+    //@@author A0147990R
     public static boolean isValidName(String test) {
-        return !test.equals(EMPTY_STRING);
+        return (!test.equals(EMPTY_STRING)) && test.length() <= MAX_LENGTH;
     }
 
     //@@author

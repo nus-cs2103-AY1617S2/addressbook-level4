@@ -1,6 +1,5 @@
 package seedu.taskboss.logic.parser;
 
-import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
@@ -17,6 +16,7 @@ import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.model.task.Name;
 import seedu.taskboss.model.task.Recurrence;
 
 /**
@@ -48,7 +48,7 @@ public class AddCommandParser {
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY))
             );
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(Name.MESSAGE_NAME_CONSTRAINTS);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         } catch (InvalidDatesException ide) {
