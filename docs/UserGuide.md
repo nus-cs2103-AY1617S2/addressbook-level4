@@ -14,7 +14,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.5. [Deleting a task](#35-deleting-a-task--delete)  
   3.6. [Marking tasks as finished](#36-marking-tasks-as-finished--finish)  
   3.7. [Editing an existing task](#37-editing-an-existing-task--edit)  
-  3.8. [Listing all tags](#38-listing-all-tags--listtag)
+  3.8. [Listing all tags](#38-listing-all-tags--listtag)  
   3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
   3.10. [Clearing all tasks](#310-clearing-all-tasks--clear)  
   3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias-view-alias)  
@@ -169,22 +169,6 @@ Format: `[\as PRIORITY]`
 > **Remarks:** <br>
 > - `Priority` can be `normal`, `important`, `very important`
 
-**Reminder** <br>
-Add a task with a reminder timing with the `\remind_at` key. State the number of hours before the task's end time that you want to be reminded. A pop-up will appear to remind you about the task at that specified time! <br>
-<br>
-Format: `[\remind_at REMINDER_RELATIVE_TIME]`
-> **Examples:** <br>
-> - `add buy milk \remind_at 3` <br>
-> - `add buy milk \remind_at 5 hrs before` <br>
-
-**Recurrence Interval** <br>
-Add a recurring task with the `\every` key. If you specify a recurrence interval, every time a task ends or is finished, the start time, end time and reminder time of the task will be updated to its next occurrence. <br>
-<br>
-Format: `[\every RECURRENCE_INTERVAL]`
-> **Examples:** <br>
-> - `add buy milk \every 4 hours` <br>
-> - `add buy milk \every week` <br>
-
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
 <br>
@@ -199,8 +183,8 @@ Format: `[\under TAG...]`
 
 **Sample Commands:**
 
-* `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
-* `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday \every week`
+* `do group meeting \from 4pm today \to 6pm today \as important \under school_work CS2103T`
+* `add submit pre-tutorial activities \by 6pm this Wednesday \remind_at 5pm this Wednesday`
 
 ### 3.3 Listing tasks : `list`
 
@@ -250,12 +234,12 @@ You can use the `find` command to find tasks whose description contains any of t
 <br>
 Format: `find 'QUERY' ['QUERY'...]`
 > **Examples:** <br>
-> - `list \from 3pm \to 5pm` <br>
-> - `list \in this week` <br>
+> - `find buy groceries` <br>
+> - `list meeting with professor` <br>
 
 > **Remarks:** <br>
-> - Spaces are allowed in search query <br>
-> - The search is case sensitive. *e.g* `hans` will not match `Hans` <br>
+> - Spaces are allowed in search query.<br>
+> - The search is case insensitive. <br>
 > - The order of the search keys does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
 > - Only the task description is searched. <br>
 > - Tasks matching at least one search query will be returned.
@@ -263,40 +247,44 @@ Format: `find 'QUERY' ['QUERY'...]`
 
 **Sample Commmands**
 
-* `find 'hiking'` <br>
-* `find 'CS2103T' 'group meeting' 'project'` <br>
+* `find hiking` <br>
+* `find CS2103T group meeting project` <br>
 
 ### 3.5 Deleting a task : `delete`
 
 You can use the `delete` command to delete the task specifed by an index. The index refers to the index number of the task shown in the most recent listing. <br>
 <br>
-Format: `delete INDEX [INDEX...]`
+Format: `delete INDEX [INDEX...] [INDEX - INDEX]`
 > **Examples:** <br>
 > - `delete 3` <br>
+> - `delete 3 4 5` <br>
+> - `delete 2-6` <br>
 
 > **Remarks:** <br>
 > - Deletes the tasks at the specified `INDEX`.<br>
 > - You can delete more than one task by specifying multiple indices.<br>
+> - You can also specify a range of indices to be deleted.<br>
 
 **Sample Commands**
 * `list finished`<br>
   `delete 1 2`<br>
-  Deletes the 1st and the 2nd tasks in the result of `list` command.
+  This combination of commands deletes the 1st and the 2nd tasks in the result of `list` command.
 * `find 'party'`<br>
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+  `delete 1-5`<br>
+  This combination of commands deletes the first 5 tasks in the results of the `find` command.
 
 ### 3.6 Marking tasks as finished : `finish`
 
 You can use the `finish` command to mark the specified tasks as finished. <br>
 <br>
-Format: `finish INDEX [INDEX...]`
+Format: `finish INDEX [INDEX...] [INDEX - INDEX] `
 
 Use the `unfinish` command to change the status of an already finished task to not finished.
-`unfinish INDEX [INDEX...]`
+`unfinish INDEX [INDEX...] [INDEX - INDEX]`
 
 > **Examples:** <br>
 > - `finish 3` <br>
+> - `finish 3 4 7-9` <br>
 > - `unfinish 3` <br>
 
 > **Remarks:** <br>
@@ -306,16 +294,16 @@ Use the `unfinish` command to change the status of an already finished task to n
 **Sample Commands**
 * `list pending \in this week`<br>
   `finish 1 2`<br>
-  Marks the 1st and the 2nd tasks in the result of `list` command as finished.
+  This combination of commands marks the 1st and the 2nd tasks in the result of `list` command as finished.
 * `find 'project'`<br>
   `finish 1`<br>
-  Marks the 1st task in the results of the `find` command as finished.
+  This combination of commands marks the 1st task in the results of the `find` command as finished.
 
 ### 3.7 Editing an existing task : `edit`
 
 You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
 <br>
-Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]`
+Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]`
 
 Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > **Examples:** <br>
@@ -326,10 +314,10 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 
 **Sample Commands**
 * `list`<br>
-  `edit 1 \desc watch NBA \remind_at this Sunday 8am`<br>
+  `edit 1 \desc watch NBA \from tuesday 7pm \to tuesday 9pm`<br>
   Suppose that the description of this task is originally `watch nba`,
   the new description will be changed to `watch NBA`.
-  The reminder time will also be updated to the specified one which is `this Sunday 8am`.
+  The 'from' and 'to' times will also be updated.
 
 ### 3.8 Listing all tags : `list_tag`
 If you want to list tasks by tag but you can't remember what tags there are, you can use the `list_tag` command to display a list of all existing tags. <br>
@@ -409,9 +397,9 @@ Format: `exit`
 ## 5. Command Summary
 
 * **Add** :
-  `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  `add TASK_DESCRIPTION [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  e.g. `do group meeting \from 4pm today \to 6pm today \remind_at 3pm \as important \under school_work CS2103T`
+  `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]` <br>
+  `add TASK_DESCRIPTION [\by TIME] [\as PRIORITY] [\under TAG...]` <br>
+  e.g. `do group meeting \from 4pm today \to 6pm today \as important \under school_work CS2103T`
 
 * **Alias** :
   `alias ALIAS \for COMMAND_WORD` <br>
@@ -430,9 +418,9 @@ Format: `exit`
    e.g. `delete 3 4 5`
 
 * **Edit** :
-  `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\remind_at REMIND_TIME] [\every RECURRENCE_INTERVAL] [\as PRIORITY] [\under TAG...]` <br>
-  e.g. `edit 1 \desc watch NBA \remind_at this Sunday 8am`
+  `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]` <br>
+  `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\as PRIORITY] [\under TAG...]` <br>
+  e.g. `edit 1 \desc watch NBA \as important`
 
 * **Exit** :
   `exit`
