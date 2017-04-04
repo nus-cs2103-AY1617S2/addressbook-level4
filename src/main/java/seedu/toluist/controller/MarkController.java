@@ -64,12 +64,7 @@ public class MarkController extends Controller {
             return;
         }
 
-        CommandResult commandResult;
-        if (isMarkComplete) {
-            commandResult = mark(indexes, true);
-        } else {
-            commandResult = mark(indexes, false);
-        }
+        CommandResult commandResult = mark(indexes, isMarkComplete);
 
         TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
