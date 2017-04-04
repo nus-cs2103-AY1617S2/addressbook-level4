@@ -57,10 +57,7 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        for (int i = 0; i < targetIndexes.size(); i++) {
-            Task taskToToggle = (Task) lastShownList.get(targetIndexes.get(i) - 1);
-            tasksToToggle.add(taskToToggle);
-        }
+        MultipleIndexCommandUtil.addTasksToList(tasksToToggle, lastShownList, targetIndexes);
 
         boolean isDone = model.toggleTasksDone(tasksToToggle);
 
