@@ -44,8 +44,8 @@ public class ModelManager extends ComponentManager implements Model {
     private SortCriteria currentSortCriteria;
     private Boolean currentIsSortedAscending;
 
-    private final FixedStack<ReadOnlyEzDo> undoStack;
-    private final FixedStack<ReadOnlyEzDo> redoStack;
+    private FixedStack<ReadOnlyEzDo> undoStack;
+    private FixedStack<ReadOnlyEzDo> redoStack;
 
     /**
      * Initializes a ModelManager with the given ezDo and userPrefs.
@@ -59,11 +59,19 @@ public class ModelManager extends ComponentManager implements Model {
         this.ezDo = new EzDo(ezDo);
         this.userPrefs = userPrefs;
         filteredTasks = new FilteredList<>(this.ezDo.getTaskList());
+        initSortPrefs();
+        initStacks();
+        updateFilteredListToShowAll();
+    }
+
+    private void initSortPrefs() {
         currentSortCriteria = userPrefs.getSortCriteria();
         currentIsSortedAscending = userPrefs.getIsSortedAscending();
+    }
+
+    private void initStacks() {
         undoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
         redoStack = new FixedStack<ReadOnlyEzDo>(STACK_CAPACITY);
-        updateFilteredListToShowAll();
     }
 
     public ModelManager() {
@@ -114,14 +122,15 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
         ezDo.toggleTasksDone(toggleTasks);
-        if (toggleTasks.get(0).getDone()) {
+        final boolean isSetToDone = toggleTasks.get(0).getDone();
+        if (isSetToDone) {
             updateFilteredListToShowAll();
         } else {
             updateFilteredDoneList();
         }
 
         indicateEzDoChanged();
-        return toggleTasks.get(0).getDone();
+        return isSetToDone;
     }
 
     @Override
@@ -139,8 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
-        ReadOnlyEzDo prevState = undoStack.pop();
-        ezDo.resetData(prevState);
+        ezDo.resetData(undoStack.pop());
         redoStack.push(currentState);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
@@ -148,15 +156,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void redo() throws EmptyStackException {
-        ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
+        ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
         ezDo.resetData(redoStack.pop());
-        undoStack.push(prevState);
+        undoStack.push(currentState);
         updateFilteredListToShowAll();
         indicateEzDoChanged();
     }
 
     @Override
-    public void updateStacks() throws EmptyStackException {
+    public void updateStacks() {
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
         undoStack.push(prevState);
         redoStack.clear();

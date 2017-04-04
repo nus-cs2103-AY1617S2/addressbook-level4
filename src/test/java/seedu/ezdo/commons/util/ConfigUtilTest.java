@@ -127,6 +127,4 @@ public class ConfigUtilTest {
                                   ? TEST_DATA_FOLDER + configFileInTestDataFolder
                                   : null;
     }
-
-
 }

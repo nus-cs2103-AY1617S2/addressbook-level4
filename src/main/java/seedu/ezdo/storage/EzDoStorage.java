@@ -30,7 +30,7 @@ public interface EzDoStorage {
     Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException;
 
     /**
-     * @see #getEzDoFilePath()
+     * @see #readEzDo()
      */
     Optional<ReadOnlyEzDo> readEzDo(String filePath) throws DataConversionException, IOException;
 
@@ -51,5 +51,4 @@ public interface EzDoStorage {
      * @throws IOException if there was a problem moving the file
      */
     void moveEzDo(String newPath, String oldPath) throws IOException;
-
 }

@@ -31,6 +31,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern SORT_CRITERIA_ARGS_FORMAT = Pattern.compile("(?<sortCriteria>.) ?(?<sortOrder>.)?");
     private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
+    private static final String WHITESPACE_DELIMITER = "\\s+";
 
     private static final int ALIAS_COMMAND_ADD_EXPECTED_ARGS = 2;
     private static final int ALIAS_COMMAND_RESET_EXPECTED_ARGS = 1;
@@ -59,8 +60,8 @@ public class ParserUtil {
   //@@author A0139248X
     /**
      * Returns the specified indexes in the {@code command} if they are
-     * positive unsigned integers separated by whitespaces.
-     * Returns empty array list otherwise.
+     * positive unsigned integers separated by whitespace.
+     * Returns an empty {@code ArrayList<Integer>()} otherwise.
      */
     public static ArrayList<Integer> parseIndexes(String command) {
         final Matcher matcher = INDEXES_ARGS_FORMAT.matcher(command.trim());
@@ -68,8 +69,9 @@ public class ParserUtil {
             return new ArrayList<Integer>();
         }
         ArrayList<Integer> indexes = new ArrayList<Integer>();
-        for (String index : command.trim().split("\\s+")) {
-            indexes.add(Integer.parseInt(index));
+        String[] splitIndexes = command.trim().split(WHITESPACE_DELIMITER);
+        for (int i = 0; i < splitIndexes.length; i++) {
+            indexes.add(Integer.parseInt(splitIndexes[i]));
         }
         return indexes;
     }

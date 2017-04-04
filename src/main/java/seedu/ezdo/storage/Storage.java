@@ -14,22 +14,47 @@ import seedu.ezdo.model.UserPrefs;
  * API of the Storage component
  */
 public interface Storage extends EzDoStorage, UserPrefsStorage {
-
+    /**
+     * Read the UserPrefs data from Storage
+     * Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
+    /**
+     * Saves the given {@link seedu.ezdo.model.UserPrefs} to the storage.
+     * @param userPrefs cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
+    /** Returns the file path of EzDo */
     @Override
     String getEzDoFilePath();
 
+    /** Sets the file path of EzDo
+     * @param path cannot be null.
+     */
     @Override
     void setEzDoFilePath(String path);
 
+    /**
+     * Returns EzDo data as a {@link ReadOnlyEzDo}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
     @Override
     Optional<ReadOnlyEzDo> readEzDo() throws DataConversionException, IOException;
 
+    /**
+     * Saves the given {@link ReadOnlyEzDo} to the storage.
+     * @param ezDo cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
     @Override
     void saveEzDo(ReadOnlyEzDo ezDo) throws IOException;
 
@@ -42,6 +67,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Changes the current directory of the ezDo
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezdce);
 }
