@@ -13,7 +13,7 @@ public class CommandInputEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "VALID COMMAND: " + commandText;
+        return commandText;
     }
 
 }
