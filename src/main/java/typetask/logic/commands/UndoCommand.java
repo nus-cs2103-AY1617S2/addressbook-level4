@@ -13,8 +13,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo the most recent command." + "\n\nExample: "
             + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Restored previous command.";
-    public static final String MESSAGE_FAILURE = "An error occured when running undo command.";
-    public static final String MESSAGE_EMPTY_HISTORY = "There is nothing to undo.";
+    public static final String MESSAGE_FAILURE = "No previous command to undo";
 
     private static final int STATUS_EMPTY_HISTORY = 0;
     private static final int STATUS_ERROR_HISTORY = -1;
