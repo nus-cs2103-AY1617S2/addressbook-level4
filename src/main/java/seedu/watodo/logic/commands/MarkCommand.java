@@ -7,6 +7,7 @@ import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0141077L
 /**
@@ -27,6 +28,9 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
+    private int undoMarkInt;
+    private Task undoMark;
+    private Task markedTask;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -53,10 +57,12 @@ public class MarkCommand extends Command {
             }
 
             ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndices[i]);
+            this.undoMark = new Task(taskToMark);
 
             try {
-                Task markedTask = createMarkedTask(taskToMark);
+                markedTask = createMarkedTask(taskToMark);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
+                this.undoMarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -67,6 +73,29 @@ public class MarkCommand extends Command {
 
         return new CommandResult(tasksMarkedMessage.toString());
     }
+
+    //@@author A0139845R
+
+    @Override
+    public void unexecute() {
+        try {
+            model.updateFilteredListToShowAll();
+            model.updateTask(undoMarkInt, undoMark);
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            this.execute();
+        } catch (CommandException e) {
+        }
+    }
+
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToMark}

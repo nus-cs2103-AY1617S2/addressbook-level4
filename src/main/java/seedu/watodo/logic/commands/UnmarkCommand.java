@@ -7,6 +7,7 @@ import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0141077L-reused
 /**
@@ -27,6 +28,9 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
+
+    private Task undoUnmark;
+    private int undoUnmarkInt;
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -53,10 +57,12 @@ public class UnmarkCommand extends Command {
             }
 
             ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
+            this.undoUnmark = new Task(taskToUnmark);
 
             try {
                 Task unmarkedTask = createUnmarkedTask(taskToUnmark);
                 model.updateTask(filteredTaskListIndices[i], unmarkedTask);
+                this.undoUnmarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -67,6 +73,27 @@ public class UnmarkCommand extends Command {
 
         return new CommandResult(tasksUnmarkedMessage.toString());
     }
+
+    //@@author A0139845R
+
+    @Override
+    public void unexecute() {
+        try {
+            model.updateTask(undoUnmarkInt, undoUnmark);
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            this.execute();
+        } catch (CommandException e) {
+        }
+    }
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToUnmark}

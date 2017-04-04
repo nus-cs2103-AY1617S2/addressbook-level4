@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
+import seedu.watodo.logic.commands.Command;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
@@ -57,5 +58,13 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keyword for type*/
     void updateFilteredByTypesTaskList(String type);
+
+    Command getPreviousCommand();
+
+    void addCommandToHistory(Command command);
+
+    Command getUndoneCommand();
+
+    void clearRedo();
 
 }

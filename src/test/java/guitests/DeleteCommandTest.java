@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.watodo.testutil.TestTask;
 import seedu.watodo.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void delete() {

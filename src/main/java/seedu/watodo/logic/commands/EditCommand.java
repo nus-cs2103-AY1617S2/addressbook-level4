@@ -14,6 +14,8 @@ import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
+import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -37,6 +39,9 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
     private final boolean hasEditDate;
     private final boolean hasRemoveDate;
+
+    private Task oldTask;
+    private Task newTask;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered task list to edit
@@ -64,7 +69,9 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        this.oldTask = new Task(taskToEdit);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor, hasEditDate, hasRemoveDate);
+        this.newTask = new Task(editedTask);
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
@@ -72,6 +79,32 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    @Override
+    public void unexecute() {
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(newTask);
+            model.addTask(oldTask);
+        } catch (TaskNotFoundException e) {
+
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+
+    @Override
+    public void redo() {
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(oldTask);
+            model.addTask(newTask);
+        } catch (TaskNotFoundException e) {
+
+        } catch (DuplicateTaskException e) {
+
+        }
     }
 
     /**

@@ -38,6 +38,7 @@ public class AlternativeCommand {
             put("a", AddCommand.COMMAND_WORD);
             put("e", EditCommand.COMMAND_WORD);
             put("d", DeleteCommand.COMMAND_WORD);
+            put("del", DeleteCommand.COMMAND_WORD);
             put("l", ListCommand.COMMAND_WORD);
             put("m", MarkCommand.COMMAND_WORD);
             put("check", MarkCommand.COMMAND_WORD);

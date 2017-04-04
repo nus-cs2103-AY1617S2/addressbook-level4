@@ -2,6 +2,7 @@ package seedu.watodo.model;
 
 import java.util.Calendar;
 import java.util.Set;
+import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListDoneCommand;
 import seedu.watodo.logic.commands.ListEventCommand;
@@ -33,6 +35,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private Stack< Command > commandHistory;
+    private Stack< Command > undoneHistory;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -43,6 +47,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
+        this.commandHistory = new Stack< Command >();
+        this.undoneHistory = new Stack< Command >();
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
@@ -135,6 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -159,6 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -345,5 +353,39 @@ public class ModelManager extends ComponentManager implements Model {
             return "type=" + type;
         }
     }
+
+    //@@author A0139845R
+    @Override
+    public Command getPreviousCommand() {
+        if (!commandHistory.isEmpty()) {
+            Command commandToReturn = commandHistory.pop();
+            undoneHistory.push(commandToReturn);
+            return commandToReturn;
+        }
+        return null;
+    }
+
+    @Override
+    public void addCommandToHistory(Command command) {
+        commandHistory.push(command);
+
+    }
+
+    @Override
+    public Command getUndoneCommand() {
+        if (!undoneHistory.isEmpty()) {
+            Command commandToReturn = undoneHistory.pop();
+            commandHistory.push(commandToReturn);
+            return commandToReturn;
+        }
+        return null;
+    }
+
+    @Override
+    public void clearRedo() {
+        this.undoneHistory.clear();
+    }
+
+    //@@author
 
 }

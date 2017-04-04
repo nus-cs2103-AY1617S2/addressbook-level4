@@ -10,7 +10,7 @@ import seedu.watodo.logic.commands.AddCommand;
 import seedu.watodo.testutil.TestTask;
 import seedu.watodo.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {

@@ -36,4 +36,12 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
+
+    public void unexecute() {
+
+    }
+
+    public void redo() {
+
+    }
 }
