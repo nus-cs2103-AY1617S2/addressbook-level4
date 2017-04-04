@@ -5,7 +5,7 @@ import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Title;
 import seedu.taskit.model.task.Priority;
-
+import seedu.taskit.model.task.Date;
 
 /**
  *
@@ -41,6 +41,22 @@ public class TaskBuilder {
             task.getTags().add(new Tag(tag));
         }
         return this;
+    }
+    
+    //@@author A0097141H
+    public TaskBuilder withDone(String done) throws IllegalValueException {
+    	task.setDone(done);
+    	return this;
+    }
+    
+    public TaskBuilder withEnd(Date end) throws IllegalValueException {
+    	task.setEnd(end);
+    	return this;
+    }
+    
+    public TaskBuilder withStart(Date start) throws IllegalValueException {
+    	task.setStart(start);
+    	return this;
     }
 
     public TestTask build() {
