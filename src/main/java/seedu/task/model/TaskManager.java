@@ -143,6 +143,14 @@ public class TaskManager implements ReadOnlyTaskManager {
         //syncMasterTagListWith(t);
         tasks.addToIndex(index, t);
     }
+
+    public void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException {
+        try {
+            completedTasks.remove(t);
+        } catch (TaskNotFoundException e) {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
     //@@author
 
     /**
