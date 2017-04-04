@@ -192,10 +192,7 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the TodoList data.
-<<<<<<< HEAD
-* stores another TodoList instance which holds the previous state of the todo list before the most recent modifying change.
-=======
->>>>>>> 6c3abd83e508da99f28b7f421d13c01cea326d30
+* stores two stacks, one which holds the previous states of the todo list and one which holds the next states (See `Handling Undo/Redo Command`).
 * exposes a `UnmodifiableObservableList<ReadOnlyTodo>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
