@@ -2,8 +2,8 @@
 <toDoList>
     <tasks>
         <name>guard duty</name>
-        <startDate>Start: 2017-04-02 15:00</startDate>
-        <endDate>End: 2017-04-02 16:00</endDate>
+        <startDate>2017-04-04 15:00</startDate>
+        <endDate>2017-04-04 16:00</endDate>
         <recur>monthly</recur>
         <priority>LOW</priority>
         <description>bring weapon</description>
@@ -13,8 +13,8 @@
     </tasks>
     <tasks>
         <name>study at home</name>
-        <startDate>Start: 2018-03-10 21:33</startDate>
-        <endDate>End: 2018-03-13 23:59</endDate>
+        <startDate>2018-03-10 17:54</startDate>
+        <endDate>2018-03-13 23:59</endDate>
         <recur>weekly</recur>
         <priority>LOW</priority>
         <description></description>
@@ -24,8 +24,8 @@
     </tasks>
     <tasks>
         <name>meet boss</name>
-        <startDate>Start: 2018-03-10 08:00</startDate>
-        <endDate>End: 2018-03-10 12:00</endDate>
+        <startDate>2018-03-10 08:00</startDate>
+        <endDate>2018-03-10 12:00</endDate>
         <recur></recur>
         <priority>HIGH</priority>
         <description></description>
@@ -34,7 +34,7 @@
     <tasks>
         <name>submit cs2101 reflection</name>
         <startDate></startDate>
-        <endDate>End: 2017-04-02 02:00</endDate>
+        <endDate>2017-04-04 02:00</endDate>
         <recur></recur>
         <priority>LOW</priority>
         <description>use the 7 C</description>
@@ -44,7 +44,7 @@
     <tasks>
         <name>complete 2103 tutorial</name>
         <startDate></startDate>
-        <endDate>End: 2017-04-03 23:59</endDate>
+        <endDate>2017-04-05 23:59</endDate>
         <recur>weekly</recur>
         <priority>LOW</priority>
         <description>bring laptop</description>
@@ -55,7 +55,7 @@
     <tasks>
         <name>finish assignments</name>
         <startDate></startDate>
-        <endDate>End: 2017-04-02 23:00</endDate>
+        <endDate>2017-04-04 23:00</endDate>
         <recur>monthly</recur>
         <priority>LOW</priority>
         <description></description>

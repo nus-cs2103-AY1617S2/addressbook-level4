@@ -133,7 +133,8 @@ public class EditCommandTest extends ToDoListGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
-        commandBox.runCommand(EditCommand.COMMAND_WORD + " e3 meet boss");
+        commandBox.runCommand(EditCommand.COMMAND_WORD
+                + " e1 study at home s/10 Mar 2018 e/13 mar 2018 r/weekly t/work t/school p/l d/");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
