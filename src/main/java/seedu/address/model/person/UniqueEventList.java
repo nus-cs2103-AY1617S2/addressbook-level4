@@ -162,7 +162,7 @@ public class UniqueEventList implements Iterable<Event> {
      * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
-    
+
     /**
      * Signals that two events have time clash
      * @author LiChengcheng

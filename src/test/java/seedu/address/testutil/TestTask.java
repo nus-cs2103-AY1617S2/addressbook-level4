@@ -98,12 +98,12 @@ public class TestTask implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return tags;
     }
-    
+
     @Override
     public boolean getStatus() {
         return status;
     }
-    
+
     @Override
     public boolean hasDeadline() {
         return hasDeadline;
