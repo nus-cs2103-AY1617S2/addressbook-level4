@@ -14,11 +14,11 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.5. [Deleting a task](#35-deleting-a-task--delete)  
   3.6. [Marking tasks as finished](#36-marking-tasks-as-finished--finish)  
   3.7. [Editing an existing task](#37-editing-an-existing-task--edit)  
-  3.8. [Listing all tags](#38-listing-all-tags--listtag)  
+  3.8. [Listing all tags](#38-listing-all-tags--list_tag)  
   3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
   3.10. [Clearing all tasks](#310-clearing-all-tasks--clear)  
-  3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias-view-alias)  
-  3.12. [Changing the storage location](#312-changing-the-storage-location--save-at)  
+  3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias-view_alias)  
+  3.12. [Changing the storage location](#312-changing-the-storage-location--save_at)  
   3.13. [Saving the data](#313-saving-the-data)  
   3.14. [Exiting the program](#314-exiting-the-program--exit)  
 4. [FAQs](#4-faqs)
@@ -149,7 +149,7 @@ Hour.Min | 03.00, 3.00
 Hour am/pm (12 hour format) | 3pm, 3am
 Hour (24 hour format)| 3
  <br>
- 
+
  *Figure 3.2.1: Acceptable date and time formats* <br>
 
 > **Remarks:** <br>
@@ -190,17 +190,19 @@ Format: `[\under TAG...]`
 
 You can use the `list` command to list different types of tasks! Doist knows that you have many tasks and will need to filter them in some way to concentrate on doing those tasks. <br>
 
-**List pending, overdue, finished, all tasks** <br>
-List `pending`, `overdue`, `finished` or `all` tasks by simply using the `list` command. <br>
+**List all, pending, overdue, finished** <br>
+Just typing  `list` will allow you to list all tasks! <br>
+List `pending`, `overdue`, `finished`  tasks too with the `list` command. <br>
 <br>
 Format: `list [TYPE]`
 > **Examples:** <br>
 > - `list` <br>
-> - `list all` <br>
+> - `list pending` <br>
+> - `list overdue` <br>
 > - `list finished` <br>
 
 > **Remarks:** <br>
-> - `list` will by default show both pending and overdue tasks. <br>
+> - `list` will by default show all tasks, with finished tasks placed at the bottom <br>
 
 **List tasks during a time period** <br>
 List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
@@ -396,55 +398,5 @@ Format: `exit`
 
 ## 5. Command Summary
 
-* **Add** :
-  `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]` <br>
-  `add TASK_DESCRIPTION [\by TIME] [\as PRIORITY] [\under TAG...]` <br>
-  e.g. `do group meeting \from 4pm today \to 6pm today \as important \under school_work CS2103T`
-
-* **Alias** :
-  `alias ALIAS \for COMMAND_WORD` <br>
-  e.g. `alias set_alias \for alias`
-  `view_alias`
-
-* **Clear** :
-  `clear` <br>
-
-* **Change storage path** :
-  `save_at PATH`  
-  e.g. `save_at C:\Users\admin\Desktop\todolist.xml`
-
-* **Delete** :
-  `delete INDEX [INDEX...]` <br>
-   e.g. `delete 3 4 5`
-
-* **Edit** :
-  `edit INDEX [\desc TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]` <br>
-  `edit INDEX [\desc TASK_DESCRIPTION] [\by TIME] [\as PRIORITY] [\under TAG...]` <br>
-  e.g. `edit 1 \desc watch NBA \as important`
-
-* **Exit** :
-  `exit`
-
-* **Find** :
-  `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find 'test' 'midterm'`
-
-* **List** :
-  `list [TYPE] [\from TIME] [\to TIME] [\under TAG]` <br>
-  `list [TYPE] [\in TIME_INTERVAL] [\under TAG]` <br>
-  e.g. `list pending \in this month \under internship`
-
-* **List tags** :
-  `list_tag`
-
-* **Mark as finished** :
-  `finish INDEX [INDEX...]`<br>
-  e.g. `finish 1 8` <br>
-  `unfinish`
-
-* **Help** :
-  `help`
-
-* **Undo/Redo** :
-  `undo` <br>
-  `redo`
+<img src="images/cheatsheet.png" width="600"> <br>
+*Figure 5.1: Doist Command Summary* <br>
