@@ -122,13 +122,14 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
         ezDo.toggleTasksDone(toggleTasks);
-        if (toggleTasks.get(0).getDone()) {
+        final boolean isSetToDone = toggleTasks.get(0).getDone();
+        if (isSetToDone) {
             updateFilteredListToShowAll();
         } else {
             updateFilteredDoneList();
         }
         indicateEzDoChanged();
-        return toggleTasks.get(0).getDone();
+        return isSetToDone;
     }
 
     @Override
