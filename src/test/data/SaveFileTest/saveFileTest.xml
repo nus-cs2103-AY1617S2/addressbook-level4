@@ -1,21 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <todolist>
-    <todos>
-        <name>asdf</name>
-        <startTime></startTime>
-        <endTime></endTime>
-        <completeTime></completeTime>
-    </todos>
-    <todos>
-        <name>asdf2</name>
-        <startTime></startTime>
-        <endTime></endTime>
-        <completeTime></completeTime>
-    </todos>
-    <todos>
-        <name>asdf1</name>
-        <startTime></startTime>
-        <endTime></endTime>
-        <completeTime></completeTime>
-    </todos>
 </todolist>

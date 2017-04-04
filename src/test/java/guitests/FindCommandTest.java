@@ -162,7 +162,7 @@ public class FindCommandTest extends TodoListGuiTest {
     //@@author
     //@@author A0163786N
     @Test
-    public void find_startBeforeToday() {
+    public void find_endBeforeTomorrow() {
         try {
             TestTodo newTodo = new TodoBuilder().withName("test")
                     .withEndTime(new SimpleDateFormat(DATE_FORMAT).format(new Date())).build();
@@ -177,7 +177,7 @@ public class FindCommandTest extends TodoListGuiTest {
     //@@author
     //@@author A0163786N
     @Test
-    public void find_startBeforeTomorrow() {
+    public void find_endBeforeEndOfTomorrow() {
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(new Date());
@@ -195,12 +195,30 @@ public class FindCommandTest extends TodoListGuiTest {
     //@@author
     //@@author A0163786N
     @Test
+    public void find_endBeforeToday() {
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.DATE, -1);
+            TestTodo newTodo = new TodoBuilder().withName("test")
+                    .withEndTime(new SimpleDateFormat(DATE_FORMAT).format(c.getTime())).build();
+            commandBox.runCommand(newTodo.getAddCommand());
+            assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_END_TIME.getPrefix()
+                + "yesterday", newTodo);
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
+    //@@author
+    //@@author A0163786N
+    @Test
     public void find_allCompleted() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix(),
                 td.car, td.library, td.tennis);
     }
     //@@author
-  //@@author A0163786N
+    //@@author A0163786N
     @Test
     public void find_allUncompleted() {
         assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_COMPLETE_TIME.getPrefix() + "not",
