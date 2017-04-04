@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -27,15 +28,20 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, boolean showIndex) {
+    public TaskListPanel(
+            AnchorPane taskListPlaceholder,
+            ObservableList<ReadOnlyTask> taskList,
+            boolean showIndex,
+            String emptyTasksMessage) {
         super(FXML);
         this.showIndex = showIndex;
 
-        setConnections(taskList);
+        setConnections(taskList, emptyTasksMessage);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+    private void setConnections(ObservableList<ReadOnlyTask> taskList, String emptyTaskMessage) {
+        taskListView.setPlaceholder(new Label(emptyTaskMessage));
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();

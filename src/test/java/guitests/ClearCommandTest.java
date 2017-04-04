@@ -21,6 +21,11 @@ public class ClearCommandTest extends TaskManagerGuiTest {
 
         //verify clear command works when the list is empty
         assertClearCommandSuccess();
+
+        //@@author A0124368A
+        //verify empty list shows placeholder text
+        assertPlaceholderTextExists();
+        //@@author
     }
 
     private void assertClearCommandSuccess() {
