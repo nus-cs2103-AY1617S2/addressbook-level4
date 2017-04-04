@@ -2,11 +2,17 @@ package seedu.doit.model.task;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.EndTime;
 
 public class EndTimeTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void isValidEndTime() {
@@ -19,6 +25,11 @@ public class EndTimeTest {
         assertTrue(EndTime.isValidEndTime("4/23/17 14:60"));
         assertTrue(EndTime.isValidEndTime("2/21/17 19:20"));
         assertTrue(EndTime.isValidEndTime("3/28/16 12:15"));
+    }
 
+    @Test
+    public void invalidDate_IllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        EndTime one = new EndTime("asdf");
     }
 }
