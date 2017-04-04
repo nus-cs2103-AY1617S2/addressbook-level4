@@ -67,6 +67,9 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+        	redoStack.pop();
+        }
         this.taskList.removeTask(target);
         indicateAddressBookChanged();
     }
@@ -75,6 +78,9 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+        	redoStack.pop();
+        }
         this.taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -88,6 +94,9 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+        	redoStack.pop();
+        }
         this.taskList.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
