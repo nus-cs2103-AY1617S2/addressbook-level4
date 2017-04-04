@@ -1,7 +1,6 @@
 package seedu.bulletjournal.commons.events.ui;
 
 import seedu.bulletjournal.commons.events.BaseEvent;
-import seedu.bulletjournal.logic.commands.Command;
 
 //@@author A0146738U-reused
 /**
@@ -9,7 +8,7 @@ import seedu.bulletjournal.logic.commands.Command;
  */
 public class FailedCommandAttemptedEvent extends BaseEvent {
 
-    public FailedCommandAttemptedEvent(Command command) {
+    public FailedCommandAttemptedEvent() {
     }
 
     @Override
