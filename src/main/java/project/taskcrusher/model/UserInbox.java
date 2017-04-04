@@ -1,7 +1,6 @@
 package project.taskcrusher.model;
 
 import java.util.Collection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,9 +30,6 @@ public class UserInbox implements ReadOnlyUserInbox {
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
     private final UniqueEventList events;
-    private static ArrayList<UserInbox> tasks_history = new ArrayList<UserInbox>();
-    private static UserInbox initial_state = new UserInbox();
-    private static int index = 0;
 
     {
         tasks = new UniqueTaskList();
@@ -53,25 +49,6 @@ public class UserInbox implements ReadOnlyUserInbox {
 
     //// list overwrite operations
 
-    public static void addState(UserInbox state)
-    {
-        UserInbox toAdd = new UserInbox();
-        toAdd.resetData(state);
-        tasks_history.add(index++, toAdd);
-    }
-    
-    public void undo()
-    {
-        UserInbox toSet = tasks_history.get(--index - 1);
-        this.resetData(toSet);
-    }
-    
-    public void redo()
-    {
-        UserInbox toSet = tasks_history.get(index++);
-        this.resetData(toSet);
-    }
-    
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
@@ -127,11 +104,8 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-    	if (index == 0)
-    		UserInbox.addState(this);
         syncMasterTagListWith(p);
         tasks.add(p);
-        UserInbox.addState(this);
     }
 
     /**
@@ -146,8 +120,6 @@ public class UserInbox implements ReadOnlyUserInbox {
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
-    	if (index == 0)
-    		UserInbox.addState(this);
 
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
@@ -155,14 +127,10 @@ public class UserInbox implements ReadOnlyUserInbox {
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
-        UserInbox.addState(this);
     }
 
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-    	if (index == 0)
-    		UserInbox.addState(this);
         if (tasks.remove(key)) {
-        	UserInbox.addState(this);
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
@@ -170,17 +138,11 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     public void markTask(int index, int markFlag) {
-    	if (index == 0)
-    		UserInbox.addState(this);
         tasks.markTask(index, markFlag);
-        UserInbox.addState(this);
     }
 
     public void markEvent(int index, int markFlag) {
-    	if (index == 0)
-    		UserInbox.addState(this);
         events.markEvent(index, markFlag);
-        UserInbox.addState(this);
     }
 
     /**
@@ -253,11 +215,8 @@ public class UserInbox implements ReadOnlyUserInbox {
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addEvent(Event e) throws UniqueEventList.DuplicateEventException {
-    	if (index == 0)
-    		UserInbox.addState(this);
         syncMasterTagListWith(e);
         events.add(e);
-        UserInbox.addState(this);
     }
 
     /**
@@ -272,23 +231,17 @@ public class UserInbox implements ReadOnlyUserInbox {
     public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
             throws UniqueEventList.DuplicateEventException {
         assert editedReadOnlyEvent != null;
-    	if (index == 0)
-    		UserInbox.addState(this);
-        
+
         Event editedEvent = new Event(editedReadOnlyEvent);
         syncMasterTagListWith(editedEvent);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
         events.updateEvent(index, editedEvent);
-        UserInbox.addState(this);
     }
 
     public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
-    	if (index == 0)
-    		UserInbox.addState(this);
-    	if (events.remove(key)) {
-        	UserInbox.addState(this);
+        if (events.remove(key)) {
             return true;
         } else {
             throw new UniqueEventList.EventNotFoundException();

@@ -7,6 +7,7 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_SUCCESS = "Redo Performed";
+    public static final String MESSAGE_FAILURE = "No Redo to perform";
 
 
     @Override
