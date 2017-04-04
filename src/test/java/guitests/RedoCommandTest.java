@@ -4,43 +4,46 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import typetask.logic.commands.RedoCommand;
 import typetask.testutil.TestTask;
-import typetask.testutil.TestUtil;
+
 //@@author A0139926R
 public class RedoCommandTest extends AddressBookGuiTest {
 
+    private static final String CLEAR_COMMAND = "clear";
+    private static final String UNDO_COMMAND = "undo";
+    private static final String REDO_COMMAND = "redo";
+    private static final String REDO_SHORT_COMMAND = "r";
     @Test
-    public void redo() {
-        TestTask[] currentList = td.getTypicalTasks();
+    public void redo_clear_success() {
+        TestTask[] expectedTaskList = {};
 
-        //redo add one task after undo
-        TestTask taskToAdd = td.hoon;
-        commandBox.runCommand(taskToAdd.getAddCommand());
-        //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().fullName);
-        assertMatching(taskToAdd, addedCard);
-        //confirm the list now contains all previous tasks plus the new task
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
-        commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
-        assertRedoSuccess(expectedList);
+        commandBox.runCommand(CLEAR_COMMAND);
+        commandBox.runCommand(UNDO_COMMAND);
+        assertRedoSuccess(expectedTaskList);
 
-        //revert the list back for testing
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO_COMMAND);
 
-        //redo clear command after undo
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
-        commandBox.runCommand("clear");
-        assertListSize(0);
-        commandBox.runCommand("undo");
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
-        TestTask[] emptyList = {};
-        assertRedoSuccess(emptyList);
+        commandBox.runCommand(CLEAR_COMMAND);
+        commandBox.runCommand(UNDO_COMMAND);
+        assertRedoShortCommandSuccess(expectedTaskList);
+    }
+    @Test
+    public void redo_fail() {
+        commandBox.runCommand(REDO_COMMAND);
+        assertResultMessage(RedoCommand.MESSAGE_FAILURE);
+
+        commandBox.runCommand(REDO_SHORT_COMMAND);
+        assertResultMessage(RedoCommand.MESSAGE_FAILURE);
     }
     private void assertRedoSuccess(TestTask[] expectedList) {
-        commandBox.runCommand("redo");
+        commandBox.runCommand(REDO_COMMAND);
+        assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
+        assertTrue(personListPanel.isListMatching(expectedList));
+    }
+    private void assertRedoShortCommandSuccess(TestTask[] expectedList) {
+        commandBox.runCommand(REDO_SHORT_COMMAND);
+        assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }

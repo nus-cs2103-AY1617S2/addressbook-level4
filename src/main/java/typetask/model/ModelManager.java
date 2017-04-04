@@ -29,13 +29,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    //@@author A0139926R
     private Stack<TaskManager> taskManagerHistory = new Stack<TaskManager>();
     private Stack<TaskManager> redoTaskManagerHistory = new Stack<TaskManager>();
 
     public static final Integer STATUS_EMPTY_HISTORY = 0;
     public static final Integer STATUS_AVAILABLE_HISTORY = 1;
     public static final Integer STATUS_ERROR_HISTORY = -1;
-
+    //@@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
