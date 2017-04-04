@@ -45,31 +45,31 @@ public class PriorityLevel {
             this.value = PRIORITY_HIGH_VALUE;
             this.input = STRING_YES;
         }
-}
+    }
 
-/**
- * Returns true if a given string is a valid task priority level.
- */
-public static boolean isValidPriorityLevel(String test) {
-    return test.matches(PRIORITY_REGEX) ||
-            EMPTY_STRING.equals(test);
-}
+    /**
+     * Returns true if a given string is a valid task priority level.
+     */
+    public static boolean isValidPriorityLevel(String test) {
+        return test.matches(PRIORITY_REGEX) ||
+                EMPTY_STRING.equals(test);
+    }
 
-@Override
-public String toString() {
-    return value;
-}
+    @Override
+    public String toString() {
+        return value;
+    }
 
-@Override
-public boolean equals(Object other) {
-    return other == this // short circuit if same object
-            || (other instanceof PriorityLevel // instanceof handles nulls
-                    && this.value.equals(((PriorityLevel) other).value)); // state check
-}
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PriorityLevel // instanceof handles nulls
+                        && this.value.equals(((PriorityLevel) other).value)); // state check
+    }
 
-@Override
-public int hashCode() {
-    return value.hashCode();
-}
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 
 }
