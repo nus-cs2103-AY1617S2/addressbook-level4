@@ -15,7 +15,7 @@ import seedu.todolist.testutil.TestTodo;
 import seedu.todolist.testutil.TestUtil;
 
 public class RedoCommandTest extends TodoListGuiTest {
-  //@@author A0163786N
+    //@@author A0163786N
     /**
      * The list of todos in the todo list panel is expected to match this list
      */
