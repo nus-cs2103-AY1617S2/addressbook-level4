@@ -13,7 +13,6 @@ import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.events.model.TodoListChangedEvent;
 import seedu.todolist.commons.events.storage.DataSavingExceptionEvent;
 import seedu.todolist.commons.events.storage.SaveFilePathChangedEvent;
-import seedu.todolist.commons.events.model.TodoListChangedEvent;
 import seedu.todolist.commons.exceptions.DataConversionException;
 import seedu.todolist.commons.util.ConfigUtil;
 import seedu.todolist.model.ReadOnlyTodoList;

@@ -2,7 +2,6 @@ package seedu.todolist.model;
 
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
