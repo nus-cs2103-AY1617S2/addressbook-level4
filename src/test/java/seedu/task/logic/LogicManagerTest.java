@@ -38,10 +38,15 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
+import seedu.task.logic.commands.FilterCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PathCommand;
+import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.SortCommand;
+import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.TaskManager;
 import seedu.task.model.Model;
@@ -394,6 +399,48 @@ public class LogicManagerTest {
 	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
 	assertCommandFailure("find ", expectedMessage);
     }
+    
+    //@@author A0164061N
+    @Test
+    public void execute_path_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PathCommand.MESSAGE_USAGE);
+	assertCommandFailure("path ", expectedMessage);
+    }
+    
+    @Test
+    public void execute_load_invalidArgsFormat() {
+    	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
+    	assertCommandFailure("load ", expectedMessage);
+        }
+    
+    @Test
+    public void execute_filter_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
+	assertCommandFailure("filter ", expectedMessage);
+    }
+    
+    @Test
+    public void execute_sort_invalidArgsFormat() {
+    	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+    	assertCommandFailure("sort ", expectedMessage);
+        }
+    
+    @Test
+    public void execute_select_invalidArgsFormat() {
+    	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
+    	assertCommandFailure("google ", expectedMessage);
+        }
+    
+//    @Test
+//    public void execute_done_IndexNotFoundErrorMessageShown() throws Exception {
+//	    assertIndexNotFoundBehaviorForCommand("done");
+//    }
+    
+    @Test
+    public void execute_google_IndexNotFoundErrorMessageShown() throws Exception {
+	    assertIndexNotFoundBehaviorForCommand("google");
+    }
+    //@@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {

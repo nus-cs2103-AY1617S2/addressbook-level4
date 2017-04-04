@@ -13,15 +13,15 @@ public class TypicalTestTasks {
 	public TypicalTestTasks() {
 		try {
 			apples = new TaskBuilder().withTaskName("Deliver apples").withTaskDate("120217").withTaskStartTime("1000")
-					.withTaskEndTime("1200").withTaskDescription("Deliver to Crescent Road.").build();
+					.withTaskEndTime("1200").withTaskDescription("Deliver to Crescent Road").build();
 			cereals = new TaskBuilder().withTaskName("Buy cereals").withTaskDate("020217").withTaskStartTime("0800")
-					.withTaskEndTime("1000").withTaskDescription("Look for promo cereals.").build();
+					.withTaskEndTime("1000").withTaskDescription("Look for promo cereals").build();
 
 			// Manually added
 			yam = new TaskBuilder().withTaskName("Grow yam").withTaskDate("100217").withTaskStartTime("0700")
-					.withTaskEndTime("1700").withTaskDescription("Buy fertilizers.").build();
+					.withTaskEndTime("1700").withTaskDescription("Buy fertilizers").build();
 			zoo = new TaskBuilder().withTaskName("Visit zoo").withTaskDate("030217").withTaskStartTime("0800")
-					.withTaskEndTime("1700").withTaskDescription("Bring Jesse along.").build();
+					.withTaskEndTime("1700").withTaskDescription("Bring Jesse along").build();
 		} catch (IllegalValueException e) {
 			e.printStackTrace();
 			assert false : "not possible";
