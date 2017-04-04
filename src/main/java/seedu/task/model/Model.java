@@ -75,6 +75,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the highest priority */
     void updatePriorityTaskList();
 
+    /** Updates the filter of the filtered task list to filter by the overdue tasks */
+    void updateOverdueTaskList();
+
     /** Deletes the given completed task from the completed task list
      * @throws TaskNotFoundException */
     void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException;

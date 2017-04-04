@@ -1,6 +1,9 @@
 package seedu.task.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -145,12 +148,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateUpcomingTaskList() {
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
         Date currentDate = new Date();
-        String textDate1 = new SimpleDateFormat("d-MMM-yyyy").format(currentDate);
-        String textDate2 = new SimpleDateFormat("dd-MMM-yyyy").format(currentDate);
 
-        Predicate<? super ReadOnlyTask> pred  = s -> s.getDate().toString().equals(textDate1)
-            || s.getDate().toString().equals(textDate2);
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> {
+            try {
+                return df.parse(s.getDate().toString()).after(currentDate) &&
+                        df.parse(s.getDate().toString()).before(c.getTime());
+            } catch (ParseException e) {
+                return false;
+            }
+        };
         filteredTasks.setPredicate(pred);
     }
 
@@ -168,6 +180,25 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updatePriorityTaskList() {
         Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
+        filteredTasks.setPredicate(pred);
+    }
+
+    @Override
+    public void updateOverdueTaskList() {
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
+        Date currentDate = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> {
+            try {
+                return df.parse(s.getDate().toString()).before(currentDate);
+            } catch (ParseException e) {
+                return false;
+            }
+        };
         filteredTasks.setPredicate(pred);
     }
 

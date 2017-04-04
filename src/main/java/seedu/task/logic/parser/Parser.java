@@ -21,6 +21,7 @@ import seedu.task.logic.commands.FindTagCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.OverdueCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
@@ -117,6 +118,9 @@ public class Parser {
 
         case FindPriorityCommand.COMMAND_WORD:
             return new FindPriorityCommand();
+
+        case OverdueCommand.COMMAND_WORD:
+            return new OverdueCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
