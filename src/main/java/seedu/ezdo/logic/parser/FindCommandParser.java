@@ -49,7 +49,7 @@ public class FindCommandParser implements CommandParser {
         Optional<Priority> findPriority = null;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
-        Set<String> findTags;
+        Set<String> findTags = null;
         boolean searchBeforeStartDate = false;
         boolean searchBeforeDueDate = false;
         boolean searchAfterStartDate = false;
@@ -133,9 +133,10 @@ public class FindCommandParser implements CommandParser {
             if (taskDateString.length() <= 6) {
                 return false;
             } else {
-                String prefixToCompare = "before";
+                String prefixToCompare1 = "before";
+                String prefixToCompare2 = "Before";
                 String byPrefix = taskDateString.substring(0, 6);
-                return byPrefix.equals(prefixToCompare);
+                return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
             }
         }
     }
@@ -148,9 +149,10 @@ public class FindCommandParser implements CommandParser {
             if (taskDateString.length() <= 5) {
                 return false;
             } else {
-                String prefixToCompare = "after";
+                String prefixToCompare1 = "after";
+                String prefixToCompare2 = "After";
                 String byPrefix = taskDateString.substring(0, 5);
-                return byPrefix.equals(prefixToCompare);
+                return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
             }
         }
     }
