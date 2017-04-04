@@ -58,28 +58,47 @@ Adds an event to the event list. Undoable.<br>
 Format: `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`
 
 > * Events must be added with description.
-> * Start date is required, while other fields are optional.
-> * Start date and end date should have format `DDMMYY`, e.g. `230117`
+> * Start date is required, while other fields are optional. Start date can be easily input with 'today', 'tmr' (tomorrow), 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'. 'next' and 'following' can also be used in conjunction with the 7 days.
+> * Otherwise, Start date, and end date should have format `DDMMYY`, e.g. `230117`
 > * Start time and end time should have format `MMHH`, e.g. `2359`
 > * Default value for end date is set to be the same as start date
 > * Default value for start time is set to be 00:01
 > * Default value for end time is set to be 23:59
 > * Tags can contain only one word without space.
 > * Events can have any number of tags (including 0).
+> * Clashing events are allowed and will display as normal.
+> * Events that are occuring on present day will be indicated with a badge.
 > * If description or start date is not entered, help message for add will appear.
 
 Examples:
 
 * `add PhotoShop Workshop st/1900 sd/130217 ed/130217 l/CLB ta/take laptop`
 * `add Industrial Talk st/1800 sd/030517 et/2000 ed/030517 l/FoS`
+* `add Visit Museum st/1800 sd/next fri et/2000 l/SAM`
 
-#### 2.2.2. Adding an [task] : `add`
+#### 2.2.2. Adding a recurring [event] : `recur`
 
-##### 2.2.2.1. Adding a floating task: `add`
+Adds recurring instances of the same event. <br>
+Format: `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES`
 
-Adds a floating task to the task list. Undoable.<br>
+> * Event must be chosen from the list of existing events.
+> * Acceptable parameters for FREQEUNCY are 'daily' and 'weekly'.
+> * Acceptable parameters for NUMBER_OF_TIMES are positive integers indicating how many days/weeks you wish to recur the event for.
+
+Examples:
+
+* `recur 1 daily 4' <br>
+   Automatically recur event INDEX:1 for the next 4 days.
+* `recur 4 weekly 12' <br>
+   Automatically recur event INDEX:4 for the next 13 weeks.
+
+#### 2.2.3. Adding an [task] : `add`
+
+##### 2.2.3.1. Adding a floating task: `add`
+
+Adds a floating task to the task list. <br>
 Tasks have completion status, which is set to [pending] by default. <br>
-User can mark a task as [Completed]. (See section 2.13) <br>
+User can mark a task as [Completed] with finish command. (See section 2.9) <br>
 Format: `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`
 
 > * Tasks must be added with description and priority.
@@ -94,27 +113,30 @@ Examples:
 * `add Review CS2103 p/high ta/review`
 * `add Buy groceries p/medium`
 
-##### 2.2.2.2. Adding a deadline: `add`
+##### 2.2.3.2. Adding a deadline: `add`
 
-Adds a deadline equivalent to adding a task with by time and by date. Undoable. <br>
+Adds a deadline equivalent to adding a task with by time and by date. <br>
 Deadlines have completion status, which is set to [pending] by default. <br>
-User can mark a deadline as [Completed]. (See section 2.13) <br>
+User can mark a deadline as [Completed] with the finish command. (See section 2.9) <br>
 Format: `add DESCRIPTION p/PRIORITY [bt/BYTIME] bd/BY_DATE [l/LOCATION] [ta/TAG]...`
 
 > * Deadlines must be added with description and priority.
 > * By date and By time is to be specified to make it a deadline, which would otherwise remains a task.
-> * By date should have format `DDMMYY`, e.g. `230117`
+> * By date can be easily input with 'today', 'tmr' (tomorrow), 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'. 'next' and 'following' can also be used in conjunction with the 7 days.
+> * Otherwise, By date should have format `DDMMYY`, e.g. `230117`
 > * End time should have format `MMHH`, e.g. `2359`
 > * If only by time is specified, by date would be set as the current day by default.
 > * If only by date is specified, by time would be set as 23:59 by default.
 > * Tags can contain only one word without space.
 > * Deadlines can have any number of tags (including 0).
+> * Deadlines that have past the current date and time, or are happening today, will be marked with a badge.
 > * If description is not entered, help message for add will appear.
 
 Examples:
 
 * `add Home Assignment 1 p/high bd/210317 l/general office ta/hardcopy`
 * `add Project Report p/medium bt/2300 bd/120417 ta/softcopy`
+* `add MKT2411 Report due p/medium bt/2300 bd/following sat ta/softcopy`
 
 ### 2.3. Listing all events/tasks : `list`
 
@@ -294,13 +316,16 @@ Examples:
   User is able to view all, completed or pending tasks as well as past or future events.
   Format: `show [DISPLAY_PREFERENCE]`
 
-  > * Display preference should be empty, `com` or `pend` representing all activities, completed activities and pending activities respectively.
+> * Display preference should be empty, `com` or `pend` representing all activities, completed activities and pending activities respectively.
 
 Examples:
 
-* `show`<br> display all events and tasks
-* `show com`<br> display completed tasks and past events
-* `show pend`<br> display pending tasks and future events
+* `show`<br> 
+   display all events and tasks
+* `show com`<br> 
+   display completed tasks and past events
+* `show pend`<br> 
+   display pending tasks and future events
 
 ### 2.11. Undoing the latest command : `undo`
 
@@ -325,8 +350,10 @@ Format: `save DIRECTORY`
 > * WhatsLeft application will automatically load from the new storage location when started in the future.
 
 Examples:
+
 * `save /User/Andy/Documents`
   Saves the current WhatsLeft content to /User/Andy/Documents.
+  
 #### 2.12.2. Read WhatsLeft from new location
 Loads WhatsLeft from storage file stored in the designated directory.<br>
 Format: `read DIRECTORY`
@@ -342,7 +369,7 @@ Examples:
 
 ### 2.13. Changing Calendar Week: `next`
 Changes the weekly view on calendar according to specified weeks ahead.<br>
-Format: 'next WEEKS_AHEAD'
+Format: 'next [WEEKS_AHEAD]'
 
 > * WEEKS_AHEAD must be an integer.
 
