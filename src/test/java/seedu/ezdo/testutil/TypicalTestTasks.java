@@ -49,7 +49,7 @@ public class TypicalTestTasks {
                     .withPriority("2")
                     .withStartDate("12/12/2015 14:15")
                     .withDueDate("16/06/2016 17:17")
-                    .withRecur("daily")
+                    .withRecur("")
                     .build();
             george = new TaskBuilder().withName("George Best")
                     .withPriority("3")

@@ -40,17 +40,9 @@ public class DoneCommandTest extends EzDoGuiTest {
         commandBox.runCommand("edit " + targetIndex + " s/02/07/2012 04:55 " + "d/17/07/2015 22:22 " + "f/");
         TestTask editedTask = new TaskBuilder(currentList[targetIndex - 1]).build();
 
-        try {
-            editedTask.setRecur(new Recur(""));
-        } catch (IllegalValueException e) {
-
-        }
-
-        currentList[targetIndex - 1] = editedTask;
-
         //marks that non recurring task in a list as done
-        TestTask doneTask2 = currentList[targetIndex - 1];
-        assertDoneSuccess(false, targetIndex, currentList, doneList);
+        TestTask doneTask2 = currentList[targetIndex - 2];
+        assertDoneSuccess(false, targetIndex-1, currentList, doneList);
         doneList = TestUtil.addTasksToList(doneList, doneTask2);
 
         // invalid index
@@ -111,7 +103,11 @@ public class DoneCommandTest extends EzDoGuiTest {
         } else {
 
             TestTask recTask = updateRecTask(new TestTask(taskToDone));
-
+            try {
+                taskToDone.setRecur(new Recur(""));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
             currentList = TestUtil.addTasksToList(currentList, recTask);
             // confirm the task list no longer has the done task
             assertTrue(taskListPanel.isListMatching(currentList));
