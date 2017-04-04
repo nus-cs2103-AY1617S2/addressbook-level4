@@ -1,5 +1,6 @@
 package seedu.task.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -22,8 +23,10 @@ public class TaskListPanel extends UiPart<Region> {
     protected Theme theme = Theme.Default;
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanelDefault.fxml";
-    protected static final String FXML_Light = "TaskListPanelLight.fxml";
-    protected static final String FXML_Dark = "TaskListPanelDark.fxml";
+//    protected static final String FXML_Light = "TaskListPanelLight.fxml";
+//    protected static final String FXML_Dark = "TaskListPanelDark.fxml";
+    protected static final Optional<String>  FXML_Light = Optional.of("TaskListPanelLight.fxml");
+    protected static final Optional<String>  FXML_Dark = Optional.of("TaskListPanelLight.fxml");
 
     private TaskCard [] cardlist = new TaskCard [1000];
 

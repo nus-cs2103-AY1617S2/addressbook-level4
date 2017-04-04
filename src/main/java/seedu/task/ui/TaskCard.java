@@ -1,5 +1,7 @@
 package seedu.task.ui;
 
+import java.util.Optional;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -78,8 +80,8 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
   //@@author A0142487Y-reused
-    public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
-        super(fxml);
+    public TaskCard(ReadOnlyTask task, int displayedIndex, Optional<String> fxml) {
+        super(fxml.isPresent()?fxml.get():FXML);
 //        plane.setText(displayedIndex + ". " + task.getName().fullName);
 //        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         //plane.setCollapsible(true);
