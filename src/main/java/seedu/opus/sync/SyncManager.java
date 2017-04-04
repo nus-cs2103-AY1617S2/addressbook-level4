@@ -11,11 +11,11 @@ import seedu.opus.model.task.Task;
  */
 public class SyncManager implements Sync {
 
+    private SyncService service;
+
     public SyncManager(SyncService service) {
         this.service = service;
     }
-
-    private SyncService service;
 
     @Override
     public void updateTaskList(List<Task> taskList) {
