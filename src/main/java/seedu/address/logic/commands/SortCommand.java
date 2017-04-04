@@ -21,9 +21,51 @@ public class SortCommand extends Command {
         cmd = args;
     }
 
+    private void sort(String para) {
+        int noOfTasks = model.getFilteredTasksSize();
+        if (noOfTasks == 0) {
+            return;
+        }
+
+        if ("name".equals(para)) {
+            bubbleSortName(noOfTasks - 1);
+        } else {
+            bubbleSortDate(noOfTasks - 1);
+        }
+
+    }
+
+    private void bubbleSortName(int upper) {
+        boolean flag = true;
+
+        while (flag) {
+            flag = false;
+            for (int k = 0; k < upper; k++) {
+                if (model.getCName(k).compareToIgnoreCase(model.getCName(k + 1)) > 0) {
+                    model.exchange(k , k + 1);
+                    flag = true;
+                }
+            }
+        }
+    }
+
+    private void bubbleSortDate(int upper) {
+        boolean flag = true;
+
+        while (flag) {
+            flag = false;
+            for (int k = 0; k < upper; k++) {
+                if (model.getCTime(k) < model.getCTime(k + 1)) {
+                    model.exchange(k , k + 1);
+                    flag = true;
+                }
+            }
+        }
+    }
+
     @Override
     public CommandResult execute() {
-        model.sort(cmd);
+        this.sort(cmd);
         model.updateFilteredListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS + " by " + cmd + ".");
     }

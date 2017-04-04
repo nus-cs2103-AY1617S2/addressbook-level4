@@ -127,54 +127,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifierByDate(deadline)));
     }
 
-  //@@ author A0138377U
-    @Override
-    public void sort(String para) {
-        if (filteredTasks.size() == 0 || filteredTasks == null) {
-            return;
-        }
-
-        if ("name".equals(para)) {
-            bubbleSortName(filteredTasks.size() - 1);
-        } else {
-            bubbleSortDate(filteredTasks.size() - 1);
-        }
-
-    }
-
-    private void bubbleSortName(int upper) {
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-            for (int k = 0; k < upper; k++) {
-                if (getCName(k).compareToIgnoreCase(getCName(k + 1)) > 0) {
-                    exchange(k , k + 1);
-                    flag = true;
-                }
-            }
-        }
-    }
-
-    private void bubbleSortDate(int upper) {
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-            for (int k = 0; k < upper; k++) {
-                if (getCTime(k) < getCTime(k + 1)) {
-                    exchange(k , k + 1);
-                    flag = true;
-                }
-            }
-        }
-    }
-
-    private String getCName(int task) {
+  //@@author A0138377U
+    public String getCName(int task) {
         return filteredTasks.get(task).getName().toString();
     }
 
-    private long getCTime(int task) {
+    public long getCTime(int task) {
         try {
             return filteredTasks.get(task).getDeadline().date.getBeginning().getTime();
         } catch (NullPointerException e) {
@@ -182,11 +140,15 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    private void exchange (int i, int j) {
+    public void exchange (int i, int j) {
         ReadOnlyTask temp = filteredTasks.get(i);
         temp = new Task(temp.getName(), temp.getDeadline(), temp.getDescription(), temp.getTags());
         taskManager.updateTask(i, filteredTasks.get(j));
         taskManager.updateTask(j, temp);
+    }
+
+    public int getFilteredTasksSize () {
+        return filteredTasks.size();
     }
   //@@author A0143504R
 

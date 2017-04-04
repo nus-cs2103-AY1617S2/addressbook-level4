@@ -48,8 +48,17 @@ public interface Model {
     /** Updates undo copy of task list*/
     void updateCopy(ReadOnlyTaskManager taskManager);
 
-    /**Sorts the task list by input parameter*/
-    void sort(String arg);
+    /** Returns the Name of a Task as String at the input index of the task list*/
+    String getCName(int index);
+
+    /** Returns the Unix time of a Task as Long at the input index of the task list*/
+    long getCTime(int index);
+
+    /** Exchanges the location of two tasks indicated by input index*/
+    void exchange(int i, int j);
+
+    /** Returns the size of tasks list*/
+    int getFilteredTasksSize();
 
     /** Returns undo copy of task list*/
     ReadOnlyTaskManager getCopy();
