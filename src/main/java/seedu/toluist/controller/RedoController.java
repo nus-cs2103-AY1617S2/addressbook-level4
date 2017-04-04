@@ -43,7 +43,10 @@ public class RedoController extends Controller {
         logger.info(getClass() + "will handle command");
         String redoTimesToken = tokens.get(PARAMETER_REDO_TIMES);
         int redoTimes = redoTimesToken != null ? Integer.parseInt(redoTimesToken) : 1;
+        redo(redoTimes);
+    }
 
+    private void redo(int redoTimes) {
         Pair<TodoList, Integer> redoResult = TodoList.getInstance().getStorage().redo(redoTimes);
         TodoList todoList = TodoList.getInstance();
         todoList.setTasks(redoResult.getKey().getTasks());

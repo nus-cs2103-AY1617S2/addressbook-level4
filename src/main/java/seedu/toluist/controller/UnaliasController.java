@@ -35,14 +35,22 @@ public class UnaliasController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String alias = tokens.get(PARAMETER_ALIAS);
 
-        if (!aliasConfig.isAlias(alias)) {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
-        }
+        validateNoAlias(alias);
 
+        unalias(alias);
+    }
+
+    private void unalias(String alias) throws InvalidCommandException {
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
             throw new InvalidCommandException(String.format(RESULT_MESSAGE_FAILURE, alias));
+        }
+    }
+
+    private void validateNoAlias(String alias) throws InvalidCommandException {
+        if (!aliasConfig.isAlias(alias)) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
         }
     }
 

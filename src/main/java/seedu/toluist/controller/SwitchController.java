@@ -47,20 +47,17 @@ public class SwitchController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String keyword = tokens.get(PARAMETER_TAB);
 
-        if (keyword == null) {
-            throw new InvalidCommandException(RESULT_MESSAGE_NO_TAB);
-        }
+        validateNoTab(keyword);
+        validateInvalidTab(keyword);
 
-        Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
+        switchTab(keyword);
+    }
 
-        if (!switchPredicateOptional.isPresent()) {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
-        }
-
+    private void switchTab(String keyword) {
+        TaskSwitchPredicate switchPredicate = switchConfig.getPredicate(keyword).get();
         String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()
                 ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
-        TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
         UiStore.getInstance().setObservableSwitchPredicate(switchPredicate);
 
         uiStore.setCommandResult(new CommandResult(String.format(
@@ -68,6 +65,20 @@ public class SwitchController extends Controller {
                 switchPredicate.getDisplayName(),
                 UiStore.getInstance().getShownTasks().size(),
                 UiStore.getInstance().getTasks().size())));
+    }
+
+    private void validateInvalidTab(String keyword) throws InvalidCommandException {
+        Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
+
+        if (!switchPredicateOptional.isPresent()) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
+        }
+    }
+
+    private void validateNoTab(String keyword) throws InvalidCommandException {
+        if (keyword == null) {
+            throw new InvalidCommandException(RESULT_MESSAGE_NO_TAB);
+        }
     }
 
     public Map<String, String> tokenize(String command) {

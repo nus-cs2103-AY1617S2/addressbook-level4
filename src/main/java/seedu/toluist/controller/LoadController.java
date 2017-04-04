@@ -47,18 +47,12 @@ public class LoadController extends Controller {
         logger.info(getClass() + "will handle command");
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
-        if (path == null) {
-            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
-        }
+        validateNoStoragePath(path);
+        validateSameStorageLocation(path);
+        load(path);
+    }
 
-        Config config = Config.getInstance();
-        String oldStoragePath = config.getTodoListFilePath();
-        if (oldStoragePath.equals(path)) {
-            uiStore.setCommandResult(new CommandResult(
-                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResultType.FAILURE));
-            return;
-        }
-
+    private void load(String path) throws InvalidCommandException {
         try {
             TodoList todoList = TodoList.getInstance();
             todoList.load(path);
@@ -67,6 +61,20 @@ public class LoadController extends Controller {
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
             throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
+        }
+    }
+
+    private void validateSameStorageLocation(String path) throws InvalidCommandException {
+        Config config = Config.getInstance();
+        String oldStoragePath = config.getTodoListFilePath();
+        if (oldStoragePath.equals(path)) {
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
+        }
+    }
+
+    private void validateNoStoragePath(String path) throws InvalidCommandException {
+        if (path == null) {
+            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
         }
     }
 

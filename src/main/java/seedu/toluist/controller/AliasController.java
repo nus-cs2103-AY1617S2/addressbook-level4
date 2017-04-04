@@ -46,7 +46,10 @@ public class AliasController extends Controller {
         String commandPhrase = tokens.get(PARAMETER_COMMAND);
 
         validateReservedWord(alias);
+        setAlias(alias, commandPhrase);
+    }
 
+    private void setAlias(String alias, String commandPhrase) throws InvalidCommandException {
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));

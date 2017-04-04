@@ -50,25 +50,36 @@ public class StoreController extends Controller {
         logger.info(getClass() + "will handle command");
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
-        if (path == null) {
-            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
-        }
+        validateNoStoragePath(path);
+        validateSameStorageLocationPath(path);
 
-        Config config = Config.getInstance();
-        if (config.getTodoListFilePath().equals(path)) {
-            throw new InvalidCommandException(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
-        }
+        save(path);
+    }
 
+    private void save(String path) throws InvalidCommandException {
         String message = "";
         if (FileUtil.isFileExists(new File(path))) {
             message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
         }
 
         if (TodoList.getInstance().getStorage().move(path)) {
-            message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
+            message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS,
+                    Config.getInstance().getTodoListFilePath());
             uiStore.setCommandResult(new CommandResult(message));
         } else {
             throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
+        }
+    }
+
+    private void validateSameStorageLocationPath(String path) throws InvalidCommandException {
+        if (Config.getInstance().getTodoListFilePath().equals(path)) {
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
+        }
+    }
+
+    private void validateNoStoragePath(String path) throws InvalidCommandException {
+        if (path == null) {
+            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
         }
     }
 

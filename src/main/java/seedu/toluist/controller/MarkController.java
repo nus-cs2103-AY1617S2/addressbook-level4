@@ -58,10 +58,17 @@ public class MarkController extends Controller {
         boolean isMarkComplete = !tokens.keySet().contains(PARAMETER_MARK_INCOMPLETE);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
+        validateInvalidIndexes(indexes);
+        mark(isMarkComplete, indexes);
+    }
+
+    private void validateInvalidIndexes(List<Integer> indexes) throws InvalidCommandException {
         if (indexes.isEmpty()) {
             throw new InvalidCommandException(Messages.MESSAGE_INVALID_TASK_INDEX);
         }
+    }
 
+    private void mark(boolean isMarkComplete, List<Integer> indexes) throws InvalidCommandException {
         CommandResult commandResult = mark(indexes, isMarkComplete);
 
         TodoList todoList = TodoList.getInstance();
