@@ -25,7 +25,6 @@ import seedu.opus.model.task.Task;
 public class SyncProviderGoogleTests {
 
     private static final SyncServiceGtask syncProviderGoogle = spy(new SyncServiceGtask());
-    private static final SyncManager mockSyncManager = mock(SyncManager.class);
     private static final Task mockTask = mock(Task.class);
 
     @BeforeClass
