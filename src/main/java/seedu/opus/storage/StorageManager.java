@@ -100,7 +100,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void setTaskManagerFilePath(String filePath) {
         assert StringUtil.isValidPathToFile(filePath);
         taskManagerStorage.setTaskManagerFilePath(filePath);
-        logger.info("Setting todo list file path to: " + filePath);
+        logger.info("Setting opus file path to: " + filePath);
     }
 
     private void saveConfigFile() {
