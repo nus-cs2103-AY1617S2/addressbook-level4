@@ -13,5 +13,6 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_TASKS_DONE_LISTED_OVERVIEW = "%1$d done tasks listed!";
     public static final String MESSAGE_TASKS_UNDONE_LISTED_OVERVIEW = "%1$d undone tasks listed!";
+    public static final String MESSAGE_TASKS_FLOAT_LISTED_OVERVIEW = "%1$d floating tasks listed!";
 
 }

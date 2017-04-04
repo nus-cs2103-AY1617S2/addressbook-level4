@@ -9,8 +9,6 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.ListByDoneCommand;
-import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.UndoCommand;
@@ -43,8 +41,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
         // list does not affect redo
         commandBox.runCommand(DoneCommand.COMMAND_WORD_1 + " 2");
-        commandBox.runCommand(ListByDoneCommand.COMMAND_WORD_1);
-        commandBox.runCommand(ListByNotDoneCommand.COMMAND_WORD_1);
+        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
+        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
         commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         currentList[1].setIsDone(true);
         assertRedoSuccess(currentList);
