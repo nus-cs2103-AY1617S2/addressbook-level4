@@ -20,7 +20,7 @@ public class MarkCommandTest extends AddressBookGuiTest {
         
         //mark done task as done
         commandBox.runCommand("mark 1 done");
-        assertResultMessage("This task is alreadly marked as done");
+        assertResultMessage(String.format(MarkCommand.MESSAGE_DUPLICATE_MARKING,"done"));
         
         //mark done task as undone
         commandBox.runCommand("mark 1 undone");
