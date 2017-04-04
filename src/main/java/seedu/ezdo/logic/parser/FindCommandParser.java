@@ -46,7 +46,7 @@ public class FindCommandParser implements CommandParser {
         String namesToMatch = argsTokenizer.getPreamble().orElse("");
         String[] splitNames = namesToMatch.split("\\s+");
 
-        Optional<Priority> findPriority;
+        Optional<Priority> findPriority = null;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
         Set<String> findTags;
