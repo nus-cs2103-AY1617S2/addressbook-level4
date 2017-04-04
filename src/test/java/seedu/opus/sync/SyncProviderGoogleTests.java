@@ -8,8 +8,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -40,8 +38,7 @@ public class SyncProviderGoogleTests {
             new File("data/StoredCredential_3")
             );
 
-    public static final File DATA_TEST_CREDENTIAL = new File("data/testCredential");
-    public static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
+    //public static File DATA_TEST_CREDENTIAL;
 
     private static final SyncServiceGtask syncProviderGoogle = spy(new SyncServiceGtask());
     private static final SyncManager mockSyncManager = mock(SyncManager.class);
@@ -49,7 +46,7 @@ public class SyncProviderGoogleTests {
 
     @BeforeClass
     public static void setUp() {
-        //copyTestCredentials();
+        copyTestCredentials();
 
         try {
             Optional<DateTime> fakeTime = Optional.of(new DateTime(LocalDateTime.now()));
@@ -73,21 +70,12 @@ public class SyncProviderGoogleTests {
     }
 
     public static void copyTestCredentials() {
-        try {
-            deleteCredential();
-            Files.copy(new File("data/testCredential").toPath(), new File("data/credentials").toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        deleteCredential();
+        File DATA_TEST_CREDENTIAL = new File(SyncServiceGtask.DATA_STORE_DIR.getPath());
     }
 
     public static void deleteCredential() {
-        DATA_STORE_DIR.delete();
-    }
-
-    private static File getRandomCredential() {
-        int r = new Random().nextInt(DATA_STORE_TEST_CREDENTIALS.size());
-        return DATA_STORE_TEST_CREDENTIALS.get(r);
+        SyncServiceGtask.DATA_STORE_DIR.delete();
     }
 
     @Test
