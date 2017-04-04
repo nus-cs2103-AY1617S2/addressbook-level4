@@ -20,10 +20,10 @@ public class MenuBarPanel extends UiPart<Region> {
     private static final String FXML = "MenuBarPanel.fxml";
     
     public static final String MENU_FLOATING_TASK = "Floating Tasks";
-    public static final String MENU_EVENT_TASK = "Event Tasks";
-    public static final String MENU_DEADLINE_TASK = "Deadline Tasks";
-    public static final String MENU_TODAY_TASK = "Today Tasks";
-    public static final String MENU_OVERDUE_TASK = "Overdue Tasks";
+    public static final String MENU_EVENT_TASK = "Event";
+    public static final String MENU_DEADLINE_TASK = "Deadline";
+    public static final String MENU_TODAY_TASK = "Today";
+    public static final String MENU_OVERDUE_TASK = "Overdue";
     
     private static final String FLOATING_TASK_ICON_PATH = "/images/floatingtask_icon.png";
     private static final String EVENT_TASK_ICON_PATH = "/images/event_icon.png";
