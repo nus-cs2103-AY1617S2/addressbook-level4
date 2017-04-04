@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -51,17 +52,9 @@
             <VBox prefHeight="109.0" prefWidth="150.0" GridPane.columnIndex="1">
                <children>
                   <HBox prefHeight="14.0" prefWidth="187.0" />
-                        <Label fx:id="priorityLevel" prefHeight="17.0" prefWidth="90.0" styleClass="cell_small_label" text="\$priorityLevel" textAlignment="RIGHT" textFill="RED" />
-                        <Label fx:id="startDateTime" prefHeight="17.0" prefWidth="268.0" styleClass="cell_small_label" text="\$startDateTime">
-                     <graphic>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start: " />
-                     </graphic>
-                  </Label>
-                        <Label fx:id="endDateTime" prefHeight="17.0" prefWidth="272.0" styleClass="cell_small_label" text="\$endDateTime">
-                     <graphic>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End: " />
-                     </graphic>
-                  </Label>
+                        <ImageView fx:id="priorityLevel" disable="false" fitHeight="22.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true"/>
+                        <Label fx:id="startDateTime" prefHeight="17.0" prefWidth="268.0" styleClass="cell_small_label" text="\$startDateTime"/>
+                        <Label fx:id="endDateTime" prefHeight="17.0" prefWidth="272.0" styleClass="cell_small_label" text="\$endDateTime"/>
                         <Label fx:id="recurrence" prefHeight="14.0" prefWidth="96.0" styleClass="cell_small_label" text="\$recurrence" />
                </children>
             </VBox>

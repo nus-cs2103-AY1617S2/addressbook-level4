@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -15,6 +16,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
+    private static final int INDEX_END_DATE_POSITION = 4;
+    private static final int INDEX_START_DATE_POSITION = 6;
     private static final String NAME_FIELD_ID = "#name";
     private static final String INFORMATION_FIELD_ID = "#information";
     private static final String PRIORITY_FIELD_ID = "#priorityLevel";
@@ -34,6 +37,9 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
+    protected ImageView getImageFromImageView(String fieldId) {
+        return getImageFromImageView(fieldId, node);
+    }
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
@@ -43,15 +49,25 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+        ImageView imageView = getImageFromImageView(PRIORITY_FIELD_ID);
+
+        if (imageView.isVisible()) {
+            return "High priority";
+        } else {
+            return "No priority";
+        }
     }
 
     public String getStartDateTime() {
-        return getTextFromLabel(START_DATE_FIELD_ID);
+        String value = getTextFromLabel(START_DATE_FIELD_ID);
+        String result = value.substring(INDEX_START_DATE_POSITION).trim();
+        return result;
     }
 
     public String getEndDateTime() {
-        return getTextFromLabel(END_DATE_FIELD_ID);
+        String value = getTextFromLabel(END_DATE_FIELD_ID);
+        String result = value.substring(INDEX_END_DATE_POSITION).trim();
+        return result;
     }
 
     public String getRecurrence() {
