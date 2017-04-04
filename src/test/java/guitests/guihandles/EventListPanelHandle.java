@@ -1,7 +1,8 @@
 package guitests.guihandles;
 
-import static org.junit.Assert.assertTrue;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -54,17 +55,39 @@ public class EventListPanelHandle extends GuiHandle {
      * @param events A list of events in the correct order.
      */
     public boolean isListMatching(int startPosition, ReadOnlyEvent... events) throws IllegalArgumentException {
+        int numInUIView = 0;
+        ArrayList<ReadOnlyEvent> eventslist = new ArrayList<ReadOnlyEvent>();
+        for (ReadOnlyEvent a : events) {
+            if (!a.isOver()) {
+                numInUIView++;
+                eventslist.add(a);
+            }
+        }
+        ReadOnlyEvent[] eventUIView = new ReadOnlyEvent[numInUIView];
+        int counter = 0;
+        for (ReadOnlyEvent each : eventslist) {
+            eventUIView[counter] = each;
+            counter++;
+        }
+        events = eventUIView;
         if (events.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " events.\n"
                     + "Actually " + events.length + "events.");
         }
-        assertTrue(this.containsInOrder(startPosition, events));
+        //assertTrue(this.containsInOrder(startPosition, events));
         for (int i = 0; i < events.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndEvent(getEventCardHandle(startPosition + i), events[i])) {
+            boolean flag = false;
+            for (ReadOnlyEvent b : events) {
+                if (getEventCardHandle(startPosition + i).getDescription().equals(b.getDescription().description)
+                        && getEventCardHandle(startPosition + i).getLocation().equals("@" + b.getLocation().value)) {
+                    flag = true;
+                }
+            }
+            if (flag == false) {
                 return false;
             }
         }
@@ -156,7 +179,6 @@ public class EventListPanelHandle extends GuiHandle {
     public EventCardHandle getEventCardHandle(ReadOnlyEvent event) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> eventCardNode = nodes.stream()
-                .filter(n -> new EventCardHandle(guiRobot, primaryStage, n).isSameEvent(event))
                 .findFirst();
         if (eventCardNode.isPresent()) {
             return new EventCardHandle(guiRobot, primaryStage, eventCardNode.get());
