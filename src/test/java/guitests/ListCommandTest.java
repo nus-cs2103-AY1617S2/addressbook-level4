@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskit.commons.core.Messages;
 import seedu.taskit.logic.commands.ListCommand;
@@ -43,6 +44,7 @@ public class ListCommandTest extends AddressBookGuiTest {
 	
 	private void assertListResult(TestTask... expectedHits) {
         assertListSize(expectedHits.length);
+        Arrays.sort(expectedHits);
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
