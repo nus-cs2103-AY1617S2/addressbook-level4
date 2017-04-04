@@ -16,12 +16,15 @@ import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.Logic;
 import seedu.doit.logic.commands.CommandResult;
 import seedu.doit.logic.commands.exceptions.CommandException;
+import seedu.doit.model.InputStack;
 
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
+    private InputStack inputs = InputStack.getInstance();
+    private String output = new String();
 
     @FXML
     private TextField commandTextField;
@@ -88,11 +91,21 @@ public class CommandBox extends UiPart<Region> {
         switch (event.getCode()) {
         case UP:
             // up arrow
-
+            this.output = this.inputs.pressedUp(this.output);
+            setCommandBoxText(this.output);
+            this.logger.info("UP pressed!!!!!!!!!!!!!!!!!!!!");
             break;
         case DOWN:
             // down arrow
-
+            this.output = this.inputs.pressedDown(this.output);
+            setCommandBoxText(this.output);
+            this.logger.info("DOWN pressed!!!!!!!!!!!!!!!!!!!!");
+            break;
+        case ENTER:
+            // down arrow
+            String currentText = this.commandTextField.getText();
+            this.inputs.addToMainStack(currentText);
+            this.logger.info("ENTER pressed!!!!!!!!!!!!!!!!!!!!");
             break;
         default:
             break;
