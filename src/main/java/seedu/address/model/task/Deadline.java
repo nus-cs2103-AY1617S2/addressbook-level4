@@ -40,7 +40,7 @@ public class Deadline {
     public static boolean isValidDeadline(String dateString) {
         DateFactory dateFactory = new DateFactory();
         try {
-            TaskDate date = dateFactory.getTaskDateFromString(dateString);
+            dateFactory.getTaskDateFromString(dateString);
             return true;
         } catch (IllegalValueException e) {
             return false;

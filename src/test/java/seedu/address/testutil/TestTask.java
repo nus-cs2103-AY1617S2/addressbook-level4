@@ -4,7 +4,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Description;
-import seedu.address.model.task.IdentificationNumber;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Status;
@@ -17,12 +16,11 @@ public class TestTask implements ReadOnlyTask {
     private Name name;
     private Deadline deadline;
     private Description description;
-    private IdentificationNumber id;
     private UniqueTagList tags;
     private Status status;
 
     public TestTask() {
-        id = new IdentificationNumber();
+        //id = new IdentificationNumber();
         description = new Description();
         deadline = new Deadline();
         status = new Status();
@@ -57,10 +55,12 @@ public class TestTask implements ReadOnlyTask {
         return this;
     }
 
+    /*
     public TestTask setID(IdentificationNumber id) {
         this.id = id;
         return this;
     }
+    */
 
     public TestTask setTags(UniqueTagList tags) {
         this.tags = tags;

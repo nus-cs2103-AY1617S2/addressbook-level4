@@ -10,7 +10,6 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
