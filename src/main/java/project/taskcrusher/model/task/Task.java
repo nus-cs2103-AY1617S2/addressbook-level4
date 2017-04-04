@@ -134,6 +134,7 @@ public class Task extends UserToDo implements ReadOnlyTask {
             return -1;
         }
         //neither is complete
+
         if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
             return this.getPriority().compareTo(another.getPriority());
         } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {
