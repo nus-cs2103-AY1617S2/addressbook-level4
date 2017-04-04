@@ -51,5 +51,4 @@ public interface EzDoStorage {
      * @throws IOException if there was a problem moving the file
      */
     void moveEzDo(String newPath, String oldPath) throws IOException;
-
 }

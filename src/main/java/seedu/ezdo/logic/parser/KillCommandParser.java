@@ -30,5 +30,4 @@ public class KillCommandParser implements CommandParser {
 
         return new KillCommand(indexes);
     }
-
 }
