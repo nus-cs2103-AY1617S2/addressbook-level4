@@ -27,48 +27,52 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="80.0" prefHeight="80.0" prefWidth="300.0" GridPane.columnIndex="0">
-                    <stylesheets>
-                        <URL value="@DarkTheme.css" />
-                        <URL value="@Extensions.css" />
-                    </stylesheets>
-                    <padding>
-                        <Insets bottom="5" left="15" right="5" top="5" />
-                    </padding>
-                    <children>
-                  <SplitPane dividerPositions="0.8, 0.9" prefHeight="30.0" prefWidth="260.0">
-                    <items>
-                      <AnchorPane minHeight="30.0" minWidth="260.0" prefHeight="30.0" prefWidth="260.0">
-                           <children>
-                                      <HBox maxWidth="260.0" minWidth="260.0" prefHeight="30.0">
+            <SplitPane dividerPositions="0.5134228187919463, 0.6073825503355704, 0.8926174496644296" prefHeight="80.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="260.0" prefHeight="80.0" prefWidth="250.0">
+                     <children>
+                            <VBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="65.0" prefWidth="150.0">
+                                <stylesheets>
+                                    <URL value="@DarkTheme.css" />
+                                    <URL value="@Extensions.css" />
+                                </stylesheets>
+                                <padding>
+                                    <Insets bottom="5" left="15" right="5" top="10" />
+                                </padding>
+                                <children>
+                                      <HBox maxWidth="260.0" minWidth="260.0" prefHeight="25.0">
                                          <children>
                                              <Label fx:id="id" styleClass="cell_big_label" />
                                              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                          </children>
                                       </HBox>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="overdueSign" Style="-fx-background-color:transparent" maxHeight="20.0" prefWidth="20.0">
-                              <children>
-                                            <ImageView>
-                                                <image>
-                                                        <Image backgroundLoading="true" url="images/calendar.png" />
-                                                </image>
-                                            </ImageView>
-                               </children>
-                       </AnchorPane>
-                      <AnchorPane minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0">
+                                    <Label fx:id="description" styleClass="cell_small_label" text="\$description" prefHeight="30.0" />
+                                    <FlowPane fx:id="tags" maxHeight="20.0" prefWidth="183.0" />
+                                </children>
+                            </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" prefWidth="100.0">
+                     <children>
+                        <VBox prefHeight="80.0" prefWidth="100.0">
+                         <padding>
+                                    <Insets bottom="5" left="0" right="0" top="10" />
+                                </padding>
                            <children>
-                                <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" />
+                                    <Label fx:id="startTime" styleClass="cell_small_label" />
+                                    <Label fx:id="to" text=" to " styleClass="cell_small_label" />
+                                    <Label fx:id="deadline" styleClass="cell_small_label" />
                            </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
-                        <FlowPane fx:id="tags" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
-                        <Label fx:id="deadline" styleClass="cell_small_label" />
-                    </children>
-                </VBox>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="20.0" prefWidth="20.0">
+                     <children>
+                              <Circle fx:id="labelBullet" layoutX="14.0" layoutY="26.0" radius="10" styleClass="taglist-item-bullet" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
             </children>
          <rowConstraints>
             <RowConstraints />
