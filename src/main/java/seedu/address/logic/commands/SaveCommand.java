@@ -11,7 +11,7 @@ import seedu.address.model.ReadOnlyWhatsLeft;
 import seedu.address.storage.JsonUserConfigStorage;
 import seedu.address.storage.Storage;
 
-//@@ author A0121668A
+//@@author A0121668A
 
 /**
  * Saves WhatsLeft to a designated location

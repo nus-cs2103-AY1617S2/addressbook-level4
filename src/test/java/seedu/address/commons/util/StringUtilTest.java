@@ -203,7 +203,7 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
-    // @@author A0121668A
+    //@@author A0121668A
     // ---------------- Tests for parseStringToTime --------------------------------------
 
     /*
