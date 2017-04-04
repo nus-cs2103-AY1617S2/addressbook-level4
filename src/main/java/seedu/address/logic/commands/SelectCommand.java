@@ -43,24 +43,48 @@ public class SelectCommand extends Command {
         model.storePreviousCommand("");
 
         if (type.equals("ev")) {
-            if (lastShownEventList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-            }
-            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
-            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(lastShownEventList.get(targetIndex - 1)));
-            ReadOnlyEvent selected = lastShownEventList.get(targetIndex - 1);
-            return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, selected));
+            return selectingEvent(lastShownEventList);
         }
         if (type.equals("ts")) {
-            if (lastShownTaskList.size() < targetIndex) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
-            EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(lastShownTaskList.get(targetIndex - 1)));
-            ReadOnlyTask selected = lastShownTaskList.get(targetIndex - 1);
-            return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, selected));
+            return selectingTask(lastShownTaskList);
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    //@@author A0110491U
+    /**
+     * @param lastShownTaskList
+     * @return CommandResult success if the index of event is valid
+     * @throws CommandException if the index given is invalid
+     */
+    private CommandResult selectingTask(UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList)
+            throws CommandException {
+        if (lastShownTaskList.size() < targetIndex) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
+        EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(lastShownTaskList.get(targetIndex - 1)));
+        ReadOnlyTask selected = lastShownTaskList.get(targetIndex - 1);
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, selected));
+    }
+
+    //@@author A0110491U
+    /**
+     * @param lastShownEventList
+     * @return CommandResult success if the index of task is valid
+     * @throws CommandException if the index given is invalid
+     */
+    private CommandResult selectingEvent(UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList)
+            throws CommandException {
+        if (lastShownEventList.size() < targetIndex) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
+        if (!lastShownEventList.get(targetIndex - 1).isOver()) {
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(lastShownEventList.get(targetIndex - 1)));
+        }
+        ReadOnlyEvent selected = lastShownEventList.get(targetIndex - 1);
+        return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, selected));
     }
 
 }

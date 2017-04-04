@@ -53,7 +53,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS_WITH_CLASH = "New activity added but with possible clash! : %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
     public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
-    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date!";
+    public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date/Time!";
 
     private final Event toAddEvent;
     private final Task toAddTask;
@@ -139,7 +139,9 @@ public class AddCommand extends Command {
         model.addEvent(toAddEvent);
         UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
         EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
-        EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
+        if (!toAddEvent.isOver()) {
+            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
+        }
         model.storePreviousCommand("add");
         if (model.eventHasClash(toAddEvent)) {
             return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));

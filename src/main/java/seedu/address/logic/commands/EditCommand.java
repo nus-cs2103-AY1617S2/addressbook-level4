@@ -130,7 +130,9 @@ public class EditCommand extends Command {
 
             UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
-            EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
+            if (!editedEvent.isOver()) {
+                EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
+            }
             if (model.eventHasClash(editedEvent)) {
                 return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
             }
