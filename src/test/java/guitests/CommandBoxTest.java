@@ -59,6 +59,12 @@ public class CommandBoxTest extends TaskManagerGuiTest {
 
     // @@author A0138909R
     @Test
+    public void commandBox_pressUp_mainStackEmpty() {
+        this.commandBox.clickUpInTextField();
+        assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
+    }
+
+    @Test
     public void commandBox_pressUp() {
         this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
         this.commandBox.clickUpInTextField();
@@ -96,6 +102,8 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     @Test
     public void commandBox_pressUp_excessUp() {
         this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        this.commandBox.clickUpInTextField();
+        this.commandBox.clickUpInTextField();
         this.commandBox.clickUpInTextField();
         this.commandBox.clickUpInTextField();
         assertEquals(COMMAND_THAT_SUCCEEDS, this.commandBox.getCommandInput());
