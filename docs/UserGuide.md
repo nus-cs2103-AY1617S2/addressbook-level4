@@ -57,7 +57,7 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 |[**delete / d**](#36-deleting-tasks--delete--d)                |Delete a task          |
 |[**clear / c**](#37-clearing-tasks-by-category--clear--c)       |Clear tasks in category|
 |[**view / v**](#38-viewing-a-task--view--v)                    |View a task            |
-|[**name / n**](#39-modifying-a-category-name--name--n)         |Rename a category      |
+|[**name / n**](#39-renaming-a-category--name--n)         |Rename a category      |
 |[**mark / m**](#310-marking-tasks-done--mark--m)               |Mark a task as done      |
 |[**undo / u**](#311-undoing-a-command--undo--u)                 |Undo a task            |
 |[**redo / r**](#312-redoing-a-command--redo--r)                 |Redo a task            |
