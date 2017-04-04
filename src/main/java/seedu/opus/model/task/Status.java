@@ -73,6 +73,15 @@ public class Status {
         return value;
     }
 
+    //@@author A0124368A
+    /**
+     * @return true if status is in complete state
+     */
+    public boolean isComplete() {
+        return value == Flag.COMPLETE;
+    }
+    //@@author
+
     @Override
     public String toString() {
         return value.toString();

@@ -21,7 +21,6 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String NOTE_FIELD_ID = "#note";
     private static final String PRIORITY_FIELD_ID = "#priority";
-    private static final String STATUS_FIELD_ID = "#status";
     private static final String STARTTIME_FIELD_ID = "#startTime";
     private static final String ENDTIME_FIELD_ID = "#endTime";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -47,10 +46,6 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getPriority() {
         return getTextFromLabel(PRIORITY_FIELD_ID);
-    }
-
-    public String getStatus() {
-        return getTextFromLabel(STATUS_FIELD_ID);
     }
 
     public String getStartTime() {
@@ -89,7 +84,6 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().map(Priority::toString).map(String::toUpperCase).orElse(""))
-                && getStatus().equals(task.getStatus().toString())
                 && getNote().equals(task.getNote().map(Note::toString).orElse(""))
                 && getStartTime().equals(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""))
                 && getEndTime().equals(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""))
@@ -103,7 +97,6 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getPriority().equals(handle.getPriority())
-                    && getStatus().equals(handle.getStatus())
                     && getNote().equals(handle.getNote())
                     && getTags().equals(handle.getTags());
         }
