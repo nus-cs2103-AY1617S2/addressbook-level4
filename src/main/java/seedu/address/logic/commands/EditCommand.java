@@ -182,7 +182,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(
-            taskToEdit::getDescription);
+                taskToEdit::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         ByTime updatedByTime = editTaskDescriptor.getByTime().orElseGet(taskToEdit::getByTime);
         ByDate updatedByDate = editTaskDescriptor.getByDate().orElseGet(taskToEdit::getByDate);
@@ -215,7 +215,7 @@ public class EditCommand extends Command {
         assert eventToEdit != null;
 
         Description updatedDescription = editEventDescriptor.getDescription().orElseGet(
-            eventToEdit::getDescription);
+                eventToEdit::getDescription);
         StartTime updatedStartTime = editEventDescriptor.getStartTime().orElseGet(eventToEdit::getStartTime);
         StartDate updatedStartDate = editEventDescriptor.getStartDate().orElseGet(eventToEdit::getStartDate);
         EndTime updatedEndTime = editEventDescriptor.getEndTime().orElseGet(eventToEdit::getEndTime);
