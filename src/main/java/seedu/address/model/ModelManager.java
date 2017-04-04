@@ -1,6 +1,7 @@
 //@@author A0144885R
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskManagerChanged() {
+    public void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
@@ -149,6 +150,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     public int getFilteredTasksSize () {
         return filteredTasks.size();
+    }
+
+    public ArrayList<ReadOnlyTask> clearDone() {
+        ArrayList<ReadOnlyTask> listOfTasks = new ArrayList<>();
+        for (ReadOnlyTask task : new FilteredList<>(this.taskManager.getTaskList())) {
+            if (task.getStatus().status.equals("Done")) {
+                listOfTasks.add(task);
+            }
+        }
+        return listOfTasks;
+    }
+
+    @Override
+    public synchronized void deleteBulkTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
     }
   //@@author A0143504R
 

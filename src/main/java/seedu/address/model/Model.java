@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
@@ -59,6 +60,15 @@ public interface Model {
 
     /** Returns the size of tasks list*/
     int getFilteredTasksSize();
+
+    /** Deletes all tasks with Done status*/
+    ArrayList<ReadOnlyTask> clearDone();
+
+    /** Deletes the given task without writing to file. */
+    void deleteBulkTask(ReadOnlyTask target) throws TaskList.TaskNotFoundException;
+
+    /** Writes changes to data to file*/
+    void indicateTaskManagerChanged();
 
     /** Returns undo copy of task list*/
     ReadOnlyTaskManager getCopy();
