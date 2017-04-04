@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,23 +31,24 @@ public class UnaliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(Map<String, String> tokens) {
         String alias = tokens.get(PARAMETER_ALIAS);
 
         if (!aliasConfig.isAlias(alias)) {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(RESULT_MESSAGE_NOT_ALIAS, alias), CommandResult.CommandResultType.FAILURE));
             return;
         }
 
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(RESULT_MESSAGE_FAILURE, alias), CommandResult.CommandResultType.FAILURE));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

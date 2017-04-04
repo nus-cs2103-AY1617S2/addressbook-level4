@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ import seedu.toluist.commons.exceptions.DataStorageException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Responsible for loading-related task
@@ -40,21 +42,21 @@ public class LoadController extends Controller {
                                                         + "from `newfile.json` in the parent folder" };
 
   //@@author A0131125Y
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass() + "will handle command");
-        HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
         if (path == null) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
+            uiStore.setCommandResult(new CommandResult(
+                    Messages.MESSAGE_NO_STORAGE_PATH, CommandResultType.FAILURE));
             return;
         }
 
         Config config = Config.getInstance();
         String oldStoragePath = config.getTodoListFilePath();
         if (oldStoragePath.equals(path)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path), CommandResultType.FAILURE));
             return;
         }
 
@@ -65,12 +67,12 @@ public class LoadController extends Controller {
             uiStore.setCommandResult(
                     new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, path)));
         } catch (DataStorageException e) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
+            uiStore.setCommandResult(new CommandResult(
+                    String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path), CommandResultType.FAILURE));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

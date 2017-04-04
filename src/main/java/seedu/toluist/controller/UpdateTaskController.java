@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 import seedu.toluist.ui.commons.ResultMessage;
 
 /**
@@ -69,19 +71,18 @@ public class UpdateTaskController extends Controller {
     //@@author A0127545A
     private static final Logger logger = LogsCenter.getLogger(UpdateTaskController.class);
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
 
         CommandResult commandResult;
-
-        HashMap<String, String> tokens = tokenize(command);
 
         String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX));
+            uiStore.setCommandResult(
+                    new CommandResult(RESULT_MESSAGE_ERROR_INVALID_INDEX, CommandResultType.FAILURE));
             return;
         }
         List<Task> shownTasks = uiStore.getShownTasks(indexes);
@@ -117,7 +118,7 @@ public class UpdateTaskController extends Controller {
         uiStore.setCommandResult(commandResult);
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return TaskTokenizer.tokenize(COMMAND_TEMPLATE, command, true, true);
     }
 
@@ -126,20 +127,22 @@ public class UpdateTaskController extends Controller {
             boolean isFloating, String taskPriority, Set<Tag> tags,
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring) {
         if (!isValidTaskType(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            return new CommandResult(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK, CommandResultType.FAILURE);
         }
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
+            return new CommandResult(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING,
+                    CommandResultType.FAILURE);
         }
         if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
+            return new CommandResult(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING,
+                    CommandResultType.FAILURE);
         }
         Task taskCopy = null;
         try {
             taskCopy = (Task) task.clone();
         } catch (CloneNotSupportedException cloneNotSupportedException) {
             // should never reach here
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResultType.FAILURE);
         }
         try {
             if (isFloating) {
@@ -178,7 +181,7 @@ public class UpdateTaskController extends Controller {
 
             TodoList todoList = TodoList.getInstance();
             if (todoList.getTasks().contains(taskCopy)) {
-                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+                return new CommandResult(RESULT_MESSAGE_ERROR_DUPLICATED_TASK, CommandResultType.FAILURE);
             }
 
             // Update all changes in taskCopy to task
@@ -189,9 +192,9 @@ public class UpdateTaskController extends Controller {
             }
             return new CommandResult(ResultMessage.getUpdateCommandResultMessage(oldTask, task, uiStore));
         } catch (IllegalArgumentException illegalArgumentException) {
-            return new CommandResult(illegalArgumentException.getMessage());
+            return new CommandResult(illegalArgumentException.getMessage(), CommandResultType.FAILURE);
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            return new CommandResult(RESULT_MESSAGE_ERROR_CLONING_ERROR, CommandResultType.FAILURE);
         }
     }
 
@@ -226,6 +229,49 @@ public class UpdateTaskController extends Controller {
 
     public String[] getCommandWords() {
         return new String[] { COMMAND_UPDATE_TASK };
+    }
+
+    public Map<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] {
+            TaskTokenizer.KEYWORD_EVENT_END_DATE,
+            TaskTokenizer.KEYWORD_EVENT_START_DATE,
+            TaskTokenizer.KEYWORD_TASK_DEADLINE,
+            TaskTokenizer.KEYWORD_TASK_PRIORITY,
+            TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+            TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE,
+            TaskTokenizer.KEYWORD_TASK_TAGS,
+            TaskTokenizer.KEYWORD_TASK_STOP_RECURRING,
+            TaskTokenizer.KEYWORD_TASK_FLOATING,
+        };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_PRIORITY,
+                new String[] { Task.HIGH_PRIORITY_STRING, Task.LOW_PRIORITY_STRING });
+        keywordMap.put(TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                new String[] {
+                    Task.RecurringFrequency.DAILY.name(), Task.RecurringFrequency.WEEKLY.name(),
+                    Task.RecurringFrequency.MONTHLY.name(), Task.RecurringFrequency.YEARLY.name()
+                });
+        return keywordMap;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] {
+            new String[][] {
+                new String[] { TaskTokenizer.KEYWORD_EVENT_START_DATE, TaskTokenizer.KEYWORD_EVENT_END_DATE },
+                new String[] { TaskTokenizer.KEYWORD_TASK_DEADLINE },
+                new String[] { TaskTokenizer.KEYWORD_TASK_FLOATING }
+            },
+            new String[][] {
+                new String[] {
+                    TaskTokenizer.KEYWORD_TASK_RECURRING_FREQUENCY,
+                    TaskTokenizer.KEYWORD_TASK_RECURRING_UNTIL_END_DATE
+                },
+                new String[] { TaskTokenizer.KEYWORD_TASK_STOP_RECURRING }
+            }
+        };
     }
 
     //@@author A0162011A

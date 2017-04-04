@@ -4,6 +4,7 @@ package seedu.toluist.controller.commons;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 import javafx.util.Pair;
@@ -25,11 +26,28 @@ public class KeywordTokenizer {
      */
     public static HashMap<String, String> tokenize(String description, String defaultKeyword, String... keywords) {
         HashMap<String, String> tokens = new HashMap<>();
+        for (Pair<String, String> token : tokenizeInOrder(description, defaultKeyword, keywords)) {
+            tokens.put(token.getKey(), token.getValue());
+        }
+        return tokens;
+    }
+
+    /**
+     * Tokenize a string description into their respective keywords (by best effort matching)
+     * @param description is the full text supplied by the user to be tokenized
+     * @param defaultKeyword is for the rest of the text that did not get tokenized by any user-specified keywords
+     * @param keywords is the list of keywords to find and to tokenize
+     * @return a list of keyword-token pairs, in order of appearances
+     */
+    public static List<Pair<String, String>> tokenizeInOrder(String description, String defaultKeyword,
+                                                             String... keywords) {
+        List<Pair<String, String>> tokens = new ArrayList<>();
         if (!StringUtil.isPresent(description)) {
             // Early termination, no description means there is nothing to tokenize.
             return tokens;
         }
-        String descriptionInLowerCase = description.toLowerCase();
+        String normalizedDescription = " " + description + " ";
+        String normalizedDescriptionInLowerCase = normalizedDescription.toLowerCase();
 
         ArrayList<Pair<Integer, String>> indexKeywordPairs = new ArrayList<>();
         String[] nonNullKeywords = keywords == null ? new String[] {} : keywords;
@@ -39,15 +57,17 @@ public class KeywordTokenizer {
         }
 
         for (String keyword : nonNullKeywords) {
-            int index = descriptionInLowerCase.lastIndexOf(keyword);
+            int index = normalizedDescriptionInLowerCase.lastIndexOf(" " + keyword + " ");
+
             if (index != INDEX_INVALID) {
                 // Index in indexKeywordPairs refers to the index behind the last character of the keyword.
-                Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length(), keyword);
+                Pair<Integer, String> indexKeywordPair = new Pair<>(index + keyword.length() + 1, keyword);
                 indexKeywordPairs.add(indexKeywordPair);
             }
         }
 
         Collections.sort(indexKeywordPairs, Comparator.comparing(pair -> ((Pair<Integer, String>) pair).getKey()));
+
 
         for (int i = 0; i < indexKeywordPairs.size(); i++) {
             Pair<Integer, String> currentIndexKeywordPair = indexKeywordPairs.get(i);
@@ -56,10 +76,10 @@ public class KeywordTokenizer {
             // For last pair of currentIndexKeywordPair, we simply match the text to the end of the description.
             int endIndex = i + 1 < indexKeywordPairs.size()
                     ? indexKeywordPairs.get(i + 1).getKey() - indexKeywordPairs.get(i + 1).getValue().length()
-                    : description.length();
+                    : normalizedDescription.length();
             String keyword = currentIndexKeywordPair.getValue();
-            String token = description.substring(startIndex, endIndex).trim();
-            tokens.put(keyword, token);
+            String token = normalizedDescription.substring(startIndex, endIndex).trim();
+            tokens.add(new Pair<>(keyword, token));
         }
 
         return tokens;

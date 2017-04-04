@@ -16,7 +16,7 @@ import javafx.scene.input.KeyCode;
 public class CommandAutoCompleteTest extends ToLuistGuiTest {
 
     @Test
-    public void autoComplete_SameThingTwiceFromMultipleOptions() {
+    public void autoComplete_sameThingTwiceFromMultipleOptions() {
         commandBox.focus();
         mainGui.press(KeyCode.S);
         List<String> expected1 = Arrays.asList(new String[] { "save", "switch" });

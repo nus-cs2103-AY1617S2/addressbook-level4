@@ -5,10 +5,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -23,12 +26,6 @@ public class HelpController extends Controller {
                                                     + "Press any keys to go back.";
     private static final String COMMAND_WORD = "help";
     private static final String COMMAND_REGEX = "(?iu)^\\s*help.*";
-
-    private static final String PARAMETER_COMMAND = "command";
-    private static final int SECTION_COMMAND = 1;
-
-    private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
-    private static final String COMMAND_SPLITTER_REGEX = " ";
 
     private static final String HELP_DETAILS = "Marks a task to be complete or incomplete.";
     private static final String HELP_FORMAT = "mark [complete/incomplete] INDEX(ES)";
@@ -50,21 +47,27 @@ public class HelpController extends Controller {
     private static final int INDEX_HELP_COMMAND = 0;
     private static final int INDEX_HELP_DESCRIPTION = 2;
     private static final int INDEX_HELP_FORMAT = 1;
-    private static final String FORMAT_LARGESPACING = "\n\n";
 
     private ControllerLibrary controllerLibrary = new ControllerLibrary();
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().getName() + " will handle command");
-        HashMap<String, String> tokens = tokenize(command);
 
-        String commandWord = tokens.get(PARAMETER_COMMAND);
-        if (commandWord.equals("")) {
+        Optional<String> commandWord = tokens.keySet().stream()
+                .filter(key -> !key.equals(Controller.DEFAULT_DESCRIPTION_KEYWORD))
+                .findFirst();
+        boolean isSpecificHelp = commandWord.isPresent()
+                && controllerLibrary.getCommandControllerCommandWords()
+                    .contains(commandWord.get().toLowerCase());
+        boolean isGeneralHelp = !StringUtil.isPresent(tokens.get(Controller.DEFAULT_DESCRIPTION_KEYWORD))
+                && !isSpecificHelp;
+
+        if (isGeneralHelp) {
             showGeneralHelp();
-        } else if (controllerLibrary.getCommandControllerKeywords().contains(commandWord.toLowerCase())) {
-            showSpecificHelp(commandWord);
+        } else if (isSpecificHelp) {
+            showSpecificHelp(commandWord.get());
         } else {
-            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR));
+            uiStore.setCommandResult(new CommandResult(MESSAGE_ERROR, CommandResult.CommandResultType.FAILURE));
         }
     }
 
@@ -120,27 +123,29 @@ public class HelpController extends Controller {
         return finalResult;
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = new HashMap<>();
-        command = command.trim();
-
-        String[] listOfParameters = command
-                .split(COMMAND_SPLITTER_REGEX, NUMBER_OF_SPLITS_FOR_COMMAND_PARSE);
-        try {
-            tokens.put(PARAMETER_COMMAND, listOfParameters[SECTION_COMMAND]);
-        } catch (Exception e) {
-            tokens.put(PARAMETER_COMMAND, "");
-        }
-
-        return tokens;
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_REGEX);
     }
 
     public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public Map<String, String[]> getCommandKeywordMap() {
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : controllerLibrary.getCommandControllerCommandWords()) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] {
+                controllerLibrary.getCommandControllerCommandWords().stream()
+                    .map(commandWord -> new String[] { commandWord })
+                    .collect(Collectors.toList())
+                    .toArray(new String[0][0])
+        };
     }
 
     public String[] getBasicHelp() {

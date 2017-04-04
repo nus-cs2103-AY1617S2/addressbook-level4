@@ -33,26 +33,23 @@ public class MarkCommandTest extends ToLuistGuiTest {
     @Test
     public void mark_invalidIndex() {
         String command = "mark";
-        commandBox.runCommand(command);
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_INDEX);
+        runCommandThenCheckForResultMessage(command, Messages.MESSAGE_INVALID_TASK_INDEX);
     }
 
     @Test
     public void markComplete_singleTask() {
         Task task1 = new TypicalTestTodoLists().getTypicalTasks()[0];
         String command1 = "mark complete 1";
-        commandBox.runCommand(command1);
-        assertTaskComplete(true, task1);
+        runCommandWithCallback(command1, () -> assertTaskComplete(true, task1));
 
         Task task2 = new TypicalTestTodoLists().getTypicalTasks()[1];
-        String command2 = "mark complete 2";
-        commandBox.runCommand(command2);
-        assertTaskComplete(true, task2);
+        String command2 = "mark 2 complete";
+        runCommandWithCallback(command2, () -> assertTaskComplete(true, task2));
     }
 
     @Test
     public void markComplete_multipleTasks() {
-        String command = "mark complete 1-2";
+        String command = "mark 1-2";
         commandBox.runCommand(command);
         assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks());
     }
@@ -61,23 +58,21 @@ public class MarkCommandTest extends ToLuistGuiTest {
     public void markIncomplete_singleTask() {
         Task task = new TypicalTestTodoLists().getTypicalTasks()[0];
         String markCompleteCommand = "mark complete 1";
-        commandBox.runCommand(markCompleteCommand);
-        assertTaskComplete(true, task);
+        runCommandWithCallback(markCompleteCommand, () -> assertTaskComplete(true, task));
 
         String markIncompleteCommand = "mark incomplete 1";
-        commandBox.runCommand(markIncompleteCommand);
-        assertTaskComplete(false, task);
+        runCommandWithCallback(markIncompleteCommand, () -> assertTaskComplete(false, task));
     }
 
     @Test
     public void markIncomplete_multipleTasks() {
         String markCompleteCommand = "mark complete 1 - ";
-        commandBox.runCommand(markCompleteCommand);
-        assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks());
+        runCommandWithCallback(markCompleteCommand,
+            () -> assertTaskComplete(true, new TypicalTestTodoLists().getTypicalTasks()));
 
         String markIncompleteCommand = "mark incomplete  - 2";
-        commandBox.runCommand(markIncompleteCommand);
-        assertTaskComplete(false, new TypicalTestTodoLists().getTypicalTasks());
+        runCommandWithCallback(markIncompleteCommand,
+            () -> assertTaskComplete(false, new TypicalTestTodoLists().getTypicalTasks()));
     }
 
     /**
@@ -113,8 +108,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String taskDescription = "do homework for Melvin";
         String recurFrequencyString = "daily";
         LocalDateTime recurUntilEndDate = DateTimeUtil.parseDateString("15 May 2018, 12pm");
-        String command = "add " + taskDescription + " repeat/" + recurFrequencyString
-                       + " repeatuntil/" + recurUntilEndDate;
+        String command = "add " + taskDescription + " /repeat " + recurFrequencyString
+                       + " /repeatuntil " + recurUntilEndDate;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription);
         task.setRecurring(recurUntilEndDate, recurFrequencyString);
@@ -125,8 +120,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String recurFrequencyString2 = "monthly";
         LocalDateTime endDate2 = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime recurUntilEndDate2 = DateTimeUtil.parseDateString("30 Apr 2017, 12pm");
-        String command2 = "add " + taskDescription2 + " by/" + endDate2 + " repeat/" + recurFrequencyString2
-                + " repeatuntil/" + recurUntilEndDate2;
+        String command2 = "add " + taskDescription2 + " /by " + endDate2 + " /repeat " + recurFrequencyString2
+                + " /repeatuntil " + recurUntilEndDate2;
         commandBox.runCommand(command2);
         Task task2 = new Task(taskDescription2, endDate2);
         task2.setRecurring(recurUntilEndDate2, recurFrequencyString2);
@@ -138,8 +133,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         LocalDateTime startDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 12pm");
         LocalDateTime endDate3 = DateTimeUtil.parseDateString("24 Mar 2017, 1pm");
         LocalDateTime recurUntilEndDate3 = DateTimeUtil.parseDateString("28 Mar 2017, 1pm");
-        String command3 = "add " + taskDescription3 + " from/" + startDate3 + " to/" + endDate3
-                        + " repeat/" + recurFrequencyString3 + " repeatuntil/" + recurUntilEndDate3;
+        String command3 = "add " + taskDescription3 + " /from " + startDate3 + " /to " + endDate3
+                        + " /repeat " + recurFrequencyString3 + " /repeatuntil " + recurUntilEndDate3;
         commandBox.runCommand(command3);
         Task task3 = new Task(taskDescription3, startDate3, endDate3);
         task3.setRecurring(recurUntilEndDate3, recurFrequencyString3);
@@ -172,8 +167,8 @@ public class MarkCommandTest extends ToLuistGuiTest {
         String recurFrequencyString = "monthly";
         LocalDateTime startDate = DateTimeUtil.parseDateString("15 Mar 2017, 12pm");
         LocalDateTime endDate = DateTimeUtil.parseDateString("31 Mar 2017, 1pm");
-        String command = "add " + taskDescription + " from/" + startDate + " to/" + endDate
-                        + " repeat/" + recurFrequencyString;
+        String command = "add " + taskDescription + " /from " + startDate + " /to " + endDate
+                        + " /repeat " + recurFrequencyString;
         commandBox.runCommand(command);
         Task task = new Task(taskDescription, startDate, endDate);
         task.setRecurring(recurFrequencyString);

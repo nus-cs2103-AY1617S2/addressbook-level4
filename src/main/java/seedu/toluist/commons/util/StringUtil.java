@@ -3,6 +3,7 @@ package seedu.toluist.commons.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.atteo.evo.inflector.English;
 
@@ -10,6 +11,10 @@ import org.atteo.evo.inflector.English;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+
+    public static final String EMPTY_COMPONENT = "";
+    public static final String WHITE_SPACE = "\\s+";
+    public static final String JOINER = " ";
 
     //@@author A0127545A
     /**
@@ -38,10 +43,10 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
-        assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
+        assert preppedWord.split(WHITE_SPACE).length == 1 : "Word parameter should be a single word";
 
         String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInPreppedSentence = preppedSentence.split(WHITE_SPACE);
 
         for (String wordInSentence: wordsInPreppedSentence) {
             if (wordInSentence.equalsIgnoreCase(preppedWord)) {
@@ -92,18 +97,43 @@ public class StringUtil {
      */
     public static String[] convertToArray(String keywords) {
         if (keywords == null || keywords.trim().isEmpty()) {
-            return new String[] { "" };
+            return new String[] { EMPTY_COMPONENT };
         }
 
         String trimmedKeywords = keywords.trim();
-        String[] keywordList = trimmedKeywords.split(" ");
+        String[] keywordList = trimmedKeywords.split(WHITE_SPACE);
         ArrayList<String> replacementList = new ArrayList<>();
         for (String keyword : keywordList) {
-            if (!keyword.equals("")) {
+            if (!keyword.equals(EMPTY_COMPONENT)) {
                 replacementList.add(keyword);
             }
         }
         return replacementList.toArray(new String[0]);
+    }
+
+    /**
+     * Return a transformed string of an original string, with the last component replaced
+     * @param s the original string
+     * @param replacement the string to replace the first word
+     * @return the transformed string
+     */
+    public static String replaceLastComponent(String s, String replacement) {
+        if (replacement == null || !StringUtil.isPresent(s)) {
+            return s;
+        }
+
+        ArrayList<String> words = new ArrayList(Arrays.asList(s.split(WHITE_SPACE)));
+
+        if (getLastComponent(s).equals(EMPTY_COMPONENT)) {
+            words.add(EMPTY_COMPONENT);
+        }
+
+        if (words.isEmpty()) {
+            return s;
+        }
+
+        words.set(words.size() - 1, replacement);
+        return String.join(JOINER, words);
     }
 
     /**
@@ -117,14 +147,41 @@ public class StringUtil {
             return s;
         }
 
-        String[] words = s.split("\\s+");
+        String[] words = s.split(WHITE_SPACE);
 
         if (words.length == 0) {
             return s;
         }
 
         words[0] = replacement;
-        return String.join(" ", words);
+        return String.join(JOINER, words);
+    }
+
+    /**
+     * Get last word of a string
+     * @param s a string
+     * @return last word of the string
+     */
+    public static String getLastWord(String s) {
+        String[] words = s.trim().split(WHITE_SPACE);
+        return words[words.length - 1];
+    }
+
+    /**
+     * Get last component of a string
+     * By component, it means the method will return the last word if the string ends with a word,
+     * or "" or the string end with whitespaces
+     * @param s a string
+     * @return last word of the string
+     */
+    public static String getLastComponent(String s) {
+        assert s != null;
+        assert !s.equals(EMPTY_COMPONENT);
+
+        if (s.substring(s.length() - 1).matches(WHITE_SPACE)) {
+            return EMPTY_COMPONENT;
+        }
+        return getLastWord(s);
     }
 
     /**

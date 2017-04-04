@@ -1,8 +1,6 @@
 //@@author A0131125Y
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,8 +26,7 @@ public class AliasCommandTest extends ToLuistGuiTest {
         String taskDescription = "read lecture slides from Uncle Soo";
         String addCommand = "d " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
     }
 
     @Test
@@ -39,19 +36,17 @@ public class AliasCommandTest extends ToLuistGuiTest {
 
         String addCommand = "d ";
         Task task = new Task("a task");
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
     }
 
     @Test
     public void alias_ReservedWord() {
         String aliasCommand = "alias alias alias";
-        commandBox.runCommand(aliasCommand);
-        assertResultMessage(String.format(AliasController.RESULT_MESSAGE_RESERVED_WORD, "alias"));
+        runCommandThenCheckForResultMessage(aliasCommand,
+                String.format(AliasController.RESULT_MESSAGE_RESERVED_WORD, "alias"));
 
         String viewAliasCommand = "viewalias";
-        commandBox.runCommand(viewAliasCommand);
-        assertResultMessage(ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
+        runCommandThenCheckForResultMessage(viewAliasCommand, ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
     }
 
     @Test
@@ -65,7 +60,6 @@ public class AliasCommandTest extends ToLuistGuiTest {
         String taskDescription = "watch webcast at home";
         String addCommand = "d " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
     }
 }

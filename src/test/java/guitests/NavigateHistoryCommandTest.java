@@ -19,21 +19,21 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
     @Test
     public void viewNextWithoutDoingAnything() {
         mainGui.getCommandBox().press(KeyCode.DOWN);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
+        assertEquals(uiStore.getCommandInputProperty().getValue(), "");
     }
 
     @Test
     public void viewPreviousAfterACommand() {
         commandBox.runCommand(command1);
         mainGui.getCommandBox().press(KeyCode.UP);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command1);
     }
 
     @Test
     public void viewNextAfterACommand() {
         commandBox.runCommand(command1);
         mainGui.press(KeyCode.DOWN);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), "");
+        assertEquals(uiStore.getCommandInputProperty().getValue(), "");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         commandBox.enterCommand(command2);
         mainGui.getCommandBox().press(KeyCode.UP);
         mainGui.getCommandBox().press(KeyCode.DOWN);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command2);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         for (int i = 0; i < 10; i++) {
             mainGui.getCommandBox().press(KeyCode.UP);
         }
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command1);
     }
 
     @Test
@@ -60,11 +60,11 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         commandBox.runCommand(command1);
         commandBox.enterCommand(command2);
         mainGui.getCommandBox().press(KeyCode.UP);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command1);
         for (int i = 0; i < 10; i++) {
             mainGui.getCommandBox().press(KeyCode.DOWN);
         }
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command2);
     }
 
     @Test
@@ -74,12 +74,12 @@ public class NavigateHistoryCommandTest extends ToLuistGuiTest {
         for (int i = 0; i < 5; i++) {
             mainGui.getCommandBox().press(KeyCode.UP);
         }
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command1);
         for (int i = 0; i < 5; i++) {
             mainGui.getCommandBox().press(KeyCode.DOWN);
         }
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command2);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command2);
         mainGui.getCommandBox().press(KeyCode.UP);
-        assertEquals(uiStore.getObservableCommandInput().getValue().getCommand(), command1);
+        assertEquals(uiStore.getCommandInputProperty().getValue(), command1);
     }
 }

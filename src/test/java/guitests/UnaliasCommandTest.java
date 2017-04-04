@@ -1,8 +1,6 @@
 //@@author A0131125Y
 package guitests;
 
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,8 +20,8 @@ public class UnaliasCommandTest extends ToLuistGuiTest {
     @Test
     public void unalias_nonExistingAlias() {
         String unaliasCommand = "unalias d";
-        commandBox.runCommand(unaliasCommand);
-        assertResultMessage(String.format(UnaliasController.RESULT_MESSAGE_NOT_ALIAS, "d"));
+        runCommandThenCheckForResultMessage(unaliasCommand,
+                String.format(UnaliasController.RESULT_MESSAGE_NOT_ALIAS, "d"));
     }
 
     @Test
@@ -36,7 +34,6 @@ public class UnaliasCommandTest extends ToLuistGuiTest {
         String taskDescription = "read lecture slides from Prof Henry";
         String addCommand = "d " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertFalse(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[0], new Task[] { task });
     }
 }

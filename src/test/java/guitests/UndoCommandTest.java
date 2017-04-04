@@ -62,6 +62,6 @@ public class UndoCommandTest extends ToLuistGuiTest {
         }
 
         mainGui.press(KeyCode.CONTROL, KeyCode.Z);
-        assertTrue(areTasksShown(new TypicalTestTodoLists().getTypicalTasks()));
+        assertTasksShown(true, new TypicalTestTodoLists().getTypicalTasks());
     }
 }

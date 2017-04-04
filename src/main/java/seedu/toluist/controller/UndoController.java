@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,10 +36,9 @@ public class UndoController extends Controller {
     //@@author A0131125Y
     private static final Logger logger = LogsCenter.getLogger(UndoController.class);
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass() + "will handle command");
 
-        HashMap<String, String> tokens = tokenize(command);
         String undoTimesToken = tokens.get(PARAMETER_UNDO_TIMES);
         int undoTimes = undoTimesToken != null ? Integer.parseInt(undoTimesToken) : 1;
 
@@ -54,7 +54,7 @@ public class UndoController extends Controller {
                 actualUndoTimes == 1 ? "was" : "were")));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

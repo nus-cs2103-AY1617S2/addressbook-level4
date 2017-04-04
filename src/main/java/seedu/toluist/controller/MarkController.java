@@ -4,7 +4,7 @@ package seedu.toluist.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +18,7 @@ import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
+import seedu.toluist.ui.commons.CommandResult.CommandResultType;
 
 /**
  * Mark Controller is responsible for marking task complete or incomplete
@@ -25,11 +26,10 @@ import seedu.toluist.ui.commons.CommandResult;
 public class MarkController extends Controller {
     private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
     private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
-    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+(?<markType>(complete|incomplete)))" +
-            "?(?<index>.*)?\\s*";
+    private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+(complete|incomplete))?"
+            + "(\\s+(?<index>.*))?(\\s+(complete|incomplete))?.*";
     private static final String COMMAND_WORD = "mark";
 
-    private static final String PARAMETER_MARK = "markType";
     private static final String PARAMETER_INDEX = "index";
     private static final String PARAMETER_MARK_COMPLETE = "complete";
     private static final String PARAMETER_MARK_INCOMPLETE = "incomplete";
@@ -52,29 +52,24 @@ public class MarkController extends Controller {
                                                     "`mark 1, 6`\nMarks the tasks at index 1 and 6 complete." };
 
     //@@author A0131125Y
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) {
         logger.info(getClass().toString() + " will handle command");
-
-        HashMap<String, String> tokens = tokenize(command);
         String indexToken = tokens.get(PARAMETER_INDEX);
-        String markTypeToken = tokens.get(PARAMETER_MARK);
+        boolean isMarkComplete = !tokens.keySet().contains(PARAMETER_MARK_INCOMPLETE);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
         if (indexes.isEmpty()) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
+            uiStore.setCommandResult(
+                    new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX, CommandResultType.FAILURE));
             return;
         }
 
-        CommandResult commandResult;
-        if (Objects.equals(markTypeToken, PARAMETER_MARK_INCOMPLETE)) {
-            commandResult = mark(indexes, false);
-        } else {
-            commandResult = mark(indexes, true);
-        }
+        CommandResult commandResult = mark(indexes, isMarkComplete);
 
         TodoList todoList = TodoList.getInstance();
         if (!todoList.save()) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_SAVING_FAILURE));
+            uiStore.setCommandResult(
+                    new CommandResult(Messages.MESSAGE_SAVING_FAILURE, CommandResultType.FAILURE));
         }
         uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(commandResult);
@@ -97,12 +92,11 @@ public class MarkController extends Controller {
                 English.plural("Task", taskIndexes.size()), indexString));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
+        Map<String, String> tokens = super.tokenize(command);
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();
-        HashMap<String, String> tokens = new HashMap<>();
-        tokens.put(PARAMETER_MARK, matcher.group(PARAMETER_MARK));
         tokens.put(PARAMETER_INDEX, matcher.group(PARAMETER_INDEX));
         return tokens;
     }
@@ -113,6 +107,22 @@ public class MarkController extends Controller {
 
     public String[] getCommandWords() {
         return new String[] { COMMAND_WORD };
+    }
+
+    public Map<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] { PARAMETER_MARK_COMPLETE, PARAMETER_MARK_INCOMPLETE };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] { new String[][] {
+            new String[] { PARAMETER_MARK_INCOMPLETE },
+            new String[] { PARAMETER_MARK_COMPLETE }
+        }};
     }
 
     //@@author A0162011A

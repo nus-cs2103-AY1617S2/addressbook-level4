@@ -35,7 +35,7 @@ public abstract class Dispatcher {
      * Returns set of possible command extensions from a command
      * @param command a command
      */
-    public abstract SortedSet<String> getPredictedCommands(String command);
+    public abstract SortedSet<String> getSuggestions(String command);
 
     /**
      * Setter DI to inject a alias config as a dependency

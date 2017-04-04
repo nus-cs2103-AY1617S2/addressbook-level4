@@ -2,6 +2,7 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,14 +40,14 @@ public class AliasController extends Controller {
     //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(Map<String, String> tokens) {
         String alias = tokens.get(PARAMETER_ALIAS);
         String commandPhrase = tokens.get(PARAMETER_COMMAND);
 
         if (aliasConfig.isReservedWord(alias)) {
             uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias)));
+                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias),
+                            CommandResult.CommandResultType.FAILURE));
             return;
         }
 
@@ -55,11 +56,12 @@ public class AliasController extends Controller {
                     new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
         } else {
             uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
+                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase),
+                            CommandResult.CommandResultType.FAILURE));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

@@ -8,9 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.text.Text;
 import seedu.toluist.commons.util.FxViewUtil;
+import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.UiStore;
+import seedu.toluist.ui.commons.CommandResult;
 
 public class CommandBox extends UiView {
     private static final String STYLE_CLASS_ERROR = "error";
@@ -31,15 +34,18 @@ public class CommandBox extends UiView {
     protected void viewDidMount () {
         FxViewUtil.makeFullWidth(getRoot());
         FxViewUtil.makeFullWidth(commandTextField);
-        UiStore store = UiStore.getInstance();
-        setCommandTextFieldText(store.getObservableCommandInput().getValue().getCommand());
+        CommandResult commandResult = UiStore.getInstance().getObservableCommandResult().getValue();
+        if (commandResult.getCommandResultType() == CommandResult.CommandResultType.FAILURE) {
+            FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
+        }
     }
 
     private void configureBindings() {
         UiStore store = UiStore.getInstance();
-        store.bind(this, store.getObservableCommandInput());
+        commandTextField.textProperty().bindBidirectional(store.getCommandInputProperty());
         commandTextField.textProperty()
-                .addListener((observable, oldValue, newValue) -> handleCommandInputChanged(newValue));
+            .addListener(((observable, oldValue, newValue) -> handleCommandInputChanged(newValue)));
+        store.bind(this, store.getObservableCommandResult());
     }
 
     private void configureKeyCombinations() {
@@ -51,19 +57,15 @@ public class CommandBox extends UiView {
 
     private void dispatchCommand() {
         dispatcher.dispatchRecordingHistory(commandTextField.getText());
-        commandTextField.setText("");
+        UiStore.getInstance().setCommandInput("");
     }
 
     private void handleCommandInputChanged(String newCommand) {
-        List<String> suggestedCommands = new ArrayList(dispatcher.getPredictedCommands(newCommand));
+        List<String> suggestedCommands = new ArrayList(dispatcher.getSuggestions(newCommand));
         UiStore uiStore = UiStore.getInstance();
-        uiStore.setCommandInput(newCommand);
         uiStore.setSuggestedCommands(suggestedCommands);
-        if (!newCommand.isEmpty() && suggestedCommands.isEmpty()) {
-            FxViewUtil.addStyleClass(commandTextField, STYLE_CLASS_ERROR);
-        } else {
-            FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
-        }
+        uiStore.setCommandTextWidth(getTextWidth(newCommand));
+        FxViewUtil.removeStyleClass(commandTextField, STYLE_CLASS_ERROR);
     }
 
     private void handleCommandInputAutoComplete() {
@@ -72,7 +74,8 @@ public class CommandBox extends UiView {
 
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         if (suggestedCommands.size() == 1) {
-            setCommandTextFieldText(suggestedCommands.get(0));
+            setCommandTextField(
+                    StringUtil.replaceLastComponent(commandTextField.getText(), suggestedCommands.get(0)));
         }
     }
 
@@ -85,19 +88,30 @@ public class CommandBox extends UiView {
         UiStore store = UiStore.getInstance();
         List<String> suggestedCommands = store.getObservableSuggestedCommands();
         int index = store.getObservableSuggestedCommandIndex().get();
+        String commandText = commandTextField.getText();
 
         if (suggestedCommands.isEmpty()
-            || index == UiStore.INDEX_INVALID_SUGGESTION
-            || suggestedCommands.get(index).trim().equals(commandTextField.getText())) {
+                || index == UiStore.INDEX_INVALID_SUGGESTION
+                || suggestedCommands.get(index).equalsIgnoreCase(StringUtil.getLastWord(commandText))) {
             dispatchCommand();
             return;
         }
 
-        store.setCommandInput(suggestedCommands.get(index));
+        setCommandTextField(StringUtil.replaceLastComponent(commandText, suggestedCommands.get(index)));
     }
 
-    private void setCommandTextFieldText(String text) {
-        commandTextField.setText(text);
+    private void setCommandTextField(String command) {
+        commandTextField.setText(command);
         commandTextField.end();
+    }
+
+    /**
+     * Estimate the width of certain command text
+     * @param text the text string
+     * @return width in double
+     */
+    private double getTextWidth(String text) {
+        Text dummyText = new Text(text);
+        return dummyText.getBoundsInLocal().getWidth();
     }
 }
