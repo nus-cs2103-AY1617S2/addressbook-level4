@@ -1,6 +1,8 @@
 package seedu.opus.logic.commands;
 
-import java.util.Set;
+import java.util.List;
+
+import seedu.opus.model.qualifier.Qualifier;
 
 /**
  * Finds and lists all tasks in task manager whose name contains any of the argument keywords.
@@ -8,22 +10,25 @@ import java.util.Set;
  */
 public class FindCommand extends Command {
 
+    //@@author A0126345J
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " do homework";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds by keywords or attributes and displays them as a list with index numbers.\n"
+            + "At least one of the parameters below must be specified.\n"
+            + "Parameters: [KEYWORDS]... [PRIORITY] [STARTTIME] [ENDTIME] [STATUS]\n"
+            + "Example: " + COMMAND_WORD + " do homework p/hi";
 
-    private final Set<String> keywords;
+    private final List<Qualifier> qualifiers;
 
-    public FindCommand(Set<String> keywords) {
-        this.keywords = keywords;
+    public FindCommand(List<Qualifier> qualifiers) {
+        this.qualifiers = qualifiers;
     }
+    //@@author
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        model.updateFilteredTaskList(qualifiers);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 

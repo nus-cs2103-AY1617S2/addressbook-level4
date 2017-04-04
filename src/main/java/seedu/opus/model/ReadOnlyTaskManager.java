@@ -17,12 +17,6 @@ public interface ReadOnlyTaskManager {
     ObservableList<ReadOnlyTask> getTaskList();
 
     /**
-     * Returns an unmodifiable view of the sorted tasks list.
-     * This list will not contain any duplicate tasks.
-     */
-    ObservableList<ReadOnlyTask> getSortedList(String keyword);
-
-    /**
      * Returns an unmodifiable view of the tags list.
      * This list will not contain any duplicate tags.
      */
