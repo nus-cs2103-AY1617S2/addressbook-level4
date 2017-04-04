@@ -16,6 +16,7 @@ public class TaskMemento {
 
     public TaskMemento(Task oldTask, Task newTask) {
         assert oldTask != null || newTask != null;
+        System.out.println("creating memento");
         if (oldTask != null && newTask != null) {
             assert oldTask.getTaskId().equals(newTask.getTaskId());
         }
