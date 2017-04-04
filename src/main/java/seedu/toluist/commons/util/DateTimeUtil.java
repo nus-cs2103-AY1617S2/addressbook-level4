@@ -16,6 +16,11 @@ import com.joestelmach.natty.Parser;
  */
 public class DateTimeUtil {
     //@@author A0127545A
+    /**
+     * Given a date string, parse it using Natty (NLP library for dates) and return a LocalDateTime
+     * @param stringDate
+     * @return LocalDateTime of the first Date returned by Natty
+     */
     public static LocalDateTime parseDateString(String stringDate) {
         if (stringDate == null) {
             return null;

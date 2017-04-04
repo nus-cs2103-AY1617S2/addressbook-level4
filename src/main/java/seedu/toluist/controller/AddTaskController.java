@@ -102,56 +102,40 @@ public class AddTaskController extends Controller {
     private CommandResult add(TodoList todoList, String description,
             LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline, String taskPriority, Set<Tag> tags,
-            String recurringFrequency, LocalDateTime recurringUntilEndDate)
-            throws InvalidCommandException {
-        if (!StringUtil.isPresent(description)) {
-            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
-        }
+            String recurringFrequency, LocalDateTime recurringUntilEndDate) throws InvalidCommandException {
         try {
-            // validates that the dates input belongs to only one type of task, or exception is thrown
+            validateTaskDescription(description);
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
-            Task task;
-            if (eventStartDateTime != null && eventEndDateTime != null) {
-                task = new Task(description, eventStartDateTime, eventEndDateTime);
-            } else if (taskDeadline != null) {
-                task = new Task(description, taskDeadline);
-            } else if (eventStartDateTime == null && eventEndDateTime == null && taskDeadline == null) {
-                task = new Task(description);
-            } else {
-                // should not reach here since it will fail validation at the top
-                throw new InvalidCommandException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
-            }
-            if (taskPriority != null) {
-                task.setTaskPriority(taskPriority);
-            }
-            if (StringUtil.isPresent(recurringFrequency)) {
-                if (recurringUntilEndDate == null) {
-                    task.setRecurring(recurringFrequency);
-                } else {
-                    task.setRecurring(recurringUntilEndDate, recurringFrequency);
-                }
-            }
-            task.replaceTags(tags);
+            Task task = createTask(description, eventStartDateTime, eventEndDateTime, taskDeadline);
+            task = addPriorityToTask(task, taskPriority);
+            task = addRecurringStatusToTask(task, recurringFrequency, recurringUntilEndDate);
+            task = addTagsToTask(task, tags);
 
-            if (todoList.getTasks().contains(task)) {
-                throw new InvalidCommandException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
-            }
-            todoList.add(task);
-            if (todoList.save()) {
-                uiStore.setTasks(todoList.getTasks(), task);
-            }
+            validatesNoDuplicateTask(task, todoList);
+            addTaskToTodoList(task, todoList);
             return new CommandResult(ResultMessage.getAddCommandResultMessage(task, uiStore));
-        } catch (IllegalArgumentException exception) {
-            throw new InvalidCommandException(exception.getMessage());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new InvalidCommandException(illegalArgumentException.getMessage());
+        }
+    }
+
+    /**
+     * Checks whether the user input for description is present
+     * @param description
+     * @throws IllegalArgumentException when there is no description
+     */
+    private void validateTaskDescription(String description) throws IllegalArgumentException {
+        if (!StringUtil.isPresent(description)) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
         }
     }
 
     /**
      * Checks whether the user input for dates is valid (belongs to only one type of task)
-     * @throws IllegalArgumentException when the input for dates is invalid
      * @param eventStartDateTime
      * @param eventEndDateTime
      * @param taskDeadline
+     * @throws IllegalArgumentException when the input for dates is invalid
      */
     private void validateTaskDatesInput(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline) throws IllegalArgumentException {
@@ -166,6 +150,59 @@ public class AddTaskController extends Controller {
                 throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE);
             }
         } // else it is a valid task (floating or deadline)
+    }
+
+    private Task createTask(String description, LocalDateTime eventStartDateTime,
+            LocalDateTime eventEndDateTime, LocalDateTime taskDeadline) throws IllegalArgumentException {
+        Task task = null;
+        if (eventStartDateTime != null && eventEndDateTime != null) {
+            task = new Task(description, eventStartDateTime, eventEndDateTime);
+        } else if (taskDeadline != null) {
+            task = new Task(description, taskDeadline);
+        } else if (eventStartDateTime == null && eventEndDateTime == null && taskDeadline == null) {
+            task = new Task(description);
+        } else {
+            // should not reach here since it will fail validation at the top
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+        }
+        return task;
+    }
+
+    private Task addPriorityToTask(Task task, String taskPriority) {
+        if (taskPriority != null) {
+            task.setTaskPriority(taskPriority);
+        }
+        return task;
+    }
+
+    private Task addRecurringStatusToTask(Task task,
+            String recurringFrequency, LocalDateTime recurringUntilEndDate) {
+        if (StringUtil.isPresent(recurringFrequency)) {
+            if (recurringUntilEndDate == null) {
+                task.setRecurring(recurringFrequency);
+            } else {
+                task.setRecurring(recurringUntilEndDate, recurringFrequency);
+            }
+        }
+        return task;
+    }
+
+    private Task addTagsToTask(Task task, Set<Tag> tags) {
+        task.replaceTags(tags);
+        return task;
+    }
+
+    private void validatesNoDuplicateTask(Task task, TodoList todoList) throws IllegalArgumentException {
+        if (todoList.getTasks().contains(task)) {
+            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+        }
+    }
+
+    private void addTaskToTodoList(Task task, TodoList todoList) throws IllegalArgumentException {
+        todoList.add(task);
+        if (todoList.save()) {
+            uiStore.setTasks(todoList.getTasks(), task);
+        }
     }
 
     public boolean matchesCommand(String command) {
