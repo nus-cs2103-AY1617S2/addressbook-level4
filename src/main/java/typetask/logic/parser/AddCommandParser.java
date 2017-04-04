@@ -7,6 +7,7 @@ import static typetask.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_STA
 import static typetask.commons.core.Messages.MESSAGE_INVALID_START_AND_END_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static typetask.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static typetask.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static typetask.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -28,6 +29,7 @@ public class AddCommandParser {
     private final int deadlineTaskWithDate = 2;
     private final int eventTask = 3;
     private final int invalidEvent = 4;
+    private final int priorityTask = 5;
     private final int day = 0;
     private final int month = 1;
     private final int dayDate = 2;
@@ -40,7 +42,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE);
+                new ArgumentTokenizer(PREFIX_DATE, PREFIX_TIME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_PRIORITY);
         argsTokenizer.tokenize(args);
         try {
             int taskType = checkTaskType(argsTokenizer);

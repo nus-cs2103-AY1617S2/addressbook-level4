@@ -11,8 +11,9 @@ public interface ReadOnlyTask {
     //@@author A0139926R
     DueDate getDate();
     DueDate getEndDate();
-    //@@author
+    //@@author A0144902L
     boolean getIsCompleted();
+    Priority getPriority();
     //@@author A0139154E
     String getIsCompletedToString();
     //@@author
@@ -39,7 +40,9 @@ public interface ReadOnlyTask {
                .append("\nEnds On: ")
                .append(getEndDate())
                .append(" \nCompleted? ")
-               .append(getIsCompletedToString());
+               .append(getIsCompletedToString())
+               .append(" \nPriority? ")
+               .append(getPriority());
         return builder.toString();
     }
     //@@author

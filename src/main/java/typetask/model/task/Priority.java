@@ -1,34 +1,66 @@
 package typetask.model.task;
 
-//@@author A0140010M
+import typetask.commons.exceptions.IllegalValueException;
+
+//@@author A0144902L
+/**
+* Represents a Task's priority in TypeTask.
+* Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
+*/
 public class Priority {
 
-    private boolean priority;
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority level should only contain"
+            + " the words Yes, No, High, Low (case-insensitive) or the letters y(Y), n(N), H(h), L(l)";
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Priority should be either in true or false.";
+    public static final String HIGH_PRIORITY = "High";
+    public static final String LOW_PRIORITY = "Low";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|High|Low|h|l)$";
+    public final String value;
 
-    public Priority () {
-        this.priority = false;
-    }
+    /**
+     * Validates given priority.
+     *
+     * @throws IllegalValueException if given priority level string is invalid.
+     */
+    public Priority(String priority) throws IllegalValueException {
+        assert priority != null;
 
-    public Priority(boolean priority) {
-        this.priority = priority;
-    }
+        String trimmedPriorityLevel = priority.trim();
 
-    public Priority(String priority) {
-        String amended = priority.substring(2).trim();
-        if (amended.toLowerCase().compareTo("true") == 0) {
-            this.priority = true;
+        if ("".equals(priority)) {
+            this.value = LOW_PRIORITY;
         } else {
-            this.priority = false;
+            if (!isValidPriority(trimmedPriorityLevel)) {
+                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+            }
+            if (trimmedPriorityLevel.contains("H") || trimmedPriorityLevel.contains("h") ||
+                    trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
+                this.value = HIGH_PRIORITY;
+            } else {
+                this.value = LOW_PRIORITY;
+            }
         }
     }
 
-    public boolean getPriority() {
-        return priority;
+    /**
+     * Returns true if a given string is a valid task priority level.
+     */
+    public static boolean isValidPriority(String test) {
+        return test.matches(PRIORITY_REGEX) ||
+                "".equals(test);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Priority // instanceof handles nulls
+                && this.value.equals(((Priority) other).value)); // state check
+    }
 
     @Override
     public int hashCode() {
