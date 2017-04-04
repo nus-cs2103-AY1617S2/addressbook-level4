@@ -298,17 +298,16 @@ Examples:
 
 #### 2.9.2. Redoing a completed task: `redo`
 
-  Redoes a completed task.<br>
-  Format: `redo INDEX`
+Redoes a completed task.<br>
+Format: `redo INDEX`
 
-  > * Changes the status of a task from `completed` to `pending`.
+> * Changes the status of a task from `completed` to `pending`.
+Examples:
 
-  Examples:
-
-  * `finish 2`<br>
-    `show com`<br>
-    `redo 1`<br>
-    Changes the status of a completed task back to pending.
+* `finish 2`<br>
+   `show com`<br>
+   `redo 1`<br>
+   Changes the status of a completed task back to pending.
 
 ### 2.10. Task display preference: `show`
 
@@ -321,11 +320,11 @@ Examples:
 Examples:
 
 * `show`<br> 
-   display all events and tasks
+   Display all events and tasks
 * `show com`<br> 
-   display completed tasks and past events
+   Display completed tasks and past events
 * `show pend`<br> 
-   display pending tasks and future events
+   Display pending tasks and future events
 
 ### 2.11. Undoing the latest command : `undo`
 
@@ -404,6 +403,9 @@ Format: `exit`
 
 * **Add Event** : `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
+  
+* **Recur Event** : `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES`<br>
+  e.g. `add Industrial Talk st/1800 sd/030517 et/2000 l/FoS`
 
 * **Add Task** : `add DESCRIPTION p/PRIORITY [l/LOCATION] [ta/TAG]...`<br>
   e.g. `add Buy groceries p/medium l/FairPrice`
@@ -444,6 +446,9 @@ Format: `exit`
 
 * **Save** : `save DIRECTORY`<br>
   e.g. `save Desktop/Data`
+  
+* **Read** : `read DIRECTORY`<br>
+  e.g. `read Desktop/Data2`
 
 * **Next** : `next WEEKS_AHEAD`<br>
   e.g. `next 2`
