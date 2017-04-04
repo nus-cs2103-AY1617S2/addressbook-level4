@@ -20,7 +20,7 @@ public class TerminateCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "t";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": Marks the recurring tasks identified by the indexes"
+            + ": Marks the recurring tasks identified by the index"
             + " numbers provided that are used in the last listing as done. "
             + "Parameters: LIST OF INDEXES (must be a positive integers)\n"
             + "Example: " + COMMAND_WORD
