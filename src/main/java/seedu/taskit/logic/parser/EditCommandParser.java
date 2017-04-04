@@ -1,6 +1,6 @@
 package seedu.taskit.logic.parser;
 
-//@author A0141872E
+//@@author A0141872E
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_END;
 import static seedu.taskit.logic.parser.CliSyntax.FIELDWORD_PRIORITY;
@@ -53,7 +53,7 @@ public class EditCommandParser {
             String fieldWordName = fieldWord.get();
             if (FIELDWORD_TITLE.equals(fieldWordName)) {
                 if(!Title.isValidTitle(updateInformation.get())) {
-                    return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
+                   return new IncorrectCommand(Title.MESSAGE_TITLE_CONSTRAINTS);
                 }
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(updateInformation));
             }

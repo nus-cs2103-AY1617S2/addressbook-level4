@@ -1,5 +1,6 @@
+/** @author A0141872E */
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#9ad3de, 20%);
 }
 
 .label {
@@ -18,8 +19,8 @@
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-family: "Lato";
+    -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
@@ -76,14 +77,14 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent #9ad3de transparent #9ad3de;
+    -fx-background-color: transparent, derive(#9ad3de, 10%);
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#9ad3de, 20%);
 }
 
 .list-cell {
@@ -111,14 +112,14 @@
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#9ad3de, 20%);
+     -fx-border-color: derive(#9ad3de, 10%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-text-fill: black;
+    -fx-background-color: derive(#9ad3de, 20%);
+    -fx-text-fill: derive(#9ad3de, 20%);
 }
 
 .result-display {
@@ -130,31 +131,32 @@
 }
 
 .status-bar .label {
-    -fx-text-fill: white;
+	-fx-font-family: "Lato";
+    -fx-text-fill: black;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#9ad3de, 30%);
+    -fx-border-color: derive(#9ad3de, 25%);
     -fx-border-width: 1px;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#9ad3de, 30%);
+    -fx-border-color: derive(#9ad3de, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#9ad3de, 30%);
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#9ad3de, 50%);
 }
 
 .context-menu .label {
@@ -162,13 +164,13 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#9ad3de, 20%);
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-family: "Lato";
+    -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
 
@@ -272,12 +274,19 @@
     -fx-padding: 8 1 8 1;
 }
 
+.card.done .text {
+	-fx-strikethrough: true;
+    -fx-fill: #c9c9c9;
+}
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;
     -fx-border-width: 1 1 1 1;
 }
 
+#menuBarCardPane {
+	-fx-background-color: transparent;
+}
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
@@ -307,4 +316,35 @@
 
 #margin {
 	-fx-padding: 5px;
+}
+	
+/* Styles for menuBarView*/
+#menuBarView .list-cell {
+	-fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 10;
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: derive(#9ad3de, 20%);
+}
+
+#menuBarView .list-cell .label {
+    -fx-font-size: 20px;
+    -fx-font-family: "Lato";
+    -fx-text-fill: #1d1d1d, 80%;
+    -fx-opacity: 1;
+    -fx-text-alignment: center;
+}
+
+#menuBarView .list-cell:filled:selected:focused, #menuBarView .list-cell:filled:selected {
+    -fx-background-color: derive(#89bdd3, 20%);
+    -fx-text-fill: black;
+    -fx-border-radius: 0.5;
+    -fx-border-width: 1,1,1,1;
+    -fx-border-color: #c9c9c9;
+}
+
+#menuBarView .list-cell:filled {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0.5;
+    -fx-border-width: 1,1,1,1;
+    -fx-border-color: #c9c9c9;
 }

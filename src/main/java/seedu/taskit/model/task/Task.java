@@ -23,6 +23,14 @@ public class Task implements ReadOnlyTask{
 
     /**
      * Constructor for tasks
+<<<<<<< HEAD
+=======
+     * @param title
+     * @param start
+     * @param end
+     * @param priority
+     * @param tags
+>>>>>>> GUI_new
      * @throws IllegalValueException
      */
     public Task(Title title, Date start, Date end, Priority priority, UniqueTagList tags) throws IllegalValueException {
@@ -169,24 +177,24 @@ public class Task implements ReadOnlyTask{
         return isDone;
     }
 
-    public void setDone(Boolean status) {
-        this.isDone = status;
+    public void setDone(String status) {
+        if(status.equals("done")) {
+            isDone = true;
+        } else {
+            isDone = false;
+        }
     }
 
     public void setOverdue() {
-        this.isOverdue=checkOverdue();
+        this.isOverdue = checkOverdue();
     }
 
     @Override
     public Boolean isOverdue() {
-        return isOverdue;
+        return checkOverdue();
     }
 
     private boolean checkOverdue() {
-        if (this.end.isEndTimePassCurrentTime()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.end.isEndTimePassCurrentTime();
     }//@@author
 }

@@ -15,6 +15,7 @@ import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
 import seedu.taskit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskit.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskit.commons.util.StringUtil;
@@ -26,7 +27,7 @@ import seedu.taskit.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/taskit_icon.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;
@@ -121,6 +122,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    }
+    
+    //@@author A0141872E
+    @Subscribe
+    private void handleMenuBarPanelSelectionChangedEvent(MenuBarPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getCommandBox().handleMenuBarSelectionChanged(event.getNewSelection());
     }
 
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import seedu.taskit.commons.core.Messages;
 import seedu.taskit.testutil.TestTask;
 
+//@@author A0141872E
 public class FindCommandTest extends AddressBookGuiTest {
 
     @Test

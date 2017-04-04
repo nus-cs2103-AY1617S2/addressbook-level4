@@ -10,11 +10,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import seedu.taskit.ui.MenuBarPanel;
 import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.GuiSettings;
 import seedu.taskit.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskit.commons.util.FxViewUtil;
 import seedu.taskit.logic.Logic;
+import seedu.taskit.model.Model;
 import seedu.taskit.model.UserPrefs;
 import seedu.taskit.model.task.ReadOnlyTask;
 
@@ -24,7 +26,7 @@ import seedu.taskit.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/taskit_icon.png";
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
@@ -35,10 +37,9 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private MenuBarPanel menuBarPanel;
+    private CommandBox commandBox;
     private Config config;
-
-    //@FXML
-    //private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -54,6 +55,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+    
+    @FXML
+    private AnchorPane menuBarPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -112,13 +116,14 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0141872E
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
-    }
+        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
+        menuBarPanel = new MenuBarPanel(getMenuBarPlaceholder());
+    }//@@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
@@ -134,6 +139,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+    
+    private AnchorPane getMenuBarPlaceholder() {
+        return menuBarPanelPlaceholder;
     }
 
     void hide() {
@@ -197,5 +206,14 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+    
+    //@@author A0141872E
+    public MenuBarPanel getMenuBarPanel() {
+        return this.menuBarPanel;
+    }
+    
+    public CommandBox getCommandBox() {
+        return this.commandBox;
     }
 }

@@ -212,7 +212,6 @@ public class LogicManagerTest {
     public void execute_add_invalidPriorities() {
         assertCommandFailure("add task priority blah", MESSAGE_INVALID_PRIORITY);
         assertCommandFailure("add task priority xyz", MESSAGE_INVALID_PRIORITY);
-
     }
 
     // @@author
