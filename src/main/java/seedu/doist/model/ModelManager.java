@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-
 import javafx.collections.transformation.FilteredList;
 import seedu.doist.commons.core.ComponentManager;
 import seedu.doist.commons.core.Config;
@@ -33,10 +31,12 @@ import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskFinishedStatusComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskPriorityComparator;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskTimingComparator;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyFinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskAlreadyUnfinishedException;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.doist.model.util.StringMatchUtil;
 
 /**
  * Represents the in-memory model of the to-do list data.
@@ -50,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final History<TodoList> todoListHistory = new History<TodoList>();
     private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final double threshold = 0.8;
 
     //@@author A0140887W
     /**
@@ -264,7 +265,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredTaskList(String keywords) {
         Qualifier[] qualifiers = {new DescriptionQualifier(keywords)};
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
@@ -321,28 +322,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class DescriptionQualifier implements Qualifier {
-        private Set<String> descriptionKeyWords;
+        private String description;
 
-        DescriptionQualifier(Set<String> descKeyWords) {
-            this.descriptionKeyWords = descKeyWords;
+        DescriptionQualifier(String descKeyWords) {
+            this.description = descKeyWords;
         }
 
         //@@author A0147620L
         @Override
         public boolean run(ReadOnlyTask task) {
-            return descriptionKeyWords.stream()
-                    .filter(keyword -> ((Double.compare(org.apache.commons.lang3.StringUtils.
-                            getJaroWinklerDistance(task.getDescription().desc, keyword), 0.90) >= 0)
-                            || (StringUtils.containsIgnoreCase(task.getDescription().desc, keyword))))
-                    .findAny()
-                    .isPresent();
+            return StringMatchUtil.isNearMatch(task.getDescription().toString(), description, threshold);
         }
 
         @Override
         public String toString() {
-            return "desc=" + String.join(", ", descriptionKeyWords);
+            return "desc=" + String.join(", ", description);
         }
     }
+
 
     private class TagQualifier implements Qualifier {
         private UniqueTagList tags;
@@ -384,7 +381,13 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
-
+   /* 
+    private class DateTypeQualifier implements Qualifier {
+        private TaskDate dates;
+        
+        public 
+    }
+*/
     //========== handle undo and re-do operation =================================================
     public void saveCurrentToHistory() {
         todoListHistory.forgetStatesAfter();

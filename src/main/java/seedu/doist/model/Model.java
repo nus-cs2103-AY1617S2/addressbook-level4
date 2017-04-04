@@ -56,7 +56,7 @@ public interface Model {
     void updateFilteredListToShowDefault();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(String keywords);
 
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
