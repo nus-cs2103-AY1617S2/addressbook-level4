@@ -46,7 +46,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
-    // @@author A0144315N
+    // @@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
