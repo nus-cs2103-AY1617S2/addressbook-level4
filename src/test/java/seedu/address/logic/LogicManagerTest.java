@@ -423,7 +423,7 @@ public class LogicManagerTest {
 
         Task task1() throws Exception {
             TaskName taskName = new TaskName("Task 1");
-            Deadline deadline = new Deadline("01-Jan-2017");
+            Deadline deadline = new Deadline("01-Jan-2017 @ 10:00:00");
             PriorityLevel priorityLevel = new PriorityLevel("1");
             Information information = new Information("Information 1");
             Tag tag1 = new Tag("tag1");
