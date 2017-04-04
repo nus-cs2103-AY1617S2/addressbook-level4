@@ -102,8 +102,14 @@
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
+    -fx-font-size: 16px;
     -fx-text-fill: #010504;
+}
+.cell_small_label_priority {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #010504;
+    -fx-font-style: italic;
 }
 
 .anchor-pane {
@@ -317,15 +323,16 @@
 }
 
 .list-cell { /* <=== changed to even */
-	-fx-padding: 10px ;
+	-fx-padding: 10 10 0 0;
     -fx-background-color: transparent;
 }
 
 .list-cell:filled:selected:focused {
+	-fx-padding: 10 10 10 0;
     -fx-background-color: #b7b7b7;
     -fx-blend-mode: hard-light;
     -fx-text-fill: white;
-    -fx-background-insets: 10px, 10px;
+    -fx-background-insets: 10px 25px 10px 0px;
 }
 
 

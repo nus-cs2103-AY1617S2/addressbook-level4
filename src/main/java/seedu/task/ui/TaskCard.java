@@ -56,7 +56,13 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initOverdueTag() {
-        overdueTag.setStyle("-fx-background-color: #d12b2b;");
+        Label overdueLabel = new Label("GG");
+        overdueLabel.setStyle("-fx-text-fill: black;"
+                + "-fx-background-color: white;"
+                + "-fx-font-family: Arial;"
+                + "-fx-font-weight: bold;"
+        );
+        overdueTag.getChildren().add(overdueLabel);
     }
 
     private void initEventTag() {
