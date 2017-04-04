@@ -34,8 +34,6 @@ public class HistoryManager extends ComponentManager {
         futureList = new ArrayList<ReadOnlyTaskManager>();
         historyCommands = new ArrayList<String>();
         futureCommands = new ArrayList<String>();
-        TaskManager taskManager = new TaskManager(model.getTaskManager());
-        historyList.add(taskManager);
     }
 
     public static HistoryManager getInstance() {
@@ -47,6 +45,8 @@ public class HistoryManager extends ComponentManager {
 
     public void init(Model model) {
         this.model = model;
+        TaskManager taskManager = new TaskManager(model.getTaskManager());
+        historyList.add(taskManager);
     }
 
     @Subscribe
