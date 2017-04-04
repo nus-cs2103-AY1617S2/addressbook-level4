@@ -2,9 +2,9 @@ package seedu.task.model.task;
 
 import java.util.function.Predicate;
 
-import seedu.task.testutil.TaskBuilder;
+//import seedu.task.testutil.TaskBuilder;
 
-public class TaskStatusPredicate implements Predicate {
+public class TaskStatusPredicate implements Predicate<Object> {
     //@@author A0163845X
 
 	private String status;

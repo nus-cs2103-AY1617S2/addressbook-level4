@@ -21,4 +21,8 @@
         <taskName>three</taskName>
         <taskStatus>Completed</taskStatus>
     </tasks>
+    <tasks>
+        <taskName>a</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
 </taskmanager>
