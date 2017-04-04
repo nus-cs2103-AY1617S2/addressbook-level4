@@ -50,6 +50,10 @@ public class TodoCard extends UiPart<Region> {
             complete.setText("Not Complete");
             complete.setStyle("-fx-text-fill: #e20000;");
         }
+        // If todo is complete, grey out the background
+        if (todo.getCompleteTime() != null) {
+            cardPane.setStyle("-fx-background-color: #c3cbcd");
+        }
         initTags(todo);
     }
 
