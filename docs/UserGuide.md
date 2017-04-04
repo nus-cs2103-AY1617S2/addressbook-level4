@@ -20,7 +20,7 @@ By : `Miao Ling` , `Ian` , `Qi Xiang` and `Dylan` - `[W09-B4]` Since : `Feb 2017
 > 3.10. [Redo-ing previous action](#310-redo-ing-previous-action-redo)<br>
 > 3.11. [Get previous command](#311-get-previous-command-)<br>
 > 3.12. [Get next command](#312-get-next-command-)<br>
-> 3.13. [Saving the task manager](#313-saving-the-task-manager)<br>
+> 3.13. [Saving the task manager](#313-saving-the-task-manager-save)<br>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -187,7 +187,6 @@ Example:
 ### 3.8. Searching for tasks: `find`
 
 Searches for tasks based on keywords that you want.<br>
-
 Format: `find KEYWORD`
 > No special characters such as ASCII whitespace is allowed.<br>
 > A popout will appear to show you the list of tasks that contains the stated `KEYWORD`.
@@ -220,15 +219,23 @@ Retrieve the next command entered, and replaces your text field with the next co
 Format: Down arrow key
 > You can retrieve later commands from your use session by pressing <kbd>↓</kbd> again and again.
 
-### 3.13. Saving the task manager
+### 3.13. Saving the task manager: `save`
 
-Upon creation of tasks, the tasks will be automatically saved in the folder where the program is stored in.
+Saves the task manager data to the .xml file specified by you.<br>
+Format: `save PATH_TO_FILE/FILE_NAME.xml`
+> Your file name must have the extension `.xml`.<br>
+> Upon creating/deleting/editing a task, the task data will be automatically saved to the file specified by you.<br>
+> If you did not specify a path, the default path is `data/taskManager.xml`.<br>
 > Do not erase the saved data as it will result in a complete loss of data that cannot be recovered by the application itself.
+
+Examples:
+* `save data/myTasks.xml`
+* `save C:\Users\yourName\Documents\todo.xml`
 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.extension> that contains the data of your current doTASK manager.
+**A**: Install the application in the other computer and overwrite the empty data file with the file <file_name.xml> that contains the data of your current doTASK manager.
 
 **Q**: Will I get reminded if the deadlines of tasks are nearing?<br>
 **A**: For tasks that are due in 24 hours, there will be a notification in the system tray reminding you of the task.
@@ -279,3 +286,5 @@ Upon creation of tasks, the tasks will be automatically saved in the folder wher
 * **Get previous command** : <kbd>↑</kbd><br>
 
 * **Get next command** : <kbd>↓</kbd><br>
+
+* **Save data to file** : `save PATH_TO_FILE/FILE_NAME.xml`<br>
