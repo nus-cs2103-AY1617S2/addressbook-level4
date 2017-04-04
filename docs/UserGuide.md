@@ -8,22 +8,22 @@ By : `TEAM W09-B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
    > 3.1. [Add tasks](#31-adding-a-task--add)<br/>
      3.2. [Delete tasks](#32-deleting-a-task--delete)<br/>
      3.3. [Edit tasks](#33-editing-a-task--edit)<br/>
-     3.4. [Find tasks](#34-finding-all-tasks-containing-any-keyword-in-their-title--find)<br/>
+     3.4. [Find tasks](#34-finding-a-specific-task--find)<br/>
      3.5. [List tasks](#35-listing-all-tasks--list)<br/>
      3.6. [Select tasks](#36-selecting-a-task--select)<br/>
      3.7. [Mark tasks as complete](#37-marking-a-task-as-complete--complete)<br/>
      3.8. [Mark tasks as incomplete](#38-marking-a-task-as-incomplete--incomplete)<br/>
      3.9. [Undo](#39-undo-the-previous-command--undo)<br/>
      3.10. [Redo](#310-redo-a-command--redo)<br/>
-     3.11. [Revert](#311-revert-a-command--redo)<br/>
-     3.12. [Unrevert](#312-unrevert-a-command--redo)<br/>
-     3.13. [Specifying the data storage location](#39-use--use)<br/>
-     3.14. [Import as Google Calender file](#314-importing-files-into-the-program--import)<br/>
-     3.15. [Export as Google Calender file](#315-exporting-files-from-the-program--export)<br/>
+     3.11. [Revert](#311-revert--revert)<br/>
+     3.12. [Unrevert](#312-unrevert--unrevert)<br/>
+     3.13. [Specifying the data storage location](#313-specifying-the-data-storage-location--use)<br/>
+     3.14. [Import as Google Calendar file](#314-import-as-google-calendar-file--import)<br/>
+     3.15. [Export as Google Calendar file](#315-export-as-google-calendar-file--export)<br/>
      3.16. [Save](#316-saving-the-data)<br/>
-     3.17. [Reset](#312-clearing-all-tasks--reset)<br/>
-     3.18. [Help](#31-viewing-help--help)<br/>
-     3.19. [Exit](#313-exiting-the-program--exit)<br/>
+     3.17. [Reset](#317-resetting-burdens--reset)<br/>
+     3.18. [Help](#318-viewing-help--help)<br/>
+     3.19. [Exit](#319-exiting-the-program--exit)<br/>
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -408,7 +408,7 @@ Note:
 
 * A valid file path must be provided.
 
-### 3.14. Import as Google Calender file
+### 3.14. Import as Google Calender file : `import`
 
 Want to import a Google Calendar file into Burdens?
 
@@ -423,7 +423,7 @@ Note:
 * A valid file must be provided.
 * The file name is casel-sensitive.
 
-### 3.15. Export as Google Calendar file
+### 3.15. Export as Google Calendar file : `export`
 
 Want to export Burden's task as a Google Calendar file?
 
