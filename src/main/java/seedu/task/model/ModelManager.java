@@ -263,7 +263,8 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return totalKeyWords.stream()
                     .filter(keyword -> result.validLevenshteinDistance(task.getTaskName().taskName, keyword)
-                            || result.validLevenshteinDistance(task.getInfo().value, keyword))
+                            || result.validLevenshteinDistance(task.getInfo().value, keyword)
+                            || result.validLevenshteinDistance(task.getDate().value, keyword))
                     .findAny()
                     .isPresent();
         }
