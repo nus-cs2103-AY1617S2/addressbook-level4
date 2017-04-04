@@ -207,6 +207,7 @@ There is no need to save manually.
 ### 2.13 Setting the data save location : `savefile`
 
 Sets the save file location containing todo data.<br>
+If the file does not exist, the application will create the file in the file path automatically.<br>
 Format: `savefile PATH_TO_FILE`
 
 > Changes the file save location to specified `PATH_TO_FILE`. <br>
