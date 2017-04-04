@@ -2,12 +2,13 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
-import seedu.toluist.model.CommandHistoryList;
+import seedu.toluist.dispatcher.CommandHistoryList;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -32,16 +33,12 @@ public class HistoryController extends Controller {
         this.commandHistoryList = commandHistoryList;
     }
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
         ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         String result = String.join("\n", commandHistory);
         uiStore.setCommandResult(new CommandResult(String.format(
                 RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
-    }
-
-    public HashMap<String, String> tokenize(String command) {
-        return null; // not used
     }
 
     public boolean matchesCommand(String command) {

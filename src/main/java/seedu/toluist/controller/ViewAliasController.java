@@ -2,12 +2,12 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -30,12 +30,12 @@ public class ViewAliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         uiStore.setCommandResult(new CommandResult(getAliasCommandResult(aliasMapping)));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    public Map<String, String> tokenize(String command) {
         return null; // not used
     }
 

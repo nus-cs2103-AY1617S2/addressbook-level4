@@ -2,11 +2,13 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.SwitchConfig;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
@@ -42,27 +44,20 @@ public class SwitchController extends Controller {
                                                     "`ctrl + N`\nSwitches the screen to the `Next 7 Days` window." };
 
     //@@author A0131125Y
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String keyword = tokens.get(PARAMETER_TAB);
 
-        if (keyword == null) {
-            uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE_NO_TAB));
-            return;
-        }
+        validateNoTab(keyword);
+        validateInvalidTab(keyword);
 
-        Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
+        switchTab(keyword);
+    }
 
-        if (!switchPredicateOptional.isPresent()) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword)));
-            return;
-        }
-
+    private void switchTab(String keyword) {
+        TaskSwitchPredicate switchPredicate = switchConfig.getPredicate(keyword).get();
         String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()
                 ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
                 : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
-        TaskSwitchPredicate switchPredicate = switchPredicateOptional.get();
         UiStore.getInstance().setObservableSwitchPredicate(switchPredicate);
 
         uiStore.setCommandResult(new CommandResult(String.format(
@@ -72,7 +67,21 @@ public class SwitchController extends Controller {
                 UiStore.getInstance().getTasks().size())));
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    private void validateInvalidTab(String keyword) throws InvalidCommandException {
+        Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
+
+        if (!switchPredicateOptional.isPresent()) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
+        }
+    }
+
+    private void validateNoTab(String keyword) throws InvalidCommandException {
+        if (keyword == null) {
+            throw new InvalidCommandException(RESULT_MESSAGE_NO_TAB);
+        }
+    }
+
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

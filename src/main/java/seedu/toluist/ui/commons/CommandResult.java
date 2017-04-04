@@ -6,14 +6,30 @@ package seedu.toluist.ui.commons;
  */
 public class CommandResult {
 
+    public enum CommandResultType {
+        SUCCESS, FAILURE
+    }
+
     private final String feedbackToUser;
+    private final CommandResultType type;
 
     public CommandResult(String feedbackToUser) {
         assert feedbackToUser != null;
         this.feedbackToUser = feedbackToUser;
+        this.type = CommandResultType.SUCCESS;
+    }
+
+    public CommandResult(String feedbackToUser, CommandResultType type) {
+        assert feedbackToUser != null;
+        this.feedbackToUser = feedbackToUser;
+        this.type = type;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public CommandResultType getCommandResultType() {
+        return type;
     }
 }

@@ -2,10 +2,11 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -24,7 +25,7 @@ public class ClearController extends Controller {
                                                         + "not just on the current task window.",
                                                     "The `undo` command can undo this action." };
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
@@ -33,10 +34,6 @@ public class ClearController extends Controller {
 
         uiStore.setTasks(todoList.getTasks());
         uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE));
-    }
-
-    public HashMap<String, String> tokenize(String command) {
-        return null; // not used
     }
 
     public boolean matchesCommand(String command) {

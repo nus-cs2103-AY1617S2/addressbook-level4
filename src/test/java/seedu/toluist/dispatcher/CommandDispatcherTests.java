@@ -39,68 +39,85 @@ public class CommandDispatcherTests {
     }
 
     @Test
-    public void getPredictedCommand_emptyCommand() {
-        assertEquals(dispatcher.getPredictedCommands(""), new TreeSet<>());
+    public void getSuggestions_emptyCommand() {
+        assertEquals(dispatcher.getSuggestions(""), new TreeSet<>());
     }
 
     @Test
-    public void getPredictedCommand_partialCommandWord() {
+    public void getSuggestions_partialCommandWord() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("mark");
         expected.add("mark incomplete");
-        assertEquals(dispatcher.getPredictedCommands("m"), expected);
+        assertEquals(dispatcher.getSuggestions("m"), expected);
 
         SortedSet<String> expected2 = new TreeSet<>();
         expected2.add("add");
         expected2.add("alias");
-        assertEquals(dispatcher.getPredictedCommands("a"), expected2);
+        assertEquals(dispatcher.getSuggestions("a"), expected2);
     }
 
     @Test
-    public void getPredictedCommand_fullCommandWord() {
+    public void getSuggestions_fullCommandWord() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("add");
 
-        assertEquals(dispatcher.getPredictedCommands("add"), expected);
+        assertEquals(dispatcher.getSuggestions("add"), expected);
     }
 
     @Test
-    public void getPredictedCommand_fullCommand() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("add a task");
-
-        assertEquals(dispatcher.getPredictedCommands("add a task"), expected);
-    }
-
-    @Test
-    public void getPredictedCommand_caseInsensitive() {
+    public void getSuggestions_caseInsensitiveCommandWord() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("add");
         expected.add("alias");
-        assertEquals(dispatcher.getPredictedCommands("A"), expected);
+        assertEquals(dispatcher.getSuggestions("A"), expected);
     }
 
     @Test
-    public void getPredictedCommand_withWhiteSpaces() {
+    public void getSuggestions_commandWordWithWhiteSpaces() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("add");
         expected.add("alias");
-        assertEquals(dispatcher.getPredictedCommands(" a"), expected);
+        assertEquals(dispatcher.getSuggestions(" a"), expected);
     }
 
     @Test
-    public void getPredictedCommand_alias() {
+    public void getSuggestions_commandWordAlias() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("mark incomplete");
 
-        assertEquals(dispatcher.getPredictedCommands("mi"), expected);
+        assertEquals(dispatcher.getSuggestions("mi"), expected);
     }
 
     @Test
-    public void getPredictedCommand_aliasCaseInsensitive() {
+    public void getPredictedCommand_commandWordAliasCaseInsensitive() {
         SortedSet<String> expected = new TreeSet<>();
         expected.add("mark incomplete");
 
-        assertEquals(dispatcher.getPredictedCommands("MI"), expected);
+        assertEquals(dispatcher.getSuggestions("MI"), expected);
+    }
+
+    @Test
+    public void getSuggestions_suggestKeywords() {
+        SortedSet<String> expected = new TreeSet<>();
+        expected.add("/by");
+        expected.add("/from");
+        expected.add("/to");
+        expected.add("/repeat");
+        expected.add("/repeatuntil");
+        expected.add("/tags");
+        expected.add("/priority");
+
+        assertEquals(dispatcher.getSuggestions("add "), expected);
+        assertEquals(dispatcher.getSuggestions("add a task /"), expected);
+
+        expected.remove("/tags");
+        assertEquals(dispatcher.getSuggestions("add task /tags "), expected);
+    }
+
+    @Test
+    public void getSuggestions_invalidKeywords() {
+        SortedSet<String> expected = new TreeSet<>();
+
+        assertEquals(dispatcher.getSuggestions("help asdfasdfsadfaf"), expected);
     }
 }

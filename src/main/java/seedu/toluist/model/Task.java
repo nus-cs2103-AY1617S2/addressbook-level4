@@ -14,8 +14,8 @@ import seedu.toluist.commons.util.StringUtil;
  * Represents a Task
  */
 public class Task implements Comparable<Task>, Cloneable {
-    private static final String HIGH_PRIORITY_STRING = "high";
-    private static final String LOW_PRIORITY_STRING = "low";
+    public static final String HIGH_PRIORITY_STRING = "high";
+    public static final String LOW_PRIORITY_STRING = "low";
     private static final String ERROR_VALIDATION_EMPTY_DESCRIPTION = "Description must not be empty.";
     private static final String ERROR_VALIDATION_START_DATE_AFTER_END_DATE = "Start date must be before end date.";
     private static final String ERROR_VALIDATION_UNCLASSIFIED_TASK = "Task cannot contain only start date.";

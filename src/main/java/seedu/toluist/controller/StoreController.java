@@ -3,6 +3,7 @@ package seedu.toluist.controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.core.Messages;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.commons.CommandResult;
@@ -44,38 +46,44 @@ public class StoreController extends Controller {
 
 
     //@@author A0131125Y
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
-        HashMap<String, String> tokens = tokenize(command);
         String path = tokens.get(PARAMETER_STORE_DIRECTORY);
 
-        if (path == null) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_NO_STORAGE_PATH));
-            return;
-        }
+        validateNoStoragePath(path);
+        validateSameStorageLocationPath(path);
 
-        Config config = Config.getInstance();
-        if (config.getTodoListFilePath().equals(path)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path)));
-            return;
-        }
+        save(path);
+    }
 
+    private void save(String path) throws InvalidCommandException {
         String message = "";
         if (FileUtil.isFileExists(new File(path))) {
             message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + "\n";
         }
 
         if (TodoList.getInstance().getStorage().move(path)) {
-            message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, config.getTodoListFilePath());
+            message += String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS,
+                    Config.getInstance().getTodoListFilePath());
             uiStore.setCommandResult(new CommandResult(message));
         } else {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path)));
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_SET_STORAGE_FAILURE, path));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    private void validateSameStorageLocationPath(String path) throws InvalidCommandException {
+        if (Config.getInstance().getTodoListFilePath().equals(path)) {
+            throw new InvalidCommandException(String.format(Messages.MESSAGE_STORAGE_SAME_LOCATION, path));
+        }
+    }
+
+    private void validateNoStoragePath(String path) throws InvalidCommandException {
+        if (path == null) {
+            throw new InvalidCommandException(Messages.MESSAGE_NO_STORAGE_PATH);
+        }
+    }
+
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

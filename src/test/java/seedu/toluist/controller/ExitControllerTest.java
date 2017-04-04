@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class ExitControllerTest extends ControllerTest {
 
     @Test
     public void tokenize() {
-        assertEquals(null, controller.tokenize("exit"));
-        assertEquals(null, controller.tokenize("quit "));
+        assertEquals(new HashMap<>(), controller.tokenize("exit"));
+        assertEquals(new HashMap<>(), controller.tokenize("quit "));
     }
 }

@@ -3,12 +3,14 @@ package seedu.toluist.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
 
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
@@ -22,12 +24,10 @@ public class FindController extends Controller {
     private static final String COMMAND_WORD_FILTER = "filter";
     private static final String COMMAND_WORD_LIST = "list";
 
-    private static final String PARAMETER_TAG = "tag/";
-    private static final String PARAMETER_NAME = "name/";
+    private static final String PARAMETER_TAG = "/tag";
+    private static final String PARAMETER_NAME = "/name";
     private static final String PARAMETER_NULL = "";
-    private static final String PARAMETER_TRUE = "true";
-    private static final String PARAMETER_FALSE = "false";
-    private static final String PARAMETER_KEYWORDS = "keywords";
+    public static final String PARAMETER_KEYWORDS = "keywords";
 
     private static final int NUMBER_OF_SPLITS_FOR_COMMAND_PARSE = 2;
     private static final String COMMAND_SPLITTER_REGEX = " ";
@@ -56,13 +56,12 @@ public class FindController extends Controller {
 
     private static final Logger logger = LogsCenter.getLogger(FindController.class);
 
-    public void execute(String command) {
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
 
         // initialize keywords and variables for searching
-        HashMap<String, String> tokens = tokenize(command);
-        boolean isSearchByTag = tokens.get(PARAMETER_TAG).equals(PARAMETER_TRUE);
-        boolean isSearchByName = tokens.get(PARAMETER_NAME).equals(PARAMETER_TRUE);
+        boolean isSearchByTag = tokens.get(PARAMETER_NAME) == null;
+        boolean isSearchByName = tokens.get(PARAMETER_TAG) == null;
         String[] keywordList = StringUtil.convertToArray(tokens.get(PARAMETER_KEYWORDS));
 
         Predicate<Task> taskPredicate = task ->
@@ -102,24 +101,8 @@ public class FindController extends Controller {
                 + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
     }
 
-    public HashMap<String, String> tokenize(String command) {
-        HashMap<String, String> tokens = new HashMap<>();
-
-        // search by tag
-        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)
-            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)) {
-            tokens.put(PARAMETER_TAG, PARAMETER_TRUE);
-        } else {
-            tokens.put(PARAMETER_TAG, PARAMETER_FALSE);
-        }
-
-        // search by name
-        if (StringUtil.containsWordIgnoreCase(command, PARAMETER_NAME)
-            || !StringUtil.containsWordIgnoreCase(command, PARAMETER_TAG)) {
-            tokens.put(PARAMETER_NAME, PARAMETER_TRUE);
-        } else {
-            tokens.put(PARAMETER_NAME, PARAMETER_FALSE);
-        }
+    public Map<String, String> tokenize(String command) {
+        Map<String, String> tokens = super.tokenize(command);
 
         // keyword for matching
         String keywords = Pattern.compile(PARAMETER_TAG, Pattern.CASE_INSENSITIVE).matcher(command)
@@ -143,6 +126,15 @@ public class FindController extends Controller {
 
     public String[] getCommandWords() {
         return new String[] { COMMAND_WORD_FILTER, COMMAND_WORD_FIND, COMMAND_WORD_LIST };
+    }
+
+    public Map<String, String[]> getCommandKeywordMap() {
+        String[] keywords = new String[] { PARAMETER_NAME, PARAMETER_TAG };
+        HashMap<String, String[]> keywordMap = new HashMap<>();
+        for (String keyword : keywords) {
+            keywordMap.put(keyword, new String[0]);
+        }
+        return keywordMap;
     }
 
     public String[] getBasicHelp() {

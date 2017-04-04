@@ -29,17 +29,14 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String taskDescription = "build a rocket";
         String addCommand = "add " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
 
         String undoCommand = "undo";
-        commandBox.runCommand(undoCommand);
-        assertFalse(isTaskShown(task));
+        runCommandThenCheckForTasks(undoCommand, new Task[0], new Task[] { task });
         assertFalse(TodoList.getInstance().getTasks().contains(task));
 
         String redoCommand = "redo";
-        commandBox.runCommand(redoCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(redoCommand, new Task[] { task }, new Task[0]);
         assertTrue(TodoList.getInstance().getTasks().contains(task));
     }
 
@@ -48,25 +45,19 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String taskDescription = "build a rocket";
         String addCommand = "add " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
 
         String taskDescription2 = "ride a unicorn";
         String addCommand2 = "add " + taskDescription2;
         Task task2 = new Task(taskDescription2);
-        commandBox.runCommand(addCommand2);
-        assertTrue(isTaskShown(task2));
+        runCommandThenCheckForTasks(addCommand2, new Task[] { task2 }, new Task[0]);
 
         String undoCommand = "undo 2";
-        commandBox.runCommand(undoCommand);
-        assertFalse(isTaskShown(task));
-        assertFalse(isTaskShown(task2));
+        runCommandThenCheckForTasks(undoCommand, new Task[0], new Task[] { task, task2 });
         assertFalse(TodoList.getInstance().getTasks().contains(task));
 
         String redoCommand = "redo 2";
-        commandBox.runCommand(redoCommand);
-        assertTrue(isTaskShown(task));
-        assertTrue(isTaskShown(task2));
+        runCommandThenCheckForTasks(redoCommand, new Task[] { task, task2 }, new Task[0]);
     }
 
     @Test
@@ -74,24 +65,20 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String taskDescription1 = "build a rocket";
         String addCommand1 = "add " + taskDescription1;
         Task task1 = new Task(taskDescription1);
-        commandBox.runCommand(addCommand1);
-        assertTrue(isTaskShown(task1));
+        runCommandThenCheckForTasks(addCommand1, new Task[] { task1 }, new Task[0]);
 
         String undoCommand = "undo";
-        commandBox.runCommand(undoCommand);
-        assertFalse(isTaskShown(task1));
+        runCommandThenCheckForTasks(undoCommand, new Task[0], new Task[] { task1 });
         assertFalse(TodoList.getInstance().getTasks().contains(task1));
 
         String taskDescription2 = "build a castle";
         String addCommand2 = "add " + taskDescription2;
         Task task2 = new Task(taskDescription2);
-        commandBox.runCommand(addCommand2);
-        assertTrue(isTaskShown(task2));
+        runCommandThenCheckForTasks(addCommand2, new Task[] { task2 }, new Task[0]);
 
         // This won't redo anything
         String redoCommand = "redo";
-        commandBox.runCommand(redoCommand);
-        assertFalse(isTaskShown(task1));
+        runCommandThenCheckForTasks(redoCommand, new Task[0], new Task[] { task1 });
         assertFalse(TodoList.getInstance().getTasks().contains(task1));
     }
 
@@ -100,12 +87,10 @@ public class RedoCommandTest extends ToLuistGuiTest {
         String taskDescription = "build a rocket";
         String addCommand = "add " + taskDescription;
         Task task = new Task(taskDescription);
-        commandBox.runCommand(addCommand);
-        assertTrue(isTaskShown(task));
+        runCommandThenCheckForTasks(addCommand, new Task[] { task }, new Task[0]);
 
         String undoCommand = "undo";
-        commandBox.runCommand(undoCommand);
-        assertFalse(isTaskShown(task));
+        runCommandThenCheckForTasks(undoCommand, new Task[0], new Task[] { task });
         assertFalse(TodoList.getInstance().getTasks().contains(task));
 
         mainGui.press(KeyCode.CONTROL, KeyCode.Y);

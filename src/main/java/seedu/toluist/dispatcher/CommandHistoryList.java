@@ -1,5 +1,5 @@
 //@@author A0162011A
-package seedu.toluist.model;
+package seedu.toluist.dispatcher;
 
 import java.util.ArrayList;
 

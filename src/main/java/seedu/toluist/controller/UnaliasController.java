@@ -2,10 +2,12 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -30,23 +32,29 @@ public class UnaliasController extends Controller {
   //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String alias = tokens.get(PARAMETER_ALIAS);
 
-        if (!aliasConfig.isAlias(alias)) {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_NOT_ALIAS, alias)));
-            return;
-        }
+        validateNoAlias(alias);
 
+        unalias(alias);
+    }
+
+    private void unalias(String alias) throws InvalidCommandException {
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
             uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
         } else {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias)));
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_FAILURE, alias));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    private void validateNoAlias(String alias) throws InvalidCommandException {
+        if (!aliasConfig.isAlias(alias)) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
+        }
+    }
+
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

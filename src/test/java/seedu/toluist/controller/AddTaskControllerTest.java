@@ -2,9 +2,11 @@
 package seedu.toluist.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.Task;
 import seedu.toluist.testutil.TypicalTestTodoLists;
 
@@ -18,10 +20,12 @@ public class AddTaskControllerTest extends ControllerTest {
     }
 
     @Test
-    public void addFloatingTask() {
+    public void addFloatingTask() throws InvalidCommandException {
         String taskDescription = "learn how to catch a pokemon";
         Task floatingTask = new Task(taskDescription);
-        controller.execute("add " + taskDescription);
+        HashMap<String, String> tokens = new HashMap<>();
+        tokens.put("description", taskDescription);
+        controller.execute(tokens);
 
         ArrayList<Task> tasksThatShouldExist = new ArrayList<>();
         for (Task task : (new TypicalTestTodoLists()).getTypicalTasks()) {

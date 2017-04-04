@@ -2,10 +2,12 @@
 package seedu.toluist.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.Config;
+import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.model.AliasTable;
 import seedu.toluist.ui.commons.CommandResult;
 
@@ -39,27 +41,30 @@ public class AliasController extends Controller {
     //@@author A0131125Y
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
-    public void execute(String command) {
-        HashMap<String, String> tokens = tokenize(command);
+    public void execute(Map<String, String> tokens) throws InvalidCommandException {
         String alias = tokens.get(PARAMETER_ALIAS);
         String commandPhrase = tokens.get(PARAMETER_COMMAND);
 
-        if (aliasConfig.isReservedWord(alias)) {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_RESERVED_WORD, alias)));
-            return;
-        }
+        validateReservedWord(alias);
+        setAlias(alias, commandPhrase);
+    }
 
+    private void setAlias(String alias, String commandPhrase) throws InvalidCommandException {
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
         } else {
-            uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
+            throw new InvalidCommandException((String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
         }
     }
 
-    public HashMap<String, String> tokenize(String command) {
+    private void validateReservedWord(String alias) throws InvalidCommandException {
+        if (aliasConfig.isReservedWord(alias)) {
+            throw new InvalidCommandException(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
+        }
+    }
+
+    public Map<String, String> tokenize(String command) {
         Pattern pattern = Pattern.compile(COMMAND_TEMPLATE);
         Matcher matcher = pattern.matcher(command.trim());
         matcher.find();

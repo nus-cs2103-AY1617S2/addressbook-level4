@@ -51,8 +51,6 @@ public class ViewAliasCommandTest extends ToLuistGuiTest {
      * @param expected expected result message
      */
     private void checkResultOfViewAlias(String expected) {
-        String command = "viewalias";
-        commandBox.runCommand(command);
-        assertResultMessage(expected);
+        runCommandThenCheckForResultMessage("viewalias", expected);
     }
 }

@@ -1,6 +1,7 @@
 //@@author A0131125Y
 package guitests;
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
@@ -124,6 +125,51 @@ public abstract class ToLuistGuiTest {
     }
 
     /**
+     * Run a command then use callback to check for result
+     * @param command command string
+     * @param callback a callback, can be lambda
+     */
+    protected void runCommandWithCallback(String command, Runnable callback) {
+        commandBox.runCommand(command);
+        callback.run();
+    }
+
+    /**
+     * Run a command then check if the tasks are shown and not shown. Also check for expect result message
+     * @param command command string
+     * @param resultMessage expected result message
+     * @param tasksShown all the tasks that should be shown
+     * @param tasksNotShown all the tasks that should not be shown
+     */
+    protected void runCommandThenCheckForTasks(String command, String resultMessage,
+                                               Task[] tasksShown, Task[] tasksNotShown) {
+        runCommandThenCheckForTasks(command, tasksShown, tasksNotShown);
+        assertResultMessage(resultMessage);
+    }
+
+    /**
+     * Run a command then check if the tasks are shown and not shown
+     * @param command command string
+     * @param tasksShown all the tasks that should be shown
+     * @param tasksNotShown all the tasks that should not be shown
+     */
+    protected void runCommandThenCheckForTasks(String command, Task[] tasksShown, Task[] tasksNotShown) {
+        commandBox.runCommand(command);
+        assertTasksShown(true, tasksShown);
+        assertTasksShown(false, tasksNotShown);
+    }
+
+    /**
+     * Run a command then check if the result message matches the expected one
+     * @param command a command
+     * @param resultMessage expected result message
+     */
+    protected void runCommandThenCheckForResultMessage(String command, String resultMessage) {
+        commandBox.runCommand(command);
+        assertResultMessage(resultMessage);
+    }
+
+    /**
      * Asserts the message shown in the Result Display area is same as the given string.
      */
     protected void assertResultMessage(String expected) {
@@ -135,6 +181,17 @@ public abstract class ToLuistGuiTest {
      */
     protected void assertTabShown(String expected) {
         assertEquals(tabBar.getHighlightedTabText(), expected);
+    }
+
+    /**
+     * Check if tasks are shown in the TaskList. Returns true only if all tasks are shown.
+     */
+    protected void assertTasksShown(boolean isShown, Task... tasks) {
+        for (Task task : tasks) {
+            if (isTaskShown(task) != isShown) {
+                fail("task should be shown/not shown");
+            }
+        }
     }
 
     /**
@@ -153,17 +210,5 @@ public abstract class ToLuistGuiTest {
                 .findFirst()
                 .isPresent();
         return taskIsPresent;
-    }
-
-    /**
-     * Check if tasks are shown in the TaskList. Returns true only if all tasks are shown.
-     */
-    protected boolean areTasksShown(Task... tasks) {
-        for (Task task : tasks) {
-            if (!isTaskShown(task)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
