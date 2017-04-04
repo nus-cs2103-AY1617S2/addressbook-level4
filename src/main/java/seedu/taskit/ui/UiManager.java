@@ -128,6 +128,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleMenuBarPanelSelectionChangedEvent(MenuBarPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getCommandBox().handleMenuBarSelectionChanged(event.getNewSelection());
     }
 
 }

@@ -18,7 +18,7 @@ public static final String COMMAND_WORD = "mark";
             + "Parameters: [done,undone]\n"
             + "Example: " + COMMAND_WORD + " done\n";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Marked Task: %1$s";
+    public static final String MESSAGE_SUCCESS_ALL = "Marked Task as %1$s";
     public static final String MESSAGE_NOT_MARKED = "Must indicate to mark as done or undone.";
     public static final String MESSAGE_DUPLICATE_MARKING = "This task is alreadly marked as %1$s";
 

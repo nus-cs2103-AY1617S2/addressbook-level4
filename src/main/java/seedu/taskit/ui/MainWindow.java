@@ -16,6 +16,7 @@ import seedu.taskit.commons.core.GuiSettings;
 import seedu.taskit.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskit.commons.util.FxViewUtil;
 import seedu.taskit.logic.Logic;
+import seedu.taskit.model.Model;
 import seedu.taskit.model.UserPrefs;
 import seedu.taskit.model.task.ReadOnlyTask;
 
@@ -37,6 +38,7 @@ public class MainWindow extends UiPart<Region> {
     //private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private MenuBarPanel menuBarPanel;
+    private CommandBox commandBox;
     private Config config;
 
     @FXML
@@ -119,7 +121,7 @@ public class MainWindow extends UiPart<Region> {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
-        new CommandBox(getCommandBoxPlaceholder(), logic);
+        commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         menuBarPanel = new MenuBarPanel(getMenuBarPlaceholder());
     }//@@author
 
@@ -209,5 +211,9 @@ public class MainWindow extends UiPart<Region> {
     //@@author A0141872E
     public MenuBarPanel getMenuBarPanel() {
         return this.menuBarPanel;
+    }
+    
+    public CommandBox getCommandBox() {
+        return this.commandBox;
     }
 }

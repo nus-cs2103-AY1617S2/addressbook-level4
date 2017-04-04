@@ -274,6 +274,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+.card.done .text {
+	-fx-strikethrough: true;
+    -fx-fill: #c9c9c9;
+}
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #d6d6d6;

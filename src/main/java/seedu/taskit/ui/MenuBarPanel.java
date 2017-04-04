@@ -13,31 +13,31 @@ import javafx.scene.layout.Region;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.events.ui.MenuBarPanelSelectionChangedEvent;
 import seedu.taskit.commons.util.FxViewUtil;
-import seedu.taskit.logic.commands.ListCommand;
 
 //@@author A0141872E
 public class MenuBarPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(MenuBarPanel.class);
     private static final String FXML = "MenuBarPanel.fxml";
     
-    private String command = null;
-    private static final String MENU_FLOATING_TASK = "Floating Tasks";
-    private static final String MENU_EVENT_TASK = "Event Tasks";
-    private static final String MENU_DEADLINE_TASK = "Deadline Tasks";
-    private static final String MENU_TODAY_TASK = "Today Tasks";
+    public static final String MENU_FLOATING_TASK = "Floating Tasks";
+    public static final String MENU_EVENT_TASK = "Event Tasks";
+    public static final String MENU_DEADLINE_TASK = "Deadline Tasks";
+    public static final String MENU_TODAY_TASK = "Today Tasks";
+    public static final String MENU_OVERDUE_TASK = "Overdue Tasks";
     
     private static final String FLOATING_TASK_ICON_PATH = "/images/floatingtask_icon.png";
     private static final String EVENT_TASK_ICON_PATH = "/images/event_icon.png";
     private static final String DEADLINE_TASK_ICON_PATH = "/images/deadline_icon.png";
     private static final String TODAY_TASK_ICON_PATH = "/images/today_icon.png";
+    private static final String TODAY_OVERDUE_ICON_PATH = "/images/overdue_icon.png";
     
     @FXML
     private ListView<String> menuBarView;
     
     private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_FLOATING_TASK, 
-            MENU_EVENT_TASK, MENU_DEADLINE_TASK, MENU_TODAY_TASK);
+            MENU_EVENT_TASK, MENU_DEADLINE_TASK, MENU_TODAY_TASK,MENU_OVERDUE_TASK);
     private final String[] iconPaths = {FLOATING_TASK_ICON_PATH,EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH,
-            TODAY_TASK_ICON_PATH};
+            TODAY_TASK_ICON_PATH,TODAY_OVERDUE_ICON_PATH};
 
     public MenuBarPanel(AnchorPane menuBarPanelPlaceholder) {
         super(FXML);
@@ -65,10 +65,6 @@ public class MenuBarPanel extends UiPart<Region> {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
-    }
-    
-    public String getNavigationCommand(String parameter) {
-        return ListCommand.COMMAND_WORD +" "+ parameter;
     }
     
     class MenuBarCell extends ListCell<String> {

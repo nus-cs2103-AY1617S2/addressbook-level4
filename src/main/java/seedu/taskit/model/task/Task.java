@@ -175,7 +175,11 @@ public class Task implements ReadOnlyTask{
     }
 
     public void setDone(String status) {
-        status.equals("done");
+        if(status.equals("done")) {
+            isDone = true;
+        } else {
+            isDone = false;
+        }
     }
 
     public void setOverdue() {
