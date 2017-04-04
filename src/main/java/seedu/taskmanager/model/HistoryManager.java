@@ -70,6 +70,8 @@ public class HistoryManager extends ComponentManager {
     public void handleTaskManagerStorageDirectoryChangedEvent(TaskManagerStorageDirectoryChangedEvent event) {
         historyList = new ArrayList<ReadOnlyTaskManager>();
         futureList = new ArrayList<ReadOnlyTaskManager>();
+        historyCommands = new ArrayList<String>();
+        futureCommands = new ArrayList<String>();
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
                 ("Storage file location changed, resetting history. Histories = " + historyList.size() + " Futures = "
                         + futureList.size())));
