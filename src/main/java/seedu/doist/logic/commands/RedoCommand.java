@@ -18,7 +18,7 @@ public class RedoCommand extends Command {
         assert model != null;
         int i = 0;
         while (i < numSteps && model.recoverNextTodoList()) {
-        	i++;
+            i++;
         }
         return new CommandResult(String.format(MESSAGE_REDO_SUCCESS, i));
     }

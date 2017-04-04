@@ -388,7 +388,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (previousTodoList != null) {
             todoList.resetData(previousTodoList);
         } else {
-        	return false;
+            return false;
         }
         if (isAtMostRecentState) {
             recoverPreviousTodoList();
@@ -402,7 +402,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (nextTodoList != null) {
             todoList.resetData(nextTodoList);
         } else {
-        	return false;
+            return false;
         }
         indicateTodoListChanged();
         return true;

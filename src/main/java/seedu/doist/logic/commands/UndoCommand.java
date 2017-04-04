@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
         assert model != null;
         int i = 0;
         while (i < numSteps && model.recoverPreviousTodoList()) {
-        	i++;
+            i++;
         }
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, i));
     }
