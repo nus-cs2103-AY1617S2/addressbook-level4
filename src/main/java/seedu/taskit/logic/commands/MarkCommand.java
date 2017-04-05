@@ -70,4 +70,8 @@ public static final String COMMAND_WORD = "mark";
             return false;
         }
     }
+
+    public boolean isUndoable() {
+        return true;
+    }
 }
