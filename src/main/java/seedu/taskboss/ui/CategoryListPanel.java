@@ -42,7 +42,7 @@ public class CategoryListPanel extends UiPart<Region> {
         tasks = taskList;
         updateCategoryCountToHashMap();
         initCategories();
-        setConnections(categories);
+        setConnections();
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
         setEventHandlerForViewingChangeEvent();
@@ -111,10 +111,10 @@ public class CategoryListPanel extends UiPart<Region> {
     public void handleTaskBossChangedEvent(TaskBossChangedEvent tmce) {
         updateCategoryCountToHashMap();
         initCategories();
-        setConnections(categories);
+        setConnections();
     }
 
-    private void setConnections(ObservableList<Category> categoryLists) {
+    private void setConnections() {
         categoryListView.setItems(categories);
         categoryListView.setCellFactory(listView -> new CategoryListViewCell());
         setEventHandlerForViewingChangeEvent();
