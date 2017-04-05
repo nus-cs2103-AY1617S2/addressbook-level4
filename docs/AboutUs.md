@@ -5,38 +5,26 @@ We are a team based in the [School of Computing, National University of Singapor
 ## Project Team
 
 #### [Cheuk Ting](https://github.com/ctleungac) <br>
-<img src="images/lct.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Logic
-
-(Subject to Change)
+<img src="images/ctleungac.png" width="150"><br>
+Roles and Responsibilities: In charge of GUI <br>
 
 -----
 
 #### [Hsieh Hsin Han](https://github.com/Tony-Hsieh)
-<img src="images/IMG_0159.PNG" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
-
-(Subject to Change)
+<img src="images/tony-hsieh.png" width="150"><br>
+Roles and Responsibilities: In charge of Model <br>
 
 -----
 
 #### [Malik Jabati](https://github.com/SmartyMJ)
-<img src="images/MalikJabati.jpeg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
-
-(Subject to Change)
+<img src="images/smartymj.png" width="150"><br>
+Roles and Responsibilities: Team Lead, Documentation, Scheduling and tracking  <br>
 
 -----
 
 #### [Ali Rizvi](https://github.com/EntitySK)
-<img src="images/MuhammadAliRizvi.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
-
-(Subject to Change)
+<img src="images/entitysk.png" width="150"><br>
+Roles and Responsibilities: Testing, Code Quality, Deliverables and deadlines, Eclipse expert, CSS expert, In charge of storage  <br>
 
 -----
 
