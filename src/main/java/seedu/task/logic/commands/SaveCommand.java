@@ -2,40 +2,47 @@
 package seedu.task.logic.commands;
 
 import java.io.File;
+import java.io.IOException;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
- * Saves all tasks in the specified directory.
+ * Saves task data in the specified directory.
  */
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks in specified directory. "
-            + "Parameters: SAVE_DIRECTORY\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks in specified directory with specified file name. "
+            + "Parameters: SAVE_LOCATION\n"
             + "Example: " + COMMAND_WORD
-            + " /Users/username/Documents/TaskManager/taskmanger.xml";
+            + " /Users/username/Documents/TaskManager/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "Tasks saved in directory: %1$s";
-    //    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_SUCCESS = "Tasks saved in location: %1$s";
+    public static final String MESSAGE_INVALID_SAVE_LOCATION = "This task already exists in the task manager";
 
     private final File toSave;
     /**
      * Creates an SaveCommand using raw values.
      *
-     * @throws IllegalValueException if any of the raw values are invalid
+     * @throws IllegalValueException if the save location is invalid
+     * @throws IOException
      */
     public SaveCommand(String fileAsString) throws IllegalValueException {
         this.toSave = new File(fileAsString);
-        if (!isValidSaveLocation(toSave)) {
-            throw new IllegalValueException("Save location invalid.");
+        try {
+            createSaveFile();
+            toSave.createNewFile();
+        } catch (IOException ioe) {
+            throw new IllegalValueException(MESSAGE_INVALID_SAVE_LOCATION);
         }
+
     }
 
-    private boolean isValidSaveLocation(File file) {
-        return false;
+    private boolean createSaveFile() throws IOException {
+        boolean created = toSave.createNewFile();
+        return created;
     }
 
     @Override
