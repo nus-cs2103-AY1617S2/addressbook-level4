@@ -36,8 +36,8 @@ public class TypicalTestEvents {
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
-					.withDescription("fighting the wildings, but extremely scared").withStartTime("11:59PM 08/04/2017")
-					.withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("The Wall")
+					.withDescription("fighting the wildings, but extremely scared").withStartTime("")
+					.withEndTime("").withDeadline("").withLocation("The Wall")
 					.withTags("LordCommanderJonSnow").withIsDone("No").build();
 			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("")
 					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH").withIsDone("No")

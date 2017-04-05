@@ -48,7 +48,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @Override
     public ObservableList<ReadOnlyEvent> getTaskList() {
-	final ObservableList<Event> persons = this.tasks.stream().map(p -> {
+	final ObservableList<Event> events = this.tasks.stream().map(p -> {
 	    try {
 		return p.toModelType();
 	    } catch (IllegalValueException e) {
@@ -57,7 +57,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 		return null;
 	    }
 	}).collect(Collectors.toCollection(FXCollections::observableArrayList));
-	return new UnmodifiableObservableList<>(persons);
+	return new UnmodifiableObservableList<>(events);
     }
 
     @Override
