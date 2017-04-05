@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Generated;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -235,6 +237,31 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag")),
                     false
             );
+        }
+        
+        /**
+         *Generatates related success message. 
+         */
+        public String generateDetailedSuccessMsg(String keyword, String earliestTime,
+                String latestTime, String tag) {
+            String successMsg = " GeeKeep is showing all the tasks which:\n";
+            if (!keyword.isEmpty()) {
+                successMsg += "Contains any of keywords in [" + keyword + "] in title;\n";
+            }
+            if (!earliestTime.isEmpty()) {
+                successMsg += "Has starting time[event] or deadline[deadline] after "
+                               + earliestTime
+                               + ";\n";
+            }
+            if (!latestTime.isEmpty()) {
+                successMsg += "Has starting time[event] or deadline[deadline] before "
+                        + latestTime
+                        + ";\n";
+            }
+            if (!tag.isEmpty()) {
+                successMsg += "Has any of tags in [" + tag + "];\n";
+            }
+            return successMsg;
         }
     }
 
@@ -556,7 +583,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("KEY", "", "", ""),
                 expectedAB,
                 expectedList);
     }
@@ -576,7 +604,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("rAnDoM, key", "", "", ""),
                 expectedAB,
                 expectedList);
     }
@@ -596,7 +625,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("KEY", "", "", ""),
                 expectedAB,
                 expectedList);
     }
