@@ -17,6 +17,11 @@ public interface TodoListStorage {
     String getTodoListFilePath();
 
     /**
+     * Updates the file path of the data file.
+     */
+    void setTodoListFilePath(String saveFilePath);
+
+    /**
      * Returns TodoList data as a {@link ReadOnlyTodoList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
@@ -40,5 +45,4 @@ public interface TodoListStorage {
      * @see #saveTodoList(ReadOnlyTodoList)
      */
     void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException;
-
 }

@@ -55,7 +55,7 @@ public class Todo implements ReadOnlyTodo {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     //@@author
-
+    //@@author A0165043M
     /**
      * Creates a copy of the given ReadOnlyTodo.
      */
@@ -72,7 +72,7 @@ public class Todo implements ReadOnlyTodo {
             this.completeTime = source.getCompleteTime();
         }
     }
-
+    //@@author
     public void setName(Name name) {
         assert name != null;
         this.name = name;
