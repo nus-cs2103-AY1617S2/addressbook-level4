@@ -4,11 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.WhatsLeft;
-import seedu.address.model.person.Event;
-import seedu.address.model.person.ReadOnlyEvent;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.whatsleft.model.WhatsLeft;
+import seedu.whatsleft.model.activity.Event;
+import seedu.whatsleft.model.activity.ReadOnlyEvent;
+import seedu.whatsleft.model.util.SampleDataUtil;
+import seedu.whatsleft.testutil.TestUtil;
 
 public class SampleDataTest extends WhatsLeftGuiTest {
     @Override

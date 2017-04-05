@@ -11,10 +11,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.model.person.Event;
-import seedu.address.model.person.ReadOnlyEvent;
-import seedu.address.testutil.TestUtil;
+import seedu.whatsleft.TestApp;
+import seedu.whatsleft.model.activity.Event;
+import seedu.whatsleft.model.activity.ReadOnlyEvent;
+import seedu.whatsleft.testutil.TestUtil;
 
 //@@author A0148038A
 /**
