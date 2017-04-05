@@ -10,6 +10,7 @@ import seedu.doist.logic.parser.CliSyntax;
 import seedu.doist.logic.parser.ParserUtil;
 import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
+import seedu.doist.model.task.TaskDate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -42,6 +43,7 @@ public class ListCommand extends Command {
     //@@author A0147980U
     private UniqueTagList tagList = new UniqueTagList();
     private TaskType type = null;
+    private TaskDate dates = null;
 
     public ListCommand(String preamble, Map<String, List<String>> parameters) throws IllegalValueException {
         if (!preamble.trim().isEmpty()) {
@@ -55,6 +57,22 @@ public class ListCommand extends Command {
             }
         } else {
             listDefault();
+        }
+
+        if (!parameters.isEmpty()) {
+            try {
+                String startDate = parameters.get("\\from").toString();
+                String endDate = parameters.get("\\to").toString();
+                dates = new TaskDate(TaskDate.parseDate(startDate), TaskDate.parseDate(endDate));
+                boolean validDate = TaskDate.validateDate(dates.getStartDate(), dates.getEndDate());
+                if (!validDate) {
+                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            MESSAGE_USAGE));
+                }
+            } catch (NullPointerException e) {
+                throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_USAGE));
+            }
         }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
         if (tagsParameterStringList != null && !tagsParameterStringList.isEmpty()) {
@@ -86,7 +104,11 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.updateFilteredTaskList(type, tagList);
+        if (this.dates != null) {
+            model.updateFilteredTaskList(this.dates);
+        } else {
+            model.updateFilteredTaskList(type, tagList);
+        }
         model.sortTasksByDefault();
         String message = "";
         if (type != null) {
