@@ -6,11 +6,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 //@@author A0139926R
+
 
 public class DateParserTest {
 
@@ -18,17 +21,20 @@ public class DateParserTest {
     private final String dateString = "10 April 2017";
     private final int wantedDate = 0;
 
-    @Test
-    public void parse_success() {
-        String expectedResult = "Mon Apr 10 16:00:00 SGT 2017";
-        List<Date> actualResult = DateParser.parse(dateTimeString);
-        assertEquals(actualResult.get(wantedDate).toString(), expectedResult);
+    private Calendar calendar = Calendar.getInstance();
+
+    @Before
+    public void setup() {
+        calendar.clear();
     }
     @Test
-    public void resetTime_success() {
-        String expectedResult = "Mon Apr 10 23:59:59 SGT 2017";
-        List<Date> actualResult = DateParser.parse(dateString);
-        assertEquals(actualResult.get(wantedDate).toString(), expectedResult);
+    public void parse_success() {
+        List<Date> expected =  new ArrayList<>();
+        calendar.set(2017, 3, 10, 23, 59, 59);
+        Date dateExpected = calendar.getTime();
+        expected.add(dateExpected);
+        List<Date> actual = DateParser.parse(dateString);
+        assertArrayEquals(expected.toArray(), actual.toArray());
     }
     @Test(expected = AssertionError.class)
     public void parseDate_nullInput_throwsAssertionError() {
@@ -47,9 +53,12 @@ public class DateParserTest {
     }
     @Test
     public void getDate_success() {
-        String expectedResult = "Mon Apr 10 16:00:00 SGT 2017";
-        List<Date> actualResult = DateParser.getDate(dateTimeString);
-        assertEquals(actualResult.get(wantedDate).toString(), expectedResult);
+        List<Date> expected = new ArrayList<>();
+        calendar.set(2017, 3, 10, 23, 59, 59);
+        Date dateExpected = calendar.getTime();
+        expected.add(dateExpected);
+        List<Date> actual = DateParser.getDate(dateString);
+        assertArrayEquals(expected.toArray(), actual.toArray());
     }
     @Test
     public void getDate_fail() {
