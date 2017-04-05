@@ -152,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert sortType != null;
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
-
+        indicateTaskBossChanged();
     }
 
     //@@author A0144904H
