@@ -19,7 +19,7 @@ import seedu.taskboss.testutil.TestUtil;
 /**
  * Provides a handle for the panel containing the category list.
  */
-public class CategoryListPanelHandle extends GuiHandle{
+public class CategoryListPanelHandle extends GuiHandle {
 
     private static final String CATEGORY_LIST_VIEW_ID = "#categoryListView";
     private static final String CATEGORY_CARD_PANE_ID = "#categoryCardPane";
@@ -50,7 +50,8 @@ public class CategoryListPanelHandle extends GuiHandle{
      * @param startPosition The starting position of the sub list.
      * @param expectedCategoryList A list of categories in the correct order.
      */
-    public boolean isListMatching(int startPosition, List<TestCategory> expectedCategoryList) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, List<TestCategory> expectedCategoryList)
+            throws IllegalArgumentException {
         if (expectedCategoryList.size() + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " tasks");
@@ -60,7 +61,8 @@ public class CategoryListPanelHandle extends GuiHandle{
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndCategory(getCategoryCardHandle(expectedCategoryList.get(i)), expectedCategoryList.get(i))) {
+            if (!TestUtil.compareCardAndCategory(getCategoryCardHandle(expectedCategoryList.get(i)),
+                    expectedCategoryList.get(i))) {
                 return false;
             }
         }
@@ -80,7 +82,8 @@ public class CategoryListPanelHandle extends GuiHandle{
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < expectedCategoryList.size(); i++) {
-            if (!categoriesInList.get(startPosition + i).categoryName.equals(expectedCategoryList.get(i).categoryName)) {
+            if (!categoriesInList.get(startPosition + i).categoryName.equals(expectedCategoryList.get(i)
+                    .categoryName)) {
                 return false;
             }
         }
