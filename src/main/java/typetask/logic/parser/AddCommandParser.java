@@ -19,6 +19,7 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.AddCommand;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.IncorrectCommand;
+
 //@@author A0139926R
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -51,44 +52,63 @@ public class AddCommandParser {
         if (taskType == eventTask) {
             List<Date> startDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_START_DATE).get());
             List<Date> endDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_END_DATE).get());
+            String priority = new String("Low");
             if (!DateParser.checkValidDateFormat(startDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE));
             }
             if (!DateParser.checkValidDateFormat(endDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE));
             }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            }
             if (DateParser.checkValidSchedule(startDate, endDate)) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         DateParser.getDateString(startDate),
-                        DateParser.getDateString(endDate)
+                        DateParser.getDateString(endDate), priority
                         );
             } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_START_AND_END_DATE));
             }
         } else if (taskType == deadlineTaskWithDate) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_DATE).get());
+            String priority = new String("Low");
             if (!DateParser.checkValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            }
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    DateParser.getDateString(deadline)
+                    DateParser.getDateString(deadline), priority
                     );
         } else if (taskType == deadlineTaskWithTime) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_TIME).get());
+            String priority = new String("Low");
             if (!DateParser.checkValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
+            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            }
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    DateParser.getDateString(deadline)
+                    DateParser.getDateString(deadline), priority
                     );
         } else if (taskType == invalidEvent) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else {
+            String priority = new String("Low");
+            if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
+                priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
+            }
             return new AddCommand(
-                    argsTokenizer.getPreamble().get()
+                    argsTokenizer.getPreamble().get(), priority
                     );
         }
     }

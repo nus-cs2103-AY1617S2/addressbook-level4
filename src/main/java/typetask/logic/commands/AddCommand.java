@@ -37,19 +37,19 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     //Creates a Floating Task
-    public AddCommand(String name)
+    public AddCommand(String name, String priority)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority(priority));
     }
     //Creates a Deadline Task
-    public AddCommand(String name, String dateTime)
+    public AddCommand(String name, String dateTime, String priority)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(dateTime), false, new Priority("Low"));
+        this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(dateTime), false, new Priority(priority));
     }
     //Creates an Event
-    public AddCommand(String name, String date, String endDate)
+    public AddCommand(String name, String date, String endDate, String priority)
             throws IllegalValueException {
-        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate), false, new Priority("Low"));
+        this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate), false, new Priority(priority));
     }
 
     @Override
