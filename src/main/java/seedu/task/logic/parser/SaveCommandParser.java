@@ -15,13 +15,12 @@ import seedu.task.logic.commands.SaveCommand;
 public class SaveCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SaveCommand
+     * and returns a SaveCommand object for execution.
      */
     public Command parse(String args) {
-
         try {
-            System.out.println("@@@Parsing savecommand: " + args);
+            System.out.println("@@@Parsing save command: " + args);
             return new SaveCommand(args);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));

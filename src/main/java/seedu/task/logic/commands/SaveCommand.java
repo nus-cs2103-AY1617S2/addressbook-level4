@@ -30,10 +30,12 @@ public class SaveCommand extends Command {
      * @throws IOException
      */
     public SaveCommand(String fileAsString) throws IllegalValueException {
+        if (fileAsString.equals("") || fileAsString == null) {
+            throw new IllegalValueException(MESSAGE_INVALID_SAVE_LOCATION);
+        }
         this.toSave = new File(fileAsString);
         try {
             createSaveFile();
-            toSave.createNewFile();
         } catch (IOException ioe) {
             throw new IllegalValueException(MESSAGE_INVALID_SAVE_LOCATION);
         }
