@@ -1,7 +1,6 @@
 # A0146738U-reused
 ###### \java\seedu\bulletjournal\commons\events\model\FilePathChangedEvent.java
 ``` java
-
 package seedu.bulletjournal.commons.events.model;
 
 import seedu.bulletjournal.commons.events.BaseEvent;
@@ -23,13 +22,26 @@ public class FilePathChangedEvent extends BaseEvent {
 ```
 ###### \java\seedu\bulletjournal\commons\events\ui\FailedCommandAttemptedEvent.java
 ``` java
+
 /**
  * Indicates an attempt to execute a failed command
  */
 public class FailedCommandAttemptedEvent extends BaseEvent {
 
-    public FailedCommandAttemptedEvent(Command command) {
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
     }
+
+}
+```
+###### \java\seedu\bulletjournal\commons\events\ui\IncorrectCommandAttemptedEvent.java
+``` java
+
+/**
+ * Indicates an attempt to execute an incorrect command
+ */
+public class IncorrectCommandAttemptedEvent extends BaseEvent {
 
     @Override
     public String toString() {
@@ -52,7 +64,8 @@ public class ChangeDirectoryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the directory for the tasklist."
             + "Parameters: FILE_PATH\n" + "Example: " + COMMAND_WORD + " D:\t.xml";
 
-    public static final String MESSAGE_SUCCESS = "Alert: This operation is irreversible.\nFile path successfully changed to : %1$s";
+    public static final String MESSAGE_SUCCESS = "Alert: This operation is irreversible."
+            + "\nFile path successfully changed to : %1$s";
     public static final String MESSAGE_IO_ERROR = "Error when saving/reading file...";
     public static final String MESSAGE_CONVENSION_ERROR = "Wrong file type/Invalid file path detected.";
 
@@ -65,8 +78,9 @@ public class ChangeDirectoryCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            if (!filePath.endsWith(".xml"))
+            if (!filePath.endsWith(".xml")) {
                 throw new DataConversionException(null);
+            }
             XmlTodoListStorage newFile = new XmlTodoListStorage(filePath);
             newFile.saveTodoList(model.getTodoList(), filePath);
             model.changeDirectory(filePath);
@@ -84,4 +98,27 @@ public class ChangeDirectoryCommand extends Command {
     }
 
 }
+```
+###### \java\seedu\bulletjournal\logic\commands\Command.java
+``` java
+    /**
+     * Raises an event to indicate an attempt to execute an incorrect command
+     */
+    protected void indicateAttemptToExecuteIncorrectCommand() {
+        EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent());
+    }
+
+    /**
+     * Raises an event to indicate an attempt to execute a failed command
+     */
+    protected void indicateAttemptToExecuteFailedCommand() {
+        EventsCenter.getInstance().post(new FailedCommandAttemptedEvent());
+    }
+```
+###### \java\seedu\bulletjournal\ui\StatusBarFooter.java
+``` java
+    @Subscribe
+    public void handleFilePathChangeEvent(FilePathChangedEvent fpce) {
+        setSaveLocation(fpce.newFilePath);
+    }
 ```
