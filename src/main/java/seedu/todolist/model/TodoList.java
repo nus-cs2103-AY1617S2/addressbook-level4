@@ -88,7 +88,7 @@ public class TodoList implements ReadOnlyTodoList {
         syncMasterTagListWith(p);
         todos.add(p);
     }
-
+    //@@author A0165043M
     /**
      * Updates the todo in the list at position {@code index} with {@code editedReadOnlyTodo}.
      * {@code TodoList}'s tag list will be updated with the tags of {@code editedReadOnlyTodo}.
@@ -117,6 +117,7 @@ public class TodoList implements ReadOnlyTodoList {
         // in the todo list.
         todos.updateTodo(index, editedTodo);
     }
+    //@@author
     //@@author A0163786N
     /**
      * Completes the todo in the list at position {@code index} with {@code completeTime}.

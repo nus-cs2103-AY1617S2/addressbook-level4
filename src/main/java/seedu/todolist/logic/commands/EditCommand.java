@@ -115,7 +115,7 @@ public class EditCommand extends Command {
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getEndTime();
         }
-
+        //@@author A0165043M
         /**
          * Returns true if at least one field is edited.
          */
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
                 return CollectionUtil.isAnyPresent(this.name, this.startTime, this.endTime, this.tags, this.addTags);
             }
         }
-
+        //@@author
         public void setName(Optional<Name> name) {
             assert name != null;
             this.name = name;
@@ -147,7 +147,7 @@ public class EditCommand extends Command {
             assert addTags != null;
             this.addTags = addTags;
         }
-      //@@author
+        //@@author
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
