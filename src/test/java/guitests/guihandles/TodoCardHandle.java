@@ -64,7 +64,7 @@ public class TodoCardHandle extends GuiHandle {
     private Region getTagsContainer() {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
-
+    //@@author A0165043M
     private String getStartTime() {
         return getTextFromLabel(STARTTIME_FIELD_ID);
     }
@@ -72,6 +72,7 @@ public class TodoCardHandle extends GuiHandle {
     private String getEndTime() {
         return getTextFromLabel(ENDTIME_FIELD_ID);
     }
+    //@@author
     //@@author A0163786N
     private String getCompleteTime() {
         return getTextFromLabel(COMPLETETIME_FIELD_ID);
