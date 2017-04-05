@@ -82,6 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(undoTaskManager.peek());
         undoTaskManager.pop();
         redoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     /** Undo previous action of task manager. */
@@ -90,6 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(redoTaskManager.peek());
         redoTaskManager.pop();
         undoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     // @@author
@@ -147,14 +149,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
         return numDeletedTasks;
-    }
-
-    @Override
-    public synchronized void addTask(int addIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        saveInstance();
-        taskManager.addTask(addIndex, task);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
     }
 
     // @@author

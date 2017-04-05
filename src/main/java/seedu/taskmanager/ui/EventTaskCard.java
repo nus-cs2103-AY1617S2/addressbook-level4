@@ -22,8 +22,6 @@ public class EventTaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private ListView<ListView<Label>> detailsList;
-    @FXML
     private Label startDateTime;
     @FXML
     private Label endDateTime;
@@ -50,7 +48,7 @@ public class EventTaskCard extends UiPart<Region> {
         if (isSameDateEvent(task)) {
             startDateTime.setText("Date: " + task.getStartDate().value);
             endDateTime
-                    .setText("End Date: " + task.getEndDate().value + "   " + "End Time: " + task.getEndTime().value);
+                    .setText("Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
         }
 
         if (task.getIsMarkedAsComplete()) {

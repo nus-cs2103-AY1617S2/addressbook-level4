@@ -39,27 +39,48 @@ public class UniqueTaskList implements Iterable<Task> {
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
-    public void add(int addIndex, Task toAdd) throws DuplicateTaskException {
-        assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        }
-        internalList.add(addIndex, toAdd);
-    }
-
-    /**
-     * Adds a task to the list.
-     *
-     * @throws DuplicateTaskException
-     *             if the task to add is a duplicate of an existing task in the
-     *             list.
-     */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+        int addIndex = 0;
+        if (!internalList.isEmpty()) {
+            if (toAdd.isEventTask()) {
+                while (internalList.get(addIndex).isEventTask()) {
+                    if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                        break;
+                    }
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+            }
+
+            if (toAdd.isDeadlineTask()) {
+                while (internalList.get(addIndex).isEventTask()) {
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+                while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
+                    if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                        break;
+                    }
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+            }
+
+            if (toAdd.isFloatingTask()) {
+                addIndex = internalList.size();
+            }
+        }
+        internalList.add(addIndex, toAdd);
     }
 
     /**
@@ -193,4 +214,98 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
+    private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                    readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) == 0) {
+                if (toAdd.getStartDate().value
+                        .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                        .compareTo(readOnlyTask.getStartDate().value.substring(
+                                readOnlyTask.getStartDate().value.length()
+                                        - 5,
+                                readOnlyTask.getStartDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getStartDate().value
+                            .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getStartDate().value.substring(
+                                    readOnlyTask.getStartDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getStartDate().value.length() - 3)) == 0) {
+                        if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                        readOnlyTask.getStartDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                            readOnlyTask.getStartDate().value.length() - 6)) == 0) {
+                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean isAddDeadlineEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getEndDate().value.substring(toAdd.getEndDate().value.length() - 2).compareTo(
+                readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getEndDate().value.substring(toAdd.getEndDate().value.length() - 2).compareTo(
+                    readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 2)) == 0) {
+                if (toAdd.getEndDate().value
+                        .substring(toAdd.getEndDate().value.length() - 5, toAdd.getEndDate().value.length() - 3)
+                        .compareTo(
+                                readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 5,
+                                        readOnlyTask.getEndDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getEndDate().value
+                            .substring(toAdd.getEndDate().value.length() - 5, toAdd.getEndDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getEndDate().value.substring(
+                                    readOnlyTask.getEndDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getEndDate().value.length() - 3)) == 0) {
+                        if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getEndDate().value.substring(0,
+                                        readOnlyTask.getEndDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getEndDate().value.substring(0,
+                                            readOnlyTask.getEndDate().value.length() - 6)) == 0) {
+                                if (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 }
