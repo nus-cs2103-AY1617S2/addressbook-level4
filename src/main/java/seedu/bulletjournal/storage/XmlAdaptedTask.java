@@ -67,9 +67,9 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final TaskName taskName = new TaskName(this.name);
-        final DueDate dueDate = this.phone == null ? null : new DueDate(this.phone.toString());
+        final DueDate dueDate = this.phone == null ? null : new DueDate(this.phone);
         final Status status = this.email == null ? null : new Status(this.email);
-        final BeginDate beginDate = this.address == null ? null : new BeginDate(this.address.toString());
+        final BeginDate beginDate = this.address == null ? null : new BeginDate(this.address);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(taskName, dueDate, status, beginDate, tags);
     }

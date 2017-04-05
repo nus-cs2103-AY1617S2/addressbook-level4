@@ -17,9 +17,6 @@ public class DateParser {
 
     private static Parser dateParser = new Parser(TimeZone.getDefault());
 
-    public DateParser() {
-    }
-
     /**
      * Parses date object from a string. Only parses first recognised date
      * instance.

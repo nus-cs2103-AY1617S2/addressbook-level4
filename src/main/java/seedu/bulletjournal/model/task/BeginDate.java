@@ -1,7 +1,6 @@
 //@@author A0105748B
 package seedu.bulletjournal.model.task;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
