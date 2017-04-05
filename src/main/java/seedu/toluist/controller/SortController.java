@@ -26,8 +26,10 @@ public class SortController extends Controller {
     private static final String COMMAND_WORD = "sort";
     private static final String WORD_BY = "by";
 
-    private static final String[] KEYWORD_CATEGORIES = { "priority", "overdue", "enddate",
-        "startdate", "description", "default" };
+    private static final String[] KEYWORD_CATEGORIES = {
+            Task.CATEGORY_DEFAULT, Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
+            Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
+    };
     private static final String PARAMETER_CATEGORY = "category";
 
     private static final Logger logger = LogsCenter.getLogger(SortController.class);
@@ -116,6 +118,15 @@ public class SortController extends Controller {
             keywords.put(category, new String[0]);
         }
         return keywords;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] { new String[][] {
+                new String[] { Task.CATEGORY_DEFAULT },
+                new String[] { Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
+                    Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
+                }
+        }};
     }
 
     public boolean matchesCommand(String command) {

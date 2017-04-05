@@ -28,12 +28,12 @@ public class Task implements Comparable<Task>, Cloneable {
             + "date of recurrence,";
 
     //@@author A0162011A
-    private static final String CATEGORY_PRIORITY = "priority";
-    private static final String CATEGORY_STARTDATE = "startdate";
-    private static final String CATEGORY_ENDDATE = "enddate";
-    private static final String CATEGORY_OVERDUE = "overdue";
-    private static final String CATEGORY_DESCRIPTION = "description";
-    private static final String CATEGORY_DEFAULT = "default";
+    public static final String CATEGORY_PRIORITY = "priority";
+    public static final String CATEGORY_STARTDATE = "startdate";
+    public static final String CATEGORY_ENDDATE = "enddate";
+    public static final String CATEGORY_OVERDUE = "overdue";
+    public static final String CATEGORY_DESCRIPTION = "description";
+    public static final String CATEGORY_DEFAULT = "default";
     private static final int START_OF_ARRAY_INDEX = 0;
 
     private static String[] defaultSortOrder = { CATEGORY_OVERDUE, CATEGORY_PRIORITY, CATEGORY_ENDDATE,
