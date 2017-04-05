@@ -115,7 +115,7 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(shownTasks.get(i).getDescription().
-                    compareToIgnoreCase(shownTasks.get(i + 1).getDescription()) >= 0);
+                    compareToIgnoreCase(shownTasks.get(i + 1).getDescription()) <= 0);
         }
     }
 
