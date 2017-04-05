@@ -74,6 +74,12 @@ public class TypicalTestTasks {
         return new TestTask[]{laundry, quiz, payment, reflection, dishes, consultation, grocery};
     }
 
+    //@@author A0148081H-reused
+    public TestTask[] getSortedByPriorityTasks() {
+        return new TestTask[]{laundry, quiz, reflection, payment, dishes, consultation, grocery};
+    }
+    //@@author
+
     public TaskManager getTypicalTaskManager() {
         TaskManager taskManager = new TaskManager();
         loadTaskManagerWithSampleData(taskManager);
