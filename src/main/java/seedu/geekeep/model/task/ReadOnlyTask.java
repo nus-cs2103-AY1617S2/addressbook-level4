@@ -77,6 +77,7 @@ public interface ReadOnlyTask {
                         && this.isDone() == other.isDone());
     }
 
+    //@@author A0148037E
     public int getPriority();
 
     DateTime getReferenceDateTime();
@@ -88,6 +89,7 @@ public interface ReadOnlyTask {
     public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask);
 
     public int compareTitle(ReadOnlyTask otherTask);
+    //@@author
 
     /**
      * Returns true if the task does not have a start datetime or end datetime

@@ -136,6 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
 
+    //@@author A0148037E
     @Override
     /**
      * Filters the task list by keywords, time and tags.
@@ -282,6 +283,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    //@@author A0148037E
     private class TitleQualifier implements Qualifier {
         private Set<String> titleKeyWords;
 
@@ -353,4 +355,5 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
     }
+    //@@author
 }

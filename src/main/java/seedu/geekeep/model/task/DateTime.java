@@ -19,10 +19,12 @@ public class DateTime {
     public static final String DEFAULT_TIME = "2359";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy HHmm");
 
+    //@@author A0148037E
     //with the constraint of DD-MM-YY, the max date time should be 2099-12-31 2359
     //and the min date time should be 2000-01-01 0000;
     public static final String MAX_TIME = "31-12-99 2359";
     public static final String MIN_TIME = "01-01-00 0000";
+    //@@author
 
     public final LocalDateTime dateTime;
     public final String value;
@@ -38,6 +40,7 @@ public class DateTime {
         return test.matches(DATETIME_REGEX_WITHOUT_TIME);
     }
 
+    //@@author A0148037E
     /**
      * Returns the min date time GeeKeep currently supports
      */
@@ -65,6 +68,7 @@ public class DateTime {
         }
         return maxDateTime;
     }
+    //@@author
 
     public DateTime(String dateTimeString) throws IllegalValueException {
         if (!isValidDateTime(dateTimeString)) {

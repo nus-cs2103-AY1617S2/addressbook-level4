@@ -12,8 +12,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Generated;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -238,9 +236,10 @@ public class LogicManagerTest {
                     false
             );
         }
-        
+
+        //@@author A0148037E
         /**
-         *Generatates related success message. 
+         *Generates related success message.
          */
         public String generateDetailedSuccessMsg(String keyword, String earliestTime,
                 String latestTime, String tag) {
@@ -263,6 +262,7 @@ public class LogicManagerTest {
             }
             return successMsg;
         }
+        //@@author
     }
 
 
