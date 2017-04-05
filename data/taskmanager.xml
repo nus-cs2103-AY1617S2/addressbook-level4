@@ -17,28 +17,6 @@
     <tags>family</tags>
     <tags>church</tags>
     <tasks>
-        <title>clean room</title>
-        <start></start>
-        <end>may</end>
-        <priority>low</priority>
-        <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>buy groceries</title>
-        <start></start>
-        <end>thursday</end>
-        <priority>low</priority>
-        <tagged>household</tagged>
-        <tagged>shopping</tagged>
-    </tasks>
-    <tasks>
-        <title>call prof lee</title>
-        <start></start>
-        <end>30 March 2017</end>
-        <priority>low</priority>
-        <tagged>school</tagged>
-    </tasks>
-    <tasks>
         <title>do fyp assignment</title>
         <start></start>
         <end>6 april</end>
@@ -46,52 +24,27 @@
         <tagged>school</tagged>
     </tasks>
     <tasks>
-        <title>health checkup</title>
-        <start>23 april 2pm</start>
-        <end>23 april 5pm</end>
-        <priority>medium</priority>
-        <tagged>health</tagged>
-        <tagged>home</tagged>
+        <title>TR3002 meeting business plan</title>
+        <start>this thursday 4pm</start>
+        <end>thursday 11.59pm</end>
+        <priority>high</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
     </tasks>
     <tasks>
-        <title>go exercise</title>
+        <title>CS2103 TaskIt v0.5rc</title>
         <start></start>
-        <end>10am</end>
-        <priority>low</priority>
-        <tagged>health</tagged>
-        <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>CS2103 exam</title>
-        <start>25 april 1pm</start>
-        <end>25 april 3pm</end>
-        <priority>low</priority>
-        <tagged>exam</tagged>
+        <end>next monday</end>
+        <priority>high</priority>
         <tagged>school</tagged>
     </tasks>
     <tasks>
-        <title>ME3241 exam</title>
-        <start>22 april 1pm</start>
-        <end>22 april 3pm</end>
-        <priority>low</priority>
-        <tagged>exam</tagged>
-        <tagged>school</tagged>
-    </tasks>
-    <tasks>
-        <title>SSA2211 exam</title>
-        <start>25 april 5pm</start>
-        <end>25 april 7pm</end>
-        <priority>low</priority>
-        <tagged>exam</tagged>
-        <tagged>school</tagged>
-    </tasks>
-    <tasks>
-        <title>liaise with Prof Ben Leong</title>
+        <title>submit TR3002 business plan</title>
         <start></start>
-        <end>this sunday</end>
-        <priority>medium</priority>
+        <end>next monday 11.59pm</end>
+        <priority>high</priority>
         <tagged>school</tagged>
-        <tagged>work</tagged>
+        <tagged>assignment</tagged>
     </tasks>
     <tasks>
         <title>pitching to VCs</title>
@@ -103,12 +56,25 @@
         <tagged>work</tagged>
     </tasks>
     <tasks>
-        <title>ME3241 assignment due</title>
+        <title>new ACE grant launch</title>
         <start></start>
-        <end>17 april 5pm</end>
-        <priority>medium</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
+        <end>1 may</end>
+        <priority>high</priority>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <title>setup Wandeer blog and social media</title>
+        <start></start>
+        <end>15 may</end>
+        <priority>high</priority>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <title>find/outsource CTO role</title>
+        <start></start>
+        <end>31 may</end>
+        <priority>high</priority>
+        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>CS2103 TaskIt v0.5</title>
@@ -119,11 +85,115 @@
         <tagged>assignment</tagged>
     </tasks>
     <tasks>
-        <title>CS2103 TaskIt v0.5rc</title>
+        <title>liaise with Prof Ben Leong</title>
         <start></start>
-        <end>next monday</end>
-        <priority>high</priority>
+        <end>this sunday</end>
+        <priority>medium</priority>
         <tagged>school</tagged>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <title>buy milk of magnesia</title>
+        <start></start>
+        <end>this sunday</end>
+        <priority>medium</priority>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>ME3241 assignment due</title>
+        <start></start>
+        <end>17 april 5pm</end>
+        <priority>medium</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <title>FYP presentation</title>
+        <start>19 april 4.15pm</start>
+        <end>19 april 5pm</end>
+        <priority>medium</priority>
+        <tagged>presentation</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>health checkup</title>
+        <start>23 april 2pm</start>
+        <end>23 april 5pm</end>
+        <priority>medium</priority>
+        <tagged>health</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>go for ECG treadmill</title>
+        <start></start>
+        <end>30 april</end>
+        <priority>medium</priority>
+        <tagged>health</tagged>
+    </tasks>
+    <tasks>
+        <title>search for taiwan accommodation</title>
+        <start></start>
+        <end>15 may</end>
+        <priority>medium</priority>
+        <tagged>holiday</tagged>
+    </tasks>
+    <tasks>
+        <title>buy lina's present</title>
+        <start></start>
+        <end>1 june</end>
+        <priority>medium</priority>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <title>call prof lee</title>
+        <start></start>
+        <end>30 March 2017</end>
+        <priority>low</priority>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>submit SSA2211 assignment hardcopy</title>
+        <start></start>
+        <end>1 april</end>
+        <priority>low</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <title>go exercise</title>
+        <start></start>
+        <end>10am</end>
+        <priority>low</priority>
+        <tagged>health</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>return library book</title>
+        <start></start>
+        <end>today</end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>buy groceries</title>
+        <start></start>
+        <end>thursday</end>
+        <priority>low</priority>
+        <tagged>household</tagged>
+        <tagged>shopping</tagged>
+    </tasks>
+    <tasks>
+        <title>change bedsheets</title>
+        <start></start>
+        <end>this weekend</end>
+        <priority>low</priority>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>skype meeting with Wandeer</title>
+        <start>this sunday 10pm</start>
+        <end>this sunday 11.30pm</end>
+        <priority>low</priority>
+        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>CS2103 TaskIt Presentation</title>
@@ -142,12 +212,43 @@
         <tagged>work</tagged>
     </tasks>
     <tasks>
-        <title>submit TR3002 business plan</title>
-        <start></start>
-        <end>next monday 11.59pm</end>
-        <priority>high</priority>
+        <title>ME3241 exam</title>
+        <start>22 april 1pm</start>
+        <end>22 april 3pm</end>
+        <priority>low</priority>
+        <tagged>exam</tagged>
         <tagged>school</tagged>
-        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <title>CS2103 exam</title>
+        <start>25 april 1pm</start>
+        <end>25 april 3pm</end>
+        <priority>low</priority>
+        <tagged>exam</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>SSA2211 exam</title>
+        <start>25 april 5pm</start>
+        <end>25 april 7pm</end>
+        <priority>low</priority>
+        <tagged>exam</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>meet grandparents</title>
+        <start></start>
+        <end>30 april</end>
+        <priority>low</priority>
+        <tagged>family</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>clean room</title>
+        <start></start>
+        <end>may</end>
+        <priority>low</priority>
+        <tagged>home</tagged>
     </tasks>
     <tasks>
         <title>do desktop cleaning</title>
@@ -157,24 +258,16 @@
         <tagged>home</tagged>
     </tasks>
     <tasks>
-        <title>taiwan trip</title>
-        <start>1 july</start>
-        <end>7 july</end>
+        <title>meet secondary school friends</title>
+        <start></start>
+        <end>2 may</end>
         <priority>low</priority>
-        <tagged>holiday</tagged>
+        <tagged>friends</tagged>
     </tasks>
     <tasks>
-        <title>aayush's wedding bangalore</title>
-        <start>1 december</start>
-        <end>4 december</end>
-        <priority>low</priority>
-        <tagged>friend</tagged>
-        <tagged>wedding</tagged>
-    </tasks>
-    <tasks>
-        <title>skype meeting with Wandeer</title>
-        <start>this sunday 10pm</start>
-        <end>this sunday 11.30pm</end>
+        <title>attend innovfest unbound</title>
+        <start>3 may</start>
+        <end>4 may 2017</end>
         <priority>low</priority>
         <tagged>work</tagged>
     </tasks>
@@ -186,40 +279,18 @@
         <tagged>friends</tagged>
     </tasks>
     <tasks>
-        <title>buy milk of magnesia</title>
+        <title>brother's birthday</title>
         <start></start>
-        <end>this sunday</end>
-        <priority>medium</priority>
-        <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>meet secondary school friends</title>
-        <start></start>
-        <end>2 may</end>
-        <priority>low</priority>
-        <tagged>friends</tagged>
-    </tasks>
-    <tasks>
-        <title>change bedsheets</title>
-        <start></start>
-        <end>this weekend</end>
-        <priority>low</priority>
-        <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>find/outsource CTO role</title>
-        <start></start>
-        <end>31 may</end>
-        <priority>high</priority>
-        <tagged>work</tagged>
-    </tasks>
-    <tasks>
-        <title>meet grandparents</title>
-        <start></start>
-        <end>30 april</end>
+        <end>24 may</end>
         <priority>low</priority>
         <tagged>family</tagged>
-        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>taiwan trip</title>
+        <start>1 july</start>
+        <end>7 july</end>
+        <priority>low</priority>
+        <tagged>holiday</tagged>
     </tasks>
     <tasks>
         <title>my birthday</title>
@@ -227,13 +298,6 @@
         <end>12 july</end>
         <priority>low</priority>
         <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>setup Wandeer blog and social media</title>
-        <start></start>
-        <end>15 may</end>
-        <priority>high</priority>
-        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>Omotesando trip</title>
@@ -244,11 +308,12 @@
         <tagged>holiday</tagged>
     </tasks>
     <tasks>
-        <title>buy lina's present</title>
-        <start></start>
-        <end>1 june</end>
-        <priority>medium</priority>
-        <tagged>family</tagged>
+        <title>aayush's wedding bangalore</title>
+        <start>1 december</start>
+        <end>4 december</end>
+        <priority>low</priority>
+        <tagged>friend</tagged>
+        <tagged>wedding</tagged>
     </tasks>
     <tasks>
         <title>visit church this sunday 6pm</title>
@@ -258,55 +323,11 @@
         <tagged>church</tagged>
     </tasks>
     <tasks>
-        <title>brother's birthday</title>
-        <start></start>
-        <end>24 may</end>
-        <priority>low</priority>
-        <tagged>family</tagged>
-    </tasks>
-    <tasks>
-        <title>attend innovfest unbound</title>
-        <start>3 may</start>
-        <end>4 may 2017</end>
-        <priority>low</priority>
-        <tagged>work</tagged>
-    </tasks>
-    <tasks>
         <title>meet Jay Ng to discuss partnership</title>
         <start></start>
         <end></end>
         <priority>low</priority>
         <tagged>work</tagged>
-    </tasks>
-    <tasks>
-        <title>TR3002 meeting business plan</title>
-        <start>this thursday 4pm</start>
-        <end>thursday 11.59pm</end>
-        <priority>high</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
-        <title>submit SSA2211 assignment hardcopy</title>
-        <start></start>
-        <end>1 april</end>
-        <priority>low</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
-        <title>FYP presentation</title>
-        <start>19 april 4.15pm</start>
-        <end>19 april 5pm</end>
-        <priority>medium</priority>
-        <tagged>presentation</tagged>
-        <tagged>school</tagged>
-    </tasks>
-    <tasks>
-        <title>return library book</title>
-        <start></start>
-        <end>today</end>
-        <priority>low</priority>
     </tasks>
     <tasks>
         <title>buy psychology textbooks</title>
@@ -343,13 +364,6 @@
         <priority>low</priority>
     </tasks>
     <tasks>
-        <title>buy travel insurance</title>
-        <start></start>
-        <end>30 june</end>
-        <priority>low</priority>
-        <tagged>holiday</tagged>
-    </tasks>
-    <tasks>
         <title>meditate</title>
         <start></start>
         <end>tomorrow morning</end>
@@ -364,6 +378,12 @@
         <tagged>home</tagged>
     </tasks>
     <tasks>
+        <title>check and buy SSO tickets</title>
+        <start></start>
+        <end>this weekend</end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
         <title>family dinner</title>
         <start>sunday 5pm</start>
         <end>sunday 8pm</end>
@@ -371,16 +391,10 @@
         <tagged>home</tagged>
     </tasks>
     <tasks>
-        <title>check and buy SSO tickets</title>
+        <title>buy travel insurance</title>
         <start></start>
-        <end>this weekend</end>
+        <end>30 june</end>
         <priority>low</priority>
-    </tasks>
-    <tasks>
-        <title>search for taiwan accommodation</title>
-        <start></start>
-        <end>15 may</end>
-        <priority>medium</priority>
         <tagged>holiday</tagged>
     </tasks>
     <tasks>
@@ -389,20 +403,6 @@
         <end></end>
         <priority>low</priority>
         <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>go for ECG treadmill</title>
-        <start></start>
-        <end>30 april</end>
-        <priority>medium</priority>
-        <tagged>health</tagged>
-    </tasks>
-    <tasks>
-        <title>new ACE grant launch</title>
-        <start></start>
-        <end>1 may</end>
-        <priority>high</priority>
-        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>buy perspirex</title>

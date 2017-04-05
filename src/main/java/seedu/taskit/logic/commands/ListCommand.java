@@ -1,5 +1,8 @@
 package seedu.taskit.logic.commands;
 
+import java.util.logging.Logger;
+import seedu.taskit.commons.core.LogsCenter;
+
 //@@author A0141872E
 /**
  * Lists all tasks in TaskIt to the user based on given parameters.
@@ -17,6 +20,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_NO_TASK_TODAY = "There is no incomplete task for today! Great";
 
     private String parameter;
+    private final Logger logger = LogsCenter.getLogger(ListCommand.class);
 
     /**
      * List all relevant tasks in TaskIt.
@@ -29,6 +33,8 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        logger.info("-------[Executing ListCommands]"+ this.toString() );
+
         int taskListSize;
         switch (parameter) {
               case "all":
@@ -47,6 +53,11 @@ public class ListCommand extends Command {
                   model.updateFilteredTaskList(parameter);
                   return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
         }
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 
 
