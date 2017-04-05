@@ -20,7 +20,7 @@ public class UserToDo implements ReadOnlyUserToDo {
         assert !CollectionUtil.isAnyNull(name, description, tags);
         if (priority == null) {
             try {
-                this.priority = new Priority("1");
+                this.priority = new Priority(Priority.NO_PRIORITY); //CHANGED THIS FOR CONSISTENCY
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block. Used for events in the future that supports priority
                 e.printStackTrace();
