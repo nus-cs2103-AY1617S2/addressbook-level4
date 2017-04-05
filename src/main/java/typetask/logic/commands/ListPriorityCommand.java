@@ -9,7 +9,7 @@ import typetask.model.task.Priority;
 public class ListPriorityCommand extends Command {
     public static final String COMMAND_WORD = "list*";
 
-    public static final String MESSAGE_SUCCESS = "All high priority task(s) listed!";
+    public static final String MESSAGE_SUCCESS = "High priority task(s) listed!";
 
     Priority priority;
 
