@@ -223,10 +223,10 @@ There is no need to save manually.
 
 * **Add**  `add TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry t/chores`
-  
+
 * **Addf**  `addf TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone t/chores`
-  
+
 * **Addd**  `addd TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone d/210317 t/chores`
 
@@ -240,10 +240,10 @@ There is no need to save manually.
 
 * **List** : `list` <br>
   e.g. `list`
-  
+
 * **Show** : `show done/undone` <br>
   e.g. `show done`
-  
+
 * **Help** : `help` <br>
   e.g.
 

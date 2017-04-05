@@ -163,7 +163,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: 
+Author:
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
