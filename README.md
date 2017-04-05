@@ -1,4 +1,4 @@
-# Tdoay
+# Today
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T09-B1/main/badge.svg?branch=develop)](https://coveralls.io/github/CS2103JAN2017-T09-B1/main?branch=develop)
