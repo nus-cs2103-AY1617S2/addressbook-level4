@@ -76,36 +76,39 @@ public class HotkeyManager {
         hotkeyManager.register(KeyStroke.getKeyStroke(LUCKY_DRAW_NOTIFICATION_COMBINATION), new HotKeyListener() {
             public void onHotKey(HotKey hotKey) {
                 System.out.println(hotKey);
-                notificationTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            SystemTray tray = SystemTray.getSystemTray();
-                            ImageIcon icon = new ImageIcon(getClass().getResource("/images/info_icon.png"));
-                            java.awt.Image image = icon.getImage();
-                            TrayIcon trayIcon = new TrayIcon(image, "notification");
-                            trayIcon.setImageAutoSize(true);
-                            trayIcon.setToolTip("Lucky Draw Reminder");
+                Platform.runLater(()-> {
+                    notificationTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            try {
+                                SystemTray tray = SystemTray.getSystemTray();
+                                ImageIcon icon = new ImageIcon(getClass().getResource("/images/info_icon.png"));
+                                java.awt.Image image = icon.getImage();
+                                TrayIcon trayIcon = new TrayIcon(image, "notification");
+                                trayIcon.setImageAutoSize(true);
+                                trayIcon.setToolTip("Lucky Draw Reminder");
 
-                            MenuItem dismissMenuItem = new MenuItem("Dismiss");
-                            dismissMenuItem.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    tray.remove(trayIcon);
-                                }
-                            });
+                                MenuItem dismissMenuItem = new MenuItem("Dismiss");
+                                dismissMenuItem.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        tray.remove(trayIcon);
+                                    }
+                                });
 
-                            PopupMenu popupMenu = new PopupMenu();
-                            popupMenu.add(dismissMenuItem);
+                                PopupMenu popupMenu = new PopupMenu();
+                                popupMenu.add(dismissMenuItem);
 
-                            trayIcon.setPopupMenu(popupMenu);
-                            tray.add(trayIcon);
-                            trayIcon.displayMessage("Lucky Draw Reminder", "This task is due now.", MessageType.INFO);
-                        } catch (AWTException e) {
-                            e.printStackTrace();
+                                trayIcon.setPopupMenu(popupMenu);
+                                tray.add(trayIcon);
+                                trayIcon.displayMessage("Lucky Draw Reminder",
+                                                        "This task is due now.", MessageType.INFO);
+                            } catch (AWTException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, 0); //0 indicate that it will only be scheduled once
+                    }, 0); //0 indicate that it will only be scheduled once
+                });
             }
         });
     }
