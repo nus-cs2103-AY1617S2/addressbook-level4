@@ -10,7 +10,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="headerLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Viewing help. Press any keys to go back.">
+      <Label fx:id="headerLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
+             text="Viewing help. Press any key(s) to go back.">
          <styleClass>
             <String fx:value="help-header" />
             <String fx:value="bold-text" />

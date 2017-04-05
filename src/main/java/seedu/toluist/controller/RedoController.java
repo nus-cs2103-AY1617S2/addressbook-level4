@@ -21,7 +21,7 @@ public class RedoController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*redo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "redo";
     private static final String PARAMETER_REDO_TIMES = "number";
-    private static final String RESULT_MESSAGE_TEMPLATE = "Your last undone %s %s re-applied.";
+    private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s %s re-applied.";
     private static final int SINGLE_REDO = 1;
 
     //@@author A0162011A
