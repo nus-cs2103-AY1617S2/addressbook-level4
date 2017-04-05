@@ -30,7 +30,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
    * **`undo`** : undoes last command that modified the todo list
    * **`redo`** : redoes the last undo command
-   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
+   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml. If it does not exist, it will create the file.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -113,13 +113,14 @@ Examples:
 ### 2.5. Finding all todos by multiple search parameters: `find`
 
 Finds todos whose descriptions contain any of the given keywords.<br>
-Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/MORE TAGS]`
+Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]`
 
 > * The search is case insensitive.
 > * The order of the keywords does not matter.
 > * Only the task description is searched using the keywords.
 > * Only full words will be matched e.g. "grocer" will not match "groceries"
 > * Todos matching at least one keyword will be returned (i.e. `OR` search).
+> * You can search by type of todo: floating, deadline, event.
 > * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
 > * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
 > * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
@@ -133,6 +134,9 @@ Examples:
 * `find Dog`<br>
 * `find dog math`<br>
   Returns Any todo containing words `dog` or `math`<br>
+* `find ty/floating`<br>
+* `find ty/deadline`<br>
+* `find ty/event`<br>
 * `find s/9:00am 11/11/17`<br>
 * `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
 * `find s/today e/tomorrow`<br>
