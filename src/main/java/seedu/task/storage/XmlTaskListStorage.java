@@ -102,17 +102,22 @@ public class XmlTaskListStorage implements TaskListStorage {
             ioe.printStackTrace();
 
         }
-        this.savedFile = newFile;
-        this.filePath = newFile.toString();
+        updateState(newFile);
+    }
+
+    public void updateState(File file) {
+        this.savedFile = file;
+        this.filePath = file.toString();
     }
 
     @Override
-    public void loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile) throws FileNotFoundException, DataConversionException {
-        // TODO Auto-generated method stub
-        readTaskList(loadFile.toString());
-
-        this.savedFile = loadFile;
-        this.filePath = loadFile.toString();
+    public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+            throws FileNotFoundException, DataConversionException {
+        Optional<ReadOnlyTaskList> newTaskList = readTaskList(loadFile.toString());
+        if (newTaskList.isPresent()) {
+            updateState(loadFile);
+        }
+        return newTaskList;
     }
     //@@author
 

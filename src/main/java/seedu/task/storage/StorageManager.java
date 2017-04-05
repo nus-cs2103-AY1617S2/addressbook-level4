@@ -88,9 +88,10 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile) throws FileNotFoundException, DataConversionException {
+    public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+            throws FileNotFoundException, DataConversionException {
         logger.fine("Attempting to load task manager data from file: " + loadFile.toString());
-        taskListStorage.loadTaskListFromNewLocation(taskList, loadFile);
+        return taskListStorage.loadTaskListFromNewLocation(taskList, loadFile);
     }
     //@@author
 

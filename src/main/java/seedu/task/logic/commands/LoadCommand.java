@@ -4,12 +4,14 @@ package seedu.task.logic.commands;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.model.ReadOnlyTaskList;
 
 /**
  * Loads task data from the specified directory and file.
@@ -60,7 +62,10 @@ public class LoadCommand extends Command {
         System.out.println("Executing load command...");
 
         try {
-            storage.loadTaskListFromNewLocation(model.getTaskList(), toLoad);
+            Optional<ReadOnlyTaskList> newTaskList = storage.loadTaskListFromNewLocation(model.getTaskList(), toLoad);
+            if (newTaskList.isPresent()) {
+                model.resetData(newTaskList.get());
+            }
         } catch (FileNotFoundException | DataConversionException e1) {
             throw new CommandException(MESSAGE_LOAD_IO_EXCEPTION);
         }

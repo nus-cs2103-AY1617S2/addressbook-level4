@@ -56,9 +56,11 @@ public interface TaskListStorage {
      * Loads saved state of Task Manager from specified location
      * @param taskList
      * @param loadFile
+     * @return
      * @throws DataConversionException
      * @throws FileNotFoundException
      */
-    void loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile) throws FileNotFoundException, DataConversionException;
+    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+            throws FileNotFoundException, DataConversionException;
     //@@author
 }
