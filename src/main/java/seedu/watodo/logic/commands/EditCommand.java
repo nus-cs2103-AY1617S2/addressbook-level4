@@ -205,11 +205,11 @@ public class EditCommand extends Command {
         public void setEndDate(Optional<DateTime> endDate) {
             this.endDate = endDate;
         }
-        
+
         public Optional<TaskStatus> getStatus() {
             return status;
         }
-        
+
         public void setStatus(Optional<TaskStatus> status) {
             this.status = status;
         }

@@ -31,7 +31,7 @@ public class DateTimeParser {
 
     private static final int INDEX_VALID_DATE = 0;
     public static final String MESSAGE_INVALID_DATETIME_PREFIX_COMBI = "Too many/few dateTime prefixes!";
-    
+
 
     /** Constructs a DateTimeParser object */
     public DateTimeParser() {}

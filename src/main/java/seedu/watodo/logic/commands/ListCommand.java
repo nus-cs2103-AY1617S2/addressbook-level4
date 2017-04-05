@@ -5,14 +5,14 @@ import java.util.Calendar;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.task.DateTime;
 
-//@@author A0139872R-reused
+//@@author A0139872R
 /**
  * Lists all overdue tasks and upcoming tasks due the next day in the task manager to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    
+
     public static final String ARGUMENT = "";
 
     public static final String MESSAGE_SUCCESS = "Listed all overdue tasks and tasks due tomorrow";
@@ -24,8 +24,8 @@ public class ListCommand extends Command {
     private static final int OFFSET = 0;
     private static DateTime tomorrow;
     private Calendar temp;
-    
-    public ListCommand(){
+
+    public ListCommand() {
         temp = Calendar.getInstance();
         temp.add(Calendar.DATE, DAY_OFFSET);
         temp.set(Calendar.HOUR_OF_DAY, OFFSET);
@@ -33,9 +33,9 @@ public class ListCommand extends Command {
         temp.set(Calendar.SECOND, OFFSET);
         temp.set(Calendar.MILLISECOND, OFFSET);
         try {
-          tomorrow = new DateTime(temp.getTime().toString());
+            tomorrow = new DateTime(temp.getTime().toString());
         } catch (IllegalValueException e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

@@ -244,7 +244,7 @@ public class ModelManager extends ComponentManager implements Model {
             String status = task.getStatus().toString();
             if (status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                 if (task.getEndDate() == null) {
-                  return true;
+                    return true;
                 }
                 if (start == null) {
                     return end.isLater(task.getEndDate());
@@ -279,27 +279,37 @@ public class ModelManager extends ComponentManager implements Model {
             String status = task.getStatus().toString();
             switch (type) {
             case ListDoneCommand.ARGUMENT:
-                if (status.equalsIgnoreCase(type)) {
+                if (status.equalsIgnoreCase(ListDoneCommand.ARGUMENT)) {
                     return true;
+                } else {
+                    return false;
                 }
             case ListDeadlineCommand.ARGUMENT:
                 if (task.getStartDate() == null && task.getEndDate() != null &&
                     status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
+                } else {
+                    return false;
                 }
             case ListEventCommand.ARGUMENT:
                 if (task.getStartDate() != null && task.getEndDate() != null &&
                     status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
+                } else {
+                    return false;
                 }
             case ListFloatCommand.ARGUMENT:
                 if (task.getStartDate() == null && task.getEndDate() == null &&
                     status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
+                } else {
+                    return false;
                 }
             case ListUndoneCommand.ARGUMENT:
                 if (status.equalsIgnoreCase(type)) {
                     return true;
+                } else {
+                    return false;
                 }
             default:
                 return false;

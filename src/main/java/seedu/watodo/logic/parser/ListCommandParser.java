@@ -43,7 +43,7 @@ public class ListCommandParser {
 
         case ListUndoneCommand.ARGUMENT:
             return new ListUndoneCommand();
-          
+
         case ListCommand.ARGUMENT:
             return new ListCommand();
 

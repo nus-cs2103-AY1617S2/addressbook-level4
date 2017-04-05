@@ -36,7 +36,8 @@ public class TagsParser {
         Set<String> unparsedTags = ParserUtil.toSet(tagsTokenizer.getAllValues(PREFIX_TAG));
         Set<String> parsedTags = new HashSet<String>();
         for (String tag : unparsedTags) {
-            tag = tag.split("[\\s+]", NUMFIELD_SPLIT_BY_WHITESPACE)[INDEX_FIRST_ARG];  //tag name is only until the first whitespace
+            tag = tag.split("[\\s+]", NUMFIELD_SPLIT_BY_WHITESPACE)
+                [INDEX_FIRST_ARG];  //tag name is only until the first whitespace
             parsedTags.add(tag);
         }
         this.tags = parsedTags;
