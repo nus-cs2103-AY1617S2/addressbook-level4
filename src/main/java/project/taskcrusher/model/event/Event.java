@@ -87,6 +87,16 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         }
     }
 
+    public Date getEarliestBookedTime() {
+        Date earliest = timeslots.get(0).start;
+        for (int i = 1; i < timeslots.size(); i++) {
+            if (timeslots.get(i).start.before(earliest)) {
+                earliest = timeslots.get(i).start;
+            }
+        }
+        return earliest;
+    }
+
     public List<Timeslot> getTimeslots() {
         return this.timeslots;
     }
@@ -125,6 +135,12 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.setLocation(replacement.getLocation());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
+        if (replacement.isComplete()) {
+            this.markComplete();
+        }
+        if (replacement.isOverdue()) {
+            this.markOverdue();
+        }
     }
 
     @Override
@@ -157,24 +173,19 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         } else if (another.isComplete()) {
             return -1;
         }
-        // TODO: just for now
-        Date thisEarliest = this.timeslots.get(0).start;
-        Date anotherEarliest = another.getTimeslots().get(0).start;
 
-        return thisEarliest.compareTo(anotherEarliest);
+        return this.getEarliestBookedTime().compareTo(another.getEarliestBookedTime());
     }
 
     public boolean hasOverlappingEvent(List<? extends ReadOnlyEvent> preexistingEvents) {
-
-        boolean isOverlapping = false;
         for (ReadOnlyEvent roe : preexistingEvents) {
             for (Timeslot roet : roe.getTimeslots()) {
                 if (this.hasOverlappingTimeslot(roet)) {
-                    isOverlapping = true;
+                    return true;
                 }
             }
         }
-        return isOverlapping;
+        return false;
     }
 
 }
