@@ -64,6 +64,20 @@ public class EndTime {
         // check
     }
 
+    public boolean laterThan(StartTime other) {
+        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean laterThan(EndTime other) {
+        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();

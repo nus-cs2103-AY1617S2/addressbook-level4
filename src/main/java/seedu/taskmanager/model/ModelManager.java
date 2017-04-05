@@ -161,6 +161,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized boolean isBlockedOutTime(Task task) throws UniqueTaskList.DuplicateTaskException {
+        saveInstance();
+        return taskManager.isBlockedOutTime(task);
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;

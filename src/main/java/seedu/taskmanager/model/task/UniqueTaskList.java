@@ -185,6 +185,17 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
+    public boolean isBlockedOutTime(Task t) {
+        int i = 0;
+        while (i < (internalList.size())) {
+            if (internalList.get(i).isEventTask() && t.isWithinStartEndDuration(internalList.get(i))) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
     // @@author A0142418L
     /**
      * Compares the starting date and time of 2 event tasks.

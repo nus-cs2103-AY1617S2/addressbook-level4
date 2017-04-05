@@ -32,6 +32,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with another event";
 
     private final Task toAdd;
     private int addIndex = 0;
@@ -62,6 +63,8 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(MESSAGE_BLOCKED_OUT_TIME);
         }
     }
 }

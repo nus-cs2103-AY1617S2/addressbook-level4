@@ -15,6 +15,7 @@ import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
+import seedu.taskmanager.logic.commands.RecurringCommand;
 
 // @@author A0139520L
 /**
@@ -96,7 +97,9 @@ public class AddCommandParser {
 
                     if (isEmptyField(toPrefixInput)) {
                         endTime = includeOneHourBuffer(startTime);
-                        // if endtime<0100, endDate is next day method
+                        if (Integer.parseInt(endTime) < 100) {
+                            endDate = RecurringCommand.getNewDate(1, "days", endDate);
+                        }
 
                     } else {
                         String[] splitedToPrefixInput = toPrefixInput.split("\\s+");
@@ -259,6 +262,11 @@ public class AddCommandParser {
                             if (Integer.parseInt(splitedEndDate[0]) <= Integer.parseInt(splitedStartDate[0])) {
                                 if (Integer.parseInt(splitedEndDate[0]) < Integer.parseInt(splitedStartDate[0])) {
                                     isValidStartEnd = false;
+                                } else {
+                                    if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
+                                        throw new IllegalValueException(
+                                                "Invalid input of time, start time has to be earlier than end time");
+                                    }
                                 }
                             }
                         }
@@ -267,10 +275,6 @@ public class AddCommandParser {
 
             }
             if (!isValidStartEnd) {
-                throw new IllegalValueException("Invalid input of time, start time has to be earlier than end time");
-            }
-
-            if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
                 throw new IllegalValueException("Invalid input of time, start time has to be earlier than end time");
             }
         }
