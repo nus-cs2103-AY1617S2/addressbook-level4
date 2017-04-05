@@ -20,8 +20,8 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
     public static final String BACKUP_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("temp/");
     private History history = History.getInstance();
-    TestTask[] currentList = td.getTypicalTasks();
-    TestTask[] emptyList = {};
+    private TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] emptyList = {};
 
     @Test
     public void redo_add() {

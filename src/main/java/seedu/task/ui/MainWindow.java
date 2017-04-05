@@ -163,7 +163,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     // @@author A0142487Y
-    void fillInnerParts() {
+    protected void fillInnerParts() {
         switch (this.userPrefs.getTheme()) {
         case Dark:
             taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
@@ -204,7 +204,7 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
-    void hide() {
+    protected void hide() {
         primaryStage.hide();
     }
 
@@ -301,7 +301,7 @@ public class MainWindow extends UiPart<Region> {
     }
     // @@author
 
-    void show() {
+    protected void show() {
         primaryStage.show();
     }
 
