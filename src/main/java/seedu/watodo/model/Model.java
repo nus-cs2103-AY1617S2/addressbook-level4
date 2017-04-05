@@ -56,12 +56,19 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keyword for type*/
     void updateFilteredByTypesTaskList(String type);
 
+    //@@author A0139845R
+    /** Returns the last command saved in command history stack*/
     Command getPreviousCommand();
 
+    /** Adds the executed command to the command history stack*/
     void addCommandToHistory(Command command);
 
+    /** Returns the last undo saved in undo history stack*/
     Command getUndoneCommand();
 
+    /** clears the undo history stack of all commands saved*/
     void clearRedo();
+
+    //@@author
 
 }

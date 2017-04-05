@@ -329,6 +329,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    /**
+     * returns the
+     */
     @Override
     public Command getUndoneCommand() {
         if (!undoneHistory.isEmpty()) {
