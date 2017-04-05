@@ -162,8 +162,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
-        saveInstance();
-
         int index = 0;
         while (index < (filteredTasks.size())) {
             if (filteredTasks.get(index).isEventTask() && !filteredTasks.get(index).getIsMarkedAsComplete()
@@ -173,7 +171,6 @@ public class ModelManager extends ComponentManager implements Model {
             index++;
         }
         return -1;
-
     }
 
     @Override
