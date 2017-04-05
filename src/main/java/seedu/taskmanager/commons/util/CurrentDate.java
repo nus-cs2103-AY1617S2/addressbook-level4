@@ -1,6 +1,7 @@
 package seedu.taskmanager.commons.util;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -278,5 +279,20 @@ public class CurrentDate {
         updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
 
         return updatedDate;
+    }
+
+    public static boolean isValidDate(String date) {
+        String[] dmy = date.trim().split("/");
+        int day = Integer.parseInt(dmy[0]);
+        int month = Integer.parseInt(dmy[1]);
+        int year = Integer.parseInt(dmy[2]);
+
+        YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
+
+        if (day > yearMonthObject.lengthOfMonth() || month > 12) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
