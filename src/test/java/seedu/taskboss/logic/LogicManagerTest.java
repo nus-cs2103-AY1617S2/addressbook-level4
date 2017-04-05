@@ -389,7 +389,7 @@ public class LogicManagerTest {
         // prepare expected TDL
         ToDoList expectedTDL = helper.generateToDoList(threeTasks);
         expectedTDL.removeTask(threeTasks.get(2));
-        
+
         // prepare model
         helper.addToModel(model, threeTasks);
 
@@ -397,13 +397,13 @@ public class LogicManagerTest {
         List<Integer> deletedTaskVisibleIndices = helper.generateNumberList(3);
         List<ReadOnlyTask> deletedTasks = helper.generateReadOnlyTaskList(threeTasks.get(2));
         String tasksAsString = CommandResult.tasksToString(deletedTasks, deletedTaskVisibleIndices);
-        
+
         // test boundary value (last task in the list)
         assertCommandBehavior("delete 3",
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksAsString),
                 expectedTDL,
                 expectedTDL.getTaskList());
-    }  
+    }
 
     @Test
     public void execute_find_invalidArgsFormat() throws IllegalValueException,
