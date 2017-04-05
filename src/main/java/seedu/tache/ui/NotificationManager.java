@@ -23,7 +23,15 @@ import seedu.tache.logic.Logic;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
+/**
+ * Contains methods related to system tray notifications.
+ *
+ */
 public class NotificationManager {
+
+    public static final int EVENT_TYPE = 0;
+    public static final int DEADLINE_TYPE = 1;
+    public static final int REMOVE_SECONDS_OFFSET = 3;
 
     private Logic logic;
     private Timer notificationTimer;
@@ -38,18 +46,32 @@ public class NotificationManager {
     }
 
     /**
-     * Sets a notification timer to tasks that are due tomorrow. The notification timer
+     * Sets a notification timer to tasks that are due tomorrow. The notification timer.
      * will then call showSystemTrayNotification method.
      * @param taskList: Lists of tasks from user's data storage file.
      */
-    private void initTasksWithNotificationTimer(ObservableList<ReadOnlyTask> taskList) {
+    private void initNotificationTimerWithTasks(ObservableList<ReadOnlyTask> taskList) {
         for (ReadOnlyTask task : taskList) {
-            if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
+            //if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
+            if (task.getStartDateTime().isPresent() && isDueInMoreThanTwoHours(task.getStartDateTime().get())) {
                 notificationTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         try {
-                            showSystemTrayNotification(task);
+                            showSystemTrayNotification(task, EVENT_TYPE);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (AWTException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, getTwoHoursBefore(task.getStartDateTime().get())); //0 indicate that it will only be scheduled once
+            } else if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
+                notificationTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            showSystemTrayNotification(task, DEADLINE_TYPE);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (AWTException e) {
@@ -75,12 +97,18 @@ public class NotificationManager {
         return false;
     }*/
 
+    /**
+     * Converts the time of the given object to 2 hours before it with a 3 seconds
+     * offset (1hour 59minutes and 57 seconds).
+     * @param dateTime: The object to modify the time to 2 hours before.
+     * @return a Date object which is 2 hours before the parsed in DateTime object's time.
+     */
     private Date getTwoHoursBefore(DateTime dateTime) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime.getDate());
-        cal.add(Calendar.HOUR, -1);
-        cal.add(Calendar.MINUTE, -59);
-        cal.add(Calendar.SECOND, -57);
+        cal.add(Calendar.HOUR, -1); // -1 hour from the given time
+        cal.add(Calendar.MINUTE, -59); // -59 minutes from the given time
+        cal.add(Calendar.SECOND, -57); // minus 57 seconds from the given time
         return cal.getTime();
     }
 
@@ -91,28 +119,41 @@ public class NotificationManager {
         } else {
             return true;
         }
-
     }
 
     /**
-     * Shows a notification from the system tray
+     * Shows a notification from the system tray.
      * @param task: The task that is being notified about.
      */
-    private void showSystemTrayNotification(ReadOnlyTask task) throws AWTException, java.net.MalformedURLException {
-        String displayMsg = "This task is due tomorrow";
-        if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
-            String time = task.getEndDateTime().get().getTimeOnly();
-            displayMsg += " at " + time.substring(0, time.length() - 3) + ".";
-        } else {
-            displayMsg += ".";
-        }
-
+    private void showSystemTrayNotification(ReadOnlyTask task, int type)
+            throws AWTException, java.net.MalformedURLException {
         SystemTray tray = SystemTray.getSystemTray();
         ImageIcon icon = new ImageIcon(getClass().getResource("/images/info_icon.png"));
         java.awt.Image image = icon.getImage();
         TrayIcon trayIcon = new TrayIcon(image, "notification");
         trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip(task.getName().fullName + " is due tomorrow.");
+
+        String displayMsg = "";
+        if (type == DEADLINE_TYPE) {
+            trayIcon.setToolTip(task.getName().fullName + " is due in 2Hrs.");
+            displayMsg += "This task is due in 2Hrs";
+            if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
+                String time = task.getEndDateTime().get().getTimeOnly();
+                displayMsg += " at " + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + ".";
+            } else {
+                displayMsg += ".";
+            }
+        }
+        if (type == EVENT_TYPE) {
+            trayIcon.setToolTip(task.getName().fullName + " is starting in 2Hrs.");
+            displayMsg += "This task is starting in 2Hrs";
+            if (!task.getStartDateTime().get().getTimeOnly().isEmpty()) {
+                String time = task.getStartDateTime().get().getTimeOnly();
+                displayMsg += " at " + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + ".";
+            } else {
+                displayMsg += ".";
+            }
+        }
 
         MenuItem dismissMenuItem = new MenuItem("Dismiss");
         dismissMenuItem.addActionListener(new ActionListener() {
@@ -130,18 +171,22 @@ public class NotificationManager {
         trayIcon.displayMessage(task.getName().fullName, displayMsg, MessageType.INFO);
     }
 
+    /**
+     * Removes all existing scheduled notifications and reschedule them based on the new TaskList
+     * @param event: Contains the new TaskList modified due to an event
+     */
     public void updateNotifications(TaskManagerChangedEvent event) {
-        notificationTimer.cancel(); //remove old scheudled notifications
+        notificationTimer.cancel(); //remove old scheduled notifications
         notificationTimer = new Timer();
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
-        initTasksWithNotificationTimer(taskList);
+        initNotificationTimerWithTasks(taskList);
     }
 
     /**
-     * Starts adding notifications to the timer
+     * Initialized the scheduling of tasks
      */
     public void start() {
-        initTasksWithNotificationTimer(logic.getFilteredTaskList());
+        initNotificationTimerWithTasks(logic.getFilteredTaskList());
     }
 
     /**

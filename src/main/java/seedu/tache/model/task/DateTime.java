@@ -16,6 +16,9 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 
 public class DateTime {
 
+    private static final String EXPLICIT_DATE_TREE_IDENTIFIER = "EXPLICIT_DATE";
+    private static final String EXPLICIT_TIME_TREE_IDENTIFIER = "EXPLICIT_TIME";
+
     public static final String MESSAGE_DATE_CONSTRAINTS = "Unknown date format. It is recommended to "
                                         + "interchangeably use the following few formats:"
                                         + "\nMM-DD-YY hh:mm:ss or MM/DD/YY 10.30pm";
@@ -38,8 +41,8 @@ public class DateTime {
         }
         this.date = temp.get(0).getDates().get(0);
         String syntaxTree = temp.get(0).getSyntaxTree().toStringTree();
-        boolean hasExplicitDate = syntaxTree.contains("EXPLICIT_DATE");
-        boolean hasExplicitTime = syntaxTree.contains("EXPLICIT_TIME");
+        boolean hasExplicitDate = syntaxTree.contains(EXPLICIT_DATE_TREE_IDENTIFIER);
+        boolean hasExplicitTime = syntaxTree.contains(EXPLICIT_TIME_TREE_IDENTIFIER);
         if (hasExplicitDate ^ hasExplicitTime) {
             if (hasExplicitDate) {
                 this.date.setHours(0);
@@ -151,6 +154,45 @@ public class DateTime {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
+    }
+    //@@author A0150120H
+    /**
+     * Returns if the parser can find any date and/or time text
+     * @param s String to check
+     * @return true if it can be parsed as a date and/or time, false otherwise
+     */
+    public static boolean canParse(String s) {
+        return new Parser().parse(s).size() > 0;
+    }
+
+    /**
+     * Returns if the String contains a time field
+     * @param s String to check
+     * @return true if the Parser sees a time field, false otherwise
+     */
+    public static boolean isTime(String s) {
+        Parser dateTimeParser = new Parser();
+        List<DateGroup> list = dateTimeParser.parse(s);
+        if (list.isEmpty()) {
+            return false;
+        } else {
+            return list.get(0).getSyntaxTree().toStringTree().contains(EXPLICIT_DATE_TREE_IDENTIFIER);
+        }
+    }
+
+    /**
+     * Returns if the String contains a date field
+     * @param s String to check
+     * @return true if the Parser sees a date field, false otherwise
+     */
+    public static boolean isDate(String s) {
+        Parser dateTimeParser = new Parser();
+        List<DateGroup> list = dateTimeParser.parse(s);
+        if (list.isEmpty()) {
+            return false;
+        } else {
+            return list.get(0).getSyntaxTree().toStringTree().contains(EXPLICIT_DATE_TREE_IDENTIFIER);
+        }
     }
     //@@author
 

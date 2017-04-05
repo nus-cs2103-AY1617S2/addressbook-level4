@@ -15,6 +15,7 @@ import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.parser.ParserUtil.DateTimeType;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
 
+//@@author A0150120H
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -32,19 +33,20 @@ public class AddCommandParser {
         if (taskTag.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else if (taskTag.length > 1) {
-            for (String tag: taskTag[1].split(" ")) {
+            for (String tag: taskTag[1].trim().split(" ")) {
                 tagSet.add(tag);
             }
         }
 
         String taskWithoutTags = taskTag[0];
-        Deque<PossibleDateTime> possibleDateTimes = ParserUtil.findDateTime(taskWithoutTags);
+        Deque<PossibleDateTime> possibleDateTimes = ParserUtil.parseDateTimeIdentifiers(taskWithoutTags);
         PossibleDateTime startDateTime = null;
         PossibleDateTime endDateTime = null;
         while (!possibleDateTimes.isEmpty()) {
             PossibleDateTime current = possibleDateTimes.pop();
-
-            if (current.type == DateTimeType.END && endDateTime == null) {
+            if (!ParserUtil.canParse(current.data)) {
+                continue;
+            } else if (current.type == DateTimeType.END && endDateTime == null) {
                 endDateTime = current;
             } else if (current.type == DateTimeType.START && startDateTime == null) {
                 startDateTime = current;
