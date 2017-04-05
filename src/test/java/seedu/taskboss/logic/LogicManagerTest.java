@@ -382,7 +382,7 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
 
-	@Test
+    @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
