@@ -30,6 +30,7 @@ import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.ClearCommand;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.CommandResult;
+import seedu.taskboss.logic.commands.DeleteCommand;
 import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
