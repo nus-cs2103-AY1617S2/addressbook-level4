@@ -104,7 +104,7 @@ public class CompleteCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToComplete::getDescription);
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToComplete::getPriority);
         Timing updatedStartDate = editTaskDescriptor.getStartTiming().orElseGet(taskToComplete::getStartTiming);
-        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToComplete::getStartTiming);
+        Timing updatedEndDate = editTaskDescriptor.getEndTiming().orElseGet(taskToComplete::getEndTiming);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToComplete::getTags);
         boolean updatedRecurring = editTaskDescriptor.isRecurring().orElseGet(taskToComplete::isRecurring);
         RecurringFrequency updatedFrequency = editTaskDescriptor.getFrequency().orElseGet(taskToComplete::getFrequency);
