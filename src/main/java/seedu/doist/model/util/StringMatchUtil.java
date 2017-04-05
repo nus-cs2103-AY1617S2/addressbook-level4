@@ -23,7 +23,12 @@ public class StringMatchUtil {
      */
     private static double stringContain(String target, String query) {
         assert query != null;
-        return StringUtils.containsIgnoreCase(target, query) ? 1.0 : 0.0;
+        String[] words = query.split(" ");
+        double value = 0.0;
+        for (String word: words) {
+            value += StringUtils.containsIgnoreCase(target, word) ? 1.0 : 0.0;
+        }
+        return value;
     }
 
     public static double matchValue(String target, String query) {
@@ -39,7 +44,6 @@ public class StringMatchUtil {
      * @return true if they are close enough, else false
      */
     public static boolean isNearMatch(String target, String query, double threshold) {
-        System.out.println(matchValue(target, query) + "  --" + target + "-- " + query);
         return threshold < matchValue(target, query);
     }
 }
