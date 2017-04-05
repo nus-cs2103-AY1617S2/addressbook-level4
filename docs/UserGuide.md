@@ -83,19 +83,10 @@ Format: `list`
 Edits a Todo's title, start time and endtime.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits a Todo's name and deadline.<br>
-Format: `edit INDEX [TASK] [e/DEADLINE]`
-
-Edits a deadline's endtime.<br>
-Format: `edit INDEX [e/DEADLINE]`
-
 Edits a deadline's endtime with default date.<br>
 Format: `edit INDEX [e/]`
 
-Edits a event's starttime and endtime.<br>
-Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
-
-Edits a event's starttime and endtime with default date.<br>
+Edits a event's start time and endt ime with default date.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
@@ -111,7 +102,8 @@ Format: `edit INDEX [ta/TAG]`
 > * Existing values will be updated to the input values.
 > * Edit with `t/` may replace all the previous tags with new assigned tags.
 > * Edit command will replace the todo with all parameters specified by the command and change todo's type.
-e.g. if you don't specified starttime and endtime for an event, the event will become a task after the edit command.
+e.g. if you don't specified start time and endt ime for an event, the event will become a task after the edit command.
+> * Default edit time is set to 12:00AM today for start time and 1200:AM tomorrow for end time.
 
 Examples:
 
