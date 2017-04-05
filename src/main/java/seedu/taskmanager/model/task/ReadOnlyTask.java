@@ -80,21 +80,21 @@ public interface ReadOnlyTask {
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Event Task
      */
     boolean isEventTask();
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Deadline Task
      */
     boolean isDeadlineTask();
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Floating Task
      */
     boolean isFloatingTask();
