@@ -3,6 +3,7 @@ package seedu.task.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,6 +17,7 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -128,7 +130,6 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setScene(scene);
 
         setAccelerators();
-        setScroll();
     }
 
     // @@author
@@ -150,8 +151,8 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
 
-    private void setScroll() {
-        scroll = new Scroll();
+    private void setScroll(ListView<ReadOnlyTask> taskListView) {
+        scroll = new Scroll(taskListView);
     }
 
     /**
@@ -204,6 +205,7 @@ public class MainWindow extends UiPart<Region> {
             break;
         }
         browserPanel = new BrowserPanel(browserPlaceholder);
+        setScroll(taskListPanel.getTaskListView());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
     }
 
@@ -302,7 +304,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void handleSave() {
-        commandBox.type("save");
+        commandBox.type("save ");
     }
 
     public void handleLoad() {

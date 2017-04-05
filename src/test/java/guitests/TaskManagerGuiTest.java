@@ -28,6 +28,7 @@ import seedu.task.model.TaskManager;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.testutil.TestUtil;
 import seedu.task.testutil.TypicalTestTasks;
+import seedu.task.ui.Scroll;
 
 /**
  * A GUI Test class for TaskManager.
@@ -52,6 +53,7 @@ public abstract class TaskManagerGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
+    protected Scroll scroll;
     private Stage stage;
 
     @BeforeClass
