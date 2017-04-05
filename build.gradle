@@ -20,13 +20,15 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'jacoco'
     apply plugin: 'checkstyle'
+    apply plugin: 'application'
 
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
-        jcenter()
+		maven()
+		jcenter()
         mavenCentral()
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
@@ -59,15 +61,13 @@ allprojects {
         }
     }
 
-    dependencies {
-        compile "org.controlsfx:controlsfx:$controlsFxVersion"
+    dependencies {     
+        compile 'com.google.api-client:google-api-client:1.22.0'
+		compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+    	compile 'com.google.apis:google-api-services-calendar:v3-rev240-1.22.0'compile "org.controlsfx:controlsfx:$controlsFxVersion"
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
-        
-        compile 'com.google.api-client:google-api-client:1.22.0'
-		compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
-    	compile 'com.google.apis:google-api-services-calendar:v3-rev240-1.22.0'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"

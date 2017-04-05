@@ -30,6 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+        
         String username = "esdaesa";
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
         browser.getEngine().getLoadWorker().stateProperty().addListener(
