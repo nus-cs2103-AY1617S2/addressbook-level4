@@ -32,21 +32,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.contains(toCheck);
     }
 
-    /**
-     * Adds a task to the list.
-     *
-     * @throws DuplicateTaskException
-     *             if the task to add is a duplicate of an existing task in the
-     *             list.
-     */
-    public void add(int addIndex, Task toAdd) throws DuplicateTaskException {
-        assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        }
-        internalList.add(addIndex, toAdd);
-    }
-
+    // @@author A0142418L
     /**
      * Adds a task to the list.
      *
@@ -59,7 +45,8 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
-        internalList.add(toAdd);
+
+        internalList.add(findSortedPositionToAdd(toAdd), toAdd);
     }
 
     /**
@@ -87,9 +74,14 @@ public class UniqueTaskList implements Iterable<Task> {
         // class.
         // Then, PersonCard should then bind its text labels to those observable
         // properties.
-        internalList.set(index, taskToUpdate);
+
+        // internalList.set(index, taskToUpdate);
+
+        internalList.remove(index);
+        internalList.add(findSortedPositionToAdd(taskToUpdate), taskToUpdate);
     }
 
+    // @@author A0139520L
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
@@ -201,4 +193,161 @@ public class UniqueTaskList implements Iterable<Task> {
      * index++; } return -1; }
      */
 
+    // @@author A0142418L
+    /**
+     * Compares the starting date and time of 2 event tasks.
+     *
+     * @return true if 1st event task is earlier than the 2nd event task based on the startDate and startTime
+     * @return false, if otherwise.
+     */
+    private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                    readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) == 0) {
+                if (toAdd.getStartDate().value
+                        .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                        .compareTo(readOnlyTask.getStartDate().value.substring(
+                                readOnlyTask.getStartDate().value.length()
+                                        - 5,
+                                readOnlyTask.getStartDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getStartDate().value
+                            .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getStartDate().value.substring(
+                                    readOnlyTask.getStartDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getStartDate().value.length() - 3)) == 0) {
+                        if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                        readOnlyTask.getStartDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                            readOnlyTask.getStartDate().value.length() - 6)) == 0) {
+                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Compares the due date of 2 deadline tasks.
+     *
+     * @return true if 1st deadline task is earlier than the 2nd deadline task based on the endDate and endTime
+     * @return false, if otherwise.
+     */
+    private boolean isAddDeadlineEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getEndDate().value.substring(toAdd.getEndDate().value.length() - 2).compareTo(
+                readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getEndDate().value.substring(toAdd.getEndDate().value.length() - 2).compareTo(
+                    readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 2)) == 0) {
+                if (toAdd.getEndDate().value
+                        .substring(toAdd.getEndDate().value.length() - 5, toAdd.getEndDate().value.length() - 3)
+                        .compareTo(
+                                readOnlyTask.getEndDate().value.substring(readOnlyTask.getEndDate().value.length() - 5,
+                                        readOnlyTask.getEndDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getEndDate().value
+                            .substring(toAdd.getEndDate().value.length() - 5, toAdd.getEndDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getEndDate().value.substring(
+                                    readOnlyTask.getEndDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getEndDate().value.length() - 3)) == 0) {
+                        if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getEndDate().value.substring(0,
+                                        readOnlyTask.getEndDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getEndDate().value.substring(0, toAdd.getEndDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getEndDate().value.substring(0,
+                                            readOnlyTask.getEndDate().value.length() - 6)) == 0) {
+                                if (toAdd.getEndTime().value.compareTo(readOnlyTask.getEndTime().value) < 0) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Finds the sorted position to add new task to the existing list of task.
+     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * 
+     * Event tasks sorted by startDate startTime.
+     * Deadline tasks sorted by endDate endTime.
+     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     *
+     * @return The sorted position index to add the new task in the sorted list of tasks.
+     */
+    private int findSortedPositionToAdd(Task toAdd) {
+        int addIndex = 0;
+        if (!internalList.isEmpty()) {
+            if (toAdd.isEventTask()) {
+                while (internalList.get(addIndex).isEventTask()) {
+                    if (isAddEventEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                        break;
+                    }
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+            }
+
+            if (toAdd.isDeadlineTask()) {
+                while (internalList.get(addIndex).isEventTask()) {
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+                while ((addIndex != internalList.size()) && internalList.get(addIndex).isDeadlineTask()) {
+                    if (isAddDeadlineEarlierAddListIndex(toAdd, internalList.get(addIndex))) {
+                        break;
+                    }
+                    addIndex++;
+                    if (addIndex == internalList.size()) {
+                        break;
+                    }
+                }
+            }
+
+            if (toAdd.isFloatingTask()) {
+                addIndex = internalList.size();
+            }
+        }
+        return addIndex;
+    }
 }
