@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+
 /**
  * Writes and reads files
  */
@@ -84,5 +88,34 @@ public class FileUtil {
         assert pathWithForwardSlash.contains("/");
         return pathWithForwardSlash.replace("/", File.separator);
     }
+    
+    //@@author A0163848R
+    /**
+     * Creates a localized window to create a file for saving.
+     * @param Window title
+     * @param File extension filters
+     * @return Chosen file
+     */
+    public static File promptSaveFileDialog(String title, Stage stage, ExtensionFilter ...extensionFilters) {
+        return getFileChooser(title, extensionFilters).showSaveDialog(stage);
+    }
+    
+    /**
+     * Creates a localized window to select a file for loading.
+     * @param Window title
+     * @param File extension filters
+     * @return Chosen file
+     */
+    public static File promptOpenFileDialog(String title, Stage stage, ExtensionFilter ...extensionFilters) {
+        return getFileChooser(title, extensionFilters).showOpenDialog(stage);
+    }
 
+    private static FileChooser getFileChooser(String title, ExtensionFilter ...extensionFilters) {
+        FileChooser fileChooser = new FileChooser();
+        
+        fileChooser.setTitle(title);
+        fileChooser.getExtensionFilters().addAll(extensionFilters);
+        
+        return fileChooser;
+    }
 }

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.nio.file.Paths;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -8,43 +11,47 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.util.FxViewUtil;
+import seedu.address.commons.events.ui.ExportRequestEvent;
+import seedu.address.commons.events.ui.ImportRequestEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.YTomorrow;
+import seedu.address.model.task.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Region> {
+public class MainWindow extends Window {
 
-    private static final String ICON = "/images/address_book_32.png";
-    private static final String FXML = "MainWindow.fxml";
+    protected static final String ICON = "/images/address_book_32.png";
+    protected static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
-    private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private Config config;
+    private UserPrefs prefs;
 
     @FXML
     private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
-
-    @FXML
-    private MenuItem helpMenuItem;
 
     @FXML
     private AnchorPane personListPanelPlaceholder;
@@ -55,31 +62,54 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
+    @FXML
+    private MenuItem saveMenuItem;
+    
+    @FXML
+    private MenuItem loadMenuItem;
+    
+    @FXML
+    private MenuItem exportMenuItem;
+    
+    @FXML
+    private MenuItem importMenuItem;
+    
+    @FXML
+    private MenuItem helpMenuItem;
+    
+    @FXML
+    private MenuItem themeMenuItem;
+    
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML);
+        super(FXML, primaryStage);
 
         // Set dependencies
-        this.primaryStage = primaryStage;
         this.logic = logic;
         this.config = config;
+        this.prefs = prefs;
 
         // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
-        setWindowMinSize();
+        setWindowMinSize(MIN_HEIGHT, MIN_WIDTH);
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
+        getStage().setScene(scene);
+
+        //@@author A0163848R
+        ThemeManager.changeTheme(getRoot(), prefs.getGuiSettings().getStyleSheet());
+        //@@author
 
         setAccelerators();
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(saveMenuItem,   KeyCombination.valueOf("ctrl+s"));
+        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+v"));
+        setAccelerator(exportMenuItem, KeyCombination.valueOf("ctrl+e"));
+        setAccelerator(importMenuItem, KeyCombination.valueOf("ctrl+i"));
+        setAccelerator(helpMenuItem,   KeyCombination.valueOf("ctrl+h"));
+        setAccelerator(themeMenuItem,  KeyCombination.valueOf("ctrl+c"));
     }
 
     /**
@@ -136,56 +166,81 @@ public class MainWindow extends UiPart<Region> {
         return personListPanelPlaceholder;
     }
 
-    void hide() {
-        primaryStage.hide();
-    }
-
-    private void setTitle(String appTitle) {
-        primaryStage.setTitle(appTitle);
-    }
-
-    /**
-     * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
-     */
-    private void setIcon(String iconSource) {
-        FxViewUtil.setStageIcon(primaryStage, iconSource);
-    }
-
-    /**
-     * Sets the default size based on user preferences.
-     */
-    private void setWindowDefaultSize(UserPrefs prefs) {
-        primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
-        primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
-        if (prefs.getGuiSettings().getWindowCoordinates() != null) {
-            primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
-            primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
-        }
-    }
-
-    private void setWindowMinSize() {
-        primaryStage.setMinHeight(MIN_HEIGHT);
-        primaryStage.setMinWidth(MIN_WIDTH);
-    }
-
     /**
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(
+                stage.getWidth(),
+                stage.getHeight(),
+                (int) stage.getX(),
+                (int) stage.getY(),
+                Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""),
+                prefs.getGuiSettings().getLastLoadedYTomorrow());
     }
-
+    
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
         helpWindow.show();
     }
 
-    void show() {
-        primaryStage.show();
+    //@@author A0163848R
+    @FXML
+    public void handleSave() {
+        File selected = FileUtil.promptSaveFileDialog("Save and Use YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
+            raise(new TargetFileRequestEvent(selected, prefs));
+        }
     }
+    
+    @FXML
+    public void handleLoad() {
+        File selected = FileUtil.promptOpenFileDialog("Load and Use YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
+            raise(new TargetFileRequestEvent(selected, prefs));
+        }
+    }
+    
+    @FXML
+    public void handleExport() {
+        File selected = FileUtil.promptSaveFileDialog("Export YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            ReadOnlyAddressBook current = logic.getYTomorrow();
+            raise(new ExportRequestEvent(current, selected));
+        }
+    }
+    
+    @FXML
+    public void handleImport() {
+        File selected = FileUtil.promptOpenFileDialog("Import YTomorrow File", getStage(),
+                new ExtensionFilter("YTomorrow XML Files", "*.xml"));
+        
+        if (selected != null) {
+            YTomorrow readIn = new YTomorrow();
+            raise(new ImportRequestEvent(readIn, selected));
+            logic.importYTomorrow(readIn);
+        }
+    }
+    
+    @FXML
+    public void handleTheme() {
+        ThemeWindow themeWindow = new ThemeWindow(getRoot(), prefs);
+        themeWindow.fillInnerParts();
+        themeWindow.show();
+    }
+    //@@author
 
     /**
      * Closes the application.

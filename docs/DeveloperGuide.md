@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# Yesterday's Tomorrow - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -191,7 +191,7 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Task Manager data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -263,13 +263,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -346,27 +346,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | new user | see [usage instructions](#usage-instructions) |  refer to instructions when I forget how to use the App
+`* * *` | user | add a new task | keep track of tasks I need to complete
+`* * *` | user | delete a task | remove tasks that are no longer relevant
+`* * *` | user | find a task by name | locate details of task without having to go through the entire list
+`* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
+`* * *` | user | mark tasks as complete | see what I've already completed (and still have left to do)
+`* * *` | user | undo my last action | easily fix typos and mistakes I make
+`* * *` | user | specify a duration of the task | plan when I will complete the task
+`* *`| user | list tasks in order of due date | prioritize what to do next
+`* *`| user | mark tasks as important | prioritize what to do next
+`* *`| user | have a calendar view of all tasks | see how busy I am
+`* *`| user | have my emails converted to tasks or events automatically | save time on manually entering tasks and events
+`* *`| user | add custom tags to tasks | organize my tasks by category
+`* *`| user | be able to migrate my data to another computer | change computers without losing my tasks
+`* *`| user | get a reminder about a task | don't miss a task due date
+`*`| user | print out all tasks | keep a paper copy when there is no computer access
+`*`| user | have an automatically prioritized list | have more time to do the items instead of planning
+`*`| user | have an customizable GUI | feel good looking at my tasks and be motivated
+`*`| user | attach files to tasks | keep track of supplimentary information for the task
+`*`| user | email updates on tasks to people | alert individuals when a task is done
+`*`| user | see percentage of time I spend doing certain types of tasks | have a better understanding of how my time is allocated
+`*`| user | easily share tasks with other people | collaborate on a project with them
+`*`| new user | import task data from other TODO products | easily migrate to DoTomorrow
+`*`| user | add subtasks to tasks | break down larger tasks
+`*`| user | have a history of task edits | keep track of when tasks change (or when I make mistakes)
+`**`| user | edit tag labels | update tag labels (or when I make mistakes)
+`**`| user | create folders for my tasks | organize related tasks together
+`*`| user | save my tasks on the cloud | have a backup of my data or view my tasks accross different devices
+`*`| user | print out all tasks for a specific tag | view all tasks of a specific tag
+`*`| user | add subtasks to my tasks | break down major tasks into smaller steps
+`*`| user | add hyperlinks to my task descriptions | click to useful links without having to copy and paste into my browser
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Yesterday's Tomorrow` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Delete person
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list all tasks
+2. Yesterday's Tomorrow shows a list of tasks
+3. User requests to delete a specific task in the list
+4. Yesterday's Tomorrow deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,8 +402,70 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. Yesterday's Tomorrow shows an error message <br>
   Use case resumes at step 2
+
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests a list of all tasks
+2. DoTomorrow shows a list of all tasks
+3. User requests changes to a certain parameter of a specific task
+4. DoTomorrow changes the requested parameter of the task and displays the updated item to the user
+Use case ends.
+
+**Extensions**
+
+3a. The given index is invalid
+
+> 3a1. DoTomorrow shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Add task or event
+
+**MSS**
+
+1. User enters the task with optional parameters such as due date, start and end time
+2. DoTomorrow parses task and stores it to memory, then displays the task with formatted parameters back to user
+Use case ends.
+
+**Extensions**
+
+2a. Parameters are entered in the wrong format
+
+> 2a1. DoTomorrow shows an error message and an example of correct formatting
+> Use case resumes at step 1
+
+#### Use case: Undo last action
+
+**MSS**
+
+1. User enters undo command
+2. DoTomorrow display command to be undone, and undoes the command
+Use case ends.
+
+**Extensions**
+
+2a. There is no previous action
+
+> Use case ends.
+
+#### Use case: Search tasks
+
+**MSS**
+
+1. User enters the search command with given parameters to search for
+2. DoTomorrow interprets the search command and displays a list of matching tasks
+Use case ends.
+
+**Extensions**
+
+2a. No search terms are given
+
+> 2a1. DoTomorrow shows an error message indicating the user's error
+> Use case resumes at step 1
+
 
 {More to be added}
 
@@ -386,8 +473,11 @@ Use case ends.
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+3. A user with above average typing speed for regular English text (i.e. not code, not [system admin commands](#system-admin-commands))
    should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. All classes and public methods should have documentation.
+5. All commands should be completed within 200ms.
+6. 80% test coverage.
 
 {More to be added}
 
@@ -397,13 +487,159 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Usage Instructions
 
-> A contact detail that is not meant to be shared with others
+> list of commands with instructions on how to use them appropriately
+
+##### System Admin Commands
+
+> shell commands used to perform system level tasks
 
 ## Appendix E : Product Survey
 
 **Product Name**
+
+Author: 6 Wunderkinder GmbH
+
+Pros:
+
+* Can star tasks so important tasks to be easily found.
+* Can parse natural language, ex., “Task A due Wednesday” will be converted to a task with the name Task A and the upcoming Wednesday as the due date.
+* Supports subtasks, comments, and attachments for richer task details.
+* Has reminders so user can be notified before a due date.
+* Entry of tasks is very quick.
+
+Cons:
+
+* No calendar view to schedule tasks
+
+**Trello**
+
+Author: Fog Creek Software
+
+Pros:
+
+* Organize according to lists within a board (kanban)
+* Tags on an item for organization across lists
+* Due dates for reminding users when things have to be finished
+* Calendar view to see what is due today/this week/this month
+* Subtasks (checklists) for breaking down what needs to be done to complete the item
+* Can subscribe to changes of a task so users know when collaborators update the tasks
+* Task descriptions to provide more information about the task
+* Collaborative - multiple people can share boards
+* Commenting for conversations about tasks
+* Add attachments (e.g. PDFs) for additional information
+* Can filter cards for quickly finding tasks based on tags
+* Integrates into other apps (e.g. Github, Dropbox, etc.)
+* Can email tasks to a board to allow non-collaborators to add tasks (e.g. for customer support)
+
+Cons:
+
+* Takes longer to add complex tasks; no natural language input
+* Keyboard shortcuts are slow to move around with
+* Cards are narrow so long descriptions have line wraps
+* Can get cluttered with too many "done" tasks
+
+**Reminder**
+
+Author: Apple Inc
+
+Pros:
+
+* Simple UI design, easy to learn to use
+* Can set due dates for alert
+* Well integrated with notification center on the iPhone (can see tasks and check off for the day)
+* Can sync with other apple products
+* Has a search filter
+* Data can be backed up on [iCloud](https://support.apple.com/kb/ph2608?locale=en_US)
+
+Cons:
+
+* Only 1 dimension of lists (cannot create lists within lists)
+* Can only filter by dates (cannot filter by categories, due dates, etc)
+* Very limited application, low customizability
+* Cannot integrate with other technologies
+* Only available for iPhone users
+* Only for a single user (cannot collaborate)
+
+**To Do Reminder**
+
+Author: App Innovation
+
+Pros:
+
+* Easy and quick to set reminders.
+* Customise your reminder in your own way with repeat options minute, hour, daily, weekly, monthly, weekdays, yearly.
+* Can set in-advance alerts for Reminders.
+* Can choose reminder alert as Notification or Alarm.
+* It will remind you with alarm notification with your favourite sound.
+* With Speech-to-Text, no need to type to create an Reminder.
+* Can smartly handle your reminder notification in case of Driving Car etc for your safe drive.
+* Synchronise birthdays and anniversaries of your friends from Facebook, Phonebook, Google Calendar, or add them manually.
+* Post birthday wishes with lovely cards on your friends Facebook wall or send them Wishes by Gmail, SMS, WhatsApp.
+* With Backup & Restore, you can save all your reminders to SDCard, as mail attachments or upload to Drive.
+* You can see all reminder notes on home screen using app widget.
+* Can choose Day or Night theme for good visibility.
+
+Cons:
+
+* When a reminder pops up, each time the reminder must be clicked, which then opens the app so it can be marked as complete. This is a long process for the user.
+* It does not vibrate with the default notification sound settings, even when the default setting of the phone is set to vibrate.
+* You cannot set the notification level of a task. For example, a user may want to use sound for more important notifications while use a silent notification for others.
+
+**Just Reminder**
+
+Author: AppHouze Co.
+
+Pros:
+
+* Can set ToDo / Task Reminders, Phone Call Reminders, Birthday Reminders, Anniversary Reminders and Bills Reminders with just few clicks.
+* With Speech-to-Text, there is no need to type to create an Reminder.
+* Customisable repeat intervals like repeat every few minutes, hours, day, specific week days, weeks, months, years and more.
+* Customise each reminder with image, specific ring tone or Talking Alarm tone.
+* Can set in-advance alerts for Reminders.
+* Can customise Date & Time Formats.
+* You will not miss any reminder with LED blink (if device supports) and Auto-Snooze feature.
+* Can send wishes from Birthday / Anniversary Reminders.
+* Smart Bills Reminders will remind you every day till they were 'PAID'.
+* With Backup & Restore, you can save all your reminders to SDCard, as mail attachments or upload to Drive.
+
+Cons:
+
+* It has skipping several reminders near end of the year.
+* It does not alert user 5 days in advance of coming bills
+* It doesn't have a pass button when user want to keep something still on your notes but do it at sometime user is not sure in the coming hours or days.
+* Alarms, for some strange reason, repeat themselves.
+* It should have some options more, e.g. make a copy of the existing reminder.
+
+
+**Remind Me - Task Reminder App**
+
+Author: Lucidify Labs
+
+Pros:
+
+* Voice recognition to add reminder.
+* Add a reminder easily and quickly.
+* Select repeat type for the reminder ; Hourly, daily, weekly.
+* Completely customizable snooze time and alarm duration.
+* Do not disturb in silent mode.
+* Automatically store the completed reminders.
+* Disable / enable reminders.
+* Search the reminders.
+* Auto stop vibration and alarm tone.
+* Turn vibration on and off.
+* Simple and easy user interface.
+* Customizable settings.
+* Lightweight, eats less battery.
+
+Cons:
+
+* Alarm would stop ringing all together.
+* If a reminder comes due and your away from your phone it stays on screen few minutes then its gone
+* It alerts user 10 minutes prior. Then you snooze for 15 minutes.
+* Needs alarm to be ringing for long time at least 2 minutes.
+* Can't repeat reminders daily.
 
 Author: ...
 

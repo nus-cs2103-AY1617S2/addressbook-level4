@@ -4,45 +4,29 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Cheuk Ting](https://github.com/ctleungac) <br>
+<img src="images/ctleungac.png" width="150"><br>
+Roles and Responsibilities: In charge of GUI <br>
 
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: UI
+#### [Hsieh Hsin Han](https://github.com/Tony-Hsieh)
+<img src="images/tony-hsieh.png" width="150"><br>
+Roles and Responsibilities: In charge of Model <br>
 
 -----
 
-#### [Leow Yijin](http://github.com/yijinl)
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Data
+#### [Malik Jabati](https://github.com/SmartyMJ)
+<img src="images/smartymj.png" width="150"><br>
+Roles and Responsibilities: Team Lead, Documentation, Scheduling and tracking  <br>
 
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Dev Ops
+#### [Ali Rizvi](https://github.com/EntitySK)
+<img src="images/entitysk.png" width="150"><br>
+Roles and Responsibilities: Testing, Code Quality, Deliverables and deadlines, Eclipse expert, CSS expert, In charge of storage  <br>
 
 -----
-
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>
- Responsibilities: Threading
-
- -----
-
-#### [You Liang](http://github.com/yl-coder)
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>
- Responsibilities: UI
-
- -----
 
 # Contributors
 
