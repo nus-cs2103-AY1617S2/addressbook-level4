@@ -125,7 +125,7 @@ public class TaskCard extends UiPart<Region> {
 
     private String prettyDate (Date date) {
         StringBuilder prettydate = new StringBuilder();
-        prettydate.append(prettyMonth (date.getMonth()));
+        prettydate.append(prettyMonth (date.getMonth() + 1));
         prettydate.append(" " + date.getDate() + ", ");
         prettydate.append((date.getYear() + 1900) + " at ");
         prettydate.append(prettyTime(date.getHours(), date.getMinutes()));
