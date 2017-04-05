@@ -52,7 +52,7 @@ public class AddCommandParser {
         if (taskType == eventTask) {
             List<Date> startDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_START_DATE).get());
             List<Date> endDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_END_DATE).get());
-            String priority = new String("Low");
+            String priority = "Low";
             if (!DateParser.checkValidDateFormat(startDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE));
             }
@@ -73,7 +73,7 @@ public class AddCommandParser {
             }
         } else if (taskType == deadlineTaskWithDate) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_DATE).get());
-            String priority = new String("Low");
+            String priority = "Low";
             if (!DateParser.checkValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
@@ -89,7 +89,7 @@ public class AddCommandParser {
                     );
         } else if (taskType == deadlineTaskWithTime) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_TIME).get());
-            String priority = new String("Low");
+            String priority = "Low";
             if (!DateParser.checkValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
@@ -103,7 +103,7 @@ public class AddCommandParser {
         } else if (taskType == invalidEvent) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else {
-            String priority = new String("Low");
+            String priority = "Low";
             if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
                 priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
             }
