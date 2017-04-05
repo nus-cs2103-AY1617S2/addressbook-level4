@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.util.FxViewUtil;
 
 /**
@@ -54,4 +55,16 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
+
+    //@@author A0139845R
+    /**
+     * Sets the new save location displayed on the footer of the UI when file path is changed
+     * @param sfpce the event created when new file path saved
+     */
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent sfpce) {
+        String newPath = sfpce.newFilePath;
+        setSaveLocation("./" + newPath);
+    }
+    //@@author
 }
