@@ -40,6 +40,7 @@ public class TaskCardHandle extends GuiHandle {
     protected ImageView getImageFromImageView(String fieldId) {
         return getImageFromImageView(fieldId, node);
     }
+
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }

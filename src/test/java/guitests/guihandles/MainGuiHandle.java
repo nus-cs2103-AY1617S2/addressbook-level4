@@ -17,6 +17,10 @@ public class MainGuiHandle extends GuiHandle {
         return new TaskListPanelHandle(guiRobot, primaryStage);
     }
 
+    public CategoryListPanelHandle getCategoryListPanel() {
+        return new CategoryListPanelHandle(guiRobot, primaryStage);
+    }
+
     public ResultDisplayHandle getResultDisplay() {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }
@@ -29,9 +33,6 @@ public class MainGuiHandle extends GuiHandle {
         return new MainMenuHandle(guiRobot, primaryStage);
     }
 
-    public BrowserPanelHandle getBrowserPanel() {
-        return new BrowserPanelHandle(guiRobot, primaryStage);
-    }
 
     public AlertDialogHandle getAlertDialog(String title) {
         guiRobot.sleep(1000);
