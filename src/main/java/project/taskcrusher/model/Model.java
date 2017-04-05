@@ -21,10 +21,21 @@ public interface Model {
      */
     void resetData(ReadOnlyUserInbox newData);
 
+    /**
+     * Undoes the previously performed action. If there is no undo to perform, returns false.
+     */
+    boolean undo();
+
+    /**
+     * Re-does the previously performed undo. If there is no undo to redo, returns false
+     */
+    boolean redo();
+
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
     void prepareListsForUi();
+
     // ========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
