@@ -4,22 +4,22 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 12pt;
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 12pt;
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: #002c54;
     -fx-opacity: 1;
     -fx-font-weight: bold;
@@ -28,7 +28,7 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Century Gothic";
 }
 
 .tab-pane {
@@ -64,7 +64,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -88,7 +88,7 @@
 .split-pane {
     -fx-border-radius: 0;
     -fx-border-width: 0;
-    -fx-background-color: #e2e8e4;
+    -fx-background-color: transparent;
 }
 
 .list-cell {
@@ -107,17 +107,17 @@
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 22px;
     -fx-text-fill: white;
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
+    -fx-font-size: 14px;
     -fx-text-fill: white;
 }
 
 .anchor-pane {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: black;
     -fx-padding: 0 0 0 0;
 }
 
@@ -180,13 +180,17 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Century Gothic";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
 .menu .left-container {
     -fx-background-color: #002c54;
+}
+
+.command-box-text {
+    -fx-background-color: #ffccbb;
 }
 
 /*
@@ -200,8 +204,8 @@
     -fx-border-width: 0;
     -fx-background-radius: 0;
     -fx-background-color: #002c54;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
+    -fx-font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+    -fx-font-size: 12pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
@@ -292,7 +296,7 @@
 }
 
 #commandTypeLabel {
-    -fx-font-size: 11px;
+    -fx-font-size: 12pt;
     -fx-text-fill: #F70D1A;
 }
 
@@ -315,5 +319,5 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 12pt;
 }
