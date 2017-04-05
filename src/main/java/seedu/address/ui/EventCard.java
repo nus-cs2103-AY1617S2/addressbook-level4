@@ -22,14 +22,6 @@ public class EventCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label duration;
-//    @FXML
-//    private Label startTime;
-//    @FXML
-//    private Label startDate;
-//    @FXML
-//    private Label endTime;
-//    @FXML
-//    private Label endDate;
     @FXML
     private Label locations;
     @FXML
