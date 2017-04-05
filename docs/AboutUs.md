@@ -30,11 +30,12 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Load Command]()
 * Code written: [[functional code](A0163559U.md)][[test code](A0163559U.md)]
 * Other major contributions:
-    * Maintained all storage tests, comparable tests
-    * Maintained git repo, git page; set up Travis, Appveyor, Codacy, Coveralls
+    * Maintained storage tests, comparable tests
+    * Updated testutil files, e.g. TestTask and TaskBuilder
     * Tracked down and fixed general bugs such as null pointer on exit command
-    * Provided assistance with some helpful Eclipse and Sublime Text features
-    * Updates testutil files, e.g. TestTask and TaskBuilder
+    * Maintained git repo, git page; set up Travis, Appveyor, Codacy, Coveralls
+    * Provided team assistance with some helpful Eclipse and Sublime Text features
+
 
 -----
 
