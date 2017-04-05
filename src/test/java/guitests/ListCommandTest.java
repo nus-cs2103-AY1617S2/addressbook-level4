@@ -48,7 +48,7 @@ public class ListCommandTest extends AddressBookGuiTest {
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "overdue"));
 
 	}
-	
+
 	private void assertListResult(TestTask... expectedHits) {
         assertListSize(expectedHits.length);
         Arrays.sort(expectedHits);
