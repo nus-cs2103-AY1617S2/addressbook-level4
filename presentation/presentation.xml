@@ -341,14 +341,6 @@
         <tagged>petcare</tagged>
     </todos>
     <todos>
-        <name>Implement recurring tasks</name>
-        <startTime>Thu Apr 13 11:00:00 HKT 2017</startTime>
-        <endTime>Thu Apr 13 12:00:00 HKT 2017</endTime>
-        <completeTime></completeTime>
-        <tagged>school</tagged>
-        <tagged>dev</tagged>
-    </todos>
-    <todos>
         <name>Do laundry</name>
         <startTime>Thu Apr 13 11:00:00 HKT 2017</startTime>
         <endTime>Thu Apr 13 12:00:00 HKT 2017</endTime>
@@ -358,7 +350,15 @@
         <tagged>chores</tagged>
     </todos>
     <todos>
-        <name>Walk the iguana</name>
+        <name>Walk the python</name>
+        <startTime>Thu Apr 13 11:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 13 12:00:00 HKT 2017</endTime>
+        <completeTime></completeTime>
+        <tagged>recreation</tagged>
+        <tagged>petcare</tagged>
+    </todos>
+    <todos>
+        <name>Walk the moose</name>
         <startTime>Thu Apr 13 11:00:00 HKT 2017</startTime>
         <endTime>Thu Apr 13 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
