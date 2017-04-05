@@ -3,9 +3,9 @@ package seedu.doist.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.doist.model.task.ReadOnlyTask;
@@ -22,7 +22,7 @@ public class TaskCard extends UiPart<Region> {
     public static final String FINISHED_STYLE_CLASS = "finished";
 
     @FXML
-    private HBox cardPane;
+    private BorderPane cardPane;
     @FXML
     private GridPane grid;
     @FXML

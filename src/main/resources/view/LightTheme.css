@@ -258,6 +258,11 @@
     -fx-padding: 8 1 8 1;
 }
 
+.scroll-bar:horizontal {
+    -fx-opacity: 1;
+    -fx-padding:-2;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 0 4;
