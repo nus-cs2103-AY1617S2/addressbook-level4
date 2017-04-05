@@ -94,7 +94,7 @@ public class EzDoTest {
         EzDo typicalEzDo2 = new TypicalTestTasks().getTypicalEzDo();
         assertEquals(typicalEzDo.hashCode(), typicalEzDo2.hashCode());
     }
-
+//@@author
     @Test
     public void moveCurrentTaskToDone_ive() throws IllegalValueException {
         EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
@@ -159,7 +159,6 @@ public class EzDoTest {
         };
         typicalEzDo.toggleTasksDone(tasksToToggle);
     }
-    //@@author
     /**
      * A stub ReadOnlyEzDo whose tasks and tags lists can violate interface constraints.
      */
