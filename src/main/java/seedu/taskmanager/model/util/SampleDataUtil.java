@@ -1,7 +1,5 @@
 package seedu.taskmanager.model.util;
 
-import java.lang.Boolean;
-
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
