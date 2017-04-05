@@ -7,7 +7,7 @@ package seedu.geekeep.logic.commands;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
+    public static final String MESSAGE_USAGE = "No argument should be given to list";
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
 
