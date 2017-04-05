@@ -149,14 +149,6 @@ public class ModelManager extends ComponentManager implements Model {
         return numDeletedTasks;
     }
 
-    @Override
-    public synchronized void addTask(int addIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        saveInstance();
-        taskManager.addTask(addIndex, task);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-    }
-
     // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {

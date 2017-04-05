@@ -90,7 +90,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void addTask(int addIndex, Task t) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(t);
-        tasks.add(addIndex, t);
+        tasks.add(t);
     }
 
     /**
