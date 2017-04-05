@@ -26,7 +26,7 @@ public class EditCommandTest extends TodoListGuiTest {
     TestTodo[] expectedTodosList = td.getTypicalTodos();
 
     @Test
-    public void editAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby t/husband";
         int todoListIndex = 1;
 
@@ -36,7 +36,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
     //@@author A0165043M
     @Test
-    public void editTaskToEventSuccess() throws Exception {
+    public void edit_taskToEvent_success() throws Exception {
         String detailsToEdit = "Bobby s/3:00AM 17/10/11 e/6:00AM 17/11/11 t/husband";
         int todoListIndex = 1;
 
@@ -47,7 +47,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editTaskToDeadLineWithoutOtherChangeSuccess() throws Exception {
+    public void edit_taskToDeadLineWithoutOtherChanges_success() throws Exception {
         String detailsToEdit = "e/6:00AM 17/11/2011";
         int todoListIndex = 1;
 
@@ -58,7 +58,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDeadLineWithDefaultSuccess() throws Exception {
+    public void edit_deadLineWithDefault_success() throws Exception {
         String detailsToEdit = "e/";
         int todoListIndex = 8;
 
@@ -69,7 +69,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editEventWithDefaultSuccess() throws Exception {
+    public void edit_eventWithDefault_success() throws Exception {
         String detailsToEdit = "s/ e/";
         int todoListIndex = 9;
 
@@ -81,7 +81,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editTaskToEventWithoutOtherChangeSuccess() throws Exception {
+    public void edit_taskToEventWithoutOtherChange_success() throws Exception {
         String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
         int todoListIndex = 1;
 
@@ -92,7 +92,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDeadLineToEventWithoutOtherChangeSuccess() throws Exception {
+    public void edit_deadLineToEventWithoutOtherChange_success() throws Exception {
         String detailsToEdit = "s/6:00AM 18/11/2011 e/6:00AM 17/11/2011";
         int todoListIndex = 8;
 
@@ -103,7 +103,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editTaskToDeadLineSuccess() throws Exception {
+    public void edit_taskToDeadLine_success() throws Exception {
         String detailsToEdit = "Bobby e/6:00AM 17/11/11 t/husband";
         int todoListIndex = 1;
 
@@ -114,7 +114,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDeadLineToEventSuccess() throws Exception {
+    public void edit_deadLineToEvent_success() throws Exception {
         String detailsToEdit = "Bobby s/3:00AM 17/10/11 e/6:00AM 17/11/11 t/husband";
         int todoListIndex = 8;
 
@@ -125,7 +125,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDeadLineToTaskSuccess() throws Exception {
+    public void edit_deadLineToTask_success() throws Exception {
         String detailsToEdit = " Bobby t/husband";
         int todoListIndex = 8;
 
@@ -135,7 +135,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editEventToTaskSuccess() throws Exception {
+    public void edit_eventToTask_success() throws Exception {
         String detailsToEdit = "Bobby t/husband";
         int todoListIndex = 9;
 
@@ -145,7 +145,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editEventToDeadLineSuccess() throws Exception {
+    public void edit_eventToDeadLine_success() throws Exception {
         String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
         int todoListIndex = 9;
 
@@ -156,7 +156,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editWithAddTagsSuccess() throws Exception {
+    public void edit_addTags_success() throws Exception {
         String detailsToEdit = " ta/husband";
         int todoListIndex = 1;
 
@@ -166,7 +166,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editWithTwoAddTagsSuccess() throws Exception {
+    public void edit_twoAddTags_success() throws Exception {
         String detailsToEdit = "ta/husband ta/twoAddTags";
         int todoListIndex = 1;
 
@@ -177,7 +177,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
     //@@author
     @Test
-    public void editAllFieldsSpecifiedEventSuccess() throws Exception {
+    public void edit_allFieldsSpecifiedEvent_success() throws Exception {
         String detailsToEdit = "Bobby t/husband";
         int todoListIndex = 1;
 
@@ -187,7 +187,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editNotAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
         int todoListIndex = 2;
 
@@ -198,7 +198,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editClearTagsSuccess() throws Exception {
+    public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
         int todoListIndex = 2;
         TestTodo todoToEdit = expectedTodosList[todoListIndex - 1];
@@ -208,7 +208,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editFindThenEditSuccess() throws Exception {
+    public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find cat");
 
         String detailsToEdit = "Feed the cat";
@@ -222,7 +222,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
     //@@author A0165043M
     @Test
-    public void editWithOnlyDateSuccess() throws Exception {
+    public void edit_withOnlyDate_success() throws Exception {
         String detailsToEdit = "e/11/11/11";
         int todoListIndex = 1;
 
@@ -242,39 +242,39 @@ public class EditCommandTest extends TodoListGuiTest {
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
     @Test
-    public void editWithInvalidValuefailure() {
+    public void edit_withInvalidValue_failure() {
         commandBox.runCommand("edit 1 Walk the dog s/12 e/12");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
     }
 
     @Test
-    public void editTimeOnlyFailure() {
+    public void edit_timeOnly_failure() {
         commandBox.runCommand("edit 1 s/12:00PM");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
     }
     //@@author
     @Test
-    public void editMissingTodoIndexFailure() {
+    public void edit_missingTodoIndex_failure() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
 
     @Test
-    public void editInvalidTodoIndexFailure() {
+    public void edit_invalidTodoIndex_failure() {
         int invalidTodoIndex = expectedTodosList.length + 1;
         commandBox.runCommand("edit " + invalidTodoIndex + " Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TODO_DISPLAYED_INDEX);
     }
 
     @Test
-    public void editNoFieldsSpecifiedFailure() {
+    public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
-    public void editInvalidValuesFailure() {
+    public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
@@ -283,7 +283,7 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void editDuplicateTodoFailure() {
+    public void edit_DuplicateTodo_failure() {
         commandBox.runCommand("edit 2 Walk the dog t/petcare");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TODO);
     }

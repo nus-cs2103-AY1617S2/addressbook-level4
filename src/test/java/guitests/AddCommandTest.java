@@ -22,7 +22,7 @@ import seedu.todolist.testutil.TodoBuilder;
 public class AddCommandTest extends TodoListGuiTest {
 
     @Test
-    public void add() {
+    public void add_sampleTest_success() {
         //add one todo
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.laundry;
@@ -51,20 +51,20 @@ public class AddCommandTest extends TodoListGuiTest {
     }
   //@@author A0165043M
     @Test
-    public void addEventTest() {
+    public void add_event_success() {
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.lunch;
         assertAddSuccess(todoToAdd, currentList);
     }
 
     @Test
-    public void addDeadLineTest() {
+    public void add_deadLine_success() {
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd = td.job;
         assertAddSuccess(todoToAdd, currentList);
     }
     @Test
-    public void addEventByDateTest() {
+    public void add_eventByDate_success() {
         TestTodo[] currentList = td.getTypicalTodos();
         TestTodo todoToAdd;
         try {
@@ -86,7 +86,7 @@ public class AddCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void getTimeByDefaultTest() {
+    public void add_getTimeByDefault_success() {
         try {
             Set<String> str = new HashSet<String>();
             AddCommand addComand = new AddCommand("testGetTime", str);
@@ -113,7 +113,7 @@ public class AddCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void invalidDateTimeInputTest() {
+    public void add_invalidDateTime_failure() {
         commandBox.runCommand("add invalidDateTimeInput s/11");
         assertResultMessage(AddCommand.MESSAGE_INVALID_TIME);
 
