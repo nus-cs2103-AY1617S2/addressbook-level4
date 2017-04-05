@@ -313,7 +313,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    // @@author A0142487Y
     private class StringAndDateQualifier implements Qualifier {
         private boolean isExact = false;
         private boolean isPossibleDate = true;
@@ -417,13 +416,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return this.value == task.isDone();
-//            if (this.value && task.isDone()) {
-//                return true;
-//            } else if (!this.value && !task.isDone()) {
-//                return true;
-//            } else {
-//                return false;
-//            }
         }
     }
 

@@ -45,7 +45,6 @@ public class UiManager extends ComponentManager implements Ui {
         this.prefs = prefs;
     }
 
-    // @@author A0142487Y
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
@@ -125,11 +124,13 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
+  //@@author A0142487Y
     @Subscribe
     public CommandResult handleQueryUnknownCommandEvent(QueryUnknownCommandEvent event) {
         EventsCenter.getInstance().post(new ShowHelpFormatRequestEvent());
         return new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE);
     }
+  //@@author 
 
     @Subscribe
     public void handleShowHelpEvent(ShowHelpRequestEvent event) {

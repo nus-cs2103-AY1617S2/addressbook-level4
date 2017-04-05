@@ -9,7 +9,7 @@ import guitests.guihandles.HelpFormatWindowHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.EditCommand;
-
+//@@author A0142487Y
 public class HelpCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -40,7 +40,8 @@ public class HelpCommandTest extends TaskManagerGuiTest {
         assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
         assertResultMessage(String.format(MESSAGE_COMMAND_DOES_NOT_EXIST, incorrectCommandWord));
     }
-
+  //@@author 
+  //@@author A0142487Y--reused
     private void assertHelpFormatWindowOpen(HelpFormatWindowHandle helpFormatWindowHandle) {
         assertTrue(helpFormatWindowHandle.isWindowOpen());
         helpFormatWindowHandle.closeWindow();

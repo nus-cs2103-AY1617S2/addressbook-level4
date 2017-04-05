@@ -7,6 +7,7 @@ import org.junit.Test;
 import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 
+//@@author A0142487Y
 public class FindExactCommandTest extends TaskManagerGuiTest {
 
     @Test
