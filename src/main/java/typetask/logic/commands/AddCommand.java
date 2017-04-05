@@ -30,22 +30,23 @@ public class AddCommand extends Command {
 
     private final Task toAdd;
 
+    //@@author A0139926R
     /**
      * Creates an AddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    //Floating Task
+    //Creates a Floating Task
     public AddCommand(String name)
             throws IllegalValueException {
         this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));
     }
-    //Deadline Task
+    //Creates a Deadline Task
     public AddCommand(String name, String dateTime)
             throws IllegalValueException {
         this.toAdd = new Task(new Name(name), new DueDate(""), new DueDate(dateTime), false, new Priority("Low"));
     }
-    //Event Task
+    //Creates an Event
     public AddCommand(String name, String date, String endDate)
             throws IllegalValueException {
         this.toAdd = new Task(new Name(name), new DueDate(date), new DueDate(endDate), false, new Priority("Low"));

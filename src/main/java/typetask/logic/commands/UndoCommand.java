@@ -1,6 +1,11 @@
 package typetask.logic.commands;
 
 //@@author A0139926R
+/**
+ * Undo recent command entered.
+ * Undo commands that makes modification to data
+ * E.g add,delete,edit,clear,done
+ */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
@@ -8,13 +13,15 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo the most recent command." + "\n\nExample: "
             + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Restored previous command.";
-    public static final String MESSAGE_FAILURE = "An error occured when running undo command.";
-    public static final String MESSAGE_EMPTY_HISTORY = "There is nothing to undo.";
+    public static final String MESSAGE_FAILURE = "No previous command to undo";
 
     private static final int STATUS_EMPTY_HISTORY = 0;
     private static final int STATUS_ERROR_HISTORY = -1;
 
-
+    /**
+     * Returns failure if there is no command executed before
+     * Returns success if a command is found to be executed before this command
+     */
     @Override
     public CommandResult execute() {
         switch (model.restoreTaskManager()) {

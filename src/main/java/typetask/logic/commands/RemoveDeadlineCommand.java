@@ -12,7 +12,9 @@ import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 
 //@@author A0139926R
-//Removes the deadline for a task
+/**
+ * Remove all the date and time for a task
+ */
 public class RemoveDeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "removedeadline";

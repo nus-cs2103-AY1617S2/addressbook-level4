@@ -4,7 +4,6 @@ import typetask.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a task's date in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 //@@author A0139926R
 public class DueDate {
