@@ -14,6 +14,9 @@ public class CommandBoxTest extends TaskManagerGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
+    //@@author A0142255M
+    private static final String EMPTY_COMMAND = "";
+    //@@author
 
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
@@ -60,14 +63,38 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     @Test
     public void commandAutocompletesWithEnterKey() {
         commandBox.enterCommand("del");
-        commandBox.pressEnterKey();
+        commandBox.pressEnter();
         assertEquals(commandBox.getCommandInput(), "delete ");
     }
 
     @Test
     public void commandAutocompletesLexicographicallySmallerCommand() {
         commandBox.enterCommand("e"); // autocomplete options: edit or exit
-        commandBox.pressEnterKey();
-        assertEquals(commandBox.getCommandInput(), "clear");
+        commandBox.pressEnter();
+        assertEquals(commandBox.getCommandInput(), "edit ");
     }
+
+    @Test
+    public void commandGoesToPreviousCommandWithUpKey() {
+        // succeeded command
+        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        commandBox.pressUp();
+        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_SUCCEEDS);
+
+        // failed command
+        commandBox.runCommand(COMMAND_THAT_FAILS);
+        commandBox.pressUp();
+        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_FAILS);
+    }
+
+    @Test
+    public void commandGoesToNextCommandWithDownKey() {
+        commandBox.runCommand("list completed");
+        commandBox.runCommand("list uncompleted");
+        commandBox.pressUp(); // "list uncompleted"
+        commandBox.pressUp(); // "list completed"
+        commandBox.pressDown();
+        assertEquals(commandBox.getCommandInput(), "list uncompleted");
+    }
+
 }

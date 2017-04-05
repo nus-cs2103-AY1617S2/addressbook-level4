@@ -19,9 +19,18 @@ public class SaveCommandParser {
      * and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
-        File f = new File(args.trim());
-        if (f.exists() && f.isDirectory()) {
-            return new SaveCommand(args.trim());
+        if (!(Character.toString(args.trim().charAt(0)).equals("/")) &&
+                !(Character.toString(args.trim().charAt(0)).equals("\\"))) {
+            File directory = new File(args.trim());
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            if (directory.isDirectory()) {
+                return new SaveCommand(args.trim());
+            } else {
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_DIRECTORY, SaveCommand.MESSAGE_USAGE));
+            }
         } else {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_DIRECTORY, SaveCommand.MESSAGE_USAGE));

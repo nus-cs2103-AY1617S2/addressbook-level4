@@ -40,22 +40,22 @@ public class TaskCountTest extends TaskManagerGuiTest {
 
         // list complete
         commandBox.runCommand("list completed");
-        assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
-        assertEquals(taskCount.getTimedTaskCount().getText(), "2");
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "2");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "1");
 
         // list uncompleted
         commandBox.runCommand("list uncompleted");
-        assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
-        assertEquals(taskCount.getTimedTaskCount().getText(), "1");
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "0");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "2");
 
         // list timed
         commandBox.runCommand("list timed");
         assertEquals(taskCount.getFloatingTaskCount().getText(), "0");
-        assertEquals(taskCount.getTimedTaskCount().getText(), "1");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "2");
 
         // list floating
         commandBox.runCommand("list floating");
-        assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "0");
         assertEquals(taskCount.getTimedTaskCount().getText(), "0");
     }
 

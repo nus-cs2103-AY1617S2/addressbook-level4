@@ -1,10 +1,17 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.model.tag.UniqueTagList;
 
@@ -24,6 +31,8 @@ public class Task implements ReadOnlyTask {
     private boolean isTimed;
     private boolean isRecurring;
     private RecurInterval interval;
+    private List<Date> recurCompletedList;
+    private String recurDisplayDate;
 
     /**
      * Every field must be present and not null.
@@ -38,11 +47,13 @@ public class Task implements ReadOnlyTask {
         this.isTimed = false;
         this.isRecurring = false;
         this.interval = RecurInterval.NONE;
+        this.recurCompletedList = new ArrayList<Date>();
+        this.recurDisplayDate = "";
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
                     UniqueTagList tags, boolean isTimed, boolean isActive, boolean isRecurring,
-                    RecurInterval interval) {
+                    RecurInterval interval, List<Date> recurCompletedList) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -56,6 +67,8 @@ public class Task implements ReadOnlyTask {
         }
         this.isRecurring = isRecurring;
         this.interval = interval;
+        this.recurCompletedList = recurCompletedList;
+        this.recurDisplayDate = "";
     }
 
     /**
@@ -64,7 +77,7 @@ public class Task implements ReadOnlyTask {
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
                     source.getTimedStatus(), source.getActiveStatus(), source.getRecurringStatus(),
-                    source.getRecurInterval());
+                    source.getRecurInterval(), source.getRecurCompletedList());
     }
 
     @Override
@@ -79,6 +92,18 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartDateTime() {
+        if (!recurDisplayDate.equals("")) {
+            try {
+                String time = "";
+                if (startDateTime.isPresent()) {
+                    time = " " + startDateTime.get().getTimeOnly();
+                }
+                return Optional.of(new DateTime(recurDisplayDate + time));
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return startDateTime;
     }
 
@@ -88,6 +113,18 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getEndDateTime() {
+        if (!recurDisplayDate.equals("")) {
+            try {
+                String time = "";
+                if (endDateTime.isPresent()) {
+                    time = " " + endDateTime.get().getTimeOnly();
+                }
+                return Optional.of(new DateTime(recurDisplayDate + time));
+            } catch (IllegalValueException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return endDateTime;
     }
 
@@ -126,7 +163,7 @@ public class Task implements ReadOnlyTask {
     public void setActiveStatus(boolean isActive) {
         this.isActive = isActive;
     }
-
+    //@@author A0139925U
     @Override
     public boolean getRecurringStatus() {
         return isRecurring;
@@ -145,6 +182,97 @@ public class Task implements ReadOnlyTask {
         this.interval = interval;
     }
 
+    @Override
+    public boolean isMasterRecurring() {
+        return this.isRecurring && this.recurDisplayDate.equals("");
+    }
+
+    @Override
+    public List<Date> getRecurCompletedList() {
+        return this.recurCompletedList;
+    }
+
+    public void setRecurCompletedList(List<Date> recurCompletedList) {
+        this.recurCompletedList = recurCompletedList;
+    }
+
+    public List<Task> getUncompletedRecurList(Date endingRangeDate) {
+        List<Task> uncompletedRecurList = new ArrayList<Task>();
+        if (startDateTime.isPresent() && isRecurring) {
+            Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
+                                            + " " + startDateTime.get().getTimeOnly());
+            Calendar calendarNow = Calendar.getInstance();
+            if (endingRangeDate == null) {
+                calendarNow.setTime(new Date());
+                if (interval.equals(RecurInterval.DAY)) {
+                    calendarNow.add(Calendar.WEEK_OF_YEAR, 2);
+                } else if (interval.equals(RecurInterval.WEEK)) {
+                    calendarNow.add(Calendar.MONTH, 2);
+                } else if (interval.equals(RecurInterval.MONTH)) {
+                    calendarNow.add(Calendar.YEAR, 1);
+                } else if (interval.equals(RecurInterval.YEAR)) {
+                    calendarNow.add(Calendar.YEAR, 5);
+                }
+            } else {
+                calendarNow.setTime(endingRangeDate);
+            }
+            while ((currentDate.before(calendarNow.getTime())
+                    || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
+                    && currentDate.getMonth() == calendarNow.get(Calendar.MONTH)
+                    && currentDate.getYear() == calendarNow.get(Calendar.YEAR)))) {
+                if (endDateTime.isPresent()) {
+                    if (currentDate.after(new Date(endDateTime.get().getAmericanDateOnly()
+                                            + " " + endDateTime.get().getTimeOnly()))) {
+                        break;
+                    }
+                }
+                Task temp = new Task(this);
+                if (!temp.isRecurCompleted(currentDate)) {
+                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                    String tempDate = df.format(currentDate);
+                    temp.setRecurDisplayDate(tempDate);
+                    uncompletedRecurList.add(temp);
+                }
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                if (temp.interval == RecurInterval.DAY) {
+                    calendar.add(Calendar.DATE, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.WEEK) {
+                    calendar.add(Calendar.WEEK_OF_YEAR, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.MONTH) {
+                    calendar.add(Calendar.MONTH, 1);
+                    currentDate = calendar.getTime();
+                } else if (temp.interval == RecurInterval.YEAR) {
+                    calendar.add(Calendar.YEAR, 1);
+                    currentDate = calendar.getTime();
+                }
+            }
+        }
+        return uncompletedRecurList;
+
+    }
+
+    public boolean isRecurCompleted(Date recurCompleted) {
+        DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        for (int i = 0; i < getRecurCompletedList().size(); i++) {
+            if (outputFormatter.format(getRecurCompletedList().get(i))
+                                .equals(outputFormatter.format(recurCompleted))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getRecurDisplayDate() {
+        return this.recurDisplayDate;
+    }
+
+    public void setRecurDisplayDate(String recurDisplayDate) {
+        this.recurDisplayDate = recurDisplayDate;
+    }
+    //@@author
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -158,6 +286,7 @@ public class Task implements ReadOnlyTask {
         this.setActiveStatus(replacement.getActiveStatus());
         this.setRecurringStatus(replacement.getRecurringStatus());
         this.setRecurInterval(replacement.getRecurInterval());
+        this.setRecurCompletedList(replacement.getRecurCompletedList());
     }
 
     @Override
@@ -185,8 +314,8 @@ public class Task implements ReadOnlyTask {
      */
     public boolean isWithinDate(Date date) {
         if (this.startDateTime.isPresent() && this.endDateTime.isPresent()) {
-            if (this.startDateTime.get().getDate().before(date) &&
-                    this.endDateTime.get().getDate().after(date)) {
+            if ((this.startDateTime.get().getDate().before(date) || this.startDateTime.get().getDate().equals(date)) &&
+                    this.endDateTime.get().getDate().after(date) || this.startDateTime.get().getDate().equals(date)) {
                 return true;
             } else {
                 return false;
@@ -196,4 +325,26 @@ public class Task implements ReadOnlyTask {
         }
     }
 
+    public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
+
+        public int compare(Task task1, Task task2) {
+            Date lastComparableDate = new Date(0);
+            int result = 0;
+            //ascending order
+            if (!task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                result = lastComparableDate.compareTo(task2.getEndDateTime().get().getDate());
+                lastComparableDate = task2.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && !task2.getEndDateTime().isPresent()) {
+                result = task1.getEndDateTime().get().getDate().compareTo(lastComparableDate);
+                lastComparableDate = task1.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                return task1.getEndDateTime().get().getDate().compareTo(task2.getEndDateTime().get().getDate());
+            }
+            return (result);
+        }
+
+    };
+    //@@author
 }

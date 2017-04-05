@@ -19,8 +19,8 @@ public class LoadCommandParser {
      * and returns an LoadCommand object for execution.
      */
     public Command parse(String args) {
-        File f = new File(args.trim());
-        if (f.exists()) {
+        File file = new File(args.trim());
+        if (file.exists() && file.isFile()) {
             return new LoadCommand(args.trim());
         } else {
             return new IncorrectCommand(

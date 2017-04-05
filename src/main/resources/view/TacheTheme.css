@@ -43,10 +43,18 @@
     -fx-background-color: white;
 }
 
+.menu-item:focused {
+    -fx-background-color: #c3cfe2;
+}
+
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #5f77bd;
+}
+
+.menu:hover {
+    -fx-background-color: #c3cfe2;
 }
 
 .task-list-header {
@@ -71,8 +79,16 @@
     -fx-text-fill: black;
 }
 
+.list-cell:selected {
+    -fx-background-color: #c3cfe2;
+}
+
 #cardPane {
     -fx-border-width: 3 3 3 3;
+}
+
+#cardPane:active {
+    -fx-background-color: gray;
 }
 
 #tags {

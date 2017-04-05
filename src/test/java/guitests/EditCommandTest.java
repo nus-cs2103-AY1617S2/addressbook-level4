@@ -24,8 +24,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void editAllFieldsSpecifiedSuccess() throws Exception {
-        String detailsToEdit = "name Buy Eggs and Bread; tag HighPriority;";
-        int taskManagerIndex = 1;
+        String detailsToEdit = "name Buy Eggs and Bread; end_date 01-04-17 19:55:12; tag HighPriority;";
+        int taskManagerIndex = 3;
         TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread")
                               .withEndDateTime("01-04-17 19:55:12")
                               .withTags("HighPriority").build();
@@ -62,7 +62,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "name Visit Grandpa";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 3;
+        int taskManagerIndex = 4;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Visit Grandpa").build();
@@ -149,7 +149,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void editDuplicateTaskFailure() {
-        commandBox.runCommand("edit 3; name Buy Eggs and Bread; start_date 01-04-17; start_time 19:55:12; "
+
+        commandBox.runCommand("edit 5; name Buy Eggs and Bread; end_date 04-01-17; end_time 19:55:12; "
                 + "tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }

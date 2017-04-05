@@ -1,19 +1,27 @@
 package seedu.tache.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.tache.commons.core.ComponentManager;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.core.UnmodifiableObservableList;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.ui.FilteredTaskListUpdatedEvent;
+import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
+import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
@@ -86,7 +94,8 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
-        raise(new FilteredTaskListUpdatedEvent(filteredTasks));
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
+        raise(new PopulateRecurringGhostTaskEvent(getAllRecurringGhostTasks()));
     }
     //@@author
 
@@ -124,7 +133,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateUncompletedRecurringDatesAsTask();
+        raise(new TaskPanelConnectionChangedEvent(filteredTasksWithRecurringTasks));
+        return new UnmodifiableObservableList<>(filteredTasksWithRecurringTasks);
     }
 
     //@@author A0142255M
@@ -166,13 +177,13 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139961U
     @Override
     public void updateFilteredListToShowDueToday() {
-        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
         updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+        updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
     }
 
     public void updateFilteredListToShowDueThisWeek() {
-        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
         updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
+        updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
     }
 
     //@@author A0142255M
@@ -364,7 +375,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             if (task.getEndDateTime().isPresent() && isDueToday) {
                 if (task.getStartDateTime().isPresent()) {
-                    return task.isWithinDate(new Date());
+                    return task.isWithinDate(DateTime.removeTime(new Date()));
                 }
                 return task.getEndDateTime().get().isToday();
             } else {
@@ -507,6 +518,44 @@ public class ModelManager extends ComponentManager implements Model {
 
     private int minimum(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
+    }
+
+    private ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            if (filteredTasks.get(i).getRecurringStatus()) {
+                if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                    Collections.addAll(concatenated, filteredTasks.get(i)
+                                                .getUncompletedRecurList(new Date()).toArray());
+                } else if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                    Calendar dateThisWeek = Calendar.getInstance();
+                    dateThisWeek.setTime(new Date());
+                    dateThisWeek.add(Calendar.WEEK_OF_YEAR, 1);
+                    Collections.addAll(concatenated, filteredTasks.get(i)
+                                                .getUncompletedRecurList(dateThisWeek.getTime()).toArray());
+                } else {
+                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList(null).toArray());
+                }
+            }
+        }
+        Collections.addAll(concatenated, filteredTasks.toArray());
+        return FXCollections.observableList(concatenated);
+    }
+
+    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (taskManager.getTaskList().get(i).getRecurringStatus()) {
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                            .getUncompletedRecurList(null).toArray());
+            }
+        }
+        return FXCollections.observableList(concatenated);
+    }
+    //@@author A0150120H
+    @Override
+    public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
+        return getFilteredTaskList().indexOf(targetTask);
     }
     //@@author
 }

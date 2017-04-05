@@ -59,7 +59,7 @@ allprojects {
     }
 
     dependencies {
-        compile "org.controlsfx:controlsfx:$controlsFxVersion"
+        compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
