@@ -18,18 +18,18 @@ public class SampleDataUtil {
         try {
 
             return new Task[] {
-                new Task(new Name("study SE"), new Date("12.12"), new StartDate("09.01"),
+                new Task(new Name("study SE"), new Date("May 6"), new StartDate("09.01"),
                             new Email("alexyeoh@gmail.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("watch Beauty and Beast"), new Date("01.01"), new StartDate("00.00"),
+                new Task(new Name("watch Beauty and Beast"), new Date("May 4"), new StartDate("Jan 1"),
                             new Email("berniceyu@gmail.com"), new Group("relax"),
                             new UniqueTagList("undone", "important")),
-                new Task(new Name("do tutorial"), new Date("03.11"), new StartDate("00.00"),
+                new Task(new Name("do tutorial"), new Date("May 1"), new StartDate("Jan 2"),
                             new Email("charlotte@yahoo.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("review the lesson"), new Date("03.21"), new StartDate("00.00"),
+                new Task(new Name("review the lesson"), new Date("May 4"), new StartDate("Jan 3"),
                             new Email("lidavid@google.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("read books"), new Date("03.31"), new StartDate("00.00"),
+                new Task(new Name("read books"), new Date("May 5"), new StartDate("Jan 4"),
                             new Email("irfan@outlook.com"), new Group("leisure time"), new UniqueTagList("undone")),
-                new Task(new Name("painting"), new Date("03.06"), new StartDate("00.00"),
+                new Task(new Name("painting"), new Date("May 6"), new StartDate("Jan 1"),
                             new Email("royb@gmail.com"), new Group("leisure time"), new UniqueTagList("undone")) };
 
         } catch (IllegalValueException e) {
