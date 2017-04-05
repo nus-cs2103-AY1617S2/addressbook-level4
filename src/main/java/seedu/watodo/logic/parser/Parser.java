@@ -17,16 +17,7 @@ import seedu.watodo.logic.commands.ExitCommand;
 import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
 import seedu.watodo.logic.commands.IncorrectCommand;
-import seedu.watodo.logic.commands.ListAllCommand;
 import seedu.watodo.logic.commands.ListCommand;
-import seedu.watodo.logic.commands.ListDayCommand;
-import seedu.watodo.logic.commands.ListDeadlineCommand;
-import seedu.watodo.logic.commands.ListDoneCommand;
-import seedu.watodo.logic.commands.ListEventCommand;
-import seedu.watodo.logic.commands.ListFloatCommand;
-import seedu.watodo.logic.commands.ListMonthCommand;
-import seedu.watodo.logic.commands.ListUndoneCommand;
-import seedu.watodo.logic.commands.ListWeekCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.RedoCommand;
 import seedu.watodo.logic.commands.SaveAsCommand;
@@ -94,47 +85,7 @@ public class Parser {
             return new RedoCommand();
 
         case ListCommand.COMMAND_WORD:
-            if (arguments.contains("" + "#")) {
-                return new ListTagCommandParser().parse(arguments);
-            }
-            switch (arguments) {
-
-            case ListAllCommand.COMMAND_WORD:
-                return new ListAllCommand();
-
-            case ListDayCommand.COMMAND_WORD:
-                return new ListDayCommand();
-
-            case ListDeadlineCommand.COMMAND_WORD:
-                return new ListDeadlineCommand();
-
-            case ListDoneCommand.COMMAND_WORD:
-                return new ListDoneCommand();
-
-            case ListEventCommand.COMMAND_WORD:
-                return new ListEventCommand();
-
-            case ListFloatCommand.COMMAND_WORD:
-                return new ListFloatCommand();
-
-            case ListMonthCommand.COMMAND_WORD:
-                return new ListMonthCommand();
-
-            case ListUndoneCommand.COMMAND_WORD:
-                return new ListUndoneCommand();
-
-            case ListWeekCommand.COMMAND_WORD:
-                return new ListWeekCommand();
-
-
-            default:
-                if (arguments.equals("")) {
-                    return new ListCommand();
-                } else {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListCommand.MESSAGE_USAGE));
-                }
-            }
+            return new ListCommandParser().parse(arguments);
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);

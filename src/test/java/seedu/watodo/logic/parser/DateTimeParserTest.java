@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.logic.parser.DateTimeParser.TaskType;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.TaskType;
 
 //@@author A0143076J
 public class DateTimeParserTest {
@@ -59,7 +59,7 @@ public class DateTimeParserTest {
 
     public void prefixThrowException(String args) throws IllegalValueException {
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(DateTimeParser.MESSAGE_INVALID_NUM_DATETIME);
+        thrown.expectMessage(DateTimeParser.MESSAGE_INVALID_DATETIME_PREFIX_COMBI);
         dateTimeParser.parse(args);
     }
 
@@ -78,26 +78,26 @@ public class DateTimeParserTest {
     @Test
     public void parse_validDateargs() throws IllegalValueException {
         dateTimeParser.parse("this is an event from/ " + validStartDate + " to/ " + validEndDate);
-        assertEquals(dateTimeParser.getStartDate(), validStartDate);
-        assertEquals(dateTimeParser.getEndDate(), validEndDate);
+        assertEquals(dateTimeParser.getStartDate().get(), validStartDate);
+        assertEquals(dateTimeParser.getEndDate().get(), validEndDate);
         dateTimeParser.parse("by/ " + validEndDate + " some other additional description");
-        assertEquals(dateTimeParser.getEndDate(), validEndDate);
+        assertEquals(dateTimeParser.getEndDate().get(), validEndDate);
     }
 
     @Test
-    public void trimArgsOfDates() throws IllegalValueException {
+    public void parse_extractUnparsedArgsCorrectly() throws IllegalValueException {
         String arg = "task description #tags from/ " + validStartDate + " more description to/ " + validEndDate;
         dateTimeParser.parse(arg);
-        assertEquals(dateTimeParser.trimArgsOfDates(arg), "task description #tags more description");
+        assertEquals(dateTimeParser.getUnparsedArgs(), "task description #tags more description");
 
         // check that subset or same word as date elsewhere in the string is not trimmed off
         arg = "buy fri chicken for friends on/ fri";
         dateTimeParser.parse(arg);
-        assertEquals(dateTimeParser.trimArgsOfDates(arg), "buy fri chicken for friends");
+        assertEquals(dateTimeParser.getUnparsedArgs(), "buy fri chicken for friends");
 
         arg = "go to 7-11 to collect pay by/ 7-11";
         dateTimeParser.parse(arg);
-        assertEquals(dateTimeParser.trimArgsOfDates(arg), "go to 7-11 to collect pay");
+        assertEquals(dateTimeParser.getUnparsedArgs(), "go to 7-11 to collect pay");
     }
 
 }

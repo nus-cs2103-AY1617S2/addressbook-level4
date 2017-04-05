@@ -5,6 +5,7 @@ import java.util.Set;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.Command;
+import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
@@ -50,11 +51,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given number of days
      * @throws IllegalValueException */
-    void updateFilteredByDatesTaskList(int days) throws IllegalValueException;
-
-    /** Updates the filter of the filtered task list to filter by the given number of months
-     * @throws IllegalValueException */
-    void updateFilteredByMonthsTaskList(int months) throws IllegalValueException;
+    void updateFilteredByDatesTaskList(DateTime start, DateTime end) throws IllegalValueException;
 
     /** Updates the filter of the filtered task list to filter by the given keyword for type*/
     void updateFilteredByTypesTaskList(String type);
