@@ -34,13 +34,13 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         if (task.getStartDate() != null) {
-            startDate.setText("Start Task From " + task.getStartDate());
+            startDate.setText("Start: " + task.getStartDate());
         } else {
             startDate.setText("");
         }
 
         if (task.getEndDate() != null) {
-            endDate.setText("Do Task By " + task.getEndDate());
+            endDate.setText("By: " + task.getEndDate());
         } else {
             endDate.setText("");
         }

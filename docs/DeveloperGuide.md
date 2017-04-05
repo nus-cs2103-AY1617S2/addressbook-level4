@@ -349,50 +349,43 @@ Priority | As a ... | I want to ... | So that I can...
 `* * * * *` | user | add a task by specifying task description only | record tasks that need to be done some day
 `* * * * *` | user | add a task with a specific deadline | know when the task is due
 `* * * * *` | user | add an event with a start and end time | record tasks that are events
-`* * * * *` | user | list tasks that are due within the day, week or month | have an overview of my schedule and decide what needs to be done soon
 `* * * * *` | user | edit the deadline of a specific task | keep my task manager up to date with any changes
 `* * * * *` | user | edit the task descriptions | make corrections or updates to the task description
 `* * * * *` | user | delete a task | get rid of tasks that I no longer care to track
-`* * * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
-`* * * *` | user | mark a task as done | remove the task from my to-do list
-`* * * *` | user | unmark tasks previously marked as done | edit the task status
+`* * * * *` | user | mark a task as done | remove the task from my to-do list
+`* * * * *` | user | unmark tasks previously marked as done | edit the task status
+`* * * *` | user | list tasks that are due within the day, week or month | have an overview of my schedule and decide what needs to be done soon
+`* * * *` | user with many tasks | search keyword(s) | find all the tasks that are similar or relevant to the keyword
 `* * * *` | user | undo my most recent action | reverse any mistake made in the previous step
+`* * * *` | user | redo my most recent action | revert back to the previous state before an undo
 `* * * *` | advanced user | use shorter versions of a command | type a command faster
 `* * * *` | advanced user | specify which folder I want to save the files in | have easy access to the tasks just by sharing the files
 `* * * *` | new user | see usage instructions | refer to instructions when I forget how to use the programme
 `* * * *` | new user | view more information about a particular command | so that I can learn how to use various commands
 `* * *` | user | set tasks to repeat over a specified interval | manage recurring tasks
 `* * *` | user | add additional details or subtasks to a task | record tasks in detail
-`* * *` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
 `* * *` | user | assign tags to the tasks | organise them properly
 `* * *` | user | indicate the priority of a task | see which tasks are more urgent or important
 `* * *` | user | list the deadline tasks by date | know which are the most urgent.
 `* * *` | user | list tasks by tags | see what are the tasks under a specific category.
 `* * *` | user | list tasks by priority | know which are the most urgent tasks.
 `* * *` | user | view the list of tasks that I have completed | unmark completed tasks if necessary.
-`* *` | user | search better with auto complete | search better.
-`* *` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
-`* *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
-`* *` | advanced user | be able to use shortcut keys to execute commands that I commonly use (Eg. Ctrl+z for undoing) | do things faster and more efficiently.
-`* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
-`* *` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
-`* *` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
+`* * *` | advanced user | add default keywords to my interface | customize it according to the vocabulary that I am most comfortable with.
+`* *` | user | colour code my tasks | I can differentiate tasks better
+`* *` | user | add icons to my tasks | quickly tell what kind of tasks I have
+`* *` | user | reorder my tasks | reorder floating tasks.
+`* *` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
+`* *` | user | pin tasks to the top of the list | see them straight away when I open the application
 `* *` | advanced user | view a log of my history | track all the commands I have entered since the start of time.
-`* *` | user | export the tasks to a calendar file | use with other apps.
+`* *` | advanced user | change the layout of my UI (eg. background colour, font size) | customize it according to my preference.
+`*` | user | export the tasks to a calendar file | use with other apps.
 `*` | user | add location details to events | I know where the event is taking place
-`*` | user | colour code my tasks | I can differentiate tasks better
+`*` | user | search better with auto complete | search better.
+`*` | user | enable auto spell checker | correct any spelling mistakes I might make when typing commands.
+`*` | user | be notified if the time period an event I am adding clashes or overlaps with another event already added | reschedule the event to another free time slot if needed
 `*` | user | search for empty time periods | schedule my tasks with minimal overlap or clashes in deadlines.
-`*` | user | add icons to my tasks | quickly tell what kind of tasks I have
-`*` | user | reorder my tasks | reorder floating tasks.
-`*` | user | organise my tasks into different sections | view only the tasks that are relevant to the situation
-`*` | user | pin tasks to the top of the list | see them straight away when I open the application
-`*` | user | expand or collapse the additional details or subtasks of a task | prevent the task list from becoming very cluttered
-`*` | user | sync my task list with my other devices | access my task list easily.
-`*` | user | sync the tasks with my email | create tasks automatically from incoming emails.
-`*` | user | set up email notifications for specific tasks | get email reminders for when a task is due soon.
-`*` | user who collaborates with many people | share my task list with other people | view and work on the tasks as a group.
-`*` | user | share my completed task on social media | let my friends know if I have accomplished something I'm proud of.
-
+`*` | user | receive flavour text when I mark a task as complete such as ¡°Good job!¡± And ¡°Another one off the list!¡±  | give myself more motivation to complete my tasks.
+`*` | user | receive sound effects when I mark a task as completed | give myself more motivation to complete my tasks.
 
 ## Appendix B : Use Cases
 

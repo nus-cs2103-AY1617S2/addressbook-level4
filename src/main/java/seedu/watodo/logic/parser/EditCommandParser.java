@@ -1,13 +1,15 @@
 package seedu.watodo.logic.parser;
 
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.watodo.logic.parser.ParserUtil.INDEX_FIRST_ARG;
+import static seedu.watodo.logic.parser.ParserUtil.INDEX_SECOND_ARG;
+import static seedu.watodo.logic.parser.ParserUtil.NUMFIELD_SPLIT_BY_WHITESPACE;
+import static seedu.watodo.logic.parser.ParserUtil.WHITESPACE;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.Command;
@@ -15,12 +17,13 @@ import seedu.watodo.logic.commands.EditCommand;
 import seedu.watodo.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.watodo.logic.commands.IncorrectCommand;
 import seedu.watodo.model.tag.UniqueTagList;
-import seedu.watodo.model.task.DateTime;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
+
+    private final String KEYWORD_REMOVEDATES = "REMOVEDATES";
 
     //@@author A0143076J
     /**
@@ -31,19 +34,26 @@ public class EditCommandParser {
      */
     public Command parse(String args) throws IllegalValueException {
         assert args != null;
+
         boolean hasEditDate = false;
         boolean hasRemoveDate = false;
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
+        //checks if the args format by the user is correct
+        String splitedArgs[] = args.split(WHITESPACE, NUMFIELD_SPLIT_BY_WHITESPACE);
+        if (splitedArgs.length != NUMFIELD_SPLIT_BY_WHITESPACE) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE)); 
+        }
+
         // get index of the task to edit
-        Optional<Integer> index = ParserUtil.parseIndex(args.split(" ", 2)[0]);
-        args = args.split(" ", 2)[1];
+        Optional<Integer> index = ParserUtil.parseIndex(splitedArgs[INDEX_FIRST_ARG]);
+        args = splitedArgs[INDEX_SECOND_ARG];
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         //check if user wants to remove dates of task
-        if (args.equals("REMOVEDATES")) {
+        if (args.equals(KEYWORD_REMOVEDATES)) {
             hasRemoveDate = true;
             return new EditCommand(index.get(), editTaskDescriptor, hasEditDate, hasRemoveDate);
         }
@@ -52,47 +62,64 @@ public class EditCommandParser {
             // get any dates arguments entered by the user
             DateTimeParser dateTimeParser = new DateTimeParser();
             dateTimeParser.parse(args);
-            String argsWithDatesExtracted = dateTimeParser.trimArgsOfDates(args);
-            if (dateTimeParser.getStartDate() != null || dateTimeParser.getEndDate() != null) {
-                hasEditDate = true;
-                if (dateTimeParser.getStartDate() != null) {
-                    editTaskDescriptor.setStartDate(Optional.of(new DateTime(dateTimeParser.getStartDate())));
-                }
-                editTaskDescriptor.setEndDate(Optional.of(new DateTime(dateTimeParser.getEndDate())));
-            }
+            putDates(dateTimeParser.getStartDate(), dateTimeParser.getEndDate(),
+                      editTaskDescriptor, hasEditDate);
 
             // get any tags arguments entered by the user
-            ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
-            argsTokenizer.tokenize(argsWithDatesExtracted);
-            if (argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
-                List<String> tags = argsTokenizer.getAllValues(PREFIX_TAG).get();
-                List<String> parsedTags = new ArrayList<String>();
-                for (String tag : tags) {
-                    parsedTags.add(tag.split("[\\s+]", 2)[0]);  //tag name is only until the first whitespace
-                }
-                editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(Optional.of(parsedTags))));
-            }
+            String argsWithDatesExtracted = dateTimeParser.getUnparsedArgs();
+            TagsParser tagsParser = new TagsParser();
+            tagsParser.parse(argsWithDatesExtracted);
+            putTags(tagsParser.getTags(), editTaskDescriptor);
 
             //get any new task description entered by the user
-            String tagArgs = String.format(AddCommandParser.EXTRACT_ARGS_REGEX, PREFIX_TAG.getPrefix() + "(\\S+)", "");
-            Optional<String> description;
-            String argsWithDatesAndTagsExtracted = argsWithDatesExtracted.replaceAll(tagArgs, " ").trim();
-            if (argsWithDatesAndTagsExtracted.equals("")) {
-                description = Optional.empty();
-            } else {
-                description = Optional.of(argsWithDatesAndTagsExtracted);
-            }
-            editTaskDescriptor.setTaskName(ParserUtil.parseDescription(description));
+            String argsWithDatesAndTagsExtracted = tagsParser.getUnparsedArgs();
+            putDescription(argsWithDatesAndTagsExtracted, editTaskDescriptor);
 
             if (!editTaskDescriptor.isAnyFieldEdited()) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
             }
+
             return new EditCommand(index.get(), editTaskDescriptor, hasEditDate, hasRemoveDate);
 
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
+    }
+
+    /**
+     * Sets the startDate and endDate in the editTaskDescriptor
+     * Parameters are set to {@code Optional.empty()} if the user does not input them
+     */
+    private void putDates(Optional<String> startDate, Optional<String> endDate,
+            EditTaskDescriptor editTaskDescriptor, boolean hasEditDate) throws IllegalValueException {
+        if (startDate.isPresent() || endDate.isPresent()) {
+            hasEditDate = true;
+        }
+        editTaskDescriptor.setStartDate(ParserUtil.parseDateTime(startDate));
+        editTaskDescriptor.setEndDate(ParserUtil.parseDateTime(endDate));
+    }
+
+    /**
+     * Sets the tags in the editTaskDescriptor
+     * Parameters are set to {@code Optional.empty()} if the user does not input them
+     */
+    private void putTags(Set<String> tags, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        editTaskDescriptor.setTags(parseTagsForEdit(tags));
+    }
+
+    /** Sets the description in the editTaskDescriptor
+     *  Parameters are set to {@code Optional.empty()} if the user does not input them
+     */
+    private void putDescription(String description, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        final String EMPTY_STRING = "";
+        if (description.equals(EMPTY_STRING)) {
+            editTaskDescriptor.setTaskName(ParserUtil.parseDescription(Optional.empty()));
+        } else {
+            editTaskDescriptor.setTaskName(ParserUtil.parseDescription(Optional.of(description)));
+        }
     }
 
     /**
