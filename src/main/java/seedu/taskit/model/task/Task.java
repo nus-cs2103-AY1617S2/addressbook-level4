@@ -117,7 +117,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
         this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
     }
-    
+
     @Override
     public int compareTo(Task o) {
         int priorityComparison = this.priority.compareTo(o.priority);

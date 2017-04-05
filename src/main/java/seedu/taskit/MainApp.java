@@ -208,7 +208,7 @@ public class MainApp extends Application {
             EventsCenter.getInstance().post(new DataSavingExceptionEvent(ioe));
         }
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -87,7 +87,7 @@ public class UniqueTaskList implements Iterable<Task> {
         sortTasks();
         return taskFoundAndDeleted;
     }
-    
+
     /**
      * Sorts task using Comparable
      */
@@ -98,7 +98,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
         sortTasks();
-        
+
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {

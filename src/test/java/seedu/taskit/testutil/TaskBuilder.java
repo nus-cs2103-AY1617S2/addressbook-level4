@@ -30,19 +30,19 @@ public class TaskBuilder {
         this.task.setTitle(new Title(title));
         return this;
     }
-    
+
     // @@author A0163996J
 
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
         return this;
     }
-    
+
     public TaskBuilder withStart(String start) throws IllegalValueException {
         this.task.setStart(new Date(start));
         return this;
     }
-    
+
     public TaskBuilder withEnd(String end) throws IllegalValueException {
         this.task.setEnd(new Date(end));
         return this;
@@ -57,18 +57,18 @@ public class TaskBuilder {
         }
         return this;
     }
-    
+
     //@@author A0097141H
     public TaskBuilder withDone(String done) throws IllegalValueException {
     	task.setDone(done);
     	return this;
     }
-    
+
     public TaskBuilder withEnd(Date end) throws IllegalValueException {
     	task.setEnd(end);
     	return this;
     }
-    
+
     public TaskBuilder withStart(Date start) throws IllegalValueException {
     	task.setStart(start);
     	return this;
