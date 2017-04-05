@@ -219,12 +219,12 @@ public class Task implements ReadOnlyTask {
         }
 
         else {
-            if ((CurrentDate.isDateWithin(this.getStartDate().value, t.getStartDate().value, t.getEndDate().value) == 1)
-                    || (CurrentDate.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value, t.getEndDate().value) == 1)
+                    || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
                             t.getEndDate().value) == 1)
-                    || (CurrentDate.isDateWithin(t.getStartDate().value, this.getStartDate().value,
+                    || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
                             this.getEndDate().value) == 1)
-                    || (CurrentDate.isDateWithin(t.getEndDate().value, this.getStartDate().value,
+                    || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
                             this.getEndDate().value) == 1)) {
                 return true;
             }

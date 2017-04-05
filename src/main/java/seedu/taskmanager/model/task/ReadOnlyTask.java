@@ -1,6 +1,5 @@
 package seedu.taskmanager.model.task;
 
-import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
