@@ -7,7 +7,7 @@ package seedu.geekeep.logic.commands;
 public class ListDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "listdone";
-
+    public static final String MESSAGE_USAGE = "No argument should be given to listdone";
     public static final String MESSAGE_SUCCESS = "Listed all completed tasks";
 
 
