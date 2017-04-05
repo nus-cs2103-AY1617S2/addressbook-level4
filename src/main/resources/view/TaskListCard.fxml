@@ -27,9 +27,9 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
             </columnConstraints>
             <children>
-            <SplitPane dividerPositions="0.52, 0.85" prefHeight="80.0" prefWidth="300.0">
+            <SplitPane dividerPositions="0.7, 0.8" prefHeight="80.0" prefWidth="300.0" GridPane.valignment="CENTER">
               <items>
-                <AnchorPane maxWidth="210.0" minHeight="0.0" minWidth="210.0" prefHeight="80.0" prefWidth="210.0">
+                <AnchorPane minHeight="0.0" minWidth="180.0" prefHeight="80.0" prefWidth="210.0">
                      <children>
                             <VBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="65.0">
                                 <stylesheets>
@@ -40,7 +40,7 @@
                                     <Insets bottom="5" left="15" right="5" top="10" />
                                 </padding>
                                 <children>
-                                      <HBox maxWidth="210.0" minWidth="180.0" prefHeight="25.0">
+                                      <HBox minWidth="180.0" prefHeight="25.0" prefWidth="210.0">
                                          <children>
                                              <Label fx:id="id" styleClass="cell_big_label" />
                                              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
@@ -52,7 +52,7 @@
                             </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" minWidth="100.0" prefWidth="100.0">
+                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" maxWidth="90.0" prefWidth="90.0">
                      <children>
                         <VBox minWidth="100.0" prefHeight="80.0" prefWidth="100.0">
                          <padding>
@@ -66,9 +66,9 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="30.0">
+                <AnchorPane maxWidth="40.0" minHeight="0.0" minWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="40.0">
                      <children>
-                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" />
+                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
               </items>
