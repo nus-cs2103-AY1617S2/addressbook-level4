@@ -196,10 +196,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListFloat() {
         updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
     }
-//    @Override
-//    public void updateFilteredTaskList(Set<String> keywords) {
-//        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
-//    }
+    // @Override
+    // public void updateFilteredTaskList(Set<String> keywords) {
+    // updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
+    // }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
@@ -216,11 +216,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
-//    // @@author A0139975J-reused
-//    @Override
-//    public void updateFilteredTaskList(Date date) {
-//        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-//    }
+    // // @@author A0139975J-reused
+    // @Override
+    // public void updateFilteredTaskList(Date date) {
+    // updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    // }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
@@ -394,22 +394,16 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0139975J
+    // @@author A0139975J
     private class FloatDateQualifier implements Qualifier {
-
-        private Date date;
-
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate().isNull() && task.getStartDate().isNull()) {
-                return true;
-            }
-            return false;
+            return task.getEndDate().isNull() && task.getStartDate().isNull();
         }
     }
 
-    //@@author A0139975J
+    // @@author A0139975J
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
@@ -422,14 +416,14 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (this.value & task.isDone()) {
-                return true;
-            } else if (!this.value & !task.isDone()) {
-                return true;
-            } else {
-                return false;
-            }
-
+            return this.value == task.isDone();
+//            if (this.value && task.isDone()) {
+//                return true;
+//            } else if (!this.value && !task.isDone()) {
+//                return true;
+//            } else {
+//                return false;
+//            }
         }
     }
 
