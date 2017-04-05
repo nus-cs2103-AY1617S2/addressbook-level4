@@ -44,6 +44,8 @@ public class CommandBoxHandle extends GuiHandle {
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
         pressEnter();
+        // If autocomplete, ensures that command is still entered
+        pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
