@@ -17,6 +17,7 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.ListCompletedCommand;
 import seedu.taskmanager.logic.commands.MarkCommand;
+import seedu.taskmanager.logic.commands.RecurringCommand;
 import seedu.taskmanager.logic.commands.RedoCommand;
 import seedu.taskmanager.logic.commands.SearchCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
@@ -54,23 +55,14 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case UpdateCommand.COMMAND_WORD:
-            return new UpdateCommandParser().parse(arguments);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case ChangeSaveLocationCommand.COMMAND_WORD:
+            return new ChangeSaveLocationCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -78,23 +70,35 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ChangeSaveLocationCommand.COMMAND_WORD:
-            return new ChangeSaveLocationCommandParser().parse(arguments);
-
-        case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);
-
-        case UnmarkCommand.COMMAND_WORD:
-            return new UnmarkCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommandParser().parse(arguments);
 
         case ListCompletedCommand.COMMAND_WORD:
             return new ListCompletedCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
+
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments);
+
+        case RecurringCommand.COMMAND_WORD:
+            return new RecurringCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments);
+
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

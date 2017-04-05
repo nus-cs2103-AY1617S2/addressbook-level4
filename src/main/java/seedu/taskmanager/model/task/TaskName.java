@@ -8,8 +8,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class TaskName {
 
-    public static final String MESSAGE_TASKNAME_CONSTRAINTS = "Tasks names should only "
-            + "contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_TASKNAME_CONSTRAINTS = "Tasks names should not be blank";
 
     /*
      * The first character of the address must not be a whitespace, otherwise
