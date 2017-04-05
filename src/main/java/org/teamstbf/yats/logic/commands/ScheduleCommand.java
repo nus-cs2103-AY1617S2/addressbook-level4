@@ -40,7 +40,7 @@ public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule an task or event to the task manager. "
-            + "Parameters: task name l/location s/START TIME  e/END TIME  d/ description [t/TAG]...\n"
+            + "Parameters: task name [l/location s/START TIME  e/END TIME  d/ description t/TAG] = HOURS\n"
             + "Example: " + COMMAND_WORD
             + " meeting with boss l/work p/daily s/7:00pm,18/03/2017  e/9:00pm,18/03/2017  "
             + "d/get scolded for being lazy t/kthxbye";
@@ -53,7 +53,7 @@ public class ScheduleCommand extends Command {
     private static final long MAXIMUM_EVENT_LENGTH = 36000000L;
     private static final long MINIMUM_EVENT_LENGTH = 0L;
     private final Event toSchedule;
-    private final String hours;
+    private String hours;
 
 
     /**
@@ -67,7 +67,11 @@ public class ScheduleCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toSchedule = new Event(parameters, new UniqueTagList(tagSet));
-        this.hours = parameters.get("hours").toString();
+        try {
+            this.hours = parameters.get("hours").toString();
+        } catch (NullPointerException e) {
+            this.hours = "2";
+        }
     }
 
     @Override
@@ -232,23 +236,6 @@ public class ScheduleCommand extends Command {
         calendar.setTimeInMillis(longTiming);
         int hourMinuteRep = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
         return hourMinuteRep;
-    }
-
-    private boolean isCorrectDay(long max, long checkedHours, int[] invalidDays) {
-        Calendar dayOne = Calendar.getInstance();
-        dayOne.setTimeInMillis(max);
-        Calendar dayTwo = Calendar.getInstance();
-        dayTwo.setTimeInMillis(max+ checkedHours);
-        int dateOne = dayOne.get(Calendar.DAY_OF_WEEK);
-        System.out.println("dateOne is " + dateOne);
-        int dateTwo = dayTwo.get(Calendar.DAY_OF_WEEK);
-        System.out.println("dateTwo is " + dateTwo);
-        for (int day : invalidDays) {
-            if (dateOne == day || dateTwo == day) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private List<ReadOnlyEvent> filterOnlyEventsWithStartEndTime() {
