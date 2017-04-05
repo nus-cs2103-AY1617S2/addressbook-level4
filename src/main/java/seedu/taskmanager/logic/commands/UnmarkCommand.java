@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
             + "by the index number used in the last task listing as incomplete.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task is marked as incomplete : %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task is marked as incomplete: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This incompleted task already exists.";
     public static final String MESSAGE_ALREADY_UNMARKED = "This task is already marked as incomplete.";
 

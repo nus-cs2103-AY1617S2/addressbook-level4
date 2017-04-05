@@ -153,38 +153,6 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
-    public boolean isWithinStartEndDuration(Task t) {
-
-        if (this.startDate.equals(t.startDate) && this.endDate.equals(t.endDate)) {
-            if (this.startDate.equals(t.endDate)) {
-                if ((this.startTime.laterThan(t.startTime) && t.endTime.laterThan(this.startTime))
-                        || (this.endTime.laterThan(t.startTime) && t.endTime.laterThan(this.endTime))) {
-                    return true;
-                }
-            } else if (this.startDate.equals(t.endDate)) {
-                if (t.endTime.laterThan(this.startTime)) {
-                    return true;
-                }
-            } else if (this.endDate.equals(t.startDate)) {
-                if (this.endTime.laterThan(t.startTime)) {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        }
-
-        else {
-            if ((CurrentDate.isDateWithin(this.startDate.value, t.startDate.value, t.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(this.endDate.value, t.startDate.value, t.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(t.startDate.value, this.startDate.value, this.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(t.endDate.value, this.startDate.value, this.endDate.value) == 1)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     // @@author A0142418L
     /**
      * Checks the fields populated within the task
@@ -226,5 +194,42 @@ public class Task implements ReadOnlyTask {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean isWithinStartEndDuration(ReadOnlyTask t) {
+
+        if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
+            if (this.getStartDate().equals(t.getEndDate())) {
+                if ((this.getStartTime().laterThan(t.getStartTime()) && t.getEndTime().laterThan(this.getStartTime()))
+                        || (this.getEndTime().laterThan(t.getStartTime())
+                                && t.getEndTime().laterThan(this.getEndTime()))) {
+                    return true;
+                }
+            } else if (this.getStartDate().equals(t.getEndDate())) {
+                if (t.getEndTime().laterThan(this.getStartTime())) {
+                    return true;
+                }
+            } else if (this.getEndDate().equals(t.getStartDate())) {
+                if (this.getEndTime().laterThan(t.getStartTime())) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        else {
+            if ((CurrentDate.isDateWithin(this.getStartDate().value, t.getStartDate().value, t.getEndDate().value) == 1)
+                    || (CurrentDate.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                            t.getEndDate().value) == 1)
+                    || (CurrentDate.isDateWithin(t.getStartDate().value, this.getStartDate().value,
+                            this.getEndDate().value) == 1)
+                    || (CurrentDate.isDateWithin(t.getEndDate().value, this.getStartDate().value,
+                            this.getEndDate().value) == 1)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
