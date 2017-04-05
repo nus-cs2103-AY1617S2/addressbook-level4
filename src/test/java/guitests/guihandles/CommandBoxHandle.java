@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +21,10 @@ public class CommandBoxHandle extends GuiHandle {
      */
     public void clickOnTextField() {
         guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
+    }
+
+    public void type(KeyCode... keyCodes) {
+        guiRobot.type(keyCodes);
     }
 
     public void enterCommand(String command) {
