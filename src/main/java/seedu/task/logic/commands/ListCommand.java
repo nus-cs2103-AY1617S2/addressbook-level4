@@ -26,7 +26,8 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists all tasks in KIT.\n"
             + "Example: " + NOT_DONE;
 
-    public static final String MESSAGE_FAIL = "Wrong command format, list format should be list, list done or list undone";
+    public static final String MESSAGE_FAIL = "Wrong command format, "
+            + "list format should be list, list done or list undone";
 
     private final int value;
 
@@ -34,17 +35,13 @@ public class ListCommand extends Command {
         // TODO Auto-generated constructor stub
         if (args.trim().isEmpty()) {
             this.value = 1;
-        }
-        else if (args.trim().equals("done")) {
+        } else if (args.trim().equals("done")) {
             this.value = 2;
-        }
-        else if (args.trim().equals("undone") || args.trim().equals("notdone")) {
+        } else if (args.trim().equals("undone") || args.trim().equals("notdone")) {
             this.value = 3;
-        }
-        else if (args.trim().equals("floating") || args.trim().equals("float")) {
+        } else if (args.trim().equals("floating") || args.trim().equals("float")) {
             this.value = 4;
-        }
-        else {
+        } else {
             this.value = 0;
         }
 
@@ -56,19 +53,16 @@ public class ListCommand extends Command {
         if (value == 1) {
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
-        }
-        else if (value == 2) {
+        } else if (value == 2) {
             model.updateFilteredTaskList(true);
             return new CommandResult(getMessageForDoneTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
-        else if (value == 3) {
+        } else if (value == 3) {
             model.updateFilteredTaskList(false);
             return new CommandResult(getMessageForUnDoneTaskListShownSummary(model.getFilteredTaskList().size()));
         } else if (value == 4) {
             model.updateFilteredTaskListFloat();
             return new CommandResult(getMessageForFloatingTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
-        else {
+        } else {
             return  new CommandResult(MESSAGE_FAIL);
         }
     }

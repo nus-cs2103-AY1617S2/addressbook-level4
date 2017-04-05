@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.logic.commands.QuickAddCommand;
+import seedu.task.logic.commands.SmartAddCommand;
 import seedu.task.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.task.model.task.Remark;
 
@@ -20,7 +20,7 @@ import seedu.task.model.task.Remark;
 /**
  * Parses input arguments and creates a new QuickAddCommand object
  */
-public class QuickAddCommandParser extends CommandParser {
+public class SmartAddCommandParser extends CommandParser {
 
     private String REMARK;
 
@@ -36,10 +36,10 @@ public class QuickAddCommandParser extends CommandParser {
         REMARK = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
                 : Remark.DEFAULT_REMARK;
         try {
-            return new QuickAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), REMARK.replace("\\", ""),
+            return new SmartAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), REMARK.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, QuickAddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SmartAddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         } catch (IOException ioe) {
