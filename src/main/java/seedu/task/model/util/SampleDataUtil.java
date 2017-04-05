@@ -15,11 +15,11 @@ public class SampleDataUtil {
         try {
             return new Task[] {
                 new Task(new Description("Visit Alex"), new Priority("3"), new Timing("26/03/2017"),
-                    new Timing("27/03/2017"), new UniqueTagList("visit")),
+                        new Timing("27/03/2017"), new UniqueTagList("visit"), false, null),
                 new Task(new Description("CS Midterm"), new Priority("1"), new Timing("15/03/2017"),
-                    new Timing("19/03/2017"), new UniqueTagList("study", "exams")),
+                            new Timing("19/03/2017"), new UniqueTagList("study", "exams"), false, null),
                 new Task(new Description("Buy grocery"), new Priority("2"), new Timing("10/03/2017"),
-                    new Timing("10/03/2017"), new UniqueTagList("misc")),
+                            new Timing("10/03/2017"), new UniqueTagList("misc"), false, null),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

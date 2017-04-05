@@ -72,5 +72,4 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskList {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
     }
-
 }

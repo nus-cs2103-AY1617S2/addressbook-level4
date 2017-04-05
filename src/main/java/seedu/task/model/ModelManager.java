@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -63,6 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskListChangedEvent(taskList));
     }
 
+    //@@author A0113795Y
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList update = new TaskList(this.taskList);
@@ -121,7 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
     public Stack<TaskList> getUndoStack() {
         return this.undoStack;
     }
-
+    //@@author
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -147,6 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -171,6 +174,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+        @Override
         String toString();
     }
 
@@ -181,26 +185,47 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        //@@author A0164212U
+        /**
+         * @param task
+         * internally sets task.occurrenceIndexList for occurrences that match given keywords for task
+         * @return true if keywords are present in the given task
+         */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return
-                (nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().description, keyword))
-                    .findAny()
-                    .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getPriority().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartTiming().value, keyword))
-                        .findAny()
-                        .isPresent()) ||
-                (nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndTiming().value, keyword))
-                        .findAny()
-                        .isPresent());
+            boolean isValid = false;
+            ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
+            for (int i = 0; i < task.getOccurrences().size(); i++) {
+                final int finalIndex = i;
+                if (
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getDescription().description, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getPriority().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
+                                .findAny()
+                                .isPresent()) ||
+                        (nameKeyWords.stream()
+                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                                        task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
+                                .findAny()
+                                .isPresent())) {
+                    occurrenceIndexList.add(i);
+                    isValid = true;
+                }
+            }
+            task.setOccurrenceIndexList(occurrenceIndexList);
+            return isValid;
         }
+        //@@author
 
         @Override
         public String toString() {

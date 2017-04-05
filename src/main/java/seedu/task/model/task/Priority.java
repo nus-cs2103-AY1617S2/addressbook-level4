@@ -51,7 +51,7 @@ public class Priority implements Comparable<Priority> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Priority // instanceof handles nulls
-                && this.value.equals(((Priority) other).value)); // state check
+                        && this.value.equals(((Priority) other).value)); // state check
     }
 
     @Override
@@ -80,6 +80,7 @@ public class Priority implements Comparable<Priority> {
         }
     }
 
+    //@@author A0163559U
     /**
      * Results in Priority sorted in ascending order.
      */
@@ -89,5 +90,6 @@ public class Priority implements Comparable<Priority> {
         int otherValue = Integer.parseInt(comparePriority.value);
         return thisValue - otherValue;
     }
+    //@@author
 
 }

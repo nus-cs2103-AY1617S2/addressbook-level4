@@ -3,6 +3,7 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,10 +28,11 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
-    public Command parse(String args) {
+    public Command parse(String args, boolean isSpecific) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_TAG, PREFIX_RECURRING);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -46,6 +48,7 @@ public class EditCommandParser {
             editTaskDescriptor.setStartTiming(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_START_DATE)));
             editTaskDescriptor.setEndTiming(ParserUtil.parseTiming(argsTokenizer.getValue(PREFIX_END_DATE)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
+            editTaskDescriptor.setFrequency(ParserUtil.parseFrequency(argsTokenizer.getValue(PREFIX_RECURRING)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -54,7 +57,7 @@ public class EditCommandParser {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor, isSpecific);
     }
 
     /**

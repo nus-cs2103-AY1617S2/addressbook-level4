@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Timing;
 
 public class PersonCard extends UiPart<Region> {
 
@@ -13,7 +14,7 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-//@@author A0164212U
+    //@@author A0164212U
     @FXML
     private Label description;
     @FXML
@@ -25,22 +26,54 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label endTiming;
     @FXML
+    private Label recurring;
+    @FXML
     private FlowPane tags;
 
-    public PersonCard(ReadOnlyTask person, int displayedIndex) {
+    public PersonCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        description.setText(person.getDescription().description);
+
+        description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
-        priority.setText("Priority: " + person.getPriority().value);
-        priority.setStyle("-fx-background-color: " + person.getPriority().getPriorityColor() + ";");
-        startTiming.setText("Start Timing: " + person.getStartTiming().value);
-        endTiming.setText("End Timing: " + person.getEndTiming().value);
-        initTags(person);
+        priority.setText("Priority: " + task.getPriority().value);
+        priority.setStyle("-fx-background-color: " + task.getPriority().getPriorityColor() + ";");
+
+        if (task.getStartTiming().value.equals(Timing.TIMING_NOT_SPECIFIED)) {
+            startTiming.setText("");
+        } else if (task.getOccurrenceIndexList().size() == 0) {
+            startTiming.setText("Start Timing: " + task.getOccurrences().get(0).getStartTiming().value);
+        } else {
+            int index = task.getOccurrenceIndexList().get(0);
+            if (task.getOccurrences().size() <= index) {
+                index--;
+            }
+            startTiming.setText("Start Timing: " + task.getOccurrences().get(index).getStartTiming().value);
+        }
+
+        if (task.getEndTiming().value.equals(Timing.TIMING_NOT_SPECIFIED)) {
+            endTiming.setText("");
+        } else if (task.getOccurrenceIndexList().size() == 0) {
+            endTiming.setText("End Timing: " + task.getOccurrences().get(0).getEndTiming().value);
+        } else {
+            int index = task.getOccurrenceIndexList().get(0);
+            if (task.getOccurrences().size() <= index) {
+                index--;
+            }
+            endTiming.setText("End Timing: " + task.getOccurrences().get(index).getEndTiming().value);
+        }
+
+        if (task.isRecurring()) {
+            recurring.setText("Recurring Task: " + task.getFrequency().toString());
+            recurring.setStyle("-fx-background-color: pink;");
+        } else {
+            recurring.setText("");
+        }
+        initTags(task);
     }
-//@@author
+    //@@author
 
     private void initTags(ReadOnlyTask person) {
-//        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         person.getTags().forEach(tag -> {
             String complete = "complete";

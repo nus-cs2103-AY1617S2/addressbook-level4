@@ -19,7 +19,8 @@ public class Timing implements Comparable<Timing> {
             "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy " +
                     "Use only HH:mm if today is the default date";
     public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
-    public static final String NULL_TIMING = "n/a";
+    public static final String TIMING_NOT_SPECIFIED = "floating";
+
     public final String value;
     private Date timing;
 
@@ -33,18 +34,23 @@ public class Timing implements Comparable<Timing> {
     public Timing(String time) throws IllegalValueException {
         if (time != null) {
             String trimmedTiming = time.trim();
-            if (!trimmedTiming.equals(NULL_TIMING) && trimmedTiming.length() <= 5) {
+            if (trimmedTiming.length() <= 5) {
                 trimmedTiming = trimmedTiming + " " + Timing.getTodayDate();
             }
-            if (!isValidTiming(trimmedTiming)) {
+            if (!trimmedTiming.equals(TIMING_NOT_SPECIFIED) && !isValidTiming(trimmedTiming)) {
+                System.out.println("INVALID TIMING IS " + time);
                 throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
             }
             this.value = trimmedTiming;
             setTiming(trimmedTiming);
         } else {
-            this.value = NULL_TIMING;
+            this.value = TIMING_NOT_SPECIFIED;
             this.timing = null;
         }
+    }
+
+    public Timing() throws IllegalValueException {
+        this(null);
     }
 
     /**
@@ -52,9 +58,9 @@ public class Timing implements Comparable<Timing> {
      */
     public static boolean isValidTiming(String test) {
         boolean isValid = false;
-        if (test.equals(NULL_TIMING)) {
+        if (test.equals(TIMING_NOT_SPECIFIED)) {
             isValid = true;
-        } else {
+        } else if (test.length() == 16 || test.length() == 10) {
             for (int i = 0; i < TIMING_FORMAT.length; i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat(TIMING_FORMAT[i]);
                 sdf.setLenient(false);
@@ -132,8 +138,8 @@ public class Timing implements Comparable<Timing> {
      */
     public static boolean checkTimingOrder(Timing time1, Timing time2) {
         boolean isOrdered = true;
-        if (time1 == null || time1.value.equals(NULL_TIMING)
-                || time2 == null || time2.value.equals(NULL_TIMING)) {
+        if (time1 == null || time1.value.equals(TIMING_NOT_SPECIFIED)
+                || time2 == null || time2.value.equals(TIMING_NOT_SPECIFIED)) {
             return isOrdered;
         }
         Calendar cal1 = Calendar.getInstance();
@@ -148,44 +154,36 @@ public class Timing implements Comparable<Timing> {
         return isOrdered;
     }
 
+    public boolean isFloating() {
+        return this.value.equals(TIMING_NOT_SPECIFIED);
+    }
+
     //@@author A0163559U
-    /**
-     * Results in Timing sorted in ascending order.
-     */
-    @SuppressWarnings("deprecation")
     @Override
     public int compareTo(Timing compareTiming) {
-        boolean thisNull = this.timing == null;
-        boolean otherNull = compareTiming.timing == null;
+        int compareToResult = 0;
 
-        if (thisNull && otherNull) {
-            return 0;
-        } else if (thisNull) {
-            return 1;
-        } else if (otherNull) {
-            return -1;
-        }
+        boolean thisTimingSpecified = this.value.equals(TIMING_NOT_SPECIFIED);
+        boolean otherTimingSpecified = compareTiming.value.equals(TIMING_NOT_SPECIFIED);
 
-        boolean thisNullTiming = this.timing.equals(NULL_TIMING);
-        boolean otherNullTiming = compareTiming.timing.equals(NULL_TIMING);
-
-        if (thisNullTiming && otherNullTiming) {
-            return 0;
-        } else if (thisNullTiming) {
-            return 1;
-        } else if (otherNullTiming) {
-            return -1;
-        }
-
-        int compareToResult = this.timing.getYear() - compareTiming.timing.getYear() + 3800;
-
-        if (compareToResult == 0) {
-            compareToResult = this.timing.getMonth() - compareTiming.timing.getMonth();
+        if (thisTimingSpecified && otherTimingSpecified) {
+            return compareToResult;
+        } else if (thisTimingSpecified) {
+            compareToResult = 1;
+        } else if (otherTimingSpecified) {
+            compareToResult = -1;
         }
 
         if (compareToResult == 0) {
-            compareToResult = this.timing.getDay() - compareTiming.timing.getDay();
+            Calendar thisCal = Calendar.getInstance();
+            Calendar otherCal = Calendar.getInstance();
+            thisCal.setTime(this.getTiming());
+            compareTiming.setTiming(compareTiming.toString());
+            otherCal.setTime(compareTiming.getTiming());
+            compareToResult = thisCal.compareTo(otherCal);
         }
+
         return compareToResult;
     }
+    //@@author
 }

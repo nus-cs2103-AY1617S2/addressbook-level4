@@ -414,14 +414,14 @@
 //     class TestDataHelper {
 
 //         Task adam() throws Exception {
-//             Description description = new Description("Adam Brown");
+//             Description frequency = new Description("Adam Brown");
 //             Priority privatePhone = new Priority("111111");
 //             Timing startDate = new Timing("03/21/2017");
 //             Timing endDate = new Timing("03/25/2017");
 //             Tag tag1 = new Tag("tag1");
 //             Tag tag2 = new Tag("longertag2");
 //             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-//             return new Task(description, privatePhone, startDate, endDate, tags);
+//             return new Task(frequency, privatePhone, startDate, endDate, tags);
 //         }
 
 //         /**

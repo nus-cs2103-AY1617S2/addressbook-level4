@@ -4,6 +4,7 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -26,9 +27,13 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
+                        PREFIX_END_DATE, PREFIX_TAG, PREFIX_RECURRING);
         argsTokenizer.tokenize(args);
-        String priority, startDate, endDate;
+        String priority;
+        String startDate;
+        String endDate;
+        String recur;
 
         try {
             priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
@@ -49,9 +54,15 @@ public class AddCommandParser {
         }
 
         try {
+            recur = argsTokenizer.getValue(PREFIX_RECURRING).get();
+        } catch (NoSuchElementException e) {
+            recur = null;
+        }
+
+        try {
             return new AddCommand(
                     argsTokenizer.getPreamble().get(),
-                    priority, startDate, endDate,
+                    priority, startDate, endDate, recur,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
                     );
         } catch (NoSuchElementException nsee) {

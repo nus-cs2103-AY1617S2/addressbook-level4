@@ -17,6 +17,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Timing;
 
 /**
@@ -55,10 +56,10 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
+     * Splits a preamble string into ordered fields.
+     * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
+     *         the input, {@code Optional.empty()} otherwise.
+     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
         return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
@@ -99,5 +100,10 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    public static Optional<RecurringFrequency> parseFrequency(Optional<String> frequency) throws IllegalValueException {
+        assert frequency != null;
+        return frequency.isPresent() ? Optional.of(new RecurringFrequency(frequency.get())) : Optional.empty();
     }
 }

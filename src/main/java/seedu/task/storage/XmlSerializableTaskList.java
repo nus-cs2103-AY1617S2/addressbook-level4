@@ -26,7 +26,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
-
     /**
      * Creates an empty XmlSerializableTaskList.
      * This empty constructor is required for marshalling.

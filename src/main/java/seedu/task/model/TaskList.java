@@ -48,7 +48,7 @@ public class TaskList implements ReadOnlyTaskList {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
@@ -74,7 +74,7 @@ public class TaskList implements ReadOnlyTaskList {
         syncMasterTagListWith(tasks);
     }
 
-//// task-level operations
+    //// task-level operations
 
     /**
      * Adds a task to the ToDo list.
@@ -114,8 +114,8 @@ public class TaskList implements ReadOnlyTaskList {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(Task task) {
-        final UniqueTagList taskTags = task.getTags();
+    private void syncMasterTagListWith(Task p) {
+        final UniqueTagList taskTags = p.getTags();
         tags.mergeFrom(taskTags);
 
         // Create map with values = tag object references in the master list
@@ -126,7 +126,7 @@ public class TaskList implements ReadOnlyTaskList {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        task.setTags(new UniqueTagList(correctTagReferences));
+        p.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
@@ -147,13 +147,13 @@ public class TaskList implements ReadOnlyTaskList {
         }
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
@@ -175,8 +175,8 @@ public class TaskList implements ReadOnlyTaskList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskList // instanceof handles nulls
-                && this.tasks.equals(((TaskList) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskList) other).tags));
+                        && this.tasks.equals(((TaskList) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((TaskList) other).tags));
     }
 
     @Override
@@ -184,4 +184,5 @@ public class TaskList implements ReadOnlyTaskList {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
 }
