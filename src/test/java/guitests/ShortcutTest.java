@@ -30,7 +30,12 @@ public class ShortcutTest extends TaskManagerGuiTest {
         browserPanel.clickOnWebView();
         commandBox.clear();
         mainMenu.useCtrlAltA();
-        assertCommandBoxInput("");
+        assertCommandBoxInput("add ");
+
+        //use menu button
+        commandBox.clear();
+        mainMenu.quickAddUsingMenu();
+        assertCommandBoxInput("add ");
     }
 
     @Test
@@ -53,7 +58,12 @@ public class ShortcutTest extends TaskManagerGuiTest {
         browserPanel.clickOnWebView();
         commandBox.clear();
         mainMenu.useCtrlAltZ();
-        assertCommandBoxInput("");
+        assertCommandBoxInput("undo");
+
+        //use menu button
+        commandBox.clear();
+        mainMenu.quickUndoUsingMenu();
+        assertCommandBoxInput("undo");
     }
 
     @Test
@@ -76,7 +86,12 @@ public class ShortcutTest extends TaskManagerGuiTest {
         browserPanel.clickOnWebView();
         commandBox.clear();
         mainMenu.useCtrlAltD();
-        assertCommandBoxInput("");
+        assertCommandBoxInput("done ");
+
+        //use menu button
+        commandBox.clear();
+        mainMenu.quickDoneUsingMenu();
+        assertCommandBoxInput("done ");
     }
 
     @Test
@@ -126,18 +141,18 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     private void assertScrollDownSuccess() {
         scroll = new Scroll();
-        double currentValue = scroll.getScrollValue(taskListPanel.getListView());
+    	double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftDown();
-        double newValue = scroll.getScrollValue(taskListPanel.getListView());
-        assertTrue(newValue > currentValue);
+    	double newValue = scroll.getScrollValue(taskListPanel.getListView());
+    	assertTrue(newValue > currentValue);
     }
 
     private void assertScrollUpSuccess() {
-        scroll = new Scroll();
-        double currentValue = scroll.getScrollValue(taskListPanel.getListView());
+    	scroll = new Scroll();
+    	double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftUp();
-        double newValue = scroll.getScrollValue(taskListPanel.getListView());
-        assertTrue(newValue < currentValue);
+    	double newValue = scroll.getScrollValue(taskListPanel.getListView());
+    	assertTrue(newValue < currentValue);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
