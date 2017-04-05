@@ -1,6 +1,6 @@
 # TaskList - Developer Guide
 
-By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `NUS`
+By : `CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -416,7 +416,7 @@ Priority | As a ... | I want to ... | So that I can...
 **MSS**
 
 1. User requests to create a task with a name
-2. TaskManager create the task <br>
+2. Task Manager create the task <br>
 Use case ends.
 
 **Extensions**
@@ -429,9 +429,9 @@ Use case ends.
 **MSS**
 
 1. User requests to list tasks
-2. TaskManager shows a list of tasks
+2. Task Manager shows a list of tasks
 3. User requests to delete a specific task in the list
-4. TaskManager deletes the task <br>
+4. Task Manager deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -442,7 +442,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. TaskManager shows an error message <br>
+> 3a1. Task Manager shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Edit/Update task
@@ -450,10 +450,10 @@ Use case ends.
 **MSS**
 
 1. User requests to search for a task with a given name
-2. TaskManager shows the task
+2. Task Manager shows the task
 3. User type in the change
 4. User requests to update/edit the task
-5. TaskManager change the content of the task
+5. Task Manager change the content of the task <br>
 Use case ends.
 
 **Extensions**
@@ -472,7 +472,7 @@ Use case ends.
 **MSS**
 
 1. User requests to search for a task with a given name
-2. TaskManager shows the task
+2. Task Manager shows the task <br>
 Use case ends.
 
 **Extensions**
@@ -486,10 +486,10 @@ Use case ends.
 **MSS**
 
 1. User requests to search for a task with a given name
-2. TaskManager shows the task
+2. Task Manager shows the task
 3. User type in the index of the task he/she wants to mark as complete
 3. User request to complete a task
-4. TaskManager marks the task as completed
+4. Task Manager marks the task as completed <br>
 Use case ends.
 
 **Extensions**
@@ -500,7 +500,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. TaskManager shows an error message <br>
+> 3a1. Task Manager shows an error message <br>
   Use case resumes at step 3
 
 #### Use case: List all task
@@ -508,14 +508,14 @@ Use case ends.
 **MSS**
 
 1. User requests to list all tasks
-2. TaskManager shows all the tasks
+2. Task Manager shows all the tasks <br>
 Use case ends.
 
 **Extensions**
 
 2a. no tasks exist
->  2a1. TaskManager shows an error message
-   Use case ends
+> 2a1. Task Manager shows an error message
+> Use case ends
 
 #### Use case: List a task
 
@@ -523,15 +523,58 @@ Use case ends.
 
 1. User type in the index of the task
 2. User request to see the content of the task
-3. TaskManager shows the content of the task
+3. Task Manager shows the content of the task <br>
 Use case ends.
 
 **Extensions**
 
 2a. The task does not exist
-> 2a1. TaskManager shows an error message
-  Use case resumes at step 1
-{More to be added}
+> 2a1. Task Manager shows an error message
+> Use case resumes at step 1
+
+#### Use case: Save tasks to file
+
+**MSS**
+
+1. User types file location
+2. Task Manager verifies file location
+3. Task Manager saves tasks in specified save file
+4. Task Manager sets this save file as default <br>
+Use case ends.
+
+**Extensions**
+
+2a. The file path does not exist
+> 2a1. Task Manager shows an error message
+> Use case ends.
+
+3a. The file path does not end with a file name
+> 3a1. Task Manager shows an error message
+> Use case ends.
+
+#### Use case: Load tasks from file
+
+**MSS**
+
+1. User types file location
+2. Task Manager verifies file location
+3. Task Manager loads task data from load file
+4. Task Manager sets this load file as default <br>
+Use case ends.
+
+**Extensions**
+
+2a. The file does not exist
+> 2a1. Task Manager shows an error message
+> Use case ends.
+
+2b. The file path does not end with a file name
+> 2b1. Task Manager shows an error message
+> Use case ends.
+
+3a. The load file has an invalid format.
+> 3a1. Task Manager shows an error message
+> Use case ends.
 
 
 ## Appendix C : Non Functional Requirements
@@ -551,8 +594,6 @@ Use case ends.
 13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
 14. Should not overload the CPU so that other running process start to lag.
 15. Should not have seperate administrative functions as there is one user who is the Admin by default.
-
-{More to be added}
 
 ## Appendix D : Glossary
 
