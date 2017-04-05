@@ -12,16 +12,16 @@ import seedu.toluist.model.Task;
 import seedu.toluist.ui.UiStore;
 
 /**
- * TaskListUiView to display the list of tasks
+ * TaskListView to display the list of tasks
  */
-public class TaskListUiView extends UiView {
+public class TaskListView extends UiView {
 
     private static final String FXML = "TaskListView.fxml";
 
     @FXML
     private ListView<Task> taskListView;
 
-    public TaskListUiView () {
+    public TaskListView() {
         super(FXML);
         FxViewUtil.makeFullWidth(getRoot());
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -54,7 +54,7 @@ public class TaskListUiView extends UiView {
                 setGraphic(null);
                 setText(null);
             } else {
-                TaskUiView taskRow = new TaskUiView(task, getIndex() + 1);
+                TaskView taskRow = new TaskView(task, getIndex() + 1);
                 setGraphic(taskRow.getRoot());
                 taskRow.render();
             }

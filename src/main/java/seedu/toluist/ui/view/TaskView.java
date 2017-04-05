@@ -17,7 +17,7 @@ import seedu.toluist.ui.UiStore;
 /**
  * View to display task row
  */
-public class TaskUiView extends UiView {
+public class TaskView extends UiView {
 
     private static final String FXML = "TaskView.fxml";
     private static final String IMAGE_PATH_CLOCK_ICON = "/images/clock.png";
@@ -56,7 +56,7 @@ public class TaskUiView extends UiView {
     private int displayedIndex;
 
 
-    public TaskUiView (Task task, int displayedIndex) {
+    public TaskView(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         this.displayedIndex = displayedIndex;

@@ -35,7 +35,7 @@ import seedu.toluist.ui.view.HelpListView;
 import seedu.toluist.ui.view.ResultView;
 import seedu.toluist.ui.view.StatusBar;
 import seedu.toluist.ui.view.TabBarView;
-import seedu.toluist.ui.view.TaskListUiView;
+import seedu.toluist.ui.view.TaskListView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -80,7 +80,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane statusBarPlaceholder;
 
     private CommandBox commandBox;
-    private TaskListUiView taskListUiView;
+    private TaskListView taskListUiView;
     private ResultView resultView;
     private TabBarView tabBarView;
     private CommandAutoCompleteView commandAutoCompleteView;
@@ -272,7 +272,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void configureChildrenViews() {
-        taskListUiView = new TaskListUiView();
+        taskListUiView = new TaskListView();
         taskListUiView.setParent(getTaskListPlaceholder());
 
         commandBox = new CommandBox(dispatcher);
