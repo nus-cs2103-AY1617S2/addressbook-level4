@@ -52,13 +52,17 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Components in charge of:
     * Edit command
+    * Add command
 * Aspects/tools in charge of: Testing
 * Features implemented:
     * [Edit command](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#24-editing-a-todo--edit)
     * [Add todos with default datetime](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#22-adding-a-todo-add)
     * [Update single tag](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#24-editing-a-todo--edit)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/collated/main/A0165043M.md)][[testcode](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/collated/test/A0165043M.md)]
-
+* Other major contributions:
+    * Refactoring Junit tests
+    * Retrospectives
+    * Weekly sprint plannings
 
 #### Reshmi Sinhahajari
 (Intentionally left blank)
