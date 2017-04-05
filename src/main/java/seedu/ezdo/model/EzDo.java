@@ -151,7 +151,8 @@ public class EzDo implements ReadOnlyEzDo {
     private void syncMasterTagListWith(UniqueTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
-//@@author A0139248X
+
+    //@@author A0139248X
     public boolean removeTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException {
         for (int i = 0; i < tasksToKill.size(); i++) {
             tasks.remove(tasksToKill.get(i));
@@ -167,6 +168,7 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
+    //@@author A0139177W
     private void moveCurrentTaskToDone(Task task) {
         try {
             task.setRecur(new Recur(""));
@@ -176,7 +178,6 @@ public class EzDo implements ReadOnlyEzDo {
         task.toggleDone();
     }
 
-    // @@author A0139177W
     private void updateRecurringDates(Task task) {
 
         if (task.getRecur().isRecur()) {

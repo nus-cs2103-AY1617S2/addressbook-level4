@@ -4,12 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 
+import mockit.Expectations;
+import mockit.integration.junit4.JMockit;
+import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.model.todo.Recur;
-//@@author A0139177W
+
+//@@author A0139248X
+@RunWith(JMockit.class)
 public class RecurTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+  //@@author A0139177W
     @Test
     public void isValidRecur() {
         // invalid recur interval
@@ -53,5 +64,16 @@ public class RecurTest {
         Recur testRecur = new Recur("daily");
         assertEquals(testRecur.hashCode(), (new Recur("daily")).hashCode());
     }
-}
 
+    //@@author A0139248X
+    @Test
+    public void constructor_isValidRecur_throwsIVE() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        new Expectations(Recur.class) {
+            {
+                Recur.isValidRecur("test"); result = false;
+            }
+        };
+        new Recur("test");
+    }
+}
