@@ -34,6 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * Maintained git repo, git page; set up Travis, Appveyor, Codacy, Coveralls
     * Tracked down and fixed general bugs such as null pointer on exit command
     * Provided assistance with some helpful Eclipse and Sublime Text features
+    * Updates testutil files, e.g. TestTask and TaskBuilder
 
 -----
 
