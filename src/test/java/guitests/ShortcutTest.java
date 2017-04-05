@@ -31,11 +31,6 @@ public class ShortcutTest extends TaskManagerGuiTest {
         commandBox.clear();
         mainMenu.useCtrlAltA();
         assertCommandBoxInput("");
-
-        //use menu button
-        commandBox.clear();
-        mainMenu.quickAddUsingMenu();
-        assertCommandBoxInput("add ");
     }
 
     @Test
@@ -59,11 +54,6 @@ public class ShortcutTest extends TaskManagerGuiTest {
         commandBox.clear();
         mainMenu.useCtrlAltZ();
         assertCommandBoxInput("");
-
-        //use menu button
-        commandBox.clear();
-        mainMenu.quickUndoUsingMenu();
-        assertCommandBoxInput("undo");
     }
 
     @Test
@@ -87,11 +77,6 @@ public class ShortcutTest extends TaskManagerGuiTest {
         commandBox.clear();
         mainMenu.useCtrlAltD();
         assertCommandBoxInput("");
-
-        //use menu button
-        commandBox.clear();
-        mainMenu.quickDoneUsingMenu();
-        assertCommandBoxInput("done ");
     }
 
     @Test
