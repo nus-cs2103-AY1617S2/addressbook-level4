@@ -7,24 +7,29 @@ import javafx.scene.layout.Region;
 
 public class TimeCard extends UiPart<Region> {
 
-    private static final String FXML = "TimeCard.fxml";
-    private static final int TASK_TIME_START = 1;
-    private static final int TASK_TIME_END = 2;
-    private static final int TASK_TITLE = 3;
+	private static final String FXML = "TimeCard.fxml";
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label startTime;
-    @FXML
-    private Label endTime;
-    @FXML
-    private Label taskTitle;
+	private static final int TASK_TITLE = 0;
+	private static final int TASK_TIME_START = 1;
+	private static final int TASK_TIME_END = 2;
+	// private static final int TASK_LOCATION = 3;
 
-    public TimeCard(String[] taskSlot) {
-	super(FXML);
-	startTime.setText(taskSlot[TASK_TIME_START]);
-	endTime.setText(taskSlot[TASK_TIME_END]);
-	taskTitle.setText(taskSlot[TASK_TITLE]);
-    }
+	@FXML
+	private HBox cardPane;
+	@FXML
+	private Label startTime;
+	@FXML
+	private Label endTime;
+	@FXML
+	private Label taskTitle;
+	// @FXML
+	// private Label location;
+
+	public TimeCard(String[] taskSlot) {
+		super(FXML);
+		startTime.setText(taskSlot[TASK_TIME_START]);
+		endTime.setText(taskSlot[TASK_TIME_END]);
+		taskTitle.setText(taskSlot[TASK_TITLE]);
+		// location.setText(taskSlot[TASK_LOCATION]);
+	}
 }

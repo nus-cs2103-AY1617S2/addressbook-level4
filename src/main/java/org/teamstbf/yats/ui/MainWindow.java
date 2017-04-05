@@ -5,6 +5,7 @@ import org.teamstbf.yats.commons.core.GuiSettings;
 import org.teamstbf.yats.commons.events.ui.ExitAppRequestEvent;
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.logic.Logic;
+import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.UserPrefs;
 
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ public class MainWindow extends UiPart<Region> {
 
 	private Stage primaryStage;
 	private Logic logic;
+	private Model model;
 
 	// Independent Ui parts residing in this Ui container
 	private CalendarViewPanel calendarViewPanel;
@@ -50,12 +52,13 @@ public class MainWindow extends UiPart<Region> {
 	@FXML
 	private AnchorPane statusbarPlaceholder;
 
-	public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+	public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Model model) {
 		super(FXML);
 
 		// Set dependencies
 		this.primaryStage = primaryStage;
 		this.logic = logic;
+		this.model = model;
 		this.config = config;
 
 		// Configure the UI
@@ -110,7 +113,7 @@ public class MainWindow extends UiPart<Region> {
 	}
 
 	void fillInnerParts() {
-		calendarViewPanel = new CalendarViewPanel(getCalendarViewPlaceholder());
+		calendarViewPanel = new CalendarViewPanel(getCalendarViewPlaceholder(), model);
 		taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
 		new ResultDisplay(getResultDisplayPlaceholder());
 		new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());

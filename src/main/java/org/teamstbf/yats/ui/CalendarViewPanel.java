@@ -1,24 +1,24 @@
 package org.teamstbf.yats.ui;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.teamstbf.yats.commons.util.FxViewUtil;
+import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -34,164 +34,160 @@ import javafx.scene.layout.Region;
 @SuppressWarnings("restriction")
 public class CalendarViewPanel extends UiPart<Region> {
 
-    protected Model model;
+	protected Model model;
 
-    private static final String FXML = "CalendarView.fxml";
-    private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
+	private static final String FXML = "CalendarView.fxml";
+	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 
-    @FXML
-    private AnchorPane calendarPanel;
-    @FXML
-    private TabPane dWMView;
-    @FXML
-    private Tab doneTaskTab;
-    @FXML
-    private Tab browserTab;
-    @FXML
-    private Tab calendarViewTab;
-    @FXML
-    private BorderPane calendarRoot;
-    @FXML
-    private ListView<ReadOnlyEvent> taskListView;
-    @FXML
-    private Button leftArrow;
-    @FXML
-    private Button rightArrow;
-    @FXML
-    private Label currentDay;
-    @FXML
-    private Label currentWeekMonth;
-    @FXML
-    private Label currentMonth;
-    @FXML
-    private Label currentYear;
-    @FXML
-    private ListView<String[]> timeTasks;
+	private final FilteredList<ReadOnlyEvent> internalList;
 
-    private static LocalDate today = LocalDate.now();
-    private final LocalTime firstTimeSlot = LocalTime.of(0, 0);
-    private final Duration timeDifference = Duration.ofMinutes(60);
-    private final LocalTime lastTimeSlot = LocalTime.of(23, 00);
-    private LocalDateTime startTime = today.atTime(firstTimeSlot);
+	@FXML
+	private AnchorPane calendarPanel;
+	@FXML
+	private TabPane dWMView;
+	@FXML
+	private Tab doneTaskTab;
+	@FXML
+	private Tab browserTab;
+	@FXML
+	private Tab calendarViewTab;
+	@FXML
+	private BorderPane calendarRoot;
+	@FXML
+	private ListView<ReadOnlyEvent> taskListView;
+	@FXML
+	private ListView<String[]> timeTasks;
 
-    /**
-     * The AnchorPane where the CalendarView must be inserted
-     *
-     * @param placeholder
-     */
-    public CalendarViewPanel(AnchorPane placeholder) {
-	super(FXML);
-	FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
-	initializeCalendarView();
-	placeholder.getChildren().add(calendarPanel);
-    }
+	private static LocalDate today = LocalDate.now();
 
-    private void initializeCalendarView() {
+	private static final int TASK_DETAILS = 4;
+	private static final int TASK_TITLE = 0;
+	private static final int TASK_START = 1;
+	private static final int TASK_END = 2;
+	private static final int TASK_LOCATION = 3;
 
-	DatePickerSkin calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
-	Node popupContent = calendar.getPopupContent();
-	calendarRoot.setCenter(popupContent);
-
-	createFullDayTime();
-	currentDay.setText(today.format(dateFormatter("d MMM")));
-    }
-
-    // ======= Utility methods for the Button Bar ==========
-
-    private DateTimeFormatter dateFormatter(String toFormat) {
-	return DateTimeFormatter.ofPattern(toFormat);
-    }
-
-    public void nextDay() {
-	today = today.plusDays(1);
-	currentDay.setText(today.format(dateFormatter("d MMM")));
-    }
-
-    public void prevDay() {
-	today = today.minusDays(1);
-	currentDay.setText(today.format(dateFormatter("d MMM")));
-    }
-
-    public void nextWeekMonth() {
-	today = today.plusMonths(1);
-	currentWeekMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void prevWeekMonth() {
-	today = today.minusMonths(1);
-	currentWeekMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void nextMonth() {
-	today = today.plusMonths(1);
-	currentMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void prevMonth() {
-	today = today.minusMonths(1);
-	currentMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void nextYear() {
-	today = today.plusYears(1);
-	currentYear.setText(today.format(dateFormatter("uuuu")));
-    }
-
-    public void prevYear() {
-	today = today.minusYears(1);
-	currentYear.setText(today.format(dateFormatter("uuuu")));
-    }
-
-    public void resetTodayDay() {
-	today = LocalDate.now();
-	currentDay.setText(today.format(dateFormatter("d MMM")));
-    }
-
-    public void resetTodayWeek() {
-	today = LocalDate.now();
-	currentWeekMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void resetTodayMonth() {
-	today = LocalDate.now();
-	currentMonth.setText(today.format(dateFormatter("MMM")));
-    }
-
-    public void resetTodayYear() {
-	today = LocalDate.now();
-	currentYear.setText(today.format(dateFormatter("uuuu")));
-    }
-
-    // ========== Inner Class and Methods for calendar view ==========
-
-    private void createFullDayTime() {
-	// Fetch task list for today: using the list command to extract out the
-	// tasks
-	// Populate timeData observable list with the tasks with correct labels
-	for (startTime = today.atTime(firstTimeSlot); !startTime
-		.isAfter(today.atTime(lastTimeSlot)); startTime = startTime.plus(timeDifference)) {
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ha");
-	    timeData.add(startTime.format(formatter));
+	/**
+	 * The AnchorPane where the CalendarView must be inserted
+	 *
+	 * @param placeholder
+	 */
+	public CalendarViewPanel(AnchorPane placeholder, Model model) {
+		super(FXML);
+		this.model = model;
+		internalList = new FilteredList<ReadOnlyEvent>(model.getFilteredTaskList());
+		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
+		initializeCalendarView();
+		placeholder.getChildren().add(calendarPanel);
 	}
-	model.updateFilteredListToShowDeadline(today.);
-	timeTasks.setItems(timeData);
-	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-    }
 
-    private class TimeSlotListViewCell extends ListCell<String[]> {
+	private void initializeCalendarView() {
 
-	@SuppressWarnings("null")
-	@Override
-	protected void updateItem(String[] taskSlot, boolean empty) {
-	    super.updateItem(taskSlot, empty);
-
-	    if (empty || (taskSlot == null)) {
-		setGraphic(null);
-		setText(null);
-	    } else {
-		setGraphic(new TimeCard(taskSlot).getRoot());
-	    }
+		DatePickerSkin calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
+		Node popupContent = calendar.getPopupContent();
+		calendarRoot.setCenter(popupContent);
+		createFullDayTime();
 	}
-    }
+
+	// ========== Inner Class and Methods for calendar view ==========
+
+	private void createFullDayTime() {
+		// Fetch task list for today: using the list command to extract out the
+		// tasks
+		// Populate timeData observable list with the tasks with correct labels
+		String[] data = new String[TASK_DETAILS];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String[] keyword = { today.plusDays(1).format(formatter) };
+		Set<String> keywordSet = new HashSet<>(Arrays.asList(keyword));
+		updateFilteredListToShowStartTime(keywordSet);
+		for (int i = 0; i < internalList.size(); i++) {
+			ReadOnlyEvent event = internalList.get(i);
+			data[TASK_TITLE] = event.getTitle().toString();
+			data[TASK_START] = event.getStartTime().toString();
+			data[TASK_END] = event.getEndTime().toString();
+			// data[TASK_LOCATION] = event.getLocation().toString();
+			timeData.add(data);
+		}
+		timeTasks.setItems(timeData);
+		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+	}
+
+	private class TimeSlotListViewCell extends ListCell<String[]> {
+
+		@Override
+		protected void updateItem(String[] taskSlot, boolean empty) {
+			super.updateItem(taskSlot, empty);
+
+			if (empty || (taskSlot == null)) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				setGraphic(new TimeCard(taskSlot).getRoot());
+			}
+		}
+	}
+
+	// ============ Inner Class for Information Extraction ============
+
+	private void updateFilteredEventList(Expression expression) {
+		internalList.setPredicate(expression::satisfies);
+	}
+
+	private void updateFilteredListToShowStartTime(Set<String> keywords) {
+		updateFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	interface Qualifier {
+		boolean run(ReadOnlyEvent event);
+
+		@Override
+		String toString();
+	}
+
+	interface Expression {
+		boolean satisfies(ReadOnlyEvent event);
+
+		@Override
+		String toString();
+	}
+
+	private class PredicateExpression implements Expression {
+
+		private final Qualifier qualifier;
+
+		PredicateExpression(Qualifier qualifier) {
+			this.qualifier = qualifier;
+		}
+
+		@Override
+		public boolean satisfies(ReadOnlyEvent event) {
+			return qualifier.run(event);
+		}
+
+		@Override
+		public String toString() {
+			return qualifier.toString();
+		}
+	}
+
+	private class StartTimeQualifier implements Qualifier {
+
+		private Set<String> startTimeKeyWords;
+
+		StartTimeQualifier(Set<String> startTimeKeyWords) {
+			this.startTimeKeyWords = startTimeKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return startTimeKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getStartTime().toString(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "startTime=" + String.join(", ", startTimeKeyWords);
+		}
+	}
 
 }
