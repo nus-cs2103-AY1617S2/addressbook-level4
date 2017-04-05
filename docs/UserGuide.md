@@ -53,14 +53,16 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > * `9pm` or `21:00` <br>
 > * `noon` <br>
 
-> * if only the date/day is provided, the time will be default set as the current time
+> * if only the date/day is provided, the time will be default set as to 11.59 pm
 > * if only the time is provided, the date/day will be default set as the current date/day
 
 ### 2.1. Viewing help : `help`
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+> A help window will be opened showing the user guide.
+> Help for each individual command is also shown when you type the command word only
+ or when the argument format is invalid. 
 
 ### 2.2. Adding a task : `add`
 
@@ -115,14 +117,13 @@ Shows a list of all tasks with deadlines.<br>
 Format: `list event`<br>
 Shows a list of all events.<br>
 
-Format: `list day`<br>
-Shows a list of deadlines and events scheduled on the current day.<br>
+Format: `list from/ START_DATETIME to/ END_DATETIME` <br>
+     OR `list by/ DATETIME`
+Shows a list of tasks scheduled within the specified range of dates.<br>
 
-Format: `list week`<br>
-Shows a list of deadlines and events scheduled for the week.<br>
-
-Format: `list month`<br>
-Shows a list of deadlines and events scheduled for the month.<br>
+Examples:
+* `list from/ tomorrow to/ Sunday`
+* `list by/ Sunday`
 
 Format: `list #TAG`<br>
 Shows a list of tasks labeled with the given TAG.<br>
@@ -138,14 +139,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 > * Only the task description is searched.
 > * The search is case insensitive. e.g `Report` will match `report`
 > * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
+> * Partial words are matched. e.g. `proj` will match `project`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `lunch` will match `lunch appointment`
 
 Examples:
 
 * `find write test case`<br>
-  Returns any tasks with `write`, `test`, `case`, 'case test`, `write test` and any combination of the individual words
-  as part of its description (case insensitive)
+  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`, 
+  `write case`, and any combination of the individual words as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
 

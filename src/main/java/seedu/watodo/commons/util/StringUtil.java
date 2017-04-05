@@ -10,11 +10,11 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     *   Ignores case, and also allows partial word match.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordIgnoreCase("ABc def", "AB") == true //partial word match works
      *       </pre>
      * @param sentence cannot be null
      * @param word cannot be null, cannot be empty, must be a single word
@@ -23,15 +23,17 @@ public class StringUtil {
         assert word != null : "Word parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
 
-        String preppedWord = word.trim();
+        String preppedWord = word.trim().toLowerCase();
         assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
         assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
 
-        String preppedSentence = sentence;
+        String preppedSentence = sentence.toLowerCase();
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         for (String wordInSentence: wordsInPreppedSentence) {
-            if (wordInSentence.equalsIgnoreCase(preppedWord)) return true;
+            if (wordInSentence.equals(preppedWord) || wordInSentence.contains(preppedWord)) {
+                return true;
+            }
         }
         return false;
     }
