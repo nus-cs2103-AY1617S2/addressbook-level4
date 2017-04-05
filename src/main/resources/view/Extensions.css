@@ -1,12 +1,9 @@
 /*@@author A0124377A */
 
 .error {
-    -fx-background-color: #ffb7b7;
+    -fx-background-color: #ff9f80;
 }
 
-.success {
-    -fx-background-color: #A8CCA4;
-}
 
 .tag-selector {
     -fx-border-width: 1;
