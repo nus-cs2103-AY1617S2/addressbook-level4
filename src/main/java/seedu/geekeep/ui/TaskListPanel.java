@@ -54,7 +54,6 @@ public class TaskListPanel extends UiPart<Region> {
         selectTab(0);
     }
 
-    //TODO to remove
     private static String getFxmlFromType(String type) {
         if ("deadline".equals(type)) {
             return DEADLINE_FXML;
