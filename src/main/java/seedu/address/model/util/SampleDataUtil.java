@@ -5,7 +5,6 @@ import seedu.address.model.YTomorrow;
 import seedu.address.model.ReadOnlyAddressBook;
 
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
@@ -17,33 +16,32 @@ import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 public class SampleDataUtil {
     //@@author A0163848R
     public static Task[] getSamplePersons() {
+        /*
+        final int n = 50;
+        Task[] generated = new Task[n];
+        for (int i = 0; i < n; i++) {
+            generated[i] = generateRandomTask();
+        }
+        return generated;
+        */
+        return new Task[] { randomTaskGenerator() };
+    }
+    
+    /**
+     * @return a randomly-generated task
+     * @throws IllegalValueException
+     */
+    private static Task randomTaskGenerator() {
         try {
-
-            return new Task[] {
-                    Task.factory(
-                            new Name("study SE"),
-                            new StartDate("09.01"),
-                            new EndDate("12.12"),
-                            new Group("learning")),
-                    /*
-                new Task(new Name("study SE"), new Date("12.12"), new StartDate("09.01"),
-                            new Email("alexyeoh@gmail.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("watch Beauty and Beast"), new Date("01.01"), new StartDate("00.00"),
-                            new Email("berniceyu@gmail.com"), new Group("relax"),
-                            new UniqueTagList("undone", "important")),
-                new Task(new Name("do tutorial"), new Date("03.11"), new StartDate("00.00"),
-                            new Email("charlotte@yahoo.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("review the lesson"), new Date("03.21"), new StartDate("00.00"),
-                            new Email("lidavid@google.com"), new Group("learning"), new UniqueTagList("undone")),
-                new Task(new Name("read books"), new Date("03.31"), new StartDate("00.00"),
-                            new Email("irfan@outlook.com"), new Group("leisure time"), new UniqueTagList("undone")),
-                new Task(new Name("painting"), new Date("03.06"), new StartDate("00.00"),
-                            new Email("royb@gmail.com"), new Group("leisure time"), new UniqueTagList("undone"))
-                            */
-            };
-
+            return Task.factory(
+                    new Name("A"),
+                    new StartDate("today"),
+                    new EndDate("tomorrow"),
+                    new Email("a@e"),
+                    new Group("ayy"),
+                    new UniqueTagList());
         } catch (IllegalValueException e) {
-            throw new AssertionError("sample data cannot be invalid", e);
+            return randomTaskGenerator();
         }
     }
     //@@author

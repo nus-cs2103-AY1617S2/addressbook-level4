@@ -42,7 +42,13 @@ public class Task implements ReadOnlyPerson {
      */
 
     public Task(ReadOnlyPerson source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getEmail(), source.getGroup(), source.getTags());
+        this(
+            source.getName(),
+            source.getStartDate(),
+            source.getEndDate(),
+            source.getEmail(),
+            source.getGroup(),
+            source.getTags());
 
     }
 

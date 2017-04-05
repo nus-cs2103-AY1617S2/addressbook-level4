@@ -19,9 +19,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label date;
+    private Label end;
     @FXML
-    private Label sdate;
+    private Label start;
     @FXML
     private Label group;
     @FXML
@@ -34,19 +34,20 @@ public class PersonCard extends UiPart<Region> {
         
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        if (person.getEndDate().value.equals("00.00")) {
-            date.setText("");
+        
+        if (person.getEndDate() == null) {
+            end.setText("");
         } else {
-            date.setText("End date: " + person.getEndDate().value);
+            end.setText("End date: " + person.getEndDate().value);
         }
 
-        if (person.getStartDate().value.equals("00.00")) {
-            sdate.setText("");
+        if (person.getStartDate() == null) {
+            start.setText("");
         } else {
-            sdate.setText("Start Date: " + person.getStartDate().value);
+            start.setText("Start Date: " + person.getStartDate().value);
         }
+        
         group.setText(person.getGroup().value);
-        email.setText(person.getEmail().value);
         initTags(person);
     }
 

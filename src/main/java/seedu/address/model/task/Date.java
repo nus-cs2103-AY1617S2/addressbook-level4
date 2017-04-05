@@ -35,10 +35,14 @@ public abstract class Date {
 
     //@@author A0163848R
     private String parse(String rawDate) throws IllegalValueException {
-        Parser parser = new Parser();
-        List<DateGroup> groups = parser.parse(rawDate);
-        String dateText = groups.get(0).getDates().get(0).toString();
-        return dateText;
+        try {
+            Parser parser = new Parser();
+            List<DateGroup> groups = parser.parse(rawDate);
+            String dateText = groups.get(0).getDates().get(0).toString();
+            return dateText;
+        } catch (RuntimeException e) {
+            throw new IllegalValueException("Date not valid!");
+        }
     }
     //@@author
     
