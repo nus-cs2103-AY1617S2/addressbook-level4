@@ -33,6 +33,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
+        sortTasksList();
         String detailsToEdit = "title Do Homework";
         int addressBookIndex = 3;
 
@@ -43,6 +44,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_clearTags_success() throws Exception {
+        sortTasksList();
         String detailsToEdit = "tag null";
         int addressBookIndex = 5;
 
@@ -52,8 +54,46 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0163996J
+    @Test
+    public void edit_priority_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "priority is high";
+        int addressBookIndex = 4;
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withPriority("high").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_dateTime_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "end 4 pm";
+        int addressBookIndex = 5;
+
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withEnd("4pm").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_dateToday_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "end today";
+        int addressBookIndex = 4;
+
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withEnd("today").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+    }
+
+    //@@author A0141872E
     @Test
     public void edit_findThenEdit_success() throws Exception {
+        sortTasksList();
         commandBox.runCommand("find Do HW 1");
 
         String detailsToEdit = "title Homework due";
@@ -68,30 +108,35 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecified_failure() {
+        sortTasksList();
         commandBox.runCommand("edit 1 title");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_missingTaskIndex_failure() {
+        sortTasksList();
         commandBox.runCommand("edit title Homework due");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NOT_EDITED));
     }
 
     @Test
     public void edit_invalidTaskIndex_failure() {
+        sortTasksList();
         commandBox.runCommand("edit 99 title Homework due");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
     public void edit_noFieldsSpecified_failure() {
+        sortTasksList();
         commandBox.runCommand("edit ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,EditCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void edit_invalidValues_failure() {
+        sortTasksList();
         commandBox.runCommand("edit 1 title *&");
         assertResultMessage(Title.MESSAGE_TITLE_CONSTRAINTS);
 
@@ -101,6 +146,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_duplicateTask_failure() {
+        sortTasksList();
         commandBox.runCommand("edit 3 title Do HW 1");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
