@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.bulletjournal.logic.commands.AddCommand;
 import seedu.bulletjournal.logic.commands.AddCommandDeadline;
 import seedu.bulletjournal.logic.commands.AddCommandFloating;
+import seedu.bulletjournal.logic.commands.ChangeDirectoryCommand;
 import seedu.bulletjournal.logic.commands.ClearCommand;
 import seedu.bulletjournal.logic.commands.Command;
 import seedu.bulletjournal.logic.commands.DeleteCommand;
@@ -20,6 +21,7 @@ import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
 import seedu.bulletjournal.logic.commands.SelectCommand;
 import seedu.bulletjournal.logic.commands.ShowCommand;
+
 /**
  * Parses user input.
  */
@@ -33,7 +35,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -69,6 +72,9 @@ public class Parser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case ChangeDirectoryCommand.COMMAND_WORD:
+            return new ChangeDirectoryCommand(arguments.trim());
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

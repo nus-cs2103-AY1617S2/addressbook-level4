@@ -17,7 +17,6 @@ public class Config {
     private String todoListFilePath = "data/bulletjournal.xml";
     private String todoListName = "MyBulletJournal";
 
-
     public String getAppTitle() {
         return appTitle;
     }
@@ -46,7 +45,7 @@ public class Config {
         return todoListFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
+    public void setBulletJournalFilePath(String addressBookFilePath) {
         this.todoListFilePath = addressBookFilePath;
     }
 
@@ -58,23 +57,20 @@ public class Config {
         this.todoListName = addressBookName;
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof Config)) { //this handles null as well.
+        if (!(other instanceof Config)) { // this handles null as well.
             return false;
         }
 
         Config o = (Config) other;
 
-        return Objects.equals(appTitle, o.appTitle)
-                && Objects.equals(logLevel, o.logLevel)
+        return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(todoListFilePath, o.todoListFilePath)
-                && Objects.equals(todoListName, o.todoListName);
+                && Objects.equals(todoListFilePath, o.todoListFilePath) && Objects.equals(todoListName, o.todoListName);
     }
 
     @Override

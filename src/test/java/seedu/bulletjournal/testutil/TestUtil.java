@@ -38,7 +38,7 @@ import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Status;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.TaskName;
-import seedu.bulletjournal.storage.XmlSerializableAddressBook;
+import seedu.bulletjournal.storage.XmlSerializableTodoList;
 
 /**
  * A utility class for test cases.
@@ -144,8 +144,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TodoList());
+    public static XmlSerializableTodoList generateSampleStorageAddressBook() {
+        return new XmlSerializableTodoList(new TodoList());
     }
 
     /**
