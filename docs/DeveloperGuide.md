@@ -204,12 +204,12 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 The `Model`,
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task List data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* Stores a `UserPref` object that represents the user's preferences.
+* Stores the Task List data.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
-* defines reccuring tasks in the following way:
+* Does not depend on any of the other three components.
+* Defines reccuring tasks in the following way:
   * Class `RecurringTaskOccurrence` encapsulates 2 Timing objects (start & end times) and a boolean to indicate if 
   the occurrence is complete. 
   * Class `Task` encapsulates a list of `RecurringTaskOccurrence` objects. In addition, it also encapsulates a  
@@ -217,8 +217,8 @@ The `Model`,
   constructed as an object in the backend of the application. 
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
   instances of the same underlying object.
-    *If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
-    subsequently utilized to generate `RecurringTaskOccurrence` objects.
+  *If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
+  subsequently utilized to generate the respective Task's `RecurringTaskOccurrence` objects.
 
 
 ### 2.5. Storage component
