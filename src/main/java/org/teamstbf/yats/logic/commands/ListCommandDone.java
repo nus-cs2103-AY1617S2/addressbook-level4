@@ -16,6 +16,6 @@ public class ListCommandDone extends ListCommand {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowDone(keywords);
-		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredUndoneTaskList().size()));
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
 }

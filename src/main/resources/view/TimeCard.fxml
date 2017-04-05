@@ -48,12 +48,12 @@
                                  <children>
                                     <AnchorPane>
                                        <children>
-                                          <Label fx:id="startTime" layoutX="0.06982421875" layoutY="8.0" styleClass="cell_small_label" text="\\$time" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.06982421875" AnchorPane.topAnchor="8.0" />
+                                          <Label fx:id="taskStartTime" layoutX="0.06982421875" layoutY="8.0" styleClass="cell_small_label" text="\\$time" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.06982421875" AnchorPane.topAnchor="8.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane GridPane.rowIndex="1">
                                        <children>
-                                          <Label fx:id="endTime" layoutX="0.06982421875" styleClass="cell_small_label" text="\\$time" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.06982421875" AnchorPane.topAnchor="8.0" />
+                                          <Label fx:id="taskEndTime" layoutX="0.06982421875" styleClass="cell_small_label" text="\\$time" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.06982421875" AnchorPane.topAnchor="8.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -74,7 +74,7 @@
                                     </AnchorPane>
                                     <AnchorPane GridPane.rowIndex="1">
                                        <children>
-                                          <Label layoutY="7.0" styleClass="cell_small_label" stylesheets="@DarkTheme.css" text="Location" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0" />
+                                          <Label fx:id="taskLocation" layoutY="7.0" styleClass="cell_small_label" text="Location" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="7.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>

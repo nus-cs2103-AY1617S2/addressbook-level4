@@ -12,24 +12,24 @@ public class TimeCard extends UiPart<Region> {
 	private static final int TASK_TITLE = 0;
 	private static final int TASK_TIME_START = 1;
 	private static final int TASK_TIME_END = 2;
-	// private static final int TASK_LOCATION = 3;
+	private static final int TASK_LOCATION = 3;
 
 	@FXML
 	private HBox cardPane;
 	@FXML
-	private Label startTime;
+	private Label taskStartTime;
 	@FXML
-	private Label endTime;
+	private Label taskEndTime;
 	@FXML
 	private Label taskTitle;
-	// @FXML
-	// private Label location;
+	@FXML
+	private Label taskLocation;
 
 	public TimeCard(String[] taskSlot) {
 		super(FXML);
-		startTime.setText(taskSlot[TASK_TIME_START]);
-		endTime.setText(taskSlot[TASK_TIME_END]);
+		taskStartTime.setText(taskSlot[TASK_TIME_START]);
+		taskEndTime.setText(taskSlot[TASK_TIME_END]);
 		taskTitle.setText(taskSlot[TASK_TITLE]);
-		// location.setText(taskSlot[TASK_LOCATION]);
+		taskLocation.setText(taskSlot[TASK_LOCATION]);
 	}
 }

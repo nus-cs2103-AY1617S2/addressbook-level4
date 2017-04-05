@@ -17,7 +17,7 @@ public class ClearDoneCommand extends Command {
 
     @Override
     public CommandResult execute() {
-	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredUndoneTaskList();
+	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
 	int formerSize = lastShownList.size();
 

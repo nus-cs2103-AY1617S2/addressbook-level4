@@ -44,8 +44,12 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private final FilteredList<ReadOnlyEvent> taskList;
 	private final DatePickerSkin calendar;
 
+	private BrowserPanel browserPanel;
+
 	@FXML
 	private AnchorPane calendarPanel;
+	@FXML
+	private AnchorPane browserPlaceholder;
 	@FXML
 	private TabPane dWMView;
 	@FXML
@@ -86,6 +90,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
 		initializeCalendarView();
 		initializeDoneView();
+		initializeBrowser();
 		placeholder.getChildren().add(calendarPanel);
 	}
 
@@ -99,6 +104,10 @@ public class CalendarViewPanel extends UiPart<Region> {
 		updateTaskList();
 		taskListView.setItems(taskData);
 		taskListView.setCellFactory(listView -> new TaskListViewCell());
+	}
+
+	private void initializeBrowser() {
+		browserPanel = new BrowserPanel(browserPlaceholder);
 	}
 
 	private void createFullDayTime() {
@@ -155,7 +164,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 	private void updateCalendarList() {
 		String[] data = new String[TASK_DETAILS];
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String[] keyword = { today.plusDays(1).format(formatter) };
+		String[] keyword = { today.format(formatter) };
 		Set<String> keywordSet = new HashSet<>(Arrays.asList(keyword));
 		updateFilteredListToShowStartTime(keywordSet);
 		for (int i = 0; i < calendarList.size(); i++) {
@@ -163,7 +172,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 			data[TASK_TITLE] = event.getTitle().toString();
 			data[TASK_START] = event.getStartTime().toString();
 			data[TASK_END] = event.getEndTime().toString();
-			// data[TASK_LOCATION] = event.getLocation().toString();
+			data[TASK_LOCATION] = event.getLocation().toString();
 			timeData.add(data);
 		}
 	}

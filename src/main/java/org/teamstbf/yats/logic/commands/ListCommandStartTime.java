@@ -14,6 +14,6 @@ public class ListCommandStartTime extends ListCommand {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowStartTime(keywords);
-		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredUndoneTaskList().size()));
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
 }

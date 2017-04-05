@@ -173,13 +173,8 @@ public class ModelManager extends ComponentManager implements Model {
 	// =============================================================
 
 	@Override
-	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredUndoneTaskList() {
-		updateFilteredListToShowAll();
-		return new UnmodifiableObservableList<>(filteredEvents);
-	}
-
-	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
+		// updateFilteredListToShowAll();
 		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 

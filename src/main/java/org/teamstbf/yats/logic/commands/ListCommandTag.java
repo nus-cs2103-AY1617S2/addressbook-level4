@@ -14,6 +14,6 @@ public class ListCommandTag extends ListCommand {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowTags(keywords);
-		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredUndoneTaskList().size()));
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
 }

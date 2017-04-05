@@ -30,7 +30,7 @@ public class SelectCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredUndoneTaskList();
+	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
 	if (lastShownList.size() < targetIndex) {
 	    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

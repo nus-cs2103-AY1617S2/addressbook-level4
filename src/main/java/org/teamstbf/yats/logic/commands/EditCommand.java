@@ -64,7 +64,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-	List<ReadOnlyEvent> lastShownList = model.getFilteredUndoneTaskList();
+	List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
 	if (filteredTaskListIndex >= lastShownList.size()) {
 	    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

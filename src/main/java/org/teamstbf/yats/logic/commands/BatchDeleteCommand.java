@@ -28,7 +28,7 @@ public class BatchDeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredUndoneTaskList();
+	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 	int numOfTask = targetIndexes.size();
 
 	for (int i = 0; i < numOfTask; i++) {
