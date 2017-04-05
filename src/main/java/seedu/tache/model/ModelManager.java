@@ -46,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139961U
     public static final String DUE_TODAY_TASK_LIST_TYPE = "Tasks Due Today";
     public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Tasks Due This Week";
+    public static final String OVERDUE_TASK_LIST_TYPE = "Overdue Tasks";
     //@@author
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     //@@author A0139925U
@@ -184,6 +185,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowDueThisWeek() {
         updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
         updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
+    }
+
+    public void updateFilteredListToShowOverdueTasks() {
+        updateFilteredTaskListType(OVERDUE_TASK_LIST_TYPE);
+        updateFilteredTaskList(new PredicateExpression(new OverdueQualifier()));
     }
 
     //@@author A0142255M
@@ -389,7 +395,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0139961U
     private class DueThisWeekQualifier implements Qualifier {
         private boolean isDueThisWeek;
 
@@ -411,6 +416,24 @@ public class ModelManager extends ComponentManager implements Model {
             return "dueThisWeek=true";
         }
     }
+
+    private class OverdueQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getEndDateTime().isPresent() && task.getActiveStatus()) {
+                return task.getEndDateTime().get().hasPassed();
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "dueThisWeek=true";
+        }
+    }
+    //@@author
 
     //@@author A0139925U
     private class DateTimeQualifier implements Qualifier {
