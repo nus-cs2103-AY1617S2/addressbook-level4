@@ -84,6 +84,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
+        //@@author A0148052L-reused
+        model.pushCommand(COMMAND_WORD);
+        model.pushStatus(model.getTaskList());
+        //@@author
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 

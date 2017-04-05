@@ -54,17 +54,20 @@ public class AddCommand extends Command {
         return new UniqueTagList(tagSet);
     }
 
-    //@@author
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
             model.addTask(toAdd);
+            //@@author A0148052L
+            model.pushCommand(COMMAND_WORD);
+            model.pushStatus(model.getTaskList());
+            //@@author
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
     }
 
 }
