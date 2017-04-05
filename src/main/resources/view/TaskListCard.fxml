@@ -60,15 +60,15 @@
                                 </padding>
                            <children>
                                     <Label fx:id="startTime" styleClass="cell_small_label" />
-                                    <Label fx:id="to" styleClass="cell_small_label" text=" to " />
+                                    <Label fx:id="to" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text=" to " textAlignment="CENTER" />
                                     <Label fx:id="deadline" styleClass="cell_small_label" />
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane maxWidth="40.0" minHeight="0.0" minWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="40.0">
+                <AnchorPane maxWidth="40.0" minHeight="0.0" minWidth="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="40.0">
                      <children>
-                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
               </items>
