@@ -27,7 +27,8 @@ public class GetGoogleCalendarCommand extends Command {
             + "Note that duplicate events or events without names are ignored.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_2
             + ": Gets your events from your Google Calendar and add them to KIT."
-            + " Please note that this will only get upcoming events.\n" + "Example: " + COMMAND_WORD_2;
+            + " Please note that this will only get upcoming events and"
+            + " duplicate events or events without names are ignored.\n" + "Example: " + COMMAND_WORD_2;
 
     @Override
     public CommandResult execute() {

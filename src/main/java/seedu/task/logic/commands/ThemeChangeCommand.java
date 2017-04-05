@@ -9,8 +9,9 @@ public class ThemeChangeCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "changetheme";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Changes the theme of the task manager. "
-            + "Parameters: Theme Name \n" + "Example: " + COMMAND_WORD_1 + " Dark";
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Changes the theme of the task manager.\n"
+            + "Parameters: Theme Name \n"
+            + "Example: " + COMMAND_WORD_1 + " Dark";
 
     public static final String MESSAGE_SUCCESS = "Theme is successfully changed to %1$s. "
             + "Restart KIT to view the changes.";

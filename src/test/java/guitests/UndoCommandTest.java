@@ -33,8 +33,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
         // list does not affect undo
         commandBox.runCommand(DoneCommand.COMMAND_WORD_1 + " 2");
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " notdone");
         commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         assertUndoSuccess(currentList);
 

@@ -19,7 +19,6 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private WebView browser;
 
-
   //@@author A0142487Y-reused
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
@@ -30,6 +29,7 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+        loadPage();
     }
 
 //    public void loadTaskPage(ReadOnlyTask task) {
