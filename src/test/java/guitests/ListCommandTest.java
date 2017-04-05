@@ -44,7 +44,7 @@ public class ListCommandTest extends AddressBookGuiTest {
 		//list overdue tasks
 		commandBox.runCommand("add task3 by 04/04/17");
 		commandBox.runCommand("list overdue");
-		assertListSize(2); //because task1 has just been overdue.
+		assertListSize(3); //because task1 has just been overdue.
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "overdue"));
 		
 		
