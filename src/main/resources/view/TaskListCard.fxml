@@ -27,11 +27,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
             </columnConstraints>
             <children>
-            <SplitPane dividerPositions="0.52, 0.85" prefHeight="80.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.52, 0.85" prefHeight="80.0" prefWidth="300.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="260.0" prefHeight="80.0" prefWidth="260.0">
+                <AnchorPane maxWidth="210.0" minHeight="0.0" minWidth="210.0" prefHeight="80.0" prefWidth="210.0">
                      <children>
-                            <VBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="65.0" prefWidth="260.0">
+                            <VBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="65.0">
                                 <stylesheets>
                                     <URL value="@DarkTheme.css" />
                                     <URL value="@Extensions.css" />
@@ -40,21 +40,21 @@
                                     <Insets bottom="5" left="15" right="5" top="10" />
                                 </padding>
                                 <children>
-                                      <HBox maxWidth="260.0" minWidth="260.0" prefHeight="25.0">
+                                      <HBox maxWidth="210.0" minWidth="180.0" prefHeight="25.0">
                                          <children>
                                              <Label fx:id="id" styleClass="cell_big_label" />
                                              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                          </children>
                                       </HBox>
-                                    <Label fx:id="description" prefHeight="30.0" styleClass="cell_small_label" text="\$description" />
-                                    <FlowPane fx:id="tags" maxHeight="20.0" prefWidth="260.0" />
+                                    <Label fx:id="description" minWidth="180.0" prefHeight="30.0" styleClass="cell_small_label" text="\$description" />
+                                    <FlowPane fx:id="tags" maxHeight="20.0" minWidth="180.0" />
                                 </children>
                             </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" prefWidth="100.0">
+                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" minWidth="100.0" prefWidth="100.0">
                      <children>
-                        <VBox prefHeight="80.0" prefWidth="100.0">
+                        <VBox minWidth="100.0" prefHeight="80.0" prefWidth="100.0">
                          <padding>
                                     <Insets bottom="5" left="0" right="0" top="10" />
                                 </padding>
@@ -66,9 +66,9 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0">
+                <AnchorPane minHeight="0.0" minWidth="30.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="30.0">
                      <children>
-                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
               </items>
