@@ -44,7 +44,7 @@ public class NotificationManager {
      */
     private void initTasksWithNotificationTimer(ObservableList<ReadOnlyTask> taskList) {
         for (ReadOnlyTask task : taskList) {
-            if (task.getEndDateTime().isPresent() && !task.getEndDateTime().get().hasPassed()) {
+            if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
                 notificationTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -82,6 +82,16 @@ public class NotificationManager {
         cal.add(Calendar.MINUTE, -59);
         cal.add(Calendar.SECOND, -57);
         return cal.getTime();
+    }
+
+    private boolean isDueInMoreThanTwoHours(DateTime dateTime) {
+        Date now = new Date();
+        if (getTwoHoursBefore(dateTime).before(now)) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
     /**
