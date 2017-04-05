@@ -9,27 +9,24 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD_1 = "list";
     public static final String COMMAND_WORD_2 = "ls";
     public static final String COMMAND_WORD_3 = "l";
-    public static final String COMMAND_WORD_4 = "done";
-   // public static final String COMMAND_WORD_5 = "ld";
+    public static final String DONE = "done";
 
     public static final String MESSAGE_LISTBYDONE_SUCCESS = "Listed all done tasks";
-    public static final String MESSAGE_USAGE2 = COMMAND_WORD_4 + ": Lists all done tasks in KIT.\n"
-            + "Example: " + COMMAND_WORD_4;
+    public static final String MESSAGE_USAGE2 = DONE + ": Lists all done tasks in KIT.\n"
+            + "Example: " + DONE;
 
-    public static final String COMMAND_WORD_NOT_DONE = "notdone";
-    public static final String COMMAND_WORD_7 = "undone";
-   // public static final String COMMAND_WORD_8 = "lnd";
+    public static final String NOT_DONE = "notdone";
 
     public static final String MESSAGE_LISTBYNOTDONE_SUCCESS = "Listed all undone tasks";
-    public static final String MESSAGE_USAGE3 = COMMAND_WORD_NOT_DONE + ": Lists all undone tasks in KIT.\n"
+    public static final String MESSAGE_USAGE3 = NOT_DONE + ": Lists all undone tasks in KIT.\n"
             + "Example: " + COMMAND_WORD_1;
 
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists all tasks in KIT.\n"
-            + "Example: " + COMMAND_WORD_NOT_DONE;
+            + "Example: " + NOT_DONE;
 
-    public static final String MESSAGE_FAIL = "Wrong command format";
+    public static final String MESSAGE_FAIL = "Wrong command format, list format should be list, list done or list undone";
 
     private final int value;
 
