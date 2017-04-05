@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -19,11 +17,9 @@ import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
-//import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * The manager of the UI component.
