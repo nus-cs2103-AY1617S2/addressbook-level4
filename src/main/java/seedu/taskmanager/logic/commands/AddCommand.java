@@ -1,6 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
-import java.util.HashSet;ist
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
