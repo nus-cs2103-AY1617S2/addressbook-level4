@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.SwitchConfig;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
-import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TaskSwitchPredicate;
 import seedu.toluist.model.TodoList;
