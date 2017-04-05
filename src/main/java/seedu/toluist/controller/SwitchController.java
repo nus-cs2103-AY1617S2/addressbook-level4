@@ -99,6 +99,18 @@ public class SwitchController extends Controller {
         return new String[] { COMMAND_WORD };
     }
 
+    public Map<String, String[]> getCommandKeywordMap() {
+        Map<String, String[]> keywords = new HashMap<>();
+        for (String tab : switchConfig.getAllKeys()) {
+            keywords.put(tab, new String[0]);
+        }
+        return keywords;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] { StringUtil.collectionToArrayOfArrays(switchConfig.getAllKeys()) };
+    }
+
     //@@author A0162011A
     public String[] getBasicHelp() {
         return new String[] { String.join(StringUtil.FORWARD_SLASH, getCommandWords()), HELP_FORMAT,

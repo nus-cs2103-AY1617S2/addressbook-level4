@@ -50,7 +50,7 @@ public class SwitchConfigTest {
         assertEquals(switchConfig.getPredicate("a"),
                 Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_ALL));
 
-        assertEquals(switchConfig.getPredicate("a"),
+        assertEquals(switchConfig.getPredicate("al"),
                 Optional.of(TaskSwitchPredicate.SWITCH_PREDICATE_ALL));
 
         assertEquals(switchConfig.getPredicate("gibberish"), Optional.empty());
