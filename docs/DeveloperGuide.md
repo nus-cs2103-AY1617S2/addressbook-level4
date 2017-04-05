@@ -138,7 +138,7 @@ Functions of `Main`:
 #### Commons Component
 
 [**`Commons`**](#commons-component) represents a collection of classes used by multiple other components.
-This collection is encapsulated in the `seedu.addressbook.commons` package. <br>
+This collection is encapsulated in the `seedu.tache.commons` package. <br>
 
 2 classes in the package, `EventsCenter` and `LogsCenter`, play important roles at the architecture level as discussed.
 
@@ -164,7 +164,9 @@ The rest of Tache consists of the following four components:
 
 * [**`Storage`**](#35-storage-component) : Reads data from, and writes data to, the hard disk
 
-The interactions between these components are integral in providing the functionality of Tache. For example,
+#### Event-Driven Nature
+
+The interactions between the components mentioned above are integral in providing the functionality of Tache. For example,
 the [_Sequence Diagram_](#sequence-diagram) below shows how some of these components interact with one another
 to execute the user command `delete 1`.
 
