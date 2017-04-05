@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
@@ -175,10 +175,10 @@ public class Task implements ReadOnlyTask {
         }
 
         else {
-            if ((CurrentDate.isDateWithin(this.startDate.value, t.startDate.value, t.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(this.endDate.value, t.startDate.value, t.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(t.startDate.value, this.startDate.value, this.endDate.value) == 1)
-                    || (CurrentDate.isDateWithin(t.endDate.value, this.startDate.value, this.endDate.value) == 1)) {
+            if ((DateTimeUtil.isDateWithin(this.startDate.value, t.startDate.value, t.endDate.value) == 1)
+                    || (DateTimeUtil.isDateWithin(this.endDate.value, t.startDate.value, t.endDate.value) == 1)
+                    || (DateTimeUtil.isDateWithin(t.startDate.value, this.startDate.value, this.endDate.value) == 1)
+                    || (DateTimeUtil.isDateWithin(t.endDate.value, this.startDate.value, this.endDate.value) == 1)) {
                 return true;
             }
         }

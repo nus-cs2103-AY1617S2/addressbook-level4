@@ -1,11 +1,10 @@
 package seedu.taskmanager.logic.commands;
 
-import java.time.YearMonth;
 import java.util.List;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -64,13 +63,13 @@ public class RecurringCommand extends Command {
                 try {
                     recurringTask = new Task(taskToRecur.getTaskName(), taskToRecur.getStartDate(),
                             taskToRecur.getStartTime(),
-                            new EndDate(getNewDate(loop, typeOfRecurrence, taskToRecur.getEndDate().toString())),
+                            new EndDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence, taskToRecur.getEndDate().toString())),
                             taskToRecur.getEndTime(), false, taskToRecur.getCategories());
                 } catch (IllegalValueException ive) {
                     throw new CommandException("Wrong format for deadline!");
                 }
 
-                if (CurrentDate.isValidDate(recurringTask.getEndDate().toString())) {
+                if (DateTimeUtil.isValidDate(recurringTask.getEndDate().toString())) {
                     try {
                         model.addTask(recurringTask);
                     } catch (DuplicateTaskException dte) {
@@ -84,16 +83,16 @@ public class RecurringCommand extends Command {
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
                 try {
                     recurringTask = new Task(taskToRecur.getTaskName(),
-                            new StartDate(getNewDate(loop, typeOfRecurrence, taskToRecur.getStartDate().toString())),
+                            new StartDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence, taskToRecur.getStartDate().toString())),
                             taskToRecur.getStartTime(),
-                            new EndDate(getNewDate(loop, typeOfRecurrence, taskToRecur.getEndDate().toString())),
+                            new EndDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence, taskToRecur.getEndDate().toString())),
                             taskToRecur.getEndTime(), false, taskToRecur.getCategories());
                 } catch (IllegalValueException ive) {
                     throw new CommandException("Wrong format for event!");
                 }
 
-                if (CurrentDate.isValidDate(recurringTask.getStartDate().toString())
-                        && CurrentDate.isValidDate(recurringTask.getEndDate().toString()))
+                if (DateTimeUtil.isValidDate(recurringTask.getStartDate().toString())
+                        && DateTimeUtil.isValidDate(recurringTask.getEndDate().toString()))
                     try {
                         model.addTask(recurringTask);
                     } catch (DuplicateTaskException dte) {
@@ -105,72 +104,5 @@ public class RecurringCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(
                 String.format(MESSAGE_RECURRING_TASK_SUCCESS, String.valueOf(numberOfRecurrence), " number of times"));
-    }
-
-    public static String getNewDate(int loops, String typeOfRecurrence, String existingDate) {
-        String[] dmy = existingDate.trim().split("/");
-        int day = Integer.parseInt(dmy[0]);
-        int month = Integer.parseInt(dmy[1]);
-        int year = Integer.parseInt(dmy[2]);
-
-        String newDate = "";
-        String newDay = "";
-        String newMonth = "";
-
-        YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
-
-        if (typeOfRecurrence.equalsIgnoreCase("days")) {
-            day = day + loops;
-            while (day > yearMonthObject.lengthOfMonth()) {
-                day = day - yearMonthObject.lengthOfMonth();
-                month = month + 01;
-                if (month > 12) {
-                    year = year + 1;
-                    month = 01;
-                }
-                yearMonthObject = YearMonth.of(2000 + year, month);
-            }
-        }
-
-        if (typeOfRecurrence.equalsIgnoreCase("weeks")) {
-            day = day + loops * 7;
-            while (day > yearMonthObject.lengthOfMonth()) {
-                day = day - yearMonthObject.lengthOfMonth();
-                month = month + 01;
-                if (month > 12) {
-                    year = year + 1;
-                    month = 01;
-                }
-                yearMonthObject = YearMonth.of(2000 + year, month);
-            }
-        }
-
-        if (typeOfRecurrence.equalsIgnoreCase("months")) {
-            month = month + loops;
-            while (month > 12) {
-                month = month - 12;
-                year = year + 1;
-            }
-        }
-
-        if (typeOfRecurrence.equalsIgnoreCase("years")) {
-            year = year + loops;
-        }
-
-        if (day < 10) {
-            newDay = "0" + Integer.toString(day);
-        } else {
-            newDay = Integer.toString(day);
-        }
-
-        if (month < 10) {
-            newMonth = "0" + Integer.toString(month);
-        } else {
-            newMonth = Integer.toString(month);
-        }
-
-        newDate = newDay + "/" + newMonth + "/" + year;
-
-        return newDate;
     }
 }

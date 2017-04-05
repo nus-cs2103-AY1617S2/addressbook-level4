@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.EndDate;
@@ -33,6 +35,8 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to be earlier"
+            + " than end time.";
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
     private final int filteredTaskListIndex;
@@ -111,6 +115,17 @@ public class UpdateCommand extends Command {
         }
 
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
+
+        try {
+            if (updatedTask.isEventTask()
+                    && !DateTimeUtil.isValidEventTimePeriod(updatedTask.getStartDate().value
+                            , updatedTask.getStartTime().value, updatedTask.getEndDate().value
+                            , updatedTask.getEndTime().value)) {
+                throw new CommandException(MESSAGE_INVALID_EVENT_PERIOD);
+            }
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_INVALID_EVENT_PERIOD);
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, updatedTask);
