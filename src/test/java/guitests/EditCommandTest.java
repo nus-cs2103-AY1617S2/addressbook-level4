@@ -149,7 +149,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void editDuplicateTaskFailure() {
-        commandBox.runCommand("edit 3; name Buy Eggs and Bread; end_date 04-01-17; end_time 19:55:12; "
+
+        commandBox.runCommand("edit 5; name Buy Eggs and Bread; end_date 04-01-17; end_time 19:55:12; "
                 + "tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
