@@ -22,7 +22,7 @@ import seedu.task.model.task.Remark;
  */
 public class SmartAddCommandParser extends CommandParser {
 
-    private String REMARK;
+    private String remark;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -33,10 +33,10 @@ public class SmartAddCommandParser extends CommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_REMARK, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
-        REMARK = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
+        remark = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
                 : Remark.DEFAULT_REMARK;
         try {
-            return new SmartAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), REMARK.replace("\\", ""),
+            return new SmartAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), remark.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SmartAddCommand.MESSAGE_USAGE));

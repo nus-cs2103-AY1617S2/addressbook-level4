@@ -1,13 +1,10 @@
 package seedu.task.commons.core;
 
-import java.util.logging.Logger;
-
 // @@author A0140063X
 public class History {
 
     public static final int MAX_NUM_UNDO = 10;
 
-    private static final Logger logger = LogsCenter.getLogger(History.class);
     private static History instance;
     private int undoCount;
     private int redoCount;
@@ -105,7 +102,7 @@ public class History {
         }
     }
 
-    //this method means command that changes taskmanager have been executed
+    //this method means a command that modifies taskmanager have been executed
     public void handleTaskManagerChanged(String backupFilePath) {
         if (!backupFilePath.trim().equals("")) {
             increaseUndoCount();
@@ -135,9 +132,9 @@ public class History {
         this.backupDirectory = backupDirectory;
     }
 
+    //used for Junit test
     public static History test_resetInstance() {
         instance = new History();
         return instance;
     }
-
 }

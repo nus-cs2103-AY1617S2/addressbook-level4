@@ -56,8 +56,9 @@ public class TaskUtil {
             if (StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
                     || StringUtil.containsWordIgnoreCase(task.getLocation().toString(), keyword)
                     || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                    || StringUtil.containsWordIgnoreCase(task.getTags().toString(), keyword))
+                    || StringUtil.containsWordIgnoreCase(task.getTags().toString(), keyword)) {
                 return true;
+            }
         }
         return false;
     }
