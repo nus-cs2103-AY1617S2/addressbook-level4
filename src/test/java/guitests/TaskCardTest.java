@@ -28,7 +28,7 @@ public class TaskCardTest extends TaskManagerGuiTest {
         assertEquals(addedCard.getEndTime(), taskToShow.getEndDateTime().get().getTimeOnly());
 
         // task with start date and time as well as end date and time
-        taskToShow = td.visitGrandma;
+        taskToShow = td.visitFriend;
         commandBox.runCommand(taskToShow.getAddCommand());
         addedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
         assertEquals(addedCard.getStartDate(), taskToShow.getStartDateTime().get().getDateOnly());

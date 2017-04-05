@@ -12,11 +12,12 @@ public class TypicalTestTasks {
 
     public TestTask eggsAndBread;
     public TestTask readBook;
-    public TestTask visitGrandma;
+    public TestTask visitFriend;
     public TestTask payDavid;
     public TestTask getFit;
     public TestTask findGirlfriend;
     public TestTask visitSarah;
+    public TestTask startDateOnly;
 
     public TypicalTestTasks() {
         try {
@@ -26,7 +27,7 @@ public class TypicalTestTasks {
             readBook = new TaskBuilder().withName("Read Book about Software Engineering")
                     .withEndDateTime("04-21-17 23:59:59")
                     .withTags("LowPriority").build();
-            visitGrandma = new TaskBuilder().withName("Visit Grandma")
+            visitFriend = new TaskBuilder().withName("Visit Friend")
                     .withStartDateTime("04-15-17 16:00:00")
                     .withEndDateTime("04-21-17 19:00:00").build();
             payDavid = new TaskBuilder().withName("Pay David 20 for cab").build();
@@ -36,6 +37,8 @@ public class TypicalTestTasks {
             // Manually added
             getFit = new TaskBuilder().withName("Get fit").build();
             findGirlfriend = new TaskBuilder().withName("Find a girlfriend").build();
+            startDateOnly = new TaskBuilder().withName("Task with only start date")
+                    .withStartDateTime("04-01-17 19:55:12").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -53,7 +56,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{payDavid, visitSarah, eggsAndBread, visitGrandma, readBook};
+        return new TestTask[]{payDavid, visitSarah, eggsAndBread, visitFriend, readBook};
     }
 
     public TaskManager getTypicalTaskManager() {

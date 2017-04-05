@@ -102,7 +102,7 @@ public class TestTask implements ReadOnlyTask {
             sb.append(" to " + sdf.format(this.getEndDateTime().get().getDate()));
         }
         if (this.getTags().iterator().hasNext()) {
-            sb.append(" t/");
+            sb.append(" t/ ");
         }
         this.getTags().asObservableList().stream().forEach(s -> sb.append(s.tagName + " "));
         return sb.toString();
