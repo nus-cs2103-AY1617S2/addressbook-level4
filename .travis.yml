@@ -8,6 +8,7 @@ script: >-
     travis_retry ./gradlew clean checkstyleMain checkstyleTest headless allTests coverage coveralls
 
 before_install:
+           - chmod +x /check-trailing-whitespace.sh
           - "chmod -R a+rX *"
           - "export DISPLAY=:99.0"
           - "sh -e /etc/init.d/xvfb start"
