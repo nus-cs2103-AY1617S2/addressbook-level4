@@ -124,12 +124,17 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         eventListPanel = new TaskListPanel("event",
                 getEventListPlaceholder(), logic.getFilteredEventList());
+
         floatingTaskListPanel = new TaskListPanel("floatingTask",
                 getFloatingTaskListPlaceholder(), logic.getFilteredFloatingTaskList());
+
         deadlineListPanel = new TaskListPanel("deadline",
                 getDeadlineListPlaceholder(), logic.getFilteredDeadlineList());
+
         new ResultDisplay(getResultDisplayPlaceholder());
+
         new StatusBarFooter(getStatusbarPlaceholder(), config.getGeekeepFilePath());
+
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 

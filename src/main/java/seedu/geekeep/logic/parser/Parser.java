@@ -81,14 +81,14 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         //@@author A0139438W
         case ListUndoneCommand.COMMAND_WORD:
-            return new ListUndoneCommand();
+            return new ListUndoneCommandParser().parse(arguments);
 
         case ListDoneCommand.COMMAND_WORD:
-            return new ListDoneCommand();
+            return new ListDoneCommandParser().parse(arguments);
 
         //@@author
         case ExitCommand.COMMAND_WORD:

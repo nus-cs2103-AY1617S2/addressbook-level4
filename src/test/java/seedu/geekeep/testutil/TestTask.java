@@ -118,5 +118,41 @@ public class TestTask implements ReadOnlyTask {
         return false;
     }
 
+    @Override
+    public int getPriority() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public DateTime getReferenceDateTime() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int comparePriority(ReadOnlyTask otherTask) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int compareDate(ReadOnlyTask otherTask) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int compareTitle(ReadOnlyTask otherTask) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 
 }

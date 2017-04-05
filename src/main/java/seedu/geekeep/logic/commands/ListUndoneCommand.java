@@ -7,7 +7,7 @@ package seedu.geekeep.logic.commands;
 public class ListUndoneCommand extends Command {
 
     public static final String COMMAND_WORD = "listundone";
-
+    public static final String MESSAGE_USAGE = "No argument should be given to listundone";
     public static final String MESSAGE_SUCCESS = "Listed all uncompleted tasks";
 
 
