@@ -11,10 +11,24 @@ import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.logic.commands.SaveCommand;
 
+import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
+
 //@@author A0141872E
 public class ListCommandParser {
 
-    private static final List<String> PARAMETERS = Arrays.asList("all", "done", "undone", "overdue", "today", "low", "medium", "high" );
+    //TODO think a better way to do this
+    private static final List<String> PARAMETERS = Arrays.asList(LIST_ALL,LIST_DEADLINE, LIST_FLOATING, LIST_EVENT,
+            LIST_TODAY, LIST_OVERDUE, LIST_PRIORITY_LOW, LIST_PRIORITY_MEDIUM, LIST_PRIORITY_HIGH,LIST_DONE,LIST_UNDONE);
 
     public Command parse(String args) {
         Optional<String> parameters = Optional.of(args);

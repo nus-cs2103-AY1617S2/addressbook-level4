@@ -117,7 +117,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
         this.setPriority(replacement.getPriority());
         this.setTags(replacement.getTags());
     }
-    
+
     @Override
     public int compareTo(Task o) {
         int priorityComparison = this.priority.compareTo(o.priority);
@@ -170,6 +170,8 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
                .append(getStart() + " ")
                .append("End: ")
                .append(getEnd() + " ")
+               .append("Priority: ")
+               .append(getPriority().toString()+" ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
@@ -178,8 +180,8 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
 
     //@@author A0141872E
     @Override
-    public Boolean isDone() {
-        return isDone;
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public void setDone(String status) {
@@ -195,11 +197,26 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     }
 
     @Override
-    public Boolean isOverdue() {
+    public boolean isOverdue() {
         return checkOverdue();
     }
 
     private boolean checkOverdue() {
         return this.end.isEndTimePassCurrentTime()== true && isDone == false;
+    }
+
+    @Override
+    public boolean isFloating() {
+        return this.end.date == null;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return this.start.date != null && this.end.date != null;
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return this.start.date == null && this.end.date != null;
     }//@@author
 }

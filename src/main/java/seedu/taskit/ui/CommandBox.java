@@ -22,6 +22,16 @@ import static seedu.taskit.ui.MenuBarPanel.MENU_TODAY_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_OVERDUE_TASK;
 import static seedu.taskit.ui.MenuBarPanel.MENU_HOME;
 
+import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
@@ -82,7 +92,7 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0141872E
     public void handleMenuBarSelectionChanged(String parameter) {
         try {
-            String command = changeToCommandFormat(parameter);
+            String command = changeToListCommandFormat(parameter);
             CommandResult commandResult = logic.execute(command);
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
@@ -94,29 +104,26 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    private String changeToCommandFormat(String parameter) {
+    private String changeToListCommandFormat(String parameter) {
         switch (parameter) {
 
-        case MENU_HOME:
-            return ListCommand.COMMAND_WORD + " all";
-
         case MENU_FLOATING_TASK:
-            return ListCommand.COMMAND_WORD + " floating";
+            return ListCommand.COMMAND_WORD + " " + LIST_FLOATING;
 
         case MENU_EVENT_TASK:
-            return ListCommand.COMMAND_WORD + " event";
+            return ListCommand.COMMAND_WORD + " " + LIST_EVENT;
 
         case MENU_DEADLINE_TASK:
-            return ListCommand.COMMAND_WORD + " deadline";
+            return ListCommand.COMMAND_WORD + " " + LIST_DEADLINE;
 
         case MENU_TODAY_TASK:
-            return ListCommand.COMMAND_WORD + " today";
+            return ListCommand.COMMAND_WORD + " " + LIST_TODAY;
 
         case MENU_OVERDUE_TASK:
-            return ListCommand.COMMAND_WORD + " overdue";
+            return ListCommand.COMMAND_WORD + " " + LIST_OVERDUE;
 
         default:
-            return ListCommand.COMMAND_WORD + " all";
+            return ListCommand.COMMAND_WORD + " " + LIST_ALL;
         }
     }
 

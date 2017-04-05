@@ -32,7 +32,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [title|deadline|tag|priority] NEW.\n"
             + "Example: " + COMMAND_WORD + " or" + COMMAND_WORD_ALIAS + " 2 title finish SWE HW";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task:  %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskIt.";
 
@@ -65,7 +65,6 @@ public class EditCommand extends Command {
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
@@ -73,11 +72,11 @@ public class EditCommand extends Command {
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
         showEditedTask(taskToEdit);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     private void showEditedTask(ReadOnlyTask editedTask) {

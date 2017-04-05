@@ -19,14 +19,6 @@
     <tags>code</tags>
     <tags>cs2103</tags>
     <tasks>
-        <title>TR3002 meeting business plan</title>
-        <start>this thursday 4pm</start>
-        <end>thursday 11.59pm</end>
-        <priority>high</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
-    </tasks>
-    <tasks>
         <title>CS2103 TaskIt v0.5rc</title>
         <start></start>
         <end>next monday</end>
@@ -37,6 +29,14 @@
         <title>submit TR3002 business plan</title>
         <start></start>
         <end>next monday 11.59pm</end>
+        <priority>high</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+    </tasks>
+    <tasks>
+        <title>TR3002 meeting business plan</title>
+        <start>this thursday 4pm</start>
+        <end>thursday 11.59pm</end>
         <priority>high</priority>
         <tagged>school</tagged>
         <tagged>assignment</tagged>
@@ -72,19 +72,23 @@
         <tagged>work</tagged>
     </tasks>
     <tasks>
-        <title>fix bug</title>
+        <title>fix bugss</title>
+        <start></start>
+        <end></end>
+        <priority>high</priority>
+    </tasks>
+    <tasks>
+        <title>powerful search</title>
+        <start></start>
+        <end></end>
+        <priority>high</priority>
+    </tasks>
+    <tasks>
+        <title>tests</title>
         <start></start>
         <end></end>
         <priority>high</priority>
         <tagged>cs2103</tagged>
-    </tasks>
-    <tasks>
-        <title>CS2103 TaskIt v0.5</title>
-        <start></start>
-        <end>thursday 12pm</end>
-        <priority>medium</priority>
-        <tagged>school</tagged>
-        <tagged>assignment</tagged>
     </tasks>
     <tasks>
         <title>liaise with Prof Ben Leong</title>
@@ -100,6 +104,14 @@
         <end>this sunday</end>
         <priority>medium</priority>
         <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>CS2103 TaskIt v0.5</title>
+        <start></start>
+        <end>thursday 12pm</end>
+        <priority>medium</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
     </tasks>
     <tasks>
         <title>ME3241 assignment due</title>
@@ -147,6 +159,12 @@
         <tagged>family</tagged>
     </tasks>
     <tasks>
+        <title>write more tasks</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
         <title>call prof lee</title>
         <start></start>
         <end>30 March 2017</end>
@@ -162,18 +180,18 @@
         <tagged>assignment</tagged>
     </tasks>
     <tasks>
+        <title>return library book</title>
+        <start></start>
+        <end>today</end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
         <title>go exercise</title>
         <start></start>
         <end>10am</end>
         <priority>low</priority>
         <tagged>health</tagged>
         <tagged>home</tagged>
-    </tasks>
-    <tasks>
-        <title>return library book</title>
-        <start></start>
-        <end>today</end>
-        <priority>low</priority>
     </tasks>
     <tasks>
         <title>do assignment</title>
@@ -183,14 +201,6 @@
         <tagged>school</tagged>
         <tagged>assignment</tagged>
         <tagged>work</tagged>
-    </tasks>
-    <tasks>
-        <title>buy groceries</title>
-        <start></start>
-        <end>thursday</end>
-        <priority>low</priority>
-        <tagged>household</tagged>
-        <tagged>shopping</tagged>
     </tasks>
     <tasks>
         <title>change bedsheets</title>
@@ -205,6 +215,14 @@
         <end>this sunday 11.30pm</end>
         <priority>low</priority>
         <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <title>buy groceries</title>
+        <start></start>
+        <end>thursday</end>
+        <priority>low</priority>
+        <tagged>household</tagged>
+        <tagged>shopping</tagged>
     </tasks>
     <tasks>
         <title>CS2103 TaskIt Presentation</title>
@@ -433,6 +451,18 @@
         <title>fix bug 2.0</title>
         <start></start>
         <end></end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>%%%</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>hahaha</title>
+        <start></start>
+        <end>3pm</end>
         <priority>low</priority>
     </tasks>
 </addressbook>

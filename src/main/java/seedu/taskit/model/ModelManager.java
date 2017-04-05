@@ -1,13 +1,12 @@
 package seedu.taskit.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import edu.emory.mathcs.backport.java.util.Collections;
-
-import java.util.ArrayList;
 import javafx.collections.transformation.FilteredList;
 import seedu.taskit.commons.core.ComponentManager;
 import seedu.taskit.commons.core.LogsCenter;
@@ -22,6 +21,18 @@ import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
 
+import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
+
 /**
  * Represents the in-memory model of the address book data.
  * All changes to any model should be synchronized.
@@ -29,7 +40,7 @@ import seedu.taskit.model.task.UniqueTaskList;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook taskManager;
+    private final AddressBook addressBook;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@A0141011J
@@ -46,8 +57,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.taskManager = new AddressBook(addressBook);
-        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        this.addressBook = new AddressBook(addressBook);
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -56,29 +67,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        taskManager.resetData(newData);
+        addressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return taskManager;
+        return addressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TaskManagerChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(addressBook));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException {
-        taskManager.removeTask(target);
+        addressBook.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskManager.addTask(task);
+        addressBook.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
@@ -88,7 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
         assert editedTask != null;
 
         int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(addressBookIndex, editedTask);
+        addressBook.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
     }
 
@@ -228,22 +239,31 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (parameter){
-                case "done":
+                case LIST_DONE:
                     return task.isDone();
 
-                case "undone":
+                case LIST_UNDONE:
                     return !task.isDone();
 
-                case "overdue":
+                case LIST_OVERDUE:
                     return task.isOverdue() && !task.isDone();
 
-                case "low":
-                case "medium":
-                case "high":
+                case LIST_PRIORITY_LOW:
+                case LIST_PRIORITY_MEDIUM:
+                case LIST_PRIORITY_HIGH:
                     return task.getPriority().toString().equals(parameter);
 
-                case "today":
+                case LIST_TODAY:
                     return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
+                    
+                case LIST_FLOATING:
+                    return task.isFloating();
+                    
+                case LIST_EVENT:
+                    return task.isEvent();
+                    
+                case LIST_DEADLINE:
+                    return task.isDeadline();
 
                 default:
                     return false;
