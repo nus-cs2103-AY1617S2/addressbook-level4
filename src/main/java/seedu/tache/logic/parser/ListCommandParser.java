@@ -7,6 +7,7 @@ import static seedu.tache.logic.parser.CliSyntax.COMPLETED_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.DUE_THIS_WEEK_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.DUE_TODAY_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.FLOATING_FILTER;
+import static seedu.tache.logic.parser.CliSyntax.OVERDUE_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.TIMED_FILTER;
 import static seedu.tache.logic.parser.CliSyntax.UNCOMPLETED_FILTER;
 
@@ -15,10 +16,8 @@ import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.ListCommand;
 
 
-
-
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser {
 
@@ -36,6 +35,7 @@ public class ListCommandParser {
             case FLOATING_FILTER:
             case DUE_TODAY_FILTER:
             case DUE_THIS_WEEK_FILTER:
+            case OVERDUE_FILTER:
             case ALL_FILTER:
                 return new ListCommand(trimmedArgs);
             default:

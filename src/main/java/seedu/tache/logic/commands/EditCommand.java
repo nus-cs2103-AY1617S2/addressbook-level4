@@ -1,10 +1,14 @@
 //@@author A0139925U
 package seedu.tache.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
@@ -23,6 +27,7 @@ import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 public class EditCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String SHORT_COMMAND_WORD = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last tasks listing. "
@@ -38,6 +43,8 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_PART_OF_RECURRING_TASK =
+                        "This task is part of a recurring task and cannot be edited.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -73,6 +80,7 @@ public class EditCommand extends Command implements Undoable {
         cloneOriginalTask(taskToEdit);
         Task editedTask;
         try {
+            checkPartOfRecurringTask(taskToEdit);
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             try {
                 model.updateTask(taskToEdit, editedTask);
@@ -82,6 +90,7 @@ public class EditCommand extends Command implements Undoable {
             model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {
             return new IncorrectCommand(e.getMessage()).execute();
@@ -138,7 +147,7 @@ public class EditCommand extends Command implements Undoable {
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, isTimed, true, false, RecurInterval.NONE);
+                            updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
     }
 
@@ -245,7 +254,13 @@ public class EditCommand extends Command implements Undoable {
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
                taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
-               taskToEdit.getRecurInterval());
+               taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+    }
+
+    private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
+        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+            throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
+        }
     }
 
     //@@author A0150120H
@@ -259,6 +274,7 @@ public class EditCommand extends Command implements Undoable {
         try {
             model.updateTask(taskToEdit, originalTask);
             model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
             return String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit);
         } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

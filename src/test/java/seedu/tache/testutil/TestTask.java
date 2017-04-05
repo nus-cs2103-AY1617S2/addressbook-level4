@@ -1,13 +1,16 @@
 package seedu.tache.testutil;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
+import seedu.tache.model.task.Task;
 import seedu.tache.model.task.Task.RecurInterval;
 
 /**
@@ -23,6 +26,7 @@ public class TestTask implements ReadOnlyTask {
     private boolean isActive;
     private boolean isRecurring;
     private RecurInterval interval;
+    private List<Date> recurCompletedList;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -68,13 +72,11 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartDateTime() {
-        // TODO Auto-generated method stub
         return startDateTime;
     }
 
     @Override
     public Optional<DateTime> getEndDateTime() {
-        // TODO Auto-generated method stub
         return endDateTime;
     }
 
@@ -100,7 +102,7 @@ public class TestTask implements ReadOnlyTask {
             sb.append(" to " + sdf.format(this.getEndDateTime().get().getDate()));
         }
         if (this.getTags().iterator().hasNext()) {
-            sb.append(" t/");
+            sb.append(" t/ ");
         }
         this.getTags().asObservableList().stream().forEach(s -> sb.append(s.tagName + " "));
         return sb.toString();
@@ -129,8 +131,49 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean isWithinDate(Date date) {
-        // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public List<Date> getRecurCompletedList() {
+        return recurCompletedList;
+    }
+
+    @Override
+    public List<Task> getUncompletedRecurList(Date endingDateRange) {
+        return null;
+    }
+
+    @Override
+    public String getRecurDisplayDate() {
+        return "";
+    }
+
+    @Override
+    public boolean isMasterRecurring() {
+        return false;
+    }
+
+    public static Comparator<TestTask> taskDateComparator = new Comparator<TestTask>() {
+
+        public int compare(TestTask task1, TestTask task2) {
+            Date lastComparableDate = new Date(0);
+            int result = 0;
+            //ascending order
+            if (!task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                result = lastComparableDate.compareTo(task2.getEndDateTime().get().getDate());
+                lastComparableDate = task2.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && !task2.getEndDateTime().isPresent()) {
+                result = task1.getEndDateTime().get().getDate().compareTo(lastComparableDate);
+                lastComparableDate = task1.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                return task1.getEndDateTime().get().getDate().compareTo(task2.getEndDateTime().get().getDate());
+            }
+            return (result);
+        }
+
+    };
 
 }

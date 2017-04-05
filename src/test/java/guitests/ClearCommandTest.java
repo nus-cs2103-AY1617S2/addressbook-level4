@@ -8,7 +8,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void clear() {
-
+        System.out.println(taskListPanel.getTask(4));
         //verify a non-empty list can be cleared
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();

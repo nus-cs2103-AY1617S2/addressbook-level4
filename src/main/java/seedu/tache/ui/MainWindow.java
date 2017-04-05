@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author A0142255M
     void fillInnerParts() {
-        calendarPanel = new CalendarPanel(getCalendarPlaceholder(), logic.getFilteredTaskList());
+        calendarPanel = new CalendarPanel(getCalendarPlaceholder(), logic.getFullTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new TaskListType(getTaskListTypePlaceholder(), logic.getFilteredTaskListType());
         new TaskCount(getTaskCountPlaceholder(), logic);
@@ -223,6 +223,11 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    //@@author A0139925U
+    public CalendarPanel getCalendarPanel() {
+        return this.calendarPanel;
     }
 
     //@@author A0142255M

@@ -60,6 +60,11 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    //@@author A0139925U
+    public void resetConnections(ObservableList<ReadOnlyTask> taskList) {
+        setConnections(taskList);
+    }
+    //@@author
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
