@@ -215,7 +215,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     public SimpleDateFormat retriveFormat(String s) {
         SimpleDateFormat format;
-        if (s.length() <= 10) {
+        int stringLength = 10;
+        if (s.length() <= stringLength) {
             format = new SimpleDateFormat("dd/MM/yyyy");
         } else {
             format = new SimpleDateFormat("HH:mm dd/MM/yyyy");

@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,9 +21,6 @@ import seedu.task.commons.util.CollectionUtil;
  */
 public class UniqueTaskList implements Iterable<Task> {
 
-    // private final SortedList<Task> internalList = new
-    // SortedList<Task>(FXCollections.observableArrayList(),
-    // Task.TaskComparator);
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
