@@ -143,16 +143,16 @@ public class ShortcutTest extends TaskManagerGuiTest {
         scroll = new Scroll();
         double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftDown();
-    double newValue = scroll.getScrollValue(taskListPanel.getListView());
-    assertTrue(newValue > currentValue);
+        double newValue = scroll.getScrollValue(taskListPanel.getListView());
+        assertTrue(newValue > currentValue);
     }
 
     private void assertScrollUpSuccess() {
-    scroll = new Scroll();
-    double currentValue = scroll.getScrollValue(taskListPanel.getListView());
+        scroll = new Scroll();
+        double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftUp();
-    double newValue = scroll.getScrollValue(taskListPanel.getListView());
-    assertTrue(newValue < currentValue);
+        double newValue = scroll.getScrollValue(taskListPanel.getListView());
+        assertTrue(newValue < currentValue);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
