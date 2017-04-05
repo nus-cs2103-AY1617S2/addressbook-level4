@@ -45,4 +45,20 @@ public class CollectionUtil {
         }
         return true;
     }
+    
+    //@@author A0163848R
+    /**
+     * Returns first occurrence of the given type in the array.
+     * @param Collection to search.
+     * @param Type to find.
+     * @return First object of given type, or null if not found.
+     */
+    public static <T> T firstOf(Object[] items, Class<T> type) {
+        for (Object el : items) {
+            if (type.isInstance(el)) {
+                return type.cast(el);
+            }
+        }
+        return null;
+    }
 }

@@ -4,10 +4,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 //@@author A0163848R
 /**
- * Represents a Start Date in the YTomorrow.
- */
-public class StartDate extends Date {
-    public StartDate(String date) throws IllegalValueException {
+* Represents an End Date in the YTomorrow.
+*/
+public class EndDate extends Date {
+    public EndDate(String date) throws IllegalValueException {
         super(date);
     }
 }

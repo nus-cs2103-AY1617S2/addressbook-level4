@@ -9,7 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -40,16 +43,15 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     //@@author A0164032U
-    public AddCommand(String name, String date, String email, String group, Set<String> tags)
+    public AddCommand(String name, String end, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new Name(name),
-                new Date(date),
-                new StartDate("00.00"),
+        this.toAdd = new DeadlineTask(new Name(name),
+                new EndDate(end),
                 new Email(email),
                 new Group(group),
                 new UniqueTagList(tagSet));
@@ -65,16 +67,14 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(new Name(name),
-                new Date("00.00"),
-                new StartDate("00.00"),
+        this.toAdd = new FloatingTask(new Name(name),
                 new Email(email),
                 new Group(group),
                 new UniqueTagList(tagSet));
     }
     
     //@@author A0164032U
-    public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
+    public AddCommand(String name, String end, String start, String email, String group, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
@@ -83,8 +83,8 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Date(date),
-                new StartDate(sdate),
+                new StartDate(start),
+                new EndDate(end),
                 new Email(email),
                 new Group(group),
                 new UniqueTagList(tagSet)

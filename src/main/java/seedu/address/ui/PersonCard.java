@@ -34,10 +34,10 @@ public class PersonCard extends UiPart<Region> {
         
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        if (person.getDate().value.equals("00.00")) {
+        if (person.getEndDate().value.equals("00.00")) {
             date.setText("");
         } else {
-            date.setText("End date: " + person.getDate().value);
+            date.setText("End date: " + person.getEndDate().value);
         }
 
         if (person.getStartDate().value.equals("00.00")) {
