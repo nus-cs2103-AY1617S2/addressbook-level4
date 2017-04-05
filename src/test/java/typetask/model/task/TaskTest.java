@@ -33,7 +33,9 @@ public class TaskTest {
     @Test(expected = AssertionError.class)
     public void createTask_withNullForName_fail() throws IllegalValueException {
         DueDate emptyDate = new DueDate("");
+
         Task testTask = new Task(null, emptyDate, emptyDate, false, new Priority("Low"));
+
     }
     @Test(expected = AssertionError.class)
     public void setTaskName_withNull_fail() throws IllegalValueException {
@@ -46,6 +48,7 @@ public class TaskTest {
         sampleTaskForTest.setName(new Name("edited"));
         Task expectedTask = new Task(new Name("edited"), new DueDate(""),
                 new DueDate(""), false, new Priority("Low"));
+
         assertEquals(sampleTaskForTest, expectedTask);
     }
     @Test
