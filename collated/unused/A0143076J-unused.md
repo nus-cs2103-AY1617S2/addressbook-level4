@@ -127,7 +127,7 @@ public class AddCommandParser {
 ```
 ###### \DateTimeParser.java
 ``` java
-//meant to allow user to add events in the format from/friday 1pm to/ 4pm where the endDate is captured ass
+//meant to allow user to add events in the format from/friday 1pm to/ 4pm where the endDate is captured as
 //friday 4pm rather than current one of today 4pm, and thus throwing an exception warning that end date cannot
 //be earlier than startDate. However, decided to do away with this as the format becomes rather messy and
 //also code feels messier due to the way natty was implemented. ie. this addition enhancement not very value-adding.
