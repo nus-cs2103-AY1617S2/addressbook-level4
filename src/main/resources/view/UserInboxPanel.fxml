@@ -22,7 +22,7 @@
     <items>
     <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets bottom="5" left="5" right="8" top="0" />
+        <Insets bottom="0" left="5" right="8" top="0" />
     </padding>
     <children>
         <Label fx:id="taskHeader" text="Tasks: " styleClass="list_header">
@@ -39,7 +39,7 @@
         </VBox>
         <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <padding>
-           <Insets bottom="5" left="8" right="5" top="0" />
+           <Insets bottom="0" left="8" right="5" top="0" />
         </padding>
         <children>
         <Label fx:id="eventHeader" text="Events: " styleClass="list_header">

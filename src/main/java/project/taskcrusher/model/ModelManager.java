@@ -252,6 +252,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        prepareListsForUi();
     }
 
     @Override
@@ -290,6 +291,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
+        prepareListsForUi();
     }
 
     @Override

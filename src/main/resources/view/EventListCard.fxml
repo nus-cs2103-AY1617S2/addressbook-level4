@@ -39,7 +39,7 @@
                             <Label fx:id="priority" styleClass="priority" text="\$priority" />
                             <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
                             <FlowPane fx:id="tags" />
-                            <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
+                            <ImageView fx:id="tickIcon" fitHeight="25.0" fitWidth="25.0">
                             <image>
                                 <Image url = "images/tick_icon.png" ></Image>
                             </image>

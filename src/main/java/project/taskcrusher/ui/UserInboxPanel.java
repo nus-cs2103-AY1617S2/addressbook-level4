@@ -115,6 +115,7 @@ public class UserInboxPanel extends UiPart<Region> {
             eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);
             eventHeader.setText("Events: Nothing to Show!");
+            System.out.println("he");
         } else {
             eventListView.setManaged(SET_LIST_VISIBLE);
             eventListView.setVisible(SET_LIST_VISIBLE);
@@ -125,6 +126,7 @@ public class UserInboxPanel extends UiPart<Region> {
             taskListView.setManaged(SET_LIST_HIDDEN);
             taskListView.setVisible(SET_LIST_HIDDEN);
             taskHeader.setText("Tasks: Nothing to Show!");
+            System.out.println("ho");
         } else {
             taskListView.setManaged(SET_LIST_VISIBLE);
             taskListView.setVisible(SET_LIST_VISIBLE);

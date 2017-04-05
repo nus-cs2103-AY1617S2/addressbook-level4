@@ -314,7 +314,7 @@
 
 .list_header {
     -fx-text-fill: black;
-    -fx-padding: 7 10 7 10;
+    -fx-padding: 3 10 7 10;
     -fx-font-size: 17px;
 }
 
@@ -370,3 +370,4 @@
 #resultDisplayPlaceholder {
     -fx-min-height: 103px;
 }
+
