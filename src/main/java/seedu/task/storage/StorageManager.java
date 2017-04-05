@@ -15,7 +15,7 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of doTASK data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -70,19 +70,19 @@ public class StorageManager extends ComponentManager implements Storage {
         return taskManagerStorage.readTaskManager(filePath);
     }
 
-    public void saveTaskManager(ReadOnlyTaskManager addressBook) throws IOException {
-        saveTaskManager(addressBook, taskManagerStorage.getTaskManagerFilePath());
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskManagerStorage.saveTaskManager(addressBook, filePath);
+        taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(TaskManagerChangedEvent event) {
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveTaskManager(event.data);
