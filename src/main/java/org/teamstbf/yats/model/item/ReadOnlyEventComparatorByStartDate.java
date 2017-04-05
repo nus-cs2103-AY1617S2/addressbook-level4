@@ -1,8 +1,8 @@
-package org.teamstbf.yats.model;
+package org.teamstbf.yats.model.item;
 
 import java.util.Comparator;
 
-import org.teamstbf.yats.model.item.ReadOnlyEvent;
+//@@ author A0102778B
 
 public class ReadOnlyEventComparatorByStartDate implements Comparator<ReadOnlyEvent> {
 
@@ -10,4 +10,5 @@ public class ReadOnlyEventComparatorByStartDate implements Comparator<ReadOnlyEv
 	public int compare(ReadOnlyEvent o1, ReadOnlyEvent o2) {
 		return o1.getStartTime().getDate().compareTo(o2.getStartTime().getDate());
 	}
+	
 }
