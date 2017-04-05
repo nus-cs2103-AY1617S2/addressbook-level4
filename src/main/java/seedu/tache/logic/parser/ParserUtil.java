@@ -17,6 +17,7 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 
 /**
@@ -192,6 +193,11 @@ public class ParserUtil {
         throw new IllegalValueException("Invalid Input");
     }
 
+    /**
+     * Checks if the given String is a start date identifier
+     * @param s String to check
+     * @return true if it's a start date identifier, false otherwise
+     */
     public static boolean isStartDateIdentifier(String s) {
         for (String identifier: START_DATE_IDENTIFIER) {
             if (s.equalsIgnoreCase(identifier)) {
@@ -201,6 +207,11 @@ public class ParserUtil {
         return false;
     }
 
+    /**
+     * Checks if the given String is an end date identifier
+     * @param s String to check
+     * @return true if it's a start date identifier, false otherwise
+     */
     public static boolean isEndDateIdentifier(String s) {
         for (String identifier: END_DATE_IDENTIFIER) {
             if (s.equalsIgnoreCase(identifier)) {
@@ -210,7 +221,12 @@ public class ParserUtil {
         return false;
     }
 
-    public static Deque<PossibleDateTime> findDateTime(String input) {
+    /**
+     * Looks for all possible date/time strings based on identifiers
+     * @param input String to parse
+     * @return Deque of PossibleDateTime objects, each representing a possible date/time string
+     */
+    public static Deque<PossibleDateTime> parseDateTimeIdentifiers(String input) {
         String[] inputs = input.split(" ");
         Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
         PossibleDateTime current = new PossibleDateTime(PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
@@ -230,6 +246,10 @@ public class ParserUtil {
         return result;
     }
 
+    /**
+     * Class to describe a date/time String that was found
+     *
+     */
     static class PossibleDateTime {
         int startIndex;
         int endIndex;
@@ -249,6 +269,18 @@ public class ParserUtil {
             this.data += " " + data;
             this.endIndex = index;
         }
+    }
+
+    public static boolean canParse(String s) {
+        return DateTime.canParse(s);
+    }
+
+    public static boolean isTime(String s) {
+        return DateTime.isTime(s);
+    }
+
+    public static boolean isDate(String s) {
+        return DateTime.isDate(s);
     }
 
 }
