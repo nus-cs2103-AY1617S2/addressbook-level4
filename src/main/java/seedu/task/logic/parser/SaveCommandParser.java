@@ -1,4 +1,6 @@
+//@@author A0163559U
 package seedu.task.logic.parser;
+
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -19,6 +21,9 @@ public class SaveCommandParser {
      * and returns a SaveCommand object for execution.
      */
     public Command parse(String args) {
+        if (args == null || args.trim().equals("")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+        }
         try {
             System.out.println("@@@Parsing save command: " + args);
             return new SaveCommand(args);

@@ -20,7 +20,7 @@ public class SaveCommand extends Command {
             + " /Users/username/Documents/TaskManager/taskmanager.xml";
 
     public static final String MESSAGE_SUCCESS = "Tasks saved in location: %1$s";
-    public static final String MESSAGE_INVALID_SAVE_LOCATION = "This task already exists in the task manager";
+    public static final String MESSAGE_INVALID_SAVE_LOCATION = "This save location is invalid.";
 
     private final File toSave;
     /**
@@ -56,6 +56,7 @@ public class SaveCommand extends Command {
         //        } catch (UniqueTaskList.DuplicateTaskException e) {
         //            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         //        }
+        System.out.println("Executing save command...");
         return null;
     }
 

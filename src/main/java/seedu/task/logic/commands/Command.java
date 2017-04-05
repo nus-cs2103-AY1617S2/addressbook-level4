@@ -1,5 +1,6 @@
 package seedu.task.logic.commands;
 
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
@@ -9,6 +10,7 @@ import seedu.task.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected Config config;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
@@ -35,5 +37,9 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+
+    public void setConfig(Config config) {
+        this.config = config;
     }
 }
