@@ -57,11 +57,11 @@ public class XmlAdaptedPerson {
             tagged.add(new XmlAdaptedTag(tag));
         }
         
-        if (!(source instanceof FloatingTask)) {
+        if (source.getEndDate() != null) {
             end = source.getEndDate().value;
         }
         
-        if (!(source instanceof DeadlineTask)) {
+        if (source.getStartDate() != null) {
             start = source.getStartDate().value;
         }
     }

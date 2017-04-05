@@ -39,7 +39,7 @@ public class SampleDataUtil {
                     new EndDate("tomorrow"),
                     new Email("a@e"),
                     new Group("ayy"),
-                    new UniqueTagList());
+                    UniqueTagList.build("incomplete"));
         } catch (IllegalValueException e) {
             return randomTaskGenerator();
         }
