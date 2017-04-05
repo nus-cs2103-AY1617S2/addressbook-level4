@@ -99,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
+        String todolist = todoList.toString();
         TodoList tempTodoList = new TodoList(todoList);
         todoList.addTodo(todo);
         handleStateChange(tempTodoList);
