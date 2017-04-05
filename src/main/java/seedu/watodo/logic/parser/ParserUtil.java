@@ -25,6 +25,12 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    public static final String WHITESPACE = " ";
+    public static final int INDEX_FIRST_ARG = 0;
+    public static final int INDEX_SECOND_ARG = 1;
+    public static final int NUMFIELD_SPLIT_BY_WHITESPACE = 2;
+    public static final String EXTRACT_ARGS_REGEX = "\\s*" + "%1$s" + "\\s*" + "%2$s" + "\\s*";
+
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -80,7 +86,6 @@ public class ParserUtil {
         return dateTime.isPresent() ? Optional.of(new DateTime(dateTime.get())) : Optional.empty();
     }
 
-
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
@@ -92,4 +97,6 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
+
 }
+
