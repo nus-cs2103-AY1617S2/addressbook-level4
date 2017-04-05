@@ -552,5 +552,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return FXCollections.observableList(concatenated);
     }
+    //@@author A0150120H
+    @Override
+    public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
+        return getFilteredTaskList().indexOf(targetTask);
+    }
     //@@author
 }
