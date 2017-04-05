@@ -129,6 +129,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleSaveFilePathChangedEvent(SaveFilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Save file location changed"));
+        todoListStorage.setTodoListFilePath(event.saveFilePath);
     }
     //@@author
 }

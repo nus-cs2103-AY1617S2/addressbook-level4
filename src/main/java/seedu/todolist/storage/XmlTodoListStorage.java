@@ -27,7 +27,16 @@ public class XmlTodoListStorage implements TodoListStorage {
     public String getTodoListFilePath() {
         return filePath;
     }
-
+    
+    //@@author A0163720M
+    public void setTodoListFilePath(String filePath) {
+        if (filePath != null && !filePath.isEmpty()) {
+            this.filePath = filePath;
+        } else {
+            logger.info("Invalid file path string. Could not update todolist file path in storage manager.");
+        }
+    }
+    
     @Override
     public Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException {
         return readTodoList(filePath);
