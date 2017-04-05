@@ -56,8 +56,15 @@ public class SaveCommand extends Command {
         //        } catch (UniqueTaskList.DuplicateTaskException e) {
         //            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         //        }
-        System.out.println("Executing save command...");
-        return null;
+
+        try {
+            System.out.println("Executing save command...");
+
+            config.setTaskManagerFilePath(toSave.toString());
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toSave.toString()));
+        } catch (Exception e) {
+            throw new CommandException("save failed!");
+        }
     }
 
 }

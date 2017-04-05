@@ -122,7 +122,7 @@ public class MainWindow extends UiPart<Region> {
         calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredPersonList());
         personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic , this);
     }
 

@@ -42,19 +42,19 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getTaskManagerFilePath() {
         return taskManagerFilePath;
     }
 
-    public void setAddressBookFilePath(String taskManagerFilePath) {
+    public void setTaskManagerFilePath(String taskManagerFilePath) {
         this.taskManagerFilePath = taskManagerFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getTaskManagerName() {
         return taskManagerName;
     }
 
-    public void setAddressBookName(String taskManagerName) {
+    public void setTaskManagerName(String taskManagerName) {
         this.taskManagerName = taskManagerName;
     }
 
@@ -85,7 +85,7 @@ public class Config {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("TaskList name : " + appTitle);
+        sb.append("TaskManager name : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + taskManagerFilePath);
