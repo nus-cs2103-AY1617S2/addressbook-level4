@@ -90,7 +90,7 @@ public class EditCommand extends Command implements Undoable {
             model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {
             return new IncorrectCommand(e.getMessage()).execute();
@@ -274,6 +274,7 @@ public class EditCommand extends Command implements Undoable {
         try {
             model.updateTask(taskToEdit, originalTask);
             model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
             return String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit);
         } catch (DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
