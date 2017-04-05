@@ -240,7 +240,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     /** If frequency is in hours - support up to 168 hours (1 week)
-     * If frequency is in weeks - support up to 24 weeks
+     * If frequency is in days - support up to 60 days
      * If frequency is in months - support up to 12 months
      * @param startTime
      * @param endTime
@@ -309,9 +309,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     /**
      * @param taskToModify ReadOnlyTask object
-     * @return Task object after removing the last occurrence to be accessed by the most recent command
+     * @return new Task instance with only one occurrence;
+     * modifies the parameter by removing the respective occurrence for additional functionality
      */
-    public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
+    public static Task extractOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
             taskToModify.getOccurrenceIndexList().add(0);

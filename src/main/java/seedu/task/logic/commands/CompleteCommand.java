@@ -73,7 +73,7 @@ public class CompleteCommand extends Command {
 
         try {
             if (taskToComplete.isRecurring()) {
-                newTask = Task.modifyOccurrence(taskToComplete);
+                newTask = Task.extractOccurrence(taskToComplete);
                 model.addTask(newTask);
                 completedTask = createCompletedTask(newTask, completeTaskDescriptor);
                 int newIndex = model.getFilteredTaskList().indexOf(newTask);

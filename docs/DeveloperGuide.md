@@ -110,10 +110,8 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given in section 2.3) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
@@ -187,7 +185,7 @@ Author: Jay Kabra
 * precise architecture of implementing recurring tasks).
 * A new task is subsequently instantiated (with its own description, priority, etc. parameters) and added
 * to the underlying Task list. Then the edit parameters are applied to this newly instantianted task.
-* 
+<br>
 * The logic behind how to delete a specific instance of a recurring task is as follows:
 * The `Parser` recognizes the `deletethis` command and subsequently removes the entire task from the list.
 * Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the 
@@ -212,14 +210,15 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 * defines reccuring tasks in the following way:
-  * Class 'RecurringTaskOccurrence' encapsulates 2 Timing objects (start & end times) and a boolean to indicate if 
+  * Class `RecurringTaskOccurrence` encapsulates 2 Timing objects (start & end times) and a boolean to indicate if 
   * the occurrence is complete. 
-  * Class 'Task' encapsulates a list of RecurringTaskOccurrence objects. In addition, it also encapsulates a  
-  *'description,' 'priority,' 'frequency,' and a list of 'tags' for the respective task. Each of these fields is 
+  * Class `Task` encapsulates a list of `RecurringTaskOccurrence` objects. In addition, it also encapsulates a  
+  *`description`, `priority`, `frequency`, and `UniqueTagList` object for the respective task. Each of these fields is 
   * constructed as an object in the backend of the application. 
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
   * instances of the same underlying object.
-  * If tasks are recurring then their start/end times are populated based on the given frequency parameter.
+    *If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
+    *subsequently utilized to generate `RecurringTaskOccurrence` objects.
 
 
 ### 2.5. Storage component
@@ -551,8 +550,10 @@ Use case ends.
 13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
 14. Should not overload the CPU so that other running process start to lag.
 15. Should not have seperate administrative functions as there is one user who is the Admin by default.
+16. Support tasks that recur after a specified number of months for 12 months (1 year).
+17. Support tasks that recur after a specified number of days for 60 days (2 months).
+18. Support tasks that recur after a specified number of hours for 168 hours (1 week).
 
-{More to be added}
 
 ## Appendix D : Glossary
 
