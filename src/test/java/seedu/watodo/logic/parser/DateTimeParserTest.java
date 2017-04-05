@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.task.TaskType;
 import seedu.watodo.model.task.DateTime;
+import seedu.watodo.model.task.TaskType;
 
 //@@author A0143076J
 public class DateTimeParserTest {
