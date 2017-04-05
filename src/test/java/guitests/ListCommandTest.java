@@ -12,7 +12,7 @@ import typetask.logic.commands.ListTodayCommand;
 //@@author A0144902L
 public class ListCommandTest extends AddressBookGuiTest {
 
-    //Checks if List shown has the same output as expected. 
+    //Checks if List shown has the same output as expected
     @Test
     public void list_notSupported_failure() {
         commandBox.runCommand("list");
