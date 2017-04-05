@@ -98,28 +98,20 @@ public class DateParser {
             firstWord = date.substring(0, date.indexOf(" "));
         }
 
-        if (date.substring(0, 1).matches("[0-9]")) {
-            int l = firstWord.length();
-            switch(l) {
-            case 5: {
-                //No year given, default to current year
-                parsedDate[DAY_INDEX] = Integer.parseInt(date.substring(0, 2));
-                parsedDate[MONTH_INDEX] = Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
-                parsedDate[YEAR_INDEX] = calDate.get(Calendar.YEAR);
-                break;
-            }
-            case 10: {
-                parsedDate[DAY_INDEX] = Integer.parseInt(date.substring(0, 2));
-                parsedDate[MONTH_INDEX] = Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
-                parsedDate[YEAR_INDEX] = Integer.parseInt(date.substring(6, 10));
-                break;
-            }
-            default:
-                throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
+        if (date.substring(0, 1).matches("[0-9]")) { //Date given in number format
+            parsedDate[DAY_INDEX] = Integer.parseInt(date.substring(0, 2));
+            parsedDate[MONTH_INDEX] = Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
 
+            int l = firstWord.length();
+            if (l == 5) { //No year given
+                parsedDate[YEAR_INDEX] = calDate.get(Calendar.YEAR);
+            } else if (l == 10) {
+                parsedDate[YEAR_INDEX] = Integer.parseInt(date.substring(6, 10));
+            } else {
+                throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
             }
         } else {
-            switch (firstWord.toLowerCase()) {
+            switch (firstWord.toLowerCase()) { //Date given in recognized keyword
             case "today" : {
                 break;
             }
