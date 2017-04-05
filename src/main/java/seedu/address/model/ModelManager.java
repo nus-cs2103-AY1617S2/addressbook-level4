@@ -140,9 +140,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public void setList(ObservableList<ReadOnlyTask> listOfTasks) {
-        filteredTasks = new FilteredList<>(listOfTasks);
         taskManager.setTasks(listOfTasks);
-        int a = 0;
     }
 
     public int getFilteredTasksSize () {
