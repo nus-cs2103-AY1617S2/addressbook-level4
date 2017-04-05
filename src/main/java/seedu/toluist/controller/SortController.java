@@ -64,7 +64,7 @@ public class SortController extends Controller {
     private void displayResult(ArrayList<String> invalidKeywords) throws InvalidCommandException {
         String[] resultantOrder = Task.getCurrentSort();
         String resultMessage = StringUtil.EMPTY_STRING;
-        if (invalidKeywords.size() != 0) {
+        if (!invalidKeywords.isEmpty()) {
             throw new InvalidCommandException(
                     String.format(ERROR_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords)));
         }
