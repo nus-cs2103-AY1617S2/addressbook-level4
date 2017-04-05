@@ -25,16 +25,16 @@ public class Priority {
     public Priority(String priority) throws IllegalValueException {
         assert priority != null;
 
-        String trimmedPriorityLevel = priority.trim();
+        String trimmedPriority = priority.trim();
 
         if ("".equals(priority)) {
             this.value = LOW_PRIORITY;
         } else {
-            if (!isValidPriority(trimmedPriorityLevel)) {
+            if (!isValidPriority(trimmedPriority)) {
                 throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
             }
-            if (trimmedPriorityLevel.contains("H") || trimmedPriorityLevel.contains("h") ||
-                    trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
+            if (trimmedPriority.contains("H") || trimmedPriority.contains("h") ||
+                    trimmedPriority.contains("y") || trimmedPriority.contains("Y")) {
                 this.value = HIGH_PRIORITY;
             } else {
                 this.value = LOW_PRIORITY;
