@@ -30,9 +30,18 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
-        //add to empty list
+        //add task with end date only
         commandBox.runCommand("clear");
-        assertAddSuccess(td.eggsAndBread);
+        currentList = new TestTask[0];
+        assertAddSuccess(td.eggsAndBread, currentList);
+        currentList = TestUtil.addTasksToList(currentList, td.eggsAndBread);
+
+        //add task with both start and end date
+        assertAddSuccess(td.visitFriend, currentList);
+
+        //Invalid format: Start date only
+        commandBox.runCommand(td.startDateOnly.getAddCommand());
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         //invalid command
         commandBox.runCommand("adds Read Newspaper");
