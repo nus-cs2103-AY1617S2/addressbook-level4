@@ -15,6 +15,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -69,7 +70,26 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
         this.taskList.removeTask(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public synchronized void deleteThisTask(ReadOnlyTask targetToDelete,
+            Task targetToAdd) throws TaskNotFoundException, DuplicateTaskException {
+        this.taskList.removeTask(targetToDelete);
+        this.taskList.addTask(targetToAdd);
+        TaskList update = new TaskList(this.taskList);
+        undoStack.push(update);
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
+        this.taskList.removeTask(targetToAdd);
+        this.taskList.addTask((Task) targetToDelete);
+        updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
@@ -77,6 +97,9 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
         this.taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -90,8 +113,26 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
         this.taskList.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateThisTask(int filteredPersonListIndex, ReadOnlyTask editedTask,
+            Task newTaskToAdd) throws UniqueTaskList.DuplicateTaskException {
+        assert editedTask != null;
+
+        int addressBookIndex = filteredTasks.getSourceIndex(filteredPersonListIndex);
+        TaskList update = new TaskList(this.taskList);
+        undoStack.push(update);
+        while (!redoStack.empty()) {
+            redoStack.pop();
+        }
+        this.taskList.updateTask(addressBookIndex, editedTask);
+        this.taskList.addTask(newTaskToAdd);
     }
 
     @Override
