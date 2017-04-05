@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.commandmap.CommandMap;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -26,6 +27,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private XmlAdaptedCommandMap commandMap;
 
     /**
      * Creates an empty XmlSerializableTaskManager.
@@ -34,6 +37,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     public XmlSerializableTaskManager() {
         tasks = new ArrayList<>();
         tags = new ArrayList<>();
+        commandMap = new XmlAdaptedCommandMap();
     }
 
     /**
@@ -43,6 +47,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         this();
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        commandMap = new XmlAdaptedCommandMap(src.getCommandMap());
     }
 
     @Override
@@ -71,6 +76,11 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
+    }
+
+    @Override
+    public CommandMap getCommandMap() {
+        return commandMap.toModelType();
     }
 
 }

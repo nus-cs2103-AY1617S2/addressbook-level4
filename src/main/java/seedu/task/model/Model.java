@@ -11,6 +11,8 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.Model.StateLimitReachedException;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
+import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -41,6 +43,9 @@ public interface Model {
 
     /** Returns the index of given task in its displayed task list. */
     int getDisplayedIndex(ReadOnlyTask task);
+
+    /** Translate the given command word. */
+    String translateCommand(String original);
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -115,10 +120,14 @@ public interface Model {
     void setTaskManagerStateToFrontier() throws StateLimitReachedException;
 
     void setCurrentComparator(String type);
+
     /**
      * Signals that the state change command would fail because
      * the border of the state space is reached.
      */
     public static class StateLimitReachedException extends Exception {}
+
+    void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException;
 
 }

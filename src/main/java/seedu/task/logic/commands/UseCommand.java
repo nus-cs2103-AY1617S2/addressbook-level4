@@ -11,7 +11,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
  */
 public class UseCommand extends Command {
 
-    public static final String COMMAND_WORD = "use";
+    public static final String COMMAND_WORD = "cd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " path/to/file.xml"
             + " or " + COMMAND_WORD + " path/to/file.json";

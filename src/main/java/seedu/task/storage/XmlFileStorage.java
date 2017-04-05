@@ -9,11 +9,11 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.XmlUtil;
 
 /**
- * Stores taskmanager data in an XML file
+ * Stores task manager data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given taskmanager data to the specified file.
+     * Saves the given task manager data to the specified file.
      */
     public static void saveDataToFile(File file, XmlSerializableTaskManager taskManager)
             throws FileNotFoundException {

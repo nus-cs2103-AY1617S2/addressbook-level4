@@ -21,7 +21,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_emptyList() {
-        commandBox.runCommand("clear");
+        commandBox.runCommand("reset");
         assertFindResult("find Jean"); // no results
     }
 

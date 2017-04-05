@@ -11,6 +11,9 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.model.commandmap.CommandMap;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
+import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
@@ -26,6 +29,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
+    private CommandMap commandMap;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -37,6 +41,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     {
         tasks = new UniqueTaskList();
         tags = new UniqueTagList();
+        commandMap = new CommandMap();
     }
 
     public TaskManager() {}
@@ -64,6 +69,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.tags.setTags(tags);
     }
 
+    public void setCommandMap(CommandMap map) {
+        this.commandMap.putAll(map.getCommandMap());
+    }
+
     public void resetData(ReadOnlyTaskManager newData) {
         assert newData != null;
         try {
@@ -77,6 +86,7 @@ public class TaskManager implements ReadOnlyTaskManager {
             assert false : "TaskManagers should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
+        setCommandMap(newData.getCommandMap());
     }
 
 //// task-level operations
@@ -158,6 +168,24 @@ public class TaskManager implements ReadOnlyTaskManager {
         tags.add(t);
     }
 
+////command map level operations
+
+    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException {
+        String commandToMap = translateCommand(original);
+        if (!commandMap.isOriginalCommandValid(commandToMap)) {
+            throw new CommandMap.OriginalCommandNotFoundException();
+        }
+        if (commandMap.isBaseCommandWord(alias)) {
+            throw new CommandMap.BaseCommandNotAllowedAsAliasException();
+        }
+        commandMap.put(alias, commandToMap);
+    }
+
+    public String translateCommand(String original) {
+        return commandMap.translateCommand(original);
+    }
+
 //// util methods
 
     @Override
@@ -174,6 +202,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<Tag> getTagList() {
         return new UnmodifiableObservableList<>(tags.asObservableList());
+    }
+
+    @Override
+    public CommandMap getCommandMap() {
+        return commandMap;
     }
 
     @Override

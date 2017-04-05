@@ -23,6 +23,9 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
+import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
+import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -98,6 +101,19 @@ public class ModelManager extends ComponentManager implements Model {
         this.nonFloatingTasks = new FilteredList<>(this.currentTaskManager.getTaskList());
         this.floatingTasks = new FilteredList<>(this.currentTaskManager.getTaskList());
         this.completedTasks = new FilteredList<>(this.currentTaskManager.getTaskList());
+    }
+
+    @Override
+    public String translateCommand(String original) {
+        return this.currentTaskManager.translateCommand(original);
+    }
+
+    @Override
+    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException {
+        this.currentTaskManager.addCommandAlias(alias, original);
+        recordCurrentStateOfTaskManager();
+        indicateTaskManagerChanged();
     }
 
     public void setCurrentComparator(String type) {
@@ -521,7 +537,20 @@ public class ModelManager extends ComponentManager implements Model {
     private class FuzzyFinder {
 
         public boolean check(ReadOnlyTask task, Set<String> nameKeyWords) {
-            return nameKeyWords.stream()
+            boolean isTagMatching = false;
+            UniqueTagList tagList = task.getTags();
+            boolean tempIsTagMatching;
+            for (Tag tag : tagList.internalList) {
+                tempIsTagMatching = nameKeyWords.stream()
+                        .filter(keyword -> fuzzyFind(tag.tagName.toLowerCase(), keyword.toLowerCase()))
+                        .findAny()
+                        .isPresent();
+                isTagMatching |= tempIsTagMatching;
+                if (tempIsTagMatching) {
+                    break;
+                }
+            }
+            return isTagMatching || nameKeyWords.stream()
                     .filter(keyword -> fuzzyFind(task.getTitle().title.toLowerCase(), keyword.toLowerCase()))
                     .findAny()
                     .isPresent();

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.AliasCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.logic.commands.DeleteCommand;
@@ -26,6 +27,7 @@ import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.UnrevertCommand;
 import seedu.task.logic.commands.UseCommand;
+import seedu.task.model.Model;
 
 /**
  * Parses user input.
@@ -36,6 +38,12 @@ public class Parser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private Model model;
+
+    public Parser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -49,26 +57,23 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = model.translateCommand(matcher.group("commandWord"));
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case AliasCommand.COMMAND_WORD:
+            return new AliasCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_WORD_ALTERNATIVE:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD_ALTERNATIVE:
             return new EditCommandParser().parse(arguments);
 
         case CompleteCommand.COMMAND_WORD:
-        case CompleteCommand.COMMAND_WORD_FIRST_ALTERNATIVE:
-        case CompleteCommand.COMMAND_WORD_SECOND_ALTERNATIVE:
             return new CompleteCommandParser().parse(arguments);
 
         case IncompleteCommand.COMMAND_WORD:
-        case IncompleteCommand.COMMAND_WORD_FIRST_ALTERNATIVE:
-        case IncompleteCommand.COMMAND_WORD_SECOND_ALTERNATIVE:
             return new IncompleteCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:

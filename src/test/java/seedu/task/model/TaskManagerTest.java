@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.task.model.commandmap.CommandMap;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -76,10 +77,12 @@ public class TaskManagerTest {
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final CommandMap commandMap;
 
         TaskManagerStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
             this.tasks.setAll(tasks);
             this.tags.setAll(tags);
+            this.commandMap = new CommandMap();
         }
 
         @Override
@@ -90,6 +93,11 @@ public class TaskManagerTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public CommandMap getCommandMap() {
+            return this.commandMap;
         }
     }
 
