@@ -70,6 +70,7 @@ public class Event implements ReadOnlyEvent {
 	    fillRecurrence((List<Date>) parameters.get("time"), (String) parameters.get("recurrence"));
 	} else {
 	    this.isRecurring = false;
+	    this.recurrence = new Recurrence();
 	    fillStartEndDateAndDeadline(parameters);
 	}
     }

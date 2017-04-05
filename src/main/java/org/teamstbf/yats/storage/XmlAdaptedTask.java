@@ -111,7 +111,11 @@ public class XmlAdaptedTask {
 	final IsDone isDone = new IsDone(this.completed);
 	final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ?
 	        true : false;
-	final Recurrence recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
+	Recurrence recurrence = new Recurrence();
+	if (this.isRecurring.equals(RECURRING_YES)) {
+	    recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
+	}
+	
 	return new Event(title, location, startTime, endTime, deadline, description, tags,
 	        isDone, isRecurring, recurrence);
     }

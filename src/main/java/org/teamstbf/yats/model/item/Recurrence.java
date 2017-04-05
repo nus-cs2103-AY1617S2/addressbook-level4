@@ -33,7 +33,9 @@ public class Recurrence {
      * Creates an empty Recurrence object
      */
     public Recurrence() {
-        
+        this.startDate = new Date(Long.MIN_VALUE);
+        this.periodicity = RECURRENCE_NONE;
+        this.doneList = new ArrayList<String>();
     }
 
     public Recurrence(Date date, String recurrence) throws IllegalValueException {
