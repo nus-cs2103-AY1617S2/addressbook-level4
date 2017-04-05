@@ -216,12 +216,12 @@ The Model is capable of the following:
 
 * Does not depend on any of the other three components.
 
-<img src="images/TaskClassDiagram.png" width="800"><br>
-*Figure 2.4.2 : Class Diagram for Task*
+<img src="images/Task.png" width="800"><br>
+*Figure 2.4.2 : Structure of the Task Component*
 
 You can find the API for this component in [`Task.java`](../src/main/java/seedu/onetwodo/model/task/Task.java)
 
-It is compulsory for a task to have the following parameters: _name_, _isDone_ and _taskType_. Other parameters such as _startDate_, _endDate_, _priority_, _description_ and _tag_ are optional. `StartDate` and `EndDate` classes inherit from `Date` class and override the `createDisplayValue()` method of `Date`. Do note that every field must be present and cannot be null.
+It is compulsory for a task to have the following parameters: _name_, _isDone_ and _taskType_. Other parameters such as _startDate_, _endDate_, _priority_, _recur_, _description_ and _tag_ are optional. `StartDate` and `EndDate` classes inherit from `Date` class. Do note that every field must be present and cannot be null.
 
 A task can be defined in the following ways:
 
