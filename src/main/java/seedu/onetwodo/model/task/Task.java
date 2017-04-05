@@ -234,29 +234,29 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         assert this.getTaskType() != TaskType.TODO;
         StartDate tempStartDate;
         EndDate tempEndDate = getEndDate();
-        switch(this.getRecur().value) {
-        case Recurring.RECUR_DAILY:
+        switch(this.recur.getRecur()) {
+        case DAILY:
             this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
                 this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusDays(1)));
             }
             break;
-        case Recurring.RECUR_WEEKLY:
+        case WEEKLY:
             this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusWeeks(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
                 this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusWeeks(1)));
             }
             break;
-        case Recurring.RECUR_MONTHLY:
+        case MONTHLY:
             this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusMonths(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();
                 this.setStartDate(new StartDate(tempStartDate.localDateTime.get().plusMonths(1)));
             }
             break;
-        case Recurring.RECUR_YEARLY:
+        case YEARLY:
             this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusYears(1)));
             if (this.hasStartDate()) {
                 tempStartDate = getStartDate();

@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import seedu.onetwodo.logic.commands.Command;
 import seedu.onetwodo.logic.commands.FindCommand;
 import seedu.onetwodo.logic.commands.IncorrectCommand;
-
+//@@author A0139343E
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -28,8 +28,8 @@ public class FindCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
+        // keywords delimited by whitespace or commas
+        final String[] keywords = matcher.group("keywords").split("\\s*(,|\\s)\\s*");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }

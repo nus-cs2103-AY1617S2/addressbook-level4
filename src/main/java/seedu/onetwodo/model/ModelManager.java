@@ -448,7 +448,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", keyWords);
+            return "name =" + String.join(", ", keyWords);
         }
     }
     //@@author

@@ -28,7 +28,7 @@ public class StringUtil {
         assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
 
         String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s*(,|\\s)\\s*");
 
         for (String wordInSentence: wordsInPreppedSentence) {
             if (wordInSentence.equalsIgnoreCase(preppedWord)) return true;

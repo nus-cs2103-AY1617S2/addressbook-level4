@@ -1,3 +1,4 @@
+//@@author A0139343E
 package seedu.onetwodo.model.task;
 
 import java.time.LocalDateTime;
@@ -6,7 +7,6 @@ import java.util.Optional;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
-//@@author A0139343E
 /**
  * Represents a Task's date in the toDo list. Guarantees: immutable.
  */
