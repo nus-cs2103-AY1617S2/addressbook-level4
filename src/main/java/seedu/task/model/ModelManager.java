@@ -204,9 +204,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author
 
-    //========== Inner classes/interfaces used for filtering =================================================
-
     //@@author A0135762A
+    //========== Inner classes/methods used for Near Match Search =================================================
+
     private class LevenshteinDistance {
         private int minimum(int a, int b, int c) {
             return Math.min(Math.min(a, b), c);
@@ -233,27 +233,72 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean validLevenshteinDistance(String lhs, String rhs) {
-            if (StringUtil.containsWordIgnoreCase(lhs, rhs)) {
-                return true;
+            if (rhs.length() < 4) {
+                return false;
             }
 
-            String newLHS = lhs.toLowerCase();
-            String newRHS = rhs.toLowerCase();
-
-            for (String word : newLHS.split(" ")) {
-                int value = computeLevenshteinDistance(word, newRHS);
+            for (String word : lhs.split(" ")) {
+                int value = computeLevenshteinDistance(word, rhs);
 
                 if (value < 2) {
                     return true;
-                } else {
-                    continue;
                 }
             }
 
             return false;
         }
     }
+
+    private class TranspositionError {
+        private String swap(String str, int index1, int index2) {
+            char[] c = str.toCharArray();
+            char temp = c[index1];
+            c[index1] = c[index2];
+            c[index2] = temp;
+
+            String swapString = new String(c);
+            return swapString;
+        }
+
+        public boolean validTranspositionError(String lhs, String rhs) {
+            if (rhs.length() < 4) {
+                return false;
+            }
+
+            for (String word : lhs.split(" ")) {
+                for (int i = 0; i < rhs.length() - 1; i++) {
+                    if (word.equals(swap(rhs, i, i + 1))) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
+
+    private boolean finalNearMatchSearch(String lhs, String rhs) {
+        String newLHS = lhs.toLowerCase();
+        String newRHS = rhs.toLowerCase();
+
+        LevenshteinDistance result1 = new LevenshteinDistance();
+        TranspositionError result2 = new TranspositionError();
+
+        if (StringUtil.containsWordIgnoreCase(newLHS, newRHS)) {
+            return true;
+        } else if (newLHS.contains(newRHS)) {
+            return true;
+        } else if (result1.validLevenshteinDistance(newLHS, newRHS)) {
+            return true;
+        } else if (result2.validTranspositionError(newLHS, newRHS)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     //@@author
+
+    //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
@@ -291,15 +336,12 @@ public class ModelManager extends ComponentManager implements Model {
             this.totalKeyWords = totalKeyWords;
         }
 
-        LevenshteinDistance result = new LevenshteinDistance();
-
         //@@author-A0139322L
         @Override
         public boolean run(ReadOnlyTask task) {
             return totalKeyWords.stream()
-                    .filter(keyword -> result.validLevenshteinDistance(task.getTaskName().taskName, keyword)
-                            || result.validLevenshteinDistance(task.getInfo().value, keyword)
-                            || result.validLevenshteinDistance(task.getDate().value, keyword))
+                    .filter(keyword -> finalNearMatchSearch(task.getTaskName().taskName, keyword)
+                            || finalNearMatchSearch(task.getInfo().value, keyword))
                     .findAny()
                     .isPresent();
         }

@@ -3,8 +3,8 @@ package seedu.task.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all tasks in the task list whose name or information contains any of the argument keywords.
- * Keyword matching is NOT case sensitive.
+ * Finds & lists all tasks in the incomplete task list with name or information contains any of the argument keywords.
+ * Keywords matching is NOT case sensitive.
  * Near match cases are allowed.
  */
 
