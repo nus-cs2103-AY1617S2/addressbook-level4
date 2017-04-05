@@ -35,7 +35,7 @@ public class ControllerLibrary {
                 new ViewAliasController(),
                 new UntagController(),
                 new FindController(),
-                new TagController(),
+                new AddTagController(),
                 new MarkController(),
                 new SwitchController()
         ));
