@@ -12,6 +12,7 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
+import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
@@ -33,7 +34,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
-    //    private RecurringTask toAddRecur = null;
     //@@author A0164212U
     /**
      * Creates an AddCommand using raw values.
@@ -58,10 +58,13 @@ public class AddCommand extends Command {
                 recurring,
                 new RecurringFrequency(recurFreq)
                 );
-
         if (!Timing.checkTimingOrder(toAdd.getStartTiming(), toAdd.getEndTiming())) {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
+    }
+
+    public AddCommand(ReadOnlyTask task) {
+        this.toAdd = (Task) task;
     }
     //@@author
 

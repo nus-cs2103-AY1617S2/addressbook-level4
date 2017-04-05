@@ -40,16 +40,17 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
-    private void updateCalender(MainWindow mainwindow , ObservableList<ReadOnlyTask> taskList) {
-        mainwindow.updateCalender(taskList);
+    private void updateCalender(MainWindow mainwindow , ObservableList<ReadOnlyTask> taskList,
+            int dDate , int dMonth , int  dYear) {
+        mainwindow.updateCalender(taskList , dDate , dMonth , dYear);
     }
+
     @FXML
     private void handleCommandInputChanged() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             //@@author A0163935X
-            System.out.println(logic.getFilteredPersonList());
-            updateCalender(this.mainwindow , logic.getFilteredPersonList());
+            updateCalender(this.mainwindow , logic.getFilteredPersonList() , 0 , 0 , 0);
             //@@author
             // process result of the command
             setStyleToIndicateCommandSuccess();

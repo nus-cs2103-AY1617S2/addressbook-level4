@@ -24,7 +24,6 @@ public class TestTask implements ReadOnlyTask {
     private RecurringFrequency frequency;
     private ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
 
-
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -54,6 +53,7 @@ public class TestTask implements ReadOnlyTask {
         this.occurrences = occurrences;
     }
 
+    @Override
     public void setRecurring(boolean isRecurring) {
         this.recurring = isRecurring;
     }
@@ -62,6 +62,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    @Override
     public void setFrequency(RecurringFrequency recurringFrequency) {
         this.frequency = recurringFrequency;
     }
@@ -160,6 +161,9 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
-
+    @Override
+    public void removeOccurrence(int i) {
+        this.occurrences.remove(i);
+    }
 
 }

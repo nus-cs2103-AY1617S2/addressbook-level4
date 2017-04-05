@@ -32,6 +32,7 @@ public class PersonCard extends UiPart<Region> {
 
     public PersonCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
+
         description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
         priority.setText("Priority: " + task.getPriority().value);
@@ -43,6 +44,9 @@ public class PersonCard extends UiPart<Region> {
             startTiming.setText("Start Timing: " + task.getOccurrences().get(0).getStartTiming().value);
         } else {
             int index = task.getOccurrenceIndexList().get(0);
+            if (task.getOccurrences().size() <= index) {
+                index--;
+            }
             startTiming.setText("Start Timing: " + task.getOccurrences().get(index).getStartTiming().value);
         }
 
@@ -52,6 +56,9 @@ public class PersonCard extends UiPart<Region> {
             endTiming.setText("End Timing: " + task.getOccurrences().get(0).getEndTiming().value);
         } else {
             int index = task.getOccurrenceIndexList().get(0);
+            if (task.getOccurrences().size() <= index) {
+                index--;
+            }
             endTiming.setText("End Timing: " + task.getOccurrences().get(index).getEndTiming().value);
         }
 

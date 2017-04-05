@@ -29,7 +29,7 @@ public class RecurringFrequency {
     public RecurringFrequency(String frequency) throws IllegalValueException {
         if (frequency != null) {
             String trimmedFrequency = frequency.trim();
-            if (!isValidDescription(trimmedFrequency)) {
+            if (!isValidFrequency(trimmedFrequency)) {
                 throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
             }
             this.frequency = trimmedFrequency;
@@ -41,7 +41,7 @@ public class RecurringFrequency {
     /**
      * Returns true if a given string is a valid frequency.
      */
-    public static boolean isValidDescription(String test) {
+    public static boolean isValidFrequency(String test) {
         return test.matches(FREQUENCY_VALIDATION_REGEX) || test.equals(NULL_FREQUENCY);
     }
 

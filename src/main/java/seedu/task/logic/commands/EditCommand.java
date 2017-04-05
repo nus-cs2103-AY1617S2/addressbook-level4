@@ -23,6 +23,7 @@ import seedu.task.model.task.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_REC = "editthis";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
@@ -37,21 +38,23 @@ public class EditCommand extends Command {
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
+    private boolean isSpecific;
 
     /**
      * @param filteredTaskListIndex the index of the task in the filtered person list to edit
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
+    public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, boolean isSpecific) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
         // converts filteredPersonListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
-
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.isSpecific = isSpecific;
     }
 
+    //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -61,21 +64,31 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task newTask = null;
         Task editedTask;
-        try {
-            editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-        } catch (IllegalTimingOrderException e) {
-            throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
-        }
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            if (isSpecific) {
+                newTask = Task.modifyOccurrence(taskToEdit);
+                model.addTask(newTask);
+                editedTask = createEditedTask(newTask, editTaskDescriptor);
+                int newIndex = model.getFilteredTaskList().indexOf(newTask);
+                model.updateTask(newIndex, editedTask);
+
+            } else {
+                editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+                model.updateTask(filteredTaskListIndex, editedTask);
+            }
+        } catch (IllegalTimingOrderException e) {
+            throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
+
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
+    //@@author
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}

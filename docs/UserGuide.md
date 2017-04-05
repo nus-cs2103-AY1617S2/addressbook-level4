@@ -57,10 +57,18 @@ Note: HH:MM is optional
 
 > Tasks can have any number of tags (including 0).
 
+### 2.2.1. Adding a recurring task
+
+Adds a recurring task to the task list<br>
+Format: same as 'add' but specifcy the frequency by r/#_
+where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month) 
+
 Examples:
 
 * `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
 * `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
+* `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
+* `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
 
 ### 2.3. Listing tasks : `list`
 
@@ -77,6 +85,7 @@ Examples:
 
 Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
+Editing a recurring task in this way will edit all instances 
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -94,6 +103,21 @@ Examples:
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
 
+  ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
+  Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
+
+  > * Edits a specific instance of a recurring task
+  > * After editing this instane, the edited task will no longer be a part of the recurring sequence 
+
+  Examples:
+
+  * `edithis 2 sd/01/01/2017`<br>
+  Edits the start date of task 2 (which is reccuring) 
+
+  * `edithis 2 Go to 2103 Lecture`<br>
+  Edits the description of task 2 (which is reccuring) 
+
+
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
 Finds tasks whose names contain any of the given keywords or tag names.<br>
@@ -103,12 +127,26 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `assignemnt` will match `do algorightm assignment`
+    e.g. `assignemnt` will match `do algorightm assignment` 
 
 Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
+
+
+### 2.5.1. Finding an instance of a reccuring task
+  > * Execute 'find' with the same syntax as above
+  > * However, only one instance will show up in the list after executing 'list'
+  > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
+
+  Example:
+  * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
+    The task is displayed in the list with the above parameters 
+  * `find 11/05/2017`<br>
+    Returns `feed cat sd/11/05/2017 ed/11/05/2017`
+  * `list`<br>
+    Returns all of the tasks with 'feed cat's' instance with start: 11/05/2017 and end: 11/05/2017     
 
 ### 2.6. Deleting a task : `delete`
 
@@ -127,6 +165,18 @@ Examples:
 * `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
+
+  ### 2.6.1. Deleting a specific instance of a reccuring task : `deletethis`
+
+  Deletes the specific occurrence of the reccuring task from the list
+  Format: `deletethis INDEX`
+
+  > Deletes the specific occurrence of a reccuring task at the specified INDEX
+  > The index refers to the index  number shown in the most recent listing.<br>
+  > The index **must be a positive integer** 1, 2, 3, ...
+  > Upon deleting an instance, the task list will be updated with the next recent occurrence.
+    If there is no more occurrences, then the entire reccuring task will be removed from the list.
+
 
 ### 2.7. Complete a task : `complete`
 
@@ -190,8 +240,14 @@ There is no need to save manually.
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
+* **Deletethis** : `deletethis INDEX` <br>
+   e.g. `deletethis 3`
+
 * **Edit** : `edit INDEX` <br>
    e.g. `edit 1 ed/03/03/2017`
+
+* **Editthis** : `editthis INDEX` <br>
+   e.g. `editthis 1 ed/03/03/2017`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `find assignment` <br>

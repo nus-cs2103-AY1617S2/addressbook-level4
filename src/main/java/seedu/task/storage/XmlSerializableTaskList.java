@@ -72,10 +72,4 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         return new UnmodifiableObservableList<>(tags);
     }
 
-    @Override
-    public ObservableList<ReadOnlyTask> getRecurringTaskList() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

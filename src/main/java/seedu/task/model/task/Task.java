@@ -100,6 +100,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Timing getStartTiming(int i) { //add parameter to index into correct endTime
+        if (this.occurrences.size() == 0) {
+            try {
+                return new Timing(Timing.TIMING_NOT_SPECIFIED);
+            } catch (IllegalValueException e) {
+                assert false : "Illegal timing value";
+            }
+        }
         return this.occurrences.get(i).getStartTiming();
     }
 
@@ -116,6 +123,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     @Override
     public Timing getEndTiming() {
+        if (this.occurrences.size() == 0) {
+            try {
+                return new Timing(Timing.TIMING_NOT_SPECIFIED);
+            } catch (IllegalValueException e) {
+                assert false : "Illegal timing value";
+            }
+        }
         return this.occurrences.get(0).getEndTiming();
     }
 
@@ -148,10 +162,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
         this.setDescription(replacement.getDescription());
         this.setPriority(replacement.getPriority());
-        //        this.setStartTiming(replacement.getStartTiming());
-        //        this.setEndTiming(replacement.getEndTiming());
         this.setOccurrences(replacement.getOccurrences());
         this.setTags(replacement.getTags());
+        this.setFrequency(replacement.getFrequency());
     }
 
     @Override
@@ -190,6 +203,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return recurring;
     }
 
+    @Override
     public void setRecurring(boolean recurring) {
         this.recurring = recurring;
     }
@@ -201,12 +215,18 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     public SimpleDateFormat retriveFormat(String s) {
         SimpleDateFormat format;
-        if (s.length() <= 10) {
+        int stringLength = 10;
+        if (s.length() <= stringLength) {
             format = new SimpleDateFormat("dd/MM/yyyy");
         } else {
             format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         }
         return format;
+    }
+
+    @Override
+    public void removeOccurrence(int i) {
+        this.occurrences.remove(i);
     }
 
     public void setOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) {
@@ -222,85 +242,22 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime) {
         this.occurrences.add(new RecurringTaskOccurrence(initialStartTime, initialEndTime));
         if (isRecurring()) {
-            int freqNumber = frequency.getFrequencyNumber();
             String freqCharacter = frequency.getFrequencyCharacter();
-            Calendar cal1 = Calendar.getInstance();
-            Calendar cal2 = Calendar.getInstance();
-            cal1.setTime(initialStartTime.getTiming());
-            cal2.setTime(initialEndTime.getTiming());
-            SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
-            SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
-            String tempStartTime;
-            String tempEndTime;
-            Timing tempStart = null;
-            Timing tempEnd = null;
-            RecurringTaskOccurrence occurrenceToAdd;
             switch (freqCharacter) {
             case "h":
-                for (int i = 1; i < RecurringFrequency.HOUR_LIMIT; i += freqNumber) {
-                    cal1.add(Calendar.HOUR_OF_DAY, freqNumber);
-                    cal2.add(Calendar.HOUR_OF_DAY, freqNumber);
-                    tempStartTime = startTimeFormat.format(cal1.getTime());
-                    tempEndTime = endTimeFormat.format(cal2.getTime());
-                    try {
-                        tempStart = new Timing(tempStartTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    try {
-                        tempEnd = new Timing(tempEndTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurrenceToAdd);
-                }
+                int hourLimit = RecurringFrequency.HOUR_LIMIT;
+                int hourOfDay = Calendar.HOUR_OF_DAY;
+                setOccurrences(initialStartTime, initialEndTime, hourLimit, hourOfDay);
                 break;
             case "d":
-                for (int i = 1; i < RecurringFrequency.DAY_LIMIT; i += freqNumber) {
-                    cal1.add(Calendar.DATE, freqNumber);
-                    cal2.add(Calendar.DATE, freqNumber);
-                    tempStartTime = startTimeFormat.format(cal1.getTime());
-                    tempEndTime = endTimeFormat.format(cal2.getTime());
-                    try {
-                        tempStart = new Timing(tempStartTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    try {
-                        tempEnd = new Timing(tempEndTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurrenceToAdd);
-                }
+                int dayLimit = RecurringFrequency.DAY_LIMIT;
+                int day = Calendar.DATE;
+                setOccurrences(initialStartTime, initialEndTime, dayLimit, day);
                 break;
             case "m":
-                for (int i = 1; i < RecurringFrequency.MONTH_LIMIT; i += freqNumber) {
-                    cal1.add(Calendar.MONTH, freqNumber);
-                    cal2.add(Calendar.MONTH, freqNumber);
-                    tempStartTime = startTimeFormat.format(cal1.getTime());
-                    tempEndTime = endTimeFormat.format(cal2.getTime());
-                    try {
-                        tempStart = new Timing(tempStartTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    try {
-                        tempEnd = new Timing(tempEndTime);
-                    } catch (IllegalValueException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
-                    occurrences.add(occurrenceToAdd);
-                }
+                int monthLimit = RecurringFrequency.MONTH_LIMIT;
+                int month = Calendar.MONTH;
+                setOccurrences(initialStartTime, initialEndTime, monthLimit, month);
                 break;
             default:
                 break;
@@ -308,7 +265,79 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    //@@author
+    public void setOccurrences(Timing initialStartTime, Timing initialEndTime, int limit, int offSet) {
+        int freqNumber = frequency.getFrequencyNumber();
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(initialStartTime.getTiming());
+        cal2.setTime(initialEndTime.getTiming());
+        SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
+        SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
+        String tempStartTime;
+        String tempEndTime;
+        Timing tempStart = null;
+        Timing tempEnd = null;
+        RecurringTaskOccurrence occurrenceToAdd;
+
+        for (int i = 1; i < limit; i += freqNumber) {
+            cal1.add(offSet, freqNumber);
+            cal2.add(offSet, freqNumber);
+            tempStartTime = startTimeFormat.format(cal1.getTime());
+            tempEndTime = endTimeFormat.format(cal2.getTime());
+            try {
+                tempStart = new Timing(tempStartTime);
+                tempEnd = new Timing(tempEndTime);
+            } catch (IllegalValueException e) {
+                assert false : "Illegal Value for timings";
+            }
+            occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
+            occurrences.add(occurrenceToAdd);
+        }
+    }
+
+    public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
+        Task newTask = null;
+        if (taskToModify.getOccurrenceIndexList().size() == 0) {
+            taskToModify.getOccurrenceIndexList().add(0);
+        }
+        int occurrenceIndex = taskToModify.getOccurrenceIndexList().get(0);
+        RecurringFrequency freq = null;
+        try {
+            freq = new RecurringFrequency(RecurringFrequency.NULL_FREQUENCY);
+        } catch (IllegalValueException e1) {
+            assert false : "Illegal value for frequency";
+        }
+        newTask = new Task(
+                taskToModify.getDescription(),
+                taskToModify.getPriority(),
+                taskToModify.getOccurrences().get(occurrenceIndex).getStartTiming(),
+                taskToModify.getOccurrences().get(occurrenceIndex).getEndTiming(),
+                taskToModify.getTags(),
+                false,
+                freq);
+        newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
+        newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
+        taskToModify.removeOccurrence(occurrenceIndex);
+
+        return newTask;
+    }
+
+    /**
+     * converts readOnlyTask object to Task object
+     * @param readOnlyTask
+     * @return Task
+     */
+    public static Task readOnlyToTask(ReadOnlyTask readOnlyTask) {
+        assert readOnlyTask != null;
+        Task task = new Task(
+                readOnlyTask.getDescription(),
+                readOnlyTask.getPriority(),
+                readOnlyTask.getOccurrences(),
+                readOnlyTask.getTags(),
+                readOnlyTask.isRecurring(),
+                readOnlyTask.getFrequency());
+        return task;
+    }
 
     //@@author A0163559U
     /**
@@ -352,6 +381,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
         @Override
         public int compare(Task task1, Task task2) {
+            task1.getStartTiming().setTiming(task1.getStartTiming().toString());
+            task1.getEndTiming().setTiming(task1.getEndTiming().toString());
             return task1.compareTo(task2);
         }
 

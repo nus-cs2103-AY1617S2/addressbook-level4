@@ -146,8 +146,8 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
+`StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -169,15 +169,31 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+
+Author: Jay Kabra
+
+* The logic behind how to edit a specifc instance of a recurring task is as follows:
+* The `Parser` recognizes the `editthis` command to delete the occurrence of the selected task
+* from the encapsulated list of RecuirringTaskOccurrence objects (refer to the Model section to see the
+* precise architecture of implementing recurring tasks).
+* A new task is subsequently instantiated (with its own description, priority, etc. parameters) and added
+* to the underlying Task list. Then the edit parameters are applied to this newly instantianted task.
+*
+* The logic behind how to delete a specific instance of a recurring task is as follows:
+* The `Parser` recognizes the `deletethis` command and subsequently removes the entire task from the list.
+* Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the
+* recurring task back to the list with the specific instance removed. The effect for the user is a deletetion
+* of a particular recurring task instance.
+
 
 ### 2.4. Model component
 
@@ -195,6 +211,16 @@ The `Model`,
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* defines reccuring tasks in the following way:
+  * Class 'RecurringTaskOccurrence' encapsulates 2 Timing objects (start & end times) and a boolean to indicate if
+  * the occurrence is complete.
+  * Class 'Task' encapsulates a list of RecurringTaskOccurrence objects. In addition, it also encapsulates a
+  *'description,' 'priority,' 'frequency,' and a list of 'tags' for the respective task. Each of these fields is
+  * constructed as an object in the backend of the application.
+  * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
+  * instances of the same underlying object.
+  * If tasks are recurring then their start/end times are populated based on the given frequency parameter.
+
 
 ### 2.5. Storage component
 
