@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
  Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole. Looks after code quality, ensures adherence to coding standards, etc. Oversees the development of the storage component.
 
 #### [Matt Ye](https://github.com/yefenyi)
-<img src="images/yefenyi.png" width="150"><br>
+<img src="images/yefenyi.png" width="200"><br>
 Roles: Documentationem, Git Expert, Eclipse Expert<br>
 Responsibilities: Responsible for the quality of various project documents. Expert in Git and Eclipse.
 

@@ -12,6 +12,7 @@ import org.junit.Test;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 public class DateParserTest {
+    private static final int HOURS_IN_DAY = 24;
 
     @Test
     public void isValidDateString() {
@@ -79,6 +80,74 @@ public class DateParserTest {
         assertEquals(
                 cal.getTimeInMillis(),
                 DateParser.parse("01/01/2000 0000").getTimeInMillis());
+    }
+
+    /**
+     * Asserts that the actual date is the same as the expected. Checks the year, month, and day
+     * @param expected the expected date
+     * @param actual the actual date to compare with the expected
+     */
+    private void assertDatesEqual(Calendar expected, Calendar actual) {
+        assertEquals(expected.get(Calendar.YEAR), actual.get(Calendar.YEAR));
+        assertEquals(expected.get(Calendar.MONTH), actual.get(Calendar.MONTH));
+        assertEquals(expected.get(Calendar.DAY_OF_MONTH), actual.get(Calendar.DAY_OF_MONTH));
+    }
+
+    /**
+     * Finds the number of hours from the current time until the next instance of the day
+     * given in {@code dayOfWeek}. (e.g. if it is Saturday, it will return 48h until Monday)
+     * @param dayOfWeek the day of the week from {@code Calendar} (e.g. {@code Calendar.MONDAY})
+     * @return the number of hours from now until the given day. Will be a multiple of 24.
+     */
+    private int numberOfHoursUntilNextDayOfWeek(int dayOfWeek) {
+        int hoursToAdd = 0;
+        Calendar cal = Calendar.getInstance();
+        while (cal.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
+            hoursToAdd += HOURS_IN_DAY;
+            cal.add(Calendar.HOUR, HOURS_IN_DAY);
+        }
+        return hoursToAdd;
+    }
+
+    @Test
+    public void parseRelativeDates() throws IllegalValueException {
+        Calendar today = Calendar.getInstance();
+        assertDatesEqual(today, DateParser.parse("today 1200"));
+
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.add(Calendar.HOUR, 24);
+        assertDatesEqual(tomorrow, DateParser.parse("tomorrow 1200"));
+
+        Calendar monday = Calendar.getInstance();
+        monday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.MONDAY));
+        assertDatesEqual(monday, DateParser.parse("monday 1200"));
+        assertDatesEqual(monday, DateParser.parse("mon 1200"));
+        assertDatesEqual(monday, DateParser.parse("Monday 1200"));
+        assertDatesEqual(monday, DateParser.parse("mOnDay 1200"));
+
+        Calendar tuesday = Calendar.getInstance();
+        tuesday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.TUESDAY));
+        assertDatesEqual(tuesday, DateParser.parse("tuesday 1200"));
+
+        Calendar wednesday = Calendar.getInstance();
+        wednesday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.WEDNESDAY));
+        assertDatesEqual(wednesday, DateParser.parse("wednesday 1200"));
+
+        Calendar thursday = Calendar.getInstance();
+        thursday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.THURSDAY));
+        assertDatesEqual(thursday, DateParser.parse("thursday 1200"));
+
+        Calendar friday = Calendar.getInstance();
+        friday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.FRIDAY));
+        assertDatesEqual(friday, DateParser.parse("friday 1200"));
+
+        Calendar saturday = Calendar.getInstance();
+        saturday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.SATURDAY));
+        assertDatesEqual(saturday, DateParser.parse("saturday 1200"));
+
+        Calendar sunday = Calendar.getInstance();
+        sunday.add(Calendar.HOUR, numberOfHoursUntilNextDayOfWeek(Calendar.SUNDAY));
+        assertDatesEqual(sunday, DateParser.parse("sunday 1200"));
     }
 
     @Test

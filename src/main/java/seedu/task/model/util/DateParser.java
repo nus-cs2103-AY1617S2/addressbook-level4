@@ -105,7 +105,7 @@ public class DateParser {
             parsedDate[INDEX_YEAR] = Integer.parseInt(date.substring(6, 10));
         } else {
             String firstWord = date.substring(0, date.indexOf(" "));
-            switch (firstWord) {
+            switch (firstWord.toLowerCase()) {
             case "today" : {
                 break;
             }
@@ -113,39 +113,41 @@ public class DateParser {
                 calDate.add(Calendar.DATE, 1);
                 break;
             }
-            case "Monday" :
-            case "Mon": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_MON));
+            case "monday" :
+            case "mon": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, MON_INDEX));
                 break;
             }
-            case "Tuesday" :
-            case "Tue": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_TUE));
+            case "tuesday" :
+            case "tues" :
+            case "tue": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, TUE_INDEX));
                 break;
             }
-            case "Wednesday" :
-            case "Wed": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_WED));
+            case "wednesday" :
+            case "wed": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, WED_INDEX));
                 break;
             }
-            case "Thursday" :
-            case "Thu": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_THU));
+            case "thursday" :
+            case "thurs" :
+            case "thu": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, THU_INDEX));
                 break;
             }
-            case "Friday" :
-            case "Fri": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_FRI));
+            case "friday" :
+            case "fri": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, FRI_INDEX));
                 break;
             }
-            case "Saturday" :
-            case "Sat": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_SAT));
+            case "saturday" :
+            case "sat": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, SAT_INDEX));
                 break;
             }
-            case "Sunday" :
-            case "Sun": {
-                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, INDEX_SUN));
+            case "sunday" :
+            case "sun": {
+                calDate.add(Calendar.DATE, compareDayOfWeek(dayOfWeek, SUN_INDEX));
                 break;
             }
             default:
