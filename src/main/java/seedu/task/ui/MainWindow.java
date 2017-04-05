@@ -77,9 +77,12 @@ public class MainWindow extends UiPart<Region> {
 
         setAccelerators();
     }
-    public void updateCalender(ObservableList<ReadOnlyTask> taskList) {
-        calenderPanel = new CalenderPanel(calenderPlaceholder, taskList);
+
+    public void updateCalender(ObservableList<ReadOnlyTask> taskList
+            , int dDate , int dMonth , int dYear) {
+        calenderPanel = new CalenderPanel(calenderPlaceholder, taskList , dDate , dMonth , dYear);
     }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -119,8 +122,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredPersonList());
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredPersonList() , 0 , 0 , 0);
+        personListPanel = new PersonListPanel(getPersonListPlaceholder() , logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic , this);

@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <!-- @@author A0163935X -->
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="label112" layoutX="65.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="  Sunday" />
-      <Label fx:id="label1116" layoutX="195.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Monday" />
-      <Label fx:id="label11111" layoutX="319.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Tuesday" />
-      <Label fx:id="label11121" layoutX="450.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Wednesday" />
-      <Label fx:id="label11131" layoutX="597.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Thursday" />
-      <Label fx:id="label11141" layoutX="744.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Friday" />
-      <Label fx:id="label11151" layoutX="884.0" layoutY="14.0" prefHeight="20.0" prefWidth="77.0" text="Saturday" />
-      <Label fx:id="day1" layoutX="59.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
-      <Label fx:id="day2" layoutX="199.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
-      <Label fx:id="day3" layoutX="329.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/3" />
-      <Label fx:id="day4" layoutX="463.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/4" />
-      <Label fx:id="day5" layoutX="610.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/5" />
-      <Label fx:id="day6" layoutX="750.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/6" />
-      <Label fx:id="day7" layoutX="896.0" layoutY="57.0" prefHeight="20.0" prefWidth="77.0" text="3/7" />
-      <Label fx:id="day8" layoutX="65.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/8" />
-      <Label fx:id="day9" layoutX="195.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/9" />
-      <Label fx:id="day10" layoutX="332.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/10" />
-      <Label fx:id="day11" layoutX="471.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/11" />
-      <Label fx:id="day12" layoutX="616.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/12" />
-      <Label fx:id="day13" layoutX="763.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/13" />
-      <Label fx:id="day14" layoutX="896.0" layoutY="198.0" prefHeight="20.0" prefWidth="77.0" text="3/14" />
-      <Label fx:id="day15" layoutX="69.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/15" />
-      <Label fx:id="day16" layoutX="201.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/16" />
-      <Label fx:id="day17" layoutX="339.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/17" />
-      <Label fx:id="day18" layoutX="475.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/18" />
-      <Label fx:id="day19" layoutX="612.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/19" />
-      <Label fx:id="day20" layoutX="763.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/20" />
-      <Label fx:id="day21" layoutX="896.0" layoutY="353.0" prefHeight="20.0" prefWidth="77.0" text="3/21" />
-      <Label fx:id="day22" layoutX="71.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/22" />
-      <Label fx:id="day23" layoutX="201.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/23" />
-      <Label fx:id="day24" layoutX="332.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/24" />
-      <Label fx:id="day25" layoutX="475.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/25" />
-      <Label fx:id="day26" layoutX="615.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/26" />
-      <Label fx:id="day27" layoutX="763.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/27" />
-      <Label fx:id="day28" layoutX="896.0" layoutY="497.0" prefHeight="20.0" prefWidth="77.0" text="3/28" />
-      <ListView fx:id="listview13" layoutX="715.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview12" layoutX="574.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview14" layoutX="856.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview11" layoutX="433.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview10" layoutX="292.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview9" layoutX="152.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview8" layoutX="11.0" layoutY="235.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview6" layoutX="712.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview5" layoutX="574.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview7" layoutX="852.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview4" layoutX="433.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview3" layoutX="292.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview2" layoutX="151.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview1" layoutX="11.0" layoutY="91.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview20" layoutX="725.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview19" layoutX="584.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview21" layoutX="866.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview18" layoutX="443.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview17" layoutX="302.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview16" layoutX="162.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview15" layoutX="21.0" layoutY="384.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview27" layoutX="725.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview26" layoutX="584.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview28" layoutX="866.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview25" layoutX="443.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview24" layoutX="302.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview23" layoutX="162.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
-      <ListView fx:id="listview22" layoutX="21.0" layoutY="524.0" prefHeight="100.0" prefWidth="141.0" />
+      <Label fx:id="label112" layoutX="71.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="  Sunday" />
+      <Label fx:id="label1116" layoutX="201.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="Monday" />
+      <Label fx:id="label11111" layoutX="325.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="Tuesday" />
+      <Label fx:id="label11121" layoutX="456.0" layoutY="82.0" prefHeight="20.0" prefWidth="92.0" text="Wednesday" />
+      <Label fx:id="label11131" layoutX="603.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="Thursday" />
+      <Label fx:id="label11141" layoutX="750.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="Friday" />
+      <Label fx:id="label11151" layoutX="890.0" layoutY="82.0" prefHeight="20.0" prefWidth="77.0" text="Saturday" />
+      <Label fx:id="day1" layoutX="71.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
+      <Label fx:id="day2" layoutX="211.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/2" />
+      <Label fx:id="day3" layoutX="347.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/3" />
+      <Label fx:id="day4" layoutX="489.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/4" />
+      <Label fx:id="day5" layoutX="631.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/5" />
+      <Label fx:id="day6" layoutX="778.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/6" />
+      <Label fx:id="day7" layoutX="908.0" layoutY="113.0" prefHeight="20.0" prefWidth="77.0" text="3/7" />
+      <Label fx:id="day8" layoutX="80.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/8" />
+      <Label fx:id="day9" layoutX="210.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/9" />
+      <Label fx:id="day10" layoutX="347.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/10" />
+      <Label fx:id="day11" layoutX="486.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/11" />
+      <Label fx:id="day12" layoutX="631.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/12" />
+      <Label fx:id="day13" layoutX="778.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/13" />
+      <Label fx:id="day14" layoutX="911.0" layoutY="260.0" prefHeight="20.0" prefWidth="77.0" text="3/14" />
+      <Label fx:id="day15" layoutX="74.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/15" />
+      <Label fx:id="day16" layoutX="206.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/16" />
+      <Label fx:id="day17" layoutX="344.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/17" />
+      <Label fx:id="day18" layoutX="480.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/18" />
+      <Label fx:id="day19" layoutX="617.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/19" />
+      <Label fx:id="day20" layoutX="768.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/20" />
+      <Label fx:id="day21" layoutX="901.0" layoutY="411.0" prefHeight="20.0" prefWidth="77.0" text="3/21" />
+      <Label fx:id="day22" layoutX="76.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/22" />
+      <Label fx:id="day23" layoutX="206.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/23" />
+      <Label fx:id="day24" layoutX="337.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/24" />
+      <Label fx:id="day25" layoutX="480.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/25" />
+      <Label fx:id="day26" layoutX="620.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/26" />
+      <Label fx:id="day27" layoutX="768.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/27" />
+      <Label fx:id="day28" layoutX="901.0" layoutY="549.0" prefHeight="20.0" prefWidth="77.0" text="3/28" />
+      <ListView fx:id="listview13" layoutX="730.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview12" layoutX="589.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview14" layoutX="871.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview11" layoutX="448.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview10" layoutX="307.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview9" layoutX="167.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview8" layoutX="26.0" layoutY="297.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview6" layoutX="724.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview5" layoutX="586.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview7" layoutX="864.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview4" layoutX="445.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview3" layoutX="304.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview2" layoutX="163.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview1" layoutX="23.0" layoutY="147.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview20" layoutX="730.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview19" layoutX="589.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview21" layoutX="871.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview18" layoutX="448.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview17" layoutX="307.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview16" layoutX="167.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview15" layoutX="26.0" layoutY="442.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview27" layoutX="725.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview26" layoutX="584.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview28" layoutX="866.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview25" layoutX="443.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview24" layoutX="302.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview23" layoutX="162.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <ListView fx:id="listview22" layoutX="21.0" layoutY="589.0" prefHeight="100.0" prefWidth="141.0" />
+      <Button fx:id="button" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="127.0" text="Enter" />
+      <TextField fx:id="textfield" layoutX="150.0" layoutY="14.0" prefHeight="30.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
