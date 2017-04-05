@@ -31,6 +31,8 @@ import javafx.collections.ObservableList;
  */
 public class ScheduleCommand extends Command {
 
+    private static final int INITIAL_START_VALUE = -1;
+
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule an task or event to the task manager. "
@@ -38,37 +40,17 @@ public class ScheduleCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " meeting with boss l/work p/daily s/7:00pm,18/03/2017  e/9:00pm,18/03/2017  "
             + "d/get scolded for being lazy t/kthxbye";
-
-    public static final String MESSAGE_SUCCESS = "New event schedule: %1$s";
+    
+    public static final String MESSAGE_SUCCESS = "New event scheduled: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_WARNING = "Warning! Event lasts more than 50 years, please check if valid";
+    public static final String MESSAGE_HOURS_INVALID = "The format of hours is invalid - must be a valid long";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task manager";
-
+    public static final String MESSAGE_TIME_TOO_LONG = "Hours should not be negative";    
+    private static final long MAXIMUM_EVENT_LENGTH = 1577846300000L;
+    private static final long MINIMUM_EVENT_LENGTH = 0L;
     private final Event toSchedule;
+    private final String hours;
 
-    /**
-     * Creates an Schedule using raw values.
-     * @param string2
-     * @param string
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public ScheduleCommand(String name, String location, String period, String startTime,
-            String endTime, String deadline, String description, Set<String> tags)
-            throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toSchedule = new Event(
-                new Title(name),
-                new Location(location),
-                new Schedule(startTime),
-                new Schedule(endTime),
-                new Schedule(deadline),
-                new Description(description),
-                new UniqueTagList(tagSet),
-                new IsDone()
-        );
-    }
 
     /**
      * Creates an addCommand using a map of parameters
@@ -81,45 +63,79 @@ public class ScheduleCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toSchedule = new Event(parameters, new UniqueTagList(tagSet));
+        this.hours = parameters.get("hours").toString();
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
+        try {
+            long checkedHours = ((long)(Double.parseDouble(this.hours) * 3600000));
+            System.out.println(checkedHours);
+            if (checkedHours < MINIMUM_EVENT_LENGTH) {
+                throw new IllegalArgumentException();
+            }
+            List<ReadOnlyEvent> filteredTaskLists = filterOnlyEventsWithStartEndTime(); 
+            Collections.sort(filteredTaskLists, new ReadOnlyEventComparatorByStartDate());
+            setStartEndIntervalsForNewTask(checkedHours, filteredTaskLists);
+            model.addEvent(toSchedule);
+            if (checkedHours < MAXIMUM_EVENT_LENGTH){
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toSchedule));
+            } else {
+                return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_WARNING, toSchedule));
+            }
+        } catch (NumberFormatException e){
+            throw new CommandException(MESSAGE_HOURS_INVALID);
+        } catch (UniqueEventList.DuplicateEventException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_TIME_TOO_LONG);
+        } 
+    }
+
+    private void setStartEndIntervalsForNewTask(long checkedHours, List<ReadOnlyEvent> filteredTaskLists) {
+        long start = getStartInterval(checkedHours, filteredTaskLists);
+        long end = getEndInterval(checkedHours, start);
+        Schedule startTime = new Schedule(new Date(start));
+        Schedule endTime = new Schedule(new Date(end));
+        this.toSchedule.setStartTime(startTime);
+        this.toSchedule.setEndTime(endTime);
+    }
+
+    private long getEndInterval(long checkedHours, long start) {
+        long end = start + checkedHours;
+        return end;
+    }
+
+    private long getStartInterval(long checkedHours, List<ReadOnlyEvent> filteredTaskLists) {
+        long max = new Date().getTime();
+        long curr;
+        long start = INITIAL_START_VALUE ;
+        for (ReadOnlyEvent event : filteredTaskLists) {
+            curr = event.getStartTime().getDate().getTime();
+            if (curr > max) {
+                if ((curr - max) >= checkedHours){
+                    start = max ;
+                    break;
+                }
+            }
+            max = Math.max(max, event.getEndTime().getDate().getTime());
+        } 
+        if (start == INITIAL_START_VALUE) {
+            start = max ;
+        }
+        return start;
+    }
+
+    private List<ReadOnlyEvent> filterOnlyEventsWithStartEndTime() {
         List<ReadOnlyEvent> taskLists = (List<ReadOnlyEvent>) model.getFilteredTaskList();
         List<ReadOnlyEvent> filterTaskLists = new ArrayList<ReadOnlyEvent>();
         for (ReadOnlyEvent event : taskLists) {
             if (event.hasStartEndTime()) {
                 filterTaskLists.add(event);
             }
-        } 
-        Collections.sort(filterTaskLists, new ReadOnlyEventComparatorByStartDate());
-        long max = filterTaskLists.get(1).getEndTime().getDate().getTime();
-        long curr = -1 ;
-        long start = -1 ;
-        long end = -1 ;
-        long timeneeded = 7200000L;
-        for (ReadOnlyEvent event : filterTaskLists) {
-            System.out.println("start is" + event.getStartTime().getDate().toString());
-            System.out.println("end is " + event.getEndTime().getDate().toString());
-            curr = event.getStartTime().getDate().getTime();
-            if (curr > max) {
-                if ((curr - max) > timeneeded){
-                    start = max ;
-                    end = max + timeneeded;
-                }
-            }
-            max = Math.max(curr, event.getEndTime().getDate().getTime());
-        } 
-        System.out.println("Chosen time is");
-        System.out.println(new Date(start).toString());
-        System.out.println(new Date(end).toString());
-        try {
-            model.addEvent(toSchedule);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toSchedule));
-        } catch (UniqueEventList.DuplicateEventException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
+        return filterTaskLists;
     }
 }
 
