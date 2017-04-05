@@ -4,9 +4,11 @@ package seedu.toluist.model;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.TreeSet;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.toluist.commons.util.DateTimeUtil;
 import seedu.toluist.commons.util.StringUtil;
 
@@ -25,6 +27,20 @@ public class Task implements Comparable<Task>, Cloneable {
     private static final String ERROR_INVALID_RECURRING_END_DATE = "Non-recurring tasks cannot have end "
             + "date of recurrence,";
 
+    //@@author A0162011A
+    private static final String CATEGORY_PRIORITY = "priority";
+    private static final String CATEGORY_STARTDATE = "startdate";
+    private static final String CATEGORY_ENDDATE = "enddate";
+    private static final String CATEGORY_OVERDUE = "overdue";
+    private static final String CATEGORY_DESCRIPTION = "description";
+    private static final String CATEGORY_DEFAULT = "default";
+    private static final int START_OF_ARRAY_INDEX = 0;
+
+    private static String[] defaultSortOrder = { CATEGORY_OVERDUE, CATEGORY_PRIORITY, CATEGORY_ENDDATE,
+                                                 CATEGORY_STARTDATE, CATEGORY_DESCRIPTION};
+    private static LinkedList<String> sortingOrder = new LinkedList<String>(Arrays.asList(defaultSortOrder));
+
+    //@@author A0131125Y
     // List of tags is unique
     private TreeSet<Tag> allTags = new TreeSet<>();
     private String description;
@@ -271,21 +287,38 @@ public class Task implements Comparable<Task>, Cloneable {
 
     @Override
     /**
-     * Compare by overdue first -> priority -> end date -> start date -> description
-     * Floating tasks are put to the end
+     * Compare by sortingOrder
      */
     public int compareTo(Task comparison) {
-        if (isOverdue() != comparison.isOverdue()) {
-            return isOverdue() ? -1 : 1;
-        } else if (priority.compareTo(comparison.priority) != 0) {
-            return priority.compareTo(comparison.priority);
-        } else if (!Objects.equals(endDateTime, comparison.endDateTime)) {
-            return DateTimeUtil.isBeforeOrEqual(endDateTime, comparison.endDateTime) ? -1 : 1;
-        } else if (!Objects.equals(startDateTime, comparison.startDateTime)) {
-            return DateTimeUtil.isBeforeOrEqual(startDateTime, comparison.startDateTime) ? -1 : 1;
-        } else {
-            return this.description.compareToIgnoreCase(comparison.description);
+        for (String currentSort : sortingOrder) {
+            switch (currentSort) {
+            case CATEGORY_PRIORITY :
+                if (priority.compareTo(comparison.priority) != 0) {
+                    return priority.compareTo(comparison.priority);
+                }
+                break;
+            case CATEGORY_STARTDATE :
+                if (!Objects.equals(startDateTime, comparison.startDateTime)) {
+                    return DateTimeUtil.isBeforeOrEqual(startDateTime, comparison.startDateTime) ? -1 : 1;
+                }
+                break;
+            case CATEGORY_ENDDATE :
+                if (!Objects.equals(endDateTime, comparison.endDateTime)) {
+                    return DateTimeUtil.isBeforeOrEqual(endDateTime, comparison.endDateTime) ? -1 : 1;
+                }
+                break;
+            case CATEGORY_OVERDUE :
+                if (isOverdue() != comparison.isOverdue()) {
+                    return isOverdue() ? -1 : 1;
+                }
+                break;
+            case CATEGORY_DESCRIPTION :
+                if (this.description.compareToIgnoreCase(comparison.description) != 0) {
+                    return this.description.compareToIgnoreCase(comparison.description);
+                }
+            }
         }
+        return -1;
     }
 
     //@@author A0127545A
@@ -453,5 +486,28 @@ public class Task implements Comparable<Task>, Cloneable {
         default:
             return null;
         }
+    }
+
+    //@@author A0162011A
+    /**
+     * Changes the sorting order
+     * @param keyword to sort by
+     * @return true if sorting order changes / false if not
+     */
+    public static boolean sortBy(String keyword) {
+        if (keyword.equals(CATEGORY_DEFAULT)) {
+            sortingOrder = new LinkedList<String>(Arrays.asList(defaultSortOrder));
+            return true;
+        }
+        return updateSortingOrder(keyword);
+    }
+
+    private static boolean updateSortingOrder(String keyword) {
+        if (sortingOrder.indexOf(keyword) == START_OF_ARRAY_INDEX) {
+            return false;
+        }
+        sortingOrder.remove(keyword);
+        sortingOrder.add(START_OF_ARRAY_INDEX,  keyword);
+        return true;
     }
 }
