@@ -40,108 +40,79 @@ public class CommandDispatcherTests {
 
     @Test
     public void getSuggestions_emptyCommand() {
-        assertEquals(dispatcher.getSuggestions(""), new TreeSet<>());
+        assertDispatcherSuggestions("");
+        assertDispatcherSuggestions(" ");
     }
 
     @Test
     public void getSuggestions_partialCommandWord() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("mark");
-        expected.add("mark incomplete");
-        assertEquals(dispatcher.getSuggestions("m"), expected);
-
-        SortedSet<String> expected2 = new TreeSet<>();
-        expected2.add("add");
-        expected2.add("alias");
-        assertEquals(dispatcher.getSuggestions("a"), expected2);
+        assertDispatcherSuggestions("m", "mark", "mark incomplete");
+        assertDispatcherSuggestions("a", "add", "alias");
     }
 
     @Test
     public void getSuggestions_fullCommandWord() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("add");
-
-        assertEquals(dispatcher.getSuggestions("add"), expected);
+        assertDispatcherSuggestions("add", "add");
     }
 
     @Test
     public void getSuggestions_caseInsensitiveCommandWord() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("add");
-        expected.add("alias");
-        assertEquals(dispatcher.getSuggestions("A"), expected);
+        assertDispatcherSuggestions("A", "add", "alias");
     }
 
     @Test
     public void getSuggestions_commandWordWithWhiteSpaces() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("add");
-        expected.add("alias");
-        assertEquals(dispatcher.getSuggestions(" a"), expected);
+        assertDispatcherSuggestions(" a", "add", "alias");
     }
 
     @Test
     public void getSuggestions_commandWordAlias() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("mark incomplete");
-
-        assertEquals(dispatcher.getSuggestions("mi"), expected);
+        assertDispatcherSuggestions("mi", "mark incomplete");
     }
 
     @Test
     public void getPredictedCommand_commandWordAliasCaseInsensitive() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("mark incomplete");
-
-        assertEquals(dispatcher.getSuggestions("MI"), expected);
+        assertDispatcherSuggestions("MI", "mark incomplete");
     }
 
     @Test
     public void getSuggestions_suggestKeywords() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("/by");
-        expected.add("/from");
-        expected.add("/to");
-        expected.add("/repeat");
-        expected.add("/repeatuntil");
-        expected.add("/tags");
-        expected.add("/priority");
-
-        assertEquals(dispatcher.getSuggestions("add "), expected);
-        assertEquals(dispatcher.getSuggestions("add a task /"), expected);
-
-        expected.remove("/tags");
-        assertEquals(dispatcher.getSuggestions("add task /tags "), expected);
+        assertDispatcherSuggestions("add ", "/by", "/from", "/to", "/repeat",
+                "/repeatuntil", "/tags", "/priority");
+        assertDispatcherSuggestions("add a task /", "/by", "/from", "/to", "/repeat",
+                "/repeatuntil", "/tags", "/priority");
+        assertDispatcherSuggestions("add /tags sth ", "/by", "/from", "/to", "/repeat",
+                "/repeatuntil", "/priority");
     }
 
     @Test
     public void getSuggestions_invalidKeywords() {
-        SortedSet<String> expected = new TreeSet<>();
-
-        assertEquals(dispatcher.getSuggestions("help asdfasdfsadfaf"), expected);
+        assertDispatcherSuggestions("help asdfasdfsadfaf");
     }
 
     @Test
     public void getSuggestions_keywordWithArgumentsOverMoreKeywords() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("daily");
-        expected.add("monthly");
-        expected.add("weekly");
-        expected.add("yearly");
-
-        assertEquals(dispatcher.getSuggestions("add task /repeat "), expected);
+        assertDispatcherSuggestions("add task /repeat ", "daily", "monthly", "weekly",
+                "yearly");
     }
 
     @Test
     public void getSuggestions_noSuggestKeywordArgumentsIfAlreadyThere() {
-        SortedSet<String> expected = new TreeSet<>();
-        expected.add("/by");
-        expected.add("/from");
-        expected.add("/to");
-        expected.add("/repeatuntil");
-        expected.add("/tags");
-        expected.add("/priority");
+        assertDispatcherSuggestions("add task /repeat daily ", "/by", "/from", "/to", "/repeatuntil",
+                "/tags", "/priority");
+    }
 
-        assertEquals(dispatcher.getSuggestions("add task /repeat daily "), expected);
+    /**
+     * Helper assert method to check for suggestions to command
+     * @param command command string
+     * @param suggestions varargs of expected suggestions
+     */
+    private void assertDispatcherSuggestions(String command, String... suggestions) {
+        SortedSet<String> expected = new TreeSet<>();
+        for (String suggestion : suggestions) {
+            expected.add(suggestion);
+        }
+
+        assertEquals(dispatcher.getSuggestions(command), expected);
     }
 }

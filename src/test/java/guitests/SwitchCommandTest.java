@@ -99,7 +99,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String commandFilter = "filter task";
         commandBox.runCommand(commandFilter);
 
-        String switchToToday = "switch t";
+        String switchToToday = "switch tod";
         commandBox.runCommand(switchToToday);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
                 SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, TAB_TODAY, 1, 2);
