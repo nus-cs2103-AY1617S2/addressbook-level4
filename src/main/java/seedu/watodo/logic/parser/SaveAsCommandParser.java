@@ -12,16 +12,18 @@ public class SaveAsCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SaveAsCommand
-     * and returns an SaveAsCommand object for execution.
+     * and returns a SaveAsCommand object for execution.
      */
     public Command parse(String newFilePath) {
         newFilePath.trim();
-
-        if (!newFilePath.endsWith(".xml")) {
-            return new IncorrectCommand(SaveAsCommand.MESSAGE_INVALID_FILE_PATH_FORMAT);
+        if (!checkCorrectFileExtension(newFilePath)) {
+            return new IncorrectCommand(SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
         }
-
         return new SaveAsCommand(newFilePath);
+    }
+
+    private boolean checkCorrectFileExtension(String newFilePath) {
+        return (newFilePath.endsWith(".xml")) ? true : false;
     }
 
 }

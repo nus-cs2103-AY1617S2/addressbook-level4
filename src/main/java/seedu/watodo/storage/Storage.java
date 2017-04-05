@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.UserPrefs;
@@ -35,4 +36,11 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskListChangedEvent(TaskListChangedEvent abce);
+
+    //@@author A0141077L
+    /**
+     * Updates the File Path in which the Task List is saved to the hard disk.
+     */
+    void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event);
+    //@@author
 }

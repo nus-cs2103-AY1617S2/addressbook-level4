@@ -65,10 +65,24 @@ public class DeleteCommand extends Command {
         assert model != null;
 
         try {
+
             model.addTask(new Task(taskToDelete));
+            model.updateFilteredListToShowAll();
         } catch (DuplicateTaskException e) {
 
         }
+    }
+
+    @Override
+    public void redo() {
+        assert model != null;
+
+            try {
+                model.updateFilteredListToShowAll();
+                model.deleteTask(taskToDelete);
+            } catch (TaskNotFoundException e) {
+
+            }
     }
 
 }
@@ -139,33 +153,6 @@ public class UnmarkCommand extends Command {
         return new CommandResult(tasksUnmarkedMessage.toString());
     }
 
-    @Override
-    public void unexecute() {
-        try {
-            model.updateTask(undoUnmarkInt, undoUnmark);
-        } catch (DuplicateTaskException e) {
-
-        }
-    }
-
-    /**
-     * Creates and returns a {@code Task} with the details of {@code taskToUnmark}
-     */
-    private static Task createUnmarkedTask(ReadOnlyTask taskToUnmark) throws CommandException {
-        assert taskToUnmark != null;
-
-        if (taskToUnmark.getStatus() == TaskStatus.UNDONE) {
-            throw new CommandException(MESSAGE_STATUS_UNDONE);
-        }
-
-        Task unmarkedTask = new Task(taskToUnmark.getDescription(), taskToUnmark.getStartDate(),
-                taskToUnmark.getEndDate(), taskToUnmark.getTags());
-        unmarkedTask.setStatus(TaskStatus.UNDONE);
-
-        return unmarkedTask;
-    }
-
-}
 ```
 ###### \java\seedu\watodo\logic\commands\ViewFileCommand.java
 ``` java
