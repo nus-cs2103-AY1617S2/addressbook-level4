@@ -18,17 +18,13 @@ public class ListDateCommandParser {
 
     private DateTimeParser dateTimeParser;
 
-    /** Creates a ListDateCommandParser object that creates a new dateTimeParser object to parse date args */
-    public ListDateCommandParser() {
-        dateTimeParser = new DateTimeParser();
-    }
-
     /**
      * Parses the given {@code String} of arguments in the context of the
      * ListDateCommand and returns a ListDateCommand object for execution.
      */
     public Command parse(String args) {
         try {
+            dateTimeParser = new DateTimeParser();
             dateTimeParser.parse(args);
             return new ListDateCommand(dateTimeParser.getStartDate(), dateTimeParser.getEndDate());
         } catch (NoSuchElementException nsee) {
