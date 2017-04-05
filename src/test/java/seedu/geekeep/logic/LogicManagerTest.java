@@ -657,6 +657,8 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
+
+        assertCommandFailure("list dummy words", ListCommand.MESSAGE_USAGE);
     }
 
     //@@author A0139438W
@@ -675,6 +677,8 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
 
+        assertCommandFailure("listundone dummy words", ListUndoneCommand.MESSAGE_USAGE);
+
         // prepare expectations for list done tasks
         expectedList = expectedAB.getTaskList().filtered(t -> t.isDone());
 
@@ -682,6 +686,9 @@ public class LogicManagerTest {
                 ListDoneCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
+
+        assertCommandFailure("listdone dummy words", ListDoneCommand.MESSAGE_USAGE);
+
     }
 
     //@@author
