@@ -23,6 +23,7 @@ public class ControllerLibrary {
                 new UpdateTaskController(),
                 new DeleteTaskController(),
                 new StoreController(),
+                new SortController(),
                 new HistoryController(),
                 new LoadController(),
                 new UndoController(),
