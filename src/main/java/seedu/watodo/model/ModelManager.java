@@ -174,13 +174,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String status = task.getStatus().toString();
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
                         task.getDescription().fullDescription, keyword))
                     .findAny()
-                    .isPresent() &&
-                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT);
+                    .isPresent();
         }
 
         @Override
