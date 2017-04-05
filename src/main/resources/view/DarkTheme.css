@@ -344,4 +344,18 @@
 	-fx-text-fill: derive(white, -25%);
 	-fx-border-color: derive(white, -25%);
 }
+
+#status {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#status .label {
+    -fx-text-fill: white;
+    -fx-background-color: #800000;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
 /* @@author */
