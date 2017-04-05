@@ -37,8 +37,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
         ObservableList<Pair<ReadOnlyTask, Integer>> floatingTaskList = FXCollections.observableArrayList();
         for (int index = 0; taskList.size() != index; index++) {
             ReadOnlyTask taskToDelete = taskList.get(index);
-            if (taskToDelete.getEndDate().value.equals("EMPTY_FIELD")
-                    && taskToDelete.getStartDate().value.equals("EMPTY_FIELD")) {
+            if (taskToDelete.isFloatingTask()) {
                 Pair<ReadOnlyTask, Integer> floatingTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
                 floatingTaskList.add(floatingTask);
             }

@@ -72,7 +72,7 @@ public class UpdateCommand extends Command {
         ReadOnlyTask taskToUpdate = lastShownList.get(filteredTaskListIndex);
 
         if (!isUpdateToDeadlineTask) {
-            if ((isOnlyStartUpdated() || isOnlyEndUpdated()) && isToUpdateFloatingTask(taskToUpdate)) {
+            if ((isOnlyStartUpdated() || isOnlyEndUpdated()) && taskToUpdate.isFloatingTask()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             } else {
                 if (isOnlyStartUpdated()) {
@@ -86,7 +86,7 @@ public class UpdateCommand extends Command {
                 }
             }
             if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated())
-                    && (isToUpdateFloatingTask(taskToUpdate) || isDeadlineTaskToUpdate(taskToUpdate))) {
+                    && (taskToUpdate.isFloatingTask() || taskToUpdate.isDeadlineTask())) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             } else {
                 if (isOnlyEndTimeUpdated()) {
@@ -160,17 +160,6 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private boolean isDeadlineTaskToUpdate(ReadOnlyTask taskToUpdate) {
-        if (taskToUpdate.getStartDate().value.equals(EMPTY_FIELD)
-                && taskToUpdate.getStartTime().value.equals(EMPTY_FIELD)
-                && !taskToUpdate.getEndDate().value.equals(EMPTY_FIELD)
-                && !taskToUpdate.getEndTime().value.equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private boolean isOnlyStartTimeUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
@@ -187,17 +176,6 @@ public class UpdateCommand extends Command {
                 && updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isToUpdateFloatingTask(ReadOnlyTask taskToUpdate) {
-        if (taskToUpdate.getStartDate().value.equals(EMPTY_FIELD)
-                && taskToUpdate.getStartTime().value.equals(EMPTY_FIELD)
-                && taskToUpdate.getEndDate().value.equals(EMPTY_FIELD)
-                && taskToUpdate.getEndTime().value.equals(EMPTY_FIELD)) {
             return true;
         } else {
             return false;

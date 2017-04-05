@@ -36,7 +36,7 @@ public class EventTaskListPanel extends UiPart<Region> {
         ObservableList<ReadOnlyTask> eventTaskList = FXCollections.<ReadOnlyTask>observableArrayList(taskList);
         for (int index = 0; eventTaskList.size() != index; index++) {
             ReadOnlyTask taskToDelete = eventTaskList.get(index);
-            if (taskToDelete.getStartDate().value.equals("EMPTY_FIELD")) {
+            if (!taskToDelete.isEventTask()) {
                 eventTaskList.remove(index, index + 1);
                 index--;
             }

@@ -136,17 +136,17 @@
 }
 
 .anchor-pane {
-     -fx-background-color: LightBlue;
+     -fx-background-color: AliceBlue;
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: LightBlue;
+     -fx-background-color: AliceBlue;
      -fx-border-color: derive(#1d1d1d, 20%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: LightBlue;
+    -fx-background-color: AliceBlue;
     -fx-text-fill: black;
 }
 
@@ -163,8 +163,8 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: LightBlue;
-    -fx-border-color: LightBlue;
+    -fx-background-color: AliceBlue;
+    -fx-border-color: AliceBlue;
     -fx-border-width: 1px;
 }
 
@@ -173,17 +173,17 @@
 }
 
 .grid-pane {
-    -fx-background-color: LightBlue;
+    -fx-background-color: AliceBlue;
     -fx-border-color: derive(#1d1d1d, 20%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .anchor-pane {
-    -fx-background-color: LightBlue;
+    -fx-background-color: AliceBlue;
 }
 
 .context-menu {
-    -fx-background-color: LightBlue;
+    -fx-background-color: AliceBlue;
 }
 
 .context-menu .label {
@@ -191,8 +191,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: LightBlue;
-    -fx-border-color: derive(#1d1d1d, 20%);
+    -fx-background-color: AliceBlue;
 }
 
 .menu-bar .label {
