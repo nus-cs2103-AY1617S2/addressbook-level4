@@ -182,7 +182,7 @@ Examples:
   > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to 
   calling `delete` on the same task.
 
-  Exmaple:
+  Example:
 
 * `find 05/01/2017`<br>
   `deletethis 1`<br>
