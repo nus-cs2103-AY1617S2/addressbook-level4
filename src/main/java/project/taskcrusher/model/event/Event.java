@@ -1,5 +1,6 @@
 package project.taskcrusher.model.event;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -73,7 +74,9 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     public boolean confirmTimeslot(int timeslotIndex) {
         Timeslot confirmed = timeslots.get(timeslotIndex);
-        timeslots.clear();
+        //this approach, as opposed to timeslots.clear(), is taken so that we can maintain the reference
+        //to timeslot elements in the undo/redo saved states
+        timeslots = new ArrayList<Timeslot>();
         timeslots.add(confirmed);
         return true;
     }

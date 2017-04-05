@@ -193,6 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserInboxChanged();
     }
 
+    @Override
     public synchronized void confirmEventTime(int filteredEventListIndex, int timeslotIndex) {
         saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
