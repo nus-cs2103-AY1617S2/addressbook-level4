@@ -127,7 +127,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
+        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -144,7 +144,7 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
         return new XmlSerializableTaskManager(new TaskManager());
     }
 

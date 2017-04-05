@@ -23,34 +23,34 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Task1 d/15-Mar-2015 @ 22:00:00 p/1 i/Block 123, Bobby Street 3 t/husband";
-        int taskManagerIndex = 1;
+        int addressBookIndex = 1;
 
         TestTask editedTask = new TaskBuilder().withName("Task1").withDeadline("15-Mar-2015 @ 22:00:00")
                 .withPriorityLevel("1").withInformation("Block 123, Bobby Street 3").withTags("husband").build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "t/sweetie t/bestie";
-        int taskManagerIndex = 2;
+        int addressBookIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int taskManagerIndex = 2;
+        int addressBookIndex = 2;
 
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
     }
 
     @Test

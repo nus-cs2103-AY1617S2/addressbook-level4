@@ -64,12 +64,12 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
     public void undoEdit() throws IllegalValueException {
 
         String detailsToEdit = "Task11 d/15-Mar-2015 @ 10:00:00 p/1 i/NUS t/School";
-        int taskManagerIndex = 1;
+        int addressBookIndex = 1;
 
-        TestTask originalTask = expectedTasksList[taskManagerIndex - 1];
+        TestTask originalTask = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder().withName("Task11").withDeadline("15-Mar-2015 @ 10:00:00")
                 .withPriorityLevel("1").withInformation("NUS").withTags("School").build();
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
         commandBox.runCommand("undo");
         assertFindResult("find Task11", originalTask);
         commandBox.runCommand("redo");

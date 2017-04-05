@@ -87,7 +87,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
+        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
@@ -110,7 +110,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'task manager' and the 'last shown list' are as specified.
+     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
      * @throws IllegalValueException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager, List)
      */
@@ -136,7 +136,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal task manager data are same as those in the {@code expectedTaskManager} <br>
+     *      - the internal address book data are same as those in the {@code expectedTaskManager} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedTaskManager} was saved to the storage file. <br>
      * @throws IllegalValueException
@@ -236,7 +236,7 @@ public class LogicManagerTest {
         Task toBeAdded = helper.task1();
 
         // setup starting state
-        model.addTask(toBeAdded); // task already in internal task manager
+        model.addTask(toBeAdded); // task already in internal address book
 
         // execute command and verify result
         System.out.println(helper.generateAddCommand(toBeAdded));
@@ -252,7 +252,7 @@ public class LogicManagerTest {
         TaskManager expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare task manager state
+        // prepare address book state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list",

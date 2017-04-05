@@ -62,7 +62,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadTaskManagerWithSampleData(TaskManager ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -78,7 +78,7 @@ public class TypicalTestTasks {
 
     public TaskManager getTypicalTaskManger() {
         TaskManager ab = new TaskManager();
-        loadTaskManagerWithSampleData(ab);
+        loadAddressBookWithSampleData(ab);
         return ab;
     }
 }
