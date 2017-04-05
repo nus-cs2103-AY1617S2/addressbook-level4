@@ -29,7 +29,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 t/hipri due/2017/01/01 1230 starts/2016/01/01 1230 ends/2017/01/01 1230";
+            + "Example: " + COMMAND_WORD + " 1 t/hipri due/01/01/2017 1230 starts/01/01/2016 1230 ends/01/01/2017 1230";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

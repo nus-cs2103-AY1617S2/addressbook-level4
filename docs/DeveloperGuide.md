@@ -17,7 +17,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+<h2 name="setting-up">1. Setting up</h2>
 
 ### 1.1. Prerequisites
 
@@ -73,7 +73,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+<h2 name="design">2. Design</h2>
 
 ### 2.1. Architecture
 
@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -144,14 +144,14 @@ Author: Alice Bee
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -167,7 +167,7 @@ Author: Bernard Choo
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -186,7 +186,7 @@ Author: Chang Li
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 
@@ -203,7 +203,7 @@ Author: Darius Foong
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 
@@ -212,9 +212,9 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
-## 3. Implementation
+<h2 name="implementation"> 3. Implementation</h2>
 
 ### 3.1. Logging
 
@@ -242,8 +242,6 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 ### 3.3 Undo/Redo
 
-Author: Evan Yeung
-
 The undo and redo commands are implemented as commands in the Logic component. The command logic itself is in the `history` package of `Logic`. Within `history`, there are classes `TaskMemento` and `TaskMementos` that are data structures used by the undo/redo commands.
 
 #### 3.3.1 Memento Pattern
@@ -266,7 +264,7 @@ Storing commands means there is no duplicated data stored. With the current impl
 
 The "snapshot" method was chosen over the "command" method largely because of its reduced complexity and increased robustness. Building reverse commands introduces a more complex system that increases the chance of bugs. Building snapshots of the tasks is also unlikely to overload memory as tasks are fairly small. If the data held by a task ever becomes much larger, this decision should be revisited.
 
-## 4. Testing
+<h2 name="testing">4. Testing</h2>
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -313,7 +311,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+<h2 name="dev-ops">5. Dev Ops<h2>
 
 ### 5.1. Build Automation
 
@@ -422,12 +420,13 @@ Use case ends.
 
 2a. The list is empty
 
-> Use case ends
+ Use case ends
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message <br>
-  Use case resumes at step 2
+> 3a1. DoTomorrow shows an error message
+
+ Use case resumes at step 2
 
 #### Use case: Edit task
 
@@ -443,8 +442,9 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message <br>
-  Use case resumes at step 2
+> 3a1. DoTomorrow shows an error message 
+  
+ Use case resumes at step 2
 
 #### Use case: Add task or event
 
@@ -459,7 +459,8 @@ Use case ends.
 2a. Parameters are entered in the wrong format
 
 > 2a1. DoTomorrow shows an error message and an example of correct formatting
-> Use case resumes at step 1
+
+ Use case resumes at step 1
 
 #### Use case: Undo last action
 
@@ -473,7 +474,7 @@ Use case ends.
 
 2a. There is no previous action
 
-> Use case ends.
+ Use case ends.
 
 #### Use case: Search tasks
 
@@ -488,7 +489,8 @@ Use case ends.
 2a. No search terms are given
 
 > 2a1. DoTomorrow shows an error message indicating the user's error
-> Use case resumes at step 1
+
+ Use case resumes at step 1
 
 
 ## Appendix C : Non Functional Requirements
@@ -499,7 +501,7 @@ Use case ends.
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. All classes and public methods should have documentation.
 5. All commands should be completed within 200ms.
-6. 80% test coverage.
+6. The product should have 80% test coverage.
 
 ## Appendix D : Glossary
 
