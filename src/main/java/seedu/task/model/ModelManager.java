@@ -23,6 +23,7 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
 import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
@@ -108,7 +109,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException {
+    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException {
         this.currentTaskManager.addCommandAlias(alias, original);
         recordCurrentStateOfTaskManager();
         indicateTaskManagerChanged();

@@ -1,5 +1,6 @@
 package seedu.task.model.commandmap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import seedu.task.logic.commands.AddCommand;
@@ -25,36 +26,41 @@ import seedu.task.logic.commands.UseCommand;
 public class CommandMap {
 
     private HashMap<String, String> commandMap;
+    private final ArrayList<String> originalCommandWords;
 
     public CommandMap() {
         this.commandMap = new HashMap<String, String>();
-        populateCommandMap();
+        this.originalCommandWords = getOriginalCommandWords();
     }
 
     public void putAll(HashMap<String, String> map) {
         this.commandMap.putAll(map);
     }
 
-    private void populateCommandMap() {
-        commandMap.put(AliasCommand.COMMAND_WORD, AliasCommand.COMMAND_WORD);
-        commandMap.put(AddCommand.COMMAND_WORD, AddCommand.COMMAND_WORD);
-        commandMap.put(EditCommand.COMMAND_WORD, EditCommand.COMMAND_WORD);
-        commandMap.put(CompleteCommand.COMMAND_WORD, CompleteCommand.COMMAND_WORD);
-        commandMap.put(IncompleteCommand.COMMAND_WORD, IncompleteCommand.COMMAND_WORD);
-        commandMap.put(SelectCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD);
-        commandMap.put(DeleteCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD);
-        commandMap.put(ResetCommand.COMMAND_WORD, ResetCommand.COMMAND_WORD);
-        commandMap.put(FindCommand.COMMAND_WORD, FindCommand.COMMAND_WORD);
-        commandMap.put(ListCommand.COMMAND_WORD, ListCommand.COMMAND_WORD);
-        commandMap.put(ExitCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD);
-        commandMap.put(HelpCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD);
-        commandMap.put(RedoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD);
-        commandMap.put(UndoCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD);
-        commandMap.put(ImportCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD);
-        commandMap.put(ExportCommand.COMMAND_WORD, ExportCommand.COMMAND_WORD);
-        commandMap.put(RevertCommand.COMMAND_WORD, RevertCommand.COMMAND_WORD);
-        commandMap.put(UnrevertCommand.COMMAND_WORD, UnrevertCommand.COMMAND_WORD);
-        commandMap.put(UseCommand.COMMAND_WORD, UseCommand.COMMAND_WORD);
+    private static ArrayList<String> getOriginalCommandWords() {
+        ArrayList<String> commandWords = new ArrayList<String>();
+
+        commandWords.add(AliasCommand.COMMAND_WORD);
+        commandWords.add(AddCommand.COMMAND_WORD);
+        commandWords.add(EditCommand.COMMAND_WORD);
+        commandWords.add(CompleteCommand.COMMAND_WORD);
+        commandWords.add(IncompleteCommand.COMMAND_WORD);
+        commandWords.add(SelectCommand.COMMAND_WORD);
+        commandWords.add(DeleteCommand.COMMAND_WORD);
+        commandWords.add(ResetCommand.COMMAND_WORD);
+        commandWords.add(FindCommand.COMMAND_WORD);
+        commandWords.add(ListCommand.COMMAND_WORD);
+        commandWords.add(ExitCommand.COMMAND_WORD);
+        commandWords.add(HelpCommand.COMMAND_WORD);
+        commandWords.add(RedoCommand.COMMAND_WORD);
+        commandWords.add(UndoCommand.COMMAND_WORD);
+        commandWords.add(ImportCommand.COMMAND_WORD);
+        commandWords.add(ExportCommand.COMMAND_WORD);
+        commandWords.add(RevertCommand.COMMAND_WORD);
+        commandWords.add(UnrevertCommand.COMMAND_WORD);
+        commandWords.add(UseCommand.COMMAND_WORD);
+
+        return commandWords;
     }
 
     /**
@@ -66,16 +72,23 @@ public class CommandMap {
         }
     }
 
+    public static class BaseCommandNotAllowedAsAliasException extends Exception {}
+
     public boolean containsKey(String commandToMap) {
         return this.commandMap.containsKey(commandToMap);
+    }
+
+    public boolean isBaseCommandWord(String command) {
+        return this.originalCommandWords.contains(command);
     }
 
     public String get(String commandToMap) {
         return this.commandMap.get(commandToMap);
     }
 
-    public boolean containsValue(String commandToMap) {
-        return this.commandMap.containsValue(commandToMap);
+    public boolean isOriginalCommandValid(String command) {
+        return this.commandMap.containsValue(command)
+                || isBaseCommandWord(command);
     }
 
     public void put(String alias, String commandToMap) {
@@ -89,7 +102,10 @@ public class CommandMap {
     }
 
     public String translateCommand(String original) {
-        String commandToMap = commandMap.get(original);
+        String commandToMap = original;
+        while (commandMap.containsKey(commandToMap)) {
+            commandToMap = commandMap.get(commandToMap);
+        }
         return commandToMap;
     }
 }

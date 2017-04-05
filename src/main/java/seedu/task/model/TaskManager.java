@@ -12,6 +12,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.commandmap.CommandMap;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
 import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
@@ -169,10 +170,14 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 ////command map level operations
 
-    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException  {
+    public void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException {
         String commandToMap = translateCommand(original);
-        if (!commandMap.containsValue(commandToMap)) {
+        if (!commandMap.isOriginalCommandValid(commandToMap)) {
             throw new CommandMap.OriginalCommandNotFoundException();
+        }
+        if (commandMap.isBaseCommandWord(alias)) {
+            throw new CommandMap.BaseCommandNotAllowedAsAliasException();
         }
         commandMap.put(alias, commandToMap);
     }

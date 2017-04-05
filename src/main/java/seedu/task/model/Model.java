@@ -11,6 +11,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.Model.StateLimitReachedException;
+import seedu.task.model.commandmap.CommandMap.BaseCommandNotAllowedAsAliasException;
 import seedu.task.model.commandmap.CommandMap.OriginalCommandNotFoundException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
@@ -126,6 +127,7 @@ public interface Model {
      */
     public static class StateLimitReachedException extends Exception {}
 
-    void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException;
+    void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
+            BaseCommandNotAllowedAsAliasException;
 
 }
