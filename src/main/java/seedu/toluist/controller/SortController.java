@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
@@ -61,12 +62,12 @@ public class SortController extends Controller {
         displayResult(invalidKeywords);
     }
 
-    private void displayResult(ArrayList<String> invalidKeywords) {
+    private void displayResult(ArrayList<String> invalidKeywords) throws InvalidCommandException {
         String[] resultantOrder = Task.getCurrentSort();
         String resultMessage = StringUtil.EMPTY_STRING;
         if (invalidKeywords.size() != 0) {
-            resultMessage += String.format(ERROR_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords));
-            resultMessage += StringUtil.NEW_LINE;
+            throw new InvalidCommandException(
+                    String.format(ERROR_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords)));
         }
         resultMessage += String.format(RESULT_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, resultantOrder));
         uiStore.setTasks(TodoList.getInstance().getTasks());
@@ -108,6 +109,22 @@ public class SortController extends Controller {
 
         tokens.put(PARAMETER_CATEGORY, replacedCommand);
         return tokens;
+    }
+
+    public Map<String, String[]> getCommandKeywordMap() {
+        Map<String, String[]> keywords = new HashMap<>();
+        for (String category : KEYWORD_CATEGORIES) {
+            keywords.put(category, new String[0]);
+        }
+        return keywords;
+    }
+
+    public String[][][] getConflictingKeywordsList() {
+        return new String[][][] {
+                Arrays.stream(KEYWORD_CATEGORIES).map(category -> new String[] { category })
+                    .collect(Collectors.toList())
+                    .toArray(new String[0][0])
+        };
     }
 
     public boolean matchesCommand(String command) {
