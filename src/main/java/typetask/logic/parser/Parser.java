@@ -18,6 +18,7 @@ import typetask.logic.commands.HelpCommand;
 import typetask.logic.commands.IncorrectCommand;
 import typetask.logic.commands.ListCommand;
 import typetask.logic.commands.ListDoneCommand;
+import typetask.logic.commands.ListPriorityCommand;
 import typetask.logic.commands.ListTodayCommand;
 import typetask.logic.commands.RedoCommand;
 import typetask.logic.commands.RemoveDeadlineCommand;
@@ -73,11 +74,12 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD3:
             return new DeleteCommandParser().parse(arguments);
 
+        //@@author A0144902L    
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
         case DoneCommand.COMMAND_WORD2:
             return new DoneCommandParser().parse(arguments);
-
+          //@@author 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -91,8 +93,13 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        //@@author A0144902L    
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
+
+        case ListPriorityCommand.COMMAND_WORD:
+            return new ListPriorityCommand();
+        //@@author
 
         case ListTodayCommand.COMMAND_WORD:
             return new ListTodayCommand();

@@ -16,6 +16,7 @@ import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
 import typetask.logic.parser.DateParser;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.model.task.TaskList.TaskNotFoundException;
@@ -187,7 +188,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(boolean showComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
     }
-
+    @Override
+    public void updateFilteredTaskList(Priority priority) {
+        updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priority)));
+    }
     //@@author A0139154E
     @Override
     public void updateFilteredTaskList(Calendar today) {
@@ -279,6 +283,26 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "showComplete=" + String.valueOf(showComplete);
+        }
+    }
+
+    //@@author A0144902L
+    /** Examines if the task is qualified to be in list of priority tasks*/
+    private class PriorityQualifier implements Qualifier {
+        private Priority priority;
+
+        PriorityQualifier(Priority priority) {
+            this.priority = priority;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return (task.getPriority().value == "High");
+        }
+
+        @Override
+        public String toString() {
+            return "showPriority=" + String.valueOf(priority);
         }
     }
 
