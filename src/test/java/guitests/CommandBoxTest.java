@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.whatsleft.ui.CommandBox;
 
 //@@author A0124377A
 

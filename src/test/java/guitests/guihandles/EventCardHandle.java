@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyEvent;
-import seedu.address.model.tag.UniqueTagList;
+import seedu.whatsleft.model.activity.ReadOnlyEvent;
+import seedu.whatsleft.model.tag.UniqueTagList;
 
 //@@author A0148038A
 /**
