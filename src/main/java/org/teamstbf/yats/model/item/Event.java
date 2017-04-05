@@ -70,6 +70,7 @@ public class Event implements ReadOnlyEvent {
 	    fillRecurrence((List<Date>) parameters.get("time"), (String) parameters.get("recurrence"));
 	} else {
 	    this.isRecurring = false;
+	    this.recurrence = new Recurrence();
 	    fillStartEndDateAndDeadline(parameters);
 	}
     }
@@ -128,7 +129,7 @@ public class Event implements ReadOnlyEvent {
      *
      */
     public Event(Title name, Location location, Schedule startTime, Schedule endTime, Schedule deadline,
-	    Description description, UniqueTagList tags, IsDone isDone) {
+	    Description description, UniqueTagList tags, IsDone isDone, boolean isRecurring, Recurrence recurrence) {
 	assert !CollectionUtil.isAnyNull(name);
 	this.name = name;
 	this.location = location;

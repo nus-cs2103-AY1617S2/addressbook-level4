@@ -36,11 +36,12 @@ import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.ModelManager;
 import org.teamstbf.yats.model.ReadOnlyTaskManager;
 import org.teamstbf.yats.model.TaskManager;
-import org.teamstbf.yats.model.item.Date;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.IsDone;
@@ -68,7 +69,9 @@ public class LogicManagerTest {
 			Tag tag2 = new Tag("longertag2");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
 			IsDone isDone = new IsDone("Yes");
-			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone);
+			boolean isRecurring = false;
+			Recurrence recurrence = new Recurrence();
+			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone, isRecurring, recurrence);
 		}
 
 		/**
@@ -160,7 +163,8 @@ public class LogicManagerTest {
 			return new Event(new Title("person" + seed), new Location("bed" + seed),
 					new Schedule("11:59PM 08/04/2017"), new Schedule("11:59PM 08/04/2017"),new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
-					new UniqueTagList(new Tag("tag" + Math.abs(seed))),new IsDone("Yes"));
+					new UniqueTagList(new Tag("tag" + Math.abs(seed))),
+					new IsDone("Yes"), false, new Recurrence());
 		}
 
 		List<Event> generatePersonList(Event... persons) {
@@ -184,7 +188,8 @@ public class LogicManagerTest {
 		 */
 		Event generatePersonWithName(String name) throws Exception {
 			return new Event(new Title(name), new Location("home"), new Schedule(""),
-					new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("House of 1"), new UniqueTagList(new Tag("tag")), new IsDone("No"));
+					new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("House of 1"), new UniqueTagList(new Tag("tag")),
+					new IsDone("No"), false, new Recurrence());
 		}
 	}
 
@@ -317,7 +322,7 @@ public class LogicManagerTest {
 	public void execute_add_invalidPersonData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-				Date.MESSAGE_DEADLINE_CONSTRAINTS);
+				SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address", Schedule.MESSAGE_TIME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);

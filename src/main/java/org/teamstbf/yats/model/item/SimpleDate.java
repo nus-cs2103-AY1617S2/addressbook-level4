@@ -9,7 +9,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
  * @Deprecated use {@link #Schedule()} instead
  */
 @Deprecated
-public class Date {
+public class SimpleDate {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only be in the format dd/mm/yyyy";
     public static final String DEADLINE_VALIDATION_REGEX = "(^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$|^(?![\\s\\S]))";
@@ -22,7 +22,7 @@ public class Date {
      * @throws IllegalValueException
      *             if given phone string is invalid.
      */
-    public Date(String deadline) throws IllegalValueException {
+    public SimpleDate(String deadline) throws IllegalValueException {
 	assert deadline != null;
 	String trimmedDeadline = deadline.trim();
 	if (!isValidDeadline(trimmedDeadline)) {
@@ -46,8 +46,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
 	return other == this // short circuit if same object
-		|| (other instanceof Date // instanceof handles nulls
-			&& this.value.equals(((Date) other).value)); // state
+		|| (other instanceof SimpleDate // instanceof handles nulls
+			&& this.value.equals(((SimpleDate) other).value)); // state
 								     // check
     }
 
