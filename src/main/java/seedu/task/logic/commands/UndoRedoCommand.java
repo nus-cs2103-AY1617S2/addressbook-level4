@@ -10,7 +10,7 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Used to implement undo and redo commands.
- * This class contains all the logic required to replace a current ask in model with a memento,
+ * This class contains all the logic required to replace a current task in model with a memento,
  * the undo or redo command needs to specify which memento to replace the task with.
  */
 public abstract class UndoRedoCommand extends Command {
@@ -27,8 +27,8 @@ public abstract class UndoRedoCommand extends Command {
     }
 
     /**
-     *Replaces the appropriate task in model with memento task, deletes the task in model,
-     *or adds the memento task to the model
+     * Replaces the appropriate task in model with memento task, deletes the task in model,
+     * or adds the memento task to the model
      */
     @Override
     public CommandResult execute() throws CommandException {
