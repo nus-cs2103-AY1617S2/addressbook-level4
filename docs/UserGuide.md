@@ -79,7 +79,6 @@ To use Burdens effectively, we need to master the following commands.
 > * Commands words are case-sensitive, please follow the command summary.
 > * Words with a colon `:` at the end are keywords.
 > * Items in `<Angle Brackets>` are parameters.
-> * Items in `[Square Brackets]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 > * The following section heads show a description of the command and the command to be used.
@@ -176,7 +175,7 @@ Result: Burdens will add this task to the "Ongoing: square and
 
 ### 3.2. Deleting a task : `delete`
 
-CLeared a burden? You can eliminate it by using the `delete` a command.
+Cleared a burden? You can eliminate it by using the `delete` a command.
 
 Let's begin to delete a task from Burdens.
 
@@ -210,7 +209,7 @@ Let's begin to edit a task from Burdens.
 Here are the **allowed formats**:
 
 *  You can add any of these fields after the `<index>` of all the commands below to edit them, <br>
-   `<title> <for: deadline> <priority: priority> <note: instructions> <#tag>`
+   `<title> for: <deadline> priority: <priority> note: <instructions> #<tag>`
 * `edit <index>` - edits an ongoing task from Burdens at the specified index.
 * `edit floating <index>` - deletes a floating task from Burdens at the specified index.
 * `edit completed <index>` - deletes a completed task from Burdens at the specified index.
@@ -351,7 +350,7 @@ Note:
 
 ### 3.10. Redo a command : `redo`
 
-Changed your mind? Want to reverse a undone process?
+Changed your mind? Want to reverse an undone process?
 
 Let's begin to redo the undone process.
 
@@ -365,7 +364,7 @@ Note:
 
 ### 3.11. Revert : `revert`
 
-Sometimes you wish that you could go back to the beginning, to where you
+Sometimes you wish that you could go back to the beginning, to when you
 first initiated the application.
 
 Let's begin to revert to square one.
@@ -398,11 +397,9 @@ Let's begin to change the directory of the save file.
 
 Here are the **allowed formats**:
 
-For Macintosh users:
-* `use` - changes the directory to the file path stated after the command
-
-For Windows users:
-* `use` - changes the directory to the file path stated after the command
+For all users Macintosh and Windows alike:
+* `use <path\to\file.xml>` - changes the directory to the file path stated after the command for data
+* `use <path\to\file.json>` - changes the directory to the file path stated after the command for user preference
 
 Note:
 
@@ -421,7 +418,7 @@ Here are the **allowed formats**:
 Note:
 
 * A valid file must be provided.
-* The file name is casel-sensitive.
+* The file name is case-sensitive.
 
 ### 3.15. Export as Google Calendar file : `export`
 
@@ -474,7 +471,7 @@ Here is the **allowed format**:
 
 Note:
 
-* if an incorrect command is entered, the result display will display a
+* If an incorrect command is entered, the result display will display a
   help message regarding the incorrect command. This is provided if the
   command is typed correctly.
 * You can type a command on it's own too to jog your memory of the fields
