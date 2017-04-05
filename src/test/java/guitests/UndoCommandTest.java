@@ -13,11 +13,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     @Test
     public void undo() {
         //nothing to undo
+        commandBox.runCommand("clear");
         commandBox.runCommand(UndoCommand.COMMAND_WORD);
         assertResultMessage(UndoCommand.MESSAGE_EMPTY_HISTORY);
 
         //add one task
-        TestTask[] currentList = td.getTypicalTasks();
+        TestTask[] currentList = new TestTask[0];
         TestTask taskToAdd = td.getFit;
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertUndoSuccess(currentList);
