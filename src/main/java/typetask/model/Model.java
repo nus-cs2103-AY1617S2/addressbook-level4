@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 import typetask.commons.core.UnmodifiableObservableList;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.model.task.TaskList;
@@ -27,7 +28,7 @@ public interface Model {
     //@@author A0144902L
     /** Marks a given task as completed*/
     void completeTask(int index, ReadOnlyTask taskToComplete) throws TaskList.TaskNotFoundException;
-
+    //@@author
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
@@ -44,6 +45,11 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given isCompleted value*/
     void updateFilteredTaskList(boolean showComplete);
 
+    /** Updates the filter of the filtered task list to filter by the given priority value*/
+    void updateFilteredTaskList(Priority priority);
+    //@@author
+
+    /** Updates the filter of the filtered task list to filter by the given Calendar value*/
     void updateFilteredTaskList(Calendar today);
 
     //@@author A0139926R

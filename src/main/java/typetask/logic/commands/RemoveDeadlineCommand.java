@@ -7,6 +7,7 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 
@@ -56,11 +57,13 @@ public class RemoveDeadlineCommand extends Command {
         Name updatedName = taskToEdit.getName();
         DueDate updatedDate = taskToEdit.getDate();
         DueDate updatedEndDate = taskToEdit.getEndDate();
+        Priority updatedPriority = taskToEdit.getPriority();
+
         try {
             updatedDate = new DueDate("");
             updatedEndDate = new DueDate("");
         } catch (IllegalValueException e) {
         }
-        return new Task(updatedName, updatedDate, updatedEndDate, false);
+        return new Task(updatedName, updatedDate, updatedEndDate, false, updatedPriority);
     }
 }

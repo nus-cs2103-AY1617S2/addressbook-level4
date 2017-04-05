@@ -44,6 +44,7 @@ import typetask.model.ReadOnlyTaskManager;
 import typetask.model.TaskManager;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.storage.StorageManager;
@@ -412,7 +413,8 @@ public class LogicManagerTest {
             Name name = new Name("Adam Brown");
             DueDate date = new DueDate("");
             DueDate endDate = new DueDate("");
-            return new Task(name, date, endDate, false);
+            Priority priority = new Priority("Low");
+            return new Task(name, date, endDate, false, priority);
         }
 
         /**
@@ -423,7 +425,7 @@ public class LogicManagerTest {
         public Task generateTask(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed), new DueDate(""),
-                    new DueDate("") , false);
+                    new DueDate("") , false, new Priority("Low"));
         }
 
         /** Generates the correct add command based on the task given */
@@ -508,7 +510,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some dummy values.
          */
         public Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new DueDate(""), new DueDate(""), false);
+            return new Task(new Name(name), new DueDate(""), new DueDate(""), false, new Priority("Low"));
         }
     }
 }

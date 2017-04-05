@@ -8,6 +8,7 @@ import typetask.commons.util.CollectionUtil;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 
@@ -71,8 +72,9 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         DueDate updatedDate = editTaskDescriptor.getDate().orElseGet(taskToEdit::getDate);
         DueDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
 
-        return new Task(updatedName, updatedDate, updatedEndDate, false);
+        return new Task(updatedName, updatedDate, updatedEndDate, false, updatedPriority);
     }
   //@@author A0139926R
     /**
@@ -83,6 +85,7 @@ public class EditCommand extends Command {
         private Optional<Name> name = Optional.empty();
         private Optional<DueDate> date = Optional.empty();
         private Optional<DueDate> endDate = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -90,6 +93,7 @@ public class EditCommand extends Command {
             this.name = toCopy.getName();
             this.date = toCopy.getDate();
             this.endDate = toCopy.getEndDate();
+            this.priority = toCopy.getPriority();
         }
 
         /**
@@ -97,7 +101,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.date,
-                    this.endDate);
+                    this.endDate, this.priority);
         }
 
         public void setName(Optional<Name> name) {
@@ -123,6 +127,15 @@ public class EditCommand extends Command {
         }
         public Optional<DueDate> getEndDate() {
             return endDate;
+        }
+        //author A0144902L
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
     }

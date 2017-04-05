@@ -14,24 +14,28 @@ public class TaskTest {
 
     Task sampleTaskForTest;
     private void createSampleTask() throws IllegalValueException {
-        sampleTaskForTest = new Task(new Name("test"), new DueDate(""), new DueDate(""), false);
+        sampleTaskForTest = new Task(new Name("test"), new DueDate(""), new DueDate(""), false,
+                new Priority("Low"));
     }
     @Test
     public void createTask_success() throws IllegalValueException {
         Name taskName = new Name("Buy bread for breakfast");
         DueDate deadline = new DueDate("Mon Apr 10 2017 16:00:00");
         DueDate endDate = new DueDate("");
-        Task testTask = new Task(taskName, deadline, endDate, false);
+        Priority priority = new Priority("Low");
+        Task testTask = new Task(taskName, deadline, endDate, false, priority);
         TestTask expectedResult =
                 new TaskBuilder().withName("Buy bread for breakfast")
                 .withDate("Mon Apr 10 2017 16:00:00")
-                .withEndDate("").withCompleted(false).build();
+                .withEndDate("").withCompleted(false).withPriority("Low").build();
         assertEquals(testTask, expectedResult);
     }
     @Test(expected = AssertionError.class)
     public void createTask_withNullForName_fail() throws IllegalValueException {
         DueDate emptyDate = new DueDate("");
-        Task testTask = new Task(null, emptyDate, emptyDate, false);
+
+        Task testTask = new Task(null, emptyDate, emptyDate, false, new Priority("Low"));
+
     }
     @Test(expected = AssertionError.class)
     public void setTaskName_withNull_fail() throws IllegalValueException {
@@ -43,14 +47,15 @@ public class TaskTest {
         createSampleTask();
         sampleTaskForTest.setName(new Name("edited"));
         Task expectedTask = new Task(new Name("edited"), new DueDate(""),
-                new DueDate(""), false);
+                new DueDate(""), false, new Priority("Low"));
+
         assertEquals(sampleTaskForTest, expectedTask);
     }
     @Test
     public void setStartDate_success() throws IllegalValueException {
         createSampleTask();
         Task expectedTask = new Task(new Name("test"), new DueDate("Mon Apr 10 2017 16:00:00"),
-                new DueDate(""), false);
+                new DueDate(""), false, new Priority("Low"));
         sampleTaskForTest.setDate(new DueDate("Mon Apr 10 2017 16:00:00"));
         assertEquals(sampleTaskForTest, expectedTask);
     }
@@ -58,7 +63,7 @@ public class TaskTest {
     public void setEndDate_success() throws IllegalValueException {
         createSampleTask();
         Task expectedTask = new Task(new Name("test"), new DueDate(""),
-                new DueDate("Mon Apr 10 2017 16:00:00"), false);
+                new DueDate("Mon Apr 10 2017 16:00:00"), false, new Priority("Low"));
         sampleTaskForTest.setEndDate(new DueDate("Mon Apr 10 2017 16:00:00"));
         assertEquals(sampleTaskForTest, expectedTask);
     }
@@ -66,8 +71,16 @@ public class TaskTest {
     public void setIsCompleted_success() throws IllegalValueException {
         createSampleTask();
         Task expectedTask = new Task(new Name("test"), new DueDate(""),
-                new DueDate(""), true);
+                new DueDate(""), true, new Priority("Low"));
         sampleTaskForTest.setIsCompleted(true);
+        assertEquals(sampleTaskForTest, expectedTask);
+    }
+    @Test
+    public void setPriority_success() throws IllegalValueException {
+        createSampleTask();
+        Task expectedTask = new Task(new Name("test"), new DueDate(""),
+                new DueDate(""), true, new Priority("High"));
+        sampleTaskForTest.setPriority(new Priority("High"));
         assertEquals(sampleTaskForTest, expectedTask);
     }
     @Test
@@ -97,5 +110,12 @@ public class TaskTest {
         boolean expectedIsCompleted = false;
         boolean testIsCompleted = sampleTaskForTest.getIsCompleted();
         assertEquals(testIsCompleted, expectedIsCompleted);
+    }
+    @Test
+    public void getPriority_success() throws IllegalValueException {
+        createSampleTask();
+        String expectedpriority = "Low";
+        String testPriority = sampleTaskForTest.getPriority().toString();
+        assertEquals(testPriority, expectedpriority);
     }
 }

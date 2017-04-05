@@ -2,6 +2,7 @@ package typetask.testutil;
 
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
+import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 
 /**
@@ -13,6 +14,7 @@ public class TestTask implements ReadOnlyTask {
     private DueDate date;
     private DueDate endDate;
     private boolean isCompleted;
+    private Priority priority;
 
     public TestTask() {
     }
@@ -36,9 +38,15 @@ public class TestTask implements ReadOnlyTask {
         this.date = date;
     }
 
+    //@@author A0144902L
     public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+  //@@author
 
     @Override
     public Name getName() {
@@ -52,10 +60,17 @@ public class TestTask implements ReadOnlyTask {
     public DueDate getEndDate() {
         return endDate;
     }
+  //@@author A0144902L
     @Override
     public boolean getIsCompleted() {
         return isCompleted;
     }
+    @Override
+    public Priority getPriority() {
+        return priority;
+    }
+    //@@author
+
     //@@author A0139154E
     public String getIsCompletedToString() {
         if (isCompleted) {
