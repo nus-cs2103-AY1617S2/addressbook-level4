@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author A0127737X -->
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -43,7 +44,6 @@
                                 </ImageView>
                                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                 <Label fx:id="priority" styleClass="priority" text="\$priority" />
-<!--                                 <Label fx:id="description" text="\$description" /> -->
                                 <FlowPane fx:id="tags" />
                                 <ImageView fx:id="tickIcon" fitHeight="23.0" fitWidth="23.0">
                                     <image>

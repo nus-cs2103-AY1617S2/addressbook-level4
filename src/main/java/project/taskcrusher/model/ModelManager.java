@@ -29,11 +29,11 @@ import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final boolean LIST_EMPTY = true;
 
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
-    private static final boolean LIST_EMPTY = true;
     private final Stack<UserInbox> undoStack = new Stack<>();
     private final Stack<UserInbox> redoStack = new Stack<>();
     private boolean isLastPerformedActionIsUndo = false;
@@ -58,6 +58,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(new UserInbox(), new UserPrefs());
     }
 
+  //@@author A0163639W
     public boolean undo() {
         if (undoStack.isEmpty()) {
             return false;
@@ -72,7 +73,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     public boolean redo() {
         if (!isLastPerformedActionIsUndo) {
-            System.out.println("should not redo any more");
             return false;
         } else if (redoStack.isEmpty()) {
             return false;
@@ -84,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author
     @Override
     public void resetData(ReadOnlyUserInbox newData) {
         userInbox.resetData(newData);
@@ -125,7 +126,6 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
         prepareListsForUi();
-        System.out.println("pushing a copy");
     }
 
     @Override
@@ -216,10 +216,6 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
-    /* (non-Javadoc)
-     * @see project.taskcrusher.model.Model#updateFilteredTaskListToShowAll()
-     * Note that this filters out the completed tasks
-     */
     @Override
     public void updateFilteredTaskListToShowAll() {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));

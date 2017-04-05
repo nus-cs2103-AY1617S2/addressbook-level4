@@ -15,9 +15,9 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " Marks an event/task as complete or incomplete\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Marks an event/task as complete or incomplete "
             + "by the index number used in the last event/task listing.\n"
-            + "Parameters: t|e c|ic INDEX (must be a positive integer)";
+            + "Parameters: t|e complete|incomplete INDEX (must be a positive integer)";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s!";
     public static final String MESSAGE_MARK_EVENT_SUCCESS = "Marked event: %1$s!";

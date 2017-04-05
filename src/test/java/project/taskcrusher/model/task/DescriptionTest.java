@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import project.taskcrusher.model.shared.Description;
 
+//@@author A0127737X
 public class DescriptionTest {
 
     @Test
@@ -18,7 +19,8 @@ public class DescriptionTest {
         // valid descriptions
         assertTrue(Description.isValidDescription("To kill a mocking bird"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("This should be done after I actually sleep enough")); // long
-                                                                                                         // description
+
+        // long description
+        assertTrue(Description.isValidDescription("This should be done after I actually sleep enough tonight"));
     }
 }

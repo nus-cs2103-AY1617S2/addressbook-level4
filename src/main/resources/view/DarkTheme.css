@@ -292,9 +292,9 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-/*Things added from here By Yoshi */
+/* @@author A0127737X */
 
-/*padding added to align vertically with names */
+/*padding added to align tags vertically with the name */
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 0;
@@ -311,17 +311,13 @@
 }
 
 /*for the header labels */
+
 .list_header {
     -fx-text-fill: black;
     -fx-padding: 7 10 7 10;
     -fx-font-size: 17px;
 }
 
-/*To cut down the padding at the top 
-#taskHeader {
-    -fx-padding: -3 10 7 10;
-}
-*/
 #id {
    -fx-min-width: 20px;
 }

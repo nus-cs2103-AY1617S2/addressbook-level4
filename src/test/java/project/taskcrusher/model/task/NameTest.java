@@ -7,10 +7,12 @@ import org.junit.Test;
 
 import project.taskcrusher.model.shared.Name;
 
+//@@author A0127737X
 public class NameTest {
 
     @Test
     public void isValidName() {
+
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
