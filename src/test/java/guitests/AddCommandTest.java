@@ -29,7 +29,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(td.getFit.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
-
+        //@@author A0150120H
         //add task with end date only
         commandBox.runCommand("clear");
         currentList = new TestTask[0];
@@ -42,7 +42,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //Invalid format: Start date only
         commandBox.runCommand(td.startDateOnly.getAddCommand());
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
+        //@@author
         //invalid command
         commandBox.runCommand("adds Read Newspaper");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
