@@ -10,14 +10,15 @@ public class StartTime {
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start/End time for task "
-            + "should only contain a day (e.g. thursday) "
-            + "or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
+            + "should only contain a day (e.g. thursday) " + "or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
             + "May also include time (e.g. 1400) behind date in some instances\n"
             + "Enter HELP for user guide with detailed explanations of all commands";
-    public static final String STARTTIME_VALIDATION_REGEX1 = "\\d+";
-    public static final String STARTTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
-    public static final String STARTTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
-    public static final String STARTTIME_VALIDATION_REGEX4 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
+    public static final String STARTTIME_VALIDATION_REGEX1 = "([0-1][0-9][0-5][0-9])|(2[0-3][0-5][0-9])";
+    // public static final String STARTTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
+    // public static final String STARTTIME_VALIDATION_REGEX3 =
+    // "\\d{2}/\\d{2}/\\d{2}";
+    // public static final String STARTTIME_VALIDATION_REGEX4 =
+    // "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
 
     public final String value;
 
@@ -41,9 +42,12 @@ public class StartTime {
      * Returns true if a given string is a valid Task start time.
      */
     public static boolean isValidStartTime(String test) {
-        return test.matches(STARTTIME_VALIDATION_REGEX1) || test.matches(STARTTIME_VALIDATION_REGEX2)
-                || test.matches(STARTTIME_VALIDATION_REGEX3) || test.matches(STARTTIME_VALIDATION_REGEX4)
-                || test.matches(EMPTY_FIELD);
+        return test.matches(STARTTIME_VALIDATION_REGEX1)
+                || /*
+                    * test.matches(STARTTIME_VALIDATION_REGEX2) ||
+                    * test.matches(STARTTIME_VALIDATION_REGEX3) ||
+                    * test.matches(STARTTIME_VALIDATION_REGEX4) ||
+                    */ test.matches(EMPTY_FIELD);
     }
 
     // @@author
