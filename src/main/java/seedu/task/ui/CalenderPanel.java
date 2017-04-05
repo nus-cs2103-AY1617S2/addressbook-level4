@@ -292,8 +292,13 @@ public class CalenderPanel extends UiPart<Region> {
                         String[] taskListDateData = taskDate.toString().split("/");
                         String taskDateMonth = taskListDateData[1];
                         String taskDateDate = taskListDateData[0];
-                        if ((taskDateMonth.replaceAll("0", "") + "/" + taskDateDate.replaceAll("0", ""))
-                                .equals(labelDate)) {
+                        if (taskDateDate.charAt(0) == '0') {
+                            taskDateDate = taskDateDate.replaceAll("0" , "");
+                        }
+                        if (taskDateMonth.charAt(0) == '0') {
+                            taskDateMonth = taskDateMonth.replaceAll("0" , "");
+                        }
+                        if ((taskDateMonth + "/" + taskDateDate).equals(labelDate)) {
                             currentTaskList.getItems().addAll(taskList.get(i).getDescription().toString());
 
                         }
