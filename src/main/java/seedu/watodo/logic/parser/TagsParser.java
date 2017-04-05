@@ -6,6 +6,7 @@ import static seedu.watodo.logic.parser.ParserUtil.INDEX_FIRST_ARG;
 import static seedu.watodo.logic.parser.ParserUtil.NUMFIELD_SPLIT_BY_WHITESPACE;
 import static seedu.watodo.logic.parser.ParserUtil.WHITESPACE;
 
+import java.util.HashSet;
 import java.util.Set;
 
 //@@author A0143076J
@@ -32,10 +33,13 @@ public class TagsParser {
         ArgumentTokenizer tagsTokenizer = new ArgumentTokenizer(PREFIX_TAG);
         tagsTokenizer.tokenize(args);
 
-        this.tags = ParserUtil.toSet(tagsTokenizer.getAllValues(PREFIX_TAG));
-        for (String tag : tags) {
+        Set<String> unparsedTags = ParserUtil.toSet(tagsTokenizer.getAllValues(PREFIX_TAG));
+        Set<String> parsedTags = new HashSet<String>();
+        for (String tag : unparsedTags) {
             tag = tag.split("[\\s+]", NUMFIELD_SPLIT_BY_WHITESPACE)[INDEX_FIRST_ARG];  //tag name is only until the first whitespace
+            parsedTags.add(tag);
         }
+        this.tags = parsedTags;
     }
 
     /**
