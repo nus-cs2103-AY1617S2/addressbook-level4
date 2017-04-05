@@ -213,13 +213,19 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return occurrences;
     }
 
-    public SimpleDateFormat retriveFormat(String s) {
+    /**
+     * @param string
+     * @return SimpleDateFormat object of passed in string
+     */
+    private SimpleDateFormat retriveDateFormat(String s) {
+        assert s != null;
         SimpleDateFormat format;
-        int stringLength = 10;
-        if (s.length() <= stringLength) {
-            format = new SimpleDateFormat("dd/MM/yyyy");
+        String basicFormat = "dd/MM/yyyy";
+        String extendedFormat = "HH:mm dd/MM/yyyy";
+        if (s.length() <= basicFormat.length()) {
+            format = new SimpleDateFormat(basicFormat);
         } else {
-            format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+            format = new SimpleDateFormat(extendedFormat);
         }
         return format;
     }
@@ -265,14 +271,20 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
+    /**
+     * @param initialStartTime
+     * @param initialEndTime
+     * @param limit specifies the number of iterations to add to the occurrences list
+     * @param offSet specifies the calendar field to be updated
+     */
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime, int limit, int offSet) {
         int freqNumber = frequency.getFrequencyNumber();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(initialStartTime.getTiming());
         cal2.setTime(initialEndTime.getTiming());
-        SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
-        SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
+        SimpleDateFormat startTimeFormat = retriveDateFormat(initialStartTime.toString());
+        SimpleDateFormat endTimeFormat = retriveDateFormat(initialEndTime.toString());
         String tempStartTime;
         String tempEndTime;
         Timing tempStart = null;
@@ -295,6 +307,10 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
+    /**
+     * @param taskToModify ReadOnlyTask object
+     * @return Task object after removing the last occurrence to be accessed by the most recent command
+     */
     public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
