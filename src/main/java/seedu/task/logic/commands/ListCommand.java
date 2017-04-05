@@ -26,7 +26,8 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists all tasks in KIT.\n"
             + "Example: " + NOT_DONE;
 
-    public static final String MESSAGE_FAIL = "Wrong command format, list format should be list, list done or list undone";
+    public static final String MESSAGE_FAIL = "Wrong command format,"
+            + "list format should be list, list done or list undone";
 
     private final int value;
 
