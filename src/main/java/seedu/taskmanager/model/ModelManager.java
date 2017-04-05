@@ -161,9 +161,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized boolean isBlockedOutTime(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
-        return taskManager.isBlockedOutTime(task);
+
+        int index = 0;
+        while (index < (filteredTasks.size())) {
+            if (filteredTasks.get(index).isEventTask() && !filteredTasks.get(index).getIsMarkedAsComplete()
+                    && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                return index + 1;
+            }
+            index++;
+        }
+        return -1;
+
     }
 
     @Override

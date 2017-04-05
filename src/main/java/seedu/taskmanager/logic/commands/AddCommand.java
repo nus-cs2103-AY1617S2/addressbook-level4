@@ -1,7 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -35,7 +34,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with another event";
 
     private final Task toAdd;
-    private int addIndex = 0;
 
     /**
      * Creates an AddCommand using raw values.
@@ -64,7 +62,7 @@ public class AddCommand extends Command {
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {
-            throw new CommandException(MESSAGE_BLOCKED_OUT_TIME);
+            throw new CommandException(ive.getMessage() + MESSAGE_BLOCKED_OUT_TIME);
         }
     }
 }

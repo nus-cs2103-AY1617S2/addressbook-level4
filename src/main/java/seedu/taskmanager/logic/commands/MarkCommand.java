@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task is marked as completed! : %1$s";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task is marked as completed: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task has already been completed.";
     public static final String MESSAGE_ALREADY_MARKED = "This task is already marked as complete.";
 
