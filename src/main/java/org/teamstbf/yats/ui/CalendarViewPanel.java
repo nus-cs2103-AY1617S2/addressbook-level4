@@ -38,8 +38,11 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 	private static final String FXML = "CalendarView.fxml";
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
+	private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
 
-	private final FilteredList<ReadOnlyEvent> internalList;
+	private final FilteredList<ReadOnlyEvent> calendarList;
+	private final FilteredList<ReadOnlyEvent> taskList;
+	private final DatePickerSkin calendar;
 
 	@FXML
 	private AnchorPane calendarPanel;
@@ -60,6 +63,9 @@ public class CalendarViewPanel extends UiPart<Region> {
 
 	private static LocalDate today = LocalDate.now();
 
+	private static final String DONE_TASK_IDENTIFIER = "Yes";
+	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+
 	private static final int TASK_DETAILS = 4;
 	private static final int TASK_TITLE = 0;
 	private static final int TASK_START = 1;
@@ -74,42 +80,34 @@ public class CalendarViewPanel extends UiPart<Region> {
 	public CalendarViewPanel(AnchorPane placeholder, Model model) {
 		super(FXML);
 		this.model = model;
-		internalList = new FilteredList<ReadOnlyEvent>(model.getFilteredTaskList());
+		calendarList = new FilteredList<ReadOnlyEvent>(model.getFilteredTaskList());
+		taskList = new FilteredList<ReadOnlyEvent>(model.getFilteredTaskList());
+		calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
 		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
 		initializeCalendarView();
+		initializeDoneView();
 		placeholder.getChildren().add(calendarPanel);
 	}
 
 	private void initializeCalendarView() {
-
-		DatePickerSkin calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
 		Node popupContent = calendar.getPopupContent();
 		calendarRoot.setCenter(popupContent);
 		createFullDayTime();
 	}
 
-	// ========== Inner Class and Methods for calendar view ==========
+	private void initializeDoneView() {
+		updateTaskList();
+		taskListView.setItems(taskData);
+		taskListView.setCellFactory(listView -> new TaskListViewCell());
+	}
 
 	private void createFullDayTime() {
-		// Fetch task list for today: using the list command to extract out the
-		// tasks
-		// Populate timeData observable list with the tasks with correct labels
-		String[] data = new String[TASK_DETAILS];
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String[] keyword = { today.plusDays(1).format(formatter) };
-		Set<String> keywordSet = new HashSet<>(Arrays.asList(keyword));
-		updateFilteredListToShowStartTime(keywordSet);
-		for (int i = 0; i < internalList.size(); i++) {
-			ReadOnlyEvent event = internalList.get(i);
-			data[TASK_TITLE] = event.getTitle().toString();
-			data[TASK_START] = event.getStartTime().toString();
-			data[TASK_END] = event.getEndTime().toString();
-			// data[TASK_LOCATION] = event.getLocation().toString();
-			timeData.add(data);
-		}
+		updateCalendarList();
 		timeTasks.setItems(timeData);
 		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
 	}
+
+	// =============== Inner Class for CalendarView ==================
 
 	private class TimeSlotListViewCell extends ListCell<String[]> {
 
@@ -126,14 +124,66 @@ public class CalendarViewPanel extends UiPart<Region> {
 		}
 	}
 
-	// ============ Inner Class for Information Extraction ============
+	private class TaskListViewCell extends ListCell<ReadOnlyEvent> {
 
-	private void updateFilteredEventList(Expression expression) {
-		internalList.setPredicate(expression::satisfies);
+		@Override
+		protected void updateItem(ReadOnlyEvent task, boolean empty) {
+			super.updateItem(task, empty);
+
+			if (empty || task == null) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				if (task.getIsDone().getValue().equals("Yes")) {
+					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSONDONE).getRoot());
+				}
+			}
+		}
+	}
+
+	// ============ Inner Methods for Information Extraction ============
+
+	private void updateCalendarFilteredEventList(Expression expression) {
+		calendarList.setPredicate(expression::satisfies);
+	}
+
+	private void updateTaskFilteredEventList(Expression expression) {
+		taskList.setPredicate(expression::satisfies);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void updateCalendarList() {
+		String[] data = new String[TASK_DETAILS];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String[] keyword = { today.plusDays(1).format(formatter) };
+		Set<String> keywordSet = new HashSet<>(Arrays.asList(keyword));
+		updateFilteredListToShowStartTime(keywordSet);
+		for (int i = 0; i < calendarList.size(); i++) {
+			ReadOnlyEvent event = calendarList.get(i);
+			data[TASK_TITLE] = event.getTitle().toString();
+			data[TASK_START] = event.getStartTime().toString();
+			data[TASK_END] = event.getEndTime().toString();
+			// data[TASK_LOCATION] = event.getLocation().toString();
+			timeData.add(data);
+		}
+	}
+
+	private void updateTaskList() {
+		taskList.setPredicate(null);
+		Set<String> doneTaskIdentifier = new HashSet<String>();
+		doneTaskIdentifier.add(DONE_TASK_IDENTIFIER);
+		updateFilteredListToShowDone(doneTaskIdentifier);
+		for (int i = 0; i < taskList.size(); i++) {
+			taskData.add(taskList.get(i));
+		}
 	}
 
 	private void updateFilteredListToShowStartTime(Set<String> keywords) {
-		updateFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+		updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	public void updateFilteredListToShowDone(Set<String> keywords) {
+		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(keywords)));
 	}
 
 	interface Qualifier {
@@ -187,6 +237,27 @@ public class CalendarViewPanel extends UiPart<Region> {
 		@Override
 		public String toString() {
 			return "startTime=" + String.join(", ", startTimeKeyWords);
+		}
+	}
+
+	private class DoneQualifier implements Qualifier {
+
+		private Set<String> doneKeyWords;
+
+		DoneQualifier(Set<String> doneKeyWords) {
+			this.doneKeyWords = doneKeyWords;
+		}
+
+		@Override
+		public boolean run(ReadOnlyEvent event) {
+			return doneKeyWords.stream()
+					.filter(keyword -> StringUtil.containsWordIgnoreCase(event.getIsDone().getValue(), keyword))
+					.findAny().isPresent();
+		}
+
+		@Override
+		public String toString() {
+			return "done=" + String.join(", ", doneKeyWords);
 		}
 	}
 

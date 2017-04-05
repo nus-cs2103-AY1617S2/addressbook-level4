@@ -14,6 +14,6 @@ public class ListCommandDeadline extends ListCommand {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowDeadline(keywords);
-		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredUndoneTaskList().size()));
 	}
 }

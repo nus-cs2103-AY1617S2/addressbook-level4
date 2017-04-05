@@ -14,6 +14,6 @@ public class ListCommandLocation extends ListCommand {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowLocation(keywords);
-		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredUndoneTaskList().size()));
 	}
 }

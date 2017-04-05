@@ -35,7 +35,7 @@ public class BatchMarkDoneCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-	List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+	List<ReadOnlyEvent> lastShownList = model.getFilteredUndoneTaskList();
 	int numOfTask = targetIndexes.size();
 
 	if (lastShownList.size() < targetIndexes.peek()) {

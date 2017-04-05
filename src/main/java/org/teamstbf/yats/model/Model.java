@@ -19,8 +19,14 @@ public interface Model {
 	void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
 
 	/**
-	 * Returns the filtered event list as an
+	 * Returns the filtered done event list as an
 	 * {@code UnmodifiableObservableList<ReadOnlyEvent>}
+	 */
+	UnmodifiableObservableList<ReadOnlyEvent> getFilteredUndoneTaskList();
+
+	/**
+	 * Returns the filtered event list as an
+	 * {@code} UnmodifiableObservableList<ReadOnlyEvent>}
 	 */
 	UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 

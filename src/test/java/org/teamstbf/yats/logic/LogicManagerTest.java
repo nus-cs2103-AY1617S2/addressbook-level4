@@ -225,7 +225,7 @@ public class LogicManagerTest {
 		}
 
 		// Confirm the ui display elements should contain the right data
-		assertEquals(expectedShownList, model.getFilteredTaskList());
+		assertEquals(expectedShownList, model.getFilteredUndoneTaskList());
 
 		// Confirm the state of data (saved and in-memory) is as expected
 		assertEquals(expectedAddressBook, model.getTaskManager());
@@ -242,7 +242,7 @@ public class LogicManagerTest {
 	 */
 	private void assertCommandFailure(String inputCommand, String expectedMessage) {
 		TaskManager expectedAddressBook = new TaskManager(model.getTaskManager());
-		List<ReadOnlyEvent> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
+		List<ReadOnlyEvent> expectedShownList = new ArrayList<>(model.getFilteredUndoneTaskList());
 		assertCommandBehavior(true, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
 	}
 
@@ -485,7 +485,7 @@ public class LogicManagerTest {
 		assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedAB,
 				expectedAB.getTaskList());
 		assertEquals(1, targetedJumpIndex);
-		assertEquals(model.getFilteredTaskList().get(1), threePersons.get(1));
+		assertEquals(model.getFilteredUndoneTaskList().get(1), threePersons.get(1));
 	}
 
 	@Test
