@@ -1,5 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class FindDateCommand extends Command {
     private boolean isRange;
     private Date startDateRange, endDateRange;
 
+    private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy");
+
     public static final String COMMAND_WORD = "findbydate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all non-floating tasks which is within "
@@ -27,10 +30,16 @@ public class FindDateCommand extends Command {
             + "10/03/2017 to 15/03/2017";
     public static final String MESSAGE_INVALID_RANGE = "Invalid date range. "
             + "Either provide a single date or a starting date to ending date";
+    public static final String MESSAGE_SUCCESS = "Finding tasks ";
 
     public FindDateCommand(String args) throws IllegalValueException {
         Parser parser = new Parser();
         List<DateGroup> dateGroups = parser.parse(args);
+
+        if (dateGroups.isEmpty()) {
+            throw new IllegalValueException(MESSAGE_INVALID_RANGE);
+        }
+
         switch (dateGroups.get(0).getDates().size()) {
 
         case 1:
@@ -56,11 +65,19 @@ public class FindDateCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS);
         if (isRange) {
             model.updateFilteredTaskList(startDateRange, endDateRange);
+            sb.append(sdfOutput.format(startDateRange));
+            sb.append(" to ");
+            sb.append(sdfOutput.format(endDateRange));
         } else {
             model.updateFilteredTaskList(startDateRange);
+            sb.append("on ");
+            sb.append(sdfOutput.format(startDateRange));
         }
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        sb.append("\n");
+        return new CommandResult(sb.toString() + getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 }
+// @@author

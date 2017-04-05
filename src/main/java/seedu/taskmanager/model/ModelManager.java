@@ -1,5 +1,7 @@
 package seedu.taskmanager.model;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -210,44 +212,51 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-    
+
     // @@author A0140032E
     private class DateQualifier implements Qualifier {
-        private Date date;
-        
+        private LocalDate date;
+
         DateQualifier(Date date) {
-            this.date = date;
+            this.date = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
+
+            LocalDate taskStartDate = task.getStartDate().isPresent()
+                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+            LocalDate taskEndDate = task.getEndDate().isPresent()
+                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+
             boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
             if (isFloatingTask) {
                 return false;
             }
             if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(task.getStartDate().get().after(date) || task.getEndDate().get().before(date));
+
+                return !(taskStartDate.isAfter(date) || taskEndDate.isBefore(date));
             }
             if (task.getStartDate().isPresent()) {
-                return !(task.getStartDate().get().after(date));
+                return !(taskStartDate.isAfter(date));
             }
-            return !(task.getEndDate().get().before(date));
+            return !(taskEndDate.isBefore(date));
         }
-        
+
         @Override
         public String toString() {
             return "date=" + date.toString();
         }
     }
-    
+
     private class DateRangeQualifier implements Qualifier {
         private Date startDateCriteria, endDateCriteria;
-        
+
         DateRangeQualifier(Date startDateCriteria, Date endDateCriteria) {
             this.startDateCriteria = startDateCriteria;
             this.endDateCriteria = endDateCriteria;
         }
-        
+
         @Override
         public boolean run(ReadOnlyTask task) {
             boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
@@ -255,14 +264,17 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
             if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria) || task.getEndDate().get().after(endDateCriteria));
+                return !(task.getStartDate().get().before(startDateCriteria)
+                        || task.getEndDate().get().after(endDateCriteria));
             }
             if (task.getStartDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria) || task.getStartDate().get().after(startDateCriteria));
+                return !(task.getStartDate().get().before(startDateCriteria)
+                        || task.getStartDate().get().after(startDateCriteria));
             }
-            return !(task.getEndDate().get().before(startDateCriteria) || task.getStartDate().get().after(startDateCriteria));
+            return !(task.getEndDate().get().before(startDateCriteria)
+                    || task.getStartDate().get().after(startDateCriteria));
         }
-        
+
         @Override
         public String toString() {
             return "date range=" + startDateCriteria.toString() + " to " + endDateCriteria.toString();
