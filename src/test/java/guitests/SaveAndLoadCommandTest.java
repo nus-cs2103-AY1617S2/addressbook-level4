@@ -35,7 +35,9 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
         tasks = TestUtil.addTasksToList(tasks, td.findGirlfriend);
         assertTrue(taskListPanel.isListMatching(tasks));
 
-        //Load saveTest1 (saveTest1 : 1-5, getFit | saveTest2 : 1-5, findGirlfriend)
+        //Load saveTest1
+        //saveTest1 : payDavid, visitSarah, eggsAndBread, visitGrandma, readBook, getFit
+        //saveTest2 : payDavid, visitSarah, eggsAndBread, visitGrandma, readBook, findGirlfriend
         commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder1 + fileName);
         tasks = TestUtil.removeTasksFromList(tasks, td.findGirlfriend);
 
@@ -43,7 +45,6 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
         tasks = TestUtil.addTasksToList(td.getTypicalTasks(), td.getFit);
         assertTrue(taskListPanel.isListMatching(tasks));
 
-        //Now add something to saveTest1 (saveTest1 : 1-5, getFit | saveTest2 : 1-5, findGirlfriend)
         tasks = TestUtil.removeTasksFromList(tasks, td.getFit);
         tasks = TestUtil.removeTasksFromList(tasks, td.visitSarah);
         commandBox.runCommand("delete 3"); //getFit
@@ -51,7 +52,8 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(td.findGirlfriend.getAddCommand());
         tasks = TestUtil.addTasksToList(tasks, td.findGirlfriend);
         assertTrue(taskListPanel.isListMatching(tasks));
-        //(saveTest1 : 1-4, findGirlfriend | saveTest2 : 1-5, findGirlfriend)
+        //saveTest1 : payDavid, eggsAndBread, visitGrandma, readBook, findGirlfriend
+        //saveTest2 : payDavid, visitSarah, eggsAndBread, visitGrandma, readBook, findGirlfriend)
 
         //Load back the new file and check if getFit is deleted
         tasks = TestUtil.addTasksToList(td.getTypicalTasks(), td.findGirlfriend);
@@ -65,6 +67,18 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
         assertResultMessage(MESSAGE_INVALID_DIRECTORY);
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " /");
         assertResultMessage(MESSAGE_INVALID_DIRECTORY);
+    }
+
+    @Test
+    public void saveDirectoryNotExistSuccess() {
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1 + "\\NotExistFolder");
+        assertResultMessage(String.format(SaveCommand.MESSAGE_SUCCESS, saveFolder1 + "\\NotExistFolder"));
+    }
+
+    @Test
+    public void saveDirectoryExistSuccess() {
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1);
+        assertResultMessage(String.format(SaveCommand.MESSAGE_SUCCESS, saveFolder1));
     }
 
     @Test
