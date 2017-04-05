@@ -45,7 +45,7 @@ public class TestEvent implements ReadOnlyEvent {
 		sb.append("add " + this.getTitle().fullName + ", ");
 		sb.append("from " + this.getStartTime().toString() + " ");
 		sb.append("to " + this.getEndTime().toString() + " ");
-		sb.append("by " + this.getDeadline().toString() + " ");
+		sb.append("" + this.getDeadline().toString() + "");
 		sb.append("@" + this.getLocation().value + " ");
 		sb.append("//" + this.getDescription().value + " ");
 		this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
