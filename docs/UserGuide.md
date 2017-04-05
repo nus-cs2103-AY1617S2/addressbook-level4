@@ -3,32 +3,30 @@
 
 ## Table of contents
 
-1. [Intoduction](#intoduction) <br>
-2. [Quick Start](#quick-start) <br>
-3. [Features](#features) <br>
-   3.1.  [Viewing Help](#viewing-help) <br>
-   3.2.  [Adding a Floating Task]()  <br>
-   3.3.  [Adding a Deadline Task]() <br>
-   3.4.  [Adding an Event Task]()<br>
-   3.5.  [Adding a Priority Task]() <br>
-   3.6.  [Finding a Task]()  <br>
-   3.7.  [Editing a Task]() <br>
-   3.8.  [Deleting a Task]() <br>
-   3.9.  [Completing a Task]() <br>
-   3.10. [Listing All Tasks]() <br>
-   3.11. [Listing Today’s Tasks]()<br>
-   3.12. [Listing Priority Tasks]()<br>
-   3.13. [Listing Completed Tasks]() <br>
-   3.14. [Undoing the Latest Command]()<br>
-   3.15. [Saving Data to Another Folder]()<br>
-   3.16. [Changing Default Storage Folder]()<br>
-   3.17. [Using Data from Another Folder]()<br>
-   3.18. [Clearing all Entries]()<br>
-   3.19. [Exiting the Program]()<br>
-   3.20. [Saving your Data]()<br>
-   3.21. [Differentiating your Tasks’ Urgency]()<br>
-4. [FAQ](#faq)<br>
-5. [Command Summary](#command-summary)<br>
+1. [Intoduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#1-introduction) <br>
+2. [Quick Start](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#2-quick-start) <br>
+3. [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) <br>
+   3.1.  [Viewing Help](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#31-viewing-help--help) <br>
+   3.2.  [Adding a Floating Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#32-adding-a-floating-task-add)  <br>
+   3.3.  [Adding a Deadline Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#33-adding-a-deadline-task-add) <br>
+   3.4.  [Adding an Event Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#34-adding-an-event-task-add)<br>
+   3.5.  [Adding a Priority Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#35-adding-a-priority-taskevent--add) <br>
+   3.6.  [Finding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#36-finding-a-task-find)  <br>
+   3.7.  [Editing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#37-editing-a-task-edit) <br>
+   3.8.  [Deleting a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-deleting-a-task--delete) <br>
+   3.9.  [Completing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-completing-a-task--done) <br>
+   3.10. [Listing All Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-listing-all-tasks--list) <br>
+   3.11. [Listing Today’s Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#311-listing-today-tasks--listday)<br>
+   3.12. [Listing Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#312-listing-proirity-tasks--list)<br>
+   3.13. [Listing Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#313-listing-completed-tasks--listdone) <br>
+   3.14. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#314-undoing-the-latest-command--undo)<br>
+   3.15. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-saving-the-data-to-another-folder--save)<br>
+   3.16. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-changing-the-default-storage-folder--setting)<br>
+   3.17. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-using-data-from-another-folder--use)<br>
+   3.18. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-clearing-all-entries--clear)<br>
+   3.19. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-exiting-the-program--exit)<br>
+4. [FAQ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#4-faq)<br>
+5. [Command Summary](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary)<br>
 &nbsp;
 
 ## 1. Introduction
@@ -36,10 +34,10 @@
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
 with a single line of command! With the efficacy of a calendar without its shortcomings, <br>
 TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. <br>
-TypeTask is especially good for you if: <br>
+TypeTask is especially good for you if you want: <br>
 
-> You want to do everything through a single line of command <br>
-> You want an application that works offline <br>
+> To do everything through a single line of command <br>
+> An application that works offline <br>
 > You want to write tasks that have deadlines or start-dates <br>
 
 ## 2. Quick Start
@@ -59,12 +57,24 @@ TypeTask is especially good for you if: <br>
 
 Fig 1. TypeTask’s User Interface <br>
 
+TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
+
+`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
+`Yellow`: this uncompleted task was labelled as a priority. <br>
+`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
+
+```
+> Note that all tasks that fall outside of these categories
+  will appear normally.
+  i.e. no additional colours.
+ ```
+
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 
 6. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**` CS2103T Meeting d/12022107 t/11:00am` :
+   * **`add`**` CS2103T Meeting by: 12 Feb 11am` :
      adds a task named `CS2103T Meeting` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -96,39 +106,48 @@ Examples:
 ### 3.3. Adding a Deadline Task: `add`
 What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
-Format: `add <TASK NAME> d/<DATE> or add <TASK NAME> d/<DATE> t/<TIME>`
+Format: `add <TASK NAME> by:<DATE> or add <TASK NAME> by:<DATE> <TIME>`
 
 ```
 Things To Note:
-> Date must be in dd/mm/yyyy format
-> Time must be in hh:mm am/pm format
+> Date can be in mm/dd/yyyy format
+> Space must be used between words for dates.
+   e.g "15 Oct", "next monday"
 > Time is optional
+> Time can be in hh:mm format. 24 hours format is used.
+> Time and Date must have a space in between them.
+   e.g. "today 8pm", "15 Oct 11am"
 ```
 
 Examples:
 
-* `add CS2103T Meeting d/13/10/2016`
-* `add CS2103T Meeting d/13/10/2016 t/11:10am`
+* `add CS2103T Meeting by: next week`
+* `add CS2103T Meeting by: next monday 11:10am`
 
 
 ### 3.4. Adding an Event Task: `add`
 Now you might be interested in adding an event, which has a start time and an end time. <br>
 
-Format: `add <EVENT NAME> from d/<DATE> t/<TIME> to d/<DATE> t/<TIME>`
+Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> t/<TIME>`
 
 ```
 Things To Note:
-> Date must be in dd/mm/yyyy format
-> Time must be in hh:mm am/pm format
-> Start Date and End Date is compulsory
-> End Date must not be before Start Date
-> Start Time and End Time is compulsory
+> Start Date/Time and End Date/Time are compulsory
+> Start Date must be before End Date
+> Date can be in mm/dd/yyyy format
+> Space must be used between words for Date. 
+   e.g "15 Oct", "next monday"
+> Time is optional
+> Time can be in hh:mm format. 24 hours format is used.
+> Time and Date must have a space in between them.
+   e.g. "today 8pm", "15 Oct 11am"
+
 ```
 
 Examples:
 
-* `add OPEN HOUSE from d/13/10/2016 t/10:00am to d/16/10/2016 t/5:00 pm`
-* `add CS1010 Lecture from d/10/10/2016 t/12:00pm to d/10/4/2017 t/2:00 pm`
+* `add OPEN HOUSE from: 13 Oct 10:00am to: 16 Oct 5:00pm`
+* `add CS1010 Lecture from: tuesday 12:00pm to: tuesday 2:00 pm`
 
 
 ### 3.5. Adding a Priority Task/Event : `add`
@@ -150,7 +169,7 @@ Examples:
 
 
 ### 3.6 Finding a Task: `find`
-You may not want search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
+You may not want to search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
 
 Format: `find <KEYWORD>`
 
@@ -167,27 +186,30 @@ Things To Note:
 
 Examples:
 * `find Meeting`
-* `find Open house`
+* `find oct`
 
 
 ### 3.7 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command.
 
-Format: `edit INDEX <TASK NAME> d/<DATE> t/<TIME> p/<PRIORITY>`
+Format: `edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY> or edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`
 
 ```
 Things To Note:
 > Edits the task at the specified INDEX.
   The index refers to the number shown in the last task listing.
-> The index must be a positive integer 1, 2, 3, …
 > Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
 > At least one of the optional fields must be provided.
 > Existing field(s) will be updated with the input fields.
 ```
 
 Examples:
-* `edit 1 d/02122017 t/11:00am`
-* `edit 2 CS2013T Meeting`
+* `edit 1 by:2 Dec 11:00am`
+What it does: Edit your task deadline to 2 Dec 11am
+* `edit 2 CS2103T Meeting`
+What it does: Edit your task name to CS2103T Meeting
+* `edit 3 from: next week to: next month`
+What it does: Edit your task schedule to be from next week to next month
 
 
 ### 3.8 Deleting a Task : `delete`
@@ -215,6 +237,8 @@ Things To Note:
 > The task at the specified INDEX will be moved from the task
   list to the completed list.
 > The index refers to the index number shown in the most recent listing.
+> This list will only show you the tasks that are completed.
+  Deleted Task are not included.
 ```
 
 Examples:
@@ -264,26 +288,15 @@ To review what you have done (and feel better about yourself!), you may want to 
 
 Format: `listdone`
 
-```
-Things To Note:
-> This list will only show you the tasks that are completed.
-  Deleted Task are not included.
-```
-
 
 ### 3.14. Undoing the Latest Command : `undo`
 Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
 Format: `undo`
 
-```
-Things To Note:
-> Undo command will not work if there is no prior command executed.
-```
-
 
 ### 3.15. Saving the Data to Another Folder : `save`
-You may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
+Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format: `save <FILE_PATH>`
 
@@ -328,7 +341,7 @@ Examples:
 
 
 ### 3.18. Clearing all Entries : `clear`
-Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
+Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
@@ -338,24 +351,6 @@ Format: `clear`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format: `exit`
-
-
-### 3.20. Saving the Data
-Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
-
-
-### 3.21. Differentiating your Tasks’ Urgency
-TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
-
-`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
-`Yellow`: this uncompleted task was labelled as a priority. <br>
-`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
-
-```
-> Note that all tasks that fall outside of these categories
-  will appear normally.
-  i.e. no additional colours.
- ```
 &nbsp;
 
 ## 4. FAQ

@@ -16,11 +16,12 @@ public class Task implements ReadOnlyTask {
     private DueDate endDate;
     private Priority priority;
 
+    //@@author A0139926R
     /**
      * Every field must be present and not null.
      */
-
     public Task(Name name, DueDate date, DueDate endDate, boolean isCompleted, Priority priority) {
+
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.date = date;
@@ -96,7 +97,7 @@ public class Task implements ReadOnlyTask {
             return "No";
         }
     }
-    //@@author
+    //@@author A0139926R
 
     /**
      * Updates this task with the details of {@code replacement}.
@@ -108,6 +109,7 @@ public class Task implements ReadOnlyTask {
         this.setEndDate(replacement.getEndDate());
         this.setPriority(replacement.getPriority());
     }
+
     //@@author A0144902L
     /**
      * Marks this task as completed {boolean is set true}.

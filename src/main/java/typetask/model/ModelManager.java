@@ -1,5 +1,8 @@
 package typetask.model;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -12,6 +15,7 @@ import typetask.commons.events.model.TaskManagerChangedEvent;
 import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
 import typetask.model.task.TaskList.TaskNotFoundException;
@@ -25,13 +29,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    //@@author A0139926R
     private Stack<TaskManager> taskManagerHistory = new Stack<TaskManager>();
     private Stack<TaskManager> redoTaskManagerHistory = new Stack<TaskManager>();
 
     public static final Integer STATUS_EMPTY_HISTORY = 0;
     public static final Integer STATUS_AVAILABLE_HISTORY = 1;
     public static final Integer STATUS_ERROR_HISTORY = -1;
-
+    //@@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
@@ -98,7 +104,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139926R
-    /** Stores current TaskManager state */
+    /**
+     * Stores current TaskManager state for undo and redo features
+     */
     @Override
     public synchronized void storeTaskManager(String command) {
 
@@ -108,7 +116,9 @@ public class ModelManager extends ComponentManager implements Model {
         StorageUtil.clearRedoConfig();
     }
   //@@author A0139926R
-    /** Reverts changes made from restoring recently saved TaskManager state */
+    /**
+     * Reverts changes made from restoring recently saved TaskManager state for redo command
+     */
     @Override
     public synchronized int revertTaskManager() {
         if (StorageUtil.isRedoConfigHistoryEmpty() && redoTaskManagerHistory.isEmpty()) {
@@ -125,7 +135,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
   //@@author A0139926R
-    /** Restores recently saved TaskManager state */
+    /**
+     * Restores recently saved TaskManager state for undo command
+     */
     @Override
     public synchronized int restoreTaskManager() {
         if (StorageUtil.isConfigHistoryEmpty() && taskManagerHistory.isEmpty()) {
@@ -143,6 +155,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
   //@@author A0139926R
+    /**
+     * Restores configuration to the previous configuration
+     * Not implemented yet
+     */
     @Override
     public synchronized void rollBackTaskManager(boolean isStorageOperation) {
 
@@ -170,6 +186,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(boolean showComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
+    }
+
+    //@@author A0139154E
+    @Override
+    public void updateFilteredTaskList(Calendar today) {
+        updateFilteredTaskList(new PredicateExpression(new TodayQualifier(today)));
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -257,6 +279,50 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "showComplete=" + String.valueOf(showComplete);
+        }
+    }
+
+    //@@author A0139154E
+    /** Examines if the task is qualified to be in the list of today's tasks*/
+    private class TodayQualifier implements Qualifier {
+        private Calendar today;
+
+        TodayQualifier(Calendar today) {
+            this.today = today;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isEventDueToday = false;
+            boolean isTaskDueToday = false;
+            if (!task.getEndDate().value.equals("")) {
+                Calendar taskEndDateCalendar = Calendar.getInstance();
+                List<Date> endDates = DateParser.parse(task.getEndDate().value);
+                Date taskEndDate = endDates.get(0);
+                taskEndDateCalendar.setTime(taskEndDate);
+                isTaskDueToday = (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
+                        today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR));
+
+                if (!task.getDate().value.equals("")) {
+                    Calendar taskStartDateCalendar = Calendar.getInstance();
+                    List<Date> startDates = DateParser.parse(task.getDate().value);
+                    Date taskStartDate = startDates.get(0);
+                    taskStartDateCalendar.setTime(taskStartDate);
+                    isEventDueToday = (taskStartDateCalendar.before(today) ||
+                            (today.get(Calendar.YEAR) == taskStartDateCalendar.get(Calendar.YEAR) &&
+                            today.get(Calendar.DAY_OF_YEAR) == taskStartDateCalendar.get(Calendar.DAY_OF_YEAR))) &&
+                            (taskEndDateCalendar.after(today) ||
+                                    (today.get(Calendar.YEAR) == taskEndDateCalendar.get(Calendar.YEAR) &&
+                                    today.get(Calendar.DAY_OF_YEAR) == taskEndDateCalendar.get(Calendar.DAY_OF_YEAR)));
+                }
+            }
+
+            return (isTaskDueToday || isEventDueToday);
+        }
+
+        @Override
+        public String toString() {
+            return "showToday=" + today;
         }
     }
 

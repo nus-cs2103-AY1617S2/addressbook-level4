@@ -1,5 +1,6 @@
 package typetask.model;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import typetask.commons.core.UnmodifiableObservableList;
@@ -43,6 +44,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given isCompleted value*/
     void updateFilteredTaskList(boolean showComplete);
 
+    void updateFilteredTaskList(Calendar today);
+
+    //@@author A0139926R
     /** Stores current TaskManager state */
     void storeTaskManager(String command);
 

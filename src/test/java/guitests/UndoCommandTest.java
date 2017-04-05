@@ -1,53 +1,91 @@
 package guitests;
+
 import static org.junit.Assert.assertTrue;
-import static typetask.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import typetask.testutil.TestTask;
-import typetask.testutil.TestUtil;
+import typetask.commons.exceptions.IllegalValueException;
+import typetask.logic.commands.UndoCommand;
 
 //@@author A0139926R
 public class UndoCommandTest extends AddressBookGuiTest {
 
+    private static final String ADD_COMMAND = "add test";
+    private static final String EDIT_COMMAND = "edit 1 by: tmr";
+    private static final String DELETE_COMMAND = "delete 1";
+    private static final String CLEAR_COMMAND = "clear";
+    private static final String LIST_COMMAND = "list";
+    private static final String FIND_COMMAND = "find alice";
+    private static final String UNDO_COMMAND = "undo";
+    private static final String UNDO_SHORT_COMMAND = "u";
     @Test
-    public void undo() {
-        //undo clear command
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
-        commandBox.runCommand("clear");
-        assertListSize(0);
+    public void undo_add_success() throws IllegalValueException {
+        commandBox.runCommand(ADD_COMMAND);
         assertUndoSuccess();
 
-        //undo delete command
-        TestTask[] currentList = td.getTypicalTasks();
-        int targetIndex = 1;
-        TestTask taskToDelete = currentList[targetIndex - 1]; // -1 as array uses zero indexing
-        TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndex);
-        commandBox.runCommand("delete " + targetIndex);
-        //confirm the list now contains all previous tasks except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
-        //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        commandBox.runCommand(ADD_COMMAND);
+        assertUndoShortcutSuccess();
+    }
+    @Test
+    public void undo_edit_success() throws IllegalValueException {
+        commandBox.runCommand(EDIT_COMMAND);
         assertUndoSuccess();
 
-        //undo add command
-        //add one task
-        TestTask taskToAdd = td.hoon;
-        commandBox.runCommand(taskToAdd.getAddCommand());
-        //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().fullName);
-        assertMatching(taskToAdd, addedCard);
-        //confirm the list now contains all previous tasks plus the new task
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        commandBox.runCommand(EDIT_COMMAND);
+        assertUndoShortcutSuccess();
+    }
+    @Test
+    public void undo_delete_success() {
+        commandBox.runCommand(DELETE_COMMAND);
         assertUndoSuccess();
 
+        commandBox.runCommand(DELETE_COMMAND);
+        assertUndoShortcutSuccess();
+    }
+    @Test
+    public void undo_clear_success() {
+        commandBox.runCommand(CLEAR_COMMAND);
+        assertUndoSuccess();
 
-        //undo edit command....working in progress...
+        commandBox.runCommand(CLEAR_COMMAND);
+        assertUndoShortcutSuccess();
+    }
+    @Test
+    public void undo_list_fail() {
+        commandBox.runCommand(LIST_COMMAND);
+        commandBox.runCommand(UNDO_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+
+        commandBox.runCommand(LIST_COMMAND);
+        commandBox.runCommand(UNDO_SHORT_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+    }
+    @Test
+    public void undo_find_fail() {
+        commandBox.runCommand(FIND_COMMAND);
+        commandBox.runCommand(UNDO_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+
+        commandBox.runCommand(FIND_COMMAND);
+        commandBox.runCommand(UNDO_SHORT_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+    }
+    @Test
+    public void undo_nothingToUndo_fail() {
+        commandBox.runCommand(UNDO_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
+
+        commandBox.runCommand(UNDO_SHORT_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_FAILURE);
     }
     private void assertUndoSuccess() {
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
+        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+    }
+    private void assertUndoShortcutSuccess() {
+        commandBox.runCommand(UNDO_SHORT_COMMAND);
+        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
         assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
     }
 }
