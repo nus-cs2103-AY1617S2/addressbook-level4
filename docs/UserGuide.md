@@ -289,7 +289,7 @@ as the start and end timings of when the overall recurring pattern should start/
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `find assignment` <br>
-	      `find tutorial`
+        `find tutorial`
 
 * **List** : `list` <br>
    e.g. `list`
