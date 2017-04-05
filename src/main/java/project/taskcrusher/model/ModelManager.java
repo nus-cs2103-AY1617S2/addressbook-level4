@@ -34,11 +34,12 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyEvent> filteredEvents;
     private static final boolean LIST_EMPTY = true;
-    private static final Stack<UserInbox> undoStack = new Stack<>();
-    private static final Stack<UserInbox> redoStack = new Stack<>();
+    private final Stack<UserInbox> undoStack = new Stack<>();
+    private final Stack<UserInbox> redoStack = new Stack<>();
+    private boolean isLastPerformedActionIsUndo = false;
 
     /**
-     * Initializes a ModelManager with the given userInbox and userPrefs.
+     * Initialises a ModelManager with the given userInbox and userPrefs.
      */
     public ModelManager(ReadOnlyUserInbox userInbox, UserPrefs userPrefs) {
         super();
@@ -56,27 +57,29 @@ public class ModelManager extends ComponentManager implements Model {
         this(new UserInbox(), new UserPrefs());
     }
 
-    public void undo() {
-        System.out.println("Inside undo");
+    public boolean undo() {
         if (undoStack.isEmpty()) {
-            //throw some exception
+            return false;
         } else {
-            System.out.println("undoing");
             redoStack.push(new UserInbox(this.userInbox));
             UserInbox stateToRecover = undoStack.pop();
             resetData(stateToRecover);
+            isLastPerformedActionIsUndo = true;
+            return true;
         }
     }
 
-    public void redo() {
-        System.out.println("Inside redo");
-        if (redoStack.isEmpty()) {
-            //throw some exception
+    public boolean redo() {
+        if (!isLastPerformedActionIsUndo) {
+            System.out.println("should not redo any more");
+            return false;
+        } else if (redoStack.isEmpty()) {
+            return false;
         } else {
-            System.out.println("redoing");
             undoStack.push(new UserInbox(this.userInbox));
             UserInbox stateToRecover = redoStack.pop();
             resetData(stateToRecover);
+            return true;
         }
     }
 
@@ -84,8 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyUserInbox newData) {
         userInbox.resetData(newData);
         indicateUserInboxChanged();
-        prepareListsForUi(); //added
-        System.out.println("Undo performed");
+        prepareListsForUi();
     }
 
     @Override
@@ -114,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.removeTask(target);
         indicateUserInboxChanged();
         prepareListsForUi();
@@ -123,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.addTask(task);
         updateFilteredTaskListToShowAll();
         indicateUserInboxChanged();
@@ -133,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
@@ -142,14 +144,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.markTask(filteredTaskListIndex, markFlag);
         indicateUserInboxChanged();
     }
 
     @Override
     public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.markEvent(filteredEventListIndex, markFlag);
         indicateUserInboxChanged();
     }
@@ -158,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.removeEvent(target);
         indicateUserInboxChanged();
         prepareListsForUi();
@@ -168,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
             throws DuplicateEventException {
         assert editedEvent != null;
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
         indicateUserInboxChanged();
@@ -177,14 +179,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         userInbox.addEvent(event);
         updateFilteredEventListToShowAll();
         indicateUserInboxChanged();
     }
 
     public synchronized void confirmEventTime(int filteredEventListIndex, int timeslotIndex) {
-        undoStack.push(new UserInbox(this.userInbox));
+        saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.confirmEventTime(eventListIndex, timeslotIndex);
         indicateUserInboxChanged();
@@ -192,6 +194,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     public UnmodifiableObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
         return new UnmodifiableObservableList<>(userInbox.getEventsWithOverlappingTimeslots(candidate));
+    }
+
+    private void saveUserInboxStateForUndo() {
+        undoStack.push(new UserInbox(this.userInbox));
+        isLastPerformedActionIsUndo = false;
     }
 
     //=========== Filtered Task List Accessors =============================================================
