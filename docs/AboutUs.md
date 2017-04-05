@@ -47,6 +47,7 @@ Role: Developer <br>
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
 - Other major contributions:
 	- Implementation of CommandLibrary
+	- Two alternative themes: Light and Dark
 	- Oversee other implementations of components in Logic
 
 -----
