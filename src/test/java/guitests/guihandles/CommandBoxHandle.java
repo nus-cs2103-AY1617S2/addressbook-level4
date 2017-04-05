@@ -36,11 +36,15 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
+        // If autocomplete, ensures that command is still entered
+        pressEnter();
         guiRobot.sleep(100); // Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
+        pressEnter();
+        // If autocomplete, ensures that command is still entered
         pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }

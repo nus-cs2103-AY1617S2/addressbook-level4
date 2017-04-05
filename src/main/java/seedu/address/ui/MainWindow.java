@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -268,6 +267,11 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() {
+        // Do nothing on empty command box
+        if (commandTextField.getText().equals("")) {
+            return;
+        }
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             // process result of the command
@@ -286,12 +290,13 @@ public class MainWindow extends UiPart<Region> {
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
         this.commandResult.setText(event.getMessage());
         JFXSnackbar toast = new JFXSnackbar(taskListPanelPlaceholder);
-        EventHandler handler = new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                toast.close();
-            }
-        };
-        toast.show(event.getMessage(), "OK", 4000, handler);
+        // EventHandler handler = new EventHandler() {
+        // @Override
+        // public void handle(Event event) {
+        // toast.close();
+        // }
+        // };
+        // toast.show(event.getMessage(), "OK", 4000, handler);
+        toast.show(event.getMessage(), 4000);
     }
 }
