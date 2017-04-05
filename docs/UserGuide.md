@@ -80,19 +80,19 @@ Format: `list`
 
 ### 2.4. Editing a todo : `edit`
 
-Edits a Todo's title, start time and endtime.<br>
+Edits a Todo's title, start time, endtime, and tags.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits a deadline's endtime with default date.<br>
+Converts a floating todo to a deadline todo with endtime as tomorrow as the default.<br>
 Format: `edit INDEX [e/]`
 
-Edits a event's start time and endtime with default date.<br>
+Converts a floating todo to an event todo with starttime and endtime as today and tomorrow as the default.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
 Format: `edit INDEX [TASK]`
 
-Edits a todo with a new tag.<br>
+Adds a new tag to a todo.<br>
 Format: `edit INDEX [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
