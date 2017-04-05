@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +53,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
+    private static final String ICON_IMG = "/images/onetwodo_icon.png";
+
 
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
@@ -132,7 +135,7 @@ public class MainWindow extends UiPart<Region> {
         loadFonts(scene);
         loadStyleSheets(scene);
         primaryStage.setScene(scene);
-
+        primaryStage.getIcons().add(new Image(ICON_IMG));
         setAccelerators();
     }
 
