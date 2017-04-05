@@ -9,7 +9,7 @@ import seedu.opus.commons.util.StringUtil;
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
-    public static final String COMMAND_FORMAT = "save LOCATION";
+    public static final String COMMAND_FORMAT = "save DIRECTORY";
     public static final String COMMAND_DESCRIPTION = "saves task data at specified location";
     public static final String COMMAND_EXAMPLE = "save data/opus.xml";
 
