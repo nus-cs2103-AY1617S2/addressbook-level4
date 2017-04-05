@@ -10,13 +10,16 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     public static final String MESSAGE_FIND_COMMAND = "find ";
     public static final String MESSAGE_TEST_CLEAR_COMMAND = "clear";
+    public static final String MESSAGE_TEST_DELETE_COMMAND = "delete 1";
+
     public static final String MESSAGE_TEST_FIND_MARK = "find n/Mark";
     public static final String MESSAGE_TEST_FIND_MEIER = "find n/Meier";
     public static final String MESSAGE_TEST_FIND_JEAN = "find n/Jean";
     public static final String MESSAGE_TEST_FIND_PRIORITY = "find p/high";
     public static final String MESSAGE_TEST_FIND_DESCRIPTION = "find d/l";
     public static final String MESSAGE_TEST_FIND_TAG = "find t/owesMoney";
-    public static final String MESSAGE_TEST_DELETE_COMMAND = "delete 1";
+    public static final String MESSAGE_TEST_FIND_STARTTIME = "find s/03/19/17";
+    public static final String MESSAGE_TEST_FIND_ENDTIME = "find e/03/20/17";
     public static final String MESSAGE_TEST_FIND_INVALID = "findn/george";
 
     @Test
@@ -43,6 +46,18 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public void find_tag_nonEmptyList() {
         assertFindResult(MESSAGE_TEST_FIND_TAG, td.benson); // multiple results
     }
+
+    @Test
+    public void find_startTime_nonEmptyList() {
+        assertFindResult(MESSAGE_TEST_FIND_STARTTIME, td.aE, td.bE, td.cE); // multiple results
+    }
+
+    @Test
+    public void find_endTime_nonEmptyList() {
+        assertFindResult(MESSAGE_TEST_FIND_ENDTIME, td.george, td.aE, td.bE, td.cE); // multiple results
+    }
+
+
 
     @Test
     public void find_emptyList() {

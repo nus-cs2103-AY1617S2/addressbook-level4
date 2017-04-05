@@ -8,6 +8,6 @@
 
 <AnchorPane styleClass="anchor-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" promptText="Enter command here..." style="-fx-background-color: #ffccbb;" />
+       <TextField styleClass="command-box-text"  fx:id="commandTextField" onKeyPressed="#handleKeyPress" onAction="#handleCommandInputChanged" promptText="Enter command here..." />
    </children>
 </AnchorPane>

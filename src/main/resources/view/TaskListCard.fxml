@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!-- @@author A0160076L -->
+
+<!-- @@author A0160076L -->
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -10,43 +18,65 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.*?>
 
-
-<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" minHeight="60.0" GridPane.columnIndex="0">
-                    <stylesheets>
-                        <URL value="@DarkTheme.css"/>
-                        <URL value="@Extensions.css"/>
-                    </stylesheets>
-                    <padding>
-                        <Insets bottom="5" left="15" right="5" top="5"/>
-                    </padding>
-                    <children>
-                        <HBox spacing="1" alignment="CENTER_LEFT">
-                            <children>
-                                <HBox>
-                                 <Circle fx:id="labelBullet" styleClass="taglist-item-bullet" radius="5">
-                                        <HBox.margin>
-                                            <Insets left="5.0" right="5.0" top="6.0" />
-                                        </HBox.margin>
-                                    </Circle>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
-                                </HBox>
-                            </children>
-                        </HBox>
-                        <FlowPane fx:id="tags"/>
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description"/>
-                        <Label fx:id="deadline" styleClass="cell_small_label" />
-                    </children>
-                </VBox>
+            <SplitPane dividerPositions="0.7, 0.8" prefHeight="80.0" prefWidth="300.0" GridPane.valignment="CENTER">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="180.0" prefHeight="80.0" prefWidth="210.0">
+                     <children>
+                            <VBox alignment="CENTER_LEFT" minHeight="60.0" prefHeight="65.0">
+                                <stylesheets>
+                                    <URL value="@DarkTheme.css" />
+                                    <URL value="@Extensions.css" />
+                                </stylesheets>
+                                <padding>
+                                    <Insets bottom="5" left="15" right="5" top="10" />
+                                </padding>
+                                <children>
+                                      <HBox minWidth="180.0" prefHeight="25.0" prefWidth="210.0">
+                                         <children>
+                                             <Label fx:id="id" styleClass="cell_big_label" />
+                                             <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+                                         </children>
+                                      </HBox>
+                                    <Label fx:id="description" minWidth="180.0" prefHeight="30.0" styleClass="cell_small_label" text="\$description" />
+                                    <FlowPane fx:id="tags" maxHeight="20.0" minWidth="180.0" />
+                                </children>
+                            </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" maxWidth="102.0" prefWidth="102.0">
+                     <children>
+                        <VBox minWidth="102.0" prefHeight="80.0" prefWidth="102.0">
+                         <padding>
+                                    <Insets bottom="5" left="0" right="0" top="10" />
+                                </padding>
+                           <children>
+                                    <Label fx:id="startTime" styleClass="cell_small_label" />
+                                    <Label fx:id="to" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text=" to " textAlignment="CENTER" />
+                                    <Label fx:id="deadline" styleClass="cell_small_label" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane maxWidth="40.0" minHeight="0.0" minWidth="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="40.0">
+                     <children>
+                              <Circle fx:id="labelBullet" radius="10" styleClass="taglist-item-bullet" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
             </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </children>
 </HBox>

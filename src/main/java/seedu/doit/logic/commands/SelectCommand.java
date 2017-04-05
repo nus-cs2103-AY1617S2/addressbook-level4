@@ -24,17 +24,32 @@ public class SelectCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    private String getMessageToDisplay() {
+        String firstLine = String.format(MESSAGE_SELECT_TASK_SUCCESS, this.targetIndex);
+        ReadOnlyTask task =  this.model.getFilteredTaskList().get(this.targetIndex - 1);
+        String taskDetails = "Name: \t\t\t".concat(task.getName().toString()).concat("\n").
+                concat("Description: \t\t").concat(task.getDescription().toString()).concat("\n").
+                concat("Priority: \t\t\t").concat(task.getPriority().toString()).concat("\n");
+        if (task.hasStartTime()) {
+            taskDetails = taskDetails.concat("Start Time: \t\t").concat(task.getStartTime().toString()).concat("\n");
+        }
+        if (task.hasEndTime()) {
+            taskDetails = taskDetails.concat("End Time: \t\t").concat(task.getDeadline().toString()).concat("\n");
+        }
+        //tag not yet implemented
+        return firstLine.concat("\n\n").concat(taskDetails);
+    }
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = this.model.getFilteredTaskList();
 
-        if (lastShownList.size() < targetIndex) {
+        if (lastShownList.size() < this.targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(this.targetIndex - 1));
+        return new CommandResult(getMessageToDisplay());
 
     }
 

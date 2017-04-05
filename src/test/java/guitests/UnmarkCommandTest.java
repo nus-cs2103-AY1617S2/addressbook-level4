@@ -1,6 +1,8 @@
 // @@author A0139399J
 package guitests;
 
+import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import org.junit.Test;
 
 import seedu.doit.commons.core.Messages;
@@ -31,8 +33,14 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void unmark_task_failure() throws Exception {
-        this.commandBox.runCommand(MESSAGE_MARK_COMMAND + INDEX_UNMARK_INVALID);
+    public void unmark_task_no_index_failure() throws Exception {
+        this.commandBox.runCommand(MESSAGE_UNMARK_COMMAND);
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void unmark_task_invalid_index_failure() throws Exception {
+        this.commandBox.runCommand(MESSAGE_UNMARK_COMMAND + INDEX_UNMARK_INVALID);
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 

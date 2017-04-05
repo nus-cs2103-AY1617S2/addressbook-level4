@@ -1,10 +1,15 @@
 package seedu.doit.ui;
 
+import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -12,31 +17,37 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.doit.commons.core.Config;
 import seedu.doit.commons.core.GuiSettings;
+import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.events.ui.ExitAppRequestEvent;
+import seedu.doit.commons.events.ui.NewResultAvailableEvent;
 import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.Logic;
+import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.UserPrefs;
-
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String ICON = "/images/task_manager.png";
     private static final String FXML = "MainWindow.fxml";
+    private static final String UNDO_COMMAND = "undo";
+    private static final String REDO_COMMAND = "redo";
     private static final int MIN_HEIGHT = 650;
     private static final int MIN_WIDTH = 1100;
 
     private Stage primaryStage;
     private Logic logic;
 
+
     // Independent Ui parts residing in this Ui container
 
     private TaskListPanel taskListPanel;
-
     private EventListPanel eventListPanel;
     private FloatingTaskListPanel fListPanel;
     private Config config;
+    private Scene scene;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -72,9 +83,8 @@ public class MainWindow extends UiPart<Region> {
         setIcon(ICON);
         setWindowMinSize();
         setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
-
+        this.scene = new Scene(getRoot());
+        primaryStage.setScene(this.scene);
         setAccelerators();
     }
 
@@ -84,6 +94,31 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(this.helpMenuItem, KeyCombination.valueOf("F1"));
+        this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            KeyCombination undo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+            KeyCombination redo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+            @Override
+            public void handle(KeyEvent evt) {
+                if (this.undo.match(evt)) {
+                        // handle command failure
+                        try {
+                            MainWindow.this.logic.execute(UNDO_COMMAND);
+                    } catch (CommandException e) {
+                        MainWindow.this.logger.info("Invalid command: " + UNDO_COMMAND);
+                        raise(new NewResultAvailableEvent(e.getMessage()));
+                    }
+                }
+                if (this.redo.match(evt)) {
+                           // handle command failure
+                        try {
+                            MainWindow.this.logic.execute(REDO_COMMAND);
+                    } catch (CommandException e) {
+                        MainWindow.this.logger.info("Invalid command: " + REDO_COMMAND);
+                        raise(new NewResultAvailableEvent(e.getMessage()));
+                    }
+                }
+            }
+        });
     }
 
     /**

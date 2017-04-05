@@ -246,7 +246,7 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(this.name, this.priority, this.endTime, this.description, this.tags);
+        return Objects.hash(this.name, this.priority, this.description, this.tags);
     }
 
     @Override

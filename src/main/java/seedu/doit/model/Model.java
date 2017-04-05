@@ -33,6 +33,11 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /**
+     * Deletes the given task.
+     */
+    void deleteTasks(Set<ReadOnlyTask> targets) throws UniqueTaskList.TaskNotFoundException;
+
+    /**
      * Adds the given task
      */
     void addTask(Task task) throws DuplicateTaskException;
@@ -83,7 +88,7 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> nameKeywords, Set<String> priorityKeywords, Set<String> descriptionKeywords,
-            Set<String> tagKeywords);
+            Set<String> tagKeywords, Set<String> startTimekeywords, Set<String> endTimekeywords);
 
     /**
      * Set how the tasks are sorted

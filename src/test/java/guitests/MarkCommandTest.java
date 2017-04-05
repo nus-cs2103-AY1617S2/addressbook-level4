@@ -15,7 +15,7 @@ import seedu.doit.testutil.TestTask;
 
 public class MarkCommandTest extends TaskManagerGuiTest {
 
-    public static final String MESSAGE_MARK_COMMAND = "mark ";
+    public static final String MESSAGE_MARK_COMMAND = MarkCommand.COMMAND_WORD + " ";
     public static final String MESSAGE_TEST_FIND_COMMAND = "find n/Elle";
 
     public static final int INDEX_MARK_VALID = 2;
@@ -33,6 +33,12 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         TestTask taskToMark = this.expectedTasksList[INDEX_MARK_VALID - 1];
         TestTask markedTask = new TaskBuilder(taskToMark).withIsDone(true).build();
         assertMarkSuccess(INDEX_MARK_VALID, INDEX_MARK_VALID, markedTask);
+    }
+
+    @Test
+    public void mark_task_no_index_failure() throws Exception {
+        this.commandBox.runCommand(MESSAGE_MARK_COMMAND);
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 
     @Test

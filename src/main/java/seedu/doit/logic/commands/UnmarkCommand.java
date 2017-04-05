@@ -1,8 +1,10 @@
 // @@author A0139399J
 package seedu.doit.logic.commands;
 
+import seedu.doit.commons.core.EventsCenter;
 import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
+import seedu.doit.commons.events.ui.JumpToListRequestEvent;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.ReadOnlyTask;
 import seedu.doit.model.item.UniqueTaskList;
@@ -28,19 +30,20 @@ public class UnmarkCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = this.model.getFilteredTaskList();
 
-        if (filteredTaskListIndex <= lastShownTaskList.size()) {
-            ReadOnlyTask taskToUnmark = lastShownTaskList.get(filteredTaskListIndex - 1);
+        if (this.filteredTaskListIndex <= lastShownTaskList.size()) {
+            ReadOnlyTask taskToUnmark = lastShownTaskList.get(this.filteredTaskListIndex - 1);
 
             try {
-                model.unmarkTask(filteredTaskListIndex - 1, taskToUnmark);
+                this.model.unmarkTask(this.filteredTaskListIndex - 1, taskToUnmark);
             } catch (UniqueTaskList.TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(
+                    this.model.getFilteredTaskList().indexOf(taskToUnmark)));
             return new CommandResult(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskToUnmark));
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

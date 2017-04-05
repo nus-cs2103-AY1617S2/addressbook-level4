@@ -81,11 +81,6 @@ public class StartTime implements Comparable<StartTime> {
     }
 
     @Override
-    public int hashCode() {
-        return this.value.hashCode();
-    }
-
-    @Override
     public int compareTo(StartTime other) {
         return this.value.compareTo(other.value);
     }

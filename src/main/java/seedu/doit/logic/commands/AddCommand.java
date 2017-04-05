@@ -107,7 +107,7 @@ public class AddCommand extends Command {
      *
      * @param startTime Start Time of Event
      * @param endTime   End Time of Event
-     * @return boolean return
+     * @return boolean return is start time earlier than end time.
      */
     private boolean isStartTimeEarlier(LocalDateTime startTime, LocalDateTime endTime) {
         return startTime.isBefore(endTime);

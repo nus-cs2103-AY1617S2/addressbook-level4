@@ -3,6 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import seedu.doit.logic.commands.HelpCommand;
 
 /**
  * A handle to the Command Box in the GUI.
@@ -19,7 +20,7 @@ public class CommandBoxHandle extends GuiHandle {
      * Clicks on the TextField.
      */
     public void clickOnTextField() {
-        guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
+        this.guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
     }
 
     public void enterCommand(String command) {
@@ -36,16 +37,34 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(200); //Give time for the command to take effect
+        this.guiRobot.sleep(200); // Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
-        enterCommand("help");
+        enterCommand(HelpCommand.COMMAND_WORD);
         pressEnter();
-        return new HelpWindowHandle(guiRobot, primaryStage);
+        return new HelpWindowHandle(this.guiRobot, this.primaryStage);
+    }
+
+    public HelpWindowHandle runNewHelpCommand(String newHelp) {
+        enterCommand(newHelp);
+        pressEnter();
+        return new HelpWindowHandle(this.guiRobot, this.primaryStage);
     }
 
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
     }
+
+    // @@author A0138909R
+    public void clickUpInTextField() {
+        clickOnTextField();
+        pressUp();
+    }
+
+    public void clickDownInTextField() {
+        clickOnTextField();
+        pressDown();
+    }
+    // @@author
 }
