@@ -32,7 +32,8 @@ public class RemoveDeadlineCommandTest extends AddressBookGuiTest {
     private void assertRemovedeadlineSuccess(int editedIndex) throws IllegalValueException {
         String emptyDate = "";
         TestTask expectedResult =
-                new TaskBuilder().withName("Alice Pauline").withDate("").withEndDate("").withCompleted(false).withPriority("Low").build();
+                new TaskBuilder().withName("Alice Pauline").withDate("").withEndDate("").withCompleted(false).
+                        withPriority("Low").build();
 
         commandBox.runCommand(REMOVEDEADLINE_COMMAND + " " + editedIndex);
         assertResultMessage(String.format(RemoveDeadlineCommand.MESSAGE_EDIT_TASK_SUCCESS, expectedResult));
