@@ -174,7 +174,7 @@ public class DateParser {
     }
 
     private static int getHour(String date) {
-         if (date.indexOf(" ") == -1) {
+        if (date.indexOf(" ") == -1) {
             return 0;
         } else {
             String time = date.substring(date.indexOf(" ") + 1);
