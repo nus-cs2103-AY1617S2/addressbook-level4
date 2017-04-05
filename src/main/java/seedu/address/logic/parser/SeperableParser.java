@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 
+//@@author A0144422R
 public class SeperableParser {
 
     protected static final int NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE = 2;

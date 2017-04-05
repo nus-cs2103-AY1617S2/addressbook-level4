@@ -374,17 +374,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday,
             ObservableList<ReadOnlyTask> taskListFuture,
-<<<<<<< Updated upstream
-=======
-            ObservableList<ReadOnlyTask> taskListCompleted) {
-        splitTaskList(taskListToday, taskListFuture, taskListCompleted);
-        sortTaskList(taskListToday, taskListFuture, taskListCompleted);
-        assignUiIndex(taskListToday, taskListFuture, taskListCompleted);
-    }
-
-    private void splitTaskList(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
->>>>>>> Stashed changes
             ObservableList<ReadOnlyTask> taskListCompleted) {
         ObservableList<ReadOnlyTask> taskList = getFilteredTaskList();
         taskListToday.clear();
@@ -396,7 +385,8 @@ public class ModelManager extends ComponentManager implements Model {
         ArrayList<ReadOnlyTask> futureTempList = new ArrayList<ReadOnlyTask>();
         ArrayList<ReadOnlyTask> completedTempList = new ArrayList<ReadOnlyTask>();
 
-        splitTaskList(taskList, todayTempList, futureTempList, completedTempList);
+        splitTaskList(taskList, todayTempList, futureTempList,
+                completedTempList);
         sortTaskLists(todayTempList, futureTempList, completedTempList);
         assignUiIndex(todayTempList, futureTempList, completedTempList);
 
@@ -406,8 +396,10 @@ public class ModelManager extends ComponentManager implements Model {
         taskListCompleted.addAll(completedTempList);
     }
 
-    private void splitTaskList(ObservableList<ReadOnlyTask> taskList, ArrayList<ReadOnlyTask> todayTempList,
-            ArrayList<ReadOnlyTask> futureTempList, ArrayList<ReadOnlyTask> completedTempList) {
+    private void splitTaskList(ObservableList<ReadOnlyTask> taskList,
+            ArrayList<ReadOnlyTask> todayTempList,
+            ArrayList<ReadOnlyTask> futureTempList,
+            ArrayList<ReadOnlyTask> completedTempList) {
         ListIterator<ReadOnlyTask> iter = taskList.listIterator();
         while (iter.hasNext()) {
             ReadOnlyTask tmpTask = iter.next();
@@ -427,29 +419,17 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-<<<<<<< Updated upstream
-    private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList, ArrayList<ReadOnlyTask> futureTempList,
+    private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList,
+            ArrayList<ReadOnlyTask> futureTempList,
             ArrayList<ReadOnlyTask> completedTempList) {
         todayTempList.sort(TaskDatetimeComparator);
         futureTempList.sort(TaskDatetimeComparator);
         completedTempList.sort(TaskDatetimeComparator);
     }
 
-    private void assignUiIndex(ArrayList<ReadOnlyTask> taskListToday, ArrayList<ReadOnlyTask> taskListFuture,
+    private void assignUiIndex(ArrayList<ReadOnlyTask> taskListToday,
+            ArrayList<ReadOnlyTask> taskListFuture,
             ArrayList<ReadOnlyTask> taskListCompleted) {
-=======
-    private void sortTaskList(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
-            ObservableList<ReadOnlyTask> taskListCompleted) {
-        taskListToday.sort(TaskDatetimeComparator);
-        taskListFuture.sort(TaskDatetimeComparator);
-        taskListCompleted.sort(TaskDatetimeComparator);
-    }
-
-    private void assignUiIndex(ObservableList<ReadOnlyTask> taskListToday,
-            ObservableList<ReadOnlyTask> taskListFuture,
-            ObservableList<ReadOnlyTask> taskListCompleted) {
->>>>>>> Stashed changes
         // TODO potential performance bottleneck here
         indexMap.clear();
         // initialise displayed index

@@ -32,6 +32,9 @@ public class CliSyntax {
     public static final String STARTING_TIME = "from";
     public static final String DEADLINE = "to";
 
+    public static final int DEADLINE_INDEX = 1;
+    public static final int STARTING_INDEX = 0;
+
     public static final String TAGS = "(?:^|\\s)(#\\S*)";
 
     public static final String DEFAULT_DEADLINE = " at 2359";

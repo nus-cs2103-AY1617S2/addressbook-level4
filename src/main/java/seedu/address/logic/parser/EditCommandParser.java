@@ -60,10 +60,10 @@ public class EditCommandParser extends SeperableParser {
         // from <starting time> to <deadline>"
         List<Date> startingTimeAndDeadline = getStartingTimeAndDeadline();
         if (startingTimeAndDeadline != null) {
-            editTaskDescriptor.setStartingTime(
-                    Optional.of(new DateTime(startingTimeAndDeadline.get(0))));
-            editTaskDescriptor.setDeadline(
-                    Optional.of(new DateTime(startingTimeAndDeadline.get(1))));
+            editTaskDescriptor.setStartingTime(Optional.of(new DateTime(
+                    startingTimeAndDeadline.get(CliSyntax.STARTING_INDEX))));
+            editTaskDescriptor.setDeadline(Optional.of(new DateTime(
+                    startingTimeAndDeadline.get(CliSyntax.DEADLINE_INDEX))));
         } else {
             // find and remove starting time and deadline if the syntax is
             // "<name> due <deadline>"
