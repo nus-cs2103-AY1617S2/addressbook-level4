@@ -84,24 +84,24 @@ Edits a Todo's title, start time and endtime.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
 Edits a Todo's name and deadline.<br>
-Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
+Format: `edit INDEX [TASK] [e/DEADLINE]`
 
-Adds a deadline.<br>
+Edits a deadline's endtime.<br>
 Format: `edit INDEX [e/DEADLINE]`
 
-Adds a deadline with default date.<br>
+Edits a deadline's endtime with default date.<br>
 Format: `edit INDEX [e/]`
 
-Adds a start time and endtime.<br>
+Edits a event's starttime and endtime.<br>
 Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
 
-Adds a event and with default date.<br>
+Edits a event's starttime and endtime with default date.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
-Format: `edit INDEX [TASK] [t/TAG]`
+Format: `edit INDEX [TASK]`
 
-Add a tag.<br>
+Edits a todo with a new tag.<br>
 Format: `edit INDEX [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
@@ -110,6 +110,8 @@ Format: `edit INDEX [ta/TAG]`
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * Edit with `t/` may replace all the previous tags with new assigned tags.
+> * Edit command will replace the todo with all parameters specified by the command and change todo's type.
+e.g. if you don't specified starttime and endtime for an event, the event will become a task after the edit command.
 
 Examples:
 
@@ -236,25 +238,25 @@ Examples:
 * **Add Task** : `add TASK` <br>
   e.g. `add Finish math homework`
 
-* **Add Task With Tag** : `add TASK t/TAG` <br>
-  e.g. `add Finish math homework t/school`
+* **Add Task With Tag** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_2 t/school`
 
-* **Add Task With Multiple Tags** : `add TASK t/TAG1 t/TAG2 t/TAG3 ...` <br>
-  e.g. `add Finish math homework t/school t/boring t/difficult`
+* **Add Task With Multiple Tags** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_3 t/school t/boring`
 
-* **Add Event** : `add TODO s/STARTTIME e/ENDTIME t/TAG` <br>
+* **Add Event** : `add TODO s/STARTTIME e/ENDTIME [t/TAG]` <br>
   e.g. `add Take the dog for a walk s/6:00PM 11/11/17 e/7:00PM 11/11/17`
 
-* **Add Deadline** : `add TODO e/DEADLINE t/TAG` <br>
+* **Add Deadline** : `add TODO e/DEADLINE [t/TAG]` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`
 
-* **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
+* **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
 
-* **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME t/TAGS` <br>
+* **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
 
-* **Edit New Tags** : `edit INDEX ta/TAG1 ta/TAG2 ta/TAG3 ...` <br>
+* **Edit New Tags** : `edit INDEX [ta/TAG]` <br>
   e.g. `edit 1 ta/cat ta/pet ta/cute`
 
 * **Clear** : `clear` <br>
