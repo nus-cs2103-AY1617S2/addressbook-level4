@@ -494,12 +494,13 @@ public class Task implements Comparable<Task>, Cloneable {
      * @param keyword to sort by
      * @return true if sorting order changes / false if not
      */
-    public static boolean sortBy(String keyword) {
+    public static String[] sortBy(String keyword) {
         if (keyword.equals(CATEGORY_DEFAULT)) {
             sortingOrder = new LinkedList<String>(Arrays.asList(defaultSortOrder));
-            return true;
+        } else {
+            updateSortingOrder(keyword);
         }
-        return updateSortingOrder(keyword);
+        return sortingOrder.toArray(new String[sortingOrder.size()]);
     }
 
     private static boolean updateSortingOrder(String keyword) {

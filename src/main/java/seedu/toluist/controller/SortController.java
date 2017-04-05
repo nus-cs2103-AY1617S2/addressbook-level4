@@ -1,6 +1,8 @@
 //@@author A0162011A
 package seedu.toluist.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -18,8 +20,7 @@ import seedu.toluist.ui.commons.CommandResult;
  * Sort Controller is responsible for changing the order of the displayed tasks
  */
 public class SortController extends Controller {
-    private static final String RESULT_MESSAGE_ALREADY_SORTED = "List is already sorted by %s!";
-    private static final String RESULT_MESSAGE_SUCCESS = "List is now sorted by %s.";
+    private static final String RESULT_MESSAGE = "List is now sorted by %s.";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*sort.*";
     private static final String COMMAND_WORD = "sort";
     private static final String WORD_BY = "by";
@@ -46,26 +47,32 @@ public class SortController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().toString() + " will handle command");
 
-        String keyword = tokens.get(PARAMETER_CATEGORY);
-        if (keyword.equals(StringUtil.EMPTY_STRING)) {
+        String keywords = tokens.get(PARAMETER_CATEGORY);
+        if (keywords.equals(StringUtil.EMPTY_STRING)) {
             UiStore.getInstance().setCommandResult(new CommandResult("Invalid format"));
             return;
         }
-        if (!isKeywordInCategoryList(keyword)) {
-            UiStore.getInstance().setCommandResult(new CommandResult("Invalid parameter"));
-            return;
-        }
+        ArrayList<String> keywordList = new ArrayList<String>(Arrays.asList(StringUtil.convertToArray(keywords)));
+        ArrayList<String> invalidKeywords = new ArrayList<String>();
+        removeInvalidKeywords(keywordList, invalidKeywords);
 
-        if (Task.sortBy(keyword.toLowerCase())) { //returns true if successful
-            UiStore.getInstance().setCommandResult(new CommandResult(
-                    String.format(RESULT_MESSAGE_SUCCESS, keyword)));
-        } else {
-            UiStore.getInstance().setCommandResult(new CommandResult(
-                    String.format(RESULT_MESSAGE_ALREADY_SORTED, keyword)));
+        String[] resultantOrder = {};
+        for (int i = keywordList.size() - 1; i >= 0; i--) {
+            resultantOrder = Task.sortBy(keywordList.get(i).toLowerCase());
         }
-
 
         uiStore.setTasks(TodoList.getInstance().getTasks());
+        uiStore.setCommandResult(new CommandResult(
+                String.format(RESULT_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, resultantOrder))));
+    }
+
+    private void removeInvalidKeywords(ArrayList<String> keywordList, ArrayList<String> invalidKeywords) {
+        for (String keyword : keywordList) {
+            if (!isKeywordInCategoryList(keyword)) {
+                keywordList.remove(keyword);
+                invalidKeywords.add(keyword);
+            }
+        }
     }
 
     private boolean isKeywordInCategoryList(String keyword) {
