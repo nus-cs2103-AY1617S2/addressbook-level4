@@ -14,6 +14,9 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.ListCommand.ListCommandOption;
 
+/**
+ * Parses input arguments for the list command and creates a new ListCommand object
+ */
 public class ListCommandParser {
     private static final String EMPTY_STRING = "";
     private ListCommandOption commandOption;

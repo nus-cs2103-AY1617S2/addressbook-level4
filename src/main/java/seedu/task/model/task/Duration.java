@@ -7,6 +7,10 @@ import java.util.Objects;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.util.DateParser;
 
+/**
+ * Represents a Task's duration in the task list. Uses a start and end date
+ * Guarantees: immutable; start date is before end date.
+ */
 public class Duration {
     public static final String START_DATE_AFTER_END_DATE =
             "The start date of a duration must be before the end date";

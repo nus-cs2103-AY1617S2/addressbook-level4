@@ -1,6 +1,10 @@
 //@@author A0163744B
 package seedu.task.model.task;
 
+/**
+ * Represents a Task's id.
+ * Guarantees: immutable.
+ */
 public class TaskId {
     public final long id;
 

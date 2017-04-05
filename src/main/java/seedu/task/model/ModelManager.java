@@ -215,6 +215,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0163744B
+    /**
+     * A qualifier to filter {@code ReadOnlyTask}s by their complete status.
+     */
     private class CompletionQualifier implements Qualifier {
         private boolean isComplete;
 
@@ -236,6 +239,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * A comparator to compare {@code ReadOnlyTask}s by id.
+     */
     private class TaskIdComparator implements Comparator<ReadOnlyTask> {
 
         /**
@@ -258,6 +264,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    /**
+     * A comparator to compare {@code ReadOnlyTask}s by due date.
+     */
     private class TaskDueComparator implements Comparator<ReadOnlyTask> {
 
         /**
@@ -285,6 +294,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * A comparator to compare {@code ReadOnlyTask}s by start date.
+     */
     private class TaskStartComparator implements Comparator<ReadOnlyTask> {
 
         /**
@@ -312,6 +324,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * A comparator to compare {@code ReadOnlyTask}s by end date.
+     */
     private class TaskEndComparator implements Comparator<ReadOnlyTask> {
 
         /**

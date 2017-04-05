@@ -5,6 +5,11 @@ import java.util.Calendar;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
+/**
+ * A utility class that hold functions to deal with date strings. This includes parsing
+ * different formats of input date strings to {@code Calendar} objects and String representations
+ * for {@code Calendar} dates.
+ */
 public class DateParser {
     public static final String DATE_STRING_ILLEGAL_FORMAT =
             "String must be of the form DD/MM/YYYY HHMM, or day_of_week|today|tomorrow HHMM";
