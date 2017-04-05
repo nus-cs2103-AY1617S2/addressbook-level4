@@ -24,7 +24,7 @@ import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
- * Contains methods related to system tray notifications. 
+ * Contains methods related to system tray notifications.
  *
  */
 public class NotificationManager {
@@ -32,7 +32,7 @@ public class NotificationManager {
     public static final int EVENT_TYPE = 0;
     public static final int DEADLINE_TYPE = 1;
     public static final int REMOVE_SECONDS_OFFSET = 3;
-    
+
     private Logic logic;
     private Timer notificationTimer;
 
@@ -98,7 +98,8 @@ public class NotificationManager {
     }*/
 
     /**
-     * Converts the time of the given object to 2 hours before it with a 3 seconds offset (1hour 59minutes and 57 seconds).
+     * Converts the time of the given object to 2 hours before it with a 3 seconds
+     * offset (1hour 59minutes and 57 seconds).
      * @param dateTime: The object to modify the time to 2 hours before.
      * @return a Date object which is 2 hours before the parsed in DateTime object's time.
      */
@@ -124,13 +125,14 @@ public class NotificationManager {
      * Shows a notification from the system tray.
      * @param task: The task that is being notified about.
      */
-    private void showSystemTrayNotification(ReadOnlyTask task, int type) throws AWTException, java.net.MalformedURLException {
+    private void showSystemTrayNotification(ReadOnlyTask task, int type)
+            throws AWTException, java.net.MalformedURLException {
         SystemTray tray = SystemTray.getSystemTray();
         ImageIcon icon = new ImageIcon(getClass().getResource("/images/info_icon.png"));
         java.awt.Image image = icon.getImage();
         TrayIcon trayIcon = new TrayIcon(image, "notification");
         trayIcon.setImageAutoSize(true);
-        
+
         String displayMsg = "";
         if (type == DEADLINE_TYPE) {
             trayIcon.setToolTip(task.getName().fullName + " is due in 2Hrs.");
