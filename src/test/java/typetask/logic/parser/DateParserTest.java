@@ -28,13 +28,13 @@ public class DateParserTest {
     public void resetTime_success() {
         String expectedResult = "Mon Apr 10 23:59:59 SGT 2017";
         List<Date> actualResult = DateParser.parse(dateString);
-        assertEquals(actualResult.get(wantedDate).toString(), expectedResult); 
+        assertEquals(actualResult.get(wantedDate).toString(), expectedResult);
     }
-    @Test(expected= AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void parseDate_nullInput_throwsAssertionError() {
         DateParser.parse(null);
     }
-    @Test(expected= AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void parseDate_emptyInput_throwsAssertionError() {
         DateParser.parse("");
     }
