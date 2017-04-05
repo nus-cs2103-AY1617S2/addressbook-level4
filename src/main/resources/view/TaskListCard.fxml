@@ -52,9 +52,9 @@
                             </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" maxWidth="90.0" prefWidth="90.0">
+                  <AnchorPane fx:id="time" Style="-fx-background-color:transparent" maxHeight="80.0" maxWidth="102.0" prefWidth="102.0">
                      <children>
-                        <VBox minWidth="100.0" prefHeight="80.0" prefWidth="100.0">
+                        <VBox minWidth="102.0" prefHeight="80.0" prefWidth="102.0">
                          <padding>
                                     <Insets bottom="5" left="0" right="0" top="10" />
                                 </padding>
