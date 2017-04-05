@@ -503,6 +503,10 @@ public class Task implements Comparable<Task>, Cloneable {
         return sortingOrder.toArray(new String[sortingOrder.size()]);
     }
 
+    public static String[] getCurrentSort() {
+        return sortingOrder.toArray(new String[sortingOrder.size()]);
+    }
+
     private static boolean updateSortingOrder(String keyword) {
         if (sortingOrder.indexOf(keyword) == START_OF_ARRAY_INDEX) {
             return false;

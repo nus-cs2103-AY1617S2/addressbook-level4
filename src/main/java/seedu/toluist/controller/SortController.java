@@ -20,7 +20,8 @@ import seedu.toluist.ui.commons.CommandResult;
  * Sort Controller is responsible for changing the order of the displayed tasks
  */
 public class SortController extends Controller {
-    private static final String RESULT_MESSAGE = "List is now sorted by %s.";
+    private static final String RESULT_MESSAGE = "List is now sorted by: %s.";
+    private static final String ERROR_MESSAGE = "Unable to sort by: %s";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*sort.*";
     private static final String COMMAND_WORD = "sort";
     private static final String WORD_BY = "by";
@@ -56,22 +57,37 @@ public class SortController extends Controller {
         ArrayList<String> invalidKeywords = new ArrayList<String>();
         removeInvalidKeywords(keywordList, invalidKeywords);
 
-        String[] resultantOrder = {};
-        for (int i = keywordList.size() - 1; i >= 0; i--) {
-            resultantOrder = Task.sortBy(keywordList.get(i).toLowerCase());
-        }
+        sortByKeywords(keywordList);
 
+        displayResult(invalidKeywords);
+    }
+
+    private void displayResult(ArrayList<String> invalidKeywords) {
+        String[] resultantOrder = Task.getCurrentSort();
+        String resultMessage = StringUtil.EMPTY_STRING;
+        if (invalidKeywords.size() != 0) {
+            resultMessage += String.format(ERROR_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords));
+            resultMessage += StringUtil.NEW_LINE;
+        }
+        resultMessage += String.format(RESULT_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, resultantOrder));
         uiStore.setTasks(TodoList.getInstance().getTasks());
-        uiStore.setCommandResult(new CommandResult(
-                String.format(RESULT_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, resultantOrder))));
+        uiStore.setCommandResult(new CommandResult(resultMessage));
+    }
+
+    private void sortByKeywords(ArrayList<String> keywordList) {
+        for (int i = keywordList.size() - 1; i >= 0; i--) {
+            Task.sortBy(keywordList.get(i).toLowerCase());
+        }
     }
 
     private void removeInvalidKeywords(ArrayList<String> keywordList, ArrayList<String> invalidKeywords) {
         for (String keyword : keywordList) {
             if (!isKeywordInCategoryList(keyword)) {
-                keywordList.remove(keyword);
                 invalidKeywords.add(keyword);
             }
+        }
+        for (String keyword : invalidKeywords) {
+            keywordList.remove(keyword);
         }
     }
 
