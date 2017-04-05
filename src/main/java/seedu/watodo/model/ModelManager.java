@@ -222,6 +222,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139872R
+    /**
+     * Returns true if the tasks are within the specified range and is undone.
+     */
     private class DateQualifier implements Qualifier {
         private DateTime start = null;
         private DateTime end = null;
@@ -260,6 +263,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * Returns true if the type of the tasks matches the specified type.
+     */
     private class TypeQualifier implements Qualifier {
         private String type;
 

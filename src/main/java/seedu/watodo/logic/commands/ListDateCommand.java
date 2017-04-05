@@ -9,7 +9,7 @@ import seedu.watodo.model.task.DateTime;
  */
 public class ListDateCommand extends ListCommand {
 
-    public static final String MESSAGE_SUCCESS = "Lists all tasks scheduled on the range of dates specified";
+    public static final String MESSAGE_SUCCESS = "Lists all tasks scheduled within the range of dates specified";
 
     DateTime start = null;
     DateTime end = null;
