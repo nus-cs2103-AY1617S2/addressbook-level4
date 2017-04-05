@@ -47,7 +47,9 @@ public class HotkeyManager {
      * Bind show/hide (toggle) hotkey
      */
     private void bindToggleSystemHotkey() {
-        hotkeyManager = Provider.getCurrentProvider(false);
+        if (hotkeyManager != null) {
+            hotkeyManager = Provider.getCurrentProvider(false);
+        }
         hotkeyManager.register(KeyStroke.getKeyStroke(hotkeyCombination), new HotKeyListener() {
             public void onHotKey(HotKey hotKey) {
                 System.out.println(hotKey);
@@ -72,7 +74,9 @@ public class HotkeyManager {
      * Bind lucky draw notification trigger hotkey
      */
     private void bindTriggerNotificationHotkey() {
-        hotkeyManager = Provider.getCurrentProvider(false);
+        if (hotkeyManager != null) {
+            hotkeyManager = Provider.getCurrentProvider(false);
+        }
         hotkeyManager.register(KeyStroke.getKeyStroke(LUCKY_DRAW_NOTIFICATION_COMBINATION), new HotKeyListener() {
             public void onHotKey(HotKey hotKey) {
                 System.out.println(hotKey);
