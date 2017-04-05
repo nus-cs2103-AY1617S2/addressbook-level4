@@ -40,7 +40,7 @@ public class ClearCommand extends Command {
         if ("all".equals(cmd)) {
             model.resetData(new TaskManager());
         } else {
-            ArrayList<ReadOnlyTask> listOfTasks = model.clearDone();
+            ArrayList<ReadOnlyTask> listOfTasks = model.getAllDoneTasks();
             deleteBulkTasks(listOfTasks);
         }
     }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -129,30 +130,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
   //@@author A0138377U
-    public String getCName(int task) {
-        return filteredTasks.get(task).getName().toString();
-    }
 
-    public long getCTime(int task) {
-        try {
-            return filteredTasks.get(task).getDeadline().date.getBeginning().getTime();
-        } catch (NullPointerException e) {
-            return Long.MAX_VALUE;
+    public ArrayList<ReadOnlyTask> getList() {
+        ArrayList<ReadOnlyTask> listOfTasks = new ArrayList<>();
+        for (ReadOnlyTask task : filteredTasks) {
+            listOfTasks.add(task);
         }
+        return listOfTasks;
     }
 
-    public void exchange (int i, int j) {
-        ReadOnlyTask temp = filteredTasks.get(i);
-        temp = new Task(temp.getName(), temp.getDeadline(), temp.getDescription(), temp.getTags());
-        taskManager.updateTask(i, filteredTasks.get(j));
-        taskManager.updateTask(j, temp);
+    public void setList(ObservableList<ReadOnlyTask> listOfTasks) {
+        filteredTasks = new FilteredList<>(listOfTasks);
+        taskManager.setTasks(listOfTasks);
+        int a = 0;
     }
 
     public int getFilteredTasksSize () {
         return filteredTasks.size();
     }
 
-    public ArrayList<ReadOnlyTask> clearDone() {
+    public ArrayList<ReadOnlyTask> getAllDoneTasks() {
         ArrayList<ReadOnlyTask> listOfTasks = new ArrayList<>();
         for (ReadOnlyTask task : new FilteredList<>(this.taskManager.getTaskList())) {
             if (task.getStatus().status.equals("Done")) {
