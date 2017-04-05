@@ -153,7 +153,6 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(int addIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
         taskManager.addTask(addIndex, task);
-        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
@@ -164,6 +163,12 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public synchronized boolean isBlockedOutTime(Task task) throws UniqueTaskList.DuplicateTaskException {
+        saveInstance();
+        return taskManager.isBlockedOutTime(task);
     }
 
     @Override

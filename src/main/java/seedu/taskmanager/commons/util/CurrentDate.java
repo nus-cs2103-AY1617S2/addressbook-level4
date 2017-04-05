@@ -281,6 +281,44 @@ public class CurrentDate {
         return updatedDate;
     }
 
+    public static int isDateWithin(String date, String startDate, String endDate) {
+        String[] dmy = date.trim().split("/");
+        int day = Integer.parseInt(dmy[0]);
+        int month = Integer.parseInt(dmy[1]);
+        int year = Integer.parseInt(dmy[2]);
+
+        String[] dmyStart = startDate.trim().split("/");
+        int dayStart = Integer.parseInt(dmyStart[0]);
+        int monthStart = Integer.parseInt(dmyStart[1]);
+        int yearStart = Integer.parseInt(dmyStart[2]);
+
+        String[] dmyEnd = endDate.trim().split("/");
+        int dayEnd = Integer.parseInt(dmyEnd[0]);
+        int monthEnd = Integer.parseInt(dmyEnd[1]);
+        int yearEnd = Integer.parseInt(dmyEnd[2]);
+
+        if (year < yearEnd && yearStart < year) {
+            return 1;
+        } else {
+            if (year == yearEnd && year == yearStart) {
+                if (month < monthEnd && monthStart < month) {
+                    return 1;
+                } else {
+                    if (month == monthEnd && month == monthStart) {
+                        if (day < dayEnd && dayStart < day) {
+                            return 1;
+                        } else {
+                            if (day == dayEnd && dayStart == day) {
+                                return 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
     public static boolean isValidDate(String date) {
         String[] dmy = date.trim().split("/");
         int day = Integer.parseInt(dmy[0]);

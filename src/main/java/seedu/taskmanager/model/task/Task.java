@@ -2,7 +2,9 @@ package seedu.taskmanager.model.task;
 
 import java.util.Objects;
 
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
@@ -149,6 +151,38 @@ public class Task implements ReadOnlyTask {
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    public boolean isWithinStartEndDuration(Task t) {
+
+        if (this.startDate.equals(t.startDate) && this.endDate.equals(t.endDate)) {
+            if (this.startDate.equals(t.endDate)) {
+                if ((this.startTime.laterThan(t.startTime) && t.endTime.laterThan(this.startTime))
+                        || (this.endTime.laterThan(t.startTime) && t.endTime.laterThan(this.endTime))) {
+                    return true;
+                }
+            } else if (this.startDate.equals(t.endDate)) {
+                if (t.endTime.laterThan(this.startTime)) {
+                    return true;
+                }
+            } else if (this.endDate.equals(t.startDate)) {
+                if (this.endTime.laterThan(t.startTime)) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        else {
+            if ((CurrentDate.isDateWithin(this.startDate.value, t.startDate.value, t.endDate.value) == 1)
+                    || (CurrentDate.isDateWithin(this.endDate.value, t.startDate.value, t.endDate.value) == 1)
+                    || (CurrentDate.isDateWithin(t.startDate.value, this.startDate.value, this.endDate.value) == 1)
+                    || (CurrentDate.isDateWithin(t.endDate.value, this.startDate.value, this.endDate.value) == 1)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // @@author A0142418L

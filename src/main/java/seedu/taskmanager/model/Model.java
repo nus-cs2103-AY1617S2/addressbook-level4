@@ -99,4 +99,6 @@ public interface Model {
 
     void unmarkTask(int filteredTaskListIndex) throws DuplicateTaskException;
 
+    boolean isBlockedOutTime(Task task) throws DuplicateTaskException;
+
 }

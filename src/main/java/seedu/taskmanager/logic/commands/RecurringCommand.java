@@ -107,7 +107,7 @@ public class RecurringCommand extends Command {
                 String.format(MESSAGE_RECURRING_TASK_SUCCESS, String.valueOf(numberOfRecurrence), " number of times"));
     }
 
-    private String getNewDate(int loops, String typeOfRecurrence, String existingDate) {
+    public static String getNewDate(int loops, String typeOfRecurrence, String existingDate) {
         String[] dmy = existingDate.trim().split("/");
         int day = Integer.parseInt(dmy[0]);
         int month = Integer.parseInt(dmy[1]);
