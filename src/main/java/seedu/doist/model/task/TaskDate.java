@@ -126,19 +126,25 @@ public class TaskDate {
     }
 
     /**
-     * Method that returns 1 if the parameter lies within this tasks dates,
-     * or there is some overlap i.e, the task's startDate > parameter's startDate
-     * or the task's endDate < parameter's endDate
+     * Method that returns 1 if this tasks dates lies within the parameter,
+     * or there is some overlap i.e, the parameter's startDate < task's startDate
+     * or the parameter's endDate > task's endDate
      * @param dates
      * @return 1 if overlapping dates, else 0
      */
     public int compareTo(TaskDate dates) {
-        if (this.startDate.compareTo(dates.getStartDate()) >= 0) {
-            return 1;
-        } else if (this.endDate.compareTo(dates.getEndDate()) <= 0) {
-            return 1;
-        } else {
+        if (dates == null || dates.getStartDate() == null ||
+                dates.getEndDate() == null || this.startDate == null
+                || this.endDate == null) {
             return 0;
+        } else if (this.startDate.compareTo(dates.getStartDate()) < 0 &&
+                this.endDate.compareTo(dates.getEndDate()) < 0) {
+            return 0;
+        } else if (this.startDate.compareTo(dates.getStartDate()) > 0 &&
+                this.endDate.compareTo(dates.getEndDate()) > 0) {
+            return 0;
+        } else {
+            return 1;
         }
     }
 }
