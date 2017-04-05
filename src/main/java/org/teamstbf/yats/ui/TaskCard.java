@@ -33,25 +33,32 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyEvent person, int displayedIndex, String FXML) {
+    public TaskCard(ReadOnlyEvent task, int displayedIndex, String FXML) {
 	super(FXML);
-	name.setText(person.getTitle().fullName);
+	name.setText(task.getTitle().fullName);
 	id.setText(displayedIndex + ". ");
-	loc.setText(person.getLocation().value);
-	description.setText(person.getDescription().value);
-	if (person.hasStartEndTime()) {
-	    startTime.setText(person.getStartTime().toString() + " - ");
-	    endTime.setText(person.getEndTime().toString());
-	} else {
-	    startTime.setText("");
-	    endTime.setText("");
-	}
-	if (person.hasDeadline()) {
-	    deadline.setText(" by " + person.getDeadline().toString());
-	} else {
+	loc.setText(task.getLocation().value);
+	description.setText(task.getDescription().value);
+	if (task.isRecurring()) {
+	    startTime.setText(task.getRecurrence().getLatestUndoneString());
+	    endTime.setText(task.getRecurrence().getPeriodicity());
 	    deadline.setText("");
+	    //TODO show next undone occurence? show start date together?
+	} else {
+	    if (task.hasStartEndTime()) {
+	        startTime.setText(task.getStartTime().toString() + " - ");
+	        endTime.setText(task.getEndTime().toString());
+	    } else {
+	        startTime.setText("");
+	        endTime.setText("");
+	    }
+	    if (task.hasDeadline()) {
+	        deadline.setText(" by " + task.getDeadline().toString());
+	    } else {
+	        deadline.setText("");
+	    }
 	}
-	initTags(person);
+	initTags(task);
     }
 
     private void initTags(ReadOnlyEvent person) {

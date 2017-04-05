@@ -43,15 +43,19 @@ public class MarkDoneCommand extends Command {
 
 	ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
 	Event markedTask = new Event(taskToMark);
-	if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
-	    return new CommandResult(MESSAGE_ALR_MARKED);
-	}
-	try {
-	    markedTask.getIsDone().markDone();
-	    model.updateEvent(targetIndex, markedTask);
-	} catch (UniqueEventList.DuplicateEventException dpe) {
-	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	}
+    if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
+        return new CommandResult(MESSAGE_ALR_MARKED);
+    }
+    try {
+        if (markedTask.isRecurring()) {
+            markedTask.markDone();
+        } else {
+            markedTask.getIsDone().markDone();
+        }        
+        model.updateEvent(targetIndex, markedTask);
+    } catch (UniqueEventList.DuplicateEventException dpe) {
+        throw new CommandException(MESSAGE_DUPLICATE_TASK);
+    }
 	model.updateFilteredListToShowAll();
 	markedTask.setPriority(0);
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));

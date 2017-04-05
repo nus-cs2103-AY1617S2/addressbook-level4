@@ -119,14 +119,14 @@ public class TaskManager implements ReadOnlyTaskManager {
 	    throws UniqueEventList.DuplicateEventException {
 	assert editedReadOnlyEvent != null;
 
-	Event editedPerson = new Event(editedReadOnlyEvent);
-	syncMasterTagListWith(editedPerson);
+	Event editedTask = new Event(editedReadOnlyEvent);
+	syncMasterTagListWith(editedTask);
 	// TODO: the tags master list will be updated even though the below line
 	// fails.
 	// This can cause the tags master list to have additional tags that are
 	// not tagged to any person
 	// in the person list.
-	events.updateEvent(index, editedPerson);
+	events.updateEvent(index, editedTask);
     }
 
     /**
