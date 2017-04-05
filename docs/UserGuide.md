@@ -61,6 +61,8 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 Format: `help`
 
 > A help window will be opened showing the user guide.
+> Help for each individual command is also shown when you type the command word only
+ or when the argument format is invalid. 
 
 ### 2.2. Adding a task : `add`
 

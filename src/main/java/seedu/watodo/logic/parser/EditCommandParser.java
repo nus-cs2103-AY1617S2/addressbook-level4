@@ -39,10 +39,15 @@ public class EditCommandParser {
         boolean hasRemoveDate = false;
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
+        //checks if the args format by the user is correct
+        String splitedArgs[] = args.split(WHITESPACE, NUMFIELD_SPLIT_BY_WHITESPACE);
+        if (splitedArgs.length != NUMFIELD_SPLIT_BY_WHITESPACE) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE)); 
+        }
+
         // get index of the task to edit
-        Optional<Integer> index = ParserUtil.parseIndex(
-                args.split(WHITESPACE, NUMFIELD_SPLIT_BY_WHITESPACE)[INDEX_FIRST_ARG]);
-        args = args.split(WHITESPACE, NUMFIELD_SPLIT_BY_WHITESPACE)[INDEX_SECOND_ARG];
+        Optional<Integer> index = ParserUtil.parseIndex(splitedArgs[INDEX_FIRST_ARG]);
+        args = splitedArgs[INDEX_SECOND_ARG];
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
