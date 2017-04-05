@@ -72,7 +72,6 @@ public class Task implements ReadOnlyTask  {
         return description;
     }
 
-    @Override
     public DateTime getStartDateTime() {
         return startDateTime;
     }
@@ -94,6 +93,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     //@@author A0148037E
+    @Override
     /**
      * Get the task's priority which determines the ordering of index
      * @return int value of Priority
@@ -110,6 +110,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     //@@author A0139438W
+    @Override
     /**
      * Get the task's DateTime that is used to compare date time.
      * For events, the startDateTime is used for comparison.
@@ -127,32 +128,35 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    @Override
     /**
      * Compares this task's type priority with another.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int comparePriority(Task otherTask) {
+    public int comparePriority(ReadOnlyTask otherTask) {
         return this.getPriority() - otherTask.getPriority();
     }
 
+    @Override
     /**
      * Compares this task's reference datetime with another in chronological order.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int compareDate(Task otherTask) {
+    public int compareDate(ReadOnlyTask otherTask) {
         assert !isFloatingTask() && !otherTask.isFloatingTask();
         return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
     }
 
+    @Override
     /**
      * Compares this task's type priority and reference datetime with another.
      * Compares this task's title with another in lexicographic order if both are floating tasks.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int comparePriorityAndDatetimeAndTitle(Task otherTask) {
+    public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask) {
         int comparePriorityResult = this.comparePriority(otherTask);
         if (comparePriorityResult != 0) {
             return comparePriorityResult;
@@ -163,16 +167,41 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    @Override
     /**
      * Compares this task's title with another in lexicographic order.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int compareTitle(Task otherTask) {
+    public int compareTitle(ReadOnlyTask otherTask) {
         return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
 
     //@@author A0121658E
+    @Override
+    public String toString() {
+        return getAsText();
+    }
+
+    @Override
+    public boolean isFloatingTask() {
+        return startDateTime == null && endDateTime == null;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return startDateTime != null && endDateTime != null;
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return startDateTime == null && endDateTime != null;
+    }
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
     /**
      * Updates this task with the details of {@code replacement}.
      */
@@ -216,31 +245,6 @@ public class Task implements ReadOnlyTask  {
     public void setTitle(Title title) {
         assert title != null;
         this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
-    @Override
-    public boolean isFloatingTask() {
-        return startDateTime == null && endDateTime == null;
-    }
-
-    @Override
-    public boolean isEvent() {
-        return startDateTime != null && endDateTime != null;
-    }
-
-    @Override
-    public boolean isDeadline() {
-        return startDateTime == null && endDateTime != null;
-    }
-
-    @Override
-    public boolean isDone() {
-        return isDone;
     }
 
     public void markDone() {

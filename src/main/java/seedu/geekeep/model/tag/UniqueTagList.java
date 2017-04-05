@@ -173,6 +173,10 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.hashCode();
     }
 
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
