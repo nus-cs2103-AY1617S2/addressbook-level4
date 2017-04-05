@@ -33,8 +33,7 @@ public abstract class TagController extends Controller {
             return;
         }
         if (isIndexOutOfBounds(tokens)) {
-            uiStore.setCommandResult(new CommandResult(Messages.MESSAGE_INVALID_TASK_INDEX));
-            return;
+            throw new InvalidCommandException(Messages.MESSAGE_INVALID_TASK_INDEX);
         }
 
         ArrayList<String> successfulList = new ArrayList<String>();
@@ -49,7 +48,7 @@ public abstract class TagController extends Controller {
                                 successfulList.size()));
     }
 
-    protected abstract void showInvalidFormatMessage();
+    protected abstract void showInvalidFormatMessage() throws InvalidCommandException;
 
     protected boolean isIndexOutOfBounds(Map<String, String> tokens) {
         int index = Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1;

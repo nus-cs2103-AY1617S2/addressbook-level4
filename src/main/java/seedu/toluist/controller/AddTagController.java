@@ -97,8 +97,8 @@ public class AddTagController extends TagController {
                 StringUtil.nounWithCount(StringUtil.WORD_TAG, successCount)));
     }
 
-    protected void showInvalidFormatMessage() {
-        uiStore.setCommandResult(new CommandResult(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_TAG_WORD)));
+    protected void showInvalidFormatMessage() throws InvalidCommandException {
+        throw new InvalidCommandException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_TAG_WORD));
     }
 }
