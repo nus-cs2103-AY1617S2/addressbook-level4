@@ -22,7 +22,7 @@ public class Task implements ReadOnlyTask  {
     private Title title;
     private DateTime endDateTime;
     private DateTime startDateTime;
-    private Location location;
+    private Description description;
     private boolean isDone;
 
     private UniqueTagList tags;
@@ -32,11 +32,11 @@ public class Task implements ReadOnlyTask  {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getTitle(), source.getStartDateTime(),
-                source.getEndDateTime(), source.getLocation(), source.getTags(), source.isDone());
+                source.getEndDateTime(), source.getDescriptoin(), source.getTags(), source.isDone());
     }
 
     public Task(Title title, DateTime startDateTime,
-                DateTime endDateTime, Location location,
+                DateTime endDateTime, Description description,
                 UniqueTagList tags, boolean isDone) throws IllegalValueException {
         assert title != null;
         if (startDateTime != null && endDateTime == null) {
@@ -50,7 +50,7 @@ public class Task implements ReadOnlyTask  {
         this.title = title;
         this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
-        this.location = location;
+        this.description = description;
         this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -68,11 +68,10 @@ public class Task implements ReadOnlyTask  {
     }
 
     @Override
-    public Location getLocation() {
-        return location;
+    public Description getDescriptoin() {
+        return description;
     }
 
-    @Override
     public DateTime getStartDateTime() {
         return startDateTime;
     }
@@ -90,10 +89,11 @@ public class Task implements ReadOnlyTask  {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, endDateTime, startDateTime, location, tags);
+        return Objects.hash(title, endDateTime, startDateTime, description, tags);
     }
 
     //@@author A0148037E
+    @Override
     /**
      * Get the task's priority which determines the ordering of index
      * @return int value of Priority
@@ -110,6 +110,7 @@ public class Task implements ReadOnlyTask  {
     }
 
     //@@author A0139438W
+    @Override
     /**
      * Get the task's DateTime that is used to compare date time.
      * For events, the startDateTime is used for comparison.
@@ -127,32 +128,35 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    @Override
     /**
      * Compares this task's type priority with another.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int comparePriority(Task otherTask) {
+    public int comparePriority(ReadOnlyTask otherTask) {
         return this.getPriority() - otherTask.getPriority();
     }
 
+    @Override
     /**
      * Compares this task's reference datetime with another in chronological order.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int compareDate(Task otherTask) {
+    public int compareDate(ReadOnlyTask otherTask) {
         assert !isFloatingTask() && !otherTask.isFloatingTask();
         return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
     }
 
+    @Override
     /**
      * Compares this task's type priority and reference datetime with another.
      * Compares this task's title with another in lexicographic order if both are floating tasks.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int comparePriorityAndDatetimeAndTitle(Task otherTask) {
+    public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask) {
         int comparePriorityResult = this.comparePriority(otherTask);
         if (comparePriorityResult != 0) {
             return comparePriorityResult;
@@ -163,61 +167,17 @@ public class Task implements ReadOnlyTask  {
         }
     }
 
+    @Override
     /**
      * Compares this task's title with another in lexicographic order.
      * @param otherTask
      * @return a comparator value, negative if less, positive if greater
      */
-    public int compareTitle(Task otherTask) {
+    public int compareTitle(ReadOnlyTask otherTask) {
         return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
 
     //@@author A0121658E
-    /**
-     * Updates this task with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setTitle(replacement.getTitle());
-        this.setEndDateTime(replacement.getEndDateTime());
-        this.setStartDateTime(replacement.getStartDateTime());
-        this.setLocation(replacement.getLocation());
-        this.setTags(replacement.getTags());
-        this.setDone(replacement.isDone());
-    }
-
-    public void setStartDateTime(DateTime startDateTime) {
-        assert startDateTime != null;
-        this.startDateTime = startDateTime;
-    }
-
-    public void setEndDateTime(DateTime endDateTime) {
-        assert endDateTime != null;
-        this.endDateTime = endDateTime;
-    }
-
-    public void setLocation(Location location) {
-        assert location != null;
-        this.location = location;
-    }
-
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
-
-    /**
-     * Replaces this Task's tags with the tags in the argument tag list.
-     */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
-    }
-
-    public void setTitle(Title title) {
-        assert title != null;
-        this.title = title;
-    }
-
     @Override
     public String toString() {
         return getAsText();
@@ -241,6 +201,50 @@ public class Task implements ReadOnlyTask  {
     @Override
     public boolean isDone() {
         return isDone;
+    }
+    /**
+     * Updates this task with the details of {@code replacement}.
+     */
+    public void resetData(ReadOnlyTask replacement) {
+        assert replacement != null;
+
+        this.setTitle(replacement.getTitle());
+        this.setEndDateTime(replacement.getEndDateTime());
+        this.setStartDateTime(replacement.getStartDateTime());
+        this.setDescription(replacement.getDescriptoin());
+        this.setTags(replacement.getTags());
+        this.setDone(replacement.isDone());
+    }
+
+    public void setStartDateTime(DateTime startDateTime) {
+        assert startDateTime != null;
+        this.startDateTime = startDateTime;
+    }
+
+    public void setEndDateTime(DateTime endDateTime) {
+        assert endDateTime != null;
+        this.endDateTime = endDateTime;
+    }
+
+    public void setDescription(Description description) {
+        assert description != null;
+        this.description = description;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    /**
+     * Replaces this Task's tags with the tags in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
+    }
+
+    public void setTitle(Title title) {
+        assert title != null;
+        this.title = title;
     }
 
     public void markDone() {

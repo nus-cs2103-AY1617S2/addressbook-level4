@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.exceptions.DataConversionException;
+import seedu.geekeep.model.Config;
 
 public class ConfigUtilTest {
 

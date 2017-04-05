@@ -19,6 +19,7 @@ import seedu.geekeep.logic.commands.ListCommand;
 import seedu.geekeep.logic.commands.ListDoneCommand;
 import seedu.geekeep.logic.commands.ListUndoneCommand;
 import seedu.geekeep.logic.commands.RedoCommand;
+import seedu.geekeep.logic.commands.StoreCommand;
 import seedu.geekeep.logic.commands.UndoCommand;
 import seedu.geekeep.logic.commands.UndoneCommand;
 import seedu.geekeep.logic.commands.UpdateCommand;
@@ -80,14 +81,14 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         //@@author A0139438W
         case ListUndoneCommand.COMMAND_WORD:
-            return new ListUndoneCommand();
+            return new ListUndoneCommandParser().parse(arguments);
 
         case ListDoneCommand.COMMAND_WORD:
-            return new ListDoneCommand();
+            return new ListDoneCommandParser().parse(arguments);
 
         //@@author
         case ExitCommand.COMMAND_WORD:
@@ -95,6 +96,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case StoreCommand.COMMAND_WORD:
+            return new StoreCommand(arguments.trim());
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

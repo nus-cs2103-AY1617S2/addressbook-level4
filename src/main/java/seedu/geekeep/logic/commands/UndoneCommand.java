@@ -9,7 +9,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
 /**
  * Marks 'undone' for task identified using it's last displayed index from GeeKeep.
  */
-public class UndoneCommand extends Command {
+public class UndoneCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "undone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

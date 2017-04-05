@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import seedu.geekeep.MainApp;
 import seedu.geekeep.commons.core.ComponentManager;
-import seedu.geekeep.commons.core.Config;
 import seedu.geekeep.commons.core.LogsCenter;
 import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.events.storage.DataSavingExceptionEvent;
@@ -20,6 +19,7 @@ import seedu.geekeep.commons.events.ui.ShowHelpRequestEvent;
 import seedu.geekeep.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.geekeep.commons.util.StringUtil;
 import seedu.geekeep.logic.Logic;
+import seedu.geekeep.model.Config;
 import seedu.geekeep.model.UserPrefs;
 
 /**

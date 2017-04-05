@@ -1,4 +1,4 @@
-package seedu.geekeep.commons.core;
+package seedu.geekeep.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

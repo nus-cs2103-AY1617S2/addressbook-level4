@@ -16,7 +16,7 @@ import seedu.geekeep.model.task.ReadOnlyTask;
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String TITLE_FIELD_ID = "#title";
-    private static final String LOCATION_FIELD_ID = "#locationOfTask";
+    private static final String DESCRIPTION_FIELD_ID = "#descriptionOfTask";
     private static final String DATE_FIELD_ID = "#date";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -35,8 +35,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(TITLE_FIELD_ID);
     }
 
-    public String getLocation() {
-        return getTextFromLabel(LOCATION_FIELD_ID);
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
     public String getDate() {
@@ -71,7 +71,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
                 && getDate().equals(getDisplayedDate(task))
-                && getLocation().equals(getDisplayedLocation(task))
+                && getDescription().equals(getDisplayedLocation(task))
                 && getTags().equals(getTags(task.getTags()));
     }
 
@@ -89,10 +89,10 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getDisplayedLocation(ReadOnlyTask task) {
         String displayedLocation = "";
-        if (task.getLocation() == null || task.getLocation().equals("")) {
+        if (task.getDescriptoin() == null || task.getDescriptoin().equals("")) {
             displayedLocation = "Details: -";
         } else {
-            displayedLocation = "Details: " + task.getLocation().value;
+            displayedLocation = "Details: " + task.getDescriptoin().value;
         }
         return displayedLocation;
     }
@@ -103,7 +103,7 @@ public class TaskCardHandle extends GuiHandle {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getTitle().equals(handle.getTitle())
                     && getDate().equals(handle.getDate())
-                    && getLocation().equals(handle.getLocation())
+                    && getDescription().equals(handle.getDescription())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -111,6 +111,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTitle() + " " + getLocation();
+        return getTitle() + " " + getDescription();
     }
 }

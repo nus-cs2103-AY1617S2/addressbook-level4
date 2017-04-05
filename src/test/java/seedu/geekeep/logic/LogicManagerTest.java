@@ -47,7 +47,7 @@ import seedu.geekeep.model.ReadOnlyGeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -76,42 +76,42 @@ public class LogicManagerTest {
             Title title = new Title("Event");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
-            Location location = new Location("111, alpha street");
+            Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, startDateTime, endDateTime, location, tags, false);
+            return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
         //@@author A0139438W
         public Task deadline() throws Exception {
             Title title = new Title("Deadline");
             DateTime endDateTime = new DateTime("01-05-17 1630");
-            Location location = new Location("222, beta street");
+            Description description = new Description("222, beta street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, null, endDateTime, location, tags, false);
+            return new Task(title, null, endDateTime, description, tags, false);
         }
 
         public Task eventWithoutTime() throws Exception {
             Title title = new Title("Event Without Time");
             DateTime endDateTime = new DateTime("01-05-17");
             DateTime startDateTime = new DateTime("01-04-17");
-            Location location = new Location("111, alpha street");
+            Description description = new Description("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, startDateTime, endDateTime, location, tags, false);
+            return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
         public Task floatingTask() throws Exception {
             Title title = new Title("Floating Task");
-            Location location = new Location("333, charlie street");
+            Description description = new Description("333, charlie street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(title, null, null, location, tags, false);
+            return new Task(title, null, null, description, tags, false);
         }
 
         //@@author
@@ -162,7 +162,7 @@ public class LogicManagerTest {
                 }
                 cmd.append(" e/").append(p.getEndDateTime());
             }
-            cmd.append(" l/").append(p.getLocation());
+            cmd.append(" d/").append(p.getDescriptoin());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
@@ -184,7 +184,7 @@ public class LogicManagerTest {
                     new Title("Task " + seed),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
-                    new Location("House of " + seed),
+                    new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
                     false
             );
@@ -231,11 +231,38 @@ public class LogicManagerTest {
                     new Title(title),
                     new DateTime("01-04-17 1630"),
                     new DateTime("01-05-17 1630"),
-                    new Location("House of 1"),
+                    new Description("House of 1"),
                     new UniqueTagList(new Tag("tag")),
                     false
             );
         }
+
+        //@@author A0148037E
+        /**
+         *Generates related success message.
+         */
+        public String generateDetailedSuccessMsg(String keyword, String earliestTime,
+                String latestTime, String tag) {
+            String successMsg = " GeeKeep is showing all the tasks which:\n";
+            if (!keyword.isEmpty()) {
+                successMsg += "Contains any of keywords in [" + keyword + "] in title;\n";
+            }
+            if (!earliestTime.isEmpty()) {
+                successMsg += "Has starting time[event] or deadline[deadline] after "
+                               + earliestTime
+                               + ";\n";
+            }
+            if (!latestTime.isEmpty()) {
+                successMsg += "Has starting time[event] or deadline[deadline] before "
+                        + latestTime
+                        + ";\n";
+            }
+            if (!tag.isEmpty()) {
+                successMsg += "Has any of tags in [" + tag + "];\n";
+            }
+            return successMsg;
+        }
+        //@@author
     }
 
 
@@ -337,18 +364,18 @@ public class LogicManagerTest {
     //@@author A0139438W
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add []\\[;] s/01-04-17 1630 e/01-05-17 1630 d/valid, location",
                 Title.MESSAGE_TITLE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/not_numbers e/01-05-17 1630 d/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers l/valid, location",
+        assertCommandFailure("add Valid Title s/01-04-17 1630 e/not_numbers d/valid, location",
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-05-17 1630 e/01-04-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/01-05-17 1630 e/01-04-17 1630 d/valid, location",
                 Task.MESSAGE_ENDDATETIME_LATER_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/01-05-17 1630 l/valid, location",
+        assertCommandFailure("add Valid Title s/01-05-17 1630 d/valid, location",
                 Task.MESSAGE_DATETIME_MATCH_CONSTRAINTS);
         assertCommandFailure(
-                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 l/valid, location t/invalid_-[.tag",
+                "add Valid Title s/01-04-17 1630 e/01-05-17 1630 d/valid, location t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
@@ -478,7 +505,7 @@ public class LogicManagerTest {
         expectedAB.addTask(threeTasks.get(2));
 
         assertCommandSuccess("undo",
-                String.format(UndoCommand.MESSAGE_SUCCESS),
+                String.format(UndoCommand.MESSAGE_SUCCESS, "delete 3"),
                 expectedAB,
                 expectedAB.getTaskList());
 
@@ -486,7 +513,7 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(2));
 
         assertCommandSuccess("redo",
-                String.format(RedoCommand.MESSAGE_SUCCESS),
+                String.format(RedoCommand.MESSAGE_SUCCESS, "delete 3"),
                 expectedAB,
                 expectedAB.getTaskList());
     }
@@ -556,7 +583,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("KEY", "", "", ""),
                 expectedAB,
                 expectedList);
     }
@@ -576,7 +604,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("rAnDoM, key", "", "", ""),
                 expectedAB,
                 expectedList);
     }
@@ -596,7 +625,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size())
+                + helper.generateDetailedSuccessMsg("KEY", "", "", ""),
                 expectedAB,
                 expectedList);
     }
@@ -627,6 +657,8 @@ public class LogicManagerTest {
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
+
+        assertCommandFailure("list dummy words", ListCommand.MESSAGE_USAGE);
     }
 
     //@@author A0139438W
@@ -645,6 +677,8 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
 
+        assertCommandFailure("listundone dummy words", ListUndoneCommand.MESSAGE_USAGE);
+
         // prepare expectations for list done tasks
         expectedList = expectedAB.getTaskList().filtered(t -> t.isDone());
 
@@ -652,6 +686,9 @@ public class LogicManagerTest {
                 ListDoneCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);
+
+        assertCommandFailure("listdone dummy words", ListDoneCommand.MESSAGE_USAGE);
+
     }
 
     //@@author

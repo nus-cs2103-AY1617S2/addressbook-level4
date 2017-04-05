@@ -29,7 +29,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        storageManager = new StorageManager(getTempFilePath("ab"), getTempFilePath("prefs"));
+        storageManager = new StorageManager(getTempFilePath("config"), getTempFilePath("ab"), getTempFilePath("prefs"));
     }
 
 
@@ -73,8 +73,8 @@ public class StorageManagerTest {
     @Test
     public void handleGeeKeepChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlGeeKeepStorageExceptionThrowingStub("dummy"),
-                                             new JsonUserPrefsStorage("dummy"));
+        Storage storage = new StorageManager(new JsonConfigStorage("dummy"),
+                new XmlGeeKeepStorageExceptionThrowingStub("dummy"), new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleGeeKeepChangedEvent(new GeeKeepChangedEvent(new GeeKeep()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);

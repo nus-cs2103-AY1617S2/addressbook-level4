@@ -33,7 +33,7 @@ import seedu.geekeep.model.GeeKeep;
 import seedu.geekeep.model.tag.Tag;
 import seedu.geekeep.model.tag.UniqueTagList;
 import seedu.geekeep.model.task.DateTime;
-import seedu.geekeep.model.task.Location;
+import seedu.geekeep.model.task.Description;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.Title;
@@ -182,23 +182,23 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
                 new Task(new Title("Ali Muster"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("4th street"), new UniqueTagList(), false),
+                        new Description("4th street"), new UniqueTagList(), false),
                 new Task(new Title("Boris Mueller"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("81th street"), new UniqueTagList(), false),
+                        new Description("81th street"), new UniqueTagList(), false),
                 new Task(new Title("Carl Kurz"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("wall street"), new UniqueTagList(), false),
+                        new Description("wall street"), new UniqueTagList(), false),
                 new Task(new Title("Daniel Meier"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("10th street"), new UniqueTagList(), false),
+                        new Description("10th street"), new UniqueTagList(), false),
                 new Task(new Title("Elle Meyer"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("michegan ave"), new UniqueTagList(), false),
+                        new Description("michegan ave"), new UniqueTagList(), false),
                 new Task(new Title("Fiona Kunz"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("little tokyo"), new UniqueTagList(), false),
+                        new Description("little tokyo"), new UniqueTagList(), false),
                 new Task(new Title("George Best"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("4th street"), new UniqueTagList(), false),
+                        new Description("4th street"), new UniqueTagList(), false),
                 new Task(new Title("Hoon Meier"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("little india"), new UniqueTagList(), false),
+                        new Description("little india"), new UniqueTagList(), false),
                 new Task(new Title("Ida Mueller"), new DateTime("01-04-17 1630"), new DateTime("01-05-17 1630"),
-                        new Location("chicago ave"), new UniqueTagList(), false)
+                        new Description("chicago ave"), new UniqueTagList(), false)
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {

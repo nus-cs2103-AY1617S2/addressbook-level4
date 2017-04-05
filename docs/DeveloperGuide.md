@@ -416,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | redo last command | repeat the most recent command |
 | `* *` | user | add a recurring task | have the same task repeat itself over a specified duration without manually adding all of them |
 | `* *` | user | add a task with description | have miscellaneous details not clutter the task title |
-| `* *` | user | add a task with a venue | see location that task takes place |
+| `* *` | user | add a task with a description | see description that task takes place |
 | `* *` | user | add a task with a tag | categorize the task |
 | `* *` | user | list upcoming tasks for the week | see all the upcoming tasks from now till the end of the week |
 | `* *` | user | list all tasks for the day | see an summary of tasks for the day |

@@ -30,6 +30,11 @@ public class XmlGeeKeepStorage implements GeeKeepStorage {
     }
 
     @Override
+    public void setGeeKeepFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    @Override
     public Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException {
         return readGeeKeep(filePath);
     }

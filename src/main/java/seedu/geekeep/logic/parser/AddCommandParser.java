@@ -1,8 +1,8 @@
 package seedu.geekeep.logic.parser;
 
 import static seedu.geekeep.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_ENDING_DATETIME;
-import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_STARTING_DATETIME;
 import static seedu.geekeep.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -25,18 +25,18 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_STARTING_DATETIME, PREFIX_ENDING_DATETIME, PREFIX_LOCATION, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_STARTING_DATETIME, PREFIX_ENDING_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             String title = argsTokenizer.getPreamble().get();
             Optional<String> startDateTime = argsTokenizer.getValue(PREFIX_STARTING_DATETIME);
             Optional<String> endDateTime = argsTokenizer.getValue(PREFIX_ENDING_DATETIME);
-            Optional<String> location = argsTokenizer.getValue(PREFIX_LOCATION);
+            Optional<String> description = argsTokenizer.getValue(PREFIX_DESCRIPTION);
             return new AddCommand(
                     title,
                     startDateTime,
                     endDateTime,
-                    location,
+                    description,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))
             );
         } catch (NoSuchElementException nsee) {
