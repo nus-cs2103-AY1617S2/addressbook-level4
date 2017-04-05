@@ -22,7 +22,6 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-    private final String SUPPORTED_UNDO_STRING = "add delete clear edit mark unmark";
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;

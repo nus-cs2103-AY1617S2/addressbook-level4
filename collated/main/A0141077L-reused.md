@@ -170,17 +170,21 @@ public class ViewFileCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(String.format(VIEW_FILE_MESSAGE, getConfig().getWatodoFilePath()));
+        Config currConfig = getConfig();
+        return new CommandResult(String.format(VIEW_FILE_MESSAGE, currConfig.getWatodoFilePath()));
     }
 
     private Config getConfig() {
+        Config initialisedConfig;
         try {
             Optional<Config> optionalConfig = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE);
-            return optionalConfig.orElse(new Config());
+            initialisedConfig = optionalConfig.orElse(new Config());
         } catch (DataConversionException dce) {
-            return new Config();
+            initialisedConfig = new Config();
         }
+        return initialisedConfig;
     }
+
 }
 ```
 ###### \java\seedu\watodo\logic\parser\DeleteCommandParser.java
