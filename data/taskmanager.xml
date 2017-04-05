@@ -16,13 +16,8 @@
     <tags>friends</tags>
     <tags>family</tags>
     <tags>church</tags>
-    <tasks>
-        <title>do fyp assignment</title>
-        <start></start>
-        <end>6 april</end>
-        <priority>high</priority>
-        <tagged>school</tagged>
-    </tasks>
+    <tags>code</tags>
+    <tags>cs2103</tags>
     <tasks>
         <title>TR3002 meeting business plan</title>
         <start>this thursday 4pm</start>
@@ -75,6 +70,13 @@
         <end>31 may</end>
         <priority>high</priority>
         <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <title>fix bug</title>
+        <start></start>
+        <end></end>
+        <priority>high</priority>
+        <tagged>cs2103</tagged>
     </tasks>
     <tasks>
         <title>CS2103 TaskIt v0.5</title>
@@ -172,6 +174,15 @@
         <start></start>
         <end>today</end>
         <priority>low</priority>
+    </tasks>
+    <tasks>
+        <title>do assignment</title>
+        <start>tomorrow 4pm</start>
+        <end>tomorrow 6pm</end>
+        <priority>low</priority>
+        <tagged>school</tagged>
+        <tagged>assignment</tagged>
+        <tagged>work</tagged>
     </tasks>
     <tasks>
         <title>buy groceries</title>
@@ -410,5 +421,18 @@
         <end></end>
         <priority>low</priority>
         <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <title>do accounting hw</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <title>fix bug 2.0</title>
+        <start></start>
+        <end></end>
+        <priority>low</priority>
     </tasks>
 </addressbook>

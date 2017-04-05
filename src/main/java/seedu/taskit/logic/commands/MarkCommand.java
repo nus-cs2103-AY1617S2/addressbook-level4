@@ -16,7 +16,8 @@ import seedu.taskit.model.task.ReadOnlyTask;
  */
 public class MarkCommand extends Command {
 
-public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD_ALIAS = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark a existing tasks in TaskIt based on index\n"
             + "Parameters: [done,undone]\n"

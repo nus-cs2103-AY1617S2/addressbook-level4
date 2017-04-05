@@ -81,18 +81,6 @@ public class ParserUtil {
     }
 
     /**
-     * Splits an argument string into ordered fields.
-     * @return A list of size {@code numFields} where the first element is the index, second element is
-     *         the fieldword and last element is the update information,
-     *         {@code Optional.empty()} otherwise.
-     */
-     public static List<Optional<String>> splitArgument(String args, int numFields) {
-         return Arrays.stream(args.split("\\s+", numFields))
-                 .map(Optional::ofNullable)
-                 .collect(Collectors.toList());
-     }
-
-    /**
      * Parses a {@code Optional<String> title} into an {@code Optional<Title>} if {@code title} is present.
      */
     public static Optional<Title> parseTitle(Optional<String> title) throws IllegalValueException {

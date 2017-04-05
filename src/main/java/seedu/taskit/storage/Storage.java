@@ -3,7 +3,7 @@ package seedu.taskit.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import seedu.taskit.commons.events.model.AddressBookChangedEvent;
+import seedu.taskit.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskit.commons.exceptions.DataConversionException;
 import seedu.taskit.model.ReadOnlyAddressBook;
@@ -34,5 +34,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
 }

@@ -12,7 +12,7 @@ import seedu.taskit.logic.commands.MarkCommand;
 public class MarkCommandParser {
 
     public Command parse(String args) {
-        List<Optional<String>> markInformation = ParserUtil.splitArgument(args.trim(),2);
+        List<Optional<String>> markInformation = ParserUtil.splitPreamble(args.trim(),2);
 
         Optional<Integer> index = markInformation.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {

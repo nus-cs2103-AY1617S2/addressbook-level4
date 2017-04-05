@@ -15,13 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_FROM= new Prefix(" from ");
     public static final Prefix PREFIX_TO= new Prefix(" to ");
     public static final Prefix PREFIX_PRIORITY= new Prefix(" priority ");
-
-    public static final String FIELDWORD_TITLE= new String("title");
-    public static final String FIELDWORD_TAG= new String("tag");
-    public static final String FIELDWORD_START= new String("start");
-    public static final String FIELDWORD_END= new String("end");
-    public static final String FIELDWORD_PRIORITY= new String("priority");
-    public static final String FIELDWORD_DEADLINE= new String("deadline");
+    public static final Prefix PREFIX_TITLE= new Prefix("title");
+    public static final Prefix PREFIX_START= new Prefix("start");
+    public static final Prefix PREFIX_END= new Prefix("end");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

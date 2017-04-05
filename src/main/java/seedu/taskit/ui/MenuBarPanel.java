@@ -20,7 +20,7 @@ public class MenuBarPanel extends UiPart<Region> {
     private static final String FXML = "MenuBarPanel.fxml";
 
     public static final String MENU_HOME = "Home";
-    public static final String MENU_FLOATING_TASK = "Floating Tasks";
+    public static final String MENU_FLOATING_TASK = "Simple Tasks";
     public static final String MENU_EVENT_TASK = "Event";
     public static final String MENU_DEADLINE_TASK = "Deadline";
     public static final String MENU_TODAY_TASK = "Today";

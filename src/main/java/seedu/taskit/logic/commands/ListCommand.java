@@ -10,6 +10,7 @@ import seedu.taskit.commons.core.LogsCenter;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD_ALIAS = "l";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the existing tasks in TaskIt \n"
             + "Parameters: [all, done, undone, overdue, today]\n"

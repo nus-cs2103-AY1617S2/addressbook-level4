@@ -4,7 +4,9 @@ package seedu.taskit.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.taskit.commons.core.EventsCenter;
 import seedu.taskit.commons.core.Messages;
+import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.logic.commands.exceptions.CommandException;
@@ -22,12 +24,13 @@ import seedu.taskit.model.task.UniqueTaskList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [title|deadline|tag|priority] NEW.\n"
-            + "Example: " + COMMAND_WORD + " 2 title finish SWE HW";
+            + "Example: " + COMMAND_WORD + " or" + COMMAND_WORD_ALIAS + " 2 title finish SWE HW";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -62,6 +65,7 @@ public class EditCommand extends Command {
         Task editedTask;
         try {
             editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+            model.updateTask(filteredTaskListIndex, editedTask);
         } catch (IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
@@ -72,7 +76,14 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
+        showEditedTask(taskToEdit);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    private void showEditedTask(ReadOnlyTask editedTask) {
+        List<ReadOnlyTask> lastShownList =  model.getFilteredTaskList();
+        int taskIndex = lastShownList.indexOf(editedTask);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(taskIndex));
     }
 
     /**
@@ -139,9 +150,8 @@ public class EditCommand extends Command {
             return tags;
         }
 
-        // @@author A0163996J
-
         public void setStart(Optional<Date> start) {
+            assert start != null;
             this.start = start;
         }
 
@@ -150,6 +160,7 @@ public class EditCommand extends Command {
         }
 
         public void setEnd(Optional<Date> end) {
+            assert end != null;
             this.end = end;
         }
 
@@ -158,6 +169,7 @@ public class EditCommand extends Command {
         }
 
         public void setPriority(Optional<Priority> priority) {
+            assert priority !=null;
             this.priority = priority;
         }
 
