@@ -442,8 +442,8 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. DoTomorrow shows an error message 
-  
+> 3a1. DoTomorrow shows an error message
+
  Use case resumes at step 2
 
 #### Use case: Add task or event

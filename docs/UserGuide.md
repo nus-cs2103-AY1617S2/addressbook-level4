@@ -130,7 +130,7 @@ Examples:
 
 * `complete 1`<br>
   Marks the 1st task as complete.
-  
+
 ### 2.6. Uncompleting a task : `uncomplete`
 
 Marks a task as incomplete.<br>
@@ -237,7 +237,7 @@ Example:
 
 * **List Completed Tasks**: `list complete` <br>
   e.g. `list complete`
-  
+
 * **List Incomplete Tasks**: `list incomplete` <br>
   e.g. `list incomplete`
 
@@ -249,7 +249,7 @@ Example:
 
 * **Complete** `complete INDEX` <br>
   e.g. `complete 2`
-  
+
 * **Uncomplete** `uncomplete INDEX` <br>
   e.g. `uncomplete 2`
 
