@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [d/DATE] [e/EMAIL] [g/GROUP] [t/TAG]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [d/END DATE] [e/EMAIL] [g/GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 d/01.01 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited task: %1$s";
@@ -88,7 +88,7 @@ public class EditCommand extends Command {
         StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
         Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
         Group updatedGroup = editPersonDescriptor.getGroup().orElseGet(personToEdit::getGroup);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        UniqueTagList updatedTags = personToEdit.getTags();
 
 
         return new Task(updatedName, updatedDate, updatedStartDate, updatedEmail, updatedGroup, updatedTags);
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
         private Optional<StartDate> sdate = Optional.empty();
         private Optional<Email> email = Optional.empty();
         private Optional<Group> group = Optional.empty();
-        private Optional<UniqueTagList> tags = Optional.empty();
+        //private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
         }
@@ -116,14 +116,14 @@ public class EditCommand extends Command {
             this.sdate = toCopy.getStartDate();
             this.email = toCopy.getEmail();
             this.group = toCopy.getGroup();
-            this.tags = toCopy.getTags();
+            //this.tags = toCopy.getTags();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.email, this.group, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.date, this.email, this.group);
         }
 
         public void setName(Optional<Name> name) {
@@ -170,7 +170,7 @@ public class EditCommand extends Command {
         public Optional<Group> getGroup() {
             return group;
         }
-
+/*
         public void setTags(Optional<UniqueTagList> tags) {
             assert tags != null;
             this.tags = tags;
@@ -179,5 +179,6 @@ public class EditCommand extends Command {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+*/
     }
 }

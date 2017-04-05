@@ -7,11 +7,12 @@ import com.joestelmach.natty.Parser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-/**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
- */
 //@@author A0164032U
+
+/**
+ * Represents a Task's start date in the task manager.
+ */
+
 public class StartDate {
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS = "Person start date's format should resemble a date";
@@ -19,7 +20,7 @@ public class StartDate {
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given start date.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */

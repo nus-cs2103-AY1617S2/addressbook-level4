@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
-            + "Parameters: NAME [s/START DATE] [d/DEADLINE] e/EMAIL g/GROUP  [t/TAG]...\n "
+            + "Parameters: NAME [s/START DATE] [d/DEADLINE] e/EMAIL g/GROUP ...\n "
             + "Start date and deadline are not necessary. \n" + "Example: " + COMMAND_WORD
             + " study english s/01.01 d/03.21 e/johnd@gmail.com g/learning t/everyday t/undone";
 
@@ -40,13 +40,13 @@ public class AddCommand extends Command {
      *             if any of the raw values are invalid
      */
     //@@author A0164032U
-    public AddCommand(String name, String date, String email, String group, Set<String> tags)
+    public AddCommand(String name, String date, String email, String group)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
-        for (String tagName : tags) {
+        /*for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
-        }
+        }*/
         this.toAdd = new Task(new Name(name),
                 new Date(date),
                 new StartDate("00.00"),
@@ -59,12 +59,12 @@ public class AddCommand extends Command {
      * Constructor: floating task without starting date and end date
      */
   //@@author A0164032U
-    public AddCommand(String name, String email, String group, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String name, String email, String group) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
-        for (String tagName : tags) {
+        /*for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
-        }
+        }*/
         this.toAdd = new Task(new Name(name),
                 new Date("00.00"),
                 new StartDate("00.00"),
@@ -74,13 +74,14 @@ public class AddCommand extends Command {
     }
     
     //@@author A0164032U
-    public AddCommand(String name, String date, String sdate, String email, String group, Set<String> tags)
+    public AddCommand(String name, String date, String sdate, String email, String group)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(Tag.TAG_INCOMPLETE));
+        /*
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
-        }
+        }*/
         this.toAdd = new Task(
                 new Name(name),
                 new Date(date),
