@@ -268,6 +268,11 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private void handleCommandInputChanged() {
+        // Do nothing on empty command box
+        if (commandTextField.getText().equals("")) {
+            return;
+        }
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             // process result of the command
