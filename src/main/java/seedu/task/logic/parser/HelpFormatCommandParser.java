@@ -7,7 +7,6 @@ public class HelpFormatCommandParser extends CommandParser {
 
     @Override
     public Command parse(String args) {
-        // TODO Auto-generated method stub
         return new HelpFormatCommand();
     }
 
