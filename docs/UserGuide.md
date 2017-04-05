@@ -30,7 +30,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
    * **`undo`** : undoes last command that modified the todo list
    * **`redo`** : redoes the last undo command
-   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml
+   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml. If it does not exist, it will create the file.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -61,10 +61,10 @@ Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
 Adds a deadline<br>
 Format: `add DEADLINE e/DEADLINE [t/tag]`
 
-Adds a deadline with default date<br>
+Adds a deadline with default date of tomorrow at 12:00am<br>
 Format: `add DEADLINE e/ [t/tag]`
 
-Adds a event with default date<br>
+Adds a event with default start date of today at 12:00am and end date of tomorrow at 12:00am<br>
 Format: `add EVENT s/ e/ [t/tag]`
 
 Examples:
@@ -80,28 +80,19 @@ Format: `list`
 
 ### 2.4. Editing a todo : `edit`
 
-Edits a Todo's title, start time and endtime.<br>
+Edits a Todo's title, start time, endtime, and tags.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Edits a Todo's name and deadline.<br>
-Format: `edit INDEX [TASK] [e/DEADLINE] [t/TAG]`
-
-Adds a deadline.<br>
-Format: `edit INDEX [e/DEADLINE]`
-
-Adds a deadline with default date.<br>
+Converts a floating todo to a deadline todo with endtime as tomorrow as the default.<br>
 Format: `edit INDEX [e/]`
 
-Adds a start time and endtime.<br>
-Format: `edit INDEX [s/STARTTIME] [e/ENDTIME]`
-
-Adds a event and with default date.<br>
+Converts a floating todo to an event todo with starttime and endtime as today and tomorrow as the default.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
-Format: `edit INDEX [TASK] [t/TAG]`
+Format: `edit INDEX [TASK]`
 
-Add a tag.<br>
+Adds a new tag to a todo.<br>
 Format: `edit INDEX [ta/TAG]`
 
 > * Edits the todo at the specified `INDEX`.
@@ -110,6 +101,9 @@ Format: `edit INDEX [ta/TAG]`
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * Edit with `t/` may replace all the previous tags with new assigned tags.
+> * Edit command will replace the todo with all parameters specified by the command and change todo's type.
+e.g. if you don't specified start time and endt ime for an event, the event will become a task after the edit command.
+> * Default edit time is set to 12:00AM today for start time and 1200:AM tomorrow for end time.
 
 Examples:
 
@@ -119,13 +113,14 @@ Examples:
 ### 2.5. Finding all todos by multiple search parameters: `find`
 
 Finds todos whose descriptions contain any of the given keywords.<br>
-Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [t/TAG] [t/MORE TAGS]`
+Format: `find [KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]`
 
 > * The search is case insensitive.
 > * The order of the keywords does not matter.
 > * Only the task description is searched using the keywords.
 > * Only full words will be matched e.g. "grocer" will not match "groceries"
 > * Todos matching at least one keyword will be returned (i.e. `OR` search).
+> * You can search by type of todo: floating, deadline, event.
 > * Specifying start time, end time, and/or complete time will match todos that start, end, and/or were completed BEFORE the specified time.
 > * You may enter "today" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of the current day.
 > * You may enter "tomorrow" for start time, end time, and/or complete time to find tasks that start, end, and/or were completed before the end of tomorrow.
@@ -139,9 +134,13 @@ Examples:
 * `find Dog`<br>
 * `find dog math`<br>
   Returns Any todo containing words `dog` or `math`<br>
+* `find ty/floating`<br>
+* `find ty/deadline`<br>
+* `find ty/event`<br>
 * `find s/9:00am 11/11/17`<br>
 * `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
 * `find s/today e/tomorrow`<br>
+* `find s/yesterday e/today`<br>
 * `find c/`<br>
 * `find c/not`<br>
 
@@ -236,14 +235,26 @@ Examples:
 * **Add Task** : `add TASK` <br>
   e.g. `add Finish math homework`
 
-* **Add Event** : `add TODO s/STARTTIME e/ENDTIME` <br>
+* **Add Task With Tag** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_2 t/school`
+
+* **Add Task With Multiple Tags** : `add TASK [t/TAG]` <br>
+  e.g. `add Finish math homework_3 t/school t/boring`
+
+* **Add Event** : `add TODO s/STARTTIME e/ENDTIME [t/TAG]` <br>
   e.g. `add Take the dog for a walk s/6:00PM 11/11/17 e/7:00PM 11/11/17`
 
-* **Add Deadline** : `add TODO e/DEADLINE` <br>
+* **Add Deadline** : `add TODO e/DEADLINE [t/TAG]` <br>
   e.g. `add Finish programming project e/17-03-17T8:00`
 
-* **Edit** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME t/TAGS` <br>
+* **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
+
+* **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
+
+* **Append New Tags** : `edit INDEX [ta/TAG]` <br>
+  e.g. `edit 1 ta/cat ta/pet ta/cute`
 
 * **Clear** : `clear` <br>
   e.g. `clear`
@@ -251,8 +262,12 @@ Examples:
 * **Delete** : `delete INDEX` <br>
   e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+* **Find** : `find KEYWORD [MORE_KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]` <br>
   e.g. `find Dog`
+  e.g. `find c/tomorrow`
+  e.g. `find ty/floating`
+  e.g. `find ty/deadline`
+  e.g. `find ty/event`
 
 * **Complete** : `complete INDEX [COMPLETETIME]` <br>
   e.g. `complete 1 17-03-17T8:00`
@@ -263,14 +278,14 @@ Examples:
 * **Undo** : `undo` <br>
   e.g. `undo`
 
-* **Redo** : `undo` <br>
-  e.g. `undo`
+* **Redo** : `redo` <br>
+  e.g. `redo`
 
 * **List** : `list` <br>
   e.g. `list`
 
 * **Set Save File Location** : `savefile FILE_PATH` <br>
-  e.g. `savefile ~/User/Documents/todolist.xml`
+  e.g. `savefile todolist.xml`
 
 * **Help** : `help` <br>
   e.g. `help`
