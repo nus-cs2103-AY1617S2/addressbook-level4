@@ -22,7 +22,7 @@ import seedu.toluist.ui.UiStore;
  * modifies the models as appropriate, and render the updated UI subsequently
  */
 public abstract class Controller {
-    public static final String DEFAULT_DESCRIPTION_KEYWORD = "description";
+    public static final String DEFAULT_DESCRIPTION_KEYWORD = "command_description";
 
     /**
      * UiStore to store data to be used by Ui
