@@ -382,6 +382,30 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_delete_removesCorrectSingleTask() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        // prepare expected TDL
+        ToDoList expectedTDL = helper.generateToDoList(threeTasks);
+        expectedTDL.removeTask(threeTasks.get(2));
+        
+        // prepare model
+        helper.addToModel(model, threeTasks);
+
+        // prepare message
+        List<Integer> deletedTaskVisibleIndices = helper.generateNumberList(3);
+        List<ReadOnlyTask> deletedTasks = helper.generateReadOnlyTaskList(threeTasks.get(2));
+        String tasksAsString = CommandResult.tasksToString(deletedTasks, deletedTaskVisibleIndices);
+        
+        // test boundary value (last task in the list)
+        assertCommandBehavior("delete 3",
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksAsString),
+                expectedTDL,
+                expectedTDL.getTaskList());
+    }  
+
+    @Test
     public void execute_find_invalidArgsFormat() throws IllegalValueException,
                                                      InvalidDatesException, BuiltInCategoryException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
