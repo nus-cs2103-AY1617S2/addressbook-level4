@@ -6,13 +6,13 @@ package seedu.watodo.logic.commands;
  */
 public class ListFloatCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "float";
+    public static final String ARGUMENT = "float";
 
     public static final String MESSAGE_SUCCESS = "Listed all floating tasks";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -22,6 +22,7 @@ public class DateTime {
     private static final int INDEX_VALID_DATE = 0;
     private static final String DATESTRING_NOW = "now";
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
+    public static final String MESSAGE_DATETIME_START_LATER_THAN_END = "End date must be later than start date!";
     public static final Parser DATE_TIME_PARSER = new Parser(TimeZone.getDefault());  //Parser class in natty library
 
     public final Calendar dateTime;

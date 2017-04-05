@@ -42,7 +42,7 @@ public class EditCommandParser {
         //checks if the args format by the user is correct
         String splitedArgs[] = args.split(WHITESPACE, NUMFIELD_SPLIT_BY_WHITESPACE);
         if (splitedArgs.length != NUMFIELD_SPLIT_BY_WHITESPACE) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE)); 
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         // get index of the task to edit

@@ -6,13 +6,13 @@ package seedu.watodo.logic.commands;
  */
 public class ListUndoneCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "undone";
+    public static final String ARGUMENT = "undone";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks that are not yet completed";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

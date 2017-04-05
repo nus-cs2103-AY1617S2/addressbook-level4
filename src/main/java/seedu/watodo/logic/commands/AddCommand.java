@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             DateTime start = new DateTime(startDate.get());
             DateTime end = new DateTime(endDate.get());
             if (start.isLater(end)) { //checks if the end time is later than start time
-                throw new IllegalValueException("End date must be later than start date!");
+                throw new IllegalValueException(DateTime.MESSAGE_DATETIME_START_LATER_THAN_END);
             }
             this.toAdd = new Task(new Description(description), start, end, tagSet);
             break;

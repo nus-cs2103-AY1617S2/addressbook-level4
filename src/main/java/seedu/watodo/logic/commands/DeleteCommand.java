@@ -85,12 +85,12 @@ public class DeleteCommand extends Command {
     public void redo() {
         assert model != null;
 
-            try {
-                model.updateFilteredListToShowAll();
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException e) {
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(taskToDelete);
+        } catch (TaskNotFoundException e) {
 
-            }
+        }
     }
 
 }

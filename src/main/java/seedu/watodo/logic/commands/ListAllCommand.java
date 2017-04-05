@@ -6,7 +6,7 @@ package seedu.watodo.logic.commands;
  */
 public class ListAllCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "all";
+    public static final String ARGUMENT = "all";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 

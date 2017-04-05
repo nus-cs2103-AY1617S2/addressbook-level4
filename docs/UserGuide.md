@@ -117,14 +117,13 @@ Shows a list of all tasks with deadlines.<br>
 Format: `list event`<br>
 Shows a list of all events.<br>
 
-Format: `list day`<br>
-Shows a list of deadlines and events scheduled on the current day.<br>
+Format: `list from/ START_DATETIME to/ END_DATETIME` <br>
+     OR `list by/ DATETIME`
+Shows a list of tasks scheduled within the specified range of dates.<br>
 
-Format: `list week`<br>
-Shows a list of deadlines and events scheduled for the week.<br>
-
-Format: `list month`<br>
-Shows a list of deadlines and events scheduled for the month.<br>
+Examples:
+* `list from/ tomorrow to/ Sunday`
+* `list by/ Sunday`
 
 Format: `list #TAG`<br>
 Shows a list of tasks labeled with the given TAG.<br>
