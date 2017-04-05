@@ -118,14 +118,6 @@ public class SortController extends Controller {
         return keywords;
     }
 
-    public String[][][] getConflictingKeywordsList() {
-        return new String[][][] {
-                Arrays.stream(KEYWORD_CATEGORIES).map(category -> new String[] { category })
-                    .collect(Collectors.toList())
-                    .toArray(new String[0][0])
-        };
-    }
-
     public boolean matchesCommand(String command) {
         return command.matches(COMMAND_TEMPLATE);
     }

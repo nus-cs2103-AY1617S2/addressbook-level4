@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
+import seedu.toluist.commons.util.CollectionUtil;
 import seedu.toluist.commons.util.StringUtil;
 
 /**
@@ -141,10 +142,7 @@ public class HelpController extends Controller {
 
     public String[][][] getConflictingKeywordsList() {
         return new String[][][] {
-                controllerLibrary.getCommandControllerCommandWords().stream()
-                    .map(commandWord -> new String[] { commandWord })
-                    .collect(Collectors.toList())
-                    .toArray(new String[0][0])
+                CollectionUtil.collectionToArrayOfArrays(controllerLibrary.getCommandControllerCommandWords())
         };
     }
 

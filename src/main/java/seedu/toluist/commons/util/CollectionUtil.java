@@ -68,4 +68,13 @@ public class CollectionUtil {
         List<String> itemStringList = items.stream().map(T::toString).collect(Collectors.toList());
         return String.join(delimiter, itemStringList);
     }
+
+    /**
+     * Converts collection of item to array of arrays
+     */
+    public static <T> T[][] collectionToArrayOfArrays(Collection<T> items) {
+        return (T[][]) items.stream().map(item -> (T[]) new Object[] { item })
+                .collect(Collectors.toList())
+                .toArray(new Object[0][0]);
+    }
 }
