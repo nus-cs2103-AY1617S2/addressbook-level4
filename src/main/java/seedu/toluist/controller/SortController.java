@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
@@ -27,8 +26,8 @@ public class SortController extends Controller {
     private static final String WORD_BY = "by";
 
     private static final String[] KEYWORD_CATEGORIES = {
-            Task.CATEGORY_DEFAULT, Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
-            Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
+        Task.CATEGORY_DEFAULT, Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
+        Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
     };
     private static final String PARAMETER_CATEGORY = "category";
 
@@ -122,10 +121,10 @@ public class SortController extends Controller {
 
     public String[][][] getConflictingKeywordsList() {
         return new String[][][] { new String[][] {
-                new String[] { Task.CATEGORY_DEFAULT },
-                new String[] { Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
-                    Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
-                }
+            new String[] { Task.CATEGORY_DEFAULT },
+            new String[] { Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
+                Task.CATEGORY_OVERDUE, Task.CATEGORY_PRIORITY, Task.CATEGORY_STARTDATE
+            }
         }};
     }
 
