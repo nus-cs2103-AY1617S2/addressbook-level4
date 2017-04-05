@@ -11,8 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.watodo.commons.core.LogsCenter;
-import seedu.watodo.commons.events.model.StorageFilePathChangedEvent;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.util.FxViewUtil;
 
 /**
@@ -63,7 +63,7 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent sfpce) {
-      String newPath = sfpce.newConfig.getWatodoFilePath();
+      String newPath = sfpce.newFilePath;
       setSaveLocation("./" + newPath);
     }
 

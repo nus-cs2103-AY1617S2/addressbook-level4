@@ -17,7 +17,9 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
+    public static final String MESSAGE_DATETIME_START_LATER_THAN_END = "End date must be later than start date!";
     public static final Parser DATE_TIME_PARSER = new Parser(TimeZone.getDefault());
+
 
     public final Date dateTime;
 

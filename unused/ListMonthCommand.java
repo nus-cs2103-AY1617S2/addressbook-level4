@@ -8,7 +8,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
  */
 public class ListMonthCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "month";
+    public static final String ARGUMENT = "month";
 
     public static final String MESSAGE_SUCCESS = "Listed this month's tasks";
 

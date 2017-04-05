@@ -126,6 +126,8 @@ public class EditCommand extends Command {
                     existingTags.remove(tags);
                 }
             }
+            System.out.println(existingTags.toString());
+            System.out.println(updatedTags.toString());
             updatedTags.mergeFrom(existingTags);
         }
         if (hasRemoveDate) {

@@ -8,7 +8,7 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
  */
 public class ListWeekCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "week";
+    public static final String ARGUMENT = "week";
 
     public static final String MESSAGE_SUCCESS = "Listed this week's tasks";
 

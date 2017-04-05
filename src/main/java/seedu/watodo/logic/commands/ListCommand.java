@@ -9,6 +9,8 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    
+    public static final String ARGUMENT = "";
 
     public static final String MESSAGE_SUCCESS = "Listed all overdue tasks and tasks due tomorrow";
 
