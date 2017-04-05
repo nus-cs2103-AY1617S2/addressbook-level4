@@ -68,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
         while (!redoStack.empty()) {
-        	redoStack.pop();
+            redoStack.pop();
         }
         this.taskList.removeTask(target);
         indicateAddressBookChanged();
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
         while (!redoStack.empty()) {
-        	redoStack.pop();
+            redoStack.pop();
         }
         this.taskList.addTask(task);
         updateFilteredListToShowAll();
@@ -95,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
         TaskList update = new TaskList(this.taskList);
         undoStack.push(update);
         while (!redoStack.empty()) {
-        	redoStack.pop();
+            redoStack.pop();
         }
         this.taskList.updateTask(addressBookIndex, editedTask);
         indicateAddressBookChanged();
