@@ -4,12 +4,14 @@ import java.util.Optional;
 
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0144422R
 /**
  * Represents a Task in the task manager without deadline or starting time. not
  * null, field values are validated.
  */
 public class FloatingTask extends Task {
-    public FloatingTask(Name name, UniqueTagList tags, boolean isDone, boolean manualToday) {
+    public FloatingTask(Name name, UniqueTagList tags, boolean isDone,
+            boolean manualToday) {
         super(name, tags, isDone, manualToday);
     }
 
@@ -33,6 +35,7 @@ public class FloatingTask extends Task {
         return Optional.empty();
     }
 
+    // @@author A0144422R
     @Override
     public Optional<DateTime> getStartingTime() {
         return Optional.empty();

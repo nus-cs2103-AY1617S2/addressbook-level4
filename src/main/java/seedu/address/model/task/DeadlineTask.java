@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0144422R
 /**
  * Represents a Task in the task manager with deadline only. not null, field
  * values are validated.
@@ -16,8 +17,8 @@ public class DeadlineTask extends Task {
 
     DateTime deadline;
 
-    public DeadlineTask(Name name, UniqueTagList tags, Date date, boolean isDone, boolean manualToday)
-            throws IllegalValueException {
+    public DeadlineTask(Name name, UniqueTagList tags, Date date,
+            boolean isDone, boolean manualToday) throws IllegalValueException {
         super(name, tags, isDone, manualToday);
         this.deadline = new DateTime(date);
     }
@@ -54,15 +55,18 @@ public class DeadlineTask extends Task {
     @Override
     public boolean isToday() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        return manualToday || fmt.format(this.deadline.getDate()).equals(fmt.format(new Date())) || isOverdue();
+        return manualToday || fmt.format(this.deadline.getDate())
+                .equals(fmt.format(new Date())) || isOverdue();
     }
 
     // @@author A0093999Y
     @Override
     public String getTaskAbsoluteDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy HH:mm:ss");
         return "Due: " + dateFormat.format(deadline.getDate());
     }
+    // @@author A0144422R
 
     @Override
     public Optional<DateTime> getDeadline() {

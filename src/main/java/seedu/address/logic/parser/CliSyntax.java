@@ -2,16 +2,12 @@ package seedu.address.logic.parser;
 
 import java.util.regex.Pattern;
 
-import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
-
+//@@author A0144422R
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple
  * commands
  */
 public class CliSyntax {
-
-    /* Prefix definitions */
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern
@@ -31,7 +27,7 @@ public class CliSyntax {
     public static final String STARTINGTIME_AND_DEADLINE_REVERSE_REGEX = "(?<rest>.*)\\b+from\\b+"
             + "(?<startingTime>.*)\\b+to\\b+(?<deadline>.*)";
     public static final String[] CAPTURE_GROUPS_OF_EVENT = { "deadline",
-        "startingTime" };
+            "startingTime" };
 
     public static final String STARTING_TIME = "from";
     public static final String DEADLINE = "to";

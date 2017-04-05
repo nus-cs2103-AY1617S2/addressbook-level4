@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+//@@author A0144422R
 /**
  * Represents a Task's date and time for a deadline or a starting time in the
  * task manager.
@@ -79,8 +80,8 @@ public class DateTime implements Comparable<DateTime> {
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(date);
         cal2.setTime(dateTime.getReference());
-        return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
+        return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1
+                .get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
 
     @Override
