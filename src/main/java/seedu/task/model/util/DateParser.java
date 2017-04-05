@@ -13,7 +13,7 @@ public class DateParser {
     private static final int DEFAULT_SECONDS = 0;
     private static final int DEFAULT_MILLISECONDS = 0;
     private static final String DATE_STRING_VALIDATION_REGEX =
-            "^([A-Za-z]{3,9}|[0-3][0-9]/[0-1][0-9]/[0-9]{4}) [0-2][0-9][0-5][0-9]$";
+            "^([A-Za-z]{3,9}|[0-3][0-9]/[0-1][0-9]/[0-9]{4}|[0-3][0-9]/[0-1][0-9])( [0-2][0-9][0-5][0-9]|)$";
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
 
@@ -98,14 +98,27 @@ public class DateParser {
     private static int[] getDate(String date) throws IllegalValueException {
         Calendar calDate = Calendar.getInstance();
         int dayOfWeek = calDate.get(Calendar.DAY_OF_WEEK);
+        String firstWord;
+        if (date.indexOf(" ") == -1) {
+            firstWord = date;
+        } else {
+            firstWord = date.substring(0, date.indexOf(" "));
+        }
 
-        if (date.substring(0, 1).matches("[0-9]")) {
+        if (date.substring(0, 1).matches("[0-9]")) { //Date given in number format
             parsedDate[INDEX_DAY] = Integer.parseInt(date.substring(0, 2));
             parsedDate[INDEX_MONTH] = Integer.parseInt(date.substring(3, 5)) - MONTH_OFFSET;
-            parsedDate[INDEX_YEAR] = Integer.parseInt(date.substring(6, 10));
+
+            int l = firstWord.length();
+            if (l == 5) { //No year given
+                parsedDate[INDEX_YEAR] = calDate.get(Calendar.YEAR);
+            } else if (l == 10) {
+                parsedDate[INDEX_YEAR] = Integer.parseInt(date.substring(6, 10));
+            } else {
+                throw new IllegalValueException(DATE_STRING_ILLEGAL_FORMAT);
+            }
         } else {
-            String firstWord = date.substring(0, date.indexOf(" "));
-            switch (firstWord.toLowerCase()) {
+            switch (firstWord.toLowerCase()) { //Date given in recognized keyword
             case "today" : {
                 break;
             }
@@ -167,14 +180,21 @@ public class DateParser {
                 day2 - day1;
     }
 
-    //@@author A0163744B
     private static int getHour(String date) {
-        String time = date.substring(date.indexOf(" ") + 1);
-        return Integer.parseInt(time.substring(0, 2));
+        if (date.indexOf(" ") == -1) {
+            return 0;
+        } else {
+            String time = date.substring(date.indexOf(" ") + 1);
+            return Integer.parseInt(time.substring(0, 2));
+        }
     }
 
     private static int getMinute(String date) {
-        String time = date.substring(date.indexOf(" ") + 1);
-        return Integer.parseInt(time.substring(3));
+        if (date.indexOf(" ") == -1) {
+            return 0;
+        } else {
+            String time = date.substring(date.indexOf(" ") + 1);
+            return Integer.parseInt(time.substring(3));
+        }
     }
 }
