@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.bulletjournal.logic.commands.AddCommand;
+import seedu.bulletjournal.logic.commands.ChangeDirectoryCommand;
 import seedu.bulletjournal.logic.commands.ClearCommand;
 import seedu.bulletjournal.logic.commands.Command;
 import seedu.bulletjournal.logic.commands.DeleteCommand;
