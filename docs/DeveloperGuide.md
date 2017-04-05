@@ -217,7 +217,7 @@ The `Model`,
   constructed as an object in the backend of the application. 
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
   instances of the same underlying object.
-  *If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
+    * If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
   subsequently utilized to generate the respective Task's `RecurringTaskOccurrence` objects.
 
 
