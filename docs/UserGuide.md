@@ -1,6 +1,7 @@
 # Tache - User Guide
 
-By : `T09-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  
+&nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -38,9 +39,7 @@ I am here to be your _virtual assistant_ and help you to manage all your deadlin
 You are currently reading my user guide, which has been written to help you with:
 * `Installing` me
 * `Using` me
-* `Troubleshooting` me whenever I give you problems (Hopefully I won't!)
-
-Ready? Let's begin!
+* `Troubleshooting` me
 
 
 ## 2. Getting Started
@@ -55,7 +54,7 @@ Ready? Let's begin!
 
    > My [GUI](#graphical-user-interface-gui) should appear in a few seconds:
 
-   <img src="images/Ui.png" width="600"><br>
+   <img src="images/UiComponents.png" width="600"><br>
    _Figure 2.1. My GUI_
 
 4. Type your desired command in my command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -99,17 +98,8 @@ When typing in your commands, do take note of the following specifications: <br>
 
 * Times must be specified in _am_ and/or _pm_.
 * Dates must be specified in _DDMMYY_ format.
-* Either date or time but not both can be left out in the <... date and time> task details.
-
-  > i.e.
-  > * `<start date and time>` <br>
-  > * `<due date and time>` <br>
-  > * `<end date and time>` <br>
-
 * `<task>` refers to the name of your task.
-
 * `<task_index>` refers to the task's index number.
-
 * [Task details](#task detail) for your tasks include the following:
 
   > * Name
@@ -119,7 +109,6 @@ When typing in your commands, do take note of the following specifications: <br>
   > * End_Time
 
 * The default delimiter between different task details is ";".
-
 * [Filters](#filter) for your tasks include the following:
 
   > * All
@@ -133,38 +122,23 @@ When typing in your commands, do take note of the following specifications: <br>
 Adds a task to your task list. <br>
 
 > Type your [task details](#task-detail) in their respective orders. <br>
-E.g. If you are adding a task with a deadline as in **`add`** `<task>; <due date and time>`,
-make sure that you indicate `<task>` before `<due date and time>`, not the other way round!
+E.g. If you are adding a task with a deadline as in <br>
+**`add`** `<task>; <due date and time>`,
+make sure that you indicate `<task>` before <br>
+`<due date and time>`, not the other way round.
 
-#### Add a _floating_ task:
+#### To add a _floating_ task:
 
 A floating task is a task that _does not have any specific times_. <br>
 You are probably not sure when you are going to do it, nor are you sure when exactly it is due. <br>
 
 Here are some examples of floating tasks: <br>
 
-> Note: This list is not exhaustive!
-
 * **Hobby-related activities or long-term goals**
 
   > You just want to record these tasks somewhere so that you can get to them when you are free someday. <br>
 
   **_E.g. Learn to bake_**
-
-* **New tasks which cannot be performed _yet_**
-
-  **_E.g. Schedule meet-up with Jamie_** <br>
-  Your friend Jamie might be overseas and uncontactable for now, so you will have to wait for
-  her to return to the country in order to schedule the meet-up.
-
- * **New tasks which do not have a confirmed deadline**
-
-   > It is too early to know when you have to perform these tasks by. <br>
-
-   **_E.g. Watch La La Land in the theatres_** <br>
-   You might not know when the movie "La La Land" will stop showing in the theatres. It seems to
-   be very popular and hence, many theatres might offer showtimes for it for an extended period
-   of time.
 
 Format: **`add`** `<task>` <br>
 
