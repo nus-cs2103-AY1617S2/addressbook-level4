@@ -26,6 +26,7 @@ public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
     private static final Pattern PARAMETER_ARGS_FORMAT = Pattern.compile("^[a-zA-Z0-9_]*$");
+    private static final String[] ACCEPTABLE_NULL_DATES = {"none", "null"};
 
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
@@ -107,7 +108,7 @@ public class ParserUtil {
     public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
         if (date.isPresent()) {
-            if (date.get().equals("none") || date.get().equals("null")) {
+            if (Arrays.asList(ACCEPTABLE_NULL_DATES).contains(date.get().toLowerCase())) {
                 return Optional.of(new Date());
             }
             else {

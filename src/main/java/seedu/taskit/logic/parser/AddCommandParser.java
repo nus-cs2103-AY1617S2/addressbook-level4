@@ -32,7 +32,6 @@ public class AddCommandParser {
         String start = null;
         String end = null;
         String priority = null;
-        //TODOD better way to make these fields optional
         try {
             start = argsTokenizer.getValue(PREFIX_FROM).get();
             end = argsTokenizer.getValue(PREFIX_TO).get();
