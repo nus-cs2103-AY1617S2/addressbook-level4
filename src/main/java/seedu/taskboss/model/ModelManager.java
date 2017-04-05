@@ -153,7 +153,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
 
-        indicateTaskBossChanged();
     }
 
     //@@author A0144904H
