@@ -25,8 +25,6 @@
    3.17. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-using-data-from-another-folder--use)<br>
    3.18. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-clearing-all-entries--clear)<br>
    3.19. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-exiting-the-program--exit)<br>
-   3.20. [Saving your Data](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#320-saving-the-data)<br>
-   3.21. [Differentiating your Tasks’ Urgency](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#321-differentiating-your-tasks-urgency)<br>
 4. [FAQ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#4-faq)<br>
 5. [Command Summary](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary)<br>
 &nbsp;
@@ -36,10 +34,10 @@
 TypeTask is an easy-to-use task manager which lets you schedule and manage your tasks simply <br>
 with a single line of command! With the efficacy of a calendar without its shortcomings, <br>
 TypeTask lets you organise your to-dos with ease so you can focus on your actual tasks. <br>
-TypeTask is especially good for you if: <br>
+TypeTask is especially good for you if you want: <br>
 
-> You want to do everything through a single line of command <br>
-> You want an application that works offline <br>
+> To do everything through a single line of command <br>
+> An application that works offline <br>
 > You want to write tasks that have deadlines or start-dates <br>
 
 ## 2. Quick Start
@@ -58,6 +56,18 @@ TypeTask is especially good for you if: <br>
 <img src="images/Ui.png" width="600">
 
 Fig 1. TypeTask’s User Interface <br>
+
+TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
+
+`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
+`Yellow`: this uncompleted task was labelled as a priority. <br>
+`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
+
+```
+> Note that all tasks that fall outside of these categories
+  will appear normally.
+  i.e. no additional colours.
+ ```
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -122,9 +132,8 @@ Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> t/<TIME>`
 
 ```
 Things To Note:
-> Start Date and End Date is compulsory
-> End Date must not be before Start Date
-> Start Time and End Time is compulsory
+> Start Date/Time and End Date/Time are compulsory
+> Start Date must be before End Date
 > Date can be in mm/dd/yyyy format
 > Space must be used between words for Date. 
    e.g "15 Oct", "next monday"
@@ -160,7 +169,7 @@ Examples:
 
 
 ### 3.6 Finding a Task: `find`
-You may not want search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
+You may not want to search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
 
 Format: `find <KEYWORD>`
 
@@ -228,6 +237,8 @@ Things To Note:
 > The task at the specified INDEX will be moved from the task
   list to the completed list.
 > The index refers to the index number shown in the most recent listing.
+> This list will only show you the tasks that are completed.
+  Deleted Task are not included.
 ```
 
 Examples:
@@ -277,26 +288,15 @@ To review what you have done (and feel better about yourself!), you may want to 
 
 Format: `listdone`
 
-```
-Things To Note:
-> This list will only show you the tasks that are completed.
-  Deleted Task are not included.
-```
-
 
 ### 3.14. Undoing the Latest Command : `undo`
 Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
 Format: `undo`
 
-```
-Things To Note:
-> Undo command will not work if there is no prior command executed.
-```
-
 
 ### 3.15. Saving the Data to Another Folder : `save`
-You may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
+Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format: `save <FILE_PATH>`
 
@@ -341,7 +341,7 @@ Examples:
 
 
 ### 3.18. Clearing all Entries : `clear`
-Want to start fresh? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
+Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
@@ -351,24 +351,6 @@ Format: `clear`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format: `exit`
-
-
-### 3.20. Saving the Data
-Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually!
-
-
-### 3.21. Differentiating your Tasks’ Urgency
-TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
-
-`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
-`Yellow`: this uncompleted task was labelled as a priority. <br>
-`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
-
-```
-> Note that all tasks that fall outside of these categories
-  will appear normally.
-  i.e. no additional colours.
- ```
 &nbsp;
 
 ## 4. FAQ
