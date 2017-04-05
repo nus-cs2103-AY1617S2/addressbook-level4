@@ -215,7 +215,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
 
     public SimpleDateFormat retriveFormat(String s) {
         SimpleDateFormat format;
-        if (s.length() <= 10) {
+        int stringLength = 10;
+        if (s.length() <= stringLength) {
             format = new SimpleDateFormat("dd/MM/yyyy");
         } else {
             format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
@@ -294,10 +295,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    //    public int getUpcomingOccurrenceIndex() {
-    //        String today = Timing.getTodayDate();
-    //    }
-
     public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
@@ -321,7 +318,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         newTask.getStartTiming().setTiming(newTask.getStartTiming().toString());
         newTask.getEndTiming().setTiming(newTask.getEndTiming().toString());
         taskToModify.removeOccurrence(occurrenceIndex);
-        //        taskToModify.getOccurrenceIndexList().set(0, occurrenceIndex--);
 
         return newTask;
     }

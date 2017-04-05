@@ -146,8 +146,8 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
+`StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -183,16 +183,16 @@ Author: Jay Kabra
 
 * The logic behind how to edit a specifc instance of a recurring task is as follows:
 * The `Parser` recognizes the `editthis` command to delete the occurrence of the selected task
-* from the encapsulated list of RecuirringTaskOccurrence objects (refer to the Model section to see the 
+* from the encapsulated list of RecuirringTaskOccurrence objects (refer to the Model section to see the
 * precise architecture of implementing recurring tasks).
 * A new task is subsequently instantiated (with its own description, priority, etc. parameters) and added
 * to the underlying Task list. Then the edit parameters are applied to this newly instantianted task.
-* 
+*
 * The logic behind how to delete a specific instance of a recurring task is as follows:
 * The `Parser` recognizes the `deletethis` command and subsequently removes the entire task from the list.
-* Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the 
-* recurring task back to the list with the specific instance removed. The effect for the user is a deletetion 
-* of a particular recurring task instance.      
+* Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the
+* recurring task back to the list with the specific instance removed. The effect for the user is a deletetion
+* of a particular recurring task instance.
 
 
 ### 2.4. Model component
@@ -212,11 +212,11 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 * defines reccuring tasks in the following way:
-  * Class 'RecurringTaskOccurrence' encapsulates 2 Timing objects (start & end times) and a boolean to indicate if 
-  * the occurrence is complete. 
-  * Class 'Task' encapsulates a list of RecurringTaskOccurrence objects. In addition, it also encapsulates a  
-  *'description,' 'priority,' 'frequency,' and a list of 'tags' for the respective task. Each of these fields is 
-  * constructed as an object in the backend of the application. 
+  * Class 'RecurringTaskOccurrence' encapsulates 2 Timing objects (start & end times) and a boolean to indicate if
+  * the occurrence is complete.
+  * Class 'Task' encapsulates a list of RecurringTaskOccurrence objects. In addition, it also encapsulates a
+  *'description,' 'priority,' 'frequency,' and a list of 'tags' for the respective task. Each of these fields is
+  * constructed as an object in the backend of the application.
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
   * instances of the same underlying object.
   * If tasks are recurring then their start/end times are populated based on the given frequency parameter.
