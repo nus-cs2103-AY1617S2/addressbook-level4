@@ -3,6 +3,7 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.task.Task;
@@ -25,6 +26,7 @@ public class SampleDataTest extends TaskManagerGuiTest {
     @Test
     public void taskManagerDataFileDoesNotExistLoadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
+        Arrays.sort(expectedList, Task.taskDateComparator);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

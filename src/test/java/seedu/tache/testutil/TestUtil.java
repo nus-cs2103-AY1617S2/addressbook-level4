@@ -283,6 +283,7 @@ public class TestUtil {
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.removeAll(asList(tasksToRemove));
+        listOfTasks.sort(TestTask.taskDateComparator);
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
@@ -317,6 +318,7 @@ public class TestUtil {
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
+        listOfTasks.sort(TestTask.taskDateComparator);
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 

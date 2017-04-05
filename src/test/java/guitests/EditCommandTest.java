@@ -25,7 +25,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void editAllFieldsSpecifiedSuccess() throws Exception {
         String detailsToEdit = "name Buy Eggs and Bread; end_date 01-04-17 19:55:12; tag HighPriority;";
-        int taskManagerIndex = 1;
+        int taskManagerIndex = 3;
         TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread")
                               .withEndDateTime("01-04-17 19:55:12")
                               .withTags("HighPriority").build();
@@ -62,7 +62,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         String detailsToEdit = "name Visit Grandpa";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 3;
+        int taskManagerIndex = 4;
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Visit Grandpa").build();
