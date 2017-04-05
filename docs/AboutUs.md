@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
     * [Task count](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
     * [List timed/floating tasks](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
-    * [Autocomplete function]
+    * [Autocomplete function](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#5-faq-frequently-asked-questions)
 * Code written: [[functional code](A0142255M.md)][[test code](A0142255M.md)]
 * Other major contributions:
 	* Did initial morph, formatting and restructuring of documentation from AddressBook to Tache
