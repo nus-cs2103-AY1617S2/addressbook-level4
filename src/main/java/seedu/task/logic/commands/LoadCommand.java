@@ -20,7 +20,8 @@ public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads all tasks from specified directory and file name. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Loads all tasks from specified directory and file name. "
             + "Parameters: LOAD_LOCATION\n"
             + "Example: " + COMMAND_WORD
             + " /Users/username/Documents/TaskManager/taskmanager.xml";

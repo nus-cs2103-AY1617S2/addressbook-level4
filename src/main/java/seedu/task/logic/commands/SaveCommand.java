@@ -16,7 +16,8 @@ public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks in specified directory with specified file name. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Saves all tasks in specified directory with specified file name. "
             + "Parameters: SAVE_LOCATION\n"
             + "Example: " + COMMAND_WORD
             + " /Users/username/Documents/TaskManager/taskmanager.xml";
