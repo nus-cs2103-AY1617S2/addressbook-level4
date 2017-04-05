@@ -111,7 +111,7 @@ public class History {
         }
     }
 
-    //This methods means undo is called
+    //This methods is called by undo after it changed the data
     public void handleUndo() {
         assert undoCount != 0;
         decreaseUndoCount();
@@ -119,7 +119,7 @@ public class History {
         decreaseCurrentFileIndex();
     }
 
-    //This methods means redo is called
+    //This methods is called by redo after it changed the data
     public void handleRedo() {
         assert redoCount != 0;
         decreaseRedoCount();

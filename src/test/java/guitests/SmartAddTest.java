@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.task.commons.core.GoogleCalendar;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.SmartAddCommand;
@@ -23,6 +24,7 @@ public class SmartAddTest extends TaskManagerGuiTest {
     @Test
     public void smartAdd() throws DuplicateTagException, IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
+        GoogleCalendar.setTestGoogleCredentialFilePath();
 
         //add task with all details
         commandBox.runCommand(SmartAddCommand.COMMAND_WORD_1 + " Meet friends for dinner 6pm-8pm"
