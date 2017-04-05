@@ -13,6 +13,10 @@ import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
 
+//@@author A0141102H
+/**
+ * Recurs a task
+ */
 public class RecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "RECUR";
