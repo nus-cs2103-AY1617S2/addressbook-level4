@@ -1,24 +1,27 @@
-package guitests;
-
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import guitests.guihandles.TaskCardHandle;
-import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
-import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Remark;
-import seedu.task.testutil.TestTask;
-import seedu.task.testutil.TestUtil;
-
-//@@author A0140063X
-public class SmartAddTest extends TaskManagerGuiTest {
-
-    @Test
+//package guitests;
+//
+//import static org.junit.Assert.assertTrue;
+//
+//import org.junit.Test;
+//
+//import guitests.guihandles.TaskCardHandle;
+//import seedu.task.commons.core.GoogleCalendar;
+//import seedu.task.commons.core.Messages;
+//import seedu.task.commons.exceptions.IllegalValueException;
+//import seedu.task.logic.commands.SmartAddCommand;
+//import seedu.task.model.tag.UniqueTagList;
+//import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
+//import seedu.task.model.task.Date;
+//import seedu.task.model.task.Location;
+//import seedu.task.model.task.Name;
+//import seedu.task.model.task.Remark;
+//import seedu.task.testutil.TestTask;
+//import seedu.task.testutil.TestUtil;
+//
+////@@author A0140063X
+//public class SmartAddTest extends TaskManagerGuiTest {
+//
+//    @Test
 //    public void smartAdd() throws DuplicateTagException, IllegalValueException {
 //        TestTask[] currentList = td.getTypicalTasks();
 //        GoogleCalendar.setTestGoogleCredentialFilePath();
@@ -69,29 +72,29 @@ public class SmartAddTest extends TaskManagerGuiTest {
 //        commandBox.runCommand("smart add Johnny");
 //        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 //    }
-
-    private TestTask createTask(String name, String startDate, String endDate, String remark,
-            String location, String tags, boolean isDone, String eventId)
-                    throws DuplicateTagException, IllegalValueException {
-        if (tags.trim().equals("")) {
-            return new TestTask(new Name(name), new Date(startDate), new Date(endDate),
-                    new Remark(remark), new Location(location),
-                    new UniqueTagList(), isDone, eventId);
-        } else {
-            return new TestTask(new Name(name), new Date(startDate), new Date(endDate),
-                    new Remark(remark), new Location(location),
-                    new UniqueTagList(tags.trim()), isDone, eventId);
-        }
-    }
-
-    private void assertSmartAddSuccess(TestTask taskToAdd, TestTask... currentList) {
-        //confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
-        assertMatching(taskToAdd, addedCard);
-
-        //confirm the list now contains all previous tasks plus the new task
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(expectedList));
-    }
-
-}
+//
+//    private TestTask createTask(String name, String startDate, String endDate, String remark,
+//            String location, String tags, boolean isDone, String eventId)
+//                    throws DuplicateTagException, IllegalValueException {
+//        if (tags.trim().equals("")) {
+//            return new TestTask(new Name(name), new Date(startDate), new Date(endDate),
+//                    new Remark(remark), new Location(location),
+//                    new UniqueTagList(), isDone, eventId);
+//        } else {
+//            return new TestTask(new Name(name), new Date(startDate), new Date(endDate),
+//                    new Remark(remark), new Location(location),
+//                    new UniqueTagList(tags.trim()), isDone, eventId);
+//        }
+//    }
+//
+//    private void assertSmartAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+//        //confirm the new card contains the right data
+//        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+//        assertMatching(taskToAdd, addedCard);
+//
+//        //confirm the list now contains all previous tasks plus the new task
+//        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+//        assertTrue(taskListPanel.isListMatching(expectedList));
+//    }
+//
+//}
