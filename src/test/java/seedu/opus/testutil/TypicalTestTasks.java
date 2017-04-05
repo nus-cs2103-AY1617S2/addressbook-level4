@@ -18,14 +18,14 @@ public class TypicalTestTasks {
         try {
             laundry = new TaskBuilder().withName("Do laundry")
                     .withNote("Twice as many detergent this time").withStatus("incomplete")
-                    .withPriority("hi").withStartTime("01/12/2017 12:00").withEndTime("06/12/2017 13:00")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
             dishes = new TaskBuilder().withName("Wash the dishes")
                     .withNote("They're in the sink").withStatus("incomplete")
                     .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
             quiz = new TaskBuilder().withName("Do CS2103T post lecture quiz")
-                    .withPriority("hi").withStartTime("02/12/2017 12:00").withEndTime("05/12/2017 13:00")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("On IVLE").build();
             grocery = new TaskBuilder().withName("Buy milk")
                     .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
@@ -37,7 +37,7 @@ public class TypicalTestTasks {
                     .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("COM02-01").build();
             payment = new TaskBuilder().withName("Pay school fees")
-                    .withPriority("hi").withStartTime("03/12/2017 12:00").withEndTime("04/12/2017 13:00")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
@@ -77,14 +77,6 @@ public class TypicalTestTasks {
     //@@author A0148081H-reused
     public TestTask[] getSortedByPriorityTasks() {
         return new TestTask[]{laundry, quiz, reflection, payment, dishes, consultation, grocery};
-    }
-
-    public TestTask[] getSortedByStartDateTasks() {
-        return new TestTask[]{laundry, quiz, payment};
-    }
-
-    public TestTask[] getSortedByEndDateTasks() {
-        return new TestTask[]{payment, quiz, laundry};
     }
     //@@author
 

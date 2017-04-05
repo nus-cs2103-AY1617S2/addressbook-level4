@@ -17,22 +17,6 @@ public class SortCommandTest extends TaskManagerGuiTest {
         assertSortSuccess(parameter, expectedSortedByPriorityTasksList);
     }
 
-    @Test
-    public void sortStartDateTestSuccess() throws Exception {
-        String parameter = "start";
-        TestTask[] expectedSortedByStartDateTasksList = td.getSortedByStartDateTasks();
-
-        assertSortSuccess(parameter, expectedSortedByStartDateTasksList);
-    }
-
-    @Test
-    public void sortEndDateTestSuccess() throws Exception {
-        String parameter = "end";
-        TestTask[] expectedSortedByEndDateTasksList = td.getSortedByEndDateTasks();
-
-        assertSortSuccess(parameter, expectedSortedByEndDateTasksList);
-    }
-
     /**
      * Checks whether the sorted task lists has the correct updated details.
      *
