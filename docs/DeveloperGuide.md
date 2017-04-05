@@ -260,6 +260,17 @@ Function of `Model`
    e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * The 'Model' component does not depend on any of the other three components.
 ```
+Additional Commands
+
+* Redo Command - It is able to redo only if an undo command has been executed before.
+This function is done by using stack. When an undo command is executed, taskManager is "push" into the stack before undo command's function is carried out. By doing this way, the previous state is saved inside the stack. When redo command is executed, the stack will "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in ModelManager under Model component.
+
+* RemoveDeadline Command - It is able to remove all dates in a task.
+It checks for valid index and set all the dates for the task to an empty string.
+
+* Undo Command - It is able to undo action commands: add, edit, delete, clear, redo commands. 
+This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed,
+the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in ModelManager under Model component.
 
 ### 3.5. Storage component
 
