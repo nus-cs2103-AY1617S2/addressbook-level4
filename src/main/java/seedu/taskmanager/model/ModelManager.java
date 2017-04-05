@@ -1,5 +1,8 @@
 package seedu.taskmanager.model;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -124,6 +127,20 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    // @@author A0140032E
+    @Override
+    public void updateFilteredTaskList(Date date) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+
+    }
+
+    @Override
+    public void updateFilteredTaskList(Date startDateCriteria, Date endDateCriteria) {
+        updateFilteredTaskList(new PredicateExpression(new DateRangeQualifier(startDateCriteria, endDateCriteria)));
+
+    }
+    // @@author
+
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -176,10 +193,9 @@ public class ModelManager extends ComponentManager implements Model {
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTitle().value, keyword)).findAny()
                     .isPresent();
             boolean hasDescription = nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getDescription().isPresent() ?
-                            task.getDescription().get().value : "", keyword))
-                    .findAny()
-                    .isPresent();
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(
+                            task.getDescription().isPresent() ? task.getDescription().get().value : "", keyword))
+                    .findAny().isPresent();
             boolean hasTag = false;
             UniqueTagList tagList = task.getTags();
             for (Tag tag : tagList) {
@@ -196,5 +212,74 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    // @@author A0140032E
+    private class DateQualifier implements Qualifier {
+        private LocalDate date;
+
+        DateQualifier(Date date) {
+            this.date = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+
+            LocalDate taskStartDate = task.getStartDate().isPresent()
+                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+            LocalDate taskEndDate = task.getEndDate().isPresent()
+                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+
+            boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
+            if (isFloatingTask) {
+                return false;
+            }
+            if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
+
+                return !(taskStartDate.isAfter(date) || taskEndDate.isBefore(date));
+            }
+            if (task.getStartDate().isPresent()) {
+                return !(taskStartDate.isAfter(date));
+            }
+            return !(taskEndDate.isBefore(date));
+        }
+
+        @Override
+        public String toString() {
+            return "date=" + date.toString();
+        }
+    }
+
+    private class DateRangeQualifier implements Qualifier {
+        private Date startDateCriteria, endDateCriteria;
+
+        DateRangeQualifier(Date startDateCriteria, Date endDateCriteria) {
+            this.startDateCriteria = startDateCriteria;
+            this.endDateCriteria = endDateCriteria;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
+            if (isFloatingTask) {
+                return false;
+            }
+            if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
+                return !(task.getStartDate().get().before(startDateCriteria)
+                        || task.getEndDate().get().after(endDateCriteria));
+            }
+            if (task.getStartDate().isPresent()) {
+                return !(task.getStartDate().get().before(startDateCriteria)
+                        || task.getStartDate().get().after(startDateCriteria));
+            }
+            return !(task.getEndDate().get().before(startDateCriteria)
+                    || task.getStartDate().get().after(startDateCriteria));
+        }
+
+        @Override
+        public String toString() {
+            return "date range=" + startDateCriteria.toString() + " to " + endDateCriteria.toString();
+        }
+    }
+    // @@author
 
 }
