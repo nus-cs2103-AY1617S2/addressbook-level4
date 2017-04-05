@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskboss.commons.core.LogsCenter;
+import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.commons.events.ui.NewResultAvailableEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 
@@ -37,6 +38,7 @@ public class ResultDisplay extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(mainPane);
         registerAsAnEventHandler(this);
+        displayed.setValue(Messages.MESSAGE_WELCOME_TO_TASKBOSS);
     }
 
     @Subscribe
