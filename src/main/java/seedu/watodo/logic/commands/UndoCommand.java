@@ -1,9 +1,10 @@
 package seedu.watodo.logic.commands;
 
-/**
- * Clears the task manager.
- */
 //@@author A0139845R
+/**
+ * Undo previous commands from command history stack each time command is executed
+ * until no more commands in command history stack
+ */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";

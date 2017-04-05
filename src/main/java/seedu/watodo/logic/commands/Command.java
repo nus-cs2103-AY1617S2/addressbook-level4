@@ -37,10 +37,17 @@ public abstract class Command {
         this.model = model;
     }
 
+    //@@author A0139845R
+    /**
+     * Used to perform undo. Specific to each task.
+     */
     public void unexecute() {
 
     }
 
+    /**
+     * Used to perform redo. Sepcific to each task.
+     */
     public void redo() {
 
     }
