@@ -22,8 +22,10 @@ import seedu.toluist.ui.commons.CommandResult;
 public class SortController extends Controller {
     private static final String RESULT_MESSAGE = "List is now sorted by: %s.";
     private static final String ERROR_MESSAGE = "Unable to sort by: %s";
-    private static final String NO_VALID_KEYWORD_MESSAGE = "No valid keyword entered. Please type 'help sort' for details";
-    private static final String MULTIPLE_KEYWORDS_AND_DEFAULT_MESSAGE = "'Default' keyword may not be used with other parameters.";
+    private static final String NO_VALID_KEYWORD_MESSAGE = "No valid keyword entered."
+            + " Please type 'help sort' for details";
+    private static final String MULTIPLE_KEYWORDS_AND_DEFAULT_MESSAGE = "'Default' keyword may not"
+            + " be used with other parameters.";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*sort.*";
     private static final String COMMAND_WORD = "sort";
     private static final String WORD_BY = "by";
@@ -70,7 +72,8 @@ public class SortController extends Controller {
         displayResult(invalidKeywords, keywordList);
     }
 
-    private void displayResult(ArrayList<String> invalidKeywords, ArrayList<String> keywordList) throws InvalidCommandException {
+    private void displayResult(ArrayList<String> invalidKeywords, ArrayList<String> keywordList)
+            throws InvalidCommandException {
         String[] resultantOrder = Task.getCurrentSort();
         String resultMessage = StringUtil.EMPTY_STRING;
         if (keywordList.isEmpty()) {
