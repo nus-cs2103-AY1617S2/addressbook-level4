@@ -86,7 +86,7 @@ Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 Edits a deadline's endtime with default date.<br>
 Format: `edit INDEX [e/]`
 
-Edits a event's start time and endt ime with default date.<br>
+Edits a event's start time and endtime with default date.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
