@@ -4,9 +4,21 @@ package seedu.onetwodo.model.task;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
 public class PriorityTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void constructor() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        Priority p = new Priority("incorrect");
+    }
 
     @Test
     public void isValidPriority() {
