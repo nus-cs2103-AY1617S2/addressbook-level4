@@ -18,6 +18,8 @@ import seedu.tache.logic.commands.HelpCommand;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.logic.commands.LoadCommand;
+import seedu.tache.logic.commands.NextCommand;
+import seedu.tache.logic.commands.PrevCommand;
 import seedu.tache.logic.commands.SaveCommand;
 import seedu.tache.logic.commands.SelectCommand;
 import seedu.tache.logic.commands.UndoCommand;
@@ -95,6 +97,14 @@ public class Parser {
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.SHORT_COMMAND_WORD:
             return new UndoCommand();
+
+        case PrevCommand.COMMAND_WORD:
+        case PrevCommand.SHORT_COMMAND_WORD:
+            return new PrevCommand();
+
+        case NextCommand.COMMAND_WORD:
+        case NextCommand.SHORT_COMMAND_WORD:
+            return new NextCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
