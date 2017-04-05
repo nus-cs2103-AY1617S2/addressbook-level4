@@ -64,7 +64,7 @@ public class UiManager extends ComponentManager implements Ui {
         }
     }
 
-    //@@author 0141928B
+    //@@author A0141928B
     /**
      * Load all the fonts in the resources/fonts folder
      */
