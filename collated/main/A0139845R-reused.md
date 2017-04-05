@@ -12,3 +12,69 @@
     }
 
 ```
+###### \resources\view\TaskListCard.fxml
+``` fxml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <children>
+                <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+                    <stylesheets>
+                        <URL value="@DarkTheme.css" />
+                        <URL value="@Extensions.css" />
+                    </stylesheets>
+                    <padding>
+                        <Insets bottom="5" left="15" right="5" top="5" />
+                    </padding>
+
+                    <children>
+                  <Label fx:id="status" nodeOrientation="RIGHT_TO_LEFT" styleClass="content" text="\$status" textAlignment="RIGHT" underline="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="5">
+                            <children>
+                                <HBox>
+                                     <Label fx:id="id" styleClass="cell_big_label">
+                                         <minWidth>
+                                             <!-- Ensures that the label text is never truncated -->
+                                             <Region fx:constant="USE_PREF_SIZE" />
+                                         </minWidth>
+                                     </Label>
+                                     <Label fx:id="description" styleClass="cell_big_label" text="\$first" />
+
+                           <Pane prefHeight="0.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
+                                </HBox>
+                            </children>
+                        </HBox>
+                  <Label fx:id="startDate" styleClass="cell_big_label" text="\$startDate" />
+                  <Label fx:id="endDate" styleClass="cell_big_label" text="\$endDate" />
+                        <FlowPane fx:id="tags" />
+                    </children>
+                </VBox>
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </children>
+</HBox>
+```
