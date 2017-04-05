@@ -11,51 +11,37 @@ public class ContentAssistTests extends DoistGUITest {
     GuiRobot bot = new GuiRobot();
     @Test
     public void testCorrectSuggestionsDisplayed() {
-        String input = "f";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("f", "f");
     }
 
     @Test
     public void testCorrectSuggestionsDisplayedWithCompleteCommandWord() {
-        String input = "fin";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("fin", "fin");
     }
 
     @Test
     public void testCorrectSingleSuggestionsDisplayedWithCompleteCommandWord() {
-        String input = "find";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("find", "find");
     }
 
     @Test
     public void testNoSuggestionsDisplayedBecuaseOfSpace() {
-        String input = "find ";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("find ", "find");
     }
 
     @Test
     public void testNoSuggestionsDisplayedBecuaseOfNoMatch() {
-        String input = "no suggesion will match me";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("no suggesion will match me", "me");
     }
 
     @Test
     public void testSuggestionOnCorrectParameterKey() {
-        String input = "do task \\fro";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions("\\fro");
+        correctSuggestionsDisplayedWhenEnter("do task \\fro", "\\fro");
     }
 
     @Test
     public void testSuggestionOnIncorrectParameterKey() {
-        String input = "do task \\incorrect_key";
-        commandBox.enterCommand(input);
-        assertCorrectSuggestions(input);
+        correctSuggestionsDisplayedWhenEnter("do task \\incorrect_key", "\\incorrect_key");
     }
 
     @Test
@@ -72,6 +58,11 @@ public class ContentAssistTests extends DoistGUITest {
         commandBox.enterCommand(input);
         bot.type(KeyCode.TAB);
         assertTrue("do task \\under".equals(commandBox.getCommandInput()));
+    }
+
+    private void correctSuggestionsDisplayedWhenEnter(String input, String lastWord) {
+        commandBox.enterCommand(input);
+        assertCorrectSuggestions(lastWord);
     }
 }
 

@@ -27,7 +27,7 @@ public class CommandAutoCompleteManager {
         return instance;
     }
 
-    // main function method
+    // get the list of suggestions according to the input then display it
     public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
         attachSuggestionWindowIfNecessary(commandTextField);
 
@@ -67,6 +67,25 @@ public class CommandAutoCompleteManager {
         return suggestions;
     }
 
+    /**
+     * display the suggested text in a ContextMenu pop-up window
+     */
+    private void displaySuggestions(InlineCssTextArea commandTextField, ArrayList<String> suggestions) {
+        ContentAssistPopupWindow suggestionList = (ContentAssistPopupWindow) commandTextField.getPopupWindow();
+        suggestionList.replaceItems(suggestions);
+
+        if (!commandTextField.getPopupWindow().isShowing()) {
+            suggestionList.show(commandTextField);
+        }
+    }
+
+    public void attachSuggestionWindowIfNecessary(InlineCssTextArea commandTextField) {
+        if (commandTextField.getPopupWindow() == null) {
+            commandTextField.setPopupWindow(new ContentAssistPopupWindow());
+            commandTextField.setPopupAnchorOffset(suggestionBoxOffset);
+        }
+    }
+
     //@@author A0147620L
     /**
      * Method to provide auto-complete suggestions for search
@@ -100,24 +119,5 @@ public class CommandAutoCompleteManager {
         }
     }
     //@@author
-
-    /**
-     * display the suggested text in a ContextMenu pop-up window
-     */
-    private void displaySuggestions(InlineCssTextArea commandTextField, ArrayList<String> suggestions) {
-        ContentAssistPopupWindow suggestionList = (ContentAssistPopupWindow) commandTextField.getPopupWindow();
-        suggestionList.replaceItems(suggestions);
-
-        if (!commandTextField.getPopupWindow().isShowing()) {
-            suggestionList.show(commandTextField);
-        }
-    }
-
-    public void attachSuggestionWindowIfNecessary(InlineCssTextArea commandTextField) {
-        if (commandTextField.getPopupWindow() == null) {
-            commandTextField.setPopupWindow(new ContentAssistPopupWindow());
-            commandTextField.setPopupAnchorOffset(suggestionBoxOffset);
-        }
-    }
 }
 
