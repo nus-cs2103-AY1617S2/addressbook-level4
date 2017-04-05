@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String ICON = "/images/task_manager.png";
     private static final String FXML = "MainWindow.fxml";
     private static final String UNDO_COMMAND = "undo";
+    private static final String REDO_COMMAND = "redo";
     private static final int MIN_HEIGHT = 650;
     private static final int MIN_WIDTH = 1100;
 
@@ -95,14 +96,24 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(this.helpMenuItem, KeyCombination.valueOf("F1"));
         this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             KeyCombination undo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+            KeyCombination redo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
             @Override
             public void handle(KeyEvent evt) {
                 if (this.undo.match(evt)) {
-                 // handle command failure
+                        // handle command failure
                         try {
                             MainWindow.this.logic.execute(UNDO_COMMAND);
                     } catch (CommandException e) {
                         MainWindow.this.logger.info("Invalid command: " + UNDO_COMMAND);
+                        raise(new NewResultAvailableEvent(e.getMessage()));
+                    }
+                }
+                if (this.redo.match(evt)) {
+                           // handle command failure
+                        try {
+                            MainWindow.this.logic.execute(REDO_COMMAND);
+                    } catch (CommandException e) {
+                        MainWindow.this.logger.info("Invalid command: " + REDO_COMMAND);
                         raise(new NewResultAvailableEvent(e.getMessage()));
                     }
                 }
