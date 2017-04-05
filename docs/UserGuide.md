@@ -6,8 +6,9 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+3. [Notes on Recurring Tasks](#notes-on-recurring-tasks)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
 ## 1. Quick Start
 
@@ -230,8 +231,6 @@ Examples:
 `editthis 1 p/1`<br>
 Puts a priority level of 1 to the 1st task in the resulting list (assuming it is recurring, only this occurrence will have priority 1).
 
-
-
 ### 2.9. Clearing all entries : `clear`
 
 Clears all entries from the task list.<br>
@@ -247,13 +246,29 @@ Format: `exit`
 task list data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-## 3. FAQ
+## 3. Notes on Recurring Tasks
+
+Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports 
+the implementation of such tasks. A few things to note about how to use this feature: 
+
+* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters 
+as the start and end timings of when the overall recurring pattern should start/end respectively. 
+  * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
+  every week from 11am - 12pm, the syntax of the respective command would be as follows: 
+  `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
+  * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
+  * If this task ends before 60 days, then you can execute `delete INDEX` where INDEX specifies the index of the recurring task on
+  the User Interface.
+  * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it 
+  recurrs for another 60 days.
+
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
        the file that contains the data of your previous task list folder.
 
-## 4. Command Summary
+## 5. Command Summary
 
 * **Add**  `add TASK_NAME p/1 sd/START_DATE ed/DUE_DATE [t/TAG]...` <br>
    e.g. `add Study for midterm p/1 sd/04/03/2017 ed/04/04/2017 t/study t/midterm`
@@ -289,14 +304,3 @@ There is no need to save manually.
 
 * **Exit ** : `exit` <br>
    e.g. `exit`
-
-
-Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports 
-the implementation of such tasks. A few things to note about how to use this feature: 
-* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters 
-as the start and end timings of when the overall recurring pattern should start/end respectively. 
-  * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
-  every week from 11am - 12pm, the syntax of the respective command would be as follows: 
-  `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
-  * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
-  * 
