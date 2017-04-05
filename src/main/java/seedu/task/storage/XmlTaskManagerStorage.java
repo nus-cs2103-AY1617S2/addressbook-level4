@@ -45,7 +45,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
         File taskManagerFile = new File(filePath);
 
         if (!taskManagerFile.exists()) {
-            logger.info("AddressBook file "  + taskManagerFile + " not found");
+            logger.info("TaskManager file "  + taskManagerFile + " not found");
             return Optional.empty();
         }
 
