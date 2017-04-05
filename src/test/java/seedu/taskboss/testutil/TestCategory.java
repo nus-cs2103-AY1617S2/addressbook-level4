@@ -27,7 +27,7 @@ public class TestCategory extends Category {
     public void setTaskCount(int count) {
         taskCount = count;
     }
-    
+
     public void setTaskList(TestTask...tasks) {
         taskList = Lists.newArrayList(tasks);
     }
