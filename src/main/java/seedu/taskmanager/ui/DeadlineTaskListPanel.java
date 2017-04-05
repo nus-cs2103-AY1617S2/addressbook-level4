@@ -38,8 +38,7 @@ public class DeadlineTaskListPanel extends UiPart<Region> {
         ObservableList<Pair<ReadOnlyTask, Integer>> deadlineTaskList = FXCollections.observableArrayList();
         for (int index = 0; taskList.size() != index; index++) {
             ReadOnlyTask taskToDelete = taskList.get(index);
-            if (!taskToDelete.getEndDate().value.equals("EMPTY_FIELD")
-                    && taskToDelete.getStartDate().value.equals("EMPTY_FIELD")) {
+            if (taskToDelete.isDeadlineTask()) {
                 Pair<ReadOnlyTask, Integer> deadlineTask = new Pair<ReadOnlyTask, Integer>(taskToDelete, index);
                 deadlineTaskList.add(deadlineTask);
             }

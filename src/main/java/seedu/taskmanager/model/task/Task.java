@@ -19,6 +19,8 @@ public class Task implements ReadOnlyTask {
     private boolean isMarkedAsComplete;
     private UniqueCategoryList categories;
 
+    private final String EMPTY_FIELD = "EMPTY_FIELD";
+
     /**
      * Every field must be present and not null.
      */
@@ -149,4 +151,46 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    // @@author A0142418L
+    /**
+     * Checks the fields populated within the task
+     * 
+     * @return true if task is a Event Task
+     */
+    @Override
+    public boolean isEventTask() {
+        if (!startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks the fields populated within the task
+     * 
+     * @return true if task is a Deadline Task
+     */
+    @Override
+    public boolean isDeadlineTask() {
+        if (startDate.value.equals(EMPTY_FIELD) && !endDate.value.equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks the fields populated within the task
+     * 
+     * @return true if task is a Floating Task
+     */
+    @Override
+    public boolean isFloatingTask() {
+        if (startDate.value.equals(EMPTY_FIELD) && endDate.value.equals(EMPTY_FIELD)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

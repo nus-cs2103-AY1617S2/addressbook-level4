@@ -62,9 +62,8 @@ public class AddCommand extends Command {
             List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
             if (lastShownList.size() >= 1) {
-                if (isSameDateEvent(toAdd) || isMultipleDateEvent(toAdd)) {
-                    while (isSameDateEvent(lastShownList.get(addIndex))
-                            || isMultipleDateEvent(lastShownList.get(addIndex))) {
+                if (toAdd.isEventTask()) {
+                    while (lastShownList.get(addIndex).isEventTask()) {
                         if (isAddEventEarlierAddListIndex(toAdd, lastShownList.get(addIndex))) {
                             break;
                         }
@@ -75,16 +74,15 @@ public class AddCommand extends Command {
                     }
                 }
 
-                if (isDeadlineTask(toAdd)) {
-                    while (isSameDateEvent(lastShownList.get(addIndex))
-                            || isMultipleDateEvent(lastShownList.get(addIndex))) {
+                if (toAdd.isDeadlineTask()) {
+                    while (lastShownList.get(addIndex).isEventTask()) {
                         addIndex++;
                         if (addIndex == lastShownList.size()) {
                             break;
                         }
                     }
 
-                    while ((addIndex != lastShownList.size()) && isDeadlineTask(lastShownList.get(addIndex))) {
+                    while ((addIndex != lastShownList.size()) && lastShownList.get(addIndex).isDeadlineTask()) {
                         if (isAddDeadlineEarlierAddListIndex(toAdd, lastShownList.get(addIndex))) {
                             break;
                         }
@@ -95,7 +93,7 @@ public class AddCommand extends Command {
                     }
                 }
 
-                if (isFloatingTask(toAdd)) {
+                if (toAdd.isFloatingTask()) {
                     addIndex = lastShownList.size();
                 }
 
@@ -203,74 +201,4 @@ public class AddCommand extends Command {
             }
         }
     }
-
-    private boolean isFloatingTask(Task readOnlyTask) {
-        if (isStartDateEmpty(readOnlyTask) && isStartTimeEmpty(readOnlyTask) && isEndDateEmpty(readOnlyTask)
-                && isEndTimeEmpty(readOnlyTask)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // @@author A0142418L-reused
-    private boolean isSameDateEvent(ReadOnlyTask readOnlyTask) {
-        if ((readOnlyTask.getStartDate().value).equals(readOnlyTask.getEndDate().value)
-                && (!readOnlyTask.getStartDate().value.equals("EMPTY_FIELD"))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isMultipleDateEvent(ReadOnlyTask readOnlyTask) {
-        if (!readOnlyTask.getStartDate().value.equals(readOnlyTask.getEndDate().value)
-                && !readOnlyTask.getStartDate().value.equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isDeadlineTask(ReadOnlyTask readOnlyTask) {
-        if (isStartDateEmpty(readOnlyTask) && isStartTimeEmpty(readOnlyTask) && !isEndDateEmpty(readOnlyTask)
-                && !isEndTimeEmpty(readOnlyTask)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isStartDateEmpty(ReadOnlyTask readOnlyTask) {
-        if ((readOnlyTask.getStartDate().value).equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isStartTimeEmpty(ReadOnlyTask readOnlyTask) {
-        if ((readOnlyTask.getStartTime().value).equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isEndDateEmpty(ReadOnlyTask readOnlyTask) {
-        if ((readOnlyTask.getEndDate().value).equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isEndTimeEmpty(ReadOnlyTask readOnlyTask) {
-        if ((readOnlyTask.getEndTime().value).equals("EMPTY_FIELD")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

@@ -54,11 +54,11 @@ public class RecurringCommand extends Command {
 
         ReadOnlyTask taskToRecur = lastShownList.get(taskListIndex);
 
-        if (isFloatingTask(taskToRecur)) {
+        if (taskToRecur.isFloatingTask()) {
             throw new CommandException("Unable to create recurring task for floating task!");
         }
 
-        if (isDeadline(taskToRecur)) {
+        if (taskToRecur.isDeadlineTask()) {
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
 
                 try {
@@ -80,7 +80,7 @@ public class RecurringCommand extends Command {
             }
         }
 
-        if (isEvent(taskToRecur)) {
+        if (taskToRecur.isEventTask()) {
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
                 try {
                     recurringTask = new Task(taskToRecur.getTaskName(),
@@ -105,36 +105,6 @@ public class RecurringCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(
                 String.format(MESSAGE_RECURRING_TASK_SUCCESS, String.valueOf(numberOfRecurrence), " number of times"));
-    }
-
-    private Boolean isFloatingTask(ReadOnlyTask input) {
-        if (input.getStartDate().toString().equals(EMPTY_FIELD) && input.getStartTime().toString().equals(EMPTY_FIELD)
-                && input.getEndDate().toString().equals(EMPTY_FIELD)
-                && input.getEndTime().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private Boolean isDeadline(ReadOnlyTask input) {
-        if (input.getStartDate().toString().equals(EMPTY_FIELD) && input.getStartTime().toString().equals(EMPTY_FIELD)
-                && !input.getEndDate().toString().equals(EMPTY_FIELD)
-                && !input.getEndTime().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private Boolean isEvent(ReadOnlyTask input) {
-        if (!input.getStartDate().toString().equals(EMPTY_FIELD) && !input.getStartTime().toString().equals(EMPTY_FIELD)
-                && !input.getEndDate().toString().equals(EMPTY_FIELD)
-                && !input.getEndTime().toString().equals(EMPTY_FIELD)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private String getNewDate(int loops, String typeOfRecurrence, String existingDate) {
