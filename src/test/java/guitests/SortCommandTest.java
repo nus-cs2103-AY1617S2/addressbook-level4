@@ -1,9 +1,9 @@
 //@@author A0162011A
 package guitests;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -80,18 +80,18 @@ public class SortCommandTest extends ToLuistGuiTest {
     private void assertSortedByDefault() {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
-            assertTrue((shownTasks.get(i).isOverdue() && !shownTasks.get(i+1).isOverdue()) ||
-                (shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i+1).getTaskPriority())) > 0 ||
-                DateTimeUtil.isBefore(shownTasks.get(i).getEndDateTime(), shownTasks.get(i+1).getEndDateTime()) ||
-                DateTimeUtil.isBefore(shownTasks.get(i).getStartDateTime(), shownTasks.get(i+1).getStartDateTime()) ||
-                shownTasks.get(i).getDescription().compareToIgnoreCase(shownTasks.get(i+1).getDescription()) >= 0);
+            assertTrue((shownTasks.get(i).isOverdue() && !shownTasks.get(i + 1).isOverdue()) ||
+                (shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i + 1).getTaskPriority())) > 0 ||
+                DateTimeUtil.isBefore(shownTasks.get(i).getEndDateTime(), shownTasks.get(i + 1).getEndDateTime()) ||
+                DateTimeUtil.isBefore(shownTasks.get(i).getStartDateTime(), shownTasks.get(i + 1).getStartDateTime()) ||
+                shownTasks.get(i).getDescription().compareToIgnoreCase(shownTasks.get(i + 1).getDescription()) >= 0);
         }
     }
 
     private void assertSortedByPriority() {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
-            assertTrue(shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i+1).getTaskPriority()) >= 0);
+            assertTrue(shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i + 1).getTaskPriority()) >= 0);
         }
     }
 
@@ -99,7 +99,7 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(DateTimeUtil.isBeforeOrEqual(
-                    shownTasks.get(i).getEndDateTime(), shownTasks.get(i+1).getEndDateTime()));
+                    shownTasks.get(i).getEndDateTime(), shownTasks.get(i + 1).getEndDateTime()));
         }
     }
 
@@ -107,7 +107,7 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(DateTimeUtil.isBeforeOrEqual(
-                    shownTasks.get(i).getStartDateTime(), shownTasks.get(i+1).getStartDateTime()));
+                    shownTasks.get(i).getStartDateTime(), shownTasks.get(i + 1).getStartDateTime()));
         }
     }
 
@@ -115,7 +115,7 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(shownTasks.get(i).getDescription().
-                    compareToIgnoreCase(shownTasks.get(i+1).getDescription()) >= 0);
+                    compareToIgnoreCase(shownTasks.get(i + 1).getDescription()) >= 0);
         }
     }
 
@@ -123,7 +123,7 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(shownTasks.get(i).isOverdue() ||
-                    (shownTasks.get(i).isOverdue() == shownTasks.get(i+1).isOverdue()));
+                    (shownTasks.get(i).isOverdue() == shownTasks.get(i + 1).isOverdue()));
         }
     }
 
@@ -131,9 +131,9 @@ public class SortCommandTest extends ToLuistGuiTest {
         ArrayList<Task> shownTasks = UiStore.getInstance().getShownTasks();
         for (int i = 0; i < shownTasks.size() - 1; i++) {
             assertTrue(
-                    shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i+1).getTaskPriority()) > 0 ||
+                    shownTasks.get(i).getTaskPriority().compareTo(shownTasks.get(i + 1).getTaskPriority()) > 0 ||
                     DateTimeUtil.isBeforeOrEqual(
-                            shownTasks.get(i).getEndDateTime(), shownTasks.get(i+1).getEndDateTime()));
+                            shownTasks.get(i).getEndDateTime(), shownTasks.get(i + 1).getEndDateTime()));
         }
     }
 }
