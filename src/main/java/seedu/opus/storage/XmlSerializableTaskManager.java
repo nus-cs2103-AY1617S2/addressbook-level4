@@ -60,20 +60,6 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public ObservableList<ReadOnlyTask> getSortedList(String keyword) {
-        final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
-            try {
-                return p.toModelType();
-            } catch (IllegalValueException e) {
-                e.printStackTrace();
-                //TODO: better error handling
-                return null;
-            }
-        }).collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return new UnmodifiableObservableList<>(tasks);
-    }
-
-    @Override
     public ObservableList<Tag> getTagList() {
         final ObservableList<Tag> tags = this.tags.stream().map(t -> {
             try {

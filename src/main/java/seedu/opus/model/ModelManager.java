@@ -1,24 +1,23 @@
 package seedu.opus.model;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.opus.commons.core.ComponentManager;
 import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
+import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
-import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
-import seedu.opus.commons.util.StringUtil;
-import seedu.opus.model.tag.Tag;
+import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.opus.sync.SyncManager;
+import seedu.opus.sync.SyncServiceGtask;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -32,8 +31,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private History history;
 
+    private final SyncManager syncManager;
+
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     *
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
@@ -44,6 +46,8 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         history = new History();
+
+        syncManager = new SyncManager(new SyncServiceGtask());
     }
 
     public ModelManager() {
@@ -55,6 +59,7 @@ public class ModelManager extends ComponentManager implements Model {
         history.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -67,11 +72,19 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    //@@author A0148081H
+    /** Raises an event to indicate that save location has changed */
+    private void indicateChangeSaveLocation(String location) {
+        raise(new ChangeSaveLocationEvent(location));
+    }
+    //@@author
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         history.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -80,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
@@ -91,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     //@@author A0148087W
@@ -98,11 +113,34 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetToPreviousState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
+        indicateTaskManagerChanged();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+    }
+
+    @Override
+    public void startSync() {
+        this.syncManager.startSync();
+    }
+
+    @Override
+    public void stopSync() {
+        this.syncManager.stopSync();
+    }
+
+    //@@author
+
+    //=========== Storage Method ==========================================================================
+
+    //@@author A0148081H
+    @Override
+    public synchronized void changeSaveLocation(String location) {
+        indicateChangeSaveLocation(location);
         indicateTaskManagerChanged();
     }
     //@@author
@@ -117,114 +155,54 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0148081H
     @Override
     public void sortList(String keyword) {
-        filteredTasks = new FilteredList<>(this.taskManager.getSortedList(keyword));
+        taskManager.sortTasks(keyword);
+        indicateTaskManagerChanged();
     }
     //@@author
+
+    @Override
+    public int getTaskIndex(ReadOnlyTask task) {
+        return filteredTasks.indexOf(task);
+    }
 
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
 
+    //@@author A0126345J
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(
-                new NameQualifier(keywords), new NoteQualifier(keywords), new TagQualifier(keywords)
-                ));
+    public void updateFilteredTaskList(List<Qualifier> qualifiers) {
+        updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    //========== Classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
     }
 
-    //@@author A0126345J
     private class PredicateExpression implements Expression {
 
         private final List<Qualifier> qualifiers;
 
-
-        PredicateExpression(Qualifier... qualifiers) {
-            this.qualifiers = Arrays.asList(qualifiers);
+        PredicateExpression(List<Qualifier> qualifiers) {
+            this.qualifiers = qualifiers;
         }
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            boolean result = false;
+            boolean result = true;
             for (Qualifier qualifier: qualifiers) {
-                result = result | qualifier.run(task);
+                result = result & qualifier.run(task);
             }
             return result;
         }
 
     }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-    }
-
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
-
-        NameQualifier(Set<String> nameKeyWords) {
-            this.nameKeyWords = nameKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    private class NoteQualifier implements Qualifier {
-        private Set<String> noteKeyWords;
-
-        NoteQualifier(Set<String> noteKeyWords) {
-            this.noteKeyWords = noteKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            String note = task.getNote().isPresent() ? task.getNote().get().value : "";
-            return noteKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(note, keyword))
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
-    private class TagQualifier implements Qualifier {
-        private Set<String> tagKeyWords;
-
-        TagQualifier(Set<String> tagKeyWords) {
-            this.tagKeyWords = tagKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return tagKeyWords.stream()
-                    .filter(keyword -> {
-                        try {
-                            return task.getTags().contains(new Tag(keyword));
-                        } catch (IllegalValueException e) {
-                            e.printStackTrace();
-                        }
-                        return false;
-                    })
-                    .findAny()
-                    .isPresent();
-        }
-
-    }
-
+    //@@author
 }

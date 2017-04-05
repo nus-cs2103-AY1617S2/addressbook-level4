@@ -163,4 +163,11 @@ public class TaskListPanelHandle extends GuiHandle {
     public int getNumberOfTasks() {
         return getListView().getItems().size();
     }
+
+    //@@author A0124368A
+    public String getPlaceholderText() {
+        return getListView().getPlaceholder().toString();
+    }
+    //@@author
+
 }

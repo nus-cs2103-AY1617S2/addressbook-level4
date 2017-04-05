@@ -31,6 +31,8 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 800;
     private static final boolean SHOW_INDEX_SIDE_PANEL = false;
     private static final boolean SHOW_INDEX_MAIN_PANEL = true;
+    private static final String MESSAGE_NO_TASKS_MAIN_PANEL = "No tasks.";
+    private static final String MESSAGE_NO_TASKS_SIDE_PANEL = "No tasks due in this week!";
 
     private Stage primaryStage;
     private Logic logic;
@@ -119,8 +121,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), getFilteredTasks(), SHOW_INDEX_MAIN_PANEL);
-        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), getCurrentWeekTasks(), SHOW_INDEX_SIDE_PANEL);
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), getFilteredTasks(),
+                SHOW_INDEX_MAIN_PANEL, MESSAGE_NO_TASKS_MAIN_PANEL);
+        sidePanel = new TaskListPanel(getSidePanelPlaceholder(), getCurrentWeekTasks(),
+                SHOW_INDEX_SIDE_PANEL, MESSAGE_NO_TASKS_SIDE_PANEL);
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
