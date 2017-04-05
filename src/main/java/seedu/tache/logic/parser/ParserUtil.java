@@ -271,4 +271,16 @@ public class ParserUtil {
         }
     }
 
+    public static boolean canParse(String s) {
+        return DateTime.canParse(s);
+    }
+
+    public static boolean isTime(String s) {
+        return DateTime.isTime(s);
+    }
+
+    public static boolean isDate(String s) {
+        return DateTime.isDate(s);
+    }
+
 }
