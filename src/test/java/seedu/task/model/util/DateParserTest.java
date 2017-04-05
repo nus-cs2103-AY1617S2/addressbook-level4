@@ -18,7 +18,6 @@ public class DateParserTest {
     public void isValidDateString() {
         // invalid date
         assertFalse(DateParser.isValidDateString(""));
-        assertFalse(DateParser.isValidDateString("12/12/1234"));
         assertFalse(DateParser.isValidDateString("12/123412 0000"));
         assertFalse(DateParser.isValidDateString("1234/1212 0000"));
         assertFalse(DateParser.isValidDateString("/01/01200a 0000"));
