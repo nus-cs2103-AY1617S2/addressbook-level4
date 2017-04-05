@@ -28,7 +28,7 @@ public class TodoListTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), todoList.getTaskList());
+        assertEquals(Collections.emptyList(), todoList.getTodoList());
         assertEquals(Collections.emptyList(), todoList.getTagList());
     }
 
@@ -60,7 +60,7 @@ public class TodoListTest {
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
         TodoList typicalAddressBook = new TypicalTestTasks().getTypicalTodoList();
-        List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
+        List<ReadOnlyTask> newTasks = typicalAddressBook.getTodoList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
@@ -71,7 +71,8 @@ public class TodoListTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose tasks and tags lists can violate
+     * interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyTodoList {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
@@ -83,7 +84,7 @@ public class TodoListTest {
         }
 
         @Override
-        public ObservableList<ReadOnlyTask> getTaskList() {
+        public ObservableList<ReadOnlyTask> getTodoList() {
             return tasks;
         }
 

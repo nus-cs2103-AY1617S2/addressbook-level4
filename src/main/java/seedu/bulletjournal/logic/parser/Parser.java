@@ -18,6 +18,7 @@ import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
 import seedu.bulletjournal.logic.commands.SelectCommand;
 import seedu.bulletjournal.logic.commands.ShowCommand;
+
 /**
  * Parses user input.
  */
@@ -31,7 +32,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -69,6 +71,9 @@ public class Parser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case ChangeDirectoryCommand.COMMAND_WORD:
+            return new ChangeDirectoryCommand(arguments.trim());
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
