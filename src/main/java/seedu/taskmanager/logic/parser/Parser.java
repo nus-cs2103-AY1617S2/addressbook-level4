@@ -14,6 +14,7 @@ import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
@@ -103,6 +104,9 @@ public class Parser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case FindDateCommand.COMMAND_WORD:
+            return new FindDateCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

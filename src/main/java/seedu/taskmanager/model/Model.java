@@ -1,5 +1,6 @@
 package seedu.taskmanager.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
@@ -60,5 +61,15 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
+
+    // @@author A0140032E
+    /**
+     * Updates the filter of the filtered task list to filter by the given
+     * date(s)
+     */
+    void updateFilteredTaskList(Date date);
+
+    void updateFilteredTaskList(Date startDateCriteria, Date endDateCriteria);
+    // @@author
 
 }
