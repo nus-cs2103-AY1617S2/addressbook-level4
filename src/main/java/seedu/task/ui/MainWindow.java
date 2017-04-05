@@ -90,8 +90,8 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane statusbarPlaceholder;
 
     // @@author A0142487Y-reused
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String...fxml) {
-        super(fxml.length==0?FXML:fxml[0]);
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
 
         // Set dependencies
         this.primaryStage = primaryStage;

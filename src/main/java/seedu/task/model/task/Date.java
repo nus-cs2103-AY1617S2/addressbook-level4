@@ -84,11 +84,12 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
         List<java.util.Date> dates = pretty.parse(input);
-        if (dates.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return (!dates.isEmpty());
+//        if (dates.isEmpty()) {
+//            return false;
+//        } else {
+//            return true;
+//        }
     }
 
     //@@author A0140063X
