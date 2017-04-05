@@ -228,7 +228,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
-        prepareListsForUi();
     }
 
     @Override
@@ -267,7 +266,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
-        prepareListsForUi();
     }
 
     @Override
@@ -299,35 +297,28 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListsToShowActiveToDo() {
-        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
-        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(false)));
-        prepareListsForUi();
+        updateFilteredLists(new PredicateExpression(new CompletionQualifier(false)));
     }
 
     @Override
     public void updateFilteredListsToShowCompleteToDo() {
-        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(true)));
-        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
-        prepareListsForUi();
+        updateFilteredLists(new PredicateExpression(new CompletionQualifier(true)));
     }
 
-    @Override
-    public void updateFilteredLists(Expression expression) {
+    private void updateFilteredLists(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
         filteredEvents.setPredicate(expression::satisfies);
         prepareListsForUi();
     }
 
     @Override
-    public void updateFilteredLists(Set<String> keywords) {
-        updateFilteredLists(new PredicateExpression(new KeywordQualifier(keywords, false)));
-        prepareListsForUi();
+    public void updateFilteredLists(Set<String> keywords, boolean showCompletedToo) {
+        updateFilteredLists(new PredicateExpression(new KeywordQualifier(keywords, showCompletedToo)));
     }
 
     @Override
     public void updateFilteredLists(Timeslot userInterestedTimeslot) {
         updateFilteredLists(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
-        prepareListsForUi();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

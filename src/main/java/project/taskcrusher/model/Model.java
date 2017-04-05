@@ -3,7 +3,6 @@ package project.taskcrusher.model;
 import java.util.Set;
 
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
-import project.taskcrusher.model.ModelManager.Expression;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
@@ -143,9 +142,7 @@ public interface Model {
 
     void updateFilteredListsToShowCompleteToDo();
 
-    void updateFilteredLists(Expression expression);
-
-    void updateFilteredLists(Set<String> keywords);
+    void updateFilteredLists(Set<String> keywords, boolean showCompletedToo);
 
     void updateFilteredLists(Timeslot userInterestedTimeslot);
 }
