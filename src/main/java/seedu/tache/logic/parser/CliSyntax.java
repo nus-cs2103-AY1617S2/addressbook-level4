@@ -48,6 +48,8 @@ public class CliSyntax {
     //@@author A0139961U
     public static final String DUE_TODAY_FILTER = "today";
     public static final String DUE_THIS_WEEK_FILTER = "this week";
+    public static final String OVERDUE_FILTER = "overdue";
+    //@@author
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
