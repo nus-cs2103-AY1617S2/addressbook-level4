@@ -140,6 +140,7 @@ Examples:
 * `find s/9:00am 11/11/17`<br>
 * `find s/9:00am 11/11/17 c/9:00am 12/11/17`<br>
 * `find s/today e/tomorrow`<br>
+* `find s/yesterday e/today`<br>
 * `find c/`<br>
 * `find c/not`<br>
 
