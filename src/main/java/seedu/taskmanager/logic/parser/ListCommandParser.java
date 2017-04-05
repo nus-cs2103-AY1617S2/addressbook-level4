@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
@@ -40,7 +40,7 @@ public class ListCommandParser {
         }
 
         try {
-            keyWordArray = new String[] { CurrentDate.getNewDate(args.trim()) };
+            keyWordArray = new String[] { DateTimeUtil.getNewDate(args.trim()) };
         } catch (IllegalValueException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

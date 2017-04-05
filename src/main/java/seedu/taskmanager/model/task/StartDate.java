@@ -1,7 +1,7 @@
 package seedu.taskmanager.model.task;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 
 /**
  * Represents date of a task in ProcrastiNomore. Guarantees: immutable; is valid
@@ -39,7 +39,7 @@ public class StartDate {
      * Returns if a given string is a valid task date.
      */
     public static boolean isValidStartDate(String test) {
-        return (test.matches(STARTDATE_VALIDATION_REGEX1) && CurrentDate.isValidDate(test))
+        return (test.matches(STARTDATE_VALIDATION_REGEX1) && DateTimeUtil.isValidDate(test))
                 || test.matches(EMPTY_FIELD);
     }
 

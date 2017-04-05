@@ -2,9 +2,8 @@ package seedu.taskmanager.model.task;
 
 import java.util.Objects;
 
-import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**

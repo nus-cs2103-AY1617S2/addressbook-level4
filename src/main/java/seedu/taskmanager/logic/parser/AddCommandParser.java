@@ -11,11 +11,10 @@ import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2
 import java.util.NoSuchElementException;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
-import seedu.taskmanager.logic.commands.RecurringCommand;
 
 // @@author A0139520L
 /**
@@ -89,16 +88,16 @@ public class AddCommandParser {
             else if (isOnEvent(onPrefixInput)) {
                 String[] splited = onPrefixInput.split("\\s+");
                 startDate = splited[0];
-                startDate = convertDateForm(startDate);
+                startDate = DateTimeUtil.getNewDate(startDate);
                 endDate = startDate;
 
                 try {
                     startTime = splited[1];
 
                     if (isEmptyField(toPrefixInput)) {
-                        endTime = includeOneHourBuffer(startTime);
+                        endTime = DateTimeUtil.includeOneHourBuffer(startTime);
                         if (Integer.parseInt(endTime) < 100) {
-                            endDate = RecurringCommand.getNewDate(1, "days", endDate);
+                            endDate = DateTimeUtil.getFutureDate(1, "days", endDate);
                         }
 
                     } else {
@@ -127,11 +126,11 @@ public class AddCommandParser {
             else if (!isEmptyField(byPrefixInput)) {
                 String[] splited = byPrefixInput.split("\\s+");
                 endDate = splited[0];
-                endDate = convertDateForm(endDate);
+                endDate = DateTimeUtil.getNewDate(endDate);
                 try {
                     endTime = splited[1];
 
-                    if (!isValidTime(endTime)) {
+                    if (!DateTimeUtil.isValidTime(endTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
 
@@ -145,7 +144,10 @@ public class AddCommandParser {
                 excessInputCheck(splited);
             }
 
-            startEndTimeCheck(startDate, startTime, endDate, endTime);
+            if (isValidEvent(startDate, startTime, endDate, endTime)
+                    && !DateTimeUtil.isValidEventTimePeriod(startDate, startTime, endDate, endTime)) {
+                throw new IllegalValueException("Invalid input of time, start time has to be earlier than end time");
+            }
 
             return new AddCommand(taskName, startDate, startTime, endDate, endTime,
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_CATEGORY)));
@@ -183,21 +185,6 @@ public class AddCommandParser {
         return endTime;
     }
 
-    private String includeOneHourBuffer(String startTime) {
-        String endTime;
-        endTime = Integer.toString(100 + Integer.parseInt(startTime));
-        if (Integer.parseInt(endTime) < 1000) {
-            endTime = "0" + endTime;
-        }
-
-        if (!isValidTime(endTime)) {
-            endTime = Integer.toString(Integer.parseInt(endTime) - 2400);
-            endTime = fourDigitTimeFormat(endTime);
-
-        }
-        return endTime;
-    }
-
     private boolean isOnEvent(String onPrefixInput) {
         return !isEmptyField(onPrefixInput);
     }
@@ -205,7 +192,7 @@ public class AddCommandParser {
     private String processInputToDateForm(String[] splitedToPrefixInput) throws IllegalValueException {
         String endDate;
         if (isMatchedInput(splitedToPrefixInput[0].trim(), STARTDATE_VALIDATION_REGEX2)) {
-            endDate = CurrentDate.getNewDate(splitedToPrefixInput[0]);
+            endDate = DateTimeUtil.getNewDate(splitedToPrefixInput[0]);
         } else {
             endDate = splitedToPrefixInput[0];
 
@@ -227,73 +214,8 @@ public class AddCommandParser {
         return (!fromPrefixInput.equals("EMPTY_FIELD")) && (!toPrefixInput.equals("EMPTY_FIELD"));
     }
 
-    private String fourDigitTimeFormat(String endTime) {
-        if (Integer.parseInt(endTime) >= 10) {
-            StringBuilder stringBuilderTime = new StringBuilder();
-
-            stringBuilderTime.append("00");
-            stringBuilderTime.append(endTime);
-            endTime = stringBuilderTime.toString();
-
-        } else {
-            StringBuilder stringBuilderTime = new StringBuilder();
-
-            stringBuilderTime.append("000");
-            stringBuilderTime.append(endTime);
-            endTime = stringBuilderTime.toString();
-        }
-        return endTime;
-    }
-
-    private void startEndTimeCheck(String startDate, String startTime, String endDate, String endTime)
-            throws IllegalValueException {
-        String[] splitedStartDate = (startDate.trim()).split("/");
-        String[] splitedEndDate = (endDate.trim()).split("/");
-        boolean isValidStartEnd = true;
-        if (isValidEvent(startDate, startTime, endDate, endTime)) {
-            if (Integer.parseInt(splitedEndDate[2]) <= Integer.parseInt(splitedStartDate[2])) {
-                if (Integer.parseInt(splitedEndDate[2]) < Integer.parseInt(splitedStartDate[2])) {
-                    isValidStartEnd = false;
-                } else {
-                    if (Integer.parseInt(splitedEndDate[1]) <= Integer.parseInt(splitedStartDate[1])) {
-                        if (Integer.parseInt(splitedEndDate[0]) < Integer.parseInt(splitedStartDate[0])) {
-                            isValidStartEnd = false;
-                        } else {
-                            if (Integer.parseInt(splitedEndDate[0]) <= Integer.parseInt(splitedStartDate[0])) {
-                                if (Integer.parseInt(splitedEndDate[0]) < Integer.parseInt(splitedStartDate[0])) {
-                                    isValidStartEnd = false;
-                                } else {
-                                    if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
-                                        throw new IllegalValueException(
-                                                "Invalid input of time, start time has to be earlier than end time");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-            if (!isValidStartEnd) {
-                throw new IllegalValueException("Invalid input of time, start time has to be earlier than end time");
-            }
-        }
-    }
-
     private boolean isValidEvent(String startDate, String startTime, String endDate, String endTime) {
         return !isEmptyField(startTime) && !isEmptyField(endTime) && !isEmptyField(startDate) && !isEmptyField(endDate);
-    }
-
-    private String convertDateForm(String date) throws IllegalValueException {
-        if ((date.trim()).matches(STARTDATE_VALIDATION_REGEX2)) {
-            date = CurrentDate.getNewDate(date);
-        }
-        return date;
-    }
-
-    private boolean isValidTime(String value) {
-        return (isMatchedInput(value, "\\d+") && (Integer.parseInt(value) < 2400) && (Integer.parseInt(value) >= 0)
-                && (((Integer.parseInt(value)) % 100) < 60));
     }
 
     private void addTaskInputValidation(String date, String deadline, String startTime, String endTime) {
