@@ -19,7 +19,7 @@ public class DescriptionTest {
      */
 
     @Test
-    public void Description_null_assertFalse() throws IllegalValueException {
+    public void description_null_assertFalse() throws IllegalValueException {
         assertErrorThrown(null);
     }
 
@@ -29,7 +29,7 @@ public class DescriptionTest {
     }
 
     @Test
-    public void Description_empty_exceptionThrown() throws IllegalValueException {
+    public void description_empty_exceptionThrown() throws IllegalValueException {
         assertExceptionThrown(" ");
     }
 

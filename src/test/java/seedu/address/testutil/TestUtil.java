@@ -85,23 +85,23 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Event[] {
-                    new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"),
+                new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"),
                             new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"),
+                new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"),
                             new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"),
+                new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"),
                             new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"),
+                new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"),
                             new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"),
+                new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"),
                             new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"),
+                new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"),
                             new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"),
+                new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"),
                             new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"),
+                new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"),
                             new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
-                    new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"),
+                new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"),
                             new EndTime("1000"), new EndDate("280517"), new Location("NUS"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -114,23 +114,23 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[] {
-                    new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
                             new ByDate("200517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
                             new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
                             new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
                             new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
                             new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
                             new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
                             new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
                             new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                    new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
+                new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
                             new ByDate("280517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS) };
         } catch (IllegalValueException e) {
             assert false;
@@ -155,6 +155,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
+     *
      * @param fileName
      * @return
      */
@@ -181,6 +182,14 @@ public class TestUtil {
         }
     }
 
+    // @@author A0121668A
+    /**
+     * Takes in a list of events and returns the expected filtered and sorted
+     * list of events in event panel
+     *
+     * @param events
+     * @return expected filtered and sorted event list in event panel
+     */
     public static ReadOnlyEvent[] filterExpectedEventList(Event[] events) {
         int numInUIView = 0;
         ArrayList<ReadOnlyEvent> eventslist = new ArrayList<ReadOnlyEvent>();
@@ -200,6 +209,7 @@ public class TestUtil {
         return expected;
     }
 
+    // @@author
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
