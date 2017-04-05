@@ -24,8 +24,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Documentation and Scheduling and tracking <br>
 * Component: Model
 * Features implemented:<br>
+         * [Add Tasks with Priority](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
          * [Mark Task as Completed](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
-         * [List Completed Tasks ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
+         * [List Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
+         * [List High Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
 * Code written: [[functional code](../collated/main/A0144902L.md)][[test code](../collated/test/A0144902L.md)]  <br>
 * Other major contributions: <br>
             * Set up Travis <br>
