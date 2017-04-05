@@ -252,7 +252,7 @@ Examples:
 * **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
 
-* **Edit New Tags** : `edit INDEX [ta/TAG]` <br>
+* **Add New Tags** : `edit INDEX [ta/TAG]` <br>
   e.g. `edit 1 ta/cat ta/pet ta/cute`
 
 * **Clear** : `clear` <br>
