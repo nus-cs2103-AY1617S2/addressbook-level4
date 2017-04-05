@@ -70,7 +70,7 @@ public class ScheduleCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            long checkedHours = ((long)(Double.parseDouble(this.hours) * 3600000));
+            long checkedHours = (long)(Double.parseDouble(this.hours) * 3600000);
             System.out.println(checkedHours);
             if (checkedHours < MINIMUM_EVENT_LENGTH) {
                 throw new IllegalArgumentException();
