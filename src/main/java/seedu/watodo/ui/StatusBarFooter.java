@@ -57,6 +57,10 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     //@@author A0139845R-reused
+    /**
+     * Updates the file path shown at the bottom of the UI on saveas command.
+     * @param sfpce new config file created when command executed
+     */
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent sfpce) {
       String newPath = sfpce.newConfig.getWatodoFilePath();
