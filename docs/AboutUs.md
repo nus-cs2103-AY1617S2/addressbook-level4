@@ -18,7 +18,7 @@ Roles and Responsibilities: In charge of Model <br>
 
 #### [Malik Jabati](https://github.com/SmartyMJ)
 <img src="images/smartymj.png" width="150"><br>
-Roles and Responsibilities: Team Lead, Documentation, Scheduling and tracking,  <br>
+Roles and Responsibilities: Team Lead, Documentation, Scheduling and tracking  <br>
 
 -----
 
