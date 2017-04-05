@@ -24,6 +24,7 @@ public class SaveCommandParser {
         if (args == null || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
+        args = args.trim();
         try {
             System.out.println("@@@Parsing save command: " + args);
             return new SaveCommand(args);

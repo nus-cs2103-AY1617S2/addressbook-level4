@@ -4,12 +4,14 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
+import seedu.task.storage.Storage;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
+    protected Storage storage;
     protected Config config;
 
     /**
@@ -38,8 +40,13 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
-
+    //@@author A0163559U
     public void setConfig(Config config) {
         this.config = config;
     }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+    //@@author
 }

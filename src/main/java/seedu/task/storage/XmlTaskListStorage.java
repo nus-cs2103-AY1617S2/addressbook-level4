@@ -3,6 +3,8 @@ package seedu.task.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -19,11 +21,14 @@ public class XmlTaskListStorage implements TaskListStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlTaskListStorage.class);
 
     private String filePath;
+    private boolean saved = false;
+    private File savedFile = null;
 
     public XmlTaskListStorage(String filePath) {
         this.filePath = filePath;
     }
 
+    @Override
     public String getTaskListFilePath() {
         return filePath;
     }
@@ -38,8 +43,9 @@ public class XmlTaskListStorage implements TaskListStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+    FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
@@ -63,13 +69,42 @@ public class XmlTaskListStorage implements TaskListStorage {
      * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
      * @param filePath location of the data. Cannot be null
      */
+    @Override
     public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
         assert taskList != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
+        assert file != null;
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(taskList));
+        this.saved = true;
+        this.savedFile = file;
     }
+
+    //@@author A0163559U
+    @Override
+    public void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException {
+        assert this.saved = true && this.savedFile != null;
+        System.out.println("file is " + newFile.toString());
+        System.out.println("file path is " + newFile.toPath().toString());
+        //        System.out.println("saved file is " + savedFile.toString());
+        //        System.out.println("saved file path is " + savedFile.toPath().toString());
+        saveTaskList(taskList, filePath);
+        try {
+
+            newFile.delete(); //we are about to overwrite it
+            Files.copy(savedFile.toPath(), newFile.toPath());
+        } catch (FileAlreadyExistsException faee) {
+
+        } catch (IOException ioe) {
+            System.out.println("IO Exception in saveTaskListInNewLocation");
+            ioe.printStackTrace();
+
+        }
+        this.savedFile = newFile;
+        this.filePath = newFile.toString();
+    }
+    //@@author
 
 }
