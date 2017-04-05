@@ -61,10 +61,10 @@ Format: `add EVENT s/STARTTIME e/ENDTIME [t/tag]`
 Adds a deadline<br>
 Format: `add DEADLINE e/DEADLINE [t/tag]`
 
-Adds a deadline with default date<br>
+Adds a deadline with default date of tomorrow at 12:00am<br>
 Format: `add DEADLINE e/ [t/tag]`
 
-Adds a event with default date<br>
+Adds a event with default start date of today at 12:00am and end date of tomorrow at 12:00am<br>
 Format: `add EVENT s/ e/ [t/tag]`
 
 Examples:
