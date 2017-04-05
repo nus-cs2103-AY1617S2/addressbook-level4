@@ -1,6 +1,12 @@
 //@@author A0138377U
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.task.ReadOnlyTask;
+
 /**
  * Lists all tasks in the address book to the user.
  */
@@ -16,23 +22,36 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " deadline";
 
     public String cmd;
+    private ArrayList<ReadOnlyTask> sortingList;
 
     public SortCommand(String args) {
         cmd = args;
     }
 
-    private void sort(String para) {
+    private void sort() {
+
         int noOfTasks = model.getFilteredTasksSize();
         if (noOfTasks == 0) {
             return;
         }
 
-        if ("name".equals(para)) {
+        sortingList = model.getList();
+
+        if ("name".equals(cmd)) {
             bubbleSortName(noOfTasks - 1);
         } else {
             bubbleSortDate(noOfTasks - 1);
         }
+        ObservableList<ReadOnlyTask> sortedTaskList = createList();
+        model.setList(sortedTaskList);
+    }
 
+    private ObservableList<ReadOnlyTask> createList() {
+        ObservableList<ReadOnlyTask> tempList = FXCollections.observableArrayList();
+        for (ReadOnlyTask task : sortingList) {
+            tempList.add(task);
+        }
+        return tempList;
     }
 
     private void bubbleSortName(int upper) {
@@ -41,8 +60,8 @@ public class SortCommand extends Command {
         while (flag) {
             flag = false;
             for (int k = 0; k < upper; k++) {
-                if (model.getCName(k).compareToIgnoreCase(model.getCName(k + 1)) > 0) {
-                    model.exchange(k , k + 1);
+                if (getCName(k).compareToIgnoreCase(getCName(k + 1)) > 0) {
+                    exchange(k , k + 1);
                     flag = true;
                 }
             }
@@ -55,17 +74,35 @@ public class SortCommand extends Command {
         while (flag) {
             flag = false;
             for (int k = 0; k < upper; k++) {
-                if (model.getCTime(k) < model.getCTime(k + 1)) {
-                    model.exchange(k , k + 1);
+                if (getCTime(k) < getCTime(k + 1)) {
+                    exchange(k , k + 1);
                     flag = true;
                 }
             }
         }
     }
 
+    private String getCName(int index) {
+        return sortingList.get(index).getName().toString();
+    }
+
+    private long getCTime(int index) {
+        try {
+            return sortingList.get(index).getDeadline().date.getBeginning().getTime();
+        } catch (NullPointerException e) {
+            return Long.MAX_VALUE;
+        }
+    }
+
+    private void exchange(int i, int j) {
+        ReadOnlyTask temp = sortingList.get(i);
+        sortingList.set(i, sortingList.get(j));
+        sortingList.set(j, temp);
+    }
+
     @Override
     public CommandResult execute() {
-        this.sort(cmd);
+        this.sort();
         model.updateFilteredListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS + " by " + cmd + ".");
     }
