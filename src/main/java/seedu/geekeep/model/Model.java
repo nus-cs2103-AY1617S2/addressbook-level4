@@ -6,6 +6,8 @@ import java.util.Set;
 
 import seedu.geekeep.commons.core.UnmodifiableObservableList;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
+import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -46,9 +48,9 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords */
-    void updateFilteredTaskList(Set<String> keywords);
-
+    /**Updates the filter of the filtered task list to filter by the given keywords, time and tags*/
+    void updateFilteredTaskList(Set<String> keywords, DateTime earlistTime,
+            DateTime latestTime, UniqueTagList tags);
     /** Updates the filter of the filtered task list to filter by status of the tasks */
     void updateFilteredTaskListToShowDone();
 

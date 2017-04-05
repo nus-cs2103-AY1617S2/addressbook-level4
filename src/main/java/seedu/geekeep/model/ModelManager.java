@@ -19,6 +19,8 @@ import seedu.geekeep.commons.events.model.SwitchTaskCategoryEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.commons.util.StringUtil;
+import seedu.geekeep.model.tag.UniqueTagList;
+import seedu.geekeep.model.task.DateTime;
 import seedu.geekeep.model.task.ReadOnlyTask;
 import seedu.geekeep.model.task.Task;
 import seedu.geekeep.model.task.UniqueTaskList;
@@ -135,68 +137,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new TitleQualifier(keywords)));
+    /**
+     * Filters the task list by keywords, time and tags.
+     * @param keywords, if it is empty, then every task is satisfactory. Otherwise, tasks which
+     * don't match any of the keywords will be filtered out.
+     * @param earlistTime, the time after which a task should happen.
+     * @param latestTime, the time before which a task should happen.
+     * @param tags, if it is empty, then every task is satisfactory. Otherwise, tasks which don't
+     * contain any of the tags will be filtered out.
+     */
+    public void updateFilteredTaskList(Set<String> keywords, DateTime earlistTime,
+            DateTime latestTime, UniqueTagList tags) {
+        updateFilteredTaskList(new PredicateExpression(new TitleQualifier(keywords)),
+                               new PredicateExpression(new TimeQualifier(earlistTime, latestTime)),
+                               new PredicateExpression(new TagQualifier(tags)));
         raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
     }
-
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    // ========== Inner classes/interfaces used for filtering =================================================
-
-    interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    private class PredicateExpression implements Expression {
-
-        private final Qualifier qualifier;
-
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
-
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
-        }
-
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
-    }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    private class TitleQualifier implements Qualifier {
-        private Set<String> titleKeyWords;
-
-        TitleQualifier(Set<String> nameKeyWords) {
-            this.titleKeyWords = nameKeyWords;
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            return titleKeyWords.stream()
-                    .filter(keyword-> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
-                    .findAny().isPresent();
-        }
-
-        @Override
-        public String toString() {
-            return "title=" + String.join(", ", titleKeyWords);
-        }
+    private void updateFilteredTaskList(Expression... expressions) {
+        filteredTasks.setPredicate(task -> {
+            boolean isSatisfactory = true;
+            for (Expression expression : expressions) {
+                isSatisfactory = isSatisfactory && expression.satisfies(task);
+            }
+            return isSatisfactory;
+        });
     }
 
     //@@author A0121658E
@@ -288,4 +252,105 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new GeekeepFilePathChangedEvent(config, geeKeep));
     }
 
+    // ========== Inner classes/interfaces used for filtering =================================================
+
+    interface Expression {
+        boolean satisfies(ReadOnlyTask task);
+
+        @Override
+        String toString();
+    }
+
+    private class PredicateExpression implements Expression {
+
+        private final Qualifier qualifier;
+
+        PredicateExpression(Qualifier qualifier) {
+            this.qualifier = qualifier;
+        }
+
+        @Override
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
+        }
+    }
+
+    interface Qualifier {
+        boolean run(ReadOnlyTask task);
+
+        @Override
+        String toString();
+    }
+
+    private class TitleQualifier implements Qualifier {
+        private Set<String> titleKeyWords;
+
+        TitleQualifier(Set<String> nameKeyWords) {
+            this.titleKeyWords = nameKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (titleKeyWords.isEmpty()) {
+                //every task satisfies, because the qualifier is empty
+                return true;
+            } else {
+                return titleKeyWords.stream()
+                        .filter(keyword-> StringUtil.containsWordIgnoreCase(task.getTitle().title, keyword))
+                        .findAny().isPresent();
+            }
+        }
+    }
+
+    private class TimeQualifier implements Qualifier {
+        private DateTime earliestTime;
+        private DateTime latestTime;
+
+        private TimeQualifier(DateTime earliestTime, DateTime latestTime) {
+            this.earliestTime = earliestTime;
+            this.latestTime = latestTime;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return before(task) && after(task);
+        }
+
+        private boolean before(ReadOnlyTask task) {
+            if (task.isFloatingTask()) { // assuming floating tasks meet all the time requirements.
+                return true;
+            } else {
+                return task.getReferenceDateTime().compare(latestTime) <= 0;
+            }
+        }
+
+        private boolean after(ReadOnlyTask task) {
+            if (task.isFloatingTask()) {
+                return true;
+            } else {
+                return task.getReferenceDateTime().compare(earliestTime) >= 0;
+            }
+        }
+    }
+
+    private class TagQualifier implements Qualifier {
+        private UniqueTagList tags;
+
+
+        private TagQualifier(UniqueTagList tags) {
+            this.tags = tags;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (tags.isEmpty()) {
+                //every task satisfies, because the qualifier is empty
+                return true;
+            } else {
+                return tags.toSet().stream()
+                        .filter(tag -> task.getTags().contains(tag))
+                        .findAny().isPresent();
+            }
+        }
+    }
 }
