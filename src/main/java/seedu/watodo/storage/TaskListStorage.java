@@ -34,11 +34,10 @@ public interface TaskListStorage {
      * @param TaskManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskManager TaskList) throws IOException;
+    void saveTaskList(ReadOnlyTaskManager taskList) throws IOException;
 
     /**
      * @see #saveTaskList(ReadOnlyTaskManager)
      */
-    void saveTaskList(ReadOnlyTaskManager TaskList, String filePath) throws IOException;
-
+    void saveTaskList(ReadOnlyTaskManager taskList, String filePath) throws IOException;
 }

@@ -10,6 +10,7 @@ import seedu.watodo.commons.core.ComponentManager;
 import seedu.watodo.commons.core.LogsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.events.storage.DataSavingExceptionEvent;
+import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.model.ReadOnlyTaskManager;
 import seedu.watodo.model.UserPrefs;
@@ -20,18 +21,17 @@ import seedu.watodo.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TaskListStorage TaskListStorage;
+    private TaskListStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
 
-
-    public StorageManager(TaskListStorage TaskListStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskListStorage taskListStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.TaskListStorage = TaskListStorage;
+        this.taskListStorage = taskListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String TaskListFilePath, String userPrefsFilePath) {
-        this(new XmlTaskListStorage(TaskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskListFilePath, String userPrefsFilePath) {
+        this(new XmlTaskListStorage(taskListFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -51,31 +51,30 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public String getTaskListFilePath() {
-        return TaskListStorage.getTaskListFilePath();
+        return taskListStorage.getTaskListFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskList() throws DataConversionException, IOException {
-        return readTaskList(TaskListStorage.getTaskListFilePath());
+        return readTaskList(taskListStorage.getTaskListFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return TaskListStorage.readTaskList(filePath);
+        return taskListStorage.readTaskList(filePath);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskManager TaskList) throws IOException {
-        saveTaskList(TaskList, TaskListStorage.getTaskListFilePath());
+    public void saveTaskList(ReadOnlyTaskManager taskList) throws IOException {
+        saveTaskList(taskList, taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskManager TaskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskManager taskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        TaskListStorage.saveTaskList(TaskList, filePath);
+        taskListStorage.saveTaskList(taskList, filePath);
     }
-
 
     @Override
     @Subscribe
@@ -87,5 +86,13 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
+    //@@author A0141077L
+    @Override
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        taskListStorage = new XmlTaskListStorage(event.newFilePath);
+    }
+    //@@author
 
 }
