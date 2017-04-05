@@ -115,7 +115,7 @@ public class HotkeyManager {
      */
     public void start() {
         bindToggleSystemHotkey();
-        bindTriggerNotificationHotkey();
+        //bindTriggerNotificationHotkey();
     }
 
     /**
