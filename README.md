@@ -15,7 +15,7 @@ This user guide is here to guide you through the [installation](#installation-in
 Let's get you up and running.
 
 1. Install the latest Java [here](https://java.com/en/download/). This will be required to run the application.
-2. Download `today.jar` from the [releases](../../../releases) tab.
+2. Download `today.jar` from the [releases](https://github.com/CS2103JAN2017-T09-B1/main/releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app and you are ready to go.
 
