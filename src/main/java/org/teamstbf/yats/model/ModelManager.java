@@ -261,7 +261,7 @@ public class ModelManager extends ComponentManager implements Model {
 	updateFilteredEventList(new PredicateExpression(new FindQualifier(keywords)));
     }
 
-    // Inner class used for Searching //
+    // @@author
     interface Qualifier {
 	boolean run(ReadOnlyEvent event);
 
