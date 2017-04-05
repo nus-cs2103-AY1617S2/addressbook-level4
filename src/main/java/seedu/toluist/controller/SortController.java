@@ -50,8 +50,7 @@ public class SortController extends Controller {
 
         String keywords = tokens.get(PARAMETER_CATEGORY);
         if (keywords.equals(StringUtil.EMPTY_STRING)) {
-            UiStore.getInstance().setCommandResult(new CommandResult("Invalid format"));
-            return;
+            throw new InvalidCommandException("INVALID FORMAT");
         }
         ArrayList<String> keywordList = new ArrayList<String>(Arrays.asList(StringUtil.convertToArray(keywords)));
         ArrayList<String> invalidKeywords = new ArrayList<String>();
