@@ -16,6 +16,9 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 
 public class DateTime {
 
+    private static final String EXPLICIT_DATE_TREE_IDENTIFIER = "EXPLICIT_DATE";
+    private static final String EXPLICIT_TIME_TREE_IDENTIFIER = "EXPLICIT_TIME";
+
     public static final String MESSAGE_DATE_CONSTRAINTS = "Unknown date format. It is recommended to "
                                         + "interchangeably use the following few formats:"
                                         + "\nMM-DD-YY hh:mm:ss or MM/DD/YY 10.30pm";
@@ -38,8 +41,8 @@ public class DateTime {
         }
         this.date = temp.get(0).getDates().get(0);
         String syntaxTree = temp.get(0).getSyntaxTree().toStringTree();
-        boolean hasExplicitDate = syntaxTree.contains("EXPLICIT_DATE");
-        boolean hasExplicitTime = syntaxTree.contains("EXPLICIT_TIME");
+        boolean hasExplicitDate = syntaxTree.contains(EXPLICIT_DATE_TREE_IDENTIFIER);
+        boolean hasExplicitTime = syntaxTree.contains(EXPLICIT_TIME_TREE_IDENTIFIER);
         if (hasExplicitDate ^ hasExplicitTime) {
             if (hasExplicitDate) {
                 this.date.setHours(0);
