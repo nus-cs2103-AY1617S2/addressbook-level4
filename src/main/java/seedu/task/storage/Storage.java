@@ -1,6 +1,7 @@
 package seedu.task.storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -41,12 +42,21 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
     /**
      * Attempts to save current version of the Task Manager to new file location
      * @param taskList
-     * @param newFile
+     * @param saveFile
      * @throws IOException
      */
     @Override
-    void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException;
+    void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File saveFile) throws IOException;
+
+    /**
+     * Attempts to load Task Manager data from specified file location
+     * @param taskList
+     * @param loadFile
+     * @throws DataConversionException
+     * @throws FileNotFoundException
+     */
+    @Override
+    void loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile) throws FileNotFoundException, DataConversionException;
+
     //@@author
-
-
 }

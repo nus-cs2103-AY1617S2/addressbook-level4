@@ -105,6 +105,16 @@ public class XmlTaskListStorage implements TaskListStorage {
         this.savedFile = newFile;
         this.filePath = newFile.toString();
     }
+
+    @Override
+    public void loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile) throws FileNotFoundException, DataConversionException {
+        // TODO Auto-generated method stub
+        readTaskList(loadFile.toString());
+
+        this.savedFile = loadFile;
+        this.filePath = loadFile.toString();
+    }
     //@@author
+
 
 }

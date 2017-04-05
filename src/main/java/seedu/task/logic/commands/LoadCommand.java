@@ -2,9 +2,11 @@
 package seedu.task.logic.commands;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import seedu.task.commons.core.Config;
+import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -29,7 +31,7 @@ public class LoadCommand extends Command {
 
     private final File toLoad;
     /**
-     * Creates an LoadCommand using raw values.
+     * Creates a LoadCommand using raw values.
      *
      * @throws IllegalValueException if the load location is invalid
      * @throws IOException
@@ -38,47 +40,39 @@ public class LoadCommand extends Command {
         if (fileAsString.equals("") || fileAsString == null) {
             throw new IllegalValueException(MESSAGE_NULL_LOAD_LOCATION);
         }
+
         this.toLoad = new File(fileAsString.trim());
-        if (toLoad.isDirectory()) {
-            throw new IllegalValueException(MESSAGE_DIRECTORY_LOAD_LOCATION);
-        }
-        try {
-            createLoadFile();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+
+        if (!toLoad.exists()) {
             throw new IllegalValueException(String.format(MESSAGE_INVALID_LOAD_LOCATION, fileAsString));
         }
 
-    }
+        if (toLoad.isDirectory()) {
+            throw new IllegalValueException(MESSAGE_DIRECTORY_LOAD_LOCATION);
+        }
 
-    private boolean createLoadFile() throws IOException {
-        boolean created = toLoad.createNewFile();
-
-        return created;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        //        try {
-        //            model.addTask(toAdd);
-        //            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        //        } catch (UniqueTaskList.DuplicateTaskException e) {
-        //            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        //        }
 
         System.out.println("Executing load command...");
+
         try {
-            storage.loadTaskListInNewLocation(model.getTaskList(), toLoad);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_LOAD_IO_EXCEPTION, toLoad.toString()));
+            storage.loadTaskListFromNewLocation(model.getTaskList(), toLoad);
+        } catch (FileNotFoundException | DataConversionException e1) {
+            throw new CommandException(MESSAGE_LOAD_IO_EXCEPTION);
         }
+
         config.setTaskManagerFilePath(toLoad.toString());
+
         try {
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_LOAD_IO_EXCEPTION, toLoad.toString()));
         }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLoad.toString()));
 
     }
