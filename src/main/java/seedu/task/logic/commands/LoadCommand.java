@@ -40,7 +40,7 @@ public class LoadCommand extends Command {
      * @throws IOException
      */
     public LoadCommand(String fileAsString) throws IllegalValueException {
-        if (fileAsString.equals("") || fileAsString == null) {
+        if (fileAsString == null || fileAsString.equals("")) {
             throw new IllegalValueException(MESSAGE_NULL_LOAD_LOCATION);
         }
 

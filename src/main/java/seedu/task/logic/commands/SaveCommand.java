@@ -36,7 +36,7 @@ public class SaveCommand extends Command {
      * @throws IOException
      */
     public SaveCommand(String fileAsString) throws IllegalValueException {
-        if (fileAsString.equals("") || fileAsString == null) {
+        if (fileAsString == null || fileAsString.equals("")) {
             throw new IllegalValueException(MESSAGE_NULL_SAVE_LOCATION);
         }
         this.toSave = new File(fileAsString.trim());

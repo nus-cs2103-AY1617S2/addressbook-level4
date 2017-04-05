@@ -21,7 +21,6 @@ public class XmlTaskListStorage implements TaskListStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlTaskListStorage.class);
 
     private String filePath;
-    private boolean saved = false;
     private File savedFile = null;
 
     public XmlTaskListStorage(String filePath) {
@@ -45,7 +44,7 @@ public class XmlTaskListStorage implements TaskListStorage {
      */
     @Override
     public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
-        FileNotFoundException {
+    FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
@@ -78,18 +77,16 @@ public class XmlTaskListStorage implements TaskListStorage {
         FileUtil.createIfMissing(file);
         assert file != null;
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskList(taskList));
-        this.saved = true;
         this.savedFile = file;
     }
 
     //@@author A0163559U
     @Override
     public void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException {
-        assert this.saved = true && this.savedFile != null;
-        System.out.println("file is " + newFile.toString());
-        System.out.println("file path is " + newFile.toPath().toString());
-        //        System.out.println("saved file is " + savedFile.toString());
-        //        System.out.println("saved file path is " + savedFile.toPath().toString());
+        //System.out.println("file is " + newFile.toString());
+        //System.out.println("file path is " + newFile.toPath().toString());
+        //System.out.println("saved file is " + savedFile.toString());
+        //System.out.println("saved file path is " + savedFile.toPath().toString());
         saveTaskList(taskList, filePath);
         try {
 

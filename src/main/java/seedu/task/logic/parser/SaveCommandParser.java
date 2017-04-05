@@ -1,7 +1,6 @@
 //@@author A0163559U
 package seedu.task.logic.parser;
 
-
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.NoSuchElementException;
@@ -24,10 +23,9 @@ public class SaveCommandParser {
         if (args == null || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
-        args = args.trim();
+        String trimmed_args = args.trim();
         try {
-            System.out.println("@@@Parsing save command: " + args);
-            return new SaveCommand(args);
+            return new SaveCommand(trimmed_args);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
