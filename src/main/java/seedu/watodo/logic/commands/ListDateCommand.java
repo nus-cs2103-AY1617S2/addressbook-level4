@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Optional;
+
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.model.task.DateTime;
 
@@ -14,13 +16,13 @@ public class ListDateCommand extends ListCommand {
     DateTime start = null;
     DateTime end = null;
     
-    public ListDateCommand(String startDate, String endDate) throws IllegalValueException {
+    public ListDateCommand(Optional<String> startDate, Optional<String> endDate) throws IllegalValueException {
         assert startDate != null || endDate != null;
         if(startDate != null) {
-            this.start = new DateTime(startDate);
+            this.start = new DateTime(startDate.get());
         }
         if(endDate != null) {
-            this.end = new DateTime (endDate);
+            this.end = new DateTime (endDate.get());
         }
         if(startDate != null && endDate != null) {
             if (start.isLater(end)) { //checks if the end time is later than start time
