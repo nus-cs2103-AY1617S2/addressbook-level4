@@ -1,15 +1,23 @@
+//@@author A0105748B
 package seedu.bulletjournal.model.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.logic.parser.DateParser;
 
 /**
  * Represents a Task's due date in the todo list.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDueDate(String)}
  */
 public class DueDate {
 
     public static final String MESSAGE_DUEDATE_CONSTRAINTS =
-            "Task due date can take any values, and it should not be blank";
+            "Unrecognised date and time for due date!";
+
+    private static DateFormat outputFormatter = new SimpleDateFormat("dd-MMM-yyyy, HH:mm (EEE)");
 
     /*
      * The first character of the due date must not be a whitespace,
@@ -17,20 +25,23 @@ public class DueDate {
      */
     public static final String DUEDATE_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public final Date value;
 
     /**
-     * Validates given phone number.
+     * Validates given due date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given due date string is invalid.
      */
-    public DueDate(String phone) throws IllegalValueException {
-        assert phone != null;
-        String trimmedPhone = phone.trim();
-        if (!isValidDueDate(trimmedPhone)) {
+    public DueDate(String due) throws IllegalValueException {
+        assert due != null;
+        String trimmedDue = due.trim();
+        if (!isValidDueDate(trimmedDue)) {
             throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = DateParser.parse(trimmedDue);
+        if (this.value == null) {
+            throw new IllegalValueException(MESSAGE_DUEDATE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -42,7 +53,8 @@ public class DueDate {
 
     @Override
     public String toString() {
-        return value;
+        String dueDateString = outputFormatter.format(value);
+        return dueDateString;
     }
 
     @Override

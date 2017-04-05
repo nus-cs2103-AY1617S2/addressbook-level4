@@ -485,9 +485,9 @@ public class LogicManagerTest {
 
         private Task adam() throws Exception {
             TaskName taskName = new TaskName("Adam Brown");
-            DueDate privatePhone = new DueDate("111111");
+            DueDate privatePhone = new DueDate("14th April 4pm");
             Status status = new Status("undone");
-            BeginDate privateAddress = new BeginDate("111, alpha street");
+            BeginDate privateAddress = new BeginDate("14th April 12pm");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);

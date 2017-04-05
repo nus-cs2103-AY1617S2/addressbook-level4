@@ -47,9 +47,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getTaskName().fullName;
-        phone = source.getPhone() == null ? null : source.getPhone().value;
+        phone = source.getPhone() == null ? null : source.getPhone().toString();
         email = source.getStatus() == null ? null : source.getStatus().value;
-        address = source.getAddress() == null ? null : source.getAddress().value;
+        address = source.getAddress() == null ? null : source.getAddress().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

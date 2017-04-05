@@ -18,6 +18,7 @@ import seedu.bulletjournal.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
+    //@@author A0105748B
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.

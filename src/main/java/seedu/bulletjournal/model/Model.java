@@ -45,10 +45,9 @@ public interface Model {
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /**
-     * Returns the undone task list as an
-     * {@code UnmodifiableObservableList<ReadOnlyTask>}
-     */
+    //@@author A0105748B
+    /** Returns the undone task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+
     UnmodifiableObservableList<ReadOnlyTask> getUndoneTaskList();
 
     /** Updates the filter of the filtered task list to show all tasks */

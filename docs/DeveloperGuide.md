@@ -163,7 +163,7 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: 
+Author:
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -476,7 +476,7 @@ Author: Aris Huynh
 - Poor responsiveness on small screen size
 - Tasks can only be text-based for free version
 
-
+<!-- @@author A0105748B -->
 **Apple's Notes App**
 
 Author: Wang Yu
@@ -493,6 +493,7 @@ Author: Wang Yu
 * Notes cannot recognize task's data and group them together
 * All the updating need to be done by directly manipulating the text, which is quite a bother
 * If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function
+<!-- @@author -->
 
 **Calendar in iPhone**
 

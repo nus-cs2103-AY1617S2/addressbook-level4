@@ -135,6 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateMatchedTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    //@@author
 
     // ========== Inner classes/interfaces used for filtering
     // =================================================
@@ -171,6 +172,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         String toString();
     }
+
+    //@@author A0105748B
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;

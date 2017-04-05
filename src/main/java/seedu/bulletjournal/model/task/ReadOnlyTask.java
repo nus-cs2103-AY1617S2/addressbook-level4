@@ -38,6 +38,7 @@ public interface ReadOnlyTask {
                         "" : other.getAddress()).equals(this.getAddress() == null ?
                                 "" : this.getAddress()));
     }
+    //@@author
 
     /**
      * Formats the task as text, showing all contact details.

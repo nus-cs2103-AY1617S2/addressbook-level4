@@ -136,6 +136,7 @@ Examples:
 * `find Pick Do`<br>
   Returns Any tasks having names `Pick`, or `Do`
 
+<!-- @@author A0105748B -->
 ### 2.6. Showing done/undone tasks: `show`
 
 Shows tasks that are done or undone.<br>
@@ -151,6 +152,7 @@ Examples:
   Returns tasks that are done
 * `show undone`<br>
   Returns tasks that are undone
+<!-- @@author -->
 
 ### 2.7. Deleting a task : `delete`
 
@@ -221,10 +223,10 @@ There is no need to save manually.
 
 * **Add**  `add TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry t/chores`
-  
+
 * **Addf**  `addf TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone t/chores`
-  
+
 * **Addd**  `addd TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry s/undone d/210317 t/chores`
 
@@ -238,10 +240,10 @@ There is no need to save manually.
 
 * **List** : `list` <br>
   e.g. `list`
-  
+
 * **Show** : `show done/undone` <br>
   e.g. `show done`
-  
+
 * **Help** : `help` <br>
   e.g.
 

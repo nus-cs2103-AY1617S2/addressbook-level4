@@ -1,5 +1,5 @@
 //@@author A0146738U
-
+/*
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -54,3 +54,4 @@ public class AddCommandTestDeadline extends TodoListGuiTest {
     }
 
 }
+*/

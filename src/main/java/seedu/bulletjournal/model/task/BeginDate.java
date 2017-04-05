@@ -1,17 +1,23 @@
+//@@author A0105748B
 package seedu.bulletjournal.model.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import seedu.bulletjournal.commons.exceptions.IllegalValueException;
+import seedu.bulletjournal.logic.parser.DateParser;
 
 /**
- * Address morphed into task start time
- * Represents a Task's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Task's begin date in the bullet journal.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBeginDate(String)}
  */
 public class BeginDate {
 
     public static final String MESSAGE_BEGINDATE_CONSTRAINTS =
-            "Task begin date can take any values, and it should not be blank";
+            "Unrecognised date and time for begin date!";
+
+    private static DateFormat outputFormatter = new SimpleDateFormat("dd-MMM-yyyy, HH:mm (EEE)");
 
     /*
      * The first character of the begin date must not be a whitespace,
@@ -19,23 +25,26 @@ public class BeginDate {
      */
     public static final String BEGINDATE_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public final Date value;
 
     /**
-     * Validates given address.
+     * Validates given begin date.
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public BeginDate(String address) throws IllegalValueException {
-        assert address != null;
-        if (!isValidBeginDate(address)) {
+    public BeginDate(String beginDate) throws IllegalValueException {
+        assert beginDate != null;
+        if (!isValidBeginDate(beginDate)) {
             throw new IllegalValueException(MESSAGE_BEGINDATE_CONSTRAINTS);
         }
-        this.value = address;
+        this.value = DateParser.parse(beginDate);
+        if (this.value == null) {
+            throw new IllegalValueException(MESSAGE_BEGINDATE_CONSTRAINTS);
+        }
     }
 
     /**
-     * Returns true if a given string is a valid task email.
+     * Returns true if a given string is a valid task begin date.
      */
     public static boolean isValidBeginDate(String test) {
         return test.matches(BEGINDATE_VALIDATION_REGEX);
@@ -43,9 +52,11 @@ public class BeginDate {
 
     @Override
     public String toString() {
-        return value;
+        String beginDateString = outputFormatter.format(value);
+        return beginDateString;
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
