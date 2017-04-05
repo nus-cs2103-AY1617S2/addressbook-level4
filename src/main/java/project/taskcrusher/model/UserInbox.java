@@ -22,7 +22,7 @@ import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the user Inbox level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class UserInbox implements ReadOnlyUserInbox {
@@ -89,15 +89,30 @@ public class UserInbox implements ReadOnlyUserInbox {
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "AddressBooks should not have duplicate tags";
+            assert false : "User inbox should not have duplicate tags";
         }
         syncMasterTagListWith(tasks);
     }
 
+    //@@author A0127737X
     public void updateOverdueStatus() {
         this.events.updateOverdueStatus();
         this.tasks.updateOverdueStatus();
     }
+
+    public void markTask(int index, int markFlag) {
+        tasks.markTask(index, markFlag);
+    }
+
+    public void markEvent(int index, int markFlag) {
+        events.markEvent(index, markFlag);
+    }
+
+    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
+        events.confirmEventTime(eventListIndex, timeslotIndex);
+    }
+
+    //@author
 
     //// task-level operations
 
@@ -142,13 +157,7 @@ public class UserInbox implements ReadOnlyUserInbox {
         }
     }
 
-    public void markTask(int index, int markFlag) {
-        tasks.markTask(index, markFlag);
-    }
 
-    public void markEvent(int index, int markFlag) {
-        events.markEvent(index, markFlag);
-    }
 
     /**
      * Ensures that every tag in this task:
@@ -251,10 +260,6 @@ public class UserInbox implements ReadOnlyUserInbox {
         } else {
             throw new UniqueEventList.EventNotFoundException();
         }
-    }
-
-    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
-        events.confirmEventTime(eventListIndex, timeslotIndex);
     }
 
     public ObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {

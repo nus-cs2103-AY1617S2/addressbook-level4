@@ -17,6 +17,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
+    //@@author A0127737X
     public void sortEventsByEarliestTimeslot() {
         internalList.sort(null);
     }
@@ -31,6 +32,23 @@ public class UniqueEventList implements Iterable<Event> {
             }
         }
     }
+
+    public void markEvent(int targetIndex, int markFlag) {
+        Event target = internalList.get(targetIndex);
+        if (markFlag == MarkCommand.MARK_COMPLETE) {
+            target.markComplete();
+        } else {
+            target.markIncomplete();
+        }
+        sortEventsByEarliestTimeslot();
+    }
+
+    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
+        internalList.get(eventListIndex).confirmTimeslot(timeslotIndex);
+        sortEventsByEarliestTimeslot();
+    }
+
+    //@@author
 
     /**
      * Returns true if the list contains an equivalent event as the given argument.
@@ -68,16 +86,6 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
-        sortEventsByEarliestTimeslot();
-    }
-
-    public void markEvent(int targetIndex, int markFlag) {
-        Event target = internalList.get(targetIndex);
-        if (markFlag == MarkCommand.MARK_COMPLETE) {
-            target.markComplete();
-        } else {
-            target.markIncomplete();
-        }
         sortEventsByEarliestTimeslot();
     }
 
@@ -130,11 +138,6 @@ public class UniqueEventList implements Iterable<Event> {
             replacement.add(new Event(event));
         }
         setEvents(replacement);
-    }
-
-    public void confirmEventTime(int eventListIndex, int timeslotIndex) {
-        internalList.get(eventListIndex).confirmTimeslot(timeslotIndex);
-        sortEventsByEarliestTimeslot();
     }
 
     public UnmodifiableObservableList<Event> asObservableList() {

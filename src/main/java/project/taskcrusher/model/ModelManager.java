@@ -217,12 +217,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListToShowAll() {
-        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
-        prepareListsForUi();
-    }
-
-    @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new KeywordQualifier(keywords , false)));
     }
@@ -238,13 +232,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListToShowComplete() {
+    public void updateFilteredTaskListToShowAll() {
+        filteredTasks.setPredicate(null);
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredTaskListToShowCompleteTasks() {
         updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(true)));
     }
 
     @Override
-    public void updateFilteredTaskListToShowNone() {
-        updateFilteredTaskList(new PredicateExpression(new FalseQualifier()));
+    public void updateFilteredTaskListToShowAllActiveTasks() {
+        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
+        prepareListsForUi();
     }
 
     //=========== Filtered Event List Accessors =============================================================
@@ -252,13 +253,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
         return new UnmodifiableObservableList<>(filteredEvents);
-    }
-
-    @Override
-    public void updateFilteredEventListToShowAll() {
-//        filteredEvents.setPredicate(null);
-        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(false)));
-        prepareListsForUi();
     }
 
     @Override
@@ -277,13 +271,63 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredEventListToShowComplete() {
-        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
+    public void updateFilteredEventListToShowAll() {
+        filteredEvents.setPredicate(null);
+        prepareListsForUi();
     }
 
     @Override
-    public void updateFilteredEventListToShowNone() {
-        updateFilteredEventList(new PredicateExpression(new FalseQualifier()));
+    public void updateFilteredEventListToShowCompleteEvents() {
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredEventListToShowAllActiveEvents() {
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(false)));
+        prepareListsForUi();
+    }
+
+    //======================Combined filtering TODO: use this one instead=============
+
+    @Override
+    public void updateFilteredListsShowAll() {
+        filteredEvents.setPredicate(null);
+        filteredTasks.setPredicate(null);
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredListsToShowActiveToDo() {
+        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(false)));
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(false)));
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredListsToShowCompleteToDo() {
+        updateFilteredTaskList(new PredicateExpression(new CompletionQualifier(true)));
+        updateFilteredEventList(new PredicateExpression(new CompletionQualifier(true)));
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredLists(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+        filteredEvents.setPredicate(expression::satisfies);
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredLists(Set<String> keywords) {
+        updateFilteredLists(new PredicateExpression(new KeywordQualifier(keywords, false)));
+        prepareListsForUi();
+    }
+
+    @Override
+    public void updateFilteredLists(Timeslot userInterestedTimeslot) {
+        updateFilteredLists(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
+        prepareListsForUi();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================
@@ -410,20 +454,6 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "separate between ongoing and completed tasks and events";
-        }
-    }
-
-    private class FalseQualifier implements Qualifier {
-
-        @Override
-        public boolean run(ReadOnlyUserToDo item) {
-            assert item != null;
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "returns always false";
         }
     }
 }

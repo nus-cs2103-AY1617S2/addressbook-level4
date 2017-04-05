@@ -3,6 +3,7 @@ package project.taskcrusher.model;
 import java.util.Set;
 
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
+import project.taskcrusher.model.ModelManager.Expression;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
@@ -76,9 +77,9 @@ public interface Model {
 
     void updateFilteredTaskList(Timeslot userInterestedTimeSlot);
 
-    void updateFilteredTaskListToShowComplete();
+    void updateFilteredTaskListToShowCompleteTasks();
 
-    public void updateFilteredTaskListToShowNone();
+    void updateFilteredTaskListToShowAllActiveTasks();
 
     // ========== for events =================================================
 
@@ -125,9 +126,9 @@ public interface Model {
 
     void markEvent(int filteredListIndex, int markFlag);
 
-    void updateFilteredEventListToShowComplete();
+    void updateFilteredEventListToShowCompleteEvents();
 
-    public void updateFilteredEventListToShowNone();
+    void updateFilteredEventListToShowAllActiveEvents();
 
     /**
      * TODO this javadoc
@@ -135,4 +136,16 @@ public interface Model {
      * @param timeslotIndex
      */
     void confirmEventTime(int filteredEventListIndex, int timeslotIndex);
+
+    void updateFilteredListsShowAll();
+
+    void updateFilteredListsToShowActiveToDo();
+
+    void updateFilteredListsToShowCompleteToDo();
+
+    void updateFilteredLists(Expression expression);
+
+    void updateFilteredLists(Set<String> keywords);
+
+    void updateFilteredLists(Timeslot userInterestedTimeslot);
 }
