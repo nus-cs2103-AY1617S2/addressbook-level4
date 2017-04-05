@@ -19,6 +19,8 @@ import seedu.watodo.commons.exceptions.IllegalValueException;
  */
 public class DateTime {
 
+    private static final int INDEX_VALID_DATE = 0;
+    private static final String DATESTRING_NOW = "now";
     public static final String MESSAGE_DATETIME_CONSTRAINTS = "Date and time format must be a date/day, time or both";
     public static final Parser DATE_TIME_PARSER = new Parser(TimeZone.getDefault());  //Parser class in natty library
 
@@ -43,7 +45,7 @@ public class DateTime {
      */
     public static boolean isValidDateTime(String dateTime) {
         List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateTime);
-        return parsedDateGroups.size() == 1 && !parsedDateGroups.get(0).getDates().isEmpty();
+        return parsedDateGroups.size() == 1 && !parsedDateGroups.get(INDEX_VALID_DATE).getDates().isEmpty();
     }
 
     /**
@@ -53,17 +55,19 @@ public class DateTime {
     private Calendar convertToCalendarFormat(String dateString) {
         List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateString);
         Calendar cal = Calendar.getInstance();
-        cal.setTime(parsedDateGroups.get(0).getDates().get(0));
+        cal.setTime(parsedDateGroups.get(INDEX_VALID_DATE).getDates().get(INDEX_VALID_DATE));
 
         //if no timing is given by the user, default timing of 11.59pm is set.
         Date currDate = new Date();
         SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm:ssa", Locale.ENGLISH);
-        if (timeFormatter.format(currDate).equals(timeFormatter.format(cal.getTime()))) {
-            cal.set(Calendar.HOUR, 11);
-            cal.set(Calendar.MINUTE, 59);
-            cal.set(Calendar.SECOND, 00);
-            cal.set(Calendar.MILLISECOND, 00);
-            cal.set(Calendar.AM_PM, Calendar.PM);
+        if (!dateString.toLowerCase().equals(DATESTRING_NOW)) {
+            if (timeFormatter.format(currDate).equals(timeFormatter.format(cal.getTime()))) {
+                cal.set(Calendar.HOUR, 11);
+                cal.set(Calendar.MINUTE, 59);
+                cal.set(Calendar.SECOND, 00);
+                cal.set(Calendar.MILLISECOND, 00);
+                cal.set(Calendar.AM_PM, Calendar.PM);
+            }
         }
         return cal;
     }
