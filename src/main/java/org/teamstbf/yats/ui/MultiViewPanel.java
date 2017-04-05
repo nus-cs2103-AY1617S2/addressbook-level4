@@ -32,7 +32,7 @@ import javafx.scene.layout.Region;
  * The Browser Panel of the App.
  */
 @SuppressWarnings("restriction")
-public class CalendarViewPanel extends UiPart<Region> {
+public class MultiViewPanel extends UiPart<Region> {
 
 	protected Model model;
 
@@ -81,7 +81,7 @@ public class CalendarViewPanel extends UiPart<Region> {
 	 *
 	 * @param placeholder
 	 */
-	public CalendarViewPanel(AnchorPane placeholder, Model model) {
+	public MultiViewPanel(AnchorPane placeholder, Model model) {
 		super(FXML);
 		this.model = model;
 		calendarList = new FilteredList<ReadOnlyEvent>(model.getFilteredTaskList());
@@ -268,6 +268,14 @@ public class CalendarViewPanel extends UiPart<Region> {
 		public String toString() {
 			return "done=" + String.join(", ", doneKeyWords);
 		}
+	}
+
+	void loadTaskPage(ReadOnlyEvent event) {
+		browserPanel.loadPersonPage(event);
+	}
+
+	void releaseResources() {
+		browserPanel.freeResources();
 	}
 
 }

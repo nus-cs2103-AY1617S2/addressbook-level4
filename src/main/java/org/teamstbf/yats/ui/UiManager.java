@@ -129,7 +129,7 @@ public class UiManager extends ComponentManager implements Ui {
 	@Subscribe
 	private void handlePersonPanelSelectionChangedEvent(EventPanelSelectionChangedEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.loadPersonPage(event.getNewSelection());
+		mainWindow.loadTaskPage(event.getNewSelection());
 	}
 
 }

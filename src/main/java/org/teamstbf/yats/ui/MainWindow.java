@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Region> {
 	private Model model;
 
 	// Independent Ui parts residing in this Ui container
-	private CalendarViewPanel calendarViewPanel;
+	private MultiViewPanel calendarViewPanel;
 	private TaskListPanel taskListPanel;
 	private Config config;
 
@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Region> {
 	}
 
 	void fillInnerParts() {
-		calendarViewPanel = new CalendarViewPanel(getCalendarViewPlaceholder(), model);
+		calendarViewPanel = new MultiViewPanel(getCalendarViewPlaceholder(), model);
 		taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
 		new ResultDisplay(getResultDisplayPlaceholder());
 		new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());

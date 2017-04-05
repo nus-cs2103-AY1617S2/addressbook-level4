@@ -458,12 +458,17 @@ public class ModelManager extends ComponentManager implements Model {
 				if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
 						keyword)) {
 					return true;
-				} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword)) {
+				} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+						keyword)) {
 					return true;
-				} else if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(0), keyword)) {
-					return (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword));
-				} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword)) {
-					return (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(0), keyword));
+				} else if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+						keyword)) {
+					return (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+							keyword));
+				} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+						keyword)) {
+					return (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+							keyword));
 				}
 				return false;
 			}).findAny().isPresent();
