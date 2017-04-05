@@ -57,6 +57,11 @@ Note: HH:MM is optional
 
 > Tasks can have any number of tags (including 0).
 
+Examples:
+
+* `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
+* `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
+
 ### 2.2.1. Adding a recurring task
 
 Adds a recurring task to the task list<br>
@@ -65,8 +70,6 @@ where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
 
 Examples:
 
-* `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
-* `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 * `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
 * `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
 
@@ -107,7 +110,7 @@ Examples:
   Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
 
   > * Edits a specific instance of a recurring task
-  > * After editing this instane, the edited task will no longer be a part of the recurring sequence 
+  > * After editing this instance, the edited task will no longer be a part of the recurring sequence 
 
   Examples:
 
@@ -176,6 +179,14 @@ Examples:
   > The index **must be a positive integer** 1, 2, 3, ...
   > Upon deleting an instance, the task list will be updated with the next recent occurrence.
     If there is no more occurrences, then the entire reccuring task will be removed from the list.
+  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to 
+  calling `delete` on the same task.
+
+  Exmaple:
+
+* `find 05/01/2017`<br>
+  `deletethis 1`<br>
+  Executes a search to find tasks on January 5th the deletes the 1st task (which is a recurring instance).
 
 
 ### 2.7. Complete a task : `complete`
@@ -186,6 +197,8 @@ Format: `complete INDEX`
 > Mark the task at the specified `INDEX` as `Completed`.
 > The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
+> To complete a specific instance of a recurring task, follow the same syntax.
+> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.   
 
 Examples:
 
@@ -204,11 +217,20 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 > Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
 > The index **must be a positive interger** 1, 2, 3,...
 > The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
+> Using `prioritize` on a recurring task will change the priority of ALL occurrences.  
+> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited 
+priority. 
 
 Examples:
 * `list`<br>
   `prioritize 2 3`<br>
-  Puts a priority level of 3 to the 2nd task in the task list
+  Puts a priority level of 3 to the 2nd task in the task list. If the 2nd task is recurring, then all occurrences will have priority 3.
+
+* `find attend 2103 lecture`<br>
+`editthis 1 p/1`<br>
+Puts a priority level of 1 to the 1st task in the resulting list (assuming it is recurring, only this occurrence will have priority 1).
+
+
 
 ### 2.9. Clearing all entries : `clear`
 
