@@ -82,6 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(undoTaskManager.peek());
         undoTaskManager.pop();
         redoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     /** Undo previous action of task manager. */
@@ -90,6 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(redoTaskManager.peek());
         redoTaskManager.pop();
         undoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     // @@author
