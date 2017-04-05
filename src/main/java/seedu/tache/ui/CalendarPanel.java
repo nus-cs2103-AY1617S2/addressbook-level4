@@ -21,6 +21,8 @@ import javafx.scene.web.WebView;
 import seedu.tache.MainApp;
 import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
+import seedu.tache.commons.events.ui.CalendarNextRequestEvent;
+import seedu.tache.commons.events.ui.CalendarPreviousRequestEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
@@ -89,8 +91,11 @@ public class CalendarPanel extends UiPart<Region> {
         if (task.getActiveStatus() == false) {
             status = "completed";
         } else if (task.getEndDateTime().isPresent()) {
-            DateTime taskDate = task.getEndDateTime().get();
-            if (taskDate.hasPassed()) {
+            if (task.getEndDateTime().get().hasPassed()) {
+                status = "overdue";
+            }
+        } else if (task.getStartDateTime().isPresent()) {
+            if (task.getStartDateTime().get().hasPassed()) {
                 status = "overdue";
             }
         }
@@ -129,6 +134,46 @@ public class CalendarPanel extends UiPart<Region> {
             }
         } else {
             changeView("month");
+        }
+    }
+
+    @Subscribe
+    public void handleCalendarPreviousRequestEvent(CalendarPreviousRequestEvent event) {
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            engine.executeScript("prev()");
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript("prev()");
+                }
+            });
+        }
+    }
+
+    @Subscribe
+    public void handleCalendarNextRequestEvent(CalendarNextRequestEvent event) {
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            engine.executeScript("next()");
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript("next()");
+                }
+            });
         }
     }
 

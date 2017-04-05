@@ -41,6 +41,15 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0150120H
+    /** Returns the index of the specified task in the filtered task list
+     *
+     * @param targetTask Task to search for in the filtered task list
+     * @return index of targetTask if found, -1 otherwise
+     */
+    int getFilteredTaskListIndex(ReadOnlyTask targetTask);
+    //@@author
+
     /** Returns the all recurring ghost (not an actual task but will still be displayed to the user) tasks
      * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     ObservableList<ReadOnlyTask> getAllRecurringGhostTasks();
