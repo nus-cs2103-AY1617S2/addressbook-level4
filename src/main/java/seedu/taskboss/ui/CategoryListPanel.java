@@ -41,8 +41,6 @@ public class CategoryListPanel extends UiPart<Region> {
         super(FXML);
         tasks = taskList;
         updateCategoryCountToHashMap();
-        initCategories();
-        setConnections();
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
         setEventHandlerForViewingChangeEvent();
@@ -64,12 +62,14 @@ public class CategoryListPanel extends UiPart<Region> {
                 }
             }
         }
+
+        setConnections();
     }
 
     /**
      * Initializes {@code ObservableList<Category>} categories
      */
-    private void initCategories() {
+    private ObservableList<Category> initCategories() {
         categories = FXCollections.observableArrayList();
         for (Entry<Category, Integer> entry : categoryHm.entrySet()) {
             if (entry.getValue() > 0) {
@@ -77,6 +77,7 @@ public class CategoryListPanel extends UiPart<Region> {
             }
         }
         sortCategoryList();
+        return categories;
     }
 
     /**
@@ -115,9 +116,24 @@ public class CategoryListPanel extends UiPart<Region> {
     }
 
     private void setConnections() {
+        categories = initCategories();
         categoryListView.setItems(categories);
         categoryListView.setCellFactory(listView -> new CategoryListViewCell());
         setEventHandlerForViewingChangeEvent();
+    }
+
+    /**
+     * Sets the task list to the given task list
+     */
+    public void setTaskList(ObservableList<ReadOnlyTask> taskList) {
+        this.tasks = taskList;
+    }
+
+    /**
+     * Sets the category list to the given category list
+     */
+    public void setCategoryList(ObservableList<Category> categoryList) {
+        this.categories = categoryList;
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {

@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
+    private CategoryListPanel categoryListPanel;
     private Config config;
 
     @FXML
@@ -116,7 +117,10 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBossFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
-        new CategoryListPanel(getCategoryListPlaceholder(), logic.getFilteredTaskList());
+        categoryListPanel = new CategoryListPanel(getCategoryListPlaceholder(), logic.getFilteredTaskList());
+        categoryListPanel.setTaskList(logic.getTaskBoss().getTaskList());
+        categoryListPanel.setCategoryList(logic.getTaskBoss().getCategoryList());
+        categoryListPanel.updateCategoryCountToHashMap();
     }
 
     //@@author A0143157J
