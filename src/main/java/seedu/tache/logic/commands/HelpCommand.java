@@ -31,15 +31,22 @@ public class HelpCommand extends Command {
         this.filter = filter;
     }
 
+    //@@author A0150120H
     @Override
     public CommandResult execute() {
         switch(filter) {
         case AddCommand.COMMAND_WORD:
             return new CommandResult(AddCommand.MESSAGE_USAGE);
+        case ClearCommand.COMMAND_WORD:
+            return new CommandResult(ClearCommand.MESSAGE_USAGE);
+        case CompleteCommand.COMMAND_WORD:
+            return new CommandResult(CompleteCommand.MESSAGE_USAGE);
         case DeleteCommand.COMMAND_WORD:
             return new CommandResult(DeleteCommand.MESSAGE_USAGE);
         case EditCommand.COMMAND_WORD:
             return new CommandResult(EditCommand.MESSAGE_USAGE);
+        case ExitCommand.COMMAND_WORD:
+            return new CommandResult(ExitCommand.MESSAGE_USAGE);
         case FindCommand.COMMAND_WORD:
             return new CommandResult(FindCommand.MESSAGE_USAGE);
         case ListCommand.COMMAND_WORD:
@@ -48,6 +55,10 @@ public class HelpCommand extends Command {
             return new CommandResult(LoadCommand.MESSAGE_USAGE);
         case SaveCommand.COMMAND_WORD:
             return new CommandResult(SaveCommand.MESSAGE_USAGE);
+        case SelectCommand.COMMAND_WORD:
+            return new CommandResult(SelectCommand.MESSAGE_USAGE);
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(UndoCommand.MESSAGE_USAGE);
         default:
             EventsCenter.getInstance().post(new ShowHelpRequestEvent());
             return new CommandResult(SHOWING_HELP_MESSAGE);
