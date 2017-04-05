@@ -122,7 +122,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     public ListView<ReadOnlyTask> getTaskListView() {
-    	return taskListView;
+        return taskListView;
     }
 
 }

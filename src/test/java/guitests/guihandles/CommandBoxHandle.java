@@ -31,7 +31,7 @@ public class CommandBoxHandle extends GuiHandle {
     }
 
     public void clear() {
-    	setTextField(COMMAND_INPUT_FIELD_ID, "");
+        setTextField(COMMAND_INPUT_FIELD_ID, "");
     }
 
     /**

@@ -1,11 +1,9 @@
 package guitests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 import seedu.task.ui.Scroll;
@@ -98,7 +96,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickScrollTest() {
-    	//populate the current task list to test for scroll
+        //populate the current task list to test for scroll
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.handle;
@@ -127,11 +125,11 @@ public class ShortcutTest extends TaskManagerGuiTest {
         //add task without start date
         taskToAdd = td.neglect;
         assertAddSuccess(taskToAdd, currentList);
-        
+
         //scroll down
         mainMenu.useShiftDown();
         assertScrollDownSuccess();
-        
+
         //scroll up
         mainMenu.useShiftUp();
         assertScrollUpSuccess();
@@ -142,19 +140,19 @@ public class ShortcutTest extends TaskManagerGuiTest {
     }
 
     private void assertScrollDownSuccess() {
-    	scroll = new Scroll();
-    	double currentValue = scroll.getScrollValue(taskListPanel.getListView());
+        scroll = new Scroll();
+        double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftDown();
-    	double newValue = scroll.getScrollValue(taskListPanel.getListView());
-    	assertTrue(newValue > currentValue);
+        double newValue = scroll.getScrollValue(taskListPanel.getListView());
+        assertTrue(newValue > currentValue);
     }
 
     private void assertScrollUpSuccess() {
-    	scroll = new Scroll();
-    	double currentValue = scroll.getScrollValue(taskListPanel.getListView());
+        scroll = new Scroll();
+        double currentValue = scroll.getScrollValue(taskListPanel.getListView());
         mainMenu.useShiftUp();
-    	double newValue = scroll.getScrollValue(taskListPanel.getListView());
-    	assertTrue(newValue < currentValue);
+        double newValue = scroll.getScrollValue(taskListPanel.getListView());
+        assertTrue(newValue < currentValue);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
