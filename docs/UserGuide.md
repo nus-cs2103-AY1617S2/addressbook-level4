@@ -305,7 +305,17 @@ Some of you power-users want to keep your tasks synced between devices. Using th
 * `saveto C:\Desktop`
 * `saveto ..\mySecretFolder`
 
-#### 3.6.2. Export file
+#### 3.6.2. Load different data file
+
+Once you have saved your file to your Dropbox folder, your other computer will need to be told where this file is. Use the usethis command to load the tasks from this data file. Any changes you make to this file will also be reflected in your original file.
+
+##### Format: `usethis <dir_location>`
+
+##### Parameters
+
+    dir_location : path to save location
+
+#### 3.6.3. Export file
 
 Don't worry if you don't have the luxury of a syncing service. If you want to transfer tasks from one computer to the next, you can `export` your tasks, and transfer the output file using a USB stick.
 
@@ -320,7 +330,7 @@ Don't worry if you don't have the luxury of a syncing service. If you want to tr
 * `export C:\Desktop`
 * `export ..\mySecretFolder`
 
-#### 3.6.3. Import file
+#### 3.6.4. Import file
 
 In your second computer, plug in the USB stick and get the file path of the previously exported file. Tell **Today** to `import` this file and it will add these tasks to your current tasklist.
 
