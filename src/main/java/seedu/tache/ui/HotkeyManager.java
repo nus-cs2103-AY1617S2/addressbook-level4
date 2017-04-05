@@ -105,8 +105,8 @@ public class HotkeyManager {
 
                                 trayIcon.setPopupMenu(popupMenu);
                                 tray.add(trayIcon);
-                                trayIcon.displayMessage("Lucky Draw Reminder", "This task is due now."
-                                                                , MessageType.INFO);
+                                trayIcon.displayMessage("Lucky Draw Reminder",
+                                                        "This task is due now.", MessageType.INFO);
                             } catch (AWTException e) {
                                 e.printStackTrace();
                             }
