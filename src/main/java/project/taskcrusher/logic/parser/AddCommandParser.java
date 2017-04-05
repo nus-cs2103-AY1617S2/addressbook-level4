@@ -4,6 +4,7 @@ import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_OPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,7 +39,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_TAG, PREFIX_PRIORITY,
-                PREFIX_LOCATION, PREFIX_DESCRIPTION);
+                PREFIX_LOCATION, PREFIX_DESCRIPTION, PREFIX_OPTION);
         argsTokenizer.tokenize(args);
 
         // extract flag and name from preamble
@@ -61,12 +62,17 @@ public class AddCommandParser {
         final String location = ParserUtil.setValue(argsTokenizer, PREFIX_LOCATION, Location.NO_LOCATION);
         final String description = ParserUtil.setValue(argsTokenizer, PREFIX_DESCRIPTION, Description.NO_DESCRIPTION);
         final Set<String> tags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
+        final String option = ParserUtil.setValue(argsTokenizer, PREFIX_OPTION, Parser.NO_OPTION);
 
         try {
             switch (flag) {
             case Event.EVENT_FLAG:
                 List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-                return new AddCommand(name, timeslots, location, description, tags);
+                AddCommand eventToAdd = new AddCommand(name, timeslots, location, description, tags);
+                if (option.equals(Parser.FORCE_OPTION)) {
+                    eventToAdd.force = true;
+                }
+                return eventToAdd;
             case Task.TASK_FLAG:
                 return new AddCommand(name, date, priority, description, tags);
             default:
