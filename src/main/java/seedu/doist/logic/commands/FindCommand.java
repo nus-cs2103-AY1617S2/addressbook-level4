@@ -1,5 +1,7 @@
 package seedu.doist.logic.commands;
 
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskMatchingComparator;
+
 /**
  * Finds and lists all tasks in to-do list whose description contains any of the
  * argument keywords. Keyword matching is case sensitive.
@@ -22,7 +24,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-        model.sortTasksByDefault();
+        model.sortTasks(new ReadOnlyTaskMatchingComparator(keywords));
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 }

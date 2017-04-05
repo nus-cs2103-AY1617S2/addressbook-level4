@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Priority.PriorityLevel;
+import seedu.doist.model.util.StringMatchUtil;
 
 /**
  * A read-only immutable interface for a Task in the to-do list.
@@ -125,6 +126,23 @@ public interface ReadOnlyTask {
     }
 
     /**
+     * Compare the 'degree of closeness' of task descriptions
+     */
+    public class ReadOnlyTaskMatchingComparator implements Comparator<ReadOnlyTask> {
+        private String targetString;
+
+        public ReadOnlyTaskMatchingComparator(String targetString) {
+            this.targetString = targetString;
+        }
+
+        @Override
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            double result1 = StringMatchUtil.matchValue(targetString, task1.getDescription().toString());
+            double result2 = StringMatchUtil.matchValue(targetString, task2.getDescription().toString());
+            return Double.compare(result2, result1);
+        }
+    }
+    /**
      * Combines multiple comparators together to compare tasks.
      * For example if you want to sort by end time then by priority,
      * you create a list of comparators, adding the end time comparator first
@@ -150,4 +168,5 @@ public interface ReadOnlyTask {
             return compareResult;
         }
     }
+
 }

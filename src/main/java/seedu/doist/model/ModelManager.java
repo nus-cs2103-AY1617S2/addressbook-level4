@@ -230,6 +230,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void sortTasks(Comparator<ReadOnlyTask> comparator) {
+        todoList.sortTasks(comparator);
+    }
+
+    @Override
     public ReadOnlyTaskCombinedComparator parseSortTypesToComparator(List<SortType> sortTypes) {
         List<Comparator<ReadOnlyTask>> comparatorList = new ArrayList<Comparator<ReadOnlyTask>>();
         // Finished tasks are always put at the bottom

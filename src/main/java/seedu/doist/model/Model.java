@@ -2,6 +2,7 @@ package seedu.doist.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -64,6 +65,9 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given task type and tags*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags);
+
+    /** Sorts the task accorfing to the specific comparator passed as an argument */
+    void sortTasks(Comparator<ReadOnlyTask> comparator);
 
     /** Sorts the tasks according to the comparators defined in the list*/
     void sortTasks(List<SortType> sortTypes);
