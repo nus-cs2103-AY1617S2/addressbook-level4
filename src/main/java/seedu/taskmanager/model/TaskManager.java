@@ -206,9 +206,11 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public boolean isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
-        return tasks.isBlockedOutTime(t);
-    }
+    /*
+     * public int isBlockedOutTime(Task t) throws
+     * UniqueTaskList.DuplicateTaskException { return tasks.isBlockedOutTime(t);
+     * }
+     */
 
     // @@author
     //// tag-level operations

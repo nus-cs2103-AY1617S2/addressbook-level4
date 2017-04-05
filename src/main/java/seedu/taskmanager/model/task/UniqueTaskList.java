@@ -185,16 +185,13 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
-    public boolean isBlockedOutTime(Task t) {
-        int i = 0;
-        while (i < (internalList.size())) {
-            if (internalList.get(i).isEventTask() && t.isWithinStartEndDuration(internalList.get(i))) {
-                return true;
-            }
-            i++;
-        }
-        return false;
-    }
+    /*
+     * public int isBlockedOutTime(Task t) { int index = 0; while (index <
+     * (internalList.size())) { if (internalList.get(index).isEventTask() &&
+     * !internalList.get(index).getIsMarkedAsComplete() &&
+     * t.isWithinStartEndDuration(internalList.get(index))) { return index; }
+     * index++; } return -1; }
+     */
 
     // @@author A0142418L
     /**

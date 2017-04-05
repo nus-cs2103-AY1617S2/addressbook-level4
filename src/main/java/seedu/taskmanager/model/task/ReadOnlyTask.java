@@ -1,5 +1,6 @@
 package seedu.taskmanager.model.task;
 
+import seedu.taskmanager.commons.util.CurrentDate;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
@@ -98,4 +99,7 @@ public interface ReadOnlyTask {
      * @return true if task is a Floating Task
      */
     boolean isFloatingTask();
+
+    boolean isWithinStartEndDuration(ReadOnlyTask t);
+
 }
