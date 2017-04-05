@@ -68,10 +68,9 @@ public class AddTagController extends TagController {
         return new String[][] { getBasicHelp(), HELP_COMMENTS, HELP_EXAMPLES };
     }
 
-    protected void modifyTagsForIndex(ArrayList<String> successfulList,
-            ArrayList<String> failedList, int index, String keywords) {
+    protected void modifyTagsForTask(ArrayList<String> successfulList,
+            ArrayList<String> failedList, Task task, String keywords) {
         String[] keywordList = StringUtil.convertToArray(keywords);
-        Task task = UiStore.getInstance().getShownTasks().get(index);
         for (String keyword : keywordList) {
             if (task.addTag(new Tag(keyword))) {
                 successfulList.add(keyword);
