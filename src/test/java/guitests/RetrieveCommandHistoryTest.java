@@ -11,14 +11,14 @@ public class RetrieveCommandHistoryTest extends GeeKeepGuiTest {
     private static final String COMMAND_ADD_LEARN_HASKELL = "add Learn Haskell";
     private static final String COMMAND_ADD_BUY_SPECTACLES = "add Buy spectacles";
     private static final String COMMAND_DELETE_1 = "delete 1";
+    private static final String PREFIX = "add";
 
     @Test
-    public void commandBox_up_retrieve_previous_history() {
+    public void retrievePreviousHistory() {
         commandBox.runCommand(COMMAND_ADD_LEARN_HASKELL);
         commandBox.runCommand(COMMAND_DELETE_1);
         commandBox.runCommand(COMMAND_ADD_BUY_SPECTACLES);
-        commandBox.type(KeyCode.A, KeyCode.D, KeyCode.D);
-        commandBox.pressEnter();
+        commandBox.enterCommand(PREFIX);
         commandBox.type(KeyCode.UP);
         assertEquals(COMMAND_ADD_BUY_SPECTACLES, commandBox.getCommandInput());
         commandBox.type(KeyCode.UP);
@@ -28,20 +28,19 @@ public class RetrieveCommandHistoryTest extends GeeKeepGuiTest {
     }
 
     @Test
-    public void commandBox_down_retrieve_next_history() {
+    public void retrieveNextHistory() {
         commandBox.runCommand(COMMAND_ADD_LEARN_HASKELL);
         commandBox.runCommand(COMMAND_DELETE_1);
         commandBox.runCommand(COMMAND_ADD_BUY_SPECTACLES);
-        commandBox.type(KeyCode.A, KeyCode.D, KeyCode.D);
-        commandBox.pressEnter();
+        commandBox.enterCommand(PREFIX);
         commandBox.type(KeyCode.UP);
         commandBox.type(KeyCode.UP);
         commandBox.type(KeyCode.DOWN);
         assertEquals(COMMAND_ADD_BUY_SPECTACLES, commandBox.getCommandInput());
         commandBox.type(KeyCode.DOWN);
-        assertEquals("add", commandBox.getCommandInput());
+        assertEquals(PREFIX, commandBox.getCommandInput());
         commandBox.type(KeyCode.DOWN);
-        assertEquals("add", commandBox.getCommandInput());
+        assertEquals(PREFIX, commandBox.getCommandInput());
     }
 
 }
