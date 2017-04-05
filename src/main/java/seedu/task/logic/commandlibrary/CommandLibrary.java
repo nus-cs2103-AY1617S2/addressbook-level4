@@ -170,8 +170,6 @@ public class CommandLibrary {
                 new ListCommandParser(), ListCommand.MESSAGE_USAGE));
         commandTable.put(ListCommand.COMMAND_WORD_3, new CommandInstance(ListCommand.COMMAND_WORD_1,
                 new ListCommandParser(), ListCommand.MESSAGE_USAGE));
-        commandTable.put(ListCommand.NOT_DONE, new CommandInstance(ListCommand.NOT_DONE,
-                new ListCommandParser(), ListCommand.MESSAGE_USAGE));
 
         commandTable.put(LoadCommand.COMMAND_WORD_1, new CommandInstance(LoadCommand.COMMAND_WORD_1,
                 new LoadCommandParser(), LoadCommand.MESSAGE_USAGE));
