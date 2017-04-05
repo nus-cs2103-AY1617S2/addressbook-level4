@@ -33,12 +33,14 @@ public interface ReadOnlyPerson {
     default boolean isSameStateAs(ReadOnlyPerson other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state
-                                                                  // checks here
-                                                                  // onwards
-                        && other.getEndDate().equals(this.getEndDate()) && other.getStartDate().equals(this.getStartDate())
-                        && other.getEmail().equals(this.getEmail()) && other.getGroup().equals(this.getGroup()));
-    }
+                && other.getName().equals(this.getName())
+                && ((other.getStartDate() == null && this.getStartDate() == null)
+                        || ((other.getStartDate() != null && this.getStartDate() != null)
+                                && other.getStartDate().equals(this.getStartDate())))
+                && ((other.getEndDate() == null && this.getEndDate() == null)
+                        || ((other.getEndDate() != null && this.getEndDate() != null)
+                                && other.getEndDate().equals(this.getEndDate()))));
+        }
 
     /**
      * Formats the person as text, showing all contact details.

@@ -1,9 +1,15 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
 import seedu.address.model.ReadOnlyAddressBook;
-
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
@@ -13,35 +19,48 @@ import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 
+//@@author A0163848R
+
 public class SampleDataUtil {
-    //@@author A0163848R
-    public static Task[] getSamplePersons() {
-        /*
-        final int n = 50;
-        Task[] generated = new Task[n];
+    
+    private static final int SAMPLE_SIZE = 50;
+    
+    Random r;
+    
+    public static Iterable<Task> getSamplePersons() {
+        final int n = SAMPLE_SIZE;
+        List<Task> generated = new ArrayList<Task>(n);
         for (int i = 0; i < n; i++) {
-            generated[i] = generateRandomTask();
+            Task t = generateRandomTask();
+            if (!generated.contains(t)) {
+                generated.add(t);
+            } else {
+                i--;
+            }
         }
         return generated;
-        */
-        return new Task[] { randomTaskGenerator() };
     }
     
     /**
      * @return a randomly-generated task
      * @throws IllegalValueException
      */
-    private static Task randomTaskGenerator() {
+    private static Task generateRandomTask() {
+        Random r = new Random();
+        boolean addStartDate = r.nextBoolean();
+        boolean addEndDate = r.nextBoolean();
+        
         try {
+            
             return Task.factory(
-                    new Name("A"),
-                    new StartDate("today"),
-                    new EndDate("tomorrow"),
-                    new Email("a@e"),
-                    new Group("ayy"),
-                    UniqueTagList.build("incomplete"));
+                    new Name(TaskNameGenerator.doAction(r).with().maybe(0.75f).in().maybe(0.75f).toString()),
+                    addStartDate && addEndDate ?  new StartDate(TaskDateGenerator.getStartDate(r)) : null,
+                    addEndDate ? new EndDate(TaskDateGenerator.getEndDate(r)) : null,
+                    new Group(TaskGroupGenerator.getGroup(r)),
+                    UniqueTagList.build(r.nextBoolean() ? Tag.TAG_COMPLETE : Tag.TAG_INCOMPLETE));
+            
         } catch (IllegalValueException e) {
-            return randomTaskGenerator();
+            return generateRandomTask();
         }
     }
     //@@author
@@ -57,4 +76,5 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
+    
 }
