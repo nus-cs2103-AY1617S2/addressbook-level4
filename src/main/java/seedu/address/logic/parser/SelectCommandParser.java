@@ -30,7 +30,7 @@ public class SelectCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
 
-        return new SelectCommand(index.get(), type.get());
+        return new SelectCommand(index.get(), type.get().toLowerCase());
     }
 
 }

@@ -30,12 +30,12 @@ public class DeleteCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-        if (!type.get().equals("ev") && !type.get().equals("ts")) {
+        if (!type.get().equalsIgnoreCase("ev") && !type.get().equalsIgnoreCase("ts")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(index.get(), type.get());
+        return new DeleteCommand(index.get(), type.get().toLowerCase());
     }
 
 }

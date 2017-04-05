@@ -57,7 +57,7 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
         try {
-            String type = typeToEdit.get();
+            String type = typeToEdit.get().toLowerCase();
             boolean priorityExists = argsTokenizer.getValue(PREFIX_PRIORITY).isPresent();
             boolean startdateExists = argsTokenizer.getValue(PREFIX_STARTDATE).isPresent();
             boolean enddateExists = argsTokenizer.getValue(PREFIX_ENDDATE).isPresent();
@@ -95,7 +95,7 @@ public class EditCommandParser {
         if (!editEventDescriptor.isAnyFieldEdited() && !editTaskDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
-        String taskorevent = preambleFields.get(0).get();
+        String taskorevent = preambleFields.get(0).get().toLowerCase();
         try {
             return new EditCommand(index.get(), editEventDescriptor, editTaskDescriptor, taskorevent);
         } catch (IllegalValueException ile) {

@@ -17,10 +17,10 @@ public class ClearCommandParser {
      */
     public Command parse(String args) {
         String type = ParserUtil.parseClearType(args);
-        if (!type.equals("") && !type.equals("ev") && !type.equals("ts")) {
+        if (!type.equals("") && !type.equalsIgnoreCase("ev") && !type.equalsIgnoreCase("ts")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
         }
 
-        return new ClearCommand(type);
+        return new ClearCommand(type.toLowerCase());
     }
 }
