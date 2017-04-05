@@ -69,12 +69,10 @@ public class EditCommand extends Command {
 
         try {
             if (isSpecific) {
-                newTask = Task.modifyOccurrence(taskToEdit);
-                model.addTask(newTask);
+                ReadOnlyTask copyRecurTask = new Task(taskToEdit);
+                newTask = Task.modifyOccurrence(copyRecurTask);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
-                int newIndex = model.getFilteredTaskList().indexOf(newTask);
-                model.updateTask(newIndex, editedTask);
-
+                model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
                 model.updateTask(filteredTaskListIndex, editedTask);

@@ -24,6 +24,11 @@ public interface Model {
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
+    /** Delete a specific task in a recurring task.
+     * @throws DuplicateTaskException */
+    void deleteThisTask(ReadOnlyTask targetToDelete, Task
+            taskToAdd) throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException;
+
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -43,7 +48,13 @@ public interface Model {
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredtaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedtask)
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+
+    /**
+     * Updates the specific occurrence of a recurring task
+     */
+    void updateThisTask(int filteredTaskListIndex, ReadOnlyTask editedTask, Task newTaskToAdd)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */

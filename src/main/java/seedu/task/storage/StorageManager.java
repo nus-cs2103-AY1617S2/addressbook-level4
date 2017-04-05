@@ -1,5 +1,7 @@
 package seedu.task.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -75,7 +77,23 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(taskList, filePath);
+
     }
+
+    //@@author A0163559U
+    @Override
+    public void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException {
+        logger.fine("Attempting to copy task manager data to file: " + newFile.toString());
+        taskListStorage.saveTaskListInNewLocation(taskList, newFile);
+    }
+
+    @Override
+    public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+            throws FileNotFoundException, DataConversionException {
+        logger.fine("Attempting to load task manager data from file: " + loadFile.toString());
+        return taskListStorage.loadTaskListFromNewLocation(taskList, loadFile);
+    }
+    //@@author
 
 
     @Override
@@ -88,5 +106,6 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
 
 }
