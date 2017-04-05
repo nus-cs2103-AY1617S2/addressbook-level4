@@ -85,20 +85,22 @@ public class FindController extends Controller {
                 + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
         }
 
-        String searchParameters;
-
-        if (isSearchByName && isSearchByTag) {
-            searchParameters = MESSAGE_NAME_AND_TAG;
-        } else if (isSearchByName) {
-            searchParameters = MESSAGE_NAME;
-        } else { //isSearchByTag
-            searchParameters = MESSAGE_TAG;
-        }
+        String searchParameters = nameSearchParameters(isSearchByTag, isSearchByName);
 
         String keywords = String.join(MESSAGE_STRING_JOINING, keywordList);
         return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_FIND,
                 keywords, searchParameters, StringUtil.nounWithCount("result", foundCount))
                 + String.format(MESSAGE_RESULT_TEMPLATE_TAB, uiStore.getShownTasks().size()));
+    }
+
+    private String nameSearchParameters(boolean isSearchByTag, boolean isSearchByName) {
+        if (isSearchByName && isSearchByTag) {
+            return MESSAGE_NAME_AND_TAG;
+        } else if (isSearchByName) {
+            return MESSAGE_NAME;
+        } else { //isSearchByTag
+            return MESSAGE_TAG;
+        }
     }
 
     public Map<String, String> tokenize(String command) {
