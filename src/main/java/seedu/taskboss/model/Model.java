@@ -75,6 +75,8 @@ public interface Model {
     /** Undoes previous command of TaskBoss*/
     void undoTaskboss() throws EmptyStackException, IllegalValueException;
 
+    String undoTaskbossInput() throws IllegalValueException;
+
     /** Redoes previous undo command of TaskBoss*/
     void redoTaskboss() throws EmptyStackException, IllegalValueException;
 

@@ -39,7 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
     private final Stack<ReadOnlyTaskBoss> taskbossUndoHistory;
+    private final Stack<String> undoInputList;
     private SortBy currentSortType;
+    private String undoInput = null;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
@@ -58,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
         taskbossUndoHistory = new Stack<ReadOnlyTaskBoss>();
+        undoInputList = new Stack<String>();
     }
 
     public ModelManager() throws IllegalValueException {
@@ -89,12 +92,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public String undoTaskbossInput() throws IllegalValueException {
+        undoInput = undoInputList.pop();
+
+        return undoInput;
+    }
+
+    @Override
     public void redoTaskboss() throws EmptyStackException, IllegalValueException {
         TaskBoss previousTaskList = new TaskBoss(this.taskBoss);
         taskBoss.resetData(taskbossUndoHistory.pop());
         taskbossHistory.push(previousTaskList);
         updateFilteredListToShowAll();
-
+        undoInputList.push("redo");
         indicateTaskBossChanged();
     }
 
@@ -119,6 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask target: targets) {
             taskBoss.removeTask(target);
         }
+        undoInputList.push("delete");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -130,6 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.addTask(task);
         taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
+        undoInputList.push("add");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -142,7 +154,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         taskBoss.sortTasks(currentSortType);
-
+        undoInputList.push("edit");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -153,7 +165,6 @@ public class ModelManager extends ComponentManager implements Model {
         assert sortType != null;
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
-
         indicateTaskBossChanged();
     }
 
@@ -179,7 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
             }
             index++;
         }
-
+        undoInputList.push("mark");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -219,6 +230,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.renameCategory(newCategory, oldCategory);
         removeCategoryFromTaskboss(oldCategory);
         taskbossUndoHistory.clear();
+        undoInputList.push("rename");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
