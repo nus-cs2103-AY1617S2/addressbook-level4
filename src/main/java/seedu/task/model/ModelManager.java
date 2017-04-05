@@ -196,11 +196,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListFloat() {
         updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
     }
-
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
-    }
+//    @Override
+//    public void updateFilteredTaskList(Set<String> keywords) {
+//        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
+//    }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
@@ -217,13 +216,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
-
-    // @@author A0139975J-reused
-    @Override
-    public void updateFilteredTaskList(Date date) {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-
-    }
+//    // @@author A0139975J-reused
+//    @Override
+//    public void updateFilteredTaskList(Date date) {
+//        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+//    }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {

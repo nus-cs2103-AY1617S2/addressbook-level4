@@ -109,9 +109,6 @@ public class CommandLibrary {
         commandTable.put(FindCommand.COMMAND_WORD_2, new CommandInstance(FindCommand.COMMAND_WORD_1,
                 new FindCommandParser() , FindCommand.MESSAGE_USAGE));
 
-        commandTable.put(FindDateCommand.COMMAND_WORD_1, new CommandInstance(FindDateCommand.COMMAND_WORD_1,
-                new FindDateCommandParser() , FindDateCommand.MESSAGE_USAGE));
-
         commandTable.put(FindExactCommand.COMMAND_WORD_1, new CommandInstance(FindExactCommand.COMMAND_WORD_1,
                 new FindExactCommandParser(), FindExactCommand.MESSAGE_USAGE));
         commandTable.put(FindExactCommand.COMMAND_WORD_2, new CommandInstance(FindExactCommand.COMMAND_WORD_1,
