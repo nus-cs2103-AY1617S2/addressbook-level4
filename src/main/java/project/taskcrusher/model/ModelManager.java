@@ -21,6 +21,7 @@ import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
+import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -197,6 +198,28 @@ public class ModelManager extends ComponentManager implements Model {
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.confirmEventTime(eventListIndex, timeslotIndex);
         indicateUserInboxChanged();
+    }
+
+    @Override
+    public synchronized void switchTaskToEvent(ReadOnlyTask toDelete, Event toAdd) throws
+        DuplicateEventException, TaskNotFoundException {
+        assert toDelete != null && toAdd != null;
+        saveUserInboxStateForUndo();
+        userInbox.removeTask(toDelete);
+        userInbox.addEvent(toAdd);
+        indicateUserInboxChanged();
+        prepareListsForUi();
+    }
+
+    @Override
+    public synchronized void switchEventToTask(ReadOnlyEvent toDelete, Task toAdd) throws
+        DuplicateTaskException, EventNotFoundException {
+        assert toDelete != null && toAdd != null;
+        saveUserInboxStateForUndo();
+        userInbox.removeEvent(toDelete);
+        userInbox.addTask(toAdd);
+        indicateUserInboxChanged();
+        prepareListsForUi();
     }
 
     public UnmodifiableObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {

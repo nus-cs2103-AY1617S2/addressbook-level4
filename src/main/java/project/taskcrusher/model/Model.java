@@ -7,10 +7,13 @@ import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
+import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
+import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
+import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -101,6 +104,12 @@ public interface Model {
 
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+
+    void switchEventToTask(ReadOnlyEvent toDelete, Task toAdd) throws
+        DuplicateTaskException, EventNotFoundException;
+
+    void switchTaskToEvent(ReadOnlyTask toDelete, Event toAdd) throws
+        DuplicateEventException, TaskNotFoundException;
 
     /**
      * Returns the filtered event list as an
