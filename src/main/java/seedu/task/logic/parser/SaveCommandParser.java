@@ -23,9 +23,9 @@ public class SaveCommandParser {
         if (args == null || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
-        String trimmed_args = args.trim();
+        String trimmedArgs = args.trim();
         try {
-            return new SaveCommand(trimmed_args);
+            return new SaveCommand(trimmedArgs);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {

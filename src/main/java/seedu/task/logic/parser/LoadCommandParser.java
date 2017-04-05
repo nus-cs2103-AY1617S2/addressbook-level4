@@ -23,10 +23,10 @@ public class LoadCommandParser {
         if (args == null || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         }
-        String trimmed_args = args.trim();
+        String trimmedArgs = args.trim();
         try {
             //System.out.println("@@@Parsing load command: " + args);
-            return new LoadCommand(trimmed_args);
+            return new LoadCommand(trimmedArgs);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
