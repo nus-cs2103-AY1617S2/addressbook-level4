@@ -35,14 +35,12 @@
         </Label>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
         </children>
-        
         </VBox>
         <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <padding>
            <Insets bottom="5" left="8" right="5" top="0" />
         </padding>
         <children>
-        
         <Label fx:id="eventHeader" text="Events: " styleClass="list_header">
         <graphic>
         <ImageView fitHeight="23.0" fitWidth="23.0">
@@ -54,7 +52,6 @@
         </Label>
         <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
         </children>
-        
         </VBox>
         </items>
     </SplitPane>

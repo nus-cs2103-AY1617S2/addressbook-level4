@@ -203,7 +203,8 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(userInbox.getEventsWithOverlappingTimeslots(candidate));
     }
 
-    private void saveUserInboxStateForUndo() {
+    @Override
+    public void saveUserInboxStateForUndo() {
         undoStack.push(new UserInbox(this.userInbox));
         isLastPerformedActionIsUndo = false;
     }

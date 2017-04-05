@@ -31,6 +31,8 @@ public interface Model {
      */
     boolean redo();
 
+    void saveUserInboxStateForUndo();
+
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 

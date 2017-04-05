@@ -19,9 +19,10 @@ import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.ListCommand;
 import project.taskcrusher.logic.commands.LoadCommand;
 import project.taskcrusher.logic.commands.MarkCommand;
+import project.taskcrusher.logic.commands.RedoCommand;
 import project.taskcrusher.logic.commands.SelectCommand;
 import project.taskcrusher.logic.commands.UndoCommand;
-import project.taskcrusher.logic.commands.RedoCommand;
+
 
 /**
  * Parses user input.
@@ -86,10 +87,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
