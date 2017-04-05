@@ -18,15 +18,23 @@ public class Recurrence {
     public static final String RECURRENCE_MONTH = "monthly";
     public static final String RECURRENCE_YEAR = "yearly";
     public static final int RECURRENCE_INCREMENT = 1;
+    public static final String MESSAGE_RECURRENCE_DATE_CONSTRAINTS = "Recurrence date must be in dd/MM/yyyy format.";
     public static final String MESSAGE_RECURRENCE_CONSTRAINTS = "Recurrence must be none, daily, weekly, monthly or yearly";
     public static final String RECURRENCE_VALIDATION_REGEX = ".*(none|daily|weekly|monthly|yearly).*";
     public static final String RECURRENCE_DATE_FORMAT = "dd/MM/yyyy";
     
     Date startDate;
-    String recurrence;
+    String periodicity;
     List<String> doneList;
     static SimpleDateFormat dateFormat = new SimpleDateFormat(RECURRENCE_DATE_FORMAT);
     int recurrencePeriod;
+    
+    /*
+     * Creates an empty Recurrence object
+     */
+    public Recurrence() {
+        
+    }
 
     public Recurrence(Date date, String recurrence) throws IllegalValueException {
         if (!isValidPeriod(recurrence)) {
@@ -34,9 +42,20 @@ public class Recurrence {
         }
         
         this.startDate = date;
-        this.recurrence = recurrence;
+        this.periodicity = recurrence;
         setPeriod(recurrence);
         this.doneList = new ArrayList<String>();
+    }
+    
+    public Recurrence(String startDate, String periodicity, String doneList) throws IllegalValueException {
+        try {
+            this.startDate = dateFormat.parse(startDate);
+        } catch (ParseException pe) {
+            throw new IllegalValueException(MESSAGE_RECURRENCE_DATE_CONSTRAINTS);
+        }
+        this.periodicity = periodicity;
+        // TODO create doneListfromString
+        this.doneList = null;
     }
     
     private static boolean isValidPeriod(String recurrence) {
@@ -44,13 +63,13 @@ public class Recurrence {
     }
     
     private void setPeriod(String recurrence) throws IllegalValueException {
-        if (this.recurrence.equals(RECURRENCE_DAY)) {
+        if (this.periodicity.equals(RECURRENCE_DAY)) {
             this.recurrencePeriod = Calendar.DAY_OF_WEEK;
-        } else if (this.recurrence.equals(RECURRENCE_WEEK)) {
+        } else if (this.periodicity.equals(RECURRENCE_WEEK)) {
             this.recurrencePeriod = Calendar.WEEK_OF_YEAR;
-        } else if (this.recurrence.equals(RECURRENCE_MONTH)) {
+        } else if (this.periodicity.equals(RECURRENCE_MONTH)) {
             this.recurrencePeriod = Calendar.MONTH;
-        } else if (this.recurrence.equals(RECURRENCE_YEAR)) {
+        } else if (this.periodicity.equals(RECURRENCE_YEAR)) {
             this.recurrencePeriod = Calendar.YEAR;
         } else {
             throw new IllegalValueException(MESSAGE_RECURRENCE_CONSTRAINTS);
@@ -66,7 +85,12 @@ public class Recurrence {
     }
     
     public String getPeriodicity() {
-        return this.recurrence;
+        return this.periodicity;
+    }
+    
+    public String getDoneListString() {
+        // TODO format doneList as a String
+        return "";
     }
     
     public List<Date> getOccurenceBetween(Date start, Date end) {
