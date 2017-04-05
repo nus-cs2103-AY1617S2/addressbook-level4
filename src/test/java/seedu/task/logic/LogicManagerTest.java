@@ -279,27 +279,28 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_noTaskName() throws Exception {
-	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-	assertCommandFailure("add ", expectedMessage);
+	    String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+	    assertCommandFailure("add ", expectedMessage);
     }
 
-//    @Test
-//    public void execute_add_invalidDate() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_DATE_FORMAT);
-//	assertCommandFailure("add Go cycling d/999999 ", expectedMessage);
-//    }
-//
-//    @Test
+    @Test
+    public void execute_add_invalidDate() throws Exception {
+	    String expectedMessage = String.format(AddCommand.MESSAGE_INVALID_DATE_FORMAT);
+	    assertCommandFailure("add Cycling d/ ", expectedMessage);
+    }
+
+//    This test is not needed since invalid start and end dates just show today's date
+//    @Test -> 
 //    public void execute_add_invalidStartAndEndDate() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_DATE);
-//	assertCommandFailure("add Go swimming d/170110 160110 ", expectedMessage);
+//	    String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_DATE);
+//	    assertCommandFailure("add Go swimming d/170110 160110 ", expectedMessage);
 //    }
 //
-//    @Test
-//    public void execute_add_invalidStartAndEndTime() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_TIME);
-//	assertCommandFailure("add Go cycling s/1700 e/1500 ", expectedMessage);
-//    }
+    @Test
+    public void execute_add_invalidStartAndEndTime() throws Exception {
+	    String expectedMessage = String.format(AddCommand.MESSAGE_INVALID_TIME);
+	    assertCommandFailure("add Go cycling s/1700 e/1500 ", expectedMessage);
+    }
 
     @Test
     public void execute_edit_successful() throws Exception {
@@ -429,7 +430,7 @@ public class LogicManagerTest {
     public void execute_select_invalidArgsFormat() {
     	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
     	assertCommandFailure("google ", expectedMessage);
-        }
+    }
     
 //    @Test
 //    public void execute_done_IndexNotFoundErrorMessageShown() throws Exception {
@@ -437,9 +438,10 @@ public class LogicManagerTest {
 //    }
     
     @Test
-    public void execute_google_IndexNotFoundErrorMessageShown() throws Exception {
+    public void execute_select_IndexNotFoundErrorMessageShown() throws Exception {
 	    assertIndexNotFoundBehaviorForCommand("google");
     }
+    
     //@@author
 
     @Test

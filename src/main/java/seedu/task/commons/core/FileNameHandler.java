@@ -2,6 +2,7 @@ package seedu.task.commons.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,13 +44,30 @@ public class FileNameHandler {
 		}
 	}
 
-	public static boolean isValid(String str) {
-		if (str.length() <= 4) {
-			return false;
-		}
-		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
-			return true;
-		}
-		return false;
+//	public static boolean isValid(String str) {
+//		if (str.length() <= 4) {
+//			return false;
+//		}
+//		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
+//			return true;
+//		}
+//		return false;
+//	}
+	
+	public static boolean isValid(String FileName) {
+	    final File File = new File(FileName);
+	    boolean isValid = true;
+	    try {
+	        if (File.createNewFile()) {
+	            File.delete();
+	        }
+	    } catch (IOException e) {
+	        isValid = false;
+	    }
+//	    if (FileName.substring(FileName.length() - 4, FileName.length()).equals(".xml")){
+//	    	isValid = true;
+//	    }
+	    System.out.println(isValid);
+	    return isValid;
 	}
 }

@@ -4,6 +4,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
@@ -21,7 +22,7 @@ public class DoneCommand extends Command {
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD
 			+ ": Mark a task as completed which is identified by the index number used in the last task listing.\n"
-			+ "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
+			+ "Parameters: INDEX [MORE INDECIES] (must be positive integers)\n" + "Example: " + COMMAND_WORD + " 1";
 
 	public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: %1$s";
 	public static final String MESSAGE_ALREADY_COMPLETED = "The task is already done.";
@@ -36,7 +37,7 @@ public class DoneCommand extends Command {
 	}
 
 	@Override
-	public CommandResult execute() {
+	public CommandResult execute() throws CommandException {
 
 		assert model != null;
 		UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();

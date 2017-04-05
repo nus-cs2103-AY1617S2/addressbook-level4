@@ -14,6 +14,8 @@ import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 
 /**
  * Adds a task to the task manager.
@@ -28,7 +30,7 @@ public class AddCommand extends Command {
 
 	public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-	public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
+	public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date, try ddmmyy-ddmmyy ";
 	public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try hhmm, hh:mm, or h:mm";
 	public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
 	public static final String MESSAGE_INVALID_DATE = "Start time can't be after end time.";

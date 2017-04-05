@@ -45,7 +45,7 @@ public class TaskDate {
 	private static final int YEAR2_START_INDEX = 11;
 	private static final int YEAR2_END_INDEX = 13;
 
-	public static final String MESSAGE_INVALID_DATE_FORMAT = "Invaid date, try ddmmyy-ddmmyy ";
+	public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date, try ddmmyy-ddmmyy ";
 
 	public TaskDate(String input) throws IllegalValueException {
 
