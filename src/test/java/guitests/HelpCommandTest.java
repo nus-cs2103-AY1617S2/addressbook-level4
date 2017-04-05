@@ -40,7 +40,6 @@ public class HelpCommandTest extends TaskManagerGuiTest {
         assertHelpFormatWindowOpen(mainMenu.openHelpFormatWindowUsingAccelerator());
         assertResultMessage(String.format(MESSAGE_COMMAND_DOES_NOT_EXIST, incorrectCommandWord));
     }
-  //@@author 
   //@@author A0142487Y--reused
     private void assertHelpFormatWindowOpen(HelpFormatWindowHandle helpFormatWindowHandle) {
         assertTrue(helpFormatWindowHandle.isWindowOpen());
