@@ -82,7 +82,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-  //---------------- Tests for format of Done command --------------------------------------
+  //---------------- Tests for format of terminate command --------------------------------------
 
     /*
      * Valid format equivalence partitions for : 1) short command format
@@ -134,10 +134,21 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertTerminateSuccess(false, true, taskBossIndex, taskBossIndex, terminatedTask);
     }
 
-  //---------------- Tests for successfully marking done a task after find command--------------------------------------
+  //---------------- Tests for inputing wrong task type--------------------------------------------------------
 
     /*
-     * EP: Check if successfully marked done a command after performing a find command,
+     * EP: Check if successfully showed error message when task is non-recurring.
+     */
+    @Test
+    public void task_NotRecurring_failure() {
+        commandBox.runCommand("t 1");
+        assertResultMessage(TerminateCommand.ERROR_TASK_NOT_RECURRING);
+    }
+
+  //---------------- Tests for successfully ending a task after find command--------------------------------------
+
+    /*
+     * EP: Check if successfully end a recurring task after performing a find command,
      * should should remove all task's current categories and add category "Done" in their place.
      * Should return true.
      */
@@ -155,7 +166,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertTerminateSuccess(true, false, filteredTaskListIndex, taskBossIndex, markedDoneTask);
     }
 
-    //---------------- Tests for successfully marking done multiple tasks-----------------------
+    //---------------- Tests for successfully ending multiple recurring tasks-----------------------
 
     @Test
     public void multiple_Terminate_Long_Command_success() throws Exception {
@@ -208,11 +219,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void task_NotRecurring_failure() {
-        commandBox.runCommand("t 1");
-        assertResultMessage(TerminateCommand.ERROR_TASK_NOT_RECURRING);
-    }
+
 
     //---------------- End of test cases --------------------------------------
 
