@@ -45,6 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148081H.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
+  * Correct most grammatical errors in docs
 
 
 #### [Han Lynn](http://github.com/hlynn93)
