@@ -29,10 +29,13 @@ Role: Developer <br>
 - Features implemented:
 	- Done/Undone Command
 	- ListDone/ListUndone Command
+	- UI TilePlane view
+	- Colour coding done tasked
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0139975J.md)]
 - Other major contributions:
 	- Implementation of UI
 	- Ensure Travis passes for each milestone
+	- Documentation 
 
 -----
 
@@ -44,6 +47,7 @@ Role: Developer <br>
 - Features implemented:
 	- ChangeTheme Command
 	- Power search
+	- Several Util Classes : TaskUtil, DateUtil 
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
 - Other major contributions:
 	- Implementation of CommandLibrary
