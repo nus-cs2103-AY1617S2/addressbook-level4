@@ -463,25 +463,25 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    // @@author A0140032E
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
 
-        Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
-        Task tTarget2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
-        Task tTarget3 = helper.generateTaskWithTitle("KE Y");
-        Task tTarget4 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
+        Task tValid1 = helper.generateTaskWithTitle("bla bla KEY bla");
+        Task tValid2 = helper.generateTaskWithTitle("bla KEY bla bceofeia");
+        Task tValid3 = helper.generateTaskWithTitle("KEYKEYKEY sduauo");
+        Task tInvalid1 = helper.generateTaskWithTitle("KE Y");
 
-        List<Task> fourTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
+        List<Task> fourTasks = helper.generateTaskList(tValid1, tValid2, tValid3, tInvalid1);
         TaskManager expectedTM = helper.generateTaskManager(fourTasks);
-        // @@author A0140032E
-        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
-        // @@author
+        List<Task> expectedList = helper.generateTaskList(tValid1, tValid2, tValid3);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
+    // @@authro
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {

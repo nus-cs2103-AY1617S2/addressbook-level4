@@ -11,10 +11,10 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 public class StringUtil {
 
     // @@author A0140032E
-    private static final int TOLERANCE_SIMPLE_RATIO = 75;
-    private static final int TOLERANCE_PARTIAL_RATIO = 75;
-    private static final int TOLERANCE_TOKEN_SORT_PARTIAL_RATIO = 75;
-    private static final int TOLERANCE_TOKEN_SORT_RATIO = 75;
+    private static final int TOLERANCE_SIMPLE_RATIO = 90;
+    private static final int TOLERANCE_PARTIAL_RATIO = 90;
+    private static final int TOLERANCE_TOKEN_SORT_PARTIAL_RATIO = 80;
+    private static final int TOLERANCE_TOKEN_SORT_RATIO = 90;
     // @@author
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
