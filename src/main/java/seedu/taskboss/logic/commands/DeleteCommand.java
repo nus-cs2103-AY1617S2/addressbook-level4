@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1"
             + " || "  + COMMAND_WORD_2ND_SHORT + "1 2 3";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: ";
 
     public final ArrayList<Integer> targetIndex;
 
