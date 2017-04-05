@@ -24,26 +24,26 @@ public class AddCommandTest extends TaskBossGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         //add one task
         TestTask taskToAdd = td.taskH;
-        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory(AddCommand.BUILT_IN_ALL_TASKS,
-                td.taskA)), taskToAdd, currentList);
+        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory
+            (AddCommand.BUILT_IN_ALL_TASKS, td.taskA)), taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.taskI;
-        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory(AddCommand.BUILT_IN_ALL_TASKS,
-                td.taskA)), taskToAdd, currentList);
+        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory
+            (AddCommand.BUILT_IN_ALL_TASKS, td.taskA)), taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task using short command
         taskToAdd = td.taskK;
-        assertAddSuccess(false, true, Lists.newArrayList(new TestCategory(AddCommand.BUILT_IN_ALL_TASKS,
-                td.taskA)), taskToAdd, currentList);
+        assertAddSuccess(false, true, Lists.newArrayList(new TestCategory
+            (AddCommand.BUILT_IN_ALL_TASKS, td.taskA)), taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task using short command '+'
         taskToAdd = td.taskL;
-        assertAddSuccess(true, false, Lists.newArrayList(new TestCategory(AddCommand.BUILT_IN_ALL_TASKS,
-                td.taskA)), taskToAdd, currentList);
+        assertAddSuccess(true, false, Lists.newArrayList(new TestCategory
+            (AddCommand.BUILT_IN_ALL_TASKS, td.taskA)), taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
@@ -58,8 +58,8 @@ public class AddCommandTest extends TaskBossGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory(AddCommand.BUILT_IN_ALL_TASKS,
-                td.taskA), new TestCategory("Friends", td.taskA)), td.taskA);
+        assertAddSuccess(false, false, Lists.newArrayList(new TestCategory
+            (AddCommand.BUILT_IN_ALL_TASKS, td.taskA), new TestCategory("Friends", td.taskA)), td.taskA);
 
         //invalid command
         commandBox.runCommand("adds new task");
