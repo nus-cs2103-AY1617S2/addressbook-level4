@@ -63,22 +63,11 @@ public class SaveToCommand extends Command {
             } else {
 
                 Config config = MainApp.getInstance().getConfig();
-                StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
-                ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+                saveNewConfig(config);
 
-                // set to new path
-                // save new updates into config.json
-                config.setToDoListFilePath(filePath);
-                ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-
-                // set new path
-                // copy data to new file
                 String updatedFilePath = config.getToDoListFilePath();
-                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
-                storageManager.setToDoListFilePath(updatedFilePath);
-                toDoListStorage.saveToDoList(toDoList);
-
-                MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
+                saveNewStorage(updatedFilePath);
+                updateFooter(updatedFilePath);
             }
         } catch (IOException ioe) {
             return new CommandResult(MESSAGE_SAVETO_FAILURE + StringUtil.getDetails(ioe));
@@ -90,6 +79,37 @@ public class SaveToCommand extends Command {
 
     public void setIsOverWriting(boolean result) {
         this.isOverWriting = result;
+    }
+
+    /**
+     * set to new path and save new updates into config.json.
+     * @param config config used by MainApp.
+     */
+    private void saveNewConfig(Config config) throws IOException {
+        config.setToDoListFilePath(filePath);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
+    /**
+     * set new path and copy data to new file.
+     * @param updatedFilePath location to be saved for new file.
+     * @return
+     */
+    private void saveNewStorage(String updatedFilePath) throws IOException, DataConversionException {
+        StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
+        ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+        ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
+
+        storageManager.setToDoListFilePath(updatedFilePath);
+        toDoListStorage.saveToDoList(toDoList);
+    }
+
+    /**
+     * updates the footer that shows current storage location.
+     * @param updatedFilePath latest file location for storage.
+     */
+    private void updateFooter(String updatedFilePath) {
+        MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
     }
 
 }

@@ -53,20 +53,13 @@ public class ImportCommand extends Command {
                         + String.format(MESSAGE_IMPORT_FAILURE, filePath).toString();
                 return new CommandResult(result);
             } else {
-                Config config = MainApp.getInstance().getConfig();
-                Model model = MainApp.getInstance().getModel();
-                StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
 
-                config.setToDoListFilePath(filePath);
-                ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+                Config config = MainApp.getInstance().getConfig();
+                saveNewConfig(config);
 
                 String updatedFilePath = config.getToDoListFilePath();
-                storageManager.setToDoListFilePath(updatedFilePath);
-                ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
-                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
-                toDoListStorage.saveToDoList(toDoList);
-                model.resetData(toDoList);
-                MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
+                saveNewStorage(updatedFilePath);
+                updateFooter(updatedFilePath);
             }
 
         } catch (IOException ioe) {
@@ -79,6 +72,39 @@ public class ImportCommand extends Command {
 
     public void setIsOverWriting(boolean result) {
         this.isOverWriting = result;
+    }
+
+    /**
+     * set to new path and save new updates into config.json.
+     * @param config config used by MainApp.
+     */
+    private void saveNewConfig(Config config) throws IOException {
+        config.setToDoListFilePath(filePath);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
+    /**
+     * set new path and copy data to new file.
+     * @param updatedFilePath location to be saved for new file.
+     * @return
+     */
+    private void saveNewStorage(String updatedFilePath) throws IOException, DataConversionException {
+        StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
+        Model model = MainApp.getInstance().getModel();
+        ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+        ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
+
+        storageManager.setToDoListFilePath(updatedFilePath);
+        toDoListStorage.saveToDoList(toDoList);
+        model.resetData(toDoList);
+    }
+
+    /**
+     * updates the footer that shows current storage location.
+     * @param updatedFilePath latest file location for storage.
+     */
+    private void updateFooter(String updatedFilePath) {
+        MainWindow.getStatusBarFooter().setSaveLocation(updatedFilePath);
     }
 
 }

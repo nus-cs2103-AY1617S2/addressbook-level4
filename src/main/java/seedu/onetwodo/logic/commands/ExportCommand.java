@@ -61,12 +61,12 @@ public class ExportCommand extends Command {
                 Config config = MainApp.getInstance().getConfig();
                 StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
                 ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
+                String currentFilePath = config.getToDoListFilePath();
+                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
 
                 // set new file path
                 // copy data to new file
                 // set back file path
-                String currentFilePath = config.getToDoListFilePath();
-                ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
                 storageManager.setToDoListFilePath(filePath);
                 toDoListStorage.saveToDoList(toDoList);
                 storageManager.setToDoListFilePath(currentFilePath);

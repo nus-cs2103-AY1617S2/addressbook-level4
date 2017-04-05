@@ -43,6 +43,7 @@ public class DateTimeParser {
         // Input exist. Try to parse it using Natty.
         Parser parser = new Parser();
 
+        // parse() is a method from natty.
         List<DateGroup> dateGroups = parser.parse(input);
         if (dateGroups.isEmpty()) {
             throw new IllegalValueException(MESSAGE_DATE_INPUT_CONSTRAINTS);
