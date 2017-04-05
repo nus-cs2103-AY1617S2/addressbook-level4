@@ -53,7 +53,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{eggsAndBread, readBook, visitGrandma, payDavid, visitSarah};
+        return new TestTask[]{payDavid, visitSarah, eggsAndBread, visitGrandma, readBook};
     }
 
     public TaskManager getTypicalTaskManager() {

@@ -1,6 +1,7 @@
 package seedu.tache.testutil;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -152,5 +153,27 @@ public class TestTask implements ReadOnlyTask {
     public boolean isMasterRecurring() {
         return false;
     }
+
+    public static Comparator<TestTask> taskDateComparator = new Comparator<TestTask>() {
+
+        public int compare(TestTask task1, TestTask task2) {
+            Date lastComparableDate = new Date(0);
+            int result = 0;
+            //ascending order
+            if (!task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                result = lastComparableDate.compareTo(task2.getEndDateTime().get().getDate());
+                lastComparableDate = task2.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && !task2.getEndDateTime().isPresent()) {
+                result = task1.getEndDateTime().get().getDate().compareTo(lastComparableDate);
+                lastComparableDate = task1.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                return task1.getEndDateTime().get().getDate().compareTo(task2.getEndDateTime().get().getDate());
+            }
+            return (result);
+        }
+
+    };
 
 }
