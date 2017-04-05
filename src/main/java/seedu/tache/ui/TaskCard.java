@@ -33,6 +33,7 @@ public class TaskCard extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskCard.class);
 
     private String statusOfTask = UNCOMPLETED_INDICATOR;
+    private boolean isMasterRecurring = false;
     //@@author
 
     @FXML
@@ -45,7 +46,7 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
 
     @FXML
-    private ImageView tickOrCross;
+    private ImageView symbol;
 
     @FXML
     private FlowPane tags;
@@ -62,7 +63,8 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
         setStatusOfTask(task);
-        setTickOrCross();
+        setIsMasterRecurring(task);
+        setSymbol();
         setBorderColour();
         initDatesAndTimes(task);
         initTags(task);
@@ -79,6 +81,12 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
+    private void setIsMasterRecurring(ReadOnlyTask task) {
+        if (task.isMasterRecurring()) {
+            isMasterRecurring = true;
+        }
+    }
+
     private void setBorderColour() {
         if (statusOfTask.equals(UNCOMPLETED_INDICATOR)) {
             cardPane.setStyle("-fx-border-color: #5f77bd");
@@ -87,11 +95,15 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private void setTickOrCross() {
-        if (statusOfTask.equals(COMPLETED_INDICATOR)) {
-            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
-        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
-            tickOrCross.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
+    private void setSymbol() {
+        if (isMasterRecurring) {
+            symbol.setImage(new Image(MainApp.class.getResource("/images/recurring.png").toExternalForm()));
+        } else {
+            if (statusOfTask.equals(COMPLETED_INDICATOR)) {
+                symbol.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
+            } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+                symbol.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
+            }
         }
     }
 
