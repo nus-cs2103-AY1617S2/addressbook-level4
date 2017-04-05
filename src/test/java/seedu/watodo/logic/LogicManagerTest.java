@@ -348,29 +348,29 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_matchesFullAndPartialWordsInDescriptions() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithDescription("KE Y");
+        Task p2 = helper.generateTaskWithDescription("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(fourTasks);
+        List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+                expectedTM, expectedList);
     }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+        Task p1 = helper.generateTaskWithDescription("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithDescription("keyop keyul"); //partial word match
+        Task p4 = helper.generateTaskWithDescription("KEykitgua sduauo"); //partial word match
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
@@ -384,17 +384,17 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
+        Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithDescription("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithDescription("key key");
+        Task p1 = helper.generateTaskWithDescription("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourTasks);
 
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
+        assertCommandSuccess("find key random", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
@@ -540,7 +540,7 @@ public class LogicManagerTest {
          * Generates a Task object with given name. Other fields will have some
          * dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+        Task generateTaskWithDescription(String name) throws Exception {
             return new Task(new Description(name), new UniqueTagList(new Tag("tag")));
         }
     }
