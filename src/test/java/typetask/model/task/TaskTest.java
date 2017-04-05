@@ -14,7 +14,7 @@ public class TaskTest {
 
     Task sampleTaskForTest;
     private void createSampleTask() throws IllegalValueException {
-        sampleTaskForTest = new Task(new Name("test"), new DueDate(""), new DueDate(""), false, 
+        sampleTaskForTest = new Task(new Name("test"), new DueDate(""), new DueDate(""), false,
                 new Priority("Low"));
     }
     @Test
@@ -111,8 +111,8 @@ public class TaskTest {
     @Test
     public void getPriority_success() throws IllegalValueException {
         createSampleTask();
-        String Expectedpriority = "Low";
+        String expectedpriority = "Low";
         String testPriority = sampleTaskForTest.getPriority().toString();
-        assertEquals(testPriority, Expectedpriority);
+        assertEquals(testPriority, expectedpriority);
     }
 }
