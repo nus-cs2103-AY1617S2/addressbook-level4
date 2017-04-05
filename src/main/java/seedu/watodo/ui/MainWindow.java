@@ -16,6 +16,7 @@ import seedu.watodo.commons.events.ui.ExitAppRequestEvent;
 import seedu.watodo.commons.util.FxViewUtil;
 import seedu.watodo.logic.Logic;
 import seedu.watodo.model.UserPrefs;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,9 +33,12 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
 
+    @FXML
+    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -109,6 +113,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWatodoFilePath());
@@ -192,6 +197,14 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getPersonListPanel() {
         return this.taskListPanel;
+    }
+
+    void loadPersonPage(ReadOnlyTask person) {
+        browserPanel.loadPersonPage(person);
+    }
+
+    void releaseResources() {
+        browserPanel.freeResources();
     }
 
 }
