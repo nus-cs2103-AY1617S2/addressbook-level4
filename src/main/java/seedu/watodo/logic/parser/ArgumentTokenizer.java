@@ -47,7 +47,7 @@ public class ArgumentTokenizer {
      */
     public Optional<String> getUniqueValue(Prefix prefix) throws IllegalValueException {
         if (getAllValues(prefix).isPresent() && getAllValues(prefix).get().size() > 1) {
-            throw new IllegalValueException(DateTimeParser.MESSAGE_INVALID_NUM_DATETIME);
+            throw new IllegalValueException(DateTimeParser.MESSAGE_INVALID_DATETIME_PREFIX_COMBI);
         }
         return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
     }

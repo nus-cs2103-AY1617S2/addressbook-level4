@@ -1,10 +1,11 @@
 package seedu.watodo.logic.parser;
 
-import static seedu.watodo.logic.parser.AddCommandParser.EXTRACT_ARGS_REGEX;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_BY;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.watodo.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.watodo.logic.parser.ParserUtil.EXTRACT_ARGS_REGEX;
+import static seedu.watodo.logic.parser.ParserUtil.WHITESPACE;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,9 @@ public class DateTimeParser {
     private String unparsedArgs;
     private TaskType type;
 
+    private static final int INDEX_VALID_DATE = 0;
     public static final String MESSAGE_INVALID_DATETIME_PREFIX_COMBI = "Too many/few dateTime prefixes!";
+    
 
     /** Constructs a DateTimeParser object */
     public DateTimeParser() {}
@@ -119,7 +122,7 @@ public class DateTimeParser {
         if (isInvalidDateArg(dateGroups)) {
             throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
         }
-        return dateGroups.get(0).getText().trim();
+        return dateGroups.get(INDEX_VALID_DATE).getText().trim();
     }
 
     /** Returns true if a valid dateTime substring does not exist or
@@ -127,7 +130,8 @@ public class DateTimeParser {
      */
     private boolean isInvalidDateArg(List<DateGroup> dateGroups) {
         final int POS_RIGHT_AFTER_PREFIX = 1;
-        return dateGroups.size() == 0 || dateGroups.get(0).getPosition() != POS_RIGHT_AFTER_PREFIX;
+        return dateGroups.size() == 0
+                || dateGroups.get(INDEX_VALID_DATE).getPosition() != POS_RIGHT_AFTER_PREFIX;
     }
 
     /**
@@ -135,13 +139,18 @@ public class DateTimeParser {
      */
     private void extractUnparsedArgs(String args) {
         if (startDate.isPresent()) {
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate.get()), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate.get()), " ");
+            args = args.replaceAll(
+                    String.format(EXTRACT_ARGS_REGEX, PREFIX_FROM.getPrefix(), startDate.get()), WHITESPACE);
+            args = args.replaceAll(
+                    String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), startDate.get()), WHITESPACE);
         }
         if (endDate.isPresent()) {
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate.get()), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate.get()), " ");
-            args = args.replaceAll(String.format(EXTRACT_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate.get()), " ");
+            args = args.replaceAll(
+                    String.format(EXTRACT_ARGS_REGEX, PREFIX_BY.getPrefix(), endDate.get()), WHITESPACE);
+            args = args.replaceAll(
+                    String.format(EXTRACT_ARGS_REGEX, PREFIX_ON.getPrefix(), endDate.get()), WHITESPACE);
+            args = args.replaceAll(
+                    String.format(EXTRACT_ARGS_REGEX, PREFIX_TO.getPrefix(), endDate.get()), WHITESPACE);
         }
 
         this.unparsedArgs = args.trim();

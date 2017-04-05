@@ -15,8 +15,9 @@ public class Task implements ReadOnlyTask {
     private Description description;
     private DateTime startDate;
     private DateTime endDate;
-    private TaskStatus status; //Default status of any new task created is UNDONE
     private UniqueTagList tags;
+    private TaskStatus status; //Default status of any new task created is UNDONE
+    private TaskType taskType;
 
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
@@ -144,6 +145,14 @@ public class Task implements ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getAsText());
         return builder.toString();
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
     }
 
 }

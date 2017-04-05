@@ -1,16 +1,16 @@
 package seedu.watodo.logic.commands;
 
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
-import seedu.watodo.logic.parser.DateTimeParser.TaskType;
-import seedu.watodo.model.tag.Tag;
+import seedu.watodo.logic.parser.ParserUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.TaskType;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
@@ -39,32 +39,28 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String description, String startDate, String endDate, Set<String> tags, TaskType taskType)
-            throws IllegalValueException {
+    public AddCommand(String description, Optional<String> startDate, Optional<String> endDate,
+            Set<String> tags, TaskType taskType) throws IllegalValueException {
 
         assert description != null;
         assert taskType.equals(TaskType.FLOAT) || taskType.equals(TaskType.DEADLINE) || taskType.equals(TaskType.EVENT);
 
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
+        final UniqueTagList tagSet = ParserUtil.parseTags(tags);
 
         switch (taskType) {
         case FLOAT:
-            this.toAdd = new Task(new Description(description), new UniqueTagList(tagSet));
+            this.toAdd = new Task(new Description(description), tagSet);
             break;
         case DEADLINE:
-            this.toAdd = new Task(new Description(description), new DateTime(endDate),
-                    new UniqueTagList(tagSet));
+            this.toAdd = new Task(new Description(description), new DateTime(endDate.get()), tagSet);
             break;
         case EVENT:
-            DateTime start = new DateTime(startDate);
-            DateTime end = new DateTime(endDate);
+            DateTime start = new DateTime(startDate.get());
+            DateTime end = new DateTime(endDate.get());
             if (start.isLater(end)) { //checks if the end time is later than start time
                 throw new IllegalValueException("End date must be later than start date!");
             }
-            this.toAdd = new Task(new Description(description), start, end, new UniqueTagList(tagSet));
+            this.toAdd = new Task(new Description(description), start, end, tagSet);
             break;
         }
     }
