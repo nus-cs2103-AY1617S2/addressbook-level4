@@ -62,18 +62,21 @@ public class EditCommandParser {
             // get any dates arguments entered by the user
             DateTimeParser dateTimeParser = new DateTimeParser();
             dateTimeParser.parse(args);
-            putDates(dateTimeParser.getStartDate(), dateTimeParser.getEndDate(),
-                      editTaskDescriptor, hasEditDate);
 
             // get any tags arguments entered by the user
             String argsWithDatesExtracted = dateTimeParser.getUnparsedArgs();
             TagsParser tagsParser = new TagsParser();
             tagsParser.parse(argsWithDatesExtracted);
-            putTags(tagsParser.getTags(), editTaskDescriptor);
 
             //get any new task description entered by the user
             String argsWithDatesAndTagsExtracted = tagsParser.getUnparsedArgs();
-            putDescription(argsWithDatesAndTagsExtracted, editTaskDescriptor);
+
+            editTaskDescriptor = setArguments(dateTimeParser.getStartDate(), dateTimeParser.getEndDate(),
+                    tagsParser.getTags(), argsWithDatesAndTagsExtracted, editTaskDescriptor);
+
+            if (editTaskDescriptor.getStartDate().isPresent() || editTaskDescriptor.getEndDate().isPresent()) {
+                hasEditDate = true;
+            }
 
             if (!editTaskDescriptor.isAnyFieldEdited()) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
@@ -88,38 +91,23 @@ public class EditCommandParser {
     }
 
     /**
-     * Sets the startDate and endDate in the editTaskDescriptor
+     * Sets the startDate, endDate, tags and description in the editTaskDescriptor
      * Parameters are set to {@code Optional.empty()} if the user does not input them
      */
-    private void putDates(Optional<String> startDate, Optional<String> endDate,
-            EditTaskDescriptor editTaskDescriptor, boolean hasEditDate) throws IllegalValueException {
-        if (startDate.isPresent() || endDate.isPresent()) {
-            hasEditDate = true;
-        }
+    private EditTaskDescriptor setArguments(Optional<String> startDate, Optional<String> endDate,
+            Set<String> tags, String description, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
         editTaskDescriptor.setStartDate(ParserUtil.parseDateTime(startDate));
         editTaskDescriptor.setEndDate(ParserUtil.parseDateTime(endDate));
-    }
 
-    /**
-     * Sets the tags in the editTaskDescriptor
-     * Parameters are set to {@code Optional.empty()} if the user does not input them
-     */
-    private void putTags(Set<String> tags, EditTaskDescriptor editTaskDescriptor)
-            throws IllegalValueException {
         editTaskDescriptor.setTags(parseTagsForEdit(tags));
-    }
 
-    /** Sets the description in the editTaskDescriptor
-     *  Parameters are set to {@code Optional.empty()} if the user does not input them
-     */
-    private void putDescription(String description, EditTaskDescriptor editTaskDescriptor)
-            throws IllegalValueException {
-        final String EMPTY_STRING = "";
-        if (description.equals(EMPTY_STRING)) {
+        if (description.isEmpty()) {
             editTaskDescriptor.setTaskName(ParserUtil.parseDescription(Optional.empty()));
         } else {
             editTaskDescriptor.setTaskName(ParserUtil.parseDescription(Optional.of(description)));
         }
+        return editTaskDescriptor;
     }
 
     /**
