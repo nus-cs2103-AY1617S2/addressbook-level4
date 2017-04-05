@@ -253,7 +253,7 @@ Examples:
 * **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
 
-* **Add New Tags** : `edit INDEX [ta/TAG]` <br>
+* **Append New Tags** : `edit INDEX [ta/TAG]` <br>
   e.g. `edit 1 ta/cat ta/pet ta/cute`
 
 * **Clear** : `clear` <br>
@@ -262,8 +262,12 @@ Examples:
 * **Delete** : `delete INDEX` <br>
   e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+* **Find** : `find KEYWORD [MORE_KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]` <br>
   e.g. `find Dog`
+  e.g. `find c/tomorrow`
+  e.g. `find ty/floating`
+  e.g. `find ty/deadline`
+  e.g. `find ty/event`
 
 * **Complete** : `complete INDEX [COMPLETETIME]` <br>
   e.g. `complete 1 17-03-17T8:00`
@@ -274,14 +278,14 @@ Examples:
 * **Undo** : `undo` <br>
   e.g. `undo`
 
-* **Redo** : `undo` <br>
-  e.g. `undo`
+* **Redo** : `redo` <br>
+  e.g. `redo`
 
 * **List** : `list` <br>
   e.g. `list`
 
 * **Set Save File Location** : `savefile FILE_PATH` <br>
-  e.g. `savefile ~/User/Documents/todolist.xml`
+  e.g. `savefile todolist.xml`
 
 * **Help** : `help` <br>
   e.g. `help`
