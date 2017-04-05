@@ -12,8 +12,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.CategoryCardHandle;
-import guitests.guihandles.CategoryListPanelHandle;
+import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -27,7 +26,6 @@ import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.events.BaseEvent;
 import seedu.taskboss.model.TaskBoss;
 import seedu.taskboss.model.task.ReadOnlyTask;
-import seedu.taskboss.testutil.TestCategory;
 import seedu.taskboss.testutil.TestUtil;
 import seedu.taskboss.testutil.TypicalTestTasks;
 
@@ -51,9 +49,9 @@ public abstract class TaskBossGuiTest {
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
     protected TaskListPanelHandle taskListPanel;
-    protected CategoryListPanelHandle categoryListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
+    protected BrowserPanelHandle browserPanel;
     private Stage stage;
 
     @BeforeClass
@@ -72,9 +70,9 @@ public abstract class TaskBossGuiTest {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
             taskListPanel = mainGui.getTaskListPanel();
-            categoryListPanel = mainGui.getCategoryListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
+            browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
@@ -111,13 +109,6 @@ public abstract class TaskBossGuiTest {
      */
     public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));
-    }
-
-    /**
-     * Asserts the category shown in the category card is same as the given category
-     */
-    public void assertMatching(TestCategory category, CategoryCardHandle card) {
-        assertTrue(TestUtil.compareCardAndCategory(card, category));
     }
 
     /**

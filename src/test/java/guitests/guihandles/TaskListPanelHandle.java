@@ -112,7 +112,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Navigates the listview to display and view the task.
+     * Navigates the listview to display and view the person.
      */
     public TaskCardHandle navigateToTask(ReadOnlyTask task) {
         int index = getTaskIndex(task);

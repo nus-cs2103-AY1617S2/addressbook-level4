@@ -16,7 +16,6 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.CategoryCardHandle;
 import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -353,19 +352,6 @@ public class TestUtil {
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
-    /**
-     * Appends categories to the array of categories.
-     * @param categories An array of categories.
-     * @param categoriesToAdd The categories that are to be appended behind the original array.
-     * @return The modified array of categories.
-     */
-    public static TestCategory[] addCategoriesToList(final TestCategory[] categories,
-            TestCategory... categoriesToAdd) {
-        List<TestCategory> listOfCategories = asList(categories);
-        listOfCategories.addAll(asList(categoriesToAdd));
-        return listOfCategories.toArray(new TestCategory[listOfCategories.size()]);
-    }
-
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
         for (T obj : objs) {
@@ -376,10 +362,6 @@ public class TestUtil {
 
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
-    }
-
-    public static boolean compareCardAndCategory(CategoryCardHandle card, TestCategory category) {
-        return card.isSameCategory(category);
     }
 
     public static Category[] getCategoryList(String categories) {
