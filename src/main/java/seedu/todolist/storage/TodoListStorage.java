@@ -15,12 +15,12 @@ public interface TodoListStorage {
      * Returns the file path of the data file.
      */
     String getTodoListFilePath();
-    
+
     /**
      * Updates the file path of the data file.
      */
     void setTodoListFilePath(String saveFilePath);
-    
+
     /**
      * Returns TodoList data as a {@link ReadOnlyTodoList}.
      *   Returns {@code Optional.empty()} if storage file is not found.

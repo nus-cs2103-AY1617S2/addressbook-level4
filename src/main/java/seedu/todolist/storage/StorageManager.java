@@ -75,7 +75,14 @@ public class StorageManager extends ComponentManager implements Storage {
     public String getTodoListFilePath() {
         return todoListStorage.getTodoListFilePath();
     }
-
+    
+    //@@author A0163720M
+    @Override
+    public void setTodoListFilePath(String filePath) {
+        todoListStorage.setTodoListFilePath(filePath);
+    }
+    //@@author
+    
     @Override
     public Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException {
         return readTodoList(todoListStorage.getTodoListFilePath());
