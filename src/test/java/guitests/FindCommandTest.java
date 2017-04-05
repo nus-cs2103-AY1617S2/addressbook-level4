@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
+import static seedu.todolist.commons.core.GlobalConstants.TODO_TYPES;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -225,6 +226,32 @@ public class FindCommandTest extends TodoListGuiTest {
                 td.dog, td.cat, td.math, td.english, td.dishes, td.lawn, td.dinner, td.essay, td.toilet);
     }
     //@@author
+
+    //@@author A0163720M
+    @Test
+    public void find_floating() {
+        // TODO_TYPES = {'floating', 'deadline', 'event'}
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TODO_TYPE.getPrefix() + TODO_TYPES.get(0),
+                td.dog, td.cat, td.math, td.english, td.dishes, td.lawn, td.dinner, td.car);
+    }
+    //@@author
+
+    //@@author A0163720M
+    @Test
+    public void find_deadline() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TODO_TYPE.getPrefix() + TODO_TYPES.get(1),
+                td.essay, td.library);
+    }
+    //@@author
+
+    //@@author A0163720M
+    @Test
+    public void find_event() {
+        assertFindResult(FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_TODO_TYPE.getPrefix() + TODO_TYPES.get(2),
+                td.toilet, td.tennis);
+    }
+    //@@author
+
     private void assertFindResult(String command, TestTodo... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

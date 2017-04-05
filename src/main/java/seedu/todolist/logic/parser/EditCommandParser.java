@@ -35,33 +35,21 @@ public class EditCommandParser {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      */
-
-
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_TAG, PREFIX_TAG_ADD);
         argsTokenizer.tokenize(args);
         try {
-            Optional<String> startTime = argsTokenizer.getValue(PREFIX_START_TIME);
-            Optional<String> endTime = argsTokenizer.getValue(PREFIX_END_TIME);
+            Optional<String> startTime = formatAndCheckValidTime(argsTokenizer.getValue(PREFIX_START_TIME));
+            Optional<String> endTime = formatAndCheckValidTime(argsTokenizer.getValue(PREFIX_END_TIME));;
             EditTodoDescriptor editTodoDescriptor = new EditTodoDescriptor();
             List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
             Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-
-            if (!index.isPresent()) {
+            if (!index.isPresent() || (startTime.isPresent() && !endTime.isPresent())) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            startTime = formatAndCheckValidTime(startTime);
-            endTime = formatAndCheckValidTime(endTime);
-            if (startTime.isPresent() && endTime.isPresent()) { //for event
-                setEditTodoDescriptroForEvent(editTodoDescriptor, startTime, endTime);
-            } else if (endTime.isPresent() && !startTime.isPresent()) { //for deadLine
-                setEditTodoDescriptroForDeadLine(editTodoDescriptor, endTime);
-            } else if (startTime.isPresent() && !endTime.isPresent()) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-            }
-
+            setEditTodoDescriptor(editTodoDescriptor, startTime, endTime);
             editTodoDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editTodoDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
 
@@ -74,7 +62,6 @@ public class EditCommandParser {
             if (!editTodoDescriptor.isAnyFieldEdited() && !startTime.isPresent() && !endTime.isPresent()) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
             }
-
             return new EditCommand(index.get(), editTodoDescriptor);
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -84,72 +71,59 @@ public class EditCommandParser {
             return new IncorrectCommand(pe.getMessage());
         }
     }
-    private void setEditTodoDescriptroForEvent(EditTodoDescriptor editTodoDescriptor,
+
+    /**
+     * convert the given startTime and endTime to editTodoDescriptor
+     * if startTime lack of date information, it will set today as default
+     * if endTime lack of date information, it will set tomorrow as default
+     * @param editTodoDescriptor
+     * @param startTime
+     * @param endTime
+     */
+    private void setEditTodoDescriptor(EditTodoDescriptor editTodoDescriptor,
             Optional<String> startTime, Optional<String> endTime) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-            if (!startTime.get().equals("")) {
-                editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
-            } else {
-                editTodoDescriptor.setStartTime(getToday());
+            if (startTime.isPresent()) {
+                if (!startTime.get().equals("")) {
+                    editTodoDescriptor.setStartTime(dateFormat.parse(startTime.get()));
+                } else {
+                    editTodoDescriptor.setStartTime(getTodayPlusDays(0));
+                }
             }
-            if (!endTime.get().equals("")) {
-                editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
-            } else {
-                editTodoDescriptor.setEndTime(getTomorrow());
-            }
-        } catch (NoSuchElementException | ParseException e) {
-
-        }
-    }
-
-    private void setEditTodoDescriptroForDeadLine(EditTodoDescriptor editTodoDescriptor,
-            Optional<String> endTime) {
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-            if (!endTime.get().equals("")) {
-                editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
-            } else {
-                editTodoDescriptor.setEndTime(getTomorrow());
+            if (endTime.isPresent()) {
+                if (!endTime.get().equals("")) {
+                    editTodoDescriptor.setEndTime(dateFormat.parse(endTime.get()));
+                } else {
+                    editTodoDescriptor.setEndTime(getTodayPlusDays(1));
+                }
             }
         } catch (NoSuchElementException | ParseException e) {
 
         }
     }
 
-    private Date getTomorrow() {
+    /**
+     * returns today plus addDays as Date
+     * @param addDays
+     * @return today plus addDays
+     */
+    private Date getTodayPlusDays(int addDays) {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
-        c.add(Calendar.DATE, 1);
+        c.add(Calendar.DATE, addDays);
         dt = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
         try {
             dt = dateTimeFormat.parse("12:00AM" + " " + dateFormat.format(dt));
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return dt;
     }
-
-    private Date getToday() {
-        Date dt = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(dt);
-        dt = c.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat dateTimeFormat = new SimpleDateFormat("h:mma dd/MM/yyyy");
-        try {
-            dt = dateTimeFormat.parse("12:00AM" + " " + dateFormat.format(dt));
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return dt;
-    }
-
+    //@@author
     private Optional<String> formatAndCheckValidTime (Optional<String> time) throws ParseException {
         if (!time.equals(Optional.empty()) && !time.get().equals("")) {
             try {
@@ -171,7 +145,7 @@ public class EditCommandParser {
             return time;
         }
     }
-    //@@author
+
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a

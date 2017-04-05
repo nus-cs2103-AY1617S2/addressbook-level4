@@ -38,8 +38,6 @@ public class TypicalTestTodos {
             job = new TodoBuilder().withName("Apply to job").withEndTime("6:00PM 11/11/17").build();
             lunch = new TodoBuilder().withName("lunch").withStartTime("9:00AM 11/11/17")
                     .withEndTime("1:00PM 11/11/17").build();
-            //eventWithDefaultValue = new TodoBuilder().withName("eventWithDefaultValue").withStartTime("")
-                    //.withEndTime("").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
