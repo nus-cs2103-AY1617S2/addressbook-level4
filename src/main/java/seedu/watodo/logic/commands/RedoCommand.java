@@ -1,9 +1,11 @@
 package seedu.watodo.logic.commands;
 
-/**
- * Clears the task manager.
- */
 //@@author A0139845R
+/**
+ * Redo commands from the undo history stack each time command is executed
+ * until no more undo history left.
+ */
+
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
