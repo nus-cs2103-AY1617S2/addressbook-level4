@@ -2,11 +2,11 @@
 ###### /java/seedu/opus/logic/LogicManagerTest.java
 ``` java
         /**
-         * Generates a Task object with given start time. Other fields will have some dummy values.
+         * Generates a Task object with given name and start time. Other fields will have some dummy values.
          */
-        private Task generateTaskWithStartTime(String startTime) throws Exception {
+        private Task generateTaskWithStartTime(String name, String startTime) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -17,11 +17,11 @@
         }
 
         /**
-         * Generates a Task object with given end time. Other fields will have some dummy values.
+         * Generates a Task object with given name and end time. Other fields will have some dummy values.
          */
-        private Task generateTaskWithEndTime(String endTime) throws Exception {
+        private Task generateTaskWithEndTime(String name, String endTime) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority("hi"),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -32,11 +32,11 @@
         }
 
         /**
-         * Generates a Task object with given priority. Other fields will have some dummy values.
+         * Generates a Task object with given name and priority. Other fields will have some dummy values.
          */
-        private Task generateTaskWithPriority(String priority) throws Exception {
+        private Task generateTaskWithPriority(String name, String priority) throws Exception {
             return new Task(
-                    new Name("Finish assignment"),
+                    new Name(name),
                     new Priority(priority),
                     new Status("incomplete"),
                     new Note("House of 1"),
@@ -57,6 +57,21 @@
                     new Note("House of 1"),
                     new DateTime("01/01/2017 00:00"),
                     new DateTime("01/01/2017 23:59"),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Task object with given name. Other fields will be null except for status and tags
+         */
+        private Task generateFloatingTask(String name) throws Exception {
+            return new Task(
+                    new Name(name),
+                    null,
+                    new Status(),
+                    null,
+                    null,
+                    null,
                     new UniqueTagList(new Tag("tag"))
             );
         }
