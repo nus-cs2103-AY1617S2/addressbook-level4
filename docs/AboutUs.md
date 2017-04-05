@@ -22,8 +22,18 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Tyler Austin Rocha](https://github.com/tylerrocha)
 <img src="images/tylerrocha.jpg" width="150"><br>
-Role: Developer <br>
-Responsibilities: Storage, Git Expert
+* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>
+* Aspects/tools in charge of: Storage, Github repo and webpage
+* Features implemented:
+    * [Comparable Tasks]()
+    * [Save Command]()
+    * [Load Command]()
+* Code written: [[functional code](A0163559U.md)][[test code](A0163559U.md)]
+* Other major contributions:
+    * Maintained all storage tests, comparable tests
+    * Maintained git repo, git page; set up Travis, Appveyor, Codacy, Coveralls
+    * Tracked down and fixed general bugs such as null pointer on exit command
+    * Provided assistance with some helpful Eclipse and Sublime Text features
 
 -----
 
