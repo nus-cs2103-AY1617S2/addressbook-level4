@@ -18,14 +18,14 @@ public class TypicalTestTasks {
         try {
             laundry = new TaskBuilder().withName("Do laundry")
                     .withNote("Twice as many detergent this time").withStatus("incomplete")
-                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withPriority("hi").withStartTime("01/12/2017 12:00").withEndTime("06/12/2017 13:00")
                     .withTags("chores").build();
             dishes = new TaskBuilder().withName("Wash the dishes")
                     .withNote("They're in the sink").withStatus("incomplete")
                     .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withTags("chores").build();
             quiz = new TaskBuilder().withName("Do CS2103T post lecture quiz")
-                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withPriority("hi").withStartTime("02/12/2017 12:00").withEndTime("05/12/2017 13:00")
                     .withStatus("incomplete").withNote("On IVLE").build();
             grocery = new TaskBuilder().withName("Buy milk")
                     .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
@@ -37,21 +37,21 @@ public class TypicalTestTasks {
                     .withPriority("mid").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("COM02-01").build();
             payment = new TaskBuilder().withName("Pay school fees")
-                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
+                    .withPriority("hi").withStartTime("03/12/2017 12:00").withEndTime("04/12/2017 13:00")
                     .withStatus("incomplete").withNote("Pay it on myISIS").build();
 
             // Manually added
             submission = new TaskBuilder().withName("Submit research proposal")
-                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("19/12/2017 13:00")
+                    .withPriority("hi").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
             application = new TaskBuilder().withName("Apply for scholarship")
-                    .withPriority("low").withStartTime("13/12/2017 12:00").withEndTime("18/12/2017 13:00")
+                    .withPriority("low").withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("Apply via iDA website").build();
             taskWithoutPriority = new TaskBuilder().withName("Submit research proposal")
-                    .withNullPriority().withStartTime("14/12/2017 12:00").withEndTime("17/12/2017 13:00")
+                    .withNullPriority().withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00")
                     .withStatus("incomplete").withNote("To Prof Obama's pigeonhole").build();
             taskWithoutNote = new TaskBuilder().withName("No note").withPriority("low").withStatus("incomplete")
-                    .withStartTime("15/12/2017 12:00").withEndTime("16/12/2017 13:00").withNullNote().build();
+                    .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").withNullNote().build();
             taskWithoutDeadline = new TaskBuilder().withName("No deadlines").withPriority("hi")
                     .withNullStartTime().withNullEndTime().withStatus("incomplete").withNote("no deadlines").build();
         } catch (IllegalValueException e) {
@@ -80,11 +80,11 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getSortedByStartDateTasks() {
-        return new TestTask[]{submission, application, taskWithoutPriority, taskWithoutNote};
+        return new TestTask[]{laundry, quiz, payment};
     }
 
     public TestTask[] getSortedByEndDateTasks() {
-        return new TestTask[]{taskWithoutNote, taskWithoutPriority, application, submission};
+        return new TestTask[]{payment, quiz, laundry};
     }
     //@@author
 
