@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.atteo.evo.inflector.English;
 
@@ -209,5 +211,15 @@ public class StringUtil {
             return false;
         }
         return s.toLowerCase().startsWith(comparision.toLowerCase());
+    }
+
+
+    /**
+     * Converts collection of strings to array of arrays of strings
+     */
+    public static String[][] collectionToArrayOfArrays(Collection<String> strings) {
+        return strings.stream().map(s -> new String[] { s })
+                .collect(Collectors.toList())
+                .toArray(new String[0][0]);
     }
 }
