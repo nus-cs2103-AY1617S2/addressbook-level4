@@ -19,7 +19,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
     public static final String BACKUP_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("temp/");
     private History history = History.getInstance();
-    TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] currentList = td.getTypicalTasks();
 
     @Test
     public void undo() {

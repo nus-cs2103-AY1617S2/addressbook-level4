@@ -65,7 +65,7 @@ public class TestUtil {
                 return;
             }
             String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
-                actualException.getClass().getName());
+                    actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
         throw new AssertionFailedError(
@@ -81,19 +81,24 @@ public class TestUtil {
                 new Task(new Name("Boris Mueller"), new Date("1-02-24"), new Date("1-09-2245"),
                         new Remark("ruth@google.com"), new Location("81th street"), new UniqueTagList(), false, ""),
                 new Task(new Name("Carl Kurz"), new Date("1-04-1963"), new Date("1-13-1963"),
-                        new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false, ""),
+                            new Remark("heinz@yahoo.com"), new Location("wall street"), new UniqueTagList(), false, ""),
                 new Task(new Name("Daniel Meier"), new Date("2-12-2000"), new Date("2-17-2003"),
-                        new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false, ""),
+                            new Remark("cornelia@google.com"), new Location("10th street"), new UniqueTagList(), false,
+                            ""),
                 new Task(new Name("Elle Meyer"), new Date("1-01-2000"), new Date("2-12-2004"),
-                        new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false, ""),
+                            new Remark("werner@gmail.com"), new Location("michegan ave"), new UniqueTagList(), false,
+                            ""),
                 new Task(new Name("Fiona Kunz"), new Date("2-05-2024"), new Date("04-03-2027"),
-                        new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false, ""),
+                            new Remark("lydia@gmail.com"), new Location("little tokyo"), new UniqueTagList(), false,
+                            ""),
                 new Task(new Name("George Best"), new Date("4-09-14"), new Date("1-02-2042"),
-                        new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false, ""),
+                            new Remark("anna@google.com"), new Location("4th street"), new UniqueTagList(), false, ""),
                 new Task(new Name("Hoon Meier"), new Date("1-08-2024"), new Date("04-12-2024"),
-                        new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false, ""),
+                            new Remark("stefan@mail.com"), new Location("little india"), new UniqueTagList(), false,
+                            ""),
                 new Task(new Name("Ida Mueller"), new Date("2-05-30"), new Date("04-12-2031"),
-                        new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false, "") };
+                            new Remark("hans@google.com"), new Location("chicago ave"), new UniqueTagList(), false,
+                            "") };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -117,8 +122,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path. Creates the sandbox
-     * folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox folder if it doesn't exist.
      *
      * @param fileName
      * @return
@@ -156,8 +160,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the
-     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their respective
+     * platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -219,11 +223,9 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class Invoke the method using
-     * method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited
-     * from supertypes
+     * Caveat: only find method declared in the current Class, not inherited from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -344,7 +346,7 @@ public class TestUtil {
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
 
-        //adds each task one by one, most recent one on top
+        // adds each task one by one, most recent one on top
         for (TestTask t : tasksToAdd) {
             listOfTasks.add(0, t);
         }
@@ -397,28 +399,30 @@ public class TestUtil {
 
     }
 
-
     public static TestTask[] filterDoneTasks(final TestTask[] tasks) {
         List<TestTask> filteredTaskList = new ArrayList<>();
-        for (TestTask tt: tasks) {
-            if (tt.isDone())
+        for (TestTask tt : tasks) {
+            if (tt.isDone()) {
                 filteredTaskList.add(tt);
+            }
         }
         return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
     }
 
     public static TestTask[] filterUndoneTasks(final TestTask[] tasks) {
         List<TestTask> filteredTaskList = new ArrayList<>();
-        for (TestTask tt: tasks) {
-            if (!tt.isDone())
+        for (TestTask tt : tasks) {
+            if (!tt.isDone()) {
                 filteredTaskList.add(tt);
+            }
         }
         return filteredTaskList.toArray(new TestTask[filteredTaskList.size()]);
 
     }
+
     public static TestTask[] filterFloatTasks(final TestTask[] tasks) {
         List<TestTask> filteredTaskList = new ArrayList<>();
-        for (TestTask tt: tasks) {
+        for (TestTask tt : tasks) {
             if (tt.getStartDate().isNull() && tt.getEndDate().isNull()) {
                 filteredTaskList.add(tt);
             }

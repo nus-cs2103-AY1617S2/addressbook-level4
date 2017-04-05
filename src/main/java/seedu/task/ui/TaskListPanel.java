@@ -81,14 +81,16 @@ public class TaskListPanel extends UiPart<Region> {
 
     // @@author A0142939W
     public void scrollDown(Scroll scroll) {
-        scroll = new Scroll();
-        scroll.scrollDown(taskListView);
+//        scroll = new Scroll();
+//        scroll.scrollDown(taskListView);
+        new Scroll().scrollDown(taskListView);
     }
 
     // @@author A0142939W
     public void scrollUp(Scroll scroll) {
-        scroll = new Scroll();
-        scroll.scrollUp(taskListView);
+        new Scroll().scrollUp(taskListView);
+//        scroll = new Scroll();
+//        scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {

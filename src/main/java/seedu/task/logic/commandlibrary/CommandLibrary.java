@@ -15,7 +15,7 @@ import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
-import seedu.task.logic.commands.FindDateCommand;
+//import seedu.task.logic.commands.FindDateCommand;
 import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
@@ -42,7 +42,7 @@ import seedu.task.logic.parser.DoneCommandParser;
 import seedu.task.logic.parser.EditCommandParser;
 import seedu.task.logic.parser.ExitCommandParser;
 import seedu.task.logic.parser.FindCommandParser;
-import seedu.task.logic.parser.FindDateCommandParser;
+//import seedu.task.logic.parser.FindDateCommandParser;
 import seedu.task.logic.parser.FindExactCommandParser;
 import seedu.task.logic.parser.GetGoogleCalendarCommandParser;
 import seedu.task.logic.parser.HelpCommandParser;
@@ -108,9 +108,6 @@ public class CommandLibrary {
                 new FindCommandParser() , FindCommand.MESSAGE_USAGE));
         commandTable.put(FindCommand.COMMAND_WORD_2, new CommandInstance(FindCommand.COMMAND_WORD_1,
                 new FindCommandParser() , FindCommand.MESSAGE_USAGE));
-
-        commandTable.put(FindDateCommand.COMMAND_WORD_1, new CommandInstance(FindDateCommand.COMMAND_WORD_1,
-                new FindDateCommandParser() , FindDateCommand.MESSAGE_USAGE));
 
         commandTable.put(FindExactCommand.COMMAND_WORD_1, new CommandInstance(FindExactCommand.COMMAND_WORD_1,
                 new FindExactCommandParser(), FindExactCommand.MESSAGE_USAGE));

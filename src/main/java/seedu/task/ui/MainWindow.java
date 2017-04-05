@@ -91,29 +91,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML);
-
-        // Set dependencies
-        this.primaryStage = primaryStage;
-        this.logic = logic;
-        this.config = config;
-        this.userPrefs = prefs;
-
-        // Configure the UI
-        setTitle(config.getAppTitle());
-        setIcon(ICON);
-        setWindowMinSize();
-        setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
-
-        setAccelerators();
-    }
-
     // @@author A0142487Y-reused
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String fxml) {
-        super(fxml);
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -184,7 +164,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     // @@author A0142487Y
-    void fillInnerParts() {
+    protected void fillInnerParts() {
         switch (this.userPrefs.getTheme()) {
         case Dark:
             taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
@@ -226,7 +206,7 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
-    void hide() {
+    protected void hide() {
         primaryStage.hide();
     }
 
@@ -323,7 +303,7 @@ public class MainWindow extends UiPart<Region> {
     }
     // @@author
 
-    void show() {
+    protected void show() {
         primaryStage.show();
     }
 

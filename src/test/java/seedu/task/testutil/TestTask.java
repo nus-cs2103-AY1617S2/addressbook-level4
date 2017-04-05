@@ -51,8 +51,8 @@ public class TestTask implements ReadOnlyTask {
      *
      * @param startDate
      * @param endDate
-     * @return true if one of two dates is null. if both not null, only returns
-     *         true if startDate is strictly before endDate
+     * @return true if one of two dates is null. if both not null, only returns true if startDate is strictly before
+     *         endDate
      */
     private boolean checkDates(Date startDate, Date endDate) {
         return (startDate.isNull() || endDate.isNull()) ? true
@@ -117,13 +117,13 @@ public class TestTask implements ReadOnlyTask {
         return isDone;
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public String getEventId() {
         return eventId;
     }
 
-    //@@author
+    // @@author
     @Override
     public UniqueTagList getTags() {
         return tags;
@@ -138,14 +138,18 @@ public class TestTask implements ReadOnlyTask {
         // sequence name->location->start date->end date->remark->tags
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        if (this.getLocation() != null)
+        if (this.getLocation() != null) {
             sb.append("l/" + this.getLocation().value + " ");
-        if (this.getStartDate() != null)
+        }
+        if (this.getStartDate() != null) {
             sb.append("s/" + this.getStartDate().toString() + " ");
-        if (this.getEndDate() != null)
+        }
+        if (this.getEndDate() != null) {
             sb.append("e/" + this.getEndDate().toString() + " ");
-        if (this.getRemark() != null)
+        }
+        if (this.getRemark() != null) {
             sb.append("r/" + this.getRemark().value + " ");
+        }
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
@@ -156,8 +160,12 @@ public class TestTask implements ReadOnlyTask {
         if ((this.getEndDate() == null && o.getEndDate() == null) || (this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);
         } else {
-            if (this.getEndDate().isNull()) return 1;
-            if (o.getEndDate().isNull()) return -1;
+            if (this.getEndDate().isNull()) {
+                return 1;
+            }
+            if (o.getEndDate().isNull()) {
+                return -1;
+            }
             return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
         }
     }

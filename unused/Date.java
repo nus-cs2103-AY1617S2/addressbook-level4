@@ -128,11 +128,7 @@ public class Date {
 
         prepareDateFormats();
 
-        if (getDateFormat(input) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return (getDateFormat(input) != null);
     }
 
 }
