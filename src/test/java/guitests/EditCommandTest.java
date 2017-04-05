@@ -122,7 +122,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertMatching(editedTask, editedCard);
 
         sortTasksList();
- 
+
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[addressBookIndex - 1] = editedTask;
         sortTasksList();
