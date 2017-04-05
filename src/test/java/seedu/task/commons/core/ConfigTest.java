@@ -14,10 +14,10 @@ public class ConfigTest {
 
     @Test
     public void toString_defaultObject_stringReturned() {
-        String defaultConfigAsString = "TaskList name : Task Manager\n" +
+        String defaultConfigAsString = "TaskManager name : Task Manager\n" +
                 "Current log level : INFO\n" +
                 "Preference file Location : preferences.json\n" +
-                "Local data file location : data/addressbook.xml\n" +
+                "Local data file location : data/taskmanager.xml\n" +
                 "TaskManager name : MyTaskManager";
         System.out.println("------");
         System.out.println(defaultConfigAsString);
