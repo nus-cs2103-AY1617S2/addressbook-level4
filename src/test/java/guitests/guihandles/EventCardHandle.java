@@ -74,8 +74,7 @@ public class EventCardHandle extends GuiHandle {
                         + " " + event.getStartDate().toString()
                         + " ~ " + event.getEndTime().toString()
                         + " " + event.getEndDate().toString())
-                && getLocation().equals(event.getLocation().value)
-                && getTags().equals(getTags(event.getTags()));
+                && getLocation().equals("@" + event.getLocation().value);
     }
 
     @Override

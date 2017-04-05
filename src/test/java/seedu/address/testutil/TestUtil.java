@@ -83,19 +83,27 @@ public class TestUtil {
 
     private static Event[] getSampleEventData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
-            return new Event[]{
-                new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"), new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"), new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"), new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"), new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"), new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"), new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"), new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"), new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
-                new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"), new EndTime("1000"), new EndDate("280517"), new Location("NUS"), new UniqueTagList())
-            };
-            //CHECKSTYLE.ON: LineLength
+            // CHECKSTYLE.OFF: LineLength
+            return new Event[] {
+                    new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"),
+                            new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"),
+                            new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"),
+                            new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"),
+                            new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"),
+                            new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"),
+                            new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"),
+                            new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"),
+                            new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
+                    new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"),
+                            new EndTime("1000"), new EndDate("280517"), new Location("NUS"), new UniqueTagList()) };
+            // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -105,43 +113,38 @@ public class TestUtil {
 
     private static Task[] getSampleTaskData() {
         try {
-            return new Task[]{
-                new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("200517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
-                new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
-                        new ByDate("280517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS)
-            };
+            return new Task[] {
+                    new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("200517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                    new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
+                            new ByDate("280517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS) };
         } catch (IllegalValueException e) {
             assert false;
             return null;
         }
     }
 
-
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[]{
-                new Tag("presentation"),
-                new Tag("webcast")
-            };
+            return new Tag[] { new Tag("presentation"), new Tag("webcast") };
         } catch (IllegalValueException e) {
             assert false;
             return null;
-            //not possible
+            // not possible
         }
     }
 
@@ -150,8 +153,8 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends the file name to the sandbox folder path. Creates the sandbox
+     * folder if it doesn't exist.
      * @param fileName
      * @return
      */
@@ -178,6 +181,25 @@ public class TestUtil {
         }
     }
 
+    public static ReadOnlyEvent[] filterExpectedEventList(Event[] events) {
+        int numInUIView = 0;
+        ArrayList<ReadOnlyEvent> eventslist = new ArrayList<ReadOnlyEvent>();
+        for (ReadOnlyEvent a : events) {
+            if (!a.isOver()) {
+                numInUIView++;
+                eventslist.add(a);
+            }
+        }
+        eventslist.sort(ReadOnlyEvent.getComparator());
+        ReadOnlyEvent[] expected = new ReadOnlyEvent[numInUIView];
+        int counter = 0;
+        for (ReadOnlyEvent each : eventslist) {
+            expected[counter] = each;
+            counter++;
+        }
+        return expected;
+    }
+
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
@@ -187,8 +209,8 @@ public class TestUtil {
     }
 
     /**
-     * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
-     * respective platform-specific keycodes
+     * Tweaks the {@code keyCodeCombination} to resolve the
+     * {@code KeyCode.SHORTCUT} to their respective platform-specific keycodes
      */
     public static KeyCode[] scrub(KeyCodeCombination keyCodeCombination) {
         List<KeyCode> keys = new ArrayList<>();
@@ -205,7 +227,7 @@ public class TestUtil {
             keys.add(KeyCode.CONTROL);
         }
         keys.add(keyCodeCombination.getCode());
-        return keys.toArray(new KeyCode[]{});
+        return keys.toArray(new KeyCode[] {});
     }
 
     public static boolean isHeadlessEnvironment() {
@@ -224,18 +246,17 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream()
-                .map(Object::toString)
-                .collect(Collectors.joining("\n"));
+                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
-    public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-                                                                           IllegalAccessException {
+    public static void setFinalStatic(Field field, Object newValue)
+            throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
         modifiersField.setAccessible(true);
-        // ~Modifier.FINAL is used to remove the final modifier from field so that its value is no longer
+        // ~Modifier.FINAL is used to remove the final modifier from field so
+        // that its value is no longer
         // final and can be changed
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, newValue);
@@ -251,10 +272,11 @@ public class TestUtil {
     }
 
     /**
-     * Gets private method of a class
-     * Invoke the method using method.invoke(objectInstance, params...)
+     * Gets private method of a class Invoke the method using
+     * method.invoke(objectInstance, params...)
      *
-     * Caveat: only find method declared in the current Class, not inherited from supertypes
+     * Caveat: only find method declared in the current Class, not inherited
+     * from supertypes
      */
     public static Method getPrivateMethod(Class<?> objectClass, String methodName) throws NoSuchMethodException {
         Method method = objectClass.getDeclaredMethod(methodName);
@@ -272,6 +294,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
+     *
      * @param node
      * @return
      */
@@ -283,6 +306,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
+     *
      * @param node
      * @return
      */
@@ -294,6 +318,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
+     *
      * @param node
      * @return
      */
@@ -319,12 +344,14 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of events.
-     * @param events The list of events
-     * @param eventsToRemove The subset of events.
+     *
+     * @param events
+     *            The list of events
+     * @param eventsToRemove
+     *            The subset of events.
      * @return The modified events after removal of the subset from events.
      */
-    public static TestEvent[] removeEventsFromList(
-            final TestEvent[] events, TestEvent... eventsToRemove) {
+    public static TestEvent[] removeEventsFromList(final TestEvent[] events, TestEvent... eventsToRemove) {
         List<TestEvent> listOfEvents = asList(events);
         listOfEvents.removeAll(asList(eventsToRemove));
         return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
@@ -332,12 +359,14 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of tasks.
-     * @param tasks The list of tasks
-     * @param tasks The subset of tasks.
+     *
+     * @param tasks
+     *            The list of tasks
+     * @param tasks
+     *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(
-            final TestTask[] tasks, TestTask... tasksToRemove) {
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
@@ -345,8 +374,11 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the event at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestEvent[] removeEventFromList(final TestEvent[] list, int targetIndexInOneIndexedFormat) {
         return removeEventsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -354,8 +386,11 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the task at specified index removed.
-     * @param list original list to copy from
-     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -363,9 +398,13 @@ public class TestUtil {
 
     /**
      * Replaces events[i] with an event.
-     * @param events The array of events.
-     * @param event The replacement event
-     * @param index The index of the event to be replaced.
+     *
+     * @param events
+     *            The array of events.
+     * @param event
+     *            The replacement event
+     * @param index
+     *            The index of the event to be replaced.
      * @return
      */
     public static TestEvent[] replaceEventFromList(TestEvent[] events, TestEvent event, int index) {
@@ -375,9 +414,13 @@ public class TestUtil {
 
     /**
      * Replaces tasks[i] with a task.
-     * @param tasks The array of tasks.
-     * @param task The replacement task
-     * @param index The index of the task to be replaced.
+     *
+     * @param tasks
+     *            The array of tasks.
+     * @param task
+     *            The replacement task
+     * @param index
+     *            The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -387,8 +430,11 @@ public class TestUtil {
 
     /**
      * Appends events to the array of events.
-     * @param events A array of events.
-     * @param eventsToAdd The events that are to be appended behind the original array.
+     *
+     * @param events
+     *            A array of events.
+     * @param eventsToAdd
+     *            The events that are to be appended behind the original array.
      * @return The modified array of events.
      */
     public static TestEvent[] addEventsToList(final TestEvent[] events, TestEvent... eventsToAdd) {
@@ -399,8 +445,12 @@ public class TestUtil {
 
     /**
      * Appends tasks to the array of tasks.
-     * @param tasks A array of tasks.
-     * @param tasks The activities that are to be appended behind the original array.
+     *
+     * @param tasks
+     *            A array of tasks.
+     * @param tasks
+     *            The activities that are to be appended behind the original
+     *            array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
@@ -427,7 +477,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
         if ("".equals(tags)) {
-            return new Tag[]{};
+            return new Tag[] {};
         }
 
         final String[] split = tags.split(", ");
@@ -436,7 +486,7 @@ public class TestUtil {
             try {
                 return new Tag(e.replaceFirst("Tag: ", ""));
             } catch (IllegalValueException e1) {
-                //not possible
+                // not possible
                 assert false;
                 return null;
             }
