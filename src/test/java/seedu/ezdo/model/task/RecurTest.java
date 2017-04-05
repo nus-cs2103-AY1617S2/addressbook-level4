@@ -7,13 +7,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 
 import mockit.Expectations;
+import mockit.integration.junit4.JMockit;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
-import seedu.ezdo.model.todo.Name;
 import seedu.ezdo.model.todo.Recur;
 
 //@@author A0139248X
+@RunWith(JMockit.class)
 public class RecurTest {
 
     @Rule
