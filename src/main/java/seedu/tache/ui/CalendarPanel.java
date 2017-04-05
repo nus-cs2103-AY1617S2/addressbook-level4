@@ -89,8 +89,11 @@ public class CalendarPanel extends UiPart<Region> {
         if (task.getActiveStatus() == false) {
             status = "completed";
         } else if (task.getEndDateTime().isPresent()) {
-            DateTime taskDate = task.getEndDateTime().get();
-            if (taskDate.hasPassed()) {
+            if (task.getEndDateTime().get().hasPassed()) {
+                status = "overdue";
+            }
+        } else if (task.getStartDateTime().isPresent()) {
+            if (task.getStartDateTime().get().hasPassed()) {
                 status = "overdue";
             }
         }
