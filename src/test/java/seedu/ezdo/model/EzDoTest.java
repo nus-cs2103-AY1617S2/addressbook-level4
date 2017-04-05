@@ -120,8 +120,8 @@ public class EzDoTest {
     public void updateRecurringTasks_ive() throws IllegalValueException {
         EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
         ArrayList<Task> tasksToToggle = new ArrayList<Task>();
-        Task task = new Task(new Name("test"), new Priority(""), new StartDate(""), new DueDate("05/04/2016"), new Recur("daily") ,
-                new UniqueTagList("test"));
+        Task task = new Task(new Name("test"), new Priority(""), new StartDate(""),
+                new DueDate("05/04/2016"), new Recur("daily"), new UniqueTagList("test"));
         tasksToToggle.add(task);
         IllegalValueException e = new IllegalValueException("illegal value");
         new MockUp<Task>() {
@@ -142,8 +142,8 @@ public class EzDoTest {
     public void updateDate_parseException() throws DuplicateTagException, IllegalValueException {
         EzDo typicalEzDo = new TypicalTestTasks().getTypicalEzDo();
         ArrayList<Task> tasksToToggle = new ArrayList<Task>();
-        Task task = new Task(new Name("test"), new Priority(""), new StartDate(""), new DueDate("05/04/2016"), new Recur("daily") ,
-                new UniqueTagList("test"));
+        Task task = new Task(new Name("test"), new Priority(""), new StartDate(""),
+                new DueDate("05/04/2016"), new Recur("daily"), new UniqueTagList("test"));
         tasksToToggle.add(task);
         ParseException pe = new ParseException("parse exception", 1);
         new MockUp<Calendar>() {
