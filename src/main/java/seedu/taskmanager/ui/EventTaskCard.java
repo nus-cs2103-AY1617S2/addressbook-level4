@@ -4,7 +4,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -21,8 +20,6 @@ public class EventTaskCard extends UiPart<Region> {
     private Label taskname;
     @FXML
     private Label id;
-    @FXML
-    private ListView<ListView<Label>> detailsList;
     @FXML
     private Label startDateTime;
     @FXML
@@ -50,7 +47,7 @@ public class EventTaskCard extends UiPart<Region> {
         if (isSameDateEvent(task)) {
             startDateTime.setText("Date: " + task.getStartDate().value);
             endDateTime
-                    .setText("End Date: " + task.getEndDate().value + "   " + "End Time: " + task.getEndTime().value);
+                    .setText("Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
         }
 
         if (task.getIsMarkedAsComplete()) {
