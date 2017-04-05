@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -13,6 +15,7 @@ import seedu.taskmanager.MainApp;
 import seedu.taskmanager.commons.core.ComponentManager;
 import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.LogsCenter;
+import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
@@ -20,6 +23,7 @@ import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
+import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * The manager of the UI component.
@@ -64,7 +68,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-//        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -116,13 +119,17 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex);
     }
-/*
+    
+
     @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
+        mainWindow.getEventTaskListPanel().setConnections(logic.getFilteredTaskList());
+        mainWindow.getDeadlineTaskListPanel().setConnections(logic.getFilteredTaskList());
+        mainWindow.getFloatingTaskListPanel().setConnections(logic.getFilteredTaskList());
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Updating Task List Panels"));
     }
-*/
 }

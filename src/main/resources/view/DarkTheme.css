@@ -126,10 +126,14 @@
     -fx-text-fill: #010504;
 }
 
+.cell_small_label_header {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+}
+
 .anchor_pane_white {
 	 -fx-background-color: white;
 }
-
 
 .anchor-pane {
      -fx-background-color: derive(#1d1d1d, 20%);

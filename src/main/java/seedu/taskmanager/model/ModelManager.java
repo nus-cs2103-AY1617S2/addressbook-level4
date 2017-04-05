@@ -206,6 +206,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         updateFilteredTaskListToShowByCompletion(false);
+        indicateTaskManagerChanged();
     }
 
     // @@author
@@ -216,18 +217,27 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
+        indicateTaskManagerChanged();
     }
 
     // @@author A0141102H
     @Override
     public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
+        indicateTaskManagerChanged();
     }
 
     // @@author A0139520L
     @Override
     public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
+        indicateTaskManagerChanged();
+    }
+
+    // @@author A0142418L
+    @Override
+    public void updateFilteredTaskListForInitialView() {
+        updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(false)));
     }
 
     // ========== Inner classes/interfaces used for filtering
