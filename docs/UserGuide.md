@@ -289,3 +289,14 @@ There is no need to save manually.
 
 * **Exit ** : `exit` <br>
    e.g. `exit`
+
+
+Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports 
+the implementation of such tasks. A few things to note about how to use this feature: 
+* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters 
+as the start and end timings of when the overall recurring pattern should start/end respectively. 
+  * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
+  every week from 11am - 12pm, the syntax of the respective command would be as follows: 
+  `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
+  * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
+  * 
