@@ -42,9 +42,7 @@ public class FindCommandParser implements CommandParser {
 
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE,
                 PREFIX_TAG);
-        argsTokenizer.tokenize(args);
-        String namesToMatch = argsTokenizer.getPreamble().orElse("");
-        String[] splitNames = namesToMatch.split("\\s+");
+        String[] splitNames = tokenize(args, argsTokenizer);
 
         Optional<Priority> findPriority = null;
         Optional<TaskDate> findStartDate = null;
@@ -130,6 +128,9 @@ public class FindCommandParser implements CommandParser {
         return optionalDate;
     }
 
+    /**
+     * Checks if an optional String has the prefix "before" or "After"
+     */
     private boolean isFindBefore(Optional<String> taskDate) {
 
         if (!taskDate.isPresent()) {
@@ -150,6 +151,9 @@ public class FindCommandParser implements CommandParser {
 
     }
 
+    /**
+     * Checks if an optional String has the prefix "after" or "After"
+     */
     private boolean isFindAfter(Optional<String> taskDate) {
 
         if (!taskDate.isPresent()) {
@@ -170,4 +174,13 @@ public class FindCommandParser implements CommandParser {
 
     }
 
+    /*
+     * Get the Names to find, if any, from Find arguments
+     */
+    private String[] tokenize(String args, ArgumentTokenizer argsTokenizer) {
+        argsTokenizer.tokenize(args);
+        String namesToMatch = argsTokenizer.getPreamble().orElse("");
+        String[] splitNames = namesToMatch.split("\\s+");
+        return splitNames;
+    }
 }
