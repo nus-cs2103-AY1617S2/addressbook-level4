@@ -18,9 +18,11 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Address;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Phone;
+import seedu.address.model.task.StartDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -85,11 +87,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> date} into an {@code Optional<Date>} if {@code date} is present.
+     * Parses a {@code Optional<String> start date} into an {@code Optional<StartDate>} if {@code date} is present.
      */
-    public static Optional<Date> parseDate(Optional<String> date) throws IllegalValueException {
+    public static Optional<StartDate> parseStartDate(Optional<String> date) throws IllegalValueException {
         assert date != null;
-        return date.isPresent() ? Optional.of(new Date(date.get())) : Optional.empty();
+        return date.isPresent() ? Optional.of(new StartDate(date.get())) : Optional.empty();
+    }
+    
+    /**
+     * Parses a {@code Optional<String> end date} into an {@code Optional<EndDate>} if {@code date} is present.
+     */
+    public static Optional<EndDate> parseEndDate(Optional<String> date) throws IllegalValueException {
+        assert date != null;
+        return date.isPresent() ? Optional.of(new EndDate(date.get())) : Optional.empty();
     }
 
     /**

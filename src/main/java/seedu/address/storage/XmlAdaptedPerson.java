@@ -10,7 +10,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
+import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -25,13 +28,11 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String date;
-    @XmlElement(required = true)
-    private String sdate;
-    @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
     private String group;
+    @XmlElement
+    private String end;
+    @XmlElement
+    private String start;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -50,13 +51,18 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyPerson source) {
         name = source.getName().fullName;
-        date = source.getDate().value;
-        sdate = source.getStartDate().value;
-        email = source.getEmail().value;
         group = source.getGroup().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
+        }
+        
+        if (source.getEndDate() != null) {
+            end = source.getEndDate().value;
+        }
+        
+        if (source.getStartDate() != null) {
+            start = source.getStartDate().value;
         }
     }
 
@@ -71,13 +77,11 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Date date = new Date(this.date);
-        final StartDate sdate = new StartDate(this.sdate);
-        final Email email = new Email(this.email);
         final Group group = new Group(this.group);
         final UniqueTagList tags = new UniqueTagList(personTags);
-
-        return new Task(name, date, sdate, email, group, tags);
-
+        final Date start = new StartDate(this.start);
+        final Date end = new EndDate(this.end);
+        
+        return Task.factory(name, start, end, group, tags);
     }
 }

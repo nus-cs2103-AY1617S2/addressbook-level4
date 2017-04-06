@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -45,4 +46,25 @@ public class CollectionUtil {
         }
         return true;
     }
+    
+    //@@author A0163848R
+    /**
+     * Returns first occurrence of the given type in the array.
+     * @param Collection to search.
+     * @param Type to find.
+     * @return First object of given type, or null if not found.
+     */
+    public static <T> T firstOf(Object[] items, Class<T> type) {
+        for (Object el : items) {
+            if (type.isInstance(el)) {
+                return type.cast(el);
+            }
+        }
+        return null;
+    }
+    
+    public static String getRandom(String[] strs, Random r) {
+        return strs[r.nextInt(strs.length)];
+    }
+    
 }
