@@ -32,16 +32,17 @@ public class ListCommand extends Command {
     private boolean showActiveOnly;
     private boolean showCompleteOnly;
 
-    public ListCommand(String date, boolean showOverdueOnly, boolean showCompleteOnly) throws IllegalValueException {
+    public ListCommand(String date, boolean showActiveOnly, boolean showCompleteOnly) throws IllegalValueException {
         if (date.equals(Deadline.NO_DEADLINE)) {
             this.dateRange = null;
         } else {
             this.dateRange = parseDateRange(date);
         }
-        this.showActiveOnly = showOverdueOnly;
+        this.showActiveOnly = showActiveOnly;
         this.showCompleteOnly = showCompleteOnly;
 
-        if (dateRange != null && (showOverdueOnly || showCompleteOnly)) {
+        if (dateRange != null && (showCompleteOnly)) { // showActiveOnly allowed
+                                                       // as default
             throw new IllegalValueException(MESSAGE_USAGE);
         }
     }
@@ -51,7 +52,9 @@ public class ListCommand extends Command {
         assert model != null;
         assert !(showActiveOnly && showCompleteOnly);
 
-        if (!showActiveOnly && !showCompleteOnly) {
+        if (dateRange != null) {
+            model.updateFilteredLists(dateRange);
+        } else if (!showActiveOnly && !showCompleteOnly) {
             model.updateFilteredListsShowAll();
         } else if (showCompleteOnly) {
             model.updateFilteredListsToShowCompleteToDo();
@@ -60,6 +63,16 @@ public class ListCommand extends Command {
         } else if (dateRange != null) {
             model.updateFilteredLists(dateRange);
         }
+
+        // if (!showActiveOnly && !showCompleteOnly) {
+        // model.updateFilteredListsShowAll();
+        // } else if (showCompleteOnly) {
+        // model.updateFilteredListsToShowCompleteToDo();
+        // } else if (showActiveOnly) {
+        // model.updateFilteredListsToShowActiveToDo();
+        // } else if (dateRange != null) {
+        // model.updateFilteredLists(dateRange);
+        // }
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -73,17 +86,13 @@ public class ListCommand extends Command {
     private Timeslot parseDateRange(String date) throws IllegalValueException {
         Timeslot dateRange;
 
-        try {
-            dateRange = Timeslot.constructTimeslotFromEndDate(date);
-            return dateRange;
-        } catch (IllegalValueException ive) {
-            List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-            if (timeslots.size() > 1) {
-                throw new IllegalValueException(MESSAGE_MULTIPLE_DATERANGES);
-            }
-            dateRange = timeslots.get(0);
-            return dateRange;
+        List<Timeslot> timeslots = ParserUtil.parseForList(date);
+        if (timeslots.size() > 1) {
+            throw new IllegalValueException(MESSAGE_MULTIPLE_DATERANGES);
         }
+        dateRange = timeslots.get(0);
+
+        return dateRange;
     }
 
 }
