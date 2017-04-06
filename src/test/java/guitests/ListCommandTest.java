@@ -52,6 +52,32 @@ public class ListCommandTest extends TaskManagerGuiTest {
         assertListResult("list completed", "Completed", expectedTasksList.toArray(new TestTask[0]));
     }
 
+    //@@author A0142255M
+    @Test
+    public void listTimedTasks() {
+        assertListResult("list timed", "Timed");
+        commandBox.runCommand("list");
+        TestTask[] tempTasksList = td.getTypicalTasks();
+        ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
+        for (TestTask task : tempTasksList) {
+            expectedTasksList.add(task);
+        }
+        assertListResult("list timed", "Timed", expectedTasksList.toArray(new TestTask[0]));
+    }
+
+    @Test
+    public void listFloatingTasks() {
+        assertListResult("list floating", "Floating");
+        commandBox.runCommand("list");
+        TestTask[] tempTasksList = td.getTypicalTasks();
+        ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
+        for (TestTask task : tempTasksList) {
+            expectedTasksList.add(task);
+        }
+        assertListResult("list floating", "Floating", expectedTasksList.toArray(new TestTask[0]));
+    }
+    //@@author
+
     @Test
     public void listNoEvent() {
         commandBox.runCommand("clear");
