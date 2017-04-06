@@ -82,6 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(undoTaskManager.peek());
         undoTaskManager.pop();
         redoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     /** Undo previous action of task manager. */
@@ -90,6 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.resetData(redoTaskManager.peek());
         redoTaskManager.pop();
         undoTaskManager.push(currentTaskManager);
+        indicateTaskManagerChanged();
     }
 
     // @@author
@@ -159,6 +161,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
+        int index = 0;
+        while (index < (filteredTasks.size())) {
+            if (filteredTasks.get(index).isEventTask() && !filteredTasks.get(index).getIsMarkedAsComplete()
+                    && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                return index + 1;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
@@ -198,6 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         updateFilteredTaskListToShowByCompletion(false);
+        indicateTaskManagerChanged();
     }
 
     // @@author
@@ -208,18 +224,27 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TaskQualifier(keywords)));
+        indicateTaskManagerChanged();
     }
 
     // @@author A0141102H
     @Override
     public void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new ListQualifier(keywords, isComplete)));
+        indicateTaskManagerChanged();
     }
 
     // @@author A0139520L
     @Override
     public void updateFilteredTaskListToShowByCompletion(boolean isComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(isComplete)));
+        indicateTaskManagerChanged();
+    }
+
+    // @@author A0142418L
+    @Override
+    public void updateFilteredTaskListForInitialView() {
+        updateFilteredTaskList(new PredicateExpression(new CompletedQualifier(false)));
     }
 
     // ========== Inner classes/interfaces used for filtering

@@ -95,7 +95,24 @@ public class ArgumentTokenizer {
         List<PrefixPosition> positions = new ArrayList<>();
 
         for (Prefix prefix : this.prefixes) {
-            positions.addAll(findPrefixPositions(argsString, prefix));
+            if (prefix.getPrefix().equals("CATEGORY")) {
+                positions.addAll(findAllPrefixPositions(argsString, prefix));
+            } else {
+                positions.addAll(findLastPrefixPositions(argsString, prefix));
+            }
+        }
+        return positions;
+    }
+
+    private List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix prefix) {
+        List<PrefixPosition> positions = new ArrayList<>();
+
+        int argumentStart = argsString.indexOf(prefix.getPrefix());
+
+        while (argumentStart != -1) {
+            PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
+            positions.add(extendedPrefix);
+            argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
         }
 
         return positions;
@@ -105,17 +122,18 @@ public class ArgumentTokenizer {
      * Finds all positions in an arguments string at which a given
      * {@code prefix} appears
      */
-    private List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+    private List<PrefixPosition> findLastPrefixPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
 
         int argumentStart = argsString.lastIndexOf(prefix.getPrefix());
-        //int argumentStart = argsString.indexOf(prefix.getPrefix());
+        // int argumentStart = argsString.indexOf(prefix.getPrefix());
 
-        //while (argumentStart != -1) {
+        // while (argumentStart != -1) {
         if (argumentStart != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
             positions.add(extendedPrefix);
-            //argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
+            // argumentStart = argsString.indexOf(prefix.getPrefix(),
+            // argumentStart + 1);
         }
 
         /*

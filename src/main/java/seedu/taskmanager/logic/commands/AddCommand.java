@@ -30,6 +30,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes "
+            + "with another event";
 
     private final Task toAdd;
 
@@ -49,16 +51,26 @@ public class AddCommand extends Command {
                 new EndDate(endDate), new EndTime(endTime), new Boolean(false), new UniqueCategoryList(categorySet));
     }
 
+    // @@author A0142418L
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
+            model.updateFilteredListToShowAll();
+            // if (toAdd.isEventTask()) {
+            // int clashedTaskIndex = model.isBlockedOutTime(toAdd);
+            // if (clashedTaskIndex != -1) {
+            // throw new IllegalValueException(
+            // "Clash with task: Index " + Integer.toString(clashedTaskIndex) +
+            // "\n");
+            // }
+            // }
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage() + MESSAGE_BLOCKED_OUT_TIME);
         }
-
     }
-
 }

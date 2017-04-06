@@ -20,4 +20,7 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    /** Creates initial UI view when Task Manager starts up
+     * Returns the filtered list of tasks */
+    ObservableList<ReadOnlyTask> getInitialFilteredTaskList();
 }

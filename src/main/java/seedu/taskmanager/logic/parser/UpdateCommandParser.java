@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
-import seedu.taskmanager.commons.util.CurrentDate;
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
@@ -86,18 +86,18 @@ public class UpdateCommandParser {
             String stringEndDate = "";
 
             if (fromPrefixInput.isPresent() && fromPrefixInput.get().matches("\\d+")) {
-                if (isValidTime(fromPrefixInput.get())) {
+                if (DateTimeUtil.isValidTime(fromPrefixInput.get())) {
                     stringStartTime = fromPrefixInput.get();
                 }
             } else {
                 if (onPrefixInput.isPresent() && onPrefixInput.get().matches("\\d+")) {
-                    if (isValidTime(onPrefixInput.get())) {
+                    if (DateTimeUtil.isValidTime(onPrefixInput.get())) {
                         stringStartTime = onPrefixInput.get();
                     }
                 }
             }
             if (toPrefixInput.isPresent() && toPrefixInput.get().matches("\\d+")) {
-                if (isValidTime(toPrefixInput.get())) {
+                if (DateTimeUtil.isValidTime(toPrefixInput.get())) {
                     stringEndTime = toPrefixInput.get();
                 }
             }
@@ -112,11 +112,14 @@ public class UpdateCommandParser {
                 stringEndDate = splited[0];
                 try {
                     stringStartTime = splited[1];
-                    if (!isValidTime(stringStartTime)) {
+                    if (!DateTimeUtil.isValidTime(stringStartTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
                     if (!toPrefixInput.isPresent()) {
-                        stringEndTime = Integer.toString(100 + Integer.parseInt(splited[1]));
+                        stringEndTime = DateTimeUtil.includeOneHourBuffer(stringStartTime);
+                        if (Integer.parseInt(stringEndTime) < 100) {
+                            stringEndDate = DateTimeUtil.getFutureDate(1, "days", stringEndDate);
+                        }
                     } else {
                         String[] splitedEndTime = toPrefixInput.get().split("\\s+");
                         try {
@@ -127,7 +130,7 @@ public class UpdateCommandParser {
                             }
                         } catch (ArrayIndexOutOfBoundsException aioobe) {
                             stringEndTime = splitedEndTime[0];
-                            if (!isValidTime(stringEndTime)) {
+                            if (!DateTimeUtil.isValidTime(stringEndTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
                         }
@@ -146,7 +149,7 @@ public class UpdateCommandParser {
                             }
                         } catch (ArrayIndexOutOfBoundsException aiobe) {
                             stringEndTime = splitedEndTime[0];
-                            if (!isValidTime(stringEndTime)) {
+                            if (!DateTimeUtil.isValidTime(stringEndTime)) {
                                 throw new IllegalValueException(INVALID_TIME);
                             }
                         }
@@ -166,14 +169,14 @@ public class UpdateCommandParser {
 
             if (fromPrefixInput.isPresent()) {
                 if (fromPrefixInput.get().trim().matches("[a-zA-Z]+")) {
-                    stringStartDate = CurrentDate.getNewDate(fromPrefixInput.get());
+                    stringStartDate = DateTimeUtil.getNewDate(fromPrefixInput.get());
                     stringStartTime = "0000";
                 }
             }
 
             if (toPrefixInput.isPresent()) {
                 if (toPrefixInput.get().trim().matches("[a-zA-Z]+")) {
-                    stringEndDate = CurrentDate.getNewDate(toPrefixInput.get());
+                    stringEndDate = DateTimeUtil.getNewDate(toPrefixInput.get());
                     stringEndTime = "2359";
                 }
             }
@@ -182,13 +185,13 @@ public class UpdateCommandParser {
                 String[] splited = fromPrefixInput.get().split("\\s+");
                 try {
                     if (splited[0].matches(STARTDATE_VALIDATION_REGEX2)) {
-                        splited[0] = CurrentDate.getNewDate(splited[0]);
+                        splited[0] = DateTimeUtil.getNewDate(splited[0]);
                     }
                     stringStartDate = splited[0];
                     stringStartTime = splited[1];
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
                     if (splited[0].matches(STARTDATE_VALIDATION_REGEX2)) {
-                        stringStartDate = CurrentDate.getNewDate(splited[0]);
+                        stringStartDate = DateTimeUtil.getNewDate(splited[0]);
                     }
                 }
             }
@@ -197,13 +200,13 @@ public class UpdateCommandParser {
                 String[] splited = toPrefixInput.get().split("\\s+");
                 try {
                     if (splited[0].matches(STARTDATE_VALIDATION_REGEX2)) {
-                        splited[0] = CurrentDate.getNewDate(splited[0]);
+                        splited[0] = DateTimeUtil.getNewDate(splited[0]);
                     }
                     stringEndDate = splited[0];
                     stringEndTime = splited[1];
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
                     if (splited[0].matches(STARTDATE_VALIDATION_REGEX2)) {
-                        stringEndDate = CurrentDate.getNewDate(splited[0]);
+                        stringEndDate = DateTimeUtil.getNewDate(splited[0]);
                     }
                 }
             }
@@ -217,7 +220,7 @@ public class UpdateCommandParser {
                 stringEndDate = splited[0];
                 try {
                     stringEndTime = splited[1];
-                    if (!isValidTime(stringEndTime)) {
+                    if (!DateTimeUtil.isValidTime(stringEndTime)) {
                         throw new IllegalValueException(INVALID_TIME);
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe) {
@@ -263,12 +266,12 @@ public class UpdateCommandParser {
 
             if (startDate.isPresent()) {
                 if (startDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
-                    startDate = Optional.of(CurrentDate.getNewDate(startDate.get()));
+                    startDate = Optional.of(DateTimeUtil.getNewDate(startDate.get()));
                 }
             }
             if (endDate.isPresent()) {
                 if (endDate.get().matches(STARTDATE_VALIDATION_REGEX2)) {
-                    endDate = Optional.of(CurrentDate.getNewDate(endDate.get()));
+                    endDate = Optional.of(DateTimeUtil.getNewDate(endDate.get()));
                 }
             }
 
@@ -298,14 +301,6 @@ public class UpdateCommandParser {
             return new IncorrectCommand(UpdateCommand.MESSAGE_NOT_UPDATED);
         }
         return new UpdateCommand(index.get(), updateTaskDescriptor, isUpdateToDeadlineTask);
-    }
-
-    private boolean isValidTime(String string) {
-        if (Integer.parseInt(string) >= 2400 || Integer.parseInt(string.substring(string.length() - 2)) >= 60) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     /**

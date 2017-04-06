@@ -1,13 +1,14 @@
 package seedu.taskmanager.commons.util;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 // @@author A0142418L
-public class CurrentDate {
+public class DateTimeUtil {
 
     public static final String MESSAGE_DAY_CONSTRAINTS = "Task date should be either "
             + "a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
@@ -52,7 +53,7 @@ public class CurrentDate {
     public static int currentDay;
     public static String currentDate = "";
 
-    public CurrentDate() {
+    public DateTimeUtil() {
         currentDay = getCurrentDay();
         currentDate = getCurrentDate();
     }
@@ -278,5 +279,193 @@ public class CurrentDate {
         updatedDate = stringDay + "/" + stringMonth + "/" + stringYear;
 
         return updatedDate;
+    }
+
+    public static int isDateWithin(String date, String startDate, String endDate) {
+        String[] dmy = date.trim().split("/");
+        int day = Integer.parseInt(dmy[0]);
+        int month = Integer.parseInt(dmy[1]);
+        int year = Integer.parseInt(dmy[2]);
+
+        String[] dmyStart = startDate.trim().split("/");
+        int dayStart = Integer.parseInt(dmyStart[0]);
+        int monthStart = Integer.parseInt(dmyStart[1]);
+        int yearStart = Integer.parseInt(dmyStart[2]);
+
+        String[] dmyEnd = endDate.trim().split("/");
+        int dayEnd = Integer.parseInt(dmyEnd[0]);
+        int monthEnd = Integer.parseInt(dmyEnd[1]);
+        int yearEnd = Integer.parseInt(dmyEnd[2]);
+
+        if (year < yearEnd && yearStart < year) {
+            return 1;
+        } else {
+            if (year == yearEnd && year == yearStart) {
+                if (month < monthEnd && monthStart < month) {
+                    return 1;
+                } else {
+                    if (month == monthEnd && month == monthStart) {
+                        if (day < dayEnd && dayStart < day) {
+                            return 1;
+                        } else {
+                            if (day == dayEnd && dayStart == day) {
+                                return 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static boolean isValidDate(String date) {
+        String[] dmy = date.trim().split("/");
+        int day = Integer.parseInt(dmy[0]);
+        int month = Integer.parseInt(dmy[1]);
+        int year = Integer.parseInt(dmy[2]);
+
+        YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
+
+        if (day > yearMonthObject.lengthOfMonth() || month > 12) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static String getFutureDate(int loops, String typeOfRecurrence, String existingDate) {
+        String[] dmy = existingDate.trim().split("/");
+        int day = Integer.parseInt(dmy[0]);
+        int month = Integer.parseInt(dmy[1]);
+        int year = Integer.parseInt(dmy[2]);
+
+        String newDate = "";
+        String newDay = "";
+        String newMonth = "";
+
+        YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
+
+        if (typeOfRecurrence.equalsIgnoreCase("days")) {
+            day = day + loops;
+            while (day > yearMonthObject.lengthOfMonth()) {
+                day = day - yearMonthObject.lengthOfMonth();
+                month = month + 01;
+                if (month > 12) {
+                    year = year + 1;
+                    month = 01;
+                }
+                yearMonthObject = YearMonth.of(2000 + year, month);
+            }
+        }
+
+        if (typeOfRecurrence.equalsIgnoreCase("weeks")) {
+            day = day + loops * 7;
+            while (day > yearMonthObject.lengthOfMonth()) {
+                day = day - yearMonthObject.lengthOfMonth();
+                month = month + 01;
+                if (month > 12) {
+                    year = year + 1;
+                    month = 01;
+                }
+                yearMonthObject = YearMonth.of(2000 + year, month);
+            }
+        }
+
+        if (typeOfRecurrence.equalsIgnoreCase("months")) {
+            month = month + loops;
+            while (month > 12) {
+                month = month - 12;
+                year = year + 1;
+            }
+        }
+
+        if (typeOfRecurrence.equalsIgnoreCase("years")) {
+            year = year + loops;
+        }
+
+        if (day < 10) {
+            newDay = "0" + Integer.toString(day);
+        } else {
+            newDay = Integer.toString(day);
+        }
+
+        if (month < 10) {
+            newMonth = "0" + Integer.toString(month);
+        } else {
+            newMonth = Integer.toString(month);
+        }
+
+        newDate = newDay + "/" + newMonth + "/" + year;
+
+        return newDate;
+    }
+
+    public static boolean isValidEventTimePeriod(String startDate, String startTime, String endDate, String endTime)
+            throws IllegalValueException {
+        String[] splitedStartDate = (startDate.trim()).split("/");
+        String[] splitedEndDate = (endDate.trim()).split("/");
+        boolean isValidStartEnd = true;
+        if (Integer.parseInt(splitedEndDate[2]) <= Integer.parseInt(splitedStartDate[2])) {
+            if (Integer.parseInt(splitedEndDate[2]) < Integer.parseInt(splitedStartDate[2])) {
+                isValidStartEnd = false;
+            } else {
+                if (Integer.parseInt(splitedEndDate[1]) <= Integer.parseInt(splitedStartDate[1])) {
+                    if (Integer.parseInt(splitedEndDate[0]) < Integer.parseInt(splitedStartDate[0])) {
+                        isValidStartEnd = false;
+                    } else {
+                        if (Integer.parseInt(splitedEndDate[0]) <= Integer.parseInt(splitedStartDate[0])) {
+                            if (Integer.parseInt(splitedEndDate[0]) < Integer.parseInt(splitedStartDate[0])) {
+                                isValidStartEnd = false;
+                            } else {
+                                if (Integer.parseInt(startTime) > Integer.parseInt(endTime)) {
+                                    throw new IllegalValueException(
+                                            "Invalid input of time, start time has to be earlier than end time");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return isValidStartEnd;
+    }
+
+    public static boolean isValidTime(String value) {
+        return (value.matches("\\d+") && (Integer.parseInt(value) < 2400) && (Integer.parseInt(value) >= 0)
+                && (((Integer.parseInt(value)) % 100) < 60));
+    }
+
+    public static String includeOneHourBuffer(String startTime) {
+        String endTime;
+        endTime = Integer.toString(100 + Integer.parseInt(startTime));
+        if (Integer.parseInt(endTime) < 1000) {
+            endTime = "0" + endTime;
+        }
+
+        if (!isValidTime(endTime)) {
+            endTime = Integer.toString(Integer.parseInt(endTime) - 2400);
+            endTime = fourDigitTimeFormat(endTime);
+
+        }
+        return endTime;
+    }
+
+    public static String fourDigitTimeFormat(String endTime) {
+        if (Integer.parseInt(endTime) >= 10) {
+            StringBuilder stringBuilderTime = new StringBuilder();
+
+            stringBuilderTime.append("00");
+            stringBuilderTime.append(endTime);
+            endTime = stringBuilderTime.toString();
+
+        } else {
+            StringBuilder stringBuilderTime = new StringBuilder();
+
+            stringBuilderTime.append("000");
+            stringBuilderTime.append(endTime);
+            endTime = stringBuilderTime.toString();
+        }
+        return endTime;
     }
 }

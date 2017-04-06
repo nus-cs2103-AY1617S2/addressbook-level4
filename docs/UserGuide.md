@@ -16,8 +16,8 @@ This User Guide will aid you in understanding how ProcrastiNomore operates and w
 the functionalities this application has.
 
 ProcrastinNomore is a single command line task-management application that is able to
-store new tasks and edit existing tasks. It is able to store the tasks in Google calendar
-and will aid you in organizing all your corresponding tasks and events.
+store new tasks and edit existing tasks. This application will aid you in organizing
+all your corresponding tasks and events.
 
 ## 2. Quick Start
 
@@ -38,7 +38,7 @@ and will aid you in organizing all your corresponding tasks and events.
    >c. There are also several keyboard shortcuts found at the bottom of the User Guide for
    quick access of several functions.<br>
    >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
-   open the help window.
+   open the help window. <br>
    > <img src="images/ProcrastiNomore_Help.PNG" width="800">
 
 6. Refer to the [Features](#features) section below for more details on the various
@@ -56,6 +56,8 @@ commands you can use.<br>
 
 ### 3.1. Viewing help : `HELP`
 
+You can use this command to open a help window which will open this user guide page
+
 Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `ADD`
@@ -63,13 +65,14 @@ Format: `HELP`
 
 ### 3.2. Adding a new Task: `ADD`
 
-There are 4 forms of task that ProcrastiNomore supports:
+You can use this command to add different types of task in ProcrastiNomore. <br>
+There are 3 forms of task that ProcrastiNomore supports:
 
 #### 3.2.1. Events
 
 Format: `ADD TASK ON DATE/DAY` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
 > <img src="images/ProcrastiNomore_Add_Event.PNG" width="800">
 
 #### 3.2.2. Deadlines
@@ -87,16 +90,16 @@ Examples:
 * `ADD eat dinner FROM today 1730 TO today 1930`
 * `ADD eat breakfast FROM tomorrow 0800 TO tomorrow 0830`
 * `ADD eat lunch ON 03/03/17 1400 TO 1500`
-* `ADD eat dinner BY 03/03/17`
+* `ADD eat dinner BY 03/03/17 330`
 * `ADD eat breakfast BY 0730`
-* `ADD eat lunch BY 03/03/17 330pm`
 * `ADD eat breakfast`
 
-> TIME input can be in 24hrs format or 12hrs format with am/pm
+> TIME input must be in 24hrs format <br>
 > If the function "ADD ... BY .." is used without stating the end time, the default end time will be 2359.
 
 ### 3.3. Update an existing task : `UPDATE`
 
+You can use this command to update existing task in ProcrastiNomore. <br>
 There are 2 types of updates that ProcrastiNomore supports:
 
 #### 3.3.1. Update task name
@@ -114,40 +117,37 @@ Examples:
 * `LIST`
   `UPDATE 1 FROM thursday TO friday`
 
+> Please note that by inputting UPDATE TASKINDEX with no additional information will result in
+> all timings to be removed.
+
 ### 3.4. Delete an existing task: `DELETE`
+
+You can use this command to delete existing task in ProcrastiNomore
 
 Format: `DELETE TASKNAME` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE DATE`
 
-> In the event of DELETE TASKNAME, ProcrastiNomore will show a list of tasks
-> with the same TASKNAME and user will be required to input the TASKINDEX of
-> the TASK user wants to delete
+> In the event of DELETE TASKNAME/DATE, ProcrastiNomore will delete all tasks with the
+> TASKNAME/DATE specified in the command.
 
 Examples:
 * `DELETE breakfast` <br />
-  `1`
-* `list` <br />
-  `DELETE 1`
+* `DELETE 1`
 * `DELETE 15/06/17` <br />
 
-### 3.5. Wipe out history of all or specified tasks: `CLEAR`
+### 3.5. Remove all tasks: `CLEAR`
 
-There are 2 types of clear commands.
+You can use this command to clear all task that is shown in the current list.
 
-#### 3.5.1. Delete all tasks
+Format: `CLEAR`
 
-Format: `CLEAR all`
+### 3.6. Search by entering keywords/dates: `SEARCH`
 
-#### 3.5.2. Delete all previously marked uncomplete/complete tasks
-
-Format: `CLEAR completed` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`CLEAR uncompleted`
-
-### 3.6. Search through all existing task by entering keywords/dates: `SEARCH`
+You can use this command to search through all existing task in ProcrastiNomore.
 
 Format: `SEARCH KEYWORD` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SEARCH DATE`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SEARCH DATE`
 
 > In the event of non-unique KEYWORD, ProcrastiNomore will show a list of tasks
 > with the same KEYWORD
@@ -162,8 +162,7 @@ Examples:
 
 You can use this command to identify tasks that you have accomplised and completed.
 
-Format: `MARK` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UNMARK TASKINDEX` <br>
+Format: `MARK TASKINDEX` <br>
 
 Examples:
 * `MARK 1` <br>
@@ -178,8 +177,7 @@ Tasks identified as completed will no longer be displayed in the uncompleted lis
 You can use this command to identify tasks that you have already previously identified that you have
  accomplished as uncompleted.
 
-Format: `UNMARK` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UNMARK TASKINDEX` <br>
+Format: `UNMARK TASKINDEX` <br>
 
 Examples:
 * `UNMARK 1` <br>
@@ -192,6 +190,13 @@ Examples:
 You can use this command to view all the tasks that you have yet to finish doing.
 
 Format: `LIST`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LIST date/day`
+
+Examples:
+* `LIST today` <br>
+  All uncompleted tasks which contain the today's date will be shown.
+
+Using the list command on its own will show all existing task which are uncompleted.
 
 ### 3.10. To sort through the list of task displayed: `COMPLETED`
 
@@ -199,33 +204,15 @@ You can use this command to view all the tasks that you have completed.
 
 Format: `COMPLETED`
 
-### 3.11. To sort through the list of task displayed: `SORT`
-
-Format: `SORT` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SORT DATE` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SORT TASKNAME`
-
-Using the sort command on its own will sort the task in ascending TASKINDEX order
-
-### 3.12. To mark a task with higher importance: `PRIOR`
-
-Format: `PRIOR TASKNAME` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PRIOR TASKINDEX` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PRIOR DATE`
-
-### 3.13. To Undo your previous commands: `UNDO`
-
-Shortcut: `Ctrl+Z`<br>
+### 3.11. To Undo your previous commands: `UNDO`
 
 1 command will be undone every time this command is called.
 
-### 3.14. To Redo your previous commands: `REDO`
-
-Shortcut: `Ctrl+Y`<br>
+### 3.12. To Redo your previous commands: `REDO`
 
 1 command will be redone every time this command is called.
 
-### 3.15. Saving the data: `SAVE`
+### 3.13. Saving the data: `SAVE`
 
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -240,7 +227,11 @@ Examples:
 * `SAVE data\` <br>
   Changes the save location of the task manager back to the default save location.
 
-### 3.16. Exiting the program : `EXIT`
+### 3.14. Recurring command: `RECUR`
+
+You can use this command to make repeated task with different dates.
+
+### 3.15. Exiting the program : `EXIT`
 
 Exits the program.<br>
 
@@ -254,42 +245,35 @@ Format: `EXIT`
 
 ## 5. Command Summary
 
-* **Help** : `HELP` <br>
+* **View Help Window** : `HELP` <br>
 
-* **Add**  `ADD TASK ON DATE/DAY FROM STARTTIME TO ENDTIME` <br>
-  &nbsp;e.g. `ADD eat food ON 03/03/17 FROM 0830 TO 1030`
+* **Add a new task**  `ADD (taskname) ...` <br>
+  &nbsp;e.g. `ADD eat food ON 03/03/17 0830 TO 1030`
 
-* **Update**  `UPDATE TASKINDEX TASKNAME` <br>
+* **Update an existing task**  `UPDATE TASKINDEX TASKNAME` <br>
   &nbsp;e.g. `UPDATE 1 Email boss`
 
-* **Delete** : `DELETE INDEX` <br>
+* **Delete an existing task** : `DELETE INDEX` <br>
    e.g. `DELETE 3`
 
-* **Clear** : `CLEAR`
+* **Clear all tasks in current list** : `CLEAR`
 
-* **Search** : `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
+* **Search for specified keywords** : `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `SEARCH find more food`
 
-* **Mark** : `MARK INDEX` <br>
+* **Indicate task is completed** : `MARK INDEX` <br>
    e.g. `MARK 3`
 
-* **Unmark** : `UNMARK INDEX` <br>
+* **Indicate task is uncompleted** : `UNMARK INDEX` <br>
    e.g. `UNMARK 3`
 
-* **List** : `LIST` <br>
+* **List all uncompleted task** : `LIST` <br>
 
-* **Completed** : `COMPLETED` <br>
+* **List all completed task** : `COMPLETED` <br>
 
-* **Sort** : `Sort [Sort Criteria]` <br>
-   e.g. `SORT date`
-   e.g. `SORT taskname`
+* **Undo a command** : `UNDO` <br>
 
-* **Prior** : `PRIOR TASKNAME` <br>
-   e.g. `PRIOR Email boss`
+* **Redo a command** : `REDO` <br>
 
-* **Undo** : `Ctrl+Z` <br>
-
-* **Redo** : `Ctrl+Y` <br>
-
-* **Save** : `SAVE [File Location]` <br>
+* **Change the save location** : `SAVE [File Location]` <br>
   e.g.`SAVE C:\Users\<ACCOUNT NAME>\Desktop\`

@@ -88,6 +88,14 @@ public interface Model {
      */
     void updateFilteredTaskListToShowByCompletion(boolean bool);
 
+    // @@author A0142418L
+    /**
+     * Updates the filter of the filtered task list to filter by completed tasks
+     */
+    void updateFilteredTaskListForInitialView();
+
     void unmarkTask(int filteredTaskListIndex) throws DuplicateTaskException;
+
+    int isBlockedOutTime(Task task) throws DuplicateTaskException;
 
 }

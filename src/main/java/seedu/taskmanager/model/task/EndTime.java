@@ -9,10 +9,12 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class EndTime {
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
-    public static final String ENDTIME_VALIDATION_REGEX1 = "\\d+";
-    public static final String ENDTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
-    public static final String ENDTIME_VALIDATION_REGEX3 = "\\d{2}/\\d{2}/\\d{2}";
-    public static final String ENDTIME_VALIDATION_REGEX4 = "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
+    public static final String ENDTIME_VALIDATION_REGEX1 = "([0-1][0-9][0-5][0-9])|(2[0-3][0-5][0-9])";
+    // public static final String ENDTIME_VALIDATION_REGEX2 = "[a-zA-Z]+";
+    // public static final String ENDTIME_VALIDATION_REGEX3 =
+    // "\\d{2}/\\d{2}/\\d{2}";
+    // public static final String ENDTIME_VALIDATION_REGEX4 =
+    // "(\\d{2}/\\d{2}/\\d{2}) (\\d+)";
     public static final String MESSAGE_ENDTIME_CONSTRAINTS = "Start/End time for task should only "
             + "contain a day (e.g. thursday) or a date with the format: DD/MM/YY (e.g. 03/03/17)\n"
             + "May also include time (e.g. 1400) behind date in some instances\n"
@@ -40,9 +42,12 @@ public class EndTime {
      * Returns true if a given string is a valid Task end time.
      */
     public static boolean isValidEndTime(String test) {
-        return test.matches(ENDTIME_VALIDATION_REGEX1) || test.matches(ENDTIME_VALIDATION_REGEX2)
-                || test.matches(ENDTIME_VALIDATION_REGEX3) || test.matches(ENDTIME_VALIDATION_REGEX4)
-                || test.matches(EMPTY_FIELD);
+        return test.matches(ENDTIME_VALIDATION_REGEX1)
+                || /*
+                    * test.matches(ENDTIME_VALIDATION_REGEX2) ||
+                    * test.matches(ENDTIME_VALIDATION_REGEX3) ||
+                    * test.matches(ENDTIME_VALIDATION_REGEX4) ||
+                    */ test.matches(EMPTY_FIELD);
     }
 
     // @@author
@@ -57,6 +62,20 @@ public class EndTime {
                 || (other instanceof EndTime // instanceof handles nulls
                         && this.value.equals(((EndTime) other).value)); // state
         // check
+    }
+
+    public boolean laterThan(StartTime other) {
+        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean laterThan(EndTime other) {
+        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
