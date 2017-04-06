@@ -57,7 +57,7 @@ public class TaskListPanelHandle extends GuiHandle {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " tasks.\n"
-                    + "Actually " + tasks.length + "tasks.");
+                    + "Actually " + tasks.length + " tasks.");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
@@ -92,8 +92,8 @@ public class TaskListPanelHandle extends GuiHandle {
 
         // Return false if any of the activities doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getDescription().description.equals(
-                    tasks[i].getDescription().description)) {
+            if (!tasksInList.get(startPosition + i).getAsText().equals(
+                    tasks[i].getAsText())) {
                 return false;
             }
         }
@@ -101,13 +101,13 @@ public class TaskListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public TaskCardHandle navigateToTask(String name) {
+    public TaskCardHandle navigateToTask(String text) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                                                    .filter(p -> p.getDescription().description.equals(name))
+                                                    .filter(p -> p.getAsText().equals(text))
                                                     .findAny();
         if (!task.isPresent()) {
-            throw new IllegalStateException("Name not found: " + name);
+            throw new IllegalStateException("Name not found: " + text);
         }
 
         return navigateToTask(task.get());

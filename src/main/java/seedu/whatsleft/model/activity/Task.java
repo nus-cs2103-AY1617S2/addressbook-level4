@@ -1,10 +1,17 @@
 package seedu.whatsleft.model.activity;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.whatsleft.commons.util.CollectionUtil;
 import seedu.whatsleft.model.tag.UniqueTagList;
 //@@author A0121668A
+/**
+ * Represents a task(deadline) in WhatsLeft
+ * @author zihanli
+ *
+ */
 public class Task implements ReadOnlyTask {
 
     public static final boolean DEFAULT_TASK_STATUS = false;
@@ -45,7 +52,7 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setDescription(Description description) {
-        assert description != null;
+        assert description != null; //description must be present
         this.description = description;
     }
 
@@ -54,12 +61,14 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
-    public Priority getPriority() {
-        return priority;
+    public void setPriority(Priority priority) {
+        assert priority != null; //priority must be present
+        this.priority = priority;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    @Override
+    public Priority getPriority() {
+        return priority;
     }
 
     public void setByTime(ByTime byTime) {
@@ -81,7 +90,6 @@ public class Task implements ReadOnlyTask {
     }
 
     public void setLocation(Location location) {
-        //can be null
         this.location = location;
     }
 
@@ -102,13 +110,13 @@ public class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public boolean getStatus() {
         return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public boolean hasDeadline() {
@@ -162,9 +170,47 @@ public class Task implements ReadOnlyTask {
         return Objects.hash(description, byDate, byTime, location, tags);
     }
 
+    //@@author A0148038A
     @Override
     public String toString() {
         return getAsText();
     }
 
+    @Override
+    public String getDescriptionToShow() {
+        return getDescription().toString();
+    }
+
+    @Override
+    public String getPriorityToShow() {
+        return "Priority: " + getPriority().toString().toUpperCase();
+    }
+
+    @Override
+    public String getByTimeDateToShow() {
+        if (hasDeadline()) {
+            return "BY " + this.byTime.toString() + " " + this.byDate.toString();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getLocationToShow() {
+        if (getLocation().toString() != null) {
+            return "@" + getLocation().toString();
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<String> getTagsToShow() {
+        return tags
+                .asObservableList()
+                .stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.toList());
+    }
 }

@@ -3,6 +3,8 @@ package seedu.whatsleft.testutil;
 //import java.time.LocalDate;
 //import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.whatsleft.model.activity.ByDate;
 import seedu.whatsleft.model.activity.ByTime;
@@ -125,6 +127,45 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    //@@author A0148038A
+    @Override
+    public String getDescriptionToShow() {
+        return getDescription().toString();
+    }
+
+    @Override
+    public String getPriorityToShow() {
+        return "Priority: " + getPriority().toString().toUpperCase();
+    }
+
+    @Override
+    public String getByTimeDateToShow() {
+        if (hasDeadline()) {
+            return "BY " + this.byTime.toString() + " " + this.byDate.toString();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getLocationToShow() {
+        if (getLocation().toString() != null) {
+            return "@" + getLocation().toString();
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<String> getTagsToShow() {
+        return tags
+                .asObservableList()
+                .stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.toList());
+    }
+    //@@author
     /*
     //@@author
     @Override

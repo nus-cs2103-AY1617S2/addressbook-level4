@@ -62,7 +62,7 @@ public class TypicalTestTasks {
             homework = new TaskBuilder().withDescription("MA2101 HW")
                     .withPriority("high")
                     .withByTime("1100")
-                    .withByDate("270517")
+                    .withByDate("270617")
                     .withLocation("S17")
                     .withTags("homework").build();
             cycling = new TaskBuilder().withDescription("Night Cycling")

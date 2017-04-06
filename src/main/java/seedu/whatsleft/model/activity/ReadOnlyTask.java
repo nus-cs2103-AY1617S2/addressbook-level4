@@ -1,6 +1,7 @@
 package seedu.whatsleft.model.activity;
 
 import java.util.Comparator;
+import java.util.List;
 
 import seedu.whatsleft.model.tag.UniqueTagList;
 
@@ -17,6 +18,11 @@ public interface ReadOnlyTask {
     Location getLocation();
     boolean getStatus();
     boolean hasDeadline();
+    String getDescriptionToShow();
+    String getPriorityToShow();
+    String getByTimeDateToShow();
+    String getLocationToShow();
+    List<String> getTagsToShow();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

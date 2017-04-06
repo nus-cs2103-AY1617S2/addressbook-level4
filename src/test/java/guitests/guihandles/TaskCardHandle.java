@@ -74,12 +74,11 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getDescription().equals(task.getDescription().description)
-                && getPriority().equals(task.getPriority().toString())
-                && getByTimeDate().equals(task.getByTime().toString()
-                        + " " + task.getByDate().toString())
-                && getLocation().equals(task.getLocation().value)
-                && getTags().equals(getTags(task.getTags()));
+        return getDescription().equals(task.getDescriptionToShow())
+                && getPriority().equals(task.getPriorityToShow())
+                && getByTimeDate().equals(task.getByTimeDateToShow())
+                && getLocation().equals(task.getLocationToShow())
+                && getTags().equals(task.getTagsToShow());
     }
 
     @Override
@@ -97,6 +96,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getDescription() + " " + getPriority() + " " + getByTimeDate() + " " + getLocation();
+        return getDescription() + " " + getPriority() + " " + getByTimeDate() + " " + getLocation() + " " + getTags();
     }
 }

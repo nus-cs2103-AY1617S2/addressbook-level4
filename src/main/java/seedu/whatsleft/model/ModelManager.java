@@ -225,20 +225,6 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<ReadOnlyTask>(sortedTasks);
     }
 
-    // @Override
-    // public void updateFilteredListToShowIncomplete() {
-    // filteredTasks.setPredicate(new PredicateExpression(new
-    // StatusQualifier(false))::satisfies);
-    // filteredEvents.setPredicate(null);
-    // }
-
-    // @Override
-    // public void updateFilteredListToShowComplete() {
-    // filteredTasks.setPredicate(new PredicateExpression(new
-    // StatusQualifier(true))::satisfies);
-    // filteredEvents.setPredicate(null);
-    // }
-
     //@@author A0121668A
     @Override
     public void updateFilteredListToShowAll() {
