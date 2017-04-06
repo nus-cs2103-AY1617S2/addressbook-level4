@@ -37,7 +37,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         assert storage != null;
-        File f = new File("filepath");
+        File f = new File(filepath);
 
         if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
                 filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
