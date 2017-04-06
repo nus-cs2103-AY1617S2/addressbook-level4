@@ -1,5 +1,16 @@
 package seedu.taskit.model;
 
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
@@ -20,18 +31,6 @@ import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
-
-import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -255,13 +254,13 @@ public class ModelManager extends ComponentManager implements Model {
 
                 case LIST_TODAY:
                     return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
-                    
+
                 case LIST_FLOATING:
                     return task.isFloating();
-                    
+
                 case LIST_EVENT:
                     return task.isEvent();
-                    
+
                 case LIST_DEADLINE:
                     return task.isDeadline();
 
@@ -275,7 +274,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "parameter=" + String.join(", ", parameter);
         }
 
-    }
+    }//@@author
 
 
     //@@author A0141011J

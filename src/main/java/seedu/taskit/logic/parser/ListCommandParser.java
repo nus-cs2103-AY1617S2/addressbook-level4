@@ -47,5 +47,4 @@ public class ListCommandParser {
     private boolean isValidParameter(String parameter) {
         return PARAMETERS.contains(parameter);
     }
-
 }
