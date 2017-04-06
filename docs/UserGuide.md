@@ -201,9 +201,13 @@ There is no need to save manually.
   e.g. `add Pick up laundry t/chores`
 
 * **Clear** : `clear`
+  e.g. 'clear'
+  
+* **Change** : `change FILEPATH` <br>
+  e.g. 'change data/filepath.xml'
 
 * **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+  e.g. `delete 3`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find Pick Do`
@@ -215,7 +219,7 @@ There is no need to save manually.
   e.g. `show done`
 
 * **Help** : `help` <br>
-  e.g.
+  e.g. 'help'
 
 * **Select** : `select INDEX` <br>
   e.g.`select 2`
