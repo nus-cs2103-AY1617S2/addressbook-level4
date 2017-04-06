@@ -50,8 +50,9 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     /*
      * EP: invalid task index where index was not entered and is therefore missing,
-     * should not any of the task's
-     * current categories and will not add category "Done".
+     * should not any of the non-recurring task's
+     * current categories and will not add category "Done". Or,
+     * update the dates of the recurring tasks.
      *
      * Should show error message that command entered was in the wrong format
      * and an index should be entered.
@@ -154,6 +155,12 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
     //---------------- Tests for successfully marking done multiple tasks-----------------------
 
+    /*
+     * EP: Check if successfully marked multiple tasks done,
+     * should should remove all task's current categories and add category "Done" in their place.
+     * Recurring tasks' dates will be updated
+     * Should return true.
+     */
     @Test
     public void multiple_markTaskDone_Long_Command_success() throws Exception {
         int[] taskBossIndex = {2, 4};
@@ -207,7 +214,6 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     private void assertMarkDoneSuccess(boolean runFind, boolean isShort, int filteredTaskListIndex, int taskBossIndex,
             TestTask markedDoneTask) {
 
-        //@@author A0144904H
         if (isShort) {
             commandBox.runCommand("m " + filteredTaskListIndex);
         } else {

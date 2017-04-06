@@ -15,6 +15,7 @@ import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
 import seedu.taskboss.commons.util.StringUtil;
+import seedu.taskboss.logic.commands.TerminateCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList;
@@ -38,7 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final Stack<ReadOnlyTaskBoss> taskbossHistory;
     private final Stack<ReadOnlyTaskBoss> taskbossUndoHistory;
+    private final Stack<String> undoInputList;
     private SortBy currentSortType;
+    private String undoInput = null;
 
     /**
      * Initializes a ModelManager with the given TaskBoss and userPrefs.
@@ -57,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBoss.getTaskList());
         taskbossHistory = new Stack<ReadOnlyTaskBoss>();
         taskbossUndoHistory = new Stack<ReadOnlyTaskBoss>();
+        undoInputList = new Stack<String>();
     }
 
     public ModelManager() throws IllegalValueException {
@@ -87,11 +91,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public String undoTaskbossInput() throws IllegalValueException {
+        undoInput = undoInputList.pop();
+
+        return undoInput;
+    }
+
+    @Override
     public void redoTaskboss() throws EmptyStackException, IllegalValueException {
         TaskBoss previousTaskList = new TaskBoss(this.taskBoss);
         taskBoss.resetData(taskbossUndoHistory.pop());
         taskbossHistory.push(previousTaskList);
-
+        undoInputList.push("redo");
         indicateTaskBossChanged();
     }
 
@@ -116,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask target: targets) {
             taskBoss.removeTask(target);
         }
+        undoInputList.push("delete");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -127,6 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.addTask(task);
         taskBoss.sortTasks(currentSortType);
         updateFilteredListToShowAll();
+        undoInputList.push("add");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -139,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskBossIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBoss.updateTask(taskBossIndex, editedTask);
         taskBoss.sortTasks(currentSortType);
-
+        undoInputList.push("edit");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
@@ -178,6 +191,32 @@ public class ModelManager extends ComponentManager implements Model {
             }
             index++;
         }
+        undoInputList.push("mark");
+        indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
+    }
+
+  //@@author A0144904H
+    @Override
+    public void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
+                                                                       throws IllegalValueException,
+                                                                       CommandException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (task.isRecurring()) {
+                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
+                        task.getStartDateTime(), task.getEndDateTime(),
+                        task.getInformation(), task.getRecurrence(),
+                        new UniqueCategoryList(CATEGORY_DONE));
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newTask);
+            } else {
+                throw new CommandException(TerminateCommand.ERROR_TASK_NOT_RECURRING);
+            }
+            index++;
+        }
 
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
@@ -192,6 +231,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskBoss.renameCategory(newCategory, oldCategory);
         removeCategoryFromTaskboss(oldCategory);
         taskbossUndoHistory.clear();
+        undoInputList.push("rename");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }

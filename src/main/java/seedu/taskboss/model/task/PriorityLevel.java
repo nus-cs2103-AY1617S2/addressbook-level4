@@ -22,8 +22,8 @@ public class PriorityLevel {
     public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|yEs"
             + "|yeS|nO|YEs|yES|YeS)$";
 
-    public final String value;
-    public final String input;
+    public String value;
+    public String input;
 
     /**
      * Validates given priority level.
@@ -33,22 +33,17 @@ public class PriorityLevel {
     public PriorityLevel(String priorityLevel) throws IllegalValueException {
         assert priorityLevel != null;
 
+        this.value = PRIORITY_NO_VALUE;
+        this.input = STRING_NO;
         String trimmedPriorityLevel = priorityLevel.trim();
 
-        if (EMPTY_STRING.equals(priorityLevel)) {
-            this.value = PRIORITY_NO_VALUE;
-            this.input = STRING_NO;
-        } else {
-            if (!isValidPriorityLevel(trimmedPriorityLevel)) {
-                throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
-            }
-            if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
-                this.value = PRIORITY_HIGH_VALUE;
-                this.input = STRING_YES;
-            } else {
-                this.value = PRIORITY_NO_VALUE;
-                this.input = STRING_NO;
-            }
+        if (!isValidPriorityLevel(trimmedPriorityLevel)) {
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        }
+
+        if (trimmedPriorityLevel.contains("y") || trimmedPriorityLevel.contains("Y")) {
+            this.value = PRIORITY_HIGH_VALUE;
+            this.input = STRING_YES;
         }
     }
 
@@ -69,7 +64,7 @@ public class PriorityLevel {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PriorityLevel // instanceof handles nulls
-                && this.value.equals(((PriorityLevel) other).value)); // state check
+                        && this.value.equals(((PriorityLevel) other).value)); // state check
     }
 
     @Override

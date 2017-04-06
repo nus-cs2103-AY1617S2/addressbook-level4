@@ -61,6 +61,5 @@ public class UndoCommandTest extends TaskBossGuiTest {
             commandBox.runCommand("undo");
         }
         assertTrue(taskListPanel.isListMatching(expectedList));
-        assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
     }
 }
