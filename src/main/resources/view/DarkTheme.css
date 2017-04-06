@@ -1,31 +1,47 @@
+/* @@author A0163673Y */
+
+* {
+    light-grey: #232328;
+    dark-grey: #1D1D1F;
+    dark-border: #121212;
+    light-text: #CACED0;
+    split-pane-background: light-grey;
+    menu-bar-background: light-grey;
+    menu-bar-text: white;
+    list-cell-background: dark-grey;
+    list-cell-text: light-text;
+    card-pane-background: dark-grey;
+    card-pane-border: dark-grey;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
 }
 
 .tab-pane {
@@ -64,8 +80,8 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -76,34 +92,37 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d, 10%);
+    -fx-border-color: transparent split-pane-background transparent split-pane-background;
+    -fx-background-color: transparent, split-pane-background;
+    -fx-focus-color: transparent;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: split-pane-background;
+    -fx-focus-color: transparent;
 }
 
 .list-cell {
+    -fx-background-color: list-cell-background;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
 
 .list-cell .label {
-    -fx-text-fill: #010504;
+    -fx-text-fill: list-cell-text;
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 10pt;
+    -fx-text-fill: list-cell-text;
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 10pt;
+    -fx-text-fill: list-cell-text;
 }
 
 .anchor-pane {
@@ -154,21 +173,21 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(menu-bar-background, 20%);
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: menu-bar-text;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(menu-bar-background, 0%);
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
+    -fx-text-fill: menu-bar-text;
     -fx-opacity: 0.9;
 }
 
@@ -187,8 +206,8 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
@@ -234,7 +253,7 @@
 }
 
 .dialog-pane > *.label.content {
-    -fx-font-size: 14px;
+    -fx-font-size: 10pt;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
@@ -244,7 +263,7 @@
 }
 
 .dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
+    -fx-font-size: 10pt;
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
@@ -273,13 +292,13 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
+    -fx-background-color: card-pane-background;
+    -fx-border-color: card-pane-border;
     -fx-border-width: 1 1 1 1;
 }
 
 #commandTypeLabel {
-    -fx-font-size: 11px;
+    -fx-font-size: 10pt;
     -fx-text-fill: #F70D1A;
 }
 
@@ -293,10 +312,58 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
+    -fx-text-fill: light-text;
     -fx-background-color: #383838;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 10pt;
+}
+
+/*
+ * Custom styling starts here
+ */
+
+.anchor-pane-with-border-dark {
+     -fx-background-color: light-grey;
+     -fx-border-color: light-grey;
+}
+
+.command-box-dark {
+    -fx-background-color: dark-grey;
+    -fx-text-fill: light-text;
+    -fx-prompt-text-fill: light-text;
+    -fx-border-color: dark-border;
+    -fx-font-size: 10pt;
+}
+
+.result-display-dark {
+	-fx-text-fill: light-text;
+	-fx-background-color: dark-grey;
+	-fx-border-color: dark-border;
+	-fx-font-family: "Courier New";
+	-fx-font-size: 10pt;
+}
+
+.result-display-dark .content {
+    -fx-background-color: dark-grey;
+    -fx-background-radius: 0;
+}
+
+.anchor-pane-dark {
+     -fx-background-color: light-grey;
+}
+
+.grid-pane-dark {
+    -fx-background-color: light-grey;
+    -fx-border-width: 0px;
+}
+
+.list-view {
+    -fx-background-color: dark-grey;
+    -fx-focus-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-color: dark-border;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
 }

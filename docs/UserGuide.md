@@ -1,4 +1,4 @@
-# AddressBook Level 4 - User Guide
+# DoTomorrow - User Guide
 
 By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -16,18 +16,18 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `doTomorrow.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your TODO list.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`list`** : lists all TODOs
+   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`complete`** `2` : marks the 2nd task as completed
+   * **`delete`** `3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -43,144 +43,233 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ### 2.1. Viewing help : `help`
 
+Shows information about how to use DoTomorrow.<br>
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a person: `add`
+### 2.2. Adding a task : `add`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
+Adds a task to the list<br>
+Format: `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]`
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
+* `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
+* `add CS2013 assignment due/23/03/2017`
 
-### 2.3. Listing all persons : `list`
+### 2.3. Listing: `list`
 
-Shows a list of all persons in the address book.<br>
+Shows a list of all tasks.<br>
 Format: `list`
 
-### 2.4. Editing a person : `edit`
+### 2.3.1. Listing completed tasks: `list complete`
 
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Shows a list of all completed tasks.<br>
+Format: `list complete`
 
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+### 2.3.2. Listing incomplete tasks: `list incomplete`
 
-Examples:
+Shows a list of all incomplete tasks.<br>
+Format: `list incomplete`
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+### 2.3.3. Sort current list : `list by`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Sort the current task list in a particular order.<br>
+Format: `list by SORTING_CRITERIA`<br>
+`SORTING_CRITERIA` may be:
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+* `added`
+* `due`
+* `starts`
+* `ends`
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `list by added`
+* `list by due`
 
-### 2.6. Deleting a person : `delete`
+### 2.4. Editing a task : `edit`
 
-Deletes the specified person from the address book. Irreversible.<br>
+Edits an existing task in the list.<br>
+Format: `edit INDEX [NEW_TASK_DESCRIPTION] [PARAMETER1/VALUE1] [PARAMETER2/VALUE2] ...` <br>
+
+> * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
+> * New description must follow index if necessary
+> * New value should follow the parameter and separated by a '/'
+> * Existing value will be updated to the input value.
+> * Existing value removed if no value follow parameter
+> * Can update multiple parameters in one command (see examples below)
+> * New values must be different from existing value
+> * At least one property (description, due date, start date, etc.) must be specified
+> * If a task does not have a start and end time, both start and end times must be edited at the same time
+
+Examples:
+
+* `edit 1 due/20/03/2017`<br>
+  Edits the due date of the 1st item to 20/03/2017.
+
+* `edit 2 buy milk t/groceries`<br>
+  Edits the description of the 2nd to read “buy milk” and change tags to "groceries".
+
+* `edit 1 t/hipri starts/01/01/2016 1230 ends/01/01/2017 1230` <br>
+Edits the tag, duration start, and duration end for the 1st task.
+
+* `edit 1 t/` <br>
+  Removes all tags from the 1st task
+
+### 2.5. Completing a task : `complete`
+
+Marks a task as completed.<br>
+Format: `complete INDEX` <br>
+
+> * Completes the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
+> * Marks the task as complete.
+
+Examples:
+
+* `complete 1`<br>
+  Marks the 1st task as complete.
+
+### 2.6. Uncompleting a task : `uncomplete`
+
+Marks a task as incomplete.<br>
+Format: `uncomplete INDEX` <br>
+
+> * Uncompletes the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
+> * Marks the task as incomplete.
+
+Examples:
+
+* `uncomplete 1`<br>
+  Marks the 1st task as incomplete.
+
+### 2.7. Deleting a task : `delete`
+
+Deletes the specified task. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
+> Deletes the task at the specified `INDEX`. <br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+* `delete 2`<br>
+  Deletes the 2nd task.
 
-### 2.7. Select a person : `select`
+### 2.8. Delete all tasks : `clear`
 
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
-
-### 2.8. Clearing all entries : `clear`
-
-Clears all entries from the address book.<br>
+Deletes all tasks.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.9. Finding all tasks containing any keyword in their description: `find`
+
+Finds tasks whose descriptions contain any of the given keywords.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+> * The order of the keywords does not matter. e.g. `buy milk` will match `milk buy`
+> * The description and tags will be searched.
+> * Partial words will be matched e.g. `day` will match `monday`
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `milk` will match `buy milk`
+
+Examples:
+
+* `find milk`<br>
+  Returns `Buy milk` but not `Milk`
+* `find home school hipri`<br>
+  Returns Any task having description or tag `home`, `school`, or `hipri`
+
+### 2.10. Undo : `undo`
+
+Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
+Format: `undo`
+
+### 2.11. Redo : `redo`
+
+Re-executes the previous undo action. This command will return the program to the state it was in before the previous undo was executed<br>
+Format: `redo`
+
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.13. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+DoTomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.14. Changing storage file path: `setstorage`
+
+Change storage path to user specifed path<br>
+Format: `setstorage PATH`
+
+Example:
+
+* `setstorage /Users/Jim/Documents` will store the to-do list file to `/Users/Jim/Documents`
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous DoTomorrow folder.
+
+**Q**: I found a bug in the program, how do I report it?<br>
+**A**: Please create a new issue via this [link](https://github.com/CS2103JAN2017-T11-B4/main/issues) with a detailed title and description. Please also include [BUG] in the beginning of the title.
+
+**Q**: I am a developer. How can I contribute to the project?<br>
+**A**: Please feel free to open a pull request with implementation of new features. Our only request is that you review the [developer guide](https://github.com/CS2103JAN2017-T11-B4/main/blob/developer-guide/docs/DeveloperGuide.md) and abide to all the requirements.
+
+**Q**: Is it possible for me to change the appearance of the application?<br>
+**A**: At the moment, there are no ways to edit the theme of the application.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* **Help**: `help` <br>
+  e.g. `help`
 
-* **Clear** : `clear`
+* **Add**  `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]` <br>
+  e.g. `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
 
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
+* **List All Tasks**: `list` <br>
+  e.g. `list`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
+* **List Completed Tasks**: `list complete` <br>
+  e.g. `list complete`
+
+* **List Incomplete Tasks**: `list incomplete` <br>
+  e.g. `list incomplete`
+
+* **List By (i.e. Sorting)**: `list by SORTING_CRITERIA` <br>
+  e.g. `sort by due`
+
+* **Edit**  `edit INDEX PARAMETER/NEW_VALUE` <br>
+  e.g. `edit 2 due/23/03/2017 1200`
+
+* **Complete** `complete INDEX` <br>
+  e.g. `complete 2`
+
+* **Uncomplete** `uncomplete INDEX` <br>
+  e.g. `uncomplete 2`
+
+* **Delete** `delete INDEX` <br>
+  e.g. `delete 3`
+
+* **Delete all** `clear` <br>
+  e.g. `clear`
+
+* **Find**: `find KEYWORD [MORE_KEYWORDS]...` <br>
   e.g. `find James Jake`
 
-* **List** : `list` <br>
-  e.g.
+* **Undo**: `undo` <br>
+  e.g. `undo`
 
-* **Help** : `help` <br>
-  e.g.
+* **Redo**: `redo` <br>
+  e.g. `redo`
 
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
+* **Set storage path**: `setstorage PATH` <br>
+  e.g. `setstorage /Users/Jim/Documents`
 
-
+* **Exit**: `exit` <br>
+  e.g. `exit`
