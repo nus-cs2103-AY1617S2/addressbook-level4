@@ -13,7 +13,7 @@ plugins {
 
 // Specifies the entry point of the application
 //Comment this out to make jar
-//mainClassName = 'seedu.address.MainApp' 
+//mainClassName = 'seedu.address.MainApp'
 //comment this out to run program in Eclipse
 mainClassName = 'seedu.task.MainApp'
 
