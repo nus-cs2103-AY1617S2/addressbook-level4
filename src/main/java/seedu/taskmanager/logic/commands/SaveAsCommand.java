@@ -12,8 +12,8 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 
 // @@author A0114269E
 /**
- * Save the current taskmanager to an XML file at user-specified path to allow cloud service sync.
- * Overwrite the given file path if a file with same name exists. Old XML file is not deleted.
+ * Saves the current Task Manager to an XML file at user-specified path.
+ * Overwrites the given file path if a file with same name exists. Old XML file is not deleted.
  * Path matching is case sensitive.
  */
 public class SaveAsCommand extends Command {

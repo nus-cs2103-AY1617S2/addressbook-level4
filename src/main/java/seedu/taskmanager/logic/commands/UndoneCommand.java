@@ -17,7 +17,7 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 
 // @@author A0114269E
 /**
- * Mark a task as Incomplete in the Task Manager
+ * Marks a task as Incomplete in the Task Manager
  */
 public class UndoneCommand extends Command {
     public static final String COMMAND_WORD = "undone";

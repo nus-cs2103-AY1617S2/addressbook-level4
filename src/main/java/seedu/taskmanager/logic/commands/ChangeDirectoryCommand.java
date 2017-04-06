@@ -12,7 +12,7 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 
 // @@author A0114269E
 /**
- * Change the directory of taskmanager.xml file to user-specified path to allow cloud service sync.
+ * Loads Task Manager from user-specified path XML file and changes the directory to that file path.
  * Path matching is case sensitive.
  */
 public class ChangeDirectoryCommand extends Command {

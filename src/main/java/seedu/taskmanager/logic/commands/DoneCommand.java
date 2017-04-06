@@ -17,7 +17,7 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 
 // @@author A0114269E
 /**
- * Mark a task as done in the Task Manager
+ * Marks a task as done in the Task Manager
  */
 public class DoneCommand extends Command {
 
