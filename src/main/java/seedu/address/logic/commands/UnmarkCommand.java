@@ -12,7 +12,7 @@ import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 
-//@@author A0163848R
+//@@author A0163848R-reused
 /**
  * Command that marks task as incomplete
  */

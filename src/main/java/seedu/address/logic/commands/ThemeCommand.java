@@ -4,7 +4,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowThemeRequestEvent;
 
-//@@author A0163848R
+//@@author A0163848R-reused
 /**
  * Format full help instructions for every command for display.
  */
