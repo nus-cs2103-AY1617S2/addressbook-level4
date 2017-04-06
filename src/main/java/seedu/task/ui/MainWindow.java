@@ -255,6 +255,7 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    //@@author A0142939W
     @FXML
     public void handleHelpFormat() {
         HelpFormatWindow helpFormatWindow = new HelpFormatWindow();
@@ -291,7 +292,6 @@ public class MainWindow extends UiPart<Region> {
         commandBox.type("load ");
     }
 
-    // @@author A0142939W
     @FXML
     public void handleScrollDown() {
         taskListPanel.scrollDown(scroll);
@@ -315,17 +315,11 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    //@@author A0142939W
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
-    public void setFocus() {
-        commandBox.requestFocus();
-    }
-
-    // void loadTaskPage(ReadOnlyTask task) {
-    // browserPanel.loadTaskPage(task);
-    // }
+    //@@author
 
     void releaseResources() {
         browserPanel.freeResources();

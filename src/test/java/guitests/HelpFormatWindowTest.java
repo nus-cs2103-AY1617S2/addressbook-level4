@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.HelpFormatWindowHandle;
-
+//@@author A0142939W
 public class HelpFormatWindowTest extends TaskManagerGuiTest {
 
     @Test

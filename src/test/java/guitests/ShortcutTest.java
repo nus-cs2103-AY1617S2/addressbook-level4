@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 import seedu.task.ui.Scroll;
-
+//@@author A0142939W
 public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
@@ -20,6 +20,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickUndoTest() {
+    	//use accelerator
         resultDisplay.clickOnTextArea();
         commandBox.clear();
         mainMenu.useCtrlAltZ();
@@ -28,6 +29,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickDoneTest() {
+    	//use accelerator
         taskListPanel.clickOnListView();
         commandBox.clear();
         mainMenu.useCtrlAltD();
@@ -36,6 +38,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickEditTest() {
+    	//use accelerator
         browserPanel.clickOnWebView();
         commandBox.clear();
         mainMenu.useCtrlAltE();
@@ -44,6 +47,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickSelectTest() {
+    	//use accelerator
         commandBox.clickOnTextField();
         mainMenu.useCtrlAltS();
         assertCommandBoxInput("select ");
@@ -51,6 +55,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickSaveTest() {
+    	//use accelerator
         resultDisplay.clickOnTextArea();
         commandBox.clear();
         mainMenu.useCtrlS();
@@ -59,6 +64,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickLoadTest() {
+    	//use accelerator
         taskListPanel.clickOnListView();
         commandBox.clear();
         mainMenu.useCtrlAltL();
@@ -67,35 +73,29 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickScrollTest() {
-        //populate the current task list to test for scroll
+        //populate the current task list to test for scroll in case
+    	//list view is too short
         //add one task
-        TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.handle;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add another task
         taskToAdd = td.identify;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add task without tag
         taskToAdd = td.jump;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add task without remark
         taskToAdd = td.kick;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add task without location
         taskToAdd = td.look;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add task without end date
         taskToAdd = td.mark;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        addThroughCommand(taskToAdd);
         //add task without start date
         taskToAdd = td.neglect;
-        assertAddSuccess(taskToAdd, currentList);
+        addThroughCommand(taskToAdd);
 
         //scroll down
         mainMenu.useShiftDown();
@@ -107,25 +107,13 @@ public class ShortcutTest extends TaskManagerGuiTest {
     }
 
     private void assertCommandBoxInput(String value) {
-        /*
-        assertFalse(commandBox.getCommandInput().equals(value));
-        System.out.println(commandBox.getCommandInput().equals(value));
-        */
         assertTrue(commandBox.getCommandInput() != null);
         assertTrue(commandBox.getCommandInput().contains(value));
         commandBox.clear();
     }
 
-    private void assertCommandBoxInputNot(String value) {
-        /*
-        assertFalse(commandBox.getCommandInput().equals(value));
-        System.out.println(commandBox.getCommandInput().equals(value));
-        */
-        assertTrue(commandBox.getCommandInput() != null);
-        assertTrue(!commandBox.getCommandInput().contains(value));
-        commandBox.clear();
-    }
-
+    //Compares the value of the initial placement of scrollbar
+    // with the new one after scrolling
     private void assertScrollDownSuccess() {
         scroll = new Scroll();
         double currentValue = scroll.getScrollValue(taskListPanel.getListView());
@@ -134,6 +122,8 @@ public class ShortcutTest extends TaskManagerGuiTest {
         assertTrue(newValue > currentValue);
     }
 
+    //Compares the value of the scroll bar before and after
+    // scrolling
     private void assertScrollUpSuccess() {
         scroll = new Scroll();
         double currentValue = scroll.getScrollValue(taskListPanel.getListView());
@@ -142,7 +132,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
         assertTrue(newValue < currentValue);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+    private void addThroughCommand(TestTask taskToAdd) {
         commandBox.runCommand(taskToAdd.getAddCommand());
     }
 
