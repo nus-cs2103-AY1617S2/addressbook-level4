@@ -59,25 +59,8 @@ public class FindCommandParser implements CommandParser {
             Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
             Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
 
-            if (isFindBefore(optionalStartDate)) {
-                optionalStartDate = parseFindBefore(optionalStartDate);
-                searchBeforeStartDate = true;
-            }
-
-            if (isFindBefore(optionalDueDate)) {
-                optionalDueDate = parseFindBefore(optionalDueDate);
-                searchBeforeDueDate = true;
-            }
-
-            if (isFindAfter(optionalStartDate)) {
-                optionalStartDate = parseFindAfter(optionalStartDate);
-                searchAfterStartDate = true;
-            }
-
-            if (isFindAfter(optionalDueDate)) {
-                optionalDueDate = parseFindAfter(optionalDueDate);
-                searchAfterDueDate = true;
-            }
+            setBooleanParameters(optionalStartDate, optionalDueDate, searchBeforeStartDate, searchBeforeDueDate,
+                    searchAfterStartDate, searchAfterDueDate);
 
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
@@ -172,6 +155,34 @@ public class FindCommandParser implements CommandParser {
         String byPrefix = taskDateString.substring(0, prefixLength);
         return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
 
+    }
+
+    /*
+     * Check whether user is finding before or after the taskdate
+     */
+    private void setBooleanParameters(Optional<String> optionalStartDate, Optional<String> optionalDueDate,
+            boolean searchBeforeStartDate, boolean searchBeforeDueDate, boolean searchAfterStartDate,
+            boolean searchAfterDueDate) {
+
+        if (isFindBefore(optionalStartDate)) {
+            optionalStartDate = parseFindBefore(optionalStartDate);
+            searchBeforeStartDate = true;
+        }
+
+        if (isFindBefore(optionalDueDate)) {
+            optionalDueDate = parseFindBefore(optionalDueDate);
+            searchBeforeDueDate = true;
+        }
+
+        if (isFindAfter(optionalStartDate)) {
+            optionalStartDate = parseFindAfter(optionalStartDate);
+            searchAfterStartDate = true;
+        }
+
+        if (isFindAfter(optionalDueDate)) {
+            optionalDueDate = parseFindAfter(optionalDueDate);
+            searchAfterDueDate = true;
+        }
     }
 
     /*
