@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
+        model.updateFilteredListToShowUndone();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
