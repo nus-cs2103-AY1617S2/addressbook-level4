@@ -217,6 +217,7 @@ public class ModelManager extends ComponentManager implements Model {
             index++;
         }
 
+        undoInputList.push("terminate");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
     }
