@@ -22,13 +22,17 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/fishwind.jpg" width="150"><br>
 
 - Components in charge of: [Storage]
-- Aspects/tools in charge of: Logic, Natty, CommandParser
+- Aspects/tools in charge of: CommandParser, Documentation, Natty
 * Features implemented:
-	* [End and start Task date]
-	* [Save, import and export]
+	* [Natty DateTime parsing]
+	* [Save, import & export commands]
+	* [Find command]
 	* [Recurring task]
 * Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
-* Other major contributions:
+* Other major contributions: 
+	* Did initial refactoring from AddressBook to OneTwoDo
+	* Did initial junit tests refactoring to pass tests for OneTwoDo
+	* Improved user guide based on feedback
 
 -----
 

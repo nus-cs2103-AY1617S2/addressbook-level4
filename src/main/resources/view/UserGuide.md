@@ -31,31 +31,19 @@ Before using OneTwoDo, please ensure that you have installed Java version 1.8.0_
 Start your OneTwoDo journey by downloading the latest OneTwoDo.jar from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.
 
 You can start OneTwoDo by simply double-clicking the icon!
-   > <img src="images/UG_img.onetwodo_icon" width="600">
+   > <img src="images/UG_img.onetwodo_icon.png" width="600">
 
 Figure 1: OneTwoDo User Interface
 
-Congratulations, you are all set up! 
-
-Try some of these commands to get started!
-
-
-   * **`help`**
-   		- Shows the help window.
-   		
-
-
-Figure 2: Help Window
-
-add Scuba Diving session s/tomorrow 1pm e/tomorrow 3pm 
-
-    
+Congratulations, you are all set up!    
 You may refer to the [Features](#features) section for more details on all the possible commands.
 
 
 ## Features
 
-<img src="images/Ui-annotated.png" width="600">
+<img src="images/UG_img.MainWindow_blank.png" width="600">
+
+Figure 2: OneTwoDo main window
 
 After you have started OneTwoDo, you will see the following:
 
@@ -127,6 +115,7 @@ Let us assume you are a busy professional. You want to start using OneTwoDo to o
 
     >>  help
 
+<img src="images/UG_img.cheetsheet_ss.png" width="600">
 
 Figure 7: Command Summary Window
 
@@ -148,6 +137,7 @@ Format: `add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIOR
 
     >>  add Reply Emails 
 
+<img src="images/UG_img.addReplyEmail.png" width="600">
 Figure 8: Add a to-do
 
 
@@ -161,6 +151,7 @@ Oh noes! your boss just now emailed you that there will be an important lunch me
 
     >>  add Lunch Meeting  s/tmr 1pm  e/tmr 3pm  r/weekly  d/bring laptop  p/high  t/work
 
+<img src="images/UG_img.addLunchMeeting.png" width="600">
 
 Figure 9: Add event task with detailed info
 
@@ -234,9 +225,11 @@ Format: `edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCR
 
 The command above will edit your task at the specified PREFIX_INDEX. Our `edit` command allows you to edit any field of your task easily.
 
-As for editing tags, all existing tags of the task will be replaced. (i.e adding of tags is not cumulative). You can remove all the taskâ€™s tags by typing t/ without specifying any tags after it.
+As for editing tags, all existing tags of the task will be replaced. (i.e adding of tags is not cumulative). You can remove all the task’s tags by typing t/ without specifying any tags after it.
 
     >>  edit  e1  t/
+
+<img src="images/UG_img.tagRemove.png" width="600">
 
 Figure 10: Before and after tags removal
 
@@ -252,21 +245,23 @@ Format: `list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER] [p/PRIORITY] [
     >>  list  s/today  e/next week
 
 
-Figure 11: Filter task by date
-
 The above command will filter out all the things you need to do from today till next week. Pretty convinent right? However, you might also want compare which tasks are more crucial and hence needs to be completed earlier. This is where the sorting comes in handy.
 
     >>  list  o/priority
 
-Tasks which occur before tomorrow are sorted by their priority (from highest to lowest) and listed. This way, you can do the most urgent task for tomorrow first, followed by the rest.
+<img src="images/UG_img.prioritySort.png" width="600">
 
-Figure 12: Sort task by priority
+Figure 11: Sort by priority
 
-Also, sometimes you may be so busy that you have forgotten if a particular task has already been done.
+
+Also, sometimes you may be so busy that you have forgotten if you have replied an important email.
    
     >>  list  done
 
-All your completed tasks are listed! The feeling of satisfaction after seeing all the tasks you have successfully accomplished is indescribable!
+
+All your completed tasks are listed! The feeling of satisfaction after seeing all the tasks you have successfully accomplished is indescribable! But it looks like you haven't reply the email.
+
+<img src="images/UG_img.doneFilter.png" width="600">
 
 Figure 13: Filter all completed tasks
 
@@ -278,53 +273,33 @@ Figure 13: Filter all completed tasks
 ---
 ### Finding all tasks containing a keyword in their name or tag: `find`
 
-Canâ€™t remember if you added that task as â€œHomeworkâ€� or â€œAssignmentâ€� or â€œhmwrkâ€�? Simply use the find command and any tasks with matching keywords will be listed out for you.
+You boss asks you to buy him a new bag for his birthday. Can't remember you added that task as "birthday", "shopping" or "assignment"? Simply use the find command and any tasks with matching keywords will be listed out for you.
 
 
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 
 
-     >>  find Project Tutorial Assignment
+     >>  find birthday shopping assignment
 
->   Shows any task having names, tags, or description which contain any of the keywords: **Project**, **Tutorial** and **Assignment**.
+>   Shows any task having names, tags, or description which contain any of the keywords: **birthday**, **shopping** and **assignment**.
+
+
+<img src="images/UG_img.findCommand.png" width="600">
 
 Figure 11: find task
 
 
 ---
-### Finding a task : `find`
-
-Looking for a particular task? Be it the task name, task description or task tag, this command works like the google search engine. 
-
-Format: `find KEYWORD [MORE_KEYWORDS]...`
-
-    >>  find reply email
-
-
----
 ### Selecting a task : `select`
 
-Want to view a task in detailed? Use this command. It will popup a window for a task at PREFIX_INDEX.
+Want to view a task's description that you have written? Use this command. It will popup a window for a task at PREFIX_INDEX.
 
     >>  select e2
 
 ---
-### Deleting a task : `delete`
-
-Donâ€™t need to do a task anymore? Just type `delete` and the task will be removed from OneTwoDo. This command removes the task at PREFIX_INDEX.
-
-    >>  delete e2
-
----
-### Deleting all tasks: `clear`
-Want to start afresh? No problem! Simply type `clear` and start your OneTwoDo journey again on a new note!
-
-    >>  clear
-
----
 ### Marking a task as completed: `done`
-Completed next weekâ€™s assignment today? Give yourself a pat on the back and type `done` to mark the task as completed. This command marks a task at PREFIX_INDEX as completed. 
+Completed next week’s assignment today? Give yourself a pat on the back and type `done` to mark the task as completed. This command marks a task at PREFIX_INDEX as completed. 
 
     >>  done t1
 
@@ -336,7 +311,8 @@ Realised that a completed task still has something to do? Unmark that task as un
 
 ---
 ### Undoing actions: `undo`
-OOPS! Did you make a mistake in your input? Keep calm and type `undo`. 
+OOPS! Did you accidently deleted a high priority task? Keep calm and type `undo`, and that extremely important task will magically reappear on your OneTwoDo! 
+
 
     >>  undo
 
@@ -372,6 +348,20 @@ Want to use another storage? Input `import` and filepath. Remember to put .xml a
 
     >>  import storageName.xml
 
+---
+### Deleting a task : `delete`
+
+Your boss last minute decided to give you an overtime. Now you cannot go home for your birthday celebration. Type `delete` to remove your celebration plan from OneTwoDo. This command removes the task at PREFIX_INDEX.
+
+    >>  delete e2
+
+---
+### Deleting all tasks: `clear`
+You have finally quit your job, but there are so many added task that needs to be deleted. No problem! Simply type `clear` and start your OneTwoDo journey again on a new note!
+
+    >>  clear
+
+
 ### Exiting the program : `exit`
 
 Are you sure you have added all your tasks to OneTwoDo already? Simply type `exit` to close the application.
@@ -392,8 +382,6 @@ Are you sure you have added all your tasks to OneTwoDo already? Simply type `exi
 |  List         |  `list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER] [p/PRIORITY] [t/TAG]...` | List specified tasks in specified order| Ctrl+Shift+D,  Ctrl+Shift+U, Ctrl+Shift+A (list *Done*, *Undone* and *All* respecively)
 |  Find         |  `find KEYWORD [MORE_KEYWORDS]...` | Find tasks with keywords|
 |  Select         |  `select PREFIX_INDEX` | Select a task to view|
-|  Delete       |  `delete PREFIX_INDEX` | Delete specified task |
-|  Clear        |  `clear` | Clear all data in OneTwoDo|
 |  Done         |  `done PREFIX_INDEX` | Archive the specified task|
 |  Undone       |  `undone PREFIX_INDEX` | Unarchive the specified task|
 |  Undo         |  `undo`  | Undo previous action| Ctrl+U
@@ -401,6 +389,8 @@ Are you sure you have added all your tasks to OneTwoDo already? Simply type `exi
 |  Save         |  `save [overwrite] FILE_PATH` | Save file to specified location|
 |  Export         |  `export [overwrite] FILE_PATH` | Export file to specified location|
 |  Import         |  `import FILE_PATH` | Import file to be used|
+|  Delete       |  `delete PREFIX_INDEX` | Delete specified task |
+|  Clear        |  `clear` | Clear all data in OneTwoDo|
 |  Exit         |  `exit`  | Quit the program| Ctrl+E
 
 
