@@ -368,7 +368,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "Tag =" + tagKeyword;
+            return "Tag = " + tagKeyword;
         }
     }
 
