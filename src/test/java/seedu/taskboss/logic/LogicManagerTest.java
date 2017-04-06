@@ -410,6 +410,17 @@ public class LogicManagerTest {
                 threeTasks.get(2), threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
+
+    @Test
+    public void execute_delete_removesInvalidTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
+        helper.addToModel(model, threeTasks);
+
+        assertCommandFailure("delete 0", MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
     //@@author
 
     @Test
