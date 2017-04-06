@@ -36,6 +36,7 @@ public class DoneCommand extends Command {
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
     }
 
+
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -58,8 +59,7 @@ public class DoneCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        //TODO: switch to done category tab instead
-        model.updateFilteredListToShowAll();
+        model.updateFilteredListToShowDone();
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));
     }
 

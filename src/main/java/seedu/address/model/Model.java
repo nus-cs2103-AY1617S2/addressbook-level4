@@ -71,11 +71,17 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
+    /** Updates the filter of the filtered task list to show all done tasks */
+    void updateFilteredListToShowDone();
+
     /** Updates the filter of the filtered task list to show all floating tasks */
     void updateFilteredListToShowFloating();
 
     /** Updates the filter of the filtered task list to show all overdue tasks */
     void updateFilteredListToShowOverdue();
+
+    /** Updates the filter of the filtered task list to show all pending tasks */
+    void updateFilteredListToShowPending();
 
     /** Updates the filter of the filtered task list to show all today tasks */
     void updateFilteredListToShowToday();
