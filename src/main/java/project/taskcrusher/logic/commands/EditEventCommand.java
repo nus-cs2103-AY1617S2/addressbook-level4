@@ -13,6 +13,7 @@ import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 /**
@@ -65,10 +66,11 @@ public class EditEventCommand extends Command {
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
-        if (!force && editedEvent.hasOverlappingEvent(preexistingEvents)) { // allow
-                                                                            // for
-                                                                            // force
-                                                                            // editing
+        if (!force && editEventDescriptor.getTimeslots().isPresent()
+                && editedEvent.hasOverlappingEvent(preexistingEvents)) { // allow
+            // for
+            // force
+            // editing
             throw new CommandException(AddCommand.MESSAGE_EVENT_CLASHES);
         }
 
@@ -91,11 +93,13 @@ public class EditEventCommand extends Command {
         // After these statements, each field should NOT be nullz
         Name updatedName = editEventDescriptor.getName().orElseGet(eventToEdit::getName);
         Location updatedLocation = editEventDescriptor.getLocation().orElseGet(eventToEdit::getLocation);
+        Priority updatedPriority = editEventDescriptor.getPriority().orElseGet(eventToEdit::getPriority);
         List<Timeslot> updatedTimeslots = editEventDescriptor.getTimeslots().orElseGet(eventToEdit::getTimeslots);
         Description updatedDescription = editEventDescriptor.getDescription().orElseGet(eventToEdit::getDescription);
         UniqueTagList updatedTags = editEventDescriptor.getTags().orElseGet(eventToEdit::getTags);
 
-        return new Event(updatedName, updatedTimeslots, updatedLocation, updatedDescription, updatedTags);
+        return new Event(updatedName, updatedTimeslots, updatedPriority, updatedLocation, updatedDescription,
+                updatedTags);
     }
 
     /**
@@ -104,6 +108,7 @@ public class EditEventCommand extends Command {
      */
     public static class EditEventDescriptor {
         private Optional<Name> name = Optional.empty();
+        private Optional<Priority> priority = Optional.empty();
         private Optional<Location> location = Optional.empty();
         private Optional<List<Timeslot>> timeslots = Optional.empty();
         private Optional<Description> description = Optional.empty();
@@ -114,6 +119,7 @@ public class EditEventCommand extends Command {
 
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             this.name = toCopy.getName();
+            this.priority = toCopy.getPriority();
             this.location = toCopy.getLocation();
             this.timeslots = toCopy.getTimeslots();
             this.description = toCopy.getDescription();
@@ -124,7 +130,8 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.location, this.timeslots, this.description, this.tags);
+            return CollectionUtil.isAnyPresent(this.name, this.location, this.priority, this.timeslots,
+                    this.description, this.tags);
         }
 
         public void setName(Optional<Name> name) {
@@ -134,6 +141,15 @@ public class EditEventCommand extends Command {
 
         public Optional<Name> getName() {
             return name;
+        }
+
+        public void setPriority(Optional<Priority> priority) {
+            assert priority != null;
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return priority;
         }
 
         public void setLocation(Optional<Location> location) {

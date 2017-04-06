@@ -104,25 +104,26 @@ public class SampleDataUtil {
         try {
             return new Event[] {
                 new Event(new Name("Guitar lesson"),
-                            constructTimeslotList(new Timeslot("2017-11-11", "2017-11-12")), new Location("NUS"),
-                            new Description("presentation"), new UniqueTagList("school")),
+                        constructTimeslotList(new Timeslot("2017-11-11", "2017-11-12")), new Priority("1"),
+                        new Location("NUS"), new Description("presentation"), new UniqueTagList("school")),
                 new Event(new Name("Town festival"),
-                            constructTimeslotList(new Timeslot("2018-03-20", "2018-03-31")), new Location("Iloilo"),
-                            new Description("submit assignment"), new UniqueTagList("school")),
+                        constructTimeslotList(new Timeslot("2018-03-20", "2018-03-31")), new Location("Iloilo"),
+                        new Description("submit assignment"), new UniqueTagList("school")),
 
                 new Event(new Name("Party planning"),
-                            constructTimeslotList(new Timeslot("2017-12-11 03:00PM", "2017-12-11 05:00PM")),
-                            new Location("Secret base"), new Description("submit assignment"),
-                            new UniqueTagList("school")),
+                        constructTimeslotList(new Timeslot("2017-12-11 03:00PM", "2017-12-11 05:00PM")),
+                        new Priority("2"), new Location("Secret base"), new Description("submit assignment"),
+                        new UniqueTagList("school")),
                 new Event(new Name("Fix roof"), constructTimeslotList(new Timeslot("2017-11-19", "2017-11-20")),
-                            new Location("home"), new Description("brand audit"), new UniqueTagList("school")),
+                        new Location("home"), new Description("brand audit"), new UniqueTagList("school")),
                 new Event(new Name("Check samples"),
-                            constructTimeslotListTentative(new Timeslot("2019-11-11 02:00PM", "2019-11-11 05:00PM"),
-                                    new Timeslot("2019-11-11 06:00PM", "2019-11-11 07:00PM")),
-                            new Location("Dexters laboratory"), new Description("nuclear deal"),
-                            new UniqueTagList("office")),
+                        constructTimeslotListTentative(new Timeslot("2019-11-11 02:00PM", "2019-11-11 05:00PM"),
+                                new Timeslot("2019-11-11 06:00PM", "2019-11-11 07:00PM")),
+                        new Location("Dexters laboratory"), new Description("nuclear deal"),
+                        new UniqueTagList("office")),
                 new Event(new Name("Island trip"), constructTimeslotList(new Timeslot("2017-10-12", "2017-10-15")),
-                            new Location("Middle of nowhere"), new Description("Mr XYZ"), new UniqueTagList("Home")) };
+                        new Priority("3"), new Location("Middle of nowhere"), new Description("Mr XYZ"),
+                        new UniqueTagList("Home")) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

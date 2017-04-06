@@ -85,6 +85,7 @@ public class EditCommandParser {
                 try {
                     editEventDescriptor.setName(ParserUtil.parseName(preambleFields.get(2)));
                     editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+                    editEventDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
                     editEventDescriptor.setTimeslots(ParserUtil.parseTimeslots(argsTokenizer.getValue(PREFIX_DATE)));
                     editEventDescriptor
                             .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
