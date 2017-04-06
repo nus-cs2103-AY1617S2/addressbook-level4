@@ -3,8 +3,8 @@ package seedu.task.logic.commands;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 
-
-
+//@@author A0139975J-unused
+// merged with find command
 public class FindDateCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "finddate";
@@ -15,11 +15,11 @@ public class FindDateCommand extends Command {
 
 
     private final Date date;
-    //@@author A0139975J
+
     public FindDateCommand(String date) throws IllegalValueException {
         this.date = new Date(date);
     }
-    //@@author A0139975J
+
     @Override
     public CommandResult execute() {
         model.sortTaskList();

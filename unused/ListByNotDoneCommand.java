@@ -1,6 +1,7 @@
 package seedu.task.logic.commands;
 
-//@@author A0139975J
+//@@author A0139975J-unused
+// merged with list command
 public class ListByNotDoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "listnotdone";
@@ -12,11 +13,11 @@ public class ListByNotDoneCommand extends Command {
             + "Example: " + COMMAND_WORD_1;
 
     private final boolean value;
-    
+
     public ListByNotDoneCommand(boolean value) {
         this.value = value;
     }
-    
+
     @Override
     public CommandResult execute() {
         model.sortTaskList();

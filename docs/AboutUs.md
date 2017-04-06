@@ -35,7 +35,7 @@ Role: Developer <br>
 - Other major contributions:
 	- Implementation of UI
 	- Ensure Travis passes for each milestone
-	- Documentation 
+	- Documentation
 
 -----
 
@@ -47,7 +47,7 @@ Role: Developer <br>
 - Features implemented:
 	- ChangeTheme Command
 	- Power search
-	- Several Util Classes : TaskUtil, DateUtil 
+	- Several Util Classes : TaskUtil, DateUtil
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
 - Other major contributions:
 	- Implementation of CommandLibrary
@@ -67,7 +67,7 @@ Role: Developer <br>
 	- Windows ColourCoded Tags
 	- Shortcuts
 - Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142939W.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0142939W.md)]
-- Other major contributions: 
+- Other major contributions:
 	- UI changes
 	- Storage component
 	- Documentation
