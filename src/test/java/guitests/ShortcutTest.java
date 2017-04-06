@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.testutil.TestTask;
-import seedu.task.testutil.TestUtil;
 import seedu.task.ui.Scroll;
 //@@author A0142939W
 public class ShortcutTest extends TaskManagerGuiTest {
@@ -20,7 +19,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickUndoTest() {
-    	//use accelerator
+        //use accelerator
         resultDisplay.clickOnTextArea();
         commandBox.clear();
         mainMenu.useCtrlAltZ();
@@ -29,7 +28,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickDoneTest() {
-    	//use accelerator
+        //use accelerator
         taskListPanel.clickOnListView();
         commandBox.clear();
         mainMenu.useCtrlAltD();
@@ -38,7 +37,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickEditTest() {
-    	//use accelerator
+        //use accelerator
         browserPanel.clickOnWebView();
         commandBox.clear();
         mainMenu.useCtrlAltE();
@@ -47,7 +46,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickSelectTest() {
-    	//use accelerator
+        //use accelerator
         commandBox.clickOnTextField();
         mainMenu.useCtrlAltS();
         assertCommandBoxInput("select ");
@@ -55,7 +54,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickSaveTest() {
-    	//use accelerator
+        //use accelerator
         resultDisplay.clickOnTextArea();
         commandBox.clear();
         mainMenu.useCtrlS();
@@ -64,7 +63,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
 
     @Test
     public void quickLoadTest() {
-    	//use accelerator
+        //use accelerator
         taskListPanel.clickOnListView();
         commandBox.clear();
         mainMenu.useCtrlAltL();
@@ -74,7 +73,7 @@ public class ShortcutTest extends TaskManagerGuiTest {
     @Test
     public void quickScrollTest() {
         //populate the current task list to test for scroll in case
-    	//list view is too short
+        //list view is too short
         //add one task
         TestTask taskToAdd = td.handle;
         addThroughCommand(taskToAdd);
