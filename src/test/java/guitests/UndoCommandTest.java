@@ -71,6 +71,7 @@ public class UndoCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(currentList));
     }
 
+    @Test
     public void undo_multipleModifications_success() {
         TestTask[] currentList = td.getTypicalTasks();
 
@@ -106,19 +107,25 @@ public class UndoCommandTest extends AddressBookGuiTest{
         commandBox.runCommand("clear");
         assertListSize(0);
 
-        //undo
+        //undo clear
+        commandBox.runCommand("undo");
+        assertListSize(1);
+
+        //undo list done
+        commandBox.runCommand("undo");
+        assertListSize(currentList.length - 1);
+
+        //undo mark done
         commandBox.runCommand("undo");
         assertListSize(currentList.length);
 
-        //undo
+        //undo delete
         commandBox.runCommand("undo");
-        //assertListSize();
+        assertListSize(currentList.length + 1);
 
-        //undo
-
-        //undo
-
-
+        //undo add
+        commandBox.runCommand("undo");
+        assertListSize(currentList.length );
+        assertTrue(taskListPanel.isListMatching(currentList));
     }
-
 }

@@ -13,6 +13,7 @@ import seedu.taskit.model.tag.TagColor;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.ReadOnlyTask;
 
+//@@author A0141011J
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -36,7 +37,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    // @@author A0141011J
+    private static final String OVERDUE_ICON_PATH = "/images/overdue.png";
+
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         title.setText(task.getTitle().title);
