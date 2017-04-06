@@ -27,7 +27,7 @@ public class CliSyntax {
     public static final String STARTINGTIME_AND_DEADLINE_REVERSE_REGEX = "(?<rest>.*)\\b+from\\b+"
             + "(?<startingTime>.*)\\b+to\\b+(?<deadline>.*)";
     public static final String[] CAPTURE_GROUPS_OF_EVENT = { "deadline",
-            "startingTime" };
+        "startingTime" };
 
     public static final String STARTING_TIME = "from";
     public static final String DEADLINE = "to";
