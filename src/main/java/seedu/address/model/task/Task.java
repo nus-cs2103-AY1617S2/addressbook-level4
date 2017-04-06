@@ -172,7 +172,7 @@ public class Task implements ReadOnlyPerson {
     
     //@@author A0164032U
     public int compareTo(Task o){
-        return getStartTime().compareTo(o.getStartTime());
+        return getEndTime().compareTo(o.getEndTime());
     }
 
     //@@author A0163848R
