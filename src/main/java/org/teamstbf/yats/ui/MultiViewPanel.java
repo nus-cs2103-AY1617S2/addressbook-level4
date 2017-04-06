@@ -40,8 +40,8 @@ public class MultiViewPanel extends UiPart<Region> {
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
 
-	private final FilteredList<ReadOnlyEvent> calendarList;
-	private final FilteredList<ReadOnlyEvent> taskList;
+	private FilteredList<ReadOnlyEvent> calendarList;
+	private FilteredList<ReadOnlyEvent> taskList;
 	private final DatePickerSkin calendar;
 
 	private BrowserPanel browserPanel;

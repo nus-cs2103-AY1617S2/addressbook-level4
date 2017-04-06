@@ -56,7 +56,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
-		updateFilteredListToShowAll();
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
