@@ -235,8 +235,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        /*
-         * checks the task with a given qualifier to return a boolean value
+        /**
+         * returns true if a task agress with a given {@code Qualifier}
          */
         boolean run(ReadOnlyTask task);
     }
@@ -312,8 +312,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         }
 
-        /*
-         * convert a given set of Tags to a set of String
+        /**
+         * convert a given {@code Set} of {@code Tags} to a {@code Set} of {@code String}
          */
         private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
@@ -326,8 +326,8 @@ public class ModelManager extends ComponentManager implements Model {
             return tagSet;
         }
 
-        /*
-         * returns true if task's priority equals given priority
+        /**
+         * returns true if task's {@code Priority} equals given {@code Priority}
          */
         private boolean comparePriority(Priority taskPriority) {
 
@@ -340,8 +340,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isEqual;
         }
 
-        /*
-         * returns true if task's start date equals given start date
+        /**
+         * returns true if task's {@code StartDate} equals given {@code DueDate}
          */
         private boolean compareStartDate(TaskDate taskStartDate) {
 
@@ -357,8 +357,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isStartEqual;
         }
 
-        /*
-         * returns true if task's due date equals given due date
+        /**
+         * returns true if task's {@code DueDate} equals given {@code DueDate}
          */
         private boolean compareDueDate(TaskDate taskDueDate) {
 
@@ -373,8 +373,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isDueEqual;
         }
 
-        /*
-         * returns true if task's start date comes before given start date
+        /**
+         * returns true if task's {@code StartDate} comes before given {@code StartDate}
          */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
@@ -386,8 +386,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isBefore;
         }
 
-        /*
-         * returns true if task's due date comes before given due date
+        /**
+         * returns true if task's {@code DueDate} comes before given {@code DueDate}
          */
         private boolean compareBeforeDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
@@ -399,8 +399,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isBefore;
         }
 
-        /*
-         * returns true if task's start date comes after given start date
+        /**
+         * returns true if task's {@code StartDate} comes after given {@code StartDate}
          */
         private boolean compareAfterStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
@@ -412,8 +412,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isAfter;
         }
 
-        /*
-         * returns true if task's due date comes after given due date
+        /**
+         * returns true if task's {@code DueDate} comes after given {@code DueDate}
          */
         private boolean compareAfterDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
@@ -425,8 +425,8 @@ public class ModelManager extends ComponentManager implements Model {
             return isAfter;
         }
 
-        /*
-         * returns true if givenDate2 comes before givenDate1
+        /**
+         * returns true if {@code givenDate2} comes before {@code givenDate1}
          */
         private boolean comesBefore(String givenDate1, String givenDate2) {
 

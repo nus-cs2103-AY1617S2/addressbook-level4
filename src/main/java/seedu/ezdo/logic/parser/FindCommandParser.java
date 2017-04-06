@@ -60,7 +60,7 @@ public class FindCommandParser implements CommandParser {
 
             boolean[] booleanDateArray = setBooleanParameters(optionalStartDate, optionalDueDate);
 
-            int beforeStartIndex = 0; //indicates the position in array
+            int beforeStartIndex = 0; // indicates the position in array
             int beforeDueIndex = 1;
             int afterStartIndex = 2;
             int afterDueIndex = 3;
@@ -91,8 +91,9 @@ public class FindCommandParser implements CommandParser {
         return new FindCommand(searchParameters);
     }
 
-    /*
-     * Get the optional value of a specified prefix from a tokenizer
+    /**
+     * Get the optional value of a specified {@code prefix} from a
+     * {@code tokenizer}
      */
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         Optional<String> optionalString;
@@ -105,7 +106,8 @@ public class FindCommandParser implements CommandParser {
     }
 
     /**
-     * Removes "before" prefix from the start of a given String
+     * Removes "before" prefix from the start of a given {@code String} of
+     * taskDate
      */
     private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
@@ -116,7 +118,8 @@ public class FindCommandParser implements CommandParser {
     }
 
     /**
-     * Removes "after" prefix from the start of a given String
+     * Removes "after" prefix from the start of a given String {@code String} of
+     * taskDate
      */
     private Optional<String> parseFindAfter(Optional<String> taskDate) {
         Optional<String> optionalDate;
@@ -127,7 +130,8 @@ public class FindCommandParser implements CommandParser {
     }
 
     /**
-     * Checks if an optional String has the prefix "before" or "After"
+     * Checks if an optional {@code String} of taskDate has the prefix "before"
+     * or "After"
      */
     private boolean isFindBefore(Optional<String> taskDate) {
 
@@ -150,7 +154,8 @@ public class FindCommandParser implements CommandParser {
     }
 
     /**
-     * Checks if an optional String has the prefix "after" or "After"
+     * Checks if an optional {@code String} of taskDate has the prefix "after"
+     * or "After"
      */
     private boolean isFindAfter(Optional<String> taskDate) {
 
@@ -172,8 +177,9 @@ public class FindCommandParser implements CommandParser {
 
     }
 
-    /*
-     * Check whether user is finding before or after the taskdate
+    /**
+     * Check whether user is finding before or after the taskdate and returns a
+     * boolean array of size 4 with 4 boolean values
      */
     private boolean[] setBooleanParameters(Optional<String> optionalStartDate, Optional<String> optionalDueDate) {
 
@@ -198,7 +204,7 @@ public class FindCommandParser implements CommandParser {
             searchAfterDueDate = true;
         }
 
-        return new boolean[] {searchBeforeStartDate, searchBeforeDueDate, searchAfterStartDate, searchAfterDueDate };
+        return new boolean[] { searchBeforeStartDate, searchBeforeDueDate, searchAfterStartDate, searchAfterDueDate };
     }
 
     private Optional<String> setOptionalStartDate(Optional<String> optionalStartDate) {
@@ -227,8 +233,8 @@ public class FindCommandParser implements CommandParser {
         return optionalDueDate;
     }
 
-    /*
-     * Get the Names to find, if any, from Find arguments
+    /**
+     * Get the {@code Names} to find, if any, from {@code Find} arguments
      */
     private String[] tokenize(String args, ArgumentTokenizer argsTokenizer) {
         argsTokenizer.tokenize(args);
