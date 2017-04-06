@@ -52,9 +52,9 @@ public class ConfigUtilTest {
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
-        System.out.println(expected);
         Config actual = read("TypicalConfig.json").get();
         System.out.println(actual);
+        System.out.println(expected);
         assertEquals(expected, actual);
     }
 
