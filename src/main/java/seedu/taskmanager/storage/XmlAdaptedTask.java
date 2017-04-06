@@ -12,6 +12,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -30,6 +31,9 @@ public class XmlAdaptedTask {
     private String endDate;
     @XmlElement(required = true)
     private String description;
+    // @@author A0140032E
+    @XmlElement(required = true)
+    private String repeat;
     // @@author A0114269E
     @XmlElement(required = true)
     private String status;
@@ -52,9 +56,12 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         title = source.getTitle().value;
+        // @@author A0140032E
         startDate = source.getStartDate().isPresent() ? source.getStartDate().get().toFullDateString() : null;
         endDate = source.getEndDate().isPresent() ? source.getEndDate().get().toFullDateString() : null;
         description = source.getDescription().isPresent() ? source.getDescription().get().value : null;
+        repeat = source.getRepeat().isPresent() ? source.getRepeat().get().toString() : null;
+        // @@author
         status = source.getStatus().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -77,12 +84,13 @@ public class XmlAdaptedTask {
         final StartDate startDate = this.startDate == null ? null : new StartDate(this.startDate);
         final EndDate endDate = this.endDate == null ? null : new EndDate(this.endDate);
         final Description description = this.description == null ? null : new Description(this.description);
+        final Repeat repeat = this.repeat == null ? null : new Repeat(this.repeat);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         // @@author A0114269E
         final Status status = new Status(this.status);
         // @@author
         return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
-                Optional.ofNullable(description), status, tags);
+                Optional.ofNullable(description), Optional.ofNullable(repeat), status, tags);
     }
     // @@author
 }

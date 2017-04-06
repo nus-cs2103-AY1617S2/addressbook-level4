@@ -2,6 +2,7 @@ package seedu.taskmanager.model.task;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
+// @@author A0140032E
 /**
  * Represents a Task's repeat pattern in the task manager. Guarantees:
  * immutable; is valid as declared in {@link #isValidRepeat(String)}
@@ -14,7 +15,7 @@ public class Repeat {
     public enum RepeatPattern {
         DAY, WEEK, MONTH, YEAR
     }
-    
+
     public final RepeatPattern pattern;
 
     /**
@@ -28,7 +29,7 @@ public class Repeat {
         String trimmedAndUpperCaseRepeat = repeat.trim().toUpperCase();
         this.pattern = toEnum(trimmedAndUpperCaseRepeat);
     }
-    
+
     /**
      * Returns RepeatPattern enum if a given string is a valid repeat pattern.
      */
@@ -57,12 +58,12 @@ public class Repeat {
         return other == this // short circuit if same object
                 || (other instanceof Repeat // instanceof handles nulls
                         && this.pattern.equals(((Repeat) other).pattern)); // state
-                                                                      // check
+        // check
     }
 
     @Override
     public int hashCode() {
         return pattern.hashCode();
     }
-
 }
+// @@author

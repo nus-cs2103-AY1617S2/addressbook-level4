@@ -14,6 +14,7 @@ public interface ReadOnlyTask {
     Optional<StartDate> getStartDate();
     Optional<EndDate> getEndDate();
     Optional<Description> getDescription();
+    Optional<Repeat> getRepeat();
 
     Status getStatus();
 
@@ -46,6 +47,7 @@ public interface ReadOnlyTask {
                 .append(getStartDate().isPresent() ? " Start Date: " + getStartDate().get() : "")
                 .append(getEndDate().isPresent() ? " End Date: " + getEndDate().get() : "")
                 .append(getDescription().isPresent() ? " Description: " + getDescription().get() : "")
+                .append(getRepeat().isPresent() ? " Repeats: " + getRepeat().get() : "")
                 .append(" Status: " + getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

@@ -503,7 +503,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    //@@author A0114269E
+    // @@author A0114269E
     @Test
     public void execute_cd_invalidFilePath() throws Exception {
         assertCommandFailure("cd !asdwie34$2.xml",
@@ -515,10 +515,8 @@ public class LogicManagerTest {
     // @@author A0114269E
     @Test
     public void execute_cd_invalidXmlFile() throws Exception {
-        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("cd src/test/data/cd_test/empty.xml", ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("cd src/test/data/cd_test/invalid.xml", ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
     }
     // @@author
 
@@ -587,7 +585,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(title, Optional.ofNullable(privateStartDate), Optional.ofNullable(endDate),
-                    Optional.ofNullable(privateDescription), tags);
+                    Optional.ofNullable(privateDescription), Optional.ofNullable(null), tags);
         }
 
         /**
@@ -601,6 +599,7 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
                     Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -703,6 +702,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(new Title(title), Optional.of(new StartDate("12/03/2017")),
                     Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Buy house for 1")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -717,6 +717,7 @@ public class LogicManagerTest {
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
             return new Task(new Title("Watch Clockwork Orange"), Optional.of(new StartDate(startDate)),
                     Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Just do it")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -730,6 +731,7 @@ public class LogicManagerTest {
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
             return new Task(new Title("Watch Halestorm concert"), Optional.of(new StartDate("01/04/2017")),
                     Optional.of(new EndDate(endDate)), Optional.of(new Description("Just do it")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
         // @@author A0131278H

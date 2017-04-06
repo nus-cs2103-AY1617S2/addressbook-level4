@@ -9,6 +9,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -75,11 +76,12 @@ public class DoneCommand extends Command {
         Optional <StartDate> updatedStartDate = taskToMarkDone.getStartDate();
         Optional <EndDate> updatedEndDate = taskToMarkDone.getEndDate();
         Optional <Description> updatedDescription = taskToMarkDone.getDescription();
+        Optional <Repeat> updatedRepeat = taskToMarkDone.getRepeat();
         Status updatedStatus = new Status(true);
         UniqueTagList updatedTags = taskToMarkDone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
-                updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription,
+                updatedRepeat, updatedStatus, updatedTags);
     }
 }
 // @@author
