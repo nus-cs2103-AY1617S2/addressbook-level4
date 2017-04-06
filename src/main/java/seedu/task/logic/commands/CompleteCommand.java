@@ -77,14 +77,14 @@ public class CompleteCommand extends Command {
                 model.addTask(newTask);
                 completedTask = createCompletedTask(newTask, completeTaskDescriptor);
                 int newIndex = model.getFilteredTaskList().indexOf(newTask);
-                model.updateTask(newIndex, completedTask);
                 completedTask.setComplete();
+                model.updateTask(newIndex, completedTask);
                 model.updateFilteredListToShowAll();
                 return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, newTask));
             } else {
                 completedTask = createCompletedTask(taskToComplete, completeTaskDescriptor);
-                model.updateTask(targetIndex, completedTask);
                 completedTask.setComplete();
+                model.updateTask(targetIndex, completedTask);
                 model.updateFilteredListToShowAll();
                 return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
             }
