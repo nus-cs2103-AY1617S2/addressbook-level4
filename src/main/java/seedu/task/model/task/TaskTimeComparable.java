@@ -1,4 +1,5 @@
 package seedu.task.model.task;
+
 //@@author A0163845X
 public class TaskTimeComparable implements TaskComparable {
 
@@ -43,7 +44,7 @@ public class TaskTimeComparable implements TaskComparable {
 						return 0;
 					}
 					return 1;
-				} //task1.getTaskEndTime() != null
+				} // task1.getTaskEndTime() != null
 				if (task2.getTaskEndTime() == null) {
 					return -1;
 				}
@@ -52,8 +53,8 @@ public class TaskTimeComparable implements TaskComparable {
 		}
 		System.out.println("Error in tasktimecomparable");
 		return 0;
-		//should be unreachable
-		
+		// should be unreachable
+
 	}
 
 }

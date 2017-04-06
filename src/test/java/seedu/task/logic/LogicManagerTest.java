@@ -38,10 +38,15 @@ import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
+import seedu.task.logic.commands.FilterCommand;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PathCommand;
+import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.SortCommand;
+import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.TaskManager;
 import seedu.task.model.Model;
@@ -71,7 +76,6 @@ public class LogicManagerTest {
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
-    // private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
@@ -82,11 +86,6 @@ public class LogicManagerTest {
     private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
 	helpShown = true;
     }
-
-    // @Subscribe
-    // private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
-    // targetedJumpIndex = je.targetIndex;
-    // }
 
     @Before
     public void setUp() {
@@ -122,7 +121,6 @@ public class LogicManagerTest {
      *      List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-
 	    ReadOnlyTaskManager expectedTaskManager, List<? extends ReadOnlyTask> expectedShownList) {
 	assertCommandBehavior(false, inputCommand, expectedMessage, expectedTaskManager, expectedShownList);
 
@@ -260,42 +258,11 @@ public class LogicManagerTest {
 	assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
-//    @Test
-//    public void execute_add_successful() throws Exception {
-//	// setup expectations
-//	TestDataHelper helper = new TestDataHelper();
-//	Task toBeAdded = helper.adam();
-//	TaskManager expectedTM = new TaskManager();
-//	expectedTM.addJobTask(toBeAdded);
-//
-//	// execute command and verify result
-//	assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-//		expectedTM, expectedTM.getTaskList());
-//    }
-
     @Test
     public void execute_add_noTaskName() throws Exception {
 	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 	assertCommandFailure("add ", expectedMessage);
     }
-
-//    @Test
-//    public void execute_add_invalidDate() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_DATE_FORMAT);
-//	assertCommandFailure("add Go cycling d/999999 ", expectedMessage);
-//    }
-
-//    @Test
-//    public void execute_add_invalidStartAndEndDate() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_DATE);
-//	assertCommandFailure("add Go swimming d/170110 160110 ", expectedMessage);
-//    }
-
-//    @Test
-//    public void execute_add_invalidStartAndEndTime() throws Exception {
-//	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_INVALID_TIME);
-//	assertCommandFailure("add Go cycling s/1700 e/1500 ", expectedMessage);
-//    }
 
     @Test
     public void execute_edit_successful() throws Exception {
@@ -323,20 +290,6 @@ public class LogicManagerTest {
 		expectedTM, expectedTM.getTaskList());
     }
 
-//    @Test
-//    public void execute_list_showsAllTasks() throws Exception {
-//
-//	// prepare expectations
-//	TestDataHelper helper = new TestDataHelper();
-//	TaskManager expectedTM = helper.generateTaskManager(2);
-//	List<? extends ReadOnlyTask> expectedList = expectedTM.getTaskList();
-//
-//	// prepare task manager state
-//	helper.addToModel(model, 2);
-//
-//	assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedTM, expectedTM.getTaskList());
-//    }
-
     @Test
     public void execute_delete_InvalidArgsFormatErrorMessageShown() throws Exception {
 	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -347,18 +300,6 @@ public class LogicManagerTest {
     public void execute_delete_IndexNotFoundErrorMessageShown() throws Exception {
 	assertIndexNotFoundBehaviorForCommand("delete");
     }
-
-//    @Test
-//    public void execute_delete_successful() throws Exception {
-//	TestDataHelper helper = new TestDataHelper();
-//	List<Task> threeTasks = helper.generateTaskList(3);
-//	TaskManager expectedTM = helper.generateTaskManager(threeTasks);
-//	expectedTM.removeTask(threeTasks.get(1));
-//	helper.addToModel(model, threeTasks);
-//
-//	assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, 2).concat("\n"),
-//		expectedTM, expectedTM.getTaskList());
-//    }
 
     @Test
     public void execute_done_InvalidArgsFormatErrorMessageShown() throws Exception {
@@ -396,6 +337,50 @@ public class LogicManagerTest {
 	assertCommandFailure("find ", expectedMessage);
     }
 
+    // @@author A0164061N
+    @Test
+    public void execute_path_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PathCommand.MESSAGE_USAGE);
+	assertCommandFailure("path ", expectedMessage);
+    }
+
+    @Test
+    public void execute_load_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
+	assertCommandFailure("load ", expectedMessage);
+    }
+
+    @Test
+    public void execute_filter_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
+	assertCommandFailure("filter ", expectedMessage);
+    }
+
+    @Test
+    public void execute_sort_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+	assertCommandFailure("sort ", expectedMessage);
+    }
+
+    @Test
+    public void execute_select_invalidArgsFormat() {
+	String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
+	assertCommandFailure("google ", expectedMessage);
+    }
+
+    // @Test
+    // public void execute_done_IndexNotFoundErrorMessageShown() throws
+    // Exception {
+    // assertIndexNotFoundBehaviorForCommand("done");
+    // }
+
+    @Test
+    public void execute_select_IndexNotFoundErrorMessageShown() throws Exception {
+	assertIndexNotFoundBehaviorForCommand("google");
+    }
+
+    // @@author
+
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
 	TestDataHelper helper = new TestDataHelper();
@@ -412,23 +397,6 @@ public class LogicManagerTest {
 	assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
 		expectedList);
     }
-
-//    @Test
-//    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-//	TestDataHelper helper = new TestDataHelper();
-//	Task pTarget1 = helper.generateTaskWithName("Task1");
-//	Task pTarget2 = helper.generateTaskWithName("Task2");
-//	Task pTarget3 = helper.generateTaskWithName("Task3");
-//	Task p1 = helper.generateTaskWithName("sduauo");
-//
-//	List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-//	TaskManager expectedTM = helper.generateTaskManager(fourTasks);
-//	List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
-//	helper.addToModel(model, fourTasks);
-//
-//	assertCommandSuccess("find ask", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
-//		expectedList);
-//    }
 
     @Test
     public void execute_save_invalidArgsFormat() throws Exception {

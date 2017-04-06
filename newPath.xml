@@ -14,6 +14,13 @@
         <taskStartTime>0900</taskStartTime>
         <taskEndTime>0930</taskEndTime>
         <taskDescription>Description2</taskDescription>
+<<<<<<< HEAD
+=======
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>task</taskName>
+>>>>>>> aaec99d71fed040834db153e284866e81492e0bc
         <taskStatus>Ongoing</taskStatus>
     </tasks>
 </taskmanager>

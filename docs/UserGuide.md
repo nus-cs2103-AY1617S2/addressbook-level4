@@ -91,7 +91,7 @@ Examples:
   
 ## Editing a Task : `edit`
 Edits a specified task from the task manager.<br>
-Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
+Format: `edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
 > Edits the task at the specified `INDEX`. The index refers to the 
 task number shown in the list. `INDEX` must be an exact match in order 
@@ -103,9 +103,13 @@ Examples: `edit 2 m/Go to Ralphs`
 Clears all tasks from the task manager.<br>
 Format: `clear` 
 
-## Undoing a Task : `undo`
+## Undoing an Action : `undo`
 Undos the most recent action up to 10 times.
 Format: `undo`
+
+## Redoing an Action : `redo`
+Redos the most recent action up to 10 times.
+Format: `redo`
 
 ## Completing a Task : `done`
 Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
@@ -162,6 +166,9 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find groceries`
+  
+* **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
+  e.g. `edit 2 m/Go to Guardian`
 
 * **List** : `list` <br>
 
@@ -169,7 +176,9 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 
 * **Undo** : `undo` <br>
 
-* **Done** : `done` <br>
+* **Redo** : `redo` <br>
+
+* **Done** : `done INDEX [MORE INDECIES]` <br>
  e.g. `done 3`
 
 * **Filter** : `filter` <br>

@@ -7,6 +7,7 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.SortCommand;
+
 //@@author A0163845X
 public class SortCommandParser {
 	public static final String byTime = "time";
@@ -17,7 +18,7 @@ public class SortCommandParser {
 	public Command parse(String arguments) {
 		arguments = arguments.toLowerCase();
 		arguments = arguments.trim();
-		switch(arguments) {
+		switch (arguments) {
 		case byTime:
 			return new SortCommand(arguments);
 		case byName:

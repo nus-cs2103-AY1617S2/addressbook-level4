@@ -2,6 +2,7 @@ package seedu.task.commons.core;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.IOException;
 public class FileNameHandler {
 	private static String filePath = "fileName.txt";
 	public static final String DEFAULT_FILEPATH = "data/TaskManagerData.xml";
+
 	public static String getFileName() {
 		try {
 			FileInputStream fis = new FileInputStream(filePath);
@@ -27,8 +29,9 @@ public class FileNameHandler {
 			System.out.println("IOException");
 			return DEFAULT_FILEPATH;
 		}
-		
+
 	}
+
 	public static void setFileName(String fileName) {
 		FileOutputStream fos;
 		try {
@@ -40,13 +43,31 @@ public class FileNameHandler {
 			System.out.println("IOException");
 		}
 	}
-	public static boolean isValid(String str) {
-		if (str.length() <= 4) {
-			return false;
-		}
-		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
-			return true;
-		}
-		return false;
+
+//	public static boolean isValid(String str) {
+//		if (str.length() <= 4) {
+//			return false;
+//		}
+//		if (str.substring(str.length() - 4, str.length()).equals(".xml")) {
+//			return true;
+//		}
+//		return false;
+//	}
+	
+	public static boolean isValid(String FileName) {
+	    final File File = new File(FileName);
+	    boolean isValid = true;
+	    try {
+	        if (File.createNewFile()) {
+	            File.delete();
+	        }
+	    } catch (IOException e) {
+	        isValid = false;
+	    }
+//	    if (FileName.substring(FileName.length() - 4, FileName.length()).equals(".xml")){
+//	    	isValid = true;
+//	    }
+	    System.out.println(isValid);
+	    return isValid;
 	}
 }

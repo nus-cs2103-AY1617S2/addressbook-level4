@@ -18,145 +18,144 @@ import seedu.task.model.task.TaskTime;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private UniqueTagList tags;
-    private TaskName taskName;
-    private TaskDate taskDate;
-    private TaskTime taskStartTime;
-    private TaskTime taskEndTime;
-    private String taskDescription;
-    private TaskStatus taskStatus;
-    private LocalDate localDate;
-    private LocalTime localTime;
-    
-    
-    public TestTask() {
-	tags = new UniqueTagList();
-	
-    }
+	private UniqueTagList tags;
+	private TaskName taskName;
+	private TaskDate taskDate;
+	private TaskTime taskStartTime;
+	private TaskTime taskEndTime;
+	private String taskDescription;
+	private TaskStatus taskStatus;
+	private LocalDate localDate;
+	private LocalTime localTime;
 
-    /**
-     * Creates a copy of {@code taskToCopy}.
-     */
-    public TestTask(TestTask taskToCopy) {
-	this.taskName = taskToCopy.getTaskName();
-	this.taskDate = taskToCopy.getTaskDate();
-	this.taskStartTime = taskToCopy.getTaskStartTime();
-	this.taskEndTime = taskToCopy.getTaskEndTime();
-	this.taskDescription = taskToCopy.getTaskDescription();
-	this.taskStatus = taskToCopy.getTaskStatus();
-	this.tags = taskToCopy.getTags();
-    }
+	public TestTask() {
+		tags = new UniqueTagList();
 
-    @Override
-    public TaskName getTaskName() {
-	return taskName;
-    }
+	}
 
-    public void setTaskName(TaskName name) {
-	this.taskName = name;
-    }
+	/**
+	 * Creates a copy of {@code taskToCopy}.
+	 */
+	public TestTask(TestTask taskToCopy) {
+		this.taskName = taskToCopy.getTaskName();
+		this.taskDate = taskToCopy.getTaskDate();
+		this.taskStartTime = taskToCopy.getTaskStartTime();
+		this.taskEndTime = taskToCopy.getTaskEndTime();
+		this.taskDescription = taskToCopy.getTaskDescription();
+		this.taskStatus = taskToCopy.getTaskStatus();
+		this.tags = taskToCopy.getTags();
+	}
 
-    @Override
-    public TaskDate getTaskDate() {
-	return taskDate;
-    }
+	@Override
+	public TaskName getTaskName() {
+		return taskName;
+	}
 
-    public void setTaskDate(TaskDate taskDate) {
-	this.taskDate = taskDate;
-    }
+	public void setTaskName(TaskName name) {
+		this.taskName = name;
+	}
 
-    @Override
-    public TaskTime getTaskStartTime() {
-	return taskStartTime;
-    }
+	@Override
+	public TaskDate getTaskDate() {
+		return taskDate;
+	}
 
-    public void setTaskStartTime(TaskTime taskStartTime) {
-	this.taskStartTime = taskStartTime;
-    }
+	public void setTaskDate(TaskDate taskDate) {
+		this.taskDate = taskDate;
+	}
 
-    @Override
-    public TaskTime getTaskEndTime() {
-	return taskEndTime;
-    }
+	@Override
+	public TaskTime getTaskStartTime() {
+		return taskStartTime;
+	}
 
-    public void setTaskEndTime(TaskTime taskEndTime) {
-	this.taskEndTime = taskEndTime;
-    }
+	public void setTaskStartTime(TaskTime taskStartTime) {
+		this.taskStartTime = taskStartTime;
+	}
 
-    @Override
-    public String getTaskDescription() {
-	return taskDescription;
-    }
+	@Override
+	public TaskTime getTaskEndTime() {
+		return taskEndTime;
+	}
 
-    public void setTaskDescription(String taskDescription) {
-	this.taskDescription = taskDescription;
-    }
+	public void setTaskEndTime(TaskTime taskEndTime) {
+		this.taskEndTime = taskEndTime;
+	}
 
-    @Override
-    public TaskStatus getTaskStatus() {
-	return taskStatus;
-    }
+	@Override
+	public String getTaskDescription() {
+		return taskDescription;
+	}
 
-    public void setTaskStatus(TaskStatus taskStatus) {
-	this.taskStatus = taskStatus;
-    }
+	public void setTaskDescription(String taskDescription) {
+		this.taskDescription = taskDescription;
+	}
 
-    @Override
-    public UniqueTagList getTags() {
-	return tags;
-    }
+	@Override
+	public TaskStatus getTaskStatus() {
+		return taskStatus;
+	}
 
-    public void setTags(UniqueTagList tags) {
-	this.tags = tags;
-    }
+	public void setTaskStatus(TaskStatus taskStatus) {
+		this.taskStatus = taskStatus;
+	}
 
-    @Override
-    public String toString() {
-	return getAsText();
-    }
+	@Override
+	public UniqueTagList getTags() {
+		return tags;
+	}
 
-    public String getAddCommand() {
-	StringBuilder sb = new StringBuilder();
-	sb.append("add" + this.getTaskName().fullTaskName + " ");
-	sb.append("d/" + this.getTaskDate().value + " ");
-	sb.append("s/" + this.getTaskStartTime().value + " ");
-	sb.append("e/" + this.getTaskEndTime().value + " ");
-	sb.append("m/" + this.getTaskDescription() + " ");
-	sb.append(this.getTaskStatus() + " ");
-	this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-	return sb.toString();
-    }
+	public void setTags(UniqueTagList tags) {
+		this.tags = tags;
+	}
 
-    public String getTaskPath() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	@Override
+	public String toString() {
+		return getAsText();
+	}
 
-    public void setCreationTime() {
-    	localDate = LocalDate.now();
-    	localTime = LocalTime.now();
-    }
-    
-    public LocalDate getLocalDate() {
-    	if (localDate == null) {
-    		setCreationTime();
-    	}
-    	return localDate;
-    }
+	public String getAddCommand() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("add" + this.getTaskName().fullTaskName + " ");
+		sb.append("d/" + this.getTaskDate().value + " ");
+		sb.append("s/" + this.getTaskStartTime().value + " ");
+		sb.append("e/" + this.getTaskEndTime().value + " ");
+		sb.append("m/" + this.getTaskDescription() + " ");
+		sb.append(this.getTaskStatus() + " ");
+		this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+		return sb.toString();
+	}
 
-    public LocalTime getLocalTime() {
-    	if (localTime == null) {
-    		setCreationTime();
-    	}
-    	return localTime;
-    }
+	public String getTaskPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    private void setLocalDate(LocalDate localDate) {
-    	this.localDate = localDate;
-    }
+	public void setCreationTime() {
+		localDate = LocalDate.now();
+		localTime = LocalTime.now();
+	}
 
-    private void setLocalTime(LocalTime localTime) {
-    	this.localTime = localTime;
-    }
+	public LocalDate getLocalDate() {
+		if (localDate == null) {
+			setCreationTime();
+		}
+		return localDate;
+	}
+
+	public LocalTime getLocalTime() {
+		if (localTime == null) {
+			setCreationTime();
+		}
+		return localTime;
+	}
+
+	private void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
+	}
+
+	private void setLocalTime(LocalTime localTime) {
+		this.localTime = localTime;
+	}
 }
-//@@author
+// @@author
