@@ -36,9 +36,8 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
 	return readTaskManager(filePath);
     }
-
     /**
-     * Similar to {@link #readTaskManager()} 
+     * Similar to {@link #readTaskManager()}
      * @param filePath
      *            location of the data. Cannot be null
      * @throws DataConversionException
