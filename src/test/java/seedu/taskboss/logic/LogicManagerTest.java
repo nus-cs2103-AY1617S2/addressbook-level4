@@ -381,7 +381,7 @@ public class LogicManagerTest {
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
-    //@@author A0138961W    
+    //@@author A0138961W
     @Test
     public void execute_delete_removesSingleTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -395,7 +395,7 @@ public class LogicManagerTest {
                 threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
-    
+
     @Test
     public void execute_delete_removesMultipleTasks() throws Exception {
         TestDataHelper helper = new TestDataHelper();
