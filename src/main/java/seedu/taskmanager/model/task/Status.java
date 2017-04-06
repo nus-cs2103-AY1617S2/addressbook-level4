@@ -14,7 +14,7 @@ import seedu.taskmanager.commons.core.LogsCenter;
 public class Status {
     private static final Logger logger = LogsCenter.getLogger(Status.class);
 
-    private static final String MESSAGE_STATUS_DONE = "Completed";
+    private static final String MESSAGE_STATUS_DONE = "Done";
     private static final String MESSAGE_STATUS_NOT_DONE = "Incomplete";
 
     public boolean value;
@@ -27,14 +27,14 @@ public class Status {
     }
 
     /**
-     * For storage
+     * For copy operation
      */
     public Status(boolean status) {
         this.value = status;
     }
 
     /**
-     * For storage in String
+     * To recreate model from storage in String
      */
     public Status(String status) {
         assert status != null;
@@ -44,7 +44,7 @@ public class Status {
             this.value = false;
         } else {
             this.value = false;
-            logger.warning("Invalid Status String, status default to NOT DONE");
+            logger.warning("Unknown Status String, status default to Incomplete");
         }
     }
 
