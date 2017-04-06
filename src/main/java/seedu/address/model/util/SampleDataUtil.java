@@ -11,7 +11,6 @@ import seedu.address.model.YTomorrow;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;

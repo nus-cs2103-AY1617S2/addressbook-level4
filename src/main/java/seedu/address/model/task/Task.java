@@ -17,7 +17,6 @@ public class Task implements ReadOnlyPerson {
     private Name name;
     private EndDate end;
     private StartDate start;
-    private Email email;
     private Group group;
 
     private UniqueTagList tags;
@@ -27,13 +26,12 @@ public class Task implements ReadOnlyPerson {
      */
 
 
-    public Task(Name name, StartDate start, EndDate end, Email email, Group group, UniqueTagList tags) {
+    public Task(Name name, StartDate start, EndDate end, Group group, UniqueTagList tags) {
 
-        assert !CollectionUtil.isAnyNull(name, start, end, email, group, tags);
+        assert !CollectionUtil.isAnyNull(name, start, end, group, tags);
         this.name = name;
         this.start = start;
         this.end = end;
-        this.email = email;
         this.group = group;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
@@ -48,7 +46,6 @@ public class Task implements ReadOnlyPerson {
             source.getName(),
             source.getStartDate(),
             source.getEndDate(),
-            source.getEmail(),
             source.getGroup(),
             source.getTags());
 
@@ -84,16 +81,6 @@ public class Task implements ReadOnlyPerson {
         return start;
     }
 
-    public void setEmail(Email email) {
-        assert email != null;
-        this.email = email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
     public void setGroup(Group group) {
         assert group != null;
         this.group = group;
@@ -125,7 +112,6 @@ public class Task implements ReadOnlyPerson {
         this.setName(replacement.getName());
         this.setEndDate(replacement.getEndDate());
         this.setStartDate(replacement.getStartDate());
-        this.setEmail(replacement.getEmail());
         this.setGroup(replacement.getGroup());
         this.setTags(replacement.getTags());
     }
@@ -141,7 +127,7 @@ public class Task implements ReadOnlyPerson {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(name, end, start, email, group, tags);
+        return Objects.hash(name, end, start, group, tags);
     }
 
     @Override
@@ -178,7 +164,6 @@ public class Task implements ReadOnlyPerson {
     //@@author A0163848R
     public static Task factory(Object ...properties) throws IllegalValueException {
         Name name = CollectionUtil.firstOf(properties, Name.class);
-        Email email = CollectionUtil.firstOf(properties, Email.class);
         Group group = CollectionUtil.firstOf(properties, Group.class);
         UniqueTagList tags = CollectionUtil.firstOf(properties, UniqueTagList.class);
         StartDate start = CollectionUtil.firstOf(properties, StartDate.class);
@@ -189,14 +174,18 @@ public class Task implements ReadOnlyPerson {
         }
         
         if (start != null && end != null) {
-            return new Task(name, start, end, email, group, tags);
+            return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
-            return new DeadlineTask(name, end, email, group, tags);
+            return new DeadlineTask(name, end, group, tags);
         } else if (start == null && end == null) {
-            return new FloatingTask(name, email, group, tags);
+            return new FloatingTask(name, group, tags);
         }
         
         return null;
+    }
+
+    public boolean hasPassed() {
+        return getEndTime().before(new java.util.Date());
     }
 
 }

@@ -11,7 +11,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Group;

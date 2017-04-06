@@ -8,6 +8,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.model.task.EndDate;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
+
 /**
  * Utility methods related to Collections
  */

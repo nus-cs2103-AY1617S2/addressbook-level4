@@ -84,6 +84,6 @@ public class UnmarkCommand extends Command {
         }
 
         return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
+                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
     }
 }

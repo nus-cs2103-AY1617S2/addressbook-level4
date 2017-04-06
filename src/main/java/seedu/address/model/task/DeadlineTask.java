@@ -7,7 +7,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Deadline Task in the YTomorrow.
  */
 public class DeadlineTask extends Task {
-    public DeadlineTask(Name name, EndDate end, Email email, Group group, UniqueTagList tags) {
-        super(name, null, end, email, group, tags);
+    public DeadlineTask(Name name, EndDate end, Group group, UniqueTagList tags) {
+        super(name, null, end, group, tags);
     }
 }
