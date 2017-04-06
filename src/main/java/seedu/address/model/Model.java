@@ -56,5 +56,4 @@ public interface Model {
     
     /** Adds entries from the given YTomorrow to the current YTomorrow and updates equivalent entries. */
     void mergeYTomorrow(ReadOnlyAddressBook add);
-
 }
