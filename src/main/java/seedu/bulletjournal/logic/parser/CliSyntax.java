@@ -27,5 +27,5 @@ public class CliSyntax {
 
     /* Patterns definition for finish command args */
     public static final Pattern FINISH_ARGS_FORMAT =
-            Pattern.compile("\\d");
+            Pattern.compile("^\\d+$");
 }

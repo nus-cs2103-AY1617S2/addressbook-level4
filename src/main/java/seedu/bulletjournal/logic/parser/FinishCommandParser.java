@@ -34,7 +34,7 @@ public class FinishCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FinishCommand.MESSAGE_USAGE));
         }
-        args = args + "s/done";
+        args = args + " s/done";
         ArgumentTokenizer argsTokenizer
             = new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_BEGINTIME, PREFIX_TAG);
         argsTokenizer.tokenize(args);
