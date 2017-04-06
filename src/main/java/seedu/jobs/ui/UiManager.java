@@ -19,6 +19,7 @@ import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
+import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.UserPrefs;
 
 /**
@@ -32,13 +33,15 @@ public class UiManager extends ComponentManager implements Ui {
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
+    private LoginInfo loginInfo;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, LoginInfo loginInfo) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.loginInfo = loginInfo;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, loginInfo);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

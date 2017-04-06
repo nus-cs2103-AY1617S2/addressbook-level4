@@ -20,6 +20,7 @@ import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.logic.LogicManager;
+import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
@@ -45,7 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected LoginInfo loginInfo;
 
     @Override
     public void init() throws Exception {
@@ -56,14 +57,15 @@ public class MainApp extends Application {
         storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(), config.getLoginInfoFilePath());
 
         userPrefs = initPrefs(config);
-
+        loginInfo = initLoginInfo(config);
+        
         initLogging(config);
-
+        
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
-
-        ui = new UiManager(logic, config, userPrefs);
+        
+        ui = new UiManager(logic, config, userPrefs, loginInfo);
 
         initEventsCenter();
     }
@@ -156,7 +158,37 @@ public class MainApp extends Application {
 
         return initializedPrefs;
     }
+    
+    
+    protected LoginInfo initLoginInfo(Config config) {
+        assert config != null;
 
+        String loginInfoFilePath= config.getLoginInfoFilePath();
+        logger.info("Using login file : " + loginInfoFilePath);
+
+        LoginInfo initializedLoginInfo;
+        try {
+            Optional<LoginInfo> loginInfoOptional = storage.readLoginInfo();
+            initializedLoginInfo = loginInfoOptional.orElse(new LoginInfo());
+        } catch (DataConversionException e) {
+            logger.warning("LoginInfo file at " + loginInfoFilePath + " is not in the correct format. " +
+                    "Using default login info");
+            initializedLoginInfo = new LoginInfo();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty LoginInfo");
+            initializedLoginInfo = new LoginInfo();
+        }
+
+        //Update loginInfo file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveLoginInfo(initializedLoginInfo);;
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+
+        return initializedLoginInfo;
+    }
+    
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
