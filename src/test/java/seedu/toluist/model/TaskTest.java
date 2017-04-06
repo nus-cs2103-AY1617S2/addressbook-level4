@@ -344,11 +344,11 @@ public class TaskTest {
     @Test
     public void updateSort_SortByDefault() {
         Task.sortBy("default");
-        assertTrue(Task.getCurrentSort()[0] == "overdue"
-            && Task.getCurrentSort()[1] == "priority"
-            && Task.getCurrentSort()[2] == "enddate"
-            && Task.getCurrentSort()[3] == "startdate"
-            && Task.getCurrentSort()[4] == "description");
+        assertTrue(Task.getCurrentSort()[0].equals("overdue")
+            && Task.getCurrentSort()[1].equals("priority")
+            && Task.getCurrentSort()[2].equals("enddate")
+            && Task.getCurrentSort()[3].equals("startdate")
+            && Task.getCurrentSort()[4].equals("description"));
     }
 
     private void sortThenAssertTrue(String sort) {
