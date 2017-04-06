@@ -1,6 +1,6 @@
 # Yesterday's Tomorrow - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -39,45 +39,38 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
-### 2.1. Viewing help : `help`, `?`
+### 2.1. Viewing help : `help`
 
 Shows information about how to use Yesterday's Tomorrow.
-Format: `help`, `?`
+Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-### 2.2. Adding a task: `add`, `+`
+### 2.2. Adding a task: `add`
 
-Adds a task to the list<br>
-Format: `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`, `+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]`
+Adds a task to the task list<br>
+Format: `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
 
-> Persons can have any number of tags (including 0)
+> Persons can add a task without defining either start time or end time.
+> local time will be set as default if start time and end time parameters do not specify time .
+> TASK_NAME should only contain alphanumeric characters and spaces, and it should not be blank.
 
 Examples:
 
-* `add CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
-* `+ CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
-* `add CS2013 assignment due 23/03/2017`
-* `+ CS2013 assignment due 23/03/2017`
+* **Normal task**: `add CS2103 assignment s/Feb 3 d/Apr 6 e/example@gmail.com g/study`
+* **Task with deadline**: `add CS2013 assignment d/tomorrow e/example@gmail.com g/study`
+* **Floating task**: `add CS2013 assignment e/example@gmail.com g/study`
 
-### 2.3. Listing all tasks : `list`, `ls`
+### 2.3. Listing all tasks : `list`
 
-Shows a list of all tasks (completed **or** uncompleted).<br>
-Format: `list`, `ls`
+Shows a list of all tasks (**completed** or **incompleted**).<br>
+Format: `list`
 
-### 2.4. Listing completed tasks: `list complete`, `lc`
+> The task list will be ordered by ascending end date. 
 
-Shows a list of all completed tasks.<br>
-Format: `list complete`, `lc`
+### 2.4. Editing a task : `edit`
 
-### 2.5. Sort current list : `sort`
-
-Sort the current task list in a particular order.<br>
-Format: `sort by SORTCRITERIA`
-
-### 2.6. Editing a task : `edit`
-
-Edits an existing task in the address book.<br>
+Edits an existing task in the task list.<br>
 Format: `edit INDEX PARAMETER NEW_VALUE` <br>
 
 > * Edits the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
@@ -86,26 +79,37 @@ Format: `edit INDEX PARAMETER NEW_VALUE` <br>
 
 Examples:
 
-* `edit 1 due 20/03/2017`<br>
-  Edits the due date and email address of the 1st item to 20/03/2017.
+* `edit 1 newName`<br>
+  Edits the name of the 1st item to "newName".
 
-* `edit 2 description buy milk`<br>
-  Edits the description of the 2nd task to read “buy milk”.
+* `edit 2 g/weekend`<br>
+  Edits the group of the 2nd task to "weekend".
 
-### 2.7. Completing a task : `complete`
+### 2.5. Marking a task as complete : `Mark`
 
-Marks a task as completed.
-Format: `complete INDEX` <br>
+Changes the status of one task to **complete**.
+Format: `mark INDEX` <br>
 
-> * Completes the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
-> * Marks the task as complete.
+> * Mark the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `complete 1`<br>
-  Marks the 1st task as complete.
+* `mark 1`<br>
+  Marks the 1st task as completed.
+  
+### 2.6. Marking a task as incomplete : `Unmark`
 
-### 2.8. Deleting a task : `delete`
+Marks a task in current task list as incomplete.
+Format: `unmark INDEX` <br>
+
+> * Unmark the task at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `unmark 1`<br>
+  Marks the 1st task as incomplete.
+
+### 2.7. Deleting a task : `delete`
 
 Deletes the specified task. Irreversible.<br>
 Format: `delete INDEX`
@@ -123,15 +127,10 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
-### 2.9. Delete all tasks : `delete all`
+### 2.8. Finding all tasks containing keyword in their task name: `find`
 
-Deletes all tasks.<br>
-Format: `delete all`
-
-### 2.10. Finding all tasks containing any keyword in their description: `find`
-
-Finds tasks whose descriptions contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds tasks whose name contain any of the given keywords.<br>
+Format: `find KEYWORD`
 
 > * The search is not case-sensitive. e.g `milk` **will** match `Milk`
 > * The order of the keywords does not matter. e.g. `buy milk` will match `milk buy`
@@ -147,12 +146,17 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.11. Undo : `undo`
+### 2.9. Undo : `undo`
 
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
 
-### 2.12. Exiting the program : `exit`
+### 2.9. Redo : `redo`
+
+Does the undo function again. This command will return the program to the state it was in before the previous undo action was executed<br>
+Format: `redo`
+
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
@@ -179,42 +183,36 @@ There is no need to save manually.
 ## 4. Command Summary
 
 * **Help**: `help` <br>
-`?` <br>
-  e.g. `help`, `?`
+  e.g. `help`
 
-* **Add**  `add TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
-+ TASK_NAME [due DATE AND TIME] [starts DATE AND TIME ends DATE AND TIME]` <br>
-  e.g. `add CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`, `+ CS2103 assignment due 23/03/2017 1600 starts 22/03/2017 ends 23/03/2017 1800`
-
+* **Add**  `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
+  e.g. `add CS2103 assignment s/Feb 3 d/Apr 6 e/example@gmail.com g/study` <br> 
+       `add CS2103 assignment d/Apr 6 e/example@gmail.com g/study` <br>
+       `add CS2103 assignment e/example@gmail.com g/study` <br>
+	   
 * **List All**: `list` <br>
-`ls` <br>
-  e.g. `list`, `ls`
+  e.g. `list`
 
-* **List Completed Tasks**: `list complete`, `lc` <br>
-  e.g. `list complete`
+* **Edit**: `edit INDEX PARAMETER NEW_VALUE` <br>
+  e.g. `edit 2 g/learning`
+  
+* **Mark**: `mark INDEX` <br>
+  e.g. `mark 1`
 
-* **Sort By**: `sort by SORTCRITERIA` <br>
-  e.g. `sort by due`
+* **Unmark**: `unmark INDEX` <br>
+  e.g. `unmark 2`
 
-* **Edit**  `edit INDEX PARAMETER NEW_VALUE` <br>
-  e.g. `edit 2 due 23/03/2017 1200`
+* **Delete**: `delete INDEX` <br>
+  e.g. `delete 1`
 
-* **Complete** `complete INDEX` <br>
-  e.g. `complete 2`
-
-* **Delete** : `delete INDEX` <br>
-`- INDEX` <br>
-  e.g. `delete 3`, `- 3`
-
-* **Delete all: `delete all` <br>
-  e.g. `delete all`
-
-* **Find**: `find KEYWORD [MORE_KEYWORDS]` <br>
-`/ KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
+* **Find**: `find KEYWORD ` <br>
+  e.g. `find tutorial`
 
 * **Undo**: `undo` <br>
   e.g. `undo`
 
+* **Redo**: `redo` <br>
+  e.g. `redo`
+  
 * **Exit**: `exit` <br>
   e.g. `exit`
