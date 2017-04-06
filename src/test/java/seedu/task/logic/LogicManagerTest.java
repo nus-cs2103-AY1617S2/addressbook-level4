@@ -116,7 +116,6 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is not thrown and
      * that the result message is correct. Also confirms that both the 'task
      * manager' and the 'last shown list' are as specified.
-     * 
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -128,10 +127,8 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that
-     * the result message is correct. Both the 'task manager' and the 'last
-     * 
+     * the result message is correct. Both the 'task manager' and the 'last 
      * shown list' are verified to be unchanged.
-     * 
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -179,7 +176,6 @@ public class LogicManagerTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
-     * 
      * @param commandWord
      *            to test assuming it targets a single task in the last shown
      *            list based on visible index.
@@ -202,7 +198,6 @@ public class LogicManagerTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
-     * 
      * @param commandWord
      *            to test assuming it targets a single person in the last shown
      *            list based on visible index.
@@ -479,7 +474,6 @@ public class LogicManagerTest {
 
 	/**
 	 * Adds auto-generated Task objects to the given AddressBook
-	 * 
 	 * @param taskManager
 	 *            The TaskManager to which the Tasks will be added
 	 */
@@ -497,10 +491,8 @@ public class LogicManagerTest {
 	}
 
 	/**
-	 * Adds auto-generated Task objects to the given model
-	 * 
+	 * Adds auto-generated Task objects to the given model 
 	 * @param model
-	 * 
 	 *            The model to which the Tasks will be added
 	 */
 	void addToModel(Model model, int numGenerated) throws Exception {
