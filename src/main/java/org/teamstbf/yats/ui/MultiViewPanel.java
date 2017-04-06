@@ -122,7 +122,6 @@ public class MultiViewPanel extends UiPart<Region> {
 
     // ============ Inner Methods for Information Extraction ============
 
-    @SuppressWarnings("unchecked")
     private void updateCalendarList() {
 	String[] data = new String[TASK_DETAILS];
 	model.updateCalendarFilteredListToShowStartTime();
