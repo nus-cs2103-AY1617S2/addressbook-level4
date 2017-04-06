@@ -31,17 +31,17 @@ Before using OneTwoDo, please ensure that you have installed Java version 1.8.0_
 Start your OneTwoDo journey by downloading the latest OneTwoDo.jar from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.
 
 You can start OneTwoDo by simply double-clicking the icon!
-   > <img src="images/UG_img.onetwodo_icon.png" width="600">
+   > <img src="images/UG_img/onetwodo_icon.png" width="600">
 
 Figure 1: OneTwoDo User Interface
 
-Congratulations, you are all set up!    
+Congratulations, you are all set up!
 You may refer to the [Features](#features) section for more details on all the possible commands.
 
 
 ## Features
 
-<img src="images/UG_img.MainWindow_blank.png" width="600">
+<img src="images/UG_img/MainWindow_blank.png" width="600">
 
 Figure 2: OneTwoDo main window
 
@@ -115,7 +115,7 @@ Let us assume you are a busy professional. You want to start using OneTwoDo to o
 
     >>  help
 
-<img src="images/UG_img.cheetsheet_ss.png" width="600">
+<img src="images/UG_img/cheetsheet_ss.png" width="600">
 
 Figure 7: Command Summary Window
 
@@ -137,7 +137,7 @@ Format: `add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIOR
 
     >>  add Reply Emails 
 
-<img src="images/UG_img.addReplyEmail.png" width="600">
+<img src="images/UG_img/addReplyEmail.png" width="600">
 Figure 8: Add a to-do
 
 
@@ -151,7 +151,7 @@ Oh noes! your boss just now emailed you that there will be an important lunch me
 
     >>  add Lunch Meeting  s/tmr 1pm  e/tmr 3pm  r/weekly  d/bring laptop  p/high  t/work
 
-<img src="images/UG_img.addLunchMeeting.png" width="600">
+<img src="images/UG_img/addLunchMeeting.png" width="600">
 
 Figure 9: Add event task with detailed info
 
@@ -229,7 +229,7 @@ As for editing tags, all existing tags of the task will be replaced. (i.e adding
 
     >>  edit  e1  t/
 
-<img src="images/UG_img.tagRemove.png" width="600">
+<img src="images/UG_img/tagRemove.png" width="600">
 
 Figure 10: Before and after tags removal
 
@@ -249,7 +249,7 @@ The above command will filter out all the things you need to do from today till 
 
     >>  list  o/priority
 
-<img src="images/UG_img.prioritySort.png" width="600">
+<img src="images/UG_img/prioritySort.png" width="600">
 
 Figure 11: Sort by priority
 
@@ -261,7 +261,7 @@ Also, sometimes you may be so busy that you have forgotten if you have replied a
 
 All your completed tasks are listed! The feeling of satisfaction after seeing all the tasks you have successfully accomplished is indescribable! But it looks like you haven't reply the email.
 
-<img src="images/UG_img.doneFilter.png" width="600">
+<img src="images/UG_img/doneFilter.png" width="600">
 
 Figure 13: Filter all completed tasks
 
@@ -285,7 +285,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 >   Shows any task having names, tags, or description which contain any of the keywords: **birthday**, **shopping** and **assignment**.
 
 
-<img src="images/UG_img.findCommand.png" width="600">
+<img src="images/UG_img/findCommand.png" width="600">
 
 Figure 11: find task
 
@@ -397,21 +397,30 @@ Are you sure you have added all your tasks to OneTwoDo already? Simply type `exi
 ---
 ## FAQ
 
-**Q**: How do I transfer my data to another computer?
+**Q**: How do I transfer my data to another computer? <br>
 **A**: Use the `export` command to export out the storage. Transfer the storage file via any means (thumb drive, email, etc) and use the `import` command on another computer to import the storage.
+<br>
+<br>
 
-
-**Q**: What type of date and time format can I use?
+**Q**: What type of date and time format can I use? <br>
 **A**: OneTowDo support a variety of formats. You can checkout some of the more common formats above. For complete list of format, checkout the Natty website: http://natty.joestelmach.com/doc.jsp.
+<br>
+<br>
 
-**Q**: How do save my OneTwoDo data?
+**Q**: How do save my OneTwoDo data? <br>
 **A**: We will save your data automatically every time you input.
+<br>
+<br>
 
-**Q**: What is the different between `find` and `list` command?
+**Q**: What is the different between `find` and `list` command? <br>
 **A**: The `find` command helps you to look for a particular task. The `list` command helps you to view the task manager in a particular way.
+<br>
+<br>
 
-**Q**: Which commands can be undo?
+**Q**: Which commands can be undo? <br>
 **A**: You can only undo the commands that will modify the contents of your to do list. The 6 commands that you can undo are: `add`, `delete`, `edit`, `clear`, `done`, and `undone`.
+<br>
+<br>
 
-**Q**: What is the different between `done` and `delete` command?
+**Q**: What is the different between `done` and `delete` command? <br>
 **A**: The command `delete` will remove the selected task from the storage. The command `done` will archive the selected task into the done section. In this way, you can still keep track of the task that has been done.
