@@ -14,6 +14,7 @@ public class Schedule {
 
     private Date scheduleDate;
 
+  //@@author A0116219L
     /*
      * Creates a Schedule object from the Date object given. Date can be null.
      */
