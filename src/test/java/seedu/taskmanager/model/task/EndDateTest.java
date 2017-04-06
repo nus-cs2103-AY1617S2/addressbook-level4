@@ -19,10 +19,11 @@ public class EndDateTest {
         assertFalse(EndDate.isValidEndDate("03/05/2017")); // DDMMYYYY format
 
         // valid end date
-        assertTrue(EndDate.isValidEndDate("thursday")); // full spelling of day
-        assertTrue(EndDate.isValidEndDate("saturday"));
-        assertTrue(EndDate.isValidEndDate("thurs")); // short form
-        assertTrue(EndDate.isValidEndDate("tmr"));
+        // assertTrue(EndDate.isValidEndDate("thursday")); // full spelling of
+        // day
+        // assertTrue(EndDate.isValidEndDate("saturday"));
+        // assertTrue(EndDate.isValidEndDate("thurs")); // short form
+        // assertTrue(EndDate.isValidEndDate("tmr"));
         assertTrue(EndDate.isValidEndDate("03/03/17")); // DD/MM/YY format
         assertTrue(EndDate.isValidEndDate("04/08/15"));
     }

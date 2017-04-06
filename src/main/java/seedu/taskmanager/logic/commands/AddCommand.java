@@ -9,7 +9,6 @@ import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.model.task.Task;
@@ -31,7 +30,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with another event";
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes "
+            + "with another event";
 
     private final Task toAdd;
 

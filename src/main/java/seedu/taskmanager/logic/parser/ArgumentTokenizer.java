@@ -104,6 +104,20 @@ public class ArgumentTokenizer {
         return positions;
     }
 
+    private List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix prefix) {
+        List<PrefixPosition> positions = new ArrayList<>();
+
+        int argumentStart = argsString.indexOf(prefix.getPrefix());
+
+        while (argumentStart != -1) {
+            PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
+            positions.add(extendedPrefix);
+            argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
+        }
+
+        return positions;
+    }
+
     /**
      * Finds all positions in an arguments string at which a given
      * {@code prefix} appears
@@ -129,20 +143,6 @@ public class ArgumentTokenizer {
          * argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart
          * + 1); }
          */
-        return positions;
-    }
-
-    private List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix prefix) {
-        List<PrefixPosition> positions = new ArrayList<>();
-
-        int argumentStart = argsString.indexOf(prefix.getPrefix());
-
-        while (argumentStart != -1) {
-            PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
-            positions.add(extendedPrefix);
-            argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
-        }
-
         return positions;
     }
 

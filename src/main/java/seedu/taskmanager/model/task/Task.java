@@ -219,7 +219,8 @@ public class Task implements ReadOnlyTask {
         }
 
         else {
-            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value, t.getEndDate().value) == 1)
+            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                    t.getEndDate().value) == 1)
                     || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
                             t.getEndDate().value) == 1)
                     || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
