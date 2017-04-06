@@ -43,6 +43,7 @@ import seedu.doist.model.tag.Tag;
 import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.ReadOnlyTask;
+import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskMatchingComparator;
 import seedu.doist.model.task.Task;
 import seedu.doist.storage.StorageManager;
 
@@ -115,6 +116,12 @@ public class LogicManagerTest {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
+    private void assertCommandSuccess(String inputCommand, String expectedMessage,
+            ReadOnlyTodoList expectedAddressBook,
+            List<? extends ReadOnlyTask> expectedShownList, boolean isTest) {
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList, isTest);
+    }
+
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
@@ -136,7 +143,7 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTodoList expectedAddressBook,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+                                       List<? extends ReadOnlyTask> expectedShownList, boolean isFind) {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -148,11 +155,21 @@ public class LogicManagerTest {
         }
 
         //Confirm the ui display elements should contain the right data
-        assertEquals(expectedShownList, model.getFilteredTaskList());
+        assertEquals(expectedShownList, new ArrayList<ReadOnlyTask>(model.getFilteredTaskList()));
 
         //Confirm the state of data (saved and in-memory) is as expected
         assertEquals(expectedAddressBook, model.getTodoList());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        if (!isFind) {
+            // If not find, then check saved todolist
+            assertEquals(expectedAddressBook, latestSavedAddressBook);
+        }
+    }
+
+    private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
+            ReadOnlyTodoList expectedAddressBook,
+            List<? extends ReadOnlyTask> expectedShownList) {
+        assertCommandBehavior(isCommandExceptionExpected, inputCommand, expectedMessage,
+                expectedAddressBook, expectedShownList, false);
     }
 
     @Test
@@ -364,12 +381,12 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         // After the command, tasks will be auto sorted
-        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
-        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedList.sort(new ReadOnlyTaskMatchingComparator("KEY"));
+        expectedAB.sortTasks(new ReadOnlyTaskMatchingComparator("KEY"));
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
-                expectedList);
+                expectedList, true);
     }
 
     @Test
@@ -386,12 +403,12 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         // After the command, tasks will be auto sorted
-        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
-        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedList.sort(new ReadOnlyTaskMatchingComparator("KEY"));
+        expectedAB.sortTasks(new ReadOnlyTaskMatchingComparator("KEY"));
         assertCommandSuccess("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
-                expectedList);
+                expectedList, true);
     }
 
     @Test
@@ -408,12 +425,12 @@ public class LogicManagerTest {
         helper.addToModel(model, fourPersons);
 
         // After the command, tasks will be auto sorted
-        expectedList.sort(model.parseSortTypesToComparator(model.getDefaultSorting()));
-        expectedAB.sortTasks(model.parseSortTypesToComparator(model.getDefaultSorting()));
+        expectedList.sort(new ReadOnlyTaskMatchingComparator("key rAnDoM"));
+        expectedAB.sortTasks(new ReadOnlyTaskMatchingComparator("key rAnDoM"));
         assertCommandSuccess("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
-                expectedList);
+                expectedList, true);
     }
 
 
