@@ -201,6 +201,7 @@ public class TaskTest {
 
     @Test
     public void compareTo_differentPriority() {
+        Task.sortBy("default");
         Task testTask = new Task("floating");
         Task highPriorityTask = new Task("high priority");
         Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
@@ -212,16 +213,17 @@ public class TaskTest {
 
     @Test
     public void compareTo_samePriorityDifferentEndDateTime() {
+        Task.sortBy("default");
         Task testTask = new Task("floating");
         Task taskWithDeadline = new Task("task with deadline", LocalDateTime.now());
         Task event = new Task("event", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
-
         assertEquals(taskWithDeadline.compareTo(event), -1);
         assertEquals(event.compareTo(testTask), -1);
     }
 
     @Test
     public void compareTo_sameEndDateTimeSamePriorityDifferentStartDateTime() {
+        Task.sortBy("default");
         LocalDateTime to = LocalDateTime.now();
         LocalDateTime from  = to.minusDays(1);
         Task event1 = new Task("event 1", from, to);
@@ -231,6 +233,7 @@ public class TaskTest {
 
     @Test
     public void compareTo_sameEndDateTimeSameStartDateTimeSamePriorityDifferentDescription() {
+        Task.sortBy("default");
         LocalDateTime to = LocalDateTime.now();
         LocalDateTime from  = to.minusDays(1);
         Task event1 = new Task("event 1", from, to);
@@ -248,6 +251,7 @@ public class TaskTest {
 
     @Test
     public void compareTo_nonOverdueOverdue() {
+        Task.sortBy("default");
         Task task1 = new Task("yesterday", LocalDateTime.now().minusDays(1));
         task1.setCompleted(true);
         Task task2 = new Task("today", LocalDateTime.now());
