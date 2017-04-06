@@ -11,6 +11,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
+    -fx-text-overrun: center-ellipses;
 }
 
 .label-bright {
@@ -30,6 +31,7 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-text-overrun: center-ellipses;
 }
 
 .tab-pane {
@@ -94,6 +96,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-text-overrun: center-ellipses;
 }
 
 /*
@@ -104,11 +107,12 @@
 }
 
 /*
- * @@author A0131278H
+ * @@author
  */
 
 .list-cell .label {
     -fx-text-fill: #010504;
+    -fx-text-overrun: center-ellipses;
 }
 
 .cell_big_label {
