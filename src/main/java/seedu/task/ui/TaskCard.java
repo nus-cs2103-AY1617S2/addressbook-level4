@@ -48,34 +48,23 @@ public class TaskCard extends UiPart<Region> {
     //@@author A0139975J
     public TaskCard(ReadOnlyTask task, int displayedIndex, String...fxml) {
         super(fxml.length == 0 ? FXML : fxml[0]);
-//        plane.setText(displayedIndex + ". " + task.getName().fullName);
-//        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        //plane.setCollapsible(true);
-      //prohibit animating
-     // plane.setAnimated(false);
+
         plane.setExpanded(false);
         this.status = false;
+        name.setMaxWidth(1000);
+        name.setWrapText(true);
         name.setText(displayedIndex + ". " + task.getName().fullName);
         name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
-            //done.setText("Done");
             name.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
             name.setGraphic(new ImageView(image));
             name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        } else {
-            //done.setText("Not Done");
-            //done.setTextFill(Color.RED);
-            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            //name.setGraphic(new ImageView(image));
-            //name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         }
+
         remark.setText(task.getRemark().value);
         initTags(task);
     }
