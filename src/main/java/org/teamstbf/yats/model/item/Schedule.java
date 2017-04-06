@@ -19,7 +19,7 @@ public class Schedule {
      * Creates a Schedule object from the Date object given. Date can be null.
      */
     public Schedule(Date dateObject) {
-	this.scheduleDate = dateObject;
+        this.scheduleDate = dateObject;
     }
 
     public Schedule(String timeString) {
@@ -62,8 +62,13 @@ public class Schedule {
 	} else if (this.scheduleDate.equals("")) {
 	    return STRING_EMPTY;
 	}
+	
 	String dateString = FORMATTER_DATE.format(this.scheduleDate);
 	return dateString;
     }
+    
+    public Date getDate() {
+        return this.scheduleDate;
+    }    
 
 }

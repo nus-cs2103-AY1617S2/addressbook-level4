@@ -23,6 +23,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_NLP_TIME = new Prefix(",");
     public static final Prefix PREFIX_NLP_LOCATION = new Prefix("@");
     public static final Prefix PREFIX_NLP_TAG = new Prefix("#");
+    public static final Prefix PREFIX_NLP_HOURS = new Prefix("=");
     public static final Prefix PREFIX_NLP_DESCRIPTION = new Prefix("//");
 
     /* Patterns definitions */
