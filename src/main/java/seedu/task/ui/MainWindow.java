@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Region> {
     //private CompletedTaskList completedTaskList;
     private TaskListPanel taskListPanel;
     private CompletedTaskList completedTaskList;
+    private OverdueListPanel overdueListPanel;
     private Config config;
 
     @FXML
@@ -54,6 +55,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane completedTaskListPlaceholder;
+
+    @FXML
+    private AnchorPane overdueListPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -114,6 +118,7 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         completedTaskList = new CompletedTaskList (getCompletedTaskListPlaceholder(), logic.getCompletedTaskList());
+        overdueListPanel = new OverdueListPanel (getOverdueListPlaceholder(), logic.getOverdueList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         //new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
@@ -140,6 +145,9 @@ public class MainWindow extends UiPart<Region> {
         return completedTaskListPlaceholder;
     }
 
+    private AnchorPane getOverdueListPlaceholder() {
+        return overdueListPanelPlaceholder;
+    }
     void hide() {
         primaryStage.hide();
     }
@@ -201,5 +209,13 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    public OverdueListPanel getOverdueListPanel() {
+        return this.overdueListPanel;
+    }
+
+    public CompletedTaskList getCompletedTaskListPanel() {
+        return this.completedTaskList;
     }
 }

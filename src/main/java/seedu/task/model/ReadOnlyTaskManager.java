@@ -28,4 +28,11 @@ public interface ReadOnlyTaskManager {
      */
     ObservableList<ReadOnlyTask> getCompletedTaskList();
 
+    /**
+     * Returns an unmodifiable view of the overdue tasks list
+     * This list will not contain any duplicate tasks.
+     * @return
+     */
+    ObservableList<ReadOnlyTask> getOverdueTaskList();
+
 }

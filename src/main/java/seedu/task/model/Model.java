@@ -64,6 +64,13 @@ public interface Model {
 
     void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException;
 
+    /** Deletes the given completed task from the completed task list
+     * @throws TaskNotFoundException */
+    void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException;
+
+    /** Returns overdue task list */
+    UnmodifiableObservableList<ReadOnlyTask> getOverdueList();
+
     //@@author A0135762A
     /** Updates the filter of the filtered task list to filter by the today's date */
     void updateUpcomingTaskList();
@@ -81,7 +88,4 @@ public interface Model {
     void updateOverdueTaskList();
     //@@author
 
-    /** Deletes the given completed task from the completed task list
-     * @throws TaskNotFoundException */
-    void deleteCompletedTask(ReadOnlyTask t) throws TaskNotFoundException;
 }
