@@ -55,10 +55,8 @@ public class TaskCard extends UiPart<Region> {
         if (task.getIsAnimated() == 1) {
             // Play progress bar animation
             Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.ZERO,
-                            new KeyValue(progressBar.progressProperty(), 0)),
-                    new KeyFrame(Duration.seconds(1), 
-                            new KeyValue(progressBar.progressProperty(), 1)));
+                    new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), 0)),
+                    new KeyFrame(Duration.seconds(1), new KeyValue(progressBar.progressProperty(), 1)));
             timeline.setCycleCount(1);
             timeline.play();
             task.setAnimation(0);

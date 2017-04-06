@@ -219,15 +219,15 @@ Certain properties of the application can be controlled (e.g app name, logging l
 
 ### 4.3. UI Implementation Details
 #### 4.3.1 Splitting of Task List
-In Model, all tasks to be shown on the UI are maintained in a single `filteredTaskList`. In order for tasks to be displayed under correct category(i.e. today, future and completed), it is necessary to split them into three sublists everytime before refreshing the UI.
+In Model, all tasks to be shown on the UI are maintained in a single `filteredTaskList`. In order for tasks to be displayed under correct category(i.e. today, future and completed), it is necessary to split them into three sublists every time before refreshing the UI.
 
-In our UI implementation, tasks are stored in three `ObservableList<ReadOnlyTask>` which are `taskListToday`, `taskListFuture` and `taskListCompleted`. The reason we chose `ObservableList` is becasue it help to automatically refresh the UI view when updating task list, saving the trouble of reinventing the wheel. The three lists are initialised in `MainWindow`'s fillInnerPart() function during instantiation.
+In our UI implementation, tasks are stored in three `ObservableList<ReadOnlyTask>` which are `taskListToday`, `taskListFuture` and `taskListCompleted`. The reason we chose `ObservableList` is because it help to automatically refresh the UI view when updating task list, saving the trouble of reinventing the wheel. The three lists are initialised in `MainWindow`'s fillInnerPart() function during instantiation.
 
-Whenever the UI receives a `TaskManagerChangedEvent`, it calls `MainWindow` to prepare the splited task lists(Step 2.1). `MainWindow` further calls `logic.prepareTaskList()` while passing `taskListToday`, `taskListFuture` and `taskListCompleted`'s references as well. Logic then calls Model to do the dirty job.
+Whenever the UI receives a `TaskManagerChangedEvent`, it calls `MainWindow` to prepare the splitted task lists(Step 2.1). `MainWindow` further calls `logic.prepareTaskList()` while passing `taskListToday`, `taskListFuture` and `taskListCompleted`'s references as well. Logic then calls Model to do the dirty job.
 
 Model does the splitting work in the following steps:
 
-1. It creates three temporary ArrayLists for today, future and completed tasks. These duplicated list are used for the later spliting and sorting process. We did not use the three `ObservableList` from the parameters beacuse adding and sorting on these lists will result in multiple UI refreshes, which is both undesiable for perforamce and may result in potential synchronisation issues.
+1. It creates three temporary ArrayLists for today, future and completed tasks. These duplicated list are used for the later splitting and sorting process. We did not use the three `ObservableList` from the parameters because adding and sorting on these lists will result in multiple UI refreshes, which is both undesirable for perforance and may result in potential synchronisation issues.
 
 2. In `splitTaskList`, tasks are copied from `filteredTaskList` to their corresponding temporary lists. They are then sorted by task type first followed by deadlines. Floating tasks will always appear at the beginning of the list while event/deadline tasks with earlier deadlines will come first. Lastly, `assignUiIndex()` will assign a relative ID to individual tasks for UI display(See section 4.3.2 for more details).
 
@@ -238,7 +238,7 @@ _Figure 4.2.1: Sequence diagram of the process of splitting task lists_
 
 
 #### 4.3.2 Mapping between UI index(task ID) and absolute index
-As you may have noticed, task IDs in the UI all begin with "T/F/C". It is a design decison made to improve the usability of commands. Originally, all tasks shared a same set of index and there were "hops" between to adjacent tasks. For example, two adjacent tasks in the list **Future** may have indexes of "1" and "5" respectively beacuse task "2", "3" and "4" are in **Today**, which did not seem to be intuitive.
+As you may have noticed, task IDs in the UI all begin with "T/F/C". It is a design decision made to improve the usability of commands. Originally, all tasks shared a same set of index and there were "hops" between to adjacent tasks. For example, two adjacent tasks in the list **Future** may have indexes of "1" and "5" respectively because task "2", "3" and "4" are in **Today**, which did not seem to be intuitive.
 
 Thus, we decided to adopt the current numbering scheme while hoping to retain the original implementation based on absolute index. That is where the index mapping came from. We used a HashMap in ModelManager to store the mapping from relative to absolute index. Every time after splitting the task list, `assignUiIndex()` is called to refresh the task ID.
  
@@ -261,7 +261,7 @@ _Figure 4.3.4.1: Control Layout of MainWindow_
 ##### 4.3.4.2 Command Animation
 In **Today**, there are two types of command animation, namely **before-execute** and **after-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them. 
 
-In gerenal, both animations comprise of two stages: **displaying a progress bar underneath the task** and **scrolling the LiseView to it**.
+In general, both animations comprise of two stages: **displaying a progress bar underneath the task** and **scrolling the LiseView to it**.
 
 **Before-execute Animation (Add/Edit)**
 

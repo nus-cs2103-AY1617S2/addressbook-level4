@@ -88,7 +88,7 @@ public class LogicManagerTest {
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
-    private int targetedJumpIndex;
+    private String targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
@@ -127,7 +127,7 @@ public class LogicManagerTest {
                                                                           // to
                                                                           // date
         helpShown = false;
-        targetedJumpIndex = -1; // non yet
+        targetedJumpIndex = ""; // non yet
     }
 
     @After

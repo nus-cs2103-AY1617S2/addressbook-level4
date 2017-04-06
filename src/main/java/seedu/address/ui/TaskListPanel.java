@@ -62,8 +62,8 @@ public class TaskListPanel extends UiPart<Region> {
         updateListHeight();
     }
 
-    public void scrollTo(){
-        for (ReadOnlyTask task: taskListToday){
+    public void scrollTo() {
+        for (ReadOnlyTask task : taskListToday) {
             if (task.isAnimated()) {
                 scrollToToday(taskListToday.indexOf(task));
             }
