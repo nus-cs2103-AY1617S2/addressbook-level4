@@ -19,7 +19,6 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    // TODO update this as well
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task/event identified by the index number used in the last task/event listing.\n"
             + "Parameters: FLAG INDEX (must be a positive integer)\n"

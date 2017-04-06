@@ -71,11 +71,15 @@ public class Timeslot {
      */
     public boolean isOverlapping(Timeslot another) {
         assert another != null;
-        if (start.before(another.start) && end.after(another.start)) {
+        if (start.equals(another.start) || end.equals(another.end)) {
+            return true;
+        } else if (start.before(another.start) && end.after(another.start)) {
             return true;
         } else if (start.before(another.end) && end.after(another.end)) {
             return true;
         } else if (start.after(another.start) && start.before(another.end)) {
+            return true;
+        } else if (start.compareTo(another.start) == 0 && end.compareTo(another.end) == 0) {
             return true;
         } else {
             return false;

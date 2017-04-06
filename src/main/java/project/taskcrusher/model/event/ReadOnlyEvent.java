@@ -1,5 +1,6 @@
 package project.taskcrusher.model.event;
 
+import java.util.Date;
 import java.util.List;
 
 import project.taskcrusher.model.shared.ReadOnlyUserToDo;
@@ -14,6 +15,7 @@ public interface ReadOnlyEvent extends ReadOnlyUserToDo, Comparable<ReadOnlyEven
     Location getLocation();
     boolean isOverdue();
     boolean hasOverlappingTimeslot(Timeslot another);
+    Date getEarliestBookedTime();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -34,6 +36,7 @@ public interface ReadOnlyEvent extends ReadOnlyUserToDo, Comparable<ReadOnlyEven
         builder.append(getName() + " ")
                 .append(getTimeslots() + " ")
                 .append(getDescription() + " ")
+                .append(getLocation() + " ")
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

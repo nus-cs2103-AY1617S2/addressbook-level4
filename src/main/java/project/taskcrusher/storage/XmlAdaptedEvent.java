@@ -97,17 +97,7 @@ public class XmlAdaptedEvent {
 
         final Location location = new Location(this.location);
 
-        Event thisEvent = new Event(name, eventTimeslots, location, description, tags);
-
-        if (isOverdue) {
-            thisEvent.markOverdue();
-        }
-
-        if (isComplete) {
-            thisEvent.markComplete();
-        }
-
-        return thisEvent;
+        return new Event(name, eventTimeslots, location, description, tags, isComplete, isOverdue);
     }
 
 }

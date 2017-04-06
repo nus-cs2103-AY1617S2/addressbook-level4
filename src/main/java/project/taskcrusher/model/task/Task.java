@@ -33,10 +33,33 @@ public class Task extends UserToDo implements ReadOnlyTask {
     }
 
     /**
+     * This constructor is used when loading from storage
+     */
+    public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags,
+            boolean isComplete, boolean isOverdue) {
+        super(name, priority, description, tags);
+        assert deadline != null;
+
+        this.deadline = deadline;
+        this.isOverdue = isOverdue;
+        this.isComplete = isComplete;
+    }
+
+    /**
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(),
+                source.getTags(), source.isComplete(), source.isOverdue());
+    }
+
+    public boolean updateOverdueStatus(Date now) {
+        boolean isAnyUpdate = false;
+        if (hasDeadline() && now.after(getDeadline().getDate().get())) {
+            markOverdue();
+            isAnyUpdate = true;
+        }
+        return isAnyUpdate;
     }
 
     @Override
@@ -82,6 +105,8 @@ public class Task extends UserToDo implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
+        this.isOverdue = false;
+        updateOverdueStatus(new Date());
     }
 
     @Override
@@ -113,6 +138,7 @@ public class Task extends UserToDo implements ReadOnlyTask {
             return -1;
         }
         //neither is complete
+
         if (!this.getDeadline().hasDeadline() && !another.getDeadline().hasDeadline()) {
             return this.getPriority().compareTo(another.getPriority());
         } else if (!this.getDeadline().hasDeadline() && another.getDeadline().hasDeadline()) {

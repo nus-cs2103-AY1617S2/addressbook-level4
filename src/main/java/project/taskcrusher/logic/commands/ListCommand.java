@@ -14,44 +14,54 @@ import project.taskcrusher.model.task.Deadline;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String OVERDUE_FLAG = "o";
     public static final String COMPLETE_FLAG = "c";
+    public static final String ALL_FLAG = "all";
     public static final String NO_FLAG = "";
 
     public static final String MESSAGE_MULTIPLE_DATERANGES = "Multiple date ranges supplied. Supply only one range.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists tasks/events that satisfies the given qualifier "
-            + "list: list command with no qualifier lists all tasks and events\n"
-            + "list d/DEADLINE: lists all tasks whose deadline is set before DEADLINE"
-            + "list d/TIMESLOT: lists all events whose timeslot overlaps with TIMESLOT";
+            + "list: list command with no qualifier lists active todos only\n" + "list c: lists only complete events"
+            + "list all: lists all events, active and complete"
+            + "list d/DEADLINE: lists all todos whose set before now to DEADLINE"
+            + "list d/TIMESLOT: lists all todos whose timeslot overlaps with TIMESLOT";
 
     // TODO fix this message eventually
     public static final String MESSAGE_SUCCESS = "Listed all relevant events/tasks";
 
     private Timeslot dateRange;
-    private boolean showOverdueOnly;
+    private boolean showActiveOnly;
     private boolean showCompleteOnly;
 
-    public ListCommand(String date, boolean showOverdueOnly, boolean showCompleteOnly) throws IllegalValueException {
+    public ListCommand(String date, boolean showActiveOnly, boolean showCompleteOnly) throws IllegalValueException {
         if (date.equals(Deadline.NO_DEADLINE)) {
             this.dateRange = null;
         } else {
             this.dateRange = parseDateRange(date);
         }
-        this.showOverdueOnly = showOverdueOnly;
+        this.showActiveOnly = showActiveOnly;
         this.showCompleteOnly = showCompleteOnly;
+
+        if (dateRange != null && (showCompleteOnly)) { // showActiveOnly allowed
+                                                       // as default
+            throw new IllegalValueException(MESSAGE_USAGE);
+        }
     }
 
     @Override
     public CommandResult execute() {
         assert model != null;
-        assert !(showOverdueOnly && showCompleteOnly);
+        assert !(showActiveOnly && showCompleteOnly);
 
-        if (dateRange == null) {
-            model.updateFilteredTaskListToShowAll();
-            model.updateFilteredEventListToShowAll();
-        } else {
-            model.updateFilteredTaskList(dateRange);
-            model.updateFilteredEventList(dateRange);
+        if (dateRange != null) {
+            model.updateFilteredLists(dateRange);
+        } else if (!showActiveOnly && !showCompleteOnly) {
+            model.updateFilteredListsShowAll();
+        } else if (showCompleteOnly) {
+            model.updateFilteredListsToShowCompleteToDo();
+        } else if (showActiveOnly) {
+            model.updateFilteredListsToShowActiveToDo();
+        } else if (dateRange != null) {
+            model.updateFilteredLists(dateRange);
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
@@ -66,17 +76,13 @@ public class ListCommand extends Command {
     private Timeslot parseDateRange(String date) throws IllegalValueException {
         Timeslot dateRange;
 
-        try {
-            dateRange = Timeslot.constructTimeslotFromEndDate(date);
-            return dateRange;
-        } catch (IllegalValueException ive) {
-            List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-            if (timeslots.size() > 1) {
-                throw new IllegalValueException(MESSAGE_MULTIPLE_DATERANGES);
-            }
-            dateRange = timeslots.get(0);
-            return dateRange;
+        List<Timeslot> timeslots = ParserUtil.parseForList(date);
+        if (timeslots.size() > 1) {
+            throw new IllegalValueException(MESSAGE_MULTIPLE_DATERANGES);
         }
+        dateRange = timeslots.get(0);
+
+        return dateRange;
     }
 
 }

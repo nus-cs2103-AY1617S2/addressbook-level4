@@ -1,5 +1,5 @@
 # A0163962X-reused
-###### \java\project\taskcrusher\logic\LogicManagerTest.java
+###### /java/project/taskcrusher/logic/LogicManagerTest.java
 ``` java
     private void assertEventIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;

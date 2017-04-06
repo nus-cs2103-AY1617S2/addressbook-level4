@@ -67,7 +67,7 @@ public class Priority implements Comparable<Priority> {
     public int compareTo(Priority another) {
         int thisPriority = Integer.parseInt(this.priority);
         int anotherPriority = Integer.parseInt(another.priority);
-        return thisPriority - anotherPriority;
+        return anotherPriority - thisPriority;
     }
 
 }

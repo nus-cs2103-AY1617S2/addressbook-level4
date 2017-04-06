@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- @@author A0127737X -->
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -27,19 +29,24 @@
                     </padding>
                     <children>
                         <HBox spacing="5" alignment="CENTER_LEFT">
-                            <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
-                                    <FlowPane fx:id="tags" />
-                                </HBox>
-                            </children>
+                            <Label fx:id="id" styleClass="cell_big_label"></Label>
+                            <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">
+                                    <image>
+                                        <Image url = "images/overdue.png" ></Image>
+                                    </image>
+                            </ImageView>
+                            <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
+                            <Label fx:id="priority" styleClass="priority" text="\$priority" />
+                            <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
+                            <FlowPane fx:id="tags" />
+                            <ImageView fx:id="tickIcon" fitHeight="25.0" fitWidth="25.0">
+                            <image>
+                                <Image url = "images/tick_icon.png" ></Image>
+                            </image>
+                            </ImageView>
                         </HBox>
-<!--                         <FlowPane fx:id="tags" /> -->
-                        <FlowPane fx:id="timeslots" />
-                        <Label fx:id="eventLocation" styleClass="cell_small_label" text="\$location" />
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
-                        <Label fx:id="completeFlag" text="\$completeFlag" styleClass="cell_big_label"/>
+                        <FlowPane fx:id="timeslots" styleClass = "timeslots"/>
+                        <Label fx:id="description" text="\$description" />
                     </children>
                 </VBox>
             </children>

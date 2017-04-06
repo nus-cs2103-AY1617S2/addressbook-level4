@@ -19,7 +19,10 @@ import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.ListCommand;
 import project.taskcrusher.logic.commands.LoadCommand;
 import project.taskcrusher.logic.commands.MarkCommand;
+import project.taskcrusher.logic.commands.RedoCommand;
 import project.taskcrusher.logic.commands.SelectCommand;
+import project.taskcrusher.logic.commands.SwitchCommand;
+import project.taskcrusher.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -30,6 +33,8 @@ public class Parser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final String NO_OPTION = "";
+    public static final String FORCE_OPTION = "f";
 
     /**
      * Parses user input into command for execution.
@@ -69,7 +74,7 @@ public class Parser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
-          //TODO remove this later on
+        // TODO remove this later on
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -84,6 +89,15 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case SwitchCommand.COMMAND_WORD:
+            return new SwitchCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

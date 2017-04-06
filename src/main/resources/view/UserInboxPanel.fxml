@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author A0127737X -->
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <Label fx:id="taskHeader" text="Tasks: " styleClass="list_header" />
+    <SplitPane fx:id ="listSplitter" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+    <items>
+    <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="0" left="5" right="8" top="0" />
+    </padding>
+    <children>
+        <Label fx:id="taskHeader" text="Tasks: " styleClass="list_header">
+        <graphic>
+           <ImageView fitHeight="23.0" fitWidth="23.0">
+                <image>
+                <Image url = "images/sand_glass_icon.png" ></Image>
+                </image>
+            </ImageView>
+        </graphic>
+        </Label>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
-        <Label fx:id="eventHeader" text="Events: " styleClass="list_header" />
+        </children>
+        </VBox>
+        <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+           <Insets bottom="0" left="8" right="5" top="0" />
+        </padding>
+        <children>
+        <Label fx:id="eventHeader" text="Events: " styleClass="list_header">
+        <graphic>
+        <ImageView fitHeight="23.0" fitWidth="23.0">
+        <image>
+        <Image url = "images/calendar.png" ></Image>
+        </image>
+        </ImageView>
+        </graphic>
+        </Label>
         <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
+        </children>
+        </VBox>
+        </items>
+    </SplitPane>
     </children>
 </VBox>

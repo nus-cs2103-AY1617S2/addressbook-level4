@@ -4,6 +4,7 @@ import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_OPTION;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,8 +39,10 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_DATE, PREFIX_LOCATION,
-                PREFIX_DESCRIPTION, PREFIX_TAG);
+                PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_OPTION);
         argsTokenizer.tokenize(args);
+        final String option = ParserUtil.setValue(argsTokenizer, PREFIX_OPTION, Parser.NO_OPTION);
+
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 3);
 
         try {
@@ -82,6 +85,7 @@ public class EditCommandParser {
                 try {
                     editEventDescriptor.setName(ParserUtil.parseName(preambleFields.get(2)));
                     editEventDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_LOCATION)));
+                    editEventDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
                     editEventDescriptor.setTimeslots(ParserUtil.parseTimeslots(argsTokenizer.getValue(PREFIX_DATE)));
                     editEventDescriptor
                             .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
@@ -95,7 +99,11 @@ public class EditCommandParser {
                     return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
                 }
 
-                return new EditEventCommand(index.get(), editEventDescriptor);
+                EditEventCommand edited = new EditEventCommand(index.get(), editEventDescriptor);
+                if (option.equals(Parser.FORCE_OPTION)) {
+                    edited.force = true;
+                }
+                return edited;
 
             } else {
                 throw new IllegalValueException(
@@ -106,7 +114,7 @@ public class EditCommandParser {
         }
     }
 
-    //@@author A0163962X-reused
+    // @@author A0163962X-reused
     /**
      * Parses {@code Collection<String> tags} into an
      * {@code Optional<UniqueTagList>} if {@code tags} is non-empty. If

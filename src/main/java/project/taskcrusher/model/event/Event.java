@@ -1,5 +1,6 @@
 package project.taskcrusher.model.event;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
@@ -33,11 +35,36 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.isOverdue = false;
     }
 
+    public Event(Name name, List<Timeslot> timeslots, Priority priority, Location location, Description description,
+            UniqueTagList tags) {
+        super(name, priority, description, tags);  //added priority
+
+        assert !CollectionUtil.isAnyNull(timeslots, location);
+
+        this.timeslots = timeslots;
+        this.location = location;
+        this.isOverdue = false;
+    }
+
+    public Event(Name name, List<Timeslot> timeslots, Location location, Description description, UniqueTagList tags,
+            boolean isComplete, boolean isOverdue) {
+        super(name, null, description, tags); // TODO: remove this stub priority
+        // later
+
+        assert !CollectionUtil.isAnyNull(timeslots, location);
+
+        this.timeslots = timeslots;
+        this.location = location;
+        this.isComplete = isComplete;
+        this.isOverdue = isOverdue;
+    }
+
     /**
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags());
+        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags(),
+                source.isComplete(), source.isOverdue());
     }
 
     /**
@@ -59,9 +86,33 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     public boolean confirmTimeslot(int timeslotIndex) {
         Timeslot confirmed = timeslots.get(timeslotIndex);
-        timeslots.clear();
+        // this approach, as opposed to timeslots.clear(), is taken so that we
+        // can maintain the reference
+        // to timeslot elements in the undo/redo saved states
+        timeslots = new ArrayList<Timeslot>();
         timeslots.add(confirmed);
         return true;
+    }
+
+    public boolean updateOverdueStatus(Date now) {
+        boolean isAnyUpdate = false;
+        for (Timeslot timeslot : getTimeslots()) {
+            if (now.after(timeslot.end)) {
+                markOverdue();
+                isAnyUpdate = true;
+            }
+        }
+        return isAnyUpdate;
+    }
+
+    public Date getEarliestBookedTime() {
+        Date earliest = timeslots.get(0).start;
+        for (int i = 1; i < timeslots.size(); i++) {
+            if (timeslots.get(i).start.before(earliest)) {
+                earliest = timeslots.get(i).start;
+            }
+        }
+        return earliest;
     }
 
     public List<Timeslot> getTimeslots() {
@@ -94,6 +145,12 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         return this.isOverdue;
     }
 
+    @Override
+    public void markComplete() {
+        super.markComplete();
+        isOverdue = false;
+    }
+
     public void resetData(ReadOnlyEvent replacement) {
         assert replacement != null;
 
@@ -102,6 +159,15 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.setLocation(replacement.getLocation());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
+        if (replacement.isComplete()) {
+            this.markComplete();
+        }
+        if (replacement.isOverdue()) {
+            this.markOverdue();
+        }
+
+        this.isOverdue = false;
+        updateOverdueStatus(new Date());
     }
 
     @Override
@@ -134,24 +200,19 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         } else if (another.isComplete()) {
             return -1;
         }
-        // TODO: just for now
-        Date thisEarliest = this.timeslots.get(0).start;
-        Date anotherEarliest = another.getTimeslots().get(0).start;
 
-        return thisEarliest.compareTo(anotherEarliest);
+        return this.getEarliestBookedTime().compareTo(another.getEarliestBookedTime());
     }
 
     public boolean hasOverlappingEvent(List<? extends ReadOnlyEvent> preexistingEvents) {
-
-        boolean isOverlapping = false;
         for (ReadOnlyEvent roe : preexistingEvents) {
             for (Timeslot roet : roe.getTimeslots()) {
                 if (this.hasOverlappingTimeslot(roet)) {
-                    isOverlapping = true;
+                    return true;
                 }
             }
         }
-        return isOverlapping;
+        return false;
     }
 
 }

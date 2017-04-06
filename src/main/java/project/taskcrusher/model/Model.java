@@ -7,10 +7,13 @@ import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
+import project.taskcrusher.model.event.UniqueEventList.DuplicateEventException;
+import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
 import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
+import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -21,10 +24,25 @@ public interface Model {
      */
     void resetData(ReadOnlyUserInbox newData);
 
+    /**
+     * Undoes the previously performed action. If there is no undo to perform, returns false.
+     */
+    boolean undo();
+
+    /**
+     * Re-does the previously performed undo. If there is no undo to redo, returns false
+     */
+    boolean redo();
+
+    void saveUserInboxStateForUndo();
+
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
     void prepareListsForUi();
+
+    void updateOverdueStatus();
+
     // ========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -55,14 +73,6 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredTaskListToShowAll();
 
-    /**
-     * Updates the filter of the filtered task list to filter by the given
-     * keywords
-     */
-    void updateFilteredTaskList(Set<String> keywords);
-
-    void updateFilteredTaskList(Timeslot userInterestedTimeSlot);
-
     // ========== for events =================================================
 
     /** deletes the given event */
@@ -85,6 +95,12 @@ public interface Model {
     /** Adds the given event */
     void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
 
+    void switchEventToTask(ReadOnlyEvent toDelete, Task toAdd) throws
+        DuplicateTaskException, EventNotFoundException;
+
+    void switchTaskToEvent(ReadOnlyTask toDelete, Event toAdd) throws
+        DuplicateEventException, TaskNotFoundException;
+
     /**
      * Returns the filtered event list as an
      * {@code UnmodifiableObservableList<ReadOnlyEvent>}
@@ -94,18 +110,6 @@ public interface Model {
     /** Updates the filter of the filtered event list to show all events */
     void updateFilteredEventListToShowAll();
 
-    /**
-     * Updates the filter of the filtered event list to filter by the given
-     * keywords
-     */
-    void updateFilteredEventList(Set<String> keywords);
-
-    /**
-     * Updates the filter of the filtered event list to filter by the given
-     * timeslot
-     */
-    void updateFilteredEventList(Timeslot userInterestedTimeSlot);
-
     void markEvent(int filteredListIndex, int markFlag);
 
     /**
@@ -114,4 +118,14 @@ public interface Model {
      * @param timeslotIndex
      */
     void confirmEventTime(int filteredEventListIndex, int timeslotIndex);
+
+    void updateFilteredListsShowAll();
+
+    void updateFilteredListsToShowActiveToDo();
+
+    void updateFilteredListsToShowCompleteToDo();
+
+    void updateFilteredLists(Set<String> keywords, boolean showCompletedToo);
+
+    void updateFilteredLists(Timeslot userInterestedTimeslot);
 }
