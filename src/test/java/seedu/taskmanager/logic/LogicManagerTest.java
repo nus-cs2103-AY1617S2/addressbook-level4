@@ -208,7 +208,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("ADD []\\[;] ON 03/03/17 1400 TO 1600", TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
         assertCommandFailure("ADD Valid TaskName ON wrongdateformat 1400 TO 1600", StartDate.MESSAGE_DATE_CONSTRAINTS);
         // assertCommandFailure("ADD Valid TaskName ON thursday 1400hrs TO
         // 1600", StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
@@ -217,7 +216,6 @@ public class LogicManagerTest {
         // assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid,
         // address t/invalid_-[.tag",
         // Category.MESSAGE_TAG_CONSTRAINTS);
-
     }
 
     @Test
