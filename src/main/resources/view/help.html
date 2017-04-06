@@ -19,6 +19,7 @@
 			<th><h1>Command</h1></th>
 			<th><h1>Format</h1></th>
 			<th><h1>Description</h1></th>
+			<th><h1>Alternatives</h1></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,71 +27,107 @@
 			<td>Help</td>
 			<td class="code">help</td>
 			<td>Open help window</td>
+			<td>F1</td>
+		</tr>
+		<tr>
+			<td>Helpug</td>
+			<td class="code">helpug</td>
+			<td>Open userguide window</td>
+			<td>helpug, helpuserguide, ug</td>
 		</tr>
 		<tr>
 			<td>Add</td>
-			<td class="code">add NAME [s/START_DATE e/END_DATE | d/DURATION]
-				[r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...</td>
+			<td class="code">add NAME [s/START_DATE] [e/END_DATE] [r/RECUR]
+				[d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</td>
 			<td>Add a task</td>
-		</tr>
-		<tr>
-			<td>Find</td>
-			<td class="code">find KEYWORD [MORE_KEYWORDS] [s/SPECIFICITY]
-				[f/FIELDS]...</td>
-			<td>Find tasks with keywords</td>
-		</tr>
-		<tr>
-			<td>List</td>
-			<td class="code">list [s/START_DATE e/END_DATE | d/DURATION]
-				[o/ORDER] [rev/] [done/]</td>
-			<td>List specified tasks</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Edit</td>
-			<td class="code">edit PREFIX_INDEX [NAME] [s/START_DATE
-				e/END_DATE | d/DURATION] [r/RECUR] [p/PRIORITY] [i/INFORMATION]
-				[t/TAG]...</td>
+			<td class="code">edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE]
+				[r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...</td>
 			<td>Edit any specified task&rsquo;s information</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>List</td>
+			<td class="code">list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER]
+				[p/PRIORITY] [t/TAG]...</td>
+			<td>List specified tasks in specified order</td>
+			<td>Ctrl+Shift+D,  Ctrl+Shift+U, Ctrl+Shift+A 
+				(list Done, Undone and All respecively)</td>
+		</tr>
+		<tr>
+			<td>Find</td>
+			<td class="code">find KEYWORD [MORE_KEYWORDS]...</td>
+			<td>Find tasks with keywords</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Select</td>
+			<td class="code">select PREFIX_INDEX</td>
+			<td>Select a task to view</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Delete</td>
 			<td class="code">delete PREFIX_INDEX</td>
 			<td>Delete specified task</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Clear</td>
 			<td class="code">clear</td>
 			<td>Clear all data in OneTwoDo</td>
-		</tr>
-		<tr>
-			<td>Undo</td>
-			<td class="code">undo</td>
-			<td>Undo previous action</td>
-		</tr>
-		<tr>
-			<td>Redo</td>
-			<td class="code">Redo previous action</td>
-			<td>Redo previous action</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Done</td>
 			<td class="code">done PREFIX_INDEX</td>
 			<td>Archive the specified task</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Undone</td>
 			<td class="code">undone PREFIX_INDEX</td>
 			<td>Unarchive the specified task</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Undo</td>
+			<td class="code">undo</td>
+			<td>Undo previous action</td>
+			<td>Ctrl+U</td>
+		</tr>
+		<tr>
+			<td>Redo</td>
+			<td class="code">redo</td>
+			<td>Redo previous action</td>
+			<td>Ctrl+R</td>
 		</tr>
 		<tr>
 			<td>Save</td>
-			<td class="code">save FILE_PATH</td>
+			<td class="code">save [overwrite] FILE_PATH</td>
 			<td>Save file to specified location</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Export</td>
+			<td class="code">export [overwrite] FILE_PATH</td>
+			<td>Export file to specified location</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Import</td>
+			<td class="code">import FILE_PATH</td>
+			<td>Import file to be used</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Exit</td>
 			<td class="code">exit</td>
 			<td>Quit the program</td>
+			<td>Ctrl+E</td>
 		</tr>
 	</tbody>
 </table>
