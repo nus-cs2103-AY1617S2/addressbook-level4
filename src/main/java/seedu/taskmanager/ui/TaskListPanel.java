@@ -1,7 +1,13 @@
 package seedu.taskmanager.ui;
 
 import java.util.logging.Logger;
-
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+import com.joestelmach.natty.DateGroup;
+import com.joestelmach.natty.Parser;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,9 +39,16 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
+        Date today = new Date();
+        updateFilteredTaskList(today);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
+    
+    private void updateFilteredTaskList(Date date) {
+		// TODO Auto-generated method stub
+    	
+	}
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);

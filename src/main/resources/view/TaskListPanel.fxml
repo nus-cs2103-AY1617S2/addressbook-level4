@@ -13,7 +13,7 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-      <Label text="Overdue Task" />
+      <Label text="Task Today" />
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>

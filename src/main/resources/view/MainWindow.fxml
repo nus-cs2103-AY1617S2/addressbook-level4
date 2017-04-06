@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- @@author A0114523U-->
+<!-- @@author -->
 
 <VBox focusTraversable="true" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
@@ -41,11 +42,11 @@
                <children>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label text="Overdue Task" />
+                        <Label text="Task Today" />
                      </children></AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label text="Due Soon Task" />
+                        <Label text="Overdue Task" />
                      </children>
                   </AnchorPane>
                </children>
@@ -70,4 +71,3 @@
       <AnchorPane fx:id="statusbarPlaceholder" focusTraversable="true" VBox.vgrow="NEVER" />
    </children>
 </VBox>
-<!-- @@author -->
