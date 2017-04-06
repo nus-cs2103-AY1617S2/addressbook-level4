@@ -15,8 +15,7 @@ public class StringUtil {
      * <pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
-     *</pre> 
+     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match </pre> 
      * @param sentence
      *            cannot be null
      * @param word
