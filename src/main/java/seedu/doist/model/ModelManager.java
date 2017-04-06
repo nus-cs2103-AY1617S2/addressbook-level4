@@ -276,19 +276,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(TaskDate dates) {
-        Qualifier[] qualifiers = {new DateQualifier(dates)};
-        updateFilteredTaskList(new PredicateExpression(qualifiers));
-    }
-
-    @Override
-    public void updateFilteredTaskList(TaskType type, UniqueTagList tags) {
+    public void updateFilteredTaskList(TaskType type, UniqueTagList tags, TaskDate dates) {
         ArrayList<Qualifier> qualifiers = new ArrayList<Qualifier>();
         if (type != null) {
             qualifiers.add(new TaskTypeQualifier(type));
         }
         if (!tags.isEmpty()) {
             qualifiers.add(new TagQualifier(tags));
+        }
+        if (!(dates == null)) {
+            qualifiers.add(new DateQualifier(dates));
         }
         updateFilteredTaskList(new PredicateExpression(qualifiers.toArray(new Qualifier[qualifiers.size()])));
     }

@@ -60,11 +60,8 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(String keywords);
 
-    /** Updates the filter of the filtered task list to filter by the given pair of dates */
-    void updateFilteredTaskList(TaskDate dates);
-
-    /** Updates the filter of the filtered task list to filter by the given task type and tags*/
-    void updateFilteredTaskList(TaskType type, UniqueTagList tags);
+    /** Updates the filter of the filtered task list to filter by the given task type, tags and dates*/
+    void updateFilteredTaskList(TaskType type, UniqueTagList tags, TaskDate dates);
 
     /** Sorts the task accorfing to the specific comparator passed as an argument */
     void sortTasks(Comparator<ReadOnlyTask> comparator);

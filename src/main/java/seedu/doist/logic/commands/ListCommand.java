@@ -104,11 +104,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        if (this.dates != null) {
-            model.updateFilteredTaskList(this.dates);
-        } else {
-            model.updateFilteredTaskList(type, tagList);
-        }
+        model.updateFilteredTaskList(type, tagList, dates);
         model.sortTasksByDefault();
         String message = "";
         if (type != null) {
