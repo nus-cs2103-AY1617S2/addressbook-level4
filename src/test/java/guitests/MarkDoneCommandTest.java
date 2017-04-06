@@ -249,5 +249,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
             assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS ,
                     "[" + markedDoneTask + "]"));
         }
+
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
     }
 }
+
