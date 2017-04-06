@@ -105,7 +105,6 @@ public class TestUtil {
 	/**
 	 * Appends the file name to the sandbox folder path. Creates the sandbox
 	 * folder if it doesn't exist.
-	 * 
 	 * @param fileName
 	 * @return
 	 */
@@ -226,7 +225,6 @@ public class TestUtil {
 
 	/**
 	 * Gets mid point of a node relative to the screen.
-	 * 
 	 * @param node
 	 * @return
 	 */
