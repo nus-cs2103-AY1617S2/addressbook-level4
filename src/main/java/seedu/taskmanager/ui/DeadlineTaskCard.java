@@ -49,13 +49,13 @@ public class DeadlineTaskCard extends UiPart<Region> {
             for (int index = 0; task.getCategories().asObservableList().size() != index; index++) {
                 String category = task.getCategories().asObservableList().get(index).categoryName;
                 Label label = new Label(category);
-                if (category.equals("High")) {
+                if (category.equalsIgnoreCase("High")) {
                     label.setStyle("-fx-background-color: red");
                 }
-                if (category.equals("Medium")) {
+                if (category.equalsIgnoreCase("Medium")) {
                     label.setStyle("-fx-background-color: orange");
                 }
-                if (category.equals("Low")) {
+                if (category.equalsIgnoreCase("Low")) {
                     label.setStyle("-fx-background-color: lightblue");
                 }
 
