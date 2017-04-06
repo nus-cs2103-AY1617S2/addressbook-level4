@@ -42,7 +42,7 @@ import seedu.address.model.YTomorrow;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.EndDate;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyPerson;
@@ -198,10 +198,14 @@ public class LogicManagerTest {
     //@@author A0164889E
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add Valid Name d/not_numbers g/valid, group",
+        assertCommandFailure("add Valid Name d/not_numbers e/valid@e.mail g/valid, group",
                 Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add []\\[;] d/12.12 g/valid, group",
+        assertCommandFailure("add []\\[;] d/12.12 e/valid@e.mail g/valid, group",
                 Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12.12 e/notAnEmail g/valid, group",
+                Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandFailure("add Valid Name d/12.12 e/valid@e.mail g/valid, group t/invalid_-[.tag",
+                Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -413,15 +417,16 @@ public class LogicManagerTest {
     class TestDataHelper {
         //@@author A0164889E
         Task adam() throws Exception {
-            Name name = new Name("Adm Brown");
-            EndDate privateEndDate = new EndDate("12.11");
+            Name name = new Name("Adam Brown");
+            Date privateDate = new Date("12.11");
             StartDate privateStartDate = new StartDate("12.20");
+            Email email = new Email("adam@gmail.com");
             Group privateGroup = new Group("leisure time");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             Tag tag3 = new Tag("incomplete");
             UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
-            return new Task(name, privateStartDate, privateEndDate, privateGroup, tags);
+            return new Task(name, privateDate,privateStartDate, email, privateGroup, tags);
         }
 
         //@@author A0164889E
@@ -435,8 +440,9 @@ public class LogicManagerTest {
         Task generatePerson(int seed) throws Exception {
             return new Task(
                     new Name("Person " + seed),
+                    new Date("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
                     new StartDate("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
-                    new EndDate("0" + Math.abs(seed) + ".0" + Math.abs(seed)),
+                    new Email(seed + "@email"),
                     new Group("list of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -449,7 +455,8 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" d/").append(p.getEndDate());
+            cmd.append(" e/").append(p.getEmail());
+            cmd.append(" d/").append(p.getDate());
             cmd.append(" g/").append(p.getGroup());
 
             UniqueTagList tags = p.getTags();
@@ -534,8 +541,9 @@ public class LogicManagerTest {
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
+                    new Date("12.11"),
                     new StartDate("12.21"),
-                    new EndDate("12.11"),
+                    new Email("1@email"),
                     new Group("list of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

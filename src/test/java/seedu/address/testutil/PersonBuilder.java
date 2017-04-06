@@ -4,7 +4,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 //import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.EndDate;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Email;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -47,14 +48,19 @@ public class PersonBuilder {
     }
 
     //@@author A0164889E
-    public PersonBuilder withEndDate(String date) throws IllegalValueException {
-        this.person.setEndDate(new EndDate(date));
+    public PersonBuilder withDate(String date) throws IllegalValueException {
+        this.person.setDate(new Date(date));
         return this;
     }
     
     //@@author A0164032U
     public PersonBuilder withStartDate(String sdate) throws IllegalValueException {
         this.person.setStartDate(new StartDate(sdate));
+        return this;
+    }
+
+    public PersonBuilder withEmail(String email) throws IllegalValueException {
+        this.person.setEmail(new Email(email));
         return this;
     }
 

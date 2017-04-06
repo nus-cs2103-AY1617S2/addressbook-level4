@@ -7,7 +7,6 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.ExportRequestEvent;
 import seedu.address.commons.events.ui.ImportRequestEvent;
-import seedu.address.commons.events.ui.LoadRequestEvent;
 import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -57,7 +56,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      * Sets the file to which Address Book saving is done.
      */
     void handleTargetFileRequestEvent(TargetFileRequestEvent tfre);
-
-    void handleLoadRequestEvent(LoadRequestEvent ire);
     
 }

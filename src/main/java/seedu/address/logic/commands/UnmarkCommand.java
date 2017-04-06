@@ -12,7 +12,7 @@ import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
 
-//@@author A0163848R-reused
+//@@author A0163848R
 /**
  * Command that marks task as incomplete
  */
@@ -71,7 +71,7 @@ public class UnmarkCommand extends Command {
         UniqueTagList updatedTags =
                 personToEdit
                 .getTags()
-                .except(UniqueTagList.build(
+                .except(UniqueTagList.constructUniqueTagList(
                                 Tag.TAG_COMPLETE,
                                 Tag.TAG_INCOMPLETE));
 
@@ -84,6 +84,6 @@ public class UnmarkCommand extends Command {
         }
 
         return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
+                personToEdit.getDate(), personToEdit.getStartDate(),personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
     }
 }

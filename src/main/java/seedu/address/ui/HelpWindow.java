@@ -14,7 +14,7 @@ public class HelpWindow extends Window {
     private static final String TITLE = "Help";
     //@@author A0163848R
     private static final String HELP_HTML =
-            "http://CS2103JAN2017-F11-B3.github.io/main/util/offdoc.html"
+            "https://CS2103JAN2017-F11-B3.github.io/main/util/offdoc.html"
             + "?mdfile=https://raw.githubusercontent.com/"
             + "CS2103JAN2017-F11-B3/main/master/docs/UserGuide.md";
     //@@author

@@ -97,12 +97,7 @@ public class FileUtil {
      * @return Chosen file
      */
     public static File promptSaveFileDialog(String title, Stage stage, ExtensionFilter ...extensionFilters) {
-        FileChooser prompt =  getFileChooser(title, extensionFilters);
-        File saved = prompt.showSaveDialog(stage);
-        if(!saved.getName().contains(".")) {
-          saved = new File(saved.getAbsolutePath() + prompt.getSelectedExtensionFilter().getExtensions().get(0).substring(1));
-        }
-        return saved;
+        return getFileChooser(title, extensionFilters).showSaveDialog(stage);
     }
     
     /**

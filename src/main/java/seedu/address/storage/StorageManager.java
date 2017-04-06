@@ -12,9 +12,6 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.ExportRequestEvent;
 import seedu.address.commons.events.ui.ImportRequestEvent;
-import seedu.address.commons.events.ui.ImportResultAvailableEvent;
-import seedu.address.commons.events.ui.LoadRequestEvent;
-import seedu.address.commons.events.ui.LoadResultAvailableEvent;
 import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -107,28 +104,12 @@ public class StorageManager extends ComponentManager implements Storage {
     
     @Override
     @Subscribe
-    public void handleLoadRequestEvent(LoadRequestEvent ire) {
-        Optional<ReadOnlyAddressBook> loaded = null;
-        
-        try {
-            loaded = readAddressBook(ire.getTargetFile().getPath());
-        } catch (DataConversionException | IOException e) {
-        }
-        
-        raise(new LoadResultAvailableEvent(loaded, ire.getTargetFile()));
-    }
-    
-    @Override
-    @Subscribe
     public void handleImportRequestEvent(ImportRequestEvent ire) {
-        Optional<ReadOnlyAddressBook> loaded = null;
-        
         try {
-            loaded = readAddressBook(ire.getTargetFile().getPath());
+            readAddressBook(ire.getTargetFile().getPath());
         } catch (DataConversionException | IOException e) {
+            //TODO
         }
-        
-        raise(new ImportResultAvailableEvent(loaded));
     }
     
     @Override

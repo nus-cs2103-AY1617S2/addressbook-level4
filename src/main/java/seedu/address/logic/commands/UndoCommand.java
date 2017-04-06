@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
-//@@author A0163848R-reused
+//@@author A0163848R
 /**
  * Command that undoes changes caused by the last command.
  */

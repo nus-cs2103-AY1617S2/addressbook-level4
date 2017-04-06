@@ -12,7 +12,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.MarkCommand;
 
-//@@author A0163848R
 /**
  * Parses input arguments and creates a new MarkCommand object
  */

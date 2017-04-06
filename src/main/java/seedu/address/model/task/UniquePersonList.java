@@ -43,7 +43,7 @@ public class UniquePersonList implements Iterable<Task> {
 
         internalList.add(toAdd);
         //@@author A0164032U
-        Comparator<Task> comparator = Comparator.comparing(Task::getEndTime);
+        Comparator<Task> comparator = Comparator.comparing(Task::getDateTime);
         FXCollections.sort(internalList,comparator);
         //@@author 
     }

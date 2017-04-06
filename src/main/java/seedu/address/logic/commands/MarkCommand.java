@@ -71,7 +71,7 @@ public class MarkCommand extends Command {
         UniqueTagList updatedTags =
                 personToEdit
                 .getTags()
-                .except(UniqueTagList.build(
+                .except(UniqueTagList.constructUniqueTagList(
                                 Tag.TAG_COMPLETE,
                                 Tag.TAG_INCOMPLETE));
 
@@ -84,6 +84,6 @@ public class MarkCommand extends Command {
         }
 
         return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
-}
+                personToEdit.getDate(),personToEdit.getStartDate(), personToEdit.getEmail(), personToEdit.getGroup(), updatedTags);
+    }
 }

@@ -12,10 +12,16 @@ import seedu.address.model.YTomorrow;
 */
 public class ImportRequestEvent extends BaseEvent {
 
+    private YTomorrow toImport;
     private File target;
     
-    public ImportRequestEvent(File target) {
+    public ImportRequestEvent(YTomorrow toImport, File target) {
+        this.toImport = toImport;
         this.target = target;
+    }
+    
+    public void writeYTomorrow(YTomorrow toWrite) {
+        toImport.resetData(toWrite);;
     }
     
     public File getTargetFile() {
