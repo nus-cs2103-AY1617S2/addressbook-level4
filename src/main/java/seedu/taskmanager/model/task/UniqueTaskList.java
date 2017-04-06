@@ -187,7 +187,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public ObservableList<Task> getTaskListByStatus(String status) {
         if (status.equals(Status.STATUS_DONE))
             return internalList.filtered(StatusPredicate.isDone());
-        else if (status.equals(Status.STATUS_DONE))
+        else if (status.equals(Status.STATUS_NOT_DONE))
             return internalList.filtered(StatusPredicate.isNotDone());
         else
             return internalList;
