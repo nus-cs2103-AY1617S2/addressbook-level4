@@ -78,7 +78,7 @@ Responsibilities: Model, testing, scheduling, tracking and diagrams
 * Features Implemented:
   * [Add Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#31-adding-tasks)
   * [Edit Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#334-editing-a-task)
-  * [Find Command]https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#321-finding-tasks-by-keyword)
+  * [Find Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#321-finding-tasks-by-keyword)
   
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/collated/main/A0144422R.md)][[test code](https://github.com/CS2103JAN2017-T09-B1/main/tree/master/collated/test/A0144422R.md)]
 
