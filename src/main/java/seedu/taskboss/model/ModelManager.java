@@ -150,6 +150,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void sortTasks(SortBy sortType) throws IllegalValueException {
         assert sortType != null;
+        if (taskbossHistory != null) {
+            taskbossHistory.push(new TaskBoss(this.taskBoss));
+        }
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
         indicateTaskBossChanged();

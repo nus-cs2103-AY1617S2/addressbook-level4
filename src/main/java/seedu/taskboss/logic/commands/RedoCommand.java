@@ -26,7 +26,6 @@ public class RedoCommand extends Command {
         assert model != null;
         try {
             model.redoTaskboss();
-            model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyStackException ese) {
             return new CommandResult(MESSAGE_WITHOUT_PREVIOUS_OPERATION);
