@@ -35,8 +35,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        
-        ass
 
         UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 

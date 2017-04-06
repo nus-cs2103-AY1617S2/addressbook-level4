@@ -206,7 +206,7 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Constructs a tag list from a variadic parameter list of strings
      */
-    public static UniqueTagList constructUniqueTagList(String ... tagNames) {
+    public static UniqueTagList build(String ... tagNames) {
         UniqueTagList tags = new UniqueTagList();
 
         try {

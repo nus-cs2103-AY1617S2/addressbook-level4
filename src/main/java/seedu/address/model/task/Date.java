@@ -6,14 +6,16 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateUtil;
 
 /**
- * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Date in the YTomorrow.
  */
-public class Date {
+public abstract class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should resemble a date";
+    
+    private static final String BAD_DATE = "nil";
 
     public final String value;
 
@@ -24,25 +26,13 @@ public class Date {
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
-        String trimmedDate = date.trim();
 
-        //@@author A0163848R
-
-        if(trimmedDate == "00.00")
-            this.value = trimmedDate;
-        else
-            this.value = parse(trimmedDate);
-        //@@author 
+        if (date == null) {
+            this.value = BAD_DATE;
+        } else {
+            this.value = DateUtil.parse(date).toString();
+        }
     }
-
-    //@@author A0163848R
-    private String parse(String rawDate) throws IllegalValueException {
-        Parser parser = new Parser();
-        List<DateGroup> groups = parser.parse(rawDate);
-        String dateText = groups.get(0).getDates().get(0).toString();
-        return dateText;
-    }
-    
 
     @Override
     public String toString() {

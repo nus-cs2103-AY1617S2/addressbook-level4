@@ -1,48 +1,70 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 
+//@@author A0163848R
+
 public class SampleDataUtil {
-    public static Task[] getSamplePersons() {
+    
+    private static final int SAMPLE_SIZE = 50;
+    
+    Random r;
+    
+    public static Task[] getSampleTasks(int n) {
+        Set<Task> generated = new HashSet<Task>();
+        for (int i = 0; i < n; i++) {
+            if (!generated.add(generateRandomTask())) {
+                i--;
+            }
+        }
+        return generated.toArray(new Task[n]);
+    }
+    
+    /**
+     * @return a randomly-generated task
+     * @throws IllegalValueException
+     */
+    private static Task generateRandomTask() {
+        Random r = new Random();
+        boolean addStartDate = r.nextBoolean();
+        boolean addEndDate = r.nextBoolean();
+        
         try {
-
-            return new Task[] {
-                new Task(new Name("study SE"), new Date("May 6"), new StartDate("09.01"),
-                            new Email("alexyeoh@gmail.com"), new Group("learning"), new UniqueTagList(Tag.TAG_INCOMPLETE)),
-                new Task(new Name("watch Beauty and Beast"), new Date("May 4"), new StartDate("Jan 1"),
-                            new Email("berniceyu@gmail.com"), new Group("relax"),
-                            new UniqueTagList(Tag.TAG_COMPLETE)),
-                new Task(new Name("do tutorial"), new Date("May 1"), new StartDate("Jan 2"),
-                            new Email("charlotte@yahoo.com"), new Group("learning"), new UniqueTagList(Tag.TAG_INCOMPLETE)),
-                new Task(new Name("review the lesson"), new Date("May 4"), new StartDate("Jan 3"),
-                            new Email("lidavid@google.com"), new Group("learning"), new UniqueTagList(Tag.TAG_INCOMPLETE)),
-                new Task(new Name("read books"), new Date("May 5"), new StartDate("Jan 4"),
-                            new Email("irfan@outlook.com"), new Group("leisure time"), new UniqueTagList(Tag.TAG_INCOMPLETE)),
-                new Task(new Name("painting"), new Date("May 6"), new StartDate("Jan 1"),
-                            new Email("royb@gmail.com"), new Group("leisure time"), new UniqueTagList(Tag.TAG_INCOMPLETE))
-                
-            };
-
+            
+            return Task.factory(
+                    new Name(TaskNameGenerator.doAction(r).with().maybe(0.75f).in().maybe(0.75f).toString()),
+                    addStartDate && addEndDate ?  new StartDate(TaskDateGenerator.getStartDate(r)) : null,
+                    addEndDate ? new EndDate(TaskDateGenerator.getEndDate(r)) : null,
+                    new Group(TaskGroupGenerator.getGroup(r)),
+                    UniqueTagList.build(r.nextBoolean() ? Tag.TAG_COMPLETE : Tag.TAG_INCOMPLETE));
+          
         } catch (IllegalValueException e) {
-            throw new AssertionError("sample data cannot be invalid", e);
+            return generateRandomTask();
         }
     }
-
+    //@@author
+    
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             YTomorrow sampleAB = new YTomorrow();
-            for (Task samplePerson : getSamplePersons()) {
+            for (Task samplePerson : getSampleTasks(SAMPLE_SIZE)) {
                 sampleAB.addPerson(samplePerson);
             }
             return sampleAB;
@@ -50,4 +72,5 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
     }
+    
 }

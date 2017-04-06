@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [d/END DATE] [e/EMAIL] [g/GROUP]...\n"
+            + "Parameters: INDEX (must be a positive integer) [NAME] [s/STARTDATE] [d/END DATE] [g/GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 d/01.01 e/johndoe@yahoo.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited task: %1$s";
@@ -84,14 +84,13 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        Date updatedDate = editPersonDescriptor.getDate().orElseGet(personToEdit::getDate);
         StartDate updatedStartDate = editPersonDescriptor.getStartDate().orElseGet(personToEdit::getStartDate);
-        Email updatedEmail = editPersonDescriptor.getEmail().orElseGet(personToEdit::getEmail);
+        EndDate updatedEndDate = editPersonDescriptor.getEndDate().orElseGet(personToEdit::getEndDate);
         Group updatedGroup = editPersonDescriptor.getGroup().orElseGet(personToEdit::getGroup);
         UniqueTagList updatedTags = personToEdit.getTags();
 
 
-        return new Task(updatedName, updatedDate, updatedStartDate, updatedEmail, updatedGroup, updatedTags);
+        return new Task(updatedName, updatedStartDate, updatedEndDate, updatedGroup, updatedTags);
 
     }
 
@@ -101,29 +100,25 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Optional<Name> name = Optional.empty();
-        private Optional<Date> date = Optional.empty();
-        private Optional<StartDate> sdate = Optional.empty();
-        private Optional<Email> email = Optional.empty();
+        private Optional<EndDate> end = Optional.empty();
+        private Optional<StartDate> start = Optional.empty();
         private Optional<Group> group = Optional.empty();
-        //private Optional<UniqueTagList> tags = Optional.empty();
 
         public EditPersonDescriptor() {
         }
 
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             this.name = toCopy.getName();
-            this.date = toCopy.getDate();
-            this.sdate = toCopy.getStartDate();
-            this.email = toCopy.getEmail();
+            this.end = toCopy.getEndDate();
+            this.start = toCopy.getStartDate();
             this.group = toCopy.getGroup();
-            //this.tags = toCopy.getTags();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.date, this.email, this.group);
+            return CollectionUtil.isAnyPresent(this.name, this.start, this.end, this.group);
         }
 
         public void setName(Optional<Name> name) {
@@ -135,31 +130,22 @@ public class EditCommand extends Command {
             return name;
         }
 
-        public void setDate(Optional<Date> date) {
-            assert date != null;
-            this.date = date;
-        }
-
-        public Optional<Date> getDate() {
-            return date;
-        }
-
         public void setStartDate(Optional<StartDate> sdate) {
             assert sdate != null;
-            this.sdate = sdate;
+            this.start = sdate;
         }
 
         public Optional<StartDate> getStartDate() {
-            return sdate;
+            return start;
         }
-
-        public void setEmail(Optional<Email> email) {
-            assert email != null;
-            this.email = email;
+        
+        public void setEndDate(Optional<EndDate> date) {
+            assert date != null;
+            this.end = date;
         }
-
-        public Optional<Email> getEmail() {
-            return email;
+        
+        public Optional<EndDate> getEndDate() {
+            return end;
         }
 
         public void setGroup(Optional<Group> group) {
@@ -170,15 +156,6 @@ public class EditCommand extends Command {
         public Optional<Group> getGroup() {
             return group;
         }
-/*
-        public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
-            this.tags = tags;
-        }
-
-        public Optional<UniqueTagList> getTags() {
-            return tags;
-        }
-*/
     }
+  
 }

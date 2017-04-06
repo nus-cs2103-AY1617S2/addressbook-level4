@@ -9,8 +9,7 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -30,8 +29,12 @@ public class EditCommandTest extends AddressBookGuiTest {
         //@@author A0164889E
         String detailsToEdit = "Bobby d/12.04 e/bobby@gmail.com g/project t/undone";
         //@@author A0164889E
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withDate("12.04").withStartDate("01.01")
-                .withEmail("bobby@gmail.com").withGroup("project").withTags("undone").build();
+        TestPerson editedPerson = new PersonBuilder()
+                .withName("Bobby")
+                .withEndDate("12.04")
+                .withStartDate("01.01")
+                .withGroup("project")
+                .withTags("undone").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -96,13 +99,10 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 s/1234");
-        assertResultMessage(StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
         
         commandBox.runCommand("edit 1 d/1234");
-        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertResultMessage(EndDate.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 g/");
         assertResultMessage(Group.MESSAGE_GROUP_CONSTRAINTS);
