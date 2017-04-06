@@ -33,6 +33,8 @@ import seedu.address.commons.events.ui.UpdateStatusBarEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.NotTodayCommand;
+import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
@@ -105,7 +107,8 @@ public class MainWindow extends UiPart<Region> {
         this.titleDay.setText(new SimpleDateFormat("EE").format(cal.getTime()));
         this.commandTextField.setLabelFloat(true);
         TextFields.bindAutoCompletion(commandTextField, "add", "clear", "delete", "deletetag", "done", "edit", "exit",
-                "find", "help", "list", "listcompleted", "notdone", "redo", "renametag", "undo", "saveto", "today");
+                "find", "help", "list", "listcompleted", "notdone", "redo", "renametag", "undo", "saveto", "today",
+                NotTodayCommand.COMMAND_WORD, UseThisCommand.COMMAND_WORD);
         this.commandResult.setText("");
 
         // Configure the UI
