@@ -106,7 +106,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean hasDeadline() {
-        return hasDeadline;
+        return (this.getByDate() != null || this.getByTime() != null);
     }
 
     @Override
