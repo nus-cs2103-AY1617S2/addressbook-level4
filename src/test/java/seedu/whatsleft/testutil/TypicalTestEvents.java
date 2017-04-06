@@ -11,75 +11,85 @@ import seedu.whatsleft.model.activity.UniqueEventList.DuplicateEventException;
  */
 public class TypicalTestEvents {
 
-    public TestEvent tutorial, lecture, meeting, talk, exam, presentation, discussion, consultation, workshop;
+    public TestEvent tutorial, lecture, meeting, talk, exam, presentation, discussion,
+            consultation, workshop, clashedWorkshop;
 
     public TypicalTestEvents() {
         try {
             tutorial = new EventBuilder().withDescription("CS2103 Tutorial")
                     .withStartTime("0900")
-                    .withStartDate("010517")
+                    .withStartDate("280717")
                     .withEndTime("1000")
-                    .withEndDate("010517")
+                    .withEndDate("280717")
                     .withLocation("COM1-B103")
                     .withTags("demo").build();
             lecture = new EventBuilder().withDescription("CS2010 Lecture")
                     .withStartTime("1000")
-                    .withStartDate("050218")
+                    .withStartDate("030717")
                     .withEndTime("1200")
-                    .withEndDate("050218")
+                    .withEndDate("030717")
                     .withLocation("LT19")
                     .withTags("webcasted").build();
             meeting = new EventBuilder().withDescription("CCA Meeting")
                     .withStartTime("1900")
-                    .withStartDate("200418")
+                    .withStartDate("200717")
                     .withEndTime("2200")
-                    .withEndDate("200418")
+                    .withEndDate("200717")
                     .withLocation("FoS")
-                    .withTags("CCA").build();
+                    .withTags("meeting").build();
             talk = new EventBuilder().withDescription("Enrichment Talk")
                     .withStartTime("1800")
-                    .withStartDate("150418")
+                    .withStartDate("150717")
                     .withEndTime("2000")
-                    .withEndDate("150418")
+                    .withEndDate("150717")
                     .withLocation("LT28")
                     .withTags("talk").build();
             exam = new EventBuilder().withDescription("CS2107 Exam")
                     .withStartTime("0900")
-                    .withStartDate("040217")
+                    .withStartDate("250317")
                     .withEndTime("1030")
-                    .withEndDate("040217")
+                    .withEndDate("250317")
                     .withLocation("MPSH1A")
-                    .withTags("exam").build();
+                    .withTags("calculator").build();
             presentation = new EventBuilder().withDescription("GEH Presentation")
                     .withStartTime("1200")
-                    .withStartDate("250518")
+                    .withStartDate("250517")
                     .withEndTime("1400")
-                    .withEndDate("250518")
-                    .withLocation("123, Jurong West Ave 6, #08-111")
-                    .withTags("friends").build();
+                    .withEndDate("250517")
+                    .withLocation("FASS")
+                    .withTags("formal").build();
             discussion = new EventBuilder().withDescription("CS2103 Project Discussion")
                     .withStartTime("1500")
                     .withStartDate("260517")
                     .withEndTime("1900")
                     .withEndDate("260517")
-                    .withLocation("CLB")
+                    .withLocation("Central Library, NUS")
                     .withTags("project").build();
 
             // Manually added
             consultation = new EventBuilder().withDescription("MA2101 Consultation")
                     .withStartTime("1000")
-                    .withStartDate("270517")
+                    .withStartDate("270817")
                     .withEndTime("1100")
-                    .withEndDate("270517")
+                    .withEndDate("270817")
                     .withLocation("S17")
-                    .withTags("consultation").build();
+                    .withTags().build();
             workshop = new EventBuilder().withDescription("PS Workshop")
                     .withStartTime("0900")
-                    .withStartDate("280517")
+                    .withStartDate("280617")
                     .withEndTime("1000")
-                    .withEndDate("280517")
+                    .withEndDate("280617")
                     .withLocation("UHALL")
-                    .withTags("formal").build();
+                    .withTags("registration").build();
+
+            // Clashed event
+            clashedWorkshop = new EventBuilder().withDescription("Latex Workshop")
+                    .withStartTime("0730")
+                    .withStartDate("280617")
+                    .withEndTime("0930")
+                    .withEndDate("280617")
+                    .withLocation("YIH")
+                    .withTags().build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

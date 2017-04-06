@@ -2,8 +2,10 @@ package seedu.whatsleft.logic.commands;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.whatsleft.commons.core.EventsCenter;
+import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
 import seedu.whatsleft.commons.events.ui.JumpToCalendarEventEvent;
 import seedu.whatsleft.commons.events.ui.JumpToCalendarTaskEvent;
@@ -39,24 +41,30 @@ import seedu.whatsleft.model.tag.UniqueTagList;
  */
 public class AddCommand extends Command {
 
+    //@@author A0148038A
     public static final String COMMAND_WORD = "add";
 
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft. "
-            + "Parameters: DESCRIPTION p/PRIORITY l/LOCATION sd/STARTDATE ed/ENDDATE st/STARTTIME"
-            + " et/ENDTIME bd/BYDATE bt/BYTIME \n"
-            + "Event must have sd/STARTDATE, Task/Deadline must have p/PRIORITY \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft.\n"
+            + "Adds an event: add DESCRIPTION [st/STARTTIME] sd/STARTDATE"
+            + " [et/ENDTIME] [ed/ENDDATE] [l/LOCATION] [ta/TAG]...\n"
+            + "Event must have sd/STARTDATE\n"
             + "Example: " + COMMAND_WORD
-            + " Project Discussion p/high l/discussion room t/formal";
+            + " Project Discussion st/1200 sd/060817 et/1400 ed/060817 l/discussion room ta/formal\n"
+            + "Adds a task/deadline: add DESCRIPTION p/PRIORITY [bt/BYTIME] [bd/BYDATE] [l/LOCATION] [ta/TAG]...\n"
+            + "Task(deadline) must have p/PRIORITY\n"
+            + "Example: " + COMMAND_WORD
+            + " Project Report p/high bd/120817 ta/hardcopy";
 
-    public static final String MESSAGE_SUCCESS = "New activity added: %1$s";
-    public static final String MESSAGE_SUCCESS_WITH_CLASH = "New activity added but with possible clash! : %1$s";
+    public static final String MESSAGE_EVENT_SUCCESS = "New event added: %1$s";
+    public static final String MESSAGE_TASK_SUCCESS = "New task(deadline) added: %1$s";
+    public static final String MESSAGE_SUCCESS_WITH_CLASH = "New event added but with possible clash! : %1$s";
     public static final String MESSAGE_DUPLICATE_ACTIVITY = "This activity already exists in WhatsLeft";
-    public static final String MESSAGE_CLASH_TIMING = "This event clashes with another event";
     public static final String MESSAGE_ILLEGAL_EVENT_END_DATETIME = "End Date/Time cannot be before Start Date/Time!";
 
-    private final Event toAddEvent;
-    private final Task toAddTask;
+    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
+    private Event toAddEvent;
+    private Task toAddTask;
+
     //@@author A0110491U
     /**
      * Creates an AddCommand using raw values.
@@ -70,17 +78,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        if (priority != null) {
-            this.toAddTask = new Task(
-                    new Description(description),
-                    new Priority(priority),
-                    new ByTime(bytime),
-                    new ByDate(bydate),
-                    new Location(location),
-                    new UniqueTagList(tagSet),
-                    Task.DEFAULT_TASK_STATUS);
-            this.toAddEvent = null;
-        } else {
+        if (startdate != null) {
             this.toAddEvent = new Event(
                     new Description(description),
                     new StartTime(starttime),
@@ -94,26 +92,45 @@ public class AddCommand extends Command {
                     toAddEvent.getStartTime(), toAddEvent.getStartDate())) {
                 throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
             }
+        } else {
+            this.toAddTask = new Task(
+                    new Description(description),
+                    new Priority(priority),
+                    new ByTime(bytime),
+                    new ByDate(bydate),
+                    new Location(location),
+                    new UniqueTagList(tagSet),
+                    Task.DEFAULT_TASK_STATUS);
+            this.toAddEvent = null;
         }
     }
 
+    //@@author A0148038A
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
+        logger.info("-------[Executing AddCommand] " + this.toString());
         try {
             model.storePreviousCommand("");
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
-            if (toAddTask == null) {
+            if (toAddEvent != null && toAddTask == null) {
                 return addingEvent();
-            } else if (toAddEvent == null) {
+            } else {
                 return addingTask();
             }
         } catch (UniqueEventList.DuplicateEventException | UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+    }
 
+    @Override
+    public String toString() {
+        if (toAddEvent != null && toAddTask == null) {
+            return COMMAND_WORD + this.toAddEvent.getAsText();
+        } else {
+            return COMMAND_WORD + this.toAddTask.getAsText();
+        }
     }
 
     //@@author A0110491U
@@ -127,7 +144,7 @@ public class AddCommand extends Command {
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(toAddTask)));
         EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(toAddTask));
         model.storePreviousCommand("add");
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddTask));
+        return new CommandResult(String.format(MESSAGE_TASK_SUCCESS, toAddTask));
     }
 
     //@@author A0110491U
@@ -146,7 +163,7 @@ public class AddCommand extends Command {
         if (model.eventHasClash(toAddEvent)) {
             return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_CLASH, toAddEvent));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddEvent));
+        return new CommandResult(String.format(MESSAGE_EVENT_SUCCESS, toAddEvent));
     }
 
 }

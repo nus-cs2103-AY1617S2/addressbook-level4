@@ -209,6 +209,36 @@ public class TestUtil {
         return expected;
     }
 
+    //@@author A0148038A
+    /**
+     * Filters all future test events from an array of test events,
+     * then sort the test events in filtered array in time order.
+     * @param events
+     * @return TestEvent filteredTestEvents
+     */
+    public static TestEvent[] getFilteredTestEvents(TestEvent[] events) {
+        ArrayList<TestEvent> eventList = new ArrayList<TestEvent>(Arrays.asList(events));
+        eventList.removeIf(e -> e.isOver());
+        eventList.sort(ReadOnlyEvent.getComparator());
+        TestEvent [] filteredTestEvents = eventList.toArray(new TestEvent[eventList.size()]);
+        return filteredTestEvents;
+    }
+
+    //@@author A0148038A
+    /**
+     * Filters all future test events from an array of test events,
+     * then sort the test events in filtered array in time order.
+     * @param events
+     * @return TestEvent filteredTestEvents
+     */
+    public static TestTask[] getFilteredTestTasks(TestTask [] tasks) {
+        ArrayList<TestTask> taskList = new ArrayList<TestTask>(Arrays.asList(tasks));
+        taskList.removeIf(t -> t.getStatus());
+        taskList.sort(ReadOnlyTask.getComparator());
+        TestTask [] filteredTestTasks = taskList.toArray(new TestTask[taskList.size()]);
+        return filteredTestTasks;
+    }
+
     // @@author
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);

@@ -1,6 +1,7 @@
 package seedu.whatsleft.model.activity;
 
 import java.util.Comparator;
+import java.util.List;
 
 import seedu.whatsleft.model.tag.UniqueTagList;
 
@@ -17,6 +18,10 @@ public interface ReadOnlyEvent {
     StartDate getStartDate();
     EndDate getEndDate();
     Location getLocation();
+    String getDescriptionToShow();
+    String getDurationToShow();
+    String getLocationToShow();
+    List<String> getTagsToShow();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

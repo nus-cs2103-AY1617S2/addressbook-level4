@@ -21,11 +21,11 @@ public class ShowCommandParser {
 
         String status = ParserUtil.parseStatus(args);
 
-        if (!status.equals("com") && !status.equals("pend") && !status.equals("")) {
+        if (!status.equalsIgnoreCase("com") && !status.equalsIgnoreCase("pend") && !status.equals("")) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
-        return new ShowCommand(status);
+        return new ShowCommand(status.toLowerCase());
     }
 }

@@ -29,15 +29,12 @@ public class EventCard extends UiPart<Region> {
 
     public EventCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
-        description.setText(event.getDescription().description);
+        description.setText(event.getDescriptionToShow());
         id.setText(displayedIndex + ". ");
 
-        duration.setText(event.getStartTime().toString()
-                + " " + event.getStartDate().toString()
-                + " ~ " + event.getEndTime().toString()
-                + " " + event.getEndDate().toString());
+        duration.setText(event.getDurationToShow());
 
-        locations.setText("@" + event.getLocation().toString());
+        locations.setText(event.getLocationToShow());
         initTags(event);
         setCardLook(event);
     }

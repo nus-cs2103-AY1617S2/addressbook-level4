@@ -2,7 +2,9 @@ package seedu.whatsleft.model.activity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.whatsleft.commons.exceptions.IllegalValueException;
 import seedu.whatsleft.commons.util.CollectionUtil;
@@ -11,6 +13,7 @@ import seedu.whatsleft.model.tag.UniqueTagList;
 //@@author A0148038A
 /**
  * Represents an event in WhatsLeft
+ * @author zihanli
  */
 public class Event implements ReadOnlyEvent {
 
@@ -45,7 +48,6 @@ public class Event implements ReadOnlyEvent {
 
     /**
      * Creates a copy of the given ReadOnlyEvent.
-     * @throws IllegalValueException
      */
     public Event(ReadOnlyEvent source) {
         this(source.getDescription(), source.getStartTime(), source.getStartDate(),
@@ -180,8 +182,39 @@ public class Event implements ReadOnlyEvent {
         return Objects.hash(description, startTime, startDate, endTime, endDate, location, tags);
     }
 
+    //@@author A0148038A
     @Override
     public String toString() {
         return getAsText();
+    }
+
+    @Override
+    public String getDescriptionToShow() {
+        return getDescription().toString();
+    }
+
+    @Override
+    public String getDurationToShow() {
+        return getStartTime().toString() + " " + getStartDate().toString()
+               +  " ~ " + getEndTime().toString() + " " + getEndDate().toString();
+    }
+
+    @Override
+    public String getLocationToShow() {
+        if (getLocation().toString() != null) {
+            return "@" + getLocation().toString();
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<String> getTagsToShow() {
+        return tags
+                .asObservableList()
+                .stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.toList());
     }
 }

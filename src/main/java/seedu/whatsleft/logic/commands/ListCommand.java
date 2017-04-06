@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all activities";
 
-
+    //@@author A0148038A
     @Override
     public CommandResult execute() {
         model.updateFilteredListToShowAll();

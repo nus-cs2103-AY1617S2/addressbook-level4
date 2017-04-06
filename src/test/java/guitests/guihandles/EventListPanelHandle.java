@@ -57,7 +57,7 @@ public class EventListPanelHandle extends GuiHandle {
         if (events.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
                     "Expected " + (getListView().getItems().size() - 1) + " events.\n"
-                    + "Actually " + events.length + "events.");
+                    + "Actually " + events.length + " events.");
         }
         assertTrue(this.containsInOrder(startPosition, events));
         for (int i = 0; i < events.length; i++) {
@@ -79,6 +79,7 @@ public class EventListPanelHandle extends GuiHandle {
         guiRobot.clickOn(point.getX(), point.getY());
     }
 
+    //@@author A0148038A
     /**
      * Returns true if the {@code activities} appear as the sub list (in that order) at position {@code startPosition}.
      */
@@ -90,10 +91,10 @@ public class EventListPanelHandle extends GuiHandle {
             return false;
         }
 
-        // Return false if any of the activities doesn't match
+        // Return false if any of the events doesn't match
         for (int i = 0; i < events.length; i++) {
-            if (!eventsInList.get(startPosition + i).getDescription().description.equals(
-                    events[i].getDescription().description)) {
+            if (!eventsInList.get(startPosition + i).getAsText().equals(
+                    events[i].getAsText())) {
                 return false;
             }
         }
@@ -101,13 +102,13 @@ public class EventListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public EventCardHandle navigateToEvent(String name) {
+    public EventCardHandle navigateToEvent(String text) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyEvent> event = getListView().getItems().stream()
-                                                    .filter(p -> p.getDescription().description.equals(name))
+                                                    .filter(p -> p.getAsText().equals(text))
                                                     .findAny();
         if (!event.isPresent()) {
-            throw new IllegalStateException("Name not found: " + name);
+            throw new IllegalStateException("Name not found: " + text);
         }
 
         return navigateToEvent(event.get());
