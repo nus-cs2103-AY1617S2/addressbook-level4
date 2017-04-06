@@ -11,7 +11,6 @@ import seedu.task.model.task.ReadOnlyTask;
 public interface Logic {
 	/**
 	 * Executes the command and returns the result.
-	 * 
 	 * @param commandText
 	 *            The command as entered by the user.
 	 * @return the result of the command execution.
