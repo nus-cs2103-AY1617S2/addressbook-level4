@@ -48,6 +48,23 @@ Responsibilities: Storage, Documentation
 <img src="images/thamsy.jpg" width="150"><br>
 Role: Developer<br>
 Responsibilities: Logic, code quality, integration dfs
+
+* Components in charge of:
+  * [Logic](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/DeveloperGuide.md#33-logic)
+  
+* Features Implemented:
+  * [Show Completed List Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#324-listing-all-completed-tasks)
+  * [Today Command (to bring attention to that task)](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#331-marking-tasks-as-today)
+  * [Indicate Task Done Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#332-marking-task-as-done)
+  * [Indicate Task Not Done Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#333-marking-task-as-not-done)
+  * [Rename Tag Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#341-renaming-tag)
+  * [Delete Tag Command](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/UserGuide.md#342-deleting-tag)
+  
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/collated/main/A0093999Y.md)][[test code](https://github.com/CS2103JAN2017-T09-B1/main/tree/master/collated/test/A0093999Y.md)]
+
+* Other major contributions:
+  * Bug fixing
+  * Refactoring 
 -----
 
 #### [Cao Wei](https://github.com/LoneGunman001)
