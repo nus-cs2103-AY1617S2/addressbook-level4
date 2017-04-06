@@ -215,4 +215,9 @@ public class EditCommand extends Command {
             this.status = status;
         }
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

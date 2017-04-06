@@ -100,4 +100,9 @@ public class AddCommand extends Command {
         }
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }

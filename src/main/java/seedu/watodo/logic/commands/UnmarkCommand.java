@@ -126,4 +126,9 @@ public class UnmarkCommand extends Command {
         return unmarkedTask;
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }

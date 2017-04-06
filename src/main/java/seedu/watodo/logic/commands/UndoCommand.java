@@ -27,4 +27,9 @@ public class UndoCommand extends Command {
 
         return new CommandResult(MESSAGE_EMPTY);
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

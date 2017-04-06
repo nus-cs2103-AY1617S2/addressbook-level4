@@ -18,5 +18,9 @@ public class IncorrectCommand extends Command {
         throw new CommandException(feedbackToUser);
     }
 
+    @Override
+    public String toString() {
+        return feedbackToUser;
+    }
 }
 

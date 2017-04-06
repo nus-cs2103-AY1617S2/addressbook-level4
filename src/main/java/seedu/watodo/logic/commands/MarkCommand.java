@@ -128,4 +128,9 @@ public class MarkCommand extends Command {
         return markedTask;
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }
