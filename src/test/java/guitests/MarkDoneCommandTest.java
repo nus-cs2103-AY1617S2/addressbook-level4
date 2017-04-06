@@ -194,8 +194,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withCategories("Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "[" +
-                expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
+        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
+                expectedTasksList[3] + "\n" + "2. " + expectedTasksList[1]));
     }
 
     @Test
@@ -214,8 +214,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withCategories("Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "[" +
-                expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
+        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
+                expectedTasksList[3] + "\n" + "2. " + expectedTasksList[1]));
     }
 
     @Test
@@ -225,6 +225,13 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         commandBox.runCommand("mark 0 2 3");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        
+        //user inputs non-numeric index values
+        commandBox.runCommand("mark a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
+        
+        commandBox.runCommand("mark ; 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
     //---------------- End of test cases --------------------------------------
@@ -247,7 +254,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         } else {
             assertTrue(taskListPanel.isListMatching(expectedTasksList));
             assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS ,
-                    "[" + markedDoneTask + "]"));
+                    "1. " + markedDoneTask));
         }
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
