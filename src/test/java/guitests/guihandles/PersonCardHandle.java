@@ -17,8 +17,8 @@ import seedu.address.model.task.ReadOnlyPerson;
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String GROUP_FIELD_ID = "#group";
-    private static final String DATE_FIELD_ID = "#date";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String STARTDATE_FIELD_ID = "#start";
+    private static final String ENDDATE_FIELD_ID = "#end";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -40,14 +40,14 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(GROUP_FIELD_ID);
     }
     //@@author A0164889E
-    public String getDate() {
-        return getTextFromLabel(DATE_FIELD_ID);
+    public String getStartDate() {
+        return getTextFromLabel(STARTDATE_FIELD_ID);
     }
 
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
+    public String getEndDate() {
+        return getTextFromLabel(ENDDATE_FIELD_ID);
     }
-
+    
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
@@ -74,8 +74,8 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyPerson person) {
         return getFullName().equals(person.getName().fullName)
-                && getEmail().equals(person.getEmail().value)
-                && getDate().equals(person.getDate().value)
+                && getStartDate().equals(person.getStartDate())
+                && getEndDate().equals(person.getEndDate())
                 && getGroup().equals(person.getGroup().value)
                 && getTags().equals(getTags(person.getTags()));
     }
@@ -85,8 +85,8 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getDate().equals(handle.getDate())
-                    && getEmail().equals(handle.getEmail())
+                    && getStartDate().equals(handle.getStartDate())
+                    && getEndDate().equals(handle.getEndDate())
                     && getGroup().equals(handle.getGroup())
                     && getTags().equals(handle.getTags());
         }

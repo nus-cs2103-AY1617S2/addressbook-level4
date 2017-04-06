@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -16,9 +16,8 @@ public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
     private Group group;
-    private Email email;
-    private Date date;
-    private StartDate sdate;
+    private StartDate start;
+    private EndDate end;
     private UniqueTagList tags;
 
     public TestPerson() {
@@ -30,8 +29,8 @@ public class TestPerson implements ReadOnlyPerson {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.date = personToCopy.getDate();
-        this.email = personToCopy.getEmail();
+        this.start = personToCopy.getStartDate();
+        this.end = personToCopy.getEndDate();
         this.group = personToCopy.getGroup();
         this.tags = personToCopy.getTags();
     }
@@ -44,16 +43,13 @@ public class TestPerson implements ReadOnlyPerson {
         this.group = group;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
     //@@ author A0164032U
-    public void setStartDate(StartDate sdate) {
-        this.sdate = sdate;
+    public void setStartDate(StartDate start) {
+        this.start = start;
+    }
+    
+    public void setEndDate(EndDate end) {
+        this.end = end;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -65,19 +61,15 @@ public class TestPerson implements ReadOnlyPerson {
         return name;
     }
 
-    @Override
-    public Date getDate() {
-        return date;
-    }
     //author A0164032U
     @Override
     public StartDate getStartDate() {
-        return sdate;
+        return start;
     }
-
+    
     @Override
-    public Email getEmail() {
-        return email;
+    public EndDate getEndDate() {
+        return end;
     }
 
     @Override
@@ -100,8 +92,7 @@ public class TestPerson implements ReadOnlyPerson {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("g/" + this.getGroup().value + " ");
         sb.append("s/" + this.getStartDate().value + " ");
-        sb.append("d/" + this.getDate().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("d/" + this.getEndDate().value + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
