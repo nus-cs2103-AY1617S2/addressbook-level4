@@ -27,17 +27,17 @@ public class FinishCommandParser {
      * Parses the given {@code String} of arguments in the context of the
      * FinishCommand and returns an FinishCommand object for execution.
      */
-    public Command parse(String args) {
-        assert args != null;
-        final Matcher matcher = FINISH_ARGS_FORMAT.matcher(args.trim());
+    public Command parse(String arguments) {
+        assert arguments != null;
+        final Matcher matcher = FINISH_ARGS_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FinishCommand.MESSAGE_USAGE));
         }
-        args = args + " s/done";
+        arguments = arguments + " s/done";
         ArgumentTokenizer argsTokenizer
             = new ArgumentTokenizer(PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_BEGINTIME, PREFIX_TAG);
-        argsTokenizer.tokenize(args);
+        argsTokenizer.tokenize(arguments);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
