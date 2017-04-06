@@ -17,6 +17,8 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
  * The API of the Model component.
  */
 public interface Model {
+    static final String MESSAGE_ON_LIST = "List all tasks";
+    static final String MESSAGE_ON_LISTCOMPLETED = "List completed tasks";
     static final String MESSAGE_ON_DELETE = "Task deleted";
     static final String MESSAGE_ON_ADD = "Task added";
     static final String MESSAGE_ON_RESET = "Task list loaded";
@@ -38,7 +40,9 @@ public interface Model {
 
     /**
      * Clears existing backing model and replaces with the provided new data.
-     * @param clearPrevTasks TODO
+     * 
+     * @param clearPrevTasks
+     *            TODO
      */
     void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks);
 
