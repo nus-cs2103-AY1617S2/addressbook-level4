@@ -37,11 +37,41 @@ public class AddCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void addDeadlineTask_success() throws IllegalValueException {
+    public void addTaskWithEndDateBeforeStartDate_fail() {
+        commandBox.runCommand("add failEvent from: today to: yesterday");
+        assertResultMessage(Messages.MESSAGE_INVALID_START_AND_END_DATE);
+    }
+    @Test
+    public void addTaskWithInvalidDate_fail() {
+        commandBox.runCommand("add invalidDate by: lol");
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
+    }
+    @Test
+    public void addDeadlineTaskWithDateNoTime_success() throws IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("add deadline by: 10 oct 1993");
+        commandBox.runCommand("add deadline by: 10 oct 1993 p/Low");
         TestTask deadlineTask = new TaskBuilder().withName("deadline")
                 .withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
+                .withCompleted(false).withPriority("Low").build();
+        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
+        assertTrue(personListPanel.isListMatching(expectedList));
+    }
+    @Test
+    public void addDeadlineTaskwithDateWithTime_success() throws IllegalValueException {
+        TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand("add deadline @ 10 oct 1993 4pm");
+        TestTask deadlineTask = new TaskBuilder().withName("deadline")
+                .withDate("").withEndDate("Sun Oct 10 1993 16:00:00")
+                .withCompleted(false).withPriority("Low").build();
+        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
+        assertTrue(personListPanel.isListMatching(expectedList));
+    }
+    @Test
+    public void addEventTask_success() throws IllegalValueException {
+        TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand("add event from: 10 oct 1993 1pm to: 10 oct 1993 4pm p/Low");
+        TestTask deadlineTask = new TaskBuilder().withName("event")
+                .withDate("Sun Oct 10 1993 13:00:00").withEndDate("Sun Oct 10 1993 16:00:00")
                 .withCompleted(false).withPriority("Low").build();
         TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
         assertTrue(personListPanel.isListMatching(expectedList));
