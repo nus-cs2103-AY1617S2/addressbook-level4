@@ -65,4 +65,6 @@ public interface Model {
     /** Removes most recently stored TaskManager state upon fail in check */
     void rollBackTaskManager(boolean isStorageOperation);
 
+    /** Retrieves the index for task */
+    int getFilteredTaskListIndex(ReadOnlyTask targetTask);
 }

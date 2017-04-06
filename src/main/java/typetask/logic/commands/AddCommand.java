@@ -1,5 +1,7 @@
 package typetask.logic.commands;
 
+import typetask.commons.core.EventsCenter;
+import typetask.commons.events.ui.JumpToListRequestEvent;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.task.DueDate;
@@ -57,6 +59,7 @@ public class AddCommand extends Command {
         assert model != null;
         model.storeTaskManager(COMMAND_WORD);
         model.addTask(toAdd);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(toAdd)));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
