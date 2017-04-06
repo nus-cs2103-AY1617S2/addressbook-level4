@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+//@@author A0130979U
 public class DescriptionTest {
 
     @Test
@@ -20,3 +21,4 @@ public class DescriptionTest {
         assertFalse(Description.isValidDescription(ModelConstant.getLongString(151)));
     }
 }
+//@@author A0130979U

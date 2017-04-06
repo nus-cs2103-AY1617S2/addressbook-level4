@@ -48,6 +48,7 @@ import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.storage.StorageManager;
 
 
@@ -68,7 +69,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) throws IllegalTimeException {
         latestTaskAddressBook = new TaskBook(abce.data);
     }
 
@@ -83,7 +84,7 @@ public class LogicManagerTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IllegalTimeException {
         model = new ModelManager();
         String tempTaskBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
@@ -102,7 +103,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() {
+    public void execute_invalid() throws IllegalTimeException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
@@ -121,9 +122,10 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
+     * @throws IllegalTimeException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) {
+    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalTimeException {
         TaskBook expectedTaskBook = new TaskBook(model.getTaskBook());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBook, expectedShownList);
@@ -159,7 +161,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() {
+    public void execute_unknownCommandWord() throws IllegalTimeException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
@@ -198,7 +200,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidTaskData() {
+    public void execute_add_invalidTaskData() throws IllegalTimeException {
         //151 characters
         assertCommandFailure("add A123456789A123456789A123456789A123456789A123456789A123456789A123456789"
                 + "A123456789A123456789A123456789A123456789A123456789A123456789A123456789A1234567891",
@@ -357,7 +359,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() {
+    public void execute_find_invalidArgsFormat() throws IllegalTimeException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
@@ -368,7 +370,7 @@ public class LogicManagerTest {
         Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
         Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p2 = helper.generateTaskWithName("KE sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TaskBook expectedAB = helper.generateAddressBook(fourTasks);

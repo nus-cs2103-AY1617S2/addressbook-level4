@@ -4,6 +4,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 import seedu.jobs.model.TaskBook;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  *
@@ -45,7 +46,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadTaskBookWithSampleData(TaskBook ab) {
+    public static void loadTaskBookWithSampleData(TaskBook ab) throws IllegalTimeException {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -60,7 +61,7 @@ public class TypicalTestTasks {
         return new TestTask[]{CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107};
     }
 
-    public TaskBook getTypicalTaskBook() {
+    public TaskBook getTypicalTaskBook() throws IllegalTimeException {
         TaskBook ab = new TaskBook();
         loadTaskBookWithSampleData(ab);
         return ab;

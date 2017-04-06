@@ -1,10 +1,10 @@
 # Developer Guide 
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix A: User Stories](#appendix-a-user-stories)
+* [Appendix B: Use Cases](#appendix-b-use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E : Product Survey](#appendix-e-product-survey)
 
 
 ## Setting up
@@ -222,13 +222,23 @@ We have two types of tests:
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
       e.g. `seedu.jobs.commons.UrlUtilTest`
+<<<<<<< HEAD
    2. _Integration tests_ that are checking the integration of multiple code units 
+=======
+   2. _Integration tests_ that are checking the integration of multiple code units
+>>>>>>> refs/heads/master
      (those code units are assumed to be working).<br>
       e.g. `seedu.jobs.storage.StorageManagerTest`
+<<<<<<< HEAD
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
       how the are connected together.<br>
       e.g. `seedu.jobs.logic.LogicManagerTest`
   
+=======
+   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how they are connected together.<br>
+      e.g. `seedu.jobs.logic.LogicManagerTest`
+
+>>>>>>> refs/heads/master
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  our GUI tests can be run in the _headless_ mode. 
@@ -286,27 +296,23 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | record task that will recur at certain frequency
 `* * *` | user | list all task filtered by task types/completion/date/tags| view a specific section of the tasks that have to completed
 `* * *` | user | edit my task | ensure that the task is still relevant
+<<<<<<< HEAD
 `* * *` | user | delay my task |automatically postpone deadlines 
 `* * *` | user | delete my task | conveniently remove task that is no longer relevant
+=======
+`* * *` | user | delete my task | conveniently remove task that regardless of status
+>>>>>>> refs/heads/master
 `* * *` | user  | delete all my task | clear my data
-`* * *` | user | delete my task | conveniently remove task that is no longer relevant
-`* * *` | new user | have some flexibility in inputting my command | conveniently remove task that is no longer relevant
 `* * *` | advanced user | utilize text search | find specific tasks with specificied tags or keywords
 `* * *` | user | load my data from any specified location | have ease of access in using the application
 `* * *` | user | export my data to any specified location | share my task list with other local machines
 `* * *` | user | set a deadline reminder | been notified at some time before deadline
 `* * *` | new user | view command lists or more information about a particular command | learn how to use various command
 `* * ` | user | add several tags for a task | search tasks based on tags
-`* * ` | user | sort listed task based on deadline | prioritize the completion of task
 `* * ` | user | find recently deleted tasks | retrieve accidentally deleted tasks and monitor past activities
 `* * ` | user | support for undo/redo operation | flexibly manage the changes made on the list of task
 `*` | user | upload todo items to Google Calendar | synchronize with Google Calendar
-`*` | user | customize application’s background | personalize the appearance of the task manager
-`*` | user | view different task types in different areas on GUI | view different task types easier
 `*` | advanced user | type commands with auto-complete | type a command faster
-`*` | advanced user | alias a particular command with some arguments | type a command faster
-
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -314,40 +320,63 @@ Priority | As a ... | I want to ... | So that I can...
 
 #### Use case: 
 
-**UC01 ‐ Create a task**
+### UC01 Create a task
 
 **MSS**
 
 1. User types in the task that he/she wishes to be included in the task reminder
 2. System informs the user that the task has been included in the task reminder
+<<<<<<< HEAD
 Use case ends.  
  
+=======
+Use case ends.
+
+>>>>>>> refs/heads/master
 **Extensions**
 User enters the wrong task format
+<<<<<<< HEAD
 JOBS shows the expected task format
 JOBS prompts user to re-enter the task 
+=======
+>>>>>>> refs/heads/master
 
+JOBS shows the expected task format
+JOBS prompts user to re-enter the task
 
 > Use case ends
 
-**Use case: UC02 ‐ Task Listing **
+### UC02 Task Listing
 
 **MSS**
 
 1. User types in the kind of task that he wants to list
 2. System outputs all the information with regards to the task the user queries
+<<<<<<< HEAD
+=======
+Use case ends.
+>>>>>>> refs/heads/master
 
 **Extensions**
+<<<<<<< HEAD
 User enters the wrong task format
 System shows the expected task format
 System prompts user to re-enter the task
 The specific task name or filter cannot be found
 System informs the user that the specific task/filter cannot be found
+=======
+1a. User enters the wrong task format.
+    1a1. System shows the expected task format.
+    1a2. System prompts user to re-enter the task.
+Use case resumes from step 1.
+>>>>>>> refs/heads/master
 
+1b. The specific task name or filter cannot be found.
+    1b1. System informs the user that the specific task/filter cannot be found.
 
 >Use case ends.  
 
-**Use case: UC03 ‐ Update a task**
+### UC03 Update a task
 
 **MSS**
 
@@ -358,31 +387,51 @@ System informs the user that the specific task/filter cannot be found
 5. User enters the requested details.
 6. System requests for confirmation.
 7. User confirms update.
+<<<<<<< HEAD
 8. System updates the selected task and displays the updated task’s information.
 Use case ends.  
+=======
+8. System updates the selected task and displays the updated taskâ€™s information.
+Use case ends.
+>>>>>>> refs/heads/master
 
 **Extensions**  
 3a. The input task cannot be found.
+<<<<<<< HEAD
 	3a1. System requests for creating new task.
 	3a2. System confirms creating new task.
 	3a3. System creates a new task. (UC01)
+=======
+    3a1. System requests for creating new task.
+    3a2. System confirms creating new task.
+    3a3. System creates a new task. (UC01)
+>>>>>>> refs/heads/master
 
 5a. System detects an error in the entered data.
+<<<<<<< HEAD
 	5a1. System requests for the correct data.
 	5a2. User enters new data.
+=======
+    5a1. System requests for the correct data.
+    5a2. User enters new data.
+>>>>>>> refs/heads/master
 Step 5a1-5a2 are repeated until the data entered are correct.
 Use case resumes from step 6.
 
 * a. At  any time, user chooses to cancel the update
+<<<<<<< HEAD
 	*a1. System requests to confirm the cancellation.
 	*a2. User confirms the cancellation.
 	*a3. System discards all the changes.
+=======
+    *a1. System requests to confirm the cancellation.
+    *a2. User confirms the cancellation.
+    *a3. System discards all the changes.
+>>>>>>> refs/heads/master
 
 >Use case ends.
 
-
-
-**Use case: UC04 ‐ Delete a task**
+### UC04 Delete a task
 
 **MSS**
 
@@ -390,16 +439,24 @@ Use case resumes from step 6.
 2. System requests for confirmation.
 3. User confirms deletion
 4. System delete the selected task and displays the updated list of task.
+<<<<<<< HEAD
 Use case ends.  
+=======
+Use case ends.
+>>>>>>> refs/heads/master
 
 **Extensions**
 
 1a. The specified task cannot be found.
+<<<<<<< HEAD
 	1a1. System shows an error message.
 	Use case ends
+=======
+    1a1. System shows an error message.
+>>>>>>> refs/heads/master
 
+>Use case ends
 
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 
@@ -411,11 +468,10 @@ Use case ends.
 6. Should be able to add plugins.
 7. Should be free to use.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
-##### BucketList
+##### JOBS
 >The name of this application
 
 ##### Events

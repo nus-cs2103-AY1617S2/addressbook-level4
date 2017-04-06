@@ -7,7 +7,7 @@ import seedu.jobs.commons.exceptions.IllegalValueException;
 /**
  * Represents a Task's description in JOBS.
  */
-
+//@@author A0130979U
 public class Description {
 
     public static final String DEFAULT_DESCRIPTION = "";
@@ -49,3 +49,4 @@ public class Description {
     }
 
 }
+

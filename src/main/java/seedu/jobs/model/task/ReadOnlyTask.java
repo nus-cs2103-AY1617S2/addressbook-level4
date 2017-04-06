@@ -1,7 +1,7 @@
 package seedu.jobs.model.task;
 
 import seedu.jobs.model.tag.UniqueTagList;
-
+//@@author A0130979U
 public interface ReadOnlyTask {
 
     Name getName();

@@ -1,5 +1,6 @@
 package seedu.jobs.model;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -9,10 +10,10 @@ import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
-import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -27,8 +28,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     * @throws IllegalTimeException
      */
-    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) throws IllegalTimeException {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
@@ -38,12 +40,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
     }
 
-    public ModelManager() {
+    public ModelManager() throws IllegalTimeException {
         this(new TaskBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskBook newData) {
+    public void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException {
         taskBook.resetData(newData);
         indicateTaskBookChanged();
     }
@@ -79,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+            throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
         assert editedTask != null;
 
         int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -107,6 +109,21 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredPersonList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+
+    //=========== Undo & redo commands =======================================================================
+  //@@author A0164440M
+    @Override
+    public synchronized void undoCommand() throws EmptyStackException {
+        taskBook.undoTask();
+        indicateTaskBookChanged();
+    }
+
+    @Override
+    public synchronized void redoCommand() throws EmptyStackException {
+        taskBook.redoTask();
+        indicateTaskBookChanged();
+    }
+  //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -149,7 +166,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword))
+                    .filter(keyword -> task.getName().fullName.toLowerCase().contains(keyword.toLowerCase()))
                     .findAny()
                     .isPresent();
         }

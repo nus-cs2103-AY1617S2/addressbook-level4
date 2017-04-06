@@ -15,6 +15,7 @@ import seedu.jobs.model.task.Period;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * JAXB-friendly version of the Task.
@@ -31,7 +32,7 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String period;
-    @XmlElement
+    @XmlElement(required = true)
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -62,8 +63,9 @@ public class XmlAdaptedTask {
      * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalTimeException
      */
-    public Task toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException, IllegalTimeException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());

@@ -15,6 +15,7 @@ import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
+import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 /**
  * An Immutable TaskBook that is serializable to XML format
@@ -53,6 +54,9 @@ public class XmlSerializableTaskBook implements ReadOnlyTaskBook {
             } catch (IllegalValueException e) {
                 e.printStackTrace();
                 //TODO: better error handling
+                return null;
+            } catch (IllegalTimeException ite) {
+                ite.printStackTrace();
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));

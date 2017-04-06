@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
-//import javafx.scene.web.WebView; only for web view
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.util.FxViewUtil;
@@ -19,11 +19,11 @@ public class HelpWindow extends UiPart<Region> {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
-//    private static final String USERGUIDE_URL =
-//            "<INSERT WEB ADDRESS HERE>";
+    private static final String USERGUIDE_URL =
+            "https://cs2103jan2017-f11-b1.github.io/main/docs/UserGuide.html";
 
     @FXML
-    //private WebView browser;
+    private WebView browser;
 
     private final Stage dialogStage;
 
@@ -36,8 +36,8 @@ public class HelpWindow extends UiPart<Region> {
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
 //        THIS IS FOR BROWSER
-//        browser.getEngine().load(USERGUIDE_URL);
-//        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        browser.getEngine().load(USERGUIDE_URL);
+        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
 
     public void show() {

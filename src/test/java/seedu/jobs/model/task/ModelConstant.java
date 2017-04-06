@@ -1,6 +1,6 @@
 package seedu.jobs.model.task;
 
-
+//@@author A0130979U
 public class ModelConstant {
 
     public static String getLongString(int length) {
@@ -12,3 +12,4 @@ public class ModelConstant {
     }
 
 }
+//@@author A0130979U

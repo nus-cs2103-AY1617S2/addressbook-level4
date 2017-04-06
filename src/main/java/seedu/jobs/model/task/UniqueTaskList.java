@@ -1,5 +1,6 @@
 package seedu.jobs.model.task;
 
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.exceptions.DuplicateDataException;
 import seedu.jobs.commons.util.CollectionUtil;
+import seedu.jobs.logic.commands.exceptions.CommandException;
+import seedu.jobs.model.FixedStack;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -20,7 +23,10 @@ import seedu.jobs.commons.util.CollectionUtil;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
-
+    //@@author A0164440M
+    private final FixedStack<ObservableList<Task>> undoStack = new FixedStack();
+    private final FixedStack<ObservableList<Task>> redoStack = new FixedStack();
+    //@@author
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -39,6 +45,13 @@ public class UniqueTaskList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
         }
+        //@@author A0164440M
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
+        //@@author
         internalList.add(toAdd);
     }
 
@@ -47,10 +60,21 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing person in the list.
+     * @throws IllegalTimeException
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException, IllegalTimeException {
         assert editedTask != null;
+
+        //@@author A0164440M
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        Task temp;
+        for (Task t : internalList) {
+            temp = new Task(t);
+            stackList.add(temp);
+        }
+        undoStack.push(stackList);
+        //@@author
 
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
@@ -71,6 +95,15 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
+
+      //@@author A0164440M
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
+      //@@author
+
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
         if (!taskFoundAndDeleted) {
             throw new TaskNotFoundException();
@@ -83,21 +116,64 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
+  //@@author A0130979U
     public boolean complete(int index, ReadOnlyTask toComplete) {
         assert toComplete != null;
 
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
         internalList.set(index, taskToComplete);
         return true;
     }
+  //@@author
+
+    /**
+     *
+     * @param replacement
+     */
+  //@@author A0164440M
+    public void undo() throws EmptyStackException {
+        ObservableList<Task> replacement = undoStack.pop();
+        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            redoTemp.add(t);
+        }
+        redoStack.push(redoTemp);
+        this.internalList.setAll(replacement);
+    }
+
+    public void redo() throws EmptyStackException {
+        ObservableList<Task> replacement = redoStack.pop();
+        ObservableList<Task> undoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            undoTemp.add(t);
+        }
+        undoStack.push(undoTemp);
+        this.internalList.setAll(replacement);
+    }
+  //@@author
 
     public void setTasks(UniqueTaskList replacement) {
+
+      //@@author A0164440M
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            stackList.add(t);
+        }
+        undoStack.push(stackList);
+      //@@author
+
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException, IllegalTimeException {
         final UniqueTaskList replacement = new UniqueTaskList();
+
         for (final ReadOnlyTask task : tasks) {
             replacement.add(new Task(task));
         }
@@ -140,5 +216,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching person in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+
+    public static class IllegalTimeException extends CommandException {
+
+        public IllegalTimeException(String message) {
+            super(message);
+        }
+    }
 
 }
