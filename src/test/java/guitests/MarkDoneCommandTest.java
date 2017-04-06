@@ -195,7 +195,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
-                expectedTasksList[1] + "\n" + "2. " + expectedTasksList[3]));
+                expectedTasksList[3] + "2. " + expectedTasksList[1]));
     }
 
     @Test
@@ -215,7 +215,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
-                expectedTasksList[1] + "\n" + "2. " + expectedTasksList[3]));
+                expectedTasksList[3] + "2. " + expectedTasksList[1]));
     }
 
     @Test
