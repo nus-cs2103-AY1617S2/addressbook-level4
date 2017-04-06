@@ -240,6 +240,59 @@ public class TestUtil {
     }
 
     // @@author
+    /**
+     * Takes in a list of Testevents and returns the expected filtered and sorted
+     * list of events in event panel
+     *
+     * @param events
+     * @return expected filtered and sorted event list in event panel
+     */
+    public static TestEvent[] filterExpectedTestEventList(TestEvent[] events) {
+        int numInUIView = 0;
+        ArrayList<TestEvent> eventslist = new ArrayList<TestEvent>();
+        for (TestEvent a : events) {
+            if (!a.isOver()) {
+                numInUIView++;
+                eventslist.add(a);
+            }
+        }
+        eventslist.sort(ReadOnlyEvent.getComparator());
+        TestEvent[] expected = new TestEvent[numInUIView];
+        int counter = 0;
+        for (TestEvent each : eventslist) {
+            expected[counter] = each;
+            counter++;
+        }
+        return expected;
+    }
+
+    /**
+     * Takes in a list of TestTasks and returns the expected filtered and sorted
+     * list of tasks in task panel
+     *
+     * @param tasks
+     * @return expected filtered and sorted task list in event panel
+     */
+    public static TestTask[] filterExpectedTestTaskList(TestTask[] tasks) {
+        int numInUIView = 0;
+        ArrayList<TestTask> taskslist = new ArrayList<TestTask>();
+        for (TestTask a : tasks) {
+            if (a.getStatus() == false) {
+                numInUIView++;
+                taskslist.add(a);
+            }
+        }
+
+        taskslist.sort(ReadOnlyTask.getComparator());
+        TestTask[] expected = new TestTask[numInUIView];
+        int counter = 0;
+        for (TestTask each : taskslist) {
+            expected[counter] = each;
+            counter++;
+        }
+        return expected;
+    }
+
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }

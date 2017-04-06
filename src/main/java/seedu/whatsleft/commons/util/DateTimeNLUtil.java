@@ -28,11 +28,12 @@ public class DateTimeNLUtil {
     }
 
     enum RelativeDay {
-        today, tmr
+        today, tmr, tomorrow
     }
 
     enum AbsDay {
-        mon, tue, wed, thu, fri, sat, sun
+        mon, tue, wed, thu, fri, sat, sun, monday, tuesday, wednesday, thursday, friday, saturday,
+        sunday, tues, weds, thurs
     }
 
     /**
@@ -44,6 +45,7 @@ public class DateTimeNLUtil {
         modmap.put(Modifier.following, 2);
         relativedaymap.put(RelativeDay.today, 0);
         relativedaymap.put(RelativeDay.tmr, 1);
+        relativedaymap.put(RelativeDay.tomorrow, 1);
         absdaymap.put(AbsDay.mon, "MONDAY");
         absdaymap.put(AbsDay.tue, "TUESDAY");
         absdaymap.put(AbsDay.wed, "WEDNESDAY");
@@ -51,8 +53,19 @@ public class DateTimeNLUtil {
         absdaymap.put(AbsDay.fri, "FRIDAY");
         absdaymap.put(AbsDay.sat, "SATURDAY");
         absdaymap.put(AbsDay.sun, "SUNDAY");
+        absdaymap.put(AbsDay.monday, "MONDAY");
+        absdaymap.put(AbsDay.tuesday, "TUESDAY");
+        absdaymap.put(AbsDay.wednesday, "WEDNESDAY");
+        absdaymap.put(AbsDay.thursday, "THURSDAY");
+        absdaymap.put(AbsDay.friday, "FRIDAY");
+        absdaymap.put(AbsDay.saturday, "SATURDAY");
+        absdaymap.put(AbsDay.sunday, "SUNDAY");
+        absdaymap.put(AbsDay.tues, "TUESDAY");
+        absdaymap.put(AbsDay.weds, "WEDNESDAY");
+        absdaymap.put(AbsDay.thurs, "THURSDAY");
     }
 
+    //@@author A0110491U
     /**
      * This method takes in a natural language String argument, and processes it to determine
      * if it has the required format to be converted to a date in String (DDMMYY)
@@ -103,6 +116,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the RelativeDay Enum
      */
@@ -115,6 +129,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in RelativeDay Enum that matches the given String argument
      */
@@ -127,6 +142,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the AbsDay Enum
      */
@@ -139,6 +155,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in AbsDay Enum that matches the given String argument
      */
@@ -151,6 +168,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the Modifier Enum
      */
@@ -163,6 +181,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in Modifier Enum that matches the given String argument
      */
@@ -175,6 +194,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Represents the IllegalValueException for a Natural Language that was parsed
      *
