@@ -56,6 +56,9 @@ Are you ready to be a Doist?
 You will notice that the commands get *highlighted* with different colours as you type!
 Additionally, when you start typing a command, Doist will provide you with command word suggestions.
 Just press <kbd>TAB</kbd> to accept the first suggestion! <br> <br>
+ <img src="images/autocomplete.png" width="450"> <br>
+ *Figure 2.2: Autocomplete giving command word suggestions*
+
 Type the following commands and press <kbd>Enter</kbd> after each command.
 
 1. **`add Attend group meeting \from 3pm \to 5pm`**. <br>
@@ -79,12 +82,13 @@ Refer to the [Features](#features) section below for details of each command.<br
 
 **Command Format**
 
-Take note of some general information for our commands :
-> * All commands begin with a command word. <br>
-> *e.g.* `add`, `edit` <br>
-> * All keys start with the backslash `\`. <br>
-> *e.g.* `\from`, `\to` are the keys in `add Buy the milk \from 3pm \to 5pm` <br>
-> * Command words and keys that consist of multiple words will not contain spaces. Underscores are used instead. <br>
+Take note of some general information for our commands : <br>
+<img src="images/commandformat.png" width="450"> <br>
+*Figure 2.3: General command format*
+
+> * All parameters start with the backslash `\`. <br>
+> *e.g.* `\from`, `\to`
+> * Command words and parameters that consist of multiple words will not contain spaces. Underscores are used instead. <br>
 > *e.g.* `list_tag` <br>
 > * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
 > * If you want to use backslash `\` in the value, use `\\`. <br>
@@ -92,13 +96,13 @@ Take note of some general information for our commands :
 > * Items in `[]` are optional. <br>
 > * Items with `...` after them can have multiple instances, separated by space. <br>
 > *e.g.* `[INDEX...]` means you can specify multiple indices for that command. <br>
-> * The keys can be entered in any order after the command word. <br>
+> * The command parameters can be entered in any order after the command word. <br>
 > *e.g.* `add Buy the milk \to 3pm \from 5pm` works too! <br>
 
 
 ### 3.1 Viewing help : `help`
 
-Feeling a bit lost? Simply type "help" to view the handy help page! <br>
+Feeling a little lost? Simply type `help` to view the handy help page! <br>
 `help`
 
 ### 3.2 Adding a new task : `add`
@@ -116,12 +120,12 @@ Format: `add TASK_DESCRIPTION`
 > - To use backslash `\` in your description, type `\\`
 
 **Start time and End time** <br>
-Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` keys. <br>
+Add a task with a start time and end time for events that occur over a period of time with `\from` and `\to` parameters. <br>
 <br>
 Format: `add TASK_DESCRIPTION [\from START_TIME] [\to END_TIME]`
 > **Examples:** <br>
 > - `add buy milk \from 3pm \to 4pm`<br>
-> - `add buy milk \from 12 Oct 3pm \to 4pm` <br>
+> - `add buy milk \from 12 Oct 3pm \to 12 Oct 4pm` <br>
 
 > **Remarks:** <br>
 > - See Figure 3.2.1 for acceptable date and time formats.
@@ -209,7 +213,7 @@ Format: `list [TYPE]`
 > - `list` will by default show all tasks, with finished tasks placed at the bottom <br>
 
 **List tasks during a time period** <br>
-List tasks occurring during a time period by using the `\from` and `\to` keys. <br>
+List tasks occurring during a time period by using the `\from` and `\to` parameters. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
 You can also use the `\in` key for tasks occurring `today`, `this week`, `this month` and so on.
@@ -247,7 +251,7 @@ Format: `find 'QUERY' ['QUERY'...]`
 > **Remarks:** <br>
 > - Spaces are allowed in search query.<br>
 > - The search is case insensitive. <br>
-> - The order of the search keys does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
+> - The order of the search terms does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
 > - Only the task description is searched. <br>
 > - Tasks matching at least one search query will be returned.
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
@@ -317,7 +321,7 @@ Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
 > - `edit 3 edited description of task` <br>
 
 > **Remarks:** <br>
-> - Refer to the section about the `add` command to know how to use the keys of the `edit` command because they are used in the exact same way
+> - Refer to the section about the `add` command to know how to use the parameters of the `edit` command because they are used in the exact same way
 
 **Sample Commands**
 * `list`<br>
