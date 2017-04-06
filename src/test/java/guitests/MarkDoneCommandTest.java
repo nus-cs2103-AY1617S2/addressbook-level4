@@ -132,7 +132,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertMarkDoneSuccess(false, true, taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
-    //---------------- Tests for successfully marking done a task after find command--------------------------------------
+    //---------------- Tests for successfully marking done a task after find command------------------------
 
     /*
      * EP: Check if successfully marked done a command after performing a find command,
