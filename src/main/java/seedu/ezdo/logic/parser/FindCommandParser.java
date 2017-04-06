@@ -59,8 +59,20 @@ public class FindCommandParser implements CommandParser {
             Optional<String> optionalStartDate = getOptionalValue(argsTokenizer, PREFIX_STARTDATE);
             Optional<String> optionalDueDate = getOptionalValue(argsTokenizer, PREFIX_DUEDATE);
 
-            setBooleanParameters(optionalStartDate, optionalDueDate, searchBeforeStartDate, searchBeforeDueDate,
-                    searchAfterStartDate, searchAfterDueDate);
+            boolean[] booleanDateArray = setBooleanParameters(optionalStartDate, optionalDueDate);
+
+            int beforeStartIndex = 0; //indicates the position in array
+            int beforeDueIndex = 1;
+            int afterStartIndex = 2;
+            int afterDueIndex = 3;
+
+            searchBeforeStartDate = booleanDateArray[beforeStartIndex];
+            searchBeforeDueDate = booleanDateArray[beforeDueIndex];
+            searchAfterStartDate = booleanDateArray[afterStartIndex];
+            searchAfterDueDate = booleanDateArray[afterDueIndex];
+
+            optionalStartDate = setOptionalStartDate(optionalStartDate);
+            optionalDueDate = setOptionalDueDate(optionalDueDate);
 
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
@@ -79,6 +91,9 @@ public class FindCommandParser implements CommandParser {
         return new FindCommand(searchParameters);
     }
 
+    /*
+     * Get the optional value of a specified prefix from a tokenizer
+     */
     private Optional<String> getOptionalValue(ArgumentTokenizer tokenizer, Prefix prefix) {
         Optional<String> optionalString;
         if (!tokenizer.getValue(prefix).isPresent()) {
@@ -160,29 +175,56 @@ public class FindCommandParser implements CommandParser {
     /*
      * Check whether user is finding before or after the taskdate
      */
-    private void setBooleanParameters(Optional<String> optionalStartDate, Optional<String> optionalDueDate,
-            boolean searchBeforeStartDate, boolean searchBeforeDueDate, boolean searchAfterStartDate,
-            boolean searchAfterDueDate) {
+    private boolean[] setBooleanParameters(Optional<String> optionalStartDate, Optional<String> optionalDueDate) {
+
+        boolean searchBeforeStartDate = false;
+        boolean searchBeforeDueDate = false;
+        boolean searchAfterStartDate = false;
+        boolean searchAfterDueDate = false;
 
         if (isFindBefore(optionalStartDate)) {
-            optionalStartDate = parseFindBefore(optionalStartDate);
             searchBeforeStartDate = true;
         }
 
         if (isFindBefore(optionalDueDate)) {
-            optionalDueDate = parseFindBefore(optionalDueDate);
             searchBeforeDueDate = true;
         }
 
         if (isFindAfter(optionalStartDate)) {
-            optionalStartDate = parseFindAfter(optionalStartDate);
             searchAfterStartDate = true;
         }
 
         if (isFindAfter(optionalDueDate)) {
-            optionalDueDate = parseFindAfter(optionalDueDate);
             searchAfterDueDate = true;
         }
+
+        return new boolean[] {searchBeforeStartDate, searchBeforeDueDate, searchAfterStartDate, searchAfterDueDate };
+    }
+
+    private Optional<String> setOptionalStartDate(Optional<String> optionalStartDate) {
+
+        if (isFindBefore(optionalStartDate)) {
+            optionalStartDate = parseFindBefore(optionalStartDate);
+        }
+
+        if (isFindAfter(optionalStartDate)) {
+            optionalStartDate = parseFindAfter(optionalStartDate);
+        }
+
+        return optionalStartDate;
+    }
+
+    private Optional<String> setOptionalDueDate(Optional<String> optionalDueDate) {
+
+        if (isFindBefore(optionalDueDate)) {
+            optionalDueDate = parseFindBefore(optionalDueDate);
+        }
+
+        if (isFindAfter(optionalDueDate)) {
+            optionalDueDate = parseFindAfter(optionalDueDate);
+        }
+
+        return optionalDueDate;
     }
 
     /*
