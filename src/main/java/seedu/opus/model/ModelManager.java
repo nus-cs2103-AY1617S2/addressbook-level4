@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void stopSync() {
-    	this.isSyncOn = false;
+        this.isSyncOn = false;
         this.syncManager.stopSync();
     }
 
