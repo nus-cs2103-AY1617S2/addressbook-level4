@@ -62,7 +62,7 @@ Example:
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* `Press <kbd>Ctrl</kbd> + <kbd>A</kbd>` <br>
+* `Press `<kbd>Ctrl</kbd>` + `<kbd>A</kbd>`` <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
@@ -165,7 +165,7 @@ Examples:
 ### 3.7. Sort all tasks in a given order: `sort`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `sort [CATEGORY(priority/enddate/startdate/description/overdue/default)]...`
+Format: `sort CATEGORY(priority/enddate/startdate/description/overdue/default)...`
 
 > * The category entered will be given higher preference for sorting.
 > * By default, the sorted order is: overdue -> priority -> enddate -> startdate -> description
@@ -451,7 +451,7 @@ Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
 Help | `help [COMMAND]` | 'help add'
 History | `history`
 Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
-Sort | `sort [CATEGORY(priority/enddate/startdate/overdue/description/default)]...` | 'sort priority'
+Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | 'sort priority'
 Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
 Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
