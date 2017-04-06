@@ -189,6 +189,13 @@ Alternative commands: "logout"
 Task List data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
+### 2.12. Changing the filepath : `change`
+
+Changes the filepath for where the data is stored. <br>
+Format: `change`
+
+Alternative commands: "cd"
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
