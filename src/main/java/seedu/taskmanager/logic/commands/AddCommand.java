@@ -11,6 +11,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -59,6 +60,7 @@ public class AddCommand extends Command {
                         Optional.of(new EndDate(endDate.get())) : Optional.empty(),
                 description.isPresent() && !description.get().trim().equals("") ?
                         Optional.of(new Description(description.get())) : Optional.empty(),
+                new Status(),
                 new UniqueTagList(tagSet)
         );
         // @@author
