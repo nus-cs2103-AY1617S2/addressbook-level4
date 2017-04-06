@@ -419,7 +419,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    // @@author
+    // @@author A0142939W
     @Override
     @Subscribe
     public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {

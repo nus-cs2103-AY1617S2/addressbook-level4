@@ -2,11 +2,18 @@ package seedu.task.model.tag;
 
 import java.util.HashMap;
 import java.util.Random;
-
+//@@author A0142939W
+/**
+ * Represents the static TagColorMap in the
+ * taskmanager.
+ */
 public class TagColorMap {
     private static HashMap<String, String> tagColorMap;
 
-    //@@author A0142939W
+    /*
+     * Sets sets a random colour for a tag if the tag exists but
+     * does not have an assigned colour yet
+     */
     public static void setColor(String tag) {
         Random rand = new Random();
         int r = rand.nextInt(205);
@@ -16,11 +23,15 @@ public class TagColorMap {
         tagColorMap.put(tag, hex);
     }
 
-    //@@author A0142939W
+    /*
+     * Returns the color of the tag, if the tag does not
+     * have a colour, a random one is assigned
+     */
     public static String getColor(String tag) {
         if (tagColorMap == null) {
             tagColorMap = new HashMap<String, String>();
         }
+
         if (!tagColorMap.containsKey(tag)) {
             setColor(tag);
         }

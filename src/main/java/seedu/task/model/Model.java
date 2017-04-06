@@ -88,13 +88,15 @@ public interface Model {
     /** Updates the filer of the filtered task list to filter by floating task */
     void updateFilteredTaskListFloat();
 
-    //@@author
+    //@@author A0142939W
     /** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
 
+    //@@author A0142939W
     /** Changes the load path for data to be loaded from*/
     void loadFromLocation(String loadPath);
 
+    //@@author A0142939W
     /** Loads the file from the path to be loaded from*/
     void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
 

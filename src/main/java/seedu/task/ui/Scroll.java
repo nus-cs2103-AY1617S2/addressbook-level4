@@ -15,7 +15,12 @@ public class Scroll {
         scrollBar = null;
     }
 
-    Scroll(ListView<ReadOnlyTask> taskListView) {
+    /*
+     * Creates the scroll from the tasklistview
+     * If the listview is too short to contain a scrollbar,
+     * null is returned.
+     */
+    public Scroll(ListView<ReadOnlyTask> taskListView) {
         Node n = taskListView.lookup(".scroll-bar");
         if (n == null) {
             return;
@@ -25,6 +30,10 @@ public class Scroll {
         }
     }
 
+    /*
+     * Scrolls down the list view
+     * if there is any scrollbar to be found.
+     */
     public void scrollDown(ListView<ReadOnlyTask> taskListView) {
         if (scrollBar == null) {
             Node n = taskListView.lookup(".scroll-bar");
@@ -42,6 +51,10 @@ public class Scroll {
         scrollBar.increment();
     }
 
+    /*
+     * Scrolls up the list view if there is any scrollbar
+     * that can be found.
+     */
     public void scrollUp(ListView<ReadOnlyTask> taskListView) {
         if (scrollBar == null) {
             Node n = taskListView.lookup(".scroll-bar");
@@ -59,6 +72,10 @@ public class Scroll {
         scrollBar.decrement();
     }
 
+    /*
+     * Gets the value of the scroll, returns -1 if the listview
+     * is too short to contain a scrollbar.
+     */
     public double getScrollValue(ListView<ReadOnlyTask> taskListView) {
         if (scrollBar == null) {
             Node n = taskListView.lookup(".scroll-bar");
