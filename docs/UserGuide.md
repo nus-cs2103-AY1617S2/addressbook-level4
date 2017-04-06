@@ -122,7 +122,7 @@ Examples:
 
 ### 3.4. Delete an existing task: `DELETE`
 
-You can use this command to delete existing task in ProcrastiNomore 
+You can use this command to delete existing task in ProcrastiNomore
 
 Format: `DELETE TASKNAME` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX` <br />
