@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
@@ -26,17 +27,14 @@ public class SampleDataUtil {
     
     Random r;
     
-    public static Iterable<Task> getSampleTasks(int n) {
-        List<Task> generated = new ArrayList<Task>(n);
+    public static Task[] getSampleTasks(int n) {
+        Set<Task> generated = new HashSet<Task>();
         for (int i = 0; i < n; i++) {
-            Task t = generateRandomTask();
-            if (!generated.contains(t)) {
-                generated.add(t);
-            } else {
+            if (!generated.add(generateRandomTask())) {
                 i--;
             }
         }
-        return generated;
+        return generated.toArray(new Task[n]);
     }
     
     /**
