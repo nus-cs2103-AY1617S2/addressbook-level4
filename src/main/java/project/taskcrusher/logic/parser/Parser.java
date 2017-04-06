@@ -20,7 +20,6 @@ import project.taskcrusher.logic.commands.ListCommand;
 import project.taskcrusher.logic.commands.LoadCommand;
 import project.taskcrusher.logic.commands.MarkCommand;
 import project.taskcrusher.logic.commands.RedoCommand;
-import project.taskcrusher.logic.commands.SelectCommand;
 import project.taskcrusher.logic.commands.SwitchCommand;
 import project.taskcrusher.logic.commands.UndoCommand;
 
@@ -58,10 +57,6 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
-        // TODO remove this later on
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

@@ -36,6 +36,7 @@ public class StringUtil {
         return false;
     }
 
+    //@@author A0127737X
     public static boolean containsSubstringIgnoreCase(String sentence, String string) {
         assert string != null : "String parameter cannot be null";
         assert sentence != null : "Sentence parameter cannot be null";
@@ -53,6 +54,7 @@ public class StringUtil {
         return false;
     }
 
+    //@@author
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

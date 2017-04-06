@@ -286,7 +286,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class PredicateExpression implements Expression {
-
         private final Qualifier qualifier;
 
         PredicateExpression(Qualifier qualifier) {
@@ -373,11 +372,13 @@ public class ModelManager extends ComponentManager implements Model {
             return "user-interested timeslot is " + userInterestedTimeslot.toString();
         }
     }
+
     /**
      * checks if the given UserToDo is marked as complete or incomplete
      */
     private class CompletionQualifier implements Qualifier {
-        boolean showComplete;
+        private boolean showComplete;
+
         CompletionQualifier(boolean showComplete) {
             this.showComplete = showComplete;
         }

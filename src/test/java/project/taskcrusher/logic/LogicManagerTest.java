@@ -39,7 +39,6 @@ import project.taskcrusher.logic.commands.ExitCommand;
 import project.taskcrusher.logic.commands.FindCommand;
 import project.taskcrusher.logic.commands.HelpCommand;
 import project.taskcrusher.logic.commands.ListCommand;
-import project.taskcrusher.logic.commands.SelectCommand;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 import project.taskcrusher.model.Model;
 import project.taskcrusher.model.ModelManager;
@@ -626,34 +625,6 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
-    //@@author
-    // TODO CAN WE GET RID OF THIS USELESS COMMAND
-    @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
-    }
-
-    @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertTaskIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        List<Event> fiveEvents = helper.generateEventList(5);
-
-        UserInbox expectedInbox = helper.generateUserInbox(threeTasks, fiveEvents);
-        helper.addToModel(model, threeTasks, fiveEvents);
-
-        assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedInbox,
-                expectedInbox.getTaskList(), expectedInbox.getEventList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
     //@@author A0163962X
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
@@ -712,28 +683,29 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0127737X
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
+    public void execute_find_matchesSubstring() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithName("bla bla KEY bla");
         Task tTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task tTarget3 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task t1 = helper.generateTaskWithName("KE Y");
-        Task t2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         Event eTarget1 = helper.generateEventWithName("bla bla KEY bla");
         Event eTarget2 = helper.generateEventWithName("bla KEY bla bceofeia");
+        Event eTarget3 = helper.generateEventWithName("KEYKEYKEY sduauo");
         Event e1 = helper.generateEventWithName("KE Y");
-        Event e2 = helper.generateEventWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, t2, tTarget2);
-        List<Event> fiveEvents = helper.generateEventList(e1, eTarget1, e2, eTarget2);
+        List<Task> fourTasks = helper.generateTaskList(t1, tTarget1, tTarget2, tTarget3);
+        List<Event> fourEvents = helper.generateEventList(e1, eTarget1, eTarget2, eTarget3);
 
-        UserInbox expectedInbox = helper.generateUserInbox(fourTasks, fiveEvents);
+        UserInbox expectedInbox = helper.generateUserInbox(fourTasks, fourEvents);
 
-        List<Task> expectedTaskList = helper.generateTaskList(tTarget1, tTarget2);
-        List<Event> expectedEventList = helper.generateEventList(eTarget1, eTarget2);
+        List<Task> expectedTaskList = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Event> expectedEventList = helper.generateEventList(eTarget1, eTarget2, eTarget3);
 
-        helper.addToModel(model, fourTasks, fiveEvents);
+        helper.addToModel(model, fourTasks, fourEvents);
 
         assertCommandSuccess("find KEY",
                 Command.getMessageForPersonListShownSummary(expectedTaskList.size(), expectedEventList.size()),
