@@ -27,7 +27,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
-    public static final String TAB_TODO = "To Do";
+    public static final String TAB_TO_DO = "To Do";
     public static final String TAB_DONE = "Done";
 
     private Stage primaryStage;

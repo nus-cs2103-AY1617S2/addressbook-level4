@@ -47,8 +47,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        // @@author A0131278H
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
         filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
+        // @@author
     }
 
     public ModelManager() {
@@ -134,13 +136,15 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
         return new UnmodifiableObservableList<>(filteredDoneTasks);
     }
-    // @@author
 
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        filteredToDoTasks.setPredicate(null);
+        filteredDoneTasks.setPredicate(null);
     }
-
+    // @@author
+    
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -159,10 +163,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     // @@author
-
+    
+    // @@author A0131278H
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        filteredToDoTasks.setPredicate(expression::satisfies);
+        filteredDoneTasks.setPredicate(expression::satisfies);
     }
+    // @@author
 
     // ========== Inner classes/interfaces used for filtering
     // =================================================
