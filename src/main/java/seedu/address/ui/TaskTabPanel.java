@@ -88,7 +88,7 @@ public class TaskTabPanel extends UiPart<Region> {
         if (currTaskListPlaceHolder != null) {
             currTaskListPlaceHolder.getChildren().clear();
         }
-        taskListPanel = new TaskListPanel(placeholder, logic.getFilteredPersonList());
+        taskListPanel = new TaskListPanel(placeholder, logic.getFilteredTaskList());
         currTaskListPlaceHolder = placeholder;
     }
 
