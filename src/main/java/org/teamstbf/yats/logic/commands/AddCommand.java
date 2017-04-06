@@ -16,6 +16,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
+//@@author A0116219L
 /**
  * Adds a task to the TaskManager.
  */

@@ -29,7 +29,9 @@ public class Event implements ReadOnlyEvent {
     private Location location;
     private UniqueTagList tags;
     private Integer priority;
+    
 
+  //@@author A0116219L
     /**
      * Creates an Event object using map of parameters, only name is compulsory,
      * others are optional
