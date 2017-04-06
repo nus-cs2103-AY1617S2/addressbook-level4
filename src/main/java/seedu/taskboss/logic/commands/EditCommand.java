@@ -98,7 +98,6 @@ public class EditCommand extends Command {
             }
         }
 
-        model.updateFilteredListToShowAll();
         scrollToTask(taskToEdit);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
