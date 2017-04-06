@@ -25,7 +25,6 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(int targetIndex) {
         this.targetIndex = targetIndex;
-
     }
 
 
@@ -39,7 +38,6 @@ public class DeleteCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
@@ -48,5 +46,4 @@ public class DeleteCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete), MESSAGE_SUCCESS_STATUS_BAR);
     }
-
 }

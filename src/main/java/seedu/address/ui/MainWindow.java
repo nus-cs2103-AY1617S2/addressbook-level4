@@ -278,6 +278,7 @@ public class MainWindow extends UiPart<Region> {
             commandTextField.setText("");
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
             raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
+
         } catch (CommandException e) {
             // handle command failure
             raise(new NewResultAvailableEvent(e.getMessage()));

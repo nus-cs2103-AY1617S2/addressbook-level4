@@ -48,6 +48,7 @@ public class TodayCommand extends Command {
         ReadOnlyTask taskToToday = lastShownList.get(filteredTaskListIndex);
         try {
             Task todayTask = createTodayTask(taskToToday);
+            todayTask.setAnimation(2);
             model.updateTask(filteredTaskListIndex, todayTask);
             model.updateFilteredListToShowAll();
             return new CommandResult(String.format(MESSAGE_TODAY_TASK_SUCCESS, todayTask),

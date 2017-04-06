@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +36,9 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private TitledPane futureTaskListPanel;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     ObservableList<ReadOnlyTask> taskListToday;
 
     ObservableList<ReadOnlyTask> taskListFuture;
@@ -52,11 +56,23 @@ public class TaskListPanel extends UiPart<Region> {
         this.taskListFuture = taskListFuture;
         setConnections(todayTaskListView, taskListToday);
         setConnections(futureTaskListView, taskListFuture);
-
         // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
         // set ListView height, add 2 extra px to show border
         updateListHeight();
+    }
+
+    public void scrollTo(){
+        for (ReadOnlyTask task: taskListToday){
+            if (task.isAnimated()) {
+                scrollToToday(taskListToday.indexOf(task));
+            }
+        }
+        for (ReadOnlyTask task : taskListFuture) {
+            if (task.isAnimated()) {
+                scrollToToday(taskListFuture.indexOf(task));
+            }
+        }
     }
 
     public void updateListHeight() {
@@ -64,7 +80,6 @@ public class TaskListPanel extends UiPart<Region> {
         futureTaskListView.setPrefHeight(taskListFuture.size() * rowHeight + rowPadding);
     }
 
-    // @@author
     private void setConnections(ListView<ReadOnlyTask> taskListView, ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -87,7 +102,14 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    public void scrollTo(int index) {
+    public void scrollToToday(int index) {
+        Platform.runLater(() -> {
+            todayTaskListView.scrollTo(index);
+            todayTaskListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    public void scrollToFuture(int index) {
         Platform.runLater(() -> {
             futureTaskListView.scrollTo(index);
             futureTaskListView.getSelectionModel().clearAndSelect(index);
@@ -108,6 +130,10 @@ public class TaskListPanel extends UiPart<Region> {
 
     public TitledPane getFutureTaskListPanel() {
         return futureTaskListPanel;
+    }
+
+    public ScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {

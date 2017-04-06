@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 /**
  * Represents the result of a command execution.
  */
+// @@Author A0144315N
 public class CommandResult {
 
     public final String feedbackToUser;
@@ -13,5 +14,4 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
         this.statusBarMessage = statusBarMessage;
     }
-
 }

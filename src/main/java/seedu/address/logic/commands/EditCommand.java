@@ -64,6 +64,7 @@ public class EditCommand extends Command {
         if (editTaskDescriptor.isAnyFieldEdited()) {
             try {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+                editedTask.setAnimation(2);
             } catch (IllegalValueException e) {
                 throw new CommandException(e.getMessage());
             }

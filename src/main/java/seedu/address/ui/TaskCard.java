@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
@@ -61,6 +62,8 @@ public class TaskCard extends UiPart<Region> {
             timeline.setCycleCount(1);
             timeline.play();
             task.setAnimation(0);
+            // Scroll to the card
+            raise(new JumpToListRequestEvent(task.getID()));
         } else if (task.getIsAnimated() > 1) {
             task.setAnimation(task.getIsAnimated() - 1);
         }

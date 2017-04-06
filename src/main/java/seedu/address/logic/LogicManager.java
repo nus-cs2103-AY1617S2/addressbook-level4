@@ -56,9 +56,16 @@ public class LogicManager extends ComponentManager implements Logic {
                 }
 
                 model.saveCurrentState(commandText.trim());
-
             }
-
+            /*
+             * if (toExecute instanceof DeleteCommand) { // Play animation
+             * before deleting int taskIndex = ((DeleteCommand)
+             * toExecute).targetIndex; model.getFilteredTaskList().get(taskIndex
+             * - 1).setAnimation(2); raise(new
+             * TaskManagerChangedEvent(model.getTaskManager())); try {
+             * Thread.sleep(3000); } catch (InterruptedException e) { // TODO
+             * Auto-generated catch block e.printStackTrace(); } }
+             */
             return toExecute.execute();
         } catch (CommandException e) {
             if (!(toExecute instanceof UndoCommand)) {
