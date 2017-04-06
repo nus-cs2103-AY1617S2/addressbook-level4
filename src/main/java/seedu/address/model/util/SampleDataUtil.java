@@ -58,7 +58,7 @@ public class SampleDataUtil {
                     addEndDate ? new EndDate(TaskDateGenerator.getEndDate(r)) : null,
                     new Group(TaskGroupGenerator.getGroup(r)),
                     UniqueTagList.build(r.nextBoolean() ? Tag.TAG_COMPLETE : Tag.TAG_INCOMPLETE));
-            
+          
         } catch (IllegalValueException e) {
             return generateRandomTask();
         }

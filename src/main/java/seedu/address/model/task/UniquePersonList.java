@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +40,12 @@ public class UniquePersonList implements Iterable<Task> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
+
         internalList.add(toAdd);
+        //@@author A0164032U
+        Comparator<Task> comparator = Comparator.comparing(Task::getDateTime);
+        FXCollections.sort(internalList,comparator);
+        //@@author 
     }
 
     /**

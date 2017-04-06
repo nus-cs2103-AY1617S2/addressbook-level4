@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -145,6 +146,18 @@ public class Task implements ReadOnlyPerson {
     @Override
     public String toString() {
         return getAsText();
+    }
+    
+    //@@author A0164032U
+    public java.util.Date getDateTime(){
+        Parser parser = new Parser();
+        List<DateGroup> groups = parser.parse(date.value);
+        return groups.get(0).getDates().get(0);
+    }
+    
+    //@@authro A0164032U
+    public int compareTo(Task o){
+        return getDateTime().compareTo(o.getDateTime());
     }
 
     //@@author A0163848R

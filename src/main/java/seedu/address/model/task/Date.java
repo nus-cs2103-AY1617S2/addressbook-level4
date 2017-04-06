@@ -31,7 +31,7 @@ public abstract class Date {
             this.value = BAD_DATE;
         } else {
             this.value = DateUtil.parse(date).toString();
-        }   
+        }
     }
 
     @Override

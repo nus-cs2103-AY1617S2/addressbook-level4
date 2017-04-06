@@ -55,7 +55,7 @@ public class AddCommand extends Command {
     /*
      * Constructor: floating task without starting date and end date
      */
-  //@@author A0164032U
+    //@@author A0164032U
     public AddCommand(String name, String group) throws IllegalValueException {
         this.toAdd = new FloatingTask(new Name(name),
                 null,
