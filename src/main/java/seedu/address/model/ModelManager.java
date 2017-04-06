@@ -115,6 +115,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean isUndoneCommandEmpty() {
+        return undoneCommand.isEmpty();
+    }
+
+    @Override
+    public boolean isUndoneStatusEmpty() {
+        return undoneStatus.isEmpty();
+    }
+
+    @Override
     public void pushCommand(String command) {
         commandStack.push(command);
     }
@@ -123,6 +133,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void pushStatus(ReadOnlyTaskList currentStatus) {
         TaskList presentStatus = new TaskList(currentStatus);
         statusStack.push(presentStatus);
+    }
+
+    @Override
+    public void popUndoneStatus() {
+        TaskList latestUndoneStatus = undoneStatus.pop();
+        statusStack.push(latestUndoneStatus);
+    }
+
+    @Override
+    public void popUndoneCommand() {
+        String latestUndoneCommand = undoneCommand.pop();
+        commandStack.push(latestUndoneCommand);
     }
 
     @Override

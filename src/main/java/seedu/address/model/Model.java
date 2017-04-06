@@ -37,11 +37,23 @@ public interface Model {
     /** Check if commandStack is empty*/
     boolean isCommandStackEmpty();
 
+    /** Check if undoneCommand stack is empty*/
+    boolean isUndoneCommandEmpty();
+
+    /** Check if undoneStatus stack is empty*/
+    boolean isUndoneStatusEmpty();
+
     /** Pushes the command to commandStack*/
     void pushCommand(String command);
 
     /** Pushes the currentStatus to statusStack*/
     void pushStatus(ReadOnlyTaskList currentStatus);
+
+    /** Pops the latest undone status from undoneStatus stack and push it to statusStack*/
+    void popUndoneStatus();
+
+    /** Pops the latest undone command from undoneCommand stack and push it to commandStack*/
+    void popUndoneCommand();
 
     /** Pops the current status from statusStack*/
     void popCurrentStatus();
