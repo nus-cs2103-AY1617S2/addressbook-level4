@@ -7,7 +7,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
@@ -119,7 +118,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.start, this,end, this.group);
+            return CollectionUtil.isAnyPresent(this.name, this.start, this.end, this.group);
         }
 
         public void setName(Optional<Name> name) {

@@ -15,8 +15,6 @@ public interface ReadOnlyPerson {
     StartDate getStartDate();
 
     EndDate getEndDate();
-    
-    Email getEmail();
 
     Group getGroup();
 
@@ -47,8 +45,19 @@ public interface ReadOnlyPerson {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append(" Start Date: ").append(getStartDate()).append(" End Date: ").append(getEndDate())
-                .append(" Email: ").append(getEmail()).append(" Group: ").append(getGroup()).append(" Tags: ");
+        
+        boolean hasStartDate = getStartDate() != null;
+        boolean hasEndDate = getEndDate() != null;
+        
+        builder
+        .append(getName())
+        .append(hasStartDate ? " Start Date: " : "")
+        .append(hasStartDate ? getStartDate() : "")
+        .append(hasEndDate ? " End Date: " : "")
+        .append(hasEndDate ? getEndDate() : "")
+        .append(" Group: ")
+        .append(getGroup())
+        .append(" Status: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

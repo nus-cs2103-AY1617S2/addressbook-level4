@@ -7,7 +7,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Represents a Floating Task in the YTommorow.
  */
 public class FloatingTask extends Task {
-    public FloatingTask(Name name, Email email, Group group, UniqueTagList tags) {
-        super(name, null, null, email, group, tags);
+    public FloatingTask(Name name, Group group, UniqueTagList tags) {
+        super(name, null, null, group, tags);
     }
 }

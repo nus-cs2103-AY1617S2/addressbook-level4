@@ -10,7 +10,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.Email;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Group;
@@ -28,10 +27,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
             + "Parameters: NAME [s/START DATE] [d/DEADLINE] g/GROUP \n "
-            + "Start date and deadline are not necessary. \n" + "Example: " + COMMAND_WORD
-            + " study english s/01.01 d/03.21 g/learning";
+            + "Start date and deadline are not necessary. \n"
+            + "Cannot have a start date without an end date. \n"
+            + "Example: " + COMMAND_WORD
+            + " study english s/today d/tomorrow g/learning";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_PASSED = "The end date of the new task has passed!";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
     private final Task toAdd;
@@ -44,9 +46,9 @@ public class AddCommand extends Command {
      */
     //@@author A0164032U
     public AddCommand(String name, String end, String group) throws IllegalValueException {
-        this.toAdd = new DeadlineTask(new Name(name),
+        this.toAdd = new DeadlineTask(
+                new Name(name),
                 new EndDate(end),
-                null,
                 new Group(group),
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
@@ -57,8 +59,8 @@ public class AddCommand extends Command {
      */
     //@@author A0164032U
     public AddCommand(String name, String group) throws IllegalValueException {
-        this.toAdd = new FloatingTask(new Name(name),
-                null,
+        this.toAdd = new FloatingTask(
+                new Name(name),
                 new Group(group),
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
@@ -70,7 +72,6 @@ public class AddCommand extends Command {
                 new Name(name),
                 new StartDate(start),
                 new EndDate(end),
-                null,
                 new Group(group),
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
@@ -81,7 +82,9 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addPerson(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            
+            String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSED : "");
+            return new CommandResult(String.format(message, toAdd));
         } catch (UniquePersonList.DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
