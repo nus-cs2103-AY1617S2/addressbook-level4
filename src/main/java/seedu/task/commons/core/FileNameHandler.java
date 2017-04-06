@@ -1,5 +1,4 @@
 package seedu.task.commons.core;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -52,8 +51,7 @@ public class FileNameHandler {
 //			return true;
 //		}
 //		return false;
-//	}
-	
+//	}	
 	public static boolean isValid(String FileName) {
 	    final File File = new File(FileName);
 	    boolean isValid = true;
