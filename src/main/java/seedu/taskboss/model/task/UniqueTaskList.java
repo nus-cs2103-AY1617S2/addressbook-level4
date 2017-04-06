@@ -11,6 +11,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -127,8 +128,12 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+        try {
+            if (contains(toAdd) && !toAdd.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+                throw new DuplicateTaskException();
+            }
+        } catch (IllegalValueException ive) {
+            //Do nothing. Done category is always valid
         }
         internalList.add(toAdd);
     }
@@ -144,8 +149,12 @@ public class UniqueTaskList implements Iterable<Task> {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
+        try {
+            if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask) && !editedTask.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+                throw new DuplicateTaskException();
+            }
+        } catch (IllegalValueException ive) {
+            //Do nothing. Done category is always valid
         }
 
         taskToUpdate.resetData(editedTask);

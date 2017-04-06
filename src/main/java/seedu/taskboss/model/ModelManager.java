@@ -22,6 +22,7 @@ import seedu.taskboss.model.category.UniqueCategoryList;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Task;
+import seedu.taskboss.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -122,7 +123,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0138961W
     @Override
     public synchronized void deleteTask(List<ReadOnlyTask> targets) throws TaskNotFoundException,
-            IllegalValueException {
+    IllegalValueException {
 
         taskbossHistory.push(new TaskBoss(this.taskBoss));
 
@@ -171,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0144904H
     @Override
     public void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
-                                                                        throws IllegalValueException {
+            throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int index = 0;
         for (ReadOnlyTask task : tasksToMarkDone) {
@@ -195,11 +196,11 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossUndoHistory.clear();
     }
 
-  //@@author A0144904H
+    //@@author A0144904H
     @Override
     public void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
-                                                                       throws IllegalValueException,
-                                                                       CommandException {
+            throws IllegalValueException,
+            CommandException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         int index = 0;
         for (ReadOnlyTask task : tasksToMarkDone) {
