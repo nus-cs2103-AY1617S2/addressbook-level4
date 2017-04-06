@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -25,9 +27,25 @@
                <children>
                   <CheckBox fx:id="checkbox" mnemonicParsing="false">
                      <padding>
-                        <Insets left="5.0" />
+                        <Insets bottom="10.0" left="5.0" />
                      </padding>
                   </CheckBox>
+                  <ImageView fx:id="star1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/star.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="star2" fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/star.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ImageView>
                </children>
             </VBox>
             <VBox fx:id="taskBox" maxWidth="Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
