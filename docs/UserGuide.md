@@ -43,18 +43,22 @@ _Fig 2.1.1. Default view of the task manager_
 
 As you get used to the features, you can use **Today** any way you like. But for starters, this is what we recommend.
 
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/221addtask.PNG" height="300">
 
 1. At the start of every working day, go through your inbox and `add` new tasks to your tasklist.
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/222today.PNG" height="300">
+
+<img style="display: block; margin: auto" src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/221addtask.PNG" height="200" align="center">
 
 2. Once you're done, review your list and mark out the tasks you want to focus on `today`.
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/223done.PNG" height="300">
+
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/222today.PNG" height="200">
 
 3. Whenever you're `done` with a task, it's shifted out of sight, allowing you to focus on the remaining tasks on hand.
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/224result.PNG" height="300">
+
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/223done.PNG" height="200">
 
 Rinse and repeat until you have no more tasks left!
+
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/224result.PNG" height="200">
 
 ## 3. Features
 
