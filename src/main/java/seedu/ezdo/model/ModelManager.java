@@ -40,7 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final EzDo ezDo;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final UserPrefs userPrefs;
-  //@@author A0139248X
+    // @@author A0139248X
     private SortCriteria currentSortCriteria;
     private Boolean currentIsSortedAscending;
 
@@ -84,7 +84,8 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.resetData(newData);
         indicateEzDoChanged();
     }
-  //@@author
+
+    // @@author
     @Override
     public ReadOnlyEzDo getEzDo() {
         return ezDo;
@@ -99,7 +100,8 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateEzDoChanged() {
         raise(new EzDoChangedEvent(ezDo));
     }
-  //@@author A0139248X
+
+    // @@author A0139248X
     @Override
     public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
         updateStacks();
@@ -182,10 +184,11 @@ public class ModelManager extends ComponentManager implements Model {
             throw new DateException("Error parsing dates!");
         }
     }
-  //@@author
+
+    // @@author
     // =========== Filtered Task List Accessors
     // =============================================================
-  //@@author A0141010L
+    // @@author A0141010L
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -288,18 +291,20 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
 
             Set<String> taskTagStringSet = convertToTagStringSet(task.getTags().toSet());
+            boolean isNameEqual = nameKeyWords.contains("") || nameKeyWords.stream()
+                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
+            boolean isPriorityEqual = comparePriority(task.getPriority());
+            boolean startDateEquality = (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
+                    || (startBefore && compareBeforeStart(task.getStartDate()))
+                    || (startAfter && compareAfterStart(task.getStartDate())));
+            boolean dueDateEquality = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
+                    || (dueBefore && compareBeforeDue(task.getDueDate()))
+                    || (dueAfter && compareAfterDue(task.getDueDate())));
+            boolean areTagsEqual = (taskTagStringSet.containsAll(tags));
+            boolean isQualified = isNameEqual && !task.getDone() && isPriorityEqual && startDateEquality
+                    && dueDateEquality && areTagsEqual;
 
-            return (nameKeyWords.contains("") || nameKeyWords.stream()
-                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)))
-                    && !task.getDone()
-                    && comparePriority(task.getPriority())
-                    && (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
-                            || (startBefore && compareBeforeStart(task.getStartDate()))
-                            || (startAfter && compareAfterStart(task.getStartDate())))
-                    && (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
-                            || (dueBefore && compareBeforeDue(task.getDueDate()))
-                            || (dueAfter && compareAfterDue(task.getDueDate())))
-                    && (taskTagStringSet.containsAll(tags));
+            return isQualified;
 
         }
 
@@ -314,91 +319,134 @@ public class ModelManager extends ComponentManager implements Model {
             return tagSet;
         }
 
+        /*
+         * returns true if task's priority equals given priority
+         */
         private boolean comparePriority(Priority taskPriority) {
 
             String taskPriorityString = taskPriority.toString();
             boolean priorityExist = (taskPriorityString.length() != 0);
 
-            return (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
+            boolean isEqual = (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
                     || (priorityExist && taskPriorityString.equals(priority.get().toString())));
+
+            return isEqual;
         }
 
+        /*
+         * returns true if task's start date equals given start date
+         */
         private boolean compareStartDate(TaskDate taskStartDate) {
 
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
-                    || (taskStartDateExist && taskStartDateString.substring(0, 10).equals
-                       (startDate.get().toString().substring(0, 10))));
+            boolean startEquality = (!startDate.isPresent()
+                    || (startDate.get().toString().equals("") && taskStartDateExist)
+                    || (taskStartDateExist && taskStartDateString.substring(0, 10)
+                            .equals(startDate.get().toString().substring(0, 10))));
+
+            return startEquality;
         }
 
+        /*
+         * returns true if task's due date equals given due date
+         */
         private boolean compareDueDate(TaskDate taskDueDate) {
 
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
-                    || (taskDueDateExist && taskDueDateString.substring(0, 10).equals
-                       (dueDate.get().toString().substring(0, 10))));
+            boolean dueEquality = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+                    || (taskDueDateExist
+                            && taskDueDateString.substring(0, 10).equals(dueDate.get().toString().substring(0, 10))));
+
+            return dueEquality;
         }
 
+        /*
+         * returns true if task's start date comes before given start date
+         */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+            boolean isBefore = (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
                     || (taskStartDateExist && comesBefore(startDate.get().toString(), taskStartDateString)));
+
+            return isBefore;
         }
 
+        /*
+         * returns true if task's due date comes before given due date
+         */
         private boolean compareBeforeDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isBefore = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
                     || (taskDueDateExist && comesBefore(dueDate.get().toString(), taskDueDateString)));
+
+            return isBefore;
         }
 
+        /*
+         * returns true if task's start date comes after given start date
+         */
         private boolean compareAfterStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            return (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
+            boolean isAfter = (!startDate.isPresent() || (startDate.get().toString().equals("") && taskStartDateExist)
                     || (taskStartDateExist && comesBefore(taskStartDateString, startDate.get().toString())));
+
+            return isAfter;
         }
 
+        /*
+         * returns true if task's due date comes after given due date
+         */
         private boolean compareAfterDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            return (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isAfter = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
                     || (taskDueDateExist && comesBefore(taskDueDateString, dueDate.get().toString())));
+
+            return isAfter;
         }
 
-        private boolean comesBefore(String givenDate, String taskDate) {
+        /*
+         * returns true if givenDate2 comes before givenDate1
+         */
+        private boolean comesBefore(String givenDate1, String givenDate2) {
 
-            int givenDD = Integer.parseInt(givenDate.substring(0, 2));
-            int givenMM = Integer.parseInt(givenDate.substring(3, 5));
-            int givenYYYY = Integer.parseInt(givenDate.substring(6, 10));
+            int givenDD = Integer.parseInt(givenDate1.substring(0, 2));
+            int givenMM = Integer.parseInt(givenDate1.substring(3, 5));
+            int givenYYYY = Integer.parseInt(givenDate1.substring(6, 10));
 
-            int taskDD = Integer.parseInt(taskDate.substring(0, 2));
-            int taskMM = Integer.parseInt(taskDate.substring(3, 5));
-            int taskYYYY = Integer.parseInt(taskDate.substring(6, 10));
+            int taskDD = Integer.parseInt(givenDate2.substring(0, 2));
+            int taskMM = Integer.parseInt(givenDate2.substring(3, 5));
+            int taskYYYY = Integer.parseInt(givenDate2.substring(6, 10));
 
-            return (taskYYYY < givenYYYY)
-                   || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
-                   || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
+            boolean isBefore = (taskYYYY < givenYYYY) || ((taskYYYY == givenYYYY) && (taskMM < givenMM))
+                    || ((taskYYYY == givenYYYY) && (taskMM == givenMM) && (taskDD <= givenDD));
+
+            return isBefore;
 
         }
 
     }
 
-    //@@author A0138907W
+    // @@author A0138907W
     /**
      * Sorts the task in ezDo by the given sort criteria.
      *
-     * @param sortCriteria      The field to sort by.
-     * @param isSortedAscending If true, sorts in ascending order. Otherwise, sorts in descending order.
+     * @param sortCriteria
+     *            The field to sort by.
+     * @param isSortedAscending
+     *            If true, sorts in ascending order. Otherwise, sorts in
+     *            descending order.
      */
     @Override
     public void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending) {
@@ -414,14 +462,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
-  //@@author
-  //@@author A0139248X
+    // @@author
+    // @@author A0139248X
 
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
 
-    //@@author A0138907W
+    // @@author A0138907W
     /**
      * Raises a {@code IsSortedAscendingChangedEvent}.
      */
