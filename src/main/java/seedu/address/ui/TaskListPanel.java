@@ -65,7 +65,8 @@ public class TaskListPanel extends UiPart<Region> {
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         setTaskList(taskList);
-        viewTasksWithStatus(Arrays.asList(Status.DONE, UNFINISHED));
+        viewTasksWithStatus(Arrays.asList(Status.FLOATING, Status.OVERDUE,
+                                                    Status.TODAY, Status.TOMORROW, Status.FUTURE));
         addToPlaceholder(taskListPlaceholder);
         registerAsAnEventHandler(this);
     }
