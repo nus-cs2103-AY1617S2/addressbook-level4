@@ -15,14 +15,11 @@ import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.ExitCommand;
 import seedu.task.logic.commands.FindCommand;
-//import seedu.task.logic.commands.FindDateCommand;
 import seedu.task.logic.commands.FindExactCommand;
 import seedu.task.logic.commands.GetGoogleCalendarCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
-//import seedu.task.logic.commands.ListByDoneCommand;
-//import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PostGoogleCalendarCommand;
@@ -41,13 +38,10 @@ import seedu.task.logic.parser.DoneCommandParser;
 import seedu.task.logic.parser.EditCommandParser;
 import seedu.task.logic.parser.ExitCommandParser;
 import seedu.task.logic.parser.FindCommandParser;
-//import seedu.task.logic.parser.FindDateCommandParser;
 import seedu.task.logic.parser.FindExactCommandParser;
 import seedu.task.logic.parser.GetGoogleCalendarCommandParser;
 import seedu.task.logic.parser.HelpCommandParser;
 import seedu.task.logic.parser.HelpFormatCommandParser;
-//import seedu.task.logic.parser.ListByDoneCommandParser;
-//import seedu.task.logic.parser.ListByNotDoneCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
@@ -140,18 +134,6 @@ public class CommandLibrary {
                 new HelpFormatCommandParser(), HelpFormatCommand.MESSAGE_USAGE));
         commandTable.put(HelpFormatCommand.COMMAND_WORD_4, new CommandInstance(HelpFormatCommand.COMMAND_WORD_1,
                 new HelpFormatCommandParser(), HelpFormatCommand.MESSAGE_USAGE));
-
-//        commandTable.put(ListByDoneCommand.COMMAND_WORD_1, new CommandInstance(ListByDoneCommand.COMMAND_WORD_1,
-//                new ListByDoneCommandParser(), ListByDoneCommand.MESSAGE_USAGE));
-//        commandTable.put(ListByDoneCommand.COMMAND_WORD_2, new CommandInstance(ListByDoneCommand.COMMAND_WORD_1,
-//                new ListByDoneCommandParser(), ListByDoneCommand.MESSAGE_USAGE));
-//
-//        commandTable.put(ListByNotDoneCommand.COMMAND_WORD_1, new CommandInstance(ListByNotDoneCommand.COMMAND_WORD_1,
-//                new ListByNotDoneCommandParser(), ListByNotDoneCommand.MESSAGE_USAGE));
-//        commandTable.put(ListByNotDoneCommand.COMMAND_WORD_2, new CommandInstance(ListByNotDoneCommand.COMMAND_WORD_1,
-//                new ListByNotDoneCommandParser(), ListByNotDoneCommand.MESSAGE_USAGE));
-//        commandTable.put(ListByNotDoneCommand.COMMAND_WORD_3, new CommandInstance(ListByNotDoneCommand.COMMAND_WORD_1,
-//                new ListByNotDoneCommandParser(), ListByNotDoneCommand.MESSAGE_USAGE));
 
         commandTable.put(ListCommand.COMMAND_WORD_1, new CommandInstance(ListCommand.COMMAND_WORD_1,
                 new ListCommandParser(), ListCommand.MESSAGE_USAGE));
