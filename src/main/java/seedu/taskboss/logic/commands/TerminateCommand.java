@@ -36,6 +36,7 @@ public class TerminateCommand extends Command {
     public TerminateCommand(Set<Integer> targetIndex) {
         filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
         Collections.sort(filteredTaskListIndices);
+        Collections.reverse(filteredTaskListIndices);
         recurringTasksToMarkDone = new ArrayList<ReadOnlyTask>();
     }
 
