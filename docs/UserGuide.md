@@ -139,14 +139,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 > * Only the task description is searched.
 > * The search is case insensitive. e.g `Report` will match `report`
 > * The order of the keywords does not matter. e.g. `proposal for boss` will match `for boss proposal`
+> * Partial words are matched. e.g. `proj` will match `project`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `lunch` will match `lunch appointment`
 
 Examples:
 
 * `find write test case`<br>
-  Returns any tasks with `write`, `test`, `case`, 'case test`, `write test` and any combination of the individual words
-  as part of its description (case insensitive)
+  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`, 
+  `write case`, and any combination of the individual words as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
 
@@ -244,9 +245,14 @@ Examples:
 Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
+> Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark`
+
 ### 2.10. Redoing previous step : `redo`
 
 Redo the previous command and restore the data to one step before. <br>
+Fromat: `redo`
+
+> Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark`
 
 ### 2.11. Clearing all entries : `clear`
 

@@ -36,4 +36,8 @@ public class ViewFileCommand extends Command {
         return initialisedConfig;
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

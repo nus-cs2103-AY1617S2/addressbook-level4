@@ -174,13 +174,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String status = task.getStatus().toString();
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
                         task.getDescription().fullDescription, keyword))
                     .findAny()
-                    .isPresent() &&
-                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT);
+                    .isPresent();
         }
 
         @Override
@@ -335,7 +333,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addCommandToHistory(Command command) {
-        commandHistory.push(command);
+        String cmdWord = command.toString();
+
+        switch (cmdWord) {
+        case "add":
+        case "clear":
+        case "delete":
+        case "edit":
+        case "mark":
+        case "unmark":
+            commandHistory.push(command);
+        default:
+            break;
+        }
+
 
     }
 

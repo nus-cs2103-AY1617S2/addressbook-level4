@@ -77,5 +77,10 @@ public class ShortcutCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESSS_DELETED, shortcutKey + "->" + commandWord));
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }
 

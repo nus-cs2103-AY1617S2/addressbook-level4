@@ -117,9 +117,9 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        TaskStatus updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
+        TaskStatus updatedStatus = taskToEdit.getStatus();
 
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
         UniqueTagList existingTags = taskToEdit.getTags();
         for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
             Tag tags = iterator.next();
@@ -129,6 +129,7 @@ public class EditCommand extends Command {
             }
         }
         updatedTags.mergeFrom(existingTags);
+
         if (hasRemoveDate) {
             return new Task(updatedName, null, null, updatedTags, updatedStatus);
         }
@@ -213,5 +214,10 @@ public class EditCommand extends Command {
         public void setStatus(Optional<TaskStatus> status) {
             this.status = status;
         }
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 }

@@ -15,8 +15,6 @@ import seedu.watodo.logic.commands.IncorrectCommand;
  */
 public class AddCommandParser {
 
-    private static final String EMPTY_STRING = "";
-
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddCommand and returns an AddCommand object for execution.
@@ -34,7 +32,7 @@ public class AddCommandParser {
             String argsWithDatesAndTagsExtracted = tagsParser.getUnparsedArgs();
 
             //extract description
-            if (argsWithDatesAndTagsExtracted.equals(EMPTY_STRING)) {
+            if (argsWithDatesAndTagsExtracted.isEmpty()) {
                 throw new NoSuchElementException();
             }
             String description = argsWithDatesAndTagsExtracted;

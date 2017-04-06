@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -8,6 +10,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0141077L
 /**
@@ -18,9 +21,11 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of the task identified to done "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sets the status of the task identified to done "
             + "by the index number used in the last task listing as completed.\n"
-            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: " + COMMAND_WORD
+            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: "
+            + COMMAND_WORD
             + " 1 2";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Task completed: %1$s";
@@ -28,12 +33,15 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-    private int undoMarkInt;
-    private Task undoMark;
+    private Stack< Task > taskToMarkList;
+    private Stack< Task > markedTaskList;
     private Task markedTask;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
+
+        taskToMarkList = new Stack< Task >();
+        markedTaskList = new Stack< Task >();
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
@@ -57,12 +65,13 @@ public class MarkCommand extends Command {
             }
 
             ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoMark = new Task(taskToMark);
+            this.taskToMarkList.push(new Task(taskToMark));
+
 
             try {
                 markedTask = createMarkedTask(taskToMark);
+                markedTaskList.push(markedTask);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
-                this.undoMarkInt = filteredTaskListIndices[i];
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -80,8 +89,13 @@ public class MarkCommand extends Command {
     public void unexecute() {
         try {
             model.updateFilteredListToShowAll();
-            model.updateTask(undoMarkInt, undoMark);
+            while (!taskToMarkList.isEmpty()) {
+                model.deleteTask(markedTaskList.pop());
+                model.addTask(taskToMarkList.pop());
+            }
         } catch (DuplicateTaskException e) {
+
+        } catch (TaskNotFoundException e) {
 
         }
     }
@@ -112,6 +126,11 @@ public class MarkCommand extends Command {
         markedTask.setStatus(TaskStatus.DONE);
 
         return markedTask;
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 
 }
