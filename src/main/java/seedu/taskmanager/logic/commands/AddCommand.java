@@ -57,16 +57,17 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.updateFilteredListToShowAll();
-            // if (toAdd.isEventTask()) {
-            // int clashedTaskIndex = model.isBlockedOutTime(toAdd);
-            // if (clashedTaskIndex != -1) {
-            // throw new IllegalValueException(
-            // "Clash with task: Index " + Integer.toString(clashedTaskIndex) +
-            // "\n");
-            // }
-            // }
+            if (toAdd.isEventTask()) {
+                int clashedTaskIndex = model.isBlockedOutTime(toAdd);
+                if (clashedTaskIndex != -1) {
+                    model.addTask(toAdd);
+                    String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
+                    return new CommandResult(clashFeedback + String.format(MESSAGE_SUCCESS, toAdd));
+                }
+            }
             model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {

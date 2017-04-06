@@ -126,7 +126,10 @@ public class AddCommandParser {
             else if (!isEmptyField(byPrefixInput)) {
                 String[] splited = byPrefixInput.split("\\s+");
                 endDate = splited[0];
-                endDate = DateTimeUtil.getNewDate(endDate);
+                endDate = processInputToDateForm(splited);
+                if (endDate.trim().matches("STARTDATE_VALIDATION_REGEX2")) {
+                    endDate = DateTimeUtil.getNewDate(endDate);
+                }
                 try {
                     endTime = splited[1];
 

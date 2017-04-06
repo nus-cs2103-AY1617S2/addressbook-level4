@@ -64,14 +64,14 @@ public class EndTime {
         // check
     }
 
-    public boolean laterThan(StartTime other) {
+    public boolean laterThanOrEqual(StartTime other) {
         if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
             return true;
         }
         return false;
     }
 
-    public boolean laterThan(EndTime other) {
+    public boolean laterThanOrEqual(EndTime other) {
         if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
             return true;
         }

@@ -161,12 +161,42 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
+    public int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
         while (index < (filteredTasks.size())) {
             if (filteredTasks.get(index).isEventTask() && !filteredTasks.get(index).getIsMarkedAsComplete()
                     && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                if (isAddEventEarlierAddListIndex(t, filteredTasks.get(index))) {
+                    return index + 2;
+                }
                 return index + 1;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    @Override
+    public int isBlockedOutTime(Task t, int UpdateTaskIndex) throws UniqueTaskList.DuplicateTaskException {
+        int index = 0;
+        while (index < (filteredTasks.size())) {
+            if ((index != (UpdateTaskIndex - 1)) && filteredTasks.get(index).isEventTask()
+                    && !filteredTasks.get(index).getIsMarkedAsComplete()
+                    && t.isWithinStartEndDuration(filteredTasks.get(index))) {
+                if (isAddEventEarlierAddListIndex(t, filteredTasks.get(index))) {
+                    if (UpdateTaskIndex - 1 > index) {
+                        return index + 2;
+                    }
+                    if (UpdateTaskIndex - 1 < index) {
+                        return index + 1;
+                    }
+                } else {
+                    if (UpdateTaskIndex - 1 > index) {
+                        return index + 1;
+                    } else {
+                        return index;
+                    }
+                }
             }
             index++;
         }
@@ -356,6 +386,62 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "task name=" + String.join(", ", taskKeyWords);
+        }
+    }
+
+    // @@author A0142418L
+    /**
+     * Compares the starting date and time of 2 event tasks.
+     *
+     * @return true if 1st event task is earlier than the 2nd event task based
+     *         on the startDate and startTime
+     * @return false, if otherwise.
+     */
+    private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
+        if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) < 0) {
+            return true;
+        } else {
+            if (toAdd.getStartDate().value.substring(toAdd.getStartDate().value.length() - 2).compareTo(
+                    readOnlyTask.getStartDate().value.substring(readOnlyTask.getStartDate().value.length() - 2)) == 0) {
+                if (toAdd.getStartDate().value
+                        .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                        .compareTo(readOnlyTask.getStartDate().value.substring(
+                                readOnlyTask.getStartDate().value.length()
+                                        - 5,
+                                readOnlyTask.getStartDate().value.length() - 3)) < 0) {
+                    return true;
+                } else {
+                    if (toAdd.getStartDate().value
+                            .substring(toAdd.getStartDate().value.length() - 5, toAdd.getStartDate().value.length() - 3)
+                            .compareTo(readOnlyTask.getStartDate().value.substring(
+                                    readOnlyTask.getStartDate().value.length()
+                                            - 5,
+                                    readOnlyTask.getStartDate().value.length() - 3)) == 0) {
+                        if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                        readOnlyTask.getStartDate().value.length() - 6)) < 0) {
+                            return true;
+                        } else {
+                            if (toAdd.getStartDate().value.substring(0, toAdd.getStartDate().value.length() - 6)
+                                    .compareTo(readOnlyTask.getStartDate().value.substring(0,
+                                            readOnlyTask.getStartDate().value.length() - 6)) == 0) {
+                                if (toAdd.getStartTime().value.compareTo(readOnlyTask.getStartTime().value) < 0) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
         }
     }
 }
