@@ -371,7 +371,7 @@ public class LogicManagerTest {
                 expectedEZ,
                 expectedEZ.getTaskList());
     }
-  //@@author A0139248X
+  //@@author
 
     @Test
     public void execute_find_invalidArgsFormat() {
