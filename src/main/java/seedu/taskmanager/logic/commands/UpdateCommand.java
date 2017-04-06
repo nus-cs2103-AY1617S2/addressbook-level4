@@ -162,7 +162,7 @@ public class UpdateCommand extends Command {
     /**
      * Checks if only the time field has been identified by user to be
      * updated To ensure that user provides all the information that is required to update a task.
-     * 
+     *
      * For instance, user is only allowed to update only startTime and endTime if the task is an event
      * and not a deadline or floating task.
      *
