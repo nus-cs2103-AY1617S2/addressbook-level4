@@ -12,7 +12,10 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, tryagainCS, regret, sampleEvent,
-            sampleFloatingTask, sampleDeadline;
+            sampleFloatingTask, sampleDeadline, recurTestDay, recurTestDayOnce, recurTestDayTwice, 
+            recurTestDayThrice, recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice,
+            recurTestMonth, recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice, recurTestYear,
+            recurTestYearOnce, recurTestYearTwice, recurTestYearThrice;
 
     public TypicalTestTasks() {
         try {
@@ -54,6 +57,86 @@ public class TypicalTestTasks {
             assert false : "not possible";
         }
     }
+    
+    public void TypicalRecurringEventsForDays() {
+        try {
+           recurTestDay  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
+                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("just", "friends").build();
+           recurTestDayOnce  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("04/03/17")
+                   .withStartTime("1000").withEndDate("04/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestDayTwice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("05/03/17")
+                   .withStartTime("1000").withEndDate("05/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestDayThrice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("06/03/17")
+                   .withStartTime("1000").withEndDate("06/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
+    
+    public void TypicalRecurringEventsForWeeks() {
+        try {
+           recurTestWeek  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
+                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("just", "friends").build();
+           recurTestWeekOnce  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("10/03/17")
+                   .withStartTime("1000").withEndDate("10/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestWeekTwice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("17/03/17")
+                   .withStartTime("1000").withEndDate("17/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestWeekThrice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("21/03/17")
+                   .withStartTime("1000").withEndDate("21/03/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
+    
+    public void TypicalRecurringEventsForMonths() {
+        try {
+           recurTestMonth  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
+                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("just", "friends").build();
+           recurTestMonthOnce  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/04/17")
+                   .withStartTime("1000").withEndDate("03/04/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestMonthTwice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("05/05/17")
+                   .withStartTime("1000").withEndDate("03/05/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestMonthThrice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/06/17")
+                   .withStartTime("1000").withEndDate("03/06/17").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
+    
+    public void TypicalRecurringEventsForYears() {
+        try {
+           recurTestYear  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
+                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("just", "friends").build();
+           recurTestYearOnce  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/18")
+                   .withStartTime("1000").withEndDate("03/03/18").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestYearTwice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/19")
+                   .withStartTime("1000").withEndDate("03/03/19").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+           recurTestYearThrice  = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/20")
+                   .withStartTime("1000").withEndDate("03/03/20").withEndTime("1100").withCompletion(false)
+                   .withCategories("just", "friends").build();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
 
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
@@ -67,6 +150,22 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[] { eatbreakfast, eatlunch, eatdinner, doCS, giveupCS, regret, tryagainCS };
+    }
+    
+    public TestTask[] getTypicalRecurringTasksForDays() {
+        return new TestTask[] { recurTestDay, recurTestDayOnce, recurTestDayTwice, recurTestDayThrice };
+    }
+    
+    public TestTask[] getTypicalRecurringTasksForWeeks() {
+        return new TestTask[] { recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice };
+    }
+
+    public TestTask[] getTypicalRecurringTasksForMonths() {
+        return new TestTask[] { recurTestMonth, recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice };
+    }
+
+    public TestTask[] getTypicalRecurringTasksForYears() {
+        return new TestTask[] { recurTestYear, recurTestYearOnce, recurTestYearTwice, recurTestYearThrice };
     }
 
     public TaskManager getTypicalTaskManager() {

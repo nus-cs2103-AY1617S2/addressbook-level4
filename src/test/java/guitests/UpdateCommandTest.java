@@ -11,7 +11,6 @@ import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.StartTime;
-import seedu.taskmanager.model.task.TaskName;
 // import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
@@ -92,8 +91,8 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_invalidValues_failure() {
-        commandBox.runCommand("UPDATE 1 *&");
-        assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
+        // commandBox.runCommand("UPDATE 1 *&");
+        // assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
