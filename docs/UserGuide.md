@@ -126,8 +126,24 @@ Examples:
 * `find milk`<br>
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
+  
+### 2.8. Clear all tasks : `clear`
 
-### 2.8. Finding all tasks containing keyword in their task name: `find`
+Clear all tasks or only completed task in the list. <br>
+Format: `clear [KEYWORD]`
+
+> Keyword can just be **all**, **passed** or **complete**. <br>
+
+Examples:
+
+* `clear`<br>
+  Clear all tasks.
+* `clear all`, <br>
+  `clear passed`, <br>
+  `clear complete`<br>
+  Clear all completed tasks.
+
+### 2.9. Finding all tasks containing keyword in their task name: `find`
 
 Finds tasks whose name contain any of the given keywords.<br>
 Format: `find KEYWORD`
@@ -146,17 +162,17 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.9. Undo : `undo`
+### 2.10. Undo : `undo`
 
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
 
-### 2.9. Redo : `redo`
+### 2.11. Redo : `redo`
 
 Does the undo function again. This command will return the program to the state it was in before the previous undo action was executed<br>
 Format: `redo`
 
-### 2.10. Exiting the program : `exit`
+### 2.12. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
