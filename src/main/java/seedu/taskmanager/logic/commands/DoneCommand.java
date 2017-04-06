@@ -27,9 +27,8 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark the task identified by the index number used in the last task listing as done.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD_1 + " or "
-            + ALTERNATIVE_COMMAND_WORD_2 + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " or "
+            + ALTERNATIVE_COMMAND_WORD_1 + " or " + ALTERNATIVE_COMMAND_WORD_2 + " 1";
 
     public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
     public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
@@ -60,7 +59,7 @@ public class DoneCommand extends Command {
         } else {
             return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
         }
-        
+
         model.updateFilteredListToShowAll();
 
         return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, taskToMarkDone));
@@ -73,14 +72,13 @@ public class DoneCommand extends Command {
         assert taskToMarkDone != null;
 
         Title updatedTitle = taskToMarkDone.getTitle();
-        Optional <StartDate> updatedStartDate = taskToMarkDone.getStartDate();
-        Optional <EndDate> updatedEndDate = taskToMarkDone.getEndDate();
-        Optional <Description> updatedDescription = taskToMarkDone.getDescription();
+        Optional<StartDate> updatedStartDate = taskToMarkDone.getStartDate();
+        Optional<EndDate> updatedEndDate = taskToMarkDone.getEndDate();
+        Optional<Description> updatedDescription = taskToMarkDone.getDescription();
         Status updatedStatus = new Status(true);
         UniqueTagList updatedTags = taskToMarkDone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
-                updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus, updatedTags);
     }
 }
 // @@author

@@ -1,7 +1,7 @@
 package seedu.taskmanager.model;
 
-import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
 import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

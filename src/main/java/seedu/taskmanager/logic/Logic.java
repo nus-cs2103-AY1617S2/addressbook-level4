@@ -31,7 +31,7 @@ public interface Logic {
 
     /** Returns the filtered list of completed tasks */
     ObservableList<ReadOnlyTask> getFilteredDoneTaskList();
-    
+
     /** Sets the current tab selected */
     void setSelectedTab(String text);
     // @@author

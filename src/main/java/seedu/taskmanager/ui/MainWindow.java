@@ -51,7 +51,7 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0131278H
     @FXML
     private TabPane taskListsTabPane;
-    
+
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
@@ -209,7 +209,7 @@ public class MainWindow extends UiPart<Region> {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
                 (int) primaryStage.getY());
     }
-    
+
     // @@author A0131278H
     @FXML
     public void onSelectedTabChanged() {
@@ -220,7 +220,7 @@ public class MainWindow extends UiPart<Region> {
             // null pointer only invoked at initiation
         }
     }
-    
+
     public TaskListPanel getTaskListPanel() {
         String selectedTab = taskListsTabPane.getSelectionModel().getSelectedItem().getText();
         switch (selectedTab) {
@@ -231,10 +231,10 @@ public class MainWindow extends UiPart<Region> {
         default:
             assert false : selectedTab + " is invalid";
             return null;
-        }    
+        }
     }
     // @@author
-    
+
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();

@@ -165,7 +165,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     // @@author A0131278H
-    
+
     /**
      * Sorts task list based on keywords (StartDate or EndDate). Tasks without
      * start StartDate or EndDate are ranked at the bottom.
