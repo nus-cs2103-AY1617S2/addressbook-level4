@@ -14,6 +14,11 @@ public class AddCalendar extends BasicCommandCalendar {
 	
 	public AddCalendar (Task inputTask) {
 		toAdd = new EventCalendar(inputTask);
+		try {
+			this.execute();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void execute() throws IOException {

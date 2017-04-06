@@ -6,6 +6,7 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 
 import seedu.jobs.model.calendar.EventCalendar;
+import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 
 public class EditCalendar extends BasicCommandCalendar {
@@ -13,9 +14,15 @@ public class EditCalendar extends BasicCommandCalendar {
 	private final EventCalendar newEvent;
 	
 
-    public EditCalendar(Task initialTarget, Task newTarget) {
-        this.initialEvent = new EventCalendar(initialTarget);
+    public EditCalendar(ReadOnlyTask initial, Task newTarget) {
+        Task initialTarget = new Task(initial);
+    	this.initialEvent = new EventCalendar(initialTarget);
         this.newEvent = new EventCalendar(newTarget);
+        try {
+			execute();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     
