@@ -47,7 +47,7 @@ public class SaveCommand extends Command {
         }
 
         try {
-        	Path path = Paths.get(filepath);
+            Path path = Paths.get(filepath);
             storage.setFilePath(path.toAbsolutePath().toString());
             model.saveTaskboss();
             return new CommandResult(MESSAGE_SUCCESS);
