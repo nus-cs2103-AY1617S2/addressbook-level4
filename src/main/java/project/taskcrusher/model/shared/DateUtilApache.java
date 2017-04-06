@@ -1,10 +1,12 @@
 package project.taskcrusher.model.shared;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
+
+import com.joestelmach.natty.Parser;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
@@ -22,24 +24,35 @@ public class DateUtilApache {
     public static final String MESSAGE_DATE_NOT_FOUND = "Input provided cannot be parsed as Date"
             + "Please provide one date in a supported format";;
 
-    public static final String[] PARSE_PATTERNS = { "yyyy-MM-dd hh:mma", "yyyy-MM-dd", "MM-dd hh:mma",
-                                                    "hh:mma"};
+    public static final String[] PARSE_PATTERNS = { "yyyy-MM-dd hh:mma", "yyyy-MM-dd", "MM-dd hh:mma", "hh:mma" };
     public static final int FORMAT_DATE_ABSOLUTE = 0;
     public static final int FORMAT_THIS_YEAR = 2;
     public static final int FORMAT_DATE_RELATIVE = 3;
 
     public static Date parseDate(String toParse, boolean isNew) throws IllegalValueException {
 
+        Parser nattyParser = new Parser();
         Date parsed = null;
+        boolean needsTimeAdjustment = false;
 
-        try {
-            parsed = DateUtils.parseDateStrictly(toParse, PARSE_PATTERNS);
-        } catch (ParseException p) {
+        List<Date> tempDateList = nattyParser.parse(toParse).get(0).getDates();
+
+        if (tempDateList != null && tempDateList.size() > 0) {
+            parsed = tempDateList.get(0);
+            needsTimeAdjustment = nattyParser.parse(toParse).get(0).isTimeInferred();
+        } else {
             throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
         }
 
+        if (needsTimeAdjustment) {
+            parsed = DateUtils.setHours(parsed, 23);
+            parsed = DateUtils.setMinutes(parsed, 59);
+            parsed = DateUtils.setSeconds(parsed, 59);
+            parsed = DateUtils.setMilliseconds(parsed, 59);
+        }
+
         if (isNew && hasPassed(parsed)) { // short circuit if not new/from
-                                          // storage
+            // storage
             throw new IllegalValueException(MESSAGE_DATE_PASSED);
         }
 
@@ -56,9 +69,10 @@ public class DateUtilApache {
         }
     }
 
-    //@@author A0127737X
+    // @@author A0127737X
     /**
-     * returns a string representation of the given Date in a user-friendly format
+     * returns a string representation of the given Date in a user-friendly
+     * format
      */
     public static String deadlineAsStringForUi(Date date) {
         assert date != null;
@@ -125,4 +139,3 @@ public class DateUtilApache {
         return dateChecker.format(d1).equals(dateChecker.format(d2));
     }
 }
-

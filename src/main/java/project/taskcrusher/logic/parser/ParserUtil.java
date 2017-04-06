@@ -117,7 +117,7 @@ public class ParserUtil {
         return deadline.isPresent() ? Optional.of(new Deadline(deadline.get())) : Optional.empty();
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     /**
      * Parses a {@code Optional<String> deadline} into an
      * {@code Optional<Deadline>} if {@code deadline} is present.
@@ -202,10 +202,36 @@ public class ParserUtil {
         }
 
         return timeslots;
-
     }
 
-    //@@author
+    /**
+     *
+     * @param datesToParse
+     * @return
+     * @throws IllegalValueException
+     */
+    public static List<Timeslot> parseForList(String datesToParse) throws IllegalValueException {
+
+        if (datesToParse.equals(Timeslot.NO_TIMESLOT)) {
+            throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_DNE);
+        }
+        String[] timeslotsAsStrings = datesToParse.split("\\s+or\\s+");
+        List<Timeslot> timeslots = new ArrayList<>();
+        for (String t : timeslotsAsStrings) {
+            String[] dates = t.split("\\s+to\\s+");
+            if (dates.length == 1) {
+                timeslots.add(Timeslot.constructTimeslotFromEndDate(dates[0]));
+            } else if (dates.length != 2) {
+                throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+            } else {
+                timeslots.add(new Timeslot(dates[0], dates[1]));
+            }
+        }
+
+        return timeslots;
+    }
+
+    // @@author
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
