@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
 
         if (isSpecific && taskToDelete.getOccurrences().size() > 1) {
             Task taskToAdd = new Task(taskToDelete);
-            deleteOccurrence = Task.modifyOccurrence(taskToDelete);
+            deleteOccurrence = Task.extractOccurrence(taskToDelete);
             try {
                 model.deleteThisTask(taskToDelete, taskToAdd);
                 return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deleteOccurrence));

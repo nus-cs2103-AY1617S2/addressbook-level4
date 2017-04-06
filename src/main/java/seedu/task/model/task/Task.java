@@ -213,13 +213,19 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return occurrences;
     }
 
-    public SimpleDateFormat retriveFormat(String s) {
+    /**
+     * @param string
+     * @return SimpleDateFormat object of passed in string
+     */
+    private SimpleDateFormat retriveDateFormat(String s) {
+        assert s != null;
         SimpleDateFormat format;
-        int stringLength = 10;
-        if (s.length() <= stringLength) {
-            format = new SimpleDateFormat("dd/MM/yyyy");
+        String basicFormat = "dd/MM/yyyy";
+        String extendedFormat = "HH:mm dd/MM/yyyy";
+        if (s.length() <= basicFormat.length()) {
+            format = new SimpleDateFormat(basicFormat);
         } else {
-            format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+            format = new SimpleDateFormat(extendedFormat);
         }
         return format;
     }
@@ -234,7 +240,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     }
 
     /** If frequency is in hours - support up to 168 hours (1 week)
-     * If frequency is in weeks - support up to 24 weeks
+     * If frequency is in days - support up to 60 days
      * If frequency is in months - support up to 12 months
      * @param startTime
      * @param endTime
@@ -265,14 +271,20 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
+    /**
+     * @param initialStartTime
+     * @param initialEndTime
+     * @param limit specifies the number of iterations to add to the occurrences list
+     * @param offSet specifies the calendar field to be updated
+     */
     public void setOccurrences(Timing initialStartTime, Timing initialEndTime, int limit, int offSet) {
         int freqNumber = frequency.getFrequencyNumber();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(initialStartTime.getTiming());
         cal2.setTime(initialEndTime.getTiming());
-        SimpleDateFormat startTimeFormat = retriveFormat(initialStartTime.toString());
-        SimpleDateFormat endTimeFormat = retriveFormat(initialEndTime.toString());
+        SimpleDateFormat startTimeFormat = retriveDateFormat(initialStartTime.toString());
+        SimpleDateFormat endTimeFormat = retriveDateFormat(initialEndTime.toString());
         String tempStartTime;
         String tempEndTime;
         Timing tempStart = null;
@@ -295,7 +307,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    public static Task modifyOccurrence(ReadOnlyTask taskToModify) {
+    /**
+     * @param taskToModify ReadOnlyTask object
+     * @return new Task instance with only one occurrence;
+     * modifies the parameter by removing the respective occurrence for additional functionality
+     */
+    public static Task extractOccurrence(ReadOnlyTask taskToModify) {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
             taskToModify.getOccurrenceIndexList().add(0);

@@ -110,10 +110,8 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given in section 2.3) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
@@ -182,18 +180,17 @@ _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Comma
 Author: Jay Kabra
 
 * The logic behind how to edit a specifc instance of a recurring task is as follows:
-* The `Parser` recognizes the `editthis` command to delete the occurrence of the selected task
-* from the encapsulated list of RecuirringTaskOccurrence objects (refer to the Model section to see the
-* precise architecture of implementing recurring tasks).
-* A new task is subsequently instantiated (with its own description, priority, etc. parameters) and added
-* to the underlying Task list. Then the edit parameters are applied to this newly instantianted task.
-*
-* The logic behind how to delete a specific instance of a recurring task is as follows:
-* The `Parser` recognizes the `deletethis` command and subsequently removes the entire task from the list.
-* Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the
-* recurring task back to the list with the specific instance removed. The effect for the user is a deletetion
-* of a particular recurring task instance.
+  * The `Parser` recognizes the `editthis` command to delete the occurrence of the selected task
+  from the encapsulated list of RecuirringTaskOccurrence objects (refer to the Model section to see the 
+  precise architecture of implementing recurring tasks).
+  * A new task is subsequently instantiated (with its own description, priority, etc. parameters) and added
+  to the underlying Task list. Then the edit parameters are applied to this newly instantianted task.
 
+* The logic behind how to delete a specific instance of a recurring task is as follows:
+  * The `Parser` recognizes the `deletethis` command and subsequently removes the entire task from the list.
+  * Subsequently, it intantiates a new Recurring Task using shared logic with editthis and then adds the 
+  recurring task back to the list with the specific instance removed. The effect for the user is a deletetion 
+  of a particular recurring task instance.
 
 ### 2.4. Model component
 
@@ -206,20 +203,21 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 The `Model`,
 
-* stores a `UserPref` object that represents the user's preferences.
-* stores the Task List data.
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* Stores a `UserPref` object that represents the user's preferences.
+* Stores the Task List data.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
-* defines reccuring tasks in the following way:
-  * Class 'RecurringTaskOccurrence' encapsulates 2 Timing objects (start & end times) and a boolean to indicate if
-  * the occurrence is complete.
-  * Class 'Task' encapsulates a list of RecurringTaskOccurrence objects. In addition, it also encapsulates a
-  *'description,' 'priority,' 'frequency,' and a list of 'tags' for the respective task. Each of these fields is
-  * constructed as an object in the backend of the application.
+* Does not depend on any of the other three components.
+* Defines reccuring tasks in the following way:
+  * Class `RecurringTaskOccurrence` encapsulates 2 Timing objects (start & end times) and a boolean to indicate if 
+  the occurrence is complete. 
+  * Class `Task` encapsulates a list of `RecurringTaskOccurrence` objects. In addition, it also encapsulates a  
+  `description`, `priority`, `frequency`, and `UniqueTagList` object for the respective task. Each of these fields is 
+  constructed as an object in the backend of the application. 
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
-  * instances of the same underlying object.
-  * If tasks are recurring then their start/end times are populated based on the given frequency parameter.
+  instances of the same underlying object.
+    * If tasks are recurring then their start/end times are populated based on the given frequency parameter which are 
+  subsequently utilized to generate the respective Task's `RecurringTaskOccurrence` objects.
 
 
 ### 2.5. Storage component
@@ -584,16 +582,19 @@ Use case ends.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be open source.
-6. Should open the app in less than 5 sec.
-7. The GUI should not be overcrowded.
-8. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
-9. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
-10. The level of security will be minimal for this product since it is only accessed by a single user.
-11. To extend the software, proper security measures can be put into place in <100 hours.
-12. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
-13. Should be scalable so that a user can change the layout of the GUI based on personal preference.
-14. Should not overload the CPU so that other running process start to lag.
-15. Should not have seperate administrative functions as there is one user who is the Admin by default.
+5. Should open the app in less than 5 sec.
+6. The GUI should not be overcrowded.
+7. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
+8. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+9. The level of security will be minimal for this product since it is only accessed by a single user.
+10. To extend the software, proper security measures can be put into place in <100 hours.
+11. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+12. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+13. Should not overload the CPU so that other running process start to lag.
+14. Should not have seperate administrative functions as there is one user who is the Admin by default.
+15. Support tasks that recur after a specified number of months for 12 months (1 year).
+16. Support tasks that recur after a specified number of days for 60 days (2 months).
+17. Support tasks that recur after a specified number of hours for 168 hours (1 week).
 
 ## Appendix D : Glossary
 
@@ -629,7 +630,8 @@ Cons:
 
 **Google Tasks**
 
-Author:Google
+Author: Yu Cheng-Liang
+
 Pros:
 * easy to use
 * have all the basic functions a normal user would use.

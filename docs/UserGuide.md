@@ -4,10 +4,11 @@ By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 
 ---
 
-1. [Quick Start](#1-quick-start)
-2. [Features](#2-features)
-3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [Notes on Recurring Tasks](#notes-on-recurring-tasks)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
 
 ## 1. Quick Start
 
@@ -55,7 +56,15 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
+> To add floating tasks, simply do not specify the start and end timing paramters.
+> To add tasks with deadlines, simply specify the end timing. 
+> To add recurring tasks, see section 2.2.1.
 > Tasks can have any number of tags (including 0).
+
+Examples:
+
+* `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
+* `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 
 ### 2.2.1. Adding a recurring task
 
@@ -65,8 +74,6 @@ where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
 
 Examples:
 
-* `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
-* `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 * `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
 * `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
 
@@ -107,7 +114,8 @@ Examples:
   Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
 
   > * Edits a specific instance of a recurring task
-  > * After editing this instane, the edited task will no longer be a part of the recurring sequence
+  > * After editing this instance, the edited task will no longer be a part of the recurring sequence 
+
 
   Examples:
 
@@ -116,7 +124,6 @@ Examples:
 
   * `edithis 2 Go to 2103 Lecture`<br>
   Edits the description of task 2 (which is reccuring)
-
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
@@ -133,7 +140,6 @@ Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
-
 
 ### 2.5.1. Finding an instance of a reccuring task
   > * Execute 'find' with the same syntax as above
@@ -176,7 +182,14 @@ Examples:
   > The index **must be a positive integer** 1, 2, 3, ...
   > Upon deleting an instance, the task list will be updated with the next recent occurrence.
     If there is no more occurrences, then the entire reccuring task will be removed from the list.
+  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to 
+  calling `delete` on the same task.
 
+  Example:
+
+* `find 05/01/2017`<br>
+  `deletethis 1`<br>
+  Executes a search to find tasks on January 5th the deletes the 1st task (which is a recurring instance).
 
 ### 2.7. Complete a task : `complete`
 
@@ -186,6 +199,8 @@ Format: `complete INDEX`
 > Mark the task at the specified `INDEX` as `Completed`.
 > The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
+> To complete a specific instance of a recurring task, follow the same syntax.
+> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.   
 
 Examples:
 
@@ -204,11 +219,18 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 > Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
 > The index **must be a positive interger** 1, 2, 3,...
 > The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
+> Using `prioritize` on a recurring task will change the priority of ALL occurrences.  
+> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited 
+priority. 
 
 Examples:
 * `list`<br>
   `prioritize 2 3`<br>
-  Puts a priority level of 3 to the 2nd task in the task list
+  Puts a priority level of 3 to the 2nd task in the task list. If the 2nd task is recurring, then all occurrences will have priority 3.
+
+* `find attend 2103 lecture`<br>
+`editthis 1 p/1`<br>
+Puts a priority level of 1 to the 1st task in the resulting list (assuming it is recurring, only this occurrence will have priority 1).
 
 ### 2.9. Clearing all entries : `clear`
 
@@ -232,15 +254,28 @@ There is no need to save manually.
 Loads task manager data from specified file location
 Format: `load PATH/TO/LOAD_LOCATION`
 
+## 3. Notes on Recurring Tasks
 
+Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports 
+the implementation of such tasks. A few things to note about how to use this feature: 
 
+* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters 
+as the start and end timings of when the overall recurring pattern should start/end respectively. 
+  * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
+  every week from 11am - 12pm, the syntax of the respective command would be as follows: 
+  `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
+  * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
+  * If this task ends before 60 days, then you can execute `delete INDEX` where INDEX specifies the index of the recurring task on
+  the User Interface.
+  * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it 
+  recurrs for another 60 days.
 
-## 3. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.
 
-## 4. Command Summary
+## 5. Command Summary
 
 * **Add**  `add TASK_NAME p/1 sd/START_DATE ed/DUE_DATE [t/TAG]...` <br>
    e.g. `add Study for midterm p/1 sd/04/03/2017 ed/04/04/2017 t/study t/midterm`
@@ -261,7 +296,7 @@ Format: `load PATH/TO/LOAD_LOCATION`
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `find assignment` <br>
-	      `find tutorial`
+        `find tutorial`
 
 * **List** : `list` <br>
    e.g. `list`
@@ -282,3 +317,4 @@ Format: `load PATH/TO/LOAD_LOCATION`
 
 * **Save ** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
+>>>>>>> 04f6f9c98b7537c17ec3539b02857921a1ffd5b7
