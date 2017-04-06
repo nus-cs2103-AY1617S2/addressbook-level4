@@ -1,18 +1,17 @@
 package seedu.taskit.model;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import edu.emory.mathcs.backport.java.util.Collections;
-
-import java.util.ArrayList;
 import javafx.collections.transformation.FilteredList;
 import seedu.taskit.commons.core.ComponentManager;
 import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.core.UnmodifiableObservableList;
-import seedu.taskit.commons.events.model.AddressBookChangedEvent;
+import seedu.taskit.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.exceptions.NoValidStateException;
 import seedu.taskit.commons.util.CollectionUtil;
@@ -21,6 +20,18 @@ import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+
+import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -67,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new TaskManagerChangedEvent(addressBook));
     }
 
     @Override
@@ -228,22 +239,31 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (parameter){
-                case "done":
+                case LIST_DONE:
                     return task.isDone();
 
-                case "undone":
+                case LIST_UNDONE:
                     return !task.isDone();
 
-                case "overdue":
+                case LIST_OVERDUE:
                     return task.isOverdue() && !task.isDone();
 
-                case "low":
-                case "medium":
-                case "high":
+                case LIST_PRIORITY_LOW:
+                case LIST_PRIORITY_MEDIUM:
+                case LIST_PRIORITY_HIGH:
                     return task.getPriority().toString().equals(parameter);
 
-                case "today":
+                case LIST_TODAY:
                     return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
+                    
+                case LIST_FLOATING:
+                    return task.isFloating();
+                    
+                case LIST_EVENT:
+                    return task.isEvent();
+                    
+                case LIST_DEADLINE:
+                    return task.isDeadline();
 
                 default:
                     return false;

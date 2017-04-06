@@ -12,14 +12,14 @@
 
 <!--@@author A0141872E-->
 
-<HBox id="menuBarCardPane" fx:id="menuBarCardPane" prefHeight="63.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="menuBarCardPane" fx:id="menuBarCardPane" prefHeight="63.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane prefHeight="20.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+        <GridPane prefHeight="18.0" prefWidth="130.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="130.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" maxHeight="150.0" minHeight="43.0" prefWidth="73.0" GridPane.columnIndex="0">
+                <VBox alignment="CENTER_LEFT" maxHeight="150.0" minHeight="43.0" prefHeight="43.0" prefWidth="130.0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
@@ -28,9 +28,9 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
                     <children>
-                        <HBox alignment="CENTER" prefHeight="20.0" prefWidth="245.0" spacing="5">
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="5">
                             <children>
-                        <ImageView fx:id="imageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageView" fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                                    <Label fx:id="title" text="\$menuBar" textAlignment="CENTER">
                                    </Label>
                             </children>

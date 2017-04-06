@@ -15,8 +15,11 @@ public interface ReadOnlyTask {
     Date getEnd();
     Priority getPriority();
 
-    Boolean isDone();
-    Boolean isOverdue();
+    boolean isDone();
+    boolean isOverdue();
+    boolean isFloating();
+    boolean isEvent();
+    boolean isDeadline();
     void setDone(String status);
 
     /**
@@ -70,7 +73,6 @@ public interface ReadOnlyTask {
 
       return titleTagAndDateString.toLowerCase();
     }
-
 
 }
 

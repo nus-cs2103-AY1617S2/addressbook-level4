@@ -17,7 +17,6 @@ public class MenuBarCard extends UiPart<Region> {
 
     @FXML
     private ImageView imageView;
-
     @FXML
     private HBox menuBarCardPane;
     @FXML

@@ -2,9 +2,7 @@ package seedu.taskit.logic.commands;
 
 import java.util.List;
 
-import java.util.logging.Logger;
 import seedu.taskit.commons.core.EventsCenter;
-import seedu.taskit.commons.core.LogsCenter;
 import seedu.taskit.commons.core.Messages;
 import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskit.logic.commands.exceptions.CommandException;
@@ -16,7 +14,8 @@ import seedu.taskit.model.task.ReadOnlyTask;
  */
 public class MarkCommand extends Command {
 
-public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD_ALIAS = "m";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark a existing tasks in TaskIt based on index\n"
             + "Parameters: [done,undone]\n"
@@ -28,7 +27,6 @@ public static final String COMMAND_WORD = "mark";
 
     private int filteredTaskListIndex;
     private String parameter;
-    private final Logger logger = LogsCenter.getLogger(MarkCommand.class);
 
     public MarkCommand (int filteredTaskListIndex,String parameter) {
         assert filteredTaskListIndex > 0;
@@ -42,7 +40,6 @@ public static final String COMMAND_WORD = "mark";
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        logger.info("Executing MarkCommand " + this.toString() );
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -57,6 +54,7 @@ public static final String COMMAND_WORD = "mark";
             return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
         }
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
+        //TODO find a better way to show it
         model.updateFilteredTaskList("undone");
         return new CommandResult(String.format(MESSAGE_SUCCESS_ALL, parameter));
     }

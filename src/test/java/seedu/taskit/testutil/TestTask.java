@@ -115,13 +115,8 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
 
     //@@author A0141872E
     @Override
-    public Boolean isDone() {
+    public boolean isDone() {
         return isDone;
-    }
-
-    @Override
-    public Boolean isOverdue() {
-        return isOverdue;
     }
 
     @Override
@@ -131,5 +126,29 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
         } else {
             this.isDone = false;
         }
+    }
+
+    @Override
+    public boolean isOverdue() {
+        return checkOverdue();
+    }
+
+    private boolean checkOverdue() {
+        return this.end.isEndTimePassCurrentTime()== true && isDone == false;
+    }
+
+    @Override
+    public boolean isFloating() {
+        return this.end.date == null;
+    }
+
+    @Override
+    public boolean isEvent() {
+        return this.start.date != null && this.end.date != null;
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return this.start.date == null && this.end.date != null;
     }//@@author
 }

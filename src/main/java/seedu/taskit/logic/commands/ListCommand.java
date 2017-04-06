@@ -1,5 +1,8 @@
 package seedu.taskit.logic.commands;
 
+import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+
 //@@author A0141872E
 /**
  * Lists all tasks in TaskIt to the user based on given parameters.
@@ -7,9 +10,10 @@ package seedu.taskit.logic.commands;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD_ALIAS = "l";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the existing tasks in TaskIt \n"
-            + "Parameters: [all, done, undone, overdue, today]\n"
+            + "Parameters: [all, done, undone, overdue, today,low,medium,high]\n"
             + "Example: " + COMMAND_WORD + " undone\n" + COMMAND_WORD + " today\n";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all tasks";
@@ -29,24 +33,30 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
+
         int taskListSize;
         switch (parameter) {
-              case "all":
+              case LIST_ALL:
                   model.updateFilteredListToShowAll();
                   return new CommandResult(MESSAGE_SUCCESS_ALL);
 
-              case "today":
-                  taskListSize=model.updateFilteredTaskList("today");
+              case LIST_TODAY:
+                  taskListSize=model.updateFilteredTaskList(parameter);
                   assert(taskListSize>=0);
                   if(taskListSize==0){
                       return new CommandResult(MESSAGE_NO_TASK_TODAY);
                   }
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, "today"));
+                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
 
               default:
                   model.updateFilteredTaskList(parameter);
                   return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
         }
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 
 

@@ -15,13 +15,21 @@ public class CliSyntax {
     public static final Prefix PREFIX_FROM= new Prefix(" from ");
     public static final Prefix PREFIX_TO= new Prefix(" to ");
     public static final Prefix PREFIX_PRIORITY= new Prefix(" priority ");
+    public static final Prefix PREFIX_TITLE= new Prefix("title");
+    public static final Prefix PREFIX_START= new Prefix("start");
+    public static final Prefix PREFIX_END= new Prefix("end");
 
-    public static final String FIELDWORD_TITLE= new String("title");
-    public static final String FIELDWORD_TAG= new String("tag");
-    public static final String FIELDWORD_START= new String("start");
-    public static final String FIELDWORD_END= new String("end");
-    public static final String FIELDWORD_PRIORITY= new String("priority");
-    public static final String FIELDWORD_DEADLINE= new String("deadline");
+    public static final String LIST_ALL = "all";
+    public static final String LIST_DEADLINE = "deadline";
+    public static final String LIST_FLOATING = "floating";
+    public static final String LIST_EVENT = "event";
+    public static final String LIST_TODAY = "today";
+    public static final String LIST_OVERDUE = "overdue";
+    public static final String LIST_PRIORITY_LOW = "low";
+    public static final String LIST_PRIORITY_MEDIUM = "medium";
+    public static final String LIST_PRIORITY_HIGH = "high";
+    public static final String LIST_DONE = "done";
+    public static final String LIST_UNDONE = "undone";
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

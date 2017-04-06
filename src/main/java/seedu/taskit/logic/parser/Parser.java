@@ -53,6 +53,7 @@ public class Parser {
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
@@ -68,9 +69,11 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD_ALIAS:
             return new ListCommandParser().parse(arguments);
 
         case MarkCommand.COMMAND_WORD:
+        case MarkCommand.COMMAND_WORD_ALIAS:
             return new MarkCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
@@ -79,7 +82,6 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        //@@author A0141011J
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
 
