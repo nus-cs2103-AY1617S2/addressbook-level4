@@ -115,11 +115,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        eventTaskListPanel = new EventTaskListPanel(getEventTaskListPlaceholder(), 
+        eventTaskListPanel = new EventTaskListPanel(getEventTaskListPlaceholder(),
                 logic.getInitialFilteredTaskList());
-        deadlineTaskListPanel = new DeadlineTaskListPanel(getDeadlineTaskListPlaceholder(), 
+        deadlineTaskListPanel = new DeadlineTaskListPanel(getDeadlineTaskListPlaceholder(),
                 logic.getFilteredTaskList());
-        floatingTaskListPanel = new FloatingTaskListPanel(getFloatingTaskListPlaceholder(), 
+        floatingTaskListPanel = new FloatingTaskListPanel(getFloatingTaskListPlaceholder(),
                 logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());

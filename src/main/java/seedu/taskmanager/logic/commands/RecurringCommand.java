@@ -63,8 +63,8 @@ public class RecurringCommand extends Command {
                 try {
                     recurringTask = new Task(taskToRecur.getTaskName(), taskToRecur.getStartDate(),
                             taskToRecur.getStartTime(),
-                            new EndDate(DateTimeUtil.getFutureDate(loop, 
-                                    typeOfRecurrence, taskToRecur.getEndDate().toString())),
+                            new EndDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence,
+                                    taskToRecur.getEndDate().toString())),
                             taskToRecur.getEndTime(), false, taskToRecur.getCategories());
                 } catch (IllegalValueException ive) {
                     throw new CommandException("Wrong format for deadline!");
@@ -84,11 +84,11 @@ public class RecurringCommand extends Command {
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
                 try {
                     recurringTask = new Task(taskToRecur.getTaskName(),
-                            new StartDate(DateTimeUtil.getFutureDate(loop, 
-                                    typeOfRecurrence, taskToRecur.getStartDate().toString())),
+                            new StartDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence,
+                                    taskToRecur.getStartDate().toString())),
                             taskToRecur.getStartTime(),
-                            new EndDate(DateTimeUtil.getFutureDate(loop, 
-                                    typeOfRecurrence, taskToRecur.getEndDate().toString())),
+                            new EndDate(DateTimeUtil.getFutureDate(loop, typeOfRecurrence,
+                                    taskToRecur.getEndDate().toString())),
                             taskToRecur.getEndTime(), false, taskToRecur.getCategories());
                 } catch (IllegalValueException ive) {
                     throw new CommandException("Wrong format for event!");
@@ -106,7 +106,6 @@ public class RecurringCommand extends Command {
 
         model.updateFilteredListToShowAll();
         return new CommandResult(
-                String.format(MESSAGE_RECURRING_TASK_SUCCESS, String.valueOf(numberOfRecurrence),
-                        " number of times"));
+                String.format(MESSAGE_RECURRING_TASK_SUCCESS, String.valueOf(numberOfRecurrence), " number of times"));
     }
 }
