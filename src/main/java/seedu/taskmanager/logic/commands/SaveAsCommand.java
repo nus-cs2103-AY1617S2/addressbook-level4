@@ -21,7 +21,7 @@ public class SaveAsCommand extends Command {
     public static final String ALTERNATIVE_COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Save the current taskmanager to given directory "
-            + "to allow user to sync with cloud services. Overwrite will occur for existing file name.\n"
+            + "to allow user to sync with cloud services. Overwrites existing file name.\n"
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
