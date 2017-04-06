@@ -33,7 +33,7 @@ Before using OneTwoDo, please ensure that you have installed **Java version 1.8.
 Start your OneTwoDo journey by downloading the latest **OneTwoDo.jar** from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.
 
 You can start OneTwoDo by simply double-clicking the icon!
-   > <img src="images/UG_img/onetwodo_icon.png" width="10">
+   > <img src="images/UG_img/onetwodo_icon.png" width="32">
 
 *Figure 1: OneTwoDo User Interface*
 

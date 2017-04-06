@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/CS2103JAN2017-F14-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-F14-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F14-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F14-B1/main?branch=master)
 
-<img src="docs/images/UG_img/image05.png" width="600"><br>
+<img src="docs/images/ReadmeCover.png" width="800"><br>
 
 Having trouble keeping track with the tasks you have to complete? Looking for a simple yet effective task manager to help you organise your day? OneTwoDo is what you are looking for.
 
