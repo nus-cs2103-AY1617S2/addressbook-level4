@@ -69,8 +69,6 @@ public interface Model {
     /** clears the undo history stack of all commands saved*/
     void clearRedo();
 
-    UnmodifiableObservableList<ReadOnlyTask> getImportantTaskList();
-
     //@@author
 
 }
