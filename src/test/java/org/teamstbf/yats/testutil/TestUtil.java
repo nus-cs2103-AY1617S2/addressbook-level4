@@ -107,7 +107,7 @@ public class TestUtil {
     /**
      * Appends the file name to the sandbox folder path. Creates the sandbox
      * folder if it doesn't exist.
-     * 
+     *
      * @param fileName
      * @return
      */
@@ -228,7 +228,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to the screen.
-     * 
+     *
      * @param node
      * @return
      */
@@ -240,7 +240,7 @@ public class TestUtil {
 
     /**
      * Gets mid point of a node relative to its scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -252,7 +252,7 @@ public class TestUtil {
 
     /**
      * Gets the bound of the node relative to the parent scene.
-     * 
+     *
      * @param node
      * @return
      */
@@ -278,7 +278,7 @@ public class TestUtil {
 
     /**
      * Removes a subset from the list of events.
-     * 
+     *
      * @param events
      *            The list of events
      * @param eventsToRemove
@@ -293,7 +293,7 @@ public class TestUtil {
 
     /**
      * Returns a copy of the list with the event at specified index removed.
-     * 
+     *
      * @param list
      *            original list to copy from
      * @param targetIndexInOneIndexedFormat
@@ -305,7 +305,7 @@ public class TestUtil {
 
     /**
      * Replaces events[i] with a event.
-     * 
+     *
      * @param events
      *            The array of events.
      * @param event
@@ -321,7 +321,7 @@ public class TestUtil {
 
     /**
      * Appends events to the array of events.
-     * 
+     *
      * @param events
      *            A array of events.
      * @param eventsToAdd
