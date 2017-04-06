@@ -96,11 +96,7 @@ public class MainWindow extends Window {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         getStage().setScene(scene);
-
-        //@@author A0163848R
         ThemeManager.changeTheme(getRoot(), prefs.getGuiSettings().getStyleSheet());
-        //@@author
-
         setAccelerators();
     }
 

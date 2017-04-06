@@ -62,7 +62,7 @@ public class Parser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -79,7 +79,6 @@ public class Parser {
         case ThemeCommand.COMMAND_WORD:
             return new ThemeCommand();
 
-        //@@author A0163848R
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
 
@@ -91,7 +90,6 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-        //@@author
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
