@@ -64,16 +64,6 @@ public class ListCommand extends Command {
             model.updateFilteredLists(dateRange);
         }
 
-        // if (!showActiveOnly && !showCompleteOnly) {
-        // model.updateFilteredListsShowAll();
-        // } else if (showCompleteOnly) {
-        // model.updateFilteredListsToShowCompleteToDo();
-        // } else if (showActiveOnly) {
-        // model.updateFilteredListsToShowActiveToDo();
-        // } else if (dateRange != null) {
-        // model.updateFilteredLists(dateRange);
-        // }
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
