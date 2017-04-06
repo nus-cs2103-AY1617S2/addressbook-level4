@@ -8,17 +8,17 @@ import project.taskcrusher.commons.events.BaseEvent;
  */
 public class ListsToShowUpdatedEvent extends BaseEvent {
 
-    public final boolean eventListToShowEmpty;
-    public final boolean taskListToShowEmpty;
+    public final int eventCount;
+    public final int taskCount;
 
-    public ListsToShowUpdatedEvent(boolean eventListToShowEmpty, boolean taskListToShowEmpty) {
-        this.eventListToShowEmpty = eventListToShowEmpty;
-        this.taskListToShowEmpty = taskListToShowEmpty;
+    public ListsToShowUpdatedEvent(int eventCount, int taskCount) {
+        this.eventCount = eventCount;
+        this.taskCount = taskCount;
     }
 
     @Override
     public String toString() {
-        return "eventList empty =  " + eventListToShowEmpty + " taskList empty =  " + taskListToShowEmpty;
+        return "eventCount =  " + eventCount + " taskCount =  " + taskCount;
     }
 
 }

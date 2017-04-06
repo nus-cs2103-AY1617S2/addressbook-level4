@@ -27,7 +27,7 @@ import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 //@@author A0127737X
 /**
  * Represents the in-memory model of the user inbox data.
- * All changes to any model should be synchronized.
+ * All changes to any model should be synchronised.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -90,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyUserInbox newData) {
         userInbox.resetData(newData);
         indicateUserInboxChanged();
-        prepareListsForUi();
+        signalUiForUpdatedlists();
     }
 
     @Override
@@ -104,15 +104,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0127737X
-    public void prepareListsForUi() {
-        boolean isTaskListToShowEmpty = LIST_NOT_EMPTY, isEventListToShowEmpty = LIST_NOT_EMPTY;
-        if (filteredEvents.isEmpty()) {
-            isEventListToShowEmpty = LIST_EMPTY;
-        }
-        if (filteredTasks.isEmpty()) {
-            isTaskListToShowEmpty = LIST_EMPTY;
-        }
-        raise(new ListsToShowUpdatedEvent(isEventListToShowEmpty, isTaskListToShowEmpty));
+    public void signalUiForUpdatedlists() {
+        int eventCount = filteredEvents.size();
+        int taskCount = filteredTasks.size();
+
+        raise(new ListsToShowUpdatedEvent(eventCount, taskCount));
     }
 
     @Override
@@ -131,14 +127,13 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
+        signalUiForUpdatedlists();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         saveUserInboxStateForUndo();
         userInbox.addTask(task);
-        updateFilteredTaskListToShowAll();
         updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
     }
@@ -150,25 +145,27 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
-        indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
+        indicateUserInboxChanged();
     }
 
     @Override
     public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
         saveUserInboxStateForUndo();
         userInbox.markTask(filteredTaskListIndex, markFlag);
+        updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
-        prepareListsForUi();
     }
 
     @Override
-    public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
+    public synchronized void switchTaskToEvent(ReadOnlyTask toDelete, Event toAdd) throws
+        DuplicateEventException, TaskNotFoundException {
+        assert toDelete != null && toAdd != null;
         saveUserInboxStateForUndo();
-        userInbox.markEvent(filteredEventListIndex, markFlag);
+        userInbox.removeTask(toDelete);
+        userInbox.addEvent(toAdd);
+        updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
-        prepareListsForUi();
     }
 
     //=========== Event operations =========================================================================
@@ -177,9 +174,8 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
         saveUserInboxStateForUndo();
         userInbox.removeEvent(target);
-        indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
+        indicateUserInboxChanged();
     }
 
     @Override
@@ -189,15 +185,22 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
-        indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
+        indicateUserInboxChanged();
     }
 
     @Override
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         saveUserInboxStateForUndo();
         userInbox.addEvent(event);
+        updateFilteredListsToShowActiveToDo();
+        indicateUserInboxChanged();
+    }
+
+    @Override
+    public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
+        saveUserInboxStateForUndo();
+        userInbox.markEvent(filteredEventListIndex, markFlag);
         updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
     }
@@ -212,27 +215,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void switchTaskToEvent(ReadOnlyTask toDelete, Event toAdd) throws
-        DuplicateEventException, TaskNotFoundException {
-        assert toDelete != null && toAdd != null;
-        saveUserInboxStateForUndo();
-        userInbox.removeTask(toDelete);
-        userInbox.addEvent(toAdd);
-        indicateUserInboxChanged();
-        updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
-    }
-
-    @Override
     public synchronized void switchEventToTask(ReadOnlyEvent toDelete, Task toAdd) throws
         DuplicateTaskException, EventNotFoundException {
         assert toDelete != null && toAdd != null;
         saveUserInboxStateForUndo();
         userInbox.removeEvent(toDelete);
         userInbox.addTask(toAdd);
-        indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        prepareListsForUi();
+        indicateUserInboxChanged();
     }
 
     @Override
@@ -248,12 +238,6 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
-    @Override
-    public void updateFilteredTaskListToShowAll() {
-        filteredTasks.setPredicate(null);
-        prepareListsForUi();
-    }
-
     //=========== Filtered Event List Accessors =============================================================
 
     @Override
@@ -261,19 +245,13 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredEvents);
     }
 
-    @Override
-    public void updateFilteredEventListToShowAll() {
-        filteredEvents.setPredicate(null);
-        prepareListsForUi();
-    }
-
-    //====================== Combined filtering =================================================
+    //=========== Combined filtering for UI =================================================================
 
     @Override
     public void updateFilteredListsShowAll() {
         filteredEvents.setPredicate(null);
         filteredTasks.setPredicate(null);
-        prepareListsForUi();
+        signalUiForUpdatedlists();
     }
 
     @Override
@@ -286,12 +264,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredLists(new PredicateExpression(new CompletionQualifier(true)));
     }
 
-    private void updateFilteredLists(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-        filteredEvents.setPredicate(expression::satisfies);
-        prepareListsForUi();
-    }
-
     @Override
     public void updateFilteredLists(Set<String> keywords, boolean showCompletedToo) {
         updateFilteredLists(new PredicateExpression(new KeywordQualifier(keywords, showCompletedToo)));
@@ -300,6 +272,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredLists(Timeslot userInterestedTimeslot) {
         updateFilteredLists(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
+    }
+
+    private void updateFilteredLists(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+        filteredEvents.setPredicate(expression::satisfies);
+        signalUiForUpdatedlists();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

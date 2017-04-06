@@ -79,7 +79,6 @@ public class EditEventCommand extends Command {
         } catch (UniqueEventList.DuplicateEventException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-        model.updateFilteredEventListToShowAll();
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, eventToEdit));
     }
 

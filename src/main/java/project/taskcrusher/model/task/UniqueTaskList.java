@@ -166,10 +166,6 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified person in the list would fail because
      * there is no such matching person in the list.
      */
-    public static class TaskNotFoundException extends Exception {
-        protected TaskNotFoundException() {
-            super("The specified task was not found in the list");
-        }
-    }
+    public static class TaskNotFoundException extends Exception {}
 
 }

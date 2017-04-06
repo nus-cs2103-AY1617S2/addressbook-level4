@@ -39,7 +39,7 @@ public interface Model {
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
-    void prepareListsForUi();
+    void signalUiForUpdatedlists();
 
     void updateOverdueStatus();
 
@@ -69,9 +69,6 @@ public interface Model {
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Updates the filter of the filtered task list to show all tasks */
-    void updateFilteredTaskListToShowAll();
 
     // ========== for events =================================================
 
@@ -106,9 +103,6 @@ public interface Model {
      * {@code UnmodifiableObservableList<ReadOnlyEvent>}
      */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList();
-
-    /** Updates the filter of the filtered event list to show all events */
-    void updateFilteredEventListToShowAll();
 
     void markEvent(int filteredListIndex, int markFlag);
 

@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.ReadOnlyEvent;
-import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList;
 import project.taskcrusher.model.tag.Tag;
 import project.taskcrusher.model.tag.UniqueTagList;
@@ -259,10 +258,6 @@ public class UserInbox implements ReadOnlyUserInbox {
         } else {
             throw new UniqueEventList.EventNotFoundException();
         }
-    }
-
-    public ObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
-        return events.getEventsWithOverlapingTimeslots(candidate);
     }
 
     //// tag-level operations
