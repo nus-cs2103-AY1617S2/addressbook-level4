@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Apoorva Ullas](http://github.com/apoorva17)
 <img src="images/apoorva17.jpg" width="150"><br>
 
-* Components in charge of: [Model] 
+* Components in charge of: [Model]
 * Aspects/tools in charge of: Travis, Coveralls, Codacy, Code Quality
 * Features implemented:
 	* [Task priority]
@@ -29,7 +29,7 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [Find command]
 	* [Recurring task]
 * Code written: [[functional code](../collated/main/A0139343E.md)][[test code](../collated/main/A0139343E.md)]
-* Other major contributions: 
+* Other major contributions:
 	* Did initial refactoring from AddressBook to OneTwoDo
 	* Did initial junit tests refactoring to pass tests for OneTwoDo
 	* Improved user guide based on feedback
