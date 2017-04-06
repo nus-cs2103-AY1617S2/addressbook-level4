@@ -117,10 +117,8 @@ public class UpdateCommand extends Command {
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
 
         try {
-            if (updatedTask.isEventTask()
-                    && !DateTimeUtil.isValidEventTimePeriod(updatedTask.getStartDate().value
-                            , updatedTask.getStartTime().value, updatedTask.getEndDate().value
-                            , updatedTask.getEndTime().value)) {
+            if (updatedTask.isEventTask() && !DateTimeUtil.isValidEventTimePeriod(updatedTask.getStartDate().value,
+                    updatedTask.getStartTime().value, updatedTask.getEndDate().value, updatedTask.getEndTime().value)) {
                 throw new CommandException(MESSAGE_INVALID_EVENT_PERIOD);
             }
         } catch (IllegalValueException e) {
@@ -139,7 +137,8 @@ public class UpdateCommand extends Command {
 
     /**
      * Checks if only the task name field has been identified by user to be
-     * updated To ensure that other task details like startTime startDate endTime endDate are not lost
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
      *
      * @return true if only task name has been identified by user to be updated
      */
@@ -173,12 +172,14 @@ public class UpdateCommand extends Command {
             return false;
         }
     }
-    
+
     /**
-     * Checks if only the startTime has been identified by user to be
-     * updated To ensure that other task details like startDate endTime endDate are not lost
+     * Checks if only the startTime has been identified by user to be updated To
+     * ensure that other task details like startDate endTime endDate are not
+     * lost
      *
-     * @return true if only startTime information has been identified by user to be updated
+     * @return true if only startTime information has been identified by user to
+     *         be updated
      */
     private boolean isOnlyStartTimeUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -192,10 +193,12 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the endTime has been identified by user to be
-     * updated To ensure that other task details like startTime startDate endDate are not lost
+     * Checks if only the endTime has been identified by user to be updated To
+     * ensure that other task details like startTime startDate endDate are not
+     * lost
      *
-     * @return true if only endTime information has been identified by user to be updated
+     * @return true if only endTime information has been identified by user to
+     *         be updated
      */
     private boolean isOnlyEndTimeUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -209,10 +212,12 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the startDate and startTime has been identified by user to be
-     * updated To ensure that other task details like endDate endTime are not lost
+     * Checks if only the startDate and startTime has been identified by user to
+     * be updated To ensure that other task details like endDate endTime are not
+     * lost
      *
-     * @return true if only startDate and startTime information has been identified by user to be updated
+     * @return true if only startDate and startTime information has been
+     *         identified by user to be updated
      */
     private boolean isOnlyStartUpdated() {
         if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -227,9 +232,11 @@ public class UpdateCommand extends Command {
 
     /**
      * Checks if only the endDate and endTime has been identified by user to be
-     * updated To ensure that other task details like startDate startTime are not lost
+     * updated To ensure that other task details like startDate startTime are
+     * not lost
      *
-     * @return true if only endDate and endTime information has been identified by user to be updated
+     * @return true if only endDate and endTime information has been identified
+     *         by user to be updated
      */
     private boolean isOnlyEndUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)

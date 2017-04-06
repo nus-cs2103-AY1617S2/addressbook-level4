@@ -60,7 +60,7 @@ public class EndDate {
      * public boolean laterThan(StartDate other) { if
      * ((this.value).compareTo(other.value) > 0) { return true; } return false;
      * }
-     * 
+     *
      * public boolean laterThan(EndDate other) { if
      * ((this.value).compareTo(other.value) > 0) { return true; } return false;
      * }
