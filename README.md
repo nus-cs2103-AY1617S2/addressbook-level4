@@ -1,6 +1,7 @@
 # <img src="docs/images/BurdensLogo.png" width="30"> Burdens (v0.5)
 
 [![Build Status](https://api.travis-ci.org/CS2103JAN2017-W09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-W09-B1/main)
+[![Build status](https://ci.appveyor.com/api/projects/status/vpprul3onsc0c809branch/master?svg=true)](https://ci.appveyor.com/project/bqnguyen94/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-W09-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-W09-B1/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4d3a289fcdb3469cb2ddaede8990d379)](https://www.codacy.com/app/Jslyfer/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-W09-B1/main&amp;utm_campaign=Badge_Grade)
 <!---[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
