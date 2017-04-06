@@ -61,8 +61,8 @@ public class ListCommand extends Command {
 
         if (!parameters.isEmpty()) {
             try {
-                String startDate = parameters.get("\\from").toString();
-                String endDate = parameters.get("\\to").toString();
+                String startDate = parameters.get(CliSyntax.PREFIX_FROM.toString()).toString();
+                String endDate = parameters.get(CliSyntax.PREFIX_TO.toString()).toString();
                 dates = new TaskDate(TaskDate.parseDate(startDate), TaskDate.parseDate(endDate));
                 boolean validDate = TaskDate.validateDate(dates.getStartDate(), dates.getEndDate());
                 if (!validDate) {
@@ -70,8 +70,7 @@ public class ListCommand extends Command {
                             MESSAGE_USAGE));
                 }
             } catch (NullPointerException e) {
-                throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        MESSAGE_USAGE));
+                ;
             }
         }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
