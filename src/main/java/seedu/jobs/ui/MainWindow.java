@@ -205,10 +205,4 @@ public class MainWindow extends UiPart<Region> {
         browserPanel.freeResources();
     }
 
-    public void inputPassword() {
-        browserPanel.inputPassword();
-        
-    }
-
-
 }

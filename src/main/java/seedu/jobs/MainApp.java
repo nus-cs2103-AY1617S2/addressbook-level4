@@ -37,7 +37,7 @@ import seedu.jobs.ui.UiManager;
 public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    public static final Version VERSION = new Version(1, 0, 0, true);
+    public static final Version VERSION = new Version(5, 0, 0, true);
 
     protected Ui ui;
     protected Logic logic;
@@ -49,11 +49,11 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing JOBS ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(), config.getLoginInfoFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -143,7 +143,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -169,7 +169,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Description Book ] =============================");
+        logger.info("============================ [ Stopping JOBS ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

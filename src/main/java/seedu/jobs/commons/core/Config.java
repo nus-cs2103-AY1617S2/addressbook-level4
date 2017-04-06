@@ -11,12 +11,12 @@ public class Config {
     public static final String DEFAULT_CONFIG_FILE = "config.json";
 
     // Config values customizable through config file
-    private String appTitle = "Description App";
+    private String appTitle = "JOBS";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskBookFilePath = "data/addressbook.xml";
+    private String taskBookFilePath = "data/taskbook.xml";
     private String taskBookName = "MyTaskBook";
-
+    private String loginInfo = "loginInfo.json";
 
     public String getAppTitle() {
         return appTitle;
@@ -57,7 +57,14 @@ public class Config {
     public void setTaskBook(String taskBookName) {
         this.taskBookName = taskBookName;
     }
-
+    
+    public String getLoginInfoFilePath() {
+        return loginInfo;
+    }
+    
+    public void setLoginInfoFilePath(String loginInfo) {
+        this.loginInfo = loginInfo;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -89,7 +96,7 @@ public class Config {
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
         sb.append("\nLocal data file location : " + taskBookFilePath);
-        sb.append("\nAddressBook name : " + taskBookName);
+        sb.append("\nTaskBook name : " + taskBookName);
         return sb.toString();
     }
 

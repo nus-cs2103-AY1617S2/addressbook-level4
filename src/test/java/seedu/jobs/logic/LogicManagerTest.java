@@ -85,9 +85,10 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String tempTaskBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempPreferencesFile));
+        String tempLoginInfoFile = saveFolder.getRoot().getPath() + "TempLoginInfo.json";
+        logic = new LogicManager(model, new StorageManager(tempTaskBookFile, tempPreferencesFile, tempLoginInfoFile));
         EventsCenter.getInstance().registerHandler(this);
 
         latestTaskAddressBook = new TaskBook(model.getTaskBook()); // last saved assumed to be up to date

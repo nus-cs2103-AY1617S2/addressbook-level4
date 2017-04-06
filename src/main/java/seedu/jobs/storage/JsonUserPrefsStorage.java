@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.commons.util.JsonUtil;
+import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.UserPrefs;
 
 /**

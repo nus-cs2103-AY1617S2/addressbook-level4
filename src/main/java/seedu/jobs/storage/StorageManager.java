@@ -11,6 +11,7 @@ import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
+import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
 
@@ -22,16 +23,17 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private TaskBookStorage taskBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private LoginInfoStorage loginInfoStorage;
 
-
-    public StorageManager(TaskBookStorage taskBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskBookStorage taskBookStorage, UserPrefsStorage userPrefsStorage, LoginInfoStorage loginInfoStorage) {
         super();
         this.taskBookStorage = taskBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.loginInfoStorage = loginInfoStorage;
     }
 
-    public StorageManager(String taskBookFilePath, String userPrefsFilePath) {
-        this(new XmlTaskBookStorage(taskBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String taskBookFilePath, String userPrefsFilePath, String loginInfoFilePath) {
+        this(new XmlTaskBookStorage(taskBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new JsonLoginInfoStorage(loginInfoFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -87,5 +89,16 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+    
+ // ================ LoginInfo methods ==============================
 
+    @Override
+    public Optional<LoginInfo> readLoginInfo() throws DataConversionException, IOException {
+        return loginInfoStorage.readLoginInfo();
+    }
+
+    @Override
+    public void saveLoginInfo(LoginInfo loginInfo) throws IOException {
+        loginInfoStorage.saveLoginInfo(loginInfo);
+    }
 }

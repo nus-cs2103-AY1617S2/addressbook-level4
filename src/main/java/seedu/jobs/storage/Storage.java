@@ -6,13 +6,14 @@ import java.util.Optional;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
+import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.ReadOnlyTaskBook;
 import seedu.jobs.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends TaskBookStorage, UserPrefsStorage {
+public interface Storage extends TaskBookStorage, UserPrefsStorage, LoginInfoStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -35,4 +36,8 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskBookChangedEvent(TaskBookChangedEvent abce);
+
+    void saveLoginInfo(LoginInfo loginInfo) throws IOException;
+
+    Optional<LoginInfo> readLoginInfo() throws DataConversionException, IOException;
 }

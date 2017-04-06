@@ -97,6 +97,7 @@ public class JsonUtil {
      * @return The instance of T with the specified values in the JSON string
      */
     public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
+//        String testJson = "{ \"email\" : \"cs2103rocks@gmail.com\", \"password\" : \"abcdefgh123456\" }";
         return objectMapper.readValue(json, instanceClass);
     }
 
