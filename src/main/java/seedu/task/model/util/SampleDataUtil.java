@@ -15,16 +15,16 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new TaskName("Sleep"), new Deadline("07-Mar-2017"), new PriorityLevel("4"),
+                new Task(new TaskName("A Sleep"), new Deadline("07-Mar-2017"), new PriorityLevel("4"),
                     new Information("I don't want to sleep"),
                     new UniqueTagList("Home")),
-                new Task(new TaskName("Buy car"), new Deadline("27-May-2018"), new PriorityLevel("1"),
+                new Task(new TaskName("B Buy car"), new Deadline("27-May-2018"), new PriorityLevel("1"),
                     new Information("Audi"),
                     new UniqueTagList("Transport")),
-                new Task(new TaskName("Buy bus"), new Deadline("28-May-2018"), new PriorityLevel("1"),
+                new Task(new TaskName("C Buy bus"), new Deadline("28-May-2018"), new PriorityLevel("1"),
                     new Information("VOLVO"),
                     new UniqueTagList("Transport")),
-                new Task(new TaskName("Buy MRT"), new Deadline("29-May-2018"), new PriorityLevel("1"),
+                new Task(new TaskName("D Buy MRT"), new Deadline("29-May-2018"), new PriorityLevel("1"),
                     new Information("Become the government"),
                     new UniqueTagList("Transport")),
             };
