@@ -278,15 +278,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         NameQualifier(SearchParameters searchParameters) {
 
-            this.nameKeyWords = searchParameters.getNames();
-            this.priority = searchParameters.getPriority();
-            this.startDate = searchParameters.getStartDate();
-            this.dueDate = searchParameters.getDueDate();
-            this.tags = searchParameters.getTags();
-            this.startBefore = searchParameters.getStartBefore();
-            this.dueBefore = searchParameters.getdueBefore();
-            this.startAfter = searchParameters.getStartAfter();
-            this.dueAfter = searchParameters.getDueAfter();
+            nameKeyWords = searchParameters.getNames();
+            priority = searchParameters.getPriority();
+            startDate = searchParameters.getStartDate();
+            dueDate = searchParameters.getDueDate();
+            tags = searchParameters.getTags();
+            startBefore = searchParameters.getStartBefore();
+            dueBefore = searchParameters.getdueBefore();
+            startAfter = searchParameters.getStartAfter();
+            dueAfter = searchParameters.getDueAfter();
 
         }
 
@@ -347,11 +347,12 @@ public class ModelManager extends ComponentManager implements Model {
 
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
+            int dateLength = 10;
 
             boolean isStartEqual = (!startDate.isPresent()
                     || (startDate.get().toString().equals("") && taskStartDateExist)
-                    || (taskStartDateExist && taskStartDateString.substring(0, 10)
-                            .equals(startDate.get().toString().substring(0, 10))));
+                    || (taskStartDateExist && taskStartDateString.substring(0, dateLength)
+                            .equals(startDate.get().toString().substring(0, dateLength))));
 
             return isStartEqual;
         }
@@ -363,10 +364,11 @@ public class ModelManager extends ComponentManager implements Model {
 
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
+            int dateLength = 10;
 
             boolean isDueEqual = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
-                    || (taskDueDateExist
-                            && taskDueDateString.substring(0, 10).equals(dueDate.get().toString().substring(0, 10))));
+                    || (taskDueDateExist && taskDueDateString.substring(0, dateLength)
+                            .equals(dueDate.get().toString().substring(0, dateLength))));
 
             return isDueEqual;
         }
@@ -428,6 +430,8 @@ public class ModelManager extends ComponentManager implements Model {
          */
         private boolean comesBefore(String givenDate1, String givenDate2) {
 
+            // slice a given date format DD/MM/YYYY MM:SS into DD,MM,YYYY
+            // separate strings
             int givenDD = Integer.parseInt(givenDate1.substring(0, 2));
             int givenMM = Integer.parseInt(givenDate1.substring(3, 5));
             int givenYYYY = Integer.parseInt(givenDate1.substring(6, 10));
