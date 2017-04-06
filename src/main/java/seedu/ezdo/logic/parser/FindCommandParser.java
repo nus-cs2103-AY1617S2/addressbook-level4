@@ -20,6 +20,7 @@ import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
 
 //@@author A0141010L
@@ -108,6 +109,9 @@ public class FindCommandParser implements CommandParser {
         return optionalString;
     }
 
+    /**
+     * Removes "before" prefix from the start of a given String
+     */
     private Optional<String> parseFindBefore(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
@@ -116,6 +120,9 @@ public class FindCommandParser implements CommandParser {
         return optionalDate;
     }
 
+    /**
+     * Removes "after" prefix from the start of a given String
+     */
     private Optional<String> parseFindAfter(Optional<String> taskDate) {
         Optional<String> optionalDate;
         String taskDateString = taskDate.get();
@@ -125,35 +132,43 @@ public class FindCommandParser implements CommandParser {
     }
 
     private boolean isFindBefore(Optional<String> taskDate) {
+
         if (!taskDate.isPresent()) {
             return false;
-        } else {
-            String taskDateString = taskDate.get();
-            if (taskDateString.length() <= 6) {
-                return false;
-            } else {
-                String prefixToCompare1 = "before";
-                String prefixToCompare2 = "Before";
-                String byPrefix = taskDateString.substring(0, 6);
-                return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
-            }
         }
+
+        String taskDateString = taskDate.get();
+        int prefixLength = 6;
+
+        if (taskDateString.length() <= prefixLength) {
+            return false;
+        }
+
+        String prefixToCompare1 = "before";
+        String prefixToCompare2 = "Before";
+        String byPrefix = taskDateString.substring(0, prefixLength);
+        return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
+
     }
 
     private boolean isFindAfter(Optional<String> taskDate) {
+
         if (!taskDate.isPresent()) {
             return false;
-        } else {
-            String taskDateString = taskDate.get();
-            if (taskDateString.length() <= 5) {
-                return false;
-            } else {
-                String prefixToCompare1 = "after";
-                String prefixToCompare2 = "After";
-                String byPrefix = taskDateString.substring(0, 5);
-                return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
-            }
         }
+
+        String taskDateString = taskDate.get();
+        int prefixLength = 5;
+
+        if (taskDateString.length() <= prefixLength) {
+            return false;
+        }
+
+        String prefixToCompare1 = "after";
+        String prefixToCompare2 = "After";
+        String byPrefix = taskDateString.substring(0, prefixLength);
+        return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
+
     }
 
 }
