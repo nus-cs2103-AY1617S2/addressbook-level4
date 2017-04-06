@@ -44,35 +44,39 @@ public class DeleteTagCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         for (int index = 0; index < lastShownList.size(); index++) {
-            ReadOnlyTask taskToEdit = lastShownList.get(index);
-            boolean containsOldTag = false;
-            Set<Tag> newTagList = new HashSet<Tag>();
-            Set<Tag> tags = taskToEdit.getTags().toSet();
-            for (Tag tag : tags) {
-                if (tag.getTagName().equals(oldTag.getTagName())) {
-                    containsOldTag = true;
-                } else {
-                    newTagList.add(tag);
-                }
-            }
-
-            if (containsOldTag) {
-                try {
-                    Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
-                            taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
-                            taskToEdit.isManualToday());
-                    model.updateTask(index, newTask);
-                } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
-                } catch (IllegalValueException e) {
-                    // Should not happen
-                    throw new CommandException(e.getMessage());
-                }
-
-            }
+            removeTagFromTask(lastShownList, index);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, oldTag.getTagName()),
                 MESSAGE_SUCCESS_STATUS_BAR);
+    }
+
+    private void removeTagFromTask(List<ReadOnlyTask> lastShownList, int index) throws CommandException {
+        ReadOnlyTask taskToEdit = lastShownList.get(index);
+        boolean containsOldTag = false;
+        Set<Tag> newTagList = new HashSet<Tag>();
+        Set<Tag> tags = taskToEdit.getTags().toSet();
+        for (Tag tag : tags) {
+            if (tag.getTagName().equals(oldTag.getTagName())) {
+                containsOldTag = true;
+            } else {
+                newTagList.add(tag);
+            }
+        }
+
+        if (containsOldTag) {
+            try {
+                Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
+                        taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
+                        taskToEdit.isManualToday());
+                model.updateTask(index, newTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
+            } catch (IllegalValueException e) {
+                // Should not happen
+                throw new CommandException(e.getMessage());
+            }
+
+        }
     }
 }
