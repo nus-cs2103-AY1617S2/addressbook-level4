@@ -304,7 +304,7 @@ When undo command is called, it can obtain the latest command from History and i
 
 The alternate design, which was implemented, involves storing a backup file. This makes use of how every command that modifies data will invoke an automatic save. Before the data is saved, a backup is saved. Undo command now simply loads the backup into memory. Future commands can also support undo easily as they do not need to implement any new methods.
 
-The downside is the extra storage space used. To reduce the downside, the backup files are deleted everytime the program closes. The backup files thus functions as a temporary file. 
+The downside is the extra storage space used. To reduce the downside, the backup files are deleted everytime the program closes. The backup files thus functions as a temporary file.
 
 After much consideration and research into other products, we decided that Undo is limited to the last 10 commands. We find that for a task manager, we do not need to provide too many undos. Yes, for a text editing program like Microsoft Word, a high number of undo is needed. However, the same cannot be said for a task manager. Even Evernote, Google Keep and Google Calendar have limited undo capabilities.
 
@@ -314,12 +314,12 @@ A `History` class is used to support and maintain backup, undo and redo operatio
 * It is located in the common package along with other common classes.
 * It's main responsibility is to decide and provide the file path that commands should backup to and also the file path for undo and redo to load from.
 * 11 files are used to support 10 undos. A currentFileIndex is used to decide which file should be used. The index is modular 11 when it reaches the last file.
-* It also maintains the undo and redo count so user won't exceed the maximum number.   
+* It also maintains the undo and redo count so user won't exceed the maximum number.
 * History class uses the singleton pattern since there must only be one instance of it. It's important that the data is saved and loaded from the right file.
 
 #### Every command:
 1. Will raise a `TaskManagerChangedEvent` containing the TaskManager's data and a filePath indicating the file to backup into. The filePath should be left empty if a backup is not needed.
-2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc. 
+2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc.
 
 ##### Undo Command:
 When an undo command is issued, it's steps are as followed:
@@ -395,11 +395,11 @@ This section desrcibes the implementation of the power search function : findCom
 
 Because the extraction of strings to form possible dates depends depends on the implementation of Natural Language Processing, which is not perfect and often susceptible different interpretations, this FindCommand could give inaccurate search results to very complicated arguments. Improvements to achieve better Natural Language Processing are planned. Meanwhile, we welcome any feedback on incorrect behaviour of FindCommand.
 
-### 3.7 Implementation of UI - TilePlane and Colored done task 
+### 3.7 Implementation of UI - TilePlane and Colored done task
 
-Using list plane to list all task information allows lesser task to be shown at once as the UI has a limited space on the screen. So by implementing a tile plane it allows more task to be listed on the screen/UI that is visible to the user. By expanding the tile plane of the selected task will reveal more information on the task. The implementation of the scrolling of the task list also reduces the usage of the mouse. 
+Using list plane to list all task information allows lesser task to be shown at once as the UI has a limited space on the screen. So by implementing a tile plane it allows more task to be listed on the screen/UI that is visible to the user. By expanding the tile plane of the selected task will reveal more information on the task. The implementation of the scrolling of the task list also reduces the usage of the mouse.
 
-To allow the user to easily differentiate done and undone task, done task title are green in color and a tick will appear beside the title. 
+To allow the user to easily differentiate done and undone task, done task title are green in color and a tick will appear beside the title.
 
 ### 3.8 Google Calendar support
 
@@ -425,11 +425,11 @@ Users are able to post one or multiple task to their calendar. If a task is spec
 
 The SmartAdd command utilizes Google's quick add command to support some form of natural language processing when adding task. The user's query will be used to make a call to Google's quick add API to optain an Event object. This object will consist of the event's name, start, end and location details. We use this to create a new task.
 
-User is still able to add remark and tag using the prefix like in the normal add command. 
+User is still able to add remark and tag using the prefix like in the normal add command.
 
 The limitations of this command, other than requiring internet, is that all task created by this will require a start and end time. This is due to the fact that all event in a calendar have start and end time.
 
-After considering both the benefits and the limitations we still decided to provide smart add as we felt that the benefit outweights the limitations. This adds a great amount of flexibility to KIT as users are able to add a task wihout using any prefixes and this is also more friendly than the normal add command. 
+After considering both the benefits and the limitations we still decided to provide smart add as we felt that the benefit outweights the limitations. This adds a great amount of flexibility to KIT as users are able to add a task wihout using any prefixes and this is also more friendly than the normal add command.
 
 If the user does not have internet or wants to add a task without dates, he can still use the normal add command. The inclusion of this command does not affect the functionality of the add command or introduce any bugs. This is an additional nice-to-have feature that users can choose whether or not to use. Even if it is not used KIT still works perfectly fine.
 
@@ -659,7 +659,7 @@ Use case resumes from step 2.
 >  1a1. KIT waits for another valid command..
     1a2. User enters the correct command.
 
-  2a. KIT find no task with queried keyword 
+  2a. KIT find no task with queried keyword
 > 2a1. KIT show an message that says no tasks listed
 	2a2. KIT waits for another valid command..
 
@@ -679,11 +679,11 @@ Use case resumes from step 2.
   2a. KIT find no task with required tag
 > 2a1. KIT show an message that says no task with the required tag.
  	2a2. KIT waits for another valid command..
-    
+
 #### Use case: UC7 - Help Command for a particular command
 
 **Main success scenario**
-    
+
     1.User enters Help add (or any other valid command keyword)
     2.KIT displays the command usage of the add command.
 	Use case ends.
@@ -697,15 +697,15 @@ Use case resumes from step 2.
 2a. KIT does not recognize the queried command keyword..
 >  2a1. KIT displays the command summary in a new window
 
-#### Use case: UC8 - ThemeChange Command 
+#### Use case: UC8 - ThemeChange Command
 
 **Main success scenario**
 
     1.User enters changetheme DARK (or any other valid themes)
-    2.KIT informs user that the theme has been successfully changed to DARK. Please restart to view the changes. 
+    2.KIT informs user that the theme has been successfully changed to DARK. Please restart to view the changes.
     3.User restarts KIT and theme is changed.
     Use case ends.
-    
+
 **Extensions**
 1a. KIT detects an error in command.
 >  1a1. KIT waits for another valid command..
@@ -714,28 +714,28 @@ Use case resumes from step 2.
 2a. KIT does not recognize the given theme.
 >   2a1.KIT informs user that the required theme is not recognized.
     2a2. KIT waits for another valid command..
-    
-#### Use case: UC9 - import Google Calander command  
+
+#### Use case: UC9 - import Google Calander command
 
 ** Main success scernario
 
-    1.User enters gg to import task from google. 
-    2.KIT informs user that the google calander task has been successfully updated to local database. 
+    1.User enters gg to import task from google.
+    2.KIT informs user that the google calander task has been successfully updated to local database.
     3.list of new task is shown.
-    use case ends. 
+    use case ends.
 
 **Extensions**
-1a. KIT detects an error in command. 
+1a. KIT detects an error in command.
 >  1a1. KIT waits for another valid command.
-   1a2. User enters the correct command. 
+   1a2. User enters the correct command.
 
 
 1b. KIT does not have access to the internet.
 > 1b1. Return error message to User.
 
-1c. KIT does not have user's Google credential. 
+1c. KIT does not have user's Google credential.
 > 1c1. KIT waits for user to login to Google and authourise KIT to have access to Google Calander.
-> 1c2. Google successfuly grant KIT access. 
+> 1c2. Google successfuly grant KIT access.
 
 
 ## Appendix C : Non Functional Requirements
@@ -756,7 +756,7 @@ Use case resumes from step 2.
 
 ##### Duplicate Task
 
-> A task is considered duplicate if there is another task with the exact same name, start date, end date, location and remark. Tags are not considered when determining duplication. 
+> A task is considered duplicate if there is another task with the exact same name, start date, end date, location and remark. Tags are not considered when determining duplication.
 
 ##### Floating Task
 

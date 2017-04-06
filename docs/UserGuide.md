@@ -31,9 +31,9 @@ Welcome! We believe that like us, you have many tasks and just too little time t
 
 It's Keep It Tidy.
 
-Or KIT. 
+Or KIT.
 
-KIT is a desktop app that helps users manage their tasks and it is the one and only taskmanager you will ever need. With a simplistic design of UI and powerful functionalies embedded, KIT is capable of executing your instructions swiftly. On top of that, KIT is keyboard friendly, thereby saving you the trouble of moving the mouse and clicking. 
+KIT is a desktop app that helps users manage their tasks and it is the one and only taskmanager you will ever need. With a simplistic design of UI and powerful functionalies embedded, KIT is capable of executing your instructions swiftly. On top of that, KIT is keyboard friendly, thereby saving you the trouble of moving the mouse and clicking.
 
 Now, let's get you started!
 ## 2. Quick start
@@ -50,7 +50,7 @@ Now, let's get you started!
 ### Starting KIT
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/emptyUi.png" width="600">
- 
+
 5. (Optional) You can choose to login to your Google Calendar, click [here](#310-google-calendar) to follow the detailed instructions.
 
     After you have logged in, it looks something like this.
@@ -74,7 +74,7 @@ Now, let's get you started!
        * > <img src="images/deleteTaskAfter.png" width="600">
    * **`exit`** : exits the app
        *  > <img src="images/exitBefore.png" width="600">
-  
+
 8. Refer to the [Features](#features) section below for details of each command.<br>
 
 ## 3. Features
@@ -96,7 +96,7 @@ Format: `help [COMMANDNAME]`, `h [COMMANDNAME]`, `man [COMMANDNAME]`, `manual [C
 > * If COMMANDNAME is not entered, displays user guide in a new window.
 > * Tips: You can also bring up the help window by pressing F1.
 
-Example: 
+Example:
 
 * `man add`
 > <img src="images/manAdd.png" width="600">
@@ -179,7 +179,7 @@ Some tips for using the Smart Add command:
 
 <strong>Note: KIT will give the best interpretation for the given description, however this may not always be accurate, especially for ambiguous descriptions.</strong>
 
-For example, `sa Meeting at Wednesday Cafe`. 
+For example, `sa Meeting at Wednesday Cafe`.
 
 In this case, either Wednesday Cafe is the actual location and the date is not specified. Or, it could also be interpreted as meeting on wednesday at cafe.
 
@@ -193,7 +193,7 @@ Description: Shows a list of tasks in KIT depending on chosen criterion. <br>
 
 Format: `list [criterion]`, `ls [criterion]`, `l [criterion]`
 
-#### Available Criteria 
+#### Available Criteria
 
 `done` : display the list of all tasks that are done.
 `notdone` or `undone` : display the list of all tasks that are not done.
@@ -201,7 +201,7 @@ Format: `list [criterion]`, `ls [criterion]`, `l [criterion]`
 
 If no criterion is specified, all tasks will be shown.
 
-Examples: 
+Examples:
 * `ls`
 * `list done`
 * `l notdone`
@@ -209,7 +209,7 @@ Examples:
 
 ### 3.3.2	Listing of all task under a tag: `list tag`
 
-#### We shouldn't mix personal life with work, KIT understands that. 
+#### We shouldn't mix personal life with work, KIT understands that.
 
 If you want to see all tasks with a particular tag only, say `work`, you can use the `list tag` function.
 
@@ -219,7 +219,7 @@ Format: `list tag TAGNAME`, `ls tag TAGNAME`, `l tag TAGNAME`
 
 ### 3.4	Marking a task as done: `done`
 
-#### Congratulations on completing your first task! 
+#### Congratulations on completing your first task!
 Now that you have completed a task, you can mark it as done by using the `done` function.
 
 Description: Marks the task at the specified `INDEX` as "Done". <br>
@@ -235,7 +235,7 @@ Format: `done INDEX`, `d INDEX`
 >Tip : You can use the `list done` or `list` command to see the tasks you have marked as done. Those with green names and a tick are the done tasks.
 ### 3.5	Marking a task as undone: `undone`
 
-#### More follow ups for your task? Need to resume a completed task? 
+#### More follow ups for your task? Need to resume a completed task?
 
 You can easily mark it as "Not Done" again.
 
@@ -267,7 +267,7 @@ Examples:
 
 ### 3.7.1	Undo: `undo`
 
-#### Made a mistake? No worries. 
+#### Made a mistake? No worries.
 
 You can retract it by using the `undo` command.
 
@@ -279,7 +279,7 @@ Format: `undo`, `uhoh`
 
 ### 3.7.2	Redo: `redo`
 
-#### Along with undo comes redo. 
+#### Along with undo comes redo.
 
 Just in case you changed your mind, you can also retract your `undo` by using the `redo` command.
 
@@ -381,7 +381,7 @@ Format: `getgoogle`, `gg`
 
 #### Similarly, you can keep KIT synchronized with Google Calendar.
 
-With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar. 
+With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar.
 
 Description: Add the specified task to your Google Calendar. <br>
 
@@ -389,14 +389,14 @@ Format: `postgoogle [INDEX]`, `pg [INDEX]`
 
 > * If INDEX is specified and correct, adds the selected task to calendar.
 > * If INDEX is not specified, adds **all** displayed tasks to calendar.
-> * This will not add any duplicate tasks to your google calendar. 
+> * This will not add any duplicate tasks to your google calendar.
 > * You can also use this command to update a task you have posted to your calendar before.
 > * **Note**: Because of the task specifications (each task needs both the start date and end date) from Google Calendar, only tasks with start and end dates will be added to your google calendar.
 
 
 ### 3.11 Clearing all task: `clear`
 
-#### Need a clean slate to start over? 
+#### Need a clean slate to start over?
 Just use `clear`.
 
 Description: Clears all entries from KIT. <br>
@@ -463,7 +463,7 @@ Format: `changetheme [THEMENAME]`
 **A**: Yes. Your data is saved after every command, you can safely exit KIT when you are done.
 
 **Q**: Can I have two task with the same name?  <br>
-**A**: Sure, tasks with same names are allowed, as long as at least one of their fields is different. That being said, tasks with completely same details are not allowed. Completely same details refer to same name, location, start date, end date and remark. 
+**A**: Sure, tasks with same names are allowed, as long as at least one of their fields is different. That being said, tasks with completely same details are not allowed. Completely same details refer to same name, location, start date, end date and remark.
 
 **Q**: I accidentally created two exact same tasks, how do I remove just one of them?  <br>
 **A**: If you just added the task,meaning the most recent command is the add command, you can do so by typing undo. Otherwise, you can use [find](#391-finding-a-taskfind) or [list](#331-listing-of-task-list) to search for the duplicate tasks and [delete](#36-deleting-a-task-delete) one of them. The other task will remain in KIT. Instructions on these commands can be found in the respective section of the commands.
