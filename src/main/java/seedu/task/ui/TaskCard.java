@@ -51,7 +51,7 @@ public class TaskCard extends UiPart<Region> {
 
         plane.setExpanded(false);
         this.status = false;
-        name.setMaxWidth(1000);
+        name.setMaxWidth(700);
         name.setWrapText(true);
         name.setText(displayedIndex + ". " + task.getName().fullName);
         name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
