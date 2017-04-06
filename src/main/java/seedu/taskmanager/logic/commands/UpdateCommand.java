@@ -3,7 +3,9 @@ package seedu.taskmanager.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.DateTimeUtil;
@@ -137,18 +139,21 @@ public class UpdateCommand extends Command {
                 int clashedTaskIndex = model.isBlockedOutTime(updatedTask, filteredTaskListIndex);
                 if (clashedTaskIndex != -1) {
                     String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
-                    model.updateTask(filteredTaskListIndex, updatedTask);
+                    int updateIndex = model.updateTask(filteredTaskListIndex, updatedTask) + 1;
                     model.updateFilteredListToShowAll();
-                    return new CommandResult(clashFeedback + String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
+                    EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
+                    return new CommandResult(clashFeedback + String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate)
+                    + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
                 }
             }
-            model.updateTask(filteredTaskListIndex, updatedTask);
+            int updateIndex = model.updateTask(filteredTaskListIndex, updatedTask) + 1;
+            model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
+            return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate)
+                    + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
 
     /**

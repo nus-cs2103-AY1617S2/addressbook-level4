@@ -205,13 +205,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public int updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
         saveInstance();
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        taskManager.updateTask(taskManagerIndex, editedTask);
+        int updateIndex = taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
+        return updateIndex;
     }
 
     // @@author A0139520L

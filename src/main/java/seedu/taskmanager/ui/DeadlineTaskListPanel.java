@@ -71,6 +71,10 @@ public class DeadlineTaskListPanel extends UiPart<Region> {
         });
     }
 
+    public ListView<Pair<ReadOnlyTask,Integer>> getDeadlineTaskListView() {
+        return this.deadlineTaskListView;
+    }
+
     class TaskListViewCell extends ListCell<Pair<ReadOnlyTask, Integer>> {
 
         @Override
