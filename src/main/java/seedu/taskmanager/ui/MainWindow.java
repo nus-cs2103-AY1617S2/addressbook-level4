@@ -213,6 +213,12 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
+    
+    // @@author A0114523U
+    public TaskListPanel getOverdueTaskListPanel() {
+    	return this.overdueTaskListPanel;
+    }
+    // @@author
 
     void loadTaskPage(ReadOnlyTask task) {
         browserPanel.loadTaskPage(task);

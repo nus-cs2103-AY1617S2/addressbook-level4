@@ -1,7 +1,6 @@
 package seedu.taskmanager.ui;
 
 import java.util.logging.Logger;
-// import java.util.Date;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,31 +12,24 @@ import javafx.scene.layout.Region;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
-// import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
-/**
- * Panel containing the list of tasks.
- */
-public class TaskListPanel extends UiPart<Region> {
-    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML1 = "TaskListPanel.fxml";
-//    private static final String FXML2 = "OverdueTaskListPanel.fxml";
+public class OverdueTaskListPanel extends UiPart<Region> {
+	private final Logger logger = LogsCenter.getLogger(OverdueTaskListPanel.class);
+    private static final String FXML = "OverdueTaskListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> taskListView;
+    private ListView<ReadOnlyTask> OverdueTaskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
-        super(FXML1);
-        setConnections(taskList);
-        addToPlaceholder(taskListPlaceholder);
+    public OverdueTaskListPanel(AnchorPane overdueTaskListPlaceholder, ObservableList<ReadOnlyTask> overdueTaskList) {
+        super(FXML);
+        setConnections(overdueTaskList);
+        addToPlaceholder(overdueTaskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(taskList);
-//        Date today = new Date();
-//        model.updateFilteredTaskList(today);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
+    private void setConnections(ObservableList<ReadOnlyTask> overdueTaskList) {
+        OverdueTaskListView.setItems(overdueTaskList);
+        OverdueTaskListView.setCellFactory(listView -> new OverdueTaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -48,7 +40,7 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
+        OverdueTaskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
@@ -59,12 +51,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
+            OverdueTaskListView.scrollTo(index);
+            OverdueTaskListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyTask> {
+    class OverdueTaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
@@ -78,5 +70,4 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

@@ -44,10 +44,7 @@
                      <children>
                         <Label text="Task Today" />
                      </children></AnchorPane>
-                  <AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="207.0" prefWidth="320.0">
-                     <children>
-                        <Label text="Overdue Task" />
-                     </children></AnchorPane>
+                  <AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="207.0" prefWidth="320.0" />
                </children>
             </VBox>
             <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
