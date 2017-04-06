@@ -4,11 +4,11 @@ import project.taskcrusher.commons.events.BaseEvent;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 
 /** Indicates the AddressBook in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class UserInboxChangedEvent extends BaseEvent {
 
     public final ReadOnlyUserInbox data;
 
-    public AddressBookChangedEvent(ReadOnlyUserInbox data) {
+    public UserInboxChangedEvent(ReadOnlyUserInbox data) {
         this.data = data;
     }
 

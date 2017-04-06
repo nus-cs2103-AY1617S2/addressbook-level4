@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.events.storage.DataSavingExceptionEvent;
 import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
@@ -72,12 +72,12 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleUserInboxChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new UserInbox()));
+        storage.handleUserInboxChangedEvent(new UserInboxChangedEvent(new UserInbox()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 

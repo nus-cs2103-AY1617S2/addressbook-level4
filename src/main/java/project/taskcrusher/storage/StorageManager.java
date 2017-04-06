@@ -8,7 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
-import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.events.storage.DataSavingExceptionEvent;
 import project.taskcrusher.commons.exceptions.DataConversionException;
 import project.taskcrusher.model.ReadOnlyUserInbox;
@@ -83,7 +83,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleUserInboxChangedEvent(UserInboxChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveUserInbox(event.data);

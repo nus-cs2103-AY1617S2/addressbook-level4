@@ -8,8 +8,8 @@ import javafx.collections.transformation.FilteredList;
 import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
-import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
 import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.model.event.Event;
@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateUserInboxChanged() {
-        raise(new AddressBookChangedEvent(userInbox));
+        raise(new UserInboxChangedEvent(userInbox));
     }
 
     //@@author A0127737X

@@ -24,7 +24,7 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 import com.google.common.eventbus.Subscribe;
 
 import project.taskcrusher.commons.core.EventsCenter;
-import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.events.ui.JumpToListRequestEvent;
 import project.taskcrusher.commons.events.ui.ShowHelpRequestEvent;
 import project.taskcrusher.logic.commands.AddCommand;
@@ -73,7 +73,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(UserInboxChangedEvent abce) {
         latestSavedUserInbox = new UserInbox(abce.data);
     }
 

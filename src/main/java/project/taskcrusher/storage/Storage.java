@@ -3,7 +3,7 @@ package project.taskcrusher.storage;
 import java.io.IOException;
 import java.util.Optional;
 
-import project.taskcrusher.commons.events.model.AddressBookChangedEvent;
+import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.events.storage.DataSavingExceptionEvent;
 import project.taskcrusher.commons.exceptions.DataConversionException;
 import project.taskcrusher.model.ReadOnlyUserInbox;
@@ -35,5 +35,5 @@ public interface Storage extends UserInboxStorage, UserPrefsStorage {
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleUserInboxChangedEvent(UserInboxChangedEvent abce);
 }

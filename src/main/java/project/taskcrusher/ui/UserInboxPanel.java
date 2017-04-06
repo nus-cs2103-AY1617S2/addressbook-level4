@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
-import project.taskcrusher.commons.events.ui.PersonPanelSelectionChangedEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
@@ -51,23 +50,12 @@ public class UserInboxPanel extends UiPart<Region> {
         eventListView.setItems(eventList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         eventListView.setCellFactory(listView -> new EventListViewCell());
-        setEventHandlerForSelectionChangeEvent();
     }
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
         placeHolderPane.getChildren().add(getRoot());
-    }
-
-    private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        //logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
-                    }
-                });
     }
 
     public void scrollTo(int index) {
