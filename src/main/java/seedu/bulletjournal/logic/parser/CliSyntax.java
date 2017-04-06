@@ -24,4 +24,8 @@ public class CliSyntax {
     /* Patterns definition for show command */
     public static final Pattern KEYWORDS_SHOW_FORMAT =
             Pattern.compile("(done|undone)", Pattern.CASE_INSENSITIVE);
+    
+    /* Patterns definition for finish command args */
+    public static final Pattern FINISH_ARGS_FORMAT =
+            Pattern.compile("\\d");
 }
