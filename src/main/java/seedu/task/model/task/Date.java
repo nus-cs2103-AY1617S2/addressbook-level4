@@ -22,14 +22,14 @@ public class Date {
                                                         + " MM/DD/YY or MM-DD-YY";
     private final java.util.Date value;
     private static PrettyTimeParser pretty = new PrettyTimeParser();
-    private String extractedFrom;
+    private String extractedFrom = "";
 
-    // @@author A0140063X
+    //@@author A0140063X
     public Date() {
         this.value = null;
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
     /**
      * Validates given date.
      *
@@ -46,6 +46,8 @@ public class Date {
             }
 
             List<java.util.Date> dates = pretty.parse(date);
+
+            //ignore seconds
             Calendar cal = Calendar.getInstance();
             cal.setTime(dates.get(0));
             cal.set(Calendar.SECOND, 0);
@@ -59,13 +61,18 @@ public class Date {
         }
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * Creates a Date object from given eventDateTime. Used for Google Calendar.
+     * @param eventDateTime
+     */
     public Date(EventDateTime eventDateTime) {
         if (eventDateTime == null) {
             this.value = null;
             return;
         }
 
+        //event sometimes does not have time
         if (eventDateTime.getDateTime() != null) {
             this.value = new java.util.Date(eventDateTime.getDateTime().getValue());
         } else if (eventDateTime.getDate() != null) {
@@ -75,7 +82,17 @@ public class Date {
         }
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    public java.util.Date getDateValue() {
+        return this.value;
+    }
+
+    //@@author A0140063X
+    public boolean isNull() {
+        return this.value == null;
+    }
+
+    //@@author A0140063X
     /**
      * Returns true if a given string is a valid date.
      */
@@ -84,17 +101,7 @@ public class Date {
         return !dates.isEmpty();
     }
 
-    // @@author A0140063X
-    public java.util.Date getDateValue() {
-        return this.value;
-    }
-
-    // @@author A0140063X
-    public boolean isNull() {
-        return this.value == null;
-    }
-
-    // @@author A0140063X
+    //@@author A0140063X
     /**
      * Compares two dates and returns true if date1 is before date2
      *
@@ -105,7 +112,7 @@ public class Date {
         return date1.value.before(date2.value);
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
     @Override
     public String toString() {
         if (value == null) {
@@ -117,7 +124,7 @@ public class Date {
         return displayFormat.format(value) + ", " + pretty.format(value);
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
     @Override
     public boolean equals(Object other) {
         Date otherDate = ((Date) other);
@@ -134,7 +141,7 @@ public class Date {
                                                                      // check
     }
 
-    // @@author
+    //@@author
     @SuppressWarnings("deprecation")
     public boolean equalsIgnoreTime(Date otherDate) {
         if (otherDate.value == null && this.value == null) {
@@ -164,7 +171,7 @@ public class Date {
 
     }
 
-    // @@author
+    //@@author
     @Override
     public int hashCode() {
         return value.hashCode();
