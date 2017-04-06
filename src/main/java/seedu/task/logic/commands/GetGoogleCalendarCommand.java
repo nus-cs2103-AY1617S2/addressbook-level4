@@ -56,7 +56,7 @@ public class GetGoogleCalendarCommand extends Command {
             return new CommandResult(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
 
-        updateModel(tasks);
+        addMultipleTaskToModel(tasks);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -72,7 +72,7 @@ public class GetGoogleCalendarCommand extends Command {
         return events.getItems();
     }
 
-    private void updateModel(ArrayList<Task> tasks) {
+    private void addMultipleTaskToModel(ArrayList<Task> tasks) {
         assert model != null;
         model.addMultipleTasks(tasks);
         model.sortTaskList();
