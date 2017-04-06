@@ -71,18 +71,6 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredTaskListToShowAll();
 
-    /**
-     * Updates the filter of the filtered task list to filter by the given
-     * keywords
-     */
-    void updateFilteredTaskList(Set<String> keywords);
-
-    void updateFilteredTaskList(Timeslot userInterestedTimeSlot);
-
-    void updateFilteredTaskListToShowCompleteTasks();
-
-    void updateFilteredTaskListToShowAllActiveTasks();
-
     // ========== for events =================================================
 
     /** deletes the given event */
@@ -120,23 +108,7 @@ public interface Model {
     /** Updates the filter of the filtered event list to show all events */
     void updateFilteredEventListToShowAll();
 
-    /**
-     * Updates the filter of the filtered event list to filter by the given
-     * keywords
-     */
-    void updateFilteredEventList(Set<String> keywords);
-
-    /**
-     * Updates the filter of the filtered event list to filter by the given
-     * timeslot
-     */
-    void updateFilteredEventList(Timeslot userInterestedTimeSlot);
-
     void markEvent(int filteredListIndex, int markFlag);
-
-    void updateFilteredEventListToShowCompleteEvents();
-
-    void updateFilteredEventListToShowAllActiveEvents();
 
     /**
      * TODO this javadoc
