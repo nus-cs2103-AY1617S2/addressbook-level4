@@ -9,7 +9,7 @@ import seedu.task.model.task.ReadOnlyTask;
  * This class controls the scroll bar of any listview.
  */
 public class Scroll {
-    private static ScrollBar scrollBar;
+    private ScrollBar scrollBar;
 
     public Scroll() {
         scrollBar = null;
@@ -73,7 +73,4 @@ public class Scroll {
         return scrollBar.getValue();
     }
 
-    public double getMinValue() {
-        return scrollBar.getMin();
-    }
 }

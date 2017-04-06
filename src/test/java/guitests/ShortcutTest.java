@@ -16,91 +16,53 @@ public class ShortcutTest extends TaskManagerGuiTest {
         commandBox.clickOnTextField();
         mainMenu.useCtrlAltA();
         assertCommandBoxInput("add ");
-/*
-        resultDisplay.clickOnTextArea();
-        commandBox.clear();
-        mainMenu.useCtrlAltA();
-        assertCommandBoxInput("add ");
-
-        taskListPanel.clickOnListView();
-        commandBox.clear();
-        mainMenu.useCtrlAltA();
-        assertCommandBoxInput("add ");
-
-        browserPanel.clickOnWebView();
-        commandBox.clear();
-        mainMenu.useCtrlAltA();
-        assertCommandBoxInput("add ");
-
-        //use menu button
-        commandBox.clear();
-        mainMenu.quickAddUsingMenu();
-        assertCommandBoxInput("add ");
-        */
     }
 
     @Test
     public void quickUndoTest() {
-        //use accelerator
-        /*
-        commandBox.clickOnTextField();
-        mainMenu.useCtrlAltZ();
-        assertCommandBoxInput("undo");
-        */
-
         resultDisplay.clickOnTextArea();
         commandBox.clear();
         mainMenu.useCtrlAltZ();
         assertCommandBoxInput("undo");
-
-        /*
-        taskListPanel.clickOnListView();
-        commandBox.clear();
-        mainMenu.useCtrlAltZ();
-        assertCommandBoxInput("undo");
-
-        browserPanel.clickOnWebView();
-        commandBox.clear();
-        mainMenu.useCtrlAltZ();
-        assertCommandBoxInput("undo");
-
-        //use menu button
-        commandBox.clear();
-        mainMenu.quickUndoUsingMenu();
-        assertCommandBoxInput("undo");
-        */
     }
 
     @Test
     public void quickDoneTest() {
-        /*
-        //use accelerator
-        commandBox.clickOnTextField();
-        mainMenu.useCtrlAltD();
-        assertCommandBoxInput("done ");
-
-        resultDisplay.clickOnTextArea();
-        commandBox.clear();
-        mainMenu.useCtrlAltD();
-        assertCommandBoxInput("done ");
-        */
-
         taskListPanel.clickOnListView();
         commandBox.clear();
         mainMenu.useCtrlAltD();
         assertCommandBoxInput("done ");
+    }
 
-        /*
+    @Test
+    public void quickEditTest() {
         browserPanel.clickOnWebView();
         commandBox.clear();
-        mainMenu.useCtrlAltD();
-        assertCommandBoxInput("done ");
+        mainMenu.useCtrlAltE();
+        assertCommandBoxInput("edit ");
+    }
 
-        //use menu button
+    @Test
+    public void quickSelectTest() {
+        commandBox.clickOnTextField();
+        mainMenu.useCtrlAltS();
+        assertCommandBoxInput("select ");
+    }
+
+    @Test
+    public void quickSaveTest() {
+        resultDisplay.clickOnTextArea();
         commandBox.clear();
-        mainMenu.quickDoneUsingMenu();
-        assertCommandBoxInput("done ");
-        */
+        mainMenu.useCtrlS();
+        assertCommandBoxInput("save");
+    }
+
+    @Test
+    public void quickLoadTest() {
+        taskListPanel.clickOnListView();
+        commandBox.clear();
+        mainMenu.useCtrlAltL();
+        assertCommandBoxInput("load ");
     }
 
     @Test
@@ -151,6 +113,16 @@ public class ShortcutTest extends TaskManagerGuiTest {
         */
         assertTrue(commandBox.getCommandInput() != null);
         assertTrue(commandBox.getCommandInput().contains(value));
+        commandBox.clear();
+    }
+
+    private void assertCommandBoxInputNot(String value) {
+        /*
+        assertFalse(commandBox.getCommandInput().equals(value));
+        System.out.println(commandBox.getCommandInput().equals(value));
+        */
+        assertTrue(commandBox.getCommandInput() != null);
+        assertTrue(!commandBox.getCommandInput().contains(value));
         commandBox.clear();
     }
 
