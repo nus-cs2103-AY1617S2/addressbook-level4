@@ -2,7 +2,6 @@ package seedu.watodo.logic.commands;
 
 import java.util.Stack;
 
-import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -149,8 +148,8 @@ public class MarkCommand extends Command {
     }
 
     private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
-        this.indexForUndoMark = currIndex;
-      
+        //this.indexForUndoMark = currIndex;
+
         //this.unmarkedTaskForUndoMark = new Task(taskToMark);
         this.taskToMarkList.push(new Task(taskToMark));
         this.markedTaskList.push(markedTask);
