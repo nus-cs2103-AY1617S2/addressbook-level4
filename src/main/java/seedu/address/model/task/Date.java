@@ -6,6 +6,7 @@ import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateUtil;
 
 /**
  * Represents a Date in the YTomorrow.
@@ -29,23 +30,9 @@ public abstract class Date {
         if (date == null) {
             this.value = BAD_DATE;
         } else {
-            this.value = parse(date);
+            this.value = DateUtil.parse(date).toString();
         }   
     }
-
-    //@@author A0163848R
-    private String parse(String rawDate) throws IllegalValueException {
-        try {
-            Parser parser = new Parser();
-            List<DateGroup> groups = parser.parse(rawDate);
-            String dateText = groups.get(0).getDates().get(0).toString();
-            return dateText;
-        } catch (RuntimeException e) {
-            throw new IllegalValueException("Date not valid!");
-        }
-    }
-    //@@author
-    
 
     @Override
     public String toString() {

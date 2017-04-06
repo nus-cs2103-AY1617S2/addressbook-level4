@@ -36,13 +36,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         
         if (person.getEndDate() == null) {
-            end.setText("");
+            end.setVisible(false);
         } else {
             end.setText("End date: " + person.getEndDate().value);
         }
 
         if (person.getStartDate() == null) {
-            start.setText("");
+            start.setVisible(false);
         } else {
             start.setText("Start Date: " + person.getStartDate().value);
         }

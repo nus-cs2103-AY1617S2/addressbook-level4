@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -61,4 +62,9 @@ public class CollectionUtil {
         }
         return null;
     }
+    
+    public static String getRandom(String[] strs, Random r) {
+        return strs[r.nextInt(strs.length)];
+    }
+    
 }

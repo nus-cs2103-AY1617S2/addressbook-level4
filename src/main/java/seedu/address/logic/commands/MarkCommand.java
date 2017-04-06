@@ -71,7 +71,7 @@ public class MarkCommand extends Command {
         UniqueTagList updatedTags =
                 personToEdit
                 .getTags()
-                .except(UniqueTagList.constructUniqueTagList(
+                .except(UniqueTagList.build(
                                 Tag.TAG_COMPLETE,
                                 Tag.TAG_INCOMPLETE));
 
