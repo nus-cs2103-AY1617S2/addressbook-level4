@@ -15,6 +15,9 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
 
+    private static final String NUMBERING_DOT = ". ";
+    private static final int INDEX_ONE = 1;
+
     private static final int INDEX_ZERO = 0;
     public static final String COMMAND_WORD = "mark";
     public static final String COMMAND_WORD_SHORT = "m";
@@ -26,7 +29,7 @@ public class MarkDoneCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done: %1$s";
+    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done:\n%1$s";
     public static final String DONE = "Done";
 
     public final ArrayList<Integer> filteredTaskListIndices;
@@ -56,7 +59,7 @@ public class MarkDoneCommand extends Command {
         model.markDone(filteredTaskListIndices, tasksToMarkDone);
 
         scrollToTask(tasksToMarkDone);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, tasksToMarkDone));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, getDesiredTasksToMarkDoneFormat()));
     }
 
     /**
@@ -70,4 +73,17 @@ public class MarkDoneCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
     }
 
+    /**
+     * Returns a formatted {@code ArrayList} tasksToMarkDone,
+     * so that each ReadOnlyTask in the ArrayList is numbered
+     */
+    private String getDesiredTasksToMarkDoneFormat() {
+        int i = INDEX_ONE;
+        StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            builder.append(i + NUMBERING_DOT).append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
 }
