@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -149,15 +150,29 @@ public class Task implements ReadOnlyPerson {
     }
     
     //@@author A0164032U
-    public java.util.Date getDateTime(){
-        Parser parser = new Parser();
-        List<DateGroup> groups = parser.parse(date.value);
-        return groups.get(0).getDates().get(0);
+    public java.util.Date getStartTime() {
+        if (start != null) {
+            try {
+                return DateUtil.parse(start.value);
+            } catch (IllegalValueException e) {
+            }
+        }
+        return new java.util.Date(Long.MIN_VALUE);
     }
     
-    //@@authro A0164032U
+    public java.util.Date getEndTime() {
+        if (end != null) {
+            try {
+                return DateUtil.parse(end.value);
+            } catch (IllegalValueException e) {
+            }
+        }
+        return new java.util.Date(Long.MAX_VALUE);
+    }
+    
+    //@@author A0164032U
     public int compareTo(Task o){
-        return getDateTime().compareTo(o.getDateTime());
+        return getStartTime().compareTo(o.getStartTime());
     }
 
     //@@author A0163848R

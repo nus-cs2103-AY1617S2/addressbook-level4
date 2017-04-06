@@ -27,8 +27,7 @@ public class SampleDataUtil {
     
     Random r;
     
-    public static Iterable<Task> getSamplePersons() {
-        final int n = SAMPLE_SIZE;
+    public static Iterable<Task> getSampleTasks(int n) {
         List<Task> generated = new ArrayList<Task>(n);
         for (int i = 0; i < n; i++) {
             Task t = generateRandomTask();
@@ -68,7 +67,7 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             YTomorrow sampleAB = new YTomorrow();
-            for (Task samplePerson : getSamplePersons()) {
+            for (Task samplePerson : getSampleTasks(SAMPLE_SIZE)) {
                 sampleAB.addPerson(samplePerson);
             }
             return sampleAB;
