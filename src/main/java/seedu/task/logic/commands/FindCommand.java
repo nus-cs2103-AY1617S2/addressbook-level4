@@ -25,16 +25,10 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
-    //@@author A0135762A
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(keywords);
-        if (model.getFilteredTaskList().size() == 0) {
-            return new CommandResult("No results matched your search.");
-        } else {
-            return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
-    //@@author
 
 }
