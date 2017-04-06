@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.taskmanager.logic.commands.AddCommand;
+import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 //@@author A0142418L
@@ -45,7 +47,22 @@ public class DeadlineTaskCard extends UiPart<Region> {
     }
 
     private void initCategory(ReadOnlyTask task) {
-        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
-    }
+        if (!task.getCategories().asObservableList().isEmpty()) {
+            for (int index = 0; task.getCategories().asObservableList().size() != index; index++) {
+                String category = task.getCategories().asObservableList().get(index).categoryName;
+                Label label = new Label(category);
+                if (category.equals("High")) {
+                    label.setStyle("-fx-background-color: red");
+                }
+                if (category.equals("Medium")) {
+                    label.setStyle("-fx-background-color: orange");
+                }
+                if (category.equals("Low")) {
+                    label.setStyle("-fx-background-color: lightblue");
+                }
 
+                categories.getChildren().add(label);
+            }
+        }
+    }
 }
