@@ -313,9 +313,12 @@ public class Task implements ReadOnlyTask {
      * (StartDate is before @code date and EndDate is after @code date)
      */
     public boolean isWithinDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if (this.startDateTime.isPresent() && this.endDateTime.isPresent()) {
-            if ((this.startDateTime.get().getDate().before(date) || this.startDateTime.get().getDate().equals(date)) &&
-                    this.endDateTime.get().getDate().after(date) || this.startDateTime.get().getDate().equals(date)) {
+            if ((this.startDateTime.get().getDate().before(date) ||
+                    sdf.format(this.startDateTime.get().getDate()).equals(sdf.format(date))) &&
+                    this.endDateTime.get().getDate().after(date) ||
+                    sdf.format(this.endDateTime.get().getDate()).equals(sdf.format(date))) {
                 return true;
             } else {
                 return false;
