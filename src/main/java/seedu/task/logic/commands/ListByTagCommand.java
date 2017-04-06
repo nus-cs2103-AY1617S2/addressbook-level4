@@ -8,9 +8,9 @@ public class ListByTagCommand extends Command {
     public static final String COMMAND_WORD_3 = "ltag";
     public static final String COMMAND_WORD_4 = "lt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ":\n" + "Finds all persons whose tags contain "
-            + "the specified tag (case-sensitive) and displays them as a list with index numbers.\n\t"
-            + "Parameters: Tag \n\t" + "Example: " + COMMAND_WORD_1 + " friend";
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ":" + " Finds all persons whose tags contain "
+            + "the specified tag (case-sensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: Tag \n" + "Example: " + COMMAND_WORD_1 + " friend";
 
     private final String tag;
 

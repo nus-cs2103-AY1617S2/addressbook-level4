@@ -18,11 +18,12 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Quickly adds a task to KIT without prefixes.
+ * Adds a task to KIT without prefixes for date and location.
  */
-public class QuickAddCommand extends Command {
+public class SmartAddCommand extends Command {
 
-    public static final String COMMAND_WORD_1 = "qa";
+    public static final String COMMAND_WORD_1 = "smartadd";
+    public static final String COMMAND_WORD_2 = "sa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Quickly adds a task without any prefix. "
             + "Parameters: DESCRIPTION [r/REMARK] [t/TAG]...\n"
@@ -41,7 +42,7 @@ public class QuickAddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws IOException if connection to google failed
      */
-    public QuickAddCommand(String name, String remark, Set<String> tags)
+    public SmartAddCommand(String name, String remark, Set<String> tags)
             throws IllegalValueException, IOException {
         final Set<Tag> tagSet = new HashSet<>();
 
@@ -50,14 +51,14 @@ public class QuickAddCommand extends Command {
         }
 
         try {
-            this.toAdd = GoogleQuickAdd(name, remark, tagSet);
+            this.toAdd = googleQuickAdd(name, remark, tagSet);
         } catch (IOException ioe) {
             throw new IOException(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
     }
 
     // @@author A0140063X
-    private Task GoogleQuickAdd(String name, String remark, Set<Tag> tagSet) throws IOException, IllegalValueException {
+    private Task googleQuickAdd(String name, String remark, Set<Tag> tagSet) throws IOException, IllegalValueException {
         com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
         Event createdEvent = service.events().quickAdd(GoogleCalendar.CALENDAR_ID, name).execute();
         service.events().delete(GoogleCalendar.CALENDAR_ID, createdEvent.getId()).execute();

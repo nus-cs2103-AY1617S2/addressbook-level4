@@ -73,7 +73,7 @@ public class MainApp extends Application {
         initEventsCenter();
         initHistory();
 
-        logic.execute("list " + ListCommand.NOT_DONE);
+        logic.execute("list " + ListCommand.NOT_DONE_PARAM_1);
     }
 
     // @@author A0140063X

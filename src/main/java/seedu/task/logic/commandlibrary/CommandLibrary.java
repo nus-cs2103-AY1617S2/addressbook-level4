@@ -27,10 +27,10 @@ import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PostGoogleCalendarCommand;
-import seedu.task.logic.commands.QuickAddCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SaveCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.SmartAddCommand;
 import seedu.task.logic.commands.ThemeChangeCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.UndoneCommand;
@@ -53,10 +53,10 @@ import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
-import seedu.task.logic.parser.QuickAddCommandParser;
 import seedu.task.logic.parser.RedoCommandParser;
 import seedu.task.logic.parser.SaveCommandParser;
 import seedu.task.logic.parser.SelectCommandParser;
+import seedu.task.logic.parser.SmartAddCommandParser;
 import seedu.task.logic.parser.ThemeChangeCommandParser;
 import seedu.task.logic.parser.UndoCommandParser;
 import seedu.task.logic.parser.UndoneCommandParser;
@@ -181,9 +181,6 @@ public class CommandLibrary {
                 new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1,
                         new PostGoogleCalendarCommandParser(), PostGoogleCalendarCommand.MESSAGE_USAGE));
 
-        commandTable.put(QuickAddCommand.COMMAND_WORD_1, new CommandInstance(QuickAddCommand.COMMAND_WORD_1,
-            new QuickAddCommandParser() , QuickAddCommand.MESSAGE_USAGE));
-
         commandTable.put(RedoCommand.COMMAND_WORD_1, new CommandInstance(RedoCommand.COMMAND_WORD_1,
                 new RedoCommandParser(), RedoCommand.MESSAGE_USAGE));
 
@@ -194,6 +191,11 @@ public class CommandLibrary {
                 new SelectCommandParser(), SelectCommand.MESSAGE_USAGE));
         commandTable.put(SelectCommand.COMMAND_WORD_2, new CommandInstance(SelectCommand.COMMAND_WORD_1,
                 new SelectCommandParser(), SelectCommand.MESSAGE_USAGE));
+
+        commandTable.put(SmartAddCommand.COMMAND_WORD_1, new CommandInstance(SmartAddCommand.COMMAND_WORD_1,
+            new SmartAddCommandParser() , SmartAddCommand.MESSAGE_USAGE));
+        commandTable.put(SmartAddCommand.COMMAND_WORD_2, new CommandInstance(SmartAddCommand.COMMAND_WORD_1,
+                new SmartAddCommandParser() , SmartAddCommand.MESSAGE_USAGE));
 
         commandTable.put(ThemeChangeCommand.COMMAND_WORD_1, new CommandInstance(ThemeChangeCommand.COMMAND_WORD_1,
                 new ThemeChangeCommandParser(), ThemeChangeCommand.MESSAGE_USAGE));

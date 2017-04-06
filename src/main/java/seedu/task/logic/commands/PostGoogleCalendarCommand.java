@@ -31,8 +31,9 @@ public class PostGoogleCalendarCommand extends Command {
     public static final String MESSAGE_MISSING_DATE = "Both start and end dates are required"
             + " to post to Google Calendar";
     public static final String MESSAGE_ALREADY_POSTED = "Task already posted to Google Calendar";
-    public static final String MESSAGE_USAGE = COMMAND_WORD_2
-            + " 1 : Posts the first event to your Google Calendar.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD_2 + ": Posts events to your Google Calendar.\n"
+            + "Post the task identified by INDEX, if no index specified then posts all task in current listing.\n"
+            + "Parameters: [INDEX]\n"
             + "Example: " + COMMAND_WORD_2;
 
     private final int filteredTaskListIndex;
