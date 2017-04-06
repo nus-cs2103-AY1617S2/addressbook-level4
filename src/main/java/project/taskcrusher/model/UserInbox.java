@@ -95,9 +95,8 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     //@@author A0127737X
-    public void updateOverdueStatus() {
-        this.events.updateOverdueStatus();
-        this.tasks.updateOverdueStatus();
+    public boolean updateOverdueStatus() {
+        return this.events.updateOverdueStatus() || this.tasks.updateOverdueStatus();
     }
 
     public void markTask(int index, int markFlag) {

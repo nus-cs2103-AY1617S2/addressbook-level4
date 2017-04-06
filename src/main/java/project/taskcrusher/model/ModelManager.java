@@ -115,8 +115,12 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ListsToShowUpdatedEvent(isEventListToShowEmpty, isTaskListToShowEmpty));
     }
 
+    @Override
     public synchronized void updateOverdueStatus() {
-        userInbox.updateOverdueStatus();
+        boolean isAnyUpdate = userInbox.updateOverdueStatus();
+        if (isAnyUpdate) {
+            indicateUserInboxChanged();
+        }
     }
 
     //=========== Task operations =========================================================================

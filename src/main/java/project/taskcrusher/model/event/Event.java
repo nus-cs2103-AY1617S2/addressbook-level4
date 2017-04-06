@@ -81,13 +81,15 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         return true;
     }
 
-    public void updateOverdueStatus() {
-        Date now = new Date();
+    public boolean updateOverdueStatus(Date now) {
+        boolean isAnyUpdate = false;
         for (Timeslot timeslot: getTimeslots()) {
             if (now.after(timeslot.end)) {
                 markOverdue();
+                isAnyUpdate = true;
             }
         }
+        return isAnyUpdate;
     }
 
     public Date getEarliestBookedTime() {
@@ -130,6 +132,12 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         return this.isOverdue;
     }
 
+    @Override
+    public void markComplete() {
+        super.markComplete();
+        isOverdue = false;
+    }
+
     public void resetData(ReadOnlyEvent replacement) {
         assert replacement != null;
 
@@ -144,6 +152,9 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         if (replacement.isOverdue()) {
             this.markOverdue();
         }
+
+        this.isOverdue = false;
+        updateOverdueStatus(new Date());
     }
 
     @Override

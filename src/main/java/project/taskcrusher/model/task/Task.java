@@ -53,11 +53,13 @@ public class Task extends UserToDo implements ReadOnlyTask {
                 source.getTags(), source.isComplete(), source.isOverdue());
     }
 
-    public void updateOverdueStatus() {
-        Date now = new Date();
+    public boolean updateOverdueStatus(Date now) {
+        boolean isAnyUpdate = false;
         if (hasDeadline() && now.after(getDeadline().getDate().get())) {
             markOverdue();
+            isAnyUpdate = true;
         }
+        return isAnyUpdate;
     }
 
     @Override
@@ -103,6 +105,8 @@ public class Task extends UserToDo implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
+        this.isOverdue = false;
+        updateOverdueStatus(new Date());
     }
 
     @Override

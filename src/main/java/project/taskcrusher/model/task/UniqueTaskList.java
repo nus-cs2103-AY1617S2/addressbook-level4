@@ -1,5 +1,6 @@
 package project.taskcrusher.model.task;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,12 +37,16 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      *  Checks and marks any active tasks whose deadline is past the current time as overdue.
      */
-    public void updateOverdueStatus() {
+    public boolean updateOverdueStatus() {
+        boolean isAnyUpdate = false;
+        Date now = new Date();
         for (Task task: internalList) {
-            if (!task.isComplete()) {
-                task.updateOverdueStatus();
+            if (!task.isComplete() && !task.isOverdue()) {
+                task.updateOverdueStatus(now);
+                isAnyUpdate = isAnyUpdate || task.updateOverdueStatus(now);
             }
         }
+        return isAnyUpdate;
     }
 
     /**

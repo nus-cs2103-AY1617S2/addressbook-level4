@@ -1,5 +1,6 @@
 package project.taskcrusher.model.event;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,12 +26,15 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      *  Checks and marks any active events that are out-dated as overdue
      */
-    public void updateOverdueStatus() {
+    public boolean updateOverdueStatus() {
+        boolean isAnyUpdate = false;
+        Date now = new Date();
         for (Event event: internalList) {
-            if (!event.isComplete()) {
-                event.updateOverdueStatus();
+            if (!event.isComplete() && !event.isOverdue()) {
+                isAnyUpdate = isAnyUpdate || event.updateOverdueStatus(now);
             }
         }
+        return isAnyUpdate;
     }
 
     public void markEvent(int targetIndex, int markFlag) {
