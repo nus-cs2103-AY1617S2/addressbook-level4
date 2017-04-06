@@ -16,7 +16,7 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
  * Overwrite the given file path if a file with same name exists. Old XML file is not deleted.
  * Path matching is case sensitive.
  */
-public class MoveCommand extends Command {
+public class SaveAsCommand extends Command {
     public static final String COMMAND_WORD = "move";
     public static final String ALTERNATIVE_COMMAND_WORD = "movefile";
 
@@ -31,7 +31,7 @@ public class MoveCommand extends Command {
 
     private final String newPath;
 
-    public MoveCommand(String path) {
+    public SaveAsCommand(String path) {
         this.newPath = path;
     }
 
