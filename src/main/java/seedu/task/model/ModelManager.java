@@ -87,14 +87,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0144813J
     private void initModel(ReadOnlyTaskManager taskManager) {
-        this.taskManagerStates = new ArrayList<TaskManager>();
-        this.taskManagerStates.add(new TaskManager(taskManager));
-        this.currentTaskManagerStateIndex = 0;
-        this.currentTaskManager = new TaskManager(this.taskManagerStates.get(this.currentTaskManagerStateIndex));
+        this.currentTaskManager = new TaskManager();
+        initTaskManager(taskManager);
         setCurrentPredicateToShowAllTasks();
         initializeTaskLists();
         updateTaskListPredicate();
         setCurrentComparator(ListCommand.COMPARATOR_NAME_PRIORITY);
+    }
+
+    private void initTaskManager(ReadOnlyTaskManager taskManager) {
+        this.currentTaskManager.resetData(taskManager);
+        this.taskManagerStates = new ArrayList<TaskManager>();
+        this.taskManagerStates.add(new TaskManager(taskManager));
+        this.currentTaskManagerStateIndex = 0;
     }
 
     private void initializeTaskLists() {
@@ -174,14 +179,19 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0144813J
     @Override
     public void indicateTaskManagerFilePathChanged(String filePath) throws DataConversionException, IOException {
-        raise(new StorageFilePathChangedEvent(filePath));
         TaskManagerStorage storage = new XmlTaskManagerStorage(filePath);
         Optional<ReadOnlyTaskManager> tempTaskManager = storage.readTaskManager();
+        // Raises StorageFilePathChangedEvent if no Exception is thrown.
+        raise(new StorageFilePathChangedEvent(filePath));
         if (tempTaskManager.isPresent()) {
-            this.currentTaskManager.resetData(tempTaskManager.get());
-            initModel(this.currentTaskManager);
+            initTaskManager(tempTaskManager.get());
+            setCurrentPredicateToShowAllTasks();
+            updateTaskListPredicate();
+            setCurrentComparator(ListCommand.COMPARATOR_NAME_PRIORITY);
+        } else {
+            // Creates new storage file if not exists.
+            raise(new TaskManagerChangedEvent(this.currentTaskManager));
         }
-        raise(new TaskManagerChangedEvent(this.currentTaskManager));
     }
 
     @Override
