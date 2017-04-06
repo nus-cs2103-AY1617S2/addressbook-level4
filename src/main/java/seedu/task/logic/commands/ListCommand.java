@@ -9,68 +9,45 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD_1 = "list";
     public static final String COMMAND_WORD_2 = "ls";
     public static final String COMMAND_WORD_3 = "l";
-    public static final String DONE = "done";
-
-    public static final String MESSAGE_LISTBYDONE_SUCCESS = "Listed all done tasks";
-    public static final String MESSAGE_USAGE2 = DONE + ": Lists all done tasks in KIT.\n"
-            + "Example: " + DONE;
-
-    public static final String NOT_DONE = "notdone";
-
-    public static final String MESSAGE_LISTBYNOTDONE_SUCCESS = "Listed all undone tasks";
-    public static final String MESSAGE_USAGE3 = NOT_DONE + ": Lists all undone tasks in KIT.\n"
-            + "Example: " + COMMAND_WORD_1;
-
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists all tasks in KIT.\n"
-            + "Example: " + NOT_DONE;
 
-    public static final String MESSAGE_FAIL = "Wrong command format,"
+    public static final String MESSAGE_FAIL = "Wrong command format, "
             + "list format should be list, list done or list undone";
+    public static final String DONE_PARAM = "done";
+    public static final String NOT_DONE_PARAM_1 = "notdone";
+    public static final String NOT_DONE_PARAM_2 = "undone";
+    public static final String FLOAT_PARAM_1 = "floating";
+    public static final String FLOAT_PARAM_2 = "float";
 
-    private final int value;
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Lists tasks in KIT according to selected option.\n"
+            + "Possible options are done, notdone, floating. If no option specified, all task will be listed.\n"
+            + "Parameters: [OPTION]\n"
+            + "Example: " + COMMAND_WORD_1;
+
+    private final String option;
 
     public ListCommand(String args) {
-        // TODO Auto-generated constructor stub
-        if (args.trim().isEmpty()) {
-            this.value = 1;
-        }
-        else if (args.trim().equals("done")) {
-            this.value = 2;
-        }
-        else if (args.trim().equals("undone") || args.trim().equals("notdone")) {
-            this.value = 3;
-        }
-        else if (args.trim().equals("floating") || args.trim().equals("float")) {
-            this.value = 4;
-        }
-        else {
-            this.value = 0;
-        }
-
+        this.option = args.trim();
     }
 
     @Override
     public CommandResult execute() {
         model.sortTaskList();
-        if (value == 1) {
+        if (option.isEmpty()) {
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
-        }
-        else if (value == 2) {
+        } else if (option.equals(DONE_PARAM)) {
             model.updateFilteredTaskList(true);
             return new CommandResult(getMessageForDoneTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
-        else if (value == 3) {
+        } else if (option.equals(NOT_DONE_PARAM_1) || option.equals(NOT_DONE_PARAM_2)) {
             model.updateFilteredTaskList(false);
             return new CommandResult(getMessageForUnDoneTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (value == 4) {
+        } else if (option.equals(FLOAT_PARAM_1) || option.equals(FLOAT_PARAM_2)) {
             model.updateFilteredTaskListFloat();
             return new CommandResult(getMessageForFloatingTaskListShownSummary(model.getFilteredTaskList().size()));
-        }
-        else {
-            return  new CommandResult(MESSAGE_FAIL);
+        } else {
+            return new CommandResult(MESSAGE_FAIL);
         }
     }
 

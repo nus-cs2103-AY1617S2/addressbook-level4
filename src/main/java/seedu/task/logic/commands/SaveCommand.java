@@ -12,7 +12,7 @@ public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Saves the task manager in a different directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Saves the task manager in a different directory.\n"
             + "Parameters: PATHNAME \n"
             + "Example: " + COMMAND_WORD_1
             + " ";

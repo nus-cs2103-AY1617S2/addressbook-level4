@@ -25,7 +25,7 @@ import seedu.task.model.task.Remark;
  */
 public class AddCommandParser extends CommandParser {
 
-    private String START_DATE, END_DATE, REMARK, LOCATION;
+    private String startDate, endDate, remark, location;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -37,17 +37,17 @@ public class AddCommandParser extends CommandParser {
                 PREFIX_LOCATION, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
-        START_DATE = tokenizedArguments.containsKey(PREFIX_START_DATE) ? argsTokenizer.getValue(PREFIX_START_DATE).get()
+        startDate = tokenizedArguments.containsKey(PREFIX_START_DATE) ? argsTokenizer.getValue(PREFIX_START_DATE).get()
                 : Date.DEFAULT_DATE;
-        END_DATE = tokenizedArguments.containsKey(PREFIX_END_DATE) ? argsTokenizer.getValue(PREFIX_END_DATE).get()
+        endDate = tokenizedArguments.containsKey(PREFIX_END_DATE) ? argsTokenizer.getValue(PREFIX_END_DATE).get()
                 : Date.DEFAULT_DATE;
-        REMARK = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
+        remark = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
                 : Remark.DEFAULT_REMARK;
-        LOCATION = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
+        location = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
                 : Location.DEFAULT_LOCATION;
         try {
-            return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), START_DATE, END_DATE,
-                    REMARK.replace("\\", ""), LOCATION.replace("\\", ""),
+            return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), startDate, endDate,
+                    remark.replace("\\", ""), location.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

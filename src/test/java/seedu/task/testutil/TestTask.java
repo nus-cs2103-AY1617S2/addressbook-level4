@@ -1,6 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.Location;
@@ -35,7 +36,7 @@ public class TestTask implements ReadOnlyTask {
      */
     public TestTask(TestTask taskToCopy) throws IllegalValueException {
 
-        if (!checkDates(taskToCopy.getStartDate(), taskToCopy.getEndDate())) {
+        if (!isValidDates(taskToCopy.getStartDate(), taskToCopy.getEndDate())) {
             throw new IllegalValueException(Task.MESSAGE_TASK_CONSTRAINTS);
         }
         this.name = taskToCopy.getName();
@@ -43,10 +44,36 @@ public class TestTask implements ReadOnlyTask {
         this.endDate = taskToCopy.getEndDate();
         this.remark = taskToCopy.getRemark();
         this.location = taskToCopy.getLocation();
+        this.eventId = taskToCopy.getEventId();
         this.isDone = false;
         this.tags = taskToCopy.getTags();
     }
 
+    //author A0140063X-reused
+    /**
+     * Name field must be present and not null.
+     * @throws IllegalValueException
+     */
+    public TestTask(Name name, Date startDate, Date endDate, Remark remark,
+        Location location, UniqueTagList tags, boolean isDone, String eventId) throws IllegalValueException {
+        assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
+
+        if (!isValidDates(startDate, endDate)) {
+            throw new IllegalValueException(Task.MESSAGE_TASK_CONSTRAINTS);
+        }
+
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.remark = remark;
+        this.location = location;
+        this.isDone = isDone;
+        this.eventId = eventId;
+        this.isDone = false;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+    }
+
+    //author
     /**
      *
      * @param startDate
@@ -54,7 +81,7 @@ public class TestTask implements ReadOnlyTask {
      * @return true if one of two dates is null. if both not null, only returns true if startDate is strictly before
      *         endDate
      */
-    private boolean checkDates(Date startDate, Date endDate) {
+    private boolean isValidDates(Date startDate, Date endDate) {
         return (startDate.isNull() || endDate.isNull()) ? true
                 : startDate.getDateValue().before(endDate.getDateValue());
     }

@@ -21,7 +21,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpWindowHandle openHelpWindowUsingMenu() {
-        clickOn("Help", "Help");
+        clickOn("Help", "F1");
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
@@ -41,15 +41,15 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public void quickAddUsingMenu() {
-        clickOn("Shortcut", "Ctrl+Alt+A");
+        clickOn("Shortcut", "Quick Add");
     }
 
     public void quickUndoUsingMenu() {
-        clickOn("Shortcut", "Ctrl+Alt+Z");
+        clickOn("Shortcut", "Quick Undo");
     }
 
     public void quickDoneUsingMenu() {
-        clickOn("Shortcut", "Ctrl+Alt+D");
+        clickOn("Shortcut", "Quick Done");
     }
 
     private void useF1Accelerator() {
