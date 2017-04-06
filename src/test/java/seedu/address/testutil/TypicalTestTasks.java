@@ -62,13 +62,14 @@ public class TypicalTestTasks {
         }
     }
 
-    //@@author
     public static void loadTaskListWithSampleData(TaskList taskList) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 taskList.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
-                assert false : "not possible";
+                assert false : "the taskList should not already contain any of the typical tasks.";
+            } catch (IllegalValueException e) {
+                assert false : "Copying a valid task should always result in a valid task.";
             }
         }
     }
@@ -77,6 +78,7 @@ public class TypicalTestTasks {
         return new TestTask[]{amuseFriend, bet, count, dog, elephant, flipTable, goondu};
     }
 
+    //@@author
     public TaskList getTypicalTaskList() {
         TaskList taskList = new TaskList();
         loadTaskListWithSampleData(taskList);

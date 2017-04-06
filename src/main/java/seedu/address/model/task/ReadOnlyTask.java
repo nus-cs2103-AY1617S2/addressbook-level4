@@ -90,25 +90,24 @@ public interface ReadOnlyTask {
         // TODO don't include milliseconds in toString output
         builder.append("Deadline: ");
         builder.append(getDeadline().isPresent() ? getDeadline().get().toString() : "none");
-        builder.append("\n");
+        builder.append(System.lineSeparator());
     }
 
     default void buildStartEndDateTimeString(final StringBuilder builder) {
         // TODO don't include milliseconds in toString output
         if (getStartEndDateTime().isPresent()) {
-            builder.append(" ");
             builder.append(getStartEndDateTime().get().toString());
         } else {
             builder.append("Start Date: none,");
             builder.append(" End Date: none ");
         }
-        builder.append("\n");
+        builder.append(System.lineSeparator());
     }
 
     default void buildTagsString(final StringBuilder builder) {
         builder.append("Tags: ");
         getTags().forEach(builder::append);
-        builder.append("\n");
+        builder.append(System.lineSeparator());
     }
 
     //@@author A0135998H

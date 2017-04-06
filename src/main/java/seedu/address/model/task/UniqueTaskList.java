@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
@@ -85,7 +86,11 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final ReadOnlyTask task : tasks) {
-            replacement.add(new Task(task));
+            try {
+                replacement.add(new Task(task));
+            } catch (IllegalValueException e) {
+                assert false : "Copying a valid task should always result in a valid task";
+            }
         }
         setTasks(replacement);
     }

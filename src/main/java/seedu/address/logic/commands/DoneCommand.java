@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -46,10 +47,12 @@ public class DoneCommand extends Command {
         }
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
 
-        Task editedTask = new Task(taskToEdit.getName(),
-                taskToEdit.getDeadline(),
-                taskToEdit.getStartEndDateTime(),
-                taskToEdit.getTags());
+        Task editedTask;
+        try {
+            editedTask = new Task(taskToEdit);
+        } catch (IllegalValueException e) {
+            throw new AssertionError("Copying a valid task should always result in a valid task");
+        }
         /* switch status of task */
         editedTask.setDone(!(taskToEdit.isDone()));
 

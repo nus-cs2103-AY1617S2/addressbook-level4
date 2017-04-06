@@ -184,7 +184,11 @@ public class AddCommandParserTest {
         @Override
         public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
                 throws UniqueTaskList.DuplicateTaskException {
-            AddCommandParserTest.actualTask = new Task(editedTask);
+            try {
+                AddCommandParserTest.actualTask = new Task(editedTask);
+            } catch (IllegalValueException e) {
+                throw new AssertionError("Copying a valid task should always result in a valid task");
+            }
             super.updateTask(filteredTaskListIndex, editedTask);
         }
     }

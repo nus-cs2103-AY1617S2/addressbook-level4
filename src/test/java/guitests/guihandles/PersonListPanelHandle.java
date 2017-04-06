@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
@@ -147,7 +148,11 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
+        try {
+            return getPersonCardHandle(new Task(getListView().getItems().get(index)));
+        } catch (IllegalValueException e) {
+            throw new AssertionError("Copying a valid task should always result in a valid task.");
+        }
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyTask person) {

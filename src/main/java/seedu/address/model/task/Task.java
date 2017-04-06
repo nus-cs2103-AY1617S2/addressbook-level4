@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -12,22 +13,36 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
+    //@@author A0140023E
+    public static final String MESSAGE_TASK_CONSTRAINTS =
+            "Task cannot have both deadline and start and end date/time";
+
+    //@@author
     private Name name;
 
     private UniqueTagList tags;
 
+    //@@author A0140023E
     private Optional<StartEndDateTime> startEndDateTime;
 
     private Optional<Deadline> deadline;
 
+    //@@author A0135998H
     private boolean done;
 
+    //@@author A0140023E
     /**
      * Every field must not be null except for the {@code Optional} fields.
+     * @throws IllegalValueException if the Task to be constructed has both Deadline and StartEndDateTime
      */
     public Task(Name name, Optional<Deadline> deadline, Optional<StartEndDateTime> startEndDateTime,
-            UniqueTagList tags) {
+            UniqueTagList tags) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, deadline, startEndDateTime, tags);
+
+        if (deadline.isPresent() && startEndDateTime.isPresent()) {
+            throw new IllegalValueException(MESSAGE_TASK_CONSTRAINTS);
+        }
+
         this.name = name;
         this.deadline = deadline;
         this.startEndDateTime = startEndDateTime;
@@ -37,12 +52,14 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Creates a copy of the given ReadOnlyTask.
+     * @throws IllegalValueException if the ReadOnlyTask to be copied has both Deadline and StartEndDateTime
      */
-    public Task(ReadOnlyTask source) {
+    public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getDeadline(), source.getStartEndDateTime(), source.getTags());
         done = source.isDone();
     }
 
+    //@@author
     public void setName(Name name) {
         assert name != null;
         this.name = name;
