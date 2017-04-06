@@ -30,7 +30,6 @@ public class MultiViewPanel extends UiPart<Region> {
 	protected Model model;
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String DONE_TASK_IDENTIFIER = "Yes";
 	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
 
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
