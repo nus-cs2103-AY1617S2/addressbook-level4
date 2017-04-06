@@ -23,9 +23,11 @@
     -fx-opacity: 1;
 }
 
+/*Name of list (Completed/overdue)*/
 .text-field {
+    -fx-font-weight: bold;
     -fx-font-size: 12pt;
-    -fx-font-family: "GelPenUpright"; /*Name of list (Completed/overdue)*/
+    -fx-font-family: "GelPenUpright";
 }
 
 .tab-pane {
@@ -102,7 +104,8 @@
     -fx-text-fill: #010504;
 }
 
-.cell_small_label { /*Task deadline, info and priority*/
+ /*Task deadline, info and priority*/
+.cell_small_label {
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
 }
@@ -273,17 +276,17 @@
     -fx-padding: 8 1 8 1;
 }
 
+/*@@author A0141928B*/
+/*Individual task card*/
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-color: #999999; /*no priority level */
+    -fx-border-width: 0 0 0 15;
 }
 
-/*@@author A0141928B*/
 /*Command box*/
 #commandTextField {
     -fx-font-family: "Code New Roman";
-    
 }
 /*@@author*/
 
