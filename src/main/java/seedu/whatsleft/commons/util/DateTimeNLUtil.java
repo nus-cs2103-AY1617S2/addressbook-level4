@@ -32,7 +32,8 @@ public class DateTimeNLUtil {
     }
 
     enum AbsDay {
-        mon, tue, wed, thu, fri, sat, sun
+        mon, tue, wed, thu, fri, sat, sun, monday, tuesday, wednesday, thursday, friday, saturday,
+        sunday, tues, weds, thurs
     }
 
     /**
@@ -51,6 +52,16 @@ public class DateTimeNLUtil {
         absdaymap.put(AbsDay.fri, "FRIDAY");
         absdaymap.put(AbsDay.sat, "SATURDAY");
         absdaymap.put(AbsDay.sun, "SUNDAY");
+        absdaymap.put(AbsDay.monday, "MONDAY");
+        absdaymap.put(AbsDay.tuesday, "TUESDAY");
+        absdaymap.put(AbsDay.wednesday, "WEDNESDAY");
+        absdaymap.put(AbsDay.thursday, "THURSDAY");
+        absdaymap.put(AbsDay.friday, "FRIDAY");
+        absdaymap.put(AbsDay.saturday, "SATURDAY");
+        absdaymap.put(AbsDay.sunday, "SUNDAY");
+        absdaymap.put(AbsDay.tues, "TUESDAY");
+        absdaymap.put(AbsDay.weds, "WEDNESDAY");
+        absdaymap.put(AbsDay.thurs, "THURSDAY");
     }
 
     /**
