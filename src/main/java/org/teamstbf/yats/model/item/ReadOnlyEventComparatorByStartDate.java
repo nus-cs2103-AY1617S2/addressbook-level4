@@ -10,5 +10,5 @@ public class ReadOnlyEventComparatorByStartDate implements Comparator<ReadOnlyEv
 	public int compare(ReadOnlyEvent o1, ReadOnlyEvent o2) {
 		return o1.getStartTime().getDate().compareTo(o2.getStartTime().getDate());
 	}
-	
+
 }
