@@ -16,7 +16,7 @@ import seedu.bulletjournal.storage.XmlTodoListStorage;
  */
 public class ChangeDirectoryCommand extends Command {
 
-    public static final String COMMAND_WORD = "cd";
+    public static final String COMMAND_WORD = "change";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the directory for the tasklist."
             + "Parameters: FILE_PATH\n" + "Example: " + COMMAND_WORD + " D:\t.xml";

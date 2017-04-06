@@ -61,30 +61,6 @@ Examples:
 * `add Pick up laundry`
 * `add Do CS2103 V0.0 t/urgent`
 
-### 2.2.1 Adding a floating task: `addf`
-
-Adds a floating task to the todolist of BulletJournal<br>
-Format: `addf TASK... s/undone`
-
-> Tasks can have any number of tags (including 0)
-
-Examples:
-
-* `addf Pick up laundry s/undone`
-* `addf Do CS2103 V0.0 t/urgent s/undone`
-
-### 2.2.2 Adding a deadline task: `addd`
-
-Adds a deadline task to the todolist of BulletJournal<br>
-Format: `addd TASK... d/210317`
-
-> Tasks can have any number of tags (including 0)
-
-Examples:
-
-* `addd Pick up laundry d/210317 s/undone`
-* `addd Do CS2103 V0.0  d/210317 s/undone t/urgent`
-
 ### 2.3. Listing all tasks : `list`
 
 Shows a list of all tasks in the Task List.<br>
@@ -223,12 +199,6 @@ There is no need to save manually.
 
 * **Add**  `add TASK [t/TAG]...` <br>
   e.g. `add Pick up laundry t/chores`
-
-* **Addf**  `addf TASK [t/TAG]...` <br>
-  e.g. `add Pick up laundry s/undone t/chores`
-
-* **Addd**  `addd TASK [t/TAG]...` <br>
-  e.g. `add Pick up laundry s/undone d/210317 t/chores`
 
 * **Clear** : `clear`
 
