@@ -85,6 +85,11 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }
 ```
 ###### \java\seedu\watodo\logic\commands\UnmarkCommand.java
@@ -108,11 +113,14 @@ public class UnmarkCommand extends Command {
 
     private int[] filteredTaskListIndices;
 
-    private Task undoUnmark;
-    private int undoUnmarkInt;
+    private Stack< Task > taskToUnmarkList;
+    private Stack< Task > unmarkedTaskList;
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
+
+        taskToUnmarkList = new Stack< Task >();
+        unmarkedTaskList = new Stack< Task >();
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
@@ -136,12 +144,13 @@ public class UnmarkCommand extends Command {
             }
 
             ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoUnmark = new Task(taskToUnmark);
+            this.taskToUnmarkList.push(new Task(taskToUnmark));
 
             try {
                 Task unmarkedTask = createUnmarkedTask(taskToUnmark);
+                unmarkedTaskList.push(unmarkedTask);
                 model.updateTask(filteredTaskListIndices[i], unmarkedTask);
-                this.undoUnmarkInt = filteredTaskListIndices[i];
+
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -185,6 +194,10 @@ public class ViewFileCommand extends Command {
         return initialisedConfig;
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }
 ```
 ###### \java\seedu\watodo\logic\parser\DeleteCommandParser.java
