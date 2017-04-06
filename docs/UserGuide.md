@@ -62,7 +62,7 @@ Example:
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* `Press `<kbd>Ctrl</kbd>` + `<kbd>A</kbd>`` <br>
+* You press <kbd>Ctrl</kbd> + <kbd>A</kbd> on the keyboard. <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
@@ -85,7 +85,7 @@ Examples:
 ### 3.3. Adding a task: `add`
 
 For when you have a task you need to remember.<br>
-Adds a task to the todo list<br>
+Adds a task to the todo list.<br>
 Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
@@ -111,7 +111,7 @@ Examples:
 ### 3.4. Viewing tasks
 
 For when you need to see your tasks.<br>
-View all tasks in the todo list<br>
+View all tasks in the todo list.<br>
 Format: `list`
 > * A list of tasks will always be displayed.
 > * When starting the program, the list will show all tasks which are currently not completed.
