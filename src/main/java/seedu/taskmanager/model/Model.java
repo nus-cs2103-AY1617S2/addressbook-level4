@@ -98,4 +98,6 @@ public interface Model {
 
     int isBlockedOutTime(Task task) throws DuplicateTaskException;
 
+    int isBlockedOutTime(Task t, int UpdateTaskIndex) throws DuplicateTaskException;
+
 }

@@ -199,37 +199,48 @@ public class Task implements ReadOnlyTask {
     public boolean isWithinStartEndDuration(ReadOnlyTask t) {
 
         if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
-            if (this.getStartDate().equals(t.getEndDate())) {
-                if ((this.getStartTime().laterThan(t.getStartTime()) && t.getEndTime().laterThan(this.getStartTime()))
-                        || (this.getEndTime().laterThan(t.getStartTime())
-                                && t.getEndTime().laterThan(this.getEndTime()))) {
-                    return true;
+            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                    t.getEndDate().value) == 2)) {
+                if ((this.getStartTime().laterThanOrEqual(t.getEndTime()))
+                        || (t.getStartTime().laterThanOrEqual(this.getEndTime()))) {
+
+                    return false;
                 }
-            } else if (this.getStartDate().equals(t.getEndDate())) {
-                if (t.getEndTime().laterThan(this.getStartTime())) {
-                    return true;
-                }
-            } else if (this.getEndDate().equals(t.getStartDate())) {
-                if (this.getEndTime().laterThan(t.getStartTime())) {
-                    return true;
-                }
+                return true;
+            } else {
+                return true;
+            }
+        } else if ((this.getEndDate().value).equals(t.getStartDate().value)) {
+            if (t.getStartTime().laterThanOrEqual(this.getEndTime())) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if ((this.getStartDate().value).equals(t.getEndDate().value)) {
+            if (this.getStartTime().laterThanOrEqual(t.getEndTime())) {
+                return false;
             } else {
                 return true;
             }
         }
 
-        else {
-            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
-                    t.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
-                            t.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
-                            this.getEndDate().value) == 1)
-                    || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
-                            this.getEndDate().value) == 1)) {
-                return true;
-            }
+        else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                        t.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
+                        this.getEndDate().value) == 1)
+                || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
+                        this.getEndDate().value) == 1)) {
+            return true;
+        } else if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 2) && t.getEndTime().laterThanOrEqual(this.getStartTime())) {
+            return true;
+        } else if ((DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                t.getEndDate().value) == 2) && this.getEndTime().laterThanOrEqual(t.getStartTime())) {
+            return true;
         }
+
         return false;
     }
 }
