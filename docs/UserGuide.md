@@ -63,27 +63,27 @@ Examples:
 > Tasks can have any number of tags (including 0)
 
 [//]: # "@@author A0141872E"
-### 2.3. Listing all tasks based on given parameters: `list`
+### 2.3. Listing all tasks based on given parameters: `list` `l`
 
 List all the existing tasks in TaskIt.<br>
-Format: `list all`
+Format: `l/list all`
 
 List only the undone tasks in TaskIt.<br>
-Format: `list undone`
+Format: `l/list undone`
 
 List only the completed tasks in TaskIt.<br>
-Format: `list done`
+Format: `l/list done`
 
 List only the overdued tasks in TaskIt.<br>
-Format: `list overdue`
+Format: `l/list overdue`
 
 List all the tasks dued today in TaskIt.<br>
-Format: `list today`
+Format: `l/list today`
 
-### 2.4. Editing an existing task : `edit`
+### 2.4. Editing an existing task : `edit` `e`
 
 Edits an existing task in TaskIt.<br>
-Format: `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
+Format: `e/edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -95,28 +95,22 @@ Format: `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>`
 
 Examples:
 
-* `edit 2 title finish SWE HW`<br>
+* `e/edit 2 title finish SWE HW`<br>
   Edit the second task title to finish SWE HW.
 
-* `edit 1 start this Friday 3 pm`<br>
-  Edit the first task start time to this Friday 3pm.
+* `e/edit 1 start this Friday 3 pm end 4 pm`<br>
+  Edit the first task start time to this Friday 3pm and end time to this Friday 4pm.
 
-* `edit 5 end April 5th at 4 pm`<br>
-  Edit the fifth task end time to April 5th at 4pm.
+* `e/edit 2 title attend meeting start Apr 7 at 2pm end 4pm priority high`<br>
+  Edit the second task title to attend meeting, start time to Apr 7th 2pm, end time to 4pm and prioirty to high.
 
-* `edit 5 end none`<br>
-  Edit the fifth task to have no end time.
-
-* `edit 2 priority high`<br>
-  Edit the second task prioirty to high.
-
-* `edit 1 tag null`<br>
+* `e/edit 1 tag null`<br>
   Remove all the tags of first task.
 
-### 2.5. Marks a task as done or undone: `mark`
+### 2.5. Marks a task as done or undone: `mark` `m`
 
 Mark an existing task as done or undone based on a given valid index.<br>
-Format: `mark <INDEX> <undone|done>`
+Format: `m/mark <INDEX> <undone|done>`
 
 > Marks the task at the specified `INDEX`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
@@ -125,10 +119,10 @@ Format: `mark <INDEX> <undone|done>`
 Examples:
 
 * `list all`<br>
-  `mark 2 done`<br>
+  `m/mark 2 done`<br>
   Marks the 2nd task in the task manager as done.
 * `find do HW` <br>
-  `mark 1 undone`<br>
+  `m/mark 1 undone`<br>
   Marks the 1st task in the results of the `find` command as undone.
 
 ### 2.6. Searching all tasks based on keywords or date: `find`
@@ -233,7 +227,7 @@ Example:
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Edit**  `edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
+* **Edit**  `e/edit <INDEX>  <[title]|[start]|[end]|[priority]|[tag]> <NEW>` <br>
   e.g. `edit 1 title Movie`
   e.g. `edit 2 start this Friday 3 pm`
   e.g. `edit 2 end none`
@@ -244,14 +238,15 @@ Example:
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find do HW SWE`
 
-* **List** : `list` <br>
+* **List** : `l/list` <br>
   e.g. `list all`
-  e.g. `list done`
-  e.g. `list undone`
+  e.g. `list done|undone`
+  e.g. `list low|medium|high`
   e.g. `list overdue`
   e.g. `list today`
+  e.g. `list floating|event|deadline`
 
-* **Mark** : `mark` <br>
+* **Mark** : `m/mark` <br>
   e.g. `mark 1 undone`
   e.g. `mark 3 done`
 
