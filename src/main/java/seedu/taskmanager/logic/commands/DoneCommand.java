@@ -22,8 +22,8 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final String ALTERNATIVE_COMMAND_WORD_1 = "completed";
-    public static final String ALTERNATIVE_COMMAND_WORD_2 = "finished";
+    public static final String ALTERNATIVE_COMMAND_WORD_1 = "complete";
+    public static final String ALTERNATIVE_COMMAND_WORD_2 = "finish";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark the task identified by the index number used in the last task listing as done.\n"
@@ -31,8 +31,8 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " or " + ALTERNATIVE_COMMAND_WORD_1 + " or "
             + ALTERNATIVE_COMMAND_WORD_2 + " 1";
 
-    public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
-    public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
+    public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done:\n%1$s";
+    public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already completed.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     public final int targetIndex;

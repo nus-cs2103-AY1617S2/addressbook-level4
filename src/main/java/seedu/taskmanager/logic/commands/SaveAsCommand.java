@@ -12,20 +12,20 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 
 // @@author A0114269E
 /**
- * Move the directory of taskmanager.xml file to user-specified path to allow cloud service sync.
+ * Save the current taskmanager to an XML file at user-specified path to allow cloud service sync.
  * Overwrite the given file path if a file with same name exists. Old XML file is not deleted.
  * Path matching is case sensitive.
  */
 public class SaveAsCommand extends Command {
-    public static final String COMMAND_WORD = "move";
-    public static final String ALTERNATIVE_COMMAND_WORD = "movefile";
+    public static final String COMMAND_WORD = "saveas";
+    public static final String ALTERNATIVE_COMMAND_WORD = "save";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Move the directory of the taskmanager."
-            + "xml file to allow user to sync with cloud services. Overwrite will occur for same file name.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Save the current taskmanager to given directory "
+            + "to allow user to sync with cloud services. Overwrite will occur for existing file name.\n"
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "TaskManager directory moved to : ";
+    public static final String MESSAGE_SUCCESS = "TaskManager directory saved to : ";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVE = "Failed to save TaskManager : '%1$s'";
 

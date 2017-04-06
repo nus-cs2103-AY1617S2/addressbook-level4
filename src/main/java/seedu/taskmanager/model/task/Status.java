@@ -14,8 +14,8 @@ import seedu.taskmanager.commons.core.LogsCenter;
 public class Status {
     private static final Logger logger = LogsCenter.getLogger(Status.class);
 
-    private static final String MESSAGE_STATUS_DONE = "Done";
-    private static final String MESSAGE_STATUS_NOT_DONE = "Not Done";
+    private static final String MESSAGE_STATUS_DONE = "Completed";
+    private static final String MESSAGE_STATUS_NOT_DONE = "Incomplete";
 
     public boolean value;
 
