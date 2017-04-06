@@ -40,18 +40,6 @@ public class MainMenuHandle extends GuiHandle {
         return new HelpFormatWindowHandle(guiRobot, primaryStage);
     }
 
-    public void quickAddUsingMenu() {
-        clickOn("Shortcut", "Quick Add");
-    }
-
-    public void quickUndoUsingMenu() {
-        clickOn("Shortcut", "Quick Undo");
-    }
-
-    public void quickDoneUsingMenu() {
-        clickOn("Shortcut", "Quick Done");
-    }
-
     private void useF1Accelerator() {
         guiRobot.push(KeyCode.F1);
         guiRobot.sleep(500);
@@ -74,6 +62,26 @@ public class MainMenuHandle extends GuiHandle {
 
     public void useCtrlAltD() {
         guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.D);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltE() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.E);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltS() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.S);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlS() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.S);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltL() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.L);
         guiRobot.sleep(500);
     }
 

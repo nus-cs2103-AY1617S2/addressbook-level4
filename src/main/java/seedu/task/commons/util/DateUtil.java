@@ -44,7 +44,7 @@ public class DateUtil {
                     if (date == null) {
                         date = tempDate;
                         currentDateWords = tempSentence;
-                    } else if (date.equalsIgnoreTime(tempDate)) {
+                    } else if (date.equalsIgnoreMinutes(tempDate)) {
                         currentDateWords = tempSentence;
                     }
                 }

@@ -23,7 +23,8 @@ public abstract class Command {
     /**
      * Constructs a feedback message to summarize an operation that displayed a listing of tasks.
      *
-     * @param displaySize used to generate summary
+     * @param displaySize
+     *            used to generate summary
      * @return summary message for tasks displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
@@ -42,20 +43,23 @@ public abstract class Command {
         return String.format(Messages.MESSAGE_TASKS_FLOAT_LISTED_OVERVIEW, displaySize);
     }
 
+    public static String getMessageForTagTaskListShownSummary(int displaySize, String tag) {
+        return String.format(Messages.MESSAGE_TASKS_TAG_LISTED_OVERVIEW, displaySize, tag);
+    }
+
     /**
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
+     * @throws CommandException
+     *             If an error occurs during command execution.
      */
     public abstract CommandResult execute() throws CommandException;
 
-
     // @@author A0140063X
     /**
-     * Provides any needed dependencies to the command.
-     * Commands making use of any of these should override this method to gain
-     * access to the dependencies.
+     * Provides any needed dependencies to the command. Commands making use of any of these should override this method
+     * to gain access to the dependencies.
      */
     public void setData(Model model, Storage storage) {
         this.model = model;
