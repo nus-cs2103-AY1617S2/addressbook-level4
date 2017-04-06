@@ -48,7 +48,6 @@ public class XmlAdaptedTask {
     private String recurrencePeriodicity;
     @XmlElement(required = true)
     private String recurrenceDoneList;
-    
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -109,14 +108,13 @@ public class XmlAdaptedTask {
 	final Description description = new Description(this.description);
 	final UniqueTagList tags = new UniqueTagList(personTags);
 	final IsDone isDone = new IsDone(this.completed);
-	final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ?
-	        true : false;
+	final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ? true : false;
 	Recurrence recurrence = new Recurrence();
 	if (this.isRecurring.equals(RECURRING_YES)) {
 	    recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
 	}
-	
-	return new Event(title, location, startTime, endTime, deadline, description, tags,
-	        isDone, isRecurring, recurrence);
+
+	return new Event(title, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
+		recurrence);
     }
 }
