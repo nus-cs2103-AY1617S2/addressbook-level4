@@ -70,31 +70,32 @@ public class SyncServiceGtask implements SyncService {
             t.printStackTrace();
         }
 
-        logger.info("Starting Google Task");
-        this.isRunning = true;
+        logger.info("---[GTask]: Starting Google Task");
 
         try {
             service = getTasksService();
             opusTaskList = getOpusTasks();
+            logger.info("---[GTask]: Successfully initialised Google Task Service");
             Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SyncException e) {
             e.printStackTrace();
         }
+        this.isRunning = true;
     }
 
     @Override
     public void stop() {
         this.isRunning = false;
-        logger.info("Stopping Google Task");
+        logger.info("---[GTask]: Stopping Google Task");
     }
 
     @Override
     public void updateTaskList(List<Task> taskList) {
         assert taskList != null;
         this.taskListDeque.addFirst(taskList);
-        logger.info("New data added to Google Task update queue");
+        logger.info("---[GTask]: New data added to Google Task update queue");
     }
 
     /**
@@ -104,13 +105,13 @@ public class SyncServiceGtask implements SyncService {
     private void processUpdateTaskListDeque() {
         assert service != null;
         assert opusTaskList != null;
-
+        logger.info("---[GTask]: Launched GTask Push thread");
         while (isRunning) {
             try {
                 List<Task> taskList = this.taskListDeque.takeFirst();
-                this.taskListDeque.clear();
-
+                logger.info("GTask: Processing push task queue");
                 Tasks currentTaskList = listTasksFromGtask(this.opusTaskList.getId());
+
                 if (!currentTaskList.getItems().isEmpty()) {
                     for (com.google.api.services.tasks.model.Task task : currentTaskList.getItems()) {
                         deleteTaskFromGtask(task);
@@ -119,6 +120,7 @@ public class SyncServiceGtask implements SyncService {
                 for (Task taskToPush : taskList) {
                     insertTasktoGtask(taskToPush);
                 }
+                this.taskListDeque.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -236,15 +238,17 @@ public class SyncServiceGtask implements SyncService {
     /**
      * API service call to insert new task to Google Task
      * @param taskToPush
+     * @return result
      * @throws IOException
      */
-    private void insertTasktoGtask(Task taskToPush) throws IOException {
+    private com.google.api.services.tasks.model.Task insertTasktoGtask(Task taskToPush) throws IOException {
         com.google.api.services.tasks.model.Task googleAdaptedTask = toGoogleAdaptedTask(taskToPush);
         com.google.api.services.tasks.model.Task result = service
                                                           .tasks()
                                                           .insert(opusTaskList.getId(), googleAdaptedTask)
                                                           .execute();
-        logger.info(result.toString());
+        logger.info("---[GTask]: Insert task result:\n" + result.toPrettyString());
+        return result;
     }
 
     /**
@@ -254,6 +258,7 @@ public class SyncServiceGtask implements SyncService {
      */
     private void deleteTaskFromGtask(com.google.api.services.tasks.model.Task taskToDelete) throws IOException {
         service.tasks().delete(opusTaskList.getId(), taskToDelete.getId()).execute();
+        logger.info("---[GTask]: Deleting Task");
     }
 
     /**
