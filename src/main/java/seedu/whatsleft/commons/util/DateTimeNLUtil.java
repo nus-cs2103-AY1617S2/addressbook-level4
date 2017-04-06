@@ -65,6 +65,7 @@ public class DateTimeNLUtil {
         absdaymap.put(AbsDay.thurs, "THURSDAY");
     }
 
+    //@@author A0110491U
     /**
      * This method takes in a natural language String argument, and processes it to determine
      * if it has the required format to be converted to a date in String (DDMMYY)
@@ -115,6 +116,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the RelativeDay Enum
      */
@@ -127,6 +129,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in RelativeDay Enum that matches the given String argument
      */
@@ -139,6 +142,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the AbsDay Enum
      */
@@ -151,6 +155,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in AbsDay Enum that matches the given String argument
      */
@@ -163,6 +168,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Determines if this String argument is in the Modifier Enum
      */
@@ -175,6 +181,7 @@ public class DateTimeNLUtil {
         return false;
     }
 
+    //@@author A0110491U
     /**
      * returns the Enum value in Modifier Enum that matches the given String argument
      */
@@ -187,6 +194,7 @@ public class DateTimeNLUtil {
         return null;
     }
 
+    //@@author A0110491U
     /**
      * Represents the IllegalValueException for a Natural Language that was parsed
      *
