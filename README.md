@@ -1,7 +1,8 @@
-# Address Book (Level 4)
+# Taskcrusher
 
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T15-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T15-B1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T15-B1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T15-B1/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f88b3f98a28c49f8b63823a7f30b8a3d)](https://www.codacy.com/app/yoshi-1224/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T15-B1/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/Ui.png" width="600"><br>
 
