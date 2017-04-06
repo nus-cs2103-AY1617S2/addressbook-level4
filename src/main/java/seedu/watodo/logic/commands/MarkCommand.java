@@ -10,6 +10,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0141077L
 /**
@@ -32,15 +33,15 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-    private Stack< Integer > undoMarkInt;
-    private Stack< Task > undoMark;
+    private Stack< Task > taskToMarkList;
+    private Stack< Task > markedTaskList;
     private Task markedTask;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
 
-        undoMark = new Stack< Task >();
-        undoMarkInt = new Stack< Integer >();
+        taskToMarkList = new Stack< Task >();
+        markedTaskList = new Stack< Task >();
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
@@ -64,13 +65,13 @@ public class MarkCommand extends Command {
             }
 
             ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoMark.push(new Task(taskToMark));
+            this.taskToMarkList.push(new Task(taskToMark));
 
 
             try {
                 markedTask = createMarkedTask(taskToMark);
+                markedTaskList.push(markedTask);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
-                this.undoMarkInt.push(filteredTaskListIndices[i]);
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -88,10 +89,13 @@ public class MarkCommand extends Command {
     public void unexecute() {
         try {
             model.updateFilteredListToShowAll();
-            while (!undoMark.isEmpty()) {
-                model.updateTask(undoMarkInt.pop(), undoMark.pop());
+            while (!taskToMarkList.isEmpty()) {
+                model.deleteTask(markedTaskList.pop());
+                model.addTask(taskToMarkList.pop());
             }
         } catch (DuplicateTaskException e) {
+
+        } catch (TaskNotFoundException e) {
 
         }
     }
