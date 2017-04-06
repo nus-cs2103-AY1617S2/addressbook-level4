@@ -81,16 +81,7 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
         List<java.util.Date> dates = pretty.parse(input);
-<<<<<<< HEAD
-        return (!dates.isEmpty());
-        // if (dates.isEmpty()) {
-        // return false;
-        // } else {
-        // return true;
-        // }
-=======
         return !dates.isEmpty();
->>>>>>> c45dfd1ed805e3ef0f74022bd28a4448ebc49d9a
     }
 
     // @@author A0140063X
@@ -106,7 +97,7 @@ public class Date {
     // @@author A0140063X
     /**
      * Compares two dates and returns true if date1 is before date2
-     * 
+     *
      * @param date1
      * @param date2
      */
