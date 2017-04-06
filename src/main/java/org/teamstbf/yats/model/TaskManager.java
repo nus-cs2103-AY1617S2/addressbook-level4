@@ -185,7 +185,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyEvent> getTaskList() {
 	return new UnmodifiableObservableList<>(events.asObservableList());
     }
-
+ 
     @Override
     public ObservableList<Tag> getTagList() {
 	return new UnmodifiableObservableList<>(tags.asObservableList());

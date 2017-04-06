@@ -66,4 +66,8 @@ public interface ReadOnlyEvent {
 			&& other.getDescription().equals(this.getDescription()));
     }
 
+    /**
+     * Get number of hours required to perform event
+     */
+
 }
