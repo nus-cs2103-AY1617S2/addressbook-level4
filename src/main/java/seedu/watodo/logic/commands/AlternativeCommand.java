@@ -45,8 +45,8 @@ public class AlternativeCommand {
             put("uncheck", MarkCommand.COMMAND_WORD);
             put("f", FindCommand.COMMAND_WORD);
             put("search", FindCommand.COMMAND_WORD);
-            put("r", RedoCommand.COMMAND_WORD);
-            put("u", UndoCommand.COMMAND_WORD);
+            // put("r", RedoCommand.COMMAND_WORD);
+            // put("u", UndoCommand.COMMAND_WORD);
         }
     };
 
