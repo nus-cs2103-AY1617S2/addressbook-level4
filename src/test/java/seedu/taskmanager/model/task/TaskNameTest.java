@@ -13,10 +13,6 @@ public class TaskNameTest {
         // invalid task name
         assertFalse(TaskName.isValidName("")); // empty string
         assertFalse(TaskName.isValidName(" ")); // spaces only
-        assertFalse(TaskName.isValidName("^")); // only non-alphanumeric
-                                                // characters
-        assertFalse(TaskName.isValidName("food*")); // contains non-alphanumeric
-                                                    // characters
 
         // valid task name
         assertTrue(TaskName.isValidName("eat food")); // alphabets only

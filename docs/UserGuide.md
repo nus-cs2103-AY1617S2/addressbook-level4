@@ -16,7 +16,7 @@ This User Guide will aid you in understanding how ProcrastiNomore operates and w
 the functionalities this application has.
 
 ProcrastinNomore is a single command line task-management application that is able to
-store new tasks and edit existing tasks. This application will aid you in organizing 
+store new tasks and edit existing tasks. This application will aid you in organizing
 all your corresponding tasks and events.
 
 ## 2. Quick Start
@@ -116,19 +116,19 @@ Examples:
   `UPDATE 1 eat dinner`
 * `LIST`
   `UPDATE 1 FROM thursday TO friday`
-  
+
 > Please note that by inputting UPDATE TASKINDEX with no additional information will result in
-> 
+> all timings to be removed.
 
 ### 3.4. Delete an existing task: `DELETE`
 
-You can use this command to delete existing task in ProcrastiNomore 
+You can use this command to delete existing task in ProcrastiNomore
 
 Format: `DELETE TASKNAME` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE DATE`
 
-> In the event of DELETE TASKNAME/DATE, ProcrastiNomore will delete all tasks with the 
+> In the event of DELETE TASKNAME/DATE, ProcrastiNomore will delete all tasks with the
 > TASKNAME/DATE specified in the command.
 
 Examples:
@@ -195,7 +195,7 @@ Format: `LIST`
 Examples:
 * `LIST today` <br>
   All uncompleted tasks which contain the today's date will be shown.
-  
+
 Using the list command on its own will show all existing task which are uncompleted.
 
 ### 3.10. To sort through the list of task displayed: `COMPLETED`
@@ -229,7 +229,7 @@ Examples:
 
 ### 3.14. Recurring command: `RECUR`
 
-You can use this command to make repeated task with different dates. 
+You can use this command to make repeated task with different dates.
 
 ### 3.15. Exiting the program : `EXIT`
 

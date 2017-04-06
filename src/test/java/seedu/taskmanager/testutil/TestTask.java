@@ -1,5 +1,6 @@
 package seedu.taskmanager.testutil;
 
+import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.EndTime;
@@ -124,7 +125,7 @@ public class TestTask implements ReadOnlyTask {
     // @@author A0142418L
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Event Task
      */
     @Override
@@ -138,7 +139,7 @@ public class TestTask implements ReadOnlyTask {
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Deadline Task
      */
     @Override
@@ -152,7 +153,7 @@ public class TestTask implements ReadOnlyTask {
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Floating Task
      */
     @Override
@@ -162,5 +163,43 @@ public class TestTask implements ReadOnlyTask {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean isWithinStartEndDuration(ReadOnlyTask t) {
+
+        if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
+            if (this.getStartDate().equals(t.getEndDate())) {
+                if ((this.getStartTime().laterThan(t.getStartTime()) && t.getEndTime().laterThan(this.getStartTime()))
+                        || (this.getEndTime().laterThan(t.getStartTime())
+                                && t.getEndTime().laterThan(this.getEndTime()))) {
+                    return true;
+                }
+            } else if (this.getStartDate().equals(t.getEndDate())) {
+                if (t.getEndTime().laterThan(this.getStartTime())) {
+                    return true;
+                }
+            } else if (this.getEndDate().equals(t.getStartDate())) {
+                if (this.getEndTime().laterThan(t.getStartTime())) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        else {
+            if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
+                    t.getEndDate().value) == 1)
+                    || (DateTimeUtil.isDateWithin(this.getEndDate().value, t.getStartDate().value,
+                            t.getEndDate().value) == 1)
+                    || (DateTimeUtil.isDateWithin(t.getStartDate().value, this.getStartDate().value,
+                            this.getEndDate().value) == 1)
+                    || (DateTimeUtil.isDateWithin(t.getEndDate().value, this.getStartDate().value,
+                            this.getEndDate().value) == 1)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

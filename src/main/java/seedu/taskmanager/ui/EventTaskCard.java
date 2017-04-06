@@ -46,8 +46,8 @@ public class EventTaskCard extends UiPart<Region> {
 
         if (isSameDateEvent(task)) {
             startDateTime.setText("Date: " + task.getStartDate().value);
-            endDateTime
-                    .setText("Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
+            endDateTime.setText(
+                    "Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
         }
 
         if (task.getIsMarkedAsComplete()) {
@@ -77,7 +77,22 @@ public class EventTaskCard extends UiPart<Region> {
     }
 
     private void initCategory(ReadOnlyTask task) {
-        task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
-    }
+        if (!task.getCategories().asObservableList().isEmpty()) {
+            for (int index = 0; task.getCategories().asObservableList().size() != index; index++) {
+                String category = task.getCategories().asObservableList().get(index).categoryName;
+                Label label = new Label(category);
+                if (category.equalsIgnoreCase("High")) {
+                    label.setStyle("-fx-background-color: red");
+                }
+                if (category.equalsIgnoreCase("Medium")) {
+                    label.setStyle("-fx-background-color: orange");
+                }
+                if (category.equalsIgnoreCase("Low")) {
+                    label.setStyle("-fx-background-color: lightblue");
+                }
 
+                categories.getChildren().add(label);
+            }
+        }
+    }
 }
