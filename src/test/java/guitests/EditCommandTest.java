@@ -9,10 +9,9 @@ import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.StartDate;
+import seedu.address.model.task.Date;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 
@@ -27,14 +26,14 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         int addressBookIndex = 1;
         //@@author A0164889E
-        String detailsToEdit = "Bobby d/12.04 e/bobby@gmail.com g/project t/undone";
+        String detailsToEdit = "Bobby s/01.01 d/12.04 g/project t/incomplete";
         //@@author A0164889E
         TestPerson editedPerson = new PersonBuilder()
                 .withName("Bobby")
                 .withEndDate("12.04")
                 .withStartDate("01.01")
                 .withGroup("project")
-                .withTags("undone").build();
+                .withTags("incomplete").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
@@ -98,24 +97,22 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 *&");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 s/1234");
-        assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
+        commandBox.runCommand("edit 1 s/ssse");
+        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
         
-        commandBox.runCommand("edit 1 d/1234");
-        assertResultMessage(EndDate.MESSAGE_DATE_CONSTRAINTS);
+        commandBox.runCommand("edit 1 d/iiie");
+        assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 g/");
         assertResultMessage(Group.MESSAGE_GROUP_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void edit_duplicatePerson_failure() {
         //@@author A0164889E
-        commandBox.runCommand("edit 3 Alice Paul s/01.01 d/12.12 e/a@gml.com "
-                                + "g/group1 t/friends");
+        commandBox.runCommand("edit 3 Alice Paul s/01.01 d/12.12 "
+                                + "g/group1");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

@@ -13,7 +13,7 @@ import seedu.address.commons.util.DateUtil;
  */
 public abstract class Date {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Person date's format should resemble a date";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task date's format should resemble a date";
     
     private static final String BAD_DATE = "nil";
 

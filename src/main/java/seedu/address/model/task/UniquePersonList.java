@@ -123,7 +123,7 @@ public class UniquePersonList implements Iterable<Task> {
      */
     public static class DuplicatePersonException extends DuplicateDataException {
         protected DuplicatePersonException() {
-            super("Operation would result in duplicate persons");
+            super("Operation would result in duplicate tasks");
         }
     }
 

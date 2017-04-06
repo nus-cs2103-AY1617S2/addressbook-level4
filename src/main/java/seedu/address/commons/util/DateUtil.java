@@ -18,7 +18,7 @@ public class DateUtil {
             Date date = groups.get(0).getDates().get(0);
             return date;
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalValueException("Date not valid!");
+            throw new IllegalValueException(seedu.address.model.task.Date.MESSAGE_DATE_CONSTRAINTS);
         }
     }
     

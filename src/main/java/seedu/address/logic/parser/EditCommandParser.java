@@ -38,7 +38,7 @@ public class EditCommandParser {
         try {
             editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editPersonDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
-            editPersonDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_ENDDATE)));
+            editPersonDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_STARTDATE)));
             editPersonDescriptor.setGroup(ParserUtil.parseGroup(argsTokenizer.getValue(PREFIX_GROUP)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

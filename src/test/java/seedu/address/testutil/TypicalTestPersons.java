@@ -24,7 +24,7 @@ public class TypicalTestPersons {
             benson = new PersonBuilder().withName("Benson Meier")
                     .withGroup("311")
                     .withEndDate("12.11")
-                    .withTags("owesMoney", "friends")
+                    .withTags("incomplete")
                     .build();
             carl = new PersonBuilder().withName("Carl Kurz")
                     .withEndDate("10.01")
@@ -54,12 +54,14 @@ public class TypicalTestPersons {
             // Manually added
             hoon = new PersonBuilder()
                     .withName("Hoon Meier")
+                    .withStartDate("01.01")
                     .withEndDate("05.05")
                     .withGroup("little india")
                     .withTags("incomplete")
                     .build();
             ida = new PersonBuilder()
                     .withName("Ida Mueller")
+                    .withStartDate("03.03")
                     .withEndDate("08.08")
                     .withGroup("chicago")
                     .withTags("incomplete")
