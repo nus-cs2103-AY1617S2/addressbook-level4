@@ -32,11 +32,13 @@ public class UpdateCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [TASK] ON [DATE] FROM [STARTTIME] TO [ENDTIME]\n"
             + "Example: " + COMMAND_WORD + " 1 ON 04/03/17 FROM 1630 TO 1830";
 
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with another event";
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to be earlier"
             + " than end time.";
+
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
     private final int filteredTaskListIndex;
@@ -117,10 +119,8 @@ public class UpdateCommand extends Command {
         Task updatedTask = createUpdatedTask(taskToUpdate, updateTaskDescriptor);
 
         try {
-            if (updatedTask.isEventTask()
-                    && !DateTimeUtil.isValidEventTimePeriod(updatedTask.getStartDate().value
-                            , updatedTask.getStartTime().value, updatedTask.getEndDate().value
-                            , updatedTask.getEndTime().value)) {
+            if (updatedTask.isEventTask() && !DateTimeUtil.isValidEventTimePeriod(updatedTask.getStartDate().value,
+                    updatedTask.getStartTime().value, updatedTask.getEndDate().value, updatedTask.getEndTime().value)) {
                 throw new CommandException(MESSAGE_INVALID_EVENT_PERIOD);
             }
         } catch (IllegalValueException e) {
@@ -128,6 +128,15 @@ public class UpdateCommand extends Command {
         }
 
         try {
+            if (updatedTask.isEventTask()) {
+                int clashedTaskIndex = model.isBlockedOutTime(updatedTask, filteredTaskListIndex);
+                if (clashedTaskIndex != -1) {
+                    String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
+                    model.updateTask(filteredTaskListIndex, updatedTask);
+                    model.updateFilteredListToShowAll();
+                    return new CommandResult(clashFeedback + String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
+                }
+            }
             model.updateTask(filteredTaskListIndex, updatedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -139,7 +148,8 @@ public class UpdateCommand extends Command {
 
     /**
      * Checks if only the task name field has been identified by user to be
-     * updated To ensure that other task details like startTime startDate endTime endDate are not lost
+     * updated To ensure that other task details like startTime startDate
+     * endTime endDate are not lost
      *
      * @return true if only task name has been identified by user to be updated
      */
@@ -173,12 +183,14 @@ public class UpdateCommand extends Command {
             return false;
         }
     }
-    
+
     /**
-     * Checks if only the startTime has been identified by user to be
-     * updated To ensure that other task details like startDate endTime endDate are not lost
+     * Checks if only the startTime has been identified by user to be updated To
+     * ensure that other task details like startDate endTime endDate are not
+     * lost
      *
-     * @return true if only startTime information has been identified by user to be updated
+     * @return true if only startTime information has been identified by user to
+     *         be updated
      */
     private boolean isOnlyStartTimeUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -192,10 +204,12 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the endTime has been identified by user to be
-     * updated To ensure that other task details like startTime startDate endDate are not lost
+     * Checks if only the endTime has been identified by user to be updated To
+     * ensure that other task details like startTime startDate endDate are not
+     * lost
      *
-     * @return true if only endTime information has been identified by user to be updated
+     * @return true if only endTime information has been identified by user to
+     *         be updated
      */
     private boolean isOnlyEndTimeUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -209,10 +223,12 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the startDate and startTime has been identified by user to be
-     * updated To ensure that other task details like endDate endTime are not lost
+     * Checks if only the startDate and startTime has been identified by user to
+     * be updated To ensure that other task details like endDate endTime are not
+     * lost
      *
-     * @return true if only startDate and startTime information has been identified by user to be updated
+     * @return true if only startDate and startTime information has been
+     *         identified by user to be updated
      */
     private boolean isOnlyStartUpdated() {
         if (!updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
@@ -227,9 +243,11 @@ public class UpdateCommand extends Command {
 
     /**
      * Checks if only the endDate and endTime has been identified by user to be
-     * updated To ensure that other task details like startDate startTime are not lost
+     * updated To ensure that other task details like startDate startTime are
+     * not lost
      *
-     * @return true if only endDate and endTime information has been identified by user to be updated
+     * @return true if only endDate and endTime information has been identified
+     *         by user to be updated
      */
     private boolean isOnlyEndUpdated() {
         if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)

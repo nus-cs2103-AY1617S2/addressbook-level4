@@ -64,15 +64,15 @@ public class StartTime {
         // check
     }
 
-    public boolean laterThan(StartTime other) {
-        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+    public boolean laterThanOrEqual(StartTime other) {
+        if (Integer.parseInt(value) >= Integer.parseInt(other.value)) {
             return true;
         }
         return false;
     }
 
-    public boolean laterThan(EndTime other) {
-        if (Integer.parseInt(value) > Integer.parseInt(other.value)) {
+    public boolean laterThanOrEqual(EndTime other) {
+        if (Integer.parseInt(value) >= Integer.parseInt(other.value)) {
             return true;
         }
         return false;

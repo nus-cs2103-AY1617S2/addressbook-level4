@@ -185,19 +185,12 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
-    /*
-     * public int isBlockedOutTime(Task t) { int index = 0; while (index <
-     * (internalList.size())) { if (internalList.get(index).isEventTask() &&
-     * !internalList.get(index).getIsMarkedAsComplete() &&
-     * t.isWithinStartEndDuration(internalList.get(index))) { return index; }
-     * index++; } return -1; }
-     */
-
     // @@author A0142418L
     /**
      * Compares the starting date and time of 2 event tasks.
      *
-     * @return true if 1st event task is earlier than the 2nd event task based on the startDate and startTime
+     * @return true if 1st event task is earlier than the 2nd event task based
+     *         on the startDate and startTime
      * @return false, if otherwise.
      */
     private boolean isAddEventEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
@@ -251,7 +244,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Compares the due date of 2 deadline tasks.
      *
-     * @return true if 1st deadline task is earlier than the 2nd deadline task based on the endDate and endTime
+     * @return true if 1st deadline task is earlier than the 2nd deadline task
+     *         based on the endDate and endTime
      * @return false, if otherwise.
      */
     private boolean isAddDeadlineEarlierAddListIndex(Task toAdd, ReadOnlyTask readOnlyTask) {
@@ -303,13 +297,15 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Finds the sorted position to add new task to the existing list of task.
-     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * List of tasks is sorted firstly based on type of task and then by
+     * chronological order of the task
      * 
-     * Event tasks sorted by startDate startTime.
-     * Deadline tasks sorted by endDate endTime.
-     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     * Event tasks sorted by startDate startTime. Deadline tasks sorted by
+     * endDate endTime. Floating tasks are just added to the bottom of the list
+     * as there is no time element within a floating task.
      *
-     * @return The sorted position index to add the new task in the sorted list of tasks.
+     * @return The sorted position index to add the new task in the sorted list
+     *         of tasks.
      */
     private int findSortedPositionToAdd(Task toAdd) {
         int addIndex = 0;
