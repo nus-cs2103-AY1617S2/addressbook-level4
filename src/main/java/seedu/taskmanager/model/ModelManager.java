@@ -250,29 +250,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class DateRangeQualifier implements Qualifier {
-        private Date startDateCriteria, endDateCriteria;
+        private LocalDate startDateCriteria, endDateCriteria;
 
         DateRangeQualifier(Date startDateCriteria, Date endDateCriteria) {
-            this.startDateCriteria = startDateCriteria;
-            this.endDateCriteria = endDateCriteria;
+            this.startDateCriteria = startDateCriteria.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            this.endDateCriteria = endDateCriteria.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            LocalDate taskStartDate = task.getStartDate().isPresent()
+                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+            LocalDate taskEndDate = task.getEndDate().isPresent()
+                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+
             boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
             if (isFloatingTask) {
                 return false;
+            } else if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
+                return !(taskStartDate.isBefore(startDateCriteria) || taskEndDate.isAfter(endDateCriteria));
+            } else if (task.getStartDate().isPresent()) {
+                return !(taskStartDate.isBefore(startDateCriteria) || taskStartDate.isAfter(startDateCriteria));
+            } else {
+                return !(taskEndDate.isBefore(startDateCriteria) || taskEndDate.isAfter(startDateCriteria));
             }
-            if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria)
-                        || task.getEndDate().get().after(endDateCriteria));
-            }
-            if (task.getStartDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria)
-                        || task.getStartDate().get().after(startDateCriteria));
-            }
-            return !(task.getEndDate().get().before(startDateCriteria)
-                    || task.getStartDate().get().after(startDateCriteria));
         }
 
         @Override
