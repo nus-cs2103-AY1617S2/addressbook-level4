@@ -18,6 +18,7 @@ public class StringUtil {
     public static final String NEW_LINE = "\n";
     public static final String FORWARD_SLASH = "/";
     public static final String WHITE_SPACE = "\\s+";
+    public static final String NONE_WHITE_SPACE = "\\S+";
     public static final String SINGLE_SPACE = " ";
     public static final String QUOTE_DELIMITER = "\", \"";
     public static final String COMMA_DELIMITER = ", ";
@@ -162,15 +163,7 @@ public class StringUtil {
         if (replacement == null || !StringUtil.isPresent(s)) {
             return s;
         }
-
-        String[] words = s.split(WHITE_SPACE);
-
-        if (words.length == 0) {
-            return s;
-        }
-
-        words[0] = replacement;
-        return String.join(SINGLE_SPACE, words);
+        return s.replaceFirst(NONE_WHITE_SPACE, replacement);
     }
 
     /**

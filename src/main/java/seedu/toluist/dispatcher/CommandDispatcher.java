@@ -30,6 +30,7 @@ import seedu.toluist.ui.commons.CommandResult;
 public class CommandDispatcher extends Dispatcher {
     private static final Logger logger = LogsCenter.getLogger(CommandDispatcher.class);
     private static final int SUGGESTION_LIMIT = 7;
+    private static final int KEYWORD_CHECK_SIZE = 2;
 
     //@@author A0162011A
     /**
@@ -51,19 +52,22 @@ public class CommandDispatcher extends Dispatcher {
     }
 
     public void dispatch(String command) {
-        String deAliasedCommand = getDealiasedCommand(command);
-        logger.info("De-aliased command to be dispatched: " + deAliasedCommand + " original command " + command);
-
-        Controller controller = getBestFitController(deAliasedCommand);
+        String processedCommand = getDealiasedCommand(command).trim();
+        logger.info("De-aliased command to be dispatched: " + processedCommand + " original command " + command);
+        Controller controller = getBestFitController(processedCommand);
         logger.info("Controller class to be executed: " + controller.getClass());
+        handleHistoryController(controller);
+        handleNavigateHistoryController(controller);
+        execute(processedCommand, controller);
+    }
 
-        if (controller instanceof HistoryController) {
-            ((HistoryController) controller).setCommandHistory(commandHistory);
-        }
-        if (controller instanceof NavigateHistoryController) {
-            ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
-        }
-        Map<String, String> tokens = controller.tokenize(deAliasedCommand);
+    /**
+     * Execute command using controller
+     * @param command a command that is already de-aliased
+     * @param controller controller to handle the command
+     */
+    private void execute(String command, Controller controller) {
+        Map<String, String> tokens = controller.tokenize(command);
         tokenHistoryList.recordTokens(controller.getClass(), tokens);
         try {
             controller.execute(tokens);
@@ -73,6 +77,35 @@ public class CommandDispatcher extends Dispatcher {
         }
     }
 
+    //@@author A0162011A
+    /**
+     * Special handling for navigate history controller (if applicable)
+     * @param controller a Controller instance
+     */
+    private void handleNavigateHistoryController(Controller controller) {
+        if (controller instanceof NavigateHistoryController) {
+            ((NavigateHistoryController) controller).setCommandHistory(commandHistory);
+        }
+    }
+
+    /**
+     * Special handling for history controller (if applicable)
+     * @param controller a Controller instance
+     */
+    private void handleHistoryController(Controller controller) {
+        if (controller instanceof HistoryController) {
+            ((HistoryController) controller).setCommandHistory(commandHistory);
+        }
+    }
+
+    //@@author A0131125Y
+    /**
+     * Get set of suggestions for a command based on, in order:
+     * - Command word / Replacement for alias suggestion
+     * - Search keywords
+     * - Arguments for general keywords
+     * - General keywords
+     */
     public SortedSet<String> getSuggestions(String command) {
         if (!StringUtil.isPresent(command)) {
             return new TreeSet<>();
@@ -85,7 +118,7 @@ public class CommandDispatcher extends Dispatcher {
                 this::getKeywordSuggestions
         );
 
-        return getSuggestionMethods.stream()
+        SortedSet<String> suggestions = getSuggestionMethods.stream()
                 .reduce(new TreeSet<String>(),
                     (accumulator, next) -> {
                         if (!accumulator.isEmpty()) {
@@ -96,6 +129,8 @@ public class CommandDispatcher extends Dispatcher {
                                 .collect(Collectors.toCollection(TreeSet::new));
                     },
                     (set1, set2) -> set1); // This line will not be actually be run
+        logger.info("Suggestions for command " + command +  " " + suggestions.toString());
+        return suggestions;
     }
 
     /**
@@ -125,19 +160,23 @@ public class CommandDispatcher extends Dispatcher {
             }
         }
 
+        suggestions.remove(firstWordOfCommand);
+
         return suggestions;
     }
 
     /**
      * Return suggestions for command keywords, not including those already used in the command
+     * Works for aliased command too
      * @param command command string
      * @return sorted set of suggestions
      */
     private SortedSet<String> getKeywordSuggestions(String command) {
-        String lastComponentOfCommand = StringUtil.getLastComponent(command);
-        Controller bestFitController = getBestFitController(command);
+        String deAliasedCommand = getDealiasedCommand(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(deAliasedCommand);
+        Controller bestFitController = getBestFitController(deAliasedCommand);
         Map<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
-        Set<String> existingKeywords = bestFitController.keywordize(command).stream()
+        Set<String> existingKeywords = bestFitController.keywordize(deAliasedCommand).stream()
                 .map(keywordValuePair -> keywordValuePair.getKey())
                 .collect(Collectors.toSet());
         return keywordMap.keySet().stream()
@@ -152,15 +191,17 @@ public class CommandDispatcher extends Dispatcher {
 
     /**
      * Return suggestions for argument for command keywords
+     * Works for aliased command too
      * @param command command string
      * @return sorted set of suggestions
      */
     private SortedSet<String> getKeywordArgumentSuggestions(String command) {
-        String lastComponentOfCommand = StringUtil.getLastComponent(command);
-        Controller bestFitController = getBestFitController(command);
+        String deAliasedCommand = getDealiasedCommand(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(deAliasedCommand);
+        Controller bestFitController = getBestFitController(deAliasedCommand);
         Map<String, String[]> keywordMap = bestFitController.getCommandKeywordMap();
-        List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(command);
-        if (keywordValuePairs.size() < 2) {
+        List<Pair<String, String>> keywordValuePairs = bestFitController.keywordize(deAliasedCommand);
+        if (keywordValuePairs.size() < KEYWORD_CHECK_SIZE) {
             return new TreeSet<>();
         }
 
@@ -181,19 +222,21 @@ public class CommandDispatcher extends Dispatcher {
 
     /**
      * Return suggestions for find/search command
+     * Works for aliased command too
      * @param command command string
      * @return sorted set of suggestions
      */
     private SortedSet<String> getSearchSuggestions(String command) {
-        Controller bestFitController = getBestFitController(command);
+        String deAliasedCommand = getDealiasedCommand(command);
+        Controller bestFitController = getBestFitController(deAliasedCommand);
         if (!(bestFitController instanceof FindController)) {
             return new TreeSet<>();
         }
 
-        Set<String> existingKeywords = new HashSet(Arrays.asList(bestFitController.tokenize(command)
+        Set<String> existingKeywords = new HashSet(Arrays.asList(bestFitController.tokenize(deAliasedCommand)
                 .get(FindController.PARAMETER_KEYWORDS).split(StringUtil.WHITE_SPACE)));
 
-        String lastComponentOfCommand = StringUtil.getLastComponent(command);
+        String lastComponentOfCommand = StringUtil.getLastComponent(deAliasedCommand);
         return tokenHistoryList.retrieveTokens(bestFitController.getClass(), FindController.PARAMETER_KEYWORDS)
                 .stream()
                 .map(keywords -> keywords.split(StringUtil.WHITE_SPACE))
@@ -210,17 +253,20 @@ public class CommandDispatcher extends Dispatcher {
      * @return the converted command
      */
     private String getDealiasedCommand(String command) {
-        String trimmedCommand = command.trim();
-        return aliasConfig.dealias(trimmedCommand);
+        return aliasConfig.dealias(command);
     }
 
-    //@@author A0131125Y
+    /**
+     * Retrieve the controller that can best handle a command
+     * @param command command string, should have already been de-aliased but not necessarily trimmed
+     * @return Controller object
+     */
     private Controller getBestFitController(String command) {
         Collection<Controller> controllerCollection = controllerLibrary.getAllControllers();
 
         return controllerCollection
                 .stream()
-                .filter(controller -> controller.matchesCommand(command))
+                .filter(controller -> controller.matchesCommand(command.trim()))
                 .findFirst()
                 .orElse(new UnknownCommandController()); // fail-safe
     }

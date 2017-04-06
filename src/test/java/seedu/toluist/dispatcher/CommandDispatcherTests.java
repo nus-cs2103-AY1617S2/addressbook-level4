@@ -32,8 +32,10 @@ public class CommandDispatcherTests {
     public void setUp() {
         when(aliasTable.dealias("m")).thenReturn("m");
         when(aliasTable.dealias("mi")).thenReturn("mark incomplete");
+        when(aliasTable.dealias("a")).thenReturn("add");
         Map<String, String> aliasMapping = new HashMap();
         aliasMapping.put("mi", "mark incomplete");
+        aliasMapping.put("a", "add");
         when(aliasTable.getAliasMapping()).thenReturn(aliasMapping);
         dispatcher.setAliasConfig(aliasTable);
     }
@@ -101,6 +103,29 @@ public class CommandDispatcherTests {
         assertDispatcherSuggestions("add task /repeat daily ", "/by", "/from", "/to", "/repeatuntil",
                 "/tags", "/priority");
     }
+
+    @Test
+    public void getSuggestions_keywordArguments() {
+        assertDispatcherSuggestions(" add task /priority ", "high", "low");
+    }
+
+    @Test
+    public void getSuggestions_keywordsForDealiasedCommand() {
+        assertDispatcherSuggestions("a ", "/by", "/from", "/to", "/repeat",
+                "/repeatuntil", "/tags", "/priority");
+    }
+
+    @Test
+    public void getSuggestions_keywordArgumentsForDealiasedCommand() {
+        assertDispatcherSuggestions("a /repeat ", "daily", "weekly", "monthly", "yearly");
+    }
+
+    @Test
+    public void getSuggestions_findKeywords() {
+        dispatcher.dispatch("find abc");
+        assertDispatcherSuggestions("find ", "abc");
+    }
+
 
     /**
      * Helper assert method to check for suggestions to command
