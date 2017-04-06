@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -18,9 +20,11 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of the task identified to done "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Sets the status of the task identified to done "
             + "by the index number used in the last task listing as completed.\n"
-            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: " + COMMAND_WORD
+            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n" + "Example: "
+            + COMMAND_WORD
             + " 1 2";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Task completed: %1$s";
@@ -28,12 +32,15 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-    private int undoMarkInt;
-    private Task undoMark;
+    private Stack< Integer > undoMarkInt;
+    private Stack< Task > undoMark;
     private Task markedTask;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
+
+        undoMark = new Stack< Task >();
+        undoMarkInt = new Stack< Integer >();
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
@@ -57,12 +64,13 @@ public class MarkCommand extends Command {
             }
 
             ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoMark = new Task(taskToMark);
+            this.undoMark.push(new Task(taskToMark));
+
 
             try {
                 markedTask = createMarkedTask(taskToMark);
                 model.updateTask(filteredTaskListIndices[i], markedTask);
-                this.undoMarkInt = filteredTaskListIndices[i];
+                this.undoMarkInt.push(filteredTaskListIndices[i]);
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -80,7 +88,9 @@ public class MarkCommand extends Command {
     public void unexecute() {
         try {
             model.updateFilteredListToShowAll();
-            model.updateTask(undoMarkInt, undoMark);
+            while (!undoMark.isEmpty()) {
+                model.updateTask(undoMarkInt.pop(), undoMark.pop());
+            }
         } catch (DuplicateTaskException e) {
 
         }
