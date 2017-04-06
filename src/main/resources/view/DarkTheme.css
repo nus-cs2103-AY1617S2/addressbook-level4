@@ -4,7 +4,7 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "GelPenUpright"; /*Entire task card*/
+    -fx-font-family: "GelPenUpright";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
@@ -96,12 +96,13 @@
     -fx-text-fill: #010504;
 }
 
-.cell_big_label {
+.cell_big_label { /*Task title*/
+    -fx-font-family: "GelPenUpright";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
-.cell_small_label {
+.cell_small_label { /*Task deadline, info and priority*/
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
 }
@@ -277,6 +278,14 @@
     -fx-border-color: #d6d6d6;
     -fx-border-width: 1 1 1 1;
 }
+
+/*@@author A0141928B*/
+/*Command box*/
+#commandTextField {
+    -fx-font-family: "Code New Roman";
+    
+}
+/*@@author*/
 
 #commandTypeLabel {
     -fx-font-size: 11px;
