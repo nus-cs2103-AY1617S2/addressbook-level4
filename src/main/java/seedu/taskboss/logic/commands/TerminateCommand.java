@@ -44,8 +44,8 @@ public class TerminateCommand extends Command {
     public CommandResult execute() throws CommandException, IllegalValueException {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) > lastShownList.size()
-                || filteredTaskListIndices.get(INDEX_ZERO) < 1) {
+        if (filteredTaskListIndices.get(filteredTaskListIndices.size() - 1) < 1
+                || filteredTaskListIndices.get(INDEX_ZERO) > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 

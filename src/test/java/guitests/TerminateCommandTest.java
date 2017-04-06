@@ -100,7 +100,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markTaskDoneLong_success() throws Exception {
+    public void terminateTask_LongFormat_success() throws Exception {
         int taskBossIndex = 2;
 
         TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
@@ -121,7 +121,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markTaskDone_Short_Command_success() throws Exception {
+    public void TerminateTask_Short_Command_success() throws Exception {
         int taskBossIndex = 6;
 
         TestTask terminatedTask = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
@@ -154,7 +154,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markDone_findThenMarkDone_success() throws Exception {
+    public void terminateTask_findThenMarkDone_success() throws Exception {
         commandBox.runCommand("find ensure");
 
         int filteredTaskListIndex = 1;
@@ -186,9 +186,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withInformation("little tokyo")
                 .withCategories("Done").build();
 
-        String expectedMessage = "[" + expectedTasksList[1] + ", " + expectedTasksList[6] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        String expectedMessage = "[" + expectedTasksList[6] + ", " + expectedTasksList[1] + "]";
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
     }
 
     @Test
@@ -208,6 +208,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withCategories("Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        String expectedMessage = "[" + expectedTasksList[5] + ", " + expectedTasksList[1] + "]";
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+
     }
 
     @Test
@@ -217,6 +220,14 @@ public class TerminateCommandTest extends TaskBossGuiTest {
 
         commandBox.runCommand("t 0 2 3");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user input alphabet
+        commandBox.runCommand("t a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        //user input special character
+        commandBox.runCommand("t 1 2 ;");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
     }
 
 
