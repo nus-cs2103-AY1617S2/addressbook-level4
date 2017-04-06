@@ -19,6 +19,12 @@
     <tags>code</tags>
     <tags>cs2103</tags>
     <tasks>
+        <title>fix travis</title>
+        <start></start>
+        <end>3pm</end>
+        <priority>high</priority>
+    </tasks>
+    <tasks>
         <title>CS2103 TaskIt v0.5rc</title>
         <start></start>
         <end>next monday</end>
@@ -457,12 +463,6 @@
         <title>%%%</title>
         <start></start>
         <end></end>
-        <priority>low</priority>
-    </tasks>
-    <tasks>
-        <title>hahaha</title>
-        <start></start>
-        <end>3pm</end>
         <priority>low</priority>
     </tasks>
 </addressbook>
