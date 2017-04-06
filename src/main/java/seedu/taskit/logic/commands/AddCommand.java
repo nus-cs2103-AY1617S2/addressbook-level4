@@ -5,12 +5,16 @@ package seedu.taskit.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.taskit.commons.core.EventsCenter;
+import seedu.taskit.commons.core.UnmodifiableObservableList;
+import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Priority;
+import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 import seedu.taskit.model.task.UniqueTaskList;
@@ -53,11 +57,16 @@ public class AddCommand extends Command {
         );
     }
 
+    //@@author A0141011J
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
             model.addTask(toAdd);
+
+            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(lastShownList.indexOf(toAdd)));
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -65,7 +74,6 @@ public class AddCommand extends Command {
 
     }
 
-    //@@author A0141011J
     @Override
     public boolean isUndoable() {
         return true;

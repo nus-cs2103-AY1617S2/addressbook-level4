@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.taskit.commons.core.EventsCenter;
 import seedu.taskit.commons.core.Messages;
 import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskit.commons.core.UnmodifiableObservableList;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.logic.commands.exceptions.CommandException;
@@ -100,7 +101,11 @@ public class EditCommand extends Command {
         Priority updatedPriority = editTaskDescriptor.getPriority().orElseGet(taskToEdit::getPriority);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTask, updatedStart, updatedEnd, updatedPriority, updatedTags);
+        //@@author A0141011J
+        Task newTask = new Task(updatedTask, updatedStart, updatedEnd, updatedPriority, updatedTags);
+        newTask.setOverdue();
+        return newTask;
+        //@@author
     }
 
     /**

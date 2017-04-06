@@ -198,7 +198,8 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
 
     @Override
     public boolean isOverdue() {
-        return checkOverdue();
+        setOverdue();
+        return isOverdue;
     }
 
     private boolean checkOverdue() {
@@ -218,5 +219,5 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     @Override
     public boolean isDeadline() {
         return this.start.date == null && this.end.date != null;
-    }//@@author
+    }
 }
