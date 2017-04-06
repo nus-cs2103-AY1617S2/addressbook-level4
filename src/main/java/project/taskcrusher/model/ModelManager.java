@@ -24,6 +24,7 @@ import project.taskcrusher.model.task.UniqueTaskList;
 import project.taskcrusher.model.task.UniqueTaskList.DuplicateTaskException;
 import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0127737X
 /**
  * Represents the in-memory model of the user inbox data.
  * All changes to any model should be synchronized.
@@ -31,6 +32,7 @@ import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final boolean LIST_EMPTY = true;
+    private static final boolean LIST_NOT_EMPTY = false;
 
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -58,7 +60,6 @@ public class ModelManager extends ComponentManager implements Model {
         this(new UserInbox(), new UserPrefs());
     }
 
-  //@@author A0163639W
     public boolean undo() {
         if (undoStack.isEmpty()) {
             return false;
@@ -104,7 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author A0127737X
     public void prepareListsForUi() {
-        boolean isTaskListToShowEmpty = false, isEventListToShowEmpty = false;
+        boolean isTaskListToShowEmpty = LIST_NOT_EMPTY, isEventListToShowEmpty = LIST_NOT_EMPTY;
         if (filteredEvents.isEmpty()) {
             isEventListToShowEmpty = LIST_EMPTY;
         }
@@ -125,6 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.removeTask(target);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
@@ -133,6 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.addTask(task);
         updateFilteredTaskListToShowAll();
+        updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
     }
 
@@ -144,6 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
@@ -170,6 +174,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.removeEvent(target);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
@@ -181,6 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
@@ -188,7 +194,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addEvent(Event event) throws DuplicateEventException {
         saveUserInboxStateForUndo();
         userInbox.addEvent(event);
-        updateFilteredEventListToShowAll();
+        updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
     }
 
@@ -197,6 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.confirmEventTime(eventListIndex, timeslotIndex);
+        updateFilteredListsToShowActiveToDo();
         indicateUserInboxChanged();
     }
 
@@ -208,6 +215,7 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.removeTask(toDelete);
         userInbox.addEvent(toAdd);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
@@ -219,6 +227,7 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.removeEvent(toDelete);
         userInbox.addTask(toAdd);
         indicateUserInboxChanged();
+        updateFilteredListsToShowActiveToDo();
         prepareListsForUi();
     }
 
