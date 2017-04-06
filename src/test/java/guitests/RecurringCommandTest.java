@@ -2,40 +2,25 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.testutil.TestTask;
 
 public class RecurringCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void recur() {
-        // recur event
-        TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.sampleEvent;
-        commandBox.runCommand(taskToAdd.getAddCommand());
-
-        // recur deadline
-
-        // recur floating task
-
-        // invalid command
-        commandBox.runCommand("Recur 1");
-        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    @Test
     public void recurFloatingTaskFailure() {
+        TestTask taskToAdd = td.sampleFloatingTask;
 
     }
 
     @Test
-    public void recurEventTask() {
+    public void recurEventTaskSuccess() {
+        TestTask taskToAdd = td.sampleEvent;
 
     }
 
     @Test
-    public void recurDeadlineTask() {
+    public void recurDeadlineTaskSuccess() {
         TestTask taskToAdd = td.sampleDeadline;
 
     }

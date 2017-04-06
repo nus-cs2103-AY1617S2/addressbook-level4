@@ -424,7 +424,7 @@ public class LogicManagerTest {
             Boolean isCompleted = false;
             Category category1 = new Category("category1");
             Category category2 = new Category("longercategory2");
-            UniqueCategoryList privateCategories = new UniqueCategoryList(/*category1, */category2);
+            UniqueCategoryList privateCategories = new UniqueCategoryList(category1, category2);
             return new Task(taskName, privateStartDate, privateStartTime, privateEndDate, privateEndTime, isCompleted,
                     privateCategories);
         }

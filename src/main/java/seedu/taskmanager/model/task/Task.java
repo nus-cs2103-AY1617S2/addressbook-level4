@@ -155,7 +155,7 @@ public class Task implements ReadOnlyTask {
     // @@author A0142418L
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Event Task
      */
     @Override
@@ -169,7 +169,7 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Deadline Task
      */
     @Override
@@ -183,7 +183,7 @@ public class Task implements ReadOnlyTask {
 
     /**
      * Checks the fields populated within the task
-     * 
+     *
      * @return true if task is a Floating Task
      */
     @Override

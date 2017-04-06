@@ -17,8 +17,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * [Redo command](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/docs/UserGuide.md#314-to-redo-your-previous-commands-redo)
 * Date parsing
 
-**Code written:** 
-* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0142418L.md) 
+**Code written:**
+* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0142418L.md)
 * [Test code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/test/A0142418L.md)
 
 **Other major contributions:**
@@ -36,8 +36,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * [List command](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/docs/UserGuide.md#39-to-sort-through-the-list-of-task-displayed-list)
 * [Recurring command](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/docs/UserGuide.md#314-recurring-command-recur)
 
-**Code written:** 
-* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0141102H.md) 
+**Code written:**
+* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0141102H.md)
 * [Test code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/test/A0141102H.md)
 
 **Other major contributions:**
@@ -56,8 +56,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * [Unmark command](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/docs/UserGuide.md#38-to-mark-tasks-as-uncompleted-unmark)
 * [Completed command](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/docs/UserGuide.md#310-to-sort-through-the-list-of-task-displayed-completed)
 
-**Code written:** 
-* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0139520L.md) 
+**Code written:**
+* [Functional code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/main/A0139520L.md)
 * [Test code](https://github.com/CS2103JAN2017-T11-B1/main/blob/master/collated/test/A0139520L.md)
 
 **Other major contributions:**
