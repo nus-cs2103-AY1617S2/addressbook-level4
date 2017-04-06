@@ -197,7 +197,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Calendar today) {
         updateFilteredTaskList(new PredicateExpression(new TodayQualifier(today)));
     }
-
+    //@@author A0139926R
+    @Override
+    public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
+        return getFilteredTaskList().indexOf(targetTask);
+    }
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
