@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import typetask.commons.core.Messages;
+import typetask.commons.exceptions.IllegalValueException;
+import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 import typetask.testutil.TestUtil;
 
@@ -34,6 +36,16 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void addDeadlineTask_success() throws IllegalValueException {
+        TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand("add deadline by: 10 oct 1993");
+        TestTask deadlineTask = new TaskBuilder().withName("deadline")
+                .withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
+                .withCompleted(false).withPriority("Low").build();
+        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
+        assertTrue(personListPanel.isListMatching(expectedList));
+    }
     private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
         commandBox.runCommand(personToAdd.getAddCommand());
 
