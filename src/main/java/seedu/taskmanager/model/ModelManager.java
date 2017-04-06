@@ -1,5 +1,8 @@
 package seedu.taskmanager.model;
 
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
+import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -32,9 +35,13 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
+    // @@author A0131278H
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> filteredToDoTasks;
     private final FilteredList<ReadOnlyTask> filteredDoneTasks;
+    
+    private String selectedTab;
+    // @@author
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -50,12 +57,23 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0131278H
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
         filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
+        setSelectedTab(TAB_TO_DO); // default tab is to-do task list tab
         // @@author
     }
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
+    
+    // @@author A0131278H
+    public String getSelectedTab() {
+        return selectedTab;
+    }
+
+    public void setSelectedTab(String currentTab) {
+        this.selectedTab = currentTab;
+    }
+    // @@author
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
@@ -75,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0131278H
+    /** Raises an event to indicate an automatic selection */
     private void indicateJumpToListRequestEvent(int index) {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
     }
@@ -144,7 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDoneTasks.setPredicate(null);
     }
     // @@author
-    
+
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
@@ -163,7 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     // @@author
-    
+
     // @@author A0131278H
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);

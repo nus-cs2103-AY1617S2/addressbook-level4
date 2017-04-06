@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -48,6 +49,9 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     // @@author A0131278H
+    @FXML
+    private TabPane taskListsTabPane;
+    
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
@@ -205,7 +209,14 @@ public class MainWindow extends UiPart<Region> {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
                 (int) primaryStage.getY());
     }
-
+    
+    // @@author A0131278H
+    @FXML
+    public void OnSelectedTabChanged() {
+        logic.setSelectedTab(taskListsTabPane.getSelectionModel().getSelectedItem().getText());
+    }
+    // @@author
+    
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();

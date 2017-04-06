@@ -85,5 +85,10 @@ public interface Model {
 
     void updateFilteredTaskList(Date startDateCriteria, Date endDateCriteria);
     // @@author
+    
+    // @@author A0131278H
+    /** Sets the currently selected tab in model */
+    void setSelectedTab(String selectedTab);
+    // @@author
 
 }

@@ -70,6 +70,11 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
         return model.getFilteredDoneTaskList();
     }
+    
+    @Override
+    public void setSelectedTab(String selectedTab) {
+        model.setSelectedTab(selectedTab);
+    }
     // @@author
 
     // @@author A0140032E
