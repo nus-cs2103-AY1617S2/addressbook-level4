@@ -17,12 +17,13 @@ public class Timing implements Comparable<Timing> {
 
     public static final String MESSAGE_TIMING_CONSTRAINTS =
             "Task timing should be in the format HH:mm dd/MM/yyyy OR dd/MM/yyyy " +
-                    "Use only HH:mm if today is the default date";
+                    "Can use only HH:mm if today is the default date";
     public static final String[] TIMING_FORMAT = {"HH:mm dd/MM/yyyy", "dd/MM/yyyy"};
+    public static final String DEFAULT_DATE_INPUT_FORMAT = "HH:mm";
     public static final String TIMING_NOT_SPECIFIED = "floating";
 
     public final String value;
-    private Date timing;
+    public Date timing;
 
     /**
      * Validates given timing.
@@ -32,9 +33,10 @@ public class Timing implements Comparable<Timing> {
      *             if given timing string is invalid.
      */
     public Timing(String time) throws IllegalValueException {
+        int defaultDateLen = DEFAULT_DATE_INPUT_FORMAT.length();
         if (time != null) {
             String trimmedTiming = time.trim();
-            if (trimmedTiming.length() <= 5) {
+            if (trimmedTiming.length() <= defaultDateLen) {
                 trimmedTiming = trimmedTiming + " " + Timing.getTodayDate();
             }
             if (!trimmedTiming.equals(TIMING_NOT_SPECIFIED) && !isValidTiming(trimmedTiming)) {
@@ -57,9 +59,11 @@ public class Timing implements Comparable<Timing> {
      */
     public static boolean isValidTiming(String test) {
         boolean isValid = false;
+        int dateFormat1Len = TIMING_FORMAT[0].length();
+        int dateFormat2Len = TIMING_FORMAT[1].length();
         if (test.equals(TIMING_NOT_SPECIFIED)) {
             isValid = true;
-        } else if (test.length() == 16 || test.length() == 10) {
+        } else if (test.length() == dateFormat1Len || test.length() == dateFormat2Len) {
             for (int i = 0; i < TIMING_FORMAT.length; i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat(TIMING_FORMAT[i]);
                 sdf.setLenient(false);
