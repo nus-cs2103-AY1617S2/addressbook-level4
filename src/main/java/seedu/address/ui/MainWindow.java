@@ -19,6 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExportRequestEvent;
 import seedu.address.commons.events.ui.ImportRequestEvent;
+import seedu.address.commons.events.ui.LoadRequestEvent;
 import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
@@ -204,10 +205,7 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            YTomorrow readIn = new YTomorrow();
-            raise(new ImportRequestEvent(readIn, selected));
-            logic.importYTomorrow(readIn);
-            raise(new TargetFileRequestEvent(selected, prefs));
+            raise(new LoadRequestEvent(selected));
         }
     }
     
@@ -228,9 +226,7 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            YTomorrow readIn = new YTomorrow();
-            raise(new ImportRequestEvent(readIn, selected));
-            logic.importYTomorrow(readIn);
+            raise(new ImportRequestEvent(selected));
         }
     }
     

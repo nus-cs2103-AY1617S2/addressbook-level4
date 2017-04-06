@@ -74,15 +74,18 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyAddressBook> addressBookOptional = null;
         ReadOnlyAddressBook initialData ;
         
         try {
-
-            //addressBookOptional = storage.readAddressBook(userPrefs.getGuiSettings().getLastLoadedYTomorrow());
-            //if (!addressBookOptional.isPresent()) {
+            String prefPath = userPrefs.getGuiSettings().getLastLoadedYTomorrow();
+            
+            if (prefPath != null) {
+                addressBookOptional = storage.readAddressBook(prefPath);
+            }
+            if (addressBookOptional == null || !addressBookOptional.isPresent()) {
                 addressBookOptional = storage.readAddressBook();
-            //}
+            }
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }

@@ -14,10 +14,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ImportResultAvailableEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.LoadResultAvailableEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowThemeRequestEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -130,6 +133,21 @@ public class UiManager extends ComponentManager implements Ui {
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.loadPersonPage(event.getNewSelection());
+    }
+    
+    @Subscribe
+    private void handleLoadResultAvailableEvent(LoadResultAvailableEvent event) {
+        if (event.getImported() != null && event.getImported().isPresent()) {
+            logic.setYTomorrow(event.getImported().get());
+            raise(new TargetFileRequestEvent(event.getFile(), prefs));
+        }
+    }
+    
+    @Subscribe
+    private void handleImportResultAvailableEvent(ImportResultAvailableEvent event) {
+        if (event.getImported() != null && event.getImported().isPresent()) {
+            logic.importYTomorrow(event.getImported().get());
+        }
     }
 
 }
