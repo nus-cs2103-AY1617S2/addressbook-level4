@@ -49,7 +49,7 @@ public interface ReadOnlyTask {
         checkEmptyValue(builder, " End Date: ", getEndDateTime().toString());
         checkEmptyValue(builder, " Information: ", getInformation().toString());
         checkEmptyValue(builder, " Recurrence: ", getRecurrence().toString());
-       
+
         builder.append(" Categories: ");
         getCategories().forEach(builder::append);
         builder.append("\n");
@@ -61,6 +61,21 @@ public interface ReadOnlyTask {
      */
     default void checkEmptyValue(StringBuilder builder, String field, String value) {
         String EMPTY_STRING = "";
+        String PRIORITY_FIELD = " Priority Level: ";
+        String PRIORITY_NO_VALUE = "No priority";
+        String RECURRENCE_FIELD = " Recurrence: ";
+        String RECURRENCE_NONE = "NONE";
+
+        //don't display no priority value
+        if (field.equals(PRIORITY_FIELD) && value.equals(PRIORITY_NO_VALUE)) {
+            return;
+        }
+
+        //don't display none recurrence value
+        if (field.equals(RECURRENCE_FIELD) && value.equals(RECURRENCE_NONE)) {
+            return;
+        }
+
         if (!value.equals(EMPTY_STRING)) {
             builder.append(field)
                 .append(value);
