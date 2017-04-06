@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
-import seedu.taskboss.logic.commands.TerminateCommand;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
