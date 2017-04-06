@@ -1,10 +1,8 @@
 package seedu.task.logic.commands;
 
-import java.util.List;
 import java.util.Optional;
 
 import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.core.Messages;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
@@ -55,13 +53,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (filteredTaskListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = getTaskFromIndex(filteredTaskListIndex);
 
         try {
             Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);

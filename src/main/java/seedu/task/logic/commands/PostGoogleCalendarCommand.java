@@ -1,18 +1,15 @@
 package seedu.task.logic.commands;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 
-import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.EventDateTime;
 
 import seedu.task.commons.core.GoogleCalendar;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.util.LogicHelper;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -95,22 +92,25 @@ public class PostGoogleCalendarCommand extends Command {
 
     private ReadOnlyTask postEvent(int index) throws CommandException, IllegalValueException,
                                                     IOException, TaskNotFoundException {
-        ReadOnlyTask taskToPost = getTaskToPost(index);
+        ReadOnlyTask taskToPost = getTaskFromIndex(index);
 
         if (taskToPost.getStartDate().isNull() || taskToPost.getEndDate().isNull()) {
             throw new IllegalValueException(MESSAGE_MISSING_DATE);
         }
 
-        Event event = createEventFromTask(taskToPost);
+        Event event = LogicHelper.createEventFromTask(taskToPost);
 
         try {
             com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
+
             if (taskToPost.getEventId().trim().isEmpty()) {
                 event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
-                logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
                 setTaskEventId(index, event.getId());
+
+                logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
             } else {
                 service.events().update(GoogleCalendar.CALENDAR_ID, event.getId(), event).execute();
+
                 logger.info(String.format("Event updated: %s\n", event.getHtmlLink()));
             }
         } catch (IOException ioe) {
@@ -124,42 +124,6 @@ public class PostGoogleCalendarCommand extends Command {
     private void setTaskEventId(int index, String eventId) {
         assert model != null;
         model.setTaskEventId(index, eventId);
-    }
-
-    private ReadOnlyTask getTaskToPost(int index) throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (index >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-        return lastShownList.get(index);
-    }
-
-    private Event createEventFromTask(ReadOnlyTask taskToPost) {
-        assert taskToPost != null;
-        assert taskToPost.getStartDate() != null;
-        assert taskToPost.getEndDate() != null;
-
-        Event event = new Event()
-                .setSummary(taskToPost.getName().fullName)
-                .setLocation(taskToPost.getLocation().value)
-                .setDescription(taskToPost.getRemark().value);
-
-        DateTime startDateTime = new DateTime(taskToPost.getStartDate().getDateValue());
-        EventDateTime start = new EventDateTime()
-                .setDateTime(startDateTime)
-                .setTimeZone("Asia/Singapore");
-        event.setStart(start);
-
-        DateTime endDateTime = new DateTime(taskToPost.getEndDate().getDateValue());
-        EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone("Asia/Singapore");
-        event.setEnd(end);
-
-        event.setId(taskToPost.getEventId());
-
-        return event;
     }
 
 }
