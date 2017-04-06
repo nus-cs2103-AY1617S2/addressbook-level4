@@ -15,19 +15,19 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
 
 //@@author A0163848R
-
 public class SampleDataUtil {
     
     private static final int SAMPLE_SIZE = 50;
     
     Random r;
     
-    public static Task[] getSampleTasks(int n) {
+    public static ReadOnlyPerson[] getSampleTasks(int n) {
         Set<Task> generated = new HashSet<Task>();
         for (int i = 0; i < n; i++) {
             if (!generated.add(generateRandomTask())) {
@@ -62,15 +62,16 @@ public class SampleDataUtil {
     //@@author
     
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        try {
-            YTomorrow sampleAB = new YTomorrow();
-            for (Task samplePerson : getSampleTasks(SAMPLE_SIZE)) {
-                sampleAB.addPerson(samplePerson);
+        YTomorrow sampleAB = new YTomorrow();
+        for (int i = 0; i < SAMPLE_SIZE; i++) {
+            try {
+                sampleAB.addPerson(generateRandomTask());
+            } catch (DuplicatePersonException e) {
+                i--;
+                e.printStackTrace();
             }
-            return sampleAB;
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("sample data cannot contain duplicate tasks", e);
         }
+        return sampleAB;
     }
     
 }

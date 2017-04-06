@@ -11,6 +11,7 @@ import seedu.address.model.task.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PASSED_HEX_COLOR = "#f08080";
 
     @FXML
     private HBox cardPane;
@@ -49,6 +50,10 @@ public class PersonCard extends UiPart<Region> {
         
         group.setText(person.getGroup().value);
         initTags(person);
+        
+        if (person.hasPassed()) {
+            cardPane.setStyle("-fx-background-color: " + PASSED_HEX_COLOR);
+        }
     }
 
     private void initTags(ReadOnlyPerson person) {

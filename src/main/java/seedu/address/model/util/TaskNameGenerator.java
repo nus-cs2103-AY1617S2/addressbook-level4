@@ -26,6 +26,10 @@ public class TaskNameGenerator {
             "Shop",
             "Play Minecraft",
             "Figure out travel plans",
+            "Draw art",
+            "Do calligraphy",
+            "Play videogames",
+            "Hike",
     };
     
     private static final String[] NAMES = {
@@ -48,6 +52,18 @@ public class TaskNameGenerator {
             "Husain",
             "class",
             "project group",
+            "fam",
+            "Layla",
+            "Jake",
+            "John",
+            "Jon",
+            "Allison",
+            "Bill",
+            "Robert",
+            "Mr. Anderson",
+            "Hannah",
+            "Gabe",
+            "squad",
     };
     
     private static final String[] PLACES = {
@@ -62,6 +78,13 @@ public class TaskNameGenerator {
             "Yishun",
             "Punggol",
             "Sentosa",
+            "Changi Airport",
+            "golf course",
+            "hawker centre",
+            "NUH",
+            "NUS",
+            "Pasir Panjang Rd.",
+            "Raffles Place",
     };
     
     private static Random r;

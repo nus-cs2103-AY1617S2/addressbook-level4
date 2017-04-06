@@ -62,7 +62,7 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyPerson editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
      * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
 
-    private static Task createEditedPerson(ReadOnlyPerson personToEdit,
+    private static ReadOnlyPerson createEditedPerson(ReadOnlyPerson personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
 
         assert personToEdit != null;

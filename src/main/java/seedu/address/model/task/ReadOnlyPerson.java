@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -61,5 +63,11 @@ public interface ReadOnlyPerson {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    boolean hasPassed();
+
+    java.util.Date getEndTime();
+
+    java.util.Date getStartTime();
 
 }

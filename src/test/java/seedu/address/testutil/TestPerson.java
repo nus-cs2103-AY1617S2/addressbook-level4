@@ -96,4 +96,16 @@ public class TestPerson implements ReadOnlyPerson {
         //this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    public boolean hasPassed() {
+        return false;
+    }
+
+    public java.util.Date getEndTime() {
+        return null;
+    }
+
+    public java.util.Date getStartTime() {
+        return null;
+    }
 }
