@@ -1,7 +1,5 @@
 package seedu.task.logic.commands;
 
-import seedu.task.commons.core.Messages;
-import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
@@ -21,22 +19,16 @@ public class DoneCommand extends Command {
     public final int targetIndex;
     //@@author A0139975J
     public DoneCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex - 1;
     }
 
     //@@author A0139975J
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyTask updatedTaskDone = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask updatedTaskDone = getTaskFromIndex(targetIndex);
         try {
-            model.isDoneTask(targetIndex - 1);
+            model.isDoneTask(targetIndex);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }

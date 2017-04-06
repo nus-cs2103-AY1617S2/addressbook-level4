@@ -40,10 +40,6 @@ public class FindCommandParser extends CommandParser {
         targetDate = DateUtil.extractValidDate(keywords);
         final Set<String> keywordSet = new HashSet<>(StringUtil.asListWithoutEmptyString(keywords));
         System.out.println(StringUtil.asListWithoutEmptyString(keywords));
-        if (targetDate != null) {
-            System.out.println(targetDate.toString());
-            System.out.println(targetDate.getExtractedFrom() + " information");
-        }
         return targetDate == null ? new FindCommand(keywordSet) : new FindCommand(keywordSet, targetDate);
     }
 

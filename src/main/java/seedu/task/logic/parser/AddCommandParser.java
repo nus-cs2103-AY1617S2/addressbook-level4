@@ -16,9 +16,6 @@ import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.parser.ArgumentTokenizer.Prefix;
-import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Remark;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -38,13 +35,13 @@ public class AddCommandParser extends CommandParser {
         argsTokenizer.tokenize(args);
         Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
         startDate = tokenizedArguments.containsKey(PREFIX_START_DATE) ? argsTokenizer.getValue(PREFIX_START_DATE).get()
-                : Date.DEFAULT_DATE;
+                : "";
         endDate = tokenizedArguments.containsKey(PREFIX_END_DATE) ? argsTokenizer.getValue(PREFIX_END_DATE).get()
-                : Date.DEFAULT_DATE;
+                : "";
         remark = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
-                : Remark.DEFAULT_REMARK;
+                : "";
         location = tokenizedArguments.containsKey(PREFIX_LOCATION) ? argsTokenizer.getValue(PREFIX_LOCATION).get()
-                : Location.DEFAULT_LOCATION;
+                : "";
         try {
             return new AddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), startDate, endDate,
                     remark.replace("\\", ""), location.replace("\\", ""),
