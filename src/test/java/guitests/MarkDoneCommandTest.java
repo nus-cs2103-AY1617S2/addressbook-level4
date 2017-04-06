@@ -18,7 +18,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
-  //---------------- Tests for validity of input taskBoss index --------------------------------------
+    //---------------- Tests for validity of input taskBoss index --------------------------------------
 
     /*
      * EP: valid task index, should remove all
@@ -82,7 +82,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-  //---------------- Tests for format of Done command --------------------------------------
+    //---------------- Tests for format of Done command --------------------------------------
 
     /*
      * Valid format equivalence partitions for : 1) short command format
@@ -132,7 +132,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertMarkDoneSuccess(false, true, taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
-  //---------------- Tests for successfully marking done a task after find command--------------------------------------
+    //---------------- Tests for successfully marking done a task after find command--------------------------------------
 
     /*
      * EP: Check if successfully marked done a command after performing a find command,
@@ -180,7 +180,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "[" +
-        expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
+                expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
     }
 
     @Test
@@ -200,7 +200,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "[" +
-        expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
+                expectedTasksList[3] + ", " + expectedTasksList[1] + "]"));
     }
 
     @Test
@@ -232,7 +232,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         } else {
             assertTrue(taskListPanel.isListMatching(expectedTasksList));
             assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS ,
-                            "[" + markedDoneTask + "]"));
+                    "[" + markedDoneTask + "]"));
         }
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
