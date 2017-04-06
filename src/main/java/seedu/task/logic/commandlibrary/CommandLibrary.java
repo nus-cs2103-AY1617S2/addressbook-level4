@@ -23,7 +23,6 @@ import seedu.task.logic.commands.HelpFormatCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 //import seedu.task.logic.commands.ListByDoneCommand;
 //import seedu.task.logic.commands.ListByNotDoneCommand;
-import seedu.task.logic.commands.ListByTagCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.PostGoogleCalendarCommand;
@@ -49,7 +48,6 @@ import seedu.task.logic.parser.HelpCommandParser;
 import seedu.task.logic.parser.HelpFormatCommandParser;
 //import seedu.task.logic.parser.ListByDoneCommandParser;
 //import seedu.task.logic.parser.ListByNotDoneCommandParser;
-import seedu.task.logic.parser.ListByTagCommandParser;
 import seedu.task.logic.parser.ListCommandParser;
 import seedu.task.logic.parser.LoadCommandParser;
 import seedu.task.logic.parser.PostGoogleCalendarCommandParser;
@@ -154,15 +152,6 @@ public class CommandLibrary {
 //                new ListByNotDoneCommandParser(), ListByNotDoneCommand.MESSAGE_USAGE));
 //        commandTable.put(ListByNotDoneCommand.COMMAND_WORD_3, new CommandInstance(ListByNotDoneCommand.COMMAND_WORD_1,
 //                new ListByNotDoneCommandParser(), ListByNotDoneCommand.MESSAGE_USAGE));
-
-        commandTable.put(ListByTagCommand.COMMAND_WORD_1, new CommandInstance(ListByTagCommand.COMMAND_WORD_1,
-                new ListByTagCommandParser(), ListByTagCommand.MESSAGE_USAGE));
-        commandTable.put(ListByTagCommand.COMMAND_WORD_2, new CommandInstance(ListByTagCommand.COMMAND_WORD_1,
-                new ListByTagCommandParser(), ListByTagCommand.MESSAGE_USAGE));
-        commandTable.put(ListByTagCommand.COMMAND_WORD_3, new CommandInstance(ListByTagCommand.COMMAND_WORD_1,
-                new ListByTagCommandParser(), ListByTagCommand.MESSAGE_USAGE));
-        commandTable.put(ListByTagCommand.COMMAND_WORD_4, new CommandInstance(ListByTagCommand.COMMAND_WORD_1,
-                new ListByTagCommandParser(), ListByTagCommand.MESSAGE_USAGE));
 
         commandTable.put(ListCommand.COMMAND_WORD_1, new CommandInstance(ListCommand.COMMAND_WORD_1,
                 new ListCommandParser(), ListCommand.MESSAGE_USAGE));

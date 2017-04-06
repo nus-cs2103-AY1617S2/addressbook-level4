@@ -10,6 +10,7 @@ public class ListCommandParser extends CommandParser {
     @Override
     public Command parse(String args) {
         // TODO Auto-generated method stub
+        assert args != null;
         return new ListCommand(args);
     }
 

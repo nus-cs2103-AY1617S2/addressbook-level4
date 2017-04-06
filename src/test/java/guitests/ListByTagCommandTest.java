@@ -10,28 +10,28 @@ import seedu.task.testutil.TestTask;
 public class ListByTagCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
-        assertListByTagResult("listag friends"); // no results
-        assertListByTagResult("ltag personal", td.apply); // single result
-        assertListByTagResult("ltag school", td.buy); // single result
+        assertListByTagResult("list tag friends","friends"); // no results
+        assertListByTagResult("l tag personal", "personal",td.apply); // single result
+        assertListByTagResult("l tag school", "school",td.buy); // single result
 
 
         //ltag after deleting one result
         commandBox.runCommand("list");
         commandBox.runCommand("delete 4");
-        assertListByTagResult("ltag shopping", td.buy);
+        assertListByTagResult("l tag shopping","shopping", td.buy);
 
 
         //ltag after modifying the tag
         commandBox.runCommand("list");
         commandBox.runCommand("edit 1 t/nonpersonal");
-        assertListByTagResult("ltag personal"); // no result
+        assertListByTagResult("l tag personal","personal"); // no result
 
     }
 
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
-        assertListByTagResult("listag shopping"); // no results
+        assertListByTagResult("list tag shopping","shopping"); // no results
     }
 
     @Test
@@ -41,10 +41,10 @@ public class ListByTagCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertListByTagResult(String command, TestTask... expectedHits) {
+    private void assertListByTagResult(String command, String tag, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertResultMessage(expectedHits.length + " tasks with tag "+ "\""+tag+ "\"" +" listed!");
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
