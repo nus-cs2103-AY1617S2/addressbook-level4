@@ -68,7 +68,7 @@ public class AddCommandParser {
             switch (flag) {
             case Event.EVENT_FLAG:
                 List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-                AddCommand eventToAdd = new AddCommand(name, timeslots, location, description, tags);
+                AddCommand eventToAdd = new AddCommand(name, timeslots, priority, location, description, tags);
                 if (option.equals(Parser.FORCE_OPTION)) {
                     eventToAdd.force = true;
                 }

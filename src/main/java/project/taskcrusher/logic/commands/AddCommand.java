@@ -80,6 +80,23 @@ public class AddCommand extends Command {
         this.taskToAdd = null;
     }
 
+    /**
+     * Creates an AddCommand using raw values.
+     *
+     * @throws IllegalValueException
+     *             if any of the raw values are invalid
+     */
+    public AddCommand(String name, List<Timeslot> timeslots, String priority, String location, String description,
+            Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.eventToAdd = new Event(new Name(name), new ArrayList<Timeslot>(timeslots), new Priority(priority),
+                new Location(location), new Description(description), new UniqueTagList(tagSet));
+        this.taskToAdd = null;
+    }
+
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
@@ -88,7 +105,10 @@ public class AddCommand extends Command {
             if (eventToAdd != null) {
 
                 List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
-                if (!force && eventToAdd.hasOverlappingEvent(preexistingEvents)) { //allow for force adding
+                if (!force && eventToAdd.hasOverlappingEvent(preexistingEvents)) { // allow
+                                                                                   // for
+                                                                                   // force
+                                                                                   // adding
                     throw new CommandException(MESSAGE_EVENT_CLASHES);
                 }
 

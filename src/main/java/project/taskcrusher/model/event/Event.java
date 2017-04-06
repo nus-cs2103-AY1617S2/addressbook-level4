@@ -8,6 +8,7 @@ import java.util.Objects;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
+import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.shared.UserToDo;
 import project.taskcrusher.model.tag.UniqueTagList;
 
@@ -34,8 +35,19 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.isOverdue = false;
     }
 
-    public Event(Name name, List<Timeslot> timeslots, Location location, Description description,
-            UniqueTagList tags, boolean isComplete, boolean isOverdue) {
+    public Event(Name name, List<Timeslot> timeslots, Priority priority, Location location, Description description,
+            UniqueTagList tags) {
+        super(name, priority, description, tags);  //added priority
+
+        assert !CollectionUtil.isAnyNull(timeslots, location);
+
+        this.timeslots = timeslots;
+        this.location = location;
+        this.isOverdue = false;
+    }
+
+    public Event(Name name, List<Timeslot> timeslots, Location location, Description description, UniqueTagList tags,
+            boolean isComplete, boolean isOverdue) {
         super(name, null, description, tags); // TODO: remove this stub priority
         // later
 
@@ -51,8 +63,8 @@ public class Event extends UserToDo implements ReadOnlyEvent {
      * Creates a copy of the given ReadOnlyEvent.
      */
     public Event(ReadOnlyEvent source) {
-        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(),
-                source.getTags(), source.isComplete(), source.isOverdue());
+        this(source.getName(), source.getTimeslots(), source.getLocation(), source.getDescription(), source.getTags(),
+                source.isComplete(), source.isOverdue());
     }
 
     /**
@@ -74,8 +86,9 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     public boolean confirmTimeslot(int timeslotIndex) {
         Timeslot confirmed = timeslots.get(timeslotIndex);
-        //this approach, as opposed to timeslots.clear(), is taken so that we can maintain the reference
-        //to timeslot elements in the undo/redo saved states
+        // this approach, as opposed to timeslots.clear(), is taken so that we
+        // can maintain the reference
+        // to timeslot elements in the undo/redo saved states
         timeslots = new ArrayList<Timeslot>();
         timeslots.add(confirmed);
         return true;
@@ -83,7 +96,7 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     public boolean updateOverdueStatus(Date now) {
         boolean isAnyUpdate = false;
-        for (Timeslot timeslot: getTimeslots()) {
+        for (Timeslot timeslot : getTimeslots()) {
             if (now.after(timeslot.end)) {
                 markOverdue();
                 isAnyUpdate = true;

@@ -12,7 +12,6 @@ import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.event.UniqueEventList.EventNotFoundException;
-import project.taskcrusher.model.shared.Priority;
 import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.model.task.Task;
@@ -56,8 +55,10 @@ public class SwitchCommand extends Command {
 
             try {
                 List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-                model.switchTaskToEvent(taskToSwitch, new Event(taskToSwitch.getName(), timeslots,
-                        new Location(Location.NO_LOCATION), taskToSwitch.getDescription(), taskToSwitch.getTags()));
+                model.switchTaskToEvent(taskToSwitch,
+                        new Event(taskToSwitch.getName(), timeslots, taskToSwitch.getPriority(),
+                                new Location(Location.NO_LOCATION), taskToSwitch.getDescription(),
+                                taskToSwitch.getTags()));
             } catch (IllegalValueException ive) {
                 throw new CommandException(ive.getMessage());
             } catch (TaskNotFoundException tnfe) {
@@ -80,7 +81,7 @@ public class SwitchCommand extends Command {
 
             try {
                 model.switchEventToTask(eventToSwitch, new Task(eventToSwitch.getName(), new Deadline(date),
-                        new Priority(Priority.NO_PRIORITY), eventToSwitch.getDescription(), eventToSwitch.getTags()));
+                       eventToSwitch.getPriority(), eventToSwitch.getDescription(), eventToSwitch.getTags()));
             } catch (IllegalValueException ive) {
                 throw new CommandException(ive.getMessage());
             } catch (EventNotFoundException enfe) {
