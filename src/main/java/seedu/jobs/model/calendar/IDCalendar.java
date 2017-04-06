@@ -10,7 +10,7 @@ public class IDCalendar {
 	}
 	
 	public String manageID (String id) {
-		String alteredID = id.replaceAll("[^a-z0-9]","");
+		String alteredID = id.replaceAll("[^A-Za-z0-9]","");
 		alteredID.toLowerCase();
 		
 		//to satisfy length requirement

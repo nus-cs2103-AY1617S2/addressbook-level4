@@ -22,17 +22,17 @@ public class AddCalendar extends BasicCommandCalendar {
 	}
 	
 	public void execute() throws IOException {
-		
 		Event event = new Event()
 		    .setSummary(toAdd.getSummary().toString())
 		    .setDescription(toAdd.getDescription().toString());
 	    
+		//NULLPOINTER
 		DateTime startDateTime = new DateTime(toAdd.getStartTime().toString());
 		EventDateTime start = new EventDateTime()
 		    .setDateTime(startDateTime)
 		    .setTimeZone("Singapore");
 		event.setStart(start);
-	
+
 		DateTime endDateTime = new DateTime(toAdd.getEndTime().toString());
 		EventDateTime end = new EventDateTime()
 		    .setDateTime(endDateTime)
@@ -43,8 +43,8 @@ public class AddCalendar extends BasicCommandCalendar {
 		
 	//	String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
 	//	event.setRecurrence(Arrays.asList(recurrence));
-		
 		String calendarId = "primary";
+
 		event = service.events().insert(calendarId, event).execute();
 		}
 }
