@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
 
 public class ListCommandTest extends TaskManagerGuiTest {
@@ -55,25 +57,28 @@ public class ListCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void listTimedTasks() {
-        assertListResult("list timed", "Timed");
+        assertListResult("list timed", "Timed", td.eggsAndBread, td.visitFriend, td.readBook);
         commandBox.runCommand("list");
+        commandBox.runCommand("edit 2 change sd to 5 jun and change st to 9am");
         TestTask[] tempTasksList = td.getTypicalTasks();
         ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
-        for (TestTask task : tempTasksList) {
-            expectedTasksList.add(task);
+        for (int i = 1; i < 5; i++) {
+            expectedTasksList.add(tempTasksList[i]);
         }
         assertListResult("list timed", "Timed", expectedTasksList.toArray(new TestTask[0]));
     }
 
     @Test
-    public void listFloatingTasks() {
-        assertListResult("list floating", "Floating");
+    public void listFloatingTasks() throws IllegalValueException {
+        assertListResult("list floating", "Floating", td.payDavid, td.visitSarah);
         commandBox.runCommand("list");
+        commandBox.runCommand("add watch tv");
         TestTask[] tempTasksList = td.getTypicalTasks();
         ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
-        for (TestTask task : tempTasksList) {
-            expectedTasksList.add(task);
+        for (int i = 0; i < 2; i++) {
+            expectedTasksList.add(tempTasksList[i]);
         }
+        expectedTasksList.add(new TaskBuilder().withName("watch tv").build());
         assertListResult("list floating", "Floating", expectedTasksList.toArray(new TestTask[0]));
     }
     //@@author

@@ -38,6 +38,7 @@ public class TestTask implements ReadOnlyTask {
         this.isRecurring = false;
     }
 
+    //@@author A0142255M
     /**
      * Creates a copy of {@code taskToCopy}.
      */
@@ -47,7 +48,11 @@ public class TestTask implements ReadOnlyTask {
         this.startDateTime = taskToCopy.getStartDateTime();
         this.endDateTime = taskToCopy.getEndDateTime();
         this.interval = taskToCopy.getRecurInterval();
+        this.isTimed = taskToCopy.getTimedStatus();
+        this.isActive = taskToCopy.getActiveStatus();
+        this.isRecurring = taskToCopy.getRecurringStatus();
     }
+    //@@author
 
     public void setName(Name name) {
         this.name = name;
@@ -112,6 +117,7 @@ public class TestTask implements ReadOnlyTask {
     public boolean getTimedStatus() {
         return isTimed;
     }
+
     //@@author
 
     @Override
