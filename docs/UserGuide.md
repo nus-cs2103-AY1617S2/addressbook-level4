@@ -62,23 +62,31 @@ Example:
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* `Press <kbd>Ctrl</kbd> + <kbd>A</kbd>` <br>
+* You press <kbd>Ctrl</kbd> + <kbd>A</kbd> on the keyboard. <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
 
 For when you need assistance for inputting commands.<br>
 Shows commands which are in the system.<br>
-Format: `help`
+Format: `help [COMMAND]`
 
-> * Help is also shown if you enter an incorrect command.
+> * The system will prompt you to enter 'help' if you enter an incorrect command.
+> * If a command is entered, detailed help for that command will be shown instead.
+
+Examples:
+
+* `help` <br>
+  Shows general help information.
+* `help add` <br>
+  Shows detailed help information for 'add' command.
 
 [comment]: # (@@author A0127545A)
 ### 3.3. Adding a task: `add`
 
 For when you have a task you need to remember.<br>
-Adds a task to the todo list<br>
-Format: `add NAME [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
+Adds a task to the todo list.<br>
+Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
 > * 'startdate' requires a valid 'enddate' to be used in the same command.
@@ -94,16 +102,16 @@ Examples:
 
 * `add Do Homework` <br>
   Adds a task called 'Do Homework'.
-* `add Meeting With Boss startdate/11-11-2011 17:30 enddate/11-11-2011 19:30` <br>
+* `add Meeting With Boss /from 11-11-2011 17:30 /to 11-11-2011 19:30` <br>
   Adds a task called 'Meeting With Boss', with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
-* `add Check Email enddate/today` <br>
+* `add Check Email /by today` <br>
   Adds a task called 'Check Email', and sets the deadline to be today's date.
 
 [comment]: # (@@author A0162011A)
 ### 3.4. Viewing tasks
 
 For when you need to see your tasks.<br>
-View all tasks in the todo list<br>
+View all tasks in the todo list.<br>
 Format: `list`
 > * A list of tasks will always be displayed.
 > * When starting the program, the list will show all tasks which are currently not completed.
@@ -114,7 +122,7 @@ Format: `list`
 
 For when you need to update or fix a previously entered task.<br>
 Updates an existing task in the todo list.<br>
-Format: `update INDEX [NAME] [startdate/STARTDATE] [enddate/ENDDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...`
+Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.
@@ -126,14 +134,14 @@ Examples:
 
 * `update 2 Assignment 3`<br>
   Updates the name of the 2nd task to be `Assignment 3`.
-* `update 3 startdate/today enddate/tomorrow` <br>
+* `update 3 /from today /to tomorrow` <br>
   Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
 [comment]: # (@@author A0162011A)
 ### 3.6. Filter all tasks for a given keyword: `filter`
 
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `filter/list/find [KEYWORDS] [tag/] [name/]`
+Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -151,11 +159,30 @@ Examples:
   Lists any task with `Assignment` in their names or tags.
 * `find Assignment Project Tutorial`<br>
   Returns any task having `Assignment`, `Project`, or `Tutorial` in their names or tags.
-* `find school tag/` <br>
+* `find school /tag` <br>
   Returns any task with the word 'school' in the tag name.
 
+### 3.7. Sort all tasks in a given order: `sort`
+
+Finds tasks whose names contain any of the given keywords.<br>
+Format: `sort CATEGORY(priority/enddate/startdate/description/overdue/default)...`
+
+> * The category entered will be given higher preference for sorting.
+> * By default, the sorted order is: overdue -> priority -> enddate -> startdate -> description
+> * Using 'default' as the category will revert the sorting order to the above mentioned default.
+> * Multiple categories can be used. The list will be sorted in order based on which category was entered first.
+
+Examples:
+
+* `sort priority`<br>
+  Changes the sorting order to sort by priority first.
+* `sort enddate description`<br>
+  Changes the sorting order to sort by enddate, then description.
+* `sort default`<br>
+  Changes the sorting order to the default sort.
+
 [comment]: # (@@author A0127545A)
-### 3.7. Deleting a task : `delete`
+### 3.8. Deleting a task : `delete`
 
 For when your task is no longer necessary.<br>
 Deletes the specified task from the todo list.<br>
@@ -179,7 +206,7 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.8. Complete or Make Incomplete a Task : `mark`
+### 3.9. Complete or Make Incomplete a Task : `mark`
 
 For when you need to indicate that a task is finished or not.<br>
 Marks a task to be complete or incomplete. <br>
@@ -205,7 +232,7 @@ Example:
   Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
 [comment]: # (@@author A0162011A)
-### 3.9. Add a Tag to a Task : `tag`
+### 3.10. Add a Tag to a Task : `tag`
 
 For when you want to differentiate your tasks by categories.<br>
 Adds a tag or multiple tags to an existing task. <br>
@@ -411,7 +438,7 @@ Format: `exit/quit`
 
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
-Add | `add NAME [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `add Assigment 1 enddate/Friday tag/school`
+Add | `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
 Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
 Add Alias | `alias ALIAS PHRASE` | `alias hs history`
 Change Load Storage Location | `load FILELOCATION` | `load data/savefile.txt`
@@ -420,13 +447,14 @@ Clear | `clear`
 Delete | `delete INDEX(ES)` | `delete 3`
 Delete Alias | `unalias ALIAS` | `unalias hs`
 Exit | `exit/quit`
-Filter | `filter/list/find [KEYWORDS] [tag/] [name/]` | `find school tag/`
-Help | `help`
+Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
+Help | `help [COMMAND]` | 'help add'
 History | `history`
 Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
+Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | 'sort priority'
 Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
-Update | `update INDEX [name/NAME] [enddate/ENDDATE] [startdate/STARTDATE] [recurring/PERIOD(day/week/month)] [priority/PRIORITY] [tag/TAG]...` | `update 1 enddate/11/12/2011`
+Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
 Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
 Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
 View Aliases | `viewalias`
