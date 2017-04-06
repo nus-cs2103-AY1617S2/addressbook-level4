@@ -2,7 +2,6 @@ package seedu.watodo.logic.commands;
 
 import java.util.Stack;
 
-import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -31,7 +30,7 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_UNMARK_TASK_SUCCESSFUL = "Task #%1$d marked undone: %2$s";
     private static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
-    public static final String MESSAGE_STATUS_AlREADY_UNDONE = "The task status is already set to Undone.";
+    public static final String MESSAGE_STATUS_ALREADY_UNDONE = "The task status is already set to Undone.";
 
 
     private int[] filteredTaskListIndices;
@@ -72,15 +71,15 @@ public class UnmarkCommand extends Command {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 unmarkTaskAtIndex(filteredTaskListIndices[i], lastShownList);
                 storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToUnmark, unmarkedTask);
-                compiledExecutionMessage.append(
-                        String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToUnmark) + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL,
+                        filteredTaskListIndices[i] + 1, this.taskToUnmark) + '\n');
 
             } catch (IllegalValueException | CommandException e) {
-                // Moves on to next index even if execution of current index is unsuccessful. CommandException thrown later.
+                // Moves on to next index even if current index execution is unsuccessful. CommandException thrown later
                 executionIncomplete = true;
                 e.printStackTrace();
-                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_UNSUCCESSFUL, filteredTaskListIndices[i]+1)
-                        + '\n' + e.getMessage() + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_UNSUCCESSFUL,
+                        filteredTaskListIndices[i] + 1) + '\n' + e.getMessage() + '\n');
             }
         }
 
@@ -103,7 +102,8 @@ public class UnmarkCommand extends Command {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
-    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) throws IllegalValueException {
+    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws IllegalValueException {
         if (currIndex >= lastShownList.size()) {
             throw new IllegalValueException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
@@ -132,7 +132,7 @@ public class UnmarkCommand extends Command {
 
     private void checkCurrentTaskStatusIsDone(ReadOnlyTask taskToUnmark) throws CommandException {
         if (taskToUnmark.getStatus() == TaskStatus.UNDONE) {
-            throw new CommandException(MESSAGE_STATUS_AlREADY_UNDONE);
+            throw new CommandException(MESSAGE_STATUS_ALREADY_UNDONE);
         }
     }
 
@@ -146,7 +146,7 @@ public class UnmarkCommand extends Command {
         return unmarkedTask;
     }
 
-    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException{
+    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException {
         model.updateTask(currIndex, unmarkedTask);
     }
 

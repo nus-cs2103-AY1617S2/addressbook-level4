@@ -1,4 +1,31 @@
 # A0139845R-reused
+###### \java\seedu\watodo\logic\commands\DeleteCommand.java
+``` java
+    @Override
+    public void unexecute() {
+        assert model != null;
+
+        try {
+            model.addTask(new Task(taskToDelete));
+            model.updateFilteredListToShowAll();
+        } catch (DuplicateTaskException e) {
+
+        }
+    }
+
+    @Override
+    public void redo() {
+        assert model != null;
+
+        try {
+            model.updateFilteredListToShowAll();
+            model.deleteTask(taskToDelete);
+        } catch (TaskNotFoundException e) {
+
+        }
+    }
+
+```
 ###### \java\seedu\watodo\model\ModelManager.java
 ``` java
     @Override
@@ -64,7 +91,7 @@
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                        task.getDescription().fullDescription, keyword))
+                            task.getDescription().fullDescription, keyword))
                     .findAny()
                     .isPresent();
         }

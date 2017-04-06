@@ -2,7 +2,6 @@ package seedu.watodo.logic.commands;
 
 import java.util.Stack;
 
-import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -31,11 +30,11 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_MARK_TASK_SUCCESSFUL = "Task #%1$d completed: %2$s";
     private static final String MESSAGE_MARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as complete.";
-    public static final String MESSAGE_STATUS_AlREADY_DONE = "The task status is already set to Done.";
+    public static final String MESSAGE_STATUS_ALREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-  private ReadOnlyTask taskToMark;
-  private Task markedTask;
+    private ReadOnlyTask taskToMark;
+    private Task markedTask;
 
     private Stack< Task > taskToMarkList;
     private Stack< Task > markedTaskList;
@@ -70,15 +69,15 @@ public class MarkCommand extends Command {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 markTaskAtIndex(filteredTaskListIndices[i], lastShownList);
                 storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToMark, markedTask);
-                compiledExecutionMessage.append(
-                        String.format(MESSAGE_MARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToMark) + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESSFUL,
+                        filteredTaskListIndices[i] + 1, this.taskToMark) + '\n');
 
             } catch (IllegalValueException | CommandException e) {
-                // Moves on to next index even if execution of current index is unsuccessful. CommandException thrown later.
+                // Moves on to next index even if current index execution is unsuccessful. CommandException thrown later
                 executionIncomplete = true;
                 e.printStackTrace();
-                compiledExecutionMessage.append(String.format(MESSAGE_MARK_TASK_UNSUCCESSFUL, filteredTaskListIndices[i]+1)
-                        + '\n' + e.getMessage() + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_MARK_TASK_UNSUCCESSFUL,
+                        filteredTaskListIndices[i] + 1) + '\n' + e.getMessage() + '\n');
             }
         }
 
@@ -101,7 +100,8 @@ public class MarkCommand extends Command {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
-    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) throws IllegalValueException {
+    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws IllegalValueException {
         if (currIndex >= lastShownList.size()) {
             throw new IllegalValueException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
@@ -130,7 +130,7 @@ public class MarkCommand extends Command {
 
     private void checkCurrentTaskStatusIsUndone(ReadOnlyTask taskToMark) throws CommandException {
         if (taskToMark.getStatus() == TaskStatus.DONE) {
-            throw new CommandException(MESSAGE_STATUS_AlREADY_DONE);
+            throw new CommandException(MESSAGE_STATUS_ALREADY_DONE);
         }
     }
 
@@ -144,13 +144,12 @@ public class MarkCommand extends Command {
         return markedTask;
     }
 
-    private void updateTaskListAtIndex(int currIndex, Task markedTask) throws UniqueTaskList.DuplicateTaskException{
+    private void updateTaskListAtIndex(int currIndex, Task markedTask) throws UniqueTaskList.DuplicateTaskException {
         model.updateTask(currIndex, markedTask);
     }
 
     private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
-        this.indexForUndoMark = currIndex;
-      
+        //this.indexForUndoMark = currIndex;
         //this.unmarkedTaskForUndoMark = new Task(taskToMark);
         this.taskToMarkList.push(new Task(taskToMark));
         this.markedTaskList.push(markedTask);

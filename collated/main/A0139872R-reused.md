@@ -203,11 +203,11 @@ public class ListDateCommandParser {
         @Override
         public boolean run(ReadOnlyTask task) {
             tags = task
-                .getTags()
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.joining(" "));
+                    .getTags()
+                    .asObservableList()
+                    .stream()
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(" "));
             String status = task.getStatus().toString();
             return tagKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
