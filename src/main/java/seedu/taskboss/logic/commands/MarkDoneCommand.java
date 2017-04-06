@@ -15,7 +15,7 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 //@@author A0144904H
 public class MarkDoneCommand extends Command {
 
-    private static final String INDEX_DOT = ". ";
+    private static final String NUMBERING_DOT = ". ";
     private static final int INDEX_ONE = 1;
 
     private static final int INDEX_ZERO = 0;
@@ -58,7 +58,7 @@ public class MarkDoneCommand extends Command {
         model.markDone(filteredTaskListIndices, tasksToMarkDone);
 
         scrollToTask(tasksToMarkDone);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, getDesiredTaskListFormat()));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, getDesiredTasksToMarkDoneFormat()));
     }
 
     /**
@@ -76,11 +76,11 @@ public class MarkDoneCommand extends Command {
      * Returns a formatted {@code ArrayList} tasksToMarkDone,
      * so that each ReadOnlyTask in the ArrayList is numbered
      */
-    private String getDesiredTaskListFormat() {
+    private String getDesiredTasksToMarkDoneFormat() {
         int i = INDEX_ONE;
         StringBuilder builder = new StringBuilder();
         for (ReadOnlyTask task : tasksToMarkDone) {
-            builder.append(i + INDEX_DOT).append(task.toString());
+            builder.append(i + NUMBERING_DOT).append(task.toString());
             i++;
         }
         return builder.toString();
