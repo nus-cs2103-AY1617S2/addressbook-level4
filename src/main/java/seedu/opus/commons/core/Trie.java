@@ -73,17 +73,17 @@ public class Trie {
             }
             node = node.children.get(c);
         }
-        return node.allPrefixes();
+        return node.getAllPrefixes();
     }
 
-    protected Collection<String> allPrefixes() {
+    protected Collection<String> getAllPrefixes() {
         List<String> results = new ArrayList<String>();
         if (this.terminal) {
             results.add(this.value);
         }
         for (Entry<Character, Trie> entry : children.entrySet()) {
             Trie child = entry.getValue();
-            Collection<String> childPrefixes = child.allPrefixes();
+            Collection<String> childPrefixes = child.getAllPrefixes();
             results.addAll(childPrefixes);
         }
         return results;
