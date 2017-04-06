@@ -1,6 +1,5 @@
 package seedu.watodo.model;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -35,7 +34,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private final FilteredList<ReadOnlyTask> importantTasks;
     private Stack< Command > commandHistory;
     private Stack< Command > undoneHistory;
 
@@ -52,7 +50,6 @@ public class ModelManager extends ComponentManager implements Model {
         this.undoneHistory = new Stack< Command >();
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        importantTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
@@ -132,25 +129,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    //@@author A0139845R-reused
-    @Override
-    public UnmodifiableObservableList<ReadOnlyTask> getImportantTaskList() {
-        updateImportantTaskList();
-        return new UnmodifiableObservableList<>(importantTasks);
-    }
-
-    private void updateImportantTaskList() {
-        Set<String> keywords = new HashSet<String>();
-        keywords.add("important");
-        keywords.add("impt");
-        keywords.add("urgent");
-        keywords.add("critical");
-        keywords.add("crucial");
-        keywords.add("vital");
-        keywords.add("serious");
-        importantTasks.setPredicate(new PredicateExpression(new TagQualifier(keywords))::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

@@ -33,7 +33,6 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
-    private ImportantTaskListPanel importantTaskListPanel;
     private Config config;
 
     @FXML
@@ -47,9 +46,6 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
-
-    @FXML
-    private AnchorPane importantTaskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -116,8 +112,6 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
-        importantTaskListPanel = new ImportantTaskListPanel(getImportantTaskListPlaceholder(),
-                logic.getImportantTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getWatodoFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -137,10 +131,6 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
-    }
-
-    private AnchorPane getImportantTaskListPlaceholder() {
-        return importantTaskListPanelPlaceholder;
     }
 
     void hide() {
@@ -204,10 +194,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getPersonListPanel() {
         return this.taskListPanel;
-    }
-
-    public ImportantTaskListPanel getImportantListPanel() {
-        return this.importantTaskListPanel;
     }
 
 }
