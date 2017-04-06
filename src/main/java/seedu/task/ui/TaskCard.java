@@ -26,15 +26,33 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author A0141928B
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         name.setText(task.getTaskName().taskName);
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
         info.setText(task.getInfo().value);
+        switch(task.getPriority().value) {
+        case "1":
+            cardPane.setId("cardPaneP1");
+            break;
+        case "2":
+            cardPane.setId("cardPaneP2");
+            break;
+        case "3":
+            cardPane.setId("cardPaneP3");
+            break;
+        case "4":
+            cardPane.setId("cardPaneP4");
+            break;
+        default: //No priority given
+            break;
+        }
         priority.setText(task.getPriority().value);
         initTags(task);
     }
+    //@@author
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
