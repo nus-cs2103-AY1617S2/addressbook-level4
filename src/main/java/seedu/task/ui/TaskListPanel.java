@@ -43,8 +43,6 @@ public class TaskListPanel extends UiPart<Region> {
     // @@author
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
-        // System.out.println("when pass");
-        // cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
 
         setEventHandlerForSelectionChangeEvent();
