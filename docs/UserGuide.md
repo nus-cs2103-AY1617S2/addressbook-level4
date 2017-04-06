@@ -209,7 +209,7 @@ Alternative commands: "cd"
 
 * **Clear** : `clear`
   e.g. 'clear'
-  
+
 * **Change** : `change FILEPATH` <br>
   e.g. 'change data/filepath.xml'
 
