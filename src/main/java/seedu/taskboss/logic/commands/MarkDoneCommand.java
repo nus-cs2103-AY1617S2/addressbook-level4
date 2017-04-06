@@ -35,6 +35,7 @@ public class MarkDoneCommand extends Command {
     public MarkDoneCommand(Set<Integer> targetIndex) {
         filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
         Collections.sort(filteredTaskListIndices);
+        Collections.reverse(filteredTaskListIndices);
         tasksToMarkDone = new ArrayList<ReadOnlyTask>();
     }
 
