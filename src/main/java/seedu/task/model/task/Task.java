@@ -79,6 +79,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     //@@author A0140063X
     public void setStartDate(Date startDate) {
+        assert startDate != null;
         this.startDate = startDate;
     }
 
@@ -90,6 +91,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     //@@author A0140063X
     public void setEndDate(Date endDate) {
+        assert endDate != null;
         this.endDate = endDate;
     }
 

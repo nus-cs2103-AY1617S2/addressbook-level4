@@ -21,10 +21,9 @@ public class Date {
                                                         + " tomorrow at 5pm or 4th April."
                                                         + " Check that Month is before date,"
                                                         + " MM/DD/YY or MM-DD-YY";
-    public static final String DEFAULT_DATE = "DEFAULT_DATE";
     private final java.util.Date value;
     private static PrettyTimeParser pretty = new PrettyTimeParser();
-    private String extractedFrom = "";
+    private String extractedFrom;
 
     //@@author A0140063X
     public Date() {
@@ -39,14 +38,11 @@ public class Date {
      *             if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
-        assert date != null;
-        String trimmedDate = date.trim();
-
-        if (date.equals(DEFAULT_DATE) || trimmedDate.equals("")) {
+        if (date == null || date.trim().equals("")) {
             this.value = null;
 
         } else {
-            if (!isValidDate(trimmedDate)) {
+            if (!isValidDate(date)) {
                 throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
             }
 
@@ -58,7 +54,9 @@ public class Date {
             long time = cal.getTimeInMillis();
 
             this.value = new java.util.Date(time);
-            extractedFrom += date;
+
+            //used for find command
+            extractedFrom = date;
         }
     }
 
@@ -84,12 +82,7 @@ public class Date {
      */
     public static boolean isValidDate(String input) {
         List<java.util.Date> dates = pretty.parse(input);
-        return (!dates.isEmpty());
-//        if (dates.isEmpty()) {
-//            return false;
-//        } else {
-//            return true;
-//        }
+        return !dates.isEmpty();
     }
 
     //@@author A0140063X

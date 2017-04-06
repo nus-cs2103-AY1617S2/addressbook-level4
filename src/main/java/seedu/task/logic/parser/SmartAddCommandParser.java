@@ -14,7 +14,6 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.SmartAddCommand;
 import seedu.task.logic.parser.ArgumentTokenizer.Prefix;
-import seedu.task.model.task.Remark;
 
 // @@author A0140063X-reused
 /**
@@ -34,7 +33,7 @@ public class SmartAddCommandParser extends CommandParser {
         argsTokenizer.tokenize(args);
         Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
         remark = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
-                : Remark.DEFAULT_REMARK;
+                : "";
         try {
             return new SmartAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), remark.replace("\\", ""),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));

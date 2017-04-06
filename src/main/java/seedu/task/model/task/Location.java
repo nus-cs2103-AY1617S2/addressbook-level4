@@ -15,12 +15,11 @@ public class Location {
      * " " (a blank string) becomes a valid input.
      */
     public static final String LOCATION_VALIDATION_REGEX = "[^\\s].*";
-    public static final String DEFAULT_LOCATION = "DEFAULT_LOCATION";
     public final String value;
 
     //Allows an empty constructor
     public Location() {
-        this.value = DEFAULT_LOCATION;
+        this.value = "";
     }
     /**
      * Validates given location.
@@ -29,7 +28,7 @@ public class Location {
      *             if given location string is invalid.
      */
     public Location(String location) throws IllegalValueException {
-        if (location == null || location.equals(DEFAULT_LOCATION) || location.trim().equals("")) {
+        if (location == null || location.trim().equals("")) {
             this.value = "";
         } else {
             if (!isValidLocation(location)) {

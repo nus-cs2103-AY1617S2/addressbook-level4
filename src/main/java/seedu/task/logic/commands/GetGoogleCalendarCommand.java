@@ -12,6 +12,7 @@ import com.google.api.services.calendar.model.Events;
 import seedu.task.commons.core.GoogleCalendar;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.logic.util.LogicHelper;
 import seedu.task.model.task.Task;
 
 // @@author A0140063X
@@ -44,7 +45,7 @@ public class GetGoogleCalendarCommand extends Command {
 
             for (Event event : events) {
                 try {
-                    tasks.add(createTaskFromEvent(event));
+                    tasks.add(LogicHelper.createTaskFromEvent(event));
                     logger.info("New event from google calendar sucessfully added.");
                 } catch (IllegalValueException ive) {
                     logger.info(ive.getMessage());

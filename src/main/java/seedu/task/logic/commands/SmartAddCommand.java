@@ -11,6 +11,7 @@ import seedu.task.commons.core.GoogleCalendar;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.util.LogicHelper;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Remark;
@@ -63,7 +64,7 @@ public class SmartAddCommand extends Command {
         Event createdEvent = service.events().quickAdd(GoogleCalendar.CALENDAR_ID, name).execute();
         service.events().delete(GoogleCalendar.CALENDAR_ID, createdEvent.getId()).execute();
 
-        Task toAdd = createTaskFromEvent(createdEvent);
+        Task toAdd = LogicHelper.createTaskFromEvent(createdEvent);
         toAdd.setTags(new UniqueTagList(tagSet));
         toAdd.setRemark(new Remark(remark));
 

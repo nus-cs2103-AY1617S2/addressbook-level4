@@ -1,11 +1,8 @@
 package seedu.task.logic.commands;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
-import com.google.api.services.calendar.model.Event;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -13,13 +10,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ReadOnlyTaskManager;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Date;
-import seedu.task.model.task.Location;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Remark;
-import seedu.task.model.task.Task;
+import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.storage.Storage;
 
 /**
@@ -89,17 +80,13 @@ public abstract class Command {
     }
 
     // @@author A0140063X
-    protected static Task createTaskFromEvent(Event event) throws IllegalValueException {
-        if (event.getSummary() == null) {
-            throw new IllegalValueException("Name must not be empty.");
-        }
-        Name name = new Name(event.getSummary());
-        Date startDate = new Date(event.getStart());
-        Date endDate = new Date(event.getEnd());
-        Remark remark = new Remark(event.getDescription());
-        Location location = new Location(event.getLocation());
-        final Set<Tag> tagSet = new HashSet<>(); // No tags
+    protected ReadOnlyTask getTaskFromIndex(int index) throws CommandException {
+        assert model != null;
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false, event.getId());
+        if (index >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+        return lastShownList.get(index);
     }
 }
