@@ -121,6 +121,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    @Override
+    public String getCommandMapString() {
+        return this.currentTaskManager.getCommandMapString();
+    }
+
     public void setCurrentComparator(String type) {
         switch (type) {
         case ListCommand.COMPARATOR_NAME_DATE:

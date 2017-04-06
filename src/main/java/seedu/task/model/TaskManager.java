@@ -186,6 +186,9 @@ public class TaskManager implements ReadOnlyTaskManager {
         return commandMap.translateCommand(original);
     }
 
+    public String getCommandMapString() {
+        return commandMap.toString();
+    }
 //// util methods
 
     @Override

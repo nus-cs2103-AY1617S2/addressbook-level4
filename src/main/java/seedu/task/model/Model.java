@@ -130,4 +130,6 @@ public interface Model {
     void addCommandAlias(String alias, String original) throws OriginalCommandNotFoundException,
             BaseCommandNotAllowedAsAliasException;
 
+    String getCommandMapString();
+
 }

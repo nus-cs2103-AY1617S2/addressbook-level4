@@ -2,6 +2,8 @@ package seedu.task.model.commandmap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.AliasCommand;
@@ -107,5 +109,31 @@ public class CommandMap {
             commandToMap = commandMap.get(commandToMap);
         }
         return commandToMap;
+    }
+
+    private HashMap<String, ArrayList<String>> groupByOriginalCommand() {
+        HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+        Iterator it = this.commandMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (!map.containsKey((String) pair.getValue())) {
+                map.put((String) pair.getValue(), new ArrayList<String>());
+            }
+            map.get(pair.getValue()).add((String) pair.getKey());
+            it.remove();
+        }
+        return map;
+    }
+
+    @Override
+    public String toString() {
+        String mapString = "";
+        Iterator it = this.groupByOriginalCommand().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            mapString += pair.getKey() + ": " + pair.getValue().toString() + "\n";
+            it.remove();
+        }
+        return mapString;
     }
 }
