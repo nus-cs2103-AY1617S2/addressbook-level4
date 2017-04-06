@@ -1,56 +1,4 @@
 # A0139872R-reused
-###### \java\seedu\watodo\logic\commands\ListCommand.java
-``` java
-/**
- * Lists all overdue tasks and upcoming tasks due the next day in the task manager to the user.
- */
-public class ListCommand extends Command {
-
-    public static final String COMMAND_WORD = "list";
-
-    public static final String MESSAGE_SUCCESS = "Listed all overdue tasks and tasks due tomorrow";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists tasks that fit the specified keyword as a filter to the user. "
-            + "Parameters: LIST_TYPE\n" + "Example: " + COMMAND_WORD + " all";
-
-    public static final int DEADLINE = 1;
-
-    @Override
-    public CommandResult execute() {
-        try {
-            model.updateFilteredByDatesTaskList(DEADLINE);
-        } catch (IllegalValueException ive) {
-            ive.printStackTrace();
-        }
-        return new CommandResult(MESSAGE_SUCCESS);
-    }
-}
-```
-###### \java\seedu\watodo\logic\commands\ListDayCommand.java
-``` java
-/**
- * Lists all tasks scheduled on the current day in the task manager to the user.
- */
-public class ListDayCommand extends ListCommand {
-
-    public static final String COMMAND_WORD = "day";
-
-    public static final String MESSAGE_SUCCESS = "Listed today's tasks";
-
-    public static final int DEADLINE = 0;
-
-    @Override
-    public CommandResult execute() {
-        try {
-            model.updateFilteredByDatesTaskList(DEADLINE);
-        } catch (IllegalValueException ive) {
-            ive.printStackTrace();
-        }
-        return new CommandResult(MESSAGE_SUCCESS);
-    }
-}
-```
 ###### \java\seedu\watodo\logic\commands\ListDeadlineCommand.java
 ``` java
 /**
@@ -58,13 +6,13 @@ public class ListDayCommand extends ListCommand {
  */
 public class ListDeadlineCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "deadline";
+    public static final String ARGUMENT = "deadline";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks with deadlines";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
@@ -76,13 +24,13 @@ public class ListDeadlineCommand extends ListCommand {
  */
 public class ListDoneCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String ARGUMENT = "done";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks that are marked as completed";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
@@ -94,13 +42,13 @@ public class ListDoneCommand extends ListCommand {
  */
 public class ListEventCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "event";
+    public static final String ARGUMENT = "event";
 
     public static final String MESSAGE_SUCCESS = "Listed all events";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
@@ -112,37 +60,13 @@ public class ListEventCommand extends ListCommand {
  */
 public class ListFloatCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "float";
+    public static final String ARGUMENT = "float";
 
     public static final String MESSAGE_SUCCESS = "Listed all floating tasks";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
-        return new CommandResult(MESSAGE_SUCCESS);
-    }
-}
-```
-###### \java\seedu\watodo\logic\commands\ListMonthCommand.java
-``` java
-/**
- * Lists all tasks scheduled on the current month in the task manager to the user.
- */
-public class ListMonthCommand extends ListCommand {
-
-    public static final String COMMAND_WORD = "month";
-
-    public static final String MESSAGE_SUCCESS = "Listed this month's tasks";
-
-    public static final int DEADLINE = 1;
-
-    @Override
-    public CommandResult execute() {
-        try {
-            model.updateFilteredByMonthsTaskList(DEADLINE);
-        } catch (IllegalValueException ive) {
-            ive.printStackTrace();
-        }
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
@@ -183,38 +107,85 @@ public class ListTagCommand extends ListCommand {
  */
 public class ListUndoneCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "undone";
+    public static final String ARGUMENT = "undone";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks that are not yet completed";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
 ```
-###### \java\seedu\watodo\logic\commands\ListWeekCommand.java
+###### \java\seedu\watodo\logic\parser\ListCommandParser.java
 ``` java
 /**
- * Lists all tasks scheduled on the current week in the task manager to the user.
+ * Parses input arguments into various types of list commands for execution.
  */
-public class ListWeekCommand extends ListCommand {
+public class ListCommandParser {
 
-    public static final String COMMAND_WORD = "week";
-
-    public static final String MESSAGE_SUCCESS = "Listed this week's tasks";
-
-    public static final int DEADLINE = 7;
-
-    @Override
-    public CommandResult execute() {
-        try {
-            model.updateFilteredByDatesTaskList(DEADLINE);
-        } catch (IllegalValueException ive) {
-            ive.printStackTrace();
+    /**
+     * Parses the given {@code String} of arguments in the context of the ListCommand
+     * and returns its respective ListCommand objects for execution.
+     */
+    public Command parse(String args) {
+        if (args.contains("#")) {
+            return new ListTagCommandParser().parse(args);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        switch (args) {
+
+        case ListAllCommand.ARGUMENT:
+            return new ListAllCommand();
+
+        case ListDeadlineCommand.ARGUMENT:
+            return new ListDeadlineCommand();
+
+        case ListDoneCommand.ARGUMENT:
+            return new ListDoneCommand();
+
+        case ListEventCommand.ARGUMENT:
+            return new ListEventCommand();
+
+        case ListFloatCommand.ARGUMENT:
+            return new ListFloatCommand();
+
+        case ListUndoneCommand.ARGUMENT:
+            return new ListUndoneCommand();
+
+        case ListCommand.ARGUMENT:
+            return new ListCommand();
+
+        default:
+            return new ListDateCommandParser().parse(args);
+        }
+    }
+}
+```
+###### \java\seedu\watodo\logic\parser\ListDateCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new ListDateCommand object
+ */
+public class ListDateCommandParser {
+
+    private DateTimeParser dateTimeParser;
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the
+     * ListDateCommand and returns a ListDateCommand object for execution.
+     */
+    public Command parse(String args) {
+        try {
+            dateTimeParser = new DateTimeParser();
+            dateTimeParser.parse(args);
+            return new ListDateCommand(dateTimeParser.getStartDate(), dateTimeParser.getEndDate());
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 }
 ```
@@ -237,11 +208,12 @@ public class ListWeekCommand extends ListCommand {
                 .stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.joining(" "));
+            String status = task.getStatus().toString();
             return tagKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
                     .findAny()
                     .isPresent() &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT);
         }
 
         @Override

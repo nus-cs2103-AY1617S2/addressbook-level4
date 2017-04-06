@@ -13,6 +13,7 @@ import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
@@ -116,20 +117,21 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
+        TaskStatus updatedStatus = taskToEdit.getStatus();
+
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        if (!updatedTags.equalsOrderInsensitive(taskToEdit.getTags())) {
-            UniqueTagList existingTags = taskToEdit.getTags();
-            for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
-                Tag tags = iterator.next();
-                if (existingTags.contains(tags)) {
-                    iterator.remove();
-                    existingTags.remove(tags);
-                }
+        UniqueTagList existingTags = taskToEdit.getTags();
+        for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
+            Tag tags = iterator.next();
+            if (existingTags.contains(tags)) {
+                iterator.remove();
+                existingTags.remove(tags);
             }
-            updatedTags.mergeFrom(existingTags);
         }
+        updatedTags.mergeFrom(existingTags);
+
         if (hasRemoveDate) {
-            return new Task(updatedName, null, null, updatedTags);
+            return new Task(updatedName, null, null, updatedTags, updatedStatus);
         }
         DateTime startDate;
         DateTime endDate;
@@ -140,7 +142,7 @@ public class EditCommand extends Command {
             startDate = editTaskDescriptor.getStartDate().orElse(null);
             endDate = editTaskDescriptor.getEndDate().get();
         }
-        return new Task(updatedName, startDate, endDate, updatedTags);
+        return new Task(updatedName, startDate, endDate, updatedTags, updatedStatus);
     }
 
     /**
@@ -152,6 +154,7 @@ public class EditCommand extends Command {
         private Optional<DateTime> startDate = Optional.empty();
         private Optional<DateTime> endDate = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<TaskStatus> status = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -160,13 +163,14 @@ public class EditCommand extends Command {
             this.startDate = toCopy.getStartDate();
             this.endDate = toCopy.getEndDate();
             this.tags = toCopy.getTags();
+            this.status = toCopy.getStatus();
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.description, this.startDate, this.endDate, this.tags);
+            return CollectionUtil.isAnyPresent(this.description, this.startDate, this.endDate, this.tags, this.status);
         }
 
         public void setTaskName(Optional<Description> description) {
@@ -202,5 +206,18 @@ public class EditCommand extends Command {
         public void setEndDate(Optional<DateTime> endDate) {
             this.endDate = endDate;
         }
+
+        public Optional<TaskStatus> getStatus() {
+            return status;
+        }
+
+        public void setStatus(Optional<TaskStatus> status) {
+            this.status = status;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 }

@@ -1,13 +1,14 @@
 package seedu.watodo.logic.commands;
 
-/**
- * Clears the task manager.
- */
 //@@author A0139845R
+/**
+ * Undo the last command saved into the command history stack in model
+ */
+
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = " reverted.";
+    public static final String MESSAGE_SUCCESS = "undo success.";
     public static final String MESSAGE_EMPTY = "No command left to undo.";
     public static final String MESSAGE_FAILURE = "Failed to undo";
 
@@ -25,5 +26,10 @@ public class UndoCommand extends Command {
         }
 
         return new CommandResult(MESSAGE_EMPTY);
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 }

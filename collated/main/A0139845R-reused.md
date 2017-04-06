@@ -1,13 +1,6 @@
-package seedu.watodo.ui;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import seedu.watodo.model.task.ReadOnlyTask;
-
-//@@author A0139845R-reused
+# A0139845R-reused
+###### \java\seedu\watodo\ui\TaskCard.java
+``` java
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -57,3 +50,4 @@ public class TaskCard extends UiPart<Region> {
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
+```

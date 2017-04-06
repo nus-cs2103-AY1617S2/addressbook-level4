@@ -1,6 +1,5 @@
 package seedu.watodo.model;
 
-import java.util.Calendar;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
@@ -82,7 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        updateFilteredByTypesTaskList(ListUndoneCommand.COMMAND_WORD);
+        updateFilteredByTypesTaskList(ListUndoneCommand.ARGUMENT);
         indicateTaskManagerChanged();
     }
 
@@ -119,13 +118,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredByDatesTaskList(int days) throws IllegalValueException {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(days)));
-    }
-
-    @Override
-    public void updateFilteredByMonthsTaskList(int months) throws IllegalValueException {
-        updateFilteredTaskList(new PredicateExpression(new MonthQualifier(months)));
+    public void updateFilteredByDatesTaskList(DateTime start, DateTime end) throws IllegalValueException {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(start, end)));
     }
 
     @Override
@@ -184,8 +178,7 @@ public class ModelManager extends ComponentManager implements Model {
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
                         task.getDescription().fullDescription, keyword))
                     .findAny()
-                    .isPresent() &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                    .isPresent();
         }
 
         @Override
@@ -212,11 +205,12 @@ public class ModelManager extends ComponentManager implements Model {
                 .stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.joining(" "));
+            String status = task.getStatus().toString();
             return tagKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(tags, keyword))
                     .findAny()
                     .isPresent() &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT);
         }
 
         @Override
@@ -226,79 +220,50 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139872R
+    /**
+     * Returns true if the tasks are within the specified range and is undone.
+     */
     private class DateQualifier implements Qualifier {
-        private int days;
-        private Calendar temp;
-        private DateTime deadline;
+        private DateTime start = null;
+        private DateTime end = null;
 
-        DateQualifier(int days) throws IllegalValueException {
-            assert days >= 0;
-            this.temp = Calendar.getInstance();
-            this.temp.add(Calendar.DATE, days + 1);
-            temp.set(Calendar.HOUR_OF_DAY, 0);
-            temp.set(Calendar.MINUTE, 0);
-            temp.set(Calendar.SECOND, 0);
-            temp.set(Calendar.MILLISECOND, 0);
-            this.deadline = new DateTime(temp.getTime().toString());
-        }
-
-        @Override
-        public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
-                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return deadline.isLater(task.getEndDate()) &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+        DateQualifier(DateTime start, DateTime end) {
+            assert start != null || end != null;
+            if (start != null) {
+                this.start = start;
+            }
+            if (end != null) {
+                this.end = end;
             }
         }
 
         @Override
-        public String toString() {
-            return "period=" + days;
-        }
-    }
-
-    private class MonthQualifier implements Qualifier {
-        private int months;
-        private Calendar temp;
-        private DateTime deadline;
-
-        MonthQualifier(int months) throws IllegalValueException {
-            assert months >= 0;
-            this.temp = Calendar.getInstance();
-            this.temp.add(Calendar.MONTH, months);
-            temp.set(Calendar.DATE, 1);
-            temp.set(Calendar.HOUR_OF_DAY, 0);
-            temp.set(Calendar.MINUTE, 0);
-            temp.set(Calendar.SECOND, 0);
-            temp.set(Calendar.MILLISECOND, 0);
-            this.deadline = new DateTime(temp.getTime().toString());
-        }
-
-        @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate() == null) {
-                if (task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+            String status = task.getStatus().toString();
+            if (status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
+                if (task.getEndDate() == null) {
                     return true;
-                } else {
-                    return false;
                 }
-            } else {
-                return deadline.isLater(task.getEndDate()) &&
-                task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD);
+                if (start == null) {
+                    return end.isLater(task.getEndDate());
+                }
+                if (end == null) {
+                    task.getStartDate().isLater(start);
+                }
+                return end.isLater(task.getEndDate()) && task.getStartDate().isLater(start);
             }
+            return false;
         }
 
         @Override
         public String toString() {
-            return "period=" + months;
+            return "start=" + start.toString() + " end=" + end.toString();
         }
     }
 
+    /**
+     * Returns true if the type of the tasks matches the specified type.
+     */
     private class TypeQualifier implements Qualifier {
         private String type;
 
@@ -309,36 +274,37 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            String status = task.getStatus().toString();
             switch (type) {
-            case ListDoneCommand.COMMAND_WORD:
-                if (task.getStatus().toString().equalsIgnoreCase(type)) {
+            case ListDoneCommand.ARGUMENT:
+                if (status.equalsIgnoreCase(ListDoneCommand.ARGUMENT)) {
                     return true;
                 } else {
                     return false;
                 }
-            case ListDeadlineCommand.COMMAND_WORD:
+            case ListDeadlineCommand.ARGUMENT:
                 if (task.getStartDate() == null && task.getEndDate() != null &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
                 } else {
                     return false;
                 }
-            case ListEventCommand.COMMAND_WORD:
+            case ListEventCommand.ARGUMENT:
                 if (task.getStartDate() != null && task.getEndDate() != null &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
                 } else {
                     return false;
                 }
-            case ListFloatCommand.COMMAND_WORD:
+            case ListFloatCommand.ARGUMENT:
                 if (task.getStartDate() == null && task.getEndDate() == null &&
-                    task.getStatus().toString().equalsIgnoreCase(ListUndoneCommand.COMMAND_WORD)) {
+                    status.equalsIgnoreCase(ListUndoneCommand.ARGUMENT)) {
                     return true;
                 } else {
                     return false;
                 }
-            case ListUndoneCommand.COMMAND_WORD:
-                if (task.getStatus().toString().equalsIgnoreCase(type)) {
+            case ListUndoneCommand.ARGUMENT:
+                if (status.equalsIgnoreCase(type)) {
                     return true;
                 } else {
                     return false;
@@ -367,10 +333,26 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addCommandToHistory(Command command) {
-        commandHistory.push(command);
+        String cmdWord = command.toString();
+
+        switch (cmdWord) {
+        case "add":
+        case "clear":
+        case "delete":
+        case "edit":
+        case "mark":
+        case "unmark":
+            commandHistory.push(command);
+        default:
+            break;
+        }
+
 
     }
 
+    /**
+     * returns the
+     */
     @Override
     public Command getUndoneCommand() {
         if (!undoneHistory.isEmpty()) {

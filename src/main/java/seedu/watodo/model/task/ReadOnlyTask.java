@@ -12,7 +12,7 @@ public interface ReadOnlyTask {
     DateTime getStartDate();
     DateTime getEndDate();
     TaskStatus getStatus();
-
+    TaskType getTaskType();
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
@@ -26,10 +26,25 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription())// state checks here onwards
-                && other.getStartDate() == this.getStartDate()
-                && other.getEndDate() == this.getEndDate()
                 && other.getStatus().equals(this.getStatus())
-                && other.getTags().equals(this.getTags()));
+                && other.getTags().equals(this.getTags()))
+                && datesAreSame(other);
+    }
+
+    /**
+     * Returns true if both have the same number of dates and the dates are equal.
+     */
+    default boolean datesAreSame (ReadOnlyTask other) {
+        if (this.getEndDate() != null) {
+            if (this.getStartDate() != null) {
+                return this.getStartDate().equals(other.getStartDate())
+                    && this.getEndDate().equals(other.getEndDate());
+            }
+            return this.getEndDate().equals(other.getEndDate())
+                && this.getStartDate() == other.getStartDate();
+        }
+        return this.getStartDate() == other.getStartDate()
+            && this.getEndDate() == other.getEndDate();
     }
 
     /**
@@ -37,10 +52,14 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDescription());
-        if (this.getTags() != null) { // TODO fix
-            builder.append("\nTags: ");
-            getTags().forEach(builder::append);
+        builder.append(getDescription())
+               .append("\nTags: ");
+        getTags().forEach(builder::append);
+        if (this.getStartDate() != null) {
+            builder.append("\nStart: ").append(this.getStartDate());
+        }
+        if (this.getEndDate() != null) {
+            builder.append("\nEnd: ").append(this.getEndDate());
         }
         return builder.toString();
     }

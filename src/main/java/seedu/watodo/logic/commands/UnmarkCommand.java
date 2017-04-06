@@ -1,5 +1,8 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
+import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -8,6 +11,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0141077L-reused
 /**
@@ -34,14 +38,19 @@ public class UnmarkCommand extends Command {
     private ReadOnlyTask taskToUnmark;
     private Task unmarkedTask;
 
-    private int indexForUndoUnmark;
-    private Task markedTaskForUndoUnmark;
+    //private int indexForUndoUnmark;
+    //private Task markedTaskForUndoUnmark;
+    private Stack< Task > taskToUnmarkList;
+    private Stack< Task > unmarkedTaskList;
 
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
         changeToZeroBasedIndexing();
+        taskToUnmarkList = new Stack< Task >();
+        unmarkedTaskList = new Stack< Task >();
     }
+
 
     /** Converts filteredTaskListIndex from one-based to zero-based. */
     private void changeToZeroBasedIndexing() {
@@ -62,7 +71,7 @@ public class UnmarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 unmarkTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToUnmark);
+                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToUnmark, unmarkedTask);
                 compiledExecutionMessage.append(
                         String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToUnmark) + '\n');
 
@@ -141,9 +150,11 @@ public class UnmarkCommand extends Command {
         model.updateTask(currIndex, unmarkedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToUnmark) {
-        this.indexForUndoUnmark = currIndex;
-        this.markedTaskForUndoUnmark = new Task(taskToUnmark);
+    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToUnmark, Task unmarkedTask) {
+        //this.indexForUndoUnmark = currIndex;
+        //this.markedTaskForUndoUnmark = new Task(taskToUnmark);
+        this.taskToUnmarkList.push(new Task(taskToUnmark));
+        this.unmarkedTaskList.push(unmarkedTask);
     }
 
     //@@author A0139845R
@@ -151,8 +162,15 @@ public class UnmarkCommand extends Command {
     @Override
     public void unexecute() {
         try {
-            model.updateTask(indexForUndoUnmark, markedTaskForUndoUnmark);
+            while (!unmarkedTaskList.isEmpty()) {
+                model.deleteTask(unmarkedTaskList.pop());
+                model.addTask(taskToUnmarkList.pop());
+            }
+            model.updateFilteredListToShowAll();
+
         } catch (DuplicateTaskException e) {
+
+        } catch (TaskNotFoundException e) {
 
         }
     }
@@ -166,5 +184,10 @@ public class UnmarkCommand extends Command {
         }
     }
     //@@author
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 
 }

@@ -6,13 +6,13 @@ package seedu.watodo.logic.commands;
  */
 public class ListDoneCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String ARGUMENT = "done";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks that are marked as completed";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

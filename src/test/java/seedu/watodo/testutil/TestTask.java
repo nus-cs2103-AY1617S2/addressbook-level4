@@ -6,6 +6,7 @@ import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.TaskStatus;
+import seedu.watodo.model.task.TaskType;
 
 /**
  * A mutable person object. For testing only.
@@ -17,6 +18,7 @@ public class TestTask implements ReadOnlyTask {
     private DateTime endDate;
     private TaskStatus status; //Default status of any new task created is UNDONE
     private UniqueTagList tags;
+    private TaskType taskType;
 
     public TestTask() {};
 
@@ -112,6 +114,11 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getDescription().fullDescription + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return taskType;
     }
 
 }

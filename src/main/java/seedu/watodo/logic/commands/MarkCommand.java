@@ -1,5 +1,8 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
+import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -8,6 +11,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0141077L
 /**
@@ -30,15 +34,20 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_STATUS_AlREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-    private ReadOnlyTask taskToMark;
-    private Task markedTask;
+  private ReadOnlyTask taskToMark;
+  private Task markedTask;
 
-    private int indexForUndoMark;
-    private Task unmarkedTaskForUndoMark;
+    private Stack< Task > taskToMarkList;
+    private Stack< Task > markedTaskList;
+
+    //private int indexForUndoMark;
+    //private Task unmarkedTaskForUndoMark;
 
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
         changeToZeroBasedIndexing();
+        taskToMarkList = new Stack< Task >();
+        markedTaskList = new Stack< Task >();
     }
 
     /** Converts filteredTaskListIndex from one-based to zero-based. */
@@ -60,7 +69,7 @@ public class MarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 markTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToMark);
+                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToMark, markedTask);
                 compiledExecutionMessage.append(
                         String.format(MESSAGE_MARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToMark) + '\n');
 
@@ -139,9 +148,12 @@ public class MarkCommand extends Command {
         model.updateTask(currIndex, markedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark) {
+    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
         this.indexForUndoMark = currIndex;
-        this.unmarkedTaskForUndoMark = new Task(taskToMark);
+      
+        //this.unmarkedTaskForUndoMark = new Task(taskToMark);
+        this.taskToMarkList.push(new Task(taskToMark));
+        this.markedTaskList.push(markedTask);
     }
 
     //@@author A0139845R
@@ -150,8 +162,14 @@ public class MarkCommand extends Command {
     public void unexecute() {
         try {
             model.updateFilteredListToShowAll();
-            model.updateTask(indexForUndoMark, unmarkedTaskForUndoMark);
+            while (!taskToMarkList.isEmpty()) {
+                model.deleteTask(markedTaskList.pop());
+                model.addTask(taskToMarkList.pop());
+            }
+
         } catch (DuplicateTaskException e) {
+
+        } catch (TaskNotFoundException e) {
 
         }
     }
@@ -166,5 +184,10 @@ public class MarkCommand extends Command {
     }
 
     //@@author
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 
 }

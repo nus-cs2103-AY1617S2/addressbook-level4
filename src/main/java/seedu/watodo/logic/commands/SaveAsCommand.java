@@ -104,4 +104,9 @@ public class SaveAsCommand extends Command {
         logger.log(Level.INFO, String.format(MESSAGE_SUCCESS, this.newFilePath));
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }

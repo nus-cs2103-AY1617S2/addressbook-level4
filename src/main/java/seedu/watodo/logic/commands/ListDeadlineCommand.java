@@ -6,13 +6,13 @@ package seedu.watodo.logic.commands;
  */
 public class ListDeadlineCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "deadline";
+    public static final String ARGUMENT = "deadline";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks with deadlines";
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredByTypesTaskList(COMMAND_WORD);
+        model.updateFilteredByTypesTaskList(ARGUMENT);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

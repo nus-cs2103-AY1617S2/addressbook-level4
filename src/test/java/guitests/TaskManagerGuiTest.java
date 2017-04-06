@@ -30,7 +30,7 @@ import seedu.watodo.testutil.TestUtil;
 import seedu.watodo.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for TaskManager.
  */
 public abstract class TaskManagerGuiTest {
 
@@ -107,16 +107,16 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, task));
     }
 
     /**
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+        int numberOfTask = taskListPanel.getNumberOfPeople();
+        assertEquals(size, numberOfTask);
     }
 
     /**
