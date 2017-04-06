@@ -2,17 +2,18 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.bulletjournal.commons.core.Messages;
+import seedu.bulletjournal.logic.commands.ShowCommand;
 import seedu.bulletjournal.testutil.TestTask;
 
 public class ShowCommandTest extends TodoListGuiTest {
 
     @Test
     public void showNonEmptyList() {
-        assertShowResult("show finished"); // no results
         assertShowResult("show done", td.buymilk, td.creatework, td.eatleftovers); // multiple results
         assertShowResult("show undone", td.assignment, td.dumpmilk, td.findsocks, td.getclothes); //multiple results
 
@@ -32,6 +33,8 @@ public class ShowCommandTest extends TodoListGuiTest {
     public void showInvalidCommandFail() {
         commandBox.runCommand("showdone");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        commandBox.runCommand("show finished"); // invalid command
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
 
     private void assertShowResult(String command, TestTask... expectedHits) {

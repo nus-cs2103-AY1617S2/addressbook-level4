@@ -14,6 +14,7 @@ import seedu.bulletjournal.logic.commands.DeleteCommand;
 import seedu.bulletjournal.logic.commands.EditCommand;
 import seedu.bulletjournal.logic.commands.ExitCommand;
 import seedu.bulletjournal.logic.commands.FindCommand;
+import seedu.bulletjournal.logic.commands.FinishCommand;
 import seedu.bulletjournal.logic.commands.HelpCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
@@ -63,6 +64,9 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case FinishCommand.COMMAND_WORD:
+            return new FinishCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

@@ -2,7 +2,7 @@
 package seedu.bulletjournal.logic.parser;
 
 import static seedu.bulletjournal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bulletjournal.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
+import static seedu.bulletjournal.logic.parser.CliSyntax.KEYWORDS_SHOW_FORMAT;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,14 +23,14 @@ public class ShowCommandParser {
      * and returns an ShowCommand object for execution.
      */
     public Command parse(String args) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher = KEYWORDS_SHOW_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final String[] keywords = matcher.group().split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new ShowCommand(keywordSet);
     }
