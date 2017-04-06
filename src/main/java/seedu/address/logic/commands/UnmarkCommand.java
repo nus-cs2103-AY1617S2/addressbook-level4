@@ -50,7 +50,7 @@ public class UnmarkCommand extends Command {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createUnmarkedPerson(personToEdit);
+        ReadOnlyPerson editedPerson = createUnmarkedPerson(personToEdit);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -65,7 +65,7 @@ public class UnmarkCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited to be complete.
      */
-    private static Task createUnmarkedPerson(ReadOnlyPerson personToEdit) {
+    private static ReadOnlyPerson createUnmarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
 
         UniqueTagList updatedTags =

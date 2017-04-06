@@ -353,9 +353,9 @@ public class LogicManagerTest {
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
+        ReadOnlyPerson pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
         Task p1 = helper.generatePersonWithName("KE Y");
-        Task p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
+        ReadOnlyPerson p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
         YTomorrow expectedAB = helper.generateAddressBook(fourPersons);
@@ -371,10 +371,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task p2 = helper.generatePersonWithName("bla KEY bla bceofeia");
+        ReadOnlyPerson p1 = helper.generatePersonWithName("bla bla KEY bla");
+        ReadOnlyPerson p2 = helper.generatePersonWithName("bla KEY bla bceofeia");
         Task p3 = helper.generatePersonWithName("key key");
-        Task p4 = helper.generatePersonWithName("KEy sduauo");
+        ReadOnlyPerson p4 = helper.generatePersonWithName("KEy sduauo");
 
         List<Task> fourPersons = helper.generatePersonList(p3, p1, p4, p2);
         YTomorrow expectedAB = helper.generateAddressBook(fourPersons);
@@ -391,9 +391,9 @@ public class LogicManagerTest {
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generatePersonWithName("key key");
-        Task p1 = helper.generatePersonWithName("sduauo");
+        ReadOnlyPerson pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
+        ReadOnlyPerson pTarget3 = helper.generatePersonWithName("key key");
+        ReadOnlyPerson p1 = helper.generatePersonWithName("sduauo");
 
         List<Task> fourPersons = helper.generatePersonList(pTarget1, p1, pTarget2, pTarget3);
         YTomorrow expectedAB = helper.generateAddressBook(fourPersons);
@@ -443,7 +443,7 @@ public class LogicManagerTest {
         }
 
         /** Generates the correct add command based on the person given */
-        String generateAddCommand(Task p) {
+        String generateAddCommand(ReadOnlyPerson p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");

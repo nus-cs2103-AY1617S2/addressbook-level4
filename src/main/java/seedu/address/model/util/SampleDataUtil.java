@@ -15,6 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
@@ -26,7 +27,7 @@ public class SampleDataUtil {
     
     Random r;
     
-    public static Task[] getSampleTasks(int n) {
+    public static ReadOnlyPerson[] getSampleTasks(int n) {
         Set<Task> generated = new HashSet<Task>();
         for (int i = 0; i < n; i++) {
             if (!generated.add(generateRandomTask())) {

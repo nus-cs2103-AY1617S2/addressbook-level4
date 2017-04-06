@@ -50,7 +50,7 @@ public class MarkCommand extends Command {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createMarkedPerson(personToEdit);
+        ReadOnlyPerson editedPerson = createMarkedPerson(personToEdit);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
@@ -65,7 +65,7 @@ public class MarkCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited to be complete.
      */
-    private static Task createMarkedPerson(ReadOnlyPerson personToEdit) {
+    private static ReadOnlyPerson createMarkedPerson(ReadOnlyPerson personToEdit) {
         assert personToEdit != null;
 
         UniqueTagList updatedTags =
