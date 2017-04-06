@@ -18,37 +18,45 @@ public class TypicalTestPersons {
             alice = new PersonBuilder()
                     .withName("Alice Paul")
                     .withGroup("group1")
+                    .withStartDate("01.01")
                     .withEndDate("12.12")
-                    .withTags("incomplete")
+                    .withTags("complete")
                     .build();
-            benson = new PersonBuilder().withName("Benson Meier")
+            benson = new PersonBuilder()
+                    .withName("Benson Meier")
                     .withGroup("311")
                     .withEndDate("12.11")
                     .withTags("incomplete")
                     .build();
-            carl = new PersonBuilder().withName("Carl Kurz")
-                    .withEndDate("10.01")
+            carl = new PersonBuilder()
+                    .withName("Carl Kurz")
                     .withGroup("wall street")
+                    .withEndDate("10.01")
+                    .withTags("complete")
                     .build();
             daniel = new PersonBuilder()
                     .withName("Daniel Meier")
-                    .withEndDate("11.11")
                     .withGroup("street")
+                    .withEndDate("11.11")
+                    .withTags("incomplete")
                     .build();
             elle = new PersonBuilder()
                     .withName("Elle Meyer")
-                    .withEndDate("05.05")
                     .withGroup("michegan")
+                    .withEndDate("05.05")
+                    .withTags("incomplete")
                     .build();
             fiona = new PersonBuilder()
                     .withName("Fiona Kunz")
-                    .withEndDate("07.07")
                     .withGroup("little tokyo")
+                    .withEndDate("07.07")
+                    .withTags("incomplete")
                     .build();
             george = new PersonBuilder()
                     .withName("George Best")
                     .withEndDate("04.12")
                     .withGroup("street")
+                    .withTags("incomplete")
                     .build();
 
             // Manually added

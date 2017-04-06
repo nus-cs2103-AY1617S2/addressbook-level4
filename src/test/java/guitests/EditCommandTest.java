@@ -18,7 +18,7 @@ import seedu.address.testutil.TestPerson;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of task in the person list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
     TestPerson[] expectedPersonsList = td.getTypicalPersons();
 
@@ -26,7 +26,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_allFieldsSpecified_success() throws Exception {
         int addressBookIndex = 1;
         //@@author A0164889E
-        String detailsToEdit = "Bobby s/01.01 d/12.04 g/project t/incomplete";
+        String detailsToEdit = "Bobby s/01.01 d/12.04 g/project";
         //@@author A0164889E
         TestPerson editedPerson = new PersonBuilder()
                 .withName("Bobby")
@@ -37,25 +37,14 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
-
+    //@@author A0164032U
     @Test
     public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
+        String detailsToEdit = "g/examination";
         int addressBookIndex = 2;
 
         TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
-
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
-    }
-
-    @Test
-    public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
-        int addressBookIndex = 2;
-
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestPerson editedPerson = new PersonBuilder(personToEdit).withGroup("examination").build();
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }

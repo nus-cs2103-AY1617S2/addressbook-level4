@@ -21,6 +21,8 @@ public class TestPerson implements ReadOnlyPerson {
     private UniqueTagList tags;
 
     public TestPerson() {
+        start = null;
+        end = null;
         tags = new UniqueTagList();
     }
 
