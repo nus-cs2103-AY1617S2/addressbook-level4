@@ -235,10 +235,6 @@ public class ModelManager extends ComponentManager implements Model {
         prepareListsForUi();
     }
 
-    public UnmodifiableObservableList<ReadOnlyEvent> getEventsWithOverlappingTimeslots(Timeslot candidate) {
-        return new UnmodifiableObservableList<>(userInbox.getEventsWithOverlappingTimeslots(candidate));
-    }
-
     @Override
     public void saveUserInboxStateForUndo() {
         undoStack.push(new UserInbox(this.userInbox));

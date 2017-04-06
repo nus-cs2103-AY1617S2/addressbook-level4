@@ -10,10 +10,10 @@ import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.logic.commands.MarkCommand;
-
+//@@author A0127737X
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
- *
+ * At any point in time, {@code internalList} is sorted by the deadline.
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
@@ -26,27 +26,45 @@ public class UniqueTaskList implements Iterable<Task> {
     public void sortTasksByDeadline () {
         internalList.sort(null);
     }
-    /**
-     * Returns true if the list contains an equivalent task as the given argument.
-     */
-    public boolean contains(ReadOnlyTask toCheck) {
-        assert toCheck != null;
-        return internalList.contains(toCheck);
-    }
 
     /**
-     *  Checks and marks any active tasks whose deadline is past the current time as overdue.
+     *  Checks and marks all active, incomplete tasks whose deadline is past tehe current time.
+     *  Returns boolean {@code isAnyUpdate} that indicates that whether or not anything was newly marked as overdue,
+     *  which can be used by the caller to tell if there is a need to overwrite data in hard disk.
      */
     public boolean updateOverdueStatus() {
         boolean isAnyUpdate = false;
         Date now = new Date();
         for (Task task: internalList) {
             if (!task.isComplete() && !task.isOverdue()) {
-                task.updateOverdueStatus(now);
-                isAnyUpdate = isAnyUpdate || task.updateOverdueStatus(now);
+                isAnyUpdate = task.updateOverdueStatus(now) || isAnyUpdate;
             }
         }
         return isAnyUpdate;
+    }
+
+    /**
+     * Marks the task specified by {@code targetIndex} according to {@code markFlag}.
+     */
+    public void markTask(int targetIndex, int markFlag) {
+        Task target = internalList.get(targetIndex);
+        if (markFlag == MarkCommand.MARK_COMPLETE) {
+            target.markComplete();
+        } else if (markFlag == MarkCommand.MARK_INCOMPLETE) {
+            target.markIncomplete();
+        } else {
+            assert false;
+        }
+        sortTasksByDeadline();
+    }
+
+//@@author
+    /**
+     * Returns true if the list contains an equivalent task as the given argument.
+     */
+    public boolean contains(ReadOnlyTask toCheck) {
+        assert toCheck != null;
+        return internalList.contains(toCheck);
     }
 
     /**
@@ -60,16 +78,6 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
-        sortTasksByDeadline();
-    }
-
-    public void markTask(int targetIndex, int markFlag) {
-        Task target = internalList.get(targetIndex);
-        if (markFlag == MarkCommand.MARK_COMPLETE) {
-            target.markComplete();
-        } else {
-            target.markIncomplete();
-        }
         sortTasksByDeadline();
     }
 
@@ -89,9 +97,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
         sortTasksByDeadline();
     }
@@ -161,6 +166,10 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified person in the list would fail because
      * there is no such matching person in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+        protected TaskNotFoundException() {
+            super("The specified task was not found in the list");
+        }
+    }
 
 }

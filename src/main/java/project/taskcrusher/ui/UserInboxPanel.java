@@ -112,23 +112,23 @@ public class UserInboxPanel extends UiPart<Region> {
     public void handleListsToShowUpdatedEvent(ListsToShowUpdatedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.eventListToShowEmpty) {
-            eventListView.setManaged(SET_LIST_HIDDEN);
+//            eventListView.setManaged(SET_LIST_HIDDEN);
             eventListView.setVisible(SET_LIST_HIDDEN);
             eventHeader.setText("Events: Nothing to Show!");
             System.out.println("he");
         } else {
-            eventListView.setManaged(SET_LIST_VISIBLE);
+//            eventListView.setManaged(SET_LIST_VISIBLE);
             eventListView.setVisible(SET_LIST_VISIBLE);
             eventHeader.setText("Events: ");
         }
 
         if (event.taskListToShowEmpty) {
-            taskListView.setManaged(SET_LIST_HIDDEN);
+//            taskListView.setManaged(SET_LIST_HIDDEN);
             taskListView.setVisible(SET_LIST_HIDDEN);
             taskHeader.setText("Tasks: Nothing to Show!");
             System.out.println("ho");
         } else {
-            taskListView.setManaged(SET_LIST_VISIBLE);
+//            taskListView.setManaged(SET_LIST_VISIBLE);
             taskListView.setVisible(SET_LIST_VISIBLE);
             taskHeader.setText("Tasks: ");
         }

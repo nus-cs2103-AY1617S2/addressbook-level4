@@ -8,41 +8,52 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.exceptions.DuplicateDataException;
+import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.logic.commands.MarkCommand;
 
+//@@author A0127737X
 /**
- * stores a list of events that contain no duplicates. At any point in time, the list is sorted
+ * stores a list of events that contain no duplicates. At any point in time, {@code internalList} is sorted
  * by the earliest timeslot.
+ *
+ * @see Event#compareTo(Object)
+ * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
-    //@@author A0127737X
     public void sortEventsByEarliestTimeslot() {
         internalList.sort(null);
     }
 
     /**
-     *  Checks and marks any active events that are out-dated as overdue
+     *  Checks and marks all active, incomplete events that are out-dated as overdue.
+     *  Returns boolean {@code isAnyUpdate} that indicates that whether or not anything was newly marked as overdue,
+     *  which can be used by the caller to tell if there is a need to overwrite data in hard disk.
      */
     public boolean updateOverdueStatus() {
         boolean isAnyUpdate = false;
         Date now = new Date();
         for (Event event: internalList) {
             if (!event.isComplete() && !event.isOverdue()) {
-                isAnyUpdate = isAnyUpdate || event.updateOverdueStatus(now);
+                isAnyUpdate = event.updateOverdueStatus(now) || isAnyUpdate;
             }
         }
         return isAnyUpdate;
     }
 
+    /**
+     * Marks the event specified by {@code targetIndex} according to {@code markFlag}.
+     */
     public void markEvent(int targetIndex, int markFlag) {
         Event target = internalList.get(targetIndex);
         if (markFlag == MarkCommand.MARK_COMPLETE) {
             target.markComplete();
-        } else {
+        } else if (markFlag == MarkCommand.MARK_INCOMPLETE) {
             target.markIncomplete();
+        } else {
+            assert false;
         }
         sortEventsByEarliestTimeslot();
     }
@@ -52,7 +63,7 @@ public class UniqueEventList implements Iterable<Event> {
         sortEventsByEarliestTimeslot();
     }
 
-    //@@author
+//@@author
 
     /**
      * Returns true if the list contains an equivalent event as the given argument.
@@ -62,27 +73,10 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.contains(toCheck);
     }
 
-    /**search through the {@code internalList} to find any events with overlapping timeslot with the {@code
-     * candidate}.
-     * @param candidate
-     * @return {@code ObservableList} of events that have any overlapping timeslot with {@code candidate}.
-     */
-    public ObservableList<ReadOnlyEvent> getEventsWithOverlapingTimeslots(Timeslot candidate) {
-        assert candidate != null;
-        ObservableList<ReadOnlyEvent> overlappingEvents =  FXCollections.observableArrayList();
-
-        for (Event event: internalList) {
-            if (event.hasOverlappingTimeslot(candidate)) {
-                overlappingEvents.add(event);
-            }
-        }
-        return overlappingEvents;
-    }
-
     /**
      * Adds an event to the list.
      *
-     * @throws DuplicateTaskException if the event to add is a duplicate of an existing event in the list.
+     * @throws DuplicateEventException if the event to add is a duplicate of an existing event in the list.
      */
     public void add(Event toAdd) throws DuplicateEventException {
         assert toAdd != null;
@@ -109,9 +103,6 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         eventToUpdate.resetData(editedEvent);
-        // TODO: The code below is just a workaround to notify observers of the updated person.
-        // The right way is to implement observable properties in the Person class.
-        // Then, PersonCard should then bind its text labels to those observable properties.
         internalList.set(index, eventToUpdate);
         sortEventsByEarliestTimeslot();
     }
@@ -180,6 +171,5 @@ public class UniqueEventList implements Iterable<Event> {
      * there is no such matching event in the list.
      */
     public static class EventNotFoundException extends Exception {}
-
 
 }

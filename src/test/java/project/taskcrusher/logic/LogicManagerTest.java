@@ -404,8 +404,8 @@ public class LogicManagerTest {
 
         for (int i = 0; i < preexistingEvents.size(); i++) {
             unchangedEvents.add(new Event(preexistingEvents.get(i).getName(), preexistingEvents.get(i).getTimeslots(),
-                    preexistingEvents.get(i).getLocation(), preexistingEvents.get(i).getDescription(),
-                    preexistingEvents.get(i).getTags()));
+                    preexistingEvents.get(i).getPriority(), preexistingEvents.get(i).getLocation(),
+                    preexistingEvents.get(i).getDescription(), preexistingEvents.get(i).getTags()));
         }
 
         for (int i = 1; i < preexistingTasks.size(); i++) {
@@ -445,15 +445,16 @@ public class LogicManagerTest {
         List<Timeslot> changedTimeslot = new ArrayList<>();
         changedTimeslot.add(new Timeslot("2019-11-11", "2019-12-11"));
 
-        Event editedEvent = new Event(new Name("editedName"), changedTimeslot, new Location("editedLocation"),
-                new Description("editedDescription"), preexistingEvents.get(0).getTags());
+        Event editedEvent = new Event(new Name("editedName"), changedTimeslot, new Priority("0"),
+                new Location("editedLocation"), new Description("editedDescription"),
+                preexistingEvents.get(0).getTags());
 
         changedEvents.add(editedEvent);
 
         for (int i = 1; i < preexistingEvents.size(); i++) {
             changedEvents.add(new Event(preexistingEvents.get(i).getName(), preexistingEvents.get(i).getTimeslots(),
-                    preexistingEvents.get(i).getLocation(), preexistingEvents.get(i).getDescription(),
-                    preexistingEvents.get(i).getTags()));
+                    preexistingEvents.get(i).getPriority(), preexistingEvents.get(i).getLocation(),
+                    preexistingEvents.get(i).getDescription(), preexistingEvents.get(i).getTags()));
         }
 
         for (int i = 0; i < preexistingTasks.size(); i++) {
@@ -829,7 +830,7 @@ public class LogicManagerTest {
             Tag tag3 = new Tag("sometag3");
             Tag tag4 = new Tag("sometag4");
             UniqueTagList tags = new UniqueTagList(tag3, tag4);
-            return new Event(name, timeslots, location, description, tags);
+            return new Event(name, timeslots, new Priority("0"), location, description, tags);
         }
 
         Event reviewSessionTentative() throws Exception {
@@ -844,7 +845,7 @@ public class LogicManagerTest {
             Tag tag3 = new Tag("sometag3");
             Tag tag4 = new Tag("sometag4");
             UniqueTagList tags = new UniqueTagList(tag3, tag4);
-            return new Event(name, timeslots, location, description, tags);
+            return new Event(name, timeslots, new Priority("0"), location, description, tags);
         }
 
         Event reviewSessionConfirmed() throws Exception {
@@ -857,7 +858,7 @@ public class LogicManagerTest {
             Tag tag3 = new Tag("sometag3");
             Tag tag4 = new Tag("sometag4");
             UniqueTagList tags = new UniqueTagList(tag3, tag4);
-            return new Event(name, timeslots, location, description, tags);
+            return new Event(name, timeslots, new Priority("0"), location, description, tags);
         }
 
         Event reviewSessionClash() throws Exception {
@@ -872,7 +873,7 @@ public class LogicManagerTest {
             Tag tag3 = new Tag("sometag3");
             Tag tag4 = new Tag("sometag4");
             UniqueTagList tags = new UniqueTagList(tag3, tag4);
-            return new Event(name, timeslots, location, description, tags);
+            return new Event(name, timeslots, new Priority("0"), location, description, tags);
         }
 
         //@@author
@@ -898,8 +899,8 @@ public class LogicManagerTest {
             DateUtils.addHours(timeslot.end, seed);
             List<Timeslot> timeslots = new ArrayList<Timeslot>();
             timeslots.add(timeslot);
-            return new Event(new Name("Event " + seed), timeslots, new Location("Location" + seed),
-                    new Description("description is " + seed),
+            return new Event(new Name("Event " + seed), timeslots, new Priority("0"),
+                    new Location("Location" + seed), new Description("description is " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -1060,7 +1061,7 @@ public class LogicManagerTest {
         Event generateEventWithName(String name) throws Exception {
             List<Timeslot> timeslots = new ArrayList<>();
             timeslots.add(new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM"));
-            return new Event(new Name(name), timeslots, new Location("somewhere"),
+            return new Event(new Name(name), timeslots, new Priority("0"), new Location("somewhere"),
                     new Description("sample description"), new UniqueTagList(new Tag("tag")));
         }
     }

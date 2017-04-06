@@ -1,12 +1,11 @@
 package project.taskcrusher.model.shared;
 
-import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.model.tag.UniqueTagList;
 
 //@@author A0127737X
-/** Acts as a parent class of Event and Task. Represents some "thing" that user is going to do
- *  at "some point in time" i.e. no notion of time introduced yet.
+/** Acts as a parent class of Event and Task. Represents a ToDo that user is going to complete
+ *  at "some point in time". There is no notion of time introduced, and thus has no overdue field.
  */
 public class UserToDo implements ReadOnlyUserToDo {
     protected Name name;
@@ -15,21 +14,11 @@ public class UserToDo implements ReadOnlyUserToDo {
     protected UniqueTagList tags;
     protected boolean isComplete;
 
-    public UserToDo (Name name, Priority priority, Description description,  UniqueTagList tags) {
-        //assert !CollectionUtil.isAnyNull(name, description, priority, tags);
-        assert !CollectionUtil.isAnyNull(name, description, tags);
-        if (priority == null) {
-            try {
-                this.priority = new Priority(Priority.NO_PRIORITY); //CHANGED THIS FOR CONSISTENCY
-            } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block. Used for events in the future that supports priority
-                e.printStackTrace();
-            }
-        } else {
-            this.priority = priority;
-        }
+    public UserToDo (Name name, Priority priority, Description description, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, description, tags);
 
         this.name = name;
+        this.priority = priority;
         this.description = description;
         this.tags = new UniqueTagList(tags);
         this.isComplete = false;
@@ -44,6 +33,7 @@ public class UserToDo implements ReadOnlyUserToDo {
         this.name = name;
     }
 
+    @Override
     public Description getDescription() {
         return description;
     }
@@ -52,6 +42,7 @@ public class UserToDo implements ReadOnlyUserToDo {
         this.description = description;
     }
 
+    @Override
     public Priority getPriority() {
         return priority;
     }
@@ -60,12 +51,18 @@ public class UserToDo implements ReadOnlyUserToDo {
         this.priority = priority;
     }
 
+    @Override
     public UniqueTagList getTags() {
         return tags;
     }
 
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+    }
+
+    @Override
+    public boolean isComplete() {
+        return this.isComplete;
     }
 
     public void markComplete() {
@@ -75,10 +72,4 @@ public class UserToDo implements ReadOnlyUserToDo {
     public void markIncomplete() {
         this.isComplete = false;
     }
-
-    public boolean isComplete() {
-        return this.isComplete;
-    }
-
-
 }

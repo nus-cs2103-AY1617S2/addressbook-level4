@@ -22,7 +22,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
  */
 public class XmlAdaptedEvent {
 
-    /* Inherited attributes from UserToDo*/
+    /* Attributes inherited from UserToDo*/
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -43,7 +43,7 @@ public class XmlAdaptedEvent {
     private String location;
 
     /**
-     * Constructs an XmlAdaptedTask.
+     * Constructs an XmlAdaptedEvent.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedEvent() {}
@@ -97,7 +97,7 @@ public class XmlAdaptedEvent {
 
         final Location location = new Location(this.location);
 
-        return new Event(name, eventTimeslots, location, description, tags, isComplete, isOverdue);
+        return new Event(name, eventTimeslots, priority, location, description, tags, isComplete, isOverdue);
     }
 
 }
