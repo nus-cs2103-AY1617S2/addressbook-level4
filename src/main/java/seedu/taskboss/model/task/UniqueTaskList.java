@@ -150,7 +150,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
         Task taskToUpdate = internalList.get(index);
         try {
-            if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask) && !editedTask.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+            if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)
+                                                 && !editedTask.getCategories()
+                                                 .contains(new Category(AddCommand.BUILT_IN_DONE))) {
                 throw new DuplicateTaskException();
             }
         } catch (IllegalValueException ive) {
