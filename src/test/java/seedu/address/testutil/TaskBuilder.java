@@ -6,28 +6,21 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.Task;
 
 /**
  *
  */
 public class TaskBuilder {
 
-    private TestTask task;
+    private Task task;
 
     public TaskBuilder() {
         try {
-            this.task = new TestTask();
+            this.task = new Task();
         } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
-     */
-    public TaskBuilder(TestTask taskToCopy) {
-        this.task = new TestTask(taskToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
@@ -44,7 +37,7 @@ public class TaskBuilder {
         return this;
     }
 
-    public TestTask build() {
+    public Task build() {
         return this.task;
     }
 

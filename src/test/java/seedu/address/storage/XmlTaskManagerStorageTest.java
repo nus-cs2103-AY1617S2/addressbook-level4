@@ -15,7 +15,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.FloatingTask;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.testutil.TypicalTasks;
 
 public class XmlTaskManagerStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil
@@ -68,7 +68,7 @@ public class XmlTaskManagerStorageTest {
     public void readAndSaveTaskManager_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath()
                 + "TempTaskManager.xml";
-        TypicalTestTasks td = new TypicalTestTasks();
+        TypicalTasks td = new TypicalTasks();
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(
                 filePath);

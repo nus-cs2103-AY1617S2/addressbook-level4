@@ -32,7 +32,7 @@ import seedu.address.logic.Logic;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.testutil.TypicalTasks;
 
 /**
  * A GUI Test class for TaskManager.
@@ -49,7 +49,7 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestTasks td = new TypicalTestTasks();
+    protected TypicalTasks td = new TypicalTasks();
 
     /*
      * Handles to GUI elements present at the start up are created in advance
@@ -103,7 +103,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
+        TypicalTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 
