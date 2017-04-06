@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
+import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
 import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
@@ -38,14 +39,19 @@ public abstract class TagController extends Controller {
 
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
-        modifyTagsForIndex(successfulList, failedList,
-                Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1, tokens.get(PARAMETER_KEYWORDS));
+        Task task = getTaskFromIndex(Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1);
+        modifyTagsForTask(successfulList, failedList,
+                task, tokens.get(PARAMETER_KEYWORDS));
 
-        updateList();
+        updateList(task);
 
         uiStore.setCommandResult(formatDisplay(successfulList.toArray(new String[successfulList.size()]),
                                 failedList.toArray(new String[failedList.size()]),
                                 successfulList.size()));
+    }
+
+    private Task getTaskFromIndex(int index) {
+        return UiStore.getInstance().getShownTasks().get(index);
     }
 
     protected abstract void showInvalidFormatMessage() throws InvalidCommandException;
@@ -70,15 +76,15 @@ public abstract class TagController extends Controller {
         return false;
     }
 
-    protected void updateList() {
+    protected void updateList(Task task) {
         TodoList todoList = TodoList.getInstance();
         if (todoList.save()) {
-            uiStore.setTasks(todoList.getTasks());
+            uiStore.setTasks(todoList.getTasks(), task);
         }
     }
 
-    protected abstract void modifyTagsForIndex(ArrayList<String> successfulList,
-            ArrayList<String> failedList, int index, String keywords);
+    protected abstract void modifyTagsForTask(ArrayList<String> successfulList,
+            ArrayList<String> failedList, Task task, String keywords);
 
     protected abstract CommandResult formatDisplay(String[] successfulList, String[] failedList, int successCount);
 

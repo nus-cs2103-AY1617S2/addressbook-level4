@@ -87,6 +87,17 @@ public class DateTimeUtil {
         if (Objects.equals(dateTime1, dateTime2)) {
             return true;
         }
+        return isBefore(dateTime1, dateTime2);
+    }
+
+    /**
+     * Check if a dateTime is before another datetime
+     * null dateTime is considered to be after
+     * @param dateTime1
+     * @param dateTime2
+     * @return true / false
+     */
+    public static boolean isBefore(LocalDateTime dateTime1, LocalDateTime dateTime2) {
         if (dateTime2 == null) {
             return true;
         }

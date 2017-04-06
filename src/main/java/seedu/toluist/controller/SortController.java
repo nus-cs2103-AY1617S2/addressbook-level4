@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import seedu.toluist.commons.core.LogsCenter;
+import seedu.toluist.commons.core.Messages;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Task;
@@ -19,11 +20,16 @@ import seedu.toluist.ui.commons.CommandResult;
  * Sort Controller is responsible for changing the order of the displayed tasks
  */
 public class SortController extends Controller {
-    private static final String RESULT_MESSAGE = "List is now sorted by: %s.";
-    private static final String ERROR_MESSAGE = "Unable to sort by: %s";
+    private static final String MESSAGE_RESULT = "List is now sorted by: %s.";
+    private static final String MESSAGE_ERROR = "Unable to sort by: %s";
+    private static final String MESSAGE_NO_VALID_KEYWORD = "No valid keyword entered."
+            + " Please type 'help sort' for details";
+    private static final String MESSAGE_MULTIPLE_KEYWORDS_AND_DEFAULT = "'Default' keyword may not"
+            + " be used with other parameters.";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*sort.*";
     private static final String COMMAND_WORD = "sort";
     private static final String WORD_BY = "by";
+
 
     private static final String[] KEYWORD_CATEGORIES = {
         Task.CATEGORY_DEFAULT, Task.CATEGORY_DESCRIPTION, Task.CATEGORY_ENDDATE,
@@ -51,25 +57,33 @@ public class SortController extends Controller {
 
         String keywords = tokens.get(PARAMETER_CATEGORY);
         if (keywords.equals(StringUtil.EMPTY_STRING)) {
-            throw new InvalidCommandException("INVALID FORMAT");
+            throw new InvalidCommandException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, COMMAND_WORD));
         }
         ArrayList<String> keywordList = new ArrayList<String>(Arrays.asList(StringUtil.convertToArray(keywords)));
+        if (keywordList.contains(Task.CATEGORY_DEFAULT) && keywordList.size() > 1) {
+            throw new InvalidCommandException(MESSAGE_MULTIPLE_KEYWORDS_AND_DEFAULT);
+        }
         ArrayList<String> invalidKeywords = new ArrayList<String>();
         removeInvalidKeywords(keywordList, invalidKeywords);
 
         sortByKeywords(keywordList);
 
-        displayResult(invalidKeywords);
+        displayResult(invalidKeywords, keywordList);
     }
 
-    private void displayResult(ArrayList<String> invalidKeywords) throws InvalidCommandException {
+    private void displayResult(ArrayList<String> invalidKeywords, ArrayList<String> keywordList)
+            throws InvalidCommandException {
         String[] resultantOrder = Task.getCurrentSort();
         String resultMessage = StringUtil.EMPTY_STRING;
-        if (!invalidKeywords.isEmpty()) {
-            throw new InvalidCommandException(
-                    String.format(ERROR_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords)));
+        if (keywordList.isEmpty()) {
+            throw new InvalidCommandException(MESSAGE_NO_VALID_KEYWORD);
         }
-        resultMessage += String.format(RESULT_MESSAGE, String.join(StringUtil.COMMA_DELIMITER, resultantOrder));
+        if (!invalidKeywords.isEmpty()) {
+            resultMessage += String.format(MESSAGE_ERROR, String.join(StringUtil.COMMA_DELIMITER, invalidKeywords));
+            resultMessage += StringUtil.NEW_LINE;
+        }
+        resultMessage += String.format(MESSAGE_RESULT, String.join(StringUtil.COMMA_DELIMITER, resultantOrder));
         uiStore.setTasks(TodoList.getInstance().getTasks());
         uiStore.setCommandResult(new CommandResult(resultMessage));
     }
