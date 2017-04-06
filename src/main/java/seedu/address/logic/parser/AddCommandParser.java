@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 
+//@@author A0144422R
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -32,8 +33,9 @@ public class AddCommandParser extends SeperableParser {
         if (startingTimeAndDeadline != null) {
             try {
                 return new AddCommand(args.trim(),
-                        startingTimeAndDeadline.get(1),
-                        startingTimeAndDeadline.get(0), tags);
+                        startingTimeAndDeadline.get(CliSyntax.DEADLINE_INDEX),
+                        startingTimeAndDeadline.get(CliSyntax.STARTING_INDEX),
+                        tags);
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author A0144422R
 /**
  * Represents a Task in the task manager. not null, field values are validated.
  */
@@ -26,7 +27,8 @@ public abstract class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, UniqueTagList tags, boolean done, boolean manualToday) {
+    public Task(Name name, UniqueTagList tags, boolean done,
+            boolean manualToday) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from
@@ -40,21 +42,25 @@ public abstract class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getTags(), source.isDone(), source.isManualToday());
+        this(source.getName(), source.getTags(), source.isDone(),
+                source.isManualToday());
     }
 
     // @@author A0093999Y
     /**
      * Selecting the Task to construct based on what dates is available
      */
-    public static Task createTask(Name name, UniqueTagList tags, Optional<DateTime> deadline,
-            Optional<DateTime> startingTime, boolean done, boolean manualToday) throws IllegalValueException {
+    public static Task createTask(Name name, UniqueTagList tags,
+            Optional<DateTime> deadline, Optional<DateTime> startingTime,
+            boolean done, boolean manualToday) throws IllegalValueException {
         if (!deadline.isPresent() && !startingTime.isPresent()) {
             return new FloatingTask(name, tags, done, manualToday);
         } else if (deadline.isPresent() && !startingTime.isPresent()) {
-            return new DeadlineTask(name, tags, deadline.get().getDate(), done, manualToday);
+            return new DeadlineTask(name, tags, deadline.get().getDate(), done,
+                    manualToday);
         } else if (deadline.isPresent() && startingTime.isPresent()) {
-            return new EventTask(name, tags, deadline.get().getDate(), startingTime.get().getDate(), done, manualToday);
+            return new EventTask(name, tags, deadline.get().getDate(),
+                    startingTime.get().getDate(), done, manualToday);
         } else {
             throw new IllegalValueException(ONLY_STARTING_DATE_AVAILABLE_ERROR);
         }
@@ -63,9 +69,11 @@ public abstract class Task implements ReadOnlyTask {
     /**
      * Selecting the Task to construct from a ReadOnlyTask
      */
-    public static Task createTask(ReadOnlyTask readOnlyTask) throws IllegalValueException {
-        return createTask(readOnlyTask.getName(), readOnlyTask.getTags(), readOnlyTask.getDeadline(),
-                readOnlyTask.getStartingTime(), readOnlyTask.isDone(), readOnlyTask.isManualToday());
+    public static Task createTask(ReadOnlyTask readOnlyTask)
+            throws IllegalValueException {
+        return createTask(readOnlyTask.getName(), readOnlyTask.getTags(),
+                readOnlyTask.getDeadline(), readOnlyTask.getStartingTime(),
+                readOnlyTask.isDone(), readOnlyTask.isManualToday());
     }
 
     // @@author
@@ -100,6 +108,7 @@ public abstract class Task implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    // @@author A0144422R
     public void setToday() {
         manualToday = true;
     }
@@ -119,6 +128,7 @@ public abstract class Task implements ReadOnlyTask {
                         && this.isSameStateAs((ReadOnlyTask) other));
     }
 
+    // @@author
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing

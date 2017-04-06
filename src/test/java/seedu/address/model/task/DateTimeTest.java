@@ -10,10 +10,12 @@ import java.util.Date;
 import org.junit.Test;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
+//@@author A0144422R
 public class DateTimeTest {
     @Test
     public void dateTimeTest() {
-        DateTime dateTime = new DateTime(new PrettyTimeParser().parse("30 APRIL 2017").get(0));
+        DateTime dateTime = new DateTime(
+                new PrettyTimeParser().parse("30 APRIL 2017").get(0));
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         assertTrue(df.format(dateTime.getDate()).equals("30/04/2017"));
         Date date1 = new PrettyTimeParser().parse("31 May 2017").get(0);
