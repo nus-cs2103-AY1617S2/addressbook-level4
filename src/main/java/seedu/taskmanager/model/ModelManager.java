@@ -39,8 +39,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> filteredToDoTasks;
     private final FilteredList<ReadOnlyTask> filteredDoneTasks;
-
-    private FilteredList<ReadOnlyTask> currentTaskList;
     private String selectedTab;
     // @@author
 
@@ -59,7 +57,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
         filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
         setSelectedTab(TAB_TO_DO); // default tab is to-do task list tab
-        setCurrentTaskList();
         // @@author
     }
 
@@ -74,18 +71,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void setSelectedTab(String currentTab) {
         this.selectedTab = currentTab;
-    }
-
-    private void setCurrentTaskList() {
-        switch (selectedTab) {
-        case TAB_TO_DO:
-            currentTaskList = filteredToDoTasks;
-        case TAB_DONE:
-            currentTaskList = filteredDoneTasks;
-        default:
-            assert false : selectedTab + " is invalid";
-            currentTaskList = filteredToDoTasks;
-        }
     }
     // @@author
 
@@ -122,11 +107,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        setCurrentTaskList();
-        int index = currentTaskList.indexOf(task);
+        // @@author A0131278H
+        int index = getSelectedTaskList().indexOf(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        // @@author A0131278H
         indicateJumpToListRequestEvent(index);
         // @@author
     }
@@ -135,14 +119,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-        
+
         // @@author A0131278H
-        setCurrentTaskList();
         ReadOnlyTask taskToEdit = getSelectedTaskList().get(filteredTaskListIndex);
         int actualIndex = filteredTasks.indexOf(taskToEdit);
         int taskManagerIndex = filteredTasks.getSourceIndex(actualIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        int updatedIndex = currentTaskList.indexOf(editedTask);
+        int updatedIndex = getSelectedTaskList().indexOf(editedTask);
         indicateTaskManagerChanged();
         indicateJumpToListRequestEvent(updatedIndex);
         // @@author
