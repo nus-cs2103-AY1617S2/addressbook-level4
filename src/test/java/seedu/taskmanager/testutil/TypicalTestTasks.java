@@ -26,7 +26,7 @@ public class TypicalTestTasks {
                     .withStartTime("EMPTY_FIELD").withEndDate("04/03/17").withEndTime("1400").withCompletion(false)
                     .withCategories("no", "friends").build(); // deadline
             eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withStartDate("09/03/17")
-                    .withStartTime("1800").withEndDate("09/03/17").withEndTime("2000").withCompletion(false).build(); // event
+                    .withStartTime("1800").withEndDate("09/03/17").withEndTime("2000").withCompletion(false).build();
             doCS = new TaskBuilder().withTaskName("Start on the CS2103 project").withStartDate("03/03/17")
                     .withStartTime("1400").withEndDate("03/04/17").withEndTime("1800").withCompletion(false)
                     .withCategories("work").build(); // event
