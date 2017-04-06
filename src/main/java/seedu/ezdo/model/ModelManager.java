@@ -235,6 +235,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
+        /*
+         * checks the task with a given qualifier to return a boolean value
+         */
         boolean run(ReadOnlyTask task);
     }
 
@@ -294,20 +297,24 @@ public class ModelManager extends ComponentManager implements Model {
             boolean isNameEqual = nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
             boolean isPriorityEqual = comparePriority(task.getPriority());
-            boolean startDateEquality = (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
+            boolean isStartDateQualified = (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
                     || (startBefore && compareBeforeStart(task.getStartDate()))
                     || (startAfter && compareAfterStart(task.getStartDate())));
-            boolean dueDateEquality = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
+            boolean isDueDateQualified = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
                     || (dueBefore && compareBeforeDue(task.getDueDate()))
                     || (dueAfter && compareAfterDue(task.getDueDate())));
             boolean areTagsEqual = (taskTagStringSet.containsAll(tags));
-            boolean isQualified = isNameEqual && !task.getDone() && isPriorityEqual && startDateEquality
-                    && dueDateEquality && areTagsEqual;
+
+            boolean isQualified = isNameEqual && !task.getDone() && isPriorityEqual && isStartDateQualified
+                    && isDueDateQualified && areTagsEqual;
 
             return isQualified;
 
         }
 
+        /*
+         * convert a given set of Tags to a set of String
+         */
         private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
             Set<String> tagSet = new HashSet<String>();
@@ -341,12 +348,12 @@ public class ModelManager extends ComponentManager implements Model {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
-            boolean startEquality = (!startDate.isPresent()
+            boolean isStartEqual = (!startDate.isPresent()
                     || (startDate.get().toString().equals("") && taskStartDateExist)
                     || (taskStartDateExist && taskStartDateString.substring(0, 10)
                             .equals(startDate.get().toString().substring(0, 10))));
 
-            return startEquality;
+            return isStartEqual;
         }
 
         /*
@@ -357,11 +364,11 @@ public class ModelManager extends ComponentManager implements Model {
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
-            boolean dueEquality = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
+            boolean isDueEqual = (!dueDate.isPresent() || (dueDate.get().toString().equals("") && taskDueDateExist)
                     || (taskDueDateExist
                             && taskDueDateString.substring(0, 10).equals(dueDate.get().toString().substring(0, 10))));
 
-            return dueEquality;
+            return isDueEqual;
         }
 
         /*

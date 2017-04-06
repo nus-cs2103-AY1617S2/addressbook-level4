@@ -72,7 +72,7 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** Updates the filter of the filtered task list to show all undone tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/
