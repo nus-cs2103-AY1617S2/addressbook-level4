@@ -88,16 +88,17 @@ public class CategoryListPanel extends UiPart<Region> {
         Comparator<Category> categoryCmp = new Comparator<Category>() {
             @Override
             public int compare(Category o1, Category o2) {
-                if (o1.categoryName.equals("Alltasks"))
+                if (o1.categoryName.equals("Alltasks")) {
                     return -1;
-                else if (o2.categoryName.equals("Alltasks"))
+                } else if (o2.categoryName.equals("Alltasks")) {
                     return 1;
-                else if (o1.categoryName.equals("Done"))
+                } else if (o1.categoryName.equals("Done")) {
                     return 1;
-                else if (o2.categoryName.equals("Done"))
+                } else if (o2.categoryName.equals("Done")) {
                     return -1;
-                else
+                } else {
                     return o1.categoryName.compareTo(o2.categoryName);
+                }
             }
         };
 
