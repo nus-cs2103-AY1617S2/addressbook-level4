@@ -1,9 +1,11 @@
 # User Guide
 
+<img src="images/UG_img/coverPage_user.png" width="600">
+
 - [About](#about)
 - [Getting Started](#getting-started)
 - [Features](#features)
-- [Format](#format)
+- [Command Format](#command-format)
 - [Commands](#commands)
 - [Cheat Sheet](#cheat-sheet)
 - [FAQ](#faq)
@@ -26,24 +28,23 @@ Get started with OneTwoDo today!
 
 ## Getting Started
 
-Before using OneTwoDo, please ensure that you have installed Java version 1.8.0_60 or later as the application does not work with earlier Java 8 versions.
+Before using OneTwoDo, please ensure that you have installed **Java version 1.8.0_60** or later as the application does not work with earlier Java 8 versions.
 
-Start your OneTwoDo journey by downloading the latest OneTwoDo.jar from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.
+Start your OneTwoDo journey by downloading the latest **OneTwoDo.jar** from the releases tab. Download OneTwoDo directly into the home folder you want to use for the app.
 
 You can start OneTwoDo by simply double-clicking the icon!
-   > <img src="images/UG_img/onetwodo_icon.png" width="600">
+   > <img src="images/UG_img/onetwodo_icon.png" width="10">
 
-Figure 1: OneTwoDo User Interface
+*Figure 1: OneTwoDo User Interface*
 
 Congratulations, you are all set up!
-You may refer to the [Features](#features) section for more details on all the possible commands.
 
 
 ## Features
 
-<img src="images/UG_img/MainWindow_blank.png" width="600">
+<img src="images/UG_img/MainWindow_blank.png" width="800">
 
-Figure 2: OneTwoDo main window
+*Figure 2: OneTwoDo main window*
 
 After you have started OneTwoDo, you will see the following:
 
@@ -61,12 +62,12 @@ Your tasks are separated into 3 categories, where each category is displayed in 
 2. `Event` - This panel displays tasks with a start and end date.
 3. `To-do` - This panel displays tasks without a start or end date.
 
-### Command Format
+## Command Format
     
 - Command words are the first word of the command. (e.g. `find`, or `help`).
 - Command options specifies additional information needed by the command.
     - It consists of a character followed by a forward slash (e.g. `s/`, `t/`, etc), followed by data to be specified after the forward slash if there are any. (e.g. `s/tomorrow 0900`). 
-    - The order of options is not fixed after the task name. (e.g. executing `add Go home p/high i/after class` is the same as executing `add Go home i/after class p/high`).
+    - The order of options is not fixed after the task name. (e.g. executing `add Go home p/high d/after class` is the same as executing `add Go home d/after class p/high`).
     - Options surrounded by square brackets `[ ]` are optional.
     - Options with ellipses `...` after them can be specified multiple times (e.g. `t/Schoolwork t/CS2103`).
     - Options with `|` the pipe symbol means that either option on the left or right should be used.
@@ -98,26 +99,24 @@ OneTwoDo accepts most date and time formats, including:
 * 31st Dec 2016
 * 31st of December
 * Next Tue 3pm
+* Today 0800
 * Tomorrow 5:30am
 * Last Wednesday 0600h
 * 3 days from now
 
 Refer to [http://natty.joestelmach.com/doc.jsp](http://natty.joestelmach.com/doc.jsp) for a full list of supported formats.
+<br>
 
----
+## Commands
 ### Viewing command summary : `help`
 
 Let us assume you are a busy professional. You want to start using OneTwoDo to organize your meetings and projects more efficiently. However, being new to this application, you will definitely need some guidance. Do not worry, simply type `help` and our concised command summary window will pop up to clear your confusion.
-
-=================================================================================================================================================================
-
-`Let's use OneTwoDo as Jim, a busy professional. He wants to start using OneTwoDo to organize all his meetings and projects more efficiently. However, he is confused on how to navigate through OneTwoDo and which command to type. So he simply type `help` and our concised command summary window pops up to clear his confusion.`
 
     >>  help
 
 <img src="images/UG_img/cheetsheet_ss.png" width="600">
 
-Figure 7: Command Summary Window
+*Figure 3: Command Summary Window*
 
 ---
 ### Viewing userguide : `helpug`
@@ -137,7 +136,7 @@ Format: `add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIOR
 
     >>  add Reply Emails 
 
-<img src="images/UG_img/addReplyEmail.png" width="600">
+<img src="images/UG_img/addReplyEmail.png" width="300">
 Figure 8: Add a to-do
 
 
@@ -151,9 +150,9 @@ Oh noes! your boss just now emailed you that there will be an important lunch me
 
     >>  add Lunch Meeting  s/tmr 1pm  e/tmr 3pm  r/weekly  d/bring laptop  p/high  t/work
 
-<img src="images/UG_img/addLunchMeeting.png" width="600">
+<img src="images/UG_img/addLunchMeeting.png" width="800">
 
-Figure 9: Add event task with detailed info
+*Figure 4: Add event task with detailed info*
 
 
 > - `s/`
@@ -170,49 +169,6 @@ Figure 9: Add event task with detailed info
 >   * The task's tag. Every task can have any number of tags.
 
 
-
-
-================================================================================================================================================================================
-`
-Figure 8: Add a to-do
-
-Now, Jim is ready to add his tasks to OneTwoDo. His boss has emailed him that there will be an important lunch meeting from 1-3pm today.
-
-
-    >>  add Meeting s/1pm e/12pm p/h d/lunch meeting with boss t/work
-
-Figure 9: Add incorrect task
-
-Jim realizes his mistake after seeing the error message and corrects it.
-
-    >>  add Meeting s/1pm e/3pm p/h d/lunch meeting with boss t/work
-
-Figure 10: Add Meeting task
-
-It is highlighted in grey to bring Jim's attention to it. 
-
-> A task with a start date and end date is an **Event**_.
-> **Priority** of a task can be high (h), medium (m) or low (l)_.
-
-Jim also remembers that he has to prepare a weekly review report for a new project he is working on.
-
-    >> add InfoSyc Project Review e/Friday r/weekly t/InfoSyc t/work
-
-
-Figure 11: Add Review task
-
-> A task with only an end date is a **Deadline**_.
-> A task can **recur** daily, weekly, monthly or yearly_
-> A task can have multiple **tags** 
-
-After adding all his work-related tasks, he receives a text confirming his travel booking for Hawaii next week! 
-
-    >>  add shopping d/suglasses sunscreen t/hawaii
-
-Figure 12: Add Shopping task
-
-> A task with no date is a **ToDo**.
-`
 ---
 ### Editing a task : `edit`
 
@@ -229,9 +185,9 @@ As for editing tags, all existing tags of the task will be replaced. (i.e adding
 
     >>  edit  e1  t/
 
-<img src="images/UG_img/tagRemove.png" width="600">
+<img src="images/UG_img/tagRemove.png" width="400">
 
-Figure 10: Before and after tags removal
+*Figure 5: Before and after tags removal*
 
 ---
 ### Listing tasks : `list`
@@ -249,9 +205,9 @@ The above command will filter out all the things you need to do from today till 
 
     >>  list  o/priority
 
-<img src="images/UG_img/prioritySort.png" width="600">
+<img src="images/UG_img/prioritySort.png" width="800">
 
-Figure 11: Sort by priority
+*Figure 6: Sort by priority*
 
 
 Also, sometimes you may be so busy that you have forgotten if you have replied an important email.
@@ -261,9 +217,9 @@ Also, sometimes you may be so busy that you have forgotten if you have replied a
 
 All your completed tasks are listed! The feeling of satisfaction after seeing all the tasks you have successfully accomplished is indescribable! But it looks like you haven't reply the email.
 
-<img src="images/UG_img/doneFilter.png" width="600">
+<img src="images/UG_img/doneFilter.png" width="800">
 
-Figure 13: Filter all completed tasks
+*Figure 7: Filter all completed tasks*
 
 > - `o/` refers to ordering or sorting. You can sort by *priority*, *alphanumeric* and *dateTime*.
 > - You can also filter and sort your tasks with multiple parameters. Only tasks that has met those parameters' requirement will appear.
@@ -285,9 +241,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 >   Shows any task having names, tags, or description which contain any of the keywords: **birthday**, **shopping** and **assignment**.
 
 
-<img src="images/UG_img/findCommand.png" width="600">
+<img src="images/UG_img/findCommand.png" width="800">
 
-Figure 11: find task
+*Figure 8: Find task*
 
 
 ---
