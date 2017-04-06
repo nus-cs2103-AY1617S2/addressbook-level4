@@ -1,6 +1,5 @@
 package seedu.taskmanager.model.task;
 
-import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_ENDDATE;
 import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 
 import java.util.Comparator;
@@ -180,31 +179,32 @@ public class UniqueTaskList implements Iterable<Task> {
         this.sortCriterion = keyword;
         internalList.sort(new DateComparator(sortCriterion));
     }
-    
+
     /**
      * Filters task list based on task status (Done or Not Done).
      */
     public ObservableList<Task> getTaskListByStatus(String status) {
-        if (status.equals(Status.STATUS_DONE))
+        if (status.equals(Status.STATUS_DONE)) {
             return internalList.filtered(StatusPredicate.isDone());
-        else if (status.equals(Status.STATUS_NOT_DONE))
+        } else if (status.equals(Status.STATUS_NOT_DONE)) {
             return internalList.filtered(StatusPredicate.isNotDone());
-        else
-            return internalList;
+        } else {
+            return internalList; // return list of all task if status is invalid
+        }
     }
-    
+
     static class StatusPredicate {
 
-       public static Predicate<Task> isDone() {
-           return p -> p.getStatus().toString().equals(Status.STATUS_DONE);
-       }
-       
-       public static Predicate<Task> isNotDone() {
-           return p -> p.getStatus().toString().equals(Status.STATUS_NOT_DONE);
-       }
-        
+        public static Predicate<Task> isDone() {
+            return p -> p.getStatus().toString().equals(Status.STATUS_DONE);
+        }
+
+        public static Predicate<Task> isNotDone() {
+            return p -> p.getStatus().toString().equals(Status.STATUS_NOT_DONE);
+        }
+
     }
-    
+
     class DateComparator implements Comparator<Task> {
         String sortCriterion;
 
@@ -214,10 +214,11 @@ public class UniqueTaskList implements Iterable<Task> {
 
         @Override
         public int compare(Task t1, Task t2) {
-            if (sortCriterion.equals(SORT_KEYWORD_STARTDATE))
+            if (sortCriterion.equals(SORT_KEYWORD_STARTDATE)) {
                 return this.compareByStartDate(t1, t2);
-            else
+            } else {
                 return this.compareByEndDate(t1, t2);
+            }
         }
 
         private int compareByStartDate(Task t1, Task t2) {

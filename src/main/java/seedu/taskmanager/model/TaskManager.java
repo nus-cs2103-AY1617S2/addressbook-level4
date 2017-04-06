@@ -52,7 +52,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
@@ -84,8 +84,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * updates {@link #tags} with any new tags found, and updates the Tag
      * objects in the task to point to those in {@link #tags}.
      *
-     * @return index of new task if list is sorted
-     *              or size-1 if list in unsorted
+     * @return index of new task if list is sorted or size-1 if list in unsorted
      *
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
@@ -101,8 +100,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
      * updated with the tags of {@code editedReadOnlyTask}.
      *
-     * @return updatedIndex if the internal list is sorted
-     *              or input index if list is unsorted
+     * @return updatedIndex if the internal list is sorted or input index if
+     *         list is unsorted
      *
      * @see #syncMasterTagListWith(Task)
      *
@@ -173,13 +172,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    //// tag-level operations
+    // tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-    //// util methods
+    // util methods
 
     @Override
     public String toString() {
@@ -191,11 +190,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
-    
+
     public ObservableList<ReadOnlyTask> getToDoTaskList() {
         return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_NOT_DONE));
     }
-    
+
     public ObservableList<ReadOnlyTask> getDoneTaskList() {
         return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_DONE));
     }

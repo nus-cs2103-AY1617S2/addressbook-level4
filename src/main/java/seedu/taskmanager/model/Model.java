@@ -3,7 +3,6 @@ package seedu.taskmanager.model;
 import java.util.Date;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -53,14 +52,14 @@ public interface Model {
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-    
+
     // @@author A0131278H
     /**
      * Returns the filtered task list of incomplete tasks as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList();
-    
+
     /**
      * Returns the filtered task list of completed tasks as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -86,7 +85,5 @@ public interface Model {
 
     void updateFilteredTaskList(Date startDateCriteria, Date endDateCriteria);
     // @@author
-
-    
 
 }

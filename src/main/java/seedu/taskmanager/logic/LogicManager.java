@@ -27,7 +27,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private Storage storage;
     private String commandText;
 
-    //Singleton pattern
+    // Singleton pattern
     private LogicManager() {
     }
 
@@ -59,7 +59,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
-    
+
     // @@author A0131278H
     @Override
     public ObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
