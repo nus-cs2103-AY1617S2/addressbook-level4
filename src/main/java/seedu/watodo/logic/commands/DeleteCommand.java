@@ -93,4 +93,9 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
+
 }

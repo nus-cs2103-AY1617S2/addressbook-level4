@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -8,6 +10,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0141077L-reused
 /**
@@ -29,11 +32,14 @@ public class UnmarkCommand extends Command {
 
     private int[] filteredTaskListIndices;
 
-    private Task undoUnmark;
-    private int undoUnmarkInt;
+    private Stack< Task > taskToUnmarkList;
+    private Stack< Task > unmarkedTaskList;
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
+
+        taskToUnmarkList = new Stack< Task >();
+        unmarkedTaskList = new Stack< Task >();
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             assert filteredTaskListIndices != null;
@@ -57,12 +63,13 @@ public class UnmarkCommand extends Command {
             }
 
             ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoUnmark = new Task(taskToUnmark);
+            this.taskToUnmarkList.push(new Task(taskToUnmark));
 
             try {
                 Task unmarkedTask = createUnmarkedTask(taskToUnmark);
+                unmarkedTaskList.push(unmarkedTask);
                 model.updateTask(filteredTaskListIndices[i], unmarkedTask);
-                this.undoUnmarkInt = filteredTaskListIndices[i];
+
 
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -79,8 +86,15 @@ public class UnmarkCommand extends Command {
     @Override
     public void unexecute() {
         try {
-            model.updateTask(undoUnmarkInt, undoUnmark);
+
+            while (!unmarkedTaskList.isEmpty()) {
+                model.deleteTask(unmarkedTaskList.pop());
+                model.addTask(taskToUnmarkList.pop());
+            }
+            model.updateFilteredListToShowAll();
         } catch (DuplicateTaskException e) {
+
+        } catch (TaskNotFoundException e) {
 
         }
     }
@@ -110,6 +124,11 @@ public class UnmarkCommand extends Command {
         unmarkedTask.setStatus(TaskStatus.UNDONE);
 
         return unmarkedTask;
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 
 }

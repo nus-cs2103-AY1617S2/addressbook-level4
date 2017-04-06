@@ -37,6 +37,13 @@ public abstract class Command {
         this.model = model;
     }
 
+    //@@author A01398845R
+    /**
+     * Returns Command Name e.g. add
+     */
+    @Override
+    public abstract String toString();
+
     public void unexecute() {
 
     }

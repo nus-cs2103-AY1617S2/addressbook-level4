@@ -39,6 +39,9 @@ public class TaskCard extends UiPart<Region> {
         }
 
         status.setText(task.getStatus().toString());
+        if (task.getStatus().toString().equals("Done")) {
+            cardPane.setStyle("-fx-background-color: #2bba36;");
+        }
 
         initTags(task);
     }
