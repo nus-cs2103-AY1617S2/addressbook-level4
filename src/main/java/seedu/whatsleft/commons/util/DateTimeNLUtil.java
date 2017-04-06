@@ -28,7 +28,7 @@ public class DateTimeNLUtil {
     }
 
     enum RelativeDay {
-        today, tmr
+        today, tmr, tomorrow
     }
 
     enum AbsDay {
@@ -45,6 +45,7 @@ public class DateTimeNLUtil {
         modmap.put(Modifier.following, 2);
         relativedaymap.put(RelativeDay.today, 0);
         relativedaymap.put(RelativeDay.tmr, 1);
+        relativedaymap.put(RelativeDay.tomorrow, 1);
         absdaymap.put(AbsDay.mon, "MONDAY");
         absdaymap.put(AbsDay.tue, "TUESDAY");
         absdaymap.put(AbsDay.wed, "WEDNESDAY");
