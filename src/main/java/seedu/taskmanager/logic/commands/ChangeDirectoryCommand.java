@@ -58,6 +58,7 @@ public class ChangeDirectoryCommand extends Command {
             newTaskManager = taskManagerOptional.orElse(model.getTaskManager());
             storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
             model.resetData(newTaskManager);
+            model.updateFilteredListToShowAll();
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_INVALID_DATA);
         } catch (IOException e) {
