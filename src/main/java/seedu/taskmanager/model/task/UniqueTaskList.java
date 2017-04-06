@@ -177,7 +177,8 @@ public class UniqueTaskList implements Iterable<Task> {
      * start StartDate or EndDate are ranked at the bottom.
      */
     public void sortByDate(String keyword) {
-        internalList.sort(new DateComparator(keyword));
+        this.sortCriterion = keyword;
+        internalList.sort(new DateComparator(sortCriterion));
     }
     
     /**
@@ -246,7 +247,6 @@ public class UniqueTaskList implements Iterable<Task> {
             } else {
                 return 1;
             }
-            // @@author A0131278H
         }
     }
 }

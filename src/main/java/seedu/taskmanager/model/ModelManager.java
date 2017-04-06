@@ -127,12 +127,12 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0131278H
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(filteredToDoTasks);
     }
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
-        return new UnmodifiableObservableList<>(filteredTasks);
+        return new UnmodifiableObservableList<>(filteredDoneTasks);
     }
     // @@author
 
