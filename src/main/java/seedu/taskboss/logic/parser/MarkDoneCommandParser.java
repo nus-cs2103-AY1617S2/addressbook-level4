@@ -8,7 +8,6 @@ import java.util.Set;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
-import seedu.taskboss.logic.commands.TerminateCommand;
 
 //@@author A0144904H
 public class MarkDoneCommandParser {
