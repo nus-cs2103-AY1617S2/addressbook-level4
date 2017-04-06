@@ -80,7 +80,7 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
         // @@author A0114269E
         final Status status = this.status == null ? new Status() : new Status(this.status);
-        // @@author
+        // @@author A0140032E
         return new Task(title, Optional.ofNullable(startDate), Optional.ofNullable(endDate),
                 Optional.ofNullable(description), status, tags);
     }

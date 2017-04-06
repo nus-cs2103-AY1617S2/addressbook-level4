@@ -25,10 +25,10 @@ public class Task implements ReadOnlyTask {
 
     private UniqueTagList tags;
 
+    // @@author A0140032E
     /**
      * Every field must be present and not null.
      */
-    // @@author A0140032E
     public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
             Optional<Description> description, Status status, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
@@ -43,6 +43,9 @@ public class Task implements ReadOnlyTask {
     // @@author
 
     // @@author A0114269E
+    /**
+     * Constructor for Task without Status parameter.
+     */
     public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
             Optional<Description> description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
@@ -54,7 +57,7 @@ public class Task implements ReadOnlyTask {
                                              // changes in the arg list
         this.status = new Status();
     }
-    // @@author A0114269E
+    // @@author
 
     /**
      * Creates a copy of the given ReadOnlyTask.

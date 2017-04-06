@@ -9,6 +9,9 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.UndoneCommand;
 
 // @@author A0114269E
+/**
+ * Parses input arguments and creates a new UndoneCommand object
+ */
 public class UndoneCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the UndoneCommand
