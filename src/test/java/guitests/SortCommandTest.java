@@ -100,7 +100,6 @@ public class SortCommandTest extends EzDoGuiTest {
     @Test
     public void sort_invalidOrder() {
         commandBox.runCommand("sort p s");
-        assertResultMessage(String.format(SortCommand.MESSAGE_INVALID_ORDER, SortCommand.MESSAGE_USAGE))
-        ;
+        assertResultMessage(String.format(SortCommand.MESSAGE_INVALID_ORDER, SortCommand.MESSAGE_USAGE));
     }
 }
