@@ -155,6 +155,22 @@ public class Date {
                 && this.value.getYear() == otherDate.value.getYear());
 
     }
+    
+    
+    @SuppressWarnings("deprecation")
+    public boolean equalsIgnoreMinutes(Date otherDate) {
+        if (otherDate.value == null && this.value == null) {
+            return true;
+        } else if (otherDate.value == null || this.value == null) {
+            return false;
+        }
+        return otherDate == this // short circuit if same object
+                || (this.value.getDate() == otherDate.value.getDate()
+                && this.value.getMonth() == otherDate.value.getMonth()
+                && this.value.getYear() == otherDate.value.getYear()
+                && this.value.getHours()==otherDate.value.getHours());
+
+    }
 
     //@@author
     @Override

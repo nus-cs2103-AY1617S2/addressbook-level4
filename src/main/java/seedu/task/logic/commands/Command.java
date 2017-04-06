@@ -100,6 +100,7 @@ public abstract class Command {
         Name name = new Name(event.getSummary());
         Date startDate = new Date(event.getStart());
         Date endDate = new Date(event.getEnd());
+        System.out.println(startDate.toString()+"oh shit");
         Remark remark = new Remark(event.getDescription());
         Location location = new Location(event.getLocation());
         final Set<Tag> tagSet = new HashSet<>(); // No tags
