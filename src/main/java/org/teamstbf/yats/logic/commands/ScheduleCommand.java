@@ -50,7 +50,7 @@ public class ScheduleCommand extends Command {
 
 	/**
 	 * Creates an addCommand using a map of parameters
-	 * 
+	 *
 	 * @param addParam
 	 * @throws IllegalValueException
 	 *             if any of the parameters are invalid
