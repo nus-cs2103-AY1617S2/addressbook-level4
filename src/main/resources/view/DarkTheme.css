@@ -261,7 +261,7 @@
     -fx-padding: 8 1 8 1;
 }
 
-.scroll-bar:horizontal {
+.list-view .scroll-bar:horizontal {
     -fx-opacity: 1;
 }
 
