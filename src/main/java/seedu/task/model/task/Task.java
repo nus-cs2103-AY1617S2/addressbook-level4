@@ -119,16 +119,16 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public Location getLocation() {
         return location;
     }
-
+    //@@author A0139975J
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-
+    //@@author A0139975J
     @Override
     public boolean isDone() {
         return isDone;
     }
-
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
