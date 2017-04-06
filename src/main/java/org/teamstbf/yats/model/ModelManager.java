@@ -26,10 +26,10 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager extends ComponentManager implements Model {
 
 	private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-	private static final String UNDONE_TASK_IDENTIFIER = "No";
+	private static final String TASK_UNDONE_IDENTIFIER = "No";
+	private static final String TASK_DONE_IDENTIFIER = "Yes";
 
 	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
-
 	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 5;
 
 	private final TaskManager taskManager;
@@ -40,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 	private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
 	private final FilteredList<ReadOnlyEvent> filteredEvents;
+	private final FilteredList<ReadOnlyEvent> calendarList;
+	private final FilteredList<ReadOnlyEvent> taskList;
 
 	public ModelManager() {
 		this(new TaskManager(), new UserPrefs());
@@ -56,6 +58,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		calendarList = new FilteredList<ReadOnlyEvent>(this.taskManager.getTaskList());
+		taskList = new FilteredList<ReadOnlyEvent>(this.taskManager.getTaskList());
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
@@ -183,6 +187,16 @@ public class ModelManager extends ComponentManager implements Model {
 		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getCalendarFilteredTaskList() {
+		return new UnmodifiableObservableList<>(calendarList);
+	}
+
+	@Override
+	public UnmodifiableObservableList<ReadOnlyEvent> getTaskFilteredTaskList() {
+		return new UnmodifiableObservableList<>(taskList);
+	}
+
 	/** Raises an event to indicate the model has changed */
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
@@ -228,12 +242,33 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void updateFilteredListToShowAll() {
 		Set<String> undoneTaskIdentifier = new HashSet<String>();
-		undoneTaskIdentifier.add(UNDONE_TASK_IDENTIFIER);
+		undoneTaskIdentifier.add(TASK_UNDONE_IDENTIFIER);
 		updateFilteredListToShowDone(undoneTaskIdentifier);
 		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
+
+	private void updateCalendarFilteredEventList(Expression expression) {
+		calendarList.setPredicate(expression::satisfies);
+	}
+
+	private void updateTaskFilteredEventList(Expression expression) {
+		taskList.setPredicate(expression::satisfies);
+	}
+
+	@Override
+	public void updateCalendarFilteredListToShowStartTime(Set<String> keywords) {
+		updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	}
+
+	@Override
+	public void updateTaskFilteredListToShowDone() {
+		Set<String> doneTaskIdentifier = new HashSet<String>();
+		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
+	}
+
 	@Override
 	public void updateFilteredListToShowLocation(Set<String> keywords) {
 		updateFilteredEventList(new PredicateExpression(new LocationQualifier(keywords)));

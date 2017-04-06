@@ -7,7 +7,6 @@ import org.teamstbf.yats.commons.core.ComponentManager;
 import org.teamstbf.yats.commons.core.Config;
 import org.teamstbf.yats.commons.core.LogsCenter;
 import org.teamstbf.yats.commons.events.storage.DataSavingExceptionEvent;
-import org.teamstbf.yats.commons.events.ui.EventPanelSelectionChangedEvent;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.events.ui.ShowHelpRequestEvent;
 import org.teamstbf.yats.commons.util.StringUtil;
@@ -70,7 +69,6 @@ public class UiManager extends ComponentManager implements Ui {
 	public void stop() {
 		prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
 		mainWindow.hide();
-		mainWindow.releaseResources();
 	}
 
 	private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -124,12 +122,6 @@ public class UiManager extends ComponentManager implements Ui {
 	private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
 		logger.info(LogsCenter.getEventHandlingLogMessage(event));
 		mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
-	}
-
-	@Subscribe
-	private void handlePersonPanelSelectionChangedEvent(EventPanelSelectionChangedEvent event) {
-		logger.info(LogsCenter.getEventHandlingLogMessage(event));
-		mainWindow.loadTaskPage(event.getNewSelection());
 	}
 
 }

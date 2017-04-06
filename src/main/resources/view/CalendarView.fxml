@@ -24,11 +24,6 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Browser">
-              <content>
-                <AnchorPane fx:id="browserPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
           <Tab fx:id="calendarView" text="Calendar">
                <content>
                   <AnchorPane prefHeight="300.0" prefWidth="600.0">
