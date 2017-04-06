@@ -33,7 +33,7 @@ import seedu.address.model.YTomorrow;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.Email;
+import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
@@ -78,15 +78,15 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
 
-                new Task(new Name("study SE"), new Date("12.12"), new StartDate("09.01"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("watch movie"), new Date("12.12"), new StartDate("09.01"), new Email("ruth@google.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("do tutorial"), new Date("12.12"), new StartDate("09.01"), new Email("heinz@yahoo.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("review the lesson"), new Date("12.12"), new StartDate("09.01"), new Email("cornelia@google.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("read books"), new Date("12.12"), new StartDate("09.01"), new Email("werner@gmail.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("painting"), new Date("12.12"), new StartDate("09.01"), new Email("lydia@gmail.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("skiing"), new Date("12.12"), new StartDate("09.01"), new Email("anna@google.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("buy CD"), new Date("12.12"), new StartDate("09.01"), new Email("stefan@mail.com"), new Group("learning"), new UniqueTagList()),
-                new Task(new Name("go shopping"), new Date("12.12"), new StartDate("09.01"), new Email("hans@google.com"), new Group("learning"), new UniqueTagList())
+                new Task(new Name("study SE"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("watch movie"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("do tutorial"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("review the lesson"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("read books"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("painting"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("skiing"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("buy CD"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList()),
+                new Task(new Name("go shopping"), new StartDate("09.01"), new EndDate("12.12"), new Group("learning"), new UniqueTagList())
 
             };
             //CHECKSTYLE.ON: LineLength
