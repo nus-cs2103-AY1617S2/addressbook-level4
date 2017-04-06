@@ -6,6 +6,7 @@ import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX1;
 import static seedu.taskmanager.model.task.StartDate.STARTDATE_VALIDATION_REGEX2;
 
 import java.util.Collection;
@@ -168,16 +169,22 @@ public class UpdateCommandParser {
             }
 
             if (fromPrefixInput.isPresent()) {
+                if (fromPrefixInput.get().trim().matches("[a-zA-Z]+")
+                        || fromPrefixInput.get().trim().matches(STARTDATE_VALIDATION_REGEX1)) {
+                    stringStartTime = "0000";
+                }
                 if (fromPrefixInput.get().trim().matches("[a-zA-Z]+")) {
                     stringStartDate = DateTimeUtil.getNewDate(fromPrefixInput.get());
-                    stringStartTime = "0000";
                 }
             }
 
             if (toPrefixInput.isPresent()) {
+                if (toPrefixInput.get().trim().matches("[a-zA-Z]+")
+                        || toPrefixInput.get().trim().matches(STARTDATE_VALIDATION_REGEX1)) {
+                    stringEndTime = "2359";
+                }
                 if (toPrefixInput.get().trim().matches("[a-zA-Z]+")) {
                     stringEndDate = DateTimeUtil.getNewDate(toPrefixInput.get());
-                    stringEndTime = "2359";
                 }
             }
 

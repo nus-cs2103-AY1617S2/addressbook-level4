@@ -107,7 +107,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask updatedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask updatedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert updatedReadOnlyTask != null;
 
         Task updatedTask = new Task(updatedReadOnlyTask);
@@ -117,7 +117,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the categories master list to have additional
         // categories that are not categorized to any task
         // in the task list.
-        tasks.updateTask(index, updatedTask);
+        int updateIndex = tasks.updateTask(index, updatedTask);
+        return updateIndex;
     }
 
     /**

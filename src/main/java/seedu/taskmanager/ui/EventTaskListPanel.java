@@ -68,6 +68,10 @@ public class EventTaskListPanel extends UiPart<Region> {
         });
     }
 
+    public ListView<ReadOnlyTask> getEventTaskListView() {
+        return this.eventTaskListView;
+    }
+
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override

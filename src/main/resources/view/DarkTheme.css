@@ -97,17 +97,13 @@
     -fx-text-fill: #010504;
 }
 
-.list-cell:empty {
-    -fx-background-color: white;
-}
-
 .list-view {
-	-fx-padding: 0px;
+	-fx-padding: 1px;
 }
 
 .list-view:empty {
     -fx-background-color: white;
-	-fx-border-width: 0px;
+	-fx-border-width: 1px;
 }
 
 

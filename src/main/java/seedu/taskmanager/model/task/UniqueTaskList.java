@@ -63,7 +63,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public int updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
@@ -82,7 +82,12 @@ public class UniqueTaskList implements Iterable<Task> {
         // internalList.set(index, taskToUpdate);
 
         internalList.remove(index);
-        internalList.add(findSortedPositionToAdd(taskToUpdate), taskToUpdate);
+
+        int updateIndex = findSortedPositionToAdd(taskToUpdate);
+
+        internalList.add(updateIndex, taskToUpdate);
+
+        return updateIndex;
     }
 
     // @@author A0139520L
