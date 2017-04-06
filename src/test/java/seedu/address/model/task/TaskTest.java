@@ -94,7 +94,7 @@ public class TaskTest {
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "dd/MM/yyyy HH:mm:ss");
             assertTrue(task.getTaskAbsoluteDateTime()
-                    .equals("Begin: " + dateFormat.format(date) + "\n   Due: "
+                    .equals("Begin: " + dateFormat.format(date) + "\n   End: "
                             + dateFormat.format(date2)));
         } catch (IllegalValueException e) {
             fail();
