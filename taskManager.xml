@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>Hospital Appointment</name>
-        <deadline>14-Apr-2017</deadline>
+        <name>CS2101 OP2</name>
+        <deadline>04-Apr-2017 @ 12:00:00</deadline>
         <priority>1</priority>
-        <information>KTPH</information>
-    </tasks>
-    <tasks>
-        <name>CS2101 Presentation script making</name>
-        <deadline>30-Mar-2017</deadline>
-        <priority>1</priority>
-        <information></information>
+        <information>SOC COM2</information>
         <tagged>School</tagged>
     </tasks>
     <tasks>
-        <name>GET1006 Essay</name>
-        <deadline>4-Apr-2017</deadline>
-        <priority>1</priority>
-        <information>TR5</information>
+        <name>CS2103T Tutorial</name>
+        <deadline>05-Apr-2016 @ 09:00:00</deadline>
+        <priority>2</priority>
+        <information>SOC COM1</information>
         <tagged>School</tagged>
     </tasks>
     <tasks>
-        <name>GET1006 Essay Draft</name>
-        <deadline>04-Apr-2017</deadline>
-        <priority>1</priority>
-        <information>TR5</information>
+        <name>CS2101 Critical Reflection</name>
+        <deadline>11-Apr-2016 @ 12:00:00</deadline>
+        <priority>2</priority>
+        <information>SOC COM2</information>
         <tagged>School</tagged>
     </tasks>
     <tasks>
-        <name>Buy Milk</name>
-        <deadline>05-Apr-2017</deadline>
-        <priority></priority>
-        <information>from NTUC</information>
+        <name>CS2103T Software Demostration</name>
+        <deadline>12-Apr-2016 @ 09:00:00</deadline>
+        <priority>1</priority>
+        <information>SOC COM1</information>
+        <tagged>School</tagged>
+    </tasks>
+    <tasks>
+        <name>Play Computer Games</name>
+        <deadline>01-Apr-2017 @ 09:00:00 to 01-May-2017 @ 21:00:00</deadline>
+        <priority>4</priority>
+        <information>MMORPG</information>
         <tagged>Home</tagged>
     </tasks>
-    <tags>school</tags>
-    <tags>Schoolwork</tags>
-    <tags>Home</tags>
-    <tags>School</tags>
-    <completedTasks>
-        <name>Rent a car</name>
-        <deadline>13-Dec-2016</deadline>
+    <tasks>
+        <name>Sleep</name>
+        <deadline></deadline>
+        <priority>4</priority>
+        <information></information>
+        <tagged>Home</tagged>
+    </tasks>
+	<tasks>
+        <name>Buy Birthday Present</name>
+        <deadline></deadline>
         <priority>2</priority>
-        <information>Contact dad</information>
-        <tagged>Malaysia</tagged>
-    </completedTasks>
+        <information></information>
+        <tagged>Social</tagged>
+    </tasks>
+    <tags>School</tags>
+    <tags>Home</tags>
 </taskmanager>
