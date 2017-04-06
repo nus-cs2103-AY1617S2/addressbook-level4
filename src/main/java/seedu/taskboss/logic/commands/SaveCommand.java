@@ -1,5 +1,6 @@
 package seedu.taskboss.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 
 //@@author A0138961W
@@ -34,14 +35,19 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() {
         assert storage != null;
+        File f = new File("filepath");
 
         if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
                 filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
         }
+        else if (!f.canWrite()) {
+            return new CommandResult(MESSAGE_INVALID_FILEPATH);
+        }
 
         try {
-            storage.setFilePath(filepath);
+        	Path path = Paths.get(filepath);
+            storage.setFilePath(path.toAbsolutePath().toString());
             model.saveTaskboss();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
