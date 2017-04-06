@@ -6,11 +6,13 @@ import static seedu.jobs.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.jobs.commons.events.ui.DisplayCalendarEvent;
 import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.logic.commands.ClearCommand;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.CompleteCommand;
 import seedu.jobs.logic.commands.DeleteCommand;
+import seedu.jobs.logic.commands.DisplayCommand;
 import seedu.jobs.logic.commands.EditCommand;
 import seedu.jobs.logic.commands.ExitCommand;
 import seedu.jobs.logic.commands.FindCommand;
@@ -74,7 +76,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
+            
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayCommand();
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

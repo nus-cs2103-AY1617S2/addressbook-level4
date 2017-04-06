@@ -2,6 +2,8 @@ package seedu.jobs.ui;
 
 import java.util.logging.Logger;
 
+import javax.swing.event.TreeSelectionEvent;
+
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
@@ -17,9 +19,11 @@ import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.jobs.commons.events.ui.DisplayCalendarEvent;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.UserPrefs;
+import seedu.jobs.model.task.Task;
 
 /**
  * The manager of the UI component.
@@ -123,8 +127,11 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
-
+    @Subscribe
+    private void handleDisplayCalendarEvent(DisplayCalendarEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.inputPassword();
+    }
 }

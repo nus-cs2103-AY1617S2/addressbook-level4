@@ -10,14 +10,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.jobs.ui.BrowserPanel;
 import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.GuiSettings;
 import seedu.jobs.commons.events.ui.ExitAppRequestEvent;
 import seedu.jobs.commons.util.FxViewUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.UserPrefs;
-import seedu.jobs.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -202,13 +200,14 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
-    void loadTaskPage(ReadOnlyTask task) {
-    	browserPanel.loadTaskPage();
-    }
-
+    
     void releaseResources() {
         browserPanel.freeResources();
+    }
+
+    public void inputPassword() {
+        browserPanel.inputPassword();
+        
     }
 
 

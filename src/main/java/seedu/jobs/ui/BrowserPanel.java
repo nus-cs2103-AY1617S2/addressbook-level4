@@ -1,5 +1,7 @@
 package seedu.jobs.ui;
 
+
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -9,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.jobs.commons.util.FxViewUtil;
-import seedu.jobs.model.task.ReadOnlyTask;
 
 /**
  * The Browser Panel of the App.
@@ -30,32 +31,23 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
-        String username = "esdaesa";
+        String email = "chrishendra93@gmail.com";
+        String password = "kite0912";
+        ChangeListener<State> emailListener = new ChangeListener<State>() {
+            @Override
+            public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
+                if (newValue == State.SUCCEEDED) {
+                    browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
+                    browser.getEngine().executeScript("function fillInPassword() {document.getElementById('Passwd').value = \"" + password + "\";" + 
+                            "document.getElementById('signIn').click();}");
+                    browser.getEngine().executeScript("document.getElementById('Email').value = \"" + email+ "\";");
+                    browser.getEngine().executeScript("document.getElementById('next').click();");
+                    browser.getEngine().executeScript("setTimeout(fillInPassword, 500)");
+                }
+            }
+        };
+        browser.getEngine().getLoadWorker().stateProperty().addListener(emailListener);
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
-        browser.getEngine().getLoadWorker().stateProperty().addListener(
-                new ChangeListener<State>() {
-                    
-                    @Override
-                    public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
-                        if (newValue == State.SUCCEEDED) {
-                            browser.getEngine().executeScript(""
-                                    + "document.getElementById('Email').value = \"" + username + "\";"
-                                    + "document.getElementById('next').click();");
-                        }
-                    }
-                });
-    }
-
-    public void loadTaskPage() {
-    	//loadPage("https://www.google.com.sg/#safe=off&q=" + task.getName().fullName.replaceAll(" ", "+"));
-    	loadPage("https://calendar.google.com/calendar/render#main_7%7Cmonth");
-    }
-
-    public void loadPage(String url) {
-        String password = "asdasd";
-        browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
-                                    + "document.getElementById('signIn').click();");
-        
     }
 
     /**
@@ -63,6 +55,24 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void freeResources() {
         browser = null;
+    }
+        
+    public void inputPassword(){
+        String password = "kite0912";
+//        browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
+//                            + "document.getElementById('signIn').click();");
+        ChangeListener<State> passwordListener = new ChangeListener<State>() {
+            @Override
+            public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
+                if (newValue == State.SUCCEEDED) {
+                    browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
+                    browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
+                            + "document.getElementById('signIn').click();");
+                }
+            }
+        };
+        browser.getEngine().getLoadWorker().stateProperty().addListener(passwordListener);
+        
     }
 
 }
