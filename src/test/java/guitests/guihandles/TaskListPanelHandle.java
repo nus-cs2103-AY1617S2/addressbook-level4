@@ -7,11 +7,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import guitests.GuiRobot;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import seedu.taskmanager.TestApp;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -39,17 +41,17 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public ListView<ReadOnlyTask> getListView() {
-        ListView<ReadOnlyTask> floatingListView = getNode(FLOATING_TASK_LIST_VIEW_ID);
-        ListView<ReadOnlyTask> deadlineListView = getNode(DEADLINE_TASK_LIST_VIEW_ID);
-        ListView<ReadOnlyTask> eventListView = getNode(EVENT_TASK_LIST_VIEW_ID);
-        
-        ObservableList<ReadOnlyTask> taskList = eventListView.getItems();
-        
+        ListView<Pair<ReadOnlyTask, Integer>> floatingListView = getNode(FLOATING_TASK_LIST_VIEW_ID);
+        ListView<Pair<ReadOnlyTask, Integer>> deadlineListView = getNode(DEADLINE_TASK_LIST_VIEW_ID);
+        ListView<Pair<ReadOnlyTask, Integer>> eventListView = getNode(EVENT_TASK_LIST_VIEW_ID);
+
+        ObservableList<ReadOnlyTask> taskList = FXCollections.observableArrayList();
+        taskList.addAll(eventListView.getItems());
         taskList.addAll(deadlineListView.getItems());
         taskList.addAll(floatingListView.getItems());
-        
+
         ListView<ReadOnlyTask> taskListView = new ListView<ReadOnlyTask>();
-        
+
         taskListView.setItems(taskList);
 
         return taskListView;
