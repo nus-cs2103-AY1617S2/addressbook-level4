@@ -16,6 +16,9 @@ import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
+    private static final String INDEX_DOT = ". ";
+    private static final int INDEX_ONE = 1;
+
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_WORD_SHORT = "d";
     public static final String COMMAND_WORD_2ND_SHORT = "-";
@@ -26,7 +29,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1" + " || " + COMMAND_WORD_SHORT + " 1"
             + " || "  + COMMAND_WORD_2ND_SHORT + "1 2 3";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task:\n %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task:\n%1$s";
 
     public final ArrayList<Integer> targetIndex;
 
@@ -67,7 +70,22 @@ public class DeleteCommand extends Command {
             e.printStackTrace();
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, getDesiredTaskListFormat()));
     }
     //@@author
+
+    //@@author A0143157J
+    /**
+     * Returns a formatted {@code ArrayList} tasksToDelete,
+     * so that each ReadOnlyTask in the ArrayList is numbered
+     */
+    private String getDesiredTaskListFormat() {
+        int i = INDEX_ONE;
+        StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : tasksToDelete) {
+            builder.append(i + INDEX_DOT).append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
 }
