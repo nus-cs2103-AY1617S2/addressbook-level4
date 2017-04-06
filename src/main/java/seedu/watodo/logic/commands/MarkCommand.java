@@ -68,7 +68,6 @@ public class MarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 markTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToMark, markedTask);
                 compiledExecutionMessage.append(
                         String.format(MESSAGE_MARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToMark) + '\n');
 
@@ -111,6 +110,8 @@ public class MarkCommand extends Command {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
 
+        storeUnmarkedTaskForUndo(this.taskToMark, this.markedTask);
+
         updateTaskListAtIndex(currIndex, markedTask);
     }
 
@@ -147,7 +148,7 @@ public class MarkCommand extends Command {
         model.updateTask(currIndex, markedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
+    private void storeUnmarkedTaskForUndo(ReadOnlyTask taskToMark, Task markedTask) {
         //this.indexForUndoMark = currIndex;
 
         //this.unmarkedTaskForUndoMark = new Task(taskToMark);
