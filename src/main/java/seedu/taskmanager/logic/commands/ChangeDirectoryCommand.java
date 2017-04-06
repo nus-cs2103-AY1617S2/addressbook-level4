@@ -17,18 +17,20 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
  */
 public class ChangeDirectoryCommand extends Command {
     public static final String COMMAND_WORD = "load";
-    public static final String ALTERNATIVE_COMMAND_WORD = "cd";
+    public static final String ALTERNATIVE_COMMAND_WORD = "open";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the directory of the taskmanager."
             + "xml file to allow user to sync with cloud services\n"
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "TaskManager directory changed to : ";
+    public static final String MESSAGE_SUCCESS = "TaskManager successfully loaded from : %1$s";
+    public static final String MESSAGE_NEW_FILE = "No XML File is found at directory : %1$s\n"
+            + "New XML file will be created";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
-    public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load";
-    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager";
+    public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load.";
+    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager. Please retry.";
 
     private final String newPath;
 
@@ -71,6 +73,9 @@ public class ChangeDirectoryCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_SAVECONFIG + StringUtil.getDetails(e));
         }
 
-        return new CommandResult(MESSAGE_SUCCESS + this.newPath);
+        if (!taskManagerOptional.isPresent()) {
+            return new CommandResult(String.format(MESSAGE_NEW_FILE, this.newPath));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.newPath));
     }
 }
