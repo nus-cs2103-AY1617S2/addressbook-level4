@@ -31,7 +31,6 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-overrun: center-ellipses;
 }
 
 .tab-pane {
@@ -269,9 +268,17 @@
     -fx-text-fill: white;
 }
 
+/*
+ * @@author A0131278H
+ */
+.scroll-bar .track {
+	-fx-background-color:transparent;
+	-fx-border-color:transparent;
+	
+}
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-insets: 1;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -284,12 +291,15 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 1 4 1 4;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 4 1 4 1;
 }
+/*
+ * @@author
+ */
 
 #cardPane {
     -fx-background-color: transparent;

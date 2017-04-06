@@ -9,7 +9,9 @@
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
     </stylesheets>
+    <!-- @@author A0131278H-->
     <AnchorPane fx:id="mainPane">
         <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" wrapText="true"/>
     </AnchorPane>
+    <!-- @@author-->
 </AnchorPane>

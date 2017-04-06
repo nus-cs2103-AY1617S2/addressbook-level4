@@ -30,7 +30,9 @@
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="30"/>
+                                	<!-- @@author A0131278H-->
+                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="30.0"/>
+                                    <!-- @@author-->
                                     <Label fx:id="title" styleClass="cell_big_label" text="\$first" underline="true" wrapText="true" />
                                 </HBox>
                             </children>
