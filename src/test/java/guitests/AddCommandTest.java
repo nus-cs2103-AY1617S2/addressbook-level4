@@ -8,7 +8,7 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
 public class AddCommandTest extends TaskManagerGuiTest {
@@ -16,41 +16,58 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     public void add() throws IllegalArgumentException, IllegalValueException {
         // add one task
-        TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.hoon;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        Task[] todayList = td.getTodayListTasks();
+        Task[] futureList = td.getFutureListTasks();
+
+        Task taskToAdd = td.extraFloat;
+        futureList = TestUtil.addTasksToList(futureList, taskToAdd, 1);
+        assertFutureAddSuccess(taskToAdd, todayList, futureList);
 
         // add another task
-        taskToAdd = td.ida;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        taskToAdd = td.extraDeadline;
+        todayList = TestUtil.addTasksToList(todayList, taskToAdd, 2);
+        assertTodayAddSuccess(taskToAdd, todayList, futureList);
 
         // add duplicate task
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(futureTaskListPanel.isListMatching(currentList));
+        assertTrue(futureTaskListPanel.isListMatching(futureList));
 
         // add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.mathAssgn);
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
+        assertTodayAddSuccess(taskToAdd, new Task[] { taskToAdd }, new Task[] {});
 
         // invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList)
+    // ----- Helper -----
+    private void assertFutureAddSuccess(Task taskToAdd, Task[] expectedTodayList, Task[] expectedFutureList)
             throws IllegalArgumentException, IllegalValueException {
-        commandBox.runCommand(taskToAdd.getAddCommand());
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
 
         // confirm the new card contains the right data
         TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(futureTaskListPanel.isListMatching(expectedList));
+        assertTrue(todayTaskListPanel.isListMatching(expectedTodayList));
+        assertTrue(futureTaskListPanel.isListMatching(expectedFutureList));
+    }
+
+    private void assertTodayAddSuccess(Task taskToAdd, Task[] expectedTodayList, Task[] expectedFutureList)
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
+
+        // confirm the new card contains the right data
+        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
+
+        // confirm the list now contains all previous tasks plus the new task
+        assertTrue(todayTaskListPanel.isListMatching(expectedTodayList));
+        assertTrue(futureTaskListPanel.isListMatching(expectedFutureList));
     }
 
 }

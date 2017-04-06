@@ -14,12 +14,11 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
-import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTasks;
 
 public class XmlTaskManagerStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil
-            .getPath("./src/test/data/XmlTaskManagerStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -28,22 +27,17 @@ public class XmlTaskManagerStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readTaskManager_nullFilePath_assertionFailure()
-            throws Exception {
+    public void readTaskManager_nullFilePath_assertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readTaskManager(null);
     }
 
-    private java.util.Optional<ReadOnlyTaskManager> readTaskManager(
-            String filePath) throws Exception {
-        return new XmlTaskManagerStorage(filePath)
-                .readTaskManager(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws Exception {
+        return new XmlTaskManagerStorage(filePath).readTaskManager(addToTestDataPathIfNotNull(filePath));
     }
 
-    private String addToTestDataPathIfNotNull(
-            String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder : null;
+    private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
+        return prefsFileInTestDataFolder != null ? TEST_DATA_FOLDER + prefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -66,28 +60,25 @@ public class XmlTaskManagerStorageTest {
 
     @Test
     public void readAndSaveTaskManager_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath()
-                + "TempTaskManager.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTasks td = new TypicalTasks();
         TaskManager original = td.getTypicalTaskManager();
-        XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(
-                filePath);
+        XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 
         // Save in new file and read back
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
-        ReadOnlyTaskManager readBack = xmlTaskManagerStorage
-                .readTaskManager(filePath).get();
+        ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addTask(new FloatingTask(td.hoon));
-        original.removeTask(new FloatingTask(td.mathAssgn));
+        original.addTask(Task.createTask(td.extraFloat));
+        original.removeTask(Task.createTask(td.futureListFloat));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         // Save and read without specifying file path
-        original.addTask(new FloatingTask(td.ida));
+        original.addTask(Task.createTask(td.extraDeadline));
         xmlTaskManagerStorage.saveTaskManager(original); // file path not
                                                          // specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path
@@ -98,21 +89,17 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void saveTaskManager_nullTaskManager_assertionFailure()
-            throws IOException {
+    public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(null, "SomeFile.xml");
     }
 
-    private void saveTaskManager(ReadOnlyTaskManager taskManager,
-            String filePath) throws IOException {
-        new XmlTaskManagerStorage(filePath).saveTaskManager(taskManager,
-                addToTestDataPathIfNotNull(filePath));
+    private void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+        new XmlTaskManagerStorage(filePath).saveTaskManager(taskManager, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveTaskManager_nullFilePath_assertionFailure()
-            throws IOException {
+    public void saveTaskManager_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
     }

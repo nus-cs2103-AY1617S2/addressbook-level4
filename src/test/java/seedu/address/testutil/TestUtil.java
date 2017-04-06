@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,11 +31,9 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableTaskManager;
@@ -51,10 +50,6 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
-
-    public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
-
     public static void assertThrows(Class<? extends Throwable> expected, Runnable executable) {
         try {
             executable.run();
@@ -68,38 +63,6 @@ public class TestUtil {
         }
         throw new AssertionFailedError(
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
-    }
-
-    private static Task[] getSampleTaskData() {
-        try {
-            return new Task[] { new FloatingTask(new Name("Ali Muster"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("Boris Mueller"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("Carl Kurz"), new UniqueTagList(), true, false),
-                new FloatingTask(new Name("Daniel Meier"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("Elle Meyer"), new UniqueTagList(), true, false),
-                new FloatingTask(new Name("Fiona Kunz"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("George Best"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("Hoon Meier"), new UniqueTagList(), false, false),
-                new FloatingTask(new Name("Ida Mueller"), new UniqueTagList(), true, false) };
-        } catch (IllegalValueException e) {
-            assert false;
-            // not possible
-            return null;
-        }
-    }
-
-    private static Tag[] getSampleTagData() {
-        try {
-            return new Tag[] { new Tag("relatives"), new Tag("friends") };
-        } catch (IllegalValueException e) {
-            assert false;
-            return null;
-            // not possible
-        }
-    }
-
-    public static List<Task> generateSampleTaskData() {
-        return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
     /**
@@ -283,10 +246,10 @@ public class TestUtil {
      *            The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
-        List<TestTask> listOfTasks = asList(tasks);
+    public static Task[] removeTasksFromList(final Task[] tasks, Task... tasksToRemove) {
+        List<Task> listOfTasks = asList(tasks);
         listOfTasks.removeAll(asList(tasksToRemove));
-        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+        return listOfTasks.toArray(new Task[listOfTasks.size()]);
     }
 
     /**
@@ -297,7 +260,7 @@ public class TestUtil {
      * @param targetIndexInOneIndexedFormat
      *            e.g. index 1 if the first element is to be removed
      */
-    public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
+    public static Task[] removeTaskFromList(final Task[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
@@ -312,7 +275,7 @@ public class TestUtil {
      *            The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+    public static Task[] replaceTaskFromList(Task[] tasks, Task task, int index) {
         tasks[index] = task;
         return tasks;
     }
@@ -326,10 +289,40 @@ public class TestUtil {
      *            The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
-    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
-        List<TestTask> listOfTasks = asList(tasks);
+    public static Task[] addTasksToList(final Task[] tasks, Task... tasksToAdd) {
+        List<Task> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
-        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+        return listOfTasks.toArray(new Task[listOfTasks.size()]);
+    }
+
+    /**
+     * Appends task to the array of tasks at an index.
+     *
+     * @param tasks
+     *            A array of tasks.
+     * @param task
+     *            The task to be added
+     * @param index
+     *            The index at which to insert the task
+     * @return The modified array of tasks.
+     */
+    public static Task[] addTasksToList(final Task[] tasks, Task task, int index) {
+        Task[] newTasks = new Task[tasks.length + 1];
+        if (index <= 0) {
+            index = 0;
+        } else if (index > tasks.length) {
+            index = tasks.length;
+        }
+
+        for (int i = 0; i < index; i++) {
+            newTasks[i] = tasks[i];
+        }
+        newTasks[index] = task;
+        for (int i = index + 1; i < newTasks.length; i++) {
+            newTasks[i] = tasks[i - 1];
+        }
+
+        return newTasks;
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -368,13 +361,13 @@ public class TestUtil {
      * Assigns relative indexes for test tasks The index is the same as the
      * actual index shown on the UI
      */
-    public static void assignUiIndex(TestTask[] taskList) {
+    public static void assignUiIndex(Task[] taskList) {
         // initialise displayed index
         int todayID = 1;
         int futureID = 1;
         int completedID = 1;
         for (int i = 0; i < taskList.length; i++) {
-            TestTask tmpTask = taskList[i];
+            Task tmpTask = taskList[i];
             // set task id to be displayed, the id here is 1-based
             if (tmpTask.isToday() && !tmpTask.isDone()) {
                 tmpTask.setID("T" + todayID);
@@ -413,5 +406,29 @@ public class TestUtil {
                 completedID++;
             }
         }
+    }
+
+    /**
+     * Makes an Add command out of a Task
+     */
+    public static String makeAddCommandString(Task task) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH.mm dd/MM/yyyy");
+        StringBuilder builder = new StringBuilder();
+        builder.append(AddCommand.COMMAND_WORD + " ");
+        builder.append(task.getName().toString() + " ");
+        if (task.getStartingTime().isPresent() && task.getDeadline().isPresent()) {
+            builder.append("from ");
+            builder.append(sdf.format(task.getStartingTime().get().getDate()) + " ");
+            builder.append("to ");
+            builder.append(sdf.format(task.getDeadline().get().getDate()) + " ");
+        } else if (task.getDeadline().isPresent()) {
+            builder.append("due ");
+            builder.append(sdf.format(task.getDeadline().get().getDate()) + " ");
+        }
+        for (Tag tag : task.getTags()) {
+            builder.append("#" + tag.getTagName() + " ");
+        }
+        return builder.toString();
+
     }
 }

@@ -14,8 +14,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTasks;
@@ -47,11 +47,11 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetData_withDuplicateTasks_throwsAssertionError() throws IllegalValueException {
         TypicalTasks td = new TypicalTasks();
         // Repeat td.alice twice
-        List<Task> newTasks = Arrays.asList(new FloatingTask(td.mathAssgn), new FloatingTask(td.mathAssgn));
-        List<Tag> newTags = td.mathAssgn.getTags().asObservableList();
+        List<Task> newTasks = Arrays.asList(Task.createTask(td.todayListFloat), Task.createTask(td.todayListFloat));
+        List<Tag> newTags = td.todayListFloat.getTags().asObservableList();
         TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 
         thrown.expect(AssertionError.class);

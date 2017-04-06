@@ -1,6 +1,8 @@
 package guitests.guihandles;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import guitests.GuiRobot;
@@ -33,24 +35,18 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public List<String> getTags() {
-        return getTags(getTagsContainer());
+    public Set<String> getTags() {
+        return new HashSet<String>(getTags(getTagsContainer()));
     }
 
     private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
+        return tagsContainer.getChildrenUnmodifiable().stream().map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
 
-    private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.toList());
+    private Set<String> getTags(UniqueTagList tags) {
+        return new HashSet<String>(
+                tags.asObservableList().stream().map(tag -> tag.tagName).collect(Collectors.toList()));
     }
 
     private Region getTagsContainer() {
@@ -58,16 +54,14 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().fullName)
-                && getTags().equals(getTags(task.getTags()));
+        return getFullName().equals(task.getName().fullName) && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
-                    && getTags().equals(handle.getTags());
+            return getFullName().equals(handle.getFullName()) && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
     }

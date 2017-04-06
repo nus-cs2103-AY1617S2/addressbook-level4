@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import java.util.Date;
 import java.util.Optional;
 
+import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
@@ -12,12 +14,11 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-// @author A0093999Y
 /**
  * All variations of tasks for our task manager
  */
 public class TypicalTasks {
-
+    // @author A0093999Y
     // For Today Task List
     public Task todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday;
 
@@ -26,6 +27,9 @@ public class TypicalTasks {
 
     // For Completed Task List
     public Task completedListFloat, completedListDeadline, completedListEvent;
+
+    // Extra Tasks
+    public Task extraFloat, extraDeadline;
 
     // UniqueTagLists
     public UniqueTagList noTags = new UniqueTagList(), familyTags = new UniqueTagList(), workTags = new UniqueTagList(),
@@ -51,7 +55,7 @@ public class TypicalTasks {
             // Initialize DateTime
             noDateTime = Optional.empty();
             pastDateTime = Optional.of(new DateTime(new Date(Long.MIN_VALUE)));
-            todayDateTime = Optional.of(new DateTime(new Date()));
+            todayDateTime = Optional.of(new DateTime(DateUtils.addMinutes(new Date(), 2)));
             earlierFutureDateTime = Optional.of(new DateTime(new Date(Long.MAX_VALUE - 1000)));
             laterFutureDateTime = Optional.of(new DateTime(new Date(Long.MAX_VALUE)));
 
@@ -62,15 +66,17 @@ public class TypicalTasks {
                     doneFalse, todayTrue);
             todayListDeadline = Task.createTask(new Name("Buy Meier stove"), familyTags, todayDateTime, noDateTime,
                     doneFalse, todayFalse);
-            todayListEvent = Task.createTask(new Name("Write english essay"), workTags, pastDateTime,
-                    laterFutureDateTime, doneFalse, todayFalse);
+            todayListEvent = Task.createTask(new Name("Write english essay"), workTags, earlierFutureDateTime,
+                    pastDateTime, doneFalse, todayFalse);
+            todayListToday = Task.createTask(new Name("Do CS2222 work"), workTags, laterFutureDateTime, noDateTime,
+                    doneFalse, todayTrue);
 
             futureListFloat = Task.createTask(new Name("Buy Meier rice cooker"), familyTags, noDateTime, noDateTime,
                     doneFalse, todayFalse);
             futureListDeadline = Task.createTask(new Name("Complete CS2106 Lab Assignment"), workAndFamilyTags,
                     laterFutureDateTime, noDateTime, doneFalse, todayFalse);
             futureListEvent = Task.createTask(new Name("Complete CS2106 Lab Assignment"), workAndFamilyTags,
-                    earlierFutureDateTime, laterFutureDateTime, doneFalse, todayFalse);
+                    laterFutureDateTime, earlierFutureDateTime, doneFalse, todayFalse);
 
             completedListFloat = Task.createTask(new Name("Mark CS1010S"), workTags, noDateTime, noDateTime, doneTrue,
                     todayTrue);
@@ -78,12 +84,19 @@ public class TypicalTasks {
                     doneTrue, todayFalse);
             completedListEvent = Task.createTask(new Name("Go for Rock concert"), noTags, todayDateTime, pastDateTime,
                     doneTrue, todayFalse);
+
+            extraFloat = Task.createTask(new Name("Golf game"), workTags, noDateTime, noDateTime, doneFalse,
+                    todayFalse);
+            extraDeadline = Task.createTask(new Name("Go for a night jog"), noTags, todayDateTime, noDateTime, doneTrue,
+                    todayFalse);
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
+    // @author
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
         for (Task task : new TypicalTasks().getTypicalTasks()) {
             try {
@@ -94,12 +107,26 @@ public class TypicalTasks {
         }
     }
 
+    // @author A0093999Y
     public Task[] getTypicalTasks() {
         return new Task[] { todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday,
                 futureListFloat, futureListDeadline, futureListEvent, completedListFloat, completedListDeadline,
                 completedListEvent };
     }
 
+    public Task[] getTodayListTasks() {
+        return new Task[] { todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday };
+    }
+
+    public Task[] getFutureListTasks() {
+        return new Task[] { futureListFloat, futureListDeadline, futureListEvent };
+    }
+
+    public Task[] getCompletedListTasks() {
+        return new Task[] { completedListFloat, completedListDeadline, completedListEvent };
+    }
+
+    // @author
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);
