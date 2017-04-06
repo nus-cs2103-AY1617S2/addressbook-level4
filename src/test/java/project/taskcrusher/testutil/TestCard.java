@@ -103,18 +103,6 @@ public class TestCard implements ReadOnlyTask {
     }
 
     @Override
-    public void markComplete() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void markIncomplete() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public boolean isComplete() {
         // TODO Auto-generated method stub
         return false;

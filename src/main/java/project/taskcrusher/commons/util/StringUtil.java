@@ -36,6 +36,23 @@ public class StringUtil {
         return false;
     }
 
+    public static boolean containsSubstringIgnoreCase(String sentence, String string) {
+        assert string != null : "String parameter cannot be null";
+        assert sentence != null : "Sentence parameter cannot be null";
+
+        String preppedWord = string.trim().toLowerCase();
+        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+        assert preppedWord.split("\\s+").length == 1 : "String parameter should be a single string";
+
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        for (String wordInSentence: wordsInPreppedSentence) {
+            if (wordInSentence.toLowerCase().contains(preppedWord)) return true;
+        }
+        return false;
+    }
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

@@ -31,8 +31,6 @@ import project.taskcrusher.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final boolean LIST_EMPTY = true;
-    private static final boolean LIST_NOT_EMPTY = false;
 
     private final UserInbox userInbox;
     private final FilteredList<ReadOnlyTask> filteredTasks;
@@ -313,23 +311,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class KeywordQualifier implements Qualifier {
         private Set<String> nameKeyWords;
-        private boolean showCompletedToo;
+        private boolean showCompletedItemsToo;
 
-        KeywordQualifier(Set<String> nameKeyWords, boolean showCompletedToo) {
+        KeywordQualifier(Set<String> nameKeyWords, boolean showCompletedItemsToo) {
             this.nameKeyWords = nameKeyWords;
-            this.showCompletedToo = showCompletedToo;
+            this.showCompletedItemsToo = showCompletedItemsToo;
         }
 
         @Override
         public boolean run(ReadOnlyUserToDo item) {
-            if (showCompletedToo) {
+            if (showCompletedItemsToo) {
                 return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(item.toString(), keyword))
+                    .filter(keyword -> StringUtil.containsSubstringIgnoreCase(item.toString(), keyword))
                     .findAny()
                     .isPresent();
             } else {
                 return !item.isComplete() && nameKeyWords.stream()
-                        .filter(keyword -> StringUtil.containsWordIgnoreCase(item.toString(), keyword))
+                        .filter(keyword -> StringUtil.containsSubstringIgnoreCase(item.toString(), keyword))
                         .findAny()
                         .isPresent();
             }
@@ -356,27 +354,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyUserToDo item) {
-            if (item instanceof ReadOnlyEvent) {
+            if (item.isComplete()) {
+                return false;
+            } else if (item instanceof ReadOnlyEvent) {
                 ReadOnlyEvent event = (ReadOnlyEvent) item;
-                if (event.isComplete()) {
-                    return false;
-                } else if (event.hasOverlappingTimeslot(userInterestedTimeslot)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return event.hasOverlappingTimeslot(userInterestedTimeslot);
             } else if (item instanceof ReadOnlyTask) {
                 ReadOnlyTask task = (ReadOnlyTask) item;
-                if (task.isComplete()) {
-                    return false;
-                } else if (task.getDeadline().isWithin(userInterestedTimeslot)) { // more OOP way
-                    return true;
-                } else {
-                    return false;
-                }
+                return task.getDeadline().isWithin(userInterestedTimeslot);
+            } else {
+                assert false;
+                return false;
             }
-            assert false;
-            return false; //should not reach here
         }
 
         @Override
