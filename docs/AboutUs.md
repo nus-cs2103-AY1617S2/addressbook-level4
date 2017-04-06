@@ -26,7 +26,7 @@ Responsibilities: UI
 -----
 
 #### [Zhou Fanyi](https://github.com/fanyiii)
-
+<img src="images/fanyi.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Dev Ops
 
