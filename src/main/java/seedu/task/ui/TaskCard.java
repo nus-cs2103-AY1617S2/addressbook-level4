@@ -22,8 +22,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label info;
     @FXML
-    private Label priority;
-    @FXML
     private FlowPane tags;
 
     //@@author A0141928B
@@ -49,7 +47,6 @@ public class TaskCard extends UiPart<Region> {
         default: //No priority given
             break;
         }
-        priority.setText(task.getPriority().value);
         initTags(task);
     }
     //@@author

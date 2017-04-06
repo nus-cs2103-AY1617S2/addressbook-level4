@@ -39,7 +39,6 @@
                         <FlowPane fx:id="tags" />
                         <Label fx:id="date" styleClass="cell_small_label" text="\\$date" />
                         <Label fx:id="info" styleClass="cell_small_label" text="\\$info" />
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\\$priority" />
                     </children>
                 </VBox>
             </children>
