@@ -32,7 +32,7 @@ public class CommandAliases implements Serializable {
         if (isExistingCommand(alias)) {
             throw new AliasAlreadyInUseException();
         }
-        if (!isExistingCommand(alias)) {
+        if (!isExistingCommand(command)) {
             throw new CommandDoesNotExistException();
         }
         commandAliasesMap.put(alias, command);
