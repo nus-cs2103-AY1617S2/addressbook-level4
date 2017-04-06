@@ -37,25 +37,48 @@ public interface ReadOnlyTask {
                 && other.getCategories().equals(this.getCategories());
     }
 
+    //@@author A0147990R
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all task details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Priority Level: ")
-                .append(getPriorityLevel().value)
-                .append(" Start Date: ")
-                .append(getStartDateTime())
-                .append(" End Date: ")
-                .append(getEndDateTime())
-                .append(" Information: ")
-                .append(getInformation())
-                .append(" Recurrence: ")
-                .append(getRecurrence())
-                .append(" Categories: ");
+        builder.append(getName());
+        checkEmptyValue(builder, " Priority Level: ", getPriorityLevel().value);
+        checkEmptyValue(builder, " Start Date: ", getStartDateTime().toString());
+        checkEmptyValue(builder, " End Date: ", getEndDateTime().toString());
+        checkEmptyValue(builder, " Information: ", getInformation().toString());
+        checkEmptyValue(builder, " Recurrence: ", getRecurrence().toString());
+
+        builder.append(" Categories: ");
         getCategories().forEach(builder::append);
+        builder.append("\n");
         return builder.toString();
     }
 
+    /**
+     * Append the field and value to the builder if the value is not empty;
+     */
+    default void checkEmptyValue(StringBuilder builder, String field, String value) {
+        String EMPTY_STRING = "";
+        String PRIORITY_FIELD = " Priority Level: ";
+        String PRIORITY_NO_VALUE = "No priority";
+        String RECURRENCE_FIELD = " Recurrence: ";
+        String RECURRENCE_NONE = "NONE";
+
+        //don't append 'no priority' value
+        if (field.equals(PRIORITY_FIELD) && value.equals(PRIORITY_NO_VALUE)) {
+            return;
+        }
+
+        //don't append 'none' recurrence value
+        if (field.equals(RECURRENCE_FIELD) && value.equals(RECURRENCE_NONE)) {
+            return;
+        }
+
+        if (!value.equals(EMPTY_STRING)) {
+            builder.append(field)
+                .append(value);
+        }
+    }
 }
