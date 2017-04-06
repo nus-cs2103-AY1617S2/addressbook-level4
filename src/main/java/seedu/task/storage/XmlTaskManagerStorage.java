@@ -20,75 +20,73 @@ import seedu.task.logic.parser.PathCommandParser;
  */
 public class XmlTaskManagerStorage implements TaskManagerStorage {
 
-	private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
 
-	private String filePath;
+    private String filePath;
 
-	public XmlTaskManagerStorage(String filePath) {
-		this.filePath = filePath;
+    public XmlTaskManagerStorage(String filePath) {
+	this.filePath = filePath;
+    }
+
+    public String getTaskManagerFilePath() {
+	return FileNameHandler.getFileName();
+    }
+
+    @Override
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
+	return readTaskManager(filePath);
+    }
+
+    /**
+     * Similar to {@link #readTaskManager()} 
+     * @param filePath
+     *            location of the data. Cannot be null
+     * @throws DataConversionException
+     *             if the file is not in the correct format.
+     */
+    public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
+	    throws DataConversionException, FileNotFoundException {
+	assert filePath != null;
+
+	File taskManagerFile = new File(filePath);
+
+	if (!taskManagerFile.exists()) {
+	    logger.info("Task Manager file " + taskManagerFile + " not found");
+	    return Optional.empty();
 	}
 
-	public String getTaskManagerFilePath() {
-		return FileNameHandler.getFileName();
-	}
+	ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-	@Override
-	public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-		return readTaskManager(filePath);
-	}
+	return Optional.of(taskManagerOptional);
+    }
 
-	/**
-	 * Similar to {@link #readTaskManager()}
-	 * 
-	 * @param filePath
-	 *            location of the data. Cannot be null
-	 * @throws DataConversionException
-	 *             if the file is not in the correct format.
-	 */
-	public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
-			throws DataConversionException, FileNotFoundException {
-		assert filePath != null;
+    @Override
+    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
+	saveTaskManager(taskManager, filePath);
+    }
 
-		File taskManagerFile = new File(filePath);
+    /**
+     * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
+     * @param filePath
+     *            location of the data. Cannot be null
+     */
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+	assert taskManager != null;
+	assert filePath != null;
 
-		if (!taskManagerFile.exists()) {
-			logger.info("Task Manager file " + taskManagerFile + " not found");
-			return Optional.empty();
-		}
+	// if(PathCommand.getPath() != null){
+	// filePath = PathCommand.getPath();
+	// }
+	// filePath = "/Users/jlevy/";
 
-		ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+	File file = new File(filePath);
+	FileUtil.createIfMissing(file);
+	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+    }
 
-		return Optional.of(taskManagerOptional);
-	}
-
-	@Override
-	public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-		saveTaskManager(taskManager, filePath);
-	}
-
-	/**
-	 * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
-	 * 
-	 * @param filePath
-	 *            location of the data. Cannot be null
-	 */
-	public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
-		assert taskManager != null;
-		assert filePath != null;
-
-		// if(PathCommand.getPath() != null){
-		// filePath = PathCommand.getPath();
-		// }
-		// filePath = "/Users/jlevy/";
-
-		File file = new File(filePath);
-		FileUtil.createIfMissing(file);
-		XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
-	}
-
-	@Override
-	public void setPathName(String pathName) {
-		filePath = pathName;
-	}
+    @Override
+    public void setPathName(String pathName) {
+	filePath = pathName;
+    }
 
 }

@@ -1,5 +1,4 @@
 package seedu.task.model.task;
-
 //@@author A0146757R 
 public class TaskStatus {
 
