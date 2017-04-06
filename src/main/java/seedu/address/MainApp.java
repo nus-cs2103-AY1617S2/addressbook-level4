@@ -22,6 +22,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskList;
@@ -51,7 +52,10 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing iManager ]===========================");
+        // Initialize Natty first as it requires some startup time, so the user don't receive delay in adding tasks
+        DateTimeUtil.initializeNatty();
+
         super.init();
 
         config = initConfig(getApplicationParameter("config"));

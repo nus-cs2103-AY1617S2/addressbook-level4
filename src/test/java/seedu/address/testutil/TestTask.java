@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.util.Optional;
 
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
@@ -106,16 +106,16 @@ public class TestTask implements ReadOnlyTask {
         if (getDeadline().isPresent()) {
             sb.append(" by ");
             // TODO change the format
-            sb.append(getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+            sb.append(getDeadline().get().getDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
         }
 
         if (getStartEndDateTime().isPresent()) {
             // TODO change the format
             StartEndDateTime startEndDateTime = getStartEndDateTime().get();
             sb.append(" from ");
-            sb.append(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            sb.append(startEndDateTime.getStartDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
             sb.append(" to ");
-            sb.append(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            sb.append(startEndDateTime.getEndDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
         }
 
         getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

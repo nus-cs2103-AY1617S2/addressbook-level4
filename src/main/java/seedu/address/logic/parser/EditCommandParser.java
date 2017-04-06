@@ -63,19 +63,19 @@ public class EditCommandParser {
      * @param args the arguments to extract date/time from
      */
     private DateTimeExtractor extractDateTimes(String args) {
-        // TODO extract comments for testing
         DateTimeExtractor dateTimeExtractor = new DateTimeExtractor(args);
         // process StartEndDateTime first because it is more likely to fail due to more constraints
-        // e.g. from [some date to some date] will be parsed as a single date if we process only the
-        // startDateTime first
-        // Pass rose from Uncle to Jane by tmr
-        // we should not return an error because that case is a valid task
+        // e.g. from [some date to some date] will be parsed as a single date
+        // if we process only the startDateTime first
         dateTimeExtractor.processRawStartEndDateTime();
-        // constraints for deadline are looser so it is less likely to fail
+        // give priority to parsing raw deadline before processing the startDateTime and endDateTime separately
+        // e.g. so cases such as [edit 10 test by 2 days from 25 Apr] works
+        // Note that however [edit 10 test by 2 days later from 25 Apr] will actually fall through
+        // and have no deadline found as later is not a recognized token by Natty.
+        // Thus two date groups of dates [2 days] and [25 Apr] will be the output.
         dateTimeExtractor.processRawDeadline();
-        // TODO process from later
-        // because for example edit 10 test by 2 days from 25 Apr
-        // note again that edit 10 test by 2 days later from 25 Apr will ignore the from later
+        // since the example above have fell through, the Task name will become [test by 2 days later]
+        // and the start date-time becomes 25 Apr if the task already has an end date-time.
         dateTimeExtractor.processRawStartDateTime();
         dateTimeExtractor.processRawEndDateTime();
 

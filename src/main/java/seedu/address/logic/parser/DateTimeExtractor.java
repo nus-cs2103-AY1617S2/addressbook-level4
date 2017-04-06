@@ -236,8 +236,9 @@ public class DateTimeExtractor {
             // Note that if performance is a concern, we should process the Deadline directly instead
             // of calling processRawDeadline so to avoid parsing dates twice
             // i.e. once in processRawDeadline and once in processDeadline
-            deadline = Optional.of(new Deadline(ParserUtil.parseDateTimeString(rawDeadline.get())));
+            deadline = Optional.of(new Deadline(DateTimeUtil.parseDateTimeString(rawDeadline.get())));
         } catch (IllegalValueException e) {
+            // TODO copy to other functions
             logger.severe("processDeadline() failed with invalid date when processRawDeadline"
                     + "should have ensured a valid date is provided if the raw are present.");
         }
@@ -258,7 +259,7 @@ public class DateTimeExtractor {
         }
 
         final String matchedRawDeadline = matcher.group("deadline");
-        if (!ParserUtil.isDateTimeString(matchedRawDeadline)) {
+        if (!DateTimeUtil.isSingleDateTimeString(matchedRawDeadline)) {
             logger.info("----------------[PROCESS RAWS DEADLINE][Deadline found but not a date]");
             return;
         }
@@ -298,8 +299,8 @@ public class DateTimeExtractor {
             // of calling processRawStartEndDateTime() so to avoid parsing dates twice
             // i.e. once in processRawStartEndDateTime and once in processStartEndDateTime
             startEndDateTime =
-                    Optional.of(new StartEndDateTime(ParserUtil.parseDateTimeString(rawStartDateTime.get()),
-                            ParserUtil.parseDateTimeString(rawEndDateTime.get())));
+                    Optional.of(new StartEndDateTime(DateTimeUtil.parseDateTimeString(rawStartDateTime.get()),
+                            DateTimeUtil.parseDateTimeString(rawEndDateTime.get())));
         } catch (IllegalValueException e) {
             logger.severe("processStartEndDateTime() failed with invalid date when processRawStartEndDateTime"
                     + "should have ensured a valid date is provided if the raw are present.");
@@ -323,8 +324,8 @@ public class DateTimeExtractor {
 
         final String matchedStartDateTime = matcher.group("startDateTime");
         final String matchedEndDateTime = matcher.group("endDateTime");
-        if (!ParserUtil.isDateTimeString(matchedStartDateTime)
-                || !ParserUtil.isDateTimeString(matchedEndDateTime)) {
+        if (!DateTimeUtil.isSingleDateTimeString(matchedStartDateTime)
+                || !DateTimeUtil.isSingleDateTimeString(matchedEndDateTime)) {
             logger.info("----------------[PROCESS RAWSTARTENDDATETIME][Start and End Date/Time found "
                     + "but both/either not a date]");
             return;
@@ -362,7 +363,7 @@ public class DateTimeExtractor {
         }
 
         final String matchedStartDateTime = matcher.group("startDateTime");
-        if (!ParserUtil.isDateTimeString(matchedStartDateTime)) {
+        if (!DateTimeUtil.isSingleDateTimeString(matchedStartDateTime)) {
             logger.info("----------------[PROCESS RAWSTARTDATETIME][Start Date/Time found but not a date]");
             return;
         }
@@ -395,7 +396,7 @@ public class DateTimeExtractor {
         }
 
         final String matchedEndDateTime = matcher.group("endDateTime");
-        if (!ParserUtil.isDateTimeString(matchedEndDateTime)) {
+        if (!DateTimeUtil.isSingleDateTimeString(matchedEndDateTime)) {
             logger.info("----------------[PROCESS RAWENDDATETIME][End Date/Time found but not a date]");
             return;
         }

@@ -43,7 +43,7 @@ public class Deadline {
         this.dateTime = dateTime;
     }
 
-    public ZonedDateTime getValue() {
+    public ZonedDateTime getDateTime() {
         return dateTime;
     }
 
@@ -65,7 +65,7 @@ public class Deadline {
         }
         final Deadline other = (Deadline) o;
 
-        return Objects.equals(getValue(), other.getValue());
+        return Objects.equals(getDateTime(), other.getDateTime());
     }
 
     @Override

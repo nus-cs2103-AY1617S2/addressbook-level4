@@ -8,7 +8,7 @@ import java.util.Optional;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
@@ -78,7 +78,7 @@ public class XmlAdaptedTask {
     private void setDeadlineElementIfPresent(Optional<Deadline> sourceDeadline) {
         if (sourceDeadline.isPresent()) {
             Deadline deadline = sourceDeadline.get();
-            deadlineElement = deadline.getValue().format(ParserUtil.DATE_TIME_FORMAT);
+            deadlineElement = deadline.getDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
         }
     }
 
@@ -88,8 +88,8 @@ public class XmlAdaptedTask {
     private void setStartEndDateElementsIfPresent(Optional<StartEndDateTime> sourceStartEndDateTime) {
         if (sourceStartEndDateTime.isPresent()) {
             StartEndDateTime startEndDateTime = sourceStartEndDateTime.get();
-            startDateTimeElement = startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT);
-            endDateTimeElement = startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT);
+            startDateTimeElement = startEndDateTime.getStartDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
+            endDateTimeElement = startEndDateTime.getEndDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
         }
     }
 
@@ -138,7 +138,7 @@ public class XmlAdaptedTask {
             return Optional.empty();
         }
         // construct Deadline with allowPastDateTime set to true because this is loaded from storage
-        Deadline deadline = new Deadline(ZonedDateTime.parse(deadlineElement, ParserUtil.DATE_TIME_FORMAT), true);
+        Deadline deadline = new Deadline(ZonedDateTime.parse(deadlineElement, DateTimeUtil.DATE_TIME_FORMAT), true);
         return Optional.of(deadline);
     }
 
@@ -154,8 +154,8 @@ public class XmlAdaptedTask {
         if (startDateTimeElement == null || endDateTimeElement == null) {
             return Optional.empty();
         }
-        ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, ParserUtil.DATE_TIME_FORMAT);
-        ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, ParserUtil.DATE_TIME_FORMAT);
+        ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
+        ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
         // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
         StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime, true);
         return Optional.of(startEndDateTime);

@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.tag.TagColorScheme;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartEndDateTime;
@@ -40,16 +42,18 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().value);
         id.setText(displayedIndex + ". ");
 
+        // TODO change date format
+        DateTimeFormatter dateFormat = DateTimeUtil.DISPLAY_FORMAT_TODO;
         if (task.getStartEndDateTime().isPresent()) {
             showStartEndDate.setVisible(true);
             showDeadline.setVisible(false);
             StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
-            startDate.setText(startEndDateTime.getStartDateTime().format(ParserUtil.DATE_TIME_FORMAT));
-            endDate.setText(startEndDateTime.getEndDateTime().format(ParserUtil.DATE_TIME_FORMAT));
+            startDate.setText(startEndDateTime.getStartDateTime().format(dateFormat));
+            endDate.setText(startEndDateTime.getEndDateTime().format(dateFormat));
         } else if (task.getDeadline().isPresent()) {
             showStartEndDate.setVisible(false);
             showDeadline.setVisible(true);
-            deadline.setText(task.getDeadline().get().getValue().format(ParserUtil.DATE_TIME_FORMAT));
+            deadline.setText(task.getDeadline().get().getDateTime().format(dateFormat));
         } else {
             showStartEndDate.setVisible(false);
             showDeadline.setVisible(false);
