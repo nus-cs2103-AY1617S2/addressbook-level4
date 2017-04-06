@@ -10,12 +10,14 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
+//@@author A0116219L
 /**
  * Adds a task to the TaskManager.
  */
@@ -48,7 +50,7 @@ public class AddCommand extends Command {
 	    tagSet.add(new Tag(tagName));
 	}
 	this.toAdd = new Event(new Title(name), new Location(location), new Schedule(startTime), new Schedule(endTime),
-		new Schedule(deadline), new Description(description), new UniqueTagList(tagSet), new IsDone());
+		new Schedule(deadline), new Description(description), new UniqueTagList(tagSet), new IsDone(), false, new Recurrence());
     }
 
     /**

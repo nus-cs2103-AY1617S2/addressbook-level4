@@ -38,9 +38,13 @@ public interface ReadOnlyEvent {
 
     Schedule getDeadline();
 
+    Recurrence getRecurrence();
+
     boolean hasDeadline();
 
     boolean hasStartEndTime();
+
+    boolean isRecurring();
 
     IsDone getIsDone();
 
@@ -65,5 +69,9 @@ public interface ReadOnlyEvent {
 			// onwards
 			&& other.getDescription().equals(this.getDescription()));
     }
+
+    /**
+     * Get number of hours required to perform event
+     */
 
 }

@@ -18,6 +18,7 @@ import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -108,6 +109,11 @@ public class ParserUtil {
 	return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
+    public static Optional<Recurrence> parseRecurrence(Optional<String> recurrence) throws IllegalValueException {
+	// TODO
+	throw new UnsupportedOperationException();
+    }
+
     /**
      * Parses a {@code Optional<String> schedule} into an
      * {@code Optional<List<Date>>} if {@code schedule} is present.
@@ -148,8 +154,6 @@ public class ParserUtil {
 	    return null;
 	}
 	com.joestelmach.natty.Parser dateParser = new com.joestelmach.natty.Parser();
-	// dateGroup contains isRecurring() and getRecursUntil() methods that
-	// can be used later
 	List<DateGroup> dateGroup = dateParser.parse(words);
 	List<Date> dateList = dateGroup.isEmpty() ? new ArrayList<Date>() : dateGroup.get(0).getDates();
 	return dateList;

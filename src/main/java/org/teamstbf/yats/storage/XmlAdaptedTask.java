@@ -11,6 +11,7 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -21,6 +22,8 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class XmlAdaptedTask {
 
+    public static final String RECURRING_YES = "Yes";
+    public static final String RECURRING_NO = "No";
     @XmlElement(required = true)
     private String title;
     @XmlElement(required = true)
@@ -37,6 +40,14 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String completed;
+    @XmlElement(required = true)
+    private String isRecurring;
+    @XmlElement(required = true)
+    private String recurrenceStart;
+    @XmlElement(required = true)
+    private String recurrencePeriodicity;
+    @XmlElement(required = true)
+    private String recurrenceDoneList;
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -71,6 +82,9 @@ public class XmlAdaptedTask {
 	for (Tag tag : source.getTags()) {
 	    tagged.add(new XmlAdaptedTag(tag));
 	}
+	this.isRecurring = source.isRecurring() ? RECURRING_YES : RECURRING_NO;
+	this.period = source.getRecurrence().getPeriodicity();
+	this.recurrenceDoneList = source.getRecurrence().getDoneListString();
     }
 
     /**
@@ -94,6 +108,13 @@ public class XmlAdaptedTask {
 	final Description description = new Description(this.description);
 	final UniqueTagList tags = new UniqueTagList(personTags);
 	final IsDone isDone = new IsDone(this.completed);
-	return new Event(title, location, startTime, endTime, deadline, description, tags, isDone);
+	final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ? true : false;
+	Recurrence recurrence = new Recurrence();
+	if (this.isRecurring.equals(RECURRING_YES)) {
+	    recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
+	}
+
+	return new Event(title, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
+		recurrence);
     }
 }

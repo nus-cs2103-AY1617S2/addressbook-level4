@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * Provides a handle to a person card in the person list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class EventCardHandle extends GuiHandle {
 	private static final String NAME_FIELD_ID = "#name";
 	private static final String STARTTIME_FIELD_ID = "#startTime";
 	private static final String ENDTIME_FIELD_ID = "#endTime";
@@ -25,15 +25,15 @@ public class PersonCardHandle extends GuiHandle {
 
 	private Node node;
 
-	public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+	public EventCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
 		super(guiRobot, primaryStage, null);
 		this.node = node;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof PersonCardHandle) {
-			PersonCardHandle handle = (PersonCardHandle) obj;
+		if (obj instanceof EventCardHandle) {
+			EventCardHandle handle = (EventCardHandle) obj;
 			return getTitle().equals(handle.getTitle()) && getStartTime().equals(handle.getStartTime())
 					&& getEndTime().equals(handle.getEndTime()) && getDescription().equals(handle.getDescription())
 					&& getLocation().equals(handle.getLocation()) && getEndTime().equals(handle.getEndTime())
@@ -83,11 +83,11 @@ public class PersonCardHandle extends GuiHandle {
 		return getTextFromLabel(NAME_FIELD_ID);
 	}
 
-	public boolean isSamePerson(ReadOnlyEvent person) {
-		return getTitle().equals(person.getTitle().fullName) && getStartTime().equals(person.getStartTime().toString())
-				&& getDescription().equals(person.getDescription().value)
-				&& getLocation().equals(person.getLocation().value)
-				&& getEndTime().equals(person.getEndTime().toString()) && getTags().equals(getTags(person.getTags()));
+	public boolean isSameEvent(ReadOnlyEvent event) {
+		return event != null || getTitle().equals(event.getTitle().fullName) && getStartTime().equals(event.getStartTime().toString())
+				&& getDescription().equals(event.getDescription().value)
+				&& getLocation().equals(event.getLocation().value)
+				&& getEndTime().equals(event.getEndTime().toString()) && getTags().equals(getTags(event.getTags()));
 	}
 
 	@Override

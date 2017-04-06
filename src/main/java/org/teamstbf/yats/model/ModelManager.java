@@ -1,5 +1,7 @@
 package org.teamstbf.yats.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -26,10 +28,10 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String UNDONE_TASK_IDENTIFIER = "No";
+    private static final String TASK_UNDONE_IDENTIFIER = "No";
+    private static final String TASK_DONE_IDENTIFIER = "Yes";
 
     private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
-
     private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 5;
 
     private final TaskManager taskManager;
@@ -40,6 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
     private final FilteredList<ReadOnlyEvent> filteredEvents;
+    private final FilteredList<ReadOnlyEvent> calendarList;
+    private final FilteredList<ReadOnlyEvent> taskList;
 
     public ModelManager() {
 	this(new TaskManager(), new UserPrefs());
@@ -56,7 +60,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 	this.taskManager = new TaskManager(taskManager);
 	filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
-	updateFilteredListToShowAll();
+	calendarList = new FilteredList<ReadOnlyEvent>(this.taskManager.getTaskList());
+	taskList = new FilteredList<ReadOnlyEvent>(this.taskManager.getTaskList());
 	undoTaskManager = new Stack<TaskManager>();
 	redoTaskManager = new Stack<TaskManager>();
     }
@@ -158,6 +163,12 @@ public class ModelManager extends ComponentManager implements Model {
 	indicateTaskManagerChanged();
     }
 
+    @Override
+    public void scheduleEvent(Event event) {
+	saveImageOfCurrentTaskManager();
+	indicateTaskManagerChanged();
+    }
+
     // @@author
 
     /*
@@ -178,10 +189,23 @@ public class ModelManager extends ComponentManager implements Model {
 	return new UnmodifiableObservableList<>(filteredEvents);
     }
 
+    @Override
+    public UnmodifiableObservableList<ReadOnlyEvent> getCalendarFilteredTaskList() {
+	return new UnmodifiableObservableList<>(calendarList);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyEvent> getTaskFilteredTaskList() {
+	return new UnmodifiableObservableList<>(taskList);
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
 	raise(new TaskManagerChangedEvent(taskManager));
     }
+
+    // =========== Filtered Event List Accessors
+    // =============================================================
 
     @Override
     public void saveTaskManager() {
@@ -220,12 +244,37 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
 	Set<String> undoneTaskIdentifier = new HashSet<String>();
-	undoneTaskIdentifier.add(UNDONE_TASK_IDENTIFIER);
+	undoneTaskIdentifier.add(TASK_UNDONE_IDENTIFIER);
 	updateFilteredListToShowDone(undoneTaskIdentifier);
 	// filteredEvents.setPredicate(null);
     }
 
     // @@author A0138952W
+
+    private void updateCalendarFilteredEventList(Expression expression) {
+	calendarList.setPredicate(expression::satisfies);
+    }
+
+    private void updateTaskFilteredEventList(Expression expression) {
+	taskList.setPredicate(expression::satisfies);
+    }
+
+    @Override
+    public void updateCalendarFilteredListToShowStartTime() {
+	LocalDate today = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	Set<String> keywordSet = new HashSet<String>();
+	keywordSet.add(today.format(formatter));
+	updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywordSet)));
+    }
+
+    @Override
+    public void updateTaskFilteredListToShowDone() {
+	Set<String> doneTaskIdentifier = new HashSet<String>();
+	doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+	updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
+    }
+
     @Override
     public void updateFilteredListToShowLocation(Set<String> keywords) {
 	updateFilteredEventList(new PredicateExpression(new LocationQualifier(keywords)));
@@ -381,22 +430,22 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class DeadlineQualifier implements Qualifier {
 
-	private Set<String> startTimeKeyWords;
+	private Set<String> deadlineKeyWords;
 
 	DeadlineQualifier(Set<String> startTimeKeyWords) {
-	    this.startTimeKeyWords = startTimeKeyWords;
+	    this.deadlineKeyWords = startTimeKeyWords;
 	}
 
 	@Override
 	public boolean run(ReadOnlyEvent event) {
-	    return startTimeKeyWords.stream()
+	    return deadlineKeyWords.stream()
 		    .filter(keyword -> StringUtil.containsWordIgnoreCase(event.getDeadline().toString(), keyword))
 		    .findAny().isPresent();
 	}
 
 	@Override
 	public String toString() {
-	    return "startTime=" + String.join(", ", startTimeKeyWords);
+	    return "deadline=" + String.join(", ", deadlineKeyWords);
 	}
     }
 
@@ -458,12 +507,17 @@ public class ModelManager extends ComponentManager implements Model {
 		if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
 			keyword)) {
 		    return true;
-		} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword)) {
+		} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+			keyword)) {
 		    return true;
-		} else if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(0), keyword)) {
-		    return (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword));
-		} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(0), keyword)) {
-		    return (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(0), keyword));
+		} else if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+			keyword)) {
+		    return (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+			    keyword));
+		} else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+			keyword)) {
+		    return (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+			    keyword));
 		}
 		return false;
 	    }).findAny().isPresent();

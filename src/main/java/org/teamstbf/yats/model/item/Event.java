@@ -12,7 +12,9 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public class Event implements ReadOnlyEvent {
 
     public static final String MESSAGE_TOO_MANY_TIME = "There should be at most 2 time points in the task.";
+    public static final String MESSAGE_RECURRENCE_TIME_ERROR = "Recurring task should contain only one date.";
     public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
+    public static final int SIZE_RECURRENCE_DATE = 1;
     public static final int SIZE_DEADLINE_TASK = 1;
     public static final int SIZE_EVENT_TASK = 2;
     public static final int SIZE_FLOATING_TASK = 0;
@@ -29,7 +31,10 @@ public class Event implements ReadOnlyEvent {
     private Location location;
     private UniqueTagList tags;
     private Integer priority;
+    private boolean isRecurring;
+    private Recurrence recurrence;
 
+    // @@author A0116219L
     /**
      * Creates an Event object using map of parameters, only name is compulsory,
      * others are optional
@@ -57,7 +62,51 @@ public class Event implements ReadOnlyEvent {
 	this.isDone = new IsDone();
 	this.tags = new UniqueTagList(tags);
 	this.setPriority(1);
-	fillStartEndDateAndDeadline(parameters);
+	if (parameters.get("recurrence") != null) {
+	    this.isRecurring = true;
+	    // recurring task has empty start end and deadline
+	    this.startTime = new Schedule("");
+	    this.endTime = new Schedule("");
+	    this.deadline = new Schedule("");
+	    fillRecurrence((List<Date>) parameters.get("time"), (String) parameters.get("recurrence"));
+	} else {
+	    this.isRecurring = false;
+	    this.recurrence = new Recurrence();
+	    fillStartEndDateAndDeadline(parameters);
+	}
+    }
+
+    /**
+     *
+     * Every field must be present and not null.
+     *
+     */
+    public Event(Title name, Location location, Schedule startTime, Schedule endTime, Schedule deadline,
+	    Description description, UniqueTagList tags, IsDone isDone) {
+	assert !CollectionUtil.isAnyNull(name);
+	this.name = name;
+	this.location = location;
+	this.startTime = startTime;
+	this.endTime = endTime;
+	this.deadline = deadline;
+	this.description = description;
+	this.isDone = isDone;
+	this.tags = new UniqueTagList(tags); // protect internal tags from
+	// changes in the arg list
+    }
+
+    @Override
+    public boolean equals(Object other) {
+	return other == this // short circuit if same object
+		|| (other instanceof ReadOnlyEvent // instanceof handles nulls
+			&& this.isSameStateAs((ReadOnlyEvent) other));
+    }
+
+    private void fillRecurrence(List<Date> dateList, String period) throws IllegalValueException {
+	if (dateList.size() > SIZE_RECURRENCE_DATE) {
+	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
+	}
+	this.recurrence = new Recurrence(dateList.get(INDEX_FIRST_DATE), period);
     }
 
     private void fillStartEndDateAndDeadline(HashMap<String, Object> parameters) throws IllegalValueException {
@@ -88,9 +137,20 @@ public class Event implements ReadOnlyEvent {
     }
 
     public Event(ReadOnlyEvent editedReadOnlyEvent) {
-	this(editedReadOnlyEvent.getTitle(), editedReadOnlyEvent.getLocation(), editedReadOnlyEvent.getStartTime(),
-		editedReadOnlyEvent.getEndTime(), editedReadOnlyEvent.getDeadline(),
-		editedReadOnlyEvent.getDescription(), editedReadOnlyEvent.getTags(), editedReadOnlyEvent.getIsDone());
+	assert !CollectionUtil.isAnyNull(editedReadOnlyEvent.getTitle());
+	this.name = editedReadOnlyEvent.getTitle();
+	this.location = editedReadOnlyEvent.getLocation();
+	this.startTime = editedReadOnlyEvent.getStartTime();
+	this.endTime = editedReadOnlyEvent.getEndTime();
+	this.deadline = editedReadOnlyEvent.getDeadline();
+	this.description = editedReadOnlyEvent.getDescription();
+	this.isDone = editedReadOnlyEvent.getIsDone();
+	this.tags = new UniqueTagList(editedReadOnlyEvent.getTags()); // protect
+								      // internal
+								      // tags
+								      // from
+	this.isRecurring = editedReadOnlyEvent.isRecurring();
+	this.recurrence = editedReadOnlyEvent.getRecurrence();
     }
 
     /**
@@ -99,7 +159,7 @@ public class Event implements ReadOnlyEvent {
      *
      */
     public Event(Title name, Location location, Schedule startTime, Schedule endTime, Schedule deadline,
-	    Description description, UniqueTagList tags, IsDone isDone) {
+	    Description description, UniqueTagList tags, IsDone isDone, boolean isRecurring, Recurrence recurrence) {
 	assert !CollectionUtil.isAnyNull(name);
 	this.name = name;
 	this.location = location;
@@ -109,59 +169,51 @@ public class Event implements ReadOnlyEvent {
 	this.description = description;
 	this.isDone = isDone;
 	this.tags = new UniqueTagList(tags); // protect internal tags from
+	this.isRecurring = isRecurring;
+	this.recurrence = recurrence;
 	// changes in the arg list
     }
 
     @Override
-
-    public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof ReadOnlyEvent // instanceof handles nulls
-			&& this.isSameStateAs((ReadOnlyEvent) other));
-    }
-
-    @Override
-
     public Description getDescription() {
 	return description;
     }
 
     @Override
-
     public Schedule getEndTime() {
 	return endTime;
     }
 
     @Override
-
     public Location getLocation() {
 	return location;
     }
 
     @Override
-
     public Schedule getStartTime() {
 	return startTime;
     }
 
     @Override
-
     public UniqueTagList getTags() {
 	return new UniqueTagList(tags);
     }
 
     @Override
-
     public Title getTitle() {
 	return name;
     }
 
     @Override
+    public Recurrence getRecurrence() {
+	return this.recurrence;
+    }
 
+    @Override
     public int hashCode() {
 	// use this method for custom fields hashing instead of implementing
 	// your own
-	return Objects.hash(name, location, startTime, endTime, description, tags);
+	return Objects.hash(name, location, startTime, endTime, description, tags, recurrence);
     }
 
     /**
@@ -179,6 +231,8 @@ public class Event implements ReadOnlyEvent {
 	this.setDescription(replacement.getDescription());
 	this.setTags(replacement.getTags());
 	this.setIsDone(replacement.getIsDone());
+	this.isRecurring = replacement.isRecurring();
+	this.recurrence = replacement.getRecurrence();
     }
 
     private void setIsDone(IsDone done) {
@@ -210,12 +264,16 @@ public class Event implements ReadOnlyEvent {
 	this.deadline = schedule;
     }
 
+    public void setRecurrence(Recurrence recurrence) {
+	assert recurrence != null;
+	this.recurrence = recurrence;
+    }
+
     /**
      *
      * Replaces this person's tags with the tags in the argument tag list.
      *
      */
-
     public void setTags(UniqueTagList replacement) {
 	tags.setTags(replacement);
     }
@@ -226,7 +284,6 @@ public class Event implements ReadOnlyEvent {
     }
 
     @Override
-
     public String toString() {
 	return getAsText();
     }
@@ -238,7 +295,11 @@ public class Event implements ReadOnlyEvent {
 
     @Override
     public void markDone() {
-	this.isDone.markDone();
+	if (this.isRecurring) {
+	    this.recurrence.markOccurenceDone();
+	} else {
+	    this.isDone.markDone();
+	}
     }
 
     @Override
@@ -269,4 +330,10 @@ public class Event implements ReadOnlyEvent {
 	}
 	return true;
     }
+
+    @Override
+    public boolean isRecurring() {
+	return this.isRecurring;
+    }
+
 }

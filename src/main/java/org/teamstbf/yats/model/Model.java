@@ -24,6 +24,18 @@ public interface Model {
      */
     UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList();
 
+    /**
+     * Returns the calendar filtered event list as an
+     * {@code UnmodifiableObservableList<ReadOnlyEvent>}
+     */
+    UnmodifiableObservableList<ReadOnlyEvent> getCalendarFilteredTaskList();
+
+    /**
+     * Returns the task filtered event list as an
+     * {@code UnmodifiableObservableList<ReadOnlyEvent>}
+     */
+    UnmodifiableObservableList<ReadOnlyEvent> getTaskFilteredTaskList();
+
     /** Returns the TaskManager */
     ReadOnlyTaskManager getTaskManager();
 
@@ -63,6 +75,17 @@ public interface Model {
     void saveTaskManager();
 
     // @@author A0138952W
+    /**
+     * Updates the filter of the Calendar filtered event list to show specified
+     * start time
+     */
+    void updateCalendarFilteredListToShowStartTime();
+
+    /**
+     * Updates the filter of the Task filtered event list to show done task
+     */
+    void updateTaskFilteredListToShowDone();
+
     /**
      * Updates the filter of the filtered event list to show specified location
      */
@@ -114,5 +137,10 @@ public interface Model {
      * Method to check if the redo stack is empty - nothing to redo
      */
     boolean checkEmptyRedoStack();
+
+    /**
+     * Method to check if the redo stack is empty - nothing to redo
+     */
+    void scheduleEvent(Event event);
 
 }

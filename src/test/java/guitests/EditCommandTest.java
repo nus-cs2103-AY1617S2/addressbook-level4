@@ -6,14 +6,14 @@ import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.EditCommand;
-import org.teamstbf.yats.model.item.Date;
-import org.teamstbf.yats.model.item.Schedule;
+import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.EventBuilder;
 import org.teamstbf.yats.testutil.TestEvent;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.EventCardHandle;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
@@ -41,7 +41,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
 		// confirm the new card contains the right data
-		PersonCardHandle editedCard = taskListPanel.navigateToPerson(editedTask.getTitle().fullName);
+		EventCardHandle editedCard = taskListPanel.navigateToEvent(editedTask.getTitle().fullName);
 		assertMatching(editedTask, editedCard);
 
 		// confirm the list now contains all previous persons plus the person
@@ -58,15 +58,16 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		int taskManagerIndex = 1;
 
 		TestEvent editedPerson = new EventBuilder().withTitle("Usorp the throne").withLocation("Ruvenheigen City")
-				.withStartTime("5:45am").withEndTime("11:59pm")
-				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal").withIsDone("Yes").build();
+				.withStartTime("5:45am").withEndTime("11:59pm").withDeadline("")
+				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal")
+				.withIsDone("Yes").build();
 
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedPerson);
 	}
 
 	@Test
 	public void edit_clearTags_success() throws Exception {
-		String detailsToEdit = "t/";
+		String detailsToEdit = "#";
 		int taskManagerIndex = 2;
 
 		TestEvent taskToEdit = expectedTaskList[taskManagerIndex - 1];
@@ -75,25 +76,24 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
 	}
 
-	@Test
-	public void edit_duplicateTask_failure() {
-		commandBox.runCommand(
-				"edit 3 Alice Pauline p/85355255 e/alice@gmail.com " + "a/123, Jurong West Ave 6, #08-111 t/friends");
-		assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
-	}
+	/*
+	 * @Test public void edit_duplicateTask_failure() { commandBox.runCommand(
+	 * "edit 3 Alice Pauline");
+	 * assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK); }
+	 */
 
 	@Test
 	public void edit_findThenEdit_success() throws Exception {
-		commandBox.runCommand("find Elle");
+		commandBox.runCommand("find Oxygen");
 
-		String detailsToEdit = "Belle";
-		int filteredPersonListIndex = 1;
-		int addressBookIndex = 5;
+		String detailsToEdit = "Carbon Dioxide";
+		int filteredEventListIndex = 1;
+		int taskManagerIndex = 3;
 
-		TestEvent personToEdit = expectedTaskList[addressBookIndex - 1];
-		TestEvent editedPerson = new EventBuilder(personToEdit).withTitle("Belle").build();
+		TestEvent eventToEdit = expectedTaskList[taskManagerIndex - 1];
+		TestEvent editedEvent = new EventBuilder(eventToEdit).withTitle("Carbon Dioxide").build();
 
-		assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+		assertEditSuccess(filteredEventListIndex, taskManagerIndex, detailsToEdit, editedEvent);
 	}
 
 	@Test
@@ -108,15 +108,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
 		commandBox.runCommand("edit 1 p/abcd");
-		assertResultMessage(Date.MESSAGE_DEADLINE_CONSTRAINTS);
+		assertResultMessage(SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
 
-		commandBox.runCommand("edit 1 e/yahoo!!!");
-		assertResultMessage(Schedule.MESSAGE_TIME_CONSTRAINTS);
+		commandBox.runCommand("edit 1 something, from 10:22PM 05/05/2017to 11:23PM 05/05/2017 by 9:00PM 05/05/2017");
+		assertResultMessage(Event.MESSAGE_TOO_MANY_TIME);
 
-		commandBox.runCommand("edit 1 a/");
+		// commandBox.runCommand("edit 1 a/");
 		// assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);
 
-		commandBox.runCommand("edit 1 t/*&");
+		commandBox.runCommand("edit 1 #*&");
 		assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 	}
 
@@ -134,12 +134,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_notAllFieldsSpecified_success() throws Exception {
-		String detailsToEdit = "t/sweetie t/bestie";
-		int addressBookIndex = 2;
+		String detailsToEdit = "#sweetie #bestie #reaper";
+		int taskManagerIndex = 2;
 
-		TestEvent personToEdit = expectedTaskList[addressBookIndex - 1];
-		TestEvent editedPerson = new EventBuilder(personToEdit).withTags("sweetie", "bestie").build();
+		TestEvent eventToEdit = expectedTaskList[taskManagerIndex - 1];
+		TestEvent editedEvent = new EventBuilder(eventToEdit).withTags("sweetie", "bestie").build();
 
-		assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedEvent);
 	}
 }

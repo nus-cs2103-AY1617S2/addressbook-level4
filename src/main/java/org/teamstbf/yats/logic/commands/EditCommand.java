@@ -21,11 +21,13 @@ import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
+//@@author A0116219L
 /**
  * Edits the details of an existing task in the task scheduler.
  */
@@ -100,9 +102,12 @@ public class EditCommand extends Command {
 	    updatedTags.removeAndMerge(taskToEdit.getTags());
 	}
 	IsDone isDone = taskToEdit.getIsDone();
+	//these fields are not editable therefore unchanged
+	boolean isRecurring = taskToEdit.isRecurring();
+	Recurrence recurrence = taskToEdit.getRecurrence();
 
 	return new Event(updatedName, updatedLocation, updatedStartTime, updatedEndTime, updatedDeadline,
-		updatedDescription, updatedTags, isDone);
+		updatedDescription, updatedTags, isDone, isRecurring, recurrence);
     }
 
     /**
