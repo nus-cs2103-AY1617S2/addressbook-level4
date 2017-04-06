@@ -64,11 +64,16 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
+    //@@author A0163673Y
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
+        if (commandTextField.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
+    //@@author
 
 }
