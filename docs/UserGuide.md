@@ -70,6 +70,8 @@ Adds a task to the task manager. Three types of tasks are supported.<br>
 > Task description need not be continuous, i.e. a tag can be placed in between two chunks of the description
 > Task can have any number of tags (including 0)
 > Spacing after the dateTime prefixes (eg. by/) is not necessary
+> Tasks with `important` tags will appear on the right list
+> Special tags supported: `important` `impt` `urgent` `critical` `crucial` `vital` `serious`
 
 ### a) Floating task
 
