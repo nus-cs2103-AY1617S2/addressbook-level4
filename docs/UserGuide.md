@@ -173,7 +173,7 @@ There may be times when you would wish to review the tasks you have already comp
 
 ### 3.3. Managing Tasks
 
-#### 3.3.1. Marking tasks as today
+#### 3.3.1. Marking a task as today
 
 As suggested in the [quick-start guide](#22-how-to-get-started), we recommend that users compile a list of tasks to focus on, regardless of deadline. The `today` command shifts tasks from your future list to your list of today's tasks.
 
@@ -190,7 +190,7 @@ In the screenshot below, we use the command `today F4` to shift a task initially
 
 * `today F4`
 
-#### 3.3.2. Marking tasks as not today
+#### 3.3.2. Marking a task as not today
 
 If you've added a task to the today list, but later decide that you already have enough on your plate, feel free to shift it back to the future list using the `nottoday` command. Note that if a task is already due today, using `nottoday` will not shift it to the future list.
 
@@ -203,7 +203,7 @@ If you've added a task to the today list, but later decide that you already have
 
 * `nottoday F4`
 
-#### 3.3.3. Marking task as done
+#### 3.3.3. Marking a task as done
 
 Once you're done with a task, mark it as `done` and we'll archive it for you. Do this often enough, and you'll have a great sense of satisfaction watching your tasklist get shorter.
 
@@ -217,7 +217,7 @@ Once you're done with a task, mark it as `done` and we'll archive it for you. Do
 * `done T3`
 * `done F3`
 
-#### 3.3.4. Marking tasks as not done
+#### 3.3.4. Marking a task as not done
 
 Be honest. If you know you didn't do that task properly, and you want to come back to it, use the `notdone` function to bring it back from the completed list.
 
