@@ -51,16 +51,18 @@ public class TaskCard extends UiPart<Region> {
         taskDate.setAlignment(Pos.BASELINE_RIGHT);
         progressBar.setVisible(task.isAnimated());
         logger.info("############################################TASK ISANIMATED:" + task.isAnimated());
-        if (task.isAnimated()) {
+        if (task.getIsAnimated() == 1) {
             // Play progress bar animation
             Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.ZERO, new KeyValue(progressBar.visibleProperty(), true),
+                    new KeyFrame(Duration.ZERO,
                             new KeyValue(progressBar.progressProperty(), 0)),
-                    new KeyFrame(Duration.seconds(1), new KeyValue(progressBar.visibleProperty(), false),
+                    new KeyFrame(Duration.seconds(1), 
                             new KeyValue(progressBar.progressProperty(), 1)));
-            timeline.setCycleCount(2);
+            timeline.setCycleCount(1);
             timeline.play();
-            task.setAnimation(false);
+            task.setAnimation(0);
+        } else if (task.getIsAnimated() > 1) {
+            task.setAnimation(task.getIsAnimated() - 1);
         }
         // Change to Red if overdue
         if (task.isOverdue()) {

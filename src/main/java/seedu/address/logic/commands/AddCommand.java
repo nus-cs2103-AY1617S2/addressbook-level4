@@ -47,7 +47,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new FloatingTask(new Name(name), new UniqueTagList(tagSet),
                 false, false);
-        this.toAdd.setAnimation(true);
+        this.toAdd.setAnimation(2);
     }
 
     /**
@@ -65,7 +65,7 @@ public class AddCommand extends Command {
         System.out.print("deadline: " + deadline);
         this.toAdd = new DeadlineTask(new Name(name), new UniqueTagList(tagSet),
                 deadline, false, false);
-        this.toAdd.setAnimation(true);
+        this.toAdd.setAnimation(2);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = new EventTask(new Name(name), new UniqueTagList(tagSet),
                 deadline, startingTime, false, false);
-        this.toAdd.setAnimation(true);
+        this.toAdd.setAnimation(2);
     }
 
     @Override

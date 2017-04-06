@@ -11,7 +11,6 @@ import seedu.address.model.tag.UniqueTagList;
  * values are validated.
  */
 public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
-
     // Returns Name of Task
     Name getName();
 
@@ -31,10 +30,13 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     void setID(String id);
 
     // Sets animation flag
-    void setAnimation(boolean flag);
+    void setAnimation(int flag);
 
     // Gets animation flag
     boolean isAnimated();
+
+    // Get the animation counter
+    int getIsAnimated();
 
     // Returns whether the task is overdue
     boolean isOverdue();
