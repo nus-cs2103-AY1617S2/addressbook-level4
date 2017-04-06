@@ -89,10 +89,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public int addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        int index = tasks.add(p);
-        return index;
+        tasks.add(p);
     }
 
     /**
@@ -111,7 +110,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public int updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
@@ -121,8 +120,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the tags master list to have additional tags that are
         // not tagged to any task
         // in the task list.
-        int updatedIndex = tasks.updateTask(index, editedTask);
-        return updatedIndex;
+        tasks.updateTask(index, editedTask);
     }
 
     // @@author A0131278H

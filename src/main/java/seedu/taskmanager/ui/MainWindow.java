@@ -227,7 +227,7 @@ public class MainWindow extends UiPart<Region> {
         case TAB_TO_DO:
             return toDoTaskListPanel;
         case TAB_DONE:
-            return toDoTaskListPanel;
+            return doneTaskListPanel;
         default:
             assert false : selectedTab + " is invalid";
             return null;
