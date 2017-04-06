@@ -136,6 +136,7 @@ public class Task implements ReadOnlyPerson {
     }
     
     //@@author A0164032U
+    @Override
     public java.util.Date getStartTime() {
         if (start != null) {
             try {
@@ -146,6 +147,7 @@ public class Task implements ReadOnlyPerson {
         return new java.util.Date(Long.MIN_VALUE);
     }
     
+    @Override
     public java.util.Date getEndTime() {
         if (end != null) {
             try {
@@ -157,7 +159,7 @@ public class Task implements ReadOnlyPerson {
     }
     
     //@@author A0164032U
-    public int compareTo(Task o){
+    public int compareTo(ReadOnlyPerson o){
         return getEndTime().compareTo(o.getEndTime());
     }
 
@@ -184,6 +186,7 @@ public class Task implements ReadOnlyPerson {
         return null;
     }
 
+    @Override
     public boolean hasPassed() {
         return getEndTime().before(new java.util.Date());
     }
