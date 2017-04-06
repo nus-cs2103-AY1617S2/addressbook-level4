@@ -64,7 +64,7 @@ public class TypicalTestTasks {
         }
     }
 
-    //@@author A0097141
+    //@@author A0097141H
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
     }
