@@ -151,7 +151,6 @@ public class UnmarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 unmarkTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToUnmark, unmarkedTask);
                 compiledExecutionMessage.append(
                         String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToUnmark) + '\n');
 
@@ -194,6 +193,9 @@ public class UnmarkCommand extends Command {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
 
+        storeUnmarkedTaskForUndo(this.taskToUnmark, this.unmarkedTask);
+
+
         updateTaskListAtIndex(currIndex, unmarkedTask);
     }
 
@@ -230,7 +232,7 @@ public class UnmarkCommand extends Command {
         model.updateTask(currIndex, unmarkedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToUnmark, Task unmarkedTask) {
+    private void storeUnmarkedTaskForUndo(ReadOnlyTask taskToUnmark, Task unmarkedTask) {
         //this.indexForUndoUnmark = currIndex;
         //this.markedTaskForUndoUnmark = new Task(taskToUnmark);
         this.taskToUnmarkList.push(new Task(taskToUnmark));
