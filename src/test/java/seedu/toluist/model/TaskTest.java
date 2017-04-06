@@ -314,4 +314,45 @@ public class TaskTest {
 
         assertEquals(testTask.getAllTags(), tagSet);
     }
+
+    //@@author A0162011A
+    @Test
+    public void updateSort_SortByPriority() {
+        sortThenAssertTrue("priority");
+    }
+
+    @Test
+    public void updateSort_SortByDescription() {
+        sortThenAssertTrue("description");
+    }
+
+    @Test
+    public void updateSort_SortByOverdue() {
+        sortThenAssertTrue("overdue");
+    }
+
+    @Test
+    public void updateSort_SortByEndDate() {
+        sortThenAssertTrue("enddate");
+    }
+
+    @Test
+    public void updateSort_SortByStartDate() {
+        sortThenAssertTrue("startdate");
+    }
+
+    @Test
+    public void updateSort_SortByDefault() {
+        Task.sortBy("default");
+        assertTrue(Task.getCurrentSort()[0] == "overdue"
+            && Task.getCurrentSort()[1] == "priority"
+            && Task.getCurrentSort()[2] == "enddate"
+            && Task.getCurrentSort()[3] == "startdate"
+            && Task.getCurrentSort()[4] == "description");
+    }
+
+    private void sortThenAssertTrue(String sort) {
+        Task.sortBy(sort);
+        assertTrue(Task.getCurrentSort()[0].equals(sort));
+    }
 }
