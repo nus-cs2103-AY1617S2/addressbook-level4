@@ -103,8 +103,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path. Creates the sandbox
-     * folder if it doesn't exist. 
+     * Appends the file name to the sandbox folder path. Creates the sandbox folder if it doesn't exist. 
      * @param fileName
      * @return
      */
@@ -243,7 +242,7 @@ public class TestUtil {
 	return new Point2D(x, y);
     }
 
-    /** Gets the bound of the node relative to the parent scene. 
+    /**Gets the bound of the node relative to the parent scene. 
      * @param node
      * @return
      */
@@ -267,7 +266,7 @@ public class TestUtil {
 	return list.get(list.size() - 1);
     }
 
-    /** Removes a subset from the list of tasks. 
+    /**Removes a subset from the list of tasks. 
      * @param tasks
      *            The list of tasks
      * @param tasksToRemove

@@ -126,8 +126,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct. Both the 'task manager' and the 'last 
-     * shown list' are verified to be unchanged.
+     * Executes the command, confirms that a CommandException is thrown and that the result message is correct. Both the 'task manager' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
      *      List)
      */
@@ -489,8 +488,7 @@ public class LogicManagerTest {
 	    }
 	}
 
-	/**Adds auto-generated Task objects to the given model 
-	 * @param model
+	/**Adds auto-generated Task objects to the given model @param model
 	 *            The model to which the Tasks will be added
 	 */
 	void addToModel(Model model, int numGenerated) throws Exception {
