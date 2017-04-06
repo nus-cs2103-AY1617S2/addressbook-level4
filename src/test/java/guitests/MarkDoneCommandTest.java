@@ -3,13 +3,10 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
-import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
 import seedu.taskboss.testutil.TestTask;
