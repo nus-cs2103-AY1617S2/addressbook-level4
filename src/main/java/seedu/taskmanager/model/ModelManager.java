@@ -146,6 +146,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0131278H
+    
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getSelectedTaskList() {
+        System.out.println(selectedTab);
+        if (selectedTab.equals(TAB_TO_DO)) {
+            return getFilteredToDoTaskList();
+        } else if (selectedTab.equals(TAB_DONE)) {
+            return getFilteredDoneTaskList();
+        } else {
+            return getFilteredTaskList();
+        }
+    }
+    
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
         return new UnmodifiableObservableList<>(filteredToDoTasks);

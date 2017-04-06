@@ -54,6 +54,13 @@ public interface Model {
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     // @@author A0131278H
+
+    /**
+     * Returns the selected task list according to tab selection as an
+     * {@code UnmodifiableObservableList<ReadOnlyTask>}
+     */
+    UnmodifiableObservableList<ReadOnlyTask> getSelectedTaskList();
+
     /**
      * Returns the filtered task list of incomplete tasks as an
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
@@ -85,7 +92,7 @@ public interface Model {
 
     void updateFilteredTaskList(Date startDateCriteria, Date endDateCriteria);
     // @@author
-    
+
     // @@author A0131278H
     /** Sets the currently selected tab in model */
     void setSelectedTab(String selectedTab);

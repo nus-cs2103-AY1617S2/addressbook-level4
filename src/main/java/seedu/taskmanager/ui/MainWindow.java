@@ -212,8 +212,26 @@ public class MainWindow extends UiPart<Region> {
     
     // @@author A0131278H
     @FXML
-    public void OnSelectedTabChanged() {
-        logic.setSelectedTab(taskListsTabPane.getSelectionModel().getSelectedItem().getText());
+    public void onSelectedTabChanged() {
+        try {
+            String selectedTab = taskListsTabPane.getSelectionModel().getSelectedItem().getText();
+            logic.setSelectedTab(selectedTab);
+        } catch (NullPointerException npe) {
+            // null pointer only invoked at initiation
+        }
+    }
+    
+    public TaskListPanel getTaskListPanel() {
+        String selectedTab = taskListsTabPane.getSelectionModel().getSelectedItem().getText();
+        switch (selectedTab) {
+        case TAB_TO_DO:
+            return toDoTaskListPanel;
+        case TAB_DONE:
+            return toDoTaskListPanel;
+        default:
+            assert false : selectedTab + " is invalid";
+            return null;
+        }    
     }
     // @@author
     
@@ -233,10 +251,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
     }
 
 }
