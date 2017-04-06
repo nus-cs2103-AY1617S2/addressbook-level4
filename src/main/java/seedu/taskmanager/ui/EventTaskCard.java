@@ -46,8 +46,8 @@ public class EventTaskCard extends UiPart<Region> {
 
         if (isSameDateEvent(task)) {
             startDateTime.setText("Date: " + task.getStartDate().value);
-            endDateTime
-                    .setText("Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
+            endDateTime.setText(
+                    "Start Time: " + task.getStartTime().value + "   " + "End Time: " + task.getEndTime().value);
         }
 
         if (task.getIsMarkedAsComplete()) {
