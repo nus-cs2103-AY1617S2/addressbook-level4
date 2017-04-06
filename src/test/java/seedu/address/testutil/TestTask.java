@@ -18,6 +18,7 @@ public class TestTask implements ReadOnlyTask {
     private Optional<Deadline> deadline;
     private Optional<StartEndDateTime> startEndDateTime;
     private UniqueTagList tags;
+    private boolean done;
 
     //@@author A0140023E
     public TestTask() {
@@ -59,6 +60,11 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
+    //@@author A0135998H
+    public void markDone() {
+        this.done = !done;
+    }
+
     @Override
     public Name getName() {
         return name;
@@ -81,6 +87,12 @@ public class TestTask implements ReadOnlyTask {
         return tags;
     }
 
+    //@@author A0135998H
+    public boolean isDone() {
+        return done;
+    }
+
+    //@@author
     @Override
     public String toString() {
         return getAsText();

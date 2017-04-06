@@ -27,7 +27,7 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/iManager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 700;
+    private static final int MIN_HEIGHT = 800;
     private static final int MIN_WIDTH = 1000;
 
     private Stage primaryStage;
@@ -194,12 +194,10 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    //@author A0135998H
     public TabPane getTaskTabPane() {
         return taskTabPanel.getTaskTabPane();
     }
 
-    //@@author A0135998H
     public TaskListPanel getTaskListPanel() {
         return taskTabPanel.getTaskListPanel();
     }

@@ -20,6 +20,8 @@ public class Task implements ReadOnlyTask {
 
     private Optional<Deadline> deadline;
 
+    private boolean done;
+
     /**
      * Every field must not be null except for the {@code Optional} fields.
      */
@@ -30,6 +32,7 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
         this.startEndDateTime = startEndDateTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.done = false;
     }
 
     /**
@@ -37,6 +40,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getDeadline(), source.getStartEndDateTime(), source.getTags());
+        done = source.isDone();
     }
 
     public void setName(Name name) {
@@ -63,6 +67,17 @@ public class Task implements ReadOnlyTask {
         this.deadline = Optional.of(dateTime);
     }
 
+    //@@author A0135998H
+    @Override
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean status) {
+        done = status;
+    }
+
+    //@@author A0140023E
     @Override
     public Optional<StartEndDateTime> getStartEndDateTime() {
         return startEndDateTime;
@@ -107,7 +122,7 @@ public class Task implements ReadOnlyTask {
         deadline = replacement.getDeadline();
         // Similarly for startEndDateTime we are reusing same Optional
         startEndDateTime = replacement.getStartEndDateTime();
-
+        done = replacement.isDone();
         setTags(replacement.getTags());
     }
 
