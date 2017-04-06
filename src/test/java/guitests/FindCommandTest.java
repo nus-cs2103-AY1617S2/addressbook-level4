@@ -3,6 +3,9 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import seedu.ezdo.commons.core.Messages;
@@ -34,10 +37,19 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find p/2 d/14/04/2016", td.daniel);
         assertFindResult("find p/1", td.alice);
 
+        //find all tasks with priority
+        TestTask[] allTask = td.getTypicalTasks();
+        ArrayList<TestTask> resultList = new ArrayList<TestTask>();
+        resultList.addAll(Arrays.asList(allTask));
+        resultList.remove(1); //remove task without priority
+        TestTask[] resultArray = resultList.toArray(new TestTask[resultList.size()]);
+        assertFindResult("find p/", resultArray);
+
         //find after deleting one result
         commandBox.runCommand("list");
         commandBox.runCommand("kill 1");
         assertFindResult("find Meier", td.benson, td.daniel);
+
     }
 
     //@@author A0138907W
@@ -52,6 +64,7 @@ public class FindCommandTest extends EzDoGuiTest {
     }
 
     //@@author
+    //@@author A0141010L
     @Test
     public void find_emptyList() {
         commandBox.runCommand("clear");
@@ -67,6 +80,16 @@ public class FindCommandTest extends EzDoGuiTest {
         commandBox.runCommand("find s/10a");
         assertResultMessage("0 tasks listed!");
         commandBox.runCommand("find Meier p/1 s/11-11-2015 d/02/12/2017 t/owesMoney t/nonExistentTag");
+        assertResultMessage("0 tasks listed!");
+    }
+
+    @Test
+    public void find_nonexisting_task() {
+        commandBox.runCommand("find s/10a");
+        assertResultMessage("0 tasks listed!");
+        commandBox.runCommand("find Meier p/1 s/11-11-2015 d/02/12/2017 t/owesMoney t/nonExistentTag");
+        assertResultMessage("0 tasks listed!");
+        commandBox.runCommand("find CashMeOutsideHowBoutDat");
         assertResultMessage("0 tasks listed!");
     }
 

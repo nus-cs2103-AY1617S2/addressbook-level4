@@ -14,12 +14,7 @@ public class Recur {
 
     public static final String MESSAGE_RECUR_CONSTRAINTS =
             "Recurring time interval should be 'daily', 'weekly', 'monthly' or 'yearly'.";
-
     public static final String INTERVAL_NONE = "";
-    public static final String INTERVAL_DAILY = "daily";
-    public static final String INTERVAL_WEEKLY = "weekly";
-    public static final String INTERVAL_MONTHLY = "monthly";
-    public static final String INTERVAL_YEARLY = "yearly";
 
     public static final HashMap<String, Integer> RECUR_INTERVALS = new HashMap<>();
 
@@ -42,11 +37,17 @@ public class Recur {
     }
 
     private void initialiseRecurIntervals() {
+
+        String intervalDaily = "daily";
+        String intervalWeekly = "weekly";
+        String intervalMonthly = "monthly";
+        String intervalYearly = "yearly";
+
         RECUR_INTERVALS.put(INTERVAL_NONE, Calendar.DATE);
-        RECUR_INTERVALS.put(INTERVAL_DAILY, Calendar.DAY_OF_MONTH);
-        RECUR_INTERVALS.put(INTERVAL_WEEKLY, Calendar.WEEK_OF_MONTH);
-        RECUR_INTERVALS.put(INTERVAL_MONTHLY, Calendar.MONTH);
-        RECUR_INTERVALS.put(INTERVAL_YEARLY, Calendar.YEAR);
+        RECUR_INTERVALS.put(intervalDaily, Calendar.DAY_OF_MONTH);
+        RECUR_INTERVALS.put(intervalWeekly, Calendar.WEEK_OF_MONTH);
+        RECUR_INTERVALS.put(intervalMonthly, Calendar.MONTH);
+        RECUR_INTERVALS.put(intervalYearly, Calendar.YEAR);
     }
 
     /**
@@ -57,7 +58,7 @@ public class Recur {
     }
 
     public boolean isRecur() {
-        return !value.equals("");
+        return !value.equals(INTERVAL_NONE);
     }
 
     @Override

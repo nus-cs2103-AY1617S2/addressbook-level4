@@ -40,18 +40,10 @@ public class DoneCommandTest extends EzDoGuiTest {
         commandBox.runCommand("edit " + targetIndex + " s/02/07/2012 04:55 " + "d/17/07/2015 22:22 " + "f/");
         TestTask editedTask = new TaskBuilder(currentList[targetIndex - 1]).build();
 
-        try {
-            editedTask.setRecur(new Recur(""));
-        } catch (IllegalValueException e) {
-
-        }
-
-        currentList[targetIndex - 1] = editedTask;
-
         //marks that non recurring task in a list as done
-        TestTask doneTask2 = currentList[targetIndex - 1];
+        targetIndex = currentList.length;
         assertDoneSuccess(false, targetIndex, currentList, doneList);
-        doneList = TestUtil.addTasksToList(doneList, doneTask2);
+        doneList = TestUtil.addTasksToList(doneList, editedTask);
 
         // invalid index
         commandBox.runCommand("done " + currentList.length + 1);
@@ -71,18 +63,24 @@ public class DoneCommandTest extends EzDoGuiTest {
 
     }
 
-    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentList,
-            TestTask[] doneList) {
+    private void assertDoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, TestTask[] currentTaskList,
+            TestTask[] doneTaskList) {
 
-        TestTask taskToDone = currentList[targetIndexOneIndexed - 1]; // -1 as
+        TestTask taskToDone = currentTaskList[targetIndexOneIndexed - 1]; // -1 as
                                                                       // array
                                                                       // uses
                                                                       // zero
                                                                       // indexing
+        /* try {
+            taskToDone.setRecur(new Recur(""));
+        } catch (IllegalValueException e) {
+
+        }
         ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
         tasksToDone.add(taskToDone); // old date
         currentList = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
         doneList = TestUtil.addTasksToList(doneList, taskToDone);
+        */
         if (usesShortCommand) {
             commandBox.runCommand("d " + targetIndexOneIndexed);
         } else {
@@ -90,9 +88,18 @@ public class DoneCommandTest extends EzDoGuiTest {
         }
 
         if (!taskToDone.getRecur().isRecur()) {
+            try {
+                taskToDone.setRecur(new Recur(""));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
+            tasksToDone.add(taskToDone); // old date
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
 
             // confirm the task list no longer has the done task
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -101,20 +108,29 @@ public class DoneCommandTest extends EzDoGuiTest {
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
             assertMatching(taskToDone, addedCard);
-            assertTrue(taskListPanel.isListMatching(doneList));
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
         } else {
 
-            TestTask recTask = updateRecTask(new TestTask(taskToDone));
+            ArrayList<TestTask> tasksToDone = new ArrayList<TestTask>();
+            tasksToDone.add(taskToDone); // old date
+            currentTaskList = TestUtil.removeTaskFromList(currentTaskList, targetIndexOneIndexed);
+            doneTaskList = TestUtil.addTasksToList(doneTaskList, taskToDone);
 
-            currentList = TestUtil.addTasksToList(currentList, recTask);
+            TestTask recTask = updateRecTask(new TestTask(taskToDone));
+            try {
+                taskToDone.setRecur(new Recur(""));
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+            currentTaskList = TestUtil.addTasksToList(currentTaskList, recTask);
             // confirm the task list no longer has the done task
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
 
             // confirm the result message is correct
             assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToDone));
@@ -123,12 +139,12 @@ public class DoneCommandTest extends EzDoGuiTest {
             commandBox.runCommand("done");
             TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToDone.getName().fullName);
             assertMatching(tasksToDone.get(0), addedCard);
-            assertTrue(taskListPanel.isListMatching(doneList));
+            assertTrue(taskListPanel.isListMatching(doneTaskList));
 
             // confirm the undone list does not contain the task just marked as
             // done
             commandBox.runCommand("list");
-            assertTrue(taskListPanel.isListMatching(currentList));
+            assertTrue(taskListPanel.isListMatching(currentTaskList));
         }
     }
 

@@ -13,6 +13,7 @@ import seedu.ezdo.testutil.TestTask;
 import seedu.ezdo.testutil.TestUtil;
 import seedu.ezdo.testutil.TypicalTestTasks;
 //@@author A0139248X
+/** tests the toggling of done tasks to undone */
 public class UndoneCommandTest extends EzDoGuiTest {
 
     @Override

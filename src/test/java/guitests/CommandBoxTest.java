@@ -9,19 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.ezdo.ui.CommandBox;
-
+//@@author A0139177W
 public class CommandBoxTest extends EzDoGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
-    private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> successStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
 
     @Before
     public void setUp() {
-        defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
+        ArrayList<String> defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
                     defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
         assertFalse("CommandBox default style classes should not contain success style class.",
