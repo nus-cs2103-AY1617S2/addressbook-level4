@@ -5,6 +5,7 @@ import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_DESCRIPTION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_LOCATION;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_TAG;
 import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_TIME;
+import static org.teamstbf.yats.logic.parser.CliSyntax.PREFIX_NLP_RECURRENCE;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -25,7 +26,7 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
 	ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NLP_TIME, PREFIX_NLP_LOCATION, PREFIX_NLP_TAG,
-		PREFIX_NLP_DESCRIPTION);
+		PREFIX_NLP_DESCRIPTION, PREFIX_NLP_RECURRENCE);
 	argsTokenizer.tokenize(args);
 	try {
 	    HashMap<String, Object> addParam = new HashMap<>();
@@ -34,6 +35,7 @@ public class AddCommandParser {
 	    addParam.put("time", ParserUtil.parseDateTime(argsTokenizer.getValue(PREFIX_NLP_TIME).orElse(null)));
 	    addParam.put("description", argsTokenizer.getValue(PREFIX_NLP_DESCRIPTION).orElse(null));
 	    addParam.put("tag", ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_NLP_TAG)));
+	    addParam.put("recurrence", argsTokenizer.getValue(PREFIX_NLP_RECURRENCE).orElse(null));
 	    return new AddCommand(addParam);
 	} catch (NoSuchElementException nsee) {
 	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

@@ -41,7 +41,9 @@ import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -66,8 +68,11 @@ public class LogicManagerTest {
 			Tag tag1 = new Tag("tag1");
 			Tag tag2 = new Tag("longertag2");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
-			IsDone isDone = new IsDone("No");
-			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone);
+			IsDone isDone = new IsDone("Yes");
+			boolean isRecurring = false;
+			Recurrence recurrence = new Recurrence();
+			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
+					recurrence);
 		}
 
 		/**
@@ -156,10 +161,10 @@ public class LogicManagerTest {
 		 *            used to generate the Event data field values
 		 */
 		Event generateEvent(int seed) throws Exception {
-			return new Event(new Title("person" + seed), new Location("bed" + seed),
-					new Schedule("11:59PM 08/04/2017"), new Schedule("11:59PM 08/04/2017"),new Schedule(""),
+			return new Event(new Title("person" + seed), new Location("bed" + seed), new Schedule("11:59PM 08/04/2017"),
+					new Schedule("11:59PM 08/04/2017"), new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
-					new UniqueTagList(new Tag("tag" + Math.abs(seed))),new IsDone("No"));
+					new UniqueTagList(new Tag("tag" + Math.abs(seed))), new IsDone("Yes"), false, new Recurrence());
 		}
 
 		List<Event> generateEventList(Event... events) {
@@ -178,12 +183,13 @@ public class LogicManagerTest {
 		}
 
 		/**
-		 * Generates a Event object with given name. Other fields will have
-		 * some dummy values.
+		 * Generates a Event object with given name. Other fields will have some
+		 * dummy values.
 		 */
 		Event generateEventWithName(String name) throws Exception {
-			return new Event(new Title(name), new Location("home"), new Schedule(""),
-					new Schedule(""), new Schedule("11:59PM 08/04/2017"), new Description("House of 1"), new UniqueTagList(new Tag("tag")), new IsDone("No"));
+			return new Event(new Title(name), new Location("home"), new Schedule(""), new Schedule(""),
+					new Schedule("11:59PM 08/04/2017"), new Description("House of 1"),
+					new UniqueTagList(new Tag("tag")), new IsDone("No"), false, new Recurrence());
 		}
 	}
 
@@ -312,10 +318,10 @@ public class LogicManagerTest {
 	@Test
 	public void execute_add_invalidEventData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
-		assertCommandFailure("add Valid Name, bla ",
-				Event.MESSAGE_INVALID_TIME);
-		assertCommandFailure("add Valid Name, 7:00pm to 9pm and 10am tomorrow ", Event.MESSAGE_TOO_MANY_TIME);
-		assertCommandFailure("add Valid Name, 7:00pm to 9pm tomorrow  #invalid_-[.tag",
+		assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
+				SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
+		assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address", Schedule.MESSAGE_TIME_CONSTRAINTS);
+		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);
 
 	}
@@ -329,24 +335,25 @@ public class LogicManagerTest {
 		expectedAB.addEvent(toBeAdded);
 
 		// execute command and verify result
-		assertCommandSuccess("add sleep @bed //oh no can't sleep i'm tired #tag1 #longertag2", String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-				expectedAB, expectedAB.getTaskList());
+		assertCommandSuccess("add sleep @bed //oh no can't sleep i'm tired #tag1 #longertag2",
+				String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
 
 	}
 
-	/* @Test
-	public void execute_addDuplicate_notAllowed() throws Exception {
-		// setup expectations
-		TestDataHelper helper = new TestDataHelper();
-		Event toBeAdded = helper.testEvent();
-
-		// setup starting state
-		model.addEvent(toBeAdded); // Event already in internal address book
-
-		// execute command and verify result
-		assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_EVENT);
-
-	} */
+	/*
+	 * @Test public void execute_addDuplicate_notAllowed() throws Exception { //
+	 * setup expectations TestDataHelper helper = new TestDataHelper(); Event
+	 * toBeAdded = helper.testEvent();
+	 *
+	 * // setup starting state model.addEvent(toBeAdded); // Event already in
+	 * internal address book
+	 *
+	 * // execute command and verify result
+	 * assertCommandFailure(helper.generateAddCommand(toBeAdded),
+	 * AddCommand.MESSAGE_DUPLICATE_EVENT);
+	 *
+	 * }
+	 */
 
 	@Test
 	public void execute_reset() throws Exception {

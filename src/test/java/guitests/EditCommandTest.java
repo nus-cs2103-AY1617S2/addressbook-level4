@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.EditCommand;
 import org.teamstbf.yats.model.item.Event;
+import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.EventBuilder;
@@ -58,7 +59,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 		TestEvent editedPerson = new EventBuilder().withTitle("Usorp the throne").withLocation("Ruvenheigen City")
 				.withStartTime("5:45am").withEndTime("11:59pm").withDeadline("")
-				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal").withIsDone("Yes").build();
+				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal")
+				.withIsDone("Yes").build();
 
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedPerson);
 	}
@@ -74,12 +76,11 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
 	}
 
-	/* @Test
-	public void edit_duplicateTask_failure() {
-		commandBox.runCommand(
-				"edit 3 Alice Pauline");
-		assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
-	} */
+	/*
+	 * @Test public void edit_duplicateTask_failure() { commandBox.runCommand(
+	 * "edit 3 Alice Pauline");
+	 * assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK); }
+	 */
 
 	@Test
 	public void edit_findThenEdit_success() throws Exception {
@@ -106,8 +107,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		commandBox.runCommand("edit 1 *&");
 		assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
-		// commandBox.runCommand("edit 1 something, from 25:00AM 05/05/2017 to 23:89PM 06/05/2017");
-		//assertResultMessage(Event.MESSAGE_INVALID_TIME);
+		commandBox.runCommand("edit 1 p/abcd");
+		assertResultMessage(SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
 
 		commandBox.runCommand("edit 1 something, from 10:22PM 05/05/2017to 11:23PM 05/05/2017 by 9:00PM 05/05/2017");
 		assertResultMessage(Event.MESSAGE_TOO_MANY_TIME);

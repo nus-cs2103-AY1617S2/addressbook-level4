@@ -47,7 +47,11 @@ public class MarkDoneCommand extends Command {
 			return new CommandResult(MESSAGE_ALR_MARKED);
 		}
 		try {
-			markedTask.getIsDone().markDone();
+			if (markedTask.isRecurring()) {
+				markedTask.markDone();
+			} else {
+				markedTask.getIsDone().markDone();
+			}
 			model.updateEvent(targetIndex, markedTask);
 		} catch (UniqueEventList.DuplicateEventException dpe) {
 			throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -56,4 +60,5 @@ public class MarkDoneCommand extends Command {
 		markedTask.setPriority(0);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
 	}
+
 }

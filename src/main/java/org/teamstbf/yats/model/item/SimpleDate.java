@@ -3,9 +3,12 @@ package org.teamstbf.yats.model.item;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book. Guarantees:
- * immutable; is valid as declared in {@link #isValidDeadline(String)}
+ * Represents a Task's Date in the task manager. Guarantees: immutable; is valid
+ * as declared in {@link #isValidDeadline(String)}
+ *
+ * @Deprecated use {@link #Schedule()} instead
  */
+@Deprecated
 public class SimpleDate {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS = "Task deadline should only be in the format dd/mm/yyyy";
@@ -29,7 +32,7 @@ public class SimpleDate {
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid task date.
      */
     public static boolean isValidDeadline(String test) {
 	return test.matches(DEADLINE_VALIDATION_REGEX);
@@ -45,7 +48,7 @@ public class SimpleDate {
 	return other == this // short circuit if same object
 		|| (other instanceof SimpleDate // instanceof handles nulls
 			&& this.value.equals(((SimpleDate) other).value)); // state
-									   // check
+								     // check
     }
 
     @Override

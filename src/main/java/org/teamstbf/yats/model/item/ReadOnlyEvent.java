@@ -37,10 +37,14 @@ public interface ReadOnlyEvent {
     Schedule getEndTime();
 
     Schedule getDeadline();
+    
+    Recurrence getRecurrence();
 
     boolean hasDeadline();
 
     boolean hasStartEndTime();
+    
+    boolean isRecurring();
 
     IsDone getIsDone();
 

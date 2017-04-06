@@ -4,6 +4,7 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -21,6 +22,8 @@ public class TestEvent implements ReadOnlyEvent {
 	private IsDone isDone;
 	private Location location;
 	private UniqueTagList tags;
+	private boolean isRecurring;
+	private Recurrence recurrence;
 
 	public TestEvent() {
 		tags = new UniqueTagList();
@@ -149,4 +152,14 @@ public class TestEvent implements ReadOnlyEvent {
 	public void setDeadline(Schedule schedule) {
 		this.deadline = schedule;
 	}
+
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return this.isRecurring;
+    }
 }
