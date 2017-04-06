@@ -1,6 +1,6 @@
 # TaskManager - User Guide
 
-By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `NUS`
+By : `Team CS2103JAN2017-T11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -56,6 +56,9 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
+> To add floating tasks, simply do not specify the start and end timing paramters.
+> To add tasks with deadlines, simply specify the end timing. 
+> To add recurring tasks, see section 2.2.1.
 > Tasks can have any number of tags (including 0).
 
 Examples:
@@ -67,7 +70,7 @@ Examples:
 
 Adds a recurring task to the task list<br>
 Format: same as 'add' but specifcy the frequency by r/#_
-where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month) 
+where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
 
 Examples:
 
@@ -89,7 +92,7 @@ Examples:
 
 Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
-Editing a recurring task in this way will edit all instances 
+Editing a recurring task in this way will edit all instances
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number shown in the last task listing.<br>
@@ -113,14 +116,14 @@ Examples:
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence 
 
+
   Examples:
 
   * `edithis 2 sd/01/01/2017`<br>
-  Edits the start date of task 2 (which is reccuring) 
+  Edits the start date of task 2 (which is reccuring)
 
   * `edithis 2 Go to 2103 Lecture`<br>
-  Edits the description of task 2 (which is reccuring) 
-
+  Edits the description of task 2 (which is reccuring)
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
@@ -131,13 +134,12 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `assignemnt` will match `do algorightm assignment` 
+    e.g. `assignemnt` will match `do algorightm assignment`
 
 Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
-
 
 ### 2.5.1. Finding an instance of a reccuring task
   > * Execute 'find' with the same syntax as above
@@ -146,11 +148,11 @@ Examples:
 
   Example:
   * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
-    The task is displayed in the list with the above parameters 
+    The task is displayed in the list with the above parameters
   * `find 11/05/2017`<br>
     Returns `feed cat sd/11/05/2017 ed/11/05/2017`
   * `list`<br>
-    Returns all of the tasks with 'feed cat's' instance with start: 11/05/2017 and end: 11/05/2017     
+    Returns all of the tasks with 'feed cat's' instance with start: 11/05/2017 and end: 11/05/2017
 
 ### 2.6. Deleting a task : `delete`
 
@@ -188,7 +190,6 @@ Examples:
 * `find 05/01/2017`<br>
   `deletethis 1`<br>
   Executes a search to find tasks on January 5th the deletes the 1st task (which is a recurring instance).
-
 
 ### 2.7. Complete a task : `complete`
 
@@ -241,10 +242,17 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
-### 2.11. Saving the data
+### 2.11. Saving the data : `save`
 
-task list data are saved in the hard disk automatically after any command that changes the data.<br>
+Saves task manager data in specified file location.
+Format: `save PATH/TO/SAVE_LOCATION`
+Task list data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+###2.12. Loading the data : `load`
+
+Loads task manager data from specified file location
+Format: `load PATH/TO/LOAD_LOCATION`
 
 ## 3. Notes on Recurring Tasks
 
@@ -265,8 +273,7 @@ as the start and end timings of when the overall recurring pattern should start/
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous task list folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.
 
 ## 5. Command Summary
 
@@ -304,3 +311,10 @@ as the start and end timings of when the overall recurring pattern should start/
 
 * **Exit ** : `exit` <br>
    e.g. `exit`
+
+* **Load ** : `load PATH/TO/LOAD_FILE` <br>
+   e.g. `load /Documents/task/tasklist.xml`
+
+* **Save ** : `save PATH/TO/SAVE_FILE` <br>
+   e.g. `save /Documents/task/tasklist.xml`
+>>>>>>> 04f6f9c98b7537c17ec3539b02857921a1ffd5b7

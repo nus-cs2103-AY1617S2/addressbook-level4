@@ -42,23 +42,29 @@ public class DeleteCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-        Task newTask = null;
-
-        try {
-            model.deleteTask(taskToDelete);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
-        }
+        Task deleteOccurrence = null;
 
         if (isSpecific && taskToDelete.getOccurrences().size() > 1) {
+<<<<<<< HEAD
             newTask = Task.extractOccurrence(taskToDelete);
+=======
+            Task taskToAdd = new Task(taskToDelete);
+            deleteOccurrence = Task.modifyOccurrence(taskToDelete);
+>>>>>>> 04f6f9c98b7537c17ec3539b02857921a1ffd5b7
             try {
-                model.addTask(Task.readOnlyToTask(taskToDelete));
-                return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, newTask));
+                model.deleteThisTask(taskToDelete, taskToAdd);
+                return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deleteOccurrence));
             } catch (DuplicateTaskException e) {
                 throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
+            } catch (TaskNotFoundException tnfe) {
+                assert false : "The target task cannot be missing";
             }
-
+        } else {
+            try {
+                model.deleteTask(taskToDelete);
+            } catch (TaskNotFoundException tnfe) {
+                assert false : "The target task cannot be missing";
+            }
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }

@@ -54,6 +54,8 @@ public class ConfigUtilTest {
         Config expected = getTypicalConfig();
 
         Config actual = read("TypicalConfig.json").get();
+        System.out.println(expected);
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
@@ -76,8 +78,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setAddressBookFilePath("addressbook.xml");
-        config.setAddressBookName("TypicalAddressBookName");
+        config.setTaskManagerFilePath("data/taskmanager.xml");
+        config.setTaskManagerName("MyTaskManager");
         return config;
     }
 
@@ -124,8 +126,8 @@ public class ConfigUtilTest {
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
         return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER + configFileInTestDataFolder
-                                  : null;
+                ? TEST_DATA_FOLDER + configFileInTestDataFolder
+                        : null;
     }
 
 

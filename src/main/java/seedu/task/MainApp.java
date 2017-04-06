@@ -48,18 +48,18 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Task List ]===========================");
+        logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, config);
         ui = new UiManager(logic, config, userPrefs);
         initEventsCenter();
     }
@@ -70,14 +70,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> addressBookOptional;
+        Optional<ReadOnlyTaskList> taskManagerOptional;
         ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readTaskList();
-            if (!addressBookOptional.isPresent()) {
+            taskManagerOptional = storage.readTaskList();
+            if (!taskManagerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TaskList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
             initialData = new TaskList();
@@ -139,7 +139,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskList");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
@@ -166,7 +166,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Task List ] =============================");
+        logger.info("============================ [ Stopping Task Manager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

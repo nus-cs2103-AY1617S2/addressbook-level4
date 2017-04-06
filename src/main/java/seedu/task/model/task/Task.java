@@ -47,7 +47,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         assert !CollectionUtil.isAnyNull(description, priority, occurrences, tags, recurring, frequency);
         this.description = description;
         this.priority = priority;
-        this.occurrences = occurrences;
+        this.occurrences = new ArrayList<RecurringTaskOccurrence>(occurrences);
         this.tags = new UniqueTagList(tags);
         this.recurring = recurring;
         this.frequency = frequency;

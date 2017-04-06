@@ -38,7 +38,6 @@ public class Timing implements Comparable<Timing> {
                 trimmedTiming = trimmedTiming + " " + Timing.getTodayDate();
             }
             if (!trimmedTiming.equals(TIMING_NOT_SPECIFIED) && !isValidTiming(trimmedTiming)) {
-                System.out.println("INVALID TIMING IS " + time);
                 throw new IllegalValueException(MESSAGE_TIMING_CONSTRAINTS);
             }
             this.value = trimmedTiming;
