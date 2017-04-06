@@ -177,10 +177,12 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask task : tasksToMarkDone) {
             int targetIndex = indices.get(index) - 1;
             if (!task.isRecurring()) {
+                UniqueCategoryList newCategoryList = new UniqueCategoryList(task.getCategories());
+                newCategoryList.add(new Category(CATEGORY_DONE));
                 Task newTask = new Task(task.getName(), task.getPriorityLevel(),
                         task.getStartDateTime(), task.getEndDateTime(),
                         task.getInformation(), task.getRecurrence(),
-                        new UniqueCategoryList(CATEGORY_DONE));
+                        newCategoryList);
                 int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
                 this.taskBoss.updateTask(taskBossIndex, newTask);
             } else {
@@ -431,9 +433,15 @@ public class ModelManager extends ComponentManager implements Model {
             this.categoryKeyWords = categoryKeyWords;
         }
 
+        //@@author A0144904H
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getCategories().contains(categoryKeyWords);
+            if (categoryKeyWords.categoryName.equals("Done")) {
+                return task.getCategories().contains(categoryKeyWords);
+            } else {
+                return task.getCategories().contains(categoryKeyWords)
+                        && !task.getCategories().contains(Category.done);
+            }
         }
 
         @Override

@@ -40,6 +40,21 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertMarkDoneSuccess(false, false, taskBossIndex, taskBossIndex, markedDoneTask);
     }
 
+    @Test
+    public void markTaskDone_MultipleCategories_success() throws Exception {
+        int taskBossIndex = 5;
+
+        TestTask markedDoneTask = new TaskBuilder().withName("Birthday party")
+                .withInformation("311, Clementi Ave 2, #02-25")
+                .withPriorityLevel("No")
+                .withRecurrence(Frequency.NONE)
+                .withStartDateTime("Feb 23, 2017 10pm")
+                .withEndDateTime("Jun 28, 2017 5pm")
+                .withCategories("Done", "Friends", "Owesmoney").build();
+
+        assertMarkDoneSuccess(false, false, taskBossIndex, taskBossIndex, markedDoneTask);
+    }
+
     /*
      * Invalid index equivalence partitions for : 1) missing index
      * 2) index invalid for not existing in task list.

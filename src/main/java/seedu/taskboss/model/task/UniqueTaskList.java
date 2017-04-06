@@ -11,7 +11,6 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.DuplicateDataException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.commons.util.CollectionUtil;
-import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.RenameCategoryCommand;
 import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -191,7 +190,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws CommandException
      */
     public void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException,
-    CommandException {
+                                                                                CommandException {
         assert oldCategory != null;
 
         boolean isFound = false;
