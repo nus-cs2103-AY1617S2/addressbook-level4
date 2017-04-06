@@ -8,8 +8,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
@@ -62,9 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        //@@author A0163848R-reused
         addToHistory(new YTomorrow(addressBook));
-        //@@author
         raise(new AddressBookChangedEvent(addressBook));
     }
 
