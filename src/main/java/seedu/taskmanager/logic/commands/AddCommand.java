@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     // + " eat lunch ON thursday\n"
             + "Type HELP for user guide with detailed explanations of all commands";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added: ";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes "
             + "with another event";
@@ -60,14 +60,15 @@ public class AddCommand extends Command {
             if (toAdd.isEventTask()) {
                 int clashedTaskIndex = model.isBlockedOutTime(toAdd);
                 if (clashedTaskIndex != -1) {
-                    model.addTask(toAdd);
+                    int addIndex = model.addTask(toAdd);
                     String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
-                    return new CommandResult(clashFeedback + String.format(MESSAGE_SUCCESS, toAdd));
+                    return new CommandResult(clashFeedback + MESSAGE_SUCCESS + toAdd.getTaskName().toString() + "\n" + "Task added at index: "
+                    + Integer.toString(addIndex + 1));
                 }
             }
-            model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-
+            int addIndex = model.addTask(toAdd);
+            return new CommandResult(MESSAGE_SUCCESS + toAdd.getTaskName().toString() + "\n" + "Task added at index: "
+                    + Integer.toString(addIndex + 1));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {
