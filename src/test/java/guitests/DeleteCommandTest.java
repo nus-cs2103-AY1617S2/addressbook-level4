@@ -35,14 +35,13 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 	}
 
 	/**
-	 * Runs the delete command to delete the task at specified index and
-	 * confirms the result is correct.
-	 * 
-	 * @param targetIndexOneIndexed
-	 *            e.g. index 1 to delete the first task in the list,
-	 * @param currentList
-	 *            A copy of the current list of tasks (before deletion).
-	 */
+     * Runs the delete command to delete the task at specified index and
+     * confirms the result is correct.
+     * @param targetIndexOneIndexed
+     *            e.g. index 1 to delete the first task in the list,
+     * @param currentList
+     *            A copy of the current list of tasks (before deletion).
+     */
 	private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
 		TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
 																		// array

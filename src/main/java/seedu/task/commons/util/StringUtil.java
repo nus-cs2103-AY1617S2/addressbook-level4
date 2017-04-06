@@ -10,12 +10,7 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}. Ignores
-     * case, but a full word match is required. <br>
-     * examples:
-     * <pre>
-     *containsWordIgnoreCase("ABc def", "abc") == true
-     *containsWordIgnoreCase("ABc def", "DEF") == true
-     *containsWordIgnoreCase("ABc def", "AB") == false //not a full word match</pre> 
+     * case, but a full word match is required. <br> 
      * @param sentence
      *            cannot be null
      * @param word
