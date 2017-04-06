@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
+    private TaskListPanel overdueTaskListPanel; 
     private Config config;
 
     @FXML
@@ -48,6 +49,11 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+    
+    // @@author A0114523U
+    @FXML
+    private AnchorPane overdueTaskListPanelPlaceholder;
+    // @@author
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -115,6 +121,9 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        // @@author A0114523U
+        overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
+        // @@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -135,6 +144,12 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
+    
+    // @@author A0114523U
+    private AnchorPane getOverdueTaskListPlaceholder() {
+        return overdueTaskListPanelPlaceholder;
+    }
+    // @@author
 
     void hide() {
         primaryStage.hide();

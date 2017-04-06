@@ -21,6 +21,11 @@ public interface Logic {
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
+    
+    // @@author A0114523U
+    /** Returns the list of overdue tasks */
+    ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    // @@author
 
     // @@author A0140032E
     void init(Model model, Storage storage);
