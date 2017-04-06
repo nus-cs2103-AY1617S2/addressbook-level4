@@ -76,8 +76,8 @@ public class UserPrefs {
 
     /**
      * Updates the sorting order according to {@code isSortedAscending}.
-      * @param isSortedAscending A true value represents an ascending sort order, wheras a false value represents a descending
-     *                           sort order.
+      * @param isSortedAscending A true value represents an ascending sort order, wheras a false value represents a
+     *                           descending sort order.
      */
     public void updateLastUsedIsSortedAscending(Boolean isSortedAscending) {
         this.isSortedAscending = isSortedAscending;
