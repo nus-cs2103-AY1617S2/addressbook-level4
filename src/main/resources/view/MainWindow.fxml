@@ -36,7 +36,11 @@
          <items>
             <VBox fx:id="taskList" minWidth="340" prefWidth="340">
                 <padding>
+                	<!-- @@author-->
+                	<!-- @@author A0131278H-->
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    <!-- @@author-->
+                    <!-- @@author A0114523U-->
                 </padding>
                <children>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS">
@@ -53,19 +57,31 @@
             </VBox>
             <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
                 <padding>
+                	<!-- @@author-->
+                	<!-- @@author A0131278H-->
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    <!-- @@author-->
+                    <!-- @@author A0114523U-->
                 </padding>
             </AnchorPane>
          </items>
       </SplitPane>
-       <AnchorPane fx:id="resultDisplayPlaceholder" focusTraversable="true" maxHeight="100" minHeight="50.0" prefHeight="100.0" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+      <!-- @@author-->
+      <!-- @@author A0131278H-->
+       <AnchorPane fx:id="resultDisplayPlaceholder" focusTraversable="true" maxHeight="80" minHeight="80.0" prefHeight="80.0" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
            <padding>
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
            </padding>
        </AnchorPane>
+       <!-- @@author-->
+       <!-- @@author A0114523U-->
       <AnchorPane fx:id="commandBoxPlaceholder" focusTraversable="true" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
          <padding>
+         	<!-- @@author-->
+         	<!-- @@author A0131278H-->
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <!-- @@author-->
+            <!-- @@author A0114523U-->
          </padding>
       </AnchorPane>
       <AnchorPane fx:id="statusbarPlaceholder" focusTraversable="true" VBox.vgrow="NEVER" />
