@@ -54,10 +54,10 @@ Responsibilities: Logic, code quality, integration dfs
 
 * Features Implemented:
   * [Show Completed List Command](../docs/UserGuide.md#324-listing-all-completed-tasks)
-  * [Today Command (to bring attention to that task)](../docs/UserGuide.md#331-marking-tasks-as-today)
-  * [Not Today Command](../docs/UserGuide.md#332-marking-tasks-as-not-today)
-  * [Indicate Task Done Command](../docs/UserGuide.md#333-marking-task-as-done)
-  * [Indicate Task Not Done Command](../docs/UserGuide.md#334-marking-task-as-not-done)
+  * [Today Command (to bring attention to that task)](../docs/UserGuide.md#331-marking-a-task-as-today)
+  * [Not Today Command](../docs/UserGuide.md#332-marking-a-task-as-not-today)
+  * [Indicate Task Done Command](../docs/UserGuide.md#333-marking-a-task-as-done)
+  * [Indicate Task Not Done Command](../docs/UserGuide.md#334-marking-a-task-as-not-done)
   * [Rename Tag Command](../docs/UserGuide.md#341-renaming-tag)
   * [Delete Tag Command](../docs/UserGuide.md#342-deleting-tag)
 
