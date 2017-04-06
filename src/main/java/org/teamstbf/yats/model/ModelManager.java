@@ -56,6 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 		this.taskManager = new TaskManager(taskManager);
 		filteredEvents = new FilteredList<>(this.taskManager.getTaskList());
+		updateFilteredListToShowAll();
 		undoTaskManager = new Stack<TaskManager>();
 		redoTaskManager = new Stack<TaskManager>();
 	}
@@ -157,6 +158,12 @@ public class ModelManager extends ComponentManager implements Model {
 		indicateTaskManagerChanged();
 	}
 
+	@Override
+	public void scheduleEvent(Event event) {
+		saveImageOfCurrentTaskManager();
+		indicateTaskManagerChanged();
+	}
+
 	// @@author
 
 	/*
@@ -174,7 +181,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public UnmodifiableObservableList<ReadOnlyEvent> getFilteredTaskList() {
-		// updateFilteredListToShowAll();
 		return new UnmodifiableObservableList<>(filteredEvents);
 	}
 
@@ -182,6 +188,9 @@ public class ModelManager extends ComponentManager implements Model {
 	private void indicateTaskManagerChanged() {
 		raise(new TaskManagerChangedEvent(taskManager));
 	}
+
+	// =========== Filtered Event List Accessors
+	// =============================================================
 
 	@Override
 	public void saveTaskManager() {
@@ -261,7 +270,7 @@ public class ModelManager extends ComponentManager implements Model {
 		updateFilteredEventList(new PredicateExpression(new FindQualifier(keywords)));
 	}
 
-	// @@author
+	// Inner class used for Searching //
 	interface Qualifier {
 		boolean run(ReadOnlyEvent event);
 

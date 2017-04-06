@@ -24,8 +24,8 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -61,7 +61,7 @@ public abstract class TaskManagerGuiTest {
 	 */
 	protected MainGuiHandle mainGui;
 	protected MainMenuHandle mainMenu;
-	protected PersonListPanelHandle taskListPanel;
+	protected TaskListPanelHandle taskListPanel;
 	protected ResultDisplayHandle resultDisplay;
 	protected CommandBoxHandle commandBox;
 	protected BrowserPanelHandle browserPanel;
@@ -72,15 +72,15 @@ public abstract class TaskManagerGuiTest {
 	 * Asserts the size of the person list is equal to the given number.
 	 */
 	protected void assertListSize(int size) {
-		int numberOfPeople = taskListPanel.getNumberOfPeople();
+		int numberOfPeople = taskListPanel.getNumberOfEvent();
 		assertEquals(size, numberOfPeople);
 	}
 
 	/**
 	 * Asserts the person shown in the card is same as the given person
 	 */
-	public void assertMatching(ReadOnlyEvent person, PersonCardHandle card) {
-		assertTrue(TestUtil.compareCardAndPerson(card, person));
+	public void assertMatching(ReadOnlyEvent person, EventCardHandle card) {
+		assertTrue(TestUtil.compareCardAndEvent(card, person));
 	}
 
 	/**

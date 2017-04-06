@@ -44,11 +44,11 @@ public class Event implements ReadOnlyEvent {
 	assert !CollectionUtil.isAnyNull(parameters.get("name"));
 	this.name = new Title((String) parameters.get("name"));
 	// check optional parameters' existence
-	if (parameters.get("location") != null) {
-	    this.location = new Location((String) parameters.get("location"));
-	} else {
-	    this.location = new Location(" ");
-	}
+    if (parameters.get("location") != null) {
+        this.location = new Location((String) parameters.get("location"));
+    } else {
+        this.location = new Location(" ");
+    }	
 	if (parameters.get("description") != null) {
 	    this.description = new Description((String) parameters.get("description"));
 	} else {
