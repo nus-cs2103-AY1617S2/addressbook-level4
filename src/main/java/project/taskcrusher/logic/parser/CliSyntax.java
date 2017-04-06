@@ -20,6 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("//");
+    public static final Prefix PREFIX_OPTION = new Prefix("--");
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =

@@ -44,6 +44,7 @@ public class AddCommand extends Command {
 
     private final Task taskToAdd;
     private final Event eventToAdd;
+    public boolean force = false;
 
     /**
      * Creates an AddCommand using raw values.
@@ -87,7 +88,7 @@ public class AddCommand extends Command {
             if (eventToAdd != null) {
 
                 List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
-                if (eventToAdd.hasOverlappingEvent(preexistingEvents)) {
+                if (!force && eventToAdd.hasOverlappingEvent(preexistingEvents)) { //allow for force adding
                     throw new CommandException(MESSAGE_EVENT_CLASHES);
                 }
 

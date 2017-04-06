@@ -26,8 +26,8 @@ public class EditEventCommand extends Command {
             + "by the index number used in the last event listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [EVENT_NAME]"
-            + " [d/START_DATE to END_DATE] [l/LOCATION] [//DESCRIPTION] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 l/new world //description";
+            + " [d/START_DATE to END_DATE] [l/LOCATION] [//DESCRIPTION] [t/TAG]...\n" + "Example: " + COMMAND_WORD
+            + " 1 l/new world //description";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -35,10 +35,13 @@ public class EditEventCommand extends Command {
 
     private final int filteredEventListIndex;
     private final EditEventDescriptor editEventDescriptor;
+    public boolean force = false;
 
     /**
-     * @param filteredEventListIndex the index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param filteredEventListIndex
+     *            the index of the event in the filtered event list to edit
+     * @param editEventDescriptor
+     *            details to edit the event with
      */
     public EditEventCommand(int filteredEventListIndex, EditEventDescriptor editEventDescriptor) {
         assert filteredEventListIndex > 0;
@@ -61,6 +64,14 @@ public class EditEventCommand extends Command {
         ReadOnlyEvent eventToEdit = lastShownList.get(filteredEventListIndex);
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
+        List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
+        if (!force && editedEvent.hasOverlappingEvent(preexistingEvents)) { // allow
+                                                                            // for
+                                                                            // force
+                                                                            // editing
+            throw new CommandException(AddCommand.MESSAGE_EVENT_CLASHES);
+        }
+
         try {
             model.updateEvent(filteredEventListIndex, editedEvent);
         } catch (UniqueEventList.DuplicateEventException dpe) {
@@ -71,14 +82,13 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of
+     * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
-    private static Event createEditedEvent(ReadOnlyEvent eventToEdit,
-            EditEventDescriptor editEventDescriptor) {
+    private static Event createEditedEvent(ReadOnlyEvent eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
 
-        //After these statements, each field should NOT be nullz
+        // After these statements, each field should NOT be nullz
         Name updatedName = editEventDescriptor.getName().orElseGet(eventToEdit::getName);
         Location updatedLocation = editEventDescriptor.getLocation().orElseGet(eventToEdit::getLocation);
         List<Timeslot> updatedTimeslots = editEventDescriptor.getTimeslots().orElseGet(eventToEdit::getTimeslots);
@@ -89,8 +99,8 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the event with. Each non-empty field value will replace the
-     * corresponding field value of the event.
+     * Stores the details to edit the event with. Each non-empty field value
+     * will replace the corresponding field value of the event.
      */
     public static class EditEventDescriptor {
         private Optional<Name> name = Optional.empty();
@@ -99,7 +109,8 @@ public class EditEventCommand extends Command {
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
 
-        public EditEventDescriptor() {}
+        public EditEventDescriptor() {
+        }
 
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             this.name = toCopy.getName();

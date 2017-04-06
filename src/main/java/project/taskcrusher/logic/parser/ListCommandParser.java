@@ -15,7 +15,7 @@ import project.taskcrusher.model.task.Deadline;
  */
 public class ListCommandParser {
 
-    private final boolean showOverdueOnly = true;
+    private final boolean showActiveOnly = true;
     private final boolean showCompleteOnly = true;
 
     /**
@@ -32,11 +32,11 @@ public class ListCommandParser {
         try {
             switch (flag) {
             case ListCommand.NO_FLAG:
-                return new ListCommand(date, !showOverdueOnly, !showCompleteOnly);
-            case ListCommand.OVERDUE_FLAG:
-                return new ListCommand(date, showOverdueOnly, !showCompleteOnly);
+                return new ListCommand(date, showActiveOnly, !showCompleteOnly);
+            case ListCommand.ALL_FLAG:
+                return new ListCommand(date, !showActiveOnly, !showCompleteOnly);
             case ListCommand.COMPLETE_FLAG:
-                return new ListCommand(date, !showOverdueOnly, showCompleteOnly);
+                return new ListCommand(date, !showActiveOnly, showCompleteOnly);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
             }

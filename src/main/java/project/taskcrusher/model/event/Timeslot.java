@@ -77,6 +77,8 @@ public class Timeslot {
             return true;
         } else if (start.after(another.start) && start.before(another.end)) {
             return true;
+        } else if (start.compareTo(another.start) == 0 && end.compareTo(another.end) == 0) {
+            return true;
         } else {
             return false;
         }
