@@ -66,12 +66,12 @@ public interface ReadOnlyTask {
         String RECURRENCE_FIELD = " Recurrence: ";
         String RECURRENCE_NONE = "NONE";
 
-        //don't display no priority value
+        //don't append 'no priority' value
         if (field.equals(PRIORITY_FIELD) && value.equals(PRIORITY_NO_VALUE)) {
             return;
         }
 
-        //don't display none recurrence value
+        //don't append 'none' recurrence value
         if (field.equals(RECURRENCE_FIELD) && value.equals(RECURRENCE_NONE)) {
             return;
         }
