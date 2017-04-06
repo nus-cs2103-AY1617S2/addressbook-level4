@@ -19,19 +19,17 @@ public class TaskTest {
     @Test
     public void floatingTaskTest() throws Exception {
         try {
-            Task task = new FloatingTask(new Name("a floating task"),
-                    new UniqueTagList("tag1", "tag2"), false, false);
+            Task task = new FloatingTask(new Name("a floating task"), new UniqueTagList("tag1", "tag2"), false, false);
             assertTrue(task.getName().fullName.equals("a floating task"));
             assertTrue(task.getDeadline().isPresent() == false);
             assertTrue(task.getStartingTime().isPresent() == false);
             assertFalse(task.isToday());
-            assertTrue(task.getTags()
-                    .equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
+            assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
             assertTrue(!task.isDone());
             assertTrue(!task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
-            task.setToday();
+            task.setToday(true);
             assertTrue(task.isManualToday());
             assertTrue(task.getTaskAbsoluteDateTime().equals(""));
         } catch (IllegalValueException e) {
@@ -43,26 +41,23 @@ public class TaskTest {
     public void deadlineTaskTest() throws Exception {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
-            Task task = new DeadlineTask(new Name("a deadline task"),
-                    new UniqueTagList("tag1", "tag2"), date, false, false);
+            Task task = new DeadlineTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, false,
+                    false);
             assertTrue(task.getName().fullName.equals("a deadline task"));
             assertTrue(task.getDeadline().isPresent() == true);
             assertTrue(task.getDeadline().get().getDate().equals(date));
             assertTrue(task.getStartingTime().isPresent() == false);
             assertTrue(task.isToday());
             assertTrue(((DeadlineTask) task).isOverdue());
-            assertTrue(task.getTags()
-                    .equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
+            assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
             assertTrue(!task.isDone());
             assertTrue(!task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
-            task.setToday();
+            task.setToday(true);
             assertTrue(task.isManualToday());
-            SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    "dd/MM/yyyy HH:mm:ss");
-            assertTrue(task.getTaskAbsoluteDateTime()
-                    .equals("Due: " + dateFormat.format(date)));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            assertTrue(task.getTaskAbsoluteDateTime().equals("Due: " + dateFormat.format(date)));
         } catch (IllegalValueException e) {
             fail();
         }
@@ -73,9 +68,8 @@ public class TaskTest {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Date date2 = DateUtils.addDays(date, 1);
-            Task task = new EventTask(new Name("a deadline task"),
-                    new UniqueTagList("tag1", "tag2"), date2, date, false,
-                    false);
+            Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date2, date,
+                    false, false);
             assertTrue(task.getName().fullName.equals("a deadline task"));
             assertTrue(task.getDeadline().isPresent() == true);
             assertTrue(task.getDeadline().get().getDate().equals(date2));
@@ -83,19 +77,16 @@ public class TaskTest {
             assertTrue(task.getStartingTime().get().getDate().equals(date));
             assertTrue(task.isToday());
             assertFalse(((EventTask) task).isOverdue());
-            assertTrue(task.getTags()
-                    .equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
+            assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
             assertTrue(!task.isDone());
             assertTrue(!task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
-            task.setToday();
+            task.setToday(true);
             assertTrue(task.isManualToday());
-            SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    "dd/MM/yyyy HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             assertTrue(task.getTaskAbsoluteDateTime()
-                    .equals("Begin: " + dateFormat.format(date) + "\n   End: "
-                            + dateFormat.format(date2)));
+                    .equals("Begin: " + dateFormat.format(date) + "\n   End: " + dateFormat.format(date2)));
         } catch (IllegalValueException e) {
             fail();
         }
@@ -106,13 +97,11 @@ public class TaskTest {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Date date2 = DateUtils.addDays(date, 1);
-            Task task = new EventTask(new Name("a deadline task"),
-                    new UniqueTagList("tag1", "tag2"), date, date2, false,
-                    false);
+            Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, date2,
+                    false, false);
             fail();
         } catch (IllegalValueException e) {
-            assertTrue(e.getMessage()
-                    .equals("Deadline should be after starting time."));
+            assertTrue(e.getMessage().equals("Deadline should be after starting time."));
         }
     }
 }
