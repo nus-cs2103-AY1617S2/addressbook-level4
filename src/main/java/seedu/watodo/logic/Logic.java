@@ -22,4 +22,7 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    /** Returns the list of important tasks */
+    ObservableList<ReadOnlyTask> getImportantTaskList();
+
 }
