@@ -92,6 +92,13 @@ public class TodoListTest {
         public ObservableList<Tag> getTagList() {
             return tags;
         }
+
+        @Override
+        public ObservableList<Task> getTaskList() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
     }
 
 }

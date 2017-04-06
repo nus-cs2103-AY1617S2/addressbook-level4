@@ -17,7 +17,7 @@ import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable TodoList that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableTodoList implements ReadOnlyTodoList {
@@ -28,7 +28,7 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook. This empty constructor is
+     * Creates an empty XmlSerializableTodoList. This empty constructor is
      * required for marshalling.
      */
     public XmlSerializableTodoList() {
@@ -71,6 +71,12 @@ public class XmlSerializableTodoList implements ReadOnlyTodoList {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return new UnmodifiableObservableList<>(tags);
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

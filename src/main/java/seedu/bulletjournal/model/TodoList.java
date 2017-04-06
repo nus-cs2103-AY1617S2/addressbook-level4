@@ -50,6 +50,11 @@ public class TodoList implements ReadOnlyTodoList {
         resetData(toBeCopied);
     }
 
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.getInternalOccurrenceList();
+    }
+
     //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
@@ -192,4 +197,5 @@ public class TodoList implements ReadOnlyTodoList {
         // your own
         return Objects.hash(tasks, tags);
     }
+
 }
