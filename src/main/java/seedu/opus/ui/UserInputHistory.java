@@ -29,7 +29,10 @@ public class UserInputHistory {
      * @param input - User input String
      */
     public void saveUserInput(String input) {
-        userInputHistory.addFirst(input);
+        if (input.isEmpty()) {
+            return;
+        }
+        userInputHistory.addFirst(input.trim());
         resetIterator();
         logger.info("Capturing user input: " + input);
     }
