@@ -14,6 +14,8 @@ public class Category {
 
     public final String categoryName;
 
+    public static Category done = new Category("Done", "");
+
     /**
      * Validates given category name.
      *
@@ -26,6 +28,10 @@ public class Category {
             throw new IllegalValueException(MESSAGE_CATEGORY_CONSTRAINTS);
         }
         this.categoryName = formatName(trimmedName);
+    }
+
+    private Category(String name, String forDifferentiating) {
+        this.categoryName = name;
     }
 
     /**

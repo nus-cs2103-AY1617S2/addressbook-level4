@@ -53,7 +53,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     Date startDateTime1 = task1.getStartDateTime().getDate();
                     Date startDateTime2 = task2.getStartDateTime().getDate();
                     if (startDateTime1 == null &&
-                        startDateTime2 == null) {
+                            startDateTime2 == null) {
                         return 0;
                     } else if (startDateTime1 == null) {
                         return 1;
@@ -73,7 +73,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     Date endDateTime1 = task1.getEndDateTime().getDate();
                     Date endDateTime2 = task2.getEndDateTime().getDate();
                     if (endDateTime1 == null &&
-                        endDateTime2 == null) {
+                            endDateTime2 == null) {
                         return 0;
                     } else if (endDateTime1 == null) {
                         return 1;
@@ -127,13 +127,21 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
+        //        assert toAdd != null;
+        //        try {
+        //            if (contains(toAdd) && !toAdd.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+        //                throw new DuplicateTaskException();
+        //            }
+        //        } catch (IllegalValueException ive) {
+        //            //Do nothing. Done category is always valid
+        //        }
+        //        internalList.add(toAdd);
+
         assert toAdd != null;
-        try {
-            if (contains(toAdd) && !toAdd.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
+        if (contains(toAdd)) {
+            if (!toAdd.getCategories().contains(Category.done)) {
                 throw new DuplicateTaskException();
             }
-        } catch (IllegalValueException ive) {
-            //Do nothing. Done category is always valid
         }
         internalList.add(toAdd);
     }
@@ -149,14 +157,10 @@ public class UniqueTaskList implements Iterable<Task> {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        try {
-            if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)
-                                                 && !editedTask.getCategories()
-                                                 .contains(new Category(AddCommand.BUILT_IN_DONE))) {
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+            if (!editedTask.getCategories().contains(Category.done)) {
                 throw new DuplicateTaskException();
             }
-        } catch (IllegalValueException ive) {
-            //Do nothing. Done category is always valid
         }
 
         taskToUpdate.resetData(editedTask);
@@ -187,7 +191,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws CommandException
      */
     public void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException,
-        CommandException {
+    CommandException {
         assert oldCategory != null;
 
         boolean isFound = false;
@@ -252,8 +256,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(
+                                ((UniqueTaskList) other).internalList));
     }
 
     @Override
