@@ -16,7 +16,6 @@ import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,26 +27,36 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    public static final String TAB_TODO = "To Do";
+    public static final String TAB_DONE = "Done";
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    // @@author A0131278H
+    private TaskListPanel toDoTaskListPanel;
+    private TaskListPanel doneTaskListPanel;
     private TaskListPanel taskListPanel;
+    // @@author
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
-
+    
+    // @@author A0131278H
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane toDoTaskListPanelPlaceholder;
+    
+    @FXML
+    private AnchorPane doneTaskListPanelPlaceholder;
+    // @@author
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -113,8 +122,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        // @@author A0131278H
+        toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList());
+        doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+        // @@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -131,10 +142,23 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getResultDisplayPlaceholder() {
         return resultDisplayPlaceholder;
     }
-
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    // @@author A0131278H
+    private AnchorPane getToDoTaskListPlaceholder() {
+        return toDoTaskListPanelPlaceholder;
     }
+    
+    private AnchorPane getDoneTaskListPlaceholder() {
+        return doneTaskListPanelPlaceholder;
+    }
+
+    public TaskListPanel getToDoTaskListPanel() {
+        return this.toDoTaskListPanel;
+    }
+    
+    public TaskListPanel getDoneTaskListPanel() {
+        return this.doneTaskListPanel;
+    }
+    // @@author
 
     void hide() {
         primaryStage.hide();
@@ -197,14 +221,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
-    }
-
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }

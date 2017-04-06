@@ -14,6 +14,7 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
@@ -189,6 +190,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getToDoTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_NOT_DONE));
+    }
+    
+    public ObservableList<ReadOnlyTask> getDoneTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_DONE));
     }
 
     @Override

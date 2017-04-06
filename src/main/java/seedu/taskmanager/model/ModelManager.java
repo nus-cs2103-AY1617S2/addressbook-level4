@@ -33,6 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyTask> filteredToDoTasks;
+    private final FilteredList<ReadOnlyTask> filteredDoneTasks;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -45,6 +47,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
+        filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
     }
 
     public ModelManager() {
@@ -119,6 +123,18 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+    
+    // @@author A0131278H
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
+    }
+    // @@author
 
     @Override
     public void updateFilteredListToShowAll() {
@@ -284,5 +300,4 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     // @@author
-
 }

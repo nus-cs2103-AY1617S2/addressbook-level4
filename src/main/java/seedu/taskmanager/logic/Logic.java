@@ -21,6 +21,14 @@ public interface Logic {
 
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
+    
+    // @@author A0131278H
+    /** Returns the filtered list of incomplete tasks */
+    ObservableList<ReadOnlyTask> getFilteredToDoTaskList();
+    
+    /** Returns the filtered list of completed tasks */
+    ObservableList<ReadOnlyTask> getFilteredDoneTaskList();
+    // @@author
 
     // @@author A0140032E
     void init(Model model, Storage storage);
