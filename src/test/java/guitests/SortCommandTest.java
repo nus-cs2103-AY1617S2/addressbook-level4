@@ -60,19 +60,21 @@ public class SortCommandTest extends ToLuistGuiTest {
 
     @Test
     public void sort_byNothing() {
-        commandBox.runCommand("sort");
+        runCommandThenCheckForResultMessage("sort", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, "sort"));
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, "sort"));
     }
 
     @Test
     public void sort_byInvalidParameter() {
-        commandBox.runCommand("sort a");
+        runCommandThenCheckForResultMessage("sort a", "No valid keyword entered."
+                + " Please type 'help sort' for details");
         assertResultMessage("No valid keyword entered. Please type 'help sort' for details");
     }
 
     @Test
     public void sort_byMultipleParametersIncludingDefault() {
-        commandBox.runCommand("sort priority default");
+        runCommandThenCheckForResultMessage("sort priority default", "'Default' keyword may not"
+                + " be used with other parameters.");
         assertResultMessage("'Default' keyword may not be used with other parameters.");
     }
 
