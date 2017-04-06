@@ -29,7 +29,8 @@ public class ReadCommand extends Command {
     public static final String COMMAND_WORD = "read";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ":  Reads the WhatsLeft task storage from given location filepath.\n" + "Parameters: FILEPATH\n"
-            + "Example: " + COMMAND_WORD + " C:/Users/Downloads/Desktop/CS2103" + " 1\n" + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " C:/Users/Downloads/Desktop/CS2103/WhatsLeft.xml"
+            + " 1\n" + "Example: " + COMMAND_WORD
             + " /Users/Andy/Downloads";
 
     public static final String MESSAGE_READ_WHATSLEFT_SUCCESS = "Successfully read WhatsLeft from: %1$s";
@@ -58,9 +59,8 @@ public class ReadCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            String fileToRead = newFilePath + "/whatsleft.xml";
-            Optional<ReadOnlyWhatsLeft> whatsleftToRead = storage.readWhatsLeft(fileToRead);
-            config.setWhatsLeftFilePath(fileToRead);
+            Optional<ReadOnlyWhatsLeft> whatsleftToRead = storage.readWhatsLeft(newFilePath);
+            config.setWhatsLeftFilePath(newFilePath);
             saveConfig();
             indicateConfigChanged();
             resetWhatsLeft(whatsleftToRead);
