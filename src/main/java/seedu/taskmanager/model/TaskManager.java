@@ -88,23 +88,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public void addTask(int addIndex, Task t) throws UniqueTaskList.DuplicateTaskException {
+    public int addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
         syncMasterCategoryListWith(t);
-        tasks.add(t);
-    }
-
-    /**
-     * Adds a task to ProcrastiNomore. Also checks the new task's categories and
-     * updates {@link #categories} with any new categories found, and updates
-     * the Category objects in the task to point to those in
-     * {@link #categories}.
-     *
-     * @throws UniqueTaskList.DuplicateTaskException
-     *             if an equivalent task already exists.
-     */
-    public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterCategoryListWith(t);
-        tasks.add(t);
+        int addIndex = tasks.add(t);
+        return addIndex;
     }
 
     /**

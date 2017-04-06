@@ -89,7 +89,7 @@ public class UpdateCommand extends Command {
                     }
                 }
             }
-            if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated())
+            if ((isOnlyStartTimeUpdated() || isOnlyEndTimeUpdated() || isOnlyTimeUpdated())
                     && (taskToUpdate.isFloatingTask() || taskToUpdate.isDeadlineTask())) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             } else {
@@ -102,6 +102,11 @@ public class UpdateCommand extends Command {
                         updateTaskDescriptor.setEndTime(Optional.of(taskToUpdate.getEndTime()));
                         updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
                         updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                    } else {
+                        if (isOnlyTimeUpdated()) {
+                            updateTaskDescriptor.setStartDate(Optional.of(taskToUpdate.getStartDate()));
+                            updateTaskDescriptor.setEndDate(Optional.of(taskToUpdate.getEndDate()));
+                        }
                     }
                 }
             }
@@ -148,6 +153,26 @@ public class UpdateCommand extends Command {
                 && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)
                 && updateTaskDescriptor.getTaskName().isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if only the time field has been identified by user to be
+     * updated To ensure that user provides all the information that is required to update a task.
+     * 
+     * For instance, user is only allowed to update only startTime and endTime if the task is an event
+     * and not a deadline or floating task.
+     *
+     * @return true if only task name has been identified by user to be updated
+     */
+    private boolean isOnlyTimeUpdated() {
+        if (updateTaskDescriptor.getStartDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getStartTime().get().toString().equals(EMPTY_FIELD)
+                && updateTaskDescriptor.getEndDate().get().toString().equals(EMPTY_FIELD)
+                && !updateTaskDescriptor.getEndTime().get().toString().equals(EMPTY_FIELD)) {
             return true;
         } else {
             return false;

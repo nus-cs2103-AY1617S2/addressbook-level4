@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     // + " eat lunch ON thursday\n"
             + "Type HELP for user guide with detailed explanations of all commands";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added: ";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes "
             + "with another event";
@@ -65,8 +65,9 @@ public class AddCommand extends Command {
             // "\n");
             // }
             // }
-            model.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            int addIndex = model.addTask(toAdd);
+            return new CommandResult(MESSAGE_SUCCESS + toAdd.getTaskName().toString() + "\n" + "Task added at index: "
+                    + Integer.toString(addIndex + 1));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         } catch (IllegalValueException ive) {

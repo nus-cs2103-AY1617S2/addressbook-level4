@@ -151,15 +151,16 @@ public class ModelManager extends ComponentManager implements Model {
         return numDeletedTasks;
     }
 
-    // @@author
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
-        taskManager.addTask(task);
+        int addIndex = taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        return addIndex;
     }
 
+    // @@author A0139520L
     @Override
     public synchronized int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
@@ -192,7 +193,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    // @@author A0139520L
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
@@ -216,7 +216,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
-    // @@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
