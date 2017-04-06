@@ -42,8 +42,7 @@ public class SaveCommand extends Command {
         if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
                 filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
-        }
-        else if (!f.canWrite()) {
+        } else if (!f.canWrite()) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
         }
 
