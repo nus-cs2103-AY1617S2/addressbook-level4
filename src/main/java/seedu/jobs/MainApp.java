@@ -20,6 +20,7 @@ import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.logic.LogicManager;
+import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
@@ -45,6 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected CalendarManager calendarManager;
 
 
     @Override
@@ -60,8 +62,10 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        
+        calendarManager = new CalendarManager();
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, calendarManager);
 
         ui = new UiManager(logic, config, userPrefs);
 

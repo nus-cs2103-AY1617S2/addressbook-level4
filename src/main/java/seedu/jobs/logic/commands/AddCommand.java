@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.logic.calendar.AddCalendar;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.tag.Tag;
 import seedu.jobs.model.tag.UniqueTagList;
@@ -60,7 +59,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             //to update the calendar
-            new AddCalendar(toAdd);
+            calendar.AddTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

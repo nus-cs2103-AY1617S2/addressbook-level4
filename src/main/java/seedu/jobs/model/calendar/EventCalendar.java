@@ -65,7 +65,5 @@ public class EventCalendar {
 
 	public void setPeriod(int period) {
 		this.period = period;
-	}
-    
-    
+	}    
 }

@@ -1,6 +1,5 @@
 package seedu.jobs.logic.commands;
 
-import seedu.jobs.logic.calendar.ClearCalendar;
 import seedu.jobs.model.TaskBook;
 
 /**
@@ -16,7 +15,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(new TaskBook());
-        new ClearCalendar();
+        calendar.ClearTask();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

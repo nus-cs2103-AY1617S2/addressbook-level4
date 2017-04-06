@@ -14,8 +14,10 @@ public class EditCalendar extends BasicCommandCalendar {
 	private final EventCalendar newEvent;
 	
 
-    public EditCalendar(ReadOnlyTask initial, Task newTarget) {
+    public EditCalendar(ReadOnlyTask initial, Task newTarget,
+    		com.google.api.services.calendar.Calendar inputCalendar) {
         Task initialTarget = new Task(initial);
+        service = inputCalendar;
     	this.initialEvent = new EventCalendar(initialTarget);
         this.newEvent = new EventCalendar(newTarget);
         try {

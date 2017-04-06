@@ -1,6 +1,5 @@
 package seedu.jobs.model.calendar;
 
-import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.Time;
 
 public class TimeCalendar {

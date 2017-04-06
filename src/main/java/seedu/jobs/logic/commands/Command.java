@@ -1,6 +1,7 @@
 package seedu.jobs.logic.commands;
 
 import seedu.jobs.commons.core.Messages;
+import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.Model;
 
@@ -9,6 +10,7 @@ import seedu.jobs.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected CalendarManager calendar;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
@@ -33,7 +35,8 @@ public abstract class Command {
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    public void setData(Model model) {
+    public void setData(Model model, CalendarManager calendar) {
         this.model = model;
+        this.calendar = calendar;
     }
 }

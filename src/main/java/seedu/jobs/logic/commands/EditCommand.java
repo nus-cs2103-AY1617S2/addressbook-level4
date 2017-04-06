@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.util.CollectionUtil;
-import seedu.jobs.logic.calendar.EditCalendar;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.tag.UniqueTagList;
 import seedu.jobs.model.task.Description;
@@ -65,7 +64,7 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
-            new EditCalendar(taskToEdit, editedTask);
+            calendar.EditTask(taskToEdit, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

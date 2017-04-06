@@ -2,7 +2,6 @@ package seedu.jobs.logic.commands;
 
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
-import seedu.jobs.logic.calendar.DeleteCalendar;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.UniqueTaskList.TaskNotFoundException;
@@ -41,7 +40,7 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
-            new DeleteCalendar(taskToDelete);
+            calendar.DeleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         }
