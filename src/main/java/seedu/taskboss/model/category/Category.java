@@ -9,12 +9,13 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class Category {
 
+    private static final String EMPTY_STRING = "";
     public static final String MESSAGE_CATEGORY_CONSTRAINTS = "Categories names should be alphanumeric";
     public static final String CATEGORY_VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String categoryName;
 
-    public static Category done = new Category("Done", "");
+    public static Category done = new Category("Done", EMPTY_STRING);
 
     /**
      * Validates given category name.

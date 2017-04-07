@@ -126,21 +126,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
-        //        assert toAdd != null;
-        //        try {
-        //            if (contains(toAdd) && !toAdd.getCategories().contains(new Category(AddCommand.BUILT_IN_DONE))) {
-        //                throw new DuplicateTaskException();
-        //            }
-        //        } catch (IllegalValueException ive) {
-        //            //Do nothing. Done category is always valid
-        //        }
-        //        internalList.add(toAdd);
-
         assert toAdd != null;
-        if (contains(toAdd)) {
-            if (!toAdd.getCategories().contains(Category.done)) {
+        if (contains(toAdd) && !toAdd.getCategories().contains(Category.done)) {
                 throw new DuplicateTaskException();
-            }
         }
         internalList.add(toAdd);
     }
@@ -156,10 +144,9 @@ public class UniqueTaskList implements Iterable<Task> {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            if (!editedTask.getCategories().contains(Category.done)) {
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask) &&
+                !editedTask.getCategories().contains(Category.done)) {
                 throw new DuplicateTaskException();
-            }
         }
 
         taskToUpdate.resetData(editedTask);
