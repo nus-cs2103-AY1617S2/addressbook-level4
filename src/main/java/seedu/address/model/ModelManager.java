@@ -111,7 +111,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-    
+
     @Override
     public void mergeYTomorrow(ReadOnlyAddressBook add) {
         for (ReadOnlyPerson readOnlyTask : add.getPersonList()) {
@@ -124,7 +124,7 @@ public class ModelManager extends ComponentManager implements Model {
                     addressBook.addPerson(task);
                 } catch (PersonNotFoundException | DuplicatePersonException el) {
                 }
-                
+
             }
         }
         indicateAddressBookChanged();
@@ -134,6 +134,36 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addToHistory(ReadOnlyAddressBook state) {
         history.push(state);
+    }
+
+    //@@author A0164466X
+    @Override
+    public void updateFilteredListToShowComplete() {
+        // TODO Auto-generated method stub
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_COMPLETE))));
+        } catch (DuplicateTagException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void updateFilteredListToShowIncomplete() {
+        // TODO Auto-generated method stub
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_INCOMPLETE))));
+        } catch (DuplicateTagException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -207,6 +237,23 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+  //@@author A0164466X
+    private class TagQualifier implements Qualifier {
+        private UniqueTagList tags;
+        
+        TagQualifier(UniqueTagList tags){
+            this.tags = tags;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getTags().equals(tags);
+        }
+        
+        //Default toString() method used
+        
     }
 
 }
