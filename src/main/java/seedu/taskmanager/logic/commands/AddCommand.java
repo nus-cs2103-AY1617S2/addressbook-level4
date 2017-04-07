@@ -33,6 +33,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     // @@author A0140032E
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
+    public static final String MESSAGE_REPEAT_CONSTRAINTS = "Recurring tasks should have a start date";
     // @@author
     private final Task toAdd;
 
@@ -48,11 +49,17 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
         // @@author A0140032E
         if (startDate.isPresent() && endDate.isPresent()
                 && new StartDate(startDate.get()).after(new EndDate(endDate.get()))) {
             throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
         }
+
+        if (repeat.isPresent() && !startDate.isPresent()) {
+            throw new IllegalValueException(MESSAGE_REPEAT_CONSTRAINTS);
+        }
+
         this.toAdd = new Task(new Title(title),
                 startDate.isPresent() && !startDate.get().trim().equals("")
                         ? Optional.of(new StartDate(startDate.get())) : Optional.empty(),
@@ -60,8 +67,8 @@ public class AddCommand extends Command {
                         : Optional.empty(),
                 description.isPresent() && !description.get().trim().equals("")
                         ? Optional.of(new Description(description.get())) : Optional.empty(),
-                repeat.isPresent() && !repeat.get().trim().equals("")
-                        ? Optional.of(new Repeat(repeat.get())) : Optional.empty(),
+                repeat.isPresent() && !repeat.get().trim().equals("") ? Optional.of(new Repeat(repeat.get()))
+                        : Optional.empty(),
                 new Status(), new UniqueTagList(tagSet));
         // @@author
     }

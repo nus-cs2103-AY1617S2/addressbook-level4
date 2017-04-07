@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -36,6 +37,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     // @@author A0140032E
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
+    public static final String MESSAGE_REPEAT_CONSTRAINTS = "Recurring tasks should have a start date";
     // @@author
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -71,6 +73,10 @@ public class EditCommand extends Command {
         if (editedTask.getStartDate().isPresent() && editedTask.getEndDate().isPresent()
                 && editedTask.getStartDate().get().after(editedTask.getEndDate().get())) {
             throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        }
+
+        if (editedTask.getRepeat().isPresent() && !editedTask.getStartDate().isPresent()) {
+            throw new CommandException(MESSAGE_REPEAT_CONSTRAINTS);
         }
         // @@author
         try {

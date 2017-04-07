@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
@@ -34,6 +36,10 @@ public class StartDate extends Date {
      */
     public StartDate(String startDate) throws IllegalValueException {
         super(startDateConstructor(startDate));
+    }
+
+    public StartDate(DateTime dt) {
+        super(dt.toDate().getTime());
     }
 
     private static long startDateConstructor(String startDate) throws IllegalValueException {
