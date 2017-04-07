@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>CS2101</name>
+        <startTime>16/03/2017 15:00</startTime>
+        <endTime>16/03/2017 16:00</endTime>
+        <description>Effetive Communication For Computing Professionlas</description>
+        <period>0</period>
+        <tagged>lectures</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2102</name>
+        <startTime>17/03/2017 08:00</startTime>
+        <endTime>17/03/2017 09:00</endTime>
+        <description>Database</description>
+        <period>0</period>
+        <tagged>tutorials</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103</name>
+        <startTime>01/02/2017 11:00</startTime>
+        <endTime>01/02/2017 12:00</endTime>
+        <description>Software Engineering</description>
+        <period>0</period>
+        <tagged>tutorials</tagged>
+    </tasks>
+    <tasks>
+        <name>Meeting</name>
+        <startTime>16/03/2017 12:00</startTime>
+        <endTime>18/03/2017 17:00</endTime>
+        <description>Meet with group members at UTown</description>
+        <period>0</period>
+        <tagged>meetings</tagged>
+    </tasks>
+    <tasks>
+        <name>Finally complete change path</name>
+        <startTime>07/04/2017 19:00</startTime>
+        <endTime>07/04/2017 23:13</endTime>
+        <description></description>
+        <period>0</period>
+    </tasks>
+    <tags>lectures</tags>
+    <tags>tutorials</tags>
+    <tags>meetings</tags>
+</taskbook>
