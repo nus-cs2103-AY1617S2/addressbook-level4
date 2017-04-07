@@ -42,11 +42,11 @@
                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
            </padding>
       </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.15" VBox.vgrow="NEVER">
          <items>
-           <SplitPane dividerPositions="0.3" orientation="VERTICAL">
+           <SplitPane dividerPositions="0.15" orientation="VERTICAL">
             <items>
-                <VBox fx:id="eventList" minWidth="50.0" prefWidth="50.0" alignment="CENTER_LEFT">
+                <VBox fx:id="eventList" minWidth="20.0" prefWidth="20.0" alignment="CENTER_LEFT">
                     <padding>
                         <Insets bottom="0.0" left="10.0" right="10.0" top="0.0" />
                     </padding>
@@ -74,7 +74,7 @@
                </VBox>
             </items>
            </SplitPane>
-           <VBox fx:id="extended" minWidth="700.0" prefWidth="700.0">
+           <VBox fx:id="extended" minWidth="900.0" prefWidth="900.0">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
