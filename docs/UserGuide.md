@@ -107,7 +107,7 @@ Examples:
 * `find work`<br>
   Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 * `find werk`<br>
-  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column  
+  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
@@ -190,11 +190,11 @@ Examples:
 ### 2.14. Undo the last user command that changes data: `undo`
 
 Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
-Does nothing if there are no more previous user commands. 
+Does nothing if there are no more previous user commands.
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   Restores the data before the clear command
 * `add New task`<br>
@@ -205,11 +205,11 @@ Examples:
 ### 2.15. Redo the last undo command: `redo`
 
 Redo the last undo command by user<br>
-Does nothing if there are no commands to redo that the user has undone 
+Does nothing if there are no commands to redo that the user has undone
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   `redo`<br>
   Redoes last user command in undo history, i.e `clear`. Task manager will be cleared
