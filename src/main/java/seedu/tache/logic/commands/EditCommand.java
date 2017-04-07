@@ -116,6 +116,11 @@ public class EditCommand extends Command implements Undoable {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
                 updatedStartDateTime.get().setDefaultTime();
             }
+            if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
+                //Floating Task to Non-Floating, do not allow start date only
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
+                updatedEndDateTime.get().setDefaultTime();
+            }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
             if (updatedEndDateTime.isPresent()) {
