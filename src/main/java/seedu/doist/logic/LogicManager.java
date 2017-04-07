@@ -12,6 +12,7 @@ import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.logic.parser.Parser;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.storage.Storage;
@@ -23,10 +24,12 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
+    private final ConfigModel configModel;
     private final Parser parser;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, ConfigModel configModel, Storage storage) {
         this.model = model;
+        this.configModel = configModel;
         this.parser = new Parser(model);
     }
 
@@ -34,7 +37,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model);
+        command.setData(model, configModel);
 
         CommandResult result = command.execute();
         if (result.isMutating) {

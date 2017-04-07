@@ -13,6 +13,7 @@ import org.junit.Test;
 import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.SaveAtCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.ConfigManager;
 import seedu.doist.model.ModelManager;
 
 //@@author A0140887W
@@ -74,7 +75,7 @@ public class SaveAsParserTest {
     }
 
     public void assertFeedbackMessage(Command returnedCommand, String message, boolean isCommandExceptionExpected) {
-        returnedCommand.setData(new ModelManager());
+        returnedCommand.setData(new ModelManager(), new ConfigManager());
         try {
             returnedCommand.execute();
             assertFalse("CommandException should have been thrown", isCommandExceptionExpected);

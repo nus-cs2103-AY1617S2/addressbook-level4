@@ -35,6 +35,8 @@ import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.ConfigManager;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.ModelManager;
 import seedu.doist.model.ReadOnlyTodoList;
@@ -56,6 +58,7 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private ConfigModel configModel;
     private Logic logic;
 
     //These are for checking the correctness of the events raised
@@ -81,10 +84,11 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
+        configModel = new ConfigManager();
         String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempAliasListMapFile = saveFolder.getRoot().getPath() + "TempAliasListMap.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempAliasListMapFile,
+        logic = new LogicManager(model, configModel, new StorageManager(tempAddressBookFile, tempAliasListMapFile,
                                                                 tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 

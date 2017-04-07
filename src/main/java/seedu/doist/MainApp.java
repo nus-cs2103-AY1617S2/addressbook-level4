@@ -21,6 +21,8 @@ import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.LogicManager;
 import seedu.doist.model.AliasListMap;
+import seedu.doist.model.ConfigManager;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.ModelManager;
 import seedu.doist.model.ReadOnlyAliasListMap;
@@ -48,6 +50,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected ConfigModel configModel;
     protected UserPrefs userPrefs;
 
 
@@ -57,6 +60,8 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
+        configModel = new ConfigManager(config);
+
         storage = new StorageManager(config.getAbsoluteTodoListFilePath(), config.getAbsoluteAliasListMapFilePath(),
                                         config.getAbsoluteUserPrefsFilePath());
 
@@ -64,9 +69,9 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs, config);
+        model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, configModel, storage);
 
         ui = new UiManager(logic, config, userPrefs);
 
@@ -78,11 +83,11 @@ public class MainApp extends Application {
         return applicationParameters.get(parameterName);
     }
 
-    private Model initModelManager(Storage storage, UserPrefs userPrefs, Config config) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         ReadOnlyTodoList initialData = initTodoListData(storage);
         ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
 
-        return new ModelManager(initialData, initialAliasData, userPrefs, config);
+        return new ModelManager(initialData, initialAliasData, userPrefs);
     }
 
     protected static ReadOnlyTodoList initTodoListData(Storage storage) {
