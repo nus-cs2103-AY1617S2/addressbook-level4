@@ -89,9 +89,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private JFXTextField commandTextField;
 
-    @FXML
-    private Label commandResult;
-
     // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -109,7 +106,6 @@ public class MainWindow extends UiPart<Region> {
         TextFields.bindAutoCompletion(commandTextField, "add", "clear", "delete", "deletetag", "done", "edit", "exit",
                 "find", "help", "list", "listcompleted", "notdone", "redo", "renametag", "undo", "saveto", "today",
                 NotTodayCommand.COMMAND_WORD, UseThisCommand.COMMAND_WORD);
-        this.commandResult.setText("");
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -292,7 +288,6 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0144315N
     @Subscribe
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
-        this.commandResult.setText(event.getMessage());
         JFXSnackbar toast = new JFXSnackbar(taskListPanelPlaceholder);
         // EventHandler handler = new EventHandler() {
         // @Override
