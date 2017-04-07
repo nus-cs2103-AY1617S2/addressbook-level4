@@ -300,8 +300,8 @@ public class ModelManager extends ComponentManager implements Model {
             boolean isNameEqual = nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
             boolean isPriorityEqual = comparePriority(task.getPriority());
-            boolean isStartDateQualified = compareStartDate(task);
-            boolean isDueDateQualified = compareDueDate(task);
+            boolean isStartDateQualified = compareStart(task);
+            boolean isDueDateQualified = compareDue(task);
             boolean isRecurQualified = compareRecur(task.getRecur());
             boolean areTagsEqual = (taskTagStringSet.containsAll(tags));
 
@@ -331,7 +331,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if the task's {@code StartDate} qualifies a given
          * {@code StartDate}, before and after boolean status
          */
-        private boolean compareStartDate(ReadOnlyTask task) {
+        private boolean compareStart(ReadOnlyTask task) {
             return (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
                     || (startBefore && compareBeforeStart(task.getStartDate()))
                     || (startAfter && compareAfterStart(task.getStartDate())));
@@ -341,7 +341,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if the task's {@code DueDate} qualifies a given
          * {@code DueDate}, before and after boolean status
          */
-        private boolean compareDueDate(ReadOnlyTask task) {
+        private boolean compareDue(ReadOnlyTask task) {
             return (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
                     || (dueBefore && compareBeforeDue(task.getDueDate()))
                     || (dueAfter && compareAfterDue(task.getDueDate())));
