@@ -66,10 +66,13 @@ public class XmlTaskBookStorage implements TaskBookStorage {
     public void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException {
         assert taskBook != null;
         assert filePath != null;
-
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskBook(taskBook));
+    }
+    
+    public void setFilePath(String filePath){
+        this.filePath = filePath;
     }
 
 }

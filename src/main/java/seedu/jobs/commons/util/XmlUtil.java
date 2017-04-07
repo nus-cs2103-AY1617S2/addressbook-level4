@@ -57,12 +57,12 @@ public class XmlUtil {
         if (!file.exists()) {
             throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
         }
-
         JAXBContext context = JAXBContext.newInstance(data.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
+        System.out.println(file);
         m.marshal(data, file);
+        System.out.println("wawawa");
     }
 
 }

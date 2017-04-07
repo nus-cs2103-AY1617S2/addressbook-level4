@@ -1,14 +1,21 @@
 package seedu.jobs.model;
 
+import java.io.IOException;
 import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+import com.google.api.client.repackaged.com.google.common.base.Throwables;
+import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
@@ -34,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         assert !CollectionUtil.isAnyNull(taskBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + taskBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task book: " + taskBook + " and user prefs " + userPrefs);
 
         this.taskBook = new TaskBook(taskBook);
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
@@ -123,8 +130,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskBook.redoTask();
         indicateTaskBookChanged();
     }
-  //@@author
-
+   
+  //=========== path command =======================================================================
+  //@@author A0130979U
+    @Override
+    public void changePath(String path) throws IOException {
+        raise(new SavePathChangedEvent(path,taskBook));  
+    }
+  //@@author  
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -176,5 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+
 
 }

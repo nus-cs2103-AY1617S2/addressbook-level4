@@ -9,7 +9,10 @@ import com.google.common.eventbus.Subscribe;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
+import seedu.jobs.commons.events.storage.SavePathChangedEvent;
+import seedu.jobs.commons.events.storage.SavePathChangedEventException;
 import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.ReadOnlyTaskBook;
@@ -91,7 +94,17 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+    @Subscribe
+    public void handleSavePathChangedEvent(SavePathChangedEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        try {
+            saveTaskBook(event.getData(), event.getPath());
+            setFilePath(event.getPath());
+            raise(new ConfigChangeSavePathEvent(event.getPath()));
+        } catch (IOException e) {
+            raise(new SavePathChangedEventException());
+        }
+    }
  // ================ LoginInfo methods ==============================
 
     @Override
@@ -102,5 +115,10 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveLoginInfo(LoginInfo loginInfo) throws IOException {
         loginInfoStorage.saveLoginInfo(loginInfo);
+    }
+
+    @Override
+    public void setFilePath(String filePath) {
+        taskBookStorage.setFilePath(filePath);
     }
 }
