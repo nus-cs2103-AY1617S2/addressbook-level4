@@ -74,10 +74,15 @@ public class EditCommand extends Command {
             throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        Task editedTask = new Task(editTaskDescriptor.getUpdatedName(),
-                editTaskDescriptor.getUpdatedDeadline(),
-                editTaskDescriptor.getUpdatedStartEndDateTime(),
-                editTaskDescriptor.getUpdatedTagList());
+        Task editedTask;
+        try {
+            editedTask = new Task(editTaskDescriptor.getUpdatedName(),
+                    editTaskDescriptor.getUpdatedDeadline(),
+                    editTaskDescriptor.getUpdatedStartEndDateTime(),
+                    editTaskDescriptor.getUpdatedTagList());
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);

@@ -31,11 +31,11 @@ public class DateTimeUtilTest {
         //org.apache.log4j.Logger.getRootLogger().setLevel(Level.INFO);
 
         // Random days of the week
-        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)),
+        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)),
                 DateTimeUtil.parseDateTimeString("Sat"));
-        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY)),
+        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY)),
                 DateTimeUtil.parseDateTimeString("Wed"));
-        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY)),
+        assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)),
                 DateTimeUtil.parseDateTimeString("Fri"));
 
         // Random date with month

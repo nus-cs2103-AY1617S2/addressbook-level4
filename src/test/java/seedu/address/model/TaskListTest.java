@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -49,7 +50,12 @@ public class TaskListTest {
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.amuseFriend twice
-        List<Task> newTasks = Arrays.asList(new Task(td.amuseFriend), new Task(td.amuseFriend));
+        List<Task> newTasks;
+        try {
+            newTasks = Arrays.asList(new Task(td.amuseFriend), new Task(td.amuseFriend));
+        } catch (IllegalValueException e) {
+            throw new AssertionError("A TestTask should have been built correctly, otherwise copying will not fail.");
+        }
         List<Tag> newTags = td.amuseFriend.getTags().asObservableList();
         TaskListStub newData = new TaskListStub(newTasks, newTags);
 
