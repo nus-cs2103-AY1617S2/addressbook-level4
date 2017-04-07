@@ -23,11 +23,9 @@
     -fx-opacity: 1;
 }
 
-/*Name of list (Completed/overdue)*/
 .text-field {
     -fx-font-weight: bold;
     -fx-font-size: 12pt;
-    -fx-font-family: "GelPenUpright";
 }
 
 .tab-pane {
@@ -325,6 +323,17 @@
 /*Command box*/
 #commandTextField {
     -fx-font-family: "Code New Roman";
+}
+
+/*doingTASKS header*/
+.ongoing {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
+}
+/*didTASKS header*/
+.completed {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
 }
 /*@@author*/
 
