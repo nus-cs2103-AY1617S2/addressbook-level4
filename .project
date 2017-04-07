@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>addressbook-level4</name>
-	<comment>Project addressbook-level4 created by Buildship.</comment>
+	<name>main</name>
+	<comment>Project CoolToDoManager created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -22,13 +22,13 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1476898072165</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -37,7 +37,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1476898072188</id>
+			<id>0</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
