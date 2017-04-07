@@ -1,6 +1,5 @@
 package seedu.taskit.logic.commands;
 
-//@@author A0141872E
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +17,7 @@ import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 import seedu.taskit.model.task.UniqueTaskList;
 
+//@@author A0141872E
 /**
  * Edits an existing task in TaskIt.
  */
