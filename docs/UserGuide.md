@@ -313,7 +313,7 @@ _**Finds tasks whose information contains any of the given keywords specified by
 
 #### Format:
 
-**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**
+**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [f/RECUR] [d/DUEDATE] [t/TAGNAME...]`**
 
 <br>
 
@@ -336,7 +336,9 @@ _**Finds tasks whose information contains any of the given keywords specified by
 *  Find tasks that have a due date on `20/03/2017`:<br>
 **`f d/20/03/2017`** <br><br>
 *  Find tasks containing `School` with a priority of `1`:<br>
-**`find School p/1`** <br>
+**`find School p/1`** <br><br>
+*  Find tasks containing `lecture` with a `weekly` recurrence:<br>
+**`find lecture f/weekly`** <br>
 
 <br>
 
