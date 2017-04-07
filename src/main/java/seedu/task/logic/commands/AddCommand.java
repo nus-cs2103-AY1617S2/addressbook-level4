@@ -51,8 +51,7 @@ public class AddCommand extends Command {
                 new Date(endDate),
                 new Remark(remark),
                 new Location(location), new UniqueTagList(tagSet),
-                false, ""
-        );
+                false, "");
     }
 
     // @@author

@@ -9,7 +9,7 @@ public class HistoryTest {
     private History history;
 
     @Test
-    public void handleTaskManagerChanged() {
+    public void handleTaskManagerChanged_moreCommandsThanMaxNumUndo_valuesCorrectlyMaintained() {
         history = History.test_resetInstance();
 
         //after 11 taskmanager changing events
@@ -28,16 +28,19 @@ public class HistoryTest {
         assertEquals("data/temp/backup10.xml", history.getUndoFilePath());
     }
 
-
+    /**
+     * The History class will think that taskmanager is changed when handleTaskManagerChanged is called.
+     * This helper method calls that method for num number of times to simulate that number of changes to taskmanager.
+     * @param num
+     */
     private void simulateTaskManagerChanged(int num) {
         for (int i = 0; i < num; i++) {
             history.handleTaskManagerChanged("dummy");
         }
     }
 
-
     @Test
-    public void handleUndo() {
+    public void handleUndo_valuesCorrectlyMaintained() {
         history = History.test_resetInstance();
 
         history.handleTaskManagerChanged("1");
@@ -55,7 +58,11 @@ public class HistoryTest {
         assertEquals(10, history.getRedoCount());
         assertEquals("data/temp/backup1.xml", history.getBackupFilePath());
     }
-
+    /**
+     * The History class will think that undo is called when handleUndo is called.
+     * This helper method calls handleUndo for num number of times to simulate that number of undos executed.
+     * @param num
+     */
     private void simulateUndo(int num) {
         for (int i = 0; i < num; i++) {
             history.handleUndo();

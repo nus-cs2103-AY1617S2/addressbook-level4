@@ -15,7 +15,7 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "redo";
     public static final String MESSAGE_SUCCESS = "Redo successful!";
-    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to redo. Can only redo after undo.";
+    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to redo. Backup file not found.";
     public static final String MESSAGE_FAIL = "Nothing to redo. Already at latest state.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": Redo the most recent undo.\n"
