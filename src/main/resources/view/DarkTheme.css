@@ -277,32 +277,31 @@
 }
 
 /*@@author A0141928B*/
-/*Individual task card*/
-#cardPane {
+.cardPaneP0 {
     -fx-background-color: transparent;
-    -fx-border-color: #bbbbbb; /*no priority level*/
+    -fx-border-color: #bbbbbb; /*No priority specified*/
     -fx-border-width: 0 0 0 15;
 }
 
-#cardPaneP1 {
+.cardPaneP1 {
     -fx-background-color: transparent;
     -fx-border-color: #dd6666; /*Priority 1*/
     -fx-border-width: 0 0 0 15;
 }
 
-#cardPaneP2 {
+.cardPaneP2 {
     -fx-background-color: transparent;
     -fx-border-color: #ddbb33; /*Priority 2*/
     -fx-border-width: 0 0 0 15;
 }
 
-#cardPaneP3 {
+.cardPaneP3 {
     -fx-background-color: transparent;
     -fx-border-color: #66bbbb; /*Priority 3*/
     -fx-border-width: 0 0 0 15;
 }
 
-#cardPaneP4 {
+.cardPaneP4 {
     -fx-background-color: transparent;
     -fx-border-color: #66dd99; /*Priority 4*/
     -fx-border-width: 0 0 0 15;

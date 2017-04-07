@@ -33,18 +33,19 @@ public class TaskCard extends UiPart<Region> {
         info.setText(task.getInfo().value);
         switch(task.getPriority().value) {
         case "1":
-            cardPane.setId("cardPaneP1");
+            cardPane.getStyleClass().add("cardPaneP1");
             break;
         case "2":
-            cardPane.setId("cardPaneP2");
+            cardPane.getStyleClass().add("cardPaneP2");
             break;
         case "3":
-            cardPane.setId("cardPaneP3");
+            cardPane.getStyleClass().add("cardPaneP3");
             break;
         case "4":
-            cardPane.setId("cardPaneP4");
+            cardPane.getStyleClass().add("cardPaneP4");
             break;
         default: //No priority given
+            cardPane.getStyleClass().add("cardPaneP0");
             break;
         }
         initTags(task);
