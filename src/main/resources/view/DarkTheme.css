@@ -271,8 +271,8 @@
 .scroll-bar .track {
 	-fx-background-color:transparent;
 	-fx-border-color:transparent;
-	
 }
+
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50.0%);
     -fx-background-insets: 1.0;
