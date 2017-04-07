@@ -79,7 +79,7 @@ public class DateUtil {
             return COMPARE_RESULT_EQUAL;
         } else if (dateString1.isEmpty()) {
             return COMPARE_RESULT_MORE_THAN;
-        } else if (dateString2.isEmpty()) {
+        } else {
             return COMPARE_RESULT_LESS_THAN;
         }
     }
