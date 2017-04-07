@@ -14,14 +14,14 @@ Responsibilities: In charge of logic, Scheduling and tracking
 #### [FOO CHUAN WEN](https://github.com/fcw6323)
 <img src="images/chuanwen.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: UI
+Responsibilities: 
 
 -----
 
 #### [Peng Chong](https://github.com/Ellie-Peng)<br>
 <img src="images/pengchong.jpg" width="150"><br>
 **Role**: Developer <br>
-Responsibilities: UI
+Responsibilities: In charge of UI, Documentation,Code Integration, solving merge conflicts to master
 
 -----
 
