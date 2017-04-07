@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.YTomorrow;
 import seedu.address.testutil.EventsCollector;
 import seedu.address.testutil.TypicalTestPersons;
-import seedu.address.ui.ThemeManager;
+import seedu.address.ui.ThemeWindow;
 
 public class StorageManagerTest {
 
@@ -47,7 +47,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(300, 600, 4, 6, ThemeManager.DEFAULT_STYLESHEET, null);
+        original.setGuiSettings(300, 600, 4, 6, ThemeWindow.DEFAULT_STYLESHEET, null);
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);

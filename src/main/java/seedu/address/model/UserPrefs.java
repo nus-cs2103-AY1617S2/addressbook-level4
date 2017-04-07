@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.ui.ThemeManager;
+import seedu.address.ui.ThemeWindow;
 
 /**
  * Represents User's preferences.
@@ -21,7 +21,7 @@ public class UserPrefs {
     }
 
     public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0, ThemeManager.DEFAULT_STYLESHEET, null);
+        this.setGuiSettings(500, 500, 0, 0, ThemeWindow.DEFAULT_STYLESHEET, null);
     }
 
     public void setGuiSettings(
