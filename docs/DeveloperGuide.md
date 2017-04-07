@@ -224,9 +224,9 @@ The `UI` component:
 
 Author: [Lam Guang Jun](http://github.com/gjlam95)
 
-Logic provides APIs for the UI to execute the commands given by the user The API of the logic component can be found at Logic.java.
+Logic provides APIs for the UI to execute the commands given by the user. The API of the logic component can be found at Logic.java.
 
-The class diagram of the Logic Component is given below. LogicManager implements the Logic interface and has exactly one Parser. Parser is responsible for processing the user command and creating instances of Command objects (such as AddCommand). These will then be executed by the LogicManager. New command classes must implement the Command class. Each Command class produces exactly one CommandResult.
+The class diagram of the Logic Component is given below. `LogicManager` implements the Logic interface and has exactly one `Parser`. `Parser` is responsible for processing the user command and creating instances of Command objects (eg. AddCommand). These will then be executed by the `LogicManager`. New command classes must implement the `Command` class. Each `Command` class produces exactly one `CommandResult`.
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -240,12 +240,23 @@ This section will elaborate on the functions of the `Logic` component; i.e how a
 4. The command execution will interact with the `Model` component (eg. adding a task), to create a new task.
 4. The result of the command execution is encapsulated as a `CommandResult` object which will be handed back to the `Ui` component and display the relevant results to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTasksForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 In this diagram, the `Logic Manager` receives an event to delete the task from index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is passed back to the `UI` component through `CommandResult`.
+
+### 2.3.1 Sort implementation
+
+The sorting feature in Opus is designed using different attributes comparators implemented from `Comparators<ReadOnlyTask>`. This command allows users to perform their desired sorting according to the parameters given provided by them. The default sorting is given by the command `sort all`.
+
+Below is the Sequence Diagram for interactions within the `Logic` component for the `execute("sort all")`
+ API call.<br>
+<img src="images/SortTasksForLogic.png" width="800"><br>
+_Figure 2.3.2 : Interactions Inside the Logic Component for the `sort all` Command_
+
+In this diagram, the `Logic Manager` receives an event to sort the tasks according to firstly status, start date, end date, and finally priority and parses into a `DeleteCommand` that communicates with the Model to perform the sorting. The result is passed back to the `UI` component through `CommandResult`.
 
 ### 2.4. Model component
 
