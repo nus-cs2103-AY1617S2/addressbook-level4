@@ -11,6 +11,7 @@ import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.events.model.ToDoListChangedEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
+import seedu.onetwodo.commons.events.ui.ShowTagsRequestEvent;
 import seedu.onetwodo.commons.exceptions.EmptyHistoryException;
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.commons.util.CollectionUtil;
@@ -222,6 +223,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void clearUndone() {
         toDoList.clearUndone();
         indicateToDoListChanged();
+    }
+
+    //@@author A0135739W
+    @Override
+    public void displayTags() {
+        String tagsListToDisplay = "";
+        for (Tag tag: toDoList.getTagList()) {
+            tagsListToDisplay += tag.toString();
+            tagsListToDisplay += "\n";
+        }
+        EventsCenter.getInstance().post(new ShowTagsRequestEvent(tagsListToDisplay));
     }
 
     // =========== Filtered Task List Accessors

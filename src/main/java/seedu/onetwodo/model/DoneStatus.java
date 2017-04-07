@@ -1,6 +1,6 @@
 package seedu.onetwodo.model;
 
-//@@author A0143029M
+//@@author A0135739W
 public enum DoneStatus {
     DONE("done"),
     UNDONE("undone"),

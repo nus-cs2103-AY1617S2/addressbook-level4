@@ -293,6 +293,28 @@ public class MainWindow extends UiPart<Region> {
         helpUGWindow.show();
     }
 
+  //@@author A0135739W
+    public void handleTags(String tagsString) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Text headerText = new Text("List of All Tags:");
+        Text tagsText = new Text("\n" + tagsString);
+        headerText.setWrappingWidth(MIN_WIDTH);
+        tagsText.setWrappingWidth(MIN_WIDTH);
+        content.setHeading(headerText);
+        content.setBody(tagsText);
+        closeDialog();
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                ke.consume();
+                closeDialog();
+                commandBox.resetKeyListener();
+            }
+        });
+    }
+
     // @@author
     @FXML
     public void handleUndo() {
