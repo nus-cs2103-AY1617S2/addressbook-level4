@@ -23,22 +23,25 @@ public class TaskCard extends UiPart<Region> {
 
     @FXML
     private Label name;
+
     @FXML
     private Label id;
+
     @FXML
     private Label date;
-    @FXML
-    private Label time;
+
     @FXML
     private Label endDate;
-    @FXML
-    private Label endTime;
+
     @FXML
     private Label preposition;
+
     @FXML
     private Pane colourTag;
+
     @FXML
     private Pane completedColourTag;
+
     @FXML
     private ImageView priorityMark;
 

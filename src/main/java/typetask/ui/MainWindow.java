@@ -16,7 +16,6 @@ import typetask.commons.events.ui.ExitAppRequestEvent;
 import typetask.commons.util.FxViewUtil;
 import typetask.logic.Logic;
 import typetask.model.UserPrefs;
-import typetask.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,9 +35,6 @@ public class MainWindow extends UiPart<Region> {
 
     private TaskListPanel taskListPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -197,14 +193,6 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
-    }
-
-    public void loadTaskPage(ReadOnlyTask task) {
-//        browserPanel.loadTaskPage(person);
-    }
-
-    void releaseResources() {
-//        browserPanel.freeResources();
     }
 
 }
