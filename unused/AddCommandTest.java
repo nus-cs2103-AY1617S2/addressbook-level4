@@ -125,7 +125,7 @@ public class AddCommandTest extends TodoListGuiTest {
 	/**
      * RecurringAddCommand is not following the abstraction occurrence design pattern,
 	 * so it's not used in final product
-     */	
+     */
     @Test
     public void add_recurringAddTest_success() {
         TestTodo[] currentList = td.getTypicalTodos();
