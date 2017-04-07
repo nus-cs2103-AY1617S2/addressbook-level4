@@ -128,7 +128,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd) && !toAdd.getCategories().contains(Category.done)) {
-                throw new DuplicateTaskException();
+            throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
     }
@@ -146,7 +146,7 @@ public class UniqueTaskList implements Iterable<Task> {
         Task taskToUpdate = internalList.get(index);
         if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask) &&
                 !editedTask.getCategories().contains(Category.done)) {
-                throw new DuplicateTaskException();
+            throw new DuplicateTaskException();
         }
 
         taskToUpdate.resetData(editedTask);
