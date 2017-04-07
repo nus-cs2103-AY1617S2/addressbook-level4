@@ -6,6 +6,7 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0147980U
 /**
  * Deletes a task identified using it's last displayed index from the to-do list.
  */
@@ -38,4 +39,5 @@ public class DeleteCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete), true);
     }
+    //@@author
 }
