@@ -304,14 +304,17 @@
 }
 
 #taskListView .list-cell:filled:selected:focused, #taskListView .list-cell:filled:selected {
-    -fx-background-color: #FFFEE7;
+    -fx-background-color: #EAFFFB;
     /* Up Right Down Left */
     -fx-border-width: 0 0 0 5;
     -fx-border-color: #50E3C2;
 }
 
 #categoryListView .list-cell:filled:selected:focused, #categoryListView .list-cell:filled:selected {
-    -fx-background-color: #E9E9E9;
+    -fx-background-color: #FFFC9C;
+    /* Up Right Down Left */
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: #50E3C2;
 }
 
 #categoryTaskCount {
