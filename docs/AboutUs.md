@@ -36,12 +36,18 @@ Responsibilities: Testing, Integration<br>
 #### [Wang Yu](https://github.com/WangYu-g)<br>
 <img src="images/WangYu-g.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Documentation, Code Quality<br>
-* Components in charge of: GUI, Storage
-* Aspects/tools in charge of:
+* Components in charge of: Logic, Model, GUI
+* Aspects/tools in charge of: Testing
 * Features implemented:
-* Code written:
+	* [Show Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#showing-done-tasks--show)
+	* [Finish Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#finish-a-task--finish)
+	* [List Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#listing-undone-tasks--list)
+* Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/main/A0105748B.md)][[test code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/test/A0105748B.md)]
 * Other major contributions:
+	* Natty Date Parser
+	* Make tasks fields optional except task description
+	* Modify UI
+	* Design new GUI
 
 -----
 

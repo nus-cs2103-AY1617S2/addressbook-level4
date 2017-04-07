@@ -61,9 +61,9 @@ Examples:
 * `add Pick up laundry`
 * `add Do CS2103 V0.0 t/urgent`
 
-### 2.3. Listing all tasks : `list`
+### 2.3. Listing undone tasks : `list`
 
-Shows a list of all tasks in the Task List.<br>
+Shows a list of all undone tasks in the Task List.<br>
 Format: `list`
 
 Alternative commands: "ls", "display"
@@ -113,7 +113,7 @@ Examples:
   Returns Any tasks having names `Pick`, or `Do`
 
 <!-- @@author A0105748B -->
-### 2.6. Showing done/undone tasks: `show`
+### 2.6. Showing done tasks: `show`
 
 Shows tasks that are done or undone.<br>
 Format: `show done/undone`
@@ -195,6 +195,28 @@ Changes the filepath for where the data is stored. <br>
 Format: `change`
 
 Alternative commands: "cd"
+
+<!-- @@author A0105748B -->
+### 2.13. Finish a task : `finish`
+
+Mark an existing task as "done" in the todo list.<br>
+Format: `finish INDEX`
+
+Alternative commands: "done", "complete"
+
+> Marks the task as "done" at the specified `INDEX`. <br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `list`<br>
+  `finish 2`<br>
+  Marks the 2nd task as "done" in the todo list.
+* `find do`<br>
+  `done 1`<br>
+  Marks the 1st task as "done" in the results of the `find` command.
+<!-- @@author -->
 
 ## 3. FAQ
 
