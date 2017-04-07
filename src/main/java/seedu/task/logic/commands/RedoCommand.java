@@ -1,7 +1,6 @@
 package seedu.task.logic.commands;
 
 import seedu.task.logic.commands.exceptions.CommandException;
-import seedu.task.model.task.UniqueTaskList;
 
 //@@author A0163845X
 public class RedoCommand extends Command {

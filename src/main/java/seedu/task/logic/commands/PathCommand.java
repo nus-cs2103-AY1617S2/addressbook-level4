@@ -2,7 +2,6 @@ package seedu.task.logic.commands;
 
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.ui.ChangePathNameEvent;
-import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 //@@author A0164061N

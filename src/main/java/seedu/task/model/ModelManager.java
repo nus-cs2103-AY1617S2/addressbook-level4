@@ -10,7 +10,6 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.util.CollectionUtil;
-import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.TaskStatusPredicate;

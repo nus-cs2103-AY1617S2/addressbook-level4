@@ -2,7 +2,6 @@ package seedu.task.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -20,11 +18,9 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskComparable;
-import seedu.task.model.task.TaskTimeComparable;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
-import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Wraps all data at the task-manager level Duplicates are not allowed (by

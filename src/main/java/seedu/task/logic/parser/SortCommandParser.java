@@ -2,9 +2,7 @@ package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.SortCommand;
 

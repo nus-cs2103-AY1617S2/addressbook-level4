@@ -1,20 +1,19 @@
 package seedu.task.logic.parser;
 
-import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.NoSuchElementException;
 
-import seedu.task.logic.parser.ParserUtil;
-import seedu.task.model.task.TaskName;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.task.TaskName;
 
 /**
  * Parses input arguments and creates a new AddCommand object

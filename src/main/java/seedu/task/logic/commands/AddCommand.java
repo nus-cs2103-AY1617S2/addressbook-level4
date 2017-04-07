@@ -10,11 +10,10 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
-import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
-import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Adds a task to the task manager.

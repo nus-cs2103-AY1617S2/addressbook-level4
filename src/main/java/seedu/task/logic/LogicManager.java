@@ -12,7 +12,6 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.logic.parser.Parser;
 import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.UniqueTaskList;
 import seedu.task.storage.Storage;
 
 /**

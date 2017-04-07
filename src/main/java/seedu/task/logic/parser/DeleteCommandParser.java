@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.DeleteCommand;
-import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 /**

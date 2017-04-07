@@ -6,9 +6,7 @@ import static seedu.task.logic.parser.CliSyntax.DONE_ARGS_FORMAT;
 import java.util.regex.Matcher;
 
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
-import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 
 //@@author A0146757R

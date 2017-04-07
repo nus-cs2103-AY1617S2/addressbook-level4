@@ -11,9 +11,6 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskManager;
-import seedu.task.logic.commands.PathCommand;
-import seedu.task.model.task.TaskPath;
-import seedu.task.logic.parser.PathCommandParser;
 
 /**
  * A class to access TaskManager data stored as an xml file on the hard disk.
