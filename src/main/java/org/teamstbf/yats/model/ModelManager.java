@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.teamstbf.yats.commons.core.ComponentManager;
+import org.teamstbf.yats.commons.core.EventsCenter;
 import org.teamstbf.yats.commons.core.LogsCenter;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.commons.events.model.TaskManagerChangedEvent;
+import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
@@ -70,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
 		taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
+		EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEvents.size() - 1));
 	}
 
 	/**
@@ -228,6 +231,8 @@ public class ModelManager extends ComponentManager implements Model {
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
+
+		EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEventListIndex));
 	}
 
 	private void updateFilteredEventList(Expression expression) {
