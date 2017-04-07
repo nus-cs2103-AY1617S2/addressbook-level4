@@ -207,6 +207,14 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         commandBox.runCommand("mark 0 2 3");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user input alphabet
+        commandBox.runCommand("m a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
+
+        //user input special character
+        commandBox.runCommand("m 1 2 ;");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
     //---------------- End of test cases --------------------------------------

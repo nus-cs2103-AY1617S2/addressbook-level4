@@ -18,18 +18,28 @@ public class TerminateCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
         }
 
-        Set<Integer> index = parseIndex(args);
+        Set<Integer> index;
+        try {
+            index = parseIndex(args);
+        } catch (Exception e) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+        }
 
         return new TerminateCommand(index);
     }
 
-    private Set<Integer> parseIndex(String indexList) {
+    private Set<Integer> parseIndex(String indexList) throws Exception {
         Set<Integer> taskIndex = new HashSet<Integer>();
         String trimmedList = indexList.trim();
         String[] indexes = trimmedList.split("\\s+");
 
-        for (String index : indexes) {
-            taskIndex.add(Integer.parseInt(index));
+        try {
+            for (String index : indexes) {
+                taskIndex.add(Integer.parseInt(index));
+            }
+        } catch (NumberFormatException e) {
+            throw new Exception();
         }
 
         return taskIndex;
