@@ -53,11 +53,11 @@ public class AddCommand extends Command {
         StartTime startTime;
         EndTime endTime;
 
-        if(startDate == null){
+        if (startDate == null) {
             startDate = "";
         }
 
-        if(dueDate == null){
+        if (dueDate == null) {
             dueDate = "";
         }
 

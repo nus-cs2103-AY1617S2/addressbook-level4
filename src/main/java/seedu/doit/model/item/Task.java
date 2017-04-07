@@ -189,7 +189,7 @@ public class Task implements ReadOnlyTask {
      */
     @Override
     public boolean isEvent() {
-        return (hasStartTime() && hasEndTime());
+        return (hasStartTime());
     }
 
     /**
