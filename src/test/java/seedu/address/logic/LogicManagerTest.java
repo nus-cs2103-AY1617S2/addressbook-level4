@@ -653,7 +653,28 @@ public class LogicManagerTest {
         assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
+    /*
+    @Test
+    public void execute_find_multipleKeywords() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task targetTagAndName1 = helper.generateTaskWithNameAndTags("bla bla KEY bla", "KEY");
+        Task targetTagAndName2 = helper.generateTaskWithNameAndTags("bla KEY bla bceofeia", "blahbla", "KEY");
+        Task targetTag1 = helper.generateTaskWithNameAndTags("bla bleepa", "KEY");
+        Task targetTag2 = helper.generateTaskWithNameAndTags("bloopy beep", "blahbla", "KEY");
+        Task targetTag3 = helper.generateTaskWithNameAndTags("KE Y", "nope");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
 
+        List<Task> sevenTasks = helper.generateTaskList(targetTag3, targetTagAndName1, p2, targetTagAndName2, targetTag1,
+                targetTag2, p3);
+        TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
+        List<Task> expectedList = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2, targetTag3);
+        helper.addToModel(model, sevenTasks);
+
+        assertCommandSuccess("find nope beep KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+                expectedList);
+    }*/
+    
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
