@@ -184,7 +184,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Dec 10, 2017 5pm")
                 .withRecurrence(Frequency.WEEKLY)
                 .withInformation("little tokyo")
-                .withCategories("Done").build();
+                .withCategories("School", "Done").build();
 
         String expectedMessage = "[" + expectedTasksList[1] + ", " + expectedTasksList[6] + "]";
         assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
