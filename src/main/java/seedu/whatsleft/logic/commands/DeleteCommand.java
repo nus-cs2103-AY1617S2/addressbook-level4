@@ -25,7 +25,8 @@ public class DeleteCommand extends Command {
             + "Parameters: TYPE (ev represents event or ts represents task) and INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " ev" + " 1";
 
-    public static final String MESSAGE_DELETE_ACTIVITY_SUCCESS = "Deleted Activity: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     public final int targetIndex;
     public final String targetType;
@@ -56,7 +57,7 @@ public class DeleteCommand extends Command {
             } catch (EventNotFoundException pnfe) {
                 assert false : "The target event cannot be missing";
             }
-            return new CommandResult(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, eventToDelete));
+            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
         }
 
         if (targetType.equals("ts")) {
@@ -74,7 +75,7 @@ public class DeleteCommand extends Command {
             } catch (TaskNotFoundException pnfe) {
                 assert false : "The target task cannot be missing";
             }
-            return new CommandResult(String.format(MESSAGE_DELETE_ACTIVITY_SUCCESS, taskToDelete));
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 

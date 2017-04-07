@@ -48,7 +48,8 @@ public class EditCommand extends Command {
             + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " ts 1 p/high bd/050517";
 
-    public static final String MESSAGE_EDIT_ACTIVITY_SUCCESS = "Edited Activity: %1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_EDIT_SUCCESS_CLASH = "Edited Activity with possible clash! : %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in WhatsLeft.";
@@ -135,7 +136,7 @@ public class EditCommand extends Command {
             if (model.eventHasClash(editedEvent)) {
                 return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
             }
-            return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedEvent));
+            return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
         } catch (IllegalValueException e) {
             throw new CommandException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
         }
@@ -169,7 +170,7 @@ public class EditCommand extends Command {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(lastShownList.indexOf(editedTask)));
         EventsCenter.getInstance().post(new JumpToCalendarTaskEvent(editedTask));
-        return new CommandResult(String.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**

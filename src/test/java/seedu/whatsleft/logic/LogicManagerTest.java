@@ -346,7 +346,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeEvents);
 
         assertCommandSuccess("delete ev 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_ACTIVITY_SUCCESS, threeEvents.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, threeEvents.get(1)),
                 expectedAB,
                 expectedAB.getEventList());
     }

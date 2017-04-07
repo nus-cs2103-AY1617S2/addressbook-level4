@@ -206,7 +206,6 @@ public class Event implements ReadOnlyEvent {
         } else {
             return null;
         }
-
     }
 
     @Override
