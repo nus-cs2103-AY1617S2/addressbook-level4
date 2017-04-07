@@ -48,14 +48,32 @@ public class TaskCard extends UiPart<Region> {
         //@@author A0124368A
         name.setText(task.getName().fullName);
         setPriorityView(task);
-        note.setText(task.getNote().map(Note::toString).orElse(""));
+
+        if (task.getNote().isPresent()) {
+            note.setText(task.getNote().get().toString());
+        } else {
+            note.setVisible(false);
+            note.setManaged(false);
+        }
 
         if (task.getStatus().isComplete()) {
             cardPane.getStyleClass().add(STYLE_COMPLETED_TASK);
         }
 
-        startTime.setText(task.getStartTime().map(DateTime::toString).map(s -> "Start: " + s).orElse(""));
-        endTime.setText(task.getEndTime().map(DateTime::toString).map(s -> "End: " + s).orElse(""));
+        if (task.getStartTime().isPresent()) {
+            startTime.setText("Start: " + task.getStartTime().get().toString());
+        } else {
+            startTime.setVisible(false);
+            startTime.setManaged(false);
+        }
+
+        if (task.getEndTime().isPresent()) {
+            endTime.setText("End: " + task.getEndTime().get().toString());
+        } else {
+            endTime.setVisible(false);
+            endTime.setManaged(false);
+        }
+
         //@@author
         initTags(task);
     }
