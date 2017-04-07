@@ -42,8 +42,8 @@ public class FindCommandParser implements CommandParser {
         }
         assert args != null;
 
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE, PREFIX_RECUR,
-                PREFIX_TAG);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE,
+                PREFIX_RECUR, PREFIX_TAG);
         String[] splitNames = tokenize(args, argsTokenizer);
 
         Optional<Priority> findPriority = null;
@@ -89,8 +89,9 @@ public class FindCommandParser implements CommandParser {
 
         Set<String> keywords = new HashSet<String>(Arrays.asList(splitNames));
         SearchParameters searchParameters = new SearchParameters.Builder().name(keywords).priority(findPriority)
-                .startDate(findStartDate).dueDate(findDueDate).recur(findRecur).tags(findTags).startBefore(searchBeforeStartDate)
-                .dueBefore(searchBeforeDueDate).startAfter(searchAfterStartDate).dueAfter(searchAfterDueDate).build();
+                .startDate(findStartDate).dueDate(findDueDate).recur(findRecur).tags(findTags)
+                .startBefore(searchBeforeStartDate).dueBefore(searchBeforeDueDate).startAfter(searchAfterStartDate)
+                .dueAfter(searchAfterDueDate).build();
 
         return new FindCommand(searchParameters);
     }
