@@ -1,14 +1,15 @@
-# AddressBook Level 4 - Developer Guide
+# Bullet Journal - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+
+By : `Team F12-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `March 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+1. [Setting Up](#1-setting-up)
+2. [Design](#2-design)
+3. [Implementation](#3-implementation)
+4. [Testing](#4-testing)
+5. [Dev Ops](#5-dev-ops)
 
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
@@ -51,7 +52,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. todolist
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,7 +87,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/bulletjournal/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -120,15 +121,15 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TodoListChangedEvent` when the Bullet Journal data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -139,19 +140,19 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Tu An @arishuynhvan
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/bulletjournal/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/bulletjournal/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -162,57 +163,57 @@ The `UI` component,
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author:
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/bulletjournal/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Tu An @arishuynhvan
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/bulletjournal/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the TodoList data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Tu An @arishuynhvan
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/bulletjournal/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Bullet Journal data in xml format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.bulletjournal.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +264,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.bulletjournal.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.bulletjournal.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.bulletjournal.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -290,11 +291,47 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ## 5. Dev Ops
 
-### 5.1. Build Automation
+### 5.1. Version Control Workflow
+
+#### 5.1.1. General Guidelines
+
+All members should work on their individual branches for **code implementation**. Please avoid committing code changes directly into master. Instead, push your local branch to our central remote repo, create a new PR of your branch, and assign another member to review. Since we have 2 people in charge of each component, please assign the relevant member as your reviewer.
+
+For new pull request (PR), code changes should be **reviewed by at least one other member** before merging PR. The reviewer should at least comment that the PR is ok to merge so the team may know PR has been reviewed.
+
+##### Component Delegation
+
+1. Model: @bryan , @arishuynhvan
+2. GUI: @WangYu-g, @zhypaul
+3. Logic: @bryan, @arishuynhvan
+4. Storage: @WangYu-g, @zhypaul
+
+#### 5.1.2. Merge Branches
+
+1. After you have made necessary changes on your local feature branch and decided to merge into our remote master branch, try to pull the remote master into your local master first.
+2. Merge the local master into your local feature branch with **rebase** (*not merge*).
+3. Push your local feature branch to remote feature branch.
+4. Create a new pull request and assign a reviewer (as described in 5.1.1)
+
+#### 5.1.3. Roll back Commits after Pushed
+
+1. Open terminal from SourceTree (the icon could be found on the top right corner of SourceTree window)
+2. Use `git log` to find the code number of the commit which you  want to revert your branch to. E.g. 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb
+2. `git rebase -i <commit number>` . E.g. `git rebase -i 82ad6ad8e3410ade014e4b9ecec94a57c2df51bb` . You will see an editor where you can pick (keep) or drop (delete/remove) commits. There are other commands as well, which are displayed as instruction in the editor. To start making changes to your commit, press `i` key and edit the changes.
+3. When you have finished making the changes, press `Esc` key and type `:wq` to save changes and quit editor. (This is Vim-based editor so commands very similar to Vim)
+4. `git push -f` to overwrite your remote branch
+
+You can refer to [this article](http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html) for more explanations
+
+For **documentation changes**, it is ok to make direct changes in the master branch.
+
+
+
+### 5.2. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 5.3. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
@@ -332,7 +369,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Bullet Journal depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -347,26 +384,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | add events | remind myself what i need to do
+`* * *` | user | add tasks | finish them before deadline
+`* * *` | user | add deadlines | prioritize my tasks
+`* * *` | user | CRUD events, tasks, deadlines | help myself make tasks more manageable
+`* * *` | user | undo last operation | easily correct my mistake
+`* * *` | user | have some flexiblity in commands | use the task manager more comfortably
+`* * *` | user | simple search for finding an item | navigate to certain tasks more conveniently
+`* * *` | user | view uncompleted/completed tasks | feel sense of achievement and stress
+`* * *` | user | specify which folder data is stored | manipulate the data more directly
 
-{More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TodoList` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+#### Use case: Delete task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to list tasks
+2. TodoList shows a list of tasks
+3. User requests to delete a specific task in the list
+4. TodoList deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -377,7 +417,7 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. TodoList shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
@@ -385,7 +425,7 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -403,17 +443,68 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-**Product Name**
+**Google Calendar**
 
-Author: ...
+Author: Bryan Lee
 
-Pros:
+**Pros:**
 
-* ...
-* ...
+* Google Calendar is easy and fast to set up, especially if you use a Google account
+* Clean, minimal interface, easy to invite people to events
+* Organize events and appointments via different calendars
 
-Cons:
+**Cons:**
 
-* ...
-* ...
+* Possible problems communicating with other calendars such as iCal
+* Not specifically a task manager, just a calendar
 
+**Momentum**
+
+Author: Aris Huynh
+
+**Pros:**
+
+- Central focus task visibly displayed in the center of the site
+- Accessible from Chrome
+- Local Storage of tasks in browser
+- Simple to-do list with checkboxes as done indicator
+
+**Cons:**
+
+- Lack of data persistence when Chrome cache is cleared
+- Poor sync for the same account across browsers and devices
+- Poor responsiveness on small screen size
+- Tasks can only be text-based for free version
+
+<!-- @@author A0105748B -->
+**Apple's Notes App**
+
+Author: Wang Yu
+
+**Pros:**
+
+* Apple's built-in Notes App is nothing different from a paper notebook except that it is electronic which makes it capable of storing more than enough notes and deleting notes that are no longer needed
+* Due to its sustainability, Notes is very suitable for traditional notes takers who are not comfortable with being restricted by commands and forms
+* With the Notes App on iCloud.com, users can easily get to see their notes on different platforms if Internet connection is available
+
+**Cons:**
+
+* Notes is only available for the Apple OS platform. As our target are MS users, Notes is not an option for them
+* Notes cannot recognize task's data and group them together
+* All the updating need to be done by directly manipulating the text, which is quite a bother
+* If the user mistakenly edited something wrongly, there is no turning back for them since there is no undo function
+<!-- @@author -->
+
+**Calendar in iPhone**
+
+Author: Zhang Heyang
+
+**Pros:**
+
+* Supports iPhone and related devices
+
+**Cons:**
+
+* No localisation, for instance in China there is not lunar calendar and no Japanese traditional holidays calendar in Japan
+* Display interface too small, unable to see all events
+* Add/Remove function not user-friendly enough, hard to find
