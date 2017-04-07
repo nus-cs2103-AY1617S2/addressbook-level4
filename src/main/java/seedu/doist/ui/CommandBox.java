@@ -180,13 +180,12 @@ public class CommandBox extends UiPart<Region> {
 
     /** Method to special handle text-completion for 'Find' command */
     private void handleFindTab(int cursorPosition, String[] words, String suggestion) {
-        String lastWord = words[words.length - 1];
         StringBuilder s = new StringBuilder();
         for (int i = 1; i < words.length; i++) {
             s.append(words[i]).append(" ");
         }
         if (!(s.toString().contains(suggestion))) {
-            commandTextField.deleteText(cursorPosition - lastWord.length(), cursorPosition);
+            commandTextField.deleteText(cursorPosition - s.toString().length(), cursorPosition);
             commandTextField.insertText(commandTextField.getCaretPosition(), suggestion);
         }
     }
