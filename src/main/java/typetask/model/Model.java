@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 import typetask.commons.core.UnmodifiableObservableList;
+import typetask.model.task.DueDate;
 import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -67,4 +68,6 @@ public interface Model {
 
     /** Retrieves the index for task */
     int getFilteredTaskListIndex(ReadOnlyTask targetTask);
+    /** Retrieves the tasks with similar date */
+    void updateFilteredTaskList(String date);
 }

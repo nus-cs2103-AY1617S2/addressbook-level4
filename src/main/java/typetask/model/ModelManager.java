@@ -1,5 +1,8 @@
 package typetask.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +19,7 @@ import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
 import typetask.logic.parser.DateParser;
+import typetask.model.task.DueDate;
 import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
@@ -38,6 +42,8 @@ public class ModelManager extends ComponentManager implements Model {
     public static final Integer STATUS_EMPTY_HISTORY = 0;
     public static final Integer STATUS_AVAILABLE_HISTORY = 1;
     public static final Integer STATUS_ERROR_HISTORY = -1;
+    
+    public static final int wantedDate = 0;
     //@@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -202,6 +208,11 @@ public class ModelManager extends ComponentManager implements Model {
     public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
         return getFilteredTaskList().indexOf(targetTask);
     }
+    //@@author A0139926R
+    @Override
+    public void updateFilteredTaskList(String date) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    }
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -289,7 +300,40 @@ public class ModelManager extends ComponentManager implements Model {
             return "showComplete=" + String.valueOf(showComplete);
         }
     }
-
+    //@@author A0139926R
+    private class DateQualifier implements Qualifier {
+        private String date;
+        boolean result = false;
+        DateQualifier(String date) {
+            this.date = date;
+        }
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (!task.getEndDate().value.equals("")) {
+                result = task.getEndDate().value.contains(date);
+                if (!task.getDate().value.equals("")) {
+                    List<Date> endDates = DateParser.parse(task.getEndDate().value);
+                    List<Date> startDates = DateParser.parse(task.getDate().value);
+                    DateFormat format = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
+                    Date keywordDate;
+                    try {
+                        keywordDate = format.parse(date);
+                    } catch (ParseException e) {
+                        return false;
+                    }
+                    Date taskEndDate = endDates.get(wantedDate);
+                    Date taskStartDate = startDates.get(wantedDate);
+                    if (keywordDate.before(taskEndDate) && keywordDate.after(taskStartDate)) {
+                        result = true;
+                    }
+                    if (keywordDate.equals(taskStartDate)) {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+    }
     //@@author A0144902L
     /** Examines if the task is qualified to be in list of priority tasks*/
     private class PriorityQualifier implements Qualifier {

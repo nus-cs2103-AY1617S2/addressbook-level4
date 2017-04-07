@@ -18,14 +18,20 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final Set<String> keywords;
+    private String keywordsContainDate = "";
 
-    public FindCommand(Set<String> keywords) {
+    public FindCommand(Set<String> keywords, String keywordsContainDate) {
         this.keywords = keywords;
+        this.keywordsContainDate = keywordsContainDate;
     }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(keywords);
+        if (keywordsContainDate.equals("")) {
+            model.updateFilteredTaskList(keywords);
+        } else {
+            model.updateFilteredTaskList(keywordsContainDate);
+        }
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
