@@ -284,7 +284,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (!tags.isEmpty()) {
             qualifiers.add(new TagQualifier(tags));
         }
-        if (!(dates == null)) {
+        if (dates != null) {
             qualifiers.add(new DateQualifier(dates));
         }
         updateFilteredTaskList(new PredicateExpression(qualifiers.toArray(new Qualifier[qualifiers.size()])));

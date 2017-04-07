@@ -70,7 +70,7 @@ public class ListCommand extends Command {
                             MESSAGE_USAGE));
                 }
             } catch (NullPointerException e) {
-                ;
+
             }
         }
         List<String> tagsParameterStringList = parameters.get(CliSyntax.PREFIX_UNDER.toString());
