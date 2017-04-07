@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B2/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B2/main)
 [![Build status](https://ci.appveyor.com/api/projects/status/tmk1f4divuhbfrj2/branch/master?svg=true)](https://ci.appveyor.com/project/LWWenz/main/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T09-B2/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-T09-B2/main?branch=master)
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7c967dd5e5a64457b0fae1dc7ac79433)](https://www.codacy.com/app/LWWenz/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T09-B2/main&amp;utm_campaign=Badge_Grade)
 
 <img src="docs/images/Ui.png" width="600"><br>
