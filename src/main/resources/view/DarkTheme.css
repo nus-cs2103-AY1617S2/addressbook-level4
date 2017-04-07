@@ -1,35 +1,33 @@
-@font-face {
-    src: url('fonts/Comfortaa-Regular.ttf');
-}
-
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "GelPenUpright";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "Blue Highway";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "Blue Highway";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
+/*Name of list (Completed/overdue)*/
 .text-field {
+    -fx-font-weight: bold;
     -fx-font-size: 12pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "GelPenUpright";
 }
 
 .tab-pane {
@@ -69,7 +67,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "Blue Highway";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -100,11 +98,13 @@
     -fx-text-fill: #010504;
 }
 
-.cell_big_label {
+.cell_big_label { /*Task title*/
+    -fx-font-family: "GelPenUpright";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
+ /*Task deadline, info and priority*/
 .cell_small_label {
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
@@ -171,7 +171,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "Blue Highway";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -191,7 +191,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Comfortaa";
+    -fx-font-family: "Blue Highway";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -276,11 +276,42 @@
     -fx-padding: 8 1 8 1;
 }
 
-#cardPane {
+/*@@author A0141928B*/
+.cardPaneP0 {
     -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-border-color: #bbbbbb; /*No priority specified*/
+    -fx-border-width: 0 0 0 15;
 }
+
+.cardPaneP1 {
+    -fx-background-color: transparent;
+    -fx-border-color: #dd6666; /*Priority 1*/
+    -fx-border-width: 0 0 0 15;
+}
+
+.cardPaneP2 {
+    -fx-background-color: transparent;
+    -fx-border-color: #ddbb33; /*Priority 2*/
+    -fx-border-width: 0 0 0 15;
+}
+
+.cardPaneP3 {
+    -fx-background-color: transparent;
+    -fx-border-color: #66bbbb; /*Priority 3*/
+    -fx-border-width: 0 0 0 15;
+}
+
+.cardPaneP4 {
+    -fx-background-color: transparent;
+    -fx-border-color: #66dd99; /*Priority 4*/
+    -fx-border-width: 0 0 0 15;
+}
+
+/*Command box*/
+#commandTextField {
+    -fx-font-family: "Code New Roman";
+}
+/*@@author*/
 
 #commandTypeLabel {
     -fx-font-size: 11px;
@@ -299,6 +330,7 @@
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #383838;
+    -fx-font-family: "Blue Highway";
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
