@@ -140,14 +140,14 @@ public class FindCommandParser implements CommandParser {
         }
 
         String taskDateString = taskDate.get();
-        int prefixLength = 6;
+        String prefixToCompare1 = "before";
+        String prefixToCompare2 = "Before";
+        int prefixLength = prefixToCompare1.length();
 
         if (taskDateString.length() <= prefixLength) {
             return false;
         }
 
-        String prefixToCompare1 = "before";
-        String prefixToCompare2 = "Before";
         String byPrefix = taskDateString.substring(0, prefixLength);
         return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
 
@@ -164,14 +164,14 @@ public class FindCommandParser implements CommandParser {
         }
 
         String taskDateString = taskDate.get();
-        int prefixLength = 5;
+        String prefixToCompare1 = "after";
+        String prefixToCompare2 = "After";
+        int prefixLength = prefixToCompare1.length();
 
         if (taskDateString.length() <= prefixLength) {
             return false;
         }
 
-        String prefixToCompare1 = "after";
-        String prefixToCompare2 = "After";
         String byPrefix = taskDateString.substring(0, prefixLength);
         return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
 
