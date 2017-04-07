@@ -13,6 +13,8 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.logic.parser.Parser;
 import seedu.taskboss.model.Model;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.storage.Storage;
 
@@ -45,5 +47,16 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    //@@author A0143157J
+    @Override
+    public void updateFilteredTaskListByCategory(Category category) {
+        model.updateFilteredTaskListByCategory(category);
+    }
+
+    @Override
+    public ReadOnlyTaskBoss getTaskBoss() {
+        return model.getTaskBoss();
     }
 }

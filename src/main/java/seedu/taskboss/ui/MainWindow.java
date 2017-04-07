@@ -16,6 +16,7 @@ import seedu.taskboss.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.model.UserPrefs;
+import seedu.taskboss.model.category.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane categoryListPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -108,12 +112,27 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        CategoryListPanel categoryListPanel;
+
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBossFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        categoryListPanel = new CategoryListPanel(getCategoryListPlaceholder(), logic.getFilteredTaskList());
+        categoryListPanel.setTaskList(logic.getTaskBoss().getTaskList());
+        categoryListPanel.setCategoryList(logic.getTaskBoss().getCategoryList());
+        categoryListPanel.updateCategoryCountToHashMap();
     }
 
+    //@@author A0143157J
+    /**
+     * Loads tasks from the selected category
+     */
+    public void loadCategorySelection(Category category) {
+        logic.updateFilteredTaskListByCategory(category);
+    }
+
+    //@@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -128,6 +147,10 @@ public class MainWindow extends UiPart<Region> {
 
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
+    }
+
+    private AnchorPane getCategoryListPlaceholder() {
+        return categoryListPanelPlaceholder;
     }
 
     void hide() {

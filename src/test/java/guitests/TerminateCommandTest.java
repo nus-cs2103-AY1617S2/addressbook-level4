@@ -186,9 +186,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withInformation("little tokyo")
                 .withCategories("School", "Done").build();
 
-        String expectedMessage = "[" + expectedTasksList[1] + ", " + expectedTasksList[6] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        String expectedMessage = "[" + expectedTasksList[6] + ", " + expectedTasksList[1] + "]";
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
     }
 
     @Test
@@ -208,6 +208,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withCategories("Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        String expectedMessage = "[" + expectedTasksList[5] + ", " + expectedTasksList[1] + "]";
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+
     }
 
     @Test
@@ -217,6 +220,14 @@ public class TerminateCommandTest extends TaskBossGuiTest {
 
         commandBox.runCommand("t 0 2 3");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user input alphabet
+        commandBox.runCommand("t a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        //user input special character
+        commandBox.runCommand("t 1 2 ;");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
     }
 
     //---------------- End of test cases --------------------------------------

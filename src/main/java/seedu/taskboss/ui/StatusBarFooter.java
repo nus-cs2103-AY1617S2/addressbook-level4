@@ -44,18 +44,21 @@ public class StatusBarFooter extends UiPart<Region> {
     private void setSaveLocation(String location) {
         this.saveLocationStatus.setText(location);
     }
+
     //@@author
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);
     }
+
     //@@author A0138961W
     @Subscribe
     public void handleTaskBossStorageChangedEvent(TaskBossStorageChangedEvent newFilePath) {
         setSaveLocation(newFilePath.newPath);
     }
+
     //@@author
     @Subscribe
-    public void handleAddressBookChangedEvent(TaskBossChangedEvent abce) {
+    public void handleTaskBossChangedEvent(TaskBossChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

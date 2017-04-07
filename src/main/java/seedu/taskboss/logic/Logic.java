@@ -6,6 +6,8 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.CommandResult;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
+import seedu.taskboss.model.ReadOnlyTaskBoss;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 /**
@@ -23,7 +25,12 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException,
         IllegalValueException, InvalidDatesException, BuiltInCategoryException;
 
-    /** Returns the filtered list of persons */
+    /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    //@@author A0143157J
+    /** Returns the filtered list of tasks according to specified category */
+    void updateFilteredTaskListByCategory(Category category);
+
+    ReadOnlyTaskBoss getTaskBoss();
 }

@@ -49,20 +49,21 @@ Have you ever been overwhelmed with too many tasks? Perhaps a couple of these ta
 
 |Command    |Description                                                          |
 |:---------:|:-------------------------------------------------------------------:|
-|[**help / h**](#31-viewing-help--help)                       |View help              |
-|[**add / a**](#32-adding-a-task-add)                         |Add a task             |
-|[**list / l**](#33-listing-all-tasks--list)                  |List the tasks         |
-|[**edit / e**](#34-editing-a-task--edit)                     |Edit a task            |
-|[**find / f**](#35-finding-all-tasks-by-keywords-or-by-datetime--find)           |Find tasks by keywords or by datetime             |
-|[**delete / d**](#36-deleting-a-task--delete)                |Delete a task          |
-|[**clear / c**](#37-clearing-tasks-by-category--clear)       |Clear tasks in category|
-|[**view / v**](#38-viewing-a-task--view)                    |View a task            |
-|[**name / n**](#39-modifying-a-category-name--name)         |Rename a category      |
-|[**mark / m**](#310-marking-a-task-done--done)               |Mark a task as done      |
-|[**undo / u**](#311-undoing-a-command--undo)                 |Undo a task            |
-|[**sort / s**](#312-sorting-tasks--sort)                     |Sort tasks by deadline or by priority|
-|[**save / sv**](#314-exporting-the-data--save)                |Save TaskBoss          |
-|[**exit / x**](#315-exiting-the-program--exit)               |Exit TaskBoss          |
+|[**help / h**](#31-viewing-help--help--h)                       |View help              |
+|[**add / a**](#32-adding-a-task-add--a)                         |Add a task             |
+|[**list / l**](#33-listing-all-tasks--list--l)                  |List the tasks         |
+|[**edit / e**](#34-editing-a-task--edit--e)                     |Edit a task            |
+|[**find / f**](#35-finding-all-tasks-by-keywords-or-by-datetime--find--f)           |Find tasks by keywords or by datetime             |
+|[**delete / d**](#36-deleting-tasks--delete--d)                |Delete a task          |
+|[**clear / c**](#37-clearing-tasks-by-category--clear--c)       |Clear tasks in category|
+|[**view / v**](#38-viewing-a-task--view--v)                    |View a task            |
+|[**name / n**](#39-renaming-a-category--name--n)         |Rename a category      |
+|[**mark / m**](#310-marking-tasks-done--mark--m)               |Mark a task as done      |
+|[**undo / u**](#311-undoing-a-command--undo--u)                 |Undo a task            |
+|[**redo / r**](#312-redoing-a-command--redo--r)                 |Redo a task            |
+|[**sort / s**](#313-sorting-tasks--sort--s)                     |Sort tasks by deadline or by priority|
+|[**save / sv**](#315-exporting-the-data--save--sv)                |Save TaskBoss          |
+|[**exit / x**](#316-exiting-the-program--exit--x)               |Exit TaskBoss          |
 
 <br>
 
@@ -73,7 +74,7 @@ Format: `help`
 ### 3.2. Adding a task: `add / a`
 
 Adds a task<br>
-Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
+Format: `add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
 
 > * Date can be written in UK-time format with slashes, `i.e dd-mm-yyyy` or natural language, `i.e this sunday`.  <br>
 > * Time should be in 24-hour clock format or 12-hour format with AM or PM next to it, i.e `1700 hr:min <PM/AM>`. <br>
@@ -85,9 +86,9 @@ Format: `add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/
 
 Examples:
 
-* `add n/Buy groceries ed/19-02-2017 c/Home p/YES r/weekly`
-* `add n/Dinner with Jim i/@Orchard sd/next friday ed/19-02-2017 c/Leisure p/no`
-* `add n/Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/No`
+* `add Buy groceries ed/19-02-2017 c/Home p/YES r/weekly`
+* `add Dinner with Jim i/@Orchard sd/next friday ed/19-02-2017 c/Leisure p/no`
+* `add Post-exam celebration i/@Zouk sd/tomorrow at 3 PM ed/tomorrow 20.30  c/Leisure p/No`
 
 
 ### 3.3. Listing all tasks : `list / l`
@@ -105,7 +106,7 @@ Example:
 ### 3.4. Editing a task : `edit / e`
 
 Edits an existing task<br>
-Format: `edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
+Format: `edit INDEX [TASK NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`
 
 > * Edits the task at the specified `INDEX`.
     The index refers to the index number last shown in the last task listing.<br>
@@ -125,7 +126,7 @@ Examples:
 ### 3.5. Finding all tasks by Keywords or by Datetime : `find / f`
 
 Finds tasks whose names or information contain any of the given keywords<br>
-Format: `find k/KEYWORDS` 
+Format: `find KEYWORDS` 
 
 Finds tasks whose start datetime matches the given datetime<br>
 Formats: `find sd/date and time` `find ed/date and time`
@@ -138,10 +139,10 @@ Formats: `find sd/date and time` `find ed/date and time`
 
 Examples:
 
-* `find k/Meeting`<br>
+* `find Meeting`<br>
   Returns all tasks whose name or information contains `Meeting`.
   
-* `find k/shopping milk`<br>
+* `find shopping milk`<br>
   Returns all tasks whose name or information contains at least one of the keywords: `shopping` and `milk`.
 
 * `find sd/2 april`<br>
@@ -174,11 +175,11 @@ Examples:
 ### 3.7. Clearing tasks by category : `clear / c`
 
 Clears all tasks under the specified category<br>
-Format: `clear CATEGORY`
+Format: `clear c/CATEGORY`
 
-> * Category names are case-sensitive. <br>
-> * The default categories of TaskBoss are `AllTasks` and `Done`. <br>
-> * `AllTasks` and `Done` cannot be cleared in TaskBoss.<br>
+> * Category names are case-insensitive. <br>
+> * The build-in categories of TaskBoss are `Alltasks` and `Done`. <br>
+> * `Alltasks` and `Done` cannot be cleared in TaskBoss.<br>
 
 ### 3.8. Viewing a task : `view / v`
 
@@ -215,10 +216,15 @@ Examples:
 
 ### 3.11. Undoing a command : `undo / u`
 
-Undoes a most recent command<br>
+Undoes a most recent command and reverts TaskBoss to previous state<br>
 Format: `undo`
 
-### 3.12. Sorting tasks : `sort / s`
+### 3.12. Redoing a command : `redo / r`
+
+Redoes a most recent command after it has been undone<br>
+Format: `redo`
+
+### 3.13. Sorting tasks : `sort / s`
 
 Sorts tasks by their deadlines<br>
 Format: `sort` 
@@ -226,11 +232,11 @@ Format: `sort`
 Sorts tasks by their priorities<br>
 Format: `sort p` 
 
-### 3.13. Saving the data 
+### 3.14. Saving the data 
 
 TaskBoss data will automatically be saved in local hard disk after entering any command that updates the data. There is no need to save manually.
 
-### 3.14. Exporting the data : `save / sv`
+### 3.15. Exporting the data : `save / sv`
 
 Exports data to an existing filepath in xml format<br>
 Format: `save FILE_PATH` 
@@ -240,7 +246,7 @@ Format: `save NEW_FILE_PATH`
 
 > * TaskBoss loads data from the last specified filepath every time it is re-loaded.
 
-### 3.15. Exiting the program : `exit / x`
+### 3.16. Exiting the program : `exit / x`
 
 Exits the program.<br>
 Format: `exit`
@@ -261,18 +267,19 @@ A: Install TaskBoss in the other computer and overwrite the empty data file it c
 |Command    |Parameters                                                        |
 |:---------:|:-------------------------------------------------------------------------------------------|
 |[help / h](#31-viewing-help--help)                       |**`help`**              |
-|[add / a](#32-adding-a-task-add)                         |**`add n/TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**             |
+|[add / a](#32-adding-a-task-add)                         |**`add TASK_NAME [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**             |
 |[list / l](#33-listing-all-tasks--list)                  |**`list` `list c/CATEGORY NAME`**        |
-|[edit / e](#34-editing-a-task--edit)                     |**`edit INDEX [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**|
-|[find / f](#35-finding-all-tasks-by-name-or-by-datetime--find)|**`find n/TASK_NAME`  `find sd/date and time`  `find ed/date and time`**|
+|[edit / e](#34-editing-a-task--edit)                     |**`edit INDEX [TASK NAME] [i/INFO] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY] [p/PRIORITY_LEVEL] [r/RECURRENCE]`**|
+|[find / f](#35-finding-all-tasks-by-keywords-or-by-datetime--find)|**`find KEYWORDS`  `find sd/date and time`  `find ed/date and time`**|
 |[delete / d](#36-deleting-a-task--delete)                |**`delete INDEX`**         |
-|[clear / c](#37-clearing-tasks-by-category--clear)       |**`clear CATEGORY`** |
+|[clear / c](#37-clearing-tasks-by-category--clear)       |**`clear c/CATEGORY NAME`** |
 |[view / v](#38-viewing-a-task--view)                    |**`view INDEX`**             |
 |[name / n](#39-modifying-a-category-name--name)         |**`name EXISTING_CATEGORY NEW_CATEGORY`**       |
 |[mark / m](#310--marking-a-task-done--done)               |**`mark INDEX`**        |
-|[undo / u](#311-undoing-a-command--undo)                 |**`undo`**            |
-|[sort / s](#312-sorting-tasks--sort)                     |**`sort ed` `sort sd` `sort p`**   |
-|[save / sv](#314-exporting-the-data--save)                |**`save FILE_PATH` `save NEW_FILE_PATH`**|
-|[exit / x](#315-exiting-the-program--exit)               |**`exit`**           |
+|[undo / u](#311-undoing-a-command--undo--u)                 |**`undo`**            |
+|[redo / r](#312-redoing-a-command--redo--r)                     |**`redo`**            |
+|[sort / s](#313-sorting-tasks--sort)                     |**`sort ed` `sort sd` `sort p`**   |
+|[save / sv](#315-exporting-the-data--save)                |**`save FILE_PATH` `save NEW_FILE_PATH`**|
+|[exit / x](#316-exiting-the-program--exit)               |**`exit`**           |
 
 <br>

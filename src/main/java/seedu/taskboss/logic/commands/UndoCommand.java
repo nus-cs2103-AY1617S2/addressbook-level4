@@ -31,7 +31,6 @@ public class UndoCommand extends Command {
         try {
             String input = model.undoTaskbossInput();
             model.undoTaskboss();
-            model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS + ": " + input);
         } catch (EmptyStackException ese) {
             return new CommandResult(MESSAGE_WITHOUT_PREVIOUS_OPERATION);
