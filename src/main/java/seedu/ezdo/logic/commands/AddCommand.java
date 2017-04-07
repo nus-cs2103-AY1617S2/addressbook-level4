@@ -60,6 +60,11 @@ public class AddCommand extends Command {
         );
     }
   //@@author A0139248X
+    /**
+     * Executes the add command.
+     *
+     * @throws CommandException if the task already exists or dates are invalid (start date after due date)
+     */
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
@@ -74,7 +79,5 @@ public class AddCommand extends Command {
         } catch (DateException de) {
             throw new CommandException(Messages.MESSAGE_TASK_DATES_INVALID);
         }
-
     }
-
 }

@@ -23,7 +23,7 @@ public class ConfigTest {
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
-
+//@@author
     @Test
     public void equalsMethod() {
         Config defaultConfig = new Config();
@@ -42,7 +42,7 @@ public class ConfigTest {
         Config defaultConfig = new Config();
         assertEquals(defaultConfig.hashCode(), defaultConfig.hashCode());
     }
-
+//@@author A0139248X
     @Test
     public void getEzDoNameMethod() {
         Config defaultConfig = new Config();

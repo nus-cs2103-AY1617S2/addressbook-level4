@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.logic.commands;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import seedu.ezdo.commons.util.MultipleIndexCommandUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
-//@@author A0139248X
+
 /**
  * Deletes a task identified using its last displayed index from ezDo.
  */
@@ -33,7 +34,11 @@ public class KillCommand extends Command {
         tasksToKill = new ArrayList<ReadOnlyTask>();
     }
 
-
+    /**
+     * Executes the kill command.
+     *
+     * @throws CommandException if any index is invalid or any task is not found in model
+     */
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -42,15 +47,12 @@ public class KillCommand extends Command {
         if (!MultipleIndexCommandUtil.isIndexValid(lastShownList, targetIndexes)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
         MultipleIndexCommandUtil.addReadOnlyTasksToList(tasksToKill, lastShownList, targetIndexes);
-
         try {
             model.killTasks(tasksToKill);
         } catch (TaskNotFoundException tnfe) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
-
         return new CommandResult(String.format(MESSAGE_KILL_TASK_SUCCESS, tasksToKill));
     }
 }

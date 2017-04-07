@@ -313,7 +313,7 @@ _**Finds tasks whose information contains any of the given keywords specified by
 
 #### Format:
 
-**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**
+**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [f/RECUR] [d/DUEDATE] [t/TAGNAME...]`**
 
 <br>
 
@@ -342,6 +342,8 @@ _**Finds tasks whose information contains any of the given keywords specified by
 **`find School p/1`** <br><br>
 *  Find tasks containing `milk` that start after `10/05/2017`:<br>
 **`find milk s/after 10/05/2017`** <br>
+*  Find tasks containing `lecture` with a `weekly` recurrence:<br>
+**`find lecture f/weekly`** <br>
 
 <br>
 

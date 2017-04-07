@@ -28,18 +28,24 @@ public interface Model {
 
     void sortTasks(SortCriteria sortCriteria, Boolean isSortedAscending);
   //@@author A0139248X
-    /** Deletes the given tasks.
+    /**
+     * Deletes the given tasks.
+     *
      * @throws TaskNotFoundException if any task is not found in ezDo
      */
     void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Adds a task.
+    /**
+     * Adds a task.
+     *
      * @throws DuplicateTaskException if the same task (all attributes and fields same) is already in ezDo
      * @throws DateException if the start date is after the due date
      */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
 
-    /** Checks the task and makes sure the dates are logical.
+    /**
+     * Checks the task and makes sure the dates are logical.
+     *
      * @throws DateException if the start date is after the due date.
      */
     void checkTaskDate(ReadOnlyTask task) throws DateException;
@@ -47,17 +53,23 @@ public interface Model {
     /** Toggles the tasks as done/undone. */
     boolean toggleTasksDone(ArrayList<Task> tasksToToggle);
 
-    /** Undo the previous undoable (add/edit/clear/kill/done) command
-     * @throws EmptyStackException if there are no commands to undo*/
+    /**
+     * Undo the previous undoable (add/edit/clear/kill/done) command
+     *
+     * @throws EmptyStackException if there are no commands to undo
+     */
     void undo() throws EmptyStackException;
 
-    /** Redo the previous undone command
-     * @throws EmptyStackException if there were no undone commands to redo*/
+    /**
+     * Redo the previous undone command
+     *
+     * @throws EmptyStackException if there were no undone commands to redo
+     */
     void redo() throws EmptyStackException;
 
     /** Update stacks when new command is executed*/
     void updateStacks();
-  //@@author A0139248X
+  //@@author
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
@@ -72,7 +84,7 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** Updates the filter of the filtered task list to show all undone tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/

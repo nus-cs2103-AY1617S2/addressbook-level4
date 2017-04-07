@@ -36,6 +36,9 @@ public class FindCommandTest extends EzDoGuiTest {
         assertFindResult("find p/2 d/april 14th 2016", td.daniel);
         assertFindResult("find p/2 d/14/04/2016", td.daniel);
         assertFindResult("find p/1", td.alice);
+        assertFindResult("find f/", td.alice, td.benson, td.carl, td.daniel, td.george);
+        assertFindResult("find f/daily", td.alice, td.george);
+        assertFindResult("find f/weekly", td.benson);
 
         //find all tasks with priority
         TestTask[] allTask = td.getTypicalTasks();

@@ -188,6 +188,9 @@ public class MainApp extends Application {
         this.stop();
     }
   //@@author A0139248X
+    /**
+     * Updates the sort criteria in the user prefs
+     */
     @Subscribe
     public void handleSortCriteriaChangedEvent(SortCriteriaChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

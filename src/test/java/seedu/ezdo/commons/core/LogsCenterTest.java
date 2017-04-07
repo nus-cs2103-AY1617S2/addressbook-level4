@@ -12,7 +12,6 @@ import mockit.MockUp;
 import mockit.Verifications;
 import mockit.integration.junit4.JMockit;
 
-//@@author A0139248X
 @RunWith(JMockit.class)
 public class LogsCenterTest {
 

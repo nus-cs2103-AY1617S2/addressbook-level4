@@ -49,50 +49,32 @@ public class EditCommandTest extends EzDoGuiTest {
     //@@author A0138907W
     @Test
     public void edit_eachFieldSpecified_success() throws Exception {
-
-        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/daily t/husband");
-
         int ezDoIndex = 1;
+        commandBox.runCommand("edit 1 Alson p/1 s/01/01/2017 12:00 d/08/09/2018 12:00 f/daily t/husband");
+        TestTask testTask = new TaskBuilder().withName("Alson").withPriority("3")
+            .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
+            .withTags("husband").build();
+
 
         String detailsToEdit = "p/3";
-
-        TestTask editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("01/01/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
-                .withTags("husband").build();
-
-        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        testTask = new TaskBuilder(testTask).withPriority("3").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
 
         detailsToEdit = "Alson s/11/11/2017 12:00";
-
-        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("08/09/2018 12:00").withRecur("daily")
-                .withTags("husband").build();
-
-        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        testTask = new TaskBuilder(testTask).withStartDate("11/11/2017 12:00").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
 
         detailsToEdit = "Alson d/01/01/2018 12:00";
-
-        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("daily")
-                .withTags("husband").build();
-
-        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        testTask = new TaskBuilder(testTask).withDueDate("01/01/2018 12:00").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
 
         detailsToEdit = "Alson f/";
-
-        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("")
-                .withTags("husband").build();
-
-        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        testTask = new TaskBuilder(testTask).withRecur("").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
 
         detailsToEdit = "Alson t/brother";
-
-        editedTask = new TaskBuilder().withName("Alson").withPriority("3")
-                .withStartDate("11/11/2017 12:00").withDueDate("01/01/2018 12:00").withRecur("")
-                .withTags("brother").build();
-
-        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, editedTask);
+        testTask = new TaskBuilder(testTask).withTags("brother").build();
+        assertEditSuccess(false, ezDoIndex, ezDoIndex, detailsToEdit, testTask);
     }
 
     //@@author

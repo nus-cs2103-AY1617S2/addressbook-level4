@@ -34,17 +34,16 @@ public class StartDateTest {
                                                                    // 30 days
         assertTrue(StartDate.isValidTaskDate("29/02/2003 20:21")); // leap year
     }
-  //@@author A0139248X
+
     @Test
     public void hashCode_equals() throws Exception {
         StartDate one = new StartDate("05.10.1977");
         assertEquals(one.hashCode(), one.hashCode());
     }
-
+    //@@author A0139248X
     @Test
     public void invalidDate_IllegalValueException() throws Exception {
         thrown.expect(IllegalValueException.class);
         StartDate date = new StartDate("fgasdf", true);
-        date.toString();
     }
 }
