@@ -31,6 +31,7 @@ public class TestTask implements ReadOnlyTask {
 
     public TestTask() {
         tags = new UniqueTagList();
+        status = false;
     }
 
     /**
@@ -69,6 +70,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
