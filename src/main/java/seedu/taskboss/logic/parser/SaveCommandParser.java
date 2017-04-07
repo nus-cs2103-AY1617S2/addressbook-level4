@@ -21,7 +21,7 @@ public class SaveCommandParser {
      */
     public Command parse(String args) {
 
-        if (args.trim() == null) {
+        if (args.trim().isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
         }
