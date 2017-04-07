@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.core.GuiSettings;
 import seedu.toluist.commons.core.LogsCenter;
-import seedu.toluist.commons.events.ui.ExitAppRequestEvent;
 import seedu.toluist.commons.util.FxViewUtil;
 import seedu.toluist.dispatcher.Dispatcher;
 import seedu.toluist.ui.view.CommandAutoCompleteView;
@@ -53,7 +52,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String COMMAND_SWITCH = "switch ";
     private static final String COMMAND_NAVIGATEHISTORY = "navigatehistory ";
     private static final String[] KEYCODES_NAVIGATEHISTORY = new String[] { "up", "down" };
-    private static final String[] KEYCODES_SWITCH = new String[] { "i", "t", "n", "c", "a" };
+    private static final String[] KEYCODES_SWITCH = new String[] { "1", "2", "3", "4", "5" };
 
     private static final String APPLICATION_CLASS = "com.apple.eawt.Application";
     private static final String METHOD_GET_APPLICATION = "getApplication";
@@ -177,8 +176,9 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    //@@author A0131125Y
     /**
-     * Configure ESC for exitting help
+     * Configure keys for exitting help
      */
     private void configureExitHelpKeyPress() {
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
@@ -187,7 +187,7 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    //@@author A0131125Y
+    //@@author
     /**
      * Get matching key code for a string
      * @param s string
@@ -195,17 +195,18 @@ public class MainWindow extends UiPart<Region> {
      */
     private KeyCode getKeyCode(String s) {
         switch (s) {
-        case "i": return KeyCode.I;
-        case "t": return KeyCode.T;
-        case "n": return KeyCode.N;
-        case "c": return KeyCode.C;
-        case "a": return KeyCode.A;
+        case "1": return KeyCode.DIGIT1;
+        case "2": return KeyCode.DIGIT2;
+        case "3": return KeyCode.DIGIT3;
+        case "4": return KeyCode.DIGIT4;
+        case "5": return KeyCode.DIGIT5;
         case "up": return KeyCode.UP;
         case "down": return KeyCode.DOWN;
         default: return KeyCode.ESCAPE;
         }
     }
 
+    //@@author A0131125Y
     private AnchorPane getTaskListPlaceholder() {
         return taskListPlaceholder;
     }
@@ -306,15 +307,5 @@ public class MainWindow extends UiPart<Region> {
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
-    }
-
-    /** ================ ACTION HANDLERS ================== **/
-
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        raise(new ExitAppRequestEvent());
     }
 }

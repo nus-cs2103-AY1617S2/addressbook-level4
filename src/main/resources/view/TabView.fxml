@@ -10,7 +10,7 @@
 
 <HBox fx:id="tabPane" alignment="CENTER" styleClass="tab" stylesheets="@../stylesheet/DefaultTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="tabShortcutLabel" alignment="CENTER" text="Label">
+      <Label fx:id="tabShortcutLabel" alignment="CENTER" text="">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

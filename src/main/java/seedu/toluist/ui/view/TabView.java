@@ -16,13 +16,12 @@ import seedu.toluist.ui.UiStore;
 public class TabView extends UiView {
     private static final String STYLE_CLASS_SELECTED_TAB = "selected";
     private static final String FXML = "TabView.fxml";
+    private static final String TAB_LABEL_TEMPLATE = "%s (%d/%d)";
 
     @FXML
     private HBox tabPane;
     @FXML
     private Label tabLabel;
-    @FXML
-    private Label tabShortcutLabel;
     private final TaskSwitchPredicate switchPredicate;
     private final boolean isSelected;
 
@@ -35,12 +34,11 @@ public class TabView extends UiView {
     @Override
     protected void viewDidMount() {
         UiStore uiStore = UiStore.getInstance();
-        String taskInfo = " ("
-                + uiStore.getTasks().stream()
-                         .filter(switchPredicate.getPredicate()).collect(Collectors.toList()).size()
-                + "/" + uiStore.getTasks().size() + ")";
-        tabShortcutLabel.setText(switchPredicate.getDisplayName().substring(0, 1));
-        tabLabel.setText(switchPredicate.getDisplayName().substring(1) + taskInfo);
+        int numberOfShownTasks = uiStore.getTasks().stream()
+                .filter(switchPredicate.getPredicate()).collect(Collectors.toList()).size();
+        int numberOfTotalTasks = uiStore.getTasks().size();
+        tabLabel.setText(String.format(TAB_LABEL_TEMPLATE, switchPredicate.getDisplayName(),
+                numberOfShownTasks, numberOfTotalTasks));
         if (isSelected) {
             FxViewUtil.addStyleClass(tabPane, STYLE_CLASS_SELECTED_TAB);
         }
