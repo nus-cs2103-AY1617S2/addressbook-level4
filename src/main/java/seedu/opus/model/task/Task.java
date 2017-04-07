@@ -108,7 +108,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public Optional<DateTime> getStartTime() {
         if (startTime != null && startTime.dateTime == null) {
-           return Optional.empty();
+            return Optional.empty();
         }
         return Optional.ofNullable(startTime);
     }
@@ -123,7 +123,7 @@ public class Task implements ReadOnlyTask {
     public Optional<DateTime> getEndTime() {
         if (endTime != null && endTime.dateTime == null) {
             return Optional.empty();
-         }
+        }
         return Optional.ofNullable(endTime);
     }
     //@@author
