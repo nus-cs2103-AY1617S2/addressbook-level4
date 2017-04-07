@@ -24,6 +24,7 @@ import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.ResetCommand;
 import seedu.task.logic.commands.RevertCommand;
 import seedu.task.logic.commands.SelectCommand;
+import seedu.task.logic.commands.ShowAliasCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.UnrevertCommand;
 import seedu.task.logic.commands.UseCommand;
@@ -91,6 +92,9 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
+        case ShowAliasCommand.COMMAND_WORD:
+            return new ShowAliasCommand();
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

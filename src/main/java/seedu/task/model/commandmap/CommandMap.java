@@ -120,7 +120,6 @@ public class CommandMap {
                 map.put((String) pair.getValue(), new ArrayList<String>());
             }
             map.get(pair.getValue()).add((String) pair.getKey());
-            it.remove();
         }
         return map;
     }
@@ -132,7 +131,6 @@ public class CommandMap {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             mapString += pair.getKey() + ": " + pair.getValue().toString() + "\n";
-            it.remove();
         }
         return mapString;
     }
