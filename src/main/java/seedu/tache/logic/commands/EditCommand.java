@@ -43,7 +43,7 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_INVALID_DATE_RANGE = "Start Date can not be before End Date";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start date can not be before end date";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
 
