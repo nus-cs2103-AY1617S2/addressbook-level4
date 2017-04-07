@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
@@ -115,16 +116,71 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
+    // @@ Author: A0144315N
+    /**
+     * Scrolls the list to the position of the task to be highlighted
+     */
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.targetIndex.charAt(0) == 'T') {
-            mainWindow.getTaskListPanel().scrollToToday(Integer.valueOf(event.targetIndex.substring(1)) - 1);
+            scrollToTodayTask(event);
         } else if (event.targetIndex.charAt(0) == 'F') {
-            mainWindow.getTaskListPanel().scrollToFuture(Integer.valueOf(event.targetIndex.substring(1)) - 1);
+            scrollToFutureTask(event);
         }
-
     }
+
+    /**
+     * Scrolls TodayTaskListView first to designated index followed by the outer
+     * ScrollPane
+     */
+    private void scrollToTodayTask(JumpToListRequestEvent event) {
+        int index = Integer.valueOf(event.targetIndex.substring(1)) - 1;
+        ScrollPane scrollPane = mainWindow.getTaskListPanel().getScrollPane();
+        TaskListPanel taskListPanel = mainWindow.getTaskListPanel();
+
+        // scroll the internal ListView
+        taskListPanel.scrollToToday(Integer.valueOf(index));
+
+        // scroll the outside scroll pane
+        // get combined height of today and future lists
+        double totalHeight = taskListPanel.getTodayTaskListPanel().getHeight()
+                + taskListPanel.getFutureTaskListPanel().getHeight() - scrollPane.getHeight();
+        // calculate the current scroll position of the internal list
+        double displayPosition = taskListPanel.rowHeight * index;
+        double vValue = displayPosition / totalHeight > 1.0d ? 0.0d : displayPosition / totalHeight;
+        scrollPane.setVvalue(vValue);
+
+        logger.info("ScrollPane position: totalHeight: " + totalHeight + "; innerHeight:" + displayPosition
+                + "; setVvalue:" + vValue);
+    }
+
+    /**
+     * Scrolls FutureTaskListView first to designated index followed by the
+     * outer ScrollPane
+     */
+    private void scrollToFutureTask(JumpToListRequestEvent event) {
+        int index = Integer.valueOf(event.targetIndex.substring(1)) - 1;
+        ScrollPane scrollPane = mainWindow.getTaskListPanel().getScrollPane();
+        TaskListPanel taskListPanel = mainWindow.getTaskListPanel();
+
+        // scroll the internal ListView
+        taskListPanel.scrollToFuture(Integer.valueOf(index));
+
+        // scroll the outside scroll pane
+        // get combined height of today and future lists
+        double totalHeight = taskListPanel.getTodayTaskListPanel().getHeight()
+                + taskListPanel.getFutureTaskListPanel().getHeight() - scrollPane.getHeight();
+        // calculate the current scroll position of the internal list
+        double displayPosition = taskListPanel.getTodayTaskListPanel().getHeight() + taskListPanel.rowPadding
+                + taskListPanel.rowHeight * index;
+        double vValue = displayPosition / totalHeight > 1.0d ? 1.0d : displayPosition / totalHeight;
+        scrollPane.setVvalue(vValue);
+
+        logger.info("ScrollPane position: totalHeight: " + totalHeight + "; innerHeight:" + displayPosition
+                + "; setVvalue:" + vValue);
+    }
+
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {

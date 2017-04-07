@@ -44,9 +44,9 @@ public class TaskListPanel extends UiPart<Region> {
     ObservableList<ReadOnlyTask> taskListFuture;
 
     // height of a row should be the same as the height of a TaskCard
-    final int rowHeight = 45;
+    public final int rowHeight = 48;
     // height of paddings after each TaskListView
-    final int rowPadding = 80;
+    public final int rowPadding = 80;
 
     // @@author A0144315N
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskListToday,
@@ -130,6 +130,14 @@ public class TaskListPanel extends UiPart<Region> {
 
     public TitledPane getFutureTaskListPanel() {
         return futureTaskListPanel;
+    }
+
+    public ListView<ReadOnlyTask> getTodayTaskListView() {
+        return todayTaskListView;
+    }
+
+    public ListView<ReadOnlyTask> getFutureTaskListView() {
+        return futureTaskListView;
     }
 
     public ScrollPane getScrollPane() {

@@ -110,8 +110,8 @@ public class TypicalTasks {
     // @author A0093999Y
     public Task[] getTypicalTasks() {
         return new Task[] { todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday,
-                futureListFloat, futureListDeadline, futureListEvent, completedListFloat, completedListDeadline,
-                completedListEvent };
+            futureListFloat, futureListDeadline, futureListEvent, completedListFloat, completedListDeadline,
+            completedListEvent };
     }
 
     public Task[] getTodayListTasks() {

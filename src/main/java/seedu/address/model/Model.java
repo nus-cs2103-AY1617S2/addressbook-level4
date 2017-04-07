@@ -40,7 +40,7 @@ public interface Model {
 
     /**
      * Clears existing backing model and replaces with the provided new data.
-     * 
+     *
      * @param clearPrevTasks
      *            TODO
      */
