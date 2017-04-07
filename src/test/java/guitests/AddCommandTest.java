@@ -7,6 +7,8 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import typetask.commons.core.Messages;
 import typetask.commons.exceptions.IllegalValueException;
+import typetask.logic.commands.AddCommand;
+import typetask.model.task.Name;
 import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 import typetask.testutil.TestUtil;
@@ -37,9 +39,42 @@ public class AddCommandTest extends AddressBookGuiTest {
     }
 
     @Test
+    public void addInvalidEvent_fail() {
+        commandBox.runCommand("add invalidEvent from: today");
+        assertResultMessage(String.format
+                (Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+    @Test
+    public void addTask_success() throws IllegalValueException {
+        commandBox.runCommand("add success p/Low");
+        TestTask expectedResult = new TaskBuilder().withName("success")
+                .withDate("").withEndDate("").withCompleted(false).withPriority("Low").build();
+        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, expectedResult));
+    }
+    @Test
+    public void addTaskWithInvalidName_fail() {
+        commandBox.runCommand("add ^_^");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+    }
+    @Test
     public void addTaskWithEndDateBeforeStartDate_fail() {
         commandBox.runCommand("add failEvent from: today to: yesterday");
         assertResultMessage(Messages.MESSAGE_INVALID_START_AND_END_DATE);
+    }
+    @Test
+    public void addTaskWithInvalidStartDate_fail() {
+        commandBox.runCommand("add failEvent from: gg to: yesterday");
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE);
+    }
+    @Test
+    public void addTaskWithInvalidEndDate_fail() {
+        commandBox.runCommand("add failEvent from: today to: gg");
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE);
+    }
+    @Test
+    public void addTaskWithInvalidTime_fail() {
+        commandBox.runCommand("add failEvent @lol");
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
     }
     @Test
     public void addTaskWithInvalidDate_fail() {
@@ -59,7 +94,7 @@ public class AddCommandTest extends AddressBookGuiTest {
     @Test
     public void addDeadlineTaskwithDateWithTime_success() throws IllegalValueException {
         TestTask[] currentList = td.getTypicalTasks();
-        commandBox.runCommand("add deadline @ 10 oct 1993 4pm");
+        commandBox.runCommand("add deadline @ 10 oct 1993 4pm p/Low");
         TestTask deadlineTask = new TaskBuilder().withName("deadline")
                 .withDate("").withEndDate("Sun Oct 10 1993 16:00:00")
                 .withCompleted(false).withPriority("Low").build();
