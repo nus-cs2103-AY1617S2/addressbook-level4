@@ -54,155 +54,155 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
-	config = initConfig(getApplicationParameter("config"));
-	storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        config = initConfig(getApplicationParameter("config"));
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
-	userPrefs = initPrefs(config);
+        userPrefs = initPrefs(config);
 
-	initLogging(config);
+        initLogging(config);
 
-	model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs);
 
-	logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage);
 
-	ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs);
 
-	initEventsCenter();
+        initEventsCenter();
     }
 
     private String getApplicationParameter(String parameterName) {
-	Map<String, String> applicationParameters = getParameters().getNamed();
-	return applicationParameters.get(parameterName);
+        Map<String, String> applicationParameters = getParameters().getNamed();
+        return applicationParameters.get(parameterName);
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-	Optional<ReadOnlyTaskManager> taskManagerOptional;
-	ReadOnlyTaskManager initialData;
-	try {
-	    taskManagerOptional = storage.readTaskManager();
-	    if (!taskManagerOptional.isPresent()) {
-		logger.info("Data file not found. Will be starting with a sample Task Manager");
-	    }
-	    initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
-	} catch (DataConversionException e) {
-	    logger.warning("Data file not in the correct format. Will be starting with an empty Task Manager");
-	    initialData = new TaskManager();
-	} catch (IOException e) {
-	    logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
-	    initialData = new TaskManager();
-	}
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
+        try {
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample Task Manager");
+            }
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Task Manager");
+            initialData = new TaskManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
+            initialData = new TaskManager();
+        }
 
-	return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
-	LogsCenter.init(config);
+        LogsCenter.init(config);
     }
 
     protected Config initConfig(String configFilePath) {
-	Config initializedConfig;
-	String configFilePathUsed;
+        Config initializedConfig;
+        String configFilePathUsed;
 
-	configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
-	if (configFilePath != null) {
-	    logger.info("Custom Config file specified " + configFilePath);
-	    configFilePathUsed = configFilePath;
-	}
+        if (configFilePath != null) {
+            logger.info("Custom Config file specified " + configFilePath);
+            configFilePathUsed = configFilePath;
+        }
 
-	logger.info("Using config file : " + configFilePathUsed);
+        logger.info("Using config file : " + configFilePathUsed);
 
-	try {
-	    Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-	    initializedConfig = configOptional.orElse(new Config());
-	} catch (DataConversionException e) {
-	    logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
-		    + "Using default config properties");
-	    initializedConfig = new Config();
-	}
+        try {
+            Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
+            initializedConfig = configOptional.orElse(new Config());
+        } catch (DataConversionException e) {
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
+            initializedConfig = new Config();
+        }
 
-	// Update config file in case it was missing to begin with or there are
-	// new/unused fields
-	try {
-	    ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
-	} catch (IOException e) {
-	    logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-	}
-	return initializedConfig;
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
+        try {
+            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+        return initializedConfig;
     }
 
     protected UserPrefs initPrefs(Config config) {
-	assert config != null;
+        assert config != null;
 
-	String prefsFilePath = config.getUserPrefsFilePath();
-	logger.info("Using prefs file : " + prefsFilePath);
+        String prefsFilePath = config.getUserPrefsFilePath();
+        logger.info("Using prefs file : " + prefsFilePath);
 
-	UserPrefs initializedPrefs;
-	try {
-	    Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-	    initializedPrefs = prefsOptional.orElse(new UserPrefs());
-	} catch (DataConversionException e) {
-	    logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
-		    + "Using default user prefs");
-	    initializedPrefs = new UserPrefs();
-	} catch (IOException e) {
-	    logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
-	    initializedPrefs = new UserPrefs();
-	}
+        UserPrefs initializedPrefs;
+        try {
+            Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
+            initializedPrefs = prefsOptional.orElse(new UserPrefs());
+        } catch (DataConversionException e) {
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
+            initializedPrefs = new UserPrefs();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
+            initializedPrefs = new UserPrefs();
+        }
 
-	// Update prefs file in case it was missing to begin with or there are
-	// new/unused fields
-	try {
-	    storage.saveUserPrefs(initializedPrefs);
-	} catch (IOException e) {
-	    logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-	}
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
+        try {
+            storage.saveUserPrefs(initializedPrefs);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
 
-	return initializedPrefs;
+        return initializedPrefs;
     }
 
     private void initEventsCenter() {
-	EventsCenter.getInstance().registerHandler(this);
+        EventsCenter.getInstance().registerHandler(this);
     }
 
     @Override
     public void start(Stage primaryStage) {
-	logger.info("Starting Task Manager " + MainApp.VERSION);
-	ui.start(primaryStage);
+        logger.info("Starting Task Manager " + MainApp.VERSION);
+        ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-	logger.info("============================ [ Stopping Task Manager ] =============================");
-	ui.stop();
-	try {
-	    storage.saveUserPrefs(userPrefs);
-	} catch (IOException e) {
-	    logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
-	}
-	Platform.exit();
-	System.exit(0);
+        logger.info("============================ [ Stopping Task Manager ] =============================");
+        ui.stop();
+        try {
+            storage.saveUserPrefs(userPrefs);
+        } catch (IOException e) {
+            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
+        Platform.exit();
+        System.exit(0);
     }
 
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-	logger.info(LogsCenter.getEventHandlingLogMessage(event));
-	this.stop();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.stop();
     }
 
     // @@author A0163845X
     @Subscribe
     public void handleChangePathNameEvent(ChangePathNameEvent event) {
-	System.out.println("working cpne");
-	storage.setPathName(event.getPathName());
-	FileNameHandler.setFileName(event.getPathName());
-	try {
-	    storage.saveTaskManager(model.getTaskManager());
-	} catch (IOException e) {
-	    System.out.println("Unexpected IOE in main app");
-	    storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
-	    FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
-	}
+        System.out.println("working cpne");
+        storage.setPathName(event.getPathName());
+        FileNameHandler.setFileName(event.getPathName());
+        try {
+            storage.saveTaskManager(model.getTaskManager());
+        } catch (IOException e) {
+            System.out.println("Unexpected IOE in main app");
+            storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
+            FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
+        }
     }
 
     // @@author
@@ -210,26 +210,26 @@ public class MainApp extends Application {
     // @@author A0163845X
     @Subscribe
     public void handleLoadDataEvent(LoadDataEvent event) {
-	System.out.println("working lde");
-	for (int i = 0; i < 4; i++) {
-	    try {
-		StorageManager temp = new StorageManager(event.getPathName(), config.getUserPrefsFilePath());
-		System.out.println(temp.equals(storage));
-		if (!temp.readTaskManager().isPresent()) {
-		    throw new Exception();
-		}
-		model.setTaskManager(temp.readTaskManager());
-		FileNameHandler.setFileName(event.getPathName());
-	    } catch (Exception e) {
-		System.out.println("Unexpected exception");
-		storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
-		FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
-	    }
-	}
+        System.out.println("working lde");
+        for (int i = 0; i < 4; i++) {
+            try {
+                StorageManager temp = new StorageManager(event.getPathName(), config.getUserPrefsFilePath());
+                System.out.println(temp.equals(storage));
+                if (!temp.readTaskManager().isPresent()) {
+                    throw new Exception();
+                }
+                model.setTaskManager(temp.readTaskManager());
+                FileNameHandler.setFileName(event.getPathName());
+            } catch (Exception e) {
+                System.out.println("Unexpected exception");
+                storage.setPathName(FileNameHandler.DEFAULT_FILEPATH);
+                FileNameHandler.setFileName(FileNameHandler.DEFAULT_FILEPATH);
+            }
+        }
     }
     // @@author
 
     public static void main(String[] args) {
-	launch(args);
+        launch(args);
     }
 }
