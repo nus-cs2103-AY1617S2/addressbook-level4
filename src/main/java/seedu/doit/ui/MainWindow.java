@@ -22,8 +22,11 @@ import seedu.doit.commons.events.ui.ExitAppRequestEvent;
 import seedu.doit.commons.events.ui.NewResultAvailableEvent;
 import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.Logic;
+import seedu.doit.logic.commands.RedoCommand;
+import seedu.doit.logic.commands.UndoCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.UserPrefs;
+
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
  * and space where other JavaFX elements can be placed.
@@ -32,14 +35,13 @@ public class MainWindow extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String ICON = "/images/task_manager.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final String UNDO_COMMAND = "undo";
-    private static final String REDO_COMMAND = "redo";
+    private static final String UNDO_COMMAND = UndoCommand.COMMAND_WORD;
+    private static final String REDO_COMMAND = RedoCommand.COMMAND_WORD;
     private static final int MIN_HEIGHT = 650;
     private static final int MIN_WIDTH = 1100;
 
     private Stage primaryStage;
     private Logic logic;
-
 
     // Independent Ui parts residing in this Ui container
 
@@ -97,24 +99,34 @@ public class MainWindow extends UiPart<Region> {
         this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             KeyCombination undo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
             KeyCombination redo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+
             @Override
             public void handle(KeyEvent evt) {
+                Boolean hasCommandException = false;
                 if (this.undo.match(evt)) {
-                        // handle command failure
-                        try {
-                            MainWindow.this.logic.execute(UNDO_COMMAND);
+                    // handle command failure
+                    try {
+                        MainWindow.this.logic.execute(UNDO_COMMAND);
                     } catch (CommandException e) {
                         MainWindow.this.logger.info("Invalid command: " + UNDO_COMMAND);
                         raise(new NewResultAvailableEvent(e.getMessage()));
+                        hasCommandException = true;
+                    }
+                    if (!hasCommandException) {
+                        raise(new NewResultAvailableEvent(UndoCommand.MESSAGE_SUCCESS));
                     }
                 }
                 if (this.redo.match(evt)) {
-                           // handle command failure
-                        try {
-                            MainWindow.this.logic.execute(REDO_COMMAND);
+                    // handle command failure
+                    try {
+                        MainWindow.this.logic.execute(REDO_COMMAND);
                     } catch (CommandException e) {
                         MainWindow.this.logger.info("Invalid command: " + REDO_COMMAND);
                         raise(new NewResultAvailableEvent(e.getMessage()));
+                        hasCommandException = true;
+                    }
+                    if (!hasCommandException) {
+                        raise(new NewResultAvailableEvent(RedoCommand.MESSAGE_SUCCESS));
                     }
                 }
             }
@@ -146,13 +158,14 @@ public class MainWindow extends UiPart<Region> {
          * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+            if ((event.getTarget() instanceof TextInputControl) && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
         });
     }
-  //@@author A0160076L
+
+    // @@author A0160076L
     protected void fillInnerParts() {
         this.taskListPanel = new TaskListPanel(getTaskListPlaceholder(), this.logic.getFilteredTaskList());
         this.eventListPanel = new EventListPanel(getEventListPlaceholder(), this.logic.getFilteredTaskList());
@@ -161,7 +174,7 @@ public class MainWindow extends UiPart<Region> {
         new StatusBarFooter(getStatusbarPlaceholder(), this.config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), this.logic);
     }
-    //@@author
+    // @@author
 
     private AnchorPane getCommandBoxPlaceholder() {
         return this.commandBoxPlaceholder;
@@ -178,7 +191,8 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return this.taskListPanelPlaceholder;
     }
-    //@@author: A0160076L
+
+    // @@author: A0160076L
     private AnchorPane getEventListPlaceholder() {
         return this.eventListPanelPlaceholder;
     }
@@ -187,7 +201,8 @@ public class MainWindow extends UiPart<Region> {
 
         return this.floatingListPanelPlaceholder;
     }
-    //@@author
+
+    // @@author
     protected void hide() {
         this.primaryStage.hide();
     }
@@ -252,10 +267,12 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-    //@@author A0160076L
+
+    // @@author A0160076L
     public EventListPanel getEventListPanel() {
         return this.eventListPanel;
     }
+
     public FloatingTaskListPanel getFloatingListPanel() {
         return this.fListPanel;
     }
@@ -266,24 +283,27 @@ public class MainWindow extends UiPart<Region> {
      */
     public void scrollTo(int index) {
         if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+                && task.hasEndTime() /* && !task.getIsDone() */).size()) {
             this.taskListPanel.scrollTo(index);
             this.eventListPanel.clearSelection();
             this.fListPanel.clearSelection();
-        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                && task.hasEndTime()).size() + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+        } else if (index < (this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
+                .size()
+                + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                        && task.hasEndTime() /* && !task.getIsDone() */).size())) {
             this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                    && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+                    && task.hasEndTime() /* && !task.getIsDone() */).size());
             this.taskListPanel.clearSelection();
             this.fListPanel.clearSelection();
         } else {
-            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                    && task.hasEndTime()).size() - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                            && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.fListPanel.scrollTo(index
+                    - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
+                            .size()
+                    - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
+                            && task.hasEndTime() /* && !task.getIsDone() */).size());
             this.eventListPanel.clearSelection();
             this.taskListPanel.clearSelection();
         }
     }
-    //@@author
+    // @@author
 }
