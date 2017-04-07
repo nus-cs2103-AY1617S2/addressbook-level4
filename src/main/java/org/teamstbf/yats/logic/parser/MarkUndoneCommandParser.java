@@ -31,7 +31,9 @@ public class MarkUndoneCommandParser {
             if (ParserUtil.isAllIntegers(markIndexArr)) {
                 markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
                 for (String element : markIndexArr) {
-                    markStack.push(Integer.valueOf(element) - 1);
+                    if (!markStack.contains(Integer.valueOf(element) - 1)) {
+                        markStack.push(Integer.valueOf(element) - 1);
+                    }
                 }
                 return new BatchUnmarkDoneCommand(markStack);
             } else if (!ParserUtil.isAllIntegers(markIndexArr)) {

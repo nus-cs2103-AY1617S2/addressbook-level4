@@ -1,10 +1,16 @@
 package org.teamstbf.yats.logic.parser;
 
+import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.teamstbf.yats.commons.exceptions.IllegalValueException;
+import org.teamstbf.yats.logic.commands.AddCommand;
 import org.teamstbf.yats.logic.commands.Command;
+import org.teamstbf.yats.logic.commands.IncorrectCommand;
 import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.logic.commands.ListCommandDeadline;
 import org.teamstbf.yats.logic.commands.ListCommandDone;
@@ -35,22 +41,26 @@ public class ListCommandParser {
      * suffix for execution.
      */
     public Command parse(String args) {
-        if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
-            String[] commandTextArray = stringTokenizer(args);
-            switch (commandTextArray[LIST_COMMAND_SUFFIX]) {
-            case (ListCommand.COMMAND_WORD_SUFFIX_END):
-                return new ListCommandEndTime(internalParser(args, COMMAND_EXTENSION_END, KEYWORD_PERIOD));
-            case (ListCommand.COMMAND_WORD_SUFFIX_START):
-                return new ListCommandStartTime(internalParser(args, COMMAND_EXTENSION_START, KEYWORD_PERIOD));
-            case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
-                return new ListCommandDeadline(internalParser(args, COMMAND_EXTENSION_DEADLINE, KEYWORD_PERIOD));
-            case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
-                return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION, KEYWORD_PERIOD));
-            case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
-                return new ListCommandTag(internalParser(args, COMMAND_EXTENSION_TAG, KEYWORD_PERIOD));
-            }
-        } else if (args.contains(ListCommand.COMMAND_WORD_SUFFIX_DONE)) {
-            return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE, KEYWORD_DONE));
+        try {
+            if (args.contains(ListCommand.COMMAND_WORD_EXTENTION)) {
+                String[] commandTextArray = stringTokenizer(args);
+                switch (commandTextArray[LIST_COMMAND_SUFFIX]) {
+                case (ListCommand.COMMAND_WORD_SUFFIX_END):
+                    return new ListCommandEndTime(internalParser(args, COMMAND_EXTENSION_END, KEYWORD_PERIOD));
+                case (ListCommand.COMMAND_WORD_SUFFIX_START):
+                    return new ListCommandStartTime(internalParser(args, COMMAND_EXTENSION_START, KEYWORD_PERIOD));
+                case (ListCommand.COMMAND_WORD_SUFFIX_DEADLINE):
+                    return new ListCommandDeadline(internalParser(args, COMMAND_EXTENSION_DEADLINE, KEYWORD_PERIOD));
+                case (ListCommand.COMMAND_WORD_SUFFIX_LOCATION):
+                    return new ListCommandLocation(internalParser(args, COMMAND_EXTENSION_LOCATION, KEYWORD_PERIOD));
+                case (ListCommand.COMMAND_WORD_SUFFIX_TAG):
+                    return new ListCommandTag(internalParser(args, COMMAND_EXTENSION_TAG, KEYWORD_PERIOD));
+                }
+            } else if (args.contains(ListCommand.COMMAND_WORD_SUFFIX_DONE)) {
+                return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE, KEYWORD_DONE));
+            }        
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         return new ListCommand();
     }

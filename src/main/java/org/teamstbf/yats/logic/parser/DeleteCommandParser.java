@@ -29,7 +29,9 @@ public class DeleteCommandParser {
             if (ParserUtil.isAllIntegers(deleteIndexArr)) {
                 deleteIndexArr = ParserUtil.sortIndexArr(deleteIndexArr);
                 for (String element : deleteIndexArr) {
-                    deleteStack.push(Integer.valueOf(element));
+                    if (!deleteStack.contains(Integer.valueOf(element))) {
+                        deleteStack.push(Integer.valueOf(element));
+                    }
                 }
                 return new BatchDeleteCommand(deleteStack);
             } else if (!ParserUtil.isAllIntegers(deleteIndexArr)) {
