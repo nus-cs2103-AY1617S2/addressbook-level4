@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.logic.commands;
 
 import java.io.File;
@@ -8,7 +9,7 @@ import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.exceptions.IllegalValueException;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
-//@@author A0139248X
+
 /**
  * Changes the save location of ezDo.
  */
@@ -31,7 +32,8 @@ public class SaveCommand extends Command {
 
     /**
      * Creates a SaveCommand using raw values.
-     * @throws IllegalValueException if the directory path is invalid
+     *
+     * @throws IllegalValueException if the directory path does not exist
      */
     public SaveCommand(String path) throws IllegalValueException {
         assert path != null;
@@ -42,6 +44,11 @@ public class SaveCommand extends Command {
         directoryPath = path + DATA_FILE_NAME;
     }
 
+    /**
+     * Executes the save command.
+     *
+     * @throws CommandException if the directory path is invalid
+     */
     @Override
     public CommandResult execute() throws CommandException {
         assert directoryPath != null;
