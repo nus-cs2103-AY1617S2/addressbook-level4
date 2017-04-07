@@ -15,7 +15,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.UserPrefs;
-import seedu.address.ui.ThemeManager;
+import seedu.address.ui.ThemeWindow;
 
 public class JsonUserPrefsStorageTest {
 
@@ -62,7 +62,7 @@ public class JsonUserPrefsStorageTest {
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
         UserPrefs expected = new UserPrefs();
-        expected.setGuiSettings(1000, 500, 300, 100, ThemeManager.DEFAULT_STYLESHEET, null);
+        expected.setGuiSettings(1000, 500, 300, 100, ThemeWindow.DEFAULT_STYLESHEET, null);
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
@@ -76,7 +76,7 @@ public class JsonUserPrefsStorageTest {
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         UserPrefs expected = new UserPrefs();
-        expected.setGuiSettings(1000, 500, 300, 100, ThemeManager.DEFAULT_STYLESHEET, null);
+        expected.setGuiSettings(1000, 500, 300, 100, ThemeWindow.DEFAULT_STYLESHEET, null);
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
 
         assertEquals(expected, actual);
@@ -103,7 +103,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(1200, 200, 0, 2, ThemeManager.DEFAULT_STYLESHEET, null);
+        original.setGuiSettings(1200, 200, 0, 2, ThemeWindow.DEFAULT_STYLESHEET, null);
 
         String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -114,7 +114,7 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
 
         //Try saving when the file exists
-        original.setGuiSettings(5, 5, 5, 5, ThemeManager.DEFAULT_STYLESHEET, null);
+        original.setGuiSettings(5, 5, 5, 5, ThemeWindow.DEFAULT_STYLESHEET, null);
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);

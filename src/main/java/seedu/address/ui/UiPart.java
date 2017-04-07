@@ -39,7 +39,7 @@ public abstract class UiPart<T> {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
-        setStyleSheet(ThemeManager.DEFAULT_STYLESHEET);
+        setStyleSheet(ThemeWindow.DEFAULT_STYLESHEET);
     }
 
     /**
