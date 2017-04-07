@@ -25,37 +25,37 @@ public class Title {
      *             if given name string is invalid.
      */
     public Title(String name) throws IllegalValueException {
-	assert name != null;
-	String trimmedName = name.trim();
-	if (!isValidName(trimmedName)) {
-	    throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-	}
-	this.fullName = trimmedName;
+        assert name != null;
+        String trimmedName = name.trim();
+        if (!isValidName(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        }
+        this.fullName = trimmedName;
     }
 
     /**
      * Returns true if a given string is a valid person name.
      */
     public static boolean isValidName(String test) {
-	return test.matches(NAME_VALIDATION_REGEX);
+        return test.matches(NAME_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-	return fullName;
+        return fullName;
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof Title // instanceof handles nulls
-			&& this.fullName.equals(((Title) other).fullName)); // state
-									    // check
+        return other == this // short circuit if same object
+                || (other instanceof Title // instanceof handles nulls
+                        && this.fullName.equals(((Title) other).fullName)); // state
+        // check
     }
 
     @Override
     public int hashCode() {
-	return fullName.hashCode();
+        return fullName.hashCode();
     }
 
 }

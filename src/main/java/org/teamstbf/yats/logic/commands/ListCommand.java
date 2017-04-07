@@ -16,16 +16,16 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD_SUFFIX_TAG = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-	    + "by the index number used in the last task listing. "
-	    + "Existing values will be overwritten by the input values.\n"
-	    + "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
-	    + "Example: " + COMMAND_WORD + " 1 s/10:00am,10/10/2017 e/5:00pm,10/10/2017 d/lots of work to do t/school";
+            + "by the index number used in the last task listing. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) [s/START_TIME] [e/END_TIME] [d/DESCRIPTION] [t/TAGS]...\n"
+            + "Example: " + COMMAND_WORD + " 1 s/10:00am,10/10/2017 e/5:00pm,10/10/2017 d/lots of work to do t/school";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
     @Override
     public CommandResult execute() {
-	model.updateFilteredListToShowAll();
-	return new CommandResult(MESSAGE_SUCCESS);
+        model.updateFilteredListToShowAll();
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

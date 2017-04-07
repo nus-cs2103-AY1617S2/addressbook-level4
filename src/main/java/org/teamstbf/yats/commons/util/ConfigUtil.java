@@ -12,11 +12,11 @@ import org.teamstbf.yats.commons.exceptions.DataConversionException;
 public class ConfigUtil {
 
     public static Optional<Config> readConfig(String configFilePath) throws DataConversionException {
-	return JsonUtil.readJsonFile(configFilePath, Config.class);
+        return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
 
     public static void saveConfig(Config config, String configFilePath) throws IOException {
-	JsonUtil.saveJsonFile(config, configFilePath);
+        JsonUtil.saveJsonFile(config, configFilePath);
     }
 
 }

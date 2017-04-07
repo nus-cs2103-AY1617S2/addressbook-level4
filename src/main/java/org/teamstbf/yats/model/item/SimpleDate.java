@@ -23,37 +23,37 @@ public class SimpleDate {
      *             if given phone string is invalid.
      */
     public SimpleDate(String deadline) throws IllegalValueException {
-	assert deadline != null;
-	String trimmedDeadline = deadline.trim();
-	if (!isValidDeadline(trimmedDeadline)) {
-	    throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
-	}
-	this.value = trimmedDeadline;
+        assert deadline != null;
+        String trimmedDeadline = deadline.trim();
+        if (!isValidDeadline(trimmedDeadline)) {
+            throw new IllegalValueException(MESSAGE_DEADLINE_CONSTRAINTS);
+        }
+        this.value = trimmedDeadline;
     }
 
     /**
      * Returns true if a given string is a valid task date.
      */
     public static boolean isValidDeadline(String test) {
-	return test.matches(DEADLINE_VALIDATION_REGEX);
+        return test.matches(DEADLINE_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-	return value;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof SimpleDate // instanceof handles nulls
-			&& this.value.equals(((SimpleDate) other).value)); // state
-								     // check
+        return other == this // short circuit if same object
+                || (other instanceof SimpleDate // instanceof handles nulls
+                        && this.value.equals(((SimpleDate) other).value)); // state
+        // check
     }
 
     @Override
     public int hashCode() {
-	return value.hashCode();
+        return value.hashCode();
     }
 
 }

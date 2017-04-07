@@ -10,12 +10,12 @@ public class JumpToListRequestEvent extends BaseEvent {
     public final int targetIndex;
 
     public JumpToListRequestEvent(int targetIndex) {
-	this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public String toString() {
-	return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName();
     }
 
 }

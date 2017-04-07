@@ -17,56 +17,56 @@ public class GuiSettings implements Serializable {
     private Point windowCoordinates;
 
     public GuiSettings() {
-	this.windowWidth = DEFAULT_WIDTH;
-	this.windowHeight = DEFAULT_HEIGHT;
-	this.windowCoordinates = null; // null represent no coordinates
+        this.windowWidth = DEFAULT_WIDTH;
+        this.windowHeight = DEFAULT_HEIGHT;
+        this.windowCoordinates = null; // null represent no coordinates
     }
 
     public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition) {
-	this.windowWidth = windowWidth;
-	this.windowHeight = windowHeight;
-	this.windowCoordinates = new Point(xPosition, yPosition);
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.windowCoordinates = new Point(xPosition, yPosition);
     }
 
     public Double getWindowWidth() {
-	return windowWidth;
+        return windowWidth;
     }
 
     public Double getWindowHeight() {
-	return windowHeight;
+        return windowHeight;
     }
 
     public Point getWindowCoordinates() {
-	return windowCoordinates;
+        return windowCoordinates;
     }
 
     @Override
     public boolean equals(Object other) {
-	if (other == this) {
-	    return true;
-	}
-	if (!(other instanceof GuiSettings)) { // this handles null as well.
-	    return false;
-	}
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GuiSettings)) { // this handles null as well.
+            return false;
+        }
 
-	GuiSettings o = (GuiSettings) other;
+        GuiSettings o = (GuiSettings) other;
 
-	return Objects.equals(windowWidth, o.windowWidth) && Objects.equals(windowHeight, o.windowHeight)
-		&& Objects.equals(windowCoordinates.x, o.windowCoordinates.x)
-		&& Objects.equals(windowCoordinates.y, o.windowCoordinates.y);
+        return Objects.equals(windowWidth, o.windowWidth) && Objects.equals(windowHeight, o.windowHeight)
+                && Objects.equals(windowCoordinates.x, o.windowCoordinates.x)
+                && Objects.equals(windowCoordinates.y, o.windowCoordinates.y);
     }
 
     @Override
     public int hashCode() {
-	return Objects.hash(windowWidth, windowHeight, windowCoordinates);
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates);
     }
 
     @Override
     public String toString() {
-	StringBuilder sb = new StringBuilder();
-	sb.append("Width : " + windowWidth + "\n");
-	sb.append("Height : " + windowHeight + "\n");
-	sb.append("Position : " + windowCoordinates);
-	return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Width : " + windowWidth + "\n");
+        sb.append("Height : " + windowHeight + "\n");
+        sb.append("Position : " + windowCoordinates);
+        return sb.toString();
     }
 }

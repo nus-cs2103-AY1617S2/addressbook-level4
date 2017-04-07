@@ -137,7 +137,7 @@ public interface Model {
      * Method to check if the redo stack is empty - nothing to redo
      */
     void scheduleEvent(Event event);
-    
+
     /**
      * Saves an image of the previous state of the TaskManager for the undo
      * command - also clears the redo stack images because once the state is

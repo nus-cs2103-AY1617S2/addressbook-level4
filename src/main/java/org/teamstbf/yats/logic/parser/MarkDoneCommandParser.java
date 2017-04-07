@@ -25,26 +25,26 @@ public class MarkDoneCommandParser {
      */
     public Command parse(String args) {
 
-	String[] markIndexArr = ParserUtil.stringTokenizer(args);
-	if (markIndexArr.length > 1) {
-	    if (ParserUtil.isAllIntegers(markIndexArr)) {
-		markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
-		for (String element : markIndexArr) {
-		    markStack.push(Integer.valueOf(element) - 1);
-		}
-		return new BatchMarkDoneCommand(markStack);
-	    } else if (!ParserUtil.isAllIntegers(markIndexArr)) {
-		return new IncorrectCommand(
-			String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
-	    }
-	}
+        String[] markIndexArr = ParserUtil.stringTokenizer(args);
+        if (markIndexArr.length > 1) {
+            if (ParserUtil.isAllIntegers(markIndexArr)) {
+                markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
+                for (String element : markIndexArr) {
+                    markStack.push(Integer.valueOf(element) - 1);
+                }
+                return new BatchMarkDoneCommand(markStack);
+            } else if (!ParserUtil.isAllIntegers(markIndexArr)) {
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
+            }
+        }
 
-	Optional<Integer> index = ParserUtil.parseIndex(args);
-	if (!index.isPresent()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
-	}
+        Optional<Integer> index = ParserUtil.parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
+        }
 
-	return new MarkDoneCommand(index.get());
+        return new MarkDoneCommand(index.get());
     }
 
 }

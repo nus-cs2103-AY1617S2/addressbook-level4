@@ -34,34 +34,34 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
 
     public TaskCard(ReadOnlyEvent task, int displayedIndex, String FXML) {
-	super(FXML);
-	name.setText(task.getTitle().fullName);
-	id.setText(displayedIndex + ". ");
-	loc.setText(task.getLocation().value);
-	description.setText(task.getDescription().value);
-	if (task.isRecurring()) {
-	    startTime.setText(task.getRecurrence().getLatestUndoneString());
-	    endTime.setText(task.getRecurrence().getPeriodicity());
-	    deadline.setText("");
-	    //TODO show next undone occurence? show start date together?
-	} else {
-	    if (task.hasStartEndTime()) {
-	        startTime.setText(task.getStartTime().toString() + " - ");
-	        endTime.setText(task.getEndTime().toString());
-	    } else {
-	        startTime.setText("");
-	        endTime.setText("");
-	    }
-	    if (task.hasDeadline()) {
-	        deadline.setText(" by " + task.getDeadline().toString());
-	    } else {
-	        deadline.setText("");
-	    }
-	}
-	initTags(task);
+        super(FXML);
+        name.setText(task.getTitle().fullName);
+        id.setText(displayedIndex + ". ");
+        loc.setText(task.getLocation().value);
+        description.setText(task.getDescription().value);
+        if (task.isRecurring()) {
+            startTime.setText(task.getRecurrence().getLatestUndoneString());
+            endTime.setText(task.getRecurrence().getPeriodicity());
+            deadline.setText("");
+            // TODO show next undone occurence? show start date together?
+        } else {
+            if (task.hasStartEndTime()) {
+                startTime.setText(task.getStartTime().toString() + " - ");
+                endTime.setText(task.getEndTime().toString());
+            } else {
+                startTime.setText("");
+                endTime.setText("");
+            }
+            if (task.hasDeadline()) {
+                deadline.setText(" by " + task.getDeadline().toString());
+            } else {
+                deadline.setText("");
+            }
+        }
+        initTags(task);
     }
 
     private void initTags(ReadOnlyEvent person) {
-	person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

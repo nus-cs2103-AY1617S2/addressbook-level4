@@ -10,6 +10,6 @@ public class IllegalValueException extends Exception {
      *            constraint(s)
      */
     public IllegalValueException(String message) {
-	super(message);
+        super(message);
     }
 }

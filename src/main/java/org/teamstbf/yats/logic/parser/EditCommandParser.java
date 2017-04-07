@@ -28,34 +28,34 @@ public class EditCommandParser {
      * EditCommand and returns an EditCommand object for execution.
      */
     public Command parse(String args) {
-	assert args != null;
-	ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NLP_LOCATION, PREFIX_NLP_TIME,
-		PREFIX_NLP_DESCRIPTION, PREFIX_NLP_TAG);
-	argsTokenizer.tokenize(args);
-	List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
+        assert args != null;
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NLP_LOCATION, PREFIX_NLP_TIME,
+                PREFIX_NLP_DESCRIPTION, PREFIX_NLP_TAG);
+        argsTokenizer.tokenize(args);
+        List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
-	Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
-	if (!index.isPresent()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-	}
+        Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
 
-	EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-	try {
-	    editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-	    editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_NLP_LOCATION)));
-	    editTaskDescriptor.setTime(ParserUtil.parseSchedule(argsTokenizer.getValue(PREFIX_NLP_TIME)));
-	    editTaskDescriptor
-		    .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_NLP_DESCRIPTION)));
-	    editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_NLP_TAG))));
-	} catch (IllegalValueException ive) {
-	    return new IncorrectCommand(ive.getMessage());
-	}
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        try {
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editTaskDescriptor.setLocation(ParserUtil.parseLocation(argsTokenizer.getValue(PREFIX_NLP_LOCATION)));
+            editTaskDescriptor.setTime(ParserUtil.parseSchedule(argsTokenizer.getValue(PREFIX_NLP_TIME)));
+            editTaskDescriptor
+                    .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_NLP_DESCRIPTION)));
+            editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_NLP_TAG))));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
 
-	if (!editTaskDescriptor.isAnyFieldEdited()) {
-	    return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
-	}
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
+            return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
+        }
 
-	return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), editTaskDescriptor);
     }
 
     /**
@@ -65,13 +65,13 @@ public class EditCommandParser {
      * be parsed into a {@code Optional<UniqueTagList>} containing zero tags.
      */
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
-	assert tags != null;
+        assert tags != null;
 
-	if (tags.isEmpty()) {
-	    return Optional.empty();
-	}
-	Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-	return Optional.of(ParserUtil.parseTags(tagSet));
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
 }

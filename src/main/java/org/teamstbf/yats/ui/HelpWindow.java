@@ -28,20 +28,20 @@ public class HelpWindow extends UiPart<Region> {
     private final Stage dialogStage;
 
     public HelpWindow() {
-	super(FXML);
-	Scene scene = new Scene(getRoot());
-	// Null passed as the parent stage to make it non-modal.
-	dialogStage = createDialogStage(TITLE, null, scene);
-	dialogStage.setMaximized(true); // TODO: set a more appropriate initial
-					// size
-	FxViewUtil.setStageIcon(dialogStage, ICON);
+        super(FXML);
+        Scene scene = new Scene(getRoot());
+        // Null passed as the parent stage to make it non-modal.
+        dialogStage = createDialogStage(TITLE, null, scene);
+        dialogStage.setMaximized(true); // TODO: set a more appropriate initial
+        // size
+        FxViewUtil.setStageIcon(dialogStage, ICON);
 
-	browser.getEngine().load(USERGUIDE_URL);
-	FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        browser.getEngine().load(USERGUIDE_URL);
+        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
 
     public void show() {
-	logger.fine("Showing help page about the application.");
-	dialogStage.showAndWait();
+        logger.fine("Showing help page about the application.");
+        dialogStage.showAndWait();
     }
 }

@@ -34,7 +34,7 @@ public class ArgumentTokenizer {
      * described by prefixes
      */
     public ArgumentTokenizer(Prefix... prefixes) {
-	this.prefixes = Arrays.asList(prefixes);
+        this.prefixes = Arrays.asList(prefixes);
     }
 
     /**
@@ -43,27 +43,27 @@ public class ArgumentTokenizer {
      *            <prefix>value ...
      */
     public void tokenize(String argsString) {
-	resetTokenizerState();
-	List<PrefixPosition> positions = findAllPrefixPositions(argsString);
-	extractArguments(argsString, positions);
+        resetTokenizerState();
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString);
+        extractArguments(argsString, positions);
     }
 
     /**
      * Returns last value of given prefix.
      */
     public Optional<String> getValue(Prefix prefix) {
-	return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
+        return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
     }
 
     /**
      * Returns all values of given prefix.
      */
     public Optional<List<String>> getAllValues(Prefix prefix) {
-	if (!this.tokenizedArguments.containsKey(prefix)) {
-	    return Optional.empty();
-	}
-	List<String> values = new ArrayList<>(this.tokenizedArguments.get(prefix));
-	return Optional.of(values);
+        if (!this.tokenizedArguments.containsKey(prefix)) {
+            return Optional.empty();
+        }
+        List<String> values = new ArrayList<>(this.tokenizedArguments.get(prefix));
+        return Optional.of(values);
     }
 
     /**
@@ -73,31 +73,31 @@ public class ArgumentTokenizer {
      */
     public Optional<String> getPreamble() {
 
-	Optional<String> storedPreamble = getValue(new Prefix(""));
+        Optional<String> storedPreamble = getValue(new Prefix(""));
 
-	/* An empty preamble is considered 'no preamble present' */
-	if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
-	    return storedPreamble;
-	} else {
-	    return Optional.empty();
-	}
+        /* An empty preamble is considered 'no preamble present' */
+        if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
+            return storedPreamble;
+        } else {
+            return Optional.empty();
+        }
     }
 
     private void resetTokenizerState() {
-	this.tokenizedArguments.clear();
+        this.tokenizedArguments.clear();
     }
 
     /**
      * Finds all positions in an arguments string at which any prefix appears
      */
     private List<PrefixPosition> findAllPrefixPositions(String argsString) {
-	List<PrefixPosition> positions = new ArrayList<>();
+        List<PrefixPosition> positions = new ArrayList<>();
 
-	for (Prefix prefix : this.prefixes) {
-	    positions.addAll(findPrefixPositions(argsString, prefix));
-	}
+        for (Prefix prefix : this.prefixes) {
+            positions.addAll(findPrefixPositions(argsString, prefix));
+        }
 
-	return positions;
+        return positions;
     }
 
     /**
@@ -105,16 +105,16 @@ public class ArgumentTokenizer {
      * {@code prefix} appears
      */
     private List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
-	List<PrefixPosition> positions = new ArrayList<>();
+        List<PrefixPosition> positions = new ArrayList<>();
 
-	int argumentStart = argsString.indexOf(prefix.getPrefix());
-	while (argumentStart != -1) {
-	    PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
-	    positions.add(extendedPrefix);
-	    argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
-	}
+        int argumentStart = argsString.indexOf(prefix.getPrefix());
+        while (argumentStart != -1) {
+            PrefixPosition extendedPrefix = new PrefixPosition(prefix, argumentStart);
+            positions.add(extendedPrefix);
+            argumentStart = argsString.indexOf(prefix.getPrefix(), argumentStart + 1);
+        }
 
-	return positions;
+        return positions;
     }
 
     /**
@@ -125,22 +125,22 @@ public class ArgumentTokenizer {
      */
     private void extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
-	// Sort by start position
-	prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        // Sort by start position
+        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 
-	// Insert a PrefixPosition to represent the preamble
-	PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
-	prefixPositions.add(0, preambleMarker);
+        // Insert a PrefixPosition to represent the preamble
+        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
+        prefixPositions.add(0, preambleMarker);
 
-	// Add a dummy PrefixPosition to represent the end of the string
-	PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
-	prefixPositions.add(endPositionMarker);
+        // Add a dummy PrefixPosition to represent the end of the string
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        prefixPositions.add(endPositionMarker);
 
-	// Extract the prefixed arguments and preamble (if any)
-	for (int i = 0; i < prefixPositions.size() - 1; i++) {
-	    String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
-	    saveArgument(prefixPositions.get(i).getPrefix(), argValue);
-	}
+        // Extract the prefixed arguments and preamble (if any)
+        for (int i = 0; i < prefixPositions.size() - 1; i++) {
+            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            saveArgument(prefixPositions.get(i).getPrefix(), argValue);
+        }
 
     }
 
@@ -150,27 +150,27 @@ public class ArgumentTokenizer {
      * determined by {@code nextPrefixPosition}
      */
     private String extractArgumentValue(String argsString, PrefixPosition currentPrefixPosition,
-	    PrefixPosition nextPrefixPosition) {
-	Prefix prefix = currentPrefixPosition.getPrefix();
+            PrefixPosition nextPrefixPosition) {
+        Prefix prefix = currentPrefixPosition.getPrefix();
 
-	int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
-	String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
+        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
+        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-	return value.trim();
+        return value.trim();
     }
 
     /**
      * Stores the value of the given prefix in the state of this tokenizer
      */
     private void saveArgument(Prefix prefix, String value) {
-	if (this.tokenizedArguments.containsKey(prefix)) {
-	    this.tokenizedArguments.get(prefix).add(value);
-	    return;
-	}
+        if (this.tokenizedArguments.containsKey(prefix)) {
+            this.tokenizedArguments.get(prefix).add(value);
+            return;
+        }
 
-	List<String> values = new ArrayList<>();
-	values.add(value);
-	this.tokenizedArguments.put(prefix, values);
+        List<String> values = new ArrayList<>();
+        values.add(value);
+        this.tokenizedArguments.put(prefix, values);
     }
 
     /**
@@ -178,54 +178,54 @@ public class ArgumentTokenizer {
      * /t friend'
      */
     public static class Prefix {
-	final String prefix;
+        final String prefix;
 
-	Prefix(String prefix) {
-	    this.prefix = prefix;
-	}
+        Prefix(String prefix) {
+            this.prefix = prefix;
+        }
 
-	String getPrefix() {
-	    return this.prefix;
-	}
+        String getPrefix() {
+            return this.prefix;
+        }
 
-	@Override
-	public int hashCode() {
-	    return this.prefix == null ? 0 : this.prefix.hashCode();
-	}
+        @Override
+        public int hashCode() {
+            return this.prefix == null ? 0 : this.prefix.hashCode();
+        }
 
-	@Override
-	public boolean equals(Object obj) {
-	    if (!(obj instanceof Prefix)) {
-		return false;
-	    }
-	    if (obj == this) {
-		return true;
-	    }
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Prefix)) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
 
-	    Prefix otherPrefix = (Prefix) obj;
-	    return otherPrefix.getPrefix().equals(getPrefix());
-	}
+            Prefix otherPrefix = (Prefix) obj;
+            return otherPrefix.getPrefix().equals(getPrefix());
+        }
     }
 
     /**
      * Represents a prefix's position in an arguments string
      */
     private class PrefixPosition {
-	private int startPosition;
-	private final Prefix prefix;
+        private int startPosition;
+        private final Prefix prefix;
 
-	PrefixPosition(Prefix prefix, int startPosition) {
-	    this.prefix = prefix;
-	    this.startPosition = startPosition;
-	}
+        PrefixPosition(Prefix prefix, int startPosition) {
+            this.prefix = prefix;
+            this.startPosition = startPosition;
+        }
 
-	int getStartPosition() {
-	    return this.startPosition;
-	}
+        int getStartPosition() {
+            return this.startPosition;
+        }
 
-	Prefix getPrefix() {
-	    return this.prefix;
-	}
+        Prefix getPrefix() {
+            return this.prefix;
+        }
     }
 
 }

@@ -8,8 +8,8 @@ public class CommandResult {
     public final String feedbackToUser;
 
     public CommandResult(String feedbackToUser) {
-	assert feedbackToUser != null;
-	this.feedbackToUser = feedbackToUser;
+        assert feedbackToUser != null;
+        this.feedbackToUser = feedbackToUser;
     }
 
 }
