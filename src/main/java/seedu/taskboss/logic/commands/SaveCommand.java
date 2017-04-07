@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import seedu.taskboss.logic.commands.exceptions.CommandException;
+
 //@@author A0138961W
 /**
  * Saves the data at specific filepath. Creates filepath if it does not exist
@@ -35,7 +37,7 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         assert storage != null;
         File f = new File(filepath);
 
@@ -43,7 +45,7 @@ public class SaveCommand extends Command {
                 filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
             return new CommandResult(MESSAGE_INVALID_FILEPATH);
         } else if (!f.canWrite()) {
-            return new CommandResult(MESSAGE_INVALID_FILEPATH);
+            throw new CommandException(MESSAGE_INVALID_FILEPATH);
         }
 
         try {
