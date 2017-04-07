@@ -195,10 +195,13 @@ public class ParserUtil {
         List<Timeslot> timeslots = new ArrayList<>();
         for (String t : timeslotsAsStrings) {
             String[] dates = t.split("\\s+to\\s+");
-            if (dates.length != 2) {
+            if (dates.length == 1) {
+                timeslots.add(new Timeslot(dates[0], dates[0]));
+            } else if (dates.length != 2) {
                 throw new IllegalValueException(Timeslot.MESSAGE_TIMESLOT_PAIRS);
+            } else {
+                timeslots.add(new Timeslot(dates[0], dates[1]));
             }
-            timeslots.add(new Timeslot(dates[0], dates[1]));
         }
 
         return timeslots;

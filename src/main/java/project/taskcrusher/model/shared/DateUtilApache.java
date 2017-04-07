@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
+import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
@@ -58,6 +59,19 @@ public class DateUtilApache {
         // }
 
         return parsed;
+    }
+
+    public static DateGroup parseDateAsDateGroup(String toParse) throws IllegalValueException {
+
+        Parser nattyParser = new Parser();
+
+        List<Date> tempDateList = nattyParser.parse(toParse).get(0).getDates();
+
+        if (tempDateList == null || tempDateList.size() <= 0) {
+            throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
+        }
+
+        return nattyParser.parse(toParse).get(0);
     }
 
     public static boolean hasPassed(Date date) {
