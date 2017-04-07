@@ -62,4 +62,11 @@ public class TaskUtil {
         }
         return false;
     }
+    
+//    public static boolean doesTaskContainPossibleDateAsString(){
+//    //if one string is not valid date, then it is a keyword
+//    // if one string is a valid date, then it might be a keyword or a date, or a part of a date
+//        
+//        return true;
+//    }
 }
