@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import typetask.logic.parser.DateParser;
@@ -22,10 +21,6 @@ public class TaskCard extends UiPart<Region> {
     public static final String PENDING_STYLE_CLASS = "pending";
     public static final String PRIORITY_STYLE_CLASS = "priority";
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private HBox taskNamePane;
     @FXML
     private Label name;
     @FXML
@@ -45,7 +40,6 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private ImageView priorityMark;
 
-    // NOTE: only instantiated for non-floating task
     private Image priority = new Image(PRIORITY);
     private ReadOnlyTask task;
 
@@ -55,15 +49,10 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
-
-        if (task.getEndDate().value.equals("")) {
-            endDate.setText("-");
-        } else {
-            endDate.setText(task.getEndDate().value);
-        }
+        setDates();
         setPrepositionForDates();
         setStatusForTask(task);
-//        setImageToIndicatePriority();
+        setImageToIndicatePriority();
     }
 
     //@@author A0139926R
@@ -86,9 +75,15 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-
-
     //@@author A0139154E
+    private void setDates() {
+        if (task.getEndDate().value.equals("")) {
+            endDate.setText("");
+        } else {
+            endDate.setText(task.getEndDate().value);
+        }
+    }
+
     private void setPrepositionForDates() {
         boolean dateIsEmpty = task.getDate().value.equals("");
         boolean endDateIsEmpty = task.getEndDate().value.equals("");
@@ -97,23 +92,22 @@ public class TaskCard extends UiPart<Region> {
         } else if (!dateIsEmpty && !endDateIsEmpty) {
             preposition.setText("TO");
         } else {
-            preposition.setText("");
+            preposition.setText("-");
         }
     }
 
-    //@@author A0139154E
     private void setStyleToIndicateOverdue() {
         colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
     }
 
-    //@@author A0139154E
     private void setStyleToIndicatePending() {
         colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
     }
 
-    //@@author A0139154E
     private void setImageToIndicatePriority() {
-        priorityMark.setImage(priority);
+        if (task.getPriority().value.equals("High")) {
+            priorityMark.setImage(priority);
+        }
     }
 
 }

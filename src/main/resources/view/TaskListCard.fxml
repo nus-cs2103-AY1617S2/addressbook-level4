@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author A0139154E -->
+
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -69,6 +70,6 @@
          </rowConstraints>
 
         </GridPane>
-      <ImageView fitHeight="150.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="priorityMark" fitHeight="150.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </HBox>
