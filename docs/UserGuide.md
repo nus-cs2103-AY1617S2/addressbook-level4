@@ -107,7 +107,7 @@ Examples:
 * `find work`<br>
   Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 * `find werk`<br>
-  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column  
+  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
@@ -190,11 +190,11 @@ Examples:
 ### 2.14. Undo the last user command that changes data: `undo`
 
 Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
-Does nothing if there are no more previous user commands. 
+Does nothing if there are no more previous user commands.
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   Restores the data before the clear command
 * `add New task`<br>
@@ -205,11 +205,11 @@ Examples:
 ### 2.15. Redo the last undo command: `redo`
 
 Redo the last undo command by user<br>
-Does nothing if there are no commands to redo that the user has undone 
+Does nothing if there are no commands to redo that the user has undone
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   `redo`<br>
   Redoes last user command in undo history, i.e `clear`. Task manager will be cleared
@@ -218,7 +218,20 @@ Examples:
   `undo`<br>
   `redo`<br>
   Redoes last user command in undo history, i.e `add New task`. Adds New task
-  
+
+
+### 2.16. Find tasks by date: `findbydate`
+
+Find tasks that are within the specified date(s).<br>
+Format: `findbydate DATE` `findbydate DATE to DATE`
+
+Examples:
+
+* `findbydate today`<br>
+  Lists tasks that have starting dates before today or ending dates after today
+* `findbydate today to next wednesday`<br>
+  Lists tasks that start from today and end latest by next Wednesday.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -239,6 +252,8 @@ List    | list
 Select  | select INDEX                    | select 3
 Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
 Find    | find KEYWORD(s)                 | find report assignment
+Find by Date | findbydate DATE | findbydate today
+Find by Date | findbydate DATE to DATE | findbydate today to next wednesday
 Delete  | delete INDEX                    | delete 3
 Sort    | sort KEYWORD                    | sort e/
 Undo    | undo

@@ -33,6 +33,18 @@
 	-fx-background-color: #8cb3b8;
 }
 
+.split-pane-divider {
+    -fx-padding: 1;
+}
+
+.tab-header-background {
+	-fx-background-color: transparent;
+}
+
+.tab {
+	-fx-effect: null;
+}
+
 #startDate, #endDate {
 	-fx-font-size: 8pt;
 	-fx-text-fill: derive(#1d1d1d, 30%);
@@ -43,5 +55,5 @@
 }
 
 /*
- * @@author A0131278H
+ * @@author
  */

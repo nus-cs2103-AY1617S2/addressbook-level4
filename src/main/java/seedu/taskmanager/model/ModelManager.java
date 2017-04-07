@@ -1,5 +1,8 @@
 package seedu.taskmanager.model;
 
+import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -32,7 +35,12 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
+    // @@author A0131278H
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private final FilteredList<ReadOnlyTask> filteredToDoTasks;
+    private final FilteredList<ReadOnlyTask> filteredDoneTasks;
+    private String selectedTab;
+    // @@author
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -45,11 +53,26 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        // @@author A0131278H
+        filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
+        filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
+        setSelectedTab(TAB_TO_DO); // default tab is to-do task list tab
+        // @@author
     }
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
+
+    // @@author A0131278H
+    public String getSelectedTab() {
+        return selectedTab;
+    }
+
+    public void setSelectedTab(String currentTab) {
+        this.selectedTab = currentTab;
+    }
+    // @@author
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
@@ -69,6 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0131278H
+    /** Raises an event to indicate an automatic selection */
     private void indicateJumpToListRequestEvent(int index) {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
     }
@@ -82,10 +106,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        int index = taskManager.addTask(task);
+        taskManager.addTask(task);
+        // @@author A0131278H
+        int index = getSelectedTaskList().indexOf(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        // @@author A0131278H
         indicateJumpToListRequestEvent(index);
         // @@author
     }
@@ -95,10 +120,13 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        int updatedIndex = taskManager.updateTask(taskManagerIndex, editedTask);
-        indicateTaskManagerChanged();
         // @@author A0131278H
+        ReadOnlyTask taskToEdit = getSelectedTaskList().get(filteredTaskListIndex);
+        int actualIndex = filteredTasks.indexOf(taskToEdit);
+        int taskManagerIndex = filteredTasks.getSourceIndex(actualIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
+        int updatedIndex = getSelectedTaskList().indexOf(editedTask);
+        indicateTaskManagerChanged();
         indicateJumpToListRequestEvent(updatedIndex);
         // @@author
     }
@@ -120,10 +148,38 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    // @@author A0131278H
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getSelectedTaskList() {
+        switch (selectedTab) {
+        case TAB_TO_DO:
+            return getFilteredToDoTaskList();
+        case TAB_DONE:
+            return getFilteredDoneTaskList();
+        default:
+            assert false : selectedTab + " is invalid";
+            return null;
+        }
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredToDoTaskList() {
+        return new UnmodifiableObservableList<>(filteredToDoTasks);
+    }
+
+    @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredDoneTaskList() {
+        return new UnmodifiableObservableList<>(filteredDoneTasks);
+    }
+
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        filteredToDoTasks.setPredicate(null);
+        filteredDoneTasks.setPredicate(null);
     }
+    // @@author
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
@@ -144,9 +200,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     // @@author
 
+    // @@author A0131278H
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        filteredToDoTasks.setPredicate(expression::satisfies);
+        filteredDoneTasks.setPredicate(expression::satisfies);
     }
+    // @@author
 
     // ========== Inner classes/interfaces used for filtering
     // =================================================
@@ -253,29 +313,30 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private class DateRangeQualifier implements Qualifier {
-        private Date startDateCriteria, endDateCriteria;
+        private LocalDate startDateCriteria, endDateCriteria;
 
         DateRangeQualifier(Date startDateCriteria, Date endDateCriteria) {
-            this.startDateCriteria = startDateCriteria;
-            this.endDateCriteria = endDateCriteria;
+            this.startDateCriteria = startDateCriteria.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            this.endDateCriteria = endDateCriteria.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            LocalDate taskStartDate = task.getStartDate().isPresent()
+                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+            LocalDate taskEndDate = task.getEndDate().isPresent()
+                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
+
             boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
             if (isFloatingTask) {
                 return false;
+            } else if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
+                return !(taskStartDate.isBefore(startDateCriteria) || taskEndDate.isAfter(endDateCriteria));
+            } else if (task.getStartDate().isPresent()) {
+                return !(taskStartDate.isBefore(startDateCriteria) || taskStartDate.isAfter(startDateCriteria));
+            } else {
+                return !(taskEndDate.isBefore(startDateCriteria) || taskEndDate.isAfter(startDateCriteria));
             }
-            if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria)
-                        || task.getEndDate().get().after(endDateCriteria));
-            }
-            if (task.getStartDate().isPresent()) {
-                return !(task.getStartDate().get().before(startDateCriteria)
-                        || task.getStartDate().get().after(startDateCriteria));
-            }
-            return !(task.getEndDate().get().before(startDateCriteria)
-                    || task.getStartDate().get().after(startDateCriteria));
         }
 
         @Override
@@ -284,5 +345,4 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     // @@author
-
 }
