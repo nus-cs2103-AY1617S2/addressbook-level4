@@ -31,10 +31,11 @@ public class Location {
         if (location == null || location.trim().equals("")) {
             this.value = "";
         } else {
-            if (!isValidLocation(location)) {
-                throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
-            }
-            this.value = location;
+            this.value = location.trim();
+//            if (!isValidLocation(location)) {
+//                throw new IllegalValueException(MESSAGE_LOCATION_CONSTRAINTS);
+//            }
+//            this.value = trimmedLocation;
         }
     }
 

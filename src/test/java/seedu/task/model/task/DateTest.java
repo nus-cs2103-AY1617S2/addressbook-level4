@@ -13,7 +13,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 //@@author A0140063X
 public class DateTest {
 
-    //display format is "M/d/y H:mm a, prettytime format"
+    // display format is "M/d/y H:mm a, prettytime format"
     @Test
     public void dateIsCorrectlyCreated() throws IllegalValueException {
         PrettyTime pretty = new PrettyTime();
@@ -71,10 +71,58 @@ public class DateTest {
     }
 
     @Test
-    public void isEquals() throws IllegalValueException {
+    public void dates_Equal_success() throws IllegalValueException {
 
         Date date1 = new Date("");
         Date date2 = new Date("");
         assertTrue(date1.equals(date2));
+    }
+    // @@author
+
+    @Test
+    public void dates_Equal_Ignores_Time_success() throws IllegalValueException {
+        assertTrue(assertDatesEqualIgnoreTime(new Date("Apr 4 2017"), new Date("Apr 4 2017")));
+        assertTrue(assertDatesEqualIgnoreTime(new Date("Nov 10 2019"), new Date("Nov 10 2019")));
+        assertTrue(assertDatesEqualIgnoreTime(new Date("christmas"), new Date("Dec 25")));
+    }
+
+    @Test
+    public void dates_Equal_Ignores_Time_failure() throws IllegalValueException {
+        assertFalse(assertDatesEqualIgnoreTime(new Date("Apr 4 2018"), new Date("Apr 4 2017")));
+        assertFalse(assertDatesEqualIgnoreTime(new Date("Nov 9 2019"), new Date("Nov 10 2019")));
+        assertFalse(assertDatesEqualIgnoreTime(new Date("Oct 9 2019"), new Date("Nov 9 2019")));
+
+    }
+
+    private boolean assertDatesEqualIgnoreTime(Date date, Date otherDate) {
+        return date.equalsIgnoreTime(otherDate);
+    }
+
+    @Test
+    public void dates_Equal_Ignores_Minutes_success() throws IllegalValueException {
+        assertTrue(assertDatesEqualIgnoreTime(new Date("Apr 4 2017 6am"), new Date("Apr 4 2017 6:30")));
+        assertTrue(assertDatesEqualIgnoreTime(new Date("Nov 10 2019 1:25am"), new Date("Nov 10 2019 1am")));
+        assertTrue(assertDatesEqualIgnoreTime(new Date("christmas 14:19"), new Date("Dec 25 14")));
+
+    }
+
+    @Test
+    public void dates_Equal_Ignores_Minutes_failure() throws IllegalValueException {
+        assertFalse(assertDatesEqualIgnoreMinutes(new Date("Apr 4 2017 6pm"), new Date("Apr 4 2017 6am")));
+        assertFalse(assertDatesEqualIgnoreMinutes(new Date("Nov 10 2019 1"), new Date("Nov 10 2019 13")));
+        assertFalse(assertDatesEqualIgnoreMinutes(new Date("christmas midnight"), new Date("Dec 25 01:00")));
+
+    }
+
+    private boolean assertDatesEqualIgnoreMinutes(Date date, Date otherDate) {
+        return date.equalsIgnoreMinutes(otherDate);
+    }
+    
+    @Test
+    public void testEquals_Symmetric() throws IllegalValueException {
+        Date x = new Date("today");  // equals and hashCode check name field value
+        Date y = new Date("today");
+        assertTrue(x.equals(y) && y.equals(x));
+        assertTrue(x.hashCode() == y.hashCode());
     }
 }
