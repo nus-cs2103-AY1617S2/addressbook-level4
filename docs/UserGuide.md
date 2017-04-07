@@ -11,21 +11,21 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 ## 1. Quick Start
 
-0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+0. Ensure you have Java version `1.8.0_121` or later installed in your Computer.<br>
 
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `doTomorrow.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your TODO list.
+2. Copy the file to the folder you want to use as the home folder for your task list.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all TODOs
-   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`list`** : lists all tasks
+   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the task list and set the due date to January 8th at 9am.
    * **`complete`** `2` : marks the 2nd task as completed
    * **`delete`** `3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -51,12 +51,19 @@ Format: `help`
 ### 2.2. Adding a task : `add`
 
 Adds a task to the list<br>
-Format: `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]`
+Format: `add TASK_DESCRIPTION [due/DATE_TIME] [starts/DATE_TIME ends/DATE_TIME]`
+
+> * Date can be entered in DD/MM/YYYY format or with the keywords `today``tomorrow`, or days of the week such as `Mon``Monday`
+> * Time is optional and is entered in 24 hour time HHMM, if no time is entered, the default value 0000 will be used
+> * Start time must be before end time
 
 Examples:
 
 * `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
-* `add CS2013 assignment due/23/03/2017`
+* `add buy milk due/23/03/2017`
+* `add walk the dog starts/today 1200 ends/today 1300`
+* `add clean up room due/01/04/2017`
+
 
 ### 2.3. Listing: `list`
 
@@ -157,12 +164,7 @@ Examples:
 * `delete 2`<br>
   Deletes the 2nd task.
 
-### 2.8. Delete all tasks : `clear`
-
-Deletes all tasks.<br>
-Format: `clear`
-
-### 2.9. Finding all tasks containing any keyword in their description: `find`
+### 2.8. Finding all tasks containing any keyword in their description: `find`
 
 Finds tasks whose descriptions contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -170,39 +172,39 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `buy milk` will match `milk buy`
 > * The description and tags will be searched.
 > * Partial words will be matched e.g. `day` will match `monday`
-> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `milk` will match `buy milk`
+> * Tasks matching all keyword will be returned (i.e. `AND` search).
+    e.g. `buy milk` will not match `Milk`
 
 Examples:
 
 * `find milk`<br>
   Returns `Buy milk` but not `Milk`
 * `find home school hipri`<br>
-  Returns Any task having description or tag `home`, `school`, or `hipri`
+  Returns any task having `home`, `school`, and `hipri` in its description and/or tags.
 
-### 2.10. Undo : `undo`
+### 2.9 Undo : `undo`
 
-Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
+Undoes the previous action. This command will return the program to the state it was in before the previous action was executed. Multiple commands can be undone.<br>
 Format: `undo`
 
-### 2.11. Redo : `redo`
+### 2.10. Redo : `redo`
 
-Re-executes the previous undo action. This command will return the program to the state it was in before the previous undo was executed<br>
+Re-executes the previous undo action. This command will return the program to the state it was in before the previous undo was executed.<br>
 Format: `redo`
 
-### 2.12. Exiting the program : `exit`
+### 2.11. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.13. Saving the data
+### 2.12. Saving the data
 
 DoTomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.14. Changing storage file path: `setstorage`
+### 2.13. Changing storage file path: `setstorage`
 
-Change storage path to user specifed path<br>
+Change storage path to user specifed path.<br>
 Format: `setstorage PATH`
 
 Example:
@@ -229,7 +231,7 @@ Example:
 * **Help**: `help` <br>
   e.g. `help`
 
-* **Add**  `add TASK_DESCRIPTION [due/DATE_AND_TIME] [starts/DATE_AND_TIME ends/DATE_AND_TIME]` <br>
+* **Add**  `add TASK_DESCRIPTION [due/DATE_TIME] [starts/DATE_TIME ends/DATE_TIME]` <br>
   e.g. `add CS2103 assignment due/23/03/2017 1600 starts/22/03/2017 ends/23/03/2017 1800`
 
 * **List All Tasks**: `list` <br>
@@ -255,9 +257,6 @@ Example:
 
 * **Delete** `delete INDEX` <br>
   e.g. `delete 3`
-
-* **Delete all** `clear` <br>
-  e.g. `clear`
 
 * **Find**: `find KEYWORD [MORE_KEYWORDS]...` <br>
   e.g. `find James Jake`
