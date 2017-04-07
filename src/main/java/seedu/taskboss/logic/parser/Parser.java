@@ -25,6 +25,7 @@ import seedu.taskboss.logic.commands.SaveCommand;
 import seedu.taskboss.logic.commands.SortCommand;
 import seedu.taskboss.logic.commands.TerminateCommand;
 import seedu.taskboss.logic.commands.UndoCommand;
+import seedu.taskboss.logic.commands.UnmarkCommand;
 import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 /**
@@ -68,6 +69,10 @@ public class Parser {
         case TerminateCommand.COMMAND_WORD:
         case TerminateCommand.COMMAND_WORD_SHORT:
             return new TerminateCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+        case UnmarkCommand.COMMAND_WORD_SHORT:
+            return new UnmarkCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD_SHORT:
