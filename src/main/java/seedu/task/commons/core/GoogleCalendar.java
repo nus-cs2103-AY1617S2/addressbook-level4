@@ -90,18 +90,13 @@ public class GoogleCalendar {
      * @return an authorized Calendar client service
      * @throws IOException
      */
-    private static com.google.api.services.calendar.Calendar
+    public static com.google.api.services.calendar.Calendar
         getCalendarService() throws IOException {
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
                 httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-    }
-
-    // @@author A0140063X
-    public static com.google.api.services.calendar.Calendar getGoogleCalendarService() throws IOException {
-        return getCalendarService();
     }
 
 }
