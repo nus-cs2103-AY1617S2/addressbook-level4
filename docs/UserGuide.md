@@ -107,7 +107,7 @@ Examples:
 * `find work`<br>
   Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 * `find werk`<br>
-  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column  
+  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
@@ -159,42 +159,43 @@ Format: `exit`
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.12. Change the directory of the task manager : `load` or `cd`
+### 2.12. Change the directory of the task manager : `load` or `open`
 
 Load Task Manager data from specified file path and continue using that directory for operations.<br>
-Create new file if no such file exists and cancel operations if given non-XML address or invalid XML file.<br>
+Create new file if no such file exists with a warning.<br>
+Cancel operations if given non-XML address or invalid XML file.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `load FILEPATH` `cd FILEPATH`
+Format: `load FILEPATH` `open FILEPATH`
 
 Examples:
 
 * `load /Users/admin/taskmanager.xml`<br>
   Changes the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
-* `cd data/new/cloudsync.xml`<br>
+* `open data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.13. Move the directory of the task manager : `move` or  `movefile`
+### 2.13. Save the task manager to a specified directory: `save` or  `saveas`
 
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `move FILEPATH` `movefile FILEPATH`
+Format: `save FILEPATH` `saveas FILEPATH`
 
 Examples:
 
-* `move /Users/admin/taskmanager.xml`<br>
+* `save /Users/admin/taskmanager.xml`<br>
   Moves the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
-* `movefile data/new/cloudsync.xml`<br>
+* `saveas data/new/cloudsync.xml`<br>
   Moves the Storage Directory to ./data/new/cloudsync.xml
 
 ### 2.14. Undo the last user command that changes data: `undo`
 
 Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
-Does nothing if there are no more previous user commands. 
+Does nothing if there are no more previous user commands.
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   Restores the data before the clear command
 * `add New task`<br>
@@ -205,11 +206,11 @@ Examples:
 ### 2.15. Redo the last undo command: `redo`
 
 Redo the last undo command by user<br>
-Does nothing if there are no commands to redo that the user has undone 
+Does nothing if there are no commands to redo that the user has undone
 
-Examples: 
+Examples:
 
-* `clear`<br> 
+* `clear`<br>
   `undo`<br>
   `redo`<br>
   Redoes last user command in undo history, i.e `clear`. Task manager will be cleared
@@ -218,7 +219,53 @@ Examples:
   `undo`<br>
   `redo`<br>
   Redoes last user command in undo history, i.e `add New task`. Adds New task
-  
+
+### 2.16. Find tasks by date: `findbydate`
+
+Find tasks that are within the specified date(s).<br>
+Format: `findbydate DATE` `findbydate DATE to DATE`
+
+Examples:
+
+* `findbydate today`<br>
+  Lists tasks that have starting dates before today or ending dates after today
+* `findbydate today to next wednesday`<br>
+  Lists tasks that start from today and end latest by next Wednesday.
+
+### 2.17. Marking a task as DONE : `done` or `complete` or `finish`
+
+Marks the specified task from the task manager as DONE.<br>
+Format: `done INDEX` `complete INDEX` `finish INDEX`
+
+> Mark the task at the specified `INDEX` as DONE.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `done 1`<br>
+   Mark the task with index 1 in the Task Manager as done
+* `complete 2`<br>
+   Mark the task with index 2 in the Task Manager as done
+* `finish 3`<br>
+   Mark the task with index 3 in the Task Manager as done
+   
+### 2.18. Marking a task as TODO : `undone` or `revert`
+
+Marks the specified task from the task manager as TODO from being DONE initially.<br>
+Format: `undone INDEX` `revert INDEX`
+
+> Mark the task at the specified `INDEX` as TODO from initially DONE.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `undone 1`<br>
+   Mark the task with index 1 in the Task Manager as done
+* `revert 3`<br>
+   Mark the task with index 3 in the Task Manager as done
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -239,10 +286,16 @@ List    | list
 Select  | select INDEX                    | select 3
 Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
 Find    | find KEYWORD(s)                 | find report assignment
+Find by Date | findbydate DATE | findbydate today
+Find by Date | findbydate DATE to DATE | findbydate today to next wednesday
 Delete  | delete INDEX                    | delete 3
 Sort    | sort KEYWORD                    | sort e/
 Undo    | undo
 Redo    | redo
+Done    | done INDEX                      | done 1
+Undone  | undone INDEX                    | undone 2
+Save as | saveas FILEPATH                 | saveas newtaskmanager.xml
+Load    | load FILEPATH                   | load /Users/admin/taskmanager.xml
 Clear   | clear
 Exit    | exit
 <br>

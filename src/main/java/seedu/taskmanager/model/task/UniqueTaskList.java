@@ -1,11 +1,11 @@
 package seedu.taskmanager.model.task;
 
-import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_ENDDATE;
 import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,14 +42,13 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Adds a task to the list. Resort the list if it was already sorted.
      *
-     * @return index of new task if list is sorted
-     *              or size-1 if list in unsorted
+     * @return index of new task if list is sorted or size-1 if list in unsorted
      *
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
      *             list.
      */
-    public int add(Task toAdd) throws DuplicateTaskException {
+    public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         if (contains(toAdd)) {
             throw new DuplicateTaskException();
@@ -58,19 +57,16 @@ public class UniqueTaskList implements Iterable<Task> {
         // @@author A0131278H
         if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
             sortByDate(sortCriterion);
-            int index = internalList.indexOf(toAdd);
-            return index;
         }
         // @@author
-        return internalList.size() - 1;
     }
 
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}. Resort the list if it was already sorted.
      *
-     * @return updatedIndex if the internal list is sorted
-     *              or input index if list is unsorted
+     * @return updatedIndex if the internal list is sorted or input index if
+     *         list is unsorted
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
@@ -78,7 +74,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public int updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
@@ -97,11 +93,8 @@ public class UniqueTaskList implements Iterable<Task> {
         // @@author A0131278H
         if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
             sortByDate(sortCriterion);
-            int updatedIndex = internalList.indexOf(editedTask);
-            return updatedIndex;
         }
         // @@author
-        return index;
     }
 
     // @@author
@@ -172,52 +165,84 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     // @@author A0131278H
+
     /**
      * Sorts task list based on keywords (StartDate or EndDate). Tasks without
-     * start StartDate or EndDate are ranked higher.
+     * start StartDate or EndDate are ranked at the bottom.
      */
     public void sortByDate(String keyword) {
-        if (keyword.equals(SORT_KEYWORD_STARTDATE)) {
-            this.sortCriterion = SORT_KEYWORD_STARTDATE;
-            internalList.sort(new Comparator<Task>() {
-                @Override
-                public int compare(Task t1, Task t2) {
-                    if (t1.getStartDate().isPresent() && t2.getStartDate().isPresent()) {
-                        return t1.getStartDate().get().compareTo(t2.getStartDate().get());
-                    }
-                    // @@author A0140032E
-                    if (!t1.getStartDate().isPresent() && !t2.getStartDate().isPresent()) {
-                        return 0;
-                    } else if (t1.getStartDate().isPresent()) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                    // @@author A0131278H
-                }
-            });
-        } else if (keyword.equals(SORT_KEYWORD_ENDDATE)) {
-            this.sortCriterion = SORT_KEYWORD_ENDDATE;
-            internalList.sort(new Comparator<Task>() {
-                @Override
-                public int compare(Task t1, Task t2) {
-                    if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
-                        return t1.getEndDate().get().compareTo(t2.getEndDate().get());
-                    }
-                    // @@author A0140032E
-                    if (!t1.getEndDate().isPresent() && !t2.getEndDate().isPresent()) {
-                        return 0;
-                    } else if (t1.getEndDate().isPresent()) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                    // @@author A0131278H
-                }
-            });
+        this.sortCriterion = keyword;
+        internalList.sort(new DateComparator(sortCriterion));
+    }
+
+    /**
+     * Filters task list based on task status (Done or Not Done).
+     */
+    public ObservableList<Task> getTaskListByStatus(String status) {
+        if (status.equals(Status.STATUS_DONE)) {
+            return internalList.filtered(StatusPredicate.isDone());
+        } else if (status.equals(Status.STATUS_NOT_DONE)) {
+            return internalList.filtered(StatusPredicate.isNotDone());
         } else {
-            return; // Error message will be thrown by SortCommand
+            return internalList; // return list of all task if status is invalid
         }
     }
-    // @@author
+
+    static class StatusPredicate {
+
+        public static Predicate<Task> isDone() {
+            return p -> p.getStatus().toString().equals(Status.STATUS_DONE);
+        }
+
+        public static Predicate<Task> isNotDone() {
+            return p -> p.getStatus().toString().equals(Status.STATUS_NOT_DONE);
+        }
+
+    }
+
+    class DateComparator implements Comparator<Task> {
+        String sortCriterion;
+
+        public DateComparator(String sortCriterion) {
+            this.sortCriterion = sortCriterion;
+        }
+
+        @Override
+        public int compare(Task t1, Task t2) {
+            if (sortCriterion.equals(SORT_KEYWORD_STARTDATE)) {
+                return this.compareByStartDate(t1, t2);
+            } else {
+                return this.compareByEndDate(t1, t2);
+            }
+        }
+
+        private int compareByStartDate(Task t1, Task t2) {
+            if (t1.getStartDate().isPresent() && t2.getStartDate().isPresent()) {
+                return t1.getStartDate().get().compareTo(t2.getStartDate().get());
+            }
+            // @@author A0140032E
+            if (!t1.getStartDate().isPresent() && !t2.getStartDate().isPresent()) {
+                return 0;
+            } else if (t1.getStartDate().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
+            // @@author A0131278H
+        }
+
+        private int compareByEndDate(Task t1, Task t2) {
+            if (t1.getEndDate().isPresent() && t2.getEndDate().isPresent()) {
+                return t1.getEndDate().get().compareTo(t2.getEndDate().get());
+            }
+            // @@author A0140032E
+            if (!t1.getEndDate().isPresent() && !t2.getEndDate().isPresent()) {
+                return 0;
+            } else if (t1.getEndDate().isPresent()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+    }
 }

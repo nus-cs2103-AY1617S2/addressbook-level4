@@ -401,26 +401,6 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("edit 100000");
     }
 
-    // @Test
-    // public void executeEditNotEditedMessageShown() throws Exception {
-    // TestDataHelper helper = new TestDataHelper();
-    // Task tTarget1 = helper.generateTaskWithStartDate("01/03/2017");
-    // Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
-    // Task tTarget3 = helper.generateTaskWithStartDate("03/03/2017");
-    // Task tTarget4 = helper.generateTaskWithStartDate("03/03/2017");
-    //
-    // List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2,
-    // tTarget3);
-    // List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2,
-    // tTarget4);
-    // TaskManager expectedTM = helper.generateTaskManager(editedTasks);
-    // List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2,
-    // tTarget4);
-    // helper.addToModel(model, uneditedTasks);
-    //
-    // assertCommandSuccess("edit 3 s/03/03/2017",
-    // String.format(EditCommand.MESSAGE_NOT_EDITED), expectedTM, expectedList);
-    // }
 
     @Test
     public void executeEditDuplicateTaskMessageShown() throws Exception {
@@ -505,18 +485,20 @@ public class LogicManagerTest {
 
     // @@author A0114269E
     @Test
-    public void execute_cd_invalidFilePath() throws Exception {
-        assertCommandFailure("cd !asdwie34$2.xml",
+    public void execute_load_invalidFilePath() throws Exception {
+        assertCommandFailure("load !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
-        assertCommandFailure("cd data/taskmanager",
+        assertCommandFailure("load data/taskmanager",
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
     }
 
     // @@author A0114269E
     @Test
-    public void execute_cd_invalidXmlFile() throws Exception {
-        assertCommandFailure("cd src/test/data/cd_test/empty.xml", ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("cd src/test/data/cd_test/invalid.xml", ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+    public void execute_load_invalidXmlFile() throws Exception {
+        assertCommandFailure("load src/test/data/cd_test/empty.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("load src/test/data/cd_test/invalid.xml",
+                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
     }
     // @@author
 

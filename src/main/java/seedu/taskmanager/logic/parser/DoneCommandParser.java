@@ -8,6 +8,10 @@ import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 
+// @@author A0114269E
+/**
+ * Parses input arguments and creates a new DoneCommand object
+ */
 public class DoneCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the DoneCommand
@@ -23,3 +27,4 @@ public class DoneCommandParser {
         return new DoneCommand(index.get());
     }
 }
+// @@author

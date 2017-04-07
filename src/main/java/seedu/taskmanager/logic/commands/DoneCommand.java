@@ -21,21 +21,21 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 
 // @@author A0114269E
 /**
- * Mark a task as done in the Task Manager
+ * Marks a task as done in the Task Manager
  */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final String ALTERNATIVE_COMMAND_WORD_1 = "completed";
-    public static final String ALTERNATIVE_COMMAND_WORD_2 = "finished";
+    public static final String ALTERNATIVE_COMMAND_WORD_1 = "complete";
+    public static final String ALTERNATIVE_COMMAND_WORD_2 = "finish";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Mark the task identified by the index number used in the last task listing as done.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " or "
             + ALTERNATIVE_COMMAND_WORD_1 + " or " + ALTERNATIVE_COMMAND_WORD_2 + " 1";
 
-    public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done: %1$s";
-    public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already done.";
+    public static final String MESSAGE_MARK_DONE_TASK_SUCCESS = "Task marked done:\n%1$s";
+    public static final String MESSAGE_MARK_DONE_TASK_FAILURE = "ERROR! Task is already completed.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     public final int targetIndex;
@@ -46,7 +46,7 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
 
         if (lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -78,6 +78,7 @@ public class DoneCommand extends Command {
         } else {
             return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
         }
+
         model.updateFilteredListToShowAll();
 
         return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, taskToMarkDone));

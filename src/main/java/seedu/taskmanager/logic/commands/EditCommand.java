@@ -39,7 +39,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
     public static final String MESSAGE_REPEAT_CONSTRAINTS = "Recurring tasks should have a start date";
     // @@author
-    private final int filteredTaskListIndex;
+    private final int filteredSelectedTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
@@ -53,20 +53,20 @@ public class EditCommand extends Command {
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredSelectedTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredSelectedTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredSelectedTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // @@author A0140032E
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         }
         // @@author
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(filteredSelectedTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
