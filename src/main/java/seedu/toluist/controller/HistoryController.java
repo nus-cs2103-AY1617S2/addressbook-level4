@@ -9,6 +9,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandHistoryList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -35,6 +36,7 @@ public class HistoryController extends Controller {
 
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().getName() + " will handle command");
+        UiStore uiStore = UiStore.getInstance();
         ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         String result = String.join("\n", commandHistory);
         uiStore.setCommandResult(new CommandResult(String.format(

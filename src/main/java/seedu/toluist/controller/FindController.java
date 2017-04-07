@@ -14,6 +14,7 @@ import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -58,6 +59,7 @@ public class FindController extends Controller {
 
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass() + "will handle command");
+        UiStore uiStore = UiStore.getInstance();
 
         // initialize keywords and variables for searching
         boolean isSearchByTag = tokens.get(PARAMETER_NAME) == null;
@@ -79,6 +81,7 @@ public class FindController extends Controller {
 
     private CommandResult formatDisplay(boolean isSearchByTag, boolean isSearchByName,
                                         String[] keywordList, int foundCount) {
+        UiStore uiStore = UiStore.getInstance();
         if (keywordList[0].equals(PARAMETER_NULL)) {
             return new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE_LIST,
                 StringUtil.nounWithCount("task", foundCount))

@@ -10,6 +10,7 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.AliasTable;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -51,6 +52,7 @@ public class AliasController extends Controller {
     }
 
     private void setAlias(String alias, String commandPhrase) throws InvalidCommandException {
+        UiStore uiStore = UiStore.getInstance();
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             uiStore.setCommandResult(
                     new CommandResult(String.format(MESSAGE_RESULT_SUCCESS, alias, commandPhrase)));

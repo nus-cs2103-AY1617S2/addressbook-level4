@@ -9,6 +9,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -30,6 +31,7 @@ public class ClearController extends Controller {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         todoList.setTasks(new ArrayList<>());
         todoList.save();
 

@@ -14,6 +14,7 @@ import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -76,6 +77,7 @@ public class SortController extends Controller {
             throws InvalidCommandException {
         String[] resultantOrder = Task.getCurrentSort();
         String resultMessage = StringUtil.EMPTY_STRING;
+        UiStore uiStore = UiStore.getInstance();
         if (keywordList.isEmpty()) {
             throw new InvalidCommandException(MESSAGE_NO_VALID_KEYWORD);
         }

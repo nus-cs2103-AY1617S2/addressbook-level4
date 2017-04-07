@@ -55,6 +55,7 @@ public class LoadController extends Controller {
     private void load(String path) throws InvalidCommandException {
         try {
             TodoList todoList = TodoList.getInstance();
+            UiStore uiStore = UiStore.getInstance();
             todoList.load(path);
             UiStore.getInstance().setTasks(todoList.getTasks());
             uiStore.setCommandResult(

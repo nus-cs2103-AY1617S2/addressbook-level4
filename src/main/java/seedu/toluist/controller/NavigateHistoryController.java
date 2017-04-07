@@ -9,6 +9,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.dispatcher.CommandHistoryList;
+import seedu.toluist.ui.UiStore;
 
 /**
  * NavigateHistoryController is responsible for handling cycling through previous commands
@@ -25,6 +26,7 @@ public class NavigateHistoryController extends Controller {
         logger.info(getClass().getName() + " will handle command");
 
         String direction = tokens.get(PARAMETER_DIRECTION);
+        UiStore uiStore = UiStore.getInstance();
 
         if (direction.equals(PARAMETER_UP)) {
             showPreviousCommand(uiStore.getCommandInputProperty().getValue());
@@ -34,11 +36,13 @@ public class NavigateHistoryController extends Controller {
     }
 
     private void showNextCommand() {
+        UiStore uiStore = UiStore.getInstance();
         String command = commandHistory.movePointerDown();
         uiStore.setCommandInput(command);
     }
 
     private void showPreviousCommand(String currentCommand) {
+        UiStore uiStore = UiStore.getInstance();
         String command = commandHistory.movePointerUp(currentCommand);
         uiStore.setCommandInput(command);
     }

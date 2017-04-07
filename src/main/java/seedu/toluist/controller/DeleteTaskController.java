@@ -13,6 +13,7 @@ import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -46,6 +47,7 @@ public class DeleteTaskController extends Controller {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         CommandResult commandResult;
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);

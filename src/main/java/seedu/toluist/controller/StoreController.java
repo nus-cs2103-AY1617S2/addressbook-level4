@@ -15,6 +15,7 @@ import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.FileUtil;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -59,6 +60,7 @@ public class StoreController extends Controller {
 
     private void save(String path) throws InvalidCommandException {
         String message = StringUtil.EMPTY_STRING;
+        UiStore uiStore = UiStore.getInstance();
         if (FileUtil.isFileExists(new File(path))) {
             message += String.format(MESSAGE_RESULT_WARNING_OVERWRITE, path) + StringUtil.NEW_LINE;
         }

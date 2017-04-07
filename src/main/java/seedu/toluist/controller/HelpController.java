@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
+import seedu.toluist.ui.UiStore;
 
 /**
  * HelpController is responsible for rendering the initial UI
@@ -72,6 +73,7 @@ public class HelpController extends Controller {
     }
 
     private void showSpecificHelp(String commandWord) {
+        UiStore uiStore = UiStore.getInstance();
         List<List<String>> detailedHelp =
                 Arrays.asList(getControllerFromKeyword(commandWord).getDetailedHelp()).stream()
                     .filter(help -> help != null)
@@ -93,6 +95,7 @@ public class HelpController extends Controller {
     }
 
     private void showGeneralHelp() {
+        UiStore uiStore = UiStore.getInstance();
         List<List<String>> generalHelp = controllerLibrary.getCommandControllerBasicHelps();
         uiStore.setHelp(HEADING_GENERAL, convertListListToListStringForGeneral(generalHelp));
     }

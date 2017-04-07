@@ -10,6 +10,7 @@ import seedu.toluist.commons.core.Config;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.AliasTable;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -31,6 +32,7 @@ public class ViewAliasController extends Controller {
     private final AliasTable aliasConfig = Config.getInstance().getAliasTable();
 
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
+        UiStore uiStore = UiStore.getInstance();
         Map<String, String> aliasMapping = aliasConfig.getAliasMapping();
         uiStore.setCommandResult(new CommandResult(getAliasCommandResult(aliasMapping)));
     }

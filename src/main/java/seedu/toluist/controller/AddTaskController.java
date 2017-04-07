@@ -16,6 +16,7 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 import seedu.toluist.ui.commons.ResultMessage;
 
@@ -67,6 +68,7 @@ public class AddTaskController extends Controller {
         logger.info(getClass().getName() + " will handle command");
 
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         CommandResult commandResult;
 
         String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
@@ -106,6 +108,7 @@ public class AddTaskController extends Controller {
         try {
             validateTaskDescription(description);
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline);
+            UiStore uiStore = UiStore.getInstance();
             Task task = createTask(description, eventStartDateTime, eventEndDateTime, taskDeadline);
             task = addPriorityToTask(task, taskPriority);
             task = addRecurringStatusToTask(task, recurringFrequency, recurringUntilEndDate);
@@ -199,6 +202,7 @@ public class AddTaskController extends Controller {
     }
 
     private void addTaskToTodoList(Task task, TodoList todoList) throws IllegalArgumentException {
+        UiStore uiStore = UiStore.getInstance();
         todoList.add(task);
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks(), task);

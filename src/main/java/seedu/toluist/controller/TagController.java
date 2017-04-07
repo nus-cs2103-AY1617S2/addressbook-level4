@@ -39,6 +39,7 @@ public abstract class TagController extends Controller {
 
         ArrayList<String> successfulList = new ArrayList<String>();
         ArrayList<String> failedList = new ArrayList<String>();
+        UiStore uiStore = UiStore.getInstance();
         Task task = getTaskFromIndex(Integer.parseInt(tokens.get(PARAMETER_INDEX)) - 1);
         modifyTagsForTask(successfulList, failedList,
                 task, tokens.get(PARAMETER_KEYWORDS));
@@ -78,6 +79,7 @@ public abstract class TagController extends Controller {
 
     protected void updateList(Task task) {
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks(), task);
         }

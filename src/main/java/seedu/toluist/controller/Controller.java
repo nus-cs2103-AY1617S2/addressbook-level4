@@ -13,8 +13,6 @@ import javafx.util.Pair;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.KeywordTokenizer;
-import seedu.toluist.ui.UiStore;
-
 
 /**
  * Abstract Controller class
@@ -23,11 +21,6 @@ import seedu.toluist.ui.UiStore;
  */
 public abstract class Controller {
     public static final String DEFAULT_DESCRIPTION_KEYWORD = "command_description";
-
-    /**
-     * UiStore to store data to be used by Ui
-     */
-    protected final UiStore uiStore = UiStore.getInstance();
 
     /**
      * Given a command string, execute the command

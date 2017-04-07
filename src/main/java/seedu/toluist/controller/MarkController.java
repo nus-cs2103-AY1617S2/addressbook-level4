@@ -19,6 +19,7 @@ import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.controller.commons.IndexParser;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -56,6 +57,7 @@ public class MarkController extends Controller {
     public void execute(Map<String, String> tokens) throws InvalidCommandException {
         logger.info(getClass().toString() + " will handle command");
         String indexToken = tokens.get(PARAMETER_INDEX);
+        UiStore uiStore = UiStore.getInstance();
         boolean isMarkComplete = !tokens.keySet().contains(PARAMETER_MARK_INCOMPLETE);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
 
@@ -73,6 +75,7 @@ public class MarkController extends Controller {
         CommandResult commandResult = mark(indexes, isMarkComplete);
 
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         if (!todoList.save()) {
             throw new InvalidCommandException(Messages.MESSAGE_SAVING_FAILURE);
         }
@@ -81,6 +84,7 @@ public class MarkController extends Controller {
     }
 
     private CommandResult mark(List<Integer> taskIndexes, boolean isCompleted) {
+        UiStore uiStore = UiStore.getInstance();
         ArrayList<Task> tasks = uiStore.getShownTasks(taskIndexes);
         for (Task task : tasks) {
             if (task.canUpdateToNextRecurringTask()) {

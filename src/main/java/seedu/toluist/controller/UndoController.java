@@ -12,6 +12,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -48,6 +49,7 @@ public class UndoController extends Controller {
     }
 
     private void undo(int undoTimes) {
+        UiStore uiStore = UiStore.getInstance();
         Pair<TodoList, Integer> undoResult = TodoList.getInstance().getStorage().undo(undoTimes);
         TodoList todoList = TodoList.getInstance();
         todoList.setTasks(undoResult.getKey().getTasks());

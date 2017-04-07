@@ -55,6 +55,7 @@ public class SwitchController extends Controller {
     }
 
     private void switchTab(String keyword) {
+        UiStore uiStore = UiStore.getInstance();
         TaskSwitchPredicate switchPredicate = switchConfig.getPredicate(keyword).get();
         String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()
                 ? MESSAGE_RESULT_SWITCH_SUCCESS_ALL

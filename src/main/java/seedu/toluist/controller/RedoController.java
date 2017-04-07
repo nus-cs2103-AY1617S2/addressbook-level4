@@ -12,6 +12,7 @@ import seedu.toluist.commons.core.LogsCenter;
 import seedu.toluist.commons.exceptions.InvalidCommandException;
 import seedu.toluist.commons.util.StringUtil;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 
 /**
@@ -50,6 +51,7 @@ public class RedoController extends Controller {
     private void redo(int redoTimes) {
         Pair<TodoList, Integer> redoResult = TodoList.getInstance().getStorage().redo(redoTimes);
         TodoList todoList = TodoList.getInstance();
+        UiStore uiStore = UiStore.getInstance();
         todoList.setTasks(redoResult.getKey().getTasks());
         int actualRedoTimes = redoResult.getValue();
 

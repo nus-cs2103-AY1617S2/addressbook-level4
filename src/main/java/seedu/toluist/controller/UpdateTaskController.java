@@ -17,6 +17,7 @@ import seedu.toluist.controller.commons.TaskTokenizer;
 import seedu.toluist.model.Tag;
 import seedu.toluist.model.Task;
 import seedu.toluist.model.TodoList;
+import seedu.toluist.ui.UiStore;
 import seedu.toluist.ui.commons.CommandResult;
 import seedu.toluist.ui.commons.ResultMessage;
 
@@ -78,6 +79,7 @@ public class UpdateTaskController extends Controller {
 
         CommandResult commandResult;
 
+        UiStore uiStore = UiStore.getInstance();
         String description = tokens.get(TaskTokenizer.PARAMETER_TASK_DESCRIPTION);
 
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
@@ -128,6 +130,7 @@ public class UpdateTaskController extends Controller {
             String recurringFrequency, LocalDateTime recurringUntilEndDate, boolean isStopRecurring)
             throws InvalidCommandException {
         try {
+            UiStore uiStore = UiStore.getInstance();
             validateTaskDatesInput(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating);
             validateTaskRecurringStatusInput(recurringFrequency, recurringUntilEndDate, isStopRecurring);
             validateTaskFloatingStatusInput(eventStartDateTime, eventEndDateTime, taskDeadline, isFloating);
@@ -281,6 +284,7 @@ public class UpdateTaskController extends Controller {
     }
 
     private void updateTaskInTodoList(Task task, TodoList todoList) {
+        UiStore uiStore = UiStore.getInstance();
         if (todoList.save()) {
             uiStore.setTasks(todoList.getTasks(), task);
         }
