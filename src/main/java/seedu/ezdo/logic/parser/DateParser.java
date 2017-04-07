@@ -19,6 +19,10 @@ public class DateParser {
     public static final String DAY_MONTH_YEAR_FORMAT = "^([0-9]{1,2}[-/])([0-9]{1,2}[-/])([0-9]{4}.*)";
     public static final SimpleDateFormat USER_OUTPUT_DATE_FORMAT = new SimpleDateFormat(USER_DATE_OUTPUT_FORMAT);
 
+    public static final int MATCH_DAY_INDEX = 1;
+    public static final int MATCH_MONTH_INDEX = 2;
+    public static final int MATCH_YEAR_INDEX = 3;
+
     public String value;
 
     //@@author A0138907W
@@ -44,7 +48,7 @@ public class DateParser {
         Matcher matcher = dayMonthYearPattern.matcher(input);
 
         matcher.matches();
-        return matcher.group(2) + matcher.group(1) + matcher.group(3);
+        return matcher.group(MATCH_MONTH_INDEX) + matcher.group(MATCH_DAY_INDEX) + matcher.group(MATCH_YEAR_INDEX);
     }
 
     //@@author A0139177W

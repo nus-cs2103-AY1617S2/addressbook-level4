@@ -495,22 +495,30 @@ _**Brings up the help guide in a separate window.**_<br>
 
 ## 5. Command Summary
 
-For your convenience, the parameters for every command available in ezDo are summarised in Table 3 below.
+For your convenience, the parameters for every command available in ezDo are summarised in Table 3 below. Some examples have been included.
 
 |Command|Parameters                                               |
 |:-----:|---------------------------------------------------------|
 |[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**             |
+||**`add Buy fruits p/1 s/tomorrow`**             |
 |[edit / e](#32-editing-a-task-edit--e)         |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**            |
-|[done / d](#33-marking-a-task-as-done-done--d)  |**`done INDEX`**    |
-|[kill / k](#34-deleting-a-task-kill--k)        |**`kill INDEX`**          |
+||**`edit 1 p/2 s/next week`**             |
+|[done / d](#33-marking-a-task-as-done-done--d)  |**`done INDEX [INDEX]...`**    |
+||**`done 2 6 7`**             |
+|[kill / k](#34-deleting-a-task-kill--k)        |**`kill INDEX [INDEX]...`**          |
+||**`kill 4 3`**             |
 |[sort / s](#35-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
+||**`sort n d`**             |
 |[find / f](#36-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
+||**`find math t/homework d/before sunday`**             |
+|[save](#311-moving-the-save-file-save)      |**`save DIRECTORY`**    |
+||**`save C:/Dropbox`**             |
+|[alias](#312-aliasing-a-command-alias)      |**`alias COMMAND SHORTCUT`**    |
+||**`alias quit kaboom`**             |
 |[list / l](#37-listing-all-tasks-list--l)       |**`list`**         |
 |[undo / u](#38-reverting-the-last-action-undo--u) |**`undo`** |
 |[redo / r](#39-redoing-the-last-undone-action-redo--r)|**`redo`**|
 |[clear / c](#310-clearing-all-entries-clear--c)  |**`clear`**       |
-|[save](#311-moving-the-save-file-save)      |**`save DIRECTORY`**    |
-|[alias](#312-aliasing-a-command-alias)      |**`alias COMMAND SHORTCUT`**    |
 |[quit / q](#313-exiting-the-program-quit--q)    |**`quit`**              |
 |[help / h](#314-viewing-help-help--h)           |**`help`**    |
 

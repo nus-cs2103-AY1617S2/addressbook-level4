@@ -16,6 +16,9 @@ public class CommandAliases implements Serializable {
 
     private HashMap<String, String> commandAliasesMap;
 
+    /**
+     * Creates a CommandAliases with no command aliases initially.
+     */
     public CommandAliases() {
         commandAliasesMap = new HashMap<>();
     }

@@ -1,8 +1,10 @@
 package seedu.ezdo.model;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.ezdo.commons.core.GuiSettings;
+import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.exceptions.AliasAlreadyInUseException;
 import seedu.ezdo.commons.exceptions.CommandDoesNotExistException;
 import seedu.ezdo.logic.CommandAliases;
@@ -18,6 +20,8 @@ public class UserPrefs {
     public SortCriteria sortCriteria;
     public Boolean isSortedAscending;
     public CommandAliases commandAliases;
+
+    private static final Logger logger = LogsCenter.getLogger(UserPrefs.class);
 
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
@@ -58,6 +62,7 @@ public class UserPrefs {
     public void addCommandAlias(String command, String alias) throws AliasAlreadyInUseException,
         CommandDoesNotExistException {
         commandAliases.addAlias(command, alias);
+        logger.info("New command alias has been added");
     }
 
     /**
@@ -65,6 +70,7 @@ public class UserPrefs {
      */
     public void clearCommandAliases() {
         commandAliases.clearAliases();
+        logger.info("Command aliases have been cleared");
     }
 
     /**

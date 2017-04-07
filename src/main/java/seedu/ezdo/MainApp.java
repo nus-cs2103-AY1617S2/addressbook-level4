@@ -196,13 +196,17 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.userPrefs.updateLastUsedSortCriteria(event.getNewSortCriteria());
     }
-  //@@author
+  //@@author A0138907W
+    /**
+     * Updates isSortedAscending in the user prefs.
+     */
     @Subscribe
     public void handleIsSortedAscendingChangedEvent(IsSortedAscendingChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.userPrefs.updateLastUsedIsSortedAscending(event.getNewIsSortedAscending());
     }
 
+  //@@author
     public static void main(String[] args) {
         launch(args);
     }
