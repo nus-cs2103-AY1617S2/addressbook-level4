@@ -20,9 +20,12 @@ public class SelectCommandTest extends EzDoGuiTest {
         assertSelectionSuccess(taskCount); // last task in the list
         int middleIndex = taskCount / 2;
         assertSelectionSuccess(middleIndex); // a task in the middle of the list
-
-        assertSelectionInvalid(taskCount + 1); // invalid index
+        
+        assertSelectionInvalid(0); // invalid index
+        assertSelectionInvalid(taskCount + 1);
         assertTaskSelected(middleIndex); // assert previous selection remains
+
+        assertSelectionInvalid(0); 
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
