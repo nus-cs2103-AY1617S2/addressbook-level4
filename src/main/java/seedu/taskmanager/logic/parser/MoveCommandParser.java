@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
-import seedu.taskmanager.logic.commands.MoveCommand;
+import seedu.taskmanager.logic.commands.SaveAsCommand;
 
 // @@author A0114269E
 /**
@@ -24,13 +24,13 @@ public class MoveCommandParser {
         final Matcher matcher = FILEPATH_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MoveCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         }
         if (!isValidXmlPath(args)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_XML_FORMAT, MoveCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         }
-        return new MoveCommand(args.trim());
+        return new SaveAsCommand(args.trim());
     }
 
     /**
