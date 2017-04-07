@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.CommandBox;
+import seedu.address.ui.Ui;
 
 public class CommandBoxTest extends AddressBookGuiTest {
 
@@ -22,11 +22,11 @@ public class CommandBoxTest extends AddressBookGuiTest {
     public void setUp() {
         defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
-                    defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+                    defaultStyleOfCommandBox.contains(Ui.ERROR_STYLE_CLASS));
 
         // build style class for error
         errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
-        errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+        errorStyleOfCommandBox.add(Ui.ERROR_STYLE_CLASS);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class CommandBoxTest extends AddressBookGuiTest {
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
         // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
+        commandBox.getStyleClass().add(Ui.ERROR_STYLE_CLASS);
 
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 

@@ -14,8 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class CommandBox extends UiPart<Region> {
 
     private static final String FXML = "CommandBox.fxml";
-    public static final String ERROR_STYLE_CLASS = "error";
-
     private final Logic logic;
 
     @FXML
@@ -58,14 +56,14 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a successful command.
      */
     private void setStyleToIndicateCommandSuccess() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().remove(Ui.ERROR_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().add(Ui.ERROR_STYLE_CLASS);
     }
 
 }

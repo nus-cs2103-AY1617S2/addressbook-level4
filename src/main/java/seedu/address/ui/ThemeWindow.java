@@ -35,6 +35,7 @@ public class ThemeWindow extends Window {
     public static final String DEFAULT_STYLESHEET = "LimeTheme";
     public static final String STYLESHEET_EXTENSION = ".css";
     public static final String THEME_FILE_FOLDER = "/themes/";
+    public static final String EXTENSIONS_STYLESHEET = "/view/Extensions.css";
     
     protected static final String ICON = "/images/theme_icon.png";
     protected static final String FXML = "ThemeWindow.fxml";
@@ -84,12 +85,16 @@ public class ThemeWindow extends Window {
     * @param Theme filename (without path or extension) to be applied.
     */
    public static void changeTheme(Parent root, String theme) {
+       
        root.getStylesheets().clear();
+       
        root.getStylesheets().add(MainApp.class.getResource(
-               ThemeWindow.THEME_FILE_FOLDER
+               THEME_FILE_FOLDER
                + theme
-               + ThemeWindow.STYLESHEET_EXTENSION)
+               + STYLESHEET_EXTENSION)
                .toString());
+       
+       root.getStylesheets().add(MainApp.class.getResource(EXTENSIONS_STYLESHEET).toString());
    }
 
    private void setConnections(String path) {
