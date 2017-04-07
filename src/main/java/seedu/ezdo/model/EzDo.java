@@ -169,6 +169,13 @@ public class EzDo implements ReadOnlyEzDo {
     }
 
     //@@author A0139177W
+    public void toggleTasksSelect(ArrayList<Task> p) {
+        for (int i = 0; i < p.size(); i++) {
+            Task task = p.get(i);
+            task.toggleStart();
+        }
+    }
+
     private void moveCurrentTaskToDone(Task task) {
         try {
             task.setRecur(new Recur(""));
@@ -255,4 +262,5 @@ public class EzDo implements ReadOnlyEzDo {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
 }
