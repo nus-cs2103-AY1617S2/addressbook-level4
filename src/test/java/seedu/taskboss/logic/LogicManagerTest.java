@@ -416,7 +416,6 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandFailure("delete 0", MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
