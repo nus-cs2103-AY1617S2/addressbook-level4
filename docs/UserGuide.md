@@ -219,7 +219,7 @@ _**Marks the task at a specified index as done/undone.**_<br>
 
 > - `INDEX` refers to the index number of the tasks shown in the most recent listing.<br><br>
 > - Once a task is marked as done, it will be removed from the task list and added to the done list.<br><br>
-> - View the done list with the command `done` without any index specified.
+> - View the done list with the command `done` without any index specified.<br><br>
 > - Unmark a done task in the done list and it will return to the previous list.
 
 <br>
