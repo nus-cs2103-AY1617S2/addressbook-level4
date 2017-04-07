@@ -13,7 +13,7 @@ import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.commons.util.FileUtil;
 import seedu.ezdo.model.ReadOnlyEzDo;
-//@@author A0139248X
+
 /**
  * A class to access EzDo data stored as an xml file on the hard disk.
  */
@@ -79,7 +79,7 @@ public class XmlEzDoStorage implements EzDoStorage {
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableEzDo(ezDo));
     }
-
+  //@@author A0139248X
     @Override
     public void moveEzDo(String oldPath, String newPath) throws IOException {
         assert oldPath != null;

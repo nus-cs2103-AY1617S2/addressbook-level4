@@ -11,7 +11,7 @@ import seedu.ezdo.commons.util.MultipleIndexCommandUtil;
 import seedu.ezdo.commons.util.UrlUtil;
 import seedu.ezdo.logic.parser.CliSyntax;
 import seedu.ezdo.model.util.SampleDataUtil;
-//@@author A0139248X
+
 public class ConstructorTest {
 
     @Test
