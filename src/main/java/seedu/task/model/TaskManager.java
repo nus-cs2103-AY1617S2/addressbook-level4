@@ -25,7 +25,10 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 public class TaskManager implements ReadOnlyTaskManager {
 
     private UniqueTaskList tasks;
+    //@@author A0139161J
     private UniqueTaskList completedTasks;
+    private UniqueTaskList overdueTasks;
+    //@@author
     private final UniqueTagList tags;
 
     /*
@@ -37,7 +40,10 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     {
         tasks = new UniqueTaskList();
+        //@@author A0139161J
         completedTasks = new UniqueTaskList();
+        overdueTasks = new UniqueTaskList();
+        //@@author A0139161J
         tags = new UniqueTagList();
     }
 
@@ -62,7 +68,13 @@ public class TaskManager implements ReadOnlyTaskManager {
              throws UniqueTaskList.DuplicateTaskException {
         this.completedTasks.setTasks(completedTasks);
     }
+
+    public void setOverdueTasks(ObservableList<ReadOnlyTask> overdueTasks)
+             throws UniqueTaskList.DuplicateTaskException {
+        this.overdueTasks.setTasks(overdueTasks);
+    }
     //@@author
+
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
@@ -77,6 +89,11 @@ public class TaskManager implements ReadOnlyTaskManager {
         //@@author A0139161J
         try {
             setCompletedTasks(newData.getCompletedTaskList());
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            assert false : "Task Manager should not have duplicate tasks";
+        }
+        try {
+            setOverdueTasks(newData.getOverdueTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "Task Manager should not have duplicate tasks";
         }
@@ -237,11 +254,18 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
+    //@@author A0139161J
 
     @Override
     public ObservableList<ReadOnlyTask> getCompletedTaskList() {
         return new UnmodifiableObservableList<>(completedTasks.asObservableList());
     }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getOverdueTaskList() {
+        return new UnmodifiableObservableList<>(overdueTasks.asObservableList());
+    }
+    //@@author
 
     @Override
     public ObservableList<Tag> getTagList() {
