@@ -328,6 +328,9 @@ public class Task implements ReadOnlyTask {
         }
     }
 
+    /**
+     * Comparator use to sort task based on endDate
+     */
     public static Comparator<Task> taskDateComparator = new Comparator<Task>() {
 
         public int compare(Task task1, Task task2) {
