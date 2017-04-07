@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task complete: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task is already complete.";
 
     private final int filteredPersonListIndex;

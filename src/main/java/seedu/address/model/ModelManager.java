@@ -12,6 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
@@ -139,14 +141,11 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0164466X
     @Override
     public void updateFilteredListToShowComplete() {
-        // TODO Auto-generated method stub
         try {
             updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_COMPLETE))));
         } catch (DuplicateTagException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -154,14 +153,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowIncomplete() {
-        // TODO Auto-generated method stub
         try {
             updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_INCOMPLETE))));
         } catch (DuplicateTagException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -248,7 +244,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         @Override
-        public boolean run(ReadOnlyTask task) {
+        public boolean run(ReadOnlyPerson task) {
             return task.getTags().equals(tags);
         }
         
