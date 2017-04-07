@@ -20,7 +20,10 @@ import seedu.whatsleft.testutil.TestEvent;
 import seedu.whatsleft.testutil.TestTask;
 import seedu.whatsleft.testutil.TestUtil;
 
-// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
+//@@author A0148038A
+/*
+* GUI test for EditCommand
+*/
 public class EditCommandTest extends WhatsLeftGuiTest {
 
     // The list of events in the event list panel is expected to match this list.

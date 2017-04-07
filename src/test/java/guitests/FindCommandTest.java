@@ -8,6 +8,10 @@ import seedu.whatsleft.commons.core.Messages;
 import seedu.whatsleft.testutil.TestEvent;
 import seedu.whatsleft.testutil.TestTask;
 
+//@@author A0148038A
+/*
+* GUI test for FindCommand
+*/
 public class FindCommandTest extends WhatsLeftGuiTest {
 
     @Test
