@@ -23,6 +23,7 @@ import seedu.ezdo.commons.util.StringUtil;
 import seedu.ezdo.model.tag.Tag;
 import seedu.ezdo.model.todo.Priority;
 import seedu.ezdo.model.todo.ReadOnlyTask;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
@@ -270,6 +271,7 @@ public class ModelManager extends ComponentManager implements Model {
         private Optional<Priority> priority;
         private Optional<TaskDate> startDate;
         private Optional<TaskDate> dueDate;
+        private Optional<Recur> recur;
         private Set<String> tags;
         private boolean startBefore;
         private boolean dueBefore;
@@ -282,6 +284,7 @@ public class ModelManager extends ComponentManager implements Model {
             priority = searchParameters.getPriority();
             startDate = searchParameters.getStartDate();
             dueDate = searchParameters.getDueDate();
+            recur = searchParameters.getRecur();
             tags = searchParameters.getTags();
             startBefore = searchParameters.getStartBefore();
             dueBefore = searchParameters.getdueBefore();
@@ -303,10 +306,11 @@ public class ModelManager extends ComponentManager implements Model {
             boolean isDueDateQualified = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
                     || (dueBefore && compareBeforeDue(task.getDueDate()))
                     || (dueAfter && compareAfterDue(task.getDueDate())));
+            boolean isRecurQualified = compareRecur(task.getRecur());
             boolean areTagsEqual = (taskTagStringSet.containsAll(tags));
 
             boolean isQualified = isNameEqual && !task.getDone() && isPriorityEqual && isStartDateQualified
-                    && isDueDateQualified && areTagsEqual;
+                    && isDueDateQualified && isRecurQualified && areTagsEqual;
 
             return isQualified;
 
@@ -336,6 +340,17 @@ public class ModelManager extends ComponentManager implements Model {
 
             boolean isEqual = (!priority.isPresent() || (priority.get().toString().equals("") && priorityExist)
                     || (priorityExist && taskPriorityString.equals(priority.get().toString())));
+
+            return isEqual;
+        }
+
+        private boolean compareRecur(Recur taskRecur) {
+
+            String taskRecurString = taskRecur.toString();
+            boolean recurExist = (taskRecurString.length() != 0);
+
+            boolean isEqual = (!recur.isPresent() || (recur.get().toString().equals("") && recurExist)
+                    || (recurExist && taskRecurString.equals(recur.get().toString())));
 
             return isEqual;
         }
