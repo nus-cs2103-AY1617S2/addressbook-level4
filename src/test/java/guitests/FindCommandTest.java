@@ -10,6 +10,7 @@ import seedu.jobs.testutil.TestTask;
 
 public class FindCommandTest extends TaskBookGuiTest {
 
+    //TODO add success cases such as find by name, desc, tag
 /*    @Test
     public void find_nonEmptyList() {
         assertFindResult("find Final exam"); // no results
