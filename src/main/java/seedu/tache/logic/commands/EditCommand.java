@@ -47,6 +47,8 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
 
+    public static final String SPECIAL_CASE_TIME_STRING = "23:59:59";
+
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
@@ -162,14 +164,34 @@ public class EditCommand extends Command implements Undoable {
             isTimed = false;
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        checkValidDateRange(updatedStartDateTime, updatedEndDateTime);
+        checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
+
+        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
+                            updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
+
+    }
+
+    private static void checkValidDateRange(Optional<DateTime> updatedStartDateTime,
+                                                Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
         if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
             if (updatedStartDateTime.get().compareTo(updatedEndDateTime.get()) == 1) {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_RANGE);
             }
         }
-        return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
+    }
 
+    private static void checkSpecialCase(EditTaskDescriptor editTaskDescriptor,
+                            Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
+        //Special case End Date -> Today will result in a default timing of 2359 instead of 0000
+        if (editTaskDescriptor.getEndDate().isPresent() && updatedEndDateTime.isPresent()
+                && !editTaskDescriptor.getEndTime().isPresent()) {
+            if ((new DateTime(editTaskDescriptor.getEndDate().get()).isToday())
+                        && updatedEndDateTime.get().getDate().before(new Date())) {
+                updatedEndDateTime.get().setTimeOnly(SPECIAL_CASE_TIME_STRING);
+            }
+        }
     }
 
     /**
