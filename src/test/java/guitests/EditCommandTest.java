@@ -126,7 +126,7 @@ public class EditCommandTest extends TaskBossGuiTest {
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Birthday prepare")
                 .withCategories("Alltasks", "Friends", "Owesmoney").build();
 
-        assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit,editedTask);
+        assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
 
     @Test
