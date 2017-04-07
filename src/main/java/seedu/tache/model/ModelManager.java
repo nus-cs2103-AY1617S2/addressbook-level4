@@ -36,17 +36,17 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139925U
     public static final int MARGIN_OF_ERROR = 1;
     //@@author A0142255M
-    public static final String ALL_TASK_LIST_TYPE = "All Tasks";
-    public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
-    public static final String UNCOMPLETED_TASK_LIST_TYPE = "Uncompleted Tasks";
-    public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
-    public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
-  //@@author A0139925U
-    public static final String FOUND_TASK_LIST_TYPE = "Found Tasks";
+    public static final String TASK_LIST_TYPE_ALL = "All Tasks";
+    public static final String TASK_LIST_TYPE_COMPLETED = "Completed Tasks";
+    public static final String TASK_LIST_TYPE_UNCOMPLETED = "Uncompleted Tasks";
+    public static final String TASK_LIST_TYPE_TIMED = "Timed Tasks";
+    public static final String TASK_LIST_TYPE_FLOATING = "Floating Tasks";
+    //@@author A0139925U
+    public static final String TASK_LIST_TYPE_FOUND = "Found Tasks";
     //@@author A0139961U
-    public static final String DUE_TODAY_TASK_LIST_TYPE = "Tasks Due Today";
-    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Tasks Due This Week";
-    public static final String OVERDUE_TASK_LIST_TYPE = "Overdue Tasks";
+    public static final String TASK_LIST_TYPE_DUE_TODAY = "Tasks Due Today";
+    public static final String TASK_LIST_TYPE_DUE_THIS_WEEK = "Tasks Due This Week";
+    public static final String TASK_LIST_TYPE_OVERDUE = "Overdue Tasks";
     //@@author
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     //@@author A0139925U
@@ -54,9 +54,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     private Set<String> latestKeywords;
-    //@@author
     //@@author A0142255M
-    private String filteredTaskListType = ALL_TASK_LIST_TYPE;
+    private String filteredTaskListType = TASK_LIST_TYPE_ALL;
     //@@author
 
     /**
@@ -79,9 +78,10 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        assert newData != null;
         taskManager.resetData(newData);
         updateFilteredListToShowAll();
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_ALL);
         indicateTaskManagerChanged();
     }
     //@@author
@@ -92,7 +92,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0142255M
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises events to indicate that the model has changed.
+     */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
@@ -109,10 +111,10 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
+        assert task != null;
         taskManager.addTask(task);
         indicateTaskManagerChanged();
     }
-    //@@author
 
     //@@author A0150120H
     @Override
@@ -144,51 +146,50 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_ALL);
     }
-    //@@author
 
     //@@author A0139925U
     @Override
     public void updateFilteredListToShowUncompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
-        updateFilteredTaskListType(UNCOMPLETED_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_UNCOMPLETED);
 
     }
 
     @Override
     public void updateFilteredListToShowCompleted() {
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
-        updateFilteredTaskListType(COMPLETED_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_COMPLETED);
     }
 
     //@@author A0142255M
     @Override
     public void updateFilteredListToShowTimed() {
         updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
-        updateFilteredTaskListType(TIMED_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_TIMED);
     }
 
     @Override
     public void updateFilteredListToShowFloating() {
         updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
-        updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_FLOATING);
     }
 
     //@@author A0139961U
     @Override
     public void updateFilteredListToShowDueToday() {
-        updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_DUE_TODAY);
         updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
     }
 
     public void updateFilteredListToShowDueThisWeek() {
-        updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_DUE_THIS_WEEK);
         updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
     }
 
     public void updateFilteredListToShowOverdueTasks() {
-        updateFilteredTaskListType(OVERDUE_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_OVERDUE);
         updateFilteredTaskList(new PredicateExpression(new OverdueQualifier()));
     }
 
@@ -199,14 +200,16 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
+        assert keywords != null;
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
         ArrayList<String> keywordsList = new ArrayList<String>(keywords);
-        updateFilteredTaskListType(FOUND_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_FOUND);
         retainLatestKeywords(keywords);
         raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
     }
 
     private void updateFilteredTaskList(Expression expression) {
+        assert expression != null;
         filteredTasks.setPredicate(expression::satisfies);
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
@@ -217,12 +220,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskListType(String newFilteredTaskListType) {
+        assert newFilteredTaskListType != null;
+        assert !newFilteredTaskListType.equals("");
         if (!filteredTaskListType.equals(newFilteredTaskListType)) {
             raise(new TaskListTypeChangedEvent(newFilteredTaskListType));
         }
         filteredTaskListType = newFilteredTaskListType;
     }
-    //@@author
+
     //@@author A0139925U
     private void retainLatestKeywords(Set<String> keywords) {
         latestKeywords = keywords;
@@ -230,28 +235,28 @@ public class ModelManager extends ComponentManager implements Model {
 
     public void updateCurrentFilteredList() {
         switch(filteredTaskListType) {
-        case ALL_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_ALL:
             updateFilteredListToShowAll();
             break;
-        case COMPLETED_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_COMPLETED:
             updateFilteredListToShowCompleted();
             break;
-        case UNCOMPLETED_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_UNCOMPLETED:
             updateFilteredListToShowUncompleted();
             break;
-        case TIMED_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_TIMED:
             updateFilteredListToShowTimed();
             break;
-        case FLOATING_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_FLOATING:
             updateFilteredListToShowFloating();
             break;
-        case FOUND_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_FOUND:
             updateFilteredTaskList(latestKeywords);
             break;
-        case DUE_TODAY_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_DUE_TODAY:
             updateFilteredListToShowDueToday();
             break;
-        case DUE_THIS_WEEK_TASK_LIST_TYPE:
+        case TASK_LIST_TYPE_DUE_THIS_WEEK:
             updateFilteredListToShowDueThisWeek();
             break;
         default:
@@ -332,6 +337,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            assert task != null;
             if (isTimed) {
                 return task.getTimedStatus();
             } else {
@@ -367,7 +373,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "active=" + isActive;
         }
     }
-    //@@author
 
     //@@author A0139961U
     private class DueTodayQualifier implements Qualifier {
@@ -433,7 +438,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "dueThisWeek=true";
         }
     }
-    //@@author
 
     //@@author A0139925U
     private class DateTimeQualifier implements Qualifier {
@@ -547,10 +551,10 @@ public class ModelManager extends ComponentManager implements Model {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < filteredTasks.size(); i++) {
             if (filteredTasks.get(i).getRecurringStatus()) {
-                if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(new Date()).toArray());
-                } else if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                } else if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
                     Calendar dateThisWeek = Calendar.getInstance();
                     dateThisWeek.setTime(new Date());
                     dateThisWeek.add(Calendar.WEEK_OF_YEAR, 1);
@@ -580,5 +584,5 @@ public class ModelManager extends ComponentManager implements Model {
     public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
         return getFilteredTaskList().indexOf(targetTask);
     }
-    //@@author
+
 }

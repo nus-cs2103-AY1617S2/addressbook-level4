@@ -9,46 +9,46 @@ public class CliSyntax {
 
     //@@author A0139925U
     /* Parameter delimiter definitions */
-    public static final String PARAMETER_DELIMITER = new String(";");
-    public static final String INDEX_DELIMITER = new String(",");
-    public static final String EDIT_PARAMETER_DELIMITER = new String(" ");
+    public static final String DELIMITER_PARAMETER = new String(";");
+    public static final String DELIMITER_INDEX = new String(",");
+    public static final String DELIMITER_EDIT_PARAMETER = new String(" ");
 
     /* Natural Language Processing definitions */
-    public static final String EDIT_PARAMETER_KEYWORD = " change ";
-    public static final String EDIT_PARAMETER_VALUE_KEYWORD = " to ";
-    public static final String EDIT_MULTI_PARAMETER_KEYWORD = " and ";
-    public static final String EDIT_MULTI_PARAMETER_KEYWORDS = " and change ";
+    public static final String KEYWORD_EDIT_PARAMETER = " change ";
+    public static final String KEYWORD_EDIT_PARAMETER_VALUE = " to ";
+    public static final String KEYWORD_EDIT_MULTI_PARAMETER = " and ";
+    public static final String KEYWORDS_EDIT_MULTI_PARAMETER = " and change ";
 
     /* Parameter names definitions */
-    public static final String NAME_PARAMETER = "name";
-    public static final String NAME_PARAMETER_2 = "n";
-    public static final String START_DATE_PARAMETER = "start_date";
-    public static final String START_DATE_PARAMETER_2 = "startdate";
-    public static final String START_DATE_PARAMETER_3 = "sd";
-    public static final String END_DATE_PARAMETER = "end_date";
-    public static final String END_DATE_PARAMETER_2 = "enddate";
-    public static final String END_DATE_PARAMETER_3 = "ed";
-    public static final String START_TIME_PARAMETER = "start_time";
-    public static final String START_TIME_PARAMETER_2 = "starttime";
-    public static final String START_TIME_PARAMETER_3 = "st";
-    public static final String END_TIME_PARAMETER = "end_time";
-    public static final String END_TIME_PARAMETER_2 = "endtime";
-    public static final String END_TIME_PARAMETER_3 = "et";
-    public static final String TAG_PARAMETER = "tag";
-    public static final String TAG_PARAMETER_2 = "t";
+    public static final String PARAMETER_NAME = "name";
+    public static final String PARAMETER_2_NAME = "n";
+    public static final String PARAMETER_START_DATE = "start_date";
+    public static final String PARAMETER_2_START_DATE = "startdate";
+    public static final String PARAMETER_3_START_DATE = "sd";
+    public static final String PARAMETER_END_DATE = "end_date";
+    public static final String PARAMETER_2_END_DATE = "enddate";
+    public static final String PARAMETER_3_END_DATE = "ed";
+    public static final String PARAMETER_START_TIME = "start_time";
+    public static final String PARAMETER_2_START_TIME = "starttime";
+    public static final String PARAMETER_3_START_TIME = "st";
+    public static final String PARAMETER_END_TIME = "end_time";
+    public static final String PARAMETER_2_END_TIME = "endtime";
+    public static final String PARAMETER_3_END_TIME = "et";
+    public static final String PARAMETER_TAG = "tag";
+    public static final String PARAMETER_2_TAG = "t";
 
     /* List filter definitions */
-    public static final String COMPLETED_FILTER = "completed";
-    public static final String UNCOMPLETED_FILTER = "uncompleted";
-    public static final String ALL_FILTER = "all";
+    public static final String FILTER_COMPLETED = "completed";
+    public static final String FILTER_UNCOMPLETED = "uncompleted";
+    public static final String FILTER_ALL = "all";
     //@@author A0142255M
-    public static final String TIMED_FILTER = "timed";
-    public static final String FLOATING_FILTER = "floating";
+    public static final String FILTER_TIMED = "timed";
+    public static final String FILTER_FLOATING = "floating";
     //@@author
     //@@author A0139961U
-    public static final String DUE_TODAY_FILTER = "today";
-    public static final String DUE_THIS_WEEK_FILTER = "this week";
-    public static final String OVERDUE_FILTER = "overdue";
+    public static final String FILTER_DUE_TODAY = "today";
+    public static final String FILTER_DUE_THIS_WEEK = "this week";
+    public static final String FILTER_OVERDUE = "overdue";
     //@@author
 
     /* Patterns definitions */

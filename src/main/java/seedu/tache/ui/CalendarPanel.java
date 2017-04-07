@@ -41,7 +41,7 @@ public class CalendarPanel extends UiPart<Region> {
     private WebView calendar;
 
     /**
-     * @param placeholder The AnchorPane where the CalendarPanel must be inserted
+     * @param placeholder The AnchorPane where the CalendarPanel must be inserted.
      */
     public CalendarPanel(AnchorPane placeholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
@@ -54,7 +54,39 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     //@@author A0142255M
+    /**
+     * Executes the script when the calendar finishes loading.
+     *
+     * @param script    Script to be executed.
+     */
+    private void loadAndExecuteScript(String script) {
+        assert script != null;
+        assert !script.equals("");
+        WebEngine engine = calendar.getEngine();
+        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
+        if (webViewState.get() == Worker.State.SUCCEEDED) {
+            engine.executeScript(script);
+        } else {
+            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable,
+                        Worker.State oldValue, Worker.State newValue) {
+                    if (newValue != Worker.State.SUCCEEDED) {
+                        return;
+                    }
+                    engine.executeScript(script);
+                }
+            });
+        }
+    }
+
+    /**
+     * Initializes the calendar, then adds all timed events.
+     *
+     * @param taskList    List of all tasks (including timed tasks).
+     */
     private void loadCalendar(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         String calendarURL = MainApp.class.getResource("/html/calendar.html").toExternalForm();
         WebEngine engine = calendar.getEngine();
         engine.load(calendarURL);
@@ -73,9 +105,17 @@ public class CalendarPanel extends UiPart<Region> {
                 }
             });
         }
+        logger.fine("Calendar loaded.");
     }
 
+    /**
+     * Returns the String that can be executed by the calendar WebEngine to add an event into the calendar.
+     *
+     * @param task    Task to be added as a calendar event.
+     * @return    Script for calendar to add event.
+     */
     private String getLoadTaskExecuteScript(ReadOnlyTask task) {
+        assert task != null;
         String title = task.getName().toString();
         String start = "0";
         String end = "0"; // invalid format of datetime
@@ -102,12 +142,24 @@ public class CalendarPanel extends UiPart<Region> {
         return "add_event('" + title + "', '" + start + "', '" + end + "', '" + status + "')";
     }
 
+    /**
+     * Updates the events in the calendar whenever the task manager is modified.
+     *
+     * @param event    TaskManagerChangedEvent which contains the updated task list.
+     */
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         ObservableList<ReadOnlyTask> taskList = event.data.getTaskList();
         refreshCalendar(taskList);
+        logger.fine("Calendar refreshed.");
     }
 
+    /**
+     * Changes the reference position of the calendar to the date associated with the selected task.
+     * If the start date of the task is not present, the end date is used as reference instead.
+     *
+     * @param event    TaskPanelSelectionChangedEvent which contains the task selected.
+     */
     @Subscribe
     public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         Optional<DateTime> startDateTime = event.getNewSelection().getStartDateTime();
@@ -119,6 +171,11 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Changes the view of the calendar according to the task list type of the task panel.
+     *
+     * @param event    TaskListTypeChangedEvent which contains the updated task list type.
+     */
     @Subscribe
     public void handleTaskListTypeChangedEvent(TaskListTypeChangedEvent event) {
         String taskListType = event.getTaskListType();
@@ -137,89 +194,57 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Moves the calendar back (by a day / month / week).
+     */
     @Subscribe
     public void handleCalendarPreviousRequestEvent(CalendarPreviousRequestEvent event) {
-        WebEngine engine = calendar.getEngine();
-        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
-        if (webViewState.get() == Worker.State.SUCCEEDED) {
-            engine.executeScript("prev()");
-        } else {
-            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable,
-                        Worker.State oldValue, Worker.State newValue) {
-                    if (newValue != Worker.State.SUCCEEDED) {
-                        return;
-                    }
-                    engine.executeScript("prev()");
-                }
-            });
-        }
+        loadAndExecuteScript("prev()");
+        logger.fine("Calendar moved back.");
     }
 
+    /**
+     * Moves the calendar forward (by a day / month / week).
+     */
     @Subscribe
     public void handleCalendarNextRequestEvent(CalendarNextRequestEvent event) {
-        WebEngine engine = calendar.getEngine();
-        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
-        if (webViewState.get() == Worker.State.SUCCEEDED) {
-            engine.executeScript("next()");
-        } else {
-            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable,
-                        Worker.State oldValue, Worker.State newValue) {
-                    if (newValue != Worker.State.SUCCEEDED) {
-                        return;
-                    }
-                    engine.executeScript("next()");
-                }
-            });
-        }
+        loadAndExecuteScript("next()");
+        logger.fine("Calendar moved forward.");
     }
 
+    /**
+     * Toggles the view of the calendar to day / month / year.
+     *
+     * @param view    A string indicating the view requested ("day", "month" or "year").
+     */
     private void changeView(String view) {
-        WebEngine engine = calendar.getEngine();
-        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
-        if (webViewState.get() == Worker.State.SUCCEEDED) {
-            engine.executeScript("change_view('" + view + "')");
-        } else {
-            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable,
-                        Worker.State oldValue, Worker.State newValue) {
-                    if (newValue != Worker.State.SUCCEEDED) {
-                        return;
-                    }
-                    engine.executeScript("change_view('" + view + "')");
-                }
-            });
-        }
+        assert view != null;
+        assert !view.equals("");
+        loadAndExecuteScript("change_view('" + view + "')");
+        logger.fine("Calendar view changed to: " + view);
     }
 
+    /**
+     * Moves the calendar to the referenceDate.
+     */
     private void changeReferenceDate(String referenceDate) {
-        WebEngine engine = calendar.getEngine();
-        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
-        if (webViewState.get() == Worker.State.SUCCEEDED) {
-            engine.executeScript("change_reference_date('" + referenceDate + "')");
-        } else {
-            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable,
-                        Worker.State oldValue, Worker.State newValue) {
-                    if (newValue != Worker.State.SUCCEEDED) {
-                        return;
-                    }
-                    engine.executeScript("change_reference_date('" + referenceDate + "')");
-                }
-            });
-        }
+        assert referenceDate != null;
+        assert !referenceDate.equals("");
+        loadAndExecuteScript("change_reference_date('" + referenceDate + "')");
+        logger.fine("Calendar reference date changed to: " + referenceDate);
     }
 
-    private String getRemoveAllTaskScript() {
-        return "remove_all()";
+    private void addCurrentEvent(ReadOnlyTask task) {
+        loadAndExecuteScript(getLoadTaskExecuteScript(task));
     }
 
+    /**
+     * Clears the calendar of all previous events, then adds all timed events from the latest taskList.
+     *
+     * @param taskList    Updated list of all tasks.
+     */
     private void refreshCalendar(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         WebEngine engine = calendar.getEngine();
         ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
         if (webViewState.get() == Worker.State.SUCCEEDED) {
@@ -240,16 +265,22 @@ public class CalendarPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Clears the calendar of all events.
+     */
     private void removeAllEvents() {
         WebEngine engine = calendar.getEngine();
-        engine.executeScript(getRemoveAllTaskScript());
+        engine.executeScript("remove_all()");
     }
 
     /**
-     * Inputs all timed events in task list to calendar.
+     * Inputs all timed tasks into the calendar.
      * For deadline tasks (only have end but no start date/time), convert end date/time to start date/time.
+     *
+     * @param taskList    List which contains all tasks (including timed tasks).
      */
     public void addAllEvents(ObservableList<ReadOnlyTask> taskList) {
+        assert taskList != null;
         for (ReadOnlyTask task : taskList) {
             if (task.getTimedStatus()) {
                 if (!task.getStartDateTime().isPresent()) {
@@ -263,25 +294,6 @@ public class CalendarPanel extends UiPart<Region> {
                 }
                 addCurrentEvent(task);
             }
-        }
-    }
-
-    private void addCurrentEvent(ReadOnlyTask task) {
-        WebEngine engine = calendar.getEngine();
-        ReadOnlyObjectProperty<Worker.State> webViewState = engine.getLoadWorker().stateProperty();
-        if (webViewState.get() == Worker.State.SUCCEEDED) {
-            engine.executeScript(getLoadTaskExecuteScript(task));
-        } else {
-            engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable,
-                        Worker.State oldValue, Worker.State newValue) {
-                    if (newValue != Worker.State.SUCCEEDED) {
-                        return;
-                    }
-                    engine.executeScript(getLoadTaskExecuteScript(task));
-                }
-            });
         }
     }
     //@@author

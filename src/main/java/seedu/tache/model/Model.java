@@ -68,7 +68,7 @@ public interface Model {
     void updateFilteredListToShowCompleted();
 
     //@@author A0142255M
-    /** Updates the filter of the filtered task list to show all uncompleted tasks */
+    /** Updates the filter of the filtered task list to show all timed tasks */
     void updateFilteredListToShowTimed();
 
     //@@author A0139961U
@@ -76,10 +76,10 @@ public interface Model {
     void updateFilteredListToShowDueToday();
 
     //@@author A0139961U
-    /** Updates the filter of the filtered task list to show all tasks due today */
+    /** Updates the filter of the filtered task list to show all tasks due this week */
     void updateFilteredListToShowDueThisWeek();
 
-    /** Updates the filter of the filtered task list to show all completed tasks */
+    /** Updates the filter of the filtered task list to show all floating tasks */
     void updateFilteredListToShowFloating();
 
     /** Updates the filter of the filtered task list to show all overdue tasks */

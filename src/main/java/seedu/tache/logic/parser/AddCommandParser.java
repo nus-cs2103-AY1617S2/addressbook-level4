@@ -1,7 +1,7 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
+import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
 
 import java.util.Deque;
 import java.util.HashSet;
@@ -87,7 +87,7 @@ public class AddCommandParser {
     }
 
     public Command parseStructured(String args) {
-        String[] taskFields = args.split(PARAMETER_DELIMITER);
+        String[] taskFields = args.split(DELIMITER_PARAMETER);
         Set<String> tagSet = new HashSet<String>();
         if (taskFields.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

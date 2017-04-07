@@ -2,28 +2,28 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.EDIT_MULTI_PARAMETER_KEYWORD;
-import static seedu.tache.logic.parser.CliSyntax.EDIT_MULTI_PARAMETER_KEYWORDS;
-import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_DELIMITER;
-import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_KEYWORD;
-import static seedu.tache.logic.parser.CliSyntax.EDIT_PARAMETER_VALUE_KEYWORD;
-import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_2;
-import static seedu.tache.logic.parser.CliSyntax.END_DATE_PARAMETER_3;
-import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_2;
-import static seedu.tache.logic.parser.CliSyntax.END_TIME_PARAMETER_3;
-import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.NAME_PARAMETER_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_2;
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_PARAMETER_3;
-import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_2;
-import static seedu.tache.logic.parser.CliSyntax.START_TIME_PARAMETER_3;
-import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.TAG_PARAMETER_2;
+import static seedu.tache.logic.parser.CliSyntax.DELIMITER_EDIT_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_EDIT_MULTI_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_TAG;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +54,7 @@ public class EditCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        if (args.contains(PARAMETER_DELIMITER)) {
+        if (args.contains(DELIMITER_PARAMETER)) {
             return parseStructuredArguments(args);
         } else {
             return parseNaturalLanguageArguments(args);
@@ -67,7 +67,7 @@ public class EditCommandParser {
      */
     private Command parseNaturalLanguageArguments(String args) {
         String argsInProcess = args;
-        //Maunal expression matching due to regex matching criteria being too broad
+        //Manual expression matching due to regex matching criteria being too broad
         Optional<Integer> index = ParserUtil.parseIndex(argsInProcess.trim().split(" ")[0]);
         if (index.isPresent()) {
             //Process index
@@ -75,7 +75,7 @@ public class EditCommandParser {
             argsInProcess = argsInProcess.substring(indexOfIndex + new String("" +  index.get()).length());
 
             //Process Other Arguments
-            int indexOfFirstAndChange = argsInProcess.indexOf(EDIT_MULTI_PARAMETER_KEYWORDS);
+            int indexOfFirstAndChange = argsInProcess.indexOf(KEYWORDS_EDIT_MULTI_PARAMETER);
             if (indexOfFirstAndChange == -1) {
                 return processNaturalSingleParameterEdit(index, argsInProcess);
             } else {
@@ -92,7 +92,7 @@ public class EditCommandParser {
      * EditCommand and returns an EditCommand object for execution.
      */
     private Command parseStructuredArguments(String args) {
-        String[] preambleFields = args.split(PARAMETER_DELIMITER);
+        String[] preambleFields = args.split(DELIMITER_PARAMETER);
         Optional<Integer> index = ParserUtil.parseIndex(preambleFields[0]);
 
         if (!index.isPresent()) {
@@ -104,39 +104,39 @@ public class EditCommandParser {
         for (int i = 1; i < preambleFields.length; i++) {
             try {
                 String updateParameter = preambleFields[i].substring(0, preambleFields[i].replaceAll("^\\s+", "")
-                                         .indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
+                                         .indexOf(DELIMITER_EDIT_PARAMETER) + 1).trim();
                 String updateValue = preambleFields[i].substring(preambleFields[i].replaceAll("^\\s+", "")
-                                     .indexOf(EDIT_PARAMETER_DELIMITER) + 1).trim();
+                                     .indexOf(DELIMITER_EDIT_PARAMETER) + 1).trim();
 
                 switch(updateParameter) {
-                case NAME_PARAMETER:
-                case NAME_PARAMETER_2:
+                case PARAMETER_NAME:
+                case PARAMETER_2_NAME:
                     editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
                     break;
-                case START_DATE_PARAMETER:
-                case START_DATE_PARAMETER_2:
-                case START_DATE_PARAMETER_3:
+                case PARAMETER_START_DATE:
+                case PARAMETER_2_START_DATE:
+                case PARAMETER_3_START_DATE:
                     editTaskDescriptor.setStartDate(Optional.of(updateValue));
                     break;
-                case END_DATE_PARAMETER:
-                case END_DATE_PARAMETER_2:
-                case END_DATE_PARAMETER_3:
+                case PARAMETER_END_DATE:
+                case PARAMETER_2_END_DATE:
+                case PARAMETER_3_END_DATE:
                     editTaskDescriptor.setEndDate(Optional.of(updateValue));
                     break;
-                case START_TIME_PARAMETER:
-                case START_TIME_PARAMETER_2:
-                case START_TIME_PARAMETER_3:
+                case PARAMETER_START_TIME:
+                case PARAMETER_2_START_TIME:
+                case PARAMETER_3_START_TIME:
                     editTaskDescriptor.setStartTime(Optional.of(updateValue));
                     break;
-                case END_TIME_PARAMETER:
-                case END_TIME_PARAMETER_2:
-                case END_TIME_PARAMETER_3:
+                case PARAMETER_END_TIME:
+                case PARAMETER_2_END_TIME:
+                case PARAMETER_3_END_TIME:
                     editTaskDescriptor.setEndTime(Optional.of(updateValue));
                     break;
-                case TAG_PARAMETER:
-                case TAG_PARAMETER_2:
+                case PARAMETER_TAG:
+                case PARAMETER_2_TAG:
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
-                                                                              .split(EDIT_PARAMETER_DELIMITER))));
+                                                                              .split(DELIMITER_EDIT_PARAMETER))));
                     break;
                 default:
                     throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
@@ -156,15 +156,15 @@ public class EditCommandParser {
      * that is of a natural language format and returns an EditCommand object for execution.
      */
     private Command processNaturalSingleParameterEdit(Optional<Integer> index, String argsInProcess) {
-        int indexOfFirstChange = argsInProcess.indexOf(EDIT_PARAMETER_KEYWORD);
-        int indexOfFirstTo = argsInProcess.indexOf(EDIT_PARAMETER_VALUE_KEYWORD);
+        int indexOfFirstChange = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER);
+        int indexOfFirstTo = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER_VALUE);
         if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
             String updateParameter = argsInProcess.substring(indexOfFirstChange
-                                        + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
+                                        + new String(KEYWORD_EDIT_PARAMETER).length(), indexOfFirstTo);
             String updateValue = argsInProcess.substring(indexOfFirstTo
-                                        + new String(EDIT_PARAMETER_VALUE_KEYWORD).length());
-            return parseStructuredArguments(index.get() + PARAMETER_DELIMITER + updateParameter
-                                                + EDIT_PARAMETER_DELIMITER + updateValue);
+                                        + new String(KEYWORD_EDIT_PARAMETER_VALUE).length());
+            return parseStructuredArguments(index.get() + DELIMITER_PARAMETER + updateParameter
+                                                + DELIMITER_EDIT_PARAMETER + updateValue);
         } else {
             if (indexOfFirstChange == -1 && indexOfFirstTo == -1) {
                 return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
@@ -184,21 +184,21 @@ public class EditCommandParser {
         ArrayList<String> updateParameterList = new ArrayList<String>();
         ArrayList<String> updateValueList = new ArrayList<String>();
         while (argsInProcess.length() > 0) {
-            int indexOfFirstChange = argsInProcess.indexOf(EDIT_PARAMETER_KEYWORD);
-            int indexOfFirstTo = argsInProcess.indexOf(EDIT_PARAMETER_VALUE_KEYWORD);
+            int indexOfFirstChange = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER);
+            int indexOfFirstTo = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER_VALUE);
             if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
                 String updateParameter = argsInProcess.substring(indexOfFirstChange
-                        + new String(EDIT_PARAMETER_KEYWORD).length(), indexOfFirstTo);
+                        + new String(KEYWORD_EDIT_PARAMETER).length(), indexOfFirstTo);
                 String updateValue = "";
                 if (currentIndexOfFirstAndChange != -1) {
                     updateValue = argsInProcess.substring(indexOfFirstTo
-                            + new String(EDIT_PARAMETER_VALUE_KEYWORD).length(), currentIndexOfFirstAndChange);
+                            + new String(KEYWORD_EDIT_PARAMETER_VALUE).length(), currentIndexOfFirstAndChange);
                     argsInProcess = argsInProcess.substring(currentIndexOfFirstAndChange
-                            + new String(EDIT_MULTI_PARAMETER_KEYWORD).length() - 1);
-                    currentIndexOfFirstAndChange = argsInProcess.indexOf(EDIT_MULTI_PARAMETER_KEYWORDS);
+                            + new String(KEYWORD_EDIT_MULTI_PARAMETER).length() - 1);
+                    currentIndexOfFirstAndChange = argsInProcess.indexOf(KEYWORDS_EDIT_MULTI_PARAMETER);
                 } else {
                     updateValue = argsInProcess.substring(indexOfFirstTo
-                                    + new String(EDIT_PARAMETER_VALUE_KEYWORD).length());
+                                    + new String(KEYWORD_EDIT_PARAMETER_VALUE).length());
                     argsInProcess = "";
                 }
                 updateParameterList.add(updateParameter);
@@ -208,10 +208,10 @@ public class EditCommandParser {
                         EditCommand.MESSAGE_USAGE));
             }
         }
-        String structuredArgument = index.get() + PARAMETER_DELIMITER;
+        String structuredArgument = index.get() + DELIMITER_PARAMETER;
         for (int i = 0; i < updateParameterList.size(); i++) {
-            structuredArgument += updateParameterList.get(i) + EDIT_PARAMETER_DELIMITER
-                                + updateValueList.get(i) + EDIT_PARAMETER_DELIMITER + PARAMETER_DELIMITER;
+            structuredArgument += updateParameterList.get(i) + DELIMITER_EDIT_PARAMETER
+                                + updateValueList.get(i) + DELIMITER_EDIT_PARAMETER + DELIMITER_PARAMETER;
         }
         return parseStructuredArguments(structuredArgument);
     }

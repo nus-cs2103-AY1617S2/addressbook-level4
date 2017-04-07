@@ -2,7 +2,7 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.INDEX_DELIMITER;
+import static seedu.tache.logic.parser.CliSyntax.DELIMITER_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class CompleteCommandParser {
      */
     public Command parse(String args) {
         assert args != null;
-        String[] preambleFields = args.trim().split(INDEX_DELIMITER);
+        String[] preambleFields = args.trim().split(DELIMITER_INDEX);
         if (preambleFields.length == 0 || args.trim().equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
         }

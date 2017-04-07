@@ -52,6 +52,10 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0142255M
+    /**
+     * Executes the user command and adds it to the list of previous commands for retrieval.
+     * Handles command success as well as command failure.
+     */
     @FXML
     private void handleCommandInputChanged() {
         try {
@@ -95,6 +99,10 @@ public class CommandBox extends UiPart<Region> {
         binding.setDelay(50);
     }
 
+    /**
+     * Keeps track of previous commands executed and retrieves them with Up and Down keys.
+     * Sets the caret of the text field right at the end of the command retrieved.
+     */
     private void setSaveCommandHistory() {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override

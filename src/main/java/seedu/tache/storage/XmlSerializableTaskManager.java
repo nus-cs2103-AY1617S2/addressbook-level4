@@ -73,6 +73,9 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     //@@author A0142255M
+    /**
+     * Returns a String containing the tasks and their details.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

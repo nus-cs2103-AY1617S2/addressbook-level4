@@ -35,9 +35,11 @@ public interface ReadOnlyTask {
 
     //@@author A0142255M
     /**
-     * Returns true if both have the same state. (interfaces cannot override .equals)
+     * Returns true if both ReadOnlyTasks have the same state. (interfaces cannot override .equals)
+     * This means that the details (e.g. name, end date) of the tasks will be identical.
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
+        assert other != null;
         boolean start = true;
         boolean end = true;
         if (other.getStartDateTime().isPresent() && this.getStartDateTime().isPresent()) {
@@ -53,7 +55,10 @@ public interface ReadOnlyTask {
                 && (other.getActiveStatus() == this.getActiveStatus())
                 && (other.getTimedStatus() == this.getTimedStatus())
                 && (other.getRecurringStatus() == this.getRecurringStatus())
-                && other.getRecurInterval().equals(this.getRecurInterval())); // state checks here onwards
+                && other.getRecurInterval().equals(this.getRecurInterval())
+                && other.getRecurCompletedList().equals(this.getRecurCompletedList())
+                && other.getRecurDisplayDate().equals(this.getRecurDisplayDate())
+                && other.isMasterRecurring() == this.isMasterRecurring());
     }
     //@@author
 

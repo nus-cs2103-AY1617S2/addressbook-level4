@@ -16,6 +16,9 @@ import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
     //@@author A0142255M
+    /**
+     * Returns an array of Tasks for a sample task manager.
+     */
     public static Task[] getSampleTasks() {
         try {
             Task eggsAndBread = new Task(new Name("Buy Eggs and Bread"), new UniqueTagList("HighPriority"));

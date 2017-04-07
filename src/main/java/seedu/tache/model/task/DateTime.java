@@ -104,6 +104,10 @@ public class DateTime {
     }
 
     //@@author A0142255M
+    /**
+     * Returns a String which represents a moment to be parsed by FullCalendar.
+     * A moment (FullCalendar terminology) refers to a point in time.
+     */
     public String getDateTimeForFullCalendar() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         return sdf.format(date);
@@ -120,6 +124,9 @@ public class DateTime {
                 && this.date.equals(((DateTime) other).getDate())); // state check
     }
 
+    /**
+     * Returns true if the date is earlier than today.
+     */
     public boolean hasPassed() {
         Date today = new Date();
         return this.date.before(today);
