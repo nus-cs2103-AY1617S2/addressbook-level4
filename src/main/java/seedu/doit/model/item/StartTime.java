@@ -13,10 +13,10 @@ import seedu.doit.logic.parser.DateTimeParser;
  */
 public class StartTime implements Comparable<StartTime> {
 
-    public static final String NO_START_TIME = null;
+    public static final String NO_START_TIME = "";
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Item Start Time should be in "
         + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
-    public static final String STARTTIME_VALIDATION_REGEX = "^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
+    public static final String STARTTIME_VALIDATION_REGEX = "^$|^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
         + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
@@ -36,7 +36,7 @@ public class StartTime implements Comparable<StartTime> {
      * @throws IllegalValueException if given startTime string is invalid.
      */
     public StartTime(String startTime) throws IllegalValueException {
-        if (startTime == NO_START_TIME) {
+        if (startTime.equals(NO_START_TIME)) {
             this.value = NO_START_TIME;
             this.dateObject = null;
         } else {

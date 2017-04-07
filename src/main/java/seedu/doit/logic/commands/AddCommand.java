@@ -1,3 +1,4 @@
+//@@author A0146809W
 package seedu.doit.logic.commands;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,6 @@ import seedu.doit.model.item.Task;
 import seedu.doit.model.tag.Tag;
 import seedu.doit.model.tag.UniqueTagList;
 
-//@@author A0146809W
 /**
  * Adds a task to the task manager.
  */
@@ -38,26 +38,11 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Creates an AddCommand using raw values for task.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public AddCommand(String name, String priority, String dueDate, String text, Set<String> tags)
-        throws IllegalValueException {
-
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(new Name(name), new Priority(priority), new EndTime(dueDate), new Description(text),
-            new UniqueTagList(tagSet));
-    }
-
-    /**
      * Creates an AddCommand using raw values for event.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
+
     public AddCommand(String name, String priority, String startDate, String dueDate, String text, Set<String> tags)
         throws IllegalValueException {
 
@@ -70,23 +55,11 @@ public class AddCommand extends Command {
         this.toAdd = new Task(new Name(name), new Priority(priority), startTime = new StartTime(startDate),
             endTime = new EndTime(dueDate), new Description(text), new UniqueTagList(tagSet));
 
-        if (!isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
-            throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
+        if (startTime.getDateTimeObject() != null && endTime.getDateTimeObject() != null) {
+            if (!isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
+                throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
+            }
         }
-    }
-
-    /**
-     * Creates an AddCommand using raw values for floating task.
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
-    public AddCommand(String name, String priority, String text, Set<String> tags) throws IllegalValueException {
-
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.toAdd = new Task(new Name(name), new Priority(priority), new Description(text), new UniqueTagList(tagSet));
     }
 
     @Override
@@ -95,7 +68,7 @@ public class AddCommand extends Command {
         try {
             this.model.addTask(this.toAdd);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(
-                    this.model.getFilteredTaskList().indexOf(this.toAdd)));
+                this.model.getFilteredTaskList().indexOf(this.toAdd)));
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
