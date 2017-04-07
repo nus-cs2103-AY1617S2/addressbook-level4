@@ -174,7 +174,6 @@ public class TaskCard extends UiPart<Region> {
             status.setGraphic(new ImageView("/images/wip.png"));
         }
     }
-    
 
     // ========================= TAGS ============================ //
     private void initTags(ReadOnlyTask task) {
