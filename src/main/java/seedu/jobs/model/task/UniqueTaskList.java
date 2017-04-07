@@ -163,7 +163,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
       //@@author A0164440M
         ObservableList<Task> stackList = FXCollections.observableArrayList();
-        
+
         //To prevent empty list been pushed into undoStack during initialization
         if (!isInitialized) {
             for (Task t : internalList) {
