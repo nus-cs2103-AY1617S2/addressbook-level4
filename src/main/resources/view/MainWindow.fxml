@@ -44,6 +44,12 @@
             </VBox>
             <VBox>
                <children>
+                  <TextField alignment="CENTER" editable="false" style="-fx-background-color: #32cd32; -fx-font-weight: bold;" stylesheets="@DarkTheme.css" text="OMG Y U NO DO" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="overdueListPanelPlaceholder" prefWidth="340" VBox.vgrow="ALWAYS">
+                      <padding>
+                          <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                  </AnchorPane>
                   <TextField alignment="CENTER" editable="false" styleClass="completed" stylesheets="@DarkTheme.css" text="didTASKS" VBox.vgrow="ALWAYS" />
                   <AnchorPane fx:id="completedTaskListPlaceholder" prefWidth="340" VBox.vgrow="ALWAYS">
                       <padding>

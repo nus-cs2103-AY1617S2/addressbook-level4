@@ -15,18 +15,26 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new TaskName("Sleep"), new Deadline("07-Mar-2017"), new PriorityLevel("4"),
-                    new Information("I don't want to sleep"),
+                new Task(new TaskName("CS2101 OP2"), new Deadline("04-Apr-2017 @ 13:00:00"),
+                    new PriorityLevel("1"),
+                    new Information("15% CA"),
+                    new UniqueTagList("School")),
+                new Task(new TaskName("CS2103T Tutorial"), new Deadline("05-Apr-2017 @ 09:00:00"),
+                    new PriorityLevel("2"),
+                    new Information("Software Demostration"),
+                    new UniqueTagList("School")),
+                new Task(new TaskName("Final Lecture of CS2103T"), new Deadline("07-Apr-2017 @ 16:00:00"),
+                    new PriorityLevel("2"),
+                    new Information("iCube"),
+                    new UniqueTagList("School")),
+                new Task(new TaskName("Go Supermarket"), new Deadline("10-Apr-2017 @ 09:00:00"),
+                    new PriorityLevel("4"),
+                    new Information("Buy Things"),
                     new UniqueTagList("Home")),
-                new Task(new TaskName("Buy car"), new Deadline("27-May-2018"), new PriorityLevel("1"),
-                    new Information("Audi"),
-                    new UniqueTagList("Transport")),
-                new Task(new TaskName("Buy bus"), new Deadline("28-May-2018"), new PriorityLevel("1"),
-                    new Information("VOLVO"),
-                    new UniqueTagList("Transport")),
-                new Task(new TaskName("Buy MRT"), new Deadline("29-May-2018"), new PriorityLevel("1"),
-                    new Information("Become the government"),
-                    new UniqueTagList("Transport")),
+                new Task(new TaskName("Meet with friends"), new Deadline("10-Apr-2017 @ 18:00:00"),
+                    new PriorityLevel("2"),
+                    new Information("Eat Dinner"),
+                    new UniqueTagList("Social")),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

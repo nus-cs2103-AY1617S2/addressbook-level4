@@ -80,6 +80,7 @@ public class TaskManagerTest {
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<ReadOnlyTask> completedTasks = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> overdueTasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
         TaskManagerStub(Collection<? extends ReadOnlyTask> tasks,
@@ -102,6 +103,11 @@ public class TaskManagerTest {
         @Override
         public ObservableList<ReadOnlyTask> getCompletedTaskList() {
             return completedTasks;
+        }
+
+        @Override
+        public ObservableList<ReadOnlyTask> getOverdueTaskList() {
+            return overdueTasks;
         }
     }
 

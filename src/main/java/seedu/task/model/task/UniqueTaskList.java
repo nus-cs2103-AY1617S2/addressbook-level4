@@ -1,5 +1,6 @@
 package seedu.task.model.task;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +22,22 @@ public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0135762A
+    /**
+     * Sort the tasks in internalList.
+     */
+    public void sortTask(ObservableList<Task> unsortedList) {
+        Comparator<Task> nameComparator = new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                return task1.getTaskName().taskName.toLowerCase()
+                        .compareTo(task2.getTaskName().taskName.toLowerCase());
+            }
+        };
+        unsortedList.sort(nameComparator);
+    }
+    //@@author
+
     /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
@@ -40,6 +57,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortTask(internalList);
     }
 
     //@@author A0139161J
@@ -73,6 +91,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // The right way is to implement observable properties in the Task class.
         // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
+        sortTask(internalList);
     }
 
     /**
