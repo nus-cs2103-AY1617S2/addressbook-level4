@@ -13,6 +13,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_STARTDATE = new Prefix("s/");
     public static final Prefix PREFIX_ENDDATE = new Prefix("e/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
+    // @@author A0140032E
+    public static final Prefix PREFIX_REPEAT = new Prefix("r/");
+    // @@author
     public static final Prefix PREFIX_TAG = new Prefix("#");
 
     /* Alternative prefix definitions for natural variations of user input*/

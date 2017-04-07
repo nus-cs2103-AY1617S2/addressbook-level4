@@ -2,6 +2,8 @@ package seedu.taskmanager.logic.commands;
 
 import java.util.Optional;
 
+import org.joda.time.DateTime;
+
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
@@ -9,6 +11,8 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
+import seedu.taskmanager.model.task.Repeat.RepeatPattern;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -50,12 +54,27 @@ public class DoneCommand extends Command {
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(targetIndex - 1);
         if (!taskToMarkDone.getStatus().value) {
-            Task markedDoneTask = createDoneTask(taskToMarkDone);
-            try {
-                model.updateTask(targetIndex - 1, markedDoneTask);
-            } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            // Update a non-recurring task
+            if (!taskToMarkDone.getRepeat().isPresent()) {
+                Task markedDoneTask = createDoneTask(taskToMarkDone);
+                try {
+                    model.updateTask(targetIndex - 1, markedDoneTask);
+                } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                    throw new CommandException(MESSAGE_DUPLICATE_TASK);
+                }
+                // @@author A0140032E
+            } else {
+                // Extract a recurring task and mark as done
+                Task markedDoneTask = createDoneTask(taskToMarkDone);
+                Task updatedRecurringTask = updateRecurringTask(taskToMarkDone);
+                try {
+                    model.updateTask(targetIndex - 1, updatedRecurringTask);
+                    model.addTask(markedDoneTask);
+                } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                    throw new CommandException(MESSAGE_DUPLICATE_TASK);
+                }
             }
+            // @@author A0114269E
         } else {
             return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
         }
@@ -75,10 +94,48 @@ public class DoneCommand extends Command {
         Optional<StartDate> updatedStartDate = taskToMarkDone.getStartDate();
         Optional<EndDate> updatedEndDate = taskToMarkDone.getEndDate();
         Optional<Description> updatedDescription = taskToMarkDone.getDescription();
+        Optional<Repeat> updatedRepeat = Optional.empty();
         Status updatedStatus = new Status(true);
         UniqueTagList updatedTags = taskToMarkDone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus, updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedRepeat,
+                updatedStatus, updatedTags);
+    }
+
+    // @@author A0140032E
+    private static Task updateRecurringTask(ReadOnlyTask recurringTask) {
+        assert recurringTask != null;
+
+        Title updatedTitle = recurringTask.getTitle();
+
+        RepeatPattern rp = recurringTask.getRepeat().get().pattern;
+        DateTime dt = new DateTime(recurringTask.getStartDate().get());
+        switch (rp) {
+        case DAY:
+            dt.plusDays(1);
+            break;
+        case MONTH:
+            dt.plusMonths(1);
+            break;
+        case WEEK:
+            dt.plusWeeks(1);
+            break;
+        case YEAR:
+            dt.plusYears(1);
+            break;
+        default:
+            break;
+        }
+
+        Optional<StartDate> updatedStartDate = Optional.of(new StartDate(dt));
+        Optional<EndDate> updatedEndDate = recurringTask.getEndDate();
+        Optional<Description> updatedDescription = recurringTask.getDescription();
+        Optional<Repeat> updatedRepeat = recurringTask.getRepeat();
+        Status updatedStatus = new Status(true);
+        UniqueTagList updatedTags = recurringTask.getTags();
+
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedRepeat,
+                updatedStatus, updatedTags);
     }
 }
 // @@author
