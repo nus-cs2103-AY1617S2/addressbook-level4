@@ -94,7 +94,7 @@ public class Parser {
 
         case ShowAliasCommand.COMMAND_WORD:
             return new ShowAliasCommand();
-            
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

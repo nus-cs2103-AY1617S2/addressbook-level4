@@ -35,7 +35,7 @@ public class ShowAliasCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(AliasCommand.COMMAND_WORD + " " + firstAlias + " for " + originalCommand);
         commandBox.runCommand(ShowAliasCommand.COMMAND_WORD);
         assertResultMessage(String.format(ShowAliasCommand.MESSAGE_SUCCESS, firstExpectedResult));
-        
+
         commandBox.runCommand(AliasCommand.COMMAND_WORD + " " + secondAlias + " for " + firstAlias);
         commandBox.runCommand(ShowAliasCommand.COMMAND_WORD);
         assertResultMessage(String.format(ShowAliasCommand.MESSAGE_SUCCESS, secondExpectedResult));
