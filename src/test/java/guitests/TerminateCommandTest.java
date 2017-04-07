@@ -100,7 +100,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markTaskDoneLong_success() throws Exception {
+    public void terminateTask_Long_success() throws Exception {
         int taskBossIndex = 2;
 
         TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
@@ -121,7 +121,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markTaskDone_Short_Command_success() throws Exception {
+    public void terminateTask_Short_Command_success() throws Exception {
         int taskBossIndex = 6;
 
         TestTask terminatedTask = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
@@ -154,16 +154,16 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void markDone_findThenMarkDone_success() throws Exception {
+    public void termiateTask_findThenTerminate_success() throws Exception {
         commandBox.runCommand("find ensure");
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
 
-        TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
-        TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
+        TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
+        TestTask terminatedTask = new TaskBuilder(taskToTerminate).withCategories("Done").build();
 
-        assertTerminateSuccess(true, false, filteredTaskListIndex, taskBossIndex, markedDoneTask);
+        assertTerminateSuccess(true, false, filteredTaskListIndex, taskBossIndex, terminatedTask);
     }
 
     //---------------- Tests for successfully ending multiple recurring tasks-----------------------
@@ -219,7 +219,14 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
+  //------------------Test for marking done a marked done task----------------------------
 
+    @Test
+    public void terminate_taskTerminated_failure() {
+        commandBox.runCommand("t 2");
+        commandBox.runCommand("t 2");
+        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
+    }
 
     //---------------- End of test cases --------------------------------------
 
