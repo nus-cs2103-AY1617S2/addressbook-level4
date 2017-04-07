@@ -23,14 +23,13 @@ public class TypicalTestTasks {
                     .withEndDateTime("Mar 28, 2017 5pm")
                     .withRecurrence(Frequency.NONE)
                     .withCategories(AddCommand.BUILT_IN_ALL_TASKS, "Friends").build();
-
             taskB = new TaskBuilder().withName("Birthday party")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("No")
+                    .withPriorityLevel("Yes")
                     .withRecurrence(Frequency.NONE)
                     .withStartDateTime("Feb 23, 2017 10pm")
                     .withEndDateTime("Jun 28, 2017 5pm")
-                    .withCategories("Friends", "Owesmoney").build();
+                    .withCategories(AddCommand.BUILT_IN_ALL_TASKS, "Friends", "Owesmoney").build();
             taskC = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 19, 2017 11pm")
                     .withEndDateTime("Feb 28, 2017 5pm")

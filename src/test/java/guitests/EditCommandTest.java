@@ -1,6 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
@@ -123,12 +122,11 @@ public class EditCommandTest extends TaskBossGuiTest {
         int taskBossIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
-        System.out.println("taskToEdit: " + taskToEdit.getName().fullName);
 
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Birthday prepare")
                 .withCategories("Alltasks", "Friends", "Owesmoney").build();
 
-        assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
+        assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit,editedTask);
     }
 
     @Test
@@ -219,10 +217,6 @@ public class EditCommandTest extends TaskBossGuiTest {
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
         assertMatching(editedTask, editedCard);
-
-        // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskBossIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
