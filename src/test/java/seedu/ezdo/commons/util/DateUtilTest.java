@@ -25,7 +25,7 @@ public class DateUtilTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void dateFormat_parseException() throws Exception {
+    public void compareDateStrings_parseException_assertionThrown() throws Exception {
         thrown.expect(AssertionError.class);
         new MockUp<SimpleDateFormat>() {
             @Mock
@@ -39,7 +39,7 @@ public class DateUtilTest {
     }
 
     @Test
-    public void noDate_pass() throws Exception {
+    public void isTaskDateValid_noDate_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")
                 .withDueDate("")
                 .withTags("guy").build();
@@ -47,7 +47,7 @@ public class DateUtilTest {
     }
 
     @Test
-    public void noStartDate_pass() throws Exception {
+    public void isTaskDateValid_noStartDate_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")
                 .withDueDate("10/10/2019")
                 .withTags("guy").build();
@@ -55,7 +55,7 @@ public class DateUtilTest {
     }
 
     @Test
-    public void noDueDate_pass() throws Exception {
+    public void isTaskDateValid_noDueDate_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("02/02/2017")
                 .withDueDate("")
                 .withTags("guy").build();
@@ -64,7 +64,7 @@ public class DateUtilTest {
 
     //@@author A0138907W
     @Test
-    public void noDates_pass() throws Exception {
+    public void isTaskDateValid_noDates_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3").withStartDate("")
                 .withDueDate("")
                 .withTags("guy").build();
@@ -75,7 +75,7 @@ public class DateUtilTest {
 
     //@@author A0139248X
     @Test
-    public void twoDates_equal_pass() throws Exception {
+    public void isTaskDateValid_twoDatesEqual_pass() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("02/02/2017").withDueDate("02/02/2017")
                 .withTags("guy").build();
@@ -83,7 +83,7 @@ public class DateUtilTest {
     }
 
     @Test
-    public void startAfterDue_fail() throws Exception {
+    public void isTaskDateValid_startAfterDue_fail() throws Exception {
         TestTask task = new TaskBuilder().withName("Alson").withPriority("3")
                 .withStartDate("02/02/2020").withDueDate("10/10/2019")
                 .withTags("guy").build();

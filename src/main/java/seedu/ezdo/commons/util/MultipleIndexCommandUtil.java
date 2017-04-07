@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.commons.util;
 
 import java.util.ArrayList;
@@ -5,7 +6,7 @@ import java.util.ArrayList;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
-//@@author A0139248X
+
 /**
  * Utility methods for commands supporting multiple index
  */

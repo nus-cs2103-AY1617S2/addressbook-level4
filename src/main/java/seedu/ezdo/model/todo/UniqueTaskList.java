@@ -5,9 +5,11 @@ import static seedu.ezdo.commons.util.DateUtil.compareDateStrings;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.ezdo.commons.core.LogsCenter;
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DuplicateDataException;
 import seedu.ezdo.commons.util.CollectionUtil;
@@ -23,6 +25,8 @@ import seedu.ezdo.commons.util.CollectionUtil;
 public class UniqueTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+    private static final Logger logger = LogsCenter.getLogger(UniqueTaskList.class);
+
 
     /**
      * Returns true if the list contains an equivalent task that is not done as the given argument.
@@ -177,6 +181,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         assert taskComparator != null;
         FXCollections.sort(internalList, taskComparator);
+        logger.info("internalList has been sorted");
     }
 
 

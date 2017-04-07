@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.TaskDate;
 
 //@@author A0141010L
@@ -13,6 +14,7 @@ public class SearchParameters {
     private Optional<Priority> priorityToCompare;
     private Optional<TaskDate> startDateToCompare;
     private Optional<TaskDate> dueDateToCompare;
+    private Optional<Recur> recurToCompare;
     private Set<String> tagsToCompare;
     private boolean startBefore = false;
     private boolean dueBefore = false;
@@ -33,6 +35,10 @@ public class SearchParameters {
 
     public Optional<TaskDate> getDueDate() {
         return dueDateToCompare;
+    }
+
+    public Optional<Recur> getRecur() {
+        return recurToCompare;
     }
 
     public Set<String> getTags() {
@@ -60,6 +66,7 @@ public class SearchParameters {
         private Optional<Priority> priorityToCompare;
         private Optional<TaskDate> startDateToCompare;
         private Optional<TaskDate> dueDateToCompare;
+        private Optional<Recur> recurToCompare;
         private Set<String> tagsToCompare;
         private boolean startBefore = false;
         private boolean dueBefore = false;
@@ -83,6 +90,11 @@ public class SearchParameters {
 
         public Builder dueDate(Optional<TaskDate> dueDate) {
             dueDateToCompare = dueDate;
+            return this;
+        }
+
+        public Builder recur(Optional<Recur> recur) {
+            recurToCompare = recur;
             return this;
         }
 
@@ -121,6 +133,7 @@ public class SearchParameters {
         priorityToCompare = builder.priorityToCompare;
         startDateToCompare = builder.startDateToCompare;
         dueDateToCompare = builder.dueDateToCompare;
+        recurToCompare = builder.recurToCompare;
         tagsToCompare = builder.tagsToCompare;
         startBefore = builder.startBefore;
         dueBefore = builder.dueBefore;

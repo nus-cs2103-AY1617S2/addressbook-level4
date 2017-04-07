@@ -35,6 +35,7 @@ public class AliasCommand extends Command {
 
     /**
      * Executes the alias command.
+     * @throws CommandException if the given alias or command is invalid.
      */
     @Override
     public CommandResult execute() throws CommandException {
@@ -42,15 +43,14 @@ public class AliasCommand extends Command {
         if (hasResetIntention) {
             model.getUserPrefs().clearCommandAliases();
             return new CommandResult(MESSAGE_RESET_SUCCESS);
-        } else {
-            try {
-                model.getUserPrefs().addCommandAlias(command, alias);
-                return new CommandResult(MESSAGE_ADD_SUCCESS);
-            } catch (AliasAlreadyInUseException aaiue) {
-                throw new CommandException(MESSAGE_ALIAS_ALREADY_IN_USE);
-            } catch (CommandDoesNotExistException cdnee) {
-                throw new CommandException(MESSAGE_COMMAND_DOES_NOT_EXIST);
-            }
+        }
+        try {
+            model.getUserPrefs().addCommandAlias(command, alias);
+            return new CommandResult(MESSAGE_ADD_SUCCESS);
+        } catch (AliasAlreadyInUseException aaiue) {
+            throw new CommandException(MESSAGE_ALIAS_ALREADY_IN_USE);
+        } catch (CommandDoesNotExistException cdnee) {
+            throw new CommandException(MESSAGE_COMMAND_DOES_NOT_EXIST);
         }
     }
 

@@ -30,8 +30,8 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[NAME] [p/PRIORITY] [s/START_DATE] [d/DUE_DATE] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 p/2 s/10/12/2017 d/15/12/2017";
+            + "[NAME] [p/PRIORITY] [s/START_DATE] [d/DUE_DATE] [f/FREQUENCY] [t/TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 p/2 s/10/12/2017 d/15/12/2017 f/daily";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -54,17 +54,19 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
     //@@author A0139248X
+    /**
+     * Executes the edit command.
+     *
+     * @throws CommandException if the index is invalid, edited task is a duplicate or the dates are invalid
+     */
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
         if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dte) {
@@ -72,11 +74,9 @@ public class EditCommand extends Command {
         } catch (DateException de) {
             throw new CommandException(Messages.MESSAGE_TASK_DATES_INVALID);
         }
-
         model.updateFilteredListToShowAll();
-        lastShownList = model.getFilteredTaskList();
-        int index = lastShownList.lastIndexOf(editedTask);
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+        lastShownList = model.getFilteredTaskList(); // to scroll to edited task
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(lastShownList.lastIndexOf(editedTask)));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
     //@@author

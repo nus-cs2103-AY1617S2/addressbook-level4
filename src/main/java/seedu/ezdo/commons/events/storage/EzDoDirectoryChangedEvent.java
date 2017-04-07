@@ -1,8 +1,8 @@
+//@@author A0139248X
 package seedu.ezdo.commons.events.storage;
 
 import seedu.ezdo.commons.events.BaseEvent;
 
-//@@author A0139248X
 /**
  * Indicates a request to change the directory of the saved ezDo.xml
  */

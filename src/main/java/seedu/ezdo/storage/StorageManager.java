@@ -97,6 +97,10 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
   //@@author A0139248X
+    /**
+     * Moves the ezDo storage file to the new path, updates the config file and sets the ezdo file path
+     * Raises a DataSavingExceptionEvent if there's an IOException
+     */
     @Override
     @Subscribe
     public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent event) {
@@ -113,8 +117,9 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    /*
+    /**
      * Updates the config file's ezDo directory path and saves it
+     *
      * @throws IOException if there was a problem saving the config
      */
     private void updateConfigAndSave(String path) throws IOException {
@@ -122,6 +127,11 @@ public class StorageManager extends ComponentManager implements Storage {
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
     }
 
+    /**
+     * Moves the ezDo storage file to the new path
+     *
+     * @throws IOException if there was a problem moving the file
+     */
     @Override
     public void moveEzDo(String oldPath, String newPath) throws IOException {
         ezDoStorage.moveEzDo(oldPath, newPath);

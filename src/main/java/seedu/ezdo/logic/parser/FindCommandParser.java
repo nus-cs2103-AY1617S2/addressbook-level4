@@ -4,6 +4,7 @@ import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ezdo.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_DUEDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_RECUR;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.ezdo.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -20,6 +21,7 @@ import seedu.ezdo.logic.commands.FindCommand;
 import seedu.ezdo.logic.commands.IncorrectCommand;
 import seedu.ezdo.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.ezdo.model.todo.Priority;
+import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.TaskDate;
 
 //@@author A0141010L
@@ -41,12 +43,13 @@ public class FindCommandParser implements CommandParser {
         assert args != null;
 
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_STARTDATE, PREFIX_DUEDATE,
-                PREFIX_TAG);
+                PREFIX_RECUR, PREFIX_TAG);
         String[] splitNames = tokenize(args, argsTokenizer);
 
         Optional<Priority> findPriority = null;
         Optional<TaskDate> findStartDate = null;
         Optional<TaskDate> findDueDate = null;
+        Optional<Recur> findRecur = null;
         Set<String> findTags = null;
         boolean searchBeforeStartDate = false;
         boolean searchBeforeDueDate = false;
@@ -76,6 +79,7 @@ public class FindCommandParser implements CommandParser {
             boolean isFind = true;
             findStartDate = ParserUtil.parseStartDate(optionalStartDate, isFind);
             findDueDate = ParserUtil.parseDueDate(optionalDueDate, isFind);
+            findRecur = ParserUtil.parseRecur(getOptionalValue(argsTokenizer, PREFIX_RECUR));
             findTags = ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG));
             findPriority = ParserUtil.parsePriority(getOptionalValue(argsTokenizer, PREFIX_PRIORITY));
 
@@ -85,8 +89,9 @@ public class FindCommandParser implements CommandParser {
 
         Set<String> keywords = new HashSet<String>(Arrays.asList(splitNames));
         SearchParameters searchParameters = new SearchParameters.Builder().name(keywords).priority(findPriority)
-                .startDate(findStartDate).dueDate(findDueDate).tags(findTags).startBefore(searchBeforeStartDate)
-                .dueBefore(searchBeforeDueDate).startAfter(searchAfterStartDate).dueAfter(searchAfterDueDate).build();
+                .startDate(findStartDate).dueDate(findDueDate).recur(findRecur).tags(findTags)
+                .startBefore(searchBeforeStartDate).dueBefore(searchBeforeDueDate).startAfter(searchAfterStartDate)
+                .dueAfter(searchAfterDueDate).build();
 
         return new FindCommand(searchParameters);
     }
@@ -141,13 +146,15 @@ public class FindCommandParser implements CommandParser {
 
         String taskDateString = taskDate.get();
         int prefixLength = 6;
+        String prefixToCompare1 = "before";
+        String prefixToCompare2 = "Before";
+        int prefixLength = prefixToCompare1.length();
+
 
         if (taskDateString.length() <= prefixLength) {
             return false;
         }
 
-        String prefixToCompare1 = "before";
-        String prefixToCompare2 = "Before";
         String byPrefix = taskDateString.substring(0, prefixLength);
         return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
 
@@ -164,14 +171,15 @@ public class FindCommandParser implements CommandParser {
         }
 
         String taskDateString = taskDate.get();
-        int prefixLength = 5;
+        String prefixToCompare1 = "after";
+        String prefixToCompare2 = "After";
+        int prefixLength = prefixToCompare1.length();
+
 
         if (taskDateString.length() <= prefixLength) {
             return false;
         }
 
-        String prefixToCompare1 = "after";
-        String prefixToCompare2 = "After";
         String byPrefix = taskDateString.substring(0, prefixLength);
         return byPrefix.equals(prefixToCompare1) || byPrefix.equals(prefixToCompare2);
 
