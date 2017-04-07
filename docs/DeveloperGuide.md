@@ -401,12 +401,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | make tasks that have very close deadlines to appear as special priority | remember to complete them
 `* *` | user | set notifications for deadlines for my tasks | be notified
 `* *` | power user | set how much time it requires to finish a task | know how long I need to start and finish a task and not leave it halfway
-`* *` | power user | tell the program how much time I have right now | the program can assign me a task to complete in that time
 `* *` | user | set tasks that are currently underway | be aware of the tasks I am working on
 `* *` | user | redo my last action | reverse accidental undo commands
 `*` | user | list the tasks that are due soon | meet my deadlines
-`*` | paranoid user | set password | protect my privacy
-`*` | power user | sync tasks and events to Google Calendar | see my tasks and events alongside Google Calendar
 
 <h5 align="center">Table 1: List of User Stories</h5>
 

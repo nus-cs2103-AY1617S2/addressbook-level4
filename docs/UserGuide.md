@@ -9,7 +9,7 @@
 3. [Features](#3-features)<br>
 	3.1. [Adding a task: **`add / a`**](#31-adding-a-task-add--a)<br>
 	3.2. [Editing a task: **`edit / e`**](#32-editing-a-task-edit--e)<br>
-	3.3. [Marking a task as done: **`done / d`**](#33-marking-a-task-as-done-done--d)<br>
+	3.3. [Marking a task as done/undone: **`done / d`**](#33-marking-a-task-as-doneundone-done--d)<br>
 	3.4. [Deleting a task: **`kill / k`**](#34-deleting-a-task-kill--k)<br>
 	3.5. [Sorting a list of tasks: **`sort / s`**](#35-sorting-a-list-of-tasks-sort--s)<br>
 	3.6. [Finding tasks: **`find / f`**](#36-finding-tasks-find--f)<br>
@@ -94,7 +94,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 |:-------:|---------------------------------------------------------------- |
 |[add / a](#31-adding-a-task-add--a)            |Adds a task              |
 |[edit / e](#32-editing-a-task-edit--e)            |Edits a task             |
-|[done / d](#33-marking-a-task-as-done-done--d)    |Marks a task as done     |
+|[done / d](#33-marking-a-task-as-doneundone-done--d)    |Marks a task as done/undone     |
 |[kill / k](#34-deleting-a-task-kill--k)           |Deletes a task           |
 |[sort / s](#35-sorting-a-list-of-tasks-sort--s)   |Sorts the list of tasks  |
 |[find / f](#36-finding-tasks-find--f)             |Searches for a task      |
@@ -113,7 +113,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 <br>
 
 > #### <u>Quick Tip:</u><br>
-> You can type the <u><b>first letter</b></u> of any command instead of typing in full (except **`save`**).
+> You can type the <u><b>first letter</b></u> of any command instead of typing in full (except **`save`** and **`alias`**).
 > _For example, you can type **`u`** instead of **`undo`** to revert the last command._
 
 <br>
@@ -207,9 +207,9 @@ You can now edit the task in several ways:<br>
 <br>
 
 
-### 3.3 Marking a task as done: `done / d`
+### 3.3 Marking a task as done/undone: `done / d`
 ---
-_**Marks the task at a specified index as done.**_<br>
+_**Marks the task at a specified index as done/undone.**_<br>
 
 #### Format:
 
@@ -219,7 +219,8 @@ _**Marks the task at a specified index as done.**_<br>
 
 > - `INDEX` refers to the index number of the tasks shown in the most recent listing.<br><br>
 > - Once a task is marked as done, it will be removed from the task list and added to the done list.<br><br>
-> - View the done list with the command `done` without any index specified.
+> - View the done list with the command `done` without any index specified.<br><br>
+> - Unmark a done task in the done list and it will return to the previous list.
 
 <br>
 
@@ -227,7 +228,7 @@ _**Marks the task at a specified index as done.**_<br>
 
 * Mark the task at `INDEX` 1 as done:<br>
 **`d 1`** <br>
-* Marks the task at indexes 3, 5 and 6 as done:
+* Marks the task at `INDEX` 3, 5 and 6 as done:
 **`done 3 5 6`** <br>
 
 <br>
@@ -251,9 +252,9 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 #### Example:
 
-* Delete the task at index 2:<br>
+* Delete the task at `INDEX` 2:<br>
 **`kill 2`** <br><br>
-* Deletes the task at indexes 4, 5 and 6:
+* Deletes the task at `INDEX` 4, 5 and 6:
 **`k 4 5 6`** <br>
 
 <br>
@@ -499,7 +500,7 @@ For your convenience, the parameters for every command available in ezDo are sum
 |:-----:|---------------------------------------------------------|
 |[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**             |
 |[edit / e](#32-editing-a-task-edit--e)         |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**            |
-|[done / d](#33-marking-a-task-as-done-done--d)  |**`done INDEX`**    |
+|[done / d](#33-marking-a-task-as-doneundone-done--d)  |**`done INDEX`**    |
 |[kill / k](#34-deleting-a-task-kill--k)        |**`kill INDEX`**          |
 |[sort / s](#35-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
 |[find / f](#36-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
