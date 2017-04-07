@@ -113,7 +113,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 <br>
 
 > #### <u>Quick Tip:</u><br>
-> You can type the <u><b>first letter</b></u> of any command instead of typing in full (except **`save`**).
+> You can type the <u><b>first letter</b></u> of any command instead of typing in full (except **`save`** and **`alias`**).
 > _For example, you can type **`u`** instead of **`undo`** to revert the last command._
 
 <br>
@@ -228,7 +228,7 @@ _**Marks the task at a specified index as done/undone.**_<br>
 
 * Mark the task at `INDEX` 1 as done:<br>
 **`d 1`** <br>
-* Marks the task at indexes 3, 5 and 6 as done:
+* Marks the task at `INDEX` 3, 5 and 6 as done:
 **`done 3 5 6`** <br>
 
 <br>
@@ -252,9 +252,9 @@ _**Marks the task at a specified index as deleted.**_<br>
 
 #### Example:
 
-* Delete the task at index 2:<br>
+* Delete the task at `INDEX` 2:<br>
 **`kill 2`** <br><br>
-* Deletes the task at indexes 4, 5 and 6:
+* Deletes the task at `INDEX` 4, 5 and 6:
 **`k 4 5 6`** <br>
 
 <br>
