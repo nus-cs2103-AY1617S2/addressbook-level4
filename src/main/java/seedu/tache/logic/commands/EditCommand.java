@@ -43,6 +43,7 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start Date can not be before End Date";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
 
@@ -107,8 +108,18 @@ public class EditCommand extends Command implements Undoable {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Optional<DateTime> updatedStartDateTime = taskToEdit.getStartDateTime();
-        Optional<DateTime> updatedEndDateTime = taskToEdit.getEndDateTime();
+        Optional<DateTime> updatedStartDateTime;
+        Optional<DateTime> updatedEndDateTime;
+        if (taskToEdit.getStartDateTime().isPresent()) {
+            updatedStartDateTime = Optional.of(new DateTime(taskToEdit.getStartDateTime().get()));
+        } else {
+            updatedStartDateTime = Optional.empty();
+        }
+        if (taskToEdit.getEndDateTime().isPresent()) {
+            updatedEndDateTime = Optional.of(new DateTime(taskToEdit.getEndDateTime().get()));
+        } else {
+            updatedEndDateTime = Optional.empty();
+        }
         if (editTaskDescriptor.getStartDate().isPresent()) {
             if (updatedStartDateTime.isPresent()) {
                 updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
@@ -151,6 +162,11 @@ public class EditCommand extends Command implements Undoable {
             isTimed = false;
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
+            if (updatedStartDateTime.get().compareTo(updatedEndDateTime.get()) == 1) {
+                throw new IllegalValueException(MESSAGE_INVALID_DATE_RANGE);
+            }
+        }
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
                             updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
