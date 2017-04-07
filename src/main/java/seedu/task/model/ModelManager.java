@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void truncateOverdueList() {
-    	overdueTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
+        overdueTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
         Date currentDate = new Date();
 
@@ -177,10 +177,10 @@ public class ModelManager extends ComponentManager implements Model {
         };
         overdueTasks.setPredicate(pred);
         try {
-			taskManager.setOverdueTasks(overdueTasks);
-		} catch (DuplicateTaskException e) {
-			assert false : "There will be no duplicated tasks";
-		}
+            taskManager.setOverdueTasks(overdueTasks);
+        } catch (DuplicateTaskException e) {
+            assert false : "There will be no duplicated tasks";
+        }
     }
 
     //@@author A0135762A

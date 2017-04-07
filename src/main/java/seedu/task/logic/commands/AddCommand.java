@@ -142,15 +142,15 @@ public class AddCommand extends Command {
      * Precond: dateTime string formed by NattyParser required as input
      */
     public String getTime(String dateTime) {
-    	List<String> output = new ArrayList<String>();
+        List<String> output = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(dateTime);
         List<String> list = new ArrayList<String>();
         while (st.hasMoreTokens()) {
             list.add(st.nextToken());
         }
-        st = new StringTokenizer(list.get(3),":");
-        while(st.hasMoreTokens()) {
-        	output.add(st.nextToken());
+        st = new StringTokenizer(list.get(3), ":");
+        while (st.hasMoreTokens()) {
+            output.add(st.nextToken());
         }
         return new String(output.get(0) + ":" + output.get(1));
     }

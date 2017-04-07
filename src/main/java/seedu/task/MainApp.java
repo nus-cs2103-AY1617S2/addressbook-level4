@@ -175,8 +175,8 @@ public class MainApp extends Application {
     }
 
     private static void initOverdueTimer(Model model) {
-    	ot = new OverdueTimer(model);
-    	ot.start();
+        ot = new OverdueTimer(model);
+        ot.start();
     }
 
     //@@author A0141928B
