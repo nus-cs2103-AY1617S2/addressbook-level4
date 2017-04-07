@@ -8,9 +8,11 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_SUCCESS = "Results filtered";
     public static final String MESSAGE_FAILURE = "Failed to filter";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " command filters the list to show only completed " + "or ongoing tasks\n" + "Parameters: completed, ongoing\n" + "Examples: " + COMMAND_WORD + " completed\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " command filters the list to show only completed "
+	    + "or ongoing tasks\n" + "Parameters: completed, ongoing\n" + "Examples: " + COMMAND_WORD + " completed\n "
 	    + "                 " + COMMAND_WORD + " ongoing ";
     public static final String MESSAGE_FAIL = "Not a valid command";
+
     public FilterCommand(String status) {
 	this.status = status;
     }

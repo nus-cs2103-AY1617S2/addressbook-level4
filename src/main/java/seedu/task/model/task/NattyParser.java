@@ -10,24 +10,24 @@ import com.joestelmach.natty.*;
 
 public class NattyParser {
 
-	static Parser parser;
+    static Parser parser;
 
-	public NattyParser() {
-		parser = new Parser();
+    public NattyParser() {
+	parser = new Parser();
+    }
+
+    public List<Date> parse(String input) {
+
+	List<DateGroup> groups = parser.parse(input);
+	if (groups.isEmpty())
+	    return null;
+	else {
+	    DateGroup dategroup = groups.get(0);
+	    List<Date> result = new ArrayList<Date>();
+	    for (Date date : dategroup.getDates())
+		result.add(date);
+	    return result;
 	}
-
-	public List<Date> parse(String input) {
-
-		List<DateGroup> groups = parser.parse(input);
-		if (groups.isEmpty())
-			return null;
-		else {
-			DateGroup dategroup = groups.get(0);
-			List<Date> result = new ArrayList<Date>();
-			for (Date date : dategroup.getDates())
-				result.add(date);
-			return result;
-		}
-	}
+    }
 
 }

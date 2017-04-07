@@ -9,7 +9,7 @@ public class TaskStatus {
     public static final String MESSAGE_DONE = "Completed";
 
     public TaskStatus(String status) {
-	this.status = status;
+        this.status = status;
     }
 
     @Override
