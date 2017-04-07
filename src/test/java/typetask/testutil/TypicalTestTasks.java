@@ -25,7 +25,7 @@ public class TypicalTestTasks {
                     .withCompleted(false).withPriority("Low").build();
             fiona = new TaskBuilder().withName("Fiona Kunz").withDate("").withEndDate("")
                     .withCompleted(false).withPriority("Low").build();
-            george = new TaskBuilder().withName("George Best").withDate("").withEndDate("")
+            george = new TaskBuilder().withName("George Best").withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
                     .withCompleted(false).withPriority("Low").build();
 
             // Manually added

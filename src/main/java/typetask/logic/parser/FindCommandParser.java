@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import typetask.logic.commands.Command;
 import typetask.logic.commands.FindCommand;
 import typetask.logic.commands.IncorrectCommand;
-
+//@@author A0139926R
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -29,6 +29,7 @@ public class FindCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        //checks if keyword contains potential dates 
         List<Date> listOfDates = DateParser.parse(args);
         String wantedDate = "";
         if (DateParser.checkValidDateFormat(listOfDates)) {

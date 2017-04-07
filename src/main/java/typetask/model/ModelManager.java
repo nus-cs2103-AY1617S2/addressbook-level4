@@ -203,6 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new TodayQualifier(today)));
     }
     //@@author A0139926R
+    /** Filters related dates for find command */
     @Override
     public void updateFilteredTaskList(String date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
@@ -301,6 +302,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     //@@author A0139926R
+    /** Examines if the task is qualified to be in list of tasks that consist similar date*/
     private class DateQualifier implements Qualifier {
         private String date;
         boolean result = false;
