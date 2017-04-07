@@ -39,7 +39,7 @@ public class TaskListCard extends UiPart<Region> {
     @FXML
     private ImageView overdueIcon;
 
-    public TaskListCard(ReadOnlyTask task, int displayedIndex) {
+    public TaskListCard(ReadOnlyTask task, int displayedIndex, boolean isOverdue) {
         super(FXML);
         name.setText(task.getName().toString());
         name.setMinWidth(Region.USE_PREF_SIZE);
@@ -48,7 +48,7 @@ public class TaskListCard extends UiPart<Region> {
         showPriority(task);
         showDescription(task);
         displayComplete(task);
-        displayOverdueStatusIfAny(task);
+        displayOverdueStatusIfApplicable(task.isComplete(), isOverdue);
 
         initTags(task);
     }
@@ -59,8 +59,8 @@ public class TaskListCard extends UiPart<Region> {
         }
     }
 
-    private void displayOverdueStatusIfAny(ReadOnlyTask task) {
-        if (task.isOverdue()) {
+    private void displayOverdueStatusIfApplicable(boolean isComplete, boolean isOverdue) {
+        if (!isComplete && isOverdue) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
             deadline.setStyle("-fx-text-fill: red"); //should not be done this way

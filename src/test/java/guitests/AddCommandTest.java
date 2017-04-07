@@ -22,6 +22,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //add another task
         taskToAdd = td.notAddedBuyTicket;
+
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
@@ -40,6 +41,7 @@ public class AddCommandTest extends AddressBookGuiTest {
     }
 
     private void assertAddSuccess(TestTaskCard taskToAdd, TestTaskCard... currentList) {
+
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data

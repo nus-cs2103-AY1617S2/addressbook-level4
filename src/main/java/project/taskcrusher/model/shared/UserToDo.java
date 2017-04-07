@@ -5,7 +5,7 @@ import project.taskcrusher.model.tag.UniqueTagList;
 
 //@@author A0127737X
 /** Acts as a parent class of Event and Task. Represents a ToDo that user is going to complete
- *  at "some point in time". There is no notion of time introduced, and thus has no overdue field.
+ *  at "some point in time". There is no notion of time introduced at this level.
  */
 public class UserToDo implements ReadOnlyUserToDo {
     protected Name name;

@@ -1,5 +1,7 @@
 package project.taskcrusher.model.task;
 
+import java.util.Date;
+
 import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 
 /**
@@ -10,7 +12,7 @@ import project.taskcrusher.model.shared.ReadOnlyUserToDo;
 public interface ReadOnlyTask extends ReadOnlyUserToDo, Comparable<ReadOnlyTask> {
 
     Deadline getDeadline();
-    boolean isOverdue();
+    boolean isOverdue(Date timer);
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals).

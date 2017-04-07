@@ -41,8 +41,6 @@ public interface Model {
 
     void signalUiForUpdatedLists();
 
-    void updateOverdueStatus();
-
     // ========== for tasks =================================================
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

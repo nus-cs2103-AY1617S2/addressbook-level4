@@ -94,10 +94,6 @@ public class UserInbox implements ReadOnlyUserInbox {
     }
 
     //@@author A0127737X
-    public boolean updateOverdueStatus() {
-        return this.events.updateOverdueStatus() || this.tasks.updateOverdueStatus();
-    }
-
     public void markTask(int index, int markFlag) {
         tasks.markTask(index, markFlag);
     }
@@ -154,8 +150,6 @@ public class UserInbox implements ReadOnlyUserInbox {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
-
-
 
     /**
      * Ensures that every tag in this task:

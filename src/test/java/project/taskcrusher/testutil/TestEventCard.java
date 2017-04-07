@@ -20,7 +20,6 @@ public class TestEventCard implements ReadOnlyEvent {
     private List<Timeslot> timeslots;
     private UniqueTagList tags;
     private boolean isComplete;
-    private boolean isOverdue;
 
     public TestEventCard() {
         tags = new UniqueTagList();
@@ -142,8 +141,8 @@ public class TestEventCard implements ReadOnlyEvent {
     }
 
     @Override
-    public boolean isOverdue() {
-        return this.isOverdue;
+    public boolean isOverdue(Date timer) {
+        return false;
     }
 
     @Override

@@ -35,7 +35,6 @@ public class DateUtilApache {
         Parser nattyParser = new Parser();
         Date parsed = null;
         boolean needsTimeAdjustment = false;
-
         List<Date> tempDateList = nattyParser.parse(toParse).get(0).getDates();
 
         if (tempDateList != null && tempDateList.size() > 0) {

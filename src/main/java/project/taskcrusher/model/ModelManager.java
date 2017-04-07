@@ -9,6 +9,7 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.TimerToUpdateEvent;
 import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
@@ -109,12 +110,8 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ListsToShowUpdatedEvent(eventCount, taskCount));
     }
 
-    @Override
-    public synchronized void updateOverdueStatus() {
-        boolean isAnyUpdate = userInbox.updateOverdueStatus();
-        if (isAnyUpdate) {
-            indicateUserInboxChanged();
-        }
+    public void signalUiToUpdateTimer() {
+        raise(new TimerToUpdateEvent());
     }
 
     //=========== Task operations =========================================================================

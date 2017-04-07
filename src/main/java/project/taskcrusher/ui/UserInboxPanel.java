@@ -1,5 +1,6 @@
 package project.taskcrusher.ui;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -14,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
+import project.taskcrusher.commons.events.model.TimerToUpdateEvent;
 import project.taskcrusher.commons.util.FxViewUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
@@ -26,6 +28,7 @@ public class UserInboxPanel extends UiPart<Region> {
     private static final String FXML = "UserInboxPanel.fxml";
     private static final boolean SET_LIST_VISIBLE = true;
     private static final boolean SET_LIST_HIDDEN = false;
+    private Date timer;
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -39,6 +42,7 @@ public class UserInboxPanel extends UiPart<Region> {
     public UserInboxPanel(AnchorPane userInboxPlaceholder, ObservableList<ReadOnlyTask> taskList,
             ObservableList<ReadOnlyEvent> eventList) {
         super(FXML);
+        timer = new Date();
         setConnections(taskList, eventList);
         addToPlaceholder(userInboxPlaceholder);
         registerAsAnEventHandler(this);
@@ -67,7 +71,7 @@ public class UserInboxPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskListCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskListCard(task, getIndex() + 1, task.isOverdue(timer)).getRoot());
             }
         }
     }
@@ -82,7 +86,7 @@ public class UserInboxPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventListCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventListCard(event, getIndex() + 1, event.isOverdue(timer)).getRoot());
             }
         }
     }
@@ -106,6 +110,13 @@ public class UserInboxPanel extends UiPart<Region> {
             taskListView.setVisible(SET_LIST_VISIBLE);
             taskHeader.setText("Tasks: " + event.taskCount + " listed");
         }
+    }
+
+    @Subscribe
+    public void handleTimerToUpdateEvent(TimerToUpdateEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.timer = new Date();
+        System.out.println("Updated timer now at " + timer.toString());
     }
 
 }

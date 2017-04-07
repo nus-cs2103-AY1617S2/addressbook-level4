@@ -38,8 +38,6 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     private List<XmlAdaptedTimeslot> timeslots = new ArrayList<>();
     @XmlElement(required = true)
-    private boolean isOverdue;
-    @XmlElement(required = true)
     private String location;
 
     /**
@@ -71,7 +69,6 @@ public class XmlAdaptedEvent {
         }
 
         location = source.getLocation().location;
-        isOverdue = source.isOverdue();
     }
 
     /**
@@ -97,7 +94,7 @@ public class XmlAdaptedEvent {
 
         final Location location = new Location(this.location);
 
-        return new Event(name, eventTimeslots, priority, location, description, tags, isComplete, isOverdue);
+        return new Event(name, eventTimeslots, priority, location, description, tags, isComplete);
     }
 
 }

@@ -36,8 +36,6 @@ public class XmlAdaptedTask {
     /* Task-specific attributes */
     @XmlElement(required = true)
     private String deadline;
-    @XmlElement(required = true)
-    private boolean isOverdue;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -63,7 +61,6 @@ public class XmlAdaptedTask {
         }
 
         deadline = source.getDeadline().deadline;
-        isOverdue = source.isOverdue();
     }
 
     /**
@@ -83,6 +80,6 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(taskTags);
 
         final Deadline deadline = new Deadline(this.deadline);
-        return new Task(name, deadline, priority, description, tags, isComplete, isOverdue);
+        return new Task(name, deadline, priority, description, tags, isComplete);
     }
 }

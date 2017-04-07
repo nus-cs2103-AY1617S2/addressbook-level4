@@ -1,5 +1,7 @@
 package project.taskcrusher.testutil;
 
+import java.util.Date;
+
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.Priority;
@@ -19,7 +21,6 @@ public class TestTaskCard implements ReadOnlyTask {
     private Priority priority;
     private UniqueTagList tags;
     private boolean isComplete;
-    private boolean isOverdue;
 
     public TestTaskCard() {
         tags = new UniqueTagList();
@@ -118,7 +119,7 @@ public class TestTaskCard implements ReadOnlyTask {
     }
 
     @Override
-    public boolean isOverdue() {
-        return this.isOverdue;
+    public boolean isOverdue(Date timer) {
+        return false;
     }
 }

@@ -19,7 +19,6 @@ public class Task extends UserToDo implements ReadOnlyTask {
     public static final String TASK_FLAG = "t";
 
     private Deadline deadline;
-    private boolean isOverdue;
 
     /**
      * Modified for Task.
@@ -29,19 +28,17 @@ public class Task extends UserToDo implements ReadOnlyTask {
         assert deadline != null;
 
         this.deadline = deadline;
-        this.isOverdue = false;
     }
 
     /**
      * This constructor is used when loading from storage
      */
     public Task(Name name, Deadline deadline, Priority priority, Description description, UniqueTagList tags,
-            boolean isComplete, boolean isOverdue) {
+            boolean isComplete) {
         super(name, priority, description, tags);
         assert deadline != null;
 
         this.deadline = deadline;
-        this.isOverdue = isOverdue;
         this.isComplete = isComplete;
     }
 
@@ -50,16 +47,7 @@ public class Task extends UserToDo implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getDeadline(), source.getPriority(), source.getDescription(),
-                source.getTags(), source.isComplete(), source.isOverdue());
-    }
-
-    public boolean updateOverdueStatus(Date now) {
-        boolean isAnyUpdate = false;
-        if (hasDeadline() && now.after(getDeadline().getDate().get())) {
-            markOverdue();
-            isAnyUpdate = true;
-        }
-        return isAnyUpdate;
+                source.getTags(), source.isComplete());
     }
 
     @Override
@@ -76,22 +64,8 @@ public class Task extends UserToDo implements ReadOnlyTask {
         return this.deadline.hasDeadline();
     }
 
-    public boolean isOverdue() {
-        return this.isOverdue;
-    }
-
-    public void markOverdue() {
-        this.isOverdue = true;
-    }
-
-    public void unmarkOverdue() {
-        this.isOverdue = false;
-    }
-
-    @Override
-    public void markComplete() {
-        super.markComplete();
-        isOverdue = false;
+    public boolean isOverdue(Date timer) {
+        return hasDeadline() && timer.after(getDeadline().getDate().get());
     }
 
     /**
@@ -105,8 +79,6 @@ public class Task extends UserToDo implements ReadOnlyTask {
         this.setDeadline(replacement.getDeadline());
         this.setDescription(replacement.getDescription());
         this.setTags(replacement.getTags());
-        this.isOverdue = false;
-        updateOverdueStatus(new Date());
     }
 
     @Override

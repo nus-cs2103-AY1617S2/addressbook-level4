@@ -41,7 +41,7 @@ public class EventListCard extends UiPart<Region> {
     @FXML
     private ImageView overdueIcon;
 
-    public EventListCard(ReadOnlyEvent event, int displayedIndex) {
+    public EventListCard(ReadOnlyEvent event, int displayedIndex, boolean isOverdue) {
         super(FXML);
         name.setText(event.getName().name);
         name.setMinWidth(Region.USE_PREF_SIZE);
@@ -51,7 +51,7 @@ public class EventListCard extends UiPart<Region> {
         showPriority(event);
         showEventTimeSlots(event);
         displayComplete(event);
-        displayOverdueStatusIfAny(event);
+        displayOverdueStatusIfApplicable(event.isComplete(), isOverdue);
 
         initTags(event);
     }
@@ -62,8 +62,8 @@ public class EventListCard extends UiPart<Region> {
         }
     }
 
-    private void displayOverdueStatusIfAny(ReadOnlyEvent event) {
-        if (event.isOverdue()) {
+    private void displayOverdueStatusIfApplicable(boolean isComplete, boolean isOverdue) {
+        if (!isComplete && isOverdue) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
             for (Node child: timeslots.getChildren()) {

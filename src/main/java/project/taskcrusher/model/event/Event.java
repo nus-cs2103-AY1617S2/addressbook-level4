@@ -22,10 +22,9 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     private List<Timeslot> timeslots;
     private Location location;
-    private boolean isOverdue;
 
     /**
-     *  Constructor for event. {@code isOverdue} and {@code isComplete} is set to false.
+     *  Constructor for event. {@code isComplete} is set to false.
      *  {@code timeslots} will be sorted from earliest start time to latest start time
      */
     public Event(Name name, List<Timeslot> timeslots, Priority priority, Location location, Description description,
@@ -38,15 +37,13 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         timeslots.sort(null);
         this.timeslots = timeslots;
         this.location = location;
-        this.isOverdue = false;
     }
 
     /**
-     *  Overloaded constructor for cases we want to specify {@code isOverdue} and
-     *  {@code isComplete} fields.
+     *  Overloaded constructor for cases we want to specify {@code isComplete} field.
      */
     public Event(Name name, List<Timeslot> timeslots, Priority priority, Location location,
-            Description description, UniqueTagList tags, boolean isComplete, boolean isOverdue) {
+            Description description, UniqueTagList tags, boolean isComplete) {
         super(name, priority, description, tags);
 
         assert !CollectionUtil.isAnyNull(timeslots, location);
@@ -54,7 +51,6 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.timeslots = timeslots;
         this.location = location;
         this.isComplete = isComplete;
-        this.isOverdue = isOverdue;
     }
 
     /**
@@ -62,7 +58,7 @@ public class Event extends UserToDo implements ReadOnlyEvent {
      */
     public Event(ReadOnlyEvent source) {
         this(source.getName(), source.getTimeslots(), source.getPriority(), source.getLocation(),
-                source.getDescription(), source.getTags(), source.isComplete(), source.isOverdue());
+                source.getDescription(), source.getTags(), source.isComplete());
     }
 
     /**
@@ -75,22 +71,6 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         timeslots = new ArrayList<Timeslot>();
         timeslots.add(confirmed);
         return true;
-    }
-
-    /**
-     * Marks the event as overdue if any of the element in {@code timeslots} has passed
-     * when checked against {@code currentTime}.
-     * Returns true if it is marked as overdue, false otherwise.
-     */
-    public boolean updateOverdueStatus(Date currentTime) {
-        boolean isAnyUpdate = false;
-        for (Timeslot timeslot : getTimeslots()) {
-            if (currentTime.after(timeslot.end)) {
-                markOverdue();
-                isAnyUpdate = true;
-            }
-        }
-        return isAnyUpdate;
     }
 
     public Date getEarliestBookedTime() {
@@ -116,21 +96,13 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.location = location;
     }
 
-    public void markOverdue() {
-        isOverdue = true;
-    }
-
-    public void unmarkOverdue() {
-        isOverdue = false;
-    }
-
-    public boolean isOverdue() {
-        return this.isOverdue;
-    }
-
-    public void markComplete() {
-        super.markComplete();
-        isOverdue = false;
+    public boolean isOverdue(Date timer) {
+        for (Timeslot timeslot : getTimeslots()) {
+            if (timer.after(timeslot.end)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void resetData(ReadOnlyEvent replacement) {
@@ -144,9 +116,6 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         this.setTags(replacement.getTags());
         if (replacement.isComplete()) {
             this.markComplete();
-        } else {
-            this.isOverdue = false;
-            updateOverdueStatus(new Date());
         }
     }
 

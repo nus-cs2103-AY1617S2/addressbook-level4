@@ -43,7 +43,7 @@ public class TypicalTestUserInbox {
             notAddedBuyTicket = new TaskBuilder().withName("Buy Ticket for UEFA").withPriority("3")
                     .withDeadline("next Tuesday").withDescription("In Portugal").build();
             notAddedYetQuiz = new TaskBuilder().withName("Post lecture quiz").withPriority("2")
-                    .withDeadline("today").withDescription("CS2103").build();
+                    .withDeadline("next Tuesday").withDescription("CS2103").build();
 
             //==================== Sample events =====================
             guitarLesson = new EventBuilder().withName("Guitar lesson").withPriority("0").withDescription("concert")

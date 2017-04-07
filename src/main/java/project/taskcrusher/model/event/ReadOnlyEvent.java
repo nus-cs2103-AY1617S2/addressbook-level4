@@ -13,7 +13,7 @@ public interface ReadOnlyEvent extends ReadOnlyUserToDo, Comparable<ReadOnlyEven
 
     List<Timeslot> getTimeslots();
     Location getLocation();
-    boolean isOverdue();
+    boolean isOverdue(Date timer);
     boolean hasOverlappingTimeslot(Timeslot another);
     boolean hasOverlappingEvent(List<? extends ReadOnlyEvent> preexistingEvents);
     Date getEarliestBookedTime();

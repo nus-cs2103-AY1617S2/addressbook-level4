@@ -1,6 +1,5 @@
 package project.taskcrusher.model.event;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,22 +24,6 @@ public class UniqueEventList implements Iterable<Event> {
 
     public void sortEventsByEarliestTimeslot() {
         internalList.sort(null);
-    }
-
-    /**
-     *  Checks and marks all active, incomplete events that are out-dated as overdue.
-     *  Returns boolean {@code isAnyUpdate} that indicates that whether or not anything was newly marked as overdue,
-     *  which can be used by the caller to tell if there is a need to overwrite data in hard disk.
-     */
-    public boolean updateOverdueStatus() {
-        boolean isAnyUpdate = false;
-        Date now = new Date();
-        for (Event event: internalList) {
-            if (!event.isComplete() && !event.isOverdue()) {
-                isAnyUpdate = event.updateOverdueStatus(now) || isAnyUpdate;
-            }
-        }
-        return isAnyUpdate;
     }
 
     /**

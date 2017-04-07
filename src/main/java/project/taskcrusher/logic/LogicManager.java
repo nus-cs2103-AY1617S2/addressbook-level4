@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
+import project.taskcrusher.commons.events.model.TimerToUpdateEvent;
 import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.CommandResult;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
@@ -30,12 +31,11 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
+        signalUiToUpdateTimer();
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
 
-        ///to refresh the overdue status for events and tasks
-        model.updateOverdueStatus();
         return command.execute();
     }
 
@@ -47,5 +47,9 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyEvent> getFilteredEventList() {
         return model.getFilteredEventList();
+    }
+
+    private void signalUiToUpdateTimer() {
+        raise(new TimerToUpdateEvent());
     }
 }
