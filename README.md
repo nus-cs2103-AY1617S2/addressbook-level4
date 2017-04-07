@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-F12-B3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103JAN2017-F12-B3/main?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d2fd9d19696a4dec9aa9de740d42aa52)](https://www.codacy.com/app/gabrielsim1993/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-F12-B3/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/uiv0.0.png" width="600"><br>
+<img src="docs/images/uiv0.5rc.png" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
