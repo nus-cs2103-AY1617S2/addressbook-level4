@@ -52,7 +52,7 @@ public interface Model {
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-    
+
     // @@author A0114523U
     /**
      * Returns the list of overdue task as an

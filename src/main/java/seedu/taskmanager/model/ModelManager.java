@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
-    
+
     // @@author A0114523U
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
         return new UnmodifiableObservableList<>(filteredOverdueTasks);

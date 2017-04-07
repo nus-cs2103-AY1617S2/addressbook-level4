@@ -49,7 +49,7 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
-    
+
     // @@author A0114523U
     @FXML
     private AnchorPane overdueTaskListPanelPlaceholder;
@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+
     // @@author A0114523U
     private AnchorPane getOverdueTaskListPlaceholder() {
         return overdueTaskListPanelPlaceholder;
@@ -213,10 +213,10 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-    
+
     // @@author A0114523U
     public TaskListPanel getOverdueTaskListPanel() {
-    	return this.overdueTaskListPanel;
+        return this.overdueTaskListPanel;
     }
     // @@author
 
