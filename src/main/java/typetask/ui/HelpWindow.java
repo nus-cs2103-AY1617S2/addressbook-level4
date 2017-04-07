@@ -4,8 +4,9 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import typetask.commons.core.LogsCenter;
 import typetask.commons.util.FxViewUtil;
@@ -19,11 +20,14 @@ public class HelpWindow extends UiPart<Region> {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL =
-            "https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary";
+    private static final String COMMAND_SUMMARY_IMAGE = "/images/commandShortcut.png";
 
+    //@@author A0139154E
     @FXML
-    private WebView browser;
+    private ImageView commandSummary;
+
+    private Image commandSummaryImage = new Image(COMMAND_SUMMARY_IMAGE);
+    //@@author
 
     private final Stage dialogStage;
 
@@ -32,11 +36,17 @@ public class HelpWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        //@@author A0139154E
+        dialogStage.setMaximized(false);
+        dialogStage.setMaxHeight(920);
+        dialogStage.setMaxWidth(1050);
+        dialogStage.setMinHeight(920);
+        dialogStage.setMinWidth(1050);
+        //@@author
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
-        browser.getEngine().load(USERGUIDE_URL);
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        commandSummary.setImage(commandSummaryImage);
+
     }
 
     public void show() {
