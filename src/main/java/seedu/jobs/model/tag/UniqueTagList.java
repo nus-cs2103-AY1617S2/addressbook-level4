@@ -163,6 +163,18 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.hashCode();
     }
 
+  //@@author A0164440M
+    @Override
+    public String toString() {
+        String ans = "";
+        for (Tag t : internalList) {
+            ans += t.toString();
+        }
+        return ans.toString();
+    }
+  //@@author
+
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */

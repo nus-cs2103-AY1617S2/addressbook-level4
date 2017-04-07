@@ -103,10 +103,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
+    private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
@@ -165,8 +165,13 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+          //@@author A0164440M
+            //Enable find command to find according description and tags
+            String taskInfo = task.getName().fullName + task.getDescription().toString()
+                    + task.getTags().toString();
+          //@@author
             return nameKeyWords.stream()
-                    .filter(keyword -> task.getName().fullName.toLowerCase().contains(keyword.toLowerCase()))
+                    .filter(keyword -> taskInfo.toLowerCase().contains(keyword.toLowerCase()))
                     .findAny()
                     .isPresent();
         }
