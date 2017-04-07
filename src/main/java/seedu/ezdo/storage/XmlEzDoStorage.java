@@ -1,4 +1,4 @@
- package seedu.ezdo.storage;
+package seedu.ezdo.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
