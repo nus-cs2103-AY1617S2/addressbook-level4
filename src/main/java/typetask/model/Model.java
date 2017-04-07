@@ -53,6 +53,9 @@ public interface Model {
     void updateFilteredTaskList(Calendar today);
 
     //@@author A0139926R
+    /** Retrieves the tasks with similar date */
+    void updateFilteredTaskList(String date);
+
     /** Stores current TaskManager state */
     void storeTaskManager(String command);
 
@@ -67,4 +70,5 @@ public interface Model {
 
     /** Retrieves the index for task */
     int getFilteredTaskListIndex(ReadOnlyTask targetTask);
+
 }

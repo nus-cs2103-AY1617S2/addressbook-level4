@@ -58,7 +58,7 @@ public class RemoveDeadlineCommand extends Command {
         DueDate updatedDate = taskToEdit.getDate();
         DueDate updatedEndDate = taskToEdit.getEndDate();
         Priority updatedPriority = taskToEdit.getPriority();
-
+        //Accepts empty String for DueDate and will not lead to exception
         try {
             updatedDate = new DueDate("");
             updatedEndDate = new DueDate("");

@@ -24,7 +24,15 @@ public class FindCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); // no results
     }
-
+    //@@author A0139926R
+    @Test
+    public void findValidDate_success() {
+        int expectedListSize = 1;
+        commandBox.runCommand("find Oct 10 1993");
+        assertListSize(expectedListSize);
+        assertResultMessage(expectedListSize + " task(s) listed!");
+    }
+    //@@author
     @Test
     public void findInvalidCommandFail() {
         commandBox.runCommand("findgeorge");

@@ -60,6 +60,7 @@ public class AddCommand extends Command {
         assert model != null;
         model.storeTaskManager(COMMAND_WORD);
         model.addTask(toAdd);
+        //Shows the added task in the task list
         EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(toAdd)));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
