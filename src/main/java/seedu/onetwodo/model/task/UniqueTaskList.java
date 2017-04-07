@@ -139,6 +139,21 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
+    //@@author A0135739W
+    /**
+     * clears completed tasks.
+     *
+     *
+     */
+    public void clearUndone() {
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getDoneStatus() == false) {
+                internalList.remove(internalList.get(i));
+                i--;
+            }
+        }
+    }
+
     /**
      * Marks the equivalent task as task for today.
      *

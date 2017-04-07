@@ -217,6 +217,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author A0135739W
+    @Override
+    public void clearUndone() {
+        toDoList.clearUndone();
+        indicateToDoListChanged();
+    }
+
     // =========== Filtered Task List Accessors
     // =============================================================
 

@@ -176,6 +176,11 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.clearDone();
     }
 
+    //@@author A0135739W
+    public void clearUndone() {
+        tasks.clearUndone();
+    }
+
     public void todayTask(ReadOnlyTask taskForToday) {
         tasks.today(taskForToday);
     }
