@@ -11,8 +11,8 @@
 	-fx-background-color: #17ef22;
 }
 
-.priority {
-	-fx-background-color: yellow;
+.completed {
+	-fx-background-color: black;
 }
 /* @@author */
 .tag-selector {

@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import typetask.logic.parser.DateParser;
@@ -18,14 +17,10 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String PRIORITY = "/images/yellow_exclamation_mark.png";
+    public static final String COMPLETED_STYLE_CLASS = "completed";
     public static final String OVERDUE_STYLE_CLASS = "overdue";
     public static final String PENDING_STYLE_CLASS = "pending";
-    public static final String PRIORITY_STYLE_CLASS = "priority";
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private HBox taskNamePane;
     @FXML
     private Label name;
     @FXML
@@ -43,27 +38,21 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Pane colourTag;
     @FXML
+    private Pane completedColourTag;
+    @FXML
     private ImageView priorityMark;
 
-    // NOTE: only instantiated for non-floating task
     private Image priority = new Image(PRIORITY);
-    private ReadOnlyTask task;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        this.task = task;
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
-
-        if (task.getEndDate().value.equals("")) {
-            endDate.setText("-");
-        } else {
-            endDate.setText(task.getEndDate().value);
-        }
-        setPrepositionForDates();
+        setDates(task);
+        setPrepositionForDates(task);
         setStatusForTask(task);
-//        setImageToIndicatePriority();
+        setImageToIndicatePriority(task);
     }
 
     //@@author A0139926R
@@ -83,13 +72,22 @@ public class TaskCard extends UiPart<Region> {
             } else {
                 setStyleToIndicatePending();
             }
+            if (task.getIsCompleted()) {
+                setStyleToIndicateCompleted(task);
+            }
         }
     }
 
-
-
     //@@author A0139154E
-    private void setPrepositionForDates() {
+    private void setDates(ReadOnlyTask task) {
+        if (task.getEndDate().value.equals("")) {
+            endDate.setText("");
+        } else {
+            endDate.setText(task.getEndDate().value);
+        }
+    }
+
+    private void setPrepositionForDates(ReadOnlyTask task) {
         boolean dateIsEmpty = task.getDate().value.equals("");
         boolean endDateIsEmpty = task.getEndDate().value.equals("");
         if (dateIsEmpty && !endDateIsEmpty) {
@@ -97,23 +95,26 @@ public class TaskCard extends UiPart<Region> {
         } else if (!dateIsEmpty && !endDateIsEmpty) {
             preposition.setText("TO");
         } else {
-            preposition.setText("");
+            preposition.setText("-");
         }
     }
 
-    //@@author A0139154E
     private void setStyleToIndicateOverdue() {
         colourTag.getStyleClass().add(OVERDUE_STYLE_CLASS);
     }
 
-    //@@author A0139154E
     private void setStyleToIndicatePending() {
         colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
     }
 
-    //@@author A0139154E
-    private void setImageToIndicatePriority() {
-        priorityMark.setImage(priority);
+    private void setStyleToIndicateCompleted(ReadOnlyTask task) {
+        colourTag.getStyleClass().add(COMPLETED_STYLE_CLASS);
+    }
+
+    private void setImageToIndicatePriority(ReadOnlyTask task) {
+        if (task.getPriority().value.equals("High")) {
+            priorityMark.setImage(priority);
+        }
     }
 
 }
