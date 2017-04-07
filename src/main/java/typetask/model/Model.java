@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Set;
 
 import typetask.commons.core.UnmodifiableObservableList;
-import typetask.model.task.DueDate;
 import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;

@@ -19,7 +19,6 @@ import typetask.commons.util.CollectionUtil;
 import typetask.commons.util.StorageUtil;
 import typetask.commons.util.StringUtil;
 import typetask.logic.parser.DateParser;
-import typetask.model.task.DueDate;
 import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
