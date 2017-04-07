@@ -300,12 +300,8 @@ public class ModelManager extends ComponentManager implements Model {
             boolean isNameEqual = nameKeyWords.contains("") || nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword));
             boolean isPriorityEqual = comparePriority(task.getPriority());
-            boolean isStartDateQualified = (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
-                    || (startBefore && compareBeforeStart(task.getStartDate()))
-                    || (startAfter && compareAfterStart(task.getStartDate())));
-            boolean isDueDateQualified = (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
-                    || (dueBefore && compareBeforeDue(task.getDueDate()))
-                    || (dueAfter && compareAfterDue(task.getDueDate())));
+            boolean isStartDateQualified = compareStartDate(task);
+            boolean isDueDateQualified = compareDueDate(task);
             boolean isRecurQualified = compareRecur(task.getRecur());
             boolean areTagsEqual = (taskTagStringSet.containsAll(tags));
 
@@ -317,7 +313,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * convert a given {@code Set} of {@code Tags} to a {@code Set} of {@code String}
+         * convert a given {@code Set} of {@code Tags} to a {@code Set} of
+         * {@code String}
          */
         private Set<String> convertToTagStringSet(Set<Tag> tags) {
             Object[] tagArray = tags.toArray();
@@ -328,6 +325,26 @@ public class ModelManager extends ComponentManager implements Model {
             }
 
             return tagSet;
+        }
+
+        /**
+         * returns true if the task's {@code StartDate} qualifies a given
+         * {@code StartDate}, before and after boolean status
+         */
+        private boolean compareStartDate(ReadOnlyTask task) {
+            return (((!startBefore && !startAfter) && compareStartDate(task.getStartDate()))
+                    || (startBefore && compareBeforeStart(task.getStartDate()))
+                    || (startAfter && compareAfterStart(task.getStartDate())));
+        }
+
+        /**
+         * returns true if the task's {@code DueDate} qualifies a given
+         * {@code DueDate}, before and after boolean status
+         */
+        private boolean compareDueDate(ReadOnlyTask task) {
+            return (((!dueBefore && !dueAfter) && compareDueDate(task.getDueDate()))
+                    || (dueBefore && compareBeforeDue(task.getDueDate()))
+                    || (dueAfter && compareAfterDue(task.getDueDate())));
         }
 
         /**
@@ -392,7 +409,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code StartDate} comes before given {@code StartDate}
+         * returns true if task's {@code StartDate} comes before given
+         * {@code StartDate}
          */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
@@ -405,7 +423,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code DueDate} comes before given {@code DueDate}
+         * returns true if task's {@code DueDate} comes before given
+         * {@code DueDate}
          */
         private boolean compareBeforeDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
@@ -418,7 +437,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code StartDate} comes after given {@code StartDate}
+         * returns true if task's {@code StartDate} comes after given
+         * {@code StartDate}
          */
         private boolean compareAfterStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
@@ -431,7 +451,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code DueDate} comes after given {@code DueDate}
+         * returns true if task's {@code DueDate} comes after given
+         * {@code DueDate}
          */
         private boolean compareAfterDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
