@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
-import seedu.task.model.task.TaskStatus;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not

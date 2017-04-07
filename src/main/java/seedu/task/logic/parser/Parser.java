@@ -21,9 +21,10 @@ import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.LoadCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.SortCommand;
-import seedu.task.logic.commands.UndoCommand;
 import seedu.task.logic.commands.PathCommand;
 import seedu.task.logic.commands.RedoCommand;
+import seedu.task.logic.commands.UndoCommand;
+
 
 /**
  * Parses user input.

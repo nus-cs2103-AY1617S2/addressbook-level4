@@ -1,9 +1,10 @@
 package seedu.task.model.task;
 
-import seedu.task.commons.exceptions.IllegalValueException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import seedu.task.commons.exceptions.IllegalValueException;
 
 //@@author A0163845X
 public class TaskTime {

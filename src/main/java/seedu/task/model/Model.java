@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.TaskComparable;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 

@@ -11,9 +11,9 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
 import seedu.task.model.task.TaskName;
-import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.TaskTime;
 
 //@@author A0146757R
