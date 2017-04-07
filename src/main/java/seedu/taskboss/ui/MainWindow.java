@@ -16,7 +16,6 @@ import seedu.taskboss.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.model.UserPrefs;
-import seedu.taskboss.model.category.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing
