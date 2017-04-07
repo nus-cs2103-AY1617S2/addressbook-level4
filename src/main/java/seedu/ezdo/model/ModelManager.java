@@ -135,6 +135,18 @@ public class ModelManager extends ComponentManager implements Model {
         return isSetToDone;
     }
 
+    //@@author A0139177W
+    @Override
+    public boolean toggleTasksSelect(ArrayList<Task> tasksToToggle) {
+        ezDo.toggleTasksSelect(tasksToToggle);
+        final boolean isSetToSelect = tasksToToggle.get(0).getStarted();
+        updateFilteredListToShowAll();
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
+        indicateEzDoChanged();
+        return isSetToSelect;
+    }
+    //@@author A0139177W
+
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, DateException {
@@ -487,4 +499,5 @@ public class ModelManager extends ComponentManager implements Model {
     public void indicateIsSortedAscendingChanged() {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
+
 }
