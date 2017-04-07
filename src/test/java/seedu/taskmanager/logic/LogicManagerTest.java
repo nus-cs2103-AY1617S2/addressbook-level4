@@ -514,10 +514,10 @@ public class LogicManagerTest {
 
     // @@author A0114269E
     @Test
-    public void execute_cd_invalidXmlFile() throws Exception {
-        assertCommandFailure("cd src/test/data/cd_test/empty.xml",
+    public void execute_load_invalidXmlFile() throws Exception {
+        assertCommandFailure("load src/test/data/cd_test/empty.xml",
                 ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("cd src/test/data/cd_test/invalid.xml",
+        assertCommandFailure("load src/test/data/cd_test/invalid.xml",
                 ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
     }
     // @@author
