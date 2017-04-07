@@ -86,21 +86,21 @@ public class TestUtil {
             // CHECKSTYLE.OFF: LineLength
             return new Event[] {
                 new Event(new Description("CS2103 TUT 1"), new StartTime("0900"), new StartDate("200517"),
-                            new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("200517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2104 TUT 1"), new StartTime("0900"), new StartDate("210517"),
-                            new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("210517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2105 TUT 1"), new StartTime("0900"), new StartDate("220517"),
-                            new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("220517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2106 TUT 1"), new StartTime("0900"), new StartDate("230517"),
-                            new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("230517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2107 TUT 1"), new StartTime("0900"), new StartDate("240517"),
-                            new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("240517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2108 TUT 1"), new StartTime("0900"), new StartDate("250517"),
-                            new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("250517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2109 TUT 1"), new StartTime("0900"), new StartDate("260517"),
-                            new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("260517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2110 TUT 1"), new StartTime("0900"), new StartDate("270517"),
-                            new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
+                        new EndTime("1000"), new EndDate("270517"), new Location("NUS"), new UniqueTagList()),
                 new Event(new Description("CS2111 TUT 1"), new StartTime("0900"), new StartDate("280517"),
                             new EndTime("1000"), new EndDate("280517"), new Location("NUS"), new UniqueTagList()) };
             // CHECKSTYLE.ON: LineLength
@@ -117,19 +117,19 @@ public class TestUtil {
                 new Task(new Description("Homework 1"), new Priority("high"), new ByTime("1000"),
                             new ByDate("200517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 2"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("210517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 3"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("220517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 4"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("230517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 5"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("240517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 6"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("250517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 7"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("260517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 8"), new Priority("high"), new ByTime("1000"),
-                            new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
+                        new ByDate("270517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS),
                 new Task(new Description("Homework 9"), new Priority("high"), new ByTime("1000"),
                             new ByDate("280517"), new Location("NUS"), new UniqueTagList(), Task.DEFAULT_TASK_STATUS) };
         } catch (IllegalValueException e) {
@@ -209,10 +209,11 @@ public class TestUtil {
         return expected;
     }
 
-    //@@author A0148038A
+    // @@author A0148038A
     /**
-     * Filters all future test events from an array of test events,
-     * then sort the test events in filtered array in time order.
+     * Filters all future test events from an array of test events, then sort
+     * the test events in filtered array in time order.
+     *
      * @param events
      * @return TestEvent filteredTestEvents
      */
@@ -220,29 +221,30 @@ public class TestUtil {
         ArrayList<TestEvent> eventList = new ArrayList<TestEvent>(Arrays.asList(events));
         eventList.removeIf(e -> e.isOver());
         eventList.sort(ReadOnlyEvent.getComparator());
-        TestEvent [] filteredTestEvents = eventList.toArray(new TestEvent[eventList.size()]);
+        TestEvent[] filteredTestEvents = eventList.toArray(new TestEvent[eventList.size()]);
         return filteredTestEvents;
     }
 
-    //@@author A0148038A
+    // @@author A0148038A
     /**
-     * Filters all future test events from an array of test events,
-     * then sort the test events in filtered array in time order.
+     * Filters all future test tasks from an array of test tasks, then sort the
+     * test events in filtered array in time order.
+     *
      * @param events
      * @return TestEvent filteredTestEvents
      */
-    public static TestTask[] getFilteredTestTasks(TestTask [] tasks) {
+    public static TestTask[] getFilteredTestTasks(TestTask[] tasks) {
         ArrayList<TestTask> taskList = new ArrayList<TestTask>(Arrays.asList(tasks));
         taskList.removeIf(t -> t.getStatus());
         taskList.sort(ReadOnlyTask.getComparator());
-        TestTask [] filteredTestTasks = taskList.toArray(new TestTask[taskList.size()]);
+        TestTask[] filteredTestTasks = taskList.toArray(new TestTask[taskList.size()]);
         return filteredTestTasks;
     }
 
     // @@author
     /**
-     * Takes in a list of Testevents and returns the expected filtered and sorted
-     * list of events in event panel
+     * Takes in a list of Testevents and returns the expected filtered and
+     * sorted list of events in event panel
      *
      * @param events
      * @return expected filtered and sorted event list in event panel
@@ -252,6 +254,32 @@ public class TestUtil {
         ArrayList<TestEvent> eventslist = new ArrayList<TestEvent>();
         for (TestEvent a : events) {
             if (!a.isOver()) {
+                numInUIView++;
+                eventslist.add(a);
+            }
+        }
+        eventslist.sort(ReadOnlyEvent.getComparator());
+        TestEvent[] expected = new TestEvent[numInUIView];
+        int counter = 0;
+        for (TestEvent each : eventslist) {
+            expected[counter] = each;
+            counter++;
+        }
+        return expected;
+    }
+    //@@author A0121668A
+    /**
+     * Takes in a list of Testevents and returns the filtered and
+     * sorted list of events that are over in event panel
+     *
+     * @param events
+     * @return expected filtered and sorted past sevent list in event panel
+     */
+    public static TestEvent[] filterPastExpectedTestEventList(TestEvent[] events) {
+        int numInUIView = 0;
+        ArrayList<TestEvent> eventslist = new ArrayList<TestEvent>();
+        for (TestEvent a : events) {
+            if (a.isOver()) {
                 numInUIView++;
                 eventslist.add(a);
             }
@@ -488,6 +516,48 @@ public class TestUtil {
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
+
+    // @@author Li Chengcheng
+    /**
+     * Returns a copy of the list with tasks at multiple positions removed.
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetStartIndex
+     * @param targetEndIndex
+     */
+    public static TestTask[] removeTasksFromListByIndex(final TestTask[] list, int targetStartIndex,
+            int targetEndIndex) {
+        int numOfTasksToRemove = targetEndIndex - targetStartIndex;
+        TestTask[] buffer = list;
+        for (int i = 0; i < numOfTasksToRemove; i++) {
+            buffer = removeTasksFromList(buffer, buffer[targetStartIndex - 1]);
+        }
+        return buffer;
+    }
+
+    /**
+     * Returns a copy of the list with tasks at multiple positions.
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetStartIndex
+     * @param targetEndIndex
+     * @return taskList from start index
+     *            to end index
+     */
+    public static TestTask[] getTasksFromListByIndex(final TestTask[] list,
+            int targetStartIndex, int targetEndIndex) {
+        {
+            int numOfTasksToRemove = targetEndIndex - targetStartIndex;
+            TestTask[] taskList = new TestTask[numOfTasksToRemove];
+            for (int i = 0; i < numOfTasksToRemove; i++) {
+                taskList[i] = list[targetStartIndex + i - 1];
+            }
+            return taskList;
+        }
+    }
+    // @@author
 
     /**
      * Replaces events[i] with an event.
