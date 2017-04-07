@@ -224,9 +224,9 @@ The `UI` component:
 
 Author: [Lam Guang Jun](http://github.com/gjlam95)
 
-The `Logic` component process all the business logic and incoming requests.
-It manipulates data based on the `Model` component and communicates with the `UI` component
-to display the final output.
+Logic provides APIs for the UI to execute the commands given by the user The API of the logic component can be found at Logic.java.
+
+The class diagram of the Logic Component is given below. LogicManager implements the Logic interface and has exactly one Parser. Parser is responsible for processing the user command and creating instances of Command objects (such as AddCommand). These will then be executed by the LogicManager. New command classes must implement the Command class. Each Command class produces exactly one CommandResult.
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
