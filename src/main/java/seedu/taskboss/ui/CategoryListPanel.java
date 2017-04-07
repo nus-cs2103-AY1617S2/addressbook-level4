@@ -3,18 +3,22 @@ package seedu.taskboss.ui;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.model.category.Category;
@@ -22,6 +26,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0143157J
 public class CategoryListPanel extends UiPart<Region> {
+
+    private final Logger logger = LogsCenter.getLogger(CategoryListPanel.class);
 
     private static final int AMOUNT_ONE = 1;
     private static final String FXML = "CategoryListPanel.fxml";
@@ -38,6 +44,7 @@ public class CategoryListPanel extends UiPart<Region> {
         updateCategoryCountToHashMap();
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
+        consumeMouseClick();
 //        setEventHandlerForViewingChangeEvent();
     }
 
@@ -163,6 +170,18 @@ public class CategoryListPanel extends UiPart<Region> {
             }
             categoryListView.scrollTo(index);
             categoryListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    /**
+     * Consumes any mouse click on categories in the categoryListPanel
+     */
+    private void consumeMouseClick() {
+        categoryListView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                logger.info("Mouse clicked on CategoryListPanel");
+                event.consume();
+            }
         });
     }
 
