@@ -23,11 +23,9 @@
     -fx-opacity: 1;
 }
 
-/*Name of list (Completed/overdue)*/
 .text-field {
     -fx-font-weight: bold;
     -fx-font-size: 12pt;
-    -fx-font-family: "GelPenUpright";
 }
 
 .tab-pane {
@@ -98,17 +96,32 @@
     -fx-text-fill: #010504;
 }
 
-.cell_big_label { /*Task title*/
+/*Task title*/
+.cell_big_label {
     -fx-font-family: "GelPenUpright";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
- /*Task deadline, info and priority*/
+ /*Task info*/
 .cell_small_label {
     -fx-font-size: 11px;
     -fx-text-fill: #010504;
 }
+
+/*@@author A0141928B*/
+/*Task deadline*/
+.cell_small_label_date {
+	-fx-font-family: "Existence Light";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+}
+
+/*Box containing task deadline*/
+#dateBox {
+	-fx-alignment: center-right;
+}
+/*@@author */
 
 .anchor-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
@@ -280,36 +293,52 @@
 .cardPaneP0 {
     -fx-background-color: transparent;
     -fx-border-color: #bbbbbb; /*No priority specified*/
-    -fx-border-width: 0 0 0 15;
+    -fx-border-width: 3 3 3 15;
 }
 
 .cardPaneP1 {
     -fx-background-color: transparent;
     -fx-border-color: #dd6666; /*Priority 1*/
-    -fx-border-width: 0 0 0 15;
+    -fx-border-width: 3 3 3 15;
 }
 
 .cardPaneP2 {
     -fx-background-color: transparent;
     -fx-border-color: #ddbb33; /*Priority 2*/
-    -fx-border-width: 0 0 0 15;
+    -fx-border-width: 3 3 3 15;
 }
 
 .cardPaneP3 {
     -fx-background-color: transparent;
     -fx-border-color: #66bbbb; /*Priority 3*/
-    -fx-border-width: 0 0 0 15;
+    -fx-border-width: 3 3 3 15;
 }
 
 .cardPaneP4 {
     -fx-background-color: transparent;
     -fx-border-color: #66dd99; /*Priority 4*/
-    -fx-border-width: 0 0 0 15;
+    -fx-border-width: 3 3 3 15;
 }
 
 /*Command box*/
 #commandTextField {
     -fx-font-family: "Code New Roman";
+}
+
+/*doingTASKS header*/
+.ongoing {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
+}
+/*didTASKS header*/
+.completed {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
+}
+/*OMG Y U NO DO header*/
+.overdue {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
 }
 /*@@author*/
 
