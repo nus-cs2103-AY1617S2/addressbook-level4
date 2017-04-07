@@ -120,7 +120,10 @@ public abstract class TaskListGuiTest {
      * Asserts the message shown in the Result Display area is same as the given string.
      */
     protected void assertResultMessage(String expected) {
-        assertEquals(expected, resultDisplay.getText());
+        // TODO Strange regression where expected contains "\r\n" as line separator while
+        // resultDisplay.getText() only uses "\n" as line separator. Could it be that JavaFX
+        // TextArea automatically convert "\r\n" to "\n"?
+        assertEquals(expected.replaceAll("\\r\\n", "\n"), resultDisplay.getText().replaceAll("\\r\\n", "\n"));
     }
 
     public void raise(BaseEvent e) {

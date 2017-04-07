@@ -83,7 +83,8 @@ public interface ReadOnlyTask {
 
     default void buildNameString(final StringBuilder builder) {
         builder.append(getName());
-        builder.append("\n");
+        // TODO to remove all the line separators and rebuild toString(), create a getCLIOutput instead
+        builder.append(System.lineSeparator());
     }
 
     default void buildDeadlineString(final StringBuilder builder) {
