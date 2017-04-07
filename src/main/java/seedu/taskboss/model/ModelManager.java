@@ -207,10 +207,12 @@ public class ModelManager extends ComponentManager implements Model {
         for (ReadOnlyTask task : tasksToMarkDone) {
             int targetIndex = indices.get(index) - 1;
             if (task.isRecurring()) {
+                UniqueCategoryList newCategories = new UniqueCategoryList(task.getCategories());
+                newCategories.add(Category.done);
                 Task newTask = new Task(task.getName(), task.getPriorityLevel(),
                         task.getStartDateTime(), task.getEndDateTime(),
                         task.getInformation(), task.getRecurrence(),
-                        new UniqueCategoryList(CATEGORY_DONE));
+                        newCategories);
                 int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
                 this.taskBoss.updateTask(taskBossIndex, newTask);
             } else {
