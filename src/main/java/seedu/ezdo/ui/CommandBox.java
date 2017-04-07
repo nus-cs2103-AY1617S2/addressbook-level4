@@ -41,6 +41,7 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
+  //@@author A0139177W
     @FXML
     private void handleCommandInputChanged() {
         // reset command text field color if it is changed.
@@ -65,7 +66,7 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-
+  //@@author A0139177W
 
     /**
      * Sets the command box style to indicate a successful command.

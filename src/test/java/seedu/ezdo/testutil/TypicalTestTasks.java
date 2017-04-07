@@ -5,8 +5,9 @@ import seedu.ezdo.model.EzDo;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList;
 
+//@@author A0139177W
 /**
- *
+ * Generates the tasks for testing.
  */
 public class TypicalTestTasks {
 
@@ -182,3 +183,4 @@ public class TypicalTestTasks {
     }
 
 }
+//@@author A0139177W
