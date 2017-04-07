@@ -60,7 +60,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     public void listTimedTasks() {
         assertListResult("list timed", "Timed", td.eggsAndBread, td.visitFriend, td.readBook);
         commandBox.runCommand("list");
-        commandBox.runCommand("edit 2 change sd to 5 jun and change st to 9am");
+        commandBox.runCommand("edit 2 change sd to 2 months ago and change st to 9am and change ed to 1 months ago");
         TestTask[] tempTasksList = td.getTypicalTasks();
         ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
         for (int i = 1; i < 5; i++) {
@@ -101,15 +101,12 @@ public class ListCommandTest extends TaskManagerGuiTest {
     public void listTodayTasks() throws IllegalValueException {
         assertListResult("list today", "Today");
         commandBox.runCommand("list");
-        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
-        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
-        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
+        commandBox.runCommand("edit 1 change ed to today");
         TestTask[] tempTasksList = td.getTypicalTasks();
         ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
-        for (int i = 0; i < 3; i++) {
-            tempTasksList[i].setEndDateTime(new DateTime("today 23:59"));
-            expectedTasksList.add(tempTasksList[i]);
-        }
+        tempTasksList[0].setEndDateTime(new DateTime("today 00:00"));
+        expectedTasksList.add(tempTasksList[0]);
+
         assertListResult("list today", "Today", expectedTasksList.toArray(new TestTask[0]));
     }
 
