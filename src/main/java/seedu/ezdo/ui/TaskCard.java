@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -66,6 +67,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label recur;
     @FXML
+    private Label status;
+    @FXML
     private FlowPane tags;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -77,6 +80,7 @@ public class TaskCard extends UiPart<Region> {
         setStartDate(task);
         setDueDate(task);
         recur.setText(task.getRecur().value);
+        setStatus(task);
         initTags(task);
     }
 
@@ -162,6 +166,18 @@ public class TaskCard extends UiPart<Region> {
         priorityColor.setStyle(CSS_BACKGROUND_COLOR_PROPERTY + PRIORITY_COLOR_HASHMAP.get(priorityInString));
     }
 
+
+    // ========================= STATUS ============================ //
+    private void setStatus(ReadOnlyTask task) {
+        if (task.getDone()) {
+            status.setGraphic(new ImageView("/images/tick.png"));
+        }
+        if (task.getStarted()) {
+            status.setGraphic(new ImageView("/images/wip.png"));
+        }
+    }
+
+    // ========================= TAGS ============================ //
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
