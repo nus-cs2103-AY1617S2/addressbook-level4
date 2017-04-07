@@ -16,6 +16,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListCompleteCommand;
+import seedu.address.logic.commands.ListIncompleteCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -69,6 +71,13 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        //@@author A0164466X     
+        case ListCompleteCommand.COMMAND_WORD:
+            return new ListCompleteCommand();
+            
+        case ListIncompleteCommand.COMMAND_WORD:
+            return new ListIncompleteCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
