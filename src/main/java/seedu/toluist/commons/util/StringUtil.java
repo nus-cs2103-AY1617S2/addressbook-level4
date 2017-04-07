@@ -130,49 +130,50 @@ public class StringUtil {
 
     /**
      * Return a transformed string of an original string, with the last component replaced
-     * @param s the original string
-     * @param replacement the string to replace the first word
+     * @param originalString the original string
+     * @param newLastWord the string to replace the last word
      * @return the transformed string
      */
-    public static String replaceLastComponent(String s, String replacement) {
-        if (replacement == null || !StringUtil.isPresent(s)) {
-            return s;
+    public static String replaceLastComponent(String originalString, String newLastWord) {
+        if (newLastWord == null || !StringUtil.isPresent(originalString)) {
+            return originalString;
         }
 
-        ArrayList<String> words = new ArrayList(Arrays.asList(s.split(WHITE_SPACE)));
+        ArrayList<String> words = new ArrayList(Arrays.asList(originalString.split(WHITE_SPACE)));
 
-        if (getLastComponent(s).equals(EMPTY_STRING)) {
+        if (getLastComponent(originalString).equals(EMPTY_STRING)) {
             words.add(EMPTY_STRING);
         }
 
         if (words.isEmpty()) {
-            return s;
+            return originalString;
         }
 
-        words.set(words.size() - 1, replacement);
+        words.set(words.size() - 1, newLastWord);
         return String.join(SINGLE_SPACE, words);
     }
 
     /**
      * Return a transformed string of an original string, with the first word replaced
-     * @param s the original string
-     * @param replacement the string to replace the first word
+     * @param originalString the original string
+     * @param newFirstWord the string to replace the first word
      * @return the transformed string
      */
-    public static String replaceFirstWord(String s, String replacement) {
-        if (replacement == null || !StringUtil.isPresent(s)) {
-            return s;
+    public static String replaceFirstWord(String originalString, String newFirstWord) {
+        if (newFirstWord == null || !StringUtil.isPresent(originalString)) {
+            return originalString;
         }
-        return s.replaceFirst(NONE_WHITE_SPACE, replacement);
+
+        return originalString.replaceFirst(NONE_WHITE_SPACE, newFirstWord);
     }
 
     /**
      * Get last word of a string
-     * @param s a string
+     * @param originalString a string
      * @return last word of the string
      */
-    public static String getLastWord(String s) {
-        String[] words = s.trim().split(WHITE_SPACE);
+    public static String getLastWord(String originalString) {
+        String[] words = originalString.trim().split(WHITE_SPACE);
         return words[words.length - 1];
     }
 
@@ -180,30 +181,30 @@ public class StringUtil {
      * Get last component of a string
      * By component, it means the method will return the last word if the string ends with a word,
      * or "" or the string end with whitespaces
-     * @param s a string
-     * @return last word of the string
+     * @param originalString a string
+     * @return last component of the string
      */
-    public static String getLastComponent(String s) {
-        assert s != null;
-        assert !s.equals(EMPTY_STRING);
+    public static String getLastComponent(String originalString) {
+        assert originalString != null;
+        assert !originalString.equals(EMPTY_STRING);
 
-        if (s.substring(s.length() - 1).matches(WHITE_SPACE)) {
+        if (originalString.substring(originalString.length() - 1).matches(WHITE_SPACE)) {
             return EMPTY_STRING;
         }
-        return getLastWord(s);
+        return getLastWord(originalString);
     }
 
     /**
      * Check if a string starts with another phrase, case-ignored
-     * @param s a string
-     * @param comparision a phrase to compare with
+     * @param originalString a string
+     * @param checkPhrase a phrase to compare with
      * @return true / false
      */
-    public static boolean startsWithIgnoreCase(String s, String comparision) {
-        if (s == null || comparision == null) {
+    public static boolean startsWithIgnoreCase(String originalString, String checkPhrase) {
+        if (originalString == null || checkPhrase == null) {
             return false;
         }
-        return s.toLowerCase().startsWith(comparision.toLowerCase());
+        return originalString.toLowerCase().startsWith(checkPhrase.toLowerCase());
     }
 
 
@@ -211,7 +212,7 @@ public class StringUtil {
      * Converts collection of strings to array of arrays of strings
      */
     public static String[][] collectionToArrayOfArrays(Collection<String> strings) {
-        return strings.stream().map(s -> new String[] { s })
+        return strings.stream().map(string -> new String[] { string })
                 .collect(Collectors.toList())
                 .toArray(new String[0][0]);
     }

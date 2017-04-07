@@ -91,7 +91,7 @@ public class CommandBox extends UiView {
 
     /**
      * Handle selection of suggested command
-     * If current text matches suggested command, or if no suggested command selected, dispatch the command
+     * If no suggestions are selected dispatch the command
      * Otherwise auto-complete it to match the command
      */
     private void handleCommandInputSelectSuggestedCommand() {
@@ -100,9 +100,7 @@ public class CommandBox extends UiView {
         int index = store.getObservableSuggestedCommandIndex().get();
         String commandText = commandTextField.getText();
 
-        if (suggestedCommands.isEmpty()
-                || index == UiStore.INDEX_INVALID_SUGGESTION
-                || suggestedCommands.get(index).equalsIgnoreCase(StringUtil.getLastWord(commandText))) {
+        if (index == UiStore.INDEX_INVALID_SUGGESTION) {
             dispatchCommand();
             return;
         }
