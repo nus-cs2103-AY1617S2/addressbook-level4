@@ -1,7 +1,10 @@
 package org.teamstbf.yats.ui;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import org.teamstbf.yats.commons.core.LogsCenter;
+import org.teamstbf.yats.commons.events.ui.EventPanelSelectionChangedEvent;
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
@@ -23,125 +26,137 @@ import javafx.scene.layout.Region;
 @SuppressWarnings("restriction")
 public class MultiViewPanel extends UiPart<Region> {
 
-    protected Model model;
+	protected Model model;
 
-    private static final String FXML = "CalendarView.fxml";
-    private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
-    private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
-    private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
+	private static final String FXML = "CalendarView.fxml";
+	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
 
-    private ObservableList<ReadOnlyEvent> calendarList;
-    private ObservableList<ReadOnlyEvent> taskList;
+	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
+	private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
 
-    private final DatePickerSkin calendar;
+	private ObservableList<ReadOnlyEvent> calendarList;
+	private ObservableList<ReadOnlyEvent> taskList;
 
-    @FXML
-    private AnchorPane calendarPanel;
-    @FXML
-    private BorderPane calendarRoot;
-    @FXML
-    private ListView<ReadOnlyEvent> taskListView;
-    @FXML
-    private ListView<String[]> timeTasks;
+	private final DatePickerSkin calendar;
 
-    private static LocalDate today = LocalDate.now();
+	@FXML
+	private AnchorPane calendarPanel;
+	@FXML
+	private BorderPane calendarRoot;
+	@FXML
+	private ListView<ReadOnlyEvent> taskListView;
+	@FXML
+	private ListView<String[]> timeTasks;
 
-    private static final int TASK_DETAILS = 4;
-    private static final int TASK_TITLE = 0;
-    private static final int TASK_START = 1;
-    private static final int TASK_END = 2;
-    private static final int TASK_LOCATION = 3;
+	private static LocalDate today = LocalDate.now();
 
-    /**
-     * The AnchorPane where the CalendarView must be inserted
-     *
-     * @param placeholder
-     */
-    public MultiViewPanel(AnchorPane placeholder, Model model) {
-        super(FXML);
-        this.model = model;
-        calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
-        FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
-        initializeCalendarView();
-        initializeDoneView();
-        placeholder.getChildren().add(calendarPanel);
-    }
+	private static final int TASK_DETAILS = 4;
+	private static final int TASK_TITLE = 0;
+	private static final int TASK_START = 1;
+	private static final int TASK_END = 2;
+	private static final int TASK_LOCATION = 3;
 
-    private void initializeCalendarView() {
-        Node popupContent = calendar.getPopupContent();
-        calendarRoot.setCenter(popupContent);
-        createFullDayTime();
-    }
+	/**
+	 * The AnchorPane where the CalendarView must be inserted
+	 *
+	 * @param placeholder
+	 */
+	public MultiViewPanel(AnchorPane placeholder, Model model) {
+		super(FXML);
+		this.model = model;
+		calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
+		FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
+		initializeCalendarView();
+		initializeDoneView();
+		setEventHandlerForSelectionChangeEvent();
+		placeholder.getChildren().add(calendarPanel);
+	}
 
-    private void initializeDoneView() {
-        updateTaskList();
-        taskListView.setItems(taskData);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
-    }
+	private void initializeCalendarView() {
+		Node popupContent = calendar.getPopupContent();
+		calendarRoot.setCenter(popupContent);
+		createFullDayTime();
+	}
 
-    private void createFullDayTime() {
-        updateCalendarList();
-        timeTasks.setItems(timeData);
-        timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-    }
+	private void initializeDoneView() {
+		updateTaskList();
+		taskListView.setItems(taskData);
+		taskListView.setCellFactory(listView -> new TaskListViewCell());
+	}
 
-    // =============== Inner Class for CalendarView ==================
+	private void createFullDayTime() {
+		updateCalendarList();
+		timeTasks.setItems(timeData);
+		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+	}
 
-    private class TimeSlotListViewCell extends ListCell<String[]> {
+	private void setEventHandlerForSelectionChangeEvent() {
+		taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+				raise(new EventPanelSelectionChangedEvent(newValue));
+			}
+		});
+	}
 
-        @Override
-        protected void updateItem(String[] taskSlot, boolean empty) {
-            super.updateItem(taskSlot, empty);
+	// =============== Inner Class for CalendarView ==================
 
-            if (empty || (taskSlot == null)) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new TimeCard(taskSlot).getRoot());
-            }
-        }
-    }
+	private class TimeSlotListViewCell extends ListCell<String[]> {
 
-    private class TaskListViewCell extends ListCell<ReadOnlyEvent> {
+		@Override
+		protected void updateItem(String[] taskSlot, boolean empty) {
+			super.updateItem(taskSlot, empty);
 
-        @Override
-        protected void updateItem(ReadOnlyEvent task, boolean empty) {
-            super.updateItem(task, empty);
+			if (empty || (taskSlot == null)) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				setGraphic(new TimeCard(taskSlot).getRoot());
+			}
+		}
+	}
 
-            if (empty || task == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                if (task.getIsDone().getValue().equals("Yes")) {
-                    setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSONDONE).getRoot());
-                }
-            }
-        }
-    }
+	private class TaskListViewCell extends ListCell<ReadOnlyEvent> {
 
-    // ============ Inner Methods for Information Extraction ============
+		@Override
+		protected void updateItem(ReadOnlyEvent task, boolean empty) {
+			super.updateItem(task, empty);
 
-    private void updateCalendarList() {
-        String[] data = new String[TASK_DETAILS];
-        model.updateCalendarFilteredListToShowStartTime();
-        calendarList = model.getCalendarFilteredTaskList();
-        for (int i = 0; i < calendarList.size(); i++) {
-            ReadOnlyEvent event = calendarList.get(i);
-            data[TASK_TITLE] = event.getTitle().toString();
-            data[TASK_START] = event.getStartTime().toString();
-            data[TASK_END] = event.getEndTime().toString();
-            data[TASK_LOCATION] = event.getLocation().toString();
-            timeData.add(data);
-        }
-    }
+			if (empty || task == null) {
+				setGraphic(null);
+				setText(null);
+			} else {
+				if (task.getIsDone().getValue().equals("Yes")) {
+					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSONDONE).getRoot());
+				}
+			}
+		}
+	}
 
-    private void updateTaskList() {
-        model.updateTaskFilteredListToShowDone();
-        taskList = model.getTaskFilteredTaskList();
-        for (int i = 0; i < taskList.size(); i++) {
-            taskData.add(taskList.get(i));
-        }
-    }
+	// ============ Inner Methods for Information Extraction ============
+
+	private void updateCalendarList() {
+		String[] data = new String[TASK_DETAILS];
+		model.updateCalendarFilteredListToShowStartTime();
+		calendarList = model.getCalendarFilteredTaskList();
+		for (int i = 0; i < calendarList.size(); i++) {
+			ReadOnlyEvent event = calendarList.get(i);
+			data[TASK_TITLE] = event.getTitle().toString();
+			data[TASK_START] = event.getStartTime().toString();
+			data[TASK_END] = event.getEndTime().toString();
+			data[TASK_LOCATION] = event.getLocation().toString();
+			timeData.add(data);
+		}
+	}
+
+	private void updateTaskList() {
+		model.updateTaskFilteredListToShowDone();
+		taskList = model.getTaskFilteredTaskList();
+		for (int i = 0; i < taskList.size(); i++) {
+			taskData.add(taskList.get(i));
+		}
+	}
 
 }
