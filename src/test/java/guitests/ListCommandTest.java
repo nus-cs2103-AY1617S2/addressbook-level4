@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
 
@@ -95,10 +96,30 @@ public class ListCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0139961U
+    @Test
+    public void listTodayTasks() throws IllegalValueException {
+        assertListResult("list today", "Today");
+        commandBox.runCommand("list");
+        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
+        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
+        commandBox.runCommand("edit 1 change ed to today change et to 23:59");
+        TestTask[] tempTasksList = td.getTypicalTasks();
+        ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
+        for (int i = 0; i < 3; i++) {
+            tempTasksList[i].setEndDateTime(new DateTime("today 23:59"));
+            expectedTasksList.add(tempTasksList[i]);
+        }
+        assertListResult("list today", "Today", expectedTasksList.toArray(new TestTask[0]));
+    }
+
+    //@@author
+
     private void assertListResult(String command, String expectedMessage, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertResultMessage(expectedMessage + " tasks listed");
         assertListSize(expectedHits.length);
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
+
 }
