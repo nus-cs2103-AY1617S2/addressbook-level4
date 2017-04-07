@@ -20,6 +20,7 @@ public class ClearDoneCommand extends Command {
 	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
 	int formerSize = lastShownList.size();
+    model.saveImageOfCurrentTaskManager();
 
 	for (int index = 0; index < lastShownList.size(); index++) {
 	    if (lastShownList.get(index).getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {

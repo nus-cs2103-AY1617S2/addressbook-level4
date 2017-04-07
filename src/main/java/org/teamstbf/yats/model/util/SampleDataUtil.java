@@ -10,7 +10,6 @@ import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 public class SampleDataUtil {
@@ -220,15 +219,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyTaskManager getSampleTaskManager() {
-	try {
 	    TaskManager sampleTM = new TaskManager();
 	    for (Event sampleTask : getSampleEvents()) {
 		sampleTM.addEvent(sampleTask);
 	    }
 	    return sampleTM;
-	} catch (DuplicateEventException e) {
-	    throw new AssertionError("sample data cannot contain duplicate persons", e);
-	}
     }
     /*
      * new Event(new Title("Restructuring of sustainability revision"), new

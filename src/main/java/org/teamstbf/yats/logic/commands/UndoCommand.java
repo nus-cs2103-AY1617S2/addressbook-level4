@@ -18,12 +18,12 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-	assert model != null;
-	if (model.checkEmptyUndoStack()) {
-	    throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
-	}
-	model.getPreviousState();
-	return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
+        assert model != null;
+        if (model.checkEmptyUndoStack()) {
+            throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
+        }
+        model.getPreviousState();
+        return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
 
     }
 }

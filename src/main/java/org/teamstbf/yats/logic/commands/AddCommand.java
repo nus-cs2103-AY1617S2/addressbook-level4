@@ -30,7 +30,6 @@ public class AddCommand extends Command {
 			+ " meeting with boss @work, 7:00pm to 9pm tomorrow " + "//get scolded for being lazy #kthxbye";
 
 	public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-	public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task manager";
 
 	private final Event toAdd;
 
@@ -71,12 +70,10 @@ public class AddCommand extends Command {
 	@Override
 	public CommandResult execute() throws CommandException {
 		assert model != null;
-		try {
-			model.addEvent(toAdd);
-			return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-		} catch (UniqueEventList.DuplicateEventException e) {
-			throw new CommandException(MESSAGE_DUPLICATE_EVENT);
-		}
+		System.out.println("hello");
+		model.saveImageOfCurrentTaskManager();
+		model.addEvent(toAdd);
+		return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
 	}
 
 }

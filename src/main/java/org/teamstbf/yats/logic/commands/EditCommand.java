@@ -43,7 +43,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     protected final int filteredTaskListIndex;
     protected final EditTaskDescriptor editTaskDescriptor;
@@ -74,12 +73,8 @@ public class EditCommand extends Command {
 
 	ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
 	Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
-	try {
-	    model.updateEvent(filteredTaskListIndex, editedTask);
-	} catch (UniqueEventList.DuplicateEventException dpe) {
-	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	}
+	model.saveImageOfCurrentTaskManager();
+	model.updateEvent(filteredTaskListIndex, editedTask);
 	model.updateFilteredListToShowAll();
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }

@@ -16,7 +16,6 @@ public class BatchUnmarkDoneCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "%d task marked as not done";
     public static final String MESSAGE_ALR_MARKED = "Task is already marked as not done.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as not done "
 	    + "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
@@ -33,6 +32,7 @@ public class BatchUnmarkDoneCommand extends Command {
 
 	List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 	int numOfTask = targetIndexes.size();
+    model.saveImageOfCurrentTaskManager();
 
 	for (int i = 0; i < numOfTask; i++) {
 
@@ -48,12 +48,8 @@ public class BatchUnmarkDoneCommand extends Command {
 	    }
 
 	    markedTask.getIsDone().markUndone();
-
-	    try {
 		model.updateEvent(targetIndexes.pop(), markedTask);
-	    } catch (UniqueEventList.DuplicateEventException dpe) {
-		throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	    }
+
 	}
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, numOfTask));
     }

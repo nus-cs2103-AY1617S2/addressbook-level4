@@ -41,7 +41,6 @@ public class ScheduleCommand extends Command {
 	public static final String MESSAGE_SUCCESS = "New event scheduled: %1$s";
 	public static final String MESSAGE_SUCCESS_WITH_WARNING = "Warning! Event lasts more than 50 years, please check if valid";
 	public static final String MESSAGE_HOURS_INVALID = "The format of hours is invalid - must be a valid long";
-	public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task manager";
 	public static final String MESSAGE_TIME_TOO_LONG = "Schedule can only take a timing of at most 10 hours, and it should not be negative - use add for long events";
 	private static final long MAXIMUM_EVENT_LENGTH = 36000000L;
 	private static final long MINIMUM_EVENT_LENGTH = 0L;
@@ -72,6 +71,7 @@ public class ScheduleCommand extends Command {
 	public CommandResult execute() throws CommandException {
 		assert model != null;
 		try {
+            model.saveImageOfCurrentTaskManager();
 			long checkedHours = (long) (Double.parseDouble(this.hours) * 3600000);
 			System.out.println(checkedHours);
 			if (checkedHours < MINIMUM_EVENT_LENGTH || checkedHours > MAXIMUM_EVENT_LENGTH) {
@@ -84,8 +84,6 @@ public class ScheduleCommand extends Command {
 			return new CommandResult(String.format(MESSAGE_SUCCESS, toSchedule));
 		} catch (NumberFormatException e) {
 			throw new CommandException(MESSAGE_HOURS_INVALID);
-		} catch (UniqueEventList.DuplicateEventException e) {
-			throw new CommandException(MESSAGE_DUPLICATE_EVENT);
 		} catch (IllegalArgumentException e) {
 			throw new CommandException(MESSAGE_TIME_TOO_LONG);
 		}

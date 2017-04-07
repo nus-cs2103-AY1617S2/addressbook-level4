@@ -26,7 +26,6 @@ public class MarkDoneCommand extends Command {
 	public static final String COMMAND_WORD = "mark";
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
 			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
@@ -46,16 +45,13 @@ public class MarkDoneCommand extends Command {
 		if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 			return new CommandResult(MESSAGE_ALR_MARKED);
 		}
-		try {
-			if (markedTask.isRecurring()) {
-				markedTask.markDone();
-			} else {
-				markedTask.getIsDone().markDone();
-			}
-			model.updateEvent(targetIndex, markedTask);
-		} catch (UniqueEventList.DuplicateEventException dpe) {
-			throw new CommandException(MESSAGE_DUPLICATE_TASK);
+		model.saveImageOfCurrentTaskManager();
+		if (markedTask.isRecurring()) {
+		    markedTask.markDone();
+		} else {
+		    markedTask.getIsDone().markDone();
 		}
+		model.updateEvent(targetIndex, markedTask);
 		model.updateFilteredListToShowAll();
 		markedTask.setPriority(0);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));

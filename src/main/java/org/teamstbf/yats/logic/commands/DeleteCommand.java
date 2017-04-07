@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
 	ReadOnlyEvent taskToDelete = lastShownList.get(targetIndex - 1);
 
 	try {
+        model.saveImageOfCurrentTaskManager();
 	    model.deleteEvent(taskToDelete);
 	} catch (EventNotFoundException pnfe) {
 	    assert false : "The target task cannot be missing";

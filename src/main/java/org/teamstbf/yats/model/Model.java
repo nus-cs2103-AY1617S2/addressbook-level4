@@ -6,14 +6,13 @@ import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
-import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** Adds the given Event */
-    void addEvent(Event event) throws UniqueEventList.DuplicateEventException;
+    void addEvent(Event event);
 
     /** Deletes the given Event. */
     void deleteEvent(ReadOnlyEvent target) throws UniqueEventList.EventNotFoundException;
@@ -48,15 +47,11 @@ public interface Model {
      * Updates the event located at {@code filteredEventListIndex} with
      * {@code editedEvent}.
      *
-     * @throws DuplicateEventException
-     *             if updating the event's details causes the event to be
-     *             equivalent to another existing event in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code filteredEventListIndex} < 0 or >= the size of the
      *             filtered list.
      */
-    void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-	    throws UniqueEventList.DuplicateEventException;
+    void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent);
 
     /**
      * Updates the filter of the filtered event list to filter by the given
@@ -142,5 +137,16 @@ public interface Model {
      * Method to check if the redo stack is empty - nothing to redo
      */
     void scheduleEvent(Event event);
+    
+    /**
+     * Saves an image of the previous state of the TaskManager for the undo
+     * command - also clears the redo stack images because once the state is
+     * mutated the previous redoes state are invalid because they are no longer
+     * part of the same chain. This is an internal method used by the addEvent,
+     * deteleEvent, clearEvent, editEvent methods. This method also contains a
+     * check - if there are currently too many task manager states, it will
+     * remove half of the earlier saved states and only keep the later half.
+     */
+    void saveImageOfCurrentTaskManager();
 
 }

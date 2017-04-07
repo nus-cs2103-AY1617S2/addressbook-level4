@@ -40,7 +40,7 @@ public class UniqueEventList implements Iterable<Event> {
 	 *             if the event to add is a duplicate of an existing event in
 	 *             the list.
 	 */
-	public void add(Event p) throws DuplicateEventException {
+	public void add(Event p) {
 		assert p != null;
 		/* if (contains(p)) {
 	    throw new DuplicateEventException();
@@ -58,13 +58,10 @@ public class UniqueEventList implements Iterable<Event> {
 	 * @throws IndexOutOfBoundsException
 	 *             if {@code index} < 0 or >= the size of the list.
 	 */
-	public void updateEvent(int index, ReadOnlyEvent editedEvent) throws DuplicateEventException {
+	public void updateEvent(int index, ReadOnlyEvent editedEvent) {
 		assert editedEvent != null;
 
 		Event eventToUpdate = internalList.get(index);
-		if (!eventToUpdate.equals(editedEvent) && internalList.contains(editedEvent)) {
-			throw new DuplicateEventException();
-		}
 
 		eventToUpdate.resetData(editedEvent);
 		// TODO: The code below is just a workaround to notify observers of the
@@ -95,7 +92,7 @@ public class UniqueEventList implements Iterable<Event> {
 		this.internalList.setAll(replacement.internalList);
 	}
 
-	public void setEvents(List<? extends ReadOnlyEvent> events) throws DuplicateEventException {
+	public void setEvents(List<? extends ReadOnlyEvent> events) {
 		final UniqueEventList replacement = new UniqueEventList();
 		for (final ReadOnlyEvent event : events) {
 			replacement.add(new Event(event));
@@ -122,16 +119,6 @@ public class UniqueEventList implements Iterable<Event> {
 	@Override
 	public int hashCode() {
 		return internalList.hashCode();
-	}
-
-	/**
-	 * Signals that an operation would have violated the 'no duplicates'
-	 * property of the list.
-	 */
-	public static class DuplicateEventException extends DuplicateDataException {
-		protected DuplicateEventException() {
-			super("Operation would result in duplicate events");
-		}
 	}
 
 	/**

@@ -33,8 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
 	private static final String TASK_UNDONE_IDENTIFIER = "No";
 	private static final String TASK_DONE_IDENTIFIER = "Yes";
 
-	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 5;
-	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 5;
+	private static final int MAXIMUM_SIZE_OF_UNDO_STACK = 10;
+	private static final int NEW_SIZE_OF_UNDO_STACK_AFTER_RESIZE = 10;
 
 	private final TaskManager taskManager;
 
@@ -69,28 +69,20 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public synchronized void addEvent(Event event) throws UniqueEventList.DuplicateEventException {
-		saveImageOfCurrentTaskManager();
+	public synchronized void addEvent(Event event) {
 		taskManager.addEvent(event);
 		updateFilteredListToShowAll();
 		indicateTaskManagerChanged();
 		EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEvents.size() - 1));
 	}
 
-	/**
-	 * Saves an image of the previous state of the TaskManager for the undo
-	 * command - also clears the redo stack images because once the state is
-	 * mutated the previous redoes state are invalid because they are no longer
-	 * part of the same chain. This is an internal method used by the addEvent,
-	 * deteleEvent, clearEvent, editEvent methods. This method also contains a
-	 * check - if there are currently too many task manager states, it will
-	 * remove half of the earlier saved states and only keep the later half.
-	 */
-	private void saveImageOfCurrentTaskManager() {
+    @Override
+	public void saveImageOfCurrentTaskManager() {
 		removeUndoEntriesIfUndoStackSizeTooLarge();
 		TaskManager tempManager = new TaskManager();
 		tempManager.resetData(taskManager);
 		undoTaskManager.push(tempManager);
+		System.out.println(undoTaskManager.size());
 		clearRedoStack();
 	}
 
@@ -131,7 +123,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public synchronized void deleteEvent(ReadOnlyEvent target) throws EventNotFoundException {
-		saveImageOfCurrentTaskManager();
 		taskManager.removeEvent(target);
 		indicateTaskManagerChanged();
 	}
@@ -168,7 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void scheduleEvent(Event event) {
-		saveImageOfCurrentTaskManager();
 		indicateTaskManagerChanged();
 	}
 
@@ -217,7 +207,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void resetData(ReadOnlyTaskManager newData) {
-		saveImageOfCurrentTaskManager();
 		taskManager.resetData(newData);
 		indicateTaskManagerChanged();
 	}
@@ -226,10 +215,8 @@ public class ModelManager extends ComponentManager implements Model {
 	// =================================================
 
 	@Override
-	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent)
-			throws UniqueEventList.DuplicateEventException {
+	public void updateEvent(int filteredEventListIndex, ReadOnlyEvent editedEvent) {
 		assert editedEvent != null;
-		saveImageOfCurrentTaskManager();
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
