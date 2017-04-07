@@ -23,6 +23,7 @@ import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
+import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.TaskManager;
 import seedu.task.model.UserPrefs;
 import seedu.task.model.util.SampleDataUtil;

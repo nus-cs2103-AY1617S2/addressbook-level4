@@ -7,9 +7,9 @@ import seedu.task.commons.events.BaseEvent;
  */
 public class ShowHelpRequestEvent extends BaseEvent {
 
-	@Override
-	public String toString() {
-		return this.getClass().getSimpleName();
-	}
+    @Override
+    public String toString() {
+	return this.getClass().getSimpleName();
+    }
 
 }
