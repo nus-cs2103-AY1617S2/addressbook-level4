@@ -3,6 +3,8 @@ package seedu.bulletjournal.logic.commands;
 import seedu.bulletjournal.logic.commands.exceptions.CommandException;
 import seedu.bulletjournal.model.HistoryManager;
 
+// @@author A0146738U-reused
+
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
