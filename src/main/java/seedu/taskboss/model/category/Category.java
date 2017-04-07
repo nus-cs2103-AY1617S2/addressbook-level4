@@ -28,10 +28,11 @@ public class Category {
         if (!isValidCategoryName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_CATEGORY_CONSTRAINTS);
         }
-        this.categoryName = formatName(trimmedName);
+        this.categoryName = formatName(trimmedName); 
     }
 
-    private Category(String name, String forDifferentiating) {
+    private Category(String name, String toDifferentiaiteBetweenConstructors) {
+        assert toDifferentiaiteBetweenConstructors.equals(EMPTY_STRING);
         this.categoryName = name;
     }
 
