@@ -90,7 +90,7 @@ public class EditCommand extends Command implements Undoable {
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            model.updateCurrentFilteredList();
+            //model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));

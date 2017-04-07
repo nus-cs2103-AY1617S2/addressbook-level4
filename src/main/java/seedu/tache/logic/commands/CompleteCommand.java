@@ -81,8 +81,8 @@ public class CompleteCommand extends Command implements Undoable {
         }
         commandSuccess = true;
         undoHistory.push(this);
-        model.updateCurrentFilteredList();
-        model.getFilteredTaskList();
+        //model.updateCurrentFilteredList();
+        //model.getFilteredTaskList();
 
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
     }
