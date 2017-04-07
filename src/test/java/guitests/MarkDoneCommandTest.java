@@ -236,6 +236,15 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
     }
 
+    //------------------Test for marking done a marked done task----------------------------
+
+    @Test
+    public void markDone_taskMarkedDone_failure() {
+        commandBox.runCommand("m 1");
+        commandBox.runCommand("m 1");
+        assertResultMessage(MarkDoneCommand.ERROR_MARKED_TASK);
+    }
+
     //---------------- End of test cases --------------------------------------
 
     private void assertMarkDoneSuccess(boolean runFind, boolean isShort, int filteredTaskListIndex, int taskBossIndex,
