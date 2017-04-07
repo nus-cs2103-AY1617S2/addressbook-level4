@@ -97,7 +97,7 @@ public class ParserUtil {
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<String[]> parseCommandAlias(String command) {
-        String[] args = command.trim().split("\\s+");
+        String[] args = command.trim().split(WHITESPACE_DELIMITER);
         if (args.length == ALIAS_COMMAND_RESET_EXPECTED_ARGS
             && args[ALIAS_COMMAND_ARGS_COMMAND_INDEX].equals(ALIAS_COMMAND_RESET_KEYWORD)) {
             return Optional.of(new String[] {ALIAS_COMMAND_RESET_KEYWORD});
@@ -127,7 +127,7 @@ public class ParserUtil {
     *         the input, {@code Optional.empty()} otherwise.
     */
     public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
+        return Arrays.stream(Arrays.copyOf(preamble.split(WHITESPACE_DELIMITER, numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }

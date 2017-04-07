@@ -14,6 +14,10 @@ public class DateUtil {
     private static final String COMPARE_DATE_STRINGS_ACCEPTED_FORMAT = "dd/MM/yyyy HH:mm";
     private static final String INVALID_DATE_FORMAT_MESSAGE = "The date format should not be invalid.";
 
+    private static final int COMPARE_RESULT_LESS_THAN = -1;
+    private static final int COMPARE_RESULT_MORE_THAN = 1;
+    private static final int COMPARE_RESULT_EQUAL = 0;
+
     /**
      * Checks whether a task's dates are valid
      * @return true if the start date is earlier than or equal to the due date OR if either date is empty
@@ -50,11 +54,11 @@ public class DateUtil {
 
         // Empty dates are always considered lower in value so that they show at the bottom of the list
         if (dateString1.isEmpty() && dateString2.isEmpty()) {
-            return 0;
+            return COMPARE_RESULT_EQUAL;
         } else if (dateString1.isEmpty()) {
-            return 1;
+            return COMPARE_RESULT_MORE_THAN;
         } else if (dateString2.isEmpty()) {
-            return -1;
+            return COMPARE_RESULT_LESS_THAN;
         }
 
         try {
