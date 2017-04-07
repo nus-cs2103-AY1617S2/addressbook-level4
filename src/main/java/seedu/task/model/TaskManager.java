@@ -69,7 +69,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         this.completedTasks.setTasks(completedTasks);
     }
 
-    public void setOverdueTasks(ObservableList<ReadOnlyTask> overdueTasks)
+    public synchronized void setOverdueTasks(ObservableList<ReadOnlyTask> overdueTasks)
              throws UniqueTaskList.DuplicateTaskException {
         this.overdueTasks.setTasks(overdueTasks);
     }
@@ -230,7 +230,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     //@@author A0139161J
-    // Usage for undo/redo command
+    /**Usage for undo/redo command */
     public void loadTaskManagerList(UniqueTaskList tasks) {
         this.tasks.setTasks(tasks);
     }

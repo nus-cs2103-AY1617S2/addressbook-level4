@@ -71,6 +71,8 @@ public interface Model {
     /** Returns overdue task list */
     UnmodifiableObservableList<ReadOnlyTask> getOverdueList();
 
+    /** Updates the overdue list as shown in UI */
+    public void truncateOverdueList();
     //@@author A0135762A
     /** Updates the filter of the filtered task list to filter by the today's date */
     void updateUpcomingTaskList();
