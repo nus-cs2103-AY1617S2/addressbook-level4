@@ -16,9 +16,9 @@ import seedu.toluist.ui.commons.CommandResult;
  * Alias Controller is responsible for handling unalias requests
  */
 public class UnaliasController extends Controller {
-    private static final String RESULT_MESSAGE_SUCCESS = "Alias %s has been removed";
-    private static final String RESULT_MESSAGE_FAILURE = "Alias %s cannot be removed";
-    public static final String RESULT_MESSAGE_NOT_ALIAS = "%s is not an alias";
+    private static final String MESSAGE_RESULT_SUCCESS = "Alias %s has been removed";
+    private static final String MESSAGE_RESULT_FAILURE = "Alias %s cannot be removed";
+    public static final String MESSAGE_RESULT_NOT_ALIAS = "%s is not an alias";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*unalias\\s+(?<alias>\\S+)\\s*";
     private static final String COMMAND_WORD = "unalias";
 
@@ -43,15 +43,15 @@ public class UnaliasController extends Controller {
 
     private void unalias(String alias) throws InvalidCommandException {
         if (aliasConfig.removeAlias(alias) && Config.getInstance().save()) {
-            uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias)));
+            uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_SUCCESS, alias)));
         } else {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_FAILURE, alias));
+            throw new InvalidCommandException(String.format(MESSAGE_RESULT_FAILURE, alias));
         }
     }
 
     private void validateNoAlias(String alias) throws InvalidCommandException {
         if (!aliasConfig.isAlias(alias)) {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_NOT_ALIAS, alias));
+            throw new InvalidCommandException(String.format(MESSAGE_RESULT_NOT_ALIAS, alias));
         }
     }
 

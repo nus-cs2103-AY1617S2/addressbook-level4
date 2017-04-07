@@ -25,8 +25,8 @@ public class DeleteTaskController extends Controller {
 
     private static final String COMMAND_DELETE_TASK = "delete";
 
-    private static final String RESULT_MESSAGE_DELETE_TASK = "Deleted %s: %s";
-    private static final String RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED = "No valid index found.";
+    private static final String MESSAGE_RESULT_DELETE_TASK = "Deleted %s: %s";
+    private static final String MESSAGE_RESULT_ERROR_NO_VALID_INDEX_PROVIDED = "No valid index found.";
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Deletes the specified task from the todo list.";
@@ -71,7 +71,7 @@ public class DeleteTaskController extends Controller {
 
     private void validateIndexIsPresent(List<Integer> indexes) throws IllegalArgumentException {
         if (indexes == null || indexes.isEmpty()) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_NO_VALID_INDEX_PROVIDED);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_NO_VALID_INDEX_PROVIDED);
         }
     }
 
@@ -91,7 +91,7 @@ public class DeleteTaskController extends Controller {
             todoList.remove(task);
         }
         String taskType = task.isEvent() ? "Event" : "Task";
-        return new CommandResult(String.format(RESULT_MESSAGE_DELETE_TASK, taskType, task.getDescription()));
+        return new CommandResult(String.format(MESSAGE_RESULT_DELETE_TASK, taskType, task.getDescription()));
     }
 
     public boolean matchesCommand(String command) {

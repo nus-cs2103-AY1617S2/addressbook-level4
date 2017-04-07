@@ -26,7 +26,7 @@ public class StoreController extends Controller {
     public static final String COMMAND_WORD = "save";
     public static final String PARAMETER_STORE_DIRECTORY = "directory";
 
-    public static final String RESULT_MESSAGE_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
+    public static final String MESSAGE_RESULT_WARNING_OVERWRITE = "A file exists at %s. This file will be overwritten.";
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Changes the location for the storage file used in this system.";
@@ -60,7 +60,7 @@ public class StoreController extends Controller {
     private void save(String path) throws InvalidCommandException {
         String message = StringUtil.EMPTY_STRING;
         if (FileUtil.isFileExists(new File(path))) {
-            message += String.format(RESULT_MESSAGE_WARNING_OVERWRITE, path) + StringUtil.NEW_LINE;
+            message += String.format(MESSAGE_RESULT_WARNING_OVERWRITE, path) + StringUtil.NEW_LINE;
         }
 
         if (TodoList.getInstance().getStorage().move(path)) {

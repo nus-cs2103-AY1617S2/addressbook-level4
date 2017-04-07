@@ -18,7 +18,7 @@ public class ViewAliasCommandTest extends ToLuistGuiTest {
 
     @Test
     public void viewAlias_noAliases() {
-        checkResultOfViewAlias(ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
+        checkResultOfViewAlias(ViewAliasController.MESSAGE_RESULT_NO_ALIAS);
     }
 
     @Test

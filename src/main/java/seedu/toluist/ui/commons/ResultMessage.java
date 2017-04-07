@@ -17,13 +17,13 @@ import seedu.toluist.ui.UiStore;
  */
 public class ResultMessage {
     private static final int INDEX_INVALID = -1;
-    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER_WITH_INDEX = "Added task at index %d:";
-    private static final String RESULT_MESSAGE_ADDED_TASK_HEADER_WITHOUT_INDEX = "Added task in another tab";
-    private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER_WITH_INDEX = "Updated task at index %d:";
-    private static final String RESULT_MESSAGE_UPDATED_TASK_HEADER_WITHOUT_INDEX = "Updated task in another tab";
-    private static final String RESULT_MESSAGE_PARAMETER_INDENTATION = "- ";
-    private static final String RESULT_MESSAGE_ADD_PARAMETER_FORMAT = ": \"%s\"";
-    private static final String RESULT_MESSAGE_UPDATE_PARAMETER_FORMAT = ": \"%s\" to \"%s\"";
+    private static final String MESSAGE_RESULT_ADDED_TASK_HEADER_WITH_INDEX = "Added task at index %d:";
+    private static final String MESSAGE_RESULT_ADDED_TASK_HEADER_WITHOUT_INDEX = "Added task in another tab";
+    private static final String MESSAGE_RESULT_UPDATED_TASK_HEADER_WITH_INDEX = "Updated task at index %d:";
+    private static final String MESSAGE_RESULT_UPDATED_TASK_HEADER_WITHOUT_INDEX = "Updated task in another tab";
+    private static final String MESSAGE_RESULT_PARAMETER_INDENTATION = "- ";
+    private static final String MESSAGE_RESULT_ADD_PARAMETER_FORMAT = ": \"%s\"";
+    private static final String MESSAGE_RESULT_UPDATE_PARAMETER_FORMAT = ": \"%s\" to \"%s\"";
     private static final String STRING_NULL = "";
     private static final String STRING_NEW_LINE = "\n";
     private static final String STRING_SPACE = " ";
@@ -38,8 +38,8 @@ public class ResultMessage {
 
     public static String getAddCommandResultMessage(Task newTask, UiStore uiStore) {
         int index = uiStore.getTaskIndex(newTask);
-        String result = (index == INDEX_INVALID) ? RESULT_MESSAGE_ADDED_TASK_HEADER_WITHOUT_INDEX
-                                   : String.format(RESULT_MESSAGE_ADDED_TASK_HEADER_WITH_INDEX, index + 1);
+        String result = (index == INDEX_INVALID) ? MESSAGE_RESULT_ADDED_TASK_HEADER_WITHOUT_INDEX
+                                   : String.format(MESSAGE_RESULT_ADDED_TASK_HEADER_WITH_INDEX, index + 1);
         result = appendAddedParameterMessage(result, TASK_TYPE, newTask.getTaskType());
         result = appendAddedParameterMessage(result, TASK_DESCRIPTION, newTask.getDescription());
         result = appendAddedParameterMessage(result, TASK_START_DATE, newTask.getStartDateTime());
@@ -55,8 +55,8 @@ public class ResultMessage {
         String result = message;
         if (newObject != null && StringUtil.isPresent(toStringCustomized(newObject))) {
             result = String.join(STRING_NEW_LINE, result,
-                     String.format(RESULT_MESSAGE_PARAMETER_INDENTATION + category
-                             + RESULT_MESSAGE_ADD_PARAMETER_FORMAT,
+                     String.format(MESSAGE_RESULT_PARAMETER_INDENTATION + category
+                             + MESSAGE_RESULT_ADD_PARAMETER_FORMAT,
                      toStringCustomized(newObject)));
         }
         return result;
@@ -64,8 +64,8 @@ public class ResultMessage {
 
     public static String getUpdateCommandResultMessage(Task oldTask, Task newTask, UiStore uiStore) {
         int index = uiStore.getTaskIndex(newTask);
-        String result = (index == INDEX_INVALID) ? RESULT_MESSAGE_UPDATED_TASK_HEADER_WITHOUT_INDEX
-                                   : String.format(RESULT_MESSAGE_UPDATED_TASK_HEADER_WITH_INDEX, index + 1);
+        String result = (index == INDEX_INVALID) ? MESSAGE_RESULT_UPDATED_TASK_HEADER_WITHOUT_INDEX
+                                   : String.format(MESSAGE_RESULT_UPDATED_TASK_HEADER_WITH_INDEX, index + 1);
         result = appendUpdatedParameterMessage(result, TASK_TYPE,
                 oldTask.getTaskType(), newTask.getTaskType());
         result = appendUpdatedParameterMessage(result, TASK_DESCRIPTION,
@@ -98,8 +98,8 @@ public class ResultMessage {
         String result = message;
         if (!Objects.equal(oldObject, newObject)) {
             result = String.join(STRING_NEW_LINE, result,
-                     String.format(RESULT_MESSAGE_PARAMETER_INDENTATION + category
-                             + RESULT_MESSAGE_UPDATE_PARAMETER_FORMAT,
+                     String.format(MESSAGE_RESULT_PARAMETER_INDENTATION + category
+                             + MESSAGE_RESULT_UPDATE_PARAMETER_FORMAT,
                      toStringCustomized(oldObject), toStringCustomized(newObject)));
         }
         return result;

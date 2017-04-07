@@ -19,12 +19,12 @@ import seedu.toluist.ui.commons.CommandResult;
  * Handle switch tab command
  */
 public class SwitchController extends Controller {
-    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED = "Switched to tab %s."
+    public static final String MESSAGE_RESULT_SWITCH_SUCCESS_FILTERED = "Switched to tab %s."
         + " Showing %d out of %d filtered tasks.";
-    public static final String RESULT_MESSAGE_SWITCH_SUCCESS_ALL = "Switched to tab %s."
+    public static final String MESSAGE_RESULT_SWITCH_SUCCESS_ALL = "Switched to tab %s."
             + " Showing %d out of all %d existing tasks.";
-    public static final String RESULT_MESSAGE_SWITCH_FAILURE = "%s is not a valid tab.";
-    public static final String RESULT_MESSAGE_NO_TAB = "A tab to switch to was not provided";
+    public static final String MESSAGE_RESULT_SWITCH_FAILURE = "%s is not a valid tab.";
+    public static final String MESSAGE_RESULT_NO_TAB = "A tab to switch to was not provided";
     public static final String COMMAND_WORD = "switch";
     public static final String PARAMETER_TAB = "tab";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*switch(\\s+(?<tab>\\S+))?\\s*";
@@ -57,8 +57,8 @@ public class SwitchController extends Controller {
     private void switchTab(String keyword) {
         TaskSwitchPredicate switchPredicate = switchConfig.getPredicate(keyword).get();
         String messageTemplate = uiStore.getTasks().size() == TodoList.getInstance().getTasks().size()
-                ? RESULT_MESSAGE_SWITCH_SUCCESS_ALL
-                : RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED;
+                ? MESSAGE_RESULT_SWITCH_SUCCESS_ALL
+                : MESSAGE_RESULT_SWITCH_SUCCESS_FILTERED;
         UiStore.getInstance().setObservableSwitchPredicate(switchPredicate);
 
         uiStore.setCommandResult(new CommandResult(String.format(
@@ -72,13 +72,13 @@ public class SwitchController extends Controller {
         Optional<TaskSwitchPredicate> switchPredicateOptional = switchConfig.getPredicate(keyword);
 
         if (!switchPredicateOptional.isPresent()) {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_SWITCH_FAILURE, keyword));
+            throw new InvalidCommandException(String.format(MESSAGE_RESULT_SWITCH_FAILURE, keyword));
         }
     }
 
     private void validateNoTab(String keyword) throws InvalidCommandException {
         if (keyword == null) {
-            throw new InvalidCommandException(RESULT_MESSAGE_NO_TAB);
+            throw new InvalidCommandException(MESSAGE_RESULT_NO_TAB);
         }
     }
 

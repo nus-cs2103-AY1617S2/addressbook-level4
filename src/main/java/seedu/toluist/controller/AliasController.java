@@ -20,9 +20,9 @@ public class AliasController extends Controller {
     public static final String PARAMETER_COMMAND = "command";
     public static final String COMMAND_WORD = "alias";
 
-    private static final String RESULT_MESSAGE_SUCCESS = "Alias %s for %s was added";
-    private static final String RESULT_MESSAGE_FAILURE = "Alias %s for %s could not be added";
-    public static final String RESULT_MESSAGE_RESERVED_WORD = "%s is a reserved word";
+    private static final String MESSAGE_RESULT_SUCCESS = "Alias %s for %s was added";
+    private static final String MESSAGE_RESULT_FAILURE = "Alias %s for %s could not be added";
+    public static final String MESSAGE_RESULT_RESERVED_WORD = "%s is a reserved word";
     private static final String COMMAND_TEMPLATE = "(?iu)\\s*alias\\s+(?<alias>\\S+)\\s+(?<command>.+)";
 
     //@@author A0162011A
@@ -53,15 +53,15 @@ public class AliasController extends Controller {
     private void setAlias(String alias, String commandPhrase) throws InvalidCommandException {
         if (aliasConfig.setAlias(alias, commandPhrase) && Config.getInstance().save()) {
             uiStore.setCommandResult(
-                    new CommandResult(String.format(RESULT_MESSAGE_SUCCESS, alias, commandPhrase)));
+                    new CommandResult(String.format(MESSAGE_RESULT_SUCCESS, alias, commandPhrase)));
         } else {
-            throw new InvalidCommandException((String.format(RESULT_MESSAGE_FAILURE, alias, commandPhrase)));
+            throw new InvalidCommandException((String.format(MESSAGE_RESULT_FAILURE, alias, commandPhrase)));
         }
     }
 
     private void validateReservedWord(String alias) throws InvalidCommandException {
         if (aliasConfig.isReservedWord(alias)) {
-            throw new InvalidCommandException(String.format(RESULT_MESSAGE_RESERVED_WORD, alias));
+            throw new InvalidCommandException(String.format(MESSAGE_RESULT_RESERVED_WORD, alias));
         }
     }
 

@@ -16,7 +16,7 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class ClearController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(ClearController.class);
-    private static final String RESULT_MESSAGE = "All tasks cleared.";
+    private static final String MESSAGE_RESULT = "All tasks cleared.";
     private static final String COMMAND_WORD = "clear";
     private static final String COMMAND_REGEX = "(?iu)^\\s*clear\\s*";
 
@@ -34,7 +34,7 @@ public class ClearController extends Controller {
         todoList.save();
 
         uiStore.setTasks(todoList.getTasks());
-        uiStore.setCommandResult(new CommandResult(RESULT_MESSAGE));
+        uiStore.setCommandResult(new CommandResult(MESSAGE_RESULT));
     }
 
     public boolean matchesCommand(String command) {

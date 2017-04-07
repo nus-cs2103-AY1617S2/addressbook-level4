@@ -21,7 +21,7 @@ public class UndoController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*undo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "undo";
     private static final String PARAMETER_UNDO_TIMES = "number";
-    private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s to the data %s undone.";
+    private static final String MESSAGE_RESULT_TEMPLATE = "Your last %s to the data %s undone.";
     private static final int SINGLE_UNDO = 1;
 
     //@@author A0162011A
@@ -55,7 +55,7 @@ public class UndoController extends Controller {
 
         uiStore.setTasks(todoList.getTasks());
 
-        uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+        uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE,
                 StringUtil.nounWithCount (StringUtil.WORD_CHANGE, actualUndoTimes),
                 actualUndoTimes == SINGLE_UNDO ? StringUtil.WORD_WAS : StringUtil.WORD_WERE)));
     }

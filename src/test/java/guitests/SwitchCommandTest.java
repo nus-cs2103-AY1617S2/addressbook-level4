@@ -49,7 +49,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
     @Test
     public void switch_noTab() {
         String command = "switch ";
-        runCommandThenCheckForResultMessage(command, SwitchController.RESULT_MESSAGE_NO_TAB);
+        runCommandThenCheckForResultMessage(command, SwitchController.MESSAGE_RESULT_NO_TAB);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String tab = "fffs";
         String command = "switch " + tab;
         runCommandThenCheckForResultMessage(command,
-                String.format(SwitchController.RESULT_MESSAGE_SWITCH_FAILURE, tab));
+                String.format(SwitchController.MESSAGE_RESULT_SWITCH_FAILURE, tab));
     }
 
     @Test
@@ -65,12 +65,12 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String switchToToday = "switch t";
         commandBox.runCommand(switchToToday);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
 
         String switchToNext7Days = "switch n";
         commandBox.runCommand(switchToNext7Days);
         assertSwitchResult(new Task[] { eventIn6Days }, new Task[] { taskWithDeadline, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String switchToToday = "switch T ";
         commandBox.runCommand(switchToToday);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
     }
 
     @Test
@@ -86,12 +86,12 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String switchToToday = "switch 2";
         commandBox.runCommand(switchToToday);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
 
         String switchToNext7Days = "switch 3";
         commandBox.runCommand(switchToNext7Days);
         assertSwitchResult(new Task[] { eventIn6Days }, new Task[] { taskWithDeadline, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
     }
 
     @Test
@@ -102,12 +102,12 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         String switchToToday = "switch tod";
         commandBox.runCommand(switchToToday);
         assertSwitchResult(new Task[] { taskWithDeadline }, new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, TAB_TODAY, 1, 2);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_FILTERED, TAB_TODAY, 1, 2);
 
         String switchToNext7Days = "switch n";
         commandBox.runCommand(switchToNext7Days);
         assertSwitchResult(new Task[0], new Task[] { taskWithDeadline, eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_FILTERED, TAB_NEXT_7_DAYS, 0, 2);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_FILTERED, TAB_NEXT_7_DAYS, 0, 2);
     }
 
     @Test
@@ -115,28 +115,28 @@ public class SwitchCommandTest extends ToLuistGuiTest {
         mainGui.press(KeyCode.CONTROL, KeyCode.T);
         assertSwitchResult(TAB_TODAY + " (1/3)", new Task[] { taskWithDeadline },
                 new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_TODAY, 1, 3);
 
         mainGui.press(KeyCode.CONTROL, KeyCode.N);
         assertSwitchResult(TAB_NEXT_7_DAYS + " (1/3)", new Task[] { eventIn6Days },
                 new Task[] { taskWithDeadline, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_NEXT_7_DAYS, 1, 3);
 
         mainGui.press(KeyCode.CONTROL, KeyCode.C);
         assertSwitchResult(TAB_COMPLETED + " (1/3)", new Task[] { taskWithDeadline },
                 new Task[] { eventIn6Days, floatingTask },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_COMPLETED, 1, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_COMPLETED, 1, 3);
 
         mainGui.focusOnView(TaskListHandle.TASK_LIST_VIEW_ID);
         mainGui.press(KeyCode.CONTROL, KeyCode.A);
         assertSwitchResult(TAB_ALL + " (3/3)",
                 new Task[] { taskWithDeadline, eventIn6Days, floatingTask }, new Task[0],
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_ALL, 3, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_ALL, 3, 3);
 
         mainGui.press(KeyCode.CONTROL, KeyCode.I);
         assertSwitchResult(TAB_INCOMPLETE + " (2/3)",
                 new Task[] { floatingTask, eventIn6Days }, new Task[] { taskWithDeadline },
-                SwitchController.RESULT_MESSAGE_SWITCH_SUCCESS_ALL, TAB_INCOMPLETE, 2, 3);
+                SwitchController.MESSAGE_RESULT_SWITCH_SUCCESS_ALL, TAB_INCOMPLETE, 2, 3);
 
         runCommandThenCheckForResultMessage("history", "list\nswitch i\n2 commands displayed.");
     }

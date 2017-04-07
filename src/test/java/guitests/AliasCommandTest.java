@@ -43,10 +43,10 @@ public class AliasCommandTest extends ToLuistGuiTest {
     public void alias_ReservedWord() {
         String aliasCommand = "alias alias alias";
         runCommandThenCheckForResultMessage(aliasCommand,
-                String.format(AliasController.RESULT_MESSAGE_RESERVED_WORD, "alias"));
+                String.format(AliasController.MESSAGE_RESULT_RESERVED_WORD, "alias"));
 
         String viewAliasCommand = "viewalias";
-        runCommandThenCheckForResultMessage(viewAliasCommand, ViewAliasController.RESULT_MESSAGE_NO_ALIAS);
+        runCommandThenCheckForResultMessage(viewAliasCommand, ViewAliasController.MESSAGE_RESULT_NO_ALIAS);
     }
 
     @Test

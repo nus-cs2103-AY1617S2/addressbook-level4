@@ -47,7 +47,7 @@ public class SaveCommandTest extends ToLuistGuiTest {
             FileUtil.createFile(new File(newPath));
             String command = "save " + newPath;
             runCommandThenCheckForResultMessage(command,
-                    String.format(StoreController.RESULT_MESSAGE_WARNING_OVERWRITE, newPath)
+                    String.format(StoreController.MESSAGE_RESULT_WARNING_OVERWRITE, newPath)
                             + "\n" + String.format(Messages.MESSAGE_SET_STORAGE_SUCCESS, newPath));
 
             // Check that storage path is changed

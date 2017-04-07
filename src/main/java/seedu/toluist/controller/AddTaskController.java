@@ -30,13 +30,13 @@ public class AddTaskController extends Controller {
 
     private static final String COMMAND_ADD_TASK = "add";
 
-    private static final String RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION =
+    private static final String MESSAGE_RESULT_ERROR_EMPTY_DESCRIPTION =
             "Please provide a description.";
-    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+    private static final String MESSAGE_RESULT_ERROR_DUPLICATED_TASK =
             "Task provided already exist in the list.";
-    private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
+    private static final String MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
-    private static final String RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
+    private static final String MESSAGE_RESULT_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE =
             "An event must have both a start date (from/) and an end date (to/).";
 
     //@@author A0162011A
@@ -126,7 +126,7 @@ public class AddTaskController extends Controller {
      */
     private void validateTaskDescription(String description) throws IllegalArgumentException {
         if (!StringUtil.isPresent(description)) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_EMPTY_DESCRIPTION);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_EMPTY_DESCRIPTION);
         }
     }
 
@@ -141,13 +141,13 @@ public class AddTaskController extends Controller {
             LocalDateTime taskDeadline) throws IllegalArgumentException {
         if (eventStartDateTime != null && eventEndDateTime != null) {
             if (taskDeadline != null) {
-                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+                throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK);
             } // else it is a valid event
         } else if (eventStartDateTime != null || eventEndDateTime != null) {
             if (taskDeadline != null) {
-                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+                throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK);
             } else {
-                throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE);
+                throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_EVENT_MUST_HAVE_START_AND_END_DATE);
             }
         } // else it is a valid task (floating or deadline)
     }
@@ -163,7 +163,7 @@ public class AddTaskController extends Controller {
             task = new Task(description);
         } else {
             // should not reach here since it will fail validation at the top
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK);
         }
         return task;
     }
@@ -194,7 +194,7 @@ public class AddTaskController extends Controller {
 
     private void validatesNoDuplicateTask(Task task, TodoList todoList) throws IllegalArgumentException {
         if (todoList.getTasks().contains(task)) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_DUPLICATED_TASK);
         }
     }
 

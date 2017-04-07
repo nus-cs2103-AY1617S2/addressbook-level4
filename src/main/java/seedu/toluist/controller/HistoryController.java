@@ -16,7 +16,7 @@ import seedu.toluist.ui.commons.CommandResult;
  */
 public class HistoryController extends Controller {
     private static final Logger logger = LogsCenter.getLogger(HistoryController.class);
-    private static final String RESULT_MESSAGE = "%s\n%s displayed.";
+    private static final String MESSAGE_RESULT = "%s\n%s displayed.";
     private static final String COMMAND_WORD = "history";
     private static final String COMMAND_REGEX = "(?iu)^\\s*history\\s*";
 
@@ -38,7 +38,7 @@ public class HistoryController extends Controller {
         ArrayList<String> commandHistory = commandHistoryList.getCommandHistory();
         String result = String.join("\n", commandHistory);
         uiStore.setCommandResult(new CommandResult(String.format(
-                RESULT_MESSAGE, result, StringUtil.nounWithCount("command", commandHistory.size()))));
+                MESSAGE_RESULT, result, StringUtil.nounWithCount("command", commandHistory.size()))));
     }
 
     public boolean matchesCommand(String command) {

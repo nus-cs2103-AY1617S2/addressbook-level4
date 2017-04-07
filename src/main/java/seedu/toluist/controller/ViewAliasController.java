@@ -19,7 +19,7 @@ public class ViewAliasController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*viewalias\\s*";
     private static final String COMMAND_WORD = "viewalias";
     private static final String COMMAND_SEPARATOR_ALIAS = ":";
-    public static final String RESULT_MESSAGE_NO_ALIAS = "No aliases found";
+    public static final String MESSAGE_RESULT_NO_ALIAS = "No aliases found";
 
     //@@author A0131125Y
     private static final String HELP_DETAILS = "Views aliases in the system.";
@@ -57,7 +57,7 @@ public class ViewAliasController extends Controller {
         }
 
         String result = String.join(StringUtil.NEW_LINE, lines);
-        return result.isEmpty() ? RESULT_MESSAGE_NO_ALIAS : result;
+        return result.isEmpty() ? MESSAGE_RESULT_NO_ALIAS : result;
     }
 
     //@@author A0162011A

@@ -21,7 +21,7 @@ public class RedoController extends Controller {
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*redo(\\s+(?<number>\\d+))?\\s*";
     private static final String COMMAND_WORD = "redo";
     private static final String PARAMETER_REDO_TIMES = "number";
-    private static final String RESULT_MESSAGE_TEMPLATE = "Your last %s %s re-applied.";
+    private static final String MESSAGE_RESULT_TEMPLATE = "Your last %s %s re-applied.";
     private static final int SINGLE_REDO = 1;
 
     //@@author A0162011A
@@ -54,7 +54,7 @@ public class RedoController extends Controller {
         int actualRedoTimes = redoResult.getValue();
 
         uiStore.setTasks(todoList.getTasks());
-        uiStore.setCommandResult(new CommandResult(String.format(RESULT_MESSAGE_TEMPLATE,
+        uiStore.setCommandResult(new CommandResult(String.format(MESSAGE_RESULT_TEMPLATE,
                 StringUtil.nounWithCount(StringUtil.WORD_CHANGE, actualRedoTimes),
                 actualRedoTimes == SINGLE_REDO ? StringUtil.WORD_WAS : StringUtil.WORD_WERE)));
     }

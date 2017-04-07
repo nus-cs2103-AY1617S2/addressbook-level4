@@ -33,17 +33,17 @@ public class UpdateTaskController extends Controller {
 
     private static final int MAX_NUMBER_OF_TASK_TYPE = 1;
 
-    private static final String RESULT_MESSAGE_ERROR_DUPLICATED_TASK =
+    private static final String MESSAGE_RESULT_ERROR_DUPLICATED_TASK =
             "Task provided already exist in the list.";
-    private static final String RESULT_MESSAGE_ERROR_INVALID_INDEX =
+    private static final String MESSAGE_RESULT_ERROR_INVALID_INDEX =
             "No valid index found.";
-    private static final String RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK =
+    private static final String MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK =
             "The task cannot be classified as a floating task, deadline, or event.";
-    private static final String RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING =
+    private static final String MESSAGE_RESULT_ERROR_RECURRING_AND_STOP_RECURRING =
             "Input contains both recurring and stop recurring arguments at the same time.";
-    private static final String RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING =
+    private static final String MESSAGE_RESULT_ERROR_FLOATING_AND_NON_FLOATING =
             "Input contains both floating and non-floating task arguments at the same time.";
-    private static final String RESULT_MESSAGE_ERROR_CLONING_ERROR =
+    private static final String MESSAGE_RESULT_ERROR_CLONING_ERROR =
             "Bad things happened and we have no idea why! Please contact the administrators.";
 
   //@@author A0162011A
@@ -83,7 +83,7 @@ public class UpdateTaskController extends Controller {
         String indexToken = tokens.get(TaskTokenizer.TASK_VIEW_INDEX);
         List<Integer> indexes = IndexParser.splitStringToIndexes(indexToken, uiStore.getShownTasks().size());
         if (indexes == null || indexes.isEmpty()) {
-            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_INVALID_INDEX);
+            throw new InvalidCommandException(MESSAGE_RESULT_ERROR_INVALID_INDEX);
         }
         List<Task> shownTasks = uiStore.getShownTasks(indexes);
         Task task = shownTasks.get(0);
@@ -153,7 +153,7 @@ public class UpdateTaskController extends Controller {
         } catch (IllegalArgumentException illegalArgumentException) {
             throw new InvalidCommandException(illegalArgumentException.getMessage());
         } catch (CloneNotSupportedException cloneNotSupportedException) {
-            throw new InvalidCommandException(RESULT_MESSAGE_ERROR_CLONING_ERROR);
+            throw new InvalidCommandException(MESSAGE_RESULT_ERROR_CLONING_ERROR);
         }
     }
 
@@ -180,7 +180,7 @@ public class UpdateTaskController extends Controller {
             numberOfTaskTypes++;
         }
         if (numberOfTaskTypes > MAX_NUMBER_OF_TASK_TYPE) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_UNCLASSIFIED_TASK);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_UNCLASSIFIED_TASK);
         }
     }
 
@@ -194,7 +194,7 @@ public class UpdateTaskController extends Controller {
     private void validateTaskRecurringStatusInput(String recurringFrequency, LocalDateTime recurringUntilEndDate,
             boolean isStopRecurring) throws IllegalArgumentException {
         if (isStopRecurring && (StringUtil.isPresent(recurringFrequency) || recurringUntilEndDate != null)) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_RECURRING_AND_STOP_RECURRING);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_RECURRING_AND_STOP_RECURRING);
         }
     }
 
@@ -209,7 +209,7 @@ public class UpdateTaskController extends Controller {
     private void validateTaskFloatingStatusInput(LocalDateTime eventStartDateTime, LocalDateTime eventEndDateTime,
             LocalDateTime taskDeadline, boolean isFloating) throws IllegalArgumentException {
         if (isFloating && (eventStartDateTime != null || eventEndDateTime != null || taskDeadline != null)) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_FLOATING_AND_NON_FLOATING);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_FLOATING_AND_NON_FLOATING);
         }
     }
 
@@ -276,7 +276,7 @@ public class UpdateTaskController extends Controller {
 
     private void validatesNoDuplicateTask(Task task, TodoList todoList) throws IllegalArgumentException {
         if (todoList.getTasks().contains(task)) {
-            throw new IllegalArgumentException(RESULT_MESSAGE_ERROR_DUPLICATED_TASK);
+            throw new IllegalArgumentException(MESSAGE_RESULT_ERROR_DUPLICATED_TASK);
         }
     }
 

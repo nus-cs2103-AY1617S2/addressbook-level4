@@ -25,8 +25,8 @@ import seedu.toluist.ui.commons.CommandResult;
  * Mark Controller is responsible for marking task complete or incomplete
  */
 public class MarkController extends Controller {
-    private static final String RESULT_MESSAGE_COMPLETED_SUCCESS = "%s %s marked completed";
-    private static final String RESULT_MESSAGE_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
+    private static final String MESSAGE_RESULT_COMPLETED_SUCCESS = "%s %s marked completed";
+    private static final String MESSAGE_RESULT_INCOMPLETE_SUCCESS = "%s %s marked incomplete";
     private static final String COMMAND_TEMPLATE = "(?iu)^\\s*mark(\\s+(complete|incomplete))?"
             + "(\\s+(?<index>.*))?(\\s+(complete|incomplete))?.*";
     private static final String COMMAND_WORD = "mark";
@@ -91,8 +91,8 @@ public class MarkController extends Controller {
         }
         String indexString = CollectionUtil.getStringRepresentation(StringUtil.COMMA_DELIMITER, taskIndexes);
         String messageTemplate = isCompleted
-                ? RESULT_MESSAGE_COMPLETED_SUCCESS
-                : RESULT_MESSAGE_INCOMPLETE_SUCCESS;
+                ? MESSAGE_RESULT_COMPLETED_SUCCESS
+                : MESSAGE_RESULT_INCOMPLETE_SUCCESS;
         return new CommandResult(String.format(messageTemplate,
                 English.plural(StringUtil.capitalize(StringUtil.WORD_TASK), taskIndexes.size()), indexString));
     }

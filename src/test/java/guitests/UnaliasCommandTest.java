@@ -21,7 +21,7 @@ public class UnaliasCommandTest extends ToLuistGuiTest {
     public void unalias_nonExistingAlias() {
         String unaliasCommand = "unalias d";
         runCommandThenCheckForResultMessage(unaliasCommand,
-                String.format(UnaliasController.RESULT_MESSAGE_NOT_ALIAS, "d"));
+                String.format(UnaliasController.MESSAGE_RESULT_NOT_ALIAS, "d"));
     }
 
     @Test
