@@ -10,6 +10,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0144904H
@@ -29,6 +30,7 @@ public class TerminateCommand extends Command {
     public static final String MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS = "recurring tasks marked done: %1$s";
     public static final String DONE = "Done";
     public static final String ERROR_TASK_NOT_RECURRING = "All tasks indicated should be recurring";
+    public static final String ERROR_TERMINATED_TASK = "The task was terminated previously";
 
     public final ArrayList<Integer> filteredTaskListIndices;
     public final ArrayList<ReadOnlyTask> recurringTasksToMarkDone;
@@ -50,6 +52,9 @@ public class TerminateCommand extends Command {
 
         for (int index : filteredTaskListIndices) {
             ReadOnlyTask recurringTaskToMarkDone = lastShownList.get(index - 1);
+            if (recurringTaskToMarkDone.getCategories().contains(Category.done)) {
+                throw new CommandException(ERROR_TERMINATED_TASK);
+            }
             recurringTasksToMarkDone.add(recurringTaskToMarkDone);
         }
 
