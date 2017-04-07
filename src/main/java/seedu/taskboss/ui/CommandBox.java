@@ -43,6 +43,10 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() throws IllegalValueException,
                                                 InvalidDatesException, BuiltInCategoryException {
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            setStyleToIndicateCommandSuccess();
+        });
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
