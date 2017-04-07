@@ -83,7 +83,8 @@ public class XmlAdaptedTask {
 	    tagged.add(new XmlAdaptedTag(tag));
 	}
 	this.isRecurring = source.isRecurring() ? RECURRING_YES : RECURRING_NO;
-	this.period = source.getRecurrence().getPeriodicity();
+	this.recurrenceStart = source.getRecurrence().getStartTimeString();
+	this.recurrencePeriodicity = source.getRecurrence().getPeriodicity();
 	this.recurrenceDoneList = source.getRecurrence().getDoneListString();
     }
 
