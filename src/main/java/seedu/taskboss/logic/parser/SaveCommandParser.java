@@ -17,6 +17,12 @@ public class SaveCommandParser {
      * and returns an SaveCommand object for execution.
      */
     public Command parse(String args) {
+
+        if (args.trim() == null) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+        }
+
         File file = new File(args.trim());
 
         if (!file.exists() && !file.isDirectory()) {
