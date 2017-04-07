@@ -54,15 +54,19 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
+        case SelectCommand.SHORT_COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.SHORT_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case DoneCommand.COMMAND_WORD:
@@ -75,9 +79,11 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.SHORT_COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
         case SaveToCommand.COMMAND_WORD:
@@ -93,6 +99,7 @@ public class Parser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD:
             return new HelpCommand();
 
         case HelpUGCommand.COMMAND_WORD:

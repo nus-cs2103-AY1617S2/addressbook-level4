@@ -25,6 +25,7 @@ import seedu.onetwodo.model.task.UniqueTaskList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String SHORT_COMMAND_WORD = "a";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the todo list. "
             + "Parameters: NAME  s/START_DATE  e/END_DATE r/RECUR p/PRIORITY d/DESCRIPTION  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " Take nap s/03-03-2018 17:00 e/03-03-2018 21:00 r/daily"
