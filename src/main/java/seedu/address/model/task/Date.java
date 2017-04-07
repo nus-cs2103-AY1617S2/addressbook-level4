@@ -14,10 +14,9 @@ import seedu.address.commons.util.DateUtil;
 public abstract class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task date's format should resemble a date";
-    
-    private static final String BAD_DATE = "nil";
 
-    public final String value;
+    public final String inputValue;
+    public final java.util.Date value;
 
     /**
      * Validates given phone number.
@@ -27,28 +26,38 @@ public abstract class Date {
     public Date(String date) throws IllegalValueException {
         assert date != null;
 
-        if (date == null) {
-            this.value = BAD_DATE;
+        inputValue = date;
+        
+        if (date != null) {
+            value = DateUtil.parse(date);
         } else {
-            this.value = DateUtil.parse(date).toString();
+            value = new java.util.Date();
         }
     }
-
-    @Override
-    public String toString() {
+    
+    public java.util.Date getTime() {
         return value;
     }
 
     @Override
+    public String toString() {
+        if (inputValue != null) {
+            return inputValue;
+        } else {
+            return value.toString();
+        }
+    }
+
+    @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && this.value.equals(((Date) other).value)); // state check
+        return other == this
+                || (other instanceof Date
+                        && this.value.equals(((Date) other).value));
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return inputValue.hashCode() * value.hashCode();
     }
 
 }

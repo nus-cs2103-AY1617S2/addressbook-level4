@@ -6,6 +6,8 @@ import java.util.Random;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.DateUtil;
+import seedu.address.model.task.EndDate;
+import seedu.address.model.task.StartDate;
 
 //@@author A0163848R
 public class TaskDateGenerator {
@@ -40,25 +42,30 @@ public class TaskDateGenerator {
     
     private static Random r;
     
-    private static Date lastStartDate;
+    private static StartDate lastStartDate;
     
-    public static String getStartDate(Random r) {
+    public static StartDate getStartDate(Random r) {
         TaskDateGenerator.r = r;
         
         try {
-            lastStartDate = DateUtil.parse(CollectionUtil.getRandom(STARTDATES, r));
+            lastStartDate = new StartDate(CollectionUtil.getRandom(STARTDATES, r));
         } catch (IllegalValueException e) {
             return getStartDate(r);
         }
         
-        return lastStartDate.toString();
+        return lastStartDate;
     }
     
-    public static String getEndDate(Random r) {
+    public static EndDate getEndDate(Random r) {
         if (lastStartDate == null) {
             getStartDate(r);
         }
         
-        return DateUtil.add(lastStartDate, r.nextInt(MAX_DAYS_TO_ADD + 1)).toString();
+        try {
+            return new EndDate(r.nextInt(MAX_DAYS_TO_ADD + 1) + " days after " + lastStartDate.toString());
+        } catch (IllegalValueException e) {
+            getStartDate(r);
+            return getEndDate(r);
+        }
     }
 }

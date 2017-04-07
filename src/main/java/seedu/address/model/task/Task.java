@@ -139,10 +139,7 @@ public class Task implements ReadOnlyPerson {
     @Override
     public java.util.Date getStartTime() {
         if (start != null) {
-            try {
-                return DateUtil.parse(start.value);
-            } catch (IllegalValueException e) {
-            }
+            return start.getTime();
         }
         return new java.util.Date(Long.MIN_VALUE);
     }
@@ -150,10 +147,7 @@ public class Task implements ReadOnlyPerson {
     @Override
     public java.util.Date getEndTime() {
         if (end != null) {
-            try {
-                return DateUtil.parse(end.value);
-            } catch (IllegalValueException e) {
-            }
+            return end.getTime();
         }
         return new java.util.Date(Long.MAX_VALUE);
     }

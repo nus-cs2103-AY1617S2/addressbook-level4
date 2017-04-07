@@ -34,9 +34,8 @@
                                 </HBox>
                             </children>
                         </HBox>
-                        <FlowPane fx:id="tags" />
                         <Label fx:id="group" styleClass="cell_small_label" text="\$group" />
-                        <Label fx:id="start" layoutX="25.0" layoutY="51.0" styleClass="cell_small_label" text="\$start" />
+                        <Label fx:id="start" styleClass="cell_small_label" text="\$start" />
                         <Label fx:id="end" styleClass="cell_small_label" text="\$end" />
                     </children>
                 </VBox>
