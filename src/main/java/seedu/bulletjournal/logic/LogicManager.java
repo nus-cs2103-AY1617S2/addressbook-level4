@@ -19,8 +19,28 @@ import seedu.bulletjournal.storage.Storage;
 public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final Model model;
-    private final Parser parser;
+    private static LogicManager instance = null;
+    private Model model;
+    private Parser parser;
+    private Storage storage;
+    private String commandText;
+
+    public LogicManager() {
+    }
+
+    public static LogicManager getInstance() {
+        if (instance == null) {
+            instance = new LogicManager();
+        }
+        return instance;
+    }
+
+    @Override
+    public void init(Model model, Storage storage) {
+        this.model = model;
+        this.storage = storage;
+        this.parser = new Parser();
+    }
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -30,6 +50,7 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        this.commandText = commandText;
         Command command = parser.parseCommand(commandText);
         command.setData(model);
         return command.execute();
@@ -40,9 +61,14 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredTaskList();
     }
 
-    //@@author A0105748B
+    // @@author A0105748B
     @Override
     public ObservableList<ReadOnlyTask> getUndoneTaskList() {
         return model.getUndoneTaskList();
+    }
+
+    @Override
+    public String getCommandText() {
+        return this.commandText;
     }
 }

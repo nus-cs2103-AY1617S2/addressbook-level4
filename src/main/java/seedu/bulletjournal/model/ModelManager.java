@@ -13,6 +13,8 @@ import seedu.bulletjournal.commons.events.model.FilePathChangedEvent;
 import seedu.bulletjournal.commons.events.model.TodoListChangedEvent;
 import seedu.bulletjournal.commons.util.CollectionUtil;
 import seedu.bulletjournal.commons.util.StringUtil;
+import seedu.bulletjournal.logic.Logic;
+import seedu.bulletjournal.logic.LogicManager;
 import seedu.bulletjournal.model.task.ReadOnlyTask;
 import seedu.bulletjournal.model.task.Task;
 import seedu.bulletjournal.model.task.UniqueTaskList;
@@ -58,7 +60,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TodoListChangedEvent(todoList));
+        Logic logic = LogicManager.getInstance();
+        raise(new TodoListChangedEvent(todoList, logic.getCommandText()));
     }
 
     @Override
@@ -135,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateMatchedTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    //@@author
+    // @@author
 
     // ========== Inner classes/interfaces used for filtering
     // =================================================
@@ -173,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    //@@author A0105748B
+    // @@author A0105748B
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;

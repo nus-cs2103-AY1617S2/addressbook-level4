@@ -20,6 +20,7 @@ import seedu.bulletjournal.commons.util.ConfigUtil;
 import seedu.bulletjournal.commons.util.StringUtil;
 import seedu.bulletjournal.logic.Logic;
 import seedu.bulletjournal.logic.LogicManager;
+import seedu.bulletjournal.model.HistoryManager;
 import seedu.bulletjournal.model.Model;
 import seedu.bulletjournal.model.ModelManager;
 import seedu.bulletjournal.model.ReadOnlyTodoList;
@@ -45,7 +46,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected HistoryManager history;
 
     @Override
     public void init() throws Exception {
@@ -61,7 +62,13 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        history = HistoryManager.getInstance();
+
+        history.init(model);
+
+        logic = LogicManager.getInstance();
+
+        logic.init(model, storage);
 
         ui = new UiManager(logic, config, userPrefs);
 
@@ -114,12 +121,13 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. " +
-                    "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -139,15 +147,16 @@ public class MainApp extends Application {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
-            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. " +
-                    "Using default user prefs");
+            logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty TodoList");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {

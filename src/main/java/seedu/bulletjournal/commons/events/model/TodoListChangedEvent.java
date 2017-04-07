@@ -7,9 +7,11 @@ import seedu.bulletjournal.model.ReadOnlyTodoList;
 public class TodoListChangedEvent extends BaseEvent {
 
     public final ReadOnlyTodoList data;
+    public final String commandText;
 
-    public TodoListChangedEvent(ReadOnlyTodoList data) {
+    public TodoListChangedEvent(ReadOnlyTodoList data, String commandText) {
         this.data = data;
+        this.commandText = commandText;
     }
 
     @Override

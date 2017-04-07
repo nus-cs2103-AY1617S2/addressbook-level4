@@ -18,8 +18,10 @@ import seedu.bulletjournal.logic.commands.FinishCommand;
 import seedu.bulletjournal.logic.commands.HelpCommand;
 import seedu.bulletjournal.logic.commands.IncorrectCommand;
 import seedu.bulletjournal.logic.commands.ListCommand;
+import seedu.bulletjournal.logic.commands.RedoCommand;
 import seedu.bulletjournal.logic.commands.SelectCommand;
 import seedu.bulletjournal.logic.commands.ShowCommand;
+import seedu.bulletjournal.logic.commands.UndoCommand;
 
 /**
  * Parses user input.
@@ -54,14 +56,6 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        /*
-        case AddCommandFloating.COMMAND_WORD:
-            return new AddCommandParserFloating().parse(arguments);
-
-        case AddCommandDeadline.COMMAND_WORD:
-            return new AddCommandParserDeadline().parse(arguments);
-        */
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -94,6 +88,12 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
