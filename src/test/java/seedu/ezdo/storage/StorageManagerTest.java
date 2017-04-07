@@ -87,7 +87,7 @@ public class StorageManagerTest {
   //@@author A0139248X
     @Test
     public void handleEzDoDirectoryChangedEvent_exceptionThrown_eventRaised() throws IOException {
-	// Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        //Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlEzDoStorageExceptionThrowingStub("dummy"),
                 new JsonUserPrefsStorage("dummy"), config);
         EventsCollector eventCollector = new EventsCollector();
