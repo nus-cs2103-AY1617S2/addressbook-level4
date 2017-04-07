@@ -66,6 +66,9 @@ public class StatusBarFooter extends UiPart<Region> {
         setSyncStatus("Last Updated: " + lastUpdated);
     }
   //@@author A0139248X
+    /**
+     * Updates the status bar footer to show the new ezdo storage file path and the last updated time
+     */
     @Subscribe
     public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezce) {
         String lastUpdated = (new Date()).toString();

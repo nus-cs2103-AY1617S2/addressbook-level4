@@ -1,10 +1,11 @@
+//@@author A0139248X
 package seedu.ezdo.logic.commands;
 
 import java.util.EmptyStackException;
 
 import seedu.ezdo.logic.commands.exceptions.CommandException;
-//@@author A0139248X
-/*
+
+/**
  * Undo the last undoable command.
  */
 public class UndoCommand extends Command {
@@ -15,6 +16,11 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Previous undoable command has been undone!";
     public static final String MESSAGE_NO_PREV_COMMAND = "There is no previous undoable command!";
 
+    /**
+     * Executes the undo command.
+     *
+     * @throws CommandException if the stack is empty i.e. no command to undo
+     */
     @Override
     public CommandResult execute() throws CommandException {
         try {
@@ -24,5 +30,4 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_PREV_COMMAND);
         }
     }
-
 }

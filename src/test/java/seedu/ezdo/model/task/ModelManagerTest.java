@@ -36,7 +36,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void checkDate_parseFail() throws Exception {
+    public void checkTaskDate_parseFail_dateExceptionThrown() throws Exception {
         ReadOnlyTask task = new TaskBuilder().build();
         PowerMockito.mockStatic(DateUtil.class);
         BDDMockito.given(DateUtil.isTaskDateValid(task))

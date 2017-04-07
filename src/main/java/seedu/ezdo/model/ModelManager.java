@@ -27,6 +27,7 @@ import seedu.ezdo.model.todo.Recur;
 import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.TaskDate;
 import seedu.ezdo.model.todo.UniqueTaskList;
+import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 import seedu.ezdo.model.todo.UniqueTaskList.SortCriteria;
 import seedu.ezdo.model.todo.UniqueTaskList.TaskNotFoundException;
 
@@ -79,6 +80,9 @@ public class ModelManager extends ComponentManager implements Model {
         this(new EzDo(), new UserPrefs());
     }
 
+    /**
+     * Resets ezDo.
+     */
     @Override
     public void resetData(ReadOnlyEzDo newData) {
         updateStacks();
@@ -102,7 +106,12 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EzDoChangedEvent(ezDo));
     }
 
-    // @@author A0139248X
+  //@@author A0139248X
+    /**
+     * Deletes the tasks in {@code tasksToKill}.
+     *
+     * @throws TaskNotFoundException if a task is not found in ezDo
+     */
     @Override
     public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
         updateStacks();
@@ -111,6 +120,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    /**
+     * Adds a task to ezDo.
+     *
+     * @throws DuplicateTaskException if the task to be added already exists
+     * @throws DateException if the dates are invalid (start date after due date)
+     */
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException {
         checkTaskDate(task);
@@ -121,6 +136,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    /**
+     * Toggles the done status of the tasks in {@code toggleTasks}
+     */
     @Override
     public synchronized boolean toggleTasksDone(ArrayList<Task> toggleTasks) {
         updateStacks();
@@ -136,6 +154,12 @@ public class ModelManager extends ComponentManager implements Model {
         return isSetToDone;
     }
 
+    /**
+     * Updates an existing task in ezDo.
+     *
+     * @throws DuplicateTaskException if the edited task is a duplicate
+     * @throws DateException if the dates are invalid(start date after due date)
+     */
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException, DateException {
@@ -148,6 +172,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    /**
+     * Undo ezDo to the previous state.
+     *
+     * @throws EmptyStackException if there is no command to undo.
+     */
     @Override
     public void undo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
@@ -157,6 +186,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    /**
+     * Redo ezDo to the previous state.
+     *
+     * @throws EmptyStackException if there is no undone command to redo
+     */
     @Override
     public void redo() throws EmptyStackException {
         ReadOnlyEzDo currentState = new EzDo(this.getEzDo());
@@ -166,6 +200,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
+    /**
+     * Update the undo/redo stacks.
+     */
     @Override
     public void updateStacks() {
         ReadOnlyEzDo prevState = new EzDo(this.getEzDo());
@@ -173,6 +210,11 @@ public class ModelManager extends ComponentManager implements Model {
         redoStack.clear();
     }
 
+    /**
+     * Checks if a task's dates are valid.
+     *
+     * @throws DateException if the start date is after the due date
+     */
     @Override
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
         assert task != null;
@@ -511,10 +553,11 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
-
-    // @@author
-    // @@author A0139248X
-
+  //@@author
+  //@@author A0139248X
+    /**
+     * Raises a {@code SortCriteriaChangedEvent}.
+     */
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }

@@ -1,10 +1,11 @@
+//@@author A0139248X
 package seedu.ezdo.logic.commands;
 
 import java.util.EmptyStackException;
 
 import seedu.ezdo.logic.commands.exceptions.CommandException;
-//@@author A0139248X
-/*
+
+/**
  * Redo the last undone command
  */
 public class RedoCommand extends Command {
@@ -15,7 +16,11 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Last command undone has been redone!";
     public static final String MESSAGE_NO_PREV_COMMAND = "There is no redoable command!";
 
-
+    /**
+     * Executes the redo command.
+     *
+     * @throws CommandException if the stack is empty i.e. nothing to redo
+     */
     @Override
     public CommandResult execute() throws CommandException {
         try {
@@ -25,5 +30,4 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_PREV_COMMAND);
         }
     }
-
 }

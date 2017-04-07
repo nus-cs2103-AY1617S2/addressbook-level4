@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.storage;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import seedu.ezdo.commons.events.storage.EzDoDirectoryChangedEvent;
 import seedu.ezdo.commons.exceptions.DataConversionException;
 import seedu.ezdo.model.ReadOnlyEzDo;
 import seedu.ezdo.model.UserPrefs;
-//@@author A0139248X
+
 /**
  * API of the Storage component
  */
@@ -17,6 +18,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     /**
      * Read the UserPrefs data from Storage
      * Returns {@code Optional.empty()} if storage file is not found.
+     *
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -25,6 +27,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Saves the given {@link seedu.ezdo.model.UserPrefs} to the storage.
+     *
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
@@ -35,7 +38,9 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     @Override
     String getEzDoFilePath();
 
-    /** Sets the file path of EzDo
+    /**
+     * Sets the file path of EzDo
+     *
      * @param path cannot be null.
      */
     @Override
@@ -43,7 +48,8 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Returns EzDo data as a {@link ReadOnlyEzDo}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -52,6 +58,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Saves the given {@link ReadOnlyEzDo} to the storage.
+     *
      * @param ezDo cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
@@ -60,7 +67,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Saves the current version of the EzDo to the hard disk.
-     *   Creates the data file if it is missing.
+     * Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleEzDoChangedEvent(EzDoChangedEvent ezce);

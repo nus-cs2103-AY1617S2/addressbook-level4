@@ -61,7 +61,7 @@ public interface ReadOnlyTask {
             builder.append(" | DueDate: ").append(getDueDate());
         }
         if (!getRecur().toString().isEmpty()) {
-            builder.append(" Recur: ").append(getRecur());
+            builder.append(" | Recur: ").append(getRecur());
         }
         if (!getTags().toSet().isEmpty()) {
             builder.append(" | Tags: ");
