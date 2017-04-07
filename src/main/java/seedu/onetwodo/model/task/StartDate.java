@@ -20,7 +20,7 @@ public class StartDate extends Date {
     public StartDate(String dateString) throws IllegalValueException {
         super(dateString);
         assert dateString != null;
-        LocalDateTime newDefaultDateTime = defaultDateTime.withSecond(0).withNano(0);
+        LocalDateTime newDefaultDateTime = defaultDateTime.withSecond(0).withNano(0).plusHours(1);
         String trimmedInput = dateString.trim();
         this.localDateTime = DateTimeParser.parseDateTime(trimmedInput, newDefaultDateTime);
         this.value = createDisplayValue(localDateTime);

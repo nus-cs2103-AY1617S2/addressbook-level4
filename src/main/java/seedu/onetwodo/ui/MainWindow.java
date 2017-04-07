@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
-    private static final String ICON_IMG = "/images/onetwodo_icon.png";
+    private static final String ICON_IMG = "/images/onetwodo_icon2.png";
 
 
     private static final int MIN_HEIGHT = 600;
