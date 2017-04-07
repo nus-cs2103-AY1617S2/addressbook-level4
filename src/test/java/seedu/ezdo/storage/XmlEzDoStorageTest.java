@@ -70,7 +70,7 @@ public class XmlEzDoStorageTest {
          * That means you should not have more than one exception test in one method
          */
     }
- 
+    
     @Test
     public void readAndSaveEzDo_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempEzDo.xml";

@@ -35,7 +35,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     @Override
     String getEzDoFilePath();
 
-    /** 
+    /**
      * Sets the file path of EzDo
      * @param path cannot be null.
      */

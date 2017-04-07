@@ -57,11 +57,9 @@ public class UndoneCommandTest extends EzDoGuiTest {
 
         commandBox.runCommand("done"); // to get to done list view
         commandBox.runCommand("done " + targetIndexOneIndexed);
-        
         assertTrue(taskListPanel.isListMatching(expectedRemainder)); //confirm done list is correct
 
         assertResultMessage(String.format(MESSAGE_UNDONE_TASK_SUCCESS, tasksToUndone));
-        
         commandBox.runCommand("list"); //confirm the new current list contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToUndone.getName().fullName);
         assertMatching(taskToUndone, addedCard);

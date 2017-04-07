@@ -63,7 +63,7 @@ public class DoneCommand extends Command {
 
         if (isDone) {
             return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, tasksToToggle));
-        } 
+        }
         return new CommandResult(String.format(MESSAGE_UNDONE_TASK_SUCCESS, tasksToToggle));
     }
 }
