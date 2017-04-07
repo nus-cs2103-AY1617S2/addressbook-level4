@@ -37,8 +37,8 @@ public class MarkCommand extends Command {
         editTaskDescriptor.setStatus(Optional.of(status));
 
         EditCommand editCommand = new EditCommand(filteredTaskListIndex, editTaskDescriptor);
-
         editCommand.setData(model);
+
         return editCommand.execute();
     }
 
