@@ -1,5 +1,6 @@
 package seedu.watodo.testutil;
 
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
@@ -20,7 +21,15 @@ public class TestTask implements ReadOnlyTask {
     private UniqueTagList tags;
     private TaskType taskType;
 
-    public TestTask() {};
+    public TestTask() throws IllegalValueException {
+        description = new Description("");
+        startDate = null;
+        endDate = null;
+        status = TaskStatus.UNDONE;
+        tags = new UniqueTagList();
+        taskType = TaskType.FLOAT;
+
+    };
 
     /* Constructs a Floating TestTask object from a given description. */
     public TestTask(Description description, UniqueTagList tags) {
@@ -45,7 +54,13 @@ public class TestTask implements ReadOnlyTask {
      * Creates a copy of {@code taskToCopy}.
      */
     public TestTask(TestTask taskToCopy) {
-        this(taskToCopy.getDescription(), taskToCopy.getStartDate(), taskToCopy.getEndDate(), taskToCopy.getTags());
+        this(taskToCopy.getDescription(), taskToCopy.getTags());
+        if (taskToCopy.getStartDate() != null) {
+            this.setStartDate(taskToCopy.getStartDate());
+        }
+        if (taskToCopy.getEndDate() != null) {
+            this.setEndDate(taskToCopy.getEndDate());
+        }
     }
 
     public void setDescription(Description description) {

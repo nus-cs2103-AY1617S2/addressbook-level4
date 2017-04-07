@@ -14,7 +14,12 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            eat = new TaskBuilder().withDescription("Time to eat").build(); //TODO continue
+            eat = new TaskBuilder().withDescription("Time to eat").withTags("tag").build(); //TODO continue
+            study = new TaskBuilder().withDescription("Study mug slog").withTags("tag").build();
+            shop = new TaskBuilder().withDescription("no money spend money").withTags("tag").build();
+            code = new TaskBuilder().withDescription("coding everyday every minute every sec").withTags("tag").build();
+            play = new TaskBuilder().withDescription("what is play?").withTags("tag").build();
+            sleep = new TaskBuilder().withDescription("sleep?").withTags("tag").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
