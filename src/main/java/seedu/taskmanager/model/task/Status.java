@@ -14,8 +14,8 @@ import seedu.taskmanager.commons.core.LogsCenter;
 public class Status {
     private static final Logger logger = LogsCenter.getLogger(Status.class);
 
-    private static final String MESSAGE_STATUS_DONE = "Done";
-    private static final String MESSAGE_STATUS_NOT_DONE = "Incomplete";
+    public static final String STATUS_DONE = "Completed";
+    public static final String STATUS_NOT_DONE = "Incomplete";
 
     public boolean value;
 
@@ -42,9 +42,9 @@ public class Status {
     }
 
     public static boolean toBoolean(String status) {
-        if (status.equals(MESSAGE_STATUS_DONE)) {
+        if (status.equals(STATUS_DONE)) {
             return true;
-        } else if (status.equals(MESSAGE_STATUS_NOT_DONE)) {
+        } else if (status.equals(STATUS_NOT_DONE)) {
             return false;
         } else {
             logger.warning("Unknown Status String, status default to Incomplete");
@@ -55,9 +55,9 @@ public class Status {
     @Override
     public String toString() {
         if (value) {
-            return MESSAGE_STATUS_DONE;
+            return STATUS_DONE;
         } else {
-            return MESSAGE_STATUS_NOT_DONE;
+            return STATUS_NOT_DONE;
         }
     }
 
