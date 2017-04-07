@@ -140,6 +140,7 @@ public class EditCommand extends Command {
             return desc;
         }
 
+        //@@author A0140887W
         public Optional<FinishedStatus> getFinishStatus() {
             return finishStatus;
         }
