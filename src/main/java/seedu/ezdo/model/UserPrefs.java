@@ -47,23 +47,46 @@ public class UserPrefs {
     }
 
     //@@author A0138907W
+
+    /**
+     * Adds a command alias to user preferences.
+     * @param command The command to alias.
+     * @param alias The alias that will execute the given command.
+     * @throws AliasAlreadyInUseException when the alias is already in use by an ezDo command.
+     * @throws CommandDoesNotExistException if the given command does not exist and thus cannot be aliased.
+     */
     public void addCommandAlias(String command, String alias) throws AliasAlreadyInUseException,
         CommandDoesNotExistException {
         commandAliases.addAlias(command, alias);
     }
 
+    /**
+     * Removes all previously-specified command aliases.
+     */
     public void clearCommandAliases() {
         commandAliases.clearAliases();
     }
 
+    /**
+     * Gets the user's command aliases.
+     */
     public CommandAliases getCommandAliases() {
         return commandAliases;
     }
 
+    /**
+     * Updates the sorting order according to {@code isSortedAscending}.
+      * @param isSortedAscending A true value represents an ascending sort order, wheras a false value represents a
+     *                           descending sort order.
+     */
     public void updateLastUsedIsSortedAscending(Boolean isSortedAscending) {
         this.isSortedAscending = isSortedAscending;
     }
 
+    /**
+     * Get the current sort order.
+     * @return true if the sort order is ascending. Returns false if the sort order is descending.
+     */
     public boolean getIsSortedAscending() {
         return isSortedAscending;
     }
