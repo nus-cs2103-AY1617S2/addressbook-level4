@@ -1,8 +1,11 @@
 package seedu.task.logic.commands;
 
 import java.io.File;
+import java.io.IOException;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.FileUtil;
+import seedu.task.model.ReadOnlyTaskManager;
 //@@author A0142939W
 /**
  * Saves task manager in a different directory.
@@ -42,6 +45,13 @@ public class LoadCommand extends Command {
         }
 
         if (!FileUtil.isFileFormatCorrect(file)) {
+            return new CommandResult(String.format(MESSAGE_WRONG_FORMAT, pathName));
+        }
+
+        try {
+            ReadOnlyTaskManager newFile = readTaskManager(pathName);
+            model.loadData(newFile);
+        } catch (IOException | IllegalValueException e) {
             return new CommandResult(String.format(MESSAGE_WRONG_FORMAT, pathName));
         }
 

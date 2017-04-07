@@ -11,8 +11,6 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.FilePathChangedEvent;
-import seedu.task.commons.events.model.LoadNewFileEvent;
-import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.storage.UpdateUserPrefsEvent;
@@ -155,23 +153,5 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     //@@author
-    @Override
-    @Subscribe
-    public void handleLoadNewFileEvent(LoadNewFileEvent event) {
-        taskManagerStorage.setTaskManagerFilePath(event.path);
-        Optional<ReadOnlyTaskManager> newTaskManager;
-        try {
-            newTaskManager = taskManagerStorage.readTaskManager(event.path);
-            ReadOnlyTaskManager newData = newTaskManager.get();
-            logger.info("Loading data from " + event.path);
-            raise(new LoadNewFileSuccessEvent(newData));
-        } catch (DataConversionException e) {
-            logger.warning("File is not in the correct format");
-            e.printStackTrace();
-        } catch (IOException e) {
-            logger.warning("Failed to load from file");
-            e.printStackTrace();
-        }
-    }
 
 }

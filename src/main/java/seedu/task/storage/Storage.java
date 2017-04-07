@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.task.commons.events.model.FilePathChangedEvent;
-import seedu.task.commons.events.model.LoadNewFileEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
@@ -36,8 +35,6 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveBackup(String backupFilePath) throws IOException, FileNotFoundException;
 
     void handleFilePathChangedEvent(FilePathChangedEvent fpce);
-
-    void handleLoadNewFileEvent(LoadNewFileEvent lnfe);
 
     /**
      * Saves the current version of KIT to the hard disk.
