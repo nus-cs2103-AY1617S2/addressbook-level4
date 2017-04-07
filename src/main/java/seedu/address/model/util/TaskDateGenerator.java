@@ -1,11 +1,9 @@
 package seedu.address.model.util;
 
-import java.util.Date;
 import java.util.Random;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.StartDate;
 
@@ -19,6 +17,7 @@ public class TaskDateGenerator {
             "tomorrow",
             "yesterday",
             "day after tomorrow",
+            "day before yesterday",
             "next year",
             "last year",
             "this year",
@@ -31,13 +30,27 @@ public class TaskDateGenerator {
             "friday",
             "saturday",
             "sunday",
-            "0000-00-00",
-            "1000-00-00",
-            "1234-12-12",
-            "1977-05-15",
-            "2024-09-22",
-            "2199-02-05",
-            "12017.04.06",
+            "next monday",
+            "next tuesday",
+            "next wednesday",
+            "next thursday",
+            "next friday",
+            "next saturday",
+            "next sunday",
+            "last monday",
+            "last tuesday",
+            "last wednesday",
+            "last thursday",
+            "last friday",
+            "last saturday",
+            "last sunday",
+            "00-00-0000",
+            "00-00-1000",
+            "12-12-1234",
+            "15-05-1977",
+            "22-09-2024",
+            "05-02-2199",
+            "06.04.12017",
     };
     
     private static Random r;
