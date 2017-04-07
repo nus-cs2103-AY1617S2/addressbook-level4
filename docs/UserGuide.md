@@ -480,5 +480,5 @@ Format: `changetheme [THEMENAME]`
 ## 5. Command Summary
 
 <img src="images/Command Summary 1.png" width="600">
-<img src="images/Command Summary 2.png" width="600">
-<img src="images/Command Summary 3.png" width="600">
+<img src="images/Command Summary 2.PNG" width="600">
+<img src="images/Command Summary 3.PNG" width="600">
