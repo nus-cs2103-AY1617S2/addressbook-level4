@@ -26,7 +26,7 @@ public class UniqueTaskList implements Iterable<Task> {
     //@@author A0164440M
     private final FixedStack<ObservableList<Task>> undoStack = new FixedStack();
     private final FixedStack<ObservableList<Task>> redoStack = new FixedStack();
-    private boolean initialize = true;
+    private boolean isInitialized = true;
     //@@author
     /**
      * Returns true if the list contains an equivalent task as the given argument.
@@ -163,13 +163,15 @@ public class UniqueTaskList implements Iterable<Task> {
 
       //@@author A0164440M
         ObservableList<Task> stackList = FXCollections.observableArrayList();
-        if (!initialize) {
+        
+        //To prevent empty list been pushed into undoStack during initialization
+        if (!isInitialized) {
             for (Task t : internalList) {
                 stackList.add(t);
             }
             undoStack.push(stackList);
         } else {
-            initialize = !initialize;
+            isInitialized = !isInitialized;
         }
 
       //@@author
