@@ -40,7 +40,7 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
     public String getFeedbackMessage() {
         if (entry.size() == 1) {
             assert entry.get(0).equals(ClearCommand.COMMAND_WORD);
-            return ClearCommand.MESSAGE_SUCCESS;
+            return ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS;
         } else if (entry.size() == 2) {
             return entry.get(0).concat(entry.get(1));
         } else {

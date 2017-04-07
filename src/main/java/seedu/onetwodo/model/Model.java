@@ -121,6 +121,8 @@ public interface Model {
 
     void clear();
 
+    void clearDone();
+
     void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags);
 
     void sortBy(SortOrder sortOrder, boolean isReversed);

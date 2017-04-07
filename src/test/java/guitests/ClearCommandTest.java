@@ -29,11 +29,12 @@ public class ClearCommandTest extends ToDoListGuiTest {
 
         //verify clear command works when the list is empty
         assertClearCommandSuccess();
+
     }
 
     private void assertClearCommandSuccess() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
-        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
+        assertResultMessage(ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
     }
 }

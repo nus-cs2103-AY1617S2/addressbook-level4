@@ -175,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateToDoListChanged();
     }
 
+    //@@author A0135739W
     @Override
     public synchronized String undo() throws EmptyHistoryException {
         if (history.hasUndoHistory()) {
@@ -188,6 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0135739W
     @Override
     public synchronized String redo() throws EmptyHistoryException {
         if (history.hasRedoHistory()) {
@@ -206,6 +208,13 @@ public class ModelManager extends ComponentManager implements Model {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_WORD, copiedCurrentToDoList);
         resetData(new ToDoList());
+    }
+
+    //@@author A0135739W
+    @Override
+    public void clearDone() {
+        toDoList.clearDone();
+        indicateToDoListChanged();
     }
 
     // =========== Filtered Task List Accessors

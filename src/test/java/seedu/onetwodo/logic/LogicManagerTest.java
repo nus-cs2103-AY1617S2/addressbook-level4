@@ -197,7 +197,7 @@ public class LogicManagerTest {
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new ToDoList(), Collections.emptyList());
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS, new ToDoList(), Collections.emptyList());
     }
 
     @Test

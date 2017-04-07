@@ -130,6 +130,6 @@ public class RedoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, emptyList));
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, emptyList));
 
-        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_SUCCESS);
+        assertResultMessage(RedoCommand.COMMAND_WORD + " successfully.\n" + ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
     }
 }
