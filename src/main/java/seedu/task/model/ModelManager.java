@@ -339,15 +339,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keywords);
-            } else {
                 return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
                         : (this.stringQualifier.run(task)
                                 && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
-            }
         }
     }
     // @@author
@@ -366,10 +360,6 @@ public class ModelManager extends ComponentManager implements Model {
             return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
-        @Override
-        public String toString() {
-            return "Tag = " + tagKeyword;
-        }
     }
 
     // @@author A0139975J
@@ -386,9 +376,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (date.isNull()) {
-                return false;
-            }
             return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
         }
     }
