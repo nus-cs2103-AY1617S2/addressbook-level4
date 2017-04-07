@@ -30,6 +30,7 @@ public abstract class UiPart<T> {
         assert fxmlFileUrl != null;
         fxmlLoader = new FXMLLoader(fxmlFileUrl);
         fxmlLoader.setController(this);
+        System.out.println(fxmlFileUrl);
         try {
             fxmlLoader.load();
         } catch (IOException e) {
