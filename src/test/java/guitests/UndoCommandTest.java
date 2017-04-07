@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,6 +69,19 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
         assertResultMessage(UndoCommand.MESSAGE_FAIL);
+    }
+
+    @Test
+    public void undo_backupFileDeleted_fail() {
+        commandBox.runCommand(ClearCommand.COMMAND_WORD_1);
+
+        //delete file so undo should fail
+        History history = History.getInstance();
+        File backup = new File(history.getUndoFilePath());
+        backup.delete();
+
+        commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
+        assertResultMessage(UndoCommand.MESSAGE_FAIL_NOT_FOUND);
     }
 
     @Test

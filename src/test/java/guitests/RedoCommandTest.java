@@ -2,6 +2,8 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,6 +64,20 @@ public class RedoCommandTest extends TaskManagerGuiTest {
     public void redo_clear_success() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD_1);
         assertRedoSuccess(emptyList);
+    }
+
+    @Test
+    public void redo_backupFileDeleted_fail() {
+        commandBox.runCommand(ClearCommand.COMMAND_WORD_1);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
+
+        //delete file so redo should fail
+        History history = History.getInstance();
+        File backup = new File(history.getRedoFilePath());
+        backup.delete();
+
+        commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
+        assertResultMessage(RedoCommand.MESSAGE_FAIL_NOT_FOUND);
     }
 
     @Test
