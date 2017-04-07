@@ -39,7 +39,7 @@ Role: Developer <br>
 * Components in charge of: Logic, Model, GUI
 * Aspects/tools in charge of: Testing
 * Features implemented:
-	* [Show Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#26-showing-done-tasks--show)
+	* [Show Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#26-showing-done-tasks-show)
 	* [Finish Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#213-finish-a-task--finish)
 	* [List Command](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/docs/UserGuide.md#23-listing-undone-tasks--list)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/main/A0105748B.md)][[test code](https://github.com/CS2103JAN2017-F12-B4/main/blob/master/collated/test/A0105748B.md)]
