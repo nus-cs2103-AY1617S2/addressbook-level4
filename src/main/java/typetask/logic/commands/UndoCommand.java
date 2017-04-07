@@ -16,7 +16,6 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_FAILURE = "No previous command to undo";
 
     private static final int STATUS_EMPTY_HISTORY = 0;
-    private static final int STATUS_ERROR_HISTORY = -1;
 
     /**
      * Returns failure if there is no command executed before
@@ -25,8 +24,6 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() {
         switch (model.restoreTaskManager()) {
-        case STATUS_ERROR_HISTORY:
-            return new CommandResult(MESSAGE_FAILURE);
         case STATUS_EMPTY_HISTORY:
             return new CommandResult(MESSAGE_FAILURE);
         default:
