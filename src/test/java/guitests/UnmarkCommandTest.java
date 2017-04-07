@@ -6,7 +6,6 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
-import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.UnmarkCommand;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -299,12 +298,12 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
      * so that each TestTask in the Array is numbered
      */
     private String getDesiredFormat(TestTask[] markedDoneTask) {
-        int INDEX_ONE = 1;
-        String NUMBERING_DOT = ". ";
-        int i = INDEX_ONE;
+        int indexOne = 1;
+        String numberingDot = ". ";
+        int i = indexOne;
         StringBuilder builder = new StringBuilder();
         for (TestTask task : markedDoneTask) {
-            builder.append(i + NUMBERING_DOT).append(task.toString());
+            builder.append(i + numberingDot).append(task.toString());
             i++;
         }
         return builder.toString();
