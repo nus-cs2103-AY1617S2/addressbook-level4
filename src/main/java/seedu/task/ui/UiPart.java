@@ -62,7 +62,7 @@ public abstract class UiPart<T> {
     }
 
     /**
-     * Registers the object as an event handler at the {@link EventsCenter} 
+     * Registers the object as an event handler at the {@link EventsCenter}
      * @param handler
      *            usually {@code this}
      */
