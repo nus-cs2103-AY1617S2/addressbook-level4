@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
+import seedu.address.ui.ThemeWindow;
+
 /**
  * A Serializable class that contains the GUI settings.
  */
@@ -16,16 +18,29 @@ public class GuiSettings implements Serializable {
     private Double windowHeight;
     private Point windowCoordinates;
 
+    private String styleSheet;
+    private String lastLoadedYTomorrow;
+
     public GuiSettings() {
         this.windowWidth = DEFAULT_WIDTH;
         this.windowHeight = DEFAULT_HEIGHT;
         this.windowCoordinates = null; // null represent no coordinates
+        this.styleSheet = ThemeWindow.DEFAULT_STYLESHEET;
+        this.lastLoadedYTomorrow = null;
     }
 
-    public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition) {
+    public GuiSettings(
+            Double windowWidth,
+            Double windowHeight,
+            int xPosition,
+            int yPosition,
+            String styleSheet,
+            String lastLoadedYTomorrow) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.windowCoordinates = new Point(xPosition, yPosition);
+        this.styleSheet = styleSheet;
+        this.lastLoadedYTomorrow = lastLoadedYTomorrow;
     }
 
     public Double getWindowWidth() {
@@ -39,6 +54,24 @@ public class GuiSettings implements Serializable {
     public Point getWindowCoordinates() {
         return windowCoordinates;
     }
+
+    //@@author A0163848R
+    public String getStyleSheet() {
+        return styleSheet;
+    }
+    
+    public String getLastLoadedYTomorrow() {
+        return lastLoadedYTomorrow;
+    }
+    
+    public void setStyleSheet(String path) {
+        styleSheet = path;
+    }
+    
+    public void setLastLoadedYTomorrow(String path) {
+        lastLoadedYTomorrow = path;
+    }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
@@ -67,7 +100,8 @@ public class GuiSettings implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("Width : " + windowWidth + "\n");
         sb.append("Height : " + windowHeight + "\n");
-        sb.append("Position : " + windowCoordinates);
+        sb.append("Position : " + windowCoordinates + "\n");
+        sb.append("Style : " + styleSheet);
         return sb.toString();
     }
 }

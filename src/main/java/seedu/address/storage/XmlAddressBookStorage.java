@@ -1,3 +1,4 @@
+
 package seedu.address.storage;
 
 import java.io.File;
@@ -70,6 +71,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+    }
+
+    //@@author A0163848R
+    @Override
+    public void setAddressBookFilePath(String path) {
+        this.filePath = path;
     }
 
 }

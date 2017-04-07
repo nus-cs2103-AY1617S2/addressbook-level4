@@ -71,6 +71,7 @@ public class ConfigUtilTest {
         assertEquals(expected, actual);
     }
 
+    //@@author A0164889E
     private Config getTypicalConfig() {
         Config config = new Config();
         config.setAppTitle("Typical App Title");

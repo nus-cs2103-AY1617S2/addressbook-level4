@@ -10,6 +10,12 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ExportRequestEvent;
+import seedu.address.commons.events.ui.ImportRequestEvent;
+import seedu.address.commons.events.ui.ImportResultAvailableEvent;
+import seedu.address.commons.events.ui.LoadRequestEvent;
+import seedu.address.commons.events.ui.LoadResultAvailableEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
@@ -86,6 +92,55 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+    
+    //@@author A0163848R
+    @Override
+    @Subscribe
+    public void handleExportRequestEvent(ExportRequestEvent ere) {
+        try {
+            saveAddressBook(ere.getYTomorrowToExport(), ere.getTargetFile().getPath());
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+    
+    @Override
+    @Subscribe
+    public void handleLoadRequestEvent(LoadRequestEvent ire) {
+        Optional<ReadOnlyAddressBook> loaded = null;
+        
+        try {
+            loaded = readAddressBook(ire.getTargetFile().getPath());
+        } catch (DataConversionException | IOException e) {
+        }
+        
+        raise(new LoadResultAvailableEvent(loaded, ire.getTargetFile()));
+    }
+    
+    @Override
+    @Subscribe
+    public void handleImportRequestEvent(ImportRequestEvent ire) {
+        Optional<ReadOnlyAddressBook> loaded = null;
+        
+        try {
+            loaded = readAddressBook(ire.getTargetFile().getPath());
+        } catch (DataConversionException | IOException e) {
+        }
+        
+        raise(new ImportResultAvailableEvent(loaded));
+    }
+    
+    @Override
+    @Subscribe
+    public void handleTargetFileRequestEvent(TargetFileRequestEvent tfre) {
+        addressBookStorage.setAddressBookFilePath(tfre.getTargetFile().getPath());
+        tfre.getUserPrefs().getGuiSettings().setLastLoadedYTomorrow(tfre.getTargetFile().getPath());
+    }
+
+    @Override
+    public void setAddressBookFilePath(String path) {
+        addressBookStorage.setAddressBookFilePath(path);
     }
 
 }

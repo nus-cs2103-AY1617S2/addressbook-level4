@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -13,8 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
 
 /**
@@ -56,7 +55,7 @@ public class PersonListPanelHandle extends GuiHandle {
     public boolean isListMatching(int startPosition, ReadOnlyPerson... persons) throws IllegalArgumentException {
         if (persons.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " persons");
+                    "Expected " + (getListView().getItems().size() - 1) + " tasks");
         }
         assertTrue(this.containsInOrder(startPosition, persons));
         for (int i = 0; i < persons.length; i++) {
@@ -100,7 +99,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle navigateToPerson(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(1000); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyPerson> person = getListView().getItems().stream()
                                                     .filter(p -> p.getName().fullName.equals(name))
                                                     .findAny();
@@ -148,7 +147,7 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(new Person(getListView().getItems().get(index)));
+        return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
     public PersonCardHandle getPersonCardHandle(ReadOnlyPerson person) {

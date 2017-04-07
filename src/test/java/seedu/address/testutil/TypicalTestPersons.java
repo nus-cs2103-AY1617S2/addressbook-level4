@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.YTomorrow;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
 
 /**
  *
@@ -11,42 +11,79 @@ import seedu.address.model.person.UniquePersonList;
 public class TypicalTestPersons {
 
     public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-
+    
+    //@@author A0164889E
     public TypicalTestPersons() {
         try {
-            alice = new PersonBuilder().withName("Alice Pauline")
-                    .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-                    .withPhone("85355255")
-                    .withTags("friends").build();
-            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPhone("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-                    .withEmail("heinz@yahoo.com").withAddress("wall street").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-                    .withEmail("cornelia@google.com").withAddress("10th street").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-                    .withEmail("werner@gmail.com").withAddress("michegan ave").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-                    .withEmail("lydia@gmail.com").withAddress("little tokyo").build();
-            george = new PersonBuilder().withName("George Best").withPhone("9482442")
-                    .withEmail("anna@google.com").withAddress("4th street").build();
+            alice = new PersonBuilder()
+                    .withName("Alice Paul")
+                    .withGroup("group1")
+                    .withStartDate("01.01")
+                    .withEndDate("12.12")
+                    .withTags("complete")
+                    .build();
+            benson = new PersonBuilder()
+                    .withName("Benson Meier")
+                    .withGroup("311")
+                    .withEndDate("12.11")
+                    .withTags("incomplete")
+                    .build();
+            carl = new PersonBuilder()
+                    .withName("Carl Kurz")
+                    .withGroup("wall street")
+                    .withEndDate("10.01")
+                    .withTags("complete")
+                    .build();
+            daniel = new PersonBuilder()
+                    .withName("Daniel Meier")
+                    .withGroup("street")
+                    .withEndDate("11.11")
+                    .withTags("incomplete")
+                    .build();
+            elle = new PersonBuilder()
+                    .withName("Elle Meyer")
+                    .withGroup("michegan")
+                    .withEndDate("05.05")
+                    .withTags("incomplete")
+                    .build();
+            fiona = new PersonBuilder()
+                    .withName("Fiona Kunz")
+                    .withGroup("little tokyo")
+                    .withEndDate("07.07")
+                    .withTags("incomplete")
+                    .build();
+            george = new PersonBuilder()
+                    .withName("George Best")
+                    .withEndDate("04.12")
+                    .withGroup("street")
+                    .withTags("incomplete")
+                    .build();
 
             // Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-                    .withEmail("stefan@mail.com").withAddress("little india").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-                    .withEmail("hans@google.com").withAddress("chicago ave").build();
+            hoon = new PersonBuilder()
+                    .withName("Hoon Meier")
+                    .withStartDate("01.01")
+                    .withEndDate("05.05")
+                    .withGroup("little india")
+                    .withTags("incomplete")
+                    .build();
+            ida = new PersonBuilder()
+                    .withName("Ida Mueller")
+                    .withStartDate("03.03")
+                    .withEndDate("08.08")
+                    .withGroup("chicago")
+                    .withTags("incomplete")
+                    .build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(YTomorrow ab) {
         for (TestPerson person : new TypicalTestPersons().getTypicalPersons()) {
             try {
-                ab.addPerson(new Person(person));
+                ab.addPerson(new Task(person));
             } catch (UniquePersonList.DuplicatePersonException e) {
                 assert false : "not possible";
             }
@@ -57,8 +94,8 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public YTomorrow getTypicalAddressBook() {
+        YTomorrow ab = new YTomorrow();
         loadAddressBookWithSampleData(ab);
         return ab;
     }
