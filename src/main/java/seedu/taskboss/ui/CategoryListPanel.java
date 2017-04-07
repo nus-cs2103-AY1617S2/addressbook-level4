@@ -45,7 +45,6 @@ public class CategoryListPanel extends UiPart<Region> {
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
         consumeMouseClick();
-//        setEventHandlerForViewingChangeEvent();
     }
 
     /**
@@ -122,7 +121,6 @@ public class CategoryListPanel extends UiPart<Region> {
         categories = initCategories();
         categoryListView.setItems(categories);
         categoryListView.setCellFactory(listView -> new CategoryListViewCell());
-//        setEventHandlerForViewingChangeEvent();
     }
 
     /**
@@ -145,15 +143,7 @@ public class CategoryListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-//    private void setEventHandlerForViewingChangeEvent() {
-//        categoryListView.getSelectionModel().selectedItemProperty()
-//                .addListener((observable, oldValue, newValue) -> {
-//                    if (newValue != null) {
-//                        logger.fine("Viewing in category list panel changed to : '" + newValue + "'");
-//                        raise(new CategoryListPanelViewingChangedEvent(newValue));
-//                    }
-//                });
-//    }
+
 
     /**
      * Scrolls to the specified category by the user
