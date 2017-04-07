@@ -27,6 +27,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+//@@author A0124377A
     public EventCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         description.setText(event.getDescriptionToShow());
@@ -34,7 +35,11 @@ public class EventCard extends UiPart<Region> {
 
         duration.setText(event.getDurationToShow());
 
-        locations.setText(event.getLocationToShow());
+        if (event.getLocation() == null) {
+            locations.setText("");
+        } else {
+            locations.setText(event.getLocationToShow());
+        }
         initTags(event);
         setCardLook(event);
     }
