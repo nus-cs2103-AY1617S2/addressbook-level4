@@ -24,4 +24,13 @@ public class PriorityTest {
         assertTrue(Priority.isValidPriority("2"));
         assertTrue(Priority.isValidPriority("3"));
     }
+
+    @Test
+    public void comparePriority() throws Exception {
+        Priority one = new Priority("1");
+        Priority two = new Priority("2");
+        Priority three = new Priority("3");
+        assertTrue(two.compareTo(one) < 0);
+        assertTrue(one.compareTo(three) > 0);
+    }
 }

@@ -3,13 +3,13 @@ package project.taskcrusher.model.task;
 //import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class DeadlineTest {
-    //before set up the current time so that you can make past deadlines that are invalid
-    @Test
-    public void isValidDeadline() {
-        //invalid deadline
+
+//    @Test
+//    public void isValidDeadline() {
+//        //invalid deadline
 //        assertFalse(Deadline.isValidDeadline("1-1-1995", true));
 //        assertFalse(Deadline.isValidDeadline("yesterday", true));
 //
@@ -20,9 +20,6 @@ public class DeadlineTest {
 //        assertTrue(Deadline.isValidDeadline("next week", true));
 //        assertTrue(Deadline.isValidDeadline("next Tuesday", true));
 //
-
-
-
-    }
+//    }
 
 }
