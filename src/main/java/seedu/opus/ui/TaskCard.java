@@ -46,40 +46,18 @@ public class TaskCard extends UiPart<Region> {
         if (showIndex) id.setText(displayedIndex + ". ");
 
         //@@author A0124368A
-        name.setText(task.getName().fullName);
-        setPriorityView(task);
-
-        if (task.getNote().isPresent()) {
-            note.setText(task.getNote().get().toString());
-        } else {
-            note.setVisible(false);
-            note.setManaged(false);
-        }
-
-        if (task.getStatus().isComplete()) {
-            cardPane.getStyleClass().add(STYLE_COMPLETED_TASK);
-        }
-
-        if (task.getStartTime().isPresent()) {
-            startTime.setText("Start: " + task.getStartTime().get().toString());
-        } else {
-            startTime.setVisible(false);
-            startTime.setManaged(false);
-        }
-
-        if (task.getEndTime().isPresent()) {
-            endTime.setText("End: " + task.getEndTime().get().toString());
-        } else {
-            endTime.setVisible(false);
-            endTime.setManaged(false);
-        }
-
+        setNameLabel(task);
+        setCardStatus(task);
+        setNoteLabel(task);
+        setPriorityLabel(task);
+        setStartTimeLabel(task);
+        setEndTimeLabel(task);
         //@@author
         initTags(task);
     }
 
     //@@author A0124368A
-    private void setPriorityView(ReadOnlyTask task) {
+    private void setPriorityLabel(ReadOnlyTask task) {
         String text = task.getPriority()
                 .map(Priority::toString)
                 .map(String::toUpperCase)
@@ -112,6 +90,45 @@ public class TaskCard extends UiPart<Region> {
         }
 
         return Optional.ofNullable(styleClass);
+    }
+
+    private void setNameLabel(ReadOnlyTask task) {
+        name.setText(task.getName().fullName);
+    }
+
+    private void setNoteLabel(ReadOnlyTask task) {
+        if (task.getNote().isPresent()) {
+            note.setText(task.getNote().get().toString());
+        } else {
+            removeFromView(note);
+        }
+    }
+
+    private void setStartTimeLabel(ReadOnlyTask task) {
+        if (task.getStartTime().isPresent()) {
+            startTime.setText("Start: " + task.getStartTime().get().toString());
+        } else {
+            removeFromView(startTime);
+        }
+    }
+
+    private void setEndTimeLabel(ReadOnlyTask task) {
+        if (task.getEndTime().isPresent()) {
+            endTime.setText("End: " + task.getEndTime().get().toString());
+        } else {
+            removeFromView(endTime);
+        }
+    }
+
+    private void setCardStatus(ReadOnlyTask task) {
+        if (task.getStatus().isComplete()) {
+            cardPane.getStyleClass().add(STYLE_COMPLETED_TASK);
+        }
+    }
+
+    private void removeFromView(Label label) {
+        label.setVisible(false);
+        label.setManaged(false);
     }
     //@@author
 
