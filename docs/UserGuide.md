@@ -48,21 +48,24 @@ All the features of the application can be accessed through the use of a keyboar
 
 ### 3.1. Switch Display Task Window : `switch`
 
-For when you want to view different sets of tasks.<br>
-Changes the displayed task list.<br>
+For when you want to view different subsets of the currently displayed list of tasks, to focus on more 
+relevant tasks. The displayed list of tasks can
+ be a list of all current tasks in the app, or a list of tasks that satisfy some search keyword(s).
+.<br>
+View a different subset of the displayed task list.<br>
 Format: `switch WINDOWIDENTIFIER`
 
 > * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
-> * You can also use key combination <kbd>Ctrl</kbd> with an underlined letter to switch between different window.
+> * You can also use key combination <kbd>Ctrl</kbd> with a number to switch between different tabs.
 
 Example:
 * `switch 2` <br>
   Switches the displayed view to 'Today'.
 * `switch T` <br>
   Switches the displayed view to 'Today'.
-* You press <kbd>Ctrl</kbd> + <kbd>A</kbd> on the keyboard. <br>
+* You press <kbd>Ctrl</kbd> + <kbd>5</kbd> on the keyboard. <br>
   Switches the displayed view to 'All'.
 
 ### 3.2. Viewing help : `help`
