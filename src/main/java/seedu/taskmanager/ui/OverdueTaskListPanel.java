@@ -15,8 +15,8 @@ import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
-    public class OverdueTaskListPanel extends UiPart<Region> {
-	private final Logger logger = LogsCenter.getLogger(OverdueTaskListPanel.class);
+public class OverdueTaskListPanel extends UiPart<Region> {
+    private final Logger logger = LogsCenter.getLogger(OverdueTaskListPanel.class);
     private static final String FXML = "OverdueTaskListPanel.fxml";
 
     @FXML

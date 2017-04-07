@@ -1,7 +1,7 @@
 package seedu.taskmanager.ui;
 
-import java.util.logging.Logger;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
-import seedu.taskmanager.model.Model;
+//import seedu.taskmanager.model.Model;
 //import seedu.taskmanager.model.ModelManager.DateQualifier;
 //import seedu.taskmanager.model.ModelManager.Expression;
 //import seedu.taskmanager.model.ModelManager.PredicateExpression;
@@ -39,12 +39,12 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
-        Date today = new Date();
+//        Date today = new Date();
 //        updateFilteredTaskList(today);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
- 
+
     /*
     public void updateFilteredTaskList(Date date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
