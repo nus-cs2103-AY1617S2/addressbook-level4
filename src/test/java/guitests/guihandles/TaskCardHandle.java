@@ -18,7 +18,6 @@ public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String INFORMATION_FIELD_ID = "#info";
     private static final String DEADLINE_FIELD_ID = "#date";
-    private static final String PRIORITY_LEVEL_FIELD_ID = "#priority";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -40,12 +39,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(INFORMATION_FIELD_ID);
     }
 
-    public String getPhone() {
+    public String getDeadline() {
         return getTextFromLabel(DEADLINE_FIELD_ID);
-    }
-
-    public String getEmail() {
-        return getTextFromLabel(PRIORITY_LEVEL_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -74,8 +69,7 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getName().equals(task.getTaskName().taskName)
-                && getPhone().equals(task.getDate().value)
-                && getEmail().equals(task.getPriority().value)
+                && getDeadline().equals(task.getDate().value)
                 && getInformation().equals(task.getInfo().value)
                 && getTags().equals(getTags(task.getTags()));
     }
@@ -85,8 +79,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getName().equals(handle.getName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
+                    && getDeadline().equals(handle.getDeadline())
                     && getInformation().equals(handle.getInformation())
                     && getTags().equals(handle.getTags());
         }
