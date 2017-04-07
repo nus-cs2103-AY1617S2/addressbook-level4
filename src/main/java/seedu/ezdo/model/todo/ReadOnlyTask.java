@@ -19,6 +19,8 @@ public interface ReadOnlyTask {
     Recur getRecur();
 
     boolean getDone();
+    
+    boolean getStarted();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
