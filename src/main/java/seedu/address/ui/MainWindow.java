@@ -21,9 +21,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -89,6 +92,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private JFXTextField commandTextField;
 
+    @FXML
+    private HBox windowTop;
+
     // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -114,8 +120,26 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         registerAsAnEventHandler(this);
+
+        // Allows dragging the undecorated window around
+        final Pair coordinate = new Pair();
+        windowTop.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                coordinate.x = primaryStage.getX() - mouseEvent.getScreenX();
+                coordinate.y = primaryStage.getY() - mouseEvent.getScreenY();
+            }
+        });
+
+        windowTop.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                primaryStage.setX(mouseEvent.getScreenX() + coordinate.x);
+                primaryStage.setY(mouseEvent.getScreenY() + coordinate.y);
+            }
+        });
     }
 
     // @@author
@@ -165,9 +189,8 @@ public class MainWindow extends UiPart<Region> {
         setHotKeys();
     }
 
-    /*
+    /**
      * Prepares categorised task list for today/future/completed ListView
-     *
      */
     public void prepareTaskList() {
         // Assume the three lists will always be initialised by fillInnerParts()
@@ -299,4 +322,9 @@ public class MainWindow extends UiPart<Region> {
         // toast.show(event.getMessage(), "OK", 4000, handler);
         toast.show(event.getMessage(), 4000);
     }
+}
+
+// A coordinate pair class used to store mouse position
+class Pair {
+    public double x, y;
 }
