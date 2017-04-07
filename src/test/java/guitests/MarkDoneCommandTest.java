@@ -50,7 +50,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withRecurrence(Frequency.NONE)
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
-                .withCategories("Done", "Friends", "Owesmoney").build();
+                .withCategories("Done", "Alltasks", "Friends", "Owesmoney").build();
 
         assertMarkDoneSuccess(false, false, taskBossIndex, taskBossIndex, markedDoneTask);
     }
