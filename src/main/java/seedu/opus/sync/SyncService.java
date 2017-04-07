@@ -6,27 +6,36 @@ import java.util.List;
 import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
+//@@author A0148087W
 /**
  * An interface representing a sync service provider
  *
  */
-public interface SyncService {
+public abstract class SyncService {
+
+    protected Sync syncManager;
+
+    public SyncService() {}
 
     /**
      * Initialise and start the service
      * @throws SyncException
      * @throws IOException
      */
-    public void start();
+    public abstract void start() throws SyncException;
 
     /**
      * Stop service
      */
-    public void stop();
+    public abstract void stop();
 
     /**
      * Updates task list in sync service with provided taskList
      * @param taskList
      */
-    public void updateTaskList(List<Task> taskList);
+    public abstract void updateTaskList(List<Task> taskList);
+
+    public void setSyncManager(Sync syncManager) {
+        this.syncManager = syncManager;
+    }
 }

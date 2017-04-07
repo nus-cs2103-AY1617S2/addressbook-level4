@@ -9,6 +9,7 @@ import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.opus.sync.exceptions.SyncException;
 
 /**
  * The API of the Model component.
@@ -65,8 +66,9 @@ public interface Model {
 
     /**
      * Set Model to start syncing with sync service
+     * @throws SyncException
      */
-    void startSync();
+    void startSync() throws SyncException;
 
     /**
      * Set Model to stop syncing with sync service

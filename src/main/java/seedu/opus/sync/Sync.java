@@ -17,8 +17,14 @@ public interface Sync {
     public void stopSync();
 
     /**
-     * Pushes Current Task in Model to sync service
+     * Pushes Current Tasks in Model to sync service
      * @param taskList
      */
     public void updateTaskList(List<Task> taskList);
+
+    /**
+     * Raise any exception encountered in syncSerice to UI Result Display
+     * @param exception
+     */
+    public void raiseSyncEvent(SyncException exception);
 }

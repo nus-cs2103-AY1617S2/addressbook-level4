@@ -1,6 +1,7 @@
 package seedu.opus.sync;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.logging.Logger;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.TokenResponseException;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -31,9 +33,15 @@ import seedu.opus.model.task.Status.Flag;
 import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
-public class SyncServiceGtask implements SyncService {
+//@@author A0148087W
+/**
+ * Handles all sync operations for Google Task sync integration
+ *
+ */
+public class SyncServiceGtask extends SyncService {
 
     public static final java.io.File DATA_STORE_DIR = new java.io.File("data/credentials");
+    public static final java.io.File DATA_STORE_FILE = new java.io.File(DATA_STORE_DIR + "/StoredCredential");
 
     private static HttpTransport httpTransport;
     private static FileDataStoreFactory dataStoreFactory;
@@ -47,7 +55,14 @@ public class SyncServiceGtask implements SyncService {
     private static final String APPLICATION_NAME = "Opus";
     private static final String TASK_STATUS_COMPLETE = "completed";
     private static final String TASK_STATUS_INCOMPLETE = "needsAction";
-    private static final String SYNC_ERROR_MESSAGE = "Exception encountered while syncing";
+
+    private static final String SYNC_ERROR_CONNECT = "Failed to connect to Google Task.\n"
+                                                    + "Please check your internet connection.\n"
+                                                    + "Type \"sync on\" to login again.";
+    private static final String SYNC_ERROR_LOGIN = "Failed to login to Google Task.\n"
+                                                    + "Please check your internet connection and"
+                                                    + " authorize Opus to access Google Task.\n"
+                                                    + "Type \"sync on\" to login again.";
 
     private com.google.api.services.tasks.Tasks service;
     private TaskList opusTaskList;
@@ -60,28 +75,21 @@ public class SyncServiceGtask implements SyncService {
     }
 
     @Override
-    public void start() {
+    public void start() throws SyncException {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
             dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
+            logger.info("---[GTask]: Starting Google Task");
 
-        logger.info("---[GTask]: Starting Google Task");
-
-        try {
             service = getTasksService();
             opusTaskList = getOpusTasks();
             logger.info("---[GTask]: Successfully initialised Google Task Service");
-            Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
-        } catch (IOException e) {
+        } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
-        } catch (SyncException e) {
-            e.printStackTrace();
+            DATA_STORE_FILE.delete();
+            raiseSyncExceptionEvent(new SyncException(SYNC_ERROR_LOGIN));
         }
+        Executors.newSingleThreadExecutor().execute(() -> processUpdateTaskListDeque());
         this.isRunning = true;
     }
 
@@ -101,6 +109,7 @@ public class SyncServiceGtask implements SyncService {
     /**
      * Processes the taskList received from Model and pushes it to Google Task.
      * All current tasks in the user's google account is cleared and Tasks from TaskList is inserted
+     * This method must be run in a separate thread from the main thread
      */
     private void processUpdateTaskListDeque() {
         assert service != null;
@@ -121,21 +130,20 @@ public class SyncServiceGtask implements SyncService {
                     insertTasktoGtask(taskToPush);
                 }
                 this.taskListDeque.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (IOException | InterruptedException e) {
+                this.isRunning = false;
+                raiseSyncExceptionEvent(new SyncException(SYNC_ERROR_CONNECT));
             }
         }
     }
 
     /**
-     * Launches a Google Task authorization query using the user's default web browser
-     * @return
+     * Launches a Google Task authorization query page using the user's default web browser
+     * @return Credential
      * @throws IOException
      * @throws SyncException
      */
-    private Credential authorize() throws IOException, SyncException {
+    private Credential authorize() throws SyncException, IOException  {
         GoogleClientSecrets.Details clientSecretsDetails = new GoogleClientSecrets.Details();
         clientSecretsDetails.setClientId(CLIENT_ID);
         clientSecretsDetails.setClientSecret(CLIENT_SECRET);
@@ -150,14 +158,16 @@ public class SyncServiceGtask implements SyncService {
             credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(APPLICATION_NAME);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new SyncException(SYNC_ERROR_MESSAGE);
+            deauthorize();
+            this.isRunning = false;
+            throw new SyncException(SYNC_ERROR_LOGIN);
         }
         logger.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
     }
 
     /**
-     * Initialise Google Task API Service
+     * Initialize Google Task API Service
      * @return
      * @throws IOException
      * @throws SyncException
@@ -165,8 +175,8 @@ public class SyncServiceGtask implements SyncService {
     private com.google.api.services.tasks.Tasks getTasksService() throws IOException, SyncException {
         Credential credential = authorize();
         return new com.google.api.services.tasks.Tasks.Builder(httpTransport, JSON_FACTORY, credential)
-                                                                .setApplicationName(APPLICATION_NAME)
-                                                                .build();
+                                                              .setApplicationName(APPLICATION_NAME)
+                                                              .build();
     }
 
     /**
@@ -186,9 +196,14 @@ public class SyncServiceGtask implements SyncService {
                 }
             }
             return createOpusTaskList();
+        } catch (TokenResponseException e) {
+            deauthorize();
+            this.isRunning = false;
+            throw new SyncException(SYNC_ERROR_LOGIN);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new SyncException(SYNC_ERROR_MESSAGE);
+            this.isRunning = false;
+            throw new SyncException(SYNC_ERROR_CONNECT);
         }
     }
 
@@ -202,8 +217,13 @@ public class SyncServiceGtask implements SyncService {
         opusTaskList.setTitle("Opus");
         try {
             return insertTaskListToGtask(opusTaskList);
+        } catch (TokenResponseException e) {
+            deauthorize();
+            this.isRunning = false;
+            throw new SyncException(SYNC_ERROR_LOGIN);
         } catch (IOException e) {
-            throw new SyncException(SYNC_ERROR_MESSAGE);
+            this.isRunning = false;
+            throw new SyncException(SYNC_ERROR_CONNECT);
         }
     }
 
@@ -233,6 +253,21 @@ public class SyncServiceGtask implements SyncService {
         return googleAdaptedTask;
     }
 
+    /**
+     * Deauthorize Opus by deleting the storedCredential file
+     */
+    public void deauthorize() {
+        DATA_STORE_FILE.delete();
+    }
+
+    /**
+     * Raise a event to notify user when can exception is encountered while syncing
+     * @param syncException
+     */
+    public void raiseSyncExceptionEvent(SyncException syncException) {
+        this.syncManager.raiseSyncEvent(syncException);
+    }
+
     //====================Google Task API Service Call Methods==============================================
 
     /**
@@ -258,7 +293,7 @@ public class SyncServiceGtask implements SyncService {
      */
     private void deleteTaskFromGtask(com.google.api.services.tasks.model.Task taskToDelete) throws IOException {
         service.tasks().delete(opusTaskList.getId(), taskToDelete.getId()).execute();
-        logger.info("---[GTask]: Deleting Task");
+        logger.info("---[GTask]: Deleting Task - " + taskToDelete.getTitle());
     }
 
     /**

@@ -16,7 +16,7 @@ import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.Name;
 import seedu.opus.model.task.Task;
 
-
+/*
 //@@author A0148087W-reused
 /**
  *
@@ -41,7 +41,7 @@ public class SyncProviderGoogleTests {
             e.printStackTrace();
         }
 
-        syncProviderGoogle.start();
+        //syncProviderGoogle.start();
     }
 
     @AfterClass
