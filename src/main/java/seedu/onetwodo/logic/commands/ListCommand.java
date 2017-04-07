@@ -36,6 +36,39 @@ public class ListCommand extends Command {
 
     public ListCommand(String doneString, String beforeDate, String afterDate,
             String priorityString, Set<String> tags, String order, boolean isReversed) throws IllegalValueException {
+        setDone(doneString);
+        setSortOder(order, isReversed);
+        setDates(beforeDate, afterDate);
+        setPriority(priorityString);
+        setTags(tags);
+    }
+
+    private void setTags(Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.tagSet = tagSet;
+    }
+
+    private void setPriority(String priorityString) throws IllegalValueException {
+        priority = new Priority(priorityString);
+    }
+
+    private void setDates(String beforeDate, String afterDate) throws IllegalValueException {
+        before = new EndDate(beforeDate);
+        after = new StartDate(afterDate);
+        if (before.hasDate() && after.hasDate() && before.getLocalDateTime().isBefore(after.getLocalDateTime())) {
+            throw new IllegalValueException(DATES_ARE_INVALID);
+        }
+    }
+
+    private void setSortOder(String order, boolean isReversed) throws IllegalValueException {
+        sortOrder = SortOrder.getSortOrder(order);
+        this.isReversed = isReversed;
+    }
+
+    private void setDone(String doneString) {
         assert doneString != null;
         switch (doneString) {
         case DoneStatus.DONE_STRING: // view done tasks
@@ -48,19 +81,6 @@ public class ListCommand extends Command {
             doneStatus = DoneStatus.ALL;
             break;
         }
-        sortOrder = SortOrder.getSortOrder(order);
-        this.isReversed = isReversed;
-        before = new EndDate(beforeDate);
-        after = new StartDate(afterDate);
-        if (before.hasDate() && after.hasDate() && before.getLocalDateTime().isBefore(after.getLocalDateTime())) {
-            throw new IllegalValueException(DATES_ARE_INVALID);
-        }
-        priority = new Priority(priorityString);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        this.tagSet = tagSet;
     }
 
     @Override
