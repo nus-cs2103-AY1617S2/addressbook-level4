@@ -515,7 +515,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
   //@@author
-  
   //@@author A0139248X
     /**
      * Raises a {@code SortCriteriaChangedEvent}.
