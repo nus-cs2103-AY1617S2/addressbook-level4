@@ -12,6 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.address.model.task.ReadOnlyPerson;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniquePersonList;
@@ -111,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-    
+
     @Override
     public void mergeYTomorrow(ReadOnlyAddressBook add) {
         for (ReadOnlyPerson readOnlyTask : add.getPersonList()) {
@@ -124,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
                     addressBook.addPerson(task);
                 } catch (PersonNotFoundException | DuplicatePersonException el) {
                 }
-                
+
             }
         }
         indicateAddressBookChanged();
@@ -134,6 +136,30 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addToHistory(ReadOnlyAddressBook state) {
         history.push(state);
+    }
+
+    //@@author A0164466X
+    @Override
+    public void updateFilteredListToShowComplete() {
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_COMPLETE))));
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void updateFilteredListToShowIncomplete() {
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_INCOMPLETE))));
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -207,6 +233,23 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+  //@@author A0164466X
+    private class TagQualifier implements Qualifier {
+        private UniqueTagList tags;
+        
+        TagQualifier(UniqueTagList tags){
+            this.tags = tags;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyPerson task) {
+            return task.getTags().equals(tags);
+        }
+        
+        //Default toString() method used
+        
     }
 
 }

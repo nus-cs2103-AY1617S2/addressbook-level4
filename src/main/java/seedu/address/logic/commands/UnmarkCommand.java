@@ -25,7 +25,9 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Unmarked task: %1$s";
+    //@@author A0164466X
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task as incomplete: %1$s";
+    //@@author
     public static final String MESSAGE_DUPLICATE_PERSON = "This task is already incomplete.";
 
     private final int filteredPersonListIndex;
@@ -72,8 +74,8 @@ public class UnmarkCommand extends Command {
                 personToEdit
                 .getTags()
                 .except(UniqueTagList.build(
-                                Tag.TAG_COMPLETE,
-                                Tag.TAG_INCOMPLETE));
+                        Tag.TAG_COMPLETE,
+                        Tag.TAG_INCOMPLETE));
 
         try {
             updatedTags.add(new Tag(Tag.TAG_INCOMPLETE));
