@@ -27,7 +27,7 @@ import seedu.doist.model.task.TaskDate;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+    //@@author A0147620L
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -65,7 +65,6 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
-    //@@author A0147620L
     /**
      * Method to extract the date and time information from the edit command
      * Uses the parameteres

@@ -13,7 +13,7 @@ import seedu.doist.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser {
-
+    //@@author A0147620L
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -33,5 +33,4 @@ public class FindCommandParser {
         }
         return new FindCommand(desc.toString().trim());
     }
-
 }

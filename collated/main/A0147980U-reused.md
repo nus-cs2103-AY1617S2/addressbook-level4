@@ -19,9 +19,10 @@ public class ListCommandParser {
         final String parameters = matcher.group("parameters").trim();
         ArrayList<String> tokens = ParserUtil.getParameterKeysFromString(parameters);
 
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_UNDER);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_UNDER, PREFIX_FROM, PREFIX_TO);
 
-        if (!argsTokenizer.validateTokens(tokens)) {
+        if (!argsTokenizer.validateTokens(tokens) ||
+                (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         argsTokenizer.tokenize(parameters);

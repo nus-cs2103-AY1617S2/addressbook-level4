@@ -60,11 +60,13 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(String keywords);
 
+    //@@author A0147620L
     /** Updates the filter of the filtered task list to filter by the given task type, tags and dates*/
     void updateFilteredTaskList(TaskType type, UniqueTagList tags, TaskDate dates);
 
     /** Sorts the task accorfing to the specific comparator passed as an argument */
     void sortTasks(Comparator<ReadOnlyTask> comparator);
+    //@@author
 
     /** Sorts the tasks according to the comparators defined in the list*/
     void sortTasks(List<SortType> sortTypes);
