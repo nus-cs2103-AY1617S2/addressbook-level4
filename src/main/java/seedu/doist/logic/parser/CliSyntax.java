@@ -28,12 +28,9 @@ public class CliSyntax {
     public static final Prefix[] ALL_PREFICES = {
         PREFIX_FROM,
         PREFIX_TO,
-        PREFIX_REMIND,
-        PREFIX_EVERY,
         PREFIX_AS,
         PREFIX_UNDER,
         PREFIX_BY,
-        PREFIX_DESCRIPTION,
         PREFIX_IN,
         PREFIX_FOR
     };
