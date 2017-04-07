@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,11 +17,10 @@ import seedu.taskmanager.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.logic.Logic;
 import seedu.taskmanager.model.UserPrefs;
-import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
@@ -28,17 +28,19 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
+    public static final String TAB_TO_DO = "To Do";
+    public static final String TAB_DONE = "Done";
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    // @@author A0131278H
+    private TaskListPanel toDoTaskListPanel;
+    private TaskListPanel doneTaskListPanel;
     private TaskListPanel taskListPanel;
+    // @@author
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -46,8 +48,19 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private MenuItem helpMenuItem;
 
+    // @@author A0131278H
+    @FXML
+    private TabPane taskListsTabPane;
+
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane toDoTaskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane doneTaskListPanelPlaceholder;
+    // @@author
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -84,25 +97,27 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination
+     *            the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
+         * version of SDK.
          *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * According to the bug report, TextInputControl (TextField, TextArea)
+         * will consume function-key events. Because CommandBox contains a
+         * TextField, and ResultDisplay contains a TextArea, thus some
+         * accelerators (e.g F1) will not work when the focus is in them because
+         * the key event is consumed by the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * For now, we add following event filter to capture such key events and
+         * open help window purposely so to support accelerators even when focus
+         * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -113,8 +128,10 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        // @@author A0131278H
+        toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList());
+        doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+        // @@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -132,9 +149,23 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    // @@author A0131278H
+    private AnchorPane getToDoTaskListPlaceholder() {
+        return toDoTaskListPanelPlaceholder;
     }
+
+    private AnchorPane getDoneTaskListPlaceholder() {
+        return doneTaskListPanelPlaceholder;
+    }
+
+    public TaskListPanel getToDoTaskListPanel() {
+        return this.toDoTaskListPanel;
+    }
+
+    public TaskListPanel getDoneTaskListPanel() {
+        return this.doneTaskListPanel;
+    }
+    // @@author
 
     void hide() {
         primaryStage.hide();
@@ -146,7 +177,9 @@ public class MainWindow extends UiPart<Region> {
 
     /**
      * Sets the given image as the icon of the main window.
-     * @param iconSource e.g. {@code "/images/help_icon.png"}
+     *
+     * @param iconSource
+     *            e.g. {@code "/images/help_icon.png"}
      */
     private void setIcon(String iconSource) {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
@@ -173,9 +206,34 @@ public class MainWindow extends UiPart<Region> {
      * Returns the current size and the position of the main Window.
      */
     GuiSettings getCurrentGuiSetting() {
-        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(),
+                (int) primaryStage.getY());
     }
+
+    // @@author A0131278H
+    @FXML
+    public void onSelectedTabChanged() {
+        try {
+            String selectedTab = taskListsTabPane.getSelectionModel().getSelectedItem().getText();
+            logic.setSelectedTab(selectedTab);
+        } catch (NullPointerException npe) {
+            // null pointer only invoked at initiation
+        }
+    }
+
+    public TaskListPanel getTaskListPanel() {
+        String selectedTab = taskListsTabPane.getSelectionModel().getSelectedItem().getText();
+        switch (selectedTab) {
+        case TAB_TO_DO:
+            return toDoTaskListPanel;
+        case TAB_DONE:
+            return doneTaskListPanel;
+        default:
+            assert false : selectedTab + " is invalid";
+            return null;
+        }
+    }
+    // @@author
 
     @FXML
     public void handleHelp() {
@@ -193,18 +251,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
-    }
-
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
 }
