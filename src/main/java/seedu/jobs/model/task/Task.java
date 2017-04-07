@@ -8,6 +8,7 @@ import seedu.jobs.model.tag.UniqueTagList;
 //@@author A0130979U
 import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
+//@@author A0130979U
 public class Task implements ReadOnlyTask {
 
     private Name name;
@@ -34,6 +35,30 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isCompleted = false;
+
+        if (!startTime.value.equals(Time.DEFAULT_TIME) && !endTime.value.equals(Time.DEFAULT_TIME)
+                && startTime.compareTo(endTime) > 0) {
+            throw new IllegalTimeException(Messages.MESSAGE_INVALID_START_END_TIME);
+        }
+
+    }
+    
+    /**
+     * Overloaded constructor with isCompleted parameter
+     * @param period TODO
+     * @throws IllegalTimeException
+     */
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period, boolean isCompleted)
+            throws IllegalTimeException {
+        assert !CollectionUtil.isAnyNull(name);
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.period = period;
+        this.description = description;
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+        this.isCompleted = isCompleted;
 
         if (!startTime.value.equals(Time.DEFAULT_TIME) && !endTime.value.equals(Time.DEFAULT_TIME)
                 && startTime.compareTo(endTime) > 0) {
@@ -161,3 +186,4 @@ public class Task implements ReadOnlyTask {
     }
 
 }
+//@@author A0130979U
