@@ -52,6 +52,15 @@ public class AddCommand extends Command {
         }
         StartTime startTime;
         EndTime endTime;
+
+        if(startDate == null){
+            startDate = "";
+        }
+
+        if(dueDate == null){
+            dueDate = "";
+        }
+
         this.toAdd = new Task(new Name(name), new Priority(priority), startTime = new StartTime(startDate),
             endTime = new EndTime(dueDate), new Description(text), new UniqueTagList(tagSet));
 
