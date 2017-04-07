@@ -14,9 +14,8 @@ import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.UndoCommand;
 
-//@@author A0139161J
 public class UndoRedoCommandTest extends TaskManagerGuiTest {
-
+    //@@author A0139161J
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
@@ -63,11 +62,11 @@ public class UndoRedoCommandTest extends TaskManagerGuiTest {
     @Test
     public void undoEdit() throws IllegalValueException {
 
-        String detailsToEdit = "Task11 d/15-Mar-2015 @ 10:00:00 p/1 i/NUS t/School";
+        String detailsToEdit = "Task11 d/15-Mar-2015 @ 10:00 p/1 i/NUS t/School";
         int addressBookIndex = 1;
 
         TestTask originalTask = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder().withName("Task11").withDeadline("15-Mar-2015 @ 10:00:00")
+        TestTask editedTask = new TaskBuilder().withName("Task11").withDeadline("15-Mar-2015 @ 10:00")
                 .withPriorityLevel("1").withInformation("NUS").withTags("School").build();
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
         commandBox.runCommand("undo");

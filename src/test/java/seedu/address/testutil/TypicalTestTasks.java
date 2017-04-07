@@ -17,7 +17,7 @@ public class TypicalTestTasks {
             task11 = new TaskBuilder().withName("Task11")
                     .withInformation("Information 1")
                     .withPriorityLevel("1")
-                    .withDeadline("01-Jan-2017 @ 10:00:00")
+                    .withDeadline("01-Jan-2017 @ 10:00")
                     .withTags("friends").build();
             task22 = new TaskBuilder().withName("Task22")
                     .withInformation("Information 2")
