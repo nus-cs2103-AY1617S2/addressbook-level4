@@ -22,39 +22,39 @@ public class AddCommandTest extends WhatsLeftGuiTest {
     @Test
     public void addEvent() {
         //add one event
-        TestEvent[] currentList = te.getTypicalEvents();
+        TestEvent[] currentEventList = te.getTypicalEvents();
         TestEvent eventToAdd = te.consultation;
-        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
-        assertAddEventSuccess(eventToAdd, currentList);
+        currentEventList = TestUtil.addEventsToList(currentEventList, eventToAdd);
+        assertAddEventSuccess(eventToAdd, currentEventList);
 
         //add another event
         eventToAdd = te.workshop;
-        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
-        assertAddEventSuccess(eventToAdd, currentList);
+        currentEventList = TestUtil.addEventsToList(currentEventList, eventToAdd);
+        assertAddEventSuccess(eventToAdd, currentEventList);
 
         //add duplicate event
         commandBox.runCommand(eventToAdd.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_ACTIVITY);
-        assertTrue(eventListPanel.isListMatching(TestUtil.getFilteredTestEvents(currentList)));
+        assertTrue(eventListPanel.isListMatching(TestUtil.getFilteredTestEvents(currentEventList)));
 
         //add a clashed event
         eventToAdd = te.clashedWorkshop;
-        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
-        assertAddEventSuccess(eventToAdd, currentList);
+        currentEventList = TestUtil.addEventsToList(currentEventList, eventToAdd);
+        assertAddEventSuccess(eventToAdd, currentEventList);
         assertResultMessage("New event added but with possible clash! : " + eventToAdd.getAsText());
 
         //add to empty list
         commandBox.runCommand("clear ev");
-        currentList = TestUtil.removeEventsFromList(currentList, currentList);
+        currentEventList = TestUtil.removeEventsFromList(currentEventList, currentEventList);
         eventToAdd = te.presentation;
-        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
-        assertAddEventSuccess(eventToAdd, currentList);
+        currentEventList = TestUtil.addEventsToList(currentEventList, eventToAdd);
+        assertAddEventSuccess(eventToAdd, currentEventList);
 
         //case insensitive command
         eventToAdd = te.consultation;
         commandBox.runCommand("aDD MA2101 Consultation st/1000 sd/270817 et/1100 l/S17");
-        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
-        assertTrue(eventListPanel.isListMatching(TestUtil.getFilteredTestEvents(currentList)));
+        currentEventList = TestUtil.addEventsToList(currentEventList, eventToAdd);
+        assertTrue(eventListPanel.isListMatching(TestUtil.getFilteredTestEvents(currentEventList)));
 
         //invalid command
         commandBox.runCommand("adds invalid event");
@@ -65,32 +65,32 @@ public class AddCommandTest extends WhatsLeftGuiTest {
     @Test
     public void addTask() {
         //add one task
-        TestTask[] currentList = tt.getTypicalTasks();
+        TestTask[] currentTaskList = tt.getTypicalTasks();
         TestTask taskToAdd = tt.homework;
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertAddTaskSuccess(taskToAdd, currentList);
+        currentTaskList = TestUtil.addTasksToList(currentTaskList, taskToAdd);
+        assertAddTaskSuccess(taskToAdd, currentTaskList);
 
         //add another task
         taskToAdd = tt.cycling;
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertAddTaskSuccess(taskToAdd, currentList);
+        currentTaskList = TestUtil.addTasksToList(currentTaskList, taskToAdd);
+        assertAddTaskSuccess(taskToAdd, currentTaskList);
 
         //add duplicate task
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_ACTIVITY);
-        assertTrue(taskListPanel.isListMatching(TestUtil.getFilteredTestTasks(currentList)));
+        assertTrue(taskListPanel.isListMatching(TestUtil.getFilteredTestTasks(currentTaskList)));
 
         //add to empty list
         commandBox.runCommand("clear ts");
-        currentList = TestUtil.removeTasksFromList(currentList, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertAddTaskSuccess(taskToAdd, currentList);
+        currentTaskList = TestUtil.removeTasksFromList(currentTaskList, currentTaskList);
+        currentTaskList = TestUtil.addTasksToList(currentTaskList, taskToAdd);
+        assertAddTaskSuccess(taskToAdd, currentTaskList);
 
         //case insensitive command
         taskToAdd = tt.homework;
         commandBox.runCommand("aDD MA2101 HW p/high bt/1100 bd/270617 l/S17 ta/homework");
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(TestUtil.getFilteredTestTasks(currentList)));
+        currentTaskList = TestUtil.addTasksToList(currentTaskList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(TestUtil.getFilteredTestTasks(currentTaskList)));
 
         //invalid command
         commandBox.runCommand("adds invalid task");
@@ -105,8 +105,8 @@ public class AddCommandTest extends WhatsLeftGuiTest {
         assertMatchingEvent(eventToAdd, addedCard);
 
         //confirm the list now contains all previous events plus the new event
-        TestEvent[] filteredList = TestUtil.getFilteredTestEvents(currentList);
-        assertTrue(eventListPanel.isListMatching(filteredList));
+        TestEvent[] filteredEventList = TestUtil.getFilteredTestEvents(currentList);
+        assertTrue(eventListPanel.isListMatching(filteredEventList));
     }
 
     private void assertAddTaskSuccess(TestTask taskToAdd, TestTask... currentList) {
@@ -117,8 +117,8 @@ public class AddCommandTest extends WhatsLeftGuiTest {
         assertMatchingTask(taskToAdd, addedCard);
 
         //confirm the list now contains all previous events plus the new task
-        TestTask[] filteredList = TestUtil.getFilteredTestTasks(currentList);
-        assertTrue(taskListPanel.isListMatching(filteredList));
+        TestTask[] filteredTaskList = TestUtil.getFilteredTestTasks(currentList);
+        assertTrue(taskListPanel.isListMatching(filteredTaskList));
     }
 
 }

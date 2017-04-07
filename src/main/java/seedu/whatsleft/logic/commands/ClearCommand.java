@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": clear all events/tasks in WhatsLeft"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": clear all events/tasks in WhatsLeft\n"
             + "Parameter: type of the activities to clear"
             + "If no type is specified, the whole WhatsLeft will be cleared"
             + "clear/clear ev/clear ts\n"
