@@ -72,7 +72,7 @@ public class MainApp extends Application {
         initEventsCenter();
 
         initNotifications();
-        
+
         initOverdueTimer(model);
     }
 
@@ -173,7 +173,7 @@ public class MainApp extends Application {
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
-    
+
     private static void initOverdueTimer(Model model) {
     	ot = new OverdueTimer(model);
     	ot.start();
