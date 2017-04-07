@@ -17,9 +17,9 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
     private static final String PRIORITY = "/images/yellow_exclamation_mark.png";
+    public static final String COMPLETED_STYLE_CLASS = "completed";
     public static final String OVERDUE_STYLE_CLASS = "overdue";
     public static final String PENDING_STYLE_CLASS = "pending";
-    public static final String PRIORITY_STYLE_CLASS = "priority";
 
     @FXML
     private Label name;
@@ -38,21 +38,21 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Pane colourTag;
     @FXML
+    private Pane completedColourTag;
+    @FXML
     private ImageView priorityMark;
 
     private Image priority = new Image(PRIORITY);
-    private ReadOnlyTask task;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        this.task = task;
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         date.setText(task.getDate().value);
-        setDates();
-        setPrepositionForDates();
+        setDates(task);
+        setPrepositionForDates(task);
         setStatusForTask(task);
-        setImageToIndicatePriority();
+        setImageToIndicatePriority(task);
     }
 
     //@@author A0139926R
@@ -72,11 +72,14 @@ public class TaskCard extends UiPart<Region> {
             } else {
                 setStyleToIndicatePending();
             }
+            if (task.getIsCompleted()) {
+                setStyleToIndicateCompleted(task);
+            }
         }
     }
 
     //@@author A0139154E
-    private void setDates() {
+    private void setDates(ReadOnlyTask task) {
         if (task.getEndDate().value.equals("")) {
             endDate.setText("");
         } else {
@@ -84,7 +87,7 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private void setPrepositionForDates() {
+    private void setPrepositionForDates(ReadOnlyTask task) {
         boolean dateIsEmpty = task.getDate().value.equals("");
         boolean endDateIsEmpty = task.getEndDate().value.equals("");
         if (dateIsEmpty && !endDateIsEmpty) {
@@ -104,7 +107,11 @@ public class TaskCard extends UiPart<Region> {
         colourTag.getStyleClass().add(PENDING_STYLE_CLASS);
     }
 
-    private void setImageToIndicatePriority() {
+    private void setStyleToIndicateCompleted(ReadOnlyTask task) {
+        colourTag.getStyleClass().add(COMPLETED_STYLE_CLASS);
+    }
+
+    private void setImageToIndicatePriority(ReadOnlyTask task) {
         if (task.getPriority().value.equals("High")) {
             priorityMark.setImage(priority);
         }
