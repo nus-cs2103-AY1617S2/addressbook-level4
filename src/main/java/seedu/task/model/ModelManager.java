@@ -158,10 +158,35 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public synchronized void truncateOverdueList() {
+    	overdueTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
+        Date currentDate = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> {
+            try {
+                return df.parse(s.getDate().toString()).before(currentDate);
+            } catch (ParseException e) {
+                return false;
+            }
+        };
+        overdueTasks.setPredicate(pred);
+        try {
+			taskManager.setOverdueTasks(overdueTasks);
+		} catch (DuplicateTaskException e) {
+			assert false : "There will be no duplicated tasks";
+		}
+    }
+
     //@@author A0135762A
     @Override
     public void updateUpcomingTaskList() {
-        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
         Date currentDate = new Date();
 
         Calendar c = Calendar.getInstance();
@@ -198,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateOverdueTaskList() {
-        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
         Date currentDate = new Date();
 
         Calendar c = Calendar.getInstance();

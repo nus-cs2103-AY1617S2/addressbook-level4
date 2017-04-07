@@ -33,7 +33,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.task11);
+        assertAddSuccess(td.task22);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
