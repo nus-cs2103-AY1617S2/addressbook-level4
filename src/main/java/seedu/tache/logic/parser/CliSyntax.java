@@ -21,21 +21,21 @@ public class CliSyntax {
 
     /* Parameter names definitions */
     public static final String PARAMETER_NAME = "name";
-    public static final String PARAMETER_2_NAME = "n";
+    public static final String PARAMETER_NAME_2 = "n";
     public static final String PARAMETER_START_DATE = "start_date";
-    public static final String PARAMETER_2_START_DATE = "startdate";
-    public static final String PARAMETER_3_START_DATE = "sd";
+    public static final String PARAMETER_START_DATE_2 = "startdate";
+    public static final String PARAMETER_START_DATE_3 = "sd";
     public static final String PARAMETER_END_DATE = "end_date";
-    public static final String PARAMETER_2_END_DATE = "enddate";
-    public static final String PARAMETER_3_END_DATE = "ed";
+    public static final String PARAMETER_END_DATE_2 = "enddate";
+    public static final String PARAMETER_END_DATE_3 = "ed";
     public static final String PARAMETER_START_TIME = "start_time";
-    public static final String PARAMETER_2_START_TIME = "starttime";
-    public static final String PARAMETER_3_START_TIME = "st";
+    public static final String PARAMETER_START_TIME_2 = "starttime";
+    public static final String PARAMETER_START_TIME_3 = "st";
     public static final String PARAMETER_END_TIME = "end_time";
-    public static final String PARAMETER_2_END_TIME = "endtime";
-    public static final String PARAMETER_3_END_TIME = "et";
+    public static final String PARAMETER_END_TIME_2 = "endtime";
+    public static final String PARAMETER_END_TIME_3 = "et";
     public static final String PARAMETER_TAG = "tag";
-    public static final String PARAMETER_2_TAG = "t";
+    public static final String PARAMETER_TAG_2 = "t";
 
     /* List filter definitions */
     public static final String FILTER_COMPLETED = "completed";
