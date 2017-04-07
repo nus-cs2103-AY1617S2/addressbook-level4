@@ -1,130 +1,214 @@
-//package guitests;
-//
-////import static org.junit.Assert.assertTrue;
-//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//
-//import org.junit.Test;
-//
-////import guitests.guihandles.ActivityCardHandle;
-//
-//import seedu.address.commons.core.Messages;
-//import seedu.address.logic.commands.EditCommand;
-//import seedu.address.model.person.Location;
-////import seedu.address.model.person.Priority;
-//import seedu.address.model.tag.Tag;
-//
-//// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-//public class EditCommandTest extends WhatsLeftGuiTest {
-//
-//    // The list of activities in the activity list panel is expected to match this list.
-//    // This list is updated with every successful call to assertEditSuccess().
-//    TestActivity[] expectedActivitiesList = td.getTypicalActivities();
-//    /*
-//    @Test
-//    public void edit_allFieldsSpecified_success() throws Exception {
-//        String detailsToEdit = "Bobby l/Block 123, Bobby Street 3 ta/husband";
-//        int whatsLeftIndex = 1;
-//
-//        TestActivity editedActivity = new ActivityBuilder().withDescription("Bobby").withStartTime("0900")
-//                .withLocation("Block 123, Bobby Street 3").withTags("husband").build();
-//
-//        assertEditSuccess(whatsLeftIndex, whatsLeftIndex, detailsToEdit, editedActivity);
-//    }
-//    */
-//    @Test
-//    public void edit_notAllFieldsSpecified_success() throws Exception {
-//        String detailsToEdit = "ta/sweetie ta/bestie";
-//        int whatsLeftIndex = 2;
-//
-//        TestActivity activityToEdit = expectedActivitiesList[whatsLeftIndex - 1];
-//        TestActivity editedActivity = new ActivityBuilder(activityToEdit).withTags("sweetie", "bestie").build();
-//
-//        assertEditSuccess(whatsLeftIndex, whatsLeftIndex, detailsToEdit, editedActivity);
-//    }
-//
-//    @Test
-//    public void edit_clearTags_success() throws Exception {
-//        String detailsToEdit = "ta/";
-//        int whatsLeftIndex = 2;
-//
-//        TestActivity activityToEdit = expectedActivitiesList[whatsLeftIndex - 1];
-//        TestActivity editedActivity = new ActivityBuilder(activityToEdit).withTags().build();
-//
-//        assertEditSuccess(whatsLeftIndex, whatsLeftIndex, detailsToEdit, editedActivity);
-//    }
-//
-//    @Test
-//    public void edit_findThenEdit_success() throws Exception {
-//        commandBox.runCommand("find CS2103");
-//
-//        String detailsToEdit = "Belle";
-//        int filteredActivityListIndex = 1;
-//        int whatsLeftIndex = 1;
-//
-//        TestActivity activityToEdit = expectedActivitiesList[whatsLeftIndex - 1];
-//        TestActivity editedActivity = new ActivityBuilder(activityToEdit).withDescription("Belle").build();
-//
-//        assertEditSuccess(filteredActivityListIndex, whatsLeftIndex, detailsToEdit, editedActivity);
-//    }
-//
-//    @Test
-//    public void edit_missingActivityIndex_failure() {
-//        commandBox.runCommand("edit Bobby");
-//        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-//    }
-//
-//    @Test
-//    public void edit_invalidActivityIndex_failure() {
-//        commandBox.runCommand("edit ev 8 Bobby");
-//        assertResultMessage(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-//    }
-//
-//    @Test
-//    public void edit_noFieldsSpecified_failure() {
-//        commandBox.runCommand("edit ev 1");
-//        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-//
-//        commandBox.runCommand("edit ev 1  ");
-//        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-//    }
-//
-//    @Test
-//    public void edit_invalidValues_failure() {
-//        commandBox.runCommand("edit ev 1 l/");
-//        assertResultMessage(Location.MESSAGE_LOCATION_CONSTRAINTS);
-//
-//        commandBox.runCommand("edit ev 1 ta/*&");
-//        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-//    }
-//
-//    @Test
-//    public void edit_duplicateActivity_failure() {
-//        commandBox.runCommand("edit ev 3 CS2103 TUT 1 sd/200517 st/0900 ed/200517 et/1000"
-//                                + "l/123, Jurong West Ave 6, #08-111 ta/friends");
-//        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_EVENT);
-//    }
-//
-//    /**
-//     * Checks whether the edited activity has the correct updated details.
-//     *
-//     * @param filteredActivityListIndex index of activity to edit in filtered list
-//     * @param whatsLeftIndex index of activity to edit in the WhatsLeft.
-//     *      Must refer to the same activity as {@code filteredActivityListIndex}
-//     * @param detailsToEdit details to edit the activity with as input to the edit command
-//     * @param editedActivity the expected activity after editing the activity's details
-//     */
-//    private void assertEditSuccess(int filteredActivityListIndex, int whatsLeftIndex,
-//                                    String detailsToEdit, TestActivity editedActivity) {
-//        commandBox.runCommand("edit ev " + filteredActivityListIndex + " " + detailsToEdit);
-//
-//        // confirm the new card contains the right data
-//        //ActivityCardHandle editedCard = activityListPanel.navigateToActivity(
-//        //        editedActivity.getDescription().description);
-//        //assertMatching(editedActivity, editedCard);
-//
-//        // confirm the list now contains all previous activities plus the activity with updated details
-//        expectedActivitiesList[whatsLeftIndex - 1] = editedActivity;
-//        //assertTrue(activityListPanel.isListMatching(expectedActivitiesList));
-//        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_ACTIVITY_SUCCESS, editedActivity));
-//    }
-//}
+package guitests;
+
+import static org.junit.Assert.assertTrue;
+import static seedu.whatsleft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import org.junit.Test;
+
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.TaskCardHandle;
+
+import seedu.whatsleft.commons.core.Messages;
+import seedu.whatsleft.logic.commands.EditCommand;
+import seedu.whatsleft.model.activity.ByDate;
+import seedu.whatsleft.model.activity.Priority;
+import seedu.whatsleft.model.activity.StartTime;
+import seedu.whatsleft.model.tag.Tag;
+import seedu.whatsleft.testutil.EventBuilder;
+import seedu.whatsleft.testutil.TaskBuilder;
+import seedu.whatsleft.testutil.TestEvent;
+import seedu.whatsleft.testutil.TestTask;
+import seedu.whatsleft.testutil.TestUtil;
+
+// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
+public class EditCommandTest extends WhatsLeftGuiTest {
+
+    // The list of events in the event list panel is expected to match this list.
+    // This list is updated with every successful call to assertEditSuccess().
+    TestEvent[] filteredEventList = TestUtil.getFilteredTestEvents(te.getTypicalEvents());
+
+    // The list of tasks in the task list panel is expected to match this list.
+    // This list is updated with every successful call to assertEditSuccess().
+    TestTask[] filteredTaskList = TestUtil.getFilteredTestTasks(tt.getTypicalTasks());
+
+    @Test
+    public void editEventWithAllFieldsSpecified() throws Exception {
+        String detailsToEdit = "CS2102 Demostration st/0900 sd/220617 et/1000 ed/220617 l/I Cube ta/demo";
+        int filteredEventIndex = 1;
+        int eventListPanelIndex = 1;
+        TestEvent editedEvent = new EventBuilder().withDescription("CS2102 Demostration")
+                 .withStartTime("0900").withStartDate("220617").withEndTime("1000").withEndDate("220617")
+                .withLocation("I Cube").withTags("demo").build();
+
+        assertEditEventSuccess(eventListPanelIndex, filteredEventIndex, detailsToEdit, editedEvent);
+    }
+
+    @Test
+    public void editEventWithoutAllFieldsSpecified() throws Exception {
+        String detailsToEdit = "l/NUS";
+
+        //edit the last event in the event list
+        int filteredEventIndex = filteredEventList.length;
+        int eventListPanelIndex = filteredEventIndex;
+        TestEvent eventToEdit = filteredEventList[filteredEventIndex - 1];
+        TestEvent editedEvent = new EventBuilder(eventToEdit).withLocation("NUS").build();
+
+        assertEditEventSuccess(eventListPanelIndex, filteredEventIndex, detailsToEdit, editedEvent);
+    }
+
+    @Test
+    public void editEventClearTags() throws Exception {
+        String detailsToEdit = "ta/";
+
+        //edit the middle event in the event list
+        int filteredEventIndex = filteredEventList.length / 2;
+        int eventListPanelIndex = filteredEventIndex;
+        TestEvent eventToEdit = filteredEventList[filteredEventIndex - 1];
+        TestEvent editedEvent = new EventBuilder(eventToEdit).withTags().build();
+
+        assertEditEventSuccess(eventListPanelIndex, filteredEventIndex, detailsToEdit, editedEvent);
+    }
+
+    @Test
+    public void editEventAfterFind() throws Exception {
+        commandBox.runCommand("find CS2103");
+
+        String detailsToEdit = "l/Changi Airport";
+        int filteredEventIndex = 2;
+        int eventListPanelIndex = 1;
+        TestEvent eventToEdit = filteredEventList[filteredEventIndex - 1];
+        TestEvent editedEvent = new EventBuilder(eventToEdit).withLocation("Changi Airport").build();
+
+        assertEditEventSuccess(eventListPanelIndex, filteredEventIndex, detailsToEdit, editedEvent);
+    }
+
+    @Test
+    public void editWithoutTypeSpecified() {
+        commandBox.runCommand("edit 1 l/NTU");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void editWithInvalidIndex() {
+        // invalid task index
+        int invalidIndex = filteredEventList.length + 1;
+        commandBox.runCommand("edit ev " + invalidIndex + " st/1200");
+        assertResultMessage(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+
+        // invalid task index
+        invalidIndex = filteredTaskList.length + 1;
+        commandBox.runCommand("edit ts " + invalidIndex + " bt/2230");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void editWithNoFieldSpecified() {
+        commandBox.runCommand("edit ev 1");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+
+        commandBox.runCommand("edit ts 1 ");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void editEventWithInvalidValues() {
+        commandBox.runCommand("edit ev 1 st/3000");
+        assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+
+        commandBox.runCommand("edit ev 1 ta/*");
+        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
+
+    @Test
+    public void editDuplicateEvent() {
+        commandBox.runCommand("edit ev 1 CS2103 Tutorial st/0900 sd/280717 et/1000 ed/280717 l/COM1-B103 ta/demo");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_EVENT);
+    }
+
+    @Test
+    public void editTaskWithAllFieldsSpecified() throws Exception {
+        String detailsToEdit = "CS2102 Project Report p/high bt/2200 bd/210617 l/IVLE ta/PDF";
+        int filteredTaskIndex = 1;
+        int taskListPanelIndex = filteredTaskIndex;
+        TestTask editedTask = new TaskBuilder().withDescription("CS2102 Project Report")
+                 .withPriority("high").withByTime("2200").withByDate("210617")
+                 .withLocation("IVLE").withTags("PDF").build();
+
+        assertEditTaskSuccess(taskListPanelIndex, filteredTaskIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void editTaskWithoutAllFieldsSpecified() throws Exception {
+        String detailsToEdit = "bt/2330";
+
+        //edit the last task in the task list
+        int filteredTaskIndex = filteredTaskList.length;
+        int taskListPanelIndex = filteredTaskIndex;
+        TestTask taskToEdit = filteredTaskList[filteredTaskIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withByTime("2330").build();
+
+        assertEditTaskSuccess(taskListPanelIndex, filteredTaskIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void editTaskWithInvalidValues() {
+        commandBox.runCommand("edit ts 1 p/important");
+        assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
+
+        commandBox.runCommand("edit ts 1 bd/320917");
+        assertResultMessage(ByDate.MESSAGE_BYDATE_CONSTRAINTS);
+    }
+
+    @Test
+    public void editDuplicateTask() {
+        //check command word case insensitive
+        commandBox.runCommand("edit ts 1 LSM Project Report p/high bt/2300 bd/010517 l/IVLE ta/softcopy");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
+    }
+
+    /**
+     * Checks whether the edited event has the correct updated details.
+     *
+     * @param panelListIndex index of task to edit in the current list shown in the event panel
+     * @param filteredEventListIndex index of event to edit in filtered event list
+     * @param detailsToEdit details to edit the event with as input to the edit command
+     * @param editedEvent the expected event after editing the event's details
+     */
+    private void assertEditEventSuccess(int eventListPanelIndex, int filteredEventListIndex,
+            String detailsToEdit, TestEvent editedEvent) {
+        commandBox.runCommand("edit ev " + eventListPanelIndex + " " + detailsToEdit);
+
+        // confirm the new card contains the right data
+        EventCardHandle editedCard = eventListPanel.navigateToEvent(editedEvent.getAsText());
+        assertMatchingEvent(editedEvent, editedCard);
+
+        // confirm the list now contains all previous events plus the event with updated details
+        filteredEventList[filteredEventListIndex - 1] = editedEvent;
+        filteredEventList = TestUtil.getFilteredTestEvents(filteredEventList);
+        assertTrue(eventListPanel.isListMatching(filteredEventList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
+    }
+
+    /**
+     * Checks whether the edited task has the correct updated details.
+     *
+     * @param panelListIndex index of task to edit in the current list shown in task list panel
+     * @param filteredTaskListIndex index of task to edit in filtered task list
+     * @param detailsToEdit details to edit the event with as input to the edit command
+     * @param editedTask the expected event after editing the task's details
+     */
+    private void assertEditTaskSuccess(int taskListPanelIndex, int filteredTaskListIndex,
+            String detailsToEdit, TestTask editedTask) {
+        commandBox.runCommand("edit ts " + taskListPanelIndex + " " + detailsToEdit);
+
+        // confirm the new card contains the right data
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getAsText());
+        assertMatchingTask(editedTask, editedCard);
+
+        // confirm the list now contains all previous events plus the event with updated details
+        filteredTaskList[filteredTaskListIndex - 1] = editedTask;
+        filteredTaskList = TestUtil.getFilteredTestTasks(filteredTaskList);
+        assertTrue(taskListPanel.isListMatching(filteredTaskList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+    }
+}
