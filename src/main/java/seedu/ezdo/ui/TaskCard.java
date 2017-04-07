@@ -81,6 +81,7 @@ public class TaskCard extends UiPart<Region> {
         setStartDate(task);
         setDueDate(task);
         recur.setText(task.getRecur().value);
+        setStatus(task);
         initTags(task);
     }
 
@@ -170,7 +171,8 @@ public class TaskCard extends UiPart<Region> {
     private void setStatus(ReadOnlyTask task) {
         if (task.getDone()) {
             status.setGraphic(new ImageView("/images/tick.png"));
-        } else {
+        }
+        if (task.getStarted()) {
             status.setGraphic(new ImageView("/images/wip.png"));
         }
     }

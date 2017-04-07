@@ -40,7 +40,7 @@ public class UniqueTaskListTest {
         when(mock.remove(task)).thenReturn(false);
         utl.remove(task);
     }
-
+//@@author
     @Test
     public void hashCode_equals() {
         assertTrue(utl.hashCode() == utl.hashCode());

@@ -19,6 +19,9 @@ public class IsSortedAscendingChangedEvent extends BaseEvent {
         return this.getClass().getSimpleName();
     }
 
+    /**
+     * Returns the new isSortedAscending state.
+     */
     public Boolean getNewIsSortedAscending() {
         return isSortedAscending;
     }

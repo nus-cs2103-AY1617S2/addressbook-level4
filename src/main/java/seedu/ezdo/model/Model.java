@@ -47,6 +47,9 @@ public interface Model {
     /** Toggles the tasks as done/undone. */
     boolean toggleTasksDone(ArrayList<Task> tasksToToggle);
 
+    /** Toggles the tasks as done/undone. */
+    boolean toggleTasksSelect(ArrayList<Task> tasksToToggle);
+
     /** Undo the previous undoable (add/edit/clear/kill/done) command
      * @throws EmptyStackException if there are no commands to undo*/
     void undo() throws EmptyStackException;
@@ -72,7 +75,7 @@ public interface Model {
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** Updates the filter of the filtered task list to show all undone tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by multiple fields*/

@@ -16,6 +16,7 @@ public class Task implements ReadOnlyTask {
     private TaskDate startDate;
     private TaskDate dueDate;
     private boolean done;
+    private boolean hasStarted;
     private Recur recur;
 
     private UniqueTagList tags;
@@ -33,6 +34,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.done = false;
+        this.hasStarted = false;
     }
 
     /**
@@ -51,12 +53,24 @@ public class Task implements ReadOnlyTask {
     public void setDone(boolean doneStatus) {
         this.done = doneStatus;
     }
+    
+    public void setStarted(boolean status) {
+        this.hasStarted = status;
+    }
 
     public void toggleDone() {
         if (this.done) {
             done = false;
         } else {
             done = true;
+        }
+    }
+
+    public void toggleStart() {
+        if (this.hasStarted) {
+            hasStarted = false;
+        } else {
+            hasStarted = true;
         }
     }
 
@@ -83,6 +97,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public boolean getDone() {
         return this.done;
+    }
+
+    @Override
+    public boolean getStarted() {
+        return this.hasStarted;
     }
 
     @Override

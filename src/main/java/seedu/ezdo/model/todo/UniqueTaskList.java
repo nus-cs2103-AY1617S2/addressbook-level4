@@ -96,6 +96,7 @@ public class UniqueTaskList implements Iterable<Task> {
         for (final ReadOnlyTask task : tasks) {
             Task toAdd = new Task(task);
             toAdd.setDone(task.getDone());
+            toAdd.setStarted(task.getStarted());
             replacement.add(toAdd);
         }
         setTasks(replacement);
