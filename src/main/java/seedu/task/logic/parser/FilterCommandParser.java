@@ -13,15 +13,15 @@ import seedu.task.logic.commands.IncorrectCommand;
 public class FilterCommandParser {
 
     public Command parse(String args) {
-	args = args.toLowerCase();
-	args = args.trim();
-	final Matcher matcher = PATH_ARGS_FORMAT.matcher(args.trim());
-	if (!matcher.matches()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-	}
+        args = args.toLowerCase();
+        args = args.trim();
+        final Matcher matcher = PATH_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
-	final String keyword = matcher.group("keyword");
-	return new FilterCommand(keyword);
+        final String keyword = matcher.group("keyword");
+        return new FilterCommand(keyword);
     }
 
 }

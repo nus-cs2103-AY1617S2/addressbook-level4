@@ -11,13 +11,13 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-	assert model != null;
-	try {
-	    model.redo();
-	    return new CommandResult(String.format(MESSAGE_SUCCESS));
-	} catch (Exception e) {
-	    throw new CommandException(MESSAGE_FAIL);
-	}
+        assert model != null;
+        try {
+            model.redo();
+            return new CommandResult(String.format(MESSAGE_SUCCESS));
+        } catch (Exception e) {
+            throw new CommandException(MESSAGE_FAIL);
+        }
     }
 
 }

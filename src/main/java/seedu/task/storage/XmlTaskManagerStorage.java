@@ -29,12 +29,12 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     public String getTaskManagerFilePath() {
-	return FileNameHandler.getFileName();
+        return FileNameHandler.getFileName();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-	return readTaskManager(filePath);
+        return readTaskManager(filePath);
     }
 
     /**
@@ -45,24 +45,24 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      *             if the file is not in the correct format.
      */
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
-	    throws DataConversionException, FileNotFoundException {
-	assert filePath != null;
+            throws DataConversionException, FileNotFoundException {
+        assert filePath != null;
 
-	File taskManagerFile = new File(filePath);
+        File taskManagerFile = new File(filePath);
 
-	if (!taskManagerFile.exists()) {
-	    logger.info("Task Manager file " + taskManagerFile + " not found");
-	    return Optional.empty();
-	}
+        if (!taskManagerFile.exists()) {
+            logger.info("Task Manager file " + taskManagerFile + " not found");
+            return Optional.empty();
+        }
 
-	ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-	return Optional.of(taskManagerOptional);
+        return Optional.of(taskManagerOptional);
     }
 
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-	saveTaskManager(taskManager, filePath);
+        saveTaskManager(taskManager, filePath);
     }
 
     /**
@@ -71,22 +71,22 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      *            location of the data. Cannot be null
      */
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
-	assert taskManager != null;
-	assert filePath != null;
+        assert taskManager != null;
+        assert filePath != null;
 
-	// if(PathCommand.getPath() != null){
-	// filePath = PathCommand.getPath();
-	// }
-	// filePath = "/Users/jlevy/";
+        // if(PathCommand.getPath() != null){
+        // filePath = PathCommand.getPath();
+        // }
+        // filePath = "/Users/jlevy/";
 
-	File file = new File(filePath);
-	FileUtil.createIfMissing(file);
-	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
     @Override
     public void setPathName(String pathName) {
-	filePath = pathName;
+        filePath = pathName;
     }
 
 }

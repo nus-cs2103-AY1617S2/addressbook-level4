@@ -10,15 +10,15 @@ public class UpdateBackupCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-	// TODO Auto-generated method stub
-	assert model != null;
-	try {
-	    model.updateBackup();
-	} catch (DuplicateTaskException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	return new CommandResult(COMMAND_MESSAGE);
+        // TODO Auto-generated method stub
+        assert model != null;
+        try {
+            model.updateBackup();
+        } catch (DuplicateTaskException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return new CommandResult(COMMAND_MESSAGE);
     }
 
 }

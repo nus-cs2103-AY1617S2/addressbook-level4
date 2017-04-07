@@ -14,20 +14,20 @@ public class TaskStatus {
 
     @Override
     public String toString() {
-	return status;
+        return status;
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof TaskStatus // instanceof handles nulls
-			&& this.status.equals(((TaskStatus) other).status)); // state
-									     // check
+        return other == this // short circuit if same object
+                || (other instanceof TaskStatus // instanceof handles nulls
+                        && this.status.equals(((TaskStatus) other).status)); // state
+                                                                             // check
     }
 
     @Override
     public int hashCode() {
-	return status.hashCode();
+        return status.hashCode();
     }
 }
 // @@author

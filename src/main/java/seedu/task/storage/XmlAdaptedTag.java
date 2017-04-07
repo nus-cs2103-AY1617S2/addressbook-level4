@@ -26,7 +26,7 @@ public class XmlAdaptedTag {
      *            future changes to this will not affect the created
      */
     public XmlAdaptedTag(Tag source) {
-	tagName = source.tagName;
+        tagName = source.tagName;
     }
 
     /**
@@ -37,7 +37,7 @@ public class XmlAdaptedTag {
      *             task
      */
     public Tag toModelType() throws IllegalValueException {
-	return new Tag(tagName);
+        return new Tag(tagName);
     }
 
 }

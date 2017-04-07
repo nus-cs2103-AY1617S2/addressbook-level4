@@ -15,14 +15,14 @@ public class LoadCommandParser {
      * returns a PathCommand object for execution.
      */
     public Command parse(String args) {
-	final Matcher matcher = PATH_ARGS_FORMAT.matcher(args.trim());
-	if (!matcher.matches()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
-	}
+        final Matcher matcher = PATH_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+        }
 
-	// keywords delimited by whitespace
-	final String path = matcher.group("keyword");
-	return new LoadCommand(path);
+        // keywords delimited by whitespace
+        final String path = matcher.group("keyword");
+        return new LoadCommand(path);
     }
 
 }

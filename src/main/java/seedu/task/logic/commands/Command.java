@@ -21,14 +21,14 @@ public abstract class Command {
      * @return summary message for persons displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
-	return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
+        return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
 
     /**
      * Raises an event to indicate an attempt to execute an incorrect command
      */
     protected void indicateAttemptToExecuteIncorrectCommand() {
-	EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
+        EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
     }
 
     /**
@@ -45,11 +45,11 @@ public abstract class Command {
      * dependencies.
      */
     public void setData(Model model) {
-	this.model = model;
+        this.model = model;
     }
 
     public boolean isUndoable() {
-	return false;
+        return false;
     }
 
 }

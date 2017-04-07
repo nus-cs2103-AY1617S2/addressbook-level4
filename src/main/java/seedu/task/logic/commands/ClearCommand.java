@@ -12,12 +12,12 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-	assert model != null;
-	model.resetData(new TaskManager());
-	return new CommandResult(MESSAGE_SUCCESS);
+        assert model != null;
+        model.resetData(new TaskManager());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     public boolean isUndoable() {
-	return true;
+        return true;
     }
 }

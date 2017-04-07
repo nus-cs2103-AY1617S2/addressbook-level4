@@ -54,29 +54,29 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
 
-	if (source.getTaskName() != null) {
-	    taskName = source.getTaskName().fullTaskName;
-	}
-	if (source.getTaskDate() != null) {
-	    taskDate = source.getTaskDate().value;
-	}
-	if (source.getTaskStartTime() != null) {
-	    taskStartTime = source.getTaskStartTime().value;
-	}
-	if (source.getTaskEndTime() != null) {
-	    taskEndTime = source.getTaskEndTime().value;
-	}
-	if (source.getTaskDescription() != null) {
-	    taskDescription = source.getTaskDescription();
-	}
-	if (source.getTaskStatus() != null) {
-	    taskStatus = source.getTaskStatus().toString();
-	}
-	tagged = new ArrayList<>();
+        if (source.getTaskName() != null) {
+            taskName = source.getTaskName().fullTaskName;
+        }
+        if (source.getTaskDate() != null) {
+            taskDate = source.getTaskDate().value;
+        }
+        if (source.getTaskStartTime() != null) {
+            taskStartTime = source.getTaskStartTime().value;
+        }
+        if (source.getTaskEndTime() != null) {
+            taskEndTime = source.getTaskEndTime().value;
+        }
+        if (source.getTaskDescription() != null) {
+            taskDescription = source.getTaskDescription();
+        }
+        if (source.getTaskStatus() != null) {
+            taskStatus = source.getTaskStatus().toString();
+        }
+        tagged = new ArrayList<>();
 
-	for (Tag tag : source.getTags()) {
-	    tagged.add(new XmlAdaptedTag(tag));
-	}
+        for (Tag tag : source.getTags()) {
+            tagged.add(new XmlAdaptedTag(tag));
+        }
     }
 
     /**
@@ -87,49 +87,49 @@ public class XmlAdaptedTask {
      *             task
      */
     public Task toModelType() throws IllegalValueException {
-	final List<Tag> taskTags = new ArrayList<>();
-	for (XmlAdaptedTag tag : tagged) {
-	    taskTags.add(tag.toModelType());
-	}
-	final TaskName taskName = new TaskName(this.taskName);
-	final Optional<TaskDate> taskDateOpt;
-	final Optional<TaskTime> taskStartTimeOpt;
-	final Optional<TaskTime> taskEndTimeOpt;
-	final Optional<String> taskDescriptionOpt;
-	final Optional<TaskStatus> taskStatusOpt;
-	if (this.taskDate == null) {
-	    taskDateOpt = Optional.ofNullable(null);
-	} else {
-	    taskDateOpt = Optional.ofNullable(new TaskDate(this.taskDate));
-	}
+        final List<Tag> taskTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            taskTags.add(tag.toModelType());
+        }
+        final TaskName taskName = new TaskName(this.taskName);
+        final Optional<TaskDate> taskDateOpt;
+        final Optional<TaskTime> taskStartTimeOpt;
+        final Optional<TaskTime> taskEndTimeOpt;
+        final Optional<String> taskDescriptionOpt;
+        final Optional<TaskStatus> taskStatusOpt;
+        if (this.taskDate == null) {
+            taskDateOpt = Optional.ofNullable(null);
+        } else {
+            taskDateOpt = Optional.ofNullable(new TaskDate(this.taskDate));
+        }
 
-	if (this.taskStartTime == null) {
-	    taskStartTimeOpt = Optional.ofNullable(null);
-	} else {
-	    taskStartTimeOpt = Optional.ofNullable(new TaskTime(this.taskStartTime));
-	}
+        if (this.taskStartTime == null) {
+            taskStartTimeOpt = Optional.ofNullable(null);
+        } else {
+            taskStartTimeOpt = Optional.ofNullable(new TaskTime(this.taskStartTime));
+        }
 
-	if (this.taskEndTime == null) {
-	    taskEndTimeOpt = Optional.ofNullable(null);
-	} else {
-	    taskEndTimeOpt = Optional.ofNullable(new TaskTime(this.taskEndTime));
-	}
+        if (this.taskEndTime == null) {
+            taskEndTimeOpt = Optional.ofNullable(null);
+        } else {
+            taskEndTimeOpt = Optional.ofNullable(new TaskTime(this.taskEndTime));
+        }
 
-	if (this.taskDescription == null) {
-	    taskDescriptionOpt = Optional.ofNullable(null);
-	} else {
-	    taskDescriptionOpt = Optional.ofNullable(this.taskDescription);
-	}
+        if (this.taskDescription == null) {
+            taskDescriptionOpt = Optional.ofNullable(null);
+        } else {
+            taskDescriptionOpt = Optional.ofNullable(this.taskDescription);
+        }
 
-	if (this.taskStatus == null) {
-	    taskStatusOpt = Optional.ofNullable(null);
-	} else {
-	    taskStatusOpt = Optional.ofNullable(new TaskStatus(this.taskStatus));
-	}
-	final UniqueTagList listOfTags = new UniqueTagList(taskTags);
+        if (this.taskStatus == null) {
+            taskStatusOpt = Optional.ofNullable(null);
+        } else {
+            taskStatusOpt = Optional.ofNullable(new TaskStatus(this.taskStatus));
+        }
+        final UniqueTagList listOfTags = new UniqueTagList(taskTags);
 
-	return new Task(taskName, taskDateOpt, taskStartTimeOpt, taskEndTimeOpt, taskDescriptionOpt, taskStatusOpt,
-		listOfTags);
+        return new Task(taskName, taskDateOpt, taskStartTimeOpt, taskEndTimeOpt, taskDescriptionOpt, taskStatusOpt,
+                listOfTags);
 
     }
 }

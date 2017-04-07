@@ -28,13 +28,13 @@ public abstract class UiPart<T> {
      */
     public UiPart(URL fxmlFileUrl) {
         assert fxmlFileUrl != null;
-	fxmlLoader = new FXMLLoader(fxmlFileUrl);
-	fxmlLoader.setController(this);
-	try {
-	    fxmlLoader.load();
-	} catch (IOException e) {
-	    throw new AssertionError(e);
-	}
+        fxmlLoader = new FXMLLoader(fxmlFileUrl);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new AssertionError(e);
+        }
     }
 
     /**
@@ -43,14 +43,14 @@ public abstract class UiPart<T> {
      * @see #UiPart(URL)
      */
     public UiPart(String fxmlFileName) {
-	this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
+        this(fxmlFileName != null ? MainApp.class.getResource(FXML_FILE_FOLDER + fxmlFileName) : null);
     }
 
     /**
      * Returns the root object of the scene graph of this UiPart.
      */
     public T getRoot() {
-	return fxmlLoader.getRoot();
+        return fxmlLoader.getRoot();
     }
 
     /**
@@ -58,16 +58,16 @@ public abstract class UiPart<T> {
      * @param event
      */
     protected void raise(BaseEvent event) {
-	EventsCenter.getInstance().post(event);
+        EventsCenter.getInstance().post(event);
     }
 
     /**
-     * Registers the object as an event handler at the {@link EventsCenter}
+     * Registers the object as an event handler at the {@link EventsCenter} 
      * @param handler
      *            usually {@code this}
      */
     protected void registerAsAnEventHandler(Object handler) {
-	EventsCenter.getInstance().registerHandler(handler);
+        EventsCenter.getInstance().registerHandler(handler);
     }
 
     /**
@@ -81,12 +81,12 @@ public abstract class UiPart<T> {
      * @return the created dialog, not yet made visible.
      */
     protected Stage createDialogStage(String title, Stage parentStage, Scene scene) {
-	Stage dialogStage = new Stage();
-	dialogStage.setTitle(title);
-	dialogStage.initModality(Modality.WINDOW_MODAL);
-	dialogStage.initOwner(parentStage);
-	dialogStage.setScene(scene);
-	return dialogStage;
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(title);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(parentStage);
+        dialogStage.setScene(scene);
+        return dialogStage;
     }
 
 }

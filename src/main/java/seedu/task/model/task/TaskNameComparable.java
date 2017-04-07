@@ -4,7 +4,7 @@ public class TaskNameComparable implements TaskComparable {
 
     @Override
     public int compareTo(Task x, Task y) {
-	return x.getTaskName().compareTo(y.getTaskName());
+        return x.getTaskName().compareTo(y.getTaskName());
     }
 
 }

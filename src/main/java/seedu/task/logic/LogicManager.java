@@ -25,25 +25,25 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Parser parser;
 
     public LogicManager(Model model, Storage storage) {
-	this.model = model;
-	this.parser = new Parser();
+        this.model = model;
+        this.parser = new Parser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
-	logger.info("----------------[USER COMMAND][" + commandText + "]");
-	Command command = parser.parseCommand(commandText);
-	command.setData(model);
-	if (command.isUndoable()) {
-	    UpdateBackupCommand ubc = new UpdateBackupCommand();
-	    ubc.setData(model);
-	    ubc.execute();
-	}
-	return command.execute();
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = parser.parseCommand(commandText);
+        command.setData(model);
+        if (command.isUndoable()) {
+            UpdateBackupCommand ubc = new UpdateBackupCommand();
+            ubc.setData(model);
+            ubc.execute();
+        }
+        return command.execute();
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
-	return model.getFilteredTaskList();
+        return model.getFilteredTaskList();
     }
 }

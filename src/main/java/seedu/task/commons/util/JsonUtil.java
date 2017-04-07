@@ -29,18 +29,18 @@ public class JsonUtil {
 
     private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-	    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-	    .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
-	    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-	    .registerModule(new SimpleModule("SimpleModule").addSerializer(Level.class, new ToStringSerializer())
-		    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
+            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+            .registerModule(new SimpleModule("SimpleModule").addSerializer(Level.class, new ToStringSerializer())
+                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
 
     static <T> void serializeObjectToJsonFile(File jsonFile, T objectToSerialize) throws IOException {
-	FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
+        FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
     }
 
     static <T> T deserializeObjectFromJsonFile(File jsonFile, Class<T> classOfObjectToDeserialize) throws IOException {
-	return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
+        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
 
     /**
@@ -56,27 +56,27 @@ public class JsonUtil {
      *             if the file format is not as expected.
      */
     public static <T> Optional<T> readJsonFile(String filePath, Class<T> classOfObjectToDeserialize)
-	    throws DataConversionException {
+            throws DataConversionException {
 
-	assert filePath != null;
+        assert filePath != null;
 
-	File file = new File(filePath);
+        File file = new File(filePath);
 
-	if (!file.exists()) {
-	    logger.info("Json file " + file + " not found");
-	    return Optional.empty();
-	}
+        if (!file.exists()) {
+            logger.info("Json file " + file + " not found");
+            return Optional.empty();
+        }
 
-	T jsonFile;
+        T jsonFile;
 
-	try {
-	    jsonFile = deserializeObjectFromJsonFile(file, classOfObjectToDeserialize);
-	} catch (IOException e) {
-	    logger.warning("Error reading from jsonFile file " + file + ": " + e);
-	    throw new DataConversionException(e);
-	}
+        try {
+            jsonFile = deserializeObjectFromJsonFile(file, classOfObjectToDeserialize);
+        } catch (IOException e) {
+            logger.warning("Error reading from jsonFile file " + file + ": " + e);
+            throw new DataConversionException(e);
+        }
 
-	return Optional.of(jsonFile);
+        return Optional.of(jsonFile);
     }
 
     /**
@@ -90,10 +90,10 @@ public class JsonUtil {
      *             if there was an error during writing to the file
      */
     public static <T> void saveJsonFile(T jsonFile, String filePath) throws IOException {
-	assert jsonFile != null;
-	assert filePath != null;
+        assert jsonFile != null;
+        assert filePath != null;
 
-	serializeObjectToJsonFile(new File(filePath), jsonFile);
+        serializeObjectToJsonFile(new File(filePath), jsonFile);
     }
 
     /**
@@ -104,7 +104,7 @@ public class JsonUtil {
      * @return The instance of T with the specified values in the JSON string
      */
     public static <T> T fromJsonString(String json, Class<T> instanceClass) throws IOException {
-	return objectMapper.readValue(json, instanceClass);
+        return objectMapper.readValue(json, instanceClass);
     }
 
     /**
@@ -117,32 +117,32 @@ public class JsonUtil {
      * @return JSON data representation of the given class instance, in string
      */
     public static <T> String toJsonString(T instance) throws JsonProcessingException {
-	return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
     }
 
     private static class LevelDeserializer extends FromStringDeserializer<Level> {
 
-	protected LevelDeserializer(Class<?> vc) {
-	    super(vc);
-	}
+        protected LevelDeserializer(Class<?> vc) {
+            super(vc);
+        }
 
-	@Override
-	protected Level _deserialize(String value, DeserializationContext ctxt) throws IOException {
-	    return getLoggingLevel(value);
-	}
+        @Override
+        protected Level _deserialize(String value, DeserializationContext ctxt) throws IOException {
+            return getLoggingLevel(value);
+        }
 
-	/**
-	 * Gets the logging level that matches loggingLevelString
-	 * <p>
-	 * Returns null if there are no matches
-	 */
-	private Level getLoggingLevel(String loggingLevelString) {
-	    return Level.parse(loggingLevelString);
-	}
+        /**
+         * Gets the logging level that matches loggingLevelString
+         * <p>
+         * Returns null if there are no matches
+         */
+        private Level getLoggingLevel(String loggingLevelString) {
+            return Level.parse(loggingLevelString);
+        }
 
-	@Override
-	public Class<Level> handledType() {
-	    return Level.class;
-	}
+        @Override
+        public Class<Level> handledType() {
+            return Level.class;
+        }
     }
 }

@@ -16,57 +16,55 @@ public class FileUtil {
     }
 
     public static void createIfMissing(File file) throws IOException {
-	if (!isFileExists(file)) {
-	    createFile(file);
-	}
+        if (!isFileExists(file)) {
+            createFile(file);
+        }
     }
 
     /**
      * Creates a file if it does not exist along with its missing parent
      * directories
-     *
      * @return true if file is created, false if file already exists
      */
     public static boolean createFile(File file) throws IOException {
-	if (file.exists()) {
-	    return false;
-	}
+        if (file.exists()) {
+            return false;
+        }
 
-	createParentDirsOfFile(file);
+        createParentDirsOfFile(file);
 
-	return file.createNewFile();
+        return file.createNewFile();
     }
 
     /**
      * Creates the given directory along with its parent directories
-     *
      * @param dir
      *            the directory to be created; assumed not null
      * @throws IOException
      *             if the directory or a parent directory cannot be created
      */
     public static void createDirs(File dir) throws IOException {
-	if (!dir.exists() && !dir.mkdirs()) {
-	    throw new IOException("Failed to make directories of " + dir.getName());
-	}
+        if (!dir.exists() && !dir.mkdirs()) {
+            throw new IOException("Failed to make directories of " + dir.getName());
+        }
     }
 
     /**
      * Creates parent directories of file if it has a parent directory
      */
     public static void createParentDirsOfFile(File file) throws IOException {
-	File parentDir = file.getParentFile();
+        File parentDir = file.getParentFile();
 
-	if (parentDir != null) {
-	    createDirs(parentDir);
-	}
+        if (parentDir != null) {
+            createDirs(parentDir);
+        }
     }
 
     /**
      * Assumes file exists
      */
     public static String readFromFile(File file) throws IOException {
-	return new String(Files.readAllBytes(file.toPath()), CHARSET);
+        return new String(Files.readAllBytes(file.toPath()), CHARSET);
     }
 
     /**
@@ -74,7 +72,7 @@ public class FileUtil {
      * yet.
      */
     public static void writeToFile(File file, String content) throws IOException {
-	Files.write(file.toPath(), content.getBytes(CHARSET));
+        Files.write(file.toPath(), content.getBytes(CHARSET));
     }
 
     /**
@@ -86,9 +84,9 @@ public class FileUtil {
      *         {@code File.separator}
      */
     public static String getPath(String pathWithForwardSlash) {
-	assert pathWithForwardSlash != null;
-	assert pathWithForwardSlash.contains("/");
-	return pathWithForwardSlash.replace("/", File.separator);
+        assert pathWithForwardSlash != null;
+        assert pathWithForwardSlash.contains("/");
+        return pathWithForwardSlash.replace("/", File.separator);
     }
 
 }
