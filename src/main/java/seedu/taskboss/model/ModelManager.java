@@ -86,7 +86,6 @@ public class ModelManager extends ComponentManager implements Model {
         TaskBoss currentTaskList = new TaskBoss(this.taskBoss);
         taskBoss.resetData(taskbossHistory.pop());
         taskbossUndoHistory.push(currentTaskList);
-        updateFilteredListToShowAll();
 
         indicateTaskBossChanged();
     }
@@ -103,7 +102,6 @@ public class ModelManager extends ComponentManager implements Model {
         TaskBoss previousTaskList = new TaskBoss(this.taskBoss);
         taskBoss.resetData(taskbossUndoHistory.pop());
         taskbossHistory.push(previousTaskList);
-        updateFilteredListToShowAll();
         undoInputList.push("redo");
         indicateTaskBossChanged();
     }
@@ -163,6 +161,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void sortTasks(SortBy sortType) throws IllegalValueException {
         assert sortType != null;
+        if (taskbossHistory != null) {
+            taskbossHistory.push(new TaskBoss(this.taskBoss));
+        }
         this.currentSortType = sortType;
         taskBoss.sortTasks(sortType);
         indicateTaskBossChanged();
