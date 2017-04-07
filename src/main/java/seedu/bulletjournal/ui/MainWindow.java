@@ -16,7 +16,6 @@ import seedu.bulletjournal.commons.events.ui.ExitAppRequestEvent;
 import seedu.bulletjournal.commons.util.FxViewUtil;
 import seedu.bulletjournal.logic.Logic;
 import seedu.bulletjournal.model.UserPrefs;
-import seedu.bulletjournal.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,7 +32,6 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private TaskListPanel taskListPanel;
     private Config config;
 
@@ -113,7 +111,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
@@ -125,7 +122,6 @@ public class MainWindow extends UiPart<Region> {
      * Decides what to show on main window when the application initializes.
      */
     public void fillInnerPartsAtStart() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getUndoneTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getBulletJournalFilePath());
@@ -211,13 +207,4 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
-    public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
 }
