@@ -70,6 +70,15 @@ public class TypicalTestTasks {
     }
     //@@author
 
+    //@@author A0141872E
+    public TestTask[] getUndoneTypicalTasks(){
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
+    }
+
+    public TestTask[] getFloatingTypicalTasks(){
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
+    }//@@author
+
     public AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         loadAddressBookWithSampleData(ab);
