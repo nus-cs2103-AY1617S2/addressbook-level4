@@ -12,7 +12,7 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " priority";
 
-    public static final String MESSAGE_SORT_CONSTRAINTS = "Sort can only take in 'all', 'status', 'priority', "
+    public static final String MESSAGE_SORT_CONSTRAINTS = "Sort can only take in 'all', 'priority', "
             + "'start', 'end' as parameters";
 
     public static final String MESSAGE_SUCCESS = "Sorted all tasks by ";
