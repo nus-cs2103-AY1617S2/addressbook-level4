@@ -116,16 +116,16 @@ public class EditCommandTest extends TaskBossGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Ensure");
+        commandBox.runCommand("find Birthday");
 
-        String detailsToEdit = "Code quality";
+        String detailsToEdit = "Birthday prepare";
         int filteredTaskListIndex = 1;
-        int taskBossIndex = 2;
+        int taskBossIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskBossIndex - 1];
+        System.out.println("taskToEdit: " + taskToEdit.getName().fullName);
 
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Code quality")
-                .withCategories("AllTasks").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Birthday prepare").build();
 
         assertEditSuccess(false, filteredTaskListIndex, taskBossIndex, detailsToEdit, editedTask);
     }
