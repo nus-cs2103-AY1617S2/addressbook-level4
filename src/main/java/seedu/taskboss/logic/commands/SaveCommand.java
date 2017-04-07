@@ -15,9 +15,10 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 public class SaveCommand extends Command {
 
     private static final String SYMBOL_ASTERISK = "*";
-    private static final String SYMBOL_CARET = "^";
-    private static final String SYMBOL_HASH = "#";
-    private static final String SYMBOL_PLUS = "+";
+    private static final String SYMBOL_LEFT = "<";
+    private static final String SYMBOL_RIGHT = ">";
+    private static final String SYMBOL_QUESTION = "?";
+    private static final String SYMBOL_BAR = "|";
     public static final String COMMAND_WORD = "save";
     public static final String COMMAND_WORD_SHORT = "sv";
 
@@ -41,8 +42,9 @@ public class SaveCommand extends Command {
         assert storage != null;
         File f = new File(filepath);
 
-        if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
-                filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
+        if (filepath.contains(SYMBOL_BAR) || filepath.contains (SYMBOL_LEFT) ||
+                filepath.contains (SYMBOL_RIGHT) || filepath.contains (SYMBOL_ASTERISK) ||
+                    filepath.contains (SYMBOL_QUESTION)) {
             throw new CommandException(MESSAGE_INVALID_FILEPATH);
         } else if (!f.canWrite()) {
             throw new CommandException(MESSAGE_INVALID_FILEPATH);
