@@ -29,7 +29,7 @@ public class FindCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        //checks if keyword contains potential dates 
+        //checks if keyword contains potential dates
         List<Date> listOfDates = DateParser.parse(args);
         String wantedDate = "";
         if (DateParser.checkValidDateFormat(listOfDates)) {
