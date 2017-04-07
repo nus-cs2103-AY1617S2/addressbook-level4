@@ -23,7 +23,8 @@ public class TaskTime {
     public final int MINUTE_ARRAY_INDEX = 0;
     public final int HOUR_ARRAY_INDEX = 1;
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try hhmm, hh:mm, or h:mm";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try "
+            + "hhmm, hh:mm, or h:mm";
 
     public TaskTime(String input) throws IllegalValueException {
 
