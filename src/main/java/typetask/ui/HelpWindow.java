@@ -28,7 +28,7 @@ public class HelpWindow extends UiPart<Region> {
 
     private Image commandSummaryImage = new Image(COMMAND_SUMMARY_IMAGE);
     //@@author
-    
+
     private final Stage dialogStage;
 
     public HelpWindow() {
