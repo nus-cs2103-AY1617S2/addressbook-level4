@@ -43,7 +43,7 @@ public class SaveCommand extends Command {
 
         if (filepath.contains(SYMBOL_PLUS) || filepath.contains (SYMBOL_HASH) ||
                 filepath.contains (SYMBOL_CARET) || filepath.contains (SYMBOL_ASTERISK)) {
-            return new CommandResult(MESSAGE_INVALID_FILEPATH);
+            throw new CommandException(MESSAGE_INVALID_FILEPATH);
         } else if (!f.canWrite()) {
             throw new CommandException(MESSAGE_INVALID_FILEPATH);
         }
@@ -54,7 +54,7 @@ public class SaveCommand extends Command {
             model.saveTaskboss();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
-            return new CommandResult(MESSAGE_INVALID_FILEPATH);
+        	throw new CommandException(MESSAGE_INVALID_FILEPATH);
         }
     }
 }
