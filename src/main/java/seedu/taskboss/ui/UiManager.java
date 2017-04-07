@@ -15,6 +15,7 @@ import seedu.taskboss.commons.core.Config;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskboss.commons.events.ui.CategoryListPanelViewingChangedEvent;
+import seedu.taskboss.commons.events.ui.JumpToCategoryListEvent;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskboss.commons.events.ui.TaskPanelViewingChangedEvent;
@@ -117,6 +118,12 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+    }
+
+    @Subscribe
+    private void handleJumpToCategoryListEvent(JumpToCategoryListEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getCategoryListPanel().scrollTo(event.category);
     }
 
     @Subscribe
