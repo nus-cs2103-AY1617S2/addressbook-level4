@@ -25,10 +25,6 @@ public class PersonCard extends UiPart<Region> {
     private Label start;
     @FXML
     private Label group;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
@@ -38,25 +34,22 @@ public class PersonCard extends UiPart<Region> {
         
         if (person.getEndDate() == null) {
             end.setVisible(false);
+            end.setStyle("-fx-font-size: 0pt;");
         } else {
-            end.setText("End date: " + person.getEndDate().value);
+            end.setText("Ends:   " + person.getEndDate());
         }
 
         if (person.getStartDate() == null) {
             start.setVisible(false);
+            start.setStyle("-fx-font-size: 0pt;");
         } else {
-            start.setText("Start Date: " + person.getStartDate().value);
+            start.setText("Starts: " + person.getStartDate());
         }
         
         group.setText(person.getGroup().value);
-        initTags(person);
         
         if (person.hasPassed()) {
             cardPane.setStyle("-fx-background-color: " + PASSED_HEX_COLOR);
         }
-    }
-
-    private void initTags(ReadOnlyPerson person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

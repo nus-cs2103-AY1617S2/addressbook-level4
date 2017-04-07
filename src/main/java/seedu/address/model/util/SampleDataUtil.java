@@ -50,8 +50,8 @@ public class SampleDataUtil {
             
             return Task.factory(
                     new Name(TaskNameGenerator.doAction(r).with().maybe(0.75f).in().maybe(0.75f).toString()),
-                    addStartDate && addEndDate ?  new StartDate(TaskDateGenerator.getStartDate(r)) : null,
-                    addEndDate ? new EndDate(TaskDateGenerator.getEndDate(r)) : null,
+                    addStartDate && addEndDate ?  TaskDateGenerator.getStartDate(r) : null,
+                    addEndDate ? TaskDateGenerator.getEndDate(r) : null,
                     new Group(TaskGroupGenerator.getGroup(r)),
                     UniqueTagList.build(r.nextBoolean() ? Tag.TAG_COMPLETE : Tag.TAG_INCOMPLETE));
           

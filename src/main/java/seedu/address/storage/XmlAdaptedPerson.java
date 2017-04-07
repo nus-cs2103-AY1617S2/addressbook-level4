@@ -57,11 +57,11 @@ public class XmlAdaptedPerson {
         }
         
         if (source.getEndDate() != null) {
-            end = source.getEndDate().value;
+            end = source.getEndDate().inputValue;
         }
         
         if (source.getStartDate() != null) {
-            start = source.getStartDate().value;
+            start = source.getStartDate().inputValue;
         }
     }
 
