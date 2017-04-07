@@ -3,7 +3,7 @@
     <tasks>
         <name>Pay Hall fees</name>
         <startDate></startDate>
-        <endDate>3/5/2017 6:00 PM, 4 weeks ago</endDate>
+        <endDate>3/5/2017 6:00 PM, 1 month ago</endDate>
         <remark></remark>
         <location>Raffles Hall</location>
         <done>true</done>
@@ -11,8 +11,8 @@
     </tasks>
     <tasks>
         <name>CS3243 Tutorial 5</name>
-        <startDate>3/10/2017 9:00 AM, 3 weeks ago</startDate>
-        <endDate>3/10/2017 10:00 AM, 3 weeks ago</endDate>
+        <startDate>3/10/2017 9:00 AM, 1 month ago</startDate>
+        <endDate>3/10/2017 10:00 AM, 1 month ago</endDate>
         <remark>Type written</remark>
         <location>COM1-01-09</location>
         <done>true</done>
@@ -21,8 +21,8 @@
     </tasks>
     <tasks>
         <name>NM3217 Flier Justification</name>
-        <startDate>3/7/2017 5:00 PM, 3 weeks ago</startDate>
-        <endDate>3/14/2017 6:00 PM, 2 weeks ago</endDate>
+        <startDate>3/7/2017 5:00 PM, 1 month ago</startDate>
+        <endDate>3/14/2017 6:00 PM, 3 weeks ago</endDate>
         <remark>2 page APA references</remark>
         <location>AS6-01 Pigeonhole</location>
         <done>true</done>
@@ -31,8 +31,8 @@
     </tasks>
     <tasks>
         <name>CS3243 Tutorial 6</name>
-        <startDate>3/17/2017 9:00 AM, 2 weeks ago</startDate>
-        <endDate>3/17/2017 10:00 AM, 2 weeks ago</endDate>
+        <startDate>3/17/2017 9:00 AM, 3 weeks ago</startDate>
+        <endDate>3/17/2017 10:00 AM, 3 weeks ago</endDate>
         <remark>Type written</remark>
         <location>COM1-01-09</location>
         <done>true</done>
@@ -41,8 +41,8 @@
     </tasks>
     <tasks>
         <name>CS2102 Gradience assignment 1</name>
-        <startDate>3/13/2017 4:00 PM, 3 weeks ago</startDate>
-        <endDate>3/17/2017 5:00 PM, 2 weeks ago</endDate>
+        <startDate>3/13/2017 4:00 PM, 4 weeks ago</startDate>
+        <endDate>3/17/2017 5:00 PM, 3 weeks ago</endDate>
         <remark>Unlimited tries, on SQL query</remark>
         <location>NUS</location>
         <done>true</done>
@@ -51,8 +51,8 @@
     </tasks>
     <tasks>
         <name>CS2102 Online project meeting</name>
-        <startDate>3/20/2017 6:00 PM, 2 weeks ago</startDate>
-        <endDate>3/20/2017 11:00 PM, 2 weeks ago</endDate>
+        <startDate>3/20/2017 6:00 PM, 3 weeks ago</startDate>
+        <endDate>3/20/2017 11:00 PM, 3 weeks ago</endDate>
         <remark>Draft out ER Diagram</remark>
         <location>Google docs</location>
         <done>true</done>
@@ -61,8 +61,8 @@
     </tasks>
     <tasks>
         <name>Help out with OGL interview</name>
-        <startDate>3/21/2017 1:00 PM, 1 week ago</startDate>
-        <endDate>3/21/2017 3:00 PM, 1 week ago</endDate>
+        <startDate>3/21/2017 1:00 PM, 2 weeks ago</startDate>
+        <endDate>3/21/2017 3:00 PM, 2 weeks ago</endDate>
         <remark>FSC</remark>
         <location>Club room</location>
         <done>true</done>
@@ -71,8 +71,8 @@
     </tasks>
     <tasks>
         <name>MediaCorp data science interview</name>
-        <startDate>3/21/2017 3:00 PM, 1 week ago</startDate>
-        <endDate>3/21/2017 5:00 PM, 1 week ago</endDate>
+        <startDate>3/21/2017 3:00 PM, 2 weeks ago</startDate>
+        <endDate>3/21/2017 5:00 PM, 2 weeks ago</endDate>
         <remark>Business Attire, bring CV</remark>
         <location>Stars Avenue MediaCorp office building A</location>
         <done>true</done>
@@ -80,8 +80,8 @@
     </tasks>
     <tasks>
         <name>CS2102 Midterm</name>
-        <startDate>3/22/2017 12:00 PM, 1 week ago</startDate>
-        <endDate>3/22/2017 2:00 PM, 1 week ago</endDate>
+        <startDate>3/22/2017 12:00 PM, 2 weeks ago</startDate>
+        <endDate>3/22/2017 2:00 PM, 2 weeks ago</endDate>
         <remark>Double sided cheatsheet, 2B pencil</remark>
         <location>LT19</location>
         <done>true</done>
@@ -90,8 +90,8 @@
     </tasks>
     <tasks>
         <name>Startup data science interview</name>
-        <startDate>3/23/2017 5:00 PM, 1 week ago</startDate>
-        <endDate>3/23/2017 7:00 PM, 1 week ago</endDate>
+        <startDate>3/23/2017 5:00 PM, 2 weeks ago</startDate>
+        <endDate>3/23/2017 7:00 PM, 2 weeks ago</endDate>
         <remark>Smart Casual, send CV</remark>
         <location>Blk71 Ayer Rajah Crescent</location>
         <done>true</done>
@@ -99,8 +99,8 @@
     </tasks>
     <tasks>
         <name>CS3243 Midterm</name>
-        <startDate>3/24/2017 2:00 PM, 7 days ago</startDate>
-        <endDate>3/24/2017 4:00 PM, 7 days ago</endDate>
+        <startDate>3/24/2017 2:00 PM, 2 weeks ago</startDate>
+        <endDate>3/24/2017 4:00 PM, 2 weeks ago</endDate>
         <remark>Open book, bring calculator</remark>
         <location>LT19</location>
         <done>true</done>
@@ -109,8 +109,8 @@
     </tasks>
     <tasks>
         <name>CS2102 Gradience assignment 2</name>
-        <startDate>3/20/2017 4:00 PM, 2 weeks ago</startDate>
-        <endDate>3/24/2017 5:00 PM, 7 days ago</endDate>
+        <startDate>3/20/2017 4:00 PM, 3 weeks ago</startDate>
+        <endDate>3/24/2017 5:00 PM, 2 weeks ago</endDate>
         <remark>On relational algebra</remark>
         <location>NUS</location>
         <done>true</done>
@@ -119,17 +119,17 @@
     </tasks>
     <tasks>
         <name>Laundry</name>
-        <startDate>3/24/2017 5:00 PM, 7 days ago</startDate>
-        <endDate>3/24/2017 9:00 PM, 7 days ago</endDate>
+        <startDate>3/24/2017 5:00 PM, 2 weeks ago</startDate>
+        <endDate>3/24/2017 9:00 PM, 2 weeks ago</endDate>
         <remark>Wash twice, spin speed lv3, water level 18L</remark>
         <location>Raffles Hall</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>hall</tagged>
     </tasks>
     <tasks>
         <name>CS3243 Project meeting</name>
-        <startDate>3/25/2017 4:00 PM, 6 days ago</startDate>
-        <endDate>3/25/2017 7:00 PM, 6 days ago</endDate>
+        <startDate>3/25/2017 4:00 PM, 2 weeks ago</startDate>
+        <endDate>3/25/2017 7:00 PM, 2 weeks ago</endDate>
         <remark>Discuss algorithm and finish up report</remark>
         <location>COM1 DR-4</location>
         <done>true</done>
@@ -138,8 +138,8 @@
     </tasks>
     <tasks>
         <name>RH Musical Production</name>
-        <startDate>3/25/2017 4:00 PM, 6 days ago</startDate>
-        <endDate>3/25/2017 11:00 PM, 6 days ago</endDate>
+        <startDate>3/25/2017 4:00 PM, 2 weeks ago</startDate>
+        <endDate>3/25/2017 11:00 PM, 2 weeks ago</endDate>
         <remark>Settle music scores</remark>
         <location>Raffles Hall Dance Studio 3</location>
         <done>true</done>
@@ -148,57 +148,79 @@
     </tasks>
     <tasks>
         <name>Pack Welfare pack</name>
-        <startDate>3/30/2017 7:00 PM, 17 hours ago</startDate>
-        <endDate>3/30/2017 11:00 PM, 13 hours ago</endDate>
+        <startDate>3/30/2017 7:00 PM, 1 week ago</startDate>
+        <endDate>3/30/2017 11:00 PM, 1 week ago</endDate>
         <remark>Free cup noodles</remark>
         <location>Computing Club Office</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>compclub</tagged>
         <tagged>friends</tagged>
     </tasks>
     <tasks>
         <name>CS2102 Project meeting</name>
-        <startDate>3/31/2017 4:00 PM, 4 hours from now</startDate>
-        <endDate>3/31/2017 8:00 PM, 8 hours from now</endDate>
+        <startDate>3/31/2017 4:00 PM, 1 week ago</startDate>
+        <endDate>3/31/2017 8:00 PM, 7 days ago</endDate>
         <remark>Finish up proposal, finalise data population, UI tweaks(if needed)</remark>
         <location>COM1 DR3</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>project</tagged>
         <tagged>CS2102</tagged>
     </tasks>
     <tasks>
         <name>Laundry</name>
-        <startDate>3/31/2017 5:00 PM, 5 hours from now</startDate>
-        <endDate>3/31/2017 9:00 PM, 9 hours from now</endDate>
+        <startDate>3/31/2017 5:00 PM, 1 week ago</startDate>
+        <endDate>3/31/2017 9:00 PM, 7 days ago</endDate>
         <remark>Wash twice, spin speed lv3, water level 18L</remark>
         <location>Raffles Hall</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>hall</tagged>
     </tasks>
     <tasks>
         <name>Study session</name>
-        <startDate>4/1/2017 10:00 AM, 22 hours from now</startDate>
-        <endDate>4/1/2017 10:00 PM, 1 day from now</endDate>
+        <startDate>4/1/2017 10:00 AM, 6 days ago</startDate>
+        <endDate>4/1/2017 10:00 PM, 6 days ago</endDate>
         <remark>With Crystal</remark>
         <location>AS6 Lab</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>NM3217</tagged>
         <tagged>friends</tagged>
     </tasks>
     <tasks>
+        <name>NM3217 Brochure Justification</name>
+        <startDate>4/4/2017 12:00 PM, 3 days ago</startDate>
+        <endDate>4/4/2017 2:00 PM, 3 days ago</endDate>
+        <remark>2-pages 1 inch margin</remark>
+        <location>AS6</location>
+        <done>true</done>
+        <eventId></eventId>
+        <tagged>project</tagged>
+        <tagged>NM3217</tagged>
+    </tasks>
+    <tasks>
         <name>NM3217 Website Justification</name>
         <startDate></startDate>
-        <endDate>4/4/2017 6:00 PM, 4 days from now</endDate>
+        <endDate>4/4/2017 6:00 PM, 3 days ago</endDate>
         <remark>Need cover page</remark>
         <location>AS6-02 Office Tan Kai En Pigeonhole</location>
-        <done>false</done>
+        <done>true</done>
         <tagged>project</tagged>
+        <tagged>NM3217</tagged>
+    </tasks>
+    <tasks>
+        <name>NM3217 Quiz</name>
+        <startDate>4/7/2017 12:00 PM, 5 hours ago</startDate>
+        <endDate>4/7/2017 1:45 PM, 4 hours ago</endDate>
+        <remark>Closed-book</remark>
+        <location>LT14</location>
+        <done>true</done>
+        <eventId></eventId>
+        <tagged>exam</tagged>
         <tagged>NM3217</tagged>
     </tasks>
     <tasks>
         <name>CS2102 Project proposal submission</name>
         <startDate></startDate>
-        <endDate>4/7/2017 6:00 PM, 1 week from now</endDate>
+        <endDate>4/7/2017 6:00 PM, 41 minutes from now</endDate>
         <remark></remark>
         <location>IVLE</location>
         <done>false</done>
@@ -206,9 +228,41 @@
         <tagged>CS2102</tagged>
     </tasks>
     <tasks>
+        <name>CS2102 report submission</name>
+        <startDate>4/7/2017 8:00 PM, 3 hours from now</startDate>
+        <endDate>4/7/2017 10:00 PM, 5 hours from now</endDate>
+        <remark>groupmates suck</remark>
+        <location>IVLE</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>project</tagged>
+        <tagged>CS2102</tagged>
+    </tasks>
+    <tasks>
+        <name>Watch CS3243 Webcast</name>
+        <startDate>4/7/2017 9:00 PM, 4 hours from now</startDate>
+        <endDate>4/7/2017 11:00 PM, 6 hours from now</endDate>
+        <remark>First order logic</remark>
+        <location>Home</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS3243</tagged>
+    </tasks>
+    <tasks>
+        <name>Eat Genki Sushi</name>
+        <startDate>4/8/2017 4:00 PM, 23 hours from now</startDate>
+        <endDate>4/8/2017 6:00 PM, 1 day from now</endDate>
+        <remark>&lt;3</remark>
+        <location>Orchard gateway</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>food</tagged>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
         <name>Outing with RH peeps</name>
-        <startDate>4/8/2017 12:00 PM, 1 week from now</startDate>
-        <endDate>4/8/2017 10:00 PM, 1 week from now</endDate>
+        <startDate>4/8/2017 12:00 PM, 19 hours from now</startDate>
+        <endDate>4/8/2017 10:00 PM, 1 day from now</endDate>
         <remark>Going to Metta School for CIP</remark>
         <location>Kent Ridge MRT</location>
         <done>false</done>
@@ -216,9 +270,20 @@
         <tagged>friends</tagged>
     </tasks>
     <tasks>
+        <name>Edit Test Case Methods</name>
+        <startDate></startDate>
+        <endDate>4/9/2017 4:39 PM, 2 days from now</endDate>
+        <remark>change naming of methods to include assert</remark>
+        <location>Github</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS2103T</tagged>
+        <tagged>project</tagged>
+    </tasks>
+    <tasks>
         <name>NM3217 Website Submission</name>
-        <startDate>4/4/2017 6:00 PM, 4 days from now</startDate>
-        <endDate>4/9/2017 6:00 PM, 1 week from now</endDate>
+        <startDate>4/4/2017 6:00 PM, 3 days ago</startDate>
+        <endDate>4/9/2017 6:00 PM, 2 days from now</endDate>
         <remark>Include justification</remark>
         <location>AS6-02 Office Tan Kai End Pigeonhole</location>
         <done>false</done>
@@ -226,9 +291,107 @@
         <tagged>NM3217</tagged>
     </tasks>
     <tasks>
+        <name>Amanda's birthday</name>
+        <startDate>4/9/2017 7:00 PM, 2 days from now</startDate>
+        <endDate>4/9/2017 11:00 PM, 2 days from now</endDate>
+        <remark>wrap 1Q84 book</remark>
+        <location>Villa C Changi Civil Service Club</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103T Final Submission</name>
+        <startDate></startDate>
+        <endDate>4/10/2017 11:59 AM, 3 days from now</endDate>
+        <remark>Zip files according to format</remark>
+        <location>IVLE</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS2103T</tagged>
+        <tagged>project</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2102 Project Demo</name>
+        <startDate>4/11/2017 10:40 AM, 4 days from now</startDate>
+        <endDate>4/11/2017 11:20 AM, 4 days from now</endDate>
+        <remark>Bring own laptop</remark>
+        <location>i-Cube</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>project</tagged>
+        <tagged>CS2102</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3243 Project Meeting</name>
+        <startDate>4/11/2017 4:00 PM, 4 days from now</startDate>
+        <endDate>4/11/2017 9:00 PM, 4 days from now</endDate>
+        <remark>Improve genetic algorithm</remark>
+        <location>COM1</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS3243</tagged>
+        <tagged>project</tagged>
+    </tasks>
+    <tasks>
+        <name>CS3243 Project Submission</name>
+        <startDate></startDate>
+        <endDate>4/13/2017 11:59 PM, 6 days from now</endDate>
+        <remark>Try to clear 1M lines</remark>
+        <location>IVLE</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS3243</tagged>
+        <tagged>project</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy paper for NM3217 brochure</name>
+        <startDate></startDate>
+        <endDate>4/14/2017 4:00 PM, 7 days from now</endDate>
+        <remark>Glossy finish, buy at least 6 pieces</remark>
+        <location>Bras Basah complex</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>project</tagged>
+        <tagged>NM3217</tagged>
+    </tasks>
+    <tasks>
+        <name>Do Module Feedback</name>
+        <startDate></startDate>
+        <endDate>4/14/2017 6:00 PM, 1 week from now</endDate>
+        <remark>20 CORS points each</remark>
+        <location>IVLE</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CORS</tagged>
+        <tagged>NUS</tagged>
+    </tasks>
+    <tasks>
+        <name>NM3217 Brochure Submission</name>
+        <startDate>4/7/2017 4:00 PM, 1 hour ago</startDate>
+        <endDate>4/14/2017 6:00 PM, 1 week from now</endDate>
+        <remark></remark>
+        <location>AS6</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>project</tagged>
+        <tagged>NM3217</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103T Software Demo</name>
+        <startDate>4/15/2017 12:30 PM, 1 week from now</startDate>
+        <endDate>4/15/2017 1:30 PM, 1 week from now</endDate>
+        <remark>12min max, penalised for time</remark>
+        <location>COM1-B1-03 (Active Learning Lab)</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CS2103T</tagged>
+        <tagged>project</tagged>
+    </tasks>
+    <tasks>
         <name>CS2102 Gradience assignment 3</name>
-        <startDate>4/10/2017 12:00 PM, 1 week from now</startDate>
-        <endDate>4/15/2017 5:00 PM, 2 weeks from now</endDate>
+        <startDate>4/10/2017 12:00 PM, 3 days from now</startDate>
+        <endDate>4/15/2017 5:00 PM, 1 week from now</endDate>
         <remark>On functional dependencies</remark>
         <location>NUS</location>
         <done>false</done>
@@ -237,17 +400,27 @@
     </tasks>
     <tasks>
         <name>Settle internship</name>
-        <startDate>3/30/2017 8:00 PM, 16 hours ago</startDate>
-        <endDate>4/20/2017 6:00 PM, 3 weeks from now</endDate>
+        <startDate>3/30/2017 8:00 PM, 1 week ago</startDate>
+        <endDate>4/20/2017 6:00 PM, 2 weeks from now</endDate>
         <remark>Finalise stipend and working hours</remark>
         <location>Blk71 Ayer Rajah Crescent</location>
         <done>false</done>
         <tagged>internship</tagged>
     </tasks>
     <tasks>
+        <name>CS2103T Finals</name>
+        <startDate>4/24/2017 1:00 PM, 2 weeks from now</startDate>
+        <endDate>4/24/2017 3:00 PM, 2 weeks from now</endDate>
+        <remark>Open-book</remark>
+        <location>TBA</location>
+        <done>false</done>
+        <tagged>exam</tagged>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
         <name>CS2102 Finals</name>
-        <startDate>4/28/2017 2:30 PM, 1 month from now</startDate>
-        <endDate>4/28/2017 4:30 PM, 1 month from now</endDate>
+        <startDate>4/28/2017 2:30 PM, 3 weeks from now</startDate>
+        <endDate>4/28/2017 4:30 PM, 3 weeks from now</endDate>
         <remark>2 Pages cheatsheet</remark>
         <location>TBA</location>
         <done>false</done>
@@ -255,9 +428,20 @@
         <tagged>CS2102</tagged>
     </tasks>
     <tasks>
+        <name>Apply SPRING Grant</name>
+        <startDate></startDate>
+        <endDate>4/30/2017 4:39 PM, 3 weeks from now</endDate>
+        <remark>Bring CV, NRIC and Student Card</remark>
+        <location>Blk 71 Ayer Rajah Crescent</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>e27co</tagged>
+        <tagged>internship</tagged>
+    </tasks>
+    <tasks>
         <name>CS3243 Finals</name>
-        <startDate>5/2/2017 5:00 PM, 1 month from now</startDate>
-        <endDate>5/2/2017 7:00 PM, 1 month from now</endDate>
+        <startDate>5/2/2017 5:00 PM, 4 weeks from now</startDate>
+        <endDate>5/2/2017 7:00 PM, 4 weeks from now</endDate>
         <remark>Open book, bring calculator and 2B pencil</remark>
         <location>TBA</location>
         <done>false</done>
@@ -265,14 +449,67 @@
         <tagged>CS3243</tagged>
     </tasks>
     <tasks>
-        <name>CS2103T Finals</name>
-        <startDate>8/24/2017 1:00 PM, 5 months from now</startDate>
-        <endDate>8/24/2017 3:00 PM, 5 months from now</endDate>
-        <remark>Open-book</remark>
-        <location>TBA</location>
+        <name>Check Out of Hall</name>
+        <startDate></startDate>
+        <endDate>5/6/2017 6:00 PM, 1 month from now</endDate>
+        <remark>Clear room</remark>
+        <location>Raffles Hall</location>
         <done>false</done>
-        <tagged>exam</tagged>
-        <tagged>CS2103T</tagged>
+        <eventId></eventId>
+        <tagged>hall</tagged>
+    </tasks>
+    <tasks>
+        <name>Start of Internship</name>
+        <startDate>5/8/2017 4:58 PM, 1 month from now</startDate>
+        <endDate>5/8/2017 4:59 PM, 1 month from now</endDate>
+        <remark>Bring own laptop, send in bank acc no.</remark>
+        <location>Blk 71 Ayer Rajah</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>e27co</tagged>
+        <tagged>internship</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet up with friends at Lola's cafe</name>
+        <startDate>5/8/2017 5:00 PM, 1 month from now</startDate>
+        <endDate>5/8/2017 10:00 PM, 1 month from now</endDate>
+        <remark></remark>
+        <location>Lola's cafe</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>friends</tagged>
+        <tagged>food</tagged>
+    </tasks>
+    <tasks>
+        <name>Orbital Lift-off</name>
+        <startDate>5/8/2017 4:54 PM, 1 month from now</startDate>
+        <endDate>5/8/2017 10:00 PM, 1 month from now</endDate>
+        <remark>Meet groups</remark>
+        <location>i-Cube</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>orbital</tagged>
+    </tasks>
+    <tasks>
+        <name>Plan out modules for 17/18 Sem 1</name>
+        <startDate></startDate>
+        <endDate>8/6/2017 4:45 PM, 4 months from now</endDate>
+        <remark>Overload?</remark>
+        <location>CORS</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>CORS</tagged>
+    </tasks>
+    <tasks>
+        <name>End of Internship</name>
+        <startDate></startDate>
+        <endDate>8/11/2017 4:58 PM, 4 months from now</endDate>
+        <remark>Yay</remark>
+        <location>Blk 71 Ayer Rajah</location>
+        <done>false</done>
+        <eventId></eventId>
+        <tagged>e27co</tagged>
+        <tagged>internship</tagged>
     </tasks>
     <tags>homework</tags>
     <tags>CS2102</tags>
@@ -287,4 +524,9 @@
     <tags>internship</tags>
     <tags>CS2103T</tags>
     <tags>NUS</tags>
+    <tags>databse</tags>
+    <tags>food</tags>
+    <tags>CORS</tags>
+    <tags>e27co</tags>
+    <tags>orbital</tags>
 </taskmanager>
