@@ -94,12 +94,20 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean hasStartTime() {
-        return !this.startTime.equals("");
+        if (this.startTime != null) {
+            return !this.startTime.equals("");
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean hasEndTime() {
-        return !this.endTime.equals("");
+        if (this.startTime != null) {
+            return !this.endTime.equals("");
+        } else {
+            return false;
+        }
     }
 
     @Override
