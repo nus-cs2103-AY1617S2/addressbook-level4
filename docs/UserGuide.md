@@ -140,8 +140,8 @@ Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 ## Loading Fast Task Data: `load`
 Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `load PATHNAME`<br>
-Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
-Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
+Example for Windows: `load C:\Desktop\MyTasks.xml`<br>
+Example for Mac: `load /Users/jlevy/Desktop/MyTasks.xml`
 
 ## Exiting the Program : `exit`
 Exits the program.<br>
