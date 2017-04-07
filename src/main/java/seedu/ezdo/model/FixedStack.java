@@ -19,11 +19,19 @@ public class FixedStack<T> {
         index = STARTING_INDEX;
     }
 
+    /**
+     * Pushes an item onto the top of the stack
+     */
     public void push(T item) {
         index = (index + 1) % ModelManager.STACK_CAPACITY; // wraps around
         array[index] = item;
     }
 
+    /**
+     * Pops an item off the stack
+     *
+     * @throws EmptyStackException if there is nothing to be popped
+     */
     public T pop() throws EmptyStackException {
         if (index == STARTING_INDEX || array[index] == null) {
             throw new EmptyStackException();
@@ -38,6 +46,9 @@ public class FixedStack<T> {
         return item;
     }
 
+    /**
+     * Checks if the stack is empty
+     */
     public boolean isEmpty() {
         for (int i = 0; i < array.length; i++) {
             if (array[i] != null) {
@@ -47,6 +58,9 @@ public class FixedStack<T> {
         return true;
     }
 
+    /**
+     * Clears the stack
+     */
     public void clear() {
         for (int i = 0; i < array.length; i++) {
             array[i] = null;

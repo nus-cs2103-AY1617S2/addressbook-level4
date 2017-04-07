@@ -1,3 +1,4 @@
+//@@author A0139248X
 package seedu.ezdo.commons.util;
 
 import java.text.ParseException;
@@ -5,9 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.ezdo.model.todo.ReadOnlyTask;
-//@@author A0139248X
-/*
- * Checks for dates
+
+/**
+ * Utility methods for dates
  */
 public class DateUtil {
 
@@ -16,6 +17,7 @@ public class DateUtil {
 
     /**
      * Checks whether a task's dates are valid
+     *
      * @return true if the start date is earlier than or equal to the due date OR if either date is empty
      * @throws ParseException if any task date cannot be parsed
      */
