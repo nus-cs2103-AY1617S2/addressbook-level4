@@ -31,10 +31,23 @@ public class FindCommandTest extends DoistGUITest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void find_nearMatch() {
+        assertFindResult("find mth homework", td.homework);
+        assertFindResult("find chemistry assnment", td.school);
+    }
+
+    @Test
+    public void find_caseInsensitive() {
+        assertFindResult("find buy new clock", td.shopping);
+        assertFindResult("find do Laundry", td.laundry);
+    }
+
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
         assertResultMessage(expectedHits.length + " tasks listed!");
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
+
 }

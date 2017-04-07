@@ -3,9 +3,6 @@ package seedu.doist.logic.parser;
 import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 
 import seedu.doist.logic.commands.Command;
@@ -34,7 +31,6 @@ public class FindCommandParser {
         for (int i = 0; i < keywords.length; i++) {
             desc.append(keywords[i] + " ");
         }
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(desc.toString().trim());
     }
 

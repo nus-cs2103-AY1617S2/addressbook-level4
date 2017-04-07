@@ -65,6 +65,7 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
+    //@@author A0147620L
     /**
      * Method to extract the date and time information from the edit command
      * Uses the parameteres
@@ -82,8 +83,8 @@ public class EditCommandParser {
         Date endDate = null;
         boolean validDate = true;
         switch (dateFormat) {
-        case ArgumentTokenizer.DATE_NIL : return editTaskDescriptor;
-        case ArgumentTokenizer.DATE_BY :  String deadline = argsTokenizer.getValue(PREFIX_BY).get();
+        case ArgumentTokenizer.DATE_NIL  : return editTaskDescriptor;
+        case ArgumentTokenizer.DATE_BY   : String deadline = argsTokenizer.getValue(PREFIX_BY).get();
             if (deadline.isEmpty()) {
                 editTaskDescriptor.setDates(Optional.of(new TaskDate()));
             } else {
@@ -91,7 +92,7 @@ public class EditCommandParser {
                 endDate = TaskDate.parseDate(deadline);
                 validDate = TaskDate.validateDate(startDate, endDate);
             }
-                                          break;
+                                           break;
         case ArgumentTokenizer.DATE_FROM : String start = argsTokenizer.getValue(PREFIX_FROM).get();
             String end = argsTokenizer.getValue(PREFIX_TO).get();
             if (start.isEmpty() && end.isEmpty()) {
@@ -102,7 +103,7 @@ public class EditCommandParser {
                 validDate = TaskDate.validateDate(startDate, endDate);
             }
                                            break;
-        default : break;
+        default                          : break;
         }
         if (!validDate) {
             throw new IllegalValueException(MESSAGE_INVALID_DATES);
@@ -110,7 +111,7 @@ public class EditCommandParser {
         editTaskDescriptor.setDates(Optional.of(new TaskDate(startDate, endDate)));
         return editTaskDescriptor;
     }
-
+  //@@author
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a

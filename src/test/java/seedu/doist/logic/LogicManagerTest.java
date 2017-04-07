@@ -466,16 +466,13 @@ public class LogicManagerTest {
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         protected String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            //cmd.append(" e/").append(p.getEmail());
-            //cmd.append(" p/").append(p.getPhone());
-            //cmd.append(" a/").append(p.getAddress());
 
             UniqueTagList tags = p.getTags();
             cmd.append(" \\under ");
