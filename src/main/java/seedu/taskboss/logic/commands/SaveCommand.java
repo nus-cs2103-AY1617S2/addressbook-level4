@@ -54,7 +54,7 @@ public class SaveCommand extends Command {
             model.saveTaskboss();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
-        	throw new CommandException(MESSAGE_INVALID_FILEPATH);
+            throw new CommandException(MESSAGE_INVALID_FILEPATH);
         }
     }
 }
