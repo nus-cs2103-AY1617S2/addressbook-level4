@@ -47,6 +47,13 @@ public class FindCommandParser implements CommandParser {
         Set<String> descKeyWordSet = new HashSet<>(
                 argsTokenizer.getAllValuesAfterPrefixAndSpaces(PREFIX_DESCRIPTION).orElse(Collections.emptyList()));
 
+
+        if (isAllKeyWordSetEmpty(nameKeyWordSet, priorityKeyWordSet, startKeyWordSet,
+            deadlineKeyWordSet, tagsKeyWordSet, descKeyWordSet)) {
+            return new IncorrectCommand(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(
@@ -57,6 +64,14 @@ public class FindCommandParser implements CommandParser {
         return new FindCommand(nameKeyWordSet, startKeyWordSet, deadlineKeyWordSet,
             priorityKeyWordSet, tagsKeyWordSet, descKeyWordSet);
 
+    }
+
+    private boolean isAllKeyWordSetEmpty (Set<String> nameKeyWordSet, Set<String> priorityKeyWordSet,
+                                          Set<String> startKeyWordSet, Set<String> deadlineKeyWordSet,
+                                          Set<String> tagsKeyWordSet, Set<String> descKeyWordSet) {
+
+        return nameKeyWordSet.isEmpty() && priorityKeyWordSet.isEmpty() && startKeyWordSet.isEmpty()
+            && deadlineKeyWordSet.isEmpty() && tagsKeyWordSet.isEmpty() && descKeyWordSet.isEmpty();
     }
 
 }
