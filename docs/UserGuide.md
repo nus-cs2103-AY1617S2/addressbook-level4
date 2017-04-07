@@ -9,7 +9,7 @@
 3. [Features](#3-features)
     * [Viewing help](#311-viewing-help--help)
     * [Adding a task](#321-adding-a-task-add)
-    * [Listing tasks](#331-listing-of-task-list)
+    * [Listing tasks](#331listing-of-task-list)
     * [Marking a task as done](#34-marking-a-task-as-done-done)
     * [Marking a task as undone](#35-marking-a-task-as-undone-undone)
     * [Deleting a task](#36-deleting-a-task-delete)
