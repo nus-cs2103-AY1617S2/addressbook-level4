@@ -64,6 +64,7 @@ allprojects {
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
         compile 'com.jfoenix:jfoenix:1.2.0'
+        compile 'de.jensd:fontawesomefx-fontawesome:4.7.0-5'
         compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
         compile 'org.ocpsoft.prettytime:prettytime-nlp:4.0.0.Final'
         compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'

@@ -10,6 +10,9 @@ import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 
+import de.jensd.fx.glyphs.GlyphsBuilder;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -41,6 +44,7 @@ import seedu.address.logic.commands.UseThisCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.ui.util.CommandTextFieldValidator;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -140,6 +144,16 @@ public class MainWindow extends UiPart<Region> {
                 primaryStage.setY(mouseEvent.getScreenY() + coordinate.y);
             }
         });
+
+        // set validator for commandTextField(to display error message under the command box)
+        CommandTextFieldValidator validator = new CommandTextFieldValidator();
+        validator.setMessage("Invalid Command");
+        validator.setIcon(GlyphsBuilder.create(FontAwesomeIconView.class)
+                .glyph(FontAwesomeIcon.WARNING)
+                .size("1em")
+                .styleClass("error")
+                .build());
+        commandTextField.getValidators().add(validator);
     }
 
     // @@author
@@ -301,9 +315,13 @@ public class MainWindow extends UiPart<Region> {
             commandTextField.setText("");
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
             raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
-
+            ((CommandTextFieldValidator) commandTextField.getValidators().get(0)).hideErrorMessage();
+            commandTextField.validate();
         } catch (CommandException e) {
             // handle command failure
+            // display error message under command box
+            ((CommandTextFieldValidator) commandTextField.getValidators().get(0)).showErrorMessage();
+            commandTextField.validate();
             raise(new NewResultAvailableEvent(e.getMessage()));
             raise(new UpdateStatusBarEvent("Invalid command. Type \"Help\" to see format."));
         }
@@ -313,13 +331,6 @@ public class MainWindow extends UiPart<Region> {
     @Subscribe
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
         JFXSnackbar toast = new JFXSnackbar(taskListPanelPlaceholder);
-        // EventHandler handler = new EventHandler() {
-        // @Override
-        // public void handle(Event event) {
-        // toast.close();
-        // }
-        // };
-        // toast.show(event.getMessage(), "OK", 4000, handler);
         toast.show(event.getMessage(), 4000);
     }
 }

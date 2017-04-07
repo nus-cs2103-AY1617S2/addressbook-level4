@@ -51,9 +51,7 @@
                      </VBox.margin>
                   </JFXTextField>
                   <AnchorPane fx:id="commandBoxPlaceholder" maxHeight="105.0" prefHeight="50.0" prefWidth="279.0">
-                     <children>
-                        <Label fx:id="commandResult" layoutY="6.0" text="command result" textFill="WHITE" />
-                     </children></AnchorPane>
+                     </AnchorPane>
                </children>
                <HBox.margin>
                   <Insets right="20.0" />

@@ -21,3 +21,17 @@
 	-fx-progress-color: #CE2345;
 	-fx-stroke-width:3;
 }
+
+.jfx-text-field:error{
+	-jfx-focus-color: #D34336;
+	-jfx-unfocus-color: #D34336;
+}
+
+.jfx-text-field .error-label{
+	-fx-text-fill : #D34336;
+	-fx-font-size: 0.75em;
+}
+.jfx-text-field .error-icon{
+	-fx-text-fill : #D34336;
+	-fx-font-size: 1em;
+}
