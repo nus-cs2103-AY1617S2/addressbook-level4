@@ -12,7 +12,7 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
 public class Event implements ReadOnlyEvent {
 
     public static final String MESSAGE_TOO_MANY_TIME = "There should be at most 2 time points in the task.";
-    public static final String MESSAGE_RECURRENCE_TIME_ERROR = "Recurring task should contain only one date.";
+    public static final String MESSAGE_RECURRENCE_TIME_ERROR = "Recurring task should contain at least one and only one date.";
     public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
     public static final int SIZE_RECURRENCE_DATE = 1;
     public static final int SIZE_DEADLINE_TASK = 1;
@@ -103,6 +103,9 @@ public class Event implements ReadOnlyEvent {
     }
 
     private void fillRecurrence(List<Date> dateList, String period) throws IllegalValueException {
+        if (dateList == null) {
+            throw new IllegalValueException(MESSAGE_RECURRENCE_TIME_ERROR);
+        }
 	if (dateList.size() > SIZE_RECURRENCE_DATE) {
 	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 	}

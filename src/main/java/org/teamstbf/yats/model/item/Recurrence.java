@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 public class Recurrence {
 
     public static final String RECURRENCE_NONE = "none";
@@ -22,6 +24,8 @@ public class Recurrence {
     public static final String MESSAGE_RECURRENCE_CONSTRAINTS = "Recurrence must be none, daily, weekly, monthly or yearly";
     public static final String RECURRENCE_VALIDATION_REGEX = ".*(none|daily|weekly|monthly|yearly).*";
     public static final String RECURRENCE_DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DELIMITER_DONE_LIST = ",";
+    public static final String STRING_EMPTY = "";
 
     Date startDate;
     String periodicity;
@@ -55,9 +59,21 @@ public class Recurrence {
 	} catch (ParseException pe) {
 	    throw new IllegalValueException(MESSAGE_RECURRENCE_DATE_CONSTRAINTS);
 	}
+    if (!isValidPeriod(periodicity)) {
+        throw new IllegalValueException(MESSAGE_RECURRENCE_CONSTRAINTS);
+    }
 	this.periodicity = periodicity;
-	// TODO create doneListfromString
-	this.doneList = null;
+	setPeriod(periodicity);
+	this.doneList = getDoneListFromString(doneList);
+    }
+
+    private List<String> getDoneListFromString(String doneListString) {
+        //return an empty List if string is empty
+        if (doneListString.equals(STRING_EMPTY)) {
+            return new ArrayList<String>();
+        }
+        return new ArrayList<String>(
+                Arrays.asList(doneListString.split(DELIMITER_DONE_LIST)));
     }
 
     private static boolean isValidPeriod(String recurrence) {
@@ -91,8 +107,15 @@ public class Recurrence {
     }
 
     public String getDoneListString() {
-	// TODO format doneList as a String
-	return "";
+        if (this.doneList.isEmpty()) {
+            return STRING_EMPTY;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String doneDate : this.doneList) {
+            sb.append(doneDate);
+            sb.append(DELIMITER_DONE_LIST);
+        }
+        return sb.toString();
     }
 
     public List<Date> getOccurenceBetween(Date start, Date end) {
