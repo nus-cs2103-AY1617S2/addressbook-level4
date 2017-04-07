@@ -99,7 +99,7 @@ public class UserInboxPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToPerson(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(1000); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> person = getListView().getItems().stream()
                                                     .filter(p -> p.getName().name.equals(name))
                                                     .findAny();

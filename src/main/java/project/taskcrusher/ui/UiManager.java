@@ -14,7 +14,6 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.Config;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.events.storage.DataSavingExceptionEvent;
-import project.taskcrusher.commons.events.ui.JumpToListRequestEvent;
 import project.taskcrusher.commons.events.ui.ShowHelpRequestEvent;
 import project.taskcrusher.commons.util.StringUtil;
 import project.taskcrusher.logic.Logic;
@@ -114,12 +113,6 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getUserInboxPanel().scrollTo(event.targetIndex);
     }
 
 }

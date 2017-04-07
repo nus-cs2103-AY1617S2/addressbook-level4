@@ -25,7 +25,6 @@ import com.google.common.eventbus.Subscribe;
 
 import project.taskcrusher.commons.core.EventsCenter;
 import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
-import project.taskcrusher.commons.events.ui.JumpToListRequestEvent;
 import project.taskcrusher.commons.events.ui.ShowHelpRequestEvent;
 import project.taskcrusher.logic.commands.AddCommand;
 import project.taskcrusher.logic.commands.ClearCommand;
@@ -80,11 +79,6 @@ public class LogicManagerTest {
     @Subscribe
     private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
-        targetedJumpIndex = je.targetIndex;
     }
 
     @Before

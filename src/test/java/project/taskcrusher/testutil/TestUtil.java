@@ -319,15 +319,15 @@ public class TestUtil {
     /**
      * Appends persons to the array of persons.
      *
-     * @param persons
+     * @param tasks
      *            A array of persons.
-     * @param personsToAdd
+     * @param tasksToAdd
      *            The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestTaskCard[] addPersonsToList(final TestTaskCard[] persons, TestTaskCard... personsToAdd) {
-        List<TestTaskCard> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
+    public static TestTaskCard[] addTasksToList(final TestTaskCard[] tasks, TestTaskCard... tasksToAdd) {
+        List<TestTaskCard> listOfPersons = asList(tasks);
+        listOfPersons.addAll(asList(tasksToAdd));
         return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
     }
 
