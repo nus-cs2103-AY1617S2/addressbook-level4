@@ -38,13 +38,17 @@ public class Status {
      */
     public Status(String status) {
         assert status != null;
+        this.value = Status.toBoolean(status);
+    }
+
+    public static boolean toBoolean(String status) {
         if (status.equals(MESSAGE_STATUS_DONE)) {
-            this.value = true;
+             return true;
         } else if (status.equals(MESSAGE_STATUS_NOT_DONE)) {
-            this.value = false;
+            return false;
         } else {
-            this.value = false;
             logger.warning("Unknown Status String, status default to Incomplete");
+            return false;
         }
     }
 
