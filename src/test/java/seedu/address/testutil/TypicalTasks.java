@@ -45,12 +45,12 @@ public class TypicalTasks {
     public TypicalTasks() {
         try {
             // Initialize UniqueTagLists
-            familyTags.add(new Tag("spouse"));
             familyTags.add(new Tag("children"));
+            familyTags.add(new Tag("spouse"));
             workTags.add(new Tag("project"));
-            workAndFamilyTags.add(new Tag("spouse"));
             workAndFamilyTags.add(new Tag("children"));
             workAndFamilyTags.add(new Tag("project"));
+            workAndFamilyTags.add(new Tag("spouse"));
 
             // Initialize DateTime
             noDateTime = Optional.empty();
@@ -75,11 +75,11 @@ public class TypicalTasks {
                     doneFalse, todayFalse);
             futureListDeadline = Task.createTask(new Name("Complete CS2106 Lab Assignment"), workAndFamilyTags,
                     laterFutureDateTime, noDateTime, doneFalse, todayFalse);
-            futureListEvent = Task.createTask(new Name("Complete CS2106 Lab Assignment"), workAndFamilyTags,
+            futureListEvent = Task.createTask(new Name("Finish up Philo Assignment"), workAndFamilyTags,
                     laterFutureDateTime, earlierFutureDateTime, doneFalse, todayFalse);
 
-            completedListFloat = Task.createTask(new Name("Mark CS1010S"), workTags, noDateTime, noDateTime, doneTrue,
-                    todayTrue);
+            completedListFloat = Task.createTask(new Name("Mark CS1010S assIgnment"), workTags, noDateTime, noDateTime,
+                    doneTrue, todayTrue);
             completedListDeadline = Task.createTask(new Name("Go for a night run"), noTags, todayDateTime, noDateTime,
                     doneTrue, todayFalse);
             completedListEvent = Task.createTask(new Name("Go for Rock concert"), noTags, todayDateTime, pastDateTime,

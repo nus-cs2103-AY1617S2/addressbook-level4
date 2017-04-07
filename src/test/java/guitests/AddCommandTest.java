@@ -16,9 +16,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     public void add() throws IllegalArgumentException, IllegalValueException {
         // add one task
-        Task[] todayList = td.getTodayListTasks();
-        Task[] futureList = td.getFutureListTasks();
-
         Task taskToAdd = td.extraFloat;
         futureList = TestUtil.addTasksToList(futureList, taskToAdd, 1);
         assertFutureAddSuccess(taskToAdd, todayList, futureList);
@@ -36,7 +33,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // add to empty list
         commandBox.runCommand("clear");
         commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
-        assertTodayAddSuccess(taskToAdd, new Task[] { taskToAdd }, new Task[] {});
+        assertTodayAddSuccess(taskToAdd, new Task[] { taskToAdd }, emptyTaskList);
 
         // invalid command
         commandBox.runCommand("adds Johnny");
@@ -53,8 +50,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
-        assertTrue(todayTaskListPanel.isListMatching(expectedTodayList));
-        assertTrue(futureTaskListPanel.isListMatching(expectedFutureList));
+        assertTodayFutureListsMatching(expectedTodayList, expectedFutureList);
     }
 
     private void assertTodayAddSuccess(Task taskToAdd, Task[] expectedTodayList, Task[] expectedFutureList)
@@ -66,8 +62,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
-        assertTrue(todayTaskListPanel.isListMatching(expectedTodayList));
-        assertTrue(futureTaskListPanel.isListMatching(expectedFutureList));
+        assertTodayFutureListsMatching(expectedTodayList, expectedFutureList);
     }
 
 }

@@ -1,11 +1,10 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.testutil.TestUtil;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
 
@@ -18,7 +17,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     @Test
     public void undo_add_success() throws IllegalArgumentException, IllegalValueException {
         // Undo an add task
-        String commandText = "add test task";
+        String commandText = TestUtil.makeAddCommandString(td.extraDeadline);
         commandBox.runCommand(commandText);
         assertUndoSuccess(commandText);
     }
@@ -26,7 +25,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     private void assertUndoSuccess(String commandText) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("undo");
         assertResultMessage(String.format(UndoCommand.MESSAGE_SUCCESS, commandText));
-        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTodayFutureListsMatching(todayList, futureList);
     }
 
 }

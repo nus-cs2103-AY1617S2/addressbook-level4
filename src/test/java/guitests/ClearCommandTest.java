@@ -1,10 +1,10 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.TestUtil;
 
 public class ClearCommandTest extends TaskManagerGuiTest {
 
@@ -12,22 +12,21 @@ public class ClearCommandTest extends TaskManagerGuiTest {
     public void clear() throws IllegalArgumentException, IllegalValueException {
 
         // verify a non-empty list can be cleared
-        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
 
         // verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(futureTaskListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(TestUtil.makeAddCommandString(td.extraFloat));
+        assertTodayFutureListsMatching(new Task[] {}, new Task[] { td.extraFloat });
         commandBox.runCommand("delete F1");
-        assertListSize(0);
+        assertFutureListSize(0);
 
         // verify clear command works when the list is empty
         assertClearCommandSuccess();
     }
 
-    private void assertClearCommandSuccess() {
+    private void assertClearCommandSuccess() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
-        assertListSize(0);
         assertResultMessage("All tasks have been cleared.");
+        assertAllListsMatching(emptyTaskList, emptyTaskList, emptyTaskList);
     }
 }

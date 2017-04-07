@@ -414,19 +414,19 @@ public class TestUtil {
     public static String makeAddCommandString(Task task) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH.mm dd/MM/yyyy");
         StringBuilder builder = new StringBuilder();
-        builder.append(AddCommand.COMMAND_WORD + " ");
-        builder.append(task.getName().toString() + " ");
+        builder.append(AddCommand.COMMAND_WORD);
+        builder.append(" " + task.getName().toString());
         if (task.getStartingTime().isPresent() && task.getDeadline().isPresent()) {
-            builder.append("from ");
-            builder.append(sdf.format(task.getStartingTime().get().getDate()) + " ");
-            builder.append("to ");
-            builder.append(sdf.format(task.getDeadline().get().getDate()) + " ");
+            builder.append(" from");
+            builder.append(sdf.format(" " + task.getStartingTime().get().getDate()));
+            builder.append(" to");
+            builder.append(sdf.format(" " + task.getDeadline().get().getDate()));
         } else if (task.getDeadline().isPresent()) {
-            builder.append("due ");
-            builder.append(sdf.format(task.getDeadline().get().getDate()) + " ");
+            builder.append(" due");
+            builder.append(" " + sdf.format(task.getDeadline().get().getDate()));
         }
         for (Tag tag : task.getTags()) {
-            builder.append("#" + tag.getTagName() + " ");
+            builder.append(" #" + tag.getTagName());
         }
         return builder.toString();
 

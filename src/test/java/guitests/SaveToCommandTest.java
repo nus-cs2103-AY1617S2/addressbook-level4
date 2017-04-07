@@ -17,15 +17,16 @@ public class SaveToCommandTest extends TaskManagerGuiTest {
     @Test
     public void saveTo() throws IllegalArgumentException, IllegalValueException {
         // verify that 'saveto' command doesn't affect list
-        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTodayFutureListsMatching(todayList, futureList);
         assertSaveToSuccess();
-        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTodayFutureListsMatching(todayList, futureList);
 
         // verify other commands can work after a saveto command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(futureTaskListPanel.isListMatching(TestUtil.addTasksToList(td.getTypicalTasks(), td.hoon)));
-        commandBox.runCommand("delete F1");
-        assertListSize(td.getTypicalTasks().length);
+        commandBox.runCommand(TestUtil.makeAddCommandString(td.extraFloat));
+        futureList = TestUtil.addTasksToList(futureList, td.extraFloat, 1);
+        assertTodayFutureListsMatching(todayList, futureList);
+        commandBox.runCommand("delete F2");
+        assertFutureListSize(td.getFutureListTasks().length);
 
         assertTrue(newTestStorage.delete());
         assertTrue(newTestStorage.getParentFile().delete());
