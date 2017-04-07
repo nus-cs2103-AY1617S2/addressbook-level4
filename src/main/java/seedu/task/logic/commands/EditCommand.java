@@ -8,9 +8,9 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
-import seedu.task.model.task.TaskName;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskStatus;
 import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.UniqueTaskList;
@@ -25,7 +25,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Index [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - all items in [] are optional\n"
+            + "Parameters: Index [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - all items in []"
+            + " are optional\n"
             + "Example: " + COMMAND_WORD + " 1 d/140317 s/1200";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

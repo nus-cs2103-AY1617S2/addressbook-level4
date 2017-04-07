@@ -6,18 +6,12 @@ import static seedu.task.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.task.logic.parser.CliSyntax.PREFIX_TAG;
-/*
-import static seedu.task.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.task.logic.parser.CliSyntax.PREFIX_ADDRESS;
- */
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.task.logic.parser.ParserUtil;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
