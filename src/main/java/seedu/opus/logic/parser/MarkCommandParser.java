@@ -19,7 +19,6 @@ public class MarkCommandParser {
      * and returns an MarkCommand object for execution.
      */
     public Command parse(String args) {
-
         Optional<Integer> index = ParserUtil.parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(
