@@ -10,6 +10,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -36,7 +37,7 @@ public class EditCommand extends Command {
     // @@author A0140032E
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
     // @@author
-    private final int filteredTaskListIndex;
+    private final int filteredSelectedTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
@@ -50,20 +51,20 @@ public class EditCommand extends Command {
         assert editTaskDescriptor != null;
 
         // converts filteredTaskListIndex from one-based to zero-based.
-        this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        this.filteredSelectedTaskListIndex = filteredTaskListIndex - 1;
 
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
 
-        if (filteredTaskListIndex >= lastShownList.size()) {
+        if (filteredSelectedTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredSelectedTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // @@author A0140032E
@@ -73,7 +74,7 @@ public class EditCommand extends Command {
         }
         // @@author
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateTask(filteredSelectedTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -98,9 +99,11 @@ public class EditCommand extends Command {
         Optional <Description> updatedDescription = editTaskDescriptor.isDescriptionChanged() ?
                 editTaskDescriptor.getDescription() : taskToEdit.getDescription();
         // @@author
+        Status updatedStatus = editTaskDescriptor.getStatus().orElseGet(taskToEdit::getStatus);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
+                updatedTags);
     }
 
     /**
@@ -113,6 +116,7 @@ public class EditCommand extends Command {
         private Optional<EndDate> endDate = Optional.empty();
         private Optional<Description> description = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<Status> status = Optional.empty();
         // @@author A0140032E
         private boolean anyChangesMade;
         private boolean startDateChanged;
@@ -132,6 +136,7 @@ public class EditCommand extends Command {
             this.startDate = toCopy.getStartDate();
             this.endDate = toCopy.getEndDate();
             this.description = toCopy.getDescription();
+            this.status = toCopy.getStatus();
             this.tags = toCopy.getTags();
             this.anyChangesMade = toCopy.isAnyFieldEdited();
             this.startDateChanged = toCopy.isStartDateChanged();
@@ -155,6 +160,10 @@ public class EditCommand extends Command {
 
         public Optional<Title> getTitle() {
             return title;
+        }
+
+        public Optional<Status> getStatus() {
+            return status;
         }
 
         // @@author A0140032E

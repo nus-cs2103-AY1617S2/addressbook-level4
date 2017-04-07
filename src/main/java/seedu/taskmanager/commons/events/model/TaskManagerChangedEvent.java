@@ -7,10 +7,14 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
+    // @@author A0140032E
+    public final String commandText;
 
-    public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data, String commandText) {
         this.data = data;
+        this.commandText = commandText;
     }
+    // @@author
 
     @Override
     public String toString() {

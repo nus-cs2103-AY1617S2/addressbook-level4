@@ -7,6 +7,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Title;
 
 /**
@@ -22,6 +23,10 @@ public class TestTask implements ReadOnlyTask {
     // @@author
     private UniqueTagList tags;
 
+    // @@author A0114269E
+    private Status status;
+    // @@author
+
     public TestTask() {
         tags = new UniqueTagList();
     }
@@ -34,6 +39,7 @@ public class TestTask implements ReadOnlyTask {
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
         this.description = taskToCopy.getDescription();
+        this.status = taskToCopy.getStatus();
         this.tags = taskToCopy.getTags();
     }
 
@@ -52,6 +58,12 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(Optional<StartDate> startDate) {
         this.startDate = startDate;
     }
+
+    // @@ author A0114269E
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    // @@ author
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -76,6 +88,12 @@ public class TestTask implements ReadOnlyTask {
     public Optional<Description> getDescription() {
         return description;
     }
+
+    // @@ author A0114269E
+    public Status getStatus() {
+        return status;
+    }
+    // @@ author
 
     @Override
     public UniqueTagList getTags() {

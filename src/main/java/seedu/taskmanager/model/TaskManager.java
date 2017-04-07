@@ -14,6 +14,7 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.DuplicateTaskException;
@@ -51,7 +52,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
@@ -83,16 +84,14 @@ public class TaskManager implements ReadOnlyTaskManager {
      * updates {@link #tags} with any new tags found, and updates the Tag
      * objects in the task to point to those in {@link #tags}.
      *
-     * @return index of new task if list is sorted
-     *              or size-1 if list in unsorted
+     * @return index of new task if list is sorted or size-1 if list in unsorted
      *
      * @throws UniqueTaskList.DuplicateTaskException
      *             if an equivalent task already exists.
      */
-    public int addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        int index = tasks.add(p);
-        return index;
+        tasks.add(p);
     }
 
     /**
@@ -100,8 +99,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      * {@code editedReadOnlyTask}. {@code TaskManager}'s tag list will be
      * updated with the tags of {@code editedReadOnlyTask}.
      *
-     * @return updatedIndex if the internal list is sorted
-     *              or input index if list is unsorted
+     * @return updatedIndex if the internal list is sorted or input index if
+     *         list is unsorted
      *
      * @see #syncMasterTagListWith(Task)
      *
@@ -111,7 +110,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
      */
-    public int updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
         assert editedReadOnlyTask != null;
 
         Task editedTask = new Task(editedReadOnlyTask);
@@ -121,8 +120,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         // This can cause the tags master list to have additional tags that are
         // not tagged to any task
         // in the task list.
-        int updatedIndex = tasks.updateTask(index, editedTask);
-        return updatedIndex;
+        tasks.updateTask(index, editedTask);
     }
 
     // @@author A0131278H
@@ -172,13 +170,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-    //// tag-level operations
+    // tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-    //// util methods
+    // util methods
 
     @Override
     public String toString() {
@@ -189,6 +187,14 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+
+    public ObservableList<ReadOnlyTask> getToDoTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_NOT_DONE));
+    }
+
+    public ObservableList<ReadOnlyTask> getDoneTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_DONE));
     }
 
     @Override

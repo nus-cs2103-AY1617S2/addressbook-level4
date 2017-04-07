@@ -15,6 +15,8 @@ public interface ReadOnlyTask {
     Optional<EndDate> getEndDate();
     Optional<Description> getDescription();
 
+    Status getStatus();
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the task's internal tags.
@@ -23,6 +25,7 @@ public interface ReadOnlyTask {
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
+     * This ignores the Status from consideration of being in the same state.
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
@@ -43,6 +46,7 @@ public interface ReadOnlyTask {
                 .append(getStartDate().isPresent() ? " Start Date: " + getStartDate().get() : "")
                 .append(getEndDate().isPresent() ? " End Date: " + getEndDate().get() : "")
                 .append(getDescription().isPresent() ? " Description: " + getDescription().get() : "")
+                .append(" Status: " + getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         // @@author

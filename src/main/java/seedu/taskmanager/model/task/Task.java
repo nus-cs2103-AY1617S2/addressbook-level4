@@ -19,12 +19,33 @@ public class Task implements ReadOnlyTask {
     private Optional<Description> description;
     // @@author
 
+    // @@author A0114269E
+    private Status status;
+    // @@author
+
     private UniqueTagList tags;
 
+    // @@author A0140032E
     /**
      * Every field must be present and not null.
      */
-    // @@author A0140032E
+    public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
+            Optional<Description> description, Status status, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+        this.status = status;
+    }
+    // @@author
+
+    // @@author A0114269E
+    /**
+     * Constructor for Task without Status parameter.
+     */
     public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
             Optional<Description> description, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
@@ -34,6 +55,7 @@ public class Task implements ReadOnlyTask {
         this.description = description;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
+        this.status = new Status();
     }
     // @@author
 
@@ -41,7 +63,8 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getTags());
+        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(),
+                source.getStatus(), source.getTags());
     }
 
     public void setTitle(Title title) {
@@ -85,6 +108,18 @@ public class Task implements ReadOnlyTask {
     }
     // @@author
 
+    // @@author A0114269E
+    @Override
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        assert status != null;
+        this.status = status;
+    }
+    // @@author
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -107,6 +142,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDate(replacement.getStartDate());
         this.setEndDate(replacement.getEndDate());
         this.setDescription(replacement.getDescription());
+        this.setStatus(replacement.getStatus());
         this.setTags(replacement.getTags());
     }
 
