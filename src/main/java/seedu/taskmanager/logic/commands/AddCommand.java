@@ -33,7 +33,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     // @@author A0140032E
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
-    public static final String MESSAGE_REPEAT_CONSTRAINTS = "Recurring tasks should have a start date";
+    public static final String MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS = "Recurring tasks should have a start date";
     // @@author
     private final Task toAdd;
 
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
         }
 
         if (repeat.isPresent() && !startDate.isPresent()) {
-            throw new IllegalValueException(MESSAGE_REPEAT_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS);
         }
 
         this.toAdd = new Task(new Title(title),

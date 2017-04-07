@@ -68,8 +68,12 @@ public class DoneCommand extends Command {
                 Task markedDoneTask = createDoneTask(taskToMarkDone);
                 Task updatedRecurringTask = updateRecurringTask(taskToMarkDone);
                 try {
-                    model.updateTask(targetIndex - 1, updatedRecurringTask);
-                    model.addTask(markedDoneTask);
+                    if (updatedRecurringTask != null) {
+                        model.updateTask(targetIndex - 1, updatedRecurringTask);
+                        model.addTask(markedDoneTask);
+                    } else {
+                        model.updateTask(targetIndex - 1, markedDoneTask);
+                    }
                 } catch (UniqueTaskList.DuplicateTaskException dpe) {
                     throw new CommandException(MESSAGE_DUPLICATE_TASK);
                 }
@@ -109,29 +113,35 @@ public class DoneCommand extends Command {
         Title updatedTitle = recurringTask.getTitle();
 
         RepeatPattern rp = recurringTask.getRepeat().get().pattern;
-        DateTime dt = new DateTime(recurringTask.getStartDate().get());
+        DateTime startDate = new DateTime(recurringTask.getStartDate().get());
         switch (rp) {
         case DAY:
-            dt.plusDays(1);
+            startDate = startDate.plusDays(1);
             break;
         case MONTH:
-            dt.plusMonths(1);
+            startDate = startDate.plusMonths(1);
             break;
         case WEEK:
-            dt.plusWeeks(1);
+            startDate = startDate.plusWeeks(1);
             break;
         case YEAR:
-            dt.plusYears(1);
+            startDate = startDate.plusYears(1);
             break;
         default:
             break;
         }
 
-        Optional<StartDate> updatedStartDate = Optional.of(new StartDate(dt));
+        Optional<StartDate> updatedStartDate = Optional.of(new StartDate(startDate));
         Optional<EndDate> updatedEndDate = recurringTask.getEndDate();
+
+        if (updatedStartDate.isPresent() && updatedEndDate.isPresent()
+                && updatedStartDate.get().after(updatedEndDate.get())) {
+            return null;
+        }
+
         Optional<Description> updatedDescription = recurringTask.getDescription();
         Optional<Repeat> updatedRepeat = recurringTask.getRepeat();
-        Status updatedStatus = new Status(true);
+        Status updatedStatus = new Status(false);
         UniqueTagList updatedTags = recurringTask.getTags();
 
         return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedRepeat,
