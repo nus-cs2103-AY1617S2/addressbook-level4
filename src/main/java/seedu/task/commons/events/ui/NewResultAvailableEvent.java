@@ -10,7 +10,7 @@ public class NewResultAvailableEvent extends BaseEvent {
     public final String message;
 
     public NewResultAvailableEvent(String message) {
-	this.message = message;
+        this.message = message;
     }
 
     @Override

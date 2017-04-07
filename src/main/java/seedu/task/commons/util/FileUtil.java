@@ -12,7 +12,7 @@ public class FileUtil {
     private static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(File file) {
-	return file.exists() && file.isFile();
+        return file.exists() && file.isFile();
     }
 
     public static void createIfMissing(File file) throws IOException {

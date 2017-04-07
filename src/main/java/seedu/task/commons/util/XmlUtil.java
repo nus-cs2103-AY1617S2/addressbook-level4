@@ -15,7 +15,6 @@ public class XmlUtil {
 
     /**
      * Returns the xml data in the file as an object of the specified type.
-     *
      * @param file
      *            Points to a valid xml file containing data that match the
      *            {@code classToConvert}. Cannot be null.
@@ -29,7 +28,7 @@ public class XmlUtil {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getDataFromFile(File file, Class<T> classToConvert)
-	    throws FileNotFoundException, JAXBException {
+        throws FileNotFoundException, JAXBException {
 
 	assert file != null;
 	assert classToConvert != null;
@@ -46,7 +45,6 @@ public class XmlUtil {
 
     /**
      * Saves the data in the file in xml format.
-     *
      * @param file
      *            Points to a valid xml file containing data that match the
      *            {@code classToConvert}. Cannot be null.

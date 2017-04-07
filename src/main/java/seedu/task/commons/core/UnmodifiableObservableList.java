@@ -28,7 +28,7 @@ public class UnmodifiableObservableList<E> implements ObservableList<E> {
     private final ObservableList<? extends E> backingList;
 
     public UnmodifiableObservableList(ObservableList<? extends E> backingList) {
-	assert backingList != null;
+        assert backingList != null;
 	this.backingList = backingList;
     }
 

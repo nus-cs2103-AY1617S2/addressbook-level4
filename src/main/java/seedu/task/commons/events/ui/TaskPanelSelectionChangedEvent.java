@@ -11,7 +11,7 @@ public class TaskPanelSelectionChangedEvent extends BaseEvent {
     private final ReadOnlyTask newSelection;
 
     public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
-	this.newSelection = newSelection;
+        this.newSelection = newSelection;
     }
 
     @Override

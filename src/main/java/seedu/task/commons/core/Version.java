@@ -23,7 +23,7 @@ public class Version implements Comparable<Version> {
     private final boolean isEarlyAccess;
 
     public Version(int major, int minor, int patch, boolean isEarlyAccess) {
-	this.major = major;
+        this.major = major;
 	this.minor = minor;
 	this.patch = patch;
 	this.isEarlyAccess = isEarlyAccess;

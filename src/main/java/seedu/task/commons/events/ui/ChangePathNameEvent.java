@@ -7,7 +7,7 @@ public class ChangePathNameEvent extends BaseEvent {
     private String pathName;
 
     public ChangePathNameEvent(String pathName) {
-	this.pathName = pathName;
+        this.pathName = pathName;
     }
 
     @Override

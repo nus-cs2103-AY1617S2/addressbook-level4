@@ -18,7 +18,7 @@ public abstract class ComponentManager {
     }
 
     public ComponentManager(EventsCenter eventsCenter) {
-	this.eventsCenter = eventsCenter;
+        this.eventsCenter = eventsCenter;
 	eventsCenter.registerHandler(this);
     }
 

@@ -28,7 +28,7 @@ public class JsonUtil {
     private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
 
     private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
-	    .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
 	    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 	    .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
 	    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
@@ -135,7 +135,6 @@ public class JsonUtil {
 	 * Gets the logging level that matches loggingLevelString
 	 * <p>
 	 * Returns null if there are no matches
-	 *
 	 */
 	private Level getLoggingLevel(String loggingLevelString) {
 	    return Level.parse(loggingLevelString);

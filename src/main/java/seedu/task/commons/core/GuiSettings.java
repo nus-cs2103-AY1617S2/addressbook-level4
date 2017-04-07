@@ -17,7 +17,7 @@ public class GuiSettings implements Serializable {
     private Point windowCoordinates;
 
     public GuiSettings() {
-	this.windowWidth = DEFAULT_WIDTH;
+        this.windowWidth = DEFAULT_WIDTH;
 	this.windowHeight = DEFAULT_HEIGHT;
 	this.windowCoordinates = null; // null represent no coordinates
     }

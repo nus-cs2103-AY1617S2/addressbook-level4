@@ -52,7 +52,7 @@ public class MainApp extends Application {
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing Task Manager ]===========================");
-	super.init();
+        super.init();
 
 	config = initConfig(getApplicationParameter("config"));
 	storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());

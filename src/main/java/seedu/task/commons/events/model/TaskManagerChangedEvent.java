@@ -9,7 +9,7 @@ public class TaskManagerChangedEvent extends BaseEvent {
     public final ReadOnlyTaskManager data;
 
     public TaskManagerChangedEvent(ReadOnlyTaskManager data) {
-	this.data = data;
+        this.data = data;
     }
 
     @Override

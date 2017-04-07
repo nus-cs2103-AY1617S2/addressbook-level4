@@ -22,7 +22,7 @@ public class Config {
     }
 
     public void setAppTitle(String appTitle) {
-	this.appTitle = appTitle;
+        this.appTitle = appTitle;
     }
 
     public Level getLogLevel() {

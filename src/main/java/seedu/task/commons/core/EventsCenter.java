@@ -16,7 +16,7 @@ public class EventsCenter {
 
     public static EventsCenter getInstance() {
         if (instance == null) {
-	    instance = new EventsCenter();
+            instance = new EventsCenter();
 	}
 	return instance;
     }

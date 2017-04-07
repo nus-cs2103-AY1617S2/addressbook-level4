@@ -7,7 +7,7 @@ public class LoadDataEvent extends BaseEvent {
     private String pathName;
 
     public LoadDataEvent(String pathName) {
-	this.pathName = pathName;
+        this.pathName = pathName;
     }
 
     @Override

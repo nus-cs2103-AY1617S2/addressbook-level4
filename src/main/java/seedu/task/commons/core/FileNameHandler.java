@@ -14,7 +14,7 @@ public class FileNameHandler {
 
     public static String getFileName() {
         try {
-	    FileInputStream fis = new FileInputStream(filePath);
+            FileInputStream fis = new FileInputStream(filePath);
 	    BufferedInputStream bis = new BufferedInputStream(fis);
 	    byte[] data = new byte[256];
 	    bis.read(data);

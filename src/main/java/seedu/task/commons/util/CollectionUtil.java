@@ -14,7 +14,7 @@ public class CollectionUtil {
 
     /** @see #isAnyNull(Collection) */
     public static boolean isAnyNull(Object... items) {
-	return Stream.of(items).anyMatch(Objects::isNull);
+        return Stream.of(items).anyMatch(Objects::isNull);
     }
 
     /**
