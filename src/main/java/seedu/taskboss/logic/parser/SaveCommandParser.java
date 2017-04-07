@@ -5,6 +5,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import java.io.File;
 
 import seedu.taskboss.logic.commands.Command;
+import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.SaveCommand;
 
 //@@author A0138961W
