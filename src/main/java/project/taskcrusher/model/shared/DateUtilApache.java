@@ -29,7 +29,7 @@ public class DateUtilApache {
     public static final int FORMAT_THIS_YEAR = 2;
     public static final int FORMAT_DATE_RELATIVE = 3;
 
-    public static Date parseDate(String toParse, boolean isNew) throws IllegalValueException {
+    public static Date parseDate(String toParse) throws IllegalValueException {
 
         Parser nattyParser = new Parser();
         Date parsed = null;
@@ -51,10 +51,11 @@ public class DateUtilApache {
             parsed = DateUtils.setMilliseconds(parsed, 59);
         }
 
-        if (isNew && hasPassed(parsed)) { // short circuit if not new/from
-            // storage
-            throw new IllegalValueException(MESSAGE_DATE_PASSED);
-        }
+        // REMOVED TO ALLOW PAST DATES TO BE ADDED
+        // if (isNew && hasPassed(parsed)) { // short circuit if not new/from
+        // // storage
+        // throw new IllegalValueException(MESSAGE_DATE_PASSED);
+        // }
 
         return parsed;
     }

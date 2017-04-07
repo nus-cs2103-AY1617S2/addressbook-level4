@@ -31,7 +31,7 @@ public class Timeslot implements Comparable<Timeslot> {
         assert end != null;
 
         this.start = new Date();
-        this.end = DateUtilApache.parseDate(end, true);
+        this.end = DateUtilApache.parseDate(end);
 
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
@@ -42,25 +42,27 @@ public class Timeslot implements Comparable<Timeslot> {
         assert start != null;
         assert end != null;
 
-        this.start = DateUtilApache.parseDate(start, true);
-        this.end = DateUtilApache.parseDate(end, true);
+        this.start = DateUtilApache.parseDate(start);
+        this.end = DateUtilApache.parseDate(end);
 
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
         }
     }
 
-    public Timeslot(String start, String end, boolean isNew) throws IllegalValueException {
-        assert start != null;
-        assert end != null;
-
-        this.start = DateUtilApache.parseDate(start, isNew);
-        this.end = DateUtilApache.parseDate(end, isNew);
-
-        if (!isValidTimeslot(this.start, this.end, isNew)) {
-            throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
-        }
-    }
+    // REMOVED FOR PAST DATES
+    // public Timeslot(String start, String end, boolean isNew) throws
+    // IllegalValueException {
+    // assert start != null;
+    // assert end != null;
+    //
+    // this.start = DateUtilApache.parseDate(start, isNew);
+    // this.end = DateUtilApache.parseDate(end, isNew);
+    //
+    // if (!isValidTimeslot(this.start, this.end, isNew)) {
+    // throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
+    // }
+    // }
 
     /**
      * Checks if {@code another} has overlapping timeslot with this Timeslot
@@ -116,6 +118,7 @@ public class Timeslot implements Comparable<Timeslot> {
                 || (other instanceof Timeslot // instanceof handles nulls
                         && this.start.equals(((Timeslot) other).start)
                         && this.end.equals(((Timeslot) other).end)); // state check
+
     }
 
     public int compareTo(Timeslot another) {
