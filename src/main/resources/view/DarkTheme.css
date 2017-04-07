@@ -335,6 +335,11 @@
 	-fx-background-color: #bbbbbb;
     -fx-font-family: "GelPenUpright";
 }
+/*OMG Y U NO DO header*/
+.overdue {
+	-fx-background-color: #bbbbbb;
+    -fx-font-family: "GelPenUpright";
+}
 /*@@author*/
 
 #commandTypeLabel {
