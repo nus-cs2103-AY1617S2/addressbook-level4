@@ -124,7 +124,10 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        // prevent initialising style when stage is set to visible
+        if (primaryStage.getStyle() != StageStyle.UNDECORATED) {
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+        }
         primaryStage.setResizable(false);
         registerAsAnEventHandler(this);
 
