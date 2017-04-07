@@ -15,7 +15,6 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_FAILURE = "There is no command to redo.";
 
     private static final int STATUS_EMPTY_HISTORY = 0;
-    private static final int STATUS_ERROR_HISTORY = -1;
 
     @Override
     /**
@@ -23,8 +22,6 @@ public class RedoCommand extends Command {
      */
     public CommandResult execute() {
         switch (model.revertTaskManager()) {
-        case STATUS_ERROR_HISTORY:
-            return new CommandResult(MESSAGE_FAILURE);
         case STATUS_EMPTY_HISTORY:
             return new CommandResult(MESSAGE_FAILURE);
         default:
