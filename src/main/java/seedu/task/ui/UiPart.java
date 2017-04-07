@@ -40,7 +40,6 @@ public abstract class UiPart<T> {
     /**
      * Constructs a UiPart using the specified FXML file within
      * {@link #FXML_FILE_FOLDER}.
-     * 
      * @see #UiPart(URL)
      */
     public UiPart(String fxmlFileName) {
@@ -55,8 +54,7 @@ public abstract class UiPart<T> {
     }
 
     /**
-     * Raises the event via {@link EventsCenter#post(BaseEvent)}
-     * 
+     * Raises the event via {@link EventsCenter#post(BaseEvent)} 
      * @param event
      */
     protected void raise(BaseEvent event) {
@@ -64,8 +62,7 @@ public abstract class UiPart<T> {
     }
 
     /**
-     * Registers the object as an event handler at the {@link EventsCenter}
-     * 
+     * Registers the object as an event handler at the {@link EventsCenter} 
      * @param handler
      *            usually {@code this}
      */
@@ -75,7 +72,6 @@ public abstract class UiPart<T> {
 
     /**
      * Creates a modal dialog.
-     * 
      * @param title
      *            Title of the dialog.
      * @param parentStage
