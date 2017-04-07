@@ -12,9 +12,12 @@ import seedu.jobs.model.task.Task;
 
 public class AddCalendar extends BasicCommandCalendar {
 	private EventCalendar toAdd;
+//	private com.google.api.services.calendar.Calendar service;
 	
-	public AddCalendar (Task inputTask) {
+	public AddCalendar (Task inputTask,
+			com.google.api.services.calendar.Calendar inputCalendar) {
 		toAdd = new EventCalendar(inputTask);
+		service = inputCalendar;
 		try {
 			this.execute();
 		} catch (IOException e) {
@@ -40,13 +43,10 @@ public class AddCalendar extends BasicCommandCalendar {
 		    .setTimeZone("Singapore");
 		event.setEnd(end);
 		
-		event.setId(toAdd.getId().toString());
-		
 //		String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
 //		event.setRecurrence(Arrays.asList(recurrence));
 		
 		String calendarId = "primary";
-		
 		event = service.events().insert(calendarId, event).execute();
 		}
 }

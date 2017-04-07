@@ -13,6 +13,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 
 import com.google.api.services.calendar.CalendarScopes;
 
+import seedu.jobs.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 
@@ -108,8 +109,6 @@ public class CalendarManager {
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-        System.out.println(service.getApplicationName());
-        System.out.println("test");
         return service;
     }
     
@@ -118,18 +117,18 @@ public class CalendarManager {
     }
     
     public void AddTask(Task task) {
-    	new AddCalendar(task);
+    	new AddCalendar(task, service);
     }
     
     public void ClearTask() {
-    	new ClearCalendar();
+    	new ClearCalendar(service);
     }
     
     public void DeleteTask(ReadOnlyTask task) {
     	new DeleteCalendar(task, service);
     }
     
-    public void EditTask(ReadOnlyTask initialTask, Task newTask) {
+    public void EditTask(ReadOnlyTask initialTask, EditTaskDescriptor newTask) {
     	new EditCalendar(initialTask, newTask, service);
     }
 	

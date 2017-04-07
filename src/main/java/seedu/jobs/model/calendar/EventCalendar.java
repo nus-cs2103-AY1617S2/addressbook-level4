@@ -7,7 +7,6 @@ public class EventCalendar {
     private TimeCalendar startTime;
     private TimeCalendar endTime;
     private String description;
-    private IDCalendar id;
     private int period;
     
     public EventCalendar(Task task) {
@@ -15,7 +14,6 @@ public class EventCalendar {
     	setStartTime(new TimeCalendar(task.getStartTime()));
     	setEndTime(new TimeCalendar(task.getEndTime()));
     	setDescription(task.getDescription().toString());
-    	setId(new IDCalendar(task.getName()));
     	setPeriod(task.getPeriod().value);
     }
 
@@ -51,19 +49,11 @@ public class EventCalendar {
 		this.description = description;
 	}
 
-	public IDCalendar getId() {
-		return id;
-	}
-
-	public void setId(IDCalendar id) {
-		this.id = id;
-	}
-
 	public int getPeriod() {
 		return period;
 	}
 
 	public void setPeriod(int period) {
 		this.period = period;
-	}    
+	}   
 }

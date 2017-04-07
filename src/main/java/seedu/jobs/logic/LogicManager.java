@@ -35,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        command.setData(calendar);
+        command.setCalendar(calendar);
         return command.execute();
     }
 

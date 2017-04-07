@@ -38,7 +38,7 @@ public abstract class Command {
     public void setData(Model model) {
         this.model = model;
     }
-    public void setData(CalendarManager calendar) {
+    public void setCalendar(CalendarManager calendar) {
     	this.calendar = calendar;
     }
 }
