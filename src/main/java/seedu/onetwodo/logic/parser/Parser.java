@@ -23,6 +23,7 @@ import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.RedoCommand;
 import seedu.onetwodo.logic.commands.SaveToCommand;
 import seedu.onetwodo.logic.commands.SelectCommand;
+import seedu.onetwodo.logic.commands.TagsCommand;
 import seedu.onetwodo.logic.commands.UndoCommand;
 import seedu.onetwodo.logic.commands.UndoneCommand;
 
@@ -112,6 +113,9 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case TagsCommand.COMMAND_WORD:
+            return new TagsCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
