@@ -44,7 +44,7 @@
             </VBox>
             <VBox>
                <children>
-                  <TextField alignment="CENTER" editable="false" style="-fx-background-color: #32cd32; -fx-font-weight: bold;" stylesheets="@DarkTheme.css" text="Completed" VBox.vgrow="ALWAYS" />                 
+                  <TextField alignment="CENTER" editable="false" style="-fx-background-color: #32cd32; -fx-font-weight: bold;" stylesheets="@DarkTheme.css" text="Completed" VBox.vgrow="ALWAYS" />
                   <AnchorPane fx:id="overdueListPanelPlaceholder" prefWidth="340" VBox.vgrow="ALWAYS">
                       <padding>
                           <Insets bottom="10" left="10" right="10" top="10" />
