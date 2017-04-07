@@ -330,7 +330,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-                return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
+            return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
                         : (this.stringQualifier.run(task)
                                 && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
         }
