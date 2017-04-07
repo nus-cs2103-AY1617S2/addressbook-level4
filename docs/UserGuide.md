@@ -10,17 +10,18 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.1. [Viewing help](#31-viewing-help--help)  
   3.2. [Adding a new task](#32-adding-a-new-task--add)  
   3.3. [Listing tasks](#33-listing-tasks--list)  
-  3.4. [Finding a task](#34-finding-a-task--find)  
-  3.5. [Deleting a task](#35-deleting-a-task--delete)  
-  3.6. [Marking tasks as finished](#36-marking-tasks-as-finished--finish)  
-  3.7. [Editing an existing task](#37-editing-an-existing-task--edit)  
-  3.8. [Listing all tags](#38-listing-all-tags--list_tag)  
+  3.4. [Sorting tasks](#34-sorting-tasks--sort)
+  3.5. [Finding a task](#35-finding-a-task--find)  
+  3.6. [Editing an existing task](#36-editing-an-existing-task--edit)  
+  3.7. [Deleting a task](#37-deleting-a-task--delete)  
+  3.8. [Marking tasks as finished](#38-marking-tasks-as-finished--finish)  
   3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
-  3.10. [Clearing all tasks](#310-clearing-all-tasks--clear)  
-  3.11. [Setting an alias for a command word](#311-setting-an-alias-for-a-command-word--alias-view_alias)  
-  3.12. [Changing the storage location](#312-changing-the-storage-location--save_at)  
+  3.10. [Setting an alias for a command word](#310-setting-an-alias-for-a-command-word--alias-view_alias)  
+  3.11. [Changing the storage location](#311-changing-the-storage-location--save_at)  
+  3.12  [Changing themes](#312-changing-themes)  
   3.13. [Saving the data](#313-saving-the-data)  
-  3.14. [Exiting the program](#314-exiting-the-program--exit)  
+  3.14. [Clearing all tasks](#314-clearing-all-tasks--clear)  
+  3.15. [Exiting the program](#315-exiting-the-program--exit)  
 4. [FAQs](#4-faqs)
 5. [Command Summary](#5-command-summary)
 
@@ -45,7 +46,7 @@ Are you ready to be a Doist?
 2. Copy the file to the folder you want to use as the home folder for Doist. You can change this later.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 <br> <br>
- <img src="images/Ui.png" width="450"> <br>
+ <img src="images/Ui.png" width="500"> <br>
  *Figure 2.1: Doist Application Window* <br>
 
 4. Voila, you are ready to be more productive! Type a command in the command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -83,13 +84,13 @@ Refer to the [Features](#features) section below for details of each command.<br
 **Command Format**
 
 Take note of some general information for our commands : <br>
-<img src="images/commandformat.png" width="450"> <br>
+<img src="images/commandformat.png" width="500"> <br>
 *Figure 2.3: General command format*
 
 > * All parameters start with the backslash `\`. <br>
 > *e.g.* `\from`, `\to`
 > * Command words and parameters that consist of multiple words will not contain spaces. Underscores are used instead. <br>
-> *e.g.* `list_tag` <br>
+> *e.g.* `remove_alias` <br>
 > * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
 > * If you want to use backslash `\` in the value, use `\\`. <br>
 > *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
@@ -177,6 +178,10 @@ Format: `[\as PRIORITY]`
 > **Remarks:** <br>
 > - `Priority` can be `normal`, `important`, `very important`
 
+<br>
+<img src="images/priority.png" width="230"> <br>
+*Figure 3.2.1: Important and very important tasks* <br>
+
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
 <br>
@@ -202,7 +207,7 @@ You can use the `list` command to list different types of tasks! Doist knows tha
 Just typing  `list` will allow you to list all tasks! <br>
 List `pending`, `overdue`, `finished`  tasks too with the `list` command. <br>
 <br>
-Format: `list [TYPE]`
+Format: `list [TYPE]` where TYPE can be `pending`, `overdue` or `finished`
 > **Examples:** <br>
 > - `list` <br>
 > - `list pending` <br>
@@ -213,7 +218,7 @@ Format: `list [TYPE]`
 > - `list` will by default show all tasks, with finished tasks placed at the bottom <br>
 
 **List tasks during a time period** <br>
-List tasks occurring during a time period by using the `\from` and `\to` parameters. <br>
+If you want to list tasks occurring during a time period, just use the `\from` and `\to` parameters. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
 You can also use the `\in` key for tasks occurring `today`, `this week`, `this month` and so on.
@@ -226,7 +231,7 @@ You can also use the `\in` key for tasks occurring `today`, `this week`, `this m
 > - See Figure 3.2.1 for acceptable date and time formats <br>
 
 **List tasks under tags** <br>
-List tasks that are under certain tags by using the `\under` key. <br>
+You can even list tasks that are under certain tags by using the `\under` key. <br>
 <br>
 Format: `[\under TAG]`
 > **Examples:** <br>
@@ -238,12 +243,30 @@ Format: `[\under TAG]`
 * `list \in this week` <br>
 * `list finished \from 1st March \to 20th March \under internship` <br>
 
-### 3.4 Finding a task : `find`
+### 3.4 Sorting tasks : `sort`
+
+You can use the `sort` command to sort tasks in alphabetical order, by priority or by time.
+You can even combine multiple sorting methods!
+
+Format: `sort TYPE [TYPE...]` where TYPE can be alpha, priority or time
+
+The default sorting <br>
+
+> **Examples:** <br>
+> - `sort priority` <br>
+> - `sort alpha priority time` <br>
+
+> **Remarks:** <br>
+> - By default, tasks are sorted by time, priority then alphabetical order. <br>
+
+### 3.5 Finding a task : `find`
 
 You can use the `find` command to find tasks whose description contains any of the given search queries. You just need to remember any of the words in the description of a task to find it in your long list of tasks! <br> <br>
-Doist will suggest descriptions of existing tasks. Just press <kbd>TAB</kbd> to accept the first suggestion!
-<br><br>
-Format: `find 'QUERY' ['QUERY'...]`
+Doist will suggest descriptions of existing tasks to make finding a task easier. Just press <kbd>TAB</kbd> to accept the first suggestion! <br><br>
+<img src="images/find.png" width="350"> <br>
+*Figure 3.4.1: Autocomplete giving suggestions for find* <br>
+<br>
+Format: `find QUERY [QUERY...]`
 > **Examples:** <br>
 > - `find buy groceries` <br>
 > - `list meeting with professor` <br>
@@ -251,7 +274,7 @@ Format: `find 'QUERY' ['QUERY'...]`
 > **Remarks:** <br>
 > - Spaces are allowed in search query.<br>
 > - The search is case insensitive. <br>
-> - The order of the search terms does not matter. *e.g.* `'Hans' 'Bo'` will match `'Bo Hans'` <br>
+> - The order of the search terms does not matter. *e.g.* `Hans Bo` will match `Bo Hans` <br>
 > - Only the task description is searched. <br>
 > - Tasks matching at least one search query will be returned.
     *e.g.* A task with a description of `Hans` will match search query `Hans Bo` <br>
@@ -261,7 +284,27 @@ Format: `find 'QUERY' ['QUERY'...]`
 * `find hiking` <br>
 * `find CS2103T group meeting project` <br>
 
-### 3.5 Deleting a task : `delete`
+### 3.6 Editing an existing task : `edit`
+
+You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
+<br>
+Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]`
+
+Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
+> **Examples:** <br>
+> - `edit 3 edited description of task` <br>
+
+> **Remarks:** <br>
+> - Refer to the section about the `add` command to know how to use the parameters of the `edit` command because they are used in the exact same way
+
+**Sample Commands**
+* `list`<br>
+  `edit 1 \desc watch NBA \from tuesday 7pm \to tuesday 9pm`<br>
+  Suppose that the description of this task is originally `watch nba`,
+  the new description will be changed to `watch NBA`.
+  The 'from' and 'to' times will also be updated.
+
+### 3.7 Deleting a task : `delete`
 
 You can use the `delete` command to delete the task specifed by an index. The index refers to the index number of the task shown in the most recent listing. <br>
 <br>
@@ -284,7 +327,7 @@ Format: `delete INDEX [INDEX...] [INDEX - INDEX]`
   `delete 1-5`<br>
   This combination of commands deletes the first 5 tasks in the results of the `find` command.
 
-### 3.6 Marking tasks as finished : `finish`
+### 3.8 Marking tasks as finished : `finish`
 
 You can use the `finish` command to mark the specified tasks as finished. <br>
 <br>
@@ -310,31 +353,6 @@ Use the `unfinish` command to change the status of an already finished task to n
   `finish 1`<br>
   This combination of commands marks the 1st task in the results of the `find` command as finished.
 
-### 3.7 Editing an existing task : `edit`
-
-You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
-<br>
-Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]`
-
-Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
-> **Examples:** <br>
-> - `edit 3 edited description of task` <br>
-
-> **Remarks:** <br>
-> - Refer to the section about the `add` command to know how to use the parameters of the `edit` command because they are used in the exact same way
-
-**Sample Commands**
-* `list`<br>
-  `edit 1 \desc watch NBA \from tuesday 7pm \to tuesday 9pm`<br>
-  Suppose that the description of this task is originally `watch nba`,
-  the new description will be changed to `watch NBA`.
-  The 'from' and 'to' times will also be updated.
-
-### 3.8 Listing all tags : `list_tag`
-If you want to list tasks by tag but you can't remember what tags there are, you can use the `list_tag` command to display a list of all existing tags. <br>
-<br>
-Format: `list_tag`  
-
 ### 3.9 Undoing previous commands : `undo`, `redo`
 
 You can use `undo` to undo previous commands. Undo as many times as you wish! <br>
@@ -343,14 +361,7 @@ Format: `undo` <br>
 <br>
 If you regret undoing a command, you can use `redo` to restore your changes.
 
-### 3.10 Clearing all tasks : `clear`
-
-Done with all your tasks? Need an empty to-do list?
-You can simply use `clear` to clear all tasks. <br>
-<br>
-Format: `clear`
-
-### 3.11 Setting an alias for a command word : `alias`, `view_alias`
+### 3.10 Setting an alias for a command word : `alias`, `view_alias`, `remove_alias`, `reset_alias`
 
 Do you feel that our default command words are too lengthy and will like to set your own command words? <br>
 You can use `alias` to set an alias for an existing command word. You will then be able to use the alias to trigger the command! <br> <br>
@@ -368,7 +379,7 @@ There are already some default aliases set for you. For example, `do` can be use
 <br>
 Format: `view_alias`
 
-### 3.12 Changing the storage location : `save_at`
+### 3.11 Changing the storage location : `save_at`
 
 You can use `save_at` to change the place that Doist would store its data at. <br>
 <br>
@@ -381,11 +392,23 @@ Format: `save_at PATH`
 > **Remarks:** <br>
 > - You can provide a relative path for this command.
 
+### 3.12 Changing themes
+Click on `Theme` on the menu bar to change the look and feel of Doist! For now, there are two themes for you to choose. The default theme is LightTheme. <br><br>
+<img src="images/changingtheme.png" width="300"> <br>
+*Figure 3.13.1: Changing the theme* <br>
+
 ### 3.13 Saving the data
 
 Doist will automatically save! There is no need to save manually.
 
-### 3.14 Exiting the program : `exit`
+### 3.14 Clearing all tasks : `clear`
+
+Done with all your tasks? Need an empty to-do list?
+You can simply use `clear` to clear all tasks. <br>
+<br>
+Format: `clear`
+
+### 3.15 Exiting the program : `exit`
 
 Use `exit` to exit Doist. <br>
 <br>
@@ -404,6 +427,15 @@ Format: `exit`
 
 **Q**: Why am I unable to give an alias? <br>
 **A**: If you are unable to alias, your alias is an existing command word.
+
+**Q**: What happens if I give an existing alias to another command word? <br>
+**A**: The alias will only be set for the current command word specified. It will no longer be set for the previous command word.
+
+**Q**: How to I remove the timings associated with an existing task? <br>
+**A**: For example, if the task has an index of 1, you can simply type: `edit 1 \by` or `edit 1 \from \to `
+
+**Q**: How to I remove the tags on an existing task? <br>
+**A**: For example, if the task has an index of 1, you can simply type: `edit 1 \under`
 
 ## 5. Command Summary
 
