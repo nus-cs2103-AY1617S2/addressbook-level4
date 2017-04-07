@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.task.commons.core.History;
@@ -19,73 +20,73 @@ import seedu.task.testutil.TestUtil;
 public class RedoCommandTest extends TaskManagerGuiTest {
 
     public static final String BACKUP_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("temp/");
-    private History history = History.getInstance();
-    private TestTask[] currentList = td.getTypicalTasks();
-    private TestTask[] emptyList = {};
+    private History history;
+    private TestTask[] currentList;
+    private TestTask[] emptyList;
+
+    @Before
+    public void setUp() {
+        currentList = td.getTypicalTasks();
+        emptyList = new TestTask[0];
+        history = History.getInstance();
+
+        history.test_setBackupDirectory(BACKUP_LOCATION_FOR_TESTING);
+    }
 
     @Test
-    public void redo_add() {
-        // set up
-        setUp();
-
-        // add task, undo then redo
+    public void redo_add_success() {
         TestTask taskToAdd = td.handle;
         commandBox.runCommand(taskToAdd.getAddCommand());
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+
         assertRedoSuccess(currentList);
     }
 
     @Test
-    public void redo_done_and_list() {
-        setUp();
-
-        // list does not affect redo
+    public void redo_doneAndList_success() {
         commandBox.runCommand(DoneCommand.COMMAND_WORD_1 + " 2");
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
-        commandBox.runCommand(ListCommand.COMMAND_WORD_1 + " done");
         commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         currentList[1].setIsDone(true);
+
         assertRedoSuccess(currentList);
     }
 
     @Test
-    public void redo_delete() {
-        setUp();
-
-        // delete, undo then redo
+    public void redo_delete_success() {
         commandBox.runCommand(DeleteCommand.COMMAND_WORD_1 + " 1");
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         assertRedoSuccess(currentList);
+    }
 
-        // clear, undo then redo
+    @Test
+    public void redo_clear_success() {
         commandBox.runCommand(ClearCommand.COMMAND_WORD_1);
         assertRedoSuccess(emptyList);
     }
 
     @Test
-    public void redo_failure() {
-        setUp();
+    public void redo_nothingToRedo_messageDisplayed() {
 
         commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
         assertResultMessage(RedoCommand.MESSAGE_FAIL);
 
-        runNTimes(DeleteCommand.COMMAND_WORD_1 + " 1", 3);
-        runNTimes(UndoCommand.COMMAND_WORD_1, 3);
-        runNTimes(RedoCommand.COMMAND_WORD_1, 2);
+        //undo twice, redo once
+        runNTimes(DeleteCommand.COMMAND_WORD_1 + " 1", 2);
+        runNTimes(UndoCommand.COMMAND_WORD_1, 2);
+        commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
 
-        currentList = TestUtil.removeTaskFromList(currentList, 1);
+        //check that it is correct
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         assertTrue(taskListPanel.isListMatching(currentList));
 
+        //after running done command redo should fail
         commandBox.runCommand(DoneCommand.COMMAND_WORD_1 + " 1");
         commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
         assertResultMessage(RedoCommand.MESSAGE_FAIL);
     }
 
     @Test
-    public void multipleRedo() {
-        setUp();
-
+    public void multipleRedo_success() {
         //10 valid commands, undo 10 times then redo 10 times
         commandBox.runCommand(td.handle.getAddCommand());
         commandBox.runCommand(td.identify.getAddCommand());
@@ -102,10 +103,6 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         runNTimes(RedoCommand.COMMAND_WORD_1, 10);
 
         assertTrue(taskListPanel.isListMatching(emptyList));
-    }
-
-    public void setUp() {
-        history.test_setBackupDirectory(BACKUP_LOCATION_FOR_TESTING);
     }
 
 

@@ -22,11 +22,12 @@ public class ModelManagerTest {
     public final ExpectedException exception = ExpectedException.none();
 
     private Model model;
-    private TestDataHelper helper = new TestDataHelper();
+    private TestDataHelper helper;
 
     @Before
     public void setUp() {
         model = new ModelManager();
+        helper = new TestDataHelper();
     }
 
     @Test
@@ -45,7 +46,6 @@ public class ModelManagerTest {
         assertTrue(model.getTaskManager().equals(expectedTM));
     }
 
-    //@@author A0140063X
     @Test
     public void addMultipleTasks_duplicateTask_notAdded() throws Exception {
         // setup expectations
@@ -66,7 +66,6 @@ public class ModelManagerTest {
         assertTrue(model.getTaskManager().equals(expectedTM));
     }
 
-    //@@author A0140063X
     @Test
     public void setTaskEventId_validInput_sucess() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -82,7 +81,6 @@ public class ModelManagerTest {
         assertTrue(expectedTask.equals(testTask));
     }
 
-    //@@author A0140063X
     @Test
     public void setTaskEventId_invalidEventId_exceptionThrown() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -104,7 +102,6 @@ public class ModelManagerTest {
         model.setTaskEventId(testTask, invalidEventId);
     }
 
-    //@@author A0140063X
     @Test
     public void setTaskEventId_taskNotInModel_exceptionThrown() throws Exception {
         TestDataHelper helper = new TestDataHelper();
