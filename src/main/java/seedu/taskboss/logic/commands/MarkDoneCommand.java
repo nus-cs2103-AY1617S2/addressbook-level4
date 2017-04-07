@@ -10,6 +10,7 @@ import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
+import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0144904H
@@ -31,6 +32,7 @@ public class MarkDoneCommand extends Command {
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done:\n%1$s";
     public static final String DONE = "Done";
+    public static final String ERROR_MARKED_TASK = "The task was marked done previously";
 
     public final ArrayList<Integer> filteredTaskListIndices;
     public final ArrayList<ReadOnlyTask> tasksToMarkDone;
@@ -53,6 +55,9 @@ public class MarkDoneCommand extends Command {
 
         for (int index : filteredTaskListIndices) {
             ReadOnlyTask taskToMarkDone = lastShownList.get(index - 1);
+            if (taskToMarkDone.getCategories().contains(Category.done)) {
+                throw new CommandException(ERROR_MARKED_TASK);
+            }
             tasksToMarkDone.add(taskToMarkDone);
         }
 
