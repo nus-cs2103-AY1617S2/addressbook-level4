@@ -42,6 +42,13 @@ public interface Model {
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredPersonList(Set<String> keywords);
+    
+    //@@author A0164466X
+    /** Updates the filter of the filtered person list to show all complete tasks */
+    void updateFilteredListToShowComplete();
+    
+    /** Updates the filter of the filtered person list to show all incomplete tasks */
+    void updateFilteredListToShowIncomplete();
 
     //@@author A0163848R
 
