@@ -33,6 +33,9 @@ public class ParserUtil {
     private static final Pattern INDEXES_ARGS_FORMAT = Pattern.compile("^([0-9]*\\s+)*[0-9]*$");
     private static final String WHITESPACE_DELIMITER = "\\s+";
 
+    private static final String MATCHER_GROUP_SORT_CRITERIA = "sortCriteria";
+    private static final String MATCHER_GROUP_SORT_ORDER = "sortOrder";
+
     private static final int ALIAS_COMMAND_ADD_EXPECTED_ARGS = 2;
     private static final int ALIAS_COMMAND_RESET_EXPECTED_ARGS = 1;
     private static final int ALIAS_COMMAND_ARGS_COMMAND_INDEX = 0;
@@ -86,8 +89,8 @@ public class ParserUtil {
         if (!matcher.matches()) {
             return Optional.empty();
         }
-        String sortCriteria = matcher.group("sortCriteria");
-        String sortOrder = matcher.group("sortOrder");
+        String sortCriteria = matcher.group(MATCHER_GROUP_SORT_CRITERIA);
+        String sortOrder = matcher.group(MATCHER_GROUP_SORT_ORDER);
         String[] resultPair = new String[] {sortCriteria, sortOrder};
         return Optional.of(resultPair);
     }
