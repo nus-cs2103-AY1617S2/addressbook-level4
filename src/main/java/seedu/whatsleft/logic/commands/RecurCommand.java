@@ -58,7 +58,6 @@ public class RecurCommand extends Command {
         LocalDate nexted = enddate;
         if (frequency.equals("daily")) {
             for (int i = 0; i < occur; i++) {
-                System.out.println(i);
                 nextsd = nextsd.plusDays(1);
                 nexted = nexted.plusDays(1);
                 Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
