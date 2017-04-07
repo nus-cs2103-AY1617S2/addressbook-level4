@@ -124,7 +124,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AliasListMapChangedEvent(aliasListMap));
     }
 
-    //@@author
+    //@@author A0147980U
     //=========== TodoList =============================================================
 
     @Override
@@ -333,6 +333,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147980U
     private class TagQualifier implements Qualifier {
         private UniqueTagList tags;
 
@@ -351,7 +352,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147980U
     private class TaskTypeQualifier implements Qualifier {
         private TaskType type;
 
