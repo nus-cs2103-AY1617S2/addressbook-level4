@@ -108,10 +108,10 @@ public class ParserUtil {
 	assert description != null;
 	return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
-    
+
     public static Optional<Recurrence> parseRecurrence(Optional<String> recurrence) throws IllegalValueException {
-        // TODO
-        throw new UnsupportedOperationException();
+	// TODO
+	throw new UnsupportedOperationException();
     }
 
     /**
@@ -143,7 +143,8 @@ public class ParserUtil {
     /**
      * Parses {@code String words} to a {@code List<Date>}, using natty library
      *
-     * @param a string containing date and time information
+     * @param a
+     *            string containing date and time information
      * @return a list of Date objects
      * @throws IllegalValueException
      */

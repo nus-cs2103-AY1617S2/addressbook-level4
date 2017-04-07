@@ -1,5 +1,7 @@
 package org.teamstbf.yats.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -231,7 +233,6 @@ public class ModelManager extends ComponentManager implements Model {
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
-
 		EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEventListIndex));
 	}
 
@@ -263,8 +264,12 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateCalendarFilteredListToShowStartTime(Set<String> keywords) {
-		updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywords)));
+	public void updateCalendarFilteredListToShowStartTime() {
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		Set<String> keywordSet = new HashSet<String>();
+		keywordSet.add(today.format(formatter));
+		updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywordSet)));
 	}
 
 	@Override
