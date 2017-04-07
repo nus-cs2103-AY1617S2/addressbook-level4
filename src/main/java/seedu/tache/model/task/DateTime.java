@@ -14,7 +14,7 @@ import com.joestelmach.natty.Parser;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 
-public class DateTime {
+public class DateTime implements Comparable {
 
     private static final String EXPLICIT_DATE_TREE_IDENTIFIER = "EXPLICIT_DATE";
     private static final String EXPLICIT_TIME_TREE_IDENTIFIER = "EXPLICIT_TIME";
@@ -50,6 +50,14 @@ public class DateTime {
                 this.date.setSeconds(0);
             }
         }
+    }
+
+    /**
+     * Creates a copy of the given DateTime.
+     * @throws IllegalValueException if source date string is invalid
+     */
+    public DateTime(DateTime source) throws IllegalValueException {
+        this(source.getAmericanDateTime());
     }
 
     @Override
@@ -101,6 +109,18 @@ public class DateTime {
     public String getAmericanDateOnly() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         return sdf.format(date);
+    }
+
+    @Override
+    public int compareTo(Object other) {
+        assert other instanceof DateTime;
+        if (this.equals(other)) {
+            return 0;
+        } else if (date.after(((DateTime) other).getDate())) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     //@@author A0142255M
@@ -202,6 +222,8 @@ public class DateTime {
         }
     }
     //@@author
+
+
 
     /*@Override
     public int hashCode() {

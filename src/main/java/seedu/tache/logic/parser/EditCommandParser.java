@@ -8,22 +8,23 @@ import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_END_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_END_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_NAME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_START_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_START_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_2_TAG;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_END_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_END_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_START_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_3_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
+
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,31 +111,31 @@ public class EditCommandParser {
 
                 switch(updateParameter) {
                 case PARAMETER_NAME:
-                case PARAMETER_2_NAME:
+                case PARAMETER_NAME_2:
                     editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
                     break;
                 case PARAMETER_START_DATE:
-                case PARAMETER_2_START_DATE:
-                case PARAMETER_3_START_DATE:
+                case PARAMETER_START_DATE_2:
+                case PARAMETER_START_DATE_3:
                     editTaskDescriptor.setStartDate(Optional.of(updateValue));
                     break;
                 case PARAMETER_END_DATE:
-                case PARAMETER_2_END_DATE:
-                case PARAMETER_3_END_DATE:
+                case PARAMETER_END_DATE_2:
+                case PARAMETER_END_DATE_3:
                     editTaskDescriptor.setEndDate(Optional.of(updateValue));
                     break;
                 case PARAMETER_START_TIME:
-                case PARAMETER_2_START_TIME:
-                case PARAMETER_3_START_TIME:
+                case PARAMETER_START_TIME_2:
+                case PARAMETER_START_TIME_3:
                     editTaskDescriptor.setStartTime(Optional.of(updateValue));
                     break;
                 case PARAMETER_END_TIME:
-                case PARAMETER_2_END_TIME:
-                case PARAMETER_3_END_TIME:
+                case PARAMETER_END_TIME_2:
+                case PARAMETER_END_TIME_3:
                     editTaskDescriptor.setEndTime(Optional.of(updateValue));
                     break;
                 case PARAMETER_TAG:
-                case PARAMETER_2_TAG:
+                case PARAMETER_TAG_2:
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(DELIMITER_EDIT_PARAMETER))));
                     break;
