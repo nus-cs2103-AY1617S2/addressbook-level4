@@ -32,29 +32,29 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtilApache.dateAsStringForStorage(DateUtilApache.parseDate(deadline, true));
+            this.deadline = DateUtilApache.dateAsStringForStorage(DateUtilApache.parseDate(deadline));
         }
     }
 
-    /**
-     * Creates a Deadline using the String passed. isNew means that this
-     * Deadline object is added from user input as opposed to being loaded from
-     * storage, and therefore the checking of whether the deadline date is in
-     * the past should NOT be bypassed.
-     *
-     * @param deadline
-     * @throws IllegalValueException
-     */
-    public Deadline(String deadline, boolean filterOverdue) throws IllegalValueException {
-        assert deadline != null;
-
-        if (deadline.equals(NO_DEADLINE)) {
-            this.deadline = NO_DEADLINE;
-        } else {
-            this.deadline = DateUtilApache.dateAsStringForStorage(DateUtilApache.parseDate(deadline, filterOverdue));
-        }
-
-    }
+//    /**
+//     * Creates a Deadline using the String passed. isNew means that this
+//     * Deadline object is added from user input as opposed to being loaded from
+//     * storage, and therefore the checking of whether the deadline date is in
+//     * the past should NOT be bypassed.
+//     *
+//     * @param deadline
+//     * @throws IllegalValueException
+//     */
+//    public Deadline(String deadline, boolean filterOverdue) throws IllegalValueException {
+//        assert deadline != null;
+//
+//        if (deadline.equals(NO_DEADLINE)) {
+//            this.deadline = NO_DEADLINE;
+//        } else {
+//            this.deadline = DateUtilApache.dateAsStringForStorage(DateUtilApache.parseDate(deadline, filterOverdue));
+//        }
+//
+//    }
 
     /**
      * Returns Deadline in the form of Optional<Date>
@@ -69,7 +69,7 @@ public class Deadline {
 
         if (this.hasDeadline()) {
             try {
-                return Optional.of(DateUtilApache.parseDate(this.deadline, false));
+                return Optional.of(DateUtilApache.parseDate(this.deadline));
             } catch (IllegalValueException e) {
                 // TODO this should not occur by default, provided that this
                 // object was instantiated successfully.

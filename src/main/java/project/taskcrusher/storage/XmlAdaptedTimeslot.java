@@ -37,6 +37,6 @@ public class XmlAdaptedTimeslot {
      * @throws IllegalValueException if there were any data constraints violated in the adapted timeslot
      */
     public Timeslot toModelType() throws IllegalValueException {
-        return new Timeslot(startDate, endDate, Timeslot.IS_LOADING_FROM_STORAGE);
+        return new Timeslot(startDate, endDate);
     }
 }

@@ -14,7 +14,7 @@ import project.taskcrusher.model.task.Deadline;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String COMPLETE_FLAG = "c";
+    public static final String COMPLETE_FLAG = "complete";
     public static final String ALL_FLAG = "all";
     public static final String NO_FLAG = "";
 

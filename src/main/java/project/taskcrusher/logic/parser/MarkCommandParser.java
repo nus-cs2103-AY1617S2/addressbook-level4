@@ -24,7 +24,7 @@ public class MarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         } else if (!preamble[1].matches("\\d+")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
-        } else if (!preamble[2].matches("c|ic")) {
+        } else if (!preamble[2].matches("complete|incomplete")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
@@ -32,7 +32,7 @@ public class MarkCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
-        int markFlag = preamble[2].equals("ic") ? MarkCommand.MARK_INCOMPLETE : MarkCommand.MARK_COMPLETE;
+        int markFlag = preamble[2].equals("incomplete") ? MarkCommand.MARK_INCOMPLETE : MarkCommand.MARK_COMPLETE;
 
         return new MarkCommand(preamble[0], index.get(), markFlag);
     }
