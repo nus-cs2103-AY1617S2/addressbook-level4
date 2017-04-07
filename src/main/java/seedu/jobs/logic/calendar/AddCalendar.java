@@ -1,6 +1,7 @@
 package seedu.jobs.logic.calendar;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
@@ -41,10 +42,11 @@ public class AddCalendar extends BasicCommandCalendar {
 		
 		event.setId(toAdd.getId().toString());
 		
-	//	String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
-	//	event.setRecurrence(Arrays.asList(recurrence));
+//		String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
+//		event.setRecurrence(Arrays.asList(recurrence));
+		
 		String calendarId = "primary";
-
+		
 		event = service.events().insert(calendarId, event).execute();
 		}
 }

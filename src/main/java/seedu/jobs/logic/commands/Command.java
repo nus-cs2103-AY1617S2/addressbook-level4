@@ -35,8 +35,10 @@ public abstract class Command {
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    public void setData(Model model, CalendarManager calendar) {
+    public void setData(Model model) {
         this.model = model;
-        this.calendar = calendar;
+    }
+    public void setData(CalendarManager calendar) {
+    	this.calendar = calendar;
     }
 }

@@ -27,11 +27,11 @@ allprojects {
     targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
-		maven()
 		jcenter()
-        mavenCentral()
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        mavenCentral()
+        
     }
 
     // This part is similar to global variables

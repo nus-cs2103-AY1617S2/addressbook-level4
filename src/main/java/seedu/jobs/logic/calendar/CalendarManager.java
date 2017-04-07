@@ -50,7 +50,17 @@ public class CalendarManager {
         Arrays.asList(CalendarScopes.CALENDAR);
     
     protected static com.google.api.services.calendar.Calendar service;
-
+    
+    public CalendarManager() {
+    	try {
+			authorize();
+			getCalendarService();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
     static {
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -70,7 +80,7 @@ public class CalendarManager {
     public static Credential authorize() throws IOException {
         // Load client secrets.
         InputStream in =
-            BasicCommandCalendar.class.getResourceAsStream("/client_secret.json");
+            CalendarManager.class.getResourceAsStream("/client_secret.json");
         GoogleClientSecrets clientSecrets =
             GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -98,7 +108,13 @@ public class CalendarManager {
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
+        System.out.println(service.getApplicationName());
+        System.out.println("test");
         return service;
+    }
+    
+    public static com.google.api.services.calendar.Calendar getCalendar() {
+    	return service;
     }
     
     public void AddTask(Task task) {
