@@ -193,9 +193,10 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withInformation("10th street")
                 .withCategories("Done").build();
 
+        TestTask[] markedDone = new TestTask[] {expectedTasksList[3], expectedTasksList[1]};
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
-                expectedTasksList[3] + "2. " + expectedTasksList[1]));
+        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS,
+                getDesiredFormat(markedDone)));
     }
 
     @Test
@@ -213,9 +214,10 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withInformation("10th street")
                 .withCategories("Done").build();
 
+        TestTask[] markedDone = new TestTask[] {expectedTasksList[3], expectedTasksList[1]};
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , "1. " +
-                expectedTasksList[3] + "2. " + expectedTasksList[1]));
+        assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS,
+                getDesiredFormat(markedDone)));
     }
 
     @Test
@@ -259,5 +261,21 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
     }
-}
 
+    //@@author A0143157J
+    /**
+     * Returns a formatted {@code Array} tasksToMarkDone,
+     * so that each TestTask in the Array is numbered
+     */
+    private String getDesiredFormat(TestTask[] markedDoneTask) {
+        int INDEX_ONE = 1;
+        String NUMBERING_DOT = ". ";
+        int i = INDEX_ONE;
+        StringBuilder builder = new StringBuilder();
+        for (TestTask task : markedDoneTask) {
+            builder.append(i + NUMBERING_DOT).append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
+}
