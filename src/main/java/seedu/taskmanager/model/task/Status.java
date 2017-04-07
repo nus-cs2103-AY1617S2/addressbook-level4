@@ -43,7 +43,7 @@ public class Status {
 
     public static boolean toBoolean(String status) {
         if (status.equals(MESSAGE_STATUS_DONE)) {
-             return true;
+            return true;
         } else if (status.equals(MESSAGE_STATUS_NOT_DONE)) {
             return false;
         } else {
