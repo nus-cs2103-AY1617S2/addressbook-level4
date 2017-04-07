@@ -51,12 +51,14 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
+    // @author A0093999Y
     protected TypicalTasks td = new TypicalTasks();
     protected Task[] emptyTaskList = new Task[] {};
     protected Task[] todayList = td.getTodayListTasks();
     protected Task[] futureList = td.getFutureListTasks();
     protected Task[] completedList = td.getCompletedListTasks();
 
+    // @author
     /*
      * Handles to GUI elements present at the start up are created in advance
      * for easy access from child classes.
@@ -140,6 +142,7 @@ public abstract class TaskManagerGuiTest {
         assertEquals(size, numberOfTasks);
     }
 
+    // @author A0093999Y
     /**
      * Asserts the UI Today and Future Task Lists match the given expected lists
      */
@@ -159,6 +162,7 @@ public abstract class TaskManagerGuiTest {
         commandBox.runCommand("list");
     }
 
+    // @author
     /**
      * Asserts the message shown in the Result Display area is same as the given
      * string.
