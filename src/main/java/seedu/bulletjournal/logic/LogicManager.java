@@ -67,6 +67,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getUndoneTaskList();
     }
 
+    // @@author A0146738U-reused
     @Override
     public String getCommandText() {
         return this.commandText;
