@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -58,6 +59,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label status;
+    @FXML
     private Label priority;
     @FXML
     private Label startDate;
@@ -74,6 +77,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
         setPriority(task);
+        setStatus(task);
         setStartDate(task);
         setDueDate(task);
         recur.setText(task.getRecur().value);
@@ -144,7 +148,7 @@ public class TaskCard extends UiPart<Region> {
 
     // ========================= PRIORITY ============================ //
 
-    public void setPriorityInString(String priorityInString) {
+    private void setPriorityInString(String priorityInString) {
         this.priorityInString = priorityInString;
     }
 
@@ -162,7 +166,18 @@ public class TaskCard extends UiPart<Region> {
         priorityColor.setStyle(CSS_BACKGROUND_COLOR_PROPERTY + PRIORITY_COLOR_HASHMAP.get(priorityInString));
     }
 
+    // ========================= STATUS ============================ //
+    private void setStatus(ReadOnlyTask task) {
+        if (task.getDone()) {
+            status.setGraphic(new ImageView("/images/tick.png"));
+        } else {
+            status.setGraphic(new ImageView("/images/wip.png"));
+        }
+    }
+
+    // ========================= TAGS ============================ //
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
+//@@author A0139177W
