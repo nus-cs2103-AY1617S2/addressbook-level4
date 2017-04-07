@@ -77,6 +77,7 @@ public class DateTest {
         Date date2 = new Date("");
         assertTrue(date1.equals(date2));
     }
+    // @@author
 
     @Test
     public void dates_Equal_Ignores_Time_success() throws IllegalValueException {
@@ -115,5 +116,13 @@ public class DateTest {
 
     private boolean assertDatesEqualIgnoreMinutes(Date date, Date otherDate) {
         return date.equalsIgnoreMinutes(otherDate);
+    }
+    
+    @Test
+    public void testEquals_Symmetric() throws IllegalValueException {
+        Date x = new Date("today");  // equals and hashCode check name field value
+        Date y = new Date("today");
+        assertTrue(x.equals(y) && y.equals(x));
+        assertTrue(x.hashCode() == y.hashCode());
     }
 }
