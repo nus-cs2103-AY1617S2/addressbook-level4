@@ -102,7 +102,6 @@ function change_view(view) {
 
 function change_reference_date(date) {
     $(document).ready(function() {
-        $('#calendar').fullCalendar( 'changeView', 'month' );
         $('#calendar').fullCalendar( 'gotoDate', date );
         $('#calendar').fullCalendar( 'select', date );
     });

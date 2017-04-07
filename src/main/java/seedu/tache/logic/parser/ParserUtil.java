@@ -25,19 +25,16 @@ import seedu.tache.model.task.Name;
  */
 public class ParserUtil {
     //@@author A0139925U
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern FORMAT_INDEX_ARGS = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
-    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
+    private static final Pattern FORMAT_NAME = Pattern.compile("^\".+\"");
+    private static final Pattern FORMAT_DATE = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}"
                                                                + "(?:[0-9]{2})?[0-9]{2}$");
-    private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
+    private static final Pattern FORMAT_TIME = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
-    private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
-
-    public static final int TYPE_TASK = 0;
-    public static final int TYPE_DETAILED_TASK = 1;
+    private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
     //@@author
 
     //@@author A0150120H
@@ -51,7 +48,7 @@ public class ParserUtil {
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = FORMAT_INDEX_ARGS.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
@@ -110,7 +107,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidDate(String input) {
-        final Matcher matcher = DATE_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_DATE.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -119,7 +116,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidTime(String input) {
-        final Matcher matcher = TIME_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_TIME.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -128,7 +125,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidDuration(String input) {
-        final Matcher matcher = DURATION_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_DURATION.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -137,7 +134,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidName(String input) {
-        final Matcher matcher = NAME_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_NAME.matcher(input.trim());
         return matcher.matches();
     }
     //@@author
@@ -171,7 +168,7 @@ public class ParserUtil {
     public static String parseTime(String input) throws IllegalValueException {
         String[] inputs = input.split(" ");
         for (String candidate : inputs) {
-            Matcher matcher = TIME_FORMAT.matcher(candidate.trim());
+            Matcher matcher = FORMAT_TIME.matcher(candidate.trim());
             if (matcher.lookingAt()) {
                 return matcher.group();
             }
@@ -185,7 +182,7 @@ public class ParserUtil {
     public static String parseDate(String input) throws IllegalValueException {
         String[] inputs = input.split(" ");
         for (String candidate : inputs) {
-            Matcher matcher = DATE_FORMAT.matcher(candidate.trim());
+            Matcher matcher = FORMAT_DATE.matcher(candidate.trim());
             if (matcher.lookingAt()) {
                 return matcher.group();
             }
