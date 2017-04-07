@@ -9,7 +9,6 @@ import project.taskcrusher.commons.core.ComponentManager;
 import project.taskcrusher.commons.core.LogsCenter;
 import project.taskcrusher.commons.core.UnmodifiableObservableList;
 import project.taskcrusher.commons.events.model.ListsToShowUpdatedEvent;
-import project.taskcrusher.commons.events.model.TimerToUpdateEvent;
 import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.util.CollectionUtil;
 import project.taskcrusher.commons.util.StringUtil;
@@ -38,7 +37,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyEvent> filteredEvents;
     private final Stack<UserInbox> undoStack = new Stack<>();
     private final Stack<UserInbox> redoStack = new Stack<>();
-    private boolean isLastPerformedActionIsUndo = false;
+    private boolean isLastPerformedActionUndo;
+    private boolean isLastSeenListsActiveLists = false; //to make the list showing consistent after user actions
 
     /**
      * Initialises a ModelManager with the given userInbox and userPrefs.
@@ -52,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.userInbox = new UserInbox(userInbox);
         filteredTasks = new FilteredList<>(this.userInbox.getTaskList());
         filteredEvents = new FilteredList<>(this.userInbox.getEventList());
-        updateFilteredListsToShowActiveToDo();
+        updateFilteredListsToShowAll();
     }
 
     public ModelManager() {
@@ -66,13 +66,13 @@ public class ModelManager extends ComponentManager implements Model {
             redoStack.push(new UserInbox(this.userInbox));
             UserInbox stateToRecover = undoStack.pop();
             resetData(stateToRecover);
-            isLastPerformedActionIsUndo = true;
+            isLastPerformedActionUndo = true;
             return true;
         }
     }
 
     public boolean redo() {
-        if (!isLastPerformedActionIsUndo) {
+        if (!isLastPerformedActionUndo) {
             return false;
         } else if (redoStack.isEmpty()) {
             return false;
@@ -110,10 +110,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ListsToShowUpdatedEvent(eventCount, taskCount));
     }
 
-    public void signalUiToUpdateTimer() {
-        raise(new TimerToUpdateEvent());
+    private void showAppropriateList() {
+        if (isLastSeenListsActiveLists) {
+            updateFilteredListsToShowActiveToDo();
+        } else {
+            updateFilteredListsToShowAll();
+        }
     }
-
     //=========== Task operations =========================================================================
 
     @Override
@@ -130,6 +133,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.addTask(task);
         updateFilteredListsToShowActiveToDo();
+        isLastSeenListsActiveLists = true;
         indicateUserInboxChanged();
     }
 
@@ -140,7 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         userInbox.updateTask(taskListIndex, editedTask);
-        updateFilteredListsToShowActiveToDo();
+        showAppropriateList();
         indicateUserInboxChanged();
     }
 
@@ -148,7 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void markTask(int filteredTaskListIndex, int markFlag) {
         saveUserInboxStateForUndo();
         userInbox.markTask(filteredTaskListIndex, markFlag);
-        updateFilteredListsToShowActiveToDo();
+        updateFilteredListsToShowAll();
         indicateUserInboxChanged();
     }
 
@@ -159,7 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.removeTask(toDelete);
         userInbox.addEvent(toAdd);
-        updateFilteredListsToShowActiveToDo();
+        showAppropriateList();
         indicateUserInboxChanged();
     }
 
@@ -180,7 +184,7 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         int eventListIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
         userInbox.updateEvent(eventListIndex, editedEvent);
-        updateFilteredListsToShowActiveToDo();
+        showAppropriateList();
         indicateUserInboxChanged();
     }
 
@@ -196,7 +200,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void markEvent(int filteredEventListIndex, int markFlag) {
         saveUserInboxStateForUndo();
         userInbox.markEvent(filteredEventListIndex, markFlag);
-        updateFilteredListsToShowActiveToDo();
+        updateFilteredListsToShowAll();
         indicateUserInboxChanged();
     }
 
@@ -216,14 +220,14 @@ public class ModelManager extends ComponentManager implements Model {
         saveUserInboxStateForUndo();
         userInbox.removeEvent(toDelete);
         userInbox.addTask(toAdd);
-        updateFilteredListsToShowActiveToDo();
+        showAppropriateList();
         indicateUserInboxChanged();
     }
 
     @Override
     public void saveUserInboxStateForUndo() {
         undoStack.push(new UserInbox(this.userInbox));
-        isLastPerformedActionIsUndo = false;
+        isLastPerformedActionUndo = false;
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -243,7 +247,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Combined filtering for UI =================================================================
 
     @Override
-    public void updateFilteredListsShowAll() {
+    public void updateFilteredListsToShowAll() {
+        isLastSeenListsActiveLists = false;
         filteredEvents.setPredicate(null);
         filteredTasks.setPredicate(null);
         signalUiForUpdatedLists();
@@ -251,11 +256,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListsToShowActiveToDo() {
+        isLastSeenListsActiveLists = true;
         updateFilteredLists(new PredicateExpression(new CompletionQualifier(false)));
     }
 
     @Override
     public void updateFilteredListsToShowCompleteToDo() {
+        isLastSeenListsActiveLists = false;
         updateFilteredLists(new PredicateExpression(new CompletionQualifier(true)));
     }
 
@@ -266,6 +273,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredLists(Timeslot userInterestedTimeslot) {
+        isLastSeenListsActiveLists = true;
         updateFilteredLists(new PredicateExpression(new TimeslotQualifier(userInterestedTimeslot)));
     }
 

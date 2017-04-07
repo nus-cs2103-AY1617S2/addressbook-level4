@@ -36,7 +36,11 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
-                                <Label fx:id="id" styleClass="cell_big_label" />
+                                <Label fx:id="id" styleClass="cell_big_label">
+                                  <minWidth>
+                                      <Region fx:constant="USE_PREF_SIZE" />
+                                </minWidth>
+                                </Label>
                                 <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">
                                     <image>
                                         <Image url = "images/overdue.png" ></Image>

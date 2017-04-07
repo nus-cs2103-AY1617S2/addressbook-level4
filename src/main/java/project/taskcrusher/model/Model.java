@@ -111,7 +111,7 @@ public interface Model {
      */
     void confirmEventTime(int filteredEventListIndex, int timeslotIndex);
 
-    void updateFilteredListsShowAll();
+    void updateFilteredListsToShowAll();
 
     void updateFilteredListsToShowActiveToDo();
 

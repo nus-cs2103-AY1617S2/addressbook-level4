@@ -115,8 +115,8 @@ public class UserInboxPanel extends UiPart<Region> {
     @Subscribe
     public void handleTimerToUpdateEvent(TimerToUpdateEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info("Updated timer now at " + timer.toString());
         this.timer = new Date();
-        System.out.println("Updated timer now at " + timer.toString());
     }
 
 }

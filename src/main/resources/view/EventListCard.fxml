@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
@@ -29,15 +30,19 @@
                     </padding>
                     <children>
                         <HBox spacing="5" alignment="CENTER_LEFT">
-                            <Label fx:id="id" styleClass="cell_big_label"></Label>
+                            <Label fx:id="id" styleClass="cell_big_label">
+                                <minWidth>
+                                      <Region fx:constant="USE_PREF_SIZE" />
+                                </minWidth>
+                            </Label>
                             <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">
                                     <image>
                                         <Image url = "images/overdue.png" ></Image>
                                     </image>
                             </ImageView>
                             <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
-                            <Label fx:id="priority" styleClass="priority" text="\$priority" />
                             <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
+                            <Label fx:id="priority" styleClass="priority" text="\$priority" />
                             <FlowPane fx:id="tags" />
                             <ImageView fx:id="tickIcon" fitHeight="25.0" fitWidth="25.0">
                             <image>

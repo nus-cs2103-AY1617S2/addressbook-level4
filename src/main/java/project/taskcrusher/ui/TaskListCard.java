@@ -18,7 +18,6 @@ public class TaskListCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
     private static final String MESSAGE_NO_DEADLINE = "no deadline";
     private static final String MESSAGE_DEADLINE_BY = "By ";
-    private static final String OVERDUE_STYLE_CLASS = "overdue";
 
     @FXML
     private HBox cardPane;
@@ -41,26 +40,30 @@ public class TaskListCard extends UiPart<Region> {
 
     public TaskListCard(ReadOnlyTask task, int displayedIndex, boolean isOverdue) {
         super(FXML);
-        name.setText(task.getName().toString());
-        name.setMinWidth(Region.USE_PREF_SIZE);
-        id.setText(displayedIndex + ". ");
+        showIdAndName(task, displayedIndex);
         showDeadline(task);
         showPriority(task);
         showDescription(task);
-        displayComplete(task);
-        displayOverdueStatusIfApplicable(task.isComplete(), isOverdue);
+        displayCompleteTickIfApplicable(task);
+        displayOverdueStatusIfApplicable(task, isOverdue);
 
         initTags(task);
     }
 
-    private void displayComplete(ReadOnlyTask task) {
+    private void showIdAndName(ReadOnlyTask task, int displayedIndex) {
+        name.setText(task.getName().name);
+        name.setMinWidth(Region.USE_PREF_SIZE);
+        id.setText(displayedIndex + ". ");
+    }
+
+    private void displayCompleteTickIfApplicable(ReadOnlyTask task) {
         if (!task.isComplete()) {
             tickIcon.setVisible(false);
         }
     }
 
-    private void displayOverdueStatusIfApplicable(boolean isComplete, boolean isOverdue) {
-        if (!isComplete && isOverdue) {
+    private void displayOverdueStatusIfApplicable(ReadOnlyTask task, boolean isOverdue) {
+        if (!task.isComplete() && isOverdue) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
             deadline.setStyle("-fx-text-fill: red"); //should not be done this way

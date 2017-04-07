@@ -55,7 +55,7 @@ public class ListCommand extends Command {
         if (dateRange != null) {
             model.updateFilteredLists(dateRange);
         } else if (!showActiveOnly && !showCompleteOnly) {
-            model.updateFilteredListsShowAll();
+            model.updateFilteredListsToShowAll();
         } else if (showCompleteOnly) {
             model.updateFilteredListsToShowCompleteToDo();
         } else if (showActiveOnly) {

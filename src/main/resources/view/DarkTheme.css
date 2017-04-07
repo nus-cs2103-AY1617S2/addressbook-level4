@@ -318,13 +318,9 @@
     -fx-font-size: 17px;
 }
 
-#id {
-   -fx-min-width: 25px;
-}
-
 #name {
     -fx-padding: 0 10 0 5;
-    -fx-min-width: 180px;
+    -fx-min-width: 260px;
 }
 
 #timeslots {
@@ -333,6 +329,12 @@
 }
 
 #description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #252c36;
+    -fx-padding: 0 0 0 0;
+}
+
+#location {
     -fx-font-size: 13px;
     -fx-text-fill: #252c36;
     -fx-padding: 0 0 0 0;

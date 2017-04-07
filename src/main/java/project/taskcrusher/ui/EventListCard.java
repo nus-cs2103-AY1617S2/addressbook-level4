@@ -18,7 +18,6 @@ public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
     private static final String LOCATION_AT = "@ ";
-//    private static final String OVERDUE_STYLE_CLASS = "overdue";
 
     @FXML
     private HBox cardPane;
@@ -43,17 +42,21 @@ public class EventListCard extends UiPart<Region> {
 
     public EventListCard(ReadOnlyEvent event, int displayedIndex, boolean isOverdue) {
         super(FXML);
-        name.setText(event.getName().name);
-        name.setMinWidth(Region.USE_PREF_SIZE);
-        id.setText(displayedIndex + ". ");
+        showIdAndName(event, displayedIndex);
         showLocation(event);
         showDescription(event);
         showPriority(event);
         showEventTimeSlots(event);
         displayComplete(event);
-        displayOverdueStatusIfApplicable(event.isComplete(), isOverdue);
+        displayOverdueStatusIfApplicable(event, isOverdue);
 
         initTags(event);
+    }
+
+    private void showIdAndName(ReadOnlyEvent event, int displayedIndex) {
+        name.setText(event.getName().name);
+        name.setMinWidth(Region.USE_PREF_SIZE);
+        id.setText(displayedIndex + ". ");
     }
 
     private void displayComplete(ReadOnlyEvent event) {
@@ -62,8 +65,8 @@ public class EventListCard extends UiPart<Region> {
         }
     }
 
-    private void displayOverdueStatusIfApplicable(boolean isComplete, boolean isOverdue) {
-        if (!isComplete && isOverdue) {
+    private void displayOverdueStatusIfApplicable(ReadOnlyEvent event, boolean isOverdue) {
+        if (!event.isComplete() && isOverdue) {
             overdueIcon.setVisible(true);
             overdueIcon.setManaged(true);
             for (Node child: timeslots.getChildren()) {
