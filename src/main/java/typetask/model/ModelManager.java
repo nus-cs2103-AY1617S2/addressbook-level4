@@ -41,8 +41,8 @@ public class ModelManager extends ComponentManager implements Model {
     public static final Integer STATUS_EMPTY_HISTORY = 0;
     public static final Integer STATUS_AVAILABLE_HISTORY = 1;
     public static final Integer STATUS_ERROR_HISTORY = -1;
-    
-    public static final int wantedDate = 0;
+
+    public static final int WANTED_DATE = 0;
     //@@author
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -204,14 +204,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author A0139926R
     @Override
-    public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
-        return getFilteredTaskList().indexOf(targetTask);
-    }
-    //@@author A0139926R
-    @Override
     public void updateFilteredTaskList(String date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
     }
+    //@@author A0139926R
+    @Override
+    public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
+        return getFilteredTaskList().indexOf(targetTask);
+    }
+
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -320,8 +321,8 @@ public class ModelManager extends ComponentManager implements Model {
                     } catch (ParseException e) {
                         return false;
                     }
-                    Date taskEndDate = endDates.get(wantedDate);
-                    Date taskStartDate = startDates.get(wantedDate);
+                    Date taskEndDate = endDates.get(WANTED_DATE);
+                    Date taskStartDate = startDates.get(WANTED_DATE);
                     if (keywordDate.before(taskEndDate) && keywordDate.after(taskStartDate)) {
                         result = true;
                     }
