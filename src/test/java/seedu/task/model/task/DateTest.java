@@ -117,10 +117,10 @@ public class DateTest {
     private boolean assertDatesEqualIgnoreMinutes(Date date, Date otherDate) {
         return date.equalsIgnoreMinutes(otherDate);
     }
-    
+
     @Test
     public void testEquals_Symmetric() throws IllegalValueException {
-        Date x = new Date("today");  // equals and hashCode check name field value
+        Date x = new Date("today"); // equals and hashCode check name field value
         Date y = new Date("today");
         assertTrue(x.equals(y) && y.equals(x));
         assertTrue(x.hashCode() == y.hashCode());

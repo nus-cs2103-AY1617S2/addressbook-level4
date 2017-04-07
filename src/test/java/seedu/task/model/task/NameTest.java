@@ -24,11 +24,10 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
-    
-    
+
     @Test
     public void testEquals_Symmetric() throws IllegalValueException {
-        Name x = new Name("test name");  // equals and hashCode check name field value
+        Name x = new Name("test name"); // equals and hashCode check name field value
         Name y = new Name("test name");
         assertTrue(x.equals(y) && y.equals(x));
         assertTrue(x.hashCode() == y.hashCode());
