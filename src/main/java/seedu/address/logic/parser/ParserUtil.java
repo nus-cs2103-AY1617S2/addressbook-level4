@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,12 +14,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartEndDateTime;
+import seedu.address.model.task.exceptions.InvalidDurationException;
+import seedu.address.model.task.exceptions.PastDateTimeException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -75,30 +77,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
-     */
-    public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
-        assert phone != null;
-        return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        assert address != null;
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        assert email != null;
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-    }
-
-    /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
@@ -108,5 +86,89 @@ public class ParserUtil {
             tagSet.add(new Tag(tagName));
         }
         return new UniqueTagList(tagSet);
+    }
+
+    //@@author A0140023E
+    /**
+     * Parses a {@code Optional<String>} into an {@code Optional<Deadline>} if {@code deadline} is present.
+     */
+    public static Optional<Deadline> parseNewDeadline(Optional<String> deadline)
+            throws PastDateTimeException, IllegalValueException {
+
+        assert deadline != null;
+
+        if (!deadline.isPresent()) {
+            return Optional.empty();
+        }
+
+        ZonedDateTime parsedDateTime = DateTimeUtil.parseDateTimeString(deadline.get());
+        return Optional.of(new Deadline(parsedDateTime));
+    }
+
+    /**
+     * Parses a {@code Optional<String>} into an {@code Optional<Deadline>} relative to
+     * {@code previousDeadline} if {@code rawDeadline} is present.
+     */
+    public static Optional<Deadline> parseEditedDeadline(Optional<String> rawDeadline, Deadline previousDeadline)
+            throws PastDateTimeException, IllegalValueException {
+
+        assert rawDeadline != null && previousDeadline != null;
+
+        if (!rawDeadline.isPresent()) {
+            return Optional.empty();
+        }
+
+        ZonedDateTime parsedDateTime =
+                DateTimeUtil.parseEditedDateTimeString(rawDeadline.get(), previousDeadline.getDateTime());
+        return Optional.of(new Deadline(parsedDateTime));
+    }
+
+    /**
+     * Parses parameters {@code Optional<String> startDateTimeString} and {@code Optional<String> endDateTimeString}
+     * into an {@code Optional<StartEndDateTime>} if they are present.
+     */
+    public static Optional<StartEndDateTime> parseNewStartEndDateTime(Optional<String> startDateTimeString,
+            Optional<String> endDateTimeString)
+            throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+        assert startDateTimeString != null && endDateTimeString != null;
+
+        if (!startDateTimeString.isPresent() || !endDateTimeString.isPresent()) {
+            return Optional.empty();
+        }
+
+        ZonedDateTime startDateTime = DateTimeUtil.parseDateTimeString(startDateTimeString.get());
+        ZonedDateTime endDateTime = DateTimeUtil.parseDateTimeString(endDateTimeString.get());
+
+        StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime);
+
+        return Optional.of(startEndDateTime);
+    }
+
+    /**
+     * Parses parameters {@code Optional<String> startDateTimeString} and
+     * {@code Optional<String> endDateTimeString} relative to {@code previousStartEndDateTime} into an
+     * {@code Optional<StartEndDateTime>} if the parameters are present.
+     */
+    public static Optional<StartEndDateTime> parseEditedStartEndDateTime(Optional<String> startDateTimeString,
+            Optional<String> endDateTimeString, StartEndDateTime previousStartEndDateTime)
+            throws PastDateTimeException, InvalidDurationException, IllegalValueException {
+
+        assert startDateTimeString != null && endDateTimeString != null;
+
+        if (!startDateTimeString.isPresent() || !endDateTimeString.isPresent()) {
+            return Optional.empty();
+        }
+
+        ZonedDateTime startDateTime =
+                DateTimeUtil.parseEditedDateTimeString(startDateTimeString.get(),
+                                                       previousStartEndDateTime.getStartDateTime());
+        ZonedDateTime endDateTime =
+                DateTimeUtil.parseEditedDateTimeString(endDateTimeString.get(),
+                        previousStartEndDateTime.getEndDateTime());
+
+        StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime);
+
+        return Optional.of(startEndDateTime);
     }
 }

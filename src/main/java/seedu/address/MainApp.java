@@ -1,5 +1,6 @@
 package seedu.address;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -17,13 +18,15 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
@@ -49,11 +52,15 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing iManager ]===========================");
+        // Initialize Natty first as it requires some startup time, so the user don't receive delay in adding tasks
+        DateTimeUtil.initializeNatty();
+
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskListFilePath(), config.getUserPrefsFilePath(),
+                                     initConfigFilePath(getApplicationParameter("config")));
 
         userPrefs = initPrefs(config);
 
@@ -74,20 +81,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskList> taskListOptional;
+        ReadOnlyTaskList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskListOptional = storage.readTaskList();
+            if (!taskListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
+            initialData = new TaskList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskList");
+            initialData = new TaskList();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -101,11 +108,10 @@ public class MainApp extends Application {
         Config initializedConfig;
         String configFilePathUsed;
 
-        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+        configFilePathUsed = initConfigFilePath(configFilePath);
 
-        if (configFilePath != null) {
+        if (configFilePathUsed.equals(configFilePath)) {
             logger.info("Custom Config file specified " + configFilePath);
-            configFilePathUsed = configFilePath;
         }
 
         logger.info("Using config file : " + configFilePathUsed);
@@ -143,7 +149,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty UserPrefs");
             initializedPrefs = new UserPrefs();
         }
 
@@ -161,6 +167,21 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
+    //@@author A0148052L
+    protected String initConfigFilePath(String filePath) {
+        if (filePath == null) {
+            return Config.DEFAULT_CONFIG_FILE;
+        }
+        try {
+            File newFile = new File(filePath);
+            FileUtil.createIfMissing(newFile);
+            return filePath;
+        } catch (IOException e) {
+            return Config.DEFAULT_CONFIG_FILE;
+        }
+    }
+
+    //@@author
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);

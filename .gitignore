@@ -16,3 +16,9 @@ preferences.json
 classes/
 /data/
 /bin/
+# Generated files from Github Flavored Markdown Viewer plugin
+.*.md.html
+# Ignore Collate binaries
+collate
+Collate-GUI.jar
+Collate-TUI.jar

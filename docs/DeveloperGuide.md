@@ -1,57 +1,84 @@
-# AddressBook Level 4 - Developer Guide
+# iManager Developer Guide.
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+1. [Introduction](#introduction)
+2. [Setting Up](#setting-up)
+   * 2.1. [Prerequisites](#Prerequisites)
+   * 2.2. [Importing the project into Eclipse](#Importing-the-project-into-Eclipse)
+   * 2.3. [Configuring Checkstyle](#Configuring-Checkstyle)
+   * 2.4. [Troubleshooting project setup](#Troubleshooting-project-setup)
+3. [Design](#design)
+   * 3.1. [Architecture](#Architecture)
+   * 3.2. [UI component](#UI-component)
+   * 3.3. [Logic component](#Logic-component)
+   * 3.4. [Model component](#Model-component)
+   * 3.5. [Storage component](#Storage-component)
+   * 3.6. [Common classes](#Common-classes)
+4. [Implementation](#implementation)
+   * 4.1. [Logging](#Logging)
+   * 4.2. [Configuration](#Configuration)
+5. [Testing](#testing)
+   * 5.1. [Troubleshooting tests](#Troubleshooting-tests)
+6. [Dev Ops](#dev-ops)
+   * 6.1. [Build Automation](#Build-Automation)
+   * 6.2. [Continuous Integration](#Continuous-Integration)
+   * 6.3. [Publishing Documentation](#Publishing-Documentation)
+   * 6.4. [Making a release](#Making-a-release)
+   * 6.5. [Converting Documentation to PDF format](#Converting-Documentation-to-PDF-format)
+   * 6.6. [Managing Dependencies](#Managing-Dependencies)
+   * [Appendix A: User Stories](#appendix-a--user-stories)
+   * [Appendix B: Use Cases](#appendix-b--use-cases)
+   * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+   * [Appendix D: Glossary](#appendix-d--glossary)
+   * [Appendix E : Product Survey](#appendix-e--product-survey)
 
----
 
-1. [Setting Up](#setting-up)
-2. [Design](#design)
-3. [Implementation](#implementation)
-4. [Testing](#testing)
-5. [Dev Ops](#dev-ops)
+## 1. Introduction
 
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+Welcome to the developer guide of iManager. This guide helps you get familiar with setting up iManager on your device. In addition, it is also for your convenience of achieving further development of the application such as adding features or doing modifications to perfect our product. We will introduce code design, feature implementation and testing of the application. 
+
+iManager is created to help those who are struggling with task management. It is particularly suitable for users who love typing. It uses a command line Interface as its primary mode of input to cater for users who prefer typing over mouse actions.
+
+iManager comes with features such as Flexi Commands and Google Integration that bring convenience to its users in managing their tasks and schedules. With its interactive UI design, iManager is surely capable of providing a pleasant experience for users when managing their tasks.
+
+Without further ado, let us get started.
 
 
-## 1. Setting up
+## 2. Setting up
 
-### 1.1. Prerequisites
+### 2.1. Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
-
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
-
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+1. Make sure you have installed  **JDK `1.8.0_60`** , and take note that having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
+2. You need to have **Eclipse** IDE on your computer.
+3. Install **e(fx)clipse** plugin for Eclipse (For further assistance, you can do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+4. Install **Buildship Gradle Integration** plugin from the Eclipse Marketplace
+5. Install **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
-### 1.2. Importing the project into Eclipse
+### 2.2. Importing the project into Eclipse
 
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+After setting up Eclipse properly, you can now do the following steps to import this project into Eclipse.
+
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+3. Click `File` > `Import`
+4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+5. Click `Browse`, then locate the project's directory
+6. Click `Finish`
 
   > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### 1.3. Configuring Checkstyle
+### 2.3. Configuring Checkstyle
+
+Now you have set up the Eclipse and imported the project, next step is to configure the checkstyle.
+
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. iManager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -59,7 +86,9 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### 1.4. Troubleshooting project setup
+### 2.4. Troubleshooting project setup
+
+In case you encounter any problems when setting up, use the following as a guide.
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -73,12 +102,14 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
 
 
-## 2. Design
+## 3. Design
 
-### 2.1. Architecture
+This section will introduce you the code design for iManager.
+
+### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 2.1.1 : Architecture Diagram_
+_Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
@@ -113,23 +144,23 @@ Each of the four components
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.1.2 : Class Diagram of the Logic Component_
+_Figure 3.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images\SDforDeleteTask.png" width="800"><br>
+_Figure 3.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskListChangedEvent` when the Task List data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
+_Figure 3.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -137,12 +168,10 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 The sections below give more details of each component.
 
-### 2.2. UI component
-
-Author: Alice Bee
+### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="800"><br>
-_Figure 2.2.1 : Structure of the UI Component_
+_Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
@@ -160,31 +189,27 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
-### 2.3. Logic component
-
-Author: Bernard Choo
+### 3.3. Logic component
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
-_Figure 2.3.1 : Structure of the Logic Component_
+_Figure 3.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSDForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### 2.4. Model component
-
-Author: Cynthia Dharman
+### 3.4. Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
@@ -196,12 +221,12 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-### 2.5. Storage component
+### 3.5. Storage component
 
 Author: Darius Foong
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
-_Figure 2.5.1 : Structure of the Storage Component_
+_Figure 3.5.1 : Structure of the Storage Component_
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
@@ -210,13 +235,15 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
 
-### 2.6. Common classes
+### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.taskList.commons` package.
 
-## 3. Implementation
+## 4. Implementation
 
-### 3.1. Logging
+After knowing the code design for iManager, this section will introduce you how we implement this application including logging and configuration parts.
+
+### 4.1. Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
@@ -229,19 +256,21 @@ and logging destinations.
 
 **Logging Levels**
 
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `SEVERE` : This level means that there is a critical problem detected which may possibly cause the termination of the application
+* `WARNING` : This level means that there are potential harmful situations
+* `INFO` : This level designates the information showing the noteworthy actions by the App
+* `FINE` : This level designates the details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## 4. Testing
+## 5. Testing
+
+This section will introduce you the details of testings for iManager.
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -278,7 +307,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
+
+In case you encounter any trouble, you can refer to the following.
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -288,23 +319,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
 
-## 5. Dev Ops
+## 6. Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
-See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+You can see [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
-See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
+You can refer to [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -313,7 +344,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -328,11 +359,11 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
-    _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
+    _Figure 6.4.1 : Saving documentation as PDF files in Chrome_
 
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, iManager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -346,50 +377,298 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`***` | new user | use the program easily | use the program almost immediately without much learning
+`***` | user | add event | create new tasks
+`***` | user | add floating task | create tasks that have no associated dates
+`***` | user | mark task as complete | keep a record of completed tasks
+`***` | user | modify a task | update a task with new details or fix an incorrectly entered tasks
+`***` | user | delete a task | delete tasks that are no longer necessary
+`***` | user | view instructions | learn how to use the program with more details
+`***` | user | search for tasks by keywords | look for the tasks I want quickly
+`***` | user | choose where to save my tasks | backup my tasks
+`***` | user | undo previous operations | revert unintended actions
+`***` | user | redo previous operations | change my mind on whether to perform an action
+`**` | user | add recurring tasks | create repeating tasks easily
+`**` | user | view tasks in a time period | look for related tasks in a time period (use the find command)
+`**` | user | see suggestions when typing commands | use the program with minimal reference to instructions
+`*` | user | have syntax highlighting | ensure commands are entered correctly
+`*` | user | view tasks that require the most attention | pay attention to them first
+`*` | user | star a task | mark an important task for priority display
+`*` | user | view tasks in a calendar view | visualize tasks assigned to different time periods quickly
+`*` | user | create subtasks | add high level and low level tasks
+`*` | user | link tasks together | access related tasks quickly
+`*` | user | link emails/files/folders to tasks | view more information about a task easily
+`*` | user | generate tasks from emails using subject and dates found in the email or using a specified format | create tasks quickly or automatically
+`*` | user | receive email reminders for upcoming tasks | remember to complete my tasks
+`*` | user | switch interface from normal to compact interface | focus on what i need right now
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+#### Use case: UC01 - Input task details
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+1. Program requests for description of task.
+2. User inputs description of task.<br>
+Use case ends
 
 **Extensions**
 
-2a. The list is empty
+2a. Program detects the description is empty.
+
+> 2a1. Program shows an error message stating the description is empty. <br>
+  2a2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+2b. User chooses to add tags(UC02).
 
 > Use case ends
 
-3a. The given index is invalid
+#### Use case: UC02 - Input tags for task
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+**MSS**
 
-{More to be added}
+1. User chooses to add tags.
+2. Program requests for tags to be added.
+3. User inputs tags.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are no tags specified.
+
+> 3a1. Program shows a warning that there are no tags specified. <br>
+  Use case ends
+
+3b. Program detects that there are duplicate tags specified.
+
+> 3a1. Programs shows a warning that there are duplicate tags specified. <br>
+  Use case ends
+
+#### Use case: Create floating task
+
+**MSS**
+
+1. User chooses to add a floating task.
+2. User inputs task details(UC01).
+3. Program adds the task to the list of tasks.
+Use case ends
+
+#### Use case: Create an event
+
+**MSS**
+
+1. User chooses to add an event.
+2. User inputs task details(UC01).
+3. Program requests for start date.
+4. User inputs start date.
+5. Program requests for end date.
+6. User inputs end date.
+7. Program adds the task to the list of tasks.
+Use case ends
+
+**Extensions**
+
+4a. Program detects the start date is empty.
+
+> 4a1. Program shows an error message stating the start date is empty. <br>
+  4a2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+4b. Program detects the start date is invalid.
+
+> 4b1. Program shows an error message stating the start date is invalid. <br>
+  4b2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+6a. Program detects the end date is empty.
+
+> 6a1. Program shows an error message stating the end date is empty. <br>
+  6a2. Program requests for re-input. <br>
+  Use case resumes at step 6
+
+6b. Program detects the end date is invalid.
+
+> 6b1. Program shows an error message stating the end date is invalid. <br>
+  6b2. Program requests for re-input. <br>
+  Use case resumes at step 6
+
+
+#### Use case: Create task with deadline
+
+**MSS**
+
+1. User chooses to add a task with deadline.
+2. User inputs task details(UC01).
+3. Program requests for deadline.
+4. User inputs deadline.
+5. Program adds the task to the list of tasks.
+Use case ends
+
+**Extensions**
+
+4a. Program detects the deadline is empty.
+
+> 4a1. Program shows an error message stating the deadline is empty. <br>
+  4a2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+4b. Program detects the deadline is invalid.
+
+> 4b1. Program shows an error message stating the deadline is invalid. <br>
+  4b2. Program requests for re-input. <br>
+  Use case resumes at step 4
+
+#### Use case: Update a task
+
+**MSS**
+
+1. User chooses to update a task.
+2. Program requests for the task to be updated.
+3. User inputs the task to be updated.
+4. Program requests for changes to be made to the task.
+5. User inputs the changes to to be made to the task.
+6. Program updates the task.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by user.
+
+> 3a1. Program requests user to specify the exact task. <br>
+  3a2. User specifies the exact task to be updated. <br>
+  3a3. Program deletes the task. <br>
+  Use case ends
+
+3b. Program detects the specified task is not valid.
+
+> 3b1. Program returns an error message. <br>
+  3b2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+
+#### Use case: Delete a task
+
+**MSS**
+
+1. User chooses to delete task.
+2. Program requests for the task to be deleted.
+3. User inputs the task to be deleted.
+4. Program deletes the task.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by the user.
+
+> 3a1. Program requests user to specify the exact task. <br>
+  3a2. User specifies the exact task to be deleted. <br>
+  3a3. Program deletes the task. <br>
+  Use case ends
+
+3b. Program detects the specified task is not valid.
+
+> 3b1. Program shows an error message. <br>
+  3b2. Program requests for re-input. <br>
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+#### Use case: Mark a task as complete
+
+**MSS**
+
+1. User chooses to mark a task as complete.
+2. Program requests for the task to be marked complete.
+3. User inputs the task to be marked complete.
+4. Program marks the task as complete.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that there are multiple tasks with the same words specified by the user.
+
+> 3a1. Program marks all the tasks with the same words as complete.
+  3a2. Program informs user that multiple tasks are marked as complete.
+  Use case ends
+
+3b. Program detects the specified task is not valid.
+
+> 3b1. Program shows an error message.
+  3b2. Program requests for re-input.
+  Use case resumes at step 3
+
+3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
+
+> Use case resumes at step 3a1
+
+
+#### Use case: Undo operations
+
+**MSS**
+
+1. User chooses to undo operation.
+2. Program requests for number of operations to undo.
+3. User specifies the number of operations to undo.
+4. Program undo the number of operations specified.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that user did not specify the number of operations.
+
+> 3a1. Program undo one operation. <br>
+  Use case ends
+
+3b. Program detects the specified number of operations is not valid.
+
+> 3b1. Program requests for re-input for number of operations. <br>
+  Use case resumes at step 3
+
+3c. Programs detect the number of operations to undo is more than the undo history.
+
+> 3c1. Program undo all the operations in the undo history. <br>
+  3c2. Program informs the user that the number specified is more than the undo history so it will undo all operations in the history. <br>
+  Use case ends
+
+#### Use case: Search for tasks
+
+**MSS**
+
+1. User chooses to search for tasks.
+2. Program requests for the keywords.
+3. User inputs the keywords.
+4. Program shows the tasks with the specified keywords.
+Use case ends
+
+**Extensions**
+
+3a. Program detects that user did not specify any keywords.
+
+> 3a1. Program shows an error message stating no keywords are specified. <br>
+  3a2. Program requests for re-input. <br>
+  Use case resumes at step 3
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+   should be able to accomplish most of the faster using commands than using the mouse.
+4. Should have a response time of at most five seconds, including functionality that require longer than five seconds to
+   execute. This can be achieved by status updates on an ongoing function.
+5. Should have reasonable amount of documentation so that future developers can easily extend the project.
+6. Should have reasonably high quality source code as determined by the supervisor.
+7. Should not have any proprietary dependencies.
+8. Should be able to function standalone without any installation of third-party software (excluding Java).
+9. Data should be stored locally in the form of a human editable text file.
+10. Should able to work offline.
 
 ## Appendix D : Glossary
 
@@ -397,23 +676,76 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Response time
 
-> A contact detail that is not meant to be shared with others
+> Amount of time elapsed before a system respond upon user input
+
+##### Third-party software
+
+> Any software that is not iManager or pre-installed with the OS
+
+##### Operation
+
+> An action that the user wants to perform, usually a command.
+
+##### Task
+
+> A piece of work required to be done.
+
+##### Command
+
+> An instruction causing computer to perform functions.
+
+##### Functionality
+
+> The range of operations that can be run within the software.
 
 ## Appendix E : Product Survey
 
-**Product Name**
-
-Author: ...
+**Hitask**
 
 Pros:
 
-* ...
-* ...
+* Uers can easily sign in with Google account
+* Support team work
+* Settings allow users to change date and time preferences
+* Users can close or open calendar and team when they need to
 
 Cons:
 
-* ...
-* ...
+* Ask for too much information when signing in with Google account, might make users feel their privacy is insecure
+* Font size is too small, difficult for users to read
+* Too much information in one page
 
+**Trello**
+
+Pros:
+
+* Users can easily sign in with Google account without asking for too much information
+* Uses a novel way to display tasks
+* Users can see the emergency of tasks easily
+* Users can add detail information about tasks easily
+
+Cons:
+
+* Small font size
+* The interface might not be good enough. After clicking on close menu button or show menu button, the tasks in the same interface do not become larger or smaller accordingly.
+* Detailed information of tasks includes boards, labels and due dates, which might be too complex and troublesome for some users.
+
+**Wunderlist**
+
+Pros:
+
+* Accessible on many devices.
+* Users can easily sign in with Google account without asking for too much information
+* Lists including not only tasks from work but also movies to watch and familiy etc. Creates a less stressful environment for users.
+* Interface is simple and clear
+* Users can make list copies or share lists easily.
+* Users can start conversations with each other.
+* Due dates of tasks are clearly shown.
+
+Cons:
+
+* Web application is either not well developed or unintuitive. New users might face difficulties when trying to add new tasks.
+* Users can not set due date and reminder directly when creating new task.
+* Tasks cannot be sorted by due date.

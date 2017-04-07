@@ -3,83 +3,106 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestPerson;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartEndDateTime;
+import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskListGuiTest {
 
-    // The list of persons in the person list panel is expected to match this list.
+    // The list of tasks in the person list panel(NOTE TO CHANGE) is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
-    TestPerson[] expectedPersonsList = td.getTypicalPersons();
+    TestTask[] expectedTasksList = td.getTypicalTasks();
 
+    //author A0140023E
+    //TODO not all fields are specified because they cannot
+    // GUI tests are slow, so just check StartEndDateTime here and check Deadline and floating task elsewhere
+    /**
+     * This method tests if editing all fields will be successful. However, StartEndDateTime
+     * cannot exist with Deadline, so Deadline cannot be edited here
+     * @throws Exception
+     */
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
-        int addressBookIndex = 1;
+    public void edit_allFieldsSpecifiedWithStartEndDateTime_success() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Task with start and end date");
+        // A date after today is created so as to not generate a PastDateTimeException.
+        // Date is also truncated to seconds precision as Natty does not parse milliseconds
+        ZonedDateTime startDateTime = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusDays(3);
+        ZonedDateTime endDateTime = startDateTime.plusDays(1);
+        sb.append(" from " + startDateTime);
+        sb.append(" to " + endDateTime);
+        sb.append(" t/IMPT");
+        String detailsToEdit = sb.toString();
 
-        TestPerson editedPerson = new PersonBuilder().withName("Bobby").withPhone("91234567")
-                .withEmail("bobby@gmail.com").withAddress("Block 123, Bobby Street 3").withTags("husband").build();
+        int taskListIndex = 1;
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        TestTask editedTask = new TaskBuilder().withName("Task with start and end date")
+                .withStartEndDateTime(new StartEndDateTime(startDateTime, endDateTime)).withTags("IMPT").build();
+
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_notAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
-        int addressBookIndex = 2;
+    public void edit_notAllFieldsSpecifiedWithTagsOnly_success() throws Exception {
+        // TODO notice how tags have to be in alphabetical order because of the way tags are added
+        // and compared. See TestUtil::compareCardAndPerson using list compare instead of set compare
+        String detailsToEdit = "t/fail t/lose";
+        int taskListIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("fail", "lose").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
+    //@@author
     @Test
     public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "t/";
-        int addressBookIndex = 2;
+        int taskListIndex = 2;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withTags().build();
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
+        commandBox.runCommand("find Elephant");
 
-        String detailsToEdit = "Belle";
-        int filteredPersonListIndex = 1;
-        int addressBookIndex = 5;
+        String detailsToEdit = "Bellyphant";
+        int filteredTaskListIndex = 1; // TODO notice the bad naming here again
+        int taskListIndex = 5;
 
-        TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-        TestPerson editedPerson = new PersonBuilder(personToEdit).withName("Belle").build();
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Bellyphant").build();
 
-        assertEditSuccess(filteredPersonListIndex, addressBookIndex, detailsToEdit, editedPerson);
+        assertEditSuccess(filteredTaskListIndex, taskListIndex, detailsToEdit, editedTask);
     }
 
     @Test
-    public void edit_missingPersonIndex_failure() {
-        commandBox.runCommand("edit Bobby");
+    public void edit_missingTaskIndex_failure() {
+        commandBox.runCommand("edit Basketball");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
-        assertResultMessage(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    public void edit_invalidTaskIndex_failure() {
+        commandBox.runCommand("edit 8 Basketball");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -88,51 +111,56 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
+    //@@author A0140023E
     @Test
     public void edit_invalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
+        // TODO constraints for date-time fields are also checked in other tests as they are constrained differently
+        commandBox.runCommand("edit 1 //comments");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        commandBox.runCommand("edit 1 by yesterday");
+        assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 e/yahoo!!!");
-        assertResultMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        commandBox.runCommand("edit 1 from yesterday to tmr");
+        assertResultMessage(StartEndDateTime.MESSAGE_STARTDATETIME_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 a/");
-        assertResultMessage(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        commandBox.runCommand("edit 1 from tmr to yesterday");
+        assertResultMessage(StartEndDateTime.MESSAGE_ENDDATETIME_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 from 2 days later to 1 day later");
+        assertResultMessage(StartEndDateTime.MESSAGE_STARTENDDATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    //@@author
     @Test
-    public void edit_duplicatePerson_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_PERSON);
+    public void edit_duplicateTask_failure() {
+        commandBox.runCommand("edit 3 Amuse friend t/friends");
+        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     /**
-     * Checks whether the edited person has the correct updated details.
+     * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of person to edit in filtered list
-     * @param addressBookIndex index of person to edit in the address book.
-     *      Must refer to the same person as {@code filteredPersonListIndex}
-     * @param detailsToEdit details to edit the person with as input to the edit command
-     * @param editedPerson the expected person after editing the person's details
+     * @param filteredTaskListIndex index of task to edit in filtered list // TODO note again due to bad naming
+     * @param taskListIndex index of task to edit in the task list.
+     *      Must refer to the same task as {@code filteredTaskListIndex}
+     * @param detailsToEdit details to edit the task with as input to the edit command
+     * @param editedTask the expected task after editing the task's details
      */
-    private void assertEditSuccess(int filteredPersonListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestPerson editedPerson) {
-        commandBox.runCommand("edit " + filteredPersonListIndex + " " + detailsToEdit);
+    private void assertEditSuccess(int filteredTaskListIndex, int taskListIndex,
+                                    String detailsToEdit, TestTask editedTask) {
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
 
         // confirm the new card contains the right data
-        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedPerson.getName().fullName);
-        assertMatching(editedPerson, editedCard);
+        PersonCardHandle editedCard = personListPanel.navigateToPerson(editedTask.getName().value);
+        assertMatching(editedTask, editedCard);
 
-        // confirm the list now contains all previous persons plus the person with updated details
-        expectedPersonsList[addressBookIndex - 1] = editedPerson;
-        assertTrue(personListPanel.isListMatching(expectedPersonsList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        // confirm the list now contains all previous tasks plus the task with updated details
+        expectedTasksList[taskListIndex - 1] = editedTask;
+        assertTrue(personListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }

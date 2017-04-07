@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -148,5 +149,52 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
     }
 
+    //@@author A0140023E
+    //---------------- Tests for replace --------------------------------------
+    // TODO EP
+    @Test
+    public void replace_startIndexNegative_exceptionThrown() {
+        assertOutOfBoundsExceptionThrown("01234", -1, 1, "Valid replacement");
+    }
+
+    // assertOutOfBoundsExceptionThrown("01234", 0, -1, "Valid replacement"); // negative end index
+
+    @Test
+    public void replace_startIndexLargerThanEndIndex_exceptionThrown() {
+        assertOutOfBoundsExceptionThrown("01234", 1, 0, "Valid replacement");
+    }
+    // rename this method
+    @Test
+    public void replace_endIndexSuperLarge_expectedNewString() {
+        String s = "01234";
+        assertEquals(StringUtil.replace(s, s.length(), 1000, "Valid replacement"), "01234Valid replacement");
+    }
+
+    // boundary value less than length by 1, length(), length() + 1
+    @Test
+    public void replace_startIndexLessThanLength_expectedNewString() {
+        String s = "01234";
+        assertEquals(StringUtil.replace(s, s.length() - 1, s.length(), "Valid replacement"), "0123Valid replacement");
+    }
+    @Test
+    public void replace_startIndexEqualToLength_expectedNewString() {
+        String s = "01234";
+        assertEquals(StringUtil.replace(s, s.length(), s.length(), "Valid replacement"), "01234Valid replacement");
+    }
+    @Test
+    public void replace_startIndexGreaterThanLength_exceptionThrown() {
+        String s = "01234";
+        assertOutOfBoundsExceptionThrown(s, s.length() + 1, 1, "Valid replacement");
+    }
+
+    @Test
+    public void replace_withinBounds_expectedNewString() {
+        assertEquals(StringUtil.replace("01234", 0, 1, "Valid replacement"), "Valid replacement1234");
+    }
+
+    private void assertOutOfBoundsExceptionThrown(String s, int startIndex, int endIndex, String replacement) {
+        thrown.expect(StringIndexOutOfBoundsException.class);
+        StringUtil.replace(s, startIndex, endIndex, replacement);
+    }
 
 }

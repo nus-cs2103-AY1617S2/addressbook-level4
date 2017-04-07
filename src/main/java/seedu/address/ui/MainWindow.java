@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,44 +17,43 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
 
+//@@author A0135998H
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/iManager_32.png";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 800;
+    private static final int MIN_WIDTH = 1000;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskTabPanel taskTabPanel;
     private Config config;
-
-    @FXML
-    private AnchorPane browserPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private AnchorPane clockPlaceholder;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private MenuItem helpMenuItem;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
     @FXML
     private AnchorPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane taskTabPanelPlaceHolder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -70,7 +70,6 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
         setAccelerators();
     }
 
@@ -112,12 +111,12 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
-    void fillInnerParts() {
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+    public void fillInnerParts() {
+        taskTabPanel = new TaskTabPanel(taskTabPanelPlaceHolder, logic);
         new ResultDisplay(getResultDisplayPlaceholder());
-        new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
+        new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
+        new Clock(getDigitalClockPlaceholder());
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
@@ -132,8 +131,8 @@ public class MainWindow extends UiPart<Region> {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    private AnchorPane getDigitalClockPlaceholder() {
+        return clockPlaceholder;
     }
 
     void hide() {
@@ -195,16 +194,19 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public TabPane getTaskTabPane() {
+        return taskTabPanel.getTaskTabPane();
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
-        browserPanel.loadPersonPage(person);
+    public TaskListPanel getTaskListPanel() {
+        return taskTabPanel.getTaskListPanel();
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
+    public void switchTabOnCommand(String typeOfList) {
+        taskTabPanel.switchTabOnCommand(typeOfList);
     }
 
+    public void switchTabOnClick() {
+        taskTabPanel.switchTabOnClick();
+    }
 }

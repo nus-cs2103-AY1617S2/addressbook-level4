@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author A0135998H -->
+
+<?import java.net.URL?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
+   </children>
+   <stylesheets>
+      <URL value="@GraphiteTheme.css" />
+      <URL value="@Extensions.css" />
+   </stylesheets>
+</VBox>

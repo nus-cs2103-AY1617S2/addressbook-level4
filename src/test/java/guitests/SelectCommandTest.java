@@ -4,31 +4,31 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TaskListGuiTest {
 
 
     @Test
-    public void selectPerson_nonEmptyList() {
+    public void selectTask_nonEmptyList() {
 
         assertSelectionInvalid(10); // invalid index
-        assertNoPersonSelected();
+        assertNoTaskSelected();
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalPersons().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first task in the list
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
-        assertPersonSelected(middleIndex); // assert previous selection remains
+        assertSelectionInvalid(taskCount + 1); // invalid index
+        assertTaskSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
     }
 
     @Test
-    public void selectPerson_emptyList() {
+    public void selectTask_emptyList() {
         commandBox.runCommand("clear");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
@@ -36,24 +36,23 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("The person index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
     }
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("Selected Person: " + index);
-        assertPersonSelected(index);
+        assertTaskSelected(index);
     }
 
-    private void assertPersonSelected(int index) {
+    private void assertTaskSelected(int index) {
         assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyPerson selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
-        //TODO: confirm the correct page is loaded in the Browser Panel
+        ReadOnlyTask selectedTask = personListPanel.getSelectedPersons().get(0); // TODO ui
+        assertEquals(personListPanel.getPerson(index - 1), selectedTask);
     }
 
-    private void assertNoPersonSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+    private void assertNoTaskSelected() {
+        assertEquals(personListPanel.getSelectedPersons().size(), 0); // TODO ui
     }
 
 }
