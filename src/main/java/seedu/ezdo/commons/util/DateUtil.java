@@ -77,15 +77,11 @@ public class DateUtil {
 
         if (dateString1.isEmpty() && dateString2.isEmpty()) {
             return COMPARE_RESULT_EQUAL;
-        }
-        if (dateString1.isEmpty()) {
+        } else if (dateString1.isEmpty()) {
             return COMPARE_RESULT_MORE_THAN;
-        }
-        if (dateString2.isEmpty()) {
+        } else if (dateString2.isEmpty()) {
             return COMPARE_RESULT_LESS_THAN;
         }
-        assert false : "At least one of the dates must be empty";
-        return 0;
     }
 
 }
