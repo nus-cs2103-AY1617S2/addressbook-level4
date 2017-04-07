@@ -1,5 +1,7 @@
 package seedu.taskboss.logic.parser;
 
+import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.io.File;
 
 import seedu.taskboss.logic.commands.Command;
