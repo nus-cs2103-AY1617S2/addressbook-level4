@@ -125,8 +125,10 @@ public interface ReadOnlyTask {
         }
     }
 
+    //@@author A0147620L
     /**
-     * Compare the 'degree of closeness' of task descriptions
+     * Compare the 'degree of closeness' of task descriptions,
+     * with respect to the targetString.
      */
     public class ReadOnlyTaskMatchingComparator implements Comparator<ReadOnlyTask> {
         private String targetString;
@@ -142,6 +144,8 @@ public interface ReadOnlyTask {
             return Double.compare(result2, result1);
         }
     }
+    //@@author
+
     /**
      * Combines multiple comparators together to compare tasks.
      * For example if you want to sort by end time then by priority,

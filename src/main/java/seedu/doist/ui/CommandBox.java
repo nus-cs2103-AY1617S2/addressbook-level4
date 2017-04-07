@@ -66,6 +66,7 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
+    //@@author A0147620L
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -129,6 +130,7 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
+    //@@author
 
     //@@author A0147980U
     //Handle Control + z key combination
@@ -178,6 +180,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author A0147620L
     /** Method to special handle text-completion for 'Find' command */
     private void handleFindTab(int cursorPosition, String[] words, String suggestion) {
         StringBuilder s = new StringBuilder();
@@ -189,6 +192,7 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.insertText(commandTextField.getCaretPosition(), suggestion);
         }
     }
+    //@@author
 
     //@@author A0140887W
     /**

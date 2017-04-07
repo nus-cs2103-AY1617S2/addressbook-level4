@@ -2,6 +2,7 @@ package seedu.doist.model.util;
 
 import org.apache.commons.lang.StringUtils;
 
+//@@author A0147620L
 public class StringMatchUtil {
 
     /**
@@ -46,4 +47,5 @@ public class StringMatchUtil {
     public static boolean isNearMatch(String target, String query, double threshold) {
         return threshold < matchValue(target, query);
     }
+    //@@author
 }

@@ -123,6 +123,7 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
+    //@@author A0147620L
     private String prettyDate (Date date) {
         StringBuilder prettydate = new StringBuilder();
         prettydate.append(prettyMonth (date.getMonth() + 1));
@@ -156,4 +157,5 @@ public class TaskCard extends UiPart<Region> {
         String minute = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
         return hour + ":" + minute + suffix;
     }
+    //@@author
 }

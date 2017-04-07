@@ -85,13 +85,13 @@ public class AddCommandParser {
             tagList = ParserUtil.parseTagsFromString(tagsParameterString.get());
         }
         TaskDate dates = getDatesFromParameters(tokenizer);
-        Task toAdd = new Task(new Description(preamble),  dates, tagList);
+        Task newTask = new Task(new Description(preamble),  dates, tagList);
         // set priority
         Optional<Priority> priority = ParserUtil.parsePriority(tokenizer.getValue(PREFIX_AS));
         if (priority.isPresent()) {
-            toAdd.setPriority(priority.get());
+            newTask.setPriority(priority.get());
         }
-        return toAdd;
+        return newTask;
     }
 
     /**

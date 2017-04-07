@@ -255,8 +255,8 @@ public class ModelManager extends ComponentManager implements Model {
     public ArrayList<String> getAllNames() {
         return todoList.getTaskNames();
     }
-
     //@@author
+
     //=========== Filtered Task List Accessors =============================================================
 
     @Override
@@ -336,7 +336,6 @@ public class ModelManager extends ComponentManager implements Model {
             this.description = descKeyWords;
         }
 
-        //@@author A0147620L
         @Override
         public boolean run(ReadOnlyTask task) {
             return StringMatchUtil.isNearMatch(task.getDescription().toString(), description, threshold);
@@ -390,6 +389,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0147620L
     private class DateQualifier implements Qualifier {
         private TaskDate dates;
 
@@ -403,6 +403,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
+    //@@author
 
     //========== handle undo and re-do operation =================================================
     public void saveCurrentToHistory() {
