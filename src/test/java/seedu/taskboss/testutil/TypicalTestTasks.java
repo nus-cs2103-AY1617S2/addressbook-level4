@@ -25,7 +25,7 @@ public class TypicalTestTasks {
                     .withCategories(AddCommand.BUILT_IN_ALL_TASKS, "Friends").build();
             taskB = new TaskBuilder().withName("Birthday party")
                     .withInformation("311, Clementi Ave 2, #02-25")
-                    .withPriorityLevel("Yes")
+                    .withPriorityLevel("No")
                     .withRecurrence(Frequency.NONE)
                     .withStartDateTime("Feb 23, 2017 10pm")
                     .withEndDateTime("Jun 28, 2017 5pm")
