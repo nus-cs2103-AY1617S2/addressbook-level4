@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import seedu.taskboss.model.task.ReadOnlyTask;
 import seedu.taskboss.testutil.TestTask;
 import seedu.taskboss.testutil.TestUtil;
 
@@ -73,7 +74,21 @@ public class DeleteCommandTest extends TaskBossGuiTest {
         //confirm the result message is correct
         ArrayList<TestTask> deletedTasks = new ArrayList<TestTask>();
         deletedTasks.add(taskToDelete);
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasks));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, getDesiredFormat(deletedTasks)));
     }
 
+    //@@author A0143157J
+    /**
+     * Returns a formatted {@code ArrayList} deletedTasks,
+     * so that each ReadOnlyTask in the ArrayList is numbered
+     */
+    private String getDesiredFormat(ArrayList<TestTask> deletedTasks) {
+        int i = 1;
+        StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : deletedTasks) {
+            builder.append(i + ". ").append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
 }

@@ -16,6 +16,9 @@ import seedu.taskboss.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
+    private static final String NUMBERING_DOT = ". ";
+    private static final int INDEX_ONE = 1;
+
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_WORD_SHORT = "d";
     public static final String COMMAND_WORD_2ND_SHORT = "-";
@@ -67,7 +70,22 @@ public class DeleteCommand extends Command {
             e.printStackTrace();
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, getDesiredTasksToDeleteFormat()));
     }
     //@@author
+
+    //@@author A0143157J
+    /**
+     * Returns a formatted {@code ArrayList} tasksToDelete,
+     * so that each ReadOnlyTask in the ArrayList is numbered
+     */
+    private String getDesiredTasksToDeleteFormat() {
+        int i = INDEX_ONE;
+        StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : tasksToDelete) {
+            builder.append(i + NUMBERING_DOT).append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
 }

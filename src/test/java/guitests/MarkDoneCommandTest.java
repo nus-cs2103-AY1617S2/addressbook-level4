@@ -228,8 +228,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
             assertResultMessage("Listed all tasks");
         } else {
             assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS ,
-                            "[" + markedDoneTask + "]"));
+            assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, "1. " +
+                    markedDoneTask));
         }
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
@@ -254,15 +254,12 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
             expectedTasksList[filteredTaskListIndex[index] - 1] = tasksMarkedDone[index];
         }
 
+        int i = 1;
         StringBuilder sbExpected = new StringBuilder();
-        sbExpected.append("[");
         for (int indexExpected = 0; indexExpected < filteredTaskListIndex.length; indexExpected++) {
-            sbExpected.append(tasksMarkedDone[indexExpected]);
-            if (indexExpected != filteredTaskListIndex.length - 1) {
-                sbExpected.append(", ");
-            }
+            sbExpected.append(i + ". ").append(tasksMarkedDone[indexExpected]);
+            i++;
         }
-        sbExpected.append("]");
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS , sbExpected));
