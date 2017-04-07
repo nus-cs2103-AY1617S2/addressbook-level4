@@ -70,7 +70,7 @@ public class XmlEzDoStorageTest {
          * That means you should not have more than one exception test in one method
          */
     }
-  //@@author A0139248X
+ 
     @Test
     public void readAndSaveEzDo_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempEzDo.xml";
@@ -99,7 +99,7 @@ public class XmlEzDoStorageTest {
         assertEquals(original, new EzDo(readBack));
 
     }
-
+    //@@author A0139248X
     @Test
     public void saveEzDo_nullEzDo_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
@@ -140,7 +140,7 @@ public class XmlEzDoStorageTest {
 
 
     @Test
-    public void testIOException_moveEzDo() throws IOException {
+    public void moveEzDo_invalid_exception() throws IOException {
         PowerMockito.mockStatic(Files.class);
         BDDMockito.given(Files.move(Paths.get("lolasdf"), Paths.get("omg"), StandardCopyOption.REPLACE_EXISTING))
                 .willThrow(new IOException("Error moving file to new directory"));

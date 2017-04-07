@@ -29,7 +29,7 @@ public class UndoneCommandTest extends EzDoGuiTest {
         TestTask[] doneList = td.getTypicalNonRecurringTasks();
         //undone a task
         int targetIndex = 1;
-        assertUndoneSuccess(false, targetIndex, currentList, doneList);
+        assertUndoneSuccess(targetIndex, currentList, doneList);
     }
 
     @Test
@@ -40,9 +40,8 @@ public class UndoneCommandTest extends EzDoGuiTest {
         assertResultMessage("The task index provided is invalid.");
     }
 
-    private void assertUndoneSuccess(boolean usesShortCommand, int targetIndexOneIndexed, final TestTask[] currentList,
+    private void assertUndoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList,
             final TestTask[] doneList) {
-
         StringBuilder sb = new StringBuilder(); // workaround to done all tasks so we can test
         sb.append("done ");
         for (int i = 0; i < doneList.length; i++) {
@@ -57,27 +56,15 @@ public class UndoneCommandTest extends EzDoGuiTest {
         TestTask[] expectedUndone = TestUtil.addTasksToList(currentList, taskToUndone);
 
         commandBox.runCommand("done"); // to get to done list view
+        commandBox.runCommand("done " + targetIndexOneIndexed);
+        
+        assertTrue(taskListPanel.isListMatching(expectedRemainder)); //confirm done list is correct
 
-        if (usesShortCommand) {
-            commandBox.runCommand("d " + targetIndexOneIndexed);
-        } else {
-            commandBox.runCommand("done " + targetIndexOneIndexed);
-        }
-
-        //confirm the done list now contains all done tasks excluding the one just marked as undone
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
-
-        //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_UNDONE_TASK_SUCCESS, tasksToUndone));
-
-        //confirm the new current list contains the right data
-        commandBox.runCommand("list");
+        
+        commandBox.runCommand("list"); //confirm the new current list contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToUndone.getName().fullName);
         assertMatching(taskToUndone, addedCard);
         assertTrue(taskListPanel.isListMatching(expectedUndone));
-
-        //confirm the done list does not contain the task just marked as undone
-        commandBox.runCommand("done");
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
     }
 }
