@@ -138,8 +138,9 @@ public class DateTest {
     //@@author A0140063X
     /**
      * This method creates a DateTime object give a dateString.
-     * @param dateString
-     * @return dateTime
+     *
+     * @param dateString    Date in String form.
+     * @return              DateTime created from dateString.
      */
     private DateTime createDateTime(String dateString) {
         PrettyTimeParser pretty = new PrettyTimeParser();
@@ -150,9 +151,10 @@ public class DateTest {
     /**
      * This method creates two Date objects using two different type of constructors
      * and check that the same date is created.
-     * @param eventDateTime
-     * @param validDateString
-     * @throws IllegalValueException
+     *
+     * @param eventDateTime     EventDateTime to create Date with.
+     * @param validDateString   Date String to create Date with.
+     * @throws IllegalValueException    If Date String is invalid.
      */
     private void assertDatesDifferentConstructorEquals(EventDateTime eventDateTime, String validDateString)
             throws IllegalValueException {

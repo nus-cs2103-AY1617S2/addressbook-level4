@@ -117,6 +117,13 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     //@@author A0140063X
+    /**
+     * Saves backup into given backupFilePath.
+     *
+     * @param backupFilePath            File path to back up into.
+     * @throws IOException              If input/output error.
+     * @throws FileNotFoundException    If file is not found.
+     */
     @Override
     public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {
         logger.fine("Attempting to backup data from " + backupFilePath);
@@ -138,6 +145,12 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     //@@author A0140063X
+    /**
+     * Triggers whenever a command that modifies data is executed.
+     * Backup if required. Save data into file either way.
+     *
+     * @param event     The event that represents taskmanager is changed.
+     */
     @Override
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {

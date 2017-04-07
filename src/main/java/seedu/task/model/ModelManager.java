@@ -54,38 +54,48 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * Resets data of taskManager.
+     */
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * Load data into taskManager. Used by Undo/Redo Command.
+     */
     @Override
     public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     *
+     * @return taskManager of model.
+     */
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
     /**
-     * Raises an event to indicate the model has changed
+     * Raises an event to indicate the model has changed.
      *
-     * @param backupFilePath
+     * @param backupFilePath    File path to back up into.
      */
     private void indicateTaskManagerChanged(String backupFilePath) {
         history.handleTaskManagerChanged(backupFilePath);
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
-    // @@author
+    //@@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -113,7 +123,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     *
+     * @param target    Target task to change.
+     * @param eventId   Event id to change into.
+     */
     @Override
     public void setTaskEventId(ReadOnlyTask target, String eventId)
             throws TaskNotFoundException, IllegalValueException {
@@ -129,7 +144,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * This method adds every task in tasks to model.
+     *
+     * @param tasks     ArrayList of task to add.
+     */
     @Override
     public void addMultipleTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {

@@ -29,6 +29,7 @@ public class UndoCommand extends Command {
         assert model != null;
         assert storage != null;
 
+        //Check that undo call is valid.
         int undoCount = history.getUndoCount();
         if (undoCount <= 0) {
             return new CommandResult(MESSAGE_FAIL);

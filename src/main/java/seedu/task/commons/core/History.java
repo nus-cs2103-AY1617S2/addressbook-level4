@@ -81,7 +81,8 @@ public class History {
 
     /**
      * This method returns the filePath to save back up into. This is based on currentFileIndex.
-     * @return filePath
+     *
+     * @return File path to back up into.
      */
     public String getBackupFilePath() {
         return backupDirectory + backupFilePaths[currentFileIndex];
@@ -91,7 +92,8 @@ public class History {
      * This method returns the filePath for undo to load from.
      * This method is only used when undo command is called, therefore undoCount must not be 0.
      * currentFileIndex must never be negative since it corresponds to a file.
-     * @return filePath
+     *
+     * @return File path for undo to load from.
      */
     public String getUndoFilePath() {
         assert undoCount != 0;
@@ -106,7 +108,8 @@ public class History {
     /**
      * This method returns the filePath for redo to load from.
      * This method is only used when redo command is called, therefore redoCount must not be 0.
-     * @return filePath
+     *
+     * @return File path for redo to load from.
      */
     public String getRedoFilePath() {
         assert redoCount != 0;
@@ -120,7 +123,8 @@ public class History {
     /**
      * This method is called when a command that modifies taskmanager have been executed.
      * If backupFilePath is not empty, it means backup is done. Updates values to maintain proper status.
-     * @param backupFilePath
+     *
+     * @param backupFilePath    File path that backup was saved into.
      */
     public void handleTaskManagerChanged(String backupFilePath) {
         if (!backupFilePath.trim().equals("")) {
@@ -154,6 +158,8 @@ public class History {
 
     /**
      * This method is used for Junit testing only.
+     *
+     * @param backupDirectory   Directory for history to use.
      */
     public void test_setBackupDirectory(String backupDirectory) {
         this.backupDirectory = backupDirectory;

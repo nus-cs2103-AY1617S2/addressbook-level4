@@ -20,43 +20,58 @@ import seedu.task.model.task.Task;
 // @@author A0140063X
 public class LogicHelper {
 
+    /**
+     * This method returns a task from the given event. Name must not be empty, else IllegalValueException is thrown.
+     *
+     * @param event     Event to convert.
+     * @return          Task that was converted.
+     * @throws IllegalValueException    If event summary is empty.
+     */
     public static Task createTaskFromEvent(Event event) throws IllegalValueException {
         assert event != null;
 
         if (event.getSummary() == null) {
-            throw new IllegalValueException("Name must not be empty.");
+            throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
+
         Name name = new Name(event.getSummary());
         Date startDate = new Date(event.getStart());
         Date endDate = new Date(event.getEnd());
         Remark remark = new Remark(event.getDescription());
         Location location = new Location(event.getLocation());
-        final Set<Tag> tagSet = new HashSet<>(); // No tags
+        final Set<Tag> tagSet = new HashSet<>();
+        // No tags for event
 
         return new Task(name, startDate, endDate, remark, location, new UniqueTagList(tagSet), false, event.getId());
     }
 
-    public static Event createEventFromTask(ReadOnlyTask taskToPost) {
-        assert taskToPost != null;
-        assert taskToPost.getStartDate() != null;
-        assert taskToPost.getEndDate() != null;
+    /**
+     * This method returns an event for the given task. Task must have start and end date to be an event.
+     *
+     * @param task      Task to convert.
+     * @return          Event that was converted.
+     */
+    public static Event createEventFromTask(ReadOnlyTask task) {
+        assert task != null;
+        assert task.getStartDate() != null;
+        assert task.getEndDate() != null;
 
         Event event = new Event()
-                .setSummary(taskToPost.getName().fullName)
-                .setLocation(taskToPost.getLocation().value)
-                .setDescription(taskToPost.getRemark().value);
+                .setSummary(task.getName().fullName)
+                .setLocation(task.getLocation().value)
+                .setDescription(task.getRemark().value);
 
-        DateTime startDateTime = new DateTime(taskToPost.getStartDate().getDateValue());
+        DateTime startDateTime = new DateTime(task.getStartDate().getDateValue());
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime);
         event.setStart(start);
 
-        DateTime endDateTime = new DateTime(taskToPost.getEndDate().getDateValue());
+        DateTime endDateTime = new DateTime(task.getEndDate().getDateValue());
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime);
         event.setEnd(end);
 
-        event.setId(taskToPost.getEventId());
+        event.setId(task.getEventId());
 
         return event;
     }

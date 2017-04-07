@@ -26,7 +26,7 @@ public class SmartAddCommand extends Command {
     public static final String COMMAND_WORD_1 = "smartadd";
     public static final String COMMAND_WORD_2 = "sa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Quickly adds a task without any prefix. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Flexibly adds a task without any prefix. "
             + "Parameters: DESCRIPTION [r/REMARK] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD_1
             + " Meet Jason for dinner tomorrow at 6pm in vivocity t/friends";
@@ -38,7 +38,7 @@ public class SmartAddCommand extends Command {
 
     // @@author A0140063X
     /**
-     * Creates an QuickAddCommand using raw values.
+     * Creates an SmartAddCommand using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      * @throws IOException if connection to google failed
@@ -52,23 +52,30 @@ public class SmartAddCommand extends Command {
         }
 
         try {
-            this.toAdd = googleQuickAdd(name, remark, tagSet);
+            this.toAdd = googleQuickAdd(name);
+            toAdd.setTags(new UniqueTagList(tagSet));
+            toAdd.setRemark(new Remark(remark));
         } catch (IOException ioe) {
             throw new IOException(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
     }
 
     // @@author A0140063X
-    private Task googleQuickAdd(String name, String remark, Set<Tag> tagSet) throws IOException, IllegalValueException {
+    /**
+     * This method takes in the description string, creates and returns the corresponding task.
+     * Requires Internet as it utilizes Google's Quick Add API. Throw IOException if otherwise.
+     *
+     * @param description   Query to send to Google.
+     * @return              Task created from description.
+     * @throws IOException              If connection fails.
+     * @throws IllegalValueException    If created event has no name.
+     */
+    private Task googleQuickAdd(String description) throws IOException, IllegalValueException {
         com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
-        Event createdEvent = service.events().quickAdd(GoogleCalendar.CALENDAR_ID, name).execute();
+        Event createdEvent = service.events().quickAdd(GoogleCalendar.CALENDAR_ID, description).execute();
         service.events().delete(GoogleCalendar.CALENDAR_ID, createdEvent.getId()).execute();
 
-        Task toAdd = LogicHelper.createTaskFromEvent(createdEvent);
-        toAdd.setTags(new UniqueTagList(tagSet));
-        toAdd.setRemark(new Remark(remark));
-
-        return toAdd;
+        return LogicHelper.createTaskFromEvent(createdEvent);
     }
 
     // @@author A0140063X-reused

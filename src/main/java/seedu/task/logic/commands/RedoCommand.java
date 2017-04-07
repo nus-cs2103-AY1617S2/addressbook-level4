@@ -27,6 +27,7 @@ public class RedoCommand extends Command {
         assert model != null;
         assert storage != null;
 
+        //Check that redo call is valid.
         int redoCount = history.getRedoCount();
         if (redoCount <= 0) {
             return new CommandResult(MESSAGE_FAIL);

@@ -73,10 +73,14 @@ public class MainApp extends Application {
         initEventsCenter();
         initHistory();
 
+        // list not done by default.
         logic.execute("list " + ListCommand.NOT_DONE_PARAM_1);
     }
 
     // @@author A0140063X
+    /**
+     * Initializes the History class. Also saves initial data into file.
+     */
     private void initHistory() {
         this.history = History.getInstance();
 

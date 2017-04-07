@@ -31,10 +31,10 @@ public class Date {
 
     //@@author A0140063X
     /**
-     * Validates given date.
+     * Validates and creates date given a String.
      *
-     * @throws IllegalValueException
-     *             if given date string is invalid.
+     * @param date  Date in String format.
+     * @throws IllegalValueException If given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         if (date == null || date.trim().equals("")) {
@@ -47,7 +47,7 @@ public class Date {
 
             List<java.util.Date> dates = pretty.parse(date);
 
-            //ignore seconds
+            // Ignore seconds
             Calendar cal = Calendar.getInstance();
             cal.setTime(dates.get(0));
             cal.set(Calendar.SECOND, 0);
@@ -56,7 +56,7 @@ public class Date {
 
             this.value = new java.util.Date(time);
 
-            //used for find command
+            // used for find command
             extractedFrom = date;
         }
     }
@@ -64,7 +64,8 @@ public class Date {
     //@@author A0140063X
     /**
      * Creates a Date object from given eventDateTime. Used for Google Calendar.
-     * @param eventDateTime
+     *
+     * @param eventDateTime    EventDateTime to convert from.
      */
     public Date(EventDateTime eventDateTime) {
         if (eventDateTime == null) {
@@ -72,7 +73,7 @@ public class Date {
             return;
         }
 
-        //event sometimes does not have time
+        // Event might not have time
         if (eventDateTime.getDateTime() != null) {
             this.value = new java.util.Date(eventDateTime.getDateTime().getValue());
         } else if (eventDateTime.getDate() != null) {
@@ -83,11 +84,19 @@ public class Date {
     }
 
     //@@author A0140063X
+    /**
+     *
+     * @return  Date in java.util.Date format.
+     */
     public java.util.Date getDateValue() {
         return this.value;
     }
 
     //@@author A0140063X
+    /**
+     *
+     * @return  True if value is null.
+     */
     public boolean isNull() {
         return this.value == null;
     }
@@ -95,6 +104,9 @@ public class Date {
     //@@author A0140063X
     /**
      * Returns true if a given string is a valid date.
+     *
+     * @param input     String to check.
+     * @return          True if valid.
      */
     public static boolean isValidDate(String input) {
         List<java.util.Date> dates = pretty.parse(input);
@@ -105,14 +117,21 @@ public class Date {
     /**
      * Compares two dates and returns true if date1 is before date2
      *
-     * @param date1
-     * @param date2
+     * @param date1     First Date to compare.
+     * @param date2     Second Date to compare.
+     * @return          True if date1 is before date2.
      */
     public static boolean isBefore(Date date1, Date date2) {
         return date1.value.before(date2.value);
     }
 
     //@@author A0140063X
+    /**
+     * Display dates in this format: M/d/y h:mm a
+     * Also adds relative time behind using PrettyTime display.
+     *
+     * @return Formatted date.
+     */
     @Override
     public String toString() {
         if (value == null) {
@@ -125,6 +144,10 @@ public class Date {
     }
 
     //@@author A0140063X
+    /**
+     *
+     * @return True if equals.
+     */
     @Override
     public boolean equals(Object other) {
         Date otherDate = ((Date) other);

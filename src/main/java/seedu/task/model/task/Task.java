@@ -146,6 +146,11 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     //@@author A0140063X
+    /**
+     *
+     * @param eventId   Event Id to set.
+     * @throws IllegalValueException    If eventId is invalid.
+     */
     public void setEventId(String eventId) throws IllegalValueException {
         assert eventId != null && eventId.trim() != "";
         if (!isValidEventId(eventId)) {
@@ -155,6 +160,12 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     //@@author A0140063X
+    /**
+     * Checks if eventId is valid
+     *
+     * @param eventId   Event Id to check.
+     * @return          True if valid.
+     */
     private boolean isValidEventId(String eventId) {
         if ((eventId.length() < 5) || (eventId.length() > 1024)) {
             return false;

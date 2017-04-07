@@ -209,6 +209,13 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     //@@author A0140063X
+    /**
+     *
+     * @param target    Target task to change.
+     * @param eventId   Event id to change into.
+     * @throws UniqueTaskList.TaskNotFoundException     If Task is not found.
+     * @throws IllegalValueException                    If eventId is invalid.
+     */
     public void setTaskEventId(ReadOnlyTask target, String eventId)
             throws UniqueTaskList.TaskNotFoundException, IllegalValueException {
         tasks.setTaskEventId(target, eventId);

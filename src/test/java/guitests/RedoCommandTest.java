@@ -121,18 +121,27 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(emptyList));
     }
 
-
+    /**
+     * Runs the given command string n times.
+     *
+     * @param command   Command String to run.
+     * @param n         number of times to run.
+     */
     public void runNTimes(String command, int n) {
         for (int i = 0; i < n; i++) {
             commandBox.runCommand(command);
         }
     }
 
+    /**
+     * Undo then redo and check if list is matching.
+     *
+     * @param expectedList  Expected List to match with listing.
+     */
     private void assertRedoSuccess(TestTask[] expectedList) {
         commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
         commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
 
-        // check if the list is still the same
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

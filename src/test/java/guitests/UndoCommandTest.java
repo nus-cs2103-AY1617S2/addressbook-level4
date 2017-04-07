@@ -132,11 +132,16 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
     }
 
-    private void assertUndoSuccess(TestTask[] currentList) {
+    /**
+     * Run undo then check if list matching.
+     *
+     * @param expectedList     Expected list to check if match with current listing.
+     */
+    private void assertUndoSuccess(TestTask[] expectedList) {
         commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
 
         // check if the list is still the same
-        assertTrue(taskListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

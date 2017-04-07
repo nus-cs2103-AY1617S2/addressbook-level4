@@ -54,7 +54,6 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
-    //@@author A0140063X
     @Test
     public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Eat");
@@ -71,7 +70,6 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
-    //@@author
     @Test
     public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit Bobby");
