@@ -225,6 +225,35 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossUndoHistory.clear();
     }
 
+  //@@author A0144904H
+    @Override
+    public void unmarkTask(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone)
+            throws IllegalValueException {
+        taskbossHistory.push(new TaskBoss(this.taskBoss));
+        int index = 0;
+        for (ReadOnlyTask task : tasksToMarkDone) {
+            int targetIndex = indices.get(index) - 1;
+            if (!task.isRecurring()) {
+                UniqueCategoryList newCategoryList = new UniqueCategoryList(task.getCategories());
+                newCategoryList.remove(Category.done);
+                Task newTask = new Task(task.getName(), task.getPriorityLevel(),
+                        task.getStartDateTime(), task.getEndDateTime(),
+                        task.getInformation(), task.getRecurrence(),
+                        newCategoryList);
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newTask);
+            } else {
+                Task newRecurredTask = createRecurredTaskForUnmarking(task);
+                int taskBossIndex = filteredTasks.getSourceIndex(targetIndex);
+                this.taskBoss.updateTask(taskBossIndex, newRecurredTask);
+            }
+            index++;
+        }
+        undoInputList.push("mark");
+        indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
+    }
+
     //@@author A0143157J
     @Override
     public void renameCategory(Category oldCategory, Category newCategory)
@@ -246,6 +275,20 @@ public class ModelManager extends ComponentManager implements Model {
     private Task createRecurredTask(ReadOnlyTask taskToMarkDone) throws IllegalValueException {
         Task newRecurredTask = new Task(taskToMarkDone);
         newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+        return newRecurredTask;
+    }
+
+    /**
+     * Returns a new recurred task with updated task dates according to the recurrence
+     * of the given task and removes done category
+     */
+    private Task createRecurredTaskForUnmarking(ReadOnlyTask taskToUnmark)
+            throws IllegalValueException {
+        UniqueCategoryList newCategoryList = new UniqueCategoryList(taskToUnmark.getCategories());
+        newCategoryList.remove(Category.done);
+        Task newRecurredTask = new Task(taskToUnmark);
+        newRecurredTask.getRecurrence().updateTaskDates(newRecurredTask);
+        newRecurredTask.setCategories(newCategoryList);
         return newRecurredTask;
     }
 
