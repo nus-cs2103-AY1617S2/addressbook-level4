@@ -49,7 +49,7 @@ Now, let's get you started!
 
 ### Starting KIT
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/emptyUi.png" width="600">
+   > <img src="images/startUi.png" width="600">
 
 5. (Optional) You can choose to login to your Google Calendar, click [here](#310-google-calendar) to follow the detailed instructions.
 
