@@ -219,15 +219,6 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-  //------------------Test for marking done a marked done task----------------------------
-
-    @Test
-    public void terminate_taskTerminated_failure() {
-        commandBox.runCommand("t 2");
-        commandBox.runCommand("t 2");
-        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
-    }
-
     //---------------- End of test cases --------------------------------------
 
     private void assertTerminateSuccess(boolean runFind, boolean isShort, int filteredTaskListIndex, int taskBossIndex,
