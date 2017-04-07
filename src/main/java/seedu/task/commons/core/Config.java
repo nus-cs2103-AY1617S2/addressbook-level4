@@ -18,7 +18,7 @@ public class Config {
     private String taskManagerName = "MyTaskManager";
 
     public String getAppTitle() {
-	return appTitle;
+        return appTitle;
     }
 
     public void setAppTitle(String appTitle) {

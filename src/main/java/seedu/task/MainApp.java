@@ -51,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-	logger.info("=============================[ Initializing Task Manager ]===========================");
+        logger.info("=============================[ Initializing Task Manager ]===========================");
 	super.init();
 
 	config = initConfig(getApplicationParameter("config"));

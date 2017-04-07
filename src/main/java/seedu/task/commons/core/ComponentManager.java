@@ -14,7 +14,7 @@ public abstract class ComponentManager {
      * Uses default {@link EventsCenter}
      */
     public ComponentManager() {
-	this(EventsCenter.getInstance());
+        this(EventsCenter.getInstance());
     }
 
     public ComponentManager(EventsCenter eventsCenter) {

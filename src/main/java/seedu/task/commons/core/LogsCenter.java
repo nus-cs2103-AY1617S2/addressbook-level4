@@ -35,7 +35,7 @@ public class LogsCenter {
      * with the same name is requested again from the LogsCenter.
      */
     public static void init(Config config) {
-	currentLogLevel = config.getLogLevel();
+        currentLogLevel = config.getLogLevel();
 	logger.info("currentLogLevel: " + currentLogLevel);
     }
 
@@ -57,14 +57,16 @@ public class LogsCenter {
      * Creates a Logger for the given class name.
      */
     public static <T> Logger getLogger(Class<T> clazz) {
-	if (clazz == null)
+	if (clazz == null) {
 	    return Logger.getLogger("");
+	}
 	return getLogger(clazz.getSimpleName());
     }
 
     private static void addConsoleHandler(Logger logger) {
-	if (consoleHandler == null)
+	if (consoleHandler == null) {
 	    consoleHandler = createConsoleHandler();
+	}
 	logger.addHandler(consoleHandler);
     }
 
@@ -77,8 +79,9 @@ public class LogsCenter {
 
     private static void addFileHandler(Logger logger) {
 	try {
-	    if (fileHandler == null)
+	    if (fileHandler == null) {
 		fileHandler = createFileHandler();
+	    }
 	    logger.addHandler(fileHandler);
 	} catch (IOException e) {
 	    logger.warning("Error adding file handler for logger.");
