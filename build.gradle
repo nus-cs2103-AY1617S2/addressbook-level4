@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'project.taskcrusher.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -29,6 +29,7 @@ allprojects {
         mavenCentral()
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+	maven { url "https://mvnrepository.com/artifact/com.joestelmach/natty/0.13" }
     }
 
     // This part is similar to global variables
@@ -63,6 +64,11 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+        compile files('lib/prettytime-nlp-4.0.1.Final.jar')
+        compile files('lib/commons-lang3-3.5.jar')
+        // https://mvnrepository.com/artifact/com.joestelmach/natty
+        compile group: 'com.joestelmach', name: 'natty', version: '0.13'
+
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +91,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "taskcrusher.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -156,7 +162,7 @@ task guiTests(type: AddressBookTest) {
 
 
 task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+    include 'project/taskcrusher/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")

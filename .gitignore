@@ -3,12 +3,10 @@ build/
 .checkstyle
 .settings/
 .idea/
-lib/*
 *.iml
 *.log
 *.log.*
 *.csv
-config.json
 src/test/data/sandbox/
 preferences.json
 .DS_Store
@@ -16,3 +14,7 @@ preferences.json
 classes/
 /data/
 /bin/
+.classpath
+config.json
+Collate-TUI.jar
+*.bat

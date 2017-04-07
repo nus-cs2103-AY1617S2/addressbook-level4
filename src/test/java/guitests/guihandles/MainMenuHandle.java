@@ -5,7 +5,7 @@ import java.util.Arrays;
 import guitests.GuiRobot;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import project.taskcrusher.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.
@@ -32,6 +32,6 @@ public class MainMenuHandle extends GuiHandle {
 
     private void useF1Accelerator() {
         guiRobot.push(KeyCode.F1);
-        guiRobot.sleep(500);
+        guiRobot.sleep(1000);
     }
 }
