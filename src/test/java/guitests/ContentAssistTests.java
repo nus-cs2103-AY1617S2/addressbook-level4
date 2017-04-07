@@ -45,7 +45,7 @@ public class ContentAssistTests extends DoistGUITest {
     }
 
     @Test
-    public void testCompleteByTappingTap() {
+    public void testCompleteByTappingTab() {
         String input = "view_alia";
         commandBox.enterCommand(input);
         bot.type(KeyCode.TAB);
@@ -53,7 +53,7 @@ public class ContentAssistTests extends DoistGUITest {
     }
 
     @Test
-    public void testCompleteKeyByTappingTap() {
+    public void testCompleteKeyByTappingTab() {
         String input = "do task \\unde";
         commandBox.enterCommand(input);
         bot.type(KeyCode.TAB);
