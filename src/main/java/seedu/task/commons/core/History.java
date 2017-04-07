@@ -157,6 +157,20 @@ public class History {
     }
 
     /**
+     * This resets undoCount to 0. Used when an I/O error occurs.
+     */
+    public void resetUndoCount() {
+        this.undoCount = 0;
+    }
+
+    /**
+     * This resets redoCount to 0. Used when an I/O error occurs.
+     */
+    public void resetRedoCount() {
+        this.redoCount = 0;
+    }
+
+    /**
      * This method is used for Junit testing only.
      *
      * @param backupDirectory   Directory for history to use.

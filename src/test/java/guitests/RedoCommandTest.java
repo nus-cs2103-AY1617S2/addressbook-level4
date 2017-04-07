@@ -72,12 +72,12 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(UndoCommand.COMMAND_WORD_1);
 
         //delete file so redo should fail
-        History history = History.getInstance();
         File backup = new File(history.getRedoFilePath());
         backup.delete();
 
         commandBox.runCommand(RedoCommand.COMMAND_WORD_1);
         assertResultMessage(RedoCommand.MESSAGE_FAIL_NOT_FOUND);
+
     }
 
     @Test
