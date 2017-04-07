@@ -332,3 +332,11 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.error {
+    -fx-background-color: #ffb3b3;
+}
+
+.white {
+    -fx-background-color: #a9a9a9 , white , white;
+}
