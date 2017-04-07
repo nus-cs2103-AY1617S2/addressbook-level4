@@ -17,7 +17,9 @@ import seedu.onetwodo.commons.events.ui.DeselectCardsEvent;
 import seedu.onetwodo.commons.events.ui.NewResultAvailableEvent;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.logic.Logic;
+import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.logic.commands.CommandResult;
+import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.exceptions.CommandException;
 
 public class CommandBox extends UiPart<Region> {
@@ -93,13 +95,20 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void setKeyListenerForMutators(String command) {
-        commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                raise(new DeselectCardsEvent());
-                resetKeyListener();
-            }
-        });
+        switch (command) {
+        case AddCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD:
+            commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    raise(new DeselectCardsEvent());
+                    resetKeyListener();
+                }
+            });
+            break;
+        default:
+            break;
+        }
     }
 
     public void resetKeyListener() {

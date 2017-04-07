@@ -35,9 +35,9 @@ As prerequisites, make sure that your computer has the following software instal
 
 3. **e(fx)clipse** plugin for Eclipse . You may refer to the tutorial by doing the steps 2 onwards given here: http://www.eclipse.org/efxclipse/install.html#for-the-ambitious
 
-4. **Buildship Gradle **Integration plugin from the Eclipse Marketplace.
+4. **Buildship Gradle** Integration plugin from the Eclipse Marketplace.
 
-5. **Checkstyle **Plug-in plugin from the Eclipse Marketplace.
+5. **Checkstyle** Plug-in plugin from the Eclipse Marketplace.
 
 ### 1.2 Importing the project into Eclipse
 
@@ -47,13 +47,13 @@ We recommend this application to be developed with Eclipse. Simply carry out the
 
 2. Open Eclipse (Note: Ensure you have installed the e(fx)clipse and buildship plugins as given in the prerequisites above).
 
-3. Click File > Import.
+3. Click *File* > *Import*.
 
-4. Click Gradle > Gradle Project > Next > Next.
+4. Click *Gradle* > Gradle *Project* > *Next* > *Next*.
 
-5. Click Browse, then locate the project’s directory.
+5. Click *Browse*, then locate the project’s directory.
 
-6. Click Finish.
+6. Click *Finish*.
 
 **Notes:**
 
@@ -67,19 +67,19 @@ We recommend this application to be developed with Eclipse. Simply carry out the
 
 To adhere to the common coding style adopted for this project, you may want to import Checksyle into WorkSpace as well. 
 
-1. Click Project -> Properties -> Checkstyle -> Local Check Configurations -> New...
+1. Click *Project* -> *Properties* -> *Checkstyle* -> *Local Check Configurations* -> *New*...
 
-2. Choose External Configuration File under Type.
+2. Choose *External Configuration File* under *Type*.
 
 3. Enter an arbitrary configuration name e.g. onetwodo.
 
-4. Import checkstyle configuration file found at config/checkstyle/checkstyle.xml.
+4. Import checkstyle configuration file found at *config/checkstyle/checkstyle.xml*.
 
-5. Click OK once, go to the Main tab, use the newly imported check configuration.
+5. Click *OK* once, go to the *Main tab*, use the newly imported check configuration.
 
-6. Tick and select files from packages, click Change..., and select the resources package.
+6. Tick and select files from packages, click *Change*..., and select the resources package.
 
-7. Click OK twice. Rebuild project if prompted.
+7. Click *OK* twice. Rebuild project if prompted.
 
 **Notes**
 
@@ -89,14 +89,13 @@ To adhere to the common coding style adopted for this project, you may want to i
 
 You may encounter some problems during the setup. Here we provide solutions to some common ones.
 
-Problem: Eclipse reports compile errors after new commits are pulled from Git
+**Problem**: Eclipse reports compile errors after new commits are pulled from Git
 
 * Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
 
-* Solution: Refresh the project in Eclipse:
-Right click on the project (in Eclipse package explorer), choose Gradle -> Refresh Gradle Project.
+* Solution: Refresh the project in Eclipse. Right click on the project (in Eclipse package explorer), choose *Gradle* -> *Refresh Gradle Project*.
 
-Problem: Eclipse reports some required libraries missing
+**Problem**: Eclipse reports some required libraries missing
 
 * Reason: Required libraries may not have been downloaded during the project import.
 
@@ -111,7 +110,7 @@ In this section you will find out about each internal part of the application an
 <img src="images/Architecture.png" width="600"><br>
 *Figure 2.1.1 : Architecture Diagram*
 
-Welcome to our **_Architecture_** layout!Over here, you get to see a high-level design of our OneTwoDo as shown in the **_Figure 2.1.1_** above. If you ever want to update the diagram, you can do so in the diagram pptx file. Simply select the objects of the diagram, and choose **Save as picture**. Without further ado, we will now give you a quick overview of each component.
+Welcome to our **Architecture** layout!Over here, you get to see a high-level design of our OneTwoDo as shown in the **_Figure 2.1.1_** above. If you ever want to update the diagram, you can do so in the diagram pptx file. Simply select the objects of the diagram, and choose **Save as picture**. Without further ado, we will now give you a quick overview of each component.
 
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/onetwodo/MainApp.java). It is responsible for:
 
@@ -121,7 +120,7 @@ Welcome to our **_Architecture_** layout!Over here, you get to see a high-level 
 
 `Commons` represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class is used by components to communicate with other components using events (i.e. a form of** **Event Driven design).
+* `EventsCenter` : This class is used by components to communicate with other components using events (i.e. a form of **Event Driven** design).
 
 * `LogsCenter`: This class is used by many classes to write log messages to the App’s log file.
 
@@ -216,12 +215,12 @@ The Model is capable of the following:
 
 * Does not depend on any of the other three components.
 
-<img src="images/TaskClassDiagram.png" width="800"><br>
-*Figure 2.4.2 : Class Diagram for Task*
+<img src="images/Task.png" width="800"><br>
+*Figure 2.4.2 : Structure of the Task Component*
 
 You can find the API for this component in [`Task.java`](../src/main/java/seedu/onetwodo/model/task/Task.java)
 
-It is compulsory for a task to have the following parameters: _name_, _isDone_ and _taskType_. Other parameters such as _startDate_, _endDate_, _priority_, _description_ and _tag_ are optional. `StartDate` and `EndDate` classes inherit from `Date` class and override the `createDisplayValue()` method of `Date`. Do note that every field must be present and cannot be null.
+It is compulsory for a task to have the following parameters: _name_, _isDone_ and _taskType_. Other parameters such as _startDate_, _endDate_, _priority_, _recur_, _description_ and _tag_ are optional. `StartDate` and `EndDate` classes inherit from `Date` class. Do note that every field must be present and cannot be null.
 
 A task can be defined in the following ways:
 
@@ -315,7 +314,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use, our GUI
 
 Over here, we provide solutions to some of your common problems you may encounter in the process of testing. 
 
-**Problem: Tests fail because NullPointException when AssertionError is expected**
+**Problem:** Tests fail because NullPointException when AssertionError is expected.
 
 This is caused by assertions not enabled for JUnit tests. This usually occurs if you are not using a recent Eclipse version (i.e. *Neon* or later).  Try enabling assertions in JUnit tests as described here: stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option. Also, you can try to delete the run configurations that was created previously when you ran tests.
 
@@ -598,22 +597,25 @@ Projects often depends on third-party libraries. Likewise, OneTwoDo depends on t
 1. User input information to add task.
 
 2. System notifies user that the task has been successfully added.
-
+ 
 Use case ends.
+<br>
 
 #### Extensions
 
-      2a. Task already exists.
+2a. Task already exists.
 
 2a1. System informs user that the task already exists and doesn’t add repeated task.
-
+    
 Use case ends.
+<br>
 
-       2b. Invalid command format.
+2b. Invalid command format.
 
 2b1. System informs user that the command format is invalid and outputs a sample format to user.
 
 Use case ends.
+<br>
 
 #### UC02 - Delete task
 
@@ -626,26 +628,30 @@ Use case ends.
 3. System notifies user that task has been successfully deleted.
 
 Use case ends.
+<br>
 
 #### Extension
 
-      1a. List is empty.
+1a. List is empty.
 
 1a1. System informs user that there is no task to delete.
 
 Use case ends.
+<br>
 
-      2a. Invalid command format.
+2a. Invalid command format.
 
-     2a1. System informs user that the input is invalid and outputs a sample format.
+2a1. System informs user that the input is invalid and outputs a sample format.
 
- Use case resume at 1.
+Use case resume at 1.
+<br>
 
-     2b. User input index is not valid.
+2b. User input index is not valid.
 
 2b1. System informs user that the input index is invalid.
 
 Use case resume at 1.
+<br>
 
 #### UC03 - Edit task
 
@@ -664,22 +670,27 @@ Use case resume at 1.
 6. System displays changes made to task.
 
 Use case ends.
+<br>
 
 #### Extension
 
-     2a. The list is empty.
+2a. The list is empty.
 
 2a1. System informs user that there is no task to edit.
 
 Use case ends.
+<br>
 
-     3a. User task selection is invalid.
+
+3a. User task selection is invalid.
 
 3a1. System shows error message.
 
 Use case resumes from step 2.
+<br>
 
-     3b. System detects an error in the data that user entered.
+
+3b. System detects an error in the data that user entered.
 
 3b1. System selects valid task.
 
@@ -688,12 +699,14 @@ Use case resumes from step 2.
 3b3. Repeat steps 3b1 and 3b2 until data has no errors.
 
 Use case resumes from step 4.
+<br>
 
-     3c. User requests to tag a task with a category that is not currently in the system.
+3c. User requests to tag a task with a category that is not currently in the system.
 
 3c1. System creates the category.
 
 Use case resumes from step 4.
+<br>
 
 #### UC04 - Find task
 
@@ -707,11 +720,12 @@ Use case ends.
 
 #### Extension
 
-     2a. Task does not exist.
+2a. Task does not exist.
 
 2a1. System informs user that no tasks is found.
 
 Use case ends.
+<br>
 
 #### UC04 - List tasks
 
@@ -721,21 +735,25 @@ Use case ends.
 
 2. System displays list of tasks.
 
-3. Use case ends.
+Use case ends.
+<br>
 
 #### Extension
 
-     1a. User requests to list task in a certain category.
+1a. User requests to list task in a certain category.
 
 1a1. System displays list of tasks in that category.
 
 Use case ends.
+<br>
 
-     2a. The list is empty.
+
+2a. The list is empty.
 
 2a1. System displays empty list.
 
 Use case ends.
+<br>
 
 #### UC05 - Done task
 
@@ -750,14 +768,17 @@ Use case ends.
 4. System shows user remaining tasks that are uncompleted.
 
 Use case ends.
+<br>
 
 #### Extension
 
-**     **3a. User task selection is invalid.
+3a. User task selection is invalid.
 
 3a1. System shows error message.
 
 Use case resumes from step 2.
+<br>
+
 
 #### UC06 - Undo most recent action
 
@@ -768,20 +789,26 @@ Use case resumes from step 2.
 2. System reverts user’s previous command and displays feedback message to user.
 
 Use case ends.
+<br>
+
 
 #### Extension
 
-     2a. There is no previous command yet.
+2a. There is no previous command yet.
 
 2a1. System feedbacks to user that no previous command has found.
 
 Use case ends.
+<br>
 
-     2b. Previous command is not mutable.
+
+2b. Previous command is not mutable.
 
 2b1. System feedbacks to user no action required.
 
 Use case ends.
+<br>
+
 
 ## Appendix C : Non-Functional Requirements
 
@@ -972,4 +999,3 @@ Defaults to time of 2359 hrs if no time is indicated.</td>
 * Deadline of the tasks are not shown unless clicked.
 
 * Unable to mark tasks as done without keeping them for future references.
-
