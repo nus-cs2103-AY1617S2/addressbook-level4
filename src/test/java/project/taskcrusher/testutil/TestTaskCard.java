@@ -7,25 +7,28 @@ import project.taskcrusher.model.tag.UniqueTagList;
 import project.taskcrusher.model.task.Deadline;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
+//@@author A0127737X
 /**
  * A mutable task object. For testing only.
  */
-public class TestCard implements ReadOnlyTask {
+public class TestTaskCard implements ReadOnlyTask {
 
     private Name name;
     private Description description;
     private Deadline deadline;
     private Priority priority;
     private UniqueTagList tags;
+    private boolean isComplete;
+    private boolean isOverdue;
 
-    public TestCard() {
+    public TestTaskCard() {
         tags = new UniqueTagList();
     }
 
     /**
      * Creates a copy of {@code taskToCopy}.
      */
-    public TestCard(TestCard taskToCopy) {
+    public TestTaskCard(TestTaskCard taskToCopy) {
         this.name = taskToCopy.getName();
         this.priority = taskToCopy.getPriority();
         this.deadline = taskToCopy.getDeadline();
@@ -86,6 +89,7 @@ public class TestCard implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add t " + this.getName().name);
+
         if (this.getDeadline().hasDeadline()) {
             sb.append("d/" + this.getDeadline().deadline + " ");
         }
@@ -104,8 +108,7 @@ public class TestCard implements ReadOnlyTask {
 
     @Override
     public boolean isComplete() {
-        // TODO Auto-generated method stub
-        return false;
+        return this.isComplete;
     }
 
     @Override
@@ -116,7 +119,6 @@ public class TestCard implements ReadOnlyTask {
 
     @Override
     public boolean isOverdue() {
-        // TODO Auto-generated method stub
-        return false;
+        return this.isOverdue;
     }
 }

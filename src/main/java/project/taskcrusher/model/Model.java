@@ -39,7 +39,7 @@ public interface Model {
     /** Returns the UserInbox */
     ReadOnlyUserInbox getUserInbox();
 
-    void signalUiForUpdatedlists();
+    void signalUiForUpdatedLists();
 
     void updateOverdueStatus();
 

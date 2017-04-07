@@ -34,7 +34,7 @@ public class LogicManager extends ComponentManager implements Logic {
         Command command = parser.parseCommand(commandText);
         command.setData(model);
 
-        ///to refresh the overdues
+        ///to refresh the overdue status for events and tasks
         model.updateOverdueStatus();
         return command.execute();
     }

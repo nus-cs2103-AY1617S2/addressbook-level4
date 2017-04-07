@@ -88,7 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyUserInbox newData) {
         userInbox.resetData(newData);
         indicateUserInboxChanged();
-        signalUiForUpdatedlists();
+        signalUiForUpdatedLists();
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0127737X
-    public void signalUiForUpdatedlists() {
+    public void signalUiForUpdatedLists() {
         int eventCount = filteredEvents.size();
         int taskCount = filteredTasks.size();
 
@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
         userInbox.removeTask(target);
         indicateUserInboxChanged();
         updateFilteredListsToShowActiveToDo();
-        signalUiForUpdatedlists();
+        signalUiForUpdatedLists();
     }
 
     @Override
@@ -249,7 +249,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListsShowAll() {
         filteredEvents.setPredicate(null);
         filteredTasks.setPredicate(null);
-        signalUiForUpdatedlists();
+        signalUiForUpdatedLists();
     }
 
     @Override
@@ -275,7 +275,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredLists(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
         filteredEvents.setPredicate(expression::satisfies);
-        signalUiForUpdatedlists();
+        signalUiForUpdatedLists();
     }
 
     //========== Inner classes/interfaces used for filtering =================================================

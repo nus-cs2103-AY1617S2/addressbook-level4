@@ -15,7 +15,7 @@ import project.taskcrusher.logic.commands.exceptions.CommandException;
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": loads the storage file with the name given\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": loads an xml storage file with the name given\n "
             + "if the file does not exist, a new file will be created and set as the new storage file\n"
             + "Parameters: XML_FILE_NAME";
 
@@ -33,6 +33,9 @@ public class LoadCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        if (filenameToLoad.isEmpty()) {
+            throw new CommandException(MESSAGE_USAGE);
+        }
         if (!filenameToLoad.endsWith(XML_EXTENSION)) {
             throw new CommandException(MESSAGE_INVALID_EXTENSION);
         }

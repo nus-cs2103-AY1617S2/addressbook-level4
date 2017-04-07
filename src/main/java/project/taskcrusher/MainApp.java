@@ -169,7 +169,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting Taskcrusher " + MainApp.VERSION);
         ui.start(primaryStage);
-        model.signalUiForUpdatedlists(); //Post event here to refresh the list at the beginning
+        model.signalUiForUpdatedLists(); //Post event here to refresh the list at the beginning
     }
 
     @Override

@@ -33,6 +33,8 @@ public class Event extends UserToDo implements ReadOnlyEvent {
         super(name, priority, description, tags);
 
         assert !CollectionUtil.isAnyNull(timeslots, location);
+        assert !timeslots.isEmpty();
+
         timeslots.sort(null);
         this.timeslots = timeslots;
         this.location = location;
@@ -65,13 +67,11 @@ public class Event extends UserToDo implements ReadOnlyEvent {
 
     /**
      * Picks the timeslot specified by the {@code timeslotIndex} and removes the rest from {@code timeslots}.
-     * @param timeslotIndex
-     * @return
      */
     public boolean confirmTimeslot(int timeslotIndex) {
         Timeslot confirmed = timeslots.get(timeslotIndex);
 
-        //done this way to save the state for undo
+        //done this way to keep the data state for undo
         timeslots = new ArrayList<Timeslot>();
         timeslots.add(confirmed);
         return true;
@@ -94,12 +94,6 @@ public class Event extends UserToDo implements ReadOnlyEvent {
     }
 
     public Date getEarliestBookedTime() {
-//        Date earliest = timeslots.get(0).start;
-//        for (int i = 1; i < timeslots.size(); i++) {
-//            if (timeslots.get(i).start.before(earliest)) {
-//                earliest = timeslots.get(i).start;
-//            }
-//        }
         return timeslots.get(0).start;
     }
 

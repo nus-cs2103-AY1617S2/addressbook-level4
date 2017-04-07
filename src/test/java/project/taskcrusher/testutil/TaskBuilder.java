@@ -13,17 +13,17 @@ import project.taskcrusher.model.task.Deadline;
  */
 public class TaskBuilder {
 
-    private TestCard task;
+    private TestTaskCard task;
 
     public TaskBuilder() {
-        this.task = new TestCard();
+        this.task = new TestTaskCard();
     }
 
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(TestCard taskToCopy) {
-        this.task = new TestCard(taskToCopy);
+    public TaskBuilder(TestTaskCard taskToCopy) {
+        this.task = new TestTaskCard(taskToCopy);
     }
 
     public TaskBuilder withName(String name) throws IllegalValueException {
@@ -54,7 +54,7 @@ public class TaskBuilder {
         return this;
     }
 
-    public TestCard build() {
+    public TestTaskCard build() {
         return this.task;
     }
 

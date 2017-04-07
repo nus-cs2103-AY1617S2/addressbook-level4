@@ -282,10 +282,10 @@ public class TestUtil {
      *            The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestCard[] removePersonsFromList(final TestCard[] persons, TestCard... personsToRemove) {
-        List<TestCard> listOfPersons = asList(persons);
+    public static TestTaskCard[] removePersonsFromList(final TestTaskCard[] persons, TestTaskCard... personsToRemove) {
+        List<TestTaskCard> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestCard[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
     }
 
     /**
@@ -296,7 +296,7 @@ public class TestUtil {
      * @param targetIndexInOneIndexedFormat
      *            e.g. index 1 if the first element is to be removed
      */
-    public static TestCard[] removePersonFromList(final TestCard[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTaskCard[] removePersonFromList(final TestTaskCard[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
@@ -311,7 +311,7 @@ public class TestUtil {
      *            The index of the person to be replaced.
      * @return
      */
-    public static TestCard[] replacePersonFromList(TestCard[] persons, TestCard person, int index) {
+    public static TestTaskCard[] replacePersonFromList(TestTaskCard[] persons, TestTaskCard person, int index) {
         persons[index] = person;
         return persons;
     }
@@ -325,10 +325,10 @@ public class TestUtil {
      *            The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestCard[] addPersonsToList(final TestCard[] persons, TestCard... personsToAdd) {
-        List<TestCard> listOfPersons = asList(persons);
+    public static TestTaskCard[] addPersonsToList(final TestTaskCard[] persons, TestTaskCard... personsToAdd) {
+        List<TestTaskCard> listOfPersons = asList(persons);
         listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestCard[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
