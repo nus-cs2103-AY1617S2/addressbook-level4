@@ -95,11 +95,13 @@ public class Time implements Comparable<Time> {
      *
      */
     public void addDays(int days) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-        String oldDate = extractDate(this.value);
-        String time = extractTime(this.value);
-        LocalDate date = LocalDate.parse(oldDate, formatter);
-        this.value = date.plusDays(days).format(formatter) + " " + time;
+        if (this.value != DEFAULT_TIME) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+            String oldDate = extractDate(this.value);
+            String time = extractTime(this.value);
+            LocalDate date = LocalDate.parse(oldDate, formatter);
+            this.value = date.plusDays(days).format(formatter) + " " + time;
+        }
     }
 
     @Override
