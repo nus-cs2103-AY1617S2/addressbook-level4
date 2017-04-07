@@ -25,7 +25,8 @@ public class StorageManager extends ComponentManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
     private LoginInfoStorage loginInfoStorage;
 
-    public StorageManager(TaskBookStorage taskBookStorage, UserPrefsStorage userPrefsStorage, LoginInfoStorage loginInfoStorage) {
+    public StorageManager(TaskBookStorage taskBookStorage, UserPrefsStorage userPrefsStorage,
+            LoginInfoStorage loginInfoStorage) {
         super();
         this.taskBookStorage = taskBookStorage;
         this.userPrefsStorage = userPrefsStorage;
@@ -33,7 +34,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     public StorageManager(String taskBookFilePath, String userPrefsFilePath, String loginInfoFilePath) {
-        this(new XmlTaskBookStorage(taskBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath), new JsonLoginInfoStorage(loginInfoFilePath));
+        this(new XmlTaskBookStorage(taskBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
+                new JsonLoginInfoStorage(loginInfoFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -89,7 +91,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-    
+
  // ================ LoginInfo methods ==============================
 
     @Override

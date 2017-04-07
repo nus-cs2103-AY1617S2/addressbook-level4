@@ -26,7 +26,7 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
-    public BrowserPanel(AnchorPane placeholder,LoginInfo loginInfo) {
+    public BrowserPanel(AnchorPane placeholder, LoginInfo loginInfo) {
         super(FXML);
         placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
                                                      // loaded Web page.
@@ -39,9 +39,9 @@ public class BrowserPanel extends UiPart<Region> {
             public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
                 if (newValue == State.SUCCEEDED) {
                     browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
-                    browser.getEngine().executeScript("function fillInPassword() {document.getElementById('Passwd').value = \"" + password + "\";" + 
-                            "document.getElementById('signIn').click();}");
-                    browser.getEngine().executeScript("document.getElementById('Email').value = \"" + email+ "\";");
+                    browser.getEngine().executeScript("function fillInPassword() {document.getElementById('Passwd')"
+                            + ".value = \"" + password + "\";" + "document.getElementById('signIn').click();}");
+                    browser.getEngine().executeScript("document.getElementById('Email').value = \"" + email + "\";");
                     browser.getEngine().executeScript("document.getElementById('next').click();");
                     browser.getEngine().executeScript("setTimeout(fillInPassword, 500)");
                 }
@@ -57,8 +57,8 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         browser = null;
     }
-        
-    public void inputPassword(){
+
+    public void inputPassword() {
         String password = "kite0912";
 //        browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
 //                            + "document.getElementById('signIn').click();");
@@ -73,7 +73,7 @@ public class BrowserPanel extends UiPart<Region> {
             }
         };
         browser.getEngine().getLoadWorker().stateProperty().addListener(passwordListener);
-        
+
     }
 
 }

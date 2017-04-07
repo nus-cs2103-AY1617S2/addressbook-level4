@@ -39,9 +39,9 @@ public class MainWindow extends UiPart<Region> {
     private TaskListPanel taskListPanel;
 
     private Config config;
-    
+
     private LoginInfo loginInfo;
-    
+
     @FXML
     private AnchorPane browserPlaceholder;
 
@@ -68,7 +68,7 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
         this.loginInfo = loginInfo;
-        
+
         // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() throws InterruptedException {
-    	browserPanel = new BrowserPanel(browserPlaceholder,loginInfo);
+        browserPanel = new BrowserPanel(browserPlaceholder, loginInfo);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBookFilePath());
@@ -204,7 +204,7 @@ public class MainWindow extends UiPart<Region> {
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-    
+
     void releaseResources() {
         browserPanel.freeResources();
     }

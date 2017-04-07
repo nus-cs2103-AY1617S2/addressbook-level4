@@ -55,17 +55,18 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(), config.getLoginInfoFilePath());
+        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(),
+                config.getLoginInfoFilePath());
 
         userPrefs = initPrefs(config);
         loginInfo = initLoginInfo(config);
-        
+
         initLogging(config);
-        
+
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
-        
+
         ui = new UiManager(logic, config, userPrefs, loginInfo);
 
         initEventsCenter();
@@ -159,12 +160,12 @@ public class MainApp extends Application {
 
         return initializedPrefs;
     }
-    
-    
+
+
     protected LoginInfo initLoginInfo(Config config) {
         assert config != null;
 
-        String loginInfoFilePath= config.getLoginInfoFilePath();
+        String loginInfoFilePath = config.getLoginInfoFilePath();
         logger.info("Using login file : " + loginInfoFilePath);
 
         LoginInfo initializedLoginInfo;
@@ -189,7 +190,7 @@ public class MainApp extends Application {
 
         return initializedLoginInfo;
     }
-    
+
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }

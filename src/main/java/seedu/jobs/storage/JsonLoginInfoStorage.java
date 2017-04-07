@@ -8,7 +8,7 @@ import seedu.jobs.commons.util.JsonUtil;
 import seedu.jobs.model.LoginInfo;
 
 public class JsonLoginInfoStorage implements LoginInfoStorage {
-    
+
     private String filePath;
 
     public JsonLoginInfoStorage(String filePath) {
@@ -33,5 +33,5 @@ public class JsonLoginInfoStorage implements LoginInfoStorage {
     public void saveLoginInfo(LoginInfo loginInfo) throws IOException {
         JsonUtil.saveJsonFile(loginInfo, filePath);
     }
-        
+
 }

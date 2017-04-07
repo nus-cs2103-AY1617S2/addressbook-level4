@@ -11,7 +11,7 @@ import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
  */
 public class TypicalTestTasks {
 
-    public TestTask CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107, CS4101, CS4102;
+    public TestTask CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107, CS4101, CS4102, CS5101;
 
     public TypicalTestTasks() {
         try {
@@ -40,6 +40,11 @@ public class TypicalTestTasks {
                     .withEndTime("20/03/2017 10:00").withDescription("in-class test").withPeriod("0").build();
             CS4102 = new TaskBuilder().withName("CS4102").withStartTime("20/03/2017 12:00")
                     .withEndTime("20/03/2017 14:00").withDescription("in-class test").withPeriod("0").build();
+
+            //@@author A0164440M
+            CS5101 = new TaskBuilder().withName("CS5101").withStartTime("01/01/2017 08:00")
+                    .withEndTime("01/01/2017 10:00").withDescription("weekly tutorial").withPeriod("7").build();
+            //@@author
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -58,7 +63,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107};
+        return new TestTask[]{CS3101, CS3102, CS3103, CS3104, CS3105, CS3106, CS3107, CS5101};
     }
 
     public TaskBook getTypicalTaskBook() throws IllegalTimeException {

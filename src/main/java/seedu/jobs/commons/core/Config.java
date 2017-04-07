@@ -57,11 +57,11 @@ public class Config {
     public void setTaskBook(String taskBookName) {
         this.taskBookName = taskBookName;
     }
-    
+
     public String getLoginInfoFilePath() {
         return loginInfo;
     }
-    
+
     public void setLoginInfoFilePath(String loginInfo) {
         this.loginInfo = loginInfo;
     }
