@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.util.FxViewUtil;
 
+//@@author A0124377A
+
 /**
  * Controller for a help page
  */
@@ -30,9 +32,8 @@ public class HelpWindow extends UiPart<Region> {
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot());
-        //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        dialogStage.setMaximized(true);
         FxViewUtil.setStageIcon(dialogStage, ICON);
 
         browser.getEngine().load(USERGUIDE_URL);
@@ -40,7 +41,7 @@ public class HelpWindow extends UiPart<Region> {
     }
 
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing help page for WhatsLeft.");
         dialogStage.showAndWait();
     }
 }

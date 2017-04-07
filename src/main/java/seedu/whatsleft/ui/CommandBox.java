@@ -14,6 +14,8 @@ import seedu.whatsleft.logic.Logic;
 import seedu.whatsleft.logic.commands.CommandResult;
 import seedu.whatsleft.logic.commands.exceptions.CommandException;
 
+//@@author A0124377A
+
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";

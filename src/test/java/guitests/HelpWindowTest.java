@@ -1,17 +1,21 @@
 package guitests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
+//@@author A0124377A
+
+/**
+ * GUI test for Help Window
+ */
+
 public class HelpWindowTest extends WhatsLeftGuiTest {
 
     @Test
     public void openHelpWindow() {
-        //use accelerator
         commandBox.clickOnTextField();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
@@ -36,7 +40,4 @@ public class HelpWindowTest extends WhatsLeftGuiTest {
         helpWindowHandle.closeWindow();
     }
 
-    private void assertHelpWindowNotOpen(HelpWindowHandle helpWindowHandle) {
-        assertFalse(helpWindowHandle.isWindowOpen());
-    }
 }

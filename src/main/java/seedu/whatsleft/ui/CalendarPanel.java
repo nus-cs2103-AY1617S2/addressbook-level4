@@ -22,6 +22,12 @@ import seedu.whatsleft.model.activity.ReadOnlyTask;
 
 //@@author A0124377A
 
+/**
+ * The controller for Calendar. Populate calendar with tasks and events.
+ * The view of calendar is also controlled here through weeks ahead view
+ * and refresh to current view. Provides jump-to feedback when an event/task \
+ * is selected  * on their respective panels.
+ */
 public class CalendarPanel extends UiPart<Region> {
     private static final String CALENDAR_UNSYC_MESSAGE = "Calendar is not synced";
     private static final String CALENDAR_ID = "calendar";
@@ -45,8 +51,6 @@ public class CalendarPanel extends UiPart<Region> {
 
    /**
      * Set up the default week view
-     * @param before
-     * @param after
      */
     private void setWeekView() {
         AgendaWeekSkin skin = new AgendaWeekSkin(this.agenda);
@@ -96,6 +100,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
+     * Set up Calendar with current eventlist and tasklist
      * @param eventList
      * @param taskList
      */
@@ -106,6 +111,10 @@ public class CalendarPanel extends UiPart<Region> {
         setConnectionTask(taskList);
     }
 
+    /**
+     * Default set up calendar with events that have not passed localDateTime
+     * @param eventList
+     */
     private void setConnectionEvent(List<ReadOnlyEvent> eventList) {
         eventList.stream()
              .filter(event -> LocalDateTime.of(event.getEndDate().getValue(),
@@ -114,24 +123,31 @@ public class CalendarPanel extends UiPart<Region> {
              .forEach(event -> agenda.appointments().add(calAdder.convertFromEvent(event)));
     }
 
+    /**
+     * Default set up calendar with tasks that have deadline, are not completed,
+     * and not past localdatetime.
+     * @param eventList
+     */
     private void setConnectionTask(List<ReadOnlyTask> taskList) {
         taskList.stream()
-            .filter(task -> task.getByDate().value != null && !task.getStatus() && task.getByTime().value != null)
+            .filter(task -> task.getByDate().value != null && !task.getStatus()
+                && task.getByTime().value != null)
             .collect(Collectors.toList())
             .forEach(task -> agenda.appointments().add(calAdder.convertFromTask(task)));
     }
 
    /**
-     * Refresh data shown when eventlist in model modified
+     * Refresh data shown when eventlist or tasklist is modified.
      * @param eventList
+     * @param taskList
      */
     public void refresh(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
         logger.info("Refreshing calendar...");
         setConnection(eventList, taskList);
     }
-
+// Had help for this function
    /**
-     * Select an event in the calendar and show its details. Had help for this function
+     * Select an event in the calendar and show its details.
      * @param targetEvent
      * @throws exception if calendar is not sync with event list
      */
@@ -171,17 +187,20 @@ public class CalendarPanel extends UiPart<Region> {
         agenda.selectedAppointments().add(targetAppoint);
     }
 
-    //Update the calendar to show new view with user input weeks ahead
-    public void viewWeeksAhead(LocalDateTime t, int weeksAhead) {
-        updateCalendarShownPeriod(t.plusWeeks(weeksAhead));
+    /**
+     * Update the calendar to show new view with user input weeks ahead
+     * @param time, num of weeks ahead
+     */
+    public void viewWeeksAhead(LocalDateTime time, int weeksAhead) {
+        updateCalendarShownPeriod(time.plusWeeks(weeksAhead));
     }
 
     /**
      * Focus the calendar on selected time frame
-     * @param t
+     * @param time
      */
-    public void updateCalendarShownPeriod(LocalDateTime t) {
-        agenda.setDisplayedLocalDateTime(t);
+    public void updateCalendarShownPeriod(LocalDateTime time) {
+        agenda.setDisplayedLocalDateTime(time);
     }
 
 

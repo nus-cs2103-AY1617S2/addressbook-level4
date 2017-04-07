@@ -16,6 +16,10 @@ import seedu.whatsleft.model.activity.ReadOnlyTask;
 
 
 //@@author A0124377A
+/**
+ * The helper window for calendar panel. Supports calendar panel with conversion
+ * functions from event/task to appointments, as well as compare functions.
+ */
 public class CalendarAdder extends AppointmentImplBase implements Appointment {
     private static final String EVENT_GROUP = "group0";
     private static final long DEFAULT_DURATION = 1;
@@ -40,6 +44,11 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
         }
     }
 
+    /**
+     * Convert event into appointment for use in calendar
+     * @param event
+     * @return Appointment object of event details
+     */
     public Appointment convertFromEvent(ReadOnlyEvent event) {
         Appointment item = new AppointmentImplLocal();
         item.setSummary(event.getDescription().toString());
@@ -55,6 +64,11 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
         return item;
     }
 
+    /**
+     * Convert task into appointment for use in calendar
+     * @param task
+     * @return Appointment object of task details
+     */
     public Appointment convertFromTask(ReadOnlyTask task) {
         Appointment item = new AppointmentImplLocal();
         item.setSummary(task.getDescription().toString());
@@ -74,7 +88,6 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
      * Compare activity in calendar with a task
      * @param task
      * @param taskInCalendar
-     * @return
      */
     public static boolean compareWithTask(ReadOnlyTask task, Appointment taskInCalendar) {
         assert task.getByDate() != null;
@@ -87,7 +100,6 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
      * Compare activity in calendar with an event
      * @param event
      * @param eventInCalendar
-     * @return
      */
     public static boolean compareWithEvent(ReadOnlyEvent event, Appointment eventInCalendar) {
         return eventInCalendar.getSummary().equals(event.getDescription().toString())
