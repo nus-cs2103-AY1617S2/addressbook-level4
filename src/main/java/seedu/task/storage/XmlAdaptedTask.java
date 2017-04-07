@@ -47,7 +47,7 @@ public class XmlAdaptedTask {
 
   /**
    * Converts a given Task into this class for JAXB use.
-   * 
+   *
    * @param source
    *          future changes to this will not affect the created XmlAdaptedTask
    */
@@ -80,7 +80,7 @@ public class XmlAdaptedTask {
 
   /**
    * Converts this jaxb-friendly adapted task object into the model's task object.
-   * 
+   *
    * @throws IllegalValueException
    *           if there were any data constraints violated in the adapted task
    */

@@ -15,7 +15,7 @@ public class XmlUtil {
 
   /**
    * Returns the xml data in the file as an object of the specified type.
-   * 
+   *
    * @param file
    *          Points to a valid xml file containing data that match the {@code classToConvert}.
    *          Cannot be null.
@@ -45,7 +45,7 @@ public class XmlUtil {
 
   /**
    * Saves the data in the file in xml format.
-   * 
+   *
    * @param file
    *          Points to a valid xml file containing data that match the {@code classToConvert}.
    *          Cannot be null.

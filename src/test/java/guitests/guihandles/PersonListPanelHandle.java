@@ -41,7 +41,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
   /**
    * Returns true if the list is showing the person details correctly and in correct order.
-   * 
+   *
    * @param persons
    *          A list of person in the correct order.
    */
@@ -51,7 +51,7 @@ public class PersonListPanelHandle extends GuiHandle {
 
   /**
    * Returns true if the list is showing the person details correctly and in correct order.
-   * 
+   *
    * @param startPosition
    *          The starting position of the sub list.
    * @param persons

@@ -37,7 +37,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
   /**
    * Similar to {@link #readTaskManager()}
-   * 
+   *
    * @param filePath
    *          location of the data. Cannot be null
    * @throws DataConversionException
@@ -67,7 +67,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
 
   /**
    * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
-   * 
+   *
    * @param filePath
    *          location of the data. Cannot be null
    */

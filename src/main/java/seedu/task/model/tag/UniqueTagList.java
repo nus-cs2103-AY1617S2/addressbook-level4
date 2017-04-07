@@ -18,7 +18,7 @@ import seedu.task.commons.util.CollectionUtil;
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements. Supports minimal set
  * of list operations for the app's features.
- * 
+ *
  * @see Tag#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
@@ -121,7 +121,7 @@ public class UniqueTagList implements Iterable<Tag> {
 
   /**
    * Adds a Tag to the list.
-   * 
+   *
    * @throws DuplicateTagException
    *           if the Tag to add is a duplicate of an existing Tag in the list.
    */
