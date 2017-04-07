@@ -92,9 +92,9 @@ public class AliasTable {
 
         String firstWord = wordsInCommand[0];
 
-        for (String alias : aliasMapping.keySet()) {
+        for (String alias : getAliasMapping().keySet()) {
             if (firstWord.equals(alias)) {
-                return StringUtil.replaceFirstWord(command, aliasMapping.get(alias));
+                return StringUtil.replaceFirstWord(command, getAliasMapping().get(alias));
             }
         }
         return command;

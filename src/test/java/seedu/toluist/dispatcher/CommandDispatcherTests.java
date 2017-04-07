@@ -1,6 +1,7 @@
 package seedu.toluist.dispatcher;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
@@ -30,9 +31,7 @@ public class CommandDispatcherTests {
 
     @Before
     public void setUp() {
-        when(aliasTable.dealias("m")).thenReturn("m");
-        when(aliasTable.dealias("mi")).thenReturn("mark incomplete");
-        when(aliasTable.dealias("a")).thenReturn("add");
+        when(aliasTable.dealias(any(String.class))).thenCallRealMethod();
         Map<String, String> aliasMapping = new HashMap();
         aliasMapping.put("mi", "mark incomplete");
         aliasMapping.put("a", "add");
@@ -54,7 +53,7 @@ public class CommandDispatcherTests {
 
     @Test
     public void getSuggestions_fullCommandWord() {
-        assertDispatcherSuggestions("add", "add");
+        assertDispatcherSuggestions("add");
     }
 
     @Test
