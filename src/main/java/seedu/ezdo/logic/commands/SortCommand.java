@@ -28,6 +28,9 @@ public class SortCommand extends Command {
     private SortCriteria sortCriteria;
     private Boolean isSortedAscending;
 
+    /**
+     * Creates a new SortCommand using raw values.
+     */
     public SortCommand(SortCriteria sortCriteria, Boolean isSortedAscending) {
         this.sortCriteria = sortCriteria;
         this.isSortedAscending = isSortedAscending;
