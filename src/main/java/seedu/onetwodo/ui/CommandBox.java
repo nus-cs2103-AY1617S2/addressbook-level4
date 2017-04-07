@@ -105,6 +105,7 @@ public class CommandBox extends UiPart<Region> {
                     resetKeyListener();
                 }
             });
+            break;
         default:
             break;
         }
