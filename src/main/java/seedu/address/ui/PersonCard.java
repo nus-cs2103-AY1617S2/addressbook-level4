@@ -5,12 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyPerson;
 
+//@@author A0164032U
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
+    
     @FXML
     private HBox cardPane;
     @FXML
@@ -18,25 +19,45 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label end;
     @FXML
-    private Label address;
+    private Label start;
     @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private Label group;
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
+        
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        initTags(person);
+        
+        if (person.getEndDate() == null) {
+            end.setVisible(false);
+            end.setStyle("-fx-font-size: 0pt;");
+        } else {
+            end.setText("Ends:   " + person.getEndDate());
+        }
+
+        if (person.getStartDate() == null) {
+            start.setVisible(false);
+            start.setStyle("-fx-font-size: 0pt;");
+        } else {
+            start.setText("Starts: " + person.getStartDate());
+        }
+        
+        group.setText(person.getGroup().value);
+        
+        if (person.hasPassed()) {
+            setStyleToIndicateEndDatePassed();
+        }
+        
+        cardPane.autosize();
     }
 
-    private void initTags(ReadOnlyPerson person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    /**
+     * Sets the command box style to indicate a failed command.
+     */
+    private void setStyleToIndicateEndDatePassed() {
+        cardPane.getStyleClass().add(Ui.ERROR_STYLE_CLASS);
     }
 }

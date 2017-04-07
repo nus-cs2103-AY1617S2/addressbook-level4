@@ -8,12 +8,17 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
+import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniquePersonList;
+import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniquePersonList.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +27,8 @@ import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final YTomorrow addressBook;
+    private final History<ReadOnlyAddressBook> history;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
 
     /**
@@ -34,12 +40,17 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new YTomorrow(addressBook);
+        this.history = new History<ReadOnlyAddressBook>();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        //@@author A0163848R
+        history.push(addressBook);
+        //@@author
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new YTomorrow(), new UserPrefs());
     }
 
     @Override
@@ -55,6 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        addToHistory(new YTomorrow(addressBook));
         raise(new AddressBookChangedEvent(addressBook));
     }
 
@@ -65,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
+    public synchronized void addPerson(Task person) throws UniquePersonList.DuplicatePersonException {
         addressBook.addPerson(person);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
@@ -79,6 +91,75 @@ public class ModelManager extends ComponentManager implements Model {
         int addressBookIndex = filteredPersons.getSourceIndex(filteredPersonListIndex);
         addressBook.updatePerson(addressBookIndex, editedPerson);
         indicateAddressBookChanged();
+    }
+
+    //@@author A0163848R
+    @Override
+    public boolean undoLastModification() {
+        ReadOnlyAddressBook undone = history.undo();
+        if (undone != null) {
+            addressBook.resetData(undone);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean redoLastModification() {
+        ReadOnlyAddressBook redone = history.redo();
+        if (redone != null) {
+            addressBook.resetData(redone);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void mergeYTomorrow(ReadOnlyAddressBook add) {
+        for (ReadOnlyPerson readOnlyTask : add.getPersonList()) {
+            Task task = new Task(readOnlyTask);
+            try {
+                addressBook.addPerson(task);
+            } catch (DuplicatePersonException e) {
+                try {
+                    addressBook.removePerson(task);
+                    addressBook.addPerson(task);
+                } catch (PersonNotFoundException | DuplicatePersonException el) {
+                }
+
+            }
+        }
+        indicateAddressBookChanged();
+    }
+    //@@author
+
+    @Override
+    public void addToHistory(ReadOnlyAddressBook state) {
+        history.push(state);
+    }
+
+    //@@author A0164466X
+    @Override
+    public void updateFilteredListToShowComplete() {
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_COMPLETE))));
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void updateFilteredListToShowIncomplete() {
+        try {
+            updateFilteredPersonList(new PredicateExpression(new TagQualifier(new UniqueTagList(Tag.TAG_INCOMPLETE))));
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -152,6 +233,23 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+  //@@author A0164466X
+    private class TagQualifier implements Qualifier {
+        private UniqueTagList tags;
+        
+        TagQualifier(UniqueTagList tags){
+            this.tags = tags;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyPerson task) {
+            return task.getTags().equals(tags);
+        }
+        
+        //Default toString() method used
+        
     }
 
 }

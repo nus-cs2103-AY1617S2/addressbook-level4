@@ -1,24 +1,28 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.EndDate;
+import seedu.address.model.task.Group;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.StartDate;
+import seedu.address.model.task.ReadOnlyPerson;
 
 /**
  * A mutable person object. For testing only.
  */
+//@@author A0164032U
 public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    private Group group;
+    private StartDate start;
+    private EndDate end;
     private UniqueTagList tags;
 
     public TestPerson() {
+        start = null;
+        end = null;
         tags = new UniqueTagList();
     }
 
@@ -27,9 +31,9 @@ public class TestPerson implements ReadOnlyPerson {
      */
     public TestPerson(TestPerson personToCopy) {
         this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
+        this.start = personToCopy.getStartDate();
+        this.end = personToCopy.getEndDate();
+        this.group = personToCopy.getGroup();
         this.tags = personToCopy.getTags();
     }
 
@@ -37,16 +41,17 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    //@@ author A0164032U
+    public void setStartDate(StartDate start) {
+        this.start = start;
     }
-
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    
+    public void setEndDate(EndDate end) {
+        this.end = end;
     }
 
     public void setTags(UniqueTagList tags) {
@@ -58,19 +63,20 @@ public class TestPerson implements ReadOnlyPerson {
         return name;
     }
 
+    //author A0164032U
     @Override
-    public Phone getPhone() {
-        return phone;
+    public StartDate getStartDate() {
+        return start;
+    }
+    
+    @Override
+    public EndDate getEndDate() {
+        return end;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
+    public Group getGroup() {
+        return group;
     }
 
     @Override
@@ -86,10 +92,22 @@ public class TestPerson implements ReadOnlyPerson {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("a/" + this.getAddress().value + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+        sb.append("s/" + this.getStartDate().inputValue + " ");
+        sb.append("d/" + this.getEndDate().inputValue + " ");
+        sb.append("g/" + this.getGroup().value + " ");
+        //this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    public boolean hasPassed() {
+        return false;
+    }
+
+    public java.util.Date getEndTime() {
+        return null;
+    }
+
+    public java.util.Date getStartTime() {
+        return null;
     }
 }

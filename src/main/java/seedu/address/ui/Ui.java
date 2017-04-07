@@ -7,6 +7,8 @@ import javafx.stage.Stage;
  */
 public interface Ui {
 
+    public static final String ERROR_STYLE_CLASS = "error";
+
     /** Starts the UI (and the App).  */
     void start(Stage primaryStage);
 

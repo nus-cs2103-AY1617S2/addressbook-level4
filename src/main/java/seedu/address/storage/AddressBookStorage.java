@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link seedu.address.model.YTomorrow}.
  */
 public interface AddressBookStorage {
 
@@ -40,5 +40,9 @@ public interface AddressBookStorage {
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
+
+    //@@author A0163848R
+    /** Sets the Address Book file path */
+    void setAddressBookFilePath(String path);
 
 }

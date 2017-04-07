@@ -83,6 +83,29 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.addAll(source.internalList); // insulate internal list from changes in argument
     }
 
+    //@@author A0163848R
+    /**
+     * Creates copy of this tag list containing all tags except those in the passed tag list
+     */
+    public UniqueTagList except(UniqueTagList except) {
+        UniqueTagList remaining = new UniqueTagList();
+
+        for (Tag tag : except) {
+            if (except.contains(tag)) continue;
+
+            try {
+                remaining.add(new Tag(tag.tagName));
+            } catch (DuplicateTagException e) {
+                e.printStackTrace();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return remaining;
+    }
+    //@@author
+
     /**
      * Returns all tags in this list as a Set.
      * This set is mutable and change-insulated against the internal list.
@@ -137,6 +160,13 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Returns number of tags contained.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
     @Override
     public Iterator<Tag> iterator() {
         return internalList.iterator();
@@ -170,6 +200,26 @@ public class UniqueTagList implements Iterable<Tag> {
         protected DuplicateTagException() {
             super("Operation would result in duplicate tags");
         }
+    }
+
+    //@@author A0163848R
+    /**
+     * Constructs a tag list from a variadic parameter list of strings
+     */
+    public static UniqueTagList build(String ... tagNames) {
+        UniqueTagList tags = new UniqueTagList();
+
+        try {
+            for (String tagName : tagNames) {
+                tags.add(new Tag(tagName));
+            }
+        } catch (DuplicateTagException e) {
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        return tags;
     }
 
 }

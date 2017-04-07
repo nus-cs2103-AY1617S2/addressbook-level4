@@ -8,17 +8,17 @@ import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.ReadOnlyPerson;
 
 /**
  * Provides a handle to a person card in the person list panel.
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
+    private static final String GROUP_FIELD_ID = "#group";
+    private static final String STARTDATE_FIELD_ID = "#start";
+    private static final String ENDDATE_FIELD_ID = "#end";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
@@ -35,19 +35,19 @@ public class PersonCardHandle extends GuiHandle {
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
-
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    //@@author A0164889E
+    public String getGroup() {
+        return getTextFromLabel(GROUP_FIELD_ID);
+    }
+    //@@author A0164889E
+    public String getStartDate() {
+        return getTextFromLabel(STARTDATE_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getEndDate() {
+        return getTextFromLabel(ENDDATE_FIELD_ID);
     }
-
-    public String getEmail() {
-        return getTextFromLabel(EMAIL_FIELD_ID);
-    }
-
+    
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
@@ -74,9 +74,9 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyPerson person) {
         return getFullName().equals(person.getName().fullName)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && getAddress().equals(person.getAddress().value)
+                && getStartDate().equals(person.getStartDate())
+                && getEndDate().equals(person.getEndDate())
+                && getGroup().equals(person.getGroup().value)
                 && getTags().equals(getTags(person.getTags()));
     }
 
@@ -85,9 +85,9 @@ public class PersonCardHandle extends GuiHandle {
         if (obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getPhone().equals(handle.getPhone())
-                    && getEmail().equals(handle.getEmail())
-                    && getAddress().equals(handle.getAddress())
+                    && getStartDate().equals(handle.getStartDate())
+                    && getEndDate().equals(handle.getEndDate())
+                    && getGroup().equals(handle.getGroup())
                     && getTags().equals(handle.getTags());
         }
         return super.equals(obj);
@@ -95,6 +95,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getGroup();
     }
 }
