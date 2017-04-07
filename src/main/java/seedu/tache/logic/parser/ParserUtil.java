@@ -35,9 +35,6 @@ public class ParserUtil {
     private static final Pattern FORMAT_TIME = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
-
-    public static final int TYPE_TASK = 0;
-    public static final int TYPE_DETAILED_TASK = 1;
     //@@author
 
     //@@author A0150120H
