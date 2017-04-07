@@ -125,7 +125,7 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withRecurrence(Frequency.NONE)
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
-                .withCategories("Friends", "Owesmoney").build();
+                .withCategories("Alltasks", "Friends", "Owesmoney").build();
 
         assertUnmarkSuccess(commandType, false, false, taskBossIndex,
                 taskBossIndex, terminatedTask);
@@ -229,7 +229,7 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withRecurrence(Frequency.NONE)
                 .withStartDateTime("Feb 23, 2017 10pm")
                 .withEndDateTime("Jun 28, 2017 5pm")
-                .withCategories("Friends", "Owesmoney").build();
+                .withCategories("Alltasks", "Friends", "Owesmoney").build();
 
         TestTask[] markedDone = new TestTask[] {expectedTasksList[4], expectedTasksList[3]};
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
