@@ -35,7 +35,8 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
     @Override
     String getEzDoFilePath();
 
-    /** Sets the file path of EzDo
+    /** 
+     * Sets the file path of EzDo
      * @param path cannot be null.
      */
     @Override
@@ -43,7 +44,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Returns EzDo data as a {@link ReadOnlyEzDo}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -60,7 +61,7 @@ public interface Storage extends EzDoStorage, UserPrefsStorage {
 
     /**
      * Saves the current version of the EzDo to the hard disk.
-     *   Creates the data file if it is missing.
+     * Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleEzDoChangedEvent(EzDoChangedEvent ezce);
