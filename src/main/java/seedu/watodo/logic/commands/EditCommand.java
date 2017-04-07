@@ -119,16 +119,21 @@ public class EditCommand extends Command {
         Description updatedName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getDescription);
         TaskStatus updatedStatus = taskToEdit.getStatus();
 
-        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        UniqueTagList existingTags = taskToEdit.getTags();
-        for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
-            Tag tags = iterator.next();
-            if (existingTags.contains(tags)) {
-                iterator.remove();
-                existingTags.remove(tags);
+        UniqueTagList updatedTags = new UniqueTagList();
+        if (!editTaskDescriptor.getTags().isPresent()) {
+            updatedTags = taskToEdit.getTags();
+        } else {
+            updatedTags = editTaskDescriptor.getTags().get();
+            UniqueTagList existingTags = taskToEdit.getTags();
+            for (Iterator<Tag> iterator = updatedTags.iterator(); iterator.hasNext();) {
+                Tag tag = iterator.next();
+                if (existingTags.contains(tag)) {
+                    iterator.remove();
+                    existingTags.remove(tag);
+                }
             }
+            updatedTags.mergeFrom(existingTags);
         }
-        updatedTags.mergeFrom(existingTags);
 
         if (hasRemoveDate) {
             return new Task(updatedName, null, null, updatedTags, updatedStatus);

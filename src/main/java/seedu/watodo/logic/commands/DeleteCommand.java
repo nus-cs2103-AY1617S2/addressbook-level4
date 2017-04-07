@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]\n"
+            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
@@ -92,7 +92,7 @@ public class DeleteCommand extends Command {
 
         }
     }
-
+  
     @Override
     public String toString() {
         return COMMAND_WORD;
