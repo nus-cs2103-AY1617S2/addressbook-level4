@@ -1,5 +1,5 @@
 # A0140063X-unused
-###### /Date.java
+###### \Date.java
 ``` java
 //this code uses multiple SimpleDateFormat to validate date input.
 //this code is Working but decided to use pretty time parser instead which allows natural language parsing.
@@ -121,11 +121,7 @@ public class Date {
 
         prepareDateFormats();
 
-        if (getDateFormat(input) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return (getDateFormat(input) != null);
     }
 
 }
