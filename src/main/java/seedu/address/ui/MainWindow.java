@@ -114,6 +114,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         registerAsAnEventHandler(this);
     }
 
