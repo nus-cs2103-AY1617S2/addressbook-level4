@@ -11,15 +11,15 @@ public class EventPanelSelectionChangedEvent extends BaseEvent {
     private final ReadOnlyEvent newSelection;
 
     public EventPanelSelectionChangedEvent(ReadOnlyEvent newValue) {
-	this.newSelection = newValue;
+        this.newSelection = newValue;
     }
 
     @Override
     public String toString() {
-	return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName();
     }
 
     public ReadOnlyEvent getNewSelection() {
-	return newSelection;
+        return newSelection;
     }
 }

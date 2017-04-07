@@ -35,70 +35,70 @@ public class LogsCenter {
      * with the same name is requested again from the LogsCenter.
      */
     public static void init(Config config) {
-	currentLogLevel = config.getLogLevel();
-	logger.info("currentLogLevel: " + currentLogLevel);
+        currentLogLevel = config.getLogLevel();
+        logger.info("currentLogLevel: " + currentLogLevel);
     }
 
     /**
      * Creates a logger with the given name the given name.
      */
     public static Logger getLogger(String name) {
-	Logger logger = Logger.getLogger(name);
-	logger.setUseParentHandlers(false);
+        Logger logger = Logger.getLogger(name);
+        logger.setUseParentHandlers(false);
 
-	removeHandlers(logger);
-	addConsoleHandler(logger);
-	addFileHandler(logger);
+        removeHandlers(logger);
+        addConsoleHandler(logger);
+        addFileHandler(logger);
 
-	return Logger.getLogger(name);
+        return Logger.getLogger(name);
     }
 
     /**
      * Creates a Logger for the given class name.
      */
     public static <T> Logger getLogger(Class<T> clazz) {
-	if (clazz == null) {
-	    return Logger.getLogger("");
-	}
-	return getLogger(clazz.getSimpleName());
+        if (clazz == null) {
+            return Logger.getLogger("");
+        }
+        return getLogger(clazz.getSimpleName());
     }
 
     private static void addConsoleHandler(Logger logger) {
-	if (consoleHandler == null) {
-	    consoleHandler = createConsoleHandler();
-	}
-	logger.addHandler(consoleHandler);
+        if (consoleHandler == null) {
+            consoleHandler = createConsoleHandler();
+        }
+        logger.addHandler(consoleHandler);
     }
 
     private static void removeHandlers(Logger logger) {
-	Handler[] handlers = logger.getHandlers();
-	for (Handler handler : handlers) {
-	    logger.removeHandler(handler);
-	}
+        Handler[] handlers = logger.getHandlers();
+        for (Handler handler : handlers) {
+            logger.removeHandler(handler);
+        }
     }
 
     private static void addFileHandler(Logger logger) {
-	try {
-	    if (fileHandler == null) {
-		fileHandler = createFileHandler();
-	    }
-	    logger.addHandler(fileHandler);
-	} catch (IOException e) {
-	    logger.warning("Error adding file handler for logger.");
-	}
+        try {
+            if (fileHandler == null) {
+                fileHandler = createFileHandler();
+            }
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            logger.warning("Error adding file handler for logger.");
+        }
     }
 
     private static FileHandler createFileHandler() throws IOException {
-	FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
-	fileHandler.setFormatter(new SimpleFormatter());
-	fileHandler.setLevel(currentLogLevel);
-	return fileHandler;
+        FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
+        fileHandler.setFormatter(new SimpleFormatter());
+        fileHandler.setLevel(currentLogLevel);
+        return fileHandler;
     }
 
     private static ConsoleHandler createConsoleHandler() {
-	ConsoleHandler consoleHandler = new ConsoleHandler();
-	consoleHandler.setLevel(currentLogLevel);
-	return consoleHandler;
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(currentLogLevel);
+        return consoleHandler;
     }
 
     /**
@@ -106,13 +106,13 @@ public class LogsCenter {
      * event handling methods.
      */
     public static String getEventHandlingLogMessage(BaseEvent e, String message) {
-	return "---[Event handled][" + e + "]" + message;
+        return "---[Event handled][" + e + "]" + message;
     }
 
     /**
      * @see #getEventHandlingLogMessage(BaseEvent, String)
      */
     public static String getEventHandlingLogMessage(BaseEvent e) {
-	return getEventHandlingLogMessage(e, "");
+        return getEventHandlingLogMessage(e, "");
     }
 }

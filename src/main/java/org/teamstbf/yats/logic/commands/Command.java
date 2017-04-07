@@ -20,7 +20,7 @@ public abstract class Command {
      * @return summary message for persons displayed
      */
     public static String getMessageForPersonListShownSummary(int displaySize) {
-	return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
+        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class Command {
      * dependencies.
      */
     public void setData(Model model) {
-	this.model = model;
+        this.model = model;
     }
 
 }

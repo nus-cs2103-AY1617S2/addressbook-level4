@@ -17,30 +17,30 @@ public class IsDone {
     private String value;
 
     public IsDone() {
-	this.value = ISDONE_NOTDONE;
+        this.value = ISDONE_NOTDONE;
     }
 
     public IsDone(String done) throws IllegalValueException {
-	String trimmedIsDone = done.trim();
-	if (!isValidIsDone(trimmedIsDone)) {
-	    throw new IllegalValueException(MESSAGE_ISDONE_CONSTRAINTS);
-	}
-	this.value = trimmedIsDone;
+        String trimmedIsDone = done.trim();
+        if (!isValidIsDone(trimmedIsDone)) {
+            throw new IllegalValueException(MESSAGE_ISDONE_CONSTRAINTS);
+        }
+        this.value = trimmedIsDone;
     }
 
     public static boolean isValidIsDone(String test) {
-	return test.matches(ISDONE_VALIDATION_REGEX);
+        return test.matches(ISDONE_VALIDATION_REGEX);
     }
 
     public String getValue() {
-	return value;
+        return value;
     }
 
     public void markDone() {
-	this.value = ISDONE_DONE;
+        this.value = ISDONE_DONE;
     }
 
     public void markUndone() {
-	this.value = ISDONE_NOTDONE;
+        this.value = ISDONE_NOTDONE;
     }
 }

@@ -21,25 +21,25 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     private static String filePath;
 
     public XmlTaskManagerStorage(String filePath) {
-	XmlTaskManagerStorage.filePath = filePath;
+        XmlTaskManagerStorage.filePath = filePath;
     }
 
     @Override
     public String getTaskManagerFilePath() {
-	return filePath;
+        return filePath;
     }
 
     public static String getFilePath() {
-	return filePath;
+        return filePath;
     }
 
     public static void setTaskManagerFilePath(String newFilePath) {
-	XmlTaskManagerStorage.filePath = newFilePath;
+        XmlTaskManagerStorage.filePath = newFilePath;
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-	return readTaskManager(filePath);
+        return readTaskManager(filePath);
     }
 
     /**
@@ -52,24 +52,24 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      */
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath)
-	    throws DataConversionException, FileNotFoundException {
-	assert filePath != null;
+            throws DataConversionException, FileNotFoundException {
+        assert filePath != null;
 
-	File addressBookFile = new File(filePath);
+        File addressBookFile = new File(filePath);
 
-	if (!addressBookFile.exists()) {
-	    logger.info("TaskManager file " + addressBookFile + " not found");
-	    return Optional.empty();
-	}
+        if (!addressBookFile.exists()) {
+            logger.info("TaskManager file " + addressBookFile + " not found");
+            return Optional.empty();
+        }
 
-	ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-	return Optional.of(addressBookOptional);
+        return Optional.of(addressBookOptional);
     }
 
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-	saveTaskManager(taskManager, filePath);
+        saveTaskManager(taskManager, filePath);
     }
 
     /**
@@ -80,12 +80,12 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      */
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
-	assert taskManager != null;
-	assert filePath != null;
+        assert taskManager != null;
+        assert filePath != null;
 
-	File file = new File(filePath);
-	FileUtil.createIfMissing(file);
-	XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+        File file = new File(filePath);
+        FileUtil.createIfMissing(file);
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
     }
 
 }

@@ -12,11 +12,7 @@ public class TypicalTestEvents {
 
 	public static void loadAddressBookWithSampleData(TaskManager ab) {
 		for (TestEvent person : new TypicalTestEvents().getTypicalTasks()) {
-			try {
-				ab.addEvent(new Event(person));
-			} catch (UniqueEventList.DuplicateEventException e) {
-				assert false : "not possible";
-			}
+		    ab.addEvent(new Event(person));
 		}
 	}
 

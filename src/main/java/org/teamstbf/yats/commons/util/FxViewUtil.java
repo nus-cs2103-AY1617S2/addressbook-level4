@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 public class FxViewUtil {
 
     public static void applyAnchorBoundaryParameters(Node node, double left, double right, double top, double bottom) {
-	AnchorPane.setBottomAnchor(node, bottom);
-	AnchorPane.setLeftAnchor(node, left);
-	AnchorPane.setRightAnchor(node, right);
-	AnchorPane.setTopAnchor(node, top);
+        AnchorPane.setBottomAnchor(node, bottom);
+        AnchorPane.setLeftAnchor(node, left);
+        AnchorPane.setRightAnchor(node, right);
+        AnchorPane.setTopAnchor(node, top);
     }
 
     /**
@@ -23,7 +23,7 @@ public class FxViewUtil {
      *            e.g. {@code "/images/help_icon.png"}
      */
     public static void setStageIcon(Stage stage, String iconSource) {
-	stage.getIcons().setAll(AppUtil.getImage(iconSource));
+        stage.getIcons().setAll(AppUtil.getImage(iconSource));
     }
 
 }

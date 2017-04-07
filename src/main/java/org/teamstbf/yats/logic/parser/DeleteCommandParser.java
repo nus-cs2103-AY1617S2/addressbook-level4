@@ -24,25 +24,27 @@ public class DeleteCommandParser {
      */
     public Command parse(String args) {
 
-	String[] deleteIndexArr = ParserUtil.stringTokenizer(args);
-	if (deleteIndexArr.length > 1) {
-	    if (ParserUtil.isAllIntegers(deleteIndexArr)) {
-		deleteIndexArr = ParserUtil.sortIndexArr(deleteIndexArr);
-		for (String element : deleteIndexArr) {
-		    deleteStack.push(Integer.valueOf(element));
-		}
-		return new BatchDeleteCommand(deleteStack);
-	    } else if (!ParserUtil.isAllIntegers(deleteIndexArr)) {
-		return new IncorrectCommand(
-			String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
-	    }
-	}
+        String[] deleteIndexArr = ParserUtil.stringTokenizer(args);
+        if (deleteIndexArr.length > 1) {
+            if (ParserUtil.isAllIntegers(deleteIndexArr)) {
+                deleteIndexArr = ParserUtil.sortIndexArr(deleteIndexArr);
+                for (String element : deleteIndexArr) {
+                    if (!deleteStack.contains(Integer.valueOf(element))) {
+                        deleteStack.push(Integer.valueOf(element));
+                    }
+                }
+                return new BatchDeleteCommand(deleteStack);
+            } else if (!ParserUtil.isAllIntegers(deleteIndexArr)) {
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
+            }
+        }
 
-	Optional<Integer> index = ParserUtil.parseIndex(args);
-	if (!index.isPresent()) {
-	    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-	}
-	return new DeleteCommand(index.get());
+        Optional<Integer> index = ParserUtil.parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+        return new DeleteCommand(index.get());
     }
 
 }

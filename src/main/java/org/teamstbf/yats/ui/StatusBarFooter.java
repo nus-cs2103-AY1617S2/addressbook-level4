@@ -29,31 +29,31 @@ public class StatusBarFooter extends UiPart<Region> {
     private static final String FXML = "StatusBarFooter.fxml";
 
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation) {
-	super(FXML);
-	addToPlaceholder(placeHolder);
-	setSyncStatus("Not updated yet in this session");
-	setSaveLocation("./" + saveLocation);
-	registerAsAnEventHandler(this);
+        super(FXML);
+        addToPlaceholder(placeHolder);
+        setSyncStatus("Not updated yet in this session");
+        setSaveLocation("./" + saveLocation);
+        registerAsAnEventHandler(this);
     }
 
     private void addToPlaceholder(AnchorPane placeHolder) {
-	FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
-	placeHolder.getChildren().add(getRoot());
+        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
+        placeHolder.getChildren().add(getRoot());
     }
 
     private void setSaveLocation(String location) {
-	this.saveLocationStatus.setText(location);
+        this.saveLocationStatus.setText(location);
     }
 
     private void setSyncStatus(String status) {
-	this.syncStatus.setText(status);
+        this.syncStatus.setText(status);
     }
 
     @Subscribe
     public void handleAddressBookChangedEvent(TaskManagerChangedEvent abce) {
-	String lastUpdated = (new Date()).toString();
-	logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
-	setSyncStatus("Last Updated: " + lastUpdated);
-	setSaveLocation(XmlTaskManagerStorage.getFilePath());
+        String lastUpdated = (new Date()).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus("Last Updated: " + lastUpdated);
+        setSaveLocation(XmlTaskManagerStorage.getFilePath());
     }
 }

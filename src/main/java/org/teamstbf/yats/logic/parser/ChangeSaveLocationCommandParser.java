@@ -19,28 +19,28 @@ public class ChangeSaveLocationCommandParser {
      * for execution.
      */
     public Command parse(String arguments) {
-	assert arguments != null;
+        assert arguments != null;
 
-	arguments = arguments.trim();
+        arguments = arguments.trim();
 
-	if (arguments.equals("")) {
-	    return new IncorrectCommand(NO_LOCATION_SPECIFIED);
-	}
-	if (arguments.equals(INPUT_DEFAULT)) {
-	    return new ChangeSaveLocationCommand(new File("data/YATS.xml"));
-	}
+        if (arguments.equals("")) {
+            return new IncorrectCommand(NO_LOCATION_SPECIFIED);
+        }
+        if (arguments.equals(INPUT_DEFAULT)) {
+            return new ChangeSaveLocationCommand(new File("data/YATS.xml"));
+        }
 
-	File saveLocation = new File(arguments.trim());
+        File saveLocation = new File(arguments.trim());
 
-	if (!saveLocation.exists()) {
-	    return new IncorrectCommand(INVALID_SAVE_LOCATION);
-	} else {
-	    if (!arguments.endsWith("/")) {
-		arguments += "/";
-	    }
-	    File newSaveLocation = new File(arguments + "YATS.xml");
-	    return new ChangeSaveLocationCommand(newSaveLocation);
-	}
+        if (!saveLocation.exists()) {
+            return new IncorrectCommand(INVALID_SAVE_LOCATION);
+        } else {
+            if (!arguments.endsWith("/")) {
+                arguments += "/";
+            }
+            File newSaveLocation = new File(arguments + "YATS.xml");
+            return new ChangeSaveLocationCommand(newSaveLocation);
+        }
 
     }
 

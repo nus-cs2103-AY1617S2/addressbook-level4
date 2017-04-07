@@ -10,12 +10,12 @@ public class NewResultAvailableEvent extends BaseEvent {
     public final String message;
 
     public NewResultAvailableEvent(String message) {
-	this.message = message;
+        this.message = message;
     }
 
     @Override
     public String toString() {
-	return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName();
     }
 
 }

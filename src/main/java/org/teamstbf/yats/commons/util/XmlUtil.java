@@ -29,19 +29,19 @@ public class XmlUtil {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getDataFromFile(File file, Class<T> classToConvert)
-	    throws FileNotFoundException, JAXBException {
+            throws FileNotFoundException, JAXBException {
 
-	assert file != null;
-	assert classToConvert != null;
+        assert file != null;
+        assert classToConvert != null;
 
-	if (!FileUtil.isFileExists(file)) {
-	    throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
-	}
+        if (!FileUtil.isFileExists(file)) {
+            throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
+        }
 
-	JAXBContext context = JAXBContext.newInstance(classToConvert);
-	Unmarshaller um = context.createUnmarshaller();
+        JAXBContext context = JAXBContext.newInstance(classToConvert);
+        Unmarshaller um = context.createUnmarshaller();
 
-	return ((T) um.unmarshal(file));
+        return ((T) um.unmarshal(file));
     }
 
     /**
@@ -58,18 +58,18 @@ public class XmlUtil {
      */
     public static <T> void saveDataToFile(File file, T data) throws FileNotFoundException, JAXBException {
 
-	assert file != null;
-	assert data != null;
+        assert file != null;
+        assert data != null;
 
-	if (!file.exists()) {
-	    throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
-	}
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
+        }
 
-	JAXBContext context = JAXBContext.newInstance(data.getClass());
-	Marshaller m = context.createMarshaller();
-	m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        JAXBContext context = JAXBContext.newInstance(data.getClass());
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-	m.marshal(data, file);
+        m.marshal(data, file);
     }
 
 }

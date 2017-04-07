@@ -12,12 +12,12 @@ public class UrlUtil {
      */
     public static boolean compareBaseUrls(URL url1, URL url2) {
 
-	if (url1 == null || url2 == null) {
-	    return false;
-	}
-	return url1.getHost().toLowerCase().replaceFirst("www.", "")
-		.equalsIgnoreCase(url2.getHost().replaceFirst("www.", ""))
-		&& url1.getPath().replaceAll("/", "").equalsIgnoreCase(url2.getPath().replaceAll("/", ""));
+        if (url1 == null || url2 == null) {
+            return false;
+        }
+        return url1.getHost().toLowerCase().replaceFirst("www.", "")
+                .equalsIgnoreCase(url2.getHost().replaceFirst("www.", ""))
+                && url1.getPath().replaceAll("/", "").equalsIgnoreCase(url2.getPath().replaceAll("/", ""));
     }
 
 }
