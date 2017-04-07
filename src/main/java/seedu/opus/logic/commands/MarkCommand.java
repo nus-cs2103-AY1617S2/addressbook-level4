@@ -8,6 +8,9 @@ import seedu.opus.logic.commands.exceptions.CommandException;
 import seedu.opus.model.task.Status;
 
 //@@author A0124368A
+/**
+ * Toggles a single task in the task manager as complete/incomplete.
+ */
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
