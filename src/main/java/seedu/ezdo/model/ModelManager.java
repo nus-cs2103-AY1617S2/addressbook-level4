@@ -479,7 +479,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code StartDate} comes after given
+         * returns true if a task's {@code StartDate} comes after given
          * {@code StartDate}
          */
         private boolean compareAfterStart(TaskDate taskStartDate) {
