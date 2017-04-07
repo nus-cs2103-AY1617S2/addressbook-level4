@@ -46,7 +46,7 @@ public class JsonUtil {
     /**
      * Returns the Json object from the given file or {@code Optional.empty()}
      * object if the file is not found. If any values are missing from the file,
-     * default values will be used, as long as the file is a valid json file. 
+     * default values will be used, as long as the file is a valid json file.
      * @param filePath
      *            cannot be null.
      * @param classOfObjectToDeserialize
@@ -109,7 +109,7 @@ public class JsonUtil {
 
     /**
      * Converts a given instance of a class into its JSON data string
-     * representation 
+     * representation
      * @param instance
      *            The T object to be converted into the JSON string
      * @param <T>
