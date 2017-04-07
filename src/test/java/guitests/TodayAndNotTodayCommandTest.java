@@ -1,7 +1,5 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -19,19 +17,31 @@ public class TodayAndNotTodayCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void todayAndNotTodayTask_nonEmptyList_success() throws IllegalArgumentException, IllegalValueException {
-        commandBox.runCommand("today F1");
-        assertTrue(futureTaskListPanel.isListMatching(TestUtil.removeTaskFromList(td.getTypicalTasks(), 1)));
-        assertTrue(todayTaskListPanel.isListMatching(td.getTypicalTasks()[0]));
+        // No Change
+        commandBox.runCommand("today T4");
+        assertTodayFutureListsMatching(todayList, futureList);
 
+        // Move Task from future to today
+        commandBox.runCommand("today F1");
+        todayList = TestUtil.addTasksToList(todayList, td.futureListFloat, 2);
+        futureList = TestUtil.removeTaskFromList(futureList, 1);
+        assertTodayFutureListsMatching(todayList, futureList);
+
+        // No Change
         commandBox.runCommand("nottoday T1");
-        assertTrue(futureTaskListPanel.isListMatching(td.getTypicalTasks()));
-        assertTrue(todayTaskListPanel.isListMatching());
+        assertTodayFutureListsMatching(todayList, futureList);
+
+        // Move Task from today to future
+        commandBox.runCommand("nottoday T2");
+        todayList = TestUtil.removeTaskFromList(todayList, 2);
+        futureList = TestUtil.addTasksToList(futureList, td.todayListFloat, 0);
+        assertTodayFutureListsMatching(todayList, futureList);
     }
 
     @Test
     public void todayAndNotTask_emptyList() {
         commandBox.runCommand("clear");
-        assertListSize(0);
+        assertFutureListSize(0);
         assertTodayIndexInvalid("F1"); // invalid index
         assertNotTodayIndexInvalid("T1"); // invalid index
     }

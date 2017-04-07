@@ -1,32 +1,32 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.testutil.TestTask;
+import seedu.address.model.task.Task;
 
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList()
-            throws IllegalArgumentException, IllegalValueException {
-        assertFindResult("find dragon"); // no results
-        assertFindResult("find Meier", td.buyStove, td.buyRiceCooker); // multiple
-                                                                       // results
+    public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
+        // No results
+        assertFindResult("find dragon", new Task[] {}, new Task[] {}, new Task[] {});
+
+        // Multiple Results
+        assertFindResult("find assignment", new Task[] { td.todayListOverdue },
+                new Task[] { td.futureListDeadline, td.futureListEvent }, new Task[] { td.completedListFloat });
 
         // find after deleting one result
-        commandBox.runCommand("delete F1");
-        assertFindResult("find Meier", td.buyRiceCooker);
+        commandBox.runCommand("delete T1");
+        assertFindResult("find assignment", new Task[] {}, new Task[] { td.futureListDeadline, td.futureListEvent },
+                new Task[] { td.completedListFloat });
     }
 
     @Test
-    public void find_emptyList()
-            throws IllegalArgumentException, IllegalValueException {
+    public void find_emptyList() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("find Jean", new Task[] {}, new Task[] {}, new Task[] {});
     }
 
     @Test
@@ -35,11 +35,14 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits)
-            throws IllegalArgumentException, IllegalValueException {
+    private void assertFindResult(String command, Task[] expectedTodayList, Task[] expectedFutureList,
+            Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
-        assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
-        assertTrue(futureTaskListPanel.isListMatching(expectedHits));
+
+        int expectedHits = expectedTodayList.length + expectedFutureList.length + expectedCompletedList.length;
+        assertResultMessage(expectedHits + " tasks listed!");
+
+        assertAllListsMatching(expectedTodayList, expectedFutureList, expectedCompletedList);
+
     }
 }

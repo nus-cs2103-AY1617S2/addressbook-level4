@@ -28,11 +28,13 @@ import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Logic;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TestUtil;
-import seedu.address.testutil.TypicalTestTasks;
+import seedu.address.testutil.TypicalTasks;
 
 /**
  * A GUI Test class for TaskManager.
@@ -49,8 +51,14 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestTasks td = new TypicalTestTasks();
+    // @author A0093999Y
+    protected TypicalTasks td = new TypicalTasks();
+    protected Task[] emptyTaskList = new Task[] {};
+    protected Task[] todayList = td.getTodayListTasks();
+    protected Task[] futureList = td.getFutureListTasks();
+    protected Task[] completedList = td.getCompletedListTasks();
 
+    // @author
     /*
      * Handles to GUI elements present at the start up are created in advance
      * for easy access from child classes.
@@ -103,7 +111,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected TaskManager getInitialData() {
         TaskManager ab = new TaskManager();
-        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
+        TypicalTasks.loadTaskManagerWithSampleData(ab);
         return ab;
     }
 
@@ -129,11 +137,32 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the size of the task list is equal to the given number.
      */
-    protected void assertListSize(int size) {
-        int numberOfPeople = futureTaskListPanel.getNumberOfTasks();
-        assertEquals(size, numberOfPeople);
+    protected void assertFutureListSize(int size) {
+        int numberOfTasks = futureTaskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
     }
 
+    // @author A0093999Y
+    /**
+     * Asserts the UI Today and Future Task Lists match the given expected lists
+     */
+    protected void assertTodayFutureListsMatching(Task[] todayList, Task[] futureList) throws IllegalValueException {
+        assertTrue(todayTaskListPanel.isListMatching(todayList));
+        assertTrue(futureTaskListPanel.isListMatching(futureList));
+    }
+
+    /**
+     * Asserts the All UI Task Lists match the given expected lists
+     */
+    protected void assertAllListsMatching(Task[] todayList, Task[] futureList, Task[] completedList)
+            throws IllegalValueException {
+        assertTodayFutureListsMatching(todayList, futureList);
+        commandBox.runCommand("listcompleted");
+        assertTrue(completedTaskListPanel.isListMatching(completedList));
+        commandBox.runCommand("list");
+    }
+
+    // @author
     /**
      * Asserts the message shown in the Result Display area is same as the given
      * string.

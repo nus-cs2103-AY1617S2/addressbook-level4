@@ -15,6 +15,7 @@ import seedu.address.model.TaskManager;
 import seedu.address.storage.XmlSerializableTaskManager;
 import seedu.address.testutil.TaskManagerBuilder;
 import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.TypicalTasks;
 
 public class XmlUtilTest {
 
@@ -23,6 +24,7 @@ public class XmlUtilTest {
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskManager.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskManager.xml"));
+    private final TypicalTasks td = new TypicalTasks();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -83,11 +85,11 @@ public class XmlUtilTest {
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
         assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
-        //TODO: use equality instead of string comparisons
+        // TODO: use equality instead of string comparisons
 
         TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskManager(
-                builder.withTask(TestUtil.generateSampleTaskData().get(0)).withTag("Friends").build());
+                builder.withTask(td.getTypicalTasks()[0]).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
