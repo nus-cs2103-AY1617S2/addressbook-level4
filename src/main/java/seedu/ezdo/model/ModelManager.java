@@ -344,6 +344,9 @@ public class ModelManager extends ComponentManager implements Model {
             return isEqual;
         }
 
+        /**
+         * returns true if task's {@code Recur} equals given {@code Recur}
+         */
         private boolean compareRecur(Recur taskRecur) {
 
             String taskRecurString = taskRecur.toString();
