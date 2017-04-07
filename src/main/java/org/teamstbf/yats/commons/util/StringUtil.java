@@ -2,6 +2,7 @@ package org.teamstbf.yats.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -41,6 +42,17 @@ public class StringUtil {
             }
         }
         return false;
+    }
+    
+    public static boolean containsStringIgnoreCase(String sentence, String word) {
+        assert word != null : "Word parameter cannot be null";
+        assert sentence != null : "Sentence parameter cannot be null";
+
+        String preppedWord = word.trim();
+        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+
+        return sentence.toLowerCase().contains(word.toLowerCase());
+
     }
 
     /**

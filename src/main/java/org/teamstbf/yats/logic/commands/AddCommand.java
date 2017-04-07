@@ -71,7 +71,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        System.out.println("hello");
         model.saveImageOfCurrentTaskManager();
         model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

@@ -495,19 +495,19 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyEvent event) {
             return findKeyWords.stream().filter(keyword -> {
-                if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+                if (StringUtil.containsStringIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
                         keyword)) {
                     return true;
-                } else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+                } else if (StringUtil.containsStringIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
                         keyword)) {
                     return true;
-                } else if (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+                } else if (StringUtil.containsStringIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
                         keyword)) {
-                    return (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+                    return (StringUtil.containsStringIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
                             keyword));
-                } else if (StringUtil.containsWordIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
+                } else if (StringUtil.containsStringIgnoreCase(event.getTitle().fullName.substring(SUBSTRING_INDEX),
                         keyword)) {
-                    return (StringUtil.containsWordIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
+                    return (StringUtil.containsStringIgnoreCase(event.getDescription().value.substring(SUBSTRING_INDEX),
                             keyword));
                 }
                 return false;

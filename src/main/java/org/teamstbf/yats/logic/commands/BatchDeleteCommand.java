@@ -31,7 +31,6 @@ public class BatchDeleteCommand extends Command {
         UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
         int numOfTask = targetIndexes.size();
         model.saveImageOfCurrentTaskManager();
-        System.out.println("deleting stuff");
         for (int i = 0; i < numOfTask; i++) {
 
             if (lastShownList.size() < targetIndexes.peek()) {
