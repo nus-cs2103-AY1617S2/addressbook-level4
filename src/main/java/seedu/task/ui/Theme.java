@@ -9,6 +9,12 @@ public enum Theme {
         themeDescription = description;
     }
 
+    /**
+     * Returns a Theme enum for the input themeName if there is match,
+     * Returns a null if there is not a match.
+     * @param themeName
+     * @return
+     */
     public static Theme getTheme(String themeName) {
         // TODO Auto-generated method stub
         for (Theme t : Theme.values()) {
@@ -16,12 +22,7 @@ public enum Theme {
                 return t;
             }
         }
-        System.out.println("assigning default");
-        return Default;
-    }
-
-    public static String valueOf(Theme theme) {
-        return theme.toString();
+        return null;
     }
 
     @Override

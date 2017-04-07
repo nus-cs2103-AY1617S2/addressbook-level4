@@ -22,35 +22,27 @@ public class TaskListPanel extends UiPart<Region> {
     protected Theme theme = Theme.Default;
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanelDefault.fxml";
-    protected static final String FXML_Light = "TaskListPanelLight.fxml";
-    protected static final String FXML_Dark = "TaskListPanelDark.fxml";
+    protected static final String FXML_LIGHT = "TaskListPanelLight.fxml";
+    protected static final String FXML_DARK = "TaskListPanelDark.fxml";
 
-    private TaskCard [] cardlist = new TaskCard [1000];
-
+    private TaskCard[] cardlist = new TaskCard[1000];
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
-        super(FXML);
-        //System.out.println("print");
-        setConnections(taskList);
-        addToPlaceholder(taskListPlaceholder);
-    }
-  //@@author A0142487Y-reused
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, String fxml,
-            Theme theme) {
-        super(fxml);
+
+    // @@author A0142487Y-reused
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, Theme theme,
+            String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         this.theme = theme;
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    //@@author
+    // @@author
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
-        //System.out.println("when pass");
-        //cardlist = new ArrayList<TaskCard>();
         taskListView.setCellFactory(listView -> new TaskListViewCell());
 
         setEventHandlerForSelectionChangeEvent();
@@ -71,34 +63,32 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    //@@author A0139975J
+    // @@author A0139975J
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
+            taskListView.scrollTo(index - 3);
             taskListView.getSelectionModel().clearAndSelect(index);
             if (cardlist[index + 1].expendStatus()) {
                 cardlist[index + 1].setExpend(false);
+
             } else {
                 cardlist[index + 1].setExpend(true);
             }
         });
     }
 
-
-    //@@author A0142939W
+    // @@author A0142939W
     public void scrollDown(Scroll scroll) {
-        scroll = new Scroll();
         scroll.scrollDown(taskListView);
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     public void scrollUp(Scroll scroll) {
-        scroll = new Scroll();
         scroll.scrollUp(taskListView);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
-        //@@author A0139975J-reused
+        // @@author A0139975J-reused
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
             super.updateItem(task, empty);
@@ -110,10 +100,10 @@ public class TaskListPanel extends UiPart<Region> {
                 TaskCard taskcard = null;
                 switch (TaskListPanel.this.theme) {
                 case Dark:
-                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark);
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_DARK);
                     break;
                 case Light:
-                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light);
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_LIGHT);
                     break;
                 default:
                     taskcard = new TaskCard(task, getIndex() + 1);
@@ -123,6 +113,11 @@ public class TaskListPanel extends UiPart<Region> {
 
             }
         }
+    }
+
+    //@@author A0142939W
+    public ListView<ReadOnlyTask> getTaskListView() {
+        return taskListView;
     }
 
 }

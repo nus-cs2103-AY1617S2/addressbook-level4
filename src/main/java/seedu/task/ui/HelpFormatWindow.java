@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import seedu.task.MainApp;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.util.FxViewUtil;
-
+//@@author A0142939W
 /**
  * Controller for a help page
  */

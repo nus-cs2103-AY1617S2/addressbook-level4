@@ -10,12 +10,11 @@ public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS = "Task remarks can contain any character";
     public static final String REMARK_VALIDATION_REGEX = ".*";
-    public static final String DEFAULT_REMARK = "DEFAULT_REMARK";
     public final String value;
 
     //Allows an empty constructor
     public Remark() {
-        this.value = DEFAULT_REMARK;
+        this.value = "";
     }
     /**
      * Validates given remark.
@@ -24,7 +23,7 @@ public class Remark {
      *             if given remark string is invalid.
      */
     public Remark(String remark) throws IllegalValueException {
-        if (remark == null || remark.equals(DEFAULT_REMARK)) {
+        if (remark == null || remark.equals("")) {
             this.value = "";
         } else {
             String trimmedRemark = remark.trim();

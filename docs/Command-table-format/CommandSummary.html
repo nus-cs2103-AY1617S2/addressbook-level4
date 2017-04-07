@@ -177,12 +177,12 @@ tr:last-of-type td:last-child {
     </tr>
     <tr>
       <td><strong>Find</strong></td>
-      <td>find KEYWORD...
+      <td>find KEYWORD...and/or DATE
 			<br>
 			<br><strong>Example:</strong>
-			<br>find meet</td>
-      <td>f KEYWORD...</td>
-      <td>Finds tasks that contains <b>at least one</b> keyword.</td>
+			<br>find meeting</td>
+      <td>f KEYWORD...and/or DATE</td>
+      <td>Finds tasks that contains all of the keywords.<br> Finds tasks with the queried dates along with  <strong> all the keywords </strong> if dates are given.</td>
     </tr>
 	<tr>
       <td><strong>Find Exact</strong></td>
@@ -190,7 +190,7 @@ tr:last-of-type td:last-child {
 			<br>
 			<br><strong>Example:</strong>
 			<br>findexact meet john</td>
-      <td>fexact KEYWORD..., finde KEYWORD..., fe KEYWORD...</td>
+      <td>fexact KEYWORD..., finde KEYWORD..., <br> fe KEYWORD...</td>
       <td>Finds tasks that contains <b>all<b/> keywords.</td>
     </tr>
 	<tr>
@@ -204,7 +204,7 @@ tr:last-of-type td:last-child {
       <td>help [COMMANDNAME]
 			<br>
 			<br><strong>Example:</strong>
-			<br>help add</td>
+			<br>help add <br>man edit</td>
       <td>h, man, manual</td>
       <td>If COMMANDNAME not entered, brings up user guide in another window.
 			<br>If COMMANDNAME entered, shows help message for that command only.</td>
@@ -224,23 +224,23 @@ tr:last-of-type td:last-child {
     </tr>
     <tr>
       <td><strong>List Done</strong></td>
-      <td>listdone</td>
-      <td>ld</td>
+      <td>list done</td>
+      <td>list done</td>
       <td>Lists all completed tasks.</td>
     </tr>
     <tr>
       <td><strong>List Not Done</strong></td>
-      <td>listnotdone</td>
-      <td>listundone, lnd</td>
+      <td>list notdone</td>
+      <td>list undone</td>
       <td>Lists all ongoing tasks.</td>
     </tr>
     <tr>
       <td><strong>List Tag</strong></td>
-      <td>listtag TAGNAME
+      <td>list tag TAGNAME
 			<br>
 			<br><strong>Example:</strong>
-			<br>listtag work</td>
-      <td>listag TAGNAME, ltag TAGNAME, lt TAGNAME</td>
+			<br>list tag work</td>
+      <td>list tag TAGNAME</td>
       <td>Lists all tasks of a certain tag.</td>
     </tr>
     <tr>
@@ -265,7 +265,7 @@ tr:last-of-type td:last-child {
       <td><strong>Redo</strong></td>
       <td>Redo</td>
       <td></td>
-      <td>Revert the last undo.</td>
+      <td>Reverts the last undo.</td>
     </tr>
     <tr>
       <td><strong>Save</strong></td>

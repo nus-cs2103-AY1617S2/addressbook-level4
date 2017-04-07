@@ -23,7 +23,8 @@ import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
-import seedu.task.logic.commands.ListByNotDoneCommand;
+import seedu.task.logic.commands.ListCommand;
+//import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -72,7 +73,7 @@ public class MainApp extends Application {
         initEventsCenter();
         initHistory();
 
-        logic.execute(ListByNotDoneCommand.COMMAND_WORD_1);
+        logic.execute("list " + ListCommand.NOT_DONE_PARAM_1);
     }
 
     // @@author A0140063X

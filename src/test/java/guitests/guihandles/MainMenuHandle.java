@@ -21,7 +21,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     public HelpWindowHandle openHelpWindowUsingMenu() {
-        clickOn("Help", "Help");
+        clickOn("Help", "F1");
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
@@ -47,6 +47,51 @@ public class MainMenuHandle extends GuiHandle {
 
     private void useF3Accelerator() {
         guiRobot.push(KeyCode.F3);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltA() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.A);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltZ() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.Z);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltD() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.D);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltE() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.E);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltS() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.S);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlS() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.S);
+        guiRobot.sleep(500);
+    }
+
+    public void useCtrlAltL() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.L);
+        guiRobot.sleep(500);
+    }
+
+    public void useShiftDown() {
+        guiRobot.push(KeyCode.SHIFT, KeyCode.DOWN);
+        guiRobot.sleep(500);
+    }
+
+    public void useShiftUp() {
+        guiRobot.push(KeyCode.SHIFT, KeyCode.UP);
         guiRobot.sleep(500);
     }
 }

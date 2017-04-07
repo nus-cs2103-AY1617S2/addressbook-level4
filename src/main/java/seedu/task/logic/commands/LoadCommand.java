@@ -11,7 +11,7 @@ public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "load";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Loads the task manager from a different directory. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Loads the task manager from a different directory.\n"
             + "Parameters: PATHNAME \n"
             + "Example: " + COMMAND_WORD_1
             + " ";

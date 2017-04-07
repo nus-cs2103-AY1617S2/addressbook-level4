@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     private Remark remark;
     private Location location;
     private boolean isDone;
+    private String eventId;
     private UniqueTagList tags;
 
     /**
@@ -28,7 +29,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      * @throws IllegalValueException
      */
     public Task(Name name, Date startDate, Date endDate, Remark remark,
-        Location location, UniqueTagList tags, boolean isDone) throws IllegalValueException {
+        Location location, UniqueTagList tags, boolean isDone, String eventId) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, startDate, endDate, remark, location, tags);
 
         if (!isValidDates(startDate, endDate)) {
@@ -41,6 +42,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         this.remark = remark;
         this.location = location;
         this.isDone = isDone;
+        this.eventId = eventId;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -62,7 +64,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRemark(),
-                source.getLocation(), source.getTags(), source.isDone());
+                source.getLocation(), source.getTags(), source.isDone(), source.getEventId());
     }
 
     public void setName(Name name) {
@@ -77,6 +79,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     //@@author A0140063X
     public void setStartDate(Date startDate) {
+        assert startDate != null;
         this.startDate = startDate;
     }
 
@@ -88,6 +91,7 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     //@@author A0140063X
     public void setEndDate(Date endDate) {
+        assert endDate != null;
         this.endDate = endDate;
     }
 
@@ -117,20 +121,34 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     public Location getLocation() {
         return location;
     }
+    //@@author A0139975J
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-
+    //@@author A0139975J
     @Override
     public boolean isDone() {
         return isDone;
     }
-
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
 
+    //@@author A0140063X
+    @Override
+    public String getEventId() {
+        return eventId;
+    }
+
+    //@@author A0140063X
+    public void setEventId(String eventId) {
+        assert eventId != null && eventId.trim() != "";
+        this.eventId = eventId;
+    }
+
+    //@@author
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
@@ -183,4 +201,5 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
             return (Date.isBefore(this.getEndDate(), o.getEndDate())) ? -1 : 1;
         }
     }
+
 }

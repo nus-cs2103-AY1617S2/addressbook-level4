@@ -78,12 +78,14 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
 
     }
+
     //@@author A0139975J
     public void done(int index) {
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
         internalList.set(index, taskDone);
     }
+
     //@@author A0139975J
     public void undone(int index) {
         Task taskUnDone = internalList.get(index);
@@ -91,6 +93,14 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskUnDone);
     }
 
+    //@@author A0140063X
+    public void setTaskEventId(int index, String eventId) {
+        Task task = internalList.get(index);
+        task.setEventId(eventId);
+        internalList.set(index, task);
+    }
+
+    //@@author
     /**
      * Removes the equivalent task from the list.
      *
@@ -149,6 +159,11 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
     public static class DuplicateTaskException extends DuplicateDataException {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
         protected DuplicateTaskException() {
             super("Operation would result in duplicate tasks");
         }
@@ -158,7 +173,13 @@ public class UniqueTaskList implements Iterable<Task> {
      * Signals that an operation targeting a specified task in the list would fail because
      * there is no such matching task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+    }
 
     public void sort() {
         FXCollections.sort(internalList, new TaskComparator());

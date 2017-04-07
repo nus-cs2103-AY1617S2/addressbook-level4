@@ -31,11 +31,16 @@ public interface Model {
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     //@@author A0139975J
     /** Updates the task to done. */
-    void isDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void isDoneTask(int index) throws UniqueTaskList.TaskNotFoundException;
     //@@author A0139975J
     /** Updates the task from done to undone */
-    void unDoneTask(int index, ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void unDoneTask(int index) throws UniqueTaskList.TaskNotFoundException;
 
+    //@@author A0140063X
+    /** Sets the eventId of task */
+    void setTaskEventId(int index, String eventId);
+
+    //@@author
     /** Adds the given Task. */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
@@ -60,30 +65,43 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords */
-    void updateFilteredTaskList(Set<String> keywords);
+//    void updateFilteredTaskList(Set<String> keywords);
 
     /** Updates the filter of the filtered task list to filter by any or exactly all of the given keywords */
     void updateFilteredTaskList(Set<String> keywords, boolean isExact);
 
     /** Updates the filter of the filtered task list to filter by the given keyword of tags */
     void updateFilteredTaskList(String keyword);
+
     //@@author A0139975J
     /** Updates the filter of the filtered task list to filter by the given date */
-    void updateFilteredTaskList(Date value);
+//    void updateFilteredTaskList(Date value);
+
   //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
     void updateFilteredTaskList(boolean value);
 
+    /** Updates the filter of the filtered task list to filter by the given keyword and/or date */
+    void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact);
+
+    //@@author A0139975J
+    /** Updates the filer of the filtered task list to filter by floating task */
+    void updateFilteredTaskListFloat();
+
+    //@@author A0142939W
     /** Changes the file path for data to be saved in */
     void changeFilePath(String pathName);
 
+    //@@author A0142939W
     /** Changes the load path for data to be loaded from*/
     void loadFromLocation(String loadPath);
 
+    //@@author A0142939W
     /** Loads the file from the path to be loaded from*/
     void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
 
     /** Sorts the task list */
     void sortTaskList();
+
 
 }

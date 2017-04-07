@@ -178,9 +178,28 @@ public class UniqueTagList implements Iterable<Tag> {
      * property of the list.
      */
     public static class DuplicateTagException extends DuplicateDataException {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
         protected DuplicateTagException() {
             super("Operation would result in duplicate tags");
         }
+    }
+
+    //@@author A0142487Y
+    /**
+     * Returns a string formed by tagNames, separated by a space in between
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Tag tag : internalList) {
+            sb.append(tag.tagName);
+            sb.append(" ");
+        }
+        return sb.toString();
     }
 
 }

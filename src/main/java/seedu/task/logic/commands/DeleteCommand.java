@@ -1,7 +1,5 @@
 package seedu.task.logic.commands;
 
-import seedu.task.commons.core.Messages;
-import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
@@ -23,20 +21,14 @@ public class DeleteCommand extends Command {
     public final int targetIndex;
 
     public DeleteCommand(int targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex - 1;
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        ReadOnlyTask taskToDelete = getTaskFromIndex(targetIndex);
 
-        if (lastShownList.size() < targetIndex) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
         try {
             model.deleteTask(taskToDelete);
         } catch (TaskNotFoundException pnfe) {

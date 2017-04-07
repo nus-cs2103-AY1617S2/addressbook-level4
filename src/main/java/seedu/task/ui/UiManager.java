@@ -45,7 +45,6 @@ public class UiManager extends ComponentManager implements Ui {
         this.prefs = prefs;
     }
 
-    // @@author A0142487Y
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
@@ -57,10 +56,10 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             switch (prefs.getTheme()) {
             case Dark:
-                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Dark);
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_DARK);
                 break;
             case Light:
-                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_Light);
+                mainWindow = new MainWindow(primaryStage, config, prefs, logic, MainWindow.FXML_LIGHT);
                 break;
             default:
                 mainWindow = new MainWindow(primaryStage, config, prefs, logic);
@@ -76,7 +75,7 @@ public class UiManager extends ComponentManager implements Ui {
         }
     }
 
-    //@@author
+    // @@author
     @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
@@ -93,7 +92,7 @@ public class UiManager extends ComponentManager implements Ui {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
-    void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
+    protected void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
@@ -125,12 +124,14 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
+    // @@author A0142487Y
     @Subscribe
     public CommandResult handleQueryUnknownCommandEvent(QueryUnknownCommandEvent event) {
         EventsCenter.getInstance().post(new ShowHelpFormatRequestEvent());
         return new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE);
     }
 
+    // @@author
     @Subscribe
     public void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -144,7 +145,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelpFormat();
     }
 
-    //@@author
+    // @@author
     @Subscribe
     public void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.commons.util.StringUtil;
+import seedu.task.commons.util.TaskUtil;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -26,8 +28,7 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Represents the in-memory model of KIT data.
- * All changes to any model should be synchronized.
+ * Represents the in-memory model of KIT data. All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -38,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
+     *
      * @throws IllegalValueException
      */
     public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
@@ -56,35 +58,38 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    //@@author A0140063X
-    /** Raises an event to indicate the model has changed
-     * @param backupFilePath */
+    // @@author A0140063X
+    /**
+     * Raises an event to indicate the model has changed
+     *
+     * @param backupFilePath
+     */
     private void indicateTaskManagerChanged(String backupFilePath) {
         history.handleTaskManagerChanged(backupFilePath);
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
-    //@@author
+    // @@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -100,21 +105,32 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.removeTask(target);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
-    //@@author A0139975J
+
+    // @@author A0139975J
     @Override
-    public synchronized void isDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
+    public synchronized void isDoneTask(int index) throws TaskNotFoundException {
         int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.updateDone(taskManagerIndex, target);
-        indicateTaskManagerChanged(history.getBackupFilePath());
-    }
-    //@@author A0139975J
-    @Override
-    public synchronized void unDoneTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
-        int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.updateUnDone(taskManagerIndex, target);
+        taskManager.updateDone(taskManagerIndex);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
+    // @@author A0139975J
+    @Override
+    public synchronized void unDoneTask(int index) throws TaskNotFoundException {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.updateUnDone(taskManagerIndex);
+        indicateTaskManagerChanged(history.getBackupFilePath());
+    }
+
+    // @@author A0140063X
+    @Override
+    public void setTaskEventId(int index, String eventId) {
+        int taskManagerIndex = filteredTasks.getSourceIndex(index);
+        taskManager.setTaskEventId(taskManagerIndex, eventId);
+        indicateTaskManagerChanged("");
+    }
+
+    // @@author
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTaskToFront(task);
@@ -122,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     @Override
     public void addMultipleTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
@@ -137,10 +153,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author
+    // @@author
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws IllegalValueException {
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) throws IllegalValueException {
         assert editedTask != null;
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
@@ -165,8 +180,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateLoadChanged(loadPath);
     }
 
-
-    //=========== Filtered Task List Accessors =============================================================
+    // =========== Filtered Task List Accessors =============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -179,44 +193,53 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, false)));
+    public void updateFilteredTaskListFloat() {
+        updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
     }
+    // @Override
+    // public void updateFilteredTaskList(Set<String> keywords) {
+    // updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
+    // }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, isExact)));
+        updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, isExact)));
     }
 
     @Override
     public void updateFilteredTaskList(String keyword) {
         updateFilteredTaskList(new PredicateExpression(new TagQualifier(keyword)));
     }
-    //@@author A0139975J-reused
+
+    // @@author A0139975J-reused
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
+    // // @@author A0139975J-reused
+    // @Override
+    // public void updateFilteredTaskList(Date date) {
+    // updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    // }
 
-    //@@author A0139975J-reused
     @Override
-    public void updateFilteredTaskList(Date date) {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-
+    public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
+        // TODO Auto-generated method stub
+        updateFilteredTaskList(new PredicateExpression(new StringAndDateQualifier(keywords, date)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
-
 
     private class PredicateExpression implements Expression {
 
@@ -239,111 +262,169 @@ public class ModelManager extends ComponentManager implements Model {
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
 
-  //@@author A0142487Y
-    private class NameQualifier implements Qualifier {
+    // @@author A0142487Y
+    /**
+     * This qualifier is specifically for strings,including name, location,remark and tags. Returns true if there is any
+     * match.
+     *
+     * @author Xu
+     *
+     */
+    private class StringQualifier implements Qualifier {
         private boolean isExact = false;
-        private Set<String> keyWords;
+        private boolean isPossibleDate = false;
+        private Set<String> keywords;
 
-        NameQualifier(Set<String> keyWords, boolean isExact) {
+        StringQualifier(Set<String> keywords, boolean isExact) {
             this.isExact = isExact;
-            this.keyWords = keyWords;
+            this.keywords = keywords;
+        }
+
+        StringQualifier(Set<String> keywords, boolean isExact, boolean isPossibleDate) {
+            this.isExact = isExact;
+            this.keywords = keywords;
+            this.isPossibleDate = isPossibleDate;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
             if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keyWords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keyWords);
+                return TaskUtil.doesTaskContainExactKeywords(task, keywords);
+            } else if (isPossibleDate) {
+                return TaskUtil.doesTaskContainExactKeyword(task, keywords);
             } else {
-                return keyWords.stream()
-                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)
-                            || StringUtil.containsWordIgnoreCase(task.getRemark().toString(), keyword)
-                            || StringUtil.containsSubstringIgnoreCase(task.getName().fullName, keyword)
-                            || StringUtil.containsSubstringIgnoreCase(task.getRemark().toString(), keyword))
-                    .findAny()
-                    .isPresent();
+                for (String keyword : keywords) {
+                    if (!TaskUtil.doesTaskContainKeyword(task, keyword)) {
+                        return false;
+                    }
+                }
+                return true;
             }
         }
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", keyWords);
+            return "Target to be searched for =" + String.join(", ", keywords);
         }
     }
 
-  //@@author A0142487Y-reused
-    private class TagQualifier implements Qualifier {
+    private class StringAndDateQualifier implements Qualifier {
+        private boolean isExact = false;
+        private boolean isPossibleDate = true;
+        private Set<String> keywords;
+        private Date date;
+        private StringQualifier stringQualifier;
+        private StringQualifier dateAsStringQualifier; // e.g. to search "tomorrow" as a string instead of a date
+        private DateQualifier dateQualifier;
 
-        private String tagKeyWord;
+        StringAndDateQualifier(Set<String> keywords, Date date) {
+            assert keywords != null;
+            assert date != null;
+            this.date = date;
+            this.keywords = keywords;
+            this.dateQualifier = new DateQualifier(this.date);
+            this.stringQualifier = new StringQualifier(this.keywords, isExact);
 
-        TagQualifier(String tagKeyWord) {
-            this.tagKeyWord = tagKeyWord;
+            // this particular qualifier parses the keywords used to formulate a date as separate strings and search for
+            // those strings
+            this.dateAsStringQualifier = new StringQualifier(
+                    new HashSet<>(StringUtil.asListWithoutEmptyString(this.date.getExtractedFrom())), isExact,
+                    isPossibleDate);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyWord);
+            if (isExact) {
+                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords)
+                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keywords);
+            } else {
+                return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
+                        : (this.stringQualifier.run(task)
+                                && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
+            }
+        }
+    }
+    // @@author
+
+    // @@author A0142487Y-reused
+    private class TagQualifier implements Qualifier {
+
+        private String tagKeyword;
+
+        TagQualifier(String tagKeyWord) {
+            this.tagKeyword = tagKeyWord;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
         @Override
         public String toString() {
-            return "Tag=" +  tagKeyWord;
+            return "Tag = " + tagKeyword;
         }
     }
 
-    //@@author
+    // @@author A0139975J
     private class DateQualifier implements Qualifier {
 
         private Date date;
 
-        //@@author A0139975J
+        // @@author A0139975J
         DateQualifier(Date date) {
             this.date = date;
+            System.out.println(date.toString());
         }
 
-        //@@author A0139975J
+        // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date)) {
-                return true;
-            } else {
+            if (date.isNull()) {
                 return false;
             }
+            return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
         }
     }
 
+    // @@author A0139975J
+    private class FloatDateQualifier implements Qualifier {
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getEndDate().isNull() && task.getStartDate().isNull();
+        }
+    }
+
+    // @@author A0139975J
     private class DoneQualifier implements Qualifier {
 
         private boolean value;
-        //@@author A0139975J
+
+        // @@author A0139975J
         DoneQualifier(boolean value) {
             this.value = value;
         }
-        //@@author A0139975J
+
+        // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (this.value  & task.isDone()) {
-                return true;
-            } else if (!this.value  & !task.isDone()) {
-                return true;
-            } else {
-                return false;
-            }
-
+            return this.value == task.isDone();
         }
     }
 
-    //@@author
+    // @@author A0142939W
     @Override
     @Subscribe
     public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {
         taskManager.resetData(event.readOnlyTaskManager);
         logger.info("Resetting data from new load location.");
     }
-
 
 }

@@ -24,16 +24,6 @@ public class CheckListOrderTest extends TaskManagerGuiTest {
 
 
     private void assertCheckListOrder(TestTask... expectedList) {
-
-//        ArrayList<TestTask> sortedTestTasks =  new ArrayList<>();
-//        for(TestTask t : expectedList){
-//            sortedTestTasks.add(t);
-//        }
-//        Collections.sort(sortedTestTasks);
-//        TestTask[] sortedList = new TestTask[sortedTestTasks.size()];
-//        for(int i =0 ;i<sortedList.length;i++){
-//            sortedList[i] = sortedTestTasks.get(i);
-//        }
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

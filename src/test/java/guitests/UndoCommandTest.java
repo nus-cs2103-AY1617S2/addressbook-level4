@@ -9,8 +9,6 @@ import seedu.task.logic.commands.ClearCommand;
 import seedu.task.logic.commands.DeleteCommand;
 import seedu.task.logic.commands.DoneCommand;
 import seedu.task.logic.commands.EditCommand;
-import seedu.task.logic.commands.ListByDoneCommand;
-import seedu.task.logic.commands.ListByNotDoneCommand;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.logic.commands.UndoCommand;
 import seedu.task.testutil.TestTask;
@@ -21,7 +19,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
     public static final String BACKUP_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("temp/");
     private History history = History.getInstance();
-    TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] currentList = td.getTypicalTasks();
 
     @Test
     public void undo() {
@@ -35,8 +33,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 
         // list does not affect undo
         commandBox.runCommand(DoneCommand.COMMAND_WORD_1 + " 2");
-        commandBox.runCommand(ListByDoneCommand.COMMAND_WORD_1);
-        commandBox.runCommand(ListByNotDoneCommand.COMMAND_WORD_1);
         commandBox.runCommand(ListCommand.COMMAND_WORD_1);
         assertUndoSuccess(currentList);
 

@@ -1,6 +1,7 @@
 package seedu.task.ui;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -19,8 +20,8 @@ import seedu.task.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCardDefault.fxml";
-    protected static final String FXML_Light = "TaskListCardLight.fxml";
-    protected static final String FXML_Dark = "TaskListCardDark.fxml";
+    protected static final String FXML_LIGHT = "TaskListCardLight.fxml";
+    protected static final String FXML_DARK = "TaskListCardDark.fxml";
 
     @FXML
     private HBox cardPane;
@@ -45,69 +46,25 @@ public class TaskCard extends UiPart<Region> {
 
     private boolean status;
     //@@author A0139975J
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
-        super(FXML);
-        //plane.setText(displayedIndex + ". " + task.getName().fullName);
-        //plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        //plane.setCollapsible(true);
-      //prohibit animating
-     // plane.setAnimated(false);
+    public TaskCard(ReadOnlyTask task, int displayedIndex, String...fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
+
         plane.setExpanded(false);
         this.status = false;
-        name.setText(displayedIndex + ". " + task.getName().fullName);
-        //id.setText(displayedIndex + ". ");
-        startDate.setText(task.getStartDate().toString());
-        endDate.setText(task.getEndDate().toString());
-        loc.setText(task.getLocation().value);
-        if (task.isDone()) {
-            //done.setText("Done");
-            name.setTextFill(Color.GREEN);
-            Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
-            name.setGraphic(new ImageView(image));
-            name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        } else {
-            //done.setText("Not Done");
-            //done.setTextFill(Color.RED);
-            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            //name.setGraphic(new ImageView(image));
-            //name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        }
-        remark.setText(task.getRemark().value);
-        initTags(task);
-    }
-  //@@author A0142487Y-reused
-    public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
-        super(fxml);
-//        plane.setText(displayedIndex + ". " + task.getName().fullName);
-//        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        //plane.setCollapsible(true);
-      //prohibit animating
-     // plane.setAnimated(false);
-        plane.setExpanded(false);
-        this.status = false;
+        name.setMaxWidth(700);
+        name.setWrapText(true);
         name.setText(displayedIndex + ". " + task.getName().fullName);
         name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        //id.setText(displayedIndex + ". ");
         startDate.setText(task.getStartDate().toString());
         endDate.setText(task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
-            //done.setText("Done");
             name.setTextFill(Color.GREEN);
             Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
             name.setGraphic(new ImageView(image));
             name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        } else {
-            //done.setText("Not Done");
-            //done.setTextFill(Color.RED);
-            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            //name.setGraphic(new ImageView(image));
-            //name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         }
+
         remark.setText(task.getRemark().value);
         initTags(task);
     }

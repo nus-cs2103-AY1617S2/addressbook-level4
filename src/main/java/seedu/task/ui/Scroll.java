@@ -5,21 +5,44 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 import seedu.task.model.task.ReadOnlyTask;
 //@@author A0142939W
+/**
+ * This class controls the scroll bar of any listview.
+ */
 public class Scroll {
-    private static ScrollBar scrollBar;
+    private ScrollBar scrollBar;
 
-    Scroll() {
+    public Scroll() {
         scrollBar = null;
     }
 
-    public void scrollDown(ListView<ReadOnlyTask> taskListView) {
+    /*
+     * Creates the scroll from the tasklistview
+     * If the listview is too short to contain a scrollbar,
+     * null is returned.
+     */
+    public Scroll(ListView<ReadOnlyTask> taskListView) {
         Node n = taskListView.lookup(".scroll-bar");
         if (n == null) {
-            System.out.println("null");
             return;
         }
         if (n instanceof ScrollBar) {
             scrollBar = (ScrollBar) n;
+        }
+    }
+
+    /*
+     * Scrolls down the list view
+     * if there is any scrollbar to be found.
+     */
+    public void scrollDown(ListView<ReadOnlyTask> taskListView) {
+        if (scrollBar == null) {
+            Node n = taskListView.lookup(".scroll-bar");
+            if (n == null) {
+                return;
+            }
+            if (n instanceof ScrollBar) {
+                scrollBar = (ScrollBar) n;
+            }
         }
         scrollBar.increment();
         scrollBar.increment();
@@ -28,13 +51,19 @@ public class Scroll {
         scrollBar.increment();
     }
 
+    /*
+     * Scrolls up the list view if there is any scrollbar
+     * that can be found.
+     */
     public void scrollUp(ListView<ReadOnlyTask> taskListView) {
-        Node n = taskListView.lookup(".scroll-bar");
-        if (n == null) {
-            return;
-        }
-        if (n instanceof ScrollBar) {
-            scrollBar = (ScrollBar) n;
+        if (scrollBar == null) {
+            Node n = taskListView.lookup(".scroll-bar");
+            if (n == null) {
+                return;
+            }
+            if (n instanceof ScrollBar) {
+                scrollBar = (ScrollBar) n;
+            }
         }
         scrollBar.decrement();
         scrollBar.decrement();
@@ -42,4 +71,23 @@ public class Scroll {
         scrollBar.decrement();
         scrollBar.decrement();
     }
+
+    /*
+     * Gets the value of the scroll, returns -1 if the listview
+     * is too short to contain a scrollbar.
+     */
+    public double getScrollValue(ListView<ReadOnlyTask> taskListView) {
+        if (scrollBar == null) {
+            Node n = taskListView.lookup(".scroll-bar");
+            if (n == null) {
+                return -1;
+            }
+            if (n instanceof ScrollBar) {
+                scrollBar = (ScrollBar) n;
+            }
+        }
+
+        return scrollBar.getValue();
+    }
+
 }

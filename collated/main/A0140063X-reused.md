@@ -1,26 +1,27 @@
 # A0140063X-reused
-###### /java/seedu/task/commons/core/GoogleCalendar.java
+###### \java\seedu\task\commons\core\GoogleCalendar.java
 ``` java
 public class GoogleCalendar {
-    public static final String calendarId = "primary";
+    public static final String CALENDAR_ID = "primary";
+    public static final String CONNECTION_FAIL_MESSAGE = "Unable to connect to Google.";
     private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
 
     private static final String APPLICATION_NAME =
         "Keep It Tidy";
 
     /** Directory to store user credentials for this application. */
-    private static final java.io.File DATA_STORE_DIR = new java.io.File(
+    private static java.io.File dataStoreDir = new java.io.File(
         System.getProperty("user.home"), ".credentials/keep-it-tidy");
 
     /** Global instance of the {@link FileDataStoreFactory}. */
-    private static FileDataStoreFactory DATA_STORE_FACTORY;
+    private static FileDataStoreFactory dataStoreFactory;
 
     /** Global instance of the JSON factory. */
     private static final JsonFactory JSON_FACTORY =
         JacksonFactory.getDefaultInstance();
 
     /** Global instance of the HTTP transport. */
-    private static HttpTransport HTTP_TRANSPORT;
+    private static HttpTransport httpTransport;
 
     /** Global instance of the scopes required by this quickstart.
      *
@@ -32,8 +33,8 @@ public class GoogleCalendar {
 
     static {
         try {
-            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+            httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+            dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
@@ -55,13 +56,13 @@ public class GoogleCalendar {
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder(
-                        HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-                .setDataStoreFactory(DATA_STORE_FACTORY)
+                        httpTransport, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(dataStoreFactory)
                 .setAccessType("offline")
                 .build();
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        logger.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+        logger.info("Credentials saved to " + dataStoreDir.getAbsolutePath());
         return credential;
     }
 
@@ -74,13 +75,30 @@ public class GoogleCalendar {
         getCalendarService() throws IOException {
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
-                HTTP_TRANSPORT, JSON_FACTORY, credential)
+                httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
 
 ```
-###### /java/seedu/task/logic/parser/GetGoogleCalendarCommandParser.java
+###### \java\seedu\task\logic\commands\SmartAddCommand.java
+``` java
+    @Override
+    public CommandResult execute() throws CommandException {
+        assert model != null;
+        try {
+            model.addTask(toAdd);
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+    }
+
+}
+```
+###### \java\seedu\task\logic\parser\GetGoogleCalendarCommandParser.java
 ``` java
 public class GetGoogleCalendarCommandParser extends CommandParser {
 
@@ -91,7 +109,7 @@ public class GetGoogleCalendarCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/PostGoogleCalendarCommandParser.java
+###### \java\seedu\task\logic\parser\PostGoogleCalendarCommandParser.java
 ``` java
 public class PostGoogleCalendarCommandParser extends CommandParser {
 
@@ -106,7 +124,7 @@ public class PostGoogleCalendarCommandParser extends CommandParser {
     }
 }
 ```
-###### /java/seedu/task/logic/parser/RedoCommandParser.java
+###### \java\seedu\task\logic\parser\RedoCommandParser.java
 ``` java
 public class RedoCommandParser extends CommandParser {
 
@@ -117,7 +135,41 @@ public class RedoCommandParser extends CommandParser {
 
 }
 ```
-###### /java/seedu/task/logic/parser/UndoCommandParser.java
+###### \java\seedu\task\logic\parser\SmartAddCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new QuickAddCommand object
+ */
+public class SmartAddCommandParser extends CommandParser {
+
+    private String remark;
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the
+     * QuickAddCommand and returns an QuickAddCommand object for execution.
+     */
+    @Override
+    public Command parse(String args) {
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_REMARK, PREFIX_TAG);
+        argsTokenizer.tokenize(args);
+        Map<Prefix, List<String>> tokenizedArguments = argsTokenizer.getTokenizedArguments();
+        remark = tokenizedArguments.containsKey(PREFIX_REMARK) ? argsTokenizer.getValue(PREFIX_REMARK).get()
+                : "";
+        try {
+            return new SmartAddCommand(argsTokenizer.getPreamble().get().replace("\\", ""), remark.replace("\\", ""),
+                    ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
+        } catch (NoSuchElementException nsee) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SmartAddCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        } catch (IOException ioe) {
+            return new IncorrectCommand(ioe.getMessage());
+        }
+    }
+
+}
+```
+###### \java\seedu\task\logic\parser\UndoCommandParser.java
 ``` java
 public class UndoCommandParser extends CommandParser {
 

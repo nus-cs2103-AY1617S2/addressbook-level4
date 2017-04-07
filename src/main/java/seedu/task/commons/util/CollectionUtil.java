@@ -48,13 +48,20 @@ public class CollectionUtil {
      * Returns true if the given string is found in the given collection
      */
     public static boolean doesAnyStringMatch(Collection<String> words, String keyword) {
-        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword));
+        return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword.trim()));
+    }
+
+    // @@author A0142487Y
+    /*
+     * Returns true if the given sentence has at least one word that matches the given keywords
+     */
+    public static boolean doesAnyStringMatch(Collection<String> sentence, Collection<String> keywords) {
+        return keywords.stream().anyMatch(s -> CollectionUtil.doesAnyMatch(sentence, s));
     }
 
     // @@author
     /**
-     * Returns true if every element in a collection are unique by
-     * {@link Object#equals(Object)}.
+     * Returns true if every element in a collection are unique by {@link Object#equals(Object)}.
      */
     public static boolean elementsAreUnique(Collection<?> items) {
         final Set<Object> testSet = new HashSet<>();

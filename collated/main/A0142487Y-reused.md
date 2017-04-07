@@ -1,5 +1,5 @@
 # A0142487Y-reused
-###### /java/seedu/task/MainApp.java
+###### \java\seedu\task\MainApp.java
 ``` java
     protected UserPrefs initPrefs(Config config) {
         assert config != null;
@@ -32,39 +32,40 @@
     }
 
 ```
-###### /java/seedu/task/model/ModelManager.java
+###### \java\seedu\task\model\ModelManager.java
 ``` java
     private class TagQualifier implements Qualifier {
 
-        private String tagKeyWord;
+        private String tagKeyword;
 
         TagQualifier(String tagKeyWord) {
-            this.tagKeyWord = tagKeyWord;
+            this.tagKeyword = tagKeyWord;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyWord);
+            return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
         @Override
         public String toString() {
-            return "Tag=" +  tagKeyWord;
+            return "Tag = " + tagKeyword;
         }
     }
 
 ```
-###### /java/seedu/task/ui/BrowserPanel.java
+###### \java\seedu\task\ui\BrowserPanel.java
 ``` java
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
      */
-    public BrowserPanel(AnchorPane placeholder, String fxml) {
-        super(fxml);
+    public BrowserPanel(AnchorPane placeholder, String...fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+        loadPage();
     }
 
 //    public void loadTaskPage(ReadOnlyTask task) {
@@ -72,19 +73,19 @@
 //    }
 
 ```
-###### /java/seedu/task/ui/CommandBox.java
+###### \java\seedu\task\ui\CommandBox.java
 ``` java
-    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String fxml) {
-        super(fxml);
+    public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String...fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
     }
 
 ```
-###### /java/seedu/task/ui/MainWindow.java
+###### \java\seedu\task\ui\MainWindow.java
 ``` java
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String fxml) {
-        super(fxml);
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -101,14 +102,13 @@
         primaryStage.setScene(scene);
 
         setAccelerators();
-        setScroll();
     }
 
 ```
-###### /java/seedu/task/ui/ResultDisplay.java
+###### \java\seedu\task\ui\ResultDisplay.java
 ``` java
-    public ResultDisplay(AnchorPane placeHolder, String fxml) {
-        super(fxml);
+    public ResultDisplay(AnchorPane placeHolder, String...fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         resultDisplay.textProperty().bind(displayed);
         FxViewUtil.applyAnchorBoundaryParameters(resultDisplay, 0.0, 0.0, 0.0, 0.0);
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
@@ -117,10 +117,10 @@
     }
 
 ```
-###### /java/seedu/task/ui/StatusBarFooter.java
+###### \java\seedu\task\ui\StatusBarFooter.java
 ``` java
-    public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String fxml) {
-        super(fxml);
+    public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String...fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         addToPlaceholder(placeHolder);
         setSyncStatus("Not updated yet in this session");
         setSaveLocation("./" + saveLocation);
@@ -128,54 +128,18 @@
     }
 
 ```
-###### /java/seedu/task/ui/TaskCard.java
+###### \java\seedu\task\ui\TaskListPanel.java
 ``` java
-    public TaskCard(ReadOnlyTask task, int displayedIndex, String fxml) {
-        super(fxml);
-//        plane.setText(displayedIndex + ". " + task.getName().fullName);
-//        plane.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        //plane.setCollapsible(true);
-      //prohibit animating
-     // plane.setAnimated(false);
-        plane.setExpanded(false);
-        this.status = false;
-        name.setText(displayedIndex + ". " + task.getName().fullName);
-        name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        //id.setText(displayedIndex + ". ");
-        startDate.setText(task.getStartDate().toString());
-        endDate.setText(task.getEndDate().toString());
-        loc.setText(task.getLocation().value);
-        if (task.isDone()) {
-            //done.setText("Done");
-            name.setTextFill(Color.GREEN);
-            Image image = new Image(MainApp.class.getResourceAsStream("/images/tick.png"));
-            name.setGraphic(new ImageView(image));
-            name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        } else {
-            //done.setText("Not Done");
-            //done.setTextFill(Color.RED);
-            //Image image = new Image(MainApp.class.getResourceAsStream("/images/cross.png"));
-            //name.setGraphic(new ImageView(image));
-            //name.setContentDisplay(ContentDisplay.RIGHT);
-            //done.setFont(Font.font("Verdana", FontWeight.BOLD,20));
-        }
-        remark.setText(task.getRemark().value);
-        initTags(task);
-    }
-```
-###### /java/seedu/task/ui/TaskListPanel.java
-``` java
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, String fxml,
-            Theme theme) {
-        super(fxml);
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, Theme theme,
+            String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
         this.theme = theme;
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
 
 ```
-###### /resources/view/CommandBoxDark.fxml
+###### \resources\view\CommandBoxDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextField?>
@@ -193,7 +157,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### /resources/view/CommandBoxLight.fxml
+###### \resources\view\CommandBoxLight.fxml
 ``` fxml
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
@@ -203,16 +167,13 @@
 </AnchorPane>
 
 ```
-###### /resources/view/DarkTheme.css
+###### \resources\view\DarkTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#1d1d1d, 20.0%);
 }
 
 .label {
-    //-fx-font-size: 11pt;
-    //-fx-font-family: "Segoe UI Semibold";
-    //-fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
@@ -309,7 +270,6 @@
 }
 
 .list-cell .label {
-    //-fx-text-fill: #010504;
 }
 
 .cell_big_label {
@@ -567,7 +527,7 @@
 
 
 ```
-###### /resources/view/MainWindowDark.fxml
+###### \resources\view\MainWindowDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -643,7 +603,7 @@
    </children>
 </VBox>
 ```
-###### /resources/view/MainWindowLight.fxml
+###### \resources\view\MainWindowLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -723,7 +683,7 @@
    </stylesheets>
 </VBox>
 ```
-###### /resources/view/ResultDisplayDark.fxml
+###### \resources\view\ResultDisplayDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
@@ -748,7 +708,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### /resources/view/ResultDisplayLight.fxml
+###### \resources\view\ResultDisplayLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
@@ -768,7 +728,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### /resources/view/StatusBarFooterDark.fxml
+###### \resources\view\StatusBarFooterDark.fxml
 ``` fxml
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.StatusBar?>
@@ -783,7 +743,7 @@
  </children>
 </GridPane>
 ```
-###### /resources/view/StatusBarFooterLight.fxml
+###### \resources\view\StatusBarFooterLight.fxml
 ``` fxml
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.StatusBar?>
@@ -798,7 +758,7 @@
  </children>
 </GridPane>
 ```
-###### /resources/view/TaskListCardDark.fxml
+###### \resources\view\TaskListCardDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -861,7 +821,7 @@
    </stylesheets>
 </HBox>
 ```
-###### /resources/view/TaskListCardLight.fxml
+###### \resources\view\TaskListCardLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -920,7 +880,7 @@
    </stylesheets>
 </HBox>
 ```
-###### /resources/view/TaskListPanelDark.fxml
+###### \resources\view\TaskListPanelDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
@@ -940,7 +900,7 @@
     </children>
 </VBox>
 ```
-###### /resources/view/TaskListPanelLight.fxml
+###### \resources\view\TaskListPanelLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>

@@ -30,6 +30,10 @@ public class CommandBoxHandle extends GuiHandle {
         return getTextFieldText(COMMAND_INPUT_FIELD_ID);
     }
 
+    public void clear() {
+        setTextField(COMMAND_INPUT_FIELD_ID, "");
+    }
+
     /**
      * Enters the given command in the Command Box and presses enter.
      */

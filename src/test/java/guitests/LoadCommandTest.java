@@ -15,7 +15,7 @@ import seedu.task.testutil.TestUtil;
 public class LoadCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void save() {
+    public void load() {
         //loads a directory
         commandBox.runCommand("load data");
         assertResultMessage(String.format(MESSAGE_FAILURE_DIRECTORY, "data"));

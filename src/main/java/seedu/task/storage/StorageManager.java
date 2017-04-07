@@ -80,10 +80,10 @@ public class StorageManager extends ComponentManager implements Storage {
         }
 
     }
+  //@@author
 
     // ================ TaskManager methods ==============================
 
-    //@@author
     @Override
     public String getTaskManagerFilePath() {
         return taskManagerStorage.getTaskManagerFilePath();
@@ -125,7 +125,7 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveBackup(backupFilePath);
     }
 
-    //@@author
+    //@@author A0142939W
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {

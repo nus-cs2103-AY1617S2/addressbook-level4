@@ -3,6 +3,7 @@ package seedu.task.ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,17 +17,18 @@ import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
+import seedu.task.model.task.ReadOnlyTask;
 
 /**
- * The Main Window. Provides the basic application layout containing a menu bar
- * and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
+ * can be placed.
  */
 public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/capital-K icon.png";
     private static final String FXML = "MainWindowDefault.fxml";
-    protected static final String FXML_Light = "MainWindowLight.fxml";
-    protected static final String FXML_Dark = "MainWindowDark.fxml";
+    protected static final String FXML_LIGHT = "MainWindowLight.fxml";
+    protected static final String FXML_DARK = "MainWindowDark.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
@@ -89,8 +91,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML);
+    // @@author A0142487Y-reused
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String... fxml) {
+        super(fxml.length == 0 ? FXML : fxml[0]);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -108,29 +111,8 @@ public class MainWindow extends UiPart<Region> {
 
         setAccelerators();
     }
-  //@@author A0142487Y-reused
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String fxml) {
-        super(fxml);
 
-        // Set dependencies
-        this.primaryStage = primaryStage;
-        this.logic = logic;
-        this.config = config;
-        this.userPrefs = prefs;
-
-        // Configure the UI
-        setTitle(config.getAppTitle());
-        setIcon(ICON);
-        setWindowMinSize();
-        setWindowDefaultSize(prefs);
-        Scene scene = new Scene(getRoot());
-        primaryStage.setScene(scene);
-
-        setAccelerators();
-        setScroll();
-    }
-
-    //@@author
+    // @@author
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -149,8 +131,8 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(quickScrollUpMenuItem, KeyCombination.valueOf("SHIFT+UP"));
     }
 
-    private void setScroll() {
-        scroll = new Scroll();
+    private void setScroll(ListView<ReadOnlyTask> taskListView) {
+        scroll = new Scroll(taskListView);
     }
 
     /**
@@ -164,18 +146,14 @@ public class MainWindow extends UiPart<Region> {
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later
-         * version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later version of SDK.
          *
-         * According to the bug report, TextInputControl (TextField, TextArea)
-         * will consume function-key events. Because CommandBox contains a
-         * TextField, and ResultDisplay contains a TextArea, thus some
-         * accelerators (e.g F1) will not work when the focus is in them because
-         * the key event is consumed by the TextInputControl(s).
+         * According to the bug report, TextInputControl (TextField, TextArea) will consume function-key events. Because
+         * CommandBox contains a TextField, and ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+         * not work when the focus is in them because the key event is consumed by the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and
-         * open help window purposely so to support accelerators even when focus
-         * is in CommandBox or ResultDisplay.
+         * For now, we add following event filter to capture such key events and open help window purposely so to
+         * support accelerators even when focus is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -184,32 +162,34 @@ public class MainWindow extends UiPart<Region> {
             }
         });
     }
-  //@@author A0142487Y
-    void fillInnerParts() {
+
+    // @@author A0142487Y
+    protected void fillInnerParts() {
         switch (this.userPrefs.getTheme()) {
         case Dark:
             taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
-                    TaskListPanel.FXML_Dark, this.userPrefs.getTheme());
-            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_Dark);
-            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_Dark);
+                    this.userPrefs.getTheme(), TaskListPanel.FXML_DARK);
+            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_DARK);
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_DARK);
             break;
         case Light:
             taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(),
-                    TaskListPanel.FXML_Light, this.userPrefs.getTheme());
-            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_Light);
-            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_Light);
+                    this.userPrefs.getTheme(), TaskListPanel.FXML_LIGHT);
+            new ResultDisplay(getResultDisplayPlaceholder(), ResultDisplay.FXML_LIGHT);
+            commandBox = new CommandBox(getCommandBoxPlaceholder(), logic, CommandBox.FXML_LIGHT);
             break;
         default:
-            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+            taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList(), Theme.Default);
             new ResultDisplay(getResultDisplayPlaceholder());
             commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
             break;
         }
         browserPanel = new BrowserPanel(browserPlaceholder);
+        setScroll(taskListPanel.getTaskListView());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
     }
 
-    //@@author
+    // @@author
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -226,7 +206,7 @@ public class MainWindow extends UiPart<Region> {
         return taskListPanelPlaceholder;
     }
 
-    void hide() {
+    protected void hide() {
         primaryStage.hide();
     }
 
@@ -275,6 +255,7 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    //@@author A0142939W
     @FXML
     public void handleHelpFormat() {
         HelpFormatWindow helpFormatWindow = new HelpFormatWindow();
@@ -304,14 +285,13 @@ public class MainWindow extends UiPart<Region> {
     }
 
     public void handleSave() {
-        commandBox.type("save");
+        commandBox.type("save ");
     }
 
     public void handleLoad() {
         commandBox.type("load ");
     }
 
-    //@@author A0142939W
     @FXML
     public void handleScrollDown() {
         taskListPanel.scrollDown(scroll);
@@ -321,9 +301,9 @@ public class MainWindow extends UiPart<Region> {
     public void handleScrollUp() {
         taskListPanel.scrollUp(scroll);
     }
-    //@@author
+    // @@author
 
-    void show() {
+    protected void show() {
         primaryStage.show();
     }
 
@@ -335,17 +315,11 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    //@@author A0142939W
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
-    public void setFocus() {
-        commandBox.requestFocus();
-    }
-
-//    void loadTaskPage(ReadOnlyTask task) {
-//        browserPanel.loadTaskPage(task);
-//    }
+    //@@author
 
     void releaseResources() {
         browserPanel.freeResources();

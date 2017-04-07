@@ -1,32 +1,50 @@
 # A0139975J-reused
-###### /java/seedu/task/model/ModelManager.java
+###### \java\seedu\task\logic\parser\ListCommandParser.java
+``` java
+public class ListCommandParser extends CommandParser {
+
+
+    @Override
+    public Command parse(String args) {
+        // TODO Auto-generated method stub
+        assert args != null;
+        return new ListCommand(args);
+    }
+
+}
+```
+###### \java\seedu\task\model\ModelManager.java
 ``` java
     @Override
     public void updateFilteredTaskList(boolean value) {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
-
 ```
-###### /java/seedu/task/model/ModelManager.java
+###### \java\seedu\task\model\ModelManager.java
 ``` java
-    @Override
-    public void updateFilteredTaskList(Date date) {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    // @Override
+    // public void updateFilteredTaskList(Date date) {
+    // updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    // }
 
+    @Override
+    public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
+        // TODO Auto-generated method stub
+        updateFilteredTaskList(new PredicateExpression(new StringAndDateQualifier(keywords, date)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
-    //========== Inner classes/interfaces used for filtering =================================================
+    // ========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
+
         @Override
         String toString();
     }
-
 
     private class PredicateExpression implements Expression {
 
@@ -49,12 +67,13 @@
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);
+
         @Override
         String toString();
     }
 
 ```
-###### /java/seedu/task/ui/TaskListPanel.java
+###### \java\seedu\task\ui\TaskListPanel.java
 ``` java
         @Override
         protected void updateItem(ReadOnlyTask task, boolean empty) {
@@ -67,10 +86,10 @@
                 TaskCard taskcard = null;
                 switch (TaskListPanel.this.theme) {
                 case Dark:
-                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Dark);
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_DARK);
                     break;
                 case Light:
-                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_Light);
+                    taskcard = new TaskCard(task, getIndex() + 1, TaskCard.FXML_LIGHT);
                     break;
                 default:
                     taskcard = new TaskCard(task, getIndex() + 1);
@@ -82,18 +101,14 @@
         }
     }
 
-}
 ```
-###### /resources/view/DefaultTheme.css
+###### \resources\view\DefaultTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .label {
-    //-fx-font-size: 11pt;
-    //-fx-font-family: "Segoe UI Semibold";
-    //-fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
@@ -182,7 +197,6 @@
 }
 
 .list-cell .label {
-    //-fx-text-fill: #010504;
 }
 
 .cell_big_label {
@@ -399,7 +413,7 @@
     -fx-font-size: 16;
 }
 ```
-###### /resources/view/TaskListCardDefault.fxml
+###### \resources\view\TaskListCardDefault.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>

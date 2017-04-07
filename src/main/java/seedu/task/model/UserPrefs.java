@@ -19,8 +19,6 @@ public class UserPrefs {
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
         updateLastUsedGuiSetting(guiSettings, this.theme);
-//        this.guiSettings = guiSettings;
-//        this.theme = Theme.Default;
     }
 
     public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
@@ -43,11 +41,11 @@ public class UserPrefs {
         this.theme = Theme.getTheme(themeName);
     }
 
-    // @@author A0142487Y
     public Theme getTheme() {
         return this.theme;
     }
 
+    // @@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {

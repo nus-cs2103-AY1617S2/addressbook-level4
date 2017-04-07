@@ -14,6 +14,7 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     Remark getRemark();
     Location getLocation();
     boolean isDone();
+    String getEventId();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -40,15 +41,15 @@ public interface ReadOnlyTask extends Comparable<ReadOnlyTask> {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Start Date: ")
+                .append("\nStart Date: ")
                 .append(getStartDate())
-                .append(" End Date: ")
+                .append("\nEnd Date: ")
                 .append(getEndDate())
-                .append(" Remark: ")
+                .append("\nRemark: ")
                 .append(getRemark())
-                .append(" Location: ")
+                .append("\nLocation: ")
                 .append(getLocation())
-                .append(" Tags: ");
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
