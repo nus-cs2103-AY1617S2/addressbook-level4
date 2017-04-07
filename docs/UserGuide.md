@@ -450,10 +450,6 @@ Format: `changetheme [THEMENAME]`
 > * If THEMENAME is specified and correct, KIT will change its theme and after restart you will see the changed theme.
 > * KIT currently supports three themes: Default, Light and Dark.
 
-> <img src="images/default.png" width="600">
-> <img src="images/light.png" width="600">
-> <img src="images/dark.png" width="600">
-
 ## 4. FAQ
 
 **Q**: Does KIT support Windows 10? <br>
