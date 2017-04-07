@@ -94,7 +94,16 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0140063X
-    public void setTaskEventId(int index, String eventId) {
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
+        assert target != null;
+
+        if (!contains(target)) {
+            throw new TaskNotFoundException();
+        }
+
+        int index = internalList.indexOf(target);
+
         Task task = internalList.get(index);
         task.setEventId(eventId);
         internalList.set(index, task);

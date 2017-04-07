@@ -105,7 +105,7 @@ public class PostGoogleCalendarCommand extends Command {
 
             if (taskToPost.getEventId().trim().isEmpty()) {
                 event = service.events().insert(GoogleCalendar.CALENDAR_ID, event).execute();
-                setTaskEventId(index, event.getId());
+                setTaskEventId(taskToPost, event.getId());
 
                 logger.info(String.format("Event created: %s\n", event.getHtmlLink()));
             } else {
@@ -121,9 +121,10 @@ public class PostGoogleCalendarCommand extends Command {
         return taskToPost;
     }
 
-    private void setTaskEventId(int index, String eventId) {
+    private void setTaskEventId(ReadOnlyTask taskToPost, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
         assert model != null;
-        model.setTaskEventId(index, eventId);
+        model.setTaskEventId(taskToPost, eventId);
     }
 
 }

@@ -115,9 +115,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0140063X
     @Override
-    public void setTaskEventId(int index, String eventId) {
-        int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.setTaskEventId(taskManagerIndex, eventId);
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
+        taskManager.setTaskEventId(target, eventId);
         indicateTaskManagerChanged("");
     }
 
@@ -136,7 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 taskManager.addTaskToFront(task);
             } catch (DuplicateTaskException e) {
-                logger.info("Duplicate task " + task.getName() + " from google calendar not added.");
+                logger.info("Duplicate task " + task.getName() + " not added.");
             }
         }
 

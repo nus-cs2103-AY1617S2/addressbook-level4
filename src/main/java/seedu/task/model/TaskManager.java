@@ -209,8 +209,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     //@@author A0140063X
-    public void setTaskEventId(int index, String eventId) {
-        tasks.setTaskEventId(index, eventId);
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws UniqueTaskList.TaskNotFoundException, IllegalValueException {
+        tasks.setTaskEventId(target, eventId);
     }
 
     //@@author

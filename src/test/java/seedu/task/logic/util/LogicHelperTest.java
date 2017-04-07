@@ -31,7 +31,7 @@ public class LogicHelperTest {
     private Event testEvent = createEvent(name, start, end, remark, location);
 
     @Test
-    public void createTaskFromEvent() throws IllegalValueException {
+    public void createTaskFromEvent_validEvent_success() throws IllegalValueException {
         //event with full details
         TestTask testTask = new TaskBuilder().withName(name)
                 .withStartDate(start).withEndDate(end)
@@ -46,7 +46,12 @@ public class LogicHelperTest {
         testTask.setLocation(new Location(""));
         assertCreateTaskFromEvent(testTask, testEvent);
 
-        //event with no summary should throw exception
+
+    }
+
+    //event with no summary should throw exception
+    @Test
+    public void createTaskFromEvent_noSummary_exceptionThrown() throws IllegalValueException {
         testEvent.setSummary(null);
         exception.expect(IllegalValueException.class);
         LogicHelper.createTaskFromEvent(testEvent);
@@ -54,7 +59,7 @@ public class LogicHelperTest {
     }
 
     @Test
-    public void createEventFromTask() throws IllegalValueException {
+    public void createEventFromTask_validTask_success() throws IllegalValueException {
         //task with full details
         TestTask testTask = new TaskBuilder().withName(name)
                 .withStartDate(start).withEndDate(end)

@@ -10,6 +10,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -37,7 +38,7 @@ public interface Model {
 
     //@@author A0140063X
     /** Sets the eventId of task */
-    void setTaskEventId(int index, String eventId);
+    void setTaskEventId(ReadOnlyTask target, String eventId) throws TaskNotFoundException, IllegalValueException;
 
     //@@author
     /** Adds the given Task. */
