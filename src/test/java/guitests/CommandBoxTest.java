@@ -15,7 +15,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
     //@@author A0142255M
-    private static final String EMPTY_COMMAND = "";
+    private static final String COMMAND_EMPTY = "";
     //@@author
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -33,29 +33,42 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void commandBoxCommandSucceedsTextClearedAndStyleClassRemainsTheSame() {
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+    public void commandBox_startingWithSuccessfulCommand() {
+        assertBehaviorForSuccessfulCommand();
+        assertBehaviorForFailedCommand();
     }
 
     @Test
-    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
+    public void commandBox_startingWithFailedCommand() {
+        assertBehaviorForFailedCommand();
+        assertBehaviorForSuccessfulCommand();
+
+        // verify that style is changed correctly even after multiple consecutive successful/failed commands
+        assertBehaviorForSuccessfulCommand();
+        assertBehaviorForFailedCommand();
+        assertBehaviorForFailedCommand();
+        assertBehaviorForSuccessfulCommand();
+    }
+
+    /**
+     * Runs a command that fails, then verifies that text remains
+     * and that command box has only one ERROR_STYLE_CLASS, with other style classes untouched.
+     */
+    private void assertBehaviorForFailedCommand() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
-    @Test
-    public void commandBoxCommandSucceedsAfterFailedCommandTextClearedAndErrorStyleClassRemoved() {
-        // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-
+    /**
+     * Runs a command that succeeds, then verifies that text is cleared
+     * and that command box does not have any ERROR_STYLE_CLASS, with style classes the same as default.
+     */
+    private void assertBehaviorForSuccessfulCommand() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
-        assertEquals("", commandBox.getCommandInput());
+        assertEquals(COMMAND_EMPTY, commandBox.getCommandInput());
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 

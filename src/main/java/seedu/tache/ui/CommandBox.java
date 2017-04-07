@@ -7,6 +7,7 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
@@ -147,7 +148,11 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
+        ObservableList<String> styleClass = commandTextField.getStyleClass();
+        if (styleClass.contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+        styleClass.add(ERROR_STYLE_CLASS);
     }
 
 }

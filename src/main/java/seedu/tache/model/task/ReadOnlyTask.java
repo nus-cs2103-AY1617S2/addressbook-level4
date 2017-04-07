@@ -56,7 +56,6 @@ public interface ReadOnlyTask {
                 && (other.getTimedStatus() == this.getTimedStatus())
                 && (other.getRecurringStatus() == this.getRecurringStatus())
                 && other.getRecurInterval().equals(this.getRecurInterval())
-                && other.getRecurCompletedList().equals(this.getRecurCompletedList())
                 && other.getRecurDisplayDate().equals(this.getRecurDisplayDate())
                 && other.isMasterRecurring() == this.isMasterRecurring());
     }

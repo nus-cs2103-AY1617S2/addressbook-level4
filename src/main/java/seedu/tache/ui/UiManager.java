@@ -24,7 +24,6 @@ import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
-import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.UserPrefs;
