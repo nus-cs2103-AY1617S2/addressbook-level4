@@ -1,5 +1,6 @@
 package seedu.task.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -8,6 +9,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.task.MainApp;
 import seedu.task.commons.core.ComponentManager;
@@ -46,6 +48,8 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Starting UI...");
         primaryStage.setTitle(config.getAppTitle());
 
+        //load fonts
+        loadFonts();
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
@@ -59,6 +63,21 @@ public class UiManager extends ComponentManager implements Ui {
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
+
+    //@@author A0141928B
+    /**
+     * Load all the fonts in the resources/fonts folder
+     */
+    public void loadFonts() {
+        File[] fonts = new File("src/main/resources/fonts").listFiles(); //Get all files in the folder
+
+        if (fonts != null) {
+            for (File font : fonts) {
+                Font.loadFont(getClass().getResourceAsStream("/fonts/" + font.getName()), 100);
+            }
+        }
+    }
+    //@@author
 
     @Override
     public void stop() {
