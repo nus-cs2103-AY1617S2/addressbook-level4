@@ -85,7 +85,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setAutocomplete() {
         String[] possibleCommands = {"add ", "clear", "complete ", "delete ", "edit ", "exit", "find ",
-                                        "help", "list", "save ", "select ", "load ", "undo" };
+                                        "help", "list", "save ", "select ", "load ", "undo", "next", "prev", "view " };
         AutoCompletionBinding<String> binding = TextFields.bindAutoCompletion(commandTextField, sr -> {
             ArrayList<String> commands = new ArrayList<String>();
             for (String str : possibleCommands) {

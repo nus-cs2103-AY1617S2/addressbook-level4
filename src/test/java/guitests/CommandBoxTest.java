@@ -77,14 +77,14 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     public void commandBox_autocompleteWithEnterKey_success() {
         commandBox.enterCommand("del");
         commandBox.pressEnter();
-        assertEquals(commandBox.getCommandInput(), "delete ");
+        assertCommandInput("delete ");
     }
 
     @Test
     public void commandBox_autocompleteLexicographicallySmallerCommand_success() {
         commandBox.enterCommand("e"); // autocomplete options: edit or exit
         commandBox.pressEnter();
-        assertEquals(commandBox.getCommandInput(), "edit ");
+        assertCommandInput("edit ");
     }
 
     @Test
@@ -92,12 +92,12 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         // succeeded command
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
         commandBox.pressUp();
-        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_SUCCEEDS);
+        assertCommandInput(COMMAND_THAT_SUCCEEDS);
 
         // failed command
         commandBox.runCommand(COMMAND_THAT_FAILS);
         commandBox.pressUp();
-        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_FAILS);
+        assertCommandInput(COMMAND_THAT_FAILS);
     }
 
     @Test
@@ -107,7 +107,16 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         commandBox.pressUp(); // "list uncompleted"
         commandBox.pressUp(); // "list completed"
         commandBox.pressDown();
-        assertEquals(commandBox.getCommandInput(), "list uncompleted");
+        assertCommandInput("list uncompleted");
+    }
+
+    /**
+     * Verifies that text in command box is correct.
+     *
+     * @param input    expected text
+     */
+    private void assertCommandInput(String input) {
+        assertEquals(commandBox.getCommandInput(), input);
     }
 
 }

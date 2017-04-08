@@ -6,7 +6,15 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import seedu.tache.logic.commands.LoadCommand;
+import seedu.tache.logic.commands.SaveCommand;
+import seedu.tache.testutil.TestUtil;
+
 public class StatusBarFooterTest extends TaskManagerGuiTest {
+
+    public final String saveFolder1 = TestUtil.SANDBOX_FOLDER + "saveTest1";
+    public final String saveFolder2 = TestUtil.SANDBOX_FOLDER + "saveTest2";
+    public final String fileName = "\\taskmanager.xml";
 
     @Test
     public void showSyncStatus() {
@@ -17,6 +25,19 @@ public class StatusBarFooterTest extends TaskManagerGuiTest {
         commandBox.runCommand("clear");
         String dataSavedIndicator = statusBarFooter.getSyncStatus().getText().substring(0, 14);
         assertEquals(dataSavedIndicator, "Last Updated: ");
+    }
+
+    @Test
+    public void showSaveLocation() {
+        // save command
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1);
+        String filePath = saveFolder1 + fileName;
+        assertEquals(statusBarFooter.getSaveLocationStatus().getText(), "New Location: " + filePath);
+
+        // load command
+        commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder2 + fileName);
+        filePath = saveFolder2 + fileName;
+        assertEquals(statusBarFooter.getSaveLocationStatus().getText(), "New Location: " + filePath);
     }
 
 }

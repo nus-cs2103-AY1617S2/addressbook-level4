@@ -217,29 +217,30 @@ Functions of `UI`:
 The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts
 (e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`). All these, including the `MainWindow`, inherit from the abstract `UiPart` class. <br>
 
-The `UI` component uses the _JavaFX UI_ framework. <br>
-The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
-For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+The `UI` component uses the _JavaFX UI_ framework. Hence, the layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in 
 [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). <br>
 
 #### Design Patterns
 
 * Model-View-Controller (MVC) Pattern
 
-  > Model: the [Model](#34-model-component) component
-  > View: the .fxml files in the src/main/resources/view folder
-  > Controller: subclasses of UiPart (e.g. `TaskListPanel`)
+  > Model: the [Model](#34-model-component) component <br>
+  > View: the .fxml files in the src/main/resources/view folder <br>
+  > Controller: subclasses of UiPart (e.g. `TaskListPanel`) <br>
 
 * Observer Pattern
 
-  > Observers: objects that are registered with the EventsCenter and have the @Subscribe annotation
-  > Observable: classes that raise events for the EventsCenter to notify all relevant subscibers
+  > Observers: objects that are registered with the EventsCenter and have the @Subscribe annotation <br>
+  > Observable: classes that raise events for the EventsCenter to notify all relevant subscibers <br>
 
 #### CalendarPanel
 
 The purpose of the `CalendarPanel` is to provide users with an overview of their [timed tasks](#timed-task) for the day, week or month.
 Instead of implementing the functionality of a calendar from scratch, a JavaScript jQuery plug-in for an event calendar,
-[FullCalendar](https://fullcalendar.io), is loaded using a JavaFX WebEngine. <br>
+[FullCalendar](https://fullcalendar.io), is loaded using a JavaFX WebEngine. Its layout is defined in a `.html` file. <br>
+
 The calendar is updated whenever there are relevant changes made to the task manager.
 
 * For example, this is what happens when a [timed task](#timed-task) is selected:
