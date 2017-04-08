@@ -17,6 +17,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 public class TerminateCommand extends Command {
 
     private static final int INDEX_ZERO = 0;
+    private static final int INDEX_ONE = 1;
+    private static final String NUMBERING_DOT = ". ";
     public static final String COMMAND_WORD = "terminate";
     public static final String COMMAND_WORD_SHORT = "t";
 
@@ -27,7 +29,7 @@ public class TerminateCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS = "recurring tasks marked done: %1$s";
+    public static final String MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS = "recurring tasks marked done: \n%1$s";
     public static final String DONE = "Done";
     public static final String ERROR_TASK_NOT_RECURRING = "All tasks indicated should be recurring";
     public static final String ERROR_TERMINATED_TASK = "The task was terminated previously";
@@ -62,7 +64,8 @@ public class TerminateCommand extends Command {
         model.end(filteredTaskListIndices, recurringTasksToMarkDone);
 
         scrollToTask(recurringTasksToMarkDone);
-        return new CommandResult(String.format(MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS, recurringTasksToMarkDone));
+        return new CommandResult(String.format(MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredTasksToTerminateFormat()));
     }
 
     /**
@@ -76,4 +79,17 @@ public class TerminateCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
     }
 
+    /**
+     * Returns a formatted {@code ArrayList} tasksToDelete,
+     * so that each ReadOnlyTask in the ArrayList is numbered
+     */
+    private String getDesiredTasksToTerminateFormat() {
+        int i = INDEX_ONE;
+        StringBuilder builder = new StringBuilder();
+        for (ReadOnlyTask task : recurringTasksToMarkDone) {
+            builder.append(i + NUMBERING_DOT).append(task.toString());
+            i++;
+        }
+        return builder.toString();
+    }
 }
