@@ -30,6 +30,7 @@ public class CompleteCommandTest extends AddressBookGuiTest {
 
     @Test
     public void completeSuccess() throws IllegalValueException {
+        commandBox.runCommand("clear");
         for (int i = 0; i < currentList.length; i++) {
             commandBox.runCommand(currentList[i].getAddCommand());
         }
