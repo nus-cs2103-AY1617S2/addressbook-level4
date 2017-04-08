@@ -1,5 +1,6 @@
 package org.teamstbf.yats.model.item;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Objects;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
+
+import com.joestelmach.natty.generated.DateParser.hours_return;
 
 public class Event implements ReadOnlyEvent {
 
@@ -21,6 +24,8 @@ public class Event implements ReadOnlyEvent {
     public static final int INDEX_FIRST_DATE = 0;
     public static final int INDEX_SECOND_DATE = 1;
     public static final int INITIALPRIORITY = 1;
+    public static final int STEP_START_TIME = -2;
+    public static final int STEP_END_TIME = 2;
 
     private Title name;
     private Schedule startTime;
@@ -111,30 +116,38 @@ public class Event implements ReadOnlyEvent {
     }
 
     private void fillStartEndDateAndDeadline(HashMap<String, Object> parameters) throws IllegalValueException {
-	// check number of time group, if>2, throws exception
-	if (parameters.get("time") != null) {
-	    List<Date> dateList = (List<Date>) parameters.get("time");
-	    if (dateList.size() > SIZE_EVENT_TASK) {
-		throw new IllegalValueException(MESSAGE_TOO_MANY_TIME);
-	    } else if (dateList.size() == SIZE_EVENT_TASK) {
-		// event task with start and end time
-		this.startTime = new Schedule(dateList.get(INDEX_FIRST_DATE));
-		this.endTime = new Schedule(dateList.get(INDEX_SECOND_DATE));
-		this.deadline = new Schedule("");
-	    } else if (dateList.size() == SIZE_DEADLINE_TASK) {
-		// deadline task with only end time
-		this.startTime = new Schedule("");
-		this.endTime = new Schedule("");
-		this.deadline = new Schedule(dateList.get(INDEX_FIRST_DATE));
-	    } else {
-		throw new IllegalValueException(MESSAGE_INVALID_TIME);
-	    }
-	} else {
-	    // floating task with no time
-	    this.startTime = new Schedule("");
-	    this.endTime = new Schedule("");
-	    this.deadline = new Schedule("");
-	}
+        //set start and end if present
+        if (parameters.get("start") != null) {
+            this.startTime = new Schedule((Date) parameters.get("start"));
+        } else {
+            this.startTime = new Schedule("");
+        }
+        if (parameters.get("end") != null) {
+            this.endTime = new Schedule((Date) parameters.get("end"));
+        } else {
+            this.endTime = new Schedule("");
+        }
+        //set deadline if present
+        if (parameters.get("deadline") != null) {
+            this.deadline = new Schedule((Date) parameters.get("deadline"));
+        } else {
+            this.deadline = new Schedule("");
+        }
+        //assign default end if only start is given
+        if (parameters.get("start") != null && parameters.get("end") == null) {
+            this.endTime = new Schedule(addHoursToDate(this.startTime.getDate(), STEP_END_TIME));
+        }
+        //assign default start if only end is given
+        if (parameters.get("start") == null && parameters.get("end") != null) {
+            this.startTime = new Schedule(addHoursToDate(this.endTime.getDate(), STEP_START_TIME));
+        }
+    }
+    
+    private Date addHoursToDate(Date date, int hours) {
+        Calendar tempCal = Calendar.getInstance();
+        tempCal.setTime(date);
+        tempCal.add(Calendar.HOUR_OF_DAY,hours);
+        return tempCal.getTime();
     }
 
     public Event(ReadOnlyEvent editedReadOnlyEvent) {
@@ -326,7 +339,7 @@ public class Event implements ReadOnlyEvent {
 
     @Override
     public boolean hasStartEndTime() {
-	if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
+	if (this.startTime.toString().equals("") && this.endTime.toString().equals("")) {
 	    return false;
 	}
 	return true;
