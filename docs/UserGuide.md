@@ -71,10 +71,9 @@ Example:
 
 #### 3.2.2. Adds a task with `PRIORITY_LEVEL`. <br>
 Format: `add TASK_NAME [p/PRIORITY_LEVEL]`
-  > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
-
-doTASK will colour-code your task based on its priority level.
-> <img src="images/priority_colours.png" width="600">
+  > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4 (low).<br>
+  > * Tasks will be colour-coded based on its priority level.
+  > <img src="images/priority_colours.png">
 
 Example:
 > I want to buy a packet of milk. Highest priority as it is urgent.<br>
@@ -83,8 +82,8 @@ Example:
 #### 3.2.3. Adds a task with `DEADLINE`. <br>
 Format: `add TASK_NAME [d/DEADLINE]`
    > * `DEADLINE` can be entered in the format of "date month", "month date", "date month year" or "month date year". <br>
-	 > * If no year is specified, the current year of the system will be used as the year of the deadline.<br>
-	 > * The month must be typed out as the first three letters of the month.<br>
+   > * If no year is specified, the current year of the system will be used as the year of the deadline.<br>
+   > * The month must be typed out as the first three letters of the month.<br>
    > * Tasks with deadlines will be complemented with reminders, so you won't forget to do them!
 
 Examples:
