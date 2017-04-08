@@ -23,7 +23,7 @@ public class CompleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_COMPLETE_TODO_SUCCESS = "Completed Todo: %1$s";
+    public static final String MESSAGE_COMPLETE_TODO_SUCCESS = "[Completed]: %1$s";
 
     public static final String MESSAGE_TODO_ALREADY_COMPLETE = "This todo is already complete";
 

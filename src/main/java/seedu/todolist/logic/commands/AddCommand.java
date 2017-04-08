@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " Take dog for walk s/1:00PM 11/11/17 e/2:00PM 11/11/17 t/todoal";
 
-    public static final String MESSAGE_SUCCESS = "New todo added: %1$s";
+    public static final String MESSAGE_SUCCESS = "[Added]: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the todo list";
     public static final String MESSAGE_INVALID_STARTTIME = "Invalid start time entered";
     public static final String MESSAGE_INVALID_ENDTIME = "Invalid end time entered";
