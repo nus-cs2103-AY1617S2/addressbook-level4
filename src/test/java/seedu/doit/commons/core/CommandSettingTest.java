@@ -36,7 +36,6 @@ public class CommandSettingTest {
         differentSettings.setCommand("add", "different");
         assertFalse(originalSettings.equals(changedSettings));
         assertFalse(differentSettings.equals(changedSettings));
-
     }
 
 
