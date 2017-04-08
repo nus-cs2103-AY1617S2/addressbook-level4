@@ -36,7 +36,7 @@ public class FindCommandTest extends WhatsLeftGuiTest {
     }
 
     @Test
-    public void find_invalidCommand_fail() {
+    public void findInvalidCommandFail() {
         commandBox.runCommand("findwhatsleft");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }

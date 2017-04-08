@@ -111,7 +111,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() {
+    public void executeInvalid() {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
@@ -168,25 +168,25 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() {
+    public void executeUnknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() {
+    public void executeHelp() {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new WhatsLeft(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
-    public void execute_exit() {
+    public void executeExit() {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new WhatsLeft(), Collections.emptyList());
     }
 
     @Test
-    public void execute_clear() throws Exception {
+    public void executeClear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         model.addEvent(helper.generateEvent(1));
         model.addEvent(helper.generateEvent(2));
@@ -197,7 +197,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_add_invalidArgsFormat() {
+    public void executeAddInvalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
         assertCommandFailure("add Valid Name 12345 .butNoPhonePrefix a/valid,address", expectedMessage);
@@ -205,7 +205,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidActivityData() {
+    public void executeAddInvalidActivityData() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add  p/high e/valid@email.com l/address",
                 expectedMessage);
@@ -215,7 +215,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_successful() throws Exception {
+    public void executeAddSuccessful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Event toBeAdded = helper.adam();
@@ -231,7 +231,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_addDuplicate_notAllowed() throws Exception {
+    public void executeAddDuplicateNotAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Event toBeAdded = helper.adam();
@@ -246,7 +246,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_list_showsAllActivities() throws Exception {
+    public void executeListShowsAllActivities() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         WhatsLeft expectedAB = helper.generateWhatsLeft(2);
@@ -298,18 +298,18 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
+    public void executeSelectInvalidArgsFormatErrorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
     }
 
     @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
+    public void executeSelectIndexNotFoundErrorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("select ev");
     }
 
     @Test
-    public void execute_select_jumpsToCorrectEvent() throws Exception {
+    public void executeSelectJumpsToCorrectEvent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Event> threeEvents = helper.generateEventList(3);
 
@@ -326,18 +326,18 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
+    public void executeDeleteInvalidArgsFormatErrorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
     @Test
-    public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
+    public void executeDeleteIndexNotFoundErrorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete ev");
     }
 
     @Test
-    public void execute_delete_removesCorrectActivity() throws Exception {
+    public void executeDeleteRemovesCorrectActivity() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         List<Event> threeEvents = helper.generateEventList(3);
 
@@ -353,78 +353,10 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() {
+    public void executeFindInvalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
-    /*
-    @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Event aTarget1 = helper.generateEventWithName("bla bla KEY bla");
-        Event aTarget2 = helper.generateEventWithName("bla KEY bla bceofeia");
-        Event a1 = helper.generateEventWithName("KE Y");
-        Event a2 = helper.generateEventWithName("KEYKEYKEY sduauo");
-
-        fordate = 1;
-        List<Event> fourActivities = helper.generateEventList(a1, aTarget1, a2, aTarget2);
-        WhatsLeft expectedAB = helper.generateWhatsLeft(fourActivities);
-        fordate = 1;
-        List<Event> expectedList = helper.generateEventList(aTarget1, aTarget2);
-        helper.addToModel(model, fourActivities);
-
-        assertCommandSuccess("find KEY",
-                Command.getMessageForActivityListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-    */
-    /*
-    @Test
-    public void execute_find_isNotCaseSensitive() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Event a1 = helper.generateEventWithName("bla bla KEY bla");
-        Event a2 = helper.generateEventWithName("bla KEY bla bceofeia");
-        Event a3 = helper.generateEventWithName("key key");
-        Event a4 = helper.generateEventWithName("KEy sduauo");
-        System.out.println(a1.getAsText());
-        System.out.println(a2.getAsText());
-        System.out.println(a3.getAsText());
-        System.out.println(a4.getAsText());
-
-        List<Event> fourActivities = helper.generateEventList(a3, a1, a4, a2);
-        WhatsLeft expectedAB = helper.generateWhatsLeft(fourActivities);
-        List<Event> expectedList = fourActivities;
-        helper.addToModel(model, fourActivities);
-        for (ReadOnlyEvent a : model.getFilteredEventList()) {
-            System.out.println(a.getAsText());
-        }
-        assertCommandSuccess("find KEY",
-                Command.getMessageForActivityListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-    */
-    /*
-    @Test
-    public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Event aTarget1 = helper.generateEventWithName("bla bla KEY bla");
-        Event aTarget2 = helper.generateEventWithName("bla rAnDoM bla bceofeia");
-        Event aTarget3 = helper.generateEventWithName("key key");
-        Event a1 = helper.generateEventWithName("sduauo");
-
-        List<Event> fourEvents = helper.generateEventList(aTarget1, a1, aTarget2, aTarget3);
-        WhatsLeft expectedAB = helper.generateWhatsLeft(fourEvents);
-        List<Event> expectedList = helper.generateEventList(aTarget1, aTarget2, aTarget3);
-        helper.addToModel(model, fourEvents);
-
-        assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForActivityListShownSummary(expectedList.size()),
-                expectedAB,
-                expectedList);
-    }
-    */
 
     /**
      * A utility class to generate test data for events.

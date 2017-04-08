@@ -49,7 +49,10 @@ We are a team based in the [School of Computing, National University of Singapor
   * [Edit event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#24-editing-an-eventtask--edit)
   * [Delete event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#27-deleting-an-eventtask--delete)
   * [Select event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#26-selecting-an-eventtask--select)
-* Code written:
+  * [Undo previous command](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#211-undoing-the-latest-command--undo)
+  * Natural language parsing
+  * Recur command
+* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0110491U.md), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0110491U.md)
 * Other major contributions:
   * Travis setting up
   * Fixed GUI testing
