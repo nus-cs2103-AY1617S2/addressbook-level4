@@ -9,7 +9,7 @@ import seedu.whatsleft.commons.util.JsonUtil;
 
 //@@author A0121668A
 /**
- * A class to access UserConfig stored in the hard disk as a json file
+ * A class to access User Configuration stored in the hard disk as a json file
  */
 public class JsonUserConfigStorage implements UserConfigStorage {
 

@@ -15,7 +15,7 @@ import seedu.whatsleft.commons.events.storage.DataSavingExceptionEvent;
 import seedu.whatsleft.commons.exceptions.DataConversionException;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
 import seedu.whatsleft.model.UserPrefs;
-
+//@@author A0121668A
 /**
  * Manages storage of WhatsLeft data in local storage.
  */
@@ -38,7 +38,7 @@ public class StorageManager extends ComponentManager implements Storage {
         this(new XmlWhatsLeftStorage(whatsLeftFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
                 new JsonUserConfigStorage(userConfigStorage));
     }
-
+//@@author
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -95,7 +95,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+//@@author A0121668A
     @Subscribe
     public void handleConfigChangedEvent(ConfigChangedEvent cce) {
         String newLocation = cce.data.getWhatsLeftFilePath();
