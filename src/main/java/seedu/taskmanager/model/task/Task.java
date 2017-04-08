@@ -17,6 +17,7 @@ public class Task implements ReadOnlyTask {
     private Optional<StartDate> startDate;
     private Optional<EndDate> endDate;
     private Optional<Description> description;
+    private Optional<Repeat> repeat;
     // @@author
 
     // @@author A0114269E
@@ -30,12 +31,13 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
-            Optional<Description> description, Status status, UniqueTagList tags) {
+            Optional<Description> description, Optional<Repeat> repeat, Status status, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
+        this.repeat = repeat;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.status = status;
@@ -47,12 +49,13 @@ public class Task implements ReadOnlyTask {
      * Constructor for Task without Status parameter.
      */
     public Task(Title title, Optional<StartDate> startDate, Optional<EndDate> endDate,
-            Optional<Description> description, UniqueTagList tags) {
+            Optional<Description> description, Optional<Repeat> repeat, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(title, endDate, description, tags);
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
+        this.repeat = repeat;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.status = new Status();
@@ -63,7 +66,7 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(),
+        this(source.getTitle(), source.getStartDate(), source.getEndDate(), source.getDescription(), source.getRepeat(),
                 source.getStatus(), source.getTags());
     }
 
@@ -106,6 +109,16 @@ public class Task implements ReadOnlyTask {
     public Optional<Description> getDescription() {
         return description;
     }
+
+    @Override
+    public Optional<Repeat> getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Optional<Repeat> repeat) {
+        assert repeat != null;
+        this.repeat = repeat;
+    }
     // @@author
 
     // @@author A0114269E
@@ -142,6 +155,7 @@ public class Task implements ReadOnlyTask {
         this.setStartDate(replacement.getStartDate());
         this.setEndDate(replacement.getEndDate());
         this.setDescription(replacement.getDescription());
+        this.setRepeat(replacement.getRepeat());
         this.setStatus(replacement.getStatus());
         this.setTags(replacement.getTags());
     }

@@ -17,6 +17,7 @@ import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Title;
 
@@ -105,6 +106,16 @@ public class ParserUtil {
     public static Optional<EndDate> parseEndDate(Optional<String> endDate) throws IllegalValueException {
         assert endDate != null;
         return endDate.isPresent() && !endDate.get().trim().equals("") ? Optional.of(new EndDate(endDate.get()))
+                : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> repeat} into an
+     * {@code Optional<Repeat>} if {@code repeat} is present.
+     */
+    public static Optional<Repeat> parseRepeat(Optional<String> repeat) throws IllegalValueException {
+        assert repeat != null;
+        return repeat.isPresent() && !repeat.get().trim().equals("") ? Optional.of(new Repeat(repeat.get()))
                 : Optional.empty();
     }
     // @@author

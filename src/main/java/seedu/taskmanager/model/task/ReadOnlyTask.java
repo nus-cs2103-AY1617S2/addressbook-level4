@@ -14,6 +14,7 @@ public interface ReadOnlyTask {
     Optional<StartDate> getStartDate();
     Optional<EndDate> getEndDate();
     Optional<Description> getDescription();
+    Optional<Repeat> getRepeat();
     Status getStatus();
 
     /**
@@ -22,6 +23,7 @@ public interface ReadOnlyTask {
      */
     UniqueTagList getTags();
 
+    // @@author A0140032E
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      * This ignores the Task that is DONE from consideration of being in the same state.
@@ -32,13 +34,14 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
-                //&& other.getStatus().equals(this.getStatus())
                 // @@author A0114269E
                 && ((other.getStatus().value || this.getStatus().value) ?
                         false : other.getStatus().equals(this.getStatus()))
-                // @@author
-                && other.getDescription().equals(this.getDescription()));
+                // @@author A0140032E
+                && other.getDescription().equals(this.getDescription()))
+                && other.getRepeat().equals(this.getRepeat());
     }
+    // @@author
 
     /**
      * Formats the task as text, showing all task details.
@@ -50,6 +53,7 @@ public interface ReadOnlyTask {
                 .append(getStartDate().isPresent() ? " Start Date: " + getStartDate().get() : "")
                 .append(getEndDate().isPresent() ? " End Date: " + getEndDate().get() : "")
                 .append(getDescription().isPresent() ? " Description: " + getDescription().get() : "")
+                .append(getRepeat().isPresent() ? " Repeats: " + getRepeat().get() : "")
                 .append(" Status: " + getStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
