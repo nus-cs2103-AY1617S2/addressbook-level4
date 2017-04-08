@@ -130,6 +130,9 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void resetIfUpDownKey(KeyEvent ke) {
+        if (ke.isShiftDown()) {
+            return;
+        }
         KeyCode keyCode = ke.getCode();
         switch (keyCode) {
         case UP:
