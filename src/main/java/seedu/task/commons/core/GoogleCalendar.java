@@ -81,6 +81,10 @@ public class GoogleCalendar {
                 .setDataStoreFactory(dataStoreFactory)
                 .setAccessType("offline")
                 .build();
+
+        if (testNoInternet) {
+            throw new IOException("Connection fail!");
+        }
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
         logger.info("Credentials saved to " + DATA_STORE_FILE.getAbsolutePath());
@@ -94,9 +98,6 @@ public class GoogleCalendar {
      */
     public static com.google.api.services.calendar.Calendar
         getCalendarService() throws IOException {
-        if (testNoInternet) {
-            throw new IOException("Connection fail!");
-        }
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
                 httpTransport, JSON_FACTORY, credential)
