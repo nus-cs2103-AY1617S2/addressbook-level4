@@ -45,7 +45,7 @@ public class EditCommand extends Command {
             + "by the type and index number used in the last activity listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: TYPE (ev represents event and ts represents task, INDEX (must be a positive integer) "
-            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [t/TAG]...\n"
+            + "[DESCRIPTION] [p/PRIORITY] [l/LOCATION ] [ta/TAG]...\n"
             + "Example: " + COMMAND_WORD + " ts 1 p/high bd/050517";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";

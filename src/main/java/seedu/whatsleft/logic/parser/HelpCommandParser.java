@@ -1,7 +1,6 @@
 package seedu.whatsleft.logic.parser;
 
 import static seedu.whatsleft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.whatsleft.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,89 +26,75 @@ import seedu.whatsleft.logic.commands.SelectCommand;
 import seedu.whatsleft.logic.commands.ShowCommand;
 import seedu.whatsleft.logic.commands.UndoCommand;
 
-/**
- * Parses user input.
- */
-public class Parser {
+//@@author A0148038A
+public class HelpCommandParser {
 
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public HelpCommandParser() {
+    }
 
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     */
-    public Command parseCommand(String userInput) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+    private static final Pattern HELP_ARGS_FORMAT = Pattern.compile("(?<arguments>.*)");
+
+    public Command parse (String args) {
+        final Matcher matcher = HELP_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-        switch (commandWord.toLowerCase()) {
+        switch (matcher.group("arguments")) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new HelpCommand(AddCommand.MESSAGE_USAGE);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new HelpCommand(EditCommand.MESSAGE_USAGE);
 
         case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            return new HelpCommand(SelectCommand.MESSAGE_USAGE);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new HelpCommand(DeleteCommand.MESSAGE_USAGE);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommandParser().parse(arguments);
+            return new HelpCommand(ClearCommand.MESSAGE_USAGE);
 
         case ShowCommand.COMMAND_WORD:
-            return new ShowCommandParser().parse(arguments);
+            return new HelpCommand(ShowCommand.MESSAGE_USAGE);
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new HelpCommand(FindCommand.MESSAGE_USAGE);
 
         case FinishCommand.COMMAND_WORD:
-            return new FinishCommandParser().parse(arguments);
+            return new HelpCommand(FinishCommand.MESSAGE_USAGE);
 
         case RedoCommand.COMMAND_WORD:
-            return new RedoCommandParser().parse(arguments);
+            return new HelpCommand(RedoCommand.MESSAGE_USAGE);
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommandParser().parse(arguments);
+            return new HelpCommand(SaveCommand.MESSAGE_USAGE);
 
         case ReadCommand.COMMAND_WORD:
-            return new ReadCommandParser().parse(arguments);
+            return new HelpCommand(ReadCommand.MESSAGE_USAGE);
 
         case CalendarViewCommand.COMMAND_WORD:
-            return new CalendarViewCommandParser().parse(arguments);
+            return new HelpCommand(CalendarViewCommand.MESSAGE_USAGE);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new HelpCommand(ListCommand.MESSAGE_USAGE);
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommandParser().parse(arguments);
+            return new HelpCommand(ExitCommand.MESSAGE_USAGE);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new HelpCommand(UndoCommand.MESSAGE_USAGE);
 
         case CalendarRefreshCommand.COMMAND_WORD:
-            return new CalendarRefreshCommand();
+            return new HelpCommand(CalendarRefreshCommand.MESSAGE_USAGE);
 
         case RecurCommand.COMMAND_WORD:
-            return new RecurCommandParser().parse(arguments);
+            return new HelpCommand(RecurCommand.MESSAGE_USAGE);
 
         default:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return new HelpCommand("");
         }
     }
-
 }

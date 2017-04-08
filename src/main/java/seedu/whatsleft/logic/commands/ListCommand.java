@@ -13,6 +13,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
+    public static final String MESSAGE_USAGE = "Enter 'list' in command window to view all activities in WhatsLeft\n";
+
     public static final String MESSAGE_SUCCESS = "Listed all activities";
 
     @Override

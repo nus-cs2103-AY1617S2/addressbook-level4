@@ -19,7 +19,7 @@ import seedu.whatsleft.storage.Storage;
 public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
-    public static final Object MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":  Saves the current WhatsLeft location to the given filepath.\n" + "Parameters: FILEPATH\n"
             + "Example (Relative Path): " + COMMAND_WORD + " ./Data/WhatsLeft.xml" + " \n"
             + "Example (Absolute Path): " + COMMAND_WORD + " /Users/Andy/Downloads/WhatsLeft.xml";

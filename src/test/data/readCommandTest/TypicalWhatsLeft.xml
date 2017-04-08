@@ -100,15 +100,6 @@
         <tagged>calculator</tagged>
     </events>
     <events>
-        <description>GEH Presentation</description>
-        <startTime>12:00</startTime>
-        <startDate>2017-05-25</startDate>
-        <endTime>14:00</endTime>
-        <endDate>2017-05-25</endDate>
-        <location>FASS</location>
-        <tagged>formal</tagged>
-    </events>
-    <events>
         <description>CS2103 Project Discussion</description>
         <startTime>15:00</startTime>
         <startDate>2017-05-26</startDate>

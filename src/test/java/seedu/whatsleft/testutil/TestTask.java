@@ -1,7 +1,5 @@
 package seedu.whatsleft.testutil;
 
-//import java.time.LocalDate;
-//import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +25,6 @@ public class TestTask implements ReadOnlyTask {
     private Location location;
     private UniqueTagList tags;
     private boolean status;
-    private boolean hasDeadline;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -45,7 +42,6 @@ public class TestTask implements ReadOnlyTask {
         this.location = taskToCopy.getLocation();
         this.tags = taskToCopy.getTags();
         this.status = taskToCopy.getStatus();
-        this.hasDeadline = taskToCopy.hasDeadline();
     }
 
     public void setDescription(Description description) {
@@ -170,22 +166,4 @@ public class TestTask implements ReadOnlyTask {
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
     }
-    //@@author
-    /*
-    //@@author
-    @Override
-    public boolean isOver() {
-        if (LocalDate.now().isAfter(this.getByDate().getValue())) {
-            return true;
-        } else if (LocalDate.now().isBefore(this.getByDate().getValue())) {
-            return false;
-        } else {
-            if (LocalTime.now().isAfter(this.getByTime().getValue())) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    */
 }

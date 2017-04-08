@@ -27,7 +27,7 @@ public class ReadCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final String COMMAND_WORD = "read";
-    public static final Object MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":  Reads the WhatsLeft task storage from given location filepath.\n" + "Parameters: FILEPATH\n"
             + "Example (Relative Path): " + COMMAND_WORD + " ./Data/WhatsLeft.xml" + " \n"
             + "Example (Absolute Path): " + COMMAND_WORD + " /Users/Andy/Downloads/WhatsLeft.xml";

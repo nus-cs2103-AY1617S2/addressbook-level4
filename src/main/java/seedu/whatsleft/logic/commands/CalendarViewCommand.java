@@ -20,7 +20,7 @@ public class CalendarViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n"
         + "Shows calendar schedule for chosen weeks ahead\n"
         + "Parameters: WEEKS_AHEAD (must be a positive integer)\n"
-        + "Example: " + COMMAND_WORD + "1";
+        + "Example: " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_SUCCESS = "Calendar showing %1$s week(s) ahead";
     private LocalDateTime currentDateTime;
