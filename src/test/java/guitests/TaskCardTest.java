@@ -116,19 +116,19 @@ public class TaskCardTest extends TaskManagerGuiTest {
         TaskCardHandle editedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
         assertEquals(editedCard.getFullName(), taskToShow.getName().fullName);
 
-        // edit start date and time
-        taskToShow.setStartDateTime(new DateTime("30 may 2pm"));
-        commandBox.runCommand("edit 2 change sd to 30 may and change st to 2pm");
-        editedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
-        assertEquals(editedCard.getStartDate(), taskToShow.getStartDateTime().get().getDateOnly());
-        assertEquals(editedCard.getStartTime(), taskToShow.getStartDateTime().get().getTimeOnly());
-
         // edit end date and time
         taskToShow.setEndDateTime(new DateTime("30 may 2.30pm"));
-        commandBox.runCommand("edit 2 change ed to 30 may and change et to 2.30pm");
+        commandBox.runCommand("edit 2 change ed to 30 may and et to 2.30pm");
         editedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
         assertEquals(editedCard.getEndDate(), taskToShow.getEndDateTime().get().getDateOnly());
         assertEquals(editedCard.getEndTime(), taskToShow.getEndDateTime().get().getTimeOnly());
+
+        // edit start date and time
+        taskToShow.setStartDateTime(new DateTime("30 may 2pm"));
+        commandBox.runCommand("edit 2 change sd to 30 may and st to 2pm");
+        editedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
+        assertEquals(editedCard.getStartDate(), taskToShow.getStartDateTime().get().getDateOnly());
+        assertEquals(editedCard.getStartTime(), taskToShow.getStartDateTime().get().getTimeOnly());
     }
 
     @Test

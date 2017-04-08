@@ -144,7 +144,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
     private void assertListResult(String command, String expectedMessage, TestTask... expectedHits) {
         commandBox.runCommand(command);
-        assertResultMessage(expectedMessage + " tasks listed");
+        assertResultMessage(expectedMessage + " tasks listed.");
         assertListSize(expectedHits.length);
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
