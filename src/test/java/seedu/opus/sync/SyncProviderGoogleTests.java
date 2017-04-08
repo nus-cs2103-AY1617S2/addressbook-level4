@@ -5,6 +5,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.Name;
 import seedu.opus.model.task.Task;
+import seedu.opus.sync.exceptions.SyncException;
 
 /*
 //@@author A0148087W-reused
@@ -25,10 +27,12 @@ import seedu.opus.model.task.Task;
 public class SyncProviderGoogleTests {
 
     private static final SyncServiceGtask syncProviderGoogle = spy(new SyncServiceGtask());
+    private static final File dataTestCredential = new File("data/TestCredential");
     private static final Task mockTask = mock(Task.class);
+    private static final SyncManager mockSyncManager = mock(SyncManager.class);
 
     @BeforeClass
-    public static void setUp() {
+    public static void setUp() throws SyncException {
         copyTestCredentials();
 
         try {
@@ -40,8 +44,8 @@ public class SyncProviderGoogleTests {
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
-
-        //syncProviderGoogle.start();
+        syncProviderGoogle.setSyncManager(mockSyncManager);
+        syncProviderGoogle.start();
     }
 
     @AfterClass
@@ -50,22 +54,26 @@ public class SyncProviderGoogleTests {
     }
 
     public static void copyTestCredentials() {
+
         deleteCredential();
-        @SuppressWarnings("unused")
-        File dataTestCredential = new File(SyncServiceGtask.DATA_STORE_DIR.getPath());
+        try {
+            java.nio.file.Files.copy(dataTestCredential.toPath(), SyncServiceGtask.DATA_STORE_FILE.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void deleteCredential() {
-        SyncServiceGtask.DATA_STORE_DIR.delete();
+        SyncServiceGtask.DATA_STORE_FILE.delete();
     }
 
     /*
     @Test
-    public void syncProviderGoogleStartTest() {
+    public void syncProviderGoogleStartTest() throws SyncException {
         reset(syncProviderGoogle);
         syncProviderGoogle.start();
 
-        verify(syncProviderGoogle, atLeastOnce()).start();
+        verify(syncProviderGoogle).start();
     }
 
 
@@ -78,7 +86,6 @@ public class SyncProviderGoogleTests {
         verify(syncProviderGoogle).stop();
     }
 
-    /*
     @Test
     public void test() {
         LinkedList<Task> list = new LinkedList<Task>();
