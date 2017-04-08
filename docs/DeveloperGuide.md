@@ -234,6 +234,12 @@ Function of `Logic`
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
+
+Purpose of `CliSyntax`
+The `CliSyntax` class stores the prefix that is used to detect input and differentiate it from different details. The prefix used are
+"by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in add
+and edit commands.
+
 **Common Commands**
 
 `Add Command` - It is able to add task.
@@ -248,6 +254,11 @@ Given below is the Activity Diagram when the information reached `AddCommandPars
 <img src="images/addCommandParser.PNG" width="800"><br>
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
+`Edit Command` - It is able to edit a task using Index.
+This function make use of the Optional class to update the task.
+
+`Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
+
 `Delete Command` - It is able to delete a task using Index.
 This function can only work if the given index is valid.
 
@@ -261,6 +272,14 @@ _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Comma
 This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
 keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will 
 show the related keywords.
+
+`List Command` - It is able to list all tasks excluding completed tasks.
+
+`ListDone Command` - It is able to list all completed tasks only.
+
+`ListPriority Command` - It is able to list all tasks that have "High" priority.
+
+`ListToday Command` - It is able to list all tasks that are overdue today and events that include today's date.
 
 **Additional Commands**
 
