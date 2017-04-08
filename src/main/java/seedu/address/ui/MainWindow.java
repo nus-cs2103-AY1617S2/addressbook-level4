@@ -99,6 +99,9 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private HBox windowTop;
 
+    @FXML
+    private AnchorPane windowCentre;
+
     // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -333,7 +336,7 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0144315N
     @Subscribe
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
-        JFXSnackbar toast = new JFXSnackbar(taskListPanelPlaceholder);
+        JFXSnackbar toast = new JFXSnackbar(windowCentre);
         toast.show(event.getMessage(), 4000);
     }
 }

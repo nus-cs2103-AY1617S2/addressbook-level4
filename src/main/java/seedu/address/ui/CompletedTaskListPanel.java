@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
@@ -30,6 +31,9 @@ public class CompletedTaskListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ReadOnlyTask> completedTaskListView;
+
+    @FXML
+    private TitledPane completedTaskListTitle;
 
     // @@author A0144315N
     public CompletedTaskListPanel(AnchorPane completedTaskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
@@ -94,10 +98,13 @@ public class CompletedTaskListPanel extends UiPart<Region> {
 
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
-                    .addAll(new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0),
-                            new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                    .addAll(new KeyFrame(Duration.ZERO,
+                                    new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                                    new KeyValue(completedTaskListTitle.visibleProperty(), false),
+                                    new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
                             new KeyFrame(Duration.millis(300.0d),
                                     new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
+                                    new KeyValue(completedTaskListTitle.visibleProperty(), true),
                                     new KeyValue(completedTaskListView.opacityProperty(), 1)));
             timeline.play();
         } else {
@@ -105,12 +112,14 @@ public class CompletedTaskListPanel extends UiPart<Region> {
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
                     .addAll(new KeyFrame(Duration.ZERO,
-                            new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
-                            new KeyValue(completedTaskListView.opacityProperty(), 1)),
+                                new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
+                                new KeyValue(completedTaskListTitle.visibleProperty(), true),
+                                new KeyValue(completedTaskListView.opacityProperty(), 1)),
                             new KeyFrame(Duration.millis(200.0d),
                                     new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
                             new KeyFrame(Duration.millis(300.0d),
                                     new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                                    new KeyValue(completedTaskListTitle.visibleProperty(), false),
                                     new KeyValue(completedTaskListView.opacityProperty(), 0)));
             timeline.play();
             flag = false;
