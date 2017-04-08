@@ -7,6 +7,7 @@ import java.io.IOException;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
+import seedu.task.commons.util.FileUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
@@ -53,7 +54,7 @@ public class SaveCommand extends Command {
     }
 
     private boolean createSaveFile() throws IOException {
-        boolean created = toSave.createNewFile();
+        boolean created = FileUtil.createFile(toSave);
 
         return created;
     }
