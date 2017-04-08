@@ -55,6 +55,10 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords, near match cases are allowed */
     void updateFilteredTaskList(Set<String> keywords);
 
+    //@@author A0135762A
+    /** Updates the filter of the filtered task list to filter by the given keywords, requires exact match of keyword */
+    void updateExactFilteredTaskList(Set<String> keywords);
+
     //@@author A0139161J
     /** Returns the filtered completed task list */
     UnmodifiableObservableList<ReadOnlyTask> getCompletedTaskList();
@@ -73,6 +77,7 @@ public interface Model {
 
     /** Updates the overdue list as shown in UI */
     public void truncateOverdueList();
+
     //@@author A0135762A
     /** Updates the filter of the filtered task list to filter by the today's date */
     void updateUpcomingTaskList();

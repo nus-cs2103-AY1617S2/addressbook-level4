@@ -25,10 +25,18 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
+    //@@author A0135762A
     @Override
     public CommandResult execute() {
+        //Find Exact Match case(s) first, and calculate the list size.
+        model.updateExactFilteredTaskList(keywords);
+        int temp = model.getFilteredTaskList().size();
+
         model.updateFilteredTaskList(keywords);
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size())
+                + " Including " + temp + " Exact Match case(s) & "
+                + (model.getFilteredTaskList().size() - temp) + " Near Match case(s).");
     }
+    //@@author
 
 }

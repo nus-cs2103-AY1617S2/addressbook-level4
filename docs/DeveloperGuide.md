@@ -16,6 +16,7 @@ By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since:
 * [Appendix D: Product Survey](#appendix-d--product-survey)
 
 
+
 ## 1. Setting up
 
 ### 1.1. Prerequisites
@@ -356,13 +357,12 @@ Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | user | add a task | use the keep track of the tasks to be completed.
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track.
+`* * *` | user | delete a multiple tasks | get rid of multiple tasks without deleting them individually.
 `* * *` | user | edit a task detail/deadline | change the deadline or the specifics of the tasks.
-`* * *` | user | add comments/notes to a created task | in order to provide extra details that aids in describing the task, without being a subtask.
+`* * *` | user | add comments/notes to a created task | provide extra details that aid in describing the task.
 `* * *` | user | search for tasks using keywords | find the tasks with similar details.
 `* * *` | user | mark a task as done | track my progress through cleared tasks.
 `* * *` | user | clear all the tasks | erase all tasks without deleting them individually.
-`* * *` | user | clear a subset of tasks | erase a specific category or type of task without deleting them individually.
-`* * *` | user | view the task manager in a calendar mode | have an overall picture of how busy I will be over the next few days/weeks.
 `* * *` | user | save my task list | easily retrieve my tasks.
 `* * *` | user | find upcoming tasks | decide what needs to be done soon.
 
@@ -370,7 +370,7 @@ Priority | As a ... | I want to ... | So that I can...
 ### Reminders
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | user | reminders about a task that is due soon | start working on the more important tasks first.
+`* * *` | user | have reminders about a task that is due soon | start working on the more important tasks first.
 `* * *` | user | have recurring reminders for every deadline that is coming | not forget to wrap up a task.
 
 
@@ -388,13 +388,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | tag the tasks with relevant tags ( eg. study / work ) | easily categorise tasks.
 `* * *` | user | search for tasks using tags | easily find a category of tasks.
 `* * *` | user | delete a tag | remove a category of tasks that I no longer care to track.
-`* * *` | user | sort the tasks by tags | prioritise a certain category of tasks.
 
-
-### Security Features
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* *` | user | be able to encrypt the information in the task manager | ensure the security of my data.
 
 ### Subtasking
 Priority | As a ... | I want to ... | So that I can...
@@ -403,26 +397,14 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | delete subtasks | get rid of subtasks that are no longer relevant.
 `* *` | user | clear subtasks | keep track of my progress against the big picture.
 
-### Customization
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* *` | user | set a quote of the day at the frontpage of the task manager | be more motivated in doing my tasks.
-`* *` | user | set a custom/standard background image of the task manager | be more motivated.
-`* *` | user | change the aesthetics (colours/layout) of the task manager | make it feel more personalised.
 
 ### Advanced Features
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* *` | user | view the tasks that were completed | keep track of my efficiency
-`* *` | user | sync my tasks and notes from any device | have higher convenience in viewing my tasks.
 `* *` | user | set the type of reminder about a task (vibration/ring) about a task that is due soon | punctually complete the tasks.
-`* *` | user | share tasks with teammates and co-workers | work on a task together and clear it together.
-`* *` | user | type a command to grab all the details of a chosen task at a quick glance | single out a task to focus on and find out everything I need at once.
-`* *` | user | add media to a tasks | choose not to type the entire details out.
 
 
-
-{More to be added}
 
 ## Appendix B : Use Cases
 

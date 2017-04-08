@@ -372,7 +372,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()) + " Including "
+                        + (expectedList.size() - 1) + " Exact Match case(s) & 1 Near Match case(s).",
                 expectedAB,
                 expectedList);
     }
@@ -391,7 +392,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()) + " Including "
+                        + expectedList.size() + " Exact Match case(s) & 0 Near Match case(s).",
                 expectedAB,
                 expectedList);
     }
@@ -410,7 +412,8 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForTaskListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()) + " Including "
+                        + expectedList.size() + " Exact Match case(s) & 0 Near Match case(s).",
                 expectedAB,
                 expectedList);
     }
