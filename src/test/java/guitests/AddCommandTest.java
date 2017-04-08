@@ -70,6 +70,15 @@ public class AddCommandTest extends AddressBookGuiTest {
         //@@author
     }
 
+    @Test
+    public void addRecurringTask() {
+        TestTask[] currentList = td.getEmptyTasks();
+        TestTask taskToAdd = td.recMonth;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(currentList));
+    }
+
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand("clear");
