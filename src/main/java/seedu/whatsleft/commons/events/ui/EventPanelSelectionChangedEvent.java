@@ -5,7 +5,7 @@ import seedu.whatsleft.model.activity.ReadOnlyEvent;
 
 //@@author A0148038A
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Event List Panel
  */
 public class EventPanelSelectionChangedEvent extends BaseEvent {
 

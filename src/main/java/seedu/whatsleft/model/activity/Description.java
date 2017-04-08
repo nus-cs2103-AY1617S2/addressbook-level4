@@ -2,9 +2,10 @@ package seedu.whatsleft.model.activity;
 
 import seedu.whatsleft.commons.exceptions.IllegalValueException;
 
+//@@author A0148038A
 /**
  * Represents an Activity's description in WhatsLeft.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
@@ -22,6 +23,7 @@ public class Description {
     /**
      * Validates given description.
      *
+     * @param a description in string format
      * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
@@ -34,7 +36,10 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid activity description.
+     * Check whether the description is valid
+     *
+     * @param a description string to be check
+     * @return a boolean variable, true if the given string as a valid activity description, false otherwise
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);

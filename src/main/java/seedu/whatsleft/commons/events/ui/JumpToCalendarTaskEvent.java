@@ -19,8 +19,8 @@ public class JumpToCalendarTaskEvent extends BaseEvent {
     public boolean canJumpTo() {
         return (this.targetTask.getByDate().value != null && this.targetTask.getByTime().value != null);
     }
-    //@@author
 
+    //@@author A0124377A
     @Override
     public String toString() {
         return this.getClass().getSimpleName();

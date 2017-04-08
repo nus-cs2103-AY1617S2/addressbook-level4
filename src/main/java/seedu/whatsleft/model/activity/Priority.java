@@ -9,14 +9,15 @@ import seedu.whatsleft.commons.exceptions.IllegalValueException;
  */
 public class Priority {
 
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be high, medium or low";
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should only be high/h, medium/m or low/l";
 
     public final String value;
-    public final int integerLevel;
+    public final int integerLevel; //used to compare priority
 
     /**
-     * Validates given priority level.
+     * creates a Priority object
      *
+     * @param a priority in string format to check
      * @throws IllegalValueException if given priority level is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
@@ -35,8 +36,16 @@ public class Priority {
         }
     }
 
+    /**
+     * Check whether a string is a valid priority
+     *
+     * @param arg in string format
+     * @return a boolean variable, true if it is valid, false otherwise
+     */
     public static boolean isValidPriority(String arg) {
-        if (arg.equals("high") || arg.equals("medium") || arg.equals("low")) {
+        if (arg.equals("high") || arg.equals("h")
+                || arg.equals("medium") || arg.equals("m")
+                || arg.equals("low") || arg.equals("l")) {
             return true;
         } else {
             return false;
@@ -59,6 +68,12 @@ public class Priority {
         return value.hashCode();
     }
 
+    /**
+     * Compare with another Priority object
+     *
+     * @param a Priority object
+     * @return -1 if this Priority object is higher than the given Priority object
+     */
     public int compareTo(Priority o) {
         return this.integerLevel - o.integerLevel;
     }

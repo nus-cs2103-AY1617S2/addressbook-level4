@@ -10,7 +10,7 @@ import seedu.whatsleft.commons.exceptions.IllegalValueException;
 public class Location {
 
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Activity location can take any values, and it should not be blank";
+            "Activity location can take any values.\n";
 
     /*
      * The first character of the location must not be a whitespace,
@@ -23,6 +23,7 @@ public class Location {
     /**
      * Validates given location.
      *
+     * @param a location in string format to check
      * @throws IllegalValueException if given location string is invalid.
      */
     public Location(String location) throws IllegalValueException {

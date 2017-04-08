@@ -23,8 +23,9 @@ import seedu.whatsleft.model.activity.UniqueEventList.EventNotFoundException;
 import seedu.whatsleft.model.activity.UniqueTaskList;
 import seedu.whatsleft.model.activity.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0148038A
 /**
- * Represents the in-memory model of the address book data. All changes to any
+ * Represents the in-memory model of the WhatsLeft data. All changes to any
  * model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -40,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static String previousCommand;
     private static WhatsLeft previousState;
     private static String displayStatus;
+
     //@@author A0121668A
     /**
      * Initializes a ModelManager with the given whatsLeft and userPrefs.
@@ -58,12 +60,12 @@ public class ModelManager extends ComponentManager implements Model {
         displayStatus = DISPLAY_STATUS_PENDING;
         updateFilteredListToShowAll();
     }
-    //@@author
+
+    //@@author A0148038A
     public ModelManager() {
         this(new WhatsLeft(), new UserPrefs());
     }
 
-    //@@author A0148038A
     @Override
     public void resetData(ReadOnlyWhatsLeft newData) {
         whatsLeft.resetData(newData);
@@ -82,7 +84,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
-    //@@author
     @Override
     public ReadOnlyWhatsLeft getWhatsLeft() {
         return whatsLeft;
@@ -136,9 +137,14 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateWhatsLeftChanged();
     }
-    // @@author
 
     // @@author A0148038A
+    /**
+     * add an event to whatsleft
+     *
+     * @param an event to add
+     * @throws DuplicateEventException to prevent duplicate events
+     */
     @Override
     public synchronized void addEvent(Event event)
             throws UniqueEventList.DuplicateEventException {
@@ -147,6 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
+    /**
+     * add a task to whatsleft
+     *
+     * @param a task to add
+     * @throws DuplicateTaskException to prevent duplicate tasks
+     */
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         whatsLeft.addTask(task);
@@ -154,6 +166,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
+    /**
+     * update/edit an event in whatsleft
+     *
+     * @param an event to edit and an edited event
+     * @throws DuplicateEventException to prevent duplicate events
+     */
     @Override
     public void updateEvent(Event eventToEdit, Event editedEvent)
             throws UniqueEventList.DuplicateEventException {
@@ -163,6 +181,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateWhatsLeftChanged();
     }
 
+    /**
+     * update/edit a task in whatsleft
+     *
+     * @param a task to edit and an edited task
+     * @throws DuplicateTaskException to prevent duplicate tasks
+     */
     @Override
     public void updateTask(Task taskToEdit, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException {
@@ -214,7 +238,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return currIndex;
     }
-    //@@author
 
     // =========== Filtered List Accessors
 
@@ -258,6 +281,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, displayStatus)));
     }
+
     //@@author A0121668A
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -313,6 +337,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         String toString();
     }
+
     //@@author A0121668A
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
@@ -401,7 +426,7 @@ public class ModelManager extends ComponentManager implements Model {
                 return !event.isOver();
             }
         }
-        //@@author
+
         @Override
         public String toString() {
             return "status =" + String.valueOf(statusKey);

@@ -1,6 +1,9 @@
 package seedu.whatsleft.logic.commands;
 
+import java.util.logging.Logger;
+
 import seedu.whatsleft.commons.core.EventsCenter;
+import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.core.Messages;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
 import seedu.whatsleft.commons.events.ui.JumpToEventListRequestEvent;
@@ -13,6 +16,7 @@ import seedu.whatsleft.model.activity.ReadOnlyTask;
 import seedu.whatsleft.model.activity.UniqueEventList.EventNotFoundException;
 import seedu.whatsleft.model.activity.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0148038A
 /**
  * Deletes an activity identified using it's last displayed index from WhatsLeft.
  */
@@ -30,6 +34,8 @@ public class DeleteCommand extends Command {
 
     public final int targetIndex;
     public final String targetType;
+    private final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     //@@author A0110491U
     public DeleteCommand(int targetIndex, String targetType) {
         this.targetIndex = targetIndex;
@@ -43,9 +49,15 @@ public class DeleteCommand extends Command {
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
         if (targetType.equals("ev")) {
+            //@@author A0148038A
+            logger.info("-------[Executing DeleteEventCommand] " + this.toString());
+
             if (lastShownEventList.size() < targetIndex) {
+                logger.info("-------[Failed execution of DeleteEventCommand] " + this.toString());
                 throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
             }
+
+            //@@author A0124377A
             ReadOnlyEvent eventToDelete = lastShownEventList.get(targetIndex - 1);
             try {
                 //store for undo operation
@@ -61,9 +73,15 @@ public class DeleteCommand extends Command {
         }
 
         if (targetType.equals("ts")) {
+            //@@author A0148038A
+            logger.info("-------[Executing DeleteTaskCommand] " + this.toString());
+
             if (lastShownTaskList.size() < targetIndex) {
+                logger.info("-------[Failed execution of DeleteTaskCommand] " + this.toString());
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
+
+            //@@author A0124377A
             ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
             try {
                 //store for undo operation

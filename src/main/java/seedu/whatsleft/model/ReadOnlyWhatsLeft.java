@@ -7,22 +7,23 @@ import seedu.whatsleft.model.activity.ReadOnlyEvent;
 import seedu.whatsleft.model.activity.ReadOnlyTask;
 import seedu.whatsleft.model.tag.Tag;
 
+//author A0148038A
 /**
  * Unmodifiable view of WhatsLeft
  */
 public interface ReadOnlyWhatsLeft {
 
     /**
-     * Returns an unmodifiable view of the tasks list.
-     * This list will not contain any duplicate tasks.
-     */
-    List<ReadOnlyTask> getTaskList();
-
-    /**
      * Returns an unmodifiable view of the event list.
      * This list will not contain any duplicate events.
      */
     List<ReadOnlyEvent> getEventList();
+
+    /**
+     * Returns an unmodifiable view of the tasks list.
+     * This list will not contain any duplicate tasks.
+     */
+    List<ReadOnlyTask> getTaskList();
 
     /**
      * Returns an unmodifiable view of the tags list.

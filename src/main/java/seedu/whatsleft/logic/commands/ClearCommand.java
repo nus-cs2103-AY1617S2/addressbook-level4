@@ -1,5 +1,8 @@
 package seedu.whatsleft.logic.commands;
 
+import java.util.logging.Logger;
+
+import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.logic.commands.exceptions.CommandException;
 import seedu.whatsleft.model.ModelManager;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
@@ -7,7 +10,7 @@ import seedu.whatsleft.model.WhatsLeft;
 
 //@@author A0148038A
 /**
- * Clears WhatsLeft.
+ * Clears events, tasks or everything in WhatsLeft.
  */
 public class ClearCommand extends Command {
 
@@ -23,6 +26,7 @@ public class ClearCommand extends Command {
     public static final String CLEAR_TASKS_SUCCESS = "Task list in WhatsLeft has been cleared!";
 
     public final String typeToClear;
+    private final Logger logger = LogsCenter.getLogger(ClearCommand.class);
 
     public ClearCommand(String typeToClear) {
         assert typeToClear.equals("") || typeToClear.equals("ev") || typeToClear.equals("ts");
@@ -32,7 +36,9 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        logger.info("-------[Executing ClearCommand] " + this.toString());
         if (typeToClear.equals("ev")) {
+            logger.info("-------[Executing ClearEventCommand] " + this.toString());
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
@@ -41,6 +47,7 @@ public class ClearCommand extends Command {
             model.storePreviousCommand("clear");
             return new CommandResult(CLEAR_EVENTS_SUCCESS);
         } else if (typeToClear.equals("ts")) {
+            logger.info("-------[Executing ClearTaskCommand] " + this.toString());
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
@@ -48,7 +55,8 @@ public class ClearCommand extends Command {
             //store for undo operation
             model.storePreviousCommand("clear");
             return new CommandResult(CLEAR_TASKS_SUCCESS);
-        } else {
+        } else { //clear all events and tasks if no type is specified
+            logger.info("-------[Executing ClearAllCommand] " + this.toString());
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);

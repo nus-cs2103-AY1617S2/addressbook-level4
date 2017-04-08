@@ -15,7 +15,10 @@ import seedu.whatsleft.commons.util.StringUtil;
 public class StartDate {
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS =
-            "Event Start Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)";
+            "Event Start Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)\n"
+            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also accecptable\n"
+            + "Example: next fri\n"
+            + "Example: 250317\n";
 
     public final LocalDate value;
     //@@author A0110491U
@@ -84,6 +87,12 @@ public class StartDate {
         return value.hashCode();
     }
 
+    /**
+     * Compare with another StartDate object
+     *
+     * @param a StartDate object
+     * @return -1 if this StartDate object is earlier than the given StartDate object
+     */
     public int compareTo(StartDate o) {
         return this.getValue().compareTo(o.getValue());
     }
