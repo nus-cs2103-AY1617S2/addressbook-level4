@@ -27,28 +27,36 @@ public interface Model {
     public static class NothingToRedoException extends Exception {
     }
 
-    /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
 
-    /** Deletes the task */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
-    /** Returns the config */
+    /** 
+     * @return the configuration object 
+     */
     Config getConfig();
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    /** 
+     * @return the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} 
+     */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Returns the GeeKeep */
+    
     ReadOnlyGeeKeep getGeeKeep();
 
-    /** Clears existing backing model and replaces with the provided new data. */
+    /** 
+     * Clears existing backing model and replaces with the provided new data. 
+     */
     void resetData(ReadOnlyGeeKeep newData);
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** 
+     * Updates the filter of the filtered task list to show all tasks 
+     */
     void updateFilteredListToShowAll();
 
-    /**Updates the filter of the filtered task list to filter by the given keywords, time and tags*/
+    /**
+     * Updates the filter of the filtered task list to filter by the given keywords, time and tags
+     * 
+     */
     void updateFilteredTaskList(Set<String> keywords, DateTime earlistTime,
             DateTime latestTime, UniqueTagList tags);
     /** Updates the filter of the filtered task list to filter by status of the tasks */
@@ -71,12 +79,11 @@ public interface Model {
     void updateTask(int filteredTaskListIndex, ReadOnlyTask updatedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalValueException;
 
-    /** Mark the specified task as done */
     void markTaskDone(int filteredTaskListIndex);
 
-    /** Mark the specified task as undone */
     void markTaskUndone(int filteredTaskListIndex);
-
+    
+    //@@author A0147622H
     String undo() throws NothingToUndoException;
 
     String redo() throws NothingToRedoException;

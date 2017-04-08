@@ -89,8 +89,8 @@ public interface ReadOnlyTask {
     public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask);
 
     public int compareTitle(ReadOnlyTask otherTask);
-    //@@author
-
+    
+    //@@author A0121658E
     /**
      * Returns true if the task does not have a start datetime or end datetime
      * @return floating task identity
@@ -98,7 +98,7 @@ public interface ReadOnlyTask {
     boolean isFloatingTask();
 
     /**
-     * Returns true if the task has a start datetime nad an end datetime
+     * Returns true if the task has a start datetime and an end datetime
      * @return event identity
      */
     boolean isEvent();
