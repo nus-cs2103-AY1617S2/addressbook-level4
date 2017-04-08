@@ -43,11 +43,17 @@ import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
+<<<<<<< .merge_file_LGhX5a
 import seedu.taskmanager.logic.commands.SaveAsCommand;
+=======
+import seedu.taskmanager.logic.commands.RedoCommand;
+>>>>>>> .merge_file_6gyWj5
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
+import seedu.taskmanager.logic.commands.UndoCommand;
 import seedu.taskmanager.logic.commands.UndoneCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
+import seedu.taskmanager.model.HistoryManager;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
@@ -76,6 +82,7 @@ public class LogicManagerTest {
 
     private Model model;
     private Logic logic;
+    private HistoryManager history;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -97,12 +104,19 @@ public class LogicManagerTest {
         targetedJumpIndex = je.targetIndex;
     }
 
+    @Subscribe
+    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+        history.handleTaskManagerChangedEvent(event);
+    }
+
     @Before
     public void setUp() {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         // @@author A0140032E
+        history = HistoryManager.getInstance();
+        history.init(model);
         logic = LogicManager.getInstance();
         logic.init(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         // @@author
@@ -686,6 +700,59 @@ public class LogicManagerTest {
                 expectedTM, expectedList);
     }
 
+    @Test
+    public void executeUndoAndRedoSuccessful() throws Exception {
+        history.reset();
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithStartDate("5 June 2017");
+
+        List<Task> expectedTasks = helper.generateTaskList(tTarget1);
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1);
+
+        assertCommandSuccess(helper.generateAddCommand(tTarget1), String.format(AddCommand.MESSAGE_SUCCESS, tTarget1),
+                expectedTM, expectedList);
+
+        Task tTarget2 = helper.generateTaskWithStartDate("15 June 2017");
+        expectedTasks = helper.generateTaskList(tTarget1, tTarget2);
+        expectedTM = helper.generateTaskManager(expectedTasks);
+        expectedList = helper.generateTaskList(tTarget1, tTarget2);
+
+        assertCommandSuccess(helper.generateAddCommand(tTarget2), String.format(AddCommand.MESSAGE_SUCCESS, tTarget2),
+                expectedTM, expectedList);
+
+        expectedTasks = helper.generateTaskList(tTarget1);
+        expectedTM = helper.generateTaskManager(expectedTasks);
+        expectedList = helper.generateTaskList(tTarget1);
+
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, helper.generateAddCommand(tTarget2)),
+                expectedTM, expectedList);
+
+        expectedTasks = helper.generateTaskList(tTarget1, tTarget2);
+        expectedTM = helper.generateTaskManager(expectedTasks);
+        expectedList = helper.generateTaskList(tTarget1, tTarget2);
+
+        assertCommandSuccess("redo", String.format(RedoCommand.MESSAGE_SUCCESS, helper.generateAddCommand(tTarget2)),
+                expectedTM, expectedList);
+    }
+
+    @Test
+    public void executeUndoInvalid() throws Exception {
+        history = HistoryManager.getInstance();
+        history.init(model);
+        history.reset();
+
+        assertCommandFailure("undo", UndoCommand.MESSAGE_NO_MORE_UNDO);
+    }
+
+    @Test
+    public void executeRedoInvalid() throws Exception {
+        history = HistoryManager.getInstance();
+        history.init(model);
+        history.reset();
+
+        assertCommandFailure("redo", RedoCommand.MESSAGE_NO_MORE_REDO);
+    }
     // @@author
 
     @Test
@@ -874,11 +941,17 @@ public class LogicManagerTest {
         Task tTarget1 = helper.generateTaskWithStartDate("03/03/2017");
         Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
         Task tTarget3 = helper.generateTaskWithStartDate("01/03/2017");
+        Task floating1 = helper.t1();
+        floating1.setStartDate(Optional.empty());
+        floating1.setEndDate(Optional.empty());
+        Task floating2 = helper.t2();
+        floating2.setStartDate(Optional.empty());
+        floating2.setEndDate(Optional.empty());
 
-        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget3, floating1, tTarget2, floating2, tTarget1);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM, expectedList);
@@ -890,11 +963,17 @@ public class LogicManagerTest {
         Task tTarget1 = helper.generateTaskWithEndDate("04/04/2017");
         Task tTarget2 = helper.generateTaskWithEndDate("03/04/2017");
         Task tTarget3 = helper.generateTaskWithEndDate("02/04/2017");
+        Task floating1 = helper.t1();
+        floating1.setStartDate(Optional.empty());
+        floating1.setEndDate(Optional.empty());
+        Task floating2 = helper.t2();
+        floating2.setStartDate(Optional.empty());
+        floating2.setEndDate(Optional.empty());
 
-        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget3, floating1, tTarget2, floating2, tTarget1);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM, expectedList);
@@ -981,10 +1060,10 @@ public class LogicManagerTest {
 
             cmd.append(p.getTitle().toString());
             // @@author A0140032E
-            cmd.append(" s/").append(p.getStartDate().isPresent() ? sdf.format(p.getStartDate().get()) : "");
-            cmd.append(" e/").append(p.getEndDate().isPresent() ? sdf.format(p.getEndDate().get()) : "");
-            cmd.append(" d/").append(p.getDescription().isPresent() ? p.getDescription().get() : "");
-            cmd.append(" r/").append(p.getRepeat().isPresent() ? p.getRepeat().get().pattern.toString() : "");
+            cmd.append(p.getStartDate().isPresent() ? " s/" + sdf.format(p.getStartDate().get()) : "");
+            cmd.append(p.getEndDate().isPresent() ? " e/" + sdf.format(p.getEndDate().get()) : "");
+            cmd.append(p.getDescription().isPresent() ? " d/" + p.getDescription().get() : "");
+            cmd.append(p.getRepeat().isPresent() ? " r/" + p.getRepeat().get().pattern.toString() : "");
             // @@author
 
             UniqueTagList tags = p.getTags();
