@@ -1,5 +1,6 @@
 package t09b1.today.testutil;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -15,7 +16,8 @@ import t09b1.today.model.task.Task;
 import t09b1.today.model.task.UniqueTaskList;
 
 /**
- * All variations of tasks for our task manager
+ * All variations of tasks for our task manager. Use this to build all task test
+ * cases.
  */
 public class TypicalTasks {
     // @author A0093999Y
@@ -33,7 +35,7 @@ public class TypicalTasks {
 
     // UniqueTagLists
     public UniqueTagList noTags = new UniqueTagList(), familyTags = new UniqueTagList(), workTags = new UniqueTagList(),
-            workAndFamilyTags = new UniqueTagList();
+            alternateWorkTags = new UniqueTagList();
 
     // DateTime
     public Optional<DateTime> noDateTime, pastDateTime, todayDateTime, earlierFutureDateTime, laterFutureDateTime;
@@ -46,18 +48,21 @@ public class TypicalTasks {
         try {
             // Initialize UniqueTagLists
             familyTags.add(new Tag("children"));
-            familyTags.add(new Tag("spouse"));
+            familyTags.add(new Tag("pproject"));
             workTags.add(new Tag("project"));
-            workAndFamilyTags.add(new Tag("children"));
-            workAndFamilyTags.add(new Tag("project"));
-            workAndFamilyTags.add(new Tag("spouse"));
+            alternateWorkTags.add(new Tag("lproject"));
+            alternateWorkTags.add(new Tag("PROject"));
 
-            // Initialize DateTime
+            // Initialize DateTime, truncate to remove milliseconds
             noDateTime = Optional.empty();
-            pastDateTime = Optional.of(new DateTime(new Date(Long.MIN_VALUE)));
-            todayDateTime = Optional.of(new DateTime(DateUtils.addMinutes(new Date(), 2)));
-            earlierFutureDateTime = Optional.of(new DateTime(new Date(Long.MAX_VALUE - 1000)));
-            laterFutureDateTime = Optional.of(new DateTime(new Date(Long.MAX_VALUE)));
+            pastDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), -4), Calendar.MINUTE)));
+            todayDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addMinutes(new Date(), 2), Calendar.MINUTE)));
+            earlierFutureDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 2), Calendar.MINUTE)));
+            laterFutureDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 4), Calendar.MINUTE)));
 
             // Initialize Tasks
             todayListOverdue = Task.createTask(new Name("Do Math Assignment"), noTags, pastDateTime, noDateTime,
@@ -66,29 +71,29 @@ public class TypicalTasks {
                     doneFalse, todayTrue);
             todayListDeadline = Task.createTask(new Name("Buy Meier stove"), familyTags, todayDateTime, noDateTime,
                     doneFalse, todayFalse);
-            todayListEvent = Task.createTask(new Name("Write english essay"), workTags, earlierFutureDateTime,
+            todayListEvent = Task.createTask(new Name("Write english essay"), noTags, earlierFutureDateTime,
                     pastDateTime, doneFalse, todayFalse);
-            todayListToday = Task.createTask(new Name("Do CS2222 work"), workTags, laterFutureDateTime, noDateTime,
+            todayListToday = Task.createTask(new Name("Do CS2222 work"), noTags, laterFutureDateTime, noDateTime,
                     doneFalse, todayTrue);
 
-            futureListFloat = Task.createTask(new Name("Buy Meier rice cooker"), familyTags, noDateTime, noDateTime,
+            futureListFloat = Task.createTask(new Name("Buy Meier rice cooker"), noTags, noDateTime, noDateTime,
                     doneFalse, todayFalse);
-            futureListDeadline = Task.createTask(new Name("Complete CS2106 Lab Assignment"), workAndFamilyTags,
+            futureListDeadline = Task.createTask(new Name("Complete CS2106 Lab Assignment"), alternateWorkTags,
                     laterFutureDateTime, noDateTime, doneFalse, todayFalse);
-            futureListEvent = Task.createTask(new Name("Finish up Philo Assignment"), workAndFamilyTags,
+            futureListEvent = Task.createTask(new Name("Finish up Philo Assignment"), alternateWorkTags,
                     laterFutureDateTime, earlierFutureDateTime, doneFalse, todayFalse);
 
             completedListFloat = Task.createTask(new Name("Mark CS1010S assIgnment"), workTags, noDateTime, noDateTime,
                     doneTrue, todayTrue);
-            completedListDeadline = Task.createTask(new Name("Go for a night run"), noTags, todayDateTime, noDateTime,
+            completedListDeadline = Task.createTask(new Name("Goes for a night run"), noTags, todayDateTime, noDateTime,
                     doneTrue, todayFalse);
             completedListEvent = Task.createTask(new Name("Go for Rock concert"), noTags, todayDateTime, pastDateTime,
                     doneTrue, todayFalse);
 
             extraFloat = Task.createTask(new Name("Golf game"), workTags, noDateTime, noDateTime, doneFalse,
                     todayFalse);
-            extraDeadline = Task.createTask(new Name("Go for a night jog"), noTags, todayDateTime, noDateTime, doneTrue,
-                    todayFalse);
+            extraDeadline = Task.createTask(new Name("Go for a night jog"), noTags, todayDateTime, noDateTime,
+                    doneFalse, todayFalse);
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -97,8 +102,8 @@ public class TypicalTasks {
     }
 
     // @author
-    public static void loadTaskManagerWithSampleData(TaskManager ab) {
-        for (Task task : new TypicalTasks().getTypicalTasks()) {
+    public void loadTaskManagerWithSampleData(TaskManager ab) {
+        for (Task task : getTypicalTasks()) {
             try {
                 ab.addTask(task);
             } catch (UniqueTaskList.DuplicateTaskException e) {
