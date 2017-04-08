@@ -43,6 +43,32 @@ public class ListCommandTest extends ToDoListGuiTest {
         assertListAllSuccess(TaskType.EVENT, "e2", currentList, ListCommand.MESSAGE_LIST_ALL_SUCCESS);
     }
 
+    //@@author A0139343E
+    @Test
+    public void list_orderAlphanumeic_inoder() {
+        TestTask[] deadlineExpected = new TestTask[]{td.taskJ, td.taskE, td.taskF, td.taskD};
+        TestTask[] eventExpected = new TestTask[]{td.taskA, td.taskC, td.taskB};
+        TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskI, td.taskH};
+        assertListInOrder(" o/alphanumeric", deadlineExpected, eventExpected, todoExpected);
+    }
+
+    @Test
+    public void list_orderPriority_inoder() {
+        TestTask[] deadlineExpected = new TestTask[]{td.taskJ, td.taskD, td.taskE, td.taskF};
+        TestTask[] eventExpected = new TestTask[]{td.taskC, td.taskA, td.taskB};
+        TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskH, td.taskI};
+        assertListInOrder(" o/priority", deadlineExpected, eventExpected, todoExpected);
+    }
+
+    @Test
+    public void list_orderDateTime_inoder() {
+        TestTask[] deadlineExpected = new TestTask[]{td.taskD, td.taskJ, td.taskF, td.taskE};
+        TestTask[] eventExpected = new TestTask[]{td.taskA, td.taskC, td.taskB};
+        TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskH, td.taskI};
+        assertListInOrder(" o/datetime", deadlineExpected, eventExpected, todoExpected);
+    }
+
+    //@@author A0135739W
     /**
      * Marks a task as done. Runs the list all command and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to complete the first task in the list,
@@ -103,4 +129,15 @@ public class ListCommandTest extends ToDoListGuiTest {
         assertResultMessage(expectedFeedbackMessage);
     }
 
+
+
+    //@@author A0139343E
+    private void assertListInOrder(String command, TestTask[] deadlineExpected,
+            TestTask[] eventExpected, TestTask[] toDoExpected) {
+        commandBox.runCommand(ListCommand.COMMAND_WORD + command);
+        assertTrue(taskListPanel.isListMatching(TaskType.EVENT, eventExpected));
+        assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, deadlineExpected));
+        assertTrue(taskListPanel.isListMatching(TaskType.TODO, toDoExpected));
+        assertResultMessage(ListCommand.MESSAGE_LIST_UNDONE_SUCCESS);
+    }
 }

@@ -48,11 +48,28 @@ public class DoneCommandTest extends ToDoListGuiTest {
         assertResultMessage(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
+    //@@author A0139343E
     @Test
-    public void done_success() {
+    public void done_Task_success() {
         assertDoneSuccess(TaskType.DEADLINE, "d3", currentList);
     }
 
+    @Test
+    public void done_DailyDeadlineTask_success() {
+        assertDoneSuccess(TaskType.DEADLINE, "d4", currentList);
+    }
+
+    @Test
+    public void done_EventMonthlyTask_success() {
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+    }
+
+    @Test
+    public void done_EventYearlyTask_success() {
+        assertDoneSuccess(TaskType.EVENT, "e3", currentList);
+    }
+
+    //@@author A0135739W
     @Test
     public void done_doneTask_failure() {
         commandBox.runCommand(DoneCommand.COMMAND_WORD + " d1");
