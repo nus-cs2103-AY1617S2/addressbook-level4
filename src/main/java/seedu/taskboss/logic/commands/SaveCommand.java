@@ -40,13 +40,15 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert storage != null;
-        File f = new File(filepath);
 
         if (filepath.contains(SYMBOL_BAR) || filepath.contains (SYMBOL_LEFT) ||
                 filepath.contains (SYMBOL_RIGHT) || filepath.contains (SYMBOL_ASTERISK) ||
                     filepath.contains (SYMBOL_QUESTION)) {
             throw new CommandException(MESSAGE_INVALID_FILEPATH);
-        } else if (!f.canWrite()) {
+        } 
+
+        File f = new File(filepath);
+        if (!f.canWrite()) {
             throw new CommandException(MESSAGE_INVALID_FILEPATH);
         }
 
