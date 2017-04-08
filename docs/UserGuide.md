@@ -33,7 +33,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    * **`add`**` Do laundry p/low b/12/31/2017 12:00` : Jim wants to do laundry at noon, so he adds it to the task manager.
    * **`list`** : Jim wants to get back to the overview of his list of tasks.
    * **`sort`**` priority` : Jim wants to see the most urgent tasks at the top of his list.
-   * **`mark`**` 1 2` : Jim realises he has completed the 1st and 2nd task so he marks them as completed.
+   * **`mark`**` 1` : Jim realises he has completed the 1st task so he marks it as completed
    * **`delete`**` 3` : Jim realises he does not have to complete the 3rd task so he deletes it from his current list.
    * **`find`**` laundry` : Jim gets a call from his mum that the laundry must be completed by 3pm so he does a search for it.
    * **`edit`**` 1 p/hi` : Jim updates the priority of the found laundry task to high.
@@ -72,8 +72,16 @@ Format: `add NAME [n/NOTES] [b/STARTTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
 Examples:
 
 * `add Do laundry`
-* `add Finish v0.0 documentation n/Urgent b/02/28/2017 12:00 e/02/29/2017 23:59 p/hi t/CS2103T t/CS2101`
-* `add Orientation camp b/next friday 8pm e/next Sunday 6pm`
+
+  Adds a task called `Do laundry`.
+
+* `add Orientation camp n/Urgent b/02/28/2017 12:00 e/02/29/2017 12:00 p/hi t/SOC t/NUS`
+
+  Adds an high priority event called `Orientation camp`  with the note, `Urgent`, and the tags, `SOC` and `NUS` . The event start time is set to `Feb 28, 2017 noon` and the end time is set to `Feb 29, 2017 noon`.
+
+* `add Finish assignment e/next Sunday 6pm`
+
+  Adds a task called `Finish assignments` which is to be completed before `next Sunday at 6pm`.
 
 ### 2.3 List tasks: `list`
 
@@ -118,35 +126,21 @@ Examples:
 
 ### 2.6. Mark task : `mark`
 
-Marks task as complete.<br>
-Format: `mark [INDEX]...`
+Marks a task as complete or incomplete. This command generally toggles the status of the task<br>
+Format: `mark [INDEX]`
 
-> * Marks the task at all the specified `INDEX` as complete.
+> * Marks the task at the specified `INDEX` as complete or incomplete.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
-* `mark 3 4 5`<br>
-  Marks tasks at index 3, 4 and 5 as complete.
-
-### 2.7. Unmark task
-
-Marks task as incomplete.<br>
-Format: `unmark INDEX...`
-
-> * Marks the task at all the specified `INDEX` as incomplete.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
-* `unmark 3 4 5`<br>
-  Marks tasks at index 3, 4 and 5 as incomplete.
+* `mark 3`<br>
+  Marks the task at index 3 as `complete` if it is incomplete and as `incomplete` if it is complete.
 
 ### 2.8. Schedule: `schedule`
 
-Set an event or a deadline.<br>
+Sets an event or a deadline of a task.<br>
 Format: `schedule INDEX [STARTTIME] to ENDTIME`
 
 > * Set the start time and the end time of the task.
@@ -159,10 +153,10 @@ Format: `schedule INDEX [STARTTIME] to ENDTIME`
 Examples:
 
 * `schedule 5 12/05/2017 15:00`<br>
-  Set the deadline/end time of the 5th task as 3pm on December 5, 2017.
+  Sets the deadline/end time of the 5th task as 3pm on December 5, 2017.
 
 * `schedule 6 12/05/2017 13:00 to 12/05/2017 15:00`<br>
-  Set the start time as 1pm on December 5, 2017 and the end time as 3pm on December 5, 2017.
+  Sets the start time as 1pm on December 5, 2017 and the end time as 3pm on December 5, 2017.
 
 ### 2.9. Delete : `delete`
 
