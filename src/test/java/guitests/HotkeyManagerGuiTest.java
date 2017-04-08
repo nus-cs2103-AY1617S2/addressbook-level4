@@ -12,18 +12,17 @@ public class HotkeyManagerGuiTest extends TaskManagerGuiTest {
 
     @Test
     public void toggleWindowFocus() {
-        assertMainGuiOpen(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
-        assertMainGuiOpen(mainGui.toggleMainGuiUsingCtrlQAccelerator());
         assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
+        assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlQAccelerator());
         assertMainGuiOpen(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
     }
 
     private void assertMainGuiOpen(MainGuiHandle mainGuiHandle) {
-        assertTrue(mainGuiHandle.getPrimaryStage().isIconified());
+        assertFalse(mainGuiHandle.getPrimaryStage().isIconified());
     }
 
     private void assertMainGuiHidden(MainGuiHandle mainGuiHandle) {
-        assertFalse(mainGuiHandle.getPrimaryStage().isIconified());
+        assertTrue(mainGuiHandle.getPrimaryStage().isIconified());
     }
 
 }
