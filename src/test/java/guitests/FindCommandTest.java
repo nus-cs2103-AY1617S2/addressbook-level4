@@ -68,7 +68,7 @@ public class FindCommandTest extends TaskBossGuiTest {
     @Test
     public void find_invalidDate_fail() {
         commandBox.runCommand("find sd/mynameisbob");
-        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+        assertResultMessage(DateTime.ERROR_INVALID_DATE + "\n" + DateTime.MESSAGE_DATE_CONSTRAINTS);
     }
 
     //@@author A0147990R

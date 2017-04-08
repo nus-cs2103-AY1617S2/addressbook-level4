@@ -71,8 +71,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyTaskBoss newData) throws IllegalValueException {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.resetData(newData);
-
+        undoInputList.push("clear");
         indicateTaskBossChanged();
+        taskbossUndoHistory.clear();
     }
 
     @Override
@@ -231,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.renameCategory(newCategory, oldCategory);
         removeCategoryFromTaskboss(oldCategory);
-        taskbossUndoHistory.clear();
+
         undoInputList.push("rename");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();

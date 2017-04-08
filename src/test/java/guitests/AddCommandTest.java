@@ -45,12 +45,16 @@ public class AddCommandTest extends TaskBossGuiTest {
 
         //add invalid dates task
         commandBox.runCommand(td.taskJ.getAddCommand());
-        assertResultMessage(AddCommand.ERROR_INVALID_DATES);
+        assertResultMessage(AddCommand.ERROR_INVALID_ORDER_DATES);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
         assertAddSuccess(false, false, td.taskA);
+
+        //add to built-in done category
+        commandBox.runCommand("add floating task c/done");
+        assertResultMessage(AddCommand.ERROR_CANNOT_ADD_DONE_CATEGORY);
 
         //invalid command
         commandBox.runCommand("adds new task");
