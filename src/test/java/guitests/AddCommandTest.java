@@ -72,6 +72,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand("clear");
         for (int i = 0; i < currentList.length; i++) {
             commandBox.runCommand(currentList[i].getAddCommand());
         }
