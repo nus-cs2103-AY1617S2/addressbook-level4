@@ -45,6 +45,11 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
+    
+    private void addWithoutCheck(Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        internalList.add(toAdd);
+    }
 
     /**
      * Updates the task in the list at position {@code index} with
@@ -100,6 +105,13 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
+    public void setTasks(ObservableList<ReadOnlyTask> list) throws DuplicateTaskException, IllegalValueException {
+        final UniqueTaskList replacement = new UniqueTaskList();
+        for (final ReadOnlyTask task : list) {
+            replacement.addWithoutCheck(Task.createTask(task));
+        }
+    }
+    
     public UnmodifiableObservableList<Task> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
