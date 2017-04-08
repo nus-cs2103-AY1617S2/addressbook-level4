@@ -42,6 +42,7 @@ public class ClearDoneCommand extends Command {
 			}
 		}
 		if (formerSize == lastShownList.size()) {
+			model.updateFilteredListToShowAll();
 			return new CommandResult(MESSAGE_ALREADY_CLEAR);
 		}
 		model.updateFilteredListToShowAll();
