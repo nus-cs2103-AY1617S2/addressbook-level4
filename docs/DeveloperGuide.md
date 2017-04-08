@@ -97,7 +97,7 @@ _Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App. We provide a quick overview of each component below.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java) which ...
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/today/MainApp.java) which ...
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -130,13 +130,13 @@ We elaborate more about the individual components below.
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/today/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
-For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+For example, the layout of the [`MainWindow`](../src/main/java/seedu/today/ui/MainWindow.java) is specified in  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component passes user commands using the `Logic` component, auto-update when data in the `Model` changes, and responds to events raised from various parts of the App and updates the interface accordingly.
 
@@ -144,7 +144,7 @@ The `UI` component passes user commands using the `Logic` component, auto-update
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerLogicClassDiagram.png" width="800">
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/today/logic/Logic.java)
 
 The **Logic** component of the software handles the input from the **UI** and calls methods from the **Model**, **Config**, and **Storage** to perform the appropriate changes.
 
@@ -169,7 +169,7 @@ In the event the parser encounters input errors, for example the input contains 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/today/model/Model.java)
 
 **Task**
 
@@ -191,7 +191,7 @@ The command history and previous states of the task manager are also saved in th
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/today/storage/Storage.java)
 
 Similar to the `Model`, `Storage` contains the `UserPrefsStorage` object and the `TaskManagerStorage` object.
 

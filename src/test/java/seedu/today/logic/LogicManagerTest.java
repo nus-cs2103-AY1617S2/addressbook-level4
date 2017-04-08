@@ -141,7 +141,7 @@ public class LogicManagerTest {
         EventsCenter.clearSubscribers();
     }
 
-    // @author A0093999Y
+    // @@author A0093999Y
     // --------------- Helper ---------------
 
     /**
@@ -157,7 +157,7 @@ public class LogicManagerTest {
         }
     }
 
-    // @author
+    // @@author
     // --------------- Assert ---------------
 
     /**

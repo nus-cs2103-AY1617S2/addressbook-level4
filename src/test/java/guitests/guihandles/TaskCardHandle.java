@@ -19,6 +19,7 @@ import seedu.today.model.task.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String DATETIME_FIELD_ID = "#taskDate";
 
     private Node node;
 
@@ -53,8 +54,13 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
+    public String getDateTime() {
+        return getTextFromLabel(DATETIME_FIELD_ID);
+    }
+
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().toString()) && getTags().equals(getTags(task.getTags()));
+        return getFullName().equals(task.getName().toString()) && getTags().equals(getTags(task.getTags()))
+                && getDateTime().equals(task.getTaskAbsoluteDateTime());
     }
 
     @Override
