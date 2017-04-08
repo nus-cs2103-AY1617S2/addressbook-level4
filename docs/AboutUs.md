@@ -64,14 +64,16 @@ We are a team based in the [School of Computing, National University of Singapor
 * Component in charge of: [Storage](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#25-storage-component), [Commons](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#26-common-classes)<br>
 * Aspects/tools in charge of: Testing<br>
 * Features implemented:<br>
-  * [Finish task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#29-finishing-a-task-finish)
+  * [Finish a pending task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#29-finishing-a-task-finish)
   * [Show completed/pending/all tasks](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#210-task-display-preference-show)
-  * [Redo task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#212-redoing-the-completed-task--redo)
-  * [Save/Read WhatsLeft from another folder]
-* Code written:
+  * [Redo a finished task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#212-redoing-the-completed-task--redo)
+  * Save WhatsLeft to designated location
+  * Read WhatsLeft from designated location
+* Code written: functional code, test code
 * Other major contributions:
   * Fixed GUI testing
-  * Added start-end constraint for Event
+  * Added start-end constraint for Event]()
+  * Issue tracking
 
  -----
 
