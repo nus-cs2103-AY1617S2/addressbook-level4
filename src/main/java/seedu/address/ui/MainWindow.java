@@ -332,6 +332,7 @@ public class MainWindow extends UiPart<Region> {
             validator.setMessage(e.getMessage());
             validator.showErrorMessage();
             commandTextField.validate();
+            raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
 
