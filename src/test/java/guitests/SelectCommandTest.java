@@ -49,18 +49,48 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertTaskSelected(int index) {
-        assertEquals(eventTaskListPanel.getSelectedTasks().size(), 1);
-        assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 1);
-        assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = eventTaskListPanel.getSelectedTasks().get(0);
-        assertEquals(eventTaskListPanel.getEventTask(index - 1), selectedTask);
-        assertEquals(deadlineTaskListPanel.getDeadlineTask(index - 1), selectedTask);
-        assertEquals(floatingTaskListPanel.getFloatingTask(index - 1), selectedTask);
-        // TODO: confirm the correct page is loaded in the Browser Panel
+        if (eventTaskListPanel.getNumberOfTask() > index) {
+            assertEquals(eventTaskListPanel.getSelectedTasks().size(), 1);
+            assertNoDeadlineTaskSelected();
+            assertNoFloatingTaskSelected();
+            ReadOnlyTask selectedTask = eventTaskListPanel.getSelectedTasks().get(0);
+            assertEquals(eventTaskListPanel.getEventTask(index - 1), selectedTask);
+        } else {
+            if ((eventTaskListPanel.getNumberOfTask() + deadlineTaskListPanel.getNumberOfTask()) > index) {
+                assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 1);
+                assertNoEventTaskSelected();
+                assertNoFloatingTaskSelected();
+                ReadOnlyTask selectedTask = deadlineTaskListPanel.getSelectedTasks().get(0).getKey();
+                assertEquals(deadlineTaskListPanel.getDeadlineTask(index - eventTaskListPanel.getNumberOfTask() - 1)
+                        , selectedTask);
+
+            } else {
+                assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 1);
+                assertNoDeadlineTaskSelected();
+                assertNoEventTaskSelected();
+                ReadOnlyTask selectedTask = floatingTaskListPanel.getSelectedTasks().get(0).getKey();
+                assertEquals(floatingTaskListPanel.getFloatingTask(index - eventTaskListPanel.getNumberOfTask()
+                        - deadlineTaskListPanel.getNumberOfTask() - 1), selectedTask);
+            }
+        }        
     }
 
     private void assertNoTaskSelected() {
-        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
+        assertNoEventTaskSelected();
+        assertNoDeadlineTaskSelected();
+        assertNoFloatingTaskSelected();
+    }
+
+    private void assertNoEventTaskSelected() {
+        assertEquals(eventTaskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    private void assertNoDeadlineTaskSelected() {
+        assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    private void assertNoFloatingTaskSelected() {
+        assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 0);
     }
 
 }

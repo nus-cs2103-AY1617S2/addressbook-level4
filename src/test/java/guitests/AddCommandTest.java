@@ -21,12 +21,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.sampleEvent;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd).getKey();
+        
         // add another task (deadline)
         taskToAdd = td.sampleDeadline;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd).getKey();
 
         // add duplicate task
         commandBox.runCommand(td.sampleDeadline.getAddCommand());
@@ -67,7 +67,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the new
         // task
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd).getKey();
         assertTrue(eventTaskListPanel.isListMatching(expectedList));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
         assertTrue(floatingTaskListPanel.isListMatching(expectedList));
