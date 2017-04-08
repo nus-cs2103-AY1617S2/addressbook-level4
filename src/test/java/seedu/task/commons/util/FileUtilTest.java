@@ -11,8 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.task.testutil.TestUtil;
-
 public class FileUtilTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/FileUtilTest/");
