@@ -102,6 +102,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane windowCentre;
 
+    CommandTextFieldValidator validator;
+
     // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -137,7 +139,8 @@ public class MainWindow extends UiPart<Region> {
         // Allows dragging the undecorated window around
         final Pair coordinate = new Pair();
         windowTop.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
                 // record a delta distance for the drag and drop operation.
                 coordinate.x = primaryStage.getX() - mouseEvent.getScreenX();
                 coordinate.y = primaryStage.getY() - mouseEvent.getScreenY();
@@ -145,20 +148,19 @@ public class MainWindow extends UiPart<Region> {
         });
 
         windowTop.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent mouseEvent) {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
                 primaryStage.setX(mouseEvent.getScreenX() + coordinate.x);
                 primaryStage.setY(mouseEvent.getScreenY() + coordinate.y);
             }
         });
 
-        // set validator for commandTextField(to display error message under the command box)
-        CommandTextFieldValidator validator = new CommandTextFieldValidator();
-        validator.setMessage("Invalid Command");
-        validator.setIcon(GlyphsBuilder.create(FontAwesomeIconView.class)
-                .glyph(FontAwesomeIcon.WARNING)
-                .size("1em")
-                .styleClass("error")
-                .build());
+        // set validator for commandTextField(to display error message under the
+        // command box)
+        validator = new CommandTextFieldValidator();
+        validator.setMessage("");
+        validator.setIcon(GlyphsBuilder.create(FontAwesomeIconView.class).glyph(FontAwesomeIcon.WARNING).size("1em")
+                .styleClass("error").build());
         commandTextField.getValidators().add(validator);
     }
 
@@ -315,21 +317,21 @@ public class MainWindow extends UiPart<Region> {
             return;
         }
 
+        validator.hideErrorMessage();
+        commandTextField.validate();
+
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             // process result of the command
             commandTextField.setText("");
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
             raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
-            ((CommandTextFieldValidator) commandTextField.getValidators().get(0)).hideErrorMessage();
-            commandTextField.validate();
         } catch (CommandException e) {
             // handle command failure
             // display error message under command box
-            ((CommandTextFieldValidator) commandTextField.getValidators().get(0)).showErrorMessage();
+            validator.setMessage(e.getMessage());
+            validator.showErrorMessage();
             commandTextField.validate();
-            raise(new NewResultAvailableEvent(e.getMessage()));
-            raise(new UpdateStatusBarEvent("Invalid command. Type \"Help\" to see format."));
         }
     }
 
