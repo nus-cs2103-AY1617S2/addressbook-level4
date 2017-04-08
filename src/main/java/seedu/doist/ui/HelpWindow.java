@@ -4,14 +4,17 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.util.FxViewUtil;
 
+//@@author A0140887W
 /**
- * Controller for a help page
+ * Controller for a window that loads the cheatsheet image
  */
 public class HelpWindow extends UiPart<Region> {
 
@@ -19,11 +22,17 @@ public class HelpWindow extends UiPart<Region> {
     private static final String ICON = "/images/help_icon.png";
     private static final String FXML = "HelpWindow.fxml";
     private static final String TITLE = "Help";
-    private static final String USERGUIDE_URL =
-            "https://se-edu.github.io/addressbook-level4/docs/UserGuide.html";
+    private static final double MAX_WIDTH = 1040;
+    private static final double START_HEIGHT = 800;
 
     @FXML
-    private WebView browser;
+    private ImageView helpImage;
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private AnchorPane helpWindowRoot;
 
     private final Stage dialogStage;
 
@@ -32,11 +41,11 @@ public class HelpWindow extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         //Null passed as the parent stage to make it non-modal.
         dialogStage = createDialogStage(TITLE, null, scene);
-        dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
+        dialogStage.setHeight(START_HEIGHT);
+        dialogStage.setWidth(MAX_WIDTH);
+        dialogStage.setMaxWidth(MAX_WIDTH);
         FxViewUtil.setStageIcon(dialogStage, ICON);
-
-        browser.getEngine().load(USERGUIDE_URL);
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.applyAnchorBoundaryParameters(scrollPane, 0.0, 0.0, 0.0, 0.0);
     }
 
     public void show() {
