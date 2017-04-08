@@ -261,9 +261,9 @@ public class Task implements ReadOnlyTask {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if (this.startDateTime.isPresent() && this.endDateTime.isPresent()) {
             if ((this.startDateTime.get().getDate().before(date) ||
-                    sdf.format(this.startDateTime.get().getDate()).equals(sdf.format(date))) &&
-                    this.endDateTime.get().getDate().after(date) ||
-                    sdf.format(this.endDateTime.get().getDate()).equals(sdf.format(date))) {
+                 sdf.format(this.startDateTime.get().getDate()).equals(sdf.format(date))) &&
+                 this.endDateTime.get().getDate().after(date) ||
+                 sdf.format(this.endDateTime.get().getDate()).equals(sdf.format(date))) {
                 return true;
             } else {
                 return false;
