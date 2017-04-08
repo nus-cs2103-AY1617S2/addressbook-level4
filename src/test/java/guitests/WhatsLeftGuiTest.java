@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CalendarHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.EventCardHandle;
 import guitests.guihandles.EventListPanelHandle;
@@ -57,7 +57,7 @@ public abstract class WhatsLeftGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
+    protected CalendarHandle calendar;
     private Stage stage;
 
     @BeforeClass
@@ -79,6 +79,7 @@ public abstract class WhatsLeftGuiTest {
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
+            calendar = mainGui.getCalendar();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();

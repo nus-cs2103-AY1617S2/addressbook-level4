@@ -658,4 +658,30 @@ public class TestUtil {
         return collect.toArray(new Tag[split.length]);
     }
 
+//@@author A0124377A
+    /**
+     * Edits events according to index in the array of events.
+     * @param events list.
+     * @param eventsToEdit The events that are to be edited in the original array.
+     * @param index Index of event to edit
+     * @return Returns modified array of events.
+     */
+    public static TestEvent[] editEventsToList(final TestEvent[] events, int index, TestEvent eventToEdit) {
+        List<TestEvent> listOfEvents = asList(events);
+        listOfEvents.set(index, eventToEdit);
+        return listOfEvents.toArray(new TestEvent[listOfEvents.size()]);
+    }
+
+    /**
+     * Edits task according to index in the array of tasks.
+     * @param tasks list.
+     * @param tasksToEdit The tasks that are to be edited in the original array.
+     * @param index Index of task to edit
+     * @return Returns modified array of tasks.
+     */
+    public static TestTask[] editTasksToList(final TestTask[] tasks, int index, TestTask taskToEdit) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.set(index, taskToEdit);
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
 }
