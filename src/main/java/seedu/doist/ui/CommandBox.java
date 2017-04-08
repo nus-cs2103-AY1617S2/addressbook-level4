@@ -54,6 +54,9 @@ public class CommandBox extends UiPart<Region> {
     private ChangeListener<? super String> disableInputListener = (observable, oldValue, newValue)
         -> removeInput();
 
+    private static final String NAVIGATION_MODE_MESSAGE = "quick navigation mode\n\nj: down\nk: up";
+    private static final String EDITING_MODE_MESSAGE = "editing mode";
+
     @FXML
     private InlineCssTextArea commandTextField;
 
@@ -139,7 +142,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().removeListener(highlightListener);
         commandTextField.textProperty().addListener(disableInputListener);
         logger.info("turn on navigation mode");
-        raise(new NewResultAvailableEvent("navigation mode"));
+        raise(new NewResultAvailableEvent(NAVIGATION_MODE_MESSAGE));
     }
 
     private void turnOnEditingMode() {
@@ -147,7 +150,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().removeListener(disableInputListener);
         commandTextField.textProperty().addListener(highlightListener);
         logger.info("turn on editing mode");
-        raise(new NewResultAvailableEvent("editing mode"));
+        raise(new NewResultAvailableEvent(EDITING_MODE_MESSAGE));
     }
 
     private void removeInput() {
