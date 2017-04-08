@@ -42,6 +42,17 @@ public class LoadCommandTest extends DoistGUITest {
         assertLoadFailure(MISSING_FILE.getAbsolutePath(), LoadCommand.MESSAGE_NOT_FILE);
     }
 
+    @Test
+    public void loadWithEmpty() {
+        commandBox.runCommand("load ");
+        assertResultMessage(String.format(LoadCommand.MESSAGE_INVALID_PATH,
+                                            LoadCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("load");
+        assertResultMessage(String.format(LoadCommand.MESSAGE_INVALID_PATH,
+                                              LoadCommand.MESSAGE_USAGE));
+    }
+
     private void assertLoadSuccess(String path, ReadOnlyTodoList loadedList) {
         commandBox.runCommand("load " + path);
 
