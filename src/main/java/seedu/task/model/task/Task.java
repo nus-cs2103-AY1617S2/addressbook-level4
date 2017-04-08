@@ -1,9 +1,9 @@
 package seedu.task.model.task;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
+import java.util.Optional;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;

@@ -13,12 +13,12 @@ public class RandomTaskGenerator {
     private static Random rand = new Random();
     private static final String[] TASK_NAME_LIST = { "Go to class", "Go to store", "Go to gym" };
     private static final String[] CLASS_LIST = { "MATH", "NETWORKING", "PSYCHOLOGY", "CRYPTOGRAPHY", "PHILOSOPHY",
-            "FAT STUDIES", "CHINESE", "PHYSICAL EDUCATION", "PHYSICS", "HEAT TRANSFER" };
+        "FAT STUDIES", "CHINESE", "PHYSICAL EDUCATION", "PHYSICS", "HEAT TRANSFER" };
     private static final String[] BUILDING_LIST = { "Love", "Woodruff", "MRDC", "CRC", "Klaus", "Knight", "Howey" };
     private static final String[] THINGS_TO_BUY = { "peanut butter", "milk", "soy milk", "snacks", "fruit", "bananas",
-            "century eggs", "isotonic" };
+        "century eggs", "isotonic" };
     private static final String[] WORKOUT_DAYS = { "Chest day", "Back day", "Leg day", "Secondary chest day",
-            "arm day" };
+        "arm day" };
 
     public static Task generateTask() {
         boolean generated = false;
