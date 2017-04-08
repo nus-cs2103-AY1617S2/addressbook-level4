@@ -19,6 +19,9 @@ import t09b1.today.commons.core.LogsCenter;
 import t09b1.today.commons.events.ui.JumpToListRequestEvent;
 import t09b1.today.model.task.ReadOnlyTask;
 
+/**
+ * Controller for each card in the lists
+ */
 public class TaskCard extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskCard.class);
 

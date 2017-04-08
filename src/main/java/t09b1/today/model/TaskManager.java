@@ -171,8 +171,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 try {
                     tags.add(tag);
                 } catch (DuplicateTagException e) {
-                    // Will not happen
-                    assert false : "not possible";
+                    continue;
                 }
             }
         }
