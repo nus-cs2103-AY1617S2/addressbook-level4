@@ -15,6 +15,7 @@ import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 
 /**
  * Wraps all data at the address-book level
@@ -106,6 +107,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         // This can cause the tags master list to have additional tags that are not tagged to any task
         // in the task list.
         tasks.updateTask(index, editedTask);
+    }
+
+    //@@author A0141872E
+    /**
+     * Mark the task in the list {@code taskToMark} with {@code parameter}.
+     *
+     * @throws DuplicateMarkingException if the task is already be marked as done or undone.
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void markTask(ReadOnlyTask taskToMark, String parameter)
+            throws UniqueTaskList.DuplicateMarkingException {
+        tasks.markTask(taskToMark, parameter);
     }
 
 

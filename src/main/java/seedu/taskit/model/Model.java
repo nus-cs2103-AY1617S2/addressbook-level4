@@ -7,6 +7,7 @@ import seedu.taskit.commons.exceptions.NoValidStateException;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 
 /**
  * The API of the Model component.
@@ -35,6 +36,12 @@ public interface Model {
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
+    /** mark the task status to done or undone
+     * @throws UniqueTaskList.DuplicateMarkingException
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+    */
+    void markTask(ReadOnlyTask taskToMark, String parameter) throws UniqueTaskList.DuplicateMarkingException;
+
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -57,4 +64,5 @@ public interface Model {
 
     /** Records the current state of the model */
     void save();
+
 }

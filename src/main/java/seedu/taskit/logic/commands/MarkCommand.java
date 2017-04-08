@@ -7,6 +7,8 @@ import seedu.taskit.commons.core.Messages;
 import seedu.taskit.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 import seedu.taskit.model.task.ReadOnlyTask;
+import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 
 //@@author A0141872E
 /**
@@ -47,26 +49,12 @@ public class MarkCommand extends Command {
         }
 
         ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndex);
-        assert taskToMark != null;
-
-        if(checkDuplicateMarking(taskToMark)) {
-            return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
+        try {
+            model.markTask(taskToMark,parameter);
+        } catch (UniqueTaskList.DuplicateMarkingException e) {
+            throw new CommandException(String.format(MarkCommand.MESSAGE_DUPLICATE_MARKING, parameter));
         }
-
-        taskToMark.setDone(parameter);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
-        //TODO find a better way to show it
-        //model.updateFilteredTaskList("undone");
         return new CommandResult(String.format(MESSAGE_SUCCESS_ALL, parameter));
-    }
-
-    public Boolean checkDuplicateMarking(ReadOnlyTask taskToMark) {
-        if(taskToMark.isDone() == true && parameter.equals("done")){
-            return true;
-        } else if(taskToMark.isDone() == false && parameter.equals("undone")){
-            return true;
-        } else {
-            return false;
-        }
     }
 }
