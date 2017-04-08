@@ -30,7 +30,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
     }
 
     @Test
-    public void editNotAllFieldsSpecifiedSuccess() throws Exception {
+    public void editNotAllFieldsSpecifiedUsingDateAndPriorityPrefix_success() throws Exception {
         String detailsToEdit = "by:10/10/1993 p/High";
         int typeTaskIndex = 2;
 
@@ -39,6 +39,25 @@ public class EditCommandTest extends TypeTaskGuiTest {
                 .withCompleted(false).withPriority("High").build();
 
         assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
+    }
+    @Test
+    public void editNotAllFieldsSpecifiedUsingPrefixForEvent_success() throws Exception {
+        String detailsToEdit = "from: 10 oct 1993 to: 12 oct 1993";
+        int typeTaskIndex = 2;
+
+        TestTask taskToEdit = expectedTasksList[typeTaskIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit)
+                .withDate("Sun Oct 10 1993 23:59:59").withEndDate("Tue Oct 12 1993 23:59:59")
+                .withCompleted(false).withPriority("Low").build();
+
+        assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
+    }
+    @Test
+    public void editFindThenEditInvalidSchedule_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 from: 12 Oct 1993 to: 10 Oct 1993";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(Messages.MESSAGE_INVALID_START_AND_END_DATE);
     }
     @Test
     public void editFindThenEditStartDateToInvalidSchedule_fail() {
