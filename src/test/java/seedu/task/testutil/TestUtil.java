@@ -163,6 +163,19 @@ public class TestUtil {
         }
         return new XmlSerializableTaskList(tl);
     }
+
+    //assists with load command test
+    public static XmlSerializableTaskList generateSampleStorageTaskManager(ArrayList<Task> tasks) {
+        TaskList tl = new TaskList();
+        for (Task t : tasks) {
+            try {
+                tl.addTask(t);
+            } catch (DuplicateTaskException e) {
+                //continue
+            }
+        }
+        return new XmlSerializableTaskList(tl);
+    }
     //@@author
 
     /**
@@ -297,20 +310,20 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... personsToRemove) {
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
-        listOfTasks.removeAll(asList(personsToRemove));
+        listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -319,26 +332,26 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTask[] replacePersonFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
-    public static TestTask[] addTasksToList(final TestTask[] persons, TestTask... personsToAdd) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfPersons = asList(tasks);
+        listOfPersons.addAll(asList(tasksToAdd));
         return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
@@ -350,8 +363,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSameTask(person);
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
