@@ -24,8 +24,8 @@ import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
 public class SyncServiceGtaskTest {
-    private SyncManager mockSyncManager;
-    private SyncServiceGtask syncServiceGtask;
+    private static SyncManager mockSyncManager;
+    private static SyncServiceGtask syncServiceGtask;
 
     private static File dataStoreCredential;
 
@@ -81,6 +81,7 @@ public class SyncServiceGtaskTest {
         List<Task> list = new ArrayList<Task>();
         list.add(mockTask);
 
+        syncServiceGtask.start();
         syncServiceGtask.updateTaskList(list);
         verify(syncServiceGtask).updateTaskList(list);
     }
