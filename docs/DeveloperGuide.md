@@ -259,7 +259,7 @@ This function is done by using stack. When an action command is executed, taskMa
 the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in ModelManager under Model component.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
+ API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br>
  
 <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
