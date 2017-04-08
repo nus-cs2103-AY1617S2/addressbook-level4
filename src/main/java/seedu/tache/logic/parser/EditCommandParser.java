@@ -145,7 +145,6 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
-
     /**
      * Process the given {@code String} of arguments that contains only multiple parameters of interest
      * that is of a natural language format and returns an EditCommand object for execution.
