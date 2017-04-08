@@ -76,24 +76,24 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
-                    new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"),
-                            new Timing("02/02/2017"),  new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/03/2017"),
-                            new Timing("02/03/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/04/2017"),
-                            new Timing("02/04/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/05/2017"),
-                            new Timing("02/05/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/06/2017"),
-                            new Timing("02/06/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/07/2017"),
-                            new Timing("02/07/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("George Best"), new Priority("2"), new Timing("02/08/2017"),
-                            new Timing("02/08/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/09/2017"),
-                            new Timing("02/09/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
-                    new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"),
-                            new Timing("02/02/2017"), new UniqueTagList(), false, new RecurringFrequency(null))
+                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"),
+                        new Timing("02/02/2017"),  new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/03/2017"),
+                        new Timing("02/03/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/04/2017"),
+                        new Timing("02/04/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/05/2017"),
+                        new Timing("02/05/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/06/2017"),
+                        new Timing("02/06/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/07/2017"),
+                        new Timing("02/07/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("George Best"), new Priority("2"), new Timing("02/08/2017"),
+                        new Timing("02/08/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/09/2017"),
+                        new Timing("02/09/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"),
+                        new Timing("02/02/2017"), new UniqueTagList(), false, new RecurringFrequency(null))
             };
         } catch (IllegalValueException e) {
             return null;
@@ -105,8 +105,8 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                    new Tag("relatives"),
-                    new Tag("friends")
+                new Tag("relatives"),
+                new Tag("friends")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -222,7 +222,7 @@ public class TestUtil {
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-    IllegalAccessException {
+        IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");

@@ -51,7 +51,7 @@ public class SaveCommandTest extends AddressBookGuiTest {
         //This test involves saving files with and without extensions, with and without creating new folders
         //However, all files are prefixed with a specified test folder
         String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
-                "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
+            "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
         for (String saveFile : saveFiles) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(TEST_FOLDER + saveFile);
@@ -63,7 +63,7 @@ public class SaveCommandTest extends AddressBookGuiTest {
         //This test involves saving files with and without extensions, with and without creating new folders
         //However, all files are prefixed with a specified test folder
         String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
-                "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
+            "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
         for (String saveFile : saveFiles) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(saveFile);
