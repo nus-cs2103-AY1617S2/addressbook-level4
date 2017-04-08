@@ -16,6 +16,7 @@ public class PrioritizeCommandTest extends AddressBookGuiTest {
 
     @Test
     public void prioritizeSuccess() throws IllegalValueException {
+        commandBox.runCommand("clear");
         for (int i = 0; i < currentList.length; i++) {
             commandBox.runCommand(currentList[i].getAddCommand());
         }

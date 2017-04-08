@@ -105,13 +105,13 @@ public class TaskListPanelHandle extends GuiHandle {
         return true;
     }
 
-    public TaskCardHandle navigateToTask(String name) {
+    public TaskCardHandle navigateToTask(String description) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                .filter(p -> p.getDescription().description.equals(name))
+                .filter(p -> p.getDescription().description.equals(description))
                 .findAny();
         if (!task.isPresent()) {
-            throw new IllegalStateException("Description not found: " + name);
+            throw new IllegalStateException("Description not found: " + description);
         }
 
         return navigateToTask(task.get());
