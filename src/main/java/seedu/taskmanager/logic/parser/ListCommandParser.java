@@ -14,6 +14,7 @@ import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.model.task.StartDate;
 
 //@@author A0141102H
 /**
@@ -31,6 +32,12 @@ public class ListCommandParser {
          * set.
          */
         if (args.trim().isEmpty()) {
+            return new ListCommand(keyWordSet);
+        }
+
+        if (args.trim().matches(StartDate.STARTDATE_VALIDATION_REGEX1)) {
+            keyWordArray = new String[] { args.trim() };
+            keyWordSet = new HashSet<>(Arrays.asList(keyWordArray));
             return new ListCommand(keyWordSet);
         }
 
