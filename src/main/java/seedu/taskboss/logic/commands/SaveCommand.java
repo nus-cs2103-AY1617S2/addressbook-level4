@@ -14,11 +14,11 @@ import seedu.taskboss.logic.commands.exceptions.CommandException;
 
 public class SaveCommand extends Command {
 
-    private static final String SYMBOL_ASTERISK = "*";
-    private static final String SYMBOL_LEFT = "<";
-    private static final String SYMBOL_RIGHT = ">";
-    private static final String SYMBOL_QUESTION = "?";
-    private static final String SYMBOL_BAR = "|";
+    public static final String SYMBOL_ASTERISK = "*";
+    public static final String SYMBOL_LEFT = "<";
+    public static final String SYMBOL_RIGHT = ">";
+    public static final String SYMBOL_QUESTION = "?";
+    public static final String SYMBOL_BAR = "|";
     public static final String COMMAND_WORD = "save";
     public static final String COMMAND_WORD_SHORT = "sv";
 
