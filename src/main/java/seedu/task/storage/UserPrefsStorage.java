@@ -14,7 +14,6 @@ public interface UserPrefsStorage {
     /**
      * Returns UserPrefs data from storage. Returns {@code Optional.empty()} if
      * storage file is not found.
-     * 
      * @throws DataConversionException
      *             if the data in storage is not in the expected format.
      * @throws IOException
@@ -24,7 +23,6 @@ public interface UserPrefsStorage {
 
     /**
      * Saves the given {@link seedu.task.model.UserPrefs} to the storage.
-     * 
      * @param userPrefs
      *            cannot be null.
      * @throws IOException

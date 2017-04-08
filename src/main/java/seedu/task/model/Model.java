@@ -36,7 +36,6 @@ public interface Model {
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
-     * 
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.

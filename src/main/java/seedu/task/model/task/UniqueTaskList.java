@@ -11,8 +11,8 @@ import seedu.task.commons.util.CollectionUtil;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not
- * allow nulls. Supports a minimal set of list operations.
- * 
+ * allow nulls.
+ * Supports a minimal set of list operations.
  * @see Task#equals(Object)
  * @see CollectionUtil#elementsAreUnique(Collection)
  */
@@ -31,7 +31,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Adds a task to the list.
-     * 
      * @throws DuplicateTaskException
      *             if the task to add is a duplicate of an existing task in the
      *             list.
@@ -70,7 +69,6 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
-     * 
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.
@@ -98,7 +96,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Removes the equivalent task from the list.
-     * 
      * @throws TaskNotFoundException
      *             if no such person could be found in the list.
      */
@@ -115,7 +112,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Complete the equivalent task from the list.
-     * 
      * @throws TaskNotFoundException
      *             if no such task could be found in the list.
      */

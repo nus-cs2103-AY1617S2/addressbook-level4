@@ -26,7 +26,8 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: Index [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - all items in []"
-            + " are optional\n" + "Example: " + COMMAND_WORD + " 1 d/140317 s/1200";
+            + " are optional\n"
+            + "Example: " + COMMAND_WORD + " 1 d/140317 s/1200";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
