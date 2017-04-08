@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import typetask.model.task.ReadOnlyTask;
 import typetask.testutil.TypicalTestTasks;
 
-public class AddressBookTest {
+public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

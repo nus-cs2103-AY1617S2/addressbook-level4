@@ -12,12 +12,13 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name("Eat Breakfast"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
-                new Task(new Name("Eat Lunch"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
-                new Task(new Name("Eat Dinner"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
+                new Task(new Name("Add more task"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
+                new Task(new Name("Edit existing task"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
+                new Task(new Name("Delete task"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
                 new Task(new Name("Read Harry Potter book 3"), new DueDate(""), new DueDate(""),
                          false, new Priority("Low")),
-                new Task(new Name("Wash shoe"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
+                new Task(new Name("Use help command for help"), new DueDate(""),
+                        new DueDate(""), false, new Priority("Low")),
                 new Task(new Name("Sweep floor"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
             };
         } catch (IllegalValueException e) {

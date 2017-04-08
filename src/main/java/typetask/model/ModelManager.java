@@ -213,7 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
     public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
         return getFilteredTaskList().indexOf(targetTask);
     }
-
+    //@@author
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {
@@ -244,14 +244,14 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-
+    //@@author A0139926R
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-        //@@author A0139926R
+
         @Override
         public boolean run(ReadOnlyTask task) {
             boolean result = false;
