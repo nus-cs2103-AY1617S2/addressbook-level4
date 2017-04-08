@@ -12,12 +12,12 @@ import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -125,11 +125,6 @@ public class EditCommand extends Command implements Undoable {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
                 updatedStartDateTime.get().setDefaultTime();
             }
-            if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
-                //Floating Task to Non-Floating, do not allow start date only
-                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
-                updatedEndDateTime.get().setDefaultTime();
-            }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
             if (updatedEndDateTime.isPresent()) {
@@ -161,12 +156,27 @@ public class EditCommand extends Command implements Undoable {
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
+        updatedEndDateTime = checkFloatingToNonFloatingCase(editTaskDescriptor, updatedStartDateTime,
+                                                                updatedEndDateTime);
         checkValidDateRange(updatedStartDateTime, updatedEndDateTime);
         checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
 
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
                             updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
+    }
+
+    private static Optional<DateTime> checkFloatingToNonFloatingCase(EditTaskDescriptor editTaskDescriptor,
+                                Optional<DateTime> updatedStartDateTime, Optional<DateTime> updatedEndDateTime)
+                                throws IllegalValueException {
+        if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
+            if (updatedStartDateTime.isPresent()) {
+                //Floating Task to Non-Floating, do not allow start date only
+                Optional<DateTime> temp = Optional.of(updatedStartDateTime.get());
+                return temp;
+            }
+        }
+        return updatedEndDateTime;
     }
 
     private static void checkValidDateRange(Optional<DateTime> updatedStartDateTime,
@@ -292,12 +302,12 @@ public class EditCommand extends Command implements Undoable {
         }
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
-               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
-               taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurState().isRecurring(),
+               taskToEdit.getRecurState().getRecurInterval(), taskToEdit.getRecurState().getRecurCompletedList());
     }
 
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
             throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
         }
     }

@@ -9,13 +9,17 @@ import java.util.Set;
 import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
+
 import seedu.tache.logic.commands.exceptions.CommandException;
+
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
+
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 

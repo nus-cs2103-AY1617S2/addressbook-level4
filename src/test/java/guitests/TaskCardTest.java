@@ -125,7 +125,7 @@ public class TaskCardTest extends TaskManagerGuiTest {
 
         // edit start date and time
         taskToShow.setStartDateTime(new DateTime("30 may 2pm"));
-        commandBox.runCommand("edit 2 change sd to 30 may and st to 2pm");
+        commandBox.runCommand("edit 5 change sd to 30 may and st to 2pm");
         editedCard = taskListPanel.navigateToTask(taskToShow.getName().fullName);
         assertEquals(editedCard.getStartDate(), taskToShow.getStartDateTime().get().getDateOnly());
         assertEquals(editedCard.getStartTime(), taskToShow.getStartDateTime().get().getTimeOnly());

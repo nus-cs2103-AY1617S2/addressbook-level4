@@ -117,8 +117,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("edit 1;");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+        commandBox.runCommand("edit 1");
+        assertResultMessage("Invalid command format! \n" + EditCommand.MESSAGE_USAGE);
     }
 
     //@@author A0139925U

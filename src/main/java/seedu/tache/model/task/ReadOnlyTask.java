@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
@@ -19,13 +19,10 @@ public interface ReadOnlyTask {
     Optional<DateTime> getEndDateTime();
     boolean getActiveStatus();
     boolean getTimedStatus();
-    boolean getRecurringStatus();
-    RecurInterval getRecurInterval();
     boolean isWithinDate(Date date);
-    List<Date> getRecurCompletedList();
-    List<Task> getUncompletedRecurList(Date endingRangeDate);
-    String getRecurDisplayDate();
-    boolean isMasterRecurring();
+    RecurState getRecurState();
+    List<Task> getUncompletedRecurList();
+    List<Task> getUncompletedRecurList(Date filterEndDate);
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -54,10 +51,7 @@ public interface ReadOnlyTask {
                 && start && end
                 && (other.getActiveStatus() == this.getActiveStatus())
                 && (other.getTimedStatus() == this.getTimedStatus())
-                && (other.getRecurringStatus() == this.getRecurringStatus())
-                && other.getRecurInterval().equals(this.getRecurInterval())
-                && other.getRecurDisplayDate().equals(this.getRecurDisplayDate())
-                && other.isMasterRecurring() == this.isMasterRecurring());
+                && (other.getRecurState().equals(this.getRecurState())));
     }
     //@@author
 
