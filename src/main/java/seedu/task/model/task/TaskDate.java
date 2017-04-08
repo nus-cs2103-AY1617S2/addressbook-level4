@@ -47,26 +47,26 @@ public class TaskDate {
 
     public TaskDate(String input) throws IllegalValueException {
 
-        value = input.trim();
-        try {
-            int[] dateArray = dateFormatConverter(input);
-            if (input.length() == 6) {
-                setDay(dateArray[DAY_ARRAY_INDEX]);
-                setMonth(dateArray[MONTH_ARRAY_INDEX]);
-                setYear(dateArray[YEAR_ARRAY_INDEX]);
-            }
-            if (input.length() == 13) {
-                setDay(dateArray[DAY_ARRAY_INDEX]);
-                setMonth(dateArray[MONTH_ARRAY_INDEX]);
-                setYear(dateArray[YEAR_ARRAY_INDEX]);
-                setSecondDay(dateArray[DAY2_ARRAY_INDEX]);
-                setSecondMonth(dateArray[MONTH2_ARRAY_INDEX]);
-                setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
-            }
-        } catch (Exception e) {
-            formatter = new SimpleDateFormat(OUTPUT_FORMAT);
-            NattyParser natty = new NattyParser();
-            dates = natty.parse(input);
+		this.value = input.trim();
+		try {
+			int[] dateArray = dateFormatConverter(value);
+			if (input.length() == 6) {
+				setDay(dateArray[DAY_ARRAY_INDEX]);
+				setMonth(dateArray[MONTH_ARRAY_INDEX]);
+				setYear(dateArray[YEAR_ARRAY_INDEX]);
+			}
+			if (input.length() == 13) {
+				setDay(dateArray[DAY_ARRAY_INDEX]);
+				setMonth(dateArray[MONTH_ARRAY_INDEX]);
+				setYear(dateArray[YEAR_ARRAY_INDEX]);
+				setSecondDay(dateArray[DAY2_ARRAY_INDEX]);
+				setSecondMonth(dateArray[MONTH2_ARRAY_INDEX]);
+				setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
+			}
+		} catch (Exception e) {
+			formatter = new SimpleDateFormat(OUTPUT_FORMAT);
+			NattyParser natty = new NattyParser();
+			dates = natty.parse(input);
 
             if (dates == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
