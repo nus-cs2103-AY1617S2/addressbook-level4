@@ -53,7 +53,7 @@ public class XmlAliasListMapStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveTodoList_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAliasListMap.xml";
         AliasListMap original = new AliasListMap();
         XmlAliasListMapStorage xmlAliasListMapStorage = new XmlAliasListMapStorage(filePath);
@@ -78,7 +78,7 @@ public class XmlAliasListMapStorageTest {
     }
 
     @Test
-    public void saveAliasListMap_nullAddressBook_assertionFailure() throws IOException {
+    public void saveAliasListMap_nullTodoList_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveAliasListMap(null, "SomeFile.xml");
     }

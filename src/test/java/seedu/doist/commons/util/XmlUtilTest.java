@@ -86,7 +86,7 @@ public class XmlUtilTest {
 
         TodoListBuilder builder = new TodoListBuilder(new TodoList());
         dataToWrite = new XmlSerializableTodoList(
-                builder.withPerson(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
+                builder.withTask(TestUtil.generateSamplePersonData().get(0)).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTodoList.class);

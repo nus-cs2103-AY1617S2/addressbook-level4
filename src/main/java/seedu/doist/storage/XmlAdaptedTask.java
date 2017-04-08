@@ -82,16 +82,16 @@ public class XmlAdaptedTask {
     public Task toModelType() throws IllegalValueException {
         // instead of throwing illegal value exception,
         // can consider just removing the invalid data
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            taskTags.add(tag.toModelType());
         }
         final Description name = new Description(this.desc);
         final Priority priority = new Priority(this.priority);
         final FinishedStatus finishedStatus = new FinishedStatus(Boolean.parseBoolean(this.finishedStatus));
         final Date startDate = getDate(this.startDate);
         final Date endDate = getDate(this.endDate);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
 
         return new Task(name, priority, finishedStatus, new TaskDate(startDate, endDate), tags);
     }

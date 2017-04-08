@@ -10,7 +10,7 @@ import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.TaskDate;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 

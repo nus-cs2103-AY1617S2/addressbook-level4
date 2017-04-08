@@ -28,12 +28,12 @@ public class AliasCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        if (!model.getDefaultCommandWordSet().contains(defaultCommandWord)) {
+        if (!aliasModel.getDefaultCommandWordSet().contains(defaultCommandWord)) {
             throw new CommandException(String.format(MESSAGE_COMMAND_WORD_NOT_EXIST, defaultCommandWord));
-        } else if (model.getDefaultCommandWordSet().contains(alias)) {
+        } else if (aliasModel.getDefaultCommandWordSet().contains(alias)) {
             throw new CommandException(String.format(MESSAGE_ALIAS_IS_DEFAULT_COMMAND_WORD, alias));
         } else {
-            model.setAlias(alias, defaultCommandWord);
+            aliasModel.setAlias(alias, defaultCommandWord);
             return new CommandResult(String.format(MESSAGE_SUCCESS, alias, defaultCommandWord));
         }
     }

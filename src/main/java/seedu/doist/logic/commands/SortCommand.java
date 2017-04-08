@@ -5,7 +5,7 @@ import java.util.List;
 
 //@@author A0140887W
 /**
- * Sorts all persons in the to-do list by the specified parameter and shows it to the user.
+ * Sorts all tasks in the to-do list by the specified parameter and shows it to the user.
  */
 public class SortCommand extends Command {
 

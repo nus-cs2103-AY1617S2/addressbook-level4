@@ -34,12 +34,12 @@ public class SaveAtCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assert configModel != null;
         if (file.exists() && !file.isDirectory()) {
             throw new CommandException(MESSAGE_FILE_EXISTS);
         }
         // This would trigger an event that will change storage
-        model.changeConfigAbsolutePath(file.toPath().toAbsolutePath());
+        configModel.changeConfigAbsolutePath(file.toPath().toAbsolutePath());
         return new CommandResult(String.format(MESSAGE_SUCCESS, file));
     }
 }

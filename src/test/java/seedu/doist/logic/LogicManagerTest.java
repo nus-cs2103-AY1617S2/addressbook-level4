@@ -35,6 +35,10 @@ import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.AliasListMapManager;
+import seedu.doist.model.AliasListMapModel;
+import seedu.doist.model.ConfigManager;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.ModelManager;
 import seedu.doist.model.ReadOnlyTodoList;
@@ -56,16 +60,18 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private AliasListMapModel aliasModel;
+    private ConfigModel configModel;
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyTodoList latestSavedAddressBook;
+    private ReadOnlyTodoList latestSavedTodoList;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TodoListChangedEvent tce) {
-        latestSavedAddressBook = new TodoList(tce.data);
+        latestSavedTodoList = new TodoList(tce.data);
     }
 
     @Subscribe
@@ -81,14 +87,16 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
+        aliasModel = new AliasListMapManager();
+        configModel = new ConfigManager();
+        String tempTodoListFile = saveFolder.getRoot().getPath() + "TempTodoList.xml";
         String tempAliasListMapFile = saveFolder.getRoot().getPath() + "TempAliasListMap.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempAddressBookFile, tempAliasListMapFile,
-                                                                tempPreferencesFile));
+        logic = new LogicManager(model, aliasModel, configModel, new StorageManager(tempTodoListFile,
+                tempAliasListMapFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedAddressBook = new TodoList(model.getTodoList()); // last saved assumed to be up to date
+        latestSavedTodoList = new TodoList(model.getTodoList()); // last saved assumed to be up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -106,18 +114,18 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
-     * Also confirms that both the 'address book' and the 'last shown list' are as specified.
+     * Also confirms that both the 'to do list' and the 'last shown list' are as specified.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTodoList, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-                                      ReadOnlyTodoList expectedAddressBook,
+                                      ReadOnlyTodoList expectedTodoList,
                                       List<? extends ReadOnlyTask> expectedShownList) {
-        assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
+        assertCommandBehavior(false, inputCommand, expectedMessage, expectedTodoList, expectedShownList);
     }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * Both the 'address book' and the 'last shown list' are verified to be unchanged.
+     * Both the 'to do list' and the 'last shown list' are verified to be unchanged.
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTodoList, List)
      */
     private void assertCommandFailure(String inputCommand, String expectedMessage) {
@@ -130,12 +138,12 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal todo list data are same as those in the {@code expectedTodoList} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedTodoList} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
-                                       ReadOnlyTodoList expectedAddressBook,
+                                       ReadOnlyTodoList expectedTodoList,
                                        List<? extends ReadOnlyTask> expectedShownList) {
 
         try {
@@ -151,8 +159,8 @@ public class LogicManagerTest {
         assertEquals(expectedShownList, model.getFilteredTaskList());
 
         //Confirm the state of data (saved and in-memory) is as expected
-        assertEquals(expectedAddressBook, model.getTodoList());
-        assertEquals(expectedAddressBook, latestSavedAddressBook);
+        assertEquals(expectedTodoList, model.getTodoList());
+        assertEquals(expectedTodoList, latestSavedTodoList);
     }
 
     @Test
@@ -228,10 +236,10 @@ public class LogicManagerTest {
         Task toBeAdded = helper.doLaundry();
 
         // setup starting state
-        model.addTask(toBeAdded); // person already in internal address book
+        model.addTask(toBeAdded); // task already in internal todo list
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_DUPLICATE_TASK);
     }
 
 
@@ -239,10 +247,10 @@ public class LogicManagerTest {
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TodoList expectedAB = helper.generateAddressBook(2);
+        TodoList expectedAB = helper.generateTodoList(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
-        // prepare address book state
+        // prepare todo list state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("list all",
@@ -254,8 +262,8 @@ public class LogicManagerTest {
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * targeting a single task in the shown list, using visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIncorrectIndexFormatBehaviorForCommand(String commandWord, String expectedMessage)
@@ -269,18 +277,18 @@ public class LogicManagerTest {
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list
+     * targeting a single task in the shown list, using visible index.
+     * @param commandWord to test assuming it targets a single task in the last shown list
      *                    based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
-        List<Task> personList = helper.generateTaskList(2);
+        List<Task> taskList = helper.generateTaskList(2);
 
-        // set AB state to 2 persons
+        // set AB state to 2 tasks
         model.resetData(new TodoList());
-        for (Task p : personList) {
+        for (Task p : taskList) {
             model.addTask(p);
         }
 
@@ -303,7 +311,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threePersons = helper.generateTaskList(3);
 
-        TodoList expectedAB = helper.generateAddressBook(threePersons);
+        TodoList expectedAB = helper.generateTodoList(threePersons);
         helper.addToModel(model, threePersons);
 
         assertCommandSuccess("select 2",
@@ -331,7 +339,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threePersons = helper.generateTaskList(3);
 
-        TodoList expectedAB = helper.generateAddressBook(threePersons);
+        TodoList expectedAB = helper.generateTodoList(threePersons);
         expectedAB.removeTask(threePersons.get(1));
         helper.addToModel(model, threePersons);
 
@@ -359,7 +367,7 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithDescription("KEYKEYKEY sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TodoList expectedAB = helper.generateAddressBook(fourPersons);
+        TodoList expectedAB = helper.generateTodoList(fourPersons);
         List<Task> expectedList = helper.generateTaskList(pTarget1, p2, pTarget2);
         helper.addToModel(model, fourPersons);
 
@@ -381,7 +389,7 @@ public class LogicManagerTest {
         Task p4 = helper.generateTaskWithDescription("KEy sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
-        TodoList expectedAB = helper.generateAddressBook(fourPersons);
+        TodoList expectedAB = helper.generateTodoList(fourPersons);
         List<Task> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
 
@@ -403,7 +411,7 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithDescription("sduauo");
 
         List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TodoList expectedAB = helper.generateAddressBook(fourPersons);
+        TodoList expectedAB = helper.generateTodoList(fourPersons);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
         helper.addToModel(model, fourPersons);
 
@@ -434,22 +442,22 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a valid person using the given seed.
-         * Running this function with the same parameter values guarantees the returned person will have the same state.
-         * Each unique seed will generate a unique Person object.
+         * Generates a valid task using the given seed.
+         * Running this function with the same parameter values guarantees the returned task will have the same state.
+         * Each unique seed will generate a unique Task object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed used to generate the task data field values
          */
 
         // TODO: MAKE IT EASIER TO GENERATE RANDOM DATES
         protected Task generateTask(int seed) throws Exception {
             return new Task(
-                    new Description("Person " + seed),
+                    new Description("Task " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         protected String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
@@ -471,53 +479,53 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an AddressBook with auto-generated persons.
+         * Generates an TodoList with auto-generated tasks.
          */
-        protected TodoList generateAddressBook(int numGenerated) throws Exception {
-            TodoList addressBook = new TodoList();
-            addToAddressBook(addressBook, numGenerated);
-            return addressBook;
+        protected TodoList generateTodoList(int numGenerated) throws Exception {
+            TodoList todoList = new TodoList();
+            addToTodoList(todoList, numGenerated);
+            return todoList;
         }
 
         /**
-         * Generates an AddressBook based on the list of Persons given.
+         * Generates an TodoList based on the list of Tasks given.
          */
-        protected TodoList generateAddressBook(List<Task> persons) throws Exception {
-            TodoList addressBook = new TodoList();
-            addToAddressBook(addressBook, persons);
-            return addressBook;
+        protected TodoList generateTodoList(List<Task> tasks) throws Exception {
+            TodoList todoList = new TodoList();
+            addToTodoList(todoList, tasks);
+            return todoList;
         }
 
         /**
-         * Adds auto-generated Person objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Persons will be added
+         * Adds auto-generated Task objects to the given TodoList
+         * @param todoList The TodoList to which the Tasks will be added
          */
-        protected void addToAddressBook(TodoList addressBook, int numGenerated) throws Exception {
-            addToAddressBook(addressBook, generateTaskList(numGenerated));
+        protected void addToTodoList(TodoList todoList, int numGenerated) throws Exception {
+            addToTodoList(todoList, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given AddressBook
+         * Adds the given list of Tasks to the given TodoList
          */
-        protected void addToAddressBook(TodoList addressBook, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
-                addressBook.addTask(p);
+        protected void addToTodoList(TodoList todoList, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
+                todoList.addTask(p);
             }
         }
 
         /**
-         * Adds auto-generated Person objects to the given model
-         * @param model The model to which the Persons will be added
+         * Adds auto-generated Task objects to the given model
+         * @param model The model to which the Tasks will be added
          */
         protected void addToModel(Model model, int numGenerated) throws Exception {
             addToModel(model, generateTaskList(numGenerated));
         }
 
         /**
-         * Adds the given list of Persons to the given model
+         * Adds the given list of Tasks to the given model
          */
-        protected void addToModel(Model model, List<Task> personsToAdd) throws Exception {
-            for (Task p: personsToAdd) {
+        protected void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
+            for (Task p: tasksToAdd) {
                 model.addTask(p);
             }
         }
