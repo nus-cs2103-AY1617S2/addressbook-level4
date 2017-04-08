@@ -10,9 +10,10 @@ import java.util.Random;
 public class TagColorMap {
     private static HashMap<String, String> tagColorMap;
 
-    /*
+    /**
      * Sets sets a random colour for a tag if the tag exists but
      * does not have an assigned colour yet
+     * @param tag
      */
     public static void setColor(String tag) {
         Random rand = new Random();
@@ -23,9 +24,10 @@ public class TagColorMap {
         tagColorMap.put(tag, hex);
     }
 
-    /*
+    /**
      * Returns the color of the tag, if the tag does not
      * have a colour, a random one is assigned
+     * @param tag
      */
     public static String getColor(String tag) {
         if (tagColorMap == null) {

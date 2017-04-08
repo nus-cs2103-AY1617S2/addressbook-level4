@@ -31,6 +31,11 @@ public class FileUtil {
         return file.isDirectory();
     }
 
+    /**
+     * Checks if file is in correct taskmanager format to be read
+     * @param file
+     * @return true if if it correct Xml file which is readable
+     */
     public static boolean isFileFormatCorrect(File file) {
         assert file != null;
         try {

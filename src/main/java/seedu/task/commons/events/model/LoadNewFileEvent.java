@@ -3,7 +3,7 @@ package seedu.task.commons.events.model;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.TaskManager;
 //@@author A0142939W
-/** Indicates the TaskManager in the model has changed*/
+/** Indicates to load new task manager in the model*/
 public class LoadNewFileEvent extends BaseEvent {
 
     public final String path;

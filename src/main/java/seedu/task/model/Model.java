@@ -95,7 +95,7 @@ public interface Model {
     //@@author A0142939W
     /** Changes the load path for data to be loaded from*/
     void loadFromLocation(String loadPath);
-
+    //@@author
     /** Sorts the task list */
     void sortTaskList();
 

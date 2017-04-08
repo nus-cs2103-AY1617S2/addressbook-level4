@@ -27,6 +27,7 @@ public class LoadCommand extends Command {
 
     /**
      * Creates a Load command
+     * @param pathName the designated path to load from
      */
     public LoadCommand(String pathName) {
         this.pathName = pathName;

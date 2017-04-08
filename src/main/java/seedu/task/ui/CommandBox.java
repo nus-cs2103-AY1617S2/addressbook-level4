@@ -78,6 +78,7 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0142939W
     /**
      * Sets the text in command box.
+     * @param text which is the intended text
      */
     public void setText(String text) {
         commandTextField.setText(text);
@@ -102,6 +103,7 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0142939W
     /**
      * Types the given text in the commandbox and sets focus there
+     * @param text is the given text so set in the command box
      */
     public void type(String text) {
         setText(text);
