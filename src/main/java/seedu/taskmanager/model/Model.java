@@ -32,7 +32,7 @@ public interface Model {
      * Sorts task list based on keywords (startdate or enddate).
      */
     void sortTasks(String keyword);
- 
+
     /** Returns the current tab selected. */
     String getSelectedTab();
     // @@author
