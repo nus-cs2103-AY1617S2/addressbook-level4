@@ -20,7 +20,7 @@ public class SyncCommandTest {
 
     @Rule
     public TemporaryFolder saveFolder = new TemporaryFolder();
-    
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
