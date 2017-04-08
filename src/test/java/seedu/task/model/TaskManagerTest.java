@@ -2,16 +2,10 @@ package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-
-//import java.util.ArrayList;
-//import java.util.Arrays;
-
+import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
-//import java.util.List;
-import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,8 +17,6 @@ import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.testutil.TypicalTestTasks;
-//import seedu.task.model.task.Task;
-//import seedu.task.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
 
@@ -65,7 +57,8 @@ public class TaskManagerTest {
 
     // @Test
     // public void resetData_withDuplicateTags_throwsAssertionError() {
-    // TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+    // TaskManager typicalTaskManager = new
+    // TypicalTestTasks().getTypicalTaskManager();
     // List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
     // List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
     // // Repeat the first tag twice
@@ -77,7 +70,8 @@ public class TaskManagerTest {
     // }
 
     /**
-     * A stub ReadOnlyTaskManager whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose persons and tags lists can violate
+     * interface constraints.
      */
     private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();

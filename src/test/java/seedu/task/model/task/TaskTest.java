@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import seedu.task.model.tag.UniqueTagList;
