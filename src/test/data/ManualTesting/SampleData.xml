@@ -137,6 +137,49 @@
         <location>Home</location>
         <status>true</status>
     </tasks>
+    <tasks>
+        <description>Buy leather shoes</description>
+        <priority>medium</priority>
+        <byTime>23:59</byTime>
+        <byDate>2017-05-02</byDate>
+        <location>JEM</location>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Meet Uncle Liang</description>
+        <priority>medium</priority>
+        <location>Utown</location>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>make FIN3101 CheatSheet</description>
+        <priority>high</priority>
+        <byTime>23:59</byTime>
+        <byDate>2017-04-10</byDate>
+        <location>home</location>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Revise CS2103</description>
+        <priority>medium</priority>
+        <byTime>23:59</byTime>
+        <byDate>2017-04-20</byDate>
+        <location>home</location>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>prepare CIP form</description>
+        <priority>medium</priority>
+        <byTime>23:59</byTime>
+        <byDate>2017-04-20</byDate>
+        <location>cinnamon College</location>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Watch Get Oot</description>
+        <priority>low</priority>
+        <status>false</status>
+    </tasks>
     <events>
         <description>CS2010 Week 7 Lecture</description>
         <startTime>12:00</startTime>
@@ -370,6 +413,21 @@
         <endTime>23:59</endTime>
         <endDate>2017-04-17</endDate>
         <location>I-CUBE</location>
+    </events>
+    <events>
+        <description>meet with Ms Glenna</description>
+        <startTime>13:00</startTime>
+        <startDate>2017-04-11</startDate>
+        <endTime>14:00</endTime>
+        <endDate>2017-04-11</endDate>
+        <location>ICBC Standard Bank</location>
+    </events>
+    <events>
+        <description>FIN3101 Final Exams</description>
+        <startTime>17:00</startTime>
+        <startDate>2017-04-12</startDate>
+        <endTime>19:00</endTime>
+        <endDate>2017-04-12</endDate>
     </events>
     <tags>webcasted</tags>
     <tags>V04</tags>
