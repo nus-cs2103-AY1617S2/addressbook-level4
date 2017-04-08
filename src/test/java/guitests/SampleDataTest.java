@@ -9,7 +9,7 @@ import typetask.model.task.Task;
 import typetask.model.util.SampleDataUtil;
 import typetask.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TypeTaskGuiTest {
     @Override
     protected TaskManager getInitialData() {
         // return null to force test app to load data from file only
@@ -25,6 +25,6 @@ public class SampleDataTest extends AddressBookGuiTest {
     @Test
     public void taskManagerDataFileDoesNotExistLoadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

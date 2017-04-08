@@ -11,7 +11,7 @@ import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 
 //@@author A0139926R
-public class RemoveDeadlineCommandTest extends AddressBookGuiTest {
+public class RemoveDeadlineCommandTest extends TypeTaskGuiTest {
 
     private static final String REMOVEDEADLINE_COMMAND = "removedeadline";
     private static final String ADD_DEADLINE_TO_EXISTING = "edit 1 by: tmr";
@@ -37,7 +37,7 @@ public class RemoveDeadlineCommandTest extends AddressBookGuiTest {
 
         commandBox.runCommand(REMOVEDEADLINE_COMMAND + " " + editedIndex);
         assertResultMessage(String.format(RemoveDeadlineCommand.MESSAGE_EDIT_TASK_SUCCESS, expectedResult));
-        assertEquals(personListPanel.getPerson(editedIndex).getDate().value, emptyDate);
-        assertEquals(personListPanel.getPerson(editedIndex).getEndDate().value, emptyDate);
+        assertEquals(taskListPanel.getTask(editedIndex).getDate().value, emptyDate);
+        assertEquals(taskListPanel.getTask(editedIndex).getEndDate().value, emptyDate);
     }
 }

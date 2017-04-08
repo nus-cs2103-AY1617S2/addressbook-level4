@@ -9,7 +9,7 @@ import typetask.commons.core.Messages;
 import typetask.testutil.TestTask;
 
 //@@author A0144902L
-public class DoneCommandTest extends AddressBookGuiTest {
+public class DoneCommandTest extends TypeTaskGuiTest {
 
   //---------------- Tests for validity of given index for Different Format -----------------------------
 

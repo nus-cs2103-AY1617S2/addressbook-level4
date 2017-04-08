@@ -8,7 +8,7 @@ import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.UndoCommand;
 
 //@@author A0139926R
-public class UndoCommandTest extends AddressBookGuiTest {
+public class UndoCommandTest extends TypeTaskGuiTest {
 
     private static final String ADD_COMMAND = "add test";
     private static final String EDIT_COMMAND = "edit 1 by: tmr";
@@ -81,11 +81,11 @@ public class UndoCommandTest extends AddressBookGuiTest {
     private void assertUndoSuccess() {
         commandBox.runCommand(UNDO_COMMAND);
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
     }
     private void assertUndoShortcutSuccess() {
         commandBox.runCommand(UNDO_SHORT_COMMAND);
         assertResultMessage(UndoCommand.MESSAGE_SUCCESS);
-        assertTrue(personListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
     }
 }

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import typetask.model.task.ReadOnlyTask;
 
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TypeTaskGuiTest {
 
 
     @Test
@@ -15,13 +15,13 @@ public class SelectCommandTest extends AddressBookGuiTest {
         assertSelectionInvalid(10); // invalid index
         assertNoTaskSelected();
 
-        assertSelectionSuccess(1); // first person in the list
-        int personCount = td.getTypicalTasks().length;
-        assertSelectionSuccess(personCount); // last person in the list
-        int middleIndex = personCount / 2;
-        assertSelectionSuccess(middleIndex); // a person in the middle of the list
+        assertSelectionSuccess(1); // first task in the list
+        int taskCount = td.getTypicalTasks().length;
+        assertSelectionSuccess(taskCount); // last task in the list
+        int middleIndex = taskCount / 2;
+        assertSelectionSuccess(middleIndex); // a task in the middle of the list
 
-        assertSelectionInvalid(personCount + 1); // invalid index
+        assertSelectionInvalid(taskCount + 1); // invalid index
         assertTaskSelected(middleIndex); // assert previous selection remains
 
         /* Testing other invalid indexes such as -1 should be done when testing the SelectCommand */
@@ -46,14 +46,14 @@ public class SelectCommandTest extends AddressBookGuiTest {
     }
 
     private void assertTaskSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyTask selectedPerson = personListPanel.getSelectedPersons().get(0);
-        assertEquals(personListPanel.getPerson(index - 1), selectedPerson);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedPerson = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedPerson);
         //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0);
+        assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 
 }

@@ -16,7 +16,7 @@ import typetask.commons.util.FxViewUtil;
 import typetask.model.task.ReadOnlyTask;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
@@ -47,7 +47,7 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
