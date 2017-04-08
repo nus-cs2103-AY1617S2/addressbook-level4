@@ -13,25 +13,25 @@ public class Description {
     public final String value;
 
     public Description(String description) {
-	this.value = description;
+        this.value = description;
     }
 
     @Override
     public String toString() {
-	return value;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof Description // instanceof handles nulls
-			&& this.value.equals(((Description) other).value)); // state
-									    // check
+        return other == this // short circuit if same object
+                || (other instanceof Description // instanceof handles nulls
+                        && this.value.equals(((Description) other).value)); // state
+        // check
     }
 
     @Override
     public int hashCode() {
-	return value.hashCode();
+        return value.hashCode();
     }
 
     /**
@@ -39,13 +39,13 @@ public class Description {
      * blank("") and never null.
      */
     public static boolean isValidDescription(String string) {
-	if (string == null) {
-	    return false;
-	} else if (string.length() > DESCRIPTION_MAXIMUM_LENGTH) {
-	    return false;
-	} else {
-	    return true;
-	}
+        if (string == null) {
+            return false;
+        } else if (string.length() > DESCRIPTION_MAXIMUM_LENGTH) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

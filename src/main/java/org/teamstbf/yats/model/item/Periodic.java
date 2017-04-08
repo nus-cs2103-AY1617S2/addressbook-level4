@@ -16,22 +16,22 @@ public class Periodic {
     public static final String PERIODIC_VALIDATION_REGEX = ".*(none|daily|weekly|monthly).*";
 
     public static boolean isPeriodic() {
-	return isPeriodic;
+        return isPeriodic;
     }
 
     /**
      * Returns if a given string is a valid period.
      */
     public static boolean isValidPeriod(String test) {
-	return test.matches(PERIODIC_VALIDATION_REGEX);
+        return test.matches(PERIODIC_VALIDATION_REGEX);
     }
 
     public static void setPeriodicityFalse() {
-	isPeriodic = false;
+        isPeriodic = false;
     }
 
     public static void setPeriodicityTrue() {
-	isPeriodic = true;
+        isPeriodic = true;
     }
 
     private ArrayList<Schedule> scheduleArray;
@@ -59,30 +59,30 @@ public class Periodic {
      *             if given period string is invalid.
      */
     public Periodic(String period) throws IllegalValueException {
-	assert period != null;
-	String trimmedPeriod = period.trim();
-	if (!isValidPeriod(trimmedPeriod)) {
-	    throw new IllegalValueException(MESSAGE_PERIODIC_CONSTRAINTS);
-	}
-	this.value = trimmedPeriod;
-	int repeatFrequency = parsePeriod(trimmedPeriod);
+        assert period != null;
+        String trimmedPeriod = period.trim();
+        if (!isValidPeriod(trimmedPeriod)) {
+            throw new IllegalValueException(MESSAGE_PERIODIC_CONSTRAINTS);
+        }
+        this.value = trimmedPeriod;
+        int repeatFrequency = parsePeriod(trimmedPeriod);
     }
 
     @Override
     public boolean equals(Object other) {
-	return other == this // short circuit if same object
-		|| (other instanceof Periodic // instanceof handles nulls
-			&& this.value.equals(((Periodic) other).value)); // state
-									 // check
+        return other == this // short circuit if same object
+                || (other instanceof Periodic // instanceof handles nulls
+                        && this.value.equals(((Periodic) other).value)); // state
+        // check
     }
 
     public ArrayList<Schedule> getScheduleArray() {
-	return scheduleArray;
+        return scheduleArray;
     }
 
     @Override
     public int hashCode() {
-	return value.hashCode();
+        return value.hashCode();
     }
 
     /**
@@ -92,24 +92,24 @@ public class Periodic {
      * @return period as integer
      */
     public int parsePeriod(String value) {
-	int repeatFrequency = REPEAT_FREQUENCY_NONE;
-	switch (value) {
-	case (PERIODIC_NONE):
-	    setPeriodicityFalse();
-	case (PERIODIC_DAILY): {
-	    repeatFrequency = REPEAT_FREQUENCY_DAILY;
-	    setPeriodicityTrue();
-	}
-	case (PERIODIC_WEEKLY): {
-	    repeatFrequency = REPEAT_FREQUENCY_WEEKLY;
-	    setPeriodicityTrue();
-	}
-	case (PERIODIC_MONTHLY): {
-	    repeatFrequency = REPEAT_FREQUENCY_MONTHLY;
-	    setPeriodicityTrue();
-	}
-	}
-	return repeatFrequency;
+        int repeatFrequency = REPEAT_FREQUENCY_NONE;
+        switch (value) {
+        case (PERIODIC_NONE):
+            setPeriodicityFalse();
+        case (PERIODIC_DAILY): {
+            repeatFrequency = REPEAT_FREQUENCY_DAILY;
+            setPeriodicityTrue();
+        }
+        case (PERIODIC_WEEKLY): {
+            repeatFrequency = REPEAT_FREQUENCY_WEEKLY;
+            setPeriodicityTrue();
+        }
+        case (PERIODIC_MONTHLY): {
+            repeatFrequency = REPEAT_FREQUENCY_MONTHLY;
+            setPeriodicityTrue();
+        }
+        }
+        return repeatFrequency;
     }
 
     public void setupScheduleArray() {
@@ -117,7 +117,7 @@ public class Periodic {
 
     @Override
     public String toString() {
-	return value;
+        return value;
     }
 
 }

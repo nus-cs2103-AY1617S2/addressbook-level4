@@ -71,21 +71,21 @@ public class XmlAdaptedTask {
      *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyEvent source) {
-	title = source.getTitle().fullName;
-	location = source.getLocation().value;
-	startTime = source.getStartTime().toString();
-	endTime = source.getEndTime().toString();
-	deadline = source.getDeadline().toString();
-	description = source.getDescription().value;
-	completed = source.getIsDone().getValue();
-	tagged = new ArrayList<>();
-	for (Tag tag : source.getTags()) {
-	    tagged.add(new XmlAdaptedTag(tag));
-	}
-	this.isRecurring = source.isRecurring() ? RECURRING_YES : RECURRING_NO;
-	this.recurrenceStart = source.getRecurrence().getStartTimeString();
-	this.recurrencePeriodicity = source.getRecurrence().getPeriodicity();
-	this.recurrenceDoneList = source.getRecurrence().getDoneListString();
+        title = source.getTitle().fullName;
+        location = source.getLocation().value;
+        startTime = source.getStartTime().toString();
+        endTime = source.getEndTime().toString();
+        deadline = source.getDeadline().toString();
+        description = source.getDescription().value;
+        completed = source.getIsDone().getValue();
+        tagged = new ArrayList<>();
+        for (Tag tag : source.getTags()) {
+            tagged.add(new XmlAdaptedTag(tag));
+        }
+        this.isRecurring = source.isRecurring() ? RECURRING_YES : RECURRING_NO;
+        this.recurrenceStart = source.getRecurrence().getStartTimeString();
+        this.recurrencePeriodicity = source.getRecurrence().getPeriodicity();
+        this.recurrenceDoneList = source.getRecurrence().getDoneListString();
     }
 
     /**
@@ -97,25 +97,25 @@ public class XmlAdaptedTask {
      *             task
      */
     public Event toModelType() throws IllegalValueException {
-	final List<Tag> personTags = new ArrayList<>();
-	for (XmlAdaptedTag tag : tagged) {
-	    personTags.add(tag.toModelType());
-	}
-	final Title title = new Title(this.title);
-	final Location location = new Location(this.location);
-	final Schedule startTime = new Schedule(this.startTime);
-	final Schedule endTime = new Schedule(this.endTime);
-	final Schedule deadline = new Schedule(this.deadline);
-	final Description description = new Description(this.description);
-	final UniqueTagList tags = new UniqueTagList(personTags);
-	final IsDone isDone = new IsDone(this.completed);
-	final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ? true : false;
-	Recurrence recurrence = new Recurrence();
-	if (this.isRecurring.equals(RECURRING_YES)) {
-	    recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
-	}
+        final List<Tag> personTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            personTags.add(tag.toModelType());
+        }
+        final Title title = new Title(this.title);
+        final Location location = new Location(this.location);
+        final Schedule startTime = new Schedule(this.startTime);
+        final Schedule endTime = new Schedule(this.endTime);
+        final Schedule deadline = new Schedule(this.deadline);
+        final Description description = new Description(this.description);
+        final UniqueTagList tags = new UniqueTagList(personTags);
+        final IsDone isDone = new IsDone(this.completed);
+        final boolean isRecurring = this.isRecurring.equals(RECURRING_YES) ? true : false;
+        Recurrence recurrence = new Recurrence();
+        if (this.isRecurring.equals(RECURRING_YES)) {
+            recurrence = new Recurrence(this.recurrenceStart, this.recurrencePeriodicity, this.recurrenceDoneList);
+        }
 
-	return new Event(title, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
-		recurrence);
+        return new Event(title, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
+                recurrence);
     }
 }

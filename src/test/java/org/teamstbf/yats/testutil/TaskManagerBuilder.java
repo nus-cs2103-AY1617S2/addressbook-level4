@@ -19,7 +19,7 @@ public class TaskManagerBuilder {
 		this.taskManager = taskManager;
 	}
 
-	public TaskManagerBuilder withEvent(Event event) throws UniqueEventList.DuplicateEventException {
+	public TaskManagerBuilder withEvent(Event event) {
 		taskManager.addEvent(event);
 		return this;
 	}

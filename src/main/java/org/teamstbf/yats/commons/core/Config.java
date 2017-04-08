@@ -20,86 +20,86 @@ public class Config {
     private String taskManagerName = "MyYATSList";
 
     public String getAppTitle() {
-	return appTitle;
+        return appTitle;
     }
 
     public void setAppTitle(String appTitle) {
-	this.appTitle = appTitle;
+        this.appTitle = appTitle;
     }
 
     public Level getLogLevel() {
-	return logLevel;
+        return logLevel;
     }
 
     public void setLogLevel(Level logLevel) {
-	this.logLevel = logLevel;
+        this.logLevel = logLevel;
     }
 
     public String getUserPrefsFilePath() {
-	return userPrefsFilePath;
+        return userPrefsFilePath;
     }
 
     public void setUserPrefsFilePath(String userPrefsFilePath) {
-	this.userPrefsFilePath = userPrefsFilePath;
+        this.userPrefsFilePath = userPrefsFilePath;
     }
 
     public String getTaskManagerFilePath() {
-	return taskManagerFilePath;
+        return taskManagerFilePath;
     }
 
     public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateFileException {
-	if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
-	    throw new DuplicateFileException("Invalid. Command will result in duplicate file in source directory");
-	} else {
-	    this.taskManagerFilePath = taskManagerFilePath;
-	}
+        if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
+            throw new DuplicateFileException("Invalid. Command will result in duplicate file in source directory");
+        } else {
+            this.taskManagerFilePath = taskManagerFilePath;
+        }
     }
 
     public String getTaskManagerName() {
-	return taskManagerName;
+        return taskManagerName;
     }
 
     public void setTaskManagerName(String taskManagerName) {
-	this.taskManagerName = taskManagerName;
+        this.taskManagerName = taskManagerName;
     }
 
     @Override
     public boolean equals(Object other) {
-	if (other == this) {
-	    return true;
-	}
-	if (!(other instanceof Config)) { // this handles null as well.
-	    return false;
-	}
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Config)) { // this handles null as well.
+            return false;
+        }
 
-	Config o = (Config) other;
+        Config o = (Config) other;
 
-	return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
-		&& Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-		&& Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
-		&& Objects.equals(taskManagerName, o.taskManagerName);
+        return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+                && Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
+                && Objects.equals(taskManagerName, o.taskManagerName);
     }
 
     @Override
     public int hashCode() {
-	return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
     }
 
     @Override
     public String toString() {
-	StringBuilder sb = new StringBuilder();
-	sb.append("App title : " + appTitle);
-	sb.append("\nCurrent log level : " + logLevel);
-	sb.append("\nPreference file Location : " + userPrefsFilePath);
-	sb.append("\nLocal data file location : " + taskManagerFilePath);
-	sb.append("\nTaskManager name : " + taskManagerName);
-	return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("App title : " + appTitle);
+        sb.append("\nCurrent log level : " + logLevel);
+        sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append("\nLocal data file location : " + taskManagerFilePath);
+        sb.append("\nTaskManager name : " + taskManagerName);
+        return sb.toString();
     }
 
     public static class DuplicateFileException extends DuplicateDataException {
-	public DuplicateFileException(String message) {
-	    super(message);
-	}
+        public DuplicateFileException(String message) {
+            super(message);
+        }
     }
 
 }

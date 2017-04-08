@@ -5,6 +5,6 @@ package org.teamstbf.yats.commons.exceptions;
  */
 public abstract class DuplicateDataException extends IllegalValueException {
     public DuplicateDataException(String message) {
-	super(message);
+        super(message);
     }
 }

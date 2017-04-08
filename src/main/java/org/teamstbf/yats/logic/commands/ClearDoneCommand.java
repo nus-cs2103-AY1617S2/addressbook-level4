@@ -17,25 +17,26 @@ public class ClearDoneCommand extends Command {
 
     @Override
     public CommandResult execute() {
-	UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+        UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
-	int formerSize = lastShownList.size();
+        int formerSize = lastShownList.size();
+        model.saveImageOfCurrentTaskManager();
 
-	for (int index = 0; index < lastShownList.size(); index++) {
-	    if (lastShownList.get(index).getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
-		ReadOnlyEvent eventToDelete = lastShownList.get(index);
-		try {
-		    model.deleteEvent(eventToDelete);
-		} catch (EventNotFoundException pnfe) {
-		    assert false : "The target task cannot be missing";
-		}
-		index--;
-	    }
-	}
-	if (formerSize == lastShownList.size()) {
-	    return new CommandResult(MESSAGE_ALREADY_CLEAR);
-	}
-	return new CommandResult(MESSAGE_SUCCESS);
+        for (int index = 0; index < lastShownList.size(); index++) {
+            if (lastShownList.get(index).getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
+                ReadOnlyEvent eventToDelete = lastShownList.get(index);
+                try {
+                    model.deleteEvent(eventToDelete);
+                } catch (EventNotFoundException pnfe) {
+                    assert false : "The target task cannot be missing";
+                }
+                index--;
+            }
+        }
+        if (formerSize == lastShownList.size()) {
+            return new CommandResult(MESSAGE_ALREADY_CLEAR);
+        }
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
 }

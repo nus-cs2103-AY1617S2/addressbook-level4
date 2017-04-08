@@ -7,6 +7,6 @@ import org.teamstbf.yats.logic.commands.Command;
  */
 public class CommandException extends Exception {
     public CommandException(String message) {
-	super(message);
+        super(message);
     }
 }

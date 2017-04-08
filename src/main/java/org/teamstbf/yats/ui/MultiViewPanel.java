@@ -1,13 +1,17 @@
 package org.teamstbf.yats.ui;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import org.teamstbf.yats.commons.core.LogsCenter;
+import org.teamstbf.yats.commons.events.ui.EventPanelSelectionChangedEvent;
 import org.teamstbf.yats.commons.util.FxViewUtil;
 import org.teamstbf.yats.model.Model;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,14 +29,13 @@ public class MultiViewPanel extends UiPart<Region> {
 
     protected Model model;
 
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+
     private static final String FXML = "CalendarView.fxml";
     private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
 
     private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
-    private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
-
     private ObservableList<ReadOnlyEvent> calendarList;
-    private ObservableList<ReadOnlyEvent> taskList;
 
     private final DatePickerSkin calendar;
 
@@ -58,35 +61,49 @@ public class MultiViewPanel extends UiPart<Region> {
      *
      * @param placeholder
      */
-    public MultiViewPanel(AnchorPane placeholder, Model model) {
+    public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableList, Model model) {
 	super(FXML);
 	this.model = model;
-	calendar = new DatePickerSkin(new DatePicker(LocalDate.now()));
-	FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
-	initializeCalendarView();
-	initializeDoneView();
-	placeholder.getChildren().add(calendarPanel);
+	calendar = new DatePickerSkin(new DatePicker(today));
+	setConnectionsCalendarView();
+	setConnectionsDoneView(observableList);
+	addToPlaceholder(placeholder);
     }
 
-    private void initializeCalendarView() {
+    private void setConnectionsCalendarView() {
 	Node popupContent = calendar.getPopupContent();
 	calendarRoot.setCenter(popupContent);
 	createFullDayTime();
     }
 
-    private void initializeDoneView() {
-	updateTaskList();
-	taskListView.setItems(taskData);
+    private void setConnectionsDoneView(ObservableList<ReadOnlyEvent> observableList) {
+	taskListView.setItems(observableList);
 	taskListView.setCellFactory(listView -> new TaskListViewCell());
+	setEventHandlerForSelectionChangeEvent();
     }
 
-    private void createFullDayTime() {
-	updateCalendarList();
-	timeTasks.setItems(timeData);
-	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+    private void addToPlaceholder(AnchorPane placeHolderPane) {
+	FxViewUtil.applyAnchorBoundaryParameters(calendarPanel, 0.0, 0.0, 0.0, 0.0);
+	placeHolderPane.getChildren().add(calendarPanel);
     }
 
-    // =============== Inner Class for CalendarView ==================
+    private void setEventHandlerForSelectionChangeEvent() {
+	taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+	    if (newValue != null) {
+		logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+		raise(new EventPanelSelectionChangedEvent(newValue));
+	    }
+	});
+    }
+
+    public void scrollTo(int index) {
+	Platform.runLater(() -> {
+	    taskListView.scrollTo(index);
+	    taskListView.getSelectionModel().clearAndSelect(index);
+	});
+    }
+
+    // ================== Inner Class for CalendarView ==================
 
     private class TimeSlotListViewCell extends ListCell<String[]> {
 
@@ -120,7 +137,13 @@ public class MultiViewPanel extends UiPart<Region> {
 	}
     }
 
-    // ============ Inner Methods for Information Extraction ============
+    // ================== Inner Methods for Calendar View ==================
+
+    private void createFullDayTime() {
+	updateCalendarList();
+	timeTasks.setItems(timeData);
+	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+    }
 
     private void updateCalendarList() {
 	String[] data = new String[TASK_DETAILS];
@@ -136,12 +159,12 @@ public class MultiViewPanel extends UiPart<Region> {
 	}
     }
 
-    private void updateTaskList() {
-	model.updateTaskFilteredListToShowDone();
-	taskList = model.getTaskFilteredTaskList();
-	for (int i = 0; i < taskList.size(); i++) {
-	    taskData.add(taskList.get(i));
-	}
-    }
+    // private void updateTaskList() {
+    // model.updateTaskFilteredListToShowDone();
+    // taskList = model.getTaskFilteredTaskList();
+    // for (int i = 0; i < taskList.size(); i++) {
+    // taskData.add(taskList.get(i));
+    // }
+    // }
 
 }

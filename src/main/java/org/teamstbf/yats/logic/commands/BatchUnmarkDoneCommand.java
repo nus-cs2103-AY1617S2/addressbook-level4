@@ -1,6 +1,8 @@
 package org.teamstbf.yats.logic.commands;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.teamstbf.yats.commons.core.Messages;
@@ -8,7 +10,6 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueEventList;
 
 //@@author A0138952W
 public class BatchUnmarkDoneCommand extends Command {
@@ -16,11 +17,12 @@ public class BatchUnmarkDoneCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "%d task marked as not done";
     public static final String MESSAGE_ALR_MARKED = "Task is already marked as not done.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as not done "
 	    + "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
 	    + "Example: " + COMMAND_WORD + " 1";
+
+    private static final String TASK_DONE_IDENTIFIER = "Yes";
 
     public final Stack<Integer> targetIndexes;
 
@@ -31,8 +33,9 @@ public class BatchUnmarkDoneCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-	List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+	List<ReadOnlyEvent> lastShownList = retrieveDoneTaskList();
 	int numOfTask = targetIndexes.size();
+	model.saveImageOfCurrentTaskManager();
 
 	for (int i = 0; i < numOfTask; i++) {
 
@@ -48,13 +51,18 @@ public class BatchUnmarkDoneCommand extends Command {
 	    }
 
 	    markedTask.getIsDone().markUndone();
-
-	    try {
-		model.updateEvent(targetIndexes.pop(), markedTask);
-	    } catch (UniqueEventList.DuplicateEventException dpe) {
-		throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	    }
+	    model.updateEvent(targetIndexes.pop(), markedTask);
+	    model.updateDoneTaskList();
+	    model.updateFilteredListToShowAll();
 	}
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, numOfTask));
     }
+
+    private List<ReadOnlyEvent> retrieveDoneTaskList() {
+	Set<String> doneTaskIdentifier = new HashSet<String>();
+	doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+	model.updateFilteredListToShowDone(doneTaskIdentifier);
+	return model.getFilteredTaskList();
+    }
+
 }
