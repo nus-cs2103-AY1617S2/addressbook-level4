@@ -8,12 +8,15 @@ import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.loadui.testfx.GuiTest;
+import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
@@ -34,6 +37,11 @@ import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
 import seedu.address.storage.XmlSerializableTaskManager;
@@ -413,15 +421,15 @@ public class TestUtil {
      * Makes an Add command out of a Task
      */
     public static String makeAddCommandString(Task task) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH.mm dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmm dd/MM/yyyy");
         StringBuilder builder = new StringBuilder();
         builder.append(AddCommand.COMMAND_WORD);
         builder.append(" " + task.getName().toString());
         if (task.getStartingTime().isPresent() && task.getDeadline().isPresent()) {
             builder.append(" from");
-            builder.append(sdf.format(" " + task.getStartingTime().get().getDate()));
+            builder.append(" " + sdf.format(task.getStartingTime().get().getDate()));
             builder.append(" to");
-            builder.append(sdf.format(" " + task.getDeadline().get().getDate()));
+            builder.append(" " + sdf.format(task.getDeadline().get().getDate()));
         } else if (task.getDeadline().isPresent()) {
             builder.append(" due");
             builder.append(" " + sdf.format(task.getDeadline().get().getDate()));
@@ -431,5 +439,47 @@ public class TestUtil {
         }
         return builder.toString();
 
+    }
+
+    /**
+     * Generates a Task object with given name. Other fields will have some
+     * dummy values.
+     */
+    public static Task generateTaskWithName(String name) throws Exception {
+        return new FloatingTask(new Name(name), new UniqueTagList(new Tag("tag")), false, false);
+    }
+
+    /**
+     * Generates a Task object with given name and tag. Other fields will have
+     * some dummy values.
+     */
+    public static Task generateTaskWithNameAndTags(String name, String... tagNames) throws Exception {
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        for (String tagName : tagNames) {
+            tags.add(new Tag(tagName));
+        }
+        return new FloatingTask(new Name(name), new UniqueTagList(tags), false, false);
+    }
+
+    // @@author: A0144422R
+    public static Task generateEventTaskWithNameTags(String name, int days1, int days2, String... tagNames)
+            throws Exception {
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        for (String tagName : tagNames) {
+            tags.add(new Tag(tagName));
+        }
+        Date start = DateUtils.truncate(DateUtils.addDays(new Date(), days1), Calendar.DAY_OF_MONTH);
+        Date end = DateUtils.truncate(DateUtils.addDays(new Date(), days2), Calendar.DAY_OF_MONTH);
+        return new EventTask(new Name(name), new UniqueTagList(tags), end, start, false, false);
+    }
+
+    // @@author: A0144422R
+    public static Task generateDeadlineTaskWithNameTags(String name, int days, String... tagNames) throws Exception {
+        ArrayList<Tag> tags = new ArrayList<Tag>();
+        for (String tagName : tagNames) {
+            tags.add(new Tag(tagName));
+        }
+        Date end = DateUtils.truncate(DateUtils.addDays(new Date(), days), Calendar.DAY_OF_MONTH);
+        return new DeadlineTask(new Name(name), new UniqueTagList(tags), end, false, false);
     }
 }

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -59,14 +60,17 @@ import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.DateTime;
 import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.EventTask;
 import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.TestUtil;
+import seedu.address.testutil.TypicalTasks;
 
 public class LogicManagerTest {
 
@@ -89,6 +93,7 @@ public class LogicManagerTest {
     private ReadOnlyTaskManager latestSavedTaskManager;
     private boolean helpShown;
     private String targetedJumpIndex;
+    private TypicalTasks td;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
@@ -105,8 +110,10 @@ public class LogicManagerTest {
         targetedJumpIndex = je.targetIndex;
     }
 
+    // --------------- Initialize ---------------
+
     @Before
-    public void setUp() {
+    public void setUp() throws DuplicateTaskException {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
@@ -116,16 +123,13 @@ public class LogicManagerTest {
         config.setUserPrefsFilePath(tempPreferencesFile);
         storage = new StorageManager(config);
         logic = new LogicManager(model);
+        td = new TypicalTasks();
         EventsCenter.getInstance().registerHandler(this);
+        populateModelWithTypicalTasks();
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
-                                                                          // saved
-                                                                          // assumed
-                                                                          // to
-                                                                          // be
-                                                                          // up
-                                                                          // to
-                                                                          // date
+        // last saved assumed to be up to date
+        latestSavedTaskManager = new TaskManager(model.getTaskManager());
+
         helpShown = false;
         targetedJumpIndex = ""; // non yet
     }
@@ -135,11 +139,24 @@ public class LogicManagerTest {
         EventsCenter.clearSubscribers();
     }
 
-    @Test
-    public void execute_invalid() {
-        String invalidCommand = "       ";
-        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+    // @author A0093999Y
+    // --------------- Helper ---------------
+
+    /**
+     * Populates the model with tasks from TypicalTask class in the testutil
+     * package
+     * 
+     * @throws DuplicateTaskException
+     */
+    private void populateModelWithTypicalTasks() throws DuplicateTaskException {
+        Task[] tasks = td.getTypicalTasks();
+        for (Task task : tasks) {
+            model.addTask(task);
+        }
     }
+
+    // @author
+    // --------------- Assert ---------------
 
     /**
      * Executes the command, confirms that a CommandException is not thrown and
@@ -197,45 +214,68 @@ public class LogicManagerTest {
         assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
+    /**
+     * Confirms the 'invalid argument index number behaviour' for the given
+     * command targeting a single task in the shown list, using visible index.
+     *
+     * @param commandWord
+     *            to test assuming it targets a single task in the last shown
+     *            list based on visible index.
+     */
+    private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
+        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+        assertCommandFailure(commandWord + " F100", expectedMessage);
+    }
+
+    // --------------- Execute ---------------
+
+    @Test
+    public void execute_invalid() {
+        String invalidCommand = "       ";
+        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+    }
+
     @Test
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
+    // ------------- Help Command -----------------
+
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, td.getTypicalTaskManager(),
+                Arrays.asList(td.getTypicalTasks()));
         assertTrue(helpShown);
     }
 
+    // --------------- Exit Command ---------------
+
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, new TaskManager(),
-                Collections.emptyList());
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, td.getTypicalTaskManager(),
+                Arrays.asList(td.getTypicalTasks()));
     }
+
+    // --------------- Clear ---------------
 
     @Test
     public void execute_clear() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generateTask(1));
-        model.addTask(helper.generateTask(2));
-        model.addTask(helper.generateTask(3));
-
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
+
+    // --------------- Add ---------------
 
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
-        expectedAB.addTask(toBeAdded);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        expectedAB.addTask(td.extraFloat);
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess(TestUtil.makeAddCommandString(td.extraFloat),
+                String.format(AddCommand.MESSAGE_SUCCESS, td.extraFloat), expectedAB, expectedAB.getTaskList());
 
     }
 
@@ -243,9 +283,8 @@ public class LogicManagerTest {
     @Test
     public void execute_add_event_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.generateEventTaskWithNameTags("name", 0, 1, "tag1");
-        TaskManager expectedAB = new TaskManager();
+        Task toBeAdded = TestUtil.generateEventTaskWithNameTags("name", 0, 1, "tag1");
+        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -257,9 +296,8 @@ public class LogicManagerTest {
     @Test
     public void execute_add_deadline_task_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.generateDeadlineTaskWithNameTags("name", 0, "tag1");
-        TaskManager expectedAB = new TaskManager();
+        Task toBeAdded = TestUtil.generateDeadlineTaskWithNameTags("name", 0, "tag1");
+        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -270,53 +308,27 @@ public class LogicManagerTest {
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-
-        // setup starting state
-        model.addTask(toBeAdded); // task already in internal task manager
+        Task toBeAdded = td.futureListEvent;
 
         // execute command and verify result
-        assertCommandFailure(helper.generateAddCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(TestUtil.makeAddCommandString(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
 
     }
+
+    // ------------- List Command -----------------
 
     // author A0144422R
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
-        TaskManager expectedAB = helper.generateTaskManager(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        expectedAB.addTask(td.extraDeadline);
+        model.addTask(td.extraDeadline);
 
-        // prepare task manager state
-        helper.addToModel(model, 2);
-
-        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedList);
+        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedAB.getTaskList());
     }
 
-    /**
-     * Confirms the 'invalid argument index number behaviour' for the given
-     * command targeting a single task in the shown list, using visible index.
-     *
-     * @param commandWord
-     *            to test assuming it targets a single task in the last shown
-     *            list based on visible index.
-     */
-    private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> taskList = helper.generateTaskList(2);
-
-        // set AB state to 2 tasks
-        model.setData(new TaskManager(), true);
-        for (Task p : taskList) {
-            model.addTask(p);
-        }
-
-        assertCommandFailure(commandWord + " F100", expectedMessage);
-    }
-
+    // ---------- Delete Command --------------
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
@@ -324,17 +336,16 @@ public class LogicManagerTest {
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.removeTask(threeTasks.get(1));
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        expectedAB.removeTask(td.futureListDeadline);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandSuccess("delete C1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("delete F2",
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, td.futureListDeadline), expectedAB,
+                expectedAB.getTaskList());
     }
+
+    // ---------- Done Command ---------------
 
     // @@author A0093999Y
     @Test
@@ -350,21 +361,18 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_valid() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        // TestUtil.assignUiIndex(threeTasks);
-        Task taskToDone = threeTasks.get(0);
-        Task doneTask = new FloatingTask(taskToDone.getName(), taskToDone.getTags(), true, false);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task doneTask = Task.createTask(td.futureListFloat);
+        doneTask.setDone(true);
+        expectedAB.updateTask(5, doneTask);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(0, doneTask);
-
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("done F1", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
                 expectedAB.getTaskList());
     }
+
+    // ------------ Not Done Command ---------------
 
     @Test
     public void execute_notdone_invalidArgsFormat() {
@@ -379,21 +387,18 @@ public class LogicManagerTest {
 
     @Test
     public void execute_notdone_valid() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        Task taskToNotDone = threeTasks.get(1);
-        taskToNotDone.setDone(true);
-        Task notDoneTask = new FloatingTask(taskToNotDone.getName(), taskToNotDone.getTags(), false, false);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task notDoneTask = Task.createTask(td.completedListFloat);
+        notDoneTask.setDone(false);
+        expectedAB.updateTask(8, notDoneTask);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(1, notDoneTask);
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("notdone C1", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB, expectedAB.getTaskList());
-
     }
+
+    // -------------- Edit Command ------------------
 
     // @@author A0093999Y
     @Test
@@ -423,109 +428,96 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editNameOnly_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        Task taskToEdit = threeTasks.get(1);
-        Task backup = new FloatingTask(taskToEdit);
-        taskToEdit = new FloatingTask(new Name("new name"), new UniqueTagList(), false, false);
-        expectedAB.updateTask(1, taskToEdit);
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToEdit = Task.createTask(td.completedListFloat);
+        taskToEdit.setName(new Name("new name"));
+        expectedAB.updateTask(8, taskToEdit);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandSuccess("edit C1 new name", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("edit C1 new name",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_editNameAndTag_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        Task taskToEdit = threeTasks.get(1);
-        Task backup = new FloatingTask(taskToEdit);
-        taskToEdit = new FloatingTask(new Name("new name"), new UniqueTagList("tag1", "tag2"), false, false);
-        expectedAB.updateTask(1, taskToEdit);
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToEdit = Task.createTask(td.completedListFloat);
+        taskToEdit.setName(new Name("new name"));
+        UniqueTagList tags = new UniqueTagList("tag1", "tag2");
+        taskToEdit.setTags(tags);
+        expectedAB.updateTask(8, taskToEdit);
+
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 new name #tag1 #tag2",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup), expectedAB, expectedAB.getTaskList());
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_editEventNameAndTag_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        Task taskToEdit = threeTasks.get(1);
-        Date start = DateUtils.truncate(DateUtils.addDays(new Date(), 0), Calendar.DAY_OF_MONTH);
-        Date end = DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH);
-        Task backup = new FloatingTask(taskToEdit);
-        taskToEdit = new EventTask(new Name("new name"), new UniqueTagList("tag1", "tag2"), end, start, false, false);
-        expectedAB.updateTask(1, taskToEdit);
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        DateTime start = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 0), Calendar.DAY_OF_MONTH));
+        DateTime end = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH));
+        Task taskToEdit = Task.createTask(new Name("new name"), new UniqueTagList("tag1", "tag2"), Optional.of(end),
+                Optional.of(start), td.completedListFloat.isDone(), td.completedListFloat.isManualToday());
+        expectedAB.updateTask(8, taskToEdit);
+
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 new name from today at 0000 to tomorrow at 0000 #tag1 #tag2",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup), expectedAB, expectedAB.getTaskList());
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_editDeadlineTaskTag_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        Task taskToEdit = threeTasks.get(1);
-        Task backup = new FloatingTask(taskToEdit);
-        Date end = DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH);
-        taskToEdit = new DeadlineTask(taskToEdit.getName(), new UniqueTagList("tag1", "tag2"), end, false, false);
-        expectedAB.updateTask(1, taskToEdit);
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        DateTime end = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH));
+        Task taskToEdit = Task.createTask(td.completedListFloat.getName(), new UniqueTagList("tag1", "tag2"),
+                Optional.of(end), Optional.empty(), td.completedListFloat.isDone(),
+                td.completedListFloat.isManualToday());
+        expectedAB.updateTask(8, taskToEdit);
+
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 due tomorrow at 0000 #tag1 #tag2",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup), expectedAB, expectedAB.getTaskList());
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_editConfusingName_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        Task taskToEdit = threeTasks.get(1);
-        Task backup = new FloatingTask(taskToEdit);
-        taskToEdit = new FloatingTask(new Name("from today uihasduhas to tomorrow uhaius"),
-                new UniqueTagList("tag1", "tag2"), false, false);
-        expectedAB.updateTask(1, taskToEdit);
-        helper.addToModel(model, threeTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToEdit = Task.createTask(td.completedListFloat);
+        taskToEdit.setName(new Name("from today uihasduhas to tomorrow uhaius"));
+        taskToEdit.setTags(new UniqueTagList("tag1", "tag2"));
+        expectedAB.updateTask(8, taskToEdit);
+
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 from today uihasduhas to tomorrow uhaius #tag1 #tag2",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, backup), expectedAB, expectedAB.getTaskList());
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
+                expectedAB.getTaskList());
     }
 
     @Test
     public void execute_editDuplicateTask_notAllowed() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandFailure("edit C1 Task 3 #tag3 #tag4", EditCommand.MESSAGE_DUPLICATE_TASK);
+        assertCommandFailure("edit C1 " + td.futureListFloat.getName().toString() + " #tag3 #tag4",
+                EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
     public void execute_editIndexNotFound_notAllowed() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
         assertCommandFailure("edit C100 Task 3 #tag3 #tag4", Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
     // @@author A0093999Y
-    // ----------------------Today----------------------
+    // ----------------- Today Command ------------------
 
     @Test
     public void execute_today_invalidArgsFormat() {
@@ -540,20 +532,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_today_valid() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        // TestUtil.assignUiIndex(threeTasks);
-        Task taskToToday = threeTasks.get(0);
-        Task todayTask = new FloatingTask(taskToToday.getName(), taskToToday.getTags(), taskToToday.isDone(), true);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToToday = Task.createTask(td.futureListDeadline);
+        taskToToday.setToday(true);
+        expectedAB.updateTask(6, taskToToday);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(0, todayTask);
-
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandSuccess("today F1", String.format(TodayCommand.MESSAGE_TODAY_TASK_SUCCESS, todayTask), expectedAB,
-                expectedAB.getTaskList());
+        assertCommandSuccess("today F2", String.format(TodayCommand.MESSAGE_TODAY_TASK_SUCCESS, td.futureListDeadline),
+                expectedAB, expectedAB.getTaskList());
     }
 
     // ------------------- Not Today -----------------------
@@ -571,22 +558,19 @@ public class LogicManagerTest {
 
     @Test
     public void execute_notToday_valid() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-        // TestUtil.assignUiIndex(threeTasks);
-        Task firstTask = threeTasks.get(0);
-        firstTask.setToday(true);
-        Task notTodayTask = new FloatingTask(firstTask.getName(), firstTask.getTags(), firstTask.isDone(), false);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToNotToday = Task.createTask(td.todayListFloat);
+        taskToNotToday.setToday(false);
+        expectedAB.updateTask(1, taskToNotToday);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.updateTask(0, notTodayTask);
-
-        helper.addToModel(model, threeTasks);
         model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
                 FXCollections.observableArrayList());
-        assertCommandSuccess("nottoday T1", String.format(NotTodayCommand.MESSAGE_NOTTODAY_TASK_SUCCESS, notTodayTask),
-                expectedAB, expectedAB.getTaskList());
+        assertCommandSuccess("nottoday T2",
+                String.format(NotTodayCommand.MESSAGE_NOTTODAY_TASK_SUCCESS, taskToNotToday), expectedAB,
+                expectedAB.getTaskList());
     }
+
+    // --------------- Find Command -------------------
 
     // @@author
     @Test
@@ -596,97 +580,44 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithName("KE Y");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
+    public void execute_find_onlyMatchesFullWordsInNamesAndNotCaseSensitive() throws Exception {
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        List<Task> expectedList = Arrays.asList(td.completedListEvent);
 
-        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find go", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInTags() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task targetTagAndName1 = helper.generateTaskWithNameAndTags("bla bla KEY bla", "KEY");
-        Task targetTagAndName2 = helper.generateTaskWithNameAndTags("bla KEY bla bceofeia", "blahbla", "KEY");
-        Task targetTag1 = helper.generateTaskWithNameAndTags("bla bleepa", "KEY");
-        Task targetTag2 = helper.generateTaskWithNameAndTags("bloopy beep", "blahbla", "KEY");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
+    public void execute_find_onlyMatchesFullWordsInTagsAndNotCaseSensitive() throws Exception {
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        List<Task> expectedList = Arrays.asList(td.todayListFloat, td.futureListDeadline, td.futureListEvent,
+                td.completedListFloat);
 
-        List<Task> sevenTasks = helper.generateTaskList(p1, targetTagAndName1, p2, targetTagAndName2, targetTag1,
-                targetTag2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
-        List<Task> expectedList = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2);
-        helper.addToModel(model, sevenTasks);
-
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find project", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
     // @@author: A0144422R
     @Test
     public void execute_find_date() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task targetDeadline1 = helper.generateDeadlineTaskWithNameTags("bla bla KEY bla", 0, "KEY");
-        Task targetDeadline2 = helper.generateEventTaskWithNameTags("bla KEY bla bceofeia", -1, 0, "blahbla", "KEY");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
-        Task p4 = helper.generateDeadlineTaskWithNameTags("KEYKEYKEY sduauo", 2);
-        Task p5 = helper.generateEventTaskWithNameTags("KEEEEY", 2, 3);
-
-        List<Task> sevenTasks = helper.generateTaskList(p1, targetDeadline1, p2, targetDeadline2, p4, p5, p3);
-        TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
-        List<Task> expectedList = helper.generateTaskList(targetDeadline1, targetDeadline2);
-        helper.addToModel(model, sevenTasks);
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        List<Task> expectedList = Arrays.asList(td.todayListDeadline, td.completedListDeadline, td.completedListEvent);
 
         assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
 
     @Test
-    public void execute_find_isNotCaseSensitive() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithName("key key");
-        Task p4 = helper.generateTaskWithName("KEy sduauo");
+    public void execute_find_multipleArgs() throws Exception {
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        List<Task> expectedList = Arrays.asList(td.completedListDeadline, td.completedListEvent);
 
-        List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = fourTasks;
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find go goes", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }
 
-    @Test
-    public void execute_find_invalidArgs() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithName("key key");
-        Task p1 = helper.generateTaskWithName("sduauo");
-
-        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskManager expectedAB = helper.generateTaskManager(fourTasks);
-        List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourTasks);
-
-        assertCommandSuccess("find key rAnDoM", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
-    }
+    // ------------------------ Rename Tag Command -----------------------
 
     // @@author A0093999Y
     @Test
@@ -696,46 +627,23 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_renametag_onlyMatchesFullWordsInTags() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
-        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "newkey");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
+    public void execute_renametag_onlyMatchesFullWordsCorrectCaseInTags() throws Exception {
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToRenameTag1 = Task.createTask(td.todayListFloat);
+        Task taskToRenameTag2 = Task.createTask(td.completedListFloat);
+        UniqueTagList replacementTags = new UniqueTagList();
+        replacementTags.add(new Tag("lol"));
+        taskToRenameTag1.setTags(replacementTags);
+        taskToRenameTag2.setTags(replacementTags);
+        expectedAB.updateTask(1, taskToRenameTag1);
+        expectedAB.updateTask(8, taskToRenameTag2);
 
-        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
-        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(expectedList);
-        helper.addToModel(model, fiveTasks);
-
-        assertCommandSuccess("renametag KEY newkey",
-                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB, expectedList);
+        assertCommandSuccess("renametag project lol",
+                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "project", "lol"), expectedAB,
+                expectedAB.getTaskList());
     }
 
-    @Test
-    public void execute_renametag_onlyMatchesCorrectCaseInTags() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
-        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla", "newkey");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "newkey");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
-
-        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
-        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(expectedList);
-        helper.addToModel(model, fiveTasks);
-
-        assertCommandSuccess("renametag KEY newkey",
-                String.format(RenameTagCommand.MESSAGE_RENAME_TAG_SUCCESS, "KEY", "newkey"), expectedAB, expectedList);
-    }
-
-    // DeleteTagCommand Tests
+    // ---------------- Delete Tag Command ----------------------
 
     @Test
     public void execute_deletetag_invalidArgsFormat() {
@@ -744,46 +652,21 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_deletetag_onlyMatchesFullWordsInTags() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
-        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
+    public void execute_deletetag_onlyMatchesFullWordsAndCorrectCaseInTags() throws Exception {
+        TaskManager expectedAB = td.getTypicalTaskManager();
+        Task taskToRenameTag1 = Task.createTask(td.todayListFloat);
+        Task taskToRenameTag2 = Task.createTask(td.completedListFloat);
+        UniqueTagList replacementTags = new UniqueTagList();
+        taskToRenameTag1.setTags(replacementTags);
+        taskToRenameTag2.setTags(replacementTags);
+        expectedAB.updateTask(1, taskToRenameTag1);
+        expectedAB.updateTask(8, taskToRenameTag2);
 
-        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
-        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(expectedList);
-        helper.addToModel(model, fiveTasks);
-
-        assertCommandSuccess("deletetag KEY", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
-                expectedAB, expectedList);
+        assertCommandSuccess("deletetag project", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+                expectedAB, expectedAB.getTaskList());
     }
 
-    @Test
-    public void execute_deletetag_onlyMatchesCorrectCaseInTags() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTaskWithNameAndTags("bla bla bla", "KEY");
-        Task t2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla", "KEY");
-        Task r1 = helper.generateTaskWithNameAndTags("bla bla bla");
-        Task r2 = helper.generateTaskWithNameAndTags("bla bla bceofeia", "blahbla");
-        Task p1 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEy");
-
-        List<Task> fiveTasks = helper.generateTaskList(p1, t1, p2, t2, p3);
-        List<Task> expectedList = helper.generateTaskList(p1, r1, p2, r2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(expectedList);
-        helper.addToModel(model, fiveTasks);
-
-        assertCommandSuccess("deletetag KEY", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
-                expectedAB, expectedList);
-    }
-
-    // SaveToCommand Tests
+    // --------------------- SaveTo Command ----------------------
     // @@author A0139388M
     @Test
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
@@ -856,9 +739,7 @@ public class LogicManagerTest {
                 String.format(SaveToCommand.MESSAGE_WRITE_FILE_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
-    // End SaveToCommand tests
-
-    // ExportCommand Tests
+    // ----------------- Export Command ----------------------
 
     @Test
     public void execute_export_canonicalSameDirectory() throws Exception {
@@ -931,9 +812,7 @@ public class LogicManagerTest {
                 String.format(ExportCommand.MESSAGE_WRITE_FILE_ERROR, invalidFileNameFile.getAbsolutePath()));
     }
 
-    // End ExportCommand Tests
-
-    // UseThisCommand Tests
+    // --------------------- UseThisCommand -----------------------
 
     @Test
     public void execute_useThis_absoluteSubDirectory() throws Exception {
@@ -953,9 +832,7 @@ public class LogicManagerTest {
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
-    // End UseThisCommand tests
-
-    // ImportCommand Tests
+    // ------------------------- ImportCommand ------------------------
 
     @Test
     public void execute_import_absoluteSubDirectory() throws Exception {
@@ -990,9 +867,7 @@ public class LogicManagerTest {
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
-    // End ImportCommand tests
-
-    // UndoCommand tests
+    // ------------------- Undo Command ---------------------
 
     @Test
     public void execute_undoAdd_successful() throws Exception {
@@ -1049,9 +924,7 @@ public class LogicManagerTest {
         assertCommandFailure("undo", UndoCommand.MESSAGE_NO_PREV_COMMAND);
     }
 
-    // End UndoCommand tests
-
-    // RedoCommand tests
+    // ----------------- Redo Command -------------------------
 
     @Test
     public void execute_undoAddRedo_successful() throws Exception {
@@ -1099,7 +972,6 @@ public class LogicManagerTest {
         tmFile.delete();
     }
 
-    // End RedoCommand tests
     // @@author
 
     /**
@@ -1226,45 +1098,5 @@ public class LogicManagerTest {
             return Arrays.asList(tasks);
         }
 
-        /**
-         * Generates a Task object with given name. Other fields will have some
-         * dummy values.
-         */
-        Task generateTaskWithName(String name) throws Exception {
-            return new FloatingTask(new Name(name), new UniqueTagList(new Tag("tag")), false, false);
-        }
-
-        /**
-         * Generates a Task object with given name and tag. Other fields will
-         * have some dummy values.
-         */
-        Task generateTaskWithNameAndTags(String name, String... tagNames) throws Exception {
-            ArrayList<Tag> tags = new ArrayList<Tag>();
-            for (String tagName : tagNames) {
-                tags.add(new Tag(tagName));
-            }
-            return new FloatingTask(new Name(name), new UniqueTagList(tags), false, false);
-        }
-
-        // @@author: A0144422R
-        Task generateEventTaskWithNameTags(String name, int days1, int days2, String... tagNames) throws Exception {
-            ArrayList<Tag> tags = new ArrayList<Tag>();
-            for (String tagName : tagNames) {
-                tags.add(new Tag(tagName));
-            }
-            Date start = DateUtils.truncate(DateUtils.addDays(new Date(), days1), Calendar.DAY_OF_MONTH);
-            Date end = DateUtils.truncate(DateUtils.addDays(new Date(), days2), Calendar.DAY_OF_MONTH);
-            return new EventTask(new Name(name), new UniqueTagList(tags), end, start, false, false);
-        }
-
-        // @@author: A0144422R
-        Task generateDeadlineTaskWithNameTags(String name, int days, String... tagNames) throws Exception {
-            ArrayList<Tag> tags = new ArrayList<Tag>();
-            for (String tagName : tagNames) {
-                tags.add(new Tag(tagName));
-            }
-            Date end = DateUtils.truncate(DateUtils.addDays(new Date(), days), Calendar.DAY_OF_MONTH);
-            return new DeadlineTask(new Name(name), new UniqueTagList(tags), end, false, false);
-        }
     }
 }
