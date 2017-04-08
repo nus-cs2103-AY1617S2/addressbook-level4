@@ -53,8 +53,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
+    private static final String USERGUIDE_URL = "https://cs2103jan2017-f14-b1.github.io/main/UserGuide.html";
     private static final String ICON_IMG = "/images/onetwodo_icon.png";
-
 
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
@@ -289,8 +289,16 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0141138N
     @FXML
     public void handleHelpUG() {
-        HelpUGWindow helpUGWindow = new HelpUGWindow();
-        helpUGWindow.show();
+        JFXDialogLayout content = new JFXDialogLayout();
+        WebView browser = new WebView();
+        browser.getEngine().load(USERGUIDE_URL);
+        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
+        content.setBody(browser);
+        closeDialog();
+        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        closeDialogOnNextKeyPress();
     }
 
     // @@author
