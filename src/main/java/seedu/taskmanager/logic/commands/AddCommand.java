@@ -62,7 +62,10 @@ public class AddCommand extends Command {
                 endDate = Optional.of(endDate.get() + TIME_OF_DAY_END);
             } else if (sd.after(ed) && sd.isTimeInferred()) {
                 startDate = Optional.of(startDate.get() + TIME_OF_DAY_START);
-            } else if (sd.after(ed)) {
+            }
+            sd = new StartDate(startDate.get());
+            ed = new EndDate(endDate.get());
+            if (sd.after(ed)) {
                 throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
             }
         }

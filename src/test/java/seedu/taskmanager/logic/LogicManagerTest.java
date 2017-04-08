@@ -54,6 +54,7 @@ import seedu.taskmanager.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -230,8 +231,12 @@ public class LogicManagerTest {
                 StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/not_numbers d/valid, description",
                 EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description t/invalid_-[.tag",
+        assertCommandFailure("add Valid Title s/today e/05/03/2017 d/valid, description t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
+        // @@author A0140032E
+        assertCommandFailure("add Valid Title e/05/03/2017 d/valid, description r/year",
+                AddCommand.MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS);
+        // @@author
     }
 
     @Test
@@ -465,6 +470,73 @@ public class LogicManagerTest {
         assertCommandSuccess("edit 3 d", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget4), expectedTM,
                 expectedList);
     }
+
+    // @@author A0140032E
+    @Test
+    public void executeEditStartDateSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithStartDate("4 may 2016 3pm");
+        Task tTarget2 = helper.generateTaskWithStartDate("6 may 2016 5pm");
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1);
+        List<Task> editedTasks = helper.generateTaskList(tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget2);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandSuccess("edit 1 s/6 may 2016 5pm", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2),
+                expectedTM, expectedList);
+    }
+
+    @Test
+    public void executeEditEndDateSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithEndDate("1 june 2017 3am");
+        Task tTarget2 = helper.generateTaskWithEndDate("3 june 2019 5am");
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1);
+        List<Task> editedTasks = helper.generateTaskList(tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget2);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandSuccess("edit 1 e/3 june 2019 5am", String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2),
+                expectedTM, expectedList);
+    }
+
+    @Test
+    public void executeEditMultipleFieldsSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/01/2017")), Optional.of(new Description("Some text")),
+                Optional.ofNullable(null), new UniqueTagList(new Tag("tag1")));
+
+        Task tTarget2 = new Task(new Title("Task B"), Optional.of(new StartDate("03/01/2017")),
+                Optional.of(new EndDate("04/01/2017")), Optional.of(new Description("More text")),
+                Optional.ofNullable(null), new UniqueTagList(new Tag("tag1")));
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1);
+        List<Task> editedTasks = helper.generateTaskList(tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget2);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandSuccess("edit 1 Task B s/03/01/2017 e/04/01/2017 d/More text",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2), expectedTM, expectedList);
+    }
+
+    @Test
+    public void executeEditIllegalValues() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.t1();
+        model.addTask(tTarget1);
+        assertCommandFailure("edit 1 s/no date", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("edit 1 e/no date", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
+        assertCommandFailure("edit 1 s/today e/yesterday", EditCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
+        assertCommandFailure("edit 1 t/~invalid", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("edit 1 r/asd", Repeat.MESSAGE_REPEAT_CONSTRAINTS);
+    }
+    // @@author
 
     @Test
     public void executeChangeInvalidArgsFormatErrorMessageShown() throws Exception {
@@ -788,8 +860,8 @@ public class LogicManagerTest {
          */
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
             return new Task(new Title("Watch Clockwork Orange"), Optional.of(new StartDate(startDate)),
-                    Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Just do it")),
-                    Optional.ofNullable(null), new UniqueTagList(new Tag("tag")));
+                    Optional.ofNullable(null), Optional.of(new Description("Just do it")), Optional.ofNullable(null),
+                    new UniqueTagList(new Tag("tag")));
         }
 
         /**
@@ -800,7 +872,7 @@ public class LogicManagerTest {
          * @throws DuplicateTagException
          */
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
-            return new Task(new Title("Watch Halestorm concert"), Optional.of(new StartDate("01/04/2017")),
+            return new Task(new Title("Watch Halestorm concert"), Optional.ofNullable(null),
                     Optional.of(new EndDate(endDate)), Optional.of(new Description("Just do it")),
                     Optional.ofNullable(null), new UniqueTagList(new Tag("tag")));
         }
