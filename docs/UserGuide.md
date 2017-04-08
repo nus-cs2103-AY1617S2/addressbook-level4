@@ -10,7 +10,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.1. [Viewing help](#31-viewing-help--help)  
   3.2. [Adding a new task](#32-adding-a-new-task--add)  
   3.3. [Listing tasks](#33-listing-tasks--list)  
-  3.4. [Sorting tasks](#34-sorting-tasks--sort)
+  3.4. [Sorting tasks](#34-sorting-tasks--sort)  
   3.5. [Finding a task](#35-finding-a-task--find)  
   3.6. [Editing an existing task](#36-editing-an-existing-task--edit)  
   3.7. [Deleting a task](#37-deleting-a-task--delete)  
@@ -410,7 +410,7 @@ Format: `save_at PATH`
 > - `save_at data` <br>
 
 > **Remarks:** <br>
-> - This is similar to [3.11 Loading an external data file](#311-loading-an-external-data-file--load)   <br>
+> - This is similar to [3.11 Loading an external data file](#311-loading-an-external-data-file--load)  <br>
 > - You can provide a relative path for this command. <br>
 > - To go up a directory, use `../` <br>
 > - Both `/` and `\` are acceptable as the director separator, that is, the symbol between the folders in a path
