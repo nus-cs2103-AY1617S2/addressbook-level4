@@ -112,7 +112,7 @@ Example:
 
 ### Undo/Redo a task: `undo` `redo`
 Undo is the command word to erase the last change done
-Format : `undo` `undo` 
+Format : `undo` `undo`
 
 Example:
 * `delete 1` >> `undo` to retrieve task indexed 1
@@ -126,14 +126,14 @@ Example:
 
 ### Exit the program: `exit`
 Exits the program.
-Format: `exit`  
+Format: `exit`
 
-### Save the data 
+### Save the data
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-<<<<<<< HEAD
-Command | Format  
+
+Command | Format
 -------- | :--------
 help | `help`
 add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
@@ -144,15 +144,3 @@ list | `list * | completed | pending | overdue`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 undo/redo | `undo` `redo`
 exit | `exit`
-=======
-| Command | Format
-| --------| --------
-| help | `help`
-| add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
-| delete | `delete index\INDEX`
-| find | `find name/Name`
-| list | `list * | completed | pending | overdue`
-| edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-| undo/redo | `undo` `redo`
-| exit | `exit`
->>>>>>> refs/heads/master

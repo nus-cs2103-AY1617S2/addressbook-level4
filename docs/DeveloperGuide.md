@@ -24,7 +24,7 @@
 #### Importing the project into Eclipse
 
 0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given 
+1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
 2. Click `File` > `Import`
 3. Click `Gradle` > `Gradle Project` > `Next` > `Next`
@@ -35,9 +35,9 @@
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
-  
+
 #### Configuring Checkstyle
-1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...` 
+1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. taskbook
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
@@ -45,19 +45,19 @@
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
 7. Click OK twice. Rebuild project if prompted
 
-> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button  
+> Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 #### Troubleshooting project setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
-* Reason: Eclipse fails to recognize new files that appeared due to the Git pull. 
-* Solution: Refresh the project in Eclipse:<br> 
+* Reason: Eclipse fails to recognize new files that appeared due to the Git pull.
+* Solution: Refresh the project in Eclipse:<br>
   Right click on the project (in Eclipse package explorer), choose `Gradle` -> `Refresh Gradle Project`.
-  
+
 **Problem: Eclipse reports some required libraries missing**
-* Reason: Required libraries may not have been downloaded during the project import. 
+* Reason: Required libraries may not have been downloaded during the project import.
 * Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
- 
+
 
 ## Design
 
@@ -91,7 +91,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/Logic_JOBS.png" width="800"><br>
 
-##### Events-Driven nature of the design 
+##### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
@@ -106,7 +106,7 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 <img src="images\EventHandleforDelete_JOBS.png" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
+  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
 The sections below give more details of each component.
@@ -196,7 +196,7 @@ and logging destinations.
 
 ### Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file 
+Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
@@ -215,44 +215,34 @@ Tests can be found in the `./src/test/java` folder.
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI. 
+1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
    These are in the `guitests` package.
-  
+
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
       e.g. `seedu.jobs.commons.UrlUtilTest`
-<<<<<<< HEAD
-   2. _Integration tests_ that are checking the integration of multiple code units 
-=======
    2. _Integration tests_ that are checking the integration of multiple code units
->>>>>>> refs/heads/master
      (those code units are assumed to be working).<br>
       e.g. `seedu.jobs.storage.StorageManagerTest`
-<<<<<<< HEAD
-   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
+   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
       e.g. `seedu.jobs.logic.LogicManagerTest`
-  
-=======
-   3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how they are connected together.<br>
-      e.g. `seedu.jobs.logic.LogicManagerTest`
 
->>>>>>> refs/heads/master
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode. 
+ our GUI tests can be run in the _headless_ mode.
  In the headless mode, GUI tests do not show up on the screen.
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
- 
+
 #### Troubleshooting tests
  **Problem: Tests fail because NullPointException when AssertionError is expected**
- * Reason: Assertions are not enabled for JUnit tests. 
+ * Reason: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later)
- * Solution: Enable assertions in JUnit tests as described 
+ * Solution: Enable assertions in JUnit tests as described
    [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
    Delete run configurations created when you ran tests earlier.
-  
+
 ## Dev Ops
 
 ### Build Automation
@@ -267,12 +257,12 @@ See [UsingTravis.md](UsingTravis.md) for more details.
 ### Making a Release
 
 Here are the steps to create a new release.
- 
+
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) 
+ 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file your created.
-   
+
 ### Managing Dependencies
 
 A project often depends on third-party libraries. For example, JOBS depends on the
@@ -295,12 +285,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a recurring task | record task that will recur at certain frequency
 `* * *` | user | list all task filtered by task types/completion/date/tags| view a specific section of the tasks that have to completed
 `* * *` | user | edit my task | ensure that the task is still relevant
-<<<<<<< HEAD
-`* * *` | user | delay my task |automatically postpone deadlines 
+`* * *` | user | delay my task |automatically postpone deadlines
 `* * *` | user | delete my task | conveniently remove task that is no longer relevant
-=======
-`* * *` | user | delete my task | conveniently remove task that regardless of status
->>>>>>> refs/heads/master
 `* * *` | user  | delete all my task | clear my data
 `* * *` | advanced user | utilize text search | find specific tasks with specificied tags or keywords
 `* * *` | user | load my data from any specified location | have ease of access in using the application
@@ -317,7 +303,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `JOBS` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: 
+#### Use case:
 
 ### UC01 Create a task
 
@@ -326,8 +312,8 @@ Priority | As a ... | I want to ... | So that I can...
 1. User types in the task that he/she wishes to be included in the task reminder
 2. System informs the user that the task has been included in the task reminder
 <<<<<<< HEAD
-Use case ends.  
- 
+Use case ends.
+
 =======
 Use case ends.
 
@@ -336,7 +322,7 @@ Use case ends.
 User enters the wrong task format
 <<<<<<< HEAD
 JOBS shows the expected task format
-JOBS prompts user to re-enter the task 
+JOBS prompts user to re-enter the task
 =======
 >>>>>>> refs/heads/master
 
@@ -373,7 +359,7 @@ Use case resumes from step 1.
 1b. The specific task name or filter cannot be found.
     1b1. System informs the user that the specific task/filter cannot be found.
 
->Use case ends.  
+>Use case ends.
 
 ### UC03 Update a task
 
@@ -388,13 +374,13 @@ Use case resumes from step 1.
 7. User confirms update.
 <<<<<<< HEAD
 8. System updates the selected task and displays the updated task’s information.
-Use case ends.  
+Use case ends.
 =======
 8. System updates the selected task and displays the updated taskâ€™s information.
 Use case ends.
 >>>>>>> refs/heads/master
 
-**Extensions**  
+**Extensions** 
 3a. The input task cannot be found.
 
     3a1. System requests for creating new task.
@@ -428,7 +414,7 @@ Use case resumes from step 6.
 3. User confirms deletion
 4. System delete the selected task and displays the updated list of task.
 <<<<<<< HEAD
-Use case ends.  
+Use case ends.
 =======
 Use case ends.
 >>>>>>> refs/heads/master
@@ -461,7 +447,7 @@ Use case ends.
 
 ##### Events
 
-> A task with specific start and end timing 
+> A task with specific start and end timing
 
 ##### Floating task
 
@@ -475,31 +461,31 @@ Use case ends.
 
 ### HiTask
 Pros:
-* Convenient for (shared) project management with features including centralized file library and calendar, synchronization across devices, etc 
+* Convenient for (shared) project management with features including centralized file library and calendar, synchronization across devices, etc
 * Single-window display
 * Provides scheduling platform for hour by hour basis
 
 Cons:
 * Complicated navigation procedures involving a lot of clicks, drop-downs or task expansions
-* Overly structured which limit flexibility 
+* Overly structured which limit flexibility
 * A lot of (unnecessary) functionality that might overwhelm user
 
 ### Google Calendar + Google Task
 Pros:
-* Flexibility in access (private or shared) allows for shared project management 
+* Flexibility in access (private or shared) allows for shared project management
 * Provides scheduling platform for hour by hour basis
-* Flexibility in display setting 
+* Flexibility in display setting
 
 Cons:
 * Complicated navigation procedures involving a lot of clicks, drop-downs or task expansions
-* Overly structured task input requirements limits flexibility 
+* Overly structured task input requirements limits flexibility
 * Requires internet access for updating, offline access only allows read only display
 
 ### Todo.txt
 Pros:
 * Utilizes plain text as the navigation medium with limited clicks necessary (no checkboxes, drop-downs, etc)
 * Simple interface with neat output display
-* Comprehensible command words 
+* Comprehensible command words
 
 Cons:
 * Mostly suitable for people comfortable with CLI
