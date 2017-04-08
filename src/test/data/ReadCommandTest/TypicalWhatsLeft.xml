@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<whatsleft>
+    <tasks>
+        <description>LSM Project Report</description>
+        <priority>high</priority>
+        <byTime>23:00</byTime>
+        <byDate>2017-05-01</byDate>
+        <location>IVLE</location>
+        <tagged>softcopy</tagged>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Clean room</description>
+        <priority>medium</priority>
+        <byTime>12:00</byTime>
+        <byDate>2018-02-07</byDate>
+        <location>home</location>
+        <tagged>housekeeping</tagged>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Laundry</description>
+        <priority>medium</priority>
+        <byTime>22:00</byTime>
+        <byDate>2017-04-20</byDate>
+        <location>home</location>
+        <tagged>housekeeping</tagged>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Shopping</description>
+        <priority>low</priority>
+        <byTime>18:00</byTime>
+        <byDate>2017-05-04</byDate>
+        <location>VivoCity</location>
+        <tagged>shopping</tagged>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Reading Books</description>
+        <priority>high</priority>
+        <byTime>17:00</byTime>
+        <byDate>2018-05-22</byDate>
+        <location>CLB</location>
+        <tagged>study</tagged>
+        <status>false</status>
+    </tasks>
+    <tasks>
+        <description>Cook Dinner</description>
+        <priority>high</priority>
+        <byTime>17:30</byTime>
+        <byDate>2017-05-21</byDate>
+        <location>kitchen</location>
+        <tagged>food</tagged>
+        <status>true</status>
+    </tasks>
+    <events>
+        <description>CS2103 Tutorial</description>
+        <startTime>09:00</startTime>
+        <startDate>2017-07-28</startDate>
+        <endTime>10:00</endTime>
+        <endDate>2017-07-28</endDate>
+        <location>COM1-B103</location>
+        <tagged>demo</tagged>
+    </events>
+    <events>
+        <description>CS2010 Lecture</description>
+        <startTime>10:00</startTime>
+        <startDate>2017-07-03</startDate>
+        <endTime>12:00</endTime>
+        <endDate>2017-07-03</endDate>
+        <location>LT19</location>
+        <tagged>webcasted</tagged>
+    </events>
+    <events>
+        <description>CCA Meeting</description>
+        <startTime>19:00</startTime>
+        <startDate>2017-07-20</startDate>
+        <endTime>22:00</endTime>
+        <endDate>2017-07-20</endDate>
+        <location>FoS</location>
+        <tagged>meeting</tagged>
+    </events>
+    <events>
+        <description>Enrichment Talk</description>
+        <startTime>18:00</startTime>
+        <startDate>2017-07-15</startDate>
+        <endTime>20:00</endTime>
+        <endDate>2017-07-15</endDate>
+        <location>LT28</location>
+        <tagged>talk</tagged>
+    </events>
+    <events>
+        <description>CS2107 Exam</description>
+        <startTime>09:00</startTime>
+        <startDate>2017-03-25</startDate>
+        <endTime>10:30</endTime>
+        <endDate>2017-03-25</endDate>
+        <location>MPSH1A</location>
+        <tagged>calculator</tagged>
+    </events>
+    <events>
+        <description>GEH Presentation</description>
+        <startTime>12:00</startTime>
+        <startDate>2017-05-25</startDate>
+        <endTime>14:00</endTime>
+        <endDate>2017-05-25</endDate>
+        <location>FASS</location>
+        <tagged>formal</tagged>
+    </events>
+    <events>
+        <description>CS2103 Project Discussion</description>
+        <startTime>15:00</startTime>
+        <startDate>2017-05-26</startDate>
+        <endTime>19:00</endTime>
+        <endDate>2017-05-26</endDate>
+        <location>Central Library, NUS</location>
+        <tagged>project</tagged>
+    </events>
+    <tags>demo</tags>
+    <tags>webcasted</tags>
+    <tags>meeting</tags>
+    <tags>talk</tags>
+    <tags>calculator</tags>
+    <tags>formal</tags>
+    <tags>project</tags>
+    <tags>softcopy</tags>
+    <tags>housekeeping</tags>
+    <tags>study</tags>
+    <tags>shopping</tags>
+    <tags>food</tags>
+</whatsleft>
