@@ -20,7 +20,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "The most recent operation has been undone";
 
-    public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "There's no operation to undo.";
+    public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "There is no operation to undo.";
 
     public UndoCommand() {}
 

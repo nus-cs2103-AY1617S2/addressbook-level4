@@ -19,7 +19,7 @@ public class RedoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "The most recent operation has been redone!";
 
-    public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "There's no undo operation to redo";
+    public static final String MESSAGE_WITHOUT_PREVIOUS_OPERATION = "There is no undo operation to redo";
 
     @Override
     public CommandResult execute() {
