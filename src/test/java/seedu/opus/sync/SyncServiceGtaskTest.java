@@ -23,27 +23,20 @@ import seedu.opus.model.task.DateTime;
 import seedu.opus.model.task.Task;
 import seedu.opus.sync.exceptions.SyncException;
 
+//@@author A0148087W
 public class SyncServiceGtaskTest {
+
+    public static final String TEST_CREDENTIAL_DIRECTORY = "cred/StoredCredential_1";
+    public static final String STORED_CREDENTIAL_DIRECTORY = "data/credentials/StoredCredential";
+
     private static SyncManager mockSyncManager;
     private static SyncServiceGtask syncServiceGtask;
 
     private static File dataStoreCredential;
-
     private static File dataStoreTestCredential;
 
     @Before
     public void setUp() throws SyncException {
-        dataStoreTestCredential = new File("cred/StoredCredential_1");
-        dataStoreCredential = new File("data/credentials/StoredCredential");
-
-        if (!Files.exists(dataStoreCredential.toPath())) {
-            try {
-                Files.createDirectories(dataStoreCredential.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
         copyTestCredentials();
         mockSyncManager = mock(SyncManager.class);
         syncServiceGtask = spy(new SyncServiceGtask());
@@ -83,10 +76,22 @@ public class SyncServiceGtaskTest {
 
         syncServiceGtask.start();
         syncServiceGtask.updateTaskList(list);
+
         verify(syncServiceGtask).updateTaskList(list);
     }
 
     public static void copyTestCredentials() {
+        dataStoreTestCredential = new File(TEST_CREDENTIAL_DIRECTORY);
+        dataStoreCredential = new File(STORED_CREDENTIAL_DIRECTORY);
+
+        if (!Files.exists(dataStoreCredential.toPath())) {
+            try {
+                Files.createDirectories(dataStoreCredential.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             deleteCredential();
             Path path = dataStoreCredential.toPath();
@@ -97,6 +102,7 @@ public class SyncServiceGtaskTest {
     }
 
     public static void deleteCredential() {
+        dataStoreCredential = new File("data/credentials/StoredCredential");
         if (dataStoreCredential.exists()) {
             dataStoreCredential.delete();
         }
