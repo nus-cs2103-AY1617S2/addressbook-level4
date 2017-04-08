@@ -8,6 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import typetask.commons.core.Messages;
 import typetask.logic.commands.EditCommand;
+import typetask.model.task.Name;
 import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 //@@author A0139926R
@@ -51,6 +52,11 @@ public class EditCommandTest extends TypeTaskGuiTest {
                 .withCompleted(false).withPriority("Low").build();
 
         assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
+    }
+    @Test
+    public void editWithInvalidName_fail() {
+        commandBox.runCommand("edit 1 ^_^");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
     }
     @Test
     public void editFindThenEditInvalidSchedule_fail() {

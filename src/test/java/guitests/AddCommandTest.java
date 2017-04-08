@@ -40,13 +40,13 @@ public class AddCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void addInvalidEvent_fail() {
-        commandBox.runCommand("add invalidEvent from: today");
+        commandBox.runCommand("a invalidEvent from: today");
         assertResultMessage(String.format
                 (Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
     @Test
     public void addInvalidMultiplePrefix_fail() {
-        commandBox.runCommand("add invalidEvent by: today @tmr");
+        commandBox.runCommand("+ invalidEvent by: today @tmr");
         assertResultMessage(String.format
                 (Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }

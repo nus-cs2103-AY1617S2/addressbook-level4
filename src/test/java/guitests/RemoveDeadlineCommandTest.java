@@ -5,6 +5,7 @@ import static typetask.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
+import typetask.commons.core.Messages;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.RemoveDeadlineCommand;
 import typetask.testutil.TaskBuilder;
@@ -14,6 +15,7 @@ import typetask.testutil.TestTask;
 public class RemoveDeadlineCommandTest extends TypeTaskGuiTest {
 
     private static final String REMOVEDEADLINE_COMMAND = "removedeadline";
+    private static final String REMOVEDEADLINE_COMMAND_SHORT = "rd";
     private static final String ADD_DEADLINE_TO_EXISTING = "edit 1 by: tmr";
 
     @Test
@@ -23,10 +25,15 @@ public class RemoveDeadlineCommandTest extends TypeTaskGuiTest {
         assertRemovedeadlineSuccess(editIndex);
     }
     @Test
-    public void removedeadline_fail() {
-        commandBox.runCommand(REMOVEDEADLINE_COMMAND);
+    public void removedeadlineWithNoIndex_fail() {
+        commandBox.runCommand(REMOVEDEADLINE_COMMAND_SHORT);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveDeadlineCommand.MESSAGE_USAGE));
+    }
+    @Test
+    public void removedeadlineWithInvalidIndex_fail() {
+        commandBox.runCommand(REMOVEDEADLINE_COMMAND_SHORT + " 500");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     private void assertRemovedeadlineSuccess(int editedIndex) throws IllegalValueException {
