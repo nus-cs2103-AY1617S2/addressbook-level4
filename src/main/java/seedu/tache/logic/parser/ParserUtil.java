@@ -242,12 +242,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        for (String identifier: START_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, START_DATE_IDENTIFIER);
     }
 
     /**
@@ -256,12 +251,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        for (String identifier: END_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, END_DATE_IDENTIFIER);
     }
 
     /**
@@ -324,6 +314,20 @@ public class ParserUtil {
 
     public static boolean isDate(String s) {
         return DateTime.isDate(s);
+    }
+    /**
+     * Checks if the given string exists in the strArray. Check is case insensitive
+     * @param s String to check
+     * @param strArray Array of Strings to check against
+     * @return true if s is in strArray, false otherwise
+     */
+    public static boolean isFoundIn(String s, String[] strArray) {
+        for (String str: strArray) {
+            if (s.equalsIgnoreCase(str)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

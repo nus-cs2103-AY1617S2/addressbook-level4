@@ -19,22 +19,12 @@ public class CliSyntax {
     public static final String KEYWORD_EDIT_MULTI_PARAMETER = "and";
 
     /* Parameter names definitions */
-    public static final String PARAMETER_NAME = "name";
-    public static final String PARAMETER_NAME_2 = "n";
-    public static final String PARAMETER_START_DATE = "start_date";
-    public static final String PARAMETER_START_DATE_2 = "startdate";
-    public static final String PARAMETER_START_DATE_3 = "sd";
-    public static final String PARAMETER_END_DATE = "end_date";
-    public static final String PARAMETER_END_DATE_2 = "enddate";
-    public static final String PARAMETER_END_DATE_3 = "ed";
-    public static final String PARAMETER_START_TIME = "start_time";
-    public static final String PARAMETER_START_TIME_2 = "starttime";
-    public static final String PARAMETER_START_TIME_3 = "st";
-    public static final String PARAMETER_END_TIME = "end_time";
-    public static final String PARAMETER_END_TIME_2 = "endtime";
-    public static final String PARAMETER_END_TIME_3 = "et";
-    public static final String PARAMETER_TAG = "tag";
-    public static final String PARAMETER_TAG_2 = "t";
+    public static final String[] PARAMETER_NAME = {"name", "n"};
+    public static final String[] PARAMETER_START_DATE = {"start_date", "startdate", "sd"};
+    public static final String[] PARAMETER_END_DATE = {"end_date", "enddate", "ed"};
+    public static final String[] PARAMETER_START_TIME = {"start_time", "starttime", "st"};
+    public static final String[] PARAMETER_END_TIME = {"end_time", "endtime", "et"};
+    public static final String[] PARAMETER_TAG = {"tag", "t"};
 
     /* List filter definitions */
     public static final String FILTER_COMPLETED = "completed";
