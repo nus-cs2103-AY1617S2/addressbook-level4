@@ -13,11 +13,7 @@ public class ListCommandDeadline extends ListCommand {
 
     @Override
     public CommandResult execute() {
-        if (this.keywords.size() == 1 && this.keywords.contains("")) {
-            model.updateFilteredListToShowDeadline();
-        } else {
-            model.updateFilteredListToShowDeadline(keywords);
-        }
+        model.updateFilteredListToShowDeadline(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
     }
 }

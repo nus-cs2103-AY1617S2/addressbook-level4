@@ -1,6 +1,7 @@
 package org.teamstbf.yats.ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
 import org.teamstbf.yats.commons.core.LogsCenter;
@@ -16,7 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +52,12 @@ public class MultiViewPanel extends UiPart<Region> {
     private ListView<ReadOnlyEvent> taskListView;
     @FXML
     private ListView<String[]> timeTasks;
+    @FXML
+    private Button prevDate;
+    @FXML
+    private Button nextDate;
+    @FXML
+    private Label date;
 
     private static LocalDate today = LocalDate.now();
 
@@ -76,6 +85,7 @@ public class MultiViewPanel extends UiPart<Region> {
     private void setConnectionsCalendarView() {
 	Node popupContent = calendar.getPopupContent();
 	calendarRoot.setCenter(popupContent);
+	updateCurrentDay(today);
 	createFullDayTime();
     }
 
@@ -146,12 +156,11 @@ public class MultiViewPanel extends UiPart<Region> {
 	updateCalendarList();
 	timeTasks.setItems(timeData);
 	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-	getSelectedDate();
     }
 
     private void updateCalendarList() {
 	String[] data = new String[TASK_DETAILS];
-	model.updateCalendarFilteredListToShowStartTime();
+	model.updateCalendarFilteredListToShowStartTime(today);
 	calendarList = model.getCalendarFilteredTaskList();
 	for (int i = 0; i < calendarList.size(); i++) {
 	    ReadOnlyEvent event = calendarList.get(i);
@@ -163,12 +172,22 @@ public class MultiViewPanel extends UiPart<Region> {
 	}
     }
 
-    public LocalDate getSelectedDate() {
-	datepicker.setOnAction(event -> {
-	    LocalDate date = datepicker.getValue();
-	    System.out.println(date);
-	});
-	return datepicker.getValue();
+    public void prevDay() {
+	today = today.minusDays(1);
+	datepicker.setValue(today);
+	updateCurrentDay(today);
+    }
+
+    public void nextDay() {
+	today = today.plusDays(1);
+	datepicker.setValue(today);
+	updateCurrentDay(today);
+    }
+
+    public void updateCurrentDay(LocalDate day) {
+	today = day;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM");
+	date.setText(today.format(formatter));
     }
 
 }

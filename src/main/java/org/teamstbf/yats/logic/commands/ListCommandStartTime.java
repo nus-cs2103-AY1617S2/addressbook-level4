@@ -9,16 +9,11 @@ public class ListCommandStartTime extends ListCommand {
 
     public ListCommandStartTime(Set<String> keywords) {
         this.keywords = keywords;
-        System.out.println(keywords.size());
     }
 
     @Override
     public CommandResult execute() {
-        if (this.keywords.size() == 1 && this.keywords.contains("")) {
-            model.updateFilteredListToShowSortedStart();
-        } else {
-            model.updateFilteredListToShowStartTime(keywords);
-        }
+        model.updateFilteredListToShowStartTime(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
     }
 }

@@ -13,11 +13,7 @@ public class ListCommandEndTime extends ListCommand {
 
     @Override
     public CommandResult execute() {
-        if (this.keywords.size() == 1 && this.keywords.contains("")) {
-            model.updateFilteredListToShowSortedEnd();
-        } else {
-            model.updateFilteredListToShowEndTime(keywords);
-        }
+        model.updateFilteredListToShowEndTime(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
     }
 }
