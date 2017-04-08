@@ -44,7 +44,6 @@ public class FindCommandParser {
     public Command parse(String args) throws IllegalValueException {
 
         String findType = parseType(args);
-
         initOneWordDay();
 
         if (findType.equals(EMPTY_STRING)) {
@@ -52,13 +51,7 @@ public class FindCommandParser {
                     FindCommand.MESSAGE_USAGE));
         }
 
-        Prefix inputPrefix;
-
-        if (findType.equals(TYPE_START_DATE)) {
-            inputPrefix = PREFIX_START_DATE;
-        } else {
-            inputPrefix = PREFIX_END_DATE;
-        }
+        Prefix inputPrefix = getInputPrefix(findType);
 
         try {
             ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(inputPrefix);
@@ -161,6 +154,18 @@ public class FindCommandParser {
             return TYPE_END_DATE;
         } else {
             return TYPE_KEYWORDS;
+        }
+    }
+
+    /**
+     * Get the input prefix according to the find type
+     * @return PREFIX_START_DATE or PREFIX_END_DATE
+     */
+    private Prefix getInputPrefix(String findType) {
+        if (findType.equals(TYPE_START_DATE)) {
+            return PREFIX_START_DATE;
+        } else {
+            return PREFIX_END_DATE;
         }
     }
 
