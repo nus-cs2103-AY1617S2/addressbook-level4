@@ -61,7 +61,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleEzDoChangedEvent(EzDoChangedEvent ezce) {
-        String lastUpdated = (new SimpleDateFormat("dd/MM/YYYY (E) h:mm:ss a")).format(new Date());
+        String lastUpdated = (new SimpleDateFormat("dd/MM/YYYY H:mm:ss")).format(new Date());
         logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
