@@ -49,6 +49,7 @@ $(document).ready(function() {
         navLinks: true, // can click day/week names to navigate views
         timeFormat: 'HH:mm',
         selectable: true,
+        allDaySlot: false,
         dayClick: function(date, jsEvent, view) {
             $('#calendar').fullCalendar( 'changeView', 'agendaDay' );
             $('#calendar').fullCalendar( 'gotoDate', date );
