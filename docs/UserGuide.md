@@ -192,11 +192,14 @@ Things To Note:
    e.g. Meeting Tutor will match meeting tutor
 > The search function prioritise dates.
    e.g. "find tmr" will give a list of tasks with tomorrow date but will not give task name with "tmr"
+> The search function does not support finding by months.
+> The search function will return the closest day from your current time.
+   e.g. "find monday" will give you a list of tasks that have this coming monday date
 ```
 
 Examples:
 * `find Meeting`
-* `find oct`
+* `find next week`
 * `find tmr`
 
 
