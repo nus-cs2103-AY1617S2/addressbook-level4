@@ -212,7 +212,7 @@ public class FileTransferCommandTest extends ToDoListGuiTest {
 
     //@@author A0139343E-unused
 
-    //These tests only work in junit, but not in travis (suspects due to OS in travis too slow).
+    //These tests only work in junit, but not in travis (suspects due to OS in travis too slow for creating files).
 /*
     @Rule
     public ExpectedException thrown = ExpectedException.none();

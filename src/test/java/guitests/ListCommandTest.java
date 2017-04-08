@@ -97,7 +97,8 @@ public class ListCommandTest extends ToDoListGuiTest {
             newTestTask.forwardTaskRecurDate();
             targetTask.setIsDone(true);
             filteredTaskList = TestUtil.addTasksToList(currentList, newTestTask);
-        }        TestTask[] filteredResultList = TestUtil.getTasksByDoneStatus(filteredTaskList, isDone);
+        }
+        TestTask[] filteredResultList = TestUtil.getTasksByDoneStatus(filteredTaskList, isDone);
         assertTrue(taskListPanel.isListMatching(taskType, filteredResultList));
         assertResultMessage(expectedFeedbackMessage);
     }
