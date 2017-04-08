@@ -596,6 +596,10 @@ public class LogicManagerTest {
     @Test
     public void executeFindDateInvalidArgs() throws Exception {
         assertCommandFailure("findbydate no date", FindDateCommand.MESSAGE_INVALID_RANGE);
+        assertCommandFailure("findbydate", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
+        assertCommandFailure("findbydate yesterday to today to next week", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
+        assertCommandFailure("findbydate today to no date", FindDateCommand.MESSAGE_INVALID_RANGE);
+        assertCommandFailure("findbydate no date to no date", FindDateCommand.MESSAGE_INVALID_RANGE);
     }
 
     @Test
