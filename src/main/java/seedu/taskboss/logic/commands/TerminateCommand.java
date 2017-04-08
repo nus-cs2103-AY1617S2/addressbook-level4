@@ -29,7 +29,7 @@ public class TerminateCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS = "recurring tasks marked done: \n%1$s";
+    public static final String MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS = "Recurring task(s) marked done: \n%1$s";
     public static final String DONE = "Done";
     public static final String ERROR_TASK_NOT_RECURRING = "All tasks indicated should be recurring";
     public static final String ERROR_TERMINATED_TASK = "The task was terminated previously";

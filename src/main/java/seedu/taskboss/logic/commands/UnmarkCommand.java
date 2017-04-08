@@ -31,10 +31,10 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_UNMARK_TASK_DONE_SUCCESS = "Task unmarked:\n%1$s";
+    public static final String MESSAGE_UNMARK_TASK_DONE_SUCCESS = "Task(s) unmarked:\n%1$s";
     public static final String DONE = "Done";
-    public static final String ERROR_NOT_MARKED = "The task was never "
-            + "terminated or marked done previously";
+    public static final String ERROR_NOT_MARKED = "Unable to unmark as the task is not"
+            + " in the Done category.";
 
     public final ArrayList<Integer> filteredTaskListIndices;
     public final ArrayList<ReadOnlyTask> tasksToUnmark;

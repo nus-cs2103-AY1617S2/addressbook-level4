@@ -30,7 +30,7 @@ public class MarkDoneCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task marked done:\n%1$s";
+    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task(s) marked done:\n%1$s";
     public static final String DONE = "Done";
     public static final String ERROR_MARKED_TASK = "The task was marked done previously";
 
