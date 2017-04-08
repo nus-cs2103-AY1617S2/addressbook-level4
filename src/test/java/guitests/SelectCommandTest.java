@@ -72,7 +72,7 @@ public class SelectCommandTest extends EzDoGuiTest {
 
         // select index smaller than the range in done list
         assertSelectionInvalidInDoneList(0);
-        
+
         // select any task in done list
         assertDoneTaskSelectionInvalid(2);
 
