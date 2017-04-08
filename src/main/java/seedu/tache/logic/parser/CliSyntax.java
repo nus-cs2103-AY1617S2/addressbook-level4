@@ -50,6 +50,13 @@ public class CliSyntax {
     public static final String FILTER_DUE_THIS_WEEK = "this week";
     public static final String FILTER_OVERDUE = "overdue";
     //@@author
+  //@@author A0150120H
+    public static final String[] START_DATE_IDENTIFIER = {"from"};
+    public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
+    public static final String[] RECURRENCE_PREFIX_IDENTIFIER = {"every"};
+    public static final String[] DAILY_REURRENCE_IDENTIFIER = {"daily"};
+    public static final
+    //@@author
 
     /* Patterns definitions */
     public static final Pattern KEYWORDS_ARGS_FORMAT =
