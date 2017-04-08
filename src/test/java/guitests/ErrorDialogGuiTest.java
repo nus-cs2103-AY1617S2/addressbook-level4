@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import guitests.guihandles.AlertDialogHandle;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import onlythree.imanager.commons.events.storage.DataSavingExceptionEvent;
 
 public class ErrorDialogGuiTest extends TaskListGuiTest {
 
