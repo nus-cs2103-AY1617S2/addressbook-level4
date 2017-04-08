@@ -16,6 +16,9 @@ import seedu.whatsleft.model.activity.ReadOnlyEvent;
 import seedu.whatsleft.model.activity.StartDate;
 import seedu.whatsleft.model.activity.UniqueEventList.DuplicateEventException;
 
+/**
+ * Recur an event
+ */
 public class RecurCommand extends Command {
 
     public final int targetIndex;
@@ -57,39 +60,66 @@ public class RecurCommand extends Command {
         LocalDate nextsd = startdate;
         LocalDate nexted = enddate;
         if (frequency.equals("daily")) {
-            for (int i = 0; i < occur; i++) {
-                nextsd = nextsd.plusDays(1);
-                nexted = nexted.plusDays(1);
-                Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
-                        new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
-                        selected.getLocation(), selected.getTags());
-                try {
-                    model.addEvent(nextOccur);
-                } catch (DuplicateEventException e) {
-                    throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
-                }
-            }
-            model.storePreviousCommand("add");
-            return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
+            return recurDailyEvent(selected, nextsd, nexted);
         } else if (frequency.equals("weekly")) {
-            for (int i = 0; i < occur; i++) {
-                nextsd = nextsd.plusDays(7);
-                nexted = nexted.plusDays(7);
-                Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
-                        new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
-                        selected.getLocation(), selected.getTags());
-                try {
-                    model.addEvent(nextOccur);
-                } catch (DuplicateEventException e) {
-                    throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
-                }
-            }
-            model.storePreviousCommand("add");
-            return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
+            return recurWeeklyEvent(selected, nextsd, nexted);
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
-    //@@author
+
+    //@@author A0110491U
+    /**
+     * Handles the weekly recurring event addition
+     * @param selected event
+     * @param next start date
+     * @param next end date
+     * @return CommandResult for successful recur
+     * @throws CommandException
+     */
+    private CommandResult recurWeeklyEvent(ReadOnlyEvent selected, LocalDate nextsd, LocalDate nexted)
+            throws CommandException {
+        for (int i = 0; i < occur; i++) {
+            nextsd = nextsd.plusDays(7);
+            nexted = nexted.plusDays(7);
+            Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
+                    new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
+                    selected.getLocation(), selected.getTags());
+            try {
+                model.addEvent(nextOccur);
+            } catch (DuplicateEventException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+            }
+        }
+        model.storePreviousCommand("add");
+        return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
+    }
+
+    //@@author A0110491U
+    /**
+     * Handles the daily recurring event addition
+     * @param selected event
+     * @param next start date
+     * @param next end date
+     * @return CommandResult for successful recur
+     * @throws CommandException
+     */
+    private CommandResult recurDailyEvent(ReadOnlyEvent selected, LocalDate nextsd, LocalDate nexted)
+            throws CommandException {
+        for (int i = 0; i < occur; i++) {
+            nextsd = nextsd.plusDays(1);
+            nexted = nexted.plusDays(1);
+            Event nextOccur = new Event(selected.getDescription(), selected.getStartTime(),
+                    new StartDate(nextsd), selected.getEndTime(), new EndDate(nexted),
+                    selected.getLocation(), selected.getTags());
+            try {
+                model.addEvent(nextOccur);
+            } catch (DuplicateEventException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+            }
+        }
+        model.storePreviousCommand("add");
+        return new CommandResult(String.format(MESSAGE_ADD_RECUR_ACTIVITY_SUCCESS, selected));
+    }
 }
 
 

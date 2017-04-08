@@ -53,6 +53,7 @@ public class SelectCommand extends Command {
 
     //@@author A0110491U
     /**
+     * Handles the selection of task
      * @param lastShownTaskList
      * @return CommandResult success if the index of event is valid
      * @throws CommandException if the index given is invalid
@@ -70,6 +71,7 @@ public class SelectCommand extends Command {
 
     //@@author A0110491U
     /**
+     * Handles the selection of event
      * @param lastShownEventList
      * @return CommandResult success if the index of task is valid
      * @throws CommandException if the index given is invalid
