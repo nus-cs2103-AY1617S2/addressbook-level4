@@ -1,7 +1,6 @@
 package seedu.onetwodo.model.task;
 
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.onetwodo.commons.core.UnmodifiableObservableList;
 import seedu.onetwodo.commons.exceptions.DuplicateDataException;
-import seedu.onetwodo.commons.util.CollectionUtil;
 import seedu.onetwodo.model.SortOrder;
 
 /**
@@ -19,7 +17,6 @@ import seedu.onetwodo.model.SortOrder;
  * Supports a minimal set of list operations.
  *
  * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
 public class UniqueTaskList implements Iterable<Task> {
 
