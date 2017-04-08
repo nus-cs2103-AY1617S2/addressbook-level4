@@ -462,7 +462,7 @@ Description: Fills the command box with specific command.
 Example format: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd>
 This will fill the command box with "add ".
 
- >  <img src="images/shortcuts.png" width="600>
+ >  <img src="images/shortcuts.png" width="600">
 
 > * Shortcuts do not work when you have clicked on google calendar as it is a separate browser.
 
