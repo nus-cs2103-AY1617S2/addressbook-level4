@@ -612,6 +612,9 @@ public class LogicManagerTest {
         assertCommandSuccess("findbydate 10 june 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE,
                 "10/06/2017", Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM,
                 expectedList);
+        assertCommandSuccess("findbydate 10/06/2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE,
+                "10/06/2017", Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM,
+                expectedList);
     }
 
     @Test
@@ -627,6 +630,10 @@ public class LogicManagerTest {
 
         assertCommandSuccess(
                 "findbydate 11 march 2017 to 16 march 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE_TO_DATE,
+                        "11/03/2017", "16/03/2017", Command.getMessageForTaskListShownSummary(expectedList.size())),
+                expectedTM, expectedList);
+        assertCommandSuccess(
+                "findbydate 11/03/2017 to 16/03/2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE_TO_DATE,
                         "11/03/2017", "16/03/2017", Command.getMessageForTaskListShownSummary(expectedList.size())),
                 expectedTM, expectedList);
 
