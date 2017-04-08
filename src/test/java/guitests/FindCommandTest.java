@@ -16,13 +16,13 @@ public class FindCommandTest extends TypeTaskGuiTest {
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        assertFindResult("f Meier", td.daniel);
     }
 
     @Test
     public void findEmptyList() {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("search Jean"); // no results
     }
     //@@author A0139926R
     @Test
