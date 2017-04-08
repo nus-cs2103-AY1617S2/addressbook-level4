@@ -32,7 +32,7 @@ public class ListByCategoryCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         model.updateFilteredTaskListByCategory(category);
- 
+
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < 1) { //the category does not exist
