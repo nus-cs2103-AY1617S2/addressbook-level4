@@ -7,7 +7,7 @@ import seedu.taskmanager.commons.util.DateTimeUtil;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 
 /**
- * Represents a Task in the address book. Guarantees: details are present and
+ * Represents a Task in the task manager. Guarantees: details are present and
  * not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {

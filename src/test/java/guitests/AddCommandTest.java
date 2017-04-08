@@ -37,7 +37,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         // add to empty list
         commandBox.runCommand("CLEAR");
-        assertAddSuccess(td.eatbreakfast);
+        assertAddSuccess(td.eatBreakfast);
 
         // invalid command
         commandBox.runCommand("ADDS Johnny");
@@ -53,11 +53,13 @@ public class AddCommandTest extends TaskManagerGuiTest {
             assertMatching(taskToAdd, addedCard);
         } else {
             if (taskToAdd.isDeadlineTask()) {
-                DeadlineTaskCardHandle addedCard = deadlineTaskListPanel.navigateToDeadlineTask(taskToAdd.getTaskName().toString());
+                DeadlineTaskCardHandle addedCard = deadlineTaskListPanel
+                        .navigateToDeadlineTask(taskToAdd.getTaskName().toString());
                 assertMatching(taskToAdd, addedCard);
             } else {
                 if (taskToAdd.isFloatingTask()) {
-                    FloatingTaskCardHandle addedCard = floatingTaskListPanel.navigateToFloatingTask(taskToAdd.getTaskName().toString());
+                    FloatingTaskCardHandle addedCard = floatingTaskListPanel
+                            .navigateToFloatingTask(taskToAdd.getTaskName().toString());
                     assertMatching(taskToAdd, addedCard);
                 }
             }
