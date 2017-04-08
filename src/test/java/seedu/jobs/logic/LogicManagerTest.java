@@ -70,17 +70,17 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) throws IllegalTimeException {
+    public void handleLocalModelChangedEvent(TaskBookChangedEvent abce) throws IllegalTimeException {
         latestTaskAddressBook = new TaskBook(abce.data);
     }
 
     @Subscribe
-    private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
+    public void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
         targetedJumpIndex = je.targetIndex;
     }
 
