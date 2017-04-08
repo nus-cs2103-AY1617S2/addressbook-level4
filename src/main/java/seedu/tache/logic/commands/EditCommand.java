@@ -12,12 +12,12 @@ import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.logic.commands.exceptions.CommandException;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -296,12 +296,12 @@ public class EditCommand extends Command implements Undoable {
         }
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
-               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurringStatus(),
-               taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurState().isRecurring(),
+               taskToEdit.getRecurState().getRecurInterval(), taskToEdit.getRecurState().getRecurCompletedList());
     }
 
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
             throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
         }
     }

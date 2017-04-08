@@ -588,7 +588,7 @@ public class ModelManager extends ComponentManager implements Model {
     private ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < filteredTasks.size(); i++) {
-            if (filteredTasks.get(i).getRecurringStatus()) {
+            if (filteredTasks.get(i).getRecurState().isRecurring()) {
                 if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(new Date()).toArray());
@@ -599,7 +599,7 @@ public class ModelManager extends ComponentManager implements Model {
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(dateThisWeek.getTime()).toArray());
                 } else {
-                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList(null).toArray());
+                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
                 }
             }
         }
@@ -610,7 +610,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < taskManager.getTaskList().size(); i++) {
-            if (taskManager.getTaskList().get(i).getRecurringStatus()) {
+            if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
                 Collections.addAll(concatenated, taskManager.getTaskList().get(i)
                                             .getUncompletedRecurList(null).toArray());
             }

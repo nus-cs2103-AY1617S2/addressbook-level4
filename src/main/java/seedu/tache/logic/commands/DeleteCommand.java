@@ -79,7 +79,7 @@ public class DeleteCommand extends Command implements Undoable {
     }
     //@@author A0139925U
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
             throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
         }
     }

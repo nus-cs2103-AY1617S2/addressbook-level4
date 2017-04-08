@@ -13,31 +13,35 @@ import seedu.tache.model.task.DateTime;
 public class RecurState {
     public enum RecurInterval { NONE, DAY, WEEK, MONTH, YEAR };
 
-    private boolean isRecurring;
+    private boolean recurringStatus;
     private RecurInterval interval;
     private List<Date> recurCompletedList;
     private String recurDisplayDate;
 
     public RecurState() {
-        this.isRecurring = false;
+        this.recurringStatus = false;
         this.interval = RecurInterval.NONE;
         this.recurCompletedList = new ArrayList<Date>();
         this.recurDisplayDate = "";
     }
 
     public RecurState(boolean isRecurring, RecurInterval interval, List<Date> recurCompletedList) {
-        this.isRecurring = isRecurring;
+        this.recurringStatus = isRecurring;
         this.interval = interval;
         this.recurCompletedList = recurCompletedList;
         this.recurDisplayDate = "";
     }
 
+    public boolean isRecurring() {
+        return recurringStatus;
+    }
+
     public boolean getRecurringStatus() {
-        return isRecurring;
+        return recurringStatus;
     }
 
     public void setRecurringStatus(boolean isRecurring) {
-        this.isRecurring = isRecurring;
+        this.recurringStatus = isRecurring;
     }
 
     public RecurInterval getRecurInterval() {
@@ -49,11 +53,11 @@ public class RecurState {
     }
 
     public boolean isMasterRecurring() {
-        return this.isRecurring && this.recurDisplayDate.equals("");
+        return isRecurring() && this.recurDisplayDate.equals("");
     }
 
     public boolean isGhostRecurring() {
-        return this.isRecurring && !this.recurDisplayDate.equals("");
+        return isRecurring() && !this.recurDisplayDate.equals("");
     }
 
     public List<Date> getRecurCompletedList() {
@@ -64,9 +68,9 @@ public class RecurState {
         this.recurCompletedList = recurCompletedList;
     }
 
-    public List<Date> getUncompletedRecurList(DateTime startDateTime, DateTime endDateTime) {
+    public List<Date> getUncompletedRecurDates(DateTime startDateTime, DateTime endDateTime, Date filterEndDate) {
         List<Date> uncompletedRecurList = new ArrayList<Date>();
-        if (isRecurring) {
+        if (isRecurring()) {
             Calendar calendarCurrent = Calendar.getInstance();
             calendarCurrent.setTime(new Date(startDateTime.getAmericanDateOnly()
                                         + " " + startDateTime.getTimeOnly()));
@@ -77,7 +81,8 @@ public class RecurState {
             calendarEnd.add(Calendar.SECOND, 1);
 
             //Populate 'Ghost' Task
-            while (calendarCurrent.getTime().before(calendarEnd.getTime())) {
+            while (calendarCurrent.getTime().before(calendarEnd.getTime())
+                    && (filterEndDate == null || calendarCurrent.getTime().before(filterEndDate))) {
 
                 if (!isRecurCompleted(calendarCurrent.getTime())) {
                     uncompletedRecurList.add(calendarCurrent.getTime());
@@ -115,5 +120,15 @@ public class RecurState {
 
     public void setRecurDisplayDate(String recurDisplayDate) {
         this.recurDisplayDate = recurDisplayDate;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RecurState // instanceof handles nulls
+                && this.recurringStatus == ((RecurState) other).getRecurringStatus()
+                && this.interval.equals(((RecurState) other).getRecurInterval())
+                && this.recurCompletedList == ((RecurState) other).getRecurCompletedList()
+                && this.recurDisplayDate.equals(((RecurState) other).getRecurDisplayDate())); // state check
     }
 }

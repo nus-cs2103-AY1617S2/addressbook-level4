@@ -4,7 +4,6 @@ package seedu.tache.model.task;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +12,8 @@ import java.util.Optional;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.CollectionUtil;
+import seedu.tache.model.recurstate.RecurState;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 
 /**
@@ -21,18 +22,13 @@ import seedu.tache.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    public enum RecurInterval { NONE, DAY, WEEK, MONTH, YEAR };
-
     private Name name;
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
     private boolean isActive;
     private boolean isTimed;
-    private boolean isRecurring;
-    private RecurInterval interval;
-    private List<Date> recurCompletedList;
-    private String recurDisplayDate;
+    private RecurState recurState;
 
     /**
      * Every field must be present and not null.
@@ -45,10 +41,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isActive = true;
         this.isTimed = false;
-        this.isRecurring = false;
-        this.interval = RecurInterval.NONE;
-        this.recurCompletedList = new ArrayList<Date>();
-        this.recurDisplayDate = "";
+        this.recurState = new RecurState();
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
@@ -65,10 +58,7 @@ public class Task implements ReadOnlyTask {
         } else {
             this.isTimed = false;
         }
-        this.isRecurring = isRecurring;
-        this.interval = interval;
-        this.recurCompletedList = recurCompletedList;
-        this.recurDisplayDate = "";
+        this.recurState = new RecurState(isRecurring, interval, recurCompletedList);
     }
 
     /**
@@ -76,8 +66,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
-                    source.getTimedStatus(), source.getActiveStatus(), source.getRecurringStatus(),
-                    source.getRecurInterval(), source.getRecurCompletedList());
+                    source.getTimedStatus(), source.getActiveStatus(), source.getRecurState().isRecurring(),
+                    source.getRecurState().getRecurInterval(), source.getRecurState().getRecurCompletedList());
     }
 
     @Override
@@ -92,13 +82,13 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartDateTime() {
-        if (!recurDisplayDate.equals("")) {
+        if (recurState.isGhostRecurring()) {
             try {
                 String time = "";
                 if (startDateTime.isPresent()) {
                     time = " " + startDateTime.get().getTimeOnly();
                 }
-                return Optional.of(new DateTime(recurDisplayDate + time));
+                return Optional.of(new DateTime(recurState.getRecurDisplayDate() + time));
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -113,13 +103,13 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getEndDateTime() {
-        if (!recurDisplayDate.equals("")) {
+        if (recurState.isGhostRecurring()) {
             try {
                 String time = "";
                 if (endDateTime.isPresent()) {
                     time = " " + endDateTime.get().getTimeOnly();
                 }
-                return Optional.of(new DateTime(recurDisplayDate + time));
+                return Optional.of(new DateTime(recurState.getRecurDisplayDate() + time));
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -164,115 +154,50 @@ public class Task implements ReadOnlyTask {
         this.isActive = isActive;
     }
     //@@author A0139925U
-    @Override
-    public boolean getRecurringStatus() {
-        return isRecurring;
+    public RecurState getRecurState() {
+        return recurState;
     }
 
-    public void setRecurringStatus(boolean isRecurring) {
-        this.isRecurring = isRecurring;
-    }
-
-    @Override
-    public RecurInterval getRecurInterval() {
-        return interval;
-    }
-
-    public void setRecurInterval(RecurInterval interval) {
-        this.interval = interval;
+    public void setRecurState(RecurState recurState) {
+        this.recurState = recurState;
     }
 
     @Override
-    public boolean isMasterRecurring() {
-        return this.isRecurring && this.recurDisplayDate.equals("");
-    }
+    public List<Task> getUncompletedRecurList() {
+        assert startDateTime.isPresent();
+        assert endDateTime.isPresent();
 
-    @Override
-    public List<Date> getRecurCompletedList() {
-        return this.recurCompletedList;
-    }
-
-    public void setRecurCompletedList(List<Date> recurCompletedList) {
-        this.recurCompletedList = recurCompletedList;
-    }
-
-    public List<Task> getUncompletedRecurList(Date endingRangeDate) {
         List<Task> uncompletedRecurList = new ArrayList<Task>();
-        if (startDateTime.isPresent() && isRecurring) {
-            Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
-                                            + " " + startDateTime.get().getTimeOnly());
-            //Set soft cap
-            Calendar calendarNow = Calendar.getInstance();
-            if (endingRangeDate == null) {
-                calendarNow.setTime(new Date());
-                if (interval.equals(RecurInterval.DAY)) {
-                    calendarNow.add(Calendar.WEEK_OF_YEAR, 2);
-                } else if (interval.equals(RecurInterval.WEEK)) {
-                    calendarNow.add(Calendar.MONTH, 2);
-                } else if (interval.equals(RecurInterval.MONTH)) {
-                    calendarNow.add(Calendar.YEAR, 1);
-                } else if (interval.equals(RecurInterval.YEAR)) {
-                    calendarNow.add(Calendar.YEAR, 5);
-                }
-            } else {
-                calendarNow.setTime(endingRangeDate);
-            }
-            //Populate 'Ghost' Task
-            while ((currentDate.before(calendarNow.getTime())
-                    || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
-                    && currentDate.getMonth() == calendarNow.get(Calendar.MONTH)
-                    && currentDate.getYear() == calendarNow.get(Calendar.YEAR)))) {
-                if (endDateTime.isPresent()) {
-                    if (currentDate.after(new Date(endDateTime.get().getAmericanDateOnly()
-                                            + " " + endDateTime.get().getTimeOnly()))) {
-                        break;
-                    }
-                }
-                Task temp = new Task(this);
-                if (!temp.isRecurCompleted(currentDate)) {
-                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                    String tempDate = df.format(currentDate);
-                    temp.setRecurDisplayDate(tempDate);
-                    uncompletedRecurList.add(temp);
-                }
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(currentDate);
-                if (temp.interval == RecurInterval.DAY) {
-                    calendar.add(Calendar.DATE, 1);
-                    currentDate = calendar.getTime();
-                } else if (temp.interval == RecurInterval.WEEK) {
-                    calendar.add(Calendar.WEEK_OF_YEAR, 1);
-                    currentDate = calendar.getTime();
-                } else if (temp.interval == RecurInterval.MONTH) {
-                    calendar.add(Calendar.MONTH, 1);
-                    currentDate = calendar.getTime();
-                } else if (temp.interval == RecurInterval.YEAR) {
-                    calendar.add(Calendar.YEAR, 1);
-                    currentDate = calendar.getTime();
-                }
-            }
+        List<Date> uncompletedRecurDates = this.recurState.getUncompletedRecurDates(startDateTime.get(),
+                                                                                    endDateTime.get(), null);
+        for (int i = 0; i < uncompletedRecurDates.size(); i++) {
+            Task temp = new Task(this);
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String tempDate = df.format(uncompletedRecurDates.get(i));
+            temp.getRecurState().setRecurDisplayDate(tempDate);
+            uncompletedRecurList.add(temp);
         }
+
         return uncompletedRecurList;
-
     }
 
-    public boolean isRecurCompleted(Date recurCompleted) {
-        DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        for (int i = 0; i < getRecurCompletedList().size(); i++) {
-            if (outputFormatter.format(getRecurCompletedList().get(i))
-                                .equals(outputFormatter.format(recurCompleted))) {
-                return true;
-            }
+    @Override
+    public List<Task> getUncompletedRecurList(Date filterEndDate) {
+        assert startDateTime.isPresent();
+        assert endDateTime.isPresent();
+
+        List<Task> uncompletedRecurList = new ArrayList<Task>();
+        List<Date> uncompletedRecurDates = this.recurState.getUncompletedRecurDates(startDateTime.get(),
+                                                                                    endDateTime.get(), filterEndDate);
+        for (int i = 0; i < uncompletedRecurDates.size(); i++) {
+            Task temp = new Task(this);
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String tempDate = df.format(uncompletedRecurDates.get(i));
+            temp.getRecurState().setRecurDisplayDate(tempDate);
+            uncompletedRecurList.add(temp);
         }
-        return false;
-    }
 
-    public String getRecurDisplayDate() {
-        return this.recurDisplayDate;
-    }
-
-    public void setRecurDisplayDate(String recurDisplayDate) {
-        this.recurDisplayDate = recurDisplayDate;
+        return uncompletedRecurList;
     }
     //@@author
     /**
@@ -286,9 +211,7 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
         this.setTimedStatus(replacement.getTimedStatus());
         this.setActiveStatus(replacement.getActiveStatus());
-        this.setRecurringStatus(replacement.getRecurringStatus());
-        this.setRecurInterval(replacement.getRecurInterval());
-        this.setRecurCompletedList(replacement.getRecurCompletedList());
+        this.setRecurState(replacement.getRecurState());
     }
 
     @Override

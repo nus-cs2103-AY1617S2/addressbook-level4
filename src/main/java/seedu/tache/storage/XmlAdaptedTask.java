@@ -1,20 +1,19 @@
 package seedu.tache.storage;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * JAXB-friendly version of the Task.
@@ -36,17 +35,11 @@ public class XmlAdaptedTask {
     @XmlElement(required = false)
     private boolean isTimed;
 
-    @XmlElement(required = false)
-    private boolean isRecurring;
-
-    @XmlElement(required = false)
-    private RecurInterval interval;
+    @XmlElement(required = true)
+    private RecurState recurState;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
-
-    @XmlElement(required = false)
-    private List<Date> recurCompletedList = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -70,13 +63,11 @@ public class XmlAdaptedTask {
         }
         isActive = source.getActiveStatus();
         isTimed = source.getTimedStatus();
-        isRecurring = source.getRecurringStatus();
-        interval = source.getRecurInterval();
+        recurState = source.getRecurState();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
-        recurCompletedList = source.getRecurCompletedList();
     }
 
     /**
@@ -104,11 +95,9 @@ public class XmlAdaptedTask {
         }
         final boolean isActive = this.isActive;
         final boolean isTimed = this.isTimed;
-        final boolean isRecurring = this.isRecurring;
-        final RecurInterval interval = this.interval;
+        final RecurState recurState = this.recurState;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        final List<Date> recurCompletedList = this.recurCompletedList;
-        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, isRecurring,
-                            interval, recurCompletedList);
+        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, recurState.isRecurring(),
+                            recurState.getRecurInterval(), recurState.getRecurCompletedList());
     }
 }
