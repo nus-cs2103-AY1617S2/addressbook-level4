@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
-    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate.";
+    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate."; //TODO merv to use
 
     private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
@@ -101,9 +101,9 @@ public class DeleteCommand extends Command {
 
     private void deleteTaskAtIndex(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
             throws UniqueTaskList.TaskNotFoundException {
-        this.taskToDelete = getTaskToDelete(currIndex, lastShownList); //TODO check
+        this.taskToDelete = getTaskToDelete(currIndex, lastShownList);
         deleteTask(taskToDelete);
-        storeTasksForUndo(currIndex, taskToDelete);
+        storeTasksForUndo(taskToDelete);
     }
 
     private ReadOnlyTask getTaskToDelete(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
@@ -114,7 +114,7 @@ public class DeleteCommand extends Command {
         model.deleteTask(taskToDelete);
     }
 
-    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToDelete) {
+    private void storeTasksForUndo(ReadOnlyTask taskToDelete) {
         this.deletedTaskList.push(new Task(taskToDelete));
     }
 

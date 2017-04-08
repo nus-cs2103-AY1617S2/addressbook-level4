@@ -108,7 +108,7 @@ public class UnmarkCommand extends Command {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
         updateTaskListAtIndex(currIndex, unmarkedTask);
-        storeTasksForUndo(currIndex, taskToUnmark, unmarkedTask);
+        storeTasksForUndo(taskToUnmark, unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
@@ -143,7 +143,7 @@ public class UnmarkCommand extends Command {
         model.updateTask(currIndex, unmarkedTask);
     }
 
-    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToUnmark, Task unmarkedTask) {
+    private void storeTasksForUndo(ReadOnlyTask taskToUnmark, Task unmarkedTask) {
         this.taskToUnmarkList.push(new Task(taskToUnmark));
         this.unmarkedTaskList.push(unmarkedTask);
     }
