@@ -9,6 +9,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -74,11 +75,12 @@ public class UndoneCommand extends Command {
         Optional <StartDate> updatedStartDate = taskToMarkUndone.getStartDate();
         Optional <EndDate> updatedEndDate = taskToMarkUndone.getEndDate();
         Optional <Description> updatedDescription = taskToMarkUndone.getDescription();
+        Optional <Repeat> updatedRepeat = taskToMarkUndone.getRepeat();
         Status updatedStatus = new Status(false);
         UniqueTagList updatedTags = taskToMarkUndone.getTags();
 
-        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription, updatedStatus,
-                updatedTags);
+        return new Task(updatedTitle, updatedStartDate, updatedEndDate, updatedDescription,
+                updatedRepeat, updatedStatus, updatedTags);
     }
 }
 // @@author

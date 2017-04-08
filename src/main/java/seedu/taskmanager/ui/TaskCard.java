@@ -22,6 +22,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label repeat;
+    @FXML
     private Label endDate;
     @FXML
     private FlowPane tags;
@@ -34,6 +36,7 @@ public class TaskCard extends UiPart<Region> {
         startDate.setText(task.getStartDate().isPresent() ? "Starts on " + task.getStartDate().get() : "");
         endDate.setText(task.getEndDate().isPresent() ? "Ends on " + task.getEndDate().get() : "");
         description.setText(task.getDescription().isPresent() ? task.getDescription().get().value : "");
+        repeat.setText(task.getRepeat().isPresent() ? "Repeats: " + task.getRepeat().get() : "");
         // @@author
         initTags(task);
     }
