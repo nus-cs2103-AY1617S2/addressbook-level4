@@ -34,6 +34,8 @@ public class AddCommand extends Command {
     // @@author A0140032E
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
     public static final String MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS = "Recurring tasks should have a start date";
+    public static final String TIME_OF_DAY_START = " 00:00am";
+    public static final String TIME_OF_DAY_END = " 11:59pm";
     // @@author
     private final Task toAdd;
 
@@ -51,11 +53,21 @@ public class AddCommand extends Command {
         }
 
         // @@author A0140032E
-        if (startDate.isPresent() && endDate.isPresent()
-                && new StartDate(startDate.get()).after(new EndDate(endDate.get()))) {
-            throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        // Enforce start date before end date
+        if (startDate.isPresent() && endDate.isPresent()) {
+            StartDate sd = new StartDate(startDate.get());
+            EndDate ed = new EndDate(endDate.get());
+            // Enforce tasks with inferred times are set to appropriate times
+            if (sd.after(ed) && ed.isTimeInferred()) {
+                endDate = Optional.of(endDate.get() + TIME_OF_DAY_END);
+            } else if (sd.after(ed) && sd.isTimeInferred()) {
+                startDate = Optional.of(startDate.get() + TIME_OF_DAY_START);
+            } else if (sd.after(ed)) {
+                throw new IllegalValueException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+            }
         }
 
+        // Enforce recurring tasks have start date
         if (repeat.isPresent() && !startDate.isPresent()) {
             throw new IllegalValueException(MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS);
         }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -38,6 +39,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DATE_ORDER_CONSTRAINTS = "Start Date should be earlier or same as End Date";
     public static final String MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS = "Recurring tasks should have a start date";
     public static final String MESSAGE_REPEAT_WITH_DONE_CONSTRAINTS = "Completed tasks cannot have any repeat patterns";
+    public static final String TIME_OF_DAY_START = " 00:00am";
+    public static final String TIME_OF_DAY_END = " 11:59pm";
     // @@author
     private final int filteredSelectedTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -70,15 +73,29 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         // @@author A0140032E
-        if (editedTask.getStartDate().isPresent() && editedTask.getEndDate().isPresent()
-                && editedTask.getStartDate().get().after(editedTask.getEndDate().get())) {
-            throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+        // Enforce start date before end date
+        try {
+            if (editedTask.getStartDate().isPresent() && editedTask.getEndDate().isPresent()) {
+                StartDate sd = editedTask.getStartDate().get();
+                EndDate ed = editedTask.getEndDate().get();
+                if (sd.after(ed) && ed.isTimeInferred()) {
+                    editedTask.setEndDate(Optional.of(new EndDate(ed.toDateString() + TIME_OF_DAY_END)));
+                } else if (sd.after(ed) && sd.isTimeInferred()) {
+                    editedTask.setStartDate(Optional.of(new StartDate(sd.toDateString() + TIME_OF_DAY_START)));
+                } else if (sd.after(ed)) {
+                    throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
+                }
+            }
+        } catch (IllegalValueException ive) {
+            throw new CommandException(ive.getMessage());
         }
 
+        // Enforce recurring tasks have start date
         if (editedTask.getRepeat().isPresent() && !editedTask.getStartDate().isPresent()) {
             throw new CommandException(MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS);
         }
 
+        // Enforce completed tasks do not have any recurrence
         if (editedTask.getRepeat().isPresent() && editedTask.getStatus().value) {
             throw new CommandException(MESSAGE_REPEAT_WITH_DONE_CONSTRAINTS);
         }
