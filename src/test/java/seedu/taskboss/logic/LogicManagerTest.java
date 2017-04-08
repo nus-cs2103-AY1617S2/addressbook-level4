@@ -33,6 +33,7 @@ import seedu.taskboss.logic.commands.CommandResult;
 import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
+import seedu.taskboss.logic.commands.ListByCategoryCommand;
 import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
@@ -297,7 +298,9 @@ public class LogicManagerTest {
         // prepare TaskBoss state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
+        assertCommandSuccess("list", String.format(ListByCategoryCommand.MESSAGE_SUCCESS, new Category("Alltasks")),
+                expectedTB, expectedList);
+
     }
 
     @Test
@@ -310,7 +313,8 @@ public class LogicManagerTest {
         // prepare TaskBoss state
         helper.addToModel(model, 2);
 
-        assertCommandSuccess("l", ListCommand.MESSAGE_SUCCESS, expectedTB, expectedList);
+        assertCommandSuccess("l", String.format(ListByCategoryCommand.MESSAGE_SUCCESS, new Category("Alltasks")),
+                expectedTB, expectedList);
     }
 
     /**
@@ -529,8 +533,7 @@ public class LogicManagerTest {
                     new DateTime("Feb 20 10am 2017"),
                     new Information("House of " + seed),
                     new Recurrence(Frequency.NONE),
-                    new UniqueCategoryList(new Category("category" + Math.abs(seed)),
-                           new Category("category" + Math.abs(seed + 1)))
+                    new UniqueCategoryList(new Category("Alltasks"))
             );
         }
 
