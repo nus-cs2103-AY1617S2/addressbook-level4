@@ -21,7 +21,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String END_TIMING_FIELD_ID = "#endTiming";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String RECURRING_FIELD_ID = "#recurring";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
@@ -55,8 +55,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
-        return getTextFromLabel(PHONE_FIELD_ID);
+    public String getRecurring() {
+        return getTextFromLabel(RECURRING_FIELD_ID);
     }
 
     public String getEmail() {
@@ -80,20 +80,24 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSameTask(ReadOnlyTask person) {
-        System.out.println(getDescription());
-        return getDescription().equals(person.getDescription().description)
-                && getPriority().equals("Priority: " + person.getPriority().value)
-                && getStartingTiming().equals("Start Timing: " + person.getStartTiming().value)
-                && getEndTiming().equals("End Timing: " + person.getEndTiming().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        boolean recurSame = true;
+        if (task.isRecurring()) {
+            recurSame = getRecurring().equals("Recurring Task: " + task.getFrequency().frequency);
+        }
+        return getDescription().equals(task.getDescription().description)
+                && getPriority().equals("Priority: " + task.getPriority().value)
+                && getStartingTiming().equals("Start Timing: " + task.getStartTiming().value)
+                && getEndTiming().equals("End Timing: " + task.getEndTiming().value)
+                && getTags().equals(getTags(task.getTags()))
+                && recurSame;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName()) && getPhone().equals(handle.getPhone())
+            return getFullName().equals(handle.getFullName()) && getRecurring().equals(handle.getRecurring())
                     && getEmail().equals(handle.getEmail()) && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }

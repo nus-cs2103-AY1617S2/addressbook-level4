@@ -332,8 +332,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSameTask(person);
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

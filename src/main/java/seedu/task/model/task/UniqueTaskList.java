@@ -44,7 +44,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
-        FXCollections.sort(internalList, Task.TaskComparator);
+        FXCollections.sort(internalList, Task.taskComparator);
     }
 
     /**
@@ -73,7 +73,7 @@ public class UniqueTaskList implements Iterable<Task> {
         // Then, PersonCard should then bind its text labels to those observable
         // properties.
         internalList.set(index, taskToUpdate);
-        FXCollections.sort(internalList, Task.TaskComparator);
+        FXCollections.sort(internalList, Task.taskComparator);
     }
 
     /**
@@ -93,7 +93,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void setTasks(UniqueTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
-        FXCollections.sort(internalList, Task.TaskComparator);
+        FXCollections.sort(internalList, Task.taskComparator);
     }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
