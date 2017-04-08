@@ -8,7 +8,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
-import seedu.task.storage.XmlSerializableAddressBook;
+import seedu.task.storage.XmlSerializableTaskList;
 import seedu.task.testutil.TestUtil;
 
 /**
@@ -36,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskList(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
