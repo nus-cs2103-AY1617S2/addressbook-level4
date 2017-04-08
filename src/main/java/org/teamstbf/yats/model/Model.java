@@ -112,6 +112,8 @@ public interface Model {
      */
     void updateFilteredListToFindAll(Set<String> keywords);
 
+    void updateFilteredListToShowSortedStart();
+    
     // @@author A0102778B
     /**
      * Method to get the previous state (undo command) of the task manager
@@ -149,4 +151,9 @@ public interface Model {
      */
     void saveImageOfCurrentTaskManager();
 
+    void updateFilteredListToShowSortedEnd();
+
+    void updateFilteredListToShowDeadline();
+
+    void updateFilteredListToShowDone();
 }
