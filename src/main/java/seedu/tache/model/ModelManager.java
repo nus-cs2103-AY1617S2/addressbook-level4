@@ -603,7 +603,9 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
         Collections.addAll(concatenated, filteredTasks.toArray());
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
 
     public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
@@ -614,7 +616,9 @@ public class ModelManager extends ComponentManager implements Model {
                                             .getUncompletedRecurList(null).toArray());
             }
         }
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
     //@@author A0150120H
     @Override
