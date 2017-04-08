@@ -36,7 +36,7 @@ public class RecurCommandTest extends WhatsLeftGuiTest {
             e.printStackTrace();
         }
         currentEventList = TestUtil.addEventsToList(currentEventList, recurEvent1, recurEvent2);
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         assertRecurEventSuccess(recurCommand, currentEventList);
     }
 

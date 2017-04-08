@@ -14,9 +14,9 @@ public class FinishCommandTest extends WhatsLeftGuiTest {
     public void finishTaskSuccess() {
         // finish one task
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
 
         /** test finish task at the start of the list panel */
         int firstTaskToFinish = 1;
