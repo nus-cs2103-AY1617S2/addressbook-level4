@@ -8,6 +8,7 @@ import org.junit.Test;
 import t09b1.today.logic.commands.ListCommand;
 import t09b1.today.logic.commands.ListCompletedCommand;
 
+// @author A0093999Y
 public class ListCompletedCommandTest extends TaskManagerGuiTest {
 
     @Test
