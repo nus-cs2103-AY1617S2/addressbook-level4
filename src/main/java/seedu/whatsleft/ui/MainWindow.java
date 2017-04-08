@@ -211,10 +211,19 @@ public class MainWindow extends UiPart<Region> {
         return this.calendarPanel;
     }
 
+    /**
+     * Allows the calendar to be updated to the latest list after changes
+     * have been made
+     * @param eventlist, tasklist
+     */
     public void updateCalendar(List<ReadOnlyEvent> eventList, List<ReadOnlyTask> taskList) {
         this.calendarPanel.refresh(eventList, taskList);
     }
 
+    /**
+     * Allows the calendar view to be changed accordingly
+     * @param selectedDateTime
+     */
     public void changeCalendarView(LocalDateTime nextDateTime) {
         this.calendarPanel.updateCalendarShownPeriod(nextDateTime);
     }

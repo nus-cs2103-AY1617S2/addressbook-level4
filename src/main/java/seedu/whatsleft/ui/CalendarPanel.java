@@ -25,8 +25,8 @@ import seedu.whatsleft.model.activity.ReadOnlyTask;
 /**
  * The controller for Calendar. Populate calendar with tasks and events.
  * The view of calendar is also controlled here through weeks ahead view
- * and refresh to current view. Provides jump-to feedback when an event/task \
- * is selected  * on their respective panels.
+ * and refresh to current view. Provides jump-to feedback when an event/task
+ * is selected on their respective panels.
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String CALENDAR_UNSYC_MESSAGE = "Calendar is not synced";

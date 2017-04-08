@@ -36,13 +36,6 @@ public class TaskCard extends UiPart<Region> {
     private Label locations;
     @FXML
     private FlowPane tags;
-    // private final Background focusBackground =
-    // new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY,
-    // Insets.EMPTY));
-    // private final Background unfocusBackground =
-    // new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY,
-    // Insets.EMPTY));
-    // private VBox cardVBox = new VBox();
 
     // @@author A0124377A
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -63,6 +56,10 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Set the style of the card to have a badge depending on its
+     * urgency ie. task deadline is today, or task deadline is over
+     */
     private void setCardLook(ReadOnlyTask task) {
         if (task.getStatus()) {
             cardPane.getStyleClass().add("status-complete");
@@ -82,10 +79,3 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 }
-// private void feedback() {
-// cardVBox.requestFocus();
-// cardVBox.backgroundProperty().bind(Bindings
-// .when(cardVBox.focusedProperty())
-// .then(focusBackground)
-// .otherwise(unfocusBackground));
-// }
