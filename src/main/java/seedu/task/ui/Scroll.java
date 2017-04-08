@@ -22,7 +22,7 @@ public class Scroll {
      * @param taskListView the list we want to find scroll off
      */
     public Scroll(ListView<ReadOnlyTask> taskListView) {
-    	scrollBar = getScrollBar(taskListView);
+        scrollBar = getScrollBar(taskListView);
     }
 
     /**
@@ -31,14 +31,14 @@ public class Scroll {
      * @return ScrollBar if scrollbar is found or else null
      */
     public ScrollBar getScrollBar(ListView<ReadOnlyTask> taskListView) {
-    	ScrollBar scrollBar = null;
+        ScrollBar scrollBar = null;
 
         Node n = taskListView.lookup(".scroll-bar");
 
         if (n instanceof ScrollBar) {
             scrollBar = (ScrollBar) n;
         }
-    	
+
         return scrollBar;
     }
 
@@ -48,7 +48,11 @@ public class Scroll {
      * @param taskListView the intended ListView
      */
     public void scrollDown(ListView<ReadOnlyTask> taskListView) {
-    	scrollBar = getScrollBar(taskListView);
+        scrollBar = getScrollBar(taskListView);
+
+        if (scrollBar == null) {
+            return;
+        }
 
         scrollBar.increment();
         scrollBar.increment();
@@ -63,15 +67,12 @@ public class Scroll {
      * @param taskListView the intended ListView
      */
     public void scrollUp(ListView<ReadOnlyTask> taskListView) {
+        scrollBar = getScrollBar(taskListView);
+
         if (scrollBar == null) {
-            Node n = taskListView.lookup(".scroll-bar");
-            if (n == null) {
-                return;
-            }
-            if (n instanceof ScrollBar) {
-                scrollBar = (ScrollBar) n;
-            }
+            return;
         }
+
         scrollBar.decrement();
         scrollBar.decrement();
         scrollBar.decrement();
@@ -86,10 +87,10 @@ public class Scroll {
      * @return the current value or the scrollbar
      */
     public double getScrollValue(ListView<ReadOnlyTask> taskListView) {
-    	scrollBar = getScrollBar(taskListView);
+        scrollBar = getScrollBar(taskListView);
 
         if (scrollBar == null) {
-        	return -1;
+            return -1;
         }
 
         return scrollBar.getValue();
