@@ -33,6 +33,7 @@ public class SwitchCommand extends Command {
     public final int targetIndex;
     public final String flag;
     public final String date;
+    public boolean force = false;
 
     public SwitchCommand(String flag, int targetIndex, String date) {
         this.flag = flag;
@@ -55,10 +56,17 @@ public class SwitchCommand extends Command {
 
             try {
                 List<Timeslot> timeslots = ParserUtil.parseAsTimeslots(date);
-                model.switchTaskToEvent(taskToSwitch,
-                        new Event(taskToSwitch.getName(), timeslots, taskToSwitch.getPriority(),
-                                new Location(Location.NO_LOCATION), taskToSwitch.getDescription(),
-                                taskToSwitch.getTags()));
+
+                Event eventToSwitchTo = new Event(taskToSwitch.getName(), timeslots, taskToSwitch.getPriority(),
+                        new Location(Location.NO_LOCATION), taskToSwitch.getDescription(), taskToSwitch.getTags());
+
+                List<? extends ReadOnlyEvent> preexistingEvents = model.getUserInbox().getEventList();
+                if (!force && timeslots.size() > 0 && eventToSwitchTo.hasOverlappingEvent(preexistingEvents)) {
+                    // allow for force editing
+                    throw new CommandException(AddCommand.MESSAGE_EVENT_CLASHES);
+                }
+
+                model.switchTaskToEvent(taskToSwitch, eventToSwitchTo);
             } catch (IllegalValueException ive) {
                 throw new CommandException(ive.getMessage());
             } catch (TaskNotFoundException tnfe) {
@@ -81,7 +89,7 @@ public class SwitchCommand extends Command {
 
             try {
                 model.switchEventToTask(eventToSwitch, new Task(eventToSwitch.getName(), new Deadline(date),
-                       eventToSwitch.getPriority(), eventToSwitch.getDescription(), eventToSwitch.getTags()));
+                        eventToSwitch.getPriority(), eventToSwitch.getDescription(), eventToSwitch.getTags()));
             } catch (IllegalValueException ive) {
                 throw new CommandException(ive.getMessage());
             } catch (EventNotFoundException enfe) {
