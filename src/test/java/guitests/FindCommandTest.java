@@ -20,6 +20,7 @@ public class FindCommandTest extends AddressBookGuiTest {
         TestApp testApp = new TestApp();
         Config config = testApp.initConfig(Config.DEFAULT_CONFIG_FILE);
         ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        commandBox.runCommand("clear");
     }
 
     @Test
