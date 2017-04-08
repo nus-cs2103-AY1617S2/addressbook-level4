@@ -26,7 +26,7 @@ public class DeleteTagCommandParser {
         try {
             if (tagNames.length != NUM_ARGUMENTS || tagNames[TAG_INDEX].equals("")) {
                 // TODO: Name this exception, unchecked
-                throw new Exception(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+                throw new Exception(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             return new DeleteTagCommand(tagNames[TAG_INDEX]);
         } catch (IllegalValueException ive) {

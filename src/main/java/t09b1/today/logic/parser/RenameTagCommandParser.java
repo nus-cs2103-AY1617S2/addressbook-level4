@@ -27,7 +27,7 @@ public class RenameTagCommandParser {
         try {
             if (tagNames.length != NUM_ARGUMENTS) {
                 // TODO: Name this exception, unchecked
-                throw new Exception(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE));
+                throw new Exception(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             return new RenameTagCommand(tagNames[OLDTAG_INDEX], tagNames[NEWTAG_INDEX]);
         } catch (IllegalValueException ive) {

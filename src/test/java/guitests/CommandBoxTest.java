@@ -1,13 +1,11 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
-import static t09b1.today.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import t09b1.today.commons.core.Messages;
 import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.logic.commands.AddCommand;
 import t09b1.today.logic.commands.RedoCommand;
 import t09b1.today.logic.commands.UndoCommand;
 
@@ -27,7 +25,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
 
         // Enter invalid command
         commandBox.runCommand("add !@#$%^&");
-        assertShowErrorMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertShowErrorMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
 
         // Test no command left to undo/redo message
         commandBox.runCommand("undo");

@@ -11,6 +11,7 @@ import t09b1.today.model.task.Name;
 import t09b1.today.model.task.Task;
 import t09b1.today.testutil.TestUtil;
 
+// @author A0093999Y
 public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -45,13 +46,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
     public void edit_fail() throws Exception {
         // ~~~ Failure Tests ~~~
         commandBox.runCommand("edit Bobby");
-        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
 
         commandBox.runCommand("edit F8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         commandBox.runCommand("edit F1");
-        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
 
         commandBox.runCommand("edit F1 " + td.todayListFloat.getName().toString() + " #helo");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
@@ -60,7 +61,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
 
         commandBox.runCommand("edit F1 #*&");
-        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
     }
 
     @Test
