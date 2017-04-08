@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.UnmarkCommand;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -36,10 +37,11 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave").build();
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
-        assertUnmarkSuccess(commandType, false, false, taskBossIndex, taskBossIndex,
-                terminatedTask);
+        assertUnmarkSuccess(commandType, false, taskBossIndex, taskBossIndex,
+                terminatedTask, expectedTasksList);
     }
 
     /*
@@ -109,9 +111,10 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave").build();
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
-        assertUnmarkSuccess(commandType, false, false, taskBossIndex, taskBossIndex, terminatedTask);
+        assertUnmarkSuccess(commandType, false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
 
     @Test
@@ -127,8 +130,8 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Jun 28, 2017 5pm")
                 .withCategories("Alltasks", "Friends", "Owesmoney").build();
 
-        assertUnmarkSuccess(commandType, false, false, taskBossIndex,
-                taskBossIndex, terminatedTask);
+        assertUnmarkSuccess(commandType, false, taskBossIndex,
+                taskBossIndex, terminatedTask, expectedTasksList);
     }
 
     /*
@@ -147,10 +150,11 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
                 .withRecurrence(Frequency.NONE)
-                .withInformation("10th street").build();
+                .withInformation("10th street")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
-        assertUnmarkSuccess(commandType, false, true, taskBossIndex,
-                taskBossIndex, terminatedTask);
+        assertUnmarkSuccess(commandType, true, taskBossIndex,
+                taskBossIndex, terminatedTask, expectedTasksList);
     }
 
   //---------------- Tests for inputing wrong task type--------------------------------------------------------
@@ -184,9 +188,10 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
 
         TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
         TestTask terminatedTask = new TaskBuilder(taskToTerminate).build();
+        TestTask[] resultList = { terminatedTask };
 
-        assertUnmarkSuccess(commandType, true, false, filteredTaskListIndex,
-                taskBossIndex, terminatedTask);
+        assertUnmarkSuccess(commandType,false, filteredTaskListIndex,
+                taskBossIndex, terminatedTask, resultList);
     }
 
     //---------------- Tests for successfully unmakring multiple tasks-----------------------
@@ -200,14 +205,15 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave").build();
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
         expectedTasksList[6] = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
                 .withStartDateTime("Feb 28, 2017 1pm")
                 .withEndDateTime("Dec 17, 2017 5pm")
                 .withRecurrence(Frequency.WEEKLY)
                 .withInformation("little tokyo")
-                .withCategories("School").build();
+                .withCategories("School", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         String expectedMessage = "1. " + expectedTasksList[6] + "2. " + expectedTasksList[1];
         assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS , expectedMessage));
@@ -222,7 +228,8 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
                 .withRecurrence(Frequency.NONE)
-                .withInformation("10th street").build();
+                .withInformation("10th street")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
         expectedTasksList[4] = new TaskBuilder().withName("Birthday party")
                 .withInformation("311, Clementi Ave 2, #02-25")
                 .withPriorityLevel("No")
@@ -255,9 +262,9 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
 
     //---------------- End of test cases --------------------------------------
 
-    private void assertUnmarkSuccess(String commandType, boolean runFind, boolean isShort,
+    private void assertUnmarkSuccess(String commandType, boolean isShort,
             int filteredTaskListIndex, int taskBossIndex,
-            TestTask terminatedTask) {
+            TestTask terminatedTask, TestTask[] resultList) {
 
         if (commandType.equals("termination")) {
             if (isShort) {
@@ -279,17 +286,11 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskBossIndex - 1] = terminatedTask;
-        if (runFind) {
-            commandBox.runCommand("list ");
-            assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage("Listed all tasks");
-        } else {
-            assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS ,
+        assertTrue(taskListPanel.isListMatching(resultList));
+        assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS ,
                             "1. " + terminatedTask));
-        }
 
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(taskListPanel.isListMatching(resultList));
     }
 
     //@@author A0143157J
