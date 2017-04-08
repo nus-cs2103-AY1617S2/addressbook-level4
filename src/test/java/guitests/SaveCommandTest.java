@@ -31,7 +31,10 @@ public class SaveCommandTest extends AddressBookGuiTest {
     private static final String TEST_SAMPLE_DATA_PATH = TestUtil.getFilePathInSandboxFolder(TEST_XML);
 
     private static final String SAVE_COMMAND = "save ";
-
+    private String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
+            "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
+    private String[] saveFiles_Windows = { "blooper", "taskmanager.xml", "data\\taskmanager.xml", "data\\taskmanager",
+            "taskmanager", "secret_folder\\secret_tasks.xml", "secret_folder\\secret_tasks" };
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -55,21 +58,28 @@ public class SaveCommandTest extends AddressBookGuiTest {
     public void save_absolute_success() throws IllegalValueException, DataConversionException, IOException {
         //This test involves saving files with and without extensions, with and without creating new folders
         //However, all files are prefixed with a specified test folder
-        String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
-            "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
-        for (String saveFile : saveFiles) {
+        String[] files = chooseTestStringsByOS();
+        for (String saveFile : files) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(TEST_FOLDER + saveFile);
         }
     }
 
+    private String[] chooseTestStringsByOS() {
+        String os = System.getProperty("os.name");
+        if (os.startsWith("Windows")) {
+            return saveFiles_Windows;
+        } else {
+            return saveFiles;
+        }
+    }
+
     @Test
     public void save_relative_success() throws IllegalValueException, DataConversionException, IOException {
-        //This test involves saving files with and without extensions, with and without creating new folders
-        //However, all files are prefixed with a specified test folder
-        String[] saveFiles = { "blooper", "taskmanager.xml", "datataskmanager.xml", "datataskmanager",
-            "taskmanager", "secretfoldersecrettasks.xml", "secretfoldersecret_tasks" };
-        for (String saveFile : saveFiles) {
+        //This test is similar to the previous, but does not specify the test path.
+        String[] files = chooseTestStringsByOS();
+
+        for (String saveFile : files) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(saveFile);
         }
