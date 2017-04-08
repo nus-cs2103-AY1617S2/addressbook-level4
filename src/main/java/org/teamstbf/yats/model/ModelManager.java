@@ -250,11 +250,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateCalendarFilteredListToShowStartTime() {
-	LocalDate today = LocalDate.now();
+    public void updateCalendarFilteredListToShowStartTime(LocalDate day) {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	Set<String> keywordSet = new HashSet<String>();
-	keywordSet.add(today.format(formatter));
+	keywordSet.add(day.format(formatter));
 	updateCalendarFilteredEventList(new PredicateExpression(new StartTimeQualifier(keywordSet)));
     }
 
