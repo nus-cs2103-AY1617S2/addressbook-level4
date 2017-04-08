@@ -60,6 +60,7 @@ import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.StorageManager;
+import seedu.taskmanager.ui.MainWindow;
 
 public class LogicManagerTest {
 
@@ -489,6 +490,27 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void executeEditStartDateAfterWorkingHoursSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("today")),
+                Optional.of(new EndDate("today")), Optional.of(new Description("Some text")), Optional.ofNullable(null),
+                new UniqueTagList(new Tag("tag1")));
+
+        Task tTarget2 = new Task(new Title("Task A"), Optional.of(new StartDate("today 0am")),
+                Optional.of(new EndDate("today 7am")), Optional.of(new Description("Some text")),
+                Optional.ofNullable(null), new UniqueTagList(new Tag("tag1")));
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1);
+        List<Task> editedTasks = helper.generateTaskList(tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget2);
+        helper.addToModel(model, uneditedTasks);
+
+        assertCommandSuccess("edit 1 s/today e/today 7am",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2), expectedTM, expectedList);
+    }
+
+    @Test
     public void executeEditEndDateSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithEndDate("1 june 2017 3am");
@@ -513,7 +535,7 @@ public class LogicManagerTest {
 
         Task tTarget2 = new Task(new Title("Task B"), Optional.of(new StartDate("03/01/2017")),
                 Optional.of(new EndDate("04/01/2017")), Optional.of(new Description("More text")),
-                Optional.ofNullable(null), new UniqueTagList(new Tag("tag1")));
+                Optional.of(new Repeat("DAY")), new UniqueTagList(new Tag("tag1")));
 
         List<Task> uneditedTasks = helper.generateTaskList(tTarget1);
         List<Task> editedTasks = helper.generateTaskList(tTarget2);
@@ -521,7 +543,7 @@ public class LogicManagerTest {
         List<Task> expectedList = helper.generateTaskList(tTarget2);
         helper.addToModel(model, uneditedTasks);
 
-        assertCommandSuccess("edit 1 Task B s/03/01/2017 e/04/01/2017 d/More text",
+        assertCommandSuccess("edit 1 Task B s/03/01/2017 e/04/01/2017 d/More text r/day",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2), expectedTM, expectedList);
     }
 
@@ -531,10 +553,21 @@ public class LogicManagerTest {
         Task tTarget1 = helper.t1();
         model.addTask(tTarget1);
         assertCommandFailure("edit 1 s/no date", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
+        assertCommandFailure("edit 1 s/ r/month", EditCommand.MESSAGE_REPEAT_WITH_START_DATE_CONSTRAINTS);
         assertCommandFailure("edit 1 e/no date", EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
         assertCommandFailure("edit 1 s/today e/yesterday", EditCommand.MESSAGE_DATE_ORDER_CONSTRAINTS);
         assertCommandFailure("edit 1 t/~invalid", Tag.MESSAGE_TAG_CONSTRAINTS);
         assertCommandFailure("edit 1 r/asd", Repeat.MESSAGE_REPEAT_CONSTRAINTS);
+    }
+
+    @Test
+    public void executeEditDoneTaskIllegalValues() throws Exception {
+        Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/01/2017")), Optional.of(new Description("Some text")),
+                Optional.ofNullable(null), new Status(true), new UniqueTagList(new Tag("tag1")));
+        model.addTask(tTarget1);
+        model.setSelectedTab(MainWindow.TAB_DONE);
+        assertCommandFailure("edit 1 r/month", EditCommand.MESSAGE_REPEAT_WITH_DONE_CONSTRAINTS);
     }
     // @@author
 
@@ -543,7 +576,6 @@ public class LogicManagerTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertIncorrectIndexFormatBehaviorForCommand("change", expectedMessage);
     }
-    // @@author
 
     @Test
     public void execute_find_invalidArgsFormat() {
