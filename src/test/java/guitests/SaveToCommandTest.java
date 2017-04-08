@@ -6,9 +6,9 @@ import java.io.File;
 
 import org.junit.Test;
 
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.commons.util.FileUtil;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.commons.util.FileUtil;
+import seedu.today.testutil.TestUtil;
 
 public class SaveToCommandTest extends TaskManagerGuiTest {
     private static final String TEST_SAVE_LOCATION = FileUtil.getPath("./src/test/data/SaveToCommandTest/");

@@ -3,13 +3,13 @@ package guitests;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import t09b1.today.commons.core.Messages;
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.logic.commands.EditCommand;
-import t09b1.today.model.tag.UniqueTagList;
-import t09b1.today.model.task.Name;
-import t09b1.today.model.task.Task;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.core.Messages;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.logic.commands.EditCommand;
+import seedu.today.model.tag.UniqueTagList;
+import seedu.today.model.task.Name;
+import seedu.today.model.task.Task;
+import seedu.today.testutil.TestUtil;
 
 public class EditCommandTest extends TaskManagerGuiTest {
 

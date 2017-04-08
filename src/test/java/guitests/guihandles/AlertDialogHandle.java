@@ -3,7 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
-import t09b1.today.ui.UiManager;
+import seedu.today.ui.UiManager;
 
 /**
  * A handle for the AlertDialog of the UI

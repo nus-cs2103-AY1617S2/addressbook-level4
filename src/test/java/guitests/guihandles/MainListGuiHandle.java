@@ -11,9 +11,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.model.task.ReadOnlyTask;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.model.task.ReadOnlyTask;
+import seedu.today.testutil.TestUtil;
 
 public abstract class MainListGuiHandle extends GuiHandle {
 

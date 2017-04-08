@@ -24,17 +24,17 @@ import guitests.guihandles.TaskCardHandle;
 import guitests.guihandles.TodayTaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import t09b1.today.TestApp;
-import t09b1.today.commons.core.EventsCenter;
-import t09b1.today.commons.core.LogsCenter;
-import t09b1.today.commons.events.BaseEvent;
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.logic.Logic;
-import t09b1.today.model.TaskManager;
-import t09b1.today.model.task.ReadOnlyTask;
-import t09b1.today.model.task.Task;
-import t09b1.today.testutil.TestUtil;
-import t09b1.today.testutil.TypicalTasks;
+import seedu.today.TestApp;
+import seedu.today.commons.core.EventsCenter;
+import seedu.today.commons.core.LogsCenter;
+import seedu.today.commons.events.BaseEvent;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.logic.Logic;
+import seedu.today.model.TaskManager;
+import seedu.today.model.task.ReadOnlyTask;
+import seedu.today.model.task.Task;
+import seedu.today.testutil.TestUtil;
+import seedu.today.testutil.TypicalTasks;
 
 /**
  * A GUI Test class for TaskManager.

@@ -2,9 +2,9 @@ package guitests;
 
 import org.junit.Test;
 
-import t09b1.today.commons.core.Messages;
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.core.Messages;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.testutil.TestUtil;
 
 //@@author A0093999Y
 public class TodayAndNotTodayCommandTest extends TaskManagerGuiTest {

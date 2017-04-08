@@ -4,8 +4,8 @@ import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import t09b1.today.TestApp;
-import t09b1.today.model.task.ReadOnlyTask;
+import seedu.today.TestApp;
+import seedu.today.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to the Completed Panel of the app.

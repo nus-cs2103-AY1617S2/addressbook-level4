@@ -3,8 +3,8 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import t09b1.today.TestApp;
-import t09b1.today.model.task.ReadOnlyTask;
+import seedu.today.TestApp;
+import seedu.today.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle for the Today panel containing the task list.

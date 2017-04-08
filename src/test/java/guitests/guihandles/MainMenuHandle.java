@@ -5,7 +5,7 @@ import java.util.Arrays;
 import guitests.GuiRobot;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import t09b1.today.TestApp;
+import seedu.today.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.

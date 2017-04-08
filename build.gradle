@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 't09b1.today.MainApp'
+mainClassName = 'seedu.today.MainApp'
 
 allprojects {
     apply plugin: 'idea'

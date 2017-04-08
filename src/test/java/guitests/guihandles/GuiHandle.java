@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import t09b1.today.TestApp;
-import t09b1.today.commons.core.LogsCenter;
+import seedu.today.TestApp;
+import seedu.today.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.

@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import t09b1.today.commons.core.Messages;
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.model.task.Task;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.core.Messages;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.model.task.Task;
+import seedu.today.testutil.TestUtil;
 
 //@@author A0093999Y
 public class DoneAndNotDoneCommandTest extends TaskManagerGuiTest {

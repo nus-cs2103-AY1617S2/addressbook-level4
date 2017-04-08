@@ -2,9 +2,9 @@ package guitests;
 
 import org.junit.Test;
 
-import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.logic.commands.UndoCommand;
-import t09b1.today.testutil.TestUtil;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.logic.commands.UndoCommand;
+import seedu.today.testutil.TestUtil;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
 
