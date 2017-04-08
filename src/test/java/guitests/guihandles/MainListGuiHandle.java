@@ -20,8 +20,7 @@ public abstract class MainListGuiHandle extends GuiHandle {
     public static final String CARD_PANE_ID = "#cardPane";
     public static final int NOT_FOUND = -1;
 
-    public MainListGuiHandle(GuiRobot guiRobot, Stage primaryStage,
-            String stageTitle) {
+    public MainListGuiHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
         super(guiRobot, primaryStage, stageTitle);
     }
 
@@ -41,8 +40,7 @@ public abstract class MainListGuiHandle extends GuiHandle {
      * @throws IllegalValueException
      * @throws IllegalArgumentException
      */
-    public boolean isListMatching(ReadOnlyTask... tasks)
-            throws IllegalArgumentException, IllegalValueException {
+    public boolean isListMatching(ReadOnlyTask... tasks) throws IllegalArgumentException, IllegalValueException {
         return this.isListMatching(0, tasks);
     }
 
@@ -60,16 +58,14 @@ public abstract class MainListGuiHandle extends GuiHandle {
             throws IllegalArgumentException, IllegalValueException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException(
-                    "List size mismatched\n" + "Expected "
-                            + (getListView().getItems().size() - 1) + " tasks");
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " tasks");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(
-                    getTaskCardHandle(startPosition + i), tasks[i])) {
+            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
         }
@@ -100,8 +96,7 @@ public abstract class MainListGuiHandle extends GuiHandle {
 
         // Return false if any of the tasks doesn't match
         for (int i = 0; i < tasks.length; i++) {
-            if (!tasksInList.get(startPosition + i).getName().fullName
-                    .equals(tasks[i].getName().fullName)) {
+            if (!tasksInList.get(startPosition + i).getName().toString().equals(tasks[i].getName().toString())) {
                 return false;
             }
         }
@@ -112,7 +107,7 @@ public abstract class MainListGuiHandle extends GuiHandle {
     public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); // Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
-                .filter(p -> p.getName().fullName.equals(name)).findAny();
+                .filter(p -> p.getName().toString().equals(name)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
@@ -156,20 +151,16 @@ public abstract class MainListGuiHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public TaskCardHandle getTaskCardHandle(int index)
-            throws IllegalValueException {
+    public TaskCardHandle getTaskCardHandle(int index) throws IllegalValueException {
         return getTaskCardHandle(getListView().getItems().get(index));
     }
 
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> taskCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n)
-                        .isSameTask(task))
-                .findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task)).findFirst();
         if (taskCardNode.isPresent()) {
-            return new TaskCardHandle(guiRobot, primaryStage,
-                    taskCardNode.get());
+            return new TaskCardHandle(guiRobot, primaryStage, taskCardNode.get());
         } else {
             return null;
         }

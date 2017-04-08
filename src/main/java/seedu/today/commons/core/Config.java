@@ -31,7 +31,6 @@ public class Config {
         if (FileUtil.isWritable(filePath)) {
             this.filePath = filePath;
         } else {
-            // TODO: show warning that default file path is used instead
             this.filePath = DEFAULT_CONFIG_FILE;
         }
     }

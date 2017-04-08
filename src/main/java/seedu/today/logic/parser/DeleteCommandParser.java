@@ -12,11 +12,10 @@ import seedu.today.logic.commands.IncorrectCommand;
 public class DeleteCommandParser {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * DeleteCommand and returns an DeleteCommand object for execution.
      */
     public Command parse(String args, Logic logic) {
-        // TODO allow multiple index
         if (!logic.isValidUIIndex(args)) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

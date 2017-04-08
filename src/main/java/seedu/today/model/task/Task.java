@@ -21,7 +21,7 @@ public abstract class Task implements ReadOnlyTask {
     private UniqueTagList tags;
     private int isAnimated;
     private boolean done;
-    protected boolean manualToday = false;
+    private boolean isManualToday = false;
 
     /**
      * Every field must be present and not null.
@@ -32,7 +32,7 @@ public abstract class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.done = done;
-        this.manualToday = manualToday;
+        this.isManualToday = manualToday;
         this.id = "";
     }
 
@@ -102,12 +102,12 @@ public abstract class Task implements ReadOnlyTask {
 
     // @@author A0144422R
     public void setToday(boolean manualToday) {
-        this.manualToday = manualToday;
+        this.isManualToday = manualToday;
     }
 
     @Override
     public boolean isManualToday() {
-        return manualToday;
+        return isManualToday;
     }
 
     @Override

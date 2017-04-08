@@ -22,7 +22,7 @@ public class NotDoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_NOTDONE_TASK_SUCCESS = "Task Not Done: %1$s";
-    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task notdone successfully.";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task marked as not done";
 
     private final int filteredTaskListIndex;
 

@@ -21,6 +21,9 @@ import seedu.today.commons.events.ui.ShowCompletedTaskEvent;
 import seedu.today.commons.util.FxViewUtil;
 import seedu.today.model.task.ReadOnlyTask;
 
+/**
+ * Controller for the completed task list
+ */
 public class CompletedTaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "CompletedTaskListPanel.fxml";
@@ -98,10 +101,9 @@ public class CompletedTaskListPanel extends UiPart<Region> {
 
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
-                    .addAll(new KeyFrame(Duration.ZERO,
-                                    new KeyValue(completedTaskListView.prefHeightProperty(), 0),
-                                    new KeyValue(completedTaskListTitle.visibleProperty(), false),
-                                    new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
+                    .addAll(new KeyFrame(Duration.ZERO, new KeyValue(completedTaskListView.prefHeightProperty(), 0),
+                            new KeyValue(completedTaskListTitle.visibleProperty(), false),
+                            new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
                             new KeyFrame(Duration.millis(300.0d),
                                     new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
                                     new KeyValue(completedTaskListTitle.visibleProperty(), true),
@@ -112,9 +114,9 @@ public class CompletedTaskListPanel extends UiPart<Region> {
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
                     .addAll(new KeyFrame(Duration.ZERO,
-                                new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
-                                new KeyValue(completedTaskListTitle.visibleProperty(), true),
-                                new KeyValue(completedTaskListView.opacityProperty(), 1)),
+                            new KeyValue(completedTaskListView.prefHeightProperty(), completedPanelHeight),
+                            new KeyValue(completedTaskListTitle.visibleProperty(), true),
+                            new KeyValue(completedTaskListView.opacityProperty(), 1)),
                             new KeyFrame(Duration.millis(200.0d),
                                     new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
                             new KeyFrame(Duration.millis(300.0d),

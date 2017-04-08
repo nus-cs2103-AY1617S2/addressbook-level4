@@ -54,7 +54,6 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<String> redoCommandHistory;
     private Stack<Boolean> completedViewHistory;
 
-    // TODO change message to fit updateFilteredTaskList's use cases
     private static final String MESSAGE_ON_UPDATELIST = "[Debug] Update FilteredTaskList";
     private static final String MESSAGE_ON_UNDO = "Undo completed";
 
@@ -335,8 +334,9 @@ public class ModelManager extends ComponentManager implements Model {
     public Predicate<ReadOnlyTask> isTitleContainsKeyword(Set<String> keywords) {
         assert !keywords.isEmpty() : "no keywords provided for a keyword search";
         return t -> {
-            return keywords.stream().filter(keyword -> StringUtil.containsWordIgnoreCase(t.getName().fullName, keyword))
-                    .findAny().isPresent();
+            return keywords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(t.getName().toString(), keyword)).findAny()
+                    .isPresent();
         };
     }
 

@@ -124,13 +124,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void updateTask(int index, Task editedTask) throws DuplicateTaskException {
         assert editedTask != null;
-
-        // TODO: the tags master list will be updated even though the below line
-        // fails.
-        // This can cause the tags master list to have additional tags that are
-        // not tagged to any task
-        // in the task list.
-        // Current idea is to redo the tag implementation.
         tasks.updateTask(index, editedTask);
         refreshMasterTagList();
     }
@@ -178,7 +171,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 try {
                     tags.add(tag);
                 } catch (DuplicateTagException e) {
-                    // Ignore
+                    continue;
                 }
             }
         }
@@ -205,7 +198,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public String toString() {
         return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
-        // TODO: refine later
     }
 
     @Override

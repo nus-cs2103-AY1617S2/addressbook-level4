@@ -49,36 +49,49 @@ public class RenameTagCommand extends Command {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         for (int index = 0; index < lastShownList.size(); index++) {
-            ReadOnlyTask taskToEdit = lastShownList.get(index);
-            boolean containsOldTag = false;
-            Set<Tag> newTagList = new HashSet<Tag>();
-            Set<Tag> tags = taskToEdit.getTags().toSet();
-            for (Tag tag : tags) {
-                if (tag.getTagName().equals(oldTag.getTagName())) {
-                    containsOldTag = true;
-                    newTagList.add(newTag);
-                } else {
-                    newTagList.add(tag);
-                }
-            }
-
-            if (containsOldTag) {
-                try {
-                    Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
-                            taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
-                            taskToEdit.isManualToday());
-                    model.updateTask(index, newTask);
-                } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                    throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
-                } catch (IllegalValueException e) {
-                    // Should not happen
-                    throw new CommandException(e.getMessage());
-                }
-
-            }
+            renameTagInTask(lastShownList, index);
         }
 
         return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, oldTag.getTagName(), newTag.getTagName()),
                 MESSAGE_SUCCESS_STATUS_BAR);
+    }
+
+    /**
+     * Takes a task from the list, replace the designated tags, and updates it
+     * to model
+     * 
+     * @param lastShownList
+     *            list from model
+     * @param index
+     *            index of task in model
+     * @throws CommandException
+     */
+    private void renameTagInTask(List<ReadOnlyTask> lastShownList, int index) throws CommandException {
+        ReadOnlyTask taskToEdit = lastShownList.get(index);
+        boolean containsOldTag = false;
+        Set<Tag> newTagList = new HashSet<Tag>();
+        Set<Tag> tags = taskToEdit.getTags().toSet();
+        for (Tag tag : tags) {
+            if (tag.getTagName().equals(oldTag.getTagName())) {
+                containsOldTag = true;
+                newTagList.add(newTag);
+            } else {
+                newTagList.add(tag);
+            }
+        }
+
+        if (containsOldTag) {
+            try {
+                Task newTask = Task.createTask(taskToEdit.getName(), new UniqueTagList(newTagList),
+                        taskToEdit.getDeadline(), taskToEdit.getStartingTime(), taskToEdit.isDone(),
+                        taskToEdit.isManualToday());
+                model.updateTask(index, newTask);
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(EditCommand.MESSAGE_DUPLICATE_TASK);
+            } catch (IllegalValueException e) {
+                // Should not happen
+                throw new CommandException(e.getMessage());
+            }
+        }
     }
 }

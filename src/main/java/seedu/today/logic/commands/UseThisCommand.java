@@ -7,7 +7,7 @@ import seedu.today.commons.util.FileUtil;
 import seedu.today.logic.commands.exceptions.CommandException;
 
 // @@author A0139388M
-/*
+/**
  * Changes task manager save location to specified file path.
  */
 public class UseThisCommand extends Command {

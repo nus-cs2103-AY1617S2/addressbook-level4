@@ -17,7 +17,7 @@ public class Name implements Comparable<Name> {
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    private final String fullName;
 
     /**
      * Validates given name.

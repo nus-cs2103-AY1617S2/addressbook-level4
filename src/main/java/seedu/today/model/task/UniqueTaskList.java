@@ -25,6 +25,10 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given
      * argument.
+     * 
+     * @param toCheck
+     *            task to be checked
+     * @return whether task is in list
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -69,12 +73,6 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
 
-        // TODO: The code below is just a workaround to notify observers of the
-        // updated task.
-        // The right way is to implement observable properties in the Task
-        // class.
-        // Then, TaskCard should then bind its text labels to those observable
-        // properties.
         internalList.set(index, editedTask);
     }
 

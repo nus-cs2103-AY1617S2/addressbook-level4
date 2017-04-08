@@ -22,18 +22,14 @@ public class RenameTagCommandParser {
      * RenameTagCommand and returns an RenameTagCommand object for execution.
      */
     public Command parse(String args) {
-        // TODO: refactor into some kind of tokenizers
         String[] tagNames = args.trim().split(" ");
         try {
             if (tagNames.length != NUM_ARGUMENTS) {
-                // TODO: Name this exception, unchecked
-                throw new Exception(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             return new RenameTagCommand(tagNames[OLDTAG_INDEX], tagNames[NEWTAG_INDEX]);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
-        } catch (Exception e) {
-            return new IncorrectCommand(e.getMessage());
         }
     }
 }

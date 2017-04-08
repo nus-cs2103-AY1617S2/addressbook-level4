@@ -14,8 +14,6 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports data to the specified directory.\n"
-            + "Parameters: dir_location\n" + "Example: " + COMMAND_WORD + " example_folder";
     public static final String MESSAGE_SUCCESS = "Data has been exported to: %1$s";
     public static final String MESSAGE_SUCCESS_STATUS_BAR = "Data has been exported to: %1$s";
     public static final String MESSAGE_WRITE_FILE_ERROR = "Unable to write data to: %1$s";

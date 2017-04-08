@@ -8,6 +8,7 @@ import org.junit.Test;
 import seedu.today.logic.commands.ListCommand;
 import seedu.today.logic.commands.ListCompletedCommand;
 
+// @author A0093999Y
 public class ListCompletedCommandTest extends TaskManagerGuiTest {
 
     @Test

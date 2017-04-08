@@ -2,14 +2,14 @@ package seedu.today.logic.commands;
 
 //@@author A0093999Y
 /**
- * Lists all tasks in the task manager to the user.
+ * Opens the completed task list in the task manager for the user.
  */
 public class ListCompletedCommand extends Command {
 
     public static final String COMMAND_WORD = "listcompleted";
 
     public static final String MESSAGE_SUCCESS = "Listed all completed tasks";
-    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Listed all completed tasks";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = MESSAGE_SUCCESS;
 
     @Override
     public CommandResult execute() {
