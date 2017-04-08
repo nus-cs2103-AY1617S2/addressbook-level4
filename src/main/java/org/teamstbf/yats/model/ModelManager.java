@@ -219,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
 	int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 	taskManager.updateEvent(taskManagerIndex, editedEvent);
 	indicateTaskManagerChanged();
-	EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredEventListIndex));
+	EventsCenter.getInstance().post(new JumpToListRequestEvent(taskManagerIndex));
     }
 
     private void updateFilteredEventList(Expression expression) {

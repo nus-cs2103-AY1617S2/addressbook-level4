@@ -159,12 +159,4 @@ public class MultiViewPanel extends UiPart<Region> {
 	}
     }
 
-    // private void updateTaskList() {
-    // model.updateTaskFilteredListToShowDone();
-    // taskList = model.getTaskFilteredTaskList();
-    // for (int i = 0; i < taskList.size(); i++) {
-    // taskData.add(taskList.get(i));
-    // }
-    // }
-
 }
