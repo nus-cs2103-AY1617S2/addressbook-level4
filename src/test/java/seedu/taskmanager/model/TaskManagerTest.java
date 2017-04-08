@@ -49,7 +49,7 @@ public class TaskManagerTest {
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.alice twice
+        // Repeat td.buy1 twice
         List<Task> newTasks = Arrays.asList(new Task(td.buy1), new Task(td.buy1));
         List<Tag> newTags = td.buy1.getTags().asObservableList();
         AddressBookStub newData = new AddressBookStub(newTasks, newTags);
