@@ -108,7 +108,7 @@ public class MarkCommand extends Command {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
         updateTaskListAtIndex(currIndex, markedTask);
-        storeTasksForUndo(currIndex, taskToMark, markedTask);
+        storeTasksForUndo(taskToMark, markedTask);
     }
 
     private ReadOnlyTask getTaskToMark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
@@ -143,7 +143,7 @@ public class MarkCommand extends Command {
         model.updateTask(currIndex, markedTask);
     }
 
-    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
+    private void storeTasksForUndo(ReadOnlyTask taskToMark, Task markedTask) {
         this.taskToMarkList.push(new Task(taskToMark));
         this.markedTaskList.push(markedTask);
     }
