@@ -7,7 +7,6 @@ import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 
 //@@author A0135998H
 /**
@@ -23,7 +22,6 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     private final int filteredTaskListIndex;
 
@@ -56,11 +54,7 @@ public class DoneCommand extends Command {
         /* switch status of task */
         editedTask.setComplete(!(taskToEdit.isComplete()));
 
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
+        model.updateTask(filteredTaskListIndex, editedTask);
 
         model.updateFilteredListToShowDone();
         return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));

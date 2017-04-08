@@ -8,7 +8,6 @@ import onlythree.imanager.model.TaskList;
 import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
 import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
@@ -63,8 +62,6 @@ public class TypicalTestTasks {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 taskList.addTask(new Task(task));
-            } catch (UniqueTaskList.DuplicateTaskException e) {
-                throw new AssertionError("taskList should not already contain any of the typical tasks.");
             } catch (IllegalValueException e) {
                 throw new AssertionError("Copying a valid task should always result in a valid task.");
             }

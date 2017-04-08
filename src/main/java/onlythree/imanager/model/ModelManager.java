@@ -16,11 +16,10 @@ import onlythree.imanager.commons.util.CollectionUtil;
 import onlythree.imanager.commons.util.StringUtil;
 import onlythree.imanager.logic.commands.ViewCommand;
 import onlythree.imanager.model.task.Deadline;
+import onlythree.imanager.model.task.IterableTaskList.TaskNotFoundException;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
-import onlythree.imanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Represents the in-memory model of the task list data.
@@ -92,15 +91,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void addTask(Task task) {
         taskList.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
         // TODO originally addressBookIndex, probably should have been personIndex

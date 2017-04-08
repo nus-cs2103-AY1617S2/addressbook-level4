@@ -12,7 +12,6 @@ import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.Name;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 
 /**
  * Adds a task to the task list.
@@ -27,7 +26,6 @@ public class AddCommand extends Command {
             + " exam from 10 Jan 8pm to 10 Jan 10pm t/CS2010";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
 
     private final Task toAdd;
 
@@ -58,16 +56,12 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        try {
-            model.addTask(toAdd);
-            //@@author A0148052L
-            model.pushCommand(COMMAND_WORD);
-            model.pushStatus(model.getTaskList());
-            //@@author
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
+        model.addTask(toAdd);
+        //@@author A0148052L
+        model.pushCommand(COMMAND_WORD);
+        model.pushStatus(model.getTaskList());
+        //@@author
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
 }
