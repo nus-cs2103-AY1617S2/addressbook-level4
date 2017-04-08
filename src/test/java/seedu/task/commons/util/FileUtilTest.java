@@ -45,7 +45,7 @@ public class FileUtilTest {
     @Test
     public void createDir_fail() throws IOException {
         thrown.expect(IOException.class);
-        FileUtil.createDirs(new File("#$%^&*"));
+        FileUtil.createDirs(new File("////\\\\"));
     }
 
     @Test
