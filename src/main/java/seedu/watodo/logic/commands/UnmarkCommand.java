@@ -32,16 +32,12 @@ public class UnmarkCommand extends Command {
     private static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
     public static final String MESSAGE_STATUS_ALREADY_UNDONE = "The task status is already set to Undone.";
 
-
     private int[] filteredTaskListIndices;
     private ReadOnlyTask taskToUnmark;
     private Task unmarkedTask;
 
-    //private int indexForUndoUnmark;
-    //private Task markedTaskForUndoUnmark;
     private Stack< Task > taskToUnmarkList;
     private Stack< Task > unmarkedTaskList;
-
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -70,7 +66,6 @@ public class UnmarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 unmarkTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToUnmark, unmarkedTask);
                 compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL,
                         filteredTaskListIndices[i] + 1, this.taskToUnmark) + '\n');
 
@@ -113,14 +108,13 @@ public class UnmarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
-
         updateTaskListAtIndex(currIndex, unmarkedTask);
+        storeTasksForUndo(currIndex, taskToUnmark, unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
     }
-
 
     private Task createUnmarkedCopyOfTask(ReadOnlyTask taskToUnmark) throws CommandException {
         assert taskToUnmark != null;
@@ -150,9 +144,7 @@ public class UnmarkCommand extends Command {
         model.updateTask(currIndex, unmarkedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToUnmark, Task unmarkedTask) {
-        //this.indexForUndoUnmark = currIndex;
-        //this.markedTaskForUndoUnmark = new Task(taskToUnmark);
+    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToUnmark, Task unmarkedTask) {
         this.taskToUnmarkList.push(new Task(taskToUnmark));
         this.unmarkedTaskList.push(unmarkedTask);
     }

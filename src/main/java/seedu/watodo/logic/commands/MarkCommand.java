@@ -39,9 +39,6 @@ public class MarkCommand extends Command {
     private Stack< Task > taskToMarkList;
     private Stack< Task > markedTaskList;
 
-    //private int indexForUndoMark;
-    //private Task unmarkedTaskForUndoMark;
-
     public MarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
         changeToZeroBasedIndexing();
@@ -68,7 +65,6 @@ public class MarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 markTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                storeUnmarkedTaskForUndo(filteredTaskListIndices[i], taskToMark, markedTask);
                 compiledExecutionMessage.append(String.format(MESSAGE_MARK_TASK_SUCCESSFUL,
                         filteredTaskListIndices[i] + 1, this.taskToMark) + '\n');
 
@@ -111,14 +107,13 @@ public class MarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
-
         updateTaskListAtIndex(currIndex, markedTask);
+        storeTasksForUndo(currIndex, taskToMark, markedTask);
     }
 
     private ReadOnlyTask getTaskToMark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
     }
-
 
     private Task createMarkedCopyOfTask(ReadOnlyTask taskToMark) throws CommandException {
         assert taskToMark != null;
@@ -148,9 +143,7 @@ public class MarkCommand extends Command {
         model.updateTask(currIndex, markedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
-        //this.indexForUndoMark = currIndex;
-        //this.unmarkedTaskForUndoMark = new Task(taskToMark);
+    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToMark, Task markedTask) {
         this.taskToMarkList.push(new Task(taskToMark));
         this.markedTaskList.push(markedTask);
     }

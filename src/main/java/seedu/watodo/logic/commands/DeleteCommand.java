@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import java.util.Stack;
+
 import seedu.watodo.commons.core.UnmodifiableObservableList;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
@@ -33,9 +35,12 @@ public class DeleteCommand extends Command {
     private int[] filteredTaskListIndices;
     private ReadOnlyTask taskToDelete;
 
+    private Stack< Task > deletedTaskList;
+
     public DeleteCommand(int[] args) {
         this.filteredTaskListIndices = args;
         changeToZeroBasedIndexing();
+        deletedTaskList = new Stack< Task >();
     }
 
     /** Converts filteredTaskListIndex from one-based to zero-based. */
@@ -97,11 +102,20 @@ public class DeleteCommand extends Command {
     private void deleteTaskAtIndex(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
             throws UniqueTaskList.TaskNotFoundException {
         this.taskToDelete = getTaskToDelete(currIndex, lastShownList); //TODO check
-        model.deleteTask(taskToDelete);
+        deleteTask(taskToDelete);
+        storeTasksForUndo(currIndex, taskToDelete);
     }
 
     private ReadOnlyTask getTaskToDelete(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
+    }
+
+    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
+        model.deleteTask(taskToDelete);
+    }
+
+    private void storeTasksForUndo(int currIndex, ReadOnlyTask taskToDelete) {
+        this.deletedTaskList.push(new Task(taskToDelete));
     }
 
     //@@author A0139845R-reused
@@ -110,8 +124,11 @@ public class DeleteCommand extends Command {
         assert model != null;
 
         try {
-            model.addTask(new Task(taskToDelete));
+            while (!deletedTaskList.isEmpty()) {
+                model.addTask(deletedTaskList.pop());
+            }
             model.updateFilteredListToShowAll();
+
         } catch (DuplicateTaskException e) {
 
         }
