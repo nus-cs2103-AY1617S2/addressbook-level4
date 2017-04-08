@@ -54,7 +54,7 @@ public class MarkCommand extends Command {
     }
 
     /** Returns incomplete status if task is complete, and complete status if task is incomplete */
-    private Status getNewStatusForTask(int index) throws IllegalValueException {
+    private Status getNewStatusForTask() throws IllegalValueException {
         if (isTaskCompleteAt(filteredTaskListIndex)) {
             return new Status("incomplete");
         }
