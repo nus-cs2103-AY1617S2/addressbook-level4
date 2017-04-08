@@ -201,6 +201,7 @@ public class Task implements ReadOnlyTask {
         if (startDateTime.isPresent() && isRecurring) {
             Date currentDate = new Date(startDateTime.get().getAmericanDateOnly()
                                             + " " + startDateTime.get().getTimeOnly());
+            //Set soft cap
             Calendar calendarNow = Calendar.getInstance();
             if (endingRangeDate == null) {
                 calendarNow.setTime(new Date());
@@ -216,6 +217,7 @@ public class Task implements ReadOnlyTask {
             } else {
                 calendarNow.setTime(endingRangeDate);
             }
+            //Populate 'Ghost' Task
             while ((currentDate.before(calendarNow.getTime())
                     || (currentDate.getDate() == calendarNow.get(Calendar.DAY_OF_MONTH)
                     && currentDate.getMonth() == calendarNow.get(Calendar.MONTH)

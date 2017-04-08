@@ -21,6 +21,7 @@ import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.tag.Tag;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
@@ -233,35 +234,35 @@ public class ModelManager extends ComponentManager implements Model {
         latestKeywords = keywords;
     }
 
-    public void updateCurrentFilteredList() {
-        switch(filteredTaskListType) {
-        case TASK_LIST_TYPE_ALL:
-            updateFilteredListToShowAll();
-            break;
-        case TASK_LIST_TYPE_COMPLETED:
-            updateFilteredListToShowCompleted();
-            break;
-        case TASK_LIST_TYPE_UNCOMPLETED:
-            updateFilteredListToShowUncompleted();
-            break;
-        case TASK_LIST_TYPE_TIMED:
-            updateFilteredListToShowTimed();
-            break;
-        case TASK_LIST_TYPE_FLOATING:
-            updateFilteredListToShowFloating();
-            break;
-        case TASK_LIST_TYPE_FOUND:
-            updateFilteredTaskList(latestKeywords);
-            break;
-        case TASK_LIST_TYPE_DUE_TODAY:
-            updateFilteredListToShowDueToday();
-            break;
-        case TASK_LIST_TYPE_DUE_THIS_WEEK:
-            updateFilteredListToShowDueThisWeek();
-            break;
-        default:
-        }
-    }
+//    public void updateCurrentFilteredList() {
+//        switch(filteredTaskListType) {
+//        case TASK_LIST_TYPE_ALL:
+//            updateFilteredListToShowAll();
+//            break;
+//        case TASK_LIST_TYPE_COMPLETED:
+//            updateFilteredListToShowCompleted();
+//            break;
+//        case TASK_LIST_TYPE_UNCOMPLETED:
+//            updateFilteredListToShowUncompleted();
+//            break;
+//        case TASK_LIST_TYPE_TIMED:
+//            updateFilteredListToShowTimed();
+//            break;
+//        case TASK_LIST_TYPE_FLOATING:
+//            updateFilteredListToShowFloating();
+//            break;
+//        case TASK_LIST_TYPE_FOUND:
+//            updateFilteredTaskList(latestKeywords);
+//            break;
+//        case TASK_LIST_TYPE_DUE_TODAY:
+//            updateFilteredListToShowDueToday();
+//            break;
+//        case TASK_LIST_TYPE_DUE_THIS_WEEK:
+//            updateFilteredListToShowDueThisWeek();
+//            break;
+//        default:
+//        }
+//    }
     //@@author
 
     //========== Inner classes/interfaces/methods used for filtering =================================================
@@ -294,22 +295,23 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-
+    //@@author A0139925U
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-        //@@author A0139925U
+
         @Override
         public boolean run(ReadOnlyTask task) {
             String[] nameElements = task.getName().fullName.split(" ");
             boolean partialMatch = false;
-            String trimmedNameKeyWords = nameKeyWords.toString()
+            //Remove square brackets
+            String trimmedNameKeywords = nameKeyWords.toString()
                                          .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
             for (int i = 0; i < nameElements.length; i++) {
-                if (computeLevenshteinDistance(trimmedNameKeyWords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
+                if (computeLevenshteinDistance(trimmedNameKeywords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -320,13 +322,13 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent()
                     || partialMatch;
         }
-        //@@author
+
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
+    //@@author
     //@@author A0142255M
     private class TimedQualifier implements Qualifier {
         private boolean isTimed;
@@ -480,17 +482,20 @@ public class ModelManager extends ComponentManager implements Model {
         private NameQualifier nameQualifier;
         private DateTimeQualifier dateTimeQualifier;
         private ActiveQualifier activeQualifier;
+        private TagQualifier tagQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
             dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
             activeQualifier = new ActiveQualifier(true);
+            tagQualifier = new TagQualifier(multiKeyWords);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (nameQualifier.run(task) || dateTimeQualifier.run(task)) && activeQualifier.run(task);
+            return (nameQualifier.run(task) || dateTimeQualifier.run(task)
+                        || tagQualifier.run(task)) && activeQualifier.run(task);
         }
 
         @Override
@@ -498,6 +503,39 @@ public class ModelManager extends ComponentManager implements Model {
             return "multi=" + String.join(", ", multiKeyWords);
         }
 
+    }
+
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeywords;
+
+        TagQualifier(Set<String> tagKeywords) {
+            this.tagKeywords = tagKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getTags().toSet().size() != 0) {
+                Set<Tag> tagElements = (Set<Tag>) task.getTags().toSet();
+                boolean validMatch = false;
+                //Remove square brackets
+                String trimmedTagKeywords = tagKeywords.toString()
+                                             .substring(1, tagKeywords.toString().length() - 1).toLowerCase();
+                for (Tag tag: tagElements) {
+                    if (computeLevenshteinDistance(trimmedTagKeywords, tag.tagName.toLowerCase())
+                                    <= MARGIN_OF_ERROR) {
+                        validMatch = true;
+                        break;
+                    }
+                }
+                return validMatch;
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeywords);
+        }
     }
 
     private class ActiveTimedQualifier implements Qualifier {

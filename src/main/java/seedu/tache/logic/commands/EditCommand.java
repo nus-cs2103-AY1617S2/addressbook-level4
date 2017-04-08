@@ -39,8 +39,11 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start date can not be before end date";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
+
+    public static final String SPECIAL_CASE_TIME_STRING = "23:59:59";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -83,7 +86,7 @@ public class EditCommand extends Command implements Undoable {
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
-            model.updateCurrentFilteredList();
+            //model.updateCurrentFilteredList();
             commandSuccess = true;
             undoHistory.push(this);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
@@ -103,14 +106,29 @@ public class EditCommand extends Command implements Undoable {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        Optional<DateTime> updatedStartDateTime = taskToEdit.getStartDateTime();
-        Optional<DateTime> updatedEndDateTime = taskToEdit.getEndDateTime();
+        Optional<DateTime> updatedStartDateTime;
+        Optional<DateTime> updatedEndDateTime;
+        if (taskToEdit.getStartDateTime().isPresent()) {
+            updatedStartDateTime = Optional.of(new DateTime(taskToEdit.getStartDateTime().get()));
+        } else {
+            updatedStartDateTime = Optional.empty();
+        }
+        if (taskToEdit.getEndDateTime().isPresent()) {
+            updatedEndDateTime = Optional.of(new DateTime(taskToEdit.getEndDateTime().get()));
+        } else {
+            updatedEndDateTime = Optional.empty();
+        }
         if (editTaskDescriptor.getStartDate().isPresent()) {
             if (updatedStartDateTime.isPresent()) {
                 updatedStartDateTime.get().setDateOnly(editTaskDescriptor.getStartDate().get());
             } else {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
                 updatedStartDateTime.get().setDefaultTime();
+            }
+            if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
+                //Floating Task to Non-Floating, do not allow start date only
+                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
+                updatedEndDateTime.get().setDefaultTime();
             }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
@@ -142,9 +160,34 @@ public class EditCommand extends Command implements Undoable {
             isTimed = false;
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        checkValidDateRange(updatedStartDateTime, updatedEndDateTime);
+        checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
+
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
                             updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
+    }
+
+    private static void checkValidDateRange(Optional<DateTime> updatedStartDateTime,
+                                                Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
+        if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
+            if (updatedStartDateTime.get().compareTo(updatedEndDateTime.get()) == 1) {
+                throw new IllegalValueException(MESSAGE_INVALID_DATE_RANGE);
+            }
+        }
+    }
+
+    private static void checkSpecialCase(EditTaskDescriptor editTaskDescriptor,
+                            Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
+        //Special case End Date -> Today will result in a default timing of 2359 instead of 0000
+        if (editTaskDescriptor.getEndDate().isPresent() && updatedEndDateTime.isPresent()
+                && !editTaskDescriptor.getEndTime().isPresent()) {
+            if ((new DateTime(editTaskDescriptor.getEndDate().get()).isToday())
+                        && updatedEndDateTime.get().getDate().before(new Date())) {
+                updatedEndDateTime.get().setTimeOnly(SPECIAL_CASE_TIME_STRING);
+            }
+        }
     }
 
     /**

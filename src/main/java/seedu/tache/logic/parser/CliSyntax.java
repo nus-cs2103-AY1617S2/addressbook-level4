@@ -14,28 +14,17 @@ public class CliSyntax {
     public static final String DELIMITER_EDIT_PARAMETER = new String(" ");
 
     /* Natural Language Processing definitions */
-    public static final String KEYWORD_EDIT_PARAMETER = " change ";
-    public static final String KEYWORD_EDIT_PARAMETER_VALUE = " to ";
-    public static final String KEYWORD_EDIT_MULTI_PARAMETER = " and ";
-    public static final String KEYWORDS_EDIT_MULTI_PARAMETER = " and change ";
+    public static final String KEYWORD_EDIT_PARAMETER_VALUE = "to";
+    public static final String KEYWORD_EDIT_PARAMETER = "change";
+    public static final String KEYWORD_EDIT_MULTI_PARAMETER = "and";
 
     /* Parameter names definitions */
-    public static final String PARAMETER_NAME = "name";
-    public static final String PARAMETER_2_NAME = "n";
-    public static final String PARAMETER_START_DATE = "start_date";
-    public static final String PARAMETER_2_START_DATE = "startdate";
-    public static final String PARAMETER_3_START_DATE = "sd";
-    public static final String PARAMETER_END_DATE = "end_date";
-    public static final String PARAMETER_2_END_DATE = "enddate";
-    public static final String PARAMETER_3_END_DATE = "ed";
-    public static final String PARAMETER_START_TIME = "start_time";
-    public static final String PARAMETER_2_START_TIME = "starttime";
-    public static final String PARAMETER_3_START_TIME = "st";
-    public static final String PARAMETER_END_TIME = "end_time";
-    public static final String PARAMETER_2_END_TIME = "endtime";
-    public static final String PARAMETER_3_END_TIME = "et";
-    public static final String PARAMETER_TAG = "tag";
-    public static final String PARAMETER_2_TAG = "t";
+    public static final String[] PARAMETER_NAME = {"name", "n"};
+    public static final String[] PARAMETER_START_DATE = {"start_date", "startdate", "sd"};
+    public static final String[] PARAMETER_END_DATE = {"end_date", "enddate", "ed"};
+    public static final String[] PARAMETER_START_TIME = {"start_time", "starttime", "st"};
+    public static final String[] PARAMETER_END_TIME = {"end_time", "endtime", "et"};
+    public static final String[] PARAMETER_TAG = {"tag", "t"};
 
     /* List filter definitions */
     public static final String FILTER_COMPLETED = "completed";

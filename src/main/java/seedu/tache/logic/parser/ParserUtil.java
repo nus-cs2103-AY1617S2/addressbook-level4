@@ -1,5 +1,22 @@
 package seedu.tache.logic.parser;
 
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,24 +37,22 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
 public class ParserUtil {
     //@@author A0139925U
-    private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final Pattern FORMAT_INDEX_ARGS = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern NAME_FORMAT = Pattern.compile("^\".+\"");
-    private static final Pattern DATE_FORMAT = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
+    private static final Pattern FORMAT_NAME = Pattern.compile("^\".+\"");
+    private static final Pattern FORMAT_DATE = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}"
                                                                + "(?:[0-9]{2})?[0-9]{2}$");
-    private static final Pattern TIME_FORMAT = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
+    private static final Pattern FORMAT_TIME = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
-    private static final Pattern DURATION_FORMAT = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
-
-    public static final int TYPE_TASK = 0;
-    public static final int TYPE_DETAILED_TASK = 1;
+    private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
     //@@author
 
     //@@author A0150120H
@@ -51,7 +66,7 @@ public class ParserUtil {
      * Returns an {@code Optional.empty()} otherwise.
      */
     public static Optional<Integer> parseIndex(String command) {
-        final Matcher matcher = INDEX_ARGS_FORMAT.matcher(command.trim());
+        final Matcher matcher = FORMAT_INDEX_ARGS.matcher(command.trim());
         if (!matcher.matches()) {
             return Optional.empty();
         }
@@ -110,7 +125,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidDate(String input) {
-        final Matcher matcher = DATE_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_DATE.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -119,7 +134,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidTime(String input) {
-        final Matcher matcher = TIME_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_TIME.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -128,7 +143,7 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidDuration(String input) {
-        final Matcher matcher = DURATION_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_DURATION.matcher(input.trim());
         return matcher.matches();
     }
 
@@ -137,8 +152,36 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidName(String input) {
-        final Matcher matcher = NAME_FORMAT.matcher(input.trim());
+        final Matcher matcher = FORMAT_NAME.matcher(input.trim());
         return matcher.matches();
+    }
+
+    /**
+     * Returns True if input is a valid parameter
+     * Returns False otherwise.
+     */
+    public static boolean isValidParameter(String input) {
+        switch (input) {
+        case PARAMETER_NAME:
+        case PARAMETER_NAME_2:
+        case PARAMETER_START_DATE:
+        case PARAMETER_START_DATE_2:
+        case PARAMETER_START_DATE_3:
+        case PARAMETER_END_DATE:
+        case PARAMETER_END_DATE_2:
+        case PARAMETER_END_DATE_3:
+        case PARAMETER_START_TIME:
+        case PARAMETER_START_TIME_2:
+        case PARAMETER_START_TIME_3:
+        case PARAMETER_END_TIME:
+        case PARAMETER_END_TIME_2:
+        case PARAMETER_END_TIME_3:
+        case PARAMETER_TAG:
+        case PARAMETER_TAG_2:
+            return true;
+        default:
+            return false;
+        }
     }
     //@@author
     /**
@@ -171,7 +214,7 @@ public class ParserUtil {
     public static String parseTime(String input) throws IllegalValueException {
         String[] inputs = input.split(" ");
         for (String candidate : inputs) {
-            Matcher matcher = TIME_FORMAT.matcher(candidate.trim());
+            Matcher matcher = FORMAT_TIME.matcher(candidate.trim());
             if (matcher.lookingAt()) {
                 return matcher.group();
             }
@@ -185,7 +228,7 @@ public class ParserUtil {
     public static String parseDate(String input) throws IllegalValueException {
         String[] inputs = input.split(" ");
         for (String candidate : inputs) {
-            Matcher matcher = DATE_FORMAT.matcher(candidate.trim());
+            Matcher matcher = FORMAT_DATE.matcher(candidate.trim());
             if (matcher.lookingAt()) {
                 return matcher.group();
             }
@@ -199,12 +242,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        for (String identifier: START_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, START_DATE_IDENTIFIER);
     }
 
     /**
@@ -213,12 +251,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        for (String identifier: END_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, END_DATE_IDENTIFIER);
     }
 
     /**
@@ -281,6 +314,20 @@ public class ParserUtil {
 
     public static boolean isDate(String s) {
         return DateTime.isDate(s);
+    }
+    /**
+     * Checks if the given string exists in the strArray. Check is case insensitive
+     * @param s String to check
+     * @param strArray Array of Strings to check against
+     * @return true if s is in strArray, false otherwise
+     */
+    public static boolean isFoundIn(String s, String[] strArray) {
+        for (String str: strArray) {
+            if (s.equalsIgnoreCase(str)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
