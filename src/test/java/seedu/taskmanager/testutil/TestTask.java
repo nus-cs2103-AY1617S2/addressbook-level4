@@ -170,17 +170,17 @@ public class TestTask implements ReadOnlyTask {
 
         if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
             if (this.getStartDate().equals(t.getEndDate())) {
-                if ((this.getStartTime().laterThan(t.getStartTime()) && t.getEndTime().laterThan(this.getStartTime()))
-                        || (this.getEndTime().laterThan(t.getStartTime())
-                                && t.getEndTime().laterThan(this.getEndTime()))) {
+                if ((this.getStartTime().laterThanOrEqual(t.getStartTime()) && t.getEndTime().laterThanOrEqual(this.getStartTime()))
+                        || (this.getEndTime().laterThanOrEqual(t.getStartTime())
+                                && t.getEndTime().laterThanOrEqual(this.getEndTime()))) {
                     return true;
                 }
             } else if (this.getStartDate().equals(t.getEndDate())) {
-                if (t.getEndTime().laterThan(this.getStartTime())) {
+                if (t.getEndTime().laterThanOrEqual(this.getStartTime())) {
                     return true;
                 }
             } else if (this.getEndDate().equals(t.getStartDate())) {
-                if (this.getEndTime().laterThan(t.getStartTime())) {
+                if (this.getEndTime().laterThanOrEqual(t.getStartTime())) {
                     return true;
                 }
             } else {

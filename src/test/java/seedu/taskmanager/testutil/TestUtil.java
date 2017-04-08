@@ -16,7 +16,9 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
-import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.DeadlineTaskCardHandle;
+import guitests.guihandles.EventTaskCardHandle;
+import guitests.guihandles.FloatingTaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -367,7 +369,15 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+    public static boolean compareCardAndTask(EventTaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
+    }
+
+    public static boolean compareCardAndTask(DeadlineTaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
+    }
+
+    public static boolean compareCardAndTask(FloatingTaskCardHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
 

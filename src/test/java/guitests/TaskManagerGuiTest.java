@@ -12,13 +12,16 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.DeadlineTaskCardHandle;
+import guitests.guihandles.DeadlineTaskListPanelHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.TaskCardHandle;
-import guitests.guihandles.TaskListPanelHandle;
+import guitests.guihandles.EventTaskCardHandle;
+import guitests.guihandles.EventTaskListPanelHandle;
+import guitests.guihandles.FloatingTaskCardHandle;
+import guitests.guihandles.FloatingTaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.taskmanager.TestApp;
@@ -52,10 +55,11 @@ public abstract class TaskManagerGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle taskListPanel;
+    protected EventTaskListPanelHandle eventTaskListPanel;
+    protected DeadlineTaskListPanelHandle deadlineTaskListPanel;
+    protected FloatingTaskListPanelHandle floatingTaskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
     private Stage stage;
 
     @BeforeClass
@@ -73,10 +77,11 @@ public abstract class TaskManagerGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
+            eventTaskListPanel = mainGui.getEventTaskListPanel();
+            deadlineTaskListPanel = mainGui.getDeadlineTaskListPanel();
+            floatingTaskListPanel = mainGui.getFloatingTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
@@ -112,7 +117,21 @@ public abstract class TaskManagerGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+    public void assertMatching(ReadOnlyTask task, EventTaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
+    }
+
+    /**
+     * Asserts the task shown in the card is same as the given task
+     */
+    public void assertMatching(ReadOnlyTask task, DeadlineTaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
+    }
+
+    /**
+     * Asserts the task shown in the card is same as the given task
+     */
+    public void assertMatching(ReadOnlyTask task, FloatingTaskCardHandle card) {
         assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
@@ -120,7 +139,8 @@ public abstract class TaskManagerGuiTest {
      * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfTask = taskListPanel.getNumberOfTask();
+        int numberOfTask = eventTaskListPanel.getNumberOfTask() + deadlineTaskListPanel.getNumberOfTask()
+        + floatingTaskListPanel.getNumberOfTask();
         assertEquals(size, numberOfTask);
     }
 

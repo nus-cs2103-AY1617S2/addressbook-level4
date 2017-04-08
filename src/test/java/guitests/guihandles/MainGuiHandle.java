@@ -13,8 +13,16 @@ public class MainGuiHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public TaskListPanelHandle getTaskListPanel() {
-        return new TaskListPanelHandle(guiRobot, primaryStage);
+    public EventTaskListPanelHandle getEventTaskListPanel() {
+        return new EventTaskListPanelHandle(guiRobot, primaryStage);
+    }
+
+    public DeadlineTaskListPanelHandle getDeadlineTaskListPanel() {
+        return new DeadlineTaskListPanelHandle(guiRobot, primaryStage);
+    }
+
+    public FloatingTaskListPanelHandle getFloatingTaskListPanel() {
+        return new FloatingTaskListPanelHandle(guiRobot, primaryStage);
     }
 
     public ResultDisplayHandle getResultDisplay() {
@@ -27,10 +35,6 @@ public class MainGuiHandle extends GuiHandle {
 
     public MainMenuHandle getMainMenu() {
         return new MainMenuHandle(guiRobot, primaryStage);
-    }
-
-    public BrowserPanelHandle getBrowserPanel() {
-        return new BrowserPanelHandle(guiRobot, primaryStage);
     }
 
     public AlertDialogHandle getAlertDialog(String title) {
