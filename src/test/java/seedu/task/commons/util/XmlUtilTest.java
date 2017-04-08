@@ -79,6 +79,8 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
+        TEMP_FILE.deleteOnExit();
+        TEMP_FILE.setWritable(true);
         XmlSerializableTaskManager dataToWrite = new XmlSerializableTaskManager(new TaskManager());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
