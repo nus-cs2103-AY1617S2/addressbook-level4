@@ -136,7 +136,7 @@ Examples:
 ### 3.4. Adding an Event Task: `add`
 Now you might be interested in adding an event, which has a start time and an end time. <br>
 
-Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> t/<TIME>`
+Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> <TIME>`
 
 ```
 Things To Note:
@@ -154,8 +154,9 @@ Things To Note:
 
 Examples:
 
-* `add OPEN HOUSE from: 13 Oct 10:00am to: 16 Oct 5:00pm`
-* `add CS1010 Lecture from: tuesday 12:00pm to: tuesday 2:00 pm`
+* `add OPEN HOUSE from: 13 Oct to: 16 Oct`
+* `add Meeting from: tuesday 12:00pm to: tuesday 2:00 pm`
+* `add watch television from: 7pm to: 9pm`
 
 
 ### 3.5. Adding a Priority Task/Event : `add`
@@ -173,7 +174,7 @@ Things To Note:
 
 Examples:
 * `add CS2103T Meeting p/high`
-* `add Open House from d/5/11/2016 t/11:00am to d/6/11/2016 t/11:00pm p/low`
+* `add Open House from:5 Nov 11:00am to: 6 Nov 11:00pm p/low`
 
 
 ### 3.6 Finding a Task: `find`
@@ -220,7 +221,10 @@ What it does: Edit your task deadline to 2 Dec 11am
 What it does: Edit your task name to CS2103T Meeting
 * `edit 3 from: next week to: next month`
 What it does: Edit your task schedule to be from next week to next month
-
+* `edit 4 from: next week`
+What it does: Edit your task schedule start date to next week
+* `edit 5 to: next month`
+What it does: Edit your task schedule end date to next month
 
 ### 3.8 Deleting a Task : `delete`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command.
@@ -331,7 +335,7 @@ Format: `save <FILE_PATH>`
 
 ```
 Things To Note:
-> The file path provided must be valid
+> The file path provided must be valid.
 ```
 
 Examples:
@@ -346,7 +350,7 @@ Format: `setting <FILE_PATH>`
 
 ```
 Things To Note:
-> The file path provided must be valid
+> The file path provided must be valid.
 ```
 
 Examples:
@@ -361,7 +365,7 @@ Format: `use <FILE_PATH>`
 
 ```
 Things To Note:
-> The file path provided must be valid
+> The file path provided must be valid.
 ```
 
 Examples:
