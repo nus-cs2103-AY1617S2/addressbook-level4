@@ -60,9 +60,7 @@ public class XmlUtil {
         JAXBContext context = JAXBContext.newInstance(data.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        System.out.println(file);
         m.marshal(data, file);
-        System.out.println("wawawa");
     }
 
 }
