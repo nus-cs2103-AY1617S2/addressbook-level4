@@ -89,7 +89,7 @@ public class UniqueTaskList implements Iterable<Task> {
             try {
                 replacement.add(new Task(task));
             } catch (IllegalValueException e) {
-                assert false : "Copying a valid task should always result in a valid task";
+                throw new AssertionError("Copying a valid task should always result in a valid task");
             }
         }
         setTasks(replacement);

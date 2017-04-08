@@ -65,12 +65,12 @@ public class TaskList implements ReadOnlyTaskList {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "TaskLists should not have duplicate tasks";
+            throw new AssertionError("Copying a valid TaskList should result in duplicate tasks");
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "TaskLists should not have duplicate tags";
+            throw new AssertionError("Copying a valid TaskList should not result in duplicate tags");
         }
         syncMasterTagListWith(tasks);
     }

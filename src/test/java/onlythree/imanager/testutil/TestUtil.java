@@ -69,9 +69,9 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
+    //@@author A0140023E
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
             // TODO maybe they should not be empty optionals
             return new Task[]{
                 new Task(new Name("Allocate Work"), Optional.empty(), Optional.empty(), new UniqueTagList()),
@@ -86,9 +86,7 @@ public class TestUtil {
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
-            assert false;
-            // not possible
-            return null;
+            throw new AssertionError("The sample tasks should meet all the constraints");
         }
     }
 
@@ -100,12 +98,11 @@ public class TestUtil {
                 new Tag("project")
             };
         } catch (IllegalValueException e) {
-            assert false;
-            return null;
-            //not possible
+            throw new AssertionError("The sample tag should meet the constraints");
         }
     }
 
+    //@@author
     public static List<Task> generateSampleTaskData() {
         return Arrays.asList(SAMPLE_TASK_DATA);
     }
