@@ -8,7 +8,7 @@ import seedu.jobs.model.tag.UniqueTagList;
 //@@author A0130979U
 import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
-//@@author A0130979U
+
 public class Task implements ReadOnlyTask {
 
     private Name name;

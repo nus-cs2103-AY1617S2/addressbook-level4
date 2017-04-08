@@ -3,10 +3,7 @@ package seedu.jobs.logic.commands;
 import java.io.IOException;
 
 import com.google.common.eventbus.Subscribe;
-import com.sun.glass.ui.monocle.linux.LinuxInputProcessor.Logger;
-
 import seedu.jobs.commons.core.EventsCenter;
-import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEventException;
 
 /* Change save path
