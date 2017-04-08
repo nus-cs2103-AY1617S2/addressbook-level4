@@ -60,7 +60,6 @@ public class TypicalTestTasks {
                     .withRecurrence(Frequency.DAILY)
                     .withInformation("4th street")
                     .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
-                    
 
             // Manually added
             taskH = new TaskBuilder().withName("Having dinner with Hoon Meier").withPriorityLevel("Yes")
