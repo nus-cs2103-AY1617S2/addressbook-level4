@@ -76,12 +76,13 @@ public class AddCommand extends Command {
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
     }
-
+    
+    //@@author A0164466X
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             
             String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSED : "");
             return new CommandResult(String.format(message, toAdd));

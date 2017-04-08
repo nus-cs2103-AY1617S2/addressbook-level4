@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import java.util.NoSuchElementException;
 
@@ -23,27 +23,27 @@ public class AddCommandParser {
      */
     //@@author A0164032U
     public Command parse(String args) {
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_GROUP);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_GROUP);
         argsTokenizer.tokenize(args);
         try {
-            if (!argsTokenizer.getEmpty(PREFIX_STARTDATE) && !argsTokenizer.getEmpty(PREFIX_ENDDATE)) {
+            if (!argsTokenizer.getEmpty(PREFIX_START_DATE) && !argsTokenizer.getEmpty(PREFIX_END_DATE)) {
                 
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
-                        argsTokenizer.getValue(PREFIX_STARTDATE).get(),
-                        argsTokenizer.getValue(PREFIX_ENDDATE).get(),
+                        argsTokenizer.getValue(PREFIX_START_DATE).get(),
+                        argsTokenizer.getValue(PREFIX_END_DATE).get(),
                         argsTokenizer.getValue(PREFIX_GROUP).get()
                         );
                 
-            } else if (!argsTokenizer.getEmpty(PREFIX_ENDDATE)) {
+            } else if (!argsTokenizer.getEmpty(PREFIX_END_DATE)) {
                 
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
-                        argsTokenizer.getValue(PREFIX_ENDDATE).get(),
+                        argsTokenizer.getValue(PREFIX_END_DATE).get(),
                         argsTokenizer.getValue(PREFIX_GROUP).get()
                         );
                 
-            } else if (!argsTokenizer.getEmpty(PREFIX_STARTDATE)) {
+            } else if (!argsTokenizer.getEmpty(PREFIX_START_DATE)) {
                 
                 throw new NoSuchElementException("");
                 
