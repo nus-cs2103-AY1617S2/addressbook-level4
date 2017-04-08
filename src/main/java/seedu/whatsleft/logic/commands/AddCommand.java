@@ -76,7 +76,6 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        //@@author A0148038A
         if (startdate != null) {
             this.toAddEvent = new Event(
                     new Description(description),

@@ -6,9 +6,9 @@ import java.time.LocalTime;
 import seedu.whatsleft.commons.exceptions.IllegalValueException;
 import seedu.whatsleft.commons.util.StringUtil;
 
-//@@author A0121668A
+//@@author A0148038A
 /**
- * Represents a Deadline's ByTime in WhatsLeft.
+ * Represents a task's due time in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidByTime(String)}
  */
 public class ByTime {
@@ -17,11 +17,11 @@ public class ByTime {
             "Deadline ByTime can only be in this format: hhmm, e.g. 1300";
 
     public final LocalTime value;
-    public final boolean isExisting;
+    public final boolean isExisting; // to check whether the task has a by time
 
-    //@@author A0121668A
     /**
      * Validates given start time.
+     *
      * @param byTime Argument in string format
      * @throws IllegalValueException if given start time is invalid.
      */
@@ -47,12 +47,11 @@ public class ByTime {
     public static boolean isValidByTime(String args) {
         try {
             StringUtil.parseStringToTime(args);
-        } catch (DateTimeException ive) {
+        } catch (DateTimeException dte) {
             return false;
         }
         return true;
     }
-    //@@author
 
     //@@author A0121668A
     /**
@@ -75,8 +74,9 @@ public class ByTime {
     public String toString() {
         if (value == null) {
             return null;
+        } else {
+            return value.toString();
         }
-        return value.toString();
     }
 
     @Override
@@ -92,10 +92,20 @@ public class ByTime {
     }
 
     //@@author A0148038A
+    /**
+     * check whether a by time is present
+     * @return a boolean variable, true if by time is present, false otherwise
+     */
     public boolean isExisting() {
         return this.isExisting;
     }
 
+    /**
+     * Compare with another ByTime object
+     *
+     * @param a ByTime object
+     * @return -1 if this ByTime object is earlier than the given ByTime object
+     */
     public int compareTo(ByTime o) {
         return this.getValue().compareTo(o.getValue());
     }

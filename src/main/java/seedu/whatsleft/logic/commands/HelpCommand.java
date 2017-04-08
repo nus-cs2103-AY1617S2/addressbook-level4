@@ -10,7 +10,7 @@ import seedu.whatsleft.commons.events.ui.ShowHelpRequestEvent;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
-    public final String CommandHelpMessage;
+    public final String helpCommandMessage;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
@@ -18,16 +18,16 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     public HelpCommand(String commandWord) {
-        this.CommandHelpMessage = commandWord;
+        this.helpCommandMessage = commandWord;
     }
     @Override
     public CommandResult execute() {
-        if (CommandHelpMessage.equals("")) {
+        if (helpCommandMessage.equals("")) {
             EventsCenter.getInstance().post(new ShowHelpRequestEvent());
             model.storePreviousCommand("");
             return new CommandResult(SHOWING_HELP_MESSAGE);
         } else {
-            return new CommandResult(CommandHelpMessage);
+            return new CommandResult(helpCommandMessage);
         }
     }
 }

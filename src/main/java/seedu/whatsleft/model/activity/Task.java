@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import seedu.whatsleft.commons.exceptions.IllegalValueException;
 import seedu.whatsleft.commons.util.CollectionUtil;
 import seedu.whatsleft.model.tag.UniqueTagList;
+
 //@@author A0121668A
 /**
  * Represents a task(deadline) in WhatsLeft
- * @author zihanli
  *
  */
 public class Task implements ReadOnlyTask {
@@ -26,8 +27,13 @@ public class Task implements ReadOnlyTask {
 
     private UniqueTagList tags;
 
+    //@@author A0148038A
     /**
-     * Description and Priority must be present.
+     * Create a task in WhatsLeft
+     * Description and priority must be present and not null.
+     * @param Description, Priority, ByTime, ByDate, Location, UniqueTagList
+     * and a boolean variable that indicates task status
+     * @throws IllegalValueException
      */
     public Task(Description description, Priority priority, ByTime byTime, ByDate byDate,
             Location location, UniqueTagList tags, boolean status) {
@@ -41,8 +47,8 @@ public class Task implements ReadOnlyTask {
         this.status = status;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
-  //@@author
 
+    //@@author
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -176,16 +182,31 @@ public class Task implements ReadOnlyTask {
         return getAsText();
     }
 
+    /**
+     * get description shown in the card in task list panel
+     *
+     * @return a string that represents description of the task
+     */
     @Override
     public String getDescriptionToShow() {
         return getDescription().toString();
     }
 
+    /**
+     * get priority shown in the card in task list panel
+     *
+     * @return a string that represents priority of the task
+     */
     @Override
     public String getPriorityToShow() {
         return "Priority: " + getPriority().toString().toUpperCase();
     }
 
+    /**
+     * get ByTimeDate(deadline) shown in the card in task list panel
+     *
+     * @return a string that represents deadline of the task
+     */
     @Override
     public String getByTimeDateToShow() {
         if (hasDeadline()) {
@@ -195,6 +216,11 @@ public class Task implements ReadOnlyTask {
         }
     }
 
+    /**
+     * get location shown in the card in task list panel
+     *
+     * @return a string that represents location of the task
+     */
     @Override
     public String getLocationToShow() {
         if (getLocation().toString() != null) {
@@ -205,6 +231,11 @@ public class Task implements ReadOnlyTask {
 
     }
 
+    /**
+     * get tags shown in the card in task list panel
+     *
+     * @return a list of strings that represents tags of the task
+     */
     @Override
     public List<String> getTagsToShow() {
         return tags

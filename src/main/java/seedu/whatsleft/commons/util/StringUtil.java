@@ -78,19 +78,6 @@ public class StringUtil {
         return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
     }
 
-//    //@@author A0148038A
-//    /**
-//     * Parse a String argument into date format.
-//     * @param dateArg
-//     * @return date in localDate format
-//     * @throws IllegalValueException
-//     */
-//    public static LocalDate parseStringToDate(String dateString) throws IllegalValueException {
-//        //empty date
-//        if (dateString == null) throw new IllegalValueException(DATE_FORMAT_CONSTRAINTS);
-//        return LocalDate.parse(dateString, DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
-//    }
-
     //@@author A0121668A
     /**
      * Parse a String argument into date format.

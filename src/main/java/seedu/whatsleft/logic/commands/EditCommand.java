@@ -1,10 +1,13 @@
 package seedu.whatsleft.logic.commands;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.whatsleft.commons.core.EventsCenter;
+import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.core.Messages;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
 import seedu.whatsleft.commons.events.ui.JumpToCalendarEventEvent;
@@ -64,6 +67,7 @@ public class EditCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
     private final EditTaskDescriptor editTaskDescriptor;
     private final String type;
+    private final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     //@@author A0110491U
     /**
@@ -88,6 +92,11 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        //@@author A0148038A
+        assert model != null;
+        logger.info("-------[Executing EditCommand] " + this.toString());
+
+        //@@author A0110491U
         if (type.equals("ev")) {
             return editingEvent();
         }
@@ -106,6 +115,9 @@ public class EditCommand extends Command {
      * @throws CommandException if invalid index or incorrect end_date/time or duplicate event
      */
     private CommandResult editingEvent() throws CommandException {
+        //@@author A0148038A
+        assert model != null;
+        logger.info("-------[Executing EditEventCommand] " + this.toString());
         List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
         if (filteredActivityListIndex >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -152,6 +164,11 @@ public class EditCommand extends Command {
      * @throws CommandException if invalid index or duplicate task
      */
     private CommandResult editingTask() throws CommandException {
+        //@@author A0148038A
+        assert model != null;
+        logger.info("-------[Executing EditTaskCommand] " + this.toString());
+
+        //@@author A0110491U
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         if (filteredActivityListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);

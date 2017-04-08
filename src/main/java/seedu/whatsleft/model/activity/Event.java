@@ -13,7 +13,6 @@ import seedu.whatsleft.model.tag.UniqueTagList;
 //@@author A0148038A
 /**
  * Represents an event in WhatsLeft
- * @author zihanli
  */
 public class Event implements ReadOnlyEvent {
 
@@ -27,7 +26,9 @@ public class Event implements ReadOnlyEvent {
     private UniqueTagList tags;
 
     /**
+     * Create an event in WhatsLeft
      * Description and start date must be present and not null.
+     * @param Description, StartTime, StartDate, EndTime, EndDate, Location, UniqueTagList
      * @throws IllegalValueException
      */
     public Event(Description description, StartTime startTime, StartDate startDate,
@@ -187,17 +188,32 @@ public class Event implements ReadOnlyEvent {
         return getAsText();
     }
 
+    /**
+     * get description shown in the card in event list panel
+     *
+     * @return a string that represents description of the event
+     */
     @Override
     public String getDescriptionToShow() {
         return getDescription().toString();
     }
 
+    /**
+     * get duration shown in the card in event list panel
+     *
+     * @return a string that represents duration of the event
+     */
     @Override
     public String getDurationToShow() {
         return getStartTime().toString() + " " + getStartDate().toString()
                +  " ~ " + getEndTime().toString() + " " + getEndDate().toString();
     }
 
+    /**
+     * get location shown in the card in event list panel
+     *
+     * @return a string that represents location of the event
+     */
     @Override
     public String getLocationToShow() {
         if (getLocation().toString() != null) {
@@ -207,6 +223,11 @@ public class Event implements ReadOnlyEvent {
         }
     }
 
+    /**
+     * get tags shown in the card in event list panel
+     *
+     * @return a list of strings that represents tags of the event
+     */
     @Override
     public List<String> getTagsToShow() {
         return tags

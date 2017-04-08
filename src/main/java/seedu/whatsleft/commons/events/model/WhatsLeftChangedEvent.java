@@ -11,7 +11,8 @@ public class WhatsLeftChangedEvent extends BaseEvent {
     public WhatsLeftChangedEvent(ReadOnlyWhatsLeft data) {
         this.data = data;
     }
-//@@author A0121668A
+
+    //@@author A0121668A
     @Override
     public String toString() {
         return "number of tasks " + data.getTaskList().size()

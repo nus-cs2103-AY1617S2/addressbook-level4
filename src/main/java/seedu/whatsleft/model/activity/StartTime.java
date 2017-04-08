@@ -81,6 +81,12 @@ public class StartTime {
         return value.hashCode();
     }
 
+    /**
+     * Compare with another StartTime object
+     *
+     * @param a StartTime object
+     * @return -1 if this StartTime object is earlier than the given StartTime object
+     */
     public int compareTo(StartTime o) {
         return this.getValue().compareTo(o.getValue());
     }

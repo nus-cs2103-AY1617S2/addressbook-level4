@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
 import seedu.whatsleft.commons.exceptions.DuplicateDataException;
 import seedu.whatsleft.commons.util.CollectionUtil;
-import seedu.whatsleft.model.activity.UniqueEventList.DuplicateEventException;
 import seedu.whatsleft.model.activity.UniqueTaskList.TaskNotFoundException;
-
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -34,13 +32,17 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0148038A
+    /**
+     * Clears all tasks in the task list
+     */
     public void clearAll() {
         internalList.clear();
     }
 
     /**
-     * Adds an Task to the list.
+     * Adds an Task to the task list.
      *
+     * @param the task to add into the task list
      * @throws DuplicateTaskException if the Task to add is a duplicate of an existing Task in the list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
@@ -51,12 +53,11 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
-    //@@author A0148038A
     /**
-     * Updates an event in WhatsLeft.
+     * Updates(edits) a task in WhatsLeft.
      *
-     * @throws DuplicateEventException if the edited event is a duplicate of an existing event in the list.
-     * @throws DuplicateTimeClashException if the edited event clashes with any other event
+     * @param a task to edit and an edit task
+     * @throws DuplicateTaskException if the edited task is a duplicate of an existing task in the list.
      */
     public void updateTask(Task taskToEdit, Task editedTask) throws UniqueTaskList.DuplicateTaskException {
         assert taskToEdit != null && editedTask != null;

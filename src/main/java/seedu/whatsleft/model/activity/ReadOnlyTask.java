@@ -6,7 +6,7 @@ import java.util.List;
 import seedu.whatsleft.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for an Tasks in WhatsLeft.
+ * A read-only immutable interface for a Task in WhatsLeft.
  * Implementations should guarantee: Description is present, field values are validated.
  */
 public interface ReadOnlyTask {
@@ -73,14 +73,18 @@ public interface ReadOnlyTask {
 
 
     //@@author A0148038A
+    /**
+     * compare tasks by deadline and priority
+     * @return -1 if this task is more urgent than the given task
+     */
     default int compareTo(ReadOnlyTask o) {
-        if (!this.hasDeadline() && !o.hasDeadline()) {
+        if (!this.hasDeadline() && !o.hasDeadline()) { // floating task is sorted by priority
             return this.getPriority().compareTo(o.getPriority());
-        } else if (this.hasDeadline() && !o.hasDeadline()) {
+        } else if (this.hasDeadline() && !o.hasDeadline()) { // deadline is before floating task
             return -1;
-        } else if (!this.hasDeadline() && o.hasDeadline()) {
+        } else if (!this.hasDeadline() && o.hasDeadline()) { // floating task is after deadline
             return 1;
-        } else {
+        } else { // compare two deadlines
             if (!this.getByDate().equals(o.getByDate())) {
                 return this.getByDate().compareTo(o.getByDate());
             } else if (!this.getByTime().equals(o.getByTime())) {
@@ -91,6 +95,10 @@ public interface ReadOnlyTask {
         }
     }
 
+    /**
+     * compare tasks
+     * @return a comparator of ReadOnlyTask
+     */
     static Comparator<? super ReadOnlyTask> getComparator() {
         Comparator<ReadOnlyTask> byTask = (t1, t2) -> t1.compareTo(t2);
         return byTask;

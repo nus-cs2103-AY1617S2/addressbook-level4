@@ -21,6 +21,7 @@ public class EndTime {
     /**
      * Validates given start time.
      *
+     * @param an endTimeArg string to check
      * @throws IllegalValueException if given start time is invalid.
      */
     public EndTime(String endTimeArg) throws IllegalValueException {
@@ -81,6 +82,12 @@ public class EndTime {
         return value.hashCode();
     }
 
+    /**
+     * Compare with another EndTime object
+     *
+     * @param a EndTime object
+     * @return -1 if this EndTime object is earlier than the given EndTime object
+     */
     public int compareTo(EndTime o) {
         return this.getValue().compareTo(o.getValue());
     }
