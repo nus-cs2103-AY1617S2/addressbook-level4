@@ -12,10 +12,13 @@ import seedu.taskmanager.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask eatBreakfast, eatLunch, eatDinner, doCS, tryHarderCS, tryAgainCS, getFit, sampleEvent,
-            sampleFloatingTask, sampleDeadline, recurTestDay, recurTestDayOnce, recurTestDayTwice, recurTestDayThrice,
-            recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice, recurTestMonth,
-            recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice, recurTestYear, recurTestYearOnce,
-            recurTestYearTwice, recurTestYearThrice;
+            sampleFloatingTask, sampleDeadline, sampleClashBetweenOneDayEvent, sampleClashBetweenMultipleDaysEvent,
+            sampleClashAcrossMultipleDaysEvent, sampleClashStartOfMultipleDaysEvent, sampleClashEndOfMultipleDaysEvent,
+            sampleNoClashSameDayEvent, sampleNoClashSeparateDayEvent, recurTestDay, recurTestDayOnce, recurTestDayTwice,
+            recurTestDayThrice, recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice,
+            recurTestMonth, recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice, recurTestYear,
+            recurTestYearOnce, recurTestYearTwice, recurTestYearThrice, eventTestMon, eventTestTuesThurs,
+            eventTestThurs, eventTestFriSat;
 
     public TypicalTestTasks() {
         try {
@@ -51,6 +54,43 @@ public class TypicalTestTasks {
             sampleDeadline = new TaskBuilder().withTaskName("Get it done").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("06/05/17").withEndTime("1700").withCompletion(false)
                     .withCategories("work").build();
+
+            // blocking time slots test tasks
+            sampleClashBetweenOneDayEvent = new TaskBuilder().withTaskName("Escape Reality").withStartDate("13/04/17")
+                    .withStartTime("1130").withEndDate("13/04/17").withEndTime("1800").withCompletion(false)
+                    .withCategories("CS", "NO").build();
+            sampleClashBetweenMultipleDaysEvent = new TaskBuilder().withTaskName("Midweek blues")
+                    .withStartDate("12/04/17").withStartTime("1900").withEndDate("12/04/17").withEndTime("2200")
+                    .withCompletion(false).withCategories("dance", "orNoDance").build();
+            sampleClashAcrossMultipleDaysEvent = new TaskBuilder().withTaskName("No gap").withStartDate("10/04/17")
+                    .withStartTime("1200").withEndDate("14/04/17").withEndTime("1000").withCompletion(false)
+                    .withCategories("thigh", "gap").build();
+            sampleClashStartOfMultipleDaysEvent = new TaskBuilder().withTaskName("Sighpie").withStartDate("11/04/17")
+                    .withStartTime("1500").withEndDate("11/04/17").withEndTime("1800").withCompletion(false)
+                    .withCategories("submission", "approaching").build();
+            sampleClashEndOfMultipleDaysEvent = new TaskBuilder().withTaskName("Fixing Travis")
+                    .withStartDate("13/04/17").withStartTime("0700").withEndDate("13/04/17").withEndTime("1100")
+                    .withCompletion(false).withCategories("Work", "Travis").build();
+            sampleNoClashSameDayEvent = new TaskBuilder().withTaskName("Reality hits hard").withStartDate("13/04/17")
+                    .withStartTime("1200").withEndDate("14/04/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("CS", "rekt").build();
+            sampleNoClashSeparateDayEvent = new TaskBuilder().withTaskName("Coding in Progress")
+                    .withStartDate("16/04/17").withStartTime("1000").withEndDate("16/04/17").withEndTime("1800")
+                    .withCompletion(false).withCategories("work", "code").build();
+
+            eventTestMon = new TaskBuilder().withTaskName("Monday Blues").withStartDate("10/04/17")
+                    .withStartTime("1000").withEndDate("10/04/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("not", "red").build();
+            eventTestTuesThurs = new TaskBuilder().withTaskName("TwoDays").withStartDate("11/04/17")
+                    .withStartTime("1700").withEndDate("13/04/17").withEndTime("0800").withCompletion(false)
+                    .withCategories("not", "one").build();
+            eventTestThurs = new TaskBuilder().withTaskName("Depressing Thursday").withStartDate("13/04/17")
+                    .withStartTime("1100").withEndDate("13/04/17").withEndTime("1200").withCompletion(false)
+                    .withCategories("CS2013", "impossible").build();
+            eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
+                    .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
+                    .build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -137,6 +177,26 @@ public class TypicalTestTasks {
         }
     }
 
+    public void TypicalTestEventsForBlockingTimeSlots() {
+        try {
+            eventTestMon = new TaskBuilder().withTaskName("Monday Blues").withStartDate("10/04/17")
+                    .withStartTime("1000").withEndDate("10/04/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("not", "red").build();
+            eventTestTuesThurs = new TaskBuilder().withTaskName("TwoDays").withStartDate("11/04/17")
+                    .withStartTime("1700").withEndDate("13/04/17").withEndTime("0800").withCompletion(false)
+                    .withCategories("not", "one").build();
+            eventTestThurs = new TaskBuilder().withTaskName("Depressing Thursday").withStartDate("13/04/17")
+                    .withStartTime("1100").withEndDate("13/04/17").withEndTime("1200").withCompletion(false)
+                    .withCategories("CS2013", "impossible").build();
+            eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
+                    .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
+                    .build();
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+    }
+
     public static void loadTaskManagerWithSampleData(TaskManager tm) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
@@ -165,6 +225,10 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalRecurringTasksForYears() {
         return new TestTask[] { recurTestYear, recurTestYearOnce, recurTestYearTwice, recurTestYearThrice };
+    }
+
+    public TestTask[] getTypicalTestEventsForBlockingTimeSlots() {
+        return new TestTask[] { eventTestMon, eventTestTuesThurs, eventTestThurs, eventTestFriSat };
     }
 
     public TaskManager getTypicalTaskManager() {
