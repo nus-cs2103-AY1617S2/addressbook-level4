@@ -21,8 +21,7 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
     private final ArrayList<Integer> targetIndexes;
@@ -49,7 +48,12 @@ public class SelectCommand extends Command {
         MultipleIndexCommandUtil.addTasksToList(tasksToToggle, lastShownList, targetIndexes);
         model.toggleTasksSelect(tasksToToggle);
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndexes.get(targetIndexes.size()-1)-1));
+        int offset = 1;
+        int lastIndex = targetIndexes.size() - offset;
+        int lastElementInTargetIndexes = targetIndexes.get(lastIndex - offset);
+
+        JumpToListRequestEvent scrollToTask = new JumpToListRequestEvent(lastElementInTargetIndexes - offset);
+        EventsCenter.getInstance().post(scrollToTask);
 
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndexes));
 
