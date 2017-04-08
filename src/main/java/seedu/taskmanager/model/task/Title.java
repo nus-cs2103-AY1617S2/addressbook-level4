@@ -18,7 +18,7 @@ public class Title {
      * Allows some commonly used special characters "_,.?':;&%$@()!-"
      */
     //public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String TITLE_VALIDATION_REGEX = 
+    public static final String TITLE_VALIDATION_REGEX =
             "[0-9a-zA-Z_,.?':;&%$@()!-][ 0-9a-zA-Z_,.?':;&%$@()!-]*";
     // @@author
 

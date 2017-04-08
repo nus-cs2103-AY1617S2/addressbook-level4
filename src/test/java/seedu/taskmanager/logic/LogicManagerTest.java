@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,9 +44,11 @@ import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.RedoCommand;
+import seedu.taskmanager.logic.commands.SaveAsCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
+import seedu.taskmanager.logic.commands.UndoneCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.HistoryManager;
 import seedu.taskmanager.model.Model;
@@ -63,6 +66,7 @@ import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.model.util.SampleDataUtil;
 import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.ui.MainWindow;
 
@@ -403,6 +407,30 @@ public class LogicManagerTest {
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
+
+    // @@author A0114269E
+    @Test
+    public void execute_doneInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("done", expectedMessage);
+    }
+
+    @Test
+    public void execute_doneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("done");
+    }
+
+    @Test
+    public void execute_undoneInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("undone", expectedMessage);
+    }
+
+    @Test
+    public void execute_undoneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("undone");
+    }
+    // @@author
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
@@ -779,14 +807,48 @@ public class LogicManagerTest {
     public void execute_load_invalidFilePath() throws Exception {
         assertCommandFailure("load !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
-        assertCommandFailure("load data/taskmanager",
+        assertCommandFailure("open data/taskmanager",
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void execute_load_invalidXmlFile() throws Exception {
         assertCommandFailure("load src/test/data/cd_test/empty.xml", LoadCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("load src/test/data/cd_test/invalid.xml", LoadCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("open src/test/data/cd_test/invalid.xml", LoadCommand.MESSAGE_INVALID_DATA);
+    }
+
+    @Test
+    public void execute_load_successful() throws Exception {
+        String sampleFilepath = "src/test/data/cd_test/sample.xml";
+        TestDataHelper helper = new TestDataHelper();
+
+        List<Task> expectedTasks = helper.generateTaskList(SampleDataUtil.getSampleTasks());
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+
+        assertCommandSuccess("load " + sampleFilepath, String.format(LoadCommand.MESSAGE_SUCCESS, sampleFilepath),
+                expectedTM, expectedTasks);
+    }
+
+    @Test
+    public void execute_load_nonExistentFile() throws Exception {
+        String newFilepath = "src/test/data/cd_test/new.xml";
+        assertCommandFailure("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath));
+    }
+
+    @Test
+    public void execute_save_invalidFilePath() throws Exception {
+        assertCommandFailure("save !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+        assertCommandFailure("saveas data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_save_successful() throws Exception {
+        assertCommandFailure("save !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+        assertCommandFailure("saveas data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -798,15 +860,84 @@ public class LogicManagerTest {
         Task tTarget3 = helper.generateTaskWithStatus(3, false);
         Task tTarget4 = helper.generateTaskWithStatus(3, true);
 
-        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
-        List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
-        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> modifiedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
         List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
-        helper.addToModel(model, uneditedTasks);
+        helper.addToModel(model, initialTasks);
 
         // execute command and verify result
         assertCommandSuccess("done 3", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tTarget4), expectedTM,
                 expectedList);
+    }
+
+    @Test
+    public void execute_done_alreadyDoneFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, true);
+        Task tTarget3 = helper.generateTaskWithStatus(3, true);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandFailure("done 2", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_FAILURE));
+    }
+
+    @Test
+    public void execute_undone_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, true);
+        Task tTarget3 = helper.generateTaskWithStatus(3, true);
+        Task tTarget4 = helper.generateTaskWithStatus(3, false);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> modifiedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandSuccess("undone 2", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_SUCCESS, tTarget4),
+                expectedTM, expectedList);
+    }
+
+    @Test
+    public void execute_undone_alreadyUndoneFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        helper.addToModel(model, initialTasks);
+
+        // execute command and verify result
+        assertCommandFailure("undone 3", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_FAILURE));
+    }
+
+    @Test
+    public void execute_undone_duplicateFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+        Task tTarget4 = helper.generateTaskWithStatus(1, true);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandFailure("undone 1", String.format(UndoneCommand.MESSAGE_DUPLICATE_TASK));
     }
     // @@author
 
