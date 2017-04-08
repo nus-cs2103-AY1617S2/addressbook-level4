@@ -1,11 +1,13 @@
 package typetask.logic.commands;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import typetask.commons.core.Messages;
 import typetask.commons.util.CollectionUtil;
 import typetask.logic.commands.exceptions.CommandException;
+import typetask.logic.parser.DateParser;
 import typetask.model.task.DueDate;
 import typetask.model.task.Name;
 import typetask.model.task.Priority;
@@ -27,6 +29,10 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_INVALID_DATE = "Please check your dates again."
+            + "Start date cannot be after End date. End date cannot be before Start date.";
+    public static final String MESSAGE_MISSING_END_DATE = "There is no End date for the task."
+            + "Please provide an End date as well.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -55,6 +61,17 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        if (!editedTask.getDate().value.equals("")) {
+            if (editedTask.getEndDate().value.equals("")) {
+                return new CommandResult(String.format(MESSAGE_MISSING_END_DATE));
+            } else {
+                List<Date> startDate = DateParser.parse(editedTask.getDate().value);
+                List<Date> endDate = DateParser.parse(editedTask.getEndDate().value);
+                if (!DateParser.checkValidSchedule(startDate, endDate)) {
+                    return new CommandResult(MESSAGE_INVALID_DATE);
+                }
+            }
+        }
         model.storeTaskManager(COMMAND_WORD);
         model.updateTask(filteredTaskListIndex, editedTask);
         model.updateFilteredTaskList(false);
