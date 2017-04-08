@@ -4,7 +4,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Cheuk Ting](https://github.com/ctleungac) <br>
+#### [LEUNG Cheuk Ting](https://github.com/ctleungac) <br>
 <img src="images/ctleungac.png" width="150"><br>
 Roles and Responsibilities: In charge of GUI <br>
 
