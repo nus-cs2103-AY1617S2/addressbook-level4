@@ -23,3 +23,4 @@ runtests.sh
 /config/checkstyle/awesometodoformat.xml
 Collate-GUI.jar
 Collate-TUI.jar
+src/test/data/SaveFileTest/doesnotexist

@@ -134,7 +134,13 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.completeTodo(todoListIndex, completeTime);
-        indicateTodoListChanged(null);
+        try {
+            Todo todo = todoList.getTodo(todoListIndex);
+            indicateTodoListChanged(todo);
+        } catch (TodoNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     //@@author
     //@@author A0163786N
@@ -143,7 +149,13 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.uncompleteTodo(todoListIndex);
-        indicateTodoListChanged(null);
+        try {
+            Todo todo = todoList.getTodo(todoListIndex);
+            indicateTodoListChanged(todo);
+        } catch (TodoNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     //@@author
     //@@author A0163786N
