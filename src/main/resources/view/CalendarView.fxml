@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <!-- @@author A0138952W -->
 
@@ -56,8 +57,13 @@
                                              <children>
                                                 <ButtonBar>
                                                   <buttons>
-                                                    <Button fx:id="prevDate" mnemonicParsing="false" onMouseClicked="#prevDay" text="&lt;" />
-                                                      <Button fx:id="nextDate" mnemonicParsing="false" onMouseClicked="#nextDay" text="&gt;" />
+                                                    <Button fx:id="prevDate" maxWidth="10.0" mnemonicParsing="false" onMouseClicked="#prevDay" text="&lt;" />
+                                                      <Button fx:id="nextDate" maxWidth="10.0" mnemonicParsing="false" onMouseClicked="#nextDay" text="&gt;" />
+                                                      <Button fx:id="resetDay" mnemonicParsing="false" styleClass="cell_small_label" stylesheets="@DarkTheme.css" text="Today">
+                                                         <font>
+                                                            <Font size="10.0" />
+                                                         </font>
+                                                      </Button>
                                                   </buttons>
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="100.0" right="5.0" top="5.0" />
