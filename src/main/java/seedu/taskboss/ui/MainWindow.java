@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Region> {
         categoryListPanel = new CategoryListPanel(getCategoryListPlaceholder(), logic.getFilteredTaskList());
         categoryListPanel.setTaskList(logic.getTaskBoss().getTaskList());
         categoryListPanel.setCategoryList(logic.getTaskBoss().getCategoryList());
-        categoryListPanel.updateCategoryCountToHashMap();
+        categoryListPanel.syncCategoryTaskCount();
     }
 
     //@@author A0143157J

@@ -40,30 +40,53 @@ public class CategoryListPanel extends UiPart<Region> {
     public CategoryListPanel(AnchorPane categoryListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
         super(FXML);
         tasks = taskList;
-        updateCategoryCountToHashMap();
+        syncCategoryTaskCount();
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
         setEventHandlerForViewingChangeEvent();
     }
 
     /**
-     * Compute task counts in each category,
-     * and save them into {@code HashMap<Category, Integer>} categoryHm
+     * Syncs each category task count in the CategoryListPanel with
+     * {@code ObservableList<ReadOnlyTask>} tasks
      */
-    public void updateCategoryCountToHashMap() {
+    public void syncCategoryTaskCount() {
         categoryHm = new HashMap<Category, Integer>();
 
         for (ReadOnlyTask task : tasks) {
-            for (Category category : task.getCategories()) {
-                if (!categoryHm.containsKey(category)) {
-                    categoryHm.put(category, AMOUNT_ONE);
-                } else {
-                    categoryHm.put(category, categoryHm.get(category) + AMOUNT_ONE);
+            if (task.getCategories().contains(Category.done)) {
+               updateCategoryHashMap(Category.done, true);
+            } else {
+                for (Category category : task.getCategories()) {
+                    updateCategoryHashMap(category, false);
                 }
             }
         }
-
         setConnections();
+    }
+
+    /**
+     * Updates {@code HashMap<Category, Integer>} categoryHm accordingly
+     * after checking boolean {@code isDoneCategory}
+     */
+    private void updateCategoryHashMap(Category category, boolean isDoneCategory) {
+        if (isDoneCategory) {
+            putCategoryInHashMap(Category.done);
+        } else {
+            putCategoryInHashMap(category);
+        }
+    }
+
+    /**
+     * Adds one to the value of {@code category} in its corresponding {@code categoryHm} <key, pair> entry
+     * if it is present, else create the entry and set its value as one.
+     */
+    private void putCategoryInHashMap(Category category) {
+        if (!categoryHm.containsKey(category)) {
+            categoryHm.put(category, AMOUNT_ONE);
+        } else {
+            categoryHm.put(category, categoryHm.get(category) + AMOUNT_ONE);
+        }
     }
 
     /**
@@ -111,7 +134,7 @@ public class CategoryListPanel extends UiPart<Region> {
      */
     @Subscribe
     public void handleTaskBossChangedEvent(TaskBossChangedEvent tmce) {
-        updateCategoryCountToHashMap();
+        syncCategoryTaskCount();
         initCategories();
         setConnections();
     }
