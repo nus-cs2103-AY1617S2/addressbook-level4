@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.whatsleft.commons.core.ComponentManager;
+import seedu.whatsleft.commons.core.Config;
 import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.events.model.ConfigChangedEvent;
 import seedu.whatsleft.commons.events.model.WhatsLeftChangedEvent;
@@ -23,15 +24,19 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private WhatsLeftStorage whatsLeftStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserConfigStorage userConfigStorage;
 
-    public StorageManager(WhatsLeftStorage whatsLeftStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(WhatsLeftStorage whatsLeftStorage, UserPrefsStorage userPrefsStorage,
+            UserConfigStorage userConfigStorage) {
         super();
         this.whatsLeftStorage = whatsLeftStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userConfigStorage = userConfigStorage;
     }
 
-    public StorageManager(String whatsLeftFilePath, String userPrefsFilePath) {
-        this(new XmlWhatsLeftStorage(whatsLeftFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String whatsLeftFilePath, String userPrefsFilePath, String userConfigStorage) {
+        this(new XmlWhatsLeftStorage(whatsLeftFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
+                new JsonUserConfigStorage(userConfigStorage));
     }
 
     // ================ UserPrefs methods ==============================
@@ -96,5 +101,15 @@ public class StorageManager extends ComponentManager implements Storage {
         String newLocation = cce.data.getWhatsLeftFilePath();
         logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting save location to " + newLocation));
         setWhatsLeftFilePath(newLocation);
+    }
+    // ================ WhatsLeft methods ==============================
+    @Override
+    public Optional<Config> readUserConfig() throws DataConversionException, IOException {
+        return userConfigStorage.readUserConfig();
+    }
+
+    @Override
+    public void saveUserConfig(Config config) throws IOException {
+        userConfigStorage.saveUserConfig(config);
     }
 }

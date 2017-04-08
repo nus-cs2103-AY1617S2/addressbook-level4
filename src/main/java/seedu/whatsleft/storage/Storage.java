@@ -12,7 +12,7 @@ import seedu.whatsleft.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends WhatsLeftStorage, UserPrefsStorage {
+public interface Storage extends WhatsLeftStorage, UserPrefsStorage, UserConfigStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

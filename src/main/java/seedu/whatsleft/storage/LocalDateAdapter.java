@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 //@@author A0121668A
-/*
+/**
  * Adapter used for marshaling LocalDate using JAXB
  */
 public class LocalDateAdapter extends XmlAdapter<String, LocalDate> {
