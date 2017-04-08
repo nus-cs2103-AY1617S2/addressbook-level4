@@ -36,10 +36,16 @@ public class ResultDisplay extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author A0164032U
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
         LOGGER.info(LogsCenter.getEventHandlingLogMessage(event));
         displayed.setValue(event.message);
+        if (event.isError == true) {
+            resultDisplay.setStyle("-fx-text-fill: red;");
+        } else {
+            resultDisplay.setStyle("-fx-text-fill: black;");
+        }
     }
 
 }

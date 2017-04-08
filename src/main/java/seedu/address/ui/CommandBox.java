@@ -57,6 +57,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandInputChanged() {
         lastCommand = commandTextField.getText();
+        //@@author A0164032U
         try {
             CommandResult commandResult = logic.execute(lastCommand);
 
@@ -64,14 +65,15 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
             LOGGER.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser,false));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
             LOGGER.info("Invalid command: " + commandTextField.getText());
-            raise(new NewResultAvailableEvent(e.getMessage()));
+            raise(new NewResultAvailableEvent(e.getMessage(),true));
         }
+        //@@author 
     }
 
 
