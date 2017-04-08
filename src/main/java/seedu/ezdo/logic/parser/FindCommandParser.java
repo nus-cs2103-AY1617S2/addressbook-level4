@@ -145,7 +145,6 @@ public class FindCommandParser implements CommandParser {
         }
 
         String taskDateString = taskDate.get();
-        int prefixLength = 6;
         String prefixToCompare1 = "before";
         String prefixToCompare2 = "Before";
         int prefixLength = prefixToCompare1.length();
