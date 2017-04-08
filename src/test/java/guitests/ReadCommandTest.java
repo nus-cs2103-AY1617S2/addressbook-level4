@@ -17,8 +17,8 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
         TestTask[] currentTaskList = tt.getTypicalTasks();
         currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
 
-        /**  */
-        assertReadWhatsLeftSuccess("./src/test/data/ReadCommandTest/TypicalWhatsLeft.xml",
+        /**  Read a file from the designated filepath*/
+        assertReadWhatsLeftSuccess("./src/test/data/readCommandTest/TypicalWhatsLeft.xml",
                 currentTaskList, currentEventList);
     }
 
@@ -35,7 +35,6 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
         TestEvent[] expectedEvents = eventslist;
 
         commandBox.runCommand("read " + filePathToRead);
-
         assertTrue(eventListPanel.isListMatching(expectedEvents));
         assertTrue(taskListPanel.isListMatching(expectedTasks));
     }
