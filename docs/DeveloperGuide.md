@@ -221,13 +221,13 @@ Certain properties of the application can be controlled (e.g app name, logging l
 #### 4.3.1 Splitting of Task List
 In Model, all tasks to be shown on the UI are maintained in a single `filteredTaskList`. In order for tasks to be displayed under correct category(i.e. today, future and completed), it is necessary to split them into three sublists every time before refreshing the UI.
 
-In our UI implementation, tasks are stored in three `ObservableList<ReadOnlyTask>` which are `taskListToday`, `taskListFuture` and `taskListCompleted`. The reason we chose `ObservableList` is because it help to automatically refresh the UI view when updating task list, saving the trouble of reinventing the wheel. The three lists are initialised in `MainWindow`'s fillInnerPart() function during instantiation.
+In our UI implementation, tasks are stored in three `ObservableList<ReadOnlyTask>` which are `taskListToday`, `taskListFuture` and `taskListCompleted`. The reason we chose `ObservableList` is because it helps to automatically refresh the UI view when updating task list, saving the trouble of reinventing the wheel. The three lists are initialised in `MainWindow`'s fillInnerPart() function during instantiation.
 
 Whenever the UI receives a `TaskManagerChangedEvent`, it calls `MainWindow` to prepare the splitted task lists(Step 2.1). `MainWindow` further calls `logic.prepareTaskList()` while passing `taskListToday`, `taskListFuture` and `taskListCompleted`'s references as well. Logic then calls Model to do the dirty job.
 
 Model does the splitting work in the following steps:
 
-1. It creates three temporary ArrayLists for today, future and completed tasks. These duplicated list are used for the later splitting and sorting process. We did not use the three `ObservableList` from the parameters because adding and sorting on these lists will result in multiple UI refreshes, which is both undesirable for perforance and may result in potential synchronisation issues.
+1. It creates three temporary ArrayLists for today, future and completed tasks. These duplicated lists are used for the later splitting and sorting process. We did not use the three `ObservableList` from the parameters because adding and sorting on these lists will result in multiple UI refreshes, which is both undesirable for performance and may result in potential synchronisation issues.
 
 2. In `splitTaskList`, tasks are copied from `filteredTaskList` to their corresponding temporary lists. They are then sorted by task type first followed by deadlines. Floating tasks will always appear at the beginning of the list while event/deadline tasks with earlier deadlines will come first. Lastly, `assignUiIndex()` will assign a relative ID to individual tasks for UI display(See section 4.3.2 for more details).
 
@@ -240,15 +240,25 @@ _Figure 4.2.1: Sequence diagram of the process of splitting task lists_
 #### 4.3.2 Mapping between UI index(task ID) and absolute index
 As you may have noticed, task IDs in the UI all begin with "T/F/C". It is a design decision made to improve the usability of commands. Originally, all tasks shared a same set of index and there were "hops" between to adjacent tasks. For example, two adjacent tasks in the list **Future** may have indexes of "1" and "5" respectively because task "2", "3" and "4" are in **Today**, which did not seem to be intuitive.
 
-Thus, we decided to adopt the current numbering scheme while hoping to retain the original implementation based on absolute index. That is where the index mapping came from. We used a HashMap in ModelManager to store the mapping from relative to absolute index. Every time after splitting the task list, `assignUiIndex()` is called to refresh the task ID.
+Thus, we decided to adopt the current numbering scheme while hoping to retain the original implementation based on the absolute index. That is where the index mapping came from. We used a HashMap in ModelManager to store the mapping from relative to absolute index. Every time after splitting the task list, `assignUiIndex()` is called to refresh the task ID.
  
 #### 4.3.3 Autocomplete
 The autocomplete feature of CommandBox utilises `Textfields.bindAutoCompletion()` from the ControlsFX Library. To extend the list of candidates, simply add new commands inside `bindAutoCompletion()` from the constructor of `MainWindow.java`. 
 
 > Notice: In GUI testing, "Enter" is now pressed **twice** in `runCommand(String command)` in `CommandBoxHandle` so as to ensure that the autocomplete windows is dismissed before executing any command. You may want to take notice of this when debugging.
 
-#### 4.3.4 UI Animation
-##### 4.3.4.1 Slide Animation of CompletedTaskListPanel
+#### 4.3.4 Snack Bar Notification
+To display a snack bar message, simply raise an `UpdateStatusBarEvent`.
+
+#### 4.3.5 Error Message
+In **Today**, the error message is displayed directly under the command box. It is trigger by the `CommandValidator` of the command box.
+
+To show/hide an error message, call `CommandValidator`'s `showErrorMessage()/hideErrorMessage()` followed by calling `commandTextField.validate()`. 
+
+> Notice: `validate()` should be called explicitly so as to trigger the UI control to refresh.
+
+#### 4.3.6 UI Animation
+##### 4.3.6.1 Slide Animation of CompletedTaskListPanel
 
 **prefHeight Setting**
 
@@ -256,18 +266,47 @@ The panel of completed tasks is hidden by default. It only shows up when called 
 
 ![mainwindow-layout](images/mainwindow-layout.jpg)
 
-_Figure 4.3.4.1: Control Layout of MainWindow_
+_Figure 4.3.6.1: Control Layout of MainWindow_
 
-##### 4.3.4.2 Command Animation
-In **Today**, there are two types of command animation, namely **before-execute** and **after-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them. 
+##### 4.3.6.2 Command Execution Animation
+In **Today**, there are two types of command animation, namely **pre-execute** and **post-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise, the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them. 
 
-In general, both animations comprise of two stages: **displaying a progress bar underneath the task** and **scrolling the LiseView to it**.
+In general, both animations comprise of two stages: **displaying a progress bar under the task** and **scrolling the ListView to select it**.
 
-**Before-execute Animation (Add/Edit)**
+![command-animation](images/command-animation.png)
 
-**After-execute Animation(Delete/Done)**
+_Figure 4.3.6.2: Effect of `add` command animation_
 
-#### 4.3.5 Snack Bar Notification
+
+**Pre-execute Animation (Add/Edit/Today)**
+
+UI relies on the `isAnimatated` flag in `Task` to trigger the pre-execute animation. It is checked when initilising the `TaskCard` view for a task. 
+
+There should be only one task at a time in the entire list that carries the flag since each command execution modifies at most one task. **Take notice that `isAnimated` is an `int` instead of a `boolean`.** You may refer to the following table when setting its value:
+
+`isAnimated` Value | Play Animation? | Remark
+-------- | :-------- | :--------- 
+0 | No | Default value
+1 | Yes| Animation trigger
+2 | No | Initial value when add/edit/today a task
+> 2 | No | Not used by the current version
+
+_Table 4.3.6.2 'isAnimated' values_
+
+It might appear to be somewhat bewildering. In fact, `isAnimated` acts more like a counter/semaphore by its nature. In the current implementation, it decreases by 1 every time when UI constructs the `TaskCard`. It triggers animation only when the value hits 1. This counter-like design prevents the flag from getting lost since ObservableList updates the UI multiple times when preparing the backing list for ListView.
+
+**Post-execute Animation (Future Plan)**
+
+_Note: This feature has not been implemented in the v0.5 release. You are welcomed to implement it in your own fork if needed._
+
+The post-execute animation will be implemented as a dummy command. It takes over before the actual ommand is executed and only calls logic to continue execution when the animation has finished. The sequence is changed as follows:
+
+e.g. When deleting a task:
+
+1. User enters "delete [task ID]".
+2. Logic calls `DeleteAnimationCommand` instead of `DeleteCommand`.
+3. `DeleteAnimationCommand` set `isAnimated` for the target task and let UI play the animation.
+4. Logic calls `DeleteCommand` to continue. 
 
 
 ## 5. Testing
