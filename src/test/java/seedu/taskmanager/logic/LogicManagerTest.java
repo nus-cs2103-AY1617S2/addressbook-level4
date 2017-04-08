@@ -834,11 +834,17 @@ public class LogicManagerTest {
         Task tTarget1 = helper.generateTaskWithStartDate("03/03/2017");
         Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
         Task tTarget3 = helper.generateTaskWithStartDate("01/03/2017");
+        Task floating1 = helper.t1();
+        floating1.setStartDate(Optional.empty());
+        floating1.setEndDate(Optional.empty());
+        Task floating2 = helper.t2();
+        floating2.setStartDate(Optional.empty());
+        floating2.setEndDate(Optional.empty());
 
-        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
+        List<Task> unsortedTasks = helper.generateTaskList(floating1, floating2, tTarget1, tTarget2, tTarget3);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort s/", String.format(SortCommand.MESSAGE_SUCCESS_START), expectedTM, expectedList);
@@ -850,11 +856,17 @@ public class LogicManagerTest {
         Task tTarget1 = helper.generateTaskWithEndDate("04/04/2017");
         Task tTarget2 = helper.generateTaskWithEndDate("03/04/2017");
         Task tTarget3 = helper.generateTaskWithEndDate("02/04/2017");
+        Task floating1 = helper.t1();
+        floating1.setStartDate(Optional.empty());
+        floating1.setEndDate(Optional.empty());
+        Task floating2 = helper.t2();
+        floating2.setStartDate(Optional.empty());
+        floating2.setEndDate(Optional.empty());
 
-        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
-        List<Task> unsortedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
+        List<Task> unsortedTasks = helper.generateTaskList(floating1, floating2, tTarget1, tTarget2, tTarget3);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
-        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1);
+        List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
 
         assertCommandSuccess("sort e/", String.format(SortCommand.MESSAGE_SUCCESS_END), expectedTM, expectedList);
