@@ -9,18 +9,19 @@
 3. [Features](#3-features)<br>
 	3.1. [Adding a task: **`add / a`**](#31-adding-a-task-add--a)<br>
 	3.2. [Editing a task: **`edit / e`**](#32-editing-a-task-edit--e)<br>
-	3.3. [Marking a task as done: **`done / d`**](#33-marking-a-task-as-done-done--d)<br>
-	3.4. [Deleting a task: **`kill / k`**](#34-deleting-a-task-kill--k)<br>
-	3.5. [Sorting a list of tasks: **`sort / s`**](#35-sorting-a-list-of-tasks-sort--s)<br>
-	3.6. [Finding tasks: **`find / f`**](#36-finding-tasks-find--f)<br>
-	3.7. [Listing all tasks: **`list / l`**](#37-listing-all-tasks-list--l)<br>
-	3.8. [Reverts the command: **`undo / u`**](#38-reverting-the-last-action-undo--u)<br>
-	3.9. [Redoing the last undone command: **`redo / r`**](#39-redoing-the-last-undone-action-redo--r)<br>
-	3.10. [Clearing all entries: **`clear /c `**](#310-clearing-all-entries-clear--c)<br>
-	3.11. [Moving the save file: **`save`**](#311-moving-the-save-file-save)<br>
-	3.12. [Aliasing a command: **`alias`**](#312-aliasing-a-command-alias)<br>
-	3.13. [Exiting the program: **`quit / q`**](#313-exiting-the-program-quit--q)<br>
-	3.14. [Viewing help: **`help / h`**](#314-viewing-help-help--h)<br>
+	3.3. [Selecting a task: **`select`**](#33-selecting-a-task-select)<br>
+	3.4. [Marking a task as done: **`done / d`**](#34-marking-a-task-as-done-done--d)<br>
+	3.5. [Deleting a task: **`kill / k`**](#35-deleting-a-task-kill--k)<br>
+	3.6. [Sorting a list of tasks: **`sort / s`**](#36-sorting-a-list-of-tasks-sort--s)<br>
+	3.7. [Finding tasks: **`find / f`**](#37-finding-tasks-find--f)<br>
+	3.8. [Listing all tasks: **`list / l`**](#38-listing-all-tasks-list--l)<br>
+	3.9. [Reverts the command: **`undo / u`**](#39-reverting-the-last-action-undo--u)<br>
+	3.10. [Redoing the last undone command: **`redo / r`**](#310-redoing-the-last-undone-action-redo--r)<br>
+	3.11. [Clearing all entries: **`clear /c `**](#311-clearing-all-entries-clear--c)<br>
+	3.12. [Moving the save file: **`save`**](#312-moving-the-save-file-save)<br>
+	3.13. [Aliasing a command: **`alias`**](#313-aliasing-a-command-alias)<br>
+	3.14. [Exiting the program: **`quit / q`**](#314-exiting-the-program-quit--q)<br>
+	3.15. [Viewing help: **`help / h`**](#315-viewing-help-help--h)<br>
 4. [Frequently Asked Questions](#4-frequently-asked-questions)<br>
 5. [Command Summary](#5-command-summary)<br>
 
@@ -69,16 +70,27 @@ Your commands should be typed here.<br><br>
 The results of your command executions will be shown here.<br><br>
 3. **Task Card**<br>
 Each task in ezDo is represented by a task card with the following properties:<br>
-    * Each task card has an index on the left.<br>
+    * Each task card has an index on the left.<br><br>
     * The color bar on the left indicates its priority.<br>
         * <font color="green">Green</font>: low priority <br>
         * <font color="orange">Orange</font>: medium priority <br>
-        * <font color="red">Red</font>: high priority
-    * Task cards may have a start/end time.<br>
+        * <font color="red">Red</font>: high priority<br><br>
+    * The color shown on the start date and/or due date represents the following.<br>
+        * The start date is in <font color="green">green</font>: The start date of a task has past ezDo's last updated date.<br>
+        * The due date is in <font color="orange">orange</font>: The due date is about to due in 7 days according to ezDo's last updated date. <br>
+        * Both start and due dates are in <font color="red">red</font>: The task is overdue according to ezDo's last updated date. <br><br>
+    * Under the status column, a task has either:<br>
+        * Not commenced (with no icon) <br>
+        * Commenced (with a hammer icon) <br>
+        * Completed (with a tick icon) <br><br>
+    * Task cards may have a start/end time.<br><br>
     * Task cards may have any number of tags associated with it.<br>
 
 4. **Tags**<br>
-Each task may have some tags associated with it. Tags are a way for you to group and classify your tasks.
+Each task may have some tags associated with it. Tags are a way for you to group and classify your tasks. <br><br>
+
+> #### <u>Quick Tip:</u><br>
+> If you hover your mouse over the command box or description box, a tooltip description will be displayed in a few seconds. The description briefly describes its functionality. This is one way you can locate them on the user interface easily.
 
 Now that we are familiar with ezDo's interface, let us get started with the features of ezDo!<br>
 
@@ -90,22 +102,23 @@ Now that we are familiar with ezDo's interface, let us get started with the feat
 A summary of the commands available on ezDo is shown in Table 1 for your convenience.<br>
 
 
-| Command |Description                                                      |
-|:-------:|---------------------------------------------------------------- |
-|[add / a](#31-adding-a-task-add--a)            |Adds a task              |
+| Command |Description                                                       |
+|:-------:|----------------------------------------------------------------- |
+|[add / a](#31-adding-a-task-add--a)               |Adds a task              |
 |[edit / e](#32-editing-a-task-edit--e)            |Edits a task             |
-|[done / d](#33-marking-a-task-as-done-done--d)    |Marks a task as done     |
-|[kill / k](#34-deleting-a-task-kill--k)           |Deletes a task           |
-|[sort / s](#35-sorting-a-list-of-tasks-sort--s)   |Sorts the list of tasks  |
-|[find / f](#36-finding-tasks-find--f)             |Searches for a task      |
-|[list / l](#37-listing-all-tasks-list--l)         |Lists the tasks          |
-|[undo / u](#38-reverting-the-last-action-undo--u) |Reverts the last action  |
-|[redo / r](#39-redoing-the-last-undone-action-redo--r)| Redoes the last undo|
-|[clear / c](#310-clearing-all-entries-clear--c)    |Deletes all tasks        |
-|[save](#311-moving-the-save-file-save)            |Saves ezDo to a directory|
-|[alias](#312-aliasing-a-command-alias)           | Aliases a command       |
-|[quit / q](#313-exiting-the-program-quit--q)      |Quits ezDo               |
-|[help / h](#314-viewing-help-help--h)             |Shows the user guide     |
+|[select](#33-selecting-a-task-select)             |Marks the status of a task|
+|[done / d](#34-marking-a-task-as-done-done--d)    |Marks a task as done     |
+|[kill / k](#35-deleting-a-task-kill--k)           |Deletes a task           |
+|[sort / s](#36-sorting-a-list-of-tasks-sort--s)   |Sorts the list of tasks  |
+|[find / f](#37-finding-tasks-find--f)             |Searches for a task      |
+|[list / l](#38-listing-all-tasks-list--l)         |Lists the tasks          |
+|[undo / u](#39-reverting-the-last-action-undo--u) |Reverts the last action  |
+|[redo / r](#310-redoing-the-last-undone-action-redo--r)| Redoes the last undo|
+|[clear / c](#311-clearing-all-entries-clear--c)   |Deletes all tasks        |
+|[save](#312-moving-the-save-file-save)            |Saves ezDo to a directory|
+|[alias](#313-aliasing-a-command-alias)            | Aliases a command       |
+|[quit / q](#314-exiting-the-program-quit--q)      |Quits ezDo               |
+|[help / h](#315-viewing-help-help--h)             |Shows the user guide     |
 
 
 <h5 align="center">Table 1: Summary of Commands in ezDo</h5>
@@ -132,11 +145,12 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 
 #### Format:
 
-**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME1] [t/TAGNAME2]...`**
+**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [f/FREQUENCY] [t/TAGNAME1] [t/TAGNAME2]...`**
 
 <br>
 
 > - Add as many tags as you want to a task, if required.<br><br>
+> - Add a **`FREQUENCY`** if required. The acceptable words are daily, weekly, monthly and yearly (case sensitive).<br><br>
 > - Add a **`STARTDATE`** or **`DUEDATE`** if required. Refer to Table 2 for examples of **`STARTDATE`** and **`DUEDATE`**.<br><br>
 > - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the highest priority and 3 the lowest, if required.<br>
 
@@ -163,6 +177,8 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 #### Examples:
 * Buy milk:<br>
 **`add Buy milk`** <br><br>
+* Go to gym every week starting from today:<br>
+**`add Go to gym s/today f/weekly`** <br><br>
 * Buy plane tickets to Hong Kong urgently:<br>
 **`a Buy plane tickets to Hong Kong p/3`** <br><br>
 * Buy a table by 03/02/2017 13:00:<br>
@@ -179,7 +195,7 @@ _**Edits a particular task by <u>specifying its index</u> and <u> new informatio
 
 #### Format:
 
-**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME]...`**
+**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [f/NEWFREQUENCY] [t/NEWTAGNAME]...`**
 
 <br>
 
@@ -203,11 +219,39 @@ You can now edit the task in several ways:<br>
 **`edit 1 d/05/07/2017`**<br><br>
 * Remove a task's tag:<br>
 **`edit 1 d/05/07/2017`**<br>
+* Remove a task's recurring status / frequency:<br>
+**`edit 2 f/`**<br>
+
+<br>
+
+### 3.3 Selecting a task: `select`
+---
+_**Marks the status of task at a specified index.**_<br>
+
+#### Format:
+
+**`select INDEX [INDEX]...`**
+
+<br>
+
+> - `INDEX` refers to the index number of the tasks shown in the most recent listing.<br><br>
+> - From the list of uncompleted tasks (by typing `list`), when a task is selected, the status column will show a hammer icon (indicating that the task is completing in progress.<br><br>
+> - From the list of uncompleted tasks (by typing `list`), you can remove the hammer icon by typing `select INDEX [INDEX]...`.<br><br>
+> - From the list of completed tasks (by typing `done`), you cannot select a task to set its status because the status column shows a tick icon (indicating that the task is completed) by default.<br><br>
+
+<br>
+
+#### Example:
+
+* Select the task at `INDEX` 1 as completing in progress:<br>
+**`select 1`** <br>
+* Selects the task at indexes 3, 5 and 6  as completing in progress:
+**`select 3 5 6`** <br>
 
 <br>
 
 
-### 3.3 Marking a task as done: `done / d`
+### 3.4 Marking a task as done: `done / d`
 ---
 _**Marks the task at a specified index as done.**_<br>
 
@@ -233,7 +277,7 @@ _**Marks the task at a specified index as done.**_<br>
 <br>
 
 
-### 3.4 Deleting a task: `kill / k`
+### 3.5 Deleting a task: `kill / k`
 ---
 _**Marks the task at a specified index as deleted.**_<br>
 
@@ -259,7 +303,7 @@ _**Marks the task at a specified index as deleted.**_<br>
 <br>
 
 
-### 3.5 Sorting a list of tasks: `sort / s`
+### 3.6 Sorting a list of tasks: `sort / s`
 ---
 _**Sorts the list of tasks by the specified field according to the specified ordering.**_ <br>
 
@@ -307,13 +351,13 @@ Figure 4 illustrates the screenshots <u>before</u> and <u>after</u> the **`sort`
 <br>
 
 
-### 3.6 Finding tasks: `find / f`
+### 3.7 Finding tasks: `find / f`
 ---
 _**Finds tasks whose information contains any of the given keywords specified by its prefix.**_<br>
 
 #### Format:
 
-**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [f/RECUR] [d/DUEDATE] [t/TAGNAME...]`**
+**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [f/FREQUENCY] [d/DUEDATE] [t/TAGNAME...]`**
 
 <br>
 
@@ -348,7 +392,7 @@ _**Finds tasks whose information contains any of the given keywords specified by
 <br>
 
 
-### 3.7 Listing all tasks: `list / l`
+### 3.8 Listing all tasks: `list / l`
 ---
 _**Lists all the tasks in ezDo.**_<br>
 
@@ -359,7 +403,7 @@ _**Lists all the tasks in ezDo.**_<br>
 <br>
 
 
-### 3.8 Reverting the last action: `undo / u`
+### 3.9 Reverting the last action: `undo / u`
 ---
 _**Reverts the last command.**_<br>
 
@@ -381,7 +425,7 @@ Revert the task **`buy milk`** that was just deleted by typing **`undo`**
 <br>
 
 
-### 3.9 Redoing the last undone action: `redo / r`
+### 3.10 Redoing the last undone action: `redo / r`
 ---
 _**Redoes the last undone command.**_<br>
 
@@ -403,7 +447,7 @@ Redo the last undone deletion of the task **`buy milk`** i.e. delete it again, b
 <br>
 
 
-### 3.10 Clearing all entries: `clear / c`
+### 3.11 Clearing all entries: `clear / c`
 ---
 _**Clears all entries from ezDo.**_<br>
 
@@ -414,7 +458,7 @@ _**Clears all entries from ezDo.**_<br>
 <br>
 
 
-### 3.11 Moving the save file: `save`
+### 3.12 Moving the save file: `save`
 ---
 _**Moves the save file of ezDo to a specified directory.**_<br>
 
@@ -435,7 +479,7 @@ _**Moves the save file of ezDo to a specified directory.**_<br>
 
 <br>
 
-### 3.12 Aliasing a command: `alias`
+### 3.13 Aliasing a command: `alias`
 ---
 _**Maps a command to the shortcut specified.**_<br>
 
@@ -463,7 +507,7 @@ Now all previously added aliases will be removed.
 <br>
 
 
-### 3.13 Exiting the program: `quit / q`
+### 3.14 Exiting the program: `quit / q`
 ---
 _**Exits the program.**_<br>
 
@@ -478,7 +522,7 @@ _**Exits the program.**_<br>
 <br>
 
 
-### 3.14 Viewing help: `help / h`
+### 3.15 Viewing help: `help / h`
 ---
 _**Brings up the help guide in a separate window.**_<br>
 
@@ -504,28 +548,30 @@ For your convenience, the parameters for every command available in ezDo are sum
 
 |Command|Parameters                                               |
 |:-----:|---------------------------------------------------------|
-|[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**             |
+|[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [f/FREQUENCY] [t/TAGNAME...]`**             |
 ||**`add Buy fruits p/1 s/tomorrow`**             |
-|[edit / e](#32-editing-a-task-edit--e)         |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [t/NEWTAGNAME...]`**            |
+|[edit / e](#32-editing-a-task-edit--e)         |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [f/FREQUENCY] [t/NEWTAGNAME...]`**            |
 ||**`edit 1 p/2 s/next week`**             |
-|[done / d](#33-marking-a-task-as-done-done--d)  |**`done INDEX [INDEX]...`**    |
+|[select](#33-selecting-a-task-select)  |**`select INDEX [INDEX]...`**    |
+||**`select 1 4 5`**             |
+|[done / d](#34-marking-a-task-as-done-done--d)  |**`done INDEX [INDEX]...`**    |
 ||**`done 2 6 7`**             |
-|[kill / k](#34-deleting-a-task-kill--k)        |**`kill INDEX [INDEX]...`**          |
+|[kill / k](#35-deleting-a-task-kill--k)        |**`kill INDEX [INDEX]...`**          |
 ||**`kill 4 3`**             |
-|[sort / s](#35-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
+|[sort / s](#36-sorting-a-list-of-tasks-sort--s) |**`sort FIELD [ORDER]`** |
 ||**`sort n d`**             |
-|[find / f](#36-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [t/TAGNAME...]`**      |
+|[find / f](#37-finding-tasks-find--f)           |**`find [KEYWORD] [MORE_KEYWORDS] [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [f/FREQUENCY] [t/TAGNAME...]`**      |
 ||**`find math t/homework d/before sunday`**             |
-|[save](#311-moving-the-save-file-save)      |**`save DIRECTORY`**    |
+|[save](#312-moving-the-save-file-save)      |**`save DIRECTORY`**    |
 ||**`save C:/Dropbox`**             |
-|[alias](#312-aliasing-a-command-alias)      |**`alias COMMAND SHORTCUT`**    |
+|[alias](#313-aliasing-a-command-alias)      |**`alias COMMAND SHORTCUT`**    |
 ||**`alias quit kaboom`**             |
-|[list / l](#37-listing-all-tasks-list--l)       |**`list`**         |
-|[undo / u](#38-reverting-the-last-action-undo--u) |**`undo`** |
-|[redo / r](#39-redoing-the-last-undone-action-redo--r)|**`redo`**|
-|[clear / c](#310-clearing-all-entries-clear--c)  |**`clear`**       |
-|[quit / q](#313-exiting-the-program-quit--q)    |**`quit`**              |
-|[help / h](#314-viewing-help-help--h)           |**`help`**    |
+|[list / l](#38-listing-all-tasks-list--l)       |**`list`**         |
+|[undo / u](#39-reverting-the-last-action-undo--u) |**`undo`** |
+|[redo / r](#310-redoing-the-last-undone-action-redo--r)|**`redo`**|
+|[clear / c](#311-clearing-all-entries-clear--c)  |**`clear`**       |
+|[quit / q](#314-exiting-the-program-quit--q)    |**`quit`**              |
+|[help / h](#315-viewing-help-help--h)           |**`help`**    |
 
 <h5 align="center">Table 3: Command Summary</h5>
 
