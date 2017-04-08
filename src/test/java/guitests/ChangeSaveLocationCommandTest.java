@@ -10,10 +10,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.ChangeSaveLocationCommand;
-import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.storage.XmlTaskManagerStorage;
-import seedu.taskmanager.testutil.TestTask;
-import seedu.taskmanager.testutil.TestUtil;
 
 public class ChangeSaveLocationCommandTest extends TaskManagerGuiTest {
 
