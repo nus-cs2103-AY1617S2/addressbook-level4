@@ -1,23 +1,21 @@
-package seedu.watodo.model.person;
+package seedu.watodo.model.task;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.watodo.model.task.Description;
-
-public class NameTest {
+public class DescriptionTest {
 
     @Test
-    public void isValidName() {
-        // invalid name
+    public void isValidDescription() {
+        // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
-        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
 
-        // valid name
+        // valid description
+        assertTrue(Description.isValidDescription("^!&((^<^>%?&<&")); // only non-alphanumeric characters
+        assertTrue(Description.isValidDescription("peter*")); // contains non-alphanumeric characters
         assertTrue(Description.isValidDescription("peter jack")); // alphabets only
         assertTrue(Description.isValidDescription("12345")); // numbers only
         assertTrue(Description.isValidDescription("peter the 2nd")); // alphanumeric characters

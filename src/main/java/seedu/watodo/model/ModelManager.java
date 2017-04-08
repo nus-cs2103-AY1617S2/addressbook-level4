@@ -141,6 +141,10 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(importantTasks);
     }
 
+    /**
+     * Searches for tasks with the tags that mark these tasks as important and
+     * adds them to the ImportantTaskList
+     */
     private void updateImportantTaskList() {
         Set<String> keywords = new HashSet<String>();
         keywords.add("important");
@@ -152,6 +156,7 @@ public class ModelManager extends ComponentManager implements Model {
         keywords.add("serious");
         importantTasks.setPredicate(new PredicateExpression(new TagQualifier(keywords))::satisfies);
     }
+    //@@author
 
     //========== Inner classes/interfaces used for filtering =================================================
 
@@ -365,6 +370,7 @@ public class ModelManager extends ComponentManager implements Model {
         case "mark":
         case "unmark":
             commandHistory.push(command);
+            break;
         default:
             break;
         }

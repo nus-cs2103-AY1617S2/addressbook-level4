@@ -60,12 +60,12 @@ public class ParserUtil {
     }
 
     /**
-    * Splits a preamble string into ordered fields.
+    * Splits a string into ordered fields.
     * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
     *         the input, {@code Optional.empty()} otherwise.
     */
-    public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
+    public static List<Optional<String>> splitArgs(String args, int numFields) {
+        return Arrays.stream(Arrays.copyOf(args.split("\\s+", numFields), numFields))
                 .map(Optional::ofNullable)
                 .collect(Collectors.toList());
     }
