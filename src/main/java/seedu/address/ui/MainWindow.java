@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -51,6 +52,7 @@ import seedu.address.ui.util.CommandTextFieldValidator;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
+
     private final Logger logger = LogsCenter.getLogger(MainWindow.class);
 
     private static final String ICON = "/images/address_book_32.png";
@@ -103,6 +105,9 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane windowCentre;
 
     CommandTextFieldValidator validator;
+
+    /** Amount that is scrolled using the down and up arrow keys */
+    private static final double SCROLL_AMOUNT = 0.05;
 
     // @@author A0144315N
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
@@ -164,34 +169,45 @@ public class MainWindow extends UiPart<Region> {
         commandTextField.getValidators().add(validator);
     }
 
-    // @@author
+    // @@author A0139388M
+    /** Bind key combinations to scene */
+    private void bindKeysToScene() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(final KeyEvent keyEvent) {
+                setHotKeys(keyEvent);
+                setScrollingKeys(keyEvent);
+            }
+        });
+    }
+
     /** Set hotkeys for today and future tasklists */
-    private void setHotKeys() {
+    private void setHotKeys(KeyEvent keyEvent) {
         KeyCodeCombination todayKey = new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_ANY);
         KeyCodeCombination futureKey = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.CONTROL_ANY);
         TitledPane todayPanel = taskListPanel.getTodayTaskListPanel();
         TitledPane futurePanel = taskListPanel.getFutureTaskListPanel();
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(final KeyEvent keyEvent) {
-                if (todayKey.match(keyEvent)) {
-                    todayPanel.setExpanded(!(todayPanel.isExpanded()));
-                } else if (futureKey.match(keyEvent)) {
-                    futurePanel.setExpanded(!(futurePanel.isExpanded()));
-                }
-            }
-        });
+        if (todayKey.match(keyEvent)) {
+            todayPanel.setExpanded(!(todayPanel.isExpanded()));
+        } else if (futureKey.match(keyEvent)) {
+            futurePanel.setExpanded(!(futurePanel.isExpanded()));
+        }
     }
+
+    /** Set scrolling using up and down arrow keys */
+    private void setScrollingKeys(KeyEvent keyEvent) {
+        ScrollPane scrollPane = taskListPanel.getScrollPane();
+        if (keyEvent.getCode() == KeyCode.DOWN) {
+            scrollPane.setVvalue(scrollPane.getVvalue() + SCROLL_AMOUNT);
+        } else if (keyEvent.getCode() == KeyCode.UP) {
+            scrollPane.setVvalue(scrollPane.getVvalue() - SCROLL_AMOUNT);
+        }
+    }
+    // @@author
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    /**
-     * Sets hotkeys for tasklists to expand and minimize.
-     */
-    private void setHotKeyForTaskLists(TitledPane panel, KeyCombination k) {
     }
 
     // @@author A0144315N
@@ -208,7 +224,7 @@ public class MainWindow extends UiPart<Region> {
         new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
 
-        setHotKeys();
+        bindKeysToScene();
     }
 
     /**
