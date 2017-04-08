@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import typetask.commons.core.Messages;
 import typetask.commons.exceptions.IllegalValueException;
 import typetask.logic.commands.AddCommand;
@@ -13,7 +13,7 @@ import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
 import typetask.testutil.TestUtil;
 //@@author A0139926R
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void add() {
@@ -21,12 +21,12 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.hoon;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
         taskToAdd = td.ida;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, taskToAdd);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
 
         //add to empty list
@@ -88,8 +88,8 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask deadlineTask = new TaskBuilder().withName("deadline")
                 .withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
                 .withCompleted(false).withPriority("Low").build();
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, deadlineTask);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
     @Test
     public void addDeadlineTaskwithDateWithTime_success() throws IllegalValueException {
@@ -98,8 +98,8 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask deadlineTask = new TaskBuilder().withName("deadline")
                 .withDate("").withEndDate("Sun Oct 10 1993 16:00:00")
                 .withCompleted(false).withPriority("Low").build();
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, deadlineTask);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
     @Test
     public void addEventTask_success() throws IllegalValueException {
@@ -108,19 +108,19 @@ public class AddCommandTest extends AddressBookGuiTest {
         TestTask deadlineTask = new TaskBuilder().withName("event")
                 .withDate("Sun Oct 10 1993 13:00:00").withEndDate("Sun Oct 10 1993 16:00:00")
                 .withCompleted(false).withPriority("Low").build();
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, deadlineTask);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, deadlineTask);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
-    private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        assertMatching(taskToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

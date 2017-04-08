@@ -10,7 +10,7 @@ import typetask.logic.commands.ListPriorityCommand;
 import typetask.logic.commands.ListTodayCommand;
 
 //@@author A0144902L
-public class ListCommandTest extends AddressBookGuiTest {
+public class ListCommandTest extends TypeTaskGuiTest {
 
     //Checks if List shown has the same output as expected
     @Test

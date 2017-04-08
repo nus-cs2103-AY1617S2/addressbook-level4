@@ -6,7 +6,7 @@ import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 

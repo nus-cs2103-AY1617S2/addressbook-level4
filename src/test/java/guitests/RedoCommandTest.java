@@ -8,7 +8,7 @@ import typetask.logic.commands.RedoCommand;
 import typetask.testutil.TestTask;
 
 //@@author A0139926R
-public class RedoCommandTest extends AddressBookGuiTest {
+public class RedoCommandTest extends TypeTaskGuiTest {
 
     private static final String CLEAR_COMMAND = "clear";
     private static final String UNDO_COMMAND = "undo";
@@ -39,11 +39,11 @@ public class RedoCommandTest extends AddressBookGuiTest {
     private void assertRedoSuccess(TestTask[] expectedList) {
         commandBox.runCommand(REDO_COMMAND);
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
     private void assertRedoShortCommandSuccess(TestTask[] expectedList) {
         commandBox.runCommand(REDO_SHORT_COMMAND);
         assertResultMessage(RedoCommand.MESSAGE_SUCCESS);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

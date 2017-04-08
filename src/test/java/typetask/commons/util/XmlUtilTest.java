@@ -87,7 +87,7 @@ public class XmlUtilTest {
 
         TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
         dataToWrite = new XmlSerializableTaskManager(
-                builder.withTask(TestUtil.generateSamplePersonData().get(0)).build());
+                builder.withTask(TestUtil.generateSampleTaskData().get(0)).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
