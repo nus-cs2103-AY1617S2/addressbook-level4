@@ -6,6 +6,7 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
+//@@author A0147980U
 /**
  * Adds a task to the to-do list.
  */
@@ -20,7 +21,7 @@ public class AddCommand extends Command {
                     + "\\under school ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the to-do list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list";
     public static final String MESSAGE_NO_DESC = "Tasks must have description";
 
     private final Task newTask;
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, newTask), true);
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
 }

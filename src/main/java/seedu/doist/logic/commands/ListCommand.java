@@ -13,7 +13,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.TaskDate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all tasks in the todo list to the user.
  */
 public class ListCommand extends Command {
 
@@ -53,7 +53,7 @@ public class ListCommand extends Command {
                 type = TaskType.valueOf(processedPreamble);
             } catch (IllegalArgumentException e) {
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                                MESSAGE_USAGE));
+                                                              MESSAGE_USAGE));
             }
         } else {
             listDefault();
@@ -80,8 +80,14 @@ public class ListCommand extends Command {
     }
 
     //@@author A0140887W
+    /** Trims trailing whitespace, removes leading whitespace, replaces in-between whitespaces with one underscore
+     * and converts to uppercase letters. This is so that it can be converted to the TaskType enum.
+     *
+     * @param preamble the pre-processed preamble of the list command
+     * @return the processed preamble
+     * */
     private String processListPreamble(String preamble) {
-     // remove all trailing spaces, new line characters etc
+        // remove all trailing spaces, new line characters etc
         String processedPreamble = preamble.trim();
 
         // remove all leading spaces, new line characters etc

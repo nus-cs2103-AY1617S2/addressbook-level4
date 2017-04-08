@@ -15,7 +15,7 @@ import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.model.task.ReadOnlyTask;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);

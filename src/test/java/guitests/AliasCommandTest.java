@@ -10,8 +10,7 @@ public class AliasCommandTest extends DoistGUITest {
 
     @Test
     public void testInputAliasSuccess() {
-        commandBox.runCommand("alias addeaais \\for add");
-        assertResultMessage(String.format(AliasCommand.MESSAGE_SUCCESS, "addeaais", "add"));
+        assertAliasSuccessfullyAdded("addalias", "add");
     }
 
     @Test
@@ -38,5 +37,16 @@ public class AliasCommandTest extends DoistGUITest {
     public void testDefaultCommandWordNotExist() {
         commandBox.runCommand("alias newAlias \\for notExistCommand");
         assertResultMessage(String.format(AliasCommand.MESSAGE_COMMAND_WORD_NOT_EXIST, "notExistCommand"));
+    }
+
+    private void assertViewAliasContains(String alias) {
+        commandBox.runCommand("view_alias");
+        assert resultDisplay.getText().contains(alias);
+    }
+
+    private void assertAliasSuccessfullyAdded(String alias, String commandWord) {
+        commandBox.runCommand("alias " + alias + " \\for " + commandWord);
+        assertResultMessage(String.format(AliasCommand.MESSAGE_SUCCESS, alias, commandWord));
+        assertViewAliasContains(alias);
     }
 }

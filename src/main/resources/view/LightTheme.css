@@ -258,6 +258,11 @@
     -fx-padding: 8 1 8 1;
 }
 
+.list-view .scroll-bar:horizontal {
+    -fx-opacity: 1;
+    -fx-padding:-2;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 0 4;
@@ -310,7 +315,7 @@
     -fx-border-width: 0 0 0 0;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -326,4 +331,12 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.error {
+    -fx-background-color: #ffb3b3;
+}
+
+.white {
+    -fx-background-color: #a9a9a9 , white , white;
 }

@@ -119,14 +119,29 @@ public class TaskDate {
         }
     }
 
+    //@@author A0140887W
+    // Workaround has been done because equals method does not work for type Date
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TaskDate // instanceof handles nulls
-                && this.startDate == ((TaskDate) other).startDate // state check
-                && this.endDate == ((TaskDate) other).endDate);
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof TaskDate)) {
+            return false;
+        }
+        TaskDate otherDate = (TaskDate) other;
+        if (this.startDate == otherDate.startDate && this.endDate == otherDate.endDate) {
+            return true;
+        } else if (this.startDate == null || otherDate.startDate == null
+                || this.endDate == null || otherDate.endDate == null) {
+            return false;
+        } else {
+            return (this.startDate.toString().equals(otherDate.startDate.toString())
+                && this.endDate.toString().equals(otherDate.endDate.toString()));
+        }
     }
 
+    //@@author
     @Override
     public int hashCode() {
         return Objects.hash(startDate, endDate);

@@ -178,13 +178,6 @@ public class TodoList implements ReadOnlyTodoList {
         return tasks.changeFinishStatus(taskToFinish, isToFinish);
     }
 
-    /**
-     * Returns the index of a task in the internal list, or -1 if no such task
-     */
-    public int getTaskIndex(ReadOnlyTask readOnlyTask) {
-        return tasks.getTaskIndex(readOnlyTask);
-    }
-
     //@@author A0147620L
     public ArrayList<String> getTaskNames() {
         ArrayList<String> names = new ArrayList<>();

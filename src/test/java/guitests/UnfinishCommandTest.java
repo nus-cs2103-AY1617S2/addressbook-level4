@@ -50,7 +50,7 @@ public class UnfinishCommandTest extends DoistGUITest {
     /**
      * Runs the finish command to finish the task at specified index and confirms the result is correct.
      * @param targetIndexOneIndexed e.g. index 1 to finish the first task in the list,
-     * @param currentList A copy of the current list of persons (before deletion).
+     * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertFinishSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask[] expectedTasks = currentList.clone();
@@ -64,7 +64,7 @@ public class UnfinishCommandTest extends DoistGUITest {
 
         //confirm that UI is showing normal
         TaskCardHandle finishedCard = taskListPanel.getTaskCardHandle(taskToUnfinish);
-        assertTrue(finishedCard.isStyleInStyleClass("normal"));
+        assertTrue(finishedCard.isStyleInStyleClass("normal") || finishedCard.isStyleInStyleClass("overdue"));
 
         //confirm the result message is correct
         ArrayList<TestTask> tasksToUnfinish = new ArrayList<TestTask>();

@@ -39,9 +39,9 @@ public class EditCommand extends Command {
 
     /**
      * @param filteredTaskListIndex
-     *            the index of the person in the filtered person list to edit
+     *            the index of the task in the filtered task list to edit
      * @param editTaskDescriptor
-     *            details to edit the person with
+     *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
@@ -126,10 +126,12 @@ public class EditCommand extends Command {
             this.desc = desc;
         }
 
+        //@@author A0147980U
         public void setPriority(Optional<Priority> priority) {
             assert priority != null;
             this.priority = priority;
         }
+        //@@author
 
         public void setDates(Optional<TaskDate> dates) {
             assert dates != null;
@@ -140,13 +142,16 @@ public class EditCommand extends Command {
             return desc;
         }
 
+        //@@author A0140887W
         public Optional<FinishedStatus> getFinishStatus() {
             return finishStatus;
         }
 
+        //@@author A0147980U
         public Optional<Priority> getPriority() {
             return priority;
         }
+        //@@author
 
         public Optional<TaskDate> getDates() {
             return dates;

@@ -26,15 +26,13 @@ public class CliSyntax {
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
+    //@@author A0147980U
     public static final Prefix[] ALL_PREFICES = {
         PREFIX_FROM,
         PREFIX_TO,
-        PREFIX_REMIND,
-        PREFIX_EVERY,
         PREFIX_AS,
         PREFIX_UNDER,
         PREFIX_BY,
-        PREFIX_DESCRIPTION,
         PREFIX_IN,
         PREFIX_FOR
     };

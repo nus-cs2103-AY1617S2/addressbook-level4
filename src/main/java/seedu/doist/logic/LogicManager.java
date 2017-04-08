@@ -12,6 +12,8 @@ import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.logic.parser.Parser;
+import seedu.doist.model.AliasListMapModel;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.storage.Storage;
@@ -23,18 +25,22 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
+    private final AliasListMapModel aliasModel;
+    private final ConfigModel configModel;
     private final Parser parser;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, AliasListMapModel aliasModel, ConfigModel configModel, Storage storage) {
         this.model = model;
-        this.parser = new Parser(model);
+        this.aliasModel = aliasModel;
+        this.configModel = configModel;
+        this.parser = new Parser(aliasModel);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
-        command.setData(model);
+        command.setData(model, aliasModel, configModel);
 
         CommandResult result = command.execute();
         if (result.isMutating) {
@@ -51,9 +57,9 @@ public class LogicManager extends ComponentManager implements Logic {
     //@@author A0147980U
     public List<String> getAllCommandWords() {
         ArrayList<String> allCommandWords = new ArrayList<String>();
-        Set<String> allDefaultCommandWords = model.getDefaultCommandWordSet();
+        Set<String> allDefaultCommandWords = aliasModel.getDefaultCommandWordSet();
         for (String defaultCommandWords : allDefaultCommandWords) {
-            allCommandWords.addAll(model.getValidCommandList(defaultCommandWords));
+            allCommandWords.addAll(aliasModel.getValidCommandList(defaultCommandWords));
         }
         return allCommandWords;
     }

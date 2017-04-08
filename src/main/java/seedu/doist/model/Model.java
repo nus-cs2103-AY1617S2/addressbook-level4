@@ -1,6 +1,5 @@
 package seedu.doist.model;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -85,32 +84,6 @@ public interface Model {
 
     //========== handle undo and redo operation =================================================
     void saveCurrentToHistory();
-    void recoverPreviousTodoList();
-    void recoverNextTodoList();
-
-    ///// Alias List Map
-    /** Returns the AliasListMap */
-    ReadOnlyAliasListMap getAliasListMap();
-
-    /** Sets an alias in the AliasListMap */
-    void setAlias(String alias, String commandWord);
-
-    /** Get the alias list of a defaultCommandWord */
-    List<String> getAliasList(String defaultCommandWord);
-
-    /** Get the valid command list of a defaultCommandWord */
-    List<String> getValidCommandList(String defaultCommandWord);
-
-    /** Get the set of default command words */
-    Set<String> getDefaultCommandWordSet();
-
-    /** Resets alias list to default */
-    void resetToDefaultCommandWords();
-
-    /** Change absolute path in config */
-    void changeConfigAbsolutePath(Path path);
-
-    /** Remove the alias if it exists, otherwise nothing happens */
-    void removeAlias(String alias);
-
+    boolean recoverPreviousTodoList();
+    boolean recoverNextTodoList();
 }

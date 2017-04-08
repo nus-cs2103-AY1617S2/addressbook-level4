@@ -1,7 +1,5 @@
 package seedu.doist.model;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,16 +8,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.doist.commons.core.ComponentManager;
-import seedu.doist.commons.core.Config;
 import seedu.doist.commons.core.LogsCenter;
 import seedu.doist.commons.core.UnmodifiableObservableList;
-import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
-import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.util.CollectionUtil;
-import seedu.doist.commons.util.ConfigUtil;
 import seedu.doist.commons.util.History;
-import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.commands.ListCommand.TaskType;
 import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.model.tag.Tag;
@@ -46,9 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TodoList todoList;
-    private final Config config;
     private final History<TodoList> todoListHistory = new History<TodoList>();
-    private final AliasListMap aliasListMap;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final double threshold = 0.8;
 
@@ -56,84 +47,25 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given to-do list and userPrefs.
      */
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
-                          Config config, boolean isTest) {
+    public ModelManager(ReadOnlyTodoList todoList, UserPrefs userPrefs) {
         super();
-        assert !CollectionUtil.isAnyNull(todoList, aliasListMap, userPrefs, config);
+        assert !CollectionUtil.isAnyNull(todoList, userPrefs);
 
-        logger.fine("Initializing with To-do List: " + todoList + " aliasListMap: " + aliasListMap
-                + " and user prefs " + userPrefs + " and config: " + config);
+        logger.fine("Initializing with To-do List: " + todoList + " and user prefs " + userPrefs);
 
         this.todoList = new TodoList(todoList);
-        this.aliasListMap = new AliasListMap(aliasListMap);
-        this.config = config;
         filteredTasks = new FilteredList<>(this.todoList.getTaskList());
 
-        //if (!isTest) {
         updateFilteredListToShowDefault();
         sortTasksByDefault();
-        //}
         saveCurrentToHistory();
     }
 
     public ModelManager() {
-        this(new TodoList(), new AliasListMap(), new UserPrefs(), new Config(), false);
+        this(new TodoList(), new UserPrefs());
     }
 
-    public ModelManager(ReadOnlyTodoList todoList, ReadOnlyAliasListMap aliasListMap, UserPrefs userPrefs,
-                          Config config) {
-        this(todoList, aliasListMap, userPrefs, config, false);
-    }
-
-
-
-    //=========== AliasListMap =============================================================
-    /** Raises an event to indicate the alias list model has changed */
-
-    @Override
-    public ReadOnlyAliasListMap getAliasListMap() {
-        return aliasListMap;
-    }
-
-    @Override
-    public void setAlias(String alias, String commandWord) {
-        aliasListMap.setAlias(alias, commandWord);
-        indicateAliasListMapChanged();
-    }
-
-    @Override
-    public void removeAlias(String alias) {
-        aliasListMap.removeAlias(alias);
-        indicateAliasListMapChanged();
-    }
-
-    @Override
-    public List<String> getAliasList(String defaultCommandWord) {
-        return aliasListMap.getAliasList(defaultCommandWord);
-    }
-
-    @Override
-    public List<String> getValidCommandList(String defaultCommandWord) {
-        List<String> list = new ArrayList<String>(aliasListMap.getAliasList(defaultCommandWord));
-        list.add(defaultCommandWord);
-        return list;
-    }
-
-    @Override
-    public Set<String> getDefaultCommandWordSet() {
-        return aliasListMap.getDefaultCommandWordSet();
-    }
-
-    @Override
-    public void resetToDefaultCommandWords() {
-        aliasListMap.setDefaultAliasListMapping();
-    }
-
-    private void indicateAliasListMapChanged() {
-        raise(new AliasListMapChangedEvent(aliasListMap));
-    }
-
-    //@@author
+    //@@author A0147980U
     //=========== TodoList =============================================================
 
     @Override
@@ -168,33 +100,31 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (TaskAlreadyUnfinishedException e) {
             assert false : "finishTask should not try to unfinish tasks!";
         }
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(target);
+        return getFilteredTaskList().indexOf(target);
     }
 
     @Override
     public int unfinishTask(ReadOnlyTask target) throws TaskNotFoundException,
         TaskAlreadyUnfinishedException {
+        assert target != null;
         try {
             todoList.changeTaskFinishStatus(target, false);
         } catch (TaskAlreadyFinishedException e) {
             assert false : "unfinishTask should not try to finish tasks!";
         }
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(target);
+        return getFilteredTaskList().indexOf(target);
     }
 
     @Override
     public synchronized int addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         todoList.addTask(task);
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(task);
+        return getFilteredTaskList().indexOf(task);
     }
 
     @Override
@@ -204,10 +134,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         int todoListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         todoList.updateTask(todoListIndex, editedTask);
-        updateFilteredListToShowDefault();
         sortTasksByDefault();
         indicateTodoListChanged();
-        return todoList.getTaskIndex(editedTask);
+        return getFilteredTaskList().indexOf(editedTask);
     }
 
     @Override
@@ -347,7 +276,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-
+    //@@author A0147980U
     private class TagQualifier implements Qualifier {
         private UniqueTagList tags;
 
@@ -366,7 +295,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author A0147980U
     private class TaskTypeQualifier implements Qualifier {
         private TaskType type;
 
@@ -403,8 +331,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    //@@author
-
+    //@@author A0147980U
     //========== handle undo and re-do operation =================================================
     public void saveCurrentToHistory() {
         todoListHistory.forgetStatesAfter();
@@ -413,42 +340,29 @@ public class ModelManager extends ComponentManager implements Model {
         todoListHistory.addToHistory(toSave);
     }
 
-    public void recoverPreviousTodoList() {
+    public boolean recoverPreviousTodoList() {
         boolean isAtMostRecentState = todoListHistory.isAtMostRecentState();
         TodoList previousTodoList = todoListHistory.getPreviousState();
         if (previousTodoList != null) {
             todoList.resetData(previousTodoList);
+        } else {
+            return false;
         }
         if (isAtMostRecentState) {
             recoverPreviousTodoList();
         }
         indicateTodoListChanged();
+        return true;
     }
 
-    public void recoverNextTodoList() {
+    public boolean recoverNextTodoList() {
         TodoList nextTodoList = todoListHistory.getNextState();
         if (nextTodoList != null) {
             todoList.resetData(nextTodoList);
+        } else {
+            return false;
         }
         indicateTodoListChanged();
-    }
-
-  //@@author A0140887W
-  //========== change absolute storage path =================================================
-    @Override
-    public void changeConfigAbsolutePath(Path path) {
-        config.setAbsoluteStoragePath(path.toString());
-        try {
-            ConfigUtil.saveConfig(config, ConfigUtil.getConfigPath());
-            indicateAbsoluteStoragePathChanged();
-        } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
-        }
-    }
-
-    /** Raises an event to indicate the absolute storage path has changed */
-    private void indicateAbsoluteStoragePathChanged() {
-        raise(new AbsoluteStoragePathChangedEvent(config.getAbsoluteTodoListFilePath(),
-                config.getAbsoluteAliasListMapFilePath(), config.getAbsoluteUserPrefsFilePath()));
+        return true;
     }
 }

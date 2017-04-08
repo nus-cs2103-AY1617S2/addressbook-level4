@@ -5,11 +5,13 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 
 //@@author A0140887W
@@ -24,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
     public static final String FINISHED_STYLE_CLASS = "finished";
 
     @FXML
-    private HBox cardPane;
+    private BorderPane cardPane;
     @FXML
     private GridPane grid;
     @FXML
@@ -45,6 +47,10 @@ public class TaskCard extends UiPart<Region> {
     private Label endTime;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView star1;
+    @FXML
+    private ImageView star2;
 
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
@@ -77,6 +83,16 @@ public class TaskCard extends UiPart<Region> {
             setStyleToFinished();
         } else {
             checkbox.setSelected(false);
+        }
+
+        //Importance
+        if (task.getPriority().getPriorityLevel().equals(Priority.PriorityLevel.NORMAL)) {
+            // Disable both stars
+            star1.setImage(null);
+            star2.setImage(null);
+        } else if (task.getPriority().getPriorityLevel().equals(Priority.PriorityLevel.IMPORTANT)) {
+            // Disable one star
+            star2.setImage(null);
         }
 
         // Tags

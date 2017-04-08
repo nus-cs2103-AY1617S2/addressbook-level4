@@ -7,6 +7,8 @@ import seedu.doist.commons.core.Messages;
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.SortCommand.SortType;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.AliasListMapModel;
+import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.task.ReadOnlyTask;
 
@@ -15,6 +17,8 @@ import seedu.doist.model.task.ReadOnlyTask;
  */
 public abstract class Command {
     protected Model model;
+    protected AliasListMapModel aliasModel;
+    protected ConfigModel configModel;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -46,13 +50,16 @@ public abstract class Command {
      */
     public abstract CommandResult execute() throws CommandException;
 
+    //@@author A0140887W
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    public void setData(Model model) {
+    public void setData(Model model, AliasListMapModel aliasModel, ConfigModel configModel) {
         this.model = model;
+        this.aliasModel = aliasModel;
+        this.configModel = configModel;
     }
 
     //@@author A0147980U
