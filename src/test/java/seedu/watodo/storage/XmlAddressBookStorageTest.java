@@ -39,7 +39,7 @@ public class XmlAddressBookStorageTest {
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
                 ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+                        : null;
     }
 
     @Test
@@ -49,7 +49,6 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
-
         thrown.expect(DataConversionException.class);
         readTaskList("NotXmlFormatAddressBook.xml");
 
