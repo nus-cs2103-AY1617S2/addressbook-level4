@@ -42,13 +42,15 @@ latest version should be v0.5.
 1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Installing](#21-installing). 
 2. The GUI should appear in a few seconds. Refer to the figure below to see how ToLuist should initially look like on your first launch.
    
-   <img src="images/Ui.png" width="600"/>
+   <img src="images/Ui.png" width="600">
+   **Figure 2.2**: Initial launch screen of ToLuist
 
 ### 2.3. Get used to the interface
 
 With some tasks added in, the interface of ToLuist may look as follows.
 
-   <img src="images/Ui-parts.png" width="600"/>
+   <img src="images/Ui-parts.png" width="600"/><br>
+    **Figure 2.3**: Different components in ToLuist's Ui
     
 At the very top of the app, the **App Title**, which include a cute app icon, will highlight that you are 
 using ToLuist.
@@ -105,13 +107,57 @@ All the features of the application can be accessed through the use of a keyboar
 > * Parameters can be in any order.
 > * Options with '/' allow either word to be used.
 
-### 3.1. Switch Display Task Window : `switch`
+### 3.1. Viewing help : `help`
 
-For when you want to view different subsets of the currently displayed list of tasks, to focus on more 
-relevant tasks. The displayed list of tasks can
- be a list of all current tasks in the app, or a list of tasks that satisfy some search keyword(s).
-.<br>
-View a different subset of the displayed task list.<br>
+If you are a new user of ToLuist, you may need assistance for inputting commands.<br>
+`help` shows you all the commands which are available in the system.<br>
+Format: `help [COMMAND]`
+
+
+> * The system will also prompt you to enter 'help' if you enter an incorrect command.
+> * If `help` followed by a command word is entered, detailed help for that command will be shown instead.
+
+Examples:
+
+* `help` <br>
+  Shows general help information.
+* `help add` <br>
+  Shows detailed help information for 'add' command.
+  
+### 3.2. Smart command suggestion :
+
+We understand that it may take time for you to remember all the different command formats. Our smart command 
+suggestion feature automatically suggests to you how you can complete your command, based on what 
+you already put in the command box.
+  
+For example, ToLuist suggest to you the command words `add` and `alias` when you type `a`.
+
+   <img src="images/smart-command-word.png" width="600">
+   **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed
+
+ToLuist also shows you the parameters available for a command type.
+
+   <img src="images/smart-command-parameter.png" width="600">
+   **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task
+
+If a command can have multiple options that follow one particular parameter, ToLuist shows you these too.
+
+   <img src="images/smart-command-different-options.png" width="600">
+   **Figure 3.2c**: `high` and `low` are suggested as options for task priority
+
+If only one suggestion is shown, you can press kbd>Tab</kbd> to automatically replace the last word of your 
+command with the suggestion. If there are multiple suggestions available, you can press <kbd>Tab</kbd> to 
+cycle through the list of suggestions, and press kbd>Enter</kbd> to select one of them.
+ 
+   <img src="images/smart-command-multiple-suggestions.png" width="600">
+   **Figure 3.2d**: Suggestions can be cycled through, with highlighting
+  
+
+### 3.3. Switching to a different tab : `switch`
+
+When using ToLuist, you may want to switch between different tabs to zoom in on the tasks most important to
+ you.<br>
+`switch` allows you to view a different subset of the currently displayed tasks.<br>
 Format: `switch WINDOWIDENTIFIER`
 
 > * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
@@ -127,27 +173,12 @@ Example:
 * You press <kbd>Ctrl</kbd> + <kbd>5</kbd> on the keyboard. <br>
   Switches the displayed view to 'All'.
 
-### 3.2. Viewing help : `help`
-
-For when you need assistance for inputting commands.<br>
-Shows commands which are in the system.<br>
-Format: `help [COMMAND]`
-
-> * The system will prompt you to enter 'help' if you enter an incorrect command.
-> * If a command is entered, detailed help for that command will be shown instead.
-
-Examples:
-
-* `help` <br>
-  Shows general help information.
-* `help add` <br>
-  Shows detailed help information for 'add' command.
 
 [comment]: # (@@author A0127545A)
-### 3.3. Adding a task: `add`
+### 3.4. Adding a task: `add`
 
-For when you have a task you need to remember.<br>
-Adds a task to the todo list.<br>
+You can start keeping track of your task by adding to ToLuist.<br>
+`add` allows you to add a task to the system.<br>
 Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
@@ -159,6 +190,7 @@ Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(da
     Standard times are parsed in as well. i.e. `0600h`, `8pm`, `noon`, `4:30 p.m.`<br>
     Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
     For more details, please visit http://natty.joestelmach.com/doc.jsp.
+> * ToLuist will auto scroll to the newly added task.
 
 Examples:
 
@@ -169,21 +201,11 @@ Examples:
 * `add Check Email /by today` <br>
   Adds a task called 'Check Email', and sets the deadline to be today's date.
 
-[comment]: # (@@author A0162011A)
-### 3.4. Viewing tasks
-
-For when you need to see your tasks.<br>
-View all tasks in the todo list.<br>
-Format: `list`
-> * A list of tasks will always be displayed.
-> * When starting the program, the list will show all tasks which are currently not completed.
-> * When performing `filter` operations, this list will be updated to show only the results searched for.
-
 [comment]: # (@@author A0127545A)
 ### 3.5. Updating a task : `update`
 
-For when you need to update or fix a previously entered task.<br>
-Updates an existing task in the todo list.<br>
+Sometimes, you may need to update or fix a previously entered task.<br>
+`update` allows you to update an existing task in the list.<br>
 Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
@@ -202,7 +224,9 @@ Examples:
 [comment]: # (@@author A0162011A)
 ### 3.6. Filter all tasks for a given keyword: `filter`
 
-Finds tasks whose names contain any of the given keywords.<br>
+As you list of tasks grows, you may find the need to filter your todo list to locate a particularly 
+important task.
+`filter` allows you to finds tasks whose names or tags contain any of the given keywords.<br>
 Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 
 > * The search is case insensitive. e.g `hans` will match `Hans`
@@ -214,6 +238,7 @@ Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 > * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans` will match `Hans Bo`
+> * Search terms that are used in the current search will pop up as suggestions in subsequent searches.
 
 Examples:
 
@@ -226,7 +251,9 @@ Examples:
 
 ### 3.7. Sort all tasks in a given order: `sort`
 
-Finds tasks whose names contain any of the given keywords.<br>
+You may feel the need to sort your tasks in some order, so that the tasks that require your immediate 
+attention stand out at the top.<br>
+`sort` allows you to re-order the task list according to a category you specify.<br>
 Format: `sort CATEGORY(priority/enddate/startdate/description/overdue/default)...`
 
 > * The category entered will be given higher preference for sorting.
@@ -246,8 +273,8 @@ Examples:
 [comment]: # (@@author A0127545A)
 ### 3.8. Deleting a task : `delete`
 
-For when your task is no longer necessary.<br>
-Deletes the specified task from the todo list.<br>
+Assuming you have been using ToLuist for a long while, you may want to remove some of your older tasks.<br>
+`delete` allows you to delete a task or multiple tasks from the todo list.<br>
 Format: `delete INDEX(ES)`
 
 > * Deletes the task at the specified `INDEX`. <br>
@@ -270,8 +297,9 @@ Examples:
 [comment]: # (@@author A0131125Y)
 ### 3.9. Complete or Make Incomplete a Task : `mark`
 
-For when you need to indicate that a task is finished or not.<br>
-Marks a task to be complete or incomplete. <br>
+After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
+a completed task as incomplete if you feel that it still needs more work.
+`mark` allow you to set the completion status for a task or multiple tasks.<br>
 Format: `mark [complete/incomplete] INDEX(ES)`
 
 > * Using complete as a parameter will mark the selected task(s) as complete.
@@ -296,8 +324,8 @@ Example:
 [comment]: # (@@author A0162011A)
 ### 3.10. Add a Tag to a Task : `tag`
 
-For when you want to differentiate your tasks by categories.<br>
-Adds a tag or multiple tags to an existing task. <br>
+You may want to differentiate your tasks by categories.<br>
+`tag` allows you to add a tag or multiple tags to an existing task. <br>
 Format: `tag INDEX TAG...`
 
 > * If the tag already exists, the command will notify you and do nothing.
@@ -309,10 +337,10 @@ Example:
 * `tag 2 work home` <br>
   Adds the tags 'work' and 'home' to task 2.
 
-### 3.10. Remove a Tag from a Task : `untag`
+### 3.11. Remove a Tag from a Task : `untag`
 
-For when you want to remove a category from a task.<br>
-Removes a tag or multiple tags from an existing task. <br>
+You may change your mind and decide to remove a category from a task.<br>
+`untag` allows you to remove a tag or multiple tags from an existing task. <br>
 Format: `untag INDEX TAG...`
 
 > * If the tag already does not exist, the command will notify you and do nothing.
@@ -324,33 +352,33 @@ Example:
 * `untag 2 work home` <br>
   Removes the tags 'work' and 'home' from task 2.
 
-### 3.11. Clearing all entries : `clear`
+### 3.12. Clearing all entries : `clear`
 
-For when you want to start from a clean slate.<br>
-Clears all entries from the todo list.<br>
+Occasionally, the stress may get to you, and you want to start from a clean slate.<br>
+`clear` allows you to clear all entries from the todo list.<br>
 Format: `clear`
 
 [comment]: # (@@author A0131125Y)
-### 3.12. Undo a command : `undo`
+### 3.13. Undo a command : `undo`
 
-For when you accidentally entered a wrong command.<br>
-Undoes previous commands by the user.<br>
+As human, we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
+the result of your command.<br>
+`undo` allows you to undo your previous command(s).<br>
 Format: `undo [NUMBER]`
 
-> * `Undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
+> * `undo` allows reverting of modifications to the tasks in the todo list. This means that commands like 
 `add`, `update`, `delete`, `clear`, `tag`, `untag` and `mark` which modifies the tasks can be reversed with
-> `undo`. If loading a different data file with `load` cause the current tasks to be changed, you can go back
-> to the previous task using `undo` too (Using `undo`, however, won't revert the change of data storage 
-path. It's not considered modifications to the task).
+> `undo`. If loading a different data file with `load` causes the current tasks to be changed, you can go back
+> to the previous list of tasks using `undo` too (Using `undo`, however, won't revert the change of data 
+storage path. It's not considered modifications to the task).
 > Changes that are not modifications to the tasks in the todo list cannot be reversed with `undo`. However, 
 > you can still easily revert their effects:
->   * Change of storage path location (due to `save` / `load` ) - You can change your storage path to the 
+>   * Changing of storage path location (with `save` / `load` ) - You can change your storage path to the 
 previous location with `save`.
->   * Setting of aliases (due to `alias`) - You can remove the alias with `unalias`.
->   * Removal of aliases (due to `unalias`) - You can set back the alias with `alias`.
+>   * Setting of aliases (with `alias`) - You can remove the alias with `unalias`.
+>   * Removing aliases (with `unalias`) - You can set back the alias with `alias`.
+>   * Re-ordering the list of tasks (with `sort`) - You can set back the previous sorting order with `sort`.
 >
-> * Note that commands that commands that do not modifies the content of the todo list cannot be undone with 
-> `undo`. E.g
 > * If a number is entered, undoes that amount of previous commands instead.
 > * You can also use key combination <kbd>Ctrl</kbd> + <kbd>Z</kbd> to quickly undo one time.
 
@@ -364,13 +392,13 @@ Examples:
   `undo 2`<br>
   Undo both commands.
 * `add Test`<br>
-  `Press <kbd>Ctrl</kbd> + <kbd>Z</kbd>` <br>
+  Press <kbd>Ctrl</kbd> + <kbd>Z</kbd> <br>
   Undo adding Test to the todo list.
 
-### 3.13. Redo a command : `redo`
+### 3.14. Redo a command : `redo`
 
-For when you accidentally undo a correct command.<br>
-Redo previously undone commands by the user.<br>
+After undoing a command, you want to re-apply it.<br>
+`redo` allows you to redo previously undone commands.<br>
 Format: `redo [NUMBER]`
 
 > * Similar to `undo`, `redo` will help you re-apply modifications to the tasks in the todo list that 
@@ -392,14 +420,14 @@ Examples:
   Redo `add Assignment`.
 * `add Test`<br>
   `undo`<br>
-  `Press <kbd>Ctrl</kbd> + <kbd>Y</kbd>` <br>
+  Press <kbd>Ctrl</kbd> + <kbd>Y</kbd> <br>
   Redo adding Test to the todo list.
 
 [comment]: # (@@author A0162011A)
-### 3.14. Viewing previous commands and accessing them : `history`
+### 3.15. Viewing previous commands and accessing them : `history`
 
-For when you want to check what you have previously entered.<br>
-Shows previous commands entered. <br>
+You may want to check what you have previously entered.<br>
+`history` shows you your previous commands entered in the current session. <br>
 Format: `history`
 
 > * Previous commands are listed in order from latest command to earlier command.
@@ -410,17 +438,21 @@ Examples:
   `history` <br>
   Shows `add Test` in the list.
 * `add Test` <br>
-  You press on the <kbd>up</kbd> arrow key. <br>
+  Press on the <kbd>up</kbd> arrow key. <br>
   Shows `add Test` in your input text field.
 
-### 3.15. Add alias for any phrase: `alias`
+### 3.16. Add alias for any phrase: `alias`
 
-For when you want a shortcut for entering a command.<br>
-Adds an alias for a phrase. <br>
+For long commands like `mark complete`, you may want to have a shortcut for it.<br>
+`alias` allows you to add an alias for a phrase. <br>
 Format: `alias ALIAS PHRASE`
 
-> * Once added, alias can be used instead of the phrase to perform operations.
-> * The phrase can be multiple words long.
+> * Once added, alias can be used instead of the phrase to perform operations. In subsequent commands, if 
+the first word is detected to an alias, the command will give the same result as if the command starts the 
+aliased phrase.
+> * The phrase can be multiple words long. It can be anything, not necessarily a command word.
+> * Parameter suggestion is also supported for commands that uses an alias. For example, if `a` is set as 
+an alias for `add`, the parameters for adding task are also suggested when `a a task` is typed.
 
 Example:
 * `alias hs history` <br>
@@ -430,10 +462,10 @@ Example:
   `addTaskNamedTest` <br>
   Performs the command `add Test` which will add a new task called 'Test'.
 
-### 3.16. Delete alias for commands: `unalias`
+### 3.17. Delete alias for commands: `unalias`
 
-For when you want to remove a shortcut for entering a command.<br>
-Removes an alias for a command. <br>
+You may an alias no longer suitable, and want to remove it from ToLuist.<br>
+`unalias` allows you to remove an alias for a phrase.<br>
 Format: `unalias ALIAS`
 
 Example:
@@ -441,10 +473,10 @@ Example:
   `unalias hs` <br>
   Removes the alias 'hs'.
 
-### 3.17. View aliases for commands: `viewalias`
+### 3.18. View aliases for commands: `viewalias`
 
-For when you want to see all your shortcuts you entered.<br>
-Views aliases in the system. <br>
+You may get forgetful and forget the aliases you set in ToLuist.<br>
+`viewalias` shows you all the aliases currently set in the system. <br>
 Format: `viewalias`
 
 > * Lists aliases in the format `ALIAS:PHRASE`.
@@ -454,31 +486,36 @@ Example:
   `viewalias` <br>
   Shows `hs:history` in the list.
 
-### 3.18. Saving the data
+### 3.19. Saving the data
 
-For you to be able to keep your list, even if you close and re-open the application.<br>
-Todo list data are saved in the hard disk automatically after any command that changes the data.<br>
+You would want to have your data on your computer always updated, even if you close and re-open 
+the application.<br>
+ToLuist data are saved in the hard disk automatically after any command that changes the data. By default, 
+the data is saved `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
 There is no need to save manually.
 
-### 3.19. Change storage location for save data: `save`
+### 3.20. Change storage location for save data: `save`
 
-For when you want to switch the save location of the application, such as if you are moving it to a Dropbox folder.<br>
-Changes the location for the storage file used in this system. <br>
+Occasionally, you may want to change the save location of the application, such as if you are 
+moving it to a Dropbox folder.<br>
+`save` changes the location for the storage file used in this system. <br>
 Warning: If a file with the requested name already exists, it will be overwritten. <br>
 Format: `save NEWFILELOCATION`
 
 > * All data will be moved to the new file location.
 > * If the file does not exist, the file will be created.
 > * The old file will be removed.
+> * This feature is similar to the `Save as...` feature in other applications.
 
 Example:
 * `save data/savefile.txt` <br>
   Sets the save storage location to `data/savefile.txt`.
 
-### 3.20. Change storage location for load data: `load`
+### 3.21. Change storage location for load data: `load`
 
-For when you want to switch the load location of the application, such as when you want to load the data from a file in Dropbox.<br>
-Changes the location for the storage file used in this system. <br>
+Occasionally, you may want to load the data from a different location, such as when you want
+ to load the data from a file in Dropbox.<br>
+`load` changes the location for the storage file used in this system. <br>
 Format: `load NEWFILELOCATION`
 
 > * The new save location will be updated to the location.
@@ -490,10 +527,10 @@ Example:
 * `load data/savefile.txt` <br>
   Sets the load storage location to `data/savefile.txt`.
 
-### 3.21. Exiting the program : `exit`
+### 3.22. Exiting the program : `exit`
 
-For when you are done with the application.<br>
-Exits the program.<br>
+After you are done organizing your todo list, you may want to close the application.<br>
+`exit` allows you to exit the program.<br>
 Format: `exit/quit`
 
 ## 4. Command Summary
