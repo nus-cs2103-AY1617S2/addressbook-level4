@@ -128,7 +128,7 @@ public class Event implements ReadOnlyEvent {
         return true;
     }
 
-    //@@author A0121668A
+    //@@author
     /**
      * Replaces this event's tags with the tags in the argument tag list.
      */
