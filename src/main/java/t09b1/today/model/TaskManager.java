@@ -55,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     //// list overwrite operations
 
     public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
-        this.tasks.setTasks(tasks);
+        this.tasks.setTasksWithoutCheck(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -72,9 +72,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 }
                 setTasks(tempTasks);
             } else {
-                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
-                    tasks.add(Task.createTask(readOnlyTask));
-                }
+                tasks.setTasks(newData.getTaskList());
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";
