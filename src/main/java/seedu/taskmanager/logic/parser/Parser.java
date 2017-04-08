@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.taskmanager.logic.commands.AddCommand;
-import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
@@ -21,6 +20,7 @@ import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.RedoCommand;
 import seedu.taskmanager.logic.commands.SaveAsCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
@@ -88,11 +88,11 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ChangeDirectoryCommand.COMMAND_WORD:
-            return new ChangeDirectoryCommandParser().parse(arguments);
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
 
-        case ChangeDirectoryCommand.ALTERNATIVE_COMMAND_WORD:
-            return new ChangeDirectoryCommandParser().parse(arguments);
+        case LoadCommand.ALTERNATIVE_COMMAND_WORD:
+            return new LoadCommandParser().parse(arguments);
 
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
@@ -116,10 +116,10 @@ public class Parser {
             return new RedoCommand();
 
         case SaveAsCommand.COMMAND_WORD:
-            return new MoveCommandParser().parse(arguments);
+            return new SaveAsCommandParser().parse(arguments);
 
         case SaveAsCommand.ALTERNATIVE_COMMAND_WORD:
-            return new MoveCommandParser().parse(arguments);
+            return new SaveAsCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);

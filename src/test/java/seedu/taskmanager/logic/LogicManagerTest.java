@@ -28,18 +28,20 @@ import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
-import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
+import seedu.taskmanager.logic.commands.UndoneCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
@@ -52,6 +54,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.StorageManager;
@@ -226,7 +229,7 @@ public class LogicManagerTest {
                 StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/not_numbers d/valid, description",
                 EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description #invalid_-[.tag",
+        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
@@ -464,7 +467,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
-    // @@authro
+    // @@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -483,22 +486,41 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    //@@author A0114269E
+    // @@author A0114269E
     @Test
     public void execute_load_invalidFilePath() throws Exception {
         assertCommandFailure("load !asdwie34$2.xml",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         assertCommandFailure("load data/taskmanager",
-                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 
-    // @@author A0114269E
     @Test
     public void execute_load_invalidXmlFile() throws Exception {
         assertCommandFailure("load src/test/data/cd_test/empty.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+                LoadCommand.MESSAGE_INVALID_DATA);
         assertCommandFailure("load src/test/data/cd_test/invalid.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+                LoadCommand.MESSAGE_INVALID_DATA);
+    }
+
+    @Test
+    public void execute_done_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+        Task tTarget4 = helper.generateTaskWithStatus(3, true);
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        helper.addToModel(model, uneditedTasks);
+        
+        // execute command and verify result
+        assertCommandSuccess("done 3", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tTarget4),
+                expectedTM, expectedList);
     }
     // @@author
 
@@ -567,7 +589,7 @@ public class LogicManagerTest {
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(title, Optional.ofNullable(privateStartDate), Optional.ofNullable(endDate),
-                    Optional.ofNullable(privateDescription), tags);
+                    Optional.ofNullable(privateDescription), Optional.ofNullable(null), tags);
         }
 
         /**
@@ -581,7 +603,25 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
                     Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+        }
+
+        /**
+         * Generates a valid task using the given seed and set status. Running this function
+         * with the same parameter values guarantees the returned task will have
+         * the same state. Each unique seed will generate a unique Task object.
+         *
+         * @param seed
+         *            used to generate the task data field values
+         * @param status
+         *            used to generate the status of the task
+         */
+        Task generateTaskWithStatus(int seed, boolean status) throws Exception {
+            return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
+                    Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
+                    new Status(status), new UniqueTagList(new Tag("tag" + Math.abs(seed)),
+                    new Tag("tag" + Math.abs(seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */
@@ -599,7 +639,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" #").append(t.tagName);
+                cmd.append(" t/").append(t.tagName);
             }
 
             return cmd.toString();
@@ -683,6 +723,7 @@ public class LogicManagerTest {
         Task generateTaskWithTitle(String title) throws Exception {
             return new Task(new Title(title), Optional.of(new StartDate("12/03/2017")),
                     Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Buy house for 1")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -697,6 +738,7 @@ public class LogicManagerTest {
         public Task generateTaskWithStartDate(String startDate) throws DuplicateTagException, IllegalValueException {
             return new Task(new Title("Watch Clockwork Orange"), Optional.of(new StartDate(startDate)),
                     Optional.of(new EndDate("15/03/2017")), Optional.of(new Description("Just do it")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -710,6 +752,7 @@ public class LogicManagerTest {
         public Task generateTaskWithEndDate(String endDate) throws DuplicateTagException, IllegalValueException {
             return new Task(new Title("Watch Halestorm concert"), Optional.of(new StartDate("01/04/2017")),
                     Optional.of(new EndDate(endDate)), Optional.of(new Description("Just do it")),
+                    Optional.ofNullable(null),
                     new UniqueTagList(new Tag("tag")));
         }
         // @@author A0131278H

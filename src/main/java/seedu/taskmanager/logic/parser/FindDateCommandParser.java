@@ -15,13 +15,26 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
  * Parses input arguments and creates a new FindDateCommand object
  */
 public class FindDateCommandParser {
+    private static final int MIN_NO_OF_DATES = 1;
+    private static final int MAX_NO_OF_DATES = 2;
+
     public Command parse(String args) {
+
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
         }
+        args = args.trim();
+        String[] dates = args.split(" to ");
+        if (dates.length < MIN_NO_OF_DATES || dates.length > MAX_NO_OF_DATES) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
+        }
         try {
-            return new FindDateCommand(args.trim());
+            if (dates.length == 1) {
+                return new FindDateCommand(dates[0]);
+            } else {
+                return new FindDateCommand(dates[0], dates[1]);
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }

@@ -14,7 +14,7 @@ import seedu.taskmanager.logic.commands.SaveAsCommand;
 /**
  * Parses input arguments and creates a new MoveCommand object
  */
-public class MoveCommandParser {
+public class SaveAsCommandParser {
     public static final String XML_FILE_EXT = "xml";
     /**
      * Parses the given {@code String} of path in the context of the MoveCommand

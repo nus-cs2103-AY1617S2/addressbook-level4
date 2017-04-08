@@ -321,21 +321,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            LocalDate taskStartDate = task.getStartDate().isPresent()
-                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-            LocalDate taskEndDate = task.getEndDate().isPresent()
-                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
 
-            boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
-            if (isFloatingTask) {
+            // tasks must have a starting and ending date in order to qualify
+            // for check
+            if (!(task.getStartDate().isPresent() && task.getEndDate().isPresent())) {
                 return false;
-            } else if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(taskStartDate.isBefore(startDateCriteria) || taskEndDate.isAfter(endDateCriteria));
-            } else if (task.getStartDate().isPresent()) {
-                return !(taskStartDate.isBefore(startDateCriteria) || taskStartDate.isAfter(startDateCriteria));
-            } else {
-                return !(taskEndDate.isBefore(startDateCriteria) || taskEndDate.isAfter(startDateCriteria));
             }
+
+            LocalDate taskStartDate = task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            LocalDate taskEndDate = task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            return !(taskStartDate.isBefore(startDateCriteria) || endDateCriteria.isBefore(taskEndDate));
         }
 
         @Override
