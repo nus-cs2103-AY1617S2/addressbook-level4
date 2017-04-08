@@ -181,18 +181,17 @@ public class ModelManager extends ComponentManager implements Model {
     public int isBlockedOutTime(Task t, int UpdateTaskIndex) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
         while (index < (filteredTasks.size())) {
-            if ((index != (UpdateTaskIndex - 1)) && filteredTasks.get(index).isEventTask()
+            if ((index != (UpdateTaskIndex)) && filteredTasks.get(index).isEventTask()
                     && !filteredTasks.get(index).getIsMarkedAsComplete()
                     && t.isWithinStartEndDuration(filteredTasks.get(index))) {
                 if (isAddEventEarlierAddListIndex(t, filteredTasks.get(index))) {
-                    if (UpdateTaskIndex - 1 > index) {
+                    if (UpdateTaskIndex > index) {
                         return index + 2;
-                    }
-                    if (UpdateTaskIndex - 1 < index) {
+                    } else {
                         return index + 1;
                     }
                 } else {
-                    if (UpdateTaskIndex - 1 > index) {
+                    if (UpdateTaskIndex > index) {
                         return index + 1;
                     } else {
                         return index;
