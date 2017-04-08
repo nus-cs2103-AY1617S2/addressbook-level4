@@ -15,7 +15,7 @@ public class Title {
      * The first character of the title must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String TITLE_VALIDATION_REGEX = "([ 0-9a-zA-Z/_,%.?':;&$@()!-])+";
+    public static final String TITLE_VALIDATION_REGEX = "([0-9a-zA-Z/_,.?':;&%$@()!-])([ 0-9a-zA-Z/_,.?':;&%$@()!-])+";
 
     public final String value;
 
