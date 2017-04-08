@@ -55,7 +55,7 @@ public class CategoryListPanel extends UiPart<Region> {
 
         for (ReadOnlyTask task : tasks) {
             if (task.getCategories().contains(Category.done)) {
-               updateCategoryHashMap(Category.done, true);
+                updateCategoryHashMap(Category.done, true);
             } else {
                 for (Category category : task.getCategories()) {
                     updateCategoryHashMap(category, false);
