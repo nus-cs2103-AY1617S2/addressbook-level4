@@ -65,8 +65,8 @@ public class TaskCard extends UiPart<Region> {
         } else if (task.getIsAnimated() > 1) {
             task.setAnimation(task.getIsAnimated() - 1);
         }
-        // Change to Red if overdue
-        if (task.isOverdue()) {
+        // Change to Red if overdue(excluding those in the completed list)
+        if (task.isOverdue() && !task.isDone()) {
             cardCell.setStyle("-fx-background-color: #ffdbe0;");
         }
     }
