@@ -10,10 +10,10 @@ By : `Miao Ling`, `Ian`, `Qi Xiang` and `Dylan`  &nbsp;&nbsp;&nbsp;&nbsp; Since:
 4. [Testing](#4-testing)
 5. [Dev Ops](#5-dev-ops)
 
-* [Appendix A: User Stories](#appendix-a-user-stories)
-* [Appendix B: Use Cases](#appendix-b-use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c-non-functional-requirements)
-* [Appendix D: Product Survey](#appendix-d-product-survey)
+* [Appendix A: User Stories](#appendix-a--user-stories)
+* [Appendix B: Use Cases](#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
+* [Appendix D: Product Survey](#appendix-d--product-survey)
 
 
 ## 1. Setting up
