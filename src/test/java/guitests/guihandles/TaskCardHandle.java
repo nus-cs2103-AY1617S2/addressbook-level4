@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,14 +73,11 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
+    //@@author A0143076J
     public boolean isSameTask(ReadOnlyTask task) {
         if (task == null) {
-            System.out.println("FALSE");
             return false;
         }
-        System.out.println(getFullName());
-        System.out.println(getStartDate());
-        System.out.println(getEndDate());
 
         String taskStartDate = "";
         String taskEndDate = "";
@@ -93,8 +91,8 @@ public class TaskCardHandle extends GuiHandle {
         return getFullName().equals(task.getDescription().fullDescription)
                 && getStartDate().equals(taskStartDate)
                 && getEndDate().equals(taskEndDate)
-                && getTaskStatus().equals(task.getStatus().toString());
-               // && getTags().equals(getTags(task.getTags()));
+                && getTaskStatus().equals(task.getStatus().toString())
+                && equalsOrderInsensitive(getTags(), getTags(task.getTags()));
     }
 
     @Override
@@ -102,9 +100,17 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getTags().equals(handle.getTags());
+                    && getStartDate().equals(handle.getStartDate())
+                    && getEndDate().equals(handle.getEndDate())
+                    && getTaskStatus().equals(handle.getTaskStatus())
+                    && equalsOrderInsensitive(getTags(), handle.getTags());
         }
         return super.equals(obj);
+    }
+
+    //@@author A0143076J-reused
+    public boolean equalsOrderInsensitive(List<String> other, List<String> another) {
+        return another == other || new HashSet<>(another).equals(new HashSet<>(other));
     }
 
     @Override
@@ -112,4 +118,3 @@ public class TaskCardHandle extends GuiHandle {
         return getFullName();
     }
 }
-

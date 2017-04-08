@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 
-import guitests.guihandles.TaskCardHandle;
-
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.EditCommand;
@@ -208,7 +206,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withDescription(detailsToEdit).build();
 
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+
+        // confirm the new card contains the right data
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getDescription().fullDescription);
+        assertMatching(editedTask, editedCard);
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
+        assertTrue(taskListPanel.isListMatching(expectedTasksList[taskManagerIndex - 1]));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
     @Test
