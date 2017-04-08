@@ -7,7 +7,7 @@ import seedu.taskmanager.model.HistoryManager;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_SUCCESS = "Redo successful: ";
+    public static final String MESSAGE_SUCCESS = "Redo successful: %1$s";
     public static final String MESSAGE_NO_MORE_REDO = "No more actions available to redo";
 
     @Override
@@ -19,7 +19,7 @@ public class RedoCommand extends Command {
         } catch (Exception e) {
             throw new CommandException(MESSAGE_NO_MORE_REDO);
         }
-        return new CommandResult(MESSAGE_SUCCESS + commandText);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, commandText));
     }
 }
 // @@author
