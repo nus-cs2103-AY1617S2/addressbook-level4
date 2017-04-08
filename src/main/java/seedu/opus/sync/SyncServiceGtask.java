@@ -233,6 +233,7 @@ public class SyncServiceGtask extends SyncService {
      * @return
      */
     private com.google.api.services.tasks.model.Task toGoogleAdaptedTask(Task source) {
+        assert source.isEvent() == false;
         com.google.api.services.tasks.model.Task googleAdaptedTask = new com.google.api.services.tasks.model.Task();
 
         googleAdaptedTask.setTitle(source.getName().toString());
