@@ -10,8 +10,7 @@ public class Name {
 
     public static final int MAX_LENGTH = 45;
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "The length of a task name should not be longer than " + MAX_LENGTH
-            + " characters, and it should not be blank";
+            "The length of a task name should not be longer than " + MAX_LENGTH;
     public static final String EMPTY_STRING = "";
 
 
