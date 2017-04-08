@@ -22,18 +22,21 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
   //---------------- Tests for validity of input taskBoss index --------------------------------------
 
     /*
-     * EP: valid task index, should remove Done category
-     * from the task's current categories.
-     *
-     * Should return true.
+     * EP: valid task index,
+     * should remove Done category from all tasks' current category lists.
+     * - test for long and short command formats
+     * - test multiple and single unmark
      */
 
+    //long command format
+
+    //single unmark
     @Test
-    public void unmarkTask_success() throws Exception {
+    public void unmark_validIndex_longCommandFormat_success() throws Exception {
         int taskBossIndex = 2;
         String commandType = "termination";
 
-        TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+        TestTask unmarkedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
@@ -41,187 +44,177 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertUnmarkSuccess(commandType, false, taskBossIndex, taskBossIndex,
-                terminatedTask, expectedTasksList);
+                unmarkedTask, expectedTasksList);
     }
 
-    /*
-     * Invalid index equivalence partitions for : 1) missing index
-     * 2) index invalid for not existing in task list.
-     *
-     * The two test cases below test one invalid index input type at a time
-     * for each of the two invalid possible cases.
-     */
-
-    /*
-     * EP: invalid task index where index was not entered and is therefore missing,
-     * should not affect any of the task's
-     * current categories and will not remove the category "Done".
-     *
-     * Should show error message that command entered was in the wrong format
-     * and an index should be entered.
-     *
-     * Should return false.
-     */
-
+    //multiple unmark
     @Test
-    public void unmark_missingTaskIndex_failure() {
-        commandBox.runCommand("unmark ");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
-    }
-
-    /*
-     * EP: invalid task index where the index entered does
-     * not exist in current task list, should not affect any of the task's
-     * current categories and will not remove the category "Done".
-     *
-     * Should show error message that index entered is invalid.
-     *
-     * Should return false.
-     */
-
-    @Test
-    public void unmark_invalidTaskIndex_failure() {
-        commandBox.runCommand("um 9");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-    }
-
-  //---------------- Tests for format of terminate command --------------------------------------
-
-    /*
-     * Valid format equivalence partitions for : 1) short command format
-     * 2) long command format
-     *
-     * The two test cases below test one valid command format at a time
-     * for each of the two valid possible command formats.
-     */
-
-    /*
-     * EP: valid format using long command, should remove the Done category of all task's
-     * current categories
-     *
-     * Should return true.
-     */
-
-    @Test
-    public void unmarkTerminatedTask_Long_success() throws Exception {
-        int taskBossIndex = 2;
-        String commandType = "termination";
-
-        TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
-                .withStartDateTime("Mar 22, 2017 5pm")
-                .withEndDateTime("Mar 28, 2017 5pm")
-                .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave")
-                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
-
-        assertUnmarkSuccess(commandType, false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
-    }
-
-    @Test
-    public void unmarkMarkedTask_Long_success() throws Exception {
-        int taskBossIndex = 5;
-        String commandType = "marking";
-
-        TestTask terminatedTask = new TaskBuilder().withName("Birthday party")
-                .withInformation("311, Clementi Ave 2, #02-25")
-                .withPriorityLevel("No")
-                .withRecurrence(Frequency.NONE)
-                .withStartDateTime("Feb 23, 2017 10pm")
-                .withEndDateTime("Jun 28, 2017 5pm")
-                .withCategories("Alltasks", "Friends", "Owesmoney").build();
-
-        assertUnmarkSuccess(commandType, false, taskBossIndex,
-                taskBossIndex, terminatedTask, expectedTasksList);
-    }
-
-    /*
-     * EP: valid format using short command, should remove the Done category of all task's
-     * current categories
-     *
-     * Should return true.
-     */
-
-    @Test
-    public void unmarkTask_Short_Command_success() throws Exception {
-        int taskBossIndex = 4;
-        String commandType = "marking";
-
-        TestTask terminatedTask = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
+    public void multiple_unmark_validIndexes_longCommandFormat_success() throws Exception {
+        commandBox.runCommand("m 4 5");
+        commandBox.runCommand("unmark 4           5");
+        expectedTasksList[3] = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
                 .withRecurrence(Frequency.NONE)
                 .withInformation("10th street")
                 .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+        expectedTasksList[4] = new TaskBuilder().withName("Birthday party")
+                .withInformation("311, Clementi Ave 2, #02-25")
+                .withPriorityLevel("No")
+                .withRecurrence(Frequency.NONE)
+                .withStartDateTime("Feb 23, 2017 10pm")
+                .withEndDateTime("Jun 28, 2017 5pm")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS, "Friends", "Owesmoney").build();
 
-        assertUnmarkSuccess(commandType, true, taskBossIndex,
-                taskBossIndex, terminatedTask, expectedTasksList);
+        TestTask[] unmarked = new TestTask[] {expectedTasksList[4], expectedTasksList[3]};
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS,
+                getDesiredFormat(unmarked)));
     }
 
-  //---------------- Tests for inputing wrong task type--------------------------------------------------------
+    //short command format
 
-    /*
-     * EP: Check if successfully showed error message when task was not marked or
-     * terminated.
-     */
+    //single unmark
     @Test
-    public void task_NotMarked_failure() {
-        commandBox.runCommand("um 1");
-        assertResultMessage(UnmarkCommand.ERROR_NOT_MARKED);
-    }
+    public void unmark_validIndex_shortCommandFormat_success() throws Exception {
+        int taskBossIndex = 2;
+        String commandType = "termination";
 
-  //---------------- Tests for successfully unmarking a task after find command--------------------------------------
-
-    /*
-     * EP: Check if successfully unmark task after performing a find command,
-     * should remove the Done category of all task's
-     * current categories
-     * Should return true.
-     */
-
-    @Test
-    public void unmarkTask_findThenUnmark_success() throws Exception {
-        commandBox.runCommand("find clean");
-        String commandType = "marking";
-
-        int filteredTaskListIndex = 1;
-        int taskBossIndex = 1;
-
-        TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
-        TestTask terminatedTask = new TaskBuilder(taskToTerminate).build();
-        TestTask[] resultList = { terminatedTask };
-
-        assertUnmarkSuccess(commandType, false, filteredTaskListIndex,
-                taskBossIndex, terminatedTask, resultList);
-    }
-
-    //---------------- Tests for successfully unmakring multiple tasks-----------------------
-
-    @Test
-    public void multiple_unmark_Long_Command_success() throws Exception {
-        commandBox.runCommand("t 2 7");
-        commandBox.runCommand("unmark 2 7");
-
-        expectedTasksList[1] = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+        TestTask unmarkedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
                 .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
-        expectedTasksList[6] = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
-                .withStartDateTime("Feb 28, 2017 1pm")
-                .withEndDateTime("Dec 17, 2017 5pm")
-                .withRecurrence(Frequency.WEEKLY)
-                .withInformation("little tokyo")
-                .withCategories("School", AddCommand.BUILT_IN_ALL_TASKS).build();
-
-        String expectedMessage = "1. " + expectedTasksList[6] + "2. " + expectedTasksList[1];
-        assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS , expectedMessage));
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertUnmarkSuccess(commandType, true, taskBossIndex, taskBossIndex,
+                unmarkedTask, expectedTasksList);
     }
 
+    //multiple mark done
     @Test
-    public void multiple_SpacesInBetween_unmark_Short_Command_success() throws Exception {
+    public void multiple_unmark_validIndexes_shortCommandFormat_success() throws Exception {
+        commandBox.runCommand("m 4 5");
+        commandBox.runCommand("um 4           5");
+        expectedTasksList[3] = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
+                .withStartDateTime("Feb 20, 2017 11.30pm")
+                .withEndDateTime("Apr 28, 2017 3pm")
+                .withRecurrence(Frequency.NONE)
+                .withInformation("10th street")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+        expectedTasksList[4] = new TaskBuilder().withName("Birthday party")
+                .withInformation("311, Clementi Ave 2, #02-25")
+                .withPriorityLevel("No")
+                .withRecurrence(Frequency.NONE)
+                .withStartDateTime("Feb 23, 2017 10pm")
+                .withEndDateTime("Jun 28, 2017 5pm")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS, "Friends", "Owesmoney").build();
+
+        TestTask[] unmarked = new TestTask[] {expectedTasksList[4], expectedTasksList[3]};
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS,
+                getDesiredFormat(unmarked)));
+    }
+
+
+    /*
+     * EP: missing task index,
+     * should show error message: invalid command format
+     * and display a message demonstrating the correct way to write the command
+     */
+    @Test
+    public void unmark_missingTaskIndex_failure() {
+        //long command format
+        commandBox.runCommand("unmark ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        //short command format
+        commandBox.runCommand("um ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+    }
+
+    /*
+     * EP: invalid task index,
+     * should show error message: invalid index
+     * - test short and long command format
+     * - test multiple and single unmark
+     */
+
+    //single unmark
+    @Test
+    public void unmark_invalidTaskIndex_failure() {
+
+        //long command format
+
+        commandBox.runCommand("unmark 9");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("unmark -1");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // non-numeric inputs
+        commandBox.runCommand("unmark ^");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("unmark b");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        //short command format
+
+        commandBox.runCommand("um 10");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("um 0");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // non-numeric inputs
+        commandBox.runCommand("um ^");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("um b");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+    }
+
+    //multiple unmark
+    @Test
+    public void multiple_unmark_InvalidIndexes_failure() {
+        //long command format
+        commandBox.runCommand("unmark 1 2 100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("unmark 0 2 3");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user inputs non-numeric index values
+        commandBox.runCommand("unmark a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("unmark ; 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        //short command format
+        commandBox.runCommand("um 1 2 100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("um 0 2 3");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user inputs non-numeric index values
+        commandBox.runCommand("um a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("um ; 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+    }
+
+    //---------------- Tests for corner cases --------------------------------------------------------
+
+    /*
+     * EP: unmarking multiple tasks with spaces between indexes,
+     * should remove Done category from all tasks' current category lists.
+     */
+    @Test
+    public void multiple_SpacesInBetween_unmarkTask_success() throws Exception {
         commandBox.runCommand("m 4 5");
         commandBox.runCommand("um 4           5");
         expectedTasksList[3] = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
@@ -244,20 +237,124 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
                 getDesiredFormat(markedDone)));
     }
 
+    //---------------- Tests unmark done after find command -----------------------------------------
+
+    /*
+     * EP: unmarking after finding a task,
+     * should remove Done category from all tasks' current category lists.
+     */
     @Test
-    public void multiple_Unmark_Command_InvalidIndex() {
-        commandBox.runCommand("um 1 2 100");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    public void unmark_findThenUnmark_success() throws Exception {
+        commandBox.runCommand("find clean");
+        String commandType = "marking";
 
-        commandBox.runCommand("um 0 2 3");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        int filteredTaskListIndex = 1;
+        int taskBossIndex = 1;
 
-      //user inputs non-numeric index values
-        commandBox.runCommand("unmark a 2 3");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+        TestTask taskToUnmark = expectedTasksList[taskBossIndex - 1];
+        TestTask unmarkedTask = new TaskBuilder(taskToUnmark).build();
+        TestTask[] resultList = { unmarkedTask };
 
-        commandBox.runCommand("unmark ; 2 3");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
+        assertUnmarkSuccess(commandType, false, filteredTaskListIndex,
+                taskBossIndex, unmarkedTask, resultList);
+    }
+
+    //---------------- Test for different types of tasks --------------------------------------
+
+
+    /*
+     * EP: unmarking non-recurring task,
+     * should remove Done category from all tasks' current category lists.
+     */
+    @Test
+    public void unmark_nonRecurring_success() throws Exception {
+        int taskBossIndex = 1;
+        String commandType = "marking";
+
+        TestTask unmarkedTask = new TaskBuilder().withName("Clean house").withPriorityLevel("Yes")
+                .withStartDateTime("Feb 19, 2017 11pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withInformation("wall street").withRecurrence(Frequency.NONE)
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        assertUnmarkSuccess(commandType, false, taskBossIndex,
+                taskBossIndex, unmarkedTask, expectedTasksList);
+    }
+
+    /*
+     * EP: unmarking recurring task,
+     * should remove Done category from all tasks' current category lists
+     * and should update date of task according to recurrance type
+     */
+    @Test
+    public void unmark_recurring_success() throws Exception {
+        int taskBossIndex = 2;
+        String commandType = "termination";
+
+        TestTask unmarkedTask =  new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+                .withStartDateTime("Mar 22, 2017 5pm")
+                .withEndDateTime("Mar 28, 2017 5pm")
+                .withRecurrence(Frequency.MONTHLY)
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        assertUnmarkSuccess(commandType, false, taskBossIndex,
+                taskBossIndex, unmarkedTask, expectedTasksList);
+    }
+
+    /*
+     * EP: unmarking recurring and non-recurring tasks at the same time,
+     * should update the recurring task's dates based on recurrence type.
+     * and should remove Done category from all tasks' current category lists
+     */
+    @Test
+    public void unmarkDone_mixTypes_success() throws Exception {
+        commandBox.runCommand("terminate 2");
+        commandBox.runCommand("mark 4");
+        commandBox.runCommand("unmark 2 4");
+
+        // recurring
+        expectedTasksList[1] = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+                .withStartDateTime("Mar 22, 2017 5pm")
+                .withEndDateTime("Mar 28, 2017 5pm")
+                .withRecurrence(Frequency.MONTHLY)
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        //non recurring
+        expectedTasksList[3] = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
+                .withStartDateTime("Feb 20, 2017 11.30pm")
+                .withEndDateTime("Apr 28, 2017 3pm")
+                .withRecurrence(Frequency.NONE)
+                .withInformation("10th street")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        TestTask[] markedDone = new TestTask[] {expectedTasksList[3], expectedTasksList[1]};
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_DONE_SUCCESS,
+                getDesiredFormat(markedDone)));
+    }
+
+    //---------------- Tests for inputing wrong task type--------------------------------------------------------
+
+    /*
+     * EP: task is not in Done category
+     * should show error message: cannot unmark a task that is not in the done category
+     * - test for marked and terminated tasks
+     */
+
+    //not marked task
+    @Test
+    public void unmarkTask_NotMarkedDone_failure() {
+        commandBox.runCommand("um 1");
+        assertResultMessage(UnmarkCommand.ERROR_NOT_MARKED);
+    }
+
+    //not terminated task
+    @Test
+    public void unmarkTask_NotTerminated_failure() {
+        commandBox.runCommand("um 2");
+        assertResultMessage(UnmarkCommand.ERROR_NOT_MARKED);
     }
 
     //---------------- End of test cases --------------------------------------
