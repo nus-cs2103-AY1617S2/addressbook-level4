@@ -12,6 +12,7 @@ Role: Developer <br>
    * [Path Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
+   * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0164061N.md)]
 * Other major contributions: User Guide, Developer Guide, Scheduling and Tracking
 
 -----
@@ -38,6 +39,7 @@ Role: Developer <br>
    * [Done Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0146757R.md)]
+   * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0146757R.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
    * Set up Travis and Coverage
