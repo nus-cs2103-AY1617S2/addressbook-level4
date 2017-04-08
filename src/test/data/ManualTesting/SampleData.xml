@@ -34,7 +34,7 @@
         <name>Update documentation</name>
         <startTime></startTime>
         <endTime></endTime>
-        <completeTime>Sat Apr 08 23:00:00 SGT 2017</completeTime>
+        <completeTime>Sat Apr 08 23:00:00 HKT 2017</completeTime>
         <tagged>dev</tagged>
         <tagged>docs</tagged>
     </todos>
@@ -49,48 +49,48 @@
         <name>Eat dinner</name>
         <startTime></startTime>
         <endTime></endTime>
-        <completeTime>Thu Mar 30 18:34:08 SGT 2017</completeTime>
+        <completeTime>Thu Mar 30 18:34:08 HKT 2017</completeTime>
         <tagged>food</tagged>
     </todos>
     <todos>
         <name>Walk the cat</name>
         <startTime></startTime>
-        <endTime>Fri Apr 07 12:00:00 SGT 2017</endTime>
-        <completeTime>Thu Apr 06 11:50:33 SGT 2017</completeTime>
+        <endTime>Fri Apr 07 12:00:00 HKT 2017</endTime>
+        <completeTime>Thu Apr 06 11:50:33 HKT 2017</completeTime>
         <tagged>petcare</tagged>
     </todos>
     <todos>
         <name>Walk the ostrich</name>
         <startTime></startTime>
-        <endTime>Thu Apr 20 09:00:00 SGT 2017</endTime>
+        <endTime>Thu Apr 20 09:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>petcare</tagged>
     </todos>
     <todos>
         <name>Eat breakfast</name>
-        <startTime>Thu Apr 13 09:00:00 SGT 2017</startTime>
-        <endTime>Thu Apr 13 09:30:00 SGT 2017</endTime>
-        <completeTime>Thu Apr 13 09:30:00 SGT 2017</completeTime>
+        <startTime>Thu Apr 13 09:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 13 09:30:00 HKT 2017</endTime>
+        <completeTime>Thu Apr 13 09:30:00 HKT 2017</completeTime>
         <tagged>food</tagged>
     </todos>
     <todos>
         <name>Eat midnight snack</name>
-        <startTime>Thu Apr 13 23:00:00 SGT 2017</startTime>
-        <endTime>Fri Apr 14 00:00:00 SGT 2017</endTime>
-        <completeTime>Fri Apr 14 00:00:00 SGT 2017</completeTime>
+        <startTime>Thu Apr 13 23:00:00 HKT 2017</startTime>
+        <endTime>Fri Apr 14 00:00:00 HKT 2017</endTime>
+        <completeTime>Fri Apr 14 00:00:00 HKT 2017</completeTime>
         <tagged>food</tagged>
     </todos>
     <todos>
         <name>Withdraw money</name>
-        <startTime>Thu Apr 20 10:00:00 SGT 2017</startTime>
-        <endTime>Thu Apr 20 10:10:00 SGT 2017</endTime>
+        <startTime>Thu Apr 20 10:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 20 10:10:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>errand</tagged>
     </todos>
     <todos>
         <name>Wash car</name>
-        <startTime>Fri Apr 21 10:30:00 SGT 2017</startTime>
-        <endTime>Fri Apr 21 11:00:00 SGT 2017</endTime>
+        <startTime>Fri Apr 21 10:30:00 HKT 2017</startTime>
+        <endTime>Fri Apr 21 11:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>cleaning</tagged>
         <tagged>car</tagged>
@@ -98,15 +98,15 @@
     <todos>
         <name>Wash house</name>
         <startTime></startTime>
-        <endTime>Sat Apr 22 12:00:00 SGT 2017</endTime>
+        <endTime>Sat Apr 22 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>cleaning</tagged>
         <tagged>house</tagged>
     </todos>
     <todos>
         <name>Wash porch</name>
-        <startTime>Sat Apr 22 13:00:00 SGT 2017</startTime>
-        <endTime>Sat Apr 22 14:00:00 SGT 2017</endTime>
+        <startTime>Sat Apr 22 13:00:00 HKT 2017</startTime>
+        <endTime>Sat Apr 22 14:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>cleaning</tagged>
         <tagged>house</tagged>
@@ -121,41 +121,41 @@
     </todos>
     <todos>
         <name>Paint house</name>
-        <startTime>Wed Apr 12 11:00:00 SGT 2017</startTime>
-        <endTime>Wed Apr 12 12:00:00 SGT 2017</endTime>
-        <completeTime>Wed Apr 12 12:00:00 SGT 2017</completeTime>
+        <startTime>Wed Apr 12 11:00:00 HKT 2017</startTime>
+        <endTime>Wed Apr 12 12:00:00 HKT 2017</endTime>
+        <completeTime>Wed Apr 12 12:00:00 HKT 2017</completeTime>
         <tagged>painting</tagged>
         <tagged>house</tagged>
     </todos>
     <todos>
         <name>Paint car</name>
-        <startTime>Wed May 03 18:00:00 SGT 2017</startTime>
-        <endTime>Thu May 04 12:00:00 SGT 2017</endTime>
+        <startTime>Wed May 03 18:00:00 HKT 2017</startTime>
+        <endTime>Thu May 04 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>car</tagged>
         <tagged>painting</tagged>
     </todos>
     <todos>
         <name>Paint porch</name>
-        <startTime>Thu May 04 14:00:00 SGT 2017</startTime>
-        <endTime>Thu May 04 23:59:00 SGT 2017</endTime>
+        <startTime>Thu May 04 14:00:00 HKT 2017</startTime>
+        <endTime>Thu May 04 23:59:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>painting</tagged>
         <tagged>house</tagged>
     </todos>
     <todos>
         <name>Mow front yard</name>
-        <startTime>Thu Apr 06 11:00:00 SGT 2017</startTime>
-        <endTime>Thu Apr 06 12:00:00 SGT 2017</endTime>
-        <completeTime>Thu Apr 06 12:00:00 SGT 2017</completeTime>
+        <startTime>Thu Apr 06 11:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 06 12:00:00 HKT 2017</endTime>
+        <completeTime>Thu Apr 06 12:00:00 HKT 2017</completeTime>
         <tagged>yardwork</tagged>
         <tagged>chores</tagged>
     </todos>
     <todos>
         <name>Mow back yard</name>
-        <startTime>Thu Apr 06 13:00:00 SGT 2017</startTime>
-        <endTime>Thu Apr 06 14:00:00 SGT 2017</endTime>
-        <completeTime>Thu Apr 06 14:00:00 SGT 2017</completeTime>
+        <startTime>Thu Apr 06 13:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 06 14:00:00 HKT 2017</endTime>
+        <completeTime>Thu Apr 06 14:00:00 HKT 2017</completeTime>
         <tagged>yardwork</tagged>
         <tagged>chores</tagged>
     </todos>
@@ -169,25 +169,25 @@
     </todos>
     <todos>
         <name>Wash back yard</name>
-        <startTime>Mon Feb 06 11:00:00 SGT 2017</startTime>
-        <endTime>Mon Feb 06 12:00:00 SGT 2017</endTime>
-        <completeTime>Mon Feb 06 12:00:00 SGT 2017</completeTime>
+        <startTime>Mon Feb 06 11:00:00 HKT 2017</startTime>
+        <endTime>Mon Feb 06 12:00:00 HKT 2017</endTime>
+        <completeTime>Mon Feb 06 12:00:00 HKT 2017</completeTime>
         <tagged>yardwork</tagged>
         <tagged>chores</tagged>
     </todos>
     <todos>
         <name>Dig up front yard</name>
         <startTime></startTime>
-        <endTime>Mon Feb 06 18:00:00 SGT 2017</endTime>
-        <completeTime>Mon Feb 06 18:00:00 SGT 2017</completeTime>
+        <endTime>Mon Feb 06 18:00:00 HKT 2017</endTime>
+        <completeTime>Mon Feb 06 18:00:00 HKT 2017</completeTime>
         <tagged>renovations</tagged>
         <tagged>yardwork</tagged>
     </todos>
     <todos>
         <name>Dig up back yard</name>
         <startTime></startTime>
-        <endTime>Tue Feb 07 18:00:00 SGT 2017</endTime>
-        <completeTime>Tue Feb 07 18:00:00 SGT 2017</completeTime>
+        <endTime>Tue Feb 07 18:00:00 HKT 2017</endTime>
+        <completeTime>Tue Feb 07 18:00:00 HKT 2017</completeTime>
         <tagged>renovations</tagged>
         <tagged>yardwork</tagged>
     </todos>
@@ -195,22 +195,22 @@
         <name>Put rocks in front yard</name>
         <startTime></startTime>
         <endTime></endTime>
-        <completeTime>Wed Feb 08 09:00:00 SGT 2017</completeTime>
+        <completeTime>Wed Feb 08 09:00:00 HKT 2017</completeTime>
         <tagged>renovations</tagged>
         <tagged>yardwork</tagged>
     </todos>
     <todos>
         <name>Put rocks in back yard</name>
-        <startTime>Thu May 04 16:00:00 SGT 2017</startTime>
-        <endTime>Thu May 04 18:00:00 SGT 2017</endTime>
+        <startTime>Thu May 04 16:00:00 HKT 2017</startTime>
+        <endTime>Thu May 04 18:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>renovations</tagged>
         <tagged>yardwork</tagged>
     </todos>
     <todos>
         <name>Put potted plants in front yard</name>
-        <startTime>Thu May 04 19:00:00 SGT 2017</startTime>
-        <endTime>Thu May 04 22:00:00 SGT 2017</endTime>
+        <startTime>Thu May 04 19:00:00 HKT 2017</startTime>
+        <endTime>Thu May 04 22:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>renovations</tagged>
         <tagged>gardening</tagged>
@@ -218,8 +218,8 @@
     </todos>
     <todos>
         <name>Put potted plants in back yard</name>
-        <startTime>Thu May 04 22:00:00 SGT 2017</startTime>
-        <endTime>Fri May 05 03:00:00 SGT 2017</endTime>
+        <startTime>Thu May 04 22:00:00 HKT 2017</startTime>
+        <endTime>Fri May 05 03:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>renovations</tagged>
         <tagged>gardening</tagged>
@@ -234,22 +234,22 @@
     </todos>
     <todos>
         <name>Mortgage house</name>
-        <startTime>Wed May 10 10:00:00 SGT 2017</startTime>
-        <endTime>Wed May 10 11:00:00 SGT 2017</endTime>
+        <startTime>Wed May 10 10:00:00 HKT 2017</startTime>
+        <endTime>Wed May 10 11:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>important</tagged>
     </todos>
     <todos>
         <name>Pay credit card bills</name>
         <startTime></startTime>
-        <endTime>Wed May 10 14:00:00 SGT 2017</endTime>
+        <endTime>Wed May 10 14:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>important</tagged>
     </todos>
     <todos>
         <name>Plan vacation</name>
-        <startTime>Thu May 11 10:00:00 SGT 2017</startTime>
-        <endTime>Thu May 11 12:00:00 SGT 2017</endTime>
+        <startTime>Thu May 11 10:00:00 HKT 2017</startTime>
+        <endTime>Thu May 11 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>important</tagged>
     </todos>
@@ -276,16 +276,16 @@
     </todos>
     <todos>
         <name>Dispose of body</name>
-        <startTime>Thu Apr 06 23:00:00 SGT 2017</startTime>
-        <endTime>Fri Apr 07 00:00:00 SGT 2017</endTime>
-        <completeTime>Fri Apr 07 00:00:00 SGT 2017</completeTime>
+        <startTime>Thu Apr 06 23:00:00 HKT 2017</startTime>
+        <endTime>Fri Apr 07 00:00:00 HKT 2017</endTime>
+        <completeTime>Fri Apr 07 00:00:00 HKT 2017</completeTime>
         <tagged>important</tagged>
         <tagged>chores</tagged>
     </todos>
     <todos>
         <name>Do CS2102 project</name>
-        <startTime>Wed Feb 01 09:00:00 SGT 2017</startTime>
-        <endTime>Mon Apr 10 14:00:00 SGT 2017</endTime>
+        <startTime>Wed Feb 01 09:00:00 HKT 2017</startTime>
+        <endTime>Mon Apr 10 14:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>important</tagged>
         <tagged>dev</tagged>
@@ -293,32 +293,32 @@
     </todos>
     <todos>
         <name>Play tennis</name>
-        <startTime>Mon May 01 13:00:00 SGT 2017</startTime>
-        <endTime>Mon May 01 15:00:00 SGT 2017</endTime>
+        <startTime>Mon May 01 13:00:00 HKT 2017</startTime>
+        <endTime>Mon May 01 15:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>sports</tagged>
         <tagged>recreation</tagged>
     </todos>
     <todos>
         <name>Play basketball</name>
-        <startTime>Tue May 02 13:00:00 SGT 2017</startTime>
-        <endTime>Tue May 02 15:00:00 SGT 2017</endTime>
+        <startTime>Tue May 02 13:00:00 HKT 2017</startTime>
+        <endTime>Tue May 02 15:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>sports</tagged>
         <tagged>recreation</tagged>
     </todos>
     <todos>
         <name>Play frisbee</name>
-        <startTime>Wed May 03 13:00:00 SGT 2017</startTime>
-        <endTime>Wed May 03 15:00:00 SGT 2017</endTime>
+        <startTime>Wed May 03 13:00:00 HKT 2017</startTime>
+        <endTime>Wed May 03 15:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>sports</tagged>
         <tagged>recreation</tagged>
     </todos>
     <todos>
         <name>Play golf</name>
-        <startTime>Thu May 04 13:00:00 SGT 2017</startTime>
-        <endTime>Thu May 04 15:00:00 SGT 2017</endTime>
+        <startTime>Thu May 04 13:00:00 HKT 2017</startTime>
+        <endTime>Thu May 04 15:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>sports</tagged>
         <tagged>recreation</tagged>
@@ -326,7 +326,7 @@
     <todos>
         <name>Walk the iguana</name>
         <startTime></startTime>
-        <endTime>Fri May 05 12:00:00 SGT 2017</endTime>
+        <endTime>Fri May 05 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>petcare</tagged>
         <tagged>recreation</tagged>
@@ -334,7 +334,7 @@
     <todos>
         <name>Walk the turtle</name>
         <startTime></startTime>
-        <endTime>Sat May 06 12:00:00 SGT 2017</endTime>
+        <endTime>Sat May 06 12:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>petcare</tagged>
         <tagged>recreation</tagged>
@@ -342,7 +342,7 @@
     <todos>
         <name>Do laundry</name>
         <startTime></startTime>
-        <endTime>Sun May 07 19:00:00 SGT 2017</endTime>
+        <endTime>Sun May 07 19:00:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>cleaning</tagged>
         <tagged>chores</tagged>
@@ -374,17 +374,17 @@
     </todos>
     <todos>
         <name>Attend CS2103 tutorial</name>
-        <startTime>Thu Apr 13 11:00:00 SGT 2017</startTime>
-        <endTime>Thu Apr 13 11:50:00 SGT 2017</endTime>
+        <startTime>Thu Apr 13 11:00:00 HKT 2017</startTime>
+        <endTime>Thu Apr 13 11:50:00 HKT 2017</endTime>
         <completeTime></completeTime>
         <tagged>dev</tagged>
         <tagged>school</tagged>
     </todos>
     <todos>
         <name>Populate task data</name>
-        <startTime>Sat Apr 08 23:00:00 SGT 2017</startTime>
-        <endTime>Sat Apr 08 23:45:00 SGT 2017</endTime>
-        <completeTime>Sat Apr 08 23:45:00 SGT 2017</completeTime>
+        <startTime>Sat Apr 08 23:00:00 HKT 2017</startTime>
+        <endTime>Sat Apr 08 23:45:00 HKT 2017</endTime>
+        <completeTime>Sat Apr 08 23:45:00 HKT 2017</completeTime>
         <tagged>dev</tagged>
         <tagged>school</tagged>
     </todos>
