@@ -11,6 +11,7 @@ public class FindCommandTest extends AddressBookGuiTest {
 
     @Test
     public void findNonEmptyList() {
+        commandBox.runCommand("clear");
         commandBox.runCommand(td.benson.getAddCommand());
         commandBox.runCommand(td.daniel.getAddCommand());
         assertFindResult("find Mark"); // no results
