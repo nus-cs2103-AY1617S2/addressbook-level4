@@ -292,7 +292,6 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord , expectedMessage); //index missing
         assertCommandFailure(commandWord + " +1", expectedMessage); //index should be unsigned
         assertCommandFailure(commandWord + " -1", expectedMessage); //index should be unsigned
-        assertCommandFailure(commandWord + " 0", expectedMessage); //index cannot be 0
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
@@ -336,7 +335,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, "[2]"),
                 expectedEZ,
                 expectedEZ.getTaskList());
         assertEquals(1, targetedJumpIndex);

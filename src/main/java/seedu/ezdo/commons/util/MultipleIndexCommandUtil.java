@@ -18,6 +18,20 @@ public class MultipleIndexCommandUtil {
         return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
     }
 
+    //@@author A0139177W
+    /** checks if the tasks with the indexes specified are marked as done */
+    public static boolean isDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList,
+            ArrayList<Integer> targetIndexes) {
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Task task = (Task) lastShownList.get(targetIndexes.get(i) - 1);
+            if (task.getDone()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    //@@author A0139177W
+
     /** adds read only tasks from the unmodifiable observable list to the ArrayList list */
     public static void addReadOnlyTasksToList(ArrayList<ReadOnlyTask> list,
             UnmodifiableObservableList<ReadOnlyTask> lastShownList, ArrayList<Integer> targetIndexes) {

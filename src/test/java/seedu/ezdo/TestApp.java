@@ -28,9 +28,6 @@ public class TestApp extends MainApp {
     private static final double MIN_HEIGHT = 720;
     private static final double MIN_WIDTH = 1280;
 
-    public TestApp() {
-    }
-
     public TestApp(Supplier<ReadOnlyEzDo> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;

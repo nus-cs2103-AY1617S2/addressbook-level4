@@ -154,6 +154,18 @@ public class ModelManager extends ComponentManager implements Model {
         return isSetToDone;
     }
 
+    //@@author A0139177W
+    @Override
+    public boolean toggleTasksSelect(ArrayList<Task> tasksToToggle) {
+        ezDo.toggleTasksSelect(tasksToToggle);
+        final boolean isSetToSelect = tasksToToggle.get(0).getStarted();
+        updateFilteredListToShowAll();
+        ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
+        indicateEzDoChanged();
+        return isSetToSelect;
+    }
+    //@@author A0139177W
+
     /**
      * Updates an existing task in ezDo.
      *
@@ -451,8 +463,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
+         * returns true if task's {@code StartDate} comes before given {@code StartDate}
          * returns true if task's {@code StartDate} comes before given
          * {@code StartDate}
+
          */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
             String taskStartDateString = taskStartDate.toString();
@@ -495,6 +509,7 @@ public class ModelManager extends ComponentManager implements Model {
         /**
          * returns true if task's {@code DueDate} comes after given
          * {@code DueDate}
+
          */
         private boolean compareAfterDue(TaskDate taskDueDate) {
             String taskDueDateString = taskDueDate.toString();
@@ -510,7 +525,6 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if {@code givenDate2} comes before {@code givenDate1}
          */
         private boolean comesBefore(String givenDate1, String givenDate2) {
-
             // slice a given date format DD/MM/YYYY MM:SS into DD,MM,YYYY
             // separate strings
             int givenDD = Integer.parseInt(givenDate1.substring(0, 2));
@@ -553,11 +567,13 @@ public class ModelManager extends ComponentManager implements Model {
         ezDo.sortTasks(sortCriteria, isSortedAscending);
         indicateEzDoChanged();
     }
+
   //@@author
   //@@author A0139248X
     /**
      * Raises a {@code SortCriteriaChangedEvent}.
      */
+
     public void indicateSortCriteriaChanged() {
         raise(new SortCriteriaChangedEvent(currentSortCriteria));
     }
@@ -569,4 +585,5 @@ public class ModelManager extends ComponentManager implements Model {
     public void indicateIsSortedAscendingChanged() {
         raise(new IsSortedAscendingChangedEvent(currentIsSortedAscending));
     }
+
 }

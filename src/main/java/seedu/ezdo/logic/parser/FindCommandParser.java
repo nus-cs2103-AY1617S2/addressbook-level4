@@ -149,6 +149,7 @@ public class FindCommandParser implements CommandParser {
         String prefixToCompare2 = "Before";
         int prefixLength = prefixToCompare1.length();
 
+
         if (taskDateString.length() <= prefixLength) {
             return false;
         }
@@ -172,6 +173,7 @@ public class FindCommandParser implements CommandParser {
         String prefixToCompare1 = "after";
         String prefixToCompare2 = "After";
         int prefixLength = prefixToCompare1.length();
+
 
         if (taskDateString.length() <= prefixLength) {
             return false;

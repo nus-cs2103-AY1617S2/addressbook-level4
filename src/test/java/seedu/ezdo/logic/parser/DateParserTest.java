@@ -35,7 +35,6 @@ public class DateParserTest {
         dateParser = new DateParser("today 2pm");
         dt = c.getTime();
         String expectedValue = expectedFormat.format(dt);
-        System.out.println(expectedValue);
         assertTrue(expectedValue.equals(dateParser.value));
 
         dateParser = new DateParser("tomorrow 2pm");

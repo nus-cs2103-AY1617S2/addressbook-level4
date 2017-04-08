@@ -80,12 +80,12 @@ public class XmlEzDoStorage implements EzDoStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableEzDo(ezDo));
     }
   //@@author A0139248X
-
     /**
      * Moves the ezDo storage file to the new path
      *
      * @throws IOException if there was a problem moving the file
      */
+
     @Override
     public void moveEzDo(String oldPath, String newPath) throws IOException {
         assert oldPath != null;
