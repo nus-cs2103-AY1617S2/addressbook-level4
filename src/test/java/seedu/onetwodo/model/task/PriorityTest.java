@@ -1,6 +1,7 @@
 //@@author A0141138N
 package seedu.onetwodo.model.task;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -55,6 +56,24 @@ public class PriorityTest {
         assertFalse(Priority.isValidPriority("#1"));
         assertFalse(Priority.isValidPriority("first"));
         assertFalse(Priority.isValidPriority("top"));
+    }
+
+    @Test
+    public void testCompareTo() throws Exception {
+
+        Priority lowerPriority = new Priority("medium");
+        Priority higherPriority = new Priority("HIGh");
+        Priority higherPriorityChar = new Priority("h");
+        Priority noPriority = new Priority("");
+
+        assertEquals(lowerPriority.compareTo(higherPriority), 1);
+        assertEquals(higherPriority.compareTo(lowerPriority), -1);
+
+        assertEquals(higherPriority.compareTo(higherPriorityChar), 0);
+
+        assertEquals(noPriority.compareTo(higherPriority), 1);
+        assertEquals(higherPriority.compareTo(noPriority), -1);
+
     }
 
 }
