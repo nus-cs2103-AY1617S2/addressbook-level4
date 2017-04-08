@@ -311,7 +311,7 @@ _Figure 3.10.1. Calendar_
 * _week button_: **`show week`** <br>
 * _month button_: **`show month`** <br>
 
-For advanced users: **`p`**, **`n`**, **`s`** `<view>`, 
+For advanced users: **`p`**, **`n`**, **`s`** `<view>` <br>
 
 ### 3.12. Get help : `help`
 

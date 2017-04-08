@@ -225,7 +225,7 @@ For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/
 #### Design Patterns
 
 * Model-View-Controller (MVC) Pattern
-  
+
   > Model: the [Model](#34-model-component) component
   > View: the .fxml files in the src/main/resources/view folder
   > Controller: subclasses of UiPart (e.g. `TaskListPanel`)
@@ -238,7 +238,7 @@ For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/
 #### CalendarPanel
 
 The purpose of the `CalendarPanel` is to provide users with an overview of their [timed tasks](#timed-task) for the day, week or month.
-Instead of implementing the functionality of a calendar from scratch, a JavaScript jQuery plug-in for an event calendar, 
+Instead of implementing the functionality of a calendar from scratch, a JavaScript jQuery plug-in for an event calendar,
 [FullCalendar](https://fullcalendar.io), is loaded using a JavaFX WebEngine. <br>
 The calendar is updated whenever there are relevant changes made to the task manager.
 
