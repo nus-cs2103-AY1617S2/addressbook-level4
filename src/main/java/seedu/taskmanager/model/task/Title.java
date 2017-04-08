@@ -9,16 +9,17 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
 public class Title {
 
     public static final String MESSAGE_TITLE_CONSTRAINTS =
-            "Task titles should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task titles should only contain alphanumeric characters, spaces, and _,.?':;&%$@()!- symbols\n" +
+                    "It should not be blank";
 
     // @@author A0114269E
     /*
      * The first character of the title must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * Allows some commonly used special characters "/_,.?':;&%$@()!-"
+     * Allows some commonly used special characters "_,.?':;&%$@()!-"
      */
-    public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-//    public static final String TITLE_VALIDATION_REGEX = "([0-9a-zA-Z/_,.?':;&%$@()!-])([ 0-9a-zA-Z/_,.?':;&%$@()!-])+";
+//    public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TITLE_VALIDATION_REGEX = "[0-9a-zA-Z_,.?':;&%$@()!-][ 0-9a-zA-Z_,.?':;&%$@()!-]*";
     // @@author
 
     public final String value;
