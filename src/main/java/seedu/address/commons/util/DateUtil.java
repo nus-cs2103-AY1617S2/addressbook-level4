@@ -21,11 +21,26 @@ public class DateUtil {
             throw new IllegalValueException(seedu.address.model.task.Date.MESSAGE_DATE_CONSTRAINTS);
         }
     }
-    
+
     public static Date add(Date date, int days) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.add(Calendar.DATE, days);
         return c.getTime();
+    }
+
+//@@author A0164032U
+    /**
+     * Returns true if a given string is a valid date.
+     */
+    public static boolean isValidDate(String date) {
+        try {
+            Parser parser = new Parser();
+            List<DateGroup> groups = parser.parse(date);
+            boolean x = (groups.get(0).getDates().get(0) != null);
+            return x;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 }

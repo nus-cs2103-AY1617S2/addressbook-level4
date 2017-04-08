@@ -19,9 +19,9 @@ public abstract class Date {
     public final java.util.Date value;
 
     /**
-     * Validates given phone number.
+     * Validates given date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
@@ -54,6 +54,10 @@ public abstract class Date {
                 || (other instanceof Date
                         && this.value.equals(((Date) other).value));
     }
+    //@@author A0164032U
+   public static boolean isValidDate(String date){
+            return DateUtil.isValidDate(date);
+   }
 
     @Override
     public int hashCode() {
