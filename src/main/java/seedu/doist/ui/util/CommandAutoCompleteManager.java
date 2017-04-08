@@ -100,9 +100,11 @@ public class CommandAutoCompleteManager {
             s.append(words[i]).append(" ");
         }
         ArrayList<String> suggestions = new ArrayList<>();
+        if (s.toString().trim().isEmpty()) {
+            return suggestions;
+        }
         for (String desc : logic.getAllNames()) {
-            if ((Double.compare(org.apache.commons.lang3.StringUtils.
-                    getJaroWinklerDistance(desc, s.toString()), 0.60) >= 0) && count < maxItemNu) {
+            if ((desc.toLowerCase().contains(s.toString().toLowerCase())) && count < maxItemNu) {
                 suggestions.add(desc);
                 count++;
             }

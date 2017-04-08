@@ -11,6 +11,13 @@ import com.joestelmach.natty.DateGroup;
 import seedu.doist.commons.exceptions.IllegalValueException;
 
 //@@author A0147620L
+/**
+ * Class that holds all date and time information for a task.
+ * Encapsulates the start and end date and times, so that operations
+ * that use these properties of a task are easy.
+ * Consists of two properties, startDate and Date, that holds this information.
+ * Also defines the method that is used for parsing date and time input from the user.
+ */
 public class TaskDate {
 
     private Date startDate;
@@ -72,7 +79,7 @@ public class TaskDate {
      * Also checks if the parsing of dates has been successful
      * @param startDate
      * @param endDate
-     * @return
+     * @return true if dates are valid, and false if dates cannot be parsed
      * @throws IllegalValueException
      */
     public static boolean validateDate (Date startDate, Date endDate) throws IllegalValueException {
@@ -138,5 +145,28 @@ public class TaskDate {
     @Override
     public int hashCode() {
         return Objects.hash(startDate, endDate);
+    }
+
+    /**
+     * Method that returns 1 if this tasks dates lies within the parameter,
+     * or there is some overlap i.e, the parameter's startDate < task's startDate
+     * or the parameter's endDate > task's endDate
+     * @param dates
+     * @return 1 if overlapping dates, else 0
+     */
+    public int compareTo(TaskDate dates) {
+        if (dates == null || dates.getStartDate() == null ||
+                dates.getEndDate() == null || this.startDate == null
+                || this.endDate == null) {
+            return 0;
+        } else if (this.startDate.compareTo(dates.getStartDate()) < 0 &&
+                this.endDate.compareTo(dates.getEndDate()) < 0) {
+            return 0;
+        } else if (this.startDate.compareTo(dates.getStartDate()) > 0 &&
+                this.endDate.compareTo(dates.getEndDate()) > 0) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }

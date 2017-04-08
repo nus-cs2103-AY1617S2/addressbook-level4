@@ -1,8 +1,8 @@
 package seedu.doist.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.ListCommand.TaskType;
@@ -11,6 +11,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.ReadOnlyTask.ReadOnlyTaskCombinedComparator;
 import seedu.doist.model.task.Task;
+import seedu.doist.model.task.TaskDate;
 import seedu.doist.model.task.UniqueTaskList;
 import seedu.doist.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -55,10 +56,15 @@ public interface Model {
     void updateFilteredListToShowDefault();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(String keywords);
 
-    /** Updates the filter of the filtered task list to filter by the given task type and tags*/
-    void updateFilteredTaskList(TaskType type, UniqueTagList tags);
+    //@@author A0147620L
+    /** Updates the filter of the filtered task list to filter by the given task type, tags and dates*/
+    void updateFilteredTaskList(TaskType type, UniqueTagList tags, TaskDate dates);
+
+    /** Sorts the task accorfing to the specific comparator passed as an argument */
+    void sortTasks(Comparator<ReadOnlyTask> comparator);
+    //@@author
 
     /** Sorts the tasks according to the comparators defined in the list*/
     void sortTasks(List<SortType> sortTypes);
