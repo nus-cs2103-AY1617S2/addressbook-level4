@@ -57,7 +57,7 @@ public class SyncCommandTest {
     }
 
     @Test
-    public void executeSyncCommandWithSyncCommandRaised() throws SyncException, CommandException {
+    public void executeSyncCommandWithValidArgumentsAndSyncCommandRaised() throws SyncException, CommandException {
         doThrow(new SyncException(null)).when(mockModel).startSync();
         assertNotNull(logic);
         thrown.expect(CommandException.class);
