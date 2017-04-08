@@ -95,6 +95,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(ke);
     }
 
+    public void setKeyListenerReleased(EventHandler<KeyEvent> ke) {
+        commandTextField.setOnKeyReleased(ke);
+    }
+
     private void setKeyListenerForMutators(String command) {
         switch (command) {
         case AddCommand.COMMAND_WORD:

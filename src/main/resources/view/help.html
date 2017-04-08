@@ -2,9 +2,22 @@
 
 <!-- @author A0141138N -->
 <html>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<script type="text/javascript">
+document.addEventListener("keydown", keyDownTextField, false);
 
+function keyDownTextField(e) {
+	var keyCode = e.keyCode;
+	switch (keyCode) {
+	case 38: window.scrollBy(0,-100);
+	case 40: window.scrollBy(0,100);
+	default: break;
+	}
+	console.log(keyCode)
+}
+</script>
+</head>
 <h1>
 	<span class="blue">&lt;</span>Cheat Sheet<span class="blue">&gt;</span>
 </h1>
