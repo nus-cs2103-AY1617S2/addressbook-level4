@@ -7,9 +7,11 @@ import org.junit.Test;
 //@@author A0124368A
 public class AutocompleteTest extends TaskManagerGuiTest {
 
-    private static final String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "schedule", "list",
+    private static final String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "save", "list",
         "help", "find", "undo", "redo", "clear" };
-    private static final String[] COMMANDS_TWO_TAB = { "unmark" };
+    private static final String[] COMMANDS_TWO_TAB = { "schedule", "exit" };
+    private static final String[] COMMANDS_THREE_TAB = { "sync" };
+    private static final String[] COMMANDS_FOUR_TAB = { "sort" };
 
     @Test
     public void testAutocompleteEmptyCommand() {
@@ -31,6 +33,14 @@ public class AutocompleteTest extends TaskManagerGuiTest {
 
         for (String command : COMMANDS_TWO_TAB) {
             assertCommandAutocompleted(String.valueOf(command.charAt(0)), command, 2);
+        }
+
+        for (String command : COMMANDS_THREE_TAB) {
+            assertCommandAutocompleted(String.valueOf(command.charAt(0)), command, 3);
+        }
+
+        for (String command : COMMANDS_FOUR_TAB) {
+            assertCommandAutocompleted(String.valueOf(command.charAt(0)), command, 4);
         }
     }
 
