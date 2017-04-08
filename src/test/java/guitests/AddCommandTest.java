@@ -15,7 +15,7 @@ import seedu.jobs.testutil.TestUtil;
 public class AddCommandTest extends TaskBookGuiTest {
 
     @Test
-    public void add() throws IllegalArgumentException, IllegalTimeException {
+    public void add() throws IllegalArgumentException, IllegalTimeException, InterruptedException {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.CS4101;

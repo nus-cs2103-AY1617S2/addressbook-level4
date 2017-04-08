@@ -41,4 +41,5 @@ public interface TaskBookStorage {
      */
     void saveTaskBook(ReadOnlyTaskBook addressBook, String filePath) throws IOException;
 
+    void setFilePath(String filePath);
 }

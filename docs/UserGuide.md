@@ -3,19 +3,7 @@
 This product is a tool to accept natural language commands via keyboards to manage the user's schedule and todo tasks.
 
 * [Start the program](#start-the-program)
-<<<<<<< HEAD
-* [Feature Details](#feature-details)
-	* [help](#view-help--help)
-	* [add](#add-a-task-add)
-	* [delete](#delete-a-task-delete)
-   * [clear](#clear-a-task-clear)
-	* [find](#find-a-task-find)
-	* [list](#list-tasks--list)
-	* [edit](#edit-a-task-edit)
-   * [undo/redo](#undo/redo-a-task-undo-redo)
-	* [exit](#exit-the-program--exit)
-	* [save](#save-the-data)
-=======
+
 * [Feature details](#feature-details)
     * [help](#view-help-help)
     * [add](#add-a-task-add)
@@ -26,7 +14,7 @@ This product is a tool to accept natural language commands via keyboards to mana
     * [undo/redo](#undo/redo-a-task-undo-redo)
     * [exit](#exit-the-program-exit)
     * [save](#save-the-data)
->>>>>>> refs/heads/master
+
 * [Command Summary](#command-summary)
 
 
@@ -106,7 +94,7 @@ Example:
 ### Edit a task: `edit`
 <<<<<<< HEAD
 Edit is the command word to edit a specific task
-Format : `edit index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+Format : `edit index/INDEX [name/NAME start/START   end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 =======
 Edit is the command word to edit a specific tasks
 Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
@@ -124,7 +112,7 @@ Example:
 
 ### Undo/Redo a task: `undo` `redo`
 Undo is the command word to erase the last change done
-Format : `undo` `undo` 
+Format : `undo` `undo`
 
 Example:
 * `delete 1` >> `undo` to retrieve task indexed 1
@@ -138,14 +126,14 @@ Example:
 
 ### Exit the program: `exit`
 Exits the program.
-Format: `exit`  
+Format: `exit`
 
-### Save the data 
+### Save the data
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## Command Summary
-<<<<<<< HEAD
-Command | Format  
+
+Command | Format
 -------- | :--------
 help | `help`
 add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
@@ -153,18 +141,6 @@ delete | `delete index\INDEX`
 clear | `clear`
 find | `find name/Name`
 list | `list * | completed | pending | overdue`
-edit | `edit index/INDEX [name/NAME start/START	end/END	recur/PERIOD desc/DESCRIPTION tag/TAG]`
+edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 undo/redo | `undo` `redo`
 exit | `exit`
-=======
-| Command | Format
-| --------| --------
-| help | `help`
-| add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
-| delete | `delete index\INDEX`
-| find | `find name/Name`
-| list | `list * | completed | pending | overdue`
-| edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-| undo/redo | `undo` `redo`
-| exit | `exit`
->>>>>>> refs/heads/master

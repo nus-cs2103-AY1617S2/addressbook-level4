@@ -1,5 +1,7 @@
 package seedu.jobs.logic.commands;
 
+import java.io.IOException;
+
 import seedu.jobs.commons.core.Messages;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.Model;
@@ -25,8 +27,9 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IOException
      */
-    public abstract CommandResult execute() throws CommandException;
+    public abstract CommandResult execute() throws CommandException, IOException;
 
     /**
      * Provides any needed dependencies to the command.

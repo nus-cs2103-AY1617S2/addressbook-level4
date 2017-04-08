@@ -1,5 +1,6 @@
 package seedu.jobs.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -13,10 +14,12 @@ import seedu.jobs.MainApp;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
+import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.LoginInfo;
@@ -105,27 +108,35 @@ public class UiManager extends ComponentManager implements Ui {
     //==================== Event Handling Code ===============================================================
 
     @Subscribe
-    private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
+    public void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
     @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
+    public void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+    public void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 
+  //@@author A0130979U
+    @Subscribe
+    public void handleConfigChangedSavePathEvent(ConfigChangeSavePathEvent event) throws IOException {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        config.setTaskBookFilePath(event.getPath());
+        ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
+    }
+  //@@author
 }

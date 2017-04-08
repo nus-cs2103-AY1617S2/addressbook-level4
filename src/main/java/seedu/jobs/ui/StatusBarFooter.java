@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.util.FxViewUtil;
 
 /**
@@ -54,4 +55,14 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
+
+    @Subscribe
+    public void handleConfigChangeSavePathEvent(ConfigChangeSavePathEvent abce) {
+        setSaveLocation(abce.getPath());
+        String lastUpdated = (new Date()).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus("Last Updated: " + lastUpdated);
+    }
+
 }
+

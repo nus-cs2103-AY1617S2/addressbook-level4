@@ -45,4 +45,6 @@ public class ResultDisplay extends UiPart<Region> {
         displayed.setValue(event.message);
     }
 
+
+
 }

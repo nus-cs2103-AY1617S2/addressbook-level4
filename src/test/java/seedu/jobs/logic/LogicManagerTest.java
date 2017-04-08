@@ -7,6 +7,7 @@ import static seedu.jobs.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.jobs.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.jobs.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -69,17 +70,17 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) throws IllegalTimeException {
+    public void handleLocalModelChangedEvent(TaskBookChangedEvent abce) throws IllegalTimeException {
         latestTaskAddressBook = new TaskBook(abce.data);
     }
 
     @Subscribe
-    private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
+    public void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
         targetedJumpIndex = je.targetIndex;
     }
 
@@ -103,7 +104,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalid() throws IllegalTimeException {
+    public void execute_invalid() throws IllegalTimeException, IOException {
         String invalidCommand = "       ";
         assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
@@ -111,11 +112,12 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
      * Also confirms that both the 'address book' and the 'last shown list' are as specified.
+     * @throws IOException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
                                       ReadOnlyTaskBook expectedAddressBook,
-                                      List<? extends ReadOnlyTask> expectedShownList) {
+                                      List<? extends ReadOnlyTask> expectedShownList) throws IOException {
         assertCommandBehavior(false, inputCommand, expectedMessage, expectedAddressBook, expectedShownList);
     }
 
@@ -123,9 +125,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
      * @throws IllegalTimeException
+     * @throws IOException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalTimeException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage)
+            throws IllegalTimeException, IOException {
         TaskBook expectedTaskBook = new TaskBook(model.getTaskBook());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBook, expectedShownList);
@@ -138,10 +142,11 @@ public class LogicManagerTest {
      *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     * @throws IOException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskBook expectedTaskBook,
-                                       List<? extends ReadOnlyTask> expectedShownList) {
+                                       List<? extends ReadOnlyTask> expectedShownList) throws IOException {
 
         try {
             CommandResult result = logic.execute(inputCommand);
@@ -161,19 +166,19 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unknownCommandWord() throws IllegalTimeException {
+    public void execute_unknownCommandWord() throws IllegalTimeException, IOException {
         String unknownCommand = "uicfhmowqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_help() {
+    public void execute_help() throws IOException {
         assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskBook(), Collections.emptyList());
         assertTrue(helpShown);
     }
 
     @Test
-    public void execute_exit() {
+    public void execute_exit() throws IOException {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new TaskBook(), Collections.emptyList());
     }
@@ -200,7 +205,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidTaskData() throws IllegalTimeException {
+    public void execute_add_invalidTaskData() throws IllegalTimeException, IOException {
         //151 characters
         assertCommandFailure("add A123456789A123456789A123456789A123456789A123456789A123456789A123456789"
                 + "A123456789A123456789A123456789A123456789A123456789A123456789A123456789A1234567891",
@@ -359,7 +364,7 @@ public class LogicManagerTest {
 
 
     @Test
-    public void execute_find_invalidArgsFormat() throws IllegalTimeException {
+    public void execute_find_invalidArgsFormat() throws IllegalTimeException, IOException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }

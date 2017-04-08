@@ -10,7 +10,7 @@ import guitests.guihandles.HelpWindowHandle;
 public class HelpWindowTest extends TaskBookGuiTest {
 
     @Test
-    public void openHelpWindow() {
+    public void openHelpWindow() throws InterruptedException {
         //use accelerator
         commandBox.clickOnTextField();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());

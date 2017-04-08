@@ -1,5 +1,6 @@
 package seedu.jobs.model;
 
+import java.io.IOException;
 import java.util.EmptyStackException;
 import java.util.Set;
 
@@ -62,5 +63,7 @@ public interface Model {
     void undoCommand() throws EmptyStackException;
 
     void redoCommand() throws EmptyStackException;
+
+    void changePath(String path) throws IOException;
 
 }
