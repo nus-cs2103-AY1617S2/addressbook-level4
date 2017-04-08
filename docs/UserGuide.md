@@ -132,24 +132,24 @@ you already put in the command box.
   
 For example, ToLuist suggest to you the command words `add` and `alias` when you type `a`.
 
-   <img src="images/smart-command-word.png" width="600">
+   <img src="images/smart-command-word.png" width="600"><br>
    **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed
 
 ToLuist also shows you the parameters available for a command type.
 
-   <img src="images/smart-command-parameter.png" width="600">
+   <img src="images/smart-command-parameter.png" width="600"><br>
    **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task
 
 If a command can have multiple options that follow one particular parameter, ToLuist shows you these too.
 
-   <img src="images/smart-command-different-options.png" width="600">
+   <img src="images/smart-command-different-options.png" width="600"><br>
    **Figure 3.2c**: `high` and `low` are suggested as options for task priority
 
 If only one suggestion is shown, you can press kbd>Tab</kbd> to automatically replace the last word of your 
 command with the suggestion. If there are multiple suggestions available, you can press <kbd>Tab</kbd> to 
-cycle through the list of suggestions, and press kbd>Enter</kbd> to select one of them.
+cycle through the list of suggestions, and press <kbd>Enter</kbd> to select one of them.
  
-   <img src="images/smart-command-multiple-suggestions.png" width="600">
+   <img src="images/smart-command-multiple-suggestions.png" width="600"><br>
    **Figure 3.2d**: Suggestions can be cycled through, with highlighting
   
 
