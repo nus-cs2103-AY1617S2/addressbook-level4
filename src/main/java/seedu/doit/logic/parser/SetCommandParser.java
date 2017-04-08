@@ -5,6 +5,7 @@ import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.IncorrectCommand;
 import seedu.doit.logic.commands.SetCommand;
+
 //@@author A0138909R
 public class SetCommandParser {
     private static final int MAX_STRING_WORDS = 2;
@@ -14,12 +15,12 @@ public class SetCommandParser {
      * SetCommand and returns an SetCommand object for execution.
      */
     public Command parse(String args) {
-        String[] splited = args.trim().split("\\s+");
+        String[] split = args.trim().split("\\s+");
 
-        if (splited.length != MAX_STRING_WORDS) {
+        if (split.length != MAX_STRING_WORDS) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
         }
 
-        return new SetCommand(splited[0], splited[1]);
+        return new SetCommand(split[0].toLowerCase(), split[1].toLowerCase());
     }
 }
