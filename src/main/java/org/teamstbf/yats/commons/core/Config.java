@@ -10,96 +10,96 @@ import org.teamstbf.yats.commons.exceptions.DuplicateDataException;
  */
 public class Config {
 
-    public static final String DEFAULT_CONFIG_FILE = "config.json";
+	public static final String DEFAULT_CONFIG_FILE = "config.json";
 
-    // Config values customizable through config file
-    private String appTitle = "Yet Another Task Scheduler";
-    private Level logLevel = Level.INFO;
-    private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/YATS.xml";
-    private String taskManagerName = "MyYATSList";
+	// Config values customizable through config file
+	private String appTitle = "Yet Another Task Scheduler";
+	private Level logLevel = Level.INFO;
+	private String userPrefsFilePath = "preferences.json";
+	private String taskManagerFilePath = "data/YATS.xml";
+	private String taskManagerName = "MyYATSList";
 
-    public String getAppTitle() {
-        return appTitle;
-    }
+	public String getAppTitle() {
+		return appTitle;
+	}
 
-    public void setAppTitle(String appTitle) {
-        this.appTitle = appTitle;
-    }
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
+	}
 
-    public Level getLogLevel() {
-        return logLevel;
-    }
+	public Level getLogLevel() {
+		return logLevel;
+	}
 
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
+	public void setLogLevel(Level logLevel) {
+		this.logLevel = logLevel;
+	}
 
-    public String getUserPrefsFilePath() {
-        return userPrefsFilePath;
-    }
+	public String getUserPrefsFilePath() {
+		return userPrefsFilePath;
+	}
 
-    public void setUserPrefsFilePath(String userPrefsFilePath) {
-        this.userPrefsFilePath = userPrefsFilePath;
-    }
+	public void setUserPrefsFilePath(String userPrefsFilePath) {
+		this.userPrefsFilePath = userPrefsFilePath;
+	}
 
-    public String getTaskManagerFilePath() {
-        return taskManagerFilePath;
-    }
+	public String getTaskManagerFilePath() {
+		return taskManagerFilePath;
+	}
 
-    public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateFileException {
-        if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
-            throw new DuplicateFileException("Invalid. Command will result in duplicate file in source directory");
-        } else {
-            this.taskManagerFilePath = taskManagerFilePath;
-        }
-    }
+	public void setTaskManagerFilePath(String taskManagerFilePath) throws DuplicateFileException {
+		if (this.taskManagerFilePath.equals(taskManagerFilePath)) {
+			throw new DuplicateFileException("Invalid. Command will result in duplicate file in source directory");
+		} else {
+			this.taskManagerFilePath = taskManagerFilePath;
+		}
+	}
 
-    public String getTaskManagerName() {
-        return taskManagerName;
-    }
+	public String getTaskManagerName() {
+		return taskManagerName;
+	}
 
-    public void setTaskManagerName(String taskManagerName) {
-        this.taskManagerName = taskManagerName;
-    }
+	public void setTaskManagerName(String taskManagerName) {
+		this.taskManagerName = taskManagerName;
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Config)) { // this handles null as well.
-            return false;
-        }
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if (!(other instanceof Config)) { // this handles null as well.
+			return false;
+		}
 
-        Config o = (Config) other;
+		Config o = (Config) other;
 
-        return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
-                && Objects.equals(taskManagerName, o.taskManagerName);
-    }
+		return Objects.equals(appTitle, o.appTitle) && Objects.equals(logLevel, o.logLevel)
+				&& Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+				&& Objects.equals(taskManagerFilePath, o.taskManagerFilePath)
+				&& Objects.equals(taskManagerName, o.taskManagerName);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(appTitle, logLevel, userPrefsFilePath, taskManagerFilePath, taskManagerName);
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("App title : " + appTitle);
-        sb.append("\nCurrent log level : " + logLevel);
-        sb.append("\nPreference file Location : " + userPrefsFilePath);
-        sb.append("\nLocal data file location : " + taskManagerFilePath);
-        sb.append("\nTaskManager name : " + taskManagerName);
-        return sb.toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("App title : " + appTitle);
+		sb.append("\nCurrent log level : " + logLevel);
+		sb.append("\nPreference file Location : " + userPrefsFilePath);
+		sb.append("\nLocal data file location : " + taskManagerFilePath);
+		sb.append("\nTaskManager name : " + taskManagerName);
+		return sb.toString();
+	}
 
-    public static class DuplicateFileException extends DuplicateDataException {
-        public DuplicateFileException(String message) {
-            super(message);
-        }
-    }
+	public static class DuplicateFileException extends DuplicateDataException {
+		public DuplicateFileException(String message) {
+			super(message);
+		}
+	}
 
 }

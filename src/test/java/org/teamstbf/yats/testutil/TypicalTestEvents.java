@@ -12,7 +12,7 @@ public class TypicalTestEvents {
 
 	public static void loadAddressBookWithSampleData(TaskManager ab) {
 		for (TestEvent person : new TypicalTestEvents().getTypicalTasks()) {
-		    ab.addEvent(new Event(person));
+			ab.addEvent(new Event(person));
 		}
 	}
 
@@ -21,23 +21,24 @@ public class TypicalTestEvents {
 	public TypicalTestEvents() {
 		try {
 			abdicate = new EventBuilder().withTitle("Abdicate the British Throne")
-					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
-					.withLocation("Buckingham Palace").withTags("KingGeorgeVI").withIsDone("No").build();
-			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose")
-					.withStartTime("").withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row")
-					.withTags("reaper").withIsDone("No").build();
+					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017")
+					.withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Buckingham Palace")
+					.withTags("KingGeorgeVI").withIsDone("No").build();
+			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose").withStartTime("")
+					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row").withTags("reaper")
+					.withIsDone("No").build();
 			oxygen = new EventBuilder().withTitle("Oxygen not Included").withDescription("Don't starve together")
-					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Klei Entertainment")
-					.withTags("ONN").withIsDone("No").build();
+					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
+					.withLocation("Klei Entertainment").withTags("ONN").withIsDone("No").build();
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
-					.withDescription("fighting the wildings, but extremely scared").withStartTime("")
-					.withEndTime("").withDeadline("").withLocation("The Wall")
-					.withTags("LordCommanderJonSnow").withIsDone("No").build();
-			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("")
-					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH").withIsDone("No")
+					.withDescription("fighting the wildings, but extremely scared").withStartTime("").withEndTime("")
+					.withDeadline("").withLocation("The Wall").withTags("LordCommanderJonSnow").withIsDone("No")
 					.build();
+			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("").withEndTime("")
+					.withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH")
+					.withIsDone("No").build();
 
 		} catch (IllegalValueException e) {
 			e.printStackTrace();

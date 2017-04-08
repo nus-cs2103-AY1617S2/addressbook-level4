@@ -17,42 +17,42 @@ import org.teamstbf.yats.model.item.UniqueEventList;
 // @@author A0138952W
 public class BatchMarkDoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "%d tasks marked as done";
-    public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
+	public static final String COMMAND_WORD = "mark";
+	public static final String MESSAGE_EDIT_TASK_SUCCESS = "%d tasks marked as done";
+	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
-	    + "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
-	    + "Example: " + COMMAND_WORD + " 1";
+	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
+			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
+			+ "Example: " + COMMAND_WORD + " 1";
 
-    public final Stack<Integer> targetIndexes;
+	public final Stack<Integer> targetIndexes;
 
-    public BatchMarkDoneCommand(Stack<Integer> targetIndexes) {
-	this.targetIndexes = targetIndexes;
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-
-	List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
-	int numOfTask = targetIndexes.size();
-
-	if (lastShownList.size() < targetIndexes.peek()) {
-	    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+	public BatchMarkDoneCommand(Stack<Integer> targetIndexes) {
+		this.targetIndexes = targetIndexes;
 	}
-	model.saveImageOfCurrentTaskManager();
 
-	for (int i = 0; i < numOfTask; i++) {
-	    ReadOnlyEvent taskToMark = lastShownList.get(targetIndexes.peek());
-	    Event markedTask = new Event(taskToMark);
-	    if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
-		return new CommandResult(MESSAGE_ALR_MARKED);
-	    }
-	    markedTask.getIsDone().markDone();
-	    model.updateEvent(targetIndexes.pop(), markedTask);
-	    model.updateDoneTaskList();
-	    model.updateFilteredListToShowAll();
+	@Override
+	public CommandResult execute() throws CommandException {
+
+		List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+		int numOfTask = targetIndexes.size();
+
+		if (lastShownList.size() < targetIndexes.peek()) {
+			throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+		}
+		model.saveImageOfCurrentTaskManager();
+
+		for (int i = 0; i < numOfTask; i++) {
+			ReadOnlyEvent taskToMark = lastShownList.get(targetIndexes.peek());
+			Event markedTask = new Event(taskToMark);
+			if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
+				return new CommandResult(MESSAGE_ALR_MARKED);
+			}
+			markedTask.getIsDone().markDone();
+			model.updateEvent(targetIndexes.pop(), markedTask);
+			model.updateDoneTaskList();
+			model.updateFilteredListToShowAll();
+		}
+		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, numOfTask));
 	}
-	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, numOfTask));
-    }
 }

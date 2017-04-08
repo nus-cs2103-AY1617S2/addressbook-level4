@@ -8,15 +8,15 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
  */
 public class IncorrectCommand extends Command {
 
-    public final String feedbackToUser;
+	public final String feedbackToUser;
 
-    public IncorrectCommand(String feedbackToUser) {
-        this.feedbackToUser = feedbackToUser;
-    }
+	public IncorrectCommand(String feedbackToUser) {
+		this.feedbackToUser = feedbackToUser;
+	}
 
-    @Override
-    public CommandResult execute() throws CommandException {
-        throw new CommandException(feedbackToUser);
-    }
+	@Override
+	public CommandResult execute() throws CommandException {
+		throw new CommandException(feedbackToUser);
+	}
 
 }

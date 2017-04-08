@@ -9,21 +9,21 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
  */
 public class UndoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_UNDO_TASK_SUCCESS = "Undo completed";
-    public static final String MESSAGE_EMPTY_UNDO_STACK = "Nothing to undo";
+	public static final String COMMAND_WORD = "undo";
+	public static final String MESSAGE_UNDO_TASK_SUCCESS = "Undo completed";
+	public static final String MESSAGE_EMPTY_UNDO_STACK = "Nothing to undo";
 
-    public UndoCommand() {
-    }
+	public UndoCommand() {
+	}
 
-    @Override
-    public CommandResult execute() throws CommandException {
-        assert model != null;
-        if (model.checkEmptyUndoStack()) {
-            throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
-        }
-        model.getPreviousState();
-        return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
+	@Override
+	public CommandResult execute() throws CommandException {
+		assert model != null;
+		if (model.checkEmptyUndoStack()) {
+			throw new CommandException(MESSAGE_EMPTY_UNDO_STACK);
+		}
+		model.getPreviousState();
+		return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
 
-    }
+	}
 }

@@ -16,7 +16,8 @@ public class RecurrenceTest {
 		assertFalse(Recurrence.isValidPeriod("weekl")); // typo error
 		assertFalse(Recurrence.isValidPeriod("")); // contains nothing
 		assertFalse(Recurrence.isValidPeriod("    ")); // spaces only
-		assertFalse(Recurrence.isValidPeriod("fnwuibig")); // completely invalid input
+		assertFalse(Recurrence.isValidPeriod("fnwuibig")); // completely invalid
+															// input
 
 		// valid recurrence
 		assertTrue(Recurrence.isValidPeriod(" daily "));

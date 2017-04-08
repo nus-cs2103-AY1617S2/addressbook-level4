@@ -8,10 +8,12 @@ public class Schedule {
 
 	public static final String MESSAGE_TIME_ERROR = "Invalid or empty date/time entry";
 	public static final String STRING_EMPTY = "";
-    public static final SimpleDateFormat FORMATTER_TIME = new SimpleDateFormat("hh:mma ");
+	public static final SimpleDateFormat FORMATTER_TIME = new SimpleDateFormat("hh:mma ");
 	private static final SimpleDateFormat FORMATTER_DATE = new SimpleDateFormat("hh:mma dd/MM/yyyy");
 	public static final String MESSAGE_TIME_CONSTRAINTS = "non valid time";
-	// public static final String SCHEDULE_VALIDATION_REGEX = "((1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)|^(?![\\s\\S])) (^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$|^(?![\\s\\S]))";
+	// public static final String SCHEDULE_VALIDATION_REGEX =
+	// "((1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)|^(?![\\s\\S]))
+	// (^[0-3][0-9]/[0-3][0-9]/(?:[0-9][0-9])?[0-9][0-9]$|^(?![\\s\\S]))";
 
 	private Date scheduleDate;
 
@@ -22,10 +24,10 @@ public class Schedule {
 	public Schedule(Date dateObject) {
 		this.scheduleDate = dateObject;
 	}
-	
-    public String getTimeOnlyString() {
-        return FORMATTER_TIME.format(scheduleDate);
-    }
+
+	public String getTimeOnlyString() {
+		return FORMATTER_TIME.format(scheduleDate);
+	}
 
 	public Schedule(String timeString) {
 		// CHANGE THIS
@@ -76,10 +78,10 @@ public class Schedule {
 		return this.scheduleDate;
 	}
 
-	
-	/* public static boolean isValidSchedule(String date) {
-
-		return date.matches(SCHEDULE_VALIDATION_REGEX);
-	} */
+	/*
+	 * public static boolean isValidSchedule(String date) {
+	 * 
+	 * return date.matches(SCHEDULE_VALIDATION_REGEX); }
+	 */
 
 }
