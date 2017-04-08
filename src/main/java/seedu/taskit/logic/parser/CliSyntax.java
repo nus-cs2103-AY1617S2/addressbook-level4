@@ -11,11 +11,11 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_TAG = new Prefix(" tag ");
-    public static final Prefix PREFIX_BY= new Prefix(" by ");
-    public static final Prefix PREFIX_FROM= new Prefix(" from ");
-    public static final Prefix PREFIX_TO= new Prefix(" to ");
-    public static final Prefix PREFIX_PRIORITY= new Prefix(" priority ");
-    public static final Prefix PREFIX_TITLE= new Prefix("title");
+    public static final Prefix PREFIX_BY = new Prefix(" by ");
+    public static final Prefix PREFIX_FROM = new Prefix(" from ");
+    public static final Prefix PREFIX_TO = new Prefix(" to ");
+    public static final Prefix PREFIX_PRIORITY = new Prefix(" priority ");
+    public static final Prefix PREFIX_TITLE = new Prefix("title");
 
     public static final String LIST_ALL = "all";
     public static final String LIST_DEADLINE = "deadline";

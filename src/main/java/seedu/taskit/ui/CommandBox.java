@@ -15,22 +15,17 @@ import seedu.taskit.logic.commands.CommandResult;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.logic.commands.exceptions.CommandException;
 
-import static seedu.taskit.ui.MenuBarPanel.MENU_FLOATING_TASK;
-import static seedu.taskit.ui.MenuBarPanel.MENU_EVENT_TASK;
-import static seedu.taskit.ui.MenuBarPanel.MENU_DEADLINE_TASK;
-import static seedu.taskit.ui.MenuBarPanel.MENU_TODAY_TASK;
-import static seedu.taskit.ui.MenuBarPanel.MENU_OVERDUE_TASK;
-import static seedu.taskit.ui.MenuBarPanel.MENU_HOME;
-
 import static seedu.taskit.logic.parser.CliSyntax.LIST_ALL;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
+import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
+import static seedu.taskit.ui.MenuBarPanel.MENU_DEADLINE_TASK;
+import static seedu.taskit.ui.MenuBarPanel.MENU_EVENT_TASK;
+import static seedu.taskit.ui.MenuBarPanel.MENU_FLOATING_TASK;
+import static seedu.taskit.ui.MenuBarPanel.MENU_OVERDUE_TASK;
+import static seedu.taskit.ui.MenuBarPanel.MENU_TODAY_TASK;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);

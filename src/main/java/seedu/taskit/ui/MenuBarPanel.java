@@ -36,10 +36,10 @@ public class MenuBarPanel extends UiPart<Region> {
     @FXML
     private ListView<String> menuBarView;
 
-    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_HOME,MENU_TODAY_TASK,
-            MENU_OVERDUE_TASK,MENU_FLOATING_TASK,MENU_EVENT_TASK, MENU_DEADLINE_TASK);
-    private final String[] iconPaths = {HOME_ICON_PATH,TODAY_TASK_ICON_PATH,OVERDUE_TASK_ICON_PATH,
-            FLOATING_TASK_ICON_PATH,EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH};
+    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_HOME, MENU_TODAY_TASK,
+            MENU_OVERDUE_TASK, MENU_FLOATING_TASK, MENU_EVENT_TASK, MENU_DEADLINE_TASK);
+    private final String[] iconPaths = {HOME_ICON_PATH, TODAY_TASK_ICON_PATH, OVERDUE_TASK_ICON_PATH,
+            FLOATING_TASK_ICON_PATH, EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH};
 
     public MenuBarPanel(AnchorPane menuBarPanelPlaceholder) {
         super(FXML);
