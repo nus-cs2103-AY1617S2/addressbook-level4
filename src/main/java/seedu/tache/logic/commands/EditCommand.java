@@ -129,11 +129,6 @@ public class EditCommand extends Command implements Undoable {
                 updatedStartDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
                 updatedStartDateTime.get().setDefaultTime();
             }
-            if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
-                //Floating Task to Non-Floating, do not allow start date only
-                updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getStartDate().get()));
-                updatedEndDateTime.get().setDefaultTime();
-            }
         }
         if (editTaskDescriptor.getEndDate().isPresent()) {
             if (updatedEndDateTime.isPresent()) {
@@ -165,12 +160,27 @@ public class EditCommand extends Command implements Undoable {
         }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
+        updatedEndDateTime = checkFloatingToNonFloatingCase(editTaskDescriptor, updatedStartDateTime,
+                                                                updatedEndDateTime);
         checkValidDateRange(updatedStartDateTime, updatedEndDateTime);
         checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
 
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
                             updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
 
+    }
+
+    private static Optional<DateTime> checkFloatingToNonFloatingCase(EditTaskDescriptor editTaskDescriptor,
+                                Optional<DateTime> updatedStartDateTime, Optional<DateTime> updatedEndDateTime)
+                                throws IllegalValueException {
+        if (!updatedEndDateTime.isPresent() && !editTaskDescriptor.getEndDate().isPresent()) {
+            if (updatedStartDateTime.isPresent()) {
+                //Floating Task to Non-Floating, do not allow start date only
+                Optional<DateTime> temp = Optional.of(updatedStartDateTime.get());
+                return temp;
+            }
+        }
+        return updatedEndDateTime;
     }
 
     private static void checkValidDateRange(Optional<DateTime> updatedStartDateTime,
