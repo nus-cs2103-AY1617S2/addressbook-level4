@@ -2,6 +2,7 @@ package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.TaskManager;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList;
 
@@ -18,6 +19,8 @@ public class TypicalTestTasks {
     public TestTask findGirlfriend;
     public TestTask visitSarah;
     public TestTask startDateOnly;
+    public TestTask recurringMacdonalds;
+    public TestTask recurringKFC;
 
     public TypicalTestTasks() {
         try {
@@ -39,6 +42,18 @@ public class TypicalTestTasks {
             findGirlfriend = new TaskBuilder().withName("Find a girlfriend").build();
             startDateOnly = new TaskBuilder().withName("Task with only start date")
                     .withStartDateTime("04-01-17 19:55:12").build();
+
+            //Recurring tasks
+            recurringMacdonalds = new TaskBuilder().withName("Macdonald Breakfast")
+                    .withStartDateTime("16:00:00 next week")
+                    .withEndDateTime("19:00:00 two weeks later")
+                    .withRecurringInterval(RecurInterval.WEEK)
+                    .withRecurringStatus(true).build();
+            recurringKFC = new TaskBuilder().withName("KFC Dinner")
+                    .withStartDateTime("16:00:00 next week")
+                    .withEndDateTime("19:00:00 10 months later")
+                    .withRecurringInterval(RecurInterval.MONTH)
+                    .withRecurringStatus(true).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -57,6 +72,10 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{payDavid, visitSarah, eggsAndBread, visitFriend, readBook};
+    }
+
+    public TestTask[] getTypicalRecurringTasks() {
+        return new TestTask[]{recurringMacdonalds, recurringKFC};
     }
 
     public TaskManager getTypicalTaskManager() {

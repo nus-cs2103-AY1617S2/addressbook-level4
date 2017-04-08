@@ -1,6 +1,7 @@
 package seedu.tache.testutil;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
@@ -36,6 +37,16 @@ public class TaskBuilder {
 
     public TaskBuilder withEndDateTime(String datetime) throws IllegalValueException {
         this.task.setEndDateTime(new DateTime(datetime));
+        return this;
+    }
+
+    public TaskBuilder withRecurringInterval(RecurInterval interval) throws IllegalValueException {
+        this.task.getRecurState().setRecurInterval(interval);
+        return this;
+    }
+
+    public TaskBuilder withRecurringStatus(boolean isRecurring) throws IllegalValueException {
+        this.task.getRecurState().setRecurringStatus(isRecurring);
         return this;
     }
 
