@@ -21,14 +21,14 @@ public interface WhatsLeftStorage {
      * Sets the new storage location of the data file
      */
     void setWhatsLeftFilePath(String filepath);
-
+  //@@author
     /**
      * Returns WhatsLeft data as a {@link ReadOnlyWhatsLeft}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    //@@author
+
     Optional<ReadOnlyWhatsLeft> readWhatsLeft() throws DataConversionException, IOException;
 
     /**

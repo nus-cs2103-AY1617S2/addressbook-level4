@@ -8,7 +8,6 @@ import seedu.whatsleft.commons.core.Messages;
 import seedu.whatsleft.commons.events.model.ConfigChangedEvent;
 import seedu.whatsleft.logic.commands.exceptions.CommandException;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
-import seedu.whatsleft.storage.JsonUserConfigStorage;
 import seedu.whatsleft.storage.Storage;
 
 //@@author A0121668A
@@ -30,11 +29,9 @@ public class SaveCommand extends Command {
     private String newFilePath;
     private static Config config;
     private static Storage storage;
-    private static JsonUserConfigStorage jsonUserConfigStorage;
 
     public SaveCommand(String filePath) {
         this.newFilePath = filePath;
-        jsonUserConfigStorage = new JsonUserConfigStorage(Config.DEFAULT_CONFIG_FILE);
     }
 
     public static void setStorage(Storage storageToSet) {
@@ -65,7 +62,7 @@ public class SaveCommand extends Command {
 
     private void saveConfig() throws CommandException {
         try {
-            jsonUserConfigStorage.saveUserConfig(config);
+            storage.saveUserConfig(config);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_SAVE_CONFIG_ERROR);
         }

@@ -69,16 +69,16 @@ public class XmlAdaptedEvent {
             tagged.add(new XmlAdaptedTag(tag));
         }
     }
-
+    //@@author A0121668A
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Event object.
+     * Converts this jaxb-friendly adapted Event object into the model's Event object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Event toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> eventTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            eventTags.add(tag.toModelType());
         }
         final Description description = new Description(this.description);
         final StartTime startTime = new StartTime(this.startTime);
@@ -86,7 +86,7 @@ public class XmlAdaptedEvent {
         final EndTime endTime = new EndTime(this.endTime);
         final EndDate endDate = new EndDate(this.startDate);
         final Location location = new Location(this.location);
-        final UniqueTagList tags = new UniqueTagList(personTags);
+        final UniqueTagList tags = new UniqueTagList(eventTags);
         return new Event(description, startTime, startDate, endTime, endDate, location, tags);
     }
 }

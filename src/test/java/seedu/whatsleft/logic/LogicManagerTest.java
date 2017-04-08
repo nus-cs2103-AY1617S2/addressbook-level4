@@ -96,7 +96,9 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempWhatsLeftFile = saveFolder.getRoot().getPath() + "TempWhatsLeft.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempWhatsLeftFile, tempPreferencesFile));
+        String tempConfigurationFile = saveFolder.getRoot().getPath() + "TempConfiguration.json";
+        logic = new LogicManager(model, new StorageManager(tempWhatsLeftFile, tempPreferencesFile,
+                tempConfigurationFile));
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedWhatsLeft = new WhatsLeft(model.getWhatsLeft()); // last saved assumed to be up to date

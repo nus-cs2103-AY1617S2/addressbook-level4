@@ -12,7 +12,7 @@ import seedu.whatsleft.model.activity.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0121668A
 /**
- * Mark a Task as complete
+ * Mark a Task as incomplete
  */
 public class RedoCommand extends Command {
 

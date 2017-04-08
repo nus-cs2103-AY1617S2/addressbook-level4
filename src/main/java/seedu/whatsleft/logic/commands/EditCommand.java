@@ -140,7 +140,7 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
 
-            //@@authour A0148038A
+            //@@author A0148038A
             UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
 

@@ -6,7 +6,6 @@ import seedu.whatsleft.logic.commands.CalendarViewCommand;
 import seedu.whatsleft.logic.commands.Command;
 
 //@@author A0124377A
-
 /**
  * Parses input arguments and creates a new SelectCommand object
  */

@@ -27,6 +27,9 @@ import seedu.whatsleft.logic.commands.ShowCommand;
 import seedu.whatsleft.logic.commands.UndoCommand;
 
 //@@author A0148038A
+/**
+ * Parses input arguments and creates a new HelpCommand object
+ */
 public class HelpCommandParser {
 
     public HelpCommandParser() {

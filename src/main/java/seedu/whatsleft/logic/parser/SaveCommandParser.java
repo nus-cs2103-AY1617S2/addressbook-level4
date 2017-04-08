@@ -10,9 +10,8 @@ import seedu.whatsleft.logic.commands.SaveCommand;
 
 //@@author A0121668A
 /**
- * Parses input arguments and creates a new RedoCommand object
+ * Parses input arguments and creates a new SaveCommand object
  */
-
 public class SaveCommandParser {
 
     /**

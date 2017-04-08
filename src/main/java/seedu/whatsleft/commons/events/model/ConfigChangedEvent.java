@@ -3,9 +3,7 @@ package seedu.whatsleft.commons.events.model;
 import seedu.whatsleft.commons.core.Config;
 import seedu.whatsleft.commons.events.BaseEvent;
 //@@author A0121668A
-/**
- * Indicates the configuration in the model has changed
- */
+/** Indicates the configuration in the model has changed*/
 public class ConfigChangedEvent extends BaseEvent {
 
     public final Config data;

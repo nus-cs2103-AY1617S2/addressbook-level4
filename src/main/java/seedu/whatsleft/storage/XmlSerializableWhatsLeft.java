@@ -33,7 +33,7 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
 
     /**
      * Creates an empty XmlSerializableWhatsLeft.
-     * This empty constructor is required for marshalling.
+     * This empty constructor is required for marshaling.
      */
     public XmlSerializableWhatsLeft() {
         tasks = new ArrayList<>();
@@ -58,7 +58,6 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
                 return p.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
@@ -72,7 +71,6 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
                 return p.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
@@ -86,7 +84,6 @@ public class XmlSerializableWhatsLeft implements ReadOnlyWhatsLeft {
                 return t.toModelType();
             } catch (IllegalValueException e) {
                 e.printStackTrace();
-                //TODO: better error handling
                 return null;
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));

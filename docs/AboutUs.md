@@ -73,6 +73,7 @@ We are a team based in the [School of Computing, National University of Singapor
   * Fixed GUI testing
   * Added start-end constraint for Event]()
   * Issue tracking
+  * Writing GUI test for basic features
 
  -----
 

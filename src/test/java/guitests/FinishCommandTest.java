@@ -27,7 +27,7 @@ public class FinishCommandTest extends WhatsLeftGuiTest {
         assertFinishTaskSuccess(lastTaskToFinish, currentTaskList, currentEventList);
 
         /** finish task in the middle of the list panel */
-        int middleTaskToFinish = currentTaskList.length;
+        int middleTaskToFinish = currentTaskList.length / 2;
         assertFinishTaskSuccess(middleTaskToFinish, currentTaskList, currentEventList);
 
         /** invalid index */

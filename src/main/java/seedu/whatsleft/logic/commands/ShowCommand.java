@@ -10,7 +10,6 @@ import seedu.whatsleft.logic.commands.exceptions.CommandException;
 /**
  * Updates the display preference of tasks in WhatsLeft.
  */
-
 public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";

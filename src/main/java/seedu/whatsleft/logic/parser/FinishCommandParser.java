@@ -11,7 +11,6 @@ import seedu.whatsleft.logic.commands.IncorrectCommand;
 /**
  * Parses input arguments and creates a new FinishCommand object
  */
-
 public class FinishCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the FinishCommand

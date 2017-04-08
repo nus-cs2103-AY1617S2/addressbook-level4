@@ -12,7 +12,6 @@ import seedu.whatsleft.logic.commands.RedoCommand;
 /**
  * Parses input arguments and creates a new RedoCommand object
  */
-
 public class RedoCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the RedoCommand

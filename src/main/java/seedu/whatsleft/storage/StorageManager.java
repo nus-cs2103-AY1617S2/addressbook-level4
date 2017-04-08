@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.whatsleft.commons.core.ComponentManager;
+import seedu.whatsleft.commons.core.Config;
 import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.events.model.ConfigChangedEvent;
 import seedu.whatsleft.commons.events.model.WhatsLeftChangedEvent;
@@ -14,7 +15,7 @@ import seedu.whatsleft.commons.events.storage.DataSavingExceptionEvent;
 import seedu.whatsleft.commons.exceptions.DataConversionException;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
 import seedu.whatsleft.model.UserPrefs;
-
+//@@author A0121668A
 /**
  * Manages storage of WhatsLeft data in local storage.
  */
@@ -23,17 +24,21 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private WhatsLeftStorage whatsLeftStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserConfigStorage userConfigStorage;
 
-    public StorageManager(WhatsLeftStorage whatsLeftStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(WhatsLeftStorage whatsLeftStorage, UserPrefsStorage userPrefsStorage,
+            UserConfigStorage userConfigStorage) {
         super();
         this.whatsLeftStorage = whatsLeftStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userConfigStorage = userConfigStorage;
     }
 
-    public StorageManager(String whatsLeftFilePath, String userPrefsFilePath) {
-        this(new XmlWhatsLeftStorage(whatsLeftFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String whatsLeftFilePath, String userPrefsFilePath, String userConfigStorage) {
+        this(new XmlWhatsLeftStorage(whatsLeftFilePath), new JsonUserPrefsStorage(userPrefsFilePath),
+                new JsonUserConfigStorage(userConfigStorage));
     }
-
+//@@author
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -90,11 +95,23 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+//@@author A0121668A
     @Subscribe
     public void handleConfigChangedEvent(ConfigChangedEvent cce) {
         String newLocation = cce.data.getWhatsLeftFilePath();
-        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting save location to " + newLocation));
+        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting default filepath to " + newLocation));
         setWhatsLeftFilePath(newLocation);
+    }
+    // ================ WhatsLeft methods ==============================
+    @Override
+    public Optional<Config> readUserConfig() throws DataConversionException, IOException {
+        logger.fine("Attempting to read configuration file");
+        return userConfigStorage.readUserConfig();
+    }
+
+    @Override
+    public void saveUserConfig(Config config) throws IOException {
+        logger.fine("Attempting to save configuration file");
+        userConfigStorage.saveUserConfig(config);
     }
 }
