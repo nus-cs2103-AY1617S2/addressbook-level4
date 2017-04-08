@@ -59,7 +59,7 @@ public interface ReadOnlyTask {
             builder.append("\nStart: ").append(this.getStartDate());
         }
         if (this.getEndDate() != null) {
-            builder.append("\nEnd: ").append(this.getEndDate());
+            builder.append("\nBy: ").append(this.getEndDate());
         }
         return builder.toString();
     }

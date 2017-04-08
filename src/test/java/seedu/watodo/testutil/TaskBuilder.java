@@ -1,7 +1,6 @@
 package seedu.watodo.testutil;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
-import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
@@ -14,7 +13,7 @@ public class TaskBuilder {
 
     private TestTask task;
 
-    public TaskBuilder() {
+    public TaskBuilder() throws IllegalValueException {
         this.task = new TestTask();
     }
 
@@ -46,10 +45,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
-        task.setTags(new UniqueTagList());
-        for (String tag: tags) {
-            task.getTags().add(new Tag(tag));
-        }
+        task.setTags(new UniqueTagList(tags));
         return this;
     }
 
