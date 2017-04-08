@@ -120,8 +120,6 @@ public class HelpWindow extends UiPart<Region> {
                 .filter(p -> p != null) // remove nulls
                 .sorted((lhs, rhs) -> lhs.get(CommandColumns.COMMAND).compareTo(rhs.get(CommandColumns.COMMAND)))
                 .forEach(m -> commandList.add(m));
-
-
     }
 }
 //@@
