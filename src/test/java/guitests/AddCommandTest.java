@@ -45,7 +45,7 @@ public class AddCommandTest extends TaskBossGuiTest {
 
         //add invalid dates task
         commandBox.runCommand(td.taskJ.getAddCommand());
-        assertResultMessage(AddCommand.ERROR_INVALID_DATES);
+        assertResultMessage(AddCommand.ERROR_INVALID_ORDER_DATES);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
