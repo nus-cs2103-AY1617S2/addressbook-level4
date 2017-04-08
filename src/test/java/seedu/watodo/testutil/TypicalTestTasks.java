@@ -10,16 +10,18 @@ import seedu.watodo.model.task.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
-    public TestTask eat, study, shop, code, play, sleep;
+    public TestTask code, study, eat, sleep, shop, play;
 
     public TypicalTestTasks() {
         try {
-            eat = new TaskBuilder().withDescription("Time to eat").withTags("tag").build(); //TODO continue
-            study = new TaskBuilder().withDescription("Study mug slog").withTags("tag").build();
+            code = new TaskBuilder().withDescription("coding everyday every minute every sec")
+                    .withStartDate("now").withEndDate("next mon 11.59am").withTags("CS").build();
+            study = new TaskBuilder().withDescription("Study mug slog").withTags("life").build();
+            eat = new TaskBuilder().withDescription("Time to eat").withEndDate("tmr 1pm").withTags("yumm").build();
+            sleep = new TaskBuilder().withDescription("sleep?").withEndDate("fri").build();
             shop = new TaskBuilder().withDescription("no money spend money").withTags("tag").build();
-            code = new TaskBuilder().withDescription("coding everyday every minute every sec").withTags("tag").build();
             play = new TaskBuilder().withDescription("what is play?").withTags("tag").build();
-            sleep = new TaskBuilder().withDescription("sleep?").withTags("tag").build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -37,7 +39,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{eat, study, sleep};
+        return new TestTask[]{code, study, eat, sleep, shop, play};
     }
 
     public TaskManager getTypicalTaskManager() {

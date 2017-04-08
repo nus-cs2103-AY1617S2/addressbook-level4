@@ -32,6 +32,7 @@ import seedu.watodo.commons.util.XmlUtil;
 import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.tag.UniqueTagList;
+import seedu.watodo.model.task.DateTime;
 import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
@@ -42,7 +43,7 @@ import seedu.watodo.storage.XmlSerializableTaskList;
  */
 public class TestUtil {
 
-    public static final String LS = System.lineSeparator();
+    public static final String LINE_SEPARATOR = System.lineSeparator();
 
     /**
      * Folder used for temp files created during testing. Ignored by Git.
@@ -72,15 +73,10 @@ public class TestUtil {
         try {
             //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Read Lord of The Rings"),
-                         new UniqueTagList("reading")),
-                new Task(new Description("Do CS2103 V0.1"),
-                         new UniqueTagList("school", "homework")),
-                new Task(new Description("Learn airflares"),
-                         new UniqueTagList("dance")),
-                new Task(new Description("Design RPG using RPG Maker VX Ace"),
-                         new UniqueTagList("gamedesign"))
-            };
+                new Task(new Description("Read Lord of The Rings"), new UniqueTagList("reading")),
+                new Task(new Description("Do CS2103 V0.1"), new DateTime("march 3"), new UniqueTagList("school", "homework")),
+                new Task(new Description("Learn airflares"), new DateTime("next wed"), new DateTime("next fri"), new UniqueTagList("dance")),
+                new Task(new Description("Design RPG using RPG Maker VX Ace"), new UniqueTagList("gamedesign", "fun", "interest", "learning"))};
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -93,8 +89,9 @@ public class TestUtil {
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                new Tag("family"),
+                new Tag("friends"),
+                new Tag("family")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -276,20 +273,20 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] persons, TestTask... personsToRemove) {
-        List<TestTask> listOfTasks = asList(persons);
-        listOfTasks.removeAll(asList(personsToRemove));
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -298,27 +295,27 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
-    public static TestTask[] addTaskToList(final TestTask[] persons, TestTask... personsToAdd) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    public static TestTask[] addTaskToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -329,8 +326,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {

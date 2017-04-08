@@ -1,6 +1,5 @@
 package seedu.watodo.testutil;
 
-import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.model.tag.UniqueTagList;
 import seedu.watodo.model.task.DateTime;
@@ -10,7 +9,7 @@ import seedu.watodo.model.task.TaskStatus;
 import seedu.watodo.model.task.TaskType;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
@@ -21,24 +20,32 @@ public class TestTask implements ReadOnlyTask {
     private UniqueTagList tags;
     private TaskType taskType;
 
-    public TestTask() throws IllegalValueException {
-        description = new Description("");
-        startDate = null;
-        endDate = null;
-        status = TaskStatus.UNDONE;
+    public TestTask() {
         tags = new UniqueTagList();
-        taskType = TaskType.FLOAT;
-
     };
 
     /* Constructs a Floating TestTask object from a given description. */
     public TestTask(Description description, UniqueTagList tags) {
         this(description, null, null, tags);
+        this.taskType = TaskType.FLOAT;
+    }
+
+    /* Constructs a Floating TestTask object from a given description. With Status */
+    public TestTask(Description description, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, null, tags, newStatus);
+        this.taskType = TaskType.FLOAT;
     }
 
     /* Constructs a Deadline TestTask object from a given description. */
     public TestTask(Description description, DateTime deadline, UniqueTagList tags) {
         this(description, null, deadline, tags);
+        this.taskType = TaskType.DEADLINE;
+    }
+
+    /* Constructs a Deadline TestTask object from a given description. With status. */
+    public TestTask(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, deadline, tags, newStatus);
+        this.taskType = TaskType.DEADLINE;
     }
 
     /* Constructs an Event TestTask object from a given description. */
@@ -49,7 +56,21 @@ public class TestTask implements ReadOnlyTask {
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = TaskStatus.UNDONE;
+        this.taskType = TaskType.EVENT;
     }
+
+    /* Constructs an Event TestTask object from a given description. With status */
+    public TestTask(Description description, DateTime startDate, DateTime endDate,
+            UniqueTagList tags, TaskStatus status) {
+        assert !CollectionUtil.isAnyNull(description, tags);
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.status = status;
+        this.taskType = TaskType.EVENT;
+    }
+
     /**
      * Creates a copy of {@code taskToCopy}.
      */
@@ -85,6 +106,10 @@ public class TestTask implements ReadOnlyTask {
         tags.setTags(replacement);
     }
 
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
+
     @Override
     public Description getDescription() {
         return description;
@@ -111,29 +136,27 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(); //TO DO the timing
-        builder.append(getAsText());
-        if (startDate != null) {
-            builder.append("\nStart: ").append(startDate);
-        }
-        if (endDate != null) {
-            builder.append("\nEnd: ").append(endDate);
-        }
-        return builder.toString();
-    }
-
-    public String getAddCommand() {
-        //TO DO update
-        StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getDescription().fullDescription + " ");
-        this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
-        return sb.toString();
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     @Override
-    public TaskType getTaskType() {
-        return taskType;
+    public String toString() {
+        return getAsText();
+    }
+
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getDescription().fullDescription + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
+        if (this.getStartDate() != null) { // event
+            sb.append(" from/").append(this.getStartDate().toString());
+            sb.append(" to/").append(this.getEndDate().toString());
+        }
+        if (this.getEndDate() != null && this.getStartDate() == null) { // deadline
+            sb.append(" by/").append(this.getEndDate().toString());
+        }
+        return sb.toString();
     }
 
 }
