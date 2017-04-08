@@ -48,9 +48,9 @@
 
 
 ## 1. Introduction
-DoIt is a task manager to help users to organise their busy schedules using keyboard commands. It is a written in Java and uses JavaFX for its GUI.<br>
+DoIt is a task manager to help users to organise their busy schedules using keyboard commands. It is a written in Java and uses JavaFX for its GUI<br>
 
-This guide aims to help developers understand how DoIt works by describing its design and implementation. The guide is organised in a top-down fashion to give readers an overview of the entire program before diving into more detailed sections.
+This guide aims to help developers understand how DoIt works by describing its design and implementation. The guide is organised in a top-down fashion to give readers an overview of the entire program before diving into more detailed sections
 
 ## 2. Setting up
 
@@ -69,28 +69,28 @@ This guide aims to help developers understand how DoIt works by describing its d
 
 ### 2.2 Importing the Project into Eclipse
 
-1. Fork this repo, and clone the fork to your computer.
-2. Open Eclipse. (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+1. Fork this repo, and clone the fork to your computer
+2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
 3. Click `File` > `Import`
 4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
-5. Click `Browse`, then locate the project's directory.
+5. Click `Browse`, then locate the project's directory
 6. Click `Finish`
 
-  > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'.
+  > * If you are asked whether to 'keep' or 'overwrite' config files, choose to 'keep'
   > * Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish.
       (This is because Gradle downloads library files from servers during the project set up process)
-  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
+  > * If Eclipse auto-changed any settings files during the import process, you can discard those changes
 
 ### 2.3 Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name. e.g. taskManager
+3. Enter an arbitrary configuration name (e.g. taskManager)
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
-5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
-6. Tick and select `files from packages`, click `Change...`, and select the `resources` package.
-7. Click OK twice.
-8. Rebuild project if prompted.
+5. Click OK once, go to the `Main` tab, use the newly imported check configuration
+6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
+7. Click OK twice
+8. Rebuild project if prompted
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
@@ -175,8 +175,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/doit/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+The UI consists of a `MainWindow` that is made up of parts (e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,`StatusBarFooter`, `BrowserPanel` etc). All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files found in the `src/main/resources/view` folder<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/doit/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
@@ -198,8 +197,8 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 The `Logic` component:
 
-* Parses the user command using the `Parser` class.
-* Creates a `Command` object which is executed by the `LogicManager`.
+* Parses the user command using the `Parser` class
+* Creates a `Command` object which is executed by the `LogicManager`
 * Invokes changes to the `Model` (e.g. adding a task) and/or raises events
 * Encapsulates a `CommandResult` object which is passed back to the `Ui`
 
@@ -215,23 +214,23 @@ Author: Hon Kean Wai
 
 The `Model` component:
 
-* Stores the user's preferences.
-* Stores and manages DoIt's task list data.
-* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'. 
+* Stores the user's preferences
+* Stores and manages DoIt's task list data
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'
 (e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change)
-* Remains unaffected by changes in the other three components due to application of the Observer Pattern.
-* Interacts with the other components by raising events.
+* Remains unaffected by changes in the other three components due to application of the Observer Pattern
+* Interacts with the other components by raising events
 
-The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1.  
+The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1  
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-The `ModelManager` implements the `Model` interface. It contains a `UserPrefs` object that represents the user's preferences. It also contains a `TaskManager` along with a `TaskManagerStack` which represents a stack of `TaskManager` objects which are necessary from redo and undo commands.
+The `ModelManager` implements the `Model` interface. It contains a `UserPrefs` object that represents the user's preferences. It also contains a `TaskManager` along with a `TaskManagerStack` which represents a stack of `TaskManager` objects which are necessary from redo and undo commands
 
-Each `TaskManager` contains a single `UniqueTaskList` object. It also provides methods that directly manipulate the data in the `UniqueTaskList`.
+Each `TaskManager` contains a single `UniqueTaskList` object. It also provides methods that directly manipulate the data in the `UniqueTaskList`
 
-A `UniqueTaskList` is a list of `task` objects and cannot contain duplicate `tasks`.
+A `UniqueTaskList` is a list of `task` objects and cannot contain duplicate `tasks`
 
 The `ReadOnlyItemManager` and `ReadOnlyTask` interfaces allow other classes and components, such as the UI, to access but not modify the list of tasks and their details
 
@@ -249,14 +248,14 @@ The `Storage` component:
 * Saves `UserPrefs` objects in json format and load it back
 * Saves the DoIt data in xml format and load it back
 
-The `Storage` class is the interface of the `Storage` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.5.1.
+The `Storage` class is the interface of the `Storage` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.5.1
 
-The `StorageManager` implements the `Storage` interface. It contains a `UserPrefsStorage` interface that references `JsonUserPrefsStorage` allows storing and loading of the user's preferences in json format. It also contains a `TaskManagerStorage` interface that references `XmlTaskManagerStorage` that allows storing and loading of the user's DoIt data. 
+The `StorageManager` implements the `Storage` interface. It contains a `UserPrefsStorage` interface that references `JsonUserPrefsStorage` allows storing and loading of the user's preferences in json format. It also contains a `TaskManagerStorage` interface that references `XmlTaskManagerStorage` that allows storing and loading of the user's DoIt data
 
-The `XmlSerializableTaskManager` is a class that converts `ReadOnlyTaskManager` into a serializable object with which contains a list of `XmlAdaptedTask` and a list of `XmlAdaptedTag`.
+The `XmlSerializableTaskManager` is a class that converts `ReadOnlyTaskManager` into a serializable object with which contains a list of `XmlAdaptedTask` and a list of `XmlAdaptedTag`
 
-`XmlAdaptedTask` converts the Model's `Task` into a JAXB-friendly adapted version.
-`XmlAdaptedTag` converts the Model's `Tag` into a JAXB-friendly adapted version.
+`XmlAdaptedTask` converts the Model's `Task` into a JAXB-friendly adapted version
+`XmlAdaptedTag` converts the Model's `Tag` into a JAXB-friendly adapted version
 
 ### 3.7 Common Classes
 
@@ -281,11 +280,11 @@ and logging destinations
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by DoIt
 * `FINE` : Details that are not usually noteworthy but may be useful in debugging
-  e.g. print the actual list instead of just its size
+  (e.g. print the actual list instead of just its size)
 
 ### 4.2 Configuration
 
-Certain properties of DoIt can be controlled (e.g App name, logging level) through the configuration file
+Certain properties of DoIt can be controlled (e.g. App name, logging level) through the configuration file
 (default: `config.json`):
 
 
@@ -312,22 +311,22 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 We have two types of tests:
 
 1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI
-   These are in the `guitests` package.
+   These are in the `guitests` package
 
-2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
+2. **Non-GUI Tests** - These are tests not involving the GUI. They include:
    1. _Unit tests_ targeting the lowest level methods/classes<br>
-      e.g. `seedu.doit.commons.UrlUtilTest`
+      (e.g. `seedu.doit.commons.UrlUtilTest`)
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working)<br>
-      e.g. `seedu.doit.storage.StorageManagerTest`
+     (e.g. `seedu.doit.storage.StorageManagerTest`)
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.doit.logic.LogicManagerTest`
+      (e.g. `seedu.doit.logic.LogicManagerTest`)
 
 
 ### 5.2 Troubleshooting Failed Tests
 
- **Tests fail because NullPointException when AssertionError is expected**
+ **Tests fail due to NullPointException when AssertionError is expected**
 
  * Reason: Assertions are not enabled for JUnit tests.
    This can happen if you are not using a recent Eclipse version. (i.e. _Neon_ or later)
@@ -337,34 +336,34 @@ We have two types of tests:
 
 ### 6.1 Build Automation
 
-See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
+See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation
 
 ### 6.2 Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects
-See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
+See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details
 
 ### 6.3 Publishing Documentation
 
-See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the project site.
+See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the project site
 
 ### 6.4 Making a Release
 
 Here are the steps to create a new release:
 
- 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
- 2. Tag the repo with the version number. (e.g.`v0.1`)
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created.
+ 1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file)
+ 2. Tag the repo with the version number (e.g.`v0.1`)
+ 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created
 
 ### 6.5 Converting Documentation to PDF Format
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
+We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages
 
 Here are the steps to convert the project documentation files to PDF format:
 
- 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 2. Using Chrome, go to the [GitHub Pages version (UsingGithubPages.md#viewing-the-project-site) of the documentation file.
- 3. Click on the `Print` option in Chrome's menu.
+ 1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up)
+ 2. Using Chrome, go to the [GitHub Pages version (UsingGithubPages.md#viewing-the-project-site) of the documentation file
+ 3. Click on the `Print` option in Chrome's menu
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format<br>
     For the best results, use the settings indicated in Figure 5.4.1<br>
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
@@ -656,22 +655,22 @@ Use case ends
 
 ## 10. Appendix D : Glossary
 
-**CRUD**: Create, read, update and delete.
+**CRUD**: Create, read, update and delete
 
-**GUI**: Graphical user interface is the means by which information from the system is displayed to the user.
+**GUI**: Graphical user interface is the means by which information from the system is displayed to the user
 
-**Index of task**: The number visually tagged to a task on the GUI. (changes with how to-dos are listed)
+**Index of task**: The number visually tagged to a task on the GUI (changes with how tasks are listed)
 
 
 **Mainstream OS**: Windows, Linux, Unix, OS-X Operating Systems
 
-**MSS**: Main Success Scenario of a use case.
+**MSS**: Main Success Scenario of a use case
     
-**Sync**: Synchronize / adjust data on multiple files to be the same as each other.
+**Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
-**Task**: A to-do without a date range, and optionally has a deadline.
+**Task**: A to-do without a date range, and optionally has a deadline
 
-**UI**: User interface is the means by which the user and the system interact with each other.
+**UI**: User interface is the means by which the user and the system interact with each other
 
 
 
@@ -681,30 +680,30 @@ Use case ends
 ### Author: Chia Sin
 ### Product: Toodledo
 ### Advantages:
-* Provides many features to use.
-* Provides email sync.
-* Tells you what to do.
-* Provides default settings so minimal adjustment is needed.
-* Allows input commands using a keyboard. <br>
+* Provides many features to use
+* Provides email sync
+* Tells you what to do
+* Provides default settings so minimal adjustment is needed
+* Allows input commands using a keyboard<br>
  
 ### Disadvantages: 
-* Requires too many clicks for settings and other features other than task. 
-* Requires clicking to delete and update.
-* Requires internet for desktop version to use.
+* Requires too many clicks for settings and other features other than task
+* Requires clicking to delete and update
+* Requires internet for desktop version to use
 
 ### Author: Kean Wai
 ### Product: Sticky Notes
 ### Advantages:
 * Functions like text document and is easy to use
-* Can be navigated using keyboard only .
-* Starts up automatically on entering desktop .
-* Works offline.
-* Comes preinstalled on windows so no need for special IT permissions.<br>
+* Can be navigated using keyboard only
+* Starts up automatically on entering desktop
+* Works offline
+* Comes preinstalled on windows so no need for special IT permissions<br>
 
 ### Disadvantages:
-* Unable to sync with email.
-* Lack of functionality.(No reminders, calendar view, etc) 
-* Requires Windows Operating System to be installed.
+* Unable to sync with email
+* Lack of functionality(No reminders, calendar view, etc) 
+* Requires Windows Operating System to be installed
 
 ### Author: Jin Shun
 ### Product: Momentum 
@@ -734,7 +733,3 @@ Use case ends
 * Not fully functional on keyboard, still need to use mouse to do operations such as select task 
 * Do not have an undo function 
 * Requires installation
-
-
-
-
