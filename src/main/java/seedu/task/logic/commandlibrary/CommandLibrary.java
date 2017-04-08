@@ -196,6 +196,11 @@ public class CommandLibrary {
         return commandTable.get(commandWord).commandParser.parse(arguments.trim());
     }
 
+    /**
+     * 
+     * @param commandWord is the keyword of the command queried
+     * @return Returns the command Usage for the commadn queried
+     */
     public String getCommandUsage(String commandWord) {
         if (!commandTable.containsKey(commandWord)) {
             EventsCenter.getInstance().post(new QueryUnknownCommandEvent());
@@ -204,7 +209,7 @@ public class CommandLibrary {
         return commandTable.get(commandWord).getCommandUsage();
     }
 
-    protected static class CommandInstance {
+    public static class CommandInstance {
         private String commandKey;
         private String commandUsage;
         private CommandParser commandParser;

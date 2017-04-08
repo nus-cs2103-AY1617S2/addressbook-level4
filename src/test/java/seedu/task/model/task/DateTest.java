@@ -164,9 +164,10 @@ public class DateTest {
         assertTrue(dateUsingEvent.equals(dateUsingString));
     }
 
-    // @@author
+    //@@author
     @Test
     public void dates_Equal_Ignores_Time_success() throws IllegalValueException {
+        assertTrue(assertDatesEqualIgnoreTime(new Date(""), new Date("")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("Apr 4 2017"), new Date("Apr 4 2017")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("Nov 10 2019"), new Date("Nov 10 2019")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("christmas"), new Date("Dec 25")));
@@ -186,6 +187,7 @@ public class DateTest {
 
     @Test
     public void dates_Equal_Ignores_Minutes_success() throws IllegalValueException {
+        assertTrue(assertDatesEqualIgnoreTime(new Date(""), new Date("")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("Apr 4 2017 6am"), new Date("Apr 4 2017 6:30")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("Nov 10 2019 1:25am"), new Date("Nov 10 2019 1am")));
         assertTrue(assertDatesEqualIgnoreTime(new Date("christmas 14:19"), new Date("Dec 25 14")));
@@ -194,6 +196,7 @@ public class DateTest {
 
     @Test
     public void dates_Equal_Ignores_Minutes_failure() throws IllegalValueException {
+        assertFalse(assertDatesEqualIgnoreTime(new Date("Apr 4 2017"), new Date("")));
         assertFalse(assertDatesEqualIgnoreMinutes(new Date("Apr 4 2017 6pm"), new Date("Apr 4 2017 6am")));
         assertFalse(assertDatesEqualIgnoreMinutes(new Date("Nov 10 2019 1"), new Date("Nov 10 2019 13")));
         assertFalse(assertDatesEqualIgnoreMinutes(new Date("christmas midnight"), new Date("Dec 25 01:00")));

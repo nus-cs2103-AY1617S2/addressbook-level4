@@ -32,7 +32,7 @@ public class HelpCommand extends Command {
             EventsCenter.getInstance().post(new ShowHelpRequestEvent());
             return new CommandResult(SHOWING_HELP_MESSAGE);
         } else  {
-            return new CommandResult(CommandLibrary.getInstance().getCommandUsage(commandToShowUser.trim()));
+            return new CommandResult(CommandLibrary.getInstance().getCommandUsage(commandToShowUser.trim().toLowerCase()));
         }
     }
 

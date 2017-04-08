@@ -20,7 +20,7 @@ public class FileUtilTest {
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskManager.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskManager.xml"));
-    
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -38,38 +38,41 @@ public class FileUtilTest {
         thrown.expect(AssertionError.class);
         FileUtil.getPath("folder");
     }
-    
+
     @Test
-    public void createDir_success() throws IOException{
+    public void createDir_success() throws IOException {
         FileUtil.createDirs(TEMP_FILE);
     }
+
     @Test
-    public void createDir_fail() throws IOException{
+    public void createDir_fail() throws IOException {
         thrown.expect(IOException.class);
         FileUtil.createDirs(new File(" "));
     }
-    
+
     @Test
-    public void creatFile_success() throws IOException{
+    public void creatFile_success() throws IOException {
         File file = new File(TEST_DATA_FOLDER + "CREATED.xml");
         assertTrue(FileUtil.createFile(file));
         file.delete();
-        
+
     }
+
     @Test
-    public void creatFile_fail() throws IOException{
-        assertFalse(FileUtil.createFile(EMPTY_FILE)); //creating an existing file
-        
+    public void creatFile_fail() throws IOException {
+        assertFalse(FileUtil.createFile(EMPTY_FILE)); // creating an existing file
+
     }
-    
+
     @Test
-    public void isFileFormatCorrect_success(){
+    public void isFileFormatCorrect_success() {
         assertTrue(FileUtil.isFileFormatCorrect(VALID_FILE));
     }
+
     @Test
-    public void isFileFormatCorrect_fail(){
+    public void isFileFormatCorrect_fail() {
         assertFalse(FileUtil.isFileFormatCorrect(MISSING_FILE));
-        
+
     }
 
 }
