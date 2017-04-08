@@ -2,7 +2,7 @@ package seedu.today.ui.util;
 
 import com.jfoenix.validation.base.ValidatorBase;
 
-// @@Author A0144315N
+// @@author A0144315N
 public class CommandTextFieldValidator extends ValidatorBase {
     private boolean isErrorMessageShown;
 

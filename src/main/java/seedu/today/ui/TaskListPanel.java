@@ -92,7 +92,7 @@ public class TaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
-    // @@Author
+    // @@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
