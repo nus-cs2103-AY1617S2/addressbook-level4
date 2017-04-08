@@ -2,6 +2,7 @@ package seedu.task.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,6 +118,24 @@ public class JsonUserPrefsStorageTest {
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
+    }
+    
+    @Test
+    public void compareUserPrefs_Equals_Symmetric_success(){
+        UserPrefs first = new UserPrefs();
+        first.setGuiSettings(1200, 200, 0, 2);
+        UserPrefs second = new UserPrefs();
+        second.setGuiSettings(1200, 200, 0, 2);
+        assertTrue(first.equals(second));
+        assertTrue(first.hashCode()==second.hashCode());
+    }
+    
+    @Test
+    public void compareUserPrefs_Equals_Symmetric_fail(){
+        UserPrefs first = new UserPrefs();
+        first.setGuiSettings(1200, 200, 0, 2);
+        UserPrefs second = null;
+        assertFalse(first.equals(second));
     }
 
 }

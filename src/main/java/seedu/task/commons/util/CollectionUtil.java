@@ -34,14 +34,6 @@ public class CollectionUtil {
         return Stream.of(items).anyMatch(Optional::isPresent);
     }
 
-    // @@author A0142487Y
-    /**
-     * Returns true if the given item is found in the given collection
-     *
-     */
-    public static boolean doesAnyMatch(Collection<?> items, Object item) {
-        return items.stream().anyMatch(s -> s.equals(item));
-    }
 
     // @@author A0142487Y
     /*
@@ -51,13 +43,7 @@ public class CollectionUtil {
         return words.stream().anyMatch(s -> StringUtil.containsWordIgnoreCase(s, keyword.trim()));
     }
 
-    // @@author A0142487Y
-    /*
-     * Returns true if the given sentence has at least one word that matches the given keywords
-     */
-    public static boolean doesAnyStringMatch(Collection<String> sentence, Collection<String> keywords) {
-        return keywords.stream().anyMatch(s -> CollectionUtil.doesAnyMatch(sentence, s));
-    }
+ 
 
     // @@author
     /**
@@ -74,4 +60,12 @@ public class CollectionUtil {
         }
         return true;
     }
+    
+//    // @@author A0142487Y
+//    /*
+//     * Returns true if the given sentence has at least one word that matches the given keywords
+//     */
+//    public static boolean doesAnyStringMatch(Collection<String> sentence, Collection<String> keywords) {
+//        return keywords.stream().anyMatch(s -> CollectionUtil.doesAnyStringMatch(sentence, s));
+//    }
 }

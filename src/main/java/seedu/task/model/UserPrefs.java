@@ -17,13 +17,15 @@ public class UserPrefs {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
 
-    public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
-        updateLastUsedGuiSetting(guiSettings, this.theme);
-    }
+    // public void updateLastUsedGuiSetting(GuiSettings guiSettings) {
+    // updateLastUsedGuiSetting(guiSettings, this.theme);
+    // }
 
-    public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme theme) {
+    public void updateLastUsedGuiSetting(GuiSettings guiSettings, Theme... theme) {
         this.guiSettings = guiSettings;
-        this.theme = theme;
+        if (theme.length != 0) {
+            this.theme = theme[0];
+        }
     }
 
     // Default UserPrefs has the Theme.Default.
