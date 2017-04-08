@@ -2,12 +2,16 @@ package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 //import java.util.ArrayList;
 //import java.util.Arrays;
 
 import java.util.Collection;
 import java.util.Collections;
 //import java.util.List;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.testutil.TypicalTestTasks;
 //import seedu.task.model.task.Task;
 //import seedu.task.testutil.TypicalTestTasks;
@@ -46,26 +51,26 @@ public class TaskManagerTest {
         assertEquals(newData, taskManager);
     }
 
-//    @Test
-//    public void resetData_withDuplicateTasks_throwsAssertionError() {
-//        TypicalTestTasks td = new TypicalTestTasks();
-//        // Repeat td.alice twice
-//        List<Task> newTasks = Arrays.asList(new Task(td.apples), new Task(td.apples));
-//        List<Tag> newTags = td.apples.getTags().asObservableList();
-//        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
-//
-//        thrown.expect(AssertionError.class);
-//        taskManager.resetData(newData);
-//    }
+    @Test
+    public void resetData_withDuplicateTasks_throwsAssertionError() {
+        TypicalTestTasks td = new TypicalTestTasks();
+        // Repeat td.alice twice
+        List<Task> newTasks = Arrays.asList(new Task(td.apples), new Task(td.apples));
+        List<Tag> newTags = td.apples.getTags().asObservableList();
+        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+
+        thrown.expect(AssertionError.class);
+        taskManager.resetData(newData);
+    }
 
 //    @Test
 //    public void resetData_withDuplicateTags_throwsAssertionError() {
 //        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
-//        List<ReadOnlyTask> newPersons = typicalTaskManager.getTaskList();
+//        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
 //        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
 //        // Repeat the first tag twice
 //        newTags.add(newTags.get(0));
-//        TaskManagerStub newData = new TaskManagerStub(newPersons, newTags);
+//        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
 //
 //        thrown.expect(AssertionError.class);
 //        taskManager.resetData(newData);
