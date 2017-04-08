@@ -94,20 +94,18 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean hasStartTime() {
-        if (this.startTime != null) {
-            return !this.startTime.equals("");
-        } else {
+        if (this.startTime == null || this.startTime.equals("")) {
             return false;
         }
+        return true;
     }
 
     @Override
     public boolean hasEndTime() {
-        if (this.startTime != null) {
-            return !this.endTime.equals("");
-        } else {
+        if (this.endTime == null || this.endTime.equals("")) {
             return false;
         }
+        return true;
     }
 
     @Override
@@ -124,7 +122,7 @@ public class TestTask implements ReadOnlyTask {
      */
     @Override
     public boolean isEvent() {
-        return hasStartTime() && hasEndTime();
+        return hasStartTime();
     }
 
     /**
