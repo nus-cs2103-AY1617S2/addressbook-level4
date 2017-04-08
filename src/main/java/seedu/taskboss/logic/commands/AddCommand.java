@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             + " i/inform partner r/WEEKLY c/Work c/Project\n"
             + "Example: " + COMMAND_WORD_SHORT
             + " Watch movie sd/feb 19 c/Fun\n"
-            + "Example : " + COMMAND_WORD_2ND_SHORT + "Call David sd/tomorrow i/inform"
+            + "Example : " + COMMAND_WORD_2ND_SHORT + " Call David sd/tomorrow i/inform"
             + " David of the new updates c/Project";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
