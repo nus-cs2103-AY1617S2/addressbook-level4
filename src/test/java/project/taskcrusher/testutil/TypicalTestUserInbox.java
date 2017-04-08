@@ -22,7 +22,7 @@ public class TypicalTestUserInbox {
 
     public TestTaskCard assignment1, assignment2, payment, shopping, phoneCall, application;
     public TestTaskCard notAddedBuyTicket, notAddedYetQuiz;
-    public TestEventCard guitarLesson, islandTrip, fixRoof;
+    public TestEventCard guitarLesson, islandTrip, fixRoof, birthdayParty;
     public TestEventCard notAddedYetTownFestival, notAddedYetCheckSamples;
 
     public TypicalTestUserInbox() {
@@ -59,6 +59,10 @@ public class TypicalTestUserInbox {
             fixRoof = new EventBuilder().withName("Fix roof").withPriority("2").withDescription("brand audit")
                     .withLocation("home").withTimeslots(constructTimeslotList(new Timeslot("2017-11-19", "2017-11-20")))
                             .build();
+            birthdayParty = new EventBuilder().withName("Birthday party").withPriority("2")
+                    .withDescription("who is coming").withLocation("TBC")
+                    .withTimeslots(constructTimeslotList(new Timeslot("2017-12-24 10am", "2017-12-24 2pm")))
+                    .build();
             notAddedYetTownFestival = new EventBuilder().withName("Town festival").withPriority("1").withDescription("")
                     .withLocation("Downtown").
                     withTimeslots(constructTimeslotList(new Timeslot("2018-03-20", "2018-03-31"))).build();
@@ -97,7 +101,7 @@ public class TypicalTestUserInbox {
     }
 
     public TestEventCard[] getTypicalEvents() {
-        return new TestEventCard[]{guitarLesson, fixRoof, islandTrip};
+        return new TestEventCard[]{guitarLesson, fixRoof, islandTrip, birthdayParty};
     }
 
     public UserInbox getTypicalUserInbox() {

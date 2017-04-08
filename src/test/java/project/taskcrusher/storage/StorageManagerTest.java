@@ -18,7 +18,7 @@ import project.taskcrusher.model.ReadOnlyUserInbox;
 import project.taskcrusher.model.UserInbox;
 import project.taskcrusher.model.UserPrefs;
 import project.taskcrusher.testutil.EventsCollector;
-//import project.taskcrusher.testutil.TypicalTestTasks;
+import project.taskcrusher.testutil.TypicalTestUserInbox;
 
 public class StorageManagerTest {
 
@@ -53,18 +53,18 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-//    @Test
-//    public void addressBookReadSave() throws Exception {
-//        /*
-//         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-//         * {@link XmlAddressBookStorage} class.
-//         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
-//         */
-//        UserInbox original = new TypicalTestTasks().getTypicalUserInbox();
-//        storageManager.saveUserInbox(original);
-//        ReadOnlyUserInbox retrieved = storageManager.readUserInbox().get();
-////        assertEquals(original, new UserInbox(retrieved));
-//    }
+    @Test
+    public void userInboxReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlAddressBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         */
+        UserInbox original = new TypicalTestUserInbox().getTypicalUserInbox();
+        storageManager.saveUserInbox(original);
+        ReadOnlyUserInbox retrieved = storageManager.readUserInbox().get();
+        assertEquals(original, new UserInbox(retrieved));
+    }
 
     @Test
     public void getAddressBookFilePath() {

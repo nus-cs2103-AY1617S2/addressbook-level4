@@ -298,8 +298,36 @@ public class TestUtil {
      * @param targetIndexInOneIndexedFormat
      *            e.g. index 1 if the first element is to be removed
      */
-    public static TestTaskCard[] removePersonFromList(final TestTaskCard[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTaskCard[] removeTaskFromList(final TestTaskCard[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+    }
+
+    /**
+     * Removes a subset from the list of persons.
+     *
+     * @param events
+     *            The list of persons
+     * @param eventsToRemove
+     *            The subset of persons.
+     * @return The modified persons after removal of the subset from persons.
+     */
+    public static TestEventCard[] removeEventsFromList(final TestEventCard[] events,
+            TestEventCard... eventsToRemove) {
+        List<TestEventCard> listOfEvents = asList(events);
+        listOfEvents.removeAll(asList(eventsToRemove));
+        return listOfEvents.toArray(new TestEventCard[listOfEvents.size()]);
+    }
+
+    /**
+     * Returns a copy of the list with the person at specified index removed.
+     *
+     * @param list
+     *            original list to copy from
+     * @param targetIndexInOneIndexedFormat
+     *            e.g. index 1 if the first element is to be removed
+     */
+    public static TestEventCard[] removeEventFromList(final TestEventCard[] list, int targetIndexInOneIndexedFormat) {
+        return removeEventsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**
