@@ -116,14 +116,14 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        if (mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size() > event.targetIndex) {
+        if (mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size()
+                > event.targetIndex) {
             mainWindow.getEventTaskListPanel().scrollTo(event.targetIndex);
             mainWindow.getDeadlineTaskListPanel().getDeadlineTaskListView().getSelectionModel().clearSelection();
             mainWindow.getFloatingTaskListPanel().getFloatingTaskListView().getSelectionModel().clearSelection();
         } else {
-            if ((mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size()
-                    + mainWindow.getDeadlineTaskListPanel().getDeadlineTaskListView().getItems().size())
-                    > event.targetIndex) {
+            if ((mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size() + mainWindow
+                    .getDeadlineTaskListPanel().getDeadlineTaskListView().getItems().size()) > event.targetIndex) {
                 mainWindow.getDeadlineTaskListPanel().scrollTo(event.targetIndex
                         - mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size());
                 mainWindow.getEventTaskListPanel().getEventTaskListView().getSelectionModel().clearSelection();
@@ -131,7 +131,7 @@ public class UiManager extends ComponentManager implements Ui {
             } else {
                 mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex
                         - ((mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size()
-                    + mainWindow.getDeadlineTaskListPanel().getDeadlineTaskListView().getItems().size())));
+                                + mainWindow.getDeadlineTaskListPanel().getDeadlineTaskListView().getItems().size())));
                 mainWindow.getEventTaskListPanel().getEventTaskListView().getSelectionModel().clearSelection();
                 mainWindow.getDeadlineTaskListPanel().getDeadlineTaskListView().getSelectionModel().clearSelection();
             }
@@ -144,6 +144,7 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getEventTaskListPanel().setConnections(logic.getFilteredTaskList());
         mainWindow.getDeadlineTaskListPanel().setConnections(logic.getFilteredTaskList());
         mainWindow.getFloatingTaskListPanel().setConnections(logic.getFilteredTaskList());
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Updating Task List Panels" + Integer.toString(mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size())));
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Updating Task List Panels"
+                + Integer.toString(mainWindow.getEventTaskListPanel().getEventTaskListView().getItems().size())));
     }
 }

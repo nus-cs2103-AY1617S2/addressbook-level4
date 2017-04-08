@@ -50,7 +50,8 @@ public class AddCommand extends Command {
             categorySet.add(new Category(categoryName));
         }
         this.toAdd = new Task(new TaskName(taskName), new StartDate(startDate), new StartTime(startTime),
-                new EndDate(endDate), new EndTime(endTime), new Boolean(false), new UniqueCategoryList(categorySet));
+                new EndDate(endDate), new EndTime(endTime), new Boolean(false),
+                new UniqueCategoryList(categorySet));
     }
 
     // @@author A0142418L
@@ -65,8 +66,8 @@ public class AddCommand extends Command {
                     int addIndex = model.addTask(toAdd);
                     EventsCenter.getInstance().post(new JumpToListRequestEvent(addIndex));
                     String clashFeedback = "Clash with task: Index " + Integer.toString(clashedTaskIndex) + "\n";
-                    return new CommandResult(clashFeedback + String.format(MESSAGE_SUCCESS, toAdd) + "\n" + "Task added at index: "
-                    + Integer.toString(addIndex + 1));
+                    return new CommandResult(clashFeedback + String.format(MESSAGE_SUCCESS, toAdd) + "\n"
+                            + "Task added at index: " + Integer.toString(addIndex + 1));
                 }
             }
             int addIndex = model.addTask(toAdd);
