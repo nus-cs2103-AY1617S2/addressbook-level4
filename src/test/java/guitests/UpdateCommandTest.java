@@ -155,15 +155,15 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList = TestUtil.removeTaskFromList(expectedTasksList, taskManagerIndex);
-        Pair<TestTask[],Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
-        
+        Pair<TestTask[], Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
+
         expectedTasksList = expectedList.getKey();
         int updateIndex = expectedList.getValue();
 
         assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(floatingTaskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask)
-                + "\n" + "Task updated to index: " + Integer.toString(updateIndex + 1));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                + "Task updated to index: " + Integer.toString(updateIndex + 1));
     }
 }

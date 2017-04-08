@@ -90,14 +90,6 @@ public class TypicalTestTasks {
             eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
                     .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
                     .build();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-    }
-
-    public void TypicalRecurringEventsForDays() {
-        try {
             recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
