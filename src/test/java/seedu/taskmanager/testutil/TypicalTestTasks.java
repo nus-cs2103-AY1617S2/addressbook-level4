@@ -61,22 +61,22 @@ public class TypicalTestTasks {
                     .withCategories("CS", "NO").build();
             sampleClashBetweenMultipleDaysEvent = new TaskBuilder().withTaskName("Midweek blues")
                     .withStartDate("12/04/17").withStartTime("1900").withEndDate("12/04/17").withEndTime("2200")
-                    .withCompletion(false).withCategories("dance", "orNoDance").build();
+                    .withCompletion(false).withCategories("no", "dance").build();
             sampleClashAcrossMultipleDaysEvent = new TaskBuilder().withTaskName("No gap").withStartDate("10/04/17")
                     .withStartTime("1200").withEndDate("14/04/17").withEndTime("1000").withCompletion(false)
                     .withCategories("thigh", "gap").build();
             sampleClashStartOfMultipleDaysEvent = new TaskBuilder().withTaskName("Sighpie").withStartDate("11/04/17")
                     .withStartTime("1500").withEndDate("11/04/17").withEndTime("1800").withCompletion(false)
-                    .withCategories("submission", "approaching").build();
+                    .withCategories("approaching", "submission").build();
             sampleClashEndOfMultipleDaysEvent = new TaskBuilder().withTaskName("Fixing Travis")
                     .withStartDate("13/04/17").withStartTime("0700").withEndDate("13/04/17").withEndTime("1100")
-                    .withCompletion(false).withCategories("Work", "Travis").build();
+                    .withCompletion(false).withCategories("NoTravis").build();
             sampleNoClashSameDayEvent = new TaskBuilder().withTaskName("Reality hits hard").withStartDate("13/04/17")
                     .withStartTime("1200").withEndDate("14/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("CS", "rekt").build();
             sampleNoClashSeparateDayEvent = new TaskBuilder().withTaskName("Coding in Progress")
                     .withStartDate("16/04/17").withStartTime("1000").withEndDate("16/04/17").withEndTime("1800")
-                    .withCompletion(false).withCategories("work", "code").build();
+                    .withCompletion(false).withCategories("code", "work").build();
 
             eventTestMon = new TaskBuilder().withTaskName("Monday Blues").withStartDate("10/04/17")
                     .withStartTime("1000").withEndDate("10/04/17").withEndTime("1100").withCompletion(false)
