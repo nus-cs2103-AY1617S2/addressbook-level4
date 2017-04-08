@@ -30,7 +30,7 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
    * **`uncomplete`**` 3`: marks the 3rd Todo shown in the current list as uncomplete
    * **`undo`** : undoes last command that modified the todo list
    * **`redo`** : redoes the last undo command
-   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml. If it does not exist, it will create the file.
+   * **`savefile`** ` data/newsave.xml`: changes the location of the save file to data/newsave.xml. If it does not exist, it will create the file and the appropriate directories.
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -215,7 +215,7 @@ There is no need to save manually.
 ### 2.14 Setting the data save location : `savefile`
 
 Sets the save file location containing todo data.<br>
-If the file does not exist, the application will create the file in the file path automatically.<br>
+If the file does not exist, the application will create the file and the directories in the file path automatically.<br>
 Format: `savefile PATH_TO_FILE`
 
 > Changes the file save location to specified `PATH_TO_FILE`. <br>
