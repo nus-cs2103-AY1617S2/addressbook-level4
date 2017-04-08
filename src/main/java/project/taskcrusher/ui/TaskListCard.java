@@ -16,8 +16,6 @@ import project.taskcrusher.model.task.ReadOnlyTask;
 public class TaskListCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
-    private static final String MESSAGE_NO_DEADLINE = "no deadline";
-    private static final String MESSAGE_DEADLINE_BY = "By ";
 
     @FXML
     private HBox cardPane;
@@ -74,8 +72,8 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void showDescription(ReadOnlyTask task) {
+        description.setText(task.getDescription().toString()); //still set the text even if empty for GuiTest
         if (task.getDescription().hasDescription()) {
-            description.setText(task.getDescription().toString());
             description.setMinWidth(Region.USE_PREF_SIZE);
         } else {
             description.setVisible(false);;
@@ -102,12 +100,7 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void showDeadline(ReadOnlyTask task) {
-        if (task.getDeadline().hasDeadline()) {
-            deadline.setText(MESSAGE_DEADLINE_BY +
-                    UiDisplayUtil.dateAsStringForUi(task.getDeadline().getDate().get()));
-        } else {
-            deadline.setText(MESSAGE_NO_DEADLINE);
-        }
+        deadline.setText(UiDisplayUtil.deadlineForUi(task.getDeadline()));
         deadline.setMinWidth(Region.USE_PREF_SIZE);
     }
 

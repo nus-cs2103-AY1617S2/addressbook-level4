@@ -6,6 +6,7 @@ import java.util.Date;
 import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.Timeslot;
 import project.taskcrusher.model.shared.Priority;
+import project.taskcrusher.model.task.Deadline;
 
 // @@author A0127737X
 public class UiDisplayUtil {
@@ -13,14 +14,20 @@ public class UiDisplayUtil {
     public static final int FORMAT_DATE_ABSOLUTE = 0;
     public static final int FORMAT_THIS_YEAR = 2;
     public static final int FORMAT_DATE_RELATIVE = 3;
+    private static final String MESSAGE_NO_DEADLINE = "no deadline";
 
     /**
      * returns a string representation of the given Date in a user-friendly format
      */
-    public static String dateAsStringForUi(Date date) {
-        assert date != null;
+    public static String deadlineForUi(Deadline deadline) {
+        assert deadline != null;
+        if (!deadline.hasDeadline()) {
+            return MESSAGE_NO_DEADLINE;
+        }
+
+        Date date = deadline.getDate().get();
         SimpleDateFormat formatter;
-        String prepend = "";
+        String prepend = "By ";
         if (isToday(date)) {
             formatter = new SimpleDateFormat(PARSE_PATTERNS[FORMAT_DATE_RELATIVE]);
             prepend = "Today ";

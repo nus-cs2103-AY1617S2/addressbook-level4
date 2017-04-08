@@ -13,6 +13,7 @@ import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventCardHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.ResultDisplayHandle;
@@ -24,6 +25,7 @@ import project.taskcrusher.TestApp;
 import project.taskcrusher.commons.core.EventsCenter;
 import project.taskcrusher.commons.events.BaseEvent;
 import project.taskcrusher.model.UserInbox;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.task.ReadOnlyTask;
 import project.taskcrusher.testutil.TestUtil;
 import project.taskcrusher.testutil.TypicalTestUserInbox;
@@ -31,7 +33,7 @@ import project.taskcrusher.testutil.TypicalTestUserInbox;
 /// **
 // * A GUI Test class for AddressBook.
 // */
-public abstract class AddressBookGuiTest {
+public abstract class TaskcrusherGuiTest {
 
     /*
      * The TestName Rule makes the current test name available inside test
@@ -90,6 +92,7 @@ public abstract class AddressBookGuiTest {
     protected UserInbox getInitialData() {
         UserInbox ab = new UserInbox();
         TypicalTestUserInbox.loadUserInboxWithSampleTasks(ab);
+        TypicalTestUserInbox.loadUserInboxWithSampleEvents(ab);
         return ab;
     }
 
@@ -108,15 +111,22 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask event, TaskCardHandle card) {
+        assertTrue(TestUtil.compareTaskCardAndTask(card, event));
+    }
+
+    /**
+     * Asserts the person shown in the card is same as the given person
+     */
+    public void assertMatching(ReadOnlyEvent event, EventCardHandle card) {
+        assertTrue(TestUtil.compareEventCardAndEvent(card, event));
     }
 
     /**
      * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = userInboxPanel.getNumberOfPeople();
+        int numberOfPeople = userInboxPanel.getNumberOfTasks();
         assertEquals(size, numberOfPeople);
     }
 

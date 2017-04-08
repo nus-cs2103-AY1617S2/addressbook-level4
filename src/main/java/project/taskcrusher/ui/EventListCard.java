@@ -46,7 +46,7 @@ public class EventListCard extends UiPart<Region> {
         showDescription(event);
         showPriority(event);
         showEventTimeSlots(event);
-        displayComplete(event);
+        displayCompleteStatusIfApplicable(event);
         displayOverdueStatusIfApplicable(event, isOverdue);
 
         initTags(event);
@@ -58,7 +58,7 @@ public class EventListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
     }
 
-    private void displayComplete(ReadOnlyEvent event) {
+    private void displayCompleteStatusIfApplicable(ReadOnlyEvent event) {
         if (!event.isComplete()) {
             tickIcon.setVisible(false);
         }
@@ -78,12 +78,12 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void showDescription(ReadOnlyEvent event) {
+        description.setText(event.getDescription().description);
         if (event.getDescription().hasDescription()) {
-            description.setText(event.getDescription().toString());
+            description.setMinWidth(Region.USE_PREF_SIZE);
         } else {
             description.setVisible(false);
         }
-        description.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showPriority(ReadOnlyEvent event) {

@@ -9,22 +9,20 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import project.taskcrusher.commons.util.UiDisplayUtil;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.tag.UniqueTagList;
-import project.taskcrusher.model.task.ReadOnlyTask;
 
-/**
- * Provides a handle to a task card in the task list panel.
- */
-public class TaskCardHandle extends GuiHandle {
+public class EventCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String TAGS_FIELD_ID = "#tags";
-    private static final String DEADLINE_FIELD_ID = "#deadline";
+    private static final String TIMESLOT_FIELD_ID = "#timeslots";
     private static final String PRIORITY_FIELD_ID = "#priority";
+    private static final String LOCATION_FIELD_ID = "#eventLocation";
     private static final String DESCRIPTION_FIELD_ID = "#description";
 
     private Node node;
 
-    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public EventCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -33,7 +31,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getTaskName() {
+    public String getEventName() {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
@@ -45,10 +43,13 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(PRIORITY_FIELD_ID);
     }
 
-    public String getDeadline() {
-        return getTextFromLabel(DEADLINE_FIELD_ID);
-    }
+//    public String getTimeslots() {
+//        return getTextFromLabel(TIMESLOT_FIELD_ID);
+//    }
 
+    public String getLocation() {
+        return getTextFromLabel(LOCATION_FIELD_ID);
+    }
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
@@ -74,25 +75,25 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     //@@author A0127737X
-    public boolean isSameTask(ReadOnlyTask task) {
-        String uiAdjustedPriority = UiDisplayUtil.priorityForUi(task.getPriority());
-        String uiAdjustedDeadline = UiDisplayUtil.deadlineForUi(task.getDeadline());
+    public boolean isSameEvent(ReadOnlyEvent event) {
+        String uiAdjustedPriority = UiDisplayUtil.priorityForUi(event.getPriority());
+        String uiAdjustedLocation = UiDisplayUtil.locationForUi(event.getLocation());
 
-        return getTaskName().equals(task.getName().name)
+        return getEventName().equals(event.getName().name)
                 && getPriority().equals(uiAdjustedPriority)
-                && getDeadline().equals(uiAdjustedDeadline)
-                && getDescription().equals(task.getDescription().description)
-                && getTags().equals(getTags(task.getTags()));
+                && getLocation().equals(uiAdjustedLocation)
+                && getDescription().equals(event.getDescription().description)
+                && getTags().equals(getTags(event.getTags()));
     }
 
     //@@author
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof TaskCardHandle) {
-            TaskCardHandle handle = (TaskCardHandle) obj;
-            return getTaskName().equals(handle.getTaskName())
+        if (obj instanceof EventCardHandle) {
+            EventCardHandle handle = (EventCardHandle) obj;
+            return getEventName().equals(handle.getEventName())
                     && getPriority().equals(handle.getPriority())
-                    && getDeadline().equals(handle.getDeadline())
+                    && getLocation().equals(handle.getLocation())
                     && getDescription().equals(handle.getDescription())
                     && getTags().equals(handle.getTags());
         }
@@ -101,6 +102,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTaskName() + " " + getDescription();
+        return getEventName() + " " + getDescription();
     }
 }

@@ -16,6 +16,7 @@ import org.testfx.api.FxToolkit;
 
 import com.google.common.io.Files;
 
+import guitests.guihandles.EventCardHandle;
 import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -30,6 +31,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.commons.util.XmlUtil;
 import project.taskcrusher.model.UserInbox;
+import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.Priority;
@@ -326,13 +328,17 @@ public class TestUtil {
      * @return The modified array of persons.
      */
     public static TestTaskCard[] addTasksToList(final TestTaskCard[] tasks, TestTaskCard... tasksToAdd) {
-        List<TestTaskCard> listOfPersons = asList(tasks);
-        listOfPersons.addAll(asList(tasksToAdd));
-        listOfPersons.sort(null);
-        for (TestTaskCard task: listOfPersons) {
-            System.out.println("containing in this order: " + task.toString());
-        }
-        return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
+        List<TestTaskCard> listOfTasks = asList(tasks);
+        listOfTasks.addAll(asList(tasksToAdd));
+        listOfTasks.sort(null);
+        return listOfTasks.toArray(new TestTaskCard[listOfTasks.size()]);
+    }
+
+    public static TestEventCard[] addEventsToList(final TestEventCard[] events, TestEventCard... eventsToAdd) {
+        List<TestEventCard> listOfEvents = asList(events);
+        listOfEvents.addAll(asList(eventsToAdd));
+        listOfEvents.sort(null);
+        return listOfEvents.toArray(new TestEventCard[listOfEvents.size()]);
     }
 
     private static <T> List<T> asList(T[] objs) {
@@ -343,11 +349,18 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
+    public static boolean compareTaskCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
         if (card == null) {
             assert false;
         }
-        return card.isSameTask(person);
+        return card.isSameTask(task);
+    }
+
+    public static boolean compareEventCardAndEvent(EventCardHandle card, ReadOnlyEvent event) {
+        if (card == null) {
+            assert false;
+        }
+        return card.isSameEvent(event);
     }
 
     public static Tag[] getTagList(String tags) {
