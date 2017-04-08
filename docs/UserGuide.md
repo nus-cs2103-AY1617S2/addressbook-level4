@@ -73,6 +73,9 @@ Example:
 Format: `add TASK_NAME [p/PRIORITY_LEVEL]`
   > * `PRIORITY_LEVEL` should be defined by integers 1 (high) to 4(low).<br>
 
+doTASK will colour-code your task based on its priority level.
+> <img src="images/priority_colours.png" width="600">
+
 Example:
 > I want to buy a packet of milk. Highest priority as it is urgent.<br>
 * add Buy Milk p/1
