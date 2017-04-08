@@ -117,7 +117,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void editNoFieldsSpecifiedFailure() {
-        commandBox.runCommand("edit 1");
+        commandBox.runCommand("edit 1;");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 

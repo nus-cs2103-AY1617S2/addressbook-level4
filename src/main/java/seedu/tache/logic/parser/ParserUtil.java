@@ -1,5 +1,22 @@
 package seedu.tache.logic.parser;
 
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +36,7 @@ import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
@@ -136,6 +154,34 @@ public class ParserUtil {
     public static boolean isValidName(String input) {
         final Matcher matcher = FORMAT_NAME.matcher(input.trim());
         return matcher.matches();
+    }
+
+    /**
+     * Returns True if input is a valid parameter
+     * Returns False otherwise.
+     */
+    public static boolean isValidParameter(String input) {
+        switch (input) {
+        case PARAMETER_NAME:
+        case PARAMETER_NAME_2:
+        case PARAMETER_START_DATE:
+        case PARAMETER_START_DATE_2:
+        case PARAMETER_START_DATE_3:
+        case PARAMETER_END_DATE:
+        case PARAMETER_END_DATE_2:
+        case PARAMETER_END_DATE_3:
+        case PARAMETER_START_TIME:
+        case PARAMETER_START_TIME_2:
+        case PARAMETER_START_TIME_3:
+        case PARAMETER_END_TIME:
+        case PARAMETER_END_TIME_2:
+        case PARAMETER_END_TIME_3:
+        case PARAMETER_TAG:
+        case PARAMETER_TAG_2:
+            return true;
+        default:
+            return false;
+        }
     }
     //@@author
     /**
