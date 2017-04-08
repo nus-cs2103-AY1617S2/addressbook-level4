@@ -47,7 +47,7 @@ public class AddCommand extends Command implements Undoable {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String nameStr, Optional<String> startDateTimeStr, Optional<String> endDateTimeStr,
-            Set<String> tagsStr) throws IllegalValueException {
+            Set<String> tagsStr, Optional<RecurInterval> recurInterval) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagsStr) {
             tagSet.add(new Tag(tagName));
@@ -64,8 +64,8 @@ public class AddCommand extends Command implements Undoable {
         }
 
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, false,
-                                    RecurInterval.NONE, new ArrayList<Date>());
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, recurInterval.isPresent(),
+                                    recurInterval.orElse(RecurInterval.NONE), new ArrayList<Date>());
         commandSuccess = false;
     }
 
