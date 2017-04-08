@@ -99,7 +99,11 @@ public class FindCommandParser {
 
     //@@author A0143157J
     /**
-     * Returns a Natty-parsed String that represents the date that the keywords suggest
+     * Returns a Natty-parsed String that represents the date that the keywords suggest.
+     * Three possible cases:
+     * 1. User only enters time (e.g 9am / 5.30pm)
+     * 2. User only enters month (e.g feb / december)
+     * 3. User enters a date regardless of the presence of time
      * @throws IllegalValueException
      */
     private String parseFindDates(String keywords) throws IllegalValueException {
@@ -108,15 +112,19 @@ public class FindCommandParser {
         // user only enters time
         if (parsedFormattedDateTime.isDateInferred() &&
                 !parsedFormattedDateTime.isTimeInferred()) {
+
             String extractedKeywords = parsedFormattedDateTime.value
                     .substring(INDEX_TIME_START_POSITION);
             keywords = extractedKeywords;
+
         // user only enters month
         } else if (!keywords.trim().contains(WHITESPACE) &&
                 !oneWordDays.containsKey(keywords.toLowerCase())) {
+
             String extractedKeywords = parsedFormattedDateTime.value
                   .substring(INDEX_MONTH_START_POSITION, INDEX_MONTH_END_POSITION + 1);
             keywords = extractedKeywords;
+
         // user enters date with or without time
         } else {
             keywords = parsedFormattedDateTime.value;
@@ -124,7 +132,9 @@ public class FindCommandParser {
         return keywords;
     }
 
-    // Returns true if keyword is a String time
+    /**
+     * Returns true if keyword is a {@code String} time
+     */
     private boolean hasAmOrPm(String keyword) {
         return (keyword.toLowerCase().contains("am") ||
                 keyword.toLowerCase().contains("pm"));
@@ -132,7 +142,7 @@ public class FindCommandParser {
 
     /**
      * Helper function for parseFindDates().
-     * Initializes the HashMap so that we can distinguish
+     * Initializes the {@code oneWordDays} HashMap so that we can distinguish
      * in O(1) time if a one-word keyword is a natural language day
      * or a month
      */

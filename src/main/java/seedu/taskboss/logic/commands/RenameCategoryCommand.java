@@ -6,7 +6,6 @@ import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.category.UniqueCategoryList.DuplicateCategoryException;
 
@@ -49,8 +48,7 @@ public class RenameCategoryCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException,
-                                        InvalidDatesException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;
 
         Category oldCategory = new Category(this.oldCategory);
