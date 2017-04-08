@@ -182,7 +182,7 @@ For advanced users: **`l`** `<filter>` <br>
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
+Finds uncompleted and overdue task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
 
 > For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`. <br>
 
@@ -218,9 +218,9 @@ An example of a task you might want to _edit_: <br>
 
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br>
-Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and change <task_detail_2> to <new_value2> and ...`<br>
+Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
 You can edit more task details for your task concurrently using the following format:<br>
-E.g. **`edit`** `3 change start_date to 26 apr and change end_date to 29 apr` <br>
+E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
@@ -274,7 +274,7 @@ Format: **`complete`** `<task_index>`<br>
 E.g. **`complete`** `1` <br>
 Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format:<br>
-E.g. **`complete`** `1,2,3` <br>
+E.g. **`complete`** `1,2,3,4` <br>
 
 <img src="images/UiCompleteCommand.png" width="600"><br>
 _Figure 3.8.1. Complete Command_
@@ -296,20 +296,22 @@ Format: **`undo`** <br>
 <img src="images/UiUndoCommand.png" width="600"><br>
 _Figure 3.9.1. Undo Command_
 
-For advanced users: **`u`** `<task_index>` <br>
+For advanced users: **`u`** <br>
 
-### 3.10. Navigate the Calendar: 
+### 3.10. Navigate the Calendar:
 
-Uses commands to replace clicking on the buttons at the calendar.<br>
+Replaces navigation buttons on the calendar with user commands. <br>
 
 <img src="images/UiCalendar.png" width="600"><br>
 _Figure 3.10.1. Calendar_
 
-* < : **`prev`** or **`p`** <br>
-* > : **`next`** or **`n`** <br>
-* day: **`show day`** or **`s day`** <br>
-* week: **`show week`** or **`s week`** <br>
-* month: **`show month`** or **`s month`** <br>
+* _< button_ : **`prev`** <br>
+* _> button_ : **`next`** <br>
+* _day button_: **`show day`** <br>
+* _week button_: **`show week`** <br>
+* _month button_: **`show month`** <br>
+
+For advanced users: **`p`**, **`n`**, **`s`** `<view>`, 
 
 ### 3.12. Get help : `help`
 
@@ -324,7 +326,7 @@ This command will instruct me to provide you specific information on how to use 
 <img src="images/UiHelpCommand.png" width="600"><br>
 _Figure 3.12.1. Help Command_
 
-For advanced users: **`h`** `<task_index>` <br>
+For advanced users: **`h`** `<command>` <br>
 
 ### 3.13. Change data file location
 
@@ -379,14 +381,15 @@ Your wish is my command!
 |Add          |**`add`** `<task_name> by <due date and time>`                 |**`add`** `project proposal by 13 apr 2pm`           |
 |List         |**`list`** `<optional filter>`                                 |**`list`** `uncompleted`                             |
 |Find         |**`find`** `<keyword>`                                         |**`find`** `prject`                                  |
-|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread;`      |
+|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread`      |
 |Delete       |**`delete`** `<task_index>`                                    |**`delete`** `1`                                     |
 |Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
 |Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
 |Undo         |**`undo`**                                                     |                                                     |
 |Prev         |**`prev`**                                                     |                                                     |
 |Next         |**`next`**                                                     |                                                     |
-|Help         |**`help`**                                                     |                                                     |
+|View         |**`view`**                                                     |**`view`** `day`                                     |
+|Help         |**`help`**                                                     |**`help`** `find`                                    |
 |Save         |**`save`** `<directory>`                                       |**`save`** `C:\Users\Jim\Desktop`                    |
 |Load         |**`load`** `<file_path>`                                       |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`    |
 |Exit         |**`exit`**                                                     |                                                     |
@@ -406,7 +409,7 @@ Here are some questions that you might want to ask me:
 [here](#32-add-a-task--add).
 
 **Q**: How do I retrieve my _previous commands_? <br>
-**A**: Use the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to get the previous commands you gave me.
+**A**: Use the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to get your previous commands.
 
 **Q**: Is there any way I can _type my commands faster_? <br>
 **A**: Yes, I _autocomplete_ all commands. Every command can also be replaced with the first letter of
