@@ -6,10 +6,9 @@ import org.junit.Test;
 
 import onlythree.imanager.model.TaskList;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.util.SampleDataUtil;
 import onlythree.imanager.testutil.TestUtil;
 
-public class SampleDataTest extends TaskListGuiTest {
+public class EmptyDataTest extends TaskListGuiTest {
     @Override
     protected TaskList getInitialData() {
         // return null to force test app to load data from file only
@@ -18,13 +17,14 @@ public class SampleDataTest extends TaskListGuiTest {
 
     @Override
     protected String getDataFileLocation() {
-        // return a non-existent file location to force test app to load sample data
+        // return a non-existent file location to force test app to start with empty task list
         return TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
     }
 
+    //@@author A0140023E
     @Test
-    public void taskList_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Task[] expectedList = SampleDataUtil.getSampleTasks();
-        assertTrue(personListPanel.isListMatching(expectedList)); // TODO Ui to change
+    public void taskList_dataFileDoesNotExist_initEmptyTaskList() throws Exception {
+        Task[] expectedList = new Task[0];
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 }

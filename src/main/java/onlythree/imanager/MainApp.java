@@ -26,7 +26,6 @@ import onlythree.imanager.model.ModelManager;
 import onlythree.imanager.model.ReadOnlyTaskList;
 import onlythree.imanager.model.TaskList;
 import onlythree.imanager.model.UserPrefs;
-import onlythree.imanager.model.util.SampleDataUtil;
 import onlythree.imanager.storage.Storage;
 import onlythree.imanager.storage.StorageManager;
 import onlythree.imanager.ui.Ui;
@@ -83,9 +82,9 @@ public class MainApp extends Application {
         try {
             taskListOptional = storage.readTaskList();
             if (!taskListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskList");
+                logger.info("Data file not found. Will be starting with an empty TaskList");
             }
-            initialData = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
+            initialData = taskListOptional.orElseGet(TaskList::new);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
             initialData = new TaskList();

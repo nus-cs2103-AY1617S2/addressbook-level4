@@ -28,7 +28,7 @@ public class AddCommandTest extends TaskListGuiTest {
         //add duplicate task
         commandBox.runCommand(td.helpMe.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(personListPanel.isListMatching(currentList));
+        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
@@ -43,12 +43,12 @@ public class AddCommandTest extends TaskListGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(taskToAdd.getName().value);
+        PersonCardHandle addedCard = taskListPanel.navigateToPerson(taskToAdd.getName().value);
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

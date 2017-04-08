@@ -46,13 +46,13 @@ public class SelectCommandTest extends TaskListGuiTest {
     }
 
     private void assertTaskSelected(int index) {
-        assertEquals(personListPanel.getSelectedPersons().size(), 1);
-        ReadOnlyTask selectedTask = personListPanel.getSelectedPersons().get(0); // TODO ui
-        assertEquals(personListPanel.getPerson(index - 1), selectedTask);
+        assertEquals(taskListPanel.getSelectedPersons().size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedPersons().get(0); // TODO ui
+        assertEquals(taskListPanel.getPerson(index - 1), selectedTask);
     }
 
     private void assertNoTaskSelected() {
-        assertEquals(personListPanel.getSelectedPersons().size(), 0); // TODO ui
+        assertEquals(taskListPanel.getSelectedPersons().size(), 0); // TODO ui
     }
 
 }
