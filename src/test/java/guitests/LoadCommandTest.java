@@ -41,15 +41,16 @@ public class LoadCommandTest extends TaskcrusherGuiTest {
 
     @Test
     public void loadNonExistingFile() {
-        String filename = "nonexisting.xml";
-        commandBox.runCommand("load " + filename);
-        assertResultMessage(String.format(LoadCommand.MESSAGE_FILE_NONEXISTENT, filename));
+        String filePath = "nonexisting.xml";
+        commandBox.runCommand("load " + filePath);
+        assertResultMessage(String.format(LoadCommand.MESSAGE_FILE_NONEXISTENT, filePath));
     }
 
     @Test
     public void loadExistingFileAsNewFile() {
-        commandBox.runCommand("load new " + EXISTING_FILE);
-        assertResultMessage(String.format(LoadCommand.MESSAGE_FILE_ALREADY_EXISTS, EXISTING_FILE));
+        String filePath = getTempFilePath(EXISTING_FILE);
+        commandBox.runCommand("load new " + filePath);
+        assertResultMessage(String.format(LoadCommand.MESSAGE_FILE_ALREADY_EXISTS, filePath));
     }
 
     @Test
@@ -60,9 +61,9 @@ public class LoadCommandTest extends TaskcrusherGuiTest {
 
     @Test
     public void loadNewFile() throws Exception {
-        String filepath = getTempFilePath("newfile.xml");
-        commandBox.runCommand("load new " + filepath);
-        assertTrue(FileUtil.isFileExists(new File(filepath)));
+        String filePath = getTempFilePath("newfile.xml");
+        commandBox.runCommand("load new " + filePath);
+        assertTrue(FileUtil.isFileExists(new File(filePath)));
     }
 
     @Test
