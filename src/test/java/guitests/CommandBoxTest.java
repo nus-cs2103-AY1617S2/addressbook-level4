@@ -16,32 +16,38 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     private static final String COMMAND_THAT_SUCCEEDS = "select 1";
     private static final String COMMAND_THAT_FAILS = "invalid command";
 
+
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
+    private ArrayList<String> successStyleOfCommandBox;
 
     @Before
     public void setUp() {
         this.defaultStyleOfCommandBox = new ArrayList<>(this.commandBox.getStyleClass());
         assertFalse("CommandBox default style classes should not contain error style class.",
                 this.defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
+        assertFalse("CommandBox default style classes should not contain success style class.",
+                this.defaultStyleOfCommandBox.contains(CommandBox.SUCCESS_STYLE_CLASS));
 
         // build style class for error
         this.errorStyleOfCommandBox = new ArrayList<>(this.defaultStyleOfCommandBox);
         this.errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
+
+        //build style class for success
+        this.successStyleOfCommandBox = new ArrayList<>(this.defaultStyleOfCommandBox);
+        this.successStyleOfCommandBox.add(CommandBox.SUCCESS_STYLE_CLASS);
     }
 
     @Test
     public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
         this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-
         assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
-        assertEquals(this.defaultStyleOfCommandBox, this.commandBox.getStyleClass());
+        assertEquals(this.successStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     @Test
     public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
         this.commandBox.runCommand(COMMAND_THAT_FAILS);
-
         assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
         assertEquals(this.errorStyleOfCommandBox, this.commandBox.getStyleClass());
     }
@@ -54,7 +60,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
         this.commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
         assertEquals(EMPTY_STRING, this.commandBox.getCommandInput());
-        assertEquals(this.defaultStyleOfCommandBox, this.commandBox.getStyleClass());
+        assertEquals(this.successStyleOfCommandBox, this.commandBox.getStyleClass());
     }
 
     // @@author A0138909R
