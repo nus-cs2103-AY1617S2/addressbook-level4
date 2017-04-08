@@ -98,26 +98,4 @@ public class DateUtil {
         return newDate.setHours(23).setMinutes(59).setSeconds(59);
     }
 
-    /**
-     * Returns the beginning of week at time Monday, 00:00:00.
-     */
-    public static DateValue getBeginOfWeek(DateValue date) {
-        DateValue newDate = new DateTime(date);
-        while (newDate.getDay() != MONDAY) {
-            newDate = getPreviousDay(newDate);
-        }
-        return getBeginOfDay(newDate);
-    }
-
-    /**
-     * Returns the end of week at time Sunday, 23:59:59.
-     */
-    public static DateValue getEndOfWeek(DateValue date) {
-        DateValue newDate = new DateTime(date);
-        while (newDate.getDay() != SUNDAY) {
-            newDate = getNextDay(newDate);
-        }
-        return getEndOfDay(newDate);
-    }
-
 }
