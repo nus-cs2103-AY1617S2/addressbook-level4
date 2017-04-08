@@ -81,7 +81,8 @@ public class TaskCard extends UiPart<Region> {
         } else if (isOverdue) {
             // account for special case (taskEndDate == today) that is marked as true for .after() in the API
             // ie. ed/today (without time) should not be overdue
-            if (sdfNoTime.format(taskEndDate).equals(sdfNoTime.format(currDate)) && !task.getEndDateTime().isTimeInferred()) {
+            if (sdfNoTime.format(taskEndDate).equals(sdfNoTime.format(currDate))
+                    && !task.getEndDateTime().isTimeInferred()) {
                 return true;
             } else if (!sdfNoTime.format(taskEndDate).equals(sdfNoTime.format(currDate))) {
                 return true;
