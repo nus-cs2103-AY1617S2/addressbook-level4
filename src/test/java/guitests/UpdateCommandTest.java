@@ -8,6 +8,7 @@ import org.junit.Test;
 import guitests.guihandles.DeadlineTaskCardHandle;
 import guitests.guihandles.EventTaskCardHandle;
 import guitests.guihandles.FloatingTaskCardHandle;
+import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
@@ -16,6 +17,7 @@ import seedu.taskmanager.model.task.StartTime;
 // import seedu.taskmanager.model.category.Category;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
+import seedu.taskmanager.testutil.TestUtil;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class UpdateCommandTest extends TaskManagerGuiTest {
@@ -28,11 +30,11 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     // @@author A0141102H
     @Test
     public void update_allFieldsSpecified_success() throws Exception {
-        String detailsToUpdate = "take a snack break ON 03/03/17 1500 TO 1600 CATEGORY";
+        String detailsToUpdate = "take a snack break ON 03/03/19 1500 TO 1600 CATEGORY";
         int taskManagerIndex = 1;
 
-        updatedTask = new TaskBuilder().withTaskName("take a snack break").withStartDate("03/03/17")
-                .withStartTime("1500").withEndDate("03/03/17").withEndTime("1600").build();
+        updatedTask = new TaskBuilder().withTaskName("take a snack break").withStartDate("03/03/19")
+                .withStartTime("1500").withEndDate("03/03/19").withEndTime("1600").build();
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
@@ -152,10 +154,16 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
-        expectedTasksList[taskManagerIndex - 1] = updatedTask;
+        expectedTasksList = TestUtil.removeTaskFromList(expectedTasksList, taskManagerIndex);
+        Pair<TestTask[],Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
+        
+        expectedTasksList = expectedList.getKey();
+        int updateIndex = expectedList.getValue();
+
         assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(floatingTaskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask)
+                + "\n" + "Task updated to index: " + Integer.toString(updateIndex + 1));
     }
 }
