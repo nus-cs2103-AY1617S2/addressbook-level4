@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static seedu.ezdo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
@@ -65,10 +66,15 @@ public class SelectCommandTest extends EzDoGuiTest {
     public void selectMultipleTasks_nonEmptyList() {
 
         TestTask[] currentList = td.getTypicalTasks();
+        assertFalse((currentList[1]).getStarted());
+
         assertMultipleSelectionSuccess(currentList);
 
         // select index smaller than the range in done list
         assertSelectionInvalidInDoneList(0);
+        
+        // select any task in done list
+        assertDoneTaskSelectionInvalid(2);
 
         // select index larger than the range in done list
         commandBox.runCommand("list");
@@ -109,6 +115,13 @@ public class SelectCommandTest extends EzDoGuiTest {
         commandBox.runCommand("done");
         commandBox.runCommand("select " + index);
         assertResultMessage("The task index provided is invalid.");
+    }
+
+    private void assertDoneTaskSelectionInvalid(int index) {
+        commandBox.runCommand("done 1 2 4");
+        commandBox.runCommand("done");
+        commandBox.runCommand("select " + index);
+        assertResultMessage("The task has a status marked as done.");
     }
 
     private void assertSelectionSuccess(int index) {
