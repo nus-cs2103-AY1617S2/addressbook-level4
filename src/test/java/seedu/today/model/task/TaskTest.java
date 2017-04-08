@@ -97,8 +97,7 @@ public class TaskTest {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Date date2 = DateUtils.addDays(date, 1);
-            Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, date2,
-                    false, false);
+            new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, date2, false, false);
             fail();
         } catch (IllegalValueException e) {
             assertTrue(e.getMessage().equals("Deadline should be after starting time."));

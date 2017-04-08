@@ -105,13 +105,13 @@ public class UiManager extends ComponentManager implements Ui {
     // ===============================================================
 
     @Subscribe
-    private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
+    public void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
     @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
+    public void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
     }
@@ -121,7 +121,7 @@ public class UiManager extends ComponentManager implements Ui {
      * Scrolls the list to the position of the task to be highlighted
      */
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.targetIndex.charAt(0) == 'T') {
             scrollToTodayTask(event);
@@ -181,9 +181,8 @@ public class UiManager extends ComponentManager implements Ui {
                 + "; setVvalue:" + vValue);
     }
 
-
     @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
+    public void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 

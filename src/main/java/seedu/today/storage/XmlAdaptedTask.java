@@ -30,9 +30,6 @@ public class XmlAdaptedTask {
     private String deadline;
 
     @XmlElement(required = true)
-    private String taskType;
-
-    @XmlElement(required = true)
     private boolean done;
 
     @XmlElement(required = true)

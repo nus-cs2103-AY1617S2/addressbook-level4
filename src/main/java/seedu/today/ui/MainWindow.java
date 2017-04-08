@@ -2,7 +2,6 @@ package seedu.today.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -33,7 +32,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import seedu.today.commons.core.Config;
 import seedu.today.commons.core.GuiSettings;
-import seedu.today.commons.core.LogsCenter;
 import seedu.today.commons.events.ui.ExitAppRequestEvent;
 import seedu.today.commons.events.ui.NewResultAvailableEvent;
 import seedu.today.commons.events.ui.UpdateStatusBarEvent;
@@ -52,8 +50,6 @@ import seedu.today.ui.util.CommandTextFieldValidator;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-
-    private final Logger logger = LogsCenter.getLogger(MainWindow.class);
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";

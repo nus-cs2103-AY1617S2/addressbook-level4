@@ -12,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.today.commons.core.LogsCenter;
@@ -28,8 +27,6 @@ public class TaskCard extends UiPart<Region> {
     private static final String FXML = "TaskListCard.fxml";
 
     @FXML
-    private HBox cardPane;
-    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -39,8 +36,6 @@ public class TaskCard extends UiPart<Region> {
     private Label taskDate;
     @FXML
     private JFXProgressBar progressBar;
-    @FXML
-    private JFXProgressBar overdueBar;
     @FXML
     private AnchorPane cardCell;
 

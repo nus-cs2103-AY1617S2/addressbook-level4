@@ -12,8 +12,8 @@ public class CommandTextFieldValidator extends ValidatorBase {
     }
 
     /**
-     * Implements parent class's abstract method.
-     * It refreshes the commandBox error message when called.
+     * Implements parent class's abstract method. It refreshes the commandBox
+     * error message when called.
      */
     @Override
     protected void eval() {
@@ -21,8 +21,8 @@ public class CommandTextFieldValidator extends ValidatorBase {
     }
 
     /**
-     * displays error message under command box
-     * Notice: need to call the corresponding JFXTextField's validate() method to update the UI
+     * displays error message under command box Notice: need to call the
+     * corresponding JFXTextField's validate() method to update the UI
      */
     public void showErrorMessage() {
         hasErrors.set(true);
