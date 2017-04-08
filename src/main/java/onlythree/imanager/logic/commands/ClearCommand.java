@@ -8,7 +8,7 @@ import onlythree.imanager.model.TaskList;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "iManager has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Task list has been cleared!";
 
 
     @Override

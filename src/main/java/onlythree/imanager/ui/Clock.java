@@ -16,7 +16,7 @@ import onlythree.imanager.commons.util.FxViewUtil;
 //@@author A0135998H
 public class Clock extends UiPart<Region> {
     private static final String FXML = "Clock.fxml";
-    private static final int CLOCK_RENDERING_DELAY = 500; // msec
+    private static final int CLOCK_RENDERING_DELAY_MS = 500;
 
     private DateTimeFormatter formatter;
 
@@ -27,9 +27,9 @@ public class Clock extends UiPart<Region> {
         super(FXML);
         formatter = DateTimeFormatter.ofPattern("d MMM EEEE, h:mm a");
         addToPlaceholder(clockPlaceholder);
-        clockLabel.setText(formattedDate());
-        Timeline timer = new Timeline(new KeyFrame(Duration.millis(CLOCK_RENDERING_DELAY), event -> {
-            clockLabel.setText(formattedDate());
+        clockLabel.setText(getCurrentFormattedDate());
+        Timeline timer = new Timeline(new KeyFrame(Duration.millis(CLOCK_RENDERING_DELAY_MS), event -> {
+            clockLabel.setText(getCurrentFormattedDate());
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();
@@ -42,7 +42,7 @@ public class Clock extends UiPart<Region> {
         placeHolderPane.getChildren().add(clockLabel);
     }
 
-    public String formattedDate() {
+    public String getCurrentFormattedDate() {
         return formatter.format((LocalDateTime.now()));
     }
 

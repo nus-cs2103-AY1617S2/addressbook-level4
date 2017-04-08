@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import onlythree.imanager.logic.parser.DateTimeUtil;
+import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 
@@ -24,9 +25,9 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private HBox showStartEndDate;
+    private HBox startEndDateContainer;
     @FXML
-    private HBox showDeadline;
+    private HBox deadlineContainer;
     @FXML
     private Label startDate;
     @FXML
@@ -43,26 +44,73 @@ public class TaskCard extends UiPart<Region> {
 
         // TODO change date format
         DateTimeFormatter dateFormat = DateTimeUtil.DISPLAY_FORMAT_TODO;
-        if (task.getStartEndDateTime().isPresent()) {
-            showStartEndDate.setVisible(true);
-            showDeadline.setVisible(false);
-            StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
-            startDate.setText(startEndDateTime.getStartDateTime().format(dateFormat));
-            endDate.setText(startEndDateTime.getEndDateTime().format(dateFormat));
-        } else if (task.getDeadline().isPresent()) {
-            showStartEndDate.setVisible(false);
-            showDeadline.setVisible(true);
-            deadline.setText(task.getDeadline().get().getDateTime().format(dateFormat));
+        StartEndDateTime taskStartEndDateTime = getStartEndDateTime(task);
+        Deadline taskDeadline = getDeadline(task);
+        if (taskStartEndDateTime != null) {
+            showStartEndDateContainer();
+            hideDeadlineContainer();
+            startDate.setText(getStartDateTime(taskStartEndDateTime, dateFormat));
+            endDate.setText(getEndDateTime(taskStartEndDateTime, dateFormat));
+        } else if (taskDeadline != null) {
+            showDeadlineContainer();
+            hideStartEndDateContainer();
+            deadline.setText(getDeadlineDateTime(taskDeadline, dateFormat));
         } else {
-            showStartEndDate.setVisible(false);
-            showDeadline.setVisible(false);
+            hideStartEndDateContainer();
+            hideDeadlineContainer();
         }
-
         initTags(task);
     }
 
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void showStartEndDateContainer() {
+        startEndDateContainer.setVisible(true);
+    }
+
+    private void showDeadlineContainer() {
+        deadlineContainer.setVisible(true);
+    }
+
+    private void hideStartEndDateContainer() {
+        startEndDateContainer.setVisible(false);
+    }
+
+    private void hideDeadlineContainer() {
+        deadlineContainer.setVisible(false);
+    }
+
+    private StartEndDateTime getStartEndDateTime(ReadOnlyTask task) {
+        if (task.getStartEndDateTime().isPresent()) {
+            return task.getStartEndDateTime().get();
+        } else {
+            return null;
+        }
+    }
+
+    private Deadline getDeadline(ReadOnlyTask task) {
+        if (task.getDeadline().isPresent()) {
+            return task.getDeadline().get();
+        } else {
+            return null;
+        }
+    }
+
+    private String getStartDateTime(StartEndDateTime taskStartEndDateTime,
+            DateTimeFormatter dateFormat) {
+        return taskStartEndDateTime.getStartDateTime().format(dateFormat);
+    }
+
+    private String getEndDateTime(StartEndDateTime taskStartEndDateTime,
+            DateTimeFormatter dateFormat) {
+        return taskStartEndDateTime.getEndDateTime().format(dateFormat);
+    }
+
+    private String getDeadlineDateTime(Deadline taskDeadline,
+            DateTimeFormatter dateFormat) {
+        return taskDeadline.getDateTime().format(dateFormat);
     }
 
 }

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import onlythree.imanager.logic.commands.ClearCommand;
+
 public class ClearCommandTest extends TaskListGuiTest {
 
     @Test
@@ -26,6 +28,6 @@ public class ClearCommandTest extends TaskListGuiTest {
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage("iManager has been cleared!");
+        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
     }
 }

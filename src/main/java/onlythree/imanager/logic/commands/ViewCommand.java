@@ -24,7 +24,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": View a type of specified tasks.\n"
             + "Parameters: TYPE\n"
-            + "Example: " + COMMAND_WORD + TYPE_DONE;
+            + "Example: " + COMMAND_WORD + " " + TYPE_DONE;
 
 
     public static final String MESSAGE_SUCCESS_VIEW_ALL_TASKS = "List All Tasks";

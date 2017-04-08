@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- @@author A0135998H -->
 
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,7 @@
    <children>
       <Label fx:id="clockLabel" alignment="BOTTOM_LEFT" contentDisplay="BOTTOM" text="\$clock" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="45.0" />
+            <Font name="Arial Rounded MT Bold" size="26.0" />
          </font>
       </Label>
    </children>
