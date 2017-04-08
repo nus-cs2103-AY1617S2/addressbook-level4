@@ -22,7 +22,7 @@ public interface Model {
     void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Task person) throws UniqueTaskList.DuplicatePersonException;
+    void addTask(Task person) throws UniqueTaskList.DuplicatePersonException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.

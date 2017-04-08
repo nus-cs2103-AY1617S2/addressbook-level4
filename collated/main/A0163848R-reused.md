@@ -1,5 +1,58 @@
 # A0163848R-reused
-###### /java/seedu/address/logic/commands/ThemeCommand.java
+###### \java\seedu\address\commons\events\ui\LoadRequestEvent.java
+``` java
+/**
+* Represents a request to retrieve the file at the stored path.
+*/
+public class LoadRequestEvent extends BaseEvent {
+
+    private File target;
+    
+    public LoadRequestEvent(File target) {
+        this.target = target;
+    }
+    
+    public File getTargetFile() {
+        return target;
+    }
+
+    @Override
+    public String toString() {
+        return "Imported YTomorrow: " + target.toString();
+    }
+}
+```
+###### \java\seedu\address\commons\events\ui\LoadResultAvailableEvent.java
+``` java
+/**
+ * Indicates that a new result is available.
+ */
+public class LoadResultAvailableEvent extends BaseEvent {
+
+    private final Optional<ReadOnlyTaskManager> imported;
+    private final File origin;
+
+    public LoadResultAvailableEvent(Optional<ReadOnlyTaskManager> imported, File origin) {
+        this.imported = imported;
+        this.origin = origin;
+    }
+
+    public Optional<ReadOnlyTaskManager> getImported() {
+        return imported;
+    }
+    
+    public File getFile() {
+        return origin;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+}
+```
+###### \java\seedu\address\logic\commands\ThemeCommand.java
 ``` java
 /**
  * Format full help instructions for every command for display.
@@ -20,7 +73,7 @@ public class ThemeCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/UndoCommand.java
+###### \java\seedu\address\logic\commands\UndoCommand.java
 ``` java
 /**
  * Command that undoes changes caused by the last command.
@@ -45,7 +98,7 @@ public class UndoCommand extends Command {
 
 }
 ```
-###### /java/seedu/address/logic/commands/UnmarkCommand.java
+###### \java\seedu\address\logic\commands\UnmarkCommand.java
 ``` java
 /**
  * Command that marks task as incomplete
@@ -59,123 +112,4 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Unmarked task: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task is already incomplete.";
-
-    private final int filteredPersonListIndex;
-
-    /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
-     */
-    public UnmarkCommand(int filteredPersonListIndex) {
-        assert filteredPersonListIndex > 0;
-
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-
-        if (filteredPersonListIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        Task editedPerson = createUnmarkedPerson(personToEdit);
-
-        try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-        model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, personToEdit));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited to be complete.
-     */
-    private static Task createUnmarkedPerson(ReadOnlyPerson personToEdit) {
-        assert personToEdit != null;
-
-        UniqueTagList updatedTags =
-                personToEdit
-                .getTags()
-                .except(UniqueTagList.build(
-                                Tag.TAG_COMPLETE,
-                                Tag.TAG_INCOMPLETE));
-
-        try {
-            updatedTags.add(new Tag(Tag.TAG_INCOMPLETE));
-        } catch (DuplicateTagException e) {
-            e.printStackTrace();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
-
-        return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
-    }
-}
-```
-###### /java/seedu/address/commons/events/ui/LoadRequestEvent.java
-``` java
-/**
-* Represents a request to retrieve the file at the stored path.
-*/
-public class LoadRequestEvent extends BaseEvent {
-
-    private File target;
-    
-    public LoadRequestEvent(File target) {
-        this.target = target;
-    }
-    
-    public File getTargetFile() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return "Imported YTomorrow: " + target.toString();
-    }
-}
-```
-###### /java/seedu/address/commons/events/ui/LoadResultAvailableEvent.java
-``` java
-/**
- * Indicates that a new result is available.
- */
-public class LoadResultAvailableEvent extends BaseEvent {
-
-    private final Optional<ReadOnlyAddressBook> imported;
-    private final File origin;
-
-    public LoadResultAvailableEvent(Optional<ReadOnlyAddressBook> imported, File origin) {
-        this.imported = imported;
-        this.origin = origin;
-    }
-
-    public Optional<ReadOnlyAddressBook> getImported() {
-        return imported;
-    }
-    
-    public File getFile() {
-        return origin;
-    }
-    
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
-
-}
-```
-###### /java/seedu/address/model/ModelManager.java
-``` java
-        addToHistory(new YTomorrow(addressBook));
 ```
