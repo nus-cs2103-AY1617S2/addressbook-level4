@@ -327,7 +327,10 @@ public class TestUtil {
     }
 
     public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
-        return card.isSameTask(task);
+        if (card != null) {
+            return card.isSameTask(task);
+        }
+        return false;
     }
 
     public static Tag[] getTagList(String tags) {

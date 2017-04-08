@@ -507,7 +507,8 @@ public class LogicManagerTest {
             DateTime deadline = new DateTime("thurs 4pm");
             Tag tag1 = new Tag("urgent");
             Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Tag tag3 = new Tag("impt");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
             return new Task(description, deadline, tags);
         }
 

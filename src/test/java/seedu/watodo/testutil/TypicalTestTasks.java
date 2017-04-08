@@ -16,7 +16,7 @@ public class TypicalTestTasks {
         try {
             code = new TaskBuilder().withDescription("coding everyday every minute every sec")
                     .withStartDate("now").withEndDate("next mon 11.59am").withTags("CS").build();
-            study = new TaskBuilder().withDescription("Study mug slog").withTags("life").build();
+            study = new TaskBuilder().withDescription("Study mug slog").withTags("life", "school", "work").build();
             eat = new TaskBuilder().withDescription("Time to eat").withEndDate("tmr 1pm").withTags("yumm").build();
             sleep = new TaskBuilder().withDescription("sleep?").withEndDate("fri").build();
             shop = new TaskBuilder().withDescription("no money spend money").withTags("tag").build();

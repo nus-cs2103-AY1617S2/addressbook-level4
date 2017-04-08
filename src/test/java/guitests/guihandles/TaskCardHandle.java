@@ -15,8 +15,11 @@ import seedu.watodo.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String DESCRIPTION_FIELD_ID = "#description";
     private static final String TAGS_FIELD_ID = "#tags";
+    private static final String STARTDATE_FIELD_ID = "#startDate";
+    private static final String ENDDATE_FIELD_ID = "#endDate";
+    private static final String STATUS_FIELD_ID = "#status";
 
     private Node node;
 
@@ -30,7 +33,19 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
+    }
+
+    public String getStartDate() {
+        return getTextFromLabel(STARTDATE_FIELD_ID);
+    }
+
+    public String getEndDate() {
+        return getTextFromLabel(ENDDATE_FIELD_ID);
+    }
+
+    public String getTaskStatus() {
+        return getTextFromLabel(STATUS_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -58,8 +73,28 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return task != null && getFullName().equals(task.getDescription().fullDescription)
-                && getTags().equals(getTags(task.getTags()));
+        if (task == null) {
+            System.out.println("FALSE");
+            return false;
+        }
+        System.out.println(getFullName());
+        System.out.println(getStartDate());
+        System.out.println(getEndDate());
+
+        String taskStartDate = "";
+        String taskEndDate = "";
+        if (task.getStartDate() != null) {
+            taskStartDate = task.getStartDate().toString();
+        }
+        if (task.getEndDate() != null) {
+            taskEndDate = task.getEndDate().toString();
+        }
+
+        return getFullName().equals(task.getDescription().fullDescription)
+                && getStartDate().equals(taskStartDate)
+                && getEndDate().equals(taskEndDate)
+                && getTaskStatus().equals(task.getStatus().toString());
+               // && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
@@ -77,3 +112,4 @@ public class TaskCardHandle extends GuiHandle {
         return getFullName();
     }
 }
+

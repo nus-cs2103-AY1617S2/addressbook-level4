@@ -544,11 +544,6 @@ time only:
 day/date and time:
 >mon 4.30pm
 
-
-
-
-
-
 ## Appendix E : Product Survey
 
 **Todoist**
