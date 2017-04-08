@@ -18,7 +18,7 @@ public class ResultDisplayTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
         commandBox.runCommand("");
-        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertResultMessage(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
     }
 
 }

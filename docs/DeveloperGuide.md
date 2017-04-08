@@ -217,9 +217,9 @@ Functions of `UI`:
 The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts
 (e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`). All these, including the `MainWindow`, inherit from the abstract `UiPart` class. <br>
 
-The `UI` component uses the _JavaFX UI_ framework. Hence, the layout of these UI parts are defined in matching `.fxml` files 
-that are in the `src/main/resources/view` folder. For example, the layout of the 
-[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+The `UI` component uses the _JavaFX UI_ framework. Hence, the layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the
+[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
 [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). <br>
 
 #### Design Patterns
