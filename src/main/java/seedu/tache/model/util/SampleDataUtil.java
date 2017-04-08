@@ -7,11 +7,11 @@ import java.util.Optional;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.TaskManager;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {

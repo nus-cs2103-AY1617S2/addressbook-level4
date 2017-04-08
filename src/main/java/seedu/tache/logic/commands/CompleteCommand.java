@@ -68,7 +68,7 @@ public class CompleteCommand extends Command implements Undoable {
             ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
             Task completedTask = createCompletedTask(taskToEdit);
             try {
-                if (taskToEdit.getRecurringStatus()) {
+                if (taskToEdit.getRecurState().isRecurring()) {
                     model.updateTask(createMasterRecurringTask(taskToEdit), completedTask);
                 } else {
                     model.updateTask(taskToEdit, completedTask);
@@ -93,17 +93,21 @@ public class CompleteCommand extends Command implements Undoable {
      */
     private static Task createCompletedTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
-            List<Date> tempList = (ArrayList<Date>) ((ArrayList<Date>) taskToEdit.getRecurCompletedList()).clone();
-            tempList.add(new Date(taskToEdit.getRecurDisplayDate()));
-            ((Task) taskToEdit).setRecurDisplayDate("");
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
+            //List<Date> tempList = (ArrayList<Date>) ((ArrayList<Date>) taskToEdit.getRecurState()
+             //                           .getRecurCompletedList()).clone();
+            List<Date> tempList = taskToEdit.getRecurState().getRecurCompletedList();
+            tempList.add(new Date(taskToEdit.getRecurState().getRecurDisplayDate()));
+            ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                    taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                    taskToEdit.getRecurringStatus(), taskToEdit.getRecurInterval(), tempList);
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
+                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            tempList);
         } else {
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false, taskToEdit.getRecurringStatus(),
-                            taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false,
+                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getRecurState().getRecurCompletedList());
         }
     }
 
@@ -115,8 +119,9 @@ public class CompleteCommand extends Command implements Undoable {
         assert taskToEdit != null;
 
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true, taskToEdit.getRecurringStatus(),
-                                taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true,
+                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getRecurState().getRecurCompletedList());
 
     }
 
@@ -126,11 +131,11 @@ public class CompleteCommand extends Command implements Undoable {
      */
     private static Task createMasterRecurringTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
-        ((Task) taskToEdit).setRecurDisplayDate("");
+        ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
                             taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                            taskToEdit.getRecurringStatus(), taskToEdit.getRecurInterval(),
-                            taskToEdit.getRecurCompletedList());
+                            taskToEdit.getRecurState().isRecurring(), taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getRecurState().getRecurCompletedList());
 
     }
 

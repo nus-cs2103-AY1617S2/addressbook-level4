@@ -93,7 +93,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setIsMasterRecurring(ReadOnlyTask task) {
         assert task != null;
-        isMasterRecurring = task.isMasterRecurring();
+        isMasterRecurring = task.getRecurState().isMasterRecurring();
     }
 
     /**
