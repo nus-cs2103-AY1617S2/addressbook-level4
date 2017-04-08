@@ -35,7 +35,6 @@ public class Event implements ReadOnlyEvent {
 
         //check description and start date are present
         assert !CollectionUtil.isAnyNull(description, startDate);
-        assert isValideEndDateTime(endTime, endDate, startTime, startDate);
 
         this.description = description;
         this.startTime = startTime;
@@ -119,7 +118,7 @@ public class Event implements ReadOnlyEvent {
     /**
      * Checks if start Date/Time is before end Date/Time
      */
-    public static boolean isValideEndDateTime(EndTime et, EndDate ed, StartTime st, StartDate sd) {
+    public static boolean isValidEndDateTime(EndTime et, EndDate ed, StartTime st, StartDate sd) {
         if (sd.getValue().isAfter(ed.getValue())) {
             return false;
         }

@@ -45,15 +45,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an activity to WhatsLeft.\n"
-            + "Adds an event: add DESCRIPTION [st/STARTTIME] sd/STARTDATE"
-            + " [et/ENDTIME] [ed/ENDDATE] [l/LOCATION] [ta/TAG]...\n"
-            + "Event must have sd/STARTDATE\n"
+            + "Adds an event: add DESCRIPTION [st/START_TIME] sd/START_DATE"
+            + " [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " Project Discussion st/1200 sd/060817 et/1400 ed/060817 l/discussion room ta/formal\n"
-            + "Adds a task/deadline: add DESCRIPTION p/PRIORITY [bt/BYTIME] [bd/BYDATE] [l/LOCATION] [ta/TAG]...\n"
-            + "Task(deadline) must have p/PRIORITY\n"
+            + "Adds a task(deadline): add DESCRIPTION p/PRIORITY [bt/BY_TIME] [bd/BY_DATE] [l/LOCATION] [ta/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Project Report p/high bd/120817 ta/hardcopy";
+            + " Project Report p/high bd/tmr ta/hardcopy";
 
     public static final String MESSAGE_EVENT_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_TASK_SUCCESS = "New task(deadline) added: %1$s";
@@ -78,6 +76,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        //@@author A0148038A
         if (startdate != null) {
             this.toAddEvent = new Event(
                     new Description(description),
@@ -88,7 +87,7 @@ public class AddCommand extends Command {
                     new Location(location),
                     new UniqueTagList(tagSet));
             this.toAddTask = null;
-            if (!Event.isValideEndDateTime(toAddEvent.getEndTime(), toAddEvent.getEndDate(),
+            if (!Event.isValidEndDateTime(toAddEvent.getEndTime(), toAddEvent.getEndDate(),
                     toAddEvent.getStartTime(), toAddEvent.getStartDate())) {
                 throw new IllegalValueException(MESSAGE_ILLEGAL_EVENT_END_DATETIME);
             }
@@ -154,8 +153,12 @@ public class AddCommand extends Command {
      */
     private CommandResult addingEvent() throws DuplicateEventException {
         model.addEvent(toAddEvent);
+
+        //@@authour A0148038A
         UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
         EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
+
+        //@@author A0110491U
         if (!toAddEvent.isOver()) {
             EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
         }
