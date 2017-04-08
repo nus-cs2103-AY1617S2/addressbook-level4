@@ -653,7 +653,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
-    /*
+
     @Test
     public void execute_find_multipleKeywords() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -668,12 +668,12 @@ public class LogicManagerTest {
         List<Task> sevenTasks = helper.generateTaskList(targetTag3, targetTagAndName1, p2, targetTagAndName2, targetTag1,
                 targetTag2, p3);
         TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
-        List<Task> expectedList = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2, targetTag3);
+        List<Task> expectedList = helper.generateTaskList(targetTag3);
         helper.addToModel(model, sevenTasks);
 
-        assertCommandSuccess("find nope beep KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find nope", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
-    }*/
+    }
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
