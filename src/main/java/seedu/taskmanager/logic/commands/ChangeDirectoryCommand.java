@@ -9,10 +9,12 @@ import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
+import seedu.taskmanager.model.TaskManager;
 
 // @@author A0114269E
 /**
  * Loads Task Manager from user-specified path XML file and changes the directory to that file path.
+ * If no XML is found, starting a new Task Manager with new XML file at given file path
  * Path matching is case sensitive.
  */
 public class ChangeDirectoryCommand extends Command {
@@ -24,9 +26,9 @@ public class ChangeDirectoryCommand extends Command {
             + "Parameters: PATH...\n"
             + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "TaskManager successfully loaded from : %1$s";
-    public static final String MESSAGE_NEW_FILE = "No XML File is found at directory : %1$s\n"
-            + "New XML file will be created";
+    public static final String MESSAGE_SUCCESS = "TaskManager successfully loaded : %1$s";
+    public static final String MESSAGE_NEW_FILE = "WARNING! No XML file is found\n"
+            + "Starting a new Task Manager with XML file at : %1$s\n";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load.";
@@ -57,7 +59,7 @@ public class ChangeDirectoryCommand extends Command {
 
         try {
             taskManagerOptional = storage.readTaskManager(this.newPath);
-            newTaskManager = taskManagerOptional.orElse(model.getTaskManager());
+            newTaskManager = taskManagerOptional.orElse(new TaskManager());
             storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
             model.resetData(newTaskManager);
             model.updateFilteredListToShowAll();
