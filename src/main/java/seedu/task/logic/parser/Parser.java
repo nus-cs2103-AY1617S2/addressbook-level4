@@ -25,6 +25,7 @@ import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.UndoCommand;
 
+
 /**
  * Parses user input.
  */
@@ -37,7 +38,6 @@ public class Parser {
 
     /**
      * Parses user input into command for execution.
-     * 
      * @param userInput
      *            full user input string
      * @return the command based on the user input

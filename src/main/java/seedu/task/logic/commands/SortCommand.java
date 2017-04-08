@@ -16,8 +16,9 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": can sort the tasks in Fast Task by alphabetical order, "
             + "by the date that is closest to the current date, by the date the task was created, "
-            + "or by the task status\n" + "Parameters: KEYWORD\n" + "Examples: " + COMMAND_WORD + " name, "
-            + COMMAND_WORD + " time, " + COMMAND_WORD + " cd, " + COMMAND_WORD + " status";
+            + "or by the task status\n"
+            + "Parameters: KEYWORD\n" + "Examples: " + COMMAND_WORD + " name, " + COMMAND_WORD + " time, "
+            + COMMAND_WORD + " cd, " + COMMAND_WORD + " status";
 
     public static final String MESSAGE_FAILURE = "Sorting failed";
     public static final String MESSAGE_SUCCESS = "Sorting success";

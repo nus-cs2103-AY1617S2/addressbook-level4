@@ -21,7 +21,6 @@ public class TaskName implements Comparable<TaskName> {
 
     /**
      * Validates given name.
-     * 
      * @throws IllegalValueException
      *             if given name string is invalid.
      */

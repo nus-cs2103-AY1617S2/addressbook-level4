@@ -16,7 +16,6 @@ public abstract class Command {
     /**
      * Constructs a feedback message to summarize an operation that displayed a
      * listing of tasks.
-     * 
      * @param displaySize
      *            used to generate summary
      * @return summary message for persons displayed
@@ -34,7 +33,6 @@ public abstract class Command {
 
     /**
      * Executes the command and returns the result message.
-     * 
      * @return feedback message of the operation result for display
      * @throws CommandException
      *             If an error occurs during command execution.
