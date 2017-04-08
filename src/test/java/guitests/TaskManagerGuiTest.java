@@ -51,7 +51,7 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    // @author A0093999Y
+    // @@author A0093999Y
     protected TypicalTasks td = new TypicalTasks();
     protected Task[] emptyTaskList = new Task[] {};
     protected Task[] todayList = td.getTodayListTasks();
@@ -142,7 +142,7 @@ public abstract class TaskManagerGuiTest {
         assertEquals(size, numberOfTasks);
     }
 
-    // @author A0093999Y
+    // @@author A0093999Y
     /**
      * Asserts the UI Today and Future Task Lists match the given expected lists
      */

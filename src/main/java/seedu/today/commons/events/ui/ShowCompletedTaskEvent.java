@@ -2,7 +2,7 @@ package seedu.today.commons.events.ui;
 
 import seedu.today.commons.events.BaseEvent;
 
-//@@author A0093999Y
+// @@author A0093999Y
 /**
  * Informs the Completed Task Panel whether to Show, Hide, or Toggle.
  */

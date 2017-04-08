@@ -11,7 +11,7 @@ import seedu.today.model.task.Name;
 import seedu.today.model.task.Task;
 import seedu.today.testutil.TestUtil;
 
-// @author A0093999Y
+// @@author A0093999Y
 public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
