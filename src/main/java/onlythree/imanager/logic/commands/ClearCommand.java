@@ -3,7 +3,7 @@ package onlythree.imanager.logic.commands;
 import onlythree.imanager.model.TaskList;
 
 /**
- * Clears the address book.
+ * Clears the task list.
  */
 public class ClearCommand extends Command {
 

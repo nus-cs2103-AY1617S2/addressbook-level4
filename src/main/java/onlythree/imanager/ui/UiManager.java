@@ -20,8 +20,8 @@ import onlythree.imanager.commons.core.LogsCenter;
 import onlythree.imanager.commons.events.model.ViewListChangedEvent;
 import onlythree.imanager.commons.events.storage.DataSavingExceptionEvent;
 import onlythree.imanager.commons.events.ui.JumpToListRequestEvent;
-import onlythree.imanager.commons.events.ui.PersonPanelSelectionChangedEvent;
 import onlythree.imanager.commons.events.ui.ShowHelpRequestEvent;
+import onlythree.imanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import onlythree.imanager.commons.util.StringUtil;
 import onlythree.imanager.logic.Logic;
 import onlythree.imanager.model.UserPrefs;
@@ -133,7 +133,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 

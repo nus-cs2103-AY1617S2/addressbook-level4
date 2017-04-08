@@ -27,7 +27,7 @@ public class TypicalTestTasks {
         try {
             // floating task with a tag
             amuseFriend = new TaskBuilder().withName("Amuse friend").withTags("friends").build();
-            // TODO flip the order of tags and test cases can fail, see TestUtil::compareCardAndPerson
+            // Notice how flipping the order of tags and test cases can fail, see TestUtil::compareCardAndTask
             // using list compare instead of set compare
             // floating task with two tags
             bet = new TaskBuilder().withName("Bet dog race").withTags("luck", "money").build();

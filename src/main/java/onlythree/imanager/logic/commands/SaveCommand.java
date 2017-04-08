@@ -15,7 +15,7 @@ import onlythree.imanager.storage.XmlTaskListStorage;
 
 /**
  *
- * Save the address book data
+ * Save the task listdata
  *
  */
 

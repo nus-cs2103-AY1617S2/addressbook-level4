@@ -12,15 +12,18 @@ import onlythree.imanager.model.tag.UniqueTagList;
 import onlythree.imanager.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
+    private static final String DEADLINE_FIELD_ID = "#deadline";
+    private static final String STARTDATE_FIELD_ID = "#startDate";
+    private static final String ENDDATE_FIELD_ID = "#endDate";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -31,6 +34,16 @@ public class PersonCardHandle extends GuiHandle {
 
     public String getFullName() {
         return getTextFromLabel(NAME_FIELD_ID);
+    }
+
+    public String getDeadline() {
+        return getTextFromLabel(DEADLINE_FIELD_ID);
+    }
+    public String getStartDate() {
+        return getTextFromLabel(STARTDATE_FIELD_ID);
+    }
+    public String getEndDate() {
+        return getTextFromLabel(ENDDATE_FIELD_ID);
     }
 
     public List<String> getTags() {
@@ -57,15 +70,17 @@ public class PersonCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSamePerson(ReadOnlyTask person) {
-        return getFullName().equals(person.getName().value)
-                && getTags().equals(getTags(person.getTags()));
+    public boolean isSameTask(ReadOnlyTask task) {
+        // TODO compare the other fields
+        return getFullName().equals(task.getName().value)
+                && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        // TODO compare the other fields
+        if (obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getTags().equals(handle.getTags());
         }
@@ -74,6 +89,6 @@ public class PersonCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName(); // + " " + getAddress(); TODO find out why only using address and no others like phone
+        return getFullName();
     }
 }
