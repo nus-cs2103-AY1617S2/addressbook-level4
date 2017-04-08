@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import com.jfoenix.controls.JFXTextField;
+
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -51,5 +53,9 @@ public class CommandBoxHandle extends GuiHandle {
 
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
+    }
+
+    public JFXTextField getCommandBoxInstance() {
+        return getNode(COMMAND_INPUT_FIELD_ID);
     }
 }

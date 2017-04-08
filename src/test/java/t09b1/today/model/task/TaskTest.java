@@ -1,4 +1,4 @@
-//@@author: A0144422R
+//@@author A0144422R
 package t09b1.today.model.task;
 
 import static org.junit.Assert.assertFalse;
