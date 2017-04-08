@@ -97,4 +97,10 @@ public class AddCommand extends Command {
 
     }
 
+    // @@author A0140032E
+    public Task getTask() {
+        return this.toAdd;
+    }
+    // @@author
+
 }
