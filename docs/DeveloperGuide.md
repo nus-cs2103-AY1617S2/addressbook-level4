@@ -154,6 +154,16 @@ When a command is entered, the `Parser` processes the text and selects the appro
 
 > `CommandParser` may return an `IncorrectCommand` in the case when the arguments are not of the suitable format
 
+**Command Parsers**
+
+Command parsers are designed to facilitate logic manager to understand certain user commands. They break the input string down based on the keywords in the commands, and generating instances like dates and names that the logic manager will understand. 
+
+All the parsers are extending from CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java. For certain commands, like `add` and `edit` commands, which have flexible input styles, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will find the tag information first. After that, the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads, instead it will only check whether the index exist and pass the UI index string to the logic manager untouched. The parsers will not modify the model directly. 
+
+The parsers will generate Command instances, based on the type of commands they received. The Command instance will include all the fields the parser identified. 
+
+In the event the parser encounters input errors, for example the input contains invalid characters or the index typed is unknown, an IncorrectCommand instance will be returned to the handler, containing the error information.
+
 ### 3.4. Model
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerModelClassDiagram.png" width="800"><br>
@@ -161,11 +171,20 @@ _Figure 3.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-`Model` consists of `UserPref`, `TaskManager` and `UnmodifiableObservableList`.
+**Task**
 
-The`UserPref` object manages the user's preferences (e.g. window size) while the `TaskManager` object manages the user's tasks. All CRUD commands, such as adding and deleting tasks, are all handled by the `TaskManager` object.
+Task class is the fundamental block of the whole task manager. Each Task instance holds the specifications of one task.
 
-Lastly, the `UnmodfiableObservableList<ReadOnlyTask>` is bound to the UI. Whenever this list is updated, the UI will be updated to reflected the new set of tasks.
+Task is an abstract class, and it has three subclasses, namely FloatingTask (task with no date time), DeadlineTask (task with a deadline), and EventTask (task with a starting time and an ending time). Each subclass has a unique constructor which will initiate the name and tag information of one task with the given information. The constructor also needs date time information based on the type of the task. For EventTask, the constructor will check whether the ending time is after the starting time. If not, an IllegalValueException will be thrown.
+
+**Filter**
+
+All tasks are stored in an ObservableList inside model. In order to fetch a list of tasks which meet some certain criteria, filters can be applied to the ObservableList. The filters are written as Predicate instances.
+
+**History**
+
+The command history and previous states of the task manager are also saved in the model, in order to make `undo` and `redo` user commands possible. 
+
 
 ### 3.5. Storage
 
