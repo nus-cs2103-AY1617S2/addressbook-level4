@@ -11,6 +11,7 @@ import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
@@ -18,11 +19,12 @@ import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
-import seedu.taskmanager.logic.commands.MoveCommand;
 import seedu.taskmanager.logic.commands.RedoCommand;
+import seedu.taskmanager.logic.commands.SaveAsCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
+import seedu.taskmanager.logic.commands.UndoneCommand;
 
 /**
  * Parses user input.
@@ -76,7 +78,7 @@ public class Parser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -90,16 +92,31 @@ public class Parser {
         case ChangeDirectoryCommand.ALTERNATIVE_COMMAND_WORD:
             return new ChangeDirectoryCommandParser().parse(arguments);
 
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case DoneCommand.ALTERNATIVE_COMMAND_WORD_1:
+            return new DoneCommandParser().parse(arguments);
+
+        case DoneCommand.ALTERNATIVE_COMMAND_WORD_2:
+            return new DoneCommandParser().parse(arguments);
+
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
+
+        case UndoneCommand.ALTERNATIVE_COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case MoveCommand.COMMAND_WORD:
+        case SaveAsCommand.COMMAND_WORD:
             return new MoveCommandParser().parse(arguments);
 
-        case MoveCommand.ALTERNATIVE_COMMAND_WORD:
+        case SaveAsCommand.ALTERNATIVE_COMMAND_WORD:
             return new MoveCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:

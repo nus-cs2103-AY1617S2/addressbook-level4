@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
+
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
@@ -19,10 +22,13 @@ public class EndDate extends Date {
     public static final String MESSAGE_ENDDATE_CONSTRAINTS = "End date should be of dd/mm/yyyy format or "
             + "can be empty";
     public static final String ENDDATE_VALIDATION_REGEX = "(^$)|(^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$)";
-
     // @@author A0140032E
+    public static final LocalTime WORKING_HOUR_END = new LocalTime(18, 0);
+
     private static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+    private static final SimpleDateFormat sdfOutputForDateString = new SimpleDateFormat("d MMM yyyy");
     private static final SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
+    private static boolean timeInferred;
 
     /**
      * Validates given end date.
@@ -41,6 +47,13 @@ public class EndDate extends Date {
             try {
                 Parser parser = new Parser();
                 List<DateGroup> dateGroups = parser.parse(endDate);
+                Date parsedDate = dateGroups.get(0).getDates().get(0);
+                timeInferred = dateGroups.get(0).isTimeInferred();
+                if (timeInferred) {
+                    DateTime dt = new DateTime(parsedDate);
+                    dt = dt.withTime(WORKING_HOUR_END);
+                    return dt.getMillis();
+                }
                 return dateGroups.get(0).getDates().get(0).getTime();
             } catch (IndexOutOfBoundsException f) {
                 throw new IllegalValueException(MESSAGE_ENDDATE_CONSTRAINTS);
@@ -67,6 +80,10 @@ public class EndDate extends Date {
     public String toFullDateString() {
         return super.toString();
     }
+
+    public String toDateString() {
+        return sdfOutputForDateString.format(this);
+    }
     // @@author
 
     @Override
@@ -82,4 +99,9 @@ public class EndDate extends Date {
         return toString().hashCode();
     }
 
+    // @@author A0140032E
+    public boolean isTimeInferred() {
+        return timeInferred;
+    }
+    // @@author
 }

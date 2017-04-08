@@ -6,7 +6,9 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.Repeat;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Title;
 
 /**
@@ -19,8 +21,13 @@ public class TestTask implements ReadOnlyTask {
     private Optional<Description> description;
     private Optional<EndDate> endDate;
     private Optional<StartDate> startDate;
+    private Optional<Repeat> repeat;
     // @@author
     private UniqueTagList tags;
+
+    // @@author A0114269E
+    private Status status;
+    // @@author
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -34,6 +41,8 @@ public class TestTask implements ReadOnlyTask {
         this.startDate = taskToCopy.getStartDate();
         this.endDate = taskToCopy.getEndDate();
         this.description = taskToCopy.getDescription();
+        this.repeat = taskToCopy.getRepeat();
+        this.status = taskToCopy.getStatus();
         this.tags = taskToCopy.getTags();
     }
 
@@ -52,6 +61,12 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(Optional<StartDate> startDate) {
         this.startDate = startDate;
     }
+
+    // @@ author A0114269E
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    // @@ author
 
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
@@ -77,6 +92,23 @@ public class TestTask implements ReadOnlyTask {
         return description;
     }
 
+    // @@author A0140032E
+    @Override
+    public Optional<Repeat> getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Optional<Repeat> repeat) {
+        this.repeat = repeat;
+    }
+    // @@author
+
+    // @@ author A0114269E
+    public Status getStatus() {
+        return status;
+    }
+    // @@ author
+
     @Override
     public UniqueTagList getTags() {
         return tags;
@@ -98,4 +130,5 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
         return sb.toString();
     }
+
 }

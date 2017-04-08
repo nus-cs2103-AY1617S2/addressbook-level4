@@ -3,6 +3,7 @@ package seedu.taskmanager.logic.parser;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_REPEAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -24,11 +25,12 @@ public class AddCommandParser {
      */
     public Command parse(String args) {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_DESCRIPTION,
-                PREFIX_TAG);
+                PREFIX_REPEAT, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         try {
             return new AddCommand(argsTokenizer.getPreamble().get(), argsTokenizer.getValue(PREFIX_STARTDATE),
                     argsTokenizer.getValue(PREFIX_ENDDATE), argsTokenizer.getValue(PREFIX_DESCRIPTION),
+                    argsTokenizer.getValue(PREFIX_REPEAT),
                     ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

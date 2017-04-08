@@ -30,7 +30,9 @@
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
                                 <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label" />
+                                	<!-- @@author A0131278H-->
+                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="30.0"/>
+                                    <!-- @@author-->
                                     <Label fx:id="title" styleClass="cell_big_label" text="\$first" underline="true" wrapText="true" />
                                 </HBox>
                             </children>
@@ -39,6 +41,7 @@
                         <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
                         <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" wrapText="true" />
                         <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
+                        <Label fx:id="repeat" styleClass="cell_small_label" text="\$repeat" wrapText="true" />
                     </children>
                 </VBox>
             </children>
