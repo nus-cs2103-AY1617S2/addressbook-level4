@@ -12,6 +12,7 @@ import onlythree.imanager.commons.core.LogsCenter;
 import onlythree.imanager.commons.core.UnmodifiableObservableList;
 import onlythree.imanager.commons.events.model.TaskListChangedEvent;
 import onlythree.imanager.commons.events.model.ViewListChangedEvent;
+import onlythree.imanager.commons.events.ui.JumpToListRequestEvent;
 import onlythree.imanager.commons.util.CollectionUtil;
 import onlythree.imanager.commons.util.StringUtil;
 import onlythree.imanager.logic.commands.ViewCommand;
@@ -90,20 +91,31 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskListChanged();
     }
 
+    //@@author A0140023E
+    /**
+     * Adds a task to the task list and select the added task.
+     */
     @Override
     public synchronized void addTask(Task task) {
-        taskList.addTask(task);
+        int taskIndex = taskList.addTask(task);
+
         updateFilteredListToShowAll();
+
         indicateTaskListChanged();
+
+        raise(new JumpToListRequestEvent(taskIndex));
     }
 
+    //@@author
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
         // TODO originally addressBookIndex, probably should have been personIndex
         int taskIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+
         taskList.updateTask(taskIndex, editedTask);
+
         indicateTaskListChanged();
     }
 
@@ -174,6 +186,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Task List Accessors =============================================================
 
+    //@@author A0140023E
+    @Override
+    public int getSourceIndexFromFilteredTasks(int filteredTaskListIndex) {
+        return filteredTasks.getSourceIndex(filteredTaskListIndex);
+    }
+
+    //@@author
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);

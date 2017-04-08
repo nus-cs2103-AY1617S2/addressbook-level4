@@ -59,8 +59,12 @@ public interface Model {
 
     /** Returns the latest status*/
     TaskList getPrevStatus();
-    //@@author
 
+    //@@author A0140023E
+    /** Returns the index of the direct source list given the index from the filtered task list */
+    int getSourceIndexFromFilteredTasks(int filteredTaskListIndex);
+
+    //@@author
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -84,5 +88,4 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
-
 }

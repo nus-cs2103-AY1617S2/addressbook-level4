@@ -71,16 +71,18 @@ public class TaskList implements ReadOnlyTaskList {
 
 //// task-level operations
 
+    //@@author A0140023E
     /**
-     * Adds a task to the task list.
+     * Adds a task to the task list and returns the index where the task is added.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      */
-    public void addTask(Task p) {
+    public int addTask(Task p) {
         syncMasterTagListWith(p);
-        tasks.add(p);
+        return tasks.add(p);
     }
 
+    //@@author
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
      * {@code TaskList}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.

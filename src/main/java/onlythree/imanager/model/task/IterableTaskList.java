@@ -18,14 +18,18 @@ public class IterableTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
+    //@@author A0140023E
     /**
-     * Adds a task to the list.
+     * Adds a task to the end of the list and returns the index where the task is added.
      */
-    public void add(Task toAdd) {
+    public int add(Task toAdd) {
         assert toAdd != null;
         internalList.add(toAdd);
+
+        return internalList.size() - 1;
     }
 
+    //@@author
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
