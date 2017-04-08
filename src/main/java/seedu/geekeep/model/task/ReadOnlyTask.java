@@ -89,7 +89,7 @@ public interface ReadOnlyTask {
     public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask);
 
     public int compareTitle(ReadOnlyTask otherTask);
-    
+
     //@@author A0121658E
     /**
      * Returns true if the task does not have a start datetime or end datetime
