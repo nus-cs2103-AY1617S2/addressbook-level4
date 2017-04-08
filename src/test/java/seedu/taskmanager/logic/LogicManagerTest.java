@@ -545,6 +545,28 @@ public class LogicManagerTest {
 
         assertCommandSuccess("edit 1 Task B s/03/01/2017 e/04/01/2017 d/More text r/day",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget2), expectedTM, expectedList);
+
+        Task tTarget3 = new Task(new Title("Task B"), Optional.of(new StartDate("yesterday")),
+                Optional.of(new EndDate("next year")), Optional.of(new Description("More text")),
+                Optional.of(new Repeat("WEEK")), new UniqueTagList(new Tag("tag1")));
+
+        editedTasks = helper.generateTaskList(tTarget3);
+        expectedTM = helper.generateTaskManager(editedTasks);
+        expectedList = helper.generateTaskList(tTarget3);
+
+        assertCommandSuccess("edit 1 s/yesterday e/next year r/week",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget3), expectedTM, expectedList);
+
+        Task tTarget4 = new Task(new Title("Task C"), Optional.of(new StartDate("last year")),
+                Optional.of(new EndDate("next year")), Optional.ofNullable(null),
+                Optional.of(new Repeat("YEAR")), new UniqueTagList(new Tag("tag1")));
+
+        editedTasks = helper.generateTaskList(tTarget4);
+        expectedTM = helper.generateTaskManager(editedTasks);
+        expectedList = helper.generateTaskList(tTarget4);
+
+        assertCommandSuccess("edit 1 Task C s/last year d/ r/year",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget4), expectedTM, expectedList);
     }
 
     @Test
