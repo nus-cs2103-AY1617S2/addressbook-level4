@@ -8,6 +8,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
+import seedu.task.storage.Storage;
 import seedu.task.storage.XmlSerializableTaskList;
 import seedu.task.testutil.TestUtil;
 
@@ -69,5 +70,9 @@ public class TestApp extends MainApp {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 }

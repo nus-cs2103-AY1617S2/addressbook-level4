@@ -26,6 +26,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.TaskList;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.storage.Storage;
 import seedu.task.testutil.TestUtil;
 import seedu.task.testutil.TypicalTestTasks;
 
@@ -56,6 +57,7 @@ public abstract class AddressBookGuiTest {
     protected CommandBoxHandle commandBox;
     protected CalenderPanelHandle calenderPanel;
     private Stage stage;
+    protected Storage storage;
 
     @BeforeClass
     public static void setupSpec() {
@@ -80,6 +82,7 @@ public abstract class AddressBookGuiTest {
         });
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+        this.storage = testApp.getStorage();
         FxToolkit.showStage();
         while (!stage.isShowing())
             ;

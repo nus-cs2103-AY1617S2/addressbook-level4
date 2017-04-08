@@ -93,6 +93,11 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to load task manager data from file: " + loadFile.toString());
         return taskListStorage.loadTaskListFromNewLocation(taskList, loadFile);
     }
+
+    public void updateXmlTaskListStorage(File file) {
+        XmlTaskListStorage xmlTaskListStorage = (XmlTaskListStorage) taskListStorage;
+        xmlTaskListStorage.updateState(file);;
+    }
     //@@author
 
 
