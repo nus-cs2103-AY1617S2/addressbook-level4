@@ -32,9 +32,9 @@ public class SaveCommandTest extends AddressBookGuiTest {
 
     private static final String SAVE_COMMAND = "save ";
     private String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
-            "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
+        "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
     private String[] saveFiles_Windows = { "blooper", "taskmanager.xml", "data\\taskmanager.xml", "data\\taskmanager",
-            "taskmanager", "secret_folder\\secret_tasks.xml", "secret_folder\\secret_tasks" };
+        "taskmanager", "secret_folder\\secret_tasks.xml", "secret_folder\\secret_tasks" };
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
