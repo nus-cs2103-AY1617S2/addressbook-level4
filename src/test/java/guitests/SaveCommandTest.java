@@ -2,7 +2,9 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ public class SaveCommandTest extends AddressBookGuiTest {
     private static final String TEST_CONFIG_PATH = FileUtil.getPath("./");
     private static final String TEST_CONFIG = "config.json";
     private static final String TEST_XML = "changeme.xml";
+    private static final String TEST_SAMPLE_DATA_PATH = TestUtil.getFilePathInSandboxFolder(TEST_XML);
 
     private static final String SAVE_COMMAND = "save ";
 
@@ -33,8 +36,7 @@ public class SaveCommandTest extends AddressBookGuiTest {
     @Before
     public void reset_config() throws DataConversionException, IOException {
         // System.out.println("Executing JUnit before!");
-        String sampleDataFilePath = TestUtil.getFilePathInSandboxFolder(TEST_XML);
-        TestUtil.createDataFileWithSampleData(sampleDataFilePath);
+        TestUtil.createDataFileWithSampleData(TEST_SAMPLE_DATA_PATH);
         Optional<Config> opConfig = readConfig(TEST_CONFIG);
         if (opConfig.isPresent()) {
             Config config = opConfig.get();
@@ -45,7 +47,19 @@ public class SaveCommandTest extends AddressBookGuiTest {
     }
 
     @Test
-    public void save_success() throws IllegalValueException, DataConversionException {
+    public void save_absolute_success() throws IllegalValueException, DataConversionException, IOException {
+        //This test involves saving files with and without extensions, with and without creating new folders
+        //However, all files are prefixed with a specified test folder
+        String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
+                "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
+        for (String saveFile : saveFiles) {
+            System.out.println("Testing " + saveFile + "...");
+            assertSaveSuccess(TEST_FOLDER + saveFile);
+        }
+    }
+
+    @Test
+    public void save_relative_success() throws IllegalValueException, DataConversionException, IOException {
         //This test involves saving files with and without extensions, with and without creating new folders
         //However, all files are prefixed with a specified test folder
         String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
@@ -59,29 +73,41 @@ public class SaveCommandTest extends AddressBookGuiTest {
     @Test
     public void save_nullFile_illegalValueException() throws IllegalValueException {
         thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(SaveCommand.MESSAGE_NULL_SAVE_LOCATION);
         SaveCommand sc = new SaveCommand(null);
     }
 
     @Test
     public void save_emptyString_illegalValueException() throws IllegalValueException {
         thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(SaveCommand.MESSAGE_NULL_SAVE_LOCATION);
         SaveCommand sc = new SaveCommand("");
     }
 
-    private void assertSaveSuccess(String saveFile) throws DataConversionException {
+    @Test
+    public void save_isDirectory_illegalValueException() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(SaveCommand.MESSAGE_DIRECTORY_SAVE_LOCATION);
+        SaveCommand sc = new SaveCommand(TEST_FOLDER);
+    }
+
+    private void assertSaveSuccess(String expectedFilePath) throws DataConversionException, IOException {
         System.out.println("before save: " + getFilePathFromConfig());
-        saveFile = TEST_FOLDER + saveFile;
-        commandBox.runCommand(SAVE_COMMAND + saveFile);
+
+        commandBox.runCommand(SAVE_COMMAND + expectedFilePath);
 
         // confirm config file is updated properly
 
-        String actual = getFilePathFromConfig();
-        System.out.println("after save: " + actual);
-        System.out.println("expected: " + saveFile);
-        assertEquals(actual, saveFile);
+        String actualFilePath = getFilePathFromConfig();
+        System.out.println("after save: " + actualFilePath);
+        System.out.println("expected: " + expectedFilePath);
+        assertEquals(actualFilePath, expectedFilePath);
 
         // compare old and new task lists
-
+        File expectedFile = new File(TEST_SAMPLE_DATA_PATH);
+        File actualFile = new File(expectedFilePath);
+        boolean filesMatch = FileUtil.isFileContentSame(expectedFile, actualFile);
+        assertTrue(filesMatch);
     }
 
     private String getFilePathFromConfig() throws DataConversionException {

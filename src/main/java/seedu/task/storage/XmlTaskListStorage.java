@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -44,7 +43,7 @@ public class XmlTaskListStorage implements TaskListStorage {
      */
     @Override
     public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
-        FileNotFoundException {
+    FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
@@ -87,12 +86,18 @@ public class XmlTaskListStorage implements TaskListStorage {
         //System.out.println("file path is " + newFile.toPath().toString());
         //System.out.println("saved file is " + savedFile.toString());
         //System.out.println("saved file path is " + savedFile.toPath().toString());
+        System.out.println("FILEPATH:::" + filePath);
         saveTaskList(taskList, filePath);
         try {
 
-            newFile.delete(); //we are about to overwrite it
-            Files.copy(savedFile.toPath(), newFile.toPath());
+            //newFile.delete(); //we are about to overwrite it
+            //Files.copy(savedFile.toPath(), newFile.toPath());
+            String taskData = FileUtil.readFromFile(savedFile);
+            System.out.println(taskData);
+            FileUtil.writeToFile(newFile, taskData);
+
         } catch (FileAlreadyExistsException faee) {
+            System.out.println("FileAlreadyExistsException in saveTaskListInNewLocation");
 
         } catch (IOException ioe) {
             System.out.println("IO Exception in saveTaskListInNewLocation");

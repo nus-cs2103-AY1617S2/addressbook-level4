@@ -48,7 +48,6 @@ public class SaveCommand extends Command {
         try {
             createSaveFile();
         } catch (IOException ioe) {
-            ioe.printStackTrace();
             throw new IllegalValueException(String.format(MESSAGE_INVALID_SAVE_LOCATION, fileAsString));
         }
 
@@ -56,7 +55,9 @@ public class SaveCommand extends Command {
 
     private boolean createSaveFile() throws IOException {
         boolean created = FileUtil.createFile(toSave);
-
+        if (!FileUtil.isFileExists(toSave) && !created) {
+            throw new IOException();
+        }
         return created;
     }
 
@@ -72,13 +73,16 @@ public class SaveCommand extends Command {
 
         System.out.println("Executing save command...");
         try {
+            //make sure the current save file is up to date.
+            //            storage.saveTaskList(model.getTaskList());
+
+            //write the data into new location
             storage.saveTaskListInNewLocation(model.getTaskList(), toSave);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_SAVE_IO_EXCEPTION, toSave.toString()));
-        }
-        config.setTaskManagerFilePath(toSave.toString());
-        try {
+
+            //update configuration to reflect new save location
+            config.setTaskManagerFilePath(toSave.toString());
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_SAVE_IO_EXCEPTION, toSave.toString()));
         }

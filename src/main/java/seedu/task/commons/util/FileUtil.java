@@ -96,6 +96,8 @@ public class FileUtil {
     public static boolean isFileContentSame(File f1, File f2) throws IOException {
         String fileAsString1 = readFromFile(f1);
         String fileAsString2 = readFromFile(f2);
+        System.out.println(fileAsString1);
+        System.out.println(fileAsString2);
         return fileAsString1.equals(fileAsString2);
     }
     //@@author
