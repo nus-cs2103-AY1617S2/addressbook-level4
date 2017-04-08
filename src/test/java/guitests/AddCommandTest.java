@@ -40,11 +40,22 @@ public class AddCommandTest extends AddressBookGuiTest {
         //invalid command
         commandBox.runCommand("adds meeting");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        //@@author A0141872E
+        //add title containing keywords
+        commandBox.runCommand("clear");
+        commandBox.runCommand("add priority low tag leisure \"today movie night\"");
+        assertTaskExistedSuccess(td.today);
+
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
+        assertTaskExistedSuccess(taskToAdd, currentList);
+    }
+
+    private void assertTaskExistedSuccess(TestTask taskToAdd, TestTask... currentList) {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTitle().title);
         assertMatching(taskToAdd, addedCard);

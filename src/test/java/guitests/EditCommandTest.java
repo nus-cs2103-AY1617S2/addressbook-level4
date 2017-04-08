@@ -28,7 +28,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     public void sortTasksList() {
         Arrays.sort(expectedTasksList);
-    }
+    }//@@author
 
     //@@author A0141872E
 
