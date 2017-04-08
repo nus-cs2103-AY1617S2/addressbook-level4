@@ -25,6 +25,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     /**
      * Similar to {@link #readUserPrefs()}
+     * 
      * @param prefsFilePath
      *            location of the data. Cannot be null.
      * @throws DataConversionException
