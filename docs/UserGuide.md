@@ -105,7 +105,11 @@ Take note of some general information for our commands : <br>
 ### 3.1 Viewing help : `help`
 
 Feeling a little lost? Simply type `help` to view the handy help page! <br>
-`help`
+<br>
+Format: `help`
+<br> <br>
+<img src="images/help.png" width="700"> <br>
+*Figure 3.1.1: The help window pops up when you use the help command* <br>
 
 ### 3.2 Adding a new task : `add`
 
@@ -181,7 +185,7 @@ Format: `[\as PRIORITY]`
 
 <br>
 <img src="images/priority.png" width="230"> <br>
-*Figure 3.2.1: Important and very important tasks* <br>
+*Figure 3.2.1: Important and very important tasks have stars next to them* <br>
 
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
@@ -347,7 +351,10 @@ Use the `unfinish` command to change the status of an already finished task to n
 
 > **Remarks:** <br>
 > - The index refers to the index number of the task shown in the most recent listing.<br>
-> - If the task(s) at the specified `INDEX` is/are already finished, there will be no changes made.
+> - If the task(s) at the specified `INDEX` is/are already finished, there will be no changes made. <br>
+
+<img src="images/finished.png" width="230"> <br>
+*Figure 3.8.1: Finished tasks have their checkboxes marked and have a green sidebar* <br>
 
 **Sample Commands**
 * `list pending \in this week`<br>
@@ -462,5 +469,5 @@ Format: `exit`
 
 ## 5. Command Summary
 
-<img src="images/cheatsheet.png" width="600"> <br>
+<img src="images/cheatsheet.png" width="900"> <br>
 *Figure 5.1: Doist Command Summary* <br>
