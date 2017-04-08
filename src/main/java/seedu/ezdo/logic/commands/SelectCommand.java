@@ -50,7 +50,7 @@ public class SelectCommand extends Command {
 
         int offset = 1;
         int lastIndex = targetIndexes.size() - offset;
-        int lastElementInTargetIndexes = targetIndexes.get(lastIndex - offset);
+        int lastElementInTargetIndexes = targetIndexes.get(lastIndex);
 
         JumpToListRequestEvent scrollToTask = new JumpToListRequestEvent(lastElementInTargetIndexes - offset);
         EventsCenter.getInstance().post(scrollToTask);
