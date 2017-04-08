@@ -4,7 +4,9 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import onlythree.imanager.commons.core.EventsCenter;
 import onlythree.imanager.commons.core.Messages;
+import onlythree.imanager.commons.events.ui.JumpToListRequestEvent;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
 import onlythree.imanager.logic.parser.DateTimeUtil;
@@ -72,18 +74,20 @@ public class EditCommand extends Command {
             throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        Task editedTask;
         try {
-            editedTask = new Task(editTaskDescriptor.getUpdatedName(),
+            Task editedTask = new Task(editTaskDescriptor.getUpdatedName(),
                     editTaskDescriptor.getUpdatedDeadline(),
                     editTaskDescriptor.getUpdatedStartEndDateTime(),
                     editTaskDescriptor.getUpdatedTagList());
+            model.updateTask(filteredTaskListIndex, editedTask);
+            model.updateFilteredListToShowAll();
         } catch (IllegalValueException e) {
             throw new CommandException(e.getMessage());
         }
 
-        model.updateTask(filteredTaskListIndex, editedTask);
-        model.updateFilteredListToShowAll();
+        int taskIndex = model.getSourceIndexFromFilteredTasks(filteredTaskListIndex);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(taskIndex));
+
         //@@author A0148052L-reused
         model.pushCommand(COMMAND_WORD);
         model.pushStatus(model.getTaskList());
