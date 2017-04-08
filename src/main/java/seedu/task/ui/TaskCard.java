@@ -55,9 +55,9 @@ public class TaskCard extends UiPart<Region> {
         name.setWrapText(true);
         name.setText(displayedIndex + ". " + task.getName().fullName);
         name.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        String start = (!task.getStartDate().isNull()) ?"Start: ":"";
+        String start = (!task.getStartDate().isNull()) ? "Start: " : "";
         startDate.setText(start + task.getStartDate().toString());
-        String end = (!task.getEndDate().isNull()) ?"End: ":"";
+        String end = (!task.getEndDate().isNull()) ? "End: " : "";
         endDate.setText(end + task.getEndDate().toString());
         loc.setText(task.getLocation().value);
         if (task.isDone()) {
