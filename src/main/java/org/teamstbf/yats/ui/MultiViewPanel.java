@@ -44,6 +44,8 @@ public class MultiViewPanel extends UiPart<Region> {
     @FXML
     private BorderPane calendarRoot;
     @FXML
+    private DatePicker datepicker;
+    @FXML
     private ListView<ReadOnlyEvent> taskListView;
     @FXML
     private ListView<String[]> timeTasks;
@@ -64,7 +66,8 @@ public class MultiViewPanel extends UiPart<Region> {
     public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableList, Model model) {
 	super(FXML);
 	this.model = model;
-	calendar = new DatePickerSkin(new DatePicker(today));
+	datepicker = new DatePicker(today);
+	calendar = new DatePickerSkin(datepicker);
 	setConnectionsCalendarView();
 	setConnectionsDoneView(observableList);
 	addToPlaceholder(placeholder);
@@ -143,6 +146,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	updateCalendarList();
 	timeTasks.setItems(timeData);
 	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+	getSelectedDate();
     }
 
     private void updateCalendarList() {
@@ -157,6 +161,14 @@ public class MultiViewPanel extends UiPart<Region> {
 	    data[TASK_LOCATION] = event.getLocation().toString();
 	    timeData.add(data);
 	}
+    }
+
+    public LocalDate getSelectedDate() {
+	datepicker.setOnAction(event -> {
+	    LocalDate date = datepicker.getValue();
+	    System.out.println(date);
+	});
+	return datepicker.getValue();
     }
 
 }

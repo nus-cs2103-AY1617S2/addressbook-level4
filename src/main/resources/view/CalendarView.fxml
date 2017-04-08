@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
@@ -37,7 +38,14 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <BorderPane fx:id="calendarRoot" />
+                              <BorderPane fx:id="calendarRoot">
+                                 <bottom>
+                                    <AnchorPane BorderPane.alignment="CENTER">
+                                       <children>
+                                          <DatePicker fx:id="datepicker" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </bottom></BorderPane>
                               <GridPane GridPane.rowIndex="1">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
