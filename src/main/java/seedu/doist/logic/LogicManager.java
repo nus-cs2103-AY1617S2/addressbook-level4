@@ -16,7 +16,6 @@ import seedu.doist.model.AliasListMapModel;
 import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
 import seedu.doist.model.task.ReadOnlyTask;
-import seedu.doist.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -29,13 +28,15 @@ public class LogicManager extends ComponentManager implements Logic {
     private final ConfigModel configModel;
     private final Parser parser;
 
-    public LogicManager(Model model, AliasListMapModel aliasModel, ConfigModel configModel, Storage storage) {
+    //@@author A0140887W
+    public LogicManager(Model model, AliasListMapModel aliasModel, ConfigModel configModel) {
         this.model = model;
         this.aliasModel = aliasModel;
         this.configModel = configModel;
         this.parser = new Parser(aliasModel);
     }
 
+    //@@author A0147980U
     @Override
     public CommandResult execute(String commandText) throws CommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -49,6 +50,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return result;
     }
 
+    //@@author
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredTaskList();

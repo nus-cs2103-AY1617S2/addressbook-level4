@@ -26,8 +26,6 @@ public class SaveAtCommand extends Command {
             + " Do give a path to a folder!";
     public static final String MESSAGE_INVALID_PATH = "Invalid folder path entered! \n%1$s";
 
-
-    // TODO: can we undo save as config change too?
     public SaveAtCommand(File file) {
         this.file = file;
     }

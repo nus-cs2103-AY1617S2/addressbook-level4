@@ -70,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTodoList newData) {
         todoList.resetData(newData);
+        sortTasksByDefault();
         indicateTodoListChanged();
     }
 
@@ -143,6 +144,9 @@ public class ModelManager extends ComponentManager implements Model {
         sortTasks(getDefaultSorting());
     }
 
+    /** Returns the list of SortTypes that is the default sorting.
+     * Tasks are sorted by time, then priority then by alphabetical order
+     */
     @Override
     public List<SortType> getDefaultSorting() {
         List<SortType> sortTypes = new ArrayList<SortType>();
@@ -157,6 +161,13 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.sortTasks(parseSortTypesToComparator(sortTypes));
     }
 
+    /**
+     * Parses a list of sort types into a combined comparator that can be used by ReadOnlyTask
+     * to sort tasks
+     *
+     * @param sortTypes a list of SortTypes
+     * @return the combined comparator
+     */
     @Override
     public void sortTasks(Comparator<ReadOnlyTask> comparator) {
         todoList.sortTasks(comparator);
