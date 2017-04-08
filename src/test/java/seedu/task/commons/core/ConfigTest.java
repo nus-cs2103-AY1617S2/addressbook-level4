@@ -11,23 +11,23 @@ import org.junit.rules.ExpectedException;
 import seedu.task.commons.core.Config;
 
 public class ConfigTest {
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-	@Test
-	public void toString_defaultObject_stringReturned() {
-		String defaultConfigAsString = "App title : Address App\n" + "Current log level : INFO\n"
-				+ "Preference file Location : preferences.json\n" + "Local data file location : data/addressbook.xml\n"
-				+ "AddressBook name : MyAddressBook";
+    @Test
+    public void toString_defaultObject_stringReturned() {
+        String defaultConfigAsString = "App title : Address App\n" + "Current log level : INFO\n"
+                + "Preference file Location : preferences.json\n" + "Local data file location : data/addressbook.xml\n"
+                + "AddressBook name : MyAddressBook";
 
-		assertEquals(defaultConfigAsString, new Config().toString());
-	}
+        assertEquals(defaultConfigAsString, new Config().toString());
+    }
 
-	@Test
-	public void equalsMethod() {
-		Config defaultConfig = new Config();
-		assertNotNull(defaultConfig);
-		assertTrue(defaultConfig.equals(defaultConfig));
-	}
+    @Test
+    public void equalsMethod() {
+        Config defaultConfig = new Config();
+        assertNotNull(defaultConfig);
+        assertTrue(defaultConfig.equals(defaultConfig));
+    }
 
 }
