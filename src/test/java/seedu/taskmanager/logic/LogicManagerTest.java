@@ -41,6 +41,7 @@ import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
+import seedu.taskmanager.logic.commands.UndoneCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
@@ -505,17 +506,21 @@ public class LogicManagerTest {
     @Test
     public void execute_done_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task t1 = helper.generateTask(1);
-        Task t2 = helper.generateTask(2);
-        Task t3 = helper.generateTask(3);
 
-        List<Task> threeTasks = helper.generateTaskList(t1, t2, t3);
-        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+        Task tTarget4 = helper.generateTaskWithStatus(3, true);
+
+        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        helper.addToModel(model, uneditedTasks);
         
         // execute command and verify result
-        assertCommandSuccess("done 1", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, t1),
-                expectedTM, expectedTM.getTaskList());
+        assertCommandSuccess("done 3", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tTarget4),
+                expectedTM, expectedList);
     }
     // @@author
 
