@@ -10,7 +10,7 @@ import seedu.whatsleft.testutil.TestEvent;
 import seedu.whatsleft.testutil.TestUtil;
 
 public class RecurCommandTest extends WhatsLeftGuiTest {
-
+    //@@author A0110491U
     @Test
     public void recurEvent() {
         TestEvent[] currentEventList = te.getTypicalEvents();
