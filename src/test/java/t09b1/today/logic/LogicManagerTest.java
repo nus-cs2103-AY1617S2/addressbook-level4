@@ -148,7 +148,7 @@ public class LogicManagerTest {
     /**
      * Populates the model with tasks from TypicalTask class in the testutil
      * package
-     * 
+     *
      * @throws DuplicateTaskException
      */
     private void populateModelWithTypicalTasks() throws DuplicateTaskException {

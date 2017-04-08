@@ -15,8 +15,6 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import t09b1.today.commons.exceptions.IllegalValueException;
-import t09b1.today.model.ReadOnlyTaskManager;
-import t09b1.today.model.TaskManager;
 import t09b1.today.model.tag.Tag;
 import t09b1.today.model.task.ReadOnlyTask;
 import t09b1.today.model.task.Task;

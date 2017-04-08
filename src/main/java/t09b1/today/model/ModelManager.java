@@ -355,13 +355,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0144315N
     /**
-     * Splits the filteredTaskList into three sublists every time before refreshing the UI.
-     * The newly created sublists will be added to corresponding observable lists at the end
-     * so as to force the UI to refresh.
+     * Splits the filteredTaskList into three sublists every time before
+     * refreshing the UI. The newly created sublists will be added to
+     * corresponding observable lists at the end so as to force the UI to
+     * refresh.
      *
-     * @param taskListToday backing list for TodayTaskListView in UI
-     * @param taskListFuture backing list for FutureTaskListView in UI
-     * @param taskListCompeleted backing list for CompletedTaskListView in UI
+     * @param taskListToday
+     *            backing list for TodayTaskListView in UI
+     * @param taskListFuture
+     *            backing list for FutureTaskListView in UI
+     * @param taskListCompeleted
+     *            backing list for CompletedTaskListView in UI
      */
     @Override
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
@@ -412,8 +416,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Sorts task lists by deadline. Floating tasks will appear before deadline tasks.
-     */    
+     * Sorts task lists by deadline. Floating tasks will appear before deadline
+     * tasks.
+     */
     private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList, ArrayList<ReadOnlyTask> futureTempList,
             ArrayList<ReadOnlyTask> completedTempList) {
         todayTempList.sort(TaskDatetimeComparator);

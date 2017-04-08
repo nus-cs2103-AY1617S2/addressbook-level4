@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import t09b1.today.MainApp;
 import t09b1.today.commons.core.Config;
 import t09b1.today.commons.core.GuiSettings;
 import t09b1.today.model.ReadOnlyTaskManager;

@@ -8,8 +8,6 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import t09b1.today.commons.util.UrlUtil;
-
 /**
  * Tests the UrlUtil methods.
  */

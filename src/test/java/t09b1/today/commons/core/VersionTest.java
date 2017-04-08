@@ -7,8 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import t09b1.today.commons.core.Version;
-
 public class VersionTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

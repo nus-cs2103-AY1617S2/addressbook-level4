@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import t09b1.today.commons.util.FileUtil;
-import t09b1.today.commons.util.JsonUtil;
 import t09b1.today.testutil.SerializableTestClass;
 import t09b1.today.testutil.TestUtil;
 

@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 
 import javafx.fxml.FXML;
 import t09b1.today.MainApp;
-import t09b1.today.ui.UiPart;
 
 public class UiPartTest {
 

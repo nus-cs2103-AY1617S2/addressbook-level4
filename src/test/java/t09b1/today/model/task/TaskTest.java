@@ -14,11 +14,6 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
 import t09b1.today.commons.exceptions.IllegalValueException;
 import t09b1.today.model.tag.UniqueTagList;
-import t09b1.today.model.task.DeadlineTask;
-import t09b1.today.model.task.EventTask;
-import t09b1.today.model.task.FloatingTask;
-import t09b1.today.model.task.Name;
-import t09b1.today.model.task.Task;
 
 public class TaskTest {
     @Test

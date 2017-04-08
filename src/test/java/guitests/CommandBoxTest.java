@@ -1,7 +1,7 @@
 package guitests;
 
-import static t09b1.today.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static org.junit.Assert.assertEquals;
+import static t09b1.today.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 

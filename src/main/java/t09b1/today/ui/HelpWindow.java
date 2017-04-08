@@ -1,6 +1,5 @@
 package t09b1.today.ui;
 
-import java.io.File;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;

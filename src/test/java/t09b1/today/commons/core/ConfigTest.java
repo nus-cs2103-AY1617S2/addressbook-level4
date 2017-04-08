@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import t09b1.today.commons.core.Config;
-
 public class ConfigTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

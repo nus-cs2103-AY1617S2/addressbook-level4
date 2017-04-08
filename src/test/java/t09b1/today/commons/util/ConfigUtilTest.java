@@ -15,8 +15,6 @@ import org.junit.rules.TemporaryFolder;
 
 import t09b1.today.commons.core.Config;
 import t09b1.today.commons.exceptions.DataConversionException;
-import t09b1.today.commons.util.ConfigUtil;
-import t09b1.today.commons.util.FileUtil;
 
 public class ConfigUtilTest {
 

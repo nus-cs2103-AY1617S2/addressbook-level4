@@ -15,7 +15,6 @@ import org.junit.rules.TemporaryFolder;
 import t09b1.today.commons.exceptions.DataConversionException;
 import t09b1.today.commons.util.FileUtil;
 import t09b1.today.model.UserPrefs;
-import t09b1.today.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

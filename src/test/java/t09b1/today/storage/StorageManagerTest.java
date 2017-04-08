@@ -17,10 +17,6 @@ import t09b1.today.commons.events.storage.DataSavingExceptionEvent;
 import t09b1.today.model.ReadOnlyTaskManager;
 import t09b1.today.model.TaskManager;
 import t09b1.today.model.UserPrefs;
-import t09b1.today.storage.JsonUserPrefsStorage;
-import t09b1.today.storage.Storage;
-import t09b1.today.storage.StorageManager;
-import t09b1.today.storage.XmlTaskManagerStorage;
 import t09b1.today.testutil.EventsCollector;
 import t09b1.today.testutil.TypicalTasks;
 
