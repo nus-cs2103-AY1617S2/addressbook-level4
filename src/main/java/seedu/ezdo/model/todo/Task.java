@@ -53,7 +53,7 @@ public class Task implements ReadOnlyTask {
     public void setDone(boolean doneStatus) {
         this.done = doneStatus;
     }
-    
+
     public void setStarted(boolean status) {
         this.hasStarted = status;
     }

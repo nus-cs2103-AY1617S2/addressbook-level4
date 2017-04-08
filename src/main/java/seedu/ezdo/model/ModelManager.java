@@ -437,7 +437,7 @@ public class ModelManager extends ComponentManager implements Model {
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
             int dateLength = 10;
-          
+
             boolean isStartEqual = (!startDate.isPresent()
                     || (startDate.get().toString().equals("") && taskStartDateExist)
                     || (taskStartDateExist && taskStartDateString.substring(0, dateLength)

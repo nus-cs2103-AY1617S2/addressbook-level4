@@ -17,7 +17,7 @@ public class MultipleIndexCommandUtil {
             ArrayList<Integer> targetIndexes) {
         return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
     }
-    
+
     //@@author A0139177W
     /** checks if the tasks with the indexes specified are marked as done */
     public static boolean isDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList,

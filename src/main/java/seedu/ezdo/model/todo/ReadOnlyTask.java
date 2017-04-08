@@ -19,7 +19,7 @@ public interface ReadOnlyTask {
     Recur getRecur();
 
     boolean getDone();
-    
+
     boolean getStarted();
 
     /**

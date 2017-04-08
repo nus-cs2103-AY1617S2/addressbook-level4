@@ -20,7 +20,7 @@ public class SelectCommandParser implements CommandParser {
     @Override
     public Command parse(String args) {
         assert args != null;
-        
+
         if (args.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
