@@ -5,7 +5,6 @@ import static seedu.todolist.commons.core.GlobalConstants.DATE_FORMAT;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Logger;
