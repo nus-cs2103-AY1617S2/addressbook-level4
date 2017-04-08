@@ -97,14 +97,23 @@ public interface Model {
     //@@author A0144904H
     /**
      * marks tasks done if they are non recurring or updates date if it's recurring
+     * @throws IllegalValueException
      */
     void markDone(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 
     /**
      * marks recurring tasks done
      * @throws CommandException
+     * @throws IllegalValueException
      */
     void end(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException,
                                                                                         CommandException;
+
+    /**
+     * unmarks a task
+     * @throws CommandException
+     * @throws IllegalValueException
+     */
+    void unmarkTask(ArrayList<Integer> indices, ArrayList<ReadOnlyTask> tasksToMarkDone) throws IllegalValueException;
 
 }

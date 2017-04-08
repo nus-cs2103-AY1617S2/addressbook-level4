@@ -14,34 +14,36 @@ import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0144904H
-public class MarkDoneCommand extends Command {
+public class UnmarkCommand extends Command {
 
     private static final String NUMBERING_DOT = ". ";
     private static final int INDEX_ONE = 1;
 
     private static final int INDEX_ZERO = 0;
-    public static final String COMMAND_WORD = "mark";
-    public static final String COMMAND_WORD_SHORT = "m";
+    public static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_WORD_SHORT = "um";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
-            + ": Marks the tasks identified by the indexes"
-            + " numbers provided that are used in the last listing as done. "
+            + ": Unmarks the tasks identified by the index"
+            + " numbers provided that were used in the last listing. Reccuring task dates"
+            + "will be updated aswell. "
             + "Parameters: LIST OF INDEXES (must be a positive integers)\n"
             + "Example: " + COMMAND_WORD
             + " 1 2 3" +  " || " + COMMAND_WORD_SHORT + " 1";
 
-    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task(s) marked done:\n%1$s";
+    public static final String MESSAGE_UNMARK_TASK_DONE_SUCCESS = "Task(s) unmarked:\n%1$s";
     public static final String DONE = "Done";
-    public static final String ERROR_MARKED_TASK = "The task was marked done previously";
+    public static final String ERROR_NOT_MARKED = "Unable to unmark as the task is not"
+            + " in the Done category.";
 
     public final ArrayList<Integer> filteredTaskListIndices;
-    public final ArrayList<ReadOnlyTask> tasksToMarkDone;
+    public final ArrayList<ReadOnlyTask> tasksToUnmark;
 
-    public MarkDoneCommand(Set<Integer> targetIndex) {
+    public UnmarkCommand(Set<Integer> targetIndex) {
         filteredTaskListIndices = new ArrayList<Integer>(targetIndex);
         Collections.sort(filteredTaskListIndices);
         Collections.reverse(filteredTaskListIndices);
-        tasksToMarkDone = new ArrayList<ReadOnlyTask>();
+        tasksToUnmark = new ArrayList<ReadOnlyTask>();
     }
 
     @Override
@@ -54,17 +56,17 @@ public class MarkDoneCommand extends Command {
         }
 
         for (int index : filteredTaskListIndices) {
-            ReadOnlyTask taskToMarkDone = lastShownList.get(index - 1);
-            if (taskToMarkDone.getCategories().contains(Category.done)) {
-                throw new CommandException(ERROR_MARKED_TASK);
+            ReadOnlyTask taskToUnmark = lastShownList.get(index - 1);
+            if (!taskToUnmark.getCategories().contains(Category.done)) {
+                throw new CommandException(ERROR_NOT_MARKED);
             }
-            tasksToMarkDone.add(taskToMarkDone);
+            tasksToUnmark.add(taskToUnmark);
         }
 
-        model.markDone(filteredTaskListIndices, tasksToMarkDone);
+        model.unmarkTask(filteredTaskListIndices, tasksToUnmark);
 
-        scrollToTask(tasksToMarkDone);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, getDesiredTasksToMarkDoneFormat()));
+        scrollToTask(tasksToUnmark);
+        return new CommandResult(String.format(MESSAGE_UNMARK_TASK_DONE_SUCCESS, getDesiredTasksToMarkDoneFormat()));
     }
 
     /**
@@ -85,7 +87,7 @@ public class MarkDoneCommand extends Command {
     private String getDesiredTasksToMarkDoneFormat() {
         int i = INDEX_ONE;
         StringBuilder builder = new StringBuilder();
-        for (ReadOnlyTask task : tasksToMarkDone) {
+        for (ReadOnlyTask task : tasksToUnmark) {
             builder.append(i + NUMBERING_DOT).append(task.toString());
             i++;
         }

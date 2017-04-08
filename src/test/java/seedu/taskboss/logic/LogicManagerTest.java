@@ -395,7 +395,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                threeTasks.get(1)),
+                "1. " + threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
 
@@ -410,7 +410,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 2 3", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                threeTasks.get(2), threeTasks.get(1)),
+                "1. " + threeTasks.get(2) + "2. " + threeTasks.get(1)),
                 expectedAB, expectedAB.getTaskList());
     }
 

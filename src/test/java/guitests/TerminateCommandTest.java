@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.TerminateCommand;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -36,7 +37,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
@@ -100,7 +101,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void terminateTask_LongFormat_success() throws Exception {
+    public void terminateTask_Long_success() throws Exception {
         int taskBossIndex = 2;
 
         TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
@@ -108,7 +109,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
@@ -121,7 +122,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void TerminateTask_Short_Command_success() throws Exception {
+    public void terminateTask_Short_Command_success() throws Exception {
         int taskBossIndex = 6;
 
         TestTask terminatedTask = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
@@ -129,7 +130,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Nov 28, 2017 5pm")
                 .withRecurrence(Frequency.DAILY)
                 .withInformation("4th street")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTerminateSuccess(true, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
@@ -154,17 +155,18 @@ public class TerminateCommandTest extends TaskBossGuiTest {
      */
 
     @Test
-    public void terminateTask_findThenMarkDone_success() throws Exception {
+    public void termiateTask_findThenTerminate_success() throws Exception {
         commandBox.runCommand("find ensure");
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
+        TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
+        TestTask terminatedTask = new TaskBuilder(taskToTerminate).withCategories("Done",
+                AddCommand.BUILT_IN_ALL_TASKS).build();
+        TestTask[] resultList = { terminatedTask };
 
-        TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
-        TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
-        TestTask[] resultList = { markedDoneTask };
+        assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, terminatedTask, resultList);
 
-        assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, markedDoneTask, resultList);
     }
 
     //---------------- Tests for successfully ending multiple recurring tasks-----------------------
@@ -178,18 +180,19 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         expectedTasksList[6] = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
                 .withStartDateTime("Feb 21, 2017 1pm")
                 .withEndDateTime("Dec 10, 2017 5pm")
                 .withRecurrence(Frequency.WEEKLY)
                 .withInformation("little tokyo")
-                .withCategories("Done").build();
+                .withCategories("School", "Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        String expectedMessage = "[" + expectedTasksList[6] + ", " + expectedTasksList[1] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+        TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[6], expectedTasksList[1]};
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredFormat(terminatedTasks)));
     }
 
     @Test
@@ -200,17 +203,18 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
         expectedTasksList[5] = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
                 .withStartDateTime("Jan 1, 2017 5pm")
                 .withEndDateTime("Nov 28, 2017 5pm")
                 .withRecurrence(Frequency.DAILY)
                 .withInformation("4th street")
-                .withCategories("Done").build();
+                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        String expectedMessage = "[" + expectedTasksList[5] + ", " + expectedTasksList[1] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+        TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[5], expectedTasksList[1]};
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredFormat(terminatedTasks)));
 
     }
 
@@ -231,8 +235,6 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
     }
 
-
-
     //---------------- End of test cases --------------------------------------
 
     private void assertTerminateSuccess(boolean isShort, int filteredTaskListIndex, int taskBossIndex,
@@ -248,8 +250,25 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         expectedTasksList[taskBossIndex - 1] = terminatedTask;
         assertTrue(taskListPanel.isListMatching(resultList));
         assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS ,
-                            "[" + terminatedTask + "]"));
+                            "1. " + terminatedTask));
 
         assertTrue(taskListPanel.isListMatching(resultList));
+    }
+
+    //@@author
+    /**
+     * Returns a formatted {@code Array} tasksToMarkDone,
+     * so that each TestTask in the Array is numbered
+     */
+    private String getDesiredFormat(TestTask[] terminatedTask) {
+        int indexOne = 1;
+        String numberingDot = ". ";
+        int i = indexOne;
+        StringBuilder builder = new StringBuilder();
+        for (TestTask task : terminatedTask) {
+            builder.append(i + numberingDot).append(task.toString());
+            i++;
+        }
+        return builder.toString();
     }
 }

@@ -9,13 +9,18 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class Category {
 
+
+    private static final String EMPTY_STRING = "";
     private static final int INDEX_SECOND_CHAR = 1;
     private static final int INDEX_FIRST_CHAR = 0;
     private static final int NUM_SINGLE_CHAR = 1;
+
     public static final String MESSAGE_CATEGORY_CONSTRAINTS = "Categories names should be alphanumeric";
     public static final String CATEGORY_VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String categoryName;
+
+    public static Category done = new Category("Done", EMPTY_STRING);
 
     /**
      * Validates given category name.
@@ -29,6 +34,11 @@ public class Category {
             throw new IllegalValueException(MESSAGE_CATEGORY_CONSTRAINTS);
         }
         this.categoryName = formatName(trimmedName);
+    }
+
+    private Category(String name, String toDifferentiaiteBetweenConstructors) {
+        assert toDifferentiaiteBetweenConstructors.equals(EMPTY_STRING);
+        this.categoryName = name;
     }
 
     /**

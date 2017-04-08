@@ -52,7 +52,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     Date startDateTime1 = task1.getStartDateTime().getDate();
                     Date startDateTime2 = task2.getStartDateTime().getDate();
                     if (startDateTime1 == null &&
-                        startDateTime2 == null) {
+                            startDateTime2 == null) {
                         return 0;
                     } else if (startDateTime1 == null) {
                         return 1;
@@ -72,7 +72,7 @@ public class UniqueTaskList implements Iterable<Task> {
                     Date endDateTime1 = task1.getEndDateTime().getDate();
                     Date endDateTime2 = task2.getEndDateTime().getDate();
                     if (endDateTime1 == null &&
-                        endDateTime2 == null) {
+                            endDateTime2 == null) {
                         return 0;
                     } else if (endDateTime1 == null) {
                         return 1;
@@ -127,7 +127,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
-        if (contains(toAdd)) {
+        if (contains(toAdd) && !toAdd.getCategories().contains(Category.done)) {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
@@ -144,7 +144,8 @@ public class UniqueTaskList implements Iterable<Task> {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask) &&
+                !editedTask.getCategories().contains(Category.done)) {
             throw new DuplicateTaskException();
         }
 
@@ -176,7 +177,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws CommandException
      */
     public void renameCategory(Category oldCategory, Category newCategory) throws IllegalValueException,
-        CommandException {
+                                                                                CommandException {
         assert oldCategory != null;
 
         boolean isFound = false;
@@ -241,8 +242,8 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(
+                                ((UniqueTaskList) other).internalList));
     }
 
     @Override
