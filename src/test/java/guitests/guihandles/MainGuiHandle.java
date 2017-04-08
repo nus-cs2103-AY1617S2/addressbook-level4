@@ -21,7 +21,7 @@ public class MainGuiHandle extends GuiHandle {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }
 
-    public CommandBoxHandle getCommandBox() {
+    public CommandBoxHandle getCommandBox() throws InterruptedException {
         return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 

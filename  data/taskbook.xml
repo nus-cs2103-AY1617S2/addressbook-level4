@@ -33,7 +33,7 @@
         <endTime>18/03/2017 17:00</endTime>
         <description>Meet with group members at UTown</description>
         <period>0</period>
-        <isCompleted>false</isCompleted>
+        <isCompleted>true</isCompleted>
         <tagged>meetings</tagged>
     </tasks>
     <tasks>
@@ -43,6 +43,22 @@
         <description></description>
         <period>0</period>
         <isCompleted>true</isCompleted>
+    </tasks>
+    <tasks>
+        <name>babababa</name>
+        <startTime>23/03/2017 12:00</startTime>
+        <endTime>25/03/2017 14:00</endTime>
+        <description></description>
+        <period>7</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
+    <tasks>
+        <name>abcdefg</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
     </tasks>
     <tags>lectures</tags>
     <tags>tutorials</tags>

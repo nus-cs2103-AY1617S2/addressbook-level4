@@ -11,8 +11,9 @@ public class CommandBoxHandle extends GuiHandle {
 
     private static final String COMMAND_INPUT_FIELD_ID = "#commandTextField";
 
-    public CommandBoxHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
+    public CommandBoxHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) throws InterruptedException {
         super(guiRobot, primaryStage, stageTitle);
+        Thread.sleep(2000);
     }
 
     /**

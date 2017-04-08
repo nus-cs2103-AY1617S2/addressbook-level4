@@ -30,7 +30,7 @@ import seedu.jobs.testutil.TestUtil;
 import seedu.jobs.testutil.TypicalTestTasks;
 
 /**
- * A GUI Test class for AddressBook.
+ * A GUI Test class for JOBS.
  */
 public abstract class TaskBookGuiTest {
 
@@ -70,13 +70,22 @@ public abstract class TaskBookGuiTest {
             mainMenu = mainGui.getMainMenu();
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
-            commandBox = mainGui.getCommandBox();
+            try {
+                commandBox = mainGui.getCommandBox();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
 getDataFileLocation()));
         FxToolkit.showStage();
+        try{
+            Thread.sleep(2000); //wait for the browser to finish loading
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
         while (!stage.isShowing());
         mainGui.focusOnMainApp();
     }

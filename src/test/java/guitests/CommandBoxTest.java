@@ -30,7 +30,7 @@ public class CommandBoxTest extends TaskBookGuiTest {
     }
 
     @Test
-    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
+    public void commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() throws InterruptedException {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
         assertEquals("", commandBox.getCommandInput());
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());

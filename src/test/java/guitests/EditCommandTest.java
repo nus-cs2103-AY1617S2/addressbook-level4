@@ -17,7 +17,7 @@ import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 import seedu.jobs.testutil.TaskBuilder;
 import seedu.jobs.testutil.TestTask;
 
-// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
+
 public class EditCommandTest extends TaskBookGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
@@ -79,7 +79,7 @@ public class EditCommandTest extends TaskBookGuiTest {
 
     @Test
     public void edit_invalidPersonIndex_failure() {
-        commandBox.runCommand("edit 8 Bobby");
+        commandBox.runCommand("edit 100 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
