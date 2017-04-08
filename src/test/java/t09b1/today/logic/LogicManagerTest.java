@@ -203,7 +203,7 @@ public class LogicManagerTest {
         try {
             CommandResult result = logic.execute(inputCommand);
             assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
-            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedMessage, result.getFeedbackToUser());
         } catch (CommandException e) {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());

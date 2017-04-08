@@ -21,7 +21,6 @@ public class DeleteTagCommandParser {
      * DeleteTagCommand and returns an DeleteTagCommand object for execution.
      */
     public Command parse(String args) {
-        // TODO: refactor into some kind of tokenizers
         String[] tagNames = args.trim().split(" ");
         try {
             if (tagNames.length != NUM_ARGUMENTS || tagNames[TAG_INDEX].equals("")) {

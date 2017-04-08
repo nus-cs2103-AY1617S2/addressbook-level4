@@ -83,7 +83,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     private void assertTodayEditSuccess(Task taskToEdit, Task[] expectedTodayList, Task[] expectedFutureList,
             Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         // confirm the new card contains the right data
-        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToEdit.getName().fullName);
+        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToEdit.getName().toString());
         assertMatching(taskToEdit, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
@@ -93,7 +93,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     private void assertFutureEditSuccess(Task taskToEdit, Task[] expectedTodayList, Task[] expectedFutureList,
             Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         // confirm the new card contains the right data
-        TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToEdit.getName().fullName);
+        TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToEdit.getName().toString());
         assertMatching(taskToEdit, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
@@ -104,7 +104,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
             Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         // confirm the new card contains the right data
         commandBox.runCommand("listcompleted");
-        TaskCardHandle addedCard = completedTaskListPanel.navigateToTask(taskToEdit.getName().fullName);
+        TaskCardHandle addedCard = completedTaskListPanel.navigateToTask(taskToEdit.getName().toString());
         assertMatching(taskToEdit, addedCard);
         commandBox.runCommand("list");
 

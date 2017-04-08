@@ -6,12 +6,20 @@ package t09b1.today.logic.commands;
 // @@Author A0144315N
 public class CommandResult {
 
-    public final String feedbackToUser;
-    public final String statusBarMessage;
+    private final String feedbackToUser;
+    private final String statusBarMessage;
 
     public CommandResult(String feedbackToUser, String statusBarMessage) {
         assert feedbackToUser != null;
         this.feedbackToUser = feedbackToUser;
         this.statusBarMessage = statusBarMessage;
+    }
+
+    public String getFeedbackToUser() {
+        return feedbackToUser;
+    }
+
+    public String getStatusBarMessage() {
+        return statusBarMessage;
     }
 }

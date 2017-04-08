@@ -16,7 +16,6 @@ public class TodayCommandParser {
      * TodayCommand and returns an TodayCommand object for execution.
      */
     public Command parse(String args, Logic logic) {
-        // TODO allow multiple index
         if (!logic.isValidUIIndex(args)) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

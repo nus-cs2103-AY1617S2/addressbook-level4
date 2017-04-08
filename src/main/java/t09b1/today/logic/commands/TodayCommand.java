@@ -23,7 +23,7 @@ public class TodayCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) \n" + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_TODAY_TASK_SUCCESS = "Task for Today: %1$s";
-    public static final String MESSAGE_SUCCESS_STATUS_BAR = "Task for Today: %1$s";
+    public static final String MESSAGE_SUCCESS_STATUS_BAR = MESSAGE_TODAY_TASK_SUCCESS;
 
     private final int filteredTaskListIndex;
 

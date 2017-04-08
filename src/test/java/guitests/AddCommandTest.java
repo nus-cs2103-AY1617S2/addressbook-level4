@@ -46,7 +46,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
 
         // confirm the new card contains the right data
-        TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToAdd.getName().toString());
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task
@@ -58,7 +58,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
 
         // confirm the new card contains the right data
-        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToAdd.getName().fullName);
+        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToAdd.getName().toString());
         assertMatching(taskToAdd, addedCard);
 
         // confirm the list now contains all previous tasks plus the new task

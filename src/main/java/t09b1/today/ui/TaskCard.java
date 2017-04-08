@@ -44,7 +44,7 @@ public class TaskCard extends UiPart<Region> {
     // @@author A0144315N
     public TaskCard(ReadOnlyTask task, String displayedIndex) {
         super(FXML);
-        name.setText(task.getName().fullName);
+        name.setText(task.getName().toString());
         id.setText(displayedIndex + "");
         taskDate.setText(task.getTaskAbsoluteDateTime());
         initTags(task);
@@ -53,7 +53,7 @@ public class TaskCard extends UiPart<Region> {
         progressBar.setVisible(task.isAnimated());
         logger.info("############################################TASK ISANIMATED:" + task.isAnimated());
 
-     // Play progress bar animation
+        // Play progress bar animation
         if (task.getIsAnimated() == 1) {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), 0)),
@@ -74,6 +74,6 @@ public class TaskCard extends UiPart<Region> {
     }
 
     private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
     }
 }

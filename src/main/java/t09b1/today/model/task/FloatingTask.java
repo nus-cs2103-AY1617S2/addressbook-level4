@@ -10,8 +10,7 @@ import t09b1.today.model.tag.UniqueTagList;
  * null, field values are validated.
  */
 public class FloatingTask extends Task {
-    public FloatingTask(Name name, UniqueTagList tags, boolean isDone,
-            boolean manualToday) {
+    public FloatingTask(Name name, UniqueTagList tags, boolean isDone, boolean manualToday) {
         super(name, tags, isDone, manualToday);
     }
 
@@ -43,7 +42,7 @@ public class FloatingTask extends Task {
 
     @Override
     public boolean isToday() {
-        return manualToday || isOverdue();
+        return isManualToday() || isOverdue();
     }
 
     @Override

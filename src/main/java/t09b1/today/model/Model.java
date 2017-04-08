@@ -42,7 +42,6 @@ public interface Model {
      * Clears existing backing model and replaces with the provided new data.
      *
      * @param clearPrevTasks
-     *            TODO
      */
     void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks);
 
@@ -129,13 +128,13 @@ public interface Model {
 
     public void discardCurrentState();
 
-    /*
-     * translates task index on ui to internal integer index
+    /**
+     * Translates task index on UI to internal integer index
      */
     int parseUIIndex(String uiIndex);
 
-    /*
-     * checks if a given ui index is present in model
+    /**
+     * Checks if a given UI index is present in model
      */
     boolean isValidUIIndex(String uiIndex);
 
@@ -168,7 +167,7 @@ public interface Model {
      */
     void handleImportEvent(ImportEvent event);
 
-    /*
+    /**
      * Gets UI index by absolute index
      */
     public String getUIIndex(int index);
