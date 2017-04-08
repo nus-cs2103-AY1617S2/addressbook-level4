@@ -28,7 +28,7 @@ public class SyncServiceGtaskTest {
         DATA_STORE_TEST_CREDENTIALS = new File("cred/StoredCredential_1");
         DATA_STORE_CREDENTIAL = new File("data/credentials/StoredCredential");
 
-        if(!Files.exists(DATA_STORE_CREDENTIAL.toPath())) {
+        if (!Files.exists(DATA_STORE_CREDENTIAL.toPath())) {
             try {
                 Files.createDirectories(DATA_STORE_CREDENTIAL.toPath());
             } catch (IOException e) {
