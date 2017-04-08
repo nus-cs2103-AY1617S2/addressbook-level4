@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.task.TestApp;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -42,6 +43,7 @@ public class LoadCommandTest extends AddressBookGuiTest {
     public void reset_config() throws DataConversionException, IOException {
         //initialize sample data
         TestUtil.createDataFileWithSampleData(TEST_SAMPLE_DATA_PATH);
+        TestUtil.createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
 
         //create slightly different sample data to later verify successful load
         ArrayList<Task> tasks = new ArrayList<Task>(Arrays.asList(TestUtil.SAMPLE_TASK_DATA));

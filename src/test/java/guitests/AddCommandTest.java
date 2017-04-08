@@ -2,13 +2,18 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.task.TestApp;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.model.task.RecurringTaskOccurrence;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
@@ -16,6 +21,14 @@ import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
+
+    @Before
+    public void reset_config() throws IOException {
+        TestApp testApp = new TestApp();
+        Config config = testApp.initConfig(Config.DEFAULT_CONFIG_FILE);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+    }
+
     @Test
     public void add() throws IllegalValueException {
         // add one task
