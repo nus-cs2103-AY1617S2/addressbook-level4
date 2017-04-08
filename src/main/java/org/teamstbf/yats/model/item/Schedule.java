@@ -32,6 +32,9 @@ public class Schedule {
 			e.printStackTrace();
 		}
 	}
+	public String getTimeOnlyString() {
+	    return FORMATTER_TIME.format(scheduleDate);
+	}
 
 	@Override
 	public boolean equals(Object other) {
