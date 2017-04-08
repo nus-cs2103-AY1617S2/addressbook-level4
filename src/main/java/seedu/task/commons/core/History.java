@@ -171,7 +171,7 @@ public class History {
     }
 
     /**
-     * This method is used for Junit testing only.
+     * This method is used for Junit testing only. Set up another directory for testing.
      *
      * @param backupDirectory   Directory for history to use.
      */
@@ -181,6 +181,7 @@ public class History {
 
     /**
      * This method is used for Junit testing only.
+     * It resets the values of history class for separate tests.
      */
     public static History test_resetInstance() {
         instance = new History();

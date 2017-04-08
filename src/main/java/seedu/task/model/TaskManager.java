@@ -85,9 +85,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTaskToFront(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.addToFront(p);
+    public void addTaskToFront(Task task) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.addToFront(task);
     }
 
     /**
@@ -97,9 +97,9 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(p);
-        tasks.add(p);
+    public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(task);
+        tasks.add(task);
     }
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.

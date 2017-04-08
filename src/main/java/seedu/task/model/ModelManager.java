@@ -32,6 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final History history;
+    private UserPrefs userPrefs;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -47,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
 
+        this.userPrefs = userPrefs;
         this.history = History.getInstance();
     }
 
@@ -241,6 +243,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+    }
+
+    public UserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     // ========== Inner classes/interfaces used for filtering =================================================

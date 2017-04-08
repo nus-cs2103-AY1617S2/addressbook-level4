@@ -105,6 +105,10 @@ public class GoogleCalendar {
                 .build();
     }
 
+    /**
+     * This is used for JUnit testing only.
+     * It simulates the situation where KIT does not have internet and thus is unable to get user's credentials.
+     */
     public static void setNoInternetTrue() {
         testNoInternet = true;
     }
