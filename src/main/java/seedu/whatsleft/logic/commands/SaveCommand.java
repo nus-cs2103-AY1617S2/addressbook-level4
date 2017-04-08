@@ -21,9 +21,8 @@ public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ":  Saves the current WhatsLeft location to the given filepath.\n" + "Parameters: FILEPATH\n"
-            + "Example: " + COMMAND_WORD + " C:/Users/Downloads/Desktop/CS2103/WhatsLeft.xml"
-            + " 1\n" + "Example: " + COMMAND_WORD
-            + " /Users/Andy/Downloads/WhatsLeft.xml";
+            + "Example (Relative Path): " + COMMAND_WORD + " ./Data/WhatsLeft.xml" + " \n"
+            + "Example (Absolute Path): " + COMMAND_WORD + " /Users/Andy/Downloads/WhatsLeft.xml";
 
     public static final String MESSAGE_CHANGE_FILEPATH_SUCCESS = "Saved WhatsLeft to: %1$s";
     private static final String MESSAGE_SAVE_CONFIG_ERROR = "Failed to save configuration file";

@@ -33,7 +33,7 @@ public class ParserUtil {
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetType>[et][vs])\\s(?<targetIndex>.+)",
             Pattern.CASE_INSENSITIVE);
     private static final Pattern INDEX_ALONE_ARG_FORMAT = Pattern.compile("(?<index>.+)");
-    private static final Pattern CONFIG_FILEPATH_FORMAT = Pattern.compile("(?<filepath>.*)");
+    private static final Pattern CONFIG_FILEPATH_FORMAT = Pattern.compile("^(.)?(/\\p{Alnum}*)+.xml");
     private static final Pattern INDEX_FREQ_OCCUR_FORMAT = Pattern.compile("(?<index>.+)\\s(?<freq>.+)\\s(?<occur>.+)");
 
     /**
@@ -66,7 +66,7 @@ public class ParserUtil {
             return Optional.empty();
         }
 
-        String filePath = matcher.group("filepath");
+        String filePath = command.trim();
         return Optional.of(filePath);
     }
 
