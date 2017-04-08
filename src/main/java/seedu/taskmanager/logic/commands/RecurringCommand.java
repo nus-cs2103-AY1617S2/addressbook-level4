@@ -27,6 +27,7 @@ public class RecurringCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_RECURRING_TASK_SUCCESS = "Task has successfully recurred ";
+    public static final String MESSAGE_RECURRING_FLOATING_TASK_FAILURE = "Unable to create recurring task for floating task!";
     public static final String RECURRING_TASK_VALIDATION_REGEX = "\\d+\\s+\\d+\\s+[a-zA-Z]+";
     public static final String RECURRING_TASK_VALIDATION_REGEX2 = "[^\\s].*";
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
@@ -54,7 +55,7 @@ public class RecurringCommand extends Command {
         ReadOnlyTask taskToRecur = lastShownList.get(taskListIndex);
 
         if (taskToRecur.isFloatingTask()) {
-            throw new CommandException("Unable to create recurring task for floating task!");
+            throw new CommandException(MESSAGE_RECURRING_FLOATING_TASK_FAILURE);
         }
 
         if (taskToRecur.isDeadlineTask()) {
