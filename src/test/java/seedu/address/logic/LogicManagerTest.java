@@ -665,16 +665,15 @@ public class LogicManagerTest {
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
         Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
 
-        List<Task> sevenTasks = helper.generateTaskList(targetTag3, targetTagAndName1,
-                p2, targetTagAndName2, targetTag1,
-                targetTag2, p3);
+        List<Task> sevenTasks = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2,
+                targetTag3, p2, p3);
         TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
-        List<Task> expectedList = helper.generateTaskList(targetTag3);
+        List<Task> expectedList = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2,
+                targetTag3);
         helper.addToModel(model, sevenTasks);
 
-        assertCommandSuccess("find nope",
-                Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find nope beep key", Command.getMessageForTaskListShownSummary(expectedList.size()),
+                expectedAB, expectedList);
     }
 
     @Test
