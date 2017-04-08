@@ -161,27 +161,8 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidParameter(String input) {
-        switch (input) {
-        case PARAMETER_NAME:
-        case PARAMETER_NAME_2:
-        case PARAMETER_START_DATE:
-        case PARAMETER_START_DATE_2:
-        case PARAMETER_START_DATE_3:
-        case PARAMETER_END_DATE:
-        case PARAMETER_END_DATE_2:
-        case PARAMETER_END_DATE_3:
-        case PARAMETER_START_TIME:
-        case PARAMETER_START_TIME_2:
-        case PARAMETER_START_TIME_3:
-        case PARAMETER_END_TIME:
-        case PARAMETER_END_TIME_2:
-        case PARAMETER_END_TIME_3:
-        case PARAMETER_TAG:
-        case PARAMETER_TAG_2:
-            return true;
-        default:
-            return false;
-        }
+        return ParserUtil.isFoundIn(input, PARAMETER_NAME, PARAMETER_START_DATE, PARAMETER_END_DATE,
+                PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG);
     }
     //@@author
     /**
