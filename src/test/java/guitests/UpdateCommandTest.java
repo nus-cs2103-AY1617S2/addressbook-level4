@@ -46,16 +46,16 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
     }
-    /*
-     * @Test public void update_clearCategories_success() throws Exception {
-     * String detailsToUpdate = "t/"; int taskManagerIndex = 2;
-     *
-     * TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1]; TestTask
-     * updatedTask = new TaskBuilder(taskToUpdate).withCategories().build();
-     *
-     * assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate,
-     * updatedTask); }
-     */
+
+    @Test
+    public void update_clearCategories_success() throws Exception {
+        String detailsToUpdate = "CATEGORY";
+        int taskManagerIndex = 2;
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withCategories().build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
 
     @Test
     public void update_searchThenUpdate_success() throws Exception {
