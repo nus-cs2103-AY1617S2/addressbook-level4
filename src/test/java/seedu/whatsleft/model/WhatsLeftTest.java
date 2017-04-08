@@ -37,13 +37,13 @@ public class WhatsLeftTest {
     }
 
     @Test
-    public void resetData_null_throwsAssertionError() {
+    public void resetDataNullThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         whatsLeft.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyWhatsLeft_replacesData() {
+    public void resetDataWithValidReadOnlyWhatsLeftReplacesData() {
         TypicalTestEvents te = new TypicalTestEvents();
         WhatsLeft newData = te.getTypicalWhatsLeft();
         whatsLeft.resetData(newData);
@@ -51,7 +51,7 @@ public class WhatsLeftTest {
     }
 
     @Test
-    public void resetData_withDuplicateEvents_throwsAssertionError() {
+    public void resetDataWithDuplicateEventsThrowsAssertionError() {
         TypicalTestEvents te = new TypicalTestEvents();
         // Repeat te.tutorial twice
         List<Event> newEvents = Arrays.asList(new Event(te.tutorial), new Event(te.tutorial));
@@ -64,7 +64,7 @@ public class WhatsLeftTest {
     }
 
     @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
+    public void resetDataWithDuplicateTasksThrowsAssertionError() {
         TypicalTestTasks tt = new TypicalTestTasks();
         List<Event> newEvents = Arrays.asList();
         // Repeat tt.homework twice
@@ -77,7 +77,7 @@ public class WhatsLeftTest {
     }
 
     @Test
-    public void resetData_withDuplicateTags_throwsAssertionError() {
+    public void resetDataWithDuplicateTagsThrowsAssertionError() {
         WhatsLeft typicalWhatsLeft = new TypicalTestEvents().getTypicalWhatsLeft();
         List<ReadOnlyEvent> newEvents = typicalWhatsLeft.getEventList();
         List<ReadOnlyTask> newTasks = typicalWhatsLeft.getTaskList();

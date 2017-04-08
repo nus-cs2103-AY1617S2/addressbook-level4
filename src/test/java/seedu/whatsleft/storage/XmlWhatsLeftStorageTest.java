@@ -27,7 +27,7 @@ public class XmlWhatsLeftStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readWhatsLeft_nullFilePath_assertionFailure() throws Exception {
+    public void readWhatsLeftNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readWhatsLeft(null);
     }
@@ -43,12 +43,12 @@ public class XmlWhatsLeftStorageTest {
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws Exception {
+    public void readMissingFileEmptyResult() throws Exception {
         assertFalse(readWhatsLeft("NonExistentFile.xml").isPresent());
     }
 
     @Test
-    public void read_notXmlFormat_exceptionThrown() throws Exception {
+    public void readNotXmlFormatExceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
         readWhatsLeft("NotXmlFormatWhatsLeft.xml");
@@ -59,7 +59,7 @@ public class XmlWhatsLeftStorageTest {
     }
 
     @Test
-    public void readAndSaveWhatsLeft_allInOrder_success() throws Exception {
+    public void readAndSaveWhatsLeftAllInOrderSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempWhatsLeft.xml";
         TypicalTestEvents te = new TypicalTestEvents();
         WhatsLeft original = te.getTypicalWhatsLeft();
@@ -85,7 +85,7 @@ public class XmlWhatsLeftStorageTest {
     }
 
     @Test
-    public void saveWhatsLeft_nullWhatsLeft_assertionFailure() throws IOException {
+    public void saveWhatsLeftNullWhatsLeftAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveWhatsLeft(null, "SomeFile.xml");
     }
@@ -95,7 +95,7 @@ public class XmlWhatsLeftStorageTest {
     }
 
     @Test
-    public void saveWhatsLeft_nullFilePath_assertionFailure() throws IOException {
+    public void saveWhatsLeftNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveWhatsLeft(new WhatsLeft(), null);
     }

@@ -14,7 +14,7 @@ public class ConfigTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toString_defaultObject_stringReturned() {
+    public void toStringDefaultObjectStringReturned() {
         String defaultConfigAsString = "App title : WhatsLeft App\n" +
                 "Current log level : INFO\n" +
                 "Preference file Location : preferences.json\n" +

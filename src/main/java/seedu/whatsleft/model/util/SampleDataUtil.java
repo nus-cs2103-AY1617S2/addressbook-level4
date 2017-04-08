@@ -1,8 +1,5 @@
 package seedu.whatsleft.model.util;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import seedu.whatsleft.commons.exceptions.IllegalValueException;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
 import seedu.whatsleft.model.WhatsLeft;
@@ -28,7 +25,7 @@ public class SampleDataUtil {
             return new Event[] {
                 new Event(new Description("Welcome! Events are shown here!"), new StartTime("0001"),
                         new StartDate("today"),  new EndTime("2359"), new EndDate("today"),
-                    new Location(null), new UniqueTagList()),
+                    new Location("Home"), new UniqueTagList()),
 
             };
         } catch (IllegalValueException e) {
@@ -37,13 +34,11 @@ public class SampleDataUtil {
     }
 
     public static Task[] getSampleTasks() {
-        LocalDate testdate = null;
-        LocalTime testtime = null;
         try {
             return new Task[] {
                 new Task(new Description("You will find Tasks here!"), new Priority("high"),
                         new ByTime("2359"), new ByDate("today"),
-                    new Location("null"), new UniqueTagList(), false),
+                    new Location("Home"), new UniqueTagList(), false),
 
             };
         } catch (IllegalValueException e) {

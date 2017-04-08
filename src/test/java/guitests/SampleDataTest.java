@@ -24,7 +24,7 @@ public class SampleDataTest extends WhatsLeftGuiTest {
     }
     //@@author A0121668A
     @Test
-    public void whatsLeft_dataFileDoesNotExist_loadSampleData() throws Exception {
+    public void whatsLeftDataFileDoesNotExistLoadSampleData() throws Exception {
         Event[] events = SampleDataUtil.getSampleEvents();
         ReadOnlyEvent[] expected = TestUtil.filterExpectedEventList(events);
         assertTrue(eventListPanel.isListMatching(expected));
