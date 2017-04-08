@@ -87,8 +87,8 @@ public class AddCommandParser {
 
             else if (isOnEvent(onPrefixInput)) {
                 String[] splited = onPrefixInput.split("\\s+");
-                startDate = splited[0];
-                startDate = DateTimeUtil.getNewDate(startDate);
+                startDate = processInputToDateForm(splited);
+
                 endDate = startDate;
 
                 try {
