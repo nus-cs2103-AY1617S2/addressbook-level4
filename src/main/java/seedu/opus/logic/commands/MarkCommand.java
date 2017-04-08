@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
         Status status;
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
-            status = getNewStatusForTask(filteredTaskListIndex);
+            status = getNewStatusForTask();
         } catch (IllegalValueException e) {
             throw new CommandException("Invalid status created.");
         }
