@@ -52,7 +52,7 @@
         <byDate>2017-05-21</byDate>
         <location>kitchen</location>
         <tagged>food</tagged>
-        <status>true</status>
+        <status>false</status>
     </tasks>
     <events>
         <description>CS2103 Tutorial</description>

@@ -43,7 +43,7 @@ public class HelpCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        switch (matcher.group("arguments")) {
+        switch (matcher.group("arguments").toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
             return new HelpCommand(AddCommand.MESSAGE_USAGE);
