@@ -37,7 +37,7 @@ import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
-import seedu.task.storage.XmlSerializableAddressBook;
+import seedu.task.storage.XmlSerializableTaskList;
 
 /**
  * A utility class for test cases.
@@ -143,8 +143,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskList());
+    public static XmlSerializableTaskList generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskList(new TaskList());
     }
 
     /**
