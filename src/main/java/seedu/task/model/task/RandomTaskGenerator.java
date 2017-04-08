@@ -58,9 +58,13 @@ public class RandomTaskGenerator {
 		String retString = "";
 		if (day < 10) {
 			retString += "0" + day;
+		} else {
+			retString += day;
 		}
 		if (month < 10) {
 			retString += "0" + month;
+		} else {
+			retString += month;
 		}
 		retString += year;
 		return new TaskDate(retString);

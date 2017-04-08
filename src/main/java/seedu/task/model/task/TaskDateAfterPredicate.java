@@ -6,13 +6,13 @@ import seedu.task.commons.exceptions.IllegalValueException;
 
 //import seedu.task.testutil.TaskBuilder;
 
-public class TaskDateBeforePredicate implements Predicate<Object> {
-	public static final String PREDICATE_WORD = "before";
+public class TaskDateAfterPredicate implements Predicate<Object> {
+	public static final String PREDICATE_WORD = "after";
     //@@author A0163845X
 
 	private TaskDate date;
 	
-	public TaskDateBeforePredicate(String date) throws IllegalValueException {
+	public TaskDateAfterPredicate(String date) throws IllegalValueException {
 		this.date = new TaskDate(date);
 		System.out.println(date);
 	}
@@ -26,7 +26,7 @@ public class TaskDateBeforePredicate implements Predicate<Object> {
 		if (task.getTaskDate() != null)
 			System.out.println(task.getTaskDate().compareTo(date));
 
-		if (task.getTaskDate() != null && date.compareTo(task.getTaskDate()) >= 0) {
+		if (task.getTaskDate() != null && date.compareTo(task.getTaskDate()) <= 0) {
 			return true;
 		} else {
 			return false;

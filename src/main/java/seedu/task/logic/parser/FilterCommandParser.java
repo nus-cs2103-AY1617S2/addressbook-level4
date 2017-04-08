@@ -8,7 +8,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.FilterCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.task.TaskDateAfterPredicate;
 import seedu.task.model.task.TaskDateBeforePredicate;
+import seedu.task.model.task.TaskDescriptionPredicate;
 import seedu.task.model.task.TaskNamePredicate;
 import seedu.task.model.task.TaskStatusPredicate;
 
@@ -37,6 +39,12 @@ public class FilterCommandParser {
 					break;
 				case TaskDateBeforePredicate.PREDICATE_WORD:
 					pred = new TaskDateBeforePredicate(predicateArgument);
+					break;
+				case TaskDateAfterPredicate.PREDICATE_WORD:
+					pred = new TaskDateAfterPredicate(predicateArgument);
+					break;
+				case TaskDescriptionPredicate.PREDICATE_WORD:
+					pred = new TaskDescriptionPredicate(predicateArgument);
 					break;
 				default:
 					return new IncorrectCommand("Invalid predicate type, can use status or name");
