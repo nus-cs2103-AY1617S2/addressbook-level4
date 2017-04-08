@@ -50,7 +50,12 @@ public class TagsParser {
     private void extractUnparsedArgs(String args) {
         //tag name is only until the first whitespace
         String tagArgs = String.format(EXTRACT_ARGS_REGEX, PREFIX_TAG.getPrefix() + "(\\S+)", "");
-        this.unparsedArgs = args.replaceAll(tagArgs, WHITESPACE).trim();  //to remove excess whitespace
+        String trimmedArgs = args.replaceFirst(tagArgs, WHITESPACE).trim(); //to remove excess whitespace
+        while (!trimmedArgs.equals(args)) {
+            args = trimmedArgs;
+            trimmedArgs = args.replaceFirst(tagArgs, WHITESPACE).trim();  //to prevent consecutive whitespaces
+        }
+        this.unparsedArgs = args;
     }
 
 
