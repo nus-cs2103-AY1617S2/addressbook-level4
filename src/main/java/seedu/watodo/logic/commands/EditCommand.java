@@ -77,6 +77,7 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);
+            selectTaskAtIndex(filteredTaskListIndex + 1);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -89,6 +90,7 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.deleteTask(newTask);
             model.addTask(oldTask);
+            selectLastTask();
         } catch (TaskNotFoundException e) {
 
         } catch (DuplicateTaskException e) {
@@ -102,6 +104,7 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.deleteTask(oldTask);
             model.addTask(newTask);
+            selectLastTask();
         } catch (TaskNotFoundException e) {
 
         } catch (DuplicateTaskException e) {
