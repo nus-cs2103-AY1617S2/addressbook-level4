@@ -235,6 +235,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.occurrences.remove(i);
     }
 
+    @Override
     public void setOccurrences(ArrayList<RecurringTaskOccurrence> occurrences) {
         this.occurrences = occurrences;
     }
@@ -394,7 +395,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return compareToResult;
     }
 
-    public static Comparator<Task> TaskComparator = new Comparator<Task>() {
+    public static Comparator<Task> taskComparator = new Comparator<Task>() {
 
         @Override
         public int compare(Task task1, Task task2) {

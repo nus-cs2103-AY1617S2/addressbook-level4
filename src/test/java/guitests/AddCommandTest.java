@@ -2,17 +2,22 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.task.RecurringTaskOccurrence;
+import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
 public class AddCommandTest extends AddressBookGuiTest {
     @Test
-    public void add() {
+    public void add() throws IllegalValueException {
         // add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.ida;
@@ -70,8 +75,31 @@ public class AddCommandTest extends AddressBookGuiTest {
         //@@author
     }
 
+    @Test
+    public void addRecurringTask() throws IllegalValueException {
+        TestTask[] currentList = td.getEmptyTasks();
+        TestTask taskToAdd = td.recMonth;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(currentList));
+        ArrayList<RecurringTaskOccurrence> hardCoded = new ArrayList<RecurringTaskOccurrence>();
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2017"), new Timing("05/01/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/03/2017"), new Timing("05/03/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("05/05/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/07/2017"), new Timing("05/07/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/09/2017"), new Timing("05/09/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/11/2017"), new Timing("05/11/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2018"), new Timing("05/01/2018")));
+        Task task = new Task(taskToAdd.getDescription(), taskToAdd.getPriority(),
+                taskToAdd.getStartTiming(), taskToAdd.getEndTiming(), taskToAdd.getTags(),
+                taskToAdd.isRecurring(), taskToAdd.getFrequency());
 
-    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+        assertOccurrenceSame(hardCoded, task.getOccurrences());
+    }
+
+
+    private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) throws IllegalValueException {
+        commandBox.runCommand("clear");
         for (int i = 0; i < currentList.length; i++) {
             commandBox.runCommand(currentList[i].getAddCommand());
         }
@@ -81,9 +109,17 @@ public class AddCommandTest extends AddressBookGuiTest {
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().toString());
         assertMatching(taskToAdd, addedCard);
 
+
         // confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
+    private void assertOccurrenceSame(ArrayList<RecurringTaskOccurrence> hardCoded
+            , ArrayList<RecurringTaskOccurrence> taskOccurrences) {
+        assertTrue(hardCoded.size() == taskOccurrences.size());
+        for (int i = 0; i < hardCoded.size(); i++) {
+            assertTrue(hardCoded.get(i).equals(taskOccurrences.get(i)));
+        }
+    }
 }

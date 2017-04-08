@@ -156,7 +156,9 @@ public class TestTask implements ReadOnlyTask {
         sb.append("p/" + this.getPriority().value + " ");
         sb.append("sd/" + this.getStartTiming().value + " ");
         sb.append("ed/" + this.getEndTiming().value + " ");
-        sb.append("r/" + this.getFrequency().frequency + " ");
+        if (this.isRecurring()) {
+            sb.append("r/" + this.getFrequency().frequency + " ");
+        }
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
