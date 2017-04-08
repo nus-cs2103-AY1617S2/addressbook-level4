@@ -50,6 +50,8 @@ public class GoogleCalendar {
     private static final List<String> SCOPES =
         Arrays.asList(CalendarScopes.CALENDAR);
 
+    private static boolean testNoInternet = false;
+
     static {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -92,11 +94,18 @@ public class GoogleCalendar {
      */
     public static com.google.api.services.calendar.Calendar
         getCalendarService() throws IOException {
+        if (testNoInternet) {
+            throw new IOException("Connection fail!");
+        }
         Credential credential = authorize();
         return new com.google.api.services.calendar.Calendar.Builder(
                 httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
+    }
+
+    public static void setNoInternetTrue() {
+        testNoInternet = true;
     }
 
 }
