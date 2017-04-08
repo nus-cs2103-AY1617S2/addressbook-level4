@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.SplitPane;
@@ -15,7 +16,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.LogsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.commons.events.ui.NewResultAvailableEvent;
 import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.commons.util.History;
@@ -43,6 +46,14 @@ public class CommandBox extends UiPart<Region> {
     private CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
     private CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
 
+    private boolean navigationMode = false;
+    private int currentIndex = -1;
+
+    private ChangeListener<? super String> highlightListener = (observable, oldValue, newValue)
+        -> highlightAndSuggestCompletion();
+    private ChangeListener<? super String> disableInputListener = (observable, oldValue, newValue)
+        -> removeInput();
+
     @FXML
     private InlineCssTextArea commandTextField;
 
@@ -51,14 +62,15 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
 
-        commandTextField.textProperty().addListener((observable, oldValue, newValue)
-            -> highlightAndSuggestCompletion());
+        commandTextField.textProperty().addListener(highlightListener);
     }
 
+    //@@author A0147980U
     private void highlightAndSuggestCompletion() {
         highlightManager.highlight(commandTextField);
         autoCompleteManager.suggestCompletion(commandTextField, logic);
     }
+    //@@author
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
@@ -70,7 +82,36 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0147620L
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
+        if (navigationMode) {
+            handleKeyPressedInNavigationMode(event);
+        } else {
+            handleKeyPressedInEditingMode(event);
+        }
+    }
+
+    //@@author A0147980U
+    private void handleKeyPressedInNavigationMode(KeyEvent event) {
+        event.consume();
+        if (event.getCode() == KeyCode.J) {
+            if (currentIndex + 1 < logic.getFilteredTaskList().size()) {
+                currentIndex++;
+            }
+        } else if (event.getCode() == KeyCode.K) {
+            if (currentIndex - 1 >= 0) {
+                currentIndex--;
+            }
+        } else if (event.getCode() == KeyCode.ESCAPE) {
+            currentIndex = -1;
+            turnOnEditingMode();
+        }
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(currentIndex));
+    }
+
+    private void handleKeyPressedInEditingMode(KeyEvent event) {
+        if (event.getCode() == KeyCode.ESCAPE) {
+            event.consume();
+            turnOnNavigationMode();
+        } else if (event.getCode() == KeyCode.ENTER) {
             event.consume();
             handleEnterKey();
         } else if (event.getCode() == KeyCode.UP) {
@@ -93,6 +134,27 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    private void turnOnNavigationMode() {
+        navigationMode = true;
+        commandTextField.textProperty().removeListener(highlightListener);
+        commandTextField.textProperty().addListener(disableInputListener);
+        logger.info("turn on navigation mode");
+        raise(new NewResultAvailableEvent("navigation mode"));
+    }
+
+    private void turnOnEditingMode() {
+        navigationMode = false;
+        commandTextField.textProperty().removeListener(disableInputListener);
+        commandTextField.textProperty().addListener(highlightListener);
+        logger.info("turn on editing mode");
+        raise(new NewResultAvailableEvent("editing mode"));
+    }
+
+    private void removeInput() {
+        commandTextField.clear();
+    }
+
+    //@@author A0147620L
     //Handles Down key press
     private void handleDownKey() {
         String userCommandText = commandHistory.getNextState();
