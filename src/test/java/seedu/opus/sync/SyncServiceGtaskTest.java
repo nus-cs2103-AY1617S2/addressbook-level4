@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +19,24 @@ public class SyncServiceGtaskTest {
     private SyncManager mockSyncManager;
     private SyncServiceGtask syncServiceGtask;
 
-    private static final File DATA_STORE_CREDENTIAL = new File("data/credentials/StoredCredential");
+    private static File DATA_STORE_CREDENTIAL;
 
-    private static final File DATA_STORE_TEST_CREDENTIALS = new File("cred/StoredCredential_1");
+    private static File DATA_STORE_TEST_CREDENTIALS;
 
     @Before
     public void setUp() throws SyncException {
+        DATA_STORE_TEST_CREDENTIALS = new File("cred/StoredCredential_1");
+        DATA_STORE_CREDENTIAL = new File("data/credentials/StoredCredential");
+
+        if(!Files.exists(DATA_STORE_CREDENTIAL.toPath())) {
+            try {
+                Files.createDirectories(DATA_STORE_CREDENTIAL.toPath());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
         copyTestCredentials();
         mockSyncManager = mock(SyncManager.class);
         syncServiceGtask = spy(new SyncServiceGtask());
@@ -38,13 +52,16 @@ public class SyncServiceGtaskTest {
     public static void copyTestCredentials() {
         try {
             deleteCredential();
-            Files.copy(DATA_STORE_TEST_CREDENTIALS.toPath(), DATA_STORE_CREDENTIAL.toPath());
+            Path path = DATA_STORE_CREDENTIAL.toPath();
+            Files.copy(DATA_STORE_TEST_CREDENTIALS.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void deleteCredential() {
-        DATA_STORE_CREDENTIAL.delete();
+        if (DATA_STORE_CREDENTIAL.exists()) {
+            DATA_STORE_CREDENTIAL.delete();
+        }
     }
 }
