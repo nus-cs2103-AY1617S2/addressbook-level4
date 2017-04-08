@@ -313,6 +313,12 @@ whenever there is a change to the task manager data, the component updates the s
 
 Classes used by multiple components are in the `seedu.opus.commons` package.
 
+### 2.7. Activity Diagram
+
+Below is the activity diagram to model Opus' workflow.
+
+<img src="images/activity_diagram.png" width="800"/><br/>
+
 ## 3. Implementation
 
 ### 3.1. Logging
