@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskname>Eat breakfast with mom</taskname>
+        <startdate>03/03/17</startdate>
+        <starttime>1000</starttime>
+        <enddate>03/03/17</enddate>
+        <endtime>1100</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>just</categorised>
+        <categorised>friends</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Start on the CS2103 project</taskname>
+        <startdate>03/03/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>03/04/17</enddate>
+        <endtime>1800</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Eat dinner with my only 2 friends</taskname>
+        <startdate>09/03/17</startdate>
+        <starttime>1800</starttime>
+        <enddate>09/03/17</enddate>
+        <endtime>2000</endtime>
+        <markedCompleted>false</markedCompleted>
+    </tasks>
+    <tasks>
+        <taskname>Try harder for CS2103 project</taskname>
+        <startdate>04/04/17</startdate>
+        <starttime>1400</starttime>
+        <enddate>05/04/17</enddate>
+        <endtime>1500</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Try even harder for CS2103</taskname>
+        <startdate>05/04/17</startdate>
+        <starttime>1500</starttime>
+        <enddate>05/05/17</enddate>
+        <endtime>1600</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>work</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Eat lunch at techno</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>04/03/17</enddate>
+        <endtime>1400</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>no</categorised>
+        <categorised>friends</categorised>
+    </tasks>
+    <tasks>
+        <taskname>Run 2.4km in 10 mins</taskname>
+        <startdate>EMPTY_FIELD</startdate>
+        <starttime>EMPTY_FIELD</starttime>
+        <enddate>EMPTY_FIELD</enddate>
+        <endtime>EMPTY_FIELD</endtime>
+        <markedCompleted>false</markedCompleted>
+        <categorised>lepak</categorised>
+    </tasks>
+    <categories>just</categories>
+    <categories>friends</categories>
+    <categories>work</categories>
+    <categories>lepak</categories>
+    <categories>no</categories>
+</taskmanager>
