@@ -138,7 +138,7 @@ _Figure 2.1.3b : Component interactions for `delete ev 1` command (part 2)_
 
 #### Activity Diagrams for some workflow
 
-The Activity Diagram below shows the workflow of a user saving/read the xml data file at/from another location
+The Activity Diagram below shows the workflow of a user saving/reading the xml data file at/from another location
 <img src="images\ActivityDiagramSaveFile.png" width="800"><br>
 _Figure 2.1.4a : Activity Diagram for Saving File
 
@@ -156,7 +156,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BrowserPanel`, `EventListPanel`, `TaskListPanel`
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -218,6 +218,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
+* can save `Config` objects in json format and read it back.
 * can save the WhatsLeft data in xml format and read it back.
 
 ### 2.6. Common classes
