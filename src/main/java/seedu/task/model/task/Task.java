@@ -160,13 +160,16 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public boolean equals(Object other) {
-        
-        if(other == null) return false;
-        if(other == this) return true;
-        if(other.toString().equals(this.toString())) return true;
-        
+
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (other.toString().equals(this.toString()))
+            return true;
+
         return false;
-        
+
     }
 
     @Override

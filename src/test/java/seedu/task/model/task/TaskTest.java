@@ -39,8 +39,7 @@ public class TaskTest {
     public void TaskEquals() {
         this.setUp();
         Task another = new Task(name, date, start, end, descrip, status, tags);
-        assertEquals(this.task,another);
+        assertEquals(this.task, another);
     }
-
 
 }

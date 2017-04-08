@@ -63,18 +63,18 @@ public class TaskManagerTest {
         taskManager.resetData(newData);
     }
 
-//    @Test
-//    public void resetData_withDuplicateTags_throwsAssertionError() {
-//        TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
-//        List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
-//        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
-//        // Repeat the first tag twice
-//        newTags.add(newTags.get(0));
-//        TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
-//
-//        thrown.expect(AssertionError.class);
-//        taskManager.resetData(newData);
-//    }
+    // @Test
+    // public void resetData_withDuplicateTags_throwsAssertionError() {
+    // TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
+    // List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
+    // List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
+    // // Repeat the first tag twice
+    // newTags.add(newTags.get(0));
+    // TaskManagerStub newData = new TaskManagerStub(newTasks, newTags);
+    //
+    // thrown.expect(AssertionError.class);
+    // taskManager.resetData(newData);
+    // }
 
     /**
      * A stub ReadOnlyTaskManager whose persons and tags lists can violate interface constraints.
