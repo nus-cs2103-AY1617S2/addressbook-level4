@@ -1,7 +1,9 @@
 package seedu.opus.logic.commands;
 
+import java.util.List;
 import java.util.Optional;
 
+import seedu.opus.commons.core.Messages;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
@@ -29,6 +31,12 @@ public class MarkCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (filteredTaskListIndex > lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
         Status status;
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
@@ -57,6 +65,7 @@ public class MarkCommand extends Command {
     /** Returns the task at index inside filtered task list */
     private ReadOnlyTask getTask(int index) {
         UnmodifiableObservableList<ReadOnlyTask> list = model.getFilteredTaskList();
+        // -1 to convert to zero based index
         return list.get(index - 1);
     }
 
