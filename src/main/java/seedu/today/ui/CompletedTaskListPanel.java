@@ -129,7 +129,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleShowCompletedTasksEvent(ShowCompletedTaskEvent event) {
+    public void handleShowCompletedTasksEvent(ShowCompletedTaskEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.action == ShowCompletedTaskEvent.Action.SHOW && !flag) {
             display(true);

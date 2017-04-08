@@ -41,10 +41,6 @@ public class StorageManagerTest {
         return config;
     }
 
-    private String getTempFilePath(String fileName) {
-        return testFolder.getRoot().getPath() + fileName;
-    }
-
     @Test
     public void prefsReadSave() throws Exception {
         /*

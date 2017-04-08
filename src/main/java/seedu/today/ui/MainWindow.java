@@ -2,7 +2,6 @@ package seedu.today.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -33,7 +32,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import seedu.today.commons.core.Config;
 import seedu.today.commons.core.GuiSettings;
-import seedu.today.commons.core.LogsCenter;
 import seedu.today.commons.events.ui.ExitAppRequestEvent;
 import seedu.today.commons.events.ui.NewResultAvailableEvent;
 import seedu.today.commons.events.ui.UpdateStatusBarEvent;
@@ -52,8 +50,6 @@ import seedu.today.ui.util.CommandTextFieldValidator;
  * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Region> {
-
-    private final Logger logger = LogsCenter.getLogger(MainWindow.class);
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
@@ -104,7 +100,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane windowCentre;
 
-    CommandTextFieldValidator validator;
+    private CommandTextFieldValidator validator;
 
     /** Amount that is scrolled using the down and up arrow keys */
     private static final double SCROLL_AMOUNT = 0.05;
@@ -214,7 +210,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Initialises observable lists for ListView and loads other UI components
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         // Initialises observable lists for ListViews
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
@@ -262,7 +258,7 @@ public class MainWindow extends UiPart<Region> {
         return completedTaskListPlaceholder;
     }
 
-    void hide() {
+    public void hide() {
         primaryStage.hide();
     }
 

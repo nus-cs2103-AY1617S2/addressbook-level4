@@ -21,12 +21,12 @@ public class TaskTest {
         try {
             Task task = new FloatingTask(new Name("a floating task"), new UniqueTagList("tag1", "tag2"), false, false);
             assertTrue(task.getName().toString().equals("a floating task"));
-            assertTrue(task.getDeadline().isPresent() == false);
-            assertTrue(task.getStartingTime().isPresent() == false);
+            assertFalse(task.getDeadline().isPresent());
+            assertFalse(task.getStartingTime().isPresent());
             assertFalse(task.isToday());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
@@ -44,14 +44,14 @@ public class TaskTest {
             Task task = new DeadlineTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, false,
                     false);
             assertTrue(task.getName().toString().equals("a deadline task"));
-            assertTrue(task.getDeadline().isPresent() == true);
+            assertTrue(task.getDeadline().isPresent());
             assertTrue(task.getDeadline().get().getDate().equals(date));
-            assertTrue(task.getStartingTime().isPresent() == false);
+            assertFalse(task.getStartingTime().isPresent());
             assertTrue(task.isToday());
             assertTrue(((DeadlineTask) task).isOverdue());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
@@ -71,15 +71,15 @@ public class TaskTest {
             Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date2, date,
                     false, false);
             assertTrue(task.getName().toString().equals("a deadline task"));
-            assertTrue(task.getDeadline().isPresent() == true);
+            assertTrue(task.getDeadline().isPresent());
             assertTrue(task.getDeadline().get().getDate().equals(date2));
-            assertTrue(task.getStartingTime().isPresent() == true);
+            assertTrue(task.getStartingTime().isPresent());
             assertTrue(task.getStartingTime().get().getDate().equals(date));
             assertTrue(task.isToday());
             assertFalse(((EventTask) task).isOverdue());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
@@ -97,8 +97,7 @@ public class TaskTest {
         try {
             Date date = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
             Date date2 = DateUtils.addDays(date, 1);
-            Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, date2,
-                    false, false);
+            new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, date2, false, false);
             fail();
         } catch (IllegalValueException e) {
             assertTrue(e.getMessage().equals("Deadline should be after starting time."));

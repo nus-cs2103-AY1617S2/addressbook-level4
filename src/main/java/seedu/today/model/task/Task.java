@@ -157,10 +157,7 @@ public abstract class Task implements ReadOnlyTask {
 
     @Override
     public boolean isAnimated() {
-        if (this.isAnimated == 0) {
-            return false;
-        }
-        return true;
+        return this.isAnimated != 0;
     }
 
     @Override

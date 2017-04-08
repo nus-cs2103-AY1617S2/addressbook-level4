@@ -30,9 +30,9 @@ public class AddParserTest extends AddCommandParser {
         Name name = new Name("CS2103 project due");
         UniqueTagList tags = new UniqueTagList(new HashSet<>());
         assertTrue(task instanceof FloatingTask);
-        assertTrue(!task.getDeadline().isPresent());
+        assertFalse(task.getDeadline().isPresent());
         assertTrue(task.getName().toString().equals(name.toString()));
-        assertTrue(!task.getStartingTime().isPresent());
+        assertFalse(task.getStartingTime().isPresent());
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertTrue(task.getTaskDateTime().equals(""));
         assertTrue(task.getTaskAbsoluteDateTime().equals(""));
@@ -50,7 +50,7 @@ public class AddParserTest extends AddCommandParser {
         assertTrue(task instanceof DeadlineTask);
         assertTrue(task.getDeadline().get().isSameDay(new Date()));
         assertTrue(task.getName().toString().equals(name.toString()));
-        assertTrue(!task.getStartingTime().isPresent());
+        assertFalse(task.getStartingTime().isPresent());
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertFalse(task.getTaskDateTime() == null);
     }
@@ -81,9 +81,9 @@ public class AddParserTest extends AddCommandParser {
         Name name = new Name("CS2103 project from school to home");
         UniqueTagList tags = new UniqueTagList(new HashSet<>());
         assertTrue(task instanceof FloatingTask);
-        assertTrue(!task.getDeadline().isPresent());
+        assertFalse(task.getDeadline().isPresent());
         assertTrue(task.getName().toString().equals(name.toString()));
-        assertTrue(!task.getStartingTime().isPresent());
+        assertFalse(task.getStartingTime().isPresent());
         assertTrue(task.getTags().toSet().equals(tags.toSet()));
         assertTrue(task.getTaskDateTime().equals(""));
         assertTrue(task.getTaskAbsoluteDateTime().equals(""));

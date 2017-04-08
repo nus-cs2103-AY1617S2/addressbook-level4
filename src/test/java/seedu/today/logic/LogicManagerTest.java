@@ -82,9 +82,9 @@ public class LogicManagerTest {
     private Config config;
     private Storage storage;
 
-    String tempTaskManagerFile;
-    String tempPreferencesFile;
-    String tempConfigFile;
+    // private String tempTaskManagerFile;
+    // private String tempPreferencesFile;
+    // private String tempConfigFile;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -94,17 +94,17 @@ public class LogicManagerTest {
     private TaskManager expectedAB;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
         latestSavedTaskManager = new TaskManager(abce.data);
     }
 
     @Subscribe
-    private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
+    public void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
         targetedJumpIndex = je.targetIndex;
     }
 
