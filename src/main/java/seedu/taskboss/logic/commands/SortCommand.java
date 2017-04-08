@@ -32,7 +32,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException, IllegalValueException, InvalidDatesException {
+    public CommandResult execute() throws CommandException, IllegalValueException {
         assert model != null;
 
         try {
