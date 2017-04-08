@@ -51,7 +51,7 @@ public class ListCommand extends Command {
                 type = TaskType.valueOf(processedPreamble);
             } catch (IllegalArgumentException e) {
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                                MESSAGE_USAGE));
+                                                              MESSAGE_USAGE));
             }
         } else {
             listDefault();
