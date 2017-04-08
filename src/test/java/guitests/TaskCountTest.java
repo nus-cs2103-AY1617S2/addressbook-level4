@@ -64,7 +64,7 @@ public class TaskCountTest extends TaskManagerGuiTest {
         assertEquals(taskCount.getFloatingTaskCount().getText(), "2");
         assertEquals(taskCount.getTimedTaskCount().getText(), "3");
 
-        commandBox.runCommand("edit 1 change ed to 4 jun and change et to 2pm");
+        commandBox.runCommand("edit 1 change ed to 4 jun and et to 2pm");
 
         assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
         assertEquals(taskCount.getTimedTaskCount().getText(), "4");

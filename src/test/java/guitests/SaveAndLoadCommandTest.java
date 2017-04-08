@@ -69,7 +69,7 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void saveInvalidDirectoryFailure() {
+    public void save_invalidDirectory_failure() {
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " \\");
         assertResultMessage(MESSAGE_INVALID_DIRECTORY);
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " /");
@@ -77,19 +77,19 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void saveDirectoryNotExistSuccess() {
+    public void save_directoryNotExist_success() {
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1 + "\\NotExistFolder");
         assertResultMessage(String.format(SaveCommand.MESSAGE_SUCCESS, saveFolder1 + "\\NotExistFolder"));
     }
 
     @Test
-    public void saveDirectoryExistSuccess() {
+    public void save_directoryExist_success() {
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1);
         assertResultMessage(String.format(SaveCommand.MESSAGE_SUCCESS, saveFolder1));
     }
 
     @Test
-    public void loadInvalidFilePathFailure() {
+    public void load_invalidFilePath_failure() {
         commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder1);
         assertResultMessage(MESSAGE_INVALID_FILE);
         commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder1 + "\\someInvalidFolder" + fileName);
@@ -97,17 +97,24 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void saveInvalidCommandFail() {
+    public void save_invalidCommand_failure() {
         commandBox.runCommand("saveeeeeee");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void loadInvalidCommandFail() {
+    public void load_invalidCommand_failure() {
         commandBox.runCommand("loaddddd");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0142255M
+    public void save_noDirectoryGiven_failure() {
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " ");
+        assertResultMessage("");
+    }
+
+    //@@author A0139961U
     @After
     public void cleanUp() {
         //Revert the config.json back to original

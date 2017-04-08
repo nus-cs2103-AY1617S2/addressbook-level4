@@ -2,6 +2,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.exceptions.IllegalValueException;
+import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.testutil.TaskBuilder;
 import seedu.tache.testutil.TestTask;
@@ -58,7 +60,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void list_timedTasks_success() {
-        assertListResult("list timed", "Timed", td.eggsAndBread, td.visitFriend, td.readBook);
+        assertListResult(ListCommand.COMMAND_WORD + " timed", "Timed", td.eggsAndBread, td.visitFriend, td.readBook);
         commandBox.runCommand("list");
         commandBox.runCommand("edit 2 change sd to 2 months ago and st to 9am and"
                               + " ed to 1 months ago and et to 9pm");
@@ -67,12 +69,12 @@ public class ListCommandTest extends TaskManagerGuiTest {
         for (int i = 1; i < 5; i++) {
             expectedTasksList.add(tempTasksList[i]);
         }
-        assertListResult("list timed", "Timed", expectedTasksList.toArray(new TestTask[0]));
+        assertListResult(ListCommand.COMMAND_WORD + " timed", "Timed", expectedTasksList.toArray(new TestTask[0]));
     }
 
     @Test
     public void list_floatingTasks_success() throws IllegalValueException {
-        assertListResult("list floating", "Floating", td.payDavid, td.visitSarah);
+        assertListResult(ListCommand.COMMAND_WORD + " floating", "Floating", td.payDavid, td.visitSarah);
         commandBox.runCommand("list");
         commandBox.runCommand("add watch tv");
         TestTask[] tempTasksList = td.getTypicalTasks();
@@ -81,7 +83,8 @@ public class ListCommandTest extends TaskManagerGuiTest {
             expectedTasksList.add(tempTasksList[i]);
         }
         expectedTasksList.add(new TaskBuilder().withName("watch tv").build());
-        assertListResult("list floating", "Floating", expectedTasksList.toArray(new TestTask[0]));
+        assertListResult(ListCommand.COMMAND_WORD + " floating", "Floating",
+            expectedTasksList.toArray(new TestTask[0]));
     }
     //@@author
 
@@ -97,9 +100,30 @@ public class ListCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0142255M
+    @Test
+    public void list_invalidFilter_failure() {
+        commandBox.runCommand(ListCommand.COMMAND_WORD + " time");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void list_shortCommand_success() {
+        assertListResult(ListCommand.SHORT_COMMAND_WORD + " all", "All", td.getTypicalTasks());
+
+        //list after deleting one result
+        commandBox.runCommand("delete 1");
+        TestTask[] tempTasksList = td.getTypicalTasks();
+        ArrayList<TestTask> expectedTasksList = new ArrayList<TestTask>();
+        for (int i = 0; i < tempTasksList.length - 1; i++) {
+            expectedTasksList.add(tempTasksList[i + 1]);
+        }
+        assertListResult(ListCommand.SHORT_COMMAND_WORD + " all", "All", expectedTasksList.toArray(new TestTask[0]));
+    }
+
     //@@author A0139961U
     @Test
-    public void listTodayTasks() throws IllegalValueException {
+    public void list_todayTasks_success() throws IllegalValueException {
         assertListResult("list today", "Today");
         commandBox.runCommand("list");
         commandBox.runCommand("edit 1 change ed to today and et to 2359");
@@ -112,7 +136,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void listThisWeekTasks() throws IllegalValueException {
+    public void list_thisWeekTasks_success() throws IllegalValueException {
         assertListResult("list this week", "This week");
         commandBox.runCommand("list");
         commandBox.runCommand("edit 2 change ed to start of this week and et to 0000");
@@ -128,7 +152,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void listOverdueTasks() throws IllegalValueException {
+    public void list_overdueTasks_success() throws IllegalValueException {
         assertListResult("list overdue", "Overdue", td.eggsAndBread);
         commandBox.runCommand("list");
         commandBox.runCommand("edit 1 change ed to yesterday and et to 2359");

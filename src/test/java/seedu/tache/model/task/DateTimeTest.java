@@ -120,5 +120,4 @@ public class DateTimeTest {
         DateTime today = new DateTime("today 00:00AM");
         assertEquals(DateTime.removeTime(date), today.getDate());
     }
-    //@@author
 }

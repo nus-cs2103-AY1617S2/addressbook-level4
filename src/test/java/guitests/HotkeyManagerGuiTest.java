@@ -11,7 +11,7 @@ import guitests.guihandles.MainGuiHandle;
 public class HotkeyManagerGuiTest extends TaskManagerGuiTest {
 
     @Test
-    public void toggleWindowFocus() {
+    public void hotkeyManager_toggleWindowFocus_success() {
         assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
         assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlQAccelerator());
         assertMainGuiOpen(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());

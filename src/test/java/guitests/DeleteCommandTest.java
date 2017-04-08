@@ -5,6 +5,9 @@ import static seedu.tache.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCE
 
 import org.junit.Test;
 
+import seedu.tache.commons.core.Messages;
+import seedu.tache.logic.commands.DeleteCommand;
+import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.testutil.TestTask;
 import seedu.tache.testutil.TestUtil;
 
@@ -28,11 +31,33 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
+        //@@author A0142255M
         //invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid.");
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " " + currentList.length + 1);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
     }
+
+    @Test
+    public void delete_invalidParameter_failure() {
+        commandBox.runCommand("delete second task");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void delete_shortCommand_success() {
+        commandBox.runCommand(DeleteCommand.SHORT_COMMAND_WORD + " 1");
+        TestTask[] currentList = td.getTypicalTasks();
+        int targetIndex = 1;
+        assertDeleteSuccess(targetIndex, currentList);
+    }
+
+    @Test
+    public void delete_invalidCommand_success() {
+        commandBox.runCommand("detele");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+    //@@author
 
     /**
      * Runs the delete command to delete the task at specified index and confirms the result is correct.

@@ -7,6 +7,7 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.AddCommand;
+import seedu.tache.model.task.Name;
 import seedu.tache.testutil.TestTask;
 import seedu.tache.testutil.TestUtil;
 
@@ -47,6 +48,21 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("adds Read Newspaper");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
+
+    //@@author A0142255M
+    @Test
+    public void add_invalidTask_failure() {
+        commandBox.runCommand(AddCommand.COMMAND_WORD + " ");
+        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
+    }
+
+    @Test
+    public void add_shortCommand_success() {
+        TestTask toAdd = td.getFit;
+        commandBox.runCommand(AddCommand.SHORT_COMMAND_WORD + " " + toAdd.getAddCommand());
+        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, toAdd));
+    }
+    //@@author
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());

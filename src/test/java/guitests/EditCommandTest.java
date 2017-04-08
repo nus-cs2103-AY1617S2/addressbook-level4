@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.tache.commons.core.Messages;
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.parser.EditCommandParser;
 import seedu.tache.model.tag.Tag;
@@ -76,6 +77,31 @@ public class EditCommandTest extends TaskManagerGuiTest {
         editedTask = new TaskBuilder(taskToEdit).withStartDateTime("04-04-17 3pm").build();
 
         assertEditWithSameFilterSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    //@@author A0142255M
+    @Test
+    public void edit_invalidCommand_failure() {
+        commandBox.runCommand("update");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void edit_shortCommand_success() throws IllegalValueException {
+        commandBox.runCommand(EditCommand.SHORT_COMMAND_WORD + " 1; tag MediumPriority");
+        int taskManagerIndex = 1;
+
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("MediumPriority").build();
+
+        // confirm the new card contains the right data
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getName().fullName);
+        assertMatching(editedTask, editedCard);
+
+        // confirm the list now contains all previous tasks plus the task with updated details
+        expectedTasksList[taskManagerIndex - 1] = editedTask;
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
     //@@author
 
@@ -149,9 +175,8 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author A0142255M
     @Test
     public void edit_duplicateTask_failure() {
-
-        commandBox.runCommand("edit 5; name Buy Eggs and Bread; end_date 04-01-17; end_time 19:55:12; "
-                + "tag HighPriority;");
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " 5; name Buy Eggs and Bread; "
+            + "end_date 04-01-17; end_time 19:55:12; tag HighPriority;");
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
     //@@author

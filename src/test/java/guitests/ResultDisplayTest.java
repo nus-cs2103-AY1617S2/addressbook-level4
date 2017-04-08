@@ -19,7 +19,10 @@ public class ResultDisplayTest extends TaskManagerGuiTest {
     public void resultDisplay_unknownCommand_failure() {
         commandBox.runCommand("yutyfcydvchui");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
 
+    @Test
+    public void resultDisplay_invalidCommand_failure() {
         commandBox.runCommand("");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }

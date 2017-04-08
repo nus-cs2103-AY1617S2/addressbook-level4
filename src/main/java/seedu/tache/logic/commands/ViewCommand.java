@@ -13,8 +13,8 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String SHORT_COMMAND_WORD = "v";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":Navigates calendar to a day / week / month view.\n"
-            + "Example: " + COMMAND_WORD + "week";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":Navigates calendar to a day / week / month view. \n"
+            + "Example: " + COMMAND_WORD + " week";
 
     public static final String MESSAGE_SUCCESS = "Calendar view switched to %s view.";
 
