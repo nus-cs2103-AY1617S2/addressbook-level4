@@ -18,7 +18,8 @@ public class ListByCategoryCommandTest extends TaskBossGuiTest {
     @Test
     public void listByCategory_nonEmptyList() {
         // Equivalence partition: list tasks by a nonexistent category
-        assertListByCategoryResult("list c/wife"); // no results
+        commandBox.runCommand("list c/wife");
+        assertResultMessage(String.format(ListByCategoryCommand.MESSAGE_CATEGORY_NOT_FOUND));
 
         // EP: list tasks by an existing category
         assertListByCategoryResult("list c/friends", td.taskA, td.taskB); // multiple results
