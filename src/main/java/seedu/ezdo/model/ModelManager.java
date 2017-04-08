@@ -492,6 +492,7 @@ public class ModelManager extends ComponentManager implements Model {
             return isBefore;
         }
 
+        /**
          * returns true if task's {@code StartDate} comes after given
          * {@code StartDate}
          */
