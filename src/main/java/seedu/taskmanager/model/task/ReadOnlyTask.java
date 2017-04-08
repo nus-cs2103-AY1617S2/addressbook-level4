@@ -34,9 +34,10 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
+                && other.getStatus().equals(this.getStatus())
                 // @@author A0114269E
-                && ((other.getStatus().value || this.getStatus().value) ?
-                        false : other.getStatus().equals(this.getStatus()))
+//                && ((other.getStatus().value || this.getStatus().value) ?
+//                        false : other.getStatus().equals(this.getStatus()))
                 // @@author A0140032E
                 && other.getDescription().equals(this.getDescription()))
                 && other.getRepeat().equals(this.getRepeat());
