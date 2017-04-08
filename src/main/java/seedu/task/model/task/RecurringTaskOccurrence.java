@@ -46,4 +46,8 @@ public class RecurringTaskOccurrence {
     public boolean isComplete() {
         return complete;
     }
+
+    public boolean equals(RecurringTaskOccurrence other) {
+        return this.startTiming.equals(other.startTiming) && this.endTiming.equals(other.endTiming);
+    }
 }
