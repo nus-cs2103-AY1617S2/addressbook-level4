@@ -296,6 +296,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private void setBrowserCloseListener() {
+        closeDialogOnNextKeyPress();
         browser.setOnKeyReleased((KeyEvent ke) -> {
             KeyCode code = ke.getCode();
             if (code == KeyCode.UP || code == KeyCode.DOWN) {
@@ -318,15 +319,16 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleHelpUG() {
         JFXDialogLayout content = new JFXDialogLayout();
-        WebView browser = new WebView();
+        browser = new WebView();
         browser.getEngine().load(USERGUIDE_URL);
+        hideScrollBar(browser);
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         content.setBody(browser);
         closeDialog();
         EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
-        closeDialogOnNextKeyPress();
+        setBrowserCloseListener();
     }
 
     //@@author A0135739W
