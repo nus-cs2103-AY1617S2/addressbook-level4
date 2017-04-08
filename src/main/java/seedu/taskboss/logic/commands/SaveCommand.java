@@ -25,7 +25,7 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
                 + ": Saves the data at specific filepath.\n"
                 + "Example: " + COMMAND_WORD
-                + " C://Users/Desktop/TaskBoss\n";
+                + " C://Users/Desktop/TaskBoss\n"
                 + "Example: " + COMMAND_WORD
                 + " /User/Username/Desktop/TaskBoss";
 
