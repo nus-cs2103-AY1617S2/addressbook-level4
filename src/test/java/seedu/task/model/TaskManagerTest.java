@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.testutil.TypicalTestTasks;
 //import seedu.task.model.task.Task;
 //import seedu.task.testutil.TypicalTestTasks;
 
@@ -24,7 +25,6 @@ public class TaskManagerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
     private final TaskManager taskManager = new TaskManager();
 
     @Test
@@ -39,12 +39,12 @@ public class TaskManagerTest {
         taskManager.resetData(null);
     }
 
-//    @Test
-//    public void resetData_withValidReadOnlyTaskManager_replacesData() {
-//        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
-//        taskManager.resetData(newData);
-//        assertEquals(newData, taskManager);
-//    }
+    @Test
+    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+        TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
+    }
 
 //    @Test
 //    public void resetData_withDuplicateTasks_throwsAssertionError() {

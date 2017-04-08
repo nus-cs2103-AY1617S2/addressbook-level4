@@ -71,8 +71,18 @@ public class TaskDate {
             if (dates == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
             }
-        }
 
+            setDay(dates.get(0).getDate());
+            setMonth(dates.get(0).getMonth());
+            setYear(dates.get(0).getYear());
+
+            if (dates.size() == 2) {
+                setSecondDay(dates.get(1).getDate());
+                setSecondMonth(dates.get(1).getMonth());
+                setSecondYear(dates.get(1).getYear());
+            }
+
+        }
     }
 
     public void setDay(int day) {
@@ -129,8 +139,9 @@ public class TaskDate {
             if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
                 return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
             }
-            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " "
-                    + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
+            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " "
+                    + DATE_DELIMITER_DASH + " " + dayTwo + DATE_DELIMITER_SLASH + monthTwo
+                    + DATE_DELIMITER_SLASH + yearTwo;
         } else {
             if (dates.size() == 1) {
                 return formatter.format(dates.get(0));
