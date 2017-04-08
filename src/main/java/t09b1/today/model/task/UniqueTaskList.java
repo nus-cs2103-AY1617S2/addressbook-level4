@@ -150,4 +150,12 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class TaskNotFoundException extends Exception {
     }
 
+    public void setTasksWithoutCheck(List<? extends Task> tasks) throws DuplicateTaskException {
+        final UniqueTaskList replacement = new UniqueTaskList();
+        for (final Task task : tasks) {
+            replacement.addWithoutCheck(task);
+        }
+        setTasks(replacement);
+    }
+
 }

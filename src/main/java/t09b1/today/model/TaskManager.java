@@ -55,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     //// list overwrite operations
 
     public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
-        this.tasks.setTasks(tasks);
+        this.tasks.setTasksWithoutCheck(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
