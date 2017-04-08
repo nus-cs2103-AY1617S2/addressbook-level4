@@ -43,7 +43,7 @@ public interface ReadOnlyTask {
      * Formats the event as text, showing all details.
      */
     default String getAsText() {
-        final StringBuilder builder = new StringBuilder();;
+        final StringBuilder builder = new StringBuilder();
 
         appendName(builder);
         appendPriority(builder);
