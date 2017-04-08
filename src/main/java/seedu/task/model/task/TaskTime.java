@@ -48,6 +48,12 @@ public class TaskTime {
         }
 
     }
+    
+    public TaskTime(int hour, int minute) throws IllegalValueException {
+    	setHour(hour);
+    	setMinute(minute);
+    	value = this.toString();
+    }
 
     @Override
     public String toString() {
