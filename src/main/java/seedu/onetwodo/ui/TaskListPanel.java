@@ -58,6 +58,10 @@ public class TaskListPanel extends UiPart<Region> {
         }
     }
 
+    public int getNumberOfItems() {
+        return taskListView.getItems().size();
+    }
+
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(getFilteredTasks(taskList));
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -91,6 +95,12 @@ public class TaskListPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    public void viewScrollTo(int index) {
+        Platform.runLater(() -> {
+            taskListView.scrollTo(index);
         });
     }
 

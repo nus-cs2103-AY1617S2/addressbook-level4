@@ -31,6 +31,7 @@ public class CommandBox extends UiPart<Region> {
     public static final PseudoClass ERROR_PSEUDOCLASS = PseudoClass.getPseudoClass(ERROR_STYLE_CLASS);
 
     private final Logic logic;
+    private EventHandler<KeyEvent> scrollHandler;
 
     @FXML
     private TextField commandTextField;
@@ -120,6 +121,8 @@ public class CommandBox extends UiPart<Region> {
                 resetIfUpDownKey(ke);
             }
         });
+        commandTextField.setOnKeyReleased(null);
+        commandTextField.setOnKeyReleased(scrollHandler);
     }
 
     private void resetIfUpDownKey(KeyEvent ke) {
@@ -159,6 +162,11 @@ public class CommandBox extends UiPart<Region> {
         } else {
             commandTextField.setText(refilledCommands.peek());
         }
+    }
+
+    public void setScrollKeyListener(EventHandler<KeyEvent> scrollHandler) {
+        this.scrollHandler = scrollHandler;
+        commandTextField.setOnKeyReleased(scrollHandler);
     }
 
 }

@@ -45,6 +45,7 @@ import seedu.onetwodo.model.task.TaskType;
  */
 public class MainWindow extends UiPart<Region> {
 
+    private static final int MINIMUM_SCROLL_AMOUNT = 5;
     private static final String LIST_DONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " done";
     private static final String LIST_UNDONE_COMMAND_INPUT = ListCommand.COMMAND_WORD + " undone";
     private static final String LIST_ALL_COMMAND_INPUT = ListCommand.COMMAND_WORD + " all";
@@ -59,6 +60,9 @@ public class MainWindow extends UiPart<Region> {
 
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
+    private int deadlineScrollIndex = 0;
+    private int eventScrollIndex = 0;
+    private int todoScrollIndex = 0;
 
     private Stage primaryStage;
     private Logic logic;
@@ -207,6 +211,7 @@ public class MainWindow extends UiPart<Region> {
 
         commandBox = new CommandBox(getCommandBoxPlaceholder(), logic);
         commandBox.focus();
+        setScrollOnShiftUpDown();
     }
 
     private ObservableList<ReadOnlyTask> getDoneTaskList() {
@@ -354,6 +359,7 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    // @@author A0143029M
     public TaskListPanel getDeadlineTaskListPanel() {
         return this.deadlineTaskListPanel;
     }
@@ -377,7 +383,6 @@ public class MainWindow extends UiPart<Region> {
             return getTodoTaskListPanel();
         }
     }
-
 
     public void openDialog(ReadOnlyTask task) {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -405,6 +410,7 @@ public class MainWindow extends UiPart<Region> {
             return;
         }
         dialog.close();
+        dialog = null;
         commandBox.focus();
     }
 
@@ -437,4 +443,41 @@ public class MainWindow extends UiPart<Region> {
         });
     }
 
+    private void setScrollOnShiftUpDown() {
+        commandBox.setScrollKeyListener(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (!ke.isShiftDown() || dialog != null) {
+                    return;
+                }
+                int maxDeadlineIndex = deadlineTaskListPanel.getNumberOfItems() - 1;
+                int maxEventIndex = eventTaskListPanel.getNumberOfItems() - 1;
+                int maxTodoIndex = todoTaskListPanel.getNumberOfItems() - 1;
+                int maxAmountOfTasks = Math.max(Math.max(maxDeadlineIndex, maxEventIndex), maxTodoIndex);
+                int scrollAmount = Math.min(MINIMUM_SCROLL_AMOUNT, maxAmountOfTasks);
+                switch (ke.getCode()) {
+                case UP:
+                    deadlineScrollIndex -= scrollAmount;
+                    eventScrollIndex -= scrollAmount;
+                    todoScrollIndex -= scrollAmount;
+                    break;
+                case DOWN:
+                    deadlineScrollIndex += scrollAmount;
+                    eventScrollIndex += scrollAmount;
+                    todoScrollIndex += scrollAmount;
+                    break;
+                default: break;
+                }
+                deadlineScrollIndex = deadlineScrollIndex < 0 ? 0 : deadlineScrollIndex > maxDeadlineIndex ?
+                        maxDeadlineIndex : deadlineScrollIndex;
+                eventScrollIndex = eventScrollIndex < 0 ? 0 : eventScrollIndex > maxEventIndex ?
+                        maxEventIndex : eventScrollIndex;
+                todoScrollIndex = todoScrollIndex < 0 ? 0 : todoScrollIndex > maxTodoIndex ?
+                        maxTodoIndex : todoScrollIndex;
+                deadlineTaskListPanel.viewScrollTo(deadlineScrollIndex);
+                eventTaskListPanel.viewScrollTo(eventScrollIndex);
+                todoTaskListPanel.viewScrollTo(todoScrollIndex);
+            }
+        });
+    }
 }
