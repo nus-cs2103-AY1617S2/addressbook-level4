@@ -220,15 +220,15 @@ The Model is capable of the following:
 
 You can find the API for this component in [`Task.java`](../src/main/java/seedu/onetwodo/model/task/Task.java)
 
-It is compulsory for a task to have the following parameters: _name_, _isDone_ and _taskType_. Other parameters such as _startDate_, _endDate_, _priority_, _recur_, _description_ and _tag_ are optional. `StartDate` and `EndDate` classes inherit from `Date` class. Do note that every field must be present and cannot be null.
+It is compulsory for a task to have the following parameters: _Name_ and _TaskType_. Other parameters such as _StartDate_, _EndDate_, _Priority_, _Recur_, _Description_ and _Tag_ are optional. A task can have multiple tags. `StartDate` and `EndDate` classes inherit from `Date` class.
 
 A task can be defined in the following ways:
 
-1. **To-do**: A task without a startDate and endDate.
+1. **To-do**: A task without a StartDate and EndDate.
 
-2. **Deadline**: A task with an endDate only.
+2. **Deadline**: A task with an EndDate only.
 
-3. **Event**: A task with both a startDate and an endDate.
+3. **Event**: A task with both a StartDate and an EndDate.
 
 //@@author 
 ### 2.5. Storage component
