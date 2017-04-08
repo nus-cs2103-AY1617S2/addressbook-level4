@@ -33,12 +33,12 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public List<Pair<ReadOnlyTask,Integer>> getSelectedTasks() {
-        ListView<Pair<ReadOnlyTask,Integer>> taskList = getFloatingListView();
+    public List<Pair<ReadOnlyTask, Integer>> getSelectedTasks() {
+        ListView<Pair<ReadOnlyTask, Integer>> taskList = getFloatingListView();
         return taskList.getSelectionModel().getSelectedItems();
     }
 
-    public ListView<Pair<ReadOnlyTask,Integer>> getFloatingListView() {
+    public ListView<Pair<ReadOnlyTask, Integer>> getFloatingListView() {
         ListView<Pair<ReadOnlyTask, Integer>> floatingListView = getNode(FLOATING_TASK_LIST_VIEW_ID);
         return floatingListView;
     }
@@ -101,7 +101,7 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
      * at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
-        List<Pair<ReadOnlyTask,Integer>> tasksInList = getFloatingListView().getItems();
+        List<Pair<ReadOnlyTask, Integer>> tasksInList = getFloatingListView().getItems();
 
         // Return false if the list in panel is too short to contain the given
         // list
@@ -122,7 +122,7 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
 
     public FloatingTaskCardHandle navigateToFloatingTask(String taskname) {
         guiRobot.sleep(500); // Allow a bit of time for the list to be updated
-        final Optional<Pair<ReadOnlyTask,Integer>> task = getFloatingListView().getItems().stream()
+        final Optional<Pair<ReadOnlyTask, Integer>> task = getFloatingListView().getItems().stream()
                 .filter(p -> p.getKey().getTaskName().toString().equals(taskname)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Task name not found: " + taskname);
@@ -151,7 +151,7 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
      * in the list.
      */
     public int getFloatingTaskIndex(ReadOnlyTask targetTask) {
-        List<Pair<ReadOnlyTask,Integer>> tasksInList = getFloatingListView().getItems();
+        List<Pair<ReadOnlyTask, Integer>> tasksInList = getFloatingListView().getItems();
         for (int i = 0; i < tasksInList.size(); i++) {
             if (tasksInList.get(i).getKey().getTaskName().equals(targetTask.getTaskName())) {
                 return i;
@@ -163,7 +163,7 @@ public class FloatingTaskListPanelHandle extends GuiHandle {
     /**
      * Gets a person from the list by index
      */
-    public ReadOnlyTask getTask(int index) {
+    public ReadOnlyTask getFloatingTask(int index) {
         return getFloatingListView().getItems().get(index).getKey();
     }
 

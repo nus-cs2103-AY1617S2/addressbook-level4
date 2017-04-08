@@ -5,7 +5,9 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 
 import org.junit.Test;
 
+import guitests.guihandles.DeadlineTaskCardHandle;
 import guitests.guihandles.EventTaskCardHandle;
+import guitests.guihandles.FloatingTaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
@@ -63,7 +65,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
         String detailsToUpdate = "Lunch BY 04/03/17 1400";
         int filteredTaskListIndex = 1;
-        int taskManagerIndex = 2;
+        int taskManagerIndex = 6;
 
         TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
         TestTask updatedTask = new TaskBuilder(taskToUpdate).withTaskName("Lunch").build();
@@ -130,14 +132,30 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
             TestTask updatedTask) {
         commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
 
-        // confirm the new card contains the right data
-        EventTaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullTaskName);
-        assertMatching(updatedTask, updatedCard);
+        if (updatedTask.isEventTask()) {
+            EventTaskCardHandle updatedCard = eventTaskListPanel
+                    .navigateToEventTask(updatedTask.getTaskName().toString());
+            assertMatching(updatedTask, updatedCard);
+        } else {
+            if (updatedTask.isDeadlineTask()) {
+                DeadlineTaskCardHandle updatedCard = deadlineTaskListPanel
+                        .navigateToDeadlineTask(updatedTask.getTaskName().toString());
+                assertMatching(updatedTask, updatedCard);
+            } else {
+                if (updatedTask.isFloatingTask()) {
+                    FloatingTaskCardHandle updatedCard = floatingTaskListPanel
+                            .navigateToFloatingTask(updatedTask.getTaskName().toString());
+                    assertMatching(updatedTask, updatedCard);
+                }
+            }
+        }
 
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList[taskManagerIndex - 1] = updatedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedTasksList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask));
     }
 }
