@@ -50,14 +50,14 @@ public class ConfigUtilTest {
          */
     }
 
-//    @Test
-//    public void read_fileInOrder_successfullyRead() throws DataConversionException {
-//
-//        Config expected = getTypicalConfig();
-//
-//        Config actual = read("TypicalConfig.json").get();
-//        assertEquals(expected, actual);
-//    }
+    // @Test
+    // public void read_fileInOrder_successfullyRead() throws DataConversionException {
+    //
+    // Config expected = getTypicalConfig();
+    //
+    // Config actual = read("TypicalConfig.json").get();
+    // assertEquals(expected, actual);
+    // }
 
     @Test
     public void read_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
@@ -65,13 +65,13 @@ public class ConfigUtilTest {
         assertEquals(new Config(), actual);
     }
 
-//    @Test
-//    public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
-//        Config expected = getTypicalConfig();
-//        Config actual = read("ExtraValuesConfig.json").get();
-//
-//        assertEquals(expected, actual);
-//    }
+    // @Test
+    // public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
+    // Config expected = getTypicalConfig();
+    // Config actual = read("ExtraValuesConfig.json").get();
+    //
+    // assertEquals(expected, actual);
+    // }
 
     private Config getTypicalConfig() {
         Config config = new Config();
