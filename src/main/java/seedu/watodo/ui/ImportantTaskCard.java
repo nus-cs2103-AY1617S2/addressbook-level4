@@ -38,13 +38,23 @@ public class ImportantTaskCard extends UiPart<Region> {
         initTags(task);
     }
 
+    /**
+     * Changes status text and colour based on status of the task
+     * @param task
+     */
     private void setStatus(ReadOnlyTask task) {
         status.setText(task.getStatus().toString());
         if (task.getStatus().toString().equals("Done")) {
             cardPane.setStyle("-fx-background-color: #5c5c5c;");
+            description.setStyle("-fx-text-fill: green !important;");
         }
     }
 
+    /**
+     * Gets the end date of the task and updates the card
+     * If no date, blank the label
+     * @param task
+     */
     private void setEndDate(ReadOnlyTask task) {
         if (task.getEndDate() != null) {
             endDate.setText("By: " + task.getEndDate());
@@ -53,6 +63,11 @@ public class ImportantTaskCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Gets the start date of the task and updates the card
+     * If no date, blank the label
+     * @param task
+     */
     private void setStartDate(ReadOnlyTask task) {
         if (task.getStartDate() != null) {
             startDate.setText("Start: " + task.getStartDate());

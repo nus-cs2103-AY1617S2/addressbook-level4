@@ -32,25 +32,56 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         description.setText(task.getDescription().fullDescription);
         id.setText(displayedIndex + ". ");
+        setStartDate(task);
+        setEndDate(task);
+        setStatus(task);
+        initTags(task);
+    }
 
-        if (task.getStartDate() != null) {
-            startDate.setText("Start: " + task.getStartDate());
-        } else {
-            startDate.setText("");
+    /**
+     * Changes status text and colour based on status of the task
+     * @param task
+     */
+    private void setStatus(ReadOnlyTask task) {
+        status.setText(task.getStatus().toString());
+        if (task.getStatus().toString().equals("Done")) {
+            cardPane.setStyle("-fx-background-color: #5c5c5c;");
+            description.setStyle("-fx-text-fill: #6dc006;");
+            setLabelsColourGreen();
         }
+    }
 
+    private void setLabelsColourGreen() {
+        status.setStyle("-fx-text-fill: #6dc006;");
+        id.setStyle("-fx-text-fill: #6dc006;");
+        startDate.setStyle("-fx-text-fill: #6dc006;");
+        endDate.setStyle("-fx-text-fill: #6dc006;");
+    }
+
+    /**
+     * Gets the end date of the task and updates the card
+     * If no date, blank the label
+     * @param task
+     */
+    private void setEndDate(ReadOnlyTask task) {
         if (task.getEndDate() != null) {
             endDate.setText("By: " + task.getEndDate());
         } else {
             endDate.setText("");
         }
+    }
 
-        status.setText(task.getStatus().toString());
-        if (task.getStatus().toString().equals("Done")) {
-            cardPane.setStyle("-fx-background-color: #5c5c5c;");
+    /**
+     * Gets the start date of the task and updates the card
+     * If no date, blank the label
+     * @param task
+     */
+    private void setStartDate(ReadOnlyTask task) {
+        if (task.getStartDate() != null) {
+            startDate.setText("Start: " + task.getStartDate());
+        } else {
+            startDate.setText("");
         }
-
-        initTags(task);
     }
 
     private void initTags(ReadOnlyTask person) {
