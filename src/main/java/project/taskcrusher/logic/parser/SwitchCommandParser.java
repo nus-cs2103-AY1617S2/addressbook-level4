@@ -2,6 +2,7 @@ package project.taskcrusher.logic.parser;
 
 import static project.taskcrusher.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_DATE;
+import static project.taskcrusher.logic.parser.CliSyntax.PREFIX_OPTION;
 
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class SwitchCommandParser {
      */
     public Command parse(String args) {
 
-        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE);
+        ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_DATE, PREFIX_OPTION);
         argsTokenizer.tokenize(args);
 
         if (!argsTokenizer.getPreamble().isPresent()) {
@@ -46,8 +47,15 @@ public class SwitchCommandParser {
         }
 
         final String date = ParserUtil.setValue(argsTokenizer, PREFIX_DATE, Deadline.NO_DEADLINE);
+        final String option = ParserUtil.setValue(argsTokenizer, PREFIX_OPTION, Parser.NO_OPTION);
 
-        return new SwitchCommand(preamble[0], index.get(), date);
+        SwitchCommand switched = new SwitchCommand(preamble[0], index.get(), date);
+
+        if (option.equals(Parser.FORCE_OPTION)) {
+            switched.force = true;
+        }
+
+        return switched;
     }
 
 }
