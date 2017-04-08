@@ -14,16 +14,17 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.storage.StorageFileChangeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.TaskManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
@@ -49,11 +50,11 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing TaskManager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -74,20 +75,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        ReadOnlyTaskManager initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskManagerOptional = storage.readTaskManager();
+            if (!taskManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -121,6 +122,7 @@ public class MainApp extends Application {
 
         //Update config file in case it was missing to begin with or there are new/unused fields
         try {
+            initializedConfig.setConfigFilePath(configFilePathUsed);
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
@@ -143,7 +145,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initializedPrefs = new UserPrefs();
         }
 
@@ -163,7 +165,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TaskManager " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -180,11 +182,47 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
+    public void saveConfig() {
+        //Update config file in case it was missing to begin with or there are new/unused fields
+        try {
+            ConfigUtil.saveConfig(config, config.getConfigFilePath());
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+    }
+
+//@@author A0144885R
+    public void reload() {
+        ui.stop();
+        EventsCenter.clearSubscribers();
+
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage);
+        ui = new UiManager(logic, config, userPrefs);
+
+        initEventsCenter();
+
+        ui.start(new Stage());
+    }
+//@@author
+
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
+
+//@@author A0144885R
+    @Subscribe
+    public void handleStorageFileChangeEvent(StorageFileChangeEvent event) {
+        logger.info("============================ [ Restarting Address Book ] =============================");
+
+        config.setTaskManagerFilePath(event.filePath);
+        saveConfig();
+        reload();
+    }
+//@@author
 
     public static void main(String[] args) {
         launch(args);

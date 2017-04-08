@@ -1,31 +1,133 @@
+//@@author A0144885R
+@font-face {
+	font-family: 'Open Sans';
+	src: url('OpenSans-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans Light';
+	src: url('OpenSans-Light.ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans Semibold';
+	src: url('OpenSans-Semibold.ttf');
+}
+
+#taskListPanelPlaceholder {
+	-fx-background-image: url("../images/astronaut.png");
+	-fx-background-repeat: stretch;
+	-fx-background-position: bottom right;
+}
+
+.scroll-pane {
+	-fx-border-width: 0 0 0 0;
+}
+
+.titled-pane {
+	-fx-text-fill: #e74c3c;
+	-fx-font-family: "Open Sans";
+	-fx-font-size: 17px;
+}
+
+.titled-pane > .title {
+	-fx-background-color: white;
+	-fx-background-insets: 0, 1, 2;
+	-fx-border-color: #e74c3c;
+	-fx-border-width: 0 0 1 0;
+}
+
+.titled-pane > .title > .arrow-button .arrow {
+	-fx-background-color: white;
+	-fx-border-color: #e74c3c;
+	-fx-border-width: 1 1 1 1;
+	-fx-background-insets: 1 0 -1 0, 0;
+	-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+	-fx-shape: "M 0 0 h 4 l -2 2 z";
+	-fx-effect: null;
+}
+
+.titled-pane:collapsed > .title > .arrow-button .arrow {
+	-fx-background-color: white;
+	-fx-border-color: #e74c3c;
+	-fx-border-width: 1 1 1 1;
+	-fx-background-insets: 1 0 -1 0, 0;
+	-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+	-fx-shape: "M 0 0 h 4 l -2 2 z";
+	-fx-effect: null;
+}
+
+.titled-pane:collapsed > .title {
+	-fx-border-color: white;
+	-fx-border-width: 0 0 1 0;
+}
+
+.titled-pane > *.content {
+	-fx-background-color: white;
+	-fx-border-width: 0 0 0 0;
+	-fx-font-family: "Open Sans";
+	-fx-effect: null;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.command-box-holder {
+    -fx-background-color: #34495E;
+}
+
+.content-holder {
+	-fx-background-color: #F8F9FA;
+}
+
+.result-display .content {
+	-fx-background-color: white;
+}
+
+.result-display {
+	-fx-background-color: white, white;
+	-fx-font-family: "Open Sans";
+	-fx-line-spacing: 1em;
+}
+
+.result-display:focused .content {
+	-fx-background-color: white;
+}
+
+#commandTextField {
+    -fx-background-color: #34495E;
+	-fx-text-fill: #ecf0f1;
+	-fx-font-family: "Open Sans";
+	-fx-font-size: 17px;
+}
+//@@author
+
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Open Sans";
+    -fx-text-fill: white;
 }
 
 .tab-pane {
@@ -65,7 +167,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -81,7 +183,7 @@
 }
 
 .split-pane {
-    -fx-border-radius: 1;
+    -fx-border-radius: 0;
     -fx-border-width: 1;
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -97,13 +199,15 @@
 }
 
 .cell_big_label {
+	-fx-font-family: "Open Sans" !important;
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #22313F !important;
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
-    -fx-text-fill: #010504;
+	-fx-font-family: "Open Sans Light" !important;
+    -fx-font-size: 15px;
+    -fx-text-fill: #424f5e;
 }
 
 .anchor-pane {
@@ -119,14 +223,6 @@
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-text-fill: black;
-}
-
-.result-display {
-    -fx-background-color: #ffffff;
-}
-
-.result-display .label {
-    -fx-text-fill: black !important;
 }
 
 .status-bar .label {
@@ -167,7 +263,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -187,7 +283,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Open Sans", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -273,9 +369,9 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-color: #d6d6d6;
-    -fx-border-width: 1 1 1 1;
+    -fx-background-color: white;
+	-fx-border-color: #eeeeee;
+    -fx-border-width: 0 0 1 0;
 }
 
 #commandTypeLabel {
@@ -283,7 +379,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

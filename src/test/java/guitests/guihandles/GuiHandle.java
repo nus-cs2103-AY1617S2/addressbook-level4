@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
@@ -10,8 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.task.TestApp;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -72,6 +73,14 @@ public class GuiHandle {
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
+    }
+
+    public Node getNodeWithID(String nodeId) {
+        return guiRobot.lookup(nodeId).query();
+    }
+
+    public Set<Node> getSetNodesWithID(String nodeId) {
+        return guiRobot.lookup(nodeId).queryAll();
     }
 
     public void focusOnSelf() {

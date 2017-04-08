@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Go fly kite</name>
+        <deadline>Mon, Feb 27 2017</deadline>
+        <description>Flying kite at park</description>
+        <tagged>friends</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy christmas presents</name>
+        <deadline>Sat, Dec 23 2017</deadline>
+        <description>Buy presents for Familiy and Friends</description>
+        <tagged>christmas</tagged>
+        <tagged>presents</tagged>
+    </tasks>
+    <tasks>
+        <name>Meeting with Charlotte Oliveiro</name>
+        <deadline>Thu, Feb 02 2017</deadline>
+        <description>Prepare for Meeting with Charlotte</description>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>Dinner outing with family</name>
+        <deadline>Sun, Dec 17 2017</deadline>
+        <description>Going to the zoo with family</description>
+        <tagged>zoo</tagged>
+        <tagged>family</tagged>
+    </tasks>
+    <tasks>
+        <name>Class reunion</name>
+        <deadline>Mon, Jan 15 2018</deadline>
+        <description>Secondary school class reunion</description>
+        <tagged>classmates</tagged>
+    </tasks>
+    <tasks>
+        <name>Company meeting</name>
+        <deadline>Thu, May 04 2017</deadline>
+        <description>Prepare for company meeting</description>
+        <tagged>important</tagged>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>newtask</name>
+        <deadline>Fri, Mar 10 2017</deadline>
+        <description>buy eggs</description>
+        <tagged>no</tagged>
+    </tasks>
+    <tags>friends</tags>
+    <tags>presents</tags>
+    <tags>christmas</tags>
+    <tags>important</tags>
+    <tags>meeting</tags>
+    <tags>family</tags>
+    <tags>zoo</tags>
+    <tags>classmates</tags>
+</taskmanager>
