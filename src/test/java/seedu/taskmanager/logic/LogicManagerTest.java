@@ -596,8 +596,10 @@ public class LogicManagerTest {
     @Test
     public void executeFindDateInvalidArgs() throws Exception {
         assertCommandFailure("findbydate no date", FindDateCommand.MESSAGE_INVALID_RANGE);
-        assertCommandFailure("findbydate", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
-        assertCommandFailure("findbydate yesterday to today to next week", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
+        assertCommandFailure("findbydate",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
+        assertCommandFailure("findbydate yesterday to today to next week",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDateCommand.MESSAGE_USAGE));
         assertCommandFailure("findbydate today to no date", FindDateCommand.MESSAGE_INVALID_RANGE);
         assertCommandFailure("findbydate no date to no date", FindDateCommand.MESSAGE_INVALID_RANGE);
     }
@@ -616,9 +618,8 @@ public class LogicManagerTest {
         assertCommandSuccess("findbydate 10 june 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE,
                 "10/06/2017", Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM,
                 expectedList);
-        assertCommandSuccess("findbydate 10/06/2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE,
-                "10/06/2017", Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM,
-                expectedList);
+        assertCommandSuccess("findbydate 10/06/2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE, "10/06/2017",
+                Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM, expectedList);
     }
 
     @Test
