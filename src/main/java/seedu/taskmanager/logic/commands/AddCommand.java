@@ -1,9 +1,13 @@
 package seedu.taskmanager.logic.commands;
 
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO_INDEX;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.taskmanager.commons.core.EventsCenter;
+import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.Tag;
@@ -71,6 +75,8 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            EventsCenter.getInstance().post(new TabSelectionChangedEvent(TAB_TO_DO_INDEX));
+            model.highlightTask(toAdd);  
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

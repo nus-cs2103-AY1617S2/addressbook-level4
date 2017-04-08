@@ -65,10 +65,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0131278H
+    @Override
     public String getSelectedTab() {
         return selectedTab;
     }
 
+    @Override
     public void setSelectedTab(String currentTab) {
         this.selectedTab = currentTab;
     }
@@ -107,36 +109,33 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        // @@author A0131278H
-        int index = getSelectedTaskList().indexOf(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        indicateJumpToListRequestEvent(index);
-        // @@author
     }
 
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
-
         // @@author A0131278H
         ReadOnlyTask taskToEdit = getSelectedTaskList().get(filteredTaskListIndex);
-        int actualIndex = filteredTasks.indexOf(taskToEdit);
-        int taskManagerIndex = filteredTasks.getSourceIndex(actualIndex);
+        int indexInFullList = filteredTasks.indexOf(taskToEdit);
+        int taskManagerIndex = filteredTasks.getSourceIndex(indexInFullList);
         taskManager.updateTask(taskManagerIndex, editedTask);
-        int updatedIndex = getSelectedTaskList().indexOf(editedTask);
         indicateTaskManagerChanged();
-        indicateJumpToListRequestEvent(updatedIndex);
-        // @@author
     }
 
-    // @@author A0131278H
     @Override
     public void sortTasks(String keyword) {
         taskManager.sortByDate(keyword);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+    }
+
+    @Override
+    public void highlightTask(ReadOnlyTask task) {
+        int targetIndex = getSelectedTaskList().indexOf(task);
+        indicateJumpToListRequestEvent(targetIndex);
     }
     // @@author
 
@@ -200,9 +199,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     // @@author
 
-    // @@author A0131278H
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
+        // @@author A0131278H
         filteredToDoTasks.setPredicate(expression::satisfies);
         filteredDoneTasks.setPredicate(expression::satisfies);
     }

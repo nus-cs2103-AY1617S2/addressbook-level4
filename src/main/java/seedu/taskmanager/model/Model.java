@@ -32,6 +32,11 @@ public interface Model {
      * Sorts task list based on keywords (startdate or enddate).
      */
     void sortTasks(String keyword);
+    
+    /**
+     * highlights changed task in task list.
+     */
+    void highlightTask(ReadOnlyTask task);
 
     /** Returns the current tab selected. */
     String getSelectedTab();
@@ -100,5 +105,4 @@ public interface Model {
     /** Sets the currently selected tab in model */
     void setSelectedTab(String selectedTab);
     // @@author
-
 }
