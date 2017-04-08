@@ -1,10 +1,13 @@
 package seedu.watodo.logic.commands;
 
-import seedu.watodo.commons.core.Messages;
+import java.util.Stack;
+
 import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
+import seedu.watodo.model.task.UniqueTaskList;
 import seedu.watodo.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.watodo.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -21,61 +24,111 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
-    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate.";
+    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate."; //TODO merv to use
 
+    private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
+    public static final String MESSAGE_DELETE_TASK_SUCCESSFUL = "Task #%1$d deleted: %2$s";
+    private static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
+    public static final String MESSAGE_STATUS_ALREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
-
     private ReadOnlyTask taskToDelete;
+
+    private Stack< Task > deletedTaskList;
 
     public DeleteCommand(int[] args) {
         this.filteredTaskListIndices = args;
+        changeToZeroBasedIndexing();
+        deletedTaskList = new Stack< Task >();
+    }
 
+    /** Converts filteredTaskListIndex from one-based to zero-based. */
+    private void changeToZeroBasedIndexing() {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            assert filteredTaskListIndices != null;
-            assert filteredTaskListIndices.length > 0;
             assert filteredTaskListIndices[i] > 0;
-
-            // converts filteredTaskListIndex to from one-based to zero-based.
             filteredTaskListIndices[i] = filteredTaskListIndices[i] - 1;
         }
     }
 
-
     @Override
     public CommandResult execute() throws CommandException {
-        final StringBuilder tasksDeletedMessage = new StringBuilder();
+        final StringBuilder compiledExecutionMessage = new StringBuilder();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        boolean executionIncomplete = false;
 
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-            if (filteredTaskListIndices[i] >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
-            taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
-
+            clearClassTaskVariables();
             try {
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
+                checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
+                deleteTaskAtIndex(filteredTaskListIndices[i], lastShownList);
+                compiledExecutionMessage.append(String.format(MESSAGE_DELETE_TASK_SUCCESSFUL,
+                        filteredTaskListIndices[i] + 1, this.taskToDelete) + '\n');
 
-            tasksDeletedMessage.append(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete) + "\n");
+            } catch (IllegalValueException | TaskNotFoundException e) {
+                // Moves on to next index even if current index execution is unsuccessful. CommandException thrown later
+                executionIncomplete = true;
+                e.printStackTrace();
+                compiledExecutionMessage.append(String.format(MESSAGE_DELETE_TASK_UNSUCCESSFUL,
+                        filteredTaskListIndices[i] + 1) + '\n' + e.getMessage() + '\n');
+            }
         }
 
-        return new CommandResult(tasksDeletedMessage.toString());
+        if (executionIncomplete) {
+            if (multipleExectutions(filteredTaskListIndices)) {
+                compiledExecutionMessage.insert(0, MESSAGE_INCOMPLETE_EXECUTION + '\n');
+            }
+            throw new CommandException(compiledExecutionMessage.toString());
+        }
+
+        return new CommandResult(compiledExecutionMessage.toString());
     }
 
+    private void clearClassTaskVariables() {
+        this.taskToDelete = null;
+    }
+
+    private boolean multipleExectutions(int[] filteredTaskListIndices) {
+        return (filteredTaskListIndices.length > 1) ? true : false;
+    }
+
+    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws IllegalValueException {
+        if (currIndex >= lastShownList.size()) {
+            throw new IllegalValueException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+        }
+    }
+
+    private void deleteTaskAtIndex(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws UniqueTaskList.TaskNotFoundException {
+        this.taskToDelete = getTaskToDelete(currIndex, lastShownList);
+        deleteTask(taskToDelete);
+        storeTasksForUndo(taskToDelete);
+    }
+
+    private ReadOnlyTask getTaskToDelete(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
+        return lastShownList.get(currIndex);
+    }
+
+    private void deleteTask(ReadOnlyTask taskToDelete) throws UniqueTaskList.TaskNotFoundException {
+        model.deleteTask(taskToDelete);
+    }
+
+    private void storeTasksForUndo(ReadOnlyTask taskToDelete) {
+        this.deletedTaskList.push(new Task(taskToDelete));
+    }
+
+    //@@author A0139845R-reused
     @Override
     public void unexecute() {
         assert model != null;
 
         try {
-
-            model.addTask(new Task(taskToDelete));
+            while (!deletedTaskList.isEmpty()) {
+                model.addTask(deletedTaskList.pop());
+            }
             model.updateFilteredListToShowAll();
+
         } catch (DuplicateTaskException e) {
 
         }
@@ -92,7 +145,9 @@ public class DeleteCommand extends Command {
 
         }
     }
-  
+
+    //@@author
+
     @Override
     public String toString() {
         return COMMAND_WORD;

@@ -41,7 +41,7 @@ public class DeleteCommandParser {
         String[] indicesInStringArray = args.split("\\s+");
         this.filteredTaskListIndices = new int[indicesInStringArray.length];
 
-        //Sets filteredTaskListIndices[i] as NEGATIVE_NUMBER if indicesInStringArray[i] is not a positive unsigned integer
+        //Sets index as NEGATIVE_NUMBER if it is not a positive unsigned integer
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             Optional<Integer> optionalIndex = ParserUtil.parseIndex(indicesInStringArray[i]);
             filteredTaskListIndices[i] = optionalIndex.orElse(NEGATIVE_NUMBER);
@@ -51,7 +51,8 @@ public class DeleteCommandParser {
     private void checkValidIndices() throws IllegalValueException {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
-                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' + DeleteCommand.MESSAGE_USAGE);
+                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
+                        DeleteCommand.MESSAGE_USAGE);
             }
         }
     }

@@ -30,18 +30,14 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_UNMARK_TASK_SUCCESSFUL = "Task #%1$d marked undone: %2$s";
     private static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
-    public static final String MESSAGE_STATUS_AlREADY_UNDONE = "The task status is already set to Undone.";
-
+    public static final String MESSAGE_STATUS_ALREADY_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
     private ReadOnlyTask taskToUnmark;
     private Task unmarkedTask;
 
-    //private int indexForUndoUnmark;
-    //private Task markedTaskForUndoUnmark;
     private Stack< Task > taskToUnmarkList;
     private Stack< Task > unmarkedTaskList;
-
 
     public UnmarkCommand(int[] args) {
         this.filteredTaskListIndices = args;
@@ -49,7 +45,6 @@ public class UnmarkCommand extends Command {
         taskToUnmarkList = new Stack< Task >();
         unmarkedTaskList = new Stack< Task >();
     }
-
 
     /** Converts filteredTaskListIndex from one-based to zero-based. */
     private void changeToZeroBasedIndexing() {
@@ -70,15 +65,15 @@ public class UnmarkCommand extends Command {
             try {
                 checkIndexIsWithinBounds(filteredTaskListIndices[i], lastShownList);
                 unmarkTaskAtIndex(filteredTaskListIndices[i], lastShownList);
-                compiledExecutionMessage.append(
-                        String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL, filteredTaskListIndices[i]+1, this.taskToUnmark) + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESSFUL,
+                        filteredTaskListIndices[i] + 1, this.taskToUnmark) + '\n');
 
             } catch (IllegalValueException | CommandException e) {
-                // Moves on to next index even if execution of current index is unsuccessful. CommandException thrown later.
+                // Moves on to next index even if current index execution is unsuccessful. CommandException thrown later
                 executionIncomplete = true;
                 e.printStackTrace();
-                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_UNSUCCESSFUL, filteredTaskListIndices[i]+1)
-                        + '\n' + e.getMessage() + '\n');
+                compiledExecutionMessage.append(String.format(MESSAGE_UNMARK_TASK_UNSUCCESSFUL,
+                        filteredTaskListIndices[i] + 1) + '\n' + e.getMessage() + '\n');
             }
         }
 
@@ -101,7 +96,8 @@ public class UnmarkCommand extends Command {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
-    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) throws IllegalValueException {
+    private void checkIndexIsWithinBounds(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList)
+            throws IllegalValueException {
         if (currIndex >= lastShownList.size()) {
             throw new IllegalValueException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
@@ -111,17 +107,13 @@ public class UnmarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToUnmark = getTaskToUnmark(currIndex, lastShownList);
         this.unmarkedTask = createUnmarkedCopyOfTask(this.taskToUnmark);
-
-        storeUnmarkedTaskForUndo(this.taskToUnmark, this.unmarkedTask);
-
-
         updateTaskListAtIndex(currIndex, unmarkedTask);
+        storeTasksForUndo(taskToUnmark, unmarkedTask);
     }
 
     private ReadOnlyTask getTaskToUnmark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
         return lastShownList.get(currIndex);
     }
-
 
     private Task createUnmarkedCopyOfTask(ReadOnlyTask taskToUnmark) throws CommandException {
         assert taskToUnmark != null;
@@ -133,7 +125,7 @@ public class UnmarkCommand extends Command {
 
     private void checkCurrentTaskStatusIsDone(ReadOnlyTask taskToUnmark) throws CommandException {
         if (taskToUnmark.getStatus() == TaskStatus.UNDONE) {
-            throw new CommandException(MESSAGE_STATUS_AlREADY_UNDONE);
+            throw new CommandException(MESSAGE_STATUS_ALREADY_UNDONE);
         }
     }
 
@@ -147,13 +139,11 @@ public class UnmarkCommand extends Command {
         return unmarkedTask;
     }
 
-    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException{
+    private void updateTaskListAtIndex(int currIndex, Task unmarkedTask) throws UniqueTaskList.DuplicateTaskException {
         model.updateTask(currIndex, unmarkedTask);
     }
 
-    private void storeUnmarkedTaskForUndo(ReadOnlyTask taskToUnmark, Task unmarkedTask) {
-        //this.indexForUndoUnmark = currIndex;
-        //this.markedTaskForUndoUnmark = new Task(taskToUnmark);
+    private void storeTasksForUndo(ReadOnlyTask taskToUnmark, Task unmarkedTask) {
         this.taskToUnmarkList.push(new Task(taskToUnmark));
         this.unmarkedTaskList.push(unmarkedTask);
     }
