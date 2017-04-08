@@ -35,6 +35,10 @@ public class DateUtilApache {
         Parser nattyParser = new Parser();
         Date parsed = null;
         boolean needsTimeAdjustment = false;
+
+        if (nattyParser.parse(toParse).size() < 1) {
+            throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
+        }
         List<Date> tempDateList = nattyParser.parse(toParse).get(0).getDates();
 
         if (tempDateList != null && tempDateList.size() > 0) {
@@ -63,6 +67,10 @@ public class DateUtilApache {
     public static DateGroup parseDateAsDateGroup(String toParse) throws IllegalValueException {
 
         Parser nattyParser = new Parser();
+
+        if (nattyParser.parse(toParse).size() < 1) {
+            throw new IllegalValueException(MESSAGE_DATE_NOT_FOUND);
+        }
 
         List<Date> tempDateList = nattyParser.parse(toParse).get(0).getDates();
 
