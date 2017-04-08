@@ -33,12 +33,12 @@ public class DeadlineTaskListPanelHandle extends GuiHandle {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
 
-    public List<Pair<ReadOnlyTask,Integer>> getSelectedTasks() {
-        ListView<Pair<ReadOnlyTask,Integer>> taskList = getDeadlineListView();
+    public List<Pair<ReadOnlyTask, Integer>> getSelectedTasks() {
+        ListView<Pair<ReadOnlyTask, Integer>> taskList = getDeadlineListView();
         return taskList.getSelectionModel().getSelectedItems();
     }
 
-    public ListView<Pair<ReadOnlyTask,Integer>> getDeadlineListView() {
+    public ListView<Pair<ReadOnlyTask, Integer>> getDeadlineListView() {
         ListView<Pair<ReadOnlyTask, Integer>> deadlineListView = getNode(DEADLINE_TASK_LIST_VIEW_ID);
         return deadlineListView;
     }
@@ -101,7 +101,7 @@ public class DeadlineTaskListPanelHandle extends GuiHandle {
      * at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
-        List<Pair<ReadOnlyTask,Integer>> tasksInList = getDeadlineListView().getItems();
+        List<Pair<ReadOnlyTask, Integer>> tasksInList = getDeadlineListView().getItems();
 
         // Return false if the list in panel is too short to contain the given
         // list
@@ -122,7 +122,7 @@ public class DeadlineTaskListPanelHandle extends GuiHandle {
 
     public DeadlineTaskCardHandle navigateToDeadlineTask(String taskname) {
         guiRobot.sleep(500); // Allow a bit of time for the list to be updated
-        final Optional<Pair<ReadOnlyTask,Integer>> task = getDeadlineListView().getItems().stream()
+        final Optional<Pair<ReadOnlyTask, Integer>> task = getDeadlineListView().getItems().stream()
                 .filter(p -> p.getKey().getTaskName().toString().equals(taskname)).findAny();
         if (!task.isPresent()) {
             throw new IllegalStateException("Task name not found: " + taskname);
@@ -151,7 +151,7 @@ public class DeadlineTaskListPanelHandle extends GuiHandle {
      * in the list.
      */
     public int getDeadlineTaskIndex(ReadOnlyTask targetTask) {
-        List<Pair<ReadOnlyTask,Integer>> tasksInList = getDeadlineListView().getItems();
+        List<Pair<ReadOnlyTask, Integer>> tasksInList = getDeadlineListView().getItems();
         for (int i = 0; i < tasksInList.size(); i++) {
             if (tasksInList.get(i).getKey().getTaskName().equals(targetTask.getTaskName())) {
                 return i;
@@ -163,7 +163,7 @@ public class DeadlineTaskListPanelHandle extends GuiHandle {
     /**
      * Gets a person from the list by index
      */
-    public ReadOnlyTask getTask(int index) {
+    public ReadOnlyTask getDeadlineTask(int index) {
         return getDeadlineListView().getItems().get(index).getKey();
     }
 
