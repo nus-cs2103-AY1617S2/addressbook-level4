@@ -126,7 +126,7 @@ public interface ReadOnlyTask {
 
     /**
      * Combines multiple comparators together to compare tasks.
-     * For example if you want to sort by end time then by priority,
+     * For example, if you want to sort by end time then by priority,
      * you create a list of comparators, adding the end time comparator first
      * then adding the priority comparator.
      * @return: -1 task1 is compared to be "less" than task2 based on multiple comparators
