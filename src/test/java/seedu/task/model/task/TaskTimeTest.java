@@ -9,7 +9,7 @@ public class TaskTimeTest {
 
 	@Test
 	public void validDate() {
-
+		
 		// valid dates
 		try {
 			assertEquals("09:45",new TaskTime("0945").toString());
@@ -29,7 +29,7 @@ public class TaskTimeTest {
 			TaskTime time = new TaskTime("2533");
 			time = new TaskTime("1261");
 			time = new TaskTime("this is invalid");
-
+			
 			fail("invalid time is parsed");
 		} catch (Exception e) {
 

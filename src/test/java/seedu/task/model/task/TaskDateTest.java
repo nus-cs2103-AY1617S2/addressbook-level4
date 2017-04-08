@@ -9,13 +9,13 @@ public class TaskDateTest {
 
 	@Test
 	public void validDate() {
-
+		
 		// valid dates
 		try {
 			assertEquals("4/4/17",new TaskDate("040417").toString());
 			assertEquals("4/4/17 - 5/5/17",new TaskDate("040417 050517").toString());
 			assertEquals("4/4/17 - 5/5/17",new TaskDate("040417-050517").toString());
-
+			
 			TaskDate date = new TaskDate("tmr");
 			date = new TaskDate("today tmr");
 			date = new TaskDate("next Saturday");
@@ -30,7 +30,7 @@ public class TaskDateTest {
 			date = new TaskDate("this is an invalid input");
 			date = new TaskDate("999999");
 			date = new TaskDate("030317 020217");
-
+			
 			fail("invalid date is parsed");
 		} catch (Exception e) {
 
