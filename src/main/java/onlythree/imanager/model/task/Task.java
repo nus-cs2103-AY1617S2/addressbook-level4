@@ -28,15 +28,30 @@ public class Task implements ReadOnlyTask {
     private Optional<Deadline> deadline;
 
     //@@author A0135998H
-    private boolean done;
+    private boolean complete;
 
     //@@author A0140023E
     /**
-     * Every field must not be null except for the {@code Optional} fields.
-     * @throws IllegalValueException if the Task to be constructed has both Deadline and StartEndDateTime
+     * Every field must not be null except for the {@code Optional} fields. The task is
+     * automatically initialized as not complete.
+     *
+     * @throws IllegalValueException if the Task to be constructed has both Deadline and
+     *         StartEndDateTime
      */
     public Task(Name name, Optional<Deadline> deadline, Optional<StartEndDateTime> startEndDateTime,
             UniqueTagList tags) throws IllegalValueException {
+        this(name, deadline, startEndDateTime, tags, false);
+    }
+
+    /**
+     * Every field must not be null except for the {@code Optional} fields. This constructor
+     * requires whether the task is complete to be specified.
+     *
+     * @throws IllegalValueException if the Task to be constructed has both Deadline and
+     *         StartEndDateTime
+     */
+    public Task(Name name, Optional<Deadline> deadline, Optional<StartEndDateTime> startEndDateTime,
+            UniqueTagList tags, boolean isComplete) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(name, deadline, startEndDateTime, tags);
 
         if (deadline.isPresent() && startEndDateTime.isPresent()) {
@@ -47,7 +62,7 @@ public class Task implements ReadOnlyTask {
         this.deadline = deadline;
         this.startEndDateTime = startEndDateTime;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.done = false;
+        this.complete = isComplete;
     }
 
     /**
@@ -55,8 +70,8 @@ public class Task implements ReadOnlyTask {
      * @throws IllegalValueException if the ReadOnlyTask to be copied has both Deadline and StartEndDateTime
      */
     public Task(ReadOnlyTask source) throws IllegalValueException {
-        this(source.getName(), source.getDeadline(), source.getStartEndDateTime(), source.getTags());
-        done = source.isDone();
+        this(source.getName(), source.getDeadline(), source.getStartEndDateTime(), source.getTags(),
+             source.isComplete());
     }
 
     //@@author
@@ -86,12 +101,12 @@ public class Task implements ReadOnlyTask {
 
     //@@author A0135998H
     @Override
-    public boolean isDone() {
-        return done;
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setDone(boolean status) {
-        done = status;
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     //@@author A0140023E
@@ -139,7 +154,7 @@ public class Task implements ReadOnlyTask {
         deadline = replacement.getDeadline();
         // Similarly for startEndDateTime we are reusing same Optional
         startEndDateTime = replacement.getStartEndDateTime();
-        done = replacement.isDone();
+        complete = replacement.isComplete();
         setTags(replacement.getTags());
     }
 
@@ -154,7 +169,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(name, deadline, startEndDateTime, tags, complete);
     }
 
     @Override

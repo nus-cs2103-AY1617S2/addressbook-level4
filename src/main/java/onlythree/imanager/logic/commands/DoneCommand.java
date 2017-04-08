@@ -54,7 +54,7 @@ public class DoneCommand extends Command {
             throw new AssertionError("Copying a valid task should always result in a valid task");
         }
         /* switch status of task */
-        editedTask.setDone(!(taskToEdit.isDone()));
+        editedTask.setComplete(!(taskToEdit.isComplete()));
 
         try {
             model.updateTask(filteredTaskListIndex, editedTask);

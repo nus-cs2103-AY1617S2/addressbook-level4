@@ -38,7 +38,7 @@ public interface ReadOnlyTask {
     /**
      * Gets the status of the task.
      */
-    boolean isDone();
+    boolean isComplete();
 
     //@@author A0140023E
     /**
@@ -113,7 +113,7 @@ public interface ReadOnlyTask {
 
     //@@author A0135998H
     default void buildDoneString(final StringBuilder builder) {
-        if (isDone()) {
+        if (isComplete()) {
             builder.append("Status: Completed");
         } else {
             builder.append("Status: Not Completed");

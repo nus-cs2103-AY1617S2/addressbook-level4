@@ -33,12 +33,12 @@ public class TaskBuilder {
     }
 
     //@@author A0140023E
-    public TaskBuilder withDeadline(Deadline deadline) throws IllegalValueException {
+    public TaskBuilder withDeadline(Deadline deadline) {
         task.setDeadline(deadline);
         return this;
     }
 
-    public TaskBuilder withStartEndDateTime(StartEndDateTime startEndDateTime) throws IllegalValueException {
+    public TaskBuilder withStartEndDateTime(StartEndDateTime startEndDateTime) {
         task.setStartEndDateTime(startEndDateTime);
         return this;
     }
@@ -52,6 +52,13 @@ public class TaskBuilder {
         return this;
     }
 
+    //@@author A0140023E
+    public TaskBuilder withComplete(boolean isComplete) {
+        task.setComplete(isComplete);
+        return this;
+    }
+
+    //@@author
     public TestTask build() {
         return task;
     }

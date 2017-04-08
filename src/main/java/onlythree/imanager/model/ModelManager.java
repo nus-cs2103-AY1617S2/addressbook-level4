@@ -191,7 +191,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowDone() {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
-            return task.isDone();
+            return task.isComplete();
         });
         indicateViewListChanged(ViewCommand.TYPE_DONE);
     }
@@ -199,7 +199,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowFloating() {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
-            return isFloating(task) && !(task.isDone());
+            return isFloating(task) && !(task.isComplete());
         });
         indicateViewListChanged(ViewCommand.TYPE_FLOATING);
     }
@@ -207,7 +207,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowOverdue() {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
-            return isOverdue(task) && !(task.isDone());
+            return isOverdue(task) && !(task.isComplete());
         });
         indicateViewListChanged(ViewCommand.TYPE_OVERDUE);
     }
@@ -215,8 +215,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowPending() {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
-            System.out.println(!task.isDone());
-            return !(task.isDone());
+            return !(task.isComplete());
         });
         indicateViewListChanged(ViewCommand.TYPE_PENDING);
     }
@@ -224,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowToday() {
         filteredTasks.setPredicate((Predicate<? super ReadOnlyTask>) task -> {
-            return isToday(task) && !(task.isDone());
+            return isToday(task) && !(task.isComplete());
         });
         indicateViewListChanged(ViewCommand.TYPE_TODAY);
     }

@@ -16,7 +16,6 @@ import onlythree.imanager.model.tag.Tag;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.Task;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
-import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
 /**
  * An Immutable TaskList that is serializable to XML format
@@ -24,7 +23,7 @@ import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 @XmlRootElement(name = "tasklist")
 public class XmlSerializableTaskList implements ReadOnlyTaskList {
 
-    @XmlElement
+    @XmlElement(name = "task")
     private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<XmlAdaptedTag> tags;
@@ -47,21 +46,14 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
-    //@@author A0140023E
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
         final ObservableList<Task> tasks = this.tasks.stream().map(p -> {
             try {
                 return p.toModelType();
-            } catch (PastDateTimeException e) {
-                // this should never happen as we loaded from storage
-                // TODO should we handle this differently or earlier?
-                return null;
             } catch (InvalidDurationException e) {
-                // TODO should we handle this earlier?
                 return null;
             } catch (IllegalValueException e) {
-                e.printStackTrace();
                 //TODO: better error handling
                 return null;
             }
@@ -69,7 +61,6 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
         return new UnmodifiableObservableList<>(tasks);
     }
 
-    //@@author
     @Override
     public ObservableList<Tag> getTagList() {
         final ObservableList<Tag> tags = this.tags.stream().map(t -> {
