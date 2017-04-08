@@ -17,8 +17,9 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = "";
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s as complete";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": toggles the complete status of a task.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: mark 3";
 
     private final int filteredTaskListIndex;
 
