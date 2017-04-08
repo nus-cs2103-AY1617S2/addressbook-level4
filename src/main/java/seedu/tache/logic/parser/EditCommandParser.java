@@ -6,13 +6,15 @@ import static seedu.tache.logic.parser.CliSyntax.DELIMITER_EDIT_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER_TEST;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_TEST;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
+import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE_TEST;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
-
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
@@ -77,11 +79,12 @@ public class EditCommandParser {
 
             //Process Other Arguments
             int indexOfFirstAndChange = argsInProcess.indexOf(KEYWORDS_EDIT_MULTI_PARAMETER);
-            if (indexOfFirstAndChange == -1) {
-                return processNaturalSingleParameterEdit(index, argsInProcess);
-            } else {
-                return processNaturalMultiParameterEdit(index, indexOfFirstAndChange, argsInProcess);
-            }
+            //if (indexOfFirstAndChange == -1) {
+                //return processNaturalSingleParameterEdit(index, argsInProcess);
+            //} else {
+                //return processNaturalMultiParameterEdit(index, indexOfFirstAndChange, argsInProcess);
+                return processNaturalMultiParameterEdit2(index, argsInProcess);
+            //}
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditCommand.MESSAGE_USAGE));
@@ -209,6 +212,64 @@ public class EditCommandParser {
                         EditCommand.MESSAGE_USAGE));
             }
         }
+        String structuredArgument = index.get() + DELIMITER_PARAMETER;
+        for (int i = 0; i < updateParameterList.size(); i++) {
+            structuredArgument += updateParameterList.get(i) + DELIMITER_EDIT_PARAMETER
+                                + updateValueList.get(i) + DELIMITER_EDIT_PARAMETER + DELIMITER_PARAMETER;
+        }
+        return parseStructuredArguments(structuredArgument);
+    }
+
+    /**
+     * Process the given {@code String} of arguments that contains only multiple parameters of interest
+     * that is of a natural language format and returns an EditCommand object for execution.
+     */
+    private Command processNaturalMultiParameterEdit2 (Optional<Integer> index, String argsInProcess) {
+        String[] argsInProcessElements = argsInProcess.trim().split(DELIMITER_EDIT_PARAMETER);
+        ArrayList<String> updateParameterList = new ArrayList<String>();
+        ArrayList<String> updateValueList = new ArrayList<String>();
+
+        if (!argsInProcessElements[0].equals(KEYWORD_EDIT_PARAMETER_TEST)) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
+
+        boolean processingParameter = false;
+        String currentParameter = "";
+        String currentValue = "";
+        for (int i = 1; i < argsInProcessElements.length; i++) {
+            if (ParserUtil.isValidParameter(argsInProcessElements[i]) && !processingParameter) {
+                if (argsInProcessElements[i + 1] != null
+                        && argsInProcessElements[i + 1].equals(KEYWORD_EDIT_PARAMETER_VALUE_TEST)) {
+                    processingParameter = true;
+                    currentParameter = argsInProcessElements[i];
+                    i++;
+                    continue;
+                }
+            }
+            if (processingParameter) {
+                //Parameter Value Termination Condition Check
+                if (argsInProcessElements[i].equals(KEYWORD_EDIT_MULTI_PARAMETER_TEST)
+                        && (i + 1 < argsInProcessElements.length)
+                        && ParserUtil.isValidParameter(argsInProcessElements[i + 1])
+                        && (i + 2 < argsInProcessElements.length)
+                        && argsInProcessElements[i + 2].equals(KEYWORD_EDIT_PARAMETER_VALUE_TEST)) {
+                    processingParameter = false;
+                    updateParameterList.add(currentParameter);
+                    updateValueList.add(currentValue.trim());
+                    currentValue = "";
+                } else if (i + 1 == argsInProcessElements.length) {
+                    currentValue += " " + argsInProcessElements[i];
+                    processingParameter = false;
+                    updateParameterList.add(currentParameter);
+                    updateValueList.add(currentValue.trim());
+                    currentValue = "";
+                } else {
+                    currentValue += " " + argsInProcessElements[i];
+                }
+            }
+        }
+
         String structuredArgument = index.get() + DELIMITER_PARAMETER;
         for (int i = 0; i < updateParameterList.size(); i++) {
             structuredArgument += updateParameterList.get(i) + DELIMITER_EDIT_PARAMETER
