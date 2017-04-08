@@ -43,6 +43,7 @@ import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
+import seedu.taskmanager.logic.commands.SaveAsCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.UndoneCommand;
@@ -741,14 +742,22 @@ public class LogicManagerTest {
     public void execute_load_invalidFilePath() throws Exception {
         assertCommandFailure("load !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
-        assertCommandFailure("load data/taskmanager",
+        assertCommandFailure("open data/taskmanager",
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void execute_load_invalidXmlFile() throws Exception {
         assertCommandFailure("load src/test/data/cd_test/empty.xml", LoadCommand.MESSAGE_INVALID_DATA);
-        assertCommandFailure("load src/test/data/cd_test/invalid.xml", LoadCommand.MESSAGE_INVALID_DATA);
+        assertCommandFailure("open src/test/data/cd_test/invalid.xml", LoadCommand.MESSAGE_INVALID_DATA);
+    }
+
+    @Test
+    public void execute_save_invalidFilePath() throws Exception {
+        assertCommandFailure("save !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+        assertCommandFailure("saveas data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -821,6 +830,23 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandFailure("undone 3", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_FAILURE));
+    }
+
+    @Test
+    public void execute_undone_duplicateFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+        Task tTarget4 = helper.generateTaskWithStatus(1, true);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3, tTarget4);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandFailure("undone 1", String.format(UndoneCommand.MESSAGE_DUPLICATE_TASK));
     }
     // @@author
 
