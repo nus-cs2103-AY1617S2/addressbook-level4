@@ -109,6 +109,9 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void handle(KeyEvent event) {
                 String userInput;
+                if (userInputs.isEmpty()) {
+                    return;
+                }
                 if (event.getCode() == KeyCode.UP && currentUserInputIndex >= 0) {
                     currentUserInputIndex--;
                     userInput = userInputs.get(currentUserInputIndex);
