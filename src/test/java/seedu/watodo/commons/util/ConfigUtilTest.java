@@ -73,11 +73,11 @@ public class ConfigUtilTest {
 
     private Config getTypicalConfig() {
         Config config = new Config();
-        config.setAppTitle("Typical App Title");
+        config.setAppTitle("Watodo");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setWatodoFilePath("watodo.xml");
-        config.setWatodoName("TypicalWatodoName");
+        config.setWatodoFilePath("data/watodo.xml");
+        config.setWatodoName("My Tasks");
         return config;
     }
 
@@ -124,8 +124,8 @@ public class ConfigUtilTest {
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
         return configFileInTestDataFolder != null
-                                  ? TEST_DATA_FOLDER + configFileInTestDataFolder
-                                  : null;
+                ? TEST_DATA_FOLDER + configFileInTestDataFolder
+                        : null;
     }
 
 

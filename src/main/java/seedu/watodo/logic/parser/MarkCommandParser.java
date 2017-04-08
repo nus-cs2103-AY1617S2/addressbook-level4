@@ -3,8 +3,10 @@ package seedu.watodo.logic.parser;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.google.common.primitives.Ints;
 
@@ -30,6 +32,7 @@ public class MarkCommandParser {
         try {
             getOptionalIntArrayFromString(args);
             checkValidIndices();
+            checkForDuplicateIndices();
             sortIntArray();
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -53,6 +56,16 @@ public class MarkCommandParser {
             if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
                 throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
                         MarkCommand.MESSAGE_USAGE);
+            }
+        }
+    }
+
+    private void checkForDuplicateIndices() throws IllegalValueException {
+        List<Integer> indicesAsInteger = Ints.asList(filteredTaskListIndices);
+        Set<Integer> indicesHashSet = new HashSet<Integer>();
+        for (Integer index : indicesAsInteger) {
+            if (!indicesHashSet.add(index)) {
+                throw new IllegalValueException(MarkCommand.MESSAGE_DUPLICATE_INDICES);
             }
         }
     }

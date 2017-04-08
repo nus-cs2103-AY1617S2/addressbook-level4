@@ -17,8 +17,8 @@ import seedu.watodo.model.TaskManager;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.testutil.TypicalTestTasks;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlTaskListStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskListStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -39,7 +39,7 @@ public class XmlAddressBookStorageTest {
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
                 ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
-                : null;
+                        : null;
     }
 
     @Test
@@ -49,9 +49,8 @@ public class XmlAddressBookStorageTest {
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
-
         thrown.expect(DataConversionException.class);
-        readTaskList("NotXmlFormatAddressBook.xml");
+        readTaskList("NotXmlFormatTaskList.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -59,8 +58,8 @@ public class XmlAddressBookStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+    public void readAndSaveTaskList_allInOrder_success() throws Exception {
+        String filePath = testFolder.getRoot().getPath() + "TempTaskList.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskListStorage xmlTaskListStorage = new XmlTaskListStorage(filePath);
@@ -71,7 +70,7 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(td.play));
+        original.addTask(new Task(td.study));
         original.removeTask(new Task(td.sleep));
         xmlTaskListStorage.saveTaskList(original, filePath);
         readBack = xmlTaskListStorage.readTaskList(filePath).get();
@@ -86,19 +85,19 @@ public class XmlAddressBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_assertionFailure() throws IOException {
+    public void saveTaskList_nullTaskList_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveTaskList(null, "SomeFile.xml");
     }
 
-    private void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
-        new XmlTaskListStorage(filePath).saveTaskList(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveTaskList(ReadOnlyTaskManager taskList, String filePath) throws IOException {
+        new XmlTaskListStorage(filePath).saveTaskList(taskList, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskList_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
-        saveAddressBook(new TaskManager(), null);
+        saveTaskList(new TaskManager(), null);
     }
 
 

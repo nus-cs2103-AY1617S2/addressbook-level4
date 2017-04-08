@@ -1,8 +1,8 @@
 {
-  "appTitle" : "Typical App Title",
+  "appTitle" : "Watodo",
   "logLevel" : "INFO",
   "userPrefsFilePath" : "C:\\preferences.json",
-  "addressBookFilePath" : "addressbook.xml",
-  "addressBookName" : "TypicalAddressBookName",
+  "watodoFilePath" : "data/watodo.xml",
+  "watodoName" : "My Tasks",
   "extra" : "extra value"
 }
