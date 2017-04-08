@@ -39,7 +39,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
             Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
 
-        int expectedHits = expectedTodayList.length + expectedFutureList.length + expectedCompletedList.length;
+        int expectedHits = expectedTodayList.length + expectedFutureList.length;
         assertResultMessage(expectedHits + " tasks listed!");
 
         assertAllListsMatching(expectedTodayList, expectedFutureList, expectedCompletedList);

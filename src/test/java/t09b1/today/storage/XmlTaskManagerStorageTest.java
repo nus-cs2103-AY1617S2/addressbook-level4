@@ -1,3 +1,4 @@
+
 package t09b1.today.storage;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,6 @@ import t09b1.today.commons.util.FileUtil;
 import t09b1.today.model.ReadOnlyTaskManager;
 import t09b1.today.model.TaskManager;
 import t09b1.today.model.task.Task;
-import t09b1.today.storage.XmlTaskManagerStorage;
 import t09b1.today.testutil.TypicalTasks;
 
 public class XmlTaskManagerStorageTest {
