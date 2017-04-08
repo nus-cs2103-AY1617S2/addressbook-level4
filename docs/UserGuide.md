@@ -48,7 +48,7 @@ latest version should be v0.5.
 
 With some tasks added in, the interface of ToLuist may look as follows.
 
-   <img src="images/Ui-parts.png" width="600"/><br>
+   <img src="images/Ui-parts.png" width="600"/>
     
 At the very top of the app, the **App Title**, which include a cute app icon, will highlight that you are 
 using ToLuist.
