@@ -57,12 +57,12 @@ public class SyncServiceGtask extends SyncService {
     private static final String TASK_STATUS_INCOMPLETE = "needsAction";
 
     private static final String SYNC_ERROR_CONNECT = "Failed to connect to Google Task.\n"
-                                                    + "Please check your internet connection.\n"
-                                                    + "Type \"sync on\" to login again.";
+            + "Please check your internet connection.\n"
+            + "Type \"sync on\" to login again.";
     private static final String SYNC_ERROR_LOGIN = "Failed to login to Google Task.\n"
-                                                    + "Please check your internet connection and"
-                                                    + " authorize Opus to access Google Task.\n"
-                                                    + "Type \"sync on\" to login again.";
+            + "Please check your internet connection and"
+            + " authorize Opus to access Google Task.\n"
+            + "Type \"sync on\" to login again.";
 
     private com.google.api.services.tasks.Tasks service;
     private TaskList opusTaskList;
@@ -149,9 +149,9 @@ public class SyncServiceGtask extends SyncService {
         clientSecretsDetails.setClientSecret(CLIENT_SECRET);
         GoogleClientSecrets clientSecrets = new GoogleClientSecrets().setInstalled(clientSecretsDetails);
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport,
-                                            JSON_FACTORY, clientSecrets, SCOPES)
-                                            .setDataStoreFactory(dataStoreFactory)
-                                            .build();
+                JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(dataStoreFactory)
+                .build();
 
         Credential credential = null;
         try {
@@ -175,8 +175,8 @@ public class SyncServiceGtask extends SyncService {
     private com.google.api.services.tasks.Tasks getTasksService() throws IOException, SyncException {
         Credential credential = authorize();
         return new com.google.api.services.tasks.Tasks.Builder(httpTransport, JSON_FACTORY, credential)
-                                                              .setApplicationName(APPLICATION_NAME)
-                                                              .build();
+                .setApplicationName(APPLICATION_NAME)
+                .build();
     }
 
     /**
@@ -233,7 +233,7 @@ public class SyncServiceGtask extends SyncService {
      * @return
      */
     private com.google.api.services.tasks.model.Task toGoogleAdaptedTask(Task source) {
-        assert source.isEvent() == false;
+        assert source.isEvent();
         com.google.api.services.tasks.model.Task googleAdaptedTask = new com.google.api.services.tasks.model.Task();
 
         googleAdaptedTask.setTitle(source.getName().toString());
@@ -249,8 +249,8 @@ public class SyncServiceGtask extends SyncService {
         googleAdaptedTask.setUpdated(new DateTime(updated));
 
         googleAdaptedTask.setStatus(source.getStatus().equals(Flag.COMPLETE)
-                                    ? TASK_STATUS_COMPLETE
-                                    : TASK_STATUS_INCOMPLETE);
+                ? TASK_STATUS_COMPLETE
+                        : TASK_STATUS_INCOMPLETE);
         return googleAdaptedTask;
     }
 
@@ -280,9 +280,9 @@ public class SyncServiceGtask extends SyncService {
     private com.google.api.services.tasks.model.Task insertTasktoGtask(Task taskToPush) throws IOException {
         com.google.api.services.tasks.model.Task googleAdaptedTask = toGoogleAdaptedTask(taskToPush);
         com.google.api.services.tasks.model.Task result = service
-                                                          .tasks()
-                                                          .insert(opusTaskList.getId(), googleAdaptedTask)
-                                                          .execute();
+                .tasks()
+                .insert(opusTaskList.getId(), googleAdaptedTask)
+                .execute();
         logger.info("---[GTask]: Insert task result:\n" + result.toPrettyString());
         return result;
     }
