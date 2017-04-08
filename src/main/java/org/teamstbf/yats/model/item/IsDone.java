@@ -2,10 +2,10 @@ package org.teamstbf.yats.model.item;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
+//@@author A0139448U
 /**
  * Represents a Task's completeness in the Task Manager.
  */
-// @@author A0139448U
 public class IsDone {
 
 	public static final String MESSAGE_ISDONE_CONSTRAINTS = "IsDone must be Yes or No";
@@ -44,11 +44,4 @@ public class IsDone {
 		this.value = ISDONE_NOTDONE;
 	}
 
-	public static boolean isValidDone(String doneness) {
-		if (doneness.equals(ISDONE_DONE) || doneness.equals(ISDONE_NOTDONE)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }
