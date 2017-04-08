@@ -46,7 +46,6 @@ public class UnmarkCommand extends Command {
         unmarkedTaskList = new Stack< Task >();
     }
 
-
     /** Converts filteredTaskListIndex from one-based to zero-based. */
     private void changeToZeroBasedIndexing() {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {

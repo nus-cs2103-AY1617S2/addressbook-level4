@@ -96,99 +96,7 @@ public class DeleteCommand extends Command {
     }
 
 ```
-###### \java\seedu\watodo\logic\commands\DeleteCommandCopy.java
-``` java
-/**
- * Deletes a task identified using it's last displayed index from the task manager.
- */
-public class DeleteCommandCopy extends Command {
 
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 2";
-
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
-    public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate.";
-
-
-    private int[] filteredTaskListIndices;
-
-    private ReadOnlyTask taskToDelete;
-
-    public DeleteCommandCopy(int[] args) {
-        this.filteredTaskListIndices = args;
-
-        for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            assert filteredTaskListIndices != null;
-            assert filteredTaskListIndices.length > 0;
-            assert filteredTaskListIndices[i] > 0;
-
-            // converts filteredTaskListIndex to from one-based to zero-based.
-            filteredTaskListIndices[i] = filteredTaskListIndices[i] - 1;
-        }
-    }
-
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        final StringBuilder tasksDeletedMessage = new StringBuilder();
-
-        for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-            if (filteredTaskListIndices[i] >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
-            taskToDelete = lastShownList.get(filteredTaskListIndices[i]);
-
-            try {
-                model.deleteTask(taskToDelete);
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
-
-            tasksDeletedMessage.append(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete) + "\n");
-        }
-
-        return new CommandResult(tasksDeletedMessage.toString());
-    }
-
-    @Override
-    public void unexecute() {
-        assert model != null;
-
-        try {
-
-            model.addTask(new Task(taskToDelete));
-            model.updateFilteredListToShowAll();
-        } catch (DuplicateTaskException e) {
-
-        }
-    }
-
-    @Override
-    public void redo() {
-        assert model != null;
-
-        try {
-            model.updateFilteredListToShowAll();
-            model.deleteTask(taskToDelete);
-        } catch (TaskNotFoundException e) {
-
-        }
-    }
-
-    @Override
-    public String toString() {
-        return COMMAND_WORD;
-    }
-
-}
-```
 ###### \java\seedu\watodo\logic\commands\UnmarkCommand.java
 ``` java
 /**
@@ -210,13 +118,10 @@ public class UnmarkCommand extends Command {
     private static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
     public static final String MESSAGE_STATUS_ALREADY_UNDONE = "The task status is already set to Undone.";
 
-
     private int[] filteredTaskListIndices;
     private ReadOnlyTask taskToUnmark;
     private Task unmarkedTask;
 
-    //private int indexForUndoUnmark;
-    //private Task markedTaskForUndoUnmark;
     private Stack< Task > taskToUnmarkList;
     private Stack< Task > unmarkedTaskList;
 
@@ -227,7 +132,6 @@ public class UnmarkCommand extends Command {
         taskToUnmarkList = new Stack< Task >();
         unmarkedTaskList = new Stack< Task >();
     }
-
 
     /** Converts filteredTaskListIndex from one-based to zero-based. */
     private void changeToZeroBasedIndexing() {
@@ -333,73 +237,6 @@ public class UnmarkCommand extends Command {
         //this.markedTaskForUndoUnmark = new Task(taskToUnmark);
         this.taskToUnmarkList.push(new Task(taskToUnmark));
         this.unmarkedTaskList.push(unmarkedTask);
-    }
-
-```
-###### \java\seedu\watodo\logic\commands\UnmarkCommandCopy.java
-``` java
-/**
- * Marks a task identified using it's last displayed index from the task manager
- * as undone.
- */
-public class UnmarkCommandCopy extends Command {
-
-    public static final String COMMAND_WORD = "unmark";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of the task identified to Undone, "
-            + "using the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
-            + "Example: " + COMMAND_WORD + " 1 2";
-
-    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task undone: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_STATUS_UNDONE = "The task status is already set to Undone.";
-
-    private int[] filteredTaskListIndices;
-
-    private Task undoUnmark;
-    private int undoUnmarkInt;
-
-    public UnmarkCommandCopy(int[] args) {
-        this.filteredTaskListIndices = args;
-
-        for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            assert filteredTaskListIndices != null;
-            assert filteredTaskListIndices.length > 0;
-            assert filteredTaskListIndices[i] > 0;
-
-            // converts filteredTaskListIndex to from one-based to zero-based.
-            filteredTaskListIndices[i] = filteredTaskListIndices[i] - 1;
-        }
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        final StringBuilder tasksUnmarkedMessage = new StringBuilder();
-
-        for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-            if (filteredTaskListIndices[i] >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
-            ReadOnlyTask taskToUnmark = lastShownList.get(filteredTaskListIndices[i]);
-            this.undoUnmark = new Task(taskToUnmark);
-
-            try {
-                Task unmarkedTask = createUnmarkedTask(taskToUnmark);
-                model.updateTask(filteredTaskListIndices[i], unmarkedTask);
-                this.undoUnmarkInt = filteredTaskListIndices[i];
-
-            } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
-            }
-
-            tasksUnmarkedMessage.append(String.format(MESSAGE_UNMARK_TASK_SUCCESS, taskToUnmark) + "\n");
-        }
-
-        return new CommandResult(tasksUnmarkedMessage.toString());
     }
 
 ```
@@ -522,11 +359,11 @@ public class UnmarkCommandParser {
         }
         return new UnmarkCommand(filteredTaskListIndices);
     }
-
+    
     private void getOptionalIntArrayFromString(String args) {
         String[] indicesInStringArray = args.split("\\s+");
         this.filteredTaskListIndices = new int[indicesInStringArray.length];
-
+        
         //Sets filteredTaskListIndices[i] as NEGATIVE_NUMBER if indicesInStringArray[i] is not a positive unsigned integer
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             Optional<Integer> optionalIndex = ParserUtil.parseIndex(indicesInStringArray[i]);
