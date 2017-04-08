@@ -136,6 +136,10 @@ _Figure 2.1.3b : Component interactions for `delete ev 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
+Similarly, the diagram where the user issues the command `show com` is shown below.
+<img src="images\SDforShowStatusChangedToCompletedEventHandling.png" width="800"><br>
+_Figure 2.1.3c : Component interactions for `show com` command_
+
 #### Activity Diagrams for some workflow
 
 The Activity Diagram below shows the workflow of a user saving/reading the xml data file at/from another location

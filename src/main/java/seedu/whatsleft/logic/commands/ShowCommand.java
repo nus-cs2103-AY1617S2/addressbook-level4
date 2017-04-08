@@ -1,10 +1,6 @@
 package seedu.whatsleft.logic.commands;
 
-import seedu.whatsleft.commons.core.EventsCenter;
 import seedu.whatsleft.commons.core.Messages;
-import seedu.whatsleft.commons.events.model.ShowStatusChangedEvent;
-import seedu.whatsleft.commons.events.ui.JumpToEventListRequestEvent;
-import seedu.whatsleft.commons.events.ui.JumpToTaskListRequestEvent;
 import seedu.whatsleft.logic.commands.exceptions.CommandException;
 
 //@@author A0121668A
@@ -47,16 +43,7 @@ public class ShowCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAY_STATUS_KEYWORD);
         }
         model.setDisplayStatus(preference);
-        model.updateFilteredListToShowAll();
-        //@@author A0148038A
-        EventsCenter.getInstance().post(new JumpToEventListRequestEvent(0));
-        EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(0));
-        indicateShowStatusChanged();
         return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
-    }
-
-    private void indicateShowStatusChanged() {
-        EventsCenter.getInstance().post(new ShowStatusChangedEvent(model.getDisplayStatus()));
     }
 
     // @@author
