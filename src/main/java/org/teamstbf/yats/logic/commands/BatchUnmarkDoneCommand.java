@@ -53,8 +53,8 @@ public class BatchUnmarkDoneCommand extends Command {
 	    markedTask.getIsDone().markUndone();
 	    model.updateEvent(targetIndexes.pop(), markedTask);
 	    model.updateDoneTaskList();
-	    model.updateFilteredListToShowAll();
 	}
+	model.updateFilteredListToShowAll();
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, numOfTask));
     }
 
