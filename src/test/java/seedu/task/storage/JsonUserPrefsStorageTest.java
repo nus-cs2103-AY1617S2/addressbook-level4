@@ -48,15 +48,14 @@ public class JsonUserPrefsStorageTest {
         thrown.expect(DataConversionException.class);
         readUserPrefs("NotJsonFormatUserPrefs.json");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored. That means you
+         * should not have more than one exception test in one method
          */
     }
 
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
-        return userPrefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
-                : null;
+        return userPrefsFileInTestDataFolder != null ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -95,8 +94,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {
-        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                .saveUserPrefs(userPrefs);
+        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder)).saveUserPrefs(userPrefs);
     }
 
     @Test
@@ -108,30 +106,30 @@ public class JsonUserPrefsStorageTest {
         String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
 
-        //Try writing when the file doesn't exist
+        // Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
         UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // Try saving when the file exists
         original.setGuiSettings(5, 5, 5, 5);
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
     }
-    
+
     @Test
-    public void compareUserPrefs_Equals_Symmetric_success(){
+    public void compareUserPrefs_Equals_Symmetric_success() {
         UserPrefs first = new UserPrefs();
         first.setGuiSettings(1200, 200, 0, 2);
         UserPrefs second = new UserPrefs();
         second.setGuiSettings(1200, 200, 0, 2);
         assertTrue(first.equals(second));
-        assertTrue(first.hashCode()==second.hashCode());
+        assertTrue(first.hashCode() == second.hashCode());
     }
-    
+
     @Test
-    public void compareUserPrefs_Equals_Symmetric_fail(){
+    public void compareUserPrefs_Equals_Symmetric_fail() {
         UserPrefs first = new UserPrefs();
         first.setGuiSettings(1200, 200, 0, 2);
         UserPrefs second = null;

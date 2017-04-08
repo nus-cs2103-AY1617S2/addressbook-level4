@@ -17,9 +17,9 @@ public class ChangeThemeCommandTest extends TaskManagerGuiTest {
     public void changetheme_fail() {
         assertChangeThemeFail("asdqwe");
     }
-    
+
     @Test
-    public void unknown_Command_fail(){
+    public void unknown_Command_fail() {
         commandBox.runCommand("changethem dark");
         Messages messages = new Messages();
         assertResultMessage(messages.MESSAGE_UNKNOWN_COMMAND);
@@ -28,7 +28,6 @@ public class ChangeThemeCommandTest extends TaskManagerGuiTest {
     private void assertChangeThemeSuccess(String themeName, Theme theme) {
         commandBox.runCommand("changetheme " + themeName);
         assertResultMessage(String.format(ThemeChangeCommand.MESSAGE_SUCCESS, themeName));
-
 
     }
 

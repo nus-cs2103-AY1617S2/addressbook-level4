@@ -27,7 +27,7 @@ public class DateUtilTest {
     @Test
     public void formulate_Date_From_String_fail() throws IllegalValueException {
         Date date1 = DateUtil.extractValidDate("do home work Sep 9 2011 and watch TV");
-        Date date2 = new Date("Sep 9");// default year is current year
+        Date date2 = new Date("Sep 9"); // default year is current year
         assertFalse(date1.equals(date2));
 
         date1 = DateUtil.extractValidDate("meet friends tmr"); // tmr is not recognized

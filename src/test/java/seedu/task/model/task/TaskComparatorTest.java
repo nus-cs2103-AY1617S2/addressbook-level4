@@ -58,7 +58,7 @@ public class TaskComparatorTest {
         TestTask o2 = new TaskBuilder().withName("B this goes second").withStartDate("04-03-1989 23:59")
                 .withEndDate("08-03-2017 23:59").build();
         assertTrue(Date.isBefore(o1.getEndDate(), o2.getEndDate()));
-        
+
         TestTask o3 = new TaskBuilder().withName("A this goes first").withStartDate("04-03-1989 23:59")
                 .withEndDate("08-03-2017 23:59").build();
         TestTask o4 = new TaskBuilder().withName("B this goes second").withStartDate("04-03-1989 23:59")
