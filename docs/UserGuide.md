@@ -118,10 +118,10 @@ Format: `add <TASK NAME> by:<DATE>` or `add <TASK NAME> by:<DATE> <TIME>`
 
 ```
 Things To Note:
-> Date can be in mm/dd/yyyy format
+> Date can be in mm/dd/yyyy format.
 > Space must be used between words for dates.
    e.g "15 Oct", "next monday"
-> Time is optional
+> Time is optional.
 > Time can be in hh:mm format. 24 hours format is used.
 > Time and Date must have a space in between them.
    e.g. "today 8pm", "15 Oct 11am"
@@ -140,12 +140,12 @@ Format: `add <EVENT NAME> from:<DATE> <TIME> to: <DATE> t/<TIME>`
 
 ```
 Things To Note:
-> Start Date/Time and End Date/Time are compulsory
-> Start Date must be before End Date
-> Date can be in mm/dd/yyyy format
+> Start Date/Time and End Date/Time are compulsory.
+> Start Date must be before End Date.
+> Date can be in mm/dd/yyyy format.
 > Space must be used between words for Date. 
    e.g "15 Oct", "next monday"
-> Time is optional
+> Time is optional.
 > Time can be in hh:mm format. 24 hours format is used.
 > Time and Date must have a space in between them.
    e.g. "today 8pm", "15 Oct 11am"
@@ -164,11 +164,11 @@ Format: `add <TASK NAME> p/<PRIORITY>`
 
 ```
 Things To Note:
-> Priority must be high or low
+> Priority must be high or low.
 > Priority can be applied to other type of task or event by
-  adding this additional field “p/<PRIORITY>”
+  adding this additional field “p/<PRIORITY>”.
 > Priority will automatic be low if a task is added without
-  the field “p/<PRIORITY>”
+  the field “p/<PRIORITY>”.
 ```
 
 Examples:
@@ -184,12 +184,12 @@ Format: `find <KEYWORD>`
 ```
 Things To Note:
 > The order of the keywords does not matter.
-   e.g. Meeting Tutor will match Tutor Meeting.
+   e.g. Meeting Tutor will match Tutor Meeting
 > The tasks that match at least one keyword will be returned (i.e. OR search).
-   e.g. Meeting will match Meeting Tutor.
-> The keyword is not case-sensitive
-   e.g. Meeting Tutor will match meeting tutor.
-> The search function prioritise dates
+   e.g. Meeting will match Meeting Tutor
+> The keyword is not case-sensitive.
+   e.g. Meeting Tutor will match meeting tutor
+> The search function prioritise dates.
    e.g. "find tmr" will give a list of tasks with tomorrow date but will not give task name with "tmr"
 ```
 
@@ -208,7 +208,7 @@ Format: `edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY> or edit INDEX fro
 Things To Note:
 > Edits the task at the specified INDEX.
   The index refers to the number shown in the last task listing.
-> Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>
+> Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>.
 > At least one of the optional fields must be provided.
 > Existing field(s) will be updated with the input fields.
 ```
@@ -229,7 +229,7 @@ Format: `delete <INDEX>`
 
 ```
 Things To Note:
-> The task at the specified INDEX will be deleted
+> The task at the specified INDEX will be deleted.
 > The index refers to the index number shown in the most recent listing.
 ```
 
@@ -304,10 +304,25 @@ Typed in the wrong command and submitted an operation you do not want? Fret not!
 
 Format: `undo`
 
+```
+Things To Note:
+> This will only work if there is at least one action command is used.
+   Action commands: add, edit, delete, done, clear, redo
+> This command can be used multiple times.
+   e.g You used 10 action commands. You can undo 10 times.
+```
+
 ### 3.15. Redoing the Latest Command : `redo`
 Typed in the undo command wrongly? Fret not! You can use the redo command to save the hassle of modifying your recent operation. <br>
 
-Format: `undo`
+Format: `redo`
+
+```
+Things To Note:
+> This will only work if undo command is used.
+> This command can be used multiple times.
+   e.g. You undo 10 times. You can redo 10 times.
+```
 
 ### 3.16. Saving the Data to Another Folder : `save`
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
