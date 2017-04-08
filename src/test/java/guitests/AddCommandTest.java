@@ -45,6 +45,12 @@ public class AddCommandTest extends TypeTaskGuiTest {
                 (Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
     @Test
+    public void addInvalidMultiplePrefix_fail() {
+        commandBox.runCommand("add invalidEvent by: today @tmr");
+        assertResultMessage(String.format
+                (Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+    @Test
     public void addTask_success() throws IllegalValueException {
         commandBox.runCommand("add success p/Low");
         TestTask expectedResult = new TaskBuilder().withName("success")
