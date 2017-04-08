@@ -51,14 +51,6 @@ public class TypicalTestTasks {
             sampleDeadline = new TaskBuilder().withTaskName("Get it done").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("06/05/17").withEndTime("1700").withCompletion(false)
                     .withCategories("work").build();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-    }
-
-    public void TypicalRecurringEventsForDays() {
-        try {
             recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
@@ -71,14 +63,6 @@ public class TypicalTestTasks {
             recurTestDayThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("06/03/17")
                     .withStartTime("1000").withEndDate("06/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-    }
-
-    public void TypicalRecurringEventsForWeeks() {
-        try {
             recurTestWeek = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
@@ -91,45 +75,29 @@ public class TypicalTestTasks {
             recurTestWeekThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("21/03/17")
                     .withStartTime("1000").withEndDate("21/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-    }
-
-    public void TypicalRecurringEventsForMonths() {
-        try {
-            recurTestMonth = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
-                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+            recurTestMonth = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestMonthOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/04/17")
-                    .withStartTime("1000").withEndDate("03/04/17").withEndTime("1100").withCompletion(false)
+            recurTestMonthOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestMonthTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("05/05/17")
-                    .withStartTime("1000").withEndDate("03/05/17").withEndTime("1100").withCompletion(false)
+            recurTestMonthTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/05/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestMonthThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/06/17")
-                    .withStartTime("1000").withEndDate("03/06/17").withEndTime("1100").withCompletion(false)
+            recurTestMonthThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/06/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
-        }
-    }
-
-    public void TypicalRecurringEventsForYears() {
-        try {
-            recurTestYear = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
-                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+            recurTestYear = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestYearOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/18")
-                    .withStartTime("1000").withEndDate("03/03/18").withEndTime("1100").withCompletion(false)
+            recurTestYearOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/18").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestYearTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/19")
-                    .withStartTime("1000").withEndDate("03/03/19").withEndTime("1100").withCompletion(false)
+            recurTestYearTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/19").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestYearThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/20")
-                    .withStartTime("1000").withEndDate("03/03/20").withEndTime("1100").withCompletion(false)
+            recurTestYearThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/20").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -151,19 +119,19 @@ public class TypicalTestTasks {
         return new TestTask[] { eatBreakfast, doCS, eatDinner, tryHarderCS, tryAgainCS, eatLunch, getFit };
     }
 
-    public TestTask[] getTypicalRecurringTasksForDays() {
+    public TestTask[] getTypicalRecurringEventTasksForDays() {
         return new TestTask[] { recurTestDay, recurTestDayOnce, recurTestDayTwice, recurTestDayThrice };
     }
 
-    public TestTask[] getTypicalRecurringTasksForWeeks() {
+    public TestTask[] getTypicalRecurringEventTasksForWeeks() {
         return new TestTask[] { recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice };
     }
 
-    public TestTask[] getTypicalRecurringTasksForMonths() {
+    public TestTask[] getTypicalRecurringDeadlineTasksForMonths() {
         return new TestTask[] { recurTestMonth, recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice };
     }
 
-    public TestTask[] getTypicalRecurringTasksForYears() {
+    public TestTask[] getTypicalRecurringDeadlineTasksForYears() {
         return new TestTask[] { recurTestYear, recurTestYearOnce, recurTestYearTwice, recurTestYearThrice };
     }
 
