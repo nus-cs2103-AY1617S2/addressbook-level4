@@ -3,10 +3,10 @@ package seedu.task.testutil;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.TaskName;
-import seedu.task.model.task.TaskTime;
 import seedu.task.model.task.TaskDate;
+import seedu.task.model.task.TaskName;
 import seedu.task.model.task.TaskStatus;
+import seedu.task.model.task.TaskTime;
 
 //@@author A0146757R
 public class TaskBuilder {
@@ -33,7 +33,7 @@ public class TaskBuilder {
         this.task.setTaskDate(new TaskDate(taskDate));
         return this;
     }
-    
+
     public TaskBuilder withTaskStartTime(String taskStartTime) throws IllegalValueException {
         this.task.setTaskStartTime(new TaskTime(taskStartTime));
         return this;
@@ -48,15 +48,15 @@ public class TaskBuilder {
         this.task.setTaskDescription(new String(taskDescription));
         return this;
     }
-    
+
     public TaskBuilder withTaskStatus(String taskStatus) throws IllegalValueException {
         this.task.setTaskStatus(new TaskStatus(taskStatus));
         return this;
     }
-    
-    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
+
+    public TaskBuilder withTags(String... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
-        for (String tag: tags) {
+        for (String tag : tags) {
             task.getTags().add(new Tag(tag));
         }
         return this;
@@ -67,4 +67,4 @@ public class TaskBuilder {
     }
 
 }
-//@@author
+// @@author

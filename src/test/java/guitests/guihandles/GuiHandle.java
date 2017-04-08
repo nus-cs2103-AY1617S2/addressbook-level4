@@ -20,7 +20,8 @@ public class GuiHandle {
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
     /**
-     * An optional stage that exists in the App other than the primaryStage, could be a alert dialog, popup window, etc.
+     * An optional stage that exists in the App other than the primaryStage, could be a alert
+     * dialog, popup window, etc.
      */
     protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
@@ -36,9 +37,9 @@ public class GuiHandle {
 
     public void focusOnWindow(String stageTitle) {
         logger.info("Focusing " + stageTitle);
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
-                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
+                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle))
+                .findAny();
 
         if (!window.isPresent()) {
             logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
@@ -63,7 +64,8 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a
+        // short period
     }
 
     public void pressEnter() {
@@ -85,9 +87,9 @@ public class GuiHandle {
     }
 
     public void closeWindow() {
-        Optional<Window> window = guiRobot.listTargetWindows()
-                .stream()
-                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+        Optional<Window> window = guiRobot.listTargetWindows().stream()
+                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle))
+                .findAny();
 
         if (!window.isPresent()) {
             return;

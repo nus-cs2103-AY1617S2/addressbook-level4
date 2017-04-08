@@ -5,8 +5,7 @@ import java.util.regex.Pattern;
 import seedu.task.logic.parser.ArgumentTokenizer.Prefix;
 
 /**
- * Contains Command Line Interface (CLI) syntax definitions common to multiple
- * commands
+ * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
 
@@ -18,20 +17,21 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("m/");
 
     /* Patterns definitions */
-    public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
-													  // or
-													  // more
-													  // keywords
-													  // separated
-													  // by
-													  // whitespace
+    public static final Pattern KEYWORDS_ARGS_FORMAT = Pattern
+            .compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
+    // or
+    // more
+    // keywords
+    // separated
+    // by
+    // whitespace
     public static final Pattern DELETE_ARGS_FORMAT = Pattern.compile("(?<index>\\d+(?:\\s+\\d+)*)"); // one
-												     // or
-												     // more
-												     // number
-												     // separated
-												     // by
-												     // whitespace
+    // or
+    // more
+    // number
+    // separated
+    // by
+    // whitespace
     public static final Pattern DONE_ARGS_FORMAT = Pattern.compile("(?<index>\\d+(?:\\s+\\d+)*)"); // one
     // or
     // more

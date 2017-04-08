@@ -7,29 +7,27 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 
 /**
- * Represents a command with hidden internal logic and the ability to be
- * executed.
+ * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
     protected Model model;
 
     /**
-     * Constructs a feedback message to summarize an operation that displayed a
-     * listing of tasks.
+     * Constructs a feedback message to summarize an operation that displayed a listing of tasks.
      *
      * @param displaySize
      *            used to generate summary
      * @return summary message for persons displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
-	return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
+        return String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, displaySize);
     }
 
     /**
      * Raises an event to indicate an attempt to execute an incorrect command
      */
     protected void indicateAttemptToExecuteIncorrectCommand() {
-	EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
+        EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
     }
 
     /**
@@ -42,15 +40,15 @@ public abstract class Command {
     public abstract CommandResult execute() throws CommandException;
 
     /**
-     * Provides any needed dependencies to the command. Commands making use of
-     * any of these should override this method to gain access to the
-     * dependencies.
+     * Provides any needed dependencies to the command. Commands making use of any of these should
+     * override this method to gain access to the dependencies.
      */
     public void setData(Model model) {
-	this.model = model;
+        this.model = model;
     }
+
     public boolean isUndoable() {
-    	return false;
+        return false;
     }
 
 }

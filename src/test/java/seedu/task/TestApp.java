@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.task.MainApp;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -13,14 +12,14 @@ import seedu.task.storage.XmlSerializableTaskManager;
 import seedu.task.testutil.TestUtil;
 
 /**
- * This class is meant to override some properties of MainApp so that it will be suited for
- * testing
+ * This class is meant to override some properties of MainApp so that it will be suited for testing
  */
 public class TestApp extends MainApp {
 
-    public static final String SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
-    protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
-            TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+    public static final String SAVE_LOCATION_FOR_TESTING = TestUtil
+            .getFilePathInSandboxFolder("sampleData.xml");
+    protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING = TestUtil
+            .getFilePathInSandboxFolder("pref_testing.json");
     public static final String APP_TITLE = "Test App";
     protected static final String ADDRESS_BOOK_NAME = "Test";
     protected Supplier<ReadOnlyTaskManager> initialDataSupplier = () -> null;
@@ -60,7 +59,6 @@ public class TestApp extends MainApp {
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         return userPrefs;
     }
-
 
     @Override
     public void start(Stage primaryStage) {

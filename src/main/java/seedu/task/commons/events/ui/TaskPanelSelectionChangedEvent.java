@@ -11,15 +11,15 @@ public class TaskPanelSelectionChangedEvent extends BaseEvent {
     private final ReadOnlyTask newSelection;
 
     public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection) {
-	this.newSelection = newSelection;
+        this.newSelection = newSelection;
     }
 
     @Override
     public String toString() {
-	return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName();
     }
 
     public ReadOnlyTask getNewSelection() {
-	return newSelection;
+        return newSelection;
     }
 }

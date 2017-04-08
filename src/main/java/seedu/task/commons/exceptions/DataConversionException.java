@@ -5,7 +5,6 @@ package seedu.task.commons.exceptions;
  */
 public class DataConversionException extends Exception {
     public DataConversionException(Exception cause) {
-	super(cause);
+        super(cause);
     }
-
 }

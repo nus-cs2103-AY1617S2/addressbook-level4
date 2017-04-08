@@ -33,19 +33,19 @@ Author: Jacob Levy
 ## Getting Help : `help`
 Format: `help`
 
-> Typing `help` will create a pop up of this User Guide on the user's computer. Internet connection is required. 
+> Typing `help` will create a pop up of this User Guide on the user's computer. Internet connection is required.
 
 ## Listing All Tasks : `list`
 Shows a list of all active tasks.<br>
 Format: `list`
- 
+
 ## Adding a Task : `add`
 Adds a task to the task manager<br>
-Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]` 
- 
-> Words in `UPPER_CASE` are the parameters, items in `[SQUARE_BRACKETS]` are optional. 
+Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
+
+> Words in `UPPER_CASE` are the parameters, items in `[SQUARE_BRACKETS]` are optional.
 > `add` and `TASKNAME` must be in the order shown, but there is no set order for all other parameters.
-> A format hint will be added if the user types in an incorrect command. 
+> A format hint will be added if the user types in an incorrect command.
 
 > `s/STARTTIME` and `e/ENDTIME` can be entered in the format `mm:hh` or `mmhh`. Time is formated using a 24 hour clock. Additionally, many natural language options are available. A list of some possible natural language options are listed below.
 
@@ -65,67 +65,81 @@ Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 * today
 * tomorrow
 
-Example: 
-* `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
+Example:
+* `add Buy apple juice d/010117 s/08:00 e/10:00 m/Lok out for snacks`
+<img src="images/add.png" width="600">
 
 ## Finding a Task: `find`
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> The search is not case sensitive, the order of the keywords does not matter, only the name is searched, 
+> The search is not case sensitive, the order of the keywords does not matter, only the name is searched,
 and tasks matching at least one keyword will be returned (i.e. `OR` search).
 
-Examples: 
-* `find groceries` returns `Groceries Shopping`
+Example:
+* `find juice`
+<img src="images/find.png" width="600">
 
 ## Deleting a Task : `delete`
 Deletes a specified task or tasks from the task manager. Irreversible.<br>
 Format: `delete INDEX [MORE INDECIES]`
 
-> Deletes the tasks at the specified `INDEX` or indecies. 
-  The index refers to the task number shown in the list. 
+> Deletes the tasks at the specified `INDEX` or indecies.
+  The index refers to the task number shown in the list.
   `INDEX` must be an exact match in order for the function to work.
 
-Examples: 
+Example:
 * `delete 2`<br>
-  
+<img src="images/delete.png" width="600">
+
 ## Editing a Task : `edit`
 Edits a specified task from the task manager.<br>
-Format: `edit INDEX [TASKNAME] [d/DATE] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
+Format: `edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
-> Edits the task at the specified `INDEX`. The index refers to the 
-task number shown in the list. `INDEX` must be an exact match in order 
+> Edits the task at the specified `INDEX`. The index refers to the
+task number shown in the list. `INDEX` must be an exact match in order
 for the function to work.
 
-Examples: `edit 2 m/Go to Ralphs`
+Example: `edit 1 Buy Snacks d/121212`<br>
+<img src="images/edit.png" width="600">
 
 ## Clearing all Tasks : `clear`
 Clears all tasks from the task manager.<br>
-Format: `clear` 
+Format: `clear`<br>
+<img src="images/clear.png" width="600">
 
-## Undoing a Task : `undo`
+## Undoing an Action : `undo`
 Undos the most recent action up to 10 times.
-Format: `undo`
+Format: `undo`<br>
+<img src="images/undo.png" width="600">
+
+## Redoing an Action : `redo`
+Redos the most recent action up to 10 times.
+Format: `redo`<br>
+<img src="images/redo.png" width="600">
 
 ## Completing a Task : `done`
-Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
+Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`. Moves comepleted tasks to the bottom of the list<br>
 Format: `done INDEX [MORE INDECIES]`
+
+Example: `done 1`<br>
+<img src="images/done.png" width="600">
 
 ## Filtering the Tasks : `filter`
 Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
 Format: `filter ongoing` or `filter completed`
-> Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks. 
+> Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks.
 > To return to the unsorted list of tasks, type and enter `list`.
 
 ## Sorting the Tasks : `sort`
-Sorts the tasks by date or by alphabet. 
+Sorts the tasks by date or by alphabet.
 Format: `sort name` or `sort time`
-> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. 
+> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date.
 > To return to the unsorted list of tasks, type and enter `list`.
 
-## Googling the Tasks: `google` 
+## Googling the Tasks: `google`
 Format: `google [INDEX]`
-> Googles the task name at the specified index. The user can additionally Google a task name by single clicking on a task. 
+> Googles the task name at the specified index. The user can additionally Google a task name by single clicking on a task.
 
 ## Changing the Save Path: `path`
 Changes the save path for Fast Task data. Must specify the name of the save file and mark it as a .xml file.<br>
@@ -136,14 +150,14 @@ Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 ## Loading Fast Task Data: `load`
 Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `load PATHNAME`<br>
-Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
-Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
+Example for Windows: `load C:\Desktop\MyTasks.xml`<br>
+Example for Mac: `load /Users/jlevy/Desktop/MyTasks.xml`
 
 ## Exiting the Program : `exit`
 Exits the program.<br>
-Format: `exit`  
+Format: `exit`
 
-## Saving the Data 
+## Saving the Data
 Tasks manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
@@ -163,13 +177,18 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
   e.g. `find groceries`
 
+* **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
+  e.g. `edit 2 m/Go to Guardian`
+
 * **List** : `list` <br>
 
 * **Clear** : `clear`
 
 * **Undo** : `undo` <br>
 
-* **Done** : `done` <br>
+* **Redo** : `redo` <br>
+
+* **Done** : `done INDEX [MORE INDECIES]` <br>
  e.g. `done 3`
 
 * **Filter** : `filter` <br>
@@ -179,7 +198,7 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 
 * **Path** : `path PATHNAME` <br>
  e.g. `path C:\Desktop\MyTasks.xml`
- 
+
  * **Load** : `load PATHNAME` <br>
  e.g. `load C:\Desktop\MyTasks.xml`
 

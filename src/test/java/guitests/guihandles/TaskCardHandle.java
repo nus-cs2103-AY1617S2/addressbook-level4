@@ -52,24 +52,18 @@ public class TaskCardHandle extends GuiHandle {
     public String getTaskDescription() {
         return getTextFromLabel(TASK_DESCRIPTION_FIELD_ID);
     }
-    
+
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }
 
     private List<String> getTags(Region tagsContainer) {
-        return tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(node -> ((Labeled) node).getText())
-                .collect(Collectors.toList());
+        return tagsContainer.getChildrenUnmodifiable().stream()
+                .map(node -> ((Labeled) node).getText()).collect(Collectors.toList());
     }
 
     private List<String> getTags(UniqueTagList tags) {
-        return tags
-                .asObservableList()
-                .stream()
-                .map(tag -> tag.tagName)
+        return tags.asObservableList().stream().map(tag -> tag.tagName)
                 .collect(Collectors.toList());
     }
 
@@ -79,7 +73,7 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return getFullName().equals(task.getTaskName().fullTaskName)
-        		&& getTaskDate().equals(task.getTaskDate().value)
+                && getTaskDate().equals(task.getTaskDate().value)
                 && getTaskStartTime().equals(task.getTaskStartTime().value)
                 && getTaskEndTime().equals(task.getTaskEndTime().value)
                 && getTaskDescription().equals(task.getTaskDescription())
@@ -91,7 +85,7 @@ public class TaskCardHandle extends GuiHandle {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-            		&& getTaskDate().equals(handle.getTaskDate())
+                    && getTaskDate().equals(handle.getTaskDate())
                     && getTaskStartTime().equals(handle.getTaskStartTime())
                     && getTaskEndTime().equals(handle.getTaskEndTime())
                     && getTaskDescription().equals(handle.getTaskDescription())

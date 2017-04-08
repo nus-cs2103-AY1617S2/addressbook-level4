@@ -9,7 +9,7 @@
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
   a CLI (Command Line Interface).
 * It is a Java  application intended for people who desire to manage their tasks.
-* It is **written in OOP fashion**. 
+* It is **written in OOP fashion**.
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -23,9 +23,9 @@
 
 * Some parts of this sample application were inspired by
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
-  
+
 * The date and time parser for this application was borrowed from the open source [Natty Date Parser](http://natty.joestelmach.com/)
-  
+
 * Forked from nus-cs2103-AY1617S2/addressbook-level4
 
 #### Licence : [MIT](LICENSE)

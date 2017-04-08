@@ -1,6 +1,5 @@
 package seedu.task.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -16,11 +15,11 @@ import org.junit.rules.TemporaryFolder;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.model.UserPrefs;
-import seedu.task.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/JsonUserPrefsStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil
+            .getPath("./src/test/data/JsonUserPrefsStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -34,7 +33,8 @@ public class JsonUserPrefsStorageTest {
         readUserPrefs(null);
     }
 
-    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
+    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder)
+            throws DataConversionException {
         String prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
@@ -49,15 +49,15 @@ public class JsonUserPrefsStorageTest {
         thrown.expect(DataConversionException.class);
         readUserPrefs("NotJsonFormatUserPrefs.json");
 
-        /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
-         * That means you should not have more than one exception test in one method
+        /*
+         * IMPORTANT: Any code below an exception-throwing line (like the one above) will be
+         * ignored. That means you should not have more than one exception test in one method
          */
     }
 
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
         return userPrefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
-                : null;
+                ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder : null;
     }
 
     @Test
@@ -69,13 +69,15 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
-    public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
+    public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed()
+            throws DataConversionException {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
     }
 
     @Test
-    public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
+    public void readUserPrefs_extraValuesInFile_extraValuesIgnored()
+            throws DataConversionException {
         UserPrefs expected = new UserPrefs();
         expected.setGuiSettings(1000, 500, 300, 100);
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
@@ -95,7 +97,8 @@ public class JsonUserPrefsStorageTest {
         saveUserPrefs(new UserPrefs(), null);
     }
 
-    private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {
+    private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder)
+            throws IOException {
         new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
                 .saveUserPrefs(userPrefs);
     }
@@ -109,12 +112,12 @@ public class JsonUserPrefsStorageTest {
         String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
 
-        //Try writing when the file doesn't exist
+        // Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
         UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // Try saving when the file exists
         original.setGuiSettings(5, 5, 5, 5);
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();

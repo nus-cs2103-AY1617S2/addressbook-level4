@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -13,8 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.task.TestApp;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.testutil.TestUtil;
 
 /**
@@ -42,7 +41,9 @@ public class PersonListPanelHandle extends GuiHandle {
 
     /**
      * Returns true if the list is showing the person details correctly and in correct order.
-     * @param persons A list of person in the correct order.
+     *
+     * @param persons
+     *            A list of person in the correct order.
      */
     public boolean isListMatching(ReadOnlyTask... persons) {
         return this.isListMatching(0, persons);
@@ -50,13 +51,17 @@ public class PersonListPanelHandle extends GuiHandle {
 
     /**
      * Returns true if the list is showing the person details correctly and in correct order.
-     * @param startPosition The starting position of the sub list.
-     * @param persons A list of person in the correct order.
+     *
+     * @param startPosition
+     *            The starting position of the sub list.
+     * @param persons
+     *            A list of person in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... persons)
+            throws IllegalArgumentException {
         if (persons.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " persons");
+            throw new IllegalArgumentException("List size mismatched\n" + "Expected "
+                    + (getListView().getItems().size() - 1) + " persons");
         }
         assertTrue(this.containsInOrder(startPosition, persons));
         for (int i = 0; i < persons.length; i++) {
@@ -79,19 +84,22 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code persons} appear as the sub list (in that order) at position {@code startPosition}.
+     * Returns true if the {@code persons} appear as the sub list (in that order) at position
+     * {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... persons) {
         List<ReadOnlyTask> personsInList = getListView().getItems();
 
-        // Return false if the list in panel is too short to contain the given list
+        // Return false if the list in panel is too short to contain the given
+        // list
         if (startPosition + persons.length > personsInList.size()) {
             return false;
         }
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getTaskName().fullTaskName.equals(persons[i].getTaskName().fullTaskName)) {
+            if (!personsInList.get(startPosition + i).getTaskName().fullTaskName
+                    .equals(persons[i].getTaskName().fullTaskName)) {
                 return false;
             }
         }
@@ -100,10 +108,9 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(500); // Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> person = getListView().getItems().stream()
-                                                    .filter(p -> p.getTaskName().fullTaskName.equals(name))
-                                                    .findAny();
+                .filter(p -> p.getTaskName().fullTaskName.equals(name)).findAny();
         if (!person.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
@@ -125,7 +132,6 @@ public class PersonListPanelHandle extends GuiHandle {
         guiRobot.sleep(100);
         return getPersonCardHandle(person);
     }
-
 
     /**
      * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.

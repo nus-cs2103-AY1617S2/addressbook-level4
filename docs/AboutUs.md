@@ -10,7 +10,7 @@ Role: Developer <br>
 * Aspects/Tools in charge of: Github, Source Tree, Eclipse
 * Features implemented:
    * [Path Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
-* Code written: 
+* Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
 * Other major contributions: User Guide, Developer Guide, Scheduling and Tracking
 
@@ -25,7 +25,7 @@ Role: Developer <br>
    * [Edit Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Find Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
-* Code written: 
+* Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
 * Other major contributions: Set up back end for file manipulation
 -----
@@ -36,7 +36,7 @@ Role: Developer <br>
 * Aspects/Tools in charge of: Travis, Testing
 * Features implemented:
    * [Done Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
-* Code written: 
+* Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0146757R.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
@@ -51,9 +51,9 @@ Role: Developer <br>
 * Features implemented:
    * [Flexible Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Delete Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
-* Code written: 
+* Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0152855Y.md)]
-* Other major contributions: 
+* Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
 
 -----

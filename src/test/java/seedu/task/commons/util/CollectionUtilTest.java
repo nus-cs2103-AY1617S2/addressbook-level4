@@ -12,8 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.task.commons.util.CollectionUtil;
-
 public class CollectionUtilTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -60,7 +58,8 @@ public class CollectionUtilTest {
 
         // lists containing nulls in the middle
         assertTrue(CollectionUtil.isAnyNull(Arrays.asList("spam", null, new Object())));
-        assertTrue(CollectionUtil.isAnyNull(Arrays.asList("spam", null, "eggs", null, new Object())));
+        assertTrue(
+                CollectionUtil.isAnyNull(Arrays.asList("spam", null, "eggs", null, new Object())));
 
         // lists containing nulls at the end
         assertTrue(CollectionUtil.isAnyNull(Arrays.asList("spam", new Object(), null)));

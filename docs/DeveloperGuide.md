@@ -302,7 +302,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | remove tasks that I have completed.
 `* * *` | user | edit a task | update relevant information about the task
 `* * *` | user | search for a task | see detailed information about the task.
-`* * *` | user | update the status of a task | view completed or pending tasks. 
+`* * *` | user | update the status of a task | view completed or pending tasks.
 `* * *` | user | see upcoming tasks | see what needs to be done soon.
 `* * *` | user | can undo last command | to fix mistakes.
 `* * *` | user | chnage where I save my data | organize my information
@@ -327,7 +327,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 **MSS**
 
-1. User requests to add a task in the command line. 
+1. User requests to add a task in the command line.
 2. Task shows up in list.<br>
 Use case ends.
 
@@ -352,7 +352,7 @@ Use case ends.
 
 > 3a1. Task manager shows an error message <br>
   Use case resumes at step 2
-  
+
 3b. Search parameters entered could not be found
 
 > 3b1. Task manager shows an error message <br>
@@ -408,8 +408,8 @@ Use case ends.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The executable .jar file should not be more than 5MB
-5. Should be able to connect to the internet as long as a stable internet connection is avaialble. 
-6. Should always save the Fast Task data without corruption to the data. 
+5. Should be able to connect to the internet as long as a stable internet connection is avaialble.
+6. Should always save the Fast Task data without corruption to the data.
 7. After the user enters a command, the response time should be no more than 1 second.
 8. The application should be available to download for anyone who has access to an internet connection and access to Github.
 
@@ -427,7 +427,7 @@ Author: Jacob Levy
 
 Pros:
 
-* Can edit tasks by clicking on the task itself 
+* Can edit tasks by clicking on the task itself
 * Can create categories for tasks
 * Can visually cross out a completed task, similar to a sheet of paper
 * Can favorite specific tasks
@@ -462,7 +462,7 @@ Author: Edwin Yeap
 
 Pros:
 
-* Has simplistic view of tasks with 3 lists, today, tomorrow and yesterday.  
+* Has simplistic view of tasks with 3 lists, today, tomorrow and yesterday.
 * Easy to use interface
 
 Cons:

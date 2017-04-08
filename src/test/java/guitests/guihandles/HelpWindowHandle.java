@@ -20,6 +20,7 @@ public class HelpWindowHandle extends GuiHandle {
         return guiRobot.lookup(HELP_WINDOW_ROOT_FIELD_ID).tryQuery().isPresent();
     }
 
+    @Override
     public void closeWindow() {
         super.closeWindow();
         guiRobot.sleep(500);
