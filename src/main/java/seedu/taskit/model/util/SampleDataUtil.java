@@ -1,8 +1,8 @@
 package seedu.taskit.model.util;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
-import seedu.taskit.model.AddressBook;
-import seedu.taskit.model.ReadOnlyAddressBook;
+import seedu.taskit.model.TaskManager;
+import seedu.taskit.model.ReadOnlyTaskManager;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.Priority;
@@ -23,9 +23,9 @@ public class SampleDataUtil {
         }
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleAddressBook() {
         try {
-            AddressBook sampleAB = new AddressBook();
+            TaskManager sampleAB = new TaskManager();
             for (Task sampleTask : getSampleTasks()) {
                 sampleAB.addTask(sampleTask);
             }

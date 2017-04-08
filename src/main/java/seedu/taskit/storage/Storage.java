@@ -6,7 +6,7 @@ import java.util.Optional;
 import seedu.taskit.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskit.commons.exceptions.DataConversionException;
-import seedu.taskit.model.ReadOnlyAddressBook;
+import seedu.taskit.model.ReadOnlyTaskManager;
 import seedu.taskit.model.UserPrefs;
 
 /**
@@ -24,10 +24,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     String getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.
