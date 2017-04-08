@@ -65,13 +65,13 @@ The **Tab Bar** lies just above the **Task List**. It indicates which tab is cur
 . Depending on the tab selected, the **Task List** will change to only show a subset of the current tasks 
 (which can be all the tasks in the app, or found tasks that match some search keyword(s)) that satisfy 
 the condition described in the highlighted tab. There are 5 different tabs that can be selected:
-
-    * INCOMPLETE: Displays only the subset of current tasks that are not yet completed.
-    * TODAY: Displays only the subset of current tasks that are due by / are happening on the current day.
-    * NEXT 7 DAYS: Displays only the subset of current tasks that are due by / are happening during the 
+   * INCOMPLETE: Displays only the subset of current tasks that are not yet completed.
+   * TODAY: Displays only the subset of current tasks that are due by / are happening on the current day.
+   * NEXT 7 DAYS: Displays only the subset of current tasks that are due by / are happening during the 
     next 7 days, not including the current day.
-    * COMPLETED: Displays only the subset of current tasks that are completed.
-    * ALL: Displays all current tasks.
+   * COMPLETED: Displays only the subset of current tasks that are completed.
+   * ALL: Displays all current tasks.
+    
 Note that in the label for each tab, there are some statistics describing the amount of current tasks, and 
 how many of these tasks satisfy that the's condition. For example, in the figure above, `INCOMPLETE` tab's 
 label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of all 6 current tasks.
