@@ -132,6 +132,15 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    //@@author A0124377A
+    public String getEditCommand(int i) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("edit ts " + i + " ");
+        sb.append("bd/ " + this.getByDate().toString());
+        sb.append("bt/ " + this.getByTime().toString());
+        return sb.toString();
+    }
+
     //@@author A0148038A
     @Override
     public String getDescriptionToShow() {

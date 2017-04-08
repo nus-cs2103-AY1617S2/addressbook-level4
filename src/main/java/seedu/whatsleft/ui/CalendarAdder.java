@@ -115,6 +115,7 @@ public class CalendarAdder extends AppointmentImplBase implements Appointment {
     }
 
     public boolean isEvent(Appointment appointment) {
-        return !isTask(appointment);
+        AppointmentGroup group =  appointment.getAppointmentGroup();
+        return group.getStyleClass().equals(EVENT_GROUP);
     }
 }

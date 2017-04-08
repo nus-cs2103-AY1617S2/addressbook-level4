@@ -127,6 +127,18 @@ public class TestEvent implements ReadOnlyEvent {
         return sb.toString();
     }
 
+    //@@author A0124377A
+    public String getEditCommand(int i) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("edit ev " + i + " ");
+        sb.append("st/ " + this.getStartDate().toString());
+        sb.append("et/ " + this.getEndTime().toString());
+        sb.append("sd/ " + this.getStartDate().toString());
+        sb.append("ed/ " + this.getEndTime().toString());
+        return sb.toString();
+    }
+
+
     //@@author
     @Override
     public boolean isOver() {
