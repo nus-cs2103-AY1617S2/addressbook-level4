@@ -842,7 +842,7 @@ public class LogicManagerTest {
         floating2.setEndDate(Optional.empty());
 
         List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
-        List<Task> unsortedTasks = helper.generateTaskList(floating1, floating2, tTarget1, tTarget2, tTarget3);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget3, floating1, tTarget2, floating2, tTarget1);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
         List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
@@ -864,7 +864,7 @@ public class LogicManagerTest {
         floating2.setEndDate(Optional.empty());
 
         List<Task> sortedTasks = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
-        List<Task> unsortedTasks = helper.generateTaskList(floating1, floating2, tTarget1, tTarget2, tTarget3);
+        List<Task> unsortedTasks = helper.generateTaskList(tTarget3, floating1, tTarget2, floating2, tTarget1);
         TaskManager expectedTM = helper.generateTaskManager(sortedTasks);
         List<Task> expectedList = helper.generateTaskList(tTarget3, tTarget2, tTarget1, floating1, floating2);
         helper.addToModel(model, unsortedTasks);
