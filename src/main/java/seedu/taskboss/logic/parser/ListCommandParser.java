@@ -9,7 +9,6 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.IncorrectCommand;
 import seedu.taskboss.logic.commands.ListByCategoryCommand;
-import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.model.category.Category;
 
 /**
@@ -17,17 +16,23 @@ import seedu.taskboss.model.category.Category;
  */
 public class ListCommandParser {
 
-    private static final String EMPTY_STRING = "";
-
     //@@author A0147990R
+    private static final String EMPTY_STRING = "";
+    private static final String BUILDIN_ALLTAKS = "Alltasks";
+
     /**
      * Returns a ListCommand if there is no argument.
      * Otherwise parses the given {@code String} of arguments in the context of the ListByCategoryCommand
      * and returns an ListByCategoryCommand object for execution.
      */
     public Command parse(String args) {
-        if (EMPTY_STRING.equals(args)) {
-            return new ListCommand();
+        if (EMPTY_STRING.equals(args.trim())) {
+            try {
+                return new ListByCategoryCommand(new Category(BUILDIN_ALLTAKS));
+            } catch (IllegalValueException e) {
+                // never reach here as BUILDIN_ALLTAKS is a valid category name
+                e.printStackTrace();
+            }
         }
 
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_CATEGORY);

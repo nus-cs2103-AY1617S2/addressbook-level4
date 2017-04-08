@@ -255,9 +255,15 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    //@@author A0147990R
     @Override
     public void updateFilteredListToShowAll() {
-        filteredTasks.setPredicate(null);
+        try {
+            updateFilteredTaskListByCategory(new Category(CATEGORY_ALL_TASKS));
+        } catch (IllegalValueException e) {
+            // Never reach here as CATEGORY_ALL_TASKS is a valid category name
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -265,7 +271,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new KeywordQualifier(keywords)));
     }
 
-    //@@author A0147990R
     @Override
     public void updateFilteredTaskListByStartDateTime(String keywords) {
         updateFilteredTaskList(new PredicateExpression(new StartDatetimeQualifier(keywords)));
@@ -435,7 +440,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return task.getCategories().contains(categoryKeyWords);
+            if (categoryKeyWords.categoryName.equals(CATEGORY_DONE)) {
+                return task.getCategories().contains(categoryKeyWords);
+            } else {
+                try {
+                    return task.getCategories().contains(categoryKeyWords) &&
+                            !task.getCategories().contains(new Category(CATEGORY_DONE));
+                } catch (IllegalValueException e) {
+                    // neven reach here as CATEGORY_DONE is a valid category name
+                    e.printStackTrace();
+                }
+            }
+            return false;
         }
 
         @Override
