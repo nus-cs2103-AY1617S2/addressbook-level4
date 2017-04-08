@@ -30,6 +30,8 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 450;
     public static final String TAB_TO_DO = "To Do";
     public static final String TAB_DONE = "Done";
+    public static final int TAB_TO_DO_INDEX = 0;
+    public static final int TAB_DONE_INDEX = 1;
 
     private Stage primaryStage;
     private Logic logic;
@@ -38,7 +40,6 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0131278H
     private TaskListPanel toDoTaskListPanel;
     private TaskListPanel doneTaskListPanel;
-    private TaskListPanel taskListPanel;
     // @@author
     private Config config;
 
@@ -211,6 +212,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     // @@author A0131278H
+    
+    public void selectTab(int targetIndex) {
+        taskListsTabPane.getSelectionModel().select(targetIndex);
+    }
+    
     @FXML
     public void onSelectedTabChanged() {
         try {
@@ -252,5 +258,4 @@ public class MainWindow extends UiPart<Region> {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-
 }

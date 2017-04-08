@@ -16,6 +16,7 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.Logic;
@@ -121,6 +122,12 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    }
+    
+    @Subscribe
+    private void handleTabSelectionChangedEvent(TabSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.selectTab(event.targetIndex);
     }
 
 }
