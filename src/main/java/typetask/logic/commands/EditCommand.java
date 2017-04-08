@@ -13,7 +13,7 @@ import typetask.model.task.Name;
 import typetask.model.task.Priority;
 import typetask.model.task.ReadOnlyTask;
 import typetask.model.task.Task;
-
+//@@author A0139926R
 /**
  * Edits the details of an existing task in the TaskManager.
  */
@@ -24,8 +24,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX [NAME] [by:DATE] [@TIME] \n"
-            + "Example: " + COMMAND_WORD + " 1 by:9/11/2017 @11:25pm ";
+            + "Parameters: INDEX [NAME] [by:DATE] [@TIME] [from:DATE] [to:DATE]\n"
+            + "Example: " + COMMAND_WORD + " 1 by: next week 11pm";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -61,6 +61,7 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        //Checks for valid schedule after editing before updating taskManager
         if (!editedTask.getDate().value.equals("")) {
             if (editedTask.getEndDate().value.equals("")) {
                 return new CommandResult(String.format(MESSAGE_MISSING_END_DATE));

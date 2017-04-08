@@ -118,9 +118,7 @@ public class EditCommandParser {
 
   //@@author A0139926R
     public String getDate(String date) {
-        if (date.isEmpty()) {
-            return "";
-        }
+        assert date != "";
         List<Date> dates = DateParser.parse(date);
         String nattyDate = dates.get(0).toString();
         String[] splitDate = nattyDate.split(" ");
