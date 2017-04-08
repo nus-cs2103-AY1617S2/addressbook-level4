@@ -29,7 +29,7 @@ public class GoogleCalendar {
         "Keep It Tidy";
 
     /** Directory to store user credentials for this application. */
-    private static java.io.File dataStoreDir = new java.io.File(
+    private static final java.io.File DATA_STORE_FILE = new java.io.File(
         System.getProperty("user.home"), ".credentials/keep-it-tidy");
 
     /** Global instance of the {@link FileDataStoreFactory}. */
@@ -53,7 +53,7 @@ public class GoogleCalendar {
     static {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-            dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
+            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_FILE);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
@@ -81,7 +81,7 @@ public class GoogleCalendar {
                 .build();
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        logger.info("Credentials saved to " + dataStoreDir.getAbsolutePath());
+        logger.info("Credentials saved to " + DATA_STORE_FILE.getAbsolutePath());
         return credential;
     }
 
@@ -99,12 +99,4 @@ public class GoogleCalendar {
                 .build();
     }
 
-    // @@author A0140063X
-    public static com.google.api.services.calendar.Calendar getGoogleCalendarService() throws IOException {
-        return getCalendarService();
-    }
-
-    public static void setTestGoogleCredentialFilePath() {
-        dataStoreDir = new java.io.File("credentials/");
-    }
 }

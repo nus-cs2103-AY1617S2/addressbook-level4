@@ -84,8 +84,10 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     //@@author A0140063X
     /**
      * Reads from data and creates backup.
-     * @throws IOException
-     * @throws FileNotFoundException
+     *
+     * @param backupFile Path           File path to back up into.
+     * @throws IOException              If input/output error encountered.
+     * @throws FileNotFoundException    If file is not found.
      */
     @Override
     public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {

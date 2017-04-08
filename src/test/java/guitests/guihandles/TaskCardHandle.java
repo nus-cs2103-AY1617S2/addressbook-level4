@@ -78,7 +78,6 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    //@@author A0140063X
     public boolean isSameTask(ReadOnlyTask task) {
         List<String> testTag = getTags();
         List<String> taskTag = getTags(task.getTags());
@@ -96,7 +95,6 @@ public class TaskCardHandle extends GuiHandle {
                 && testTag.equals(taskTag);
     }
 
-    //@@author
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {

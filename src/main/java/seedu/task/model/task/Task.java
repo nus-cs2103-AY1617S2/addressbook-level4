@@ -14,6 +14,9 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
 
     public static final String MESSAGE_TASK_CONSTRAINTS =
             "Start date/time must be earlier than end date/time";
+    public static final String EVENTID_VALIDATION_REGEX = "[a-z,0-9]+";
+    public static final String MESSAGE_EVENTID_CONSTRAINTS = "Event Id must only contain lowercase letters"
+            + "and digits 0-9. Event ID must also be between 5-1024 characters.";
 
     private Name name;
     private Date startDate;
@@ -143,9 +146,32 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
     }
 
     //@@author A0140063X
-    public void setEventId(String eventId) {
+    /**
+     *
+     * @param eventId   Event Id to set.
+     * @throws IllegalValueException    If eventId is invalid.
+     */
+    public void setEventId(String eventId) throws IllegalValueException {
         assert eventId != null && eventId.trim() != "";
+        if (!isValidEventId(eventId)) {
+            throw new IllegalValueException(MESSAGE_EVENTID_CONSTRAINTS);
+        }
         this.eventId = eventId;
+    }
+
+    //@@author A0140063X
+    /**
+     * Checks if eventId is valid
+     *
+     * @param eventId   Event Id to check.
+     * @return          True if valid.
+     */
+    private boolean isValidEventId(String eventId) {
+        if ((eventId.length() < 5) || (eventId.length() > 1024)) {
+            return false;
+        }
+
+        return eventId.matches(EVENTID_VALIDATION_REGEX);
     }
 
     //@@author

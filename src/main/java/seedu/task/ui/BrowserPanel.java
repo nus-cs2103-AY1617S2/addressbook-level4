@@ -37,6 +37,9 @@ public class BrowserPanel extends UiPart<Region> {
 //    }
 
     //@@author A0140063X
+    /**
+     * Loads Google Calendar.
+     */
     public void loadPage() {
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
     }

@@ -76,30 +76,30 @@ public class CommandLibrary {
     private static void init() {
 
         commandTable = new HashMap<>();
-        commandTable.put(AddCommand.COMMAND_WORD_1, new CommandInstance(AddCommand.COMMAND_WORD_1,
-            new AddCommandParser() , AddCommand.MESSAGE_USAGE));
+        commandTable.put(AddCommand.COMMAND_WORD_1,
+                new CommandInstance(AddCommand.COMMAND_WORD_1, new AddCommandParser(), AddCommand.MESSAGE_USAGE));
 
-        commandTable.put(ClearCommand.COMMAND_WORD_1, new CommandInstance(ClearCommand.COMMAND_WORD_1,
-                new ClearCommandParser() , ClearCommand.MESSAGE_USAGE));
+        commandTable.put(ClearCommand.COMMAND_WORD_1,
+                new CommandInstance(ClearCommand.COMMAND_WORD_1, new ClearCommandParser(), ClearCommand.MESSAGE_USAGE));
 
         commandTable.put(DeleteCommand.COMMAND_WORD_1, new CommandInstance(DeleteCommand.COMMAND_WORD_1,
-                new DeleteCommandParser() , DeleteCommand.MESSAGE_USAGE));
+                new DeleteCommandParser(), DeleteCommand.MESSAGE_USAGE));
 
-        commandTable.put(DoneCommand.COMMAND_WORD_1, new CommandInstance(DoneCommand.COMMAND_WORD_1,
-                new DoneCommandParser() , DoneCommand.MESSAGE_USAGE));
-        commandTable.put(DoneCommand.COMMAND_WORD_2, new CommandInstance(DoneCommand.COMMAND_WORD_1,
-                new DoneCommandParser() , DoneCommand.MESSAGE_USAGE));
+        commandTable.put(DoneCommand.COMMAND_WORD_1,
+                new CommandInstance(DoneCommand.COMMAND_WORD_1, new DoneCommandParser(), DoneCommand.MESSAGE_USAGE));
+        commandTable.put(DoneCommand.COMMAND_WORD_2,
+                new CommandInstance(DoneCommand.COMMAND_WORD_1, new DoneCommandParser(), DoneCommand.MESSAGE_USAGE));
 
-        commandTable.put(EditCommand.COMMAND_WORD_1, new CommandInstance(EditCommand.COMMAND_WORD_1,
-                new EditCommandParser() , EditCommand.MESSAGE_USAGE));
+        commandTable.put(EditCommand.COMMAND_WORD_1,
+                new CommandInstance(EditCommand.COMMAND_WORD_1, new EditCommandParser(), EditCommand.MESSAGE_USAGE));
 
-        commandTable.put(ExitCommand.COMMAND_WORD_1, new CommandInstance(ExitCommand.COMMAND_WORD_1,
-                new ExitCommandParser() , ExitCommand.MESSAGE_USAGE));
+        commandTable.put(ExitCommand.COMMAND_WORD_1,
+                new CommandInstance(ExitCommand.COMMAND_WORD_1, new ExitCommandParser(), ExitCommand.MESSAGE_USAGE));
 
-        commandTable.put(FindCommand.COMMAND_WORD_1, new CommandInstance(FindCommand.COMMAND_WORD_1,
-                new FindCommandParser() , FindCommand.MESSAGE_USAGE));
-        commandTable.put(FindCommand.COMMAND_WORD_2, new CommandInstance(FindCommand.COMMAND_WORD_1,
-                new FindCommandParser() , FindCommand.MESSAGE_USAGE));
+        commandTable.put(FindCommand.COMMAND_WORD_1,
+                new CommandInstance(FindCommand.COMMAND_WORD_1, new FindCommandParser(), FindCommand.MESSAGE_USAGE));
+        commandTable.put(FindCommand.COMMAND_WORD_2,
+                new CommandInstance(FindCommand.COMMAND_WORD_1, new FindCommandParser(), FindCommand.MESSAGE_USAGE));
 
         commandTable.put(FindExactCommand.COMMAND_WORD_1, new CommandInstance(FindExactCommand.COMMAND_WORD_1,
                 new FindExactCommandParser(), FindExactCommand.MESSAGE_USAGE));
@@ -111,20 +111,20 @@ public class CommandLibrary {
                 new FindExactCommandParser(), FindExactCommand.MESSAGE_USAGE));
 
         commandTable.put(GetGoogleCalendarCommand.COMMAND_WORD_1,
-                new CommandInstance(GetGoogleCalendarCommand.COMMAND_WORD_1,
-                new GetGoogleCalendarCommandParser(), GetGoogleCalendarCommand.MESSAGE_USAGE));
+                new CommandInstance(GetGoogleCalendarCommand.COMMAND_WORD_1, new GetGoogleCalendarCommandParser(),
+                        GetGoogleCalendarCommand.MESSAGE_USAGE));
         commandTable.put(GetGoogleCalendarCommand.COMMAND_WORD_2,
-                new CommandInstance(GetGoogleCalendarCommand.COMMAND_WORD_1,
-                new GetGoogleCalendarCommandParser(), GetGoogleCalendarCommand.MESSAGE_USAGE));
+                new CommandInstance(GetGoogleCalendarCommand.COMMAND_WORD_1, new GetGoogleCalendarCommandParser(),
+                        GetGoogleCalendarCommand.MESSAGE_USAGE));
 
-        commandTable.put(HelpCommand.COMMAND_WORD_1, new CommandInstance(HelpCommand.COMMAND_WORD_1,
-                new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
-        commandTable.put(HelpCommand.COMMAND_WORD_2, new CommandInstance(HelpCommand.COMMAND_WORD_1,
-                new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
-        commandTable.put(HelpCommand.COMMAND_WORD_3, new CommandInstance(HelpCommand.COMMAND_WORD_1,
-                new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
-        commandTable.put(HelpCommand.COMMAND_WORD_4, new CommandInstance(HelpCommand.COMMAND_WORD_1,
-                new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
+        commandTable.put(HelpCommand.COMMAND_WORD_1,
+                new CommandInstance(HelpCommand.COMMAND_WORD_1, new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
+        commandTable.put(HelpCommand.COMMAND_WORD_2,
+                new CommandInstance(HelpCommand.COMMAND_WORD_1, new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
+        commandTable.put(HelpCommand.COMMAND_WORD_3,
+                new CommandInstance(HelpCommand.COMMAND_WORD_1, new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
+        commandTable.put(HelpCommand.COMMAND_WORD_4,
+                new CommandInstance(HelpCommand.COMMAND_WORD_1, new HelpCommandParser(), HelpCommand.MESSAGE_USAGE));
 
         commandTable.put(HelpFormatCommand.COMMAND_WORD_1, new CommandInstance(HelpFormatCommand.COMMAND_WORD_1,
                 new HelpFormatCommandParser(), HelpFormatCommand.MESSAGE_USAGE));
@@ -135,28 +135,28 @@ public class CommandLibrary {
         commandTable.put(HelpFormatCommand.COMMAND_WORD_4, new CommandInstance(HelpFormatCommand.COMMAND_WORD_1,
                 new HelpFormatCommandParser(), HelpFormatCommand.MESSAGE_USAGE));
 
-        commandTable.put(ListCommand.COMMAND_WORD_1, new CommandInstance(ListCommand.COMMAND_WORD_1,
-                new ListCommandParser(), ListCommand.MESSAGE_USAGE));
-        commandTable.put(ListCommand.COMMAND_WORD_2, new CommandInstance(ListCommand.COMMAND_WORD_1,
-                new ListCommandParser(), ListCommand.MESSAGE_USAGE));
-        commandTable.put(ListCommand.COMMAND_WORD_3, new CommandInstance(ListCommand.COMMAND_WORD_1,
-                new ListCommandParser(), ListCommand.MESSAGE_USAGE));
+        commandTable.put(ListCommand.COMMAND_WORD_1,
+                new CommandInstance(ListCommand.COMMAND_WORD_1, new ListCommandParser(), ListCommand.MESSAGE_USAGE));
+        commandTable.put(ListCommand.COMMAND_WORD_2,
+                new CommandInstance(ListCommand.COMMAND_WORD_1, new ListCommandParser(), ListCommand.MESSAGE_USAGE));
+        commandTable.put(ListCommand.COMMAND_WORD_3,
+                new CommandInstance(ListCommand.COMMAND_WORD_1, new ListCommandParser(), ListCommand.MESSAGE_USAGE));
 
-        commandTable.put(LoadCommand.COMMAND_WORD_1, new CommandInstance(LoadCommand.COMMAND_WORD_1,
-                new LoadCommandParser(), LoadCommand.MESSAGE_USAGE));
+        commandTable.put(LoadCommand.COMMAND_WORD_1,
+                new CommandInstance(LoadCommand.COMMAND_WORD_1, new LoadCommandParser(), LoadCommand.MESSAGE_USAGE));
 
         commandTable.put(PostGoogleCalendarCommand.COMMAND_WORD_1,
-                new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1,
-                new PostGoogleCalendarCommandParser(), PostGoogleCalendarCommand.MESSAGE_USAGE));
+                new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1, new PostGoogleCalendarCommandParser(),
+                        PostGoogleCalendarCommand.MESSAGE_USAGE));
         commandTable.put(PostGoogleCalendarCommand.COMMAND_WORD_2,
-                new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1,
-                        new PostGoogleCalendarCommandParser(), PostGoogleCalendarCommand.MESSAGE_USAGE));
+                new CommandInstance(PostGoogleCalendarCommand.COMMAND_WORD_1, new PostGoogleCalendarCommandParser(),
+                        PostGoogleCalendarCommand.MESSAGE_USAGE));
 
-        commandTable.put(RedoCommand.COMMAND_WORD_1, new CommandInstance(RedoCommand.COMMAND_WORD_1,
-                new RedoCommandParser(), RedoCommand.MESSAGE_USAGE));
+        commandTable.put(RedoCommand.COMMAND_WORD_1,
+                new CommandInstance(RedoCommand.COMMAND_WORD_1, new RedoCommandParser(), RedoCommand.MESSAGE_USAGE));
 
-        commandTable.put(SaveCommand.COMMAND_WORD_1, new CommandInstance(SaveCommand.COMMAND_WORD_1,
-                new SaveCommandParser(), SaveCommand.MESSAGE_USAGE));
+        commandTable.put(SaveCommand.COMMAND_WORD_1,
+                new CommandInstance(SaveCommand.COMMAND_WORD_1, new SaveCommandParser(), SaveCommand.MESSAGE_USAGE));
 
         commandTable.put(SelectCommand.COMMAND_WORD_1, new CommandInstance(SelectCommand.COMMAND_WORD_1,
                 new SelectCommandParser(), SelectCommand.MESSAGE_USAGE));
@@ -164,17 +164,17 @@ public class CommandLibrary {
                 new SelectCommandParser(), SelectCommand.MESSAGE_USAGE));
 
         commandTable.put(SmartAddCommand.COMMAND_WORD_1, new CommandInstance(SmartAddCommand.COMMAND_WORD_1,
-            new SmartAddCommandParser() , SmartAddCommand.MESSAGE_USAGE));
+                new SmartAddCommandParser(), SmartAddCommand.MESSAGE_USAGE));
         commandTable.put(SmartAddCommand.COMMAND_WORD_2, new CommandInstance(SmartAddCommand.COMMAND_WORD_1,
-                new SmartAddCommandParser() , SmartAddCommand.MESSAGE_USAGE));
+                new SmartAddCommandParser(), SmartAddCommand.MESSAGE_USAGE));
 
         commandTable.put(ThemeChangeCommand.COMMAND_WORD_1, new CommandInstance(ThemeChangeCommand.COMMAND_WORD_1,
                 new ThemeChangeCommandParser(), ThemeChangeCommand.MESSAGE_USAGE));
 
-        commandTable.put(UndoCommand.COMMAND_WORD_1, new CommandInstance(UndoCommand.COMMAND_WORD_1,
-                new UndoCommandParser(), UndoCommand.MESSAGE_USAGE));
-        commandTable.put(UndoCommand.COMMAND_WORD_2, new CommandInstance(UndoCommand.COMMAND_WORD_1,
-                new UndoCommandParser(), UndoCommand.MESSAGE_USAGE));
+        commandTable.put(UndoCommand.COMMAND_WORD_1,
+                new CommandInstance(UndoCommand.COMMAND_WORD_1, new UndoCommandParser(), UndoCommand.MESSAGE_USAGE));
+        commandTable.put(UndoCommand.COMMAND_WORD_2,
+                new CommandInstance(UndoCommand.COMMAND_WORD_1, new UndoCommandParser(), UndoCommand.MESSAGE_USAGE));
 
         commandTable.put(UndoneCommand.COMMAND_WORD_1, new CommandInstance(UndoneCommand.COMMAND_WORD_1,
                 new UndoneCommandParser(), UndoneCommand.MESSAGE_USAGE));
@@ -196,6 +196,11 @@ public class CommandLibrary {
         return commandTable.get(commandWord).commandParser.parse(arguments.trim());
     }
 
+    /**
+     * @param commandWord
+     *            is the keyword of the command queried
+     * @return Returns the command Usage for the commadn queried
+     */
     public String getCommandUsage(String commandWord) {
         if (!commandTable.containsKey(commandWord)) {
             EventsCenter.getInstance().post(new QueryUnknownCommandEvent());
@@ -204,7 +209,7 @@ public class CommandLibrary {
         return commandTable.get(commandWord).getCommandUsage();
     }
 
-    protected static class CommandInstance {
+    public static class CommandInstance {
         private String commandKey;
         private String commandUsage;
         private CommandParser commandParser;

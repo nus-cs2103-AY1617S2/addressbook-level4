@@ -11,6 +11,7 @@ public class TaskManagerChangedEvent extends BaseEvent {
 
     // @@author A0140063X
     public TaskManagerChangedEvent(ReadOnlyTaskManager data, String backupFilePath) {
+        assert data != null;
         this.data = data;
         this.backupFilePath = backupFilePath;
     }

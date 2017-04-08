@@ -1,12 +1,17 @@
 package seedu.task.commons.util;
 
+import java.util.logging.Logger;
+
 import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 
 //@@author A0142487Y
 public class DateUtil {
+
+    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
 
     /**
      * Extracts valid information by parsing a sentence to formulate a Date object. If no valid date can be inferred, an
@@ -70,16 +75,13 @@ public class DateUtil {
         assert words.length == number;
 
         String testDate = StringUtil.arrayToString(words);
-        if (Date.isValidDate(testDate)) {
-            try {
-                return new Date(testDate);
-            } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return null;
-            }
+        try {
+            return new Date(testDate);
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            logger.info(e.getMessage());
+            return null;
         }
-        return null;
     }
 
     /**

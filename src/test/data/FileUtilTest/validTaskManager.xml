@@ -2,43 +2,43 @@
 <taskmanager>
     <tasks>
         <name>Add tutor to github</name>
-        <startDate>3/6/2007 12:00 AM</startDate>
-        <endDate>3/7/2007 12:00 AM</endDate>
+        <startDate>6/3/2007 12:00 AM</startDate>
+        <endDate>7/3/2007 12:00 AM</endDate>
         <remark>For CS2103T V0.1</remark>
         <location>Blk 30 Geylang Street 29, #06-40</location>
     </tasks>
     <tasks>
         <name>Bridge competition</name>
-        <startDate>12/10/12007 12:00 AM</startDate>
+        <startDate>10/12/2007 12:00 AM</startDate>
         <endDate>12/12/2017 12:00 AM</endDate>
         <remark>Match 3, table A</remark>
         <location>Blk 30 Lorong 3 Serangoon Gardens, #07-18</location>
     </tasks>
     <tasks>
         <name>Change USD to SGD</name>
-        <startDate>8/1/2015 12:00 AM</startDate>
-        <endDate>8/7/2015 12:00 AM</endDate>
+        <startDate>1/8/2015 12:00 AM</startDate>
+        <endDate>7/8/2015 12:00 AM</endDate>
         <remark>Too much change from trip</remark>
         <location>Blk 11 Ang Mo Kio Street 74, #11-04</location>
     </tasks>
     <tasks>
         <name>Download lecture notes</name>
-        <startDate>8/6/2017 12:00 AM</startDate>
-        <endDate>8/23/2017 12:00 AM</endDate>
+        <startDate>6/3/2017 12:00 AM</startDate>
+        <endDate>23/8/2017 12:00 AM</endDate>
         <remark>For open-book finals</remark>
         <location>Blk 436 Serangoon Gardens Street 26, #16-43</location>
     </tasks>
     <tasks>
         <name>Invite friends over for housewarming</name>
-        <startDate>3/6/2017 11:00 PM</startDate>
-        <endDate>3/9/2017 12:00 AM</endDate>
+        <startDate>6/3/2017 11:00 PM</startDate>
+        <endDate>9/3/2017 12:00 AM</endDate>
         <remark>prepare food as well</remark>
         <location>Blk 47 Tampines Street 20, #17-35</location>
     </tasks>
     <tasks>
         <name>Rewatch lecture 4 webcast</name>
-        <startDate>3/6/2017 10:00 AM</startDate>
-        <endDate>3/17/2017 12:00 AM</endDate>
+        <startDate>6/3/2017 10:00 AM</startDate>
+        <endDate>17/3/2017 12:00 AM</endDate>
         <remark>on algebraic query</remark>
         <location>Blk 45 Aljunied Street 85, #11-31</location>
     </tasks>

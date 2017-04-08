@@ -5,16 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.History;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.FilePathChangedEvent;
-import seedu.task.commons.events.model.LoadNewFileEvent;
-import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
@@ -58,46 +54,51 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * Resets data of taskManager.
+     */
     @Override
     public void resetData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * Load data into taskManager. Used by Undo/Redo Command.
+     */
     @Override
     public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     *
+     * @return taskManager of model.
+     */
     @Override
     public ReadOnlyTaskManager getTaskManager() {
         return taskManager;
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
     /**
-     * Raises an event to indicate the model has changed
+     * Raises an event to indicate the model has changed.
      *
-     * @param backupFilePath
+     * @param backupFilePath    File path to back up into.
      */
     private void indicateTaskManagerChanged(String backupFilePath) {
         history.handleTaskManagerChanged(backupFilePath);
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
-    // @@author
+    //@@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
-    }
-
-    private void indicateLoadChanged(String loadPath) {
-        raise(new LoadNewFileEvent(loadPath, taskManager));
-        raise(new FilePathChangedEvent(loadPath, taskManager));
     }
 
     @Override
@@ -122,11 +123,16 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     *
+     * @param target    Target task to change.
+     * @param eventId   Event id to change into.
+     */
     @Override
-    public void setTaskEventId(int index, String eventId) {
-        int taskManagerIndex = filteredTasks.getSourceIndex(index);
-        taskManager.setTaskEventId(taskManagerIndex, eventId);
+    public void setTaskEventId(ReadOnlyTask target, String eventId)
+            throws TaskNotFoundException, IllegalValueException {
+        taskManager.setTaskEventId(target, eventId);
         indicateTaskManagerChanged("");
     }
 
@@ -138,14 +144,19 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    // @@author A0140063X
+    //@@author A0140063X
+    /**
+     * This method adds every task in tasks to model.
+     *
+     * @param tasks     ArrayList of task to add.
+     */
     @Override
     public void addMultipleTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
             try {
                 taskManager.addTaskToFront(task);
             } catch (DuplicateTaskException e) {
-                logger.info("Duplicate task " + task.getName() + " from google calendar not added.");
+                logger.info("Duplicate task " + task.getName() + " not added.");
             }
         }
 
@@ -177,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void loadFromLocation(String loadPath) {
-        indicateLoadChanged(loadPath);
+        indicateFilePathChanged(loadPath);
     }
 
     // =========== Filtered Task List Accessors =============================================================
@@ -339,15 +350,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (isExact) {
-                return StringUtil.containsExactWordsIgnoreCase(task.getName().fullName, keywords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getRemark().toString(), keywords)
-                        || StringUtil.containsExactWordsIgnoreCase(task.getLocation().toString(), keywords);
-            } else {
-                return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
+            return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
                         : (this.stringQualifier.run(task)
                                 && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
-            }
         }
     }
     // @@author
@@ -366,10 +371,6 @@ public class ModelManager extends ComponentManager implements Model {
             return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
-        @Override
-        public String toString() {
-            return "Tag = " + tagKeyword;
-        }
     }
 
     // @@author A0139975J
@@ -386,9 +387,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         @Override
         public boolean run(ReadOnlyTask task) {
-            if (date.isNull()) {
-                return false;
-            }
             return task.getEndDate().equalsIgnoreTime(date) || task.getStartDate().equalsIgnoreTime(date);
         }
     }
@@ -417,14 +415,6 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             return this.value == task.isDone();
         }
-    }
-
-    // @@author A0142939W
-    @Override
-    @Subscribe
-    public void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event) {
-        taskManager.resetData(event.readOnlyTaskManager);
-        logger.info("Resetting data from new load location.");
     }
 
 }

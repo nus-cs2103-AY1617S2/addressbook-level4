@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.model.LoadNewFileSuccessEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.Date;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * The API of the Model component.
@@ -38,7 +38,7 @@ public interface Model {
 
     //@@author A0140063X
     /** Sets the eventId of task */
-    void setTaskEventId(int index, String eventId);
+    void setTaskEventId(ReadOnlyTask target, String eventId) throws TaskNotFoundException, IllegalValueException;
 
     //@@author
     /** Adds the given Task. */
@@ -95,11 +95,7 @@ public interface Model {
     //@@author A0142939W
     /** Changes the load path for data to be loaded from*/
     void loadFromLocation(String loadPath);
-
-    //@@author A0142939W
-    /** Loads the file from the path to be loaded from*/
-    void handleLoadNewFileSuccessEvent(LoadNewFileSuccessEvent event);
-
+    //@@author
     /** Sorts the task list */
     void sortTaskList();
 

@@ -15,7 +15,7 @@ public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "redo";
     public static final String MESSAGE_SUCCESS = "Redo successful!";
-    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to redo. Can only redo after undo.";
+    public static final String MESSAGE_FAIL_NOT_FOUND = "Unable to redo. Backup file not found.";
     public static final String MESSAGE_FAIL = "Nothing to redo. Already at latest state.";
     public static final String MESSAGE_USAGE = COMMAND_WORD_1
             + ": Redo the most recent undo.\n"
@@ -27,6 +27,7 @@ public class RedoCommand extends Command {
         assert model != null;
         assert storage != null;
 
+        //Check that redo call is valid.
         int redoCount = history.getRedoCount();
         if (redoCount <= 0) {
             return new CommandResult(MESSAGE_FAIL);
@@ -36,8 +37,10 @@ public class RedoCommand extends Command {
             ReadOnlyTaskManager backupData = readTaskManager(history.getRedoFilePath());
             model.loadData(backupData);
         } catch (IOException io) {
+            history.resetRedoCount();
             return new CommandResult(MESSAGE_FAIL_NOT_FOUND);
         } catch (IllegalValueException ive) {
+            history.resetRedoCount();
             return new CommandResult(Task.MESSAGE_TASK_CONSTRAINTS);
         }
 

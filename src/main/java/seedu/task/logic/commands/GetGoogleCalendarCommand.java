@@ -41,17 +41,17 @@ public class GetGoogleCalendarCommand extends Command {
             if (events.size() == 0) {
                 return new CommandResult("No events found");
             }
-            logger.info("Events retrieved from Google Calendar. Attempting to add.");
 
+            logger.info("Events retrieved from Google Calendar. Attempting to add.");
             for (Event event : events) {
                 try {
                     tasks.add(LogicHelper.createTaskFromEvent(event));
                     logger.info("New event from google calendar sucessfully added.");
                 } catch (IllegalValueException ive) {
                     logger.info(ive.getMessage());
+                    // Continue to add next event even if one fails.
                 }
             }
-
         } catch (IOException e) {
             return new CommandResult(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
         }
@@ -61,6 +61,13 @@ public class GetGoogleCalendarCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * This method makes the query to google calendar and returns the list of events.
+     * Will only get upcoming and non recurring events.
+     *
+     * @return List of obtained events.
+     * @throws IOException  If connection failed.
+     */
     private List<Event> getEventsFromGoogle() throws IOException {
         com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
         DateTime now = new DateTime(new java.util.Date());
@@ -72,6 +79,11 @@ public class GetGoogleCalendarCommand extends Command {
         return events.getItems();
     }
 
+    /**
+     * This method adds the given list of tasks to model, sort and list them.
+     *
+     * @param tasks    The list of tasks to add.
+     */
     private void addMultipleTaskToModel(ArrayList<Task> tasks) {
         assert model != null;
         model.addMultipleTasks(tasks);

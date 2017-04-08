@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.Model;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -60,6 +59,9 @@ public abstract class Command {
     /**
      * Provides any needed dependencies to the command. Commands making use of any of these should override this method
      * to gain access to the dependencies.
+     *
+     * @param model     Model component of KIT.
+     * @param storage   Storage component of KIT.
      */
     public void setData(Model model, Storage storage) {
         this.model = model;
@@ -67,7 +69,15 @@ public abstract class Command {
     }
 
     // @@author A0140063X
-    protected ReadOnlyTaskManager readTaskManager(String filePath) throws IOException, IllegalValueException {
+    /**
+     * This method gets storage to read taskmanager data from the given filePath and returns the data back to caller.
+     *
+     * @param filePath      File path to read from.
+     * @return              ReadOnlyTaskManager created from file.
+     * @throws IOException  If file not found or unable to read.
+     */
+    protected ReadOnlyTaskManager readTaskManager(String filePath) throws IOException {
+        assert storage != null;
         try {
             Optional<ReadOnlyTaskManager> taskManagerOptional = storage.readTaskManager(filePath);
 
@@ -79,11 +89,19 @@ public abstract class Command {
         } catch (DataConversionException dce) {
             throw new IOException("Data conversion error.");
         } catch (IOException ioe) {
-            throw new IOException("File not found.");
+            throw new IOException("Unable to read from file.");
         }
     }
 
     // @@author A0140063X
+    /**
+     * This method returns the task for the given index. CommandException is thrown if index is invalid.
+     * Otherwise the correct task will be returned as a ReadOnlyTask.
+     *
+     * @param index     Index of desired task.
+     * @return          Task that corresponds to index.
+     * @throws CommandException     If index is invalid.
+     */
     protected ReadOnlyTask getTaskFromIndex(int index) throws CommandException {
         assert model != null;
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -91,6 +109,7 @@ public abstract class Command {
         if (index >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+
         return lastShownList.get(index);
     }
 }
