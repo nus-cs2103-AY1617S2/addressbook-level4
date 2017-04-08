@@ -44,7 +44,7 @@ public class SyncManagerTest {
     @Test
     public void syncManagerUpdateTaskListWithValidTaskExpectSyncServiceUpdateListSuccessful() {
         assertNotNull(syncManager);
-        
+
         Task mockTask = mock(Task.class);
         Optional<DateTime> mockStartDateTime = Optional.ofNullable(null);
         Optional<DateTime> mockEndDateTime = Optional.of(mock(DateTime.class));
