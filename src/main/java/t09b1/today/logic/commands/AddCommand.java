@@ -30,7 +30,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_SUCCESS_STATUS_BAR = "New task added successfully.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the task manager";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 
@@ -93,7 +93,7 @@ public class AddCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
                     MESSAGE_SUCCESS_STATUS_BAR);
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
 

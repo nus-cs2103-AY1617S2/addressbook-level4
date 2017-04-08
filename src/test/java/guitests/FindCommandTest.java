@@ -11,7 +11,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
         // No results
-        assertFindResult("find dragon", new Task[] {}, new Task[] {}, new Task[] {});
+        assertFindResult("find dragon", emptyTaskList, emptyTaskList, emptyTaskList);
 
         // Multiple Results
         assertFindResult("find assignment", new Task[] { td.todayListOverdue },
@@ -19,14 +19,14 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
         // find after deleting one result
         commandBox.runCommand("delete T1");
-        assertFindResult("find assignment", new Task[] {}, new Task[] { td.futureListDeadline, td.futureListEvent },
+        assertFindResult("find assignment", emptyTaskList, new Task[] { td.futureListDeadline, td.futureListEvent },
                 new Task[] { td.completedListFloat });
     }
 
     @Test
     public void find_emptyList() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean", new Task[] {}, new Task[] {}, new Task[] {});
+        assertFindResult("find Jean", emptyTaskList, emptyTaskList, emptyTaskList);
     }
 
     @Test
