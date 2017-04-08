@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
+import t09b1.today.TestApp;
 
 /**
  * A handler for the BrowserPanel of the UI
