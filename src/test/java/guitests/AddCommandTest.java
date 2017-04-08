@@ -43,6 +43,10 @@ public class AddCommandTest extends WhatsLeftGuiTest {
         assertAddEventSuccess(eventToAdd, currentEventList);
         assertResultMessage("New event added but with possible clash! : " + eventToAdd.getAsText());
 
+        //add an event with invalid end date time
+        commandBox.runCommand("add CS2102 Demostration st/0800 sd/060717 et/0900 ed/050717");
+        assertResultMessage(AddCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+
         //add to empty list
         commandBox.runCommand("clear ev");
         currentEventList = TestUtil.removeEventsFromList(currentEventList, currentEventList);

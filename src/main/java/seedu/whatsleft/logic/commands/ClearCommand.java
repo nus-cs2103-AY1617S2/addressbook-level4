@@ -1,6 +1,5 @@
 package seedu.whatsleft.logic.commands;
 
-import seedu.whatsleft.commons.core.Messages;
 import seedu.whatsleft.logic.commands.exceptions.CommandException;
 import seedu.whatsleft.model.ModelManager;
 import seedu.whatsleft.model.ReadOnlyWhatsLeft;
@@ -34,15 +33,7 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        if (typeToClear.equals("")) {
-            assert model != null;
-            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-            ModelManager.setPreviousState(currState);
-            model.resetData(new WhatsLeft());
-            //store for undo operation
-            model.storePreviousCommand("clear");
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else if (typeToClear.equals("ev")) {
+        if (typeToClear.equals("ev")) {
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();
             ModelManager.setPreviousState(currState);
@@ -59,7 +50,13 @@ public class ClearCommand extends Command {
             model.storePreviousCommand("clear");
             return new CommandResult(CLEAR_TASKS_SUCCESS);
         } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_TYPE);
+            assert model != null;
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
+            model.resetData(new WhatsLeft());
+            //store for undo operation
+            model.storePreviousCommand("clear");
+            return new CommandResult(MESSAGE_SUCCESS);
         }
 
     }

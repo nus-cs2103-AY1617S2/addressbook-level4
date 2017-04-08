@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
                 EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
                 model.deleteEvent(eventToDelete);
                 model.storePreviousCommand("delete");
-            } catch (EventNotFoundException pnfe) {
+            } catch (EventNotFoundException enfe) {
                 assert false : "The target event cannot be missing";
             }
             return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));

@@ -128,8 +128,11 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
 
+            //@@authour A0148038A
             UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
+
+            //@@author A0110491U
             if (!editedEvent.isOver()) {
                 EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
             }
@@ -357,7 +360,7 @@ public class EditCommand extends Command {
             startTimeToCompare = eventToEdit.getStartTime();
         }
 
-        return Event.isValideEndDateTime(endTimeToCompare, endDateToCompare, startTimeToCompare, startDateToCompare);
+        return Event.isValidEndDateTime(endTimeToCompare, endDateToCompare, startTimeToCompare, startDateToCompare);
     }
 
     //@@author A0110491U

@@ -34,7 +34,7 @@ public class ClearCommandTest extends WhatsLeftGuiTest {
         assertEventListSize(0);
 
         //invalid command
-        commandBox.runCommand("clear invalid event");
+        commandBox.runCommand("clear deadline");
         assertResultMessage("Invalid command format! \n" + ClearCommand.MESSAGE_USAGE);
 
         //verify clear command works when the list is empty
@@ -61,10 +61,6 @@ public class ClearCommandTest extends WhatsLeftGuiTest {
 
         //verify clear command works when the list is empty
         assertClearTaskCommandSuccess();
-
-        //invalid command
-        commandBox.runCommand("clear invalid task");
-        assertResultMessage("Invalid command format! \n" + ClearCommand.MESSAGE_USAGE);
     }
 
     @Test
