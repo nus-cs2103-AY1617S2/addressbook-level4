@@ -393,7 +393,7 @@ As you start getting more and more tasks, you might need to start scrolling to l
 
 #### 3.8.1. Getting help
 
-To view this user guide you're currently viewing, you can use the F1 hotkey or use the `help` command.
+To view this user guide you're currently viewing, you can use the `help` command.
 
 ##### Format: `help`
 
