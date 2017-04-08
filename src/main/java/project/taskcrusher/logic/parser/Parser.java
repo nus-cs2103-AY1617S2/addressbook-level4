@@ -65,11 +65,11 @@ public class Parser {
             return new ConfirmCommandParser().parse(arguments);
 
         case LoadCommand.COMMAND_WORD:
-            return new LoadCommand(arguments.trim());
+            return new LoadCommandParser().parse(arguments);
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
-        // TODO remove this later on
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

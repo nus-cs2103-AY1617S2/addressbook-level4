@@ -4,7 +4,7 @@ import project.taskcrusher.commons.events.BaseEvent;
 
 //@@author A0127737X
 /**
- * Used to notify the UI about the number of items in each list so that it can display to the user.
+ * Used to notify the UI about the number of items in each list so that it can display them to the user.
  */
 public class ListsToShowUpdatedEvent extends BaseEvent {
 

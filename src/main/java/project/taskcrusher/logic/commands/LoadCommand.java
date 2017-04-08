@@ -15,20 +15,25 @@ import project.taskcrusher.logic.commands.exceptions.CommandException;
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": loads an xml storage file with the name given\n "
-            + "if the file does not exist, a new file will be created and set as the new storage file\n"
-            + "Parameters: XML_FILE_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": loads an xml storage file with the name given\n"
+            + "To create and load a new file, type in new before file name. Otherwise, it loads an existing file\n"
+            + "Parameters: [new] XML_FILE_NAME";
 
     public static final String MESSAGE_LOAD_SUCCESS = "Loaded file %1$s";
     public static final String MESSAGE_INVALID_FILENAME = "Invalid file name given";
+    public static final String MESSAGE_FILE_ALREADY_EXISTS = "The file %1$s already exists";
+    public static final String MESSAGE_FILE_NONEXISTENT = "The file %1$s does not exist";
     public static final String MESSAGE_INVALID_EXTENSION = "Only xml files are supported for data storage";
     public static final String XML_EXTENSION = ".xml";
+    public static final boolean IS_CREATE_NEW_FILE = true;
 
     public final String filenameToLoad;
+    public final boolean isCreateNewFile;
 
-    public LoadCommand(String filenameToLoad) {
+    public LoadCommand(String filenameToLoad, boolean isCreateNewFile) {
         assert filenameToLoad != null;
-        this.filenameToLoad = filenameToLoad.trim();
+        this.filenameToLoad = filenameToLoad;
+        this.isCreateNewFile = isCreateNewFile;
     }
 
     @Override
@@ -40,17 +45,27 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_EXTENSION);
         }
 
-        try {
-            FileUtil.createIfMissing(new File(filenameToLoad));
-            raise (new LoadNewStorageFileEvent(filenameToLoad));
-            return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, filenameToLoad));
-        } catch (IOException ioe) {
-            throw new CommandException(MESSAGE_INVALID_FILENAME);
+        if (isCreateNewFile) {
+            if (FileUtil.isFileExists(new File(filenameToLoad))) {
+                throw new CommandException(String.format(MESSAGE_FILE_ALREADY_EXISTS, filenameToLoad));
+            } else {
+                try {
+                    FileUtil.createIfMissing(new File(filenameToLoad));
+                } catch (IOException e) {
+                    throw new CommandException(MESSAGE_INVALID_FILENAME);
+                }
+            }
+        } else {
+            if (!FileUtil.isFileExists(new File(filenameToLoad))) {
+                throw new CommandException(String.format(MESSAGE_FILE_NONEXISTENT, filenameToLoad));
+            }
         }
+
+        raise (new LoadNewStorageFileEvent(filenameToLoad));
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, filenameToLoad));
     }
 
     private void raise(BaseEvent e) {
         EventsCenter.getInstance().post(e);
     }
-
 }
