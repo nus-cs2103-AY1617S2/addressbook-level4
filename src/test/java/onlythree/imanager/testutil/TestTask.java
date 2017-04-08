@@ -12,7 +12,7 @@ import onlythree.imanager.model.task.StartEndDateTime;
 /**
  * A mutable task object. For testing only.
  */
-public class TestTask implements ReadOnlyTask {
+public class TestTask extends ReadOnlyTask {
 
     private Name name;
     private Optional<Deadline> deadline;
@@ -92,12 +92,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setComplete(boolean complete) {
         this.complete = complete;
-    }
-
-    //@@author
-    @Override
-    public String toString() {
-        return getAsText();
     }
 
     //@@author A0140023E
