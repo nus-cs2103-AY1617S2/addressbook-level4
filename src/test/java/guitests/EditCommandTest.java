@@ -6,7 +6,6 @@ import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.EditCommand;
@@ -75,7 +74,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
 
         detailsToEdit = "don't play play";
-        taskManagerIndex = 6;
+        taskManagerIndex = 3;
         taskToEdit = expectedTasksList[taskManagerIndex - 1];
         editedTask = new TaskBuilder(taskToEdit).withDescription(detailsToEdit).build();
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
@@ -95,7 +94,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         //floating to event
         detailsToEdit = "from/5/12 to/6/12";
-        taskManagerIndex = 5;
+        taskManagerIndex = 3;
         taskToEdit = expectedTasksList[taskManagerIndex - 1];
         editedTask = new TaskBuilder(taskToEdit).withStartDate("5/12").withEndDate("6/12").build();
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
@@ -197,9 +196,9 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find mug");
+        commandBox.runCommand("find eat");
 
-        String detailsToEdit = "mugger muggings";
+        String detailsToEdit = "eatings";
         int filteredTaskListIndex = 1;
         int taskManagerIndex = 2;
 

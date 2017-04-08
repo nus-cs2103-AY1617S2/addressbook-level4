@@ -25,11 +25,11 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate."; //TODO merv to use
-
-    private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
+    public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_DELETE_TASK_SUCCESSFUL = "Task #%1$d deleted: %2$s";
-    private static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
+    public static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
     public static final String MESSAGE_STATUS_ALREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;

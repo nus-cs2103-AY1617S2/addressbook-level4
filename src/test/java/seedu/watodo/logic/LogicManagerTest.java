@@ -90,7 +90,7 @@ public class LogicManagerTest {
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be
-                                                                          // up to date
+        // up to date
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -99,6 +99,8 @@ public class LogicManagerTest {
     public void tearDown() {
         EventsCenter.clearSubscribers();
     }
+
+    // ================ For all commands ==============================
 
     @Test
     public void execute_invalid() {
@@ -195,6 +197,8 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
 
+    // ================ For Add Command ==============================
+
     //@@author A0143076J
     @Test
     public void execute_add_invalidArgsFormat() {
@@ -236,7 +240,7 @@ public class LogicManagerTest {
         builder.append("add ").append(deadline3.getDescription()).append(" on/").append(deadline3.getEndDate());
         expectedTM.addTask(deadline3);
         assertCommandSuccess(builder.toString(), String.format(AddCommand.MESSAGE_SUCCESS, deadline3),
-                             expectedTM, expectedTM.getTaskList());
+                expectedTM, expectedTM.getTaskList());
         //equivalence partition 5
         Task event5 = helper.generateTaskWithDescriptionAndStartEndDates(
                 "no sleep code everyday", "today", "next sun", "life");
@@ -249,7 +253,7 @@ public class LogicManagerTest {
         }
         expectedTM.addTask(event5);
         assertCommandSuccess(builder.toString(), String.format(AddCommand.MESSAGE_SUCCESS, event5),
-                             expectedTM, expectedTM.getTaskList());
+                expectedTM, expectedTM.getTaskList());
     }
 
     @Test
@@ -304,6 +308,8 @@ public class LogicManagerTest {
         assertCommandFailure(helper.generateAddCommand(invalidEvent), DateTime.MESSAGE_DATETIME_START_LATER_THAN_END);
     }
 
+    // ================ For Edit Command ==============================
+
     //@@author A0143076J-reused
     //similar to EditCommandTest cases under guitests package
     @Test
@@ -329,6 +335,8 @@ public class LogicManagerTest {
         assertCommandFailure("edit 1 from/thurs", DateTimeParser.MESSAGE_INVALID_DATETIME_PREFIX_COMBI);
         assertCommandFailure("edit 1 #$%^^", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
+
+    // ================ For List Command ==============================
 
     @Test
     public void execute_list_showsAllTasks() throws Exception {
@@ -381,6 +389,8 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
+    // ================ For Select Command ==============================
+
     @Test
     public void execute_selectInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
@@ -406,6 +416,8 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
 
+    // ================ For Delete Command ==============================
+
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -427,8 +439,11 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
-                threeTasks.get(0)), expectedTM, expectedTM.getTaskList());
+
+                1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
     }
+
+    // ================ For Find Command ==============================
 
     @Test
     public void execute_find_invalidArgsFormat() {
@@ -487,6 +502,8 @@ public class LogicManagerTest {
         assertCommandSuccess("find key random", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
+
+    // ================ To generate test data ==============================
 
     //@@author A0143076J
     /**

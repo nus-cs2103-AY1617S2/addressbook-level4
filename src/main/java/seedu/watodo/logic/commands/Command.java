@@ -1,8 +1,12 @@
 package seedu.watodo.logic.commands;
 
+import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.core.Messages;
+import seedu.watodo.commons.core.UnmodifiableObservableList;
+import seedu.watodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.model.Model;
+import seedu.watodo.model.task.ReadOnlyTask;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -51,4 +55,25 @@ public abstract class Command {
     public void redo() {
 
     }
+
+    //@@author A0139845R-reused
+    /**
+     * Selects the last task of the task list
+     */
+    protected void selectLastTask() {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        int targetIndex = lastShownList.size();
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
+    }
+
+    /**
+     * Selects the task at index (base 0)
+     * @param taskIndex
+     */
+    protected void selectTaskAtIndex(int taskIndex) {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        assert lastShownList.size() > taskIndex;
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(taskIndex - 1));
+    }
+    //@@author
 }

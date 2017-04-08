@@ -1,6 +1,5 @@
 package seedu.watodo.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -56,7 +55,7 @@ public class JsonUserPrefsStorageTest {
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
         return userPrefsFileInTestDataFolder != null
                 ? TEST_DATA_FOLDER + userPrefsFileInTestDataFolder
-                : null;
+                        : null;
     }
 
     @Test
@@ -78,7 +77,6 @@ public class JsonUserPrefsStorageTest {
         UserPrefs expected = new UserPrefs();
         expected.setGuiSettings(1000, 500, 300, 100);
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
-
         assertEquals(expected, actual);
     }
 
@@ -95,8 +93,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) throws IOException {
-        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                .saveUserPrefs(userPrefs);
+        new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder)).saveUserPrefs(userPrefs);
     }
 
     @Test

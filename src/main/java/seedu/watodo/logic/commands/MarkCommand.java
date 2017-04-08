@@ -26,10 +26,11 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
-    private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
+    public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_MARK_TASK_SUCCESSFUL = "Task #%1$d completed: %2$s";
-    private static final String MESSAGE_MARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as complete.";
+    public static final String MESSAGE_MARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as complete.";
     public static final String MESSAGE_STATUS_ALREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
