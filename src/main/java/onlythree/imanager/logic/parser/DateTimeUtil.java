@@ -95,8 +95,11 @@ public class DateTimeUtil {
             // but cases such as 2 hours after 25 Apr 8pm does not work
             // Neither does cases such as 2 hours after 25 Apr 8pm
             newDate = date;
+        } else if (hasDateAndTimeSpecified(dateGroup)) {
+            // date and time already clearly specified so no need to parse relative to previous date-time
+            newDate = date;
         } else {
-            newDate = parseDateTimeUsingPrevious(previousDateTime, dateGroup);
+            newDate = parseDateTimeUsingPrevious(dateGroup, previousDateTime);
         }
         // Convert the old java.util.Date class to the much better new classes in java.time package
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(newDate.toInstant(), DateTimeUtil.TIME_ZONE);
@@ -123,7 +126,10 @@ public class DateTimeUtil {
         return dateTimeTypeSubtree.getText();
     }
 
-    private static Date parseDateTimeUsingPrevious(ZonedDateTime previousDateTime, DateGroup previousDateGroup)
+    /**
+     * Returns a new date-time using the previous date or time combined with the date or time component extracted.
+     */
+    private static Date parseDateTimeUsingPrevious(DateGroup previousDateGroup, ZonedDateTime previousDateTime)
             throws IllegalValueException {
 
         String extractedDateTime = extractComponentFromDateTime(previousDateGroup);
@@ -144,8 +150,10 @@ public class DateTimeUtil {
     private static String extractComponentFromDateTime(DateGroup dateGroup) {
         // the date group given should contain one and only one date.
         assert dateGroup.getDates() != null && dateGroup.getDates().size() == 1;
-        // this means there is a bug somewhere as the date and time cannot be both inferred
+        // The date and time cannot be both inferred as that means nothing is specified at all
         assert !(dateGroup.isDateInferred() && dateGroup.isTimeInferred());
+        // if both date and time is specified we cannot extract any components
+        assert !hasDateAndTimeSpecified(dateGroup);
 
         final Date date = dateGroup.getDates().get(0);
 
@@ -162,8 +170,12 @@ public class DateTimeUtil {
         if (hasOnlyDateSpecified) {
             return new SimpleDateFormat("yyyy-MM-dd").format(date);
         }
-        // No component to extract if neither date or time is inferred, thus return a null
-        return null;
+
+        throw new AssertionError("An extracted date/time component should have been returned.");
+    }
+
+    private static boolean hasDateAndTimeSpecified(DateGroup dateGroup) {
+        return !dateGroup.isDateInferred() && !dateGroup.isTimeInferred();
     }
 
     private static DateGroup parseDateTimeStringUsingPreviousHelper(String dateTime,
