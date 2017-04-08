@@ -65,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
         return todoList;
     }
 
-    /* 
+    /*
      * Raises an event to indicate the model has changed
      * Takes the modified ReadOnlyTodo as an optional parameter
      * */
