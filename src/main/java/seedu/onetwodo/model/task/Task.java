@@ -149,12 +149,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return new UniqueTagList(tags);
     }
 
-    // Setters
-    public void setName(Name name) {
-        assert name != null;
-        this.name = name;
-    }
-
     public void setStartDate(StartDate startDate) {
         assert startDate != null;
         this.startDate = startDate;
@@ -163,24 +157,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public void setEndDate(EndDate endDate) {
         assert endDate != null;
         this.endDate = endDate;
-    }
-
-    //@@author A0139343E
-    public void setRecur(Recurring recur) {
-        assert recur != null;
-        this.recur = recur;
-    }
-
-    //@@author A0141138N
-    public void setPriority(Priority priority) {
-        assert priority != null;
-        this.priority = priority;
-    }
-
-    //@@author
-    public void setDescription(Description description) {
-        assert description != null;
-        this.description = description;
     }
 
     public void setDone() {
@@ -214,20 +190,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         tags.setTags(replacement);
     }
 
-    /**
-     * Updates this task with the details of {@code replacement}.
-     */
-    public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
-
-        this.setName(replacement.getName());
-        this.setStartDate(replacement.getStartDate());
-        this.setEndDate(replacement.getEndDate());
-        this.setRecur(replacement.getRecur());
-        this.setPriority(replacement.getPriority());
-        this.setDescription(replacement.getDescription());
-        this.setTags(replacement.getTags());
-    }
 
     //@@author A0139343E
     public void forwardTaskRecurDate() {
