@@ -59,8 +59,8 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     public void add_shortCommand_success() {
         TestTask toAdd = td.getFit;
-        commandBox.runCommand(AddCommand.SHORT_COMMAND_WORD + " " + toAdd.getAddCommand());
-        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, toAdd));
+        commandBox.runCommand(AddCommand.SHORT_COMMAND_WORD + " " + toAdd.getName().fullName);
+        assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, toAdd.toString()));
     }
     //@@author
 

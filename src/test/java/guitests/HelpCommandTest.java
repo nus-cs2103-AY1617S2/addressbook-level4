@@ -119,6 +119,7 @@ public class HelpCommandTest extends TaskManagerGuiTest {
     @Test
     public void help_openUserGuide_success() {
         commandBox.runCommand(HelpCommand.COMMAND_WORD);
+        mainMenu.openHelpWindowUsingAccelerator().closeWindow();
         assertResultMessage(HelpCommand.SHOWING_HELP_MESSAGE);
     }
 

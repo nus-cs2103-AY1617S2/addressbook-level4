@@ -47,10 +47,8 @@ public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_dateTime_success() {
-        commandBox.runCommand(td.startDateOnly.getAddCommand());
-
         // start date and end date
-        assertFindResult(FindCommand.COMMAND_WORD + " 04/01/2017", td.startDateOnly, td.eggsAndBread);
+        assertFindResult(FindCommand.COMMAND_WORD + " 01/04/2017", td.eggsAndBread);
 
         // start time and end time
         assertFindResult(FindCommand.COMMAND_WORD + " 23:59:59", td.readBook);
@@ -59,11 +57,6 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_tag_success() {
         assertFindResult(FindCommand.COMMAND_WORD + " HighPriority", td.eggsAndBread);
-    }
-
-    @Test
-    public void find_id_success() {
-        assertFindResult(FindCommand.COMMAND_WORD + " 5", td.readBook);
     }
     //@@author
 

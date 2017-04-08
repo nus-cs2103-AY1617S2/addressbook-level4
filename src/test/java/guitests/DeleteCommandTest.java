@@ -49,7 +49,14 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(DeleteCommand.SHORT_COMMAND_WORD + " 1");
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
-        assertDeleteSuccess(targetIndex, currentList);
+        TestTask taskToDelete = currentList[targetIndex - 1];
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndex);
+
+        //confirm the list now contains all previous tasks except the deleted task
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+
+        //confirm the result message is correct
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
     @Test

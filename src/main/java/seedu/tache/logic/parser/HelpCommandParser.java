@@ -15,9 +15,12 @@ import seedu.tache.logic.commands.HelpCommand;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.logic.commands.LoadCommand;
+import seedu.tache.logic.commands.NextCommand;
+import seedu.tache.logic.commands.PrevCommand;
 import seedu.tache.logic.commands.SaveCommand;
 import seedu.tache.logic.commands.SelectCommand;
 import seedu.tache.logic.commands.UndoCommand;
+import seedu.tache.logic.commands.ViewCommand;
 
 
 /**
@@ -45,6 +48,9 @@ public class HelpCommandParser {
             case SaveCommand.COMMAND_WORD:
             case SelectCommand.COMMAND_WORD:
             case UndoCommand.COMMAND_WORD:
+            case PrevCommand.COMMAND_WORD:
+            case NextCommand.COMMAND_WORD:
+            case ViewCommand.COMMAND_WORD:
                 return new HelpCommand(trimmedArgs);
             default:
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
