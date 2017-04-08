@@ -3,15 +3,18 @@ package guitests.guihandles;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
 import guitests.GuiRobot;
+import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
-import seedu.address.commons.core.LogsCenter;
+import seedu.doist.TestApp;
+import seedu.doist.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -55,23 +58,33 @@ public class GuiHandle {
     }
 
     protected String getTextFieldText(String filedName) {
-        TextField textField = getNode(filedName);
+        InlineCssTextArea textField = getNode(filedName);
         return textField.getText();
     }
 
     protected void setTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
-        TextField textField = getNode(textFieldId);
-        textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        InlineCssTextArea textField = getNode(textFieldId);
+        // Only FX application thread can modify UI but this might be on main thread
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                textField.clear();
+                textField.insertText(0, newText);
+            }
+        });
+        guiRobot.sleep(GuiHandleSetting.SLEEP_LENGTH); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        guiRobot.type(KeyCode.ENTER).sleep(GuiHandleSetting.SLEEP_LENGTH);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
         return ((Label) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getText();
+    }
+
+    protected boolean getIsSelectedFromCheckbox(String fieldId, Node parentNode) {
+        return ((CheckBox) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).isSelected();
     }
 
     public void focusOnSelf() {
