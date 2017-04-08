@@ -43,7 +43,9 @@ public class MarkUndoneCommand extends Command {
 		}
 
 		ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
-		Event markedTask = new Event(taskToMark);
+		Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(),
+				taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(),
+				new IsDone(), taskToMark.isRecurring(), taskToMark.getRecurrence());
 		model.saveImageOfCurrentTaskManager();
 		if (markedTask.isRecurring()) {
 			if (markedTask.getRecurrence().hasDoneOccurence()) {
@@ -51,11 +53,6 @@ public class MarkUndoneCommand extends Command {
 			} else {
 				return new CommandResult(MESSAGE_ALR_MARKED);
 			}
-		} else {
-			if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_NOTDONE)) {
-				return new CommandResult(MESSAGE_ALR_MARKED);
-			}
-			markedTask.getIsDone().markUndone();
 		}
 		model.updateEvent(targetIndex, markedTask);
 		model.updateDoneTaskList();
