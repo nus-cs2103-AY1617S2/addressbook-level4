@@ -254,7 +254,7 @@ As shown in Figure 9, **`Storage`**:
 * Saves ezDo data in `.xml` format and read it back.
 
 #### Design Choices
-ezDo allows users to specify a new location to save their data. Instead of populating a user's machine with many duplicates of the saved data by simply copying the old file and creating a new copy, we move the current savefile to the new location specified. This new location is saved in `Config` so that ezDo knows where to retrieve the right savefile in the next session. The Observer pattern is employed. After execution of a `SaveCommand`, an event will be posted. The `StorageManager` class which listens for such events will handle the event by moving ezDo and updating `Config`.
+ezDo allows users to specify a new location to save their data. Instead of populating a user's machine with many duplicates of the saved data by simply copying the old file and creating a new copy, we move the current data file to the new location specified. This new location is saved in `Config` so that ezDo knows where to retrieve the right data file in the next session. The Observer pattern is employed. After execution of a `SaveCommand`, an event will be posted. The `StorageManager` class which listens for such events will handle the event by moving the ezDo data file and updating `Config`.
 <br><br>
 
 
