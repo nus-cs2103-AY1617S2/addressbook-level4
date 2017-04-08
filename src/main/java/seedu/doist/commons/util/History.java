@@ -1,5 +1,6 @@
 package seedu.doist.commons.util;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class History<S> {
@@ -32,42 +33,35 @@ public class History<S> {
      * Return null if history is empty
      */
     public S getPreviousState() {
-        if (hasPreviousState()) {
+        try {
             S previousState = history.pop();
             overflow.push(previousState);
             return previousState;
-        } else {
+        } catch (EmptyStackException e) {
             return null;
         }
     }
 
-    boolean hasPreviousState() {
-        return !history.isEmpty();
-    }
-
-
+    //@@author A0147980U
     /**
      * Method that returns the next state entered by the user, if it exists
      * Returns null if overflow is empty
      */
     public S getNextState() {
-        if (hasNextState()) {
+        try {
             history.push(overflow.pop());
             return overflow.peek();
-        } else {
+        } catch (EmptyStackException e) {
             return null;
         }
     }
 
-    public boolean hasNextState() {
-        return !overflow.isEmpty();
-    }
     /**
      * Move the current state and everything in the overflow stack
      * back into history stack
      */
     public void restore() {
-        while (hasNextState()) {
+        while (!overflow.isEmpty()) {
             history.push(overflow.pop());
         }
     }
@@ -76,7 +70,7 @@ public class History<S> {
      * forget all the states in the overflow except the peek
      */
     public void forgetStatesAfter() {
-        if (hasNextState()) {
+        if (!overflow.isEmpty()) {
             history.push(overflow.pop());
         }
         overflow.clear();

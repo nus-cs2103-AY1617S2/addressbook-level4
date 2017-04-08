@@ -3,7 +3,6 @@ package seedu.doist.model;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import seedu.doist.commons.core.UnmodifiableObservableList;
 import seedu.doist.logic.commands.ListCommand.TaskType;
