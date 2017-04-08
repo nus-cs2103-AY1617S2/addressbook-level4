@@ -24,7 +24,6 @@ import seedu.today.commons.util.FileUtil;
 import seedu.today.model.ReadOnlyTaskManager;
 import seedu.today.model.TaskManager;
 import seedu.today.model.UserPrefs;
-import seedu.today.model.util.SampleDataUtil;
 
 /**
  * Manages storage of TaskManager data in local storage.
@@ -235,9 +234,9 @@ public class StorageManager extends ComponentManager implements Storage {
             }
             taskManagerOptional = readTaskManager(path);
             if (!taskManagerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskManager");
+                logger.info("Data file not found. Will be starting with an empty TaskManager");
             }
-            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            initialData = new TaskManager();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();

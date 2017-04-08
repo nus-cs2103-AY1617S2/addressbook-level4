@@ -37,7 +37,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk. Creates
+     * Saves the current version of the Task Manager to the hard disk. Creates
      * the data file if it is missing. Raises {@link DataSavingExceptionEvent}
      * if there was an error during saving.
      */
