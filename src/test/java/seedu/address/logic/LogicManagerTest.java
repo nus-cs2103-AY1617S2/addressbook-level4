@@ -674,7 +674,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find nope beep KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
                 expectedList);
     }*/
-    
+
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
