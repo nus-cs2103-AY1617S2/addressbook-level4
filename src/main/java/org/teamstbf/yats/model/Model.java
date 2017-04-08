@@ -12,6 +12,7 @@ import org.teamstbf.yats.model.item.UniqueEventList;
  * The API of the Model component.
  */
 public interface Model {
+    <<<<<<<HEAD
     /** Adds the given Event */
     void addEvent(Event event);
 
@@ -149,5 +150,13 @@ public interface Model {
      * remove half of the earlier saved states and only keep the later half.
      */
     void saveImageOfCurrentTaskManager();
+
+    void updateFilteredListToShowSortedStart();
+
+    void updateFilteredListToShowSortedEnd();
+
+    void updateFilteredListToShowDeadline();
+
+    void updateFilteredListToShowDone();
 
 }
