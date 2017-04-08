@@ -51,7 +51,8 @@ public class TaskDate {
     
     
     public TaskDate(String input) throws IllegalValueException {
-
+    
+    System.out.println(input);
 	value = input.trim();
 	try {
 	    int[] dateArray = dateFormatConverter(input);
@@ -69,22 +70,33 @@ public class TaskDate {
 		setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
 	    }
 	} catch (Exception e) {
+		System.out.println(input);
 	    formatter = new SimpleDateFormat(OUTPUT_FORMAT);
 	    NattyParser natty = new NattyParser();
 	    dates = natty.parse(input);
 
-	    if (dates == null)
-		throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+	    if (dates == null) {
+	    	throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+	    }
+	    if (dates.size() >= 1 && dates.get(0) != null) {
+	    	setDay(dates.get(0).getDay());
+	    	setMonth(dates.get(0).getMonth());
+	    	setYear(dates.get(0).getYear());
+	    }
+	    if (dates.size() >= 2 && dates.get(1) != null) {
+	    	setSecondDay(dates.get(1).getDay());
+	    	setSecondMonth(dates.get(1).getMonth());
+	    	setSecondYear(dates.get(1).getYear());
+	    }
 	}
-	
-
     }
+	
 
 	public TaskDate(int inputDay, int inputMonth, int inputYear) {
 		this.setDay(inputDay);
 		this.setMonth(inputMonth);
 		this.setYear(inputYear);
-		value = day + "" + month + "" + year;
+		value = day + "" + month + "";
 	}
     
     

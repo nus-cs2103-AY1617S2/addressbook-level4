@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 //import seedu.task.testutil.TaskBuilder;
 
 public class TaskStatusPredicate implements Predicate<Object> {
+	public static final String PREDICATE_WORD = "status";
     //@@author A0163845X
 
 	private String status;

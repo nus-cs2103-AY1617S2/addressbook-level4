@@ -48,14 +48,22 @@ public class RandomTaskGenerator {
 		return new TaskTime(hour + "" + minute);
 	}
 
-	private static TaskDate generateTaskDate() {
+	private static TaskDate generateTaskDate() throws IllegalValueException {
 		if (!isFieldPresent(TASK_DATE_PERCENTAGE)) {
 			return null;
 		}
 		int day = rand.nextInt(31) + 1;
 		int month = rand.nextInt(12) + 1;
-		int year = 2017;
-		return new TaskDate(day, month, year);
+		int year = 17;
+		String retString = "";
+		if (day < 10) {
+			retString += "0" + day;
+		}
+		if (month < 10) {
+			retString += "0" + month;
+		}
+		retString += year;
+		return new TaskDate(retString);
 	}
 
 	private static TaskName generateTaskName() throws IllegalValueException {

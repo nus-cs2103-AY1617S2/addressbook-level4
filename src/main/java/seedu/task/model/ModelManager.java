@@ -2,6 +2,7 @@ package seedu.task.model;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
@@ -130,7 +131,15 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
 	updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-
+    //@@author A0163845X
+    private void updateFilteredTaskList(Predicate<Object> predicate) {
+    	if (filteredTasks.getPredicate() == null) {
+    		filteredTasks.setPredicate(predicate);
+    	} else {
+    		filteredTasks.setPredicate(predicate.and((Predicate<? super Object>) filteredTasks.getPredicate()));
+    	}
+    }
+    
     private void updateFilteredTaskList(Expression expression) {
 	filteredTasks.setPredicate(expression::satisfies);
     }
@@ -230,5 +239,11 @@ public class ModelManager extends ComponentManager implements Model {
 	public void showcase(int numberOfTasks) throws DuplicateTaskException {
 		taskManager.showcase(numberOfTasks);
 		indicateTaskManagerChanged();
+	}
+    //@@author A0163845X
+
+	@Override
+	public void filter(Predicate<Object> pred) {
+		updateFilteredTaskList(pred);
 	}
 }

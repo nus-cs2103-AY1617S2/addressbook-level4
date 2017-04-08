@@ -2,6 +2,7 @@ package seedu.task.model;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.Task;
@@ -76,5 +77,8 @@ public interface Model {
 	//void getPath(String path);
 	//@@author A0163845X
 	void showcase(int numberOfTasks) throws DuplicateTaskException;
+	
+	//@@author A0163845X
+	public void filter(Predicate<Object> pred);
 
 }
