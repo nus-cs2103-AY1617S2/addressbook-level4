@@ -66,7 +66,8 @@ Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 * tomorrow
 
 Example:
-* `add Groceries Shopping d/030117 s/09:00 e/12:00 m/ Go to Cold Storage, Buy Extra milk`
+* `add Buy apple juice d/010117 s/08:00 e/10:00 m/Lok out for snacks`
+<img src="images/add.png" width="600">
 
 ## Finding a Task: `find`
 Finds tasks whose names contain any of the given keywords.<br>
@@ -75,8 +76,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > The search is not case sensitive, the order of the keywords does not matter, only the name is searched,
 and tasks matching at least one keyword will be returned (i.e. `OR` search).
 
-Examples:
-* `find groceries` returns `Groceries Shopping`
+Example:
+* `find juice`
+<img src="images/find.png" width="600">
 
 ## Deleting a Task : `delete`
 Deletes a specified task or tasks from the task manager. Irreversible.<br>
@@ -86,8 +88,9 @@ Format: `delete INDEX [MORE INDECIES]`
   The index refers to the task number shown in the list.
   `INDEX` must be an exact match in order for the function to work.
 
-Examples:
+Example:
 * `delete 2`<br>
+<img src="images/delete.png" width="600">
 
 ## Editing a Task : `edit`
 Edits a specified task from the task manager.<br>
@@ -97,23 +100,30 @@ Format: `edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/ME
 task number shown in the list. `INDEX` must be an exact match in order
 for the function to work.
 
-Examples: `edit 2 m/Go to Ralphs`
+Example: `edit 1 Buy Snacks d/121212`<br>
+<img src="images/edit.png" width="600">
 
 ## Clearing all Tasks : `clear`
 Clears all tasks from the task manager.<br>
-Format: `clear`
+Format: `clear`<br>
+<img src="images/clear.png" width="600">
 
 ## Undoing an Action : `undo`
 Undos the most recent action up to 10 times.
-Format: `undo`
+Format: `undo`<br>
+<img src="images/undo.png" width="600">
 
 ## Redoing an Action : `redo`
 Redos the most recent action up to 10 times.
-Format: `redo`
+Format: `redo`<br>
+<img src="images/redo.png" width="600">
 
 ## Completing a Task : `done`
-Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`.<br>
+Completes the specified tasks from the task manager and changes the task status from `Ongoing` to `Completed`. Moves comepleted tasks to the bottom of the list<br>
 Format: `done INDEX [MORE INDECIES]`
+
+Example: `done 1`<br>
+<img src="images/done.png" width="600">
 
 ## Filtering the Tasks : `filter`
 Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
