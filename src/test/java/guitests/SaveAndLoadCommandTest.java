@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import seedu.tache.commons.core.Config;
+import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.ConfigUtil;
 import seedu.tache.logic.commands.LoadCommand;
 import seedu.tache.logic.commands.SaveCommand;
@@ -93,6 +94,18 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
         assertResultMessage(MESSAGE_INVALID_FILE);
         commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder1 + "\\someInvalidFolder" + fileName);
         assertResultMessage(MESSAGE_INVALID_FILE);
+    }
+
+    @Test
+    public void saveInvalidCommandFail() {
+        commandBox.runCommand("saveeeeeee");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void loadInvalidCommandFail() {
+        commandBox.runCommand("loaddddd");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     @After
