@@ -9,7 +9,6 @@ import javafx.stage.Stage;
  */
 public class CalenderPanelHandle extends GuiHandle {
 
-    private static final String DAY_1_LABEL = "#day1";
     private static final String PERSON_LIST_VIEW_ID = "#listview";
 
     public CalenderPanelHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
