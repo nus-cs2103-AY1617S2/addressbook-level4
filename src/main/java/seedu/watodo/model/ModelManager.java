@@ -370,6 +370,7 @@ public class ModelManager extends ComponentManager implements Model {
         case "mark":
         case "unmark":
             commandHistory.push(command);
+            break;
         default:
             break;
         }

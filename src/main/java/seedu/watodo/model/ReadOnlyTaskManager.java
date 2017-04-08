@@ -1,6 +1,5 @@
 package seedu.watodo.model;
 
-
 import javafx.collections.ObservableList;
 import seedu.watodo.model.tag.Tag;
 import seedu.watodo.model.task.ReadOnlyTask;
