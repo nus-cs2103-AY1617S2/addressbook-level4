@@ -119,13 +119,13 @@ Let us assume you are a busy professional. You want to start using OneTwoDo to o
 *Figure 3: Command Summary Window*
 
 ---
-### Viewing userguide : `helpug`
+### Viewing userguide : `help ug`
 
-After viewing the command summary, you want to explore more special features offered by OneTwoDo. Try typing `helpug` and our informative User Guide will open up for your exploration.
+After viewing the command summary, you want to explore more special features offered by OneTwoDo. Try typing `help ug` and our informative User Guide will open up for your exploration.
 
 
 
-    >>  helpug
+    >>  help ug, help userguide
 
 ---
 ### Adding a task: `add`
