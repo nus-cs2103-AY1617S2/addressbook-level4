@@ -23,7 +23,6 @@ import onlythree.imanager.model.task.Name;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
 import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
@@ -175,15 +174,14 @@ public class AddCommandParserTest {
 
     private class ModelManagerMock extends ModelManager {
         @Override
-        public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        public synchronized void addTask(Task task) {
             AddCommandParserTest.actualTask = task;
             super.addTask(task);
         }
 
         // TODO move this to EditCommandParserTest
         @Override
-        public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-                throws UniqueTaskList.DuplicateTaskException {
+        public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
             try {
                 AddCommandParserTest.actualTask = new Task(editedTask);
             } catch (IllegalValueException e) {

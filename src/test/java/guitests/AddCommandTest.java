@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import onlythree.imanager.commons.core.Messages;
-import onlythree.imanager.logic.commands.AddCommand;
 import onlythree.imanager.testutil.TestTask;
 import onlythree.imanager.testutil.TestUtil;
 
@@ -24,11 +23,6 @@ public class AddCommandTest extends TaskListGuiTest {
         taskToAdd = td.iAmCode;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-
-        //add duplicate task
-        commandBox.runCommand(td.helpMe.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");

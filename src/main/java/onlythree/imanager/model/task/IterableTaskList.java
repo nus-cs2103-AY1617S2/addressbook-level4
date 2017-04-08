@@ -6,57 +6,35 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import onlythree.imanager.commons.core.UnmodifiableObservableList;
-import onlythree.imanager.commons.exceptions.DuplicateDataException;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
-import onlythree.imanager.commons.util.CollectionUtil;
 
 /**
- * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that does not allow nulls that can be iterated.
  *
  * Supports a minimal set of list operations.
  *
- * @see Task#equals(Object)
- * @see CollectionUtil#elementsAreUnique(Collection)
  */
-public class UniqueTaskList implements Iterable<Task> {
+public class IterableTaskList implements Iterable<Task> {
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent task as the given argument.
-     */
-    public boolean contains(ReadOnlyTask toCheck) {
-        assert toCheck != null;
-        return internalList.contains(toCheck);
-    }
-
-    /**
      * Adds a task to the list.
-     *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
      */
-    public void add(Task toAdd) throws DuplicateTaskException {
+    public void add(Task toAdd) {
         assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        }
         internalList.add(toAdd);
     }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedTask}.
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedTask) throws DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedTask) {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
-        }
 
         taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the updated task.
@@ -79,12 +57,12 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
 
-    public void setTasks(UniqueTaskList replacement) {
+    public void setTasks(IterableTaskList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks) throws DuplicateTaskException {
-        final UniqueTaskList replacement = new UniqueTaskList();
+    public void setTasks(List<? extends ReadOnlyTask> tasks) {
+        final IterableTaskList replacement = new IterableTaskList();
         for (final ReadOnlyTask task : tasks) {
             try {
                 replacement.add(new Task(task));
@@ -107,23 +85,14 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTaskList // instanceof handles nulls
+                || (other instanceof IterableTaskList // instanceof handles nulls
                 && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                ((IterableTaskList) other).internalList));
     }
 
     @Override
     public int hashCode() {
         return internalList.hashCode();
-    }
-
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicateTaskException extends DuplicateDataException {
-        protected DuplicateTaskException() {
-            super("Operation would result in duplicate tasks");
-        }
     }
 
     /**

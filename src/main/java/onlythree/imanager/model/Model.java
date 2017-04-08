@@ -3,10 +3,9 @@ package onlythree.imanager.model;
 import java.util.Set;
 
 import onlythree.imanager.commons.core.UnmodifiableObservableList;
+import onlythree.imanager.model.task.IterableTaskList;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
-import onlythree.imanager.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -19,20 +18,17 @@ public interface Model {
     ReadOnlyTaskList getTaskList();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws IterableTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task task);
 
     /**
      * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException;
+    void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask);
     //@@author A0148052L
     /** Check if commandStack is empty*/
     boolean isCommandStackEmpty();

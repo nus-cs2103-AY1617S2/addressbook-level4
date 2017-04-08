@@ -13,18 +13,17 @@ import onlythree.imanager.commons.core.UnmodifiableObservableList;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.model.tag.Tag;
 import onlythree.imanager.model.tag.UniqueTagList;
+import onlythree.imanager.model.task.IterableTaskList;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
-import onlythree.imanager.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * Wraps all data at the task list level
- * Duplicates are not allowed (by .equals comparison)
+ * Duplicates are not allowed for tags (by .equals comparison)
  */
 public class TaskList implements ReadOnlyTaskList {
 
-    private final UniqueTaskList tasks;
+    private final IterableTaskList tasks;
     private final UniqueTagList tags;
 
     /*
@@ -35,7 +34,7 @@ public class TaskList implements ReadOnlyTaskList {
      *   among constructors.
      */
     {
-        tasks = new UniqueTaskList();
+        tasks = new IterableTaskList();
         tags = new UniqueTagList();
     }
 
@@ -51,8 +50,7 @@ public class TaskList implements ReadOnlyTaskList {
 
 //// list overwrite operations
 
-    public void setTasks(List<? extends ReadOnlyTask> tasks)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void setTasks(List<? extends ReadOnlyTask> tasks) {
         this.tasks.setTasks(tasks);
     }
 
@@ -62,11 +60,7 @@ public class TaskList implements ReadOnlyTaskList {
 
     public void resetData(ReadOnlyTaskList newData) {
         assert newData != null;
-        try {
-            setTasks(newData.getTaskList());
-        } catch (UniqueTaskList.DuplicateTaskException e) {
-            throw new AssertionError("Copying a valid TaskList should result in duplicate tasks");
-        }
+        setTasks(newData.getTaskList());
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
@@ -81,10 +75,8 @@ public class TaskList implements ReadOnlyTaskList {
      * Adds a task to the task list.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
-     *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) {
         syncMasterTagListWith(p);
         tasks.add(p);
     }
@@ -94,12 +86,9 @@ public class TaskList implements ReadOnlyTaskList {
      * {@code TaskList}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
      * @see #syncMasterTagListWith(Task)
      *
-     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
-     *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
-    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask)
-            throws UniqueTaskList.DuplicateTaskException {
+    public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) {
         assert editedReadOnlyTask != null;
 
         Task editedTask;
@@ -141,15 +130,15 @@ public class TaskList implements ReadOnlyTaskList {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(Task)
      */
-    private void syncMasterTagListWith(UniqueTaskList tasks) {
+    private void syncMasterTagListWith(IterableTaskList tasks) {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws IterableTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            throw new IterableTaskList.TaskNotFoundException();
         }
     }
 

@@ -3,8 +3,8 @@ package onlythree.imanager.logic.commands;
 import onlythree.imanager.commons.core.Messages;
 import onlythree.imanager.commons.core.UnmodifiableObservableList;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
+import onlythree.imanager.model.task.IterableTaskList.TaskNotFoundException;
 import onlythree.imanager.model.task.ReadOnlyTask;
-import onlythree.imanager.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Deletes a task identified using it's last displayed index from the task list.

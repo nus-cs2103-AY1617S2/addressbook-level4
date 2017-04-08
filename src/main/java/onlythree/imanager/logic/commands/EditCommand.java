@@ -15,7 +15,6 @@ import onlythree.imanager.model.task.Name;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
 import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
@@ -35,7 +34,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit that is different must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -84,11 +82,7 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-        } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
+        model.updateTask(filteredTaskListIndex, editedTask);
         model.updateFilteredListToShowAll();
         //@@author A0148052L-reused
         model.pushCommand(COMMAND_WORD);

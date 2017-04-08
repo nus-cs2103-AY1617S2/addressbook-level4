@@ -135,12 +135,6 @@ public class EditCommandTest extends TaskListGuiTest {
     }
 
     //@@author
-    @Test
-    public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Amuse friend t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
-    }
-
     /**
      * Checks whether the edited task has the correct updated details.
      *

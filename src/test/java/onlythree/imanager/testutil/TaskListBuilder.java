@@ -4,7 +4,6 @@ import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.model.TaskList;
 import onlythree.imanager.model.tag.Tag;
 import onlythree.imanager.model.task.Task;
-import onlythree.imanager.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building TaskList objects.
@@ -19,7 +18,7 @@ public class TaskListBuilder {
         this.taskList = taskList;
     }
 
-    public TaskListBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+    public TaskListBuilder withTask(Task task) {
         taskList.addTask(task);
         return this;
     }

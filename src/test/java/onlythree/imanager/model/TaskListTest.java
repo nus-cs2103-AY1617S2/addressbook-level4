@@ -3,7 +3,6 @@ package onlythree.imanager.model;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,10 +13,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.model.tag.Tag;
 import onlythree.imanager.model.task.ReadOnlyTask;
-import onlythree.imanager.model.task.Task;
 import onlythree.imanager.testutil.TypicalTestTasks;
 
 public class TaskListTest {
@@ -44,23 +41,6 @@ public class TaskListTest {
         TaskList newData = new TypicalTestTasks().getTypicalTaskList();
         taskList.resetData(newData);
         assertEquals(newData, taskList);
-    }
-
-    @Test
-    public void resetData_withDuplicateTasks_throwsAssertionError() {
-        TypicalTestTasks td = new TypicalTestTasks();
-        // Repeat td.amuseFriend twice
-        List<Task> newTasks;
-        try {
-            newTasks = Arrays.asList(new Task(td.amuseFriend), new Task(td.amuseFriend));
-        } catch (IllegalValueException e) {
-            throw new AssertionError("A TestTask should have been built correctly, otherwise copying will not fail.");
-        }
-        List<Tag> newTags = td.amuseFriend.getTags().asObservableList();
-        TaskListStub newData = new TaskListStub(newTasks, newTags);
-
-        thrown.expect(AssertionError.class);
-        taskList.resetData(newData);
     }
 
     @Test
