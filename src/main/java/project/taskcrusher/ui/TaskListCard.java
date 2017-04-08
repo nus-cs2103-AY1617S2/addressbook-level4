@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import project.taskcrusher.model.shared.DateUtilApache;
+import project.taskcrusher.commons.util.UiDisplayUtil;
 import project.taskcrusher.model.task.ReadOnlyTask;
 
 //@@author A0127737X
@@ -83,7 +83,7 @@ public class TaskListCard extends UiPart<Region> {
     }
 
     private void showPriority(ReadOnlyTask task) {
-        priority.setText("p=" + task.getPriority().priority);
+        priority.setText(UiDisplayUtil.priorityForUi(task.getPriority()));
         switch (task.getPriority().priority) {
         case "1":
             priority.getStyleClass().add("priority-one");
@@ -104,7 +104,7 @@ public class TaskListCard extends UiPart<Region> {
     private void showDeadline(ReadOnlyTask task) {
         if (task.getDeadline().hasDeadline()) {
             deadline.setText(MESSAGE_DEADLINE_BY +
-                    DateUtilApache.deadlineAsStringForUi(task.getDeadline().getDate().get()));
+                    UiDisplayUtil.dateAsStringForUi(task.getDeadline().getDate().get()));
         } else {
             deadline.setText(MESSAGE_NO_DEADLINE);
         }

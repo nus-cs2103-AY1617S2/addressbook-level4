@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import project.taskcrusher.commons.util.UiDisplayUtil;
 import project.taskcrusher.model.event.ReadOnlyEvent;
-import project.taskcrusher.model.shared.DateUtilApache;
 
 //@@author A0127737X
 /**
@@ -17,7 +17,6 @@ import project.taskcrusher.model.shared.DateUtilApache;
 public class EventListCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final String LOCATION_AT = "@ ";
 
     @FXML
     private HBox cardPane;
@@ -88,7 +87,7 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void showPriority(ReadOnlyEvent event) {
-        priority.setText("p=" + event.getPriority().priority);
+        priority.setText(UiDisplayUtil.priorityForUi(event.getPriority()));
         switch (event.getPriority().priority) {
         case "1":
             priority.getStyleClass().add("priority-one");
@@ -106,17 +105,13 @@ public class EventListCard extends UiPart<Region> {
     }
 
     private void showLocation(ReadOnlyEvent event) {
-        if (event.getLocation().hasLocation()) {
-            eventLocation.setText(LOCATION_AT + event.getLocation().location);
-        } else {
-            eventLocation.setText("");
-        }
+        eventLocation.setText(UiDisplayUtil.locationForUi(event.getLocation()));
         eventLocation.setMinWidth(Region.USE_PREF_SIZE);
     }
 
     private void showEventTimeSlots(ReadOnlyEvent event) {
         event.getTimeslots().forEach(timeslot -> timeslots.getChildren().add(new Label(
-                DateUtilApache.timeslotAsStringForUi(timeslot))));
+                UiDisplayUtil.timeslotAsStringForUi(timeslot))));
     }
 
     private void initTags(ReadOnlyEvent event) {
