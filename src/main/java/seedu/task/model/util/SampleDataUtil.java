@@ -17,7 +17,8 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new TaskName("Buy apple juice"), new TaskDate("010117"),                            new TaskTime("0800"), new TaskTime("1000"),
+                new Task(new TaskName("Buy apple juice"), new TaskDate("010117"),
+                            new TaskTime("0800"), new TaskTime("1000"),
                             new String("Look out for lucky draws."), new TaskStatus("Ongoing"),
                             new UniqueTagList()),
                 new Task(new TaskName("Buy blueberry juice"), new TaskDate("020117"),
