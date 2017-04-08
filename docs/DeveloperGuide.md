@@ -15,6 +15,7 @@
     * 3.7 Common Classes
 4. [Implementation](#implementation)
     * 4.1 Logging
+    * 4.2 Configuration
 5. [Testing](#testing)
     * 5.1 Headless GUI Testing
     * 5.2 Troubleshooting Failed Tests
@@ -27,19 +28,33 @@
     * 6.6 Managing Dependencies
 7. [Appendix A: User Stories](#appendix-a--user-stories)
 8. [Appendix B: Use Cases](#appendix-b--use-cases)
+    * 8.1 Adding a Task
+    * 8.2 Editing a Task
+    * 8.3 Deleting a Task
+    * 8.4 Undoing a Command
+    * 8.5 Redoing a Command
+    * 8.6 Sorting Displayed Tasks
+    * 8.7 Marking Task as Done
+    * 8.8 Filtering Tasks by Date
+    * 8.9 Saving to a new Location
+    * 8.10 Viewing Completed and Uncompleted Tasks
+    * 8.11 Searching for Tasks Containing Keywords
+    * 8.12 Updating Priority of a Task
+    * 8.13 Getting Help
+    * 8.14 Clearing all Tasks
 9. [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 10. [Appendix D: Glossary](#appendix-d--glossary)
 11. [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## Introduction
+## 1. Introduction
 DoIt is a task manager to help users to organise their busy schedules using keyboard commands. It is a written in Java and uses JavaFX for its GUI.<br>
 
 This guide aims to help developers understand how DoIt works by describing its design and implementation. The guide is organised in a top-down fashion to give readers an overview of the entire program before diving into more detailed sections.
 
-## Setting up
+## 2. Setting up
 
-### Prerequisites
+### 2.1 Prerequisites
 
 1. **JDK `1.8.0_60`**  or later<br>
     > Having any Java 8 version is not enough
@@ -52,7 +67,7 @@ This guide aims to help developers understand how DoIt works by describing its d
 5. **Checkstyle Plug-in** from the Eclipse Marketplace
 
 
-### Importing the Project into Eclipse
+### 2.2 Importing the Project into Eclipse
 
 1. Fork this repo, and clone the fork to your computer.
 2. Open Eclipse. (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
@@ -67,7 +82,7 @@ This guide aims to help developers understand how DoIt works by describing its d
       (This is because Gradle downloads library files from servers during the project set up process)
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
-### Configuring Checkstyle
+### 2.3 Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name. e.g. taskManager
@@ -79,7 +94,7 @@ This guide aims to help developers understand how DoIt works by describing its d
 
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
-### Troubleshooting Project Setup
+### 2.4 Troubleshooting Project Setup
 
 **Problem: Eclipse reports compile errors after new commits are pulled from Git**
 
@@ -92,9 +107,9 @@ This guide aims to help developers understand how DoIt works by describing its d
 * Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries)
 
 
-## Design
+## 3. Design
 
-### Architecture
+### 3.1 Architecture
 
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
@@ -129,7 +144,7 @@ For example, `Logic` (seen in **Figure 2.1.2**) defines it's API in the `Logic.j
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.1.2 : Class Diagram of the Logic Component_
 
-### Events-Driven Nature of the Design
+### 3.2 Events-Driven Nature of the Design
 
 The **Figure 2.1.3a** below shows how the components interact for the scenario where the user issues the
 command `delete 1`
@@ -151,7 +166,7 @@ _Figure 2.1.3b : Component Interactions for `delete 1` Command (part 2)_
 
 The sections below give more details of each component
 
-### UI Component
+### 3.3 UI Component
 
 Author: Ye Huan Hui
 
@@ -172,7 +187,7 @@ The `UI` component:
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change
 * Responds to events raised from various parts of DoIt and updates the UI accordingly
 
-### Logic Component
+### 3.4 Logic Component
 
 Author: Lee Jin Shun
 
@@ -192,7 +207,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-### Model Component
+### 3.5 Model Component
 
 Author: Hon Kean Wai
 
@@ -202,12 +217,12 @@ The `Model` component:
 
 * Stores the user's preferences.
 * Stores and manages DoIt's task list data.
-* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'.
+* Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed'. 
 (e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change)
 * Remains unaffected by changes in the other three components due to application of the Observer Pattern.
 * Interacts with the other components by raising events.
 
-The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1.
+The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1.  
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -220,7 +235,7 @@ A `UniqueTaskList` is a list of `task` objects and cannot contain duplicate `tas
 
 The `ReadOnlyItemManager` and `ReadOnlyTask` interfaces allow other classes and components, such as the UI, to access but not modify the list of tasks and their details
 
-### Storage Component
+### 3.6 Storage Component
 
 Author: Chew Chia Sin
 
@@ -236,20 +251,20 @@ The `Storage` component:
 
 The `Storage` class is the interface of the `Storage` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.5.1.
 
-The `StorageManager` implements the `Storage` interface. It contains a `UserPrefsStorage` interface that references `JsonUserPrefsStorage` allows storing and loading of the user's preferences in json format. It also contains a `TaskManagerStorage` interface that references `XmlTaskManagerStorage` that allows storing and loading of the user's DoIt data.
+The `StorageManager` implements the `Storage` interface. It contains a `UserPrefsStorage` interface that references `JsonUserPrefsStorage` allows storing and loading of the user's preferences in json format. It also contains a `TaskManagerStorage` interface that references `XmlTaskManagerStorage` that allows storing and loading of the user's DoIt data. 
 
 The `XmlSerializableTaskManager` is a class that converts `ReadOnlyTaskManager` into a serializable object with which contains a list of `XmlAdaptedTask` and a list of `XmlAdaptedTag`.
 
 `XmlAdaptedTask` converts the Model's `Task` into a JAXB-friendly adapted version.
 `XmlAdaptedTag` converts the Model's `Tag` into a JAXB-friendly adapted version.
 
-### Common Classes
+### 3.7 Common Classes
 
 Classes used by multiple components are in the `seedu.doit.commons` package
 
-## Implementation
+## 4. Implementation
 
-### Logging
+### 4.1 Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations
@@ -268,13 +283,13 @@ and logging destinations
 * `FINE` : Details that are not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### Configuration
+### 4.2 Configuration
 
 Certain properties of DoIt can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
 
-## Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder
 
@@ -287,13 +302,13 @@ Tests can be found in the `./src/test/java` folder
 
 * See [UsingGradle.md](UsingGradle.md) for how to run tests using Gradle
 
-### Headless GUI Testing
+### 5.1 Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  our GUI tests can be run in the headless mode
  In the headless mode, GUI tests do not show up on the screen
  That means the developer can do other things on the Computer while the tests are running<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode
-
+ 
 We have two types of tests:
 
 1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI
@@ -310,7 +325,7 @@ We have two types of tests:
       e.g. `seedu.doit.logic.LogicManagerTest`
 
 
-### Troubleshooting Failed Tests
+### 5.2 Troubleshooting Failed Tests
 
  **Tests fail because NullPointException when AssertionError is expected**
 
@@ -318,22 +333,22 @@ We have two types of tests:
    This can happen if you are not using a recent Eclipse version. (i.e. _Neon_ or later)
  * Solution: Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option) and delete run configurations created when you ran tests earlier.
 
-## Dev Ops
+## 6. Dev Ops
 
-### Build Automation
+### 6.1 Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### Continuous Integration
+### 6.2 Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### Publishing Documentation
+### 6.3 Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the project site.
 
-### Making a Release
+### 6.4 Making a Release
 
 Here are the steps to create a new release:
 
@@ -341,7 +356,7 @@ Here are the steps to create a new release:
  2. Tag the repo with the version number. (e.g.`v0.1`)
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created.
 
-### Converting Documentation to PDF Format
+### 6.5 Converting Documentation to PDF Format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
 
@@ -355,13 +370,13 @@ Here are the steps to convert the project documentation files to PDF format:
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
 
-### Managing Dependencies
+### 6.6 Managing Dependencies
 
 A project often depends on third-party libraries. For example, DoIt depends on the [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these dependencies can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives: <br>
 * Include those libraries in the repo (this bloats the repo size)<br>
 * Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## Appendix A : User Stories
+## 7. Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
@@ -369,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | New user | Have a help command | Refer to instructions when I forget how to use DoIt
-`* * *` | User | Add a task | Keep track of a floating task which can be done anytime
+`* * *` | User | Add a task | Keep track of a task which can be done anytime
 `* * *` | User | Add a task with a deadline | Keep track of a task which has to be done by a specific date and time
 `* * *` | User | Add a task with start and end time | Keep track of a task which occurs during a time frame
 `* * *` | User | Delete a task | Remove a task that is no longer needed
@@ -381,18 +396,18 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | User | Set priority to a task | Know which is the highest priority that I should do first
 `* * *` | User | Tag/Categorise a task | Know what to do when I am in the current context
 `* *` | User | Sort tasks by date, priority, deadline, recurrence, tags | View important tasks first
-`* *` | User | Select a task/events by index | Reduce typing needed
+`* *` | User | Select a task by index | Reduce typing needed
 `*` | User | Color scheme to represent priority | Visually differentiate between priority levels easily
 
 
 
 
 
-## Appendix B : Use Cases
+## 8. Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `DoIt` and the **Actor** is the `user`, unless specified otherwise)
 
-### Use Case: Adding a task<br>
+### 8.1 Use Case: Adding a Task<br>
 
 **MSS**
 1. User enters command to add task
@@ -413,7 +428,7 @@ Priority | As a ... | I want to ... | So that I can...
 > Use case ends
 
 
-### Use Case: Editing a task<br>
+### 8.2 Use Case: Editing a Task<br>
 
 **MSS**
 1. User enters command to edit task
@@ -435,7 +450,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 
 
-### Use case: Deleting a task<br>
+### 8.3 Use case: Deleting a Task<br>
 
 **MSS**
 
@@ -455,13 +470,13 @@ Use case ends
 
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
-
+  
 4a. User undos task delete command
 
 > System adds the deleted task back and shows feedback to user
 > Use case ends
 
-### User Case : Undoing a command<br>
+### 8.4 User Case : Undoing a Command<br>
 
 **MSS**
 1. User enters command to undo prev undoable command
@@ -477,7 +492,7 @@ Use case ends
 > System redo the undone command and shows feedback to user
 > Use case ends
 
-### User Case : Redoing a command<br>
+### 8.5 User Case : Redoing a Command<br>
 
 **MSS**
 1. User enters command to redo the previously undone command
@@ -493,7 +508,7 @@ Use case ends
 > System undo the redone command and shows feedback to user
 > Use case ends
 
-### User Case : Sorting the displayed tasks<br>
+### 8.6 User Case : Sorting Displayed Tasks<br>
 
 **MSS**
 1. User enters command to sort that tasks displayed
@@ -506,7 +521,7 @@ Use case ends
 > Use case ends
 
 
-### User Case : Marking a task as done<br>
+### 8.7 User Case : Marking Task as Done<br>
 
 **MSS**
 1. User enters command to mark task as done
@@ -522,7 +537,7 @@ Use case ends
 > System marks the task back as undone and shows feedback to user
 > Use case ends
 
-### Use Case: Filter events/tasks by date<br>
+### 8.8 Use Case: Filtering Tasks by Date<br>
 
 **MSS**
 1. User enters command to filter task by date
@@ -534,7 +549,7 @@ Use case ends
 > System shows an error message
 > Use case ends
 
-## Use Case : Save to new location<br>
+## 8.9 Use Case : Saving to a new Location<br>
 
 **MSS**
 1. User enters command to save data to specified location
@@ -558,22 +573,8 @@ Use case ends
 > System shows an error message
 > Use case ends
 
-### Use Case: Set reminder<br>
 
-**MSS**
-1. User enters command to set reminder for specific task
-2. System reminds user at specified time via popup
-
-**Extensions**
-1a. User enters invalid task
-> System shows an error message
-> Use case ends
-
-1a. User enters invalid date to be reminded
-> System shows an error message
-> Use case ends
-
-## Use Case: View completed and uncompleted tasks<br>
+## 8.10 Use Case: Viewing Completed and Uncompleted Tasks<br>
 
 **MSS**
 1. User enters command to view uncompleted or completed tasks
@@ -581,7 +582,7 @@ Use case ends
 Use case ends
 
 
-## Use Case : Search items containing keywords<br>
+## 8.11 Use Case : Searching for Tasks Containing Keywords<br>
 
 **MSS**
 1. User enters command to view uncompleted or completed tasks
@@ -598,29 +599,11 @@ Use case ends
 > Use case ends
 
 
-
-## Use Case : Update reminder<br>
-
-**MSS**
-1. User enters command to update reminder for specific task
-2. System reminds user at specified time via popup
-Use case ends
-
-**Extensions**
-1a. User enters invalid task
-> System shows an error message
-> Use case ends
-
-1b. User enters invalid date to be reminded
-> System shows an error message
-> Use case ends
-
-
-## Use Case : Update priority of an task<br>
+## 8.12 Use Case : Updating Priority of a Task<br>
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority
+2. System updates priority to user specified priority 
 Use case ends
 
 **Extensions**
@@ -633,7 +616,7 @@ Use case ends
 > Use case ends
 
 
-## Use Case : Getting Help<br>
+## 8.13 Use Case : Getting Help<br>
 
 **MSS**
 1. User enters command for help
@@ -642,57 +625,48 @@ Use case ends
 
 
 
-## Use Case : Clear by date/category<br>
+## 8.14 Use Case : Clearing all Tasks<br>
 
 **MSS**
-1. User enters command to clear all tasks by date
-2. System clears all tasks by date
+1. User enters command to clear all tasks
+2. System clears all tasks
 Use case ends
 
-**Extensions**
-1a. User enters an invalid date
-> System shows an error message
-> Use case ends
 
 
-## Appendix C : Non-Functional Requirements
+## 9. Appendix C : Non-Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed
 
-2. Should be able to hold up to 1000 items without a noticeable sluggishness in performance for typical usage
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage
 
-3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-
-4. Should be able to enter an event/tasks in one command instead of multiple clicks
+3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+   
+4. Should be able to enter a task in one command instead of multiple clicks
 
 5. Should be able to access the program offline access tasks in areas without internet
 
 6. Should be able to complete any user command within 2 seconds
 
-7. Should delete all past events automatically without user doing it manually
+7. Should delete all past tasks automatically without user doing it manually
 
 8. Should should take no more than 5 minutes for a first time user to learn how to use program
 
 {More to be added}
 
-## Appendix D : Glossary
+## 10. Appendix D : Glossary
 
 **CRUD**: Create, read, update and delete.
 
-**Event**: A to-do that has a date range.
-
-**Floating Tasks**: Tasks without deadlines.
-
 **GUI**: Graphical user interface is the means by which information from the system is displayed to the user.
 
-**Index of to-do item**: The number visually tagged to a to-do item on the GUI. (changes with how to-dos are listed)
+**Index of task**: The number visually tagged to a task on the GUI. (changes with how to-dos are listed)
 
-**Items** : Refers to tasks, floating tasks and events.
 
 **Mainstream OS**: Windows, Linux, Unix, OS-X Operating Systems
 
 **MSS**: Main Success Scenario of a use case.
-
+    
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other.
 
 **Task**: A to-do without a date range, and optionally has a deadline.
@@ -702,7 +676,7 @@ Use case ends
 
 
 
-## Appendix E : Product Survey
+## 11. Appendix E : Product Survey
 
 ### Author: Chia Sin
 ### Product: Toodledo
@@ -712,9 +686,9 @@ Use case ends
 * Tells you what to do.
 * Provides default settings so minimal adjustment is needed.
 * Allows input commands using a keyboard. <br>
-
-### Disadvantages:
-* Requires too many clicks for settings and other features other than task.
+ 
+### Disadvantages: 
+* Requires too many clicks for settings and other features other than task. 
 * Requires clicking to delete and update.
 * Requires internet for desktop version to use.
 
@@ -729,36 +703,36 @@ Use case ends
 
 ### Disadvantages:
 * Unable to sync with email.
-* Lack of functionality.(No reminders, calendar view, etc)
+* Lack of functionality.(No reminders, calendar view, etc) 
 * Requires Windows Operating System to be installed.
 
 ### Author: Jin Shun
-### Product: Momentum
+### Product: Momentum 
 ### Advantages:
-* Simple to use
-* Nice background
+* Simple to use 
+* Nice background 
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
 * Has integration with full fledged task managers like trello<br>
 
-### Disadvantages:
-* Only works with chrome browser
-* Requires internet connection
-* Unable to set deadline for tasks
-* Minimal features
-
+### Disadvantages: 
+* Only works with chrome browser 
+* Requires internet connection 
+* Unable to set deadline for tasks 
+* Minimal features 
+ 
 ### Author: Huanhui
-### Product: Wunderlist
+### Product: Wunderlist 
 ### Advantages:
-* Some shortcut keys available, good user flexibility
-* CRUD can function offline
-* Many features such as the ability to set reminders, due dates, recurring tasks
-* Tasks are automatically sorted by due date
-* Able to display completed tasks
+* Some shortcut keys available, good user flexibility 
+* CRUD can function offline 
+* Many features such as the ability to set reminders, due dates, recurring tasks 
+* Tasks are automatically sorted by due date 
+* Able to display completed tasks 
 * Well designed UI<br>
 
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task
-* Do not have an undo function
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
+* Do not have an undo function 
 * Requires installation
 
 
