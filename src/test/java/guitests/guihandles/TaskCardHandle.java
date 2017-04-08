@@ -43,11 +43,11 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getStartDate() {
-        return getTextFromLabel(START_DATE_FIELD_ID);
+        return getTextFromLabel(START_DATE_FIELD_ID).replaceAll("Start: ", "").trim();
     }
 
     public String getEndDate() {
-        return getTextFromLabel(END_DATE_FIELD_ID);
+        return getTextFromLabel(END_DATE_FIELD_ID).replaceAll("End: ", "").trim();
     }
 
     public String getRemark() {
