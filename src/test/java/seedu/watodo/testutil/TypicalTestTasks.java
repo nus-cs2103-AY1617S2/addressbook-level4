@@ -44,7 +44,7 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{eat, sleep, play};
+        return new TestTask[]{code, study, eat, sleep, shop, play};
     }
 
     public TaskManager getTypicalTaskManager() {
