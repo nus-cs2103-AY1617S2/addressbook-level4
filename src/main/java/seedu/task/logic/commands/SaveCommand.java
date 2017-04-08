@@ -11,7 +11,7 @@ import seedu.task.commons.util.FileUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
- * Saves task data in the specified directory.
+ * Saves task data in the specified directory and updates the default save directory.
  */
 public class SaveCommand extends Command {
 
@@ -25,7 +25,8 @@ public class SaveCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Tasks saved in location: %1$s";
     public static final String MESSAGE_INVALID_SAVE_LOCATION = "This save location is invalid: %1$s";
-    public static final String MESSAGE_NULL_SAVE_LOCATION = "A save location must be specified.";
+    public static final String MESSAGE_NULL_SAVE_LOCATION = "A save location must be specified.\n" +
+            "Otherwise, saving occurs automatically in the current save location.";
     public static final String MESSAGE_DIRECTORY_SAVE_LOCATION = "A save location must also include the file name.";
     public static final String MESSAGE_SAVE_IO_EXCEPTION = "Failed to save file in location: %1$s";
 

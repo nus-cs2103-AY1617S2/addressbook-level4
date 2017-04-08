@@ -2,19 +2,21 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.FileUtil;
+import seedu.task.logic.commands.SaveCommand;
 import seedu.task.testutil.TestUtil;
 
 public class SaveCommandTest extends AddressBookGuiTest {
@@ -24,6 +26,9 @@ public class SaveCommandTest extends AddressBookGuiTest {
     private static final String TEST_XML = "changeme.xml";
 
     private static final String SAVE_COMMAND = "save ";
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void reset_config() throws DataConversionException, IOException {
@@ -36,19 +41,31 @@ public class SaveCommandTest extends AddressBookGuiTest {
             config.setTaskManagerFilePath(TEST_FOLDER + TEST_XML);
             saveConfig(config, TEST_CONFIG);
             System.out.println("Reset TaskManagerFilePath to " + config.getTaskManagerFilePath());
-        } else {
-            fail();
         }
     }
 
     @Test
     public void save_success() throws IllegalValueException, DataConversionException {
+        //This test involves saving files with and without extensions, with and without creating new folders
+        //However, all files are prefixed with a specified test folder
         String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
-        "taskmanager" };
+                "taskmanager", "secret_folder/secret_tasks.xml", "secret_folder/secret_tasks" };
         for (String saveFile : saveFiles) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(saveFile);
         }
+    }
+
+    @Test
+    public void save_nullFile_illegalValueException() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        SaveCommand sc = new SaveCommand(null);
+    }
+
+    @Test
+    public void save_emptyString_illegalValueException() throws IllegalValueException {
+        thrown.expect(IllegalValueException.class);
+        SaveCommand sc = new SaveCommand("");
     }
 
     private void assertSaveSuccess(String saveFile) throws DataConversionException {
@@ -73,8 +90,6 @@ public class SaveCommandTest extends AddressBookGuiTest {
         if (opConfig.isPresent()) {
             Config config = opConfig.get();
             configTaskManagerFilePath = config.getTaskManagerFilePath();
-        } else {
-            fail();
         }
         return configTaskManagerFilePath;
     }
