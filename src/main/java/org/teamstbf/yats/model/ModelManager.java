@@ -18,9 +18,13 @@ import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByDeadline;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByEndDate;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByStartDate;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
  * Represents the in-memory model of the task manager data. All changes to any
@@ -297,6 +301,54 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToFindAll(Set<String> keywords) {
 	updateFilteredEventList(new PredicateExpression(new FindQualifier(keywords)));
+    }
+
+    // @@author
+
+    @Override
+    public void updateFilteredListToShowSortedStart() {
+	FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByStart();
+	taskManager.setPersons(tempEvents);
+    }
+
+    @Override
+    public void updateFilteredListToShowSortedEnd() {
+	FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByEnd();
+	taskManager.setPersons(tempEvents);
+    }
+
+    @Override
+    public void updateFilteredListToShowDeadline() {
+	FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByDeadline();
+	taskManager.setPersons(tempEvents);
+    }
+
+    private FilteredList<ReadOnlyEvent> getSortedEventListByEnd() {
+	SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByEndDate());
+	FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
+	taskManager.setPersons(tempEvents);
+	return tempEvents;
+    }
+
+    private FilteredList<ReadOnlyEvent> getSortedEventListByStart() {
+	SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
+	FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
+	taskManager.setPersons(tempEvents);
+	return tempEvents;
+    }
+
+    private FilteredList<ReadOnlyEvent> getSortedEventListByDeadline() {
+	SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByDeadline());
+	FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
+	taskManager.setPersons(tempEvents);
+	return tempEvents;
+    }
+
+    @Override
+    public void updateFilteredListToShowDone() {
+	Set<String> doneTaskIdentifier = new HashSet<String>();
+	doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+	updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
     }
 
     // Inner class used for Searching //
