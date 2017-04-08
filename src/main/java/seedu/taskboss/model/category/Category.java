@@ -9,7 +9,12 @@ import seedu.taskboss.commons.exceptions.IllegalValueException;
  */
 public class Category {
 
+
     private static final String EMPTY_STRING = "";
+    private static final int INDEX_SECOND_CHAR = 1;
+    private static final int INDEX_FIRST_CHAR = 0;
+    private static final int NUM_SINGLE_CHAR = 1;
+
     public static final String MESSAGE_CATEGORY_CONSTRAINTS = "Categories names should be alphanumeric";
     public static final String CATEGORY_VALIDATION_REGEX = "\\p{Alnum}+";
 
@@ -64,11 +69,11 @@ public class Category {
 
     //@@author A0147990R
     private String formatName(String name) {
-        if (name.length() <= 1) {
+        if (name.length() <= NUM_SINGLE_CHAR) {
             return name.toUpperCase();
         } else {
-            String first = name.substring(0, 1).toUpperCase();
-            String rest = name.substring(1).toLowerCase();
+            String first = name.substring(INDEX_FIRST_CHAR, INDEX_SECOND_CHAR).toUpperCase();
+            String rest = name.substring(INDEX_SECOND_CHAR).toLowerCase();
             return first + rest;
         }
     }

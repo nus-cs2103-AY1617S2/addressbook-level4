@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.events.ui.JumpToCategoryListEvent;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in TaskBoss";
-    public static final String ERROR_INVALID_DATES = "Your end date is earlier than start date.";
+    public static final String ERROR_INVALID_ORDER_DATES = "Your end date is earlier than start date.";
     //@@author A0144904H
     public static final String BUILT_IN_ALL_TASKS = "Alltasks";
     public static final String BUILT_IN_DONE = "Done";
@@ -70,22 +71,13 @@ public class AddCommand extends Command {
 
         categoriesSetUp(categories, categorySet);
 
-        String updatedFreq;
-        if (frequency.isEmpty()) {
-            updatedFreq = Frequency.NONE.toString();
-        } else {
-            updatedFreq = frequency.toUpperCase().trim();
-        }
-
         Name taskName = new Name(name);
         PriorityLevel priorityLvl = new PriorityLevel(priorityLevel);
         DateTime startDateTimeObj = new DateTime(startDateTime);
         DateTime endDateTimeObj = new DateTime(endDateTime);
+        String updatedFreq = initFrequency(frequency);
 
-        if (startDateTimeObj.getDate() != null && endDateTimeObj.getDate() != null &&
-                startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
-            throw new InvalidDatesException(ERROR_INVALID_DATES);
-        }
+        checkDatesValidity(startDateTimeObj, endDateTimeObj);
 
         this.toAdd = new Task(
                 taskName,
@@ -96,6 +88,29 @@ public class AddCommand extends Command {
                 new Recurrence(Frequency.valueOf(updatedFreq)),
                 new UniqueCategoryList(categorySet)
         );
+    }
+
+    /**
+     * Throws InvalidDatesException if {@code startDateTimeObj} is later than {@code endDateTimeObj}
+     */
+    private void checkDatesValidity(DateTime startDateTimeObj, DateTime endDateTimeObj) throws InvalidDatesException {
+        if (startDateTimeObj.getDate() != null && endDateTimeObj.getDate() != null &&
+                startDateTimeObj.getDate().after(endDateTimeObj.getDate())) {
+            throw new InvalidDatesException(ERROR_INVALID_ORDER_DATES);
+        }
+    }
+
+    /**
+     * Initialises value of {@code frequency}
+     */
+    private String initFrequency(String frequency) {
+        String updatedFreq;
+        if (frequency.isEmpty()) {
+            updatedFreq = Frequency.NONE.toString();
+        } else {
+            updatedFreq = frequency.toUpperCase().trim();
+        }
+        return updatedFreq;
     }
 
     //@@author A0144904H
@@ -110,11 +125,11 @@ public class AddCommand extends Command {
     private void categoriesSetUp(Set<String> categories, final Set<Category> categorySet)
             throws IllegalValueException, BuiltInCategoryException {
         categorySet.add(new Category(BUILT_IN_ALL_TASKS));
-        if (categories.contains(BUILT_IN_DONE)) {
-            throw new BuiltInCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
-        }
 
         for (String categoryName : categories) {
+            if ((new Category(categoryName)).equals(new Category(BUILT_IN_DONE))) {
+                throw new BuiltInCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
+            }
             categorySet.add(new Category(categoryName));
         }
     }
@@ -126,6 +141,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToCategoryListEvent(new Category("Alltasks")));
             scrollToTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {

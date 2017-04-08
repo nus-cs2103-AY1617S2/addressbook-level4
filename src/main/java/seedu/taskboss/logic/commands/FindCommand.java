@@ -26,6 +26,7 @@ public class FindCommand extends Command {
 
     private static final String TYPE_KEYWORDS = "keywords";
     private static final String TYPE_START_DATE = "startDate";
+    private static final String TYPE_END_DATE = "endDate";
 
     private final String keywords;
     private final String type;
@@ -38,17 +39,24 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (type.equals(TYPE_KEYWORDS)) {
+        switch(type) {
+        case TYPE_KEYWORDS:
             String[] keywordsList = keywords.split(ALL_WHITESPACE);
             final Set<String> keywordSet = new HashSet<String>(Arrays.asList(keywordsList));
+
             model.updateFilteredTaskListByKeywords(keywordSet);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else if (type.equals(TYPE_START_DATE)) {
+
+        case TYPE_START_DATE:
             model.updateFilteredTaskListByStartDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
-        } else { //find by end date time
+
+        case TYPE_END_DATE:
             model.updateFilteredTaskListByEndDateTime(keywords);
             return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+
+        default:
+            return null; //will never reach here
         }
     }
 
