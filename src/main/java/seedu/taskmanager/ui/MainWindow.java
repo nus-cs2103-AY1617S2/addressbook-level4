@@ -38,8 +38,6 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
 
-    private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
     private TaskListPanel overdueTaskListPanel; 
 
     // @@author A0131278H
@@ -141,8 +139,8 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
 
-        browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+//        browserPanel = new BrowserPanel(browserPlaceholder);
+//        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         // @@author A0114523U
         overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
 
@@ -177,6 +175,7 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0114523U
     private AnchorPane getOverdueTaskListPlaceholder() {
         return overdueTaskListPanelPlaceholder;
+    }
 
     private AnchorPane getDoneTaskListPlaceholder() {
         return doneTaskListPanelPlaceholder;
@@ -282,21 +281,9 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
-    }
-
     // @@author A0114523U
     public TaskListPanel getOverdueTaskListPanel() {
         return this.overdueTaskListPanel;
     }
     // @@author
-
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
 }
