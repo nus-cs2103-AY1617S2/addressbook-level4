@@ -58,7 +58,7 @@ public class ListCommandParser {
                 }
             } else if (args.contains(ListCommand.COMMAND_WORD_SUFFIX_DONE)) {
                 return new ListCommandDone(internalParser(args, COMMAND_EXTENSION_DONE, KEYWORD_DONE));
-            }        
+            }
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
