@@ -24,9 +24,9 @@ public class SaveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_SHORT
                 + ": Saves the data at specific filepath.\n"
-                + "Example: " + COMMAND_WORD
+                + "Example (Windows): " + COMMAND_WORD
                 + " C://Users/Desktop/TaskBoss\n"
-                + "Example: " + COMMAND_WORD
+                + "Example (Mac): " + COMMAND_WORD
                 + " /User/Username/Desktop/TaskBoss";
 
     public static final String MESSAGE_SUCCESS = "The data has been saved!";
