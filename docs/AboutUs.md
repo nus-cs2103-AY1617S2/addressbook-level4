@@ -18,13 +18,13 @@ Roles and Responsibilities: In charge of Model <br>
 
 #### [Malik Jabati](https://github.com/SmartyMJ)
 <img src="images/smartymj.png" width="150"><br>
-Roles and Responsibilities: Team Lead, Documentation, Scheduling and tracking  <br>
+Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking  <br>
 
 -----
 
 #### [Ali Rizvi](https://github.com/EntitySK)
 <img src="images/entitysk.png" width="150"><br>
-Roles and Responsibilities: Testing, Code Quality, Deliverables and deadlines, Eclipse expert, CSS expert, In charge of storage  <br>
+Roles and Responsibilities: Team Co-Lead, Testing, Code Quality, Deliverables and deadlines, Eclipse expert, CSS expert, In charge of storage  <br>
 
 -----
 
