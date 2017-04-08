@@ -1,15 +1,9 @@
 package org.teamstbf.yats.model.person;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-import org.teamstbf.yats.model.item.Schedule;
-
 // @@author A0139448U
 public class ScheduleTest {
 
-	@Test
+	/* @Test
 	public void test() {
 		// invalid schedule
 		assertFalse(Schedule.isValidSchedule("")); // empty string
@@ -32,6 +26,6 @@ public class ScheduleTest {
 		assertTrue(Schedule.isValidSchedule("12:59AM 05/12/2017"));
 		assertTrue(Schedule.isValidSchedule("12:59AM 20/05/2017"));
 
-	}
+	} */
 
 }
