@@ -119,10 +119,10 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `delete ev 1`.
 
 <img src="images\SDforDeleteActivity.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+_Figure 2.1.3a : Component interactions for `delete ev 1` command (part 1)_
 
 >Note how the `Model` simply raises a `WhatsLeftChangedEvent` when the WhatsLeft data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
@@ -130,11 +130,20 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
 <img src="images\SDforDeleteActivityEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+_Figure 2.1.3b : Component interactions for `delete ev 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
+
+#### Activity Diagrams for some workflow
+
+The Activity Diagram below shows the workflow of a user saving/read the xml data file at/from another location
+<img src="images\ActivityDiagramSaveFile.png" width="800"><br>
+_Figure 2.1.4a : Activity Diagram for Saving File
+
+<img src="images\ActivityDiagramReadFile.png" width="800"><br>
+_Figure 2.1.4b : Activity Diagram for Reading File
 
 The sections below give more details of each component.
 
@@ -152,7 +161,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/whatsleft/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -168,17 +177,17 @@ Author: Shannon Yong
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/whatsleft/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
 3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete ev 1")`
  API call.<br>
 <img src="images/DeleteActivitySdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete ev 1` Command_
 
 ### 2.4. Model component
 
@@ -187,7 +196,7 @@ Author: Li Zihan
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/whatsleft/model/Model.java)
 
 The `Model`,
 
@@ -204,7 +213,7 @@ Author: Li Chengcheng
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/whatsleft/storage/Storage.java)
 
 The `Storage` component,
 
