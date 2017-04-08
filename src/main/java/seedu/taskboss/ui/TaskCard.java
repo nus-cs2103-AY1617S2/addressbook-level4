@@ -1,5 +1,8 @@
 package seedu.taskboss.ui;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,6 +16,8 @@ import seedu.taskboss.model.task.ReadOnlyTask;
 
 public class TaskCard extends UiPart<Region> {
 
+    private static final String CSS_CARDPANE_OVERDUE = "-fx-background-color: #FFF7F8; -fx-border-color: #FF0097;"
+            + " -fx-border-width: 1 2 1 2;";
     private static final String RECURRENCE_NONE = "NONE";
     private static final String PATH_IMAGE_URGENT = "/images/urgentImage.png";
     private static final String FXML = "TaskListCard.fxml";
@@ -36,16 +41,75 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane categories;
 
+    //@@author A0143157J
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
-        name.setText(task.getName().fullName);
-        id.setText(displayedIndex + ". ");
+        initOverdueTaskCss(task);
+        initName(task);
+        initId(displayedIndex);
         initPriority(task);
         initStartDateTime(task);
         initEndDateTime(task);
-        information.setText(task.getInformation().value);
+        initInformation(task);
         initRecurrence(task);
         initCategories(task);
+    }
+
+    /**
+     * Initialises CSS properties for a task that is overdue
+     */
+    private void initOverdueTaskCss(ReadOnlyTask task) {
+        Date currDate = new Date();
+        if (task.getEndDateTime() == null || task.getEndDateTime().getDate() == null) {
+            return;
+        }
+        Date taskEndDate = task.getEndDateTime().getDate();
+        if (isOverdueTask(taskEndDate, currDate, task)) {
+            setCardPaneOverdueStyle();
+        }
+    }
+
+    /**
+     * Returns true if a task is overdue by comparing current time with the task's end date time
+     */
+    private boolean isOverdueTask(Date taskEndDate, Date currDate, ReadOnlyTask task) {
+        boolean isOverdue = currDate.after(taskEndDate);
+        SimpleDateFormat sdfNoTime = new SimpleDateFormat("MMM dd, yyyy");
+
+        if (!isOverdue) {
+            return false;
+        } else if (isOverdue) {
+            // account for special case (taskEndDate == today) that is marked as true for .after() in the API
+            // ie. ed/today (without time) should not be overdue
+            if (sdfNoTime.format(taskEndDate).equals(sdfNoTime.format(currDate)) && !task.getEndDateTime().isTimeInferred()) {
+                return true;
+            } else if (!sdfNoTime.format(taskEndDate).equals(sdfNoTime.format(currDate))) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    /**
+     * Sets CSS style for the cardPane of overdue tasks
+     */
+    private void setCardPaneOverdueStyle() {
+        cardPane.setStyle(CSS_CARDPANE_OVERDUE);
+    }
+
+    /**
+     * Initialises name
+     */
+    private void initName(ReadOnlyTask task) {
+        name.setText(task.getName().fullName);
+    }
+
+    /**
+     * Initialises id
+     */
+    private void initId(int displayedIndex) {
+        id.setText(displayedIndex + ". ");
     }
 
     /**
@@ -88,6 +152,13 @@ public class TaskCard extends UiPart<Region> {
     }
 
     /**
+     * Initialises information
+     */
+    private void initInformation(ReadOnlyTask task) {
+        information.setText(task.getInformation().value);
+    }
+
+    /**
      * Initialises recurrence
      */
     private void initRecurrence(ReadOnlyTask task) {
@@ -100,6 +171,9 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Initialises categories
+     */
     private void initCategories(ReadOnlyTask task) {
         task.getCategories().forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
