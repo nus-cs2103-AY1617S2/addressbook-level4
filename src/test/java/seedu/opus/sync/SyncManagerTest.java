@@ -1,5 +1,6 @@
 package seedu.opus.sync;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,18 +29,22 @@ public class SyncManagerTest {
 
     @Test
     public void syncManagerStartSyncExpectSyncServiceStart() throws SyncException {
+        assertNotNull(syncManager);
         syncManager.startSync();
         verify(mockService).start();
     }
 
     @Test
     public void syncManagerStopSyncExpectSyncServiceStop() throws SyncException {
+        assertNotNull(syncManager);
         syncManager.stopSync();
         verify(mockService).stop();
     }
 
     @Test
     public void syncManagerUpdateTaskListWithValidTaskExpectSyncServiceUpdateListSuccessful() {
+        assertNotNull(syncManager);
+        
         Task mockTask = mock(Task.class);
         Optional<DateTime> mockStartDateTime = Optional.ofNullable(null);
         Optional<DateTime> mockEndDateTime = Optional.of(mock(DateTime.class));
