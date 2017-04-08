@@ -145,6 +145,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         commandBox.runCommand("edit 1; tag *&;");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 change mother to wonderwoman");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+
+        commandBox.runCommand("edit 1 change start_date to wonderwoman");
+        assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
+
+        commandBox.runCommand("edit 1 change invalid to today and something to tmr");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
     //@@author A0142255M
