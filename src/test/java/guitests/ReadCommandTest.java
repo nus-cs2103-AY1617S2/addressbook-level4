@@ -18,9 +18,9 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
     public void readWhatsLeftSuccess() {
         // finish one task
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
 
         /**  Read a file from the designated filepath*/
         assertReadWhatsLeftSuccess("./src/test/data/readCommandTest/TypicalWhatsLeft.xml",

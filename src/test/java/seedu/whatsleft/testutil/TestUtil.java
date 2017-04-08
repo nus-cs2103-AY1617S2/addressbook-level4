@@ -225,6 +225,21 @@ public class TestUtil {
         return filteredTestEvents;
     }
 
+    /**
+     * Filters all past test events from an array of test events, then sort
+     * the test events in filtered array in time order.
+     *
+     * @param events
+     * @return TestEvent filteredTestEvents
+     */
+    public static TestEvent[] getPastTestEvents(TestEvent[] events) {
+        ArrayList<TestEvent> eventList = new ArrayList<TestEvent>(Arrays.asList(events));
+        eventList.removeIf(e -> !e.isOver());
+        eventList.sort(ReadOnlyEvent.getComparator());
+        TestEvent[] filteredTestEvents = eventList.toArray(new TestEvent[eventList.size()]);
+        return filteredTestEvents;
+    }
+
     // @@author A0148038A
     /**
      * Filters all future test tasks from an array of test tasks, then sort the
@@ -239,86 +254,6 @@ public class TestUtil {
         taskList.sort(ReadOnlyTask.getComparator());
         TestTask[] filteredTestTasks = taskList.toArray(new TestTask[taskList.size()]);
         return filteredTestTasks;
-    }
-
-    // @@author
-    /**
-     * Takes in a list of Testevents and returns the expected filtered and
-     * sorted list of events in event panel
-     *
-     * @param events
-     * @return expected filtered and sorted event list in event panel
-     */
-    public static TestEvent[] filterExpectedTestEventList(TestEvent[] events) {
-        int numInUIView = 0;
-        ArrayList<TestEvent> eventslist = new ArrayList<TestEvent>();
-        for (TestEvent a : events) {
-            if (!a.isOver()) {
-                numInUIView++;
-                eventslist.add(a);
-            }
-        }
-        eventslist.sort(ReadOnlyEvent.getComparator());
-        TestEvent[] expected = new TestEvent[numInUIView];
-        int counter = 0;
-        for (TestEvent each : eventslist) {
-            expected[counter] = each;
-            counter++;
-        }
-        return expected;
-    }
-    //@@author A0121668A
-    /**
-     * Takes in a list of Testevents and returns the filtered and
-     * sorted list of events that are over in event panel
-     *
-     * @param events
-     * @return expected filtered and sorted past sevent list in event panel
-     */
-    public static TestEvent[] filterPastExpectedTestEventList(TestEvent[] events) {
-        int numInUIView = 0;
-        ArrayList<TestEvent> eventslist = new ArrayList<TestEvent>();
-        for (TestEvent a : events) {
-            if (a.isOver()) {
-                numInUIView++;
-                eventslist.add(a);
-            }
-        }
-        eventslist.sort(ReadOnlyEvent.getComparator());
-        TestEvent[] expected = new TestEvent[numInUIView];
-        int counter = 0;
-        for (TestEvent each : eventslist) {
-            expected[counter] = each;
-            counter++;
-        }
-        return expected;
-    }
-
-    /**
-     * Takes in a list of TestTasks and returns the expected filtered and sorted
-     * list of tasks in task panel
-     *
-     * @param tasks
-     * @return expected filtered and sorted task list in event panel
-     */
-    public static TestTask[] filterExpectedTestTaskList(TestTask[] tasks) {
-        int numInUIView = 0;
-        ArrayList<TestTask> taskslist = new ArrayList<TestTask>();
-        for (TestTask a : tasks) {
-            if (a.getStatus() == false) {
-                numInUIView++;
-                taskslist.add(a);
-            }
-        }
-
-        taskslist.sort(ReadOnlyTask.getComparator());
-        TestTask[] expected = new TestTask[numInUIView];
-        int counter = 0;
-        for (TestTask each : taskslist) {
-            expected[counter] = each;
-            counter++;
-        }
-        return expected;
     }
 
     public static void main(String... s) {

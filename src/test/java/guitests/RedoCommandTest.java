@@ -16,9 +16,9 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
     public void redoPreviousFinishedTaskSuccess() {
         // finish one task
         TestEvent[] currentEventList = te.getTypicalEvents();
-        TestEvent[] filteredPastEventList = TestUtil.filterPastExpectedTestEventList(currentEventList);
+        TestEvent[] filteredPastEventList = TestUtil.getPastTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        TestTask[] filteredTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        TestTask[] filteredTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         TestTask[] redoList = TestUtil.getTasksFromListByIndex(filteredTaskList, 1, 4);
 
         //finishes 3 tasks
@@ -37,7 +37,7 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
     @Test
     public void redoPreviousFinishedTasksFailure() {
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        TestTask[] filteredTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        TestTask[] filteredTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         TestTask[] redoList = TestUtil.getTasksFromListByIndex(filteredTaskList, 1, 4);
 
       //finishes 3 tasks

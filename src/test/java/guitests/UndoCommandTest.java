@@ -14,17 +14,17 @@ public class UndoCommandTest extends WhatsLeftGuiTest {
     public void undoPreviousAddCommandSuccess() {
         //add one event
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         TestEvent eventToAdd = te.consultation;
         assertAddActivityUndoSuccess(eventToAdd.getAddCommand(), currentTaskList, currentEventList);
 
         //add one task
         TestEvent[] currentEventList2 = te.getTypicalEvents();
-        currentEventList2 = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList2 = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList2 = tt.getTypicalTasks();
-        currentTaskList2 = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList2 = TestUtil.getFilteredTestTasks(currentTaskList);
         TestTask taskToAdd = tt.homework;
         assertAddActivityUndoSuccess(taskToAdd.getAddCommand(), currentTaskList2, currentEventList2);
 
@@ -35,19 +35,19 @@ public class UndoCommandTest extends WhatsLeftGuiTest {
     public void undoPreviousEditCommandSuccess() {
         //edit an event
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String eventDetailsToEdit = "ev 1 sd/friday ed/friday";
         assertEditActivityUndoSuccess(eventDetailsToEdit, currentTaskList, currentEventList);
 
         //edit a task
-        TestEvent[] currentEventList2 = te.getTypicalEvents();
-        currentEventList2 = TestUtil.filterExpectedTestEventList(currentEventList);
-        TestTask[] currentTaskList2 = tt.getTypicalTasks();
-        currentTaskList2 = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentEventList = te.getTypicalEvents();
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
+        currentTaskList = tt.getTypicalTasks();
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String taskDetailsToEdit = "ts 2 by/friday p/low";
-        assertEditActivityUndoSuccess(taskDetailsToEdit, currentTaskList2, currentEventList2);
+        assertEditActivityUndoSuccess(taskDetailsToEdit, currentTaskList, currentEventList);
     }
 
     //@@author A0110491U
@@ -55,15 +55,15 @@ public class UndoCommandTest extends WhatsLeftGuiTest {
     public void undoPreviousDeleteCommandSuccess() {
         //delete an event
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String eventDetailsToDelete = "ev 2";
         assertDeleteActivityUndoSuccess(eventDetailsToDelete, currentTaskList, currentEventList);
 
         //delete a task
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String taskDetailsToDelete = "ts 3";
         assertDeleteActivityUndoSuccess(taskDetailsToDelete, currentTaskList, currentEventList);
     }
@@ -73,21 +73,21 @@ public class UndoCommandTest extends WhatsLeftGuiTest {
     public void undoPreviousClearCommandSuccess() {
         //clear all
         TestEvent[] currentEventList = te.getTypicalEvents();
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String clearcommand = "clear";
         assertClearActivityUndoSuccess(clearcommand, currentTaskList, currentEventList);
 
         //clear events
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String clearevent = "clear ev";
         assertClearActivityUndoSuccess(clearevent, currentTaskList, currentEventList);
 
         //clear tasks
-        currentEventList = TestUtil.filterExpectedTestEventList(currentEventList);
-        currentTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
+        currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
         String cleartask = "clear ts";
         assertClearActivityUndoSuccess(cleartask, currentTaskList, currentEventList);
 
