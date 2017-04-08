@@ -3,6 +3,7 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
 import guitests.guihandles.TaskCardHandle;
 import project.taskcrusher.commons.core.Messages;
@@ -50,6 +51,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
         //confirm the list now contains all previous persons plus the new person
         TestTaskCard[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        System.out.println("here");
         assertTrue(userInboxPanel.isListMatching(expectedList));
     }
 

@@ -73,22 +73,22 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-//        if (getTaskName().equals(task.getTaskName().name)) {
-//            System.out.println("task name " + getTaskName());
-//        }
-//        if (getPriority().equals(task.getPriority().priority)) {
-//            System.out.println("priority " + getPriority());
-//        }
-//        if (getDeadline().equals(task.getDeadline().deadline)) {
-//            System.out.println("deadline " + getDeadline());
-//        }
-//        if (getDescription().equals(task.getDescription().description)) {
-//            System.out.println("Description " + getDescription());
-//        }
-//        if (getTags().equals(getTags(task.getTags()))) {
-//            System.out.println("Tags are matching");
-//        }
-//        //return true;
+        if (getTaskName().equals(task.getName().name)) {
+            System.out.println("task name " + getTaskName());
+        }
+        if (getPriority().equals(task.getPriority().priority)) {
+            System.out.println("priority " + getPriority());
+        }
+        if (getDeadline().equals(task.getDeadline().deadline)) {
+            System.out.println("deadline " + getDeadline());
+        }
+        if (getDescription().equals(task.getDescription().description)) {
+            System.out.println("Description " + getDescription());
+        }
+        if (getTags().equals(getTags(task.getTags()))) {
+            System.out.println("Tags are matching");
+        }
+        //return true;
         //TODO: match priority (because it is shown as stars), and also the deadline
         //(it is formatted differently, may change if the test takes too long)
         return getTaskName().equals(task.getName().name)

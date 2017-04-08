@@ -61,7 +61,7 @@ public class UserInboxPanelHandle extends GuiHandle {
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
+            guiRobot.sleep(400);
             if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
@@ -91,6 +91,9 @@ public class UserInboxPanelHandle extends GuiHandle {
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
             if (!personsInList.get(startPosition + i).getName().name.equals(persons[i].getName().name)) {
+                System.out.println(i + " : " + persons[i]);
+                System.out.println(i + " : " + personsInList.get(i));
+                System.out.println(i + " does not match");
                 return false;
             }
         }
@@ -100,14 +103,14 @@ public class UserInboxPanelHandle extends GuiHandle {
 
     public TaskCardHandle navigateToPerson(String name) {
         guiRobot.sleep(1000); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> person = getListView().getItems().stream()
+        final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                                                     .filter(p -> p.getName().name.equals(name))
                                                     .findAny();
-        if (!person.isPresent()) {
+        if (!task.isPresent()) {
             throw new IllegalStateException("Name not found: " + name);
         }
 
-        return navigateToPerson(person.get());
+        return navigateToPerson(task.get());
     }
 
     /**
@@ -120,6 +123,7 @@ public class UserInboxPanelHandle extends GuiHandle {
             getListView().scrollTo(index);
             guiRobot.sleep(150);
             getListView().getSelectionModel().select(index);
+            System.out.println("trying to select");
         });
         guiRobot.sleep(100);
         return getPersonCardHandle(person);
@@ -156,6 +160,7 @@ public class UserInboxPanelHandle extends GuiHandle {
                 .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(person))
                 .findFirst();
         if (personCardNode.isPresent()) {
+            System.out.println("Returning present value");
             return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {
             System.out.println("Returning null");

@@ -328,6 +328,10 @@ public class TestUtil {
     public static TestTaskCard[] addTasksToList(final TestTaskCard[] tasks, TestTaskCard... tasksToAdd) {
         List<TestTaskCard> listOfPersons = asList(tasks);
         listOfPersons.addAll(asList(tasksToAdd));
+        listOfPersons.sort(null);
+        for (TestTaskCard task: listOfPersons) {
+            System.out.println("containing in this order: " + task.toString());
+        }
         return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
     }
 
