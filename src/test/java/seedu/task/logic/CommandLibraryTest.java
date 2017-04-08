@@ -13,18 +13,19 @@ import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.parser.AddCommandParser;
 
 public class CommandLibraryTest {
-    
-    private static HashMap<String,CommandInstance> hm = CommandLibrary.getInstance().getCommandTable();
-    
+
+    private static HashMap<String, CommandInstance> hm = CommandLibrary.getInstance().getCommandTable();
+
     @Test
-    public void getHashTable(){
+    public void getHashTable() {
         assertNotNull(hm);
     }
+
     @Test
-    public void getCommandFromTable(){
-        assertEquals(CommandLibrary.getCommandTable().get("Add".toLowerCase()).getCommandParser().getClass(),AddCommandParser.class);
-        assertEquals(CommandLibrary.getCommandTable().get("add").getCommandKey(),AddCommand.COMMAND_WORD_1);
+    public void getCommandFromTable() {
+        assertEquals(CommandLibrary.getCommandTable().get("Add".toLowerCase()).getCommandParser().getClass(),
+                AddCommandParser.class);
+        assertEquals(CommandLibrary.getCommandTable().get("add").getCommandKey(), AddCommand.COMMAND_WORD_1);
     }
-    
 
 }
