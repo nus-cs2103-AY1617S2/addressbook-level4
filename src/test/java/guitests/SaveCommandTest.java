@@ -36,7 +36,7 @@ public class SaveCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("save");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
 
-        //missing filepath using short command
+        //empty filepath using short command
         commandBox.runCommand("sv");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
 
