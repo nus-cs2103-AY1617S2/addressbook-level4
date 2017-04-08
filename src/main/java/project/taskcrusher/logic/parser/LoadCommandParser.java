@@ -6,18 +6,22 @@ import project.taskcrusher.logic.commands.Command;
 import project.taskcrusher.logic.commands.IncorrectCommand;
 import project.taskcrusher.logic.commands.LoadCommand;
 
+//@@author A0127737X
+/**
+ * Parses the arguments for load command. Also checks if the user wants to create new file before loading.
+ */
 public class LoadCommandParser {
 
     public Command parse(String arguments) {
-        String[] argumentsArray = arguments.trim().split(" ");
+        String[] argElements = arguments.trim().split(" ");
 
-        if (argumentsArray.length == 1) {
-            String filenameToLoad = argumentsArray[0].trim();
+        if (argElements.length == 1) {
+            String filenameToLoad = argElements[0].trim();
             return new LoadCommand(filenameToLoad, !LoadCommand.IS_CREATE_NEW_FILE);
-        } else if (argumentsArray.length == 2) {
-            String option = argumentsArray[0].trim();
+        } else if (argElements.length == 2) {
+            String option = argElements[0].trim();
             if (option.equals("new")) {
-                String filenameToLoad = argumentsArray[1].trim();
+                String filenameToLoad = argElements[1].trim();
                 return new LoadCommand(filenameToLoad, LoadCommand.IS_CREATE_NEW_FILE);
             }
         }

@@ -10,8 +10,9 @@ import project.taskcrusher.commons.util.FileUtil;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
 
 //@@author A0127737X
-/** loads a new xml storage file. If the file does not exist, create a new one and set it as the storage file
- *  This is achieved by posting LoadNewStorageFileEvent which is handled at the high-level MainApp instance.
+/** loads an xml storage file. The user may specify if he/she wants to create a missing file,
+ *  by providing the word "new" before the filename. or load an existing xml file. The loading of new file
+ *  is achieved by posting LoadNewStorageFileEvent which is handled at the high-level MainApp instance.
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";

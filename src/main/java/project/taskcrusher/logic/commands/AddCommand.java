@@ -29,9 +29,9 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task or an event to the active list.\n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task or an event to the active list.\n"
             + "For events: " + COMMAND_WORD + " " + Event.EVENT_FLAG
-            + " NAME d/START_DATE to END_DATE [l/LOCATION] [//DESCRIPTION] [t/TAG]\n" + " For tasks: " + COMMAND_WORD
+            + " NAME d/START_DATE to END_DATE [l/LOCATION] [//DESCRIPTION] [t/TAG]\n" + "For tasks: " + COMMAND_WORD
             + " " + Task.TASK_FLAG + " NAME [d/DEADLINE] [p/PRIORITY] [//DESCRIPTION] [t/TAG]";
 
     public static final String MESSAGE_TASK_SUCCESS = "New task added: %1$s";
