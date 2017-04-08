@@ -2,22 +2,28 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+import project.taskcrusher.testutil.TestTaskCard;
+
+public class ClearCommandTest extends TaskcrusherGuiTest {
 
     @Test
     public void clear() {
 
         //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
+        TestTaskCard[] taskList = td.getTypicalTasks();
+        Arrays.sort(taskList);
+        assertTrue(userInboxPanel.isListMatching(taskList));
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
-        assertListSize(0);
+        commandBox.runCommand(td.assignment1.getAddCommand());
+        assertTrue(userInboxPanel.isListMatching(td.assignment1));
+        commandBox.runCommand("delete t 1");
+        assertTaskListSize(0);
 
         //verify clear command works when the list is empty
         assertClearCommandSuccess();
@@ -25,7 +31,7 @@ public class ClearCommandTest extends AddressBookGuiTest {
 
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
-        assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+        assertTaskListSize(0);
+        assertResultMessage("Active list has been cleared!");
     }
 }

@@ -1,6 +1,6 @@
-# AddressBook Level 4 - Developer Guide
+# TaskCrusher - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team T15B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -51,7 +51,7 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
 ### 1.3. Configuring Checkstyle
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
-3. Enter an arbitrary configuration name e.g. addressbook
+3. Enter an arbitrary configuration name e.g. taskmanager
 4. Import checkstyle configuration file found at `config/checkstyle/checkstyle.xml`
 5. Click OK once, go to the `Main` tab, use the newly imported check configuration.
 6. Tick and select `files from packages`, click `Change...`, and select the `resources` package
@@ -86,7 +86,7 @@ Given below is a quick overview of each component.
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/project/taskcrusher/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -118,18 +118,18 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 #### Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+command `delete t 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
-_Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
+<img src="images/SDforDeleteTask.PNG" width="800"><br>
+_Figure 2.1.3a : Component interactions for `delete t 1` command (part 1)_
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `UserInboxChangedEvent` when the UserInbox data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
-_Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
+<img src="images/SDforDeleteTaskEventHandling.PNG" width="800"><br>
+_Figure 2.1.3b : Component interactions for `delete t 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
@@ -139,80 +139,105 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: Alice Bee
+Author: Yoshi Nishimura
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/project/taskcrusher/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `UserInboxPanel` and its components, and `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/project/taskcrusher/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
-* Executes user commands using the `Logic` component.
+* Executes user commands using the `Logic` component through `CommandBox`.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
-* Responds to events raised from various parts of the App and updates the UI accordingly.
+* Responds to events raised from various parts of the App and updates the UI accordingly. For example, when the user has made changes to the underlying `Model` data by deleting a task, the `statusBar` will update its `syncStatus` field through `UserInboxChangedEvent`.
+
+**The `UserInboxPanel`:**
+- contains two `ListView`s, namely, `taskList` and `eventList`.
+- The visibility of these two lists will be altered according to the command entered. For example, if the user wants to list tasks whose deadlines are set before next Monday, he would type in `list t d/next Monday`. This command would set the visibility of `eventList` to hidden so that the user can use the entire window to list the tasks he/she is interested in. This is accomplished by the `Model` posting `taskListToShowUpdatedEvent` and `eventListShowUpdatedEvent` and the `UserInboxPanel` listening to these events to determine whether the filtered lists are empty or not.
 
 ### 2.3. Logic component
 
-Author: Bernard Choo
+Author: Brea Dionisio
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/project/taskcrusher/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+2. `Parser` calls the appropriate parser for the identified command, e.g. `AddCommandParser` and `DeleteCommandParser`
+3. The command parser creates the appropriate task or event version of the command, e.g. `AddTaskCommand` and `AddEventCommand`
+4. This `Command` object is executed by the `LogicManager`.
+5. The command execution can affect the `Model` (e.g. editing a task) and/or raise events.
+6. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete t 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
-_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+_Figure 2.3.1 : Interactions Inside the Logic Component for the `delete t 1` Command_
 
 ### 2.4. Model component
 
-Author: Cynthia Dharman
+Author: Yoshi Nishimura
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
-_Figure 2.4.1 : Structure of the Model Component_
+_Figure 2.4.1.1 : Structure of the Model Component1/2_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+<br><img src="images/ModelClassDiagram2.png" width="800"><br>
+_Figure 2.4.1.2 : Structure of the Model Component2/2_
+
+**API** : [`Model.java`](../src/main/java/project/taskcrusher/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
-  so that the UI automatically updates when the data in the list change.
+* stores the User inbox data, including the list of events, list of tasks and list of tags associated with the items in user inbox.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` and `UnmodifiableObservableList<ReadOnlyEvent>` that can be 'observed' e.g. the `UserInboxPanel` in UI can be notified of any updates so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* `Task` and `Event` inherits of `UserItem`.
+
+**Task** consists of:
+1. Name
+2. Deadline (optional)
+3. Priority: 1, 2, 3 in ascending order (optional. default = 0)
+4. Description (optional)
+5. Zero or more tags
+
+**Event** consists of:
+1. Name
+2. One or more Timeslots
+3. Location (optional)
+4. Description (optional)
+5. Zero or more tags
+
+**Note**: the reason why although some elements are optional but are still tied as composition is that when they are not supplied by the user, the `Model` would set their values to default values (e.g. empty string).
 
 ### 2.5. Storage component
 
-Author: Darius Foong
+Author: Yoshi Nishimura
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/project/taskcrusher/storage/Storage.java)
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the `UserInbox` data in xml format and read it back.
+* gets notified of the changes in model by `UserInboxChangedEvent` posted by the `Model` each time it updates the data upon executing add, delete or edit. This way, the coupling between `Storage` and `Model` is reduced.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `project.taskcrusher.commons` package.
 
 ## 3. Implementation
 
@@ -263,13 +288,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `project.taskcrusher.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `project.taskcrusher.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `project.taskcrusher.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -323,7 +348,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
  1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
-    e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
+    e.g. For [UserGuide.md](UserGuide.md), the URL is TBC
  1. Click on the `Print` option in Chrome's menu.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
@@ -332,7 +357,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Taskcrusher depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -343,77 +368,256 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
+Priority | As a ... | I can ... | So that I can...
+-------- | :----------- | :-------------------- | :-------------------------
+`* * *` | new user |  view an instruction manual | remember the format and syntax of commands when necessary
+`* * *` | user | quit the program from the command line | avoid the trouble of using the GUI when quit
+`* * *` | user with [events](#event)| add an event by specifying its start date/time and end date/time either in relative or absolute form i.e. `12 Mar` or `today`<br /><br /> **condition**: <br />when there is already an event booked for that time frame, I can be notified and choose whether or not to force the addition| book that time slot and be reminded of the event
+`* * *` | user with [tentative events](#tentative-event)| temporarily [block](#blocking) multiple time slots for a tentative event<br /><br /> **condition**: <br />I can later confirm its finalized time slot and [release](#releasing) all the other time slots| avoid time clash between events
+`* * *` | user with events| specify the location of an event | later adapt my actions based on where the event is located
+`* * *` | user with [tasks](#task)| add a task with a deadline, either in relative or absolute form |
+`* * *` | user with tasks| add a task without a deadline |
+`* * *` | user with tasks or events that are related to each other | add tags to tasks or events | easily search and categorize tasks or events
+`* * *` | user | add a description to a task or an event | refer to relevant information in the future
+`* * *` | user with tasks| specify the priority of a task | later compare the importance of tasks, which can be especially useful for comparing tasks without deadlines
+`* * *` | user with tasks| view only tasks with deadlines |
+`* * *` | user with tasks| view only tasks without deadlines |
+`* * *` | user with an [active task](#active-task-or-event)| view the list of tasks that need to be completed by a specific deadline |
+`* * *` | user with an active task or event | update their fields.  **For both:** <ul><li>name</li><li>tag</li><li>description</li></ul>**For an event:**<ul><li>time frame</li><li>location</li></ul> **For a task:**<ul><li>priority</li><li>deadline</li></ul>|
+`* * *` | user with active events| view the list of events taking place during a specific time frame |
+`* * *` | user with many active tasks | sort tasks by their fields <ul><li>sort by name</li><li>sort by priority</li><li>sort by deadline</li><li>sort by tag</li></ul>| locate tasks with certain fields easily
+`* * *` | user with many active events | sort events by their fields <ul><li>sort by name</li><li>sort by start date</li><li>sort by tag</li></ul>| locate events with certain fields easily
+`* * *` | user with an active event | mark an active event as `done` and remove from the active list | separate it from other active tasks and events
+`* * *` | user with an active event | cancel and dismiss an event in the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the [expired list](#expired-list)| distinguish between a successful event and a cancelled one
+`* * *` | user with an active task | mark an active task as `done` and remove from the active list | separate it from other active tasks and events
+`* * *` | user with an active task | dismiss an active task and remove from the active list <br /><br /> **condition**:<br />I can add a reason for why it is being dismissed before it gets moved into the expired list| distinguish between a task that was successfully done with one that failed
+`* * *` | user with overdue tasks and past events| view the list of tasks that are considered overdue or events past relative to the current time | manage them all at once
+`* * *` | user | view the effect of the last action undertaken | confirm the details of the action and amend if necessary
+`* * *` | user with many tasks and events in the active list | search for tasks or events by a keyword <ul><li>keyword in name</li> <li>keyword in tag</li><li>keyword in description </li></ul>|
+`* * *` | user who have completed one or more tasks | view a reverse chronological log of all completed tasks | see which tasks I have marked as `done` in the past
+`* * *` | user who have completed one or more events | view a reverse chronological log of all completed events | see which events I have marked as `done` in the past
+`* * *` | user who have dismissed a task | reverse chronological log of all dismissed tasks | see which tasks I have dismissed
+`* * *` | user who have completed or dismissed tasks or events | recycle a task or an event kept in the expired list | efficiently add back the previous events and tasks to the active list
+`* * *` | user who have completed or dismissed tasks or events | clear all the past tasks and events from the expired list | eliminate no-longer-relevant tasks and events and keep the log clean
+`* * *` | user | see error message when I enter an invalid command | ammend the command appropriately
+`* * *` | user | undo the last command entered |
+`* * *` | user | switch between multiple storage files | have separate task managers of different aspects of my life
+`* * *` | user | specify the location of the storage file <br /><br /> **condition**:<br />If the file does not exist in the path, create a new file| place the file anywhere I find convenient, for example, in a shared folder
+`* * *` | advanced user | have raw access to the storage files | directly perform CRUD operation on the data all at once
+`* *` | user with recurring tasks or events| add a task or an event that are reccuring| avoid the trouble of manually adding repeatedly on a regular basis
+`* *` | user | identify free time slots in a day, week or month | can evaluate how busy I am and optimize the date for tasks and events to add
+`* *` | user | display daily, weekly, or monthly calendar views | visualize the deadlines of tasks and times of events for the day/week/month
+`* *` | user | view the history of all previously undertaken actions | prevent duplicate commands and correct entries that are erroneous in hindsight
+`* *` | user | choose between automatic save and manual save |
+`*` | user | have an auto-completion for commands that are predictable | avoid the trouble of typing in the full command
+`*` | user | enter the options for a command in any order |
 
-Priority | As a ... | I want to ... | So that I can...
--------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+## Appendix B : Sample Use Cases
 
-{More to be added}
+(For all use cases below, the **System** is the `TaskCrusher` and the **Actor** is the `user`, unless specified otherwise)
 
-## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+#### Use case: Add an event
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User enters the name of an event to be added, together with its start and end date/time and other options.
+2. TaskCrusher adds the event to the active list and displays back the details of the add action.
+
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. The command format is invalid
+
+> 2a1. TaskCrusher shows an error message <br>
+  Use case resumes at step 1
+
+2b. The entered time slot is already occupied by another event
+> 2b1. TaskCrusher notifies the user that the time slot for the event has been already occupied by other event, and confirms whether user wants to force the addition.
+  2b2. User decides whether or not to force the addition.
 
 > Use case ends
 
-3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+#### <a name = "list"> Use case: Display the active list
 
-{More to be added}
+**MSS**
+
+1. User requests to list active tasks, active events or both. Additional sort field may be specified.
+2. TaskCrusher displays the (filtered) active list according to the listing options, assigning each item in the list an index.
+
+Use case ends
+
+**Extensions**
+
+2a. The command format is invalid
+
+> 2a1. TaskCrusher shows an error message <br>
+> Use case resumes at step 1
+
+2b. The active list is empty.
+> 2b1. TaskCrusher notifies the user that the active list is currently empty.<br/>
+> Use case ends
+
+#### Use case: Mark a task/event as `done`
+
+**MSS**
+
+1. User requests to [display the active list](#list).
+2. TaskCrusher displays the (filtered) active list.
+3. User uses the index of the task/event of interest to request to mark it as `done`. Multiple indexes can be entered to process more than one item at once.
+4. TaskCrusher moves the item from the active list to the expired list.
+
+Use case ends
+
+**Extensions**
+
+2a. The task/event is not found in the list
+> Use case ends
+
+2b. User decides not to mark a task/event.
+> Use case ends
+
+3a. The index is invalid
+> 3a1. TaskCrusher shows an error message <br>
+Use case resumes at step 2
+<br>
+#### Use case: manage overdue tasks and past events
+
+**MSS**
+
+1. User requests to [display the active list](#list) with the option to list only overdue tasks and past events relative to the current time.
+2. TaskCrusher displays the filtered list.
+3. For each item in the displayed list, user uses the index to request to mark it as `done`, or dismiss it. Multiple indexes may be entered to process more than one item at once.
+4. TaskCrusher prompts the user to enter the reason for dismissing an item, if the user chose to dismiss an item rather than mark as `done`.
+5. User enters the reason for dismissing a task/event. If user does not wish to do so, user enters nothing and proceeds.
+6. TaskCrusher moves the task/event from the active list to the expired list.
+
+Use case ends
+
+**Extensions**
+
+2a. There are no overdue tasks or past events i.e. the filtered list is empty
+> Use case ends
+
+2b. User quits the process
+> Use case ends
+
+3a. The index is invalid
+> Use case resumes at step 2
+
+4a. The reason is in the wrong format
+> Use case resumes at step 3
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any desktop machine running on Windows 7 or later as long as it has Java `1.8.0_60` or higher installed.
+2. Must be fully functioning offline.
+3. No installation on the user machine should be required.
+4. Should work stand-alone.
+5. Must come with extensive JUnit error-testing.
+6. Must not rely on any relational databases.
+7. Must rely minimally on GUI. GUI is used only for output.
+8. Must be able to support CLI.
+9. Supports one and only one user.
+10. A user with an above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+11. Should be able to hold up to 1000 tasks without a noticeable decline, say no more than 1.5 seconds, in performance.
 
-{More to be added}
 
 ## Appendix D : Glossary
 
-##### Mainstream OS
+#### Task
+> A task is to be completed by some deadline. If a task does not have a deadline, then it is considered to be "done someday"
 
-> Windows, Linux, Unix, OS-X
+#### Event
+> An event takes place during a specific time frame, which may or may not extend over one or more days.
 
-##### Private contact detail
+#### Tentative event
+> A tentative event is an event whose time is not yet finalized. User may add a tentative event together with its possible time slots so that these slots can be blocked until the event is finalized.
 
-> A contact detail that is not meant to be shared with others
+#### Blocking
+> when a tentative event blocks a time slot, that time slot by default cannot be occupied by another event.
+
+#### Releasing
+> When the time slot for a tentative event is finalized, those time slots which had been blocked by that event bu are not part of the finalized time slot become free again for other events to occupy.
+
+#### Active task or event
+> An active task or event is one that is yet to be marked as `completed` or `cannot be done` by the user.
+
+#### Active list
+> The active list contains all the active events and tasks. The active list may contain overdue tasks and past events since it is up to the user to remove them from this list.
+
+#### Expired list
+> The expired set contains all the tasks and events that are removed from the active list by the user, which may be recycled. This list can be emptied by the user.
 
 ## Appendix E : Product Survey
+This product survey is conducted with respect to Jim's needs. Therefore, it may not mention some of the remarkable features of a product should they be irrelevant to Jim.
 
-**Product Name**
+**Product Name: Remember the Milk**
 
-Author: ...
+Author: Yoshiaki Nishimura
 
 Pros:
 
-* ...
-* ...
+* Many supplementary information can be specified with the task, including location, start date, due date and priority.
+* The task inbox can be sorted by various fields, including task name, due date and priority.
+* Adding of tasks can be achieved both through keyboard as well as clicking. After the typing in the task name, you can specify options like due date and tags using meta characters. For example, you can specify due date with `^` followed by date
+* The web page supports many keyboard shortcuts, such as `t` for adding tasks.
+* Removed tasks are temporarily put into trash, from which a customer can recover tasks within 30 days.
+* Can undo a previous delete with one click.
+* Can break a task into its subtasks (pro-version).
 
 Cons:
 
-* ...
-* ...
+* The Web App is browser-based and needs internet connection, at least for free-versions.
+* Only addition of a task can be done from the command line. The rest of user operations rely heavily on GUI.
+* Does not offer time-slot “block” feature for tentative events whose time is yet to be finalized.
 
+**Product: Wunderlist**
+
+Author: Anshul Aggarwal
+
+Benefits:
+
+* This to-do list app provides the feature of reminders via in-app notification,email etc.
+* The user can set a deadlines for a task
+* Very user friendly UI and easy to organise things
+* Allow Multiple device usage like Iphone,Ipad,Mac,windows and Kindlefire
+* This app is cloud based and has the ability to sync task.
+* Allows to colloborate with friends and colleagues.
+* Data is stored and synced with device when there is internet access,claims to be faster than Google calendar
+* Allow gruping of list into folders
+* Allow #tags to add more context to your to dos
+* Allow addition of notes to give more clarity
+
+Downsides:
+
+* Unlike what the professor favours this app requires a lot of clicks and fields to save a task
+* Dont allow booking of multiple slots for a particular task
+* The app allows to set deadline for a task on the basis of due date and not time which might be hinder the users work.
+
+**Product Name: Google Calendar**
+
+Author: Brea Dionisio
+
+Pros:
+* Free
+* "Quick add" function allows you to type add commands in natural language
+* "Quick add" accessed by a keyboard shortcut (q)
+* Search function that searches through events as well as emails
+* Options to set recurring events
+* Undo option available for some time after action taken
+* Reminders can be set; users can be notified through the web app, phone app or email
+* Elapsed events automatically displayed as such in GUI-- allows one to focus on what is current or in the future
+* Concept of separate calendars to segregate items into appropriate categories
+* Color coding for events of separate calendars
+* Option to turn on and off viewing of calendars in order to focus on the most relevant information
+
+Cons:
+* Undo option not available after a short period of time
+* Event-focused; functionalities specific to tasks aren't supported
+* No concept of tentative timeslots that are released as events are confirmed; such blockings must be deleted manually
+* Can't set your own keyboard shortcuts
+* No command line-style input accepted other than for adds
+* Browser-based only, internet connection required

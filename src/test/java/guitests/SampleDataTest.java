@@ -3,15 +3,17 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.ocpsoft.prettytime.shade.edu.emory.mathcs.backport.java.util.Arrays;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import project.taskcrusher.model.UserInbox;
+import project.taskcrusher.model.event.Event;
+import project.taskcrusher.model.task.Task;
+import project.taskcrusher.model.util.SampleDataUtil;
+import project.taskcrusher.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookGuiTest {
+public class SampleDataTest extends TaskcrusherGuiTest {
     @Override
-    protected AddressBook getInitialData() {
+    protected UserInbox getInitialData() {
         // return null to force test app to load data from file only
         return null;
     }
@@ -22,9 +24,14 @@ public class SampleDataTest extends AddressBookGuiTest {
         return TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
     }
 
+    //@@author A0127737X
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertTrue(personListPanel.isListMatching(expectedList));
+        Task[] expectedTaskList = SampleDataUtil.getSampleTasks();
+        Event[] expectedEventList = SampleDataUtil.getSampleEvents();
+        Arrays.sort(expectedTaskList);
+        Arrays.sort(expectedEventList);
+        assertTrue(userInboxPanel.isListMatching(expectedTaskList));
+        assertTrue(userInboxPanel.isListMatching(expectedEventList));
     }
 }

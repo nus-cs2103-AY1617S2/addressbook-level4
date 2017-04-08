@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author A0127737X -->
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <children>
+                <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
+                    <stylesheets>
+                        <URL value="@DarkTheme.css" />
+                        <URL value="@Extensions.css" />
+                    </stylesheets>
+                    <padding>
+                        <Insets bottom="5" left="15" right="5" top="5" />
+                    </padding>
+                    <children>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <Label fx:id="id" styleClass="cell_big_label">
+                                <minWidth>
+                                      <Region fx:constant="USE_PREF_SIZE" />
+                                </minWidth>
+                            </Label>
+                            <ImageView fx:id="overdueIcon" fitHeight="16.0" fitWidth="16.0">
+                                    <image>
+                                        <Image url = "images/overdue.png" ></Image>
+                                    </image>
+                            </ImageView>
+                            <Label fx:id="name" text="\$event_name" styleClass="cell_big_label"/>
+                            <Label fx:id="eventLocation" styleClass="cell_big_label" text="\$location" />
+                            <Label fx:id="priority" styleClass="priority" text="\$priority" />
+                            <FlowPane fx:id="tags" />
+                            <ImageView fx:id="tickIcon" fitHeight="25.0" fitWidth="25.0">
+                            <image>
+                                <Image url = "images/tick_icon.png" ></Image>
+                            </image>
+                            </ImageView>
+                        </HBox>
+                        <FlowPane fx:id="timeslots" styleClass = "timeslots"/>
+                        <Label fx:id="description" text="\$description" />
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+    </children>
+</HBox>
