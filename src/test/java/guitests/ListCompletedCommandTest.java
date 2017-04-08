@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListCompletedCommand;
+import t09b1.today.logic.commands.ListCommand;
+import t09b1.today.logic.commands.ListCompletedCommand;
 
 public class ListCompletedCommandTest extends TaskManagerGuiTest {
 

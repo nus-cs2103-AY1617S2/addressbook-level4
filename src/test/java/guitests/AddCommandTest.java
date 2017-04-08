@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TestUtil;
+import t09b1.today.commons.core.Messages;
+import t09b1.today.commons.exceptions.IllegalValueException;
+import t09b1.today.logic.commands.AddCommand;
+import t09b1.today.model.task.Task;
+import t09b1.today.testutil.TestUtil;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
