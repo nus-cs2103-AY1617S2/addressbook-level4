@@ -249,14 +249,14 @@ the stack will be "pop" and the taskManager will be replaced by the taskManager 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
  
-<img src="images/deleteCommand.png" width="800"><br>
+<img src="images/deleteCommand.PNG" width="800"><br>
  
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")`
  API call. Notice the differences between the remove and undo commands.<br>
 
-<img src="images/undoCommand.png" width="800"><br>
+<img src="images/undoCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `undo` Command_
 
 
