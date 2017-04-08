@@ -82,7 +82,7 @@ public class Event implements ReadOnlyEvent {
      *
      */
     public Event(Title name, Location location, Schedule startTime, Schedule endTime, Schedule deadline,
-            Description description, UniqueTagList tags, IsDone isDone) {
+            Description description, UniqueTagList tags, IsDone isDone, Recurrence recurrence) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.location = location;
@@ -93,6 +93,7 @@ public class Event implements ReadOnlyEvent {
         this.isDone = isDone;
         this.tags = new UniqueTagList(tags); // protect internal tags from
         // changes in the arg list
+        this.recurrence = recurrence;
     }
 
     @Override

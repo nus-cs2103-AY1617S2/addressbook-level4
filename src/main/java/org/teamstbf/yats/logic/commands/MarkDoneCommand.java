@@ -40,7 +40,7 @@ public class MarkDoneCommand extends Command {
 	}
 
 	ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
-	Event markedTask = new Event(taskToMark);
+	Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), new IsDone(), taskToMark.getRecurrence());
 	if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 	    return new CommandResult(MESSAGE_ALR_MARKED);
 	}
