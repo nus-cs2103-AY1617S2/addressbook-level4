@@ -1,5 +1,8 @@
 package seedu.jobs.model.calendar;
 
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.model.EventDateTime;
+
 import seedu.jobs.model.task.Task;
 
 public class EventCalendar {
@@ -7,14 +10,25 @@ public class EventCalendar {
     private TimeCalendar startTime;
     private TimeCalendar endTime;
     private String description;
-    private int period;
+    private String period;
     
     public EventCalendar(Task task) {
     	setSummary(task.getName().toString());
-    	setStartTime(new TimeCalendar(task.getStartTime()));
-    	setEndTime(new TimeCalendar(task.getEndTime()));
+    	
+    	if(task.getStartTime().toString()=="") {
+    		setStartTime(new TimeCalendar(task.getEndTime()));
+        } else {
+        	setStartTime(new TimeCalendar(task.getStartTime()));
+        }
+		
+		if(task.getEndTime().toString()=="") {
+			setEndTime(new TimeCalendar(task.getStartTime()));
+        } else {
+        	setEndTime(new TimeCalendar(task.getEndTime()));
+        }
+
     	setDescription(task.getDescription().toString());
-    	setPeriod(task.getPeriod().value);
+    	setPeriod(task.getPeriod().toString());
     }
 
 	public String getSummary() {
@@ -49,11 +63,11 @@ public class EventCalendar {
 		this.description = description;
 	}
 
-	public int getPeriod() {
+	public String getPeriod() {
 		return period;
 	}
 
-	public void setPeriod(int period) {
+	public void setPeriod(String period) {
 		this.period = period;
 	}   
 }

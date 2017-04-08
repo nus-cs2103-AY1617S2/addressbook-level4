@@ -63,8 +63,9 @@ public class EditCommand extends Command {
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
-            model.updateTask(filteredTaskListIndex, editedTask);
-            calendar.EditTask(taskToEdit, editTaskDescriptor);
+            calendar.EditTask(taskToEdit, editedTask);
+        	model.updateTask(filteredTaskListIndex, editedTask);
+            
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

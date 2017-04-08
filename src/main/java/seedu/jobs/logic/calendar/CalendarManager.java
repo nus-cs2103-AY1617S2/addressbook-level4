@@ -128,8 +128,13 @@ public class CalendarManager {
     	new DeleteCalendar(task, service);
     }
     
-    public void EditTask(ReadOnlyTask initialTask, EditTaskDescriptor newTask) {
-    	new EditCalendar(initialTask, newTask, service);
+    public void EditTask(ReadOnlyTask initialTask, Task newTask) {
+    	if(!(initialTask.getEndTime().toString()=="" && initialTask.getStartTime().toString()=="")) {
+    		new DeleteCalendar(initialTask, service);
+        }
+        if(!(newTask.getEndTime().toString()=="" && newTask.getStartTime().toString()=="")) {
+        	new AddCalendar(newTask, service);
+        }
     }
 	
 }

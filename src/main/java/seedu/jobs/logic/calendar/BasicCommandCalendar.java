@@ -17,6 +17,9 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+import seedu.jobs.model.calendar.EventCalendar;
+import seedu.jobs.model.task.Task;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,18 +32,18 @@ public abstract class BasicCommandCalendar {
 
     public abstract void execute() throws IOException;	
     
-    public String retrieveID (String summary) throws IOException {
+    public String retrieveID (EventCalendar target) throws IOException {
     	String id = "";
-    	
     	String pageToken = null;
     	do {
-    	  Events events = service.events().list("primary").setPageToken(pageToken).execute();
-    	  List<Event> items = events.getItems();
-    	  for (Event event : items) {
-    	    if (event.getSummary().equals(summary)) 
-    	    	id = event.getId();
-    	  }
-    	  pageToken = events.getNextPageToken();
+    		Events events = service.events().list("primary").setPageToken(pageToken).execute();
+    		List<Event> items = events.getItems();
+    		for (Event event : items) {
+    			if (event.getSummary().equals(target.getSummary())) {
+    				id = event.getId();
+    			}
+    		}
+    		pageToken = events.getNextPageToken();
     	} while (pageToken != null);
     	return id;
     }
