@@ -324,9 +324,12 @@ _**Finds tasks whose information contains any of the given keywords specified by
 > _For example: **`find Buy Milk`** will match the task with the name `Milk Buy`._ <br><br>
 > - Only full words will be matched.
 > _For example: **`find Milk`** will not match the task with the name `Milks`._ <br><br>
-> - Only tasks that match all the keywords will be returned.
-    _For example: **`find Milk p/1`** will not match with the task `Buy Milk` with a priority of 2._
-    _For example: **`find donuts milk`** will match the task with the name `Buy donuts and milk`._<br><br>
+> - Only tasks that match all the keywords will be returned.<br><br>
+> _For example: **`find Milk p/1`** will not match with the task `Buy Milk` with a priority of 2._<br><br>
+> _For example: **`find donuts milk`** will match the task with the name `Buy donuts and milk`._<br><br>
+> - You can search tasks that have start date and due date before and after certain dates.<br><br>
+> _For example: **`find s/before 10/05/2017`** will return all tasks that start before 10/05/2017._<br><br>
+> _For example: **`find d/after 10/10/2017`** will return all tasks that are due after 10/10/2017._<br><br>
 > - Type **`list`** to go back to the default view.
 
 <br>
@@ -337,6 +340,8 @@ _**Finds tasks whose information contains any of the given keywords specified by
 **`f d/20/03/2017`** <br><br>
 *  Find tasks containing `School` with a priority of `1`:<br>
 **`find School p/1`** <br><br>
+*  Find tasks containing `milk` that start after `10/05/2017`:<br>
+**`find milk s/after 10/05/2017`** <br>
 *  Find tasks containing `lecture` with a `weekly` recurrence:<br>
 **`find lecture f/weekly`** <br>
 
