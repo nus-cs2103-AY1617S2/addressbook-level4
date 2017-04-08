@@ -65,12 +65,12 @@ public class MainGuiHandle extends GuiHandle {
 
     private void useCtrlAltDAccelerator() {
         guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.D);
-        guiRobot.sleep(500);
+        guiRobot.sleep(3000);
     }
 
     private void useCtrlQAccelerator() {
         guiRobot.push(KeyCode.CONTROL, KeyCode.Q);
-        guiRobot.sleep(500);
+        guiRobot.sleep(3000);
     }
     //@@author
 
