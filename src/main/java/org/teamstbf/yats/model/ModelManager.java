@@ -43,8 +43,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static Stack<TaskManager> redoTaskManager = new Stack<TaskManager>();
 
     private final FilteredList<ReadOnlyEvent> filteredEvents;
-    private FilteredList<ReadOnlyEvent> calendarList;
-    private FilteredList<ReadOnlyEvent> taskList;
+    private final FilteredList<ReadOnlyEvent> calendarList;
+    private final FilteredList<ReadOnlyEvent> taskList;
 
     public ModelManager() {
 	this(new TaskManager(), new UserPrefs());
@@ -259,8 +259,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateTaskFilteredListToShowDone() {
-	taskList = filteredEvents;
+    public void updateDoneTaskList() {
 	Set<String> doneTaskIdentifier = new HashSet<String>();
 	doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
 	updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));

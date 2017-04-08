@@ -11,6 +11,7 @@ import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,8 +35,6 @@ public class MultiViewPanel extends UiPart<Region> {
     private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
 
     private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
-    private static ObservableList<ReadOnlyEvent> taskData = FXCollections.observableArrayList();
-
     private ObservableList<ReadOnlyEvent> calendarList;
 
     private final DatePickerSkin calendar;
@@ -88,12 +87,6 @@ public class MultiViewPanel extends UiPart<Region> {
 	placeHolderPane.getChildren().add(calendarPanel);
     }
 
-    private void createFullDayTime() {
-	updateCalendarList();
-	timeTasks.setItems(timeData);
-	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-    }
-
     private void setEventHandlerForSelectionChangeEvent() {
 	taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 	    if (newValue != null) {
@@ -103,7 +96,14 @@ public class MultiViewPanel extends UiPart<Region> {
 	});
     }
 
-    // =============== Inner Class for CalendarView ==================
+    public void scrollTo(int index) {
+	Platform.runLater(() -> {
+	    taskListView.scrollTo(index);
+	    taskListView.getSelectionModel().clearAndSelect(index);
+	});
+    }
+
+    // ================== Inner Class for CalendarView ==================
 
     private class TimeSlotListViewCell extends ListCell<String[]> {
 
@@ -137,7 +137,13 @@ public class MultiViewPanel extends UiPart<Region> {
 	}
     }
 
-    // ============ Inner Methods for Information Extraction ============
+    // ================== Inner Methods for Calendar View ==================
+
+    private void createFullDayTime() {
+	updateCalendarList();
+	timeTasks.setItems(timeData);
+	timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+    }
 
     private void updateCalendarList() {
 	String[] data = new String[TASK_DETAILS];

@@ -51,7 +51,7 @@ public class MarkDoneCommand extends Command {
 	    markedTask.getIsDone().markDone();
 	}
 	model.updateEvent(targetIndex, markedTask);
-	model.updateTaskFilteredListToShowDone();
+	model.updateDoneTaskList();
 	model.updateFilteredListToShowAll();
 	markedTask.setPriority(0);
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
