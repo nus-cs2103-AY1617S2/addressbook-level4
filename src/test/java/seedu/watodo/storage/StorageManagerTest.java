@@ -53,11 +53,11 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void taskListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * {@link XmlTaskListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlTaskListStorageTest} class.
          */
         TaskManager original = new TypicalTestTasks().getTypicalTaskManager();
         storageManager.saveTaskList(original);
@@ -66,15 +66,15 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getTaskListFilePath() {
         assertNotNull(storageManager.getTaskListFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleTaskListChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"),
-                                             new JsonUserPrefsStorage("dummy"));
+                new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskListChangedEvent(new TaskListChangedEvent(new TaskManager()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
@@ -91,7 +91,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveTaskList(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+        public void saveTaskList(ReadOnlyTaskManager taskList, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
