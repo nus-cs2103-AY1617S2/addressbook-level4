@@ -17,7 +17,7 @@ import seedu.taskmanager.model.TaskManager;
  * If no XML is found, starting a new Task Manager with new XML file at given file path
  * Path matching is case sensitive.
  */
-public class ChangeDirectoryCommand extends Command {
+public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String ALTERNATIVE_COMMAND_WORD = "open";
 
@@ -36,7 +36,7 @@ public class ChangeDirectoryCommand extends Command {
 
     private final String newPath;
 
-    public ChangeDirectoryCommand(String path) {
+    public LoadCommand(String path) {
         this.newPath = path;
     }
 

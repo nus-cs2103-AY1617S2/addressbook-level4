@@ -28,7 +28,6 @@ import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.AddCommand;
-import seedu.taskmanager.logic.commands.ChangeDirectoryCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
@@ -38,6 +37,7 @@ import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
+import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
@@ -487,18 +487,17 @@ public class LogicManagerTest {
     @Test
     public void execute_load_invalidFilePath() throws Exception {
         assertCommandFailure("load !asdwie34$2.xml",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
         assertCommandFailure("load data/taskmanager",
-                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, ChangeDirectoryCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 
-    // @@author A0114269E
     @Test
     public void execute_load_invalidXmlFile() throws Exception {
         assertCommandFailure("load src/test/data/cd_test/empty.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+                LoadCommand.MESSAGE_INVALID_DATA);
         assertCommandFailure("load src/test/data/cd_test/invalid.xml",
-                ChangeDirectoryCommand.MESSAGE_INVALID_DATA);
+                LoadCommand.MESSAGE_INVALID_DATA);
     }
     // @@author
 
