@@ -20,7 +20,7 @@ import seedu.today.model.task.UniqueTaskList;
  * cases.
  */
 public class TypicalTasks {
-    // @author A0093999Y
+    // @@author A0093999Y
     // For Today Task List
     public Task todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday;
 
@@ -101,7 +101,7 @@ public class TypicalTasks {
         }
     }
 
-    // @author
+    // @@author
     public void loadTaskManagerWithSampleData(TaskManager ab) {
         for (Task task : getTypicalTasks()) {
             try {
@@ -112,11 +112,11 @@ public class TypicalTasks {
         }
     }
 
-    // @author A0093999Y
+    // @@author A0093999Y
     public Task[] getTypicalTasks() {
         return new Task[] { todayListOverdue, todayListFloat, todayListDeadline, todayListEvent, todayListToday,
-            futureListFloat, futureListDeadline, futureListEvent, completedListFloat, completedListDeadline,
-            completedListEvent };
+                futureListFloat, futureListDeadline, futureListEvent, completedListFloat, completedListDeadline,
+                completedListEvent };
     }
 
     public Task[] getTodayListTasks() {
@@ -131,7 +131,7 @@ public class TypicalTasks {
         return new Task[] { completedListFloat, completedListDeadline, completedListEvent };
     }
 
-    // @author
+    // @@author
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);

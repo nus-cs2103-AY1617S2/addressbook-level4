@@ -58,7 +58,7 @@ public abstract class TaskManagerGuiTest {
     protected Task[] futureList = td.getFutureListTasks();
     protected Task[] completedList = td.getCompletedListTasks();
 
-    // @author
+    // @@author
     /*
      * Handles to GUI elements present at the start up are created in advance
      * for easy access from child classes.
@@ -162,7 +162,7 @@ public abstract class TaskManagerGuiTest {
         commandBox.runCommand("list");
     }
 
-    // @author
+    // @@author
     /**
      * Asserts the message shown in the Result Display area is same as the given
      * string.
