@@ -72,7 +72,7 @@ public class AddCommand extends Command {
 	assert model != null;
 	model.saveImageOfCurrentTaskManager();
 	model.addEvent(toAdd);
-	model.updateCalendarFilteredListToShowStartTime();
+	// model.updateCalendarFilteredListToShowStartTime();
 	return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

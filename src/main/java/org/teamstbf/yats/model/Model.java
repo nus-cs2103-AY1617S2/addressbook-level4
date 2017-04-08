@@ -75,8 +75,9 @@ public interface Model {
     /**
      * Updates the filter of the Calendar filtered event list to show specified
      * start time
+     * @param today 
      */
-    void updateCalendarFilteredListToShowStartTime(LocalDate day);
+    void updateCalendarFilteredListToShowStartTime(LocalDate today);
 
     /**
      * Updates the filter of the Done task filtered event list to show done task

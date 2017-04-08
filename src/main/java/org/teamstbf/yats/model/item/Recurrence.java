@@ -118,41 +118,41 @@ public class Recurrence {
 	}
 
 	public List<Date> getOccurenceBetween(Date start, Date end) {
-		List<Date> occurenceList = new ArrayList<Date>();
-		Calendar startTime = Calendar.getInstance();
-		Calendar startBound = Calendar.getInstance();
-		Calendar endBound = Calendar.getInstance();
-		startTime.setTime(this.startDate);
-		startBound.setTime(start);
-		endBound.setTime(end);
+	    List<Date> occurenceList = new ArrayList<Date>();
+	    Calendar startTime = Calendar.getInstance();
+	    Calendar startBound = Calendar.getInstance();
+	    Calendar endBound = Calendar.getInstance();
+	    startTime.setTime(this.startDate);
+	    startBound.setTime(start);
+	    endBound.setTime(end);
 
-		for (Date date = startTime.getTime(); startTime.before(endBound); startTime.add(recurrencePeriod,
-				RECURRENCE_INCREMENT), date = startTime.getTime()) {
-			if (date.before(end) && date.after(start)) {
-				occurenceList.add(date);
-			}
-		}
+	    for (Date date = startTime.getTime(); startTime.before(endBound); startTime.add(recurrencePeriod,
+	        RECURRENCE_INCREMENT), date = startTime.getTime()) {
+	        if (date.before(end) && date.after(start)) {
+	        occurenceList.add(date);
+	        }
+	    }
 
-		return occurenceList;
-	}
+	    return occurenceList;
+	    }
 
-	public String getLatestUndoneString() {
-		if (doneList.isEmpty()) {
-			return dateFormat.format(startDate);
-		}
-		String lastDateString = doneList.get(doneList.size() - 1);
-		Calendar lastCalendar = Calendar.getInstance();
-		try {
-			lastCalendar.setTime(dateFormat.parse(lastDateString));
-		} catch (ParseException pe) {
-			// TODO: handle parse exception
-			;
-		}
-		return dateFormat.format(getNextOccurence(lastCalendar).getTime());
-	}
+	    public String getLatestUndoneDateString() {
+	    if (doneList.isEmpty()) {
+	        return dateFormat.format(startDate);
+	    }
+	    String lastDateString = doneList.get(doneList.size() - 1);
+	    Calendar lastCalendar = Calendar.getInstance();
+	    try {
+	        lastCalendar.setTime(dateFormat.parse(lastDateString));
+	    } catch (ParseException pe) {
+	        // TODO: handle parse exception
+	        ;
+	    }
+	    return dateFormat.format(getNextOccurence(lastCalendar).getTime());
+	    }
 
 	public Date getLatestUndoneDate() throws ParseException {
-		return dateFormat.parse(getLatestUndoneString());
+		return dateFormat.parse(getLatestUndoneDateString());
 	}
 
 	public Calendar getNextOccurence(Calendar occurence) {
@@ -165,7 +165,7 @@ public class Recurrence {
 		if (doneList.isEmpty()) {
 			doneList.add(dateFormat.format(this.startDate));
 		} else {
-			doneList.add(getLatestUndoneString());
+		    doneList.add(getLatestUndoneDateString());
 		}
 	}
 
