@@ -1,7 +1,5 @@
 # User Guide
 
-Author: Jacob Levy
-
 1. [Starting the Program](#Starting-the-Program)
 2. [Features](#Features)
 3. [Command Summary](#Command-Summary)
@@ -123,6 +121,7 @@ Completes the specified tasks from the task manager and changes the task status 
 Format: `done INDEX [MORE INDECIES]`
 
 Example: `done 1`<br>
+<img src="images/doneResult.png" width="600"> <br>
 <img src="images/done.png" width="600">
 
 ## Filtering the Tasks : `filter`
@@ -131,15 +130,36 @@ Format: `filter ongoing` or `filter completed`
 > Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks.
 > To return to the unsorted list of tasks, type and enter `list`.
 
+Examples: <br>
+`filter ongoing`<br>
+
+<img src="images/filter ongoing.png" width="600"> <br>
+
+`filter completed`<br>
+
+<img src="images/filter completed.png" width="600">
+
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet.
 Format: `sort name` or `sort time`
 > Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date.
 > To return to the unsorted list of tasks, type and enter `list`.
 
+Examples:<br>
+`sort name`<br>
+
+<img src="images/sortName.png" width="600"> <br>
+
+`sort time`<br>
+
+<img src="images/sortTime.png" width="600">
+
 ## Googling the Tasks: `google`
 Format: `google [INDEX]`
 > Googles the task name at the specified index. The user can additionally Google a task name by single clicking on a task.
+
+Example: `google 2` <br>
+<img src="images/google.png" width="600">
 
 ## Changing the Save Path: `path`
 Changes the save path for Fast Task data. Must specify the name of the save file and mark it as a .xml file.<br>
@@ -147,11 +167,22 @@ Format: `path PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
 
+After entering a save path, this confirmation message will appear.
+
+<img src="images/path.png" width="600">
+
 ## Loading Fast Task Data: `load`
 Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `load PATHNAME`<br>
 Example for Windows: `load C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `load /Users/jlevy/Desktop/MyTasks.xml`
+
+After entering a load path, this confirmation message will appear.
+
+<img src="images/load.png" width="600"> <br>
+
+After loading a .xml file, the path should change at the bottom of the application.
+<img src="images/loadPath.png" width="600">
 
 ## Exiting the Program : `exit`
 Exits the program.<br>
@@ -194,7 +225,8 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Filter** : `filter` <br>
  e.g.`filter ongoing` or `filter completed`
 
-* **Sort** : `sort time` or `sort name`<br>
+* **Sort** : `sort`<br>
+ e.g.`sort time` or `sort name`
 
 * **Path** : `path PATHNAME` <br>
  e.g. `path C:\Desktop\MyTasks.xml`
