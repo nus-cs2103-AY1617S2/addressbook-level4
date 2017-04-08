@@ -3,6 +3,7 @@ package seedu.taskmanager.logic.parser;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_REPEAT;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,7 +31,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_DESCRIPTION,
-                PREFIX_TAG);
+                PREFIX_REPEAT, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -54,6 +55,11 @@ public class EditCommandParser {
                 editTaskDescriptor
                         .setDescription(ParserUtil.parseDescription(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
             }
+            // @@author A0140032E
+            if (argsTokenizer.getValue(PREFIX_REPEAT).isPresent()) {
+                editTaskDescriptor.setRepeat(ParserUtil.parseRepeat(argsTokenizer.getValue(PREFIX_REPEAT)));
+            }
+            // @@author
             if (argsTokenizer.getAllValues(PREFIX_TAG).isPresent()) {
                 editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
             }

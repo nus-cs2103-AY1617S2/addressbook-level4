@@ -292,6 +292,10 @@ Delete  | delete INDEX                    | delete 3
 Sort    | sort KEYWORD                    | sort e/
 Undo    | undo
 Redo    | redo
+Done    | done INDEX                      | done 1
+Undone  | undone INDEX                    | undone 2
+Save as | saveas FILEPATH                 | saveas newtaskmanager.xml
+Load    | load FILEPATH                   | load /Users/admin/taskmanager.xml
 Clear   | clear
 Exit    | exit
 <br>

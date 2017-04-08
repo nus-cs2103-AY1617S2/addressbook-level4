@@ -30,16 +30,23 @@ public class MainWindow extends UiPart<Region> {
     private static final int MIN_WIDTH = 450;
     public static final String TAB_TO_DO = "To Do";
     public static final String TAB_DONE = "Done";
+    public static final int TAB_TO_DO_INDEX = 0;
+    public static final int TAB_DONE_INDEX = 1;
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+
+    private BrowserPanel browserPanel;
+    private TaskListPanel taskListPanel;
+    private TaskListPanel overdueTaskListPanel; 
+
     // @@author A0131278H
     private TaskListPanel toDoTaskListPanel;
     private TaskListPanel doneTaskListPanel;
-    private TaskListPanel taskListPanel;
     // @@author
+
     private Config config;
 
     @FXML
@@ -54,6 +61,11 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
+
+    // @@author A0114523U
+    @FXML
+    private AnchorPane overdueTaskListPanelPlaceholder;
+    // @@author
 
     @FXML
     private AnchorPane toDoTaskListPanelPlaceholder;
@@ -128,9 +140,16 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+
+        browserPanel = new BrowserPanel(browserPlaceholder);
+        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        // @@author A0114523U
+        overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
+
         // @@author A0131278H
         toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList());
         doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+
         // @@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
@@ -153,6 +172,11 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getToDoTaskListPlaceholder() {
         return toDoTaskListPanelPlaceholder;
     }
+
+
+    // @@author A0114523U
+    private AnchorPane getOverdueTaskListPlaceholder() {
+        return overdueTaskListPanelPlaceholder;
 
     private AnchorPane getDoneTaskListPlaceholder() {
         return doneTaskListPanelPlaceholder;
@@ -211,6 +235,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     // @@author A0131278H
+
+    public void selectTab(int targetIndex) {
+        taskListsTabPane.getSelectionModel().select(targetIndex);
+    }
+
     @FXML
     public void onSelectedTabChanged() {
         try {
@@ -253,4 +282,21 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    public TaskListPanel getTaskListPanel() {
+        return this.taskListPanel;
+    }
+
+    // @@author A0114523U
+    public TaskListPanel getOverdueTaskListPanel() {
+        return this.overdueTaskListPanel;
+    }
+    // @@author
+
+    void loadTaskPage(ReadOnlyTask task) {
+        browserPanel.loadTaskPage(task);
+    }
+
+    void releaseResources() {
+        browserPanel.freeResources();
+    }
 }

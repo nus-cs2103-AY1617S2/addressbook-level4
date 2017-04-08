@@ -37,6 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     // @@author A0131278H
     private final FilteredList<ReadOnlyTask> filteredTasks;
+
+    // @@author A0114523U
+    private final FilteredList<ReadOnlyTask> filteredOverdueTasks;
     private final FilteredList<ReadOnlyTask> filteredToDoTasks;
     private final FilteredList<ReadOnlyTask> filteredDoneTasks;
     private String selectedTab;
@@ -53,6 +56,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+
+        // @@author A0114523U
+        filteredOverdueTasks = new FilteredList<>(this.taskManager.getTaskList());
+
         // @@author A0131278H
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
         filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
@@ -147,6 +154,12 @@ public class ModelManager extends ComponentManager implements Model {
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
+
+    // @@author A0114523U
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
+        return new UnmodifiableObservableList<>(filteredOverdueTasks);
+    }
+    // @@author
 
     // @@author A0131278H
 
@@ -322,21 +335,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            LocalDate taskStartDate = task.getStartDate().isPresent()
-                    ? task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-            LocalDate taskEndDate = task.getEndDate().isPresent()
-                    ? task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
 
-            boolean isFloatingTask = !(task.getStartDate().isPresent() || task.getEndDate().isPresent());
-            if (isFloatingTask) {
+            // tasks must have a starting and ending date in order to qualify
+            // for check
+            if (!(task.getStartDate().isPresent() && task.getEndDate().isPresent())) {
                 return false;
-            } else if (task.getStartDate().isPresent() && task.getEndDate().isPresent()) {
-                return !(taskStartDate.isBefore(startDateCriteria) || taskEndDate.isAfter(endDateCriteria));
-            } else if (task.getStartDate().isPresent()) {
-                return !(taskStartDate.isBefore(startDateCriteria) || taskStartDate.isAfter(startDateCriteria));
-            } else {
-                return !(taskEndDate.isBefore(startDateCriteria) || taskEndDate.isAfter(startDateCriteria));
             }
+
+            LocalDate taskStartDate = task.getStartDate().get().toInstant().atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            LocalDate taskEndDate = task.getEndDate().get().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            return !(taskStartDate.isBefore(startDateCriteria) || endDateCriteria.isBefore(taskEndDate));
         }
 
         @Override

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- @@author A0114523U-->
+<!-- @@author -->
 
 <VBox xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
@@ -13,7 +14,7 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
+      <Label text="Task Today" />
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
-<!-- @@author -->

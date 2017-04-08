@@ -15,6 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Git
 * Features implemented:
    * [Find](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#26-finding-all-tasks-containing-any-keyword-in-their-task-title--description--tags-find)
+   * [Findbydate](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#216-find-tasks-by-date-findbydate)
    * [Edit](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)
    * [Undo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#214-undo-the-last-user-command-that-changes-data-undo)
    * [Redo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#215-redo-the-last-undo-command-redo)
@@ -57,8 +58,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: [Storage](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/DeveloperGuide.md#storage-component)
 * Aspects/tools in charge of: Documentation
 * Features implemented:
-   * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-cd)
-   * [Move Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-move-the-directory-of-the-task-manager--move-or--movefile)
+   * [Change Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#212-change-the-directory-of-the-task-manager--load-or-open)
+   * [Save Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-save-the-task-manager-to-a-specified-directory-save-or--saveas)
+   * [Mark as Done](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#217-marking-a-task-as-done--done-or-complete-or-finish)
+   * [Mark as Todo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#218-marking-a-task-as-todo--undone-or-revert)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0114269E.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0114269E.md)]
 * Other major contributions:
   * Managing most documentations
