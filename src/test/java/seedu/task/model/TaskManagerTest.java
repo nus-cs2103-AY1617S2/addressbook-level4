@@ -2,11 +2,11 @@ package seedu.task.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.ArrayList;
+//import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+//import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,8 +16,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Task;
-import seedu.task.testutil.TypicalTestTasks;
+//import seedu.task.model.task.Task;
+//import seedu.task.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
 

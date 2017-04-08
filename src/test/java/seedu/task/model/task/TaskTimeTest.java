@@ -1,8 +1,9 @@
 package seedu.task.model.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
-import seedu.task.model.task.TaskTime;
 
 public class TaskTimeTest {
 

@@ -1,8 +1,8 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class ClearCommandTest extends TaskManagerGuiTest {
 

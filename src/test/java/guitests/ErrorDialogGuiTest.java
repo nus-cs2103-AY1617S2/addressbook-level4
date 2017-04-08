@@ -1,13 +1,13 @@
 package guitests;
 
-import static junit.framework.TestCase.assertTrue;
+//import static junit.framework.TestCase.assertTrue;
 
-import java.io.IOException;
+//import java.io.IOException;
 
-import org.junit.Test;
+//import org.junit.Test;
 
-import guitests.guihandles.AlertDialogHandle;
-import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+//import guitests.guihandles.AlertDialogHandle;
+//import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 
 public class ErrorDialogGuiTest extends TaskManagerGuiTest {
 
