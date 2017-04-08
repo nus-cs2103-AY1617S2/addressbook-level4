@@ -10,6 +10,12 @@ import seedu.doit.logic.commands.exceptions.NoSuchCommandException;
 
 public class CommandSettingTest {
 
+    public static final String MESSAGE_ADD_COMMAND = "add";
+    public static final String MESSAGE_UNDO_COMMAND = "undo";
+
+    public static final String MESSAGE_TEST_SET_CHANGED = "changed";
+
+
     CommandSettings originalSettings = new CommandSettings();
     CommandSettings testSettings = new CommandSettings();
 
@@ -32,8 +38,8 @@ public class CommandSettingTest {
     public void equals_add() throws NoSuchCommandException, CommandExistedException {
         CommandSettings changedSettings = new CommandSettings();
         CommandSettings differentSettings = new CommandSettings();
-        changedSettings.setCommand("add", "changed");
-        differentSettings.setCommand("add", "different");
+        changedSettings.setCommand(MESSAGE_ADD_COMMAND, "changed");
+        differentSettings.setCommand(MESSAGE_ADD_COMMAND, "different");
         assertFalse(originalSettings.equals(changedSettings));
         assertFalse(differentSettings.equals(changedSettings));
     }
