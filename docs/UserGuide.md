@@ -45,8 +45,8 @@ By : `Team CS2103JAN2017-W10-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &n
 Shows help message.<br>
 Format: `help [COMMAND]`
 
-> * `COMMAND` is optional.Shows help message.
-> * `COMMAND` should have format `add`, `recur`, `edit`, `find`, `select`, `delete`, `finish`, `redo`, `save` or `read`.
+> * `COMMAND` is optional.
+> * `COMMAND` should be `add`, `recur`, `list`, `edit`, `find`, `select`, `delete`, `clear`, `finish`, `redo`, `show`, `undo`, `save`, `read`, `next`, `refresh` or `exit`.
 > * When there is no command specified or incorrect command e.g.`abcd`, a help window with all commands will be shown.
 > * When the command is specified, the format and examples of the command will be shown.
 
@@ -335,6 +335,7 @@ Format: 'next [WEEKS_AHEAD]'
 
 > * `WEEKS_AHEAD` is an optional field
 > * `WEEKS_AHEAD` must be an integer.
+> * If no `WEEKS_AHEAD` is specified, the timetable for next week will be shown in calendar.
 
 Examples:
 
@@ -367,7 +368,7 @@ Feature | Command Format | Example |
 -------- | :-------- | :--------- |
 Show help message | `help [COMMAND]` | `help add`
 Add an event | `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...` | `add Industrial Talk st/1600 sd/030717 et/2000 l/FoS`
-Add a recurring event | `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES` |
+Add a recurring event | `recur EVENT_INDEX FREQUENCY NUMBER_OF_TIMES` | `recur 2 daily 3`
 Add a task | `add DESCRIPTION p/PRIORITY [bt/BY_TIME] [bd/BY_DATE] [l/LOCATION] [ta/TAG]...` | `add Home Assignment 1 bd/tmr l/general office ta/hardcopy`
 List | `list` | `list`
 Edits an event | `edit ev INDEX [DESCRIPTION] [st/START_TIME] [sd/START_DATE] [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...` | `edit ev 3 Project Discussion et/2300`
@@ -377,11 +378,11 @@ Select | `select TYPE INDEX` | `select ev 2`
 Delete | `delete TYPE INDEX` | `delete ts 3`
 Clear | `clear [TYPE]` | `clear ev`
 Finish a task | `finish TASK_INDEX` | `finish 3`
+Redo a task | `redo TASK_INDEX` | `show com`<br>`redo 1`
 Change status preference | `show [DISPLAY_PREFERENCE]` | `show com`
-Redo a task | `redo TASK_INDEX` | ``
 Undo last operation | `undo` | `undo`
 Change storage file location | `save DIRECTORY` | `save Desktop/Data`
 Read data from location | `read DIRECTORY` | `read Desktop/MyData`
-Changes week in calendar | `next WEEKS_AHEAD` | `next 2`
+Changes week in calendar | `next [WEEKS_AHEAD]` | `next 2`
 Refresh calendar | `refresh` | `refresh`
 Exit WhatsLeft | `exit` | `exit`

@@ -73,6 +73,33 @@ public class EditCommandTest extends WhatsLeftGuiTest {
     }
 
     @Test
+    public void editEventWithInvalidEndDateTime() {
+        //edit an event with invalid end date time
+        commandBox.runCommand("edit ev 1 sd/060717 ed/050717");
+        assertResultMessage(EditCommand.MESSAGE_ILLEGAL_EVENT_END_DATETIME);
+    }
+
+    @Test
+    public void editEventToClash() {
+        filteredEventList = TestUtil.addEventsToList(filteredEventList, te.workshop);
+        commandBox.runCommand(te.workshop.getAddCommand());
+        filteredEventList = TestUtil.getFilteredTestEvents(filteredEventList);
+        commandBox.runCommand("edit ev 1 Latex Workshop st/0730 sd/280617 et/0930 ed/280617 l/YIH ta/");
+        int filteredEventListIndex = 1;
+        TestEvent editedEvent = te.clashedWorkshop;
+
+        // confirm the new card contains the right data
+        EventCardHandle editedCard = eventListPanel.navigateToEvent(editedEvent.getAsText());
+        assertMatchingEvent(editedEvent, editedCard);
+
+        // confirm the list now contains all previous events plus the event with updated details
+        filteredEventList[filteredEventListIndex - 1] = editedEvent;
+        filteredEventList = TestUtil.getFilteredTestEvents(filteredEventList);
+        assertTrue(eventListPanel.isListMatching(filteredEventList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_SUCCESS_CLASH, editedEvent));
+    }
+
+    @Test
     public void editEventAfterFind() throws Exception {
         commandBox.runCommand("find CS2103");
 

@@ -1,9 +1,11 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.whatsleft.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
+import seedu.whatsleft.logic.commands.RedoCommand;
 import seedu.whatsleft.testutil.TestEvent;
 import seedu.whatsleft.testutil.TestTask;
 import seedu.whatsleft.testutil.TestUtil;
@@ -30,10 +32,31 @@ public class RedoCommandTest extends WhatsLeftGuiTest {
 
         /** Redo a task at the end of the completed list */
         assertRedoFinishedTaskSuccess("2", redoList, filteredPastEventList);
+    }
 
-        /** invalid index */
-        commandBox.runCommand("redo " + redoList.length + 1);
-        assertResultMessage("The Task index provided is invalid");
+    @Test
+    public void redoPreviousFinishedTasksFailure() {
+        TestTask[] currentTaskList = tt.getTypicalTasks();
+        TestTask[] filteredTaskList = TestUtil.filterExpectedTestTaskList(currentTaskList);
+        TestTask[] redoList = TestUtil.getTasksFromListByIndex(filteredTaskList, 1, 4);
+
+      //finishes 3 tasks
+        setUpRedoTest();
+        /** index out of range */
+        assertRedoCommandFailure("redo " + redoList.length + 1 , "The Task index provided is invalid");
+        /** empty index */
+        assertRedoCommandFailure("redo", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        /** string as index */
+        assertRedoCommandFailure("redo ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+    }
+    /**
+     * Assert Redo Command with invalid input fails
+     * @param command
+     * @param expected
+     */
+    private void assertRedoCommandFailure(String command, String expected) {
+        commandBox.runCommand(command);
+        assertResultMessage(expected);
     }
 
 

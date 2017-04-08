@@ -13,15 +13,17 @@ We are a team based in the [School of Computing, National University of Singapor
   * [Edit an event or task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#24-editing-an-eventtask--edit)
   * [Clear tasks and events](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#28-clearing-all-entries--clear)
   * [List sorted tasks and events](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#23-listing-all-eventstasks--list)
-* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0148038A.md#a0148038a), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0148038A.md#a0148038a)
+  * [Enable case insensitive command word](https://github.com/CS2103JAN2017-W10-B4/main/commit/93538bdf41dcb71b74833f05dd47d528f20e14d9)
+* Code written:
+  * [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0148038A.md#a0148038a)
+  * [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0148038A.md#a0148038a)
 * Other major contributions:
   * Refactored original AddressBook to current WhatsLeft
   * Refactored Person to Activity
   * Morphing UI package and Test package
   insensitive
   * Maintainer of [Model](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#24-model-component) component
-  * [Insensitive command word](https://github.com/CS2103JAN2017-W10-B4/main/commit/93538bdf41dcb71b74833f05dd47d528f20e14d9)
-  * Test basic features
+  * Writing test for basic features
 
 -----
 
@@ -47,7 +49,10 @@ We are a team based in the [School of Computing, National University of Singapor
   * [Edit event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#24-editing-an-eventtask--edit)
   * [Delete event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#27-deleting-an-eventtask--delete)
   * [Select event and task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#26-selecting-an-eventtask--select)
-* Code written:
+  * [Undo previous command](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#211-undoing-the-latest-command--undo)
+  * Natural language parsing
+  * Recur command
+* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0110491U.md), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0110491U.md)
 * Other major contributions:
   * Travis setting up
   * Fixed GUI testing

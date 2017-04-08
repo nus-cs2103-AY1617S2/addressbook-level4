@@ -10,6 +10,9 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
+    public static final String MESSAGE_USAGE = "Enter 'exit' in command window to exit WhatsLeft App\n";
+
+
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting WhatsLeft as requested ...";
 
     @Override

@@ -71,7 +71,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleWhatsLeftChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleWhatsLeftChangedEventExceptionThrownEventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlWhatsLeftStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
