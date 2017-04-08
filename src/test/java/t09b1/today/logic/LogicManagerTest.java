@@ -635,7 +635,7 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-    // @@author: A0144422R
+    // @@author A0144422R
     @Test
     public void execute_find_date() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -1270,7 +1270,7 @@ public class LogicManagerTest {
             return new FloatingTask(new Name(name), new UniqueTagList(tags), false, false);
         }
 
-        // @@author: A0144422R
+        // @@author A0144422R
         Task generateEventTaskWithNameTags(String name, int days1, int days2, String... tagNames) throws Exception {
             ArrayList<Tag> tags = new ArrayList<Tag>();
             for (String tagName : tagNames) {
@@ -1281,7 +1281,7 @@ public class LogicManagerTest {
             return new EventTask(new Name(name), new UniqueTagList(tags), end, start, false, false);
         }
 
-        // @@author: A0144422R
+        // @@author A0144422R
         Task generateDeadlineTaskWithNameTags(String name, int days, String... tagNames) throws Exception {
             ArrayList<Tag> tags = new ArrayList<Tag>();
             for (String tagName : tagNames) {

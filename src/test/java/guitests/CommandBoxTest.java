@@ -1,53 +1,49 @@
 package guitests;
 
-/**
- * (Depreciated) CommandBox changed
- */
+import static t09b1.today.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import t09b1.today.commons.core.Messages;
+import t09b1.today.commons.exceptions.IllegalValueException;
+import t09b1.today.logic.commands.AddCommand;
+import t09b1.today.logic.commands.RedoCommand;
+import t09b1.today.logic.commands.UndoCommand;
+
+// @@Author A0144315N
 public class CommandBoxTest extends TaskManagerGuiTest {
 
-    // private static final String COMMAND_THAT_SUCCEEDS = "find 123";
-    // private static final String COMMAND_THAT_FAILS = "invalid command";
-    //
-    // private ArrayList<String> defaultStyleOfCommandBox;
-    // private ArrayList<String> errorStyleOfCommandBox;
-    //
-    // @Before
-    // public void setUp() {
-    // defaultStyleOfCommandBox = new ArrayList<>(commandBox.getStyleClass());
-    // assertFalse("CommandBox default style classes should not contain error
-    // style class.",
-    // defaultStyleOfCommandBox.contains(CommandBox.ERROR_STYLE_CLASS));
-    //
-    // // build style class for error
-    // errorStyleOfCommandBox = new ArrayList<>(defaultStyleOfCommandBox);
-    // errorStyleOfCommandBox.add(CommandBox.ERROR_STYLE_CLASS);
-    // }
-    //
-    // public void
-    // commandBox_commandSucceeds_textClearedAndStyleClassRemainsTheSame() {
-    // commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-    //
-    // assertEquals("", commandBox.getCommandInput());
-    // assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
-    // }
-    //
-    // public void commandBox_commandFails_textStaysAndErrorStyleClassAdded() {
-    // commandBox.runCommand(COMMAND_THAT_FAILS);
-    //
-    // assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
-    // assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
-    // }
-    //
-    // public void
-    // commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved()
-    // {
-    // // add error style to simulate a failed command
-    // commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-    //
-    // commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-    //
-    // assertEquals("", commandBox.getCommandInput());
-    // assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
-    // }
+    @Test
+    public void add() throws IllegalArgumentException, IllegalValueException {
 
+        // Enter empty string
+        commandBox.runCommand("");
+        assertNoErrorMessage();
+
+        // Enter unknown command
+        commandBox.runCommand("aaaaaaa");
+        assertShowErrorMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        // Enter invalid command
+        commandBox.runCommand("add !@#$%^&");
+        assertShowErrorMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // Test no command left to undo/redo message
+        commandBox.runCommand("undo");
+        assertShowErrorMessage(UndoCommand.MESSAGE_NO_PREV_COMMAND);
+        commandBox.runCommand("redo");
+        assertShowErrorMessage(RedoCommand.MESSAGE_NO_PREV_COMMAND);
+    }
+
+    // ----- Helper -----
+    private void assertNoErrorMessage() {
+        String errorMessage = commandBox.getCommandBoxInstance().getValidators().get(0).getMessage();
+        assertEquals(errorMessage, "");
+    }
+
+    private void assertShowErrorMessage(String expectedMessage) {
+        String errorMessage = commandBox.getCommandBoxInstance().getValidators().get(0).getMessage();
+        assertEquals(errorMessage, expectedMessage);
+    }
 }

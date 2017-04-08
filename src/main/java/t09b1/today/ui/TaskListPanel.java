@@ -92,7 +92,7 @@ public class TaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
-    // @@Author:
+    // @@Author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
@@ -108,7 +108,7 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
-    // @@Author: A0144315N
+    // @@Author A0144315N
     public void scrollToToday(int index) {
         Platform.runLater(() -> {
             todayTaskListView.scrollTo(index);
@@ -143,7 +143,7 @@ public class TaskListPanel extends UiPart<Region> {
         return scrollPane;
     }
 
-    // @@Author:
+    // @@Author
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
