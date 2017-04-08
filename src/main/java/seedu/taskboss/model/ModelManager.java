@@ -232,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskbossHistory.push(new TaskBoss(this.taskBoss));
         taskBoss.renameCategory(newCategory, oldCategory);
         removeCategoryFromTaskboss(oldCategory);
-        taskbossUndoHistory.clear();
+
         undoInputList.push("rename");
         indicateTaskBossChanged();
         taskbossUndoHistory.clear();
