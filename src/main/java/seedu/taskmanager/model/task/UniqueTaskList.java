@@ -81,7 +81,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
         Task taskToUpdate = internalList.get(index);
         // @@author A0114269E
-        if ((editedTask.getStatus().value == false) && !taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        if ((editedTask.getStatus().value == false) && !taskToUpdate.equals(editedTask)
+                && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
         // @@author

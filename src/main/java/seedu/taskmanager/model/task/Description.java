@@ -9,7 +9,7 @@ import seedu.taskmanager.commons.exceptions.IllegalValueException;
  */
 public class Description {
 
-    public static final String MESSAGE_TASK_CONSTRAINTS =
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
             "Task description can take any values, and it can be blank";
 
     public static final String DESCRIPTION_VALIDATION_REGEX = "(^$)|([^\\s].*)";
@@ -24,7 +24,7 @@ public class Description {
     public Description(String description) throws IllegalValueException {
         assert description != null;
         if (!isValidDescription(description)) {
-            throw new IllegalValueException(MESSAGE_TASK_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
         this.value = description;
     }
