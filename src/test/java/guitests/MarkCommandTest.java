@@ -51,9 +51,19 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         assertMatching(markedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskManagerIndex - 1] = markedTask;
+        moveToEnd(filteredTaskListIndex - 1);
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, markedTask));
+    }
+
+    /** Moves an element at index of expectedTasksList to the end of the list */
+    private void moveToEnd(int index) {
+        TestTask temp;
+        for (int i = index + 1; i < expectedTasksList.length; i++) {
+            temp = expectedTasksList[i - 1];
+            expectedTasksList[i - 1] = expectedTasksList[i];
+            expectedTasksList[i] = temp;
+        }
     }
 
 }
