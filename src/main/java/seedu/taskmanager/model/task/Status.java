@@ -34,7 +34,7 @@ public class Status {
     }
 
     /**
-     * To recreate model from storage in String
+     * To recreate model from XML storage in String
      */
     public Status(String status) {
         assert status != null;
