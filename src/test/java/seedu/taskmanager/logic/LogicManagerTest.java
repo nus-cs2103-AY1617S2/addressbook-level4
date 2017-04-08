@@ -620,7 +620,7 @@ public class LogicManagerTest {
         Task generateTaskWithStatus(int seed, boolean status) throws Exception {
             return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
                     Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
-                    new Status(status), new UniqueTagList(new Tag("tag" + Math.abs(seed)),
+                    Optional.empty(), new Status(status), new UniqueTagList(new Tag("tag" + Math.abs(seed)),
                     new Tag("tag" + Math.abs(seed + 1))));
         }
 
