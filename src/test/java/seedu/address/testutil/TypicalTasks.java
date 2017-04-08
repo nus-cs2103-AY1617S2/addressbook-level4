@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -54,10 +55,14 @@ public class TypicalTasks {
 
             // Initialize DateTime, truncate to remove milliseconds
             noDateTime = Optional.empty();
-            pastDateTime = Optional.of(new DateTime(DateUtils.addDays(new Date(), -4)));
-            todayDateTime = Optional.of(new DateTime(new Date()));
-            earlierFutureDateTime = Optional.of(new DateTime(DateUtils.addDays(new Date(), 2)));
-            laterFutureDateTime = Optional.of(new DateTime(DateUtils.addDays(new Date(), 4)));
+            pastDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), -4), Calendar.MINUTE)));
+            todayDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addMinutes(new Date(), 2), Calendar.MINUTE)));
+            earlierFutureDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 2), Calendar.MINUTE)));
+            laterFutureDateTime = Optional
+                    .of(new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 4), Calendar.MINUTE)));
 
             // Initialize Tasks
             todayListOverdue = Task.createTask(new Name("Do Math Assignment"), noTags, pastDateTime, noDateTime,

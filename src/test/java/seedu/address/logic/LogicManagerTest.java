@@ -61,8 +61,6 @@ import seedu.address.model.TaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.DateTime;
-import seedu.address.model.task.DeadlineTask;
-import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
@@ -94,6 +92,7 @@ public class LogicManagerTest {
     private boolean helpShown;
     private String targetedJumpIndex;
     private TypicalTasks td;
+    private TaskManager expectedAB;
 
     @Subscribe
     private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
@@ -124,8 +123,12 @@ public class LogicManagerTest {
         storage = new StorageManager(config);
         logic = new LogicManager(model);
         td = new TypicalTasks();
+        expectedAB = td.getTypicalTaskManager();
         EventsCenter.getInstance().registerHandler(this);
+        // Populate model and sort
         populateModelWithTypicalTasks();
+        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
+                FXCollections.observableArrayList());
 
         // last saved assumed to be up to date
         latestSavedTaskManager = new TaskManager(model.getTaskManager());
@@ -245,8 +248,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_help() {
-        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, td.getTypicalTaskManager(),
-                Arrays.asList(td.getTypicalTasks()));
+        assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, expectedAB, Arrays.asList(td.getTypicalTasks()));
         assertTrue(helpShown);
     }
 
@@ -254,7 +256,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_exit() {
-        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, td.getTypicalTaskManager(),
+        assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, expectedAB,
                 Arrays.asList(td.getTypicalTasks()));
     }
 
@@ -270,7 +272,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(td.extraFloat);
 
         // execute command and verify result
@@ -284,7 +285,6 @@ public class LogicManagerTest {
     public void execute_add_event_successful() throws Exception {
         // setup expectations
         Task toBeAdded = TestUtil.generateEventTaskWithNameTags("name", 0, 1, "tag1");
-        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -297,7 +297,6 @@ public class LogicManagerTest {
     public void execute_add_deadline_task_successful() throws Exception {
         // setup expectations
         Task toBeAdded = TestUtil.generateDeadlineTaskWithNameTags("name", 0, "tag1");
-        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -321,7 +320,6 @@ public class LogicManagerTest {
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
-        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.addTask(td.extraDeadline);
         model.addTask(td.extraDeadline);
 
@@ -336,10 +334,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         expectedAB.removeTask(td.futureListDeadline);
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("delete F2",
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, td.futureListDeadline), expectedAB,
                 expectedAB.getTaskList());
@@ -361,13 +356,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_valid() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task doneTask = Task.createTask(td.futureListFloat);
         doneTask.setDone(true);
         expectedAB.updateTask(5, doneTask);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("done F1", String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, doneTask), expectedAB,
                 expectedAB.getTaskList());
     }
@@ -387,13 +379,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_notdone_valid() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task notDoneTask = Task.createTask(td.completedListFloat);
         notDoneTask.setDone(false);
         expectedAB.updateTask(8, notDoneTask);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("notdone C1", String.format(NotDoneCommand.MESSAGE_NOTDONE_TASK_SUCCESS, notDoneTask),
                 expectedAB, expectedAB.getTaskList());
     }
@@ -428,12 +417,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editNameOnly_successful() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToEdit = Task.createTask(td.completedListFloat);
         taskToEdit.setName(new Name("new name"));
         expectedAB.updateTask(8, taskToEdit);
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
+
         assertCommandSuccess("edit C1 new name",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
                 expectedAB.getTaskList());
@@ -441,15 +428,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editNameAndTag_successful() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToEdit = Task.createTask(td.completedListFloat);
         taskToEdit.setName(new Name("new name"));
         UniqueTagList tags = new UniqueTagList("tag1", "tag2");
         taskToEdit.setTags(tags);
         expectedAB.updateTask(8, taskToEdit);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 new name #tag1 #tag2",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
                 expectedAB.getTaskList());
@@ -457,15 +441,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editEventNameAndTag_successful() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         DateTime start = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 0), Calendar.DAY_OF_MONTH));
         DateTime end = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH));
         Task taskToEdit = Task.createTask(new Name("new name"), new UniqueTagList("tag1", "tag2"), Optional.of(end),
                 Optional.of(start), td.completedListFloat.isDone(), td.completedListFloat.isManualToday());
         expectedAB.updateTask(8, taskToEdit);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 new name from today at 0000 to tomorrow at 0000 #tag1 #tag2",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
                 expectedAB.getTaskList());
@@ -473,15 +454,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editDeadlineTaskTag_successful() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         DateTime end = new DateTime(DateUtils.truncate(DateUtils.addDays(new Date(), 1), Calendar.DAY_OF_MONTH));
         Task taskToEdit = Task.createTask(td.completedListFloat.getName(), new UniqueTagList("tag1", "tag2"),
                 Optional.of(end), Optional.empty(), td.completedListFloat.isDone(),
                 td.completedListFloat.isManualToday());
         expectedAB.updateTask(8, taskToEdit);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 due tomorrow at 0000 #tag1 #tag2",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
                 expectedAB.getTaskList());
@@ -489,14 +467,11 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editConfusingName_successful() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToEdit = Task.createTask(td.completedListFloat);
         taskToEdit.setName(new Name("from today uihasduhas to tomorrow uhaius"));
         taskToEdit.setTags(new UniqueTagList("tag1", "tag2"));
         expectedAB.updateTask(8, taskToEdit);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("edit C1 from today uihasduhas to tomorrow uhaius #tag1 #tag2",
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, td.completedListFloat), expectedAB,
                 expectedAB.getTaskList());
@@ -504,16 +479,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_editDuplicateTask_notAllowed() throws Exception {
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandFailure("edit C1 " + td.futureListFloat.getName().toString() + " #tag3 #tag4",
                 EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
     public void execute_editIndexNotFound_notAllowed() throws Exception {
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandFailure("edit C100 Task 3 #tag3 #tag4", Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
     // @@author A0093999Y
@@ -532,13 +503,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_today_valid() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToToday = Task.createTask(td.futureListDeadline);
         taskToToday.setToday(true);
         expectedAB.updateTask(6, taskToToday);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("today F2", String.format(TodayCommand.MESSAGE_TODAY_TASK_SUCCESS, td.futureListDeadline),
                 expectedAB, expectedAB.getTaskList());
     }
@@ -558,13 +526,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_notToday_valid() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToNotToday = Task.createTask(td.todayListFloat);
         taskToNotToday.setToday(false);
         expectedAB.updateTask(1, taskToNotToday);
 
-        model.prepareTaskList(FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
         assertCommandSuccess("nottoday T2",
                 String.format(NotTodayCommand.MESSAGE_NOTTODAY_TASK_SUCCESS, taskToNotToday), expectedAB,
                 expectedAB.getTaskList());
@@ -581,7 +546,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_onlyMatchesFullWordsInNamesAndNotCaseSensitive() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         List<Task> expectedList = Arrays.asList(td.completedListEvent);
 
         assertCommandSuccess("find go", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
@@ -590,7 +554,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_onlyMatchesFullWordsInTagsAndNotCaseSensitive() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         List<Task> expectedList = Arrays.asList(td.todayListFloat, td.futureListDeadline, td.futureListEvent,
                 td.completedListFloat);
 
@@ -601,7 +564,6 @@ public class LogicManagerTest {
     // @@author: A0144422R
     @Test
     public void execute_find_date() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         List<Task> expectedList = Arrays.asList(td.todayListDeadline, td.completedListDeadline, td.completedListEvent);
 
         assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(expectedList.size()),
@@ -610,7 +572,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_multipleArgs() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         List<Task> expectedList = Arrays.asList(td.completedListDeadline, td.completedListEvent);
 
         assertCommandSuccess("find go goes", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
@@ -628,7 +589,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_renametag_onlyMatchesFullWordsCorrectCaseInTags() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToRenameTag1 = Task.createTask(td.todayListFloat);
         Task taskToRenameTag2 = Task.createTask(td.completedListFloat);
         UniqueTagList replacementTags = new UniqueTagList();
@@ -653,7 +613,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_deletetag_onlyMatchesFullWordsAndCorrectCaseInTags() throws Exception {
-        TaskManager expectedAB = td.getTypicalTaskManager();
         Task taskToRenameTag1 = Task.createTask(td.todayListFloat);
         Task taskToRenameTag2 = Task.createTask(td.completedListFloat);
         UniqueTagList replacementTags = new UniqueTagList();
@@ -662,7 +621,7 @@ public class LogicManagerTest {
         expectedAB.updateTask(1, taskToRenameTag1);
         expectedAB.updateTask(8, taskToRenameTag2);
 
-        assertCommandSuccess("deletetag project", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "KEY"),
+        assertCommandSuccess("deletetag project", String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, "project"),
                 expectedAB, expectedAB.getTaskList());
     }
 
@@ -672,7 +631,7 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalSameDirectory() throws Exception {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto .", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -680,7 +639,7 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalParentDirectory() throws Exception {
         File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto ..", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -688,8 +647,8 @@ public class LogicManagerTest {
     public void execute_saveTo_canonicalSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto testSubDir",
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
         tmFile.getParentFile().delete();
     }
@@ -698,8 +657,8 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteSameDirectory() throws Exception {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -707,8 +666,8 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteParentDirectory() throws Exception {
         File tmFile = new File("..", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -716,8 +675,8 @@ public class LogicManagerTest {
     public void execute_saveTo_absoluteSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", SaveToCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("saveto " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
         tmFile.getParentFile().delete();
     }
@@ -745,7 +704,7 @@ public class LogicManagerTest {
     public void execute_export_canonicalSameDirectory() throws Exception {
         File tmFile = new File(".", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export .", String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -753,7 +712,7 @@ public class LogicManagerTest {
     public void execute_export_canonicalParentDirectory() throws Exception {
         File tmFile = new File("..", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export ..", String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -761,8 +720,8 @@ public class LogicManagerTest {
     public void execute_export_canonicalSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export testSubDir",
-                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
         tmFile.getParentFile().delete();
     }
@@ -771,8 +730,8 @@ public class LogicManagerTest {
     public void execute_export_absoluteSameDirectory() throws Exception {
         File tmFile = new File(".", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -780,8 +739,8 @@ public class LogicManagerTest {
     public void execute_export_absoluteParentDirectory() throws Exception {
         File tmFile = new File("..", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
     }
 
@@ -789,8 +748,8 @@ public class LogicManagerTest {
     public void execute_export_absoluteSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", ExportCommand.TASK_MANAGER_FILE_NAME);
         assertCommandSuccess("export " + tmFile.getParentFile().getAbsolutePath(),
-                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), new TaskManager(),
-                Collections.emptyList());
+                String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()), expectedAB,
+                expectedAB.getTaskList());
         tmFile.delete();
         tmFile.getParentFile().delete();
     }
@@ -832,20 +791,19 @@ public class LogicManagerTest {
                 String.format(UseThisCommand.MESSAGE_FILE_MISSING_ERROR, invalidFolderNameFile.getAbsolutePath()));
     }
 
-    // ------------------------- ImportCommand ------------------------
+    // ------------------------- Import Command ------------------------
 
     @Test
     public void execute_import_absoluteSubDirectory() throws Exception {
         File tmFile = new File("testSubDir", ImportCommand.TASK_MANAGER_FILE_NAME);
 
         // add adam to list
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
+
+        Task toBeAdded = Task.createTask(td.extraDeadline);
         expectedAB.addTask(toBeAdded);
 
         // verify added
-        String addCommand = helper.generateAddCommand(toBeAdded);
+        String addCommand = TestUtil.makeAddCommandString(toBeAdded);
         assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
                 expectedAB.getTaskList());
 
@@ -872,13 +830,11 @@ public class LogicManagerTest {
     @Test
     public void execute_undoAdd_successful() throws Exception {
         // add adam to list
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
+        Task toBeAdded = Task.createTask(td.extraFloat);
         expectedAB.addTask(toBeAdded);
 
         // verify added
-        String addCommand = helper.generateAddCommand(toBeAdded);
+        String addCommand = TestUtil.makeAddCommandString(toBeAdded);
         assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
                 expectedAB.getTaskList());
 
@@ -894,12 +850,12 @@ public class LogicManagerTest {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
         assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
         // undo command
-        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
-                Collections.emptyList());
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), expectedAB,
+                expectedAB.getTaskList());
         assertFalse(FileUtil.isFileExists(tmFile));
     }
 
@@ -909,12 +865,12 @@ public class LogicManagerTest {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "export " + tmFile.getParentFile().getAbsolutePath();
         assertCommandSuccess(commandText, String.format(ExportCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
         // undo command
-        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
-                Collections.emptyList());
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), expectedAB,
+                expectedAB.getTaskList());
         assertFalse(FileUtil.isFileExists(tmFile));
     }
 
@@ -929,13 +885,11 @@ public class LogicManagerTest {
     @Test
     public void execute_undoAddRedo_successful() throws Exception {
         // add adam to list
-        TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
-        TaskManager expectedAB = new TaskManager();
+        Task toBeAdded = Task.createTask(td.extraDeadline);
         expectedAB.addTask(toBeAdded);
 
         // verify added
-        String addCommand = helper.generateAddCommand(toBeAdded);
+        String addCommand = TestUtil.makeAddCommandString(toBeAdded);
         assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB,
                 expectedAB.getTaskList());
 
@@ -957,146 +911,18 @@ public class LogicManagerTest {
         File tmFile = new File(".", SaveToCommand.TASK_MANAGER_FILE_NAME);
         String commandText = "saveto " + tmFile.getParentFile().getAbsolutePath();
         assertCommandSuccess(commandText, String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         assertTrue(FileUtil.isFileExists(tmFile));
 
         // undo command
-        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), new TaskManager(),
-                Collections.emptyList());
+        assertCommandSuccess("undo", String.format(UndoCommand.MESSAGE_SUCCESS, commandText), expectedAB,
+                expectedAB.getTaskList());
         assertFalse(FileUtil.isFileExists(tmFile));
 
         // redo command
         assertCommandSuccess("redo", String.format(SaveToCommand.MESSAGE_SUCCESS, tmFile.getCanonicalPath()),
-                new TaskManager(), Collections.emptyList());
+                expectedAB, expectedAB.getTaskList());
         assertTrue(FileUtil.isFileExists(tmFile));
         tmFile.delete();
-    }
-
-    // @@author
-
-    /**
-     * A utility class to generate test data.
-     */
-    class TestDataHelper {
-
-        Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            boolean done = false;
-            return new FloatingTask(name, tags, done, false);
-        }
-
-        Task bob() throws Exception {
-            Name name = new Name("Bob Black");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            boolean done = false;
-            return new DeadlineTask(name, tags, new Date(), done, false);
-        }
-
-        /**
-         * Generates a valid task using the given seed. Running this function
-         * with the same parameter values guarantees the returned task will have
-         * the same state. Each unique seed will generate a unique Task object.
-         *
-         * @param seed
-         *            used to generate the task data field values
-         */
-        Task generateTask(int seed) throws Exception {
-            return new FloatingTask(new Name("Task " + seed),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
-                    seed % 2 == 0, false);
-        }
-
-        /** Generates the correct add command based on the task given */
-        String generateAddCommand(Task p) {
-            StringBuffer cmd = new StringBuffer();
-
-            cmd.append("add ");
-
-            cmd.append(p.getName().toString());
-
-            UniqueTagList tags = p.getTags();
-            for (Tag t : tags) {
-                cmd.append(" #").append(t.tagName);
-            }
-
-            return cmd.toString();
-        }
-
-        /**
-         * Generates an TaskManager with auto-generated tasks.
-         */
-        TaskManager generateTaskManager(int numGenerated) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, numGenerated);
-            return taskManager;
-        }
-
-        /**
-         * Generates an TaskManager based on the list of Tasks given.
-         */
-        TaskManager generateTaskManager(List<Task> tasks) throws Exception {
-            TaskManager taskManager = new TaskManager();
-            addToTaskManager(taskManager, tasks);
-            return taskManager;
-        }
-
-        /**
-         * Adds auto-generated Task objects to the given TaskManager
-         *
-         * @param taskManager
-         *            The TaskManager to which the Tasks will be added
-         */
-        private void addToTaskManager(TaskManager taskManager, int numGenerated) throws Exception {
-            addToTaskManager(taskManager, generateTaskList(numGenerated));
-        }
-
-        /**
-         * Adds the given list of Tasks to the given TaskManager
-         */
-        private void addToTaskManager(TaskManager taskManager, List<Task> tasksToAdd) throws Exception {
-            for (Task p : tasksToAdd) {
-                taskManager.addTask(p);
-            }
-        }
-
-        /**
-         * Adds auto-generated Task objects to the given model
-         *
-         * @param model
-         *            The model to which the Tasks will be added
-         */
-        void addToModel(Model model, int numGenerated) throws Exception {
-            addToModel(model, generateTaskList(numGenerated));
-        }
-
-        /**
-         * Adds the given list of Tasks to the given model
-         */
-        void addToModel(Model model, List<Task> tasksToAdd) throws Exception {
-            for (Task p : tasksToAdd) {
-                model.addTask(p);
-            }
-        }
-
-        /**
-         * Generates a list of Tasks based on the flags.
-         */
-        List<Task> generateTaskList(int numGenerated) throws Exception {
-            List<Task> tasks = new ArrayList<>();
-            for (int i = 1; i <= numGenerated; i++) {
-                tasks.add(generateTask(i));
-            }
-            return tasks;
-        }
-
-        List<Task> generateTaskList(Task... tasks) {
-            return Arrays.asList(tasks);
-        }
-
     }
 }

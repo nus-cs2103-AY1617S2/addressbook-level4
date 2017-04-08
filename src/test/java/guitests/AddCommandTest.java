@@ -22,7 +22,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         // add another task
         taskToAdd = td.extraDeadline;
-        todayList = TestUtil.addTasksToList(todayList, taskToAdd, 2);
+        todayList = TestUtil.addTasksToList(todayList, taskToAdd, 3);
         assertTodayAddSuccess(taskToAdd, todayList, futureList);
 
         // add duplicate task
