@@ -332,7 +332,7 @@ Are you sure you have added all your tasks to OneTwoDo already? Simply type `exi
 | Command       | Format       | Description | Alternatives |
 | :-------------|:-------------|:-----------|:-------------|
 |  Help         |  `help` | Open help window |F1
-|  Helpug         |  `helpug` | Open this userguide | helpug, helpuserguide, ug
+|  Help ug         |  `help ug` | Open this userguide | help ug, help userguide
 |  Add          |  `add NAME [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...` | Add a task| 
 |  Edit         |  `edit PREFIX_INDEX [NAME] [s/START_DATE] [e/END_DATE] [r/RECUR] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]...` | Edit any specified task's information|
 |  List         |  `list [DONE_STATUS] [s/START_DATE] [e/END_DATE] [o/ORDER] [p/PRIORITY] [t/TAG]...` | List specified tasks in specified order| Ctrl+Shift+D,  Ctrl+Shift+U, Ctrl+Shift+A (list *Done*, *Undone* and *All* respecively)
