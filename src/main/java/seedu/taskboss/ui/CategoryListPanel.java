@@ -10,15 +10,16 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskboss.commons.core.LogsCenter;
 import seedu.taskboss.commons.events.model.TaskBossChangedEvent;
-import seedu.taskboss.commons.events.ui.CategoryListPanelViewingChangedEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.model.category.Category;
 import seedu.taskboss.model.task.ReadOnlyTask;
@@ -43,7 +44,7 @@ public class CategoryListPanel extends UiPart<Region> {
         updateCategoryCountToHashMap();
         addToPlaceholder(categoryListPlaceholder);
         registerAsAnEventHandler(this);
-        setEventHandlerForViewingChangeEvent();
+        consumeMouseClick();
     }
 
     /**
@@ -120,7 +121,6 @@ public class CategoryListPanel extends UiPart<Region> {
         categories = initCategories();
         categoryListView.setItems(categories);
         categoryListView.setCellFactory(listView -> new CategoryListViewCell());
-        setEventHandlerForViewingChangeEvent();
     }
 
     /**
@@ -143,20 +143,35 @@ public class CategoryListPanel extends UiPart<Region> {
         placeHolderPane.getChildren().add(getRoot());
     }
 
-    private void setEventHandlerForViewingChangeEvent() {
-        categoryListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Viewing in category list panel changed to : '" + newValue + "'");
-                        raise(new CategoryListPanelViewingChangedEvent(newValue));
-                    }
-                });
-    }
 
-    public void scrollTo(int index) {
+
+    /**
+     * Scrolls to the specified category by the user
+     * using list or list c/ commands.
+     */
+    public void scrollTo(Category currCategory) {
         Platform.runLater(() -> {
+            int index = 0;
+            for (Category category : categories) {
+                if (category.equals(currCategory)) {
+                    break;
+                }
+                index++;
+            }
             categoryListView.scrollTo(index);
             categoryListView.getSelectionModel().clearAndSelect(index);
+        });
+    }
+
+    /**
+     * Consumes any mouse click on categories in the categoryListPanel
+     */
+    private void consumeMouseClick() {
+        categoryListView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                logger.info("Mouse clicked on CategoryListPanel");
+                event.consume();
+            }
         });
     }
 
