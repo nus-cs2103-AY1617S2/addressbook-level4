@@ -226,7 +226,7 @@ public class LogicManagerTest {
                 StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
         assertCommandFailure("add Valid Title s/01/03/2017 e/not_numbers d/valid, description",
                 EndDate.MESSAGE_ENDDATE_CONSTRAINTS);
-        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description #invalid_-[.tag",
+        assertCommandFailure("add Valid Title s/12345 e/05/03/2017 d/valid, description t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
@@ -600,7 +600,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" #").append(t.tagName);
+                cmd.append(" t/").append(t.tagName);
             }
 
             return cmd.toString();
