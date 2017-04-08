@@ -51,14 +51,11 @@ public class TypicalTestTasks {
             helpMe = new TaskBuilder().withName("Help me").build();
             iAmCode = new TaskBuilder().withName("I am code").build();
         } catch (PastDateTimeException e) {
-            e.printStackTrace();
-            assert false : "not possible";
+            throw new AssertionError("The typical test tasks should not be built with date-times in the past");
         } catch (InvalidDurationException e) {
-            e.printStackTrace();
-            assert false : "not possible";
+            throw new AssertionError("The typical test tasks should not be built with an invalid duration period");
         } catch (IllegalValueException e) {
-            e.printStackTrace();
-            assert false : "not possible";
+            throw new AssertionError("The typical test tasks should already meet all the constraints required");
         }
     }
 
@@ -67,9 +64,9 @@ public class TypicalTestTasks {
             try {
                 taskList.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
-                assert false : "the taskList should not already contain any of the typical tasks.";
+                throw new AssertionError("taskList should not already contain any of the typical tasks.");
             } catch (IllegalValueException e) {
-                assert false : "Copying a valid task should always result in a valid task.";
+                throw new AssertionError("Copying a valid task should always result in a valid task.");
             }
         }
     }

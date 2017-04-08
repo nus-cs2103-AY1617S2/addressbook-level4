@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
             model.pushStatus(model.getTaskList());
             //@@author
         } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
+            throw new AssertionError("The target task cannot be missing");
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
