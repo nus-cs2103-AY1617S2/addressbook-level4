@@ -26,12 +26,11 @@ import seedu.doit.model.tag.UniqueTagList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-        + "by the index number used in the last task list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) [TASK NAME] [p/PRIORITY] [e/END DATE] "
-        + "[d/ADDITIONAL DESCRIPTION] [t/TAG]...\n"
-        + "Example: " + COMMAND_WORD + " 1 p/1 e/15-3-2020 23:59";
+    public static final String COMMAND_PARAMETER = "INDEX [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]бн";
+    public static final String COMMAND_RESULT = "Edits exisitng task with new details";
+    public static final String COMMAND_EXAMPLE = "edit 1 s/9pm e/11pm p/high t/CS1010";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_RESULT + "Parameters: " + COMMAND_PARAMETER
+            + "\nExample: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,6 +99,8 @@ public class EditCommand extends Command {
 
         }
     }
+
+
 
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
@@ -188,5 +189,20 @@ public class EditCommand extends Command {
         }
     }
 
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
+    }
 
 }

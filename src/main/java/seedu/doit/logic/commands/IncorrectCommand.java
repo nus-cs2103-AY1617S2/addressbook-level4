@@ -15,7 +15,7 @@ public class IncorrectCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        throw new CommandException(feedbackToUser);
+        throw new CommandException(this.feedbackToUser);
     }
 
 }

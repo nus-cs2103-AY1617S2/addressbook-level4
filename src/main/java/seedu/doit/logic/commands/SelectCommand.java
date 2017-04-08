@@ -13,6 +13,9 @@ import seedu.doit.model.item.ReadOnlyTask;
 public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_PARAMETER = "INDEX (must be a positive integer)";
+    public static final String COMMAND_RESULT = "Select a task and display its details";
+    public static final String COMMAND_EXAMPLE = "select 4";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Selects the task identified by the index number used in the last task listing.\n"
         + "Parameters: INDEX (must be a positive integer)\n"
@@ -51,6 +54,22 @@ public class SelectCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(this.targetIndex - 1));
         return new CommandResult(getMessageToDisplay());
 
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 
 }

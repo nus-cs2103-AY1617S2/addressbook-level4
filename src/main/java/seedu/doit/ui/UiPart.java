@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.doit.MainApp;
@@ -23,6 +24,10 @@ public abstract class UiPart<T> {
     public static final String FXML_FILE_FOLDER = "/view/";
 
     private FXMLLoader fxmlLoader;
+    /**
+     * The primary stage for the UI Part.
+     */
+    protected Stage primaryStage;
 
     /**
      * Constructs a UiPart with the specified FXML file URL.
@@ -90,4 +95,16 @@ public abstract class UiPart<T> {
         return dialogStage;
     }
 
+    public void setPlaceholder(AnchorPane placeholder) {
+        //Do nothing by default.
+    }
+
+    /**
+     * Override this method to receive the main Node generated while loading the view from the .fxml file.
+     * @param node
+     */
+
+    public void setStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 }
