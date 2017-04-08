@@ -1,6 +1,5 @@
 package onlythree.imanager.model.task;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import onlythree.imanager.commons.exceptions.IllegalValueException;
@@ -11,7 +10,7 @@ import onlythree.imanager.model.tag.UniqueTagList;
  * Represents a Task in the task list.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyTask {
+public class Task extends ReadOnlyTask {
 
     //@@author A0140023E
     public static final String MESSAGE_TASK_CONSTRAINTS =
@@ -149,32 +148,12 @@ public class Task implements ReadOnlyTask {
 
         setName(replacement.getName());
 
-        // Note that we are reusing the same Optional from replacement directly
-        // Hence we are not using the setter method which only accepts Deadline
+        // Note that the same Optional is being reused from replacement directly
+        // Hence the setter method cannot be used for both deadline and startEndDateTime
         deadline = replacement.getDeadline();
-        // Similarly for startEndDateTime we are reusing same Optional
         startEndDateTime = replacement.getStartEndDateTime();
-        complete = replacement.isComplete();
+
         setTags(replacement.getTags());
+        setComplete(replacement.isComplete());
     }
-
-    //@@author
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ReadOnlyTask // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyTask) other));
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline, startEndDateTime, tags, complete);
-    }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
 }
