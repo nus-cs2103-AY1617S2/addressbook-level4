@@ -78,6 +78,7 @@ public class TaskBuilder {
         this.task.setEndTiming(new Timing(string));
         return this;
     }
+
     public TestTask build() {
         return this.task;
     }

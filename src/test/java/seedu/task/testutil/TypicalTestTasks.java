@@ -78,6 +78,7 @@ public class TypicalTestTasks {
             recMonth = new TaskBuilder().withDescription("recMonth")
                     .withOccurrences(new ArrayList<RecurringTaskOccurrence>())
                     .withFrequency("2m")
+                    .withRecurring(true)
                     .withStartTiming("01/01/2017")
                     .withEndTiming("05/01/2017")
                     .withPriority("1").build();

@@ -55,7 +55,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
+    public String getRecurring() {
         return getTextFromLabel(RECURRING_FIELD_ID);
     }
 
@@ -81,18 +81,23 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
+        boolean recurSame = true;
+        if (task.isRecurring()) {
+            recurSame = getRecurring().equals("Recurring Task: " + task.getFrequency().frequency);
+        }
         return getDescription().equals(task.getDescription().description)
                 && getPriority().equals("Priority: " + task.getPriority().value)
                 && getStartingTiming().equals("Start Timing: " + task.getStartTiming().value)
                 && getEndTiming().equals("End Timing: " + task.getEndTiming().value)
-                && getTags().equals(getTags(task.getTags()));
+                && getTags().equals(getTags(task.getTags()))
+                && recurSame;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName()) && getPhone().equals(handle.getPhone())
+            return getFullName().equals(handle.getFullName()) && getRecurring().equals(handle.getRecurring())
                     && getEmail().equals(handle.getEmail()) && getAddress().equals(handle.getAddress())
                     && getTags().equals(handle.getTags());
         }
