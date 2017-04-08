@@ -44,6 +44,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_ILLEGAL_EDIT_RECURRING_TASK = "Date, time, periodicity of recurring task cannot be edited.";
+    public static final String MESSAGE_ILLEGAL_EDIT_RECURRENCE = "Recurrence/periodicity is not editable.";
 
     protected final int filteredTaskListIndex;
     protected final EditTaskDescriptor editTaskDescriptor;
@@ -74,7 +76,6 @@ public class EditCommand extends Command {
 
 	ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
 	Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-
 	try {
 	    model.updateEvent(filteredTaskListIndex, editedTask);
 	} catch (UniqueEventList.DuplicateEventException dpe) {
@@ -87,9 +88,22 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @throws IllegalValueException 
      */
-    protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor) throws CommandException {
 	assert taskToEdit != null;
+	
+	if (taskToEdit.isRecurring()) {
+	    if (editTaskDescriptor.getStartTime().isPresent()
+	            || editTaskDescriptor.getEndTime().isPresent()
+	            || editTaskDescriptor.getDeadline().isPresent()) {
+	        throw new CommandException(MESSAGE_ILLEGAL_EDIT_RECURRING_TASK);
+	    }
+	}
+	
+	if (editTaskDescriptor.getRecurrence().isPresent()) {
+	    throw new CommandException(MESSAGE_ILLEGAL_EDIT_RECURRENCE);
+	}
 
 	Title updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getTitle);
 	Location updatedLocation = editTaskDescriptor.getLocation().orElseGet(taskToEdit::getLocation);
@@ -123,6 +137,7 @@ public class EditCommand extends Command {
 	private Optional<Description> description = Optional.empty();
 	private Optional<Periodic> periodic = Optional.empty();
 	Optional<UniqueTagList> tags = Optional.empty();
+	private Optional<String> recurrence = Optional.empty();
 	private IsDone isDone = new IsDone();
 
 	public EditTaskDescriptor() {
@@ -134,6 +149,7 @@ public class EditCommand extends Command {
 	    this.deadline = toCopy.getDeadline();
 	    this.startTime = toCopy.getStartTime();
 	    this.endTime = toCopy.getEndTime();
+	    this.recurrence = toCopy.getRecurrence();
 	    this.description = toCopy.getDescription();
 	    this.periodic = toCopy.getPeriodic();
 	    this.tags = toCopy.getTags();
@@ -145,7 +161,7 @@ public class EditCommand extends Command {
 	 */
 	public boolean isAnyFieldEdited() {
 	    return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.endTime, this.description,
-		    this.periodic, this.tags);
+		    this.periodic, this.tags, this.recurrence);
 	}
 
 	public void setName(Optional<Title> name) {
@@ -167,6 +183,7 @@ public class EditCommand extends Command {
 	}
 
 	/*
+	 * Deprecated for reverting back to -prefixes
 	 * Sets start and end time together for event, both start and end time
 	 * must present, i.e.times.get().size() is 2
 	 */
@@ -201,7 +218,38 @@ public class EditCommand extends Command {
 		throw new IllegalValueException(null);
 	    }
 	}
-
+	
+	public void setStartTime(Optional<Date> dateTime) {
+	    if (dateTime.isPresent()) {
+	        this.startTime = Optional.of(new Schedule(dateTime.get()));
+	    } else {
+	        this.startTime = Optional.empty();
+	    }
+	}
+	
+	public void setEndTime(Optional<Date> dateTime) {
+        if (dateTime.isPresent()) {
+            this.endTime = Optional.of(new Schedule(dateTime.get()));
+        } else {
+            this.endTime = Optional.empty();
+        }
+	}
+	
+	public void setDeadline(Optional<Date> dateTime) {
+        if (dateTime.isPresent()) {
+            this.deadline = Optional.of(new Schedule(dateTime.get()));
+        } else {
+            this.deadline = Optional.empty();
+        }
+	}
+	
+	public void setRecurrence(Optional<String> periodicity) {
+	    if (periodicity.isPresent()) {
+	        //this should not happen!
+	        this.recurrence = Optional.of(MESSAGE_ILLEGAL_EDIT_RECURRENCE);
+	    }
+	}
+	
 	public Optional<Schedule> getStartTime() {
 	    return startTime;
 	}
@@ -230,6 +278,10 @@ public class EditCommand extends Command {
 
 	public Optional<Schedule> getDeadline() {
 	    return deadline;
+	}
+	
+	public Optional<String> getRecurrence() {
+	    return this.recurrence;
 	}
 
 	public void setTags(Optional<UniqueTagList> tags) {

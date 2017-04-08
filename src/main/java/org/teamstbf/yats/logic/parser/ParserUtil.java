@@ -32,6 +32,8 @@ import com.joestelmach.natty.DateGroup;
 public class ParserUtil {
 
     private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    private static final int NUMBER_SINGLE = 1;
+    private static final String MESSAGE_WRONG_DATE_NUMBER = "One field should contain one and only one date/time.";
 
     /**
      * Returns the specified index in the {@code command} if it is a positive
@@ -109,16 +111,16 @@ public class ParserUtil {
 	return description.isPresent() ? Optional.of(new Description(description.get())) : Optional.empty();
     }
 
-    public static Optional<Recurrence> parseRecurrence(Optional<String> recurrence) throws IllegalValueException {
-	// TODO
-	throw new UnsupportedOperationException();
+    public static Optional<String> parseRecurrence(Optional<String> recurrence) throws IllegalValueException {
+	assert recurrence != null;
+	return recurrence.isPresent() ? recurrence : Optional.empty();
     }
 
     /**
      * Parses a {@code Optional<String> schedule} into an
      * {@code Optional<List<Date>>} if {@code schedule} is present.
      */
-    public static Optional<List<Date>> parseSchedule(Optional<String> schedule) throws IllegalValueException {
+    public static Optional<List<Date>> parseDateList(Optional<String> schedule) throws IllegalValueException {
 	// String -> DateList -> Optional
 	assert schedule != null;
 	if (schedule.isPresent()) {
@@ -126,6 +128,19 @@ public class ParserUtil {
 	} else {
 	    return Optional.empty();
 	}
+    }
+    
+    /**
+     * Parses a {@code Optional<String> dateString} into an
+     * {@code Optional<Date>} if {@code dateString} is present
+     */
+    public static Optional<Date> parseDateSingle(Optional<String> dateString) throws IllegalValueException {
+        assert dateString != null;
+        if (dateString.isPresent()) {
+            return Optional.of(parseSingleDate(dateString.get()));
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**
@@ -162,6 +177,9 @@ public class ParserUtil {
     public static Date parseSingleDate(String words) throws IllegalValueException {
 	List<Date> dates = parseDateTime(words);
 	// Assert.assertEquals(1, dates.size());
+	if (dates.size() != NUMBER_SINGLE) {
+	    throw new IllegalValueException(MESSAGE_WRONG_DATE_NUMBER);
+	}
 	return dates.get(0);
     }
 
