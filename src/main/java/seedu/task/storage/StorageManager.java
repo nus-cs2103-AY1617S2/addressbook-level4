@@ -82,18 +82,28 @@ public class StorageManager extends ComponentManager implements Storage {
 
     //@@author A0163559U
     @Override
+    /**
+     * Saves current state of task list in new location.
+     */
     public void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException {
         logger.fine("Attempting to copy task manager data to file: " + newFile.toString());
         taskListStorage.saveTaskListInNewLocation(taskList, newFile);
     }
 
     @Override
+    /**
+     * Attempts to load a stored task list into the task manager.
+     */
     public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
             throws FileNotFoundException, DataConversionException {
         logger.fine("Attempting to load task manager data from file: " + loadFile.toString());
         return taskListStorage.loadTaskListFromNewLocation(taskList, loadFile);
     }
 
+    /**
+     * Updates internal state data as storage support.
+     * @param file File to update state
+     */
     public void updateXmlTaskListStorage(File file) {
         XmlTaskListStorage xmlTaskListStorage = (XmlTaskListStorage) taskListStorage;
         xmlTaskListStorage.updateState(file);;
