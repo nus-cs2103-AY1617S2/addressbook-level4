@@ -17,7 +17,7 @@ public class UncompleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNCOMPLETE_TODO_SUCCESS = "Uncompleted Todo: %1$s";
+    public static final String MESSAGE_UNCOMPLETE_TODO_SUCCESS = "[Uncompleted]: %1$s";
 
     public static final String MESSAGE_TODO_NOT_COMPLETE = "This todo is not complete";
 

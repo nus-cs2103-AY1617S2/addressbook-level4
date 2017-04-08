@@ -27,7 +27,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 Take Dog for a walk";
 
-    public static final String MESSAGE_EDIT_TODO_SUCCESS = "Edited Todo: %1$s";
+    public static final String MESSAGE_EDIT_TODO_SUCCESS = "[Edited]: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TODO = "This todo already exists in the address book.";
 

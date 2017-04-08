@@ -45,22 +45,24 @@ public interface ReadOnlyTodo {
         builder.append(getName());
 
         if (getStartTime() != null) {
-            builder.append(" Start: ")
+            builder.append("\n[Start]: ")
                 .append(getStartTime());
         }
 
         if (getEndTime() != null) {
-            builder.append(" End: ")
+            builder.append("\n[End]: ")
                 .append(getEndTime());
         }
 
         if (getCompleteTime() != null) {
-            builder.append(" Complete: ")
+            builder.append("\n[Complete]: ")
                 .append(getCompleteTime());
         }
 
-        builder.append(" Tags: ");
-        builder.append(getTagsAsString());
+        if (!getTagsAsString().isEmpty()) {
+            builder.append("\n[Tags]: ");
+            builder.append(getTagsAsString());
+        }
 
         return builder.toString();
     }
