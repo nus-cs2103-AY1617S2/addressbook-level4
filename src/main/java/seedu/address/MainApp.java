@@ -1,6 +1,5 @@
 package seedu.address;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +17,6 @@ import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -59,8 +57,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskListFilePath(), config.getUserPrefsFilePath(),
-                                     initConfigFilePath(getApplicationParameter("config")));
+        storage = new StorageManager(config.getTaskListFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -108,10 +105,11 @@ public class MainApp extends Application {
         Config initializedConfig;
         String configFilePathUsed;
 
-        configFilePathUsed = initConfigFilePath(configFilePath);
+        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
-        if (configFilePathUsed.equals(configFilePath)) {
+        if (configFilePath != null) {
             logger.info("Custom Config file specified " + configFilePath);
+            configFilePathUsed = configFilePath;
         }
 
         logger.info("Using config file : " + configFilePathUsed);
@@ -167,21 +165,6 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
-    //@@author A0148052L
-    protected String initConfigFilePath(String filePath) {
-        if (filePath == null) {
-            return Config.DEFAULT_CONFIG_FILE;
-        }
-        try {
-            File newFile = new File(filePath);
-            FileUtil.createIfMissing(newFile);
-            return filePath;
-        } catch (IOException e) {
-            return Config.DEFAULT_CONFIG_FILE;
-        }
-    }
-
-    //@@author
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);

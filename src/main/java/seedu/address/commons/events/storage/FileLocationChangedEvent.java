@@ -5,6 +5,9 @@ package seedu.address.commons.events.storage;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyTaskList;
 
+/**
+ * Indicates the file location has been changed
+ */
 public class FileLocationChangedEvent extends BaseEvent {
 
     private String filePath;

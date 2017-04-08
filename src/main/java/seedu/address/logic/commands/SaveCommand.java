@@ -26,6 +26,8 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Task list has been saved!";
     public static final String MESSAGE_INVALID_FILE_PATH = "Do not have the permission to access the file path "
                                                      + "chosen or cannot find file." + "Please change file path.";
+    public static final String MESSAGE_INVALID_FILE_NAME = "Did not enter file name "
+                                                           + "or did not end file name with '.xml'";
 
     private String filePath;
 
@@ -35,6 +37,9 @@ public class SaveCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        if (isFileNameInvalid(filePath)) {
+            return new CommandResult(String.format(MESSAGE_INVALID_FILE_NAME, filePath));
+        }
         try {
             File file = new File(filePath);
             FileUtil.createIfMissing(file);
@@ -49,5 +54,7 @@ public class SaveCommand extends Command {
         }
     }
 
-
+    private boolean isFileNameInvalid(String filePath) {
+        return (!filePath.endsWith(".xml") || filePath.endsWith("\\.xml"));
+    }
 }
