@@ -17,7 +17,7 @@ public class StatusBarFooterTest extends TaskManagerGuiTest {
     public final String fileName = "\\taskmanager.xml";
 
     @Test
-    public void showSyncStatus() {
+    public void statusBarFooter_showSyncStatus_success() {
         // at startup
         assertEquals(statusBarFooter.getSyncStatus().getText(), "Not updated yet in this session");
 
@@ -28,7 +28,7 @@ public class StatusBarFooterTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void showSaveLocation() {
+    public void statusBarFooter_showSaveLocation_success() {
         // save command
         commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1);
         String filePath = saveFolder1 + fileName;
