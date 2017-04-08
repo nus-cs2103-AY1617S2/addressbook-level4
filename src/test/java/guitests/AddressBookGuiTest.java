@@ -13,6 +13,7 @@ import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CalenderPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -55,6 +56,7 @@ public abstract class AddressBookGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
+    protected CalenderPanelHandle calenderPanel;
     private Stage stage;
 
     @BeforeClass
@@ -76,6 +78,7 @@ public abstract class AddressBookGuiTest {
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             browserPanel = mainGui.getBrowserPanel();
+            calenderPanel = mainGui.getCalenderPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
