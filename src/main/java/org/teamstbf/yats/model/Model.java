@@ -77,9 +77,9 @@ public interface Model {
     void updateCalendarFilteredListToShowStartTime();
 
     /**
-     * Updates the filter of the Task filtered event list to show done task
+     * Updates the filter of the Done task filtered event list to show done task
      */
-    void updateTaskFilteredListToShowDone();
+    void updateDoneTaskList();
 
     /**
      * Updates the filter of the filtered event list to show specified location
