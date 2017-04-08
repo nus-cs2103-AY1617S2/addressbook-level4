@@ -38,6 +38,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: JavaFX, Natty
 * Features implemented:
     * Add task with time
+    * Reschedule a task
     * Command History
     * Power Search
 
@@ -68,7 +69,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
     * Updating of documentation
     * Updating of test cases to improve the coverage
-    * highlight of task after add and edit command
+    * Highlight of task after add and edit command
 * Aspects responsible for:
     * Code quality
     * Ensuring project deliverables are done on time and in the right format
