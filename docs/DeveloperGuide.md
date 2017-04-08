@@ -199,7 +199,7 @@ The sections below give more details for each component.
 
 ### 3.2. User Interface (UI) Component
 
-Author: Tan Yu Wei
+**Author:** Tan Yu Wei
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
@@ -275,6 +275,8 @@ _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Comma
 
 ### 3.4. Model Component
 
+**Author:** Lim Shun Xian
+
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
@@ -294,6 +296,8 @@ updates when this list is modified. <br>
 `Model` does not depend on any of the other three components.
 
 ### 3.5. Storage Component
+
+**Author:** Lim Shun Xian
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
@@ -362,7 +366,7 @@ These are _System Tests_ that test the entire Tache by simulating user actions o
 [Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
 
-Author: Tan Yu Wei
+**Author:** Tan Yu Wei
 
 Because the [CalendarPanel](#calendarpanel)'s functionality is provided by JavaScript,
 testing its functions fully using the _JUnit framework_ is not possible given that JUnit only
@@ -511,7 +515,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-Author: Tan Yu Wei
+**Author:** Tan Yu Wei
 
 ### Use case: Show possible commands to be executed
 
@@ -534,19 +538,35 @@ Use case ends.
 
 > Use case resumes at step 2
 
+**Author:** Lim Shun Xian
+
 ### Use case: Change save location
 
 **MSS**
 
-1. `User` requests to change data file location
-2. `Tache` displays a directory chooser
-3. `User` selects a directory
-4. `Tache` changes the save location to the one selected <br>
+1. `User` requests to change data file location by typing the directory to save to
+2. `Tache` changes the save location to the one selected <br>
 Use case ends.
 
 **Extensions**
 
-3a. `User` cancels the request
+2a. `User` enters an invalid directory to save the file
+
+> Use case ends
+
+**Author:** Lim Shun Xian
+
+### Use case: Loads save file
+
+**MSS**
+
+1. `User` requests to load data file by typing the file path
+2. `Tache` reads the data from the file and display it on the main window <br>
+Use case ends.
+
+**Extensions**
+
+2a. `User` enters an invalid file path
 
 > Use case ends
 

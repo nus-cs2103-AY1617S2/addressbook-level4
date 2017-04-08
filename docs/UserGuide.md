@@ -173,7 +173,7 @@ Format: **`list`** <br>
 This lists all your uncompleted tasks. <br>
 
 Format: **`list`** `<filter>`<br>
-E.g. **`list`** `completed`, **`list`** `all`, **`list`** `floating`, **`list`** `timed` <br>
+E.g. **`list`** `completed`, **`list`** `all`, **`list`** `floating`, **`list`** `timed`, **`list`** `overdue`, **`list`** `today`, **`list`** `this week`<br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.3.2. List Command_
