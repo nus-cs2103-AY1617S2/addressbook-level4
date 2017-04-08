@@ -301,7 +301,7 @@ public class MainWindow extends UiPart<Region> {
         closeDialogOnNextKeyPress();
     }
 
-  //@@author A0135739W
+    //@@author A0135739W
     public void handleTags(String tagsString) {
         JFXDialogLayout content = new JFXDialogLayout();
         Text headerText = new Text("List of All Tags:");
@@ -313,14 +313,7 @@ public class MainWindow extends UiPart<Region> {
         closeDialog();
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
-        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                ke.consume();
-                closeDialog();
-                commandBox.resetKeyListener();
-            }
-        });
+        closeDialogOnNextKeyPress();
     }
 
     // @@author
