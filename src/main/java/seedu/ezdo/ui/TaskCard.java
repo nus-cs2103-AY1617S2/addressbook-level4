@@ -169,11 +169,11 @@ public class TaskCard extends UiPart<Region> {
 
     // ========================= STATUS ============================ //
     private void setStatus(ReadOnlyTask task) {
-        if (task.getDone()) {
-            status.setGraphic(new ImageView("/images/tick.png"));
-        }
         if (task.getStarted()) {
             status.setGraphic(new ImageView("/images/wip.png"));
+        }
+        if (task.getDone()) {
+            status.setGraphic(new ImageView("/images/tick.png"));
         }
     }
 
