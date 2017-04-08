@@ -19,8 +19,8 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
-     > Having any Java 8 version is not enough. <br>
-     > This app will not work with earlier versions of Java 8.
+      > Having any Java 8 version is not enough. <br>
+      > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `opus.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
@@ -52,7 +52,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 ### 2.1. Viewing help : `help`
 
-Brings up a browser window that loads the user guide of Opus.
+Brings up the user guide of Opus.
 
 Format: `help`
 
@@ -60,14 +60,14 @@ Format: `help`
 
 ### 2.2. Adding a task: `add`
 
-Adds a task to the task manager. `add` command allows multiple attributes including dates as described in the command format below. For dates, they have to be in the US format which is `mm/dd/yyy hh:mm` or  flexible expressions such as `next friday 11pm` or `tomorrow noon`.  <br>
+Adds a task to the task manager. `add` command allows multiple attributes including dates as described in the command format below. For entering dates, you should follow the US format which is `mm/dd/yyy hh:mm` for absolute values or  flexible expressions such as `next friday 11pm` or `tomorrow noon`.  <br>
 Format: `add NAME [n/NOTES] [b/STARTTIME] [e/ENDTIME] [p/PRIORITY] [t/TAG]...`
 
-> * NOTES : Can contain any alphanumeric inputs, or left empty.
+> * NOTES : Can contain any alphanumeric inputs.
 > * STARTTIME: Can have any date and time but not before the current moment.
 > * ENDTIME : Can have any date and time but not before the current moment and the start time.
-> * PRIORITY : Can have a ranking of hi, mid, low, or left empty.
-> * TAG: Can have any number of tags, or left empty.
+> * PRIORITY : Can have a ranking of hi, mid, low.
+> * TAG: Can have any number of tags.
 
 Examples:
 
@@ -77,7 +77,7 @@ Examples:
 
 * `add Orientation camp n/Urgent b/02/28/2017 12:00 e/02/29/2017 12:00 p/hi t/SOC t/NUS`
 
-  Adds an high priority event called `Orientation camp`  with the note, `Urgent`, and the tags, `SOC` and `NUS` . The event start time is set to `Feb 28, 2017 noon` and the end time is set to `Feb 29, 2017 noon`.
+  Adds a high-priority event called `Orientation camp`  with the note, `Urgent`, and the tags, `SOC` and `NUS` . The event's start time is set to `Feb 28, 2017 noon` and the end time is set to `Feb 29, 2017 noon`.
 
 * `add Finish assignment e/next Sunday 6pm`
 
@@ -136,7 +136,7 @@ Format: `mark [INDEX]`
 Examples:
 
 * `mark 3`<br>
-  Marks the task at index 3 as `complete` if it is incomplete and as `incomplete` if it is complete.
+  Marks the task at index 3 as `complete` if it is incomplete and as `incomplete` if its status is set as complete.
 
 ### 2.8. Schedule: `schedule`
 
@@ -144,7 +144,7 @@ Sets an event or a deadline of a task.<br>
 Format: `schedule INDEX [STARTTIME] to ENDTIME`
 
 > * Set the start time and the end time of the task.
-> * Both `[STARTTIME]` and `[ENDTIME]` have to be in the US format of `mm/dd/yyyy hh:mm` or flexible expressions such as `next friday 11pm` or `tomorrow noon`.
+> * Both `STARTTIME` and `ENDTIME` have to be in the US format of `mm/dd/yyyy hh:mm` or flexible expressions such as `next friday 11pm` or `tomorrow noon`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
 > * If only one datetime is specified, opus will automatically schedule for `ENDTIME`
@@ -197,8 +197,8 @@ Format: `find [KEYWORD]... [s/STATUS] [b/STARTTIME] [e/ENDTIME] [p/PRIORITY]`
 > * Displays the list of tasks matching the search parameters
 > * `find` without parameters will display the help section for the command
 > * `find` requires minimal of one parameter
-> * `[KEYWORD]` can be a text segment from either name, note or tags.
-> * Specifying `[STARTTIME]` will show the tasks before the specified time and specifying `[ENDTIME]` will perform the same behaviour as the `[STARTTIME]`.
+> * `KEYWORD` can be a text segment from either name, note or tags.
+> * Specifying `STARTTIME` will show the tasks before the specified time and specifying `ENDTIME` will perform the same behaviour as the `STARTTIME`.
 
 Examples:
 
