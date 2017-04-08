@@ -234,6 +234,18 @@ Function of `Logic`
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
+Add Command
+
+When Add Command is used, user's input will be checked in the AddCommandParser. In the AddCommandParser, it will check
+for the type of task. There are three types of task and they are floating task(no date, no time), deadline task(date/time present),
+event task(Start and End date present). There are three addCommand with different number of parameter to handle the three type of task.
+After checking for the type of task, AddCommandParser will call the corresponding addCommand to add the task.
+
+Given below is the Activity Diagram when the information reached `AddCommandParser`
+
+<img src="images/addCommandParser.PNG" width="800"><br>
+_Figure 3.3.2 : Actions taken within `AddCommandParser`_
+
 Additional Commands
 
 * Redo Command - It is able to redo only if an undo command has been executed before.
@@ -250,14 +262,13 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
  
 <img src="images/deleteCommand.PNG" width="800"><br>
- 
-_Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
+_Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")`
  API call. Notice the differences between the remove and undo commands.<br>
 
 <img src="images/undoCommand.PNG" width="800"><br>
-_Figure 3.3.3 : Interactions Inside the Logic Component for the `undo` Command_
+_Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 
 ### 3.4. Model component
