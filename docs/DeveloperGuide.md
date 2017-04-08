@@ -236,6 +236,7 @@ Function of `Logic`
 ```
 
 Purpose of `CliSyntax`
+
 The `CliSyntax` class stores the prefix that is used to detect input and differentiate it from different details. The prefix used are
 "by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in add
 and edit commands.
@@ -254,11 +255,6 @@ Given below is the Activity Diagram when the information reached `AddCommandPars
 <img src="images/addCommandParser.PNG" width="800"><br>
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
-`Edit Command` - It is able to edit a task using Index.
-This function make use of the Optional class to update the task.
-
-`Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
-
 `Delete Command` - It is able to delete a task using Index.
 This function can only work if the given index is valid.
 
@@ -267,6 +263,11 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  
 <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
+
+`Edit Command` - It is able to edit a task using Index.
+This function make use of the Optional class to update the task.
+
+`Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
 
 `Find Command` - It is able to find a task with the specified name or date
 This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
