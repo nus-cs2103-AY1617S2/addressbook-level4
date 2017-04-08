@@ -21,6 +21,30 @@ public class UnfinishCommandParser {
     }
 }
 ```
+###### \java\seedu\doist\MainApp.java
+``` java
+    protected static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
+        Optional<ReadOnlyAliasListMap> aliasListMapOptional;
+        ReadOnlyAliasListMap initialAliasData;
+        try {
+            aliasListMapOptional = storage.readAliasListMap();
+            if (!aliasListMapOptional.isPresent()) {
+                LOGGER.info("Data file not found. Will be starting with the default alias list map");
+                initialAliasData = new AliasListMap();
+            } else {
+                initialAliasData = aliasListMapOptional.get();
+            }
+        } catch (DataConversionException e) {
+            LOGGER.warning("Data file not in the correct format. Will be starting with the default alias list map");
+            initialAliasData = new AliasListMap();
+        } catch (IOException e) {
+            LOGGER.warning("Problem while reading from the file. Will be starting with the default alias list map");
+            initialAliasData = new AliasListMap();
+        }
+        return initialAliasData;
+    }
+
+```
 ###### \java\seedu\doist\storage\AliasListMapStorage.java
 ``` java
 /**
