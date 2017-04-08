@@ -7,7 +7,6 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
-import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -396,6 +395,30 @@ public class LogicManagerTest {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
 
+    // @@author A0114269E
+    @Test
+    public void execute_doneInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("done", expectedMessage);
+    }
+
+    @Test
+    public void execute_doneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("done");
+    }
+
+    @Test
+    public void execute_undoneInvalidArgsFormat_errorMessageShown() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE);
+        assertIncorrectIndexFormatBehaviorForCommand("undone", expectedMessage);
+    }
+
+    @Test
+    public void execute_undoneIndexNotFound_errorMessageShown() throws Exception {
+        assertIndexNotFoundBehaviorForCommand("undone");
+    }
+    // @@author
+
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -781,10 +804,10 @@ public class LogicManagerTest {
         model.setSelectedTab(TAB_DONE);
 
         // execute command and verify result
-        assertCommandSuccess("undone 2", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_SUCCESS, tTarget4), expectedTM,
-                expectedList);
+        assertCommandSuccess("undone 2", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_SUCCESS, tTarget4),
+                expectedTM, expectedList);
     }
-    
+
     @Test
     public void execute_undone_alreadyUndoneFailure() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -795,7 +818,6 @@ public class LogicManagerTest {
 
         List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
         helper.addToModel(model, initialTasks);
-        model.setSelectedTab(TAB_TO_DO);
 
         // execute command and verify result
         assertCommandFailure("undone 3", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_FAILURE));
