@@ -190,7 +190,7 @@ public class UnmarkCommandTest extends TaskBossGuiTest {
         TestTask terminatedTask = new TaskBuilder(taskToTerminate).build();
         TestTask[] resultList = { terminatedTask };
 
-        assertUnmarkSuccess(commandType,false, filteredTaskListIndex,
+        assertUnmarkSuccess(commandType, false, filteredTaskListIndex,
                 taskBossIndex, terminatedTask, resultList);
     }
 
