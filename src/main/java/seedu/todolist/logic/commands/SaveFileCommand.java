@@ -33,8 +33,16 @@ public class SaveFileCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         try {
-            // If the file does not exist, create it (as per Ashkay's recommendations)
+            // If the file or the directories do not exist, create it (as per Ashkay's recommendations)
             File f = new File(saveFilePath);
+            String fileName = f.getName();
+            String directory = saveFilePath.substring(0, saveFilePath.indexOf(fileName));
+            File folders = new File(directory);
+
+            if (!folders.exists()) {
+                folders.mkdirs();
+            }
+
             final boolean fileCreated = f.createNewFile();
 
             if (fileCreated) {
