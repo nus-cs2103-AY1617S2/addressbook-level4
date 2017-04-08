@@ -41,9 +41,9 @@ public class ListCommand extends Command {
                   return new CommandResult(MESSAGE_SUCCESS_ALL);
 
               case LIST_TODAY:
-                  taskListSize=model.updateFilteredTaskList(parameter);
+                  taskListSize = model.updateFilteredTaskList(parameter);
                   assert(taskListSize>=0);
-                  if(taskListSize==0){
+                  if(taskListSize == 0){
                       return new CommandResult(MESSAGE_NO_TASK_TODAY);
                   }
                   return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));

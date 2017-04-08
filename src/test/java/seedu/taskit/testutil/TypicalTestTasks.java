@@ -3,7 +3,7 @@
 package seedu.taskit.testutil;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
-import seedu.taskit.model.AddressBook;
+import seedu.taskit.model.TaskManager;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
 import seedu.taskit.model.task.Date;
@@ -54,7 +54,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -79,8 +79,8 @@ public class TypicalTestTasks {
         return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
     }//@@author
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public TaskManager getTypicalAddressBook() {
+        TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

@@ -40,7 +40,7 @@ import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook taskManager;
+    private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@A0141011J
@@ -51,28 +51,28 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.taskManager = new AddressBook(addressBook);
+        this.taskManager = new TaskManager(addressBook);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyTaskManager getAddressBook() {
         return taskManager;
     }
 
@@ -288,11 +288,11 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/functions used for filtering =================================================
 
     private static class State {
-        final ReadOnlyAddressBook data;
+        final ReadOnlyTaskManager data;
         final Predicate<? super ReadOnlyTask> filterPredicate;
 
         public State(ModelManager mm) {
-            data = new AddressBook(mm.getAddressBook());
+            data = new TaskManager(mm.getAddressBook());
             filterPredicate = mm.filteredTasks.getPredicate();
         }
     }
