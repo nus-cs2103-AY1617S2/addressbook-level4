@@ -16,7 +16,6 @@ import seedu.taskboss.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskboss.commons.util.FxViewUtil;
 import seedu.taskboss.logic.Logic;
 import seedu.taskboss.model.UserPrefs;
-import seedu.taskboss.model.category.Category;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +33,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private TaskListPanel taskListPanel;
+    private CategoryListPanel categoryListPanel;
     private Config config;
 
     @FXML
@@ -112,8 +112,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        CategoryListPanel categoryListPanel;
-
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBossFilePath());
@@ -122,14 +120,6 @@ public class MainWindow extends UiPart<Region> {
         categoryListPanel.setTaskList(logic.getTaskBoss().getTaskList());
         categoryListPanel.setCategoryList(logic.getTaskBoss().getCategoryList());
         categoryListPanel.syncCategoryTaskCount();
-    }
-
-    //@@author A0143157J
-    /**
-     * Loads tasks from the selected category
-     */
-    public void loadCategorySelection(Category category) {
-        logic.updateFilteredTaskListByCategory(category);
     }
 
     //@@author
@@ -214,5 +204,9 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+
+    public CategoryListPanel getCategoryListPanel() {
+        return this.categoryListPanel;
     }
 }

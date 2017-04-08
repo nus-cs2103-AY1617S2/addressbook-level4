@@ -55,7 +55,7 @@
                         <ImageView fx:id="priorityLevel" disable="false" fitHeight="22.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true"/>
                         <Label fx:id="startDateTime" prefHeight="17.0" prefWidth="268.0" styleClass="cell_small_label" text="\$startDateTime"/>
                         <Label fx:id="endDateTime" prefHeight="17.0" prefWidth="272.0" styleClass="cell_small_label" text="\$endDateTime"/>
-                        <Label fx:id="recurrence" prefHeight="14.0" prefWidth="96.0" styleClass="cell_small_label" text="\$recurrence" />
+                        <Label fx:id="recurrence" prefHeight="14.0" prefWidth="96.0" styleClass="cell_small_label" text="\$recurrence"/>
                </children>
             </VBox>
          </children>

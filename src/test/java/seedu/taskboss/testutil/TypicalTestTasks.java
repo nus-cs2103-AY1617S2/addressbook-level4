@@ -34,28 +34,32 @@ public class TypicalTestTasks {
                     .withStartDateTime("Feb 19, 2017 11pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withRecurrence(Frequency.NONE)
-                    .withInformation("wall street").build();
+                    .withInformation("wall street")
+                    .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
             taskD = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                     .withStartDateTime("Feb 20, 2017 11.30pm")
                     .withEndDateTime("Apr 28, 2017 3pm")
                     .withRecurrence(Frequency.NONE)
-                    .withInformation("10th street").build();
+                    .withInformation("10th street")
+                    .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
             taskE = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
                     .withStartDateTime("Feb 22, 2017 5pm")
                     .withEndDateTime("Feb 28, 2017 5pm")
                     .withRecurrence(Frequency.MONTHLY)
-                    .withInformation("michegan ave").build();
+                    .withInformation("michegan ave")
+                    .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
             taskF = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
                     .withStartDateTime("Feb 21, 2017 1pm")
                     .withEndDateTime("Dec 10, 2017 5pm")
                     .withRecurrence(Frequency.WEEKLY)
                     .withInformation("little tokyo")
-                    .withCategories("School").build();
+                    .withCategories("School", AddCommand.BUILT_IN_ALL_TASKS).build();
             taskG = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
                     .withStartDateTime("Jan 1, 2017 5pm")
                     .withEndDateTime("Nov 28, 2017 5pm")
                     .withRecurrence(Frequency.DAILY)
-                    .withInformation("4th street").build();
+                    .withInformation("4th street")
+                    .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
             // Manually added
             taskH = new TaskBuilder().withName("Having dinner with Hoon Meier").withPriorityLevel("Yes")

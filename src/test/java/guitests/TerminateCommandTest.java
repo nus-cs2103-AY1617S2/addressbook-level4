@@ -38,7 +38,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withInformation("michegan ave")
                 .withCategories("Done").build();
 
-        assertTerminateSuccess(false, false, taskBossIndex, taskBossIndex, terminatedTask);
+        assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
 
     /*
@@ -110,7 +110,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withInformation("michegan ave")
                 .withCategories("Done").build();
 
-        assertTerminateSuccess(false, false, taskBossIndex, taskBossIndex, terminatedTask);
+        assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
 
     /*
@@ -131,7 +131,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withInformation("4th street")
                 .withCategories("Done").build();
 
-        assertTerminateSuccess(false, true, taskBossIndex, taskBossIndex, terminatedTask);
+        assertTerminateSuccess(true, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
 
   //---------------- Tests for inputing wrong task type--------------------------------------------------------
@@ -159,11 +159,12 @@ public class TerminateCommandTest extends TaskBossGuiTest {
 
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
-
         TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
-        TestTask terminatedTask = new TaskBuilder(taskToTerminate).withCategories("Done").build();
+        TestTask terminatedTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
+        TestTask[] resultList = { markedDoneTask };
 
-        assertTerminateSuccess(true, false, filteredTaskListIndex, taskBossIndex, terminatedTask);
+        assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, terminatedTask, resultList);
+
     }
 
     //---------------- Tests for successfully ending multiple recurring tasks-----------------------
@@ -234,8 +235,8 @@ public class TerminateCommandTest extends TaskBossGuiTest {
 
     //---------------- End of test cases --------------------------------------
 
-    private void assertTerminateSuccess(boolean runFind, boolean isShort, int filteredTaskListIndex, int taskBossIndex,
-            TestTask terminatedTask) {
+    private void assertTerminateSuccess(boolean isShort, int filteredTaskListIndex, int taskBossIndex,
+            TestTask terminatedTask, TestTask[] resultList) {
 
         //@@author A0144904H
         if (isShort) {
@@ -244,19 +245,12 @@ public class TerminateCommandTest extends TaskBossGuiTest {
             commandBox.runCommand("terminate " + filteredTaskListIndex);
         }
 
-        // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskBossIndex - 1] = terminatedTask;
-        if (runFind) {
-            commandBox.runCommand("list ");
-            assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage("Listed all tasks");
-        } else {
-            assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
-                    "1. " + terminatedTask));
-        }
+        assertTrue(taskListPanel.isListMatching(resultList));
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS ,
+                            "[" + terminatedTask + "]"));
 
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(taskListPanel.isListMatching(resultList));
     }
 
     //@@author

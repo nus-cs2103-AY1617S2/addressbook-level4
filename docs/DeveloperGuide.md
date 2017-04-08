@@ -166,7 +166,7 @@ The [**`UI`**](#32-ui-component) component,
 
 ### 3.3. Logic component
 
-Author: Soh Wei Kiat Melvin
+Author: Alsharef Haya Fayez M
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -204,7 +204,7 @@ The [**`Model`**](#34-model-component) component,
 
 ### 3.5. Storage component
 
-Author: Al Sharef Haya Fayez M
+Author: Soh Wei Kiat Melvin
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
