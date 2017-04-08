@@ -6,8 +6,10 @@ import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.whatsleft.commons.core.ComponentManager;
+import seedu.whatsleft.commons.core.EventsCenter;
 import seedu.whatsleft.commons.core.LogsCenter;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
+import seedu.whatsleft.commons.events.model.ShowStatusChangedEvent;
 import seedu.whatsleft.commons.events.model.WhatsLeftChangedEvent;
 import seedu.whatsleft.commons.exceptions.IllegalValueException;
 import seedu.whatsleft.commons.util.CollectionUtil;
@@ -90,18 +92,24 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateWhatsLeftChanged() {
         raise(new WhatsLeftChangedEvent(whatsLeft));
     }
+    //@@author A0121668A
+    /** Raises an event to indicate the show status has changed */
+    private void indicateShowStatusChanged() {
+        EventsCenter.getInstance().post(new ShowStatusChangedEvent(getDisplayStatus()));
+    }
 
     @Override
     public void setDisplayStatus(String status) {
         displayStatus = status;
         updateFilteredListToShowAll();
+        indicateShowStatusChanged();
     }
 
     @Override
     public String getDisplayStatus() {
         return displayStatus;
     }
-
+    //@@author
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         whatsLeft.removeTask(target);
@@ -263,10 +271,9 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredEventList(Expression expression) {
         filteredEvents.setPredicate(expression::satisfies);
     }
-
-    // ========== Inner classes/interfaces used for filtering
-    // =================================================
     //@@author A0121668A
+    // ========== Inner classes/interfaces used for filtering =================================================
+
     interface Expression {
         boolean satisfies(ReadOnlyTask task);
 

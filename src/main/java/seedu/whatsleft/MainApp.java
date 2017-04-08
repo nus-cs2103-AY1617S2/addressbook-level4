@@ -70,6 +70,10 @@ public class MainApp extends Application {
 
         initEventsCenter();
 
+        initCommand();
+    }
+
+    private void initCommand() {
         SaveCommand.setStorage(storage);
         SaveCommand.setConfig(config);
         ReadCommand.setStorage(storage);
