@@ -15,22 +15,25 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.FileUtil;
+import seedu.task.testutil.TestUtil;
 
 public class SaveCommandTest extends AddressBookGuiTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/SaveCommandTest/");
-    private static final String TEST_CONFIG_FOLDER = FileUtil.getPath("./");
+    private static final String TEST_FOLDER = FileUtil.getPath("./src/test/data/SaveCommandTest/");
+    private static final String TEST_CONFIG_PATH = FileUtil.getPath("./");
     private static final String TEST_CONFIG = "config.json";
-    private static final String INITIAL_CONFIG_FILE_PATH = "changeme.xml";
+    private static final String TEST_XML = "changeme.xml";
 
-    private static final String saveCommand = "save ";
+    private static final String SAVE_COMMAND = "save ";
 
     @Before
     public void reset_config() throws DataConversionException, IOException {
         //System.out.println("Executing Junit before!");
+        String sampleDataFilePath = TestUtil.getFilePathInSandboxFolder(TEST_XML);
+        TestUtil.createDataFileWithSampleData(sampleDataFilePath);
         Optional<Config> opConfig = readConfig(TEST_CONFIG);
         if (opConfig.isPresent()) {
             Config config = opConfig.get();
-            config.setTaskManagerFilePath(INITIAL_CONFIG_FILE_PATH);
+            config.setTaskManagerFilePath(TEST_FOLDER + TEST_XML); //or TEST_FOLDER + TEST_XML?
             saveConfig(config, TEST_CONFIG);
             System.out.println("Reset TaskManagerFilePath to " +
                     config.getTaskManagerFilePath());
@@ -43,9 +46,6 @@ public class SaveCommandTest extends AddressBookGuiTest {
     public void save_success() throws IllegalValueException, DataConversionException {
         String[] saveFiles = {"blooper", "taskmanager.xml", "data/taskmanager.xml",
                 "data/taskmanager", "taskmanager"};
-        // String saveFile = "data/taskmanager.xml";
-        // String saveFile = "taskmanager";
-        // String saveFile = "data/taskmanager";
         for (String saveFile : saveFiles) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(saveFile);
@@ -54,7 +54,8 @@ public class SaveCommandTest extends AddressBookGuiTest {
 
     private void assertSaveSuccess(String saveFile) throws DataConversionException {
         System.out.println("before save: " + getFilePathFromConfig());
-        commandBox.runCommand(saveCommand + saveFile);
+        saveFile = TEST_FOLDER + saveFile;
+        commandBox.runCommand(SAVE_COMMAND + saveFile);
 
         //confirm config file is updated properly
 
@@ -92,7 +93,7 @@ public class SaveCommandTest extends AddressBookGuiTest {
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
         return configFileInTestDataFolder != null
-                ? TEST_CONFIG_FOLDER + configFileInTestDataFolder
+                ? TEST_CONFIG_PATH + configFileInTestDataFolder
                         : null;
     }
 }
