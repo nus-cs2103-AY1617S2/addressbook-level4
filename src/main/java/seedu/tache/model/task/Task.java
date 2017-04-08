@@ -163,6 +163,26 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public List<Task> getCompletedRecurList() {
+        assert startDateTime.isPresent();
+        assert endDateTime.isPresent();
+
+        List<Task> completedRecurList = new ArrayList<Task>();
+        List<Date> completedRecurDates = this.recurState.getCompletedRecurDates(startDateTime.get(),
+                                                                                    endDateTime.get(), null);
+        for (int i = 0; i < completedRecurDates.size(); i++) {
+            Task temp = new Task(this);
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String tempDate = df.format(completedRecurDates.get(i));
+            temp.getRecurState().setRecurDisplayDate(tempDate);
+            temp.setActiveStatus(false);
+            completedRecurList.add(temp);
+        }
+
+        return completedRecurList;
+    }
+
+    @Override
     public List<Task> getUncompletedRecurList() {
         assert startDateTime.isPresent();
         assert endDateTime.isPresent();
