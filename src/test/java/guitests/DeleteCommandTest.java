@@ -1,10 +1,10 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.watodo.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
+import seedu.watodo.logic.commands.DeleteCommand;
 import seedu.watodo.testutil.TestTask;
 import seedu.watodo.testutil.TestUtil;
 
@@ -49,7 +49,9 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+
+        assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL, taskToDelete));
+
     }
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.watodo.model.task.ReadOnlyTask;
 
 //@@author A0139845R-reused
-public class TaskCard extends UiPart<Region> {
+public class ImportantTaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
 
@@ -28,10 +28,10 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
 
 
-    public TaskCard(ReadOnlyTask task, int displayedIndex) {
+    public ImportantTaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
         description.setText(task.getDescription().fullDescription);
-        id.setText(displayedIndex + ". ");
+        id.setText("! ");
         setStartDate(task);
         setEndDate(task);
         setStatus(task);
@@ -46,17 +46,8 @@ public class TaskCard extends UiPart<Region> {
         status.setText(task.getStatus().toString());
         if (task.getStatus().toString().equals("Done")) {
             cardPane.setStyle("-fx-background-color: #5c5c5c;");
-            description.setStyle("-fx-text-fill: #6dc006;");
-            setLabelsColourGreen();
-
+            description.setStyle("-fx-text-fill: green !important;");
         }
-    }
-
-    private void setLabelsColourGreen() {
-        status.setStyle("-fx-text-fill: #6dc006;");
-        id.setStyle("-fx-text-fill: #6dc006;");
-        startDate.setStyle("-fx-text-fill: #6dc006;");
-        endDate.setStyle("-fx-text-fill: #6dc006;");
     }
 
     /**
@@ -66,7 +57,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setEndDate(ReadOnlyTask task) {
         if (task.getEndDate() != null) {
-            endDate.setText(task.getEndDate().toString());
+            endDate.setText("By: " + task.getEndDate());
         } else {
             endDate.setText("");
         }
@@ -85,7 +76,7 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private void initTags(ReadOnlyTask task) {
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask person) {
+        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
