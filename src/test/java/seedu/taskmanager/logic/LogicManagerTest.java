@@ -32,6 +32,7 @@ import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.DeleteCommand;
+import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
@@ -52,6 +53,7 @@ import seedu.taskmanager.model.task.Description;
 import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.StartDate;
+import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.storage.StorageManager;
@@ -464,7 +466,7 @@ public class LogicManagerTest {
         assertCommandSuccess("find KEY", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedTM,
                 expectedList);
     }
-    // @@authro
+    // @@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -498,6 +500,22 @@ public class LogicManagerTest {
                 LoadCommand.MESSAGE_INVALID_DATA);
         assertCommandFailure("load src/test/data/cd_test/invalid.xml",
                 LoadCommand.MESSAGE_INVALID_DATA);
+    }
+
+    @Test
+    public void execute_done_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task t1 = helper.generateTask(1);
+        Task t2 = helper.generateTask(2);
+        Task t3 = helper.generateTask(3);
+
+        List<Task> threeTasks = helper.generateTaskList(t1, t2, t3);
+        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
+        helper.addToModel(model, threeTasks);
+        
+        // execute command and verify result
+        assertCommandSuccess("done 1", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, t1),
+                expectedTM, expectedTM.getTaskList());
     }
     // @@author
 
@@ -581,6 +599,23 @@ public class LogicManagerTest {
             return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
                     Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
+        }
+
+        /**
+         * Generates a valid task using the given seed and set status. Running this function
+         * with the same parameter values guarantees the returned task will have
+         * the same state. Each unique seed will generate a unique Task object.
+         *
+         * @param seed
+         *            used to generate the task data field values
+         * @param status
+         *            used to generate the status of the task
+         */
+        Task generateTaskWithStatus(int seed, boolean status) throws Exception {
+            return new Task(new Title("Task " + seed), Optional.of(new StartDate("01/01/2017")),
+                    Optional.of(new EndDate("01/01/2017")), Optional.of(new Description("House of " + seed)),
+                    new Status(status), new UniqueTagList(new Tag("tag" + Math.abs(seed)),
+                    new Tag("tag" + Math.abs(seed + 1))));
         }
 
         /** Generates the correct add command based on the task given */
