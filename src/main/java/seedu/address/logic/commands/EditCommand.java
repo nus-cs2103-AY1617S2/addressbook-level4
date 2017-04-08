@@ -105,7 +105,7 @@ public class EditCommand extends Command {
             updatedDeadline = editTaskDescriptor.getDeadline();
         } else {
             updatedStartingTime = taskToEdit.getStartingTime();
-            updatedDeadline = editTaskDescriptor.getDeadline();
+            updatedDeadline = taskToEdit.getDeadline();
         }
 
         return Task.createTask(updatedName, updatedTags, updatedDeadline,
