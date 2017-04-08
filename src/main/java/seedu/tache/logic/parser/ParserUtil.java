@@ -316,15 +316,17 @@ public class ParserUtil {
         return DateTime.isDate(s);
     }
     /**
-     * Checks if the given string exists in the strArray. Check is case insensitive
+     * Checks if the given string exists in any of the arrays in strArrays. Check is case insensitive
      * @param s String to check
-     * @param strArray Array of Strings to check against
+     * @param strArrays Arrays of Strings to check against
      * @return true if s is in strArray, false otherwise
      */
-    public static boolean isFoundIn(String s, String[] strArray) {
-        for (String str: strArray) {
-            if (s.equalsIgnoreCase(str)) {
-                return true;
+    public static boolean isFoundIn(String s, String[]... strArrays) {
+        for (String[] strArray: strArrays) {
+            for (String str: strArray) {
+                if (s.equalsIgnoreCase(str)) {
+                    return true;
+                }
             }
         }
         return false;
