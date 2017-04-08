@@ -20,6 +20,7 @@ import seedu.doit.commons.core.LogsCenter;
 import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.commands.Command;
 
+//@@author A0160076L
 /**
  * Controller for a help page
  */
@@ -35,6 +36,9 @@ public class HelpWindow extends UiPart<Region> {
     private static final double RESULT_COLUMN_WIDTH = 0.3;
     private static final double EXAMPLE_COLUMN_WIDTH = 0.3;
     private static ObservableList<Map<CommandColumns, String>> commandList = FXCollections.observableArrayList();
+    private enum CommandColumns {
+        COMMAND, PARAMETER, RESULT, EXAMPLE
+    }
 
     @FXML
     private AnchorPane helpWindowRoot;
@@ -54,10 +58,6 @@ public class HelpWindow extends UiPart<Region> {
     @FXML
     private TableColumn<Map<CommandColumns, String>, String> exampleColumn;
 
-    private enum CommandColumns {
-        COMMAND, PARAMETER, RESULT, EXAMPLE
-    }
-
     @FXML
     private void initialize() {
         this.commandColumn.setCellValueFactory(cellData ->
@@ -71,6 +71,7 @@ public class HelpWindow extends UiPart<Region> {
         this.commandTable.setItems(commandList);
         this.commandTable.setEditable(false);
     }
+
     public HelpWindow() {
         super(FXML);
         Scene scene = new Scene(getRoot(), 1020, 350);
@@ -123,3 +124,4 @@ public class HelpWindow extends UiPart<Region> {
 
     }
 }
+//@@
