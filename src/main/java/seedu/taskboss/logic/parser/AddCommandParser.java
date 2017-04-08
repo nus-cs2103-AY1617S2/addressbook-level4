@@ -1,5 +1,6 @@
 package seedu.taskboss.logic.parser;
 
+import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.taskboss.logic.parser.CliSyntax.PREFIX_INFORMATION;
@@ -33,6 +34,9 @@ public class AddCommandParser {
      * @throws BuiltInCategoryException
      */
     public Command parse(String args) throws InvalidDatesException, BuiltInCategoryException {
+        if (args.trim().equals(EMPTY_STRING)) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
         ArgumentTokenizer argsTokenizer =
                 new ArgumentTokenizer(PREFIX_PRIORITY, PREFIX_START_DATE,
                         PREFIX_END_DATE, PREFIX_INFORMATION, PREFIX_RECURRENCE, PREFIX_CATEGORY);
