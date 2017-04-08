@@ -17,10 +17,6 @@ import seedu.today.commons.events.storage.DataSavingExceptionEvent;
 import seedu.today.model.ReadOnlyTaskManager;
 import seedu.today.model.TaskManager;
 import seedu.today.model.UserPrefs;
-import seedu.today.storage.JsonUserPrefsStorage;
-import seedu.today.storage.Storage;
-import seedu.today.storage.StorageManager;
-import seedu.today.storage.XmlTaskManagerStorage;
 import seedu.today.testutil.EventsCollector;
 import seedu.today.testutil.TypicalTasks;
 

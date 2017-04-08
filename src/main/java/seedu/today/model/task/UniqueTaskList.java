@@ -25,7 +25,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if the list contains an equivalent task as the given
      * argument.
-     * 
+     *
      * @param toCheck
      *            task to be checked
      * @return whether task is in list

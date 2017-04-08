@@ -1,13 +1,11 @@
 package guitests;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.today.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.today.commons.core.Messages;
 import seedu.today.commons.exceptions.IllegalValueException;
-import seedu.today.logic.commands.AddCommand;
 import seedu.today.logic.commands.RedoCommand;
 import seedu.today.logic.commands.UndoCommand;
 

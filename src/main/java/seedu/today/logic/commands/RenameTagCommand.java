@@ -59,7 +59,7 @@ public class RenameTagCommand extends Command {
     /**
      * Takes a task from the list, replace the designated tags, and updates it
      * to model
-     * 
+     *
      * @param lastShownList
      *            list from model
      * @param index

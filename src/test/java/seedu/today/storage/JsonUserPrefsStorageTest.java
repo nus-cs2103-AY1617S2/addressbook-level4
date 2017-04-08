@@ -15,7 +15,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.today.commons.exceptions.DataConversionException;
 import seedu.today.commons.util.FileUtil;
 import seedu.today.model.UserPrefs;
-import seedu.today.storage.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

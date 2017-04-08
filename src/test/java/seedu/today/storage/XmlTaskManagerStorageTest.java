@@ -16,7 +16,6 @@ import seedu.today.commons.util.FileUtil;
 import seedu.today.model.ReadOnlyTaskManager;
 import seedu.today.model.TaskManager;
 import seedu.today.model.task.Task;
-import seedu.today.storage.XmlTaskManagerStorage;
 import seedu.today.testutil.TypicalTasks;
 
 public class XmlTaskManagerStorageTest {

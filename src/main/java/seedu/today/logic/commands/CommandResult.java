@@ -3,7 +3,7 @@ package seedu.today.logic.commands;
 /**
  * Represents the result of a command execution.
  */
-// @@Author A0144315N
+// @@author A0144315N
 public class CommandResult {
 
     private final String feedbackToUser;

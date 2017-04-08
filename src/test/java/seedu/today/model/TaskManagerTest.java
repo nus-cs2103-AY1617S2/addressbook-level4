@@ -15,8 +15,6 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.today.commons.exceptions.IllegalValueException;
-import seedu.today.model.ReadOnlyTaskManager;
-import seedu.today.model.TaskManager;
 import seedu.today.model.tag.Tag;
 import seedu.today.model.task.ReadOnlyTask;
 import seedu.today.model.task.Task;

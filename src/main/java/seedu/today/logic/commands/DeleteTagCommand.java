@@ -51,7 +51,7 @@ public class DeleteTagCommand extends Command {
     /**
      * Takes a task from the list, deletes the designated tag, and updates it to
      * model
-     * 
+     *
      * @param lastShownList
      *            list from model
      * @param index

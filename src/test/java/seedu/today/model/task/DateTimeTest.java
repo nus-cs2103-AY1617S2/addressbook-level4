@@ -10,8 +10,6 @@ import java.util.Date;
 import org.junit.Test;
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
-import seedu.today.model.task.DateTime;
-
 //@@author A0144422R
 public class DateTimeTest {
     @Test

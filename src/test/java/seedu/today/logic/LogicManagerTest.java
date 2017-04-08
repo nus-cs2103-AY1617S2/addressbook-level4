@@ -25,7 +25,6 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.FXCollections;
-<<<<<<< HEAD:src/test/java/seedu/today/logic/LogicManagerTest.java
 import seedu.today.commons.core.Config;
 import seedu.today.commons.core.EventsCenter;
 import seedu.today.commons.core.Messages;
@@ -33,8 +32,6 @@ import seedu.today.commons.events.model.TaskManagerChangedEvent;
 import seedu.today.commons.events.ui.JumpToListRequestEvent;
 import seedu.today.commons.events.ui.ShowHelpRequestEvent;
 import seedu.today.commons.util.FileUtil;
-import seedu.today.logic.Logic;
-import seedu.today.logic.LogicManager;
 import seedu.today.logic.commands.AddCommand;
 import seedu.today.logic.commands.ClearCommand;
 import seedu.today.logic.commands.Command;
@@ -45,7 +42,6 @@ import seedu.today.logic.commands.DoneCommand;
 import seedu.today.logic.commands.EditCommand;
 import seedu.today.logic.commands.ExitCommand;
 import seedu.today.logic.commands.ExportCommand;
-import seedu.today.logic.commands.FindCommand;
 import seedu.today.logic.commands.HelpCommand;
 import seedu.today.logic.commands.ImportCommand;
 import seedu.today.logic.commands.ListCommand;

@@ -14,11 +14,6 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
 import seedu.today.commons.exceptions.IllegalValueException;
 import seedu.today.model.tag.UniqueTagList;
-import seedu.today.model.task.DeadlineTask;
-import seedu.today.model.task.EventTask;
-import seedu.today.model.task.FloatingTask;
-import seedu.today.model.task.Name;
-import seedu.today.model.task.Task;
 
 public class TaskTest {
     @Test

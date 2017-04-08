@@ -6,8 +6,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.today.commons.util.AppUtil;
-
 public class AppUtilTest {
 
     @Rule
