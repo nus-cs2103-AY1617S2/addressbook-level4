@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+//@@author A0140887W
 /**
  * Stores a HashMap of ArrayLists representing the alias list
  */
@@ -51,7 +52,6 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         return aliasMap;
     }
 
-    //@@author A0140887W
     /**
      * @return a set of strings which are the default command words
      */
@@ -99,6 +99,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         }
     }
 
+    //@@author A0140887W
     public AliasListMap() {
         setDefaultAliasListMapping();
     }

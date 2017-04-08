@@ -125,6 +125,7 @@ public class EditCommandTest extends DoistGUITest {
 
     }
 
+    //@@author A0147980U
     @Test
     public void edit_duplicateTask_failure() {
         commandBox.runCommand("edit 3 Do laundry \\as normal");
@@ -136,6 +137,7 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit 3 \\as invalidPriority");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
     }
+    //@@author
 
     /**
      * Checks whether the edited task has the correct updated details.

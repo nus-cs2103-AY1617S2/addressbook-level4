@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doist.logic.commands.FinishCommand.MESSAGE_FINISH_TASK_SUCCESS;
 import static seedu.doist.logic.commands.FinishCommand.MESSAGE_TASK_ALREADY_FINISHED;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.testutil.TestTask;
 
 //@@author A0140887W
@@ -38,6 +40,19 @@ public class FinishCommandTest extends DoistGUITest {
         // finish a task that has already been finished
         assertAlreadyFinished(currentList.length, currentList);
     }
+
+    //@@author A0147980U
+    @Test
+    public void testFinishWithEmptyParameter() {
+        commandBox.runCommand("finish ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          FinishCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("finish");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          FinishCommand.MESSAGE_USAGE));
+    }
+    //@@author
 
     /**
      * Runs the finish command to finish the task at specified index and confirms the result is correct.

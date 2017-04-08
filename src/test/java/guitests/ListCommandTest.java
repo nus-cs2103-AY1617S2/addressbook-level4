@@ -2,6 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static seedu.doist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
@@ -50,6 +51,22 @@ public class ListCommandTest extends DoistGUITest {
         commandBox.runCommand("list overdue");
         assertListOverdue();
     }
+
+    //@@author A0147980U
+    @Test
+    public void testInvalidParameterKey() {
+        commandBox.runCommand("list \\\\wrongKey someValue");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void testInvalidTaskType() {
+        commandBox.runCommand("list PNDING");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                          ListCommand.MESSAGE_USAGE));
+    }
+    //@@author
 
     @Test
     public void testListFinishedUnderValidTagName() {
