@@ -27,16 +27,15 @@ public class SaveCommandTest extends AddressBookGuiTest {
 
     @Before
     public void reset_config() throws DataConversionException, IOException {
-        //System.out.println("Executing Junit before!");
+        // System.out.println("Executing JUnit before!");
         String sampleDataFilePath = TestUtil.getFilePathInSandboxFolder(TEST_XML);
         TestUtil.createDataFileWithSampleData(sampleDataFilePath);
         Optional<Config> opConfig = readConfig(TEST_CONFIG);
         if (opConfig.isPresent()) {
             Config config = opConfig.get();
-            config.setTaskManagerFilePath(TEST_FOLDER + TEST_XML); //or TEST_FOLDER + TEST_XML?
+            config.setTaskManagerFilePath(TEST_FOLDER + TEST_XML);
             saveConfig(config, TEST_CONFIG);
-            System.out.println("Reset TaskManagerFilePath to " +
-                    config.getTaskManagerFilePath());
+            System.out.println("Reset TaskManagerFilePath to " + config.getTaskManagerFilePath());
         } else {
             fail();
         }
@@ -44,8 +43,8 @@ public class SaveCommandTest extends AddressBookGuiTest {
 
     @Test
     public void save_success() throws IllegalValueException, DataConversionException {
-        String[] saveFiles = {"blooper", "taskmanager.xml", "data/taskmanager.xml",
-                "data/taskmanager", "taskmanager"};
+        String[] saveFiles = { "blooper", "taskmanager.xml", "data/taskmanager.xml", "data/taskmanager",
+        "taskmanager" };
         for (String saveFile : saveFiles) {
             System.out.println("Testing " + saveFile + "...");
             assertSaveSuccess(saveFile);
@@ -57,15 +56,14 @@ public class SaveCommandTest extends AddressBookGuiTest {
         saveFile = TEST_FOLDER + saveFile;
         commandBox.runCommand(SAVE_COMMAND + saveFile);
 
-        //confirm config file is updated properly
+        // confirm config file is updated properly
 
         String actual = getFilePathFromConfig();
         System.out.println("after save: " + actual);
         System.out.println("expected: " + saveFile);
         assertEquals(actual, saveFile);
 
-        //compare old and new task lists
-
+        // compare old and new task lists
 
     }
 
@@ -92,8 +90,6 @@ public class SaveCommandTest extends AddressBookGuiTest {
     }
 
     private String addToTestDataPathIfNotNull(String configFileInTestDataFolder) {
-        return configFileInTestDataFolder != null
-                ? TEST_CONFIG_PATH + configFileInTestDataFolder
-                        : null;
+        return configFileInTestDataFolder != null ? TEST_CONFIG_PATH + configFileInTestDataFolder : null;
     }
 }
