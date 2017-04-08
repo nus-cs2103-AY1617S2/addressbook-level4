@@ -19,6 +19,7 @@ import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
+import seedu.doist.logic.commands.LoadCommand;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.RemoveAliasCommand;
 import seedu.doist.logic.commands.ResetAliasCommand;
@@ -86,6 +87,8 @@ public class Parser {
             return new ExitCommand();
         } else if (doesTriggerSameCommand(commandWord, HelpCommand.DEFAULT_COMMAND_WORD)) {
             return new HelpCommand();
+        } else if (doesTriggerSameCommand(commandWord, LoadCommand.DEFAULT_COMMAND_WORD)) {
+            return new LoadCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, SaveAtCommand.DEFAULT_COMMAND_WORD)) {
             return new SaveAtCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, AliasCommand.DEFAULT_COMMAND_WORD)) {

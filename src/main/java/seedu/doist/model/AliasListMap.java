@@ -39,6 +39,7 @@ public class AliasListMap implements ReadOnlyAliasListMap {
         aliasMap.put("finish",  new ArrayList<>(Arrays.asList("fin")));
         aliasMap.put("help",  new ArrayList<>());
         aliasMap.put("list",  new ArrayList<>(Arrays.asList("ls")));
+        aliasMap.put("load",  new ArrayList<>());
         aliasMap.put("save_at", new ArrayList<>(Arrays.asList("save")));
         aliasMap.put("select",  new ArrayList<>());
         aliasMap.put("sort",  new ArrayList<>(Arrays.asList("sort_by")));

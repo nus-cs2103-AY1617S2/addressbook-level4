@@ -77,5 +77,4 @@ public class XmlTodoListStorage implements TodoListStorage {
     public void setTodoListFilePath(String path) {
         this.filePath = path;
     }
-
 }
