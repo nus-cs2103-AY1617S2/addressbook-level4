@@ -6,8 +6,11 @@
         assert model != null;
 
         try {
-            model.addTask(new Task(taskToDelete));
+            while (!deletedTaskList.isEmpty()) {
+                model.addTask(deletedTaskList.pop());
+            }
             model.updateFilteredListToShowAll();
+
         } catch (DuplicateTaskException e) {
 
         }
@@ -91,7 +94,7 @@
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                            task.getDescription().fullDescription, keyword))
+                        task.getDescription().fullDescription, keyword))
                     .findAny()
                     .isPresent();
         }
@@ -131,13 +134,13 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
 
         if (task.getStartDate() != null) {
-            startDate.setText("Start: " + task.getStartDate());
+            startDate.setText(task.getStartDate().toString());
         } else {
             startDate.setText("");
         }
 
         if (task.getEndDate() != null) {
-            endDate.setText("By: " + task.getEndDate());
+            endDate.setText(task.getEndDate().toString());
         } else {
             endDate.setText("");
         }
@@ -150,8 +153,8 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
 ```

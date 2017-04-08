@@ -48,6 +48,7 @@ public class TaskCard extends UiPart<Region> {
             cardPane.setStyle("-fx-background-color: #5c5c5c;");
             description.setStyle("-fx-text-fill: #6dc006;");
             setLabelsColourGreen();
+
         }
     }
 
@@ -65,7 +66,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setEndDate(ReadOnlyTask task) {
         if (task.getEndDate() != null) {
-            endDate.setText("By: " + task.getEndDate());
+            endDate.setText(task.getEndDate().toString());
         } else {
             endDate.setText("");
         }
@@ -84,7 +85,7 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private void initTags(ReadOnlyTask person) {
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private void initTags(ReadOnlyTask task) {
+        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

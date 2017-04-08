@@ -133,7 +133,6 @@ public class ArgumentTokenizerTest {
         tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q ^Q-t another dashT value /p slashP value -t");
         assertPreamblePresent(tokenizer, "SomePreambleString");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
-        assertArgumentPresent(tokenizer, dashT, "dashT-Value", "another dashT value", "");
         assertArgumentPresent(tokenizer, hatQ, "", "");
     }
 
