@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
-import project.taskcrusher.model.shared.DateUtilApache;
+import project.taskcrusher.model.shared.DateUtil;
 
 //@@author A0127737X
 /**
@@ -27,8 +27,8 @@ public class XmlAdaptedTimeslot {
      * Converts a given Timeslot into this class for JAXB use.
      */
     public XmlAdaptedTimeslot(Timeslot timeslot) {
-        startDate = DateUtilApache.dateAsStringForStorage(timeslot.start);
-        endDate = DateUtilApache.dateAsStringForStorage(timeslot.end);
+        startDate = DateUtil.dateAsStringForStorage(timeslot.start);
+        endDate = DateUtil.dateAsStringForStorage(timeslot.end);
     }
 
     /**

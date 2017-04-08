@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
 import project.taskcrusher.model.event.Timeslot;
-import project.taskcrusher.model.shared.DateUtilApache;
+import project.taskcrusher.model.shared.DateUtil;
 
 //@@author A0163962X
 /**
@@ -32,7 +32,7 @@ public class Deadline {
         if (deadline.equals(NO_DEADLINE)) {
             this.deadline = NO_DEADLINE;
         } else {
-            this.deadline = DateUtilApache.dateAsStringForStorage(DateUtilApache.parseDate(deadline));
+            this.deadline = DateUtil.dateAsStringForStorage(DateUtil.parseDate(deadline));
         }
     }
 
@@ -69,7 +69,7 @@ public class Deadline {
 
         if (this.hasDeadline()) {
             try {
-                return Optional.of(DateUtilApache.parseDate(this.deadline));
+                return Optional.of(DateUtil.parseDate(this.deadline));
             } catch (IllegalValueException e) {
                 // TODO this should not occur by default, provided that this
                 // object was instantiated successfully.
@@ -103,7 +103,7 @@ public class Deadline {
     @Override
     public String toString() {
         if (this.hasDeadline()) {
-            return DateUtilApache.dateAsStringForStorage(this.getDate().get());
+            return DateUtil.dateAsStringForStorage(this.getDate().get());
         } else {
             return Deadline.NO_DEADLINE;
         }

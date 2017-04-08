@@ -24,6 +24,7 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 import com.google.common.eventbus.Subscribe;
 
 import project.taskcrusher.commons.core.EventsCenter;
+import project.taskcrusher.commons.core.Messages;
 import project.taskcrusher.commons.events.model.UserInboxChangedEvent;
 import project.taskcrusher.commons.events.ui.ShowHelpRequestEvent;
 import project.taskcrusher.logic.commands.AddCommand;
@@ -38,7 +39,9 @@ import project.taskcrusher.logic.commands.ExitCommand;
 import project.taskcrusher.logic.commands.FindCommand;
 import project.taskcrusher.logic.commands.HelpCommand;
 import project.taskcrusher.logic.commands.ListCommand;
+import project.taskcrusher.logic.commands.SwitchCommand;
 import project.taskcrusher.logic.commands.exceptions.CommandException;
+import project.taskcrusher.logic.parser.ParserUtil;
 import project.taskcrusher.model.Model;
 import project.taskcrusher.model.ModelManager;
 import project.taskcrusher.model.ReadOnlyUserInbox;
@@ -47,7 +50,6 @@ import project.taskcrusher.model.event.Event;
 import project.taskcrusher.model.event.Location;
 import project.taskcrusher.model.event.ReadOnlyEvent;
 import project.taskcrusher.model.event.Timeslot;
-import project.taskcrusher.model.shared.DateUtilApache;
 import project.taskcrusher.model.shared.Description;
 import project.taskcrusher.model.shared.Name;
 import project.taskcrusher.model.shared.Priority;
@@ -207,7 +209,7 @@ public class LogicManagerTest {
                 Collections.emptyList());
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -226,9 +228,6 @@ public class LogicManagerTest {
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("add t validname p/-1 d/2017-11-11 //validdescription",
                 Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("add t validname p/2 d/2016-11-11 //validdescription", DateUtilApache.MESSAGE_DATE_PASSED);
-//        assertCommandFailure("add t validname p/2 d/ewrio232 //validdescription",
-//                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
         assertCommandFailure("add t validname p/1 d/2017-11-11 //validdescription t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }
@@ -238,19 +237,13 @@ public class LogicManagerTest {
         assertCommandFailure("add e d/2017-11-11 p/1 //validdescription",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         assertCommandFailure("add e validname l/validlocation d/ //validdescription", Timeslot.MESSAGE_TIMESLOT_DNE);
-        assertCommandFailure("add e validname l/validlocation d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
-                + " or 2021-11-11 03:00PM //validdescription", Timeslot.MESSAGE_TIMESLOT_PAIRS);
         assertCommandFailure(
                 "add e validname l/validlocation d/2020-11-11 11:00PM to 2020-11-11 05:00PM //validdescription",
                 Timeslot.MESSAGE_TIMESLOT_RANGE);
-        assertCommandFailure("add e validname l/validlocation d/2016-11-11 to 2017-11-11 //validdescription",
-                DateUtilApache.MESSAGE_DATE_PASSED);
-//        assertCommandFailure("add e validname l/validlocation d/ewrio232 to 54rthg //validdescription",
-//                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
-//        assertCommandFailure("add e validname l/validlocation d/2017-11-11 to 2017-99-99 //validdescription",
-//                DateUtilApache.MESSAGE_DATE_NOT_FOUND);
         assertCommandFailure("add e validname l/validlocation d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
                 + " //validdescription t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure("add e validname l/invalid_-[.location d/2020-11-11 03:00PM to 2020-11-11 05:00PM"
+                + " //validdescription", Location.MESSAGE_LOCATION_CONSTRAINTS);
     }
 
     @Test
@@ -284,6 +277,35 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_add_specialCases() throws Exception {
+        // add valid task
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        UserInbox expectedInbox = new UserInbox();
+
+        // add event
+        Event toBeAdded2 = helper.reviewSession();
+        expectedInbox.addEvent(toBeAdded2);
+        assertCommandSuccess(helper.generateAddEventCommand(toBeAdded2),
+                String.format(AddCommand.MESSAGE_EVENT_SUCCESS, toBeAdded2), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
+
+        // add clashing event (force)
+        Event toBeAdded4 = helper.reviewSessionClash();
+        expectedInbox.addEvent(toBeAdded4);
+        assertCommandSuccess(helper.generateAddEventCommand(toBeAdded4) + " --force",
+                String.format(AddCommand.MESSAGE_EVENT_SUCCESS, toBeAdded4), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
+
+        // add whole day event
+        Event toBeAdded5 = helper.reviewSessionWholeDay();
+        expectedInbox.addEvent(toBeAdded5);
+        assertCommandSuccess("add e CS2103 review session d/5/28 l/i3 Aud //makes life easier t/sometag3",
+                String.format(AddCommand.MESSAGE_EVENT_SUCCESS, toBeAdded5), expectedInbox, expectedInbox.getTaskList(),
+                expectedInbox.getEventList());
+    }
+
+    @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
@@ -295,13 +317,13 @@ public class LogicManagerTest {
         // execute command and verify result
         assertCommandFailure(helper.generateAddTaskCommand(toBeAdded), AddCommand.MESSAGE_DUPLICATE_TASK);
 
-//        Event toBeAdded2 = helper.reviewSession();
-//        model.addEvent(toBeAdded2); // event already in internal user inbox
-//        assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), AddCommand.MESSAGE_DUPLICATE_EVENT);
+        Event toBeAdded2 = helper.reviewSession();
+        model.addEvent(toBeAdded2); // event already in internal user inbox
+        assertCommandFailure(helper.generateAddEventCommand(toBeAdded2), AddCommand.MESSAGE_EVENT_CLASHES);
 
-//        Event toBeAdded3 = helper.reviewSessionTentative();
-//        model.addEvent(toBeAdded3); // event already in internal user inbox
-//        assertCommandFailure(helper.generateAddEventCommand(toBeAdded3), AddCommand.MESSAGE_DUPLICATE_EVENT);
+        Event toBeAdded3 = helper.reviewSessionTentative();
+        model.addEvent(toBeAdded3); // event already in internal user inbox
+        assertCommandFailure(helper.generateAddEventCommand(toBeAdded3), AddCommand.MESSAGE_EVENT_CLASHES);
 
     }
 
@@ -371,6 +393,74 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_switch_command_event() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Event eventToSwitch = helper.reviewSession();
+        model.addEvent(eventToSwitch);
+        Task afterSwitch = new Task(new Name(eventToSwitch.getName().name), new Deadline("March 6, 2018"),
+                new Priority(eventToSwitch.getPriority().priority),
+                new Description(eventToSwitch.getDescription().description), eventToSwitch.getTags());
+
+        // expected inbox after switch
+        UserInbox expectedInbox = new UserInbox();
+        expectedInbox.addTask(afterSwitch);
+
+        // expected lists after switch
+        List<Event> noEvents = new ArrayList<>();
+        List<Task> withSwitchedEvent = new ArrayList<>();
+        withSwitchedEvent.add(afterSwitch);
+
+        assertCommandSuccess("switch e 1 d/March 6, 2018",
+                String.format(SwitchCommand.MESSAGE_SWITCH_EVENT_SUCCESS, eventToSwitch), expectedInbox,
+                withSwitchedEvent, noEvents);
+    }
+
+    @Test
+    public void execute_switch_command_task() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task taskToSwitch = helper.homework();
+        model.addTask(taskToSwitch);
+        List<Timeslot> timeslots = ParserUtil.parseAsTimeslots("d/today 6pm to 9pm");
+        Event afterSwitch = new Event(new Name(taskToSwitch.getName().name), timeslots,
+                new Priority(taskToSwitch.getPriority().priority), new Location(Location.NO_LOCATION),
+                new Description(taskToSwitch.getDescription().description), taskToSwitch.getTags());
+
+        // expected inbox after switch
+        UserInbox expectedInbox = new UserInbox();
+        expectedInbox.addEvent(afterSwitch);
+
+        // expected lists after switch
+        List<Event> withSwitchedTask = new ArrayList<>();
+        List<Task> noTasks = new ArrayList<>();
+        withSwitchedTask.add(afterSwitch);
+
+        assertCommandSuccess("switch t 1 d/today 6pm to 9pm",
+                String.format(SwitchCommand.MESSAGE_SWITCH_TASK_SUCCESS, taskToSwitch), expectedInbox, noTasks,
+                withSwitchedTask);
+
+    }
+
+    @Test
+    public void execute_switch_invalid() throws Exception {
+        assertCommandFailure("switch t 1 d/today 6pm to 9pm", Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        assertCommandFailure("switch e 1", Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+
+        // switch task to clashing event
+        TestDataHelper helper = new TestDataHelper();
+        Event toBeAdded2 = helper.reviewSession();
+        model.addEvent(toBeAdded2);
+
+        Tag tag3 = new Tag("sometag3");
+        Tag tag4 = new Tag("sometag4");
+        UniqueTagList tags = new UniqueTagList(tag3, tag4);
+        model.addTask(new Task(new Name("CS2103 review session"), new Deadline(Deadline.NO_DEADLINE),
+                new Priority(Priority.NO_PRIORITY), new Description("makes life easier"), tags));
+
+        assertCommandFailure("switch t 1 d/2017-09-23 3pm to 5pm", AddCommand.MESSAGE_EVENT_CLASHES);
+
+    }
+
+    @Test
     public void execute_editTask_successful() throws Exception {
         // set up
         execute_add_successful();
@@ -382,13 +472,6 @@ public class LogicManagerTest {
 
         List<Event> unchangedEvents = new ArrayList<>();
         List<Task> changedTasks = new ArrayList<>();
-
-        // keep if want to add more tests
-        // Event editedEvent = new Event(preexistingEvents.get(0).getName(),
-        // preexistingEvents.get(0).getTimeslots(),
-        // preexistingEvents.get(0).getLocation(),
-        // preexistingEvents.get(0).getDescription(),
-        // preexistingEvents.get(0).getTags());
 
         Task editedTask = new Task(new Name("editedName"), new Deadline(""), new Priority(Priority.NO_PRIORITY),
                 new Description("editedDescription"), preexistingTasks.get(0).getTags());
@@ -428,13 +511,6 @@ public class LogicManagerTest {
         List<Event> changedEvents = new ArrayList<>();
         List<Task> unchangedTasks = new ArrayList<>();
 
-        // keep if want to add more tests
-        // Event editedEvent = new Event(preexistingEvents.get(0).getName(),
-        // preexistingEvents.get(0).getTimeslots(),
-        // preexistingEvents.get(0).getLocation(),
-        // preexistingEvents.get(0).getDescription(),
-        // preexistingEvents.get(0).getTags());
-
         List<Timeslot> changedTimeslot = new ArrayList<>();
         changedTimeslot.add(new Timeslot("2019-11-11", "2019-12-11"));
 
@@ -473,11 +549,10 @@ public class LogicManagerTest {
         assertCommandFailure("edit t 1", EditCommand.MESSAGE_NOT_EDITED);
         assertCommandFailure("edit t 1 p/999", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandFailure("edit t 1 p/", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandFailure("edit t 1 d/2016-01-01", DateUtilApache.MESSAGE_DATE_PASSED);
         assertCommandFailure("edit e 1 d/", Timeslot.MESSAGE_TIMESLOT_DNE);
     }
 
-    //@@author
+    // @@author
     @Test
     public void execute_list_showsAllPersons() throws Exception {
         // prepare expectations
@@ -492,7 +567,7 @@ public class LogicManagerTest {
         assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedInbox, expectedTaskList, expectedEventList);
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     @Test
     public void execute_list_filtersCorrectly() throws Exception {
         // set up model
@@ -543,12 +618,12 @@ public class LogicManagerTest {
     @Test
     public void execute_list_invalidArgs() throws Exception {
 
-//        assertCommandFailure("list d/2019-11-11 to 2020-11-11 or 2018-11-11 to 2019-11-11",
-//                ListCommand.MESSAGE_MULTIPLE_DATERANGES);
+        assertCommandFailure("list d/2019-11-11 to 2020-11-11 or 2018-11-11 to 2019-11-11",
+                ListCommand.MESSAGE_MULTIPLE_DATERANGES);
 
     }
 
-    //@@author
+    // @@author
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single person in the shown list, using visible index.
@@ -599,7 +674,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
-    //@@author A0163962X-reused
+    // @@author A0163962X-reused
     private void assertEventIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
@@ -619,7 +694,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -629,7 +704,7 @@ public class LogicManagerTest {
         assertCommandFailure("delete e e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
-    //@@author
+    // @@author
     @Test
     public void execute_deleteTaskIndexNotFound_errorMessageShown() throws Exception {
         assertTaskIndexNotFoundBehaviorForCommand("delete t");
@@ -640,7 +715,7 @@ public class LogicManagerTest {
         assertEventIndexNotFoundBehaviorForCommand("delete e");
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     @Test
     public void execute_delete_removesCorrectUserToDo() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -670,14 +745,14 @@ public class LogicManagerTest {
                 expectedInbox2, expectedInbox2.getTaskList(), expectedInbox2.getEventList());
     }
 
-    //@@author
+    // @@author
     @Test
     public void execute_find_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         assertCommandFailure("find ", expectedMessage);
     }
 
-    //@@author A0127737X
+    // @@author A0127737X
     @Test
     public void execute_find_matchesSubstring() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -706,7 +781,7 @@ public class LogicManagerTest {
                 expectedInbox, expectedTaskList, expectedEventList);
     }
 
-    //@@author A0163962X
+    // @@author A0163962X
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -757,7 +832,7 @@ public class LogicManagerTest {
                 expectedInbox, expectedTaskList, expectedEventList);
     }
 
-    //@@author
+    // @@author
     /**
      * A utility class to generate test data.
      */
@@ -774,7 +849,7 @@ public class LogicManagerTest {
             return new Task(name, deadline, priority, description, tags);
         }
 
-        //@@author A0163962X
+        // @@author A0163962X
         Task homeworkWithDeadline() throws Exception {
             Name name = new Name("CS2103 homework");
             Deadline deadline = new Deadline("2017-08-23");
@@ -842,7 +917,19 @@ public class LogicManagerTest {
             return new Event(name, timeslots, new Priority("0"), location, description, tags);
         }
 
-        //@@author
+        Event reviewSessionWholeDay() throws Exception {
+            Name name = new Name("CS2103 review session");
+            Timeslot timeslot = new Timeslot("5/28 00:00AM", "5/28 11:59PM");
+            List<Timeslot> timeslots = new ArrayList<>();
+            timeslots.add(timeslot);
+            Location location = new Location("i3 Aud");
+            Description description = new Description("makes life easier");
+            Tag tag3 = new Tag("sometag3");
+            UniqueTagList tags = new UniqueTagList(tag3);
+            return new Event(name, timeslots, new Priority("0"), location, description, tags);
+        }
+
+        // @@author
         /**
          * Generates a valid person using the given seed. Running this function
          * with the same parameter values guarantees the returned person will
@@ -858,19 +945,19 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
-        //@@author A0163962X
+        // @@author A0163962X
         Event generateEvent(int seed) throws Exception {
             Timeslot timeslot = new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM");
             DateUtils.addHours(timeslot.start, seed);
             DateUtils.addHours(timeslot.end, seed);
             List<Timeslot> timeslots = new ArrayList<Timeslot>();
             timeslots.add(timeslot);
-            return new Event(new Name("Event " + seed), timeslots, new Priority("0"),
-                    new Location("Location" + seed), new Description("description is " + seed),
+            return new Event(new Name("Event " + seed), timeslots, new Priority("0"), new Location("Location" + seed),
+                    new Description("description is " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
-        //@@author
+        // @@author
         /** Generates the correct add command based on the person given */
         String generateAddTaskCommand(Task task) {
             StringBuffer cmd = new StringBuffer();
@@ -891,7 +978,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
-        //@@author A0163962X
+        // @@author A0163962X
         String generateAddEventCommand(Event event) {
             StringBuffer cmd = new StringBuffer();
 
@@ -922,7 +1009,7 @@ public class LogicManagerTest {
             return cmd.toString();
         }
 
-        //@@author
+        // @@author
         /**
          * Generates an AddressBook with auto-generated persons.
          */
@@ -1023,7 +1110,7 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag")));
         }
 
-        //@@author A0163962X
+        // @@author A0163962X
         Event generateEventWithName(String name) throws Exception {
             List<Timeslot> timeslots = new ArrayList<>();
             timeslots.add(new Timeslot("2020-09-23 03:00PM", "2020-9-23 05:00PM"));

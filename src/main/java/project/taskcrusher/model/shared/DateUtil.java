@@ -16,7 +16,7 @@ import project.taskcrusher.commons.exceptions.IllegalValueException;
  * Utility class for parsing Dates
  *
  */
-public class DateUtilApache {
+public class DateUtil {
 
     public static final String MESSAGE_DATE_PASSED = "Dates provided must not be in the past";
     public static final String MESSAGE_DATE_AMBIGUOUS = "Multiple dates provided."
@@ -53,12 +53,6 @@ public class DateUtilApache {
             parsed = DateUtils.setSeconds(parsed, 59);
             parsed = DateUtils.setMilliseconds(parsed, 59);
         }
-
-        // REMOVED TO ALLOW PAST DATES TO BE ADDED
-        // if (isNew && hasPassed(parsed)) { // short circuit if not new/from
-        // // storage
-        // throw new IllegalValueException(MESSAGE_DATE_PASSED);
-        // }
 
         return parsed;
     }

@@ -8,7 +8,7 @@ import org.apache.commons.lang.time.DateUtils;
 import com.joestelmach.natty.DateGroup;
 
 import project.taskcrusher.commons.exceptions.IllegalValueException;
-import project.taskcrusher.model.shared.DateUtilApache;
+import project.taskcrusher.model.shared.DateUtil;
 
 //@@author A0163962X
 /**
@@ -36,7 +36,7 @@ public class Timeslot implements Comparable<Timeslot> {
         assert end != null;
 
         this.start = new Date();
-        this.end = DateUtilApache.parseDate(end);
+        this.end = DateUtil.parseDate(end);
 
         if (!isValidTimeslot(this.start, this.end)) {
             throw new IllegalValueException(MESSAGE_TIMESLOT_RANGE);
@@ -47,11 +47,11 @@ public class Timeslot implements Comparable<Timeslot> {
         assert start != null;
         assert end != null;
 
-        this.start = DateUtilApache.parseDate(start);
-        DateGroup startInfo = DateUtilApache.parseDateAsDateGroup(start);
+        this.start = DateUtil.parseDate(start);
+        DateGroup startInfo = DateUtil.parseDateAsDateGroup(start);
 
-        this.end = DateUtilApache.parseDate(end);
-        DateGroup endInfo = DateUtilApache.parseDateAsDateGroup(end);
+        this.end = DateUtil.parseDate(end);
+        DateGroup endInfo = DateUtil.parseDateAsDateGroup(end);
 
         // special cases:
         // handle whole day events
@@ -140,7 +140,7 @@ public class Timeslot implements Comparable<Timeslot> {
 
     @Override
     public String toString() {
-        return DateUtilApache.dateAsStringForStorage(start) + " to " + DateUtilApache.dateAsStringForStorage(end);
+        return DateUtil.dateAsStringForStorage(start) + " to " + DateUtil.dateAsStringForStorage(end);
     }
 
     @Override
