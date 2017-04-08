@@ -76,7 +76,9 @@ public class TaskManager implements ReadOnlyTaskManager {
                 }
                 setTasks(tempTasks, validateData);
             } else {
-                tasks.setTasks(newData.getTaskList(), validateData);
+                for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
+                    tasks.add(Task.createTask(readOnlyTask));
+                }
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";

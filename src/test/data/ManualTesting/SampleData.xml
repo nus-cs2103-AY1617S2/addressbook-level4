@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Do math assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>math</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy Meier stove</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>appliance</tagged>
+        <tagged>stove</tagged>
+    </tasks>
+    <tasks>
+        <name>Write english essay</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Buy Meier rice cooker</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Complete CS2106 Lab Assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Mark CS1010S</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Go for a night run</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Prepare guest list</name>
+        <deadline>1491555600000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Confirm dinner menu</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Send out invitations</name>
+        <deadline>1491926340000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Finalize sitting plan</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Company Dinner</name>
+        <startingTime>1492250400000</startingTime>
+        <deadline>1492268400000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Send invitations</name>
+        <deadline>1492099140000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner17</tagged>
+    </tasks>
+    <tasks>
+        <name>Sales Pitch with Client</name>
+        <startingTime>1491462000000</startingTime>
+        <deadline>1491469200000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+        <tagged>samsung</tagged>
+        <tagged>john</tagged>
+        <tagged>sales</tagged>
+    </tasks>
+    <tasks>
+        <name>Staff Meeting</name>
+        <startingTime>1492149600000</startingTime>
+        <deadline>1492156800000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>Prepare for meeting</name>
+        <deadline>1491465600000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+        <tagged>meeting</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2106 Lab Assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Describe black box algorithms</name>
+        <deadline>1491753540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>get1004</tagged>
+    </tasks>
+    <tasks>
+        <name>Running</name>
+        <deadline>1492012740000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Extract whatsapp conversations</name>
+        <deadline>1492271940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Do online CV</name>
+        <deadline>1492012740000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>NOC</tagged>
+    </tasks>
+    <tasks>
+        <name>Medical Appointment</name>
+        <startingTime>1491897600000</startingTime>
+        <deadline>1491904800000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Study for ST2132 Chapter 7</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>ST2131</tagged>
+    </tasks>
+    <tasks>
+        <name>Study for ST2132 Chapter 8</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>2132</tagged>
+    </tasks>
+    <tasks>
+        <name>Study for ST2132 Chapter 9</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>ST2132</tagged>
+    </tasks>
+    <tasks>
+        <name>GET Project Meeting</name>
+        <deadline>1492185540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>GET1004</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy new water bottle</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Study for CS3230 Finals</name>
+        <deadline>1492012740000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>CS3230 assignment</name>
+        <deadline>1492185540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Send in NOC CV for vetting</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Update user guide to reflect new commands</name>
+        <deadline>1492185540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Make changes to developer guide</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Buy new earphones</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Change bag for weekend</name>
+        <deadline>1491926340000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Bring car for servicing</name>
+        <deadline>1492859033886</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Plan meeting agenda</name>
+        <deadline>1492099140000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>GET1004</tagged>
+    </tasks>
+    <tasks>
+        <name>Lunch with Jim</name>
+        <deadline>1491753540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Discuss about reality with shiyuan</name>
+        <deadline>1491839940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>GET Finals</name>
+        <deadline>1493135940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>CS3230 Finals</name>
+        <startingTime>1493172000000</startingTime>
+        <deadline>1493179200000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>CS2103 Finals</name>
+        <startingTime>1493085600000</startingTime>
+        <deadline>1493092800000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>ST2132 Finals</name>
+        <deadline>1493135940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>verify bank transfer to zx</name>
+        <deadline>1491494340000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Make some changes to task manager scrolling interface</name>
+        <deadline>1491667140000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Finish proposal for ST2132 Report</name>
+        <deadline>1491580740000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Prepare budget</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner18</tagged>
+    </tasks>
+    <tasks>
+        <name>Meet boss to discuss next year comp dinnner</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>compDinner18</tagged>
+    </tasks>
+    <tasks>
+        <name>do project assignment</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>do assignment</name>
+        <deadline>1491580740000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>do project</name>
+        <startingTime>1491462000000</startingTime>
+        <deadline>1491469200000</deadline>
+        <done>true</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>task</name>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>dowork</tagged>
+    </tasks>
+    <tasks>
+        <name>Study PCA</name>
+        <deadline>1491926340000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>school</tagged>
+        <tagged>ml</tagged>
+    </tasks>
+    <tasks>
+        <name>Submit CS3230 Galactus Report</name>
+        <deadline>1492099140000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Buy new macbook</name>
+        <deadline>1492185540000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Get a haircut</name>
+        <deadline>1492271940000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Medical Appointment</name>
+        <startingTime>1492495200000</startingTime>
+        <deadline>1492502400000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>dinner with jeremy</name>
+        <startingTime>1492596000000</startingTime>
+        <deadline>1492606800000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+    </tasks>
+    <tasks>
+        <name>Submit GET1004 slides</name>
+        <deadline>1491667140000</deadline>
+        <done>false</done>
+        <manualToday>false</manualToday>
+        <tagged>blackbox</tagged>
+    </tasks>
+    <tags>math</tags>
+    <tags>appliance</tags>
+    <tags>stove</tags>
+    <tags>compDinner17</tags>
+    <tags>samsung</tags>
+    <tags>john</tags>
+    <tags>sales</tags>
+    <tags>meeting</tags>
+    <tags>get1004</tags>
+    <tags>NOC</tags>
+    <tags>ST2131</tags>
+    <tags>2132</tags>
+    <tags>ST2132</tags>
+    <tags>GET1004</tags>
+    <tags>compDinner18</tags>
+    <tags>dowork</tags>
+    <tags>school</tags>
+    <tags>ml</tags>
+    <tags>blackbox</tags>
+</taskmanager>
