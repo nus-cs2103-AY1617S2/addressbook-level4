@@ -110,11 +110,11 @@ public class AddCommand extends Command {
     private void categoriesSetUp(Set<String> categories, final Set<Category> categorySet)
             throws IllegalValueException, BuiltInCategoryException {
         categorySet.add(new Category(BUILT_IN_ALL_TASKS));
-        if (categories.contains(BUILT_IN_DONE)) {
-            throw new BuiltInCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
-        }
 
         for (String categoryName : categories) {
+            if ((new Category(categoryName)).equals(new Category(BUILT_IN_DONE))) {
+                throw new BuiltInCategoryException(ERROR_CANNOT_ADD_DONE_CATEGORY);
+            }
             categorySet.add(new Category(categoryName));
         }
     }

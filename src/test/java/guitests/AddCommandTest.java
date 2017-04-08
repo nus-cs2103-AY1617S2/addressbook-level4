@@ -52,6 +52,10 @@ public class AddCommandTest extends TaskBossGuiTest {
         commandBox.runCommand("clear");
         assertAddSuccess(false, false, td.taskA);
 
+        //add to built-in done category
+        commandBox.runCommand("add floating task c/done");
+        assertResultMessage(AddCommand.ERROR_CANNOT_ADD_DONE_CATEGORY);
+
         //invalid command
         commandBox.runCommand("adds new task");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
