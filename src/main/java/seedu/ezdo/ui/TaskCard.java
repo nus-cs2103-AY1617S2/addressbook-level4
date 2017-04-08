@@ -20,6 +20,10 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
 //@@author A0139177W
 public class TaskCard extends UiPart<Region> {
 
+    private static final String HAS_COMPLETED_LINK = "/images/tick.png";
+
+    private static final String HAS_STARTED_LINK = "/images/wip.png";
+
     private String priorityInString;
 
     private static final String DEFAULT_PRIORITY_NUMBER = "";
@@ -170,10 +174,10 @@ public class TaskCard extends UiPart<Region> {
     // ========================= STATUS ============================ //
     private void setStatus(ReadOnlyTask task) {
         if (task.getStarted()) {
-            status.setGraphic(new ImageView("/images/wip.png"));
+            status.setGraphic(new ImageView(HAS_STARTED_LINK));
         }
         if (task.getDone()) {
-            status.setGraphic(new ImageView("/images/tick.png"));
+            status.setGraphic(new ImageView(HAS_COMPLETED_LINK));
         }
     }
 
