@@ -36,4 +36,6 @@ public abstract class SyncService {
     public void setSyncManager(Sync syncManager) {
         this.syncManager = syncManager;
     }
+
+    public abstract void raiseSyncExceptionEvent(SyncException syncException);
 }

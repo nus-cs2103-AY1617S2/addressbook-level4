@@ -265,6 +265,7 @@ public class SyncServiceGtask extends SyncService {
      * Raise a event to notify user when can exception is encountered while syncing
      * @param syncException
      */
+    @Override
     public void raiseSyncExceptionEvent(SyncException syncException) {
         this.syncManager.raiseSyncEvent(syncException);
     }
