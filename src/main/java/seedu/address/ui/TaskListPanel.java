@@ -58,10 +58,13 @@ public class TaskListPanel extends UiPart<Region> {
         setConnections(futureTaskListView, taskListFuture);
         // todayTaskListView.setExpanded(true);
         addToPlaceholder(taskListPlaceholder);
-        // set ListView height, add 2 extra px to show border
+        // set ListView height, add 3 extra px to show border
         updateListHeight();
     }
 
+    /**
+     * scrolls the list to place the animated task card at top
+     */
     public void scrollTo() {
         for (ReadOnlyTask task : taskListToday) {
             if (task.isAnimated()) {
@@ -75,6 +78,9 @@ public class TaskListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Set the height of task lists based on the number of tasks they contains.
+     */
     public void updateListHeight() {
         todayTaskListView.setPrefHeight(taskListToday.size() * rowHeight + rowPadding);
         futureTaskListView.setPrefHeight(taskListFuture.size() * rowHeight + rowPadding);
@@ -86,6 +92,7 @@ public class TaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent(taskListView);
     }
 
+    // @@Author:
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
@@ -96,12 +103,12 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                // TODO: change event to recognise list type
                 raise(new TaskPanelSelectionChangedEvent(newValue));
             }
         });
     }
 
+    // @@Author: A0144315N
     public void scrollToToday(int index) {
         Platform.runLater(() -> {
             todayTaskListView.scrollTo(index);
@@ -114,14 +121,6 @@ public class TaskListPanel extends UiPart<Region> {
             futureTaskListView.scrollTo(index);
             futureTaskListView.getSelectionModel().clearAndSelect(index);
         });
-    }
-
-    public void showCommandCompleteAnimation(String index) {
-
-    }
-
-    public void showProgressbar() {
-
     }
 
     public TitledPane getTodayTaskListPanel() {
@@ -144,6 +143,7 @@ public class TaskListPanel extends UiPart<Region> {
         return scrollPane;
     }
 
+    // @@Author:
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override

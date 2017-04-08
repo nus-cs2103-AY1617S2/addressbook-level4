@@ -354,6 +354,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0144315N
+    /**
+     * Splits the filteredTaskList into three sublists every time before refreshing the UI.
+     * The newly created sublists will be added to corresponding observable lists at the end
+     * so as to force the UI to refresh.
+     *
+     * @param taskListToday backing list for TodayTaskListView in UI
+     * @param taskListFuture backing list for FutureTaskListView in UI
+     * @param taskListCompeleted backing list for CompletedTaskListView in UI
+     */
     @Override
     public void prepareTaskList(ObservableList<ReadOnlyTask> taskListToday, ObservableList<ReadOnlyTask> taskListFuture,
             ObservableList<ReadOnlyTask> taskListCompleted) {
@@ -367,6 +376,7 @@ public class ModelManager extends ComponentManager implements Model {
         ArrayList<ReadOnlyTask> futureTempList = new ArrayList<ReadOnlyTask>();
         ArrayList<ReadOnlyTask> completedTempList = new ArrayList<ReadOnlyTask>();
 
+        // split, sort and assign UI index to sub lists
         splitTaskList(taskList, todayTempList, futureTempList, completedTempList);
         sortTaskLists(todayTempList, futureTempList, completedTempList);
         assignUiIndex(todayTempList, futureTempList, completedTempList);
@@ -377,6 +387,9 @@ public class ModelManager extends ComponentManager implements Model {
         taskListCompleted.addAll(completedTempList);
     }
 
+    /**
+     * Splits the filteredTaskList into three sublists
+     */
     private void splitTaskList(ObservableList<ReadOnlyTask> taskList, ArrayList<ReadOnlyTask> todayTempList,
             ArrayList<ReadOnlyTask> futureTempList, ArrayList<ReadOnlyTask> completedTempList) {
         ListIterator<ReadOnlyTask> iter = taskList.listIterator();
@@ -398,6 +411,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * Sorts task lists by deadline. Floating tasks will appear before deadline tasks.
+     */    
     private void sortTaskLists(ArrayList<ReadOnlyTask> todayTempList, ArrayList<ReadOnlyTask> futureTempList,
             ArrayList<ReadOnlyTask> completedTempList) {
         todayTempList.sort(TaskDatetimeComparator);
@@ -405,6 +421,9 @@ public class ModelManager extends ComponentManager implements Model {
         completedTempList.sort(TaskDatetimeComparator);
     }
 
+    /**
+     * Tranlates absolute index into relative Task ID and save it to task
+     */
     private void assignUiIndex(ArrayList<ReadOnlyTask> taskListToday, ArrayList<ReadOnlyTask> taskListFuture,
             ArrayList<ReadOnlyTask> taskListCompleted) {
         // TODO potential performance bottleneck here
@@ -440,6 +459,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // For debugging
+    /**
+     * Prints the mapping between absolute and relative index
+     */
     public void printIndexMap(HashMap<String, Integer> map) {
         logger.info("=============indexmap content==============");
         for (String name : map.keySet()) {
@@ -449,6 +471,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /**
+     * Translate task ID to absolute index
+     */
     @Override
     public int parseUIIndex(String uiIndex) {
         uiIndex = uiIndex.toUpperCase();
@@ -461,8 +486,8 @@ public class ModelManager extends ComponentManager implements Model {
         return indexMap.get(uiIndex) + 1;
     }
 
-    /*
-     * gets UI index by absolute index
+    /**
+     * gets UI index(task ID) by absolute index
      */
     @Override
     public String getUIIndex(int index) {

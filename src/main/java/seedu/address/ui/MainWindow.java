@@ -193,16 +193,21 @@ public class MainWindow extends UiPart<Region> {
     }
 
     // @@author A0144315N
+    /**
+     *  Initialises observable lists for ListView and loads other UI components
+     */
     void fillInnerParts() {
+        // Initialises observable lists for ListViews
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
         taskListCompleted = FXCollections.observableArrayList();
+
+        // Split and sort task lists (see Developer Guide "Implementation" section for detail)
         prepareTaskList();
+
+        // Load UI components
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), taskListToday, taskListFuture);
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
-        // new CommandBox(getCommandBoxPlaceholder(), logic);
-        // TODO: show completedTaskPanel when show completed command is
-        // implemented
         new ResultDisplay(getResultDisplayPlaceholder());
         completedTaskListPanel = new CompletedTaskListPanel(getCompletedTaskListPlaceholder(), taskListCompleted);
 
@@ -220,11 +225,6 @@ public class MainWindow extends UiPart<Region> {
 
         logic.prepareTaskList(taskListToday, taskListFuture, taskListCompleted);
     }
-
-    /*
-     * private AnchorPane getCommandBoxPlaceholder() { return
-     * commandBoxPlaceholder; }
-     */
 
     // @@author
     private AnchorPane getResultDisplayPlaceholder() {
@@ -308,6 +308,10 @@ public class MainWindow extends UiPart<Region> {
         return this.taskListPanel;
     }
 
+    // @@author A0144315N
+    /**
+     * Handles command execution for commandTextField input
+     */
     @FXML
     private void handleCommandInputChanged() {
         // Do nothing on empty command box
@@ -333,7 +337,9 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    // @@author A0144315N
+    /**
+     * Displays a snack bar message at the bottom of the main window
+     */
     @Subscribe
     public void handleUpdateStatusBarEvent(UpdateStatusBarEvent event) {
         JFXSnackbar toast = new JFXSnackbar(windowCentre);
