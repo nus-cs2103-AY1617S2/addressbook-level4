@@ -6,6 +6,7 @@ import static seedu.taskboss.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import org.junit.Test;
 
 import seedu.taskboss.commons.core.Messages;
+import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.MarkDoneCommand;
 import seedu.taskboss.model.task.Recurrence.Frequency;
 import seedu.taskboss.testutil.TaskBuilder;
@@ -170,7 +171,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave").build();
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
 
         TestTask markedDoneTaskB = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2017 11.30pm")
@@ -192,7 +194,8 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withStartDateTime("Mar 22, 2017 5pm")
                 .withEndDateTime("Mar 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave").build();
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_ALL_TASKS).build();
         expectedTasksList[3] = new TaskBuilder().withName("Debug code").withPriorityLevel("Yes")
                 .withStartDateTime("Feb 20, 2017 11.30pm")
                 .withEndDateTime("Apr 28, 2017 3pm")
