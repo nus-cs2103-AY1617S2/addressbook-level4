@@ -20,11 +20,12 @@
    3.12. [Listing Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#312-listing-proirity-tasks--list)<br>
    3.13. [Listing Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#313-listing-completed-tasks--listdone) <br>
    3.14. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#314-undoing-the-latest-command--undo)<br>
-   3.15. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-saving-the-data-to-another-folder--save)<br>
-   3.16. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-changing-the-default-storage-folder--setting)<br>
-   3.17. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-using-data-from-another-folder--use)<br>
-   3.18. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-clearing-all-entries--clear)<br>
-   3.19. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-exiting-the-program--exit)<br>
+   3.15. [Redoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-undoing-the-latest-command--redo)<br>
+   3.16. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-saving-the-data-to-another-folder--save)<br>
+   3.17. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-changing-the-default-storage-folder--setting)<br>
+   3.18. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-using-data-from-another-folder--use)<br>
+   3.19. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-clearing-all-entries--clear)<br>
+   3.20. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#320-exiting-the-program--exit)<br>
 4. [FAQ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#4-faq)<br>
 5. [Command Summary](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary)<br>
 &nbsp;
@@ -97,6 +98,13 @@ The first thing you would do is to add your first task! Lets make it simple by f
 
 Format: `add <TASK NAME>`
 
+```
+Things To Note:
+> Tasklist will focus on the added task after add command is executed.
+> Tasklist will not detect duplicate task names.
+> Task name does not allow symbols.
+   e.g. "/", ".", ","
+```
 Examples:
 
 * `add CS2103T Meeting`
@@ -106,7 +114,7 @@ Examples:
 ### 3.3. Adding a Deadline Task: `add`
 What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
-Format: `add <TASK NAME> by:<DATE> or add <TASK NAME> by:<DATE> <TIME>`
+Format: `add <TASK NAME> by:<DATE>` or `add <TASK NAME> by:<DATE> <TIME>`
 
 ```
 Things To Note:
@@ -177,16 +185,18 @@ Format: `find <KEYWORD>`
 Things To Note:
 > The order of the keywords does not matter.
    e.g. Meeting Tutor will match Tutor Meeting.
-> The input that is a partial word of a task name will be matched
-   e.g. Meeting will match Meetings.
 > The tasks that match at least one keyword will be returned (i.e. OR search).
    e.g. Meeting will match Meeting Tutor.
-> find is not case-sensitive, i.e. Meeting Tutor will match meeting tutor.
+> The keyword is not case-sensitive
+   e.g. Meeting Tutor will match meeting tutor.
+> The search function prioritise dates
+   e.g. "find tmr" will give a list of tasks with tomorrow date but will not give task name with "tmr"
 ```
 
 Examples:
 * `find Meeting`
 * `find oct`
+* `find tmr`
 
 
 ### 3.7 Editing a Task: `edit`
@@ -257,7 +267,7 @@ Things To Note:
 > This list will be sorted by Priority, Date and Time.
 ```
 
-### 3.11. Listing Today Tasks : `listday`
+### 3.11. Listing Today Tasks : `listtoday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command.
 
 Format: `listday`
@@ -294,8 +304,12 @@ Typed in the wrong command and submitted an operation you do not want? Fret not!
 
 Format: `undo`
 
+### 3.15. Redoing the Latest Command : `redo`
+Typed in the undo command wrongly? Fret not! You can use the redo command to save the hassle of modifying your recent operation. <br>
 
-### 3.15. Saving the Data to Another Folder : `save`
+Format: `undo`
+
+### 3.16. Saving the Data to Another Folder : `save`
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format: `save <FILE_PATH>`
@@ -310,7 +324,7 @@ Examples:
 * `save C:/Desktop/myTask`
 
 
-### 3.16. Changing the Default Storage Folder : `setting`
+### 3.17. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
 Format: `setting <FILE_PATH>`
@@ -325,7 +339,7 @@ Examples:
 * `setting C:/Desktop/myOtherTask`<br>
 
 
-### 3.17. Using Data from Another Folder : `use`
+### 3.18. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
 Format: `use <FILE_PATH>`
@@ -340,14 +354,14 @@ Examples:
 * `use C:/Desktop/myTask`<br>
 
 
-### 3.18. Clearing all Entries : `clear`
+### 3.19. Clearing all Entries : `clear`
 Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
 Format: `clear`
 
 
-### 3.19. Exiting the Program : `exit`
+### 3.20. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format: `exit`
@@ -359,10 +373,6 @@ Format: `exit`
  Install the app in the other computer and overwrite the empty data file it creates with
  the file that contains the data of your previous Task Manager folder.
 
-**Q**: TypeTask does not launch in Eclipse. How can I solve this issue?<br>
-Make sure that you run the program as a java application. Also, try refreshing the Gradle project
-by try right clicking on the file -> Gradle -> Refresh Gradle project
-&nbsp;
 
 ## 5. Command Summary
 
