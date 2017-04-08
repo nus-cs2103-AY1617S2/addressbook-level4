@@ -68,8 +68,6 @@ public class ConfigUtilTest {
     public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         Config expected = getTypicalConfig();
         Config actual = read("ExtraValuesConfig.json").get();
-        System.out.println(actual);
-        System.out.println(expected);
         assertEquals(expected, actual);
     }
 
@@ -78,7 +76,7 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskBookFilePath("data/addressbook.xml");
+        config.setTaskBookFilePath("data/taskbook.xml");
         config.setTaskBook("MyTaskBook");
         return config;
     }
