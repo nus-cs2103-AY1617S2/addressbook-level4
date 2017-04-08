@@ -33,11 +33,11 @@ public class TestApp extends MainApp {
         this.saveFileLocation = saveFileLocation;
 
         // If some initial local data has been provided, write those to the file
-        // if (initialDataSupplier.get() != null) {
-        //     TestUtil.createDataFileWithData(
-        //             new XmlSerializableTaskList(this.initialDataSupplier.get()),
-        //             this.saveFileLocation);
-        // }
+        if (initialDataSupplier.get() != null) {
+            TestUtil.createDataFileWithData(
+                    new XmlSerializableTaskList(this.initialDataSupplier.get()),
+                    this.saveFileLocation);
+        }
         //TestUtil.createDataFileWithSampleData(this.saveFileLocation);
     }
 
