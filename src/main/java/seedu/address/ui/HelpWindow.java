@@ -35,8 +35,8 @@ public class HelpWindow extends UiPart<Region> {
         dialogStage = createDialogStage(TITLE, null, scene);
         dialogStage.setMaximized(true); //TODO: set a more appropriate initial size
         FxViewUtil.setStageIcon(dialogStage, ICON);
-        System.out.println("file:///" + System.getProperty("user.dir").replace("\\", "/") + USERGUIDE_URL);
-        browser.getEngine().load("file:///" + System.getProperty("user.dir").replace("\\", "/") + USERGUIDE_URL);
+        browser.getEngine().load("file:///" + System.getProperty("user.dir").replace("\\", "/")
+                + USERGUIDE_URL);
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
     }
 
