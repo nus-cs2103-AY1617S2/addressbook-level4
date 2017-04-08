@@ -85,4 +85,19 @@ public class FileUtil {
         return pathWithForwardSlash.replace("/", File.separator);
     }
 
+    //@@author A0163559U
+    /**
+     * Compares the contents of two files.
+     * @param f1 file 1
+     * @param f2 file 2
+     * @return true if file contents are identical
+     * @throws IOException
+     */
+    public static boolean isFileContentSame(File f1, File f2) throws IOException {
+        String fileAsString1 = readFromFile(f1);
+        String fileAsString2 = readFromFile(f2);
+        return fileAsString1.equals(fileAsString2);
+    }
+    //@@author
+
 }
