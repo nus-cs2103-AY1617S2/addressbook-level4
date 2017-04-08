@@ -17,7 +17,8 @@ public class SampleDataUtil {
                 new Task(new Name("Delete task"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
                 new Task(new Name("Read Harry Potter book 3"), new DueDate(""), new DueDate(""),
                          false, new Priority("Low")),
-                new Task(new Name("Use help command for help"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
+                new Task(new Name("Use help command for help"), new DueDate(""),
+                        new DueDate(""), false, new Priority("Low")),
                 new Task(new Name("Sweep floor"), new DueDate(""), new DueDate(""), false, new Priority("Low")),
             };
         } catch (IllegalValueException e) {
