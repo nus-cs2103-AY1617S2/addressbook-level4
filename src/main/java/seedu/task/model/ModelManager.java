@@ -158,6 +158,17 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    //@@author A0135762A
+    @Override
+    public void updateExactFilteredTaskList(Set<String> keywords) {
+        updateExactFilteredTaskList(new PredicateExpression(new ExactQualifier(keywords)));
+    }
+
+    private void updateExactFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    //@@author
+
     @Override
     public synchronized void truncateOverdueList() {
         overdueTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
@@ -217,7 +228,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0135762A
     @Override
     public void updatePriorityTaskList() {
-        Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().toString().equals("1");
+        Predicate<? super ReadOnlyTask> pred  = s -> s.getPriority().value.equals("1");
         filteredTasks.setPredicate(pred);
     }
 
@@ -244,6 +255,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0135762A
     //========== Inner classes/methods used for Near Match Search =================================================
 
+    // The Levenshtein distance is a string metric for measuring the difference between two sequences.
     private class LevenshteinDistance {
         private int minimum(int a, int b, int c) {
             return Math.min(Math.min(a, b), c);
@@ -270,13 +282,14 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean validLevenshteinDistance(String lhs, String rhs) {
+            // Levenshtein Distance will only be computed if a string consist of more than 3 letters.
             if (rhs.length() < 4) {
                 return false;
             }
 
             for (String word : lhs.split(" ")) {
                 int value = computeLevenshteinDistance(word, rhs);
-
+                // Maximum one letter difference allowed.
                 if (value < 2) {
                     return true;
                 }
@@ -286,6 +299,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    // A Transcription Error is a specific type of data entry error that is commonly made by human operators.
     private class TranspositionError {
         private String swap(String str, int index1, int index2) {
             char[] c = str.toCharArray();
@@ -298,6 +312,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean validTranspositionError(String lhs, String rhs) {
+            // Transcription Error will only be computed if a string consist of more than 3 letters.
             if (rhs.length() < 4) {
                 return false;
             }
@@ -314,6 +329,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    // Take into account all the criteria and return the result.
     private boolean finalNearMatchSearch(String lhs, String rhs) {
         String newLHS = lhs.toLowerCase();
         String newRHS = rhs.toLowerCase();
@@ -389,4 +405,28 @@ public class ModelManager extends ComponentManager implements Model {
             return "keywords =" + String.join(", ", totalKeyWords);
         }
     }
+
+    //@@author A0135762A
+    private class ExactQualifier implements Qualifier {
+        private Set<String> exactKeyWords;
+
+        ExactQualifier(Set<String> totalKeyWords) {
+            this.exactKeyWords = totalKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return exactKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getTaskName().taskName, keyword)
+                            || StringUtil.containsWordIgnoreCase(task.getInfo().value, keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "keywords =" + String.join(", ", exactKeyWords);
+        }
+    }
+    //@@author
 }
