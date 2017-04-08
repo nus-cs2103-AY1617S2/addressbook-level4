@@ -1,21 +1,11 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
 
 import java.util.Arrays;
 import java.util.Collection;
