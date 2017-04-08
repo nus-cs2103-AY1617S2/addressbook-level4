@@ -87,7 +87,7 @@ public class TaskCard extends UiPart<Region> {
                 return true;
             }
         }
-        
+
         return false;
     }
 
