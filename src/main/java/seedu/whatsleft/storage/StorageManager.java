@@ -99,17 +99,19 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleConfigChangedEvent(ConfigChangedEvent cce) {
         String newLocation = cce.data.getWhatsLeftFilePath();
-        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting save location to " + newLocation));
+        logger.info(LogsCenter.getEventHandlingLogMessage(cce, "Setting default filepath to " + newLocation));
         setWhatsLeftFilePath(newLocation);
     }
     // ================ WhatsLeft methods ==============================
     @Override
     public Optional<Config> readUserConfig() throws DataConversionException, IOException {
+        logger.fine("Attempting to read configuration file");
         return userConfigStorage.readUserConfig();
     }
 
     @Override
     public void saveUserConfig(Config config) throws IOException {
+        logger.fine("Attempting to save configuration file");
         userConfigStorage.saveUserConfig(config);
     }
 }
