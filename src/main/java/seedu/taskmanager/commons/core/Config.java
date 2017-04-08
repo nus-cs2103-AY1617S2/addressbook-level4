@@ -3,7 +3,7 @@ package seedu.taskmanager.commons.core;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import seedu.taskmanager.commons.exceptions.DuplicateDataException;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
  * Config values used by the app
@@ -16,7 +16,7 @@ public class Config {
     private String appTitle = "ProcrastiNomore - Task Manager Application";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data/taskmanager.xml";
+    private String taskManagerFilePath = "data\taskmanager.xml";
     private String taskManagerName = "MyTaskManager";
 
     public String getAppTitle() {
@@ -69,7 +69,7 @@ public class Config {
     /**
      * Signals that the file path specified is the same as the current one.
      */
-    public static class DuplicateTaskManagerFilePathException extends DuplicateDataException {
+    public static class DuplicateTaskManagerFilePathException extends IllegalValueException {
         protected DuplicateTaskManagerFilePathException() {
             super("Operation would result in duplicate tasks");
         }

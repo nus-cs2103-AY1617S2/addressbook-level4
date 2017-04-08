@@ -32,11 +32,7 @@ public class ChangeSaveLocationCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-
         try {
-            // Optional<Config> optionalConfig =
-            // ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE);
-            // Config config = optionalConfig.get();
             Config config = new Config();
             config.setTaskManagerFilePath(toSave.toString());
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
