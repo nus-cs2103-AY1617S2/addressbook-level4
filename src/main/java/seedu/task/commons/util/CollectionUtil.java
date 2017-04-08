@@ -14,31 +14,31 @@ public class CollectionUtil {
 
     /** @see #isAnyNull(Collection) */
     public static boolean isAnyNull(Object... items) {
-	return Stream.of(items).anyMatch(Objects::isNull);
+        return Stream.of(items).anyMatch(Objects::isNull);
     }
 
     /**
      * Returns true if any element of {@code items} is null.
-     * 
      * @throws NullPointerException
      *             if {@code items} itself is null.
      */
     public static boolean isAnyNull(Collection<?> items) {
-	return items.stream().anyMatch(Objects::isNull);
+        return items.stream().anyMatch(Objects::isNull);
     }
 
     /**
      * Returns true is any of the given items are present.
      */
-    //@@author A0163845X
+    // @@author A0163845X
     public static boolean isAnyPresent(Optional<?>... items) {
-	//return Stream.of(items).anyMatch(Optional != null && Optional::isPresent);
-	for (Optional<?> optional : items) {
-		if (optional == null || optional.isPresent()) {
-			return true;
-		}
-	}
-	return false;
+        // return Stream.of(items).anyMatch(Optional != null &&
+        // Optional::isPresent);
+        for (Optional<?> optional : items) {
+            if (optional == null || optional.isPresent()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -46,14 +46,14 @@ public class CollectionUtil {
      * {@link Object#equals(Object)}.
      */
     public static boolean elementsAreUnique(Collection<?> items) {
-	final Set<Object> testSet = new HashSet<>();
-	for (Object item : items) {
-	    final boolean itemAlreadyExists = !testSet.add(item); // see Set
-								  // documentation
-	    if (itemAlreadyExists) {
-		return false;
-	    }
-	}
-	return true;
+        final Set<Object> testSet = new HashSet<>();
+        for (Object item : items) {
+            final boolean itemAlreadyExists = !testSet.add(item); // see Set
+                                                                  // documentation
+            if (itemAlreadyExists) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -23,10 +23,10 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-	    + "by the index number used in the last task listing. "
-	    + "Existing values will be overwritten by the input values.\n"
-	    + "Parameters: Index [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - all items in [] are optional\n"
-	    + "Example: " + COMMAND_WORD + " 1 d/140317 s/1200";
+            + "by the index number used in the last task listing. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: Index [d/date1 [date2]] [s/startTime] [e/endTime] [m/description] - "
+            + "all items in [] are optional\n" + "Example: " + COMMAND_WORD + " 1 d/140317 s/1200";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -42,81 +42,81 @@ public class EditCommand extends Command {
      *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
-	assert filteredTaskListIndex > 0;
-	assert editTaskDescriptor != null;
+        assert filteredTaskListIndex > 0;
+        assert editTaskDescriptor != null;
 
-	// converts filteredTaskListIndex from one-based to zero-based.
-	this.filteredTaskListIndex = filteredTaskListIndex - 1;
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
 
-	this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
+        this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
-    public boolean isUndoable () {
-    	return true;
+
+    public boolean isUndoable() {
+        return true;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-	List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-	if (filteredTaskListIndex >= lastShownList.size()) {
-	    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-	}
+        if (filteredTaskListIndex >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
 
-	ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-	Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-	try {
-	    model.updateTask(filteredTaskListIndex, editedTask);
-	} catch (UniqueTaskList.DuplicateTaskException dpe) {
-	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	}
-	model.updateFilteredListToShowAll();
-	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        try {
+            model.updateTask(filteredTaskListIndex, editedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+        model.updateFilteredListToShowAll();
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
 
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-  //@@author A0163845X
+    // @@author A0163845X
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
-	assert taskToEdit != null;
+        assert taskToEdit != null;
 
-	TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
-	TaskDate updatedDate;
-	if (editTaskDescriptor.getTaskDate() == null) {
-		updatedDate = null;
-	} else if (editTaskDescriptor.getTaskDate().isPresent()) {
-		updatedDate = editTaskDescriptor.getTaskDate().get();
-	} else {
-		updatedDate = taskToEdit.getTaskDate();
-	}
-	//TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElseGet(taskToEdit::getTaskDate);
-	//TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
-	//TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
-	TaskTime updatedStartTime;
-	if (editTaskDescriptor.getTaskStartTime() == null) {
-		updatedStartTime = null;
-	} else if (editTaskDescriptor.getTaskStartTime().isPresent()) {
-		updatedStartTime = editTaskDescriptor.getTaskStartTime().get();
-	} else {
-		updatedStartTime = taskToEdit.getTaskStartTime();
-	}
-	TaskTime updatedEndTime;
-	if (editTaskDescriptor.getTaskEndTime() == null) {
-		updatedEndTime = null;
-	} else if (editTaskDescriptor.getTaskEndTime().isPresent()) {
-		updatedEndTime = editTaskDescriptor.getTaskEndTime().get();
-	} else {
-		updatedEndTime = taskToEdit.getTaskEndTime();
-	}
+        TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
+        TaskDate updatedDate;
+        if (editTaskDescriptor.getTaskDate() == null) {
+            updatedDate = null;
+        } else if (editTaskDescriptor.getTaskDate().isPresent()) {
+            updatedDate = editTaskDescriptor.getTaskDate().get();
+        } else {
+            updatedDate = taskToEdit.getTaskDate();
+        }
 
-	String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
-	TaskStatus remainStatus = new TaskStatus("Ongoing");
-	UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+        TaskTime updatedStartTime;
+        if (editTaskDescriptor.getTaskStartTime() == null) {
+            updatedStartTime = null;
+        } else if (editTaskDescriptor.getTaskStartTime().isPresent()) {
+            updatedStartTime = editTaskDescriptor.getTaskStartTime().get();
+        } else {
+            updatedStartTime = taskToEdit.getTaskStartTime();
+        }
 
-	return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription, remainStatus,
-		updatedTags);
+        TaskTime updatedEndTime;
+        if (editTaskDescriptor.getTaskEndTime() == null) {
+            updatedEndTime = null;
+        } else if (editTaskDescriptor.getTaskEndTime().isPresent()) {
+            updatedEndTime = editTaskDescriptor.getTaskEndTime().get();
+        } else {
+            updatedEndTime = taskToEdit.getTaskEndTime();
+        }
+
+        String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
+        TaskStatus remainStatus = new TaskStatus("Ongoing");
+        UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        return new Task(updatedTaskName, updatedDate, updatedStartTime, updatedEndTime, updatedDescription,
+                remainStatus, updatedTags);
 
     }
 
@@ -125,87 +125,86 @@ public class EditCommand extends Command {
      * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-	private Optional<TaskName> taskName = Optional.empty();
-	private Optional<TaskDate> taskDate = Optional.empty();
-	private Optional<TaskTime> taskStartTime = Optional.empty();
-	private Optional<TaskTime> taskEndTime = Optional.empty();
-	private Optional<String> taskDescription = Optional.empty();
-	private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<TaskName> taskName = Optional.empty();
+        private Optional<TaskDate> taskDate = Optional.empty();
+        private Optional<TaskTime> taskStartTime = Optional.empty();
+        private Optional<TaskTime> taskEndTime = Optional.empty();
+        private Optional<String> taskDescription = Optional.empty();
+        private Optional<UniqueTagList> tags = Optional.empty();
 
-	public EditTaskDescriptor() {
-	}
+        public EditTaskDescriptor() {
+        }
 
-	public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-	    this.taskName = toCopy.getTaskName();
-	    this.taskDate = toCopy.getTaskDate();
-	    this.taskStartTime = toCopy.getTaskStartTime();
-	    this.taskEndTime = toCopy.getTaskEndTime();
-	    this.taskDescription = toCopy.getTaskDescription();
-	    this.tags = toCopy.getTags();
-	}
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            this.taskName = toCopy.getTaskName();
+            this.taskDate = toCopy.getTaskDate();
+            this.taskStartTime = toCopy.getTaskStartTime();
+            this.taskEndTime = toCopy.getTaskEndTime();
+            this.taskDescription = toCopy.getTaskDescription();
+            this.tags = toCopy.getTags();
+        }
 
-	/**
-	 * Returns true if at least one field is edited.
-	 */
-	public boolean isAnyFieldEdited() {
-	    return CollectionUtil.isAnyPresent(this.taskName, this.taskDate, this.taskStartTime, this.taskEndTime,
-		    this.taskDescription, this.tags);
-	}
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyPresent(this.taskName, this.taskDate, this.taskStartTime, this.taskEndTime,
+                    this.taskDescription, this.tags);
+        }
 
-	public void setTaskName(Optional<TaskName> taskName) {
-	    assert taskName != null;
-	    this.taskName = taskName;
-	}
+        public void setTaskName(Optional<TaskName> taskName) {
+            assert taskName != null;
+            this.taskName = taskName;
+        }
 
-	public Optional<TaskName> getTaskName() {
-	    return taskName;
-	}
+        public Optional<TaskName> getTaskName() {
+            return taskName;
+        }
 
-	public void setTaskDate(Optional<TaskDate> date) {
-		//!assert date != null;
-		//allowing for two different nulls to remove fields for edit command
-	    this.taskDate = date;
-	}
+        public void setTaskDate(Optional<TaskDate> date) {
+            // allowing for two different nulls to remove fields for edit
+            // command
+            this.taskDate = date;
+        }
 
-	public Optional<TaskDate> getTaskDate() {
-	    return taskDate;
-	}
+        public Optional<TaskDate> getTaskDate() {
+            return taskDate;
+        }
 
-	public void setTaskStartTime(Optional<TaskTime> startTime) {
-	    //assert startTime != null;
-	    this.taskStartTime = startTime;
-	}
+        public void setTaskStartTime(Optional<TaskTime> startTime) {
+            // assert startTime != null;
+            this.taskStartTime = startTime;
+        }
 
-	public Optional<TaskTime> getTaskStartTime() {
-	    return taskStartTime;
-	}
+        public Optional<TaskTime> getTaskStartTime() {
+            return taskStartTime;
+        }
 
-	public void setTaskEndTime(Optional<TaskTime> endTime) {
-	    //assert endTime != null;
-	    this.taskEndTime = endTime;
-	}
+        public void setTaskEndTime(Optional<TaskTime> endTime) {
+            // assert endTime != null;
+            this.taskEndTime = endTime;
+        }
 
-	public Optional<TaskTime> getTaskEndTime() {
-	    return taskEndTime;
-	}
+        public Optional<TaskTime> getTaskEndTime() {
+            return taskEndTime;
+        }
 
-	public void setTaskDescription(Optional<String> description) {
-	    assert description != null;
-	    this.taskDescription = description;
-	}
+        public void setTaskDescription(Optional<String> description) {
+            assert description != null;
+            this.taskDescription = description;
+        }
 
-	public Optional<String> getTaskDescription() {
-	    return taskDescription;
-	}
+        public Optional<String> getTaskDescription() {
+            return taskDescription;
+        }
 
-	public void setTags(Optional<UniqueTagList> tags) {
-	    assert tags != null;
-	    this.tags = tags;
-	}
+        public void setTags(Optional<UniqueTagList> tags) {
+            assert tags != null;
+            this.tags = tags;
+        }
 
-	public Optional<UniqueTagList> getTags() {
-	    return tags;
-	}
+        public Optional<UniqueTagList> getTags() {
+            return tags;
+        }
     }
-    
 }

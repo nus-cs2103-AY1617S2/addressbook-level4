@@ -28,14 +28,15 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
-//@@author A0146757R
+
+    // @@author A0146757R
     /** Complete the given task. */
     void completeTask(int index) throws UniqueTaskList.TaskNotFoundException;
-//@@author    
+
+    // @@author
     /**
      * Updates the task located at {@code filteredTaskListIndex} with
      * {@code editedTask}.
-     *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.
@@ -59,26 +60,29 @@ public interface Model {
      * keywords
      */
     void updateFilteredTaskList(Set<String> keywords);
-    //@@author A0163845X
-	void undo() throws Exception;
-    //@@author A0163845X
-	void updateBackup() throws DuplicateTaskException;
-    //@@author A0163845X
-	void sort(TaskComparable t);
-    //@@author A0163845X
 
-	void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
-    //@@author A0163845X
+    // @@author A0163845X
+    void undo() throws Exception;
 
-	void redo() throws Exception;
-    //@@author A0163845X
+    // @@author A0163845X
+    void updateBackup() throws DuplicateTaskException;
 
-	public void filterStatus(String status);
-	//void getPath(String path);
-	//@@author A0163845X
-	void showcase(int numberOfTasks) throws DuplicateTaskException;
-	
-	//@@author A0163845X
-	public void filter(Predicate<Object> pred);
+    // @@author A0163845X
+    void sort(TaskComparable t);
+    // @@author A0163845X
+
+    void setTaskManager(Optional<ReadOnlyTaskManager> readTaskManager);
+    // @@author A0163845X
+
+    void redo() throws Exception;
+    // @@author A0163845X
+
+    public void filterStatus(String status);
+
+    // @@author A0163845X
+    void showcase(int numberOfTasks) throws DuplicateTaskException;
+
+    // @@author A0163845X
+    public void filter(Predicate<Object> pred);
 
 }
