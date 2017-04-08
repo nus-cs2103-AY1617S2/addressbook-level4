@@ -3,10 +3,10 @@ package guitests;
 import static org.junit.Assert.assertEquals;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import org.junit.Before;
-import org.junit.Rule;
+//import org.junit.Before;
+//import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+//import org.junit.rules.TemporaryFolder;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.ChangeSaveLocationCommand;
