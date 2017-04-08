@@ -76,11 +76,7 @@ public class EditCommand extends Command {
 
 	ReadOnlyEvent taskToEdit = lastShownList.get(filteredTaskListIndex);
 	Event editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
-	try {
-	    model.updateEvent(filteredTaskListIndex, editedTask);
-	} catch (UniqueEventList.DuplicateEventException dpe) {
-	    throw new CommandException(MESSAGE_DUPLICATE_TASK);
-	}
+	model.updateEvent(filteredTaskListIndex, editedTask);
 	model.updateFilteredListToShowAll();
 	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
