@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import org.teamstbf.yats.logic.commands.AddCommand;
 import org.teamstbf.yats.logic.commands.ChangeSaveLocationCommand;
-import org.teamstbf.yats.logic.commands.ClearCommand;
 import org.teamstbf.yats.logic.commands.ClearDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.DeleteCommand;
@@ -21,6 +20,7 @@ import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.logic.commands.MarkDoneCommand;
 import org.teamstbf.yats.logic.commands.MarkUndoneCommand;
 import org.teamstbf.yats.logic.commands.RedoCommand;
+import org.teamstbf.yats.logic.commands.ResetCommand;
 import org.teamstbf.yats.logic.commands.ScheduleCommand;
 import org.teamstbf.yats.logic.commands.SelectCommand;
 import org.teamstbf.yats.logic.commands.UndoCommand;
@@ -63,8 +63,8 @@ public class Parser {
 		case DeleteCommand.COMMAND_WORD:
 			return new DeleteCommandParser().parse(arguments);
 
-		case ClearCommand.COMMAND_WORD:
-			return new ClearCommand();
+		case ResetCommand.COMMAND_WORD:
+			return new ResetCommand();
 
 		case FindCommand.COMMAND_WORD:
 			return new FindCommandParser().parse(arguments);

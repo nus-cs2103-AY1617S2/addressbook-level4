@@ -44,7 +44,8 @@ public class BatchUnmarkDoneCommand extends Command {
 			}
 
 			ReadOnlyEvent taskToMark = lastShownList.get(targetIndexes.peek());
-			Event markedTask = new Event(taskToMark);
+
+			Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), new IsDone("Yes"), taskToMark.isRecurring(), taskToMark.getRecurrence());
 
 			if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_NOTDONE)) {
 				return new CommandResult(MESSAGE_ALR_MARKED);

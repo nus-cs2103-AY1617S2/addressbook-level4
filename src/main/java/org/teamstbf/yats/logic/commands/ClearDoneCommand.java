@@ -10,7 +10,7 @@ import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 // @@author A0139448U
 /**
- * Clears the done tasks in the task manager.
+ * Command to Clear the done tasks in the task manager.
  */
 public class ClearDoneCommand extends Command {
 
@@ -28,7 +28,7 @@ public class ClearDoneCommand extends Command {
 		UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
 
 		int formerSize = lastShownList.size();
-		model.saveImageOfCurrentTaskManager();
+		model.saveImageOfCurrentTaskManager(); // For undo command
 
 		for (int index = 0; index < lastShownList.size(); index++) {
 			if (lastShownList.get(index).getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
@@ -41,7 +41,7 @@ public class ClearDoneCommand extends Command {
 				index--;
 			}
 		}
-		if (formerSize == lastShownList.size()) {
+		if (formerSize == lastShownList.size()) { // Check if any deletes occurred
 			model.updateFilteredListToShowAll();
 			return new CommandResult(MESSAGE_ALREADY_CLEAR);
 		}

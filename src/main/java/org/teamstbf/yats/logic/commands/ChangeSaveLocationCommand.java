@@ -14,7 +14,8 @@ import org.teamstbf.yats.storage.XmlTaskManagerStorage;
 
 // @@author A0139448U
 /*
- * Changes the location files are saved to
+ * Command to change file directory location
+ * where task manager XML file is saved to
  */
 public class ChangeSaveLocationCommand extends Command {
 

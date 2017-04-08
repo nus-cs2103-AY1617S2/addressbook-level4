@@ -26,7 +26,8 @@ public class ChangeSaveLocationCommandParser {
 		if (arguments.equals("")) {
 			return new IncorrectCommand(NO_LOCATION_SPECIFIED);
 		}
-		if (arguments.equals(INPUT_DEFAULT)) {
+
+		if (arguments.equals(INPUT_DEFAULT)) { // Convenient for users to change to default save location
 			return new ChangeSaveLocationCommand(new File("data/YATS.xml"));
 		}
 

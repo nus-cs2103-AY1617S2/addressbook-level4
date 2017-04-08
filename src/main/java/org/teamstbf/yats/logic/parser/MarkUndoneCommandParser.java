@@ -29,16 +29,9 @@ public class MarkUndoneCommandParser {
 		String[] markIndexArr = ParserUtil.stringTokenizer(args);
 		if (markIndexArr.length > 1) {
 			if (ParserUtil.isAllIntegers(markIndexArr)) {
-				markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
-				for (String element : markIndexArr) {
-					if (!markStack.contains(Integer.valueOf(element) - 1)) {
-						markStack.push(Integer.valueOf(element) - 1);
-					}
-				}
-				return new BatchUnmarkDoneCommand(markStack);
+				return convertToBatchUnmarkDoneCommand(markIndexArr);
 			} else if (!ParserUtil.isAllIntegers(markIndexArr)) {
-				return new IncorrectCommand(
-						String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
+				return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
 			}
 		}
 
@@ -48,6 +41,16 @@ public class MarkUndoneCommandParser {
 		}
 
 		return new MarkUndoneCommand(index.get());
+	}
+
+	public Command convertToBatchUnmarkDoneCommand(String[] markIndexArr) {
+		markIndexArr = ParserUtil.sortIndexArr(markIndexArr);
+		for (String element : markIndexArr) {
+			if (!markStack.contains(Integer.valueOf(element) - 1)) {
+				markStack.push(Integer.valueOf(element) - 1);
+			}
+		}
+		return new BatchUnmarkDoneCommand(markStack);
 	}
 
 }

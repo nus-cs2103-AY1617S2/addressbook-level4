@@ -12,13 +12,13 @@ public class IsDoneTest {
 	@Test
 	public void test() {
 		// valid IsDone
-		assertTrue(IsDone.isValidDone("Yes")); // done task
-		assertTrue(IsDone.isValidDone("No")); // undone task
+		assertTrue(IsDone.isValidIsDone("Yes")); // done task
+		assertTrue(IsDone.isValidIsDone("No")); // undone task
 
 		// invalid IsDone
-		assertFalse(IsDone.isValidDone("yes"));
-		assertFalse(IsDone.isValidDone("no"));
-		assertFalse(IsDone.isValidDone("gg.com"));
+		assertFalse(IsDone.isValidIsDone("yes"));
+		assertFalse(IsDone.isValidIsDone("no"));
+		assertFalse(IsDone.isValidIsDone("gg.com"));
 	}
 
 }

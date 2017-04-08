@@ -22,7 +22,7 @@ import org.teamstbf.yats.commons.events.model.TaskManagerChangedEvent;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.events.ui.ShowHelpRequestEvent;
 import org.teamstbf.yats.logic.commands.AddCommand;
-import org.teamstbf.yats.logic.commands.ClearCommand;
+import org.teamstbf.yats.logic.commands.ResetCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.CommandResult;
 import org.teamstbf.yats.logic.commands.DeleteCommand;
@@ -362,7 +362,7 @@ public class LogicManagerTest {
 		model.addEvent(helper.generateEvent(2));
 		model.addEvent(helper.generateEvent(3));
 
-		assertCommandSuccess("reset", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+		assertCommandSuccess("reset", ResetCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
 	}
 
 	@Test
