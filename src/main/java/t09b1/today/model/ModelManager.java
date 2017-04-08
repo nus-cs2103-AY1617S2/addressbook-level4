@@ -115,7 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
-        taskManager.setData(newData, clearPrevTasks);
+        taskManager.setData(newData, clearPrevTasks, true);
         indicateTaskManagerChanged(MESSAGE_ON_RESET);
     }
 
@@ -243,7 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // Get previous command, taskManager and view
         String toUndo = commandHistory.pop();
-        taskManager.setData(taskHistory.pop(), true);
+        taskManager.setData(taskHistory.pop(), true, true);
         filteredTasks.setPredicate(predicateHistory.pop());
 
         // Set completed tasks view

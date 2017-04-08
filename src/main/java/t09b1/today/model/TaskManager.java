@@ -49,20 +49,24 @@ public class TaskManager implements ReadOnlyTaskManager {
      * Creates an TaskManager using the Tasks and Tags in the {@code toBeCopied}
      */
     public TaskManager(ReadOnlyTaskManager toBeCopied) {
-        setData(toBeCopied, true);
+        setData(toBeCopied, true, true);
     }
 
     //// list overwrite operations
 
-    public void setTasks(List<? extends Task> tasks) throws IllegalValueException {
-        this.tasks.setTasksWithoutCheck(tasks);
+    public void setTasks(List<? extends Task> tasks, Boolean validate) throws IllegalValueException {
+        if (validate) {
+            this.tasks.setTasks(tasks);
+        } else {
+            this.tasks.setTasksWithoutCheck(tasks);
+        }
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
         this.tags.setTags(tags);
     }
 
-    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks) {
+    public void setData(ReadOnlyTaskManager newData, Boolean clearPrevTasks, Boolean validateData) {
         assert newData != null;
         try {
             if (clearPrevTasks) {
@@ -70,9 +74,9 @@ public class TaskManager implements ReadOnlyTaskManager {
                 for (ReadOnlyTask readOnlyTask : newData.getTaskList()) {
                     tempTasks.add(Task.createTask(readOnlyTask));
                 }
-                setTasks(tempTasks);
+                setTasks(tempTasks, validateData);
             } else {
-                tasks.setTasks(newData.getTaskList());
+                tasks.setTasks(newData.getTaskList(), validateData);
             }
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "TaskManagers should not have duplicate tasks";
