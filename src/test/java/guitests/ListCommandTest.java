@@ -2,7 +2,6 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import seedu.tache.commons.core.Messages;
 import seedu.tache.logic.commands.DeleteCommand;
-import seedu.tache.logic.commands.ListCommand;
 import seedu.tache.testutil.TestTask;
 import seedu.tache.testutil.TestUtil;
 
