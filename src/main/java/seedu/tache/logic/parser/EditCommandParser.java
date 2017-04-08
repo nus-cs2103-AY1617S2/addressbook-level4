@@ -8,21 +8,11 @@ import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,37 +92,20 @@ public class EditCommandParser {
                 String updateValue = preambleFields[i].substring(preambleFields[i].replaceAll("^\\s+", "")
                                      .indexOf(DELIMITER_EDIT_PARAMETER) + 1).trim();
 
-                switch(updateParameter) {
-                case PARAMETER_NAME:
-                case PARAMETER_NAME_2:
+                if (ParserUtil.isFoundIn(updateParameter, PARAMETER_NAME)) {
                     editTaskDescriptor.setName(Optional.of(new Name(updateValue)));
-                    break;
-                case PARAMETER_START_DATE:
-                case PARAMETER_START_DATE_2:
-                case PARAMETER_START_DATE_3:
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_START_DATE)) {
                     editTaskDescriptor.setStartDate(Optional.of(updateValue));
-                    break;
-                case PARAMETER_END_DATE:
-                case PARAMETER_END_DATE_2:
-                case PARAMETER_END_DATE_3:
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_END_DATE)) {
                     editTaskDescriptor.setEndDate(Optional.of(updateValue));
-                    break;
-                case PARAMETER_START_TIME:
-                case PARAMETER_START_TIME_2:
-                case PARAMETER_START_TIME_3:
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_START_TIME)) {
                     editTaskDescriptor.setStartTime(Optional.of(updateValue));
-                    break;
-                case PARAMETER_END_TIME:
-                case PARAMETER_END_TIME_2:
-                case PARAMETER_END_TIME_3:
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_END_TIME)) {
                     editTaskDescriptor.setEndTime(Optional.of(updateValue));
-                    break;
-                case PARAMETER_TAG:
-                case PARAMETER_TAG_2:
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_TAG)) {
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(DELIMITER_EDIT_PARAMETER))));
-                    break;
-                default:
+                } else {
                     throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
                 }
             } catch (IllegalValueException ive) {

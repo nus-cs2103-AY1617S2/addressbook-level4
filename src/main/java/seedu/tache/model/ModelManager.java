@@ -203,10 +203,9 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords) {
         assert keywords != null;
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
-        ArrayList<String> keywordsList = new ArrayList<String>(keywords);
         updateFilteredTaskListType(TASK_LIST_TYPE_FOUND);
         retainLatestKeywords(keywords);
-        raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
+        raise(new TaskListTypeChangedEvent("Find \"" + StringUtil.generateStringFromKeywords(keywords) + "\""));
     }
 
     private void updateFilteredTaskList(Expression expression) {

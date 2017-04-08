@@ -26,7 +26,7 @@ public class CompleteCommand extends Command implements Undoable {
             + "Parameters: INDEX1 (must be a positive integer), INDEX2, INDEX3, ... \n"
             + "Example: " + COMMAND_WORD + " 1, 2, 6, 8";
 
-    public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: \n%1$s";
+    public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task(s): \n%1$s";
     public static final String MESSAGE_NOT_COMPLETED = "At least one task's index must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
@@ -146,7 +146,7 @@ public class CompleteCommand extends Command implements Undoable {
         assert completedList != null;
         String successMessage = "";
         for (int i = 0; i < completedList.size(); i++) {
-            successMessage += completedList.get(i).toString();
+            successMessage += completedList.get(i).getAsText();
         }
         return successMessage;
     }

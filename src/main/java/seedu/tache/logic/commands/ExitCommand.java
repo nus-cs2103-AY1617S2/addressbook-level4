@@ -10,8 +10,8 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
     //@@author A0150120H
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits Tache\n"
-            + "All changes will be saved but undo history will be discarded\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits Tache.\n"
+            + "All changes will be saved but undo history will be discarded.\n"
             + "Example: " + COMMAND_WORD;
     //@@author
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Tache as requested ...";

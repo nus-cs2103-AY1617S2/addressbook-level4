@@ -23,7 +23,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     //@@author A0142255M
     @Test
-    public void editAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "name Buy Eggs and Bread; end_date 01-04-17 19:55:12; tag HighPriority;";
         int taskManagerIndex = 3;
         TestTask editedTask = new TaskBuilder().withName("Buy Eggs and Bread")
@@ -34,7 +34,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author
 
     @Test
-    public void editNotAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_notAllFieldsSpecified_success() throws Exception {
         String detailsToEdit = "tag HighPriority;";
         int taskManagerIndex = 2;
 
@@ -45,7 +45,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void editClearTagsSuccess() throws Exception {
+    public void edit_clearTags_success() throws Exception {
         String detailsToEdit = "tag ;";
         int taskManagerIndex = 2;
 
@@ -57,7 +57,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     //@@author A0139925U
     @Test
-    public void editFindThenEditSuccess() throws Exception {
+    public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find friend");
 
         String detailsToEdit = "name Visit friends";
@@ -80,14 +80,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author
 
     @Test
-    public void editMissingTaskIndexFailure() {
+    public void edit_missingTaskIndex_failure() {
         commandBox.runCommand("edit Project");
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     //@@author A0139925U
     @Test
-    public void editParameterFailure() {
+    public void edit_parameter_failure() {
         commandBox.runCommand("edit 1; chicken ccc;");
         assertResultMessage(EditCommandParser.MESSAGE_INVALID_PARAMETER);
 
@@ -96,7 +96,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void editInvalidTaskIndexFailure() {
+    public void edit_invalidTaskIndex_failure() {
         commandBox.runCommand("edit -1; name Project");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
@@ -116,14 +116,14 @@ public class EditCommandTest extends TaskManagerGuiTest {
     //@@author
 
     @Test
-    public void editNoFieldsSpecifiedFailure() {
+    public void edit_noFieldsSpecified_failure() {
         commandBox.runCommand("edit 1");
         assertResultMessage("Invalid command format! \n" + EditCommand.MESSAGE_USAGE);
     }
 
     //@@author A0139925U
     @Test
-    public void editInvalidValuesFailure() {
+    public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1; start_date *&");
         assertResultMessage(DateTime.MESSAGE_DATE_CONSTRAINTS);
 
@@ -148,7 +148,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
     //@@author A0142255M
     @Test
-    public void editDuplicateTaskFailure() {
+    public void edit_duplicateTask_failure() {
 
         commandBox.runCommand("edit 5; name Buy Eggs and Bread; end_date 04-01-17; end_time 19:55:12; "
                 + "tag HighPriority;");

@@ -18,7 +18,7 @@ public class SelectCommand extends Command {
     public static final String SHORT_COMMAND_WORD = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the task identified by the index number used in the last task listing.\n"
+            + ": Selects the task identified by the index number used in the current task list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

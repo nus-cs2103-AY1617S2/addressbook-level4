@@ -1,21 +1,11 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_2;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG_2;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -161,27 +151,8 @@ public class ParserUtil {
      * Returns False otherwise.
      */
     public static boolean isValidParameter(String input) {
-        switch (input) {
-        case PARAMETER_NAME:
-        case PARAMETER_NAME_2:
-        case PARAMETER_START_DATE:
-        case PARAMETER_START_DATE_2:
-        case PARAMETER_START_DATE_3:
-        case PARAMETER_END_DATE:
-        case PARAMETER_END_DATE_2:
-        case PARAMETER_END_DATE_3:
-        case PARAMETER_START_TIME:
-        case PARAMETER_START_TIME_2:
-        case PARAMETER_START_TIME_3:
-        case PARAMETER_END_TIME:
-        case PARAMETER_END_TIME_2:
-        case PARAMETER_END_TIME_3:
-        case PARAMETER_TAG:
-        case PARAMETER_TAG_2:
-            return true;
-        default:
-            return false;
-        }
+        return ParserUtil.isFoundIn(input, PARAMETER_NAME, PARAMETER_START_DATE, PARAMETER_END_DATE,
+                PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG);
     }
     //@@author
     /**
@@ -242,12 +213,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        for (String identifier: START_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, START_DATE_IDENTIFIER);
     }
 
     /**
@@ -256,12 +222,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        for (String identifier: END_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, END_DATE_IDENTIFIER);
     }
 
     /**
@@ -324,6 +285,22 @@ public class ParserUtil {
 
     public static boolean isDate(String s) {
         return DateTime.isDate(s);
+    }
+    /**
+     * Checks if the given string exists in any of the arrays in strArrays. Check is case insensitive
+     * @param s String to check
+     * @param strArrays Arrays of Strings to check against
+     * @return true if s is in strArray, false otherwise
+     */
+    public static boolean isFoundIn(String s, String[]... strArrays) {
+        for (String[] strArray: strArrays) {
+            for (String str: strArray) {
+                if (s.equalsIgnoreCase(str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

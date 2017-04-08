@@ -32,15 +32,11 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last tasks listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer); <parameter1> <new_value1>;"
-            + "<parameter2> <new_value2>...\n"
-            + "Example: " + COMMAND_WORD + " 1; start_date 10/11/2017; start_time 3.30pm;"
-            + "Or alternatively you can use the following format\n"
             + "Parameters: INDEX (must be a positive integer) change <parameter1> to <new_value1> and "
             + "<parameter2> to <new_value2>...\n"
-            + "Example: " + COMMAND_WORD + " 1 change startdate to 10/11/2017 and change starttime to 3.30pm;";
+            + "Example: " + COMMAND_WORD + " 1 change startdate to 10 nov and change starttime to 3.30pm";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Start date can not be before end date";

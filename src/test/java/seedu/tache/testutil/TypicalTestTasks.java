@@ -25,11 +25,11 @@ public class TypicalTestTasks {
                     .withEndDateTime("04-01-17 19:55:12")
                     .withTags("HighPriority").build();
             readBook = new TaskBuilder().withName("Read Book about Software Engineering")
-                    .withEndDateTime("04-21-17 23:59:59")
+                    .withEndDateTime("23:59:59 two weeks later")
                     .withTags("LowPriority").build();
             visitFriend = new TaskBuilder().withName("Visit Friend")
-                    .withStartDateTime("04-15-17 16:00:00")
-                    .withEndDateTime("04-21-17 19:00:00").build();
+                    .withStartDateTime("16:00:00 next week")
+                    .withEndDateTime("19:00:00 two weeks later").build();
             payDavid = new TaskBuilder().withName("Pay David 20 for cab").build();
             visitSarah = new TaskBuilder().withName("Visit Sarah")
                                           .withTags("MediumPriority").build();

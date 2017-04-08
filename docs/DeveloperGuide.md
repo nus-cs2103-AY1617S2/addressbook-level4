@@ -199,20 +199,12 @@ The sections below give more details for each component.
 
 ### 3.2. User Interface (UI) Component
 
+Author: Tan Yu Wei
+
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/tache/ui/Ui.java)
-
-The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts.
-(e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`) <br>
-
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
-
-> The `UI` component uses the _JavaFX UI_ framework. <br>
-The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. <br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
 Functions of `UI`:
 
@@ -221,6 +213,42 @@ Functions of `UI`:
 * Binds itself to some data in the `Model` so that the UI of Tache can auto-update when data in the `Model` changes
 
 * Responds to events raised from various parts of the Tache and updates its UI accordingly
+
+The [User Interface](#user-interface-ui) (UI) consists of a `MainWindow` that is made up of several parts
+(e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`). All these, including the `MainWindow`, inherit from the abstract `UiPart` class. <br>
+
+The `UI` component uses the _JavaFX UI_ framework. <br>
+The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+[`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml). <br>
+
+#### Design Patterns
+
+* Model-View-Controller (MVC) Pattern
+
+  > Model: the [Model](#34-model-component) component
+  > View: the .fxml files in the src/main/resources/view folder
+  > Controller: subclasses of UiPart (e.g. `TaskListPanel`)
+
+* Observer Pattern
+
+  > Observers: objects that are registered with the EventsCenter and have the @Subscribe annotation
+  > Observable: classes that raise events for the EventsCenter to notify all relevant subscibers
+
+#### CalendarPanel
+
+The purpose of the `CalendarPanel` is to provide users with an overview of their [timed tasks](#timed-task) for the day, week or month.
+Instead of implementing the functionality of a calendar from scratch, a JavaScript jQuery plug-in for an event calendar,
+[FullCalendar](https://fullcalendar.io), is loaded using a JavaFX WebEngine. <br>
+The calendar is updated whenever there are relevant changes made to the task manager.
+
+* For example, this is what happens when a [timed task](#timed-task) is selected:
+
+  > 1. `TaskListPanel` raises a `TaskPanelSelectionChangedEvent`. <br>
+  > 2. `CalendarPanel` handles the event and retrieves the date of the selected task. <br>
+  > 3. After the WebEngine successfully loads, it executes the script "change_reference_date(date)". <br>
+  > 4. This script calls the FullCalendar library method 'goToDate', passing in parameter 'date'. <br>
+  > 5. The calendar is then moved to the specified date. <br>
 
 ### 3.3. Logic Component
 
@@ -332,6 +360,17 @@ Then choose `Run as` > `JUnit Test`.
 These are _System Tests_ that test the entire Tache by simulating user actions on the
 [Graphical User Interface](#graphical-user-interface-gui) (GUI). <br>
 These tests are found in the `guitests` package.
+
+Author: Tan Yu Wei
+
+Because the [CalendarPanel](#calendarpanel)'s functionality is provided by JavaScript,
+testing its functions fully using the _JUnit framework_ is not possible given that JUnit only
+supports Java. Hence, the functionality of the `CalendarPanel` is tested minimally by examining the result
+displayed at the `ResultDisplay` whenever a command is executed. <br>
+
+For instance, to move the calendar to the previous day, month or year, the command "prev" is
+executed. The test will then pass if `ResultDisplay` prints out the message
+"Previous day/week/month displayed at the calendar.", but fail otherwise. <br>
 
 **Non-GUI Tests**:
 
@@ -471,12 +510,14 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
+Author: Tan Yu Wei
+
 ### Use case: Show possible commands to be executed
 
 **MSS**
 
 1. `User` types a letter or a sequence of letters
-2. `Tache` shows a list of commands that contain that letter or sequence of letters
+2. `Tache` shows a list of commands that start with the letter or sequence of letters
 3. `User` selects specific command in list
 4. `Tache` performs an [autocomplete](#autocomplete) on user's command <br>
 Use case ends.
@@ -559,7 +600,7 @@ Use case ends.
 > 1b1. `Tache` informs `User` that the task already exists<br>
 Use case ends
 
-### Use case: Undo task
+### Use case: Undo command
 
 **MSS**
 
@@ -727,6 +768,10 @@ Here are some terms that are worth defining: <br>
 #### Sync:
 
 > Ensure that data files in two or more locations are updated
+
+#### Timed Task:
+
+> A task which is associated with specific dates and times, such as events and tasks with deadlines
 
 #### User Interface (UI):
 

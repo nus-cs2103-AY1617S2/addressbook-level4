@@ -60,6 +60,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ");
         builder.append("\"" + getName() + "\"");
         if (getStartDateTime().isPresent()) {
             builder.append(" Start Date and Time: \"" + getStartDateTime().get().toString() + "\"");

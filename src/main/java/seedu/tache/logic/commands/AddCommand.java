@@ -32,14 +32,14 @@ public class AddCommand extends Command implements Undoable {
     public static final String SHORT_COMMAND_WORD = "a";
     public static final String TAG_SEPARATOR = "t/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. \n"
             + "Parameters: NAME [from <START DATE & TIME>] [to <END DATE & TIME>] [t/TAG1 TAG2...]\n"
             + "Example: " + COMMAND_WORD
             + " Orientation week camp from 25/7/16 0800 to 28/7/2016 0900 t/ HighPriority Events";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-    public static final String MESSAGE_TASK_NOT_FOUND = "%1$s no longer exists in the task manager";
+    public static final String MESSAGE_SUCCESS = "New task added: \n%1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_TASK_NOT_FOUND = "%1$s no longer exists in the task manager.";
 
     private final Task toAdd;
     private boolean commandSuccess;
