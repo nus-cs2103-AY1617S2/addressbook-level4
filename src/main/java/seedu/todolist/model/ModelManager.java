@@ -17,6 +17,7 @@ import seedu.todolist.commons.core.LogsCenter;
 import seedu.todolist.commons.core.UnmodifiableObservableList;
 import seedu.todolist.commons.events.model.TodoListChangedEvent;
 import seedu.todolist.commons.events.storage.SaveFilePathChangedEvent;
+import seedu.todolist.commons.events.ui.JumpToListRequestEvent;
 import seedu.todolist.commons.util.CollectionUtil;
 import seedu.todolist.commons.util.StringUtil;
 import seedu.todolist.model.tag.Tag;
@@ -63,8 +64,16 @@ public class ModelManager extends ComponentManager implements Model {
         return todoList;
     }
 
-    /** Raises an event to indicate the model has changed */
-    private void indicateTodoListChanged() {
+    /*
+     * Raises an event to indicate the model has changed
+     * Takes the modified ReadOnlyTodo as an optional parameter
+     * */
+    private void indicateTodoListChanged(ReadOnlyTodo todo) {
+        if (todo != null) {
+            int todoListIndex = filteredTodos.indexOf(todo);
+            raise(new JumpToListRequestEvent(todoListIndex));
+        }
+
         raise(new TodoListChangedEvent(todoList));
     }
 
@@ -80,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTodoList newData) {
         todoList.resetData(newData);
-        indicateTodoListChanged();
+        indicateTodoListChanged(null);
     }
     //@@author A0163786N
     @Override
@@ -94,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         TodoList tempTodoList = new TodoList(todoList);
         todoList.removeTodo(target);
         handleStateChange(tempTodoList);
-        indicateTodoListChanged();
+        indicateTodoListChanged(null);
     }
 
     @Override
@@ -104,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
         todoList.addTodo(todo);
         handleStateChange(tempTodoList);
         updateFilteredListToShowAll();
-        indicateTodoListChanged();
+        indicateTodoListChanged(todo);
     }
 
     @Override
@@ -116,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
         TodoList tempTodoList = new TodoList(todoList);
         todoList.updateTodo(todoListIndex, editedTodo);
         handleStateChange(tempTodoList);
-        indicateTodoListChanged();
+        indicateTodoListChanged(editedTodo);
     }
     //@@author A0163786N
     @Override
@@ -124,7 +133,13 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.completeTodo(todoListIndex, completeTime);
-        indicateTodoListChanged();
+        try {
+            Todo todo = todoList.getTodo(todoListIndex);
+            indicateTodoListChanged(todo);
+        } catch (TodoNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     //@@author
     //@@author A0163786N
@@ -133,7 +148,13 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.uncompleteTodo(todoListIndex);
-        indicateTodoListChanged();
+        try {
+            Todo todo = todoList.getTodo(todoListIndex);
+            indicateTodoListChanged(todo);
+        } catch (TodoNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     //@@author
     //@@author A0163786N

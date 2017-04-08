@@ -110,6 +110,20 @@ public class UniqueTodoList implements Iterable<Todo> {
         setTodos(replacement);
     }
 
+    /**
+     * Returns todo from list of todos via index
+     * @throws TodoNotFoundException
+     */
+    //@@author A0163720M
+    public Todo getTodo(int index) throws TodoNotFoundException {
+        if (index < 0 || index >= this.internalList.size()) {
+            throw new TodoNotFoundException();
+        }
+
+        return this.internalList.get(index);
+    }
+    //@@author
+
     public UnmodifiableObservableList<Todo> asObservableList() {
         return new UnmodifiableObservableList<>(internalList);
     }
