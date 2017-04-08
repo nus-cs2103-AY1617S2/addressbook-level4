@@ -56,7 +56,9 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks except the deleted
         // task
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(eventTaskListPanel.isListMatching(expectedRemainder));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedRemainder));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedRemainder));
 
         // confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));

@@ -22,24 +22,26 @@ public class TypicalTestTasks {
             eatbreakfast = new TaskBuilder().withTaskName("Eat breakfast with mom").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build(); // event
-            eatlunch = new TaskBuilder().withTaskName("Eat lunch at techno").withStartDate("EMPTY_FIELD")
-                    .withStartTime("EMPTY_FIELD").withEndDate("04/03/17").withEndTime("1400").withCompletion(false)
-                    .withCategories("no", "friends").build(); // deadline
-            eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withStartDate("09/03/17")
-                    .withStartTime("1800").withEndDate("09/03/17").withEndTime("2000").withCompletion(false).build();
             doCS = new TaskBuilder().withTaskName("Start on the CS2103 project").withStartDate("03/03/17")
                     .withStartTime("1400").withEndDate("03/04/17").withEndTime("1800").withCompletion(false)
                     .withCategories("work").build(); // event
+            eatdinner = new TaskBuilder().withTaskName("Eat dinner with my only 2 friends").withStartDate("09/03/17")
+                    .withStartTime("1800").withEndDate("09/03/17").withEndTime("2000").withCompletion(false).build();
+            // event
+
             giveupCS = new TaskBuilder().withTaskName("Give up on CS2103 project").withStartDate("04/04/17")
                     .withStartTime("1400").withEndDate("05/04/17").withEndTime("1500").withCompletion(false)
                     .withCategories("lepak").build(); // event
+            tryagainCS = new TaskBuilder().withTaskName("Try again for CS2103").withStartDate("05/04/17")
+                    .withStartTime("1500").withEndDate("05/05/17").withEndTime("1600").withCompletion(false)
+                    .withCategories("work").build(); // event
+            eatlunch = new TaskBuilder().withTaskName("Eat lunch at techno").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("04/03/17").withEndTime("1400").withCompletion(false)
+                    .withCategories("no", "friends").build(); // deadline
             regret = new TaskBuilder().withTaskName("Endless cycles of regret").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("EMPTY_FIELD").withEndTime("EMPTY_FIELD")
                     .withCompletion(false).withCategories("lepak").build(); // floating
                                                                             // task
-            tryagainCS = new TaskBuilder().withTaskName("Try again for CS2103").withStartDate("05/04/17")
-                    .withStartTime("1500").withEndDate("05/05/17").withEndTime("1600").withCompletion(false)
-                    .withCategories("work").build(); // event
 
             // Manually added
             sampleEvent = new TaskBuilder().withTaskName("Time to relax a little").withStartDate("06/05/17")

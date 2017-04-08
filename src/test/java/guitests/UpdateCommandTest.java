@@ -5,7 +5,7 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.EventTaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
@@ -131,7 +131,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
 
         // confirm the new card contains the right data
-        TaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullTaskName);
+        EventTaskCardHandle updatedCard = taskListPanel.navigateToTask(updatedTask.getTaskName().fullTaskName);
         assertMatching(updatedTask, updatedCard);
 
         // confirm the list now contains all previous tasks plus the task with

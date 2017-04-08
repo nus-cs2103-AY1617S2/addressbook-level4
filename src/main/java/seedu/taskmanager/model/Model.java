@@ -24,7 +24,7 @@ public interface Model {
     void saveTaskManager();
 
     /** Redo previous action of task manager. */
-    public void redoTaskManager();
+    void redoTaskManager();
 
     /** Undo previous action of task manager. */
     void undoTaskManager();
