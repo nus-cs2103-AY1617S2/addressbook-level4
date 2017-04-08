@@ -48,7 +48,7 @@ public class SampleDataUtil {
                             new TaskDate("050117"), new TaskTime("2000"), new TaskTime("2020"),
                             new String("Call in advance for food order."),
                             new TaskStatus("Ongoing"), new UniqueTagList()),
-                new Task(new TaskName("Buy toiletries."), new TaskDate("090117"),
+                new Task(new TaskName("Buy toiletries"), new TaskDate("090117"),
                             new TaskTime("1830"), new TaskTime("1900"),
                             new String("Check for ongoing promotions."), new TaskStatus("Ongoing"),
                             new UniqueTagList()),

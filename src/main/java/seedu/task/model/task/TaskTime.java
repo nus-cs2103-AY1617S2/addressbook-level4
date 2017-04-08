@@ -43,6 +43,8 @@ public class TaskTime {
                 throw new IllegalValueException(MESSAGE_INVALID_TIME_FORMAT);
             }
             time = dates.get(0);
+            setMinute(dates.get(0).getMinutes());
+            setHour(dates.get(0).getHours());
         }
 
     }

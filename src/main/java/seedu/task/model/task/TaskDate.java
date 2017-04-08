@@ -66,10 +66,24 @@ public class TaskDate {
 		} catch (Exception e) {
 			formatter = new SimpleDateFormat(OUTPUT_FORMAT);
 			NattyParser natty = new NattyParser();
-			dates = natty.parse(input);
+      dates = natty.parse(input);
 
             if (dates == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+
+            if(dates.size() == 1){
+                setDay(dates.get(0).getDate());
+                setMonth(dates.get(0).getMonth());
+                setYear(dates.get(0).getYear());
+            }
+            if(dates.size() == 2){
+                setDay(dates.get(0).getDate());
+                setMonth(dates.get(0).getMonth());
+                setYear(dates.get(0).getYear());
+                setSecondDay(dates.get(1).getDate());
+                setSecondMonth(dates.get(1).getMonth());
+                setSecondYear(dates.get(1).getYear());
             }
         }
 
