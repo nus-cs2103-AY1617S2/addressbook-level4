@@ -60,7 +60,6 @@ public class XmlAdaptedTask {
         dueDate = source.getDueDate().value;
         recur = source.getRecur().value;
         hasStarted = source.getStarted();
-        System.out.println(source.getStarted());
         done = source.getDone();
 
         tagged = new ArrayList<>();
