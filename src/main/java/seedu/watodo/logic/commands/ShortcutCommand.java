@@ -1,5 +1,7 @@
 package seedu.watodo.logic.commands;
 
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 
@@ -20,8 +22,9 @@ public class ShortcutCommand extends Command {
     public static final String COMMAND_WORD = "shortcut";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds or removes a shortcut key to one of the "
             + "standard functionalities of the task manager. "
-            + "Parameters: <+><-> COMMAND_WORD SHORTCUT_KEY" + "Example: "
-            + COMMAND_WORD + " + add a/";
+            + "Parameters: OPERATION COMMAND_WORD SHORTCUT_KEY\n" + "Example: "
+            + COMMAND_WORD + " + add a/\n"
+            + "adds the shortcut key 'a/' for the 'add' command.";
 
     public static final String MESSAGE_SUCCESS_ADDED = "New shortcut key added: %1$s";
     public static final String MESSAGE_SUCCESSS_DELETED = "Existing shortcut key deleted: %1$s";
@@ -33,7 +36,7 @@ public class ShortcutCommand extends Command {
      */
     public ShortcutCommand(String operation, String commandWord, String shortcutKey) throws IllegalValueException {
         if  (!isArgsValid(operation, commandWord)) {
-            throw new IllegalValueException(MESSAGE_USAGE);
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
         this.operation = operation;
         this.commandWord = commandWord;
@@ -46,7 +49,7 @@ public class ShortcutCommand extends Command {
      */
     private boolean isArgsValid(String operation, String commandWord) {
         return (operation.equals(SHORTCUT_ADD_OPERATION) || operation.equals(SHORTCUT_DEL_OPERATION)) &&
-               AlternativeCommand.COMMANDS_WORDS.contains(commandWord);
+               AlternativeCommandLibrary.COMMANDS_WORDS.contains(commandWord);
     }
 
     @Override
@@ -58,23 +61,36 @@ public class ShortcutCommand extends Command {
         }
     }
 
+    /**
+     * Adds the shortcutKey to the given commandWord.
+     *
+     * @throws CommandException if the shortcutKey already exists in the task manager
+     */
     private CommandResult executeAdd() throws CommandException {
-        if (AlternativeCommand.containsAlternative(shortcutKey)) {
+        if (AlternativeCommandLibrary.isAlternative(shortcutKey)) {
             throw new CommandException(MESSAGE_DUPLICATE_SHORTCUT_KEY);
         }
-        AlternativeCommand.addAlternative(shortcutKey, commandWord);
+        AlternativeCommandLibrary.addAlternative(shortcutKey, commandWord);
         return new CommandResult(String.format(MESSAGE_SUCCESS_ADDED, shortcutKey + "->" + commandWord));
     }
 
+    /**
+     * Deletes the shortcutKey from the given commandWord.
+     *
+     * @throws CommandException if the shortcutKey, commandWord pair does not exist in the task manager
+     */
     private CommandResult executeDel() throws CommandException {
-        if (!AlternativeCommand.containsAlternative(shortcutKey)) {
+        if (!AlternativeCommandLibrary.isAlternative(shortcutKey)) {
             throw new CommandException(MESSAGE_DELETE_INVALID_SHORTCUT_KEY);
         }
-        if (!AlternativeCommand.deleteAlternative(shortcutKey, commandWord)) { //shortcut key exists but is mapped to
-                                                                     //a comandWord different from that given by user
-            throw new CommandException(MESSAGE_DELETE_INVALID_SHORTCUT_KEY);
+        if (shortcutKey.equals(commandWord)) {
+            throw new CommandException("");
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESSS_DELETED, shortcutKey + "->" + commandWord));
+        if (AlternativeCommandLibrary.deleteAlternative(shortcutKey, commandWord)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESSS_DELETED, shortcutKey + "->" + commandWord));
+        }
+        throw new CommandException(MESSAGE_DELETE_INVALID_SHORTCUT_KEY); //shortcut key exists but is mapped to
+                                                                        //a comandWord different from that given by user
     }
 
     @Override
