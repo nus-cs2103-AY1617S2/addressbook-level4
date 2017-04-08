@@ -9,7 +9,6 @@ import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -32,13 +31,18 @@ public class NotificationManager {
     public static final int EVENT_TYPE = 0;
     public static final int DEADLINE_TYPE = 1;
     public static final int REMOVE_SECONDS_OFFSET = 3;
+    public static final String IMAGE_ICON_PATH = "/images/info_icon.png";
+    public static final String NOTIFICATION_TEXT = "notification";
+    public static final String DISMISS_TEXT = "Dismiss";
+    public static final String DUE_TIME_WITH_NAME_TEXT = " is due in 2Hrs.";
+    public static final String DUE_TIME_WITHOUT_NAME_TEXT = "This task is due in 2Hrs";
+    public static final String START_TIME_WITH_NAME_TEXT = " is starting in 2Hrs.";
+    public static final String START_TIME_WITHOUT_NAME_TEXT = "This task is starting in 2Hrs";
+    public static final String FULL_STOP_TEXT = ".";
+    public static final String AT_TEXT = " at ";
 
     private Logic logic;
     private Timer notificationTimer;
-
-    public NotificationManager() {
-        notificationTimer = new Timer();
-    }
 
     public NotificationManager(Logic logic) {
         this.logic = logic;
@@ -52,50 +56,23 @@ public class NotificationManager {
      */
     private void initNotificationTimerWithTasks(ObservableList<ReadOnlyTask> taskList) {
         for (ReadOnlyTask task : taskList) {
-            //if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
             if (task.getStartDateTime().isPresent() && isDueInMoreThanTwoHours(task.getStartDateTime().get())) {
                 notificationTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        try {
-                            showSystemTrayNotification(task, EVENT_TYPE);
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (AWTException e) {
-                            e.printStackTrace();
-                        }
+                        showSystemTrayNotification(task, EVENT_TYPE);
                     }
                 }, getTwoHoursBefore(task.getStartDateTime().get())); //0 indicate that it will only be scheduled once
             } else if (task.getEndDateTime().isPresent() && isDueInMoreThanTwoHours(task.getEndDateTime().get())) {
                 notificationTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        try {
-                            showSystemTrayNotification(task, DEADLINE_TYPE);
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (AWTException e) {
-                            e.printStackTrace();
-                        }
+                        showSystemTrayNotification(task, DEADLINE_TYPE);
                     }
                 }, getTwoHoursBefore(task.getEndDateTime().get())); //0 indicate that it will only be scheduled once
             }
         }
     }
-
-/*    private boolean checkIfValid(ReadOnlyTask task) {
-        Date tomorrow = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(tomorrow);
-        calendar.add(Calendar.DATE, 1);
-        tomorrow = calendar.getTime();
-        if (task.getEndDateTime().isPresent()) {
-            if (task.getEndDateTime().get().isSameDate(tomorrow)) {
-                return true;
-            }
-        }
-        return false;
-    }*/
 
     /**
      * Converts the time of the given object to 2 hours before it with a 3 seconds
@@ -125,37 +102,36 @@ public class NotificationManager {
      * Shows a notification from the system tray.
      * @param task: The task that is being notified about.
      */
-    private void showSystemTrayNotification(ReadOnlyTask task, int type)
-            throws AWTException, java.net.MalformedURLException {
+    private void showSystemTrayNotification(ReadOnlyTask task, int type) {
         SystemTray tray = SystemTray.getSystemTray();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/images/info_icon.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource(IMAGE_ICON_PATH));
         java.awt.Image image = icon.getImage();
-        TrayIcon trayIcon = new TrayIcon(image, "notification");
+        TrayIcon trayIcon = new TrayIcon(image, NOTIFICATION_TEXT);
         trayIcon.setImageAutoSize(true);
 
         String displayMsg = "";
         if (type == DEADLINE_TYPE) {
-            trayIcon.setToolTip(task.getName().fullName + " is due in 2Hrs.");
-            displayMsg += "This task is due in 2Hrs";
+            trayIcon.setToolTip(task.getName().fullName + DUE_TIME_WITH_NAME_TEXT);
+            displayMsg += DUE_TIME_WITHOUT_NAME_TEXT;
             if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
                 String time = task.getEndDateTime().get().getTimeOnly();
-                displayMsg += " at " + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + ".";
+                displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
             } else {
-                displayMsg += ".";
+                displayMsg += FULL_STOP_TEXT;
             }
         }
         if (type == EVENT_TYPE) {
-            trayIcon.setToolTip(task.getName().fullName + " is starting in 2Hrs.");
-            displayMsg += "This task is starting in 2Hrs";
+            trayIcon.setToolTip(task.getName().fullName + START_TIME_WITH_NAME_TEXT);
+            displayMsg += START_TIME_WITHOUT_NAME_TEXT;
             if (!task.getStartDateTime().get().getTimeOnly().isEmpty()) {
                 String time = task.getStartDateTime().get().getTimeOnly();
-                displayMsg += " at " + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + ".";
+                displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
             } else {
-                displayMsg += ".";
+                displayMsg += FULL_STOP_TEXT;
             }
         }
 
-        MenuItem dismissMenuItem = new MenuItem("Dismiss");
+        MenuItem dismissMenuItem = new MenuItem(DISMISS_TEXT);
         dismissMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,7 +143,11 @@ public class NotificationManager {
         popupMenu.add(dismissMenuItem);
 
         trayIcon.setPopupMenu(popupMenu);
-        tray.add(trayIcon);
+        try {
+            tray.add(trayIcon);
+        } catch (AWTException ex) {
+            ex.printStackTrace();
+        }
         trayIcon.displayMessage(task.getName().fullName, displayMsg, MessageType.INFO);
     }
 
@@ -213,6 +193,20 @@ public class NotificationManager {
            .owner(mainWindow.getPrimaryStage())
            .darkStyle()
             .show();
+    }*/
+
+    /*private boolean checkIfValid(ReadOnlyTask task) {
+        Date tomorrow = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(tomorrow);
+        calendar.add(Calendar.DATE, 1);
+        tomorrow = calendar.getTime();
+        if (task.getEndDateTime().isPresent()) {
+            if (task.getEndDateTime().get().isSameDate(tomorrow)) {
+                return true;
+            }
+        }
+        return false;
     }*/
 
 }
