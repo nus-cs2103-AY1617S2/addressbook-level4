@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.whatsleft.commons.core.UnmodifiableObservableList;
 import seedu.whatsleft.commons.exceptions.DuplicateDataException;
 import seedu.whatsleft.commons.util.CollectionUtil;
-import seedu.whatsleft.model.activity.UniqueTaskList.TaskNotFoundException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
