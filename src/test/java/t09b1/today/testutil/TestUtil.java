@@ -37,11 +37,14 @@ import t09b1.today.commons.util.XmlUtil;
 import t09b1.today.logic.commands.AddCommand;
 import t09b1.today.model.TaskManager;
 import t09b1.today.model.tag.Tag;
+import t09b1.today.model.tag.UniqueTagList;
+import t09b1.today.model.task.DeadlineTask;
+import t09b1.today.model.task.EventTask;
+import t09b1.today.model.task.FloatingTask;
+import t09b1.today.model.task.Name;
 import t09b1.today.model.task.ReadOnlyTask;
 import t09b1.today.model.task.Task;
 import t09b1.today.storage.XmlSerializableTaskManager;
-import seedu.address.model.task.FloatingTask;
-import seedu.address.model.task.Name;
 
 /**
  * A utility class for test cases.

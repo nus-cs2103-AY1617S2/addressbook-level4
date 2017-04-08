@@ -32,8 +32,6 @@ import t09b1.today.commons.events.model.TaskManagerChangedEvent;
 import t09b1.today.commons.events.ui.JumpToListRequestEvent;
 import t09b1.today.commons.events.ui.ShowHelpRequestEvent;
 import t09b1.today.commons.util.FileUtil;
-import t09b1.today.logic.Logic;
-import t09b1.today.logic.LogicManager;
 import t09b1.today.logic.commands.AddCommand;
 import t09b1.today.logic.commands.ClearCommand;
 import t09b1.today.logic.commands.Command;
@@ -62,15 +60,15 @@ import t09b1.today.model.ReadOnlyTaskManager;
 import t09b1.today.model.TaskManager;
 import t09b1.today.model.tag.Tag;
 import t09b1.today.model.tag.UniqueTagList;
-import t09b1.today.model.task.DeadlineTask;
-import t09b1.today.model.task.EventTask;
-import t09b1.today.model.task.FloatingTask;
+import t09b1.today.model.task.DateTime;
 import t09b1.today.model.task.Name;
 import t09b1.today.model.task.ReadOnlyTask;
 import t09b1.today.model.task.Task;
+import t09b1.today.model.task.UniqueTaskList.DuplicateTaskException;
 import t09b1.today.storage.Storage;
 import t09b1.today.storage.StorageManager;
-import seedu.address.testutil.TypicalTasks;
+import t09b1.today.testutil.TestUtil;
+import t09b1.today.testutil.TypicalTasks;
 
 public class LogicManagerTest {
 
@@ -550,8 +548,7 @@ public class LogicManagerTest {
     public void execute_find_onlyMatchesFullWordsInNamesAndNotCaseSensitive() throws Exception {
         List<Task> expectedList = Arrays.asList(td.completedListEvent);
 
-        assertCommandSuccess("find go", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find go", Command.getMessageForTaskListShownSummary(0), expectedAB, expectedList);
     }
 
     @Test
@@ -559,8 +556,7 @@ public class LogicManagerTest {
         List<Task> expectedList = Arrays.asList(td.todayListFloat, td.futureListDeadline, td.futureListEvent,
                 td.completedListFloat);
 
-        assertCommandSuccess("find project", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
-                expectedList);
+        assertCommandSuccess("find project", Command.getMessageForTaskListShownSummary(3), expectedAB, expectedList);
     }
 
     // @@author A0144422R
@@ -568,35 +564,21 @@ public class LogicManagerTest {
     public void execute_find_date() throws Exception {
         List<Task> expectedList = Arrays.asList(td.todayListDeadline, td.completedListDeadline, td.completedListEvent);
 
-        assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+        assertCommandSuccess("find due today", Command.getMessageForTaskListShownSummary(1), expectedAB, expectedList);
     }
 
     @Test
-    public void execute_find_multipleArgs() throws Exception {
+    public void execute_find_twoArgs() throws Exception {
         List<Task> expectedList = Arrays.asList(td.completedListDeadline, td.completedListEvent);
-        Task targetTagAndName1 = helper.generateTaskWithNameAndTags("bla bla KEY bla", "KEY");
-        Task targetTagAndName2 = helper.generateTaskWithNameAndTags("bla KEY bla bceofeia", "blahbla", "KEY");
-        Task targetTag1 = helper.generateTaskWithNameAndTags("bla bleepa", "KEY");
-        Task targetTag2 = helper.generateTaskWithNameAndTags("bloopy beep", "blahbla", "KEY");
-        Task targetTag3 = helper.generateTaskWithNameAndTags("KE Y", "nope");
-        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
-        Task p3 = helper.generateTaskWithNameAndTags("KE YY", "KEYY");
 
-        List<Task> sevenTasks = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2,
-                targetTag3, p2, p3);
-        TaskManager expectedAB = helper.generateTaskManager(sevenTasks);
-        List<Task> expectedList = helper.generateTaskList(targetTagAndName1, targetTagAndName2, targetTag1, targetTag2,
-                targetTag3);
-        helper.addToModel(model, sevenTasks);
-
-        assertCommandSuccess("find nope beep key", Command.getMessageForTaskListShownSummary(expectedList.size()),
-                expectedAB, expectedList);
+        assertCommandSuccess("find go goes", Command.getMessageForTaskListShownSummary(0), expectedAB, expectedList);
     }
 
     @Test
+    public void execute_find_fourArgs() throws Exception {
+        List<Task> expectedList = Arrays.asList(td.completedListFloat, td.completedListDeadline, td.completedListEvent);
 
-        assertCommandSuccess("find go goes", Command.getMessageForTaskListShownSummary(expectedList.size()), expectedAB,
+        assertCommandSuccess("find go goes rock mark", Command.getMessageForTaskListShownSummary(0), expectedAB,
                 expectedList);
     }
 
