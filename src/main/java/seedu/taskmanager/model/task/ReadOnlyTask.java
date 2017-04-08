@@ -14,7 +14,6 @@ public interface ReadOnlyTask {
     Optional<StartDate> getStartDate();
     Optional<EndDate> getEndDate();
     Optional<Description> getDescription();
-
     Status getStatus();
 
     /**
@@ -33,6 +32,8 @@ public interface ReadOnlyTask {
                 && other.getTitle().equals(this.getTitle()) // state checks here onwards
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
+                && (other.getStatus().value || this.getStatus().value) ?
+                        false : other.getStatus().equals(this.getStatus())
                 && other.getDescription().equals(this.getDescription()));
     }
 
