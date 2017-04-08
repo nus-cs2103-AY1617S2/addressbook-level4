@@ -107,7 +107,8 @@ public class Parser {
      * @return
      */
     public boolean isSetCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SetCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getSet().equals(commandWord);
+        return SetCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getSet().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -116,7 +117,8 @@ public class Parser {
      * @return
      */
     public boolean isRedoCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return RedoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getRedo().equals(commandWord);
+        return RedoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getRedo().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -125,7 +127,8 @@ public class Parser {
      * @return
      */
     public boolean isUndoCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return UndoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getUndo().equals(commandWord);
+        return UndoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getUndo().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -134,7 +137,8 @@ public class Parser {
      * @return
      */
     public boolean isLoadCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return LoadCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getLoad().equals(commandWord);
+        return LoadCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getLoad().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -143,7 +147,8 @@ public class Parser {
      * @return
      */
     public boolean isSaveCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SaveCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getSave().equals(commandWord);
+        return SaveCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getSave().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -152,7 +157,8 @@ public class Parser {
      * @return
      */
     public boolean isHelpCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return HelpCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getHelp().equals(commandWord);
+        return HelpCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getHelp().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -161,7 +167,8 @@ public class Parser {
      * @return
      */
     public boolean isExitCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ExitCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getExit().equals(commandWord);
+        return ExitCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getExit().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -170,7 +177,8 @@ public class Parser {
      * @return
      */
     public boolean isListCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ListCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getList().equals(commandWord);
+        return ListCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getList().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -179,7 +187,8 @@ public class Parser {
      * @return
      */
     public boolean isFindCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return FindCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getFind().equals(commandWord);
+        return FindCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getFind().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -188,8 +197,8 @@ public class Parser {
      * @return
      */
     public boolean isClearCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ClearCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) ||
-            commandSettings.getClear().equals(commandWord);
+        return ClearCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getClear().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -198,8 +207,8 @@ public class Parser {
      * @return
      */
     public boolean isDeleteCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return DeleteCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) ||
-            commandSettings.getDelete().equals(commandWord);
+        return DeleteCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getDelete().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -208,7 +217,8 @@ public class Parser {
      * @return
      */
     public boolean isSortCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SortCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getSort().equals(commandWord);
+        return SortCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getSort().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -217,8 +227,8 @@ public class Parser {
      * @return
      */
     public boolean isUnmarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return UnmarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) ||
-            commandSettings.getUnmark().equals(commandWord);
+        return UnmarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getUnmark().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -227,7 +237,8 @@ public class Parser {
      * @return
      */
     public boolean isMarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return MarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getMark().equals(commandWord);
+        return MarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getMark().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -236,7 +247,8 @@ public class Parser {
      * @return
      */
     public boolean isDoneCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return DoneCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getDone().equals(commandWord);
+        return DoneCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getDone().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -245,8 +257,8 @@ public class Parser {
      * @return
      */
     public boolean inSelectCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SelectCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) ||
-            commandSettings.getSelect().equals(commandWord);
+        return SelectCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getSelect().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -255,7 +267,8 @@ public class Parser {
      * @return
      */
     public boolean isEditCommandWord(final String commandWord, CommandSettings commandSettings) {
-        return EditCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getEdit().equals(commandWord);
+        return EditCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getEdit().equalsIgnoreCase(commandWord);
     }
 
     /**
@@ -264,7 +277,8 @@ public class Parser {
      * @return
      */
     public boolean isAddCommandWord(final String commandWord, CommandSettings commandSettings) {
-        return AddCommand.COMMAND_WORD.equalsIgnoreCase(commandWord) || commandSettings.getAdd().equals(commandWord);
+        return AddCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
+                || commandSettings.getAdd().equalsIgnoreCase(commandWord);
     }
 
 }
