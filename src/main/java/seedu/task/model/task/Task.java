@@ -240,7 +240,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         this.occurrences = occurrences;
     }
 
-    /** If frequency is in hours - support up to 168 hours (1 week)
+    /** If frequency is in years - support up to 4 years
      * If frequency is in days - support up to 60 days
      * If frequency is in months - support up to 12 months
      * @param startTime
@@ -251,11 +251,6 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         if (isRecurring()) {
             String freqCharacter = frequency.getFrequencyCharacter();
             switch (freqCharacter) {
-            case "h":
-                int hourLimit = RecurringFrequency.HOUR_LIMIT;
-                int hourOfDay = Calendar.HOUR_OF_DAY;
-                setOccurrences(initialStartTime, initialEndTime, hourLimit, hourOfDay);
-                break;
             case "d":
                 int dayLimit = RecurringFrequency.DAY_LIMIT;
                 int day = Calendar.DATE;
@@ -265,6 +260,11 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                 int monthLimit = RecurringFrequency.MONTH_LIMIT;
                 int month = Calendar.MONTH;
                 setOccurrences(initialStartTime, initialEndTime, monthLimit, month);
+                break;
+            case "y":
+                int yearLimit = RecurringFrequency.YEAR_LIMIT;
+                int year = Calendar.YEAR;
+                setOccurrences(initialStartTime, initialEndTime, yearLimit, year);
                 break;
             default:
                 break;

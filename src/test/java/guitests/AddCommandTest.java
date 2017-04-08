@@ -77,24 +77,44 @@ public class AddCommandTest extends AddressBookGuiTest {
 
     @Test
     public void addRecurringTask() throws IllegalValueException {
+        //test monthly recurring task
         TestTask[] currentList = td.getEmptyTasks();
         TestTask taskToAdd = td.recMonth;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertTrue(taskListPanel.isListMatching(currentList));
-        ArrayList<RecurringTaskOccurrence> hardCoded = new ArrayList<RecurringTaskOccurrence>();
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2017"), new Timing("05/01/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/03/2017"), new Timing("05/03/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("05/05/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/07/2017"), new Timing("05/07/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/09/2017"), new Timing("05/09/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/11/2017"), new Timing("05/11/2017")));
-        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2018"), new Timing("05/01/2018")));
-        Task task = new Task(taskToAdd.getDescription(), taskToAdd.getPriority(),
+        ArrayList<RecurringTaskOccurrence> hardCodedMonth = new ArrayList<RecurringTaskOccurrence>();
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/01/2017"), new Timing("05/01/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/03/2017"), new Timing("05/03/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("05/05/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/07/2017"), new Timing("05/07/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/09/2017"), new Timing("05/09/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/11/2017"), new Timing("05/11/2017")));
+        hardCodedMonth.add(new RecurringTaskOccurrence(new Timing("01/01/2018"), new Timing("05/01/2018")));
+        Task taskMonth = new Task(taskToAdd.getDescription(), taskToAdd.getPriority(),
                 taskToAdd.getStartTiming(), taskToAdd.getEndTiming(), taskToAdd.getTags(),
                 taskToAdd.isRecurring(), taskToAdd.getFrequency());
+        assertOccurrenceSame(hardCodedMonth, taskMonth.getOccurrences());
 
-        assertOccurrenceSame(hardCoded, task.getOccurrences());
+        //test daily recurring tasks
+        taskToAdd = td.recDay;
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(currentList));
+        ArrayList<RecurringTaskOccurrence> hardCodedDay = new ArrayList<RecurringTaskOccurrence>();
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("01/05/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("11/05/2017"), new Timing("11/05/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("21/05/2017"), new Timing("21/05/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("31/05/2017"), new Timing("31/05/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("10/06/2017"), new Timing("10/06/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("20/06/2017"), new Timing("20/06/2017")));
+        hardCodedDay.add(new RecurringTaskOccurrence(new Timing("30/06/2017"), new Timing("30/06/2017")));
+        Task taskDay = new Task(taskToAdd.getDescription(), taskToAdd.getPriority(),
+                taskToAdd.getStartTiming(), taskToAdd.getEndTiming(), taskToAdd.getTags(),
+                taskToAdd.isRecurring(), taskToAdd.getFrequency());
+        assertOccurrenceSame(hardCodedDay, taskDay.getOccurrences());
+
+
     }
 
 
