@@ -160,8 +160,8 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         int filteredTaskListIndex = 1;
         int taskBossIndex = 2;
         TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
-        TestTask terminatedTask = new TaskBuilder(taskToMarkDone).withCategories("Done").build();
-        TestTask[] resultList = { markedDoneTask };
+        TestTask terminatedTask = new TaskBuilder(taskToTerminate).withCategories("Done").build();
+        TestTask[] resultList = { terminatedTask };
 
         assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, terminatedTask, resultList);
 

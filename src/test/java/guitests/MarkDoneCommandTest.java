@@ -53,7 +53,7 @@ public class MarkDoneCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Jun 28, 2017 5pm")
                 .withCategories("Done", "Alltasks", "Friends", "Owesmoney").build();
 
-        assertMarkDoneSuccess(false, false, taskBossIndex, taskBossIndex, markedDoneTask);
+        assertMarkDoneSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask, expectedTasksList);
     }
 
     /*
