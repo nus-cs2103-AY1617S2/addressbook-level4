@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.core.UnmodifiableObservableList;
+import seedu.taskboss.commons.events.ui.JumpToCategoryListEvent;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.BuiltInCategoryException;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
@@ -140,6 +141,7 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             model.updateFilteredListToShowAll();
+            EventsCenter.getInstance().post(new JumpToCategoryListEvent(new Category("Alltasks")));
             scrollToTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
