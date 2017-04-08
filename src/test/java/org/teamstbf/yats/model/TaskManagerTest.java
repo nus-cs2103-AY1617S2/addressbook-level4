@@ -43,7 +43,6 @@ public class TaskManagerTest {
 		assertEquals(newData, taskManager);
 	}
 
-
 	@Test
 	public void resetData_withDuplicateTags_throwsAssertionError() {
 		TaskManager typicalTaskManager = new TypicalTestEvents().getTypicalTaskManager();
@@ -58,7 +57,8 @@ public class TaskManagerTest {
 	}
 
 	/**
-	 * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+	 * A stub ReadOnlyAddressBook whose persons and tags lists can violate
+	 * interface constraints.
 	 */
 	private static class TaskManagerStub implements ReadOnlyTaskManager {
 		private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();

@@ -7,8 +7,8 @@ import org.teamstbf.yats.commons.events.BaseEvent;
  */
 public class ExitAppRequestEvent extends BaseEvent {
 
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 }

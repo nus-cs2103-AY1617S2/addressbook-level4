@@ -142,24 +142,32 @@ public class TestEvent implements ReadOnlyEvent {
 	}
 
 	@Override
-	public boolean hasStartEndTime() {
-		if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+	public boolean hasStartAndEndTime() {
+		if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean hasStartOrEndTime() {
+		if (!this.startTime.toString().equals("") || !this.endTime.toString().equals("")) {
+			return true;
+		}
+		return false;
 	}
 
 	public void setDeadline(Schedule schedule) {
 		this.deadline = schedule;
 	}
 
-    @Override
-    public Recurrence getRecurrence() {
-        return this.recurrence;
-    }
+	@Override
+	public Recurrence getRecurrence() {
+		return this.recurrence;
+	}
 
-    @Override
-    public boolean isRecurring() {
-        return this.isRecurring;
-    }
+	@Override
+	public boolean isRecurring() {
+		return this.isRecurring;
+	}
 }

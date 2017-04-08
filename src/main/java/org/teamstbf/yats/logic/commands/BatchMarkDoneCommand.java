@@ -43,7 +43,9 @@ public class BatchMarkDoneCommand extends Command {
 
 		for (int i = 0; i < numOfTask; i++) {
 			ReadOnlyEvent taskToMark = lastShownList.get(targetIndexes.peek());
+
 			Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), new IsDone(), taskToMark.isRecurring(), taskToMark.getRecurrence());
+
 			if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 				return new CommandResult(MESSAGE_ALR_MARKED);
 			}

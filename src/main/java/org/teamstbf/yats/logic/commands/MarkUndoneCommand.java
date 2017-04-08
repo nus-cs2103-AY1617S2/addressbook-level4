@@ -44,7 +44,7 @@ public class MarkUndoneCommand extends Command {
 		}
 
 		ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
-		Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), taskToMark.getIsDone(), taskToMark.isRecurring(), taskToMark.getRecurrence());
+		Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), new IsDone("Yes"), taskToMark.isRecurring(), taskToMark.getRecurrence());
 
 		model.saveImageOfCurrentTaskManager(); // For undo command
 

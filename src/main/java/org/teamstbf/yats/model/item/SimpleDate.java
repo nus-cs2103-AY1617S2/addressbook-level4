@@ -4,8 +4,8 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's Date in the task manager. Guarantees: immutable; is valid
- * as declared in {@link #isValidDeadline(String)}
- * NOT USED!!!!!!!!!
+ * as declared in {@link #isValidDeadline(String)} NOT USED!!!!!!!!!
+ * 
  * @Deprecated use {@link #Schedule()} instead
  */
 @Deprecated

@@ -7,15 +7,15 @@ import org.teamstbf.yats.commons.events.BaseEvent;
  */
 public class JumpToListRequestEvent extends BaseEvent {
 
-    public final int targetIndex;
+	public final int targetIndex;
 
-    public JumpToListRequestEvent(int targetIndex) {
-        this.targetIndex = targetIndex;
-    }
+	public JumpToListRequestEvent(int targetIndex) {
+		this.targetIndex = targetIndex;
+	}
 
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 
 }
