@@ -10,6 +10,6 @@
         <URL value="@Extensions.css"/>
     </stylesheets>
     <AnchorPane fx:id="mainPane">
-        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+        <TextArea fx:id="resultDisplay" editable="false" wrapText="true" styleClass="result-display"/>
     </AnchorPane>
 </AnchorPane>

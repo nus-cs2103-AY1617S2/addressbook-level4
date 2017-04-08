@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskboss>
+    <tasks>
+        <name>Hack &amp; Roll</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Jan 21, 2017</startDateTime>
+        <endDateTime>Jan 22, 2017</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Events</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Research on project</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Feb 19, 2017</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Software 0.3 version submission</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 22, 2017 2:00 PM</endDateTime>
+        <information>update must-have features, fix bugs</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Software 0.4 version submission</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 29, 2017 2:00 PM</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Review project milestones</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 29, 2017 11:59 PM</endDateTime>
+        <information>team meeting</information>
+        <recurrence>MONTHLY</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Pay bills</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 30, 2017</endDateTime>
+        <information>check lists</information>
+        <recurrence>MONTHLY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Financial aid application</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 31, 2017 5:00 PM</endDateTime>
+        <information>must submit hardcopy documents</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Call dad</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 31, 2017</endDateTime>
+        <information>update him about job application</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Prepare presentation script</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Mar 31, 2017</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Update LinkedIn profile</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Apr 01, 2017</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Software final version submission</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Apr 05, 2017 2:00 PM</endDateTime>
+        <information>check all the contents and references</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>clear up archives</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Apr 08, 2017 8:00 PM</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Project A progress report</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Apr 14, 2017</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Weekend party</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 15, 2017 9:00 PM</startDateTime>
+        <endDateTime>Apr 15, 2017 11:00 PM</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Events</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Submit product design diagrams</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>Apr 23, 2017 9:00 PM</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>French training in company</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 25, 2017 9:00 AM</startDateTime>
+        <endDateTime>Apr 25, 2017 12:00 PM</endDateTime>
+        <information>read textbook before the training</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Email investigation report to manager</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime>May 03, 2017 12:00 PM</endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Call Mom</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Visit grandma</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime>Apr 01, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information>bring her a new phone :)</information>
+        <recurrence>WEEKLY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Project meeting to check progress</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime>Mar 31, 2017 9:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>prepare notes and reports, be punctual</information>
+        <recurrence>WEEKLY</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Reply boss' email</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Collating documents</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>send email to boss after finishing the collation</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Email boss for team information</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Email Jack to confirm meeting time</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Meetings</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Website optimization</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>improve performance, update photos</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Call Hellen to confirm meeting schedule</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Fix errors in Project A reports</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Dating with Amy</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime>Apr 09, 2017 6:00 PM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>buy flowers</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Company dinner</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Mar 22, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information>dress formally</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Events</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Product report submission</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 05, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>House cleaning</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Mar 29, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information>kitchen, living room, study room, computer room [important]</information>
+        <recurrence>WEEKLY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Check email inbox</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>delete junk emails, manage personal emails and work emails</information>
+        <recurrence>DAILY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>My birthday</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Feb 13, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information>20 years old!</information>
+        <recurrence>YEARLY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Mom's birthday</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Aug 10, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information>buy her a cake, CDs</information>
+        <recurrence>YEARLY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Check mail box</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>newpapers, letters, cards</information>
+        <recurrence>DAILY</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Help John to finish his report</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Collect &amp; check customer's information</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>bring photocopy to the next meeting</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Email Hellen to check progress of report</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 14, 2017 8:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Reports</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Excel skills training</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 10, 2017 3:00 PM</startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>WEEKLY</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Print data document for meeting</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information>document A 55 copies, document B 100 copies</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Meetings</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Presentation for product optimization</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 12, 2017 3:00 PM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>30mins during project meeting @meeting room 4</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Meetings</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+        <addedToCategory>Projects</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Research on mobile product</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Team building events</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 14, 2017 8:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>@Meeting room1</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Events</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Car washing</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 09, 2017 10:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Interview applicants for engineer</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>May 05, 2017 9:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>@meeting room 9 Blk E Level 4</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Work</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Shopping</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Personal</addedToCategory>
+        <addedToCategory>Alltasks</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Medical check this weekend</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 09, 2017 10:00 AM</startDateTime>
+        <endDateTime></endDateTime>
+        <information>bring id card</information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Get medical report</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime>Apr 09, 2017</startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Buy a new laptop</name>
+        <priorityLevel>Yes</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <tasks>
+        <name>Return books to Harry</name>
+        <priorityLevel>No</priorityLevel>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <information></information>
+        <recurrence>NONE</recurrence>
+        <addedToCategory>Alltasks</addedToCategory>
+        <addedToCategory>Personal</addedToCategory>
+    </tasks>
+    <categories>Important</categories>
+    <categories>Alltasks</categories>
+    <categories>Family</categories>
+    <categories>Personal</categories>
+    <categories>Events</categories>
+    <categories>Work</categories>
+    <categories>Projects</categories>
+    <categories>Meetings</categories>
+    <categories>Reports</categories>
+</taskboss>
