@@ -4,7 +4,6 @@ import seedu.taskboss.commons.core.EventsCenter;
 import seedu.taskboss.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
-import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
 import seedu.taskboss.model.task.UniqueTaskList.SortBy;
 
 //@@author A0143157J
