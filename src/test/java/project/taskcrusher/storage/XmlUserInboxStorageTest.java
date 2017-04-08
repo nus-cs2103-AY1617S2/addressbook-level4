@@ -70,7 +70,7 @@ public class XmlUserInboxStorageTest {
         assertEquals(original, new UserInbox(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.removeTask(new Task(testUserInbox.assignment));
+        original.removeTask(new Task(testUserInbox.assignment1));
         xmlUserInboxStorage.saveUserInbox(original, filePath);
         readBack = xmlUserInboxStorage.readUserInbox(filePath).get();
         assertEquals(original, new UserInbox(readBack));

@@ -57,8 +57,8 @@ public class UserInboxTest {
         TypicalTestUserInbox td = new TypicalTestUserInbox();
 
         // Repeat td.assignment twice
-        List<Task> duplicateTasks = Arrays.asList(new Task(td.assignment), new Task(td.assignment));
-        List<Tag> newTags = td.assignment.getTags().asObservableList();
+        List<Task> duplicateTasks = Arrays.asList(new Task(td.assignment1), new Task(td.assignment1));
+        List<Tag> newTags = td.assignment1.getTags().asObservableList();
         List<Event> emptyEvents = Arrays.asList();
         UserInboxStub newData = new UserInboxStub(duplicateTasks, emptyEvents, newTags);
 
@@ -72,7 +72,7 @@ public class UserInboxTest {
 
         // Repeat td.islandTrip twice
         List<Event> duplicateEvents = Arrays.asList(new Event(td.islandTrip), new Event(td.islandTrip));
-        List<Tag> newTags = td.assignment.getTags().asObservableList();
+        List<Tag> newTags = td.assignment1.getTags().asObservableList();
         List<Task> emptyTasks = Arrays.asList();
         UserInboxStub newData = new UserInboxStub(emptyTasks, duplicateEvents, newTags);
 

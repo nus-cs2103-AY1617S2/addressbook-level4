@@ -20,7 +20,7 @@ import project.taskcrusher.model.task.UniqueTaskList;
  */
 public class TypicalTestUserInbox {
 
-    public TestTaskCard assignment, payment, shopping, phoneCall, application;
+    public TestTaskCard assignment1, assignment2, payment, shopping, phoneCall, application;
     public TestTaskCard notAddedBuyTicket, notAddedYetQuiz;
     public TestEventCard guitarLesson, islandTrip, fixRoof;
     public TestEventCard notAddedYetTownFestival, notAddedYetCheckSamples;
@@ -28,8 +28,11 @@ public class TypicalTestUserInbox {
     public TypicalTestUserInbox() {
         try {
             //==================== Sample tasks ======================
-            assignment = new TaskBuilder().withName("CS2103 assignment")
+            assignment1 = new TaskBuilder().withName("CS2103 assignment")
                     .withDescription(Description.NO_DESCRIPTION).withDeadline("18-6-2020").withPriority("3")
+                    .withTags("school").build();
+            assignment2 = new TaskBuilder().withName("CS9999 assignment")
+                    .withDescription("very very hard").withDeadline("18-6-2018").withPriority("3")
                     .withTags("school").build();
             payment = new TaskBuilder().withName("pay tuition fee").withDescription("Set up bank account")
                     .withDeadline("tomorrow").withPriority("3")
@@ -49,7 +52,8 @@ public class TypicalTestUserInbox {
             guitarLesson = new EventBuilder().withName("Guitar lesson").withPriority("0").withDescription("concert")
                     .withLocation("NUS").withTimeslots(constructTimeslotList(new Timeslot("2017-10-12", "2017-10-15")))
                     .build();
-            islandTrip = new EventBuilder().withName("Island trip").withPriority("3").withDescription("Mr XYZ")
+            islandTrip = new EventBuilder().withName("Island trip").withPriority("3")
+                    .withDescription("do assignment first though")
                     .withTimeslots(constructTimeslotList(new Timeslot("2017-10-12", "2017-10-15")))
                     .withLocation("Carribean").build();
             fixRoof = new EventBuilder().withName("Fix roof").withPriority("2").withDescription("brand audit")
@@ -89,7 +93,7 @@ public class TypicalTestUserInbox {
     }
 
     public TestTaskCard[] getTypicalTasks() {
-        return new TestTaskCard[]{assignment, payment, shopping, phoneCall, application};
+        return new TestTaskCard[]{assignment1, assignment2, payment, shopping, phoneCall, application};
     }
 
     public TestEventCard[] getTypicalEvents() {

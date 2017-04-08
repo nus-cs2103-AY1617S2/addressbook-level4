@@ -20,10 +20,10 @@ public class ClearCommandTest extends TaskcrusherGuiTest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.assignment.getAddCommand());
-        assertTrue(userInboxPanel.isListMatching(td.assignment));
+        commandBox.runCommand(td.assignment1.getAddCommand());
+        assertTrue(userInboxPanel.isListMatching(td.assignment1));
         commandBox.runCommand("delete t 1");
-        assertListSize(0);
+        assertTaskListSize(0);
 
         //verify clear command works when the list is empty
         assertClearCommandSuccess();
@@ -31,7 +31,7 @@ public class ClearCommandTest extends TaskcrusherGuiTest {
 
     private void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
-        assertListSize(0);
+        assertTaskListSize(0);
         assertResultMessage("Active list has been cleared!");
     }
 }

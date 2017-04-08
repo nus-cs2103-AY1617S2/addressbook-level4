@@ -284,7 +284,7 @@ public class TestUtil {
      *            The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestTaskCard[] removePersonsFromList(final TestTaskCard[] persons, TestTaskCard... personsToRemove) {
+    public static TestTaskCard[] removeTasksFromList(final TestTaskCard[] persons, TestTaskCard... personsToRemove) {
         List<TestTaskCard> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
         return listOfPersons.toArray(new TestTaskCard[listOfPersons.size()]);
@@ -299,7 +299,7 @@ public class TestUtil {
      *            e.g. index 1 if the first element is to be removed
      */
     public static TestTaskCard[] removePersonFromList(final TestTaskCard[] list, int targetIndexInOneIndexedFormat) {
-        return removePersonsFromList(list, list[targetIndexInOneIndexedFormat - 1]);
+        return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
     /**

@@ -35,7 +35,7 @@ public class AddCommandTest extends TaskcrusherGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.assignment);
+        assertAddSuccess(td.assignment1);
 
         //invalid command
         commandBox.runCommand("adds earning 100 dollars");

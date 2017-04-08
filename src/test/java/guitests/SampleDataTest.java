@@ -24,6 +24,7 @@ public class SampleDataTest extends TaskcrusherGuiTest {
         return TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
     }
 
+    //@@author A0127737X
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedTaskList = SampleDataUtil.getSampleTasks();

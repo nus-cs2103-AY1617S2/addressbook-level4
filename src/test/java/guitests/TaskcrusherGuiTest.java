@@ -125,9 +125,14 @@ public abstract class TaskcrusherGuiTest {
     /**
      * Asserts the size of the person list is equal to the given number.
      */
-    protected void assertListSize(int size) {
-        int numberOfPeople = userInboxPanel.getNumberOfTasks();
-        assertEquals(size, numberOfPeople);
+    protected void assertTaskListSize(int size) {
+        int numberOfTasks = userInboxPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
+    }
+
+    protected void assertEventListSize(int size) {
+        int numberOfEvents = userInboxPanel.getNumberOfEvents();
+        assertEquals(size, numberOfEvents);
     }
 
     /**
