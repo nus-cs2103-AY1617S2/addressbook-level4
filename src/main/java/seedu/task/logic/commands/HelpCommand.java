@@ -31,8 +31,9 @@ public class HelpCommand extends Command {
         if (commandToShowUser.isEmpty()) {
             EventsCenter.getInstance().post(new ShowHelpRequestEvent());
             return new CommandResult(SHOWING_HELP_MESSAGE);
-        } else  {
-            return new CommandResult(CommandLibrary.getInstance().getCommandUsage(commandToShowUser.trim().toLowerCase()));
+        } else {
+            return new CommandResult(
+                    CommandLibrary.getInstance().getCommandUsage(commandToShowUser.trim().toLowerCase()));
         }
     }
 
