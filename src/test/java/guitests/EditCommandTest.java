@@ -12,6 +12,8 @@ import guitests.guihandles.TaskCardHandle;
 //import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.task.RecurringTaskOccurrence;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.Timing;
 //import seedu.task.model.task.Description;
 //import seedu.task.model.tag.Tag;
 import seedu.task.testutil.TaskBuilder;
@@ -20,12 +22,9 @@ import seedu.task.testutil.TestTask;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends AddressBookGuiTest {
 
-     // The list of persons in the person list panel is expected to match this list.
-     // This list is updated with every successful call to assertEditSuccess().
-    TestTask[] expectedTasksList = td.getTypicalTasks();
-
     @Test
      public void editAllFieldsSpecifiedSuccessForNormalTask() throws Exception {
+        TestTask[] expectedTasksList = td.getTypicalTasks();
         String detailsToEdit = "Bobby p/2 sd/08/04/2017 ed/09/04/2017 t/date";
         int taskListIndex = 1;
 
@@ -42,7 +41,29 @@ public class EditCommandTest extends AddressBookGuiTest {
                  .build();
 
         assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit,
-                 editedTask);
+                 editedTask, expectedTasksList);
+    }
+
+    @Test
+    public void editAllFieldsSepcifiedSuccessForRecurringTask() throws Exception {
+        String detailsToEdit = "Bobby p/2 sd/08/04/2017 ed/09/04/2017 t/date";
+        int taskListIndex = 1;
+        TestTask taskToEdit = td.recMonth;
+        commandBox.runCommand("clear");
+        commandBox.runCommand(taskToEdit.getAddCommand());
+        commandBox.runCommand("editthis 1 " + detailsToEdit);
+        Task task = new Task(taskToEdit.getDescription(), taskToEdit.getPriority(),
+                taskToEdit.getStartTiming(), taskToEdit.getEndTiming(), taskToEdit.getTags(),
+                taskToEdit.isRecurring(), taskToEdit.getFrequency());
+        ArrayList<RecurringTaskOccurrence> hardCoded = new ArrayList<RecurringTaskOccurrence>();
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/03/2017"), new Timing("05/03/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("05/05/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/07/2017"), new Timing("05/07/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/09/2017"), new Timing("05/09/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/11/2017"), new Timing("05/11/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2018"), new Timing("05/01/2018")));
+        task.getOccurrences().remove(0);
+        assertOccurrenceSame(hardCoded, task.getOccurrences());
     }
 
 //     @Test
@@ -141,7 +162,8 @@ public class EditCommandTest extends AddressBookGuiTest {
     details
     */
     private void assertEditSuccess(int filteredTaskListIndex, int
-             taskListIndex, String detailsToEdit, TestTask editedTask) {
+             taskListIndex, String detailsToEdit, TestTask editedTask,
+             TestTask[] expectedTasksList) {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " +
                  detailsToEdit);
 
@@ -156,5 +178,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS,
                  editedTask));
+    }
+
+    private void assertOccurrenceSame(ArrayList<RecurringTaskOccurrence> hardCoded
+            , ArrayList<RecurringTaskOccurrence> taskOccurrences) {
+        assertTrue(hardCoded.size() == taskOccurrences.size());
+        for (int i = 0; i < hardCoded.size(); i++) {
+            assertTrue(hardCoded.get(i).equals(taskOccurrences.get(i)));
+        }
     }
 }
