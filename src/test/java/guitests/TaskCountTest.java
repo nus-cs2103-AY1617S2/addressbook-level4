@@ -9,7 +9,7 @@ import org.junit.Test;
 public class TaskCountTest extends TaskManagerGuiTest {
 
     @Test
-    public void showTaskCountWithDefaultFilteredListOfAllTasks() {
+    public void taskCount_defaultFilteredListOfAllTasks_success() {
         // mixture of timed and floating tasks
         assertEquals(taskCount.getFloatingTaskCount().getText(), "2");
         assertEquals(taskCount.getTimedTaskCount().getText(), "3");
@@ -35,7 +35,7 @@ public class TaskCountTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void showTaskCountWithUserSelectedFilteredListUsingListCommand() {
+    public void taskCount_userSelectedFilteredListUsingListCommand_success() {
         commandBox.runCommand("complete 1, 2, 4");
 
         // list complete
@@ -57,6 +57,17 @@ public class TaskCountTest extends TaskManagerGuiTest {
         commandBox.runCommand("list floating");
         assertEquals(taskCount.getFloatingTaskCount().getText(), "0");
         assertEquals(taskCount.getTimedTaskCount().getText(), "0");
+    }
+
+    @Test
+    public void taskCount_floatingTaskChangedToTimedTask_success() {
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "2");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "3");
+
+        commandBox.runCommand("edit 1 change ed to 4 jun and change et to 2pm");
+
+        assertEquals(taskCount.getFloatingTaskCount().getText(), "1");
+        assertEquals(taskCount.getTimedTaskCount().getText(), "4");
     }
 
 }

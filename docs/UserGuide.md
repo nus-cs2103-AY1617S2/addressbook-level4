@@ -18,10 +18,11 @@ By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbs
     3.7. [Selecting Tasks](#37-select-a-task--select) <br>
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Undoing a Change](#39-undo-a-change--undo) <br>
-	3.10. [Getting Help](#310-get-help--help) <br>
-	3.11. [Changing Data File Location](#311-change-data-file-location) <br>
-	3.12. [Loading Data File From Location](#312-load-data-file-from-location) <br>
-	3.13. [Exiting](#313-exit-the-program--exit)
+	3.10. [Navigating the Calendar](#310-navigate-the-calendar) <br>
+	3.11. [Getting Help](#311-get-help--help) <br>
+	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
+	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
+	3.14. [Exiting](#314-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 
@@ -297,7 +298,20 @@ _Figure 3.9.1. Undo Command_
 
 For advanced users: **`u`** `<task_index>` <br>
 
-### 3.10. Get help : `help`
+### 3.10. Navigate the Calendar: 
+
+Uses commands to replace clicking on the buttons at the calendar.<br>
+
+<img src="images/UiCalendar.png" width="600"><br>
+_Figure 3.10.1. Calendar_
+
+* < : **`prev`** or **`p`** <br>
+* > : **`next`** or **`n`** <br>
+* day: **`show day`** or **`s day`** <br>
+* week: **`show week`** or **`s week`** <br>
+* month: **`show month`** or **`s month`** <br>
+
+### 3.12. Get help : `help`
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
@@ -308,11 +322,11 @@ Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
-_Figure 3.10.1. Help Command_
+_Figure 3.12.1. Help Command_
 
 For advanced users: **`h`** `<task_index>` <br>
 
-### 3.11. Change data file location
+### 3.13. Change data file location
 
 Modifies the file path of my data file. <br>
 Future modifications of my task list will be saved at this new location. <br>
@@ -329,9 +343,9 @@ This command directs me to set my new data file in a `<new_save_location_directo
 then save all my data in that file.
 
 <img src="images/UiSaveCommand.png" width="600"><br>
-_Figure 3.11.1. Save Command_
+_Figure 3.13.1. Save Command_
 
-### 3.12. Load data file from location
+### 3.14. Load data file from location
 
 Loads the specified data file. <br>
 
@@ -345,9 +359,9 @@ Format: **`load`** `<file_path>` <br>
 This command loads the data from the specified file in the `<file_path>`.
 
 <img src="images/UiLoadCommand.png" width="600"><br>
-_Figure 3.12.1. Load Command_
+_Figure 3.14.1. Load Command_
 
-### 3.13. Exit the program : `exit`
+### 3.15. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
@@ -370,6 +384,8 @@ Your wish is my command!
 |Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
 |Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
 |Undo         |**`undo`**                                                     |                                                     |
+|Prev         |**`prev`**                                                     |                                                     |
+|Next         |**`next`**                                                     |                                                     |
 |Help         |**`help`**                                                     |                                                     |
 |Save         |**`save`** `<directory>`                                       |**`save`** `C:\Users\Jim\Desktop`                    |
 |Load         |**`load`** `<file_path>`                                       |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`    |

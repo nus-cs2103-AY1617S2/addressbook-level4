@@ -8,7 +8,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String SHORT_COMMAND_WORD = "u";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" + "Undoes the last change to the address book.\n\t"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last change to the address book.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Undone: %s";

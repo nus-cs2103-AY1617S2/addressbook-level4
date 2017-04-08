@@ -10,7 +10,7 @@ import seedu.tache.logic.commands.PrevCommand;
 public class PrevAndNextCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void showPrevView() {
+    public void prev_success() {
         commandBox.runCommand("prev");
         assertResultMessage(PrevCommand.MESSAGE_SUCCESS);
 
@@ -19,7 +19,7 @@ public class PrevAndNextCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void showNextView() {
+    public void next_success() {
         commandBox.runCommand("next");
         assertResultMessage(NextCommand.MESSAGE_SUCCESS);
 
@@ -28,7 +28,7 @@ public class PrevAndNextCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void prevAndNextInvalidCommandFail() {
+    public void prevAndNext_invalidCommand_failure() {
         commandBox.runCommand("prv");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 

@@ -23,6 +23,7 @@ import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.commons.events.ui.CalendarNextRequestEvent;
 import seedu.tache.commons.events.ui.CalendarPreviousRequestEvent;
+import seedu.tache.commons.events.ui.CalendarViewRequestEvent;
 import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
@@ -195,7 +196,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Moves the calendar back (by a day / month / week).
+     * Moves the calendar back (by a day / week / month).
      */
     @Subscribe
     public void handleCalendarPreviousRequestEvent(CalendarPreviousRequestEvent event) {
@@ -204,7 +205,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Moves the calendar forward (by a day / month / week).
+     * Moves the calendar forward (by a day / week / month).
      */
     @Subscribe
     public void handleCalendarNextRequestEvent(CalendarNextRequestEvent event) {
@@ -213,10 +214,16 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Toggles the view of the calendar to day / month / year.
+     * Changes the view of the calendar to day / week / month view.
      *
-     * @param view    A string indicating the view requested ("day", "month" or "year").
+     * @param event    CalendarViewRequestEvent which contains the new view.
      */
+    @Subscribe
+    public void handleCalendarViewRequestEvent(CalendarViewRequestEvent event) {
+        changeView(event.getView());
+    }
+
+
     private void changeView(String view) {
         assert view != null;
         assert !view.equals("");

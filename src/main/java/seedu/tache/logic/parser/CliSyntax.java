@@ -44,11 +44,16 @@ public class CliSyntax {
     //@@author A0142255M
     public static final String FILTER_TIMED = "timed";
     public static final String FILTER_FLOATING = "floating";
-    //@@author
     //@@author A0139961U
     public static final String FILTER_DUE_TODAY = "today";
     public static final String FILTER_DUE_THIS_WEEK = "this week";
     public static final String FILTER_OVERDUE = "overdue";
+
+    //@@author A0142255M
+    /* Calendar show view options */
+    public static final String VIEW_DAY = "day";
+    public static final String VIEW_WEEK = "week";
+    public static final String VIEW_MONTH = "month";
     //@@author
 
     /* Patterns definitions */

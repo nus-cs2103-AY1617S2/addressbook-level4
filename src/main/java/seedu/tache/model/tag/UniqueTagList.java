@@ -163,6 +163,13 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalList.hashCode();
     }
 
+    //@@author A0142255M
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        forEach(builder::append);
+        return builder.toString();
+    }
+
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */

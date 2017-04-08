@@ -21,12 +21,11 @@ public class LoadCommand extends Command implements Undoable {
     public static final String COMMAND_WORD = "load";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads the file specified.\n"
-            + "Parameters: DIRECTORY \n"
-            + "Example: " + COMMAND_WORD
-            + " C:\\Users\\user\\Desktop\\taskmanager.xml";
+            + "Parameters: FILE PATH \n"
+            + "Example: " + COMMAND_WORD + " C:/Users/User/Desktop/taskmanager.xml";
 
-    public static final String MESSAGE_SUCCESS = "Data file loaded successfully from: %1$s";
-    public static final String MESSAGE_FAILURE = "Data file load failed: %1$s";
+    public static final String MESSAGE_SUCCESS = "Data file loaded successfully from %1$s";
+    public static final String MESSAGE_FAILURE = "Data file failed to load from %1$s";
 
     private String newPath;
     private String prevPath;
@@ -61,10 +60,10 @@ public class LoadCommand extends Command implements Undoable {
             initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
             return new CommandResult(String.format("Data file not in the correct format."
-                                                    + " Will be starting with an empty TaskManager"));
+                                                    + " Will be starting with an empty TaskManager."));
         } catch (IOException e) {
             return new CommandResult(String.format("Problem while reading from the file."
-                                                    + " Will be starting with an empty TaskManager"));
+                                                    + " Will be starting with an empty TaskManager."));
         }
         model.resetData(initialData);
         commandSuccess = true;

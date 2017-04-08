@@ -15,7 +15,7 @@ import seedu.tache.testutil.TestTask;
 public class ListCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void listAllTasks() {
+    public void list_allTasks_success() {
         assertListResult("list all", "All", td.getTypicalTasks());
 
         //list after deleting one result
@@ -29,7 +29,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void listUncompletedTasks() {
+    public void list_uncompletedTasks_success() {
         assertListResult("list uncompleted", "Uncompleted", td.getTypicalTasks());
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1");
@@ -42,7 +42,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void listCompletedTasks() {
+    public void list_completedTasks_success() {
         assertListResult("list completed", "Completed");
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1,2,3");
@@ -56,7 +56,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
     //@@author A0142255M
     @Test
-    public void listTimedTasks() {
+    public void list_timedTasks_success() {
         assertListResult("list timed", "Timed", td.eggsAndBread, td.visitFriend, td.readBook);
         commandBox.runCommand("list");
         commandBox.runCommand("edit 2 change sd to 5 jun and change st to 9am");
@@ -69,7 +69,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void listFloatingTasks() throws IllegalValueException {
+    public void list_floatingTasks_success() throws IllegalValueException {
         assertListResult("list floating", "Floating", td.payDavid, td.visitSarah);
         commandBox.runCommand("list");
         commandBox.runCommand("add watch tv");
@@ -84,13 +84,13 @@ public class ListCommandTest extends TaskManagerGuiTest {
     //@@author
 
     @Test
-    public void listNoEvent() {
+    public void list_noEvent_success() {
         commandBox.runCommand("clear");
         assertListResult("list", "Uncompleted");
     }
 
     @Test
-    public void listInvalidCommandFail() {
+    public void list_invalidCommand_failure() {
         commandBox.runCommand("listkkjksjkds");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }

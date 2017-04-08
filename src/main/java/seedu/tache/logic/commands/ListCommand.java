@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String SHORT_COMMAND_WORD = "l";
 
-    public static final String MESSAGE_SUCCESS = "%1$s tasks listed";
+    public static final String MESSAGE_SUCCESS = "%1$s tasks listed.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out all tasks based on type (default: all)\n"
             + "Parameters (Optional): all, timed, floating, today, this week, uncompleted or completed\n"

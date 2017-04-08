@@ -13,8 +13,7 @@ public class PrevCommand extends Command {
     public static final String COMMAND_WORD = "prev";
     public static final String SHORT_COMMAND_WORD = "p";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" +
-            "Displays the previous day/week/month at the calendar.\n\t"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":Displays the previous day/week/month at the calendar.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Previous day/week/month displayed at the calendar.";

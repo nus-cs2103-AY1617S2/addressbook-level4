@@ -23,8 +23,7 @@ public class SaveCommand extends Command implements Undoable {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the save location of the"
             + "data files based on the directory entered or selected.\n"
             + "Parameters: DIRECTORY \n"
-            + "Example: " + COMMAND_WORD
-            + " C:\\Users\\user\\Desktop";
+            + "Example: " + COMMAND_WORD + " C:/Users/User/Desktop";
 
     public static final String MESSAGE_SUCCESS = "Save location changed to: %1$s";
     public static final String MESSAGE_FAILURE = "Save location failed to change to: %1$s";
