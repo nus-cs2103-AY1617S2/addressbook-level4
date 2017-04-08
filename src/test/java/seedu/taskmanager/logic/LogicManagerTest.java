@@ -66,6 +66,7 @@ import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
+import seedu.taskmanager.model.util.SampleDataUtil;
 import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.ui.MainWindow;
 
@@ -817,7 +818,33 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_load_successful() throws Exception {
+        String sampleFilepath = "src/test/data/cd_test/sample.xml";
+        TestDataHelper helper = new TestDataHelper();
+
+        List<Task> expectedTasks = helper.generateTaskList(SampleDataUtil.getSampleTasks());
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+
+        assertCommandSuccess("load " + sampleFilepath, String.format(LoadCommand.MESSAGE_SUCCESS, sampleFilepath),
+                expectedTM, expectedTasks);
+    }
+
+    @Test
+    public void execute_load_nonExistentFile() throws Exception {
+        String newFilepath = "src/test/data/cd_test/new.xml";
+        assertCommandFailure("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath));
+    }
+
+    @Test
     public void execute_save_invalidFilePath() throws Exception {
+        assertCommandFailure("save !asdwie34$2.xml",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+        assertCommandFailure("saveas data/taskmanager",
+                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_save_successful() throws Exception {
         assertCommandFailure("save !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         assertCommandFailure("saveas data/taskmanager",
