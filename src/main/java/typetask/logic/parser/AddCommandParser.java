@@ -117,13 +117,16 @@ public class AddCommandParser {
         if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent() &&
                 argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
             return eventTask;
+        } else if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent() ||
+                argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
+            return invalidEvent;
+        } else if (argsTokenizer.getValue(PREFIX_DATE).isPresent() &&
+                argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
+            return invalidEvent;
         } else if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
             return deadlineTaskWithDate;
         } else if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
             return deadlineTaskWithTime;
-        } else if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent() ||
-                argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
-            return invalidEvent;
         } else {
             return floatingTask;
         }

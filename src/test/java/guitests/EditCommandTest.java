@@ -10,7 +10,7 @@ import typetask.commons.core.Messages;
 import typetask.logic.commands.EditCommand;
 import typetask.testutil.TaskBuilder;
 import typetask.testutil.TestTask;
-
+//@@author A0139926R
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TypeTaskGuiTest {
 
@@ -31,27 +31,62 @@ public class EditCommandTest extends TypeTaskGuiTest {
 
     @Test
     public void editNotAllFieldsSpecifiedSuccess() throws Exception {
-        String detailsToEdit = "by:10/10/1993";
+        String detailsToEdit = "by:10/10/1993 p/High";
         int typeTaskIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[typeTaskIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
-                .withCompleted(false).withPriority("Low").build();
+                .withCompleted(false).withPriority("High").build();
 
         assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
     }
-
+    @Test
+    public void editFindThenEditStartDateToInvalidSchedule_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 from: 12 Oct 1993";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(EditCommand.MESSAGE_INVALID_DATE);
+    }
+    @Test
+    public void editFindThenEditToInvalidDeadline_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 by: LOL";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
+    }
+    @Test
+    public void editFindThenEditToInvalidDeadlineWithTimePrefix_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 @ LOL";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
+    }
+    @Test
+    public void editFindThenEditToInvalidStartDate_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 from: LOL";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE);
+    }
+    @Test
+    public void editFindThenEditToInvalidEndDate_fail() {
+        commandBox.runCommand("find George");
+        String detailsToEdit = "edit 1 to: LOL";
+        commandBox.runCommand(detailsToEdit);
+        assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE);
+    }
 
     @Test
     public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find Elle");
 
-        String detailsToEdit = "Belle";
+        String detailsToEdit = "Belle @Oct 10 1993";
         int filteredTaskListIndex = 1;
         int typeTaskIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[typeTaskIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle").withDate("").withEndDate("")
+        TestTask editedTask = new TaskBuilder(taskToEdit).withName("Belle")
+                .withDate("").withEndDate("Sun Oct 10 1993 23:59:59")
                 .withCompleted(false).withPriority("Low").build();
 
         assertEditSuccess(filteredTaskListIndex, typeTaskIndex, detailsToEdit, editedTask);
@@ -74,19 +109,6 @@ public class EditCommandTest extends TypeTaskGuiTest {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
-
-//    @Test
-//    public void edit_invalidValues_failure() {
-//        commandBox.runCommand("edit 1 *&");
-//        assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-
-//        commandBox.runCommand("edit 1 by:1");
-//        assertResultMessage(DueDate.MESSAGE_DATE_CONSTRAINTS);
-
-//        commandBox.runCommand("edit 1 @13:11am");
-//        assertResultMessage(Time.MESSAGE_TIME_CONSTRAINTS);
-
-//    }
 
     /**
      * Checks whether the edited task has the correct updated details.
