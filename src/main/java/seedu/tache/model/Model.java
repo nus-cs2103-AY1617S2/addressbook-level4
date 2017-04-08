@@ -90,5 +90,5 @@ public interface Model {
 
     //@@author A0139925U
     /** Updates the filter of the current filtered task list to reflect changes */
-    void updateCurrentFilteredList();
+    //void updateCurrentFilteredList();
 }

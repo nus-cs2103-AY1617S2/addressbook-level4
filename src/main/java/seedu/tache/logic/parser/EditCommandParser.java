@@ -4,7 +4,6 @@ package seedu.tache.logic.parser;
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.DELIMITER_EDIT_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
-import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_MULTI_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
@@ -12,7 +11,6 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
-
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_2;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME_3;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
@@ -75,13 +73,8 @@ public class EditCommandParser {
             int indexOfIndex = argsInProcess.indexOf(new String("" +  index.get()));
             argsInProcess = argsInProcess.substring(indexOfIndex + new String("" +  index.get()).length());
 
-            //Process Other Arguments
-            int indexOfFirstAndChange = argsInProcess.indexOf(KEYWORDS_EDIT_MULTI_PARAMETER);
-            if (indexOfFirstAndChange == -1) {
-                return processNaturalSingleParameterEdit(index, argsInProcess);
-            } else {
-                return processNaturalMultiParameterEdit(index, indexOfFirstAndChange, argsInProcess);
-            }
+            return processNaturalMultiParameterEdit(index, argsInProcess);
+
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditCommand.MESSAGE_USAGE));
@@ -152,63 +145,56 @@ public class EditCommandParser {
         return new EditCommand(index.get(), editTaskDescriptor);
     }
 
-    /**
-     * Process the given {@code String} of arguments that contains only one parameter of interest
-     * that is of a natural language format and returns an EditCommand object for execution.
-     */
-    private Command processNaturalSingleParameterEdit(Optional<Integer> index, String argsInProcess) {
-        int indexOfFirstChange = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER);
-        int indexOfFirstTo = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER_VALUE);
-        if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
-            String updateParameter = argsInProcess.substring(indexOfFirstChange
-                                        + new String(KEYWORD_EDIT_PARAMETER).length(), indexOfFirstTo);
-            String updateValue = argsInProcess.substring(indexOfFirstTo
-                                        + new String(KEYWORD_EDIT_PARAMETER_VALUE).length());
-            return parseStructuredArguments(index.get() + DELIMITER_PARAMETER + updateParameter
-                                                + DELIMITER_EDIT_PARAMETER + updateValue);
-        } else {
-            if (indexOfFirstChange == -1 && indexOfFirstTo == -1) {
-                return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
-            }
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.MESSAGE_USAGE));
-        }
-    }
 
     /**
      * Process the given {@code String} of arguments that contains only multiple parameters of interest
      * that is of a natural language format and returns an EditCommand object for execution.
      */
-    private Command processNaturalMultiParameterEdit (Optional<Integer> index,
-                                int indexOfFirstAndChange, String argsInProcess) {
-        int currentIndexOfFirstAndChange = indexOfFirstAndChange;
+    private Command processNaturalMultiParameterEdit (Optional<Integer> index, String argsInProcess) {
+        String[] argsInProcessElements = argsInProcess.trim().split(DELIMITER_EDIT_PARAMETER);
         ArrayList<String> updateParameterList = new ArrayList<String>();
         ArrayList<String> updateValueList = new ArrayList<String>();
-        while (argsInProcess.length() > 0) {
-            int indexOfFirstChange = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER);
-            int indexOfFirstTo = argsInProcess.indexOf(KEYWORD_EDIT_PARAMETER_VALUE);
-            if (indexOfFirstChange != -1 && indexOfFirstTo != -1) {
-                String updateParameter = argsInProcess.substring(indexOfFirstChange
-                        + new String(KEYWORD_EDIT_PARAMETER).length(), indexOfFirstTo);
-                String updateValue = "";
-                if (currentIndexOfFirstAndChange != -1) {
-                    updateValue = argsInProcess.substring(indexOfFirstTo
-                            + new String(KEYWORD_EDIT_PARAMETER_VALUE).length(), currentIndexOfFirstAndChange);
-                    argsInProcess = argsInProcess.substring(currentIndexOfFirstAndChange
-                            + new String(KEYWORD_EDIT_MULTI_PARAMETER).length() - 1);
-                    currentIndexOfFirstAndChange = argsInProcess.indexOf(KEYWORDS_EDIT_MULTI_PARAMETER);
-                } else {
-                    updateValue = argsInProcess.substring(indexOfFirstTo
-                                    + new String(KEYWORD_EDIT_PARAMETER_VALUE).length());
-                    argsInProcess = "";
+
+        if (!argsInProcessElements[0].equals(KEYWORD_EDIT_PARAMETER)) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
+
+        boolean processingParameter = false;
+        String currentParameter = "";
+        String currentValue = "";
+        for (int i = 1; i < argsInProcessElements.length; i++) {
+            if (ParserUtil.isValidParameter(argsInProcessElements[i]) && !processingParameter) {
+                if (argsInProcessElements[i + 1] != null
+                        && argsInProcessElements[i + 1].equals(KEYWORD_EDIT_PARAMETER_VALUE)) {
+                    processingParameter = true;
+                    currentParameter = argsInProcessElements[i];
+                    i++;
+                    continue;
                 }
-                updateParameterList.add(updateParameter);
-                updateValueList.add(updateValue);
-            } else {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        EditCommand.MESSAGE_USAGE));
+            }
+            if (processingParameter) {
+                if (argsInProcessElements[i].equals(KEYWORD_EDIT_MULTI_PARAMETER)
+                        && (i + 1 < argsInProcessElements.length)
+                        && ParserUtil.isValidParameter(argsInProcessElements[i + 1])
+                        && (i + 2 < argsInProcessElements.length)
+                        && argsInProcessElements[i + 2].equals(KEYWORD_EDIT_PARAMETER_VALUE)) {
+                    processingParameter = false;
+                    updateParameterList.add(currentParameter);
+                    updateValueList.add(currentValue.trim());
+                    currentValue = "";
+                } else if (i + 1 == argsInProcessElements.length) {
+                    currentValue += " " + argsInProcessElements[i];
+                    processingParameter = false;
+                    updateParameterList.add(currentParameter);
+                    updateValueList.add(currentValue.trim());
+                    currentValue = "";
+                } else {
+                    currentValue += " " + argsInProcessElements[i];
+                }
             }
         }
+
         String structuredArgument = index.get() + DELIMITER_PARAMETER;
         for (int i = 0; i < updateParameterList.size(); i++) {
             structuredArgument += updateParameterList.get(i) + DELIMITER_EDIT_PARAMETER

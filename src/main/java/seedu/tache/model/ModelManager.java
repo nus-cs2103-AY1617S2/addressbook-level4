@@ -234,35 +234,35 @@ public class ModelManager extends ComponentManager implements Model {
         latestKeywords = keywords;
     }
 
-    public void updateCurrentFilteredList() {
-        switch(filteredTaskListType) {
-        case TASK_LIST_TYPE_ALL:
-            updateFilteredListToShowAll();
-            break;
-        case TASK_LIST_TYPE_COMPLETED:
-            updateFilteredListToShowCompleted();
-            break;
-        case TASK_LIST_TYPE_UNCOMPLETED:
-            updateFilteredListToShowUncompleted();
-            break;
-        case TASK_LIST_TYPE_TIMED:
-            updateFilteredListToShowTimed();
-            break;
-        case TASK_LIST_TYPE_FLOATING:
-            updateFilteredListToShowFloating();
-            break;
-        case TASK_LIST_TYPE_FOUND:
-            updateFilteredTaskList(latestKeywords);
-            break;
-        case TASK_LIST_TYPE_DUE_TODAY:
-            updateFilteredListToShowDueToday();
-            break;
-        case TASK_LIST_TYPE_DUE_THIS_WEEK:
-            updateFilteredListToShowDueThisWeek();
-            break;
-        default:
-        }
-    }
+//    public void updateCurrentFilteredList() {
+//        switch(filteredTaskListType) {
+//        case TASK_LIST_TYPE_ALL:
+//            updateFilteredListToShowAll();
+//            break;
+//        case TASK_LIST_TYPE_COMPLETED:
+//            updateFilteredListToShowCompleted();
+//            break;
+//        case TASK_LIST_TYPE_UNCOMPLETED:
+//            updateFilteredListToShowUncompleted();
+//            break;
+//        case TASK_LIST_TYPE_TIMED:
+//            updateFilteredListToShowTimed();
+//            break;
+//        case TASK_LIST_TYPE_FLOATING:
+//            updateFilteredListToShowFloating();
+//            break;
+//        case TASK_LIST_TYPE_FOUND:
+//            updateFilteredTaskList(latestKeywords);
+//            break;
+//        case TASK_LIST_TYPE_DUE_TODAY:
+//            updateFilteredListToShowDueToday();
+//            break;
+//        case TASK_LIST_TYPE_DUE_THIS_WEEK:
+//            updateFilteredListToShowDueThisWeek();
+//            break;
+//        default:
+//        }
+//    }
     //@@author
 
     //========== Inner classes/interfaces/methods used for filtering =================================================
