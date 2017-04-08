@@ -78,13 +78,39 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
+  //@@author A0163845X
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
 	assert taskToEdit != null;
 
 	TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElseGet(taskToEdit::getTaskName);
-	TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElseGet(taskToEdit::getTaskDate);
-	TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
-	TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
+	TaskDate updatedDate;
+	if (editTaskDescriptor.getTaskDate() == null) {
+		updatedDate = null;
+	} else if (editTaskDescriptor.getTaskDate().isPresent()) {
+		updatedDate = editTaskDescriptor.getTaskDate().get();
+	} else {
+		updatedDate = taskToEdit.getTaskDate();
+	}
+	//TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElseGet(taskToEdit::getTaskDate);
+	//TaskTime updatedStartTime = editTaskDescriptor.getTaskStartTime().orElseGet(taskToEdit::getTaskStartTime);
+	//TaskTime updatedEndTime = editTaskDescriptor.getTaskEndTime().orElseGet(taskToEdit::getTaskEndTime);
+	TaskTime updatedStartTime;
+	if (editTaskDescriptor.getTaskStartTime() == null) {
+		updatedStartTime = null;
+	} else if (editTaskDescriptor.getTaskStartTime().isPresent()) {
+		updatedStartTime = editTaskDescriptor.getTaskStartTime().get();
+	} else {
+		updatedStartTime = taskToEdit.getTaskStartTime();
+	}
+	TaskTime updatedEndTime;
+	if (editTaskDescriptor.getTaskEndTime() == null) {
+		updatedEndTime = null;
+	} else if (editTaskDescriptor.getTaskEndTime().isPresent()) {
+		updatedEndTime = editTaskDescriptor.getTaskEndTime().get();
+	} else {
+		updatedEndTime = taskToEdit.getTaskEndTime();
+	}
+
 	String updatedDescription = editTaskDescriptor.getTaskDescription().orElseGet(taskToEdit::getTaskDescription);
 	TaskStatus remainStatus = new TaskStatus("Ongoing");
 	UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -136,7 +162,8 @@ public class EditCommand extends Command {
 	}
 
 	public void setTaskDate(Optional<TaskDate> date) {
-	    assert date != null;
+		//!assert date != null;
+		//allowing for two different nulls to remove fields for edit command
 	    this.taskDate = date;
 	}
 
@@ -145,7 +172,7 @@ public class EditCommand extends Command {
 	}
 
 	public void setTaskStartTime(Optional<TaskTime> startTime) {
-	    assert startTime != null;
+	    //assert startTime != null;
 	    this.taskStartTime = startTime;
 	}
 
@@ -154,7 +181,7 @@ public class EditCommand extends Command {
 	}
 
 	public void setTaskEndTime(Optional<TaskTime> endTime) {
-	    assert endTime != null;
+	    //assert endTime != null;
 	    this.taskEndTime = endTime;
 	}
 

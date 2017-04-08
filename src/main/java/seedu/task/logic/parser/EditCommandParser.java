@@ -49,9 +49,27 @@ public class EditCommandParser {
 	EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
 	try {
 	    editPersonDescriptor.setTaskName(ParserUtil.parseTaskName(preambleFields.get(1)));
-	    editPersonDescriptor.setTaskDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
-	    editPersonDescriptor.setTaskStartTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_START_TIME)));
-	    editPersonDescriptor.setTaskEndTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_END_TIME)));
+	    if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
+		    if (argsTokenizer.getValue(PREFIX_DATE).get().trim().equals("")) {
+		    	editPersonDescriptor.setTaskDate(null);
+		    } else {
+		    	editPersonDescriptor.setTaskDate(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_DATE)));
+		    }
+		}
+	    if (argsTokenizer.getValue(PREFIX_START_TIME).isPresent()) {
+		    if (argsTokenizer.getValue(PREFIX_START_TIME).get().trim().equals("")) {
+		    	editPersonDescriptor.setTaskStartTime(null);
+		    } else {
+		    	editPersonDescriptor.setTaskStartTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_START_TIME)));
+		    }
+	    }
+	    if (argsTokenizer.getValue(PREFIX_END_TIME).isPresent()) {
+		    if (argsTokenizer.getValue(PREFIX_END_TIME).get().trim().equals("")) {
+		    	editPersonDescriptor.setTaskEndTime(null);
+		    } else {
+		    	editPersonDescriptor.setTaskEndTime(ParserUtil.parseTime(argsTokenizer.getValue(PREFIX_END_TIME)));
+		    }
+	    }
 	    editPersonDescriptor.setTaskDescription(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_DESCRIPTION)));
 	    editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
 	} catch (IllegalValueException ive) {

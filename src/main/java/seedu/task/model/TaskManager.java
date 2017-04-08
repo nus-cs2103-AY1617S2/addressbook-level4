@@ -121,7 +121,6 @@ public class TaskManager implements ReadOnlyTaskManager {
      */
     public void updateTask(int index, ReadOnlyTask editedReadOnlyTask) throws UniqueTaskList.DuplicateTaskException {
 	assert editedReadOnlyTask != null;
-
 	Task editedTask = new Task(editedReadOnlyTask);
 	// TODO: the tags master list will be updated even though the below line
 	// fails.

@@ -30,8 +30,15 @@ public class CollectionUtil {
     /**
      * Returns true is any of the given items are present.
      */
+    //@@author A0163845X
     public static boolean isAnyPresent(Optional<?>... items) {
-	return Stream.of(items).anyMatch(Optional::isPresent);
+	//return Stream.of(items).anyMatch(Optional != null && Optional::isPresent);
+	for (Optional<?> optional : items) {
+		if (optional == null || optional.isPresent()) {
+			return true;
+		}
+	}
+	return false;
     }
 
     /**

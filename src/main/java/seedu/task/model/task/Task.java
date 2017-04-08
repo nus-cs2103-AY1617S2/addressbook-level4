@@ -46,7 +46,8 @@ public class Task implements ReadOnlyTask {
 		setCreationTime();
 	}
     }
-
+    
+    //@@author A0163845X
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 
 	    Optional<TaskTime> parseTime2, Optional<String> parseString, TaskStatus parseTaskStatus)
@@ -76,7 +77,7 @@ public class Task implements ReadOnlyTask {
 	}
 
     }
-
+    //@@author A0163845X
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
 	    Optional<TaskTime> parseTime2, Optional<String> parseString, Optional<TaskStatus> parseTaskStatus,
 	    UniqueTagList tags) throws IllegalValueException {
@@ -215,20 +216,22 @@ public class Task implements ReadOnlyTask {
     public void setTaskDate(TaskDate taskDate) {
 	this.taskDate = taskDate;
     }
+    //@@author A0163845X
 
     public void setTaskStartTime(TaskTime taskStartTime) throws IllegalValueException {
 	if (taskStartTime == null) {
-
+		this.taskStartTime = null;
 	} else if (this.taskEndTime == null || this.taskEndTime.compareTo(taskStartTime) >= 0) {
 	    this.taskStartTime = taskStartTime;
 	} else {
 	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
 	}
     }
+    //@@author A0163845X
 
     public void setTaskEndTime(TaskTime taskEndTime) throws IllegalValueException {
 	if (taskEndTime == null) {
-
+		this.taskEndTime = null;
 	} else if (this.taskStartTime == null || taskEndTime.compareTo(taskStartTime) >= 0) {
 	    this.taskEndTime = taskEndTime;
 	} else {
