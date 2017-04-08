@@ -47,26 +47,26 @@ public class TaskDate {
 
     public TaskDate(String input) throws IllegalValueException {
 
-		this.value = input.trim();
-		try {
-			int[] dateArray = dateFormatConverter(value);
-			if (input.length() == 6) {
-				setDay(dateArray[DAY_ARRAY_INDEX]);
-				setMonth(dateArray[MONTH_ARRAY_INDEX]);
-				setYear(dateArray[YEAR_ARRAY_INDEX]);
-			}
-			if (input.length() == 13) {
-				setDay(dateArray[DAY_ARRAY_INDEX]);
-				setMonth(dateArray[MONTH_ARRAY_INDEX]);
-				setYear(dateArray[YEAR_ARRAY_INDEX]);
-				setSecondDay(dateArray[DAY2_ARRAY_INDEX]);
-				setSecondMonth(dateArray[MONTH2_ARRAY_INDEX]);
-				setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
-			}
-		} catch (Exception e) {
-			formatter = new SimpleDateFormat(OUTPUT_FORMAT);
-			NattyParser natty = new NattyParser();
-			dates = natty.parse(input);
+        this.value = input.trim();
+        try {
+            int[] dateArray = dateFormatConverter(value);
+            if (input.length() == 6) {
+                setDay(dateArray[DAY_ARRAY_INDEX]);
+                setMonth(dateArray[MONTH_ARRAY_INDEX]);
+                setYear(dateArray[YEAR_ARRAY_INDEX]);
+            }
+            if (input.length() == 13) {
+                setDay(dateArray[DAY_ARRAY_INDEX]);
+                setMonth(dateArray[MONTH_ARRAY_INDEX]);
+                setYear(dateArray[YEAR_ARRAY_INDEX]);
+                setSecondDay(dateArray[DAY2_ARRAY_INDEX]);
+                setSecondMonth(dateArray[MONTH2_ARRAY_INDEX]);
+                setSecondYear(dateArray[YEAR2_ARRAY_INDEX]);
+            }
+        } catch (Exception e) {
+            formatter = new SimpleDateFormat(OUTPUT_FORMAT);
+            NattyParser natty = new NattyParser();
+            dates = natty.parse(input);
 
             if (dates == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
@@ -129,9 +129,8 @@ public class TaskDate {
             if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
                 return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
             }
-            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " "
-                    + DATE_DELIMITER_DASH + " " + dayTwo + DATE_DELIMITER_SLASH + monthTwo
-                    + DATE_DELIMITER_SLASH + yearTwo;
+            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " "
+                    + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
         } else {
             if (dates.size() == 1) {
                 return formatter.format(dates.get(0));

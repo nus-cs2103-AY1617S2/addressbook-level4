@@ -9,10 +9,10 @@ import seedu.task.commons.exceptions.IllegalValueException;
 //@@author A0163845X
 public class TaskTime {
 
-	private List<Date> dates;
-	private Date time;
-	private SimpleDateFormat formatter;
-	private final String OUTPUT_FORMAT = "HH:mm";
+    private List<Date> dates;
+    private Date time;
+    private SimpleDateFormat formatter;
+    private final String OUTPUT_FORMAT = "HH:mm";
 
     public final String value;
     private int hour;
