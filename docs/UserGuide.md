@@ -22,6 +22,7 @@
     * [Saving Data](#3132-saving-the-data)
     * [Loading Date](#314-loading-your-own-data)
     * [Changing theme](#315-changing-the-appearance-of-kit)
+    * [Shortcuts](#316-using-shortcuts)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -449,6 +450,21 @@ Format: `changetheme [THEMENAME]`
 > * After each successful `changetheme` command, you will have to restart KIT to view the changes.
 > * If THEMENAME is specified and correct, KIT will change its theme and after restart you will see the changed theme.
 > * KIT currently supports three themes: Default, Light and Dark.
+
+### 3.16 Using shortcuts
+
+#### Too lazy to type your commands? Use KIT's shortcuts.
+
+In KIT, we provide shortcuts which are activated with different keyboard combinations.
+
+Description: Fills the command box with specific command.
+
+Example format: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd>
+This will fill the command box with "add ".
+
+ >  <img src="images/shortcuts.png" width="600">
+
+> * Shortcuts do not work when you have clicked on google calendar as it is a separate browser.
 
 ## 4. FAQ
 
