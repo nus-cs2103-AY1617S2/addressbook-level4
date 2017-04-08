@@ -15,6 +15,7 @@
    <stylesheets>
       <URL value="@DarkTheme.css" />
       <URL value="@Extensions.css" />
+      <URL value="@HelpWindow.css" />
    </stylesheets>
    <children>
       <MenuBar VBox.vgrow="NEVER">
