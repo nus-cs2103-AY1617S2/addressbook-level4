@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.testutil.TestTask;
 
 public class ListCommandTest extends TaskManagerGuiTest {
@@ -30,6 +31,9 @@ public class ListCommandTest extends TaskManagerGuiTest {
     public void listInvalidCommandFailure() {
         commandBox.runCommand("LIst");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        commandBox.runCommand("LIST nonsense");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
     @Test
