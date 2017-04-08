@@ -21,7 +21,7 @@ import seedu.address.commons.events.ui.ExportRequestEvent;
 import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
 
 //@@author A0163848R

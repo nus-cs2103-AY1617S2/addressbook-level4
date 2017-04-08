@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -36,14 +36,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         //@@author A0163848R
         if (targetIndex != null && lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToDelete = null;
+        ReadOnlyTask personToDelete = null;
         if (targetIndex != null) personToDelete = lastShownList.get(targetIndex - 1);
         if (targetName != null) personToDelete = getPersonByName(lastShownList, targetName);
         //@@author
@@ -57,8 +57,8 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
     }
 
-    private ReadOnlyPerson getPersonByName(UnmodifiableObservableList<ReadOnlyPerson> list, String name) {
-        for (ReadOnlyPerson person : list) {
+    private ReadOnlyTask getPersonByName(UnmodifiableObservableList<ReadOnlyTask> list, String name) {
+        for (ReadOnlyTask person : list) {
             if (person.getName().toString().equals(name)) {
                 return person;
             }

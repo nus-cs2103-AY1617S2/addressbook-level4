@@ -10,8 +10,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.storage.Storage;
 
 /**
@@ -37,23 +37,23 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+    public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
     
     //@@author A0163848R
     @Override
-    public ReadOnlyAddressBook getYTomorrow() {
+    public ReadOnlyTaskManager getYTomorrow() {
         return model.getAddressBook();
     }
     
     @Override
-    public void setYTomorrow(ReadOnlyAddressBook set) {
+    public void setYTomorrow(ReadOnlyTaskManager set) {
         model.resetData(set);
     }
     
     @Override
-    public void importYTomorrow(ReadOnlyAddressBook add) {
+    public void importYTomorrow(ReadOnlyTaskManager add) {
         model.mergeYTomorrow(add);
     }
 }

@@ -22,7 +22,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.YTomorrow;
 import seedu.address.model.util.SampleDataUtil;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional = null;
-        ReadOnlyAddressBook initialData ;
+        Optional<ReadOnlyTaskManager> addressBookOptional = null;
+        ReadOnlyTaskManager initialData ;
         
         try {
             String prefPath = userPrefs.getGuiSettings().getLastLoadedYTomorrow();

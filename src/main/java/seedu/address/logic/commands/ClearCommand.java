@@ -9,8 +9,8 @@ import org.controlsfx.control.PropertySheet.Mode;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.ReadOnlyPerson;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 
 //@@author A0163848R
 /**
@@ -60,8 +60,8 @@ public class ClearCommand extends Command {
         
         if (keywords.contains(KEYWORD_COMPLETE)) {
             
-            List<ReadOnlyPerson> filtered = new ArrayList<ReadOnlyPerson>();
-            for (ReadOnlyPerson task : model.getAddressBook().getPersonList()) {
+            List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
+            for (ReadOnlyTask task : model.getAddressBook().getPersonList()) {
                 try {
                     if (!task.getTags().contains(new Tag(Tag.TAG_COMPLETE))) {
                         filtered.add(task);
@@ -83,8 +83,8 @@ public class ClearCommand extends Command {
         
         if (keywords.contains(KEYWORD_PASSED)) {
             
-            List<ReadOnlyPerson> filtered = new ArrayList<ReadOnlyPerson>();
-            for (ReadOnlyPerson task : model.getAddressBook().getPersonList()) {
+            List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
+            for (ReadOnlyTask task : model.getAddressBook().getPersonList()) {
                 if (!task.hasPassed()) {
                     filtered.add(task);
                 }

@@ -38,8 +38,8 @@ import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyPerson;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.task.ReadOnlyTask;
+import seedu.address.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.
@@ -148,8 +148,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new YTomorrow());
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskManager(new YTomorrow());
     }
 
     /**
@@ -337,7 +337,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
         return card.isSamePerson(person);
     }
 

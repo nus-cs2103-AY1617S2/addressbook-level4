@@ -9,16 +9,16 @@ import java.util.TreeSet;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList.DuplicatePersonException;
+import seedu.address.model.task.UniqueTaskList.DuplicatePersonException;
 
 //@@author A0163848R
 public class SampleDataUtil {
@@ -27,7 +27,7 @@ public class SampleDataUtil {
     
     Random r;
     
-    public static ReadOnlyPerson[] getSampleTasks(int n) {
+    public static ReadOnlyTask[] getSampleTasks(int n) {
         Set<Task> generated = new HashSet<Task>();
         for (int i = 0; i < n; i++) {
             if (!generated.add(generateRandomTask())) {
@@ -61,7 +61,7 @@ public class SampleDataUtil {
     }
     //@@author
     
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyTaskManager getSampleAddressBook() {
         YTomorrow sampleAB = new YTomorrow();
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             try {

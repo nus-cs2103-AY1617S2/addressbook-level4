@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Optional;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 
 //@@author A0163848R-reused
 /**
@@ -12,15 +12,15 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class LoadResultAvailableEvent extends BaseEvent {
 
-    private final Optional<ReadOnlyAddressBook> imported;
+    private final Optional<ReadOnlyTaskManager> imported;
     private final File origin;
 
-    public LoadResultAvailableEvent(Optional<ReadOnlyAddressBook> imported, File origin) {
+    public LoadResultAvailableEvent(Optional<ReadOnlyTaskManager> imported, File origin) {
         this.imported = imported;
         this.origin = origin;
     }
 
-    public Optional<ReadOnlyAddressBook> getImported() {
+    public Optional<ReadOnlyTaskManager> getImported() {
         return imported;
     }
     

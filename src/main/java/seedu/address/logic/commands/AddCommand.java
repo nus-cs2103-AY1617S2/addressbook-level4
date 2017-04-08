@@ -16,7 +16,7 @@ import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Adds a person to the address book.
@@ -85,7 +85,7 @@ public class AddCommand extends Command {
             
             String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSED : "");
             return new CommandResult(String.format(message, toAdd));
-        } catch (UniquePersonList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 

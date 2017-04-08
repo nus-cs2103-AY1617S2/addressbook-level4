@@ -21,10 +21,10 @@ import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.YTomorrow;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -41,7 +41,7 @@ public class MainWindow extends Window {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -108,7 +108,7 @@ public class MainWindow extends Window {
 
     void fillInnerParts() {
         browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -156,7 +156,7 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            ReadOnlyAddressBook current = logic.getYTomorrow();
+            ReadOnlyTaskManager current = logic.getYTomorrow();
             raise(new ExportRequestEvent(current, selected));
             raise(new TargetFileRequestEvent(selected, prefs));
         }
@@ -178,7 +178,7 @@ public class MainWindow extends Window {
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
         
         if (selected != null) {
-            ReadOnlyAddressBook current = logic.getYTomorrow();
+            ReadOnlyTaskManager current = logic.getYTomorrow();
             raise(new ExportRequestEvent(current, selected));
         }
     }
@@ -208,11 +208,11 @@ public class MainWindow extends Window {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
+    public TaskListPanel getPersonListPanel() {
         return this.personListPanel;
     }
 
-    void loadPersonPage(ReadOnlyPerson person) {
+    void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

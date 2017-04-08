@@ -3,7 +3,7 @@ package seedu.address.commons.events.ui;
 import java.util.Optional;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 
 //@@author A0163848R
 /**
@@ -11,13 +11,13 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class ImportResultAvailableEvent extends BaseEvent {
 
-    private final Optional<ReadOnlyAddressBook> imported;
+    private final Optional<ReadOnlyTaskManager> imported;
 
-    public ImportResultAvailableEvent(Optional<ReadOnlyAddressBook> imported) {
+    public ImportResultAvailableEvent(Optional<ReadOnlyTaskManager> imported) {
         this.imported = imported;
     }
 
-    public Optional<ReadOnlyAddressBook> getImported() {
+    public Optional<ReadOnlyTaskManager> getImported() {
         return imported;
     }
     

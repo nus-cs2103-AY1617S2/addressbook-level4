@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.model.YTomorrow;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -24,7 +24,7 @@ public class SampleDataTest extends AddressBookGuiTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() throws Exception {
-        ReadOnlyPerson[] expectedList = SampleDataUtil.getSampleTasks(50);
+        ReadOnlyTask[] expectedList = SampleDataUtil.getSampleTasks(50);
         assertTrue(personListPanel.isListMatching(expectedList));
     }
 }
