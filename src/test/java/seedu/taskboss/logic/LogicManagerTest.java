@@ -34,7 +34,6 @@ import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
 import seedu.taskboss.logic.commands.ListByCategoryCommand;
-import seedu.taskboss.logic.commands.ListCommand;
 import seedu.taskboss.logic.commands.ViewCommand;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.logic.commands.exceptions.InvalidDatesException;
