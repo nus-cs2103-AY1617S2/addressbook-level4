@@ -86,11 +86,15 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/*@@author A0141928B */
+/*each cell of the task list*/
 .list-cell {
+    -fx-background-color: #ffffff;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
+/*@@author */
 
 .list-cell .label {
     -fx-text-fill: #010504;
@@ -112,14 +116,14 @@
 /*@@author A0141928B*/
 /*Task deadline*/
 .cell_small_label_date {
-	-fx-font-family: "Existence Light";
+    -fx-font-family: "Existence Light";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 /*Box containing task deadline*/
 #dateBox {
-	-fx-alignment: center-right;
+   -fx-alignment: center-right;
 }
 /*@@author */
 
@@ -293,31 +297,31 @@
 .cardPaneP0 {
     -fx-background-color: transparent;
     -fx-border-color: #bbbbbb; /*No priority specified*/
-    -fx-border-width: 3 3 3 15;
+    -fx-border-width: 0 0 1 15;
 }
 
 .cardPaneP1 {
     -fx-background-color: transparent;
-    -fx-border-color: #dd6666; /*Priority 1*/
-    -fx-border-width: 3 3 3 15;
+    -fx-border-color: #bbbbbb #bbbbbb #bbbbbb #FA3833; /*Priority 1*/
+    -fx-border-width: 0 0 1 15;
 }
 
 .cardPaneP2 {
     -fx-background-color: transparent;
-    -fx-border-color: #ddbb33; /*Priority 2*/
-    -fx-border-width: 3 3 3 15;
+    -fx-border-color: #bbbbbb #bbbbbb #bbbbbb #FA8E63; /*Priority 2*/
+    -fx-border-width: 0 0 1 15;
 }
 
 .cardPaneP3 {
     -fx-background-color: transparent;
-    -fx-border-color: #66bbbb; /*Priority 3*/
-    -fx-border-width: 3 3 3 15;
+    -fx-border-color: #bbbbbb #bbbbbb #bbbbbb #66bbbb; /*Priority 3*/
+    -fx-border-width: 0 0 1 15;
 }
 
 .cardPaneP4 {
     -fx-background-color: transparent;
-    -fx-border-color: #66dd99; /*Priority 4*/
-    -fx-border-width: 3 3 3 15;
+    -fx-border-color: #bbbbbb #bbbbbb #bbbbbb #66dd99; /*Priority 4*/
+    -fx-border-width: 0 0 1 15;
 }
 
 /*Command box*/
@@ -327,17 +331,17 @@
 
 /*doingTASKS header*/
 .ongoing {
-	-fx-background-color: #bbbbbb;
+    -fx-background-color: #bbbbbb;
     -fx-font-family: "GelPenUpright";
 }
 /*didTASKS header*/
 .completed {
-	-fx-background-color: #bbbbbb;
+    -fx-background-color: #bbbbbb;
     -fx-font-family: "GelPenUpright";
 }
 /*OMG Y U NO DO header*/
 .overdue {
-	-fx-background-color: #bbbbbb;
+    -fx-background-color: #bbbbbb;
     -fx-font-family: "GelPenUpright";
 }
 /*@@author*/
