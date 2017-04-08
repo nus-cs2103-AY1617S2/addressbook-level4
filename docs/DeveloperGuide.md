@@ -234,7 +234,7 @@ Function of `Logic`
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
-Common Commands
+**Common Commands**
 
 `Add Command` - It is able to add task.
 This function is flexible with dates by using the natty libraries. When `Add` Command is used, user's input will be checked in the 
@@ -256,11 +256,13 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  
 <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
-`Find Command` - It is able to find a task with the specified name or date
-This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will show the
-related keywords.
 
-Additional Commands
+`Find Command` - It is able to find a task with the specified name or date
+This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
+keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will 
+show the related keywords.
+
+**Additional Commands**
 
 `Redo Command` - It is able to redo only if an `Undo Command` has been executed before.
 This function is done by using stack. When an `Undo Command` is executed, taskManager is "push" into the stack before `Undo Command's` 
