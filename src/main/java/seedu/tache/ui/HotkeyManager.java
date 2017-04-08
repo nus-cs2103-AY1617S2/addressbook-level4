@@ -22,11 +22,6 @@ public class HotkeyManager {
         this.hotkeyCombination = DEFAULT_HOTKEY_COMBINATION;
     }
 
-    public HotkeyManager(Stage stage, String hotkeyCombination) {
-        this.stage = stage;
-        this.hotkeyCombination = hotkeyCombination;
-    }
-
     /**
      * Bind show/hide (toggle) hotkey
      */
@@ -36,7 +31,6 @@ public class HotkeyManager {
         }
         hotkeyManager.register(KeyStroke.getKeyStroke(hotkeyCombination), new HotKeyListener() {
             public void onHotKey(HotKey hotKey) {
-                System.out.println(hotKey);
                 if (stage.isFocused()) {
                     if (stage.isIconified()) {
                         Platform.runLater(()-> {

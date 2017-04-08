@@ -50,22 +50,26 @@ public interface Model {
     int getFilteredTaskListIndex(ReadOnlyTask targetTask);
     //@@author
 
-    /** Returns the all recurring ghost (not an actual task but will still be displayed to the user) tasks
-     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    ObservableList<ReadOnlyTask> getAllRecurringGhostTasks();
-
+    //@@author A0139925U
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //@@author A0139925U
     /** Updates the filter of the filtered task list to show all uncompleted tasks */
     void updateFilteredListToShowUncompleted();
 
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowCompleted();
+
+    /** Returns the all completed recurring ghost (not an actual task but will still be displayed to the user) tasks
+     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks();
+
+    /** Returns the all uncompleted recurring ghost (not an actual task but will still be displayed to the user) tasks
+     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks();
 
     //@@author A0142255M
     /** Updates the filter of the filtered task list to show all timed tasks */
@@ -87,8 +91,4 @@ public interface Model {
 
     /** Returns the filtered task list type as a {@code String} */
     String getFilteredTaskListType();
-
-    //@@author A0139925U
-    /** Updates the filter of the current filtered task list to reflect changes */
-    //void updateCurrentFilteredList();
 }

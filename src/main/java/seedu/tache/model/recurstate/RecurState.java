@@ -68,6 +68,41 @@ public class RecurState {
         this.recurCompletedList = recurCompletedList;
     }
 
+    public List<Date> getCompletedRecurDates(DateTime startDateTime, DateTime endDateTime, Date filterEndDate) {
+        List<Date> completedRecurList = new ArrayList<Date>();
+        if (isRecurring()) {
+            Calendar calendarCurrent = Calendar.getInstance();
+            calendarCurrent.setTime(new Date(startDateTime.getAmericanDateOnly()
+                                        + " " + startDateTime.getTimeOnly()));
+
+            Calendar calendarEnd = Calendar.getInstance();
+            calendarEnd.setTime(new Date(endDateTime.getAmericanDateOnly()
+                                        + " " + endDateTime.getTimeOnly()));
+            calendarEnd.add(Calendar.SECOND, 1);
+
+            //Populate 'Ghost' Task
+            while (calendarCurrent.getTime().before(calendarEnd.getTime())
+                    && (filterEndDate == null || calendarCurrent.getTime().before(filterEndDate))) {
+
+                if (isRecurCompleted(calendarCurrent.getTime())) {
+                    completedRecurList.add(calendarCurrent.getTime());
+                }
+
+                if (interval.equals(RecurInterval.DAY)) {
+                    calendarCurrent.add(Calendar.DATE, 1);
+                } else if (interval.equals(RecurInterval.WEEK)) {
+                    calendarCurrent.add(Calendar.WEEK_OF_YEAR, 1);
+                } else if (interval.equals(RecurInterval.MONTH)) {
+                    calendarCurrent.add(Calendar.MONTH, 1);
+                } else if (interval.equals(RecurInterval.YEAR)) {
+                    calendarCurrent.add(Calendar.YEAR, 1);
+                }
+            }
+        }
+        return completedRecurList;
+
+    }
+
     public List<Date> getUncompletedRecurDates(DateTime startDateTime, DateTime endDateTime, Date filterEndDate) {
         List<Date> uncompletedRecurList = new ArrayList<Date>();
         if (isRecurring()) {

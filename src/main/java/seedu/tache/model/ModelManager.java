@@ -99,7 +99,8 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
-        raise(new PopulateRecurringGhostTaskEvent(getAllRecurringGhostTasks()));
+        raise(new PopulateRecurringGhostTaskEvent(getAllUncompletedRecurringGhostTasks(),
+                                getAllCompletedRecurringGhostTasks()));
     }
     //@@author
 
@@ -134,10 +135,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
-
+    //@@author A0133925U
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateUncompletedRecurringDatesAsTask();
+        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateRecurringDatesAsTask();
         raise(new TaskPanelConnectionChangedEvent(filteredTasksWithRecurringTasks));
         return new UnmodifiableObservableList<>(filteredTasksWithRecurringTasks);
     }
@@ -146,35 +147,34 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
-        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
         updateFilteredTaskListType(TASK_LIST_TYPE_ALL);
+        raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
 
     //@@author A0139925U
     @Override
     public void updateFilteredListToShowUncompleted() {
-        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
         updateFilteredTaskListType(TASK_LIST_TYPE_UNCOMPLETED);
-
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
     }
 
     @Override
     public void updateFilteredListToShowCompleted() {
-        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
         updateFilteredTaskListType(TASK_LIST_TYPE_COMPLETED);
+        updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
     }
 
     //@@author A0142255M
     @Override
     public void updateFilteredListToShowTimed() {
-        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
         updateFilteredTaskListType(TASK_LIST_TYPE_TIMED);
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
     }
 
     @Override
     public void updateFilteredListToShowFloating() {
-        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
         updateFilteredTaskListType(TASK_LIST_TYPE_FLOATING);
+        updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
     }
 
     //@@author A0139961U
@@ -232,36 +232,6 @@ public class ModelManager extends ComponentManager implements Model {
     private void retainLatestKeywords(Set<String> keywords) {
         latestKeywords = keywords;
     }
-
-//    public void updateCurrentFilteredList() {
-//        switch(filteredTaskListType) {
-//        case TASK_LIST_TYPE_ALL:
-//            updateFilteredListToShowAll();
-//            break;
-//        case TASK_LIST_TYPE_COMPLETED:
-//            updateFilteredListToShowCompleted();
-//            break;
-//        case TASK_LIST_TYPE_UNCOMPLETED:
-//            updateFilteredListToShowUncompleted();
-//            break;
-//        case TASK_LIST_TYPE_TIMED:
-//            updateFilteredListToShowTimed();
-//            break;
-//        case TASK_LIST_TYPE_FLOATING:
-//            updateFilteredListToShowFloating();
-//            break;
-//        case TASK_LIST_TYPE_FOUND:
-//            updateFilteredTaskList(latestKeywords);
-//            break;
-//        case TASK_LIST_TYPE_DUE_TODAY:
-//            updateFilteredListToShowDueToday();
-//            break;
-//        case TASK_LIST_TYPE_DUE_THIS_WEEK:
-//            updateFilteredListToShowDueThisWeek();
-//            break;
-//        default:
-//        }
-//    }
     //@@author
 
     //========== Inner classes/interfaces/methods used for filtering =================================================
@@ -584,14 +554,14 @@ public class ModelManager extends ComponentManager implements Model {
         return Math.min(Math.min(a, b), c);
     }
 
-    private ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
+    private ObservableList<ReadOnlyTask> populateRecurringDatesAsTask() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < filteredTasks.size(); i++) {
             if (filteredTasks.get(i).getRecurState().isRecurring()) {
                 if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(new Date()).toArray());
-                } else if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
+                } else if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_THIS_WEEK)) {
                     Calendar dateThisWeek = Calendar.getInstance();
                     dateThisWeek.setTime(new Date());
                     dateThisWeek.add(Calendar.WEEK_OF_YEAR, 1);
@@ -602,19 +572,49 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
         }
+        if (filteredTaskListType.equals(TASK_LIST_TYPE_COMPLETED)) {
+            for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+                if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
+                    if (taskManager.getTaskList().get(i).getActiveStatus()) {
+                        Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                                .getCompletedRecurList().toArray());
+                    } else {
+                        Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                .getCompletedRecurList().toArray());
+                    }
+                }
+            }
+        }
         Collections.addAll(concatenated, filteredTasks.toArray());
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
 
-    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
+    public ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < taskManager.getTaskList().size(); i++) {
             if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
                 Collections.addAll(concatenated, taskManager.getTaskList().get(i)
-                                            .getUncompletedRecurList(null).toArray());
+                                            .getUncompletedRecurList().toArray());
             }
         }
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
+    }
+
+    public ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                            .getCompletedRecurList().toArray());
+            }
+        }
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
     //@@author A0150120H
     @Override
