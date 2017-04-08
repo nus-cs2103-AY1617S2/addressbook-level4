@@ -69,7 +69,7 @@ public class CompleteCommand extends Command implements Undoable {
             Task completedTask = createCompletedTask(taskToEdit);
             try {
                 if (taskToEdit.getRecurringStatus()) {
-                    model.updateTask(createOriginalRecurringTask(taskToEdit), completedTask);
+                    model.updateTask(createMasterRecurringTask(taskToEdit), completedTask);
                 } else {
                     model.updateTask(taskToEdit, completedTask);
                 }
@@ -124,7 +124,7 @@ public class CompleteCommand extends Command implements Undoable {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createOriginalRecurringTask(ReadOnlyTask taskToEdit) {
+    private static Task createMasterRecurringTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
         ((Task) taskToEdit).setRecurDisplayDate("");
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
