@@ -16,7 +16,7 @@ public class TestTask implements ReadOnlyTask {
     private Description description;
     private DateTime startDate;
     private DateTime endDate;
-    private TaskStatus status; //Default status of any new task created is UNDONE
+    private TaskStatus status = TaskStatus.UNDONE; //Default status of any new task created is UNDONE
     private UniqueTagList tags;
     private TaskType taskType;
 
@@ -55,7 +55,6 @@ public class TestTask implements ReadOnlyTask {
         this.startDate = startDate;
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.status = TaskStatus.UNDONE;
         this.taskType = TaskType.EVENT;
     }
 

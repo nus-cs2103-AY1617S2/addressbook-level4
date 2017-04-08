@@ -1,13 +1,13 @@
 package guitests;
 
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 
-//import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskCardHandle;
 
 import seedu.watodo.commons.core.Messages;
 import seedu.watodo.commons.exceptions.IllegalValueException;
@@ -150,7 +150,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
- /*   @Test
+    @Test
     public void execute_editDeleteExistingTag_success() throws Exception {
         String detailsToEdit = "#yumm";
         int taskManagerIndex = 3;
@@ -237,7 +237,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
-        //assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 }
