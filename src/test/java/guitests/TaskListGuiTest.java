@@ -15,9 +15,9 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import onlythree.imanager.TestApp;
@@ -47,7 +47,7 @@ public abstract class TaskListGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected PersonListPanelHandle taskListPanel;
+    protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     private Stage stage;
@@ -67,7 +67,7 @@ public abstract class TaskListGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getPersonListPanel();
+            taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             this.stage = stage;
@@ -104,16 +104,16 @@ public abstract class TaskListGuiTest {
     /**
      * Asserts the task shown in the card is same as the given task
      */
-    public void assertMatching(ReadOnlyTask task, PersonCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, task)); // TODO UI renaming
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndTask(card, task));
     }
 
     /**
-     * Asserts the size of the person list is equal to the given number. // TODO UI renaming
+     * Asserts the size of the task list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
-        assertEquals(size, numberOfPeople);
+        int numberOfTasks = taskListPanel.getNumberOfTasks();
+        assertEquals(size, numberOfTasks);
     }
 
     /**

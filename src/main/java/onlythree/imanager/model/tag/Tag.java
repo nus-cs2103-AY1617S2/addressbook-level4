@@ -3,7 +3,7 @@ package onlythree.imanager.model.tag;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the task list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

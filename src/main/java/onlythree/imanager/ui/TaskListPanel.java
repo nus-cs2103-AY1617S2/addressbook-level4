@@ -11,7 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import onlythree.imanager.commons.core.LogsCenter;
-import onlythree.imanager.commons.events.ui.PersonPanelSelectionChangedEvent;
+import onlythree.imanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import onlythree.imanager.commons.util.FxViewUtil;
 import onlythree.imanager.model.task.ReadOnlyTask;
 
@@ -49,7 +49,7 @@ public class TaskListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }

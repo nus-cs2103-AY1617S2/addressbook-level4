@@ -136,7 +136,7 @@ public class LogicManagerTest {
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
      *      - the internal task list data are same as those in the {@code expectedTaskList} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedAddressBook} was saved to the storage file. <br>
+     *      - {@code expectedTaskList} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskList expectedTaskList,
@@ -187,65 +187,53 @@ public class LogicManagerTest {
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskList(), Collections.emptyList());
     }
 
-
-    @Test
-    public void execute_add_invalidArgsFormat() {
-        // TODO no way to have invalid arguments currently
-        // is this test case appropriate?
-        String expectedMessage = Deadline.MESSAGE_DEADLINE_CONSTRAINTS;
-        assertCommandFailure("add past date by yesterday", expectedMessage);
-        // ArgumentTokenizer to understand, along with execute_add_invalidArgsFormat in LogicManagerTest why should fail
-        //String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        //assertCommandFailure("add wrong args wrong args", expectedMessage);
-        //assertCommandFailure("add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid,address", expectedMessage);
-        //assertCommandFailure("add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        // assertCommandFailure("add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid,
-        // address", expectedMessage);
-    }
-
+    //@@author A0140023E
+    // TODO maybe to take out these tests and put elsewhere
     @Test
     public void execute_add_invalidTaskData() {
-        assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
+        assertCommandFailure("add invalid name with slash/ from tmr to 2 days after",
                 Name.MESSAGE_NAME_CONSTRAINTS);
-        // TODO floating tasks don't have much to check at the moment
-        //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-        //        Phone.MESSAGE_PHONE_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-        //        Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandFailure("add valid name by yesterday t/validTag",
+                Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
+        assertCommandFailure("add valid name from yesterday to tmr t/validTag",
+                StartEndDateTime.MESSAGE_STARTDATETIME_CONSTRAINTS);
+        assertCommandFailure("add valid name from tmr to yesterday t/validTag",
+                StartEndDateTime.MESSAGE_ENDDATETIME_CONSTRAINTS);
+        assertCommandFailure("add valid name from 3 days later to 2 days later t/validTag",
+                StartEndDateTime.MESSAGE_STARTENDDATETIME_CONSTRAINTS);
         assertCommandFailure("add Valid Name from 2 days later to 3 days later t/invalid_-[.tag",
-                Tag.MESSAGE_TAG_CONSTRAINTS); //TODO only fails because of _-[
-
+                Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    //@@author
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.accept();
-        TaskList expectedAB = new TaskList();
-        expectedAB.addTask(toBeAdded);
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.addTask(toBeAdded);
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                expectedAB,
-                expectedAB.getTaskList());
-
+                expectedTaskList,
+                expectedTaskList.getTaskList());
     }
 
     @Test
     public void execute_view_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        TaskList expectedAB = helper.generateTaskList(2);
-        List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
+        TaskList expectedTaskList = helper.generateTaskList(2);
+        List<? extends ReadOnlyTask> expectedList = expectedTaskList.getTaskList();
 
-        // prepare address book state
+        // prepare task list state
         helper.addToModel(model, 2);
 
         assertCommandSuccess("view",
                 ViewCommand.MESSAGE_SUCCESS_VIEW_ALL_TASKS,
-                expectedAB,
+                expectedTaskList,
                 expectedList);
     }
 
@@ -292,8 +280,23 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_selectIndexNotFound_errorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
+    public void execute_selectIndexNotFound_selectLastIndex() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> twoTasks = helper.generateTasks(2);
+
+        TaskList expectedTaskList = helper.generateTaskList(twoTasks);
+        helper.addToModel(model, twoTasks);
+
+        // set task list state to 2 tasks
+        model.resetData(new TaskList());
+        for (Task task : twoTasks) {
+            model.addTask(task);
+        }
+
+        assertCommandSuccess("select 3",
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
+                expectedTaskList,
+                expectedTaskList.getTaskList());
     }
 
     @Test
@@ -305,7 +308,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), // TODO
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
                 expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
@@ -360,7 +363,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()), // TODO
+                Command.getMessageForTaskListShownSummary(expectedList.size()), // TODO
                 expectedAB,
                 expectedList);
     }
@@ -379,7 +382,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find KEY",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
@@ -398,7 +401,7 @@ public class LogicManagerTest {
         helper.addToModel(model, fourTasks);
 
         assertCommandSuccess("find key rAnDoM",
-                Command.getMessageForPersonListShownSummary(expectedList.size()),
+                Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
     }
