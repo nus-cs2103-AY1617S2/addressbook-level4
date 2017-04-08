@@ -123,6 +123,10 @@ public interface Model {
 
     void clearDone();
 
+    void clearUndone();
+
+    void displayTags();
+
     void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags);
 
     void sortBy(SortOrder sortOrder, boolean isReversed);

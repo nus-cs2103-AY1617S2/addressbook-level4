@@ -9,6 +9,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_CLEAR_ALL_SUCCESS = "All tasks have been removed!";
     public static final String MESSAGE_CLEAR_DONE_SUCCESS = "All completed tasks have been removed!";
+    public static final String MESSAGE_CLEAR_UNDONE_SUCCESS = "All incompleted tasks have been removed!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes all tasks or all done tasks.\n"
             + "Parameters: all, done or empty\n"
@@ -29,6 +30,11 @@ public class ClearCommand extends Command {
         case "done":
             model.clearDone();
             messageToReturn = MESSAGE_CLEAR_DONE_SUCCESS;
+            break;
+
+        case "undone":
+            model.clearUndone();
+            messageToReturn = MESSAGE_CLEAR_UNDONE_SUCCESS;
             break;
 
         case "all":

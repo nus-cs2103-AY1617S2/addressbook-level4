@@ -54,7 +54,8 @@ public class MainWindow extends UiPart<Region> {
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
     private static final String USERGUIDE_URL = "https://cs2103jan2017-f14-b1.github.io/main/UserGuide.html";
-    private static final String ICON_IMG = "/images/onetwodo_icon.png";
+    private static final String ICON_IMG = "/images/onetwodo_icon2.png";
+
 
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 650;
@@ -66,7 +67,6 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private static StatusBarFooter statusBarFooter;
-    private BrowserPanel browserPanel;
     private TaskListPanel deadlineTaskListPanel;
     private TaskListPanel eventTaskListPanel;
     private TaskListPanel todoTaskListPanel;
@@ -301,6 +301,28 @@ public class MainWindow extends UiPart<Region> {
         closeDialogOnNextKeyPress();
     }
 
+  //@@author A0135739W
+    public void handleTags(String tagsString) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        Text headerText = new Text("List of All Tags:");
+        Text tagsText = new Text("\n" + tagsString);
+        headerText.setWrappingWidth(MIN_WIDTH);
+        tagsText.setWrappingWidth(MIN_WIDTH);
+        content.setHeading(headerText);
+        content.setBody(tagsText);
+        closeDialog();
+        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
+        dialog.show();
+        commandBox.setKeyListener(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                ke.consume();
+                closeDialog();
+                commandBox.resetKeyListener();
+            }
+        });
+    }
+
     // @@author
     @FXML
     public void handleUndo() {
@@ -363,9 +385,6 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
 
     public void openDialog(ReadOnlyTask task) {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -394,10 +413,6 @@ public class MainWindow extends UiPart<Region> {
         }
         dialog.close();
         commandBox.focus();
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     public void showWelcomeDialog() {

@@ -91,10 +91,9 @@ public class ImportCommand extends Command {
     private void saveNewStorage(String updatedFilePath) throws IOException, DataConversionException {
         StorageManager storageManager = (StorageManager) MainApp.getInstance().getStorage();
         Model model = MainApp.getInstance().getModel();
+        storageManager.setToDoListFilePath(updatedFilePath);
         ToDoListStorage toDoListStorage = storageManager.getToDoListStorage();
         ReadOnlyToDoList toDoList = toDoListStorage.readToDoList().get();
-
-        storageManager.setToDoListFilePath(updatedFilePath);
         toDoListStorage.saveToDoList(toDoList);
         model.resetData(toDoList);
     }

@@ -16,6 +16,7 @@ import seedu.onetwodo.commons.events.ui.CloseDialogEvent;
 import seedu.onetwodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpUGRequestEvent;
+import seedu.onetwodo.commons.events.ui.ShowTagsRequestEvent;
 import seedu.onetwodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.onetwodo.commons.util.StringUtil;
 import seedu.onetwodo.logic.Logic;
@@ -45,8 +46,6 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Starting UI...");
         primaryStage.setTitle(config.getAppTitle());
 
-        // Set the application icon.
-        // primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
@@ -66,8 +65,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        // Release resources when browser panel is loaded
-        // mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -117,6 +114,13 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelp();
+    }
+
+    //@@author A0135739W
+    @Subscribe
+    private void handleShowTagsEvent(ShowTagsRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleTags(event.getTagsString());
     }
 
     // @@author A0141138N

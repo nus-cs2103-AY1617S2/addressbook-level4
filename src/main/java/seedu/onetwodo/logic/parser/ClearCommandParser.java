@@ -25,6 +25,9 @@ public class ClearCommandParser {
         case "done":
             return new ClearCommand("done");
 
+        case "undone":
+            return new ClearCommand("undone");
+
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
         }
