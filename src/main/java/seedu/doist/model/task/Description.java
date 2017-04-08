@@ -3,7 +3,7 @@ package seedu.doist.model.task;
 import seedu.doist.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's description in the address book.
+ * Represents a Task's description in the todo list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {

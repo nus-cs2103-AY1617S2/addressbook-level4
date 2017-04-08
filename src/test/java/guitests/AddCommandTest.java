@@ -43,7 +43,7 @@ public class AddCommandTest extends DoistGUITest {
 
         //add duplicate task
         commandBox.runCommand(td.email.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         // add a task without description (invalid)

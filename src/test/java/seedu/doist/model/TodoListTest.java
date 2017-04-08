@@ -59,9 +59,9 @@ public class TodoListTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        TodoList typicalAddressBook = new TypicalTestTasks().getTypicalTodoList();
-        List<ReadOnlyTask> newPersons = typicalAddressBook.getTaskList();
-        List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
+        TodoList typicalTodoList = new TypicalTestTasks().getTypicalTodoList();
+        List<ReadOnlyTask> newPersons = typicalTodoList.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTodoList.getTagList());
         // Repeat the first tag twice
         newTags.add(newTags.get(0));
         TodoListStub newData = new TodoListStub(newPersons, newTags);
@@ -71,20 +71,20 @@ public class TodoListTest {
     }
 
     /**
-     * A stub ReadOnlyTodoList whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyTodoList whose tasks and tags lists can violate interface constraints.
      */
     private static class TodoListStub implements ReadOnlyTodoList {
-        private final ObservableList<ReadOnlyTask> persons = FXCollections.observableArrayList();
+        private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        TodoListStub(Collection<? extends ReadOnlyTask> persons, Collection<? extends Tag> tags) {
-            this.persons.setAll(persons);
+        TodoListStub(Collection<? extends ReadOnlyTask> tasks, Collection<? extends Tag> tags) {
+            this.tasks.setAll(tasks);
             this.tags.setAll(tags);
         }
 
         @Override
         public ObservableList<ReadOnlyTask> getTaskList() {
-            return persons;
+            return tasks;
         }
 
         @Override

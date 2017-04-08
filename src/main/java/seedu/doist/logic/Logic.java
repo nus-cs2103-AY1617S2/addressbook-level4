@@ -20,7 +20,7 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException;
 
-    /** Returns the filtered list of persons */
+    /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredPersonList();
 
     //@@author A0147980U

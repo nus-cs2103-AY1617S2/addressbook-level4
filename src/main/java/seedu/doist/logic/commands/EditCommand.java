@@ -39,9 +39,9 @@ public class EditCommand extends Command {
 
     /**
      * @param filteredTaskListIndex
-     *            the index of the person in the filtered person list to edit
+     *            the index of the task in the filtered task list to edit
      * @param editTaskDescriptor
-     *            details to edit the person with
+     *            details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;

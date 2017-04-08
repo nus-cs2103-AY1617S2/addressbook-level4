@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     //private BrowserPanel browserPanel;
-    private TaskListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private Config config;
 
     @FXML
@@ -52,7 +52,7 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
        // browserPanel = new BrowserPanel(browserPlaceholder);
-        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        taskListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAbsoluteTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -142,7 +142,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     private AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+        return taskListPanelPlaceholder;
     }
 
     protected void hide() {
@@ -227,11 +227,11 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author
     public TaskListPanel getPersonListPanel() {
-        return this.personListPanel;
+        return this.taskListPanel;
     }
 
-    protected void loadPersonPage(ReadOnlyTask person) {
-      //  browserPanel.loadTaskPage(person);
+    protected void loadPersonPage(ReadOnlyTask task) {
+      //  browserPanel.loadTaskPage(task);
     }
 
     protected void releaseResources() {

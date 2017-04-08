@@ -91,12 +91,12 @@ public class XmlTodoListStorageTest {
         saveTodoList(null, "SomeFile.xml");
     }
 
-    private void saveTodoList(ReadOnlyTodoList addressBook, String filePath) throws IOException {
-        new XmlTodoListStorage(filePath).saveTodoList(addressBook, addToTestDataPathIfNotNull(filePath));
+    private void saveTodoList(ReadOnlyTodoList todoList, String filePath) throws IOException {
+        new XmlTodoListStorage(filePath).saveTodoList(todoList, addToTestDataPathIfNotNull(filePath));
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_assertionFailure() throws IOException {
+    public void saveTodoList_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTodoList(new TodoList(), null);
     }

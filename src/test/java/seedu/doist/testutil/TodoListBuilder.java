@@ -15,12 +15,12 @@ public class TodoListBuilder {
 
     private TodoList todoList;
 
-    public TodoListBuilder(TodoList addressBook) {
-        this.todoList = addressBook;
+    public TodoListBuilder(TodoList todoList) {
+        this.todoList = todoList;
     }
 
-    public TodoListBuilder withPerson(Task person) throws UniqueTaskList.DuplicateTaskException {
-        todoList.addTask(person);
+    public TodoListBuilder withTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        todoList.addTask(task);
         return this;
     }
 

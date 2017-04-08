@@ -124,7 +124,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTodoList(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -141,7 +141,7 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static XmlSerializableTodoList generateSampleStorageAddressBook() {
+    public static XmlSerializableTodoList generateSampleStorageTodoList() {
         return new XmlSerializableTodoList(new TodoList());
     }
 
@@ -290,7 +290,7 @@ public class TestUtil {
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -300,10 +300,10 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param tasks The array of persons.
-     * @param task The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -312,10 +312,10 @@ public class TestUtil {
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param tasks A array of persons.
-     * @param taskToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param taskToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... taskToAdd) {
         List<TestTask> listOfPersons = asList(tasks);
@@ -331,8 +331,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSameTask(person);
+    public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
