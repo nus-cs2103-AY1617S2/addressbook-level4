@@ -234,35 +234,48 @@ Function of `Logic`
 * The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 ```
-Add Command
+Common Commands
 
-When Add Command is used, user's input will be checked in the AddCommandParser. In the AddCommandParser, it will check
-for the type of task. There are three types of task and they are floating task(no date, no time), deadline task(date/time present),
-event task(Start and End date present). There are three addCommand with different number of parameter to handle the three type of task.
-After checking for the type of task, AddCommandParser will call the corresponding addCommand to add the task.
+`Add Command` - It is able to add task.
+This function is flexible with dates by using the natty libraries. When `Add` Command is used, user's input will be checked in the 
+`AddCommandParser`. In the `AddCommandParser`, it will check for the type of task. There are three types of task and they are floating 
+task(no date, no time), deadline task(date/time present), event task(Start and End date present). There are three `addCommand` methods 
+with different number of parameter to handle the three type of task. After checking for the type of task, `AddCommandParser` will call 
+the corresponding `addCommand` to add the task.
 
 Given below is the Activity Diagram when the information reached `AddCommandParser`
 
 <img src="images/addCommandParser.PNG" width="800"><br>
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
-Additional Commands
-
-* Redo Command - It is able to redo only if an undo command has been executed before.
-This function is done by using stack. When an undo command is executed, taskManager is "push" into the stack before undo command's function is carried out. By doing this way, the previous state is saved inside the stack. When redo command is executed, the stack will "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in ModelManager under Model component.
-
-* RemoveDeadline Command - It is able to remove all dates in a task.
-It checks for valid index and set all the dates for the task to an empty string.
-
-* Undo Command - It is able to undo action commands: add, edit, delete, clear, redo commands. 
-This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed,
-the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in ModelManager under Model component.
+`Delete Command` - It is able to delete a task using Index.
+This function can only work if the given index is valid.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br>
  
 <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
+`Find Command` - It is able to find a task with the specified name or date
+This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will show the
+related keywords.
+
+Additional Commands
+
+`Redo Command` - It is able to redo only if an `Undo Command` has been executed before.
+This function is done by using stack. When an `Undo Command` is executed, taskManager is "push" into the stack before `Undo Command's` 
+function is carried out. By doing this way, the previous state is saved inside the stack. When `Redo Command` is executed, the stack 
+will "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in 
+ModelManager under Model component.
+
+`RemoveDeadline Command` - It is able to remove all dates in a task.
+It checks for valid index and set all the dates for the task to an empty string.
+
+`Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. 
+This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action 
+command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed,
+the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside 
+in `ModelManager` under `Model` component.
 
 Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")`
  API call. Notice the differences between the remove and undo commands.<br>
