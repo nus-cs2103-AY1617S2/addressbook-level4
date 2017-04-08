@@ -31,15 +31,19 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
 
 ### 2.1. Prerequisites
 
-1. **JDK `1.8.0_60`**  or later<br>
+Here are some tasks you should to complete before diving into the project.
+
+1. Install **JDK `1.8.0_60`**  or later<br>
 
     > Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.
 
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Proceed from step 2 onwards in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
-4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+2. Download and install **Eclipse** Itegrated Development Environment on your computer.
+3. Install **e(fx)clipse** plugin for Eclipse 
+(Proceed from step 2 
+onwards in [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+4. Visit Eclipse Marketplace, search for and install **Buildship Gradle 
+Integration** plugin.
+5. Also from Eclipse Marketplace, install **Checkstyle Plug-in** plugin.
 
 
 ### 2.2. Importing the project into Eclipse
@@ -58,6 +62,7 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
   > * If Eclipse auto-changed any settings files during the import process, you can discard those changes.
 
 ### 2.3. Configuring Checkstyle
+
 1. Click `Project` -> `Properties` -> `Checkstyle` -> `Local Check Configurations` -> `New...`
 2. Choose `External Configuration File` under `Type`
 3. Enter an arbitrary configuration name e.g. toluist
@@ -87,15 +92,15 @@ We have organized the guide in a top-down manner so that, as a new developer, yo
 ### 3.1. Architecture
 
 <img src="images/Architecture.png" width="600"><br>
-_Figure 3.1 : Architecture Diagram_
+**Figure 3.1**: Architecture Diagram
 
 The **_Architecture Diagram_** given above explains the high-level design of ToLuist.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* Initializing the components in the correct sequence, and connects them up with each other during app launch.
+* Shutting down the components and invokes cleanup method where necessary when exiting the app.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
@@ -112,19 +117,18 @@ The rest of the App consists of five components:
 * [**`Model`**](#model-component) holds the data of the application in the memory.
 * [**`Storage`**](#storage-component) reads data from, and writes data to, the hard disk.
 
-Each of the five components defines its _API_ in an `interface` with the same name as the Component.
-
 Our architecture follows the *Model-View-Controller* (MVC) Pattern. UI displays data and interacts with the user. Commands are passed through 
 the Dispatcher and routed to a suitable Controller. Controller receives requests from the Dispatcher and acts as the 
-bridge between the UI and the Model. Model & Storage store and maintain the data. A lot of inspirations for this design
- was drawn from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr.com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
+bridge between the UI and the Model. Model & Storage store and maintain the data. Inspirations for this design
+ came from MVC architectures used by web MVC frameworks such as [Ruby on Rails](http://paulhan221.tumblr
+ .com/post/114731592051/rails-http-requests-for-mvc) and [Laravel](http://laravelbook.com/laravel-architecture/).
 
 The sections below give more details of each component.
 
 ### 3.2. UI component
 
 <img src="images/UiClassDiagram.png" width="600"><br>
-_Figure 3.2 : Structure of the UI Component_
+**Figure 3.2**: Structure of the UI Component
 
 **API** : [`Ui.java`](../src/main/java/seedu/toluist/ui/Ui.java)
 
@@ -160,16 +164,33 @@ Each `UiView` has a mini lifecycle. `viewDidLoad` is run after `render` is calle
 
 **API** : [`UiStore.java`](../src/main/java/seedu/toluist/ui/UiStore.java)
 
-`UiStore` holds the data to be used by the `Ui`. An example would be the task data to be displayed to the user. In essence, `UiStore` acts as a **View Model** for the `Ui`. 
+`UiStore` holds the data to be used by the `Ui`. An example would be the task data to be displayed to the user.
+ 
+In essence, `UiStore` acts as a **View Model** for the `Ui`. The reason why `UiStore` is separate from the 
+`Model` is because a lot of the states used in the `UiStore` are Ui-specific states. Having them separate 
+allows having a clear separation of concern between ui states and business logic states.
+
+Since `UiStore` acts as a single universal state container for the Ui, it also implement the *Singleton* 
+pattern.
 
 #### 3.2.3. Reactive nature of the UI ####
 
-To keep the UI predictable and to reduce the number of lines of codes used to dictate how the UI should change based on state changes, we make use of reactive programming in our UI. You can declare how the UI should be rendered based solely on the states held by the `UiStore`. `Ui` and `UiStore` together implement the **Observer-Observable** pattern where the `Ui` will listen directly to changes in `UiStore` and re-render automatically.
+To keep the Ui predictable and to reduce the number of lines of codes used to dictate how the UI should 
+change based on state changes, we make use of reactive programming in our UI.
+ 
+You can declare how the Ui should be rendered based solely on the states held by the `UiStore`. `Ui` and 
+`UiStore` together implement the **Observer-Observable** pattern where the `Ui` will listen directly to changes in `UiStore` and re-render automatically.
 
-The diagram below shows how the UI reacts when an add command is called. The UI simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
+To make an `UiView` object listen to changes to from a state in `UiStore`, you can use the `bind` API 
+provided by `UiStore`. For example, `ResultView` is bound to the observable property 
+`observableCommandResult` of `UiStore` with `uiStore.bind(resultView, uiStore.getObservableCommandResult())
+`. This way, whenever the command result changes in `UiStore`, the result view will re-render itself.
+
+The diagram below shows how `Ui` reacts when an add command is called. The UI 
+simply needs to display all the tasks available in the `UiStore`, without knowing what was the exact change.
 
 <img src="images/UiSequence.png" width="600"><br>
-_Figure 3.2.3 : Interactions Inside the UI for the `add study` Command_
+**Figure 3.2.3**: Interactions Inside the UI for the `add study` Command_
 
 The reactive approach is borrowed from modern Javascript front-end frameworks such as [React.js](https://facebook.github.io/react/) and [Vue.js](https://vuejs.org/v2/guide/reactivity.html).
 
@@ -177,18 +198,50 @@ The reactive approach is borrowed from modern Javascript front-end frameworks su
 
 **API** : [`Dispatcher.java`](../src/main/java/seedu/toluist/dispatcher/Dispatcher.java)
 
-`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command. In effect, `Dispatcher` is implementing the **Facade**, shielding the command logic from the Ui.
+`Dispatcher` acts like a router in a traditional Web MVC architecture. On receiving new input from the UI, `Dispatcher` decides which `Controller` is the best candidate to handle the input, then instantiates and asks the `Controller` object to execute the command.
+ 
+In effect, `Dispatcher` is implementing the **Facade**, shielding the command logic from the Ui.
 
 ### 3.4. Controller component
 
 <img src="images/ControllerClassDiagram.png" width="600"><br>
-_Figure 3.4 : Structure of the Controller Component_
+**Figure 3.4**: Structure of the Controller Component
 
 **API** : [`Controller.java`](../src/main/java/seedu/toluist/controller/Controller.java)
 
-`Controller` has a `execute` method to execute the command passed by the dispatcher. The command execution can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore`, which subsequently trigger a Ui re-render.
+`Controller` has an `execute` method to execute the command passed by the dispatcher. The command execution
+ can affect the `Model`, the `Storage` (e.g. adding a task) and/or raise events. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the dispatcher. After every `execute` invocation, `Controller` can optionally set new states in the `UiStore`, which subsequently trigger a Ui re-render.
 
-Each command is represented by a different Controller class, which all extends from the abstract `Controller` class. Hence, `Controller` is implementing the `Command` pattern.
+Each command is represented by a different Controller class, which all extends from the abstract 
+`Controller` class. The `Controller` is implementing the `Command` pattern, where each `Controller` class 
+carries the functionality of a different command.
+
+Some other interesting properties of `Controller` are described below.
+
+#### 3.4.1. Responsible for its own tokenization
+
+As opposed to having central `Tokenizer` or `Parser` class to decide how to tokenize all the different 
+commands, each `Controller` provides its own implementation for `tokenize`. This is more modular than 
+having a single `Tokenizer` class, as different commands can have very different formats, leading to very 
+different tokenization logics in the corresponding `Controller` classes (Though if the logics are similar, 
+they can be shared through a helper class).
+
+In effect, this is applying `Open Closed Principle`, as the `Dispatcher` do not need 
+to be aware of how the different `Controller` do their tokenization, and only interact with each 
+`Controller` through the common API `tokenize`. For new commands with vastly different formats, you can 
+then easily add a new `Controller` with its own `tokenize` implementation.
+
+#### 3.4.2. Responsible for its own parameter suggestions
+
+To support parameter suggestion, each `Controller` must also implement the API `getSuggestedKeywordMapping` 
+which provide a list of parameters for each command, as well as any options specific to a parameter. 
+Again, there was a conscious decision to let this be provided individually by each `Controller`. Though an 
+alternative approach is to have a single class that stores all the keywords used by all commands, this 
+approach quickly grows out of hand when there are different commands having the same parameter, but used for 
+different purposes. 
+
+Again, `Open Closed Principle` is applied here, where a new `Controller` can be added easily while the 
+implementation for getting suggested keyword inside `CommandDispatcher` can remain unchanged.
 
 ### 3.5. Model component
 
