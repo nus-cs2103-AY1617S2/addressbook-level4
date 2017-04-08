@@ -1,19 +1,4 @@
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import seedu.taskboss.commons.core.Config;
-import seedu.taskboss.commons.core.GuiSettings;
-import seedu.taskboss.commons.events.ui.ExitAppRequestEvent;
-import seedu.taskboss.commons.util.FxViewUtil;
-import seedu.taskboss.logic.Logic;
-import seedu.taskboss.model.UserPrefs;
 import seedu.taskboss.model.category.Category;
 
 /**
