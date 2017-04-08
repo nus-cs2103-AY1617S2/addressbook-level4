@@ -140,8 +140,8 @@ public class AddCommand extends Command {
     }
 
     //@@author A0139161J
-    /* Returns String in format of hh:mm
-     * Precond: dateTime string formed by NattyParser required as input
+    /** Returns String in format of hh:mm
+     *  Precond: dateTime string formed by NattyParser required as input
      */
     private String getTime(String dateTime) {
         List<String> output = new ArrayList<String>();

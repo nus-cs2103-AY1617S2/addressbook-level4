@@ -29,28 +29,46 @@ public class GlobalStack {
     }
 
     /*
-     * Pre-condition : Top of stack contains 2 consecutive task objects to be popped
-     * Usage : Undo Edit Command
+     * Usage : Undo/Redo Edit Command
      */
-    public Task undoEdit() {
+    /**
+     * For undo-edit function
+     */
+    public Task undoGetOriginalTask() {
         Task originalTask = (Task) undoStack.pop();
-        Task editedTask = (Task) undoStack.pop();
         redoStack.push(originalTask);
-        redoStack.push(editedTask);
         return originalTask;
     }
 
-    public Task redoEdit() {
-        Task editedTask = (Task) redoStack.pop();
-        Task originalTask = (Task) redoStack.pop();
-        undoStack.push(editedTask);
-        undoStack.push(originalTask);
+    /**
+     * For undo-edit function
+     */
+    public Task undoGetEditedTask() {
+        Task editedTask = (Task) undoStack.pop();
+        redoStack.push(editedTask);
         return editedTask;
     }
 
+    /**
+     * For redo-edit function
+     */
+    public Task redoGetEditedTask() {
+        Task editedTask = (Task) redoStack.pop();
+        undoStack.push(editedTask);
+        return editedTask;
+    }
+
+    /**
+     * For redo-edit function
+     */
+    public Task redoGetOriginalTask() {
+        Task originalTask = (Task) redoStack.pop();
+        undoStack.push(originalTask);
+        return originalTask;
+    }
+
     /*
-     * Pre-condition : Top of stack contains task object
-     * Usage : Undo Add Command
+     * Usage : Undo/Redo Add Command
      */
     public Task undoAdd() throws NoSuchElementException {
         try {
@@ -72,6 +90,9 @@ public class GlobalStack {
         }
     }
 
+    /*
+     * Usage : Undo/Redo Delete Command
+     */
     public ReadOnlyTask undoDelete() {
         ReadOnlyTask undoTask = (ReadOnlyTask) undoStack.pop();
         redoStack.push(undoTask);

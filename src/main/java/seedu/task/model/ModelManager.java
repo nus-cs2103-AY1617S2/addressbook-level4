@@ -122,11 +122,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
         taskManager.transferTaskToComplete(t);
+        indicateTaskManagerChanged();
     }
 
     @Override
     public void uncompleteTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
         taskManager.transferTaskFromComplete(t);
+        indicateTaskManagerChanged();
     }
 
     @Override

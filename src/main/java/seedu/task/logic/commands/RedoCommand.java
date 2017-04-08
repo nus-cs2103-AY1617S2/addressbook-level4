@@ -34,8 +34,10 @@ public class RedoCommand extends Command {
                     model.addTask((Task) toRedo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
                 } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
-                    gStack.redoEdit();
-                    model.updateTask(((Task) toRedo).getIndex(), (Task) toRedo);
+                    Task editedTask = gStack.redoGetEditedTask();
+                    Task originalTask = gStack.redoGetOriginalTask();
+                    model.deleteTask(originalTask);
+                    model.addTask(editedTask);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toRedo));
                 } else { //delete command
                     ReadOnlyTask unmutableTask = gStack.redoDelete();

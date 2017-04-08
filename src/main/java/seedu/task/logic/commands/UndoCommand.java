@@ -35,21 +35,18 @@ public class UndoCommand extends Command {
                     model.deleteTask((Task) toUndo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 } else if (parserInfo.equals(COMMAND_WORD_EDIT)) {
-                    gStack.undoEdit();
-                    model.updateTask(((Task) toUndo).getIndex(), (Task) toUndo);
+                    Task originalTask = gStack.undoGetOriginalTask();
+                    Task editedTask = gStack.undoGetEditedTask();
+                    model.deleteTask(editedTask);
+                    model.addTask(originalTask);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 } else if (parserInfo.equals(COMMAND_WORD_DELETE)) { // it'll be delete command
                     gStack.undoDelete(); // pushes task to redostack
-                    /**Debugging purpose
-                     * System.out.println("To be restored : " + toUndo.toString());
-                     * System.out.println("Index to be restored" + ((Task) toUndo).getEditTaskIndex());
-                    */
                     model.insertTasktoIndex(((Task) toUndo).getIndex(), (Task) toUndo);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
                 }
             } else {
                 TaskManager undo = gStack.undoClear();
-                //System.out.println(undo.toString());
                 model.resetData(undo);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toUndo));
             }
