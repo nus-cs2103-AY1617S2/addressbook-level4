@@ -250,9 +250,9 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
         assertCommandFailure("add Valid Name sd/invalid date ed/tomorrow i/valid, information",
-                DateTime.MESSAGE_DATE_CONSTRAINTS);
+                DateTime.ERROR_INVALID_DATE + "\n" + DateTime.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name sd/today ed/invalid i/valid, information",
-                DateTime.MESSAGE_DATE_CONSTRAINTS);
+                DateTime.ERROR_INVALID_DATE + "\n" + DateTime.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name sd/tomorrow ed/next friday i/valid info r/invalid recurrence",
                 Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name r/weekly monthly",

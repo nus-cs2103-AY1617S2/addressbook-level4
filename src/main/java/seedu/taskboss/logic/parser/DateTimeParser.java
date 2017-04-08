@@ -14,7 +14,6 @@ import seedu.taskboss.model.task.DateTime;
  */
 public class DateTimeParser {
 
-    private static final String ERROR_INVALID_DATE = "Failed to understand given date.";
     private static final String ERROR_MULTIPLE_DATES = "Please only enter a single date.";
     private static final String REGEX_US_DATE = "(\\d{1,2})-(\\d{1,2})-((?:\\d\\d){1,2})";
     private static final String REGEX_NON_US_DATE = "$2-$1-$3";
@@ -64,9 +63,7 @@ public class DateTimeParser {
         List <DateGroup> dateGroupList = parse(date);
         int numDates = countDates(dateGroupList);
 
-        if (numDates == 0) {
-            throw new IllegalValueException(ERROR_INVALID_DATE);
-        } else if (numDates > 1) {
+        if (numDates > 1) {
             throw new IllegalValueException(ERROR_MULTIPLE_DATES);
         }
 
@@ -84,11 +81,6 @@ public class DateTimeParser {
             numTotalDates += dateGroup.getDates().size();
         }
         return numTotalDates;
-    }
-
-    // for testing
-    public static String getInvalidDateError() {
-        return ERROR_INVALID_DATE;
     }
 
     // for testing
