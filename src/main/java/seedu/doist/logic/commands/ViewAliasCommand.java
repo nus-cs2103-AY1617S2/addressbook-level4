@@ -15,11 +15,11 @@ public class ViewAliasCommand extends Command {
     }
 
     private String formatAliasesForOutput() {
-        Set<String> allCommandWords = model.getDefaultCommandWordSet();
+        Set<String> allCommandWords = aliasModel.getDefaultCommandWordSet();
         StringBuilder sb = new StringBuilder();
         for (String word: allCommandWords) {
             sb.append(word + ": ");
-            for (String alias : model.getAliasList(word)) {
+            for (String alias : aliasModel.getAliasList(word)) {
                 sb.append(alias + ", ");
             }
             // remove the comma after the last alias

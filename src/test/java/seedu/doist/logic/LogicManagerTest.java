@@ -35,6 +35,8 @@ import seedu.doist.logic.commands.HelpCommand;
 import seedu.doist.logic.commands.ListCommand;
 import seedu.doist.logic.commands.SelectCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
+import seedu.doist.model.AliasListMapManager;
+import seedu.doist.model.AliasListMapModel;
 import seedu.doist.model.ConfigManager;
 import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
@@ -58,6 +60,7 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    private AliasListMapModel aliasModel;
     private ConfigModel configModel;
     private Logic logic;
 
@@ -84,12 +87,13 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
+        aliasModel = new AliasListMapManager();
         configModel = new ConfigManager();
         String tempAddressBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempAliasListMapFile = saveFolder.getRoot().getPath() + "TempAliasListMap.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, configModel, new StorageManager(tempAddressBookFile, tempAliasListMapFile,
-                                                                tempPreferencesFile));
+        logic = new LogicManager(model, aliasModel, configModel, new StorageManager(tempAddressBookFile,
+                tempAliasListMapFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedAddressBook = new TodoList(model.getTodoList()); // last saved assumed to be up to date

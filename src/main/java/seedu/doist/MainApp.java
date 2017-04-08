@@ -21,6 +21,8 @@ import seedu.doist.commons.util.StringUtil;
 import seedu.doist.logic.Logic;
 import seedu.doist.logic.LogicManager;
 import seedu.doist.model.AliasListMap;
+import seedu.doist.model.AliasListMapManager;
+import seedu.doist.model.AliasListMapModel;
 import seedu.doist.model.ConfigManager;
 import seedu.doist.model.ConfigModel;
 import seedu.doist.model.Model;
@@ -49,11 +51,13 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected Model model;
+    protected AliasListMapModel aliasModel;
     protected Config config;
     protected ConfigModel configModel;
     protected UserPrefs userPrefs;
 
 
+    //@@author A0140887W
     @Override
     public void init() throws Exception {
         LOGGER.info("=========================[ Initializing " + APPLICATION_NAME + " ]=======================");
@@ -71,23 +75,31 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, configModel, storage);
+        aliasModel = initAliasListMapManager(storage);
+
+        logic = new LogicManager(model, aliasModel, configModel, storage);
 
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
     }
 
+    //@@author
     protected String getApplicationParameter(String parameterName) {
         Map<String, String> applicationParameters = getParameters().getNamed();
         return applicationParameters.get(parameterName);
     }
 
+    //@@author A0140887W
+    private AliasListMapModel initAliasListMapManager(Storage storage) {
+        ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
+        return new AliasListMapManager(initialAliasData);
+    }
+
+    //@@author
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         ReadOnlyTodoList initialData = initTodoListData(storage);
-        ReadOnlyAliasListMap initialAliasData = initAliasListMapData(storage);
-
-        return new ModelManager(initialData, initialAliasData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     protected static ReadOnlyTodoList initTodoListData(Storage storage) {
@@ -109,6 +121,7 @@ public class MainApp extends Application {
         return initialData;
     }
 
+    //@@author A0140887W-reused
     protected static ReadOnlyAliasListMap initAliasListMapData(Storage storage) {
         Optional<ReadOnlyAliasListMap> aliasListMapOptional;
         ReadOnlyAliasListMap initialAliasData;
@@ -130,6 +143,7 @@ public class MainApp extends Application {
         return initialAliasData;
     }
 
+    //@@author
     protected void initLogging(Config config) {
         LogsCenter.init(config);
     }

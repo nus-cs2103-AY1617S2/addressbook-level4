@@ -28,7 +28,7 @@ import seedu.doist.logic.commands.SortCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.UnfinishCommand;
 import seedu.doist.logic.commands.ViewAliasCommand;
-import seedu.doist.model.Model;
+import seedu.doist.model.AliasListMapModel;
 
 /**
  * Parses user input.
@@ -40,10 +40,10 @@ public class Parser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private Model model;
+    private AliasListMapModel aliasModel;
 
-    public Parser(Model model) {
-        this.model = model;
+    public Parser(AliasListMapModel aliasModel) {
+        this.aliasModel = aliasModel;
     }
 
     /**
@@ -106,7 +106,7 @@ public class Parser {
     }
 
     public boolean doesTriggerSameCommand(String word, String defaultCommandWord) {
-        List<String> validCommandList = model.getValidCommandList(defaultCommandWord);
+        List<String> validCommandList = aliasModel.getValidCommandList(defaultCommandWord);
         return validCommandList.contains(word);
     }
 }

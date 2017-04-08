@@ -13,7 +13,7 @@ public class ResetAliasCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.resetToDefaultCommandWords();
+        aliasModel.resetToDefaultCommandWords();
         return new CommandResult(MESSAGE_RESET_ALIAS_SUCCESS);
     }
 }

@@ -34,7 +34,7 @@ public class SaveAtCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assert configModel != null;
         if (file.exists() && !file.isDirectory()) {
             throw new CommandException(MESSAGE_FILE_EXISTS);
         }

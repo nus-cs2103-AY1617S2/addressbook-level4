@@ -26,9 +26,9 @@ public class RemoveAliasCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        for (ArrayList<String> aliasList : model.getAliasListMap().getAliasListMapping().values()) {
+        for (ArrayList<String> aliasList : aliasModel.getAliasListMap().getAliasListMapping().values()) {
             if (aliasList.contains(alias)) {
-                model.removeAlias(alias);
+                aliasModel.removeAlias(alias);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, alias));
             }
         }

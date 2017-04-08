@@ -14,7 +14,6 @@ import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.SaveAtCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.ConfigManager;
-import seedu.doist.model.ModelManager;
 
 //@@author A0140887W
 public class SaveAsParserTest {
@@ -44,8 +43,8 @@ public class SaveAsParserTest {
             fail();
         }
 
-        //illegal characters
-        //assertIncorrectPath("***");
+        //Empty path
+        assertIncorrectPath("");
         // spaces and new line
         assertIncorrectPath("  \n");
     }
@@ -63,19 +62,27 @@ public class SaveAsParserTest {
         assertPath(path, true, true);
     }
 
+    /**
+     * Uses SaveAtCommandParser to parse the path then calls {@link #assertFeedback}
+     */
     public void assertPath(String path, boolean isCommandExceptionExpected, boolean isFileExist) {
         SaveAtCommandParser parser = new SaveAtCommandParser();
         Command command = parser.parse(path);
         if (isFileExist) {
-            assertFeedbackMessage(command, SaveAtCommand.MESSAGE_FILE_EXISTS, isCommandExceptionExpected);
+            assertFeedback(command, SaveAtCommand.MESSAGE_FILE_EXISTS, isCommandExceptionExpected);
         } else {
-            assertFeedbackMessage(command, String.format(SaveAtCommand.MESSAGE_INVALID_PATH,
+            assertFeedback(command, String.format(SaveAtCommand.MESSAGE_INVALID_PATH,
                     SaveAtCommand.MESSAGE_USAGE), isCommandExceptionExpected);
         }
     }
 
-    public void assertFeedbackMessage(Command returnedCommand, String message, boolean isCommandExceptionExpected) {
-        returnedCommand.setData(new ModelManager(), new ConfigManager());
+    /**
+     * Executes the command, confirms that a CommandException is thrown if expected or not thrown if not expected
+     * and that the result message is correct.
+     */
+    public void assertFeedback(Command returnedCommand, String message, boolean isCommandExceptionExpected) {
+        //We need to initialise config manager to be the default
+        returnedCommand.setData(null, null, new ConfigManager());
         try {
             returnedCommand.execute();
             assertFalse("CommandException should have been thrown", isCommandExceptionExpected);

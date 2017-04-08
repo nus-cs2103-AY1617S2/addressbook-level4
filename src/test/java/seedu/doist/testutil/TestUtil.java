@@ -47,7 +47,7 @@ public class TestUtil {
     /**
      * Folder used for temp files created during testing. Ignored by Git.
      */
-    public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
+    public static final String SANDBOX_FOLDER = FileUtil.getPath("src/test/data/sandbox");
 
     public static final Task[] SAMPLE_PERSON_DATA = getSampleTaskData();
 
@@ -109,7 +109,7 @@ public class TestUtil {
     }
 
     /**
-     * Appends the file name to the sandbox folder path.
+     * Returns directly the sandbox folder path.
      * Creates the sandbox folder if it doesn't exist.
      * @param fileName
      * @return
@@ -120,7 +120,7 @@ public class TestUtil {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return SANDBOX_FOLDER + fileName;
+        return fileName;
     }
 
     public static void createDataFileWithSampleData(String filePath) {
@@ -129,7 +129,7 @@ public class TestUtil {
 
     public static <T> void createDataFileWithData(T data, String filePath) {
         try {
-            File saveFileForTesting = new File(filePath);
+            File saveFileForTesting = new File(SANDBOX_FOLDER + File.separator + filePath);
             FileUtil.createIfMissing(saveFileForTesting);
             XmlUtil.saveDataToFile(saveFileForTesting, data);
         } catch (Exception e) {
