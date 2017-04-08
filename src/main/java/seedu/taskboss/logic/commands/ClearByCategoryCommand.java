@@ -1,8 +1,10 @@
 package seedu.taskboss.logic.commands;
 
+import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.exceptions.IllegalValueException;
 import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0147990R
 public class ClearByCategoryCommand extends Command {
@@ -29,10 +31,12 @@ public class ClearByCategoryCommand extends Command {
     public CommandResult execute() throws IllegalValueException, CommandException {
         model.updateFilteredTaskListByCategory(category);
 
-        if (!model.hasCategory(category)) {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        if (lastShownList.size() < 1) { //the category does not exist
             model.updateFilteredListToShowAll();
             throw new CommandException(String.format(MESSAGE_CATEGORY_NOT_FOUND));
         }
+
         model.clearTasksByCategory(category);
         return new CommandResult(String.format(MESSAGE_CLEAR_TASK_SUCCESS));
     }

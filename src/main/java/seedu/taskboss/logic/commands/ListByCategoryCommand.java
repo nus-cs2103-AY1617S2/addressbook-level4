@@ -1,8 +1,11 @@
 package seedu.taskboss.logic.commands;
 
 import seedu.taskboss.commons.core.EventsCenter;
+import seedu.taskboss.commons.core.UnmodifiableObservableList;
 import seedu.taskboss.commons.events.ui.JumpToCategoryListEvent;
+import seedu.taskboss.logic.commands.exceptions.CommandException;
 import seedu.taskboss.model.category.Category;
+import seedu.taskboss.model.task.ReadOnlyTask;
 
 //@@author A0147990R
 /**
@@ -19,6 +22,7 @@ public class ListByCategoryCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/project" + " || " + "l c/project";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks under category: %1$s";
+    public static final String MESSAGE_CATEGORY_NOT_FOUND = "The category does not exist";
     private final Category category;
 
     public ListByCategoryCommand(Category category) {
@@ -26,8 +30,16 @@ public class ListByCategoryCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         model.updateFilteredTaskListByCategory(category);
+ 
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (lastShownList.size() < 1) { //the category does not exist
+            model.updateFilteredListToShowAll();
+            throw new CommandException(String.format(MESSAGE_CATEGORY_NOT_FOUND));
+        }
+
         EventsCenter.getInstance().post(new JumpToCategoryListEvent(category));
         return new CommandResult(String.format(MESSAGE_SUCCESS, category));
     }
