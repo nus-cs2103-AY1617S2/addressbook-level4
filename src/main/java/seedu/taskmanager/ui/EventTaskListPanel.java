@@ -19,7 +19,7 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 /**
  * Panel containing the list of event tasks.
  */
-public class EventTaskListPanel extends UiPart<Region> {
+public class EventTaskListPanel extends UiPart<Region> implements TaskListPanel  {
     private final Logger logger = LogsCenter.getLogger(EventTaskListPanel.class);
     private static final String FXML = "EventTaskListPanel.fxml";
 

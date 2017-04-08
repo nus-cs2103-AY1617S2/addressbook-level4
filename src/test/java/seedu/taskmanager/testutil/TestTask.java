@@ -177,13 +177,11 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean isWithinStartEndDuration(ReadOnlyTask t) {
-
         if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
             if ((DateTimeUtil.isDateWithin(this.getStartDate().value, t.getStartDate().value,
                     t.getEndDate().value) == 2)) {
                 if ((this.getStartTime().laterThanOrEqual(t.getEndTime()))
                         || (t.getStartTime().laterThanOrEqual(this.getEndTime()))) {
-
                     return false;
                 }
                 return true;
@@ -220,7 +218,6 @@ public class TestTask implements ReadOnlyTask {
                 t.getEndDate().value) == 2) && this.getEndTime().laterThanOrEqual(t.getStartTime())) {
             return true;
         }
-
         return false;
     }
 }

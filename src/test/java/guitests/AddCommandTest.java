@@ -4,7 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
+import guitests.guihandles.DeadlineTaskCardHandle;
+import guitests.guihandles.EventTaskCardHandle;
+import guitests.guihandles.FloatingTaskCardHandle;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.testutil.TestTask;
@@ -29,11 +31,13 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // add duplicate task
         commandBox.runCommand(td.sampleDeadline.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
-        assertTrue(taskListPanel.isListMatching(currentList));
+        assertTrue(eventTaskListPanel.isListMatching(currentList));
+        assertTrue(deadlineTaskListPanel.isListMatching(currentList));
+        assertTrue(floatingTaskListPanel.isListMatching(currentList));
 
         // add to empty list
         commandBox.runCommand("CLEAR");
-        assertAddSuccess(td.eatbreakfast);
+        assertAddSuccess(td.eatBreakfast);
 
         // invalid command
         commandBox.runCommand("ADDS Johnny");
@@ -115,13 +119,29 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(taskToAdd.getAddCommand());
 
         // confirm the new card contains the right data
-        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getTaskName().toString());
-        assertMatching(taskToAdd, addedCard);
+        if (taskToAdd.isEventTask()) {
+            EventTaskCardHandle addedCard = eventTaskListPanel.navigateToEventTask(taskToAdd.getTaskName().toString());
+            assertMatching(taskToAdd, addedCard);
+        } else {
+            if (taskToAdd.isDeadlineTask()) {
+                DeadlineTaskCardHandle addedCard = deadlineTaskListPanel
+                        .navigateToDeadlineTask(taskToAdd.getTaskName().toString());
+                assertMatching(taskToAdd, addedCard);
+            } else {
+                if (taskToAdd.isFloatingTask()) {
+                    FloatingTaskCardHandle addedCard = floatingTaskListPanel
+                            .navigateToFloatingTask(taskToAdd.getTaskName().toString());
+                    assertMatching(taskToAdd, addedCard);
+                }
+            }
+        }
 
         // confirm the list now contains all previous tasks plus the new
         // task
         TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
-        assertTrue(taskListPanel.isListMatching(expectedList));
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
     }
 
     private void assertAddOneDayEventSuccess(TestTask taskToAdd, TestTask... currentList) {

@@ -14,18 +14,14 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
 /**
  * Provides a handle to a task card in the task list panel.
  */
-public class TaskCardHandle extends GuiHandle {
+public class FloatingTaskCardHandle extends GuiHandle {
     private static final String TASKNAME_FIELD_ID = "#taskname";
-    private static final String STARTDATE_FIELD_ID = "#startdate";
-    private static final String STARTTIME_FIELD_ID = "#starttime";
-    private static final String ENDDATE_FIELD_ID = "#enddate";
-    private static final String ENDTIME_FIELD_ID = "#endtime";
     private static final String COMPLETED_FIELD_ID = "#completed";
     private static final String CATEGORIES_FIELD_ID = "#categories";
 
     private Node node;
 
-    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
+    public FloatingTaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node) {
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -36,22 +32,6 @@ public class TaskCardHandle extends GuiHandle {
 
     public String getTaskName() {
         return getTextFromLabel(TASKNAME_FIELD_ID);
-    }
-
-    public String getStartDate() {
-        return getTextFromLabel(STARTDATE_FIELD_ID);
-    }
-
-    public String getStartTime() {
-        return getTextFromLabel(STARTTIME_FIELD_ID);
-    }
-
-    public String getEndDate() {
-        return getTextFromLabel(ENDDATE_FIELD_ID);
-    }
-
-    public String getEndTime() {
-        return getTextFromLabel(ENDTIME_FIELD_ID);
     }
 
     public String getIsMarkedAsCompleted() {
@@ -78,19 +58,15 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task) {
         return task != null || this == task && getTaskName().equals(task.getTaskName())
-                && getStartDate().equals(task.getStartDate()) && getStartTime().equals(task.getStartTime())
-                && getEndDate().equals(task.getEndDate()) && getEndTime().equals(task.getEndTime())
                 && getIsMarkedAsCompleted().equals(task.getIsMarkedAsComplete())
                 && getCategories().equals(getCategories(task.getCategories()));
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof TaskCardHandle) {
-            TaskCardHandle handle = (TaskCardHandle) obj;
-            return getTaskName().equals(handle.getTaskName()) && getStartDate().equals(handle.getStartDate())
-                    && getStartTime().equals(handle.getStartTime()) && getEndDate().equals(handle.getEndDate())
-                    && getEndTime().equals(handle.getEndTime())
+        if (obj instanceof FloatingTaskCardHandle) {
+            FloatingTaskCardHandle handle = (FloatingTaskCardHandle) obj;
+            return getTaskName().equals(handle.getTaskName())
                     && getIsMarkedAsCompleted().equals(handle.getIsMarkedAsCompleted())
                     && getCategories().equals(handle.getCategories());
         }
@@ -99,6 +75,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getTaskName() + " " + getStartDate();
+        return getTaskName();
     }
 }

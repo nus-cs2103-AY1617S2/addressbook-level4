@@ -49,9 +49,13 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     }
 
     private void assertTaskSelected(int index) {
-        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
-        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
-        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
+        assertEquals(eventTaskListPanel.getSelectedTasks().size(), 1);
+        assertEquals(deadlineTaskListPanel.getSelectedTasks().size(), 1);
+        assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedTask = eventTaskListPanel.getSelectedTasks().get(0);
+        assertEquals(eventTaskListPanel.getEventTask(index - 1), selectedTask);
+        assertEquals(deadlineTaskListPanel.getDeadlineTask(index - 1), selectedTask);
+        assertEquals(floatingTaskListPanel.getFloatingTask(index - 1), selectedTask);
         // TODO: confirm the correct page is loaded in the Browser Panel
     }
 
