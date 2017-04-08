@@ -101,7 +101,7 @@ public class LogicManagerTest {
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
+    public void handleJumpToListRequestEvent(JumpToListRequestEvent je) {
         targetedJumpIndex = je.targetIndex;
     }
 

@@ -4,11 +4,9 @@ import com.jfoenix.validation.base.ValidatorBase;
 
 // @@author A0144315N
 public class CommandTextFieldValidator extends ValidatorBase {
-    private boolean isErrorMessageShown;
 
     public CommandTextFieldValidator() {
         super();
-        this.isErrorMessageShown = false;
     }
 
     /**
@@ -26,11 +24,9 @@ public class CommandTextFieldValidator extends ValidatorBase {
      */
     public void showErrorMessage() {
         hasErrors.set(true);
-        isErrorMessageShown = true;
     }
 
     public void hideErrorMessage() {
         hasErrors.set(false);
-        isErrorMessageShown = false;
     }
 }

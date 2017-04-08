@@ -25,8 +25,8 @@ public class TaskTest {
             assertTrue(task.getStartingTime().isPresent() == false);
             assertFalse(task.isToday());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
@@ -50,8 +50,8 @@ public class TaskTest {
             assertTrue(task.isToday());
             assertTrue(((DeadlineTask) task).isOverdue());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
@@ -78,8 +78,8 @@ public class TaskTest {
             assertTrue(task.isToday());
             assertFalse(((EventTask) task).isOverdue());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
-            assertTrue(!task.isDone());
-            assertTrue(!task.isManualToday());
+            assertFalse(task.isDone());
+            assertFalse(task.isManualToday());
             task.setDone(true);
             assertTrue(task.isDone());
             task.setToday(true);
