@@ -28,7 +28,7 @@
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
 
-					<!-- @@author A0141928B -->
+                    <!-- @@author A0141928B -->
                     <children>
                         <HBox alignment="CENTER_LEFT" spacing="5">
                             <children>
