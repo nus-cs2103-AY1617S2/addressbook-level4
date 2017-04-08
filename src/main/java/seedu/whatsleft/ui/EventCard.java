@@ -27,7 +27,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-//@@author A0124377A
+    //@@author A0124377A
     public EventCard(ReadOnlyEvent event, int displayedIndex) {
         super(FXML);
         description.setText(event.getDescriptionToShow());
@@ -47,7 +47,7 @@ public class EventCard extends UiPart<Region> {
     private void initTags(ReadOnlyEvent event) {
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
-//@@author A0124377A
+    //@@author A0124377A
     /**
      * Function to add badge to list card for respective statuses
      * @param event

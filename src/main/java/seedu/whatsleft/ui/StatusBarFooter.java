@@ -78,5 +78,4 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(ssce, ""));
         setDisplayStatus(showStatus);
     }
-    //@@author
 }

@@ -4,7 +4,7 @@ import seedu.whatsleft.commons.exceptions.IllegalValueException;
 
 //@@author A0148038A
 /**
- * Represents an Activity's priority level in WhatsLeft.
+ * Represents an task's priority level in WhatsLeft.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class Priority {
