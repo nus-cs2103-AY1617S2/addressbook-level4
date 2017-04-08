@@ -11,7 +11,6 @@ import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
 import seedu.whatsleft.TestApp;
-import seedu.whatsleft.commons.util.StringUtil;
 import seedu.whatsleft.model.activity.ReadOnlyEvent;
 import seedu.whatsleft.model.activity.ReadOnlyTask;
 import seedu.whatsleft.testutil.TestUtil;
@@ -119,18 +118,25 @@ public class CalendarHandle extends GuiHandle {
     }
 
     public boolean isSameTask(Appointment appointment, ReadOnlyTask task) {
-        return appointment.getSummary().equals(task.getDescription())
-                && appointment.getStartLocalDateTime().format(StringUtil.DATE_FORMATTER)
+        System.out.println(appointment.getSummary());
+        System.out.println(task.getDescriptionToShow());
+        return appointment.getSummary().equals(task.getDescriptionToShow())
+                && appointment.getEndLocalDateTime()
                 .equals(LocalDateTime.of(task.getByDate().getValue(), task.getByTime().getValue()));
     }
 
     public boolean isSameEvent(Appointment appointment, ReadOnlyEvent event) {
-        return appointment.getSummary().equals(event.getDescription())
-                && appointment.getStartLocalDateTime().format(StringUtil.DATE_FORMATTER)
-                .equals(LocalDateTime.of(event.getStartDate().getValue(), event.getStartTime().getValue()))
-                && appointment.getEndLocalDateTime().format(StringUtil.DATE_FORMATTER)
-                .equals(LocalDateTime.of(event.getEndDate().getValue(), event.getEndTime().getValue()));
 
+        if (appointment.getSummary().equals(event.getDescriptionToShow())
+                && appointment.getStartLocalDateTime()
+                .equals(LocalDateTime.of(event.getStartDate().getValue(), event.getStartTime().getValue()))
+                && appointment.getEndLocalDateTime()
+                .equals(LocalDateTime.of(event.getEndDate().getValue(), event.getEndTime().getValue()))) {
+            System.out.println(appointment.getSummary());
+            System.out.println(event.getDescriptionToShow());
+            return true;
+        }
+        return false;
     }
 
     /**

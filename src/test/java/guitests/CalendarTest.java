@@ -10,7 +10,9 @@ import org.testfx.api.FxToolkit;
 
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
+import jfxtras.scene.control.agenda.Agenda.Appointment;
 import seedu.whatsleft.testutil.TestEvent;
+import seedu.whatsleft.testutil.TestTask;
 import seedu.whatsleft.testutil.TestUtil;
 
 //@@author A0124377A
@@ -19,6 +21,7 @@ import seedu.whatsleft.testutil.TestUtil;
  * Use cases need to be covered:
  *  1. Response to Refresh commmand
  *  2. Response to Next command
+ *  3. Feedback to select command
  */
 public class CalendarTest extends WhatsLeftGuiTest {
 
@@ -71,6 +74,18 @@ public class CalendarTest extends WhatsLeftGuiTest {
         assertFalse(calendarDisplayedDateTimeMatch("next 2", target1));
     }
 
+    @Test
+    public void selectActivityTest() {
+
+        //select a event
+        commandBox.runCommand("select ev 1");
+        assertCalendarSelectedCorrectEvent(te.presentation);
+
+        //select a task
+        commandBox.runCommand("select ts 1");
+        assertCalendarSelectedCorrectTask(tt.printing);
+
+    }
 
     /****************************** Helper Methods ***************************/
 
@@ -96,5 +111,24 @@ public class CalendarTest extends WhatsLeftGuiTest {
         return (agenda.getSkin().getClass().getName().equals(skin.getClass().getName()));
     }
 
+    private void assertCalendarSelectedCorrectEvent(TestEvent event) {
+        assertTrue(calendarHighlightedEvent(calendar.getAgenda().selectedAppointments().get(0), event));
+        assertTrue(assertCalendarDisplayedDateTimeMatch(calendar.getAgenda().getDisplayedLocalDateTime(),
+                LocalDateTime.of(event.getStartDate().getValue(), event.getStartTime().getValue())));
+    }
+
+    private void assertCalendarSelectedCorrectTask(TestTask task) {
+        assertTrue(calendarHighlightedEvent(calendar.getAgenda().selectedAppointments().get(0), task));
+        assertTrue(assertCalendarDisplayedDateTimeMatch(calendar.getAgenda().getDisplayedLocalDateTime(),
+                LocalDateTime.of(task.getByDate().getValue(), task.getByTime().getValue())));
+    }
+
+    private boolean calendarHighlightedEvent(Appointment appointment, TestEvent event) {
+        return calendar.isSameEvent(appointment, event);
+    }
+
+    private boolean calendarHighlightedEvent(Appointment appointment, TestTask task) {
+        return calendar.isSameTask(appointment, task);
+    }
 
 }
