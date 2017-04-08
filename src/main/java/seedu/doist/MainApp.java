@@ -77,7 +77,7 @@ public class MainApp extends Application {
 
         aliasModel = initAliasListMapManager(storage);
 
-        logic = new LogicManager(model, aliasModel, configModel, storage);
+        logic = new LogicManager(model, aliasModel, configModel);
 
         ui = new UiManager(logic, config, userPrefs);
 
