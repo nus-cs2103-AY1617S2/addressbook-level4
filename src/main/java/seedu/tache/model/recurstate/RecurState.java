@@ -128,7 +128,7 @@ public class RecurState {
                 || (other instanceof RecurState // instanceof handles nulls
                 && this.recurringStatus == ((RecurState) other).getRecurringStatus()
                 && this.interval.equals(((RecurState) other).getRecurInterval())
-                && this.recurCompletedList == ((RecurState) other).getRecurCompletedList()
+                && this.recurCompletedList.equals(((RecurState) other).getRecurCompletedList())
                 && this.recurDisplayDate.equals(((RecurState) other).getRecurDisplayDate())); // state check
     }
 }
