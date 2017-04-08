@@ -65,7 +65,7 @@ public class DateParser {
 
             // Parses input String into a list of DateGroups
             List<DateGroup> dateGroupList = parser.parse(taskDate);
-            
+
             // Retrieves parsed date
             Date parsedDate = retrieveParsedDate(dateGroupList);
 
@@ -76,9 +76,9 @@ public class DateParser {
             return taskDate;
         }
     }
-    
-    /** 
-     * Returns the parsed date from dateGroupList 
+
+    /**
+     * Returns the parsed date from dateGroupList
      * @param dateGroupList  A list of DateGroup which contains a list of Dates.
      * @return parsedDate    The parsed date.
      */
