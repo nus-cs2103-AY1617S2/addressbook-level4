@@ -30,6 +30,7 @@ import seedu.taskboss.logic.commands.AddCommand;
 import seedu.taskboss.logic.commands.ClearCommand;
 import seedu.taskboss.logic.commands.Command;
 import seedu.taskboss.logic.commands.CommandResult;
+import seedu.taskboss.logic.commands.DeleteCommand;
 import seedu.taskboss.logic.commands.ExitCommand;
 import seedu.taskboss.logic.commands.FindCommand;
 import seedu.taskboss.logic.commands.HelpCommand;
@@ -250,9 +251,9 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name sd/today to next week ed/tomorrow i/valid, information",
                 DateTimeParser.getMultipleDatesError());
         assertCommandFailure("add Valid Name sd/invalid date ed/tomorrow i/valid, information",
-                DateTime.MESSAGE_DATE_CONSTRAINTS);
+                DateTime.ERROR_INVALID_DATE + "\n" + DateTime.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name sd/today ed/invalid i/valid, information",
-                DateTime.MESSAGE_DATE_CONSTRAINTS);
+                DateTime.ERROR_INVALID_DATE + "\n" + DateTime.MESSAGE_DATE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name sd/tomorrow ed/next friday i/valid info r/invalid recurrence",
                 Recurrence.MESSAGE_RECURRENCE_CONSTRAINTS);
         assertCommandFailure("add n/Valid Name r/weekly monthly",
@@ -383,6 +384,46 @@ public class LogicManagerTest {
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("delete");
     }
+    //@@author A0138961W
+    @Test
+    public void execute_delete_removesSingleTask() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
+        expectedAB.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                threeTasks.get(1)),
+                expectedAB, expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_delete_removesMultipleTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        TaskBoss expectedAB = helper.generateTaskBoss(threeTasks);
+        expectedAB.removeTask(threeTasks.get(2));
+        expectedAB.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks);
+
+        assertCommandSuccess("delete 2 3", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
+                threeTasks.get(2), threeTasks.get(1)),
+                expectedAB, expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_delete_removesInvalidTasks() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        List<Task> threeTasks = helper.generateTaskList(3);
+
+        helper.addToModel(model, threeTasks);
+
+        assertCommandFailure("delete 0", MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+    //@@author
 
     @Test
     public void execute_find_invalidArgsFormat() throws IllegalValueException,

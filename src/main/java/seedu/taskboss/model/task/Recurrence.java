@@ -200,14 +200,6 @@ public class Recurrence {
         return this.frequency != Frequency.NONE;
     }
 
-    public Frequency getFrequency() {
-        return this.frequency;
-    }
-
-    public void setFrequency(Frequency freq) {
-        this.frequency = freq;
-    }
-
     @Override
     public String toString() {
         switch(this.frequency) {

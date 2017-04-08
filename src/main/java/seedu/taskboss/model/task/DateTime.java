@@ -9,9 +9,11 @@ import seedu.taskboss.logic.parser.DateTimeParser;
 //@@author A0143157J
 public class DateTime {
 
+    public static final String ERROR_INVALID_DATE = "Failed to understand given date.";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates format should be in dd-mm-yyyy,"
             + " or word format like 5pm tomorrow, " + "and does not accept doubles.";
     private static final String EMPTY_STRING = "";
+    private static final String NEWLINE = "\n";
 
     public String value;
     private boolean isDateInferred;
@@ -29,7 +31,7 @@ public class DateTime {
         String trimmedDate = date.trim();
         this.value = trimmedDate;
         if (!isValidDateTime(trimmedDate)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+            throw new IllegalValueException(ERROR_INVALID_DATE + NEWLINE + MESSAGE_DATE_CONSTRAINTS);
         }
 
         if (trimmedDate.equals(EMPTY_STRING)) {
@@ -52,7 +54,7 @@ public class DateTime {
      *
      * @throws IllegalValueException
      */
-    private boolean isValidDateTime(String date) {
+    private boolean isValidDateTime(String date) throws IllegalValueException {
         if (date.equals(EMPTY_STRING)) {
             return true;
         } else {
