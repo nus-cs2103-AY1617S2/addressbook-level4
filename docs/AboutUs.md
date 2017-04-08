@@ -7,20 +7,22 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Jacob Levy](http://github.com/levyjr) <br>
 <img src="images/PhotoJacobLevy.jpg" width="150"><br>
 Role: Developer <br>
-* Aspects/Tools in charge of: Github, Source Tree, Eclipse
+* Aspects/Tools in charge of: Github, Source Tree, JavaFX, UI
 * Features implemented:
    * [Path Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
    * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0164061N.md)]
-* Other major contributions: User Guide, Developer Guide, Scheduling and Tracking
+* Other major contributions:
+   * Wrote majority of User Guide and Developer Guide
+   * Was in charge of team scheduling and tracking
 
 -----
 
 #### [Daniel Mullen](http://github.com/DanielMullen3)
 <img src="images/dan2.jpg" width="150"><br>
 Role: Developer <br>
-* Aspects/Tools in charge of: Debugging, Testing
+* Aspects/Tools in charge of: Debugging
 * Features implemented:
    * [Add Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Edit Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
@@ -28,13 +30,14 @@ Role: Developer <br>
    * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
-* Other major contributions: Set up back end for file manipulation
+* Other major contributions: 
+    * Set up back end for file manipulation
 -----
 
 #### [Edwin Yeap](http://github.com/edwinyeap)
 <img src="images/aboutus_edwin.jpg" width="150"><br>
 Role: Developer <br>
-* Aspects/Tools in charge of: Travis, Testing
+* Aspects/Tools in charge of: Travis, Coverage
 * Features implemented:
    * [Done Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
@@ -49,7 +52,7 @@ Role: Developer <br>
 #### [Yun-chun Liu](http://github.com/yunchun-liu)
 <img src="images/edith.jpg" width="150"><br>
 Role: Developer <br>
-* Aspects/Tools in charge of: UI, JavaFX
+* Aspects/Tools in charge of: Testing, Parsing
 * Features implemented:
    * [Flexible Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Delete Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
