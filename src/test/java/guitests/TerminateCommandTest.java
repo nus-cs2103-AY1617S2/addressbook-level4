@@ -187,8 +187,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withCategories("School", "Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        String expectedMessage = "[" + expectedTasksList[6] + ", " + expectedTasksList[1] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+        TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[6], expectedTasksList[1]};
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredFormat(terminatedTasks)));
     }
 
     @Test
@@ -208,8 +209,9 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withCategories("Done").build();
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        String expectedMessage = "[" + expectedTasksList[5] + ", " + expectedTasksList[1] + "]";
-        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS , expectedMessage));
+        TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[5], expectedTasksList[1]};
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredFormat(terminatedTasks)));
 
     }
 
@@ -250,10 +252,27 @@ public class TerminateCommandTest extends TaskBossGuiTest {
             assertResultMessage("Listed all tasks");
         } else {
             assertTrue(taskListPanel.isListMatching(expectedTasksList));
-            assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS ,
-                            "[" + terminatedTask + "]"));
+            assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                    "1. " + terminatedTask));
         }
 
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
+    }
+
+    //@@author
+    /**
+     * Returns a formatted {@code Array} tasksToMarkDone,
+     * so that each TestTask in the Array is numbered
+     */
+    private String getDesiredFormat(TestTask[] terminatedTask) {
+        int indexOne = 1;
+        String numberingDot = ". ";
+        int i = indexOne;
+        StringBuilder builder = new StringBuilder();
+        for (TestTask task : terminatedTask) {
+            builder.append(i + numberingDot).append(task.toString());
+            i++;
+        }
+        return builder.toString();
     }
 }
