@@ -80,7 +80,7 @@ public class DoneCommand extends Command {
             }
             // @@author A0114269E
         } else {
-            return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
+            throw new CommandException(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
         }
 
         model.updateFilteredListToShowAll();

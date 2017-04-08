@@ -51,14 +51,14 @@ public class UndoneCommand extends Command {
 
         ReadOnlyTask taskToMarkUndone = lastShownList.get(targetIndex - 1);
         if (taskToMarkUndone.getStatus().value) {
-            Task markedUndoneTask = createDoneTask(taskToMarkUndone);
+            Task markedUndoneTask = createUndoneTask(taskToMarkUndone);
             try {
                 model.updateTask(targetIndex - 1, markedUndoneTask);
             } catch (UniqueTaskList.DuplicateTaskException dpe) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
         } else {
-            return new CommandResult(String.format(MESSAGE_MARK_UNDONE_TASK_FAILURE, taskToMarkUndone));
+            throw new CommandException(String.format(MESSAGE_MARK_UNDONE_TASK_FAILURE, taskToMarkUndone));
         }
         model.updateFilteredListToShowAll();
 
@@ -68,7 +68,7 @@ public class UndoneCommand extends Command {
     /**
      * Creates and returns a {@code Task} with the status marked done
      */
-    private static Task createDoneTask(ReadOnlyTask taskToMarkUndone) {
+    private static Task createUndoneTask(ReadOnlyTask taskToMarkUndone) {
         assert taskToMarkUndone != null;
 
         Title updatedTitle = taskToMarkUndone.getTitle();

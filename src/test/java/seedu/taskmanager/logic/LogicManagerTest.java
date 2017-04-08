@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
+import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.SelectCommand;
 import seedu.taskmanager.logic.commands.SortCommand;
+import seedu.taskmanager.logic.commands.UndoneCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.ModelManager;
@@ -734,15 +737,68 @@ public class LogicManagerTest {
         Task tTarget3 = helper.generateTaskWithStatus(3, false);
         Task tTarget4 = helper.generateTaskWithStatus(3, true);
 
-        List<Task> uneditedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
-        List<Task> editedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
-        TaskManager expectedTM = helper.generateTaskManager(editedTasks);
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> modifiedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
         List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
-        helper.addToModel(model, uneditedTasks);
+        helper.addToModel(model, initialTasks);
 
         // execute command and verify result
         assertCommandSuccess("done 3", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tTarget4), expectedTM,
                 expectedList);
+    }
+
+    @Test
+    public void execute_done_alreadyDoneFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, true);
+        Task tTarget3 = helper.generateTaskWithStatus(3, true);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandFailure("done 2", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_FAILURE));
+    }
+
+    @Test
+    public void execute_undone_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, true);
+        Task tTarget3 = helper.generateTaskWithStatus(3, true);
+        Task tTarget4 = helper.generateTaskWithStatus(3, false);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        List<Task> modifiedTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1, tTarget2, tTarget4);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_DONE);
+
+        // execute command and verify result
+        assertCommandSuccess("undone 2", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_SUCCESS, tTarget4), expectedTM,
+                expectedList);
+    }
+    
+    @Test
+    public void execute_undone_alreadyUndoneFailure() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = helper.generateTaskWithStatus(1, false);
+        Task tTarget2 = helper.generateTaskWithStatus(2, false);
+        Task tTarget3 = helper.generateTaskWithStatus(3, false);
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1, tTarget2, tTarget3);
+        helper.addToModel(model, initialTasks);
+        model.setSelectedTab(TAB_TO_DO);
+
+        // execute command and verify result
+        assertCommandFailure("undone 3", String.format(UndoneCommand.MESSAGE_MARK_UNDONE_TASK_FAILURE));
     }
     // @@author
 
