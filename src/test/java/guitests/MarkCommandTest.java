@@ -22,7 +22,16 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         TestTask markedTask = new TaskBuilder(taskToMark).withStatus("complete")
                 .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
 
+        // toggles to complete on the first mark
         assertMarkSuccess(taskManagerIndex, taskManagerIndex, markedTask);
+
+        // toggles to incomplete on the second mark
+        int updatedIndex = taskListPanel.getTaskIndex(markedTask) + 1; // +1 because it is the index reflected in the UI
+        taskToMark = expectedTasksList[updatedIndex - 1];
+        TestTask unmarkedTask = new TaskBuilder(taskToMark).withStatus("incomplete")
+                .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
+
+        assertMarkSuccess(updatedIndex, updatedIndex, unmarkedTask);
     }
 
     /**
