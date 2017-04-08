@@ -38,7 +38,9 @@ public class FindCommandTest extends TaskManagerGuiTest {
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertResultMessage(expectedHits.length
+                + " Task(s) listed! Including " + expectedHits.length
+                + " Exact Match case(s) & 0 Near Match case(s).");
         assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
