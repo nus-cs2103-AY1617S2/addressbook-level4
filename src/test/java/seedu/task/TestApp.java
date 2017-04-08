@@ -8,7 +8,6 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.model.ReadOnlyTaskList;
 import seedu.task.model.UserPrefs;
-import seedu.task.storage.XmlSerializableTaskList;
 import seedu.task.testutil.TestUtil;
 
 /**
