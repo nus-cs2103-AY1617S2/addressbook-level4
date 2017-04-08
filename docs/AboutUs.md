@@ -40,8 +40,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Code quality, Testing and Integration <br>
 * Component: Logic <br>
 * Features implemented: <br> 
-        * [Add 3 Type of Task : floating, deadline, event](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)
-        * [Edit name, deadline for 3 Type of Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
+        * [Add 3 Type of Task : floating, deadline, event](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)<br>
+        * [Edit name, deadline, schedule for 3 Type of Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
         * [Remove Deadline](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
         * [Undo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
         * [Redo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md) <br>
@@ -49,7 +49,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)]  <br>
 * Other major contributions:
            * Did the initial refactoring from AddressBook to TaskManager in main <br>
-           * Did refractoring from Person to Task in main
+           * Did refractoring from Person to Task in main <br>
+           * Wrote a method for checking overdue task in TaskCard <br>
 
 -----
 
