@@ -6,7 +6,11 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 ---
 
 1. [Introduction](#1-introduction)
-2. [Quick Start](#2-quick-start)
+2. [Quick Start](#2-quick-start)<br>
+    2.1 [Install](#21-install)<br>
+    2.2 [Launch](#22-launch)<br>
+    2.3 [Get used to the interface](#23-get-used-to-the-interface)<br>
+    2.4 [Try out some commands](#24-try-out-some-commands)
 3. [Features](#3-features)
 4. [Command Summary](#4-command-summary)
 
@@ -17,22 +21,77 @@ Now you can use ToLuist, the answer to all of your problems!<br>
 ToLuist is an application which will help you to manage all your tasks, allowing you to sort out your life.<br>
 ToLuist is designed with you in mind, ensuring that you are able to focus on what is important to you.
 
+[comment]: # (@@author A0131125Y)
 ## 2. Quick Start
 
-1. Double-click the file to start the app. The GUI should appear in a few seconds.
+### 2.1. Install
 
-    <img src="images/Ui.png" width="600"><br>
-    **Figure 1.** Initial launch screen of ToLuist
+1. Before using the app, ensure that you have at least [Java Runtime Environment Version 8 Update 60](https://www.java.com/en/download/manual.jsp)
+installed on your computer, so that our app can run properly.
+    >   Having any Java 8 version is not enough. 
+    This app will not work with earlier versions of Java 8.
 
-2. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
-3. Try out some example commands:
+2. Using your favourite browser (our recommended choice is [Google Chrome](https://www.google.com/chrome/))
+, navigate to our [releases page](https://github.com/CS2103JAN2017-W13-B3/main/releases). Download the latest `toluist.jar` on this page. The current 
+latest version should be v0.5.
+  
+3. Copy the file `toluist` to a folder on your computer where you would like to store your todo list data.
+
+### 2.2. Launch
+
+1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Installing](#21-installing). 
+2. The GUI should appear in a few seconds. Refer to **Figure 1** below to see how ToLuist should initially look like on your first launch.
+   
+   <img src="images/Ui.png" width="600"/>
+
+### 2.3. Get used to the interface
+
+With some tasks added in, the interface of ToLuist may look as follows.
+
+   <img src="images/Ui-parts.png" width="600"/>
+    
+At the very top of the app, the **App Title**, which include a cute app icon, will highlight that you are 
+using ToLuist.
+    
+Occupying the main bulk of the app, the **Task List** lies in the center of ToLuist. Depending on the 
+commands that were entered, as well as the tab selected, the **Task List** may display different sets of 
+tasks here. Notice each task is prefixed with an index number. For example, the task `update the user 
+guide` has the index number 3. ToLuist use the index number to uniquely identify a displayed tasks in 
+various commands.
+
+The **Tab Bar** lies just above the **Task List**. It indicates which tab is currently selected by the user
+. Depending on the tab selected, the **Task List** will change to only show a subset of the current tasks 
+(which can be all the tasks in the app, or found tasks that match some search keyword(s)) that satisfy 
+the condition described in the highlighted tab. There are 5 different tabs that can be selected:
+    - INCOMPLETE: Displays only the subset of current tasks that are not yet completed.
+    - TODAY: Displays only the subset of current tasks that are due by / are happening on the current day.
+    - NEXT 7 DAYS: Displays only the subset of current tasks that are due by / are happening during the 
+    next 7 days, not including the current day.
+    - COMPLETED: Displays only the subset of current tasks that are completed.
+    - ALL: Displays all current tasks.
+Note that in the label for each tab, there are some statistics describing the amount of current tasks, and 
+how many of these tasks satisfy that the's condition. For example, in the figure above, `INCOMPLETE` tab's 
+label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of all 6 current tasks.
+
+The **Command Box** is where you type in your commands. Feedback to your command is displayed in the 
+**Result Display**.
+
+Finally, the **Status Bar** is at the bottom of the app. It indicates where your app data is currently 
+located.
+
+### 2.4. Try out some commands
+
+Type out these command in the command box and press <kbd>Enter</kbd> to execute it.
+
+1. Since you are new to the app, type in `help` to get some information on the commands ToLuist supports.
+2. Try out some example commands:
    * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 1` : deletes the 1st task shown in the current list.
    * **`exit`** : exits the app.
-4. Refer to the [Features](#features) section below for details of each command.<br>
+3 Refer to the [Features](#features) section below for details of each command.<br>
 
+[comment]: # (@@author A0162011A)
 ## 3. Features
 
 ToLuist is focused towards users who like to type.<br>
