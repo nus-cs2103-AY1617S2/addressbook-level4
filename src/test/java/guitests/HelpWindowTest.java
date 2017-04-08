@@ -18,7 +18,7 @@ public class HelpWindowTest extends TaskListGuiTest {
         resultDisplay.clickOnTextArea();
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
-        personListPanel.clickOnListView(); // TODO ui
+        taskListPanel.clickOnListView(); // TODO ui
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button
