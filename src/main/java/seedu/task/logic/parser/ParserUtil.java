@@ -179,17 +179,21 @@ public class ParserUtil {
         }
         return new UniqueTagList(tagSet);
     }
-    //@@author A0139161J
+    //@@author A0139161J-reused
     /* Returns String in format of hh:mm:ss
      * Precond: dateTime string formed by NattyParser required as input
      */
     public static String getTime(String dateTime) {
+        List<String> output = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(dateTime);
         List<String> list = new ArrayList<String>();
         while (st.hasMoreTokens()) {
             list.add(st.nextToken());
         }
-        System.out.println(list.get(3));
-        return list.get(3);
+        st = new StringTokenizer(list.get(3), ":");
+        while (st.hasMoreTokens()) {
+            output.add(st.nextToken());
+        }
+        return new String(output.get(0) + ":" + output.get(1));
     }
 }

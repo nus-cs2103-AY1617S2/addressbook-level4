@@ -11,6 +11,9 @@ import java.util.StringTokenizer;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
+import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.GlobalStack;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -19,6 +22,7 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Deadline;
 import seedu.task.model.task.Information;
 import seedu.task.model.task.PriorityLevel;
+import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskName;
 import seedu.task.model.task.UniqueTaskList;
@@ -128,9 +132,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             GlobalStack gStack = GlobalStack.getInstance();
             gStack.getUndoStack().push(toAdd);
-            /**Debugging purpose
-             * gStack.printStack();
-             */
+            selectTargetTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -138,19 +140,32 @@ public class AddCommand extends Command {
     }
 
     //@@author A0139161J
-    /* Returns String in format of hh:mm:ss
+    /* Returns String in format of hh:mm
      * Precond: dateTime string formed by NattyParser required as input
      */
-    public String getTime(String dateTime) {
+    private String getTime(String dateTime) {
+        List<String> output = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(dateTime);
         List<String> list = new ArrayList<String>();
         while (st.hasMoreTokens()) {
             list.add(st.nextToken());
         }
-        System.out.println(list.get(3));
-        return list.get(3);
+        st = new StringTokenizer(list.get(3), ":");
+        while (st.hasMoreTokens()) {
+            output.add(st.nextToken());
+        }
+        return new String(output.get(0) + ":" + output.get(1));
     }
 
+    /**
+     * UI auto selects the added task for user's convenience
+     */
+    private void selectTargetTask() {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        int targetIndex = lastShownList.indexOf(toAdd);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+    }
+    //@@author
     /*public Date timeFormatter(String time) throws ParseException {
         System.out.println("stop here");
         DateFormat sdf = new SimpleDateFormat("hh:mm:ss");

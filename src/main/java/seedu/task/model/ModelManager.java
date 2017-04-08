@@ -34,7 +34,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
+    //@@author A0139161J
     private FilteredList<ReadOnlyTask> completedTasks;
+    private FilteredList<ReadOnlyTask> overdueTasks;
+    //@@author
     /**
      * Initializes a ModelManager with the given task manager and userPrefs.
      */
@@ -45,7 +48,10 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+        //@@author A0139161J
         completedTasks = new FilteredList<>(this.taskManager.getCompletedTaskList());
+        overdueTasks = new FilteredList<>(this.taskManager.getOverdueTaskList());
+        //@@author
     }
 
     public ModelManager() {
@@ -109,6 +115,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public UnmodifiableObservableList<ReadOnlyTask> getOverdueList() {
+        return new UnmodifiableObservableList<>(overdueTasks);
+    }
+
+    @Override
     public void completeTask(Task t) throws DuplicateTaskException, TaskNotFoundException {
         taskManager.transferTaskToComplete(t);
     }
@@ -123,6 +134,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.deleteCompletedTask(t);
         indicateTaskManagerChanged();
     }
+
     //@@author
 
     //=========== Filtered Task List Accessors =============================================================
@@ -146,10 +158,35 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
 
+    @Override
+    public synchronized void truncateOverdueList() {
+        overdueTasks = new FilteredList<ReadOnlyTask>(taskManager.getTaskList());
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
+        Date currentDate = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.DATE, 1);
+
+        Predicate<? super ReadOnlyTask> pred  = s -> {
+            try {
+                return df.parse(s.getDate().toString()).before(currentDate);
+            } catch (ParseException e) {
+                return false;
+            }
+        };
+        overdueTasks.setPredicate(pred);
+        try {
+            taskManager.setOverdueTasks(overdueTasks);
+        } catch (DuplicateTaskException e) {
+            assert false : "There will be no duplicated tasks";
+        }
+    }
+
     //@@author A0135762A
     @Override
     public void updateUpcomingTaskList() {
-        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
         Date currentDate = new Date();
 
         Calendar c = Calendar.getInstance();
@@ -186,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateOverdueTaskList() {
-        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy @ HH:mm");
         Date currentDate = new Date();
 
         Calendar c = Calendar.getInstance();
@@ -352,5 +389,4 @@ public class ModelManager extends ComponentManager implements Model {
             return "keywords =" + String.join(", ", totalKeyWords);
         }
     }
-
 }

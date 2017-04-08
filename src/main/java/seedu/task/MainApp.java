@@ -22,6 +22,7 @@ import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
+import seedu.task.logic.OverdueTimer;
 import seedu.task.logic.TimedEvent;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
@@ -48,7 +49,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    protected static OverdueTimer ot;
 
     @Override
     public void init() throws Exception {
@@ -71,6 +72,8 @@ public class MainApp extends Application {
         initEventsCenter();
 
         initNotifications();
+
+        initOverdueTimer(model);
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -171,6 +174,11 @@ public class MainApp extends Application {
         EventsCenter.getInstance().registerHandler(this);
     }
 
+    private static void initOverdueTimer(Model model) {
+        ot = new OverdueTimer(model);
+        ot.start();
+    }
+
     //@@author A0141928B
     /**
      * Initialise notifications
@@ -209,6 +217,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting doTASK " + MainApp.VERSION);
         ui.start(primaryStage);
+        ot.run();
     }
 
     @Override
