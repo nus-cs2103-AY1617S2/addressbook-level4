@@ -34,11 +34,9 @@
 
 ## 1. Introduction
 
-Welcome to the developer guide of iManager. This guide helps you get familiar with setting up iManager on your device. In addition, it is also for your convenience of achieving further development of the application such as adding features or doing modifications to perfect our product. We will introduce code design, feature implementation and testing of the application. 
+Welcome to the developer guide of iManager. iManager is an application that helps users to manage their tasks using keyboard or mouse. It is a desktop application written in Java and contains most features that users would ever need to manage their tasks. iManager can help users to add, edit, delete, clear and categorize tasks. It also supports marking tasks as done, undoing and redoing operations and saving data to another file.
 
-iManager is created to help those who are struggling with task management. It is particularly suitable for users who love typing. It uses a command line Interface as its primary mode of input to cater for users who prefer typing over mouse actions.
-
-iManager comes with features such as Flexi Commands and Google Integration that bring convenience to its users in managing their tasks and schedules. With its interactive UI design, iManager is surely capable of providing a pleasant experience for users when managing their tasks.
+This guide is friendly to both new and old contributors who are willing to help with the further development of iManager. It contains subsections including setting up, code design, implementations and testing. Each subsection contains a brief introduction and detailed illustrations.
 
 Without further ado, let us get started.
 
@@ -216,7 +214,9 @@ _Figure 3.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Task List data.
+* stores user's commands and different status for task list.
+>  This is for undo command and redo command as illustrated in the architecture part.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -233,7 +233,7 @@ _Figure 3.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task list data in xml format and read it back.
 
 ### 3.6. Common classes
 
