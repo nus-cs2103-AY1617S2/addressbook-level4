@@ -38,6 +38,7 @@ import seedu.taskmanager.logic.commands.DoneCommand;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.ExitCommand;
 import seedu.taskmanager.logic.commands.FindCommand;
+import seedu.taskmanager.logic.commands.FindDateCommand;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.LoadCommand;
@@ -558,8 +559,8 @@ public class LogicManagerTest {
                 String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, tTarget3), expectedTM, expectedList);
 
         Task tTarget4 = new Task(new Title("Task C"), Optional.of(new StartDate("last year")),
-                Optional.of(new EndDate("next year")), Optional.ofNullable(null),
-                Optional.of(new Repeat("YEAR")), new UniqueTagList(new Tag("tag1")));
+                Optional.of(new EndDate("next year")), Optional.ofNullable(null), Optional.of(new Repeat("YEAR")),
+                new UniqueTagList(new Tag("tag1")));
 
         editedTasks = helper.generateTaskList(tTarget4);
         expectedTM = helper.generateTaskManager(editedTasks);
@@ -591,6 +592,61 @@ public class LogicManagerTest {
         model.setSelectedTab(MainWindow.TAB_DONE);
         assertCommandFailure("edit 1 r/month", EditCommand.MESSAGE_REPEAT_WITH_DONE_CONSTRAINTS);
     }
+
+    @Test
+    public void executeFindDateInvalidArgs() throws Exception {
+        assertCommandFailure("findbydate no date", FindDateCommand.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void executeFindDateSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.generateTaskWithStartDate("5 June 2017");
+        Task tTarget2 = helper.generateTaskWithStartDate("15 June 2017");
+
+        List<Task> allTasks = helper.generateTaskList(tTarget1, tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(allTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1);
+        helper.addToModel(model, allTasks);
+
+        assertCommandSuccess("findbydate 10 june 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE,
+                "10/06/2017", Command.getMessageForTaskListShownSummary(expectedList.size())), expectedTM,
+                expectedList);
+    }
+
+    @Test
+    public void executeFindDateToDateSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task tTarget1 = helper.t1();
+        Task tTarget2 = helper.generateTaskWithStartDate("12 march 2017");
+
+        List<Task> allTasks = helper.generateTaskList(tTarget1, tTarget2);
+        TaskManager expectedTM = helper.generateTaskManager(allTasks);
+        List<Task> expectedList = helper.generateTaskList(tTarget1);
+        helper.addToModel(model, allTasks);
+
+        assertCommandSuccess(
+                "findbydate 11 march 2017 to 16 march 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE_TO_DATE,
+                        "11/03/2017", "16/03/2017", Command.getMessageForTaskListShownSummary(expectedList.size())),
+                expectedTM, expectedList);
+
+        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+
+        helper = new TestDataHelper();
+        tTarget1 = helper.t1();
+        tTarget2 = helper.generateTaskWithStartDate("12 march 2017");
+
+        allTasks = helper.generateTaskList(tTarget1, tTarget2);
+        expectedTM = helper.generateTaskManager(allTasks);
+        expectedList = helper.generateTaskList(tTarget1);
+        helper.addToModel(model, allTasks);
+
+        assertCommandSuccess(
+                "findbydate 16 march 2017 to 11 march 2017", String.format(FindDateCommand.MESSAGE_SUCCESS_DATE_TO_DATE,
+                        "11/03/2017", "16/03/2017", Command.getMessageForTaskListShownSummary(expectedList.size())),
+                expectedTM, expectedList);
+    }
+
     // @@author
 
     @Test
