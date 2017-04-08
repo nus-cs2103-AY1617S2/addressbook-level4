@@ -428,7 +428,7 @@ public class LogicManagerTest {
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
 
-                threeTasks.get(0)), expectedTM, expectedTM.getTaskList());
+                1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
     }
 
     @Test

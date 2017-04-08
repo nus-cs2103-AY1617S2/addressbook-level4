@@ -76,8 +76,8 @@ public class ConfigUtilTest {
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setWatodoFilePath("watodo.xml");
-        config.setWatodoName("TypicalWatodoName");
+        config.setWatodoFilePath("data/watodo.xml");
+        config.setWatodoName("My Tasks");
         return config;
     }
 
