@@ -211,8 +211,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
-                expectedMessage);
         assertCommandFailure("add d/valid", expectedMessage);
         assertCommandFailure("add e/valid", expectedMessage);
         assertCommandFailure("add Valid Task p/1", MESSAGE_PRIORITY_CONSTRAINTS);
