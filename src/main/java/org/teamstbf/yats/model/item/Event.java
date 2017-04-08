@@ -62,17 +62,14 @@ public class Event implements ReadOnlyEvent {
 	this.isDone = new IsDone();
 	this.tags = new UniqueTagList(tags);
 	this.setPriority(1);
+	//recurring task has start&end or a deadline
+	fillStartEndDateAndDeadline(parameters);
 	if (parameters.get("recurrence") != null) {
 	    this.isRecurring = true;
-	    // recurring task has empty start end and deadline
-	    this.startTime = new Schedule("");
-	    this.endTime = new Schedule("");
-	    this.deadline = new Schedule("");
-	    fillRecurrence((List<Date>) parameters.get("time"), (String) parameters.get("recurrence"));
+	    fillRecurrence((String) parameters.get("recurrence"));
 	} else {
 	    this.isRecurring = false;
 	    this.recurrence = new Recurrence();
-	    fillStartEndDateAndDeadline(parameters);
 	}
     }
 
@@ -102,14 +99,15 @@ public class Event implements ReadOnlyEvent {
 			&& this.isSameStateAs((ReadOnlyEvent) other));
     }
 
-    private void fillRecurrence(List<Date> dateList, String period) throws IllegalValueException {
-        if (dateList == null) {
-            throw new IllegalValueException(MESSAGE_RECURRENCE_TIME_ERROR);
+    private void fillRecurrence(String period) throws IllegalValueException {
+        //get current date and time
+        Date startDate = new Date();
+        //recurring event task
+        if (this.hasStartEndTime()) {
+            startDate = this.startTime.getDate();
         }
-	if (dateList.size() > SIZE_RECURRENCE_DATE) {
-	    throw new IllegalValueException(MESSAGE_INVALID_TIME);
-	}
-	this.recurrence = new Recurrence(dateList.get(INDEX_FIRST_DATE), period);
+        //recurring deadline task will take current date as starting date
+	this.recurrence = new Recurrence(startDate, period);
     }
 
     private void fillStartEndDateAndDeadline(HashMap<String, Object> parameters) throws IllegalValueException {
@@ -328,7 +326,7 @@ public class Event implements ReadOnlyEvent {
 
     @Override
     public boolean hasStartEndTime() {
-	if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+	if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
 	    return false;
 	}
 	return true;

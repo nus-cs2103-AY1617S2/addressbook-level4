@@ -34,17 +34,34 @@ public class TaskCard extends UiPart<Region> {
     private FlowPane tags;
 
     public TaskCard(ReadOnlyEvent task, int displayedIndex, String FXML) {
-	super(FXML);
-	name.setText(task.getTitle().fullName);
+	super(FXML);	
 	id.setText(displayedIndex + ". ");
 	loc.setText(task.getLocation().value);
 	description.setText(task.getDescription().value);
 	if (task.isRecurring()) {
-	    startTime.setText(task.getRecurrence().getLatestUndoneString());
-	    endTime.setText(task.getRecurrence().getPeriodicity());
-	    deadline.setText("");
-	    //TODO show next undone occurence? show start date together?
+	    //recurring task shows recurrence in its name
+	    name.setText(task.getTitle().fullName
+	            + " ["+ task.getRecurrence().getPeriodicity() + "]");
+	    //recurring task concatenates [time] in Event and [date] inside Recurrence 
+        if (task.hasStartEndTime()) {
+            startTime.setText(task.getStartTime().getTimeOnlyString()
+                    + task.getRecurrence().getLatestUndoneDateString() + " - ");
+            endTime.setText(task.getEndTime().getTimeOnlyString()
+                    + task.getRecurrence().getLatestUndoneDateString());
+        } else {
+            startTime.setText("");
+            endTime.setText("");
+        }
+        if (task.hasDeadline()) {
+            deadline.setText(" by " + task.getDeadline().getTimeOnlyString()
+                    + task.getRecurrence().getLatestUndoneDateString());
+        } else {
+            deadline.setText("");
+        }
 	} else {
+	    //other tasks does not have periodicity
+	    name.setText(task.getTitle().fullName);
+	    //other tasks show date and time as usual 
 	    if (task.hasStartEndTime()) {
 	        startTime.setText(task.getStartTime().toString() + " - ");
 	        endTime.setText(task.getEndTime().toString());

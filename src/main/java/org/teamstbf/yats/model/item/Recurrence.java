@@ -95,7 +95,23 @@ public class Recurrence {
     }
 
     public boolean hasOccurenceOn(Date day) {
-	throw new UnsupportedOperationException();
+        Calendar endBound = Calendar.getInstance();
+        endBound.setTime(day);
+        endBound.add(recurrencePeriod, RECURRENCE_INCREMENT);
+        Calendar startTime = Calendar.getInstance();
+        startTime.setTime(this.startDate);
+
+        for (Date date = startTime.getTime(); startTime.before(endBound); startTime.add(recurrencePeriod,
+                RECURRENCE_INCREMENT), date = startTime.getTime()) {
+            if (areOnTheSameDay(date, day)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean areOnTheSameDay(Date day1, Date day2) {
+        return this.dateFormat.format(day1).equals(Recurrence.dateFormat.format(day2));
     }
 
     public String getStartTimeString() {
@@ -137,7 +153,7 @@ public class Recurrence {
 	return occurenceList;
     }
 
-    public String getLatestUndoneString() {
+    public String getLatestUndoneDateString() {
 	if (doneList.isEmpty()) {
 	    return dateFormat.format(startDate);
 	}
@@ -153,7 +169,7 @@ public class Recurrence {
     }
 
     public Date getLatestUndoneDate() throws ParseException {
-	return dateFormat.parse(getLatestUndoneString());
+	return dateFormat.parse(getLatestUndoneDateString());
     }
 
     public Calendar getNextOccurence(Calendar occurence) {
@@ -166,7 +182,7 @@ public class Recurrence {
 	if (doneList.isEmpty()) {
 	    doneList.add(dateFormat.format(this.startDate));
 	} else {
-	    doneList.add(getLatestUndoneString());
+	    doneList.add(getLatestUndoneDateString());
 	}
     }
 

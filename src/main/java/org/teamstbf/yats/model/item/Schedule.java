@@ -9,7 +9,8 @@ public class Schedule {
 	public static final String MESSAGE_TIME_ERROR = "Invalid or empty date/time entry";
 	public static final String STRING_EMPTY = "";
 
-	private static final SimpleDateFormat FORMATTER_DATE = new SimpleDateFormat("hh:mma dd/MM/yyyy");
+	public static final SimpleDateFormat FORMATTER_DATE = new SimpleDateFormat("hh:mma dd/MM/yyyy");
+	public static final SimpleDateFormat FORMATTER_TIME = new SimpleDateFormat("hh:mma ");
 	public static final String MESSAGE_TIME_CONSTRAINTS = "non valid time";
 
 	private Date scheduleDate;
@@ -30,6 +31,10 @@ public class Schedule {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String getTimeOnlyString() {
+	    return FORMATTER_TIME.format(scheduleDate);
 	}
 
 	@Override
