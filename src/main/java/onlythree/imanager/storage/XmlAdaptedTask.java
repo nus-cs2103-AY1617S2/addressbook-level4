@@ -41,6 +41,9 @@ public class XmlAdaptedTask {
     @XmlElement(name = "tag")
     private List<XmlAdaptedTag> tagElements = new ArrayList<>();
 
+    @XmlElement(name = "completed")
+    private boolean completeElement;
+
     /**
      * Constructs an XmlAdaptedTask.
      * This is the no-arg constructor that is required by JAXB.
@@ -60,9 +63,9 @@ public class XmlAdaptedTask {
         // the start and end date elements must be set together because they cannot exist separately
         setStartEndDateElementsIfPresent(source.getStartEndDateTime());
 
-        // TODO do I need to check if Deadline exists then StartEndDateTime cannot exists and vice versa
-
         setTagElement(source.getTags());
+
+        setCompleteElement(source.isComplete());
     }
 
     /**
@@ -104,26 +107,33 @@ public class XmlAdaptedTask {
     }
 
     /**
+     * Sets the XmlElement completed to true if the source task's is complete
+     */
+    private void setCompleteElement(boolean isComplete) {
+        completeElement = isComplete;
+    }
+
+    /**
      * Converts this jaxb-friendly adapted task object into the model's Task object.
      * @throws PastDateTimeException should never be thrown because dates in the past are allowed
      * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
      * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
-    public Task toModelType() throws IllegalValueException, PastDateTimeException, InvalidDurationException {
-        // TODO get seems to not be a good name, as it is usually used for getters
-        final Name name = getNameFromXmlElement();
-        final Optional<Deadline> deadline = getDeadlineFromXmlElement();
-        final Optional<StartEndDateTime> startEndDateTime = getStartEndDateTimeFromXmlElement();
-        final UniqueTagList tagList = getTagListFromXmlElement();
+    public Task toModelType() throws IllegalValueException, InvalidDurationException {
+        final Name name = buildNameFromXmlElement();
+        final Optional<Deadline> deadline = buildDeadlineFromXmlElement();
+        final Optional<StartEndDateTime> startEndDateTime = buildStartEndDateTimeFromXmlElement();
+        final UniqueTagList tagList = buildTagListFromXmlElement();
+        final boolean isComplete = buildIsCompleteFromXmlElement();
 
-        return new Task(name, deadline, startEndDateTime, tagList);
+        return new Task(name, deadline, startEndDateTime, tagList, isComplete);
     }
 
     /**
      * Returns a Name created from the XmlElement.
      * @throws IllegalValueException if the name does not fulfill the name's constraints
      */
-    private Name getNameFromXmlElement() throws IllegalValueException {
+    private Name buildNameFromXmlElement() throws IllegalValueException {
         return new Name(nameElement);
     }
 
@@ -132,14 +142,20 @@ public class XmlAdaptedTask {
      * If the XmlElement for deadline does not exist, returns an empty {@link Optional}.
      * @throws PastDateTimeException should never be thrown because dates in the past are allowed
      */
-    private Optional<Deadline> getDeadlineFromXmlElement() throws PastDateTimeException {
+    private Optional<Deadline> buildDeadlineFromXmlElement() {
         // return empty if xml element does not exist
         if (deadlineElement == null) {
             return Optional.empty();
         }
-        // construct Deadline with allowPastDateTime set to true because this is loaded from storage
-        Deadline deadline = new Deadline(ZonedDateTime.parse(deadlineElement, DateTimeUtil.DATE_TIME_FORMAT), true);
-        return Optional.of(deadline);
+
+        try {
+            // construct Deadline with allowPastDateTime set to true because this is loaded from storage
+            Deadline deadline =
+                    new Deadline(ZonedDateTime.parse(deadlineElement, DateTimeUtil.DATE_TIME_FORMAT), true);
+            return Optional.of(deadline);
+        } catch (PastDateTimeException e) {
+            throw new AssertionError("Deadline constructed from storage should never throw a PastDateTimeException");
+        }
     }
 
     /**
@@ -148,17 +164,23 @@ public class XmlAdaptedTask {
      * @throws PastDateTimeException should never be thrown because dates in the past are allowed
      * @throws InvalidDurationException if the end DateTime is before or same as the start DateTime
      */
-    private Optional<StartEndDateTime> getStartEndDateTimeFromXmlElement()
-            throws PastDateTimeException, InvalidDurationException {
-        // return empty if either xml element does not exist
+    private Optional<StartEndDateTime> buildStartEndDateTimeFromXmlElement()
+            throws InvalidDurationException {
+        // a StartEndDateTime cannot be constructed if either XML element do not exist
         if (startDateTimeElement == null || endDateTimeElement == null) {
             return Optional.empty();
         }
         ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
         ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
-        // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
-        StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime, true);
-        return Optional.of(startEndDateTime);
+
+        try {
+            // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
+            StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime, true);
+            return Optional.of(startEndDateTime);
+        } catch (PastDateTimeException e) {
+            throw new AssertionError("StartEndDateTime constructed from storage should never throw"
+                                   + "a PastDateTimeException");
+        }
     }
 
     /**
@@ -166,11 +188,18 @@ public class XmlAdaptedTask {
      * @throws IllegalValueException if any of the tags from the XML is invalid
      * @throws DuplicateTagException if any of the tags are duplicates
      */
-    private UniqueTagList getTagListFromXmlElement() throws IllegalValueException, DuplicateTagException {
+    private UniqueTagList buildTagListFromXmlElement() throws IllegalValueException, DuplicateTagException {
         final List<Tag> tags = new ArrayList<>();
         for (XmlAdaptedTag adaptedTag : tagElements) {
             tags.add(adaptedTag.toModelType());
         }
         return new UniqueTagList(tags);
+    }
+
+    /**
+     * Returns a Boolean representing whether the task is complete from the XmlElement.
+     */
+    private boolean buildIsCompleteFromXmlElement() {
+        return completeElement;
     }
 }

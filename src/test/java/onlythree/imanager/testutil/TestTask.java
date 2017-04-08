@@ -18,7 +18,7 @@ public class TestTask implements ReadOnlyTask {
     private Optional<Deadline> deadline;
     private Optional<StartEndDateTime> startEndDateTime;
     private UniqueTagList tags;
-    private boolean done;
+    private boolean complete;
 
     //@@author A0140023E
     public TestTask() {
@@ -28,6 +28,7 @@ public class TestTask implements ReadOnlyTask {
         deadline = Optional.empty();
         startEndDateTime = Optional.empty();
         tags = new UniqueTagList();
+        complete = false;
     }
 
     /**
@@ -39,32 +40,10 @@ public class TestTask implements ReadOnlyTask {
         deadline = taskToCopy.getDeadline();
         startEndDateTime = taskToCopy.getStartEndDateTime();
         tags = taskToCopy.getTags();
+        complete = taskToCopy.isComplete();
     }
 
     //@@author
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    //@@author A0140023E
-    public void setDeadline(Deadline dateTime) {
-        this.deadline = Optional.of(dateTime);
-    }
-
-    public void setStartEndDateTime(StartEndDateTime startEndDateTime) {
-        this.startEndDateTime = Optional.of(startEndDateTime);
-    }
-
-    //@@author
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
-    }
-
-    //@@author A0135998H
-    public void markDone() {
-        this.done = !done;
-    }
-
     @Override
     public Name getName() {
         return name;
@@ -88,8 +67,31 @@ public class TestTask implements ReadOnlyTask {
     }
 
     //@@author A0135998H
-    public boolean isDone() {
-        return done;
+    public boolean isComplete() {
+        return complete;
+    }
+
+    //@@author
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    //@@author A0140023E
+    public void setDeadline(Deadline dateTime) {
+        this.deadline = Optional.of(dateTime);
+    }
+
+    public void setStartEndDateTime(StartEndDateTime startEndDateTime) {
+        this.startEndDateTime = Optional.of(startEndDateTime);
+    }
+
+    //@@author
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     //@@author
