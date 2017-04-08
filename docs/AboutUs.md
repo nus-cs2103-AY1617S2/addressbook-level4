@@ -24,10 +24,10 @@ Responsibilities:
 * Responsibilities: In charge of UI, Documentation,Code Integration, solving merge conflicts to master<br>
 * Component: UI <br>
 * Features implemented: <br>
-        * [Edit the tasks](https://github.com/CS2103JAN2017-T15-B4/main/docs/UserGuide.md) <br>
-        * [Mark the tasks as done||undone](https://github.com/CS2103JAN2017-T15-B4/main/docs/UserGuide.md) <br> 
-        * [List all relevant tasks based on given parameter](https://github.com/CS2103JAN2017-T15-B4/main/docs/UserGuide.md) <br>
-* Code written: [[functional code](../collated/main/A0141872EM.md)][[test code](../collated/test/A0141872E.md)]
+        * [Edit the tasks](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/AboutUs.md) <br>
+        * [Mark the tasks as done||undone](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/AboutUs.md) <br> 
+        * [List all relevant tasks based on given parameter](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/AboutUs.md) <br>
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/main/A0141872E.md)][[test code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/test/A0141872E.md)]
 * Other major contributions: <br>
 		* Designed the main UI
 

@@ -47,22 +47,23 @@ public class MarkCommand extends Command {
         }
 
         ReadOnlyTask taskToMark = lastShownList.get(filteredTaskListIndex);
+        assert taskToMark != null;
 
-        if(!checkDuplicateMarking(taskToMark)) {
-            taskToMark.setDone(parameter);
-        } else{
+        if(checkDuplicateMarking(taskToMark)) {
             return new CommandResult(String.format(MESSAGE_DUPLICATE_MARKING,parameter));
         }
+
+        taskToMark.setDone(parameter);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         //TODO find a better way to show it
-        model.updateFilteredTaskList("undone");
+        //model.updateFilteredTaskList("undone");
         return new CommandResult(String.format(MESSAGE_SUCCESS_ALL, parameter));
     }
 
     public Boolean checkDuplicateMarking(ReadOnlyTask taskToMark) {
-        if(parameter.equals("done") && taskToMark.isDone() == true){
+        if(taskToMark.isDone() == true && parameter.equals("done")){
             return true;
-        } else if(parameter.equals("undone") && taskToMark.isDone() == false){
+        } else if(taskToMark.isDone() == false && parameter.equals("undone")){
             return true;
         } else {
             return false;

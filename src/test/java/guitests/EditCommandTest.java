@@ -58,7 +58,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     @Test
     public void edit_multipleFields_Success() throws Exception {
-        String detailsToEdit = "title Do Homework start 4pm end 6pm priority low tag assignment";
+        String detailsToEdit = "title Do Homework from 4pm to 6pm priority low tag assignment";
         int addressBookIndex = 3;
 
         TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withStart("4pm").withEnd("6pm").withPriority("low").withTags("assignment").build();
@@ -117,7 +117,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_dateTime_success() throws Exception {
         sortTasksList();
-        String detailsToEdit = "end 4 pm";
+        String detailsToEdit = "to 4 pm";
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
@@ -129,7 +129,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_dateToday_success() throws Exception {
         sortTasksList();
-        String detailsToEdit = "end today";
+        String detailsToEdit = "to today";
         int addressBookIndex = 4;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
@@ -144,12 +144,12 @@ public class EditCommandTest extends AddressBookGuiTest {
         sortTasksList();
         commandBox.runCommand("find Do HW 1");
 
-        String detailsToEdit = "title Homework due";
+        String detailsToEdit = "tag Homework";
         int filteredTaskListIndex = 1;
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Homework due").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("Homework").build();
 
         assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
@@ -191,10 +191,10 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 tag *&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 start day");
+        commandBox.runCommand("edit 1 from day");
         assertResultMessage(Date.MESSAGE_DATE_FAIL);
 
-        commandBox.runCommand("edit 1 end day");
+        commandBox.runCommand("edit 1 to day");
         assertResultMessage(Date.MESSAGE_DATE_FAIL);
 
         commandBox.runCommand("edit 1 priority important");

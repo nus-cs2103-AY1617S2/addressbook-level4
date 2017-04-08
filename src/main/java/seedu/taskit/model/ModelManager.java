@@ -1,7 +1,7 @@
 package seedu.taskit.model;
 
 import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
+import static seedu.taskit.logic.parser.CliSyntax.DONE;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
@@ -9,7 +9,7 @@ import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -238,10 +238,10 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (parameter){
-                case LIST_DONE:
+                case DONE:
                     return task.isDone();
 
-                case LIST_UNDONE:
+                case UNDONE:
                     return !task.isDone();
 
                 case LIST_OVERDUE:
