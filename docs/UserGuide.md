@@ -70,20 +70,27 @@ Your commands should be typed here.<br><br>
 The results of your command executions will be shown here.<br><br>
 3. **Task Card**<br>
 Each task in ezDo is represented by a task card with the following properties:<br>
-    * Each task card has an index on the left.<br>
+    * Each task card has an index on the left.<br><br>
     * The color bar on the left indicates its priority.<br>
         * <font color="green">Green</font>: low priority <br>
         * <font color="orange">Orange</font>: medium priority <br>
-        * <font color="red">Red</font>: high priority
-    * Under the status column, a task has either:
-        * Not commenced (with no icon)
-        * Commenced (with a hammer icon)
-        * Completed (with a tick icon)
-    * Task cards may have a start/end time.<br>
+        * <font color="red">Red</font>: high priority<br><br>
+    * The color shown on the start date and/or due date represents the following.<br>
+        * The start date is in <font color="green">green</font>: The start date of a task has past ezDo's last updated date.<br>
+        * The due date is in <font color="orange">orange</font>: The due date is about to due in 7 days according to ezDo's last updated date. <br>
+        * Both start and due dates are in <font color="red">red</font>: The task is overdue according to ezDo's last updated date. <br><br>
+    * Under the status column, a task has either:<br>
+        * Not commenced (with no icon) <br>
+        * Commenced (with a hammer icon) <br>
+        * Completed (with a tick icon) <br><br>
+    * Task cards may have a start/end time.<br><br>
     * Task cards may have any number of tags associated with it.<br>
 
 4. **Tags**<br>
-Each task may have some tags associated with it. Tags are a way for you to group and classify your tasks.
+Each task may have some tags associated with it. Tags are a way for you to group and classify your tasks. <br><br>
+
+> #### <u>Quick Tip:</u><br>
+> If you hover your mouse over the command box or description box, a tooltip description will be displayed in a few seconds. The description briefly describes its functionality. This is one way you can locate them on the user interface easily.
 
 Now that we are familiar with ezDo's interface, let us get started with the features of ezDo!<br>
 
@@ -143,7 +150,7 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 <br>
 
 > - Add as many tags as you want to a task, if required.<br><br>
-> - Add a **`FREQUENCY`** if required. The acceptable fields are daily, weekly, monthly and yearly (case sensitive).<br><br>
+> - Add a **`FREQUENCY`** if required. The acceptable words are daily, weekly, monthly and yearly (case sensitive).<br><br>
 > - Add a **`STARTDATE`** or **`DUEDATE`** if required. Refer to Table 2 for examples of **`STARTDATE`** and **`DUEDATE`**.<br><br>
 > - Mark tasks with **`PRIORITY`** level 1, 2 or 3, with 1 the highest priority and 3 the lowest, if required.<br>
 
@@ -170,6 +177,8 @@ A summary of the commands available on ezDo is shown in Table 1 for your conveni
 #### Examples:
 * Buy milk:<br>
 **`add Buy milk`** <br><br>
+* Go to gym every week starting from today:<br>
+**`add Go to gym s/today f/weekly`** <br><br>
 * Buy plane tickets to Hong Kong urgently:<br>
 **`a Buy plane tickets to Hong Kong p/3`** <br><br>
 * Buy a table by 03/02/2017 13:00:<br>
