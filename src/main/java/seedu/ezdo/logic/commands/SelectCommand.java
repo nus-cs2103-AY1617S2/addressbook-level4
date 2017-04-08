@@ -11,6 +11,7 @@ import seedu.ezdo.logic.commands.exceptions.CommandException;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
 
+//@@author A0139177W
 /**
  * Selects a task identified using its last displayed index from ezDo.
  */
@@ -36,7 +37,7 @@ public class SelectCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-  
+
         if (!MultipleIndexCommandUtil.isIndexValid(lastShownList, targetIndexes)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
@@ -47,7 +48,7 @@ public class SelectCommand extends Command {
 
         MultipleIndexCommandUtil.addTasksToList(tasksToToggle, lastShownList, targetIndexes);
         model.toggleTasksSelect(tasksToToggle);
-        
+
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndexes.get(targetIndexes.size()-1)-1));
 
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndexes));
