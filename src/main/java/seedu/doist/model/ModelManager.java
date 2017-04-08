@@ -70,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTodoList newData) {
         todoList.resetData(newData);
+        sortTasksByDefault();
         indicateTodoListChanged();
     }
 

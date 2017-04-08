@@ -48,7 +48,6 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.Description;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.Task;
-import seedu.doist.storage.StorageManager;
 
 
 public class LogicManagerTest {
@@ -89,11 +88,7 @@ public class LogicManagerTest {
         model = new ModelManager();
         aliasModel = new AliasListMapManager();
         configModel = new ConfigManager();
-        String tempTodoListFile = saveFolder.getRoot().getPath() + "TempTodoList.xml";
-        String tempAliasListMapFile = saveFolder.getRoot().getPath() + "TempAliasListMap.xml";
-        String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, aliasModel, configModel, new StorageManager(tempTodoListFile,
-                tempAliasListMapFile, tempPreferencesFile));
+        logic = new LogicManager(model, aliasModel, configModel);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTodoList = new TodoList(model.getTodoList()); // last saved assumed to be up to date

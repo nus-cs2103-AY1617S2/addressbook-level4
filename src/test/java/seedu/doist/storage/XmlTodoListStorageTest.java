@@ -100,6 +100,4 @@ public class XmlTodoListStorageTest {
         thrown.expect(AssertionError.class);
         saveTodoList(new TodoList(), null);
     }
-
-
 }
