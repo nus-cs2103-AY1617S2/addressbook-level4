@@ -11,11 +11,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.TestUtil;
+import onlythree.imanager.TestApp;
+import onlythree.imanager.commons.exceptions.IllegalValueException;
+import onlythree.imanager.model.task.ReadOnlyTask;
+import onlythree.imanager.model.task.Task;
+import onlythree.imanager.testutil.TestUtil;
 
 /**
  * Provides a handle for the panel containing the person list.

@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import onlythree.imanager.commons.core.Messages;
+import onlythree.imanager.logic.commands.AddCommand;
+import onlythree.imanager.testutil.TestTask;
+import onlythree.imanager.testutil.TestUtil;
 
 public class AddCommandTest extends TaskListGuiTest {
 

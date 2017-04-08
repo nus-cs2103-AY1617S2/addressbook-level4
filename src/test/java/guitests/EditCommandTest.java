@@ -1,7 +1,7 @@
 package guitests;
 
+import static onlythree.imanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -9,14 +9,14 @@ import java.time.temporal.ChronoUnit;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.StartEndDateTime;
-import seedu.address.testutil.TaskBuilder;
-import seedu.address.testutil.TestTask;
+import onlythree.imanager.commons.core.Messages;
+import onlythree.imanager.logic.commands.EditCommand;
+import onlythree.imanager.model.tag.Tag;
+import onlythree.imanager.model.task.Deadline;
+import onlythree.imanager.model.task.Name;
+import onlythree.imanager.model.task.StartEndDateTime;
+import onlythree.imanager.testutil.TaskBuilder;
+import onlythree.imanager.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskListGuiTest {
