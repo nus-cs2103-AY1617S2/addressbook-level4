@@ -17,7 +17,7 @@ public class TaskBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code taskToCopy}.
+     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(TestTask taskToCopy) {
         this.task = new TestTask(taskToCopy);

@@ -61,7 +61,6 @@ public class EditCommandTest extends TypeTaskGuiTest {
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
     }
-
     @Test
     public void editFindThenEditToInvalidStartDate_fail() {
         commandBox.runCommand("find George");
@@ -76,6 +75,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE);
     }
+
     @Test
     public void editFindThenEditSuccess() throws Exception {
         commandBox.runCommand("find Elle");
@@ -113,11 +113,11 @@ public class EditCommandTest extends TypeTaskGuiTest {
     /**
      * Checks whether the edited task has the correct updated details.
      *
-     * @param filteredPersonListIndex index of task to edit in filtered list
-     * @param addressBookIndex index of task to edit in the address book.
+     * @param filteredTaskListIndex index of task to edit in filtered list
+     * @param typeTaskIndex index of task to edit in the typetask.
      *      Must refer to the same task as {@code filteredTaskListIndex}
      * @param detailsToEdit details to edit the task with as input to the edit command
-     * @param editedPerson the expected task after editing the task details
+     * @param editedTask the expected task after editing the task details
      */
     private void assertEditSuccess(int filteredTaskListIndex, int typeTaskIndex,
                                     String detailsToEdit, TestTask editedTask) {

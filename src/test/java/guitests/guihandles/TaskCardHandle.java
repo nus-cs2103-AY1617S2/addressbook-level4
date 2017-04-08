@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import typetask.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
@@ -63,8 +63,8 @@ public class TaskCardHandle extends GuiHandle {
         return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
     }
 
-    public boolean isSameTask(ReadOnlyTask person) {
-        return getFullName().equals(person.getName().fullName);
+    public boolean isSameTask(ReadOnlyTask task) {
+        return getFullName().equals(task.getName().fullName);
     }
 
     @Override
