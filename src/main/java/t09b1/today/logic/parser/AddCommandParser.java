@@ -32,14 +32,10 @@ public class AddCommandParser extends SeperableParser {
         List<Date> startingTimeAndDeadline = getStartingTimeAndDeadline();
         if (startingTimeAndDeadline != null) {
             try {
-                return new AddCommand(args.trim(),
-                        startingTimeAndDeadline.get(CliSyntax.DEADLINE_INDEX),
-                        startingTimeAndDeadline.get(CliSyntax.STARTING_INDEX),
-                        tags);
+                return new AddCommand(args.trim(), startingTimeAndDeadline.get(CliSyntax.DEADLINE_INDEX),
+                        startingTimeAndDeadline.get(CliSyntax.STARTING_INDEX), tags);
             } catch (IllegalValueException e) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         }
 
@@ -50,16 +46,13 @@ public class AddCommandParser extends SeperableParser {
             try {
                 return new AddCommand(args.trim(), deadline, tags);
             } catch (IllegalValueException e) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                AddCommand.MESSAGE_USAGE));
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
         }
         try {
             return new AddCommand(args.trim(), tags);
         } catch (IllegalValueException e) {
-            return new IncorrectCommand(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 

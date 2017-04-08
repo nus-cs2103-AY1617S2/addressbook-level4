@@ -42,7 +42,6 @@ import t09b1.today.logic.commands.DoneCommand;
 import t09b1.today.logic.commands.EditCommand;
 import t09b1.today.logic.commands.ExitCommand;
 import t09b1.today.logic.commands.ExportCommand;
-import t09b1.today.logic.commands.FindCommand;
 import t09b1.today.logic.commands.HelpCommand;
 import t09b1.today.logic.commands.ImportCommand;
 import t09b1.today.logic.commands.ListCommand;
@@ -204,7 +203,7 @@ public class LogicManagerTest {
         try {
             CommandResult result = logic.execute(inputCommand);
             assertFalse("CommandException expected but was not thrown.", isCommandExceptionExpected);
-            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedMessage, result.getFeedbackToUser());
         } catch (CommandException e) {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
@@ -235,7 +234,7 @@ public class LogicManagerTest {
     @Test
     public void execute_invalid() {
         String invalidCommand = "       ";
-        assertCommandFailure(invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        assertCommandFailure(invalidCommand, MESSAGE_INVALID_COMMAND_FORMAT);
     }
 
     @Test
@@ -392,20 +391,20 @@ public class LogicManagerTest {
     // @@author A0093999Y
     @Test
     public void execute_editOnlyIndex_invalid() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("edit F1", expectedMessage);
     }
 
     @Test
     public void execute_editNoIndex_invalid() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("edit task2 #well", expectedMessage);
     }
 
     // @@author A0144422R
     @Test
     public void execute_editInvalidTag_errorMessageShown() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("edit F1 #@!89", expectedMessage);
     }
 
@@ -540,7 +539,7 @@ public class LogicManagerTest {
     // @@author
     @Test
     public void execute_find_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("find ", expectedMessage);
     }
 
@@ -587,7 +586,7 @@ public class LogicManagerTest {
     // @@author A0093999Y
     @Test
     public void execute_renametag_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RenameTagCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("renametag ", expectedMessage);
     }
 
@@ -611,7 +610,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_deletetag_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
+        String expectedMessage = MESSAGE_INVALID_COMMAND_FORMAT;
         assertCommandFailure("deletetag ", expectedMessage);
     }
 

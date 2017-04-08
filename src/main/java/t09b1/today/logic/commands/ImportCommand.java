@@ -14,9 +14,6 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports file data from the specified file directory. \n" + "Parameters: dir_location\n" + "Example: "
-            + COMMAND_WORD + " example_folder";
     public static final String MESSAGE_SUCCESS = "Data imported from: %1$s";
     public static final String MESSAGE_SUCCESS_STATUS_BAR = "Data imported from %1$s";
     public static final String MESSAGE_FILE_MISSING_ERROR = "The directory does not contain the file: %1$s";

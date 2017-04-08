@@ -13,7 +13,7 @@ public class NotTodayCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * TodayCommand and returns an NotTodayCommand object for execution.
+     * NotTodayCommand and returns an NotTodayCommand object for execution.
      */
     public Command parse(String args, Logic logic) {
         if (!logic.isValidUIIndex(args)) {

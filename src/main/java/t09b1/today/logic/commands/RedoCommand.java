@@ -4,7 +4,7 @@ import t09b1.today.logic.commands.exceptions.CommandException;
 import t09b1.today.model.exceptions.NoPreviousCommandException;
 
 // @@author A0139388M
-/*
+/**
  * Undo the last command by the user.
  */
 public class RedoCommand extends Command {

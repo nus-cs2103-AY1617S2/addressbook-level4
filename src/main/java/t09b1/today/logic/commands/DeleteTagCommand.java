@@ -20,9 +20,6 @@ public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = "deletetag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing tag in the task manager "
-            + "Parameters: <tag_name>\n" + "Example: " + COMMAND_WORD + " work";
-
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
     public static final String MESSAGE_SUCCESS_STATUS_BAR = "Tag deleted successfully.";
 
@@ -51,6 +48,16 @@ public class DeleteTagCommand extends Command {
                 MESSAGE_SUCCESS_STATUS_BAR);
     }
 
+    /**
+     * Takes a task from the list, deletes the designated tag, and updates it to
+     * model
+     * 
+     * @param lastShownList
+     *            list from model
+     * @param index
+     *            index of task in model
+     * @throws CommandException
+     */
     private void removeTagFromTask(List<ReadOnlyTask> lastShownList, int index) throws CommandException {
         ReadOnlyTask taskToEdit = lastShownList.get(index);
         boolean containsOldTag = false;

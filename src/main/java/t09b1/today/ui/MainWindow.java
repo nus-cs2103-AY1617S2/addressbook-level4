@@ -212,7 +212,7 @@ public class MainWindow extends UiPart<Region> {
 
     // @@author A0144315N
     /**
-     *  Initialises observable lists for ListView and loads other UI components
+     * Initialises observable lists for ListView and loads other UI components
      */
     void fillInnerParts() {
         // Initialises observable lists for ListViews
@@ -220,7 +220,8 @@ public class MainWindow extends UiPart<Region> {
         taskListFuture = FXCollections.observableArrayList();
         taskListCompleted = FXCollections.observableArrayList();
 
-        // Split and sort task lists (see Developer Guide "Implementation" section for detail)
+        // Split and sort task lists (see Developer Guide "Implementation"
+        // section for detail)
         prepareTaskList();
 
         // Load UI components
@@ -344,8 +345,8 @@ public class MainWindow extends UiPart<Region> {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             // process result of the command
             commandTextField.setText("");
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-            raise(new UpdateStatusBarEvent(commandResult.statusBarMessage));
+            raise(new NewResultAvailableEvent(commandResult.getFeedbackToUser()));
+            raise(new UpdateStatusBarEvent(commandResult.getStatusBarMessage()));
         } catch (CommandException e) {
             // handle command failure
             // display error message under command box

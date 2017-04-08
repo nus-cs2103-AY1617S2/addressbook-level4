@@ -46,7 +46,7 @@ public class TaskCardHandle extends GuiHandle {
 
     private Set<String> getTags(UniqueTagList tags) {
         return new HashSet<String>(
-                tags.asObservableList().stream().map(tag -> tag.tagName).collect(Collectors.toList()));
+                tags.asObservableList().stream().map(tag -> tag.getTagName()).collect(Collectors.toList()));
     }
 
     private Region getTagsContainer() {
@@ -54,7 +54,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task) {
-        return getFullName().equals(task.getName().fullName) && getTags().equals(getTags(task.getTags()));
+        return getFullName().equals(task.getName().toString()) && getTags().equals(getTags(task.getTags()));
     }
 
     @Override
