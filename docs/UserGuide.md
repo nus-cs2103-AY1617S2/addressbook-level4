@@ -13,7 +13,8 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
     3.4. [Managing Tags](#34-managing-tags)<br>
     3.5. [Undo/Redo Commands](#35-undoredo-commands)<br>
     3.6. [Advanced Usage](#36-advanced-usage)<br>
-    3.7. [Miscellaneous](#37-miscellaneous)
+    3.7. [Hotkeys](#37-hotkeys)<br>
+    3.8. [Miscellaneous](#38-miscellaneous)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -378,15 +379,25 @@ In your second computer, plug in the USB stick and get the file path of the prev
 * `import C:\Users\<YourName>\Desktop`
 * `import ../mySecretFolder`
 
-### 3.7. Miscellaneous
+### 3.7 Hotkeys
 
-#### 3.7.1. Getting help
+#### 3.7.1. Expanding and minimizing task lists
+
+You might find it useful to get your today or future task list out of the way. To do so, press <kbd>Ctrl</kbd> + <kbd>1</kbd> or <kbd>Ctrl</kbd> + <kbd>2</kbd> to expand or close your today and future task lists respectively.
+
+#### 3.7.2. Scrolling through your tasks
+
+As you start getting more and more tasks, you might need to start scrolling to look at your complete list of tasks. You can either do this with your mouse, or by using <kbd>Ctrl</kbd> + <kbd>↑</kbd> and <kbd>Ctrl</kbd> + <kbd>↓</kbd> to scroll up and down respectively.
+
+### 3.8. Miscellaneous
+
+#### 3.8.1. Getting help
 
 To view this user guide you're currently viewing, you can use the F1 hotkey or use the `help` command.
 
 ##### Format: `help`
 
-### 3.7.2. Exit
+### 3.8.2. Exit
 
 At the end of a long day, you deserve some time away from your task manager. You can `exit` **Today** and enjoy the rest of your day!
 
