@@ -7,9 +7,7 @@ import seedu.watodo.model.task.Task;
 import seedu.watodo.model.task.UniqueTaskList;
 
 /**
- * A utility class to help with building Addressbook objects.
- * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ * A utility class to help with building taskManager objects.
  */
 public class TaskListBuilder {
 
