@@ -6,9 +6,9 @@ import static seedu.taskmanager.logic.parser.CliSyntax.FILEPATH_ARGS_FORMAT;
 
 import java.util.regex.Matcher;
 
-import seedu.taskmanager.logic.commands.LoadCommand;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
+import seedu.taskmanager.logic.commands.LoadCommand;
 
 // @@author A0114269E
 /**

@@ -32,7 +32,8 @@ public class FindDateCommand extends Command {
             + "10/03/2017 to 15/03/2017";
     public static final String MESSAGE_INVALID_RANGE = "Invalid date range. "
             + "Either provide a single date or a starting date to ending date";
-    public static final String MESSAGE_SUCCESS = "Finding tasks ";
+    public static final String MESSAGE_SUCCESS_DATE = "Finding tasks on %1$s\n%2$s";
+    public static final String MESSAGE_SUCCESS_DATE_TO_DATE = "Finding tasks from %1$s to %2$s\n%3$s";
 
     public FindDateCommand(String date) throws IllegalValueException {
         isRange = false;
@@ -91,19 +92,16 @@ public class FindDateCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS);
         if (isRange) {
             model.updateFilteredTaskList(startDateRange, endDateRange);
-            sb.append(sdfOutput.format(startDateRange));
-            sb.append(" to ");
-            sb.append(sdfOutput.format(endDateRange));
+            return new CommandResult(String.format(MESSAGE_SUCCESS_DATE_TO_DATE, sdfOutput.format(startDateRange),
+                    sdfOutput.format(endDateRange),
+                    getMessageForTaskListShownSummary(model.getFilteredTaskList().size())));
         } else {
             model.updateFilteredTaskList(startDateRange);
-            sb.append("on ");
-            sb.append(sdfOutput.format(startDateRange));
+            return new CommandResult(String.format(MESSAGE_SUCCESS_DATE, sdfOutput.format(startDateRange),
+                    getMessageForTaskListShownSummary(model.getFilteredTaskList().size())));
         }
-        sb.append("\n");
-        return new CommandResult(sb.toString() + getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 }
 // @@author

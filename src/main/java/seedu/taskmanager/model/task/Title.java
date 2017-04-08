@@ -3,14 +3,13 @@ package seedu.taskmanager.model.task;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's title in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
+ * Represents a Task's title in the task manager. Guarantees: immutable; is
+ * valid as declared in {@link #isValidTitle(String)}
  */
 public class Title {
-
     public static final String MESSAGE_TITLE_CONSTRAINTS =
-            "Task titles should only contain alphanumeric characters, spaces, and _,.?':;&%$@()!- symbols\n" +
-                    "It should not be blank";
+            "Task titles should only contain alphanumeric characters, spaces, and " +
+                    "_,.?':;&%$@()!- symbols\n" + "It should not be blank";
 
     // @@author A0114269E
     /*
@@ -18,8 +17,9 @@ public class Title {
      * otherwise " " (a blank string) becomes a valid input.
      * Allows some commonly used special characters "_,.?':;&%$@()!-"
      */
-//    public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String TITLE_VALIDATION_REGEX = "[0-9a-zA-Z_,.?':;&%$@()!-][ 0-9a-zA-Z_,.?':;&%$@()!-]*";
+    //public static final String TITLE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String TITLE_VALIDATION_REGEX = 
+            "[0-9a-zA-Z_,.?':;&%$@()!-][ 0-9a-zA-Z_,.?':;&%$@()!-]*";
     // @@author
 
     public final String value;
@@ -27,7 +27,8 @@ public class Title {
     /**
      * Validates given title.
      *
-     * @throws IllegalValueException if given title string is invalid.
+     * @throws IllegalValueException
+     *             if given title string is invalid.
      */
     public Title(String title) throws IllegalValueException {
         assert title != null;
@@ -45,7 +46,6 @@ public class Title {
         return test.matches(TITLE_VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
         return value;
@@ -55,7 +55,8 @@ public class Title {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Title // instanceof handles nulls
-                && this.value.equals(((Title) other).value)); // state check
+                        && this.value.equals(((Title) other).value)); // state
+                                                                      // check
     }
 
     @Override
