@@ -2,8 +2,8 @@ package seedu.opus.logic;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -55,7 +55,7 @@ public class SyncCommandTest {
         thrown.expectMessage(SyncCommand.MESSAGE_USAGE);
         logic.execute("sync invalid args");
     }
-    
+
     @Test
     public void executeSyncCommandWithSyncCommandRaised() throws SyncException, CommandException {
         doThrow(new SyncException(null)).when(mockModel).startSync();
