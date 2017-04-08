@@ -17,11 +17,12 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.8. [Marking tasks as finished](#38-marking-tasks-as-finished--finish)  
   3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
   3.10. [Setting an alias for a command word](#310-setting-an-alias-for-a-command-word--alias-view_alias)  
-  3.11. [Changing the storage location](#311-changing-the-storage-location--save_at)  
-  3.12  [Changing themes](#312-changing-themes)  
-  3.13. [Saving the data](#313-saving-the-data)  
-  3.14. [Clearing all tasks](#314-clearing-all-tasks--clear)  
-  3.15. [Exiting the program](#315-exiting-the-program--exit)  
+  3.11. [Loading an external data file](#311-loading-an-external-data-file--load)  
+  3.12. [Changing the storage location](#312-changing-the-storage-location--save_at)  
+  3.13  [Changing themes](#313-changing-themes)  
+  3.14. [Saving the data](#314-saving-the-data)  
+  3.15. [Clearing all tasks](#315-clearing-all-tasks--clear)  
+  3.16. [Exiting the program](#316-exiting-the-program--exit)  
 4. [FAQs](#4-faqs)
 5. [Command Summary](#5-command-summary)
 
@@ -288,14 +289,17 @@ Format: `find QUERY [QUERY...]`
 
 You can use the `edit` command to edit the specified task. Feel free to edit whatever you want in one line. Be assured that other properties of the task will not change! <br>
 <br>
-Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]`
+Format: `edit INDEX [TASK_DESCRIPTION] [\from START_TIME] [\to END_TIME] [\as PRIORITY] [\under TAG...]` <br>
 
-Just like the add command, `[\by TIME]` can be used in place of `\from` and `to`
+Just like the add command, `\by` can be used in place of `\from` and `to`. <br>
+<br>
+Format: `edit INDEX [TASK_DESCRIPTION] [\by TIME] [\as PRIORITY] [\under TAG...]`
+
 > **Examples:** <br>
 > - `edit 3 edited description of task` <br>
 
 > **Remarks:** <br>
-> - Refer to the section about the `add` command to know how to use the parameters of the `edit` command because they are used in the exact same way
+> - This is similar to [3.2 Adding a new task](#32-adding-a-new-task--add)  
 
 **Sample Commands**
 * `list`<br>
@@ -379,7 +383,22 @@ There are already some default aliases set for you. For example, `do` can be use
 <br>
 Format: `view_alias`
 
-### 3.11 Changing the storage location : `save_at`
+### 3.11 Loading an external data file : `load`
+
+You can use `load` to load an external data file (.xml) to replace the current tasks. Note that you can undo this loading of tasks later if you wish to. <br>
+<br>
+Format: `load PATH`
+
+> **Examples:** <br>
+> - `load C:\Users\admin\Desktop\todolist.xml` <br>
+> - `load /data/todoList.xml` <br>
+
+> **Remarks:** <br>
+> - You can provide a relative path for this command. <br>
+> - To go up a directory, use `../` <br>
+> - Both `/` and `\` are acceptable as the director separator, that is, the symbol between the folders in a path
+
+### 3.12 Changing the storage location : `save_at`
 
 You can use `save_at` to change the place that Doist would store its data at. <br>
 <br>
@@ -387,28 +406,32 @@ Format: `save_at PATH`
 
 > **Examples:** <br>
 > - `save_at C:\Users\admin\Desktop` <br>
-> - `save_at \Desktop` <br>
+> - `save_at /doist_data` <br>
+> - `save_at data` <br>
 
 > **Remarks:** <br>
-> - You can provide a relative path for this command.
+> - This is similar to [3.11 Loading an external data file](#311-loading-an-external-data-file--load)   <br>
+> - You can provide a relative path for this command. <br>
+> - To go up a directory, use `../` <br>
+> - Both `/` and `\` are acceptable as the director separator, that is, the symbol between the folders in a path
 
-### 3.12 Changing themes
+### 3.13 Changing themes
 Click on `Theme` on the menu bar to change the look and feel of Doist! For now, there are two themes for you to choose. The default theme is LightTheme. <br><br>
 <img src="images/changingtheme.png" width="300"> <br>
 *Figure 3.13.1: Changing the theme* <br>
 
-### 3.13 Saving the data
+### 3.14 Saving the data
 
 Doist will automatically save! There is no need to save manually.
 
-### 3.14 Clearing all tasks : `clear`
+### 3.15 Clearing all tasks : `clear`
 
 Done with all your tasks? Need an empty to-do list?
 You can simply use `clear` to clear all tasks. <br>
 <br>
 Format: `clear`
 
-### 3.15 Exiting the program : `exit`
+### 3.16 Exiting the program : `exit`
 
 Use `exit` to exit Doist. <br>
 <br>
