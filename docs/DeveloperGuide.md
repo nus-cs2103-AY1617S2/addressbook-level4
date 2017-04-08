@@ -162,7 +162,7 @@ The sections below give more details on each component.
 **API** : [`Ui.java`](../src/main/java/seedu/ezdo/ui/Ui.java)
 <br>
 
-As shown in Figure 5, **`UI`** consists of a `MainWindow` that consists of several parts. _For example: `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` and `TaskCardtHeader`._ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+As shown in Figure 5, **`UI`** consists of a `MainWindow` that consists of several parts. _For example: `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` and `TaskCardHeader`._ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 **`UI`** uses the `JavaFX UI` framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/ezdo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
