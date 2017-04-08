@@ -22,14 +22,16 @@ public class TerminateCommandTest extends TaskBossGuiTest {
   //---------------- Tests for validity of input taskBoss index --------------------------------------
 
     /*
-     * EP: valid task index, should remove all
-     * task's current categories and add category "Done" in their place.
-     *
-     * Should return true.
+     * EP: valid task index,
+     * should add category "Done" to the recurring task's current category list.
+     * - test for long and short command formats
+     * - test multiple and single terminate
      */
 
+    //long command format
+    //single terminate
     @Test
-    public void terminateTask_success() throws Exception {
+    public void terminateTask_validIndex_longCommandformat_success() throws Exception {
         int taskBossIndex = 2;
 
         TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
@@ -37,142 +39,14 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
+                .withCategories(AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
     }
 
-    /*
-     * Invalid index equivalence partitions for : 1) missing index
-     * 2) index invalid for not existing in task list.
-     *
-     * The two test cases below test one invalid index input type at a time
-     * for each of the two invalid possible cases.
-     */
-
-    /*
-     * EP: invalid task index where index was not entered and is therefore missing,
-     * should not any of the task's
-     * current categories and will not add category "Done".
-     *
-     * Should show error message that command entered was in the wrong format
-     * and an index should be entered.
-     *
-     * Should return false.
-     */
-
+    //multiple terminate
     @Test
-    public void terminate_missingTaskIndex_failure() {
-        commandBox.runCommand("terminate ");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
-    }
-
-    /*
-     * EP: invalid task index where the index entered does
-     * not exist in current task list, should not remove any of the task's
-     * current categories and will not add category "Done".
-     *
-     * Should show error message that index entered is invalid.
-     *
-     * Should return false.
-     */
-
-    @Test
-    public void terminate_invalidTaskIndex_failure() {
-        commandBox.runCommand("t 9");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-    }
-
-  //---------------- Tests for format of terminate command --------------------------------------
-
-    /*
-     * Valid format equivalence partitions for : 1) short command format
-     * 2) long command format
-     *
-     * The two test cases below test one valid command format at a time
-     * for each of the two valid possible command formats.
-     */
-
-    /*
-     * EP: valid format using long command, should remove all task's
-     * current categories and add category "Done" in their place.
-     *
-     * Should return true.
-     */
-
-    @Test
-    public void terminateTask_Long_success() throws Exception {
-        int taskBossIndex = 2;
-
-        TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
-                .withStartDateTime("Feb 22, 2017 5pm")
-                .withEndDateTime("Feb 28, 2017 5pm")
-                .withRecurrence(Frequency.MONTHLY)
-                .withInformation("michegan ave")
-                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
-
-        assertTerminateSuccess(false, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
-    }
-
-    /*
-     * EP: valid format using short command, should remove all task's
-     * current categories and add category "Done" in their place.
-     *
-     * Should return true.
-     */
-
-    @Test
-    public void terminateTask_Short_Command_success() throws Exception {
-        int taskBossIndex = 6;
-
-        TestTask terminatedTask = new TaskBuilder().withName("Game project player testing").withPriorityLevel("Yes")
-                .withStartDateTime("Jan 1, 2017 5pm")
-                .withEndDateTime("Nov 28, 2017 5pm")
-                .withRecurrence(Frequency.DAILY)
-                .withInformation("4th street")
-                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
-
-        assertTerminateSuccess(true, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
-    }
-
-  //---------------- Tests for inputing wrong task type--------------------------------------------------------
-
-    /*
-     * EP: Check if successfully showed error message when task is non-recurring.
-     */
-    @Test
-    public void task_NotRecurring_failure() {
-        commandBox.runCommand("t 1");
-        assertResultMessage(TerminateCommand.ERROR_TASK_NOT_RECURRING);
-    }
-
-  //---------------- Tests for successfully ending a task after find command--------------------------------------
-
-    /*
-     * EP: Check if successfully end a recurring task after performing a find command,
-     * should should remove all task's current categories and add category "Done" in their place.
-     * Should return true.
-     */
-
-    @Test
-    public void termiateTask_findThenTerminate_success() throws Exception {
-        commandBox.runCommand("find ensure");
-
-        int filteredTaskListIndex = 1;
-        int taskBossIndex = 2;
-        TestTask taskToTerminate = expectedTasksList[taskBossIndex - 1];
-        TestTask terminatedTask = new TaskBuilder(taskToTerminate).withCategories("Done",
-                AddCommand.BUILT_IN_ALL_TASKS).build();
-        TestTask[] resultList = { terminatedTask };
-
-        assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, terminatedTask, resultList);
-
-    }
-
-    //---------------- Tests for successfully ending multiple recurring tasks-----------------------
-
-    @Test
-    public void multiple_Terminate_Long_Command_success() throws Exception {
+    public void multiple_terminate_validIndexes_longCommandformat_success() throws Exception {
         commandBox.runCommand("terminate 2 7");
 
         expectedTasksList[1] = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
@@ -180,7 +54,48 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories("Done", AddCommand.BUILT_IN_ALL_TASKS).build();
+                .withCategories(AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        expectedTasksList[6] = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
+                .withStartDateTime("Feb 21, 2017 1pm")
+                .withEndDateTime("Dec 10, 2017 5pm")
+                .withRecurrence(Frequency.WEEKLY)
+                .withInformation("little tokyo")
+                .withCategories("School", AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[6], expectedTasksList[1]};
+        assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
+                getDesiredFormat(terminatedTasks)));
+    }
+
+    //short command format
+    //single terminate
+    @Test
+    public void terminateTask_validIndex_shortCommandformat_success() throws Exception {
+        int taskBossIndex = 2;
+
+        TestTask terminatedTask = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+                .withStartDateTime("Feb 22, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withRecurrence(Frequency.MONTHLY)
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        assertTerminateSuccess(true, taskBossIndex, taskBossIndex, terminatedTask, expectedTasksList);
+    }
+
+    //multiple terminate
+    @Test
+    public void multiple_terminate_validIndexes_shortCommandformat_success() throws Exception {
+        commandBox.runCommand("t 2 7");
+
+        expectedTasksList[1] = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+                .withStartDateTime("Feb 22, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withRecurrence(Frequency.MONTHLY)
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
 
         expectedTasksList[6] = new TaskBuilder().withName("Fix errors in report").withPriorityLevel("No")
                 .withStartDateTime("Feb 21, 2017 1pm")
@@ -195,8 +110,146 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 getDesiredFormat(terminatedTasks)));
     }
 
+
+    /*
+     * EP: missing task index,
+     * should show error message: invalid command format
+     * and display a message demonstrating the correct way to write the command
+     */
     @Test
-    public void multiple_SpacesInBetween_Terminate_Short_Command_success() throws Exception {
+    public void terminate_missingTaskIndex_failure() {
+        //long command format
+        commandBox.runCommand("terminate ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        //short command format
+        commandBox.runCommand("t ");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+    }
+
+    /*
+     * EP: invalid task index,
+     * should show error message: invalid index
+     * - test short and long command format
+     * - test multiple and single terminate
+     */
+
+    //single terminate
+    @Test
+    public void terminate_invalidTaskIndex_failure() {
+
+        //long command format
+
+        commandBox.runCommand("terminate 9");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("terminate -1");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // non-numeric inputs
+        commandBox.runCommand("terminate ^");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("terminate b");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        //short command format
+
+        commandBox.runCommand("t 10");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("t 0");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        // non-numeric inputs
+        commandBox.runCommand("t ^");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("t b");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+    }
+
+    //multiple terminate
+    @Test
+    public void multiple_terminate_InvalidIndexes_failure() {
+        //long command format
+        commandBox.runCommand("terminate 1 2 100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("terminate 0 2 3");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user inputs non-numeric index values
+        commandBox.runCommand("terminate a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("terminate ; 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        //short command format
+        commandBox.runCommand("t 1 2 100");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        commandBox.runCommand("t 0 2 3");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+
+        //user inputs non-numeric index values
+        commandBox.runCommand("t a 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+
+        commandBox.runCommand("t ; 2 3");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+    }
+
+    //---------------- Tests for corner cases --------------------------------------------------------
+
+    /*
+     * EP: terminating a terminated task,
+     * should show error message: cannot terminate terminated tasks
+     * - test short and long command format
+     * - test multiple and single terminate
+     */
+
+    //long command format
+
+    //single terminate
+    @Test
+    public void terminate_taskTerminated_longCommandFormat_failure() {
+        commandBox.runCommand("terminate 2");
+        commandBox.runCommand("terminate 2");
+        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
+    }
+
+    @Test
+    public void multiple_terminate_taskTerminated_longCommandFormat_failure() {
+        commandBox.runCommand("terminate 2 7");
+        commandBox.runCommand("terminate 6 7");
+        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
+    }
+
+    //long command format
+
+    //single terminate
+    @Test
+    public void terminate_taskTerminated_shortCommandFormat_failure() {
+        commandBox.runCommand("terminate 2");
+        commandBox.runCommand("terminate 2");
+        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
+    }
+
+    @Test
+    public void multiple_terminate_taskTerminated_shortCommandFormat_failure() {
+        commandBox.runCommand("terminate 2 7");
+        commandBox.runCommand("terminate 6 7");
+        assertResultMessage(TerminateCommand.ERROR_TERMINATED_TASK);
+    }
+
+    /*
+     * EP: terminating multiple recurring tasks with spaces between indexes,
+     * should add category "Done" to all the tasks's current category lists.
+     */
+    @Test
+    public void multiple_SpacesInBetween_terminateTask_success() throws Exception {
         commandBox.runCommand("t 2       6 ");
         expectedTasksList[1] = new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
                 .withStartDateTime("Feb 22, 2017 5pm")
@@ -215,24 +268,68 @@ public class TerminateCommandTest extends TaskBossGuiTest {
         TestTask[] terminatedTasks = new TestTask[] {expectedTasksList[5], expectedTasksList[1]};
         assertResultMessage(String.format(TerminateCommand.MESSAGE_MARK_RECURRING_TASK_DONE_SUCCESS,
                 getDesiredFormat(terminatedTasks)));
-
     }
 
+    //---------------- Tests terminate after find command -----------------------------------------
+
+    /*
+     * EP: terminating after finding a task,
+     * should add category "Done" to the task's current category list.
+     */
     @Test
-    public void multiple_Terminate_Command_InvalidIndex() {
-        commandBox.runCommand("t 1 2 100");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    public void terminate_findThenTerminate_success() throws Exception {
+        commandBox.runCommand("find ensure");
 
-        commandBox.runCommand("t 0 2 3");
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        int filteredTaskListIndex = 1;
+        int taskBossIndex = 2;
 
-        //user input alphabet
-        commandBox.runCommand("t a 2 3");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+        TestTask taskToMarkDone = expectedTasksList[taskBossIndex - 1];
+        TestTask markedDoneTask = new TaskBuilder(taskToMarkDone).withCategories(AddCommand.BUILT_IN_DONE,
+                AddCommand.BUILT_IN_ALL_TASKS).build();
+        TestTask[] expectedList = { markedDoneTask };
 
-        //user input special character
-        commandBox.runCommand("t 1 2 ;");
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TerminateCommand.MESSAGE_USAGE));
+        assertTerminateSuccess(false, filteredTaskListIndex, taskBossIndex, markedDoneTask, expectedList);
+    }
+
+    //---------------- Test for different types of tasks --------------------------------------
+
+
+    /*
+     * EP: terminating non-recurring task,
+     * should show message: cannot terminate a non-recurring task.
+     */
+    @Test
+    public void terminate_nonRecurring_failure() throws Exception {
+        commandBox.runCommand("t 1");
+        assertResultMessage(TerminateCommand.ERROR_TASK_NOT_RECURRING);
+    }
+
+    /*
+     * EP: terminating recurring task,
+     * should add category "Done" to the task's current category list.
+     */
+    @Test
+    public void terminate_recurring_success() throws Exception {
+        int taskBossIndex = 2;
+
+        TestTask markedDoneTask =  new TaskBuilder().withName("Ensure code quality").withPriorityLevel("No")
+                .withStartDateTime("Feb 22, 2017 5pm")
+                .withEndDateTime("Feb 28, 2017 5pm")
+                .withRecurrence(Frequency.MONTHLY)
+                .withInformation("michegan ave")
+                .withCategories(AddCommand.BUILT_IN_DONE ,AddCommand.BUILT_IN_ALL_TASKS).build();
+
+        assertTerminateSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask, expectedTasksList);
+    }
+
+    /*
+     * EP: terminating recurring and non-recurring tasks at the same time,
+     * should show message: cannot terminate a non-recurring task.
+     */
+    @Test
+    public void terminate_mixTypes_failure() throws Exception {
+        commandBox.runCommand("t 2 4");
+        assertResultMessage(TerminateCommand.ERROR_TASK_NOT_RECURRING);
     }
 
     //---------------- End of test cases --------------------------------------
