@@ -343,18 +343,11 @@ Use case ends.
 >>>>>>> refs/heads/master
 
 **Extensions**
-<<<<<<< HEAD
-User enters the wrong task format
-System shows the expected task format
-System prompts user to re-enter the task
-The specific task name or filter cannot be found
-System informs the user that the specific task/filter cannot be found
-=======
+
 1a. User enters the wrong task format.
     1a1. System shows the expected task format.
     1a2. System prompts user to re-enter the task.
 Use case resumes from step 1.
->>>>>>> refs/heads/master
 
 1b. The specific task name or filter cannot be found.
     1b1. System informs the user that the specific task/filter cannot be found.
@@ -380,7 +373,7 @@ Use case ends.
 Use case ends.
 >>>>>>> refs/heads/master
 
-**Extensions** 
+**Extensions**
 3a. The input task cannot be found.
 
     3a1. System requests for creating new task.
