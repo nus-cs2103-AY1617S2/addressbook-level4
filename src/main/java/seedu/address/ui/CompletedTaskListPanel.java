@@ -98,7 +98,7 @@ public class CompletedTaskListPanel extends UiPart<Region> {
 
             Timeline timeline = new Timeline();
             timeline.getKeyFrames()
-                    .addAll(new KeyFrame(Duration.ZERO, 
+                    .addAll(new KeyFrame(Duration.ZERO,
                                     new KeyValue(completedTaskListView.prefHeightProperty(), 0),
                                     new KeyValue(completedTaskListTitle.visibleProperty(), false),
                                     new KeyValue(completedTaskListView.opacityProperty(), 0.8d)),
