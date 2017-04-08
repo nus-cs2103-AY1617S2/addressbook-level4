@@ -1,8 +1,8 @@
 package seedu.task.model.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.text.SimpleDateFormat;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
