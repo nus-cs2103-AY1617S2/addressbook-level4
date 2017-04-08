@@ -148,7 +148,8 @@ public class UiManager extends ComponentManager implements Ui {
     private void handlePopulateRecurringGhostTaskEvent(PopulateRecurringGhostTaskEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (mainWindow.getTaskListPanel() != null) {
-            mainWindow.getCalendarPanel().addAllEvents(event.getAllRecurringGhostTasks());;
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllCompletedRecurringGhostTasks());
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllUncompletedRecurringGhostTasks());
         }
     }
 

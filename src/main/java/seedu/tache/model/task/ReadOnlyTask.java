@@ -22,6 +22,7 @@ public interface ReadOnlyTask {
     boolean getTimedStatus();
     boolean isWithinDate(Date date);
     RecurState getRecurState();
+    List<Task> getCompletedRecurList();
     List<Task> getUncompletedRecurList();
     List<Task> getUncompletedRecurList(Date filterEndDate);
 

@@ -99,7 +99,8 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
-        raise(new PopulateRecurringGhostTaskEvent(getAllRecurringGhostTasks()));
+        raise(new PopulateRecurringGhostTaskEvent(getAllUncompletedRecurringGhostTasks(),
+                                getAllCompletedRecurringGhostTasks()));
     }
     //@@author
 
@@ -608,12 +609,25 @@ public class ModelManager extends ComponentManager implements Model {
         return concatenatedList;
     }
 
-    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
+    public ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < taskManager.getTaskList().size(); i++) {
             if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
                 Collections.addAll(concatenated, taskManager.getTaskList().get(i)
-                                            .getUncompletedRecurList(null).toArray());
+                                            .getUncompletedRecurList().toArray());
+            }
+        }
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
+    }
+
+    public ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                            .getCompletedRecurList().toArray());
             }
         }
         ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
