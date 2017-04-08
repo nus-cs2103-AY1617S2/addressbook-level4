@@ -19,7 +19,6 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
 
         /**  */
         assertReadWhatsLeftSuccess("./src/test/data/ReadCommandTest/TypicalWhatsLeft.xml", currentTaskList, currentEventList);
-
     }
 
     /**

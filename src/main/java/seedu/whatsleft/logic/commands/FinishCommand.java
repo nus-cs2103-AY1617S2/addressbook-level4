@@ -17,7 +17,7 @@ public class FinishCommand extends Command {
     public static final String COMMAND_WORD = "finish";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": mark the task identified by index number used in the last respective listing.\n"
+            + ": mark the task identified by index number as completed.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 5";
 
     public static final String MESSAGE_FINISH_TASK_SUCCESS = "Finished task: %1$s";

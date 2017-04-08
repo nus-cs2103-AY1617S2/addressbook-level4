@@ -29,9 +29,8 @@ public class ReadCommand extends Command {
     public static final String COMMAND_WORD = "read";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ":  Reads the WhatsLeft task storage from given location filepath.\n" + "Parameters: FILEPATH\n"
-            + "Example: " + COMMAND_WORD + " C:/Users/Downloads/Desktop/CS2103/WhatsLeft.xml"
-            + " 1\n" + "Example: " + COMMAND_WORD
-            + " /Users/Andy/Downloads/WhatsLeft.xml";
+            + "Example (Relative Path): " + COMMAND_WORD + " ./Data/WhatsLeft.xml" + " \n"
+            + "Example (Absolute Path): " + COMMAND_WORD + " /Users/Andy/Downloads/WhatsLeft.xml";
 
     public static final String MESSAGE_READ_WHATSLEFT_SUCCESS = "Successfully read WhatsLeft from: %1$s";
     private static final String MESSAGE_SAVE_CONFIG_ERROR = "Failed to read stored WhatsLeft tasklist";
