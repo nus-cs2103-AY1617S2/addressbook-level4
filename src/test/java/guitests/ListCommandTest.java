@@ -18,6 +18,15 @@ public class ListCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
+    public void listTodayDateNonEmptyList() {
+        commandBox.runCommand("CLEAR");
+        commandBox.runCommand("ADD testcase ON today");
+        commandBox.runCommand("ADD testcase ON tmr");
+        commandBox.runCommand("LIST today");
+        assertListSize(1);
+    }
+
+    @Test
     public void listInvalidCommandFailure() {
         commandBox.runCommand("LIst");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
