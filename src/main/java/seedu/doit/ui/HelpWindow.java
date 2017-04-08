@@ -58,6 +58,10 @@ public class HelpWindow extends UiPart<Region> {
     @FXML
     private TableColumn<Map<CommandColumns, String>, String> exampleColumn;
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
     @FXML
     private void initialize() {
         this.commandColumn.setCellValueFactory(cellData ->
