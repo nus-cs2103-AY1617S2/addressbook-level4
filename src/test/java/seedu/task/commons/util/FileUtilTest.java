@@ -19,7 +19,7 @@ public class FileUtilTest {
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskManager.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskManager.xml"));
+    private static final File TEMP_FILE = new File(TEST_DATA_FOLDER + "tempTaskManager.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
