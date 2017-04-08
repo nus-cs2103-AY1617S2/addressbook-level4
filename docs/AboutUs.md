@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Louis Lai](http://github.com/louislai)
 <img src="images/louislai.png" width="150"><br>
-Role: Team Leader <br>
+Role: Architect <br>
 
 * Components in charge of: UI, Model, Storage
 * Aspects/tools in charge of: Scheduling and tracking, CI, Code quality
@@ -16,6 +16,7 @@ Role: Team Leader <br>
   - Alias/Unalias/View Alias commands
   - Change storage commands
   - Most of the GUI including the different tab filter + Switch command
+  - Refactor Controller classes to support smart command suggestions (command word suggestion, parameter suggestion, parameter options suggestion, search keyword suggestion)
 * Code written:
   - [Functional Codes](../collated/main/A0131125Y.md)
   - [Test Codes](../collated/test/A0131125Y.md)
@@ -68,3 +69,4 @@ Role: Developer <br>
   - [Documentation](../collated/docs/A0162011A.md)
 * Other major contribution:
   - Regularly update the project manual
+  - Add help descriptions to all commands
