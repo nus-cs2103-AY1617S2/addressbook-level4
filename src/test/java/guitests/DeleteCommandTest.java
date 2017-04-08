@@ -45,7 +45,7 @@ public class DeleteCommandTest extends TypeTaskGuiTest {
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
