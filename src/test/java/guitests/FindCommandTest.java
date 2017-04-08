@@ -75,6 +75,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertFindResult(MESSAGE_TEST_FIND_JEAN); // no results
     }
 
+    // @@author A0138909R
     @Test
     public void find_invalidCommand_fail() {
         this.commandBox.runCommand(MESSAGE_TEST_FIND_INVALID);
@@ -85,6 +86,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    // @@author A0139399J
     private void assertFindResult(String command, TestTask... expectedHits) {
         this.commandBox.runCommand(command);
         assertListSize(expectedHits.length);
