@@ -317,7 +317,7 @@ public class TerminateCommandTest extends TaskBossGuiTest {
                 .withEndDateTime("Feb 28, 2017 5pm")
                 .withRecurrence(Frequency.MONTHLY)
                 .withInformation("michegan ave")
-                .withCategories(AddCommand.BUILT_IN_DONE ,AddCommand.BUILT_IN_ALL_TASKS).build();
+                .withCategories(AddCommand.BUILT_IN_DONE, AddCommand.BUILT_IN_ALL_TASKS).build();
 
         assertTerminateSuccess(false, taskBossIndex, taskBossIndex, markedDoneTask, expectedTasksList);
     }
