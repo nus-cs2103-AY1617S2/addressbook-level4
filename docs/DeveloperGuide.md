@@ -502,11 +502,19 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+2. Should be portable and not require any installer to work 
+3. Should be desktop app that does not require any Internet connection to use
+4. Should not require a login username and password but can be launched conveniently
+5. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+6. Should be able to reliably store the list of tasks data and not have cases of corrupted data files
+7. The data should be stored locally in the form of a human editable text file, to allow advanced users to manipulate the data by editing the data file.
+8. Should respond to user commands relatively quickly (not more than 10 seconds).
+9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-{More to be added}
+10. Should be intuitive and easy to use even for users without any technical background.
+11. Should have proper documentation of user guide and glossary of terms.
+12. Should follow the OO paradigm and have well documented developer guide so other developers can contribute and enhance the product easily
+13. Should have some degree of automated testing
 
 ## Appendix D : Glossary
 
@@ -514,9 +522,32 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
+##### Floating task
 
-> A contact detail that is not meant to be shared with others
+> A task that has no start date and end date
+
+##### Deadline task
+
+> A task that has no start date but has an end date
+
+##### Event task
+
+> A task that has both a start date and end date
+
+##### DateTime
+
+> Refers to a day/date and/or time <br>
+Eg. day/date only:
+>tues, wed, 4 may, 7/12(MM/DD)
+time only:
+>9.50am, 1330h, noon
+day/date and time:
+>mon 4.30pm
+
+
+
+
+
 
 ## Appendix E : Product Survey
 
