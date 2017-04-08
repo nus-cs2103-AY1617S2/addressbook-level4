@@ -50,47 +50,47 @@ public class XmlTaskManagerStorageTest {
         assertFalse(readTaskManager("NonExistentFile.xml").isPresent());
     }
 
-//    @Test
-//    public void read_notXmlFormat_exceptionThrown() throws Exception {
-//
-//        thrown.expect(DataConversionException.class);
-//        readTaskManager("NotXmlFormatTaskManager.xml");
-//
-//        /*
-//         * IMPORTANT: Any code below an exception-throwing line (like the one above) will be
-//         * ignored. That means you should not have more than one exception test in one method
-//         */
-//    }
+    // @Test
+    // public void read_notXmlFormat_exceptionThrown() throws Exception {
+    //
+    // thrown.expect(DataConversionException.class);
+    // readTaskManager("NotXmlFormatTaskManager.xml");
+    //
+    // /*
+    // * IMPORTANT: Any code below an exception-throwing line (like the one above) will be
+    // * ignored. That means you should not have more than one exception test in one method
+    // */
+    // }
 
-//    @Test
-//    public void readAndSaveTaskManager_allInOrder_success() throws Exception {
-//        String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
-//        TypicalTestTasks td = new TypicalTestTasks();
-//        TaskManager original = td.getTypicalTaskManager();
-//        XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
-//
-//        // Save in new file and read back
-//        xmlTaskManagerStorage.saveTaskManager(original, filePath);
-//        ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
-//        assertEquals(original, new TaskManager(readBack));
-//
-//        // Modify data, overwrite exiting file, and read back
-//        original.addJobTask(new Task(td.yam));
-//        original.removeTask(new Task(td.cereals));
-//        xmlTaskManagerStorage.saveTaskManager(original, filePath);
-//        readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
-//        assertEquals(original, new TaskManager(readBack));
-//
-//        // Save and read without specifying file path
-//        original.addJobTask(new Task(td.apples));
-//        xmlTaskManagerStorage.saveTaskManager(original); // file path not
-//        // specified
-//        readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path
-//        // not
-//        // specified
-//        assertEquals(original, new TaskManager(readBack));
-//
-//    }
+    // @Test
+    // public void readAndSaveTaskManager_allInOrder_success() throws Exception {
+    // String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
+    // TypicalTestTasks td = new TypicalTestTasks();
+    // TaskManager original = td.getTypicalTaskManager();
+    // XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
+    //
+    // // Save in new file and read back
+    // xmlTaskManagerStorage.saveTaskManager(original, filePath);
+    // ReadOnlyTaskManager readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
+    // assertEquals(original, new TaskManager(readBack));
+    //
+    // // Modify data, overwrite exiting file, and read back
+    // original.addJobTask(new Task(td.yam));
+    // original.removeTask(new Task(td.cereals));
+    // xmlTaskManagerStorage.saveTaskManager(original, filePath);
+    // readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
+    // assertEquals(original, new TaskManager(readBack));
+    //
+    // // Save and read without specifying file path
+    // original.addJobTask(new Task(td.apples));
+    // xmlTaskManagerStorage.saveTaskManager(original); // file path not
+    // // specified
+    // readBack = xmlTaskManagerStorage.readTaskManager().get(); // file path
+    // // not
+    // // specified
+    // assertEquals(original, new TaskManager(readBack));
+    //
+    // }
 
     @Test
     public void saveTaskManager_nullTaskManager_assertionFailure() throws IOException {
