@@ -66,7 +66,6 @@ public class MainWindow extends UiPart<Region> {
 
     // Independent Ui parts residing in this Ui container
     private static StatusBarFooter statusBarFooter;
-    private BrowserPanel browserPanel;
     private TaskListPanel deadlineTaskListPanel;
     private TaskListPanel eventTaskListPanel;
     private TaskListPanel todoTaskListPanel;
@@ -377,9 +376,6 @@ public class MainWindow extends UiPart<Region> {
         }
     }
 
-    void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
-    }
 
     public void openDialog(ReadOnlyTask task) {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -408,10 +404,6 @@ public class MainWindow extends UiPart<Region> {
         }
         dialog.close();
         commandBox.focus();
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     public void showWelcomeDialog() {
