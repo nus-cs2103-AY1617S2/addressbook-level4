@@ -44,9 +44,13 @@ public class FindCommand extends Command {
         model.updateFilteredTaskList(keywords, date, tagKeys);
         return new CommandResult(
                 getMessageForTaskListShownSummary(
-                        model.getFilteredTaskList().size()),
+                        model.getFilteredTaskList().filtered(t -> {
+                            return !t.isDone();
+                        }).size()),
                 String.format(MESSAGE_SUCCESS_STATUS_BAR,
-                        model.getFilteredTaskList().size()));
+                        model.getFilteredTaskList().filtered(t -> {
+                            return !t.isDone();
+                        }).size()));
     }
 
 }
