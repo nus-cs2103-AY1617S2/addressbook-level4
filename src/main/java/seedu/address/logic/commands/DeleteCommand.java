@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String token) {
         //@@author A0163848R
         try {
-            this.targetIndex = Integer.parseInt(token);
+            this.targetIndex = Integer.parseUnsignedInt(token);
         } catch (NumberFormatException e) {
             this.targetName = token;
         }

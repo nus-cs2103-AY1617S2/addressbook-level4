@@ -9,7 +9,6 @@ import seedu.address.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field
  * values are validated.
  */
-//@@ author A0164032U
 public interface ReadOnlyTask {
 
     Name getName();
@@ -45,6 +44,7 @@ public interface ReadOnlyTask {
     /**
      * Formats the person as text, showing all contact details.
      */
+  //@@author A0164032U
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         

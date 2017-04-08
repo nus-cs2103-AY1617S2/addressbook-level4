@@ -73,7 +73,7 @@ public class CommandBox extends UiPart<Region> {
             LOGGER.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage(),true));
         }
-        //@@author 
+        //@@author
     }
 
 

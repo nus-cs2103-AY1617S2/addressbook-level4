@@ -48,6 +48,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedPerson);
     }
+    //@@author
 
     @Test
     public void edit_findThenEdit_success() throws Exception {

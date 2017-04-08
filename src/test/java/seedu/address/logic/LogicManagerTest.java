@@ -174,7 +174,7 @@ public class LogicManagerTest {
         assertCommandSuccess("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 new YTomorrow(), Collections.emptyList());
     }
-
+    //@@author A0164032U
     @Test
     public void execute_clear() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -182,18 +182,19 @@ public class LogicManagerTest {
         model.addPerson(helper.generatePerson(2));
         model.addPerson(helper.generatePerson(3));
 
-        assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS_ALL, new YTomorrow(), Collections.emptyList());
+        assertCommandSuccess("clear all", ClearCommand.MESSAGE_SUCCESS_ALL, new YTomorrow(), Collections.emptyList());
     }
+    //@@author
 
-    //@@author A0164889E
+    //@@author A0164032U
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name 12.12 e/valid@email.butNoDatePrefix g/valid,group", expectedMessage);
-        assertCommandFailure("add Valid Name d/12.12 valid@email.butNoPrefix g/valid, group", expectedMessage);
-        assertCommandFailure("add Valid Name d/12.12 e/valid@email.butNoGroupPrefix valid, address", expectedMessage);
+        assertCommandFailure("add Valid Name s/12.12 g/onlyStartTime", expectedMessage);
+        assertCommandFailure("add Valid Name butNoGroupPrefix valid s/12:12 d/23:59", expectedMessage);
     }
+    //@@author
 
     //@@author A0164889E
     @Test
@@ -205,6 +206,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author A0164032U
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
@@ -215,11 +217,12 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS + (toBeAdded.hasPassed() ? "\n" + AddCommand.MESSAGE_PASSED : ""), toBeAdded),
                 expectedAB,
                 expectedAB.getPersonList());
 
     }
+    //@@author
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
@@ -315,11 +318,11 @@ public class LogicManagerTest {
         assertEquals(model.getFilteredPersonList().get(1), threePersons.get(1));
     }
 
-
+    //@@author A0164032U
     @Test
     public void execute_deleteInvalidArgsFormat_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
+        assertCommandFailure("delete", expectedMessage);
     }
 
     @Test
@@ -417,11 +420,7 @@ public class LogicManagerTest {
             EndDate privateEndDate = new EndDate("12.11");
             StartDate privateStartDate = new StartDate("12.20");
             Group privateGroup = new Group("leisure time");
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("longertag2");
-            Tag tag3 = new Tag("incomplete");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2, tag3);
-            return new Task(name, privateStartDate, privateEndDate, privateGroup, tags);
+            return new Task(name, privateStartDate, privateEndDate, privateGroup, UniqueTagList.build(Tag.TAG_INCOMPLETE));
         }
 
         //@@author A0164889E
@@ -442,6 +441,7 @@ public class LogicManagerTest {
             );
         }
 
+        //@@author A0164032U
         /** Generates the correct add command based on the person given */
         String generateAddCommand(ReadOnlyTask p) {
             StringBuffer cmd = new StringBuffer();
@@ -449,16 +449,13 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
+            cmd.append(" s/").append(p.getStartDate());
             cmd.append(" d/").append(p.getEndDate());
             cmd.append(" g/").append(p.getGroup());
 
-            UniqueTagList tags = p.getTags();
-            for (Tag t: tags) {
-                cmd.append(" t/").append(t.tagName);
-            }
-
             return cmd.toString();
         }
+        //@@author
 
         /**
          * Generates an AddressBook with auto-generated persons.

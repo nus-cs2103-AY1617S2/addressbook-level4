@@ -38,7 +38,7 @@ public class ClearCommand extends Command {
     
     public static final String MESSAGE_SUCCESS_ALL = "All tasks have been cleared!";
     public static final String MESSAGE_SUCCESS_COMPLETE = "All competed tasks have been cleared!";
-    public static final String MESSAGE_SUCCESS_PASSSED = "All passed tasks have been cleared!";
+    public static final String MESSAGE_SUCCESS_PASSED = "All passed tasks have been cleared!";
     public static final String MESSAGE_FAILURE = "Clear command not given any keywords!\n" + MESSAGE_USAGE;
     
     private Set<String> keywords;
@@ -97,7 +97,7 @@ public class ClearCommand extends Command {
             }
             model.resetData(filteredYTomorrow);
             
-            return new CommandResult(MESSAGE_SUCCESS_PASSSED);
+            return new CommandResult(MESSAGE_SUCCESS_PASSED);
         }
         
         return new CommandResult(MESSAGE_FAILURE);

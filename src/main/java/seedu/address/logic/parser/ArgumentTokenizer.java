@@ -60,9 +60,9 @@ public class ArgumentTokenizer {
      */
     //@@author A0164032U
     public boolean getEmpty(Prefix prefix) {
-
         return !(this.tokenizedArguments.containsKey(prefix));
     }
+    //@@author
 
     public Optional<List<String>> getAllValues(Prefix prefix) {
         if (!this.tokenizedArguments.containsKey(prefix)) {
@@ -125,6 +125,7 @@ public class ArgumentTokenizer {
 
     /**
      * Extracts the preamble/arguments and stores them in local variables.
+     * 
      * @param prefixPositions
      *            must contain all prefixes in the {@code argsString}
      */
