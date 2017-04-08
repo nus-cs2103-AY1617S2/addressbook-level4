@@ -1,6 +1,5 @@
 package seedu.watodo.logic.commands;
 
-
 import java.util.Optional;
 
 import seedu.watodo.commons.core.Config;

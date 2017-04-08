@@ -1,6 +1,5 @@
 package seedu.watodo.logic.commands;
 
-
 import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
 
