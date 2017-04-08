@@ -170,8 +170,28 @@ public class TaskManager implements ReadOnlyItemManager {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
+    /**
+     * Removes the equivalent task from the UniqueTaskList.
+     *
+     * @throws TaskNotFoundException
+     *             if no such task could be found in the UniqueTaskList.
+     */
     public boolean removeTask(ReadOnlyTask key) throws TaskNotFoundException {
         if (tasks.remove(key)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the equivalent tasks from the UniqueTaskList.
+     *
+     * @throws TaskNotFoundException
+     *             if no such task could be found in the UniqueTaskList.
+     */
+    public boolean removeTask(Set<ReadOnlyTask> keys) throws TaskNotFoundException {
+        if (tasks.remove(keys)) {
             return true;
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
