@@ -11,32 +11,35 @@ import seedu.whatsleft.logic.commands.ReadCommand;
 import seedu.whatsleft.testutil.TestEvent;
 import seedu.whatsleft.testutil.TestTask;
 import seedu.whatsleft.testutil.TestUtil;
+
 //@@author A0121668A
 public class ReadCommandTest extends WhatsLeftGuiTest {
 
     @Test
     public void readWhatsLeftSuccess() {
-        // finish one task
+
         TestEvent[] currentEventList = te.getTypicalEvents();
         currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
         TestTask[] currentTaskList = tt.getTypicalTasks();
         currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
 
-        /**  Read a file from the designated filepath*/
-        assertReadWhatsLeftSuccess("./src/test/data/readCommandTest/TypicalWhatsLeft.xml",
-                currentTaskList, currentEventList);
+        /** Read a file from the designated filepath */
+        assertReadWhatsLeftSuccess("./src/test/data/ReadCommandTest/TypicalWhatsLeft.xml", currentTaskList,
+                currentEventList);
     }
 
     @Test
     public void readWhatsLeftFailure() {
-        assertInvalidCommandFormatFailure(""); //no filename
-        assertInvalidCommandFormatFailure("./Data"); //filename without .xml
-        assertInvalidCommandFormatFailure("./Data/^%&^.xml"); //invalid filename
-        assertWrongFormatFailure("./src/test/data/readCommandTest/WrongFormat.xml");
+        assertInvalidCommandFormatFailure(""); // no filename
+        assertInvalidCommandFormatFailure("./Data"); // filename without .xml
+        assertInvalidCommandFormatFailure("./Data/^%&^.xml"); // invalid
+                                                              // filename
+        assertWrongFormatFailure("./src/test/data/ReadCommandTest/WrongFormat.xml");
     }
 
     /**
      * Assert reading a WhatsLeft file in wrong format is unsuccessful
+     *
      * @param filePathToRead
      */
     private void assertWrongFormatFailure(String filePathToRead) {
@@ -47,6 +50,7 @@ public class ReadCommandTest extends WhatsLeftGuiTest {
 
     /**
      * Assert reading a WhatsLeft file from invalid filepath is unsuccessful
+     *
      * @param filePath
      */
     private void assertInvalidCommandFormatFailure(String filePathToRead) {
