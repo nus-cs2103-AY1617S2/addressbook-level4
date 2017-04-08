@@ -67,11 +67,7 @@ public class Task implements ReadOnlyTask {
     }
 
     public void toggleStart() {
-        if (this.hasStarted) {
-            hasStarted = false;
-        } else {
-            hasStarted = true;
-        }
+        this.hasStarted ^= true;
     }
 
     @Override
