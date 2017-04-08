@@ -269,7 +269,7 @@ Closes Opus.
 ## 4. Command Summary
 
 * **Add**  `add NAME [n/NOTES] [p/PRIORITY] [b/STARTTIME] [e/ENDTIME] [t/TAG]...` <br>
-  e.g. `add Do laundry n/from the blue basket p/hi b/23/3/2018 12:00 e/23/3/2018 13:00 t/friend t/colleague`
+  e.g. `add Do laundry n/from the blue basket p/hi b/03/23/2018 12:00 e/03/23/2018 13:00 t/friend t/colleague`
 
 * **Clear** : `clear`
 
@@ -277,7 +277,7 @@ Closes Opus.
    e.g. `delete 3`
 
 * **Edit**  `edit INDEX NAME [n/NOTES] [p/PRIORITY] [b/STARTTIME] [e/ENDTIME] [t/TAG]...` <br>
-  e.g. `edit 2 Prepare dinner n/for 4 pax p/hi b/23/4/2017 12:00 e/23/3/2018 13:00 t/friend t/colleague`
+  e.g. `edit 2 Prepare dinner n/for 4 pax p/hi b/03/23/2017 12:00 e/03/23/2018 13:00 t/friend t/colleague`
 
 * **Exit** `exit`
 
@@ -303,8 +303,5 @@ Closes Opus.
 
 * **Sort** : `sort KEYWORD` <br>
   e.g. `sort priority`
-
-* **Unmark** : `unmark [INDEX]` <br>
-  e.g. `unmark 1`
 
 * **Undo** : `undo` <br>
