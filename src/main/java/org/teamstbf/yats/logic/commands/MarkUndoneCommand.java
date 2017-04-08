@@ -7,7 +7,8 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueEventList;
+
+import javafx.collections.transformation.FilteredList;
 
 // @@author A0139448U
 /**
@@ -19,8 +20,8 @@ public class MarkUndoneCommand extends Command {
     public final int targetIndex;
 
     public MarkUndoneCommand(int targetIndex) {
-        assert targetIndex > 0;
-        this.targetIndex = targetIndex - 1;
+	assert targetIndex > 0;
+	this.targetIndex = targetIndex - 1;
     }
 
     public static final String COMMAND_WORD = "unmark";
@@ -29,36 +30,43 @@ public class MarkUndoneCommand extends Command {
     public static final String MESSAGE_NO_DONE_OCCURENCE = "Recurring task has no done occurrence.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as not done "
-            + "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_WORD + " 1";
+	    + "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
+	    + "Example: " + COMMAND_WORD + " 1";
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyEvent> lastShownList = model.getFilteredTaskList();
+	List<ReadOnlyEvent> lastShownList = retrieveDoneTaskList();
 
-        if (targetIndex >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
+	if (targetIndex >= lastShownList.size()) {
+	    throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+	}
 
-        ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
-        Event markedTask = new Event(taskToMark);
-        model.saveImageOfCurrentTaskManager();
-        if (markedTask.isRecurring()) {
-            if (markedTask.getRecurrence().hasDoneOccurence()) {
-                markedTask.getRecurrence().markOccurenceUndone();
-            } else {
-                return new CommandResult(MESSAGE_ALR_MARKED);
-            }
-        } else {
-            if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_NOTDONE)) {
-                return new CommandResult(MESSAGE_ALR_MARKED);
-            }
-            markedTask.getIsDone().markUndone();
-        }
-        model.updateEvent(targetIndex, markedTask);
-        model.updateFilteredListToShowAll();
-        markedTask.setPriority(1);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
+	ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
+	Event markedTask = new Event(taskToMark);
+	model.saveImageOfCurrentTaskManager();
+	if (markedTask.isRecurring()) {
+	    if (markedTask.getRecurrence().hasDoneOccurence()) {
+		markedTask.getRecurrence().markOccurenceUndone();
+	    } else {
+		return new CommandResult(MESSAGE_ALR_MARKED);
+	    }
+	} else {
+	    if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_NOTDONE)) {
+		return new CommandResult(MESSAGE_ALR_MARKED);
+	    }
+	    markedTask.getIsDone().markUndone();
+	}
+	model.updateEvent(targetIndex, markedTask);
+	model.updateFilteredListToShowAll();
+	model.updateTaskFilteredListToShowDone();
+	markedTask.setPriority(1);
+	return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));
+    }
+
+    private List<ReadOnlyEvent> retrieveDoneTaskList() {
+	FilteredList<ReadOnlyEvent> filteredList = new FilteredList<ReadOnlyEvent>(model.getTaskFilteredTaskList());
+	model.updateTaskFilteredListToShowDone();
+	return filteredList;
     }
 
 }
