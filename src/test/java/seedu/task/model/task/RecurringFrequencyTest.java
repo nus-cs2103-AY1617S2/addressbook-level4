@@ -14,15 +14,15 @@ public class RecurringFrequencyTest {
         assertFalse(RecurringFrequency.isValidFrequency("")); // empty string
         assertFalse(RecurringFrequency.isValidFrequency(" ")); // spaces only
         assertFalse(RecurringFrequency.isValidFrequency("2malpha")); // valid priority followed by alpha characters
-        assertFalse(RecurringFrequency.isValidFrequency("2h alpha"));
+        assertFalse(RecurringFrequency.isValidFrequency("2y alpha"));
         // valid priority followed by alpha char separated by space
-        assertFalse(RecurringFrequency.isValidFrequency(".1h")); // decimal hour
+        assertFalse(RecurringFrequency.isValidFrequency(".1y")); // decimal year
         assertFalse(RecurringFrequency.isValidFrequency(".1d")); // decimal day
         assertFalse(RecurringFrequency.isValidFrequency(".1m")); // decimal month
 
         // valid frequency
-        assertTrue(RecurringFrequency.isValidFrequency("1h")); // one digit hour
-        assertTrue(RecurringFrequency.isValidFrequency("10h")); // two digit hour
+        assertTrue(RecurringFrequency.isValidFrequency("1y")); // one digit year
+        assertTrue(RecurringFrequency.isValidFrequency("10y")); // two digit year
         assertTrue(RecurringFrequency.isValidFrequency("1d")); // one digit day
         assertTrue(RecurringFrequency.isValidFrequency("10d")); // two digit day
         assertTrue(RecurringFrequency.isValidFrequency("1m")); // one digit month

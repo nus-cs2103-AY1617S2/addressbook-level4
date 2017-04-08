@@ -4,8 +4,10 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -49,11 +51,26 @@ public class GuiHandle {
         guiRobot.interact(() -> window.get().requestFocus());
         logger.info("Finishing focus " + stageTitle);
     }
-
     protected <T extends Node> T getNode(String query) {
         return guiRobot.lookup(query).query();
     }
-
+    //@@author A0163935X
+    protected ObservableList<String> getListviewTask(String filedName) {
+        ListView<String>  listview = getNode(filedName);
+        System.out.println("@@" + listview.getItems());
+        for (int i = 1; i <= 28; i++) {
+            listview = getNode("#listview1");
+            System.out.println("!!" + listview);
+            System.out.println("!!" + listview.getItems());
+        }
+        guiRobot.sleep(2000);
+        return listview.getItems();
+    }
+    protected String getLabelText(String filedName) {
+        Label label = getNode(filedName);
+        return label.getText();
+    }
+    ////@@author A0163935X
     protected String getTextFieldText(String filedName) {
         TextField textField = getNode(filedName);
         return textField.getText();
