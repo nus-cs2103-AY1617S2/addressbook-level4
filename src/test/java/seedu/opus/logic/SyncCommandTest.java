@@ -21,6 +21,7 @@ import seedu.opus.storage.StorageManager;
 import seedu.opus.sync.SyncServiceGtaskTest;
 import seedu.opus.sync.exceptions.SyncException;
 
+//@@author A0148087W
 public class SyncCommandTest {
 
     @Rule
