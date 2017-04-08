@@ -35,9 +35,11 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
-import seedu.task.storage.XmlSerializableAddressBook;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.storage.XmlSerializableTaskList;
 
 /**
  * A utility class for test cases.
@@ -70,34 +72,41 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
+    //@@author A0163559U
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"),  new UniqueTagList(), false, null),
-                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("George Best"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null)
+                    new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"),
+                            new Timing("02/02/2017"),  new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/03/2017"),
+                            new Timing("02/03/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/04/2017"),
+                            new Timing("02/04/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/05/2017"),
+                            new Timing("02/05/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/06/2017"),
+                            new Timing("02/06/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/07/2017"),
+                            new Timing("02/07/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("George Best"), new Priority("2"), new Timing("02/08/2017"),
+                            new Timing("02/08/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/09/2017"),
+                            new Timing("02/09/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                    new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"),
+                            new Timing("02/02/2017"), new UniqueTagList(), false, new RecurringFrequency(null))
             };
-            //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
-            assert false;
-            // not possible
             return null;
         }
     }
+    //@@author
 
 
     private static Tag[] getSampleTagData() {
         try {
             return new Tag[]{
-                new Tag("relatives"),
-                new Tag("friends")
+                    new Tag("relatives"),
+                    new Tag("friends")
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -126,7 +135,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -142,10 +151,19 @@ public class TestUtil {
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
-
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskList());
+    //@@author A0163559U
+    public static XmlSerializableTaskList generateSampleStorageTaskManager() {
+        TaskList tl = new TaskList();
+        for (Task t : SAMPLE_TASK_DATA) {
+            try {
+                tl.addTask(t);
+            } catch (DuplicateTaskException e) {
+                //continue
+            }
+        }
+        return new XmlSerializableTaskList(tl);
     }
+    //@@author
 
     /**
      * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
@@ -191,7 +209,7 @@ public class TestUtil {
     }
 
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException,
-        IllegalAccessException {
+    IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
