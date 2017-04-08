@@ -64,6 +64,8 @@ import seedu.today.model.task.Name;
 import seedu.today.model.task.ReadOnlyTask;
 import seedu.today.model.task.Task;
 import seedu.today.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.today.storage.Storage;
+import seedu.today.storage.StorageManager;
 import seedu.today.testutil.TestUtil;
 import seedu.today.testutil.TypicalTasks;
 
@@ -78,10 +80,11 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
     private Config config;
+    private Storage storage;
 
-    String tempTaskManagerFile;
-    String tempPreferencesFile;
-    String tempConfigFile;
+    // private String tempTaskManagerFile;
+    // private String tempPreferencesFile;
+    // private String tempConfigFile;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -116,6 +119,7 @@ public class LogicManagerTest {
         config = new Config(tempConfigFile);
         config.setTaskManagerFilePath(tempTaskManagerFile);
         config.setUserPrefsFilePath(tempPreferencesFile);
+        storage = new StorageManager(config);
         logic = new LogicManager(model);
         td = new TypicalTasks();
         expectedAB = td.getTypicalTaskManager();

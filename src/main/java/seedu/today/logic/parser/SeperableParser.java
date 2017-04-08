@@ -13,7 +13,7 @@ import org.ocpsoft.prettytime.nlp.parse.DateGroup;
 public class SeperableParser {
 
     protected static final int NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE = 2;
-    String args;
+    protected String args;
 
     protected String[] getTags() {
         Pattern pattern = Pattern.compile(CliSyntax.TAGS);
@@ -30,12 +30,10 @@ public class SeperableParser {
     protected String getArgument(String key) {
         String reverseString = new StringBuilder(args).reverse().toString();
         String reverseKey = new StringBuilder(key).reverse().toString();
-        Pattern pattern = Pattern.compile(
-                CliSyntax.END_OF_A_WORD + reverseKey + CliSyntax.END_OF_A_WORD);
+        Pattern pattern = Pattern.compile(CliSyntax.END_OF_A_WORD + reverseKey + CliSyntax.END_OF_A_WORD);
         Matcher matcher = pattern.matcher(reverseString);
         if (matcher.find()) {
-            String arg = args
-                    .substring(reverseString.length() - matcher.start());
+            String arg = args.substring(reverseString.length() - matcher.start());
             args = args.substring(0, reverseString.length() - matcher.end());
             return arg.trim();
         } else {
@@ -43,8 +41,7 @@ public class SeperableParser {
         }
     }
 
-    protected List<String> getMoreThanOneArguments(String regex,
-            String[] captureGroups) {
+    protected List<String> getMoreThanOneArguments(String regex, String[] captureGroups) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(args);
         if (matcher.matches()) {
@@ -62,42 +59,33 @@ public class SeperableParser {
     protected List<Date> getStartingTimeAndDeadline() {
         String tmpArgs = args;
         String correctDateTime = "";
-        List<String> datesString = getMoreThanOneArguments(
-                CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX,
+        List<String> datesString = getMoreThanOneArguments(CliSyntax.STARTINGTIME_AND_DEADLINE_REVERSE_REGEX,
                 CliSyntax.CAPTURE_GROUPS_OF_EVENT);
         if (datesString == null) {
             args = tmpArgs;
             return null;
         }
-        assert datesString
-                .size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
+        assert datesString.size() == NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE;
         List<Date> dates = new ArrayList<Date>();
         for (int i = 0; i < NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE; i++) {
-            List<DateGroup> group = new PrettyTimeParser().parseSyntax(
-                    ParserUtil.correctDateFormat(datesString.get(i))
+            List<DateGroup> group = new PrettyTimeParser().parseSyntax(ParserUtil.correctDateFormat(datesString.get(i))
 
-                            + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
-                                    : CliSyntax.DEFAULT_DEADLINE));
+                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE));
 
-            if (group == null || group.size() > 2 || (!group.get(0).getText()
-                    .equals(datesString.get(i))
-                    && (!group.get(0).getText().equals(
-                            ParserUtil.correctDateFormat(datesString.get(i))
-                                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME
-                                            : CliSyntax.DEFAULT_DEADLINE))
-                            && !group.get(0).getText().equals(ParserUtil
-                                    .correctDateFormat(datesString.get(i)))))) {
+            if (group == null || group.size() > 2
+                    || (!group.get(0).getText().equals(datesString.get(i)) && (!group.get(0).getText()
+                            .equals(ParserUtil.correctDateFormat(datesString.get(i))
+                                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE))
+                            && !group.get(0).getText().equals(ParserUtil.correctDateFormat(datesString.get(i)))))) {
                 args = tmpArgs;
                 return null;
             } else {
                 dates.addAll(group.get(0).getDates());
 
-                correctDateTime = ((i == 1 ? "from " : "to ")
-                        + group.get(0).getText() + " ") + correctDateTime;
+                correctDateTime = ((i == 1 ? "from " : "to ") + group.get(0).getText() + " ") + correctDateTime;
             }
         }
-        if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME)
-                .after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
+        if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME).after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
             args = tmpArgs;
             return null;
         }
@@ -113,8 +101,7 @@ public class SeperableParser {
             return null;
         }
         List<DateGroup> group = new PrettyTimeParser()
-                .parseSyntax(ParserUtil.correctDateFormat(
-                        deadlineString + CliSyntax.DEFAULT_DEADLINE));
+                .parseSyntax(ParserUtil.correctDateFormat(deadlineString + CliSyntax.DEFAULT_DEADLINE));
         if (group == null || group.get(0).getPosition() != 0 || group.size() > 2
                 || group.get(0).getDates().size() > 1) {
             args = tmpArgs;

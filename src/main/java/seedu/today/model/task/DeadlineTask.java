@@ -13,9 +13,8 @@ import seedu.today.model.tag.UniqueTagList;
  * values are validated.
  */
 public class DeadlineTask extends Task {
-    static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
-    DateTime deadline;
+    private DateTime deadline;
 
     public DeadlineTask(Name name, UniqueTagList tags, Date date, boolean isDone, boolean manualToday)
             throws IllegalValueException {

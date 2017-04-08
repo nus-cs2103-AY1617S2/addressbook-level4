@@ -314,12 +314,15 @@ public class TestUtil {
      *            The index at which to insert the task
      * @return The modified array of tasks.
      */
-    public static Task[] addTasksToList(final Task[] tasks, Task task, int index) {
+    public static Task[] addTasksToList(final Task[] tasks, Task task, int pos) {
         Task[] newTasks = new Task[tasks.length + 1];
-        if (index <= 0) {
+        int index;
+        if (pos <= 0) {
             index = 0;
-        } else if (index > tasks.length) {
+        } else if (pos > tasks.length) {
             index = tasks.length;
+        } else {
+            index = pos;
         }
 
         for (int i = 0; i < index; i++) {

@@ -13,10 +13,10 @@ import seedu.today.model.tag.UniqueTagList;
  * known as an event. not null, field values are validated.
  */
 public class EventTask extends Task {
-    static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
+    public static final String MESSAGE_DATETIME_CONSTRAINTS = "Deadline should be after starting time.";
 
-    DateTime deadline;
-    DateTime startingTime;
+    private DateTime deadline;
+    private DateTime startingTime;
 
     /**
      * starting time may be null

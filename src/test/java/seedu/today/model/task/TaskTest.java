@@ -21,8 +21,8 @@ public class TaskTest {
         try {
             Task task = new FloatingTask(new Name("a floating task"), new UniqueTagList("tag1", "tag2"), false, false);
             assertTrue(task.getName().toString().equals("a floating task"));
-            assertTrue(task.getDeadline().isPresent() == false);
-            assertTrue(task.getStartingTime().isPresent() == false);
+            assertFalse(task.getDeadline().isPresent());
+            assertFalse(task.getStartingTime().isPresent());
             assertFalse(task.isToday());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
             assertFalse(task.isDone());
@@ -44,9 +44,9 @@ public class TaskTest {
             Task task = new DeadlineTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date, false,
                     false);
             assertTrue(task.getName().toString().equals("a deadline task"));
-            assertTrue(task.getDeadline().isPresent() == true);
+            assertTrue(task.getDeadline().isPresent());
             assertTrue(task.getDeadline().get().getDate().equals(date));
-            assertTrue(task.getStartingTime().isPresent() == false);
+            assertFalse(task.getStartingTime().isPresent());
             assertTrue(task.isToday());
             assertTrue(((DeadlineTask) task).isOverdue());
             assertTrue(task.getTags().equalsOrderInsensitive(new UniqueTagList("tag1", "tag2")));
@@ -71,9 +71,9 @@ public class TaskTest {
             Task task = new EventTask(new Name("a deadline task"), new UniqueTagList("tag1", "tag2"), date2, date,
                     false, false);
             assertTrue(task.getName().toString().equals("a deadline task"));
-            assertTrue(task.getDeadline().isPresent() == true);
+            assertTrue(task.getDeadline().isPresent());
             assertTrue(task.getDeadline().get().getDate().equals(date2));
-            assertTrue(task.getStartingTime().isPresent() == true);
+            assertTrue(task.getStartingTime().isPresent());
             assertTrue(task.getStartingTime().get().getDate().equals(date));
             assertTrue(task.isToday());
             assertFalse(((EventTask) task).isOverdue());

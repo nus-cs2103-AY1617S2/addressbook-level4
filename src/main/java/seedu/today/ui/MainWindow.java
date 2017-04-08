@@ -100,7 +100,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane windowCentre;
 
-    CommandTextFieldValidator validator;
+    private CommandTextFieldValidator validator;
 
     /** Amount that is scrolled using the down and up arrow keys */
     private static final double SCROLL_AMOUNT = 0.05;
@@ -210,7 +210,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Initialises observable lists for ListView and loads other UI components
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         // Initialises observable lists for ListViews
         taskListToday = FXCollections.observableArrayList();
         taskListFuture = FXCollections.observableArrayList();
@@ -258,7 +258,7 @@ public class MainWindow extends UiPart<Region> {
         return completedTaskListPlaceholder;
     }
 
-    void hide() {
+    public void hide() {
         primaryStage.hide();
     }
 
