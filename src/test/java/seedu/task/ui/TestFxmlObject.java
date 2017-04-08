@@ -9,27 +9,27 @@ import javafx.beans.DefaultProperty;
 @DefaultProperty("text")
 public class TestFxmlObject {
 
-  private String text;
+    private String text;
 
-  public TestFxmlObject() {
-  }
+    public TestFxmlObject() {
+    }
 
-  public TestFxmlObject(String text) {
-    setText(text);
-  }
+    public TestFxmlObject(String text) {
+        setText(text);
+    }
 
-  public String getText() {
-    return text;
-  }
+    public String getText() {
+        return text;
+    }
 
-  public void setText(String text) {
-    this.text = text;
-  }
+    public void setText(String text) {
+        this.text = text;
+    }
 
-  @Override
-  public boolean equals(Object other) {
-    return other == this || (other instanceof TestFxmlObject
-        && this.text.equals(((TestFxmlObject) other).getText()));
-  }
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof TestFxmlObject
+                && this.text.equals(((TestFxmlObject) other).getText()));
+    }
 
 }

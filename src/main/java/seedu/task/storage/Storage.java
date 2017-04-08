@@ -14,26 +14,27 @@ import seedu.task.model.UserPrefs;
  */
 public interface Storage extends TaskManagerStorage, UserPrefsStorage {
 
-  @Override
-  Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    @Override
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
-  @Override
-  void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+    @Override
+    void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
-  @Override
-  String getTaskManagerFilePath();
+    @Override
+    String getTaskManagerFilePath();
 
-  @Override
-  Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
+    @Override
+    Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
-  @Override
-  void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
+    @Override
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
-  /**
-   * Saves the current version of the Task Manager to the hard disk. Creates the data file if it is
-   * missing. Raises {@link DataSavingExceptionEvent} if there was an error during saving.
-   */
-  void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
+    /**
+     * Saves the current version of the Task Manager to the hard disk. Creates the data file if it
+     * is missing. Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce);
 
-  void setPathName(String pathName);
+    @Override
+    void setPathName(String pathName);
 }
