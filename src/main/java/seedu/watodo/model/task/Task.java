@@ -21,22 +21,26 @@ public class Task implements ReadOnlyTask {
 
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
-        this(description, null, null, tags, TaskStatus.UNDONE);
+        this(description, null, null, tags);
+        this.taskType = TaskType.FLOAT;
     }
 
     /* Constructs a Floating Task object from a given description. With Status */
     public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
         this(description, null, null, tags, newStatus);
+        this.taskType = TaskType.FLOAT;
     }
 
     /* Constructs a Deadline Task object from a given description. */
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
-        this(description, null, deadline, tags, TaskStatus.UNDONE);
+        this(description, null, deadline, tags);
+        this.taskType = TaskType.DEADLINE;
     }
 
     /* Constructs a Deadline Task object from a given description. With status. */
     public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
         this(description, null, deadline, tags, newStatus);
+        this.taskType = TaskType.DEADLINE;
     }
 
     /* Constructs an Event Task object from a given description. */
@@ -47,6 +51,7 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = TaskStatus.UNDONE;
+        this.taskType = TaskType.EVENT;
     }
 
     /* Constructs an Event Task object from a given description. With status */
@@ -57,6 +62,7 @@ public class Task implements ReadOnlyTask {
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = status;
+        this.taskType = TaskType.EVENT;
     }
 
     /**

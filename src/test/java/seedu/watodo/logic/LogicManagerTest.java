@@ -238,10 +238,15 @@ public class LogicManagerTest {
         assertCommandSuccess(builder.toString(), String.format(AddCommand.MESSAGE_SUCCESS, deadline3),
                              expectedTM, expectedTM.getTaskList());
         //equivalence partition 5
-        Task event5 = helper.generateTaskWithDescriptionAndStartEndDates("no sleep code everyday", "today", "next sun");
+        Task event5 = helper.generateTaskWithDescriptionAndStartEndDates(
+                "no sleep code everyday", "today", "next sun", "life");
         builder = new StringBuilder();
         builder.append("add ").append(event5.getDescription()).append(" on/").append(event5.getStartDate())
         .append(" to/").append(event5.getEndDate());
+        UniqueTagList tags = event5.getTags();
+        for (Tag t : tags) {
+            builder.append(" #").append(t.tagName);
+        }
         expectedTM.addTask(event5);
         assertCommandSuccess(builder.toString(), String.format(AddCommand.MESSAGE_SUCCESS, event5),
                              expectedTM, expectedTM.getTaskList());
@@ -250,19 +255,21 @@ public class LogicManagerTest {
     @Test
     public void execute_addflexibleArgsFormat_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task testTask1 = helper.generateTaskWithDescriptionAndStartEndDates("watch webcasts", "next tues", "4/14");
-        Task testTask2 = helper.generateTaskWithDescriptionAndStartEndDates("study for finals", "today", "may 5");
+        Task testTask1 = helper.generateTaskWithDescriptionAndStartEndDates(
+                "watch webcasts", "next tues", "4/14", "BackLog");
+        Task testTask2 = helper.generateTaskWithDescriptionAndStartEndDates(
+                "study for finals", "today", "may 5", "letgo");
         Task testTask3 = new Task(new Description("ie2150 project"), new DateTime("11 apr 12pm"),
                 new UniqueTagList(new Tag("DED"), new Tag("10000words")));
         TaskManager expectedTM = new TaskManager();
 
         expectedTM.addTask(testTask1);
-        String command = "add from/ next tues to/4/14 watch webcasts";
+        String command = "add from/ next tues to/4/14 watch webcasts #BackLog";
         assertCommandSuccess(command, String.format(AddCommand.MESSAGE_SUCCESS, testTask1),
                 expectedTM, expectedTM.getTaskList());
 
         expectedTM.addTask(testTask2);
-        command = "add to/ may 5 study for finals from/today";
+        command = "add to/ may 5 study for finals from/today #letgo";
         assertCommandSuccess(command, String.format(AddCommand.MESSAGE_SUCCESS, testTask2),
                 expectedTM, expectedTM.getTaskList());
 
@@ -288,128 +295,41 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_editInvalidArgsFormat_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-        assertCommandFailure("edit   ", expectedMessage);
-        //missing task index
-        assertCommandFailure("edit description", expectedMessage);
-        //invalid task index
-        assertCommandFailure("edit 0", expectedMessage);
-        assertCommandFailure("edit -1", expectedMessage);
-    }
-
-/*
-
-    @Test
-    public void edit_noFieldsSpecified_failure() {
-        commandBox.runCommand("edit 1");
-        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-    }
-
-    @Test
-    public void execute_editInvalidValues_failure() {
-        commandBox.runCommand("edit 1 *&");
-        assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        commandBox.runCommand("edit 1 p/abcd");
-        assertResultMessage(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
-
-
-        commandBox.runCommand("edit 1 t/*&");
-        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-    }
-    @Test
     public void execute_addEventTaskEndDateEarlierThanStartDate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task invalidEvent = helper.generateTaskWithDescriptionAndStartEndDates("meeting", "next week", "today");
+        Task invalidEvent = helper.generateTaskWithDescriptionAndStartEndDates("meeting", "next week", "today", "work");
 
         // execute command and verify result
         assertCommandFailure(helper.generateAddCommand(invalidEvent), DateTime.MESSAGE_DATETIME_START_LATER_THAN_END);
     }
 
+    //@@author A0143076J-reused
+    //similar to EditCommandTest cases under guitests package
     @Test
-    public void execute_editAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123, Bobby Street 3 t/husband";
-        int taskManagerIndex = 1;
-
-        TestTask editedTask = new TaskBuilder().withDescription("Bobby")
-                .withTags("husband").build();
-
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-    }
-
-    @Test
-    public void execute_editNotAllFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "t/sweetie t/bestie";
-        int taskManagerIndex = 2;
-
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("sweetie", "bestie").build();
-
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    public void execute_editInvalidFormat_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandFailure("edit   ", expectedMessage);
+        //missing task index
+        assertCommandFailure("edit p", expectedMessage);
+        assertCommandFailure("edit updated description but missing index", expectedMessage);
+        //invalid task index
+        assertCommandFailure("edit 0 updatedDescription", expectedMessage);
+        assertCommandFailure("edit -1 updatedDescription", expectedMessage);
     }
 
     @Test
-    public void edit_clearTags_success() throws Exception {
-        String detailsToEdit = "t/";
-        int taskManagerIndex = 2;
-
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
-
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    public void execute_editNoFieldsSpecified_failure() {
+        assertCommandFailure("edit 1", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
-    public void edit_findThenEdit_success() throws Exception {
-        commandBox.runCommand("find Elle");
-
-        String detailsToEdit = "Belle";
-        int filteredTaskListIndex = 1;
-        int taskManagerIndex = 5;
-
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withDescription("Belle").build();
-
-        assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
+    public void execute_editInvalidValues_failure() {
+        assertCommandFailure("edit 1 by/invalid date", DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        assertCommandFailure("edit 1 from/thurs", DateTimeParser.MESSAGE_INVALID_DATETIME_PREFIX_COMBI);
+        assertCommandFailure("edit 1 #$%^^", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-
-  
-   
-
-    @Test
-    public void edit_duplicateTask_failure() {
-        commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com "
-                                + "a/123, Jurong West Ave 6, #08-111 t/friends");
-        assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
-    }
-
-    /**
-     * Checks whether the edited task has the correct updated details.
-     *
-     * @param filteredTaskListIndex index of task to edit in filtered list
-     * @param taskManagerIndex index of person to edit in the task manager.
-     *      Must refer to the same task as {@code filteredTaskListIndex}
-     * @param detailsToEdit details to edit the task with as input to the edit command
-     * @param editedTask the expected task after editing the task's details
-     */
-/*    private void assertEditSuccess(int filteredTaskListIndex, int taskManagerIndex,
-                                    String detailsToEdit, TestTask editedTask) {
-        commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
-
-        // confirm the new card contains the right data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getDescription().fullDescription);
-        assertMatching(editedTask, editedCard);
-
-        // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskManagerIndex - 1] = editedTask;
-        assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
-    }
-    
-*/
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
@@ -439,6 +359,7 @@ public class LogicManagerTest {
         assertCommandFailure(commandWord + " not_a_number", expectedMessage);
     }
 
+    //@@author
     /**
      * Confirms the 'invalid argument index number behaviour' for the given
      * command targeting a single task in the shown list, using visible index.
@@ -451,7 +372,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
-        // set AB state to 2 tasks
+        // set TM state to 2 tasks
         model.resetData(new TaskManager());
         for (Task p : taskList) {
             model.addTask(p);
@@ -476,11 +397,11 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
+        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB, expectedAB.getTaskList());
+                expectedTM, expectedTM.getTaskList());
         assertEquals(1, targetedJumpIndex);
         assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
     }
@@ -501,12 +422,12 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        expectedAB.removeTask(threeTasks.get(1));
+        TaskManager expectedTM = helper.generateTaskManager(threeTasks);
+        expectedTM.removeTask(threeTasks.get(1));
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
-                threeTasks.get(0)), expectedAB, expectedAB.getTaskList());
+                threeTasks.get(0)), expectedTM, expectedTM.getTaskList());
     }
 
     @Test
@@ -723,13 +644,13 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name, startDate and endDate. Other fields will have some
-         * dummy values.
+         * Generates a Task object with given name, startDate and endDate, and a tag.
+         * Other fields will have some dummy values.
          */
-        Task generateTaskWithDescriptionAndStartEndDates(String name, String startDate, String endDate)
+        Task generateTaskWithDescriptionAndStartEndDates(String name, String startDate, String endDate, String tag)
                 throws Exception {
             return new Task(new Description(name), new DateTime(startDate),
-                    new DateTime(endDate), new UniqueTagList());
+                    new DateTime(endDate), new UniqueTagList(tag));
         }
     }
 }
