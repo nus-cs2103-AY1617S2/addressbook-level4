@@ -3,14 +3,14 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
+    -fx-font-size: 15pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
+    -fx-font-size: 15pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -24,7 +24,7 @@
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 15pt;
     -fx-font-family: "Segoe UI Semibold";
 }
 
@@ -97,7 +97,7 @@
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: #010504;
 }
 
@@ -122,6 +122,7 @@
 }
 
 .result-display {
+	-fx-font-size: 15pt;
     -fx-background-color: #ffffff;
 }
 

@@ -15,6 +15,7 @@ import seedu.watodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.watodo.commons.util.FxViewUtil;
 import seedu.watodo.model.task.ReadOnlyTask;
 
+//@@author A0139845R-reused
 /**
  * Panel containing the list of persons.
  */
@@ -70,7 +71,7 @@ public class ImportantTaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new ImportantTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }
