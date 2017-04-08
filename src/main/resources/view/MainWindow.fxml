@@ -31,14 +31,14 @@
       </MenuBar>
       <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
          <items>
-          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1300.0" prefWidth="250.0" style="-fx-max-width: 250; -fx-min-width: 250;" SplitPane.resizableWithParent="true">
+          <VBox maxWidth="-Infinity" prefHeight="1300.0" prefWidth="250.0" SplitPane.resizableWithParent="false">
                <children>
                   <AnchorPane fx:id="categoryListPanelPlaceholder" prefHeight="1300.0" />
                </children>
             </VBox>
-            <VBox fx:id="taskList" minWidth="340.0" prefWidth="340.0">
+            <VBox fx:id="taskList" minWidth="340.0" prefWidth="400.0">
                 <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets bottom="10.0" left="0.0" right="10.0" top="10.0" />
                 </padding>
                <children>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
