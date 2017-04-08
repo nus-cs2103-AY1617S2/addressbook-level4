@@ -79,7 +79,7 @@ public class XmlAdaptedTask {
         final Description description = new Description(Optional.of(this.description));
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final Period period = new Period(Optional.of(this.period));
-        final boolean isCompleted = (this.isCompleted.equals("true")) ? true: false;
-        return new Task(name, startTime, endTime, description, tags, period,isCompleted);
+        final boolean isCompleted = (this.isCompleted.equals("true")) ? true : false;
+        return new Task(name, startTime, endTime, description, tags, period, isCompleted);
     }
 }

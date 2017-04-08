@@ -16,7 +16,6 @@ import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
-import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -131,13 +130,13 @@ public class UiManager extends ComponentManager implements Ui {
     private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
-    
+
   //@@author A0130979U
     @Subscribe
-    public void handleConfigChangedSavePathEvent(ConfigChangeSavePathEvent event) throws IOException{
+    public void handleConfigChangedSavePathEvent(ConfigChangeSavePathEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         config.setTaskBookFilePath(event.getPath());
         ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
-    }  
+    }
   //@@author
 }

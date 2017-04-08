@@ -44,7 +44,7 @@ public class ResultDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         displayed.setValue(event.message);
     }
-    
+
 
 
 }

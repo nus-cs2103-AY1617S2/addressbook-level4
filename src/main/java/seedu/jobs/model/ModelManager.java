@@ -5,11 +5,6 @@ import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
-import com.google.api.client.repackaged.com.google.common.base.Throwables;
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.transformation.FilteredList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
@@ -130,14 +125,14 @@ public class ModelManager extends ComponentManager implements Model {
         taskBook.redoTask();
         indicateTaskBookChanged();
     }
-   
+
   //=========== path command =======================================================================
   //@@author A0130979U
     @Override
     public void changePath(String path) throws IOException {
-        raise(new SavePathChangedEvent(path,taskBook));  
+        raise(new SavePathChangedEvent(path, taskBook));
     }
-  //@@author  
+  //@@author
     //========== Inner classes/interfaces used for filtering =================================================
 
     interface Expression {

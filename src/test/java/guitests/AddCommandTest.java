@@ -13,7 +13,7 @@ import seedu.jobs.testutil.TestUtil;
 
 
 public class AddCommandTest extends TaskBookGuiTest {
-    
+
     @Test
     public void add() throws IllegalArgumentException, IllegalTimeException, InterruptedException {
         //add one task

@@ -42,14 +42,14 @@ public class Task implements ReadOnlyTask {
         }
 
     }
-    
+
     /**
      * Overloaded constructor with isCompleted parameter
      * @param period TODO
      * @throws IllegalTimeException
      */
-    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period, boolean isCompleted)
-            throws IllegalTimeException {
+    public Task(Name name, Time startTime, Time endTime, Description description, UniqueTagList tags, Period period,
+            boolean isCompleted) throws IllegalTimeException {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
         this.startTime = startTime;

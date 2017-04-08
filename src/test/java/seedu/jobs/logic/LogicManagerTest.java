@@ -112,7 +112,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is not thrown and that the result message is correct.
      * Also confirms that both the 'address book' and the 'last shown list' are as specified.
-     * @throws IOException 
+     * @throws IOException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
@@ -125,10 +125,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * Both the 'address book' and the 'last shown list' are verified to be unchanged.
      * @throws IllegalTimeException
-     * @throws IOException 
+     * @throws IOException
      * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskBook, List)
      */
-    private void assertCommandFailure(String inputCommand, String expectedMessage) throws IllegalTimeException, IOException {
+    private void assertCommandFailure(String inputCommand, String expectedMessage)
+            throws IllegalTimeException, IOException {
         TaskBook expectedTaskBook = new TaskBook(model.getTaskBook());
         List<ReadOnlyTask> expectedShownList = new ArrayList<>(model.getFilteredTaskList());
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTaskBook, expectedShownList);
@@ -141,7 +142,7 @@ public class LogicManagerTest {
      *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
-     * @throws IOException 
+     * @throws IOException
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTaskBook expectedTaskBook,

@@ -40,6 +40,6 @@ public interface TaskBookStorage {
      * @see #saveTaskBook(ReadOnlyTaskBook)
      */
     void saveTaskBook(ReadOnlyTaskBook addressBook, String filePath) throws IOException;
-    
+
     void setFilePath(String filePath);
 }

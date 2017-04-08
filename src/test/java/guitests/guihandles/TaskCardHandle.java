@@ -59,7 +59,7 @@ public class TaskCardHandle extends GuiHandle {
                 .map(node -> ((Labeled) node).getText())
                 .collect(Collectors.toList());
     }
-    
+
     private List<String> getTags(UniqueTagList tags) {
         return tags
                 .asObservableList()

@@ -83,11 +83,11 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-        
+
         case PathCommand.COMMAND_WORD:
             return new PathCommandParser().parse(arguments);
 
-           
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

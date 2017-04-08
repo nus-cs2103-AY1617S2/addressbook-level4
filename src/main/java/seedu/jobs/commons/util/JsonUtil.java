@@ -86,7 +86,6 @@ public class JsonUtil {
     public static <T> void saveJsonFile(T jsonFile, String filePath) throws IOException {
         assert jsonFile != null;
         assert filePath != null;
-
         serializeObjectToJsonFile(new File(filePath), jsonFile);
     }
 

@@ -63,14 +63,14 @@ public class Time implements Comparable<Time> {
         return time.length() > 0;
 
     }
-    
+
     /**
      * Check if the given time has passed
      */
     public boolean isObsolette() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm");
         LocalDateTime thisDate = LocalDateTime.parse(this.value, formatter);
-        return thisDate.compareTo(LocalDateTime.now())==1;
+        return thisDate.compareTo(LocalDateTime.now()) == 1;
     }
 
     /**

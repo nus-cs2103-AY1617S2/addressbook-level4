@@ -81,9 +81,9 @@ public abstract class TaskBookGuiTest {
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData,
 getDataFileLocation()));
         FxToolkit.showStage();
-        try{
+        try {
             Thread.sleep(2000); //wait for the browser to finish loading
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         while (!stage.isShowing());

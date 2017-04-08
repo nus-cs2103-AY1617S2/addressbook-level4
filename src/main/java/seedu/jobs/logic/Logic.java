@@ -16,7 +16,7 @@ public interface Logic {
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws IOException 
+     * @throws IOException
      */
     CommandResult execute(String commandText) throws CommandException, IOException;
 

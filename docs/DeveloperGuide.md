@@ -1,4 +1,4 @@
-# Developer Guide 
+# Developer Guide
 
 * [Appendix A: User Stories](#appendix-a-user-stories)
 * [Appendix B: Use Cases](#appendix-b-use-cases)
@@ -15,7 +15,6 @@
 
     > Having any Java 8 version is not enough. <br>
     This app will not work with earlier versions of Java 8.
-    
 2. **Eclipse** IDE
 3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
@@ -397,39 +396,28 @@ Use case ends.
 
 **Extensions**  
 3a. The input task cannot be found.
-<<<<<<< HEAD
-	3a1. System requests for creating new task.
-	3a2. System confirms creating new task.
-	3a3. System creates a new task. (UC01)
-=======
+
     3a1. System requests for creating new task.
     3a2. System confirms creating new task.
     3a3. System creates a new task. (UC01)
->>>>>>> refs/heads/master
+
 
 5a. System detects an error in the entered data.
-<<<<<<< HEAD
-	5a1. System requests for the correct data.
-	5a2. User enters new data.
-=======
+
     5a1. System requests for the correct data.
     5a2. User enters new data.
->>>>>>> refs/heads/master
+
 Step 5a1-5a2 are repeated until the data entered are correct.
 Use case resumes from step 6.
 
 * a. At  any time, user chooses to cancel the update
-<<<<<<< HEAD
-	*a1. System requests to confirm the cancellation.
-	*a2. User confirms the cancellation.
-	*a3. System discards all the changes.
-=======
+
     *a1. System requests to confirm the cancellation.
     *a2. User confirms the cancellation.
     *a3. System discards all the changes.
->>>>>>> refs/heads/master
 
->Use case ends.
+
+>Use case ends.s
 
 ### UC04 Delete a task
 
@@ -448,12 +436,9 @@ Use case ends.
 **Extensions**
 
 1a. The specified task cannot be found.
-<<<<<<< HEAD
-	1a1. System shows an error message.
-	Use case ends
-=======
+
     1a1. System shows an error message.
->>>>>>> refs/heads/master
+
 
 >Use case ends
 

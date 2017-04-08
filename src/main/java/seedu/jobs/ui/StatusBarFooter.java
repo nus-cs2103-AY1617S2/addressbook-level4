@@ -10,7 +10,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
@@ -56,7 +55,7 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
-    
+
     @Subscribe
     public void handleConfigChangeSavePathEvent(ConfigChangeSavePathEvent abce) {
         setSaveLocation(abce.getPath());
@@ -64,6 +63,6 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
-    
+
 }
 

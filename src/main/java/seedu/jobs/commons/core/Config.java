@@ -1,13 +1,7 @@
 package seedu.jobs.commons.core;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
-
-import com.google.common.eventbus.Subscribe;
-
-import seedu.jobs.commons.events.storage.SavePathChangedEvent;
-import seedu.jobs.commons.util.ConfigUtil;
 
 /**
  * Config values used by the app
@@ -105,5 +99,5 @@ public class Config {
         sb.append("\nTaskBook name : " + taskBookName);
         return sb.toString();
     }
-    
+
 }

@@ -27,7 +27,7 @@ public abstract class Command {
      *
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
-     * @throws IOException 
+     * @throws IOException
      */
     public abstract CommandResult execute() throws CommandException, IOException;
 
