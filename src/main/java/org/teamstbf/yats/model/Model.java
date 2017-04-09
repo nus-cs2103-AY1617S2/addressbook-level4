@@ -106,6 +106,12 @@ public interface Model {
      */
     void updateFilteredListToShowDeadline(Set<String> keywords);
 
+    /**
+     * Updates the filter of the filtered event list to show all tasks that are
+     * sorted by their deadlines
+     */
+    void updateFilteredListToShowDeadline();
+
     /** Updates the filter of the filtered event list to show done tasks */
     void updateFilteredListToShowDone(Set<String> keywords);
 
@@ -159,7 +165,5 @@ public interface Model {
     void updateFilteredListToShowSortedStart();
 
     void updateFilteredListToShowSortedEnd();
-
-    void updateFilteredListToShowDeadline();
 
 }

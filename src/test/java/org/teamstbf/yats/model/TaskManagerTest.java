@@ -19,65 +19,65 @@ import javafx.collections.ObservableList;
 
 public class TaskManagerTest {
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-	private final TaskManager taskManager = new TaskManager();
+    private final TaskManager taskManager = new TaskManager();
 
-	@Test
-	public void constructor() {
-		assertEquals(Collections.emptyList(), taskManager.getTaskList());
-		assertEquals(Collections.emptyList(), taskManager.getTagList());
-	}
+    @Test
+    public void constructor() {
+        assertEquals(Collections.emptyList(), taskManager.getTaskList());
+        assertEquals(Collections.emptyList(), taskManager.getTagList());
+    }
 
-	@Test
-	public void resetData_null_throwsAssertionError() {
-		thrown.expect(AssertionError.class);
-		taskManager.resetData(null);
-	}
+    @Test
+    public void resetData_null_throwsAssertionError() {
+        thrown.expect(AssertionError.class);
+        taskManager.resetData(null);
+    }
 
-	@Test
-	public void resetData_withValidReadOnlyTaskManager_replacesData() {
-		TaskManager newData = new TypicalTestEvents().getTypicalTaskManager();
-		taskManager.resetData(newData);
-		assertEquals(newData, taskManager);
-	}
+    @Test
+    public void resetData_withValidReadOnlyTaskManager_replacesData() {
+        TaskManager newData = new TypicalTestEvents().getTypicalTaskManager();
+        taskManager.resetData(newData);
+        assertEquals(newData, taskManager);
+    }
 
-	@Test
-	public void resetData_withDuplicateTags_throwsAssertionError() {
-		TaskManager typicalTaskManager = new TypicalTestEvents().getTypicalTaskManager();
-		List<ReadOnlyEvent> newEvents = typicalTaskManager.getTaskList();
-		List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
-		// Repeat the first tag twice
-		newTags.add(newTags.get(0));
-		TaskManagerStub newData = new TaskManagerStub(newEvents, newTags);
+    @Test
+    public void resetData_withDuplicateTags_throwsAssertionError() {
+        TaskManager typicalTaskManager = new TypicalTestEvents().getTypicalTaskManager();
+        List<ReadOnlyEvent> newEvents = typicalTaskManager.getTaskList();
+        List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
+        // Repeat the first tag twice
+        newTags.add(newTags.get(0));
+        TaskManagerStub newData = new TaskManagerStub(newEvents, newTags);
 
-		thrown.expect(AssertionError.class);
-		taskManager.resetData(newData);
-	}
+        thrown.expect(AssertionError.class);
+        taskManager.resetData(newData);
+    }
 
-	/**
-	 * A stub ReadOnlyAddressBook whose persons and tags lists can violate
-	 * interface constraints.
-	 */
-	private static class TaskManagerStub implements ReadOnlyTaskManager {
-		private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();
-		private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+    /**
+     * A stub ReadOnlyAddressBook whose persons and tags lists can violate
+     * interface constraints.
+     */
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
+        private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-		TaskManagerStub(Collection<? extends ReadOnlyEvent> events, Collection<? extends Tag> tags) {
-			this.events.setAll(events);
-			this.tags.setAll(tags);
-		}
+        TaskManagerStub(Collection<? extends ReadOnlyEvent> events, Collection<? extends Tag> tags) {
+            this.events.setAll(events);
+            this.tags.setAll(tags);
+        }
 
-		@Override
-		public ObservableList<ReadOnlyEvent> getTaskList() {
-			return events;
-		}
+        @Override
+        public ObservableList<ReadOnlyEvent> getTaskList() {
+            return events;
+        }
 
-		@Override
-		public ObservableList<Tag> getTagList() {
-			return tags;
-		}
-	}
+        @Override
+        public ObservableList<Tag> getTagList() {
+            return tags;
+        }
+    }
 
 }
