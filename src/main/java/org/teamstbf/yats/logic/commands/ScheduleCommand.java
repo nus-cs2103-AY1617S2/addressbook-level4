@@ -28,9 +28,23 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class ScheduleCommand extends Command {
 
+	private static final int INVALID_START_VALUE = -1;
+
+	private static final int SCHEDULE_ENDING_HOUR = 18;
+
+	private static final int SCHEDULE_STARTING_HOUR = 8;
+
+	private static final int INDEX_OF_POSITION_LONG = 1;
+
+	private static final int INDEX_OF_START_LONG = 0;
+
+	private static final int MILLISECONDS_PER_MINUTE = 60000;
+
+	private static final int MILLISECONDS_PER_HOUR = 3600000;
+
 	private static final long LAST_TIME_POSSIBLE = 1577846300000L;
 
-	private static final int INITIAL_START_VALUE = -1;
+	private static final int INITIAL_START_VALUE = INVALID_START_VALUE;
 
 	public static final String COMMAND_WORD = "schedule";
 
@@ -83,8 +97,8 @@ public class ScheduleCommand extends Command {
 		assert model != null;
 		try {
 			model.saveImageOfCurrentTaskManager();
-			long checkedHours = (long) (Double.parseDouble(this.hours) * 3600000);
-			checkedHours = checkedHours + (long) (Double.parseDouble(this.minutes) * 60000);
+			long checkedHours = (long) (Double.parseDouble(this.hours) * MILLISECONDS_PER_HOUR);
+			checkedHours = checkedHours + (long) (Double.parseDouble(this.minutes) * MILLISECONDS_PER_MINUTE);
 			System.out.println(checkedHours);
 			if (checkedHours < MINIMUM_EVENT_LENGTH || checkedHours > MAXIMUM_EVENT_LENGTH) {
 				throw new IllegalArgumentException();
@@ -107,12 +121,12 @@ public class ScheduleCommand extends Command {
 	private int setStartEndIntervalsForNewTask(long checkedHours, List<ReadOnlyEvent> filteredTaskLists)
 			throws IllegalArgumentException {
 		ArrayList<Long> myList = getStartInterval(checkedHours, filteredTaskLists);
-		long end = getEndInterval(checkedHours, myList.get(0));
-		Schedule startTime = new Schedule(new Date(myList.get(0)));
+		long end = getEndInterval(checkedHours, myList.get(INDEX_OF_START_LONG));
+		Schedule startTime = new Schedule(new Date(myList.get(INDEX_OF_START_LONG)));
 		Schedule endTime = new Schedule(new Date(end));
 		this.toSchedule.setStartTime(startTime);
 		this.toSchedule.setEndTime(endTime);
-		return myList.get(1).intValue();
+		return myList.get(INDEX_OF_POSITION_LONG).intValue();
 	}
 
 	private long getEndInterval(long checkedHours, long start) {
@@ -125,18 +139,16 @@ public class ScheduleCommand extends Command {
 		long max = new Date().getTime();
 		long curr;
 		long start = INITIAL_START_VALUE;
-		int startBound = 8;
-		int endBound = 18;
+		int startBound = SCHEDULE_STARTING_HOUR;
+		int endBound = SCHEDULE_ENDING_HOUR;
 		long getStartTime;
 		int count = 0;
 		for (ReadOnlyEvent event : filteredTaskLists) {
 			curr = event.getStartTime().getDate().getTime();
-			System.out.println("Curr is" + (curr/ 60000L));
-			System.out.println("Max is" + (max/ 60000L));
 			if (curr > max) {
 				if ((curr - max) >= checkedHours) {
 					getStartTime = findStartTime(max, checkedHours, curr, startBound, endBound);
-					if (getStartTime != -1) {
+					if (getStartTime != INVALID_START_VALUE) {
 						start = getStartTime;
 						break;
 					}
@@ -218,7 +230,7 @@ public class ScheduleCommand extends Command {
 				}
 			}
 		}
-		return -1;
+		return INVALID_START_VALUE;
 	}
 
 	private long findFirstStartTime(long start, long checkedHours, long end, int startBound, int endBound) {
