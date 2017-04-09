@@ -24,6 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
   * Team Leader
   * Did the initial refactoring from AddressBook to TaskManager
   * Did initial fixes for most JUnits tests
+  * Finetuned UI feedbacks such as highlighting upon redo
 
 -----
 
@@ -33,11 +34,14 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Code quality inspection
 * Features implemented:
    * [Sort](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-sorting-tasks--sort)
-   * [UI Improvements](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-UI)
+   * [List](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#62-listing-tasks--list)
    * [Tests](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-Tests)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0131278H.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0131278H.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
+  * Redesigned UI layout, task cards and color scheme
+  * Implemented To Do and Done Tabs
+  * Finetuned UI feedbacks such as highlighting upon new tasks added or edited
 
 -----
 
@@ -50,6 +54,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
   * Did modification for UI
   * Did initial fixes for most JUnits tests
+  * Did dashboard for Today and Overdue Tasks
 
 -----
 
@@ -62,6 +67,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Save Directory](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#213-save-the-task-manager-to-a-specified-directory-save-or--saveas)
    * [Mark as Done](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#217-marking-a-task-as-done--done-or-complete-or-finish)
    * [Mark as Todo](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#218-marking-a-task-as-todo--undone-or-revert)
+   * [Tests](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/docs/UserGuide.md#28-Tests)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/main/A0114269E.md)][[test code](https://github.com/CS2103JAN2017-F12-B3/main/blob/master/collated/test/A0114269E.md)]
 * Other major contributions:
   * Managing most documentations
