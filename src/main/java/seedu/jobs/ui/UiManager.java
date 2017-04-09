@@ -28,7 +28,6 @@ import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.UserPrefs;
-import seedu.jobs.storage.StorageManager;
 
 /**
  * The manager of the UI component.
@@ -145,19 +144,19 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    public void handleBrowserDisplayEvent(BrowserDisplayEvent event){
+    public void handleBrowserDisplayEvent(BrowserDisplayEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.activateBrowser();
         raise(new CalendarDisplayEvent());
     }
-    
+
     @Subscribe
-    public void handleLoginInfoChangeEvent(LoginInfoChangeEvent event){
+    public void handleLoginInfoChangeEvent(LoginInfoChangeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.loginInfo.setEmail(event.getEmail());
         this.loginInfo.setPassword(event.getPassword());
         raise(new SaveLoginInfoEvent());
     }
-    
+
   //@@author
 }
