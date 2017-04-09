@@ -36,7 +36,7 @@ import seedu.opus.sync.exceptions.SyncException;
 //@@author A0148087W
 /**
  * Handles all sync operations for Google Task sync integration
- *
+ * Credits to @burnflare
  */
 public class SyncServiceGtask extends SyncService {
 
