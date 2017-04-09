@@ -273,9 +273,9 @@ Autocomplete the any command that you have entered in the command box. This appl
 * `undo`
 
 > * Example:
-```javascript
-User enters `f` and presses `TAB`, `find` command will appear in the input box.
-```
+
+`User enters `f` and presses `TAB`, `find` command will appear in the input box.`
+
 ### 2.17. Browse previously entered commands
 
 Browse through previously typed commands that you have entered into Opus using <kbd>↑</kbd> and <kbd>↓</kbd>. Opus will cycle through the list of entered commands in the command box.
