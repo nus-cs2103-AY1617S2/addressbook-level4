@@ -128,6 +128,7 @@ Format: `list by ATTRIBUTE KEYWORD [MORE_KEYWORDS]...`
 
 Where ATTRIBUTE can be location, date, timing, done, tag
 Where KEYWORD can be any string that the user wants to list
+> * When typing an invalid attribute after `list by`, the application defaults to `list`
 > * The list search is not case sensitive. e.g `School` will match `school`
 > * The order of the keywords does not matter. e.g. `singapore Work` will match `Work singapore`
 > * Only location will be searched.
