@@ -26,7 +26,7 @@ Roles and Responsibilities: In charge of Logic and Testing, JUnit Expert, CRUD P
 
 #### [Malik Jabati](https://github.com/SmartyMJ)
 <img src="images/smartymj.png" width="150"><br>
-Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking, Eclipse Expert <br>
+Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking, Eclipse Expert, Stack Overflow Guru <br>
 * Components in charge of: [Model](https://github.com/CS2103JAN2017-F11-B3/main/blob/master/docs/DeveloperGuide.md#24-model-component)
 * Aspects/tools in charge of: Git
 * Features implemented:
@@ -45,7 +45,7 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
 
 #### [Muhammad Ali Rizvi](https://github.com/EntitySK)
 <img src="images/entitysk.png" width="150"><br>
-* Roles and Responsibilities: Team Co-Lead, Code Quality, Deliverables and features, Eclipse, CSS, and JavaFX expert  <br>
+Roles and Responsibilities: Team Co-Lead, Code Quality, Deliverables and features, Eclipse, CSS, and JavaFX expert  <br>
 * Components in charge of: [Storage]()
 * Features implemented:
   * [Task Manager File Location and Random Generation](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#218-data-initialization)
