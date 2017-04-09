@@ -39,7 +39,7 @@ public class CommandBoxHandle extends GuiHandle {
         removeDialog();
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(200); //Give time for the command to take effect
+        guiRobot.sleep(200); // Give time for the command to take effect
     }
 
     private void removeDialog() {
@@ -51,6 +51,14 @@ public class CommandBoxHandle extends GuiHandle {
         pressEnter();
         pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
+    }
+
+    //@@author A0141138N
+    public HelpUGWindowHandle runHelpUGCommand() {
+        enterCommand("help ug");
+        pressEnter();
+        pressEnter();
+        return new HelpUGWindowHandle(guiRobot, primaryStage);
     }
 
     public boolean isErrorStyleApplied() {
