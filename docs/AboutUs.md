@@ -33,7 +33,7 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
    * [List complete tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
    * [List incomplete tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
 * Other major contributions:
-  * Did the refactoring from AddressBook to yTomorrow/Task Manager [[#133](https://github.com/se-edu/addressbook-level4/pull/152) ]
+  * Did the refactoring from AddressBook to yTomorrow/Task Manager [[#118, #119, #123, #131](https://github.com/CS2103JAN2017-F11-B3/main/pull/118)]
   * Set up Travis, Codacy, and Coveralls
   * In charge of code cleanup (i.e. deleting trailing whitespace, converting \r\n\ to \n)
   * Install necessary JARs to build path
