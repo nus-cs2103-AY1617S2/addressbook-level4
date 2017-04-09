@@ -88,7 +88,7 @@ public class EditCommand extends Command implements Undoable {
             }
             //model.updateCurrentFilteredList();
             commandSuccess = true;
-            undoHistory.push(this);
+            UndoHistory.getInstance().push(this);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(taskToEdit)));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         } catch (IllegalValueException e) {

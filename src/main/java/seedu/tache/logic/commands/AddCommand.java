@@ -79,7 +79,7 @@ public class AddCommand extends Command implements Undoable {
         try {
             model.addTask(toAdd);
             commandSuccess = true;
-            undoHistory.push(this);
+            UndoHistory.getInstance().push(this);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(model.getFilteredTaskListIndex(toAdd)));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {

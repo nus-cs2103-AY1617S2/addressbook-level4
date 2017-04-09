@@ -18,10 +18,10 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() {
         // TODO Auto-generated method stub
-        if (undoHistory.isEmpty()) {
+        Undoable lastCommand = UndoHistory.getInstance().pop();
+        if (lastCommand == null) {
             return new CommandResult(MESSAGE_EMPTY_HISTORY);
         } else {
-            Undoable lastCommand = undoHistory.pop();
             assert lastCommand.isUndoable() : "The popped command can't be undone!";
             try {
                 String undoResult = lastCommand.undo();

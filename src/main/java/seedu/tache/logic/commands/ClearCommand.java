@@ -19,7 +19,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         model.resetData(new TaskManager());
-        clearUndoHistory();
+        UndoHistory.getInstance().clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

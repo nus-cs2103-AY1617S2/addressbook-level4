@@ -67,7 +67,7 @@ public class LoadCommand extends Command implements Undoable {
         }
         model.resetData(initialData);
         commandSuccess = true;
-        undoHistory.push(this);
+        UndoHistory.getInstance().push(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPath));
     }
 
@@ -81,7 +81,7 @@ public class LoadCommand extends Command implements Undoable {
         try {
             this.newPath = prevPath;
             this.execute();
-            undoHistory.remove(this);
+            UndoHistory.getInstance().pop();
             return String.format(MESSAGE_SUCCESS, newPath);
         } catch (CommandException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, prevPath));

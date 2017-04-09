@@ -63,7 +63,7 @@ public class CompleteCommand extends Command implements Undoable {
         commandSuccess = processNonRecurringTask(lastShownList, tasksToEdit, completedTasks)
                         && processRecurringTask(lastShownList, tasksToEdit, completedTasks);
 
-        undoHistory.push(this);
+        UndoHistory.getInstance().push(this);
 
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
     }

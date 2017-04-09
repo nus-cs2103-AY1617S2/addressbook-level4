@@ -61,7 +61,7 @@ public class DeleteCommand extends Command implements Undoable {
             originalIndex = model.getTaskManager().getTaskList().indexOf(taskToDelete);
             model.deleteTask(taskToDelete);
             commandSuccess = true;
-            undoHistory.push(this);
+            UndoHistory.getInstance().push(this);
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         } catch (IllegalValueException e) {
