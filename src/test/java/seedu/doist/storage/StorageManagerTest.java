@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
@@ -87,6 +88,45 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getTodoListFilePath());
     }
 
+    //@@author A0140887W
+    @Test
+    public void getAliasListMapFilePath() {
+        assertNotNull(storageManager.getAliasListMapFilePath());
+    }
+
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
+    }
+
+    @Test
+    public void setAliasListMapFilePath() {
+        storageManager.setAliasListMapFilePath("test/aliaslistmap.xml");
+        assertEquals(storageManager.getAliasListMapFilePath(), "test/aliaslistmap.xml");
+    }
+
+    @Test
+    public void setUserPrefsFilePath() {
+        storageManager.setUserPrefsFilePath("test/prefs.xml");
+        assertEquals(storageManager.getUserPrefsFilePath(), "test/prefs.xml");
+    }
+
+    @Test
+    public void setTodoListFilePath() {
+        storageManager.setTodoListFilePath("test/todolist.xml");
+        assertEquals(storageManager.getTodoListFilePath(), "test/todolist.xml");
+    }
+
+    @Test
+    public void handleAbsoluteStoragePathChangedEvent_eventRaised() {
+        storageManager.handleAbsoluteStoragePathChangedEvent(new AbsoluteStoragePathChangedEvent("todo.xml",
+                "alias.xml", "pref.xml"));
+        assertEquals(storageManager.getTodoListFilePath(), "todo.xml");
+        assertEquals(storageManager.getUserPrefsFilePath(), "pref.xml");
+        assertEquals(storageManager.getAliasListMapFilePath(), "alias.xml");
+    }
+
+    //@@author
     @Test
     public void handleTodoListChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
@@ -98,6 +138,7 @@ public class StorageManagerTest {
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
+    //@@author A0140887W-reused
     @Test
     public void handleAliasListMapChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
@@ -109,7 +150,7 @@ public class StorageManagerTest {
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
-
+    //@@author
     /**
      * A Stub class to throw an exception when the save method is called
      */
@@ -125,8 +166,9 @@ public class StorageManagerTest {
         }
     }
 
+    //@@author A0140887W-reused
     /**
-     * A Stub class to throw an exception when the save method is called
+     * A Stub class to throw an exception when the save method for alias list map is called
      */
     class XmlAliasListMapStorageExceptionThrowingStub extends XmlAliasListMapStorage {
 
