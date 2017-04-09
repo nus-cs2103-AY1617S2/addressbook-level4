@@ -156,8 +156,7 @@ public class DoneCommandTest extends EzDoGuiTest {
             c.add(type, increment);
             return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
         } catch (ParseException pe) {
-            // Do nothing as the date is optional
-            // and cannot be parsed as Date object
+            pe.printStackTrace();
         }
         return originalDate;
     }
@@ -177,7 +176,7 @@ public class DoneCommandTest extends EzDoGuiTest {
             taskToDone.setDueDate(new DueDate(newDueDate));
             taskToDone.setRecur(new Recur(""));
         } catch (IllegalValueException e) {
-
+            e.printStackTrace();
         }
         return taskToDone;
     }
