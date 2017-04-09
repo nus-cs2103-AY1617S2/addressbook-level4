@@ -23,7 +23,7 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 
 In our far too hectic lives, there's just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, **Today** helps you focus on the things that you *can* control - the tasks you're going to tackle today.
 
-This user guide is here to guide you through the [installation](#installation-instructions) of our application and give you a walkthrough of our [basic features](#features). We've also provided a [cheatsheet](#command-summary) with a summary of all our commands available.
+This user guide is here to guide you through the [installation](#21-installation-instructions) of our application and give you a walkthrough of our [basic features](#3-features). We've also provided a [cheatsheet](#5-command-summary) with a summary of all our commands available.
 
 ## 2. Quick Start
 
@@ -36,7 +36,7 @@ Let's get you up and running.
 3. Copy the file to the folder you want to use as the home folder for your task manager.
 4. Double-click the file to start the app and you should see an interface like the image below.
 
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/211defaultview.PNG" height="300">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/211defaultview.PNG" height="400">
 
 _Fig 2.1.1. Default view of the task manager_
 
@@ -47,19 +47,19 @@ As you get used to the features, you can use **Today** any way you like. But for
 
 1. At the start of every working day, go through your inbox and `add` new tasks to your tasklist.
 
-<img style="display: block; margin: auto" src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/221addtask.PNG" height="200" align="center">
+<img style="display: block; margin: auto" src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/221addtask.PNG">
 
 2. Once you're done, review your list and mark out the tasks you want to focus on `today`.
 
-<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/222today.PNG" height="200">
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/222today.PNG">
 
 3. Whenever you're `done` with a task, it's shifted out of sight, allowing you to focus on the remaining tasks on hand.
 
-<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/223done.PNG" height="200">
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/223done.PNG">
 
 Rinse and repeat until you have no more tasks left!
 
-<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/224result.PNG" height="200">
+<img style="display: block; margin: auto"  src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/224result.PNG">
 
 ## 3. Features
 
@@ -93,8 +93,6 @@ The first step to organizing your tasks is to make sure you have all of them in 
 
 * `add Study for CS2106`
 * `add Study for CS2106 due today`
-* `add Study for CS2106 due today 3pm`
-* `add Study for CS2106 due 20/03/17 3pm`
 * `add Study for CS2106 due 20/03/17 3pm #lab #cs2106`
 
 #### 3.1.2. Adding a new event
@@ -130,7 +128,7 @@ Most of us have plenty of things to do, which means plenty of tasks on our taskl
 
 Note that **Today** returns everything related to any of the specified keywords. For example, `find math science` returns tasks or events that contain math or science in its title or tags.
 
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/322taskfound.PNG" height="300">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/322taskfound.PNG" >
 
 ##### Format: `find <keyword1 keyword2 ...>`
 
@@ -166,7 +164,7 @@ By default, **Today** already displays all your uncompleted tasks. However, if y
 
 #### 3.2.4. Listing all Completed Tasks
 
-There may be times when you would wish to review the tasks you have already completed. You can easily view all your completed task through **Today**'s `listcompleted` command. This will open a drop down list that will display all the tasks you have completed. Use the previously mentioned `list` command to hide this list again.
+There may be times when you would wish to review the tasks you have already completed. You can easily view all your completed task through **Today**'s `listcompleted` command. This will bring up a list that will display all the tasks you have completed. Use the previously mentioned `list` command to hide this list again.
 
 ##### Format: `listcompleted`
 
@@ -180,7 +178,7 @@ As suggested in the [quick-start guide](#22-how-to-get-started), we recommend th
 
 In the screenshot below, we use the command `today F4` to shift a task initially due tomorrow to today's task list.
 
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/331today.PNG" height="300">
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/331today.PNG">
 
 ##### Format: `today <id>`
 
@@ -216,7 +214,6 @@ Once you're done with a task, mark it as `done` and we'll archive it for you. Do
 ##### Examples
 
 * `done T3`
-* `done F3`
 
 #### 3.3.4. Marking a task as not done
 
@@ -228,14 +225,13 @@ Be honest. If you know you didn't do that task properly, and you want to come ba
 
 ##### Examples
 
-* `notdone 3`
-* `notdone 3`
+* `notdone C3`
 
 #### 3.3.5. Editing a task
 
 We make mistakes all the time. When you've entered a wrong task name, or even a wrong deadline, correct it using the `edit` command.
 
-##### Format: `edit <id> [<new_task_name>] [due <new_date_time>] [#<tag1> #<tag2> ...]`
+##### Format: `edit <id> [<new_task_name>] [due <new_date_time>] [#<tag1> #<tag2> ...]`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR `edit <id> [<new_task_name>] [from <new_date_time> to <new_date_time>] [#<tag1> #<tag2> ...]`
 
 ##### Parameters
 
@@ -245,12 +241,12 @@ We make mistakes all the time. When you've entered a wrong task name, or even a 
 
     new_date_time (optional) : New deadline of your task
 
-    tag1 tag2 ... (optional) : Tags to replace the current tags
+    tag1 tag2 ... (optional) : Tags that replace ALL the current tags.
 
 ##### Examples
 
 * `edit T7 clean house`
-* `edit T7 due 05/06/17 4pm`
+* `edit T7 from 4pm to 6pm`
 * `edit T7 #schoolwork #CS2103`
 * `edit T7 clean house due 04/05/17 6pm #schoolwork #CS2103`
 
@@ -274,6 +270,8 @@ Some tasks don't get `done`. We put them aside and after several eons, we discov
 #### 3.4.1. Renaming tag
 
 You've been tagging a bunch of tasks as `work`. Now that you're quitting your current workplace, you might want to mark them as `oldwork` instead. Instead of going through your tasks one by one, all of the tasks can be instantly retagged with `oldwork` with this function.
+
+Becareful, tag names are case sensitive!
 
 ##### Format: `renametag <tag_name> <new_tag_name>`
 
@@ -332,7 +330,7 @@ Some of you power-users want to keep your tasks synced between devices. Using th
 ##### Examples
 
 * `saveto C:\Users\<YourName>\Desktop`
-* `saveto ../mySecretFolder`
+* `saveto ..\mySecretFolder`
 
 #### 3.6.2. Load different data file
 
@@ -343,7 +341,7 @@ Once you have saved your file to your Dropbox folder, your other computer will n
 ##### Examples
 
 * `usethis C:\Users\<YourName>\Desktop`
-* `usethis ../mySecretFolder`
+* `usethis ..\mySecretFolder`
 
 ##### Parameters
 
@@ -362,7 +360,7 @@ Don't worry if you don't have the luxury of a syncing service. If you want to tr
 ##### Examples
 
 * `export C:\Users\<YourName>\Desktop`
-* `export ../mySecretFolder`
+* `export .\mySecretFolder`
 
 #### 3.6.4. Import file
 
@@ -377,7 +375,7 @@ In your second computer, plug in the USB stick and get the file path of the prev
 ##### Examples
 
 * `import C:\Users\<YourName>\Desktop`
-* `import ../mySecretFolder`
+* `import ..\mySecretFolder`
 
 ### 3.7 Hotkeys
 
