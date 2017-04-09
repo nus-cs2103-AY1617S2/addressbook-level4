@@ -29,7 +29,7 @@ all your corresponding tasks and events.
 2. Download the latest `ProcrastiNomore.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/ProcrastiNomore_Covershot.PNG" width="800">
+   > <img src="images/ProcrastiNomore_Covershot.PNG" width="1000">
 
 5. Using the application
 
@@ -38,7 +38,7 @@ all your corresponding tasks and events.
    >For example, typing **`HELP`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window. <br>
    
-   > <img src="images/ProcrastiNomore_Help.PNG" width="800">
+   > <img src="images/ProcrastiNomore_Help.PNG" width="1000">
 
 6. Refer to the [Features](#Features) section below for more details on the various
 commands you can use.<br>
@@ -60,7 +60,7 @@ You can use this command to open a help window which will open this user guide p
 Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `ADD`
-> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="800">
+> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="1000">
 
 ### 3.2. Adding a new Task: `ADD`
 
@@ -72,21 +72,21 @@ There are 3 forms of task that ProcrastiNomore supports:
 Format: `ADD` task `ON` date/day <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `ON` date/day time `TO` time <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `FROM` date/day time `TO` date/day time <br />
-> <img src="images/ProcrastiNomore_Before_Add_Event_Task.PNG" width="800">
-> <img src="images/ProcrastiNomore_After_Add_Event_Task.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Add_Event_Task.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Add_Event_Task.PNG" width="1000">
 
 #### 3.2.2. Deadlines
 
 Format: `ADD` task `BY` date/time/date time
-> <img src="images/ProcrastiNomore_Before_Add_Deadline.PNG" width="800">
-> <img src="images/ProcrastiNomore_After_Add_Deadline.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Add_Deadline.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Add_Deadline.PNG" width="1000">
 
 
 #### 3.2.3. Basic
 
 Format:	`ADD` task
-> <img src="images/ProcrastiNomore_Before_Add_Floating_Task.PNG" width="800">
-> <img src="images/ProcrastiNomore_After_Add_Floating_Task.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Add_Floating_Task.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Add_Floating_Task.PNG" width="1000">
 
 Examples:
 
@@ -110,15 +110,15 @@ There are 2 types of updates that ProcrastiNomore supports:
 #### 3.3.1. Update task name
 
 Format: `UPDATE` `Task Index` `New Task Name`
-> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="800">
-> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="1000">
 
 #### 3.3.2. Update task time/date
 
 Format: `UPDATE` `Task Index` `FROM` Start time <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `TO` End time
-> <img src="images/ProcrastiNomore_Before_Update_Task_Time.PNG" width="800">
-> <img src="images/ProcrastiNomore_After_Update_Task_Time.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Update_Task_Time.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Update_Task_Time.PNG" width="1000">
 
 Examples:
 * `UPDATE` `1` eat dinner
