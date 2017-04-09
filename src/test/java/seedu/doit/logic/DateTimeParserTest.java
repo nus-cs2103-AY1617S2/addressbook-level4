@@ -36,6 +36,12 @@ public class DateTimeParserTest {
     }
 
     @Test
+    public void parse_EmptyString() throws Exception {
+        Optional<LocalDateTime> dateParsed = DateTimeParser.parseDateTime("");
+        assertFalse(dateParsed.isPresent());
+    }
+
+    @Test
     public void parse_NullString() throws Exception {
         thrown.expect(NullPointerException.class);
         DateTimeParser.parseDateTime(null);
