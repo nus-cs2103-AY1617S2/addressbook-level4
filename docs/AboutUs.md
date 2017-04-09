@@ -36,8 +36,9 @@ Role: Developer <br>
    * [Redo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
+   * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
 * Other major contributions:
-    * Set up back end for file manipulation
+   * Set up back end for file manipulation
 -----
 
 #### [Edwin Yeap](http://github.com/edwinyeap)
