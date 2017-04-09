@@ -51,7 +51,7 @@ public class AddCommand extends Command implements Undoable {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String nameStr, Optional<String> startDateTimeStr, Optional<String> endDateTimeStr,
-            Set<String> tagsStr) throws IllegalValueException {
+            Set<String> tagsStr, Optional<RecurInterval> recurInterval) throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagsStr) {
             tagSet.add(new Tag(tagName));
