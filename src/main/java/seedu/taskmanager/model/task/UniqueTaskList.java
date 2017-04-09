@@ -2,6 +2,7 @@ package seedu.taskmanager.model.task;
 
 import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDATE;
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
@@ -207,26 +208,34 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0114523U
     /**
-     * Filters task list based on end date (overdue or due today).
+     * Filters task list to show overdue tasks
      */
-    public ObservableList<Task> getTaskListByDate(Date endDate) {
-        if (endDate.before(EndDate.today)) {
-            return internalList.filtered(DatePredicate.isOverdue());
-        } else if (endDate.equals(EndDate.today)) {
-            return internalList.filtered(DatePredicate.isToday());
-        } else {
-            return internalList;
-        }
+    public ObservableList<Task> getOverdueTaskList(Date today) {
+        return internalList.filtered(OverdueTaskPredicate.overdue(today));
     }
 
-    static class DatePredicate {
-        public static Predicate<Task> isOverdue() {
-            return p -> p.getEndDate().equals(EndDate.today);
+    static class OverdueTaskPredicate {
+
+        public static Predicate<Task> overdue(Date today) {
+            return p -> p.getEndDate().isPresent() ? p.getEndDate().get().before(today) : false;
         }
 
-        public static Predicate<Task> isToday() {
-            return p -> p.getEndDate().equals(EndDate.today);
+    }
+
+    /**
+     * Filters task list to show overdue tasks
+     */
+    public ObservableList<Task> getTodayTaskList(Date today) {
+        return internalList.filtered(TodayTaskPredicate.dueToday(today));
+    }
+
+    static class TodayTaskPredicate {
+
+        public static Predicate<Task> dueToday(Date today) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return p -> p.getEndDate().isPresent() ? sdf.format(today).equals(sdf.format(p.getEndDate().get())) : false;
         }
+
     }
     // @@author
 
