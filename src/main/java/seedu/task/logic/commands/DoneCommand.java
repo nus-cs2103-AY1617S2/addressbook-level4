@@ -4,6 +4,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0139975J
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "done";
@@ -17,12 +18,12 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Done Task: %1$s";
 
     public final int targetIndex;
-    //@@author A0139975J
+
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex - 1;
     }
 
-    //@@author A0139975J
+
     @Override
     public CommandResult execute() throws CommandException {
 

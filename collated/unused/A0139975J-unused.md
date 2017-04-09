@@ -1,5 +1,5 @@
 # A0139975J-unused
-###### \FindDateCommand.java
+###### /FindDateCommand.java
 ``` java
 // merged with find command
 public class FindDateCommand extends Command {
@@ -26,7 +26,7 @@ public class FindDateCommand extends Command {
 
 }
 ```
-###### \FindDateCommandParser.java
+###### /FindDateCommandParser.java
 ``` java
 // merged with find command
 public class FindDateCommandParser extends CommandParser {
@@ -46,7 +46,7 @@ public class FindDateCommandParser extends CommandParser {
 
 }
 ```
-###### \ListByDoneCommand.java
+###### /ListByDoneCommand.java
 ``` java
 // merged with list command
 public class ListByDoneCommand extends Command {
@@ -73,7 +73,7 @@ public class ListByDoneCommand extends Command {
     }
 }
 ```
-###### \ListByDoneCommandParser.java
+###### /ListByDoneCommandParser.java
 ``` java
 // merged with list command
 public class ListByDoneCommandParser extends CommandParser {
@@ -88,7 +88,7 @@ public class ListByDoneCommandParser extends CommandParser {
 
 }
 ```
-###### \ListByNotDoneCommand.java
+###### /ListByNotDoneCommand.java
 ``` java
 // merged with list command
 public class ListByNotDoneCommand extends Command {
@@ -115,7 +115,7 @@ public class ListByNotDoneCommand extends Command {
     }
 }
 ```
-###### \ListByNotDoneCommandParser.java
+###### /ListByNotDoneCommandParser.java
 ``` java
 // merged with list command
 public class ListByNotDoneCommandParser extends CommandParser {

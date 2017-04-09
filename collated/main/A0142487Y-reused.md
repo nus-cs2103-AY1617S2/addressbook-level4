@@ -1,5 +1,36 @@
 # A0142487Y-reused
-###### \java\seedu\task\MainApp.java
+###### /java/seedu/task/logic/commands/FindExactCommand.java
+``` java
+public class FindExactCommand extends Command {
+
+    private static final boolean isExact = true;
+
+    public static final String COMMAND_WORD_1 = "findexact";
+    public static final String COMMAND_WORD_2 = "fexact";
+    public static final String COMMAND_WORD_3 = "finde";
+    public static final String COMMAND_WORD_4 = "fe";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD_1 + ": Finds all tasks whose names contain all of "
+            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD_1 + " do homework";
+
+    private final Set<String> keywords;
+
+    public FindExactCommand(Set<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public CommandResult execute() {
+        model.sortTaskList();
+        model.updateFilteredTaskList(keywords, isExact);
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+    }
+
+}
+```
+###### /java/seedu/task/MainApp.java
 ``` java
     protected UserPrefs initPrefs(Config config) {
         assert config != null;
@@ -32,7 +63,7 @@
     }
 
 ```
-###### \java\seedu\task\model\ModelManager.java
+###### /java/seedu/task/model/ModelManager.java
 ``` java
     private class TagQualifier implements Qualifier {
 
@@ -47,14 +78,9 @@
             return CollectionUtil.doesAnyStringMatch(task.getTags().getGenericCollection(), tagKeyword);
         }
 
-        @Override
-        public String toString() {
-            return "Tag = " + tagKeyword;
-        }
     }
-
 ```
-###### \java\seedu\task\ui\BrowserPanel.java
+###### /java/seedu/task/ui/BrowserPanel.java
 ``` java
     /**
      * @param placeholder The AnchorPane where the BrowserPanel must be inserted
@@ -73,7 +99,7 @@
 //    }
 
 ```
-###### \java\seedu\task\ui\CommandBox.java
+###### /java/seedu/task/ui/CommandBox.java
 ``` java
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic, String...fxml) {
         super(fxml.length == 0 ? FXML : fxml[0]);
@@ -82,7 +108,7 @@
     }
 
 ```
-###### \java\seedu\task\ui\MainWindow.java
+###### /java/seedu/task/ui/MainWindow.java
 ``` java
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, String... fxml) {
         super(fxml.length == 0 ? FXML : fxml[0]);
@@ -105,7 +131,7 @@
     }
 
 ```
-###### \java\seedu\task\ui\ResultDisplay.java
+###### /java/seedu/task/ui/ResultDisplay.java
 ``` java
     public ResultDisplay(AnchorPane placeHolder, String...fxml) {
         super(fxml.length == 0 ? FXML : fxml[0]);
@@ -117,7 +143,7 @@
     }
 
 ```
-###### \java\seedu\task\ui\StatusBarFooter.java
+###### /java/seedu/task/ui/StatusBarFooter.java
 ``` java
     public StatusBarFooter(AnchorPane placeHolder, String saveLocation, String...fxml) {
         super(fxml.length == 0 ? FXML : fxml[0]);
@@ -128,7 +154,7 @@
     }
 
 ```
-###### \java\seedu\task\ui\TaskListPanel.java
+###### /java/seedu/task/ui/TaskListPanel.java
 ``` java
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, Theme theme,
             String... fxml) {
@@ -139,7 +165,7 @@
     }
 
 ```
-###### \resources\view\CommandBoxDark.fxml
+###### /resources/view/CommandBoxDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextField?>
@@ -157,7 +183,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### \resources\view\CommandBoxLight.fxml
+###### /resources/view/CommandBoxLight.fxml
 ``` fxml
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
@@ -167,7 +193,7 @@
 </AnchorPane>
 
 ```
-###### \resources\view\DarkTheme.css
+###### /resources/view/DarkTheme.css
 ``` css
 .background {
     -fx-background-color: derive(#1d1d1d, 20.0%);
@@ -527,7 +553,7 @@
 
 
 ```
-###### \resources\view\MainWindowDark.fxml
+###### /resources/view/MainWindowDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -603,7 +629,7 @@
    </children>
 </VBox>
 ```
-###### \resources\view\MainWindowLight.fxml
+###### /resources/view/MainWindowLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -683,7 +709,7 @@
    </stylesheets>
 </VBox>
 ```
-###### \resources\view\ResultDisplayDark.fxml
+###### /resources/view/ResultDisplayDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
@@ -708,7 +734,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### \resources\view\ResultDisplayLight.fxml
+###### /resources/view/ResultDisplayLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
@@ -728,7 +754,7 @@
    </stylesheets>
 </AnchorPane>
 ```
-###### \resources\view\StatusBarFooterDark.fxml
+###### /resources/view/StatusBarFooterDark.fxml
 ``` fxml
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.StatusBar?>
@@ -743,7 +769,7 @@
  </children>
 </GridPane>
 ```
-###### \resources\view\StatusBarFooterLight.fxml
+###### /resources/view/StatusBarFooterLight.fxml
 ``` fxml
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.StatusBar?>
@@ -758,7 +784,7 @@
  </children>
 </GridPane>
 ```
-###### \resources\view\TaskListCardDark.fxml
+###### /resources/view/TaskListCardDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -821,7 +847,7 @@
    </stylesheets>
 </HBox>
 ```
-###### \resources\view\TaskListCardLight.fxml
+###### /resources/view/TaskListCardLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -880,7 +906,7 @@
    </stylesheets>
 </HBox>
 ```
-###### \resources\view\TaskListPanelDark.fxml
+###### /resources/view/TaskListPanelDark.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
@@ -900,7 +926,7 @@
     </children>
 </VBox>
 ```
-###### \resources\view\TaskListPanelLight.fxml
+###### /resources/view/TaskListPanelLight.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.scene.control.ListView?>

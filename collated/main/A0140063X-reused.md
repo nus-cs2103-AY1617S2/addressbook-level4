@@ -1,5 +1,5 @@
 # A0140063X-reused
-###### \java\seedu\task\commons\core\GoogleCalendar.java
+###### /java/seedu/task/commons/core/GoogleCalendar.java
 ``` java
 public class GoogleCalendar {
     public static final String CALENDAR_ID = "primary";
@@ -10,7 +10,7 @@ public class GoogleCalendar {
         "Keep It Tidy";
 
     /** Directory to store user credentials for this application. */
-    private static java.io.File dataStoreDir = new java.io.File(
+    private static final java.io.File DATA_STORE_FILE = new java.io.File(
         System.getProperty("user.home"), ".credentials/keep-it-tidy");
 
     /** Global instance of the {@link FileDataStoreFactory}. */
@@ -31,10 +31,12 @@ public class GoogleCalendar {
     private static final List<String> SCOPES =
         Arrays.asList(CalendarScopes.CALENDAR);
 
+    private static boolean testNoInternet = false;
+
     static {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-            dataStoreFactory = new FileDataStoreFactory(dataStoreDir);
+            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_FILE);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);
@@ -60,9 +62,13 @@ public class GoogleCalendar {
                 .setDataStoreFactory(dataStoreFactory)
                 .setAccessType("offline")
                 .build();
+
+        if (testNoInternet) {
+            throw new IOException("Connection fail!");
+        }
         Credential credential = new AuthorizationCodeInstalledApp(
             flow, new LocalServerReceiver()).authorize("user");
-        logger.info("Credentials saved to " + dataStoreDir.getAbsolutePath());
+        logger.info("Credentials saved to " + DATA_STORE_FILE.getAbsolutePath());
         return credential;
     }
 
@@ -80,8 +86,17 @@ public class GoogleCalendar {
                 .build();
     }
 
+    /**
+     * This is used for JUnit testing only.
+     * It simulates the situation where KIT does not have internet and thus is unable to get user's credentials.
+     */
+    public static void setNoInternetTrue() {
+        testNoInternet = true;
+    }
+
+}
 ```
-###### \java\seedu\task\logic\commands\SmartAddCommand.java
+###### /java/seedu/task/logic/commands/SmartAddCommand.java
 ``` java
     @Override
     public CommandResult execute() throws CommandException {
@@ -98,7 +113,7 @@ public class GoogleCalendar {
 
 }
 ```
-###### \java\seedu\task\logic\parser\GetGoogleCalendarCommandParser.java
+###### /java/seedu/task/logic/parser/GetGoogleCalendarCommandParser.java
 ``` java
 public class GetGoogleCalendarCommandParser extends CommandParser {
 
@@ -109,7 +124,7 @@ public class GetGoogleCalendarCommandParser extends CommandParser {
 
 }
 ```
-###### \java\seedu\task\logic\parser\PostGoogleCalendarCommandParser.java
+###### /java/seedu/task/logic/parser/PostGoogleCalendarCommandParser.java
 ``` java
 public class PostGoogleCalendarCommandParser extends CommandParser {
 
@@ -124,7 +139,7 @@ public class PostGoogleCalendarCommandParser extends CommandParser {
     }
 }
 ```
-###### \java\seedu\task\logic\parser\RedoCommandParser.java
+###### /java/seedu/task/logic/parser/RedoCommandParser.java
 ``` java
 public class RedoCommandParser extends CommandParser {
 
@@ -135,7 +150,7 @@ public class RedoCommandParser extends CommandParser {
 
 }
 ```
-###### \java\seedu\task\logic\parser\SmartAddCommandParser.java
+###### /java/seedu/task/logic/parser/SmartAddCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new QuickAddCommand object
@@ -169,7 +184,7 @@ public class SmartAddCommandParser extends CommandParser {
 
 }
 ```
-###### \java\seedu\task\logic\parser\UndoCommandParser.java
+###### /java/seedu/task/logic/parser/UndoCommandParser.java
 ``` java
 public class UndoCommandParser extends CommandParser {
 

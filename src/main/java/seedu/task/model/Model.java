@@ -75,7 +75,7 @@ public interface Model {
 
     //@@author A0139975J
     /** Updates the filter of the filtered task list to filter by the given date */
-//    void updateFilteredTaskList(Date value);
+    //void updateFilteredTaskList(Date value);
 
   //@@author A0139975J
     /** Updates the filer of the filtered task list to filter by done or undone task */
