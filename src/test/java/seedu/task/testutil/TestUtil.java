@@ -175,10 +175,6 @@ public class TestUtil {
             }
         }
         return new XmlSerializableTaskList(tl);
-
-    // public static XmlSerializableTaskList generateSampleStorageAddressBook() {
-    //     return new XmlSerializableTaskList(new TaskList());
-    // possible test problem??!?
     }
     //@@author
 
