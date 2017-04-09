@@ -21,8 +21,8 @@ public class MarkDoneCommand extends Command {
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
 			+ "by the index number used in the last task listing. "
-			+ "Parameters: INDEX (must be a positive integer) "
-			+ "Example: " + COMMAND_WORD + " 1";
+			+ "\n" + "Parameters: INDEX (must be a positive integer) "
+			+ "\n" + "Example: " + COMMAND_WORD + " 1";
 
 	public final int targetIndex;
 

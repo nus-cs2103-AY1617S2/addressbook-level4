@@ -16,7 +16,7 @@ import guitests.guihandles.EventCardHandle;
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class EditCommandTest extends TaskManagerGuiTest {
 
-	// The list of persons in the person list panel is expected to match this
+	// The list of events in the event list panel is expected to match this
 	// list.
 	// This list is updated with every successful call to assertEditSuccess().
 	TestEvent[] expectedTaskList = td.getTypicalTasks();
@@ -95,7 +95,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 	}
 
 	@Test
-	public void edit_invalidPersonIndex_failure() {
+	public void edit_invalidEventIndex_failure() {
 		commandBox.runCommand("edit 8 Bobby");
 		assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 	}
@@ -119,7 +119,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 	}
 
 	@Test
-	public void edit_missingPersonIndex_failure() {
+	public void edit_missingEventIndex_failure() {
 		commandBox.runCommand("edit Bobby");
 		assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 	}

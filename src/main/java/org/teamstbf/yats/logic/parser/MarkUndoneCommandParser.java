@@ -9,7 +9,6 @@ import org.teamstbf.yats.logic.commands.BatchDeleteCommand;
 import org.teamstbf.yats.logic.commands.BatchUnmarkDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
-import org.teamstbf.yats.logic.commands.MarkDoneCommand;
 import org.teamstbf.yats.logic.commands.MarkUndoneCommand;
 
 //@@author A0139448U
@@ -37,7 +36,7 @@ public class MarkUndoneCommandParser {
 
 		Optional<Integer> index = ParserUtil.parseIndex(args);
 		if (!index.isPresent()) {
-			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDoneCommand.MESSAGE_USAGE));
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkUndoneCommand.MESSAGE_USAGE));
 		}
 
 		return new MarkUndoneCommand(index.get());

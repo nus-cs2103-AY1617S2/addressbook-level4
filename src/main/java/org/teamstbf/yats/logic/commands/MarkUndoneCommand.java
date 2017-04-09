@@ -23,8 +23,9 @@ public class MarkUndoneCommand extends Command {
 	public static final String MESSAGE_NO_DONE_OCCURENCE = "Recurring task has no done occurrence.";
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as not done "
-			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
-			+ "Example: " + COMMAND_WORD + " 1";
+			+ "by the index number used in the last task listing. "
+			+ "\n" + "Parameters: INDEX (must be a positive integer) "
+			+ "\n" + "Example: " + COMMAND_WORD + " 1";
 
 	private static final String TASK_DONE_IDENTIFIER = "Yes";
 
