@@ -50,7 +50,6 @@ Now, let's get you started!
 
 ### Starting KIT
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui_Empty.png" width="600">
 
 5. (Optional) You can choose to login to your Google Calendar.
 
@@ -65,8 +64,8 @@ Now, let's get you started!
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 7. Some example commands you can try:
    * **`list`** : lists all task
-       *  > <img src="images/listEmptyBefore.png" width="600">
-       *  > <img src="images/listEmptyAfter.png" width="600">
+       *  > <img src="images/listBefore.png" width="600">
+       *  > <img src="images/listAfter.png" width="600">
    * **`add`**`  do 2103 project r/waiting for john's reply s/03-03-2017 l/nus soc t/school` : adds a task named `do 2103 project` to KIT.
        * > <img src="images/addTaskBefore.png" width="600">
        * > <img src="images/addTaskAfter.png" width="600">
