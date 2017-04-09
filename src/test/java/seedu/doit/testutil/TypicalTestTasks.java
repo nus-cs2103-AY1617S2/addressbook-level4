@@ -83,6 +83,11 @@ public class TypicalTestTasks {
                 .withDeadline("next week").withTags("tagme").build();
     }
 
+    public static TestTask getFloatingTestTaskWithDuplicateTags() throws IllegalValueException {
+        return new TaskBuilder().withName("Duplicate tag").withDescription("duplicate tag success").withPriority("med")
+                .withTags("same").withTags("same").build();
+    }
+
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);

@@ -43,6 +43,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         assertAllPanelsMatch(currentList);
 
+        // add floating task with duplicate tags
+        taskToAdd = TypicalTestTasks.getFloatingTestTaskWithDuplicateTags();
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertAllPanelsMatch(currentList);
+
         // add duplicate floating task
         this.commandBox.runCommand(TypicalTestTasks.getFloatingTestTask().getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
