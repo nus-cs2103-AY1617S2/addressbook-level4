@@ -7,6 +7,7 @@ import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 //@@author A0135739W
@@ -70,7 +71,10 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
             return "Restore Task";
 
         case DoneCommand.COMMAND_WORD:
-            return "Undone";
+            return UndoneCommand.COMMAND_WORD;
+
+        case UndoneCommand.COMMAND_WORD:
+            return DoneCommand.COMMAND_WORD;
 
         case ClearCommand.COMMAND_WORD:
             return "Restore OneTwoDo";
