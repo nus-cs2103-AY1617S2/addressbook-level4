@@ -18,16 +18,16 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose titles contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks which titles contain any of "
             + "the specified keywords (case-sensitive)\n"
-            + "or whose date is between specified time duration "
-            + "or whose tag list contains any of the specified tags.\n "
-            + "Parameters: [KEYWORD]... [a/EARLIEST_TIME] [b/LATEST_TIME] [t/TAG]...\n"
+            + "and/or which date is within the specified time duration "
+            + "and/or which tag list contains any of the specified tags.\n "
+            + "Parameters: [KEYWORD...] [a/AFTER_DATETIME] [b/BEFORE_DATETIME] [t/TAGS...]\n"
             + "Example: " + COMMAND_WORD + " CS3230 Midterm a/04-04-17 0000 t/exam";
-    public static final String MESSAGE_TIME_CONSTRAINTS = "The time a task happens before should be later "
-                                                           + "than that it happens after!";
+    public static final String MESSAGE_TIME_CONSTRAINTS = "The before date and time must be later than "
+            + "the after date and time.";
 
-    public static final String MESSAGE_SUCCESS = " GeeKeep is showing all the tasks which:\n";
+    public static final String MESSAGE_SUCCESS = "\nGeeKeep is showing all the tasks which:\n";
 
     private final Set<String> keywords;
     private final UniqueTagList tags;
@@ -71,21 +71,21 @@ public class FindCommand extends Command {
             Optional<String> latestTime,
             Set<String> tags) {
         if (!keywords.isEmpty()) {
-            datailedSuccessMsg  += "Contains any of keywords in " + keywords + " in title;\n";
+            datailedSuccessMsg  += "Contains the keyword(s) " + keywords + " in title\n";
         }
 
         if (earliestTime.isPresent()) {
-            datailedSuccessMsg += "Has starting time[event] or deadline[deadline] after "
-                              + earliestTime.get() + ";\n";
+            datailedSuccessMsg += "Happens after "
+                              + earliestTime.get() + "\n";
         }
 
         if (latestTime.isPresent()) {
-            datailedSuccessMsg += "Has starting time[event] or deadline[deadline] before "
-                              + latestTime.get() + ";\n";
+            datailedSuccessMsg += "Happens before "
+                              + latestTime.get() + "\n";
         }
 
         if (!tags.isEmpty()) {
-            datailedSuccessMsg += "Has any of tags in " + tags + ";\n";
+            datailedSuccessMsg += "Contains the tags " + tags + "\n";
         }
     }
 

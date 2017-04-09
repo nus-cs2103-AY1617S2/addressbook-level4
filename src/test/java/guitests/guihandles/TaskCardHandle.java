@@ -70,31 +70,9 @@ public class TaskCardHandle extends GuiHandle {
     //TODO only works for v0.2
     public boolean isSameTask(ReadOnlyTask task) {
         return getTitle().equals(task.getTitle().title)
-                && getDate().equals(getDisplayedDate(task))
-                && getDescription().equals(getDisplayedLocation(task))
+                && getDate().equals(task.getTaskDisplayedDateString())
+                && getDescription().equals(task.getTaskDisplayedDescriptionString())
                 && getTags().equals(getTags(task.getTags()));
-    }
-
-    public String getDisplayedDate(ReadOnlyTask task) {
-        String displayedDate = "";
-        if (task.getEndDateTime() != null && task.getStartDateTime() != null) {
-            displayedDate = "From: " + task.getStartDateTime() + " until " + task.getEndDateTime();
-        } else if (task.getEndDateTime() != null && task.getStartDateTime() == null) {
-            displayedDate = "By: " + task.getEndDateTime().value;
-        } else {
-            displayedDate = "-";
-        }
-        return displayedDate;
-    }
-
-    public String getDisplayedLocation(ReadOnlyTask task) {
-        String displayedLocation = "";
-        if (task.getDescriptoin() == null || task.getDescriptoin().equals("")) {
-            displayedLocation = "Details: -";
-        } else {
-            displayedLocation = "Details: " + task.getDescriptoin().value;
-        }
-        return displayedLocation;
     }
 
     @Override

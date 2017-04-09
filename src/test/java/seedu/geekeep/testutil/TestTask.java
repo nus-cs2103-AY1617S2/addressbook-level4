@@ -154,5 +154,29 @@ public class TestTask implements ReadOnlyTask {
         return 0;
     }
 
+    @Override
+    public String getTaskDisplayedDateString() {
+        String displayedDate = "";
+        if (this.getEndDateTime() != null && this.getStartDateTime() != null) {
+            displayedDate = "From: " + this.getStartDateTime() + " until " + this.getEndDateTime();
+        } else if (this.getEndDateTime() != null && this.getStartDateTime() == null) {
+            displayedDate = "By: " + this.getEndDateTime().value;
+        } else {
+            displayedDate = "-";
+        }
+        return displayedDate;
+    }
+
+    @Override
+    public String getTaskDisplayedDescriptionString() {
+        String displayedLocation = "";
+        if (this.getDescriptoin() == null || this.getDescriptoin().equals("")) {
+            displayedLocation = "Details: -";
+        } else {
+            displayedLocation = "Details: " + this.getDescriptoin().value;
+        }
+        return displayedLocation;
+    }
+
 
 }

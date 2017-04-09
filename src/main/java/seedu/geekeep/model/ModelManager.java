@@ -120,7 +120,9 @@ public class ModelManager extends ComponentManager implements Model {
         updateGeekeepHistory(originalGeekeepClone);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
+
         updateFilteredListToShowAll(TaskCategory.NOCHANGE);
+
         indicateGeeKeepChanged();
     }
     //@@author
@@ -200,6 +202,22 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SwitchTaskCategoryEvent(TaskCategory.UPCOMING));
     }
 
+    //@@author A0139438W
+    @Override
+    public int getNumberOfEvents() {
+        return (new UnmodifiableObservableList<>(filteredTasks)).filtered(t -> t.isEvent()).size();
+    }
+
+    @Override
+    public int getNumberOfDeadlines() {
+        return (new UnmodifiableObservableList<>(filteredTasks)).filtered(t -> t.isDeadline()).size();
+    }
+
+    @Override
+    public int getNumberOfFloatingTasks() {
+        return (new UnmodifiableObservableList<>(filteredTasks)).filtered(t -> t.isFloatingTask()).size();
+    }
+
     //@@author A0147622H
     @Override
     public String undo() throws NothingToUndoException {
@@ -246,6 +264,8 @@ public class ModelManager extends ComponentManager implements Model {
         pastGeeKeeps.add(originalGeekeepClone);
         futureGeeKeeps.clear();
     }
+
+
 
     @Override
     public void setGeekeepFilePath(String filePath) {
