@@ -253,6 +253,8 @@ The calendar is updated whenever there are relevant changes made to the task man
 
 ### 3.3. Logic Component
 
+**Author:** Brandon Tan Jian Sin
+
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 3.3.1 : Structure of the Logic Component_
 
@@ -636,7 +638,7 @@ Use case ends.
 > 2a1. `Tache` shows that it has nothing to undo <br>
 Use case ends
 
-Author: Brandon Tan Jian Sin
+**Author:** Brandon Tan Jian Sin
 
 ### Use case: Edit task
 
