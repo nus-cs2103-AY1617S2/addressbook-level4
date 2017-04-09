@@ -47,8 +47,8 @@ public class CommandBoxTest extends GeeKeepGuiTest {
 
     @Test
     public void commandBox_commandSucceedsAfterFailedCommand_textClearedAndErrorStyleClassRemoved() {
-        // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
+        //One failed command
+        commandBox.runCommand(COMMAND_THAT_FAILS);
 
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
@@ -56,4 +56,16 @@ public class CommandBoxTest extends GeeKeepGuiTest {
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
+    //@@author A0148037E
+    @Test
+    public void commandBox_commandSucceedsAfterMultipleFailedCommands_textClearedAndErrorStyleClassRemoved() {
+        //Multiple failed commands
+        commandBox.runCommand(COMMAND_THAT_FAILS);
+        commandBox.runCommand(COMMAND_THAT_FAILS);
+
+        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
+        assertEquals("", commandBox.getCommandInput());
+        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+    }
+    //@@author
 }
