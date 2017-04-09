@@ -46,7 +46,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     // @@author A0139520L
     @Test
-    public void add_eventWithClashingTimeSlots_success() {
+    public void addEventWithClashingTimeSlotsSuccess() {
 
         String clashFeedback = "Clash with task: Index ";
 

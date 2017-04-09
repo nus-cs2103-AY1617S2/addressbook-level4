@@ -12,29 +12,27 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UnmarkCommand;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TestTask;
-import seedu.taskmanager.testutil.TestUtil;
 
 public class UnmarkCommandTest extends TaskManagerGuiTest {
 
     // @@author A0139520L
     @Test
-    public void unmark_nonEmptyList() {
+    public void unmarkNonEmptyList() {
         TestTask[] currentList = td.getTypicalTasks();
         assertUnmarkResult("1", currentList); // no results
 
     }
 
     @Test
-    public void unmark_invalidIndex() {
+    public void unmarkInvalidIndex() {
         TestTask[] currentList = td.getTypicalTasks();
         assertUnmarkResult("10", currentList); // no results
 
     }
 
     @Test
-    public void unmark_IncompletedTask() {
-        TestTask[] currentList = td.getTypicalTasks();
-        assertUnmarkIncompleted("3", currentList); // no results
+    public void unmarkIncompletedTask() {
+        assertUnmarkIncompleted("3"); // no results
 
     }
 
@@ -96,7 +94,7 @@ public class UnmarkCommandTest extends TaskManagerGuiTest {
         }
     }
 
-    private void assertUnmarkIncompleted(String filteredListIndex, TestTask... currentList) {
+    private void assertUnmarkIncompleted(String filteredListIndex) {
 
         commandBox.runCommand("LIST");
         commandBox.runCommand("UNMARK " + filteredListIndex);

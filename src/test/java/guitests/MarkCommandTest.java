@@ -12,7 +12,6 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.MarkCommand;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.testutil.TestTask;
-import seedu.taskmanager.testutil.TestUtil;
 
 public class MarkCommandTest extends TaskManagerGuiTest {
 
@@ -20,7 +19,7 @@ public class MarkCommandTest extends TaskManagerGuiTest {
 
     // successfully mark incompleted task in list
     @Test
-    public void mark_nonEmptyList() {
+    public void markNonEmptyList() {
         TestTask[] currentList = td.getTypicalTasks();
         TestTask completedTask = td.completedEatBreakfast;
         assertMarkSuccess("1", completedTask, currentList);
@@ -29,7 +28,7 @@ public class MarkCommandTest extends TaskManagerGuiTest {
 
     // mark invalid index and thrown invalid index exception
     @Test
-    public void mark_invalidIndex() {
+    public void markInvalidIndex() {
         TestTask[] currentList = td.getTypicalTasks();
         assertMarkSuccess("10", td.completedEatBreakfast, currentList); // invalid
                                                                         // index
@@ -37,7 +36,7 @@ public class MarkCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void mark_alreadyCompletedTask() {
+    public void markAlreadyCompletedTask() {
         TestTask[] currentList = td.getTypicalTasks();
         assertMarkCompleted("3", currentList); // task already mark exception
                                                // thrown

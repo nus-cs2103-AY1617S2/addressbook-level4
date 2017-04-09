@@ -188,11 +188,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean isCompletedTask() {
-        if (completed) {
-            return true;
-        } else {
-            return false;
-        }
+        return completed;
     }
 
     @Override

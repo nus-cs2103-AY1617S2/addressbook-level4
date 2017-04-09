@@ -10,7 +10,6 @@ import guitests.guihandles.EventTaskCardHandle;
 import guitests.guihandles.FloatingTaskCardHandle;
 import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
-import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
@@ -30,7 +29,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void update_allFieldsSpecified_success() throws Exception {
+    public void updateAllFieldsSpecified_success() throws Exception {
         String detailsToUpdate = "take a snack break ON 03/03/19 1500 TO 1600 CATEGORY";
         int taskManagerIndex = 1;
 
@@ -120,7 +119,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     // @@author A0139520L
     @Test
-    public void update_taskClashing_success() throws Exception {
+    public void updateTaskClashingSuccess() throws Exception {
 
         String clashFeedback = "Clash with task: Index ";
 
