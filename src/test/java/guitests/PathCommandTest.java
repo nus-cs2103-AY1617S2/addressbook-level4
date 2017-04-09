@@ -16,13 +16,13 @@ public class PathCommandTest extends TaskManagerGuiTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        commandBox.runCommand("showcase 75");
+        commandBox.runCommand("showcase 35");
         commandBox.runCommand("path TaskManager1.xml");
-        commandBox.runCommand("showcase 50");
+        commandBox.runCommand("showcase 25");
         commandBox.runCommand("load TaskManager.xml");
-        assertTrue(taskListPanel.getNumberOfTasks() == 75);
+        assertTrue(taskListPanel.getNumberOfTasks() == 35);
         commandBox.runCommand("load TaskManager1.xml");
-        assertTrue(taskListPanel.getNumberOfTasks() == 50);
+        assertTrue(taskListPanel.getNumberOfTasks() == 25);
         commandBox.runCommand("load TaskManager.xml");
         // @@author
     }
