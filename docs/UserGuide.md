@@ -54,21 +54,19 @@ TypeTask is especially good for you if you want: <br>
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-<img src="images/ss.png" width="600">
+<img src="images/ss.PNG" width="600">
 
 Fig 1. TypeTask’s User Interface <br>
 
-TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
-
-`Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
-`Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
-`Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
-`Black`: this task has been labelled as completed.<br>
-```
-> Note that all tasks that fall outside of these categories
-  will appear normally.
-  i.e. no additional colours.
- ```
+5. TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
+   `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
+   `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
+   `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
+   `Black`: this task has been labelled as completed.<br>
+   ```
+   > Note that all tasks that fall outside of these categories will appear normally.
+      i.e. no additional colours.
+   ```
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -90,8 +88,8 @@ Let us now explore the interesting features found in TypeTask!
 ### 3.1. Viewing Help : `help`
 Having trouble navigating the application? Simply type  help to view a summary of TypeTask’s commands. The help screen will also show if you have entered an incorrect command e.g. abcd.
 
-Format:
-`help`
+Format:<br>
+`help`<br>
 
 ### 3.2. Adding a Task: `add`, `a`, `+`
 TypeTask supports 3 types of task. They are floating task, deadline task and event task.
@@ -107,7 +105,7 @@ Things To Note:
 ### 3.2.1. Adding a Floating Task: `add`, `a`, `+`
 The first thing you would do is to add your first task! Lets make it simple by first adding a floating task. <br>
 
-Format:
+Format:<br>
 `add <TASK NAME>`
 
 Examples:
@@ -119,10 +117,10 @@ Examples:
 ### 3.2.2. Adding a Deadline Task:  `add`, `a`, `+`
 What if you want to submit a report by a certain date or time. You might want to add a task that has a deadline. <br>
 
-Format:
-`add <TASK NAME> by:<DATE>`
-`add <TASK NAME> by:<TIME>`
-`add <TASK NAME> by:<DATE> <TIME>`
+Format:<br>
+`add <TASK NAME> by:<DATE>`<br>
+`add <TASK NAME> by:<TIME>`<br>
+`add <TASK NAME> by:<DATE> <TIME>`<br>
 
 ```
 Things To Note:
@@ -145,10 +143,10 @@ Examples:
 ### 3.2.3. Adding an Event Task:  `add`, `a`, `+`
 Now you might be interested in adding an event, which has a start time and an end time. <br>
 
-Format:
-`add <TASK NAME> from:<DATE> to:<DATE>`
-`add <TASK NAME> from:<TIME> to:<TIME>`
-`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME>`
+Format:<br>
+`add <TASK NAME> from:<DATE> to:<DATE>`<br>
+`add <TASK NAME> from:<TIME> to:<TIME>`<br>
+`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME>`<br>
 
 ```
 Things To Note:
@@ -174,10 +172,10 @@ Examples:
 ### 3.2.4. Adding a Priority Task/Event :  `add`, `a`, `+`
 What if you have task that are more important than others? You can add this task with high priority.
 
-Format:
-`add <TASK NAME> p/<PRIORITY>`
-`add <TASK NAME> by:<DATE> <TIME> p/<PRIORITY>`
-`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME> p/<PRIORITY>`
+Format:<br>
+`add <TASK NAME> p/<PRIORITY>`<br>
+`add <TASK NAME> by:<DATE> <TIME> p/<PRIORITY>`<br>
+`add <TASK NAME> from:<DATE> <TIME> to:<DATE> <TIME> p/<PRIORITY>`<br>
 
 ```
 Things To Note:
@@ -197,8 +195,8 @@ Examples:
 ### 3.6 Finding a Task: `find`, `f`, `search`
 You may not want to search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
 
-Format:
-`find <KEYWORD>`
+Format:<br>
+`find <KEYWORD>`<br>
 
 ```
 Things To Note:
@@ -224,11 +222,11 @@ Examples:
 ### 3.7 Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command.
 
-Format:
-`edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY>`
-`edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`
-`edit INDEX from:<DATE> <TIME>`
-`edit INDEX to:<DATE> <TIME>`
+Format:<br>
+`edit INDEX <TASK NAME> by: <DATE> <TIME> p/<PRIORITY>`<br>
+`edit INDEX from:<DATE> <TIME> to:<DATE> <TIME>`<br>
+`edit INDEX from:<DATE> <TIME>`<br>
+`edit INDEX to:<DATE> <TIME>`<br>
 
 ```
 Things To Note:
@@ -259,8 +257,8 @@ What it does: Edit your task schedule end date to next month
 ### 3.8 Deleting a Task : `delete`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command.
 
-Format:
-`delete <INDEX>`
+Format:<br>
+`delete <INDEX>`<br>
 
 ```
 Things To Note:
@@ -275,8 +273,8 @@ Examples:
 ### 3.9 Completing a Task : `done`
 Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
 
-Format:
-`done <INDEX>`
+Format:<br>
+`done <INDEX>`<br>
 
 ```
 Things To Note:
@@ -294,8 +292,8 @@ Examples:
 ### 3.10. Listing all Tasks : `list`
 Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
 
-Format:
-`list`
+Format:<br>
+`list`<br>
 
 ```
 Things To Note:
@@ -307,8 +305,8 @@ Things To Note:
 ### 3.11. Listing Today Tasks : `listtoday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command.
 
-Format:
-`listtoday`
+Format:<br>
+`listtoday`<br>
 
 ```
 Things To Note:
@@ -321,8 +319,8 @@ add a new floating task or task that is due today.
 ### 3.12. Listing Proirity Tasks : `list*`
 Want to focus on your urgent tasks only? You can use the command list* to see a list of all your important tasks.
 
-Format:
-`list*`
+Format:<br>
+`list*`<br>
 
 ```
 Things To Note:
@@ -335,15 +333,15 @@ when you add a new task or event with priority.
 ### 3.13. Listing Completed Tasks : `listdone`
 To review what you have done (and feel better about yourself!), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
-Format:
-`listdone`
+Format:<br>
+`listdone`<br>
 
 
 ### 3.14. Undoing the Latest Command : `undo`, `u`
 Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
-Format:
-`undo`
+Format:<br>
+`undo`<br>
 
 ```
 Things To Note:
@@ -356,8 +354,8 @@ Things To Note:
 ### 3.15. Redoing the Latest Command : `redo`, `r`
 Typed in the undo command wrongly? Fret not! You can use the redo command to save the hassle of modifying your recent operation. <br>
 
-Format:
-`redo`
+Format:<br>
+`redo`<br>
 
 ```
 Things To Note:
@@ -369,8 +367,8 @@ Things To Note:
 ### 3.16. Saving the Data to Another Folder : `save`
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
-Format:
-`save <FILE_PATH>`
+Format:<br>
+`save <FILE_PATH>`<br>
 
 ```
 Things To Note:
@@ -385,8 +383,8 @@ Examples:
 ### 3.17. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
-Format:
-`setting <FILE_PATH>`
+Format:<br>
+`setting <FILE_PATH>`<br>
 
 ```
 Things To Note:
@@ -401,8 +399,8 @@ Examples:
 ### 3.18. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
-Format:
-`use <FILE_PATH>`
+Format:<br>
+`use <FILE_PATH>`<br>
 
 ```
 Things To Note:
@@ -418,15 +416,15 @@ Examples:
 Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
-Format:
-`clear`
+Format:<br>
+`clear`<br>
 
 
 ### 3.20. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
-Format:
-`exit`
+Format:<br>
+`exit`<br>
 &nbsp;
 
 ## 4. FAQ
