@@ -74,7 +74,7 @@
 | | list | clears the filter and shows all tasks |
 |		|		|		|
 | **save data to another file location** | | |
-| save current FunTaskTic data to data/subfolder/newdata.xml | saveas data/subfolder/newdata.xml | data saved in specified location |
+| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | data saved in specified location |
 |		|		|		|
 | **clear data in FunTaskTic** | clear | list is cleared |
 |		|		|		|
