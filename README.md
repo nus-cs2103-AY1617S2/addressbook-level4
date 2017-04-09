@@ -15,6 +15,7 @@
 	* **Events** (i.e. have a start time and end time)
 	* **Deadlines** (tasks that have to be done before a specific deadline)
 	* **Floating Tasks** (tasks without specific times)
+	* **Recurring Tasks** (tasks that will auto populate base on the recur interval)
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
