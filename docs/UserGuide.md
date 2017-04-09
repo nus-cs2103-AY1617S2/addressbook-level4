@@ -58,7 +58,7 @@ Adds an event to the event list. Undoable.<br>
 Format: `add DESCRIPTION [st/START_TIME] sd/START_DATE [et/END_TIME] [ed/END_DATE] [l/LOCATION] [ta/TAG]...`
 
 > * Events must be added with `DESCRIPTION` and `START_DATE` is required, while other fields are optional.
-> * `START_DATE` and `END_DATE` can be easily input with `today`, `tmr` (tomorrow), `mon`, `tue`, `wed`, `thurs`, `fri`, `sat`, `sun`. `next` and `following` can be used in conjunction with the 7 days.
+> * `START_DATE` and `END_DATE` can be easily input with `today`, `tomorow/tmr`, `monday/mon`, `tue/tues/tuesday`, `wed/weds/wednesday`, `thu/thurs/thursday`, `fri/friday`, `sat/saturday`, `sun/sunday`, `next` and `following` can be used in conjunction with the 7 days.
 > * Otherwise, Start date, and end date should have format `DDMMYY`, e.g. `230117`
 > * Start time and end time should have format `MMHH`, e.g. `2359`
 > * Default value for `END_DATE` is set to be the same as `START_DATE`
@@ -101,7 +101,7 @@ Format: `add DESCRIPTION p/PRIORITY [bt/BY_TIME] [bd/BY_DATE] [l/LOCATION] [ta/T
 
 > * Tasks must be added with `DESCRIPTION` and `PRIORITY`, other fields are optional.
 > * Priority can only take on the values `high`. `medium`, `low`, `h`, `m` or `l`.
-> * `BY_DATE` can be easily input with `today`, `tmr` (tomorrow), `mon`, `tue`, `wed`, `thurs`, `fri`, `sat`, `sun`. `next` and `following` can be used in conjunction with the 7 days.
+> * `BY_DATE` can be easily input with `today`, `tomorow/tmr`, `monday/mon`, `tue/tues/tuesday`, `wed/weds/wednesday`, `thu/thurs/thursday`, `fri/friday`, `sat/saturday`, `sun/sunday`, `next` and `following` can be used in conjunction with the 7 days.
 > * Otherwise, `BY_DATE` should have format `DDMMYY`, e.g. `230117`
 > * `BY_TIME` should have format `MMHH`, e.g. `2359`
 > * If only `BY_TIME` is specified, `BY_DATE` would be set as the current day by default.
