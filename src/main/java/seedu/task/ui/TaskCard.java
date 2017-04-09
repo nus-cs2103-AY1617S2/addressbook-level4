@@ -11,7 +11,7 @@ import seedu.task.model.task.ReadOnlyTask;
 //@@author A0164032U
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
 
     @FXML
     private HBox cardPane;
@@ -26,32 +26,32 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label group;
 
-    public TaskCard(ReadOnlyTask person, int displayedIndex) {
+    public TaskCard(ReadOnlyTask task, int displayedIndex) {
         super(FXML);
 
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
 
-        if (person.getEndDate() == null || person.getEndDate().getInputValue() == null) {
+        if (task.getEndDate() == null || task.getEndDate().getInputValue() == null) {
             end.setVisible(false);
         } else {
-            end.setText("Ends:   " + person.getEndDate());
+            end.setText("Ends:   " + task.getEndDate());
         }
 
-        if (person.getStartDate() == null || person.getStartDate().getInputValue() == null) {
+        if (task.getStartDate() == null || task.getStartDate().getInputValue() == null) {
             start.setVisible(false);
         } else {
-            start.setText("Starts: " + person.getStartDate());
+            start.setText("Starts: " + task.getStartDate());
         }
 
-        group.setText(person.getGroup().value);
+        group.setText(task.getGroup().value);
 
-        if (person.hasPassed()) {
+        if (task.hasPassed()) {
             setStyleToIndicateEndDatePassed();
         }
 
         try {
-            if (person.getTags().contains(new Tag(Tag.TAG_COMPLETE))) {
+            if (task.getTags().contains(new Tag(Tag.TAG_COMPLETE))) {
                 setStyleToIndicateComplete();
             } else {
                 setStyleToIndicateIncomplete();

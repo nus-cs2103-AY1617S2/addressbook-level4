@@ -60,7 +60,7 @@ public class SampleDataUtil {
         YTomorrow sampleAB = new YTomorrow();
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             try {
-                sampleAB.addPerson(generateRandomTask());
+                sampleAB.addTask(generateRandomTask());
             } catch (DuplicateTaskException e) {
                 i--;
                 e.printStackTrace();
