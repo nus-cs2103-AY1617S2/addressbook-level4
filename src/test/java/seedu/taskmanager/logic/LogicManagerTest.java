@@ -852,6 +852,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_load_inaccessibleFilePath() throws Exception {
+        assertCommandFailure("load /empty.xml", LoadCommand.MESSAGE_ERROR_IO);
+    }
+
+    @Test
     public void execute_load_successful() throws Exception {
         Config originalStorageConfig =
                 ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
@@ -933,6 +938,10 @@ public class LogicManagerTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         assertCommandFailure("saveas data/taskmanager",
                 String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+    }
+
+    public void execute_save_inaccessibleFilePath() throws Exception {
+        assertCommandFailure("save /empty.xml", SaveAsCommand.MESSAGE_ERROR_IO);
     }
 
     @Test
