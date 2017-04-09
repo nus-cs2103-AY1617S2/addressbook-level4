@@ -41,6 +41,7 @@ public class CommandBox extends UiPart<Region> {
         addHistoryEventHandler();
     }
 
+    //@@author A0147622H
     private void addHistoryEventHandler() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             KeyCode keyCode = event.getCode();
@@ -111,6 +112,7 @@ public class CommandBox extends UiPart<Region> {
         return logic.getCommandHistory();
     }
 
+    //@@author
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         placeHolderPane.getChildren().add(commandTextField);

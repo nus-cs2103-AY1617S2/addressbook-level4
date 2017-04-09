@@ -1,3 +1,4 @@
+//@@author A0147622H
 package seedu.geekeep.commons.events.model;
 
 import seedu.geekeep.commons.events.BaseEvent;

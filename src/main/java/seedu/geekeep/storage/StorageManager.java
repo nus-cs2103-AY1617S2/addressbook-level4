@@ -43,6 +43,7 @@ public class StorageManager extends ComponentManager implements Storage {
                 new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
+    //@@author A0147622H
     // ================ Config methods ==============================
 
     @Override
@@ -56,6 +57,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
+    //@@author
     // ================ UserPrefs methods ==============================
 
     @Override
@@ -76,11 +78,13 @@ public class StorageManager extends ComponentManager implements Storage {
         return geeKeepStorage.getGeeKeepFilePath();
     }
 
+    //@@author A0147622H
     @Override
     public void setGeeKeepFilePath(String filePath) {
         geeKeepStorage.setGeeKeepFilePath(filePath);
     }
 
+    //@@author
     @Override
     public Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException {
         return readGeeKeep(geeKeepStorage.getGeeKeepFilePath());
@@ -115,6 +119,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    //@@author A0147622H
     @Override
     @Subscribe
     public void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) throws IOException {

@@ -16,12 +16,14 @@ import seedu.geekeep.model.UserPrefs;
  */
 public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage {
 
+    //@@author A0147622H
     @Override
     Optional<Config> readConfig() throws DataConversionException;
 
     @Override
     void saveConfig(Config config) throws IOException;
 
+    //@@author
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException;
 
@@ -31,9 +33,11 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
     @Override
     String getGeeKeepFilePath();
 
+    //@@author A0147622H
     @Override
     void setGeeKeepFilePath(String filePath);
 
+    //@@author
     @Override
     Optional<ReadOnlyGeeKeep> readGeeKeep() throws DataConversionException, IOException;
 
@@ -47,5 +51,6 @@ public interface Storage extends ConfigStorage, GeeKeepStorage, UserPrefsStorage
      */
     void handleGeeKeepChangedEvent(GeeKeepChangedEvent abce);
 
+    //@@author A0147622H
     void handleGeekeepFilePathChangedEvent(GeekeepFilePathChangedEvent event) throws IOException;
 }
