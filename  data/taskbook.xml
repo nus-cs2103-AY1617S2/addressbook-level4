@@ -60,6 +60,14 @@
         <period>0</period>
         <isCompleted>false</isCompleted>
     </tasks>
+    <tasks>
+        <name>12312312312</name>
+        <startTime></startTime>
+        <endTime></endTime>
+        <description></description>
+        <period>0</period>
+        <isCompleted>false</isCompleted>
+    </tasks>
     <tags>lectures</tags>
     <tags>tutorials</tags>
     <tags>meetings</tags>

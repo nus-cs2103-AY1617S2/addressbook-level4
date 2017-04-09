@@ -106,7 +106,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
  // ================ LoginInfo methods ==============================
-
+//@Author A0130979U
     @Override
     public Optional<LoginInfo> readLoginInfo() throws DataConversionException, IOException {
         return loginInfoStorage.readLoginInfo();

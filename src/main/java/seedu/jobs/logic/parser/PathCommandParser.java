@@ -15,13 +15,11 @@ public class PathCommandParser extends Parser {
      */
 
     public Command parse(String args) {
-
-        Optional<String> path =  Optional.of(args);
+        Optional<String> path =  Optional.of(args.trim());
         if (!path.isPresent() || path.get().equals("")) {
             return new IncorrectCommand (
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PathCommand.MESSAGE_USAGE));
         }
-
         return new PathCommand(path.get());
     }
 

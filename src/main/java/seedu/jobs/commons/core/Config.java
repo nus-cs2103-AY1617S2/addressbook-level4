@@ -16,7 +16,7 @@ public class Config {
     private String userPrefsFilePath = "preferences.json";
     private String taskBookFilePath = "data/taskbook.xml";
     private String taskBookName = "MyTaskBook";
-    private String loginInfo = "loginInfo.json";
+    private String loginInfoFilePath = "loginInfo.json";
 
     public String getAppTitle() {
         return appTitle;
@@ -59,11 +59,11 @@ public class Config {
     }
 
     public String getLoginInfoFilePath() {
-        return loginInfo;
+        return loginInfoFilePath;
     }
 
     public void setLoginInfoFilePath(String loginInfo) {
-        this.loginInfo = loginInfo;
+        this.loginInfoFilePath = loginInfo;
     }
 
     @Override
