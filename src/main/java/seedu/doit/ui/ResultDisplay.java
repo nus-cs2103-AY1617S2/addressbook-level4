@@ -21,6 +21,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
+    private static final double BOUNDARY_PARAMETER = 0.0;
 
     private final StringProperty displayed = new SimpleStringProperty("");
 
@@ -33,8 +34,10 @@ public class ResultDisplay extends UiPart<Region> {
     public ResultDisplay(AnchorPane placeHolder) {
         super(FXML);
         this.resultDisplay.textProperty().bind(this.displayed);
-        FxViewUtil.applyAnchorBoundaryParameters(this.resultDisplay, 0.0, 0.0, 0.0, 0.0);
-        FxViewUtil.applyAnchorBoundaryParameters(this.mainPane, 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.applyAnchorBoundaryParameters(this.resultDisplay, BOUNDARY_PARAMETER,
+                BOUNDARY_PARAMETER, BOUNDARY_PARAMETER, BOUNDARY_PARAMETER);
+        FxViewUtil.applyAnchorBoundaryParameters(this.mainPane, BOUNDARY_PARAMETER,
+                BOUNDARY_PARAMETER, BOUNDARY_PARAMETER, BOUNDARY_PARAMETER);
         placeHolder.getChildren().add(this.mainPane);
         registerAsAnEventHandler(this);
     }

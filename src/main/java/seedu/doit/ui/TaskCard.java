@@ -74,20 +74,26 @@ public class TaskCard extends UiPart<Region> {
         return !currentDateTime.isBefore(dateTimeToCompare.minusDays(3));
     }
 
+    /*
+     * show desciption icon on task card if the task has description
+     */
     private void setDescriptionSign(ReadOnlyTask task) {
         this.description = new Image(descriptionSource);
         this.descriptionSign.setImage(this.description);
-
         if (task.getDescription() != null && !task.getDescription().toString().equals("")) {
             this.descriptionSign.setVisible(true);
         } else {
             this.descriptionSign.setVisible(false);
         }
     }
+
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> this.tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /*
+     * set bullet color indicate different priority level
+     */
     private void setLabelBullet(ReadOnlyTask task) {
         this.labelBullet.setOpacity(1);
         this.tick = new Image(tickSource);

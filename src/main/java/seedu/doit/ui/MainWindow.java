@@ -74,6 +74,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane statusbarPlaceholder;
 
+    // @@author A0160076L
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
 
@@ -111,6 +112,7 @@ public class MainWindow extends UiPart<Region> {
             @Override
             public void handle(KeyEvent event) {
                 Boolean hasCommandException = false;
+                //handle undo shortcut key pressed
                 if (this.undo.match(event) || this.undoMac.match(event)) {
                     // handle command failure
                     try {
@@ -124,6 +126,7 @@ public class MainWindow extends UiPart<Region> {
                         raise(new NewResultAvailableEvent(UndoCommand.MESSAGE_SUCCESS));
                     }
                 }
+                //handle redo shortcut key pressed
                 if (this.redo.match(event) || this.redoMac.match(event)) {
                     // handle command failure
                     try {
@@ -137,6 +140,7 @@ public class MainWindow extends UiPart<Region> {
                         raise(new NewResultAvailableEvent(RedoCommand.MESSAGE_SUCCESS));
                     }
                 }
+                //handle list shortcut key pressed
                 if (event.getCode().equals(KeyCode.ESCAPE)) {
                     try {
                         MainWindow.this.logic.execute(LIST_COMMAND);
@@ -149,6 +153,7 @@ public class MainWindow extends UiPart<Region> {
             }
         });
     }
+    // @@author
 
     /**
      * Sets the accelerator of a MenuItem.
