@@ -27,10 +27,12 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
     This app will not work with earlier versions of Java 8.
 
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
+3. **e(fx)clipse** UI plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 4. **Buildship Gradle Integration** plugin from the Eclipse Marketplace
-5. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
+5. **M2Eclipse** Maven support plugin for Eclipse (Do the steps in Installation give in
+   [this page](http://www.eclipse.org/m2e/))
+6. **Checkstyle Plug-in** plugin from the Eclipse Marketplace
 
 
 ### 1.2. Importing the project into Eclipse
@@ -394,52 +396,62 @@ Priority | As a ... | I want to ... | So that I can...
 (For all use cases below, the **System** is the `TaskScheduler` and the **Actor** is the `user`, unless specified otherwise)
 
 
-#### Use case: Add Task
+#### Use case: Add Non-Recurring Task With Deadline
 
 **MSS**
 
-1. User requests to add a task with a title, and an optional deadline, optional description, optional tags and optional periodicity
-2. User specifies possible timings to block out for that task
-3. TaskManager creates a task
-4. TaskManager shows that the task was successfully added <br>
+1. User requests to add a task with a title, and deadline, optional description, optional description, optional tags
+2. TaskManager creates a task
+3. TaskManager shows the added task's details and that the task was successfully added <br>
 Use case ends.
 
 **Extensions**
 
-1a. User specifies a deadline
+1a. User specifies a deadline with date and time
 
 > 1a1. TaskManager stores the deadline <br>
 > Use case resumes at step 2
 
-2a. User does not include possible timings
+2a. User specifies either the date or the time of deadline
 
-> 2b1. TaskManager creates a Task object with a deadline but no possible timings for that task <br>
-> Use case resumes at step 4
-
-2b. User does not include possible timings or a deadline
-
-> 2c1. TaskManager creates a task object with no deadline and no possible timings <br>
-> Use case resumes at step 4 <br>
+> 2a1. TaskManager creates a Task object with a current date or time <br>
+> Use case resumes at step 3
 
 
-#### Use case: Add Event
+#### Use case: Add Non-recurring Task With Start and End Time
 
 **MSS**
 
-1. User requests to add a task with a title, and an optional description, optional tags and optional periodicity
-2. User specifies the event with a start time and an end time, or whole day event
-3. TaskManager shows that the event was successfully added <br>
+1. User requests to add a task with a title, either a start time or an end time or both, and an optional description, optional location and optional tags
+2. TaskManager creates a task
+3. TaskManager shows the added task's details and that the event was successfully added <br>
 Use case ends.
 
 **Extensions**
 
-2a. User doesn't specify a start time or end time
-> 2a1. TaskManager assumes it is a whole day event <br>
-> Use case resumes at step 3
+1a. User specifies either a start time or end time
+> 2a1. TaskManager assumes that the duration is 2 hours and fill the start or end time accordingly <br>
+> Use case resumes at step 2
 
-2b. User only specifies only one timing
-> 2b1. TaskManager assumes the task lasts for the rest of the day <br>
-> Use case resumes at step 3 <br>
+
+#### Use case: Add Recurring Task
+
+**MSS**
+
+1. User requests to add a task with a title and a periodicity, either a start time or an end time or both, or a deadline, and an optional description, optional location and optional tags
+2. TaskManager creates a task
+3. TaskManager shows the added task's details and that the event was successfully added <br>
+Use case ends.
+
+**Extensions**
+
+1a. User specifies either a start time or end time
+> 2a1. TaskManager assumes that the duration is 2 hours and fill the start or end time accordingly <br>
+> Use case resumes at step 2
+
+1b. User does not specify any time
+> 2a1. TaskManager assumes that the recurrence starts now<br>
+> Use case resumes at step 2
 
 
 #### Use case: Mark Task As Done (by finding)
@@ -488,7 +500,7 @@ Use case ends.
 
 1. User requests to list tasks
 2. TaskManager shows a list of tasks
-3. User requests to delete a specific task in the list
+3. User requests to delete a task with specified index in the list
 4. TaskManager deletes the task <br>
 Use case ends.
 
@@ -540,18 +552,10 @@ Use case ends.
 
 **MSS**
 
-1. User request to list tasks/events
-2. TaskManager shows list of added tasks/events in order of date from first to last
-3. TaskManager provides a list of options (one of which is edit) for User to perform commands
-4. User selects edit option
-5. TaskManager request for index of task/event to be edited
-6. User specifies index on list to be edited
-7. TaskManager shows User options of variables that can be edited
-8. TaskManager requests User to input indexes (separated by space) of variables User wants to change
-9. User specifies indexes of variables to edit
-10. TaskManager requests user to specify new variables according in order of the variable indexes
-11. User provides input
-12. TaskManager updates variables of the task/event <br>
+1. User request to list tasks
+2. TaskManager shows list of existing tasks
+3. User requests to edit a task with a specified index in the list. With optional new title, either a start time or an end time or both, and optional description, optional location and optional tags
+12. TaskManager updates variables of the task <br>
 Use case ends.
 
 **Extensions**
@@ -560,43 +564,17 @@ Use case ends.
 > 2a1. TaskManager shows 'List is empty' message <br>
 > Use case ends
 
-6a. The given index is invalid
-> 6a1. TaskManager shows an error message <br>
+3a. The given index is invalid
+> 3a1. TaskManager shows an error message <br>
 > Use case resumes at step 3
 
-9a. The given index is invalid
-> 9a1. TaskManager shows an error message <br>
-> Use case resumes at step 8 <br>
-
-
-#### Use case: Delete Task/Event
-
-**MSS**
-
-1. User requests to list tasks/events
-2. Taskmanager shows list of added tasks/events in order of date from first to last
-3. TaskManager provides a list of options (one of which is delete) for User to perform commands
-4. User selects delete option
-5. TaskManager request for index of task/event to be deleted
-6. User specifies index on the list to be deleted
-7. TaskManager deletes the task/event <br>
-Use case ends.
-
-**Extensions**
-
-2a. List is empty
-> 2a1. TaskManager shows 'List is empty' message <br>
-> Use case ends
-
-6a. The given index is invalid
-> 6a1. TaskManager shows an error message
+3b. The given parameters are invalid
+> 3a1. TaskManager shows an error message telling user the legal format<br>
 > Use case resumes at step 3
 
-6b. Task/event to be deleted is recurring
-> 6b1. TaskManager requests if all recurring tasks/events are deleted <br>
-> 6b2. User inputs (Y) or (N) <br>
-> 6b3. TaskManager deletes all recurring tasks/events if User inputs (Y) else TaskManager only deletes current task/event if User inputs (N) <br>
-> Use case ends. <br>
+3b. The given tag flag is present and empty
+> 3a1. TaskManager deletes all tags of that task<br>
+> Use case resumes at step 3
 
 
 #### Use case: Clear Done Tasks
@@ -613,23 +591,6 @@ Use case ends.
 
 2a. The list is empty
 > 2a1. TaskManager shows 'No done tasks' message <br>
-> Use case ends. <br>
-
-
-#### Use case: Clear Done Events
-
-**MSS**
-
-1. User requests to clear done events
-2. TaskManager goes through list to find done events
-3. TaskManager deletes all done events
-4. TaskManager shows User the list of deleted done events <br>
-Use case ends.
-
-**Extensions**
-
-2a. The list is empty
-> 2a1. TaskManager shows 'No done events' message <br>
 > Use case ends. <br>
 
 
