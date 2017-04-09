@@ -4,6 +4,7 @@ import static seedu.taskmanager.logic.commands.SortCommand.SORT_KEYWORD_STARTDAT
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -197,8 +198,31 @@ public class UniqueTaskList implements Iterable<Task> {
         public static Predicate<Task> isNotDone() {
             return p -> p.getStatus().toString().equals(Status.STATUS_NOT_DONE);
         }
-
     }
+    
+    // @@author A0114523U
+    public static Date today = new Date();
+    
+    public ObservableList<Task> getTaskListByDate(){
+    	if (today.after(EndDate)) {
+    		return internalList.filtered(DatePredicate.isOverdue());
+    	} else if (today.equals(EndDate)) {
+    		return internalList.filtered(DatePredicate.isToday());
+    	} else {
+    		return internalList;
+    	}
+    }
+    
+    static class DatePredicate {
+    	public static Predicate<Task> isOverdue() {
+    		return p -> p.getEndDate().before(today);
+    	}
+    	
+    	public static Predicate<Task> isToday() {
+    		return p -> p.getEndDate().equals(today);
+    	}
+    }
+    // @@author
 
     class DateComparator implements Comparator<Task> {
         String sortCriterion;

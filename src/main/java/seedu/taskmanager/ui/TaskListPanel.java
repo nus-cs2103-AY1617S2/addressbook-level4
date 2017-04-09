@@ -14,10 +14,6 @@ import javafx.scene.layout.Region;
 import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
-//import seedu.taskmanager.model.Model;
-//import seedu.taskmanager.model.ModelManager.DateQualifier;
-//import seedu.taskmanager.model.ModelManager.Expression;
-//import seedu.taskmanager.model.ModelManager.PredicateExpression;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
 /**
