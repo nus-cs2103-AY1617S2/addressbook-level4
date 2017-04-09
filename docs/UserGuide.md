@@ -57,11 +57,13 @@ Format: `add TASK_NAME [p/PRIORITY_LEVEL] [sd/START_TIMEDATE] [ed/END_TIMEDATE] 
 > * The TASK_NAME must be **2 or more characters** long. It can begin with any alphabet, number, or special character.
 > * The PRIORITY_LEVEL must be an integer between **1-3**. 1 is the HIGHEST priority level and 3 is the LOWEST (default) priority level.
 > * **TIMEDATE Format: HH:mm dd/MM/yyyy** (HH:MM is optional). The start/end timing parameters (sd/ed respectively) must be in the date >   format specified above. Note that "sd/2:15 1/1/2017 is invalid; the correct format is "sd/02:15 01/01/2017".
-> * To add floating tasks, simply do not specify the start and end timing paramters.
-> * To add tasks with deadlines, simply specify the end timing.
+> * To add floating tasks, simply do not specify the START_TIMEDATE and END_TIMEDATE paramters.
+> * To add tasks with deadlines, simply specify the END_TIMEDATE.
 > * To add recurring tasks, see section 2.2.1.
 > * Any of these 3 types of tasks can have 0 or more tags.
-> * All fields are optional, except for description.
+  > * To add a tag, specify it after `t/`. If there are multiple tags, you must use a `t` for each one (see example for more details)
+  > * A single tag cannot be deleted or edited if a task has multiple tags
+> * All fields are optional, except for TASK_NAME
 
 Examples:
 
@@ -75,6 +77,7 @@ Examples:
   > * Adds a recurring task to the task list
   > * Format: same as 'add' but specifcy the frequency by r/#_
   > where '#' is an integer and '_' is either 'd' (day), 'm' (month), or 'y' (year)
+  > * **Note:** Tags are meant to be a commonality for recurring tasks by design; thus they cannot be set differently for a specific instance of a recurring task
 
   Examples:
 
@@ -127,8 +130,8 @@ Examples:
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
 
-* `edit 4 ed/floating`<br>
-   Removes the end timing for task 4.
+* `edit 4 ed/floating p/1`<br>
+   Removes the end timing for task 4 and updates its priority to 1.
 
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
@@ -156,8 +159,8 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * The search is case insensitive. e.g `assignment` will match `AssIGNmEnt`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
-> * Task matching at least one keyword will be returned (i.e. `OR` search).
-> * Note: `find` does not search on a task's tags. e.g. `assignment` will match `do algorithm assignment`
+> * Task matching at least one keyword will be returned (i.e. `OR` search) e.g. `assignment` will match `do algorithm assignment`
+> * Note: `find` does not search on a task's tags 
 
 Examples:
 
@@ -182,7 +185,7 @@ Examples:
   * `find 11/05/2017`<br>
     Returns `feed cat sd/11/05/2017 ed/11/05/2017`
   * `list`<br>
-    Returns all of the tasks with 'feed cat's' instance with start: 11/05/2017 and end: 11/05/2017
+    Returns all of the tasks with 'feed cat's' instance with START_TIMEDATE: 11/05/2017 and END_TIMEDATE: 11/05/2017
 
 ### 2.6. Deleting a task : `delete`
 
@@ -339,7 +342,7 @@ No change (nothing to `redo`)
 Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports
 the implementation of such tasks. A few things to note about how to use this feature:
 
-* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters
+* The START/END TIMEDATE should be specified for one occurrence. A common misconception is specifiying these paramters
   as the start and end timings of when the overall recurring pattern should start/end respectively.
 * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
   every week from 11am - 12pm, the syntax of the respective command would be as follows:
@@ -349,7 +352,7 @@ the implementation of such tasks. A few things to note about how to use this fea
   the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
 * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
-* Both start and end time parameters must be specified for initiating a recurring task.
+* Both the START_TIMEDATE and the END_TIMEDATE parameters must be specified for initiating a recurring task.
 
 ## 4. FAQ
 
