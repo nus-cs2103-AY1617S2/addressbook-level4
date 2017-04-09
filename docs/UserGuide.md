@@ -29,7 +29,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 Double click the JOBS.jar file to start the program.
 
-<img src="images/DIsplay_JOBS.png" width="600"><br>
+<img src="images/Display_JOBS.png" width="600"><br>
 
 1. User input/command bar: Enter your to-dos here easily using the given Command Tags.
 2. Feedback prompt: The outcome to any changes that you make to your tasks is shown here.
@@ -56,15 +56,15 @@ Format: `add TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPT
 6. The recur specifies the recurrence period **in days**.
 
 Example :
-* `add tutorial start/13/01/2017 11:00 end/13/01/2017 12:00 recur/7 desc/"Tutorial of CS2103" tag/CS2103`
+* `add tutorial start/13/01/2017 11:00 end/13/01/2017 12:00 recur/7 desc/Tutorial of CS2103 tag/CS2103`
 
 <img src="images/Event_JOBS.png" width="600"><br>
 
-* `add v0.0 end/03/03/2017 11:00 desc/"Project version 0.0 deadline tag/CS2103 Project"`
+* `add v0.0 end/03/03/2017 11:00 desc/Project version 0.0 deadline tag/CS2103`
 
 <img src="images/TaskWithDeadline_JOBS.png" width="600"><br>
 
-* `add name/swim desc/"Remember to swim"`
+* `add swim desc/"Remember to swim"`
 
 <img src="images/FloatingTask_JOBS.png" width="600"><br>
 
@@ -107,8 +107,10 @@ Format : `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESC
 >User edits a specific task by specifying the new entry they wish to be reflected on the existing task list.
 
 Example:
-* `edit index/1 desc/"The venue has been changed"`
-* `edit index/2 start/02-04-17 17:20`
+* `edit index/1 desc/The venue has been changed`
+* `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
+<img src="images/Edit1_JOBS.png" width="300">
+<img src="images/Edit2_JOBS.png" width="300">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
@@ -116,6 +118,10 @@ Format : `undo`
 
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
+
+<img src="images/Undo1_JOBS.png" width="200">
+<img src="images/Undo2_JOBS.png" width="200">
+<img src="images/Undo3_JOBS.png" width="200">
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
@@ -128,6 +134,7 @@ Format : `set email/EMAIL pwd/PASSWORD`
 
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
+<img src="images/Set_JOBS.png" width="600"><br>
 
 ### Display Google Calendar: `display`
 Display is the command to enable the Google Calendar function for JOBS.

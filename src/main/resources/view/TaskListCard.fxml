@@ -29,17 +29,17 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="200.0">
          <children>
             <Label prefWidth="38.0" />
-                  <Label fx:id="description" maxWidth="370.0" prefHeight="20.0" prefWidth="370.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_small_label" text="\$description" />
+                  <Label fx:id="description" maxWidth="370.0" prefHeight="18.0" prefWidth="370.0" style="-fx-text-fill: derive(#ffffff, -25%);" styleClass="cell_small_label" text="\$description" />
          </children>
       </HBox>
-      <HBox prefHeight="20.0" prefWidth="200.0">
+      <HBox prefHeight="18.0" prefWidth="200.0">
          <children>
-            <Label minWidth="38.0" prefWidth="38.0" />
-            <FlowPane fx:id="tags" alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="285.0" />
-            <Pane fx:id="status" prefHeight="20.0" prefWidth="100.0" />
+            <Label minWidth="36.0" prefWidth="36.0" />
+            <FlowPane fx:id="tags" alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="285.0" />
+            <Pane fx:id="status" prefHeight="18.0" prefWidth="100.0" />
          </children>
       </HBox>
       <AnchorPane prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: white;" />
