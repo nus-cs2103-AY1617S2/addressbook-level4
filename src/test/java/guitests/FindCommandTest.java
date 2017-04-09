@@ -21,7 +21,10 @@ public class FindCommandTest extends TaskListGuiTest {
 
     @Test
     public void find_emptyList() {
-        commandBox.runCommand("clear");
+        int l = taskListPanel.getNumberOfTasks();
+        for (int i = 0; i < l; i++) {
+            commandBox.runCommand("delete 1");
+        }
         assertFindResult("find Jean"); // no results
     }
 

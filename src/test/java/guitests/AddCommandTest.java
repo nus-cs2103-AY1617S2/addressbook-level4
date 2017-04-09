@@ -31,7 +31,10 @@ public class AddCommandTest extends TaskListGuiTest {
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
-        commandBox.runCommand("clear");
+        int l = taskListPanel.getNumberOfTasks();
+        for (int i = 0; i < l; i++) {
+            commandBox.runCommand("delete 1");
+        }
         assertAddSuccess(td.bear);
 
         //invalid command

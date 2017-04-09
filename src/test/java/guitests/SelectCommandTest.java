@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class SelectCommandTest extends TaskListGuiTest {
 
-
     @Test
     public void selectPerson_nonEmptyList() {
 
@@ -21,7 +20,10 @@ public class SelectCommandTest extends TaskListGuiTest {
     @Test
     public void selectPerson_emptyList() {
         assertTasksFoundWithTerm("bear"); // task found of 'Alice' found
-        commandBox.runCommand("clear");
+        int l = taskListPanel.getNumberOfTasks();
+        for (int i = 0; i < l; i++) {
+            commandBox.runCommand("delete 1");
+        }
         assertListSize(0);
         assertNoTasksFoundWithTerm("bear"); // no tasks of 'Alice' found
     }
