@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Developer Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/hljs-solarized-light.min.css"/>
+  </head>
+<body id="wrapper"><h1 id="developer-guide"><a class="header-link" href="#developer-guide"></a>Developer Guide</h1>
+<p class="img-container"><img src="./DG_img/coverPage.png" width="600"></p>
+<ul class="list">
+<li><a href="#setting-up">Introduction</a></li>
+<li><a href="#setting-up">Setting Up</a></li>
+<li><a href="#design">Design</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#appendix-a--user-stories">Appendix A: User Stories</a></li>
+<li><a href="#appendix-b--use-cases">Appendix B: Use Cases</a></li>
+<li><a href="#appendix-c--non-functional-requirements">Appendix C: Non Functional Requirements</a></li>
+<li><a href="#appendix-d--glossary">Appendix D: Gloassary</a></li>
+</ul>
+<h2 id="introduction"><a class="header-link" href="#introduction"></a>Introduction</h2>
+<p>We welcome all software engineers who would like to contribute to our task manager OneTwoDo.</p>
+<p>This guide is a comprehensive document that explains the development environment and internal structure of the application. This guide will help you to contribute to OneTwoDo. </p>
+<p>OneTwoDo is a simple yet effective to-do list application. It helps users to remember their important tasks and to organise their schedules. It is easy to use due to its simple interface and intuitive commands. It is also designed to be extremely keyboard-friendly, so as to save time clicking on buttons and tabs. </p>
+<h3 id="1.-setting-up"><a class="header-link" href="#1.-setting-up"></a>1. Setting Up</h3>
+<p>You will have to ensure that the following settings are configured correctly to start contributing.</p>
+<h3 id="1.1-prerequisites"><a class="header-link" href="#1.1-prerequisites"></a>1.1 Prerequisites</h3>
+<p>As prerequisites, make sure that your computer has the following software installed.</p>
+<ol class="list">
+<li><p><strong>JDK 1.8.0_60</strong> or later. Having any Java 8 version is not enough. This app will not work with earlier versions of Java 8.</p>
+</li>
+<li><p><strong>Eclipse IDE</strong>.</p>
+</li>
+<li><p><strong>e(fx)clipse</strong> plugin for Eclipse . You may refer to the tutorial by doing the steps 2 onwards given here: <a href="http://www.eclipse.org/efxclipse/install.html#for-the-ambitious">http://www.eclipse.org/efxclipse/install.html#for-the-ambitious</a></p>
+</li>
+<li><p><strong>Buildship Gradle</strong> Integration plugin from the Eclipse Marketplace.</p>
+</li>
+<li><p><strong>Checkstyle</strong> Plug-in plugin from the Eclipse Marketplace.</p>
+</li>
+</ol>
+<h3 id="1.2-importing-the-project-into-eclipse"><a class="header-link" href="#1.2-importing-the-project-into-eclipse"></a>1.2 Importing the project into Eclipse</h3>
+<p>We recommend developing this application using Eclipse. Simply follow these steps to import OneTwoDo into your Eclipse Workspace:</p>
+<ol class="list">
+<li><p>Fork this repo, and clone the fork to your computer.</p>
+</li>
+<li><p>Open Eclipse (Note: Ensure you have installed the e(fx)clipse and buildship plugins as given in the prerequisites above).</p>
+</li>
+<li><p>Click <em>File</em> &gt; <em>Import</em>.</p>
+</li>
+<li><p>Click <em>Gradle</em> &gt; Gradle <em>Project</em> &gt; <em>Next</em> &gt; <em>Next</em>.</p>
+</li>
+<li><p>Click <em>Browse</em>, then locate the project’s directory.</p>
+</li>
+<li><p>Click <em>Finish</em>.</p>
+</li>
+</ol>
+<p><strong>Notes:</strong></p>
+<ul class="list">
+<li><p>If you are asked whether to ‘keep’ or ‘overwrite’ config files, choose ‘keep’.</p>
+</li>
+<li><p>Depending on your connection speed and server load, it may take up to 30 minutes for the set up to finish. This is because Gradle downloads library files from servers during the project set up process. </p>
+</li>
+<li><p>If Eclipse auto-changed any settings files during the import process, you can discard those changes.</p>
+</li>
+</ul>
+<h3 id="1.3-configuring-checkstyle"><a class="header-link" href="#1.3-configuring-checkstyle"></a>1.3 Configuring Checkstyle</h3>
+<p>To adhere to the common coding style adopted for this project, you may want to import Checksyle into WorkSpace as well. </p>
+<ol class="list">
+<li><p>Click <em>Project</em> -&gt; <em>Properties</em> -&gt; <em>Checkstyle</em> -&gt; <em>Local Check Configurations</em> -&gt; <em>New</em>...</p>
+</li>
+<li><p>Choose <em>External Configuration File</em> under <em>Type</em>.</p>
+</li>
+<li><p>Enter an arbitrary configuration name e.g. onetwodo.</p>
+</li>
+<li><p>Import checkstyle configuration file found at <em>config/checkstyle/checkstyle.xml</em>.</p>
+</li>
+<li><p>Click <em>OK</em> once, go to the <em>Main tab</em>, use the newly imported check configuration.</p>
+</li>
+<li><p>Tick and select files from packages, click <em>Change</em>..., and select the resources package.</p>
+</li>
+<li><p>Click <em>OK</em> twice. Rebuild the project if prompted.</p>
+</li>
+</ol>
+<p><strong>Notes</strong></p>
+<ul class="list">
+<li>Click on the files from packages text after ticking in order to enable the Change... button. </li>
+</ul>
+<h3 id="1.4-troubleshooting-project-setup"><a class="header-link" href="#1.4-troubleshooting-project-setup"></a>1.4 Troubleshooting project setup</h3>
+<p>You may encounter some problems during the setup. Please refer to the solutions below to address some common problems.</p>
+<p><strong>Problem</strong>: Eclipse reports compile errors after new commits are pulled from Git</p>
+<ul class="list">
+<li><p>Reason: Eclipse fails to recognize new files that appeared due to the Git pull.</p>
+</li>
+<li><p>Solution: Refresh the project in Eclipse. Right click on the project (in Eclipse package explorer), choose <em>Gradle</em> -&gt; <em>Refresh Gradle Project</em>.</p>
+</li>
+</ul>
+<p><strong>Problem</strong>: Eclipse reports some required libraries missing</p>
+<ul class="list">
+<li><p>Reason: Required libraries may not have been downloaded during the project import.</p>
+</li>
+<li><p>Solution: Run tests using Gradle once (to refresh the libraries).</p>
+</li>
+</ul>
+<h2 id="2.-design"><a class="header-link" href="#2.-design"></a>2. Design</h2>
+<p>In this section, you will find out more about the internal parts of the application and how they work together. </p>
+<h3 id="2.1-architecture"><a class="header-link" href="#2.1-architecture"></a>2.1 Architecture</h3>
+<p><img src="./DG_img/Architecture.png" width="600"><br>
+<em>Figure 2.1.1 : Architecture Diagram</em></p>
+<p>A high-level design of our OneTwoDo as shown in the Architecture Diagram in <strong><em>Figure 2.1.1</em></strong> above. </p>
+<blockquote>
+<p>If you want to update the diagram, you can do so in the provided <code>.pptx</code> file. Simply select the objects of the diagram, and choose <code>Save as picture</code>. </p>
+</blockquote>
+<p><code>Main</code> has only one class called <a href="../src/main/java/seedu/onetwodo/MainApp.java"><code>MainApp</code></a>. Its responsible are:</p>
+<ul class="list">
+<li><p>At app launch: Initializes the components in the correct sequence, and connects them up with each other at app launch.</p>
+</li>
+<li><p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+</li>
+</ul>
+<p><code>Commons</code> represents a collection of classes used by other components. Two of those classes play important roles at the architecture level.</p>
+<ul class="list">
+<li><p><code>EventsCenter</code> : This class is used by components to communicate with other components using events (i.e. a form of <strong>Event Driven</strong> design).</p>
+</li>
+<li><p><code>LogsCenter</code>: This class is used by many classes to write log messages to the OneTwoDo&#39;s log file.</p>
+</li>
+</ul>
+<p>The rest of OneTwoDo consists of these four components.</p>
+<ul class="list">
+<li><p><a href="#ui-component"><strong><code>UI</code></strong></a>: The UI of the App.</p>
+</li>
+<li><p><a href="#logic-component"><strong><code>Logic</code></strong></a> : The command executor.</p>
+</li>
+<li><p><a href="#model-component"><strong><code>Model</code></strong></a> : Holds the data of the App in-memory.</p>
+</li>
+<li><p><a href="#storage-component"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
+</li>
+</ul>
+<p>Each of the four components defines its <strong><em>API</em></strong> in an <code>interface</code> with the same name as the Component. They also exposes its functionality using a {Component Name}Manager class. For example, the <code>Logic</code> component defines its API in the <a href="../src/main/java/seedu/onetwodo/logic/Logic.java"><code>Logic.java</code></a> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+<!-- @@author A0139343E -->
+<p><strong>Singleton</strong>
+The <a href="../src/main/java/seedu/onetwodo/MainApp.java"><code>MainApp</code></a> uses the common design pattern known as &quot;Singleton&quot;. This ensures that at any point of time, there is only one instance of <a href="../src/main/java/seedu/onetwodo/MainApp.java"><code>MainApp</code></a>. In this way, it allows the 4 major components to be encapsulated and still provides a global point of access for other classes.</p>
+<!-- @@author A0141138N -->
+<p><strong>Separation of concerns</strong>
+OneTwoDo implements the Separation of concerns (SoC) design principle.</p>
+<ul class="list">
+<li><p>Our Application has been split into 4 distinct sections or components, represented by the color-coding in our Architecture Diagram: <code>UI</code>, <code>Model</code>, <code>Logic</code> and <code>Storage</code>. Each section addresses a separate feature or concern. For example, the <code>UI</code> component specifically handles the user&#39;s interactions with the application.</p>
+</li>
+<li><p>Applying such a design principle ensures <em>modularity</em> by encapsulating information inside a section of the code which has a well-defined interface.</p>
+</li>
+<li><p>This ensures that changes to one componenet does not affect the usability of other components. Modifications can be made to one component without knowledge of the other components, and without having to make corresponding changes to those sections. </p>
+</li>
+</ul>
+<!-- @@author -->
+<h4 id="events-driven-nature-of-the-design"><a class="header-link" href="#events-driven-nature-of-the-design"></a>Events-Driven nature of the design</h4>
+<p>The <em>Sequence Diagram</em> below shows how the components interact for the scenario where the user issues the command <strong><code>delete e1</code></strong></p>
+<p><img src="./DG_img\SDforDeletePerson.png" width="800"><br>
+<em>Figure 2.1.2a : Component interactions for delete e1 command (part 1)</em></p>
+<p>Note how the <code>Model</code> simply raises a <code>OneTwoDoChangedEvent</code> when the OneTwoDo data is changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.</p>
+<p>The diagram below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the ‘Last Updated’ time. </p>
+<p><img src="./DG_img\SDforDeletePersonEventHandling.png" width="800"><br>
+<em>Figure 2.1.2b : Component interactions for <code>delete e1</code> command (part 2)</em></p>
+<p>Did you realise? The event is propagated through the <strong>EventsCenter</strong> to the Storage and UI without Model having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.</p>
+<!-- @@author A0141138N -->
+<p><strong>Model-View-Controller (MVC) pattern</strong></p>
+<p>Model: <code>Model</code> which stores and maintains the user data in <code>Storage</code>, as seen in <em>Figure 2.1.3a</em>.</p>
+<p>View: <code>UI</code> which interacts with the user and displays the data to the user.</p>
+<p>Controller: <code>Logic</code> which accepts user inputs and performs follow-up actions.
+The sections below give more details of each component.</p>
+<p>In the sections below we will provide more details about each component. As OneTwoDo is written in the Object-Oriented Paradigm, you may want to pay attention to how these components work and interact with each other. </p>
+<!-- @@author A0143029M -->
+<h3 id="2.2.-ui-component"><a class="header-link" href="#2.2.-ui-component"></a>2.2. UI component</h3>
+<p><img src="./DG_img/UiClassDiagram.png" width="800"><br>
+<em>Figure 2.2.1 : Structure of the UI Component</em></p>
+<p>You can find the API for this component in <a href="../src/main/java/seedu/onetwodo/ui/Ui.java"><code>Ui.java</code></a>.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts such as <code>CommandBox</code>, <code>ResultDisplay</code>, <code>TaskListPanel</code>, <code>StatusBarFooter</code>, and <code>WelcomeWindow</code>. These parts, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI component uses the JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/ view</code> folder. For example, the layout of the <code>MainWindow</code> is specified in <a href="../src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <a href="http://www.jfoenix.com/">jfoenix</a> library has also been used to provide the <code>JFXDialog</code> component, which is used to display UI elements such as the <code>WelcomeWindow</code> and <code>WebView</code> for the command summary and user guide.</p>
+<p>The <code>UI</code> component:</p>
+<ul class="list">
+<li>Executes user commands using the <code>Logic</code> component.</li>
+<li>Binds itself to some data in the <code>Model</code> so that the <code>UI</code> can auto-update when data in the <code>Model</code> change.</li>
+<li>Responds to events (e.g. <code>CloseDialogEvent</code>) raised from various parts of OneTwoDo and updates the <code>UI</code> accordingly.</li>
+</ul>
+<p><strong>Observer Pattern</strong>
+The <code>UI</code> component adopts the observer pattern as it observes the list of tasks to be shown in OneTwoDo through the <code>UnmodifiableObservableList</code> class and updates the tasks shown when it is notified of changes to the list.</p>
+<!-- @@author A0135739W-->
+<h3 id="2.3.-logic-component"><a class="header-link" href="#2.3.-logic-component"></a>2.3. Logic component</h3>
+<p><img src="./DG_img/LogicClassDiagram.png" width="800"><br>
+<em>Figure 2.3.1 : Structure of the Logic Component</em></p>
+<p>You can find the API for this component in <a href="../src/main/java/seedu/onetwodo/logic/Logic.java"><code>Logic.java</code></a>.</p>
+<ul class="list">
+<li><p><code>Logic</code> uses the <code>Parser</code> class to parse the user command.</p>
+</li>
+<li><p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li><p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+</li>
+<li><p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+</ul>
+<p>Given below is the <em>Sequence Diagram</em> for interactions within the <code>Logic</code> component for the execute(&quot;delete e1&quot;) API call.</p>
+<p><img src="./DG_img/DeletePersonSdForLogic.png" width="800"><br>
+<em>Figure 2.3.1 : Interactions Inside the Logic Component for the delete d2 Command</em></p>
+<p><strong>Open Closed Principle</strong>
+The <code>Logic</code> component follows the <em>Open Closed  Principle</em>. Both the <code>Command</code> object and <code>CommandResult</code> object can be extended to other classes to implement different functions, without requiring themselves to be modified.</p>
+<p><strong>Command Pattern</strong>
+The <code>Logic</code> component adopts the <em>Command Pattern</em>. This allows other components to execute the commands without having to know each of the command types. This also allows the command object to be passed around, stored and executed. </p>
+<!-- @@author A0141138N -->
+<h3 id="2.4.-model-component"><a class="header-link" href="#2.4.-model-component"></a>2.4. Model component</h3>
+<p><img src="./DG_img/ModelClassDiagram.png" width="800"><br>
+<em>Figure 2.4.1 : Structure of the Model Component</em></p>
+<p>You can find the API for this component in <a href="../src/main/java/seedu/onetwodo/model/Model.java"><code>Model.java</code></a>.</p>
+<p>The Model is capable of the following:</p>
+<ul class="list">
+<li><p>Stores a <code>UserPref</code> object that represents the user’s preferences.</p>
+</li>
+<li><p>Stores the OneTwoDo data.</p>
+</li>
+<li><p>Exposes an <code>UnmodifiableObservableList</code>. They that can be ‘observed’ so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li><p>Does not depend on any of the other three components.</p>
+</li>
+</ul>
+<p><strong>Observer Pattern</strong>
+The <code>Model</code> component uses the <em>Observer Pattern</em> to update the <code>UI</code> automatically when any changes are made to the data. This pattern is implemented by exposing the <code>UnmodifiableObservableList</code> which is &#39;observed&#39; by the <code>UI</code>. Using the <em>Observer Pattern</em> allows the <code>Model</code> and <code>UI</code> components to interact with each other while avoiding a direct coupling between both the components. </p>
+<p><strong>Facade Pattern</strong>
+The <code>Model</code> component also uses the <em>Facade Pattern</em> to allow other components to access it without exposing its internal functionalities. All other components need to use the <a href="../src/main/java/seedu/onetwodo/model/Model.java"><code>Model.java</code></a> interface to read or make any changes to the user data.</p>
+<p><img src="./DG_img/Task.png" width="800"><br>
+<em>Figure 2.4.2 : Structure of the Task Component</em></p>
+<p>You can find the API for this component in <a href="../src/main/java/seedu/onetwodo/model/task/Task.java"><code>Task.java</code></a>.</p>
+<p>It is compulsory for a task to have the following parameters: <code>Name</code> and <code>TaskType</code>. Other parameters such as <code>StartDate</code>, <code>EndDate</code>, <code>Priority</code>, <code>Recur</code>, <code>Description</code> and <code>Tag</code> are optional. A task can have multiple tags. <code>StartDate</code> and <code>EndDate</code> classes inherit from <code>Date</code> class.</p>
+<p>A task can be defined in the following ways:</p>
+<ol class="list">
+<li><p><strong>To-do</strong>: A task without a <code>StartDate</code> and <code>EndDate</code>.</p>
+</li>
+<li><p><strong>Deadline</strong>: A task with an <code>EndDate</code> but no <code>StartDate</code>.</p>
+</li>
+<li><p><strong>Event</strong>: A task with both a <code>StartDate</code> and an <code>EndDate</code>.</p>
+</li>
+</ol>
+<!-- @@author A0139343E -->
+<h3 id="2.5.-storage-component"><a class="header-link" href="#2.5.-storage-component"></a>2.5. Storage component</h3>
+<p><img src="./DG_img/StorageClassDiagram.png" width="800"><br>
+<em>Figure 2.5.1 : Structure of the Storage Component</em></p>
+<p>You can find the API for this component in <a href="../src/main/java/seedu/onetwodo/storage/Storage.java"><code>Storage.java</code></a>.</p>
+<p>The Storage component has <strong>2 functionalities</strong>:</p>
+<ol class="list">
+<li><p>Saves the <code>UserPref</code> objects in <code>.json</code> format and read it back.</p>
+</li>
+<li><p>Saves the OneTwoDo task data in <code>.xml</code> format and read it back.</p>
+<!-- @@author -->
+<h3 id="2.6.-common-classes"><a class="header-link" href="#2.6.-common-classes"></a>2.6. Common classes</h3>
+</li>
+</ol>
+<p>In the <code>seedu.onetwodo.commons</code> package, you can find classes that are commonly used by multiple components. They include exception classes, <code>EventsCenter</code> and <code>LogsCenter</code>. </p>
+<h2 id="3.-implementation"><a class="header-link" href="#3.-implementation"></a>3. Implementation</h2>
+<h3 id="3.1.-logging"><a class="header-link" href="#3.1.-logging"></a>3.1. Logging</h3>
+<p>Debugging benefits greatly from logging. We are using the <code>java.util.logging</code> package for logging. You can use the <code>LogsCenter</code> class to manage the logging levels and logging destinations.</p>
+<p><strong>Notes:</strong></p>
+<ul class="list">
+<li><p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#configuration">Configuration</a>).</p>
+</li>
+<li><p>The Logger for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level.</p>
+</li>
+<li><p>Currently log messages are output through the console and to a <code>.log</code> file.</p>
+</li>
+</ul>
+<p>There are 4 different logging levels: </p>
+<ul class="list">
+<li><p><code>SEVERE</code>: Used for indicating critical problems detected, which may cause OneTwoDo to terminate.</p>
+</li>
+<li><p><code>WARNING</code>: Used for indicating minor problems detected. OneTwoDo can continue to run, but warnings to caution the developer are displayed.</p>
+</li>
+<li><p><code>INFO</code>: Used for indicating typical noteworthy information and actions performed by OneTwoDo.</p>
+</li>
+<li><p><code>FINE</code>: Used for indicating details that are not usually noteworthy but may be useful in debugging (e.g. print the actual list instead of just its size).</p>
+</li>
+</ul>
+<h3 id="3.2.-configuration"><a class="header-link" href="#3.2.-configuration"></a>3.2. Configuration</h3>
+<p>You can control various important properties of the application in the file named <code>config.json</code>. These properties include App name and logging level. Simply open the <code>config.json</code> file and change their values to suit your needs.</p>
+<h2 id="4.-testing"><a class="header-link" href="#4.-testing"></a>4. Testing</h2>
+<p>In this section, you will find out more about how testing is done when developing OneTwoDo.</p>
+<h3 id="4.1.-running-tests"><a class="header-link" href="#4.1.-running-tests"></a>4.1. Running tests</h3>
+<p>You can find all tests in the <code>./src/test/java</code> folder.</p>
+<p><strong>Running tests in Eclipse:</strong></p>
+<ul class="list">
+<li><p>To run all tests, you can simply right-click on the <code>src/test/java</code> folder and choose <code>Run as &gt; JUnit Test</code></p>
+</li>
+<li><p>To run a subset of tests, you can right-click on a test package, test class, or even a test and choose to run as a <code>JUnit test</code>.</p>
+</li>
+</ul>
+<p><strong>Running tests using Gradle:</strong></p>
+<ul class="list">
+<li>You may refer to <a href="./UsingGradle.html">UsingGradle.md</a> for how to run tests using Gradle.</li>
+</ul>
+<p>We have two types of tests:</p>
+<ol class="list">
+<li><p><strong>GUI Tests</strong> - These are <em>System Tests</em> that test the entire application by simulating user actions on the GUI. You can find them in the guitests package.</p>
+</li>
+<li><p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include:</p>
+<ul class="list">
+<li><p><em>Unit tests</em>: This targets the lowest level methods/classes, e.g. <code>seedu.onetwodo.commons.UrlUtilTest</code>.</p>
+</li>
+<li><p><em>Integration tests</em>: This checks the integration of multiple code units, e.g. <code>seedu.onetwodo.storage.StorageManagerTest</code>.</p>
+</li>
+<li><p><em>Hybrids of unit and integration tests</em>.: These tests help to check multiple code units as well as how the are connected together. For example please see <code>seedu.onetwodo.logic.LogicManagerTest</code>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="headless-gui-testing"><a class="header-link" href="#headless-gui-testing"></a>Headless GUI Testing</h4>
+<p>Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, GUI tests can be run in the headless mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running. You may want to see <a href="./UsingGradle.html#running-tests">UsingGradle.md</a> to learn how to run these tests.</p>
+<h3 id="4.2.-troubleshooting-tests"><a class="header-link" href="#4.2.-troubleshooting-tests"></a>4.2. Troubleshooting tests</h3>
+<p><strong>Problem:</strong> Tests fail because NullPointException when AssertionError is expected.</p>
+<p>This is caused by assertions not being enabled for JUnit tests. This usually occurs if you are not using a recent Eclipse version (i.e. <em>Neon</em> or later).  Try enabling assertions in JUnit tests as described here: stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option. Also, you can try to delete previous run configurations that were created when you ran the tests.</p>
+<h2 id="5.-dev-ops"><a class="header-link" href="#5.-dev-ops"></a>5. Dev Ops</h2>
+<p>In this section, you will find out more about how to make builds, tests, and releases more rapidly, frequently, and reliably.</p>
+<h3 id="5.1.-build-automation"><a class="header-link" href="#5.1.-build-automation"></a>5.1. Build Automation</h3>
+<p>We use Gradle for automation build. You can check <a href="./UsingGradle.html#running-tests">UsingGradle.md</a> to learn more about Gradle automation build.</p>
+<h3 id="5.2.-continuous-integration"><a class="header-link" href="#5.2.-continuous-integration"></a>5.2. Continuous Integration</h3>
+<p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform Continuous Integration on our projects. </p>
+<p>You can check <a href="./UsingTravis.html">UsingTravis.md</a> and <a href="./UsingAppVeyor.html">UsingAppVeyor.md</a> for more details.</p>
+<h3 id="5.3.-publishing-documentation"><a class="header-link" href="#5.3.-publishing-documentation"></a>5.3. Publishing Documentation</h3>
+<p>You can visit <a href="./UsingGithubPages.html">UsingGithubPages.md</a> to learn how to use GitHub Pages to publish documentation to the project site.</p>
+<h3 id="5.4.-making-a-release"><a class="header-link" href="#5.4.-making-a-release"></a>5.4. Making a Release</h3>
+<p>Here are the steps to create a new release:</p>
+<ol class="list">
+<li><p>Generate a JAR file using Gradle.</p>
+</li>
+<li><p>Tag the repo with the version number. e.g. v0.1.</p>
+</li>
+<li><p>Create a new release using GitHub.</p>
+</li>
+<li><p>and upload the JAR file you created.</p>
+</li>
+</ol>
+<h3 id="5.5.-managing-dependencies"><a class="header-link" href="#5.5.-managing-dependencies"></a>5.5. Managing Dependencies</h3>
+<p>Projects often depends on third-party libraries. Likewise, OneTwoDo depends on the <strong>Jackson</strong> library for XML parsing. Do not worry about managing these dependencies. It can be automated using <strong>Gradle</strong>. Gradle can do amazing stuff such as downloading the dependencies automatically. This is better than the alternatives of: </p>
+<ul class="list">
+<li><p>Including those libraries in the repo (this bloats the repo size).</p>
+</li>
+<li><p>Requiring developers to download those libraries manually (this creates extra work for developers. </p>
+</li>
+</ul>
+<h2 id="appendix-a-:-user-stories"><a class="header-link" href="#appendix-a-:-user-stories"></a>Appendix A : User Stories</h2>
+<table>
+  <tr>
+    <td>Priority</td>
+    <td>As a …</td>
+    <td>I want to …</td>
+    <td>So that I can…</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>new user</td>
+    <td>see usage instructions</td>
+    <td>refer to instructions when I forget how to use the App</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>add a new task</td>
+    <td>add task to manage all my to-do</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>delete a task</td>
+    <td>remove entries that I no longer need</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user with many tasks</td>
+    <td>find a task by keywords</td>
+    <td>search for specific task especially when the list is huge</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>edit a task</td>
+    <td>edit a task if there are any changes</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>clear all tasks</td>
+    <td>quickly start using the tool from scratch</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>close application</td>
+    <td>exit after use</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>organized user</td>
+    <td>add tags to a task</td>
+    <td>organize them by tags</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>add description to task</td>
+    <td>describe tasks in more detail</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>view task description</td>
+    <td>view the task in details</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>list tasks</td>
+    <td>view all uncompleted task</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>sort task by importance</td>
+    <td>prioritise which task to do first</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>last minute user</td>
+    <td>sort tasks by most upcoming tasks</td>
+    <td>get myself prepared for more urgent tasks</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>find tasks by tag</td>
+    <td>find tasks quickly that contains the specific tag</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>advanced user</td>
+    <td>set reminder to a task</td>
+    <td>be notified when tasks are approaching due date</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>select folder to save data storage</td>
+    <td>specify a specific folder and file for data storage</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>user</td>
+    <td>undo most recent action</td>
+    <td>undo action to rectify mistake</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>redo most recent action</td>
+    <td>redo action to rectify mistake</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>add task to nearest free slot automatically</td>
+    <td>add task easily without browsing for free time</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with multiple recurring tasks</td>
+    <td>add recurring tasks</td>
+    <td>avoid adding similar task one by one</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with multiple recurring tasks</td>
+    <td>edit all instances of a recurring task</td>
+    <td>be more efficient when editing recurring tasks</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>filter tasks by multiple keywords</td>
+    <td>search tasks by more specific criteria</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>list all tags</td>
+    <td>quickly view all the tags in the to-do list</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user</td>
+    <td>keep track of completed tasks</td>
+    <td>keep them in track for future references</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>busy user</td>
+    <td>postpone task</td>
+    <td>defer uncompleted task to near future where I am free</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>select task and pin it at the top of display</td>
+    <td>quickly mark certain tasks as demanding of priority attention</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>existing google calendar user</td>
+    <td>sync google calendar on create, update and delete tasks</td>
+    <td>exploit google calendar and sync with this task manager</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user with heavy email usage</td>
+    <td>send email notification for upcoming tasks</td>
+    <td>remind me on tasks that are approaching due date</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>user who prefers keyboard</td>
+    <td>open/close application via keyboard shortcut</td>
+    <td>quickly open or exit program easily without mouse click</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>advanced user</td>
+    <td>remove all tasks with certain tag</td>
+    <td>quickly remove all tasks with some similarity</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>advanced user</td>
+    <td>change all tag names in one go</td>
+    <td>quickly update all tasks with that tag name</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user with many tasks</td>
+    <td>assign priorities to tasks</td>
+    <td>distinguish and pinpoint importance task immediately just by looking</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>list overdue tasks</td>
+    <td>filter out overdue tasks to decide for further actions</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>remove tasks within certain range</td>
+    <td>easily specify date to remove tasks within that range.</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>user</td>
+    <td>list near future free slot</td>
+    <td>choose suitable free slot to add task</td>
+  </tr>
+</table>
+
+
+<p><strong>Priorities:</strong></p>
+<ul class="list">
+<li><strong>High</strong> (must have)</li>
+<li><strong>Medium</strong> (nice to have) </li>
+<li><strong>Low</strong> (unlikely to have) </li>
+</ul>
+<!-- @@author A0139343E -->
+<h2 id="appendix-b-:-use-cases"><a class="header-link" href="#appendix-b-:-use-cases"></a>Appendix B : Use Cases</h2>
+<p>&quot;System&quot; refers to OneTwoDo. &quot;Actor&quot; refers the user.</p>
+<h3 id="uc01---add-a-task"><a class="header-link" href="#uc01---add-a-task"></a>UC01 - Add a task</h3>
+<h4 id="**mss**"><a class="header-link" href="#**mss**"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User input information to add task.</p>
+</li>
+<li><p>System notifies user that the task has been successfully added.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extensions"><a class="header-link" href="#extensions"></a>Extensions</h4>
+<p>2a. Task already exists.</p>
+<p>2a1. System informs user that the task already exists and doesn’t add repeated task.</p>
+<p>Use case ends.
+<br></p>
+<p>2b. Invalid command format.</p>
+<p>2b1. System informs user that the command format is invalid and outputs a sample format to user.</p>
+<p>Use case ends.
+<br></p>
+<h3 id="uc02---delete-task"><a class="header-link" href="#uc02---delete-task"></a>UC02 - Delete task</h3>
+<h4 id="**mss**-1"><a class="header-link" href="#**mss**-1"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>System display a list of tasks.</p>
+</li>
+<li><p>User input task index to specify which task to delete.</p>
+</li>
+<li><p>System notifies user that task has been successfully deleted.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extension"><a class="header-link" href="#extension"></a>Extension</h4>
+<p>1a. List is empty.</p>
+<p>1a1. System informs user that there is no task to delete.</p>
+<p>Use case ends.
+<br></p>
+<p>2a. Invalid command format.</p>
+<p>2a1. System informs user that the input is invalid and outputs a sample format.</p>
+<p>Use case resume at 1.
+<br></p>
+<p>2b. User input index is not valid.</p>
+<p>2b1. System informs user that the input index is invalid.</p>
+<p>Use case resume at 1.
+<br></p>
+<h3 id="uc03---edit-task"><a class="header-link" href="#uc03---edit-task"></a>UC03 - Edit task</h3>
+<h4 id="**mss**-2"><a class="header-link" href="#**mss**-2"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User requests list of tasks.</p>
+</li>
+<li><p>System displays a list of tasks.</p>
+</li>
+<li><p>User selects a task to edit.</p>
+</li>
+<li><p>System shows user the task information.</p>
+</li>
+<li><p>User edits and submits a new task information.</p>
+</li>
+<li><p>System displays changes made to task.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extension-1"><a class="header-link" href="#extension-1"></a>Extension</h4>
+<p>2a. The list is empty.</p>
+<p>2a1. System informs user that there is no task to edit.</p>
+<p>Use case ends.
+<br></p>
+<p>3a. User task selection is invalid.</p>
+<p>3a1. System shows error message.</p>
+<p>Use case resumes from step 2.
+<br></p>
+<p>3b. System detects an error in the data that user entered.</p>
+<p>3b1. System selects valid task.</p>
+<p>3b2. User enters new data.</p>
+<p>3b3. Repeat steps 3b1 and 3b2 until data has no errors.</p>
+<p>Use case resumes from step 4.
+<br></p>
+<p>3c. User requests to tag a task with a category that is not currently in the system.</p>
+<p>3c1. System creates the category.</p>
+<p>Use case resumes from step 4.
+<br></p>
+<h3 id="uc04---find-task"><a class="header-link" href="#uc04---find-task"></a>UC04 - Find task</h3>
+<h4 id="**mss**-3"><a class="header-link" href="#**mss**-3"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User searches for task.</p>
+</li>
+<li><p>System lists tasks which match the keywords entered by user.</p>
+</li>
+</ol>
+<p>Use case ends.</p>
+<h4 id="extension-2"><a class="header-link" href="#extension-2"></a>Extension</h4>
+<p>2a. Task does not exist.</p>
+<p>2a1. System informs user that no tasks is found.</p>
+<p>Use case ends.
+<br></p>
+<h3 id="uc05---list-tasks"><a class="header-link" href="#uc05---list-tasks"></a>UC05 - List tasks</h3>
+<h4 id="**mss**-4"><a class="header-link" href="#**mss**-4"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User requests list of tasks.</p>
+</li>
+<li><p>System displays list of tasks.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extension-3"><a class="header-link" href="#extension-3"></a>Extension</h4>
+<p>1a. User requests to list task in a certain category.</p>
+<p>1a1. System displays list of tasks in that category.</p>
+<p>Use case ends.
+<br></p>
+<p>2a. The list is empty.</p>
+<p>2a1. System displays empty list.</p>
+<p>Use case ends.
+<br></p>
+<h3 id="uc06---done-task"><a class="header-link" href="#uc06---done-task"></a>UC06 - Done task</h3>
+<h4 id="**mss**-5"><a class="header-link" href="#**mss**-5"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User requests to list the tasks.</p>
+</li>
+<li><p>System displays a list of tasks.</p>
+</li>
+<li><p>User selects the task to mark as done.</p>
+</li>
+<li><p>System shows user remaining tasks that are uncompleted.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extension-4"><a class="header-link" href="#extension-4"></a>Extension</h4>
+<p>3a. User task selection is invalid.</p>
+<p>3a1. System shows error message.</p>
+<p>Use case resumes from step 2.
+<br></p>
+<h3 id="uc07---undo-most-recent-action"><a class="header-link" href="#uc07---undo-most-recent-action"></a>UC07 - Undo most recent action</h3>
+<h4 id="**mss**-6"><a class="header-link" href="#**mss**-6"></a><strong>MSS</strong></h4>
+<ol class="list">
+<li><p>User issues command undo.</p>
+</li>
+<li><p>System reverts user’s previous command and displays feedback message to user.</p>
+</li>
+</ol>
+<p>Use case ends.
+<br></p>
+<h4 id="extension-5"><a class="header-link" href="#extension-5"></a>Extension</h4>
+<p>2a. There is no previous command yet.</p>
+<p>2a1. System feedbacks to user that no previous command has found.</p>
+<p>Use case ends.
+<br></p>
+<p>2b. Previous command is not mutable.</p>
+<p>2b1. System feedbacks to user no action required.</p>
+<p>Use case ends.
+<br></p>
+<h2 id="appendix-c-:-non-functional-requirements"><a class="header-link" href="#appendix-c-:-non-functional-requirements"></a>Appendix C : Non-Functional Requirements</h2>
+<ol class="list">
+<li><p>Should work on any <a href="https://hackmd.io/EYBgHATAxgzGAmBaA7BAjEgLMNNEE4QBDZRIgVnQDN1Mj9NMg===?view#mainstream-os">mainstream OS</a>.</p>
+</li>
+<li><p>Should be able to store up to 500 tasks.</p>
+</li>
+<li><p>Should work in online or offline mode.</p>
+</li>
+<li><p>Should respond to commands within 2 seconds.</p>
+</li>
+<li><p>Programme should startup within 3 seconds.</p>
+</li>
+<li><p>Programme should be open source code and readily available.</p>
+</li>
+<li><p>Should have an easy to use interface.</p>
+</li>
+<li><p>Should be able to handle exceptions from user input.</p>
+</li>
+<li><p>Should work as a standalone application.</p>
+</li>
+<li><p>Should have an executable file that can be launched by double clicking or keyboard shortcut.</p>
+</li>
+<li><p>Should not use relational databases to store data.</p>
+</li>
+<li><p>Command line interface should be the main mode of input.</p>
+</li>
+<li><p>Should not violate any copyrights.</p>
+</li>
+<li><p>Should not contain obscene or inappropriate content.</p>
+</li>
+</ol>
+<h2 id="appendix-d-:-glossary"><a class="header-link" href="#appendix-d-:-glossary"></a>Appendix D : Glossary</h2>
+<table>
+  <tr>
+    <td>Mainstream OS</td>
+    <td>Windows, Linux, Unix, OS-X.</td>
+  </tr>
+  <tr>
+    <td>Keyword</td>
+    <td>Words in task names, tag names, and task description.</td>
+  </tr>
+  <tr>
+    <td>Invalid Commands</td>
+    <td>Invalid commands includes invalid arguments.</td>
+  </tr>
+  <tr>
+    <td>Error message</td>
+    <td>Error message includes suggestion for correct command.</td>
+  </tr>
+  <tr>
+    <td>START_DATE</td>
+    <td>START_DATE refers to start date and time entered.
+Defaults to time of 0000 hrs if no time is indicated.</td>
+  </tr>
+  <tr>
+    <td>END_DATE</td>
+    <td>END_DATE refers to end of date and time entered.
+Defaults to time of 2359 hrs if no time is indicated.</td>
+  </tr>
+  <tr>
+    <td>Event task</td>
+    <td>Tasks that have a specific start and end date.</td>
+  </tr>
+  <tr>
+    <td>Deadline task</td>
+    <td>Tasks that only have a specific end date.</td>
+  </tr>
+  <tr>
+    <td>To-Do task</td>
+    <td>Tasks that have no start or end date.</td>
+  </tr>
+  <tr>
+    <td>Category</td>
+    <td>One of Event, Deadline or To-do.</td>
+  </tr>
+</table>
+
+
+<h2 id="appendix-e-:-product-survey"><a class="header-link" href="#appendix-e-:-product-survey"></a>Appendix E : Product Survey</h2>
+<!-- @@author A0141138N -->
+<h3 id="review-for-*remember-the-milk*"><a class="header-link" href="#review-for-*remember-the-milk*"></a>Review for <em>Remember the Milk</em></h3>
+<p><strong>Pros:</strong></p>
+<ul class="list">
+<li><p>Easy to use interface.</p>
+</li>
+<li><p>User can add recurring tasks.</p>
+</li>
+<li><p>User can set a start date and end date for the task.</p>
+</li>
+<li><p>User can add tag to the task.</p>
+</li>
+<li><p>User can view a list of all completed tasks.</p>
+</li>
+<li><p>User can set priority to task.</p>
+</li>
+<li><p>User can postpone a task.</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="list">
+<li><p>No online support or video tutorials for beginners.</p>
+</li>
+<li><p>Pro version is very expensive and most features are only available in pro version.</p>
+</li>
+<li><p>No security for data in terms of encryption or HTTPS.</p>
+</li>
+</ul>
+<!-- @@author A0143029M -->
+<h3 id="review-for-*google-calender*"><a class="header-link" href="#review-for-*google-calender*"></a>Review for <em>Google Calender</em></h3>
+<p><strong>Pros:</strong></p>
+<ul class="list">
+<li><p>Calendar user interface, click on events on the calendar to view more details.</p>
+</li>
+<li><p>Users can edit events by dragging.</p>
+</li>
+<li><p>Users are able to import calendars using .ical files.</p>
+</li>
+<li><p>Users can edit a single instance of event, or recurring events.</p>
+</li>
+<li><p>Users can be notified of approaching events.</p>
+</li>
+<li><p>Users have daily, weekly, monthly, and &quot;4-days&quot; types of view.</p>
+</li>
+<li><p>Users can sync and access on multiple platforms, like mobile, and desktop.</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="list">
+<li><p>Have to be online to access calendar.</p>
+</li>
+<li><p>No command line interface.</p>
+</li>
+<li><p>Updates may take a while to sync due to network issues.</p>
+</li>
+</ul>
+<!-- @@author -->
+<h3 id="review-for-*wunderlist*"><a class="header-link" href="#review-for-*wunderlist*"></a>Review for <em>Wunderlist</em></h3>
+<p><strong>Pros:</strong></p>
+<ul class="list">
+<li><p>Allows user to note down descriptions and more information for each task.</p>
+</li>
+<li><p>Allows user to create subtasks for each task.</p>
+</li>
+<li><p>Allows user to set &quot;Reminder&quot; and “Due Date” separately.</p>
+</li>
+<li><p>Allows user to highlight(star) a task.</p>
+</li>
+<li><p>Separates &quot;Delete&quot; and “Mark as complete”.</p>
+</li>
+<li><p>Parses the reminder time when user types in the task name.</p>
+</li>
+<li><p>Automatically creates &quot;Today&quot; and “Week” folder for user to see what needs to be done for today and this week (more urgent tasks).</p>
+</li>
+<li><p>Allows user to categorise tasks using folders, e.g. (work, family).</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="list">
+<li><p>Just highlighting (starring) is not enough. User may just highlight all tasks and that defeats the purpose of starring.</p>
+</li>
+<li><p>Tasks are not sorted in chronological order in the main folder.</p>
+</li>
+</ul>
+<!-- @@author A0139343E -->
+<h3 id="review-for-*habitica*"><a class="header-link" href="#review-for-*habitica*"></a>Review for <em>Habitica</em></h3>
+<p><strong>Pros:</strong></p>
+<ul class="list">
+<li><p>It has simulation game element which keep the work fun and motivating.</p>
+</li>
+<li><p>It has colourful and clean user interface that make important tasks stand out.</p>
+</li>
+<li><p>It supports multiple platforms such as mobile and desktop.</p>
+</li>
+<li><p>It supports recurring task adding.</p>
+</li>
+<li><p>It can set multiple and different reminders on any task.</p>
+</li>
+<li><p>It can easily be reordered/sorted using name or tags.</p>
+</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul class="list">
+<li><p>Unable to view the calendar when selecting tasks</p>
+</li>
+<li><p>Adding tasks require mouse/ touch screen instead of keyboard entering.</p>
+</li>
+<li><p>Has the potential of distraction due to the existence of game elements.</p>
+</li>
+<li><p>Deadline of the tasks are not shown unless clicked.</p>
+</li>
+<li><p>Unable to mark tasks as done without keeping them for future references.</p>
+</li>
+</ul>
+<!-- @@author -->
+</body>
+</html>
