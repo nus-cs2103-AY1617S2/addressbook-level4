@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author A0163673Y -->
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="760.0" prefWidth="760.0" />
+            </columnConstraints>
+            <children>
+                <VBox alignment="CENTER_LEFT" minHeight="50.0" GridPane.columnIndex="0">
+                    <stylesheets>
+                        <URL value="@DarkTheme.css" />
+                        <URL value="@Extensions.css" />
+                    </stylesheets>
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+
+                    <children>
+                        <HBox spacing="5" alignment="CENTER_LEFT">
+                            <children>
+                                <HBox>
+                                    <Label fx:id="complete" text="" styleClass="cell_big_label" minWidth="40.0" prefWidth="40.0" wrapText="true"/>
+                                    <Label fx:id="id" styleClass="cell_big_label" minWidth="70.0" prefWidth="70.0" wrapText="true"></Label>
+                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label" minWidth="200.0" prefWidth="200.0" wrapText="true">
+                                        <padding><Insets right="20"/></padding>
+                                    </Label>
+                                    <Label fx:id="due" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="durationStart" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <Label fx:id="durationEnd" text="\$first" styleClass="cell_big_label" minWidth="100.0" prefWidth="100.0" wrapText="true"/>
+                                    <FlowPane fx:id="tags" orientation="horizontal" minWidth="150.0"/>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+    </children>
+</HBox>
