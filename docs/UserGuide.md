@@ -227,11 +227,11 @@ Format:<br>
 
 ```
 Things To Note:
-> Edits the task at the specified INDEX.
+> The edit command edits the task at the specified INDEX.
   The index refers to the number shown in the last task listing.
-> Optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>.
-> At least one of the optional fields must be provided.
-> Existing field(s) will be updated with the input fields.
+> The optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>.
+> The requirement is the presence of one of the optional fields.
+> The existing field(s) will be updated with the input fields.
 ```
 
 Examples:
