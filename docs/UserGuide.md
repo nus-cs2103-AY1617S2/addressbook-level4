@@ -19,7 +19,7 @@ By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/uiv0.5rc.png" width="600">
+   <img src="images/uiv0.5rc.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -109,20 +109,20 @@ Examples:
 
 ### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
 
-Finds a task with the given keyword.<br>
+Finds a task with fields containing the given keyword.<br>
 Supports partial matching and tolerance for misspelled keywords.<br>
 Format: `find KEYWORD`
 
 Examples:
 
 * `find report`<br>
-  Returns `submit report`  `print report` `#report` etc. in the column
+  Returns `submit report`  `print report` `t/report` etc. in the column
 * `find schoolwork sports`<br>
-  Returns `do schoolwork`  `play sports` `#schoolwork` `#sports` etc. in the column
+  Returns `do schoolwork`  `play sports` `d/schoolwork` `d/sports` `t/schoolwork` `t/sports` etc. in the column
 * `find work`<br>
-  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
+  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
 * `find werk`<br>
-  Returns `do schoolwork`  `do homework` `#schoolwork` `#workfile` etc. in the column
+  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
@@ -300,7 +300,7 @@ Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | ad
 List         | list
 List         | list KEYWORD                                                 | list todo
 Select       | select INDEX                                                 | select 3
-Edit         | edit INDEX COMPONENT                                         | edit 3 e/04/04/2017
+Edit         | edit INDEX COMPONENT(s)                                      | edit 3 e/04/04/2017
 Find         | find KEYWORD(s)                                              | find report assignment
 Find by Date | findbydate DATE                                              | findbydate today
 Find by Date | findbydate DATE to DATE                                      | findbydate today to next wednesday
