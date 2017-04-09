@@ -106,12 +106,12 @@ public class DateParser {
      * Checks only if there is a startDate and endDate
      * @return true if endDate is not before startDate, otherwise false
      */
-    public static boolean checkValidSchedule(List<Date> startDate, List<Date> endDate) {
+    public static boolean isValidSchedule(List<Date> startDate, List<Date> endDate) {
         boolean isValidDate = false;
         if (!startDate.isEmpty() && !endDate.isEmpty()) {
             Date sDate = startDate.get(dateFromUser);
             Date eDate = endDate.get(dateFromUser);
-            isValidDate = checkValidEventDate(sDate, eDate);
+            isValidDate = isValidEventDate(sDate, eDate);
         }
         return isValidDate;
     }
@@ -119,7 +119,7 @@ public class DateParser {
      * Compares @param startDate and @param endDate
      * @return true if endDate is not before startDate, otherwise false
      */
-    public static boolean checkValidEventDate(Date startDate, Date endDate) {
+    public static boolean isValidEventDate(Date startDate, Date endDate) {
         boolean isValidDate = false;
         if (startDate.before(endDate)) {
             isValidDate = true;
@@ -130,7 +130,7 @@ public class DateParser {
      * Checks @param date if the list of dates is empty or not
      * @return true if there is a date in the list
      */
-    public static boolean checkValidDateFormat(List<Date> date) {
+    public static boolean isValidDateFormat(List<Date> date) {
         boolean isValidDate = false;
         if (!date.isEmpty()) {
             isValidDate = true;
