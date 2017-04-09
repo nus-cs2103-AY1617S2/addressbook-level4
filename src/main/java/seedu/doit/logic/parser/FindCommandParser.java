@@ -1,7 +1,6 @@
 package seedu.doit.logic.parser;
 
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.doit.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.doit.logic.parser.CliSyntax.PREFIX_NAME;
@@ -13,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.FindCommand;
@@ -88,11 +86,6 @@ public class FindCommandParser implements CommandParser {
         }
         if (tagsKeyWords.contains("")) {
             return new IncorrectCommand(NO_TAGS_AFTER_PREFIX);
-        }
-
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
