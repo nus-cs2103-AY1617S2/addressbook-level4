@@ -20,14 +20,13 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML1 = "TodayTaskListPanel.fxml";
-    private static final String FXML2 = "OverdueTaskListPanel.fxml";
+    private static final String FXML = "TaskListPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
     public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
-        super(FXML1);
+        super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
     }
@@ -38,15 +37,6 @@ public class TaskListPanel extends UiPart<Region> {
         setEventHandlerForSelectionChangeEvent();
     }
 
-    /*
-    public void updateFilteredTaskList(Date date) {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-    }
-    
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-    }
-*/
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
         FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
