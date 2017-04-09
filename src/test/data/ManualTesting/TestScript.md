@@ -59,7 +59,7 @@ To change the default data save location, start command with the keyword `save`.
 
 >* `save <directory>` - `<directory>` must be a valid path to a file on the local computer. If the folders specified in the new file path does not exist, they will be created. Note that the save file in the old save location remains.
 
-Type `> save src/test/data/ManualTesting/Test/newTaskManager.xml`
+`save src/test/data/ManualTesting/Test/newTaskManager.xml`
 
 #### Result
 
@@ -68,3 +68,16 @@ Feedback shows:
 > New save location: src/test/data/ManualTesting/Test/newTaskManager.xml
 
 The storage file is saved at the specified path.
+
+## Sort command
+To sort the list of tasks, start command with the keyword `save`.
+
+`sort priority`
+
+#### Result
+
+Feedback shows:
+
+> Sorted by priority!
+
+The list of tasks is sorted according to priority, with the 'hi' priority at the top followed by 'mid' and 'low'.
