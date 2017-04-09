@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -361,15 +360,11 @@ public class LogicManagerTest {
         expectedTM.removeTask(threeTasks.get(1));
         helper.addToModel(this.model, threeTasks);
 
-        HashSet<Integer> indexToDelete = new HashSet<>();
-        int intToDelete = 2;
-        indexToDelete.add(intToDelete);
 
         HashSet<ReadOnlyTask> tasksToDelete = new HashSet<>();
         tasksToDelete.add(threeTasks.get(1));
 
-        String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete,
-            indexToDelete));
+        String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete));
 
         assertCommandSuccess("delete 2", resultMessage, expectedTM, expectedTM.getTaskList());
     }
@@ -387,10 +382,9 @@ public class LogicManagerTest {
 
         helper.addToModel(model, fourTasks);
 
-        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 2, 3, 4);
         HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(1),
             fourTasks.get(2), fourTasks.get(3));
-        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+        String tasksAsString = CommandResult.tasksToString(deletedTasks);
 
         // Delete all tasks ranging from 1 to 4
         // Then checks if the task manager have no tasks left
@@ -412,9 +406,8 @@ public class LogicManagerTest {
 
         helper.addToModel(model, fourTasks);
 
-        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 4);
         HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(3));
-        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+        String tasksAsString = CommandResult.tasksToString(deletedTasks);
 
         // Delete tasks 1 and 4
         // Then checks if the task manager have no tasks left
@@ -660,10 +653,6 @@ public class LogicManagerTest {
 
         private HashSet<ReadOnlyTask> generateTaskSet(ReadOnlyTask... tasks) {
             return new HashSet<>(Arrays.asList(tasks));
-        }
-
-        private HashSet<Integer> generateNumberSet(Integer... numbers) {
-            return new HashSet<>(Arrays.asList(numbers));
         }
     }
 }
