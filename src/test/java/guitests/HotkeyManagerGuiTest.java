@@ -13,7 +13,7 @@ public class HotkeyManagerGuiTest extends TaskManagerGuiTest {
     @Test
     public void toggleWindowFocus() {
         assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
-        //assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlQAccelerator());
+        assertMainGuiHidden(mainGui.toggleMainGuiUsingCtrlQAccelerator());
         assertMainGuiOpen(mainGui.toggleMainGuiUsingCtrlAltDAccelerator());
     }
 

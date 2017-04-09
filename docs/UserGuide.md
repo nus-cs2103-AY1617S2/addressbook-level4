@@ -225,7 +225,8 @@ E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
 
-For advanced users: **`e`** `<task_index>` <br>
+For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br>
+For advanced users: **`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
 
 ### 3.6. Delete a task : `delete`
 
