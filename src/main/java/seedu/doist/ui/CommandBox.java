@@ -82,7 +82,7 @@ public class CommandBox extends UiPart<Region> {
         FxViewUtil.applyAnchorBoundaryParameters(commandTextField, 0.0, 0.0, 0.0, 0.0);
     }
 
-    //@@author A0147620L
+    //@@author A0147980U
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         if (navigationMode) {
@@ -92,7 +92,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    //@@author A0147980U
     private void handleKeyPressedInNavigationMode(KeyEvent event) {
         event.consume();
         if (event.getCode() == KeyCode.J) {
