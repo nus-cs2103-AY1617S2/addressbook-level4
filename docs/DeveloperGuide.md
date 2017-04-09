@@ -214,7 +214,7 @@ The `Model`,
 * Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * Does not depend on any of the other three components.
-* Defines reccuring tasks in the following way:
+* Defines recurring tasks in the following way:
   * Class `RecurringTaskOccurrence` encapsulates 2 Timing objects (start & end times) and a boolean to indicate if
   the occurrence is complete.
   * Class `Task` encapsulates a list of `RecurringTaskOccurrence` objects. In addition, it also encapsulates a
