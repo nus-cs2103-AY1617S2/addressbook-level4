@@ -49,11 +49,13 @@ public class UniqueTaskList implements Iterable<Task> {
         //@@author A0164440M
         ObservableList<Task> stackList = FXCollections.observableArrayList();
         for (Task t : internalList) {
-            stackList.add(t);
+            stackList.add(0, t);
         }
         undoStack.push(stackList);
         //@@author
-        internalList.add(toAdd);
+        //@@author A0140055W
+        internalList.add(0, toAdd);
+        //@@author
     }
 
     /**

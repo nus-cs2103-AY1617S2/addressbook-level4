@@ -336,6 +336,19 @@ public class TestUtil {
         listOfTasks.addAll(asList(tasksToAdd));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
+    //@@author A0140055W
+    /**
+     * Appends tasks to the array of tasks at a certain index position.
+     * @param tasks array of tasks.
+     * @param tasksToAdd The tasks that are to be appended on the original array at position index.
+     * @return The modified array of tasks.
+     */
+    public static TestTask[] addTasksToList(final TestTask[] tasks, int index, TestTask... tasksToAdd) {
+      List<TestTask> listOfTasks = asList(tasks);
+      listOfTasks.addAll(index, asList(tasksToAdd));
+      return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
+    //@@author
 
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
