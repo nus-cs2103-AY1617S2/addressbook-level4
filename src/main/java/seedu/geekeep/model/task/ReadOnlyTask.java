@@ -9,17 +9,31 @@ import seedu.geekeep.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
+    //@@author A0139438W
     /**
-     * Formats the Task as text, showing all contact details.
+     * Formats the Task as text, showing the details when it is present.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle()).append(" Ending DateTime: ").append(getEndDateTime())
-               .append(" Starting DateTime: ").append(getStartDateTime())
-               .append(" Description: ").append(getDescriptoin()).append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getTitle());
+
+        if (getEndDateTime() != null && getStartDateTime() != null) {
+            builder.append(" Starting from: " + getStartDateTime() + " until " + getEndDateTime());
+        } else if (getEndDateTime() != null && getStartDateTime() == null) {
+            builder.append(" Due by: " + getEndDateTime().value);
+        }
+
+        if (getDescriptoin() != null) {
+            builder.append(" Details: " + getDescriptoin().value);
+        }
+
+        if (!getTags().isEmpty()) {
+            builder.append(" Tags: ");
+            getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
+    //@@author
 
     /**
      * Retrieve the DateTime representation of the ending date and time of the task
