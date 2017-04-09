@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.Config;
+import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.exceptions.DataConversionException;
 
 public class ConfigUtilTest {
@@ -50,14 +51,14 @@ public class ConfigUtilTest {
          */
     }
 
-    // @Test
-    // public void read_fileInOrder_successfullyRead() throws DataConversionException {
-    //
-    // Config expected = getTypicalConfig();
-    //
-    // Config actual = read("TypicalConfig.json").get();
-    // assertEquals(expected, actual);
-    // }
+     @Test
+     public void read_fileInOrder_successfullyRead() throws DataConversionException {
+    
+     Config expected = getTypicalConfig();
+    
+     Config actual = read("TypicalConfig.json").get();
+     assertEquals(expected, actual);
+     }
 
     @Test
     public void read_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
@@ -65,21 +66,21 @@ public class ConfigUtilTest {
         assertEquals(new Config(), actual);
     }
 
-    // @Test
-    // public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
-    // Config expected = getTypicalConfig();
-    // Config actual = read("ExtraValuesConfig.json").get();
-    //
-    // assertEquals(expected, actual);
-    // }
+     @Test
+     public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
+     Config expected = getTypicalConfig();
+     Config actual = read("ExtraValuesConfig.json").get();
+    
+     assertEquals(expected, actual);
+     }
 
     private Config getTypicalConfig() {
         Config config = new Config();
         config.setAppTitle("Typical App Title");
         config.setLogLevel(Level.INFO);
         config.setUserPrefsFilePath("C:\\preferences.json");
-        config.setTaskManagerFilePath("addressbook.xml");
-        config.setTaskManagerName("TypicalAddressBookName");
+        config.setTaskManagerFilePath("data/taskmanager.xml");
+        config.setTaskManagerName("TypicalTaskManagerName");
         return config;
     }
 

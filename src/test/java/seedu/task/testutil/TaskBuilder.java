@@ -1,6 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.TaskManager;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.TaskDate;
@@ -24,6 +25,7 @@ public class TaskBuilder {
         this.task = new TestTask(taskToCopy);
     }
 
+   
     public TaskBuilder withTaskName(String taskName) throws IllegalValueException {
         this.task.setTaskName(new TaskName(taskName));
         return this;
