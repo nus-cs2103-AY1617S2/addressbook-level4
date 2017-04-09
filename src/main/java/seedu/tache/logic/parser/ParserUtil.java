@@ -9,7 +9,13 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-import static seedu.tache.logic.parser.CliSyntax.START_DATE_IDENTIFIER;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX ;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_DAILY;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_MONTHLY;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_YEARLY;
 
 import java.util.Collection;
 import java.util.Deque;
@@ -22,6 +28,7 @@ import java.util.regex.Pattern;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.logic.parser.ParserUtil.PossibleDateTime.DateTimeType;
 import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
@@ -43,9 +50,6 @@ public class ParserUtil {
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
 
-    //@@author A0150120H
-    static enum DateTimeType { START, END, UNKNOWN, RECURRENCE };
-    //@@author
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
@@ -174,7 +178,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        return isFoundIn(s, START_DATE_IDENTIFIER);
+        return isFoundIn(s, DATE_IDENTIFIER_START);
     }
 
     /**
@@ -183,7 +187,37 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        return isFoundIn(s, END_DATE_IDENTIFIER);
+        return isFoundIn(s, DATE_IDENTIFIER_END);
+    }
+    
+    /**
+     * Checks if the given String is the prefix for a recurrence identifier
+     * @param s String to check
+     * @return true if it's a recurrence identifier prefix, false otherwise
+     */
+    public static boolean isRecurrencePrefix(String s) {
+        return s.equalsIgnoreCase(RECURRENCE_IDENTIFIER_PREFIX);
+    }
+    
+    /**
+     * Checks if the given String is a recurrence identifier
+     * @param s String to check
+     * @return true if it's a recurrence identifier, false otherwise
+     */
+    public static boolean isRecurrenceDaily(String s) {
+        return isFoundIn(s, RECURRENCE_IDENTIFIER_DAILY);
+    }
+    
+    public static boolean isRecurrenceWeekly(String s) {
+        return isFoundIn(s, RECURRENCE_IDENTIFIER_WEEKLY);
+    }
+    
+    public static boolean isRecurrenceMonthly(String s) {
+        return isFoundIn(s, RECURRENCE_IDENTIFIER_MONTHLY);
+    }
+    
+    public static boolean isRecurrenceYearly(String s) {
+        return isFoundIn(s, RECURRENCE_IDENTIFIER_YEARLY);
     }
 
     /**
@@ -193,48 +227,74 @@ public class ParserUtil {
      */
     public static Deque<PossibleDateTime> parseDateTimeIdentifiers(String input) {
         String[] inputs = input.split(" ");
+        int currentIndex = 0;
         Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
-        PossibleDateTime current = new PossibleDateTime(PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
         for (int i = 0; i < inputs.length; i++) {
             String word = inputs[i];
             if (isStartDateIdentifier(word)) {
                 result.push(current);
-                current = new PossibleDateTime(i, DateTimeType.START);
+                current = new PossibleDateTime(word, currentIndex, DateTimeType.START);
             } else if (isEndDateIdentifier(word)) {
                 result.push(current);
-                current = new PossibleDateTime(i, DateTimeType.END);
+                current = new PossibleDateTime(word, currentIndex, DateTimeType.END);
+            } else if (isRecurrencePrefix(word)) {
+                result.push(current);
+                current = new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE_PREFIX);
+            } else if (isRecurrenceDaily(word)) {
+                result.push(current);
+                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.DAY));
+                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+            }else if (isRecurrenceWeekly(word)) {
+                result.push(current);
+                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.WEEK));
+                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+            }else if (isRecurrenceMonthly(word)) {
+                result.push(current);
+                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.MONTH));
+                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+            }else if (isRecurrenceYearly(word)) {
+                result.push(current);
+                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.YEAR));
+                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
             } else {
-                current.appendDateTime(i, word);
+                current.appendDateTime(word);
             }
+            currentIndex += word.length() + 1;
         }
         result.push(current);
         return result;
     }
-
+    
     /**
      * Class to describe a date/time String that was found
      *
      */
     static class PossibleDateTime {
+        static enum DateTimeType { START, END, UNKNOWN, RECURRENCE, RECURRENCE_PREFIX };
+        
         int startIndex;
-        int endIndex;
         String data;
         DateTimeType type;
+        RecurInterval recurInterval;
 
         static final int INVALID_INDEX = -1;
 
-        PossibleDateTime(int index, DateTimeType type) {
+        PossibleDateTime(String data, int index, DateTimeType type) {
             this.startIndex = index;
-            this.endIndex = index;
             this.type = type;
-            this.data = new String();
+            this.data = data;
+        }
+        
+        PossibleDateTime(String data, int index, DateTimeType type, RecurInterval recurInterval) {
+            this(data, index, type);
+            this.recurInterval = recurInterval;
         }
 
-        void appendDateTime(int index, String data) {
+        void appendDateTime(String data) {
             this.data += " " + data;
-            this.endIndex = index;
         }
-    }
+    }    
 
     public static boolean canParse(String s) {
         return DateTime.canParse(s);
@@ -262,6 +322,23 @@ public class ParserUtil {
             }
         }
         return false;
+    }
+    /**
+     * Removes a chunk of the given string
+     * @param s Original String
+     * @param startIndex Start index of the chunk to remove, inclusive
+     * @param endIndex End index of the chunk to remove, exclusive
+     * @return
+     */
+    public static String removeLast(String s, String target) {
+        int targetIndex = s.lastIndexOf(target);
+        if (targetIndex == -1) {
+            return s;
+        } else {
+            String firstPortion = s.substring(0, targetIndex);
+            String secondPortion = s.substring(targetIndex + target.length()).trim();
+            return firstPortion.concat(secondPortion);
+        }
     }
 
 }
