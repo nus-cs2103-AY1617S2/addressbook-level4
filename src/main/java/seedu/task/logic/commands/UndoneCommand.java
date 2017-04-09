@@ -5,6 +5,9 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0139975J
+/**
+ * Update the status of the task to not done/undone using the index to identity the specific task.
+ */
 public class UndoneCommand extends Command {
 
     public static final String COMMAND_WORD_1 = "undone";

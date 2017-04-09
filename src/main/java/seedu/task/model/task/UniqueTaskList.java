@@ -80,6 +80,11 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0139975J
+    /**
+     * Set Target Task to done.
+     *
+     * @param index  Target task to be set to done
+     */
     public void done(int index) {
         Task taskDone = internalList.get(index);
         taskDone.setIsDone(true);
@@ -87,6 +92,11 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     //@@author A0139975J
+    /**
+     * Set Target Task to undone.
+     *
+     * @param index  Target task to be set to undone
+     */
     public void undone(int index) {
         Task taskUnDone = internalList.get(index);
         taskUnDone.setIsDone(false);
