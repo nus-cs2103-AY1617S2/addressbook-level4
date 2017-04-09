@@ -23,7 +23,7 @@ import seedu.jobs.testutil.TestUtil;
 
 public class RedoCommandTest extends TaskBookGuiTest {
   private final Stack<TestTask> testStack = new Stack<TestTask>();
-  
+
   @Test
   public void redo() throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
     commandBox.runCommand("redo");
@@ -57,14 +57,14 @@ public class RedoCommandTest extends TaskBookGuiTest {
     commandBox.runCommand("redo");
     assertResultMessage(MESSAGE_FAILURE);
   }
-  
+
   private void undoForRedo(TestTask[] currentList)
       throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
     TestTask taskUndone = currentList[currentList.length - 1];
     testStack.push(taskUndone);
     commandBox.runCommand("undo");
   }
-  
+
   private void assertRedoSuccess(TestTask[] currentList)
       throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
     TestTask taskToBeRedone = testStack.pop();
