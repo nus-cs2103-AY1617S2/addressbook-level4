@@ -175,4 +175,8 @@ public class TaskListPanelHandle extends GuiHandle {
     public int getNumberOfTasks() {
         return getListView().getItems().size();
     }
+  //@@author A0163845X
+    public ReadOnlyTask getTask(int i) {
+        return getListView().getItems().get(i);
+    }
 }
