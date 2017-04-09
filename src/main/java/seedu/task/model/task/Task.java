@@ -179,7 +179,7 @@ public class Task implements ReadOnlyTask {
         }
         if ((otherTask.getTaskStartTime() == null && this.getTaskStartTime() != null)
                 || (otherTask.getTaskStartTime() != null && this.getTaskStartTime() == null)
-                || (otherTask.getTaskDate() != this.getTaskDate())
+                || (otherTask.getTaskStartTime() != this.getTaskStartTime())
                         && !(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
             System.out.println("start times arent equal");
             return false;
