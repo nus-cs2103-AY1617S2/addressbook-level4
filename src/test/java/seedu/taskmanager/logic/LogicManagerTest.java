@@ -238,14 +238,14 @@ public class LogicManagerTest {
         } catch (IOException e) {
             assertTrue("CommandException not expected but was thrown.", false);
         }
-        
+
         if (!taskManagerOptional.isPresent()) {
             assertTrue("No Task Manager exists in the new directory", false);
         }
-        
+
         ObservableList<ReadOnlyTask> fromStorage = taskManagerOptional.get().getTaskList();
         UnmodifiableObservableList<ReadOnlyTask> fromModel = model.getFilteredTaskList();
-        
+
         assertEquals(fromModel, fromStorage);
     }
     // @@author
@@ -892,7 +892,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
 
         File f = new File(newFilepath);
-        if(f.exists() && !f.isDirectory()) { 
+        if (f.exists() && !f.isDirectory()) {
             f.delete();
         }
 
@@ -942,7 +942,7 @@ public class LogicManagerTest {
         f1.delete();
         f2.delete();
     }
-    
+
     @Test
     public void execute_saveas_invalidFilePath() throws Exception {
         assertCommandFailure("save !asdwie34$2.xml",
