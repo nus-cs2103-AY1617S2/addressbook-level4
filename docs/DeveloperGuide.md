@@ -262,7 +262,7 @@ _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
 
 2) `Delete Command` - It is able to delete a task using Index. This function can only work if the given index is valid. <br><br>Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br> <img src="images/deleteCommand.PNG" width="800"><br>
+ API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br><br> <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 
@@ -295,7 +295,7 @@ ModelManager under Model component.
 2) `RemoveDeadline Command` - It is able to remove all dates in a task.
 It checks for valid index and set all the dates for the task to an empty string.
 
-3) `Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed, the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in `ModelManager` under `Model` component. <br><br>Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")` API call. Notice the differences between the remove and undo commands.<br> <img src="images/undoCommand.PNG" width="800"><br>
+3) `Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed, the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in `ModelManager` under `Model` component. <br><br>Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")` API call. Notice the differences between the remove and undo commands.<br> <br><img src="images/undoCommand.PNG" width="800"><br>
 _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 
