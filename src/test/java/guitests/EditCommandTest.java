@@ -76,32 +76,32 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
-     @Test
-     public void edit_missingTaskIndex_failure() {
-     commandBox.runCommand("edit Bobby");
-     assertResultMessage(
-     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-     }
+    @Test
+    public void edit_missingTaskIndex_failure() {
+        commandBox.runCommand("edit Bobby");
+        assertResultMessage(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
 
-     @Test
-     public void edit_invalidTaskIndex_failure() {
-     commandBox.runCommand("edit 8 Bobby");
-     assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-     }
+    @Test
+    public void edit_invalidTaskIndex_failure() {
+        commandBox.runCommand("edit 8 Bobby");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
 
-     @Test
-     public void edit_noFieldsSpecified_failure() {
-     commandBox.runCommand("edit 1");
-     assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-     }
+    @Test
+    public void edit_noFieldsSpecified_failure() {
+        commandBox.runCommand("edit 1");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+    }
 
-     @Test
-     public void edit_invalidValues_failure() {
-     commandBox.runCommand("edit 1 *&");
-     assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
-     commandBox.runCommand("edit 1 t/*&");
-     assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-     }
+    @Test
+    public void edit_invalidValues_failure() {
+        commandBox.runCommand("edit 1 *&");
+        assertResultMessage(TaskName.MESSAGE_NAME_CONSTRAINTS);
+        commandBox.runCommand("edit 1 t/*&");
+        assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
 
     /**
      * Checks whether the edited task has the correct updated details.

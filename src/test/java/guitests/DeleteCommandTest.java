@@ -25,8 +25,8 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         commandBox.runCommand("clear");
-        for(int i = 0; i<currentList.length; i++)
-        commandBox.runCommand(currentList[i].getAddCommand());
+        for (int i = 0; i < currentList.length; i++)
+            commandBox.runCommand(currentList[i].getAddCommand());
 
         assertDeleteSuccess(targetIndex, currentList);
 
@@ -63,10 +63,11 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
         // confirm the list now contains all previous persons except the deleted task
-        //assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        // assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         // confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.getTaskName().fullTaskName+'\n'));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS,
+                taskToDelete.getTaskName().fullTaskName + '\n'));
     }
 
 }

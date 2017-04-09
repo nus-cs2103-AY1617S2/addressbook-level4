@@ -9,9 +9,10 @@ public class ClearCommandTest extends TaskManagerGuiTest {
     @Test
     public void clearAll() {
         // verify a non-empty list can be cleared
-        //assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        // assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
         assertClearCommandSuccess();
     }
+
     //
     public void assertClearCommandSuccess() {
         commandBox.runCommand("clear");
