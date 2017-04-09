@@ -86,7 +86,7 @@ public class TaskDateGenerator {
         }
 
         try {
-            return new EndDate(r.nextInt(MAX_DAYS_TO_ADD+1) + " days after " + lastStartDate.toString());
+            return new EndDate((r.nextInt(MAX_DAYS_TO_ADD) + 1) + " days after " + lastStartDate.toString());
         } catch (IllegalValueException e) {
             getStartDate(r);
             return getEndDate(r);
