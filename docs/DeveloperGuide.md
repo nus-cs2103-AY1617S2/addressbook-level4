@@ -191,7 +191,7 @@ Author: Cynthia Dharman
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 
@@ -208,7 +208,7 @@ Author: Darius Foong
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 
@@ -358,6 +358,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *`| user | edit a parameter of a task | update a task without needing to delete and re-add it
 `* * *` | user | mark tasks as complete | see what I've already completed (and still have left to do)
 `* * *` | user | undo my last action | easily fix typos and mistakes I make
+`* * *` | user | specify a duration of the task | plan when I will complete the task
+`* * *` | user | list completed tasks | see a list of all completed tasks
+`* * *` | user | list incomplete tasks | see a list of all incomplete tasks
 `* * *` | user | specify a duration of the task | plan when I will complete the task
 `* *`| user | list tasks in order of due date | prioritize what to do next
 `* *`| user | mark tasks as important | prioritize what to do next
