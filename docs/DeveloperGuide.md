@@ -37,7 +37,7 @@
 
 ## 1. Introduction
 
-TypeTask is a task manager for active users who prefer to manage their tasks and plans by keyboard commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX. <br>
+TypeTask is a task manager for active users who prefer to manage their tasks and plans using text commands. TypeTask works on a Java desktop application that has a graphical user interface (GUI) executed with JavaFX. <br>
 
 This guide illustrates the design and implementation of TypeTask. It will guide you as a developer to understand how TypeTask functions and show you how to be a part of its progress.  <br>
 
@@ -49,8 +49,8 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 
 1. **JDK `1.8.0_60`**  or later<br>
 
-    > Having any Java 8 version is not enough. <br>
-    This app will not work with earlier versions of Java 8.
+    > Note that simply having Java 8 is not enough.
+     TypeTask will not work with the earlier versions of Java 8.
 
 2. **Eclipse** IDE
 
@@ -65,14 +65,14 @@ This guide illustrates the design and implementation of TypeTask. It will guide 
 
 1. Fork this repo, and clone the fork to your computer
 
-2. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse** and **buildship** plugins as given
+2. Open Eclipse (Note: Ensure that you have installed the **e(fx)clipse** and **buildship** plugins as given
    in the prerequisites above)
    
-3. Click `File` > `Import`
+3. Click on `File` > `Import`
 
-4. Click `Gradle` > `Gradle Project` > `Next` > `Next`
+4. Click on `Gradle` > `Gradle Project` > `Next` > `Next`
 
-5. Click `Browse`, then locate the project's directory
+5. Click on `Browse`, then locate the project's directory
 
 6. Click `Finish`
 
@@ -128,13 +128,13 @@ Given below is a quick overview of each component.
 [comment]: # (> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.)
 
 #### `Main`
-The **`Main`** has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+The **`Main`** has only one class called `MainApp`. It is responsible for:
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
 
 
 #### `Commons`
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#36-common-classes) represents a collection of classes used by multiple other components.
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
