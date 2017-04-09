@@ -113,7 +113,7 @@ The `Commons` component is akin to the nervous system of the App. It contains a 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images/SDforDeletePerson.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TodoListChangedEvent` when the TodoList data are changed,
@@ -121,7 +121,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images/SDforDeletePersonEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -130,7 +130,7 @@ _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 #### Activity Diagram
 
-<img src="images\ActivityDiagram.png" width="800"><br>
+<img src="images/ActivityDiagram.png" width="800"><br>
 
 The above diagram describes the behaviour of Doist. The red boxes represent any actions taken by Doist, and the brown boxes represent activities that include user interactions. 
 
@@ -139,7 +139,7 @@ After Doist is launched, it tries to read the config file. In the event that the
 The sections below give more details of each component.
 
 ### 3.2. UI component
-The `UI` is the main form of interaction between Doist and the user. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist.
+The `UI` is the main form of interaction between Doist and the user. This is mainly done using the JavaFX package.`UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist. The FXML files contain the descriptions of the user interface that is controlled by the corresponding java class with the same name.
 
 The following diagram represents the structure of the `UI` component  
 <br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
@@ -186,7 +186,7 @@ The following diagram represents the structure of the `Model` component
 <br><img src="images/ModelClassDiagram.png" width="800"><br>  
 
 Here are some of the key files in the `Model` component:
-- [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the data.  
+- [`Model.java`](../src/main/java/seedu/doist/model/Model.java):  contains an `interface` that defines multiple operations on the todolist data.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
@@ -194,22 +194,30 @@ Here are some of the key files in the `Model` component:
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;  
     ```  
-- `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`.
+- `AliasListMapModel.java`: contains an `interface` that defines multiple operations on the aliaslistmap data.  
+- `ConfigModel.java`: contains an `interface` that defines multiple operations on the config file.   
+- `ModelManager.java`: contains a `class` that implements the operations specified in `Model.java`. 
+- `AliasListMapManager.java`: contains a `class` that implements the operations specified in `AliasListMapModel.java`. 
+- `ConfigManager.java`: contains a `class` that implements the operations specified in `ConfigModel.java`. 
 - `TodoList.java`: contains a `class` that represents the to-do list.
 - `Task.java`: contains a `class` that represents each to-do list item (i.e. task).
 - `UserPrefs.java`: contains a class that stores user preferences such as the position and size of the app window.
 
+**Design Decisions**
+- The model component is split into Model.java, AliasListMapModel.java and ConfigModel.java because they contain operations on different types of data. This is to support the Single Responsibility Principle.
+
 ### 3.5. Storage component
 The `Storage` component takes charge of reading and writing (R/W) data, to and from the hard drive.
-This data consists of **user preferences** and **to-do list** :
+This data consists of **user preferences**, **to-do list** and **alias list map**:
 - **user preferences** is stored in a **JSON** file.
 - **to-do list** is stored in a **XML** file.
+- **alias list map** is stored in another **XML** file
 
 The following diagram represents the structure of the `Storage` component  
 <br><img src="images/StorageClassDiagram.png" width="800"><br>  
 
 Here are some of the key files in the `Storage` component:
-- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences** and **to-do list**.  
+- [`Storage.java`](../src/main/java/seedu/doist/storage/StorageManager.java):  contains an `interface` that defines R/W operations on **user preferences**, **to-do list** and **alias list map**.  
     These operations are defined using different methods (API).  
     Some representative methods are listed here:  
     ```java  
@@ -219,8 +227,14 @@ Here are some of the key files in the `Storage` component:
     void saveTodoList(ReadOnlyTodoList todoList) throws IOException;  
     ```  
 - `StorageManager.java`: contains a `class` that implements the operations specified in `Storage.java`.
-- `XmlTodoListStorage`: contains a `class` that implements the R/W operations on **to-do list**. An instance of this class is utilized in `StorageManager`.
+- `TodoListStorage.java`: contains an `interface` that defines R/W operations on **to-do list**. 
+- `XmlTodoListStorage`: contains a `class` that implements the R/W operations specified in `TodoListStorage.java`. An instance of this class is utilized in `StorageManager`.  
+- `AliasListMapStorage.java`: contains an `interface` that defines R/W operations on **alias list map**. 
+- `XmlAliasListMapStorage`: contains a `class` that implements the R/W operations specified in `. An instance of this class is utilized in `StorageManager`.
 - `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
+
+**Design Decisions**
+- The storage component is split into TodoListStorage, AliasListMapStorage and JsonUserPrefsStorage because they contain R/W operations on different types of data. This is to support the Single Responsibility Principle.
 
 <br>
 
