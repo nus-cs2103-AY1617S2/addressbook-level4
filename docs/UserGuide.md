@@ -29,7 +29,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 Double click the JOBS.jar file to start the program.
 
-<img src="images/Display_JOBS.png" width="600"><br>
+<img src="images/DIsplay_JOBS.png" width="600"><br>
 
 1. User input/command bar: Enter your to-dos here easily using the given Command Tags.
 2. Feedback prompt: The outcome to any changes that you make to your tasks is shown here.
@@ -109,8 +109,7 @@ Format : `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESC
 Example:
 * `edit index/1 desc/The venue has been changed`
 * `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
-<img src="images/Edit1_JOBS.png" width="300">
-<img src="images/Edit2_JOBS.png" width="300">
+<img src="images/Edit1_JOBS.png" width="300"><img src="images/Edit2_JOBS.png" width="300">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
@@ -119,9 +118,7 @@ Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-<img src="images/Undo1_JOBS.png" width="200">
-<img src="images/Undo2_JOBS.png" width="200">
-<img src="images/Undo3_JOBS.png" width="200">
+<img src="images/Undo1_JOBS.png" width="200"><img src="images/Undo2_JOBS.png" width="200"><img src="images/Undo3_JOBS.png" width="200">
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
