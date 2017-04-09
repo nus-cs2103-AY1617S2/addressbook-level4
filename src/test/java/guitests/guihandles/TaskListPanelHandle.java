@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
@@ -66,7 +67,7 @@ public class TaskListPanelHandle extends GuiHandle {
         for (int i = 0; i < tasks.length; i++) {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
+            guiRobot.sleep(2 * TaskBookGuiTest.SLEEP);
             if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
@@ -104,7 +105,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     public TaskCardHandle navigateToTask(String name) {
-        guiRobot.sleep(500); //Allow a bit of time for the list to be updated
+        guiRobot.sleep(5 * TaskBookGuiTest.SLEEP); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream()
                                                     .filter(p -> p.getName().fullName.equals(name))
                                                     .findAny();
@@ -122,10 +123,10 @@ public class TaskListPanelHandle extends GuiHandle {
         int index = getTaskIndex(task);
         guiRobot.interact(() -> {
             getListView().scrollTo(index);
-            guiRobot.sleep(150);
+            guiRobot.sleep(2 * TaskBookGuiTest.SLEEP);
             getListView().getSelectionModel().select(index);
         });
-        guiRobot.sleep(100);
+        guiRobot.sleep(1 * TaskBookGuiTest.SLEEP);
         return getTaskCardHandle(task);
     }
 

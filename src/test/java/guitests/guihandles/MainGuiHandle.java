@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.stage.Stage;
 import seedu.jobs.TestApp;
 
@@ -30,7 +31,7 @@ public class MainGuiHandle extends GuiHandle {
     }
 
     public AlertDialogHandle getAlertDialog(String title) {
-        guiRobot.sleep(1000);
+        guiRobot.sleep(10 * TaskBookGuiTest.SLEEP);
         return new AlertDialogHandle(guiRobot, primaryStage, title);
     }
 }

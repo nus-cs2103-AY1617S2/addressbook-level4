@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.stage.Stage;
 
 /**
@@ -13,7 +14,7 @@ public class HelpWindowHandle extends GuiHandle {
 
     public HelpWindowHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, HELP_WINDOW_TITLE);
-        guiRobot.sleep(1000);
+        guiRobot.sleep(10 * TaskBookGuiTest.SLEEP);
     }
 
     public boolean isWindowOpen() {
@@ -22,7 +23,7 @@ public class HelpWindowHandle extends GuiHandle {
 
     public void closeWindow() {
         super.closeWindow();
-        guiRobot.sleep(500);
+        guiRobot.sleep(5 * TaskBookGuiTest.SLEEP);
     }
 
 }

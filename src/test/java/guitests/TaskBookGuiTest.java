@@ -34,6 +34,8 @@ import seedu.jobs.testutil.TypicalTestTasks;
  */
 public abstract class TaskBookGuiTest {
 
+    public static final int SLEEP = 0;
+
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
     public TestName name = new TestName();
@@ -82,7 +84,7 @@ public abstract class TaskBookGuiTest {
 getDataFileLocation()));
         FxToolkit.showStage();
         try {
-            Thread.sleep(2000); //wait for the browser to finish loading
+            Thread.sleep(20 * SLEEP); //wait for the browser to finish loading
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

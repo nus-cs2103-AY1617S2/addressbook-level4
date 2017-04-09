@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import guitests.GuiRobot;
+import guitests.TaskBookGuiTest;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -64,11 +65,11 @@ public class GuiHandle {
         guiRobot.clickOn(textFieldId);
         TextField textField = getNode(textFieldId);
         textField.setText(newText);
-        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
+        guiRobot.sleep(5 * TaskBookGuiTest.SLEEP); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
-        guiRobot.type(KeyCode.ENTER).sleep(500);
+        guiRobot.type(KeyCode.ENTER).sleep(5 * TaskBookGuiTest.SLEEP);
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
