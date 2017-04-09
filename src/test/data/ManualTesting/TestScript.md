@@ -32,44 +32,44 @@ Type HELP for user guide with detailed explanations of all commands"
 ## Testing the ADD function:
 
 ### 1. Add an event
-Input `ADD doing testing ON today 1200`
+Input `ADD doing testing FROM today 1200 TO tmr 1400`
 
-Result: "New task added: doing testing Start Date: <today's date> Start Time: 1200 End Date: <today's date> End Time: 1300 <br>
-Task added at index: <varies>"
+Result: "New task added: doing testing Start Date: [today's date] Start Time: 1200 End Date: [tomorrow's date] End Time: 1300 <br>
+Task added at index: [varies]"
 
 ### 2. Add a clash event
 Input `ADD doing testing ON today 1200 TO 1400`
 
-Result: "Clash with task: Index <varies> <br>
-New task added: doing testing Start Date: <today's date> Start Time: 1200 End Date: <today's date> End Time: 1400 <br>
-Task added at index: <varies>"
+Result: "Clash with task: Index [varies] <br>
+New task added: doing testing Start Date: [today's date] Start Time: 1200 End Date: [today's date] End Time: 1400 <br>
+Task added at index: [varies]"
 
 ### 3. Add a deadline
 Input `ADD deadline BY today`
 
-Result: "New task added: deadline End Date: <today's date> End Time: 2359 <br>
-Task added at index: <varies>" 
+Result: "New task added: deadline End Date: [today's date] End Time: 2359 <br>
+Task added at index: [varies]" 
 
 
 ### 4. Add a floating task
 Input `ADD floatingTask`
 
 Result: "New task added: floatingTask <br>
-Task added at index: <varies>"
+Task added at index: [varies]"
 
 
 ## Testing out the UPDATE function:
 
 ### 1. Update task name
-Find basic task name `Buy a dog` and remember the index number `<INDEX>`
-Input `UPDATE <INDEX> Buy 4 dogs`
+Find basic task name `Buy a dog` and remember the index number `[INDEX]`
+Input `UPDATE [INDEX] Buy 4 dogs`
 
 Result: "Updated Task: Buy 4 dogs Categories: [lepak] <br>
-Task updated to index: <varies>"
+Task updated to index: [varies]"
 
 ### 2. Update task end time
-Find event name `Meet boss` and remember the index number `<INDEX>`
-Input `UPDATE <INDEX> TO 1400`
+Find event name `Meet boss` and remember the index number `[INDEX]`
+Input `UPDATE [INDEX] TO 1400`
 
 Result: "Updated Task: Meet boss Start Date: 07/05/17 Start Time: 0000
 End Date: 08/05/17 End Time: 1400 Categories: [work] <br>
@@ -189,17 +189,47 @@ There will be 3 uncompleted tasks listed
 
 ### Remove categories from existing task
 
+Input <br>
+1. `ADD task CATEGORY High CATEGORY test`
+2. `UPDATE 10 CATEGORY`
+
+Result <br>
+1. Add a floating task with 2 categories
+2. Inputting the command word `CATEGORY` without any other information removes existing categories.
+
 ### Adding categories to existing task
+
+Input
+1. `UNDO`
+2. `UPDATE 10 CATEGORY High CATEGORY test CATEGORY more`
+
+Result <br>
+1. Recover the previous floating task with 2 categories
+2. Add another category "more"
 
 ### Change floating task to event
 
+Input `UPDATE 10 ON 10/04/17 1200`
+
+Result: "Updated Task: task Start Date: 10/04/17 Start Time: 1200 End Date: 10/04/17 End Time: 1300 Categories: [low] <br>
+Task updated to index: 5???????????????"
+Notice the shift from Basic Tasks to the Events column.
+
 ### Change event to floating task
+
+Input `UPDATE 4`
+
+Result: "Updated Task: task Categories: [low] <br>
+Task updated to index: 12????????????"
+Notice the shift from Events to Basic Tasks column.
 
 ### Change event to deadline
 
-### Change deadline to event
+Input `UPDATE 1 BY 04/04/17 2300`
 
-### Input wrong command info
+Result: "Updated Task: recurring task End Date: 04/04/17 End Time: 2300 <br>
+Task updated to index: 5" 
+Notice the shift from Events to Deadlines column.
 
 ## Testing out the SAVE function:
 Input `SAVE C:\Users\<Computer User ID>\Desktop`
