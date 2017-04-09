@@ -193,10 +193,12 @@ For advanced users: **`l`** `<filter>` <br>
 
 ### 3.4. Find a task : `find`
 
-Finds uncompleted and overdue task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
+Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.<br>
 > Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
+
+> **`find`** can also be used to look for dates, time and tags<br>
 
 A reason why you might want to _find_ a task:
 
