@@ -3,7 +3,7 @@ package seedu.task.model.tag;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the task manager.
+ * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
@@ -53,7 +53,6 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
-    @Override
     public String toString() {
         return '[' + tagName + ']';
     }

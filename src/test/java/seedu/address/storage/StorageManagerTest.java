@@ -21,7 +21,7 @@ import seedu.task.model.YTomorrow;
 import seedu.task.storage.JsonUserPrefsStorage;
 import seedu.task.storage.Storage;
 import seedu.task.storage.StorageManager;
-import seedu.task.storage.XmlTaskManagerStorage;
+import seedu.task.storage.XmlAddressBookStorage;
 import seedu.task.ui.Theme;
 
 public class StorageManagerTest {
@@ -61,18 +61,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlTaskManagerStorage} class.
+         * {@link XmlAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
          */
         YTomorrow original = new TypicalTestPersons().getTypicalAddressBook();
-        storageManager.saveTaskManager(original);
+        storageManager.saveAddressBook(original);
         ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new YTomorrow(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getTaskManagerFilePath());
+        assertNotNull(storageManager.getAddressBookFilePath());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleTaskManagerChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
+        storage.handleAddressBookChangedEvent(new TaskManagerChangedEvent(new YTomorrow()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
@@ -89,14 +89,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage {
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTaskManager(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

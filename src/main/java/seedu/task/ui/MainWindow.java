@@ -9,7 +9,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.GuiSettings;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
@@ -21,6 +20,7 @@ import seedu.task.commons.util.FileUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
+import javafx.stage.Stage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,7 +28,7 @@ import seedu.task.model.UserPrefs;
  */
 public class MainWindow extends Window {
 
-    protected static final String ICON = "/images/task_manager_32.png";
+    protected static final String ICON = "/images/address_book_32.png";
     protected static final String FXML = "MainWindow.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
@@ -36,7 +36,7 @@ public class MainWindow extends Window {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TaskListPanel taskListPanel;
+    private TaskListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -44,7 +44,7 @@ public class MainWindow extends Window {
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane personListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -103,7 +103,7 @@ public class MainWindow extends Window {
     }
 
     void fillInnerParts() {
-        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
+        personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
@@ -121,8 +121,8 @@ public class MainWindow extends Window {
         return resultDisplayPlaceholder;
     }
 
-    private AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    private AnchorPane getPersonListPlaceholder() {
+        return personListPanelPlaceholder;
     }
 
     /**
@@ -203,7 +203,7 @@ public class MainWindow extends Window {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public TaskListPanel getPersonListPanel() {
+        return this.personListPanel;
     }
 }

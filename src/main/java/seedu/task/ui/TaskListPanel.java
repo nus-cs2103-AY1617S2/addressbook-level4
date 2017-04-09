@@ -16,20 +16,20 @@ import seedu.task.model.task.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
-    private static final String FXML = "TaskListPanel.fxml";
+    private static final String FXML = "PersonListPanel.fxml";
 
     @FXML
-    private ListView<ReadOnlyTask> taskListView;
+    private ListView<ReadOnlyTask> personListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyTask> personList) {
         super(FXML);
-        setConnections(taskList);
-        addToPlaceholder(taskListPlaceholder);
+        setConnections(personList);
+        addToPlaceholder(personListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
-        taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
+    private void setConnections(ObservableList<ReadOnlyTask> personList) {
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -40,10 +40,10 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        LOGGER.fine("Selection in task list panel changed to : '" + newValue + "'");
+                        LOGGER.fine("Selection in person list panel changed to : '" + newValue + "'");
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -51,22 +51,22 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            taskListView.scrollTo(index);
-            taskListView.getSelectionModel().clearAndSelect(index);
+            personListView.scrollTo(index);
+            personListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class TaskListViewCell extends ListCell<ReadOnlyTask> {
+    class PersonListViewCell extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyTask task, boolean empty) {
-            super.updateItem(task, empty);
+        protected void updateItem(ReadOnlyTask person, boolean empty) {
+            super.updateItem(person, empty);
 
-            if (empty || task == null) {
+            if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(person, getIndex() + 1).getRoot());
             }
         }
     }
