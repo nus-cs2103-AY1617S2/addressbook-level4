@@ -22,6 +22,16 @@ public class DateParser {
     private static final String EMPTY_DATE_STRING = "";
     private static final int MONTH_OFFSET = 1;
 
+    private static final int MONTHS_PER_YEAR = 12;
+    private static final int DAYS_PER_WEEK = 7;
+    private static final int HOURS_PER_DAY = 24;
+    private static final int MINUTES_PER_HOUR = 60;
+    private static final int MINIMUM_YEAR = 0;
+    private static final int MINIMUM_MONTH = 0;
+    private static final int MINIMUM_DAY = 1;
+    private static final int MINIMUM_HOUR = 0;
+    private static final int MINIMUM_MINUTE = 0;
+
     //@@author A0164103W
     private static int parsedDate[] = new int[3];
     private static final int INDEX_DAY = 0;
@@ -77,16 +87,16 @@ public class DateParser {
     }
 
     public static boolean isValidDate(int year, int month, int day, int hour, int minute) {
-        if (year < 0 || month < 0 || month > 11) {
+        if (year < MINIMUM_YEAR || month < MINIMUM_MONTH || month >= MONTHS_PER_YEAR) {
             return false;
         }
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
-        if (day < 1 || day > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+        if (day < MINIMUM_DAY || day > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
             return false;
         }
-        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+        if (hour < MINIMUM_HOUR || hour >= HOURS_PER_DAY || minute < MINIMUM_MINUTE || minute >= MINUTES_PER_HOUR) {
             return false;
         }
         return true;
@@ -181,7 +191,7 @@ public class DateParser {
 
     private static int compareDayOfWeek(int day1, int day2) {
         return day2 - day1 < 0 ?
-                day2 - day1 + 7 :
+                day2 - day1 + DAYS_PER_WEEK :
                 day2 - day1;
     }
 
