@@ -118,6 +118,7 @@ public class TaskDate {
         }
     }
 
+  //@@author A0164061N
     public void setSecondDay(int day) {
         if (day > 0 && day <= 31) {
             this.dayTwo = day;
@@ -142,6 +143,7 @@ public class TaskDate {
         }
     }
 
+  
     @Override
     public String toString() {
         if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
@@ -151,6 +153,7 @@ public class TaskDate {
                 + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
     }
 
+    
     public static int[] dateFormatConverter(String date) {
         if (date.length() == 6) {
             int day = Integer.parseInt(date.substring(DAY_START_INDEX, DAY_END_INDEX));
@@ -173,7 +176,8 @@ public class TaskDate {
         }
 
     }
-
+    //@@author
+    //@@author A0163845X
     public int compareTo(TaskDate other) {
         if (this.year > other.year) {
             return 1;
@@ -192,4 +196,5 @@ public class TaskDate {
         }
         return 0;
     }
+    //@@author
 }

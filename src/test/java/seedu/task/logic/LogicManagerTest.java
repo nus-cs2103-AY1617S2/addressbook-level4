@@ -358,12 +358,6 @@ public class LogicManagerTest {
         assertCommandFailure("google ", expectedMessage);
     }
 
-    // @Test
-    // public void execute_done_IndexNotFoundErrorMessageShown() throws
-    // Exception {
-    // assertIndexNotFoundBehaviorForCommand("done");
-    // }
-
     @Test
     public void execute_select_IndexNotFoundErrorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("google");
