@@ -10,7 +10,7 @@ Follow this script to perform the following manual tests for Opus.
 
 ## Add command
 
-To add a task, starting command with keyword `add`.
+To add a task, start command with keyword `add`.
 
 ### Add a floating task
 
@@ -25,3 +25,43 @@ Feedback shows:
 
 Newly added task should be at index #22 without any attributes below it.
 
+## Delete command
+
+To delete a task, start command with keyword `delete`.
+
+### Delete a single task
+
+`delete 1`
+
+#### Result
+
+Feedback shows:
+
+Deleted Task: Buy dinner
+Priority: low
+Status: incomplete
+Note:
+Start Time: 28 Apr 17 09:21PM
+End Time:
+Tags:
+
+#### Result 
+Tasks with index 1 is deleted.
+
+## List command
+To see the whole list of tasks, enter command `list`.
+
+#### Result
+
+The whole list of tasks is shown to the user.
+
+## Save command
+To change the default data save location, start command with the keyword `save`.
+
+>* `save <directory>` - `<directory>` must be a valid path to a file on the local computer. If the folders specified in the new file path does not exist, they will be created. Note that the save file in the old save location remains.
+
+Type `> save src/test/data/ManualTesting/Test/newTaskManager.xml`
+
+#### Result
+
+The storage file is saved at the specified path.
