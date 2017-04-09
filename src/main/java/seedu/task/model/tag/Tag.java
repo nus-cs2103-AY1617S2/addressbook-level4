@@ -5,7 +5,7 @@ import java.util.Comparator;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the Task Manager.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag implements Comparable<Tag> {

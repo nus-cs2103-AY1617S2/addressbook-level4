@@ -160,7 +160,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting TaskList " + MainApp.VERSION);
+        logger.info("Starting Task Manager " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

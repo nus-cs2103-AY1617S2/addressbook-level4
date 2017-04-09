@@ -91,6 +91,7 @@ public class AddCommandTest extends AddressBookGuiTest {
 
     @Test
     public void addRecurringTask() throws IllegalValueException {
+        //@@author A0113795Y
         //test monthly recurring task
         TestTask[] currentList = td.getEmptyTasks();
         TestTask taskToAdd = td.recMonth;
@@ -109,6 +110,7 @@ public class AddCommandTest extends AddressBookGuiTest {
                 taskToAdd.getStartTiming(), taskToAdd.getEndTiming(), taskToAdd.getTags(),
                 taskToAdd.isRecurring(), taskToAdd.getFrequency());
         assertOccurrenceSame(hardCodedMonth, taskMonth.getOccurrences());
+        //@@author
         //@@author A0164212U
         //test daily recurring tasks
         taskToAdd = td.recDay;
@@ -153,7 +155,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         //@@author
     }
 
-
+    //@@author A0163935X
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) throws IllegalValueException {
         commandBox.runCommand("clear");
         for (int i = 0; i < currentList.length; i++) {
@@ -171,6 +173,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
+    //@@author A0113795Y
     private void assertOccurrenceSame(ArrayList<RecurringTaskOccurrence> hardCoded
             , ArrayList<RecurringTaskOccurrence> taskOccurrences) {
         assertTrue(hardCoded.size() == taskOccurrences.size());
@@ -178,4 +181,5 @@ public class AddCommandTest extends AddressBookGuiTest {
             assertTrue(hardCoded.get(i).equals(taskOccurrences.get(i)));
         }
     }
+    //@@author
 }

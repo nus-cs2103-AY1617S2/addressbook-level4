@@ -21,7 +21,7 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the task list.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
@@ -82,5 +82,4 @@ public class AddCommand extends Command {
         }
 
     }
-
 }

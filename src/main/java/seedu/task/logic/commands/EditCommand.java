@@ -1,3 +1,4 @@
+//@@authro A0113795Y
 package seedu.task.logic.commands;
 
 import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
@@ -21,11 +22,10 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
-
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_REC = "editthis";
 
@@ -47,19 +47,19 @@ public class EditCommand extends Command {
     private boolean isSpecific;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered person list to edit
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, boolean isSpecific) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
+        // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
         this.isSpecific = isSpecific;
     }
-
+    //@@author
     //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
@@ -76,7 +76,6 @@ public class EditCommand extends Command {
         try {
             if (isSpecific) {
                 newTask = Task.extractOccurrence(taskToEdit);
-                model.addTask(newTask);
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
@@ -94,6 +93,7 @@ public class EditCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
+        logger.info(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
     //@@author
