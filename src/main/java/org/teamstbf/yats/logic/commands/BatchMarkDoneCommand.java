@@ -21,8 +21,9 @@ public class BatchMarkDoneCommand extends Command {
 	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
 
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
-			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
-			+ "Example: " + COMMAND_WORD + " 1";
+			+ "by the index number used in the last task listing. "
+			+ "\n" + "Parameters: INDEX (must be a positive integer) "
+			+ "\n" + "Example: " + COMMAND_WORD + " 1 2 3";
 
 	public final Stack<Integer> targetIndexes;
 

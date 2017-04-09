@@ -5,7 +5,6 @@ import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import java.util.Optional;
 import java.util.Stack;
 
-import org.teamstbf.yats.logic.commands.BatchDeleteCommand;
 import org.teamstbf.yats.logic.commands.BatchUnmarkDoneCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.IncorrectCommand;
@@ -30,7 +29,7 @@ public class MarkUndoneCommandParser {
 			if (ParserUtil.isAllIntegers(markIndexArr)) {
 				return convertToBatchUnmarkDoneCommand(markIndexArr);
 			} else if (!ParserUtil.isAllIntegers(markIndexArr)) {
-				return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
+				return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchUnmarkDoneCommand.MESSAGE_USAGE));
 			}
 		}
 
