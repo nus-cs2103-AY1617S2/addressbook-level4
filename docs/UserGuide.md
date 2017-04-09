@@ -139,7 +139,7 @@ Here is a table of interpretation for your convenience.
 
 | Date Format | Example |KIT's interpretation  |
 |-------------------|----------|------------------|
-|Month/day           | 10/19         | Oct 19 of the curent year |
+|Month/day           | 10/19         | Oct 19 of the current year |
 |Day Month  | 6 Apr         | Apr 6 of the current year|
 |Month Day  | Apr 6         | Apr 6 of the current year  |
 |Day of the Week| Mon, Monday| The upcoming Monday |
@@ -292,7 +292,7 @@ Examples:
   >  <img src="images/editAfter.png" width="600">
 
 
-### 3.9.1 Finding a task:`find`
+### 3.9.1 Finding a task: `find`
 
 #### Finding a task in a stack of tasks can be troublesome.
 KIT has an efficient `find` command that can help. Use it along with any keyword or date you can recall that is related to that task.
@@ -359,7 +359,7 @@ Format: `getgoogle`, `gg`
 
 #### Similarly, you can keep Google Calendar updated with KIT.
 
-With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar. It also updates task that are added before.
+With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar. It also updates tasks that are added before.
 
 Description: Add or update the specified task to your Google Calendar. <br>
 
@@ -404,7 +404,7 @@ Some tips for using the Smart Add command:
     * `sa watch movie 3pm for 2 hours`
     * `sa watch movie 3pm-5pm`
 
-<strong>Note: KIT will give the best interpretation for the given description, however this may not always be accurate, especially for ambiguous descriptions.</strong>
+<strong>Note: KIT will give the best interpretation of the given description, however, this may not always be accurate, especially for ambiguous descriptions.</strong>
 
 For example, `sa Meeting at Wednesday Cafe`.
 
