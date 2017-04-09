@@ -393,7 +393,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0139975J
         DateQualifier(Date date) {
             this.date = date;
-            System.out.println(date.toString());
         }
 
         // @@author A0139975J
