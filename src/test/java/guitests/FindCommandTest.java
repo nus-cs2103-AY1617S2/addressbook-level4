@@ -7,6 +7,7 @@ import org.junit.Test;
 import seedu.doist.commons.core.Messages;
 import seedu.doist.testutil.TestTask;
 
+//@@author A0147620L
 public class FindCommandTest extends DoistGUITest {
 
     @Test

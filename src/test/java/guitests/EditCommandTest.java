@@ -23,6 +23,7 @@ public class EditCommandTest extends DoistGUITest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTask[] expectedTasks = td.getTypicalTasks();
 
+    //@@author A0147620L
     @Test
     public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Buy mangoes \\under groceries \\from \\to \\as normal";
@@ -77,6 +78,7 @@ public class EditCommandTest extends DoistGUITest {
         TestTask editedTask = new TaskBuilder(taskToEdit).withName("Complete chemistry homework").build();
         assertEditSuccess(filteredTaskListIndex, todoListIndex, detailsToEdit, editedTask, true);
     }
+    //@@author
 
     @Test
     public void edit_missingTaskIndex_failure() {
@@ -105,6 +107,7 @@ public class EditCommandTest extends DoistGUITest {
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    //@@author A0147620L
     @Test
     public void edit_invalidDateFormat_failure() {
         commandBox.runCommand("edit 1 \\from today \\by tomorrow");
