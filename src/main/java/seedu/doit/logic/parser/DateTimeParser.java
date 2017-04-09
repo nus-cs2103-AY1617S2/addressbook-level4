@@ -29,7 +29,7 @@ public class DateTimeParser {
 
     private static final String EMPTY_STRING = "";
 
-    public static Optional<LocalDateTime> parseDateTime(String input) throws IllegalValueException{
+    public static Optional<LocalDateTime> parseDateTime(String input) throws IllegalValueException {
         Date date = new Date(); //get current date
         Parser dateTimeParser = new Parser();
 
