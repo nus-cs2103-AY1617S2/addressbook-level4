@@ -55,12 +55,6 @@ Are you ready to be a Doist?
 
 ### Getting started with commands :
 
-You will notice that the commands get *highlighted* with different colours as you type!
-Additionally, when you start typing a command, Doist will provide you with command word suggestions.
-Just press <kbd>TAB</kbd> to accept the first suggestion! <br> <br>
- <img src="images/autocomplete.png" width="450"> <br>
- *Figure 2.2: Autocomplete giving command word suggestions*
-
 Type the following commands and press <kbd>Enter</kbd> after each command.
 
 1. **`add Attend group meeting \from 3pm \to 5pm`**. <br>
@@ -93,13 +87,20 @@ Take note of some general information for our commands : <br>
 > * Command words and parameters that consist of multiple words will not contain spaces. Underscores are used instead. <br>
 > *e.g.* `remove_alias` <br>
 > * Words in `UPPER_CASE` are the values. You can enter whatever you want for them!<br>
-> * If you want to use backslash `\` in the value, use `\\`. <br>
-> *e.g.* `add Remember to check file at C:\\users\\! \by 3pm` would appear as Remember to check file at C:\users\. <br>
 > * Items in `[]` are optional. <br>
 > * Items with `...` after them can have multiple instances, separated by space. <br>
 > *e.g.* `[INDEX...]` means you can specify multiple indices for that command. <br>
 > * The command parameters can be entered in any order after the command word. <br>
 > *e.g.* `add Buy the milk \to 3pm \from 5pm` works too! <br>
+
+**Command Features**
+- Highlight: Commands get *highlighted* with different colours as you type!
+
+- Auto-complete: When you start typing a command, Doist will provide you with command word suggestions. Press <kbd>TAB</kbd> to accept the first suggestion. <br> <br>
+ <img src="images/autocomplete.png" width="450"> <br>
+ *Figure 3.2: Autocomplete giving command word suggestions*
+
+- Command History: Use <kbd>↑</kbd> and <kbd>↓</kbd> to scroll through previously typed commands. You won't have to remember what you have previously typed! <br>
 
 
 ### 3.1 Viewing help : `help`
@@ -108,6 +109,7 @@ Feeling a little lost? Simply type `help` to view the handy help page! <br>
 <br>
 Format: `help`
 <br> <br>
+The following window will appear:
 <img src="images/help.png" width="700"> <br>
 *Figure 3.1.1: The help window pops up when you use the help command* <br>
 
@@ -370,8 +372,12 @@ Use the `unfinish` command to change the status of an already finished task to n
 You can use `undo` to undo previous commands. Undo as many times as you wish! <br>
 <br>
 Format: `undo` <br>
+Keyboard Shortcut: <kbd>Ctrl</kbd> + <kbd>Z</kbd> <br>
 <br>
-If you regret undoing a command, you can use `redo` to restore your changes.
+If you regret undoing a command, you can use `redo` to restore your changes. <br>
+<br>
+Format: `redo` <br>
+Keyboard Shortcut: <kbd>Ctrl</kbd> + <kbd>Y</kbd> <br>
 
 ### 3.10 Setting an alias for a command word : `alias`, `view_alias`, `remove_alias`, `reset_alias`
 
