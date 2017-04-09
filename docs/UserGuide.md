@@ -151,7 +151,7 @@ Examples:
 
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet.
-Format: `sort name` or `sort time`, or `sort status`
+Format: `sort name`,`sort time`, `sort status`
 > Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. `sort status` will sort the tasks by `Ongoing` or `Completed`.
 > To return to the unsorted list of tasks, type and enter `list`.
 
@@ -215,8 +215,6 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Filter** : `filter [FILTER_TYPE] [FILTER_ARGUMENTS]` <br>
-
 * **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
   e.g. `edit 2 m/Go to Guardian`
 
@@ -232,18 +230,20 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
  e.g. `done 3`
 
 * **Filter** : `filter FILTER_TYPE FILTER_ARGUMENTS` <br>
- e.g. `find status completed`
+ e.g. `find status completed` <br>
  e.g. `find after today`
 
 * **Sort** : `sort`<br>
- e.g.`sort time, sort name, sort status`
+ e.g.`sort time` <br>
+ e.g `sort name` <br>
+ e.g `sort status`
 
 * **Path** : `path PATHNAME` <br> 
- e.g. `path C:\Desktop\MyTasks.xml`
+ e.g. `path C:\Desktop\MyTasks.xml` <br>
  e.g. `path /Users/name/Desktop/MyTasks.xml`
 
  * **Load** : `load PATHNAME` <br> 
- e.g. `load C:\Desktop\MyTasks.xml`
+ e.g. `load C:\Desktop\MyTasks.xml` <br>
  e.g. `load /Users/name/Desktop/MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
