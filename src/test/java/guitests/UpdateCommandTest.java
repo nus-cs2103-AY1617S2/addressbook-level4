@@ -10,6 +10,7 @@ import guitests.guihandles.EventTaskCardHandle;
 import guitests.guihandles.FloatingTaskCardHandle;
 import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
@@ -117,6 +118,60 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    // @@author A0139520L
+    @Test
+    public void update_taskClashing_success() throws Exception {
+
+        String clashFeedback = "Clash with task: Index ";
+
+        // update task with a index before clashingTask to index a index before
+        // clashingTask
+        String detailsToUpdate = "TO 03/03/17 1500";
+        int taskManagerIndex = 1;
+        updatedTask = td.updateEventFromIndexBeforeToBefore;
+        assertUpdateClashSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+        assertResultMessage(
+                clashFeedback + "2\n" + String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                        + "Task updated to index: 1");
+
+        // update task with a index before clashingTask to index a index after
+        // clashingTask
+        detailsToUpdate = "FROM 09/03/17 1900 TO 11/03/17 1100";
+        taskManagerIndex = 2;
+        updatedTask = td.updateEventFromIndexBeforeToAfter;
+        assertUpdateClashSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+        assertResultMessage(
+                clashFeedback + "2\n" + String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                        + "Task updated to index: 3");
+
+        // update task with a index after clashingTask to index a index before
+        // clashingTask
+        detailsToUpdate = "FROM 08/03/17 1000";
+        taskManagerIndex = 3;
+        updatedTask = td.updateEventFromIndexAfterToBefore;
+        assertUpdateClashSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+        assertResultMessage(
+                clashFeedback + "3\n" + String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                        + "Task updated to index: 2");
+
+        // update task with a index after clashingTask to index a index after
+        // clashingTask
+        detailsToUpdate = "ON 05/04/17 1430";
+        taskManagerIndex = 5;
+        updatedTask = td.updateEventFromIndexAfterToAfter;
+        assertUpdateClashSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+        assertResultMessage(
+                clashFeedback + "4\n" + String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                        + "Task updated to index: 5");
+
+        // updates a task which does not clash
+        detailsToUpdate = "Salvage CS2103 FROM 05/04/17 1700 TO 14/04/17 1100 CATEGORY work";
+        taskManagerIndex = 5;
+        updatedTask = td.updateEventFromClashToNoClash;
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+
+    }
+
     /**
      * Checks whether the updated task has the correct updated details.
      *
@@ -155,15 +210,49 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         // confirm the list now contains all previous tasks plus the task with
         // updated details
         expectedTasksList = TestUtil.removeTaskFromList(expectedTasksList, taskManagerIndex);
-        Pair<TestTask[],Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
-        
+        Pair<TestTask[], Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
+
         expectedTasksList = expectedList.getKey();
         int updateIndex = expectedList.getValue();
 
         assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedTasksList));
         assertTrue(floatingTaskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask)
-                + "\n" + "Task updated to index: " + Integer.toString(updateIndex + 1));
+        assertResultMessage(String.format(UpdateCommand.MESSAGE_UPDATE_TASK_SUCCESS, updatedTask) + "\n"
+                + "Task updated to index: " + Integer.toString(updateIndex + 1));
+    }
+
+    private void assertUpdateClashSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToUpdate,
+            TestTask updatedTask) {
+        commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
+
+        if (updatedTask.isEventTask()) {
+            EventTaskCardHandle updatedCard = eventTaskListPanel
+                    .navigateToEventTask(updatedTask.getTaskName().toString());
+            assertMatching(updatedTask, updatedCard);
+        } else {
+            if (updatedTask.isDeadlineTask()) {
+                DeadlineTaskCardHandle updatedCard = deadlineTaskListPanel
+                        .navigateToDeadlineTask(updatedTask.getTaskName().toString());
+                assertMatching(updatedTask, updatedCard);
+            } else {
+                if (updatedTask.isFloatingTask()) {
+                    FloatingTaskCardHandle updatedCard = floatingTaskListPanel
+                            .navigateToFloatingTask(updatedTask.getTaskName().toString());
+                    assertMatching(updatedTask, updatedCard);
+                }
+            }
+        }
+
+        // confirm the list now contains all previous tasks plus the task with
+        // updated details
+        expectedTasksList = TestUtil.removeTaskFromList(expectedTasksList, taskManagerIndex);
+        Pair<TestTask[], Integer> expectedList = TestUtil.addTasksToList(expectedTasksList, updatedTask);
+
+        expectedTasksList = expectedList.getKey();
+
+        assertTrue(eventTaskListPanel.isListMatching(expectedTasksList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedTasksList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedTasksList));
     }
 }

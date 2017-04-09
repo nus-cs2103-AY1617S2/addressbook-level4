@@ -18,7 +18,9 @@ public class TypicalTestTasks {
             recurTestDayThrice, recurTestWeek, recurTestWeekOnce, recurTestWeekTwice, recurTestWeekThrice,
             recurTestMonth, recurTestMonthOnce, recurTestMonthTwice, recurTestMonthThrice, recurTestYear,
             recurTestYearOnce, recurTestYearTwice, recurTestYearThrice, eventTestMon, eventTestTuesThurs,
-            eventTestThurs, eventTestFriSat;
+            eventTestThurs, eventTestFriSat, updateEventFromIndexBeforeToAfter, updateEventFromIndexBeforeToBefore,
+            updateEventFromIndexAfterToBefore, updateEventFromIndexAfterToAfter, updateEventFromClashToNoClash,
+            completedEatBreakfast;
 
     public TypicalTestTasks() {
         try {
@@ -75,7 +77,7 @@ public class TypicalTestTasks {
                     .withStartTime("1200").withEndDate("14/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("CS", "rekt").build();
             sampleNoClashSeparateDayEvent = new TaskBuilder().withTaskName("Coding in Progress")
-                    .withStartDate("16/04/17").withStartTime("1000").withEndDate("16/04/17").withEndTime("1800")
+                    .withStartDate("16/04/17").withStartTime("2330").withEndDate("17/04/17").withEndTime("0030")
                     .withCompletion(false).withCategories("code", "work").build();
 
             eventTestMon = new TaskBuilder().withTaskName("Monday Blues").withStartDate("10/04/17")
@@ -90,6 +92,28 @@ public class TypicalTestTasks {
             eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
                     .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
                     .build();
+
+            updateEventFromIndexBeforeToBefore = new TaskBuilder().withTaskName("Eat breakfast with mom")
+                    .withStartDate("03/03/17").withStartTime("1000").withEndDate("03/03/17").withEndTime("1500")
+                    .withCompletion(false).withCategories("just", "friends").build();
+            updateEventFromIndexBeforeToAfter = new TaskBuilder().withTaskName("Start on the CS2103 project")
+                    .withStartDate("09/03/17").withStartTime("1900").withEndDate("11/03/17").withEndTime("1100")
+                    .withCompletion(false).withCategories("work").build();
+            updateEventFromIndexAfterToBefore = new TaskBuilder().withTaskName("Start on the CS2103 project")
+                    .withStartDate("08/03/17").withStartTime("1000").withEndDate("11/03/17").withEndTime("1100")
+                    .withCompletion(false).withCategories("work").build();
+            updateEventFromIndexAfterToAfter = new TaskBuilder().withTaskName("Try even harder for CS2103")
+                    .withStartDate("05/04/17").withStartTime("1430").withEndDate("05/04/17").withEndTime("1530")
+                    .withCompletion(false).withCategories("work").build();
+            updateEventFromClashToNoClash = new TaskBuilder().withTaskName("Salvage CS2103").withStartDate("05/04/17")
+                    .withStartTime("1700").withEndDate("14/04/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("work").build();
+
+            // completedTask
+            completedEatBreakfast = new TaskBuilder().withTaskName("Eat breakfast with mom").withStartDate("03/03/17")
+                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(true)
+                    .withCategories("just", "friends").build(); // event
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -154,6 +178,7 @@ public class TypicalTestTasks {
 
     public void TypicalTestEventsForBlockingTimeSlots() {
         try {
+            // add command
             eventTestMon = new TaskBuilder().withTaskName("Monday Blues").withStartDate("10/04/17")
                     .withStartTime("1000").withEndDate("10/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("not", "red").build();
@@ -166,6 +191,29 @@ public class TypicalTestTasks {
             eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
                     .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
                     .build();
+
+            // update command
+
+            updateEventFromIndexBeforeToBefore = new TaskBuilder().withTaskName("Eat breakfast with mom")
+                    .withStartDate("03/03/17").withStartTime("1000").withEndDate("03/03/17").withEndTime("1500")
+                    .withCompletion(false).withCategories("just", "friends").build();
+
+            updateEventFromIndexBeforeToAfter = new TaskBuilder().withTaskName("Start on the CS2103 project")
+                    .withStartDate("09/03/17").withStartTime("1900").withEndDate("11/03/17").withEndTime("1100")
+                    .withCompletion(false).withCategories("work").build();
+
+            updateEventFromIndexAfterToBefore = new TaskBuilder().withTaskName("Start on the CS2103 project")
+                    .withStartDate("08/03/17").withStartTime("1000").withEndDate("11/03/17").withEndTime("1100")
+                    .withCompletion(false).withCategories("not", "red").build();
+
+            updateEventFromIndexAfterToAfter = new TaskBuilder().withTaskName("Try even harder for CS2103")
+                    .withStartDate("05/04/17").withStartTime("1430").withEndDate("05/04/17").withEndTime("1530")
+                    .withCompletion(false).withCategories("work").build();
+
+            updateEventFromClashToNoClash = new TaskBuilder().withTaskName("Salvage CS2103").withStartDate("05/04/17")
+                    .withStartTime("1700").withEndDate("14/04/17").withEndTime("1100").withCompletion(false)
+                    .withCategories("work").build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

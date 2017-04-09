@@ -196,6 +196,15 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+    public boolean isCompletedTask() {
+        if (isMarkedAsComplete) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean isWithinStartEndDuration(ReadOnlyTask t) {
 
         if (this.getStartDate().equals(t.getStartDate()) && this.getEndDate().equals(t.getEndDate())) {
