@@ -79,7 +79,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setStartDate(ReadOnlyTask task) {
         if (task.getStartDate() != null) {
-            startDate.setText(task.getStartDate().toString());
+            startDate.setText("Start: " + task.getStartDate());
         } else {
             startDate.setText("");
         }

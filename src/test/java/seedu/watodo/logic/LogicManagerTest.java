@@ -260,7 +260,7 @@ public class LogicManagerTest {
     public void execute_addflexibleArgsFormat_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithDescriptionAndStartEndDates(
-                "watch webcast", "next tues", "next fri", "BackLog");
+                "watch webcasts", "next tues", "4/14", "BackLog");
         Task testTask2 = helper.generateTaskWithDescriptionAndStartEndDates(
                 "study for finals", "today", "may 5", "letgo");
         Task testTask3 = new Task(new Description("ie2150 project"), new DateTime("11 apr 12pm"),
@@ -268,7 +268,7 @@ public class LogicManagerTest {
         TaskManager expectedTM = new TaskManager();
 
         expectedTM.addTask(testTask1);
-        String command = "add from/next tues to/next fri watch webcast #BackLog";
+        String command = "add from/ next tues to/4/14 watch webcasts #BackLog";
         assertCommandSuccess(command, String.format(AddCommand.MESSAGE_SUCCESS, testTask1),
                 expectedTM, expectedTM.getTaskList());
 
@@ -439,7 +439,8 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
-                1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
+
+                threeTasks.get(0)), expectedTM, expectedTM.getTaskList());
     }
 
     // ================ For Find Command ==============================

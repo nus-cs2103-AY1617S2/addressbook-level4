@@ -133,8 +133,7 @@ public class ArgumentTokenizerTest {
         tokenizer.tokenize("SomePreambleString -t dashT-Value ^Q ^Q-t another dashT value /p slashP value -t");
         assertPreamblePresent(tokenizer, "SomePreambleString");
         assertArgumentPresent(tokenizer, slashP, "slashP value");
-        // Datetime tokenizer should not support multiple
-        //assertArgumentPresent(tokenizer, hatQ, "", "");
+        assertArgumentPresent(tokenizer, hatQ, "", "");
     }
 
     @Test

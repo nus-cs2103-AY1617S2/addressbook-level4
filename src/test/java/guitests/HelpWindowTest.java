@@ -21,7 +21,7 @@ public class HelpWindowTest extends TaskManagerGuiTest {
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button
-        //assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
+        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
 
         //use command
         assertHelpWindowOpen(commandBox.runHelpCommand());
