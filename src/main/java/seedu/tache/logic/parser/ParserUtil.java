@@ -17,9 +17,7 @@ import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_YEARLY;
 
 import java.util.Collection;
-import java.util.Deque;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -27,7 +25,6 @@ import java.util.regex.Pattern;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
-import seedu.tache.logic.parser.ParserUtil.PossibleDateTime.DateTimeType;
 import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
@@ -217,83 +214,6 @@ public class ParserUtil {
 
     public static boolean isRecurrenceYearly(String s) {
         return isFoundIn(s, RECURRENCE_IDENTIFIER_YEARLY);
-    }
-
-    /**
-     * Looks for all possible date/time strings based on identifiers
-     * @param input String to parse
-     * @return Deque of PossibleDateTime objects, each representing a possible date/time string
-     */
-    public static Deque<PossibleDateTime> parseDateTimeIdentifiers(String input) {
-        String[] inputs = input.split(" ");
-        int currentIndex = 0;
-        Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
-        PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX,
-                                                        DateTimeType.UNKNOWN);
-        for (int i = 0; i < inputs.length; i++) {
-            String word = inputs[i];
-            if (isStartDateIdentifier(word)) {
-                result.push(current);
-                current = new PossibleDateTime(word, currentIndex, DateTimeType.START);
-            } else if (isEndDateIdentifier(word)) {
-                result.push(current);
-                current = new PossibleDateTime(word, currentIndex, DateTimeType.END);
-            } else if (isRecurrencePrefix(word)) {
-                result.push(current);
-                current = new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE_PREFIX);
-            } else if (isRecurrenceDaily(word)) {
-                result.push(current);
-                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.DAY));
-                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            } else if (isRecurrenceWeekly(word)) {
-                result.push(current);
-                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.WEEK));
-                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            } else if (isRecurrenceMonthly(word)) {
-                result.push(current);
-                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.MONTH));
-                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            } else if (isRecurrenceYearly(word)) {
-                result.push(current);
-                result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.YEAR));
-                current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            } else {
-                current.appendDateTime(word);
-            }
-            currentIndex += word.length() + 1;
-        }
-        result.push(current);
-        return result;
-    }
-
-    /**
-     * Class to describe a date/time String that was found
-     *
-     */
-    static class PossibleDateTime {
-        static enum DateTimeType { START, END, UNKNOWN, RECURRENCE, RECURRENCE_PREFIX };
-
-        int startIndex;
-        String data;
-        DateTimeType type;
-        RecurInterval recurInterval;
-
-        static final int INVALID_INDEX = -1;
-
-        PossibleDateTime(String data, int index, DateTimeType type) {
-            this.startIndex = index;
-            this.type = type;
-            this.data = data;
-        }
-
-        PossibleDateTime(String data, int index, DateTimeType type, RecurInterval recurInterval) {
-            this(data, index, type);
-            this.recurInterval = recurInterval;
-        }
-
-        void appendDateTime(String data) {
-            this.data += " " + data;
-        }
     }
 
     public static boolean canParse(String s) {
