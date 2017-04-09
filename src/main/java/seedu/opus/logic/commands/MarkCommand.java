@@ -56,10 +56,10 @@ public class MarkCommand extends Command {
     /** Returns incomplete status if task is complete, and complete status if task is incomplete */
     private Status getNewStatusForTask() throws IllegalValueException {
         if (isTaskCompleteAt(filteredTaskListIndex)) {
-            return new Status("incomplete");
+            return new Status(Status.STATUS_INCOMPLETE);
         }
 
-        return new Status("complete");
+        return new Status(Status.STATUS_COMPLETE);
     }
 
     /** Returns the task at index inside filtered task list */
