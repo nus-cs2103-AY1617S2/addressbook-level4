@@ -149,7 +149,7 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 The **Figure 2.1.3a** below shows how the components interact for the scenario where the user issues the
 command `delete 1`
 
-<img src="images\SDforDeletePerson.png" width="800"><br>
+<img src="images\SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 >Note how the `Model` simply raises a `TaskManagerChangedEvent` when the DoIt data are changed,
@@ -157,7 +157,7 @@ _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
 The **Figure 2.1.3b** shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time<br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800"><br>
+<img src="images\SDforDeleteTaskEventHandling.png" width="800"><br>
 _Figure 2.1.3b : Component Interactions for `delete 1` Command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
@@ -203,7 +203,7 @@ The `Logic` component:
 * Encapsulates a `CommandResult` object which is passed back to the `Ui`
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 ### 3.5 Model Component
@@ -221,7 +221,7 @@ The `Model` component:
 * Remains unaffected by changes in the other three components due to application of the Observer Pattern
 * Interacts with the other components by raising events
 
-The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1  
+The `Model` class is the interface of the `Model` component. It provides several APIs for the other components to retrieve and update DoIt's task list data. The organization and relationship of the various classes are represented in Figure 2.4.1
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
@@ -307,7 +307,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  In the headless mode, GUI tests do not show up on the screen
  That means the developer can do other things on the Computer while the tests are running<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode
- 
+
 We have two types of tests:
 
 1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI
@@ -469,7 +469,7 @@ Use case ends
 
 > 3a1. System shows an error message <br>
   Use case resumes at step 2
-  
+
 4a. User undos task delete command
 
 > System adds the deleted task back and shows feedback to user
@@ -602,7 +602,7 @@ Use case ends
 
 **MSS**
 1. User enters command to update priority of task
-2. System updates priority to user specified priority 
+2. System updates priority to user specified priority
 Use case ends
 
 **Extensions**
@@ -639,8 +639,8 @@ Use case ends
 
 2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage
 
-3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
-   
+3. Should be able to accomplish most of the tasks faster using commands than using the mouse for a user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+
 4. Should be able to enter a task in one command instead of multiple clicks
 
 5. Should be able to access the program offline access tasks in areas without internet
@@ -665,7 +665,7 @@ Use case ends
 **Mainstream OS**: Windows, Linux, Unix, OS-X Operating Systems
 
 **MSS**: Main Success Scenario of a use case
-    
+
 **Sync**: Synchronize / adjust data on multiple files to be the same as each other
 
 **Task**: A to-do without a date range, and optionally has a deadline
@@ -685,8 +685,8 @@ Use case ends
 * Tells you what to do
 * Provides default settings so minimal adjustment is needed
 * Allows input commands using a keyboard<br>
- 
-### Disadvantages: 
+
+### Disadvantages:
 * Requires too many clicks for settings and other features other than task
 * Requires clicking to delete and update
 * Requires internet for desktop version to use
@@ -702,34 +702,34 @@ Use case ends
 
 ### Disadvantages:
 * Unable to sync with email
-* Lack of functionality(No reminders, calendar view, etc) 
+* Lack of functionality(No reminders, calendar view, etc)
 * Requires Windows Operating System to be installed
 
 ### Author: Jin Shun
-### Product: Momentum 
+### Product: Momentum
 ### Advantages:
-* Simple to use 
-* Nice background 
+* Simple to use
+* Nice background
 * Helpful way of reminding users of pending tasks, every time user opens new tab in chrome
 * Has integration with full fledged task managers like trello<br>
 
-### Disadvantages: 
-* Only works with chrome browser 
-* Requires internet connection 
-* Unable to set deadline for tasks 
-* Minimal features 
- 
+### Disadvantages:
+* Only works with chrome browser
+* Requires internet connection
+* Unable to set deadline for tasks
+* Minimal features
+
 ### Author: Huanhui
-### Product: Wunderlist 
+### Product: Wunderlist
 ### Advantages:
-* Some shortcut keys available, good user flexibility 
-* CRUD can function offline 
-* Many features such as the ability to set reminders, due dates, recurring tasks 
-* Tasks are automatically sorted by due date 
-* Able to display completed tasks 
+* Some shortcut keys available, good user flexibility
+* CRUD can function offline
+* Many features such as the ability to set reminders, due dates, recurring tasks
+* Tasks are automatically sorted by due date
+* Able to display completed tasks
 * Well designed UI<br>
 
 ### Disadvantages:
-* Not fully functional on keyboard, still need to use mouse to do operations such as select task 
-* Do not have an undo function 
+* Not fully functional on keyboard, still need to use mouse to do operations such as select task
+* Do not have an undo function
 * Requires installation
