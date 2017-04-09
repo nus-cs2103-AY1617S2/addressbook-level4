@@ -8,6 +8,9 @@ import javafx.scene.layout.Region;
 import seedu.task.model.task.ReadOnlyTask;
 
 //@@author A0163673Y
+/**
+ * Class for handling the task card UI component.
+ */
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";

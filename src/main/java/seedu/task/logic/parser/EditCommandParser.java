@@ -47,23 +47,8 @@ public class EditCommandParser {
         try {
             editTaskDescriptor.setDescription(ParserUtil.parseDescription(preambleFields.get(1)));
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
-            // handle parsing of due date
-            if (argsTokenizer.getValue(PREFIX_DUEDATE).isPresent()
-                    && argsTokenizer.getValue(PREFIX_DUEDATE).get().equals(EMPTY_STRING)) {
-                editTaskDescriptor.setDeleteDueDate(true);
-            } else {
-                editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
-            }
-            // handle parsing of duration
-            if (argsTokenizer.getValue(PREFIX_START).isPresent()
-                    && argsTokenizer.getValue(PREFIX_END).isPresent()
-                    && argsTokenizer.getValue(PREFIX_START).get().equals(EMPTY_STRING)
-                    && argsTokenizer.getValue(PREFIX_END).get().equals(EMPTY_STRING)) {
-                editTaskDescriptor.setDeleteDuration(true);
-            } else {
-                editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
-                editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
-            }
+            editTaskDescriptor = parseDueDate(editTaskDescriptor, argsTokenizer);
+            editTaskDescriptor = parseDuration(editTaskDescriptor, argsTokenizer);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -73,6 +58,33 @@ public class EditCommandParser {
         }
 
         return new EditCommand(index.get(), editTaskDescriptor);
+    }
+
+    // helper method to handle parsing of due date
+    private EditTaskDescriptor parseDueDate(EditTaskDescriptor editTaskDescriptor,
+            ArgumentTokenizer argsTokenizer) throws IllegalValueException {
+        if (argsTokenizer.getValue(PREFIX_DUEDATE).isPresent()
+                && argsTokenizer.getValue(PREFIX_DUEDATE).get().equals(EMPTY_STRING)) {
+            editTaskDescriptor.setDeleteDueDate(true);
+        } else {
+            editTaskDescriptor.setDueDate(ParserUtil.parseDueDate(argsTokenizer.getValue(PREFIX_DUEDATE)));
+        }
+        return editTaskDescriptor;
+    }
+
+    //helper method to handle parsing of duration
+    private EditTaskDescriptor parseDuration(EditTaskDescriptor editTaskDescriptor,
+            ArgumentTokenizer argsTokenizer) throws IllegalValueException {
+        if (argsTokenizer.getValue(PREFIX_START).isPresent()
+                && argsTokenizer.getValue(PREFIX_END).isPresent()
+                && argsTokenizer.getValue(PREFIX_START).get().equals(EMPTY_STRING)
+                && argsTokenizer.getValue(PREFIX_END).get().equals(EMPTY_STRING)) {
+            editTaskDescriptor.setDeleteDuration(true);
+        } else {
+            editTaskDescriptor.setDurationStart(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_START)));
+            editTaskDescriptor.setDurationEnd(ParserUtil.parseString(argsTokenizer.getValue(PREFIX_END)));
+        }
+        return editTaskDescriptor;
     }
     //@@author
 
