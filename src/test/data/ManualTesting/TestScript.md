@@ -7,29 +7,29 @@
 7. Rename [W14-B4][ezDo].jar to ezDo.jar.
 8. Run ezDo.jar.
 
-Initially, ezDo sorts tasks lexicographically by name.
-
+----
 
 <br>
 
+Initially, ezDo sorts tasks lexicographically by name.
+
+<br>
 
 Input:
-sort n d
+****sort n d****
+
 Output:
 ezDo is now sorted alphabetically in descending order.
 
-
 <br>
 
-
 Input:
-sort n a
+****sort n a****
+
 Output:
 ezDo is now sorted alphabetically in ascending order.
 
-
 <br>
-
 
 Input:
 ****add zebra sightseeing****
@@ -39,9 +39,7 @@ Description Box response:
 
 - 'zebra sightseeing' is now added as index 51 as ezDo will sort added tasks according to your last sort criteria. ezDo will scroll to the newly added task.
 
-
 <br>
-
 
 Input:
 ****add aaron's birthday****
@@ -50,9 +48,7 @@ Description Box response:
 ****"New task added: aaron's birthday"****
 - Added at index 1
 
-
 <br>
-
 
 Input:
 ****add crash boss's meeting****
@@ -72,6 +68,7 @@ Description Box response:
 - Will scroll to index 1 and sort by priority in ascending order
 
 <br>
+
 Input:
 ****sort p d****
 
@@ -80,9 +77,7 @@ Description Box reponse:
 
 - Will scroll to index 1 and sort by priority in descending order
 
-
 <br>
-
 
 Input:
 ****add alice's housewarming p/3****
@@ -93,6 +88,7 @@ Description Box response:
 - Added at index 6
 
 <br>
+
 Input:
 ****add buy phone p/1****
 
@@ -101,9 +97,7 @@ Description Box response:
 
 - Added at index 32
 
-
 <br>
-
 
 Input:
 ****add buy camera p/2****
@@ -112,8 +106,6 @@ Description Box response:
 ****New task added: buy camera | Priority: 2****
 
 - Added at index 16
-
-
 
 <br>
 
@@ -125,9 +117,7 @@ Description Box response:
 
 - Added at index 57
 
-
 <br>
-
 
 Input:
 ****sort s a****
@@ -137,9 +127,7 @@ Description Box response:
 
 - Scrolls to index 1 and sorts by start date from earliest to latest.
 
-
 <br>
-
 
 Input:
 ****sort s d****
@@ -149,9 +137,7 @@ Description Box response:
 
 - Scrolls to index 1 and sorts by start date from latest to earliest.
 
-
 <br>
-
 
 Input:
 ****add buy exit sign s/06/05/2017 00:29****
@@ -169,11 +155,9 @@ Input:
 Description Box response:
 ****New task added: buy headphones | StartDate: 06/04/2016 00:00****
 
-- Added at index 27
-
+- Added at index 37
 
 <br>
-
 
 Input:
 ****add start a fight s/20/04/2017 23:00****
@@ -183,9 +167,7 @@ Description Box response:
 
 - Index 11
 
-
 <br>
-
 
 Input:
 ****sort d a****
@@ -194,7 +176,6 @@ Description Box response:
 ****Sorted all tasks.****
 
 - Scrolls to index 1 and sorts by due date from earliest to latest.
-
 
 <br>
 
@@ -216,9 +197,7 @@ Description Box response:
 
 - Added at index 1
 
-
 <br>
-
 
 Input:
 ****add master m249 d/04/04/2014 12:00****
@@ -258,6 +237,8 @@ Description Box response:
 
 - Scrolls to the task's index at 62.
 
+<br>
+
 Input:
 ****edit 60 eat mcdonalds****
 
@@ -275,6 +256,8 @@ Description Box response:
 ****Sorted all tasks.****
 
 - Will scroll to index 1 and sort by priority in ascending order.
+
+<br>
 
 Input:
 ****edit 1 p/3****
@@ -304,6 +287,7 @@ Description Box response:
 
 - Scrolls to the task's index at 17. The leftmost color bar(priority) is now orange.
 
+<br>
 
 Input:
 ****sort s****
@@ -332,6 +316,7 @@ Description Box response:
 ****Edited Task: buy water bottle | StartDate: 05/04/2016 13:37****
 
 - Scrolls to the task's index at 1.
+
 <br>
 
 Input:
@@ -672,9 +657,7 @@ Description Box response:
 
 - 10 tasks with priority 2 are shown.
 
-
 <br>
-
 
 Input:
 ****list****
@@ -684,9 +667,7 @@ Description Box response:
 
 - All undone tasks are listed.
 
-
 <br>
-
 
 Input:
 ****find p/3****
@@ -716,9 +697,7 @@ Description Box response:
 
 - Tasks are sorted alphabetically in ascending order.
 
-
 <br>
-
 
 Input:
 ****add a1****
@@ -739,6 +718,7 @@ Description Box response:
 - Added at index 2
 
 <br>
+
 Input:
 ****add a3****
 
@@ -748,6 +728,7 @@ Description Box response:
 - Added at index 3
 
 <br>
+
 Input:
 ****add a4****
 
@@ -757,6 +738,7 @@ Description Box response:
 - Added at index 4
 
 <br>
+
 Input:
 ****add a5****
 
@@ -903,9 +885,7 @@ Description Box response:
 
 - The file is moved to the same folder as ezDo.jar. The file no longer exists at the old location at ./data
 
-
 <br>
-
 
 Input:
 ****save ./data****
@@ -935,9 +915,7 @@ Description Box response:
 
 - The tasks are sorted by lexicographical order.
 
-
 <br>
-
 
 Input:
 ****quit****
@@ -945,6 +923,7 @@ Input:
 Response:
 ****The app closes with no warning.****
 
+<br>
 
 1. Start ezDo again.
 2. The order is just the same as you left it (name ascending).
@@ -961,17 +940,15 @@ Description Box response:
 
 <br>
 
-
 Input:
 ****q****
 
 Response:
 ****The app closes with no warnings.****
 
-
+<br>
 
 1. Start ezDo again.
-
 2. The order is just the same as you left it (priority ascending).
 
 <br>
@@ -993,9 +970,9 @@ Input:
 Response:
 ****The app closes with no warnings.****
 
+<br>
 
 1. Start ezDo again.
-
 2. The order is just the same as you left it (start date ascending).
 
 <br>
@@ -1010,21 +987,18 @@ Description Box response:
 
 <br>
 
-
 Input:
 ****q****
 
 Response:
 ****The app closes with no warnings.****
 
+<br>
 
 1. Start ezDo again.
-
 2. The order is just the same as you left it (due date descending).
 
 <br>
-
-
 
 Input:
 ****clear****
@@ -1034,9 +1008,7 @@ Description Box response:
 
 - ezDo is cleared.
 
-
 <br>
-
 
 Input:
 ****alias undo helpimtwelve****
@@ -1046,9 +1018,7 @@ Description Box response:
 
 - You can now Undo commands with 'helpimtwelve'
 
-
 <br>
-
 
 Input:
 ****helpimtwelve****
@@ -1058,9 +1028,7 @@ Description Box response:
 
 - The previous command "clear" has been undone.
 
-
 <br>
-
 
 Input:
 ****alias reset****
@@ -1070,9 +1038,7 @@ Description Box response:
 
 - All aliases are removed.
 
-
 <br>
-
 
 Input:
 ****helpimtwelve****
@@ -1084,7 +1050,6 @@ Description Box response:
 
 <br>
 
-
 Input:
 ****help****
 
@@ -1093,9 +1058,7 @@ Description Box response:
 
 - A help window appears, which is linked to the user guide.
 
-
 <br>
-
 
 Input:
 ****select 1****
@@ -1104,9 +1067,7 @@ Description Box response:
 
 - The task at index 1 is marked as ongoing, as indicated by the hammer icon.
 
-
 <br>
-
 
 Input:
 ****select 5 3 4****
@@ -1115,10 +1076,7 @@ Description Box response:
 
 - The tasks at indexes 3, 4 and 5 are marked as ongoing, as indicated by the hammer icons.
 
-
-
 <br>
-
 
 Input:
 ****select 1****
@@ -1127,9 +1085,7 @@ Description Box response:
 
 - The task at index 1 is marked as no longer ongoing, as indicated by the lack of a hammer icon.
 
-
 <br>
-
 
 Input:
 ****select 3 4 5****
@@ -1138,9 +1094,7 @@ Description Box response:
 
 - The tasks at indexes 3, 4, 5 are marked as no longer ongoing, as indicated by the lack of hammer icons.
 
-
 <br>
-
 
 Input:
 ****done 1****
@@ -1177,7 +1131,8 @@ Description Box response:
 
 - ezDo exits.
 
+<br>
 
 This concludes the test script.
 
-
+<br>
