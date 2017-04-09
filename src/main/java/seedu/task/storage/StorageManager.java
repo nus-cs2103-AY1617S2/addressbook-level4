@@ -151,8 +151,7 @@ public class StorageManager extends ComponentManager implements Storage {
     /**
      * Triggers whenever a command that modifies data is executed. Backup if required. Save data into file either way.
      *
-     * @param event
-     *            The event that represents taskmanager is changed.
+     * @param event     The event that represents taskmanager is changed.
      */
     @Override
     @Subscribe

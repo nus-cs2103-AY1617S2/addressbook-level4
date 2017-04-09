@@ -93,7 +93,7 @@ public class History {
 
     /**
      * This method returns the filePath for undo to load from.
-     * This method is only used when undo command is called, therefore undoCount must not be 0.
+     * This method is only used when undo command is executing, therefore undoCount must not be 0.
      * currentFileIndex must never be negative since it corresponds to a file.
      *
      * @return File path for undo to load from.
@@ -110,7 +110,7 @@ public class History {
 
     /**
      * This method returns the filePath for redo to load from.
-     * This method is only used when redo command is called, therefore redoCount must not be 0.
+     * This method is only used when redo command is executing, therefore redoCount must not be 0.
      *
      * @return File path for redo to load from.
      */
@@ -125,7 +125,7 @@ public class History {
 
     /**
      * This method is called when a command that modifies taskmanager have been executed.
-     * If backupFilePath is not empty, it means backup is done. Updates values to maintain proper status.
+     * If backupFilePath is not empty, it means backup was successfully done. Updates values to maintain proper status.
      *
      * @param backupFilePath    File path that backup was saved into.
      */

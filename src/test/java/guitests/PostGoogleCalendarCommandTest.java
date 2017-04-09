@@ -9,7 +9,7 @@ public class PostGoogleCalendarCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void postGoogle_noInternet_Fail() {
-        GoogleCalendar.setNoInternetTrue();
+        GoogleCalendar.test_setNoInternetTrue();
 
         commandBox.runCommand(PostGoogleCalendarCommand.COMMAND_WORD_1);
         assertResultMessage(GoogleCalendar.CONNECTION_FAIL_MESSAGE);
