@@ -66,8 +66,7 @@ public class DeleteCommand extends Command {
      * Checks if any index is invalid
      */
     private boolean isAnyInvalidIndex(UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList) {
-        boolean test = this.targetIndexes.stream().anyMatch(index -> index < 0 || index > lastShownTaskList.size());
-        return test;
+        return this.targetIndexes.stream().anyMatch(index -> index < 0 || index > lastShownTaskList.size());
     }
 
     public static String getName() {

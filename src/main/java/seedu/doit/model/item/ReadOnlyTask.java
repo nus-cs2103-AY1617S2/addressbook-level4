@@ -61,7 +61,7 @@ public interface ReadOnlyTask {
      * Returns the name of the task in String
      */
     default String getTaskName() {
-       return this.getTaskName();
+        return this.getTaskName();
     }
 
     default void appendName(StringBuilder builder) {
