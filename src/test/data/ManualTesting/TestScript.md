@@ -1,5 +1,5 @@
-1. Set storage to the test directory, enter 
-"setstorage src/test/data/ManualTesting".
+1. Load storage to the test directory, enter
+"loadstorage src/test/data/ManualTesting".
 
 2. List the tasklist, enter
 "list".
@@ -176,12 +176,17 @@
 
 69. Verify the 47th Task's due time, tag, discription at the same time. 
 
-70. clear all the Tasks, enter
+70. Move storage file to a different test directory, enter
+"setstorage src/test/data/ManualTesting/ChangeDir".
+
+71. Verify that file has been moved to the new directory.
+
+71. clear all the Tasks, enter
 "clear".
 
-71. Verify the tasklist is empty.
+72. Verify the tasklist is empty.
 
-72. Exit the App, enter
+73. Exit the App, enter
 "exit".
 
-73. Verify the App is closed.
+74. Verify the App is closed.
