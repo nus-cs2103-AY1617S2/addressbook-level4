@@ -106,16 +106,7 @@ public class TodoList implements ReadOnlyTodoList {
     public void updateTodo(int index, ReadOnlyTodo editedReadOnlyTodo)
             throws UniqueTodoList.DuplicateTodoException {
         assert editedReadOnlyTodo != null;
-        Todo editedTodo = null;
-        if (editedReadOnlyTodo.getStartTime() != null && editedReadOnlyTodo.getEndTime() != null) {
-            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getStartTime(),
-                     editedReadOnlyTodo.getEndTime(), editedReadOnlyTodo.getTags());
-        } else if (editedReadOnlyTodo.getStartTime() == null && editedReadOnlyTodo.getEndTime() != null) {
-            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getEndTime(),
-                    editedReadOnlyTodo.getTags());
-        } else {
-            editedTodo = new Todo(editedReadOnlyTodo);
-        }
+        Todo editedTodo = createEditedTodoWithTime(editedReadOnlyTodo, todos.asObservableList().get(index));
         syncMasterTagListWith(editedTodo);
         // Todo: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any todo
@@ -137,6 +128,36 @@ public class TodoList implements ReadOnlyTodoList {
      */
     public void uncompleteTodo(int index) {
         todos.uncompleteTodo(index);
+    }
+    //@@author
+    //@@author A0165043M
+    /**
+     * return a Todo with proper time.
+     * if the original todo already has time and the edited todo
+     * doesn't include time, then edited todo won't replace new todo new
+     * empty time.
+     * @param editedReadOnlyTodo
+     * @param originalTodo
+     * @return Todo
+     */
+    private Todo createEditedTodoWithTime(ReadOnlyTodo editedReadOnlyTodo, Todo originalTodo) {
+        Todo editedTodo = null;
+        if (editedReadOnlyTodo.getStartTime() != null && editedReadOnlyTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getStartTime(),
+                     editedReadOnlyTodo.getEndTime(), editedReadOnlyTodo.getTags());
+        } else if (editedReadOnlyTodo.getStartTime() == null && editedReadOnlyTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), editedReadOnlyTodo.getEndTime(),
+                    editedReadOnlyTodo.getTags());
+        } else if (originalTodo.getStartTime() != null && originalTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), originalTodo.getStartTime(),
+                    originalTodo.getEndTime(), editedReadOnlyTodo.getTags());
+        } else if (originalTodo.getStartTime() == null && originalTodo.getEndTime() != null) {
+            editedTodo = new Todo(editedReadOnlyTodo.getName(), originalTodo.getEndTime(),
+                    editedReadOnlyTodo.getTags());
+        } else {
+            editedTodo = new Todo(editedReadOnlyTodo);
+        }
+        return editedTodo;
     }
     //@@author
     /**

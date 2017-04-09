@@ -25,15 +25,6 @@ public class EditCommandTest extends TodoListGuiTest {
     // This list is updated with every successful call to assertEditSuccess().
     TestTodo[] expectedTodosList = td.getTypicalTodos();
 
-    @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
-        String detailsToEdit = "Bobby t/husband";
-        int todoListIndex = 1;
-
-        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
-
-        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
-    }
     //@@author A0165043M
     @Test
     public void edit_taskToEvent_success() throws Exception {
@@ -125,29 +116,9 @@ public class EditCommandTest extends TodoListGuiTest {
     }
 
     @Test
-    public void edit_deadLineToTask_success() throws Exception {
-        String detailsToEdit = " Bobby t/husband";
-        int todoListIndex = 8;
-
-        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
-
-        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
-    }
-
-    @Test
-    public void edit_eventToTask_success() throws Exception {
-        String detailsToEdit = "Bobby t/husband";
-        int todoListIndex = 9;
-
-        TestTodo editedTodo = new TodoBuilder().withName("Bobby").withTags("husband").build();
-
-        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
-    }
-
-    @Test
     public void edit_eventToDeadLine_success() throws Exception {
         String detailsToEdit = "Bobby e/6:00AM 17/11/2011 t/husband";
-        int todoListIndex = 9;
+        int todoListIndex = 8;
 
         TestTodo editedTodo = new TodoBuilder().withName("Bobby").
                 withEndTime("6:00AM 17/11/11").withTags("husband").build();
@@ -175,6 +146,48 @@ public class EditCommandTest extends TodoListGuiTest {
 
         assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
     }
+
+    @Test
+    public void edit_deadLineEditTagsOnly_success() throws Exception {
+        String detailsToEdit = "t/homework";
+        int todoListIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay").withEndTime("6:00PM 11/11/17").
+                withTags("homework").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void edit_eventEditTagsOnly_success() throws Exception {
+        String detailsToEdit = "t/urgent";
+        int todoListIndex = 9;
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom").withStartTime("12:00PM 11/11/17")
+                .withEndTime("1:00PM 11/11/17").withTags("urgent").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void edit_deadLineEditNameOnly_success() throws Exception {
+        String detailsToEdit = "Write essay 2";
+        int todoListIndex = 8;
+
+        TestTodo editedTodo = new TodoBuilder().withName("Write essay 2").withEndTime("6:00PM 11/11/17").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
+    @Test
+    public void edit_eventEditNameOnly_success() throws Exception {
+        String detailsToEdit = "Go to the bathroom 2";
+        int todoListIndex = 9;
+        TestTodo editedTodo = new TodoBuilder().withName("Go to the bathroom 2").withStartTime("12:00PM 11/11/17")
+                .withEndTime("1:00PM 11/11/17").withTags("personal").build();
+
+        assertEditSuccess(todoListIndex, todoListIndex, detailsToEdit, editedTodo);
+    }
+
     //@@author
     @Test
     public void edit_allFieldsSpecifiedEvent_success() throws Exception {

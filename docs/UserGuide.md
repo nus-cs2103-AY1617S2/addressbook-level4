@@ -83,10 +83,10 @@ Format: `list`
 Edits a Todo's title, start time, endtime, and tags.<br>
 Format: `edit INDEX [TASK] [s/STARTTIME] [e/ENDTIME] [t/TAG]`
 
-Converts a floating todo to a deadline todo with endtime as tomorrow as the default.<br>
+Converts a floating todo or a event todo to a deadline todo with endtime as tomorrow as the default.<br>
 Format: `edit INDEX [e/]`
 
-Converts a floating todo to an event todo with starttime and endtime as today and tomorrow as the default.<br>
+Converts a floating todo or a deadline todo to an event todo with starttime and endtime as today and tomorrow as the default.<br>
 Format: `edit INDEX [s/] [e/]`
 
 Edits a todo title.<br>
@@ -101,8 +101,7 @@ Format: `edit INDEX [ta/TAG]`
 > * At least a new title or one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * Edit with `t/` may replace all the previous tags with new assigned tags.
-> * Edit command will replace the todo with all parameters specified by the command and change todo's type.
-e.g. if you don't specified start time and endt ime for an event, the event will become a task after the edit command.
+> * You can't change a deadine todo or a event todo to a floating todo.
 > * Default edit time is set to 12:00AM today for start time and 1200:AM tomorrow for end time.
 
 Examples:
@@ -250,8 +249,20 @@ Examples:
 * **Edit Event** : `edit INDEX [TASK] s/STARTTIME e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk s/11:11am 11/11/11 e/12:12pm 11/11/11 t/cat`
 
+* **Edit Event With Default Date And Time** : `edit INDEX [TASK] s/ e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk with default date and time s/ e/ t/cat`
+
+* **Edit Event With Default Time** : `edit INDEX [TASK] s/ e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk with default date s/11/11/17 e/12/11/17 t/cat`
+
 * **Edit Deadline** : `edit INDEX [TASK] e/ENDTIME [t/TAG]` <br>
   e.g. `edit 1 Take cat for a walk e/12:12pm 11/11/11 t/cat`
+
+* **Edit Deadline With Default Date And Time** : `edit INDEX [TASK] e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/ t/cat`
+
+* **Edit Deadline With Default Time** : `edit INDEX [TASK] e/ [t/TAG]` <br>
+  e.g. `edit 1 Take cat for a walk e/11/11/17 t/cat`
 
 * **Append New Tags** : `edit INDEX [ta/TAG]` <br>
   e.g. `edit 1 ta/cat ta/pet ta/cute`
