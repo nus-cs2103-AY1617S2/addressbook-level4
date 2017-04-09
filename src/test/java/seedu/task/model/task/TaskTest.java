@@ -1,6 +1,7 @@
 package seedu.task.model.task;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -37,6 +38,7 @@ public class TaskTest {
         this.setUp();
         Task another = new Task(name, date, start, end, descrip, status, tags);
         assertEquals(this.task, another);
+        assertTrue(this.task.isSameStateAs(another));
     }
 
 }
