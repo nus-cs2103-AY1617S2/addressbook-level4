@@ -38,8 +38,8 @@
 |4 | sort by invalid keyword | sort invalid | Alert for invalid keyword is shown. Tasks are sorted according to earliest end dates first, tasks without end dates will be listed after tasks with end dates |
 |	Edit	|		|		| |
 || **edit task** <br><br>Editted task will be automatically selected in the list after successful edit| | |
-|1| edit title in task:`Write english essay` | edit `index` Write chinese essay | Task is editted |
-|2| edit end date in task:`Prepare for maths test` | edit `index` e/next year | Task is editted with its position in the sorted list changed |
+|1| edit title in task:`Jogging 5km everyday` | edit 1 Jogging 10km everyday | Task is edited |
+|2| edit end date in task:`Prepare for maths test` | edit `index` e/next year | Task is edited with its position in the sorted list changed |
 |3| edit multiple fields in task `Buy airtickets to maldives` | edit `index` d/with alice t/work | Task description and tag is editted |
 |4| edit to remove fields in task `Buy airtickets to maldives` | edit `index` d/ t/ | Task description and tag are removed |
 |5| edit a task that is done| list done | Selected view is now `Done` |
