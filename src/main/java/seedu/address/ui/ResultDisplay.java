@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -19,7 +17,6 @@ import seedu.address.commons.util.FxViewUtil;
  */
 public class ResultDisplay extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
 
     private final StringProperty displayed = new SimpleStringProperty("");
@@ -39,10 +36,16 @@ public class ResultDisplay extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author A0164032U
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        LOGGER.info(LogsCenter.getEventHandlingLogMessage(event));
         displayed.setValue(event.message);
+        if (event.isError == true) {
+            resultDisplay.setStyle("-fx-text-fill: red;");
+        } else {
+            resultDisplay.setStyle("-fx-text-fill: black;");
+        }
     }
 
 }

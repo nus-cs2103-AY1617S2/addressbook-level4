@@ -14,9 +14,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ImportResultAvailableEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.LoadResultAvailableEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowThemeRequestEvent;
+import seedu.address.commons.events.ui.TargetFileRequestEvent;
+import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -64,7 +68,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -77,7 +80,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+        showAlertDialogAndWait(mainWindow.getStage(), type, title, headerText, contentText);
     }
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
@@ -114,15 +117,36 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
+    private void handleShowThemeEvent(ShowThemeRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.handleTheme();
+    }
+
+    @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+
+    }
+
+    @Subscribe
+    private void handleLoadResultAvailableEvent(LoadResultAvailableEvent event) {
+        if (event.getImported() != null && event.getImported().isPresent()) {
+            logic.setYTomorrow(event.getImported().get());
+            raise(new TargetFileRequestEvent(event.getFile(), prefs));
+        }
+    }
+
+    @Subscribe
+    private void handleImportResultAvailableEvent(ImportResultAvailableEvent event) {
+        if (event.getImported() != null && event.getImported().isPresent()) {
+            logic.importYTomorrow(event.getImported().get());
+        }
     }
 
 }

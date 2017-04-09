@@ -6,11 +6,13 @@ import seedu.address.commons.events.BaseEvent;
  * Indicates that a new result is available.
  */
 public class NewResultAvailableEvent extends BaseEvent {
-
+    //@@author A0164032U
     public final String message;
+    public boolean isError;
 
-    public NewResultAvailableEvent(String message) {
+    public NewResultAvailableEvent(String message, boolean error) {
         this.message = message;
+        this.isError = error;
     }
 
     @Override
