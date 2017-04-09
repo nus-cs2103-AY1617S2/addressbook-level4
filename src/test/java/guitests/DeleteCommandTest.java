@@ -11,7 +11,7 @@ import seedu.tache.testutil.TestTask;
 import seedu.tache.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskManagerGuiTest {
-    
+
     @Test
     public void delete_recurringTask_failure() {
         commandBox.runCommand("clear");
