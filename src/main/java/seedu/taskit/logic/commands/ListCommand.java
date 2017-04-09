@@ -36,20 +36,20 @@ public class ListCommand extends Command {
 
         int taskListSize;
         switch (parameter) {
-              case LIST_ALL:
-                  model.updateFilteredListToShowAll();
-                  return new CommandResult(MESSAGE_SUCCESS_ALL);
+        case LIST_ALL:
+            model.updateFilteredListToShowAll();
+            return new CommandResult(MESSAGE_SUCCESS_ALL);
 
-              case LIST_TODAY:
-                  taskListSize = model.updateFilteredTaskList(parameter);
-                  if(taskListSize == 0){
-                      return new CommandResult(MESSAGE_NO_TASK_TODAY);
-                  }
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
+        case LIST_TODAY:
+            taskListSize = model.updateFilteredTaskList(parameter);
+            if(taskListSize == 0){
+                return new CommandResult(MESSAGE_NO_TASK_TODAY);
+            }
+            return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
 
-              default:
-                  model.updateFilteredTaskList(parameter);
-                  return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
+        default:
+            model.updateFilteredTaskList(parameter);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_SPECIFIC, parameter));
         }
     }
 
