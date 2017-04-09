@@ -199,6 +199,9 @@ As shown in Figure 6,
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to **`UI`**.
 <br>
 
+The Command pattern is employed, as the `Command` object is passed around and executed.
+<br>
+
 The _sequence diagram_ (shown in Figure 7) shows the interactions within **`Logic`** for the _`execute("kill 1")`_ API call.<br>
 
 <p align="center"><img src="images/DeletePersonSdForLogic.png" width="800"></p>
@@ -236,6 +239,8 @@ As such, our undo/redo functionality is designed with the Memento Pattern. The `
 Before any undo-able command is fully executed, a copy of the current history state is saved onto the undo stack and the redo stack is cleared.
 
 If a user executes the undo command, the current state would be saved onto the redo stack, and the previous state in the undo stack popped off so that `ModelManager` can rollback to it.
+
+In addition, ezDo supports sorting by name, priority, start date or due date. The user's last used sort criteria and order are remembered across sessions. This is achieved by storing the sort criteria and order in user preferences. To achieve this, the Observer pattern is employed. When the tasks are sorted, the events `SortCriteriaChangedEvent` and `IsSortedAscendingChangedEvent` will be raised. The `MainApp` class listens for these events, and handles them by updating the `userPref` object with the updated sort criteria and order.
 <br><br>
 
 
