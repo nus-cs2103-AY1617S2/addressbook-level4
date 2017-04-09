@@ -48,6 +48,16 @@ Feedback shows:
 > Start Time: 01 Feb 18 10:00AM<br/>
 > End Time: 10 Feb 18 07:00PM
 
+## Clear command
+
+To clear the whole list of tasks, enter command `clear`.
+
+#### Result
+
+> Task manager has been cleared!
+
+The whole list of tasks is shown to the user.
+
 ## Delete command
 
 To delete a task, start command with keyword `delete`.
@@ -69,7 +79,7 @@ Task with index 1 is deleted.
 
 ## Edit command
 
-To edit a specific, start command with the keyword `edit`.
+To edit a specific task, start command with the keyword `edit`.
 
 `edit 1 p/hi b/04/28/2017 22:00 e/04/28/2017 22:30`
 
@@ -88,6 +98,8 @@ Feedback shows:
 To see the whole list of tasks, enter command `list`.
 
 #### Result
+
+> Listed all tasks
 
 The whole list of tasks is shown to the user.
 
