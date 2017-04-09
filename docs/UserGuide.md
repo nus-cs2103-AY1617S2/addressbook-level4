@@ -95,13 +95,13 @@ Type out these command in the command box and press <kbd>Enter</kbd> to execute 
 [comment]: # (@@author A0162011A)
 ## 3. Features
 
-ToLuist is focused towards users who like to type.<br>
+ToLuist is geared towards users who like to type.<br>
 All the features of the application can be accessed through the use of a keyboard, by entering commands into the on-screen text field.<br>
 
 > **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
+> * Items in `[SQUARE_BRACKETS]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 > * Options with '/' allow either word to be used.
