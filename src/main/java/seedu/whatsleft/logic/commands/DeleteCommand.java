@@ -49,54 +49,74 @@ public class DeleteCommand extends Command {
         UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
 
         if (targetType.equals("ev")) {
-            //@@author A0148038A
-            logger.info("-------[Executing DeleteEventCommand] " + this.toString());
-
-            if (lastShownEventList.size() < targetIndex) {
-                logger.info("-------[Failed execution of DeleteEventCommand] " + this.toString());
-                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-            }
-
-            //@@author A0124377A
-            ReadOnlyEvent eventToDelete = lastShownEventList.get(targetIndex - 1);
-            try {
-                //store for undo operation
-                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-                ModelManager.setPreviousState(currState);
-                EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
-                model.deleteEvent(eventToDelete);
-                model.storePreviousCommand("delete");
-            } catch (EventNotFoundException enfe) {
-                assert false : "The target event cannot be missing";
-            }
-            return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
+            return deletingEvent(lastShownEventList);
         }
 
         if (targetType.equals("ts")) {
-            //@@author A0148038A
-            logger.info("-------[Executing DeleteTaskCommand] " + this.toString());
-
-            if (lastShownTaskList.size() < targetIndex) {
-                logger.info("-------[Failed execution of DeleteTaskCommand] " + this.toString());
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
-            //@@author A0124377A
-            ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
-            try {
-                //store for undo operation
-                ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-                ModelManager.setPreviousState(currState);
-                EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
-                model.deleteTask(taskToDelete);
-                model.storePreviousCommand("delete");
-            } catch (TaskNotFoundException pnfe) {
-                assert false : "The target task cannot be missing";
-            }
-            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+            return deletingTask(lastShownTaskList);
         }
         return new CommandResult(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
+    }
+
+    //@@author A0124377A
+    /**
+     * Executes the deletion of an event
+     * @param lastShownEventList
+     * @return CommandResult of successful deletion of event
+     * @throws CommandException
+     */
+    private CommandResult deletingEvent(UnmodifiableObservableList<ReadOnlyEvent> lastShownEventList)
+            throws CommandException {
+        logger.info("-------[Executing DeleteEventCommand] " + this.toString());
+
+        if (lastShownEventList.size() < targetIndex) {
+            logger.info("-------[Failed execution of DeleteEventCommand] " + this.toString());
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyEvent eventToDelete = lastShownEventList.get(targetIndex - 1);
+        try {
+            //store for undo operation
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex - 1));
+            model.deleteEvent(eventToDelete);
+            model.storePreviousCommand("delete");
+        } catch (EventNotFoundException enfe) {
+            assert false : "The target event cannot be missing";
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
+    }
+
+    //@@author A0124377A
+    /**
+     * Executes the deletion of a task
+     * @param lastShownEventList
+     * @return CommandResult of successful deletion of task
+     * @throws CommandException
+     */
+    private CommandResult deletingTask(UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList)
+            throws CommandException {
+        logger.info("-------[Executing DeleteTaskCommand] " + this.toString());
+
+        if (lastShownTaskList.size() < targetIndex) {
+            logger.info("-------[Failed execution of DeleteTaskCommand] " + this.toString());
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyTask taskToDelete = lastShownTaskList.get(targetIndex - 1);
+        try {
+            //store for undo operation
+            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+            ModelManager.setPreviousState(currState);
+            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex - 1));
+            model.deleteTask(taskToDelete);
+            model.storePreviousCommand("delete");
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
 }

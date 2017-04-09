@@ -115,7 +115,6 @@ public class EditCommand extends Command {
      * @throws CommandException if invalid index or incorrect end_date/time or duplicate event
      */
     private CommandResult editingEvent() throws CommandException {
-        //@@author A0148038A
         assert model != null;
         logger.info("-------[Executing EditEventCommand] " + this.toString());
         List<ReadOnlyEvent> lastShownEventList = model.getFilteredEventList();
@@ -140,11 +139,9 @@ public class EditCommand extends Command {
             model.updateFilteredListToShowAll();
             model.storePreviousCommand("edit");
 
-            //@@author A0148038A
             UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
             EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(editedEvent)));
 
-            //@@author A0110491U
             if (!editedEvent.isOver()) {
                 EventsCenter.getInstance().post(new JumpToCalendarEventEvent(editedEvent));
             }
@@ -164,11 +161,9 @@ public class EditCommand extends Command {
      * @throws CommandException if invalid index or duplicate task
      */
     private CommandResult editingTask() throws CommandException {
-        //@@author A0148038A
         assert model != null;
         logger.info("-------[Executing EditTaskCommand] " + this.toString());
 
-        //@@author A0110491U
         List<ReadOnlyTask> lastShownTaskList = model.getFilteredTaskList();
         if (filteredActivityListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
