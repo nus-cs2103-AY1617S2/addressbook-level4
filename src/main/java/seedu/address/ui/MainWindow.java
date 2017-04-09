@@ -70,6 +70,9 @@ public class MainWindow extends Window {
     @FXML
     private MenuItem themeMenuItem;
 
+    @FXML
+    private MenuItem exitMenuItem;
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
 
@@ -91,11 +94,12 @@ public class MainWindow extends Window {
 
     private void setAccelerators() {
         setAccelerator(saveMenuItem,   KeyCombination.valueOf("ctrl+s"));
-        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+v"));
+        setAccelerator(loadMenuItem,   KeyCombination.valueOf("ctrl+l"));
         setAccelerator(exportMenuItem, KeyCombination.valueOf("ctrl+e"));
         setAccelerator(importMenuItem, KeyCombination.valueOf("ctrl+i"));
         setAccelerator(helpMenuItem,   KeyCombination.valueOf("ctrl+h"));
-        setAccelerator(themeMenuItem,  KeyCombination.valueOf("ctrl+c"));
+        setAccelerator(themeMenuItem,  KeyCombination.valueOf("ctrl+t"));
+        setAccelerator(exitMenuItem,  KeyCombination.valueOf("ctrl+q"));
     }
 
     void fillInnerParts() {
