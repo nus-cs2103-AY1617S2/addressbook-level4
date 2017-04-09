@@ -12,10 +12,10 @@ public class ReadOnlyEventComparatorByStartDate implements Comparator<ReadOnlyEv
 			return 0;
 		}
 		if (o1.getStartTime().toString().equals("")) {
-			return 1;
+			return -1;
 		}
 		if (o2.getStartTime().toString().equals("")) {
-			return -1;
+			return 1;
 		}
 		return o1.getStartTime().getDate().compareTo(o2.getStartTime().getDate());
 	}

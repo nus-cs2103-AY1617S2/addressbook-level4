@@ -21,6 +21,8 @@ import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByDeadline;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByEndDate;
 import org.teamstbf.yats.model.item.ReadOnlyEventComparatorByStartDate;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorIsDeadline;
+import org.teamstbf.yats.model.item.ReadOnlyEventComparatorIsEvent;
 import org.teamstbf.yats.model.item.UniqueEventList.EventNotFoundException;
 
 import javafx.collections.transformation.FilteredList;
@@ -339,21 +341,24 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByEnd() {
-		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByEndDate());
+		SortedList<ReadOnlyEvent> reverseSortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByEndDate());
+		SortedList<ReadOnlyEvent> sortedEvents = reverseSortedEvents.sorted(new ReadOnlyEventComparatorIsEvent());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
 		taskManager.setPersons(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByStart() {
-		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
-		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
+		SortedList<ReadOnlyEvent> reverseSortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
+		SortedList<ReadOnlyEvent> sortedEvents = reverseSortedEvents.sorted(new ReadOnlyEventComparatorIsEvent());
+FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
 		taskManager.setPersons(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByDeadline() {
-		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByDeadline());
+		SortedList<ReadOnlyEvent> reverseSortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByDeadline());
+		SortedList<ReadOnlyEvent> sortedEvents = reverseSortedEvents.sorted(new ReadOnlyEventComparatorIsDeadline());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
 		taskManager.setPersons(tempEvents);
 		return tempEvents;
