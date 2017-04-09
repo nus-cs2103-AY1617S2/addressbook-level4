@@ -15,6 +15,7 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.MenuBarPanelHandle;
 import guitests.guihandles.TaskListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.TaskCardHandle;
@@ -31,7 +32,7 @@ import seedu.taskit.testutil.TypicalTestTasks;
 /**
  * A GUI Test class for AddressBook.
  */
-public abstract class AddressBookGuiTest {
+public abstract class TaskManagerGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -52,6 +53,7 @@ public abstract class AddressBookGuiTest {
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     protected BrowserPanelHandle browserPanel;
+    protected MenuBarPanelHandle menuBarPanel;
     private Stage stage;
 
     @BeforeClass
@@ -72,6 +74,7 @@ public abstract class AddressBookGuiTest {
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
+            menuBarPanel = mainGui.getMenuBarPanel();
             browserPanel = mainGui.getBrowserPanel();
             this.stage = stage;
         });

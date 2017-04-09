@@ -33,6 +33,10 @@ public class MainGuiHandle extends GuiHandle {
         return new BrowserPanelHandle(guiRobot, primaryStage);
     }
 
+    public MenuBarPanelHandle getMenuBarPanel() {
+        return new MenuBarPanelHandle(guiRobot,primaryStage);
+    }
+
     public AlertDialogHandle getAlertDialog(String title) {
         guiRobot.sleep(1000);
         return new AlertDialogHandle(guiRobot, primaryStage, title);

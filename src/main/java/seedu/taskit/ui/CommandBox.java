@@ -85,6 +85,9 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author A0141872E
+    /**
+     * display the relevant task lists based on the MenuBarSelectionChanged Event parameter
+     */
     public void handleMenuBarSelectionChanged(String parameter) {
         try {
             String command = changeToListCommandFormat(parameter);
@@ -99,6 +102,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * change the parameter into correct ListCommand format
+     */
     private String changeToListCommandFormat(String parameter) {
         switch (parameter) {
 

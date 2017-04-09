@@ -10,7 +10,7 @@ import seedu.taskit.model.task.Date;
 
 public class TypicalTestTasks {
     public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning,
-    gymming, golfing, today, to, from, date,deadline, internship;
+    gymming, golfing, today, to, from, date,deadline, internship, overdue;
 
     public TypicalTestTasks() {
         try {
@@ -64,6 +64,9 @@ public class TypicalTestTasks {
             internship = new TaskBuilder().withTitle("internship")
                     .withPriority("low")
                     .withEnd("May 30").build();
+            overdue = new TaskBuilder().withTitle("task3")
+                    .withPriority("low")
+                    .withEnd("Apr 1").build();
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -88,9 +91,13 @@ public class TypicalTestTasks {
     //@@author
 
     //@@author A0141872E
-    public TestTask[] getUndoneTypicalTasks(){
+    public TestTask[] getUndoneTypicalTasks() {
         return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
     }//@@author
+
+    public TestTask[] getTodayTasks() {
+        return new TestTask[]{};
+    }
 
     public TaskManager getTypicalAddressBook() {
         TaskManager ab = new TaskManager();

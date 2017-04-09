@@ -7,7 +7,7 @@ import org.junit.Test;
 import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.taskit.testutil.TestTask;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+public class ClearCommandTest extends TaskManagerGuiTest {
     //@@author A0141011J
     @Test
     public void clear() {

@@ -12,7 +12,7 @@ import seedu.taskit.logic.commands.AddCommand;
 import seedu.taskit.testutil.TestTask;
 import seedu.taskit.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {

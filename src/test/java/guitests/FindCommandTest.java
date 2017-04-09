@@ -10,7 +10,7 @@ import seedu.taskit.logic.commands.FindCommand;
 import seedu.taskit.testutil.TestTask;
 
 //@@author A0141872E
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList() {

@@ -17,7 +17,7 @@ import seedu.taskit.testutil.TaskBuilder;
 import seedu.taskit.testutil.TestTask;
 
 // TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskManagerGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
     // This list is updated with every successful call to assertEditSuccess().
@@ -29,7 +29,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         Arrays.sort(expectedTasksList);
     }//@@author
 
-    //@@author A0141872E
 
     @Test
     public void edit_title_success() throws Exception {
@@ -51,28 +50,6 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags("school").build();
-
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-    }
-
-    @Test
-    public void edit_multipleFields_Success() throws Exception {
-        String detailsToEdit = "title Do Homework from 4pm to 6pm priority low tag assignment";
-        int taskManagerIndex = 3;
-
-        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withStart("4pm").withEnd("6pm").withPriority("low").withTags("assignment").build();
-
-        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-    }
-
-    @Test
-    public void edit_multiTags_success() throws Exception {
-        sortTasksList();
-        String detailsToEdit = "tag school tag work tag assignment";
-        int taskManagerIndex = 3;
-
-        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("school","work","assignment").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
@@ -127,6 +104,28 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     //@@author A0141872E
     @Test
+    public void edit_multipleFields_Success() throws Exception {
+        String detailsToEdit = "title Do Homework from 4pm to 6pm priority low tag assignment";
+        int taskManagerIndex = 3;
+
+        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withStart("4pm").withEnd("6pm").withPriority("low").withTags("assignment").build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
+    public void edit_multiTags_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "tag school tag work tag assignment";
+        int taskManagerIndex = 3;
+
+        TestTask taskToEdit = expectedTasksList[taskManagerIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("school","work","assignment").build();
+
+        assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
+    }
+
+    @Test
     public void edit_dateToNull_success() throws Exception {
         sortTasksList();
         String detailsToEdit = "to null";
@@ -148,7 +147,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("today").withTags("school").build();
 
         assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedTask);
-    }
+    }//@@author
 
     @Test
     public void edit_findThenEdit_success() throws Exception {
@@ -165,6 +164,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertEditSuccess(filteredTaskListIndex, taskManagerIndex, detailsToEdit, editedTask);
     }
 
+    //@@author A0141872E
     @Test
     public void edit_notAllFieldsSpecified_failure() {
         sortTasksList();

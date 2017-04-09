@@ -10,7 +10,7 @@ import seedu.taskit.logic.commands.MarkCommand;
 import seedu.taskit.model.task.ReadOnlyTask;
 
 //@@author A0097141H
-public class MarkCommandTest extends AddressBookGuiTest {
+public class MarkCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void mark() {

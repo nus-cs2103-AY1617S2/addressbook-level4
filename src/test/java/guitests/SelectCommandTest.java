@@ -9,7 +9,7 @@ import seedu.taskit.commons.core.Messages;
 import seedu.taskit.model.task.ReadOnlyTask;
 
 //@@author A0141011J
-public class SelectCommandTest extends AddressBookGuiTest {
+public class SelectCommandTest extends TaskManagerGuiTest {
 
 
     @Test

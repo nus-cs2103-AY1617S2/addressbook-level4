@@ -10,7 +10,7 @@ import static seedu.taskit.logic.commands.UndoCommand.MESSAGE_NO_PREVIOUS_STATE;
 import static org.junit.Assert.assertTrue;
 
 //@@author A0141011J
-public class UndoCommandTest extends AddressBookGuiTest{
+public class UndoCommandTest extends TaskManagerGuiTest{
 
     @Test
     public void undo_noPreviousCommand_error() {

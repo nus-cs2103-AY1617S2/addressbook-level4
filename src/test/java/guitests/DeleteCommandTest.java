@@ -11,7 +11,7 @@ import org.junit.Test;
 import seedu.taskit.testutil.TestTask;
 import seedu.taskit.testutil.TestUtil;
 
-public class DeleteCommandTest extends AddressBookGuiTest {
+public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void delete() {

@@ -8,7 +8,7 @@ import edu.emory.mathcs.backport.java.util.Arrays;
 import seedu.taskit.logic.commands.ListCommand;
 import seedu.taskit.testutil.TestTask;
 
-public class ListCommandTest extends AddressBookGuiTest {
+public class ListCommandTest extends TaskManagerGuiTest {
 
     //@@author A0097141H
     @Test
@@ -26,12 +26,13 @@ public class ListCommandTest extends AddressBookGuiTest {
 		assertListResult(td.cleaning);
     }
 
+  //@@author A0141872E
     @Test
     public void list_undoneTasks_Success() {
 		commandBox.runCommand("list undone");
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "undone"));
 		assertListResult(td.getUndoneTypicalTasks());
-    }
+    }//@@author
 
     @Test
     public void list_todayTasks_Success() {
@@ -54,30 +55,6 @@ public class ListCommandTest extends AddressBookGuiTest {
 		assertListSize(1);
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "overdue"));
     }
-
-	//@@author A0141872E
-    @Test
-    public void list_floatingTasks_Success() {
-        commandBox.runCommand("list floating");
-        assertListResult(td.getTypicalTasks());
-        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "floating"));
-    }
-
-    @Test
-    public void list_eventTasks_Success() {
-        commandBox.runCommand("add task3 from 3pm to 4pm");
-        commandBox.runCommand("list event");
-        assertListSize(1);
-        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "event"));
-    }
-
-    @Test
-    public void list_deadlineTasks_Success() {
-        commandBox.runCommand("add task4 by tomorrow 4pm");
-        commandBox.runCommand("list deadline");
-        assertListSize(1);
-        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "deadline"));
-    }//@@author
 
 	private void assertListResult(TestTask... expectedHits) {
         assertListSize(expectedHits.length);
