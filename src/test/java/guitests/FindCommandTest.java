@@ -1,40 +1,40 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
+/*import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.testutil.TestTask;*/
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
+// to do
+//    @Test
+//    public void find_nonEmptyList() {
+//        assertFindResult("find Print"); // no results
+//        assertFindResult("find Meeting", td.meeting1, td.meeting2); // multiple results
+//
+//        //find after deleting one result
+//        commandBox.runCommand("delete 1");
+//        assertFindResult("find Meeting", td.meeting2);
+//    }
 
-    @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+//    @Test
+//    public void find_emptyList() {
+//        commandBox.runCommand("clear");
+//        assertFindResult("find Submit"); // no results
+//    }
 
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
-    }
+//    @Test
+//    public void find_invalidCommand_fail() {
+//        commandBox.runCommand("findsell");
+//        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+//    }
 
-    @Test
-    public void find_emptyList() {
-        commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
-    }
-
-    @Test
-    public void find_invalidCommand_fail() {
-        commandBox.runCommand("findgeorge");
-        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    private void assertFindResult(String command, TestPerson... expectedHits) {
-        commandBox.runCommand(command);
-        assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
-    }
+//    private void assertFindResult(String command, TestTask... expectedHits) {
+//        commandBox.runCommand(command);
+//        assertListSize(expectedHits.length);
+//        assertResultMessage(expectedHits.length + " tasks listed!");
+//        assertTrue(taskListPanel.isListMatching(expectedHits));
+//    }
 }

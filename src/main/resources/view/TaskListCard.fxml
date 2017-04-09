@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- @@author A0131278H -->
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+	<stylesheets>
+		<URL value="@DarkTheme.css" />
+		<URL value="@Extensions.css" />
+	</stylesheets>
+	<children>
+		<GridPane HBox.hgrow="ALWAYS">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+            <ColumnConstraints />
+			</columnConstraints>
+			<children>
+				<VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+					<padding>
+						<Insets bottom="5" left="10" right="5" top="5" />
+					</padding>
+
+					<children>
+						<HBox alignment="CENTER_LEFT" spacing="5">
+							<children>
+								<HBox>
+									<Label fx:id="id" minWidth="35.0" styleClass="cell_big_label" />
+									<Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
+								</HBox>
+							</children>
+						</HBox>
+						<FlowPane fx:id="tags" styleClass="tag-pane" />
+						<Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
+					</children>
+				</VBox>
+				<VBox alignment="CENTER_RIGHT" minWidth="180.0" prefHeight="105.0" prefWidth="180.0" GridPane.columnIndex="1">
+					<padding>
+						<Insets bottom="5" left="1" right="10" top="5" />
+					</padding>
+					<children>
+						<Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
+						<Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" wrapText="true" />
+						<Label fx:id="repeat" styleClass="cell_small_label" text="\$repeat" wrapText="true" />
+					</children>
+				</VBox>
+			</children>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+		</GridPane>
+	</children>
+</HBox>
+<!-- @@author -->

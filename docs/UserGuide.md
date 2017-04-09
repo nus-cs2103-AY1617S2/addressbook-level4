@@ -1,6 +1,6 @@
-# AddressBook Level 4 - User Guide
+# FunTaskTic - User Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -16,171 +16,299 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your Address Book.
+1. Download the latest `funtasktic.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Task manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/Ui.png" width="600">
+   <img src="images/uiv0.5rc.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all contacts
-   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` :
-     adds a contact named `John Doe` to the Address Book.
-   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`help`** : list all the command can use
+   * **`list`** : list all tasks
+   * **`add submit report by Friday`** : add a task to the task manager
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
 ## 2. Features
 
-> **Command Format**
->
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
-
 ### 2.1. Viewing help : `help`
 
+Shows a command guide in a new window.
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+### 2.2. Adding a task : `add`
 
-### 2.2. Adding a person: `add`
+Adds a task to FuntaskTic.<br>
+Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description t/tags`
 
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-> Persons can have any number of tags (including 0)
-
-Examples:
-
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe t/friend e/betsycrowe@gmail.com a/Newgate Prison p/1234567 t/criminal`
-
-### 2.3. Listing all persons : `list`
-
-Shows a list of all persons in the address book.<br>
-Format: `list`
-
-### 2.4. Editing a person : `edit`
-
-Edits an existing person in the address book.<br>
-Format: `edit INDEX [NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-> * Edits the person at the specified `INDEX`.
-    The index refers to the index number shown in the last person listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> * You can remove all the person's tags by typing `t/` without specifying any tags after it. 
+> Only Task title is a compulsory field.<br>
+> Tasks can have any number of tags (including none).<br>
+> Tasks with date specified without time will have the time defaulted to the current time.<br>
+> Tasks with time specified without date will have the date defaulted to the current date.<br>
+> Date and time supports natural language.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@yahoo.com`<br>
-  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@yahoo.com` respectively.
+* `add submit report e/29/07/2017 3pm d/Assignment 1 t/academic`
+* `add read Harry Potter s/12 March 2017 1300 e/christmas d/chapter 5 t/personal`
+* `add do homework s/today 5pm e/tmr 1800 t/urgent`
+* `add buy groceries`
 
-* `edit 2 Betsy Crower t/`<br>
-  Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### 2.3. Listing tasks : `list`
 
-### 2.5. Finding all persons containing any keyword in their name: `find`
+Shows a list of tasks in FunTaskTic.<br>
+Format: `list KEYWORD`
 
-Finds persons whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> Lists tasks according to the input `KEYWORD`.<br>
+> Automatically switches between `To Do` and `Done` tabs according to the `KEYWORD`.<br>
+> The keyword refers to `todo` for all tasks to do or `done` for all done tasks.<br>
+> Invalid keyword will trigger listing all tasks in the selected tab by default.<br>
+> Any trailing symbols after a valid keyword will be ignored.
 
 Examples:
 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
-
-### 2.6. Deleting a person : `delete`
-
-Deletes the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
-
-> Deletes the person at the specified `INDEX`. <br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-
+* `list todo`<br>
+   Selects `To Do` tab and list all the tasks to do
+* `list done`<br>
+   Selects `Done` tab and list all the tasks already done
 * `list`<br>
-  `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br>
-  `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+   Stays in selected tab and list all its tasks
 
-### 2.7. Select a person : `select`
+### 2.4. Select a task : `select`
 
-Selects the person identified by the index number used in the last person listing.<br>
+Selects the task identified by the index number used in the last task listing.<br>
 Format: `select INDEX`
-
-> Selects the person and loads the Google search page the person at the specified `INDEX`.<br>
-> The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `list`<br>
   `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br>
+  Selects the 2nd task in the task manager.
+* `find report` <br>
   `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+  Selects the 1st task in the results of the `find` command.
 
-### 2.8. Clearing all entries : `clear`
+### 2.5. Editing a task : `edit`
 
-Clears all entries from the address book.<br>
+Edits an existing task in FunTaskTic.<br>
+The tasks can be edited through the index from a list.<br>
+Multiple fields in a task can be edited at once.<br>
+Format: `edit INDEX COMPONENT(s)`
+
+Examples:
+
+* `edit 3 e/24/06/2017`<br>
+  Changes the ENDING DATE of task 3 to 24/06/2017
+* `edit 2 s/21/01/2017 e/24/06/2017 #school`<br>
+  Changes task 3 STARTING DATE to 21/01/2017, ENDING DATE to 24/06/2017, tags to school
+
+### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
+
+Finds a task with fields containing the given keyword.<br>
+Supports partial matching and tolerance for misspelled keywords.<br>
+Format: `find KEYWORD`
+
+Examples:
+
+* `find report`<br>
+  Returns `submit report`  `print report` `t/report` etc. in the column
+* `find schoolwork sports`<br>
+  Returns `do schoolwork`  `play sports` `d/schoolwork` `d/sports` `t/schoolwork` `t/sports` etc. in the column
+* `find work`<br>
+  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
+* `find werk`<br>
+  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
+
+### 2.7. Deleting a task : `delete` or `remove`
+
+Deletes the specified task from FunTaskTic.<br>
+Format: `delete INDEX` `remove INDEX`
+
+> Deletes the task at the specified `INDEX`.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `delete 1`<br>
+   Delete the task with index 1 in the Task Manager
+* `remove 3`<br>
+   Delete the task with index 3 in the Task Manager
+
+### 2.8. Sorting tasks : `sort`
+
+Sorts all tasks by their start date or end date.<br>
+Format: `sort KEYWORD`
+
+> Sorts tasks according to the input `KEYWORD`.<br>
+> The keyword refers to `s/` for start date or `e/` for end date.<br>
+> Invalid keyword will trigger sort by end date as default.<br>
+> New addition of tasks will follow the sort order. <br>
+> Floating tasks will be listed below the sorted tasks.<br>
+> Any trailing symbols after a valid keyword will be ignored.
+
+Examples:
+
+* `sort s/`<br>
+   Sort the task by the start date
+* `sort e/`<br>
+   Sort the task by the end date
+
+### 2.9. Clearing all entries : `clear`
+
+Clears all entries from FunTaskTic.<br>
 Format: `clear`
 
-### 2.9. Exiting the program : `exit`
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.10. Saving the data
+### 2.11. Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+FunTaskTic data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
+
+### 2.12. Changing the directory of the task manager : `load` or `open`
+
+Load FunTaskTic data from specified file path and continue using that directory for operations.<br>
+Create new file if no such file exists with a warning.<br>
+Cancel operations if given non-XML address or invalid XML file.<br>
+Default file path is at data/taskmanager.xml.<br>
+Format: `load FILEPATH` `open FILEPATH`
+
+Examples:
+
+* `load /Users/admin/taskmanager.xml`<br>
+  Changes the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
+* `open data/new/cloudsync.xml`<br>
+  Changes the Storage Directory to ./data/new/cloudsync.xml
+
+### 2.13. Saving the task manager to a specified directory: `save` or  `saveas`
+
+Save FunTaskTic data to specified file path and continue using that directory for operations.<br>
+If existing file with the same name exists, it will be overwritten with current FunTaskTic data.<br>
+Default file path is at data/taskmanager.xml.<br>
+Format: `save FILEPATH` `saveas FILEPATH`
+
+Examples:
+
+* `save /Users/admin/taskmanager.xml`<br>
+  Moves the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
+* `saveas data/new/cloudsync.xml`<br>
+  Moves the Storage Directory to ./data/new/cloudsync.xml
+
+### 2.14. Undoing the last user command that changes data: `undo`
+
+Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
+Does nothing if there are no more previous user commands.
+
+Examples:
+
+* `clear`<br>
+  `undo`<br>
+  Restores the data before the clear command
+* `add New task`<br>
+  `list`<br>
+  `undo`<br>
+  Undoes last user command that changes data, i.e `add New task`. Removes New task
+
+### 2.15. Redoing the last undo command: `redo`
+
+Redo the last undo command by user<br>
+Does nothing if there are no commands to redo that the user has undone
+
+Examples:
+
+* `clear`<br>
+  `undo`<br>
+  `redo`<br>
+  Redoes last user command in undo history, i.e `clear`. Task manager will be cleared
+* `add New task`<br>
+  `list`<br>
+  `undo`<br>
+  `redo`<br>
+  Redoes last user command in undo history, i.e `add New task`. Adds New task
+
+### 2.16. Finding tasks by date: `findbydate`
+
+Find tasks that are within the specified date(s).<br>
+Format: `findbydate DATE` `findbydate DATE to DATE`
+
+Examples:
+
+* `findbydate today`<br>
+  Lists tasks that have starting dates before today or ending dates after today
+* `findbydate today to next wednesday`<br>
+  Lists tasks that start from today and end latest by next Wednesday.
+
+### 2.17. Marking a task as DONE : `done` or `complete` or `finish`
+
+Marks the specified task from the task manager as DONE.<br>
+Format: `done INDEX` `complete INDEX` `finish INDEX`
+
+> Mark the task at the specified `INDEX` as DONE.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `done 1`<br>
+   Mark the task with index 1 in FunTaskTic as done
+* `complete 2`<br>
+   Mark the task with index 2 in FunTaskTic as done
+* `finish 3`<br>
+   Mark the task with index 3 in FunTaskTic as done
+
+### 2.18. Marking a task as TODO : `undone` or `revert`
+
+Marks the specified task from the task manager as TODO from being DONE initially.<br>
+Format: `undone INDEX` `revert INDEX`
+
+> Mark the task at the specified `INDEX` as TODO from initially DONE.<br>
+> The index refers to the index number shown in the most recent listing.<br>
+> The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+
+* `undone 1`<br>
+   Mark the task with index 1 in FunTaskTic as done
+* `revert 3`<br>
+   Mark the task with index 3 in FunTaskTic as done
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Address Book folder.
+       the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
 
-* **Add**  `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br>
-  e.g. `add James Ho p/22224444 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-
-* **Clear** : `clear`
-
-* **Delete** : `delete INDEX` <br>
-   e.g. `delete 3`
-
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find James Jake`
-
-* **List** : `list` <br>
-  e.g.
-
-* **Help** : `help` <br>
-  e.g.
-
-* **Select** : `select INDEX` <br>
-  e.g.`select 2`
-
-
+Command | Syntax | Example
+------- | ------ | -------
+Help         | help
+Add          | add TASK                                                     | add submit report
+Add          | add TASK s/STARTING DATE                                     | add submit report s/24/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE                       | add submit report s/24/03/207 e/27/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description         | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
+List         | list
+List         | list KEYWORD                                                 | list todo
+Select       | select INDEX                                                 | select 3
+Edit         | edit INDEX COMPONENT(s)                                      | edit 3 e/04/04/2017
+Find         | find KEYWORD(s)                                              | find report assignment
+Find by Date | findbydate DATE                                              | findbydate today
+Find by Date | findbydate DATE to DATE                                      | findbydate today to next wednesday
+Delete       | delete INDEX                                                 | delete 3
+Sort         | sort KEYWORD                                                 | sort e/
+Undo         | undo
+Redo         | redo
+Done         | done INDEX                                                   | done 1
+Undone       | undone INDEX                                                 | undone 2
+Save as      | saveas FILEPATH                                              | saveas newtaskmanager.xml
+Load         | load FILEPATH                                                | load /Users/admin/taskmanager.xml
+Clear        | clear
+Exit         | exit
+<br>

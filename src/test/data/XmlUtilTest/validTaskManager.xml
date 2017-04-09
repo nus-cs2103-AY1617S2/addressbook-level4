@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Collect files from Bernice Yu</title>
+        <startDate>05/11/2017</startDate>
+        <endDate>08/11/2017</endDate>
+        <description>Important business files</description>
+        <tagged>business</tagged>
+    </tasks>
+    <tasks>
+        <title>Visit Charlotte Oliveiro</title>
+        <startDate>20/12/2017</startDate>
+        <endDate>20/12/2017</endDate>
+        <description>Her address is Blk 11 Ang Mo Kio Street 74, #11-04</description>
+        <tagged>social</tagged>
+    </tasks>
+    <tasks>
+        <title>Call David Li about CS2103 project</title>
+        <startDate>08/08/2017</startDate>
+        <endDate>10/08/2017</endDate>
+        <description>his number is 12345678</description>
+        <tagged>schoolwork</tagged>
+    </tasks>
+    <tasks>
+        <title>Submit project report</title>
+        <startDate>20/07/2017</startDate>
+        <endDate>21/07/2017</endDate>
+        <description>Submit to tutor in class</description>
+        <tagged>schoolwork</tagged>
+    </tasks>
+    <tags>social</tags>
+    <tags>business</tags>
+    <tags>schoolwork</tags>
+</taskmanager>
