@@ -78,6 +78,7 @@ Add a simple event
 > **Command:** `add "change priority to high for all my tasks" priority medium by friday`<br>
 > **Result:**<br>
 - Added an event named 'change priority to high for all my tasks' by friday
+- Contains keywords 'priority' and 'to' in title
 - TaskList panel navigates to and displays newly added task card.
 
 ------
