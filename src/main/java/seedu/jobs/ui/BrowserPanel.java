@@ -57,5 +57,5 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         browser = null;
     }
-
+    
 }
