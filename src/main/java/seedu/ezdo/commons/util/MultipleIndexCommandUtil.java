@@ -15,7 +15,8 @@ public class MultipleIndexCommandUtil {
     /** checks if the indexes specified are all smaller than the size of the list and not 0 i.e. valid */
     public static boolean isIndexValid(UnmodifiableObservableList<ReadOnlyTask> lastShownList,
             ArrayList<Integer> targetIndexes) {
-        return targetIndexes.stream().allMatch(index -> index <= lastShownList.size() && index != 0);
+        return targetIndexes.stream()
+                .allMatch(index -> index <= lastShownList.size() && index != 0);
     }
 
     //@@author A0139177W
@@ -32,7 +33,7 @@ public class MultipleIndexCommandUtil {
         return true;
     }
     //@@author
-
+//@@author A0139248X
     /** adds read only tasks from the unmodifiable observable list to the ArrayList list */
     public static void addReadOnlyTasksToList(ArrayList<ReadOnlyTask> list,
             UnmodifiableObservableList<ReadOnlyTask> lastShownList, ArrayList<Integer> targetIndexes) {

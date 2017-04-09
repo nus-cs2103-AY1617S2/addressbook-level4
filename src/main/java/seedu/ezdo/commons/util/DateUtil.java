@@ -37,7 +37,8 @@ public class DateUtil {
         SimpleDateFormat df = new SimpleDateFormat(COMPARE_DATE_STRINGS_ACCEPTED_FORMAT);
         Date startDate = df.parse(taskStartDate);
         Date dueDate = df.parse(taskDueDate);
-        return (startDate.compareTo(dueDate) <= 0);
+        final boolean isStartBeforeDue = startDate.compareTo(dueDate) <= 0;
+        return isStartBeforeDue;
     }
 
 

@@ -8,6 +8,7 @@ import seedu.ezdo.commons.events.BaseEvent;
  */
 public class EzDoDirectoryChangedEvent extends BaseEvent {
 
+    private static final String UPDATE_DIRECTORY = "New save directory: ";
     private String path;
 
     public EzDoDirectoryChangedEvent(String path) {
@@ -20,6 +21,6 @@ public class EzDoDirectoryChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "New save directory: " + path;
+        return UPDATE_DIRECTORY + path;
     }
 }
