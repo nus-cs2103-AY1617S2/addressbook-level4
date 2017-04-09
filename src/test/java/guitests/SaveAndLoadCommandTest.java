@@ -16,6 +16,7 @@ import seedu.tache.commons.core.Messages;
 import seedu.tache.commons.util.ConfigUtil;
 import seedu.tache.logic.commands.LoadCommand;
 import seedu.tache.logic.commands.SaveCommand;
+import seedu.tache.logic.commands.UndoCommand;
 import seedu.tache.testutil.TestTask;
 import seedu.tache.testutil.TestUtil;
 
@@ -106,6 +107,24 @@ public class SaveAndLoadCommandTest extends TaskManagerGuiTest {
     public void load_invalidCommand_failure() {
         commandBox.runCommand("loaddddd");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void save_undo_success() {
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder1);
+        commandBox.runCommand(SaveCommand.COMMAND_WORD + " " + saveFolder2);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(String.format(UndoCommand.MESSAGE_SUCCESS,
+                            String.format(SaveCommand.MESSAGE_SUCCESS, saveFolder1)));
+    }
+
+    @Test
+    public void load_undo_success() {
+        commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder1 + fileName);
+        commandBox.runCommand(LoadCommand.COMMAND_WORD + " " + saveFolder2 + fileName);
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(String.format(UndoCommand.MESSAGE_SUCCESS,
+                            String.format(LoadCommand.MESSAGE_SUCCESS, saveFolder1 + fileName)));
     }
 
     //@@author A0142255M
