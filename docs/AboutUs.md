@@ -31,6 +31,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](../collated/main/A0144902L.md)][[test code](../collated/test/A0144902L.md)]  <br>
 * Other major contributions: <br>
             * Set up Travis <br>
+            * Add initial Deadline Task [[#55](https://github.com/CS2103JAN2017-T09-B2/main/pull/#55), [#70](https://github.com/CS2103JAN2017-T09-B2/main/pull/70)]  <br> 
+            * Increase Coverall [[#148](https://github.com/CS2103JAN2017-T09-B2/main/pull/148)] <br>
+            * Edit Priority of a Task [[#170](https://github.com/CS2103JAN2017-T09-B2/main/pull/170)] <br>
+            * Rename Person to Task in Tests [[#190](https://github.com/CS2103JAN2017-T09-B2/main/pull/190), [#191](https://github.com/CS2103JAN2017-T09-B2/main/pull/191)] <br>
 
 -----
 
