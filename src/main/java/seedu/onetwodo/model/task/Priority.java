@@ -1,8 +1,8 @@
-//@@author A0141138N
 package seedu.onetwodo.model.task;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
+//@@author A0141138N
 /**
  * Represents a Task's priority in the toDo list. Guarantees: immutable; is
  * valid as declared in {@link #isValidPriority(Char)}

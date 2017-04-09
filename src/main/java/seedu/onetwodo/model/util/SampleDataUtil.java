@@ -15,7 +15,7 @@ import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
 
-    // @@author A0141138N
+    //@@author A0141138N
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
@@ -50,7 +50,8 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
-
+    
+    //@@author
     public static ReadOnlyToDoList getSampleToDoList() {
         try {
             ToDoList sampleAB = new ToDoList();

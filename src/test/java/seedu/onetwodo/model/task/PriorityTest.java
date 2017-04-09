@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.model.task;
 
 import static org.junit.Assert.assertEquals;
@@ -11,6 +10,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.onetwodo.commons.exceptions.IllegalValueException;
 
+//@@author A0141138N
 public class PriorityTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
