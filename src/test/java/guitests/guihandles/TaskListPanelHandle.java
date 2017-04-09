@@ -38,9 +38,10 @@ public class TaskListPanelHandle extends GuiHandle {
     public ListView<ReadOnlyTask> getListView() {
         return getNode(TASK_LIST_VIEW_ID);
     }
-    
+
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
      *
      * @param tasks
      *            A list of task in the correct order.
@@ -50,18 +51,18 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the task details correctly and in correct order.
+     * Returns true if the list is showing the task details correctly and in
+     * correct order.
      *
      * @param startPosition
      *            The starting position of the sub list.
      * @param tasks
      *            A list of task in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
-            throws IllegalArgumentException {
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
         if (tasks.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" + "Expected "
-                    + (getListView().getItems().size() - 1) + " persons");
+            throw new IllegalArgumentException(
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " persons");
         }
         assertTrue(this.containsInOrder(startPosition, tasks));
         for (int i = 0; i < tasks.length; i++) {
@@ -84,8 +85,8 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code tasks} appear as the sub list (in that order) at position
-     * {@code startPosition}.
+     * Returns true if the {@code tasks} appear as the sub list (in that order)
+     * at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... tasks) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
@@ -134,7 +135,8 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns the position of the task given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the task given, {@code NOT_FOUND} if not found in
+     * the list.
      */
     public int getTaskIndex(ReadOnlyTask targetTask) {
         List<ReadOnlyTask> tasksInList = getListView().getItems();
@@ -160,8 +162,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public TaskCardHandle getTaskCardHandle(ReadOnlyTask task) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> personCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task))
-                .findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(task)).findFirst();
         if (personCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {

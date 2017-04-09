@@ -25,7 +25,6 @@ public class TaskBuilder {
         this.task = new TestTask(taskToCopy);
     }
 
-   
     public TaskBuilder withTaskName(String taskName) throws IllegalValueException {
         this.task.setTaskName(new TaskName(taskName));
         return this;
