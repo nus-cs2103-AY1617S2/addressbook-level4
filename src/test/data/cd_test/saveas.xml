@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Task 1</title>
+        <startDate>Sun Jan 01 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jan 01 00:00:00 CST 2017</endDate>
+        <description>House of 1</description>
+        <status>Incomplete</status>
+        <tagged>tag1</tagged>
+        <tagged>tag2</tagged>
+    </tasks>
+    <tasks>
+        <title>Task 2</title>
+        <startDate>Sun Jan 01 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jan 01 00:00:00 CST 2017</endDate>
+        <description>House of 2</description>
+        <status>Incomplete</status>
+        <tagged>tag2</tagged>
+        <tagged>tag3</tagged>
+    </tasks>
+    <tasks>
+        <title>Task 3</title>
+        <startDate>Sun Jan 01 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jan 01 00:00:00 CST 2017</endDate>
+        <description>House of 3</description>
+        <status>Incomplete</status>
+        <tagged>tag4</tagged>
+        <tagged>tag3</tagged>
+    </tasks>
+    <tasks>
+        <title>Task 4</title>
+        <startDate>Sun Jan 01 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jan 01 00:00:00 CST 2017</endDate>
+        <description>House of 4</description>
+        <status>Incomplete</status>
+        <tagged>tag4</tagged>
+        <tagged>tag5</tagged>
+    </tasks>
+    <tasks>
+        <title>Task 5</title>
+        <startDate>Sun Jan 01 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jan 01 00:00:00 CST 2017</endDate>
+        <description>House of 5</description>
+        <status>Incomplete</status>
+        <tagged>tag6</tagged>
+        <tagged>tag5</tagged>
+    </tasks>
+    <tags>tag1</tags>
+    <tags>tag2</tags>
+    <tags>tag3</tags>
+    <tags>tag4</tags>
+    <tags>tag5</tags>
+    <tags>tag6</tags>
+</taskmanager>

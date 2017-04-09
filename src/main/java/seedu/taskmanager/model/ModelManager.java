@@ -135,7 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void highlightTask(ReadOnlyTask task) {
         int targetIndex = getSelectedTaskList().indexOf(task);
-        System.out.println(targetIndex);
         indicateJumpToListRequestEvent(targetIndex);
     }
     // @@author
