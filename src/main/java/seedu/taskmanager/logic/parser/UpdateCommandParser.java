@@ -193,7 +193,7 @@ public class UpdateCommandParser {
                             stringStartDate = DateTimeUtil.getNewDate(splited[0]);
                         }
                     }
-                    if (toPrefixInput.get().matches("\\d+")) {
+                    if (toPrefixInput.isPresent() && toPrefixInput.get().matches("\\d+")) {
                         throw new NoSuchElementException();
                     }
                 } else {

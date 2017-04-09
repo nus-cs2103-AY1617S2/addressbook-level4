@@ -11,14 +11,13 @@ import guitests.guihandles.FloatingTaskCardHandle;
 import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
+import seedu.taskmanager.logic.parser.UpdateCommandParser;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
-import seedu.taskmanager.model.task.StartTime;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;
 
-// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
 public class UpdateCommandTest extends TaskManagerGuiTest {
 
     // The list of tasks in the task list panel is expected to match this list.
@@ -88,20 +87,16 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void update_invalidValues_failure() {
-        // commandBox.runCommand("UPDATE 1 *&");
-        // assertResultMessage(TaskName.MESSAGE_TASKNAME_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 ON 030317");
         assertResultMessage(StartDate.MESSAGE_DATE_CONSTRAINTS);
 
         commandBox.runCommand("UPDATE 1 FROM thursday 1200hrs TO friday 1400");
-        assertResultMessage(StartTime.MESSAGE_STARTTIME_CONSTRAINTS);
+        assertResultMessage(UpdateCommandParser.INVALID_TIME);
 
         commandBox.runCommand("UPDATE 1 FROM thursday 1200 TO friday 1300hrs");
-        assertResultMessage(EndTime.MESSAGE_ENDTIME_CONSTRAINTS);
+        assertResultMessage(UpdateCommandParser.INVALID_TIME);
 
-        // commandBox.runCommand("UPDATE 1 t/*&");
-        // assertResultMessage(Category.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
