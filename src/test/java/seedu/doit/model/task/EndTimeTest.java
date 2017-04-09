@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.EndTime;
 
+//@@author A0146809W
 public class EndTimeTest {
 
     @Rule
