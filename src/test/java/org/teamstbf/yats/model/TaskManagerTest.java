@@ -11,7 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.TypicalTestEvents;
 
@@ -38,12 +37,11 @@ public class TaskManagerTest {
 	}
 
 	@Test
-	public void resetData_withValidReadOnlyTaskManager_replacesData() throws DuplicateEventException {
+	public void resetData_withValidReadOnlyTaskManager_replacesData() {
 		TaskManager newData = new TypicalTestEvents().getTypicalTaskManager();
 		taskManager.resetData(newData);
 		assertEquals(newData, taskManager);
 	}
-
 
 	@Test
 	public void resetData_withDuplicateTags_throwsAssertionError() {
@@ -59,7 +57,8 @@ public class TaskManagerTest {
 	}
 
 	/**
-	 * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+	 * A stub ReadOnlyAddressBook whose persons and tags lists can violate
+	 * interface constraints.
 	 */
 	private static class TaskManagerStub implements ReadOnlyTaskManager {
 		private final ObservableList<ReadOnlyEvent> events = FXCollections.observableArrayList();

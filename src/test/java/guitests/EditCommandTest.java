@@ -6,8 +6,6 @@ import static org.teamstbf.yats.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.logic.commands.EditCommand;
-import org.teamstbf.yats.model.item.Event;
-import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.testutil.EventBuilder;
@@ -53,21 +51,21 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_allFieldsSpecified_success() throws Exception {
-		String detailsToEdit = "Usorp the throne s/5:45am e/11:59pm l/Ruvenheigen City p/none "
-				+ "d/Down to all traitors! Down to all non-believers! t/Betrayal";
+		String detailsToEdit = "Usorp the throne -s 5 june 2017 5:45am -e 5 june 2017 11:59pm -l Ruvenheigen City"
+				+ "-d Down to all traitors! Down to all non-believers! -t Betrayal -t KingGeorgeVI";
 		int taskManagerIndex = 1;
 
 		TestEvent editedPerson = new EventBuilder().withTitle("Usorp the throne").withLocation("Ruvenheigen City")
-				.withStartTime("5:45am").withEndTime("11:59pm").withDeadline("")
+				.withStartTime("5:45AM 05/06/2017").withEndTime("11:59PM 05/06/2017").withDeadline("")
 				.withDescription("Down to all traitors! Down to all non-believers!").withTags("Betrayal")
-				.withIsDone("Yes").build();
+				.withIsDone("No").build();
 
 		assertEditSuccess(taskManagerIndex, taskManagerIndex, detailsToEdit, editedPerson);
 	}
 
 	@Test
 	public void edit_clearTags_success() throws Exception {
-		String detailsToEdit = "#";
+		String detailsToEdit = "-t ";
 		int taskManagerIndex = 2;
 
 		TestEvent taskToEdit = expectedTaskList[taskManagerIndex - 1];
@@ -108,15 +106,15 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		assertResultMessage(Title.MESSAGE_NAME_CONSTRAINTS);
 
 		commandBox.runCommand("edit 1 p/abcd");
-		assertResultMessage(SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
+		// assertResultMessage(SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
 
-		commandBox.runCommand("edit 1 something, from 10:22PM 05/05/2017to 11:23PM 05/05/2017 by 9:00PM 05/05/2017");
-		assertResultMessage(Event.MESSAGE_TOO_MANY_TIME);
+		commandBox.runCommand("edit 1 something -s 5 may 2017 10:22PM -e 5 may 2017 11:23PM -by 9:00PM 05/05/2017");
+		assertResultMessage(EditCommand.MESSAGE_ILLEGAL_DEADLINE_AND_EVENT_OBJECT);
 
 		// commandBox.runCommand("edit 1 a/");
 		// assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);
 
-		commandBox.runCommand("edit 1 #*&");
+		commandBox.runCommand("edit 1 something -t *&");
 		assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 	}
 
@@ -134,7 +132,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_notAllFieldsSpecified_success() throws Exception {
-		String detailsToEdit = "#sweetie #bestie #reaper";
+		String detailsToEdit = "-t sweetie -t bestie -t reaper";
 		int taskManagerIndex = 2;
 
 		TestEvent eventToEdit = expectedTaskList[taskManagerIndex - 1];

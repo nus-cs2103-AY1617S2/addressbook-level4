@@ -9,22 +9,22 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
  */
 public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD = "redo";
+	public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_UNDO_TASK_SUCCESS = "Redo completed";
-    public static final String MESSAGE_EMPTY_REDO_STACK = "Nothing to redo";
+	public static final String MESSAGE_UNDO_TASK_SUCCESS = "Redo completed";
+	public static final String MESSAGE_EMPTY_REDO_STACK = "Nothing to redo";
 
-    public RedoCommand() {
-	// TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-	assert model != null;
-	if (model.checkEmptyRedoStack()) {
-	    throw new CommandException(MESSAGE_EMPTY_REDO_STACK);
+	public RedoCommand() {
+		// TODO Auto-generated constructor stub
 	}
-	model.getNextState();
-	return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
-    }
+
+	@Override
+	public CommandResult execute() throws CommandException {
+		assert model != null;
+		if (model.checkEmptyRedoStack()) {
+			throw new CommandException(MESSAGE_EMPTY_REDO_STACK);
+		}
+		model.getNextState();
+		return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS));
+	}
 }

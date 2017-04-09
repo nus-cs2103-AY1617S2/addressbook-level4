@@ -5,6 +5,7 @@ import org.teamstbf.yats.commons.core.Messages;
 import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
+import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 
 /**
@@ -35,9 +36,11 @@ public class SelectCommand extends Command {
 		if (lastShownList.size() < targetIndex) {
 			throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}
+		ReadOnlyEvent taskToSelect = lastShownList.get(targetIndex - 1);
+		Event selectedTask = new Event(taskToSelect);
 
 		EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-		return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex));
+		return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, selectedTask));
 
 	}
 

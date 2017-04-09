@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.teamstbf.yats.commons.core.EventsCenter;
+import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Event;
@@ -41,12 +43,12 @@ public class ScheduleCommand extends Command {
 	public static final String MESSAGE_SUCCESS = "New event scheduled: %1$s";
 	public static final String MESSAGE_SUCCESS_WITH_WARNING = "Warning! Event lasts more than 50 years, please check if valid";
 	public static final String MESSAGE_HOURS_INVALID = "The format of hours is invalid - must be a valid long";
-	public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the task manager";
 	public static final String MESSAGE_TIME_TOO_LONG = "Schedule can only take a timing of at most 10 hours, and it should not be negative - use add for long events";
 	private static final long MAXIMUM_EVENT_LENGTH = 36000000L;
 	private static final long MINIMUM_EVENT_LENGTH = 0L;
 	private final Event toSchedule;
 	private String hours;
+	private String minutes;
 
 	/**
 	 * Creates an addCommand using a map of parameters
@@ -64,7 +66,15 @@ public class ScheduleCommand extends Command {
 		try {
 			this.hours = parameters.get("hours").toString();
 		} catch (NullPointerException e) {
-			this.hours = "2";
+			this.hours = "0";
+		}
+		try {
+			this.minutes = parameters.get("minutes").toString();
+		} catch (NullPointerException e) {
+			this.minutes = "0";
+		}
+		if (this.hours.equals("0") && this.minutes.equals("0")) {
+			this.hours = "1";
 		}
 	}
 
@@ -72,41 +82,45 @@ public class ScheduleCommand extends Command {
 	public CommandResult execute() throws CommandException {
 		assert model != null;
 		try {
+			model.saveImageOfCurrentTaskManager();
 			long checkedHours = (long) (Double.parseDouble(this.hours) * 3600000);
+			checkedHours = checkedHours + (long) (Double.parseDouble(this.minutes) * 60000);
 			System.out.println(checkedHours);
 			if (checkedHours < MINIMUM_EVENT_LENGTH || checkedHours > MAXIMUM_EVENT_LENGTH) {
 				throw new IllegalArgumentException();
 			}
 			List<ReadOnlyEvent> filteredTaskLists = filterOnlyEventsWithStartEndTime();
+			int count = setStartEndIntervalsForNewTask(checkedHours, filteredTaskLists);
 			Collections.sort(filteredTaskLists, new ReadOnlyEventComparatorByStartDate());
-			setStartEndIntervalsForNewTask(checkedHours, filteredTaskLists);
 			model.addEvent(toSchedule);
+			model.updateFilteredListToShowSortedStart();
+			System.out.println(count);
+			EventsCenter.getInstance().post(new JumpToListRequestEvent((int)count));
 			return new CommandResult(String.format(MESSAGE_SUCCESS, toSchedule));
 		} catch (NumberFormatException e) {
 			throw new CommandException(MESSAGE_HOURS_INVALID);
-		} catch (UniqueEventList.DuplicateEventException e) {
-			throw new CommandException(MESSAGE_DUPLICATE_EVENT);
 		} catch (IllegalArgumentException e) {
 			throw new CommandException(MESSAGE_TIME_TOO_LONG);
 		}
 	}
 
-	private void setStartEndIntervalsForNewTask(long checkedHours, List<ReadOnlyEvent> filteredTaskLists)
+	private int setStartEndIntervalsForNewTask(long checkedHours, List<ReadOnlyEvent> filteredTaskLists)
 			throws IllegalArgumentException {
-		long start = getStartInterval(checkedHours, filteredTaskLists);
-		long end = getEndInterval(checkedHours, start);
-		Schedule startTime = new Schedule(new Date(start));
+		ArrayList<Long> myList = getStartInterval(checkedHours, filteredTaskLists);
+		long end = getEndInterval(checkedHours, myList.get(0));
+		Schedule startTime = new Schedule(new Date(myList.get(0)));
 		Schedule endTime = new Schedule(new Date(end));
 		this.toSchedule.setStartTime(startTime);
 		this.toSchedule.setEndTime(endTime);
+		return myList.get(1).intValue();
 	}
 
 	private long getEndInterval(long checkedHours, long start) {
 		long end = start + checkedHours;
 		return end;
 	}
+	private ArrayList<Long> getStartInterval(long checkedHours, List<ReadOnlyEvent> filteredTaskLists)
 
-	private long getStartInterval(long checkedHours, List<ReadOnlyEvent> filteredTaskLists)
 			throws IllegalArgumentException {
 		long max = new Date().getTime();
 		long curr;
@@ -114,30 +128,30 @@ public class ScheduleCommand extends Command {
 		int startBound = 8;
 		int endBound = 18;
 		long getStartTime;
-
+		int count = 0;
 		for (ReadOnlyEvent event : filteredTaskLists) {
-			System.out.println(max);
-			System.out.println(event);
 			curr = event.getStartTime().getDate().getTime();
+			System.out.println("Curr is" + (curr/ 60000L));
+			System.out.println("Max is" + (max/ 60000L));
 			if (curr > max) {
-				System.out.println("curr bigger than max");
 				if ((curr - max) >= checkedHours) {
-					System.out.println("potential slot");
 					getStartTime = findStartTime(max, checkedHours, curr, startBound, endBound);
 					if (getStartTime != -1) {
 						start = getStartTime;
 						break;
 					}
-					System.out.println("didn't fit requirements");
 				}
 			}
 			max = Math.max(max, event.getEndTime().getDate().getTime());
-			System.out.println("trying next time");
+			count++;
 		}
 		if (start == INITIAL_START_VALUE) {
 			start = findFirstStartTime(max, checkedHours, LAST_TIME_POSSIBLE, startBound, endBound);
 		}
-		return start;
+		ArrayList<Long> myList = new ArrayList<Long>();
+		myList.add(start);
+		myList.add((long)count);
+		return myList;
 	}
 
 	private long findStartTime(long start, long checkedHours, long end, int startBound, int endBound) {
@@ -237,7 +251,7 @@ public class ScheduleCommand extends Command {
 		List<ReadOnlyEvent> taskLists = model.getFilteredTaskList();
 		List<ReadOnlyEvent> filterTaskLists = new ArrayList<ReadOnlyEvent>();
 		for (ReadOnlyEvent event : taskLists) {
-			if (event.hasStartEndTime()) {
+			if (event.hasStartAndEndTime()) {
 				filterTaskLists.add(event);
 			}
 		}

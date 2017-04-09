@@ -12,7 +12,6 @@ import org.teamstbf.yats.commons.core.UnmodifiableObservableList;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.UniqueEventList;
-import org.teamstbf.yats.model.item.UniqueEventList.DuplicateEventException;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
@@ -56,7 +55,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 	//// list overwrite operations
 
-	public void setPersons(List<? extends ReadOnlyEvent> persons) throws UniqueEventList.DuplicateEventException {
+	public void setPersons(List<? extends ReadOnlyEvent> persons) {
 		this.events.setEvents(persons);
 	}
 
@@ -66,11 +65,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 	public void resetData(ReadOnlyTaskManager newData) {
 		assert newData != null;
-		try {
-			setPersons(newData.getTaskList());
-		} catch (UniqueEventList.DuplicateEventException e) {
-			assert false : "AddressBooks should not have duplicate persons";
-		}
+
+		setPersons(newData.getTaskList());
 		try {
 			setTags(newData.getTagList());
 		} catch (UniqueTagList.DuplicateTagException e) {
@@ -89,7 +85,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	 * @throws UniqueEventList.DuplicateEventException
 	 *             if an equivalent person already exists.
 	 */
-	public void addEvent(Event p) throws UniqueEventList.DuplicateEventException {
+	public void addEvent(Event p) {
 		storeEventTagImage();
 		syncMasterTagListWith(p);
 		events.add(p);
@@ -109,14 +105,10 @@ public class TaskManager implements ReadOnlyTaskManager {
 	 *
 	 * @see #syncMasterTagListWith(Task)
 	 *
-	 * @throws DuplicateEventException
-	 *             if updating the person's details causes the person to be
-	 *             equivalent to another existing person in the list.
 	 * @throws IndexOutOfBoundsException
 	 *             if {@code index} < 0 or >= the size of the list.
 	 */
-	public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent)
-			throws UniqueEventList.DuplicateEventException {
+	public void updateEvent(int index, ReadOnlyEvent editedReadOnlyEvent) {
 		assert editedReadOnlyEvent != null;
 
 		Event editedTask = new Event(editedReadOnlyEvent);

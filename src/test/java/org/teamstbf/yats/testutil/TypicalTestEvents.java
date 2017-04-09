@@ -1,9 +1,11 @@
 package org.teamstbf.yats.testutil;
 
+import java.util.Date;
+
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Event;
-import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.Recurrence;
 
 /**
  *
@@ -12,36 +14,35 @@ public class TypicalTestEvents {
 
 	public static void loadAddressBookWithSampleData(TaskManager ab) {
 		for (TestEvent person : new TypicalTestEvents().getTypicalTasks()) {
-			try {
-				ab.addEvent(new Event(person));
-			} catch (UniqueEventList.DuplicateEventException e) {
-				assert false : "not possible";
-			}
+			ab.addEvent(new Event(person));
 		}
 	}
 
 	public TestEvent abdicate, boop, oxygen, cower, duck;
 
+	Date date = new Date();
+
 	public TypicalTestEvents() {
 		try {
 			abdicate = new EventBuilder().withTitle("Abdicate the British Throne")
-					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
-					.withLocation("Buckingham Palace").withTags("KingGeorgeVI").withIsDone("No").build();
-			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose")
-					.withStartTime("").withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row")
-					.withTags("reaper").withIsDone("No").build();
+					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017")
+					.withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Buckingham Palace")
+					.withTags("KingGeorgeVI").withIsDone("No").withRecurrence(new Recurrence()).build();
+			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose").withStartTime("")
+					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row").withTags("reaper")
+					.withIsDone("No").withRecurrence(new Recurrence()).build();
 			oxygen = new EventBuilder().withTitle("Oxygen not Included").withDescription("Don't starve together")
-					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Klei Entertainment")
-					.withTags("ONN").withIsDone("No").build();
+					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
+					.withLocation("Klei Entertainment").withTags("ONN").withIsDone("No").withRecurrence(new Recurrence()).build();
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
-					.withDescription("fighting the wildings, but extremely scared").withStartTime("")
-					.withEndTime("").withDeadline("").withLocation("The Wall")
-					.withTags("LordCommanderJonSnow").withIsDone("No").build();
-			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("")
-					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH").withIsDone("No")
+					.withDescription("fighting the wildings, but extremely scared").withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017")
+					.withDeadline("").withLocation("The Wall").withTags("LordCommanderJonSnow").withIsDone("No").withRecurrence(new Recurrence())
 					.build();
+			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("").withEndTime("")
+					.withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH")
+					.withIsDone("No").withRecurrence(new Recurrence()).build();
 
 		} catch (IllegalValueException e) {
 			e.printStackTrace();
@@ -56,6 +57,6 @@ public class TypicalTestEvents {
 	}
 
 	public TestEvent[] getTypicalTasks() {
-		return new TestEvent[] { abdicate, boop, oxygen, cower, duck };
+		return new TestEvent[] { abdicate, boop, oxygen, cower, duck};
 	}
 }

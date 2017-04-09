@@ -8,6 +8,8 @@
         <deadline></deadline>
         <description>Research to be extended and continued to alleviate carcinogenic vascularity</description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
         <tagged>research</tagged>
     </tasks>
     <tasks>
@@ -18,6 +20,8 @@
         <deadline></deadline>
         <description>Buy some food</description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
         <tagged>necessitires</tagged>
     </tasks>
     <tasks>
@@ -28,6 +32,8 @@
         <deadline></deadline>
         <description>To revise on p value mathematical induction</description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
         <tagged>school</tagged>
         <tagged>learn</tagged>
     </tasks>
@@ -39,6 +45,8 @@
         <deadline></deadline>
         <description>prepare project doucments</description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
         <tagged>school</tagged>
         <tagged>learn</tagged>
     </tasks>
@@ -50,6 +58,8 @@
         <deadline></deadline>
         <description> </description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
     </tasks>
     <tasks>
         <title>two</title>
@@ -59,6 +69,8 @@
         <deadline></deadline>
         <description> </description>
         <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceDoneList></recurrenceDoneList>
     </tasks>
     <tags>research</tags>
     <tags>necessitires</tags>

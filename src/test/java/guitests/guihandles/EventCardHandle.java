@@ -84,10 +84,11 @@ public class EventCardHandle extends GuiHandle {
 	}
 
 	public boolean isSameEvent(ReadOnlyEvent event) {
-		return event != null || getTitle().equals(event.getTitle().fullName) && getStartTime().equals(event.getStartTime().toString())
+		return event != null || getTitle().equals(event.getTitle().fullName)
+				&& getStartTime().equals(event.getStartTime().toString())
 				&& getDescription().equals(event.getDescription().value)
-				&& getLocation().equals(event.getLocation().value)
-				&& getEndTime().equals(event.getEndTime().toString()) && getTags().equals(getTags(event.getTags()));
+				&& getLocation().equals(event.getLocation().value) && getEndTime().equals(event.getEndTime().toString())
+				&& getTags().equals(getTags(event.getTags()));
 	}
 
 	@Override

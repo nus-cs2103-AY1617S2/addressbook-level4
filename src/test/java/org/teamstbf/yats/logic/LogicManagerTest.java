@@ -22,7 +22,6 @@ import org.teamstbf.yats.commons.events.model.TaskManagerChangedEvent;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.events.ui.ShowHelpRequestEvent;
 import org.teamstbf.yats.logic.commands.AddCommand;
-import org.teamstbf.yats.logic.commands.ClearCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.CommandResult;
 import org.teamstbf.yats.logic.commands.DeleteCommand;
@@ -30,6 +29,7 @@ import org.teamstbf.yats.logic.commands.ExitCommand;
 import org.teamstbf.yats.logic.commands.FindCommand;
 import org.teamstbf.yats.logic.commands.HelpCommand;
 import org.teamstbf.yats.logic.commands.ListCommand;
+import org.teamstbf.yats.logic.commands.ResetCommand;
 import org.teamstbf.yats.logic.commands.SelectCommand;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.Model;
@@ -43,7 +43,6 @@ import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
-import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -61,14 +60,14 @@ public class LogicManagerTest {
 		Event testEvent() throws Exception {
 			Title name = new Title("sleep");
 			Location location = new Location("bed");
-			Schedule startTime = new Schedule("");
-			Schedule endTime = new Schedule("");
+			Schedule startTime = new Schedule("12:00AM 26/06/2017");
+			Schedule endTime = new Schedule("11:00AM 27/06/2017");
 			Schedule deadline = new Schedule("");
-			Description description = new Description("oh no can't sleep i'm tired");
-			Tag tag1 = new Tag("tag1");
-			Tag tag2 = new Tag("longertag2");
+			Description description = new Description("finals finally over");
+			Tag tag1 = new Tag("rest");
+			Tag tag2 = new Tag("moreRest");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
-			IsDone isDone = new IsDone("Yes");
+			IsDone isDone = new IsDone("No");
 			boolean isRecurring = false;
 			Recurrence recurrence = new Recurrence();
 			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
@@ -164,7 +163,7 @@ public class LogicManagerTest {
 			return new Event(new Title("person" + seed), new Location("bed" + seed), new Schedule("11:59PM 08/04/2017"),
 					new Schedule("11:59PM 08/04/2017"), new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
-					new UniqueTagList(new Tag("tag" + Math.abs(seed))), new IsDone("Yes"), false, new Recurrence());
+					new UniqueTagList(new Tag("tag" + Math.abs(seed))), new IsDone("No"), false, new Recurrence());
 		}
 
 		List<Event> generateEventList(Event... events) {
@@ -315,12 +314,10 @@ public class LogicManagerTest {
 		assertCommandFailure("add", expectedMessage);
 	}
 
-	@Test
+	@Test // TO BE EDITED
 	public void execute_add_invalidEventData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
-		assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-				SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
-		assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address", Schedule.MESSAGE_TIME_CONSTRAINTS);
+		assertCommandFailure("add Valid Name -s 5 may 2017 13:00AM -e 6 may 2017 14:00PM", Schedule.MESSAGE_TIME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -335,7 +332,7 @@ public class LogicManagerTest {
 		expectedAB.addEvent(toBeAdded);
 
 		// execute command and verify result
-		assertCommandSuccess("add sleep @bed //oh no can't sleep i'm tired #tag1 #longertag2",
+		assertCommandSuccess("add sleep -l bed -s 26 june 2017 12:00AM -e 27 june 2017 11:00AM -d finals finally over -t rest -t moreRest",
 				String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
 
 	}
@@ -362,7 +359,7 @@ public class LogicManagerTest {
 		model.addEvent(helper.generateEvent(2));
 		model.addEvent(helper.generateEvent(3));
 
-		assertCommandSuccess("reset", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+		assertCommandSuccess("reset", ResetCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
 	}
 
 	@Test
@@ -441,7 +438,7 @@ public class LogicManagerTest {
 		Event pTarget1 = helper.generateEventWithName("bla bla KEY bla");
 		Event pTarget2 = helper.generateEventWithName("bla KEY bla bceofeia");
 		Event p1 = helper.generateEventWithName("KE Y");
-		Event p2 = helper.generateEventWithName("KEYKEYKEY sduauo");
+		Event p2 = helper.generateEventWithName("KE YKE YKE Y sduauo");
 
 		List<Event> fourEvents = helper.generateEventList(p1, pTarget1, p2, pTarget2);
 		TaskManager expectedAB = helper.generateTaskManager(fourEvents);
@@ -485,7 +482,7 @@ public class LogicManagerTest {
 		TaskManager expectedAB = helper.generateTaskManager(threeEvents);
 		helper.addToModel(model, threeEvents);
 
-		assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedAB,
+		assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, threeEvents.get(1)), expectedAB,
 				expectedAB.getTaskList());
 		assertEquals(2, targetedJumpIndex + 1);
 		assertEquals(model.getFilteredTaskList().get(0), threeEvents.get(0));

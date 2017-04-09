@@ -46,12 +46,12 @@ public class TestEvent implements ReadOnlyEvent {
 	public String getAddCommand() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("add " + this.getTitle().fullName + ", ");
-		sb.append("from " + this.getStartTime().toString() + " ");
-		sb.append("to " + this.getEndTime().toString() + " ");
+		sb.append("-s " + this.getStartTime().toString() + " ");
+		sb.append("-e " + this.getEndTime().toString() + " ");
 		sb.append("" + this.getDeadline().toString() + "");
-		sb.append("@" + this.getLocation().value + " ");
-		sb.append("//" + this.getDescription().value + " ");
-		this.getTags().asObservableList().stream().forEach(s -> sb.append("#" + s.tagName + " "));
+		sb.append("-l " + this.getLocation().value + " ");
+		sb.append("-d " + this.getDescription().value + " ");
+		this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
 		return sb.toString();
 	}
 
@@ -142,24 +142,36 @@ public class TestEvent implements ReadOnlyEvent {
 	}
 
 	@Override
-	public boolean hasStartEndTime() {
-		if (this.startTime.toString().equals("") || this.startTime.toString().equals("")) {
+	public boolean hasStartAndEndTime() {
+		if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean hasStartOrEndTime() {
+		if (!this.startTime.toString().equals("") || !this.endTime.toString().equals("")) {
+			return true;
+		}
+		return false;
 	}
 
 	public void setDeadline(Schedule schedule) {
 		this.deadline = schedule;
 	}
 
-    @Override
-    public Recurrence getRecurrence() {
-        return this.recurrence;
-    }
+	public void setRecurrence(Recurrence recur) {
+		this.recurrence = recur;
+	}
 
-    @Override
-    public boolean isRecurring() {
-        return this.isRecurring;
-    }
+	@Override
+	public Recurrence getRecurrence() {
+		return this.recurrence;
+	}
+
+	@Override
+	public boolean isRecurring() {
+		return this.isRecurring;
+	}
 }

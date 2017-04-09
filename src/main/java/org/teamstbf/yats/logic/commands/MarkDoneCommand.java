@@ -7,14 +7,22 @@ import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
-import org.teamstbf.yats.model.item.UniqueEventList;
 
 // @@author A0139448U
 /**
  *
- * Marks an existing task as done in the task scheduler.
+ * Command to Mark an existing task as done in the task scheduler.
  */
 public class MarkDoneCommand extends Command {
+
+	public static final String COMMAND_WORD = "mark";
+	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
+	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
+
+	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
+			+ "by the index number used in the last task listing. "
+			+ "Parameters: INDEX (must be a positive integer) "
+			+ "Example: " + COMMAND_WORD + " 1";
 
 	public final int targetIndex;
 
@@ -22,15 +30,6 @@ public class MarkDoneCommand extends Command {
 		assert targetIndex > 0;
 		this.targetIndex = targetIndex - 1;
 	}
-
-	public static final String COMMAND_WORD = "mark";
-	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task marked as done: %1$s";
-	public static final String MESSAGE_ALR_MARKED = "Task already marked as done.";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-
-	public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the task identified as done "
-			+ "by the index number used in the last task listing. " + "Parameters: INDEX (must be a positive integer) "
-			+ "Example: " + COMMAND_WORD + " 1";
 
 	@Override
 	public CommandResult execute() throws CommandException {
@@ -42,20 +41,22 @@ public class MarkDoneCommand extends Command {
 		}
 
 		ReadOnlyEvent taskToMark = lastShownList.get(targetIndex);
-		Event markedTask = new Event(taskToMark);
+		Event markedTask = new Event(taskToMark.getTitle(), taskToMark.getLocation(), taskToMark.getStartTime(), taskToMark.getEndTime(), taskToMark.getDeadline(), taskToMark.getDescription(), taskToMark.getTags(), new IsDone(), taskToMark.isRecurring(), taskToMark.getRecurrence());
+
 		if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
 			return new CommandResult(MESSAGE_ALR_MARKED);
 		}
-		try {
-			if (markedTask.isRecurring()) {
-				markedTask.markDone();
-			} else {
-				markedTask.getIsDone().markDone();
-			}
-			model.updateEvent(targetIndex, markedTask);
-		} catch (UniqueEventList.DuplicateEventException dpe) {
-			throw new CommandException(MESSAGE_DUPLICATE_TASK);
+
+		model.saveImageOfCurrentTaskManager(); // For undo command
+
+		if (markedTask.isRecurring()) {
+			markedTask.markDone();
+		} else {
+			markedTask.getIsDone().markDone();
 		}
+
+		model.updateEvent(targetIndex, markedTask);
+		model.updateDoneTaskList();
 		model.updateFilteredListToShowAll();
 		markedTask.setPriority(0);
 		return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToMark));

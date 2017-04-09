@@ -9,36 +9,36 @@ import org.teamstbf.yats.model.Model;
  * executed.
  */
 public abstract class Command {
-    protected Model model;
+	protected Model model;
 
-    /**
-     * Constructs a feedback message to summarise an operation that displayed a
-     * listing of persons.
-     *
-     * @param displaySize
-     *            used to generate summary
-     * @return summary message for persons displayed
-     */
-    public static String getMessageForPersonListShownSummary(int displaySize) {
-	return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
-    }
+	/**
+	 * Constructs a feedback message to summarise an operation that displayed a
+	 * listing of persons.
+	 *
+	 * @param displaySize
+	 *            used to generate summary
+	 * @return summary message for persons displayed
+	 */
+	public static String getMessageForPersonListShownSummary(int displaySize) {
+		return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, displaySize);
+	}
 
-    /**
-     * Executes the command and returns the result message.
-     *
-     * @return feedback message of the operation result for display
-     * @throws CommandException
-     *             If an error occurs during command execution.
-     */
-    public abstract CommandResult execute() throws CommandException;
+	/**
+	 * Executes the command and returns the result message.
+	 *
+	 * @return feedback message of the operation result for display
+	 * @throws CommandException
+	 *             If an error occurs during command execution.
+	 */
+	public abstract CommandResult execute() throws CommandException;
 
-    /**
-     * Provides any needed dependencies to the command. Commands making use of
-     * any of these should override this method to gain access to the
-     * dependencies.
-     */
-    public void setData(Model model) {
-	this.model = model;
-    }
+	/**
+	 * Provides any needed dependencies to the command. Commands making use of
+	 * any of these should override this method to gain access to the
+	 * dependencies.
+	 */
+	public void setData(Model model) {
+		this.model = model;
+	}
 
 }

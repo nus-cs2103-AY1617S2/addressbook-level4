@@ -4,6 +4,7 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
+import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
@@ -71,6 +72,11 @@ public class EventBuilder {
 
 	public EventBuilder withDeadline(String string) {
 		this.task.setDeadline(new Schedule(string));
+		return this;
+	}
+
+	public EventBuilder withRecurrence(Recurrence recur) {
+		this.task.setRecurrence(recur);
 		return this;
 	}
 }
