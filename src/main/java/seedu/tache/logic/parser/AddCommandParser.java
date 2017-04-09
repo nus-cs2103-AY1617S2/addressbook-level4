@@ -14,6 +14,7 @@ import seedu.tache.logic.commands.AddCommand;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime.DateTimeType;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
 
 //@@author A0150120H
