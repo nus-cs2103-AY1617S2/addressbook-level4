@@ -32,7 +32,7 @@ allprojects {
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 
-        
+
     }
 
     // This part is similar to global variables
