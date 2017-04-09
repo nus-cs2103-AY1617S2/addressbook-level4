@@ -6,7 +6,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 /**
  * The API of the Model component.
@@ -16,26 +16,26 @@ public interface Model {
     void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the AddressBook */
-    ReadOnlyTaskManager getAddressBook();
+    ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addTask(Task person) throws UniqueTaskList.DuplicatePersonException;
+    void addTask(Task person) throws UniqueTaskList.DuplicateTaskException;
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
      *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updatePerson(int filteredPersonListIndex, ReadOnlyTask editedPerson)
-            throws UniqueTaskList.DuplicatePersonException;
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedPerson)
+            throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
     //@@author A0164889E
     /** Returns the filtered task complete list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
@@ -45,11 +45,11 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords for FindCommand*/
-    void updateFilteredPersonList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> keywords);
 
     //@@author A0164889E
     /** Updates the filter of the filtered task list to filter by the given keywords for GroupCommand*/
-    void updateFilteredPersonListGroup(Set<String> keywords);
+    void updateFilteredTaskListGroup(Set<String> keywords);
 
     //@@author A0164466X
     /** Updates the filter of the filtered person list to show all complete tasks */

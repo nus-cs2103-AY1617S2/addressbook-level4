@@ -17,7 +17,7 @@ import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the address book.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
 
@@ -179,7 +179,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSEDDATE : "");
             return new CommandResult(String.format(message, toAdd));
-        } catch (UniqueTaskList.DuplicatePersonException e) {
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
