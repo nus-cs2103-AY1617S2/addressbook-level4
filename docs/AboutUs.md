@@ -14,8 +14,9 @@ Role: Developer <br>
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
    * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0164061N.md)]
 * Other major contributions:
-   * Wrote majority of User Guide and Developer Guide
+   * Wrote majority of User Guide
    * Was in charge of team scheduling and tracking
+   * Modified GUI with JavaFX and SceneBuilder
 
 -----
 
@@ -28,6 +29,11 @@ Role: Developer <br>
    * [Edit Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Find Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Load Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Sort Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Filter Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Undo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Redo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
 * Other major contributions:
@@ -54,7 +60,7 @@ Role: Developer <br>
 Role: Developer <br>
 * Aspects/Tools in charge of: Testing, Parsing
 * Features implemented:
-   * [Flexible Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
+   * [Natural Language Commands](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
    * [Delete Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0152855Y.md)]
