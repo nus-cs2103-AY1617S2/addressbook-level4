@@ -673,8 +673,7 @@ Use case ends
    should be able to accomplish most of the faster using commands than using the mouse.
 4. Should have a response time of at most five seconds, including functionality that require longer than five seconds to
    execute. This can be achieved by status updates on an ongoing function.
-5. Should have reasonable amount of documentation so that future developers can easily extend the project.
-6. Should have reasonably high quality source code as determined by the supervisor.
+6. Should develop new features only if the unfixed bug count is 5 and below.
 7. Should not have any proprietary dependencies.
 8. Should be able to function standalone without any installation of third-party software (excluding Java).
 9. Data should be stored locally in the form of a human editable text file.
