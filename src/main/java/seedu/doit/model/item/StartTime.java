@@ -15,8 +15,8 @@ public class StartTime implements Comparable<StartTime> {
 
     public static final String NO_START_TIME = "";
     public static final String MESSAGE_STARTTIME_CONSTRAINTS = "Start Date/Time should be in "
-        + "MM-DD-YY HH:MM Format or relative date today, tomorrow, next wednesday";
-    public static final String STARTTIME_VALIDATION_REGEX = "^$|^([0-9]||0[0-9]||1[0-2])/([0-2][0-9]||3[0-1])"
+        + "DD/MM/YY HH:MM Format or relative date today, tomorrow, next wednesday";
+    public static final String STARTTIME_VALIDATION_REGEX = "^$|^([0-2][0-9]||3[0-1])/([0-9]||0[0-9]||1[0-2])"
         + "/([0-9][0-9])?[0-9][0-9] [0-2]\\d:[0-6]\\d$";
 
     public final String value;
@@ -63,7 +63,7 @@ public class StartTime implements Comparable<StartTime> {
     }
 
     private static String formatDate(LocalDateTime input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         return input.format(formatter);
 
     }

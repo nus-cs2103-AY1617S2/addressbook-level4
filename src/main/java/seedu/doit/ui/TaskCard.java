@@ -58,7 +58,7 @@ public class TaskCard extends UiPart<Region> {
 
     public boolean isOverdue(String dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         LocalDateTime dateTimeToCompare = LocalDateTime.parse(dateTime, formatter);
         return !currentDateTime.isBefore(dateTimeToCompare);
     }
