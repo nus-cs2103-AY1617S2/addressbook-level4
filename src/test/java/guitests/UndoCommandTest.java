@@ -8,7 +8,6 @@ import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.UndoCommand;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
-	
 	@Test
 	public void undo() {
 		try {
@@ -28,6 +27,5 @@ public class UndoCommandTest extends TaskManagerGuiTest {
 		}
 		commandBox.runCommand("undo");
 	     assertResultMessage(UndoCommand.MESSAGE_FAIL);
-		
 	}
 }

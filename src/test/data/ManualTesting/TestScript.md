@@ -78,7 +78,7 @@ Result: Google's the task name specified at index 2<br>
 
 ## Path Command
 Command (PC): path C:\Desktop\MyTasks.xml <br>
-Result: Will create a new .xml file on the Desktop called MyTasks.xml. All further changes to Fast Task will me made to this file. 
+Result: Will create a new .xml file on the Desktop called MyTasks.xml. All further changes to Fast Task will me made to this file.
 
 Command (Mac): path /Users/YourName/Desktop/MyTasks.xml <br>
 Result: Will create a new .xml file on the Desktop called MyTasks.xml. All further changes to Fast Task will me made to this file. <br>

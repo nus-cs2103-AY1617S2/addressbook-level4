@@ -16,7 +16,7 @@ import seedu.task.model.task.TaskStatusPredicate;
 public class FilterCommandParser {
 
     public static final String MESSAGE_INCORRECT_FORMAT = "Invalid format for filter. filter [type] [arguments]";
-    
+
     public Command parse(String arguments) {
         try {
             arguments = arguments.toLowerCase();
