@@ -1,5 +1,7 @@
 package seedu.tache.logic.parser;
 
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
@@ -8,12 +10,10 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
-import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
-import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX ;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_DAILY;
-import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_MONTHLY;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_YEARLY;
 
 import java.util.Collection;
@@ -188,7 +188,7 @@ public class ParserUtil {
     public static boolean isEndDateIdentifier(String s) {
         return isFoundIn(s, DATE_IDENTIFIER_END);
     }
-    
+
     /**
      * Checks if the given String is the prefix for a recurrence identifier
      * @param s String to check
@@ -197,7 +197,7 @@ public class ParserUtil {
     public static boolean isRecurrencePrefix(String s) {
         return s.equalsIgnoreCase(RECURRENCE_IDENTIFIER_PREFIX);
     }
-    
+
     /**
      * Checks if the given String is a recurrence identifier
      * @param s String to check
@@ -206,15 +206,15 @@ public class ParserUtil {
     public static boolean isRecurrenceDaily(String s) {
         return isFoundIn(s, RECURRENCE_IDENTIFIER_DAILY);
     }
-    
+
     public static boolean isRecurrenceWeekly(String s) {
         return isFoundIn(s, RECURRENCE_IDENTIFIER_WEEKLY);
     }
-    
+
     public static boolean isRecurrenceMonthly(String s) {
         return isFoundIn(s, RECURRENCE_IDENTIFIER_MONTHLY);
     }
-    
+
     public static boolean isRecurrenceYearly(String s) {
         return isFoundIn(s, RECURRENCE_IDENTIFIER_YEARLY);
     }
@@ -228,7 +228,8 @@ public class ParserUtil {
         String[] inputs = input.split(" ");
         int currentIndex = 0;
         Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
-        PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        PossibleDateTime current = new PossibleDateTime(new String(),
+                PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
         for (int i = 0; i < inputs.length; i++) {
             String word = inputs[i];
             if (isStartDateIdentifier(word)) {
@@ -244,15 +245,15 @@ public class ParserUtil {
                 result.push(current);
                 result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.DAY));
                 current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            }else if (isRecurrenceWeekly(word)) {
+            } else if (isRecurrenceWeekly(word)) {
                 result.push(current);
                 result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.WEEK));
                 current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            }else if (isRecurrenceMonthly(word)) {
+            } else if (isRecurrenceMonthly(word)) {
                 result.push(current);
                 result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.MONTH));
                 current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
-            }else if (isRecurrenceYearly(word)) {
+            } else if (isRecurrenceYearly(word)) {
                 result.push(current);
                 result.push(new PossibleDateTime(word, currentIndex, DateTimeType.RECURRENCE, RecurInterval.YEAR));
                 current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
@@ -264,14 +265,14 @@ public class ParserUtil {
         result.push(current);
         return result;
     }
-    
+
     /**
      * Class to describe a date/time String that was found
      *
      */
     static class PossibleDateTime {
         static enum DateTimeType { START, END, UNKNOWN, RECURRENCE, RECURRENCE_PREFIX };
-        
+
         int startIndex;
         String data;
         DateTimeType type;
@@ -284,7 +285,7 @@ public class ParserUtil {
             this.type = type;
             this.data = data;
         }
-        
+
         PossibleDateTime(String data, int index, DateTimeType type, RecurInterval recurInterval) {
             this(data, index, type);
             this.recurInterval = recurInterval;
@@ -293,7 +294,7 @@ public class ParserUtil {
         void appendDateTime(String data) {
             this.data += " " + data;
         }
-    }    
+    }
 
     public static boolean canParse(String s) {
         return DateTime.canParse(s);

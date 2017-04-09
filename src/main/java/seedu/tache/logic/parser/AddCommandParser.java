@@ -14,8 +14,8 @@ import seedu.tache.logic.commands.AddCommand;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime.DateTimeType;
-import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 
 //@@author A0150120H
 /**
@@ -51,7 +51,8 @@ public class AddCommandParser {
                 recurInterval = current;
             } else if (current.type == DateTimeType.RECURRENCE_PREFIX && recurInterval == null) {
                 try {
-                    current.recurInterval = ParserUtil.parseStringToRecurInterval(current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
+                    current.recurInterval = ParserUtil.parseStringToRecurInterval(
+                            current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
                     recurInterval = current;
                 } catch (IllegalValueException ex) {
                     continue;
@@ -73,7 +74,7 @@ public class AddCommandParser {
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
             }
-        } else if (startDateTime == null && recurInterval != null){
+        } else if (startDateTime == null && recurInterval != null) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else {
             String taskName = taskWithoutTags;
