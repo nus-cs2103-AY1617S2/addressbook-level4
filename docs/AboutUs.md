@@ -53,8 +53,8 @@ Responsibilities: Logic and Scheduling and Tracking
     * [Adding floating task](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#22-adding-a-task-add)
     * [Complete Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#27-complete-a-task--complete)
     * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#28-allocate-priority-to-a-task-prioritize)
-    * [Undo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.13)
-    * [Redo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.14)
+    * [Undo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/final_stuff/docs/UserGuide.md#213-revert-the-previous-change--undo)
+    * [Redo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/final_stuff/docs/UserGuide.md#214-revert-the-previous-undo-change-redo)
 * Code written: [[Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0113795Y.md)][[Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0113795Y.md)]
 * Other major contributions:
     * Refactored commands class files to align with Task Manager context
