@@ -39,16 +39,16 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     /*
      * private void assertSelectionInvalid(int index) { commandBox.runCommand("select " + index);
      * assertResultMessage("The person index provided is invalid"); }
-     * 
+     *
      * private void assertSelectionSuccess(int index) { commandBox.runCommand("select " + index);
      * assertResultMessage("Selected Person: " + index); assertTaskSelected(index); }
-     * 
+     *
      * private void assertTaskSelected(int index) {
      * assertEquals(taskListPanel.getSelectedTasks().size(), 1); ReadOnlyTask selectedTask =
      * taskListPanel.getSelectedTasks().get(0); assertEquals(taskListPanel.getTask(index - 1),
      * selectedTask); // TODO: // confirm // the // correct // page is // loaded // in the //
      * Browser // Panel }
-     * 
+     *
      * private void assertNoTaskSelected() { assertEquals(taskListPanel.getSelectedTasks().size(),
      * 0); }
      */
