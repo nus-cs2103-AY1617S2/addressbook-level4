@@ -38,12 +38,12 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 #### Menu Bar : update the task list to display all relevant tasks based on the selection for fast search <br>
 Home will display all tasks inside, other buttons will only display incompleted tasks with the specified type.
 For example, click on deadline, only incompleted tasks with deadline will be displayed:<br>
-<img src="images/menubar.png" width="300">
+<img src="images/menubar.png" height="1000" width="300">
 <br>
 
 #### Task Card : display all details about a task   
 An incompleted task card is shown with a white color bar:
-<img src="images/incompleted_task.png" height="1000" width="500"> 
+<img src="images/incompleted_task.png" width="500"> 
 <br>
 A completed task card is shown with a green color bar:
 <img src="images/completed_task.png" width="500"> 
