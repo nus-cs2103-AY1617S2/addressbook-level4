@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.watodo.model.task.ReadOnlyTask;
+import seedu.watodo.model.task.TaskStatus;
 
 //@@author A0139845R-reused
 public class TaskCard extends UiPart<Region> {
@@ -48,7 +49,9 @@ public class TaskCard extends UiPart<Region> {
             cardPane.setStyle("-fx-background-color: #5c5c5c;");
             description.setStyle("-fx-text-fill: #6dc006;");
             setLabelsColourGreen();
-
+        }
+        if (task.getStatus().equals(TaskStatus.OVERDUE)) {
+            status.setStyle("-fx-text-fill: red;");
         }
     }
 
