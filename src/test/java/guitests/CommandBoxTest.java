@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import seedu.ezdo.ui.CommandBox;
 //@@author A0139177W
+/**
+ * Tests the Command Box in UI.
+ */
 public class CommandBoxTest extends EzDoGuiTest {
 
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";

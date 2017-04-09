@@ -48,6 +48,9 @@ public class CommandBox extends UiPart<Region> {
     }
 
   //@@author A0139177W
+    /**
+     * Executes the command input by the user.
+     */
     @FXML
     public void handleCommandInputChanged() {
         // reset command text field color if it is changed.

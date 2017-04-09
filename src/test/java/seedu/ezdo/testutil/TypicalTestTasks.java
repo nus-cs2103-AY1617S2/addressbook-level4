@@ -15,6 +15,9 @@ public class TypicalTestTasks {
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, jack, kappa, leroy, megan;
     public TestTask alice2, benson2, carl2, daniel2, elle2, fiona2, george2;
 
+    /**
+     * Generates test tasks for testing.
+     */
     public TypicalTestTasks() {
         try {
             alice = new TaskBuilder().withName("Alice Pauline")
@@ -145,6 +148,9 @@ public class TypicalTestTasks {
         }
     }
 
+    /**
+     * Loads ezDo with sample test tasks.
+     */
     public static void loadEzDoWithSampleData(EzDo ez) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
@@ -155,6 +161,9 @@ public class TypicalTestTasks {
         }
     }
 
+    /**
+     * Loads ezDo with sample non-recurring test tasks.
+     */
     public static void loadEzDoWithSampleDataNonRecurring(EzDo ez) {
         for (TestTask task : new TypicalTestTasks().getTypicalNonRecurringTasks()) {
             try {
@@ -165,18 +174,30 @@ public class TypicalTestTasks {
         }
     }
 
+    /**
+     * Returns sample test tasks.
+     */
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
+    /**
+     * Returns sample non recurring test tasks.
+     */
     public TestTask[] getTypicalNonRecurringTasks() {
         return new TestTask[]{alice2, benson2, carl2, daniel2, elle2, fiona2, george2};
     }
 
+    /**
+     * Returns sample done test tasks.
+     */
     public TestTask[] getTypicalDoneTasks() {
         return new TestTask[]{};
     }
 
+    /**
+     * Retrieves ezDo loaded with sample test tasks.
+     */
     public EzDo getTypicalEzDo() {
         EzDo ez = new EzDo();
         loadEzDoWithSampleData(ez);

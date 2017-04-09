@@ -13,8 +13,12 @@ import seedu.ezdo.logic.commands.SelectCommand;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.testutil.TestTask;
 //@@author A0139177W
+/**
+ * Runs test cases for Select command.
+ */
 public class SelectCommandTest extends EzDoGuiTest {
-
+    
+    /** Tests for invalid commands **/
     @Test
     public void select() {
         // invalid command
@@ -30,6 +34,7 @@ public class SelectCommandTest extends EzDoGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
     }
 
+    /** Tests for select commands in non-empty list. **/
     @Test
     public void selectTask_nonEmptyList() {
 
@@ -61,7 +66,8 @@ public class SelectCommandTest extends EzDoGuiTest {
          * the SelectCommand
          */
     }
-
+    
+    /** Tests for select commands with multiple tasks in non-empty list. **/
     @Test
     public void selectMultipleTasks_nonEmptyList() {
 
@@ -89,6 +95,7 @@ public class SelectCommandTest extends EzDoGuiTest {
          */
     }
 
+    /** Asserts success for select commands with multiple tasks. **/
     private void assertMultipleSelectionSuccess(TestTask[] currentList) {
 
         ArrayList<Integer> listOfTasks = new ArrayList<>();
@@ -98,6 +105,7 @@ public class SelectCommandTest extends EzDoGuiTest {
         assertSelectionSuccess(listOfTasks);
     }
 
+    /** Tests for select commands in an empty list. **/
     @Test
     public void selectTask_emptyList() {
         commandBox.runCommand("clear");
@@ -105,6 +113,7 @@ public class SelectCommandTest extends EzDoGuiTest {
         assertSelectionInvalid(1); // invalid index
     }
 
+    /** Tests for select commands with invalid indexes. **/
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("The task index provided is invalid.");

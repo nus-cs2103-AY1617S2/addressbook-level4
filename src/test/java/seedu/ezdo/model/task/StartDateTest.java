@@ -15,6 +15,7 @@ public class StartDateTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     //@@author A0139177W
+    /** Checks if a start date is valid. **/
     @Test
     public void isValidStartDate() {
         // invalid dates

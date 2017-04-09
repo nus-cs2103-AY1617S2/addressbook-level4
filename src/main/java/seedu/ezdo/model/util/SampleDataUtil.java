@@ -13,6 +13,9 @@ import seedu.ezdo.model.todo.Task;
 import seedu.ezdo.model.todo.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0139177W
+/**
+ * Provides the sample data for the application.
+ */
 public class SampleDataUtil {
 
     private static final String MESSAGE_DUPLICATE_TASKS = "Sample data cannot contain duplicate tasks";

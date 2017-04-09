@@ -15,6 +15,7 @@ public class DueDateTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     //@@author A0139177W
+    /** Tests if a given due date is valid. **/
     @Test
     public void isValidDueDate() {
         // invalid dates
