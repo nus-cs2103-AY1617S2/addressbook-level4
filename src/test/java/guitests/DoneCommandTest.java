@@ -56,7 +56,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
 
     //@@author A0139343E
     @Test
-    public void done_dailyDeadlineTask_success() {
+    public void done_deadlineDailyTask_success() {
         assertDoneSuccess(TaskType.DEADLINE, "d4", currentList);
     }
 
@@ -71,7 +71,18 @@ public class DoneCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void undone_task_success() {
+    public void undone_nonRecurringTask_success() {
+        // try to undone an incompleted task
+        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
+        assertResultMessage(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
+
+        // done the same task, and try to undone it
+        assertDoneSuccess(TaskType.TODO, "t1", currentList);
+        assertUndoneSuccess(TaskType.TODO, "t1", currentList);
+    }
+
+    @Test
+    public void undone_latestRecurringTask_success() {
         // try to undone an incompleted task
         commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
         assertResultMessage(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);

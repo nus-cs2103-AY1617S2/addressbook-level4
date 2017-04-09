@@ -125,6 +125,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0139343E
+    /**
+     * Undone a completed task. If it does not recur, undone it normally.
+     *
+     * If undone a recurring task with its original task being edited, it will be added back as an individual
+     * non-recurring task (to keep all tasks info).
+     *
+     * If undone a non-latest completed recurring task, it will also be added back as an
+     * individual non-recurring task.
+     *
+     * If undone a latest completed recurring task, it will replace
+     * the original task with its date reverted back by the correct amount.
+     */
     @Override
     public synchronized void undoneTask(ReadOnlyTask taskToUncomplete)
             throws IllegalValueException, TaskNotFoundException {
