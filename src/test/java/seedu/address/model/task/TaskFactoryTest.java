@@ -5,10 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.DeadlineTask;
 import seedu.task.model.task.EndDate;
-import seedu.task.model.task.FloatingTask;
 import seedu.task.model.task.Group;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.StartDate;
@@ -21,7 +20,7 @@ import seedu.task.model.task.Task;
 public class TaskFactoryTest {
 
     @Test
-    public void isTask() {
+    public void isValidTask() {
 
         Object task = null;
 
@@ -32,34 +31,10 @@ public class TaskFactoryTest {
                     new Group("Vacation"),
                     new StartDate("today"),
                     new EndDate("tomorrow"),
-                    UniqueTagList.build());
+                    UniqueTagList.build(Tag.TAG_INCOMPLETE));
         } catch (IllegalValueException e) {
-            e.printStackTrace();
         }
         assertTrue(task instanceof Task);
-
-        // Test: Is DeadlineTask
-        try {
-            task = Task.factory(
-                    new Name("Go to the beach"),
-                    new Group("Vacation"),
-                    new EndDate("tomorrow"),
-                    UniqueTagList.build());
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
-        assertTrue(task instanceof DeadlineTask);
-
-        // Test: Is FloatingTask
-        try {
-            task = Task.factory(
-                    new Name("Go to the beach"),
-                    new Group("Vacation"),
-                    UniqueTagList.build());
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
-        assertTrue(task instanceof FloatingTask);
 
         // Test: No end date
         try {
@@ -67,22 +42,8 @@ public class TaskFactoryTest {
                     new Name("Go to the beach"),
                     new Group("Vacation"),
                     new StartDate("today"),
-                    UniqueTagList.build());
+                    UniqueTagList.build(Tag.TAG_INCOMPLETE));
         } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
-        assertTrue(task == null);
-
-     // Test: End date before start date
-        try {
-            task = Task.factory(
-                    new Name("Go to the beach"),
-                    new Group("Vacation"),
-                    new StartDate("tomorrow"),
-                    new EndDate("today"),
-                    UniqueTagList.build());
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
         }
         assertTrue(task == null);
 
@@ -94,8 +55,7 @@ public class TaskFactoryTest {
                     new StartDate("today"),
                     new EndDate("tomorrow"));
         } catch (IllegalValueException e) {
-            e.printStackTrace();
+            assertTrue(true);
         }
-        assertTrue(task == null);
     }
 }
