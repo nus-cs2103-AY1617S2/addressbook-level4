@@ -6,12 +6,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Jay Gajendra Kabra](https://github.com/jay500s)
 <img src="images/jay500s.PNG" width="150"><br>
-* Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#2.4) <br>
+* Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#24-model-component) <br>
 * Aspects/tools in charge of: Code Quality
 * Features implemented:
-    * [Recurring Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#3) - Full stack implementation
-    * [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.5)
-    * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#Allocate) - Worked with Heyang to implement logic and model functionality
+    * [Recurring Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#3-notes-on-recurring-tasks) - Full stack implementation
+    * [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#25-finding-all-tasks-containing-any-keyword-in-their-name-find)
+    * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#28-allocate-priority-to-a-task-prioritize) - Worked with Heyang to implement logic and model functionality
 * Code written:
     * [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0164212U.md)
     * [Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0164212U.md)
@@ -28,12 +28,12 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/tylerrocha.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Storage, GitHub
-* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>
+* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#25-storage-component) <br>
 * Features implemented:
-    * [Comparable Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.3.1)
-    * [Save Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.11)
-    * [Load Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.12)
-* Code written: [[Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0163559U.md)][Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0163559U.md)]
+    * [Comparable Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#231-natural-ordering-of-tasks)
+    * [Save Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#211-saving-the-data--save)
+    * [Load Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#212-loading-the-data--load)
+* Code written: [[Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0163559U.md)][[Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0163559U.md)]
 * Other major contributions:
     * Maintained storage, comparable, save/load, logic manager and XMLUtil tests
     * Updated testutil files, e.g. TestTask and TaskBuilder
@@ -55,7 +55,7 @@ Responsibilities: Logic and Scheduling and Tracking
     * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#28-allocate-priority-to-a-task-prioritize)
     * [Undo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.13)
     * [Redo Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.14)
-* Code written: [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0113795Y.md)[Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0113795Y.md)
+* Code written: [[Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0113795Y.md)][[Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0113795Y.md)]
 * Other major contributions:
     * Refactored commands class files to align with Task Manager context
     * Wrote test cases for GUI tests
