@@ -48,7 +48,6 @@ public class RedoCommandTest extends TaskBookGuiTest {
 		TestTask taskUndone2 = currentList[currentList.length - 1];
 		undoForRedo(currentList);
     currentList = TestUtil.removeTasksFromList(currentList, taskUndone2);
-		
 		// double redo test
 		assertRedoSuccess(currentList);
 		currentList = TestUtil.addTasksToList(currentList, taskUndone2);
