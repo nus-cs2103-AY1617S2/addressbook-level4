@@ -1,5 +1,6 @@
 package seedu.ezdo.ui;
 
+import java.io.InputStream;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -25,6 +26,16 @@ import seedu.ezdo.model.UserPrefs;
  * The manager of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
+
+    private static final String MESSAGE_SAVE_FILE_ERROR = "Could not save data to file";
+    private static final String MESSAGE_SAVE_ERROR = "Could not save data";
+    private static final String MESSAGE_SPACE = " ";
+    private static final String NEW_LINE = ":\n";
+    private static final String MESSAGE_INITIALISE_ERROR = "Fatal error during initializing";
+    private static final String MESSAGE_FILE_OP_ERROR = "File Op Error";
+    private static final String LINK_TO_CSS = "view/DarkTheme.css";
+    private static final String MESSAGE_UI_STARTING = "Starting UI...";
+
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/ezDo_32.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
@@ -43,10 +54,13 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting UI...");
-        primaryStage.setTitle(config.getAppTitle());
+        logger.info(MESSAGE_UI_STARTING);
+        
+        // Set the application title
+        String appTitle = config.getAppTitle();
+        primaryStage.setTitle(appTitle);
 
-        //Set the application icon.
+        // Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
@@ -56,7 +70,7 @@ public class UiManager extends ComponentManager implements Ui {
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
-            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+            showFatalErrorDialogAndShutdown(MESSAGE_INITIALISE_ERROR, e);
         }
     }
 
@@ -67,12 +81,13 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
-        final String content = details + ":\n" + cause.toString();
-        showAlertDialogAndWait(AlertType.ERROR, "File Op Error", description, content);
+        final String content = details + NEW_LINE + cause.toString();
+        showAlertDialogAndWait(AlertType.ERROR, MESSAGE_FILE_OP_ERROR, description, content);
     }
 
     private Image getImage(String imagePath) {
-        return new Image(MainApp.class.getResourceAsStream(imagePath));
+        InputStream imageStream = MainApp.class.getResourceAsStream(imagePath);
+        return new Image(imageStream);
     }
 
     private void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
@@ -82,7 +97,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.getDialogPane().getStylesheets().add(LINK_TO_CSS);
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
@@ -92,7 +107,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
-        logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
+        logger.severe(title + MESSAGE_SPACE + e.getMessage() + StringUtil.getDetails(e));
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
@@ -103,7 +118,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleDataSavingExceptionEvent(DataSavingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
+        showFileOperationAlertAndWait(MESSAGE_SAVE_ERROR, MESSAGE_SAVE_FILE_ERROR, event.exception);
     }
 
     @Subscribe
@@ -115,7 +130,8 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        int index = event.targetIndex;
+        mainWindow.getTaskListPanel().scrollTo(index);
     }
 
     @Subscribe
