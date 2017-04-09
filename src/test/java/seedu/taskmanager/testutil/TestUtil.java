@@ -403,7 +403,7 @@ public class TestUtil {
         return collect.toArray(new Category[split.length]);
     }
 
-    // @@author A0142418L
+    // @@author A0142418L-reused
     /**
      * Compares the starting date and time of 2 event tasks.
      *

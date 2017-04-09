@@ -137,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (int index = 0; targets.size() != index; index++) {
             try {
                 ReadOnlyTask taskToDelete = targets.get(index);
-                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName)) {
+                if (toDeleteTaskName.equals(taskToDelete.getTaskName().fullTaskName.trim())) {
                     taskManager.removeTask(taskToDelete);
                     index--;
                     numDeletedTasks++;
