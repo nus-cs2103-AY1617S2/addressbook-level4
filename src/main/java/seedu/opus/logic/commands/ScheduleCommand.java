@@ -4,6 +4,10 @@ import seedu.opus.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.opus.logic.commands.exceptions.CommandException;
 
 //@@author A0126345J
+/**
+ * Schedule either the end time or both the start time and the end time
+ * of an existing task in the task manager.
+ */
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
@@ -12,7 +16,6 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SCHEDULE_TASK_SUCCESS = "Task is scheduled successfully";
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
-
 
     public ScheduleCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;

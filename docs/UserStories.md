@@ -18,7 +18,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | redo  the previous undo action | recover from any unintended undo action
 `* *` | user | find for specific tasks using the attributes | locate certain tasks that contain the keywords quickly
 `* *` | user | specify priority of a task | organize my tasks based on how important it is
-`* *` | user | add a tag to a task | categorise my tasks 
+`* *` | user | add a tag to a task | categorise my tasks
 `* *` | intermediate user | sort tasks based on a specified attribute | view the sorted list of tasks based on the specified attribute
 `* *` | intermediate user | specify a save location | change the directory of where the save file will be located
 `* *` | intermediate user | view my upcoming tasks in a separate window | differentiate which are the most pressing tasks to complete

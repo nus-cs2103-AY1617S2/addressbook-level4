@@ -42,32 +42,38 @@ public interface ReadOnlyTask {
      * Formats the task as text, showing all task's details.
      */
     default String getAsText() {
+        //@@author A0124368A
         final StringBuilder builder = new StringBuilder();
 
-        builder.append(getName());
+        builder.append(getName()).append("\n");
 
         if (getPriority().isPresent()) {
-            builder.append(" Priority: ").append(getPriority().get().toString());
+            builder.append(" Priority: ").append(getPriority().get().toString()).append("\n");
         }
 
         builder.append(" Status: ");
-        builder.append(getStatus());
+        builder.append(getStatus()).append("\n");
 
         if (getNote().isPresent()) {
-            builder.append(" Note: ").append(getNote().get().toString());
+            builder.append(" Note: ").append(getNote().get().toString()).append("\n");
         }
 
         if (getStartTime().isPresent()) {
-            builder.append(" Start Time: ").append(getStartTime().get().toString());
+            builder.append(" Start Time: ").append(getStartTime().get().toString()).append("\n");
         }
 
         if (getEndTime().isPresent()) {
-            builder.append(" End Time: ").append(getEndTime().get().toString());
+            builder.append(" End Time: ").append(getEndTime().get().toString()).append("\n");
         }
 
-        builder.append(" Tags: ");
-        getTags().forEach(builder::append);
+        boolean hasTags = getTags().toSet().size() > 0;
+        if (hasTags) {
+            builder.append(" Tags: ");
+            getTags().forEach(builder::append);
+        }
+
         return builder.toString();
+        //@@author
     }
 
 }

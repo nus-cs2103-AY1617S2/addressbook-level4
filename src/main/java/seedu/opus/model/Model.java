@@ -3,12 +3,13 @@ package seedu.opus.model;
 import java.util.List;
 
 import seedu.opus.commons.core.UnmodifiableObservableList;
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.opus.model.util.InvalidUndoException;
+import seedu.opus.sync.exceptions.SyncException;
 
 /**
  * The API of the Model component.
@@ -51,27 +52,30 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given qualifiers*/
     void updateFilteredTaskList(List<Qualifier> qualifiers);
 
+    //@@author A0148087W
     /**
-     * Reset current data to the previous state to undo changes
+     * Reset current TaskManager to the previous state to undo data changes by user
      * @throws InvalidUndoException
      */
     void resetToPreviousState() throws InvalidUndoException;
 
     /**
-     * Reset current data to preceding state to rollback changes due to previous undo operation
+     * Reset current TaskManager to the next forward state to rollback changes made by the most recent undo operation
      * @throws InvalidUndoException
      */
-    void resetToPrecedingState() throws InvalidUndoException;
+    void resetToNextState() throws InvalidUndoException;
 
     /**
      * Set Model to start syncing with sync service
+     * @throws SyncException
      */
-    void startSync();
+    void startSync() throws SyncException;
 
     /**
      * Set Model to stop syncing with sync service
      */
     void stopSync();
+    //@@author
 
     /** Change the data storage location */
     void changeSaveLocation(String location);

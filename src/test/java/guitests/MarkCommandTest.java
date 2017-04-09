@@ -22,7 +22,16 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         TestTask markedTask = new TaskBuilder(taskToMark).withStatus("complete")
                 .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
 
+        // toggles to complete on the first mark
         assertMarkSuccess(taskManagerIndex, taskManagerIndex, markedTask);
+
+        // toggles to incomplete on the second mark
+        int updatedIndex = taskListPanel.getTaskIndex(markedTask) + 1; // +1 because it is the index reflected in the UI
+        taskToMark = expectedTasksList[updatedIndex - 1];
+        TestTask unmarkedTask = new TaskBuilder(taskToMark).withStatus("incomplete")
+                .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").build();
+
+        assertMarkSuccess(updatedIndex, updatedIndex, unmarkedTask);
     }
 
     /**
@@ -42,9 +51,19 @@ public class MarkCommandTest extends TaskManagerGuiTest {
         assertMatching(markedTask, editedCard);
 
         // confirm the list now contains all previous tasks plus the task with updated details
-        expectedTasksList[taskManagerIndex - 1] = markedTask;
+        moveToEnd(filteredTaskListIndex - 1);
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, markedTask));
+    }
+
+    /** Moves an element at index of expectedTasksList to the end of the list */
+    private void moveToEnd(int index) {
+        TestTask temp;
+        for (int i = index + 1; i < expectedTasksList.length; i++) {
+            temp = expectedTasksList[i - 1];
+            expectedTasksList[i - 1] = expectedTasksList[i];
+            expectedTasksList[i] = temp;
+        }
     }
 
 }

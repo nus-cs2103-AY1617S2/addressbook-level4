@@ -49,7 +49,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
@@ -75,7 +75,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         syncMasterTagListWith(tasks);
     }
 
-//// Task-level operations
+    //// Task-level operations
 
     /**
      * Adds a task to the Task Manager.
@@ -157,13 +157,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         tasks.sortList(keyword);
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     //@@author A0148087W
     /**
@@ -179,6 +179,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
         return list;
     }
+    //@@author
 
     @Override
     public String toString() {
@@ -200,8 +201,8 @@ public class TaskManager implements ReadOnlyTaskManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.tasks.equals(((TaskManager) other).tasks)
-                && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+                        && this.tasks.equals(((TaskManager) other).tasks)
+                        && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
     }
 
     @Override

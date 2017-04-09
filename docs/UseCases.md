@@ -102,8 +102,9 @@ Use case ends
 
 **Extensions**
 
-1a. The history stack is empty
+1a. There is no more actions that can be undone
 
+> System shows an error that an undo command is not possible
 > Use case ends
 
 #### Use case: Redo the previous undo action
@@ -133,3 +134,37 @@ Use case ends
 > 1b1. Opus shows an error message
 
 > Use case ends
+
+#### Use case: Sync tasks to Google Tasks
+
+**MSS**
+
+1. User requests to sync tasks to Google Tasks
+2. Opus connects to Google Tasks and pushes all valid tasks.
+3. User changes data in Opus
+4. Opus pushes any new changes to Google Task
+5. User exits Opus
+
+Use case ends
+
+**Extensions**
+
+1a. No authorisation to access User's Google Tasks<br>
+> 1a1. Opus attempts to connect to Google Tasks and prompts for authorisation to access User's Google Tasks account in default web browser<br>
+> 1a2. User accepts request for authorisation
+
+1a1a. No internet connection<br>
+> 1a1a1. Opus shows an error message that there is no internet access to Google Tasks<br>
+> 1a1a2. Use case ends
+
+1a2a. User denies request for authorisation<br>
+> 1a2a1. Opus shows an error message that no authorisation is given by User<br>
+> 1a2a2. Use case ends
+
+2a. User revoked Opus access in Google Tasks<br>
+> 2a1. Opus shows an error message that no authorisation is given by User <br>
+> 2a2. Use case ends
+
+4a. No internet connection<br>
+> 4a1. Opus shows an error message that there is no internet access to Google Tasks<br>
+> 4a2. Use case ends

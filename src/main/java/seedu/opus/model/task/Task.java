@@ -99,7 +99,7 @@ public class Task implements ReadOnlyTask {
         this.note = note;
     }
 
-    //@@author A0124368A
+    //@@author A0124368J
     @Override
     public Optional<Note> getNote() {
         return Optional.ofNullable(note);
@@ -107,6 +107,9 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartTime() {
+        if (startTime != null && startTime.dateTime == null) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(startTime);
     }
     //@@author
@@ -115,9 +118,12 @@ public class Task implements ReadOnlyTask {
         this.startTime = dateTime;
     }
 
-    //@@author A0124368A
+    //@@author A0124368J
     @Override
     public Optional<DateTime> getEndTime() {
+        if (endTime != null && endTime.dateTime == null) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(endTime);
     }
     //@@author

@@ -20,10 +20,11 @@ public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Opus does not recognize the date time format. Please try again.";
+    private static final String EMPTY_STRING = "";
 
     public final LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter
-            .ofPattern("MM/dd/uuuu HH:mm")
+            .ofPattern("dd MMM uu hh:mma")
             .withResolverStyle(ResolverStyle.STRICT);
     private Clock clock;
 
@@ -34,16 +35,19 @@ public class DateTime {
      */
     public DateTime(LocalDateTime dateTime) throws IllegalValueException {
         assert dateTime != null;
-
         this.clock = Clock.systemDefaultZone();
         this.dateTime = dateTime;
     }
 
     public DateTime(String dateTime) throws IllegalValueException {
         assert dateTime != null;
-        this.clock = Clock.systemDefaultZone();
-        this.dateTime =  DateTimeParser.parse(dateTime)
-                .orElseThrow(() -> new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS));
+        if (dateTime.equals(EMPTY_STRING)) {
+            this.dateTime = null;
+        } else {
+            this.clock = Clock.systemDefaultZone();
+            this.dateTime =  DateTimeParser.parse(dateTime)
+                    .orElseThrow(() -> new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS));
+        }
     }
 
 

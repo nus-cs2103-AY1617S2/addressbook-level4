@@ -11,8 +11,8 @@ import seedu.opus.model.task.UniqueTaskList;
 public class TypicalTestTasks {
 
     public TestTask laundry, quiz, payment, reflection, dishes, consultation,
-                        grocery, submission, application, taskWithoutDeadline,
-                        taskWithoutNote, taskWithoutPriority;
+        grocery, submission, application, taskWithoutDeadline,
+        taskWithoutNote, taskWithoutPriority, taskWithoutStartTime;
 
     public TypicalTestTasks() {
         try {
@@ -54,6 +54,8 @@ public class TypicalTestTasks {
                     .withStartTime("12/12/2017 12:00").withEndTime("12/12/2017 13:00").withNullNote().build();
             taskWithoutDeadline = new TaskBuilder().withName("No deadlines").withPriority("hi")
                     .withNullStartTime().withNullEndTime().withStatus("incomplete").withNote("no deadlines").build();
+            taskWithoutStartTime = new TaskBuilder().withName("No start time").withPriority("mid").withNullStartTime()
+                    .withEndTime("12/12/2017 13:00").withStatus("incomplete").withNote("no start time").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -73,6 +75,12 @@ public class TypicalTestTasks {
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{laundry, quiz, payment, reflection, dishes, consultation, grocery};
     }
+
+    //@@author A0148081H-reused
+    public TestTask[] getSortedByPriorityTasks() {
+        return new TestTask[]{laundry, quiz, reflection, payment, dishes, consultation, grocery};
+    }
+    //@@author
 
     public TaskManager getTypicalTaskManager() {
         TaskManager taskManager = new TaskManager();
