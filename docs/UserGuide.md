@@ -5,7 +5,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 ---
 
 1. [Quick Start](#1-quick-start)
-2. [User Interface] (#2-ui)
+2. [User Interface] (#2-user-interface)
 2. [Features](#3-features)
 3. [FAQ](#4-faq)
 4. [Command Summary](#5-command-summary)
@@ -19,7 +19,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 1. Download the latest `TaskIt.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [User Interface](#2-ui) for a more detailed explanations of various UI components. 
+3. Double-click the file to start the app. The GUI should appear in a few seconds. Refer to [User Interface](#2-user-interface) for a more detailed explanations of various UI components. 
    > <img src="images/Ui_demo.gif" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
@@ -34,6 +34,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 <!-- @@author A0141872E -->
 ## 2. User Interface
+
 #### Menu Bar : update the task list to display all relevant tasks based on the selection for fast search <br>
 Home will display all tasks inside, other buttons will only display incompleted tasks with the specified type.
 For example, click on deadline, only incompleted tasks with deadline will be displayed:<br>
@@ -42,7 +43,7 @@ For example, click on deadline, only incompleted tasks with deadline will be dis
 
 #### Task Card : display all details about a task   
 An incompleted task card is shown with a white color bar:
-<img src="images/incompleted_task.png" height="700", width="500"> 
+<img src="images/incompleted_task.png" height="1000" width="500"> 
 <br>
 A completed task card is shown with a green color bar:
 <img src="images/completed_task.png" width="500"> 
@@ -51,7 +52,7 @@ A overdued task card is shown with a red red bar:<br>
 <img src="images/overdued_task.png" width="500"> 
 <br>
 There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
-<img src="images/pri_high.png" height="50" width="100"><img src="images/pri_medium.png" height="50",width="100"><img src="images/pri_low.png" height="50",width="100"> 
+<img src="images/pri_high.png" height="50" width="100"> <img src="images/pri_medium.png" height="50" width="100"><img src="images/pri_low.png" height="50" width="100"> 
 <br>
 
 ## 3. Features
