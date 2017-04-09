@@ -26,14 +26,11 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         //delete from the middle of the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
-        if (targetIndex == 0)
-            targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("Task #41 unsuccessfully deleted.\n"
-                                + "The task index provided is out of bounds.\n");
+        assertResultMessage("The task index provided is invalid");
 
     }
 
@@ -52,10 +49,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-
-        assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
-                targetIndexOneIndexed, taskToDelete) + "\n");
-
+        assertResultMessage(String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL, taskToDelete));
     }
 
 }

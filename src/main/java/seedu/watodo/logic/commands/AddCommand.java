@@ -71,7 +71,6 @@ public class AddCommand extends Command {
         try {
             this.undoAdd = new Task(toAdd);
             model.addTask(toAdd);
-            selectLastTask();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -96,7 +95,6 @@ public class AddCommand extends Command {
         try {
             model.updateFilteredListToShowAll();
             model.addTask(undoAdd);
-            selectLastTask();
         } catch (DuplicateTaskException e) {
 
         }

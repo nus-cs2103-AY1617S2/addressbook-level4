@@ -17,7 +17,7 @@ import seedu.watodo.logic.commands.ShortcutCommand;
 public class ShortcutCommandParser {
 
     private final Pattern SHORTCUT_ARGS_REGEX =
-            Pattern.compile("(?<Operation>^\\p{Punct})(\\s+)(?<CommandWord>.*)(\\s+)(?<ShortcutKey>\\S+$)");
+            Pattern.compile("(?<Operation>\\S)(\\s+)(?<CommandWord>\\S+)(\\s+)(?<ShortcutKey>\\S+)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the ShortcutCommand
