@@ -65,12 +65,12 @@ Format: `HELP`
 
 You can use this command to add different types of task in ProcrastiNomore. <br>
 There are 3 forms of task that ProcrastiNomore supports:
-> [Events](#321-events) <br>
+> * [Events](#321-events) <br>
 >> [Same Day Events](#3211-same-day-events) <br>
->> [Multiple Days Events](#3212-Multiple-days-events) <br>
+>> [Multiple Days Events](#3212-multiple-days-events) <br>
 >
-> [Deadlines](#322-deadlines) <br>
-> [Basic Tasks](#323-basic-task) <br>
+> * [Deadlines](#322-deadlines) <br>
+> * [Basic Tasks](#323-basic-task) <br>
 
 #### 3.2.1. Events
 
@@ -97,7 +97,7 @@ Format: `ADD` task `ON` date/day time `TO` time <br />
 > If one hour buffer goes into the next day, End date will be changed to next day and time will be changed accordingly.
 
 
-#### 3.2.1.1. Multiple Days Events
+#### 3.2.1.2. Multiple Days Events
 Format: `ADD` task `FROM` date/day time `TO` date/day time <br />
 > Same start and end date cannot be used for this format. If a same day event is required, use one day event format. <br>
 > Without specified start or end time, start and/or end time will be automatically assigned as:
@@ -407,6 +407,7 @@ Format: `EXIT`
 * **Delete an existing task**  <br>
   `DELETE INDEX` <br>
   `DELETE TASKNAME` <br>
+
    e.g. `DELETE 3`
 
 * **Clear all tasks in current list**  <br>
@@ -419,15 +420,18 @@ Format: `EXIT`
 
 * **Indicate incomplete task as completed**  <br>
   `MARK INDEX` <br>
+
    e.g. `MARK 3`
 
 * **Indicate completed task as incomplete** <br>
   `UNMARK INDEX` <br>
+
    e.g. `UNMARK 3`
 
 * **List all uncompleted task** <br>
   `LIST` <br>
   `LIST date/day` <br>
+
   e.g. LIST thursday
 
 * **List all completed task** <br> 
@@ -435,6 +439,8 @@ Format: `EXIT`
 
 * **Recur an existing task** <br>
   `RECUR TASKINDEX NUMBEROFTIMES INTERVAL` <br>
+  >Intervals : Days,Weeks,Months,Years
+
 e.g. `RECUR 1 3 weeks` (Recur task at index 1 every week for next 3 weeks)
 
 * **Undo a command** : `UNDO` <br>
