@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [List tasks](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#23-listing-tasks-by-type--list-list_type)<br>
    * [Edit tags](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#25-editing-a-task--edit)<br>
 * **Code written**: [[functional code](../collated/main/A0139872R.md)][[test code](../collated/test/A0139872R.md)]<br>
-* **Other major contributions:** <br>
+* **Other major contributions:** Sample test data <br>
 
 
 -----
@@ -63,7 +63,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Redo](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#210-redoing-previous-step--redo)<br>
    * [Add special tags](https://github.com/CS2103JAN2017-T16-B3/main/blob/master/docs/UserGuide.md#22-adding-a-task--add)<br>
 * **Code written**: [[functional code](../collated/main/A0139845R.md)][[test code](../collated/test/A0139845R.md)]<br>
-* **Other major contributions:** Testing <br>
+* **Other major contributions:** setting up Travis build, Testing, Test script <br>
 
 
 -----
