@@ -42,11 +42,17 @@ By : `Team CS2103JAN2017-F11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
 ### 2.1. Viewing help : `help`
 
 Shows information about how to use Yesterday's Tomorrow.
+The page is a real-time html version of this file.
 Format: `help`
+Hotkey: `CTRL+H`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+### 2.2. Opening the theme manager : `theme`
 
-### 2.2. Adding a task: `add`
+Displays the theme manager of the program.
+Format: `theme`
+Hotkey: `CTRL+T`
+
+### 2.3. Adding a task: `add`
 
 Adds a task to the task list<br>
 Format: `add TASK_NAME [from START TIME] [to END TIME] [in GROUP]`
@@ -62,28 +68,28 @@ Examples:
 * **Task with deadline**: `add CS2013 assignment from Monday in study`
 * **Floating task**: `add CS2013 assignment in study`
 
-### 2.3. Listing all tasks : `list`
+### 2.4. Listing all tasks : `list`
 
 Shows a list of all tasks (**completed** or **incompleted**).<br>
 Format: `list`
 
 > The task list will be ordered from earliest to latest end date.
 
-### 2.4. Listing complete tasks : `lc`
+### 2.5. Listing complete tasks : `lc`
 
 Shows a list of all **completed** tasks.<br>
 Format: `lc`
 
 > The task list will be ordered from earliest to latest end date.
 
-### 2.5. Listing incomplete tasks : `li`
+### 2.6. Listing incomplete tasks : `li`
 
 Shows a list of all **incomplete** tasks.<br>
 Format: `li`
 
 > The task list will be ordered from earliest to latest end date.
 
-### 2.6. Editing a task : `edit`
+### 2.7. Editing a task : `edit`
 
 Edits an existing task in the task list.<br>
 Format: `edit INDEX PARAMETER NEW_VALUE` <br>
@@ -100,7 +106,7 @@ Examples:
 * `edit 2 g/weekend`<br>
   Edits the group of the 2nd task to "weekend".
 
-### 2.7. Marking a task as complete : `mark`
+### 2.8. Marking a task as complete : `mark`
 
 Changes the status of one task to **complete**.
 Format: `mark INDEX` <br>
@@ -112,7 +118,7 @@ Examples:
 * `mark 1`<br>
   Marks the 1st task as completed.
   
-### 2.8. Marking a task as incomplete : `unmark`
+### 2.9. Marking a task as incomplete : `unmark`
 
 Marks a task in current task list as incomplete.
 Format: `unmark INDEX` <br>
@@ -124,7 +130,7 @@ Examples:
 * `unmark 1`<br>
   Marks the 1st task as incomplete.
 
-### 2.9. Deleting a task : `delete`
+### 2.10. Deleting a task : `delete`
 
 Deletes the specified task. Reversible with `undo` <br>
 Format: `delete INDEX`
@@ -142,7 +148,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
   
-### 2.10. Clear all tasks : `clear`
+### 2.11. Clear all tasks : `clear`
 
 Clear all tasks or only completed task in the list. <br>
 Format: `clear [KEYWORD]`
@@ -158,7 +164,7 @@ Examples:
   `clear complete`<br>
   Clear all completed tasks.
 
-### 2.11. Finding all tasks containing keyword in their task name: `find`
+### 2.12. Finding all tasks containing keyword in their task name: `find`
 
 Finds tasks whose name contain any of the given keywords.<br>
 Format: `find KEYWORD`
@@ -177,30 +183,83 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.12. Undo : `undo`
+### 2.13. Undo : `undo`
 
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
 
-### 2.13. Redo : `redo`
+### 2.14. Redo : `redo`
 
 Does the undo function again. This command will return the program to the state it was in before the previous undo action was executed<br>
 Format: `redo`
 
-### 2.14. Exiting the program : `exit`
+### 2.15. Exiting the program : `exit`
 
 Exits the program.<br>
-Format: `exit`, `CTRL+Q`
+Format: `exit`
+Hotkey: `CTRL+Q`
 
-### 2.15. Saving the data
-Yesterday's Tomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+### 2.16. Saving data
+
+Prompts a new window to select a file to save, and all further changes are saved to this file.
+Hotkey: `CTRL+S`
+
+### 2.16. Opening data
+
+Prompts a new window to select a file to load from, and all further changes are saved to this file.
+Hotkey: `CTRL+L`
+
+### 2.16. Exporting data
+
+Prompts a new window to select a file to save the current data to.
+Hotkey: `CTRL+E`
+
+### 2.16. Importing data
+
+Prompts a new window to select a file to import data from. 
+This adds any new tasks to the current file, and updates any with the same name.
+Hotkey: `CTRL+I`
+
+### 2.17 Hotkeys
+
+* `CTRL+S` - Save As
+* `CTRL+L` - Open
+* `CTRL+E` - Export
+* `CTRL+I` - Import
+* `CTRL+Q` - Exit
+* `CTRL+H` - Help
+* `CTRL+T` - Theme Manager
+* `ENTER` - In the Help and Theme Manager windows, closes them
+* `UP`, DOWN` In the theme manager window to cycle between themes
+
+### 2.18 Data Initialization
+Upon starting for the first time, the program randomly generates and displays 50 tasks.
+Upon saving, loading, or modifying the data, the program saves the file location and loads this on startup if found.
+
+### 2.19 Themes
+YTomorrow has a built in theme manager that displays choosable css themes for the program and sets the selected one.
+Hotkey: `CTRL+T`
+
+### 2.20 Clearing Data 
+
+Command clears all tasks that are either:
+* `clear all`: all tasks
+* `clear passed`: all tasks past deadline
+* `clear complete`: all completed tasks
+Format: `clear [all/complete/passed]`
+
+### 2.21 Completion Indication
+
+Whether a task is complete or not is indicated by a light green or red border around the task, respectively.
+
+### 2.22 Past Deadline Indication
+
+A task's deadline has passed when the task's background is red.
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with
-       the file that contains the data of your previous Yesterday's Tomorrow folder.
+**A**: Install the app in the other computer and ask the program to load the transferred file.
  **Q**: I found a bug in the program, how do I report it?<br>
  **A**: Please create a new issue via this [link](https://github.com/CS2103JAN2017-T11-B4/main/issues) with a detailed title and description. Please also include [BUG] in the beginning of the title.
 
@@ -208,13 +267,15 @@ There is no need to save manually.
 **A**: Please feel free to open a pull request with implementation of new features. Our only request is that you review the [developer guide](https://github.com/CS2103JAN2017-T11-B4/main/blob/developer-guide/docs/DeveloperGuide.md) and abide to all the requirements.
 
 **Q**: Is it possible for me to change the appearance of the application?<br>
-**A**: At the moment, there are no ways to edit the theme of the application.
-
+**A**: Yes, using the theme manager via the `theme` command or `CTRL+T`.
 
 ## 4. Command Summary
 
 * **Help**: `help` <br>
-  e.g. `help`
+  e.g. `help`, `CTRL+H`
+  
+  **Theme**: `theme` <br>
+  e.g. `theme`, `CTRL+T`
 
 * **Add**  `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
   e.g. `add CS2103 assignment from Feb 3 to Apr 6 in study` <br>
@@ -230,6 +291,15 @@ There is no need to save manually.
   
 * **List Incomplete**: `li` <br>
   e.g. `li`
+
+* **Clear All**: `clear all` <br>
+  e.g. `clear all`
+  
+* **Clear Complete**: `clear complete` <br>
+  e.g. `clear all`
+  
+* **Clear Passed**: `clear passed` <br>
+  e.g. `clear passed`
 
 * **Edit**: `edit INDEX PARAMETER NEW_VALUE` <br>
   e.g. `edit 2 g/learning`
