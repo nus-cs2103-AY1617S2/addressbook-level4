@@ -72,7 +72,7 @@ public class StorageManagerTest {
 
     @Test
     public void handleTaskListChangedEvent_exceptionThrown_eventRaised() throws IOException {
-        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        // Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"),
                 new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
@@ -95,6 +95,5 @@ public class StorageManagerTest {
             throw new IOException("dummy exception");
         }
     }
-
 
 }

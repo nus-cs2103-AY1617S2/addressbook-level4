@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <tasks>
+        <name>Read notes</name>
+        <status>Undone</status>
+        <tagged>study</tagged>
+    </tasks>
+    <tags>
+        <name>study</name>
+    </tags>
+</tasklist>
