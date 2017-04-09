@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<String> commandStack;
     private Stack<TaskList> undoneStatus;
     private Stack<String> undoneCommand;
+    private TaskList statusAfterUndo;
     //@@author
 
     /**
@@ -147,6 +148,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void setStatusAfterUndo(ReadOnlyTaskList statusAfterUndo) {
+        TaskList theStatusAfterUndo = new TaskList(statusAfterUndo);
+        this.statusAfterUndo = theStatusAfterUndo;
+    }
+
+    @Override
     public void popUndoneStatus() {
         TaskList latestUndoneStatus = undoneStatus.pop();
         statusStack.push(latestUndoneStatus);
@@ -181,6 +188,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public TaskList getPrevStatus() {
         return statusStack.peek();
+    }
+
+    @Override
+    public TaskList getStatusAfterUndo() {
+        return this.statusAfterUndo;
     }
    //@@author
 

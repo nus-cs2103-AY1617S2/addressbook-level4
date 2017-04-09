@@ -18,6 +18,7 @@ public class UndoCommand extends Command {
             model.popCurrentStatus();
             ReadOnlyTaskList prevStatus = model.getPrevStatus();
             model.resetData(prevStatus);
+            model.setStatusAfterUndo(prevStatus);
             return new CommandResult(UNDONE_SUCCESSFUL);
         }
     }
