@@ -86,7 +86,7 @@ Format: `delete INDEX [MORE INDECIES]`
   `INDEX` must be an exact match in order for the function to work.
 
 Example:
-* `delete 2`<br>
+`delete 2`<br>
 <img src="images/delete.png" width="600">
 
 ## Editing a Task : `edit`
