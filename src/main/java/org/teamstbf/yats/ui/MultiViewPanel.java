@@ -35,7 +35,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String FXMLPERSON = "PersonListCard.fxml";
+	private static final String FXMLPERSON = "PersonListCardDone.fxml";
 
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private ObservableList<ReadOnlyEvent> calendarList;
