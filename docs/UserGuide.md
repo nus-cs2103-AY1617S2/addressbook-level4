@@ -153,6 +153,14 @@ E.g. **`add`** `project proposal by 13 apr 2pm`<br>
 Format: **`add`** `<task_name> from <start date and time> to <end date and time>` <br>
 E.g. **`add`** `sushi restaurant promotion from 25 apr 10am to 28 apr 9pm`<br>
 
+#### To add a _recurring_ task:
+
+A recurring task is a task that has both start date and end date and has a specified recur interval<br>
+Recurring tasks are _auto populated based on the specified recur interval_. <br>
+
+Format: TODO <br>
+E.g. TODO<br>
+
 <img src="images/UiAddCommand.png" width="600"><br>
 _Figure 3.2.1. Add Command_
 
@@ -198,7 +206,7 @@ For advanced users: **`l`** `<filter>` <br>
 
 Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`. 
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.
 Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
 
 > **`find`** can also be used to look for dates, time and tags<br>
@@ -239,10 +247,13 @@ Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <tas
 E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 You can edit more task details for your task concurrently using the above format.<br>
 
->**Special Note**<br>
+**Special Notes**<br>
 >`<task_detail>` can be used interchangeably with no special characters or initials for better convenience <br>
 >E.g. `start_date` can be replaced with `startdate` or `sd`<br>
 >`recur_interval` can be replaced with `recurinterval` or `ri`<br>
+
+>Tasks are non editable if they are part of a recurring task, however the<br>master recurring task (denoted with an R in the task list panel) can be edited.<br>
+><img src="images/MasterRecur.png" width="200"><br>
 
 
 <img src="images/UiEditCommand.png" width="600"><br>
@@ -264,6 +275,10 @@ An example of a task that you might want to _delete_:
 
 Format: **`delete`** `<task_index>` <br>
 To delete all your tasks, you can type in **`clear`** instead. <br>
+
+**Special Note**<br>
+>Tasks can not be deleted if they are part of a recurring task, however the<br>master recurring task (denoted with an R in the task list panel) can be deleted.<br>
+><img src="images/MasterRecur.png" width="200"><br>
 
 For advanced users: **`d`** `<task_index>` <br>
 

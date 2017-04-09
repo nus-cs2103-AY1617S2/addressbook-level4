@@ -15,6 +15,7 @@
 	* **Events** (i.e. have a start time and end time)
 	* **Deadlines** (tasks that have to be done before a specific deadline)
 	* **Floating Tasks** (tasks without specific times)
+	* **Recurring Tasks** (tasks that will auto populate base on the recur interval)
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -31,5 +32,13 @@
 
 * The original source of this code comes from the SE-EDU initiative at https://github.com/se-edu/.
 
+* The project requires the use of some 3rd party open-source libraries, listed below:<br>
+	* [PrettyTime](http://www.ocpsoft.org/prettytime/)<br>
+	* [PrettyTime-NLP](http://ocpsoft.org/prettytime/nlp/)<br>
+	* [JKeyMaster](https://github.com/tulskiy/jkeymaster)<br>
+	* [Natty](https://github.com/joestelmach/natty)<br>
+	* [Guava](https://github.com/google/guava)<br>
+	* [Jackson](https://github.com/FasterXML/jackson)<br>
+	* [ControlsFX](http://fxexperience.com/controlsfx/)<br>
 
 #### Licence : [MIT](LICENSE)

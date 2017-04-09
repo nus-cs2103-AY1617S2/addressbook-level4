@@ -1,6 +1,7 @@
 //@@author A0139925U
 package guitests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -78,6 +79,29 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    @Test
+    public void complete_recurringTask_success() {
+        commandBox.runCommand("clear");
+        commandBox.runCommand("add test from 9 april to 16 april");
+        commandBox.runCommand("edit 1 change recurinterval to day");
+        commandBox.runCommand("list");
+
+        commandBox.runCommand("complete 1");
+        assertTaskListHits(8);
+
+        commandBox.runCommand("complete 1,2,3");
+        assertTaskListHits(5);
+
+        commandBox.runCommand("complete 3,4");
+        assertTaskListHits(3);
+
+        commandBox.runCommand("complete 3");
+        assertTaskListHits(0);
+
+        commandBox.runCommand("list completed");
+        assertTaskListHits(9);
+    }
+
     //@@author A0142255M
     @Test
     public void complete_shortCommand_success() {
@@ -100,5 +124,12 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
             successMessage += expectedHits[i].toString();
         }
         assertResultMessage(String.format(CompleteCommand.MESSAGE_COMPLETED_TASK_SUCCESS, successMessage));
+    }
+
+    /**
+     * Checks whether the number of tasks in taskListPanel is same as {@code expectedHits}
+     */
+    private void assertTaskListHits(int expectedHits) {
+        assertEquals(taskListPanel.getNumberOfTasks(), expectedHits);
     }
 }

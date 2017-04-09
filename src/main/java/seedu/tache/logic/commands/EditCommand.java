@@ -99,7 +99,10 @@ public class EditCommand extends Command implements Undoable {
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
+     * @param {@code taskToEdit}, task that needs editing
+     * @param {@code editTaskDescriptor}, edit details
      * @throws IllegalValueException if date or time could not be parsed
+     * or if user is trying to edit a non-recurring task into a recurring task without both start date and end date
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
                                              EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
@@ -171,6 +174,14 @@ public class EditCommand extends Command implements Undoable {
 
     }
 
+    /**
+     * Check if edit causes a floating task to become non-floating with only a start date and no end date
+     * @param {@code editTaskDescriptor}, edit details
+     * @param {@code updatedEndDateTime}, the final end date that will be in the new edited task
+     * @param {@code updatedStartDateTime}, the final start date that will be in the new edited task
+     * @throws IllegalValueException if date or time could not be parsed
+     * or if user is trying to edit a non-recurring task into a recurring task without both start date and end date
+     */
     private static Optional<DateTime> checkFloatingToNonFloatingCase(EditTaskDescriptor editTaskDescriptor,
                                 Optional<DateTime> updatedStartDateTime, Optional<DateTime> updatedEndDateTime)
                                 throws IllegalValueException {
@@ -184,6 +195,12 @@ public class EditCommand extends Command implements Undoable {
         return updatedEndDateTime;
     }
 
+    /**
+     * Check if start date < end date
+     * @param {@code updatedEndDateTime}, the final end date that will be in the new edited task
+     * @param {@code updatedStartDateTime}, the final start date that will be in the new edited task
+     * @throws IllegalValueException if start date > end date
+     */
     private static void checkValidDateRange(Optional<DateTime> updatedStartDateTime,
                                                 Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
         if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
@@ -193,6 +210,13 @@ public class EditCommand extends Command implements Undoable {
         }
     }
 
+    /**
+     * If overdue task date's end date is changed to today and end date < now,
+     * then end time would be overwritten to 2359hrs
+     * @param {@code updatedEndDateTime}, the final end date that will be in the new edited task
+     * @param {@code editTaskDescriptor}, edit details
+     * @throws IllegalValueException if date or time could not be parsed
+     */
     private static void checkSpecialCase(EditTaskDescriptor editTaskDescriptor,
                             Optional<DateTime> updatedEndDateTime) throws IllegalValueException {
         //Special case End Date -> Today will result in a default timing of 2359 instead of 0000

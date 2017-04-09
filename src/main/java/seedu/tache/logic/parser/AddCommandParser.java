@@ -2,6 +2,7 @@ package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX;
 
 import java.util.Deque;
 import java.util.HashSet;
@@ -12,7 +13,8 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.AddCommand;
 import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.IncorrectCommand;
-import seedu.tache.logic.parser.ParserUtil.DateTimeType;
+import seedu.tache.logic.parser.ParserUtil.PossibleDateTime.DateTimeType;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
 
 //@@author A0150120H
@@ -42,9 +44,19 @@ public class AddCommandParser {
         Deque<PossibleDateTime> possibleDateTimes = ParserUtil.parseDateTimeIdentifiers(taskWithoutTags);
         PossibleDateTime startDateTime = null;
         PossibleDateTime endDateTime = null;
+        PossibleDateTime recurInterval = null;
         while (!possibleDateTimes.isEmpty()) {
             PossibleDateTime current = possibleDateTimes.pop();
-            if (!ParserUtil.canParse(current.data)) {
+            if (current.type == DateTimeType.RECURRENCE && recurInterval == null) {
+                recurInterval = current;
+            } else if (current.type == DateTimeType.RECURRENCE_PREFIX && recurInterval == null) {
+                try {
+                    current.recurInterval = ParserUtil.parseStringToRecurInterval(current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
+                    recurInterval = current;
+                } catch (IllegalValueException ex) {
+                    continue;
+                }
+            } else if (!ParserUtil.canParse(current.data)) {
                 continue;
             } else if (current.type == DateTimeType.END && endDateTime == null) {
                 endDateTime = current;
@@ -61,26 +73,27 @@ public class AddCommandParser {
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
             }
+        } else if (startDateTime == null && recurInterval != null){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else {
-            int startOfDateTimeIndex = endDateTime.startIndex;
-            if (startDateTime != null) {
-                startOfDateTimeIndex = Math.min(startOfDateTimeIndex, startDateTime.startIndex);
-            }
-            StringBuilder sb = new StringBuilder();
-            String[] taskNameSegments = taskWithoutTags.split(" ");
-            for (int i = 0; i < startOfDateTimeIndex; i++) {
-                sb.append(taskNameSegments[i]).append(" ");
-            }
-            String taskName = sb.toString();
+            String taskName = taskWithoutTags;
+
             Optional<String> endDateTimeStr = Optional.of(endDateTime.data);
+            taskName = ParserUtil.removeLast(taskName, endDateTime.data);
             Optional<String> startDateTimeStr;
             if (startDateTime != null) {
                 startDateTimeStr = Optional.of(startDateTime.data);
+                taskName = ParserUtil.removeLast(taskName, startDateTime.data);
             } else {
                 startDateTimeStr = Optional.empty();
             }
+            Optional<RecurInterval> parsedRecurInterval = Optional.empty();
+            if (recurInterval != null) {
+                parsedRecurInterval = Optional.of(recurInterval.recurInterval);
+                taskName = ParserUtil.removeLast(taskName, recurInterval.data);
+            }
             try {
-                return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet, Optional.empty());
+                return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet, parsedRecurInterval);
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
             }

@@ -275,6 +275,11 @@ Given below is the [Sequence Diagram](#sequence-diagram) for interactions within
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 3.3.2 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+Given below is the [Sequence Diagram](#sequence-diagram) for interactions within the `Logic` component for the
+`execute("undo")` API call.<br>
+<img src="images/UndoSdForLogic.png" width="800"><br>
+_Figure 3.3.3 : Interactions Inside the Logic Component for the `undo` Command_
+
 ### 3.4. Model Component
 
 **Author:** Lim Shun Xian
