@@ -14,193 +14,193 @@ import org.teamstbf.yats.model.tag.UniqueTagList;
  */
 public class TestEvent implements ReadOnlyEvent {
 
-	private Title name;
-	private Schedule startTime;
-	private Schedule endTime;
-	private Schedule deadline;
-	private Description description;
-	private IsDone isDone;
-	private Location location;
-	private UniqueTagList tags;
-	private boolean isRecurring;
-	private Recurrence recurrence;
-	private String hours;
-	private String minutes;
-	
-	public TestEvent() {
-		tags = new UniqueTagList();
-	}
+    private Title name;
+    private Schedule startTime;
+    private Schedule endTime;
+    private Schedule deadline;
+    private Description description;
+    private IsDone isDone;
+    private Location location;
+    private UniqueTagList tags;
+    private boolean isRecurring;
+    private Recurrence recurrence;
+    private String hours;
+    private String minutes;
 
-	/**
-	 * Creates a copy of {@code personToCopy}.
-	 */
-	public TestEvent(TestEvent eventToCopy) {
-		this.name = eventToCopy.getTitle();
-		this.location = eventToCopy.getLocation();
-		this.startTime = eventToCopy.getStartTime();
-		this.endTime = eventToCopy.getEndTime();
-		this.deadline = eventToCopy.getEndTime();
-		this.description = eventToCopy.getDescription();
-		this.tags = eventToCopy.getTags();
-		this.isDone = eventToCopy.getIsDone();
-	}
+    public TestEvent() {
+        tags = new UniqueTagList();
+    }
 
-	public String getAddCommand() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("add " + this.getTitle().fullName + " ");
-		sb.append("-s " + this.getStartTime().toString() + " ");
-		sb.append("-e " + this.getEndTime().toString() + " ");
-		sb.append("-by " + this.getDeadline().toString() + "");
-		sb.append("-l " + this.getLocation().value + " ");
-		sb.append("-d " + this.getDescription().value + " ");
-		this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
-		return sb.toString();
-	}
-	
-	public String getScheduleCommand() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("schedule " + this.getTitle().fullName + " ");
-		sb.append("-l " + this.getLocation().value + " ");
-		sb.append("-d " + this.getDescription().value + " ");
-		sb.append("-h " + this.getHours() + " ");
-		sb.append("-m " + this.getMinutes() + " ");
-		this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
-		return sb.toString();
-	}
+    /**
+     * Creates a copy of {@code personToCopy}.
+     */
+    public TestEvent(TestEvent eventToCopy) {
+        this.name = eventToCopy.getTitle();
+        this.location = eventToCopy.getLocation();
+        this.startTime = eventToCopy.getStartTime();
+        this.endTime = eventToCopy.getEndTime();
+        this.deadline = eventToCopy.getEndTime();
+        this.description = eventToCopy.getDescription();
+        this.tags = eventToCopy.getTags();
+        this.isDone = eventToCopy.getIsDone();
+    }
 
-	private String getMinutes() {
-		return this.hours;
-	}
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getTitle().fullName + " ");
+        sb.append("-s " + this.getStartTime().toString() + " ");
+        sb.append("-e " + this.getEndTime().toString() + " ");
+        sb.append("-by " + this.getDeadline().toString() + "");
+        sb.append("-l " + this.getLocation().value + " ");
+        sb.append("-d " + this.getDescription().value + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
+        return sb.toString();
+    }
 
-	private String getHours() {
-		return this.minutes;
-	}
+    public String getScheduleCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("schedule " + this.getTitle().fullName + " ");
+        sb.append("-l " + this.getLocation().value + " ");
+        sb.append("-d " + this.getDescription().value + " ");
+        sb.append("-h " + this.getHours() + " ");
+        sb.append("-m " + this.getMinutes() + " ");
+        this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
+        return sb.toString();
+    }
 
-	@Override
-	public Description getDescription() {
-		return description;
-	}
+    private String getMinutes() {
+        return this.hours;
+    }
 
-	@Override
-	public Schedule getEndTime() {
-		return endTime;
-	}
+    private String getHours() {
+        return this.minutes;
+    }
 
-	@Override
-	public Location getLocation() {
-		return location;
-	}
+    @Override
+    public Description getDescription() {
+        return description;
+    }
 
-	@Override
-	public Schedule getStartTime() {
-		return startTime;
-	}
+    @Override
+    public Schedule getEndTime() {
+        return endTime;
+    }
 
-	@Override
-	public UniqueTagList getTags() {
-		return tags;
-	}
+    @Override
+    public Location getLocation() {
+        return location;
+    }
 
-	@Override
-	public Title getTitle() {
-		return name;
-	}
+    @Override
+    public Schedule getStartTime() {
+        return startTime;
+    }
 
-	public void setDescription(Description description) {
-		this.description = description;
-	}
+    @Override
+    public UniqueTagList getTags() {
+        return tags;
+    }
 
-	public void setEndTime(Schedule schedule) {
-		this.endTime = schedule;
-	}
+    @Override
+    public Title getTitle() {
+        return name;
+    }
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+    public void setDescription(Description description) {
+        this.description = description;
+    }
 
-	public void setStartTime(Schedule schedule) {
-		this.startTime = schedule;
-	}
+    public void setEndTime(Schedule schedule) {
+        this.endTime = schedule;
+    }
 
-	public void setTags(UniqueTagList tags) {
-		this.tags = tags;
-	}
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
-	public void setTitle(Title name) {
-		this.name = name;
-	}
+    public void setStartTime(Schedule schedule) {
+        this.startTime = schedule;
+    }
 
-	public void setIsDone(IsDone isDone) {
-		this.isDone = isDone;
-	}
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
 
-	@Override
-	public String toString() {
-		return getAsText();
-	}
+    public void setTitle(Title name) {
+        this.name = name;
+    }
 
-	@Override
-	public IsDone getIsDone() {
-		return isDone;
-	}
+    public void setIsDone(IsDone isDone) {
+        this.isDone = isDone;
+    }
 
-	@Override
-	public void markDone() {
-		isDone.markDone();
-	}
+    @Override
+    public String toString() {
+        return getAsText();
+    }
 
-	@Override
-	public Schedule getDeadline() {
-		return deadline;
-	}
+    @Override
+    public IsDone getIsDone() {
+        return isDone;
+    }
 
-	@Override
-	public boolean hasDeadline() {
-		if (this.deadline.toString().equals("")) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public void markDone() {
+        isDone.markDone();
+    }
 
-	@Override
-	public boolean hasStartAndEndTime() {
-		if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public Schedule getDeadline() {
+        return deadline;
+    }
 
-	@Override
-	public boolean hasStartOrEndTime() {
-		if (!this.startTime.toString().equals("") || !this.endTime.toString().equals("")) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean hasDeadline() {
+        if (this.deadline.toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
 
-	public void setDeadline(Schedule schedule) {
-		this.deadline = schedule;
-	}
+    @Override
+    public boolean hasStartAndEndTime() {
+        if (this.startTime.toString().equals("") || this.endTime.toString().equals("")) {
+            return false;
+        }
+        return true;
+    }
 
-	public void setRecurrence(Recurrence recur) {
-		this.recurrence = recur;
-	}
+    @Override
+    public boolean hasStartOrEndTime() {
+        if (!this.startTime.toString().equals("") || !this.endTime.toString().equals("")) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public Recurrence getRecurrence() {
-		return this.recurrence;
-	}
+    public void setDeadline(Schedule schedule) {
+        this.deadline = schedule;
+    }
 
-	@Override
-	public boolean isRecurring() {
-		return this.isRecurring;
-	}
+    public void setRecurrence(Recurrence recur) {
+        this.recurrence = recur;
+    }
 
-	public void setHours(String myHours) {
-		this.hours = myHours;
-	}
-	
-	public void setMinutes(String myMinutes) {
-		this.minutes = myMinutes;
-	}
+    @Override
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
+
+    @Override
+    public boolean isRecurring() {
+        return this.isRecurring;
+    }
+
+    public void setHours(String myHours) {
+        this.hours = myHours;
+    }
+
+    public void setMinutes(String myMinutes) {
+        this.minutes = myMinutes;
+    }
 }
