@@ -16,6 +16,7 @@ public class PathCommandTest extends TaskManagerGuiTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        commandBox.runCommand("path TaskManager.xml");
         commandBox.runCommand("showcase 35");
         commandBox.runCommand("path TaskManager1.xml");
         commandBox.runCommand("showcase 25");
