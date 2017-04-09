@@ -8,5 +8,5 @@
 |	Intention	|	Input command	|	Expected result	|
 |	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
 | show help | help | the user guide is displayed in a new window |
-| add floating task | add Write english essay d/1000 words | task is added and is automatically selected in the list |
+| add floating task | `add Write english essay d/1000 words` | task is added and is automatically selected in the list |
 | add task | add Prepare for maths test e/next week | task with end date is added  and automatically selected |
