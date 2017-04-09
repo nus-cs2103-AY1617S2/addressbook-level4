@@ -49,7 +49,6 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0139961U.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0139961U.md)]
 * Other major contributions:
   * Did parts of refactoring from AddressBook to Taskmanager [[#65](https://github.com/CS2103JAN2017-T09-B4/main/pull/65)]
-  * Refined code quality to improve Codacy from 'B' to 'A' [[commit](https://github.com/CS2103JAN2017-T09-B4/main/commit/72b13ca729c4f0c643ae5355e0490c41408d8ca1)]
   * Enhanced `list` command with `list today`, `list this week` and `list overdue` functions [[#150](https://github.com/CS2103JAN2017-T09-B4/main/pull/150)] [[commit](https://github.com/CS2103JAN2017-T09-B4/main/commit/d823324a9ee20a8fef22b5ba78ea0dc2db851f3e)]
   * Implemented sorting of tasks by chronological order [[#214](https://github.com/CS2103JAN2017-T09-B4/main/pull/214)]
   * Implemented shorter commands so that advanced user can type faster [[#216](https://github.com/CS2103JAN2017-T09-B4/main/pull/216)]
