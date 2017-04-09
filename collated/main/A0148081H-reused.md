@@ -1,0 +1,26 @@
+# A0148081H-reused
+###### /java/seedu/opus/logic/parser/SortCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new SortCommand object
+ */
+public class SortCommandParser {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns an SortCommand object for execution.
+     */
+    public Command parse(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final String keywordSet = keywords[0];
+        return new SortCommand(keywordSet);
+    }
+
+}
+```
