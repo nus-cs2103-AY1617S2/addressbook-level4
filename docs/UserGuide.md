@@ -61,6 +61,7 @@ Format: `add TASK_NAME [p/PRIORITY_LEVEL] [sd/START_TIMEDATE] [ed/END_TIMEDATE] 
 > * To add tasks with deadlines, simply specify the end timing.
 > * To add recurring tasks, see section 2.2.1.
 > * Any of these 3 types of tasks can have 0 or more tags.
+> * All fields are optional, except for description.
 
 Examples:
 
@@ -133,7 +134,8 @@ Examples:
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
-  Format: `editthis INDEX [TASK_NAME] [p/PRIORITY] [sd/START_TIMEDATE] [ed/END_TIMEDATE]...`
+
+  Format: `editthis INDEX [NAME] p/PRIORITY sd/START_TIMEDATE ed/END_TIMEDATE...`
 
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
@@ -155,8 +157,7 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `assignemnt` will match `do algorightm assignment`
-> * Note: `find` does not search on Tags a given task may contain.
+    e.g. `assignment` will match `do algorithm assignment`
 
 Examples:
 
@@ -333,7 +334,7 @@ the implementation of such tasks. A few things to note about how to use this fea
 
 ## 5. Command Summary
 
-* **Add**  `add TASK_NAME p/1 sd/START_DATE ed/DUE_DATE [t/TAG]...` <br>
+* **Add**  `add TASK_NAME p/1 sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...` <br>
    e.g. `add Study for midterm p/1 sd/04/03/2017 ed/04/04/2017 t/study t/midterm`
 
 * **Clear** : `clear`
