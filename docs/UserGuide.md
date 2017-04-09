@@ -439,6 +439,9 @@ Click on `Theme` on the menu bar to change the look and feel of Doist! For now, 
 <img src="images/changingtheme.png" width="300"> <br>
 *Figure 3.13.1: Changing the theme* <br>
 
+<img src="images/Ui2.png" width="500"> <br>
+*Figure 3.13.2: Doist Dark Theme* <br>
+
 ### 3.14 Saving the data
 
 Doist will automatically save! There is no need to save manually.
