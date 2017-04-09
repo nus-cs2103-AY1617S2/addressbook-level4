@@ -1,7 +1,5 @@
 # Test Script
 
-A document explaining the steps to perform manual testing (i.e. manual scripted testing), starting with how to load the sample data. Should cover all functionality of the product. Should specify the command to type and the expected result (screenshots not required). Limit the test cases to about 20 minutes worth of testing.
-
 ## Step 1: Load the data
 SampleData.xml will already be loaded in the .jar file when you open it.
 
