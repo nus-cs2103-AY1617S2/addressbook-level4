@@ -12,7 +12,6 @@ public class RecurUtil {
      * Checks if a recurring status is valid with at least a start date and/or
      * due date present in a task. Floating tasks should not have a recurring
      * status.
-     * 
      * @param task
      * @return false if the task is a floating task
      * @return true otherwise

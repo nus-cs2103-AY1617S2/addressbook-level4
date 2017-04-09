@@ -129,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws DateException if the dates are invalid (start date after due date)
      */
     @Override
-    public synchronized void addTask(Task task) 
+    public synchronized void addTask(Task task)
             throws UniqueTaskList.DuplicateTaskException, DateException, RecurException {
         checkTaskDate(task);
         checkRecur(task);
