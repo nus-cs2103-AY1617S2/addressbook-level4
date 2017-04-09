@@ -23,6 +23,5 @@
          </children>
       </HBox>
       <ListView fx:id="eventListView" Style="-fx-background-color:#6eb5c0" prefWidth="340.0" VBox.vgrow="ALWAYS" />
-      
     </children>
 </VBox>
