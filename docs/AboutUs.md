@@ -24,6 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Ang Zhi Yuan](http://github.com/ang-zy)
 <img src="images/ang-zy.jpg" width="150"><br>
+
 * Components in charge of:
 * [Logic](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/DeveloperGuide.md#33-logic-component)
 * Aspects/tools in charge of: Documentation, Markdown Expert <br>
@@ -33,6 +34,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0150120H.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0150120H.md)]
 * Other major contributions:
   * Change Edit Command to edit based on Task object rather than index [[#104](https://github.com/CS2103JAN2017-T09-B4/main/pull/104)]
+  * General refactoring of code [[#260](https://github.com/CS2103JAN2017-T09-B4/main/pull/260)]
+  * Multiple bug fixes
 -----
 
 #### [Lim Shun Xian](http://github.com/Crsytral)
