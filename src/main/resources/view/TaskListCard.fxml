@@ -46,7 +46,7 @@
 						<Insets bottom="5" left="1" right="10" top="5" />
 					</padding>
 					<children>
-						<Label fx:id="startDate" alignment="CENTER_RIGHT" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
+						<Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" wrapText="true" />
 						<Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" wrapText="true" />
 						<Label fx:id="repeat" styleClass="cell_small_label" text="\$repeat" wrapText="true" />
 					</children>

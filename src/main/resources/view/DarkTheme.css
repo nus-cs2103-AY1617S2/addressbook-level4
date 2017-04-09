@@ -31,7 +31,7 @@
 	-fx-background-color: white;
     -fx-font-size: 12.0pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-border-radius: 3.0; 
+    -fx-border-radius: 3.0;
 }
 
 .text-field:focused {
@@ -81,6 +81,9 @@
     -fx-opacity: 1.0;
 }
 
+/*
+ * @@author A0131278H
+ */
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color;
 }
@@ -89,7 +92,6 @@
     -fx-border-color: #d7eff2 #d7eff2 transparent #d7eff2;
     -fx-background-color: transparent, #d7eff2;
     -fx-pref-width: 0.1px
-    
 }
 
 .split-pane {
@@ -97,6 +99,9 @@
     -fx-border-width: 1.0;
     -fx-background-color: #e7f5f7;
 }
+/*
+ * @@author
+ */
 
 .list-cell {
     -fx-label-padding: 0.0 0.0 0.0 0.0;
