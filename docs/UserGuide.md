@@ -168,11 +168,11 @@ Format: `switch WINDOWIDENTIFIER`
 
 Example:
 * `switch 2` <br>
-  Switches the displayed view to 'Today'.
+  Switches the displayed view to `Today`.
 * `switch T` <br>
-  Switches the displayed view to 'Today'.
+  Switches the displayed view to `Today`.
 * You press <kbd>Ctrl</kbd> + <kbd>5</kbd> on the keyboard. <br>
-  Switches the displayed view to 'All'.
+  Switches the displayed view to `All`.
 
 
 [comment]: # (@@author A0127545A)
@@ -196,11 +196,11 @@ Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(da
 Examples:
 
 * `add Do Homework` <br>
-  Adds a task called 'Do Homework'.
+  Adds a task called `Do Homework`.
 * `add Meeting With Boss /from 11-11-2011 17:30 /to 11-11-2011 19:30` <br>
-  Adds a task called 'Meeting With Boss', with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
+  Adds a task called `Meeting With Boss`, with start date 11-11-2011 17:30, and end date to be 11-11-2011 19:30.
 * `add Check Email /by today` <br>
-  Adds a task called 'Check Email', and sets the deadline to be today's date.
+  Adds a task called `Check Email`, and sets the deadline to be today's date.
 
 [comment]: # (@@author A0127545A)
 ### 3.5. Updating a task : `update`
@@ -248,7 +248,7 @@ Examples:
 * `find Assignment Project Tutorial`<br>
   Returns any task having `Assignment`, `Project`, or `Tutorial` in their names or tags.
 * `find school /tag` <br>
-  Returns any task with the word 'school' in the tag name.
+  Returns any task with the word `school` in the tag name.
 
 ### 3.7. Sorting all tasks in a given order: `sort`
 
