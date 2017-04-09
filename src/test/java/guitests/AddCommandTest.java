@@ -44,8 +44,9 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    // @@author A0139520L
     @Test
-    public void add_eventWithClashingTimeSlots_success() {
+    public void addEventWithClashingTimeSlotsSuccess() {
 
         String clashFeedback = "Clash with task: Index ";
 
@@ -104,7 +105,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("UNDO");
         // add non-clashing event on separate day as existing event
         taskToAdd = td.sampleNoClashSeparateDayEvent;
-        assertAddOneDayEventSuccess(taskToAdd, currentList);
+        assertAddOneDayEventWithBufferSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd).getKey();
         assertResultMessage(String.format(AddCommand.MESSAGE_SUCCESS, taskToAdd) + "\n" + "Task added at index: 5");
 
@@ -141,6 +142,35 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     private void assertAddOneDayEventSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getOneDayEventAddCommand());
+
+        // confirm the new card contains the right data
+        if (taskToAdd.isEventTask()) {
+            EventTaskCardHandle addedCard = eventTaskListPanel.navigateToEventTask(taskToAdd.getTaskName().toString());
+            assertMatching(taskToAdd, addedCard);
+        } else {
+            if (taskToAdd.isDeadlineTask()) {
+                DeadlineTaskCardHandle addedCard = deadlineTaskListPanel
+                        .navigateToDeadlineTask(taskToAdd.getTaskName().toString());
+                assertMatching(taskToAdd, addedCard);
+            } else {
+                if (taskToAdd.isFloatingTask()) {
+                    FloatingTaskCardHandle addedCard = floatingTaskListPanel
+                            .navigateToFloatingTask(taskToAdd.getTaskName().toString());
+                    assertMatching(taskToAdd, addedCard);
+                }
+            }
+        }
+
+        // confirm the list now contains all previous tasks plus the new
+        // task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd).getKey();
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+    }
+
+    private void assertAddOneDayEventWithBufferSuccess(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getOneDayEventWithBufferAddCommand());
 
         // confirm the new card contains the right data
         if (taskToAdd.isEventTask()) {

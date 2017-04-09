@@ -122,12 +122,23 @@ public class TestTask implements ReadOnlyTask {
         return sb.toString();
     }
 
+    // @@author A0139520L
     public String getOneDayEventAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("ADD " + this.getTaskName().fullTaskName + " ");
         sb.append("ON " + this.getStartDate().value + " ");
         sb.append(this.getStartTime().value + " ");
         sb.append("TO " + this.getEndTime().value + " ");
+        this.getCategories().asObservableList().stream().forEach(s -> sb.append("CATEGORY " + s.categoryName + " "));
+        return sb.toString();
+    }
+
+    // @@author A0139520L
+    public String getOneDayEventWithBufferAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ADD " + this.getTaskName().fullTaskName + " ");
+        sb.append("ON " + this.getStartDate().value + " ");
+        sb.append(this.getStartTime().value + " ");
         this.getCategories().asObservableList().stream().forEach(s -> sb.append("CATEGORY " + s.categoryName + " "));
         return sb.toString();
     }
@@ -173,6 +184,11 @@ public class TestTask implements ReadOnlyTask {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean isCompletedTask() {
+        return completed;
     }
 
     @Override

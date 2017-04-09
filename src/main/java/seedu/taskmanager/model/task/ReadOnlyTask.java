@@ -101,4 +101,6 @@ public interface ReadOnlyTask {
 
     boolean isWithinStartEndDuration(ReadOnlyTask t);
 
+    boolean isCompletedTask();
+
 }
