@@ -274,7 +274,7 @@ Autocomplete the any command that you have entered in the command box. This appl
 
 > * Example:
 
-`User enters `f` and presses `TAB`, `find` command will appear in the input box.`
+User enters `f` and presses `TAB`, `find` command will appear in the input box.
 
 ### 2.17. Browse previously entered commands
 
