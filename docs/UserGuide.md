@@ -178,7 +178,7 @@ Task data are saved in the hard disk automatically after any command that change
 Command | Format
 -------- | :--------
 help | `help`
-add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
+add | `add TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
 delete | `delete INDEX`
 clear | `clear`
 find | `find NAME`
