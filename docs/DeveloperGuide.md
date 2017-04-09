@@ -466,11 +466,10 @@ Use case ends.
 
 **MSS**
 
-1. User requests to search for a task with a given name
+1. User searches for a task with a given name
 2. Task Manager shows the task
-3. User type in the change
-4. User requests to update/edit the task
-5. Task Manager change the content of the task <br>
+3. User requests to update/edit the task
+4. Task Manager changes the content of the task <br>
 Use case ends.
 
 **Extensions**
@@ -481,7 +480,7 @@ Use case ends.
 
 4a. The given index is invalid
 
-> 3a1. TaskList shows an error message <br>
+> 4a1. TaskList shows an error message <br>
   Use case resumes at step 3
 
 #### Use case: Read task
@@ -505,7 +504,6 @@ Use case ends.
 1. User requests to search for a task with a given name
 2. Task Manager shows the task
 3. User type in the index of the task he/she wants to mark as complete
-3. User request to complete a task
 4. Task Manager marks the task as completed <br>
 Use case ends.
 
@@ -528,19 +526,12 @@ Use case ends.
 2. Task Manager shows all the tasks <br>
 Use case ends.
 
-**Extensions**
-
-2a. no tasks exist
-> 2a1. Task Manager shows an error message
-> Use case ends
-
 #### Use case: List a task
 
 **MSS**
 
 1. User type in the index of the task
-2. User request to see the content of the task
-3. Task Manager shows the content of the task <br>
+2. Task Manager shows the content of the task <br>
 Use case ends.
 
 **Extensions**
@@ -554,9 +545,7 @@ Use case ends.
 **MSS**
 
 1. User types file location
-2. Task Manager verifies file location
-3. Task Manager saves tasks in specified save file
-4. Task Manager sets this save file as default <br>
+2. Task Manager saves tasks in specified save file <br>
 Use case ends.
 
 **Extensions**
@@ -565,8 +554,8 @@ Use case ends.
 > 2a1. Task Manager shows an error message
 > Use case ends.
 
-3a. The file path does not end with a file name
-> 3a1. Task Manager shows an error message
+2b. The file path does not end with a file name
+> 2b1. Task Manager shows an error message
 > Use case ends.
 
 #### Use case: Load tasks from file
@@ -574,9 +563,7 @@ Use case ends.
 **MSS**
 
 1. User types file location
-2. Task Manager verifies file location
-3. Task Manager loads task data from load file
-4. Task Manager sets this load file as default <br>
+2. Task Manager loads task data from load file <br>
 Use case ends.
 
 **Extensions**
@@ -589,8 +576,8 @@ Use case ends.
 > 2b1. Task Manager shows an error message
 > Use case ends.
 
-3a. The load file has an invalid format.
-> 3a1. Task Manager shows an error message
+3c. The load file has an invalid format.
+> 3c1. Task Manager shows an error message
 > Use case ends.
 
 
