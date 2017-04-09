@@ -51,6 +51,9 @@ public class ClearCommand extends Command {
 
     }
 
+    /**
+     * clears all events in whatsleft
+     */
     public void executeClearEvent() {
         logger.info("-------[Executing ClearEventCommand] " + this.toString());
         assert model != null;
@@ -61,6 +64,9 @@ public class ClearCommand extends Command {
         model.storePreviousCommand("clear");
     }
 
+    /**
+     * clears all tasks in whatsleft
+     */
     public void executeClearTask() {
         logger.info("-------[Executing ClearTaskCommand] " + this.toString());
         assert model != null;
@@ -71,6 +77,9 @@ public class ClearCommand extends Command {
         model.storePreviousCommand("clear");
     }
 
+    /**
+     * clears all events and tasks in whatsleft
+     */
     public void executeClearAll() {
         logger.info("-------[Executing ClearAllCommand] " + this.toString());
         assert model != null;
