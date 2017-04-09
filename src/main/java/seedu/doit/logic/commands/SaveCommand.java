@@ -20,7 +20,7 @@ public class SaveCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
     public static final String COMMAND_PARAMETER = "FILE_PATH/FILE_NAME.xml";
-    public static final String COMMAND_RESULT = "Saves DoIt¡¯s data at specified location and in specified file";
+    public static final String COMMAND_RESULT = "Saves DoIt's data at specified location and in specified file";
     public static final String COMMAND_EXAMPLE = "save folder1/savefile.xml\n"
             + "save C:/Users/USER/savefile.xml";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks to a new file location and name. "

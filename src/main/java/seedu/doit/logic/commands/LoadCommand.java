@@ -18,7 +18,7 @@ public class LoadCommand extends Command {
 
     public static final String COMMAND_WORD = "load";
     public static final String COMMAND_PARAMETER = "FILE_PATH/FILE_NAME.xml";
-    public static final String COMMAND_RESULT = "Loads an existing DoIt¡¯s data at specified "
+    public static final String COMMAND_RESULT = "Loads an existing DoIt's data at specified "
             + "location and in specified file";
     public static final String COMMAND_EXAMPLE = "load folder1/savefile.xml\n"
             + "load C:/Users/USER/savefile.xml";

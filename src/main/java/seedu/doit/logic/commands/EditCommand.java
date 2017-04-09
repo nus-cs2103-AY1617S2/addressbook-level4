@@ -26,7 +26,7 @@ import seedu.doit.model.tag.UniqueTagList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_PARAMETER = "INDEX [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]бн";
+    public static final String COMMAND_PARAMETER = "INDEX [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]";
     public static final String COMMAND_RESULT = "Edits exisitng task with new details";
     public static final String COMMAND_EXAMPLE = "edit 1 s/9pm e/11pm p/high t/CS1010";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_RESULT + "Parameters: " + COMMAND_PARAMETER
