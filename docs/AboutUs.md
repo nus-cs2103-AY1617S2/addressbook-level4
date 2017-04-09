@@ -16,7 +16,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0164212U.md)
     * [Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0164212U.md)
 * Other major contributions:
-    * Initial refactoring from AddressBook to TaskList
+    * Initial refactoring from AddressBook to Task Manager
     * Created Description, Priority, and Timing classes and added respective functionality to validate respective parameters
     * Colored Priorities for better UI experience
     * Debugged test code classes when testing recurring tasks
