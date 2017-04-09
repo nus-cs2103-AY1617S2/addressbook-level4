@@ -273,7 +273,7 @@ Tests can be found in the `./src/test/java` folder.
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the [GUI](#GUI).
    These are in the `guitests` package.
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
@@ -365,9 +365,10 @@ Priorities:
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | view all available commands | refer to them when I do not know how to use the App
-`* * *` | user | add a new [event](#event)/[task](#task) | keep track of it
+`* * *` | user | add a new [event](#Event)/[task](#Task) | keep track of it
 `* * *` | user | edit chosen event/task | update relevant details
 `* * *` | user | delete chosen event/task | mark it as cancelled
+`* * *` | user | delete all events/tasks | reset my WhatsLeft
 `* * *` | user | view a sorted all list of events/tasks | know all activities saved in WhatsLeft
 `* * *` | user | view all finished events/tasks | keep track of my progress in event/task completion
 `* * *` | user | view all pending events/tasks | keep track of all incoming activities
@@ -403,7 +404,7 @@ Use case ends.
 > WhatsLeft shows error message and suggests correct format <br>
   Use case ends
 
-1b. There is a same activity in WhatsLeft already.
+1b. There is a same [activity](#Activity) in WhatsLeft already.
 
 > WhatsLeft shows an error message of duplicate activities <br>
     Use case ends
@@ -417,19 +418,6 @@ Use case ends.
 
 > WhatsLeft shows a warning message of possible clash<br>
     Use case resumes at step 2
-
-#### Use case: List all events and tasks
-**MSS**
-
-1. User requests to list all events/deadlines/tasks
-2. WhatsLeft shows user the list of all events and tasks
-
-**Extensions**
-
-2a. The list is empty
-
-> Use case ends
-
 
 #### Use case: Edit an existing event/deadline/task
 
@@ -449,16 +437,16 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Delete an event/deadline/task
+#### Use case: Delete an event/task
 **MSS**
 
 1. User requests to list all events/tasks
 2. WhatsLeft shows user the list of all events/tasks
 3. User requests to delete a specific event/task
-4. WhatsLeft deletes the specified event/deadline/task
+4. WhatsLeft deletes the specified event/task
 Use case ends.
 
 **Extensions**
@@ -469,17 +457,17 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Finish an event/task
+#### Use case: Finish a task
 
 **MSS**
 
-1. User requests to list all events/tasks
-2. WhatsLeft shows user the list of all events/tasks
-3. User requests to finish a specific event/task
-4. WhatsLeft archives the specified event/task
+1. User requests to list all tasks
+2. WhatsLeft shows user the list of all tasks
+3. User requests to finish a specific task
+4. WhatsLeft archives the specified task
 Use case ends.
 
 **Extensions**
@@ -490,14 +478,14 @@ Use case ends.
 
 3a. The given task index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Select an event/task
 
 **MSS**
 
-1. User requests to list all event/tasks
+1. User requests to list all events and tasks
 2. WhatsLeft shows user the list of all events/tasks
 3. User requests to select a specific event/task
 4. WhatsLeft shows all Information of the specific event/task
@@ -508,9 +496,14 @@ Use case ends.
 
 > Use case ends
 
-3a. The given parameter is invalid
+3a. The given type is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+3b. The give index is invalide
+
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Undo last [mutating operation](#mutating-operation)
@@ -526,22 +519,6 @@ Use case ends.
 2a. There was no previous [mutating operation](#mutating-operation)
 
 > Use case ends
-
-#### Use case: Redo previous undo operation
-
-**MSS**
-
-1. User requests to redo last undo operation
-2. WhatsLeft redoes last operation
-Use case ends.
-
-**Extensions**
-
-2a. There was no previous undo operation
-
-> Use case ends
-
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 
@@ -563,7 +540,7 @@ Use case ends.
 
 > Graphical User Interface
 
-##### activity
+##### Activity
 
 > An event, a deadline or a floating task.
 
