@@ -76,6 +76,15 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
+    // @@author
+    /**
+     * Load data into taskManager. Used by Load Command.
+     */
+    @Override
+    public void loadDataWithoutSaving(ReadOnlyTaskManager newData) throws IllegalValueException {
+        taskManager.resetData(newData);
+    }
+
     // @@author A0140063X
     /**
      *
@@ -190,7 +199,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void changeFilePath(String newPath) {
         indicateFilePathChanged(newPath);
-        indicateTaskManagerChanged("");
     }
 
     //@@author A0142939W

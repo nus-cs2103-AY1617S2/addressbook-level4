@@ -24,6 +24,10 @@ public interface Model {
      * @throws IllegalValueException */
     void loadData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
+    /** Load data without saving.
+     * @throws IllegalValueException */
+    void loadDataWithoutSaving(ReadOnlyTaskManager newData) throws IllegalValueException;
+
     /** Returns the TaskManager. */
     ReadOnlyTaskManager getTaskManager();
 

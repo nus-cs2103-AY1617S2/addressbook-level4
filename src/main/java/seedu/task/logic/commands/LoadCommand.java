@@ -51,7 +51,7 @@ public class LoadCommand extends Command {
 
         try {
             ReadOnlyTaskManager newFile = readTaskManager(pathName);
-            model.loadData(newFile);
+            model.loadDataWithoutSaving(newFile);
         } catch (IOException | IllegalValueException e) {
             return new CommandResult(String.format(MESSAGE_WRONG_FORMAT, pathName));
         }
