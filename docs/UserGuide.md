@@ -307,7 +307,7 @@ There are different listing commands for you to use! Each listing commands shows
 Things To Note:
 > This list will refresh itself and show you the latest
   list when you add a new task or event.
-> This list will be sorted by Priority, Date and Time.
+> This list will display tasks in the order that they were added.
 ```
 
 ### 3.8.1. Listing all Tasks : `list`
