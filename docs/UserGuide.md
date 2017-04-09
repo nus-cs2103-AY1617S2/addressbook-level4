@@ -125,10 +125,10 @@ Command | Format
 -------- | :--------
 help | `help`
 add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCRIPTION tag/TAGS]`
-delete | `delete index\INDEX`
+delete | `delete INDEX`
 clear | `clear`
-find | `find name/Name`
-list | `list * | completed | pending | overdue`
+find | `find NAME`
+list | `list | completed | in-progress`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 undo/redo | `undo` `redo`
 exit | `exit`
