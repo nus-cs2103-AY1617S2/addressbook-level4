@@ -53,7 +53,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         undoStack.push(stackList);
         //@@author
-        internalList.add(toAdd);
+        internalList.add(0, toAdd);
     }
 
     /**
