@@ -283,7 +283,7 @@ public class CommandSettings implements Serializable {
     /**
      * Checks if the command word exists in both default command and alias
      * command
-     * 
+     *
      * @param command
      * @return true if command word exist else false
      */
