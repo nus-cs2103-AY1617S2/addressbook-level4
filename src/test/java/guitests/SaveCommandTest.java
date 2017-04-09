@@ -12,8 +12,8 @@ public class SaveCommandTest extends TypeTaskGuiTest {
     @Test
     public void save() {
         //invalid path
-//        commandBox.runCommand("save c:\\desktop\\^*+#");
-//        assertResultMessage(Messages.MESSAGE_INVALID_PATH);
+        commandBox.runCommand("save c:\\desktop\\^*+#");
+        assertResultMessage(Messages.MESSAGE_INVALID_PATH);
 
         //valid path
         commandBox.runCommand("save C:/Desktop/myTask");
