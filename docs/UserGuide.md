@@ -67,9 +67,23 @@ Examples:
 Shows a list of all tasks (**completed** or **incompleted**).<br>
 Format: `list`
 
-> The task list will be ordered by ascending end date. 
+> The task list will be ordered from earliest to latest end date.
 
-### 2.4. Editing a task : `edit`
+### 2.4. Listing complete tasks : `lc`
+
+Shows a list of all **completed** tasks.<br>
+Format: `lc`
+
+> The task list will be ordered from earliest to latest end date.
+
+### 2.5. Listing incomplete tasks : `li`
+
+Shows a list of all **incomplete** tasks.<br>
+Format: `li`
+
+> The task list will be ordered from earliest to latest end date.
+
+### 2.6. Editing a task : `edit`
 
 Edits an existing task in the task list.<br>
 Format: `edit INDEX PARAMETER NEW_VALUE` <br>
@@ -86,7 +100,7 @@ Examples:
 * `edit 2 g/weekend`<br>
   Edits the group of the 2nd task to "weekend".
 
-### 2.5. Marking a task as complete : `mark`
+### 2.7. Marking a task as complete : `mark`
 
 Changes the status of one task to **complete**.
 Format: `mark INDEX` <br>
@@ -98,7 +112,7 @@ Examples:
 * `mark 1`<br>
   Marks the 1st task as completed.
   
-### 2.6. Marking a task as incomplete : `unmark`
+### 2.8. Marking a task as incomplete : `unmark`
 
 Marks a task in current task list as incomplete.
 Format: `unmark INDEX` <br>
@@ -110,9 +124,9 @@ Examples:
 * `unmark 1`<br>
   Marks the 1st task as incomplete.
 
-### 2.7. Deleting a task : `delete`
+### 2.9. Deleting a task : `delete`
 
-Deletes the specified task. Reversible with 'undo' <br>
+Deletes the specified task. Reversible with `undo` <br>
 Format: `delete INDEX`
 
 > Deletes the task at the specified `INDEX`. <br>
@@ -128,7 +142,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
   
-### 2.8. Clear all tasks : `clear`
+### 2.10. Clear all tasks : `clear`
 
 Clear all tasks or only completed task in the list. <br>
 Format: `clear [KEYWORD]`
@@ -140,11 +154,11 @@ Examples:
 * `clear`<br>
   Clear all tasks.
 * `clear all`, <br>
-  `clear passed`, <br>
+  `clear incomplete`, <br>
   `clear complete`<br>
   Clear all completed tasks.
 
-### 2.9. Finding all tasks containing keyword in their task name: `find`
+### 2.11. Finding all tasks containing keyword in their task name: `find`
 
 Finds tasks whose name contain any of the given keywords.<br>
 Format: `find KEYWORD`
@@ -163,22 +177,22 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### 2.10. Undo : `undo`
+### 2.12. Undo : `undo`
 
 Undoes the previous action. This command will return the program to the state it was in before the previous action was executed<br>
 Format: `undo`
 
-### 2.11. Redo : `redo`
+### 2.13. Redo : `redo`
 
 Does the undo function again. This command will return the program to the state it was in before the previous undo action was executed<br>
 Format: `redo`
 
-### 2.12. Exiting the program : `exit`
+### 2.14. Exiting the program : `exit`
 
 Exits the program.<br>
-Format: `exit`
+Format: `exit`, `ctrl+Q`
 
-### 2.13. Saving the data
+### 2.15. Saving the data
 Yesterday's Tomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
