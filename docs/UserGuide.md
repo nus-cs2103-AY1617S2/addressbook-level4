@@ -13,7 +13,7 @@
    3.5.  [Removing Deadline from a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#35-removing-deadline-from-a-task-removedeadline-rd) <br>
    3.6.  [Deleting a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#36-deleting-a-task--delete-d--) <br>
    3.7.  [Completing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#37-completing-a-task--done) <br>
-   3.8. [Listing Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-listing-all-tasks--list) <br>
+   3.8. [Listing Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-listing-tasks--list-listtoday-list-listdone) <br>
    3.9. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-undoing-the-latest-command--undo-u)<br>
    3.10. [Redoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-redoing-the-latest-command--redo-r)<br>
    3.11. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#311-saving-the-data-to-another-folder--save)<br>
