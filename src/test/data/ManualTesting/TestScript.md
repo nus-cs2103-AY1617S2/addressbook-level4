@@ -5,6 +5,7 @@
 
 > Note:
 - The actual date and time displayed by the app depends on the day the test is performed.
+- It is advisable to follow the given order to perform the tests
 
 ------
 ## Getting Started
@@ -216,17 +217,17 @@ Mark a done task as undone
 2. `redo`<br>
 3. `undo`<br>
 > **Result:**<br>
-> 1.
+1.
 - Result display panel posts message:<br>
 `Previous action undone.`<br>
 - TaskList panel displays the list of tasks before executing clear command.
 
-> 2.
+2.
 - Result display panel posts message:<br>
 `Action redone.`<br>
 - TaskList panel removes all tasks.
 
-> 3.
+3.
 The result is the same as `1`
 
 ### 7.2 Undo/Redo add and delete command
@@ -246,17 +247,17 @@ The result is the same as `1`
 `Previous action undone..`
 - Task list panel add back the previously delete task
 
-> 4.
+4.
 - Result display panel posts message:<br>
 `Previous action undone.`
 - Task list panel remove the newly added task with title 'cs2103'
 
-> 5.
+5.
 - Result display panel posts message:<br>
 `Action redone.`<br>
 - Task list panel readd the task task card `cs2103 presentation`
 
-> 6.
+6.
 - Result display panel posts message:<br>
 `Action redone.`<br>
 - Task list panel re-delete the first task
@@ -311,7 +312,7 @@ The result is the same as `1`
 ------
 ## 11. Exit Command
 ------
-### 14.1 Exit the app
+### 11.1 Exit the app
 > **Command:** `exit`<br>
 > **Result:**<br>
 - TaskIt closes and quits.
