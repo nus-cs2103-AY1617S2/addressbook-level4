@@ -19,7 +19,7 @@ By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/uiv0.0.png" width="600">
+   > <img src="images/uiv5.0rc.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -59,10 +59,25 @@ Examples:
 * `add do homework s/today e/tmr #urgent`
 * `add buy groceries`
 
-### 2.3. Listing all tasks : `list`
+### 2.3. Listing tasks : `list`
 
-Shows a list of all tasks in the task manager.<br>
-Format: `list`
+Shows a list of tasks in the task manager.<br>
+Format: `list KEYWORD`
+
+> Lists tasks according to the input `KEYWORD`.<br>
+> Automatically switches between `To Do` and `Done` tabs according to the `KEYWORD`.<br>
+> The keyword refers to `todo` for all tasks to do or `done` for all done tasks.<br>
+> Invalid keyword will trigger listing all tasks in the selected tab by default.<br>
+> Any trailing symbols after a valid keyword will be ignored.
+
+Examples:
+
+* `list todo`<br>
+   Selects `To Do` tab and list all the tasks to do
+* `list done`<br>
+   Selects `Done` tab and list all the tasks already done
+* `list`<br>
+   Stays in selected tab and list all its tasks
 
 ### 2.4. Select a task : `select`
 
@@ -159,7 +174,7 @@ Format: `exit`
 Task Manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.12. Change the directory of the task manager : `load` or `open`
+### 2.12. Changing the directory of the task manager : `load` or `open`
 
 Load Task Manager data from specified file path and continue using that directory for operations.<br>
 Create new file if no such file exists with a warning.<br>
@@ -174,7 +189,7 @@ Examples:
 * `open data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.13. Save the task manager to a specified directory: `save` or  `saveas`
+### 2.13. Saving the task manager to a specified directory: `save` or  `saveas`
 
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
@@ -188,7 +203,7 @@ Examples:
 * `saveas data/new/cloudsync.xml`<br>
   Moves the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.14. Undo the last user command that changes data: `undo`
+### 2.14. Undoing the last user command that changes data: `undo`
 
 Undo the last user command in that user session that changes data, i.e. add, edit, delete, clear, sort.<br>
 Does nothing if there are no more previous user commands.
@@ -203,7 +218,7 @@ Examples:
   `undo`<br>
   Undoes last user command that changes data, i.e `add New task`. Removes New task
 
-### 2.15. Redo the last undo command: `redo`
+### 2.15. Redoing the last undo command: `redo`
 
 Redo the last undo command by user<br>
 Does nothing if there are no commands to redo that the user has undone
@@ -220,7 +235,7 @@ Examples:
   `redo`<br>
   Redoes last user command in undo history, i.e `add New task`. Adds New task
 
-### 2.16. Find tasks by date: `findbydate`
+### 2.16. Finding tasks by date: `findbydate`
 
 Find tasks that are within the specified date(s).<br>
 Format: `findbydate DATE` `findbydate DATE to DATE`
@@ -283,6 +298,7 @@ Add     | add TASK s/STARTING DATE e/ENDING DATE    | add submit report s/24/03/
 Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
 Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
 List    | list
+List    | list KEYWORD                    | list todo
 Select  | select INDEX                    | select 3
 Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
 Find    | find KEYWORD(s)                 | find report assignment
