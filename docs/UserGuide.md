@@ -28,7 +28,7 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
    * **`add `**` send budget proposal by next Thurs noon to boss #project` :
      adds a task to the task manager.
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
 ## 2. Features
@@ -38,7 +38,7 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
+> * Parameters can be in any order (except for the ShortCut Command).
 
 > **DATETIME Format**
 >
@@ -77,11 +77,11 @@ Format: `help`
 ### 2.2. Adding a task : `add`
 
 Adds a task to the task manager. Three types of tasks are supported.<br>
-> Task description need not be continuous, i.e. a tag can be placed in between two chunks of the description
-> Task can have any number of tags (including 0)
-> Spacing after the dateTime prefixes (eg. by/) is not necessary
-> Tasks with `important` tags will appear on the right list
-> Special tags supported: `important` `impt` `urgent` `critical` `crucial` `vital` `serious`
+> * Task description need not be continuous, i.e. a tag can be placed in between two chunks of the description
+> * Task can have any number of tags (including 0)
+> * Spacing after the dateTime prefixes (eg. by/) is not necessary
+> * Tasks with `important` tags will appear on the list on the right
+> * Special tags supported for this include: `important` `impt` `urgent` `critical` `crucial` `vital` `serious`
 
 ### a) Floating task
 
@@ -142,7 +142,7 @@ Format: `list done`<br>
 Shows a list of all tasks that have been marked as completed.<br>
 
 Format: `list by/ DATETIME` <br>
-     OR `list on/ DATETIME`
+     OR `list on/ DATETIME`<br>
 Shows a list of tasks scheduled before the specified dates.<br>
 
 Examples:
@@ -150,7 +150,7 @@ Examples:
 * `list on/ 5/4`
 
 Format: `list from/ START_DATETIME to/ END_DATETIME` <br>
-     OR `list on/ DATETIME to/ END_DATETIME`
+     OR `list on/ DATETIME to/ END_DATETIME` <br>
 Shows a list of tasks scheduled within the specified range of dates.<br>
 
 Examples:
@@ -173,7 +173,7 @@ Examples:
 
 * `find write test case`<br>
   Returns any tasks with `write`, `test`, `case`, `testing`, `cases`,
-  `write case`, and any combination of the individual words as part of its description (case insensitive)
+  `write case`, and any combination of the individual words as part of its description (case insensitive).
 
 ### 2.5. Editing a task : `edit`
 
@@ -185,17 +185,17 @@ Format: `edit INDEX <[DESCRIPTION] [EDIT DATETIME FORMAT] [#TAG]...>`
     The index **must be a positive integer** 1, 2, 3, ...
 > * At least one of the optional fields within the <> must be provided.
 > * Existing values will be updated to the input values.
-> * When editing tags, inputting tags of the task that already exist will removed them from the task i.e adding of tags is not cumulative.
+> * When editing tags, inputting tags of the task that already exist will removed them from the task, i.e. adding of tags is not cumulative.
     Inputting tags of the task that do not already exist will add them to the task.
 
 EDIT DATETIME FORMAT
 > * Task can be changed from one task type to any other task type
-> * DATETIME FORMAT must be one of the following four:
->   a. `by/` DATETIME
->   b. `on/` DATETIME
->   c. `from/` DATETIME `to/` DATETIME
->   d. `on/` DATETIME `to/` DATETIME
->   e. `REMOVEDATES`
+> * DATETIME FORMAT must be one of the following five:
+>    * a. `by/` DATETIME
+>    * b. `on/` DATETIME
+>    * c. `from/` DATETIME `to/` DATETIME
+>    * d. `on/` DATETIME `to/` DATETIME
+>    * e. `REMOVEDATES`
 > * All existing DATETIME of the task to be edited will be removed.
 > * REMOVEDATES removes all existing dates of a task and changes it to a floating task.
 > * No other field is allowed
@@ -203,19 +203,19 @@ EDIT DATETIME FORMAT
 Examples:
 
 * `list`
-  `edit 5 meeting at board room`<br>
+* `edit 5 meeting at board room`<br>
   Edits the task description of the 5th task today to be `meeting at board room`.
 
-  `edit 2 by/ mon `<br>
+* `edit 2 by/ mon `<br>
   Edits the deadline of the 2nd task listed to be `mon`
 
-  `edit 3 REMOVEDATES` <br>
+* `edit 3 REMOVEDATES` <br>
   removes all existing start and end dateTimes in the 3rd task
 
-  `edit 4 #newTag`
+* `edit 4 #newTag`
   adds the tag newTag to the 4th task in the list, given that the task does not already have that tag
 
-  `edit 1 #existingTag`
+* `edit 1 #existingTag`
   removes the existingTag from the 1st task, given that the task already has that tag
 
 ### 2.6. Deleting a task : `delete`
@@ -239,7 +239,7 @@ Marks the task identified by the index number used in the last task listing.<br>
 Format: `mark INDEX [MORE_INDICES]...`
 
 > Marks the task as completed and hides it from view.
-> Task is added to a list of completed tasks that can be viewed by calling `list done`.<br>
+> Task is added to a list of completed tasks that can be viewed by calling `list done` or `list all`.<br>
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 
@@ -251,7 +251,7 @@ Examples:
 
 ### 2.8. Unmark a task : `unmark`
 
-Unmarks the task identified by the index number used in the marked task listing.<br>
+Unmarks the task identified by the index number used in the marked task or list all listing.<br>
 Format: `unmark INDEX [MORE_INDICES]...`
 
 > Unmarks a previously marked task and restores it back into its original location and view.
@@ -270,48 +270,39 @@ Examples:
 Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
-> Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark`
-> Undoing 'delete' will replace the deleted task at the bottom of the list
+> Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark` <br>
+> Undoing 'delete' will replace the deleted task at the bottom of the list <br>
 
 ### 2.10. Redoing previous step : `redo`
 
 Redo the previous command and restore the data to one step before. <br>
 Fromat: `redo`
 
-> Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark`
-> Redoing an add undo will add back the task to the bottom of the list
+> Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark` <br>
+> Redoing an add undo will add back the task to the bottom of the list <br>
 
 ### 2.11. Clearing all entries : `clear`
 
 Clears all entries from the task manager.<br>
 Format: `clear`
 
-### 2.12. Load data from a specified file : `import`
+### 2.12. View current storage file location : `viewfile`
 
-Clears all entries from the task manager.<br>
-Format: `import FILE_PATH`
-
-Examples:
-
-* `import data/watodo2.xml`
-  Load data from data/watodo2.xml and saves future data to the same file location.
+Displays the file path where the task list data is stored at. <br>
+Format: `viewfile`
 
 ### 2.13. Change storage file location : `saveas`
 
-Saves task list data to the new specified file path and loads task list from that location in the future.<br>
+Saves the task list data to the new specified file path and loads task list from that location in the future.<br>
 Format: `saveas FILE_PATH`
-> * 'FILE_PATH' must end with **.xml**
+> * FILE_PATH must end with **.xml**
 
 Examples:
 
-* `saveas data/watodo2.xml`
+* `saveas data/watodo2.xml`<br>
   Saves current and future data to data/watodo2.xml.
 
-### 2.14. View current storage file location : `viewfile`
-
-Format: `viewfile`
-
-### 2.15 Alternative commands
+### 2.14 Alternative commands
 
 Below is a list of shortcut keys for some of the above commands:
 
@@ -326,33 +317,34 @@ Below is a list of shortcut keys for some of the above commands:
 > * redo: `r`
 > * select: `s`
 
-### 2.16 Customize alternative commands: `shortcut`
+### 2.15 Customize alternative commands: `shortcut`
 
-You can add and delete your own personal shortcut keys to the various commands.
-Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature)
-        `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY)
+You can add and delete your own personal shortcut keys to the various commands. <br>
+Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature) <br>
+        `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY) <br>
 
 > SHORTCUT_KEY can be any character except whitespace.
-> Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
-> You cannot delete any of the default command words.
-> Shortcut keys must be unique. Eg. `a` cannot be a shortcut for both `add` and `edit`
+> Unfortunately, special keys (e.g. F1, SHIFT, CTRL etc) are not supported. :( <br>
+> You cannot delete any of the default command words. <br>
+> Shortcut keys must be unique. E.g. `a` cannot be a shortcut for both `add` and `edit`. <br>
+> Flexible ordering of parameters does not apply to this feature. <br>
 
 Examples:
 * `shortcut + add @@`
 * `shortcut + undo z`
 * `shortcut - undo z`
 
-### 2.17 Viewing all the shortcut keys: `viewshortcuts`
+### 2.16 Viewing all the shortcut keys: `viewshortcuts`
 
-Shows a list of all the shortcut commands by default and those customized by the user.
-Format: `viewshortcuts`
+Shows a list of all the shortcut commands by default and those customized by the user. <br>
+Format: `viewshortcuts` <br>
 
-### 2.18. Exiting the program : `exit`
+### 2.17. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.19. Saving the data
+### 2.18. Saving the data
 
 Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
@@ -364,6 +356,65 @@ There is no need to save manually.
        the file that contains the data of your previous Task Manager folder.
 
 ## 4. Command Summary
+
+Command | Format
+--------| :-----
+Add | 
+* `add TASK [#TAG]...` <br>
+* `add TASK by/ DATETIME [#TAG]...`
+* `add TASK on/ DATETIME [#TAG]...`
+* `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
+* `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
+
+List |
+* `list`<br>
+* `list all`<br>
+* `list float`<br>
+* `list deadline`<br>
+* `list event`<br>
+  `list #TAG`<br>
+* `list undone`<br>
+* `list done`<br>
+* `list by/ DATETIME`<br>
+* `list on/ DATETIME`<br>
+* `list from/ START_DATETIME to/ END_DATETIME`<br>
+* `list on/ START_DATETIME to/ END_DATETIME`<br>
+
+Find | `find KEYWORD [MORE_KEYWORDS]...` <br>
+
+**Edit** | `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
+
+**Delete** | `delete INDEX [MORE_INDICES]...` <br>
+
+**Mark** | `mark INDEX [MORE_INDICES]...` <br>
+
+**Unmark** | `unmark INDEX [MORE_INDICES]...` <br>
+
+**Undo** | `undo` <br>
+
+**Redo** | `redo` <br>
+
+**Clear** | `clear` <br>
+
+**View File** | `viewfile` <br>
+
+**Save As** | `saveas FILE_PATH` <br>
+
+**Help** | `help` <br>
+
+* **Alternative Commands** |
+* add: `a`
+* edit: `e`
+* list: `l`
+* delete: `d`
+* mark: `m`, `check`
+* unmark: `um`, `uncheck`
+* find: `f`, `search`
+
+**Customize Alternative Commands** |
+* `shortcut + COMMAND_WORD SHORTCUT_KEY`
+* `shortcut - COMMAND_WORD SHORTCUT_KEY`
+
 
 * **Add**
 > * `add TASK [#TAG]...` <br>
