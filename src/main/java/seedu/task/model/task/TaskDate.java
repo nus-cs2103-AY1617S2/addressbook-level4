@@ -11,7 +11,7 @@ public class TaskDate {
 
     private List<Date> dates;
     private SimpleDateFormat formatter;
-    public final String OUTPUT_FORMAT = " dd/MM/yy";
+    public final String OUTPUT_FORMAT = " dd/mm/yy";
 
     private int day;
     private int month;

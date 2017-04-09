@@ -2,10 +2,7 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
-//import org.junit.Test;
-
 import guitests.guihandles.TaskCardHandle;
-//import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
