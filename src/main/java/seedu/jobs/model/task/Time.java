@@ -52,16 +52,15 @@ public class Time implements Comparable<Time> {
      * Returns true if a given string is in valid time format
      */
     public static boolean isValidTime(String test) {
-        String time = extractTime(test);
-        String date = extractDate(test);
-        try {
-            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/uuuu").
-                    withResolverStyle(ResolverStyle.STRICT));
-        } catch (DateTimeParseException e) {
+        
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm");
+            LocalDateTime testDate = LocalDateTime.parse(test, formatter);
+        }
+        catch (DateTimeParseException dtpe) {
             return false;
         }
-        return time.length() > 0;
-
+        return true;
     }
 
     /**
