@@ -255,7 +255,19 @@ public class TaskCard extends UiPart<Region> {
             cardPane.setStyle("-fx-background-color: #5c5c5c;");
             description.setStyle("-fx-text-fill: #6dc006;");
             setLabelsColourGreen();
-
+            return;
+        }
+        if (task.getStatus().equals(TaskStatus.OVERDUE)) {
+            status.setStyle("-fx-text-fill: red;");
+        }
+        if (task.getTaskType().equals(TaskType.FLOAT)) {
+            cardPane.setStyle("-fx-background-color: #EEE8AA;");
+        }
+        if (task.getTaskType().equals(TaskType.DEADLINE)) {
+            cardPane.setStyle("-fx-background-color: #98FB98;");
+        }
+        if (task.getTaskType().equals(TaskType.EVENT)) {
+            cardPane.setStyle("-fx-background-color: #AFEEEE;");
         }
     }
 

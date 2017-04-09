@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import seedu.watodo.logic.commands.exceptions.CommandException;
 
-//@@author A01403076J
+//@@author A0143076J
 /**
  * Shows user a list of all the command words for each of the standard commands.
  */
