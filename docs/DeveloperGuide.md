@@ -221,7 +221,7 @@ The `Model`,
   `description`, `priority`, `frequency`, and `UniqueTagList` object for the respective task. Each of these fields is
   constructed as an object in the backend of the application.
   * This architecture follows the use of the Abstraction Occurrence Pattern by sharing common fields between
-  instances of the same underlying object.
+  instances of the same underlying object in a parent class.
     * If tasks are recurring then their start/end times are populated based on the given frequency parameter which are
   subsequently utilized to generate the respective Task's `RecurringTaskOccurrence` objects.
 
@@ -598,9 +598,9 @@ Use case ends.
 12. Should be scalable so that a user can change the layout of the GUI based on personal preference.
 13. Should not overload the CPU so that other running process start to lag.
 14. Should not have seperate administrative functions as there is one user who is the Admin by default.
-15. Support tasks that recur after a specified number of months for 12 months (1 year).
-16. Support tasks that recur after a specified number of days for 60 days (2 months).
-17. Support tasks that recur after a specified number of hours for 168 hours (1 week).
+15. Support tasks that recur after a specified number of years for 4 years.
+16. Support tasks that recur after a specified number of months for 12 months (1 year).
+17. Support tasks that recur after a specified number of days for 60 days (2 months).
 
 ## Appendix D : Glossary
 
@@ -647,4 +647,3 @@ Cons:
 * cannot change the color of tasks based on priority
 * alert would not pop out automatically
 * everytime I boot up my computer, I have to open the app manually
-

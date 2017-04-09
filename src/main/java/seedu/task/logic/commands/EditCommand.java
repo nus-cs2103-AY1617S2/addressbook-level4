@@ -3,9 +3,12 @@ package seedu.task.logic.commands;
 import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
@@ -21,6 +24,7 @@ import seedu.task.model.task.UniqueTaskList;
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_REC = "editthis";
@@ -35,6 +39,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_NULL_TIMING =
+            "Both the start and end timings must be specified for a recurring task";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -74,6 +80,7 @@ public class EditCommand extends Command {
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
+                logger.info("Editing a specific occurrence of a recurring task");
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
                 model.updateTask(filteredTaskListIndex, editedTask);
@@ -82,6 +89,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSSAGE_INVALID_TIMING_ORDER);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_NULL_TIMING);
         }
 
         model.updateFilteredListToShowAll();
@@ -93,9 +102,10 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      * @throws IllegalTimingOrderException
+     * @throws CommandException
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit,
-            EditTaskDescriptor editTaskDescriptor) throws IllegalTimingOrderException {
+            EditTaskDescriptor editTaskDescriptor) throws IllegalTimingOrderException, CommandException {
         assert taskToEdit != null;
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
@@ -113,7 +123,11 @@ public class EditCommand extends Command {
             throw new IllegalTimingOrderException(MESSSAGE_INVALID_TIMING_ORDER);
         }
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate,
-                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        try {
+            return new Task(updatedDescription, updatedPriority, updatedStartDate,
+                    updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_NULL_TIMING);
+        }
     }
 }

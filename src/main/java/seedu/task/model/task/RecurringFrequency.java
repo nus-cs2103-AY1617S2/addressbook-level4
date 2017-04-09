@@ -1,6 +1,9 @@
 //@@author A0164212U
 package seedu.task.model.task;
 
+import java.util.logging.Logger;
+
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
@@ -8,8 +11,9 @@ import seedu.task.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidFrequency(String)}
  */
 public class RecurringFrequency {
+    private static final Logger logger = LogsCenter.getLogger(RecurringFrequency.class);
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
+    public static final String MESSAGE_FREQUENCY_CONSTRAINTS =
             "Frequency must be a number followerd by d (day), m (month), y (year) no spaces";
 
     public static final String FREQUENCY_VALIDATION_REGEX = "^[0-9]+[ydmHDY]";
@@ -30,10 +34,12 @@ public class RecurringFrequency {
         if (frequency != null) {
             String trimmedFrequency = frequency.trim();
             if (!isValidFrequency(trimmedFrequency)) {
-                throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
+                logger.severe("Invalid value for frequency...");
+                throw new IllegalValueException(MESSAGE_FREQUENCY_CONSTRAINTS);
             }
             this.frequency = trimmedFrequency;
         } else {
+            logger.info("Setting frequency to default value...");
             this.frequency = NULL_FREQUENCY;
         }
     }
