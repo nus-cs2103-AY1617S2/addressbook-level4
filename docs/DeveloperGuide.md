@@ -160,7 +160,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/whatsleft/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CalendarPanel`, `EventListPanel`, `TaskListPanel`. The 'CalendarPanel' has a 'CalendarAdder' that helps to add events and tasks to the calendar using JFxtras objects Agenda and Appointments. 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CalendarPanel`, `EventListPanel`, `TaskListPanel`. The `CalendarPanel` has a `CalendarAdder` that helps to add events and tasks to the calendar using JFxtras objects Agenda and Appointments. 
 `StatusBarFooter`, `CalendarPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
