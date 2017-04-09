@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Mon 27 Mar, 10.00AM</startDate>
+        <endDate>Mon 27 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT27</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lecture</name>
+        <startDate>Mon 27 Mar, 4.00PM</startDate>
+        <endDate>Mon 27 Mar, 6.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT19</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lab</name>
+        <startDate>Tue 28 Mar, 9.00AM</startDate>
+        <endDate>Tue 28 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>DigELab</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Tutorial</name>
+        <startDate>Tue 28 Mar, 12.00PM</startDate>
+        <endDate>Tue 28 Mar, 1.00PM</endDate>
+        <status>Done</status>
+        <tagged>COM10217</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lecture</name>
+        <startDate>Tue 28 Mar, 2.00PM</startDate>
+        <endDate>Tue 28 Mar, 4.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT6</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Tue 28 Mar, 4.00PM</startDate>
+        <endDate>Tue 28 Mar, 6.00PM</endDate>
+        <status>Done</status>
+        <tagged>E30601</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Tutorial</name>
+        <startDate>Wed 29 Mar, 10.00AM</startDate>
+        <endDate>Wed 29 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>S160437</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lab</name>
+        <startDate>Wed 29 Mar, 12.00PM</startDate>
+        <endDate>Wed 29 Mar, 2.00PM</endDate>
+        <status>Done</status>
+        <tagged>COM10114</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Thu 30 Mar, 10.00AM</startDate>
+        <endDate>Thu 30 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT27</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Thu 30 Mar, 2.00PM</startDate>
+        <endDate>Thu 30 Mar, 4.00PM</endDate>
+        <status>Done</status>
+        <tagged>E30601</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Tutorial</name>
+        <startDate>Thu 30 Mar, 4.00PM</startDate>
+        <endDate>Thu 30 Mar, 5.00PM</endDate>
+        <status>Undone</status>
+        <tagged>COM1B103</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024</name>
+        <startDate>Thu 30 Mar, 5.00PM</startDate>
+        <endDate>Thu 30 Mar, 6.00PM</endDate>
+        <status>Undone</status>
+        <tagged>LT6</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lab</name>
+        <startDate>Fri 31 Mar, 9.00AM</startDate>
+        <endDate>Fri 31 Mar, 12.00PM</endDate>
+        <status>Undone</status>
+        <tagged>SignalLab</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Tutorial</name>
+        <startDate>Fri 31 Mar, 2.00PM</startDate>
+        <endDate>Fri 31 Mar, 3.00PM</endDate>
+        <status>Undone</status>
+        <tagged>E30612</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture</name>
+        <startDate>Fri 31 Mar, 4.00PM</startDate>
+        <endDate>Fri 31 Mar, 6.00PM</endDate>
+        <status>Undone</status>
+        <tagged>i3Aud</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Online Quiz</name>
+        <endDate>Mon 3 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Online Quiz</name>
+        <endDate>Sun 2 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Report</name>
+        <endDate>Sun 2 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Study</name>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>Learn Javascript</name>
+        <status>Undone</status>
+        <tagged>coding</tagged>
+    </tasks>
+    <tasks>
+        <name>Find part time work over the summer holidays</name>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>Fix old laptop</name>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>Throw old notes</name>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>Army reunion dinner</name>
+        <startDate>Sun 16 Apr, 7.00PM</startDate>
+        <endDate>Sun 16 Apr, 9.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>JC reunion dinner</name>
+        <startDate>Thu 20 Apr, 6.00PM</startDate>
+        <endDate>Thu 20 Apr, 8.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 Final Demo</name>
+        <startDate>Thu 13 Apr, 4.00PM</startDate>
+        <endDate>Thu 13 Apr, 5.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Assignment 2 Demo</name>
+        <startDate>Tue 11 Apr, 9.00AM</startDate>
+        <endDate>Tue 11 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Exam</name>
+        <startDate>Mon 24 Apr, 1.00PM</startDate>
+        <endDate>Mon 24 Apr, 4.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Exam</name>
+        <startDate>Tue 25 Apr, 1.00PM</startDate>
+        <endDate>Tue 25 Apr, 4.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Exam</name>
+        <startDate>Fri 28 Apr, 9.00AM</startDate>
+        <endDate>Fri 28 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Exam</name>
+        <startDate>Wed 3 May, 1.00PM</startDate>
+        <endDate>Wed 3 May, 4.00PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Exam</name>
+        <startDate>Fri 5 May, 2.30PM</startDate>
+        <endDate>Fri 5 May, 5.30PM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Revision Tutorial</name>
+        <startDate>Wed 12 Apr, 12.00PM</startDate>
+        <endDate>Wed 12 Apr, 1.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CS2103 File Submission</name>
+        <endDate>Mon 10 Apr, 11.59AM</endDate>
+        <status>Undone</status>
+        <tagged>important</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy present for Mike's birthday</name>
+        <endDate>Wed 19 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>Finish watching Mythbusters</name>
+        <status>Undone</status>
+        <tagged>trivial</tagged>
+    </tasks>
+    <tasks>
+        <name>Online gaming session</name>
+        <startDate>Fri 14 Apr, 8.30PM</startDate>
+        <endDate>Fri 14 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>gaming</tagged>
+    </tasks>
+    <tasks>
+        <name>Monthly laptop dismantling and cleaning</name>
+        <endDate>Tue 18 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lecture</name>
+        <startDate>Mon 10 Apr, 4.00PM</startDate>
+        <endDate>Mon 10 Apr, 6.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lab</name>
+        <startDate>Tue 11 Apr, 9.00AM</startDate>
+        <endDate>Tue 11 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2271 Tutorial</name>
+        <startDate>Tue 11 Apr, 12.00PM</startDate>
+        <endDate>Tue 11 Apr, 1.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lecture</name>
+        <startDate>Tue 11 Apr, 2.00PM</startDate>
+        <endDate>Tue 11 Apr, 4.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Tue 11 Apr, 4.00PM</startDate>
+        <endDate>Tue 11 Apr, 6.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lab</name>
+        <startDate>Wed 12 Apr, 12.00PM</startDate>
+        <endDate>Wed 12 Apr, 2.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Thu 13 Apr, 2.00PM</startDate>
+        <endDate>Thu 13 Apr, 4.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lecture</name>
+        <startDate>Thu 13 Apr, 5.00PM</startDate>
+        <endDate>Thu 13 Apr, 6.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Mon 10 Apr, 10.00AM</startDate>
+        <endDate>Mon 10 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>ST2334 Tutorial</name>
+        <startDate>Wed 12 Apr, 10.00AM</startDate>
+        <endDate>Wed 12 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Thu 13 Apr, 10.00AM</startDate>
+        <endDate>Thu 13 Apr, 12.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lab</name>
+        <startDate>Wed 12 Apr, 2.00PM</startDate>
+        <endDate>Wed 12 Apr, 5.00PM</endDate>
+        <status>Undone</status>
+    </tasks>
+    <tags>dance</tags>
+    <tags>school</tags>
+    <tags>homework</tags>
+    <tags>gamedesign</tags>
+    <tags>reading</tags>
+    <tags>LT27</tags>
+    <tags>LT19</tags>
+    <tags>DigELab</tags>
+    <tags>COM10217</tags>
+    <tags>LT6</tags>
+    <tags>E30601</tags>
+    <tags>S160437</tags>
+    <tags>COM10114</tags>
+    <tags>COM1B103</tags>
+    <tags>SignalLab</tags>
+    <tags>E30612</tags>
+    <tags>i3Aud</tags>
+    <tags>important</tags>
+    <tags>coding</tags>
+    <tags>trivial</tags>
+    <tags>gaming</tags>
+</tasklist>

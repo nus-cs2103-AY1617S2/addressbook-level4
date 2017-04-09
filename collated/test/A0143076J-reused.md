@@ -64,6 +64,8 @@
         assertCommandFailure("edit 1 #$%^^", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
+    // ================ For List Command ==============================
+
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations

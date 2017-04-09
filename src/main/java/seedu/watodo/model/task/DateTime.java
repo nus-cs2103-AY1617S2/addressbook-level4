@@ -78,6 +78,12 @@ public class DateTime {
         return this.dateTime.after(other.dateTime);
     }
 
+
+    /* Checks if the current DateTime is at a later date than another given Date */
+    public boolean isLater(Date currDate) {
+        return this.dateTime.getTime().after(currDate);
+    }
+
     @Override
     public String toString() {
         Date currDate = new Date();

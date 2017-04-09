@@ -409,6 +409,11 @@ public class ModelManager extends ComponentManager implements Model {
         this.undoneHistory.clear();
     }
 
-    //@@author
-
+    //@@author A0143076J
+    @Override
+    public void updateTasksStatus() {
+        taskManager.updateTasksStatus();
+        resetData(taskManager);
+        indicateTaskManagerChanged();
+    }
 }
