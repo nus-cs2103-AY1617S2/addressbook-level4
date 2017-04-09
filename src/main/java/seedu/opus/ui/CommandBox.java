@@ -244,6 +244,7 @@ public class CommandBox extends UiPart<Region> {
         private boolean hasMatch(String prefix) {
             return !autoComplete(prefix).isEmpty();
         }
+
     }
     //@@author
 }
