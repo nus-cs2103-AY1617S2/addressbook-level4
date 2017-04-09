@@ -14,11 +14,11 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate."; //TODO merv to use
-
-    private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
+    public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_DELETE_TASK_SUCCESSFUL = "Task #%1$d deleted: %2$s";
-    private static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
+    public static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
     public static final String MESSAGE_STATUS_ALREADY_DONE = "The task status is already set to Done.";
 
     private int[] filteredTaskListIndices;
@@ -123,10 +123,11 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [MORE_INDICES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
-    private static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
+    public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_UNMARK_TASK_SUCCESSFUL = "Task #%1$d marked undone: %2$s";
-    private static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
+    public static final String MESSAGE_UNMARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as undone.";
     public static final String MESSAGE_STATUS_ALREADY_UNDONE = "The task status is already set to Undone.";
 
     private int[] filteredTaskListIndices;
@@ -300,6 +301,7 @@ public class DeleteCommandParser {
         try {
             getOptionalIntArrayFromString(args);
             checkValidIndices();
+            checkForDuplicateIndices();
             sortIntArray();
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -321,8 +323,19 @@ public class DeleteCommandParser {
     private void checkValidIndices() throws IllegalValueException {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
-                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
-                        DeleteCommand.MESSAGE_USAGE);
+                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                // + '\n' +
+                        //DeleteCommand.MESSAGE_USAGE);
+            }
+        }
+    }
+
+    private void checkForDuplicateIndices() throws IllegalValueException {
+        List<Integer> indicesAsInteger = Ints.asList(filteredTaskListIndices);
+        Set<Integer> indicesHashSet = new HashSet<Integer>();
+        for (Integer index : indicesAsInteger) {
+            if (!indicesHashSet.add(index)) {
+                throw new IllegalValueException(DeleteCommand.MESSAGE_DUPLICATE_INDICES);
             }
         }
     }
@@ -360,6 +373,7 @@ public class UnmarkCommandParser {
         try {
             getOptionalIntArrayFromString(args);
             checkValidIndices();
+            checkForDuplicateIndices();
             sortIntArray();
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -383,6 +397,16 @@ public class UnmarkCommandParser {
             if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
                 throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
                         UnmarkCommand.MESSAGE_USAGE);
+            }
+        }
+    }
+
+    private void checkForDuplicateIndices() throws IllegalValueException {
+        List<Integer> indicesAsInteger = Ints.asList(filteredTaskListIndices);
+        Set<Integer> indicesHashSet = new HashSet<Integer>();
+        for (Integer index : indicesAsInteger) {
+            if (!indicesHashSet.add(index)) {
+                throw new IllegalValueException(UnmarkCommand.MESSAGE_DUPLICATE_INDICES);
             }
         }
     }
