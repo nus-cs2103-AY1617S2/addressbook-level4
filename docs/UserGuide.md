@@ -23,7 +23,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 * [Command Summary](#command-summary)
 
 ## First-time user experience
-* For first-time configuration, make sure file named _calendar-java-quickstart_ in  `User/home/.credentials` does not exist or has been deleted. 
+* For first-time configuration, make sure file named _calendar-java-quickstart_ in `User/home/.credentials` does not exist or has been deleted. 
 
 ## Start the program
 
@@ -64,7 +64,7 @@ Example :
 
 <img src="images/TaskWithDeadline_JOBS.png" width="600"><br>
 
-* `add swim desc/"Remember to swim"`
+* `add swim desc/Remember to swim`
 
 <img src="images/FloatingTask_JOBS.png" width="600"><br>
 
@@ -151,6 +151,9 @@ Format : `path PATH`
 Example:
 * for MAC `path /users/home/desktop/taskbook.xml`
 * for Windows `path users/home/desktop/taskbook.xml`
+
+<img src="images/Path1_JOBS.png" width="600"><br>
+<img src="images/Path2_JOBS.png" width="600"><br>
 
 ### Exit the program: `exit`
 Exits the program.
