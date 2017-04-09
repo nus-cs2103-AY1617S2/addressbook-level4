@@ -68,6 +68,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * Command highlight
     * Alias-related command (alias, remove_alias, view_alias ...)
     * Undo & redo command and hotkeys
+    * quick navigation by pressing J and K
 * Code written: [functional code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/main/A0147980U.md) [test code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/test/A0147980U.md)  
 * Other major contributions:
     * Updating of documentation

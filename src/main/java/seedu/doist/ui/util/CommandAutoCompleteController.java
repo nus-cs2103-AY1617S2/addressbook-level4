@@ -11,8 +11,8 @@ import seedu.doist.logic.parser.CliSyntax;
 
 
 //@@author A0147980U
-public class CommandAutoCompleteManager {
-    private static CommandAutoCompleteManager instance;
+public class CommandAutoCompleteController {
+    private static CommandAutoCompleteController instance;
     private boolean isFind = false;
 
     // relative to cursor center
@@ -20,9 +20,9 @@ public class CommandAutoCompleteManager {
     private final int maxItemNu = 8;
 
     // for singleton pattern
-    public static CommandAutoCompleteManager getInstance() {
+    public static CommandAutoCompleteController getInstance() {
         if (instance == null) {
-            instance = new CommandAutoCompleteManager();
+            instance = new CommandAutoCompleteController();
         }
         return instance;
     }

@@ -9,7 +9,7 @@ import static seedu.doist.logic.parser.CliSyntax.PREFIX_UNDER;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 //@@author A0147980U
-public class CommandHighlightManager {
+public class CommandHighlightController {
     public static final String COMMAND_WORD_STYLE = "-fx-fill: #1a75ff;";  // blue"
     public static final String PARAMETER_KEY_STYLE = "-fx-fill: #55ae47;";  // green
     public static final String TIME_VALUE_STYLE = "-fx-fill: #e68a00;";  // orange
@@ -17,12 +17,12 @@ public class CommandHighlightManager {
     public static final String TAGS_STYLE = "-fx-fill: #7300e6;";  // purple
     public static final String NORMAL_STYLE = "-fx-fill: black;";
 
-    private static CommandHighlightManager instance;
+    private static CommandHighlightController instance;
 
     // for singleton pattern
-    public static CommandHighlightManager getInstance() {
+    public static CommandHighlightController getInstance() {
         if (instance == null) {
-            instance = new CommandHighlightManager();
+            instance = new CommandHighlightController();
         }
         return instance;
     }

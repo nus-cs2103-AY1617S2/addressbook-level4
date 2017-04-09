@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Region> {
 
     protected void fillInnerParts() {
        // browserPanel = new BrowserPanel(browserPlaceholder);
-        taskListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
+        taskListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAbsoluteTodoListFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic);
