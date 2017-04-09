@@ -3,6 +3,13 @@
     -fx-background-color: #f08080;
 }
 
+.incomplete {
+    -fx-border-color: #69dead;
+}
+
+.complete {
+    -fx-border-color: #ffcccc;
+}
 
 .tag-selector {
     -fx-border-width: 1;
