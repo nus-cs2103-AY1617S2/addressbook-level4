@@ -4,11 +4,10 @@ import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX;
 
-import java.util.Deque;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Stack;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.logic.commands.AddCommand;
@@ -41,30 +40,11 @@ public class AddCommandParser {
         }
 
         String taskWithoutTags = taskTag[0];
-        Deque<PossibleDateTime> possibleDateTimes = parseDateTimeRecurrenceIdentifiers(taskWithoutTags);
-        PossibleDateTime startDateTime = null;
-        PossibleDateTime endDateTime = null;
-        PossibleDateTime recurInterval = null;
-        while (!possibleDateTimes.isEmpty()) {
-            PossibleDateTime current = possibleDateTimes.pop();
-            if (current.type == DateTimeType.RECURRENCE && recurInterval == null) {
-                recurInterval = current;
-            } else if (current.type == DateTimeType.RECURRENCE_PREFIX && recurInterval == null) {
-                try {
-                    current.recurInterval = ParserUtil.parseStringToRecurInterval(
-                                            current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
-                    recurInterval = current;
-                } catch (IllegalValueException ex) {
-                    continue;
-                }
-            } else if (!ParserUtil.canParse(current.data)) {
-                continue;
-            } else if (current.type == DateTimeType.END && endDateTime == null) {
-                endDateTime = current;
-            } else if (current.type == DateTimeType.START && startDateTime == null) {
-                startDateTime = current;
-            }
-        }
+        Stack<PossibleDateTime> possibleDateTimes = parseDateTimeRecurrenceIdentifiers(taskWithoutTags);
+        DateTimeProperties filteredDateTimes = filterPossibleDateTime(possibleDateTimes);
+        PossibleDateTime startDateTime = filteredDateTimes.start;
+        PossibleDateTime endDateTime = filteredDateTimes.end;
+        PossibleDateTime recurInterval = filteredDateTimes.recurrence;
 
         if (endDateTime == null && startDateTime != null) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -81,18 +61,19 @@ public class AddCommandParser {
 
             Optional<String> endDateTimeStr = Optional.of(endDateTime.data);
             taskName = ParserUtil.removeLast(taskName, endDateTime.data);
-            Optional<String> startDateTimeStr;
+
+            Optional<String> startDateTimeStr = Optional.empty();
             if (startDateTime != null) {
                 startDateTimeStr = Optional.of(startDateTime.data);
                 taskName = ParserUtil.removeLast(taskName, startDateTime.data);
-            } else {
-                startDateTimeStr = Optional.empty();
             }
+
             Optional<RecurInterval> parsedRecurInterval = Optional.empty();
             if (recurInterval != null) {
                 parsedRecurInterval = Optional.of(recurInterval.recurInterval);
                 taskName = ParserUtil.removeLast(taskName, recurInterval.data);
             }
+
             try {
                 return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet, parsedRecurInterval);
             } catch (IllegalValueException ex) {
@@ -129,7 +110,6 @@ public class AddCommandParser {
             try {
                 return new AddCommand(name, startDateTime, endDateTime, tagSet, Optional.empty());
             } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block
                 return new IncorrectCommand(e.getMessage());
             }
         }
@@ -138,12 +118,12 @@ public class AddCommandParser {
     /**
      * Looks for all possible date/time strings based on identifiers
      * @param input String to parse
-     * @return Deque of PossibleDateTime objects, each representing a possible date/time string
+     * @return Stack of PossibleDateTime objects, each representing a possible date/time string
      */
-    private static Deque<PossibleDateTime> parseDateTimeRecurrenceIdentifiers(String input) {
+    private static Stack<PossibleDateTime> parseDateTimeRecurrenceIdentifiers(String input) {
         String[] inputs = input.split(" ");
         int currentIndex = 0;
-        Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
+        Stack<PossibleDateTime> result = new Stack<PossibleDateTime>();
         PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX,
                                                         DateTimeType.UNKNOWN);
         for (int i = 0; i < inputs.length; i++) {
@@ -210,6 +190,45 @@ public class AddCommandParser {
         void appendDateTime(String data) {
             this.data += " " + data;
         }
+    }
+
+    static class DateTimeProperties {
+        PossibleDateTime start;
+        PossibleDateTime end;
+        PossibleDateTime recurrence;
+
+        DateTimeProperties(PossibleDateTime start, PossibleDateTime end, PossibleDateTime recurrence) {
+            this.start = start;
+            this.end = end;
+            this.recurrence = recurrence;
+        }
+    }
+
+    private static DateTimeProperties filterPossibleDateTime(Stack<PossibleDateTime> dateTimeStack) {
+        PossibleDateTime recurInterval = null;
+        PossibleDateTime startDateTime = null;
+        PossibleDateTime endDateTime = null;
+        while (!dateTimeStack.isEmpty()) {
+            PossibleDateTime current = dateTimeStack.pop();
+            if (current.type == DateTimeType.RECURRENCE && recurInterval == null) {
+                recurInterval = current;
+            } else if (current.type == DateTimeType.RECURRENCE_PREFIX && recurInterval == null) {
+                try {
+                    current.recurInterval = ParserUtil.parseStringToRecurInterval(
+                                            current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
+                    recurInterval = current;
+                } catch (IllegalValueException ex) {
+                    continue;
+                }
+            } else if (!ParserUtil.canParse(current.data)) {
+                continue;
+            } else if (current.type == DateTimeType.END && endDateTime == null) {
+                endDateTime = current;
+            } else if (current.type == DateTimeType.START && startDateTime == null) {
+                startDateTime = current;
+            }
+        }
+        return new DateTimeProperties(startDateTime, endDateTime, recurInterval);
     }
 
 }
