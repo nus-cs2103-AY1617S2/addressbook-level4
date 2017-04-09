@@ -216,7 +216,7 @@ Should you wish to, you can specify the directory of the saved data using the fo
 
 ### 2.15. Specify data file directory : `save`
 
-Saves all user data into a file in the specifed directory.
+Changes the data file location to the specifed directory.
 Format: `save DIRECTORY`
 
 Example:
@@ -226,7 +226,7 @@ Example:
 
 ### 2.16. Autocomplete
 
-Autocomplete the user's command on the CLI. This applies to the following commands:
+Autocomplete the any command that you have entered in the command box. This applies to the following commands:
 
 * `add`
 * `clear`
@@ -247,8 +247,11 @@ Autocomplete the user's command on the CLI. This applies to the following comman
 ```javascript
 User enters `f` and presses `TAB`, `find` command will appear in the input box.
 ```
+### 2.17. Browse previously entered commands
 
-### 2.17. Exit : `exit`
+Browse through previously typed commands that you have entered into Opus using <kbd>↑</kbd> and <kbd>↓</kbd>. Opus will cycle through the list of entered commands in the command box.
+
+### 2.18. Exit : `exit`
 
 Closes Opus.
 
