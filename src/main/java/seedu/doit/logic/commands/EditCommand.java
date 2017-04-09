@@ -26,8 +26,8 @@ import seedu.doit.model.tag.UniqueTagList;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_PARAMETER = "INDEX [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]";
-    public static final String COMMAND_RESULT = "Edits exisitng task with new details";
+    public static final String COMMAND_PARAMETER = "INDEX [NAME] [s/START TIME] [e/END TIME] [p/PRIORITY] [#TAG]";
+    public static final String COMMAND_RESULT = "Edits existing task with new details";
     public static final String COMMAND_EXAMPLE = "edit 1 s/9pm e/11pm p/high t/CS1010";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_RESULT + "Parameters: " + COMMAND_PARAMETER
             + "\nExample: " + COMMAND_EXAMPLE;
@@ -40,8 +40,10 @@ public class EditCommand extends Command {
     private EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
-     * @param editTaskDescriptor    details to edit the task with
+     * @param filteredTaskListIndex
+     *            the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor
+     *            details to edit the task with
      */
 
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
@@ -57,8 +59,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit,
-                                         EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
         assert editTaskDescriptor != null;
 
@@ -69,16 +70,14 @@ public class EditCommand extends Command {
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        return new Task(updatedName, updatedPriority, updatedStartTime,
-            updatedDeadline, updatedDescription, updatedTags);
+        return new Task(updatedName, updatedPriority, updatedStartTime, updatedDeadline, updatedDescription,
+                updatedTags);
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
 
         List<ReadOnlyTask> lastShownTaskList = this.model.getFilteredTaskList();
-
 
         if (this.filteredTaskListIndex >= lastShownTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -93,18 +92,16 @@ public class EditCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             this.model.updateFilteredListToShowAll();
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(
-                    this.model.getFilteredTaskList().indexOf(editedTask)));
+            EventsCenter.getInstance()
+                    .post(new JumpToListRequestEvent(this.model.getFilteredTaskList().indexOf(editedTask)));
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
 
         }
     }
 
-
-
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
         protected Optional<Name> name = Optional.empty();
@@ -130,8 +127,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags,
-                this.deadline, this.startTime);
+            return CollectionUtil.isAnyPresent(this.name, this.priority, this.description, this.tags, this.deadline,
+                    this.startTime);
         }
 
         public Optional<Name> getName() {
