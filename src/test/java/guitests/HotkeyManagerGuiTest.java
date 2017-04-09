@@ -22,7 +22,8 @@ public class HotkeyManagerGuiTest extends TaskManagerGuiTest {
     }
 
     private void assertMainGuiHidden(MainGuiHandle mainGuiHandle) {
-        assertFalse(mainGuiHandle.getPrimaryStage().isFocused() || mainGuiHandle.getPrimaryStage().isIconified());
+        assertFalse((mainGuiHandle.getPrimaryStage().isFocused() == true)
+                    && (mainGuiHandle.getPrimaryStage().isIconified() == false));
     }
 
 }
