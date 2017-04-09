@@ -1,6 +1,6 @@
 # Fast Task - Developer Guide
 
-By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -401,7 +401,7 @@ Use case ends.
 
 > 3a1. Fask Task shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Mark a task as completed
 
 **MSS**
@@ -421,7 +421,7 @@ Use case ends.
 
 > 3a1. Fask Task shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Sort the tasks
 
 **MSS**
