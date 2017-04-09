@@ -133,7 +133,7 @@ Format : `set email/EMAIL pwd/PASSWORD`
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
 
-<img src="images/set_JOBS.png" width="700"><br>
+<img src="images/set_JOBS.png" width="800"><br>
 
 ### Display Google Calendar: `display`
 Display is the command to enable the Google Calendar function for JOBS.
@@ -153,8 +153,9 @@ Example:
 * for MAC `path /users/home/desktop/taskbook.xml`
 * for Windows `path users/home/desktop/taskbook.xml`
 
-<img src="images/Path1_JOBS.png" width="600"><br>
-<img src="images/Path2_JOBS.png" width="600"><br>
+<img src="images/Path1_JOBS.png" width="800"><br>
+
+<img src="images/Path2_JOBS.png" width="800"><br>
 
 ### Exit the program: `exit`
 Exits the program.
