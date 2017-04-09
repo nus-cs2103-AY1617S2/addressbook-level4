@@ -1,8 +1,5 @@
 package seedu.jobs.model.calendar;
 
-import com.google.api.client.util.DateTime;
-import com.google.api.services.calendar.model.EventDateTime;
-
 import seedu.jobs.model.task.Task;
 
 public class EventCalendar {

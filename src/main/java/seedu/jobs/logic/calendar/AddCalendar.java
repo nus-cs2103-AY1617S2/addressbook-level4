@@ -41,9 +41,9 @@ public class AddCalendar extends BasicCommandCalendar {
                 .setDateTime(endDateTime)
                 .setTimeZone("Singapore");
         event.setEnd(end);
-
+        
         if (!(toAdd.getPeriod().equals("0"))) {
-            String[] recurrence = new String[] {"RRULE:FREQ=WEEKLY;COUNT=" + toAdd.getPeriod()};
+        	String[] recurrence = new String[] {"RRULE:FREQ=WEEKLY;COUNT=" + toAdd.getPeriod()};
             event.setRecurrence(Arrays.asList(recurrence));
         }
 
