@@ -132,7 +132,8 @@ Format : `display`
 Path is the command to change the saving directory of the taskbook and automatically create the .xml file.
 Format : `path PATH`
 1. **PATH** will have to be a valid directory followed by [name of file].xml.
-2. Restriction for MAC includes directory preceded by /.
+2. Restriction for MAC, directory preceded by /.
+3. Restriction for Windows, unable to create .xml file in directory users/.
 3. [name of file].xml without specification of directory will automatically save document in the project directory.
 
 Example:
