@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         } else if (toDoList.contains(taskToCheck)) {
             int index = toDoList.getTaskList().indexOf(taskToCheck);
-            if(toDoList.getTaskList().get(index).getDoneStatus() == false) {
+            if (toDoList.getTaskList().get(index).getDoneStatus() == false) {
                 undoneLatestRecur(taskToUncomplete, taskToCheck);
             } else {
                 undoneNonLatestRecur(taskToUncomplete);
@@ -162,8 +162,8 @@ public class ModelManager extends ComponentManager implements Model {
         toDoList.undoneTask(taskToUncomplete);
     }
 
-    private void undoneLatestRecur(ReadOnlyTask taskToUncomplete, ReadOnlyTask taskToRevertBackward) throws
-            TaskNotFoundException {
+    private void undoneLatestRecur(ReadOnlyTask taskToUncomplete, ReadOnlyTask taskToRevertBackward)
+            throws TaskNotFoundException {
         toDoList.removeTask(taskToUncomplete);
         toDoList.backwardRecur(taskToRevertBackward);
     }
