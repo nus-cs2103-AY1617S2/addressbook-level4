@@ -147,13 +147,13 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() {
         // @@author A0114523U
-        overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
-        todayTaskListPanel = new TaskListPanel(getTodayTaskListPlaceholder(), logic.getFilteredTodayTaskList());
+        overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList(), true);
+        todayTaskListPanel = new TaskListPanel(getTodayTaskListPlaceholder(), logic.getFilteredTodayTaskList(), true);
         // @@author
 
         // @@author A0131278H
-        toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList());
-        doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList());
+        toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList(), false);
+        doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList(), false);
         // @@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());

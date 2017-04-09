@@ -217,7 +217,8 @@ public class UniqueTaskList implements Iterable<Task> {
     static class OverdueTaskPredicate {
 
         public static Predicate<Task> overdue(Date today) {
-            return p -> p.getEndDate().isPresent() ? p.getEndDate().get().before(today) : false;
+            return p -> p.getEndDate().isPresent() && !p.getStatus().value ? 
+                    p.getEndDate().get().before(today) : false;
         }
 
     }
@@ -233,7 +234,8 @@ public class UniqueTaskList implements Iterable<Task> {
 
         public static Predicate<Task> dueToday(Date today) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            return p -> p.getEndDate().isPresent() ? sdf.format(today).equals(sdf.format(p.getEndDate().get())) : false;
+            return p -> p.getEndDate().isPresent() && !p.getStatus().value
+                    ? sdf.format(today).equals(sdf.format(p.getEndDate().get())) : false;
         }
 
     }
