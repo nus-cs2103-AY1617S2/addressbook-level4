@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.tag.Tag;
+import seedu.task.model.tag.Tag;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.YTomorrow;
 import seedu.task.model.task.Task;
