@@ -26,6 +26,6 @@ public class ListCommand extends Command {
 	@Override
 	public CommandResult execute() {
 		model.updateFilteredListToShowAll();
-		return new CommandResult(MESSAGE_SUCCESS);
+		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
 }
