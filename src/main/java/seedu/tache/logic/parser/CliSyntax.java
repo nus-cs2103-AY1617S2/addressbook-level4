@@ -51,7 +51,6 @@ public class CliSyntax {
     public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
     public static final String[] RECURRENCE_PREFIX_IDENTIFIER = {"every"};
     public static final String[] DAILY_REURRENCE_IDENTIFIER = {"daily"};
-    public static final
     //@@author
 
     /* Patterns definitions */
