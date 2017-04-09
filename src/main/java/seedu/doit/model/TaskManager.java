@@ -176,12 +176,8 @@ public class TaskManager implements ReadOnlyItemManager {
      * @throws TaskNotFoundException
      *             if no such task could be found in the UniqueTaskList.
      */
-    public boolean removeTask(ReadOnlyTask key) throws TaskNotFoundException {
-        if (tasks.remove(key)) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
+    public void removeTask(ReadOnlyTask key) {
+        tasks.remove(key);
     }
 
     /**
@@ -190,15 +186,11 @@ public class TaskManager implements ReadOnlyItemManager {
      * @throws TaskNotFoundException
      *             if no such task could be found in the UniqueTaskList.
      */
-    public boolean removeTask(Set<ReadOnlyTask> keys) throws TaskNotFoundException {
-        if (tasks.remove(keys)) {
-            return true;
-        } else {
-            throw new UniqueTaskList.TaskNotFoundException();
-        }
+    public void removeTask(Set<ReadOnlyTask> keys) {
+        tasks.remove(keys);
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
