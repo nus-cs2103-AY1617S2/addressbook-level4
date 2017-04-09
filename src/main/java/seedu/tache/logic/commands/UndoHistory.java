@@ -1,21 +1,29 @@
+//@@author A0150120H
 package seedu.tache.logic.commands;
 
 import java.util.Stack;
 
-//@@author A0150120H
 /*
  * Class to handle the Undo history. Uses a First-In-Last-Out data structure
- * Only 1 instance can be active at any point of execution
+ * This class follows the Singleton Pattern
  */
 public class UndoHistory {
 
     private Stack<Undoable> data;
     private static UndoHistory currentInstance;
 
+    /*
+     * Creates a new UndoHistory object.
+     * This should only be called once in the entire exectution
+     */
     private UndoHistory() {
         data = new Stack<Undoable>();
     }
 
+    /*
+     * Adds an Undoable Command onto the stack
+     * @param
+     */
     public void push(Undoable target) {
         data.push(target);
     }
