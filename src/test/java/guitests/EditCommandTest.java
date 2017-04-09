@@ -1,17 +1,18 @@
 //@@author A0113795Y
 package guitests;
 import static org.junit.Assert.assertTrue;
-//import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-
+import seedu.task.commons.exceptions.IllegalValueException;
 //import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.RecurringFrequency;
@@ -89,6 +90,46 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage("1 tasks listed!");
     }
 
+    @Test
+    public void completeRecurring() throws DuplicateTagException, IllegalValueException {
+        TestTask taskToComplete = td.recMonth;
+        commandBox.runCommand("clear");
+        commandBox.runCommand(taskToComplete.getAddCommand());
+        commandBox.runCommand("complete 1");
+
+        Task editedTask = new Task(taskToComplete.getDescription(), taskToComplete.getPriority(),
+                taskToComplete.getStartTiming(), taskToComplete.getEndTiming(),
+                new UniqueTagList("complete"), false, new RecurringFrequency(null));
+
+        commandBox.runCommand("find 01/01/2017");
+        assertResultMessage("1 tasks listed!");
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getDescription().description);
+        assertMatching(editedTask, editedCard);
+
+        // Check the first occurrence
+        commandBox.runCommand("find 01/03/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the second occurrence
+        commandBox.runCommand("find 01/05/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the third occurrence
+        commandBox.runCommand("find 01/07/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the fourth occurrence
+        commandBox.runCommand("find 01/09/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the fifth occurrence
+        commandBox.runCommand("find 01/11/2017");
+        assertResultMessage("1 tasks listed!");
+
+        // Check the sixth occurrence
+        commandBox.runCommand("find 01/01/2018");
+        assertResultMessage("1 tasks listed!");
+    }
 //     @Test
 //     public void edit_notAllFieldsSpecified_success() throws Exception {
 //         String detailsToEdit = "t/sweetie t/bestie";
@@ -131,12 +172,15 @@ public class EditCommandTest extends AddressBookGuiTest {
 //     detailsToEdit, editedPerson);
 //     }
 //
-//     @Test
-//     public void edit_missingPersonIndex_failure() {
-//         commandBox.runCommand("edit Bobby");
-//         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//                 EditCommand.MESSAGE_USAGE));
-//     }
+    @Test
+     public void edit_missingPersonIndex_failure() {
+        commandBox.runCommand("clear");
+        TestTask taskToEdit = td.fiona;
+        commandBox.runCommand(taskToEdit.getAddCommand());
+        commandBox.runCommand("edit Bobby");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                 EditCommand.MESSAGE_USAGE));
+    }
 //
 //     @Test
 //     public void edit_invalidPersonIndex_failure() {
