@@ -45,10 +45,10 @@ Role: Developer <br>
 - Components in charge of: [Logic](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/docs/DeveloperGuide.md#logic-component)
 - Aspects/tools in charge of: Documentation, Eclipse expert, Markdown
 - Features implemented:
-	- ChangeTheme Command
+	- ChangeTheme command
 	- Power search
 	- Several Util Classes : TaskUtil, DateUtil
-- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)]
+- Code written: [[functional code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/main/A0142487Y.md)][[test code](https://github.com/CS2103JAN2017-F14-B2/main/blob/master/collated/test/A0142487Y.md)]
 - Other major contributions:
 	- Implementation of CommandLibrary
 	- Two alternative themes: Light and Dark
