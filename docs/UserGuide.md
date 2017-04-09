@@ -548,10 +548,10 @@ Delete | `delete INDEX(ES)` | `delete 3`
 Delete Alias | `unalias ALIAS` | `unalias hs`
 Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
-Help | `help [COMMAND]` | 'help add'
+Help | `help [COMMAND]` | `help add`
 History | `history`
 Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
-Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | 'sort priority'
+Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
 Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
 Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
