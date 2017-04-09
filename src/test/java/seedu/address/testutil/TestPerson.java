@@ -45,7 +45,7 @@ public class TestPerson implements ReadOnlyTask {
         this.group = group;
     }
 
-    //@@ author A0164032U
+    //@@author A0164032U
     public void setStartDate(StartDate start) {
         this.start = start;
     }
@@ -81,7 +81,7 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public UniqueTagList getTags() {
-    	return new UniqueTagList(tags);
+        return new UniqueTagList(tags);
     }
 
     @Override
@@ -92,24 +92,27 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("s/" + this.getStartDate().getInputValue() + " ");
-        sb.append("d/" + this.getEndDate().getInputValue() + " ");
-        sb.append("g/" + this.getGroup().value + " ");
+        sb.append("from " + this.getStartDate().getInputValue() + " ");
+        sb.append("to " + this.getEndDate().getInputValue() + " ");
+        sb.append("in " + this.getGroup().value + " ");
         return sb.toString();
     }
 
     @Override
-	public boolean hasPassed() {
+    public boolean hasPassed() {
         return false;
     }
 
     @Override
-	public java.util.Date getEndTime() {
-        return null;
+    public java.util.Date getEndTime() {
+        if (end != null) {
+            return end.getTime();
+        }
+        return new java.util.Date(Long.MAX_VALUE);
     }
 
     @Override
-	public java.util.Date getStartTime() {
+    public java.util.Date getStartTime() {
         return null;
     }
 }
