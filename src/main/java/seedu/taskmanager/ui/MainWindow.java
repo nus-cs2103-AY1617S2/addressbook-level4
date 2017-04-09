@@ -67,6 +67,8 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0114523U
     @FXML
     private AnchorPane overdueTaskListPanelPlaceholder;
+    
+    @FXML
     private AnchorPane todayTaskListPanelPlaceholder;
     // @@author
     
@@ -144,9 +146,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-
-//        browserPanel = new BrowserPanel(browserPlaceholder);
-//        taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         // @@author A0114523U
         overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
         todayTaskListPanel = new TaskListPanel(getTodayTaskListPlaceholder(), logic.getFilteredTodayTaskList());

@@ -60,8 +60,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
 
         // @@author A0114523U
-        filteredOverdueTasks = new FilteredList<>(this.taskManager.getTaskList());
-        filteredTodayTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredOverdueTasks = new FilteredList<>(this.taskManager.getOverdueTaskList());
+        filteredTodayTasks = new FilteredList<>(this.taskManager.getTodayTaskList());
         // @@author
 
         // @@author A0131278H
@@ -199,6 +199,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
         filteredToDoTasks.setPredicate(null);
         filteredDoneTasks.setPredicate(null);
+        filteredTodayTasks.setPredicate(null);
+        filteredOverdueTasks.setPredicate(null);
     }
     // @@author
 
@@ -226,6 +228,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
         filteredToDoTasks.setPredicate(expression::satisfies);
         filteredDoneTasks.setPredicate(expression::satisfies);
+        filteredTodayTasks.setPredicate(expression::satisfies);
+        filteredOverdueTasks.setPredicate(expression::satisfies);
     }
     // @@author
 

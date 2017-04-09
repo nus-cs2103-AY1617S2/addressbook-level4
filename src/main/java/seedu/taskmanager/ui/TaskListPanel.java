@@ -1,6 +1,5 @@
 package seedu.taskmanager.ui;
 
-import java.util.Date;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -21,8 +20,8 @@ import seedu.taskmanager.model.task.ReadOnlyTask;
  */
 public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
-    private static final String FXML1 = "TaskListPanel.fxml";
-//    private static final String FXML2 = "OverdueTaskListPanel.fxml";
+    private static final String FXML1 = "TodayTaskListPanel.fxml";
+    private static final String FXML2 = "OverdueTaskListPanel.fxml";
 
     @FXML
     private ListView<ReadOnlyTask> taskListView;
@@ -35,8 +34,6 @@ public class TaskListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
-//        Date today = new Date();
-//        updateFilteredTaskList(today);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -87,5 +84,4 @@ public class TaskListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

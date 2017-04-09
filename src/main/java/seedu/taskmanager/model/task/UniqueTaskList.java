@@ -201,12 +201,13 @@ public class UniqueTaskList implements Iterable<Task> {
     }
     
     // @@author A0114523U
-    public static Date today = new Date();
-    
-    public ObservableList<Task> getTaskListByDate(){
-    	if (today.after(EndDate)) {
+    /**
+     * Filters task list based on enddate (overdue or due today).
+     */
+    public ObservableList<Task> getTaskListByDate(Date endDate){
+    	if (endDate.before(EndDate.today)) {
     		return internalList.filtered(DatePredicate.isOverdue());
-    	} else if (today.equals(EndDate)) {
+    	} else if (endDate.equals(EndDate.today)) {
     		return internalList.filtered(DatePredicate.isToday());
     	} else {
     		return internalList;
@@ -215,11 +216,11 @@ public class UniqueTaskList implements Iterable<Task> {
     
     static class DatePredicate {
     	public static Predicate<Task> isOverdue() {
-    		return p -> p.getEndDate().before(today);
+    		return p -> p.getEndDate().equals(EndDate.today);
     	}
     	
     	public static Predicate<Task> isToday() {
-    		return p -> p.getEndDate().equals(today);
+    		return p -> p.getEndDate().equals(EndDate.today);
     	}
     }
     // @@author

@@ -14,6 +14,7 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.UniqueTaskList;
@@ -191,11 +192,11 @@ public class TaskManager implements ReadOnlyTaskManager {
     
     // @@author A0114523U
     public ObservableList<ReadOnlyTask> getOverdueTaskList() {
-    	return new UnmodifiableObservableList<>(tasks.asObservableList());
+    	return new UnmodifiableObservableList<>(tasks.getTaskListByDate(EndDate.today));
     }
     
     public ObservableList<ReadOnlyTask> getTodayTaskList() {
-    	return new UnmodifiableObservableList<>(tasks.asObservableList());
+    	return new UnmodifiableObservableList<>(tasks.getTaskListByDate(EndDate.today));
     }
     // @@author
 
