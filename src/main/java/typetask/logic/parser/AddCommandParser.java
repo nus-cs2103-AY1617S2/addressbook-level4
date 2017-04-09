@@ -53,16 +53,16 @@ public class AddCommandParser {
             List<Date> startDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_START_DATE).get());
             List<Date> endDate = DateParser.getDate(argsTokenizer.getValue(PREFIX_END_DATE).get());
             String priority = "Low";
-            if (!DateParser.checkValidDateFormat(startDate)) {
+            if (!DateParser.isValidDateFormat(startDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE));
             }
-            if (!DateParser.checkValidDateFormat(endDate)) {
+            if (!DateParser.isValidDateFormat(endDate)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE));
             }
             if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
                 priority = argsTokenizer.getValue(PREFIX_PRIORITY).get();
             }
-            if (DateParser.checkValidSchedule(startDate, endDate)) {
+            if (DateParser.isValidSchedule(startDate, endDate)) {
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         DateParser.getDateString(startDate),
@@ -74,7 +74,7 @@ public class AddCommandParser {
         } else if (taskType == deadlineTaskWithDate) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_DATE).get());
             String priority = "Low";
-            if (!DateParser.checkValidDateFormat(deadline)) {
+            if (!DateParser.isValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
             if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {
@@ -90,7 +90,7 @@ public class AddCommandParser {
         } else if (taskType == deadlineTaskWithTime) {
             List<Date> deadline = DateParser.getDate(argsTokenizer.getValue(PREFIX_TIME).get());
             String priority = "Low";
-            if (!DateParser.checkValidDateFormat(deadline)) {
+            if (!DateParser.isValidDateFormat(deadline)) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_DATE_FORMAT_FOR_DATE));
             }
             if (argsTokenizer.getValue(PREFIX_PRIORITY).isPresent())  {

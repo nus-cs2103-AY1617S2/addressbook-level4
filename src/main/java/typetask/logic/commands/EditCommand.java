@@ -68,7 +68,7 @@ public class EditCommand extends Command {
             } else {
                 List<Date> startDate = DateParser.parse(editedTask.getDate().value);
                 List<Date> endDate = DateParser.parse(editedTask.getEndDate().value);
-                if (!DateParser.checkValidSchedule(startDate, endDate)) {
+                if (!DateParser.isValidSchedule(startDate, endDate)) {
                     return new CommandResult(MESSAGE_INVALID_DATE);
                 }
             }

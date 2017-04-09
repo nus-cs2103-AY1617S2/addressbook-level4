@@ -75,34 +75,34 @@ public class DateParserTest {
     public void checkValidSchedule_success() {
         List<Date> startDate = DateParser.parse("today");
         List<Date> endDate = DateParser.parse("tmr");
-        assertTrue(DateParser.checkValidSchedule(startDate, endDate));
+        assertTrue(DateParser.isValidSchedule(startDate, endDate));
     }
     @Test
     public void checkValidSchedule_fail() {
         List<Date> startDate = DateParser.parse("tmr");
         List<Date> endDate = DateParser.parse("today");
-        assertFalse(DateParser.checkValidSchedule(startDate, endDate));
+        assertFalse(DateParser.isValidSchedule(startDate, endDate));
     }
     @Test
     public void checkValidDateFormat_success() {
         List<Date> validDate = DateParser.parse(dateTimeString);
-        assertTrue(DateParser.checkValidDateFormat(validDate));
+        assertTrue(DateParser.isValidDateFormat(validDate));
     }
     @Test
     public void checkValidDateFormat_fail() {
         List<Date> invalidDate = DateParser.parse("Not a date");
-        assertFalse(DateParser.checkValidDateFormat(invalidDate));
+        assertFalse(DateParser.isValidDateFormat(invalidDate));
     }
     @Test
     public void checkValidEventDate_success() {
         Date startDate = DateParser.parse("today").get(wantedDate);
         Date endDate = DateParser.parse("tmr").get(wantedDate);
-        assertTrue(DateParser.checkValidEventDate(startDate, endDate));
+        assertTrue(DateParser.isValidEventDate(startDate, endDate));
     }
     @Test
     public void checkValidEventDate_fail() {
         Date startDate = DateParser.parse("tmr").get(wantedDate);
         Date endDate = DateParser.parse("today").get(wantedDate);
-        assertFalse(DateParser.checkValidEventDate(startDate, endDate));
+        assertFalse(DateParser.isValidEventDate(startDate, endDate));
     }
 }

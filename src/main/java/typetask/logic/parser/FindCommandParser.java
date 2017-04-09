@@ -32,7 +32,7 @@ public class FindCommandParser {
         //checks if keyword contains potential dates
         List<Date> listOfDates = DateParser.parse(args);
         String wantedDate = "";
-        if (DateParser.checkValidDateFormat(listOfDates)) {
+        if (DateParser.isValidDateFormat(listOfDates)) {
             wantedDate = DateParser.getDateString(listOfDates);
         }
 

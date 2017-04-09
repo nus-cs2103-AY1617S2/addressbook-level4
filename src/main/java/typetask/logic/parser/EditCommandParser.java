@@ -56,7 +56,7 @@ public class EditCommandParser {
             //Checks for valid deadline. If valid, store new deadline for editing
             if (argsTokenizer.getValue(PREFIX_DATE).isPresent()) {
                 dateList = DateParser.parse(argsTokenizer.getValue(PREFIX_DATE).get());
-                if (!DateParser.checkValidDateFormat(dateList)) {
+                if (!DateParser.isValidDateFormat(dateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
                 }
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
@@ -67,7 +67,7 @@ public class EditCommandParser {
             //Checks for valid deadline. If valid, store new deadline for editing
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
                 timeList = DateParser.parse(argsTokenizer.getValue(PREFIX_TIME).get());
-                if (!DateParser.checkValidDateFormat(timeList)) {
+                if (!DateParser.isValidDateFormat(timeList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
                 }
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));
@@ -78,7 +78,7 @@ public class EditCommandParser {
             //Checks for valid start date. If valid, store new start date for editing
             if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent()) {
                 startDateList = DateParser.parse(argsTokenizer.getValue(PREFIX_START_DATE).get());
-                if (!DateParser.checkValidDateFormat(startDateList)) {
+                if (!DateParser.isValidDateFormat(startDateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE);
                 }
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
@@ -87,7 +87,7 @@ public class EditCommandParser {
             //Checks for valid end date. If valid, store new end date for editing
             if (argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
                 endDateList = DateParser.parse(argsTokenizer.getValue(PREFIX_END_DATE).get());
-                if (!DateParser.checkValidDateFormat(endDateList)) {
+                if (!DateParser.isValidDateFormat(endDateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE);
                 }
                 Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_END_DATE).get()));
@@ -98,7 +98,7 @@ public class EditCommandParser {
                     argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
                 startDateList = DateParser.parse(argsTokenizer.getValue(PREFIX_START_DATE).get());
                 endDateList = DateParser.parse(argsTokenizer.getValue(PREFIX_END_DATE).get());
-                if (!DateParser.checkValidSchedule(startDateList, endDateList)) {
+                if (!DateParser.isValidSchedule(startDateList, endDateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_START_AND_END_DATE);
                 }
             }
