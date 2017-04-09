@@ -33,15 +33,14 @@ all your corresponding tasks and events.
 
 5. Using the application
 
-   >a. This application works by entering commands via the keyboard.<br>
-   >b. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   >c. There are also several keyboard shortcuts found at the bottom of the User Guide for
-   quick access of several functions.<br>
-   >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
+   >This application works by entering commands via the keyboard.<br>
+   >Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   >For example, typing **`HELP`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window. <br>
+   
    > <img src="images/ProcrastiNomore_Help.PNG" width="800">
 
-6. Refer to the [Features](#features) section below for more details on the various
+6. Refer to the [Features](#Features) section below for more details on the various
 commands you can use.<br>
 
 
@@ -49,10 +48,10 @@ commands you can use.<br>
 
 > **Command Format**
 >
-> * Words in `UPPER_CASE` are the parameters.
+> * Words in `UPPER_CASE` are the command words.
+> * Command words can be in any order.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
 
 ### 3.1. Viewing help : `HELP`
 
@@ -70,15 +69,16 @@ There are 3 forms of task that ProcrastiNomore supports:
 
 #### 3.2.1. Events
 
-Format: `ADD TASK ON DATE/DAY` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
+Format: `ADD task ON date/day` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD task ON date/day time TO time` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD task FROM date time TO date time` <br />
 > <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="800">
 > <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="800">
 
 #### 3.2.2. Deadlines
 
-Format: `ADD TASK BY DATE/TIME/DATE+TIME`
+Format: `ADD task BY date/time/date time`
+> <img src="images/ProcrastiNomore_Add_Deadline.PNG" width="800>
 
 #### 3.2.3. Untimed
 

@@ -27,7 +27,6 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<TaskManager> undoTaskManager;
     private Stack<TaskManager> redoTaskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
-    private Task recurringTask;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
