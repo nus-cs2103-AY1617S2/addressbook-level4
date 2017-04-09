@@ -121,8 +121,8 @@ More information about using Gradle can be found [here](https://github.com/CS210
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+The **_Architecture Diagram_** above explains the high-level design of the App.
+Below is a quick overview of each component.
 
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
@@ -130,8 +130,8 @@ Given below is a quick overview of each component.
 #### Main
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* Initializing the components in the correct sequence at app launch, and connects them up with each other.
+* Shutting down the components and invokes cleanup method where necessary on exit.
 
 #### Commons
 [**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
@@ -139,19 +139,19 @@ Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file for debugging and communication between developers.
+* `LogsCenter` : This class is used by many other classes to write log messages to the App's log file for debugging and communication between developers.
 
 #### User Interface (UI)
-The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists.
+The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program.
 
 #### Logic
-The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass it to the model to process.
+The [**`Logic`**](#23-logic-component) accepts commands sent from the user passes it to the model for processing.
 
 #### Model
-The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
+The [**`Model`**](#24-model-component) holds the data of the App in-memory to manage and edit it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#25-storage-component) Reads data from and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads and write data to the hard disk.
 
 Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component),
 [**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
@@ -166,15 +166,14 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven Architecture
 
-Event-driven architecture (EDA) consists of event emitters and receivers that allow loosely coupled components to communicate each other. The affected components react only when they receive events and process accordingly.
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+Event-driven architecture (EDA) consists of event emitters and receivers that allow loosely coupled components to communicate with each other. The affected components react only when they receive events.
+The _Sequence Diagram_ below shows how the components interact when the user inputs the command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the TaskManager data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
+>Note how `Model` simply raises a `TaskManagerChangedEvent` when the TaskManager data is modified,
+ instead of asking `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
@@ -182,10 +181,10 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+  to be coupled to either of them. This is an example of how Event Driven approach helps us reduce direct
   coupling between components.
 
-The sections below give more details of each component.
+The sections below give more details about each component.
 
 ### 2.2. UI component
 
@@ -209,9 +208,9 @@ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 | `SidePanel`       | Displays tasks that are due, or events that are starting in the current week |
 | `StatusBarFooter` | Displays the time when the app has be last updated and the storage file path |
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/opus/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component:
@@ -329,7 +328,7 @@ whenever there is a change to the task manager data, the component updates the s
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.opus.commons` package.
+Classes used by multiple components can be found in the `seedu.opus.commons` package.
 
 ### 2.7. Activity Diagram
 
@@ -341,7 +340,7 @@ Below is the activity diagram to model Opus' workflow.
 
 ### 3.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+We are using the default `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
@@ -353,14 +352,14 @@ and logging destinations.
 **Logging Levels**
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `WARNING` : Application can still continue to run, but proceed with caution
+* `INFO` : Information showing noteworthy actions by the App
+* `FINE` : Details that are not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
 ### 3.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
+Certain properties of the application can be cofigured (e.g App name, logging level) through the configuration file
 (default: `config.json`).
 
 
@@ -398,13 +397,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.opus.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.opus.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.opus.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -432,10 +431,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ### 4.4. Troubleshooting tests
 
-#### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests.
-<br>1. Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
+#### 4.4.1. Tests fail because NullPointException when AssertionError is expected
+This is because Assertions are not enabled for JUnit tests.<br>
+1. Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).
 2. Delete run configurations created when you ran tests earlier.
 
 ## 5. Dev Ops
@@ -456,26 +454,22 @@ project site.
 
 ### 5.4. Making a Release
 
-Here are the steps to create a new release.
-
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
+ 3. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
 ### 5.5. Converting Documentation to PDF format
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
+We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) to convert documentation into PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
 
-Here are the steps to convert the project documentation files to PDF format.
-
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
+ 2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
     e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
+ 3. Click on the `Print` option in Chrome's menu.
+ 4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
@@ -487,7 +481,7 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 * [Guava](https://github.com/google/guava) `19.0`
 * [Jackson](https://github.com/FasterXML/jackson) `2.7.0`
 * [jUnit](http://junit.org/junit4/) `4.12`
-* [TestFx](https://github.com/TestFX/TestFX) `4.0`
+* [TestFx](https://github.com/TestFX/TestFX) `4.0.5-alpha`
 * [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
 
 ## 6. Version Control
