@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.AddCommand;
-import seedu.watodo.logic.commands.AlternativeCommandLibrary;
+import seedu.watodo.logic.commands.AlternativeCommandsLibrary;
 import seedu.watodo.logic.commands.ClearCommand;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.DeleteCommand;
@@ -17,7 +17,13 @@ import seedu.watodo.logic.commands.ExitCommand;
 import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
 import seedu.watodo.logic.commands.IncorrectCommand;
+import seedu.watodo.logic.commands.ListAllCommand;
 import seedu.watodo.logic.commands.ListCommand;
+import seedu.watodo.logic.commands.ListDeadlineCommand;
+import seedu.watodo.logic.commands.ListDoneCommand;
+import seedu.watodo.logic.commands.ListEventCommand;
+import seedu.watodo.logic.commands.ListFloatCommand;
+import seedu.watodo.logic.commands.ListUndoneCommand;
 import seedu.watodo.logic.commands.MarkCommand;
 import seedu.watodo.logic.commands.RedoCommand;
 import seedu.watodo.logic.commands.SaveAsCommand;
@@ -26,6 +32,7 @@ import seedu.watodo.logic.commands.ShortcutCommand;
 import seedu.watodo.logic.commands.UndoCommand;
 import seedu.watodo.logic.commands.UnmarkCommand;
 import seedu.watodo.logic.commands.ViewFileCommand;
+import seedu.watodo.logic.commands.ViewShortcutsCommand;
 
 
 /**
@@ -54,8 +61,8 @@ public class Parser {
         String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments").trim();
 
-        if (AlternativeCommandLibrary.isAlternative(commandWord)) {
-            commandWord = AlternativeCommandLibrary.getStandardCommandWord(commandWord);
+        if (AlternativeCommandsLibrary.isAlternative(commandWord)) {
+            commandWord = AlternativeCommandsLibrary.getStandardCommandWord(commandWord);
         }
 
         switch (commandWord) {
@@ -87,6 +94,24 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_WORD + " " + ListAllCommand.ARGUMENT:
+            return new ListAllCommand();
+
+        case ListCommand.COMMAND_WORD + " " + ListDeadlineCommand.ARGUMENT:
+            return new ListDeadlineCommand();
+
+        case ListCommand.COMMAND_WORD + " " + ListDoneCommand.ARGUMENT:
+            return new ListDoneCommand();
+
+        case ListCommand.COMMAND_WORD + " " + ListEventCommand.ARGUMENT:
+            return new ListEventCommand();
+
+        case ListCommand.COMMAND_WORD + " " + ListFloatCommand.ARGUMENT:
+            return new ListFloatCommand();
+
+        case ListCommand.COMMAND_WORD + " " + ListUndoneCommand.ARGUMENT:
+            return new ListUndoneCommand();
+
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
 
@@ -107,6 +132,9 @@ public class Parser {
 
         case ViewFileCommand.COMMAND_WORD:
             return new ViewFileCommand();
+
+        case ViewShortcutsCommand.COMMAND_WORD:
+            return new ViewShortcutsCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
