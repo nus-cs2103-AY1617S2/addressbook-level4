@@ -22,7 +22,8 @@ By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbs
 	3.11. [Getting Help](#311-get-help--help) <br>
 	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
 	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
-	3.14. [Exiting](#314-exit-the-program--exit)
+	3.14. [Hotkey Toggling](#314-hotkey-toggling) <br>
+	3.15. [Exiting](#315-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 
@@ -311,7 +312,7 @@ _Figure 3.9.1. Undo Command_
 
 For advanced users: **`u`** <br>
 
-### 3.10. Navigate the Calendar:
+### 3.10. Navigate the calendar:
 
 Replaces navigation buttons on the calendar with user commands. <br>
 
@@ -326,7 +327,7 @@ _Figure 3.10.1. Calendar_
 
 For advanced users: **`p`**, **`n`**, **`s`** `<view>` <br>
 
-### 3.12. Get help : `help`
+### 3.11. Get help : `help`
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
@@ -341,7 +342,7 @@ _Figure 3.12.1. Help Command_
 
 For advanced users: **`h`** `<command>` <br>
 
-### 3.13. Change data file location
+### 3.12. Change data file location
 
 Modifies the file path of my data file. <br>
 Future modifications of my task list will be saved at this new location. <br>
@@ -360,7 +361,7 @@ then save all my data in that file.
 <img src="images/UiSaveCommand.png" width="600"><br>
 _Figure 3.13.1. Save Command_
 
-### 3.14. Load data file from location
+### 3.13. Load data file from location
 
 Loads the specified data file. <br>
 
@@ -375,6 +376,18 @@ This command loads the data from the specified file in the `<file_path>`.
 
 <img src="images/UiLoadCommand.png" width="600"><br>
 _Figure 3.14.1. Load Command_
+
+### 3.14. Hotkey toggling
+
+Toggles tache window into/out of view using a hotkey <br>
+
+Here is a reason why you might want to _toggle tache window_:
+
+* **You are reading you email and want to quickly add a new task lest you forget** <br>
+
+  > Instead of moving the mouse to the small icon on the taskbar, simple press the hotkey.  <br>
+
+Hotkey: **`CTRL + ALT + D`** <br>
 
 ### 3.15. Exit the program : `exit`
 
