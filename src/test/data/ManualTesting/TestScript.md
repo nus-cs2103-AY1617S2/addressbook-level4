@@ -15,7 +15,7 @@ Command | Expected Result |
 :-------: | :--------------
 `help` | Opens the cheatsheet window.
 Press F1 | Opens the cheatsheet window.
-`helpug` | Opens the userguide window.
+`help ug` | Opens the userguide window.
 
 <br>
 
