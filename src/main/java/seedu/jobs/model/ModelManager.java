@@ -12,6 +12,8 @@ import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
+import seedu.jobs.logic.commands.FindCommand;
+import seedu.jobs.logic.commands.ListCommand;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList;
@@ -98,15 +100,21 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
-    @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+    }
+    
+  //@@author A0164440M
+    @Override
+    public void updateFilteredListToShowAll(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, ListCommand.COMMAND_WORD)));
     }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, FindCommand.COMMAND_WORD)));
     }
+    //@@author
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -166,18 +174,32 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        
+      //@@author A0164440M
+        //Reuse the function to implement filtered list
+        private String commandWord;
+        private String taskInfo = "";
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, String commandWord) {
             this.nameKeyWords = nameKeyWords;
+            this.commandWord = commandWord;
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-          //@@author A0164440M
-            //Enable find command to find according description and tags
-            String taskInfo = task.getName().fullName + task.getDescription().toString()
-                    + task.getTags().toString();
-          //@@author
+            if (commandWord.equals(FindCommand.COMMAND_WORD)) {
+                //Enable find command to find according description and tags
+                taskInfo = task.getName().fullName + task.getDescription().toString()
+                        + task.getTags().toString();
+            }
+            if (commandWord.equals(ListCommand.COMMAND_WORD)) {
+                //Enable to list completed tasks or in-progress tasks
+                if(nameKeyWords.size() == 1 && (nameKeyWords.contains("complete") ||
+                        nameKeyWords.contains("in-progress") )) {
+                    taskInfo = task.isCompleted() ? "complete" : "in-progress";
+                }
+              //@@author
+            }
             return nameKeyWords.stream()
                     .filter(keyword -> taskInfo.toLowerCase().contains(keyword.toLowerCase()))
                     .findAny()
@@ -189,7 +211,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
-
 
 }
