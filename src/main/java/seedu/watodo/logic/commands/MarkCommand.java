@@ -108,8 +108,8 @@ public class MarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
-        updateTaskListAtIndex(currIndex, this.markedTask);
-        storeTasksForUndo(this.taskToMark, this.markedTask);
+        updateTaskListAtIndex(currIndex, markedTask);
+        storeTasksForUndo(taskToMark, markedTask);
     }
 
     private ReadOnlyTask getTaskToMark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
