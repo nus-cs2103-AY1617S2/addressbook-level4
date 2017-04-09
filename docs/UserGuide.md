@@ -196,7 +196,7 @@ Examples:
 
 You can use this command to view all the tasks that you have yet to finish doing.
 
-Format: `LIST`
+Format: `LIST` <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LIST date/day`
 
 Examples:
