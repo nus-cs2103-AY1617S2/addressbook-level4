@@ -312,8 +312,11 @@ Undo the previous change made to the task manager.
 Format: `undo`
 > * The undo command is able to undo all changes made after the application is opened.
 > * When there is nothing to undo, an error message will be shown.
+> * **Note:** `undo` only works in the same session (i.e. `exit`ing the application, then restarting it, and 
+> then calling `undo` will not restore changes made in the past session)
 
 Examples:
+
 * `undo`
 
 ### 2.14. Revert the previous undo change: `redo`
@@ -321,9 +324,15 @@ Examples:
 Revert the previous undo change to the task manager.
 Format: `redo`
 > * The redo command is able to redo multiple undos.
+> * If you call `undo`, make some changes, then call `redo`, the effect is no change since there is nothing to `redo`.
+> Essentially, `redo` must be called directly after an `undo`, else the logic does not make sense.
 
 Examples:
-* `redo`
+
+* `undo`, `redo`
+Redo's the command which was just undone
+*`delete 1`, `undo`, `add floating task`, `redo`
+No change (nothing to `redo`)
 
 ## 3. Notes on Recurring Tasks
 
@@ -345,11 +354,11 @@ the implementation of such tasks. A few things to note about how to use this fea
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br><br>
 **Q**: How do I change the calendar to view a different month?<br>
-**A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.
-**Q**: How do I undo changes made in a previous session?
-**A**: Unfortunately, command history is cleared upon exiting Task Manager. So, you won't be able to undo those changes. Sorry!
+**A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.<br><br>
+**Q**: How do I undo changes made in a previous session?<br>
+**A**: Command history is cleared upon exiting Task Manager. Thus, does changes cannot be undone.<br><br> 
 
 ## 5. Command Summary
 
