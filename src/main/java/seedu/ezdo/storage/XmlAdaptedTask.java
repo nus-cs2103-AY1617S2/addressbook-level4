@@ -27,8 +27,6 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String priority;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
     private String startDate;
     @XmlElement(required = true)
     private String dueDate;
