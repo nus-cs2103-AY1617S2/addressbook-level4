@@ -106,11 +106,12 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EzDoChangedEvent(ezDo));
     }
 
-  //@@author A0139248X
+    // @@author A0139248X
     /**
      * Deletes the tasks in {@code tasksToKill}.
      *
-     * @throws TaskNotFoundException if a task is not found in ezDo
+     * @throws TaskNotFoundException
+     *             if a task is not found in ezDo
      */
     @Override
     public synchronized void killTasks(ArrayList<ReadOnlyTask> tasksToKill) throws TaskNotFoundException {
@@ -123,8 +124,10 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Adds a task to ezDo.
      *
-     * @throws DuplicateTaskException if the task to be added already exists
-     * @throws DateException if the dates are invalid (start date after due date)
+     * @throws DuplicateTaskException
+     *             if the task to be added already exists
+     * @throws DateException
+     *             if the dates are invalid (start date after due date)
      */
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException {
@@ -154,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
         return isSetToDone;
     }
 
-    //@@author A0139177W
+    // @@author A0139177W
     @Override
     public boolean toggleTasksSelect(ArrayList<Task> tasksToToggle) {
         ezDo.toggleTasksSelect(tasksToToggle);
@@ -164,13 +167,15 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
         return isSetToSelect;
     }
-    //@@author A0139177W
+    // @@author A0139177W
 
     /**
      * Updates an existing task in ezDo.
      *
-     * @throws DuplicateTaskException if the edited task is a duplicate
-     * @throws DateException if the dates are invalid(start date after due date)
+     * @throws DuplicateTaskException
+     *             if the edited task is a duplicate
+     * @throws DateException
+     *             if the dates are invalid(start date after due date)
      */
     @Override
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
@@ -187,7 +192,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Undo ezDo to the previous state.
      *
-     * @throws EmptyStackException if there is no command to undo.
+     * @throws EmptyStackException
+     *             if there is no command to undo.
      */
     @Override
     public void undo() throws EmptyStackException {
@@ -201,7 +207,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Redo ezDo to the previous state.
      *
-     * @throws EmptyStackException if there is no undone command to redo
+     * @throws EmptyStackException
+     *             if there is no undone command to redo
      */
     @Override
     public void redo() throws EmptyStackException {
@@ -225,7 +232,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Checks if a task's dates are valid.
      *
-     * @throws DateException if the start date is after the due date
+     * @throws DateException
+     *             if the start date is after the due date
      */
     @Override
     public void checkTaskDate(ReadOnlyTask task) throws DateException {
@@ -421,7 +429,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if task's {@code Recur} equals given {@code Recur}
          */
         private boolean compareRecur(Recur taskRecur) {
-
+            assert taskRecur != null;
             String taskRecurString = taskRecur.toString();
             boolean recurExist = (taskRecurString.length() != 0);
 
@@ -435,7 +443,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if task's {@code StartDate} equals given {@code DueDate}
          */
         private boolean compareStartDate(TaskDate taskStartDate) {
-
+            assert taskStartDate != null;
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
             int dateLength = 10;
@@ -452,7 +460,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if task's {@code DueDate} equals given {@code DueDate}
          */
         private boolean compareDueDate(TaskDate taskDueDate) {
-
+            assert taskDueDate!= null;
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
             int dateLength = 10;
@@ -465,12 +473,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         /**
-         * returns true if task's {@code StartDate} comes before given {@code StartDate}
          * returns true if task's {@code StartDate} comes before given
-         * {@code StartDate}
-
+         * {@code StartDate} returns true if task's {@code StartDate} comes
+         * before given {@code StartDate}
+         * 
          */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
+            assert taskStartDate != null;
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
@@ -485,6 +494,7 @@ public class ModelManager extends ComponentManager implements Model {
          * {@code DueDate}
          */
         private boolean compareBeforeDue(TaskDate taskDueDate) {
+            assert taskDueDate != null;
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
@@ -499,6 +509,7 @@ public class ModelManager extends ComponentManager implements Model {
          * {@code StartDate}
          */
         private boolean compareAfterStart(TaskDate taskStartDate) {
+            assert taskStartDate != null;
             String taskStartDateString = taskStartDate.toString();
             boolean taskStartDateExist = (taskStartDateString.length() != 0);
 
@@ -511,9 +522,10 @@ public class ModelManager extends ComponentManager implements Model {
         /**
          * returns true if task's {@code DueDate} comes after given
          * {@code DueDate}
-
+         * 
          */
         private boolean compareAfterDue(TaskDate taskDueDate) {
+            assert taskDueDate != null;
             String taskDueDateString = taskDueDate.toString();
             boolean taskDueDateExist = (taskDueDateString.length() != 0);
 
@@ -527,6 +539,8 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if {@code givenDate2} comes before {@code givenDate1}
          */
         private boolean comesBefore(String givenDate1, String givenDate2) {
+            assert givenDate1 != null;
+            assert givenDate2 != null;
             // slice a given date format DD/MM/YYYY MM:SS into DD,MM,YYYY
             // separate strings
             int givenDD = Integer.parseInt(givenDate1.substring(0, 2));
@@ -570,8 +584,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEzDoChanged();
     }
 
-  //@@author
-  //@@author A0139248X
+    // @@author
+    // @@author A0139248X
     /**
      * Raises a {@code SortCriteriaChangedEvent}.
      */
