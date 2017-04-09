@@ -235,8 +235,8 @@ An example of a task you might want to _edit_: <br>
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br><br>
 Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
-You can edit more task details for your task concurrently using the above format.<br>
 E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
+You can edit more task details for your task concurrently using the above format.<br>
 
 >**Special Note**<br>
 >`<task_detail>` can be used interchangeably with no special characters or initials for better convenience <br>
@@ -247,8 +247,8 @@ E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
 
-For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
-For advanced users: **`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
+For advanced users:<br>**`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
+For advanced users:<br>**`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
 
 ### 3.6. Delete a task : `delete`
 
@@ -294,10 +294,10 @@ A reason why you might want to _complete_ a task:
   > I will keep your completed tasks hidden from your default list view until you need to refer to them again. <br>
 
 Format: **`complete`** `<task_index>`<br>
-E.g. **`complete`** `1` <br>
+E.g. **`complete`** `1` <br><br>
 Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
-You can complete multiple tasks simultaneously using the following format:<br>
 E.g. **`complete`** `1,2,3,4` <br>
+You can complete multiple tasks simultaneously using the above format.<br>
 
 <img src="images/UiCompleteCommand.png" width="600"><br>
 _Figure 3.8.1. Complete Command_
@@ -415,8 +415,8 @@ Your wish is my command!
 |:-----------:|:-------------------------------------------------------------:|:---------------------------------------------------:|
 |Add          |**`add`** `<task_name> by <due date and time>`                 |**`add`** `project proposal by 13 apr 2pm`           |
 |List         |**`list`** `<optional filter>`                                 |**`list`** `uncompleted`                             |
-|Find         |**`find`** `<keyword>`                                         |**`find`** `prject`                                  |
-|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread`      |
+|Find         |**`find`** `<keyword>`                                         |**`find`** `project`                                  |
+|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1 change name to buy white bread`      |
 |Delete       |**`delete`** `<task_index>`                                    |**`delete`** `1`                                     |
 |Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
 |Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
