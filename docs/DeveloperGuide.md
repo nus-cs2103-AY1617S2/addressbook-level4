@@ -18,7 +18,7 @@
     3.6. [Common Classes](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#36-common-classes) <br>
 4. [Implementation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#4-implementation) <br>
     4.1. [Logging](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#41-logging) <br>
-    4.2. [Configuration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#42-configuration) <br>
+    4.2. [Configuration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#42-configuration)<br>
 5. [Testing](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#5-testing) <br>
     5.1. [Troubleshooting tests](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#51-troubleshooting-tests) <br>
 6. [Dev Ops](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-dev-ops) <br>
@@ -338,6 +338,8 @@ Using the same example as above, if the `Logic` component requests `Model` t
 
 <img src="images/SDforDeleteTasInModel.png" width="800"><br>
 
+Figure 3.4.2 : Component interactions for delete 1 command in Model
+
 In this interaction, the given task is removed from the task list. The `ModelManager` triggers a `TaskManagerChangedEvent` to save the current list in storage.
 
 
@@ -383,13 +385,13 @@ and logging destinations.
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
-### 3.2. Configuration
+### 4.2. Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 &nbsp;
 
-## 4. Testing
+## 5. Testing
 
 Tests can be found in the `./src/test/java` folder.
 
@@ -428,7 +430,7 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
  That means the developer can do other things on the Computer while the tests are running.<br>
  See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
-### 4.1. Troubleshooting tests
+### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException when AssertionError is expected**
 
@@ -439,23 +441,23 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
    Delete run configurations created when you ran tests earlier.
 &nbsp;
 
-## 5. Dev Ops
+## 6. Dev Ops
 
-### 5.1. Build Automation
+### 6.1. Build Automation
 
 See [UsingGradle.md](UsingGradle.md) to learn how to use Gradle for build automation.
 
-### 5.2. Continuous Integration
+### 6.2. Continuous Integration
 
 We use [Travis CI](https://travis-ci.org/) and [AppVeyor](https://www.appveyor.com/) to perform _Continuous Integration_ on our projects.
 See [UsingTravis.md](UsingTravis.md) and [UsingAppVeyor.md](UsingAppVeyor.md) for more details.
 
-### 5.3. Publishing Documentation
+### 6.3. Publishing Documentation
 
 See [UsingGithubPages.md](UsingGithubPages.md) to learn how to use GitHub Pages to publish documentation to the
 project site.
 
-### 5.4. Making a Release
+### 6.4. Making a Release
 
 Here are the steps to create a new release.
 
@@ -466,7 +468,7 @@ Here are the steps to create a new release.
  2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
-### 5.5. Converting Documentation to PDF format
+### 6.5. Converting Documentation to PDF format
 
 We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
@@ -484,7 +486,7 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
     
-### 5.6. Managing Dependencies
+### 6.6. Managing Dependencies
 
 A project often depends on third-party libraries. For example, Task Manager depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
@@ -495,7 +497,7 @@ a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 &nbsp;
 
-## 7. Appendix A : User Stories
+## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
@@ -534,7 +536,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | clear all tasks | start fresh by clearing all the tasks in the task manager 
 
 &nbsp;
-## 8. Appendix B : Use Cases
+## Appendix B : Use Cases
 
 > For all use cases below, the **System** is the `Task Manager` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -892,7 +894,7 @@ Use case ends
 12. Should display command results within 100 milliseconds
 &nbsp;
 
-## 10. Appendix D : Glossary
+## Appendix D : Glossary
 
 ##### Mainstream OS
 
@@ -908,7 +910,7 @@ Use case ends
 
 &nbsp;
 
-## 11. Appendix E : Product Survey
+## Appendix E : Product Survey
 
 **Product #1: Wunderlist**
 
