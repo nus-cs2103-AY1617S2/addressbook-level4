@@ -346,6 +346,13 @@ The `LogsCenter` class is used to manage logging levels and logging destinations
 Certain properties of the application can be controlled (e.g app name, logging level) through the
 [config file](#configuration-or-config-file) (default: `config.json`).
 
+### 4.3. Undo
+
+**Author:** Ang Zhi Yuan
+
+All commands that can be undone must implement the Undoable interface. The `undo` method must be overridden such that it will
+undo what was changed in `execute`. Developers must ensure that `undo` does not replace any `Task` instance with a new `Task`
+instance, as doing so will break other undo commands in the history that rely on the original `Task` instance to function.
 
 ## 5. Testing
 
@@ -608,6 +615,8 @@ Use case ends.
 > 3a1. `Tache` informs the `User` that the given index is invalid<br>
 Use case resumes at step 2
 
+**Author:** Ang Zhi Yuan
+
 ### Use case: Add task
 
 **MSS**
@@ -627,6 +636,8 @@ Use case ends.
 
 > 1b1. `Tache` informs `User` that the task already exists<br>
 Use case ends
+
+**Author:** Ang Zhi Yuan
 
 ### Use case: Undo command
 
