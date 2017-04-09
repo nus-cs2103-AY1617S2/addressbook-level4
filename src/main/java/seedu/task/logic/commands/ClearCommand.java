@@ -18,10 +18,13 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
+    //@@author A0164466X
     public static final String KEYWORD_ALL = "all";
     public static final String KEYWORD_COMPLETE = Tag.TAG_COMPLETE;
-    public static final String KEYWORD_PASSED = "passed";
+    public static final String KEYWORD_INCOMPLETE = Tag.TAG_INCOMPLETE;
+    //@@author
 
+    //@@author A0163848R
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all tasks, "
             + "or only completed tasts if the " + KEYWORD_COMPLETE + " keyword is specified.\n"
             + "Parameters: [keyword]\n"
@@ -30,13 +33,16 @@ public class ClearCommand extends Command {
             + ", "
             + KEYWORD_COMPLETE
             + ", "
-            + KEYWORD_PASSED
+            + KEYWORD_INCOMPLETE
             + "\n"
             + "Example: " + COMMAND_WORD + " completed";
 
     public static final String MESSAGE_SUCCESS_ALL = "All tasks have been cleared!";
-    public static final String MESSAGE_SUCCESS_COMPLETE = "All competed tasks have been cleared!";
-    public static final String MESSAGE_SUCCESS_PASSED = "All passed tasks have been cleared!";
+    //@@author A0164466X
+    public static final String MESSAGE_SUCCESS_COMPLETE = "All completed tasks have been cleared!";
+    public static final String MESSAGE_SUCCESS_PASSED = "All incompleted tasks have been cleared!";
+    //@@author
+    //@@author A0163848R
     public static final String MESSAGE_FAILURE = "Clear command not given any keywords!\n" + MESSAGE_USAGE;
 
     private Set<String> keywords;
@@ -79,7 +85,7 @@ public class ClearCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS_COMPLETE);
         }
 
-        if (keywords.contains(KEYWORD_PASSED)) {
+        if (keywords.contains(KEYWORD_INCOMPLETE)) {
 
             List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
             for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
