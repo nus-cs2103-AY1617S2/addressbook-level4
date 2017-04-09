@@ -52,11 +52,11 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add TASK_NAME p/PRIORITY_LEVEL sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...`
+Format: `add TASK_NAME [p/PRIORITY_LEVEL] [sd/START_TIMEDATE] [ed/END_TIMEDATE] [t/TAG]...`
 
 > * The TASK_NAME must be **2 or more characters** long. It can begin with any alphabet, number, or special character.
 > * The PRIORITY_LEVEL must be an integer between **1-3**. 1 is the HIGHEST priority level and 3 is the LOWEST (default) priority level.
-> * **TIMEDATE Format: HH:mm dd/MM/yyyy** (HH:MM is optional). The start/end timing parameters (sd/ed respectively) must be in the date > format specified above. Note that "sd/2:15 1/1/2017 is invalid; the correct format is "sd/02:15 01/01/2017".
+> * **TIMEDATE Format: HH:mm dd/MM/yyyy** (HH:MM is optional). The start/end timing parameters (sd/ed respectively) must be in the date >   format specified above. Note that "sd/2:15 1/1/2017 is invalid; the correct format is "sd/02:15 01/01/2017".
 > * To add floating tasks, simply do not specify the start and end timing paramters.
 > * To add tasks with deadlines, simply specify the end timing.
 > * To add recurring tasks, see section 2.2.1.
@@ -95,7 +95,7 @@ Example:
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the task list.<br>
-Format: `edit INDEX [TASKNAME] p/PRIORITY sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...`
+Format: `edit INDEX [TASK_NAME] [p/PRIORITY] [sd/START_TIMEDATE] [ed/END_TIMEDATE] [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
 > * The TASK_NAME must be **2 or more characters** long. It can begin with any alphabet, number, or special character.
@@ -108,9 +108,11 @@ Editing a recurring task in this way will edit all instances
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> * If you want to clear the START_TIMEDATE or END_TIMEDATE of a task, use `sd/floating` and `ed/floating` respectively 
+> in the edit command (see example below).
 > * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
 > according to the frequency specified.
-> * Once a non-recurring task is created, it cannot be * `edit`ed and made into a recurring task. You must create a new task using
+> * Once a non-recurring task is created, it cannot be `edit`ed and made into a recurring task. You must create a new task using
 > * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
 
 Examples:
@@ -120,12 +122,15 @@ Examples:
 
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
+
+* `edit 4 ed/floating`<br>
+   Removes the end timing for task 4.
   
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
-  Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
+  Format: `editthis INDEX [TASK_NAME] [p/PRIORITY] [sd/START_TIMEDATE] [ed/END_TIMEDATE]...`
 
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
@@ -140,7 +145,7 @@ Examples:
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
-Finds tasks whose names contain any of the given keywords or tag names.<br>
+Finds tasks whose TASK_NAME, PRIORITY, START_TIMEDATE, or END_TIMEDATE contain any of the given keywords.<br>
 Format 1: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case insensitive. e.g `assignment` will match `AssIGNmEnt`
@@ -148,11 +153,18 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `assignemnt` will match `do algorightm assignment`
+> * Note: `find` does not search on Tags a given task may contain.
 
 Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
+
+  * `find 11/01/2017`<br>
+  Returns all tasks with start or end timings on January 11, 2017. 
+
+  * `find 1`<br>
+  Returns tasks with a priority of 1 (i.e. a HIGH priority).
 
 ### 2.5.1. Finding an instance of a reccuring task
   > * Execute 'find' with the same syntax as above
@@ -182,6 +194,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task list.
+  
 * `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
