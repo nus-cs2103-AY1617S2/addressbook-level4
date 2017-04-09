@@ -181,4 +181,79 @@ Run `find c/not`
 You will see 36 todos listed. These are all todos in the list that are not yet completed.
 Notice there were 14 todos listed when `find c/` run. 36 + 14 = 50, which is the total number of todos in the sample data for manual testing.
 
+### Edit a Todo with Name and Tags
 
+Run `list` to show all todos.
+
+Run `edit 1 Walk the dog edited ta/edited`
+
+You will see that the first todo is now changed into a todo with `Walk the dog edited` as  its name and `petcare` and `edited` as its tags.
+
+### Edit for Cleaning the Tags of a Todo
+
+Run `edit 1 t/`
+
+You will see that the first todo has no any tag.
+
+### Edit for Adding Multiple Tags
+
+Run `edit 1 ta/tag1 ta/tag2`
+
+You will see that the first todo's tags are now changed `tag1` and `tag2`.
+
+The three edit commands above can also apply to deadline todo and event todo.
+
+### Edit to Convert a Floating Todo to a Deadline Todo
+
+Run `edit 1 e/11:00AM 11/11/17`
+
+You will see that the first todo has a new end time `11:00AM 11/11/17`.
+Now this todo is a deadline todo.
+
+### Edit to Convert a Floating Todo to a Event Todo
+
+Run `edit 2 s/10:00AM 11/11/17 e/12:00PM 11/11/17`
+
+You will see that the second todo has a new start time `10:00AM 11/11/17` and a new end time `12:00PM 11/11/17`.
+Now this todo is a event todo.
+
+### Edit to Convert a Deadline Todo to a Event Todo
+
+This is same as converting a floating todo to a event todo.
+
+Run `edit 1 s/10:00AM 11/11/17 e/12:00PM 11/11/17`
+
+You will see that the first todo has a new start time `10:00AM 11/11/17` and a new end time `12:00PM 11/11/17`.
+Now this todo is a event todo.
+
+### Edit to Convert a Event Todo to a Deadline Todo
+
+Run `edit 1 e/1:00PM 11/11/17`
+
+You will see that the first todo's new start time is gone and it has a new end time `1:00PM 11/11/17`.
+Now this todo is a deadline todo.
+
+### Edit a Todo with Defualt Date and Time
+
+Run `edit 1 e/`
+
+You will see that the first todo's new end time is set to tomorrow's midnight.
+
+Run `edit 1 s/ e/`
+
+You will see that the first todo's new start time is set to today's midnight and new end time is set to tomorrow's midnight.
+
+### Edit a Todo with Defualt Date
+
+Run `edit 1 e/1/1/17`
+
+You will see that the first todo's new end time is set to `12:00AM 01/01/17`.
+This todo is now changed into a deadline todo.
+If you want to keep the start time, you should type the start time information.
+
+Run `edit 1 s/1/1/17 e/2/1/17`
+
+You will see that the first todo's new start time is set to `12:00AM 01/01/17` and new end time is set to `12:00AM 02/01/17`.
+This todo is now changed into a event todo.
+
+All edit command will change a complete todo back to a uncomplete todo.
