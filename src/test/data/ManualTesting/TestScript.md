@@ -1,4 +1,4 @@
-1. Load storage to the test directory, enter the directory of the provided test data tasklist.xml
+1. Load storage to the test directory, enter the directory of the provided test data tasklist.xml, for example,
 "loadstorage src/test/data/ManualTesting".
 
 2. List the tasklist, enter
