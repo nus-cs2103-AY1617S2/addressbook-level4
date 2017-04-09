@@ -36,6 +36,7 @@ We are a team based in the [School of Computing, National University of Singapor
   * Change Edit Command to edit based on Task object rather than index [[#104](https://github.com/CS2103JAN2017-T09-B4/main/pull/104)]
   * General refactoring of code [[#260](https://github.com/CS2103JAN2017-T09-B4/main/pull/260)]
   * Multiple bug fixes
+  
 -----
 
 #### [Lim Shun Xian](http://github.com/Crsytral)
