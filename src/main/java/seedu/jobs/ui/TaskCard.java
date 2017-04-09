@@ -46,9 +46,9 @@ public class TaskCard extends UiPart<Region> {
 
     private void initStatus(ReadOnlyTask task) {
         if (task.isCompleted()) {
-        	status.getChildren().add(new Label("Complete"));
+            status.getChildren().add(new Label("Complete"));
         } else {
-        	status.getChildren().add(new Label("In-progress"));
+            status.getChildren().add(new Label("In-progress"));
         }
     }
 

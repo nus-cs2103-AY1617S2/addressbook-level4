@@ -66,9 +66,9 @@
                   <HBox prefHeight="25.0" prefWidth="400.0">
                      <children>
                         <Label minWidth="40.0" prefWidth="40.0" style="-fx-text-fill: white;" text="No" />
-                        <Label minWidth="155.0" prefHeight="16.0" prefWidth="155.0" style="-fx-text-fill: white;" text="Task" />
-                        <Label minWidth="110.0" prefWidth="110.0" style="-fx-text-fill: white;" text="Start" />
-                        <Label minWidth="110.0" prefWidth="110.0" style="-fx-text-fill: white;" text="End" textAlignment="CENTER" />
+                        <Label minWidth="155.0" prefHeight="16.0" prefWidth="188.0" style="-fx-text-fill: white;" text="Task" />
+                        <Label minWidth="90.0" prefHeight="16.0" prefWidth="102.0" style="-fx-text-fill: white;" text="Start" />
+                        <Label minWidth="75.0" prefHeight="16.0" prefWidth="75.0" style="-fx-text-fill: white;" text="End" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <AnchorPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />

@@ -10,6 +10,6 @@
         <URL value="@Extensions.css" />
     </stylesheets>
     <children>
-        <ListView fx:id="taskListView" prefWidth="245.0" VBox.vgrow="ALWAYS" />
+        <ListView fx:id="taskListView" prefWidth="400.0" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
