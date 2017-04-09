@@ -33,14 +33,29 @@ public class RedoCommandTest extends TaskBookGuiTest {
 		commandBox.runCommand(td.CS4101.getAddCommand());
 		currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 		undoForRedo(currentList);
+		//TestTask taskUndone1 = currentList[currentList.length - 1];
+		currentList = TestUtil.removeTasksFromList(currentList, taskToAdd);
 		assertRedoSuccess(currentList);
+    currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+    // add another task
+    taskToAdd = td.CS4102;
+    commandBox.runCommand(td.CS4102.getAddCommand());
+    currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+    // undo two times for upcoming double undo test
+    TestTask taskUndone1 = currentList[currentList.length - 1];
 		undoForRedo(currentList);
-		// add another task
-		taskToAdd = td.CS4102;
-		commandBox.runCommand(td.CS4102.getAddCommand());
-		currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+		currentList = TestUtil.removeTasksFromList(currentList, taskUndone1);
+		TestTask taskUndone2 = currentList[currentList.length - 1];
+		undoForRedo(currentList);
+    currentList = TestUtil.removeTasksFromList(currentList, taskUndone2);
+		
+		// double redo test
 		assertRedoSuccess(currentList);
+		currentList = TestUtil.addTasksToList(currentList, taskUndone2);
 		assertRedoSuccess(currentList);
+		currentList = TestUtil.addTasksToList(currentList, taskUndone1);
+    commandBox.runCommand("redo");
+    assertResultMessage(MESSAGE_FAILURE);
 	}
 	private void undoForRedo(TestTask[] currentList)
 			throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
@@ -48,13 +63,13 @@ public class RedoCommandTest extends TaskBookGuiTest {
 		testStack.push(taskUndone);
 		commandBox.runCommand("undo");
 	}
-	private void assertRedoSuccess(TestTask[] currentList)
+  private void assertRedoSuccess(TestTask[] currentList)
 			throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
     TestTask taskToBeRedone = testStack.pop();
     TestTask[] expectedResult = TestUtil.addTasksToList(currentList, taskToBeRedone);
-		commandBox.runCommand("redo");
-		// confirm the resultant list after redoing matches the original
-		assertTrue(taskListPanel.isListMatching(expectedResult));
+    commandBox.runCommand("redo");
+    // confirm the resultant list after redoing matches the original
+    assertTrue(taskListPanel.isListMatching(expectedResult));
     // confirm that the result message is correct
     assertResultMessage(String.format(MESSAGE_SUCCESS, taskToBeRedone));
   }
