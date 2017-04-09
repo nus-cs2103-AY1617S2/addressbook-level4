@@ -6,7 +6,6 @@ import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import org.junit.Test;
 
 import seedu.taskit.commons.core.Messages;
-import seedu.taskit.logic.commands.EditCommand;
 import seedu.taskit.logic.commands.FindCommand;
 import seedu.taskit.testutil.TestTask;
 
@@ -21,6 +20,11 @@ public class FindCommandTest extends AddressBookGuiTest {
         //find after deleting one result
         commandBox.runCommand("delete 1");
         assertFindResult("find HW", td.hw2);
+    }
+
+    @Test
+    public void find_tags() {
+        assertFindResult("find school", td.hw1,td.hw2);
     }
 
     @Test

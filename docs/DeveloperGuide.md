@@ -165,6 +165,8 @@ The `UI` component,
 
 * Priority - Prority will be highlighted in circle with letter L for low, M for medium and H for High. 
 * The circle will also be coloured in red, orange and green to differentiate low, medium and high priority respectively.
+* Status of task will be marked using different colour bar in task list: 
+* white for incompleted task, green for completed task and red for overdued task.
 * Events - Events such as clicking trigger the listener to select a TaskCard, highlighting the background to show selection.
 * Other Events such as clicking the menubar trigger the listener to select a menubar item, filtering the tasklists accordingly.
 * Filtering - Logic creates a filtered list of ReadOnlyTasks, which is used by TaskListPanel to create TaskCards that populate the panel.
@@ -382,11 +384,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | Assign priority to each task | rank my tasks depending on what has to get done first
 `* *` | user | list tasks by priority | see which tasks will need my attention the most
 `*` | user | Add recurring tasks | so that I can easily add a task that occurs regularly
-`*` | user |Sync with other calendars (e.g. Google calendar) | I can add functionality that TaskIt may not have
 `*` | user | See today’s most important task when opening the app | so that I immediately know what I need to work on
-`*` | user | Receive reminder for the most recent task  | so that I remember what I need to work on
 `*` | user | See encouraging words for completing priority tasks  | so that I feel good about myself and motivated to keep finishing tasks
-`*` | user | Duplicate a task  | so that I don't have to reenter a complicated task
 `*` | user | Link one task to another  | so that I can see when tasks are connected to each other
 `*` | user | view tasks with the same day as a deadline  | so that I can see tasks that are all due on the same day
 `*` | user | view tasks with the same week as a deadline  | so that I can see tasks that are all due in the same week

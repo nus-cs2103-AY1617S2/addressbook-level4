@@ -32,12 +32,12 @@ public class ListCommandParser {
             LIST_TODAY, LIST_OVERDUE, LIST_PRIORITY_LOW, LIST_PRIORITY_MEDIUM, LIST_PRIORITY_HIGH,DONE,UNDONE);
 
     public Command parse(String args) {
-        Optional<String> parameters = Optional.of(args);
-        if (!parameters.isPresent()) {
+        Optional<String> parseParameter = Optional.of(args);
+        if (!parseParameter.isPresent()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
-        String parameter = parameters.get().trim().toLowerCase();
+        String parameter = parseParameter.get().trim().toLowerCase();
         if(!isValidParameter(parameter)){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));

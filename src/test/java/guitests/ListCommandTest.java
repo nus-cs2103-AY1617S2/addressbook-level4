@@ -53,13 +53,13 @@ public class ListCommandTest extends AddressBookGuiTest {
 		commandBox.runCommand("list overdue");
 		assertListSize(1);
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "overdue"));
-    }//@@author
+    }
 
 	//@@author A0141872E
     @Test
     public void list_floatingTasks_Success() {
         commandBox.runCommand("list floating");
-        assertListResult(td.getFloatingTypicalTasks());
+        assertListResult(td.getTypicalTasks());
         assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "floating"));
     }
 
@@ -77,13 +77,6 @@ public class ListCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("list deadline");
         assertListSize(1);
         assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "deadline"));
-    }
-
-    @Test
-    public void list_alias_Success() {
-        commandBox.runCommand("l floating");
-        assertListResult(td.getFloatingTypicalTasks());
-        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "floating"));
     }//@@author
 
 	private void assertListResult(TestTask... expectedHits) {

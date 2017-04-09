@@ -29,14 +29,12 @@ public class TypicalTestTasks {
             shopping = new TaskBuilder().withTitle("Shopping with friends")
                     .withPriority("low")
                     .withTags("leisure", "friends").build();
-            //@@author A0097141H
             cleaning = new TaskBuilder().withTitle("Clean room")
                     .withPriority("low")
                     .withTags("home").withDone("done").build();
             gymming = new TaskBuilder().withTitle("Go to the gym")
                     .withPriority("low")
                     .withTags("health").withDone("done").build();
-            //@@author
 
             // Manually added
             meeting = new TaskBuilder().withTitle("Software Engineering Meeting")
@@ -91,10 +89,6 @@ public class TypicalTestTasks {
 
     //@@author A0141872E
     public TestTask[] getUndoneTypicalTasks(){
-        return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
-    }
-
-    public TestTask[] getFloatingTypicalTasks(){
         return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
     }//@@author
 
