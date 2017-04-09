@@ -1,7 +1,5 @@
 package guitests.guihandles;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -40,7 +38,8 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
+     * Returns true if the list is showing the person details correctly and in
+     * correct order.
      *
      * @param persons
      *            A list of person in the correct order.
@@ -50,31 +49,30 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the list is showing the person details correctly and in correct order.
+     * Returns true if the list is showing the person details correctly and in
+     * correct order.
      *
      * @param startPosition
      *            The starting position of the sub list.
      * @param persons
      *            A list of person in the correct order.
      */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... persons)
-            throws IllegalArgumentException {
-    	System.out.println(getListView().getItems().size());
+    public boolean isListMatching(int startPosition, ReadOnlyTask... persons) throws IllegalArgumentException {
+        System.out.println(getListView().getItems().size());
         if (false) {
-        	System.out.println(persons.length + startPosition);
-        	System.out.println(getListView().getItems().size());
-            throw new IllegalArgumentException("List size mismatched\n" + "Expected "
-                    + (getListView().getItems().size() - 1) + " persons");
+            System.out.println(persons.length + startPosition);
+            System.out.println(getListView().getItems().size());
+            throw new IllegalArgumentException(
+                    "List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " persons");
         }
-        //assertTrue(this.containsInOrder(startPosition, persons));
-        /*for (int i = 0; i < persons.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(getPersonCardHandle(startPosition + i), persons[i])) {
-                return false;
-            }
-        }*/
+        // assertTrue(this.containsInOrder(startPosition, persons));
+        /*
+         * for (int i = 0; i < persons.length; i++) { final int scrollTo = i +
+         * startPosition; guiRobot.interact(() ->
+         * getListView().scrollTo(scrollTo)); guiRobot.sleep(200); if
+         * (!TestUtil.compareCardAndTask(getPersonCardHandle(startPosition + i),
+         * persons[i])) { return false; } }
+         */
         return true;
     }
 
@@ -87,8 +85,8 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns true if the {@code persons} appear as the sub list (in that order) at position
-     * {@code startPosition}.
+     * Returns true if the {@code persons} appear as the sub list (in that
+     * order) at position {@code startPosition}.
      */
     public boolean containsInOrder(int startPosition, ReadOnlyTask... persons) {
         List<ReadOnlyTask> personsInList = getListView().getItems();
@@ -137,7 +135,8 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
     /**
-     * Returns the position of the person given, {@code NOT_FOUND} if not found in the list.
+     * Returns the position of the person given, {@code NOT_FOUND} if not found
+     * in the list.
      */
     public int getPersonIndex(ReadOnlyTask targetPerson) {
         List<ReadOnlyTask> personsInList = getListView().getItems();
@@ -163,8 +162,7 @@ public class PersonListPanelHandle extends GuiHandle {
     public TaskCardHandle getPersonCardHandle(ReadOnlyTask person) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> personCardNode = nodes.stream()
-                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(person))
-                .findFirst();
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(person)).findFirst();
         if (personCardNode.isPresent()) {
             return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {

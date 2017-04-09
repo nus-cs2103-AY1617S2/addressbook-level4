@@ -14,7 +14,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.Config;
-import seedu.task.commons.core.FileNameHandler;
 import seedu.task.commons.exceptions.DataConversionException;
 
 public class ConfigUtilTest {
