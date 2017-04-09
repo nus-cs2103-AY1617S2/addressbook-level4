@@ -142,7 +142,7 @@ After Doist is launched, it tries to read the config file. In the event that the
 The sections below give more details of each component.
 
 ### 3.2. UI component
-The `UI` is the main form of interaction between Doist and the user. This is mainly done using the JavaFX package. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist. The [FXML files](../src/main/resources/view) contain the descriptions of the user interface that is controlled by the corresponding java class with the same name.
+The `UI` is the main form of interaction between Doist and the user. This is mainly done using the JavaFX package. `UI` executes commands entered by the user and updates itself to reflect the results of these commands. It works closely with `Logic` component to execute commands, and also responds to events raised internally by Doist. The [.fxml files](../src/main/resources/view) contain the descriptions of the user interface that is controlled by the corresponding java class with the same name.
 
 The following diagram represents the structure of the `UI` component:  
 <br><img src="images/UIComponentClassDiagram.PNG" width="800"><br>
@@ -179,6 +179,10 @@ Here are some of the key files in the `Logic` component:
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
 
+**Design Decisions**/
+- `Command.java` and its sub-classes implement the Command Pattern.
+
+<br>
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
 <img src="images/DeletePersonSdForLogic.png" width="800"><br>
@@ -249,8 +253,9 @@ Here are some of the key files in the `Storage` component:
 - `JsonUserPrefsStorage`: contains a `class` that implements the R/W operations on **user preferences**. An instance of this class is used in `StorageManager`.
 
 **Design Decisions**
+- StorageManager.java shields the internals of the Storage component from outsiders and is mostly redirecting methods calls to its internal components. Thus, StorageManager is a Facade class.
 - The storage component is split into `TodoListStorage`, `AliasListMapStorage` and `JsonUserPrefsStorage` because they contain R/W operations on different types of data. This is to support the Single Responsibility Principle.
-- `StorageManager` is notified when a `AbsoluteStoragePathChangedEvent`is raised. It will then set the file paths for the three different storages. This event driven mechanism employs the Observer pattern.
+- `StorageManager` is notified when a `AbsoluteStoragePathChangedEvent` is raised. It will then set the file paths for the three different storages. This event driven mechanism employs the Observer pattern.
 
 <br>
 
