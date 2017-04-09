@@ -305,7 +305,7 @@ Examples:
 
 ### 2.12. Save/Read WhatsLeft to/from new location: `save`
 #### 2.12.1. Save WhatsLeft to new location: `save`
-Changes the location of storage file to designated directory.<br>
+Saves WhatsLeft data file to new location and updates the default storage location to new directory.<br>
 Format: `save DIRECTORY`
 
 > * Valid `DIRECTORY` should be entered.
@@ -317,12 +317,12 @@ Examples:
   Saves the current WhatsLeft content to /User/Andy/Documents.
 
 #### 2.12.2. Read WhatsLeft from new location
-Loads WhatsLeft from storage file stored in the designated directory.<br>
+Loads WhatsLeft data file from new location and updates the default storage location to new directory.<br>
 Format: `read DIRECTORY`
 
 > * Valid `DIRECTORY` should be entered.
 > * WhatsLeft application will automatically load from the new storage location when started in the future.
-> * If no WhatsLeft storage file exists in the designated directory, a blank task book will be created and loaded.
+> * If no WhatsLeft storage file is found in the designated directory, a blank task book will be created and loaded.
 
 Examples:
 

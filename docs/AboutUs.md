@@ -64,16 +64,16 @@ We are a team based in the [School of Computing, National University of Singapor
 * Component in charge of: [Storage](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#25-storage-component), [Commons](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#26-common-classes)<br>
 * Aspects/tools in charge of: Testing<br>
 * Features implemented:<br>
-  * [Finish a pending task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#29-finishing-a-task-finish)
+  * [Finish a pending task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#291-finishing-a-task)
+  * [Redo a finished task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#292-redoing-a-completed-task-redo)
   * [Show completed/pending/all tasks](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#210-task-display-preference-show)
-  * [Redo a finished task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#212-redoing-the-completed-task--redo)
-  * Save WhatsLeft to designated location
-  * Read WhatsLeft from designated location
-* Code written: functional code, test code
+  * [Save WhatsLeft to designated location](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#2121-save-whatsleft-to-new-location-save)
+  * [Read WhatsLeft from designated location](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#2122-read-whatsleft-from-new-location)
+* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0121668A.md#a0121668a), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0121668A.md#a0121668a)
 * Other major contributions:
   * Fixed GUI testing
-  * Added start-end constraint for Event]()
-  * Issue tracking
+  * Added start-end constraint for Event
+  * [Issue tracking](https://github.com/CS2103JAN2017-W10-B4/main/issues?q=is%3Aissue+is%3Aclosed)
   * Writing GUI test for basic features
 
  -----
