@@ -1,57 +1,49 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
+import guitests.guihandles.TaskCardHandle;
 import org.junit.Test;
-
-//import guitests.guihandles.TaskCardHandle;
-
+import seedu.task.logic.commands.AddCommand;
 import seedu.task.commons.core.Messages;
-import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.Task;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
+
+import static org.junit.Assert.assertTrue;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
-        try {
-            setup();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        commandBox.runCommand("clear");
-
-        // add one task
+        //add one person
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.zoo;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        TestTask TaskToAdd = td.zoo;
+        assertAddSuccess(TaskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, TaskToAdd);
 
-        // add another person
-        taskToAdd = td.yam;
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //add another person
+        TaskToAdd = td.jog;
+        assertAddSuccess(TaskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, TaskToAdd);
 
-        // invalid command
+        //add to empty list
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.lab);
+
+        //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
+
         commandBox.runCommand(taskToAdd.getAddCommand());
 
-        // confirm the new card contains the right data
-        // TaskCardHandle addedCard = taskListPanel
-        // .navigateToTask(taskToAdd.getTaskName().fullTaskName);
-        Task t1 = new Task(taskToAdd.getTaskName(), taskToAdd.getTaskDate(), taskToAdd.getTaskStartTime(),
-                taskToAdd.getTaskEndTime(), taskToAdd.getTaskDescription(), taskToAdd.getTaskStatus());
-        ReadOnlyTask temp = taskListPanel.getTask(taskListPanel.getNumberOfTasks() - 1);
-        Task t2 = new Task(temp);
-        assertTrue(t1.equals(t2));
+        //confirm the new card contains the right data
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd);
+        assertMatching(taskToAdd, addedCard);
 
+        //confirm the list now contains all previous persons plus the new person
+        //TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }

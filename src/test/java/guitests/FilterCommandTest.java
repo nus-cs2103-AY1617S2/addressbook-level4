@@ -21,7 +21,6 @@ public class FilterCommandTest extends TaskManagerGuiTest {
         }
         commandBox.runCommand("clear");
         commandBox.runCommand("showcase 75");
-        
         //filter name impossible
         commandBox.runCommand("filter name impossibleName");
         assertTrue(0 == taskListPanel.getNumberOfTasks());

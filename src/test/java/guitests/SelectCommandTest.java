@@ -1,10 +1,10 @@
 package guitests;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import seedu.task.model.task.ReadOnlyTask;
+//import seedu.task.model.task.ReadOnlyTask;
 
 public class SelectCommandTest extends TaskManagerGuiTest {
 
@@ -36,7 +36,7 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     // assertListSize(0);
     // assertSelectionInvalid(1); // invalid index
     // }
-
+/*
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
         assertResultMessage("The person index provided is invalid");
@@ -65,5 +65,5 @@ public class SelectCommandTest extends TaskManagerGuiTest {
     private void assertNoTaskSelected() {
         assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
-
+*/
 }

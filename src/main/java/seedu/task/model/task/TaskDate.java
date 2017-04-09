@@ -142,6 +142,7 @@ public class TaskDate {
         }
     }
 
+    @Override
     public String toString() {
         if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
             return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
