@@ -154,9 +154,6 @@ public class LogicManagerTest {
             assertEquals(expectedMessage, e.getMessage());
         }
 
-        // List<? extends ReadOnlyTask> actualList =
-        // model.getTaskManager().getTaskList();
-
         // Confirm the ui display elements should contain the right data
         assertEquals(expectedShownList, model.getTaskManager().getTaskList());
 
@@ -222,7 +219,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_unknownCommandWord() {
-        String unknownCommand = "uicfhmowqewca";
+        String unknownCommand = "uicfhmowaaqewca";
         assertCommandFailure(unknownCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -327,6 +324,7 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    // @@author
     // @@author A0164061N
     @Test
     public void execute_path_invalidArgsFormat() {
@@ -342,8 +340,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_filter_invalidArgsFormat() {
-        String expectedMessage = String.format(FilterCommandParser.MESSAGE_INCORRECT_FORMAT
-                    + FilterCommandParser.MESSAGE_USAGE);
+        String expectedMessage = String
+                .format(FilterCommandParser.MESSAGE_INCORRECT_FORMAT + FilterCommandParser.MESSAGE_USAGE);
         assertCommandFailure("filter ", expectedMessage);
     }
 
@@ -359,18 +357,10 @@ public class LogicManagerTest {
         assertCommandFailure("google ", expectedMessage);
     }
 
-    // @Test
-    // public void execute_done_IndexNotFoundErrorMessageShown() throws
-    // Exception {
-    // assertIndexNotFoundBehaviorForCommand("done");
-    // }
-
     @Test
     public void execute_select_IndexNotFoundErrorMessageShown() throws Exception {
         assertIndexNotFoundBehaviorForCommand("google");
     }
-
-    // @@author
 
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
@@ -399,7 +389,7 @@ public class LogicManagerTest {
      * A utility class to generate test data.
      */
     class TestDataHelper {
-
+        // @@author A0146757R
         Task adam() throws Exception {
             TaskName taskName = new TaskName("Pick Adam");
             TaskDate taskDate = new TaskDate("101010");

@@ -31,8 +31,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskManager> readTaskManager()
-            throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
         return readTaskManager(filePath);
     }
 
@@ -56,8 +55,7 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
             return Optional.empty();
         }
 
-        ReadOnlyTaskManager taskManagerOptional = XmlFileStorage
-                .loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(taskManagerOptional);
     }
@@ -74,15 +72,9 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      *            location of the data. Cannot be null
      */
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath)
-            throws IOException {
+    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
         assert taskManager != null;
         assert filePath != null;
-
-        // if(PathCommand.getPath() != null){
-        // filePath = PathCommand.getPath();
-        // }
-        // filePath = "/Users/jlevy/";
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);

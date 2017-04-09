@@ -29,11 +29,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    // @@author A0146757R
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date, try ddmmyy-ddmmyy ";
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format, be more prcise or try hhmm, "
             + "hh:mm, or h:mm";
     public static final String MESSAGE_INVALID_TIME = "Start time can't be after end time.";
     public static final String MESSAGE_INVALID_DATE = "Start time can't be after end time.";
+    // @@author
 
     private final Task taskToAdd;
 
@@ -49,8 +51,7 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.taskToAdd = new Task(new TaskName(taskName), new TaskDate(taskDate),
-                new TaskTime(taskStartTime),
+        this.taskToAdd = new Task(new TaskName(taskName), new TaskDate(taskDate), new TaskTime(taskStartTime),
 
                 new TaskTime(taskEndTime), new String(taskDescription), new TaskStatus("Ongoing"),
                 new UniqueTagList(tagSet));
@@ -58,11 +59,10 @@ public class AddCommand extends Command {
     }
 
     // @@author A0163845X
-    public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate,
-            Optional<TaskTime> parseStartTime, Optional<TaskTime> parseEndTime,
-            Optional<String> parseString) throws IllegalValueException {
-        this.taskToAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime,
-                parseString, new TaskStatus("Ongoing"));
+    public AddCommand(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseStartTime,
+            Optional<TaskTime> parseEndTime, Optional<String> parseString) throws IllegalValueException {
+        this.taskToAdd = new Task(parseTaskName, parseDate, parseStartTime, parseEndTime, parseString,
+                new TaskStatus("Ongoing"));
 
     }
 

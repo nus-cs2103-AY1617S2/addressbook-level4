@@ -22,8 +22,7 @@ public class XmlUtilTest {
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskManager.xml");
-    private static final File TEMP_FILE = new File(
-            TestUtil.getFilePathInSandboxFolder("tempTaskManager.xml"));
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskManager.xml"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -52,14 +51,6 @@ public class XmlUtilTest {
         XmlUtil.getDataFromFile(EMPTY_FILE, TaskManager.class);
     }
 
-    // @Test
-    // public void getDataFromFile_validFile_validResult() throws Exception {
-    // XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE,
-    // XmlSerializableTaskManager.class);
-    // assertEquals(9, dataFromFile.getTaskList().size());
-    // assertEquals(0, dataFromFile.getTagList().size());
-    // }
-
     @Test
     public void saveDataToFile_nullFile_AssertionError() throws Exception {
         thrown.expect(AssertionError.class);
@@ -83,19 +74,16 @@ public class XmlUtilTest {
         TEMP_FILE.createNewFile();
         XmlSerializableTaskManager dataToWrite = new XmlSerializableTaskManager(new TaskManager());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE,
-                XmlSerializableTaskManager.class);
-        assertEquals((new TaskManager(dataToWrite)).toString(),
-                (new TaskManager(dataFromFile)).toString());
+        XmlSerializableTaskManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
+        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
         // TODO: use equality instead of string comparisons
 
         TaskManagerBuilder builder = new TaskManagerBuilder(new TaskManager());
-        dataToWrite = new XmlSerializableTaskManager(builder
-                .withTask(TestUtil.generateSampleTaskData().get(0)).build());
+        dataToWrite = new XmlSerializableTaskManager(
+                builder.withTask(TestUtil.generateSampleTaskData().get(0)).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskManager.class);
-        assertEquals((new TaskManager(dataToWrite)).toString(),
-                (new TaskManager(dataFromFile)).toString());
+        assertEquals((new TaskManager(dataToWrite)).toString(), (new TaskManager(dataFromFile)).toString());
     }
 }
