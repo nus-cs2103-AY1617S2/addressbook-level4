@@ -43,6 +43,7 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
 import seedu.task.storage.StorageManager;
@@ -390,14 +391,14 @@ public class LogicManagerTest {
     class TestDataHelper {
 
         Task adam() throws Exception {
-            Description frequency = new Description("Adam Brown");
-            Priority privatePhone = new Priority("111111");
-            Timing startDate = new Timing("03/21/2017");
-            Timing endDate = new Timing("03/25/2017");
+            Description description = new Description("Kiss Adam Brown on the lips");
+            Priority priority = new Priority("1");
+            Timing startDate = new Timing("21/03/2017");
+            Timing endDate = new Timing("25/03/2017");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(frequency, privatePhone, startDate, endDate, tags);
+            return new Task(description, priority, startDate, endDate, tags, false, new RecurringFrequency(null));
         }
 
         /**
@@ -411,11 +412,12 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Task " + seed),
-                    new Priority("" + Math.abs(seed)),
-                    new Timing(seed + "@email"),
-                    new Timing(seed + "@email"),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-                    );
+                    new Priority("" + Math.abs(seed) % 3),
+                    new Timing("" + (seed % 28) + "/" + (seed % 12) + "/" + "2017"),
+                    new Timing("" + (seed % 28) + "/" + (seed % 12) + "/" + "2018"),
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))),
+                    false,
+                    new RecurringFrequency(null));
         }
 
         /** Generates the correct add command based on the task given */
@@ -510,10 +512,11 @@ public class LogicManagerTest {
             return new Task(
                     new Description(name),
                     new Priority("1"),
-                    new Timing("1@email"),
-                    new Timing("1@email"),
-                    new UniqueTagList(new Tag("tag"))
-                    );
+                    new Timing("01/01/2017"),
+                    new Timing("01/01/2017"),
+                    new UniqueTagList(new Tag("tag")),
+                    false,
+                    new RecurringFrequency(null));
         }
     }
 }
