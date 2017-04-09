@@ -85,10 +85,10 @@ Result: Will create a new .xml file on the Desktop called MyTasks.xml. All furth
 
 ## Load Command
 Command (PC): load SampleData.xml <br>
-Result: Will load the initial set of tasks that were modifed before a new task path was specified<br>
+Result: Will load the initial set of tasks that were modified before a new task path was specified<br>
 
 Command (Mac): load SampleData.xml <br>
-Result: Will load the initial set of tasks that were modifed before a new task path was specified<br>
+Result: Will load the initial set of tasks that were modified before a new task path was specified<br>
 
 ## Exit Command
 Command: exit<br>
