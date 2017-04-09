@@ -22,6 +22,12 @@ import seedu.ezdo.commons.util.FxViewUtil;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
+    private static final Date CURRENT_DATE = new Date();
+    private static final String MESSAGE_SET_SAVE_LOCATION = "Setting save location to ";
+    private static final String MESSAGE_LAST_UPDATED = "Last Updated: ";
+    private static final String MESSAGE_SET_LAST_UPDATED = "Setting last updated status to ";
+    private static final String STATUS_BAR_DATE_FORMAT = "dd/MM/YYYY H:mm:ss";
+    private static final String MESSAGE_NOT_UPDATED = "Not updated yet in this session";
     private static final String MESSAGE_SAVE_LOCATION_TOOLTIP =
             "ezDo Directory Box\nDisplays the directory of ezDo data file.";
     private static final String MESSAGE_STATUS_BAR_TOOLTIP =
@@ -41,7 +47,7 @@ public class StatusBarFooter extends UiPart<Region> {
         syncStatus.setTooltip(new Tooltip(MESSAGE_STATUS_BAR_TOOLTIP));
         saveLocationStatus.setTooltip(new Tooltip(MESSAGE_SAVE_LOCATION_TOOLTIP));
         addToPlaceholder(placeHolder);
-        setSyncStatus("Not updated yet in this session");
+        setSyncStatus(MESSAGE_NOT_UPDATED);
         setSaveLocation(saveLocation);
         registerAsAnEventHandler(this);
     }
@@ -61,9 +67,10 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     public void handleEzDoChangedEvent(EzDoChangedEvent ezce) {
-        String lastUpdated = (new SimpleDateFormat("dd/MM/YYYY H:mm:ss")).format(new Date());
-        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
-        setSyncStatus("Last Updated: " + lastUpdated);
+        SimpleDateFormat df = new SimpleDateFormat(STATUS_BAR_DATE_FORMAT);
+        String lastUpdated = df.format(CURRENT_DATE);
+        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, MESSAGE_SET_LAST_UPDATED + lastUpdated));
+        setSyncStatus(MESSAGE_LAST_UPDATED + lastUpdated);
     }
   //@@author A0139248X
     /**
@@ -71,10 +78,10 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     @Subscribe
     public void handleEzDoDirectoryChangedEvent(EzDoDirectoryChangedEvent ezce) {
-        String lastUpdated = (new Date()).toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting last updated status to " + lastUpdated));
-        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, "Setting save location to " + ezce.getPath()));
-        setSyncStatus("Last Updated: " + lastUpdated);
+        String lastUpdated = CURRENT_DATE.toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, MESSAGE_SET_LAST_UPDATED + lastUpdated));
+        logger.info(LogsCenter.getEventHandlingLogMessage(ezce, MESSAGE_SET_SAVE_LOCATION + ezce.getPath()));
+        setSyncStatus(MESSAGE_LAST_UPDATED + lastUpdated);
         setSaveLocation(ezce.getPath());
     }
 }
