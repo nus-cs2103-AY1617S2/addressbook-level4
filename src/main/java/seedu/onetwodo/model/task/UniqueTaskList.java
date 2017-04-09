@@ -138,8 +138,8 @@ public class UniqueTaskList implements Iterable<Task> {
         targetTask.setToday();
         internalList.set(index, targetTask);
     }
-    
-    //@@author
+
+    //@@author A0143029M
     public void sortTasks(SortOrder sortOrder, boolean isReversed) {
         switch (sortOrder) {
         case ALPHANUMERIC:

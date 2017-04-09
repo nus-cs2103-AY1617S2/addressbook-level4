@@ -133,7 +133,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     public boolean getDoneStatus() {
         return isDone;
     }
-    
+     
     //@@author A0141138N
     @Override
     public boolean getTodayStatus() {

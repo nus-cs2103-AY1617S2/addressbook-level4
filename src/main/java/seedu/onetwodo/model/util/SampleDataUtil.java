@@ -50,7 +50,7 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
-    
+
     //@@author
     public static ReadOnlyToDoList getSampleToDoList() {
         try {
