@@ -27,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 
 //@@author A0138952W
+
 @SuppressWarnings("restriction")
 public class MultiViewPanel extends UiPart<Region> {
 
@@ -56,6 +57,8 @@ public class MultiViewPanel extends UiPart<Region> {
 	private Button prevDate;
 	@FXML
 	private Button nextDate;
+	@FXML
+	private Button resetDate;
 	@FXML
 	private Label date;
 
@@ -167,12 +170,7 @@ public class MultiViewPanel extends UiPart<Region> {
 		} else {
 			timeData.clear();
 			for (int i = 0; i < calendarList.size(); i++) {
-				ReadOnlyEvent event = calendarList.get(i);
-				data[TASK_TITLE] = event.getTitle().toString();
-				data[TASK_START] = event.getStartTime().toString();
-				data[TASK_END] = event.getEndTime().toString();
-				data[TASK_LOCATION] = event.getLocation().toString();
-				timeData.add(data);
+				updateTimeCard(data, i);
 				String[] data1 = timeData.get(i);
 				int j = 0;
 				while (j != 4) {
@@ -181,6 +179,15 @@ public class MultiViewPanel extends UiPart<Region> {
 				}
 			}
 		}
+	}
+
+	private void updateTimeCard(String[] data, int index) {
+		ReadOnlyEvent event = calendarList.get(index);
+		data[TASK_TITLE] = event.getTitle().toString();
+		data[TASK_START] = event.getStartTime().toString();
+		data[TASK_END] = event.getEndTime().toString();
+		data[TASK_LOCATION] = event.getLocation().toString();
+		timeData.add(data);
 	}
 
 	public void prevDay() {
