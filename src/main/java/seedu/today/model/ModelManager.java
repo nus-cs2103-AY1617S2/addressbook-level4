@@ -327,7 +327,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(predicate);
         indicateTaskManagerChanged(MESSAGE_ON_UPDATELIST);
     }
-    // author
     // ========== Inner classes/interfaces used for filtering
     // =================================================
 
@@ -350,6 +349,16 @@ public class ModelManager extends ComponentManager implements Model {
                 }
                 return f;
             }).findAny().isPresent();
+        };
+    }
+    
+    public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
+        assert date != null : "no date provided for a deadline search";
+        return t -> {
+            if (t.getDeadline().isPresent()) {
+                return t.getDeadline().get().isSameDay(date);
+            }
+            return false;
         };
     }
 
@@ -503,16 +512,5 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean isValidUIIndex(String uiIndex) {
         uiIndex = uiIndex.toUpperCase();
         return indexMap.containsKey(uiIndex);
-    }
-
-    // @@author A0093999Y
-    public Predicate<ReadOnlyTask> isDueOnThisDate(Date date) {
-        assert date != null : "no date provided for a deadline search";
-        return t -> {
-            if (t.getDeadline().isPresent()) {
-                return t.getDeadline().get().isSameDay(date);
-            }
-            return false;
-        };
     }
 }

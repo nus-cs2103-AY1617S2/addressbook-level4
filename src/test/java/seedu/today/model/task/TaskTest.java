@@ -1,4 +1,3 @@
-//@@author A0144422R
 package seedu.today.model.task;
 
 import static org.junit.Assert.assertFalse;
@@ -14,7 +13,7 @@ import org.ocpsoft.prettytime.shade.org.apache.commons.lang.time.DateUtils;
 
 import seedu.today.commons.exceptions.IllegalValueException;
 import seedu.today.model.tag.UniqueTagList;
-
+//@@author A0144422R
 public class TaskTest {
     @Test
     public void floatingTaskTest() throws Exception {

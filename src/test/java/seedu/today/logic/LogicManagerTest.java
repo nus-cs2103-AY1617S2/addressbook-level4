@@ -315,7 +315,7 @@ public class LogicManagerTest {
 
     // ------------- List Command -----------------
 
-    // author A0144422R
+    // @@author A0144422R
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
@@ -324,7 +324,7 @@ public class LogicManagerTest {
 
         assertCommandSuccess("list", ListCommand.MESSAGE_SUCCESS, expectedAB, expectedAB.getTaskList());
     }
-
+    //@@author
     // ---------- Delete Command --------------
     @Test
     public void execute_deleteIndexNotFound_errorMessageShown() throws Exception {

@@ -72,17 +72,19 @@ public class SeperableParser {
 
                     + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE));
 
-            if (group == null || group.size() > 2
+            if (group == null || group.size() > NUMBER_OF_ARGUMENTS_IN_STARTING_TIME_AND_DEADLINE
                     || (!group.get(0).getText().equals(datesString.get(i)) && (!group.get(0).getText()
                             .equals(ParserUtil.correctDateFormat(datesString.get(i))
-                                    + (i == 1 ? CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE))
+                                    + (i == CliSyntax.INDEX_OF_STARTINGTIME ?
+                                            CliSyntax.DEFAULT_STARTING_TIME : CliSyntax.DEFAULT_DEADLINE))
                             && !group.get(0).getText().equals(ParserUtil.correctDateFormat(datesString.get(i)))))) {
                 args = tmpArgs;
                 return null;
             } else {
                 dates.addAll(group.get(0).getDates());
 
-                correctDateTime = ((i == 1 ? "from " : "to ") + group.get(0).getText() + " ") + correctDateTime;
+                correctDateTime = ((i == CliSyntax.INDEX_OF_STARTINGTIME ? "from " : "to ")
+                        + group.get(0).getText() + " ") + correctDateTime;
             }
         }
         if (dates.get(CliSyntax.INDEX_OF_STARTINGTIME).after(dates.get(CliSyntax.INDEX_OF_DEADLINE))) {
@@ -101,7 +103,7 @@ public class SeperableParser {
             return null;
         }
         List<DateGroup> group = new PrettyTimeParser()
-                .parseSyntax(ParserUtil.correctDateFormat(deadlineString + CliSyntax.DEFAULT_DEADLINE));
+                .parseSyntax(ParserUtil.correctDateFormat(deadlineString) + CliSyntax.DEFAULT_DEADLINE);
         if (group == null || group.get(0).getPosition() != 0 || group.size() > 2
                 || group.get(0).getDates().size() > 1) {
             args = tmpArgs;

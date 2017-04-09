@@ -49,12 +49,12 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-
+    //@@author A0144422R
     private void addWithoutCheck(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
         internalList.add(toAdd);
     }
-
+    //@@author
     /**
      * Updates the task in the list at position {@code index} with
      * {@code editedTask}.
@@ -152,7 +152,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public static class TaskNotFoundException extends Exception {
     }
-
+    //@@author A0144422R
     public void setTasksWithoutCheck(List<? extends Task> tasks) throws DuplicateTaskException {
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final Task task : tasks) {

@@ -1,6 +1,5 @@
 package seedu.today.logic.parser;
 
-//@@author A0144422R
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -21,7 +20,7 @@ import seedu.today.model.task.EventTask;
 import seedu.today.model.task.FloatingTask;
 import seedu.today.model.task.Name;
 import seedu.today.model.task.Task;;
-
+//@@author A0144422R
 public class AddParserTest extends AddCommandParser {
     @Test
     public void parserTestWithTitle() throws Exception {
