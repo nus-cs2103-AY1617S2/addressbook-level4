@@ -1,4 +1,5 @@
 package seedu.doist.logic.commands;
+
 import java.util.Set;
 
 //@@author A0147980U
@@ -18,10 +19,14 @@ public class ViewAliasCommand extends Command {
         Set<String> allCommandWords = aliasModel.getDefaultCommandWordSet();
         StringBuilder sb = new StringBuilder();
         for (String word: allCommandWords) {
+            // start with command word
             sb.append(word + ": ");
+
+            // append aliases one after another
             for (String alias : aliasModel.getAliasList(word)) {
                 sb.append(alias + ", ");
             }
+
             // remove the comma after the last alias
             if (sb.charAt(sb.length() - 2) == ',') {
                 sb.deleteCharAt(sb.length() - 2);

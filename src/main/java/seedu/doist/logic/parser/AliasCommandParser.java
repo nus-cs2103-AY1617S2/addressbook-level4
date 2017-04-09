@@ -48,6 +48,8 @@ public class AliasCommandParser {
                 throw new IllegalValueException(String.format(MESSAGE_COMMAND_WORD_NOT_SPECIFIED,
                                                     AliasCommand.MESSAGE_USAGE));
             }
+
+            // only alphabets and underscores are allowed
             if (!preamble.matches("[a-zA-Z_]+")) {
                 throw new IllegalValueException(String.format(MESSAGE_ALIAS_FORMAT_INVALID,
                                                     AliasCommand.MESSAGE_USAGE));

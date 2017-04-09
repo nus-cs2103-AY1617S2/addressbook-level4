@@ -20,6 +20,7 @@ import seedu.doist.model.tag.UniqueTagList;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.testutil.TestTask;
 
+//@@author A0147980U
 public class ListCommandTest extends DoistGUITest {
 
     @Test
@@ -58,7 +59,6 @@ public class ListCommandTest extends DoistGUITest {
         assertListOverdue();
     }
 
-    //@@author A0147980U
     @Test
     public void testInvalidParameterKey() {
         commandBox.runCommand("list \\\\wrongKey someValue");
@@ -72,7 +72,6 @@ public class ListCommandTest extends DoistGUITest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                           ListCommand.MESSAGE_USAGE));
     }
-    //@@author
 
     @Test
     public void testListFinishedUnderValidTagName() {
@@ -174,8 +173,8 @@ public class ListCommandTest extends DoistGUITest {
             assert false : "not possible";
         }
     }
-    //@@author
 
+    //@@author A0147980U
     private void assertListUnderTags(UniqueTagList tagList) {
         List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
@@ -202,6 +201,7 @@ public class ListCommandTest extends DoistGUITest {
             assertTrue(!task.getFinishedStatus().getIsFinished() && !task.getDates().isPast());
         }
     }
+    //@@author
 
     private void assertListOverdue() {
         List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();

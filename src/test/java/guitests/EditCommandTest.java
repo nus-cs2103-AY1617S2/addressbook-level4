@@ -98,6 +98,7 @@ public class EditCommandTest extends DoistGUITest {
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
 
+    //@@author A0147980U
     @Test
     public void edit_invalidValues_failure() {
         commandBox.runCommand("edit 1 *&");
@@ -106,6 +107,7 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit 1 \\under *&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
     }
+    //@@author
 
     //@@author A0147620L
     @Test

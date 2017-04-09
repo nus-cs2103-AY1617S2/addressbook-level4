@@ -36,7 +36,7 @@ public class RemoveAliasCommandParser {
             if ("".equals(preamble)) {
                 throw new IllegalValueException(MESSAGE_ALIAS_NOT_SPECIFIED);
             }
-            if (!preamble.matches("[a-zA-Z_]+")) {
+            if (!preamble.matches("[a-zA-Z_]+")) {  // aliases only contain alphabets or underscores
                 throw new IllegalValueException(String.format(MESSAGE_ALIAS_FORMAT_INVALID,
                                                 RemoveAliasCommand.MESSAGE_USAGE));
             }

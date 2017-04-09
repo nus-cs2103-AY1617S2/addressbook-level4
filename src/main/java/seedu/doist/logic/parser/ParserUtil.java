@@ -126,6 +126,7 @@ public class ParserUtil {
         return desc.isPresent() ? Optional.of(new Description(desc.get())) : Optional.empty();
     }
 
+    //@@author A0147980U
     /**
      * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
      */
@@ -133,6 +134,7 @@ public class ParserUtil {
         assert priorityRawValue != null;
         return priorityRawValue.isPresent() ? Optional.of(new Priority(priorityRawValue.get())) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
@@ -155,6 +157,7 @@ public class ParserUtil {
         return ParserUtil.parseTags(Arrays.asList(extractedTags));
     }
 
+    //@@author A0147980U
     /**
      * Parses {@code <String> parameterString} into an {@code ArrayList<String>}.
      */

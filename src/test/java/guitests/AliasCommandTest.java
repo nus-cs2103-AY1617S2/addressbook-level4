@@ -23,14 +23,14 @@ public class AliasCommandTest extends DoistGUITest {
     public void testCommandWordNotSpecified() {
         commandBox.runCommand("alias a");
         assertResultMessage(String.format(AliasCommandParser.MESSAGE_COMMAND_WORD_NOT_SPECIFIED,
-                AliasCommand.MESSAGE_USAGE));
+                            AliasCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void testInputAliasFormatInvalid() {
         commandBox.runCommand("alias add a task \\for add");
         assertResultMessage(String.format(AliasCommandParser.MESSAGE_ALIAS_FORMAT_INVALID,
-                AliasCommand.MESSAGE_USAGE));
+                            AliasCommand.MESSAGE_USAGE));
     }
 
     @Test

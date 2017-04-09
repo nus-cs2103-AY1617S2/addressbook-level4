@@ -17,7 +17,7 @@ public class CommandAutoCompleteController {
 
     // relative to cursor center
     private final Point2D suggestionBoxOffset = new Point2D(-8, 12);
-    private final int maxItemNu = 8;
+    private final int maxItemNum = 8;
 
     // for singleton pattern
     public static CommandAutoCompleteController getInstance() {
@@ -27,7 +27,9 @@ public class CommandAutoCompleteController {
         return instance;
     }
 
-    // get the list of suggestions according to the input then display it
+    /**
+     * get the list of suggestions according to the input then display it
+     */
     public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
         attachSuggestionWindowIfNecessary(commandTextField);
 
@@ -53,13 +55,13 @@ public class CommandAutoCompleteController {
         int count = 0;
         ArrayList<String> suggestions = new ArrayList<>();
         for (String commandWord : logic.getAllCommandWords()) {
-            if (commandWord.startsWith(lastWord) && count < maxItemNu) {
+            if (commandWord.startsWith(lastWord) && count < maxItemNum) {
                 suggestions.add(commandWord);
                 count++;
             }
         }
         for (Prefix prefix : CliSyntax.ALL_PREFICES) {
-            if (prefix.toString().startsWith(lastWord) && count < maxItemNu) {
+            if (prefix.toString().startsWith(lastWord) && count < maxItemNum) {
                 suggestions.add(prefix.toString());
                 count++;
             }
@@ -91,7 +93,7 @@ public class CommandAutoCompleteController {
      * Method to provide auto-complete suggestions for search
      * @param words
      * @param logic
-     * @return list of strings that represent possible autocomplete matches
+     * @return list of strings that represent possible auto-complete matches
      */
     private ArrayList<String> getSuggestionsForSearch(String[] words, Logic logic) {
         int count = 0;
@@ -104,7 +106,7 @@ public class CommandAutoCompleteController {
             return suggestions;
         }
         for (String desc : logic.getAllNames()) {
-            if ((desc.toLowerCase().contains(s.toString().toLowerCase())) && count < maxItemNu) {
+            if ((desc.toLowerCase().contains(s.toString().toLowerCase())) && count < maxItemNum) {
                 suggestions.add(desc);
                 count++;
             }

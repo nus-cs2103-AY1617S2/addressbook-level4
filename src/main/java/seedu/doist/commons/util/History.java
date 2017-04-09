@@ -27,7 +27,7 @@ public class History<S> {
         return history.add(state);
     }
 
-
+    //@@author A0147980U
     /**
      * Method that returns the previous state entered by user
      * Return null if history is empty
@@ -42,7 +42,6 @@ public class History<S> {
         }
     }
 
-    //@@author A0147980U
     /**
      * Method that returns the next state entered by the user, if it exists
      * Returns null if overflow is empty

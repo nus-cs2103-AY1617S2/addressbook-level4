@@ -14,7 +14,7 @@ import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
 
-//@@author A0147980U-reused
+//@@author A0147980U
 public class ListCommandParser {
     private static final Pattern LIST_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
@@ -36,7 +36,7 @@ public class ListCommandParser {
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_UNDER, PREFIX_FROM, PREFIX_TO);
 
         if (!argsTokenizer.validateTokens(tokens) ||
-                (argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID)) {
+            argsTokenizer.validateDate(tokens) == ArgumentTokenizer.DATE_INVALID) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         argsTokenizer.tokenize(parameters);

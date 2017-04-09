@@ -6,7 +6,6 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
-//@@author A0147980U
 /**
  * Adds a task to the to-do list.
  */
@@ -30,6 +29,7 @@ public class AddCommand extends Command {
         newTask = taskToAdd;
     }
 
+    //@@author A0147980U
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;

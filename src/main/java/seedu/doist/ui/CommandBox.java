@@ -36,6 +36,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     public static final String SUCCESS_STYLE_CLASS = "white";
 
+    //@@author A0147980U
     private final Logic logic;
     private final History<String> commandHistory = new History<String>();
     private String unEnteredInput = "";
@@ -68,7 +69,6 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener(highlightListener);
     }
 
-    //@@author A0147980U
     private void highlightAndSuggestCompletion() {
         highlightManager.highlight(commandTextField);
         autoCompleteManager.suggestCompletion(commandTextField, logic);
