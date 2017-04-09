@@ -9,7 +9,7 @@
 3. [Features](#3-features)
     * [Viewing help](#311-viewing-help--help)
     * [Adding a task](#321-adding-a-task-add)
-    * [Listing tasks](#331listing-of-task-list)
+    * [Listing tasks](#331-listing-of-task-list)
     * [Marking a task as done](#34-marking-a-task-as-done-done)
     * [Marking a task as undone](#35-marking-a-task-as-undone-undone)
     * [Deleting a task](#36-deleting-a-task-delete)
@@ -22,7 +22,6 @@
     * [Saving Data](#3132-saving-the-data)
     * [Loading Date](#314-loading-your-own-data)
     * [Changing theme](#315-changing-the-appearance-of-kit)
-    * [Shortcuts](#316-using-shortcuts)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
@@ -34,7 +33,7 @@ It's Keep It Tidy.
 
 Or KIT.
 
-KIT is a desktop app that helps users manage their tasks and it is the one and only taskmanager you will ever need. With a simplistic design of UI and powerful functionalies embedded, KIT is capable of executing your instructions swiftly. On top of that, KIT is keyboard friendly, thereby saving you the trouble of moving the mouse and clicking.
+KIT is a desktop app that helps users manage their tasks and it is the one and only taskmanager you will ever need. With a simplistic design of UI and powerful functionalies embedded, KIT is capable of executing your instructions swiftly. On top of that, KIT is keyboard friendly, thereby saving you the trouble of ever moving the mouse and clicking.
 
 Now, let's get you started!
 ## 2. Quick start
@@ -50,9 +49,9 @@ Now, let's get you started!
 
 ### Starting KIT
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/startUi.png" width="600">
+   > <img src="images/Ui_Empty.png" width="600">
 
-5. (Optional) You can choose to login to your Google Calendar, click [here](#310-google-calendar) to follow the detailed instructions.
+5. (Optional) You can choose to login to your Google Calendar.
 
     After you have logged in, it looks something like this.
      > <img src="images/googleLoggedIn.png" width="600">
@@ -65,8 +64,8 @@ Now, let's get you started!
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 7. Some example commands you can try:
    * **`list`** : lists all task
-       *  > <img src="images/listBefore.png" width="600">
-       *  > <img src="images/listAfter.png" width="600">
+       *  > <img src="images/listEmptyBefore.png" width="600">
+       *  > <img src="images/listEmptyAfter.png" width="600">
    * **`add`**`  do 2103 project r/waiting for john's reply s/03-03-2017 l/nus soc t/school` : adds a task named `do 2103 project` to KIT.
        * > <img src="images/addTaskBefore.png" width="600">
        * > <img src="images/addTaskAfter.png" width="600">
@@ -80,22 +79,22 @@ Now, let's get you started!
 
 ## 3. Features
 
-> **Command Format**
+ **Command Format**
 >
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `[SQUARE_BRACKETS]` are optional.
-> * Items with `...` after them can have multiple instances.
+> * Parameters in `[SQUARE_BRACKETS]` are optional.
+> * Parameters with `...` after them can have multiple instances.
 > * Parameters can be in any order.
 
 ### 3.1.1 Viewing help : `help`
 
-If you are not sure where to start, take a sneakpeek at the help sheet!
+##### If you are not sure where to start, take a sneakpeek at the help sheet!
 
-Format: `help [COMMANDNAME]`, `h [COMMANDNAME]`, `man [COMMANDNAME]`, `manual [COMMANDNAME]`
+Format: `help [COMMAND]`, `h [COMMAND]`, `man [COMMAND]`, `manual [COMMAND]`
 
-> * If COMMANDNAME is entered, displays the help message for that specific command
-> * If COMMANDNAME is not entered, displays user guide in a new window.
-> * Tips: You can also bring up the help window by pressing F1.
+> * If COMMAND is entered, displays the help message for that specific command
+> * If COMMAND is not entered, displays this user guide in a new window.
+> * Tips: You can also bring up the user guide by pressing <kbd>F1</kbd>.
 
 Example:
 
@@ -110,17 +109,17 @@ KIT will display the following message:
 Format: `helpformat`, `helpf`, `summary`, `hf`
 
 > * Helpf shows a quick summary of command formats.
-> * Tips: You can also bring up the help window by pressing F3.
+> * Tips: You can also bring up the help window by pressing <kbd>F3</kbd>.
 
 ### 3.2.1 Adding a task: `add`
 
 #### Now you are ready to start exploring KIT. Try adding a task!
 
-Adds a task to KIT. New tasks are `not done` by default. <br>
+Description: Adds a task to KIT. New tasks are `not done` by default. <br>
 
 Format: `add NAME [r/REMARKS] [s/STARTDATE] [e/ENDDATE] [l/LOCATION] [t/TAG]...`
 
-> * If you need to type the character /, put a \ before it to avoid t/ getting recognized as tag. eg. carrot\/cabbage <br>
+> * If you need to type the character / anywhere in the input, put a \ before it to avoid problems such as, t/ getting recognized as tag. eg. carrot\/cabbage <br>
 > * Tasks can contain any number of tags (including 0).
 
 Here are some examples:
@@ -129,12 +128,12 @@ Here are some examples:
 * `add buy presents s/two week before christmas e/christmas eve l/town t/shopping`
 * `add buy groceries r/cabbage and broccoli s/this weekend t/personal`
 * `add feed the cat\/dog t/personal t/family e/tomorrow 8am`
-
+    ##### Notice how `cat/dog` is correctly captured and displayed.
     > <img src="images/addCommand.png" width="600">
 
 #### Supported Date/Time formats:
 
-KIT has an intelligent processer that interprets your phrases and sentences about date, deadline and time.
+KIT has an intelligent processer that interprets your phrases and sentences about time, date and deadline.
 
 Here is a table of interpretation for your convenience.
 | Date Format | Example |KIT's interpretation  |
@@ -147,15 +146,17 @@ Here is a table of interpretation for your convenience.
 |Holidays | New Year, Christmas| The dates of the holiday of the current year|
 
 > * If you are adding a date of the current year, you can leave out the year because dates without specified year are assumed to be **the current year**. *See the first 3 entries of the  Date Format Table*
-> * HH:mm in 24 hour format or hh:mm am/pm.
+> * You can input time as HH:mm in 24 hour format or hh:mm am/pm.
 > * Times without am/pm are assumed to be in 24 hour format.
-> * You may include either both date and time seperated with a space or just either one or even none at all.
+> * You may include both date and time, date only, time only or even none at all.
 
 ### 3.2.2 Adding a task with smart add: `smartadd`
 
-Smart add is similiar to add in the sense that they both adds a new task. However, smart add is more flexible and allows you to add a task's location and date details without using the prefixes. <strong>Note: This command requires the internet to work.</strong>
+##### Typing prefixes is too troublesome ? Try `smartadd`.
 
-Description: Flexibly adds a task without specifying prefixes.
+`smartadd` is similiar to add in the sense that they both add a new task. However, `smartadd` is more flexible and allows you to add a task's location and date details without using the prefixes. <strong>Note: This command requires the internet to work.</strong>
+
+Description: Flexibly adds a task without specifying prefixes for date and location.
 
 Format: sa DESCRIPTION [r/REMARK] [t/TAG]...
 
@@ -164,6 +165,9 @@ Format: sa DESCRIPTION [r/REMARK] [t/TAG]...
 Example:
 
 * `sa meet friends for dinner in clementi at 6pm t/friends`
+
+> <img src="images/smartAddCommand1.png" width="600">
+
 * `sa project meeting at 2pm`
 * `sa design poster with team in meeting room r/share my new ideas with team`
 
@@ -171,7 +175,9 @@ Example:
 
 Some tips for using the Smart Add command:
 
-* If you enter a time but no date, the closest date in the future will be used. If the time is later today, the date will be today. If the time have passed for today, the date will be tomorrow.
+* If you enter a time with no date, the closest date in the future will be used.
+    * If the time is later today, the date will be today.
+    * If the time has passed for today, the date will be tomorrow.
 * If no start or end time is entered, an all day event will be created.
 * If no end time is entered, the event is assumed to be one hour long.
 * You can specify start and end time using time ranges or time intervals. These two commands are equivalent:
@@ -182,41 +188,47 @@ Some tips for using the Smart Add command:
 
 For example, `sa Meeting at Wednesday Cafe`.
 
-In this case, either Wednesday Cafe is the actual location and the date is not specified. Or, it could also be interpreted as meeting on wednesday at cafe.
+In this case, either _'Wednesday Cafe'_ is the actual location and the date is not specified. Or, it could also be interpreted as meeting on Wednesday at _'Cafe'_.
 
-In such cases, we recommend users to use the add command where you can specify clearly the location, date and etc.
+If the input is ambiguous, we recommend you to use the add command to clearly specify the location, date and etc.
 
-### 3.3.1	Listing of task: `list`
+### 3.3.1 Listing of task: `list`
 
-If you wish to see your tasks according to certain criteria, you can use the flexible list command.
+##### You can use the flexible list command to view tasks that match certain criteria.
 
 Description: Shows a list of tasks in KIT depending on chosen criterion. <br>
 
-Format: `list [criterion]`, `ls [criterion]`, `l [criterion]`
+Format: `list [CRITERION]`, `ls [CRITERION]`, `l [CRITERION]`
 
 #### Available Criteria
 
 `done` : display the list of all tasks that are done.
 `notdone` or `undone` : display the list of all tasks that are not done.
-`floating` or `float` : display the list of all tasks that have no start or end dates.
+`floating` or `float` : display the list of all tasks that have no start date and no end date.
 
-If no criterion is specified, all tasks will be shown.
+If no criterion is specified, all tasks will be listed.
 
 Examples:
-* `ls`
-* `list done`
-* `l notdone`
-* `ls float`
+* `ls` : display all task.
+* `list done` : display all done task.
+* `l notdone` : display all notdone task.
+* `ls float` : display all floating task.
 
-### 3.3.2	Listing of all task under a tag: `list tag`
+### 3.3.2 Listing of all task under a tag: `list tag`
 
-#### We shouldn't mix personal life with work, KIT understands that.
+#### We shouldn't mix personal life with work. KIT understands that.
 
 If you want to see all tasks with a particular tag only, say `work`, you can use the `list tag` function.
 
 Description: Shows a list of task by the specified tag. <br>
 
 Format: `list tag TAGNAME`, `ls tag TAGNAME`, `l tag TAGNAME`
+
+Example:
+
+`list tag work`
+
+This displays all task with the tag `work`.
 
 ### 3.4	Marking a task as done: `done`
 
@@ -227,13 +239,13 @@ Description: Marks the task at the specified `INDEX` as "Done". <br>
 
 Format: `done INDEX`, `d INDEX`
 
-> * The index refers to the index number shown in the listing.
+> * The index refers to the number shown beside the task name.
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 > <img src="images/doneBefore.png" width="600">
 > <img src="images/doneAfter.png" width="600">
 
->Tip : You can use the `list done` or `list` command to see the tasks you have marked as done. Those with green names and a tick are the done tasks.
+>Tip : You can use the `list done` or `list` command to see the tasks you have marked as done. Task with green names and a tick are done tasks.
 ### 3.5	Marking a task as undone: `undone`
 
 #### More follow ups for your task? Need to resume a completed task?
@@ -244,29 +256,31 @@ Description: Marks the task at the specified `INDEX` as "Not Done". <br>
 
 Format: `undone INDEX`, `notdone INDEX`, `ud INDEX`, `nd INDEX`
 
-> * The index refers to the index number shown in the listing.
+> * The index refers to the number shown beside the task name.
 > * The index **must be a positive integer** 1, 2, 3, ...
+
+##### Note: Repeated or multiple `done` or `undone` on the same task does not change it's status, i.e. `done` an already done task does not change it's status.
 
 ### 3.6	Deleting a task: `delete`
 #### Don't want the old tasks to take up all the space?
 
 If you would like to remove a task from KIT, simply use the `delete` function.
 
-Description: Deletes the specified task from KIT.<br>
+Description: Deletes the task with specified index from KIT.<br>
 
 Format: `delete INDEX`
 
-> * Deletes the task at the specified `INDEX`.
+> * Deletes the task with the specified `INDEX`.
 > * The index refers to the index number shown in the listing.
 > * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
 * `delete 2`<br>
-  Deletes the 2nd task of the current listing in KIT.
+Deletes the task with index `2` in the current listing in KIT.
 
 
-### 3.7.1	Undo: `undo`
+### 3.7.1 Undoing a command: `undo`
 
 #### Made a mistake? No worries.
 
@@ -276,13 +290,14 @@ Description: Undo the last command.<br>
 
 Format: `undo`, `uhoh`
 
-> * Able to undo up to 10 times.
+ * Able to undo up to 10 times.
+ * Able to undo any command that modifies data. List, find commands are ignored.
 
-### 3.7.2	Redo: `redo`
+### 3.7.2 Redoing a command: `redo`
 
 #### Along with undo comes redo.
 
-Just in case you changed your mind, you can also retract your `undo` by using the `redo` command.
+Just in case you changed your mind, you can also reverse your `undo` by using the `redo` command.
 
 Description: Redo the last undo. <br>
 
@@ -290,7 +305,9 @@ Format: `redo`
 
 > * Able to redo up to 10 times.
 > * If you make any new commands right after you undo, you will not be able to do any more redo.
-> * Work similarly to the page back and page forward button in your browser.
+
+Undo and Redo basically works similarly to the page back and page forward button in your browser.
+
 
 ### 3.8 Editing a task: `edit`
 
@@ -320,16 +337,16 @@ Examples:
 #### Finding a task in a stack of tasks can be troublesome.
 KIT has an efficient `find` command that can help. Use it along with any keyword or date you can recall that is related to that task.
 
-Description: Finds task whose names or remark contain **every one** of the given keywords. **Note** : If **both** keywords and date are given, KIT will find tasks that match **both** the keywords and the date. <br>
+Description: Finds task whose names or remark contain **every one** of the given keywords. **Note** : If **both** keywords and date are given, KIT will find tasks that match **both** the keywords **and** the date. <br>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`, `f KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case insensitive. e.g `project` will match `Project`
 > * The order of the keywords does not matter. e.g. `do project` will match `project do`
-> * All fields of the task are searched, ie name, remark and etc, basically every detail of the task is being searched.
+> * All fields of the task are searched, i.e. name, remark and etc, basically every detail of the task is being searched.
 > * Substrings will be matched. e.g. `project` will match `projects`
 > * Task matching **every** keyword will be found.
-    e.g. keywords of`biology project` will match the task of `do biology project` and not the task of `do physics project`.
+    e.g. keywords `biology project` will match the task of `do biology project` and not the task of `do physics project`(_does not contain `biology`_).
 
 Examples:
 
@@ -337,8 +354,9 @@ Examples:
   Finds `do homework`
 
 * `find poster Apr 6`<br>
-  Finds any task that contains `poster` and the date of `Apr 6 2017`(the current year).
+  Finds any task that contains `poster` **and** the date of `Apr 6 2017`(the current year).
  >  <img src="images/findAfter.png" width="600">
+
 ### 3.9.2 Finding with exact keyword(s):`findexact`
 
 #### What if you want to search for something more specific?
@@ -350,23 +368,23 @@ Description: Finds task that contains words that are **full matches** of all the
 Format: `findexact KEYWORD...`, `fexact KEYWORD...`, `finde KEYWORD...`, `fe KEYWORD...`
 
 > * The search is the similar to `find` except it **does not** search for substring matches and **does not** search for dates.
-e.g `do project` will match `do School project` but not `do School projects`
+e.g `do project` will match `do School project` but not `do School projects` (_`projects` does not match `project`_)
 
 ### 3.10 Google Calendar.
 
 #### Google Calendar is popular, and KIT knows.
 
-Google Calendar operations are supported in KIT.
+KIT provides support for Google Calendar users.
 
-To use Google Calendar with KIT, we first require your permission to read and add event to your Google Calendar. <strong>Note: Google Calendar related commands requires the internet to work.</strong>
+To use Google Calendar with KIT, we first require your permission for access to your Google Calendar. <strong>Note: Google Calendar related commands requires the internet to work.</strong>
 
-> * The request will automatically open in your default browser permission is requested.
-> * Log in to your Google account and approve the request to use this feature.
+> * The request will automatically open in your default browser.
+> * Log in to your Google account and approve our request to access your calendar.
 > * You only need to do this for the first time.
 
 ### 3.10.1 Import events from Google Calendar: `gg`
 
-#### Do you have to copy-paste your events in Google Calendar? Of course not!
+#### Do you have to copy and paste your events from Google Calendar? Of course not!
 
 You can import your google calendar with the `getgoogle` command.
 
@@ -380,19 +398,18 @@ Format: `getgoogle`, `gg`
 
 ### 3.10.2 Post Task to Google Calendar: `pg`
 
-#### Similarly, you can keep KIT synchronized with Google Calendar.
+#### Similarly, you can keep Google Calendar updated with KIT.
 
-With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar.
+With `postgoogle`, you are able to add a task from KIT as an Event to your Google Calendar. It also updates task that are added before.
 
-Description: Add the specified task to your Google Calendar. <br>
+Description: Add or update the specified task to your Google Calendar. <br>
 
 Format: `postgoogle [INDEX]`, `pg [INDEX]`
 
-> * If INDEX is specified and correct, adds the selected task to calendar.
-> * If INDEX is not specified, adds **all** displayed tasks to calendar.
+> * If INDEX is specified and correct, adds/updates the selected task to calendar.
+> * If INDEX is not specified, adds/updates **all** displayed tasks to calendar.
 > * This will not add any duplicate tasks to your google calendar.
-> * You can also use this command to update a task you have posted to your calendar before.
-> * **Note**: Because of the task specifications (each task needs both the start date and end date) from Google Calendar, only tasks with start and end dates will be added to your google calendar.
+> * **Note**: Any events in a calendar will have both start and end dates. Similarly only tasks with start and end dates can be added to your google calendar.
 
 
 ### 3.11 Clearing all task: `clear`
@@ -402,11 +419,11 @@ Just use `clear`.
 
 Description: Clears all entries from KIT. <br>
 
-Format: `clear`, `clr`
+Format: `clear`
 
 ### 3.12 Exiting the program: `exit`
 
-#### Completed your work already, exit KIT to have a break!
+#### Completed your work already? Exit KIT to have a break!
 Description: Exits the program. <br>
 
 Format: `exit`
@@ -423,7 +440,7 @@ Format: `save PATHNAME`
 
 ### 3.13.2 Saving the data
 
-#### KIT saves your data automatically and saves you some trouble.
+#### KIT saves your data automatically and saves you the trouble.
 
 In KIT, you data are saved automatically after a change has been made. There is no need to save manually.
 
@@ -436,16 +453,20 @@ Description: Loads a file from the specified location.
 
 Format: `load PATHNAME`
 
+##### Note: The file you wish to load has to be a xml file. Be careful when manipulating the xml file, an invalid format will not be read.
+
 ### 3.15 Changing the appearance of KIT
 
-#### You want to have a bit more colors, absolutely!
+#### If you want to have a bit more colors, KIT can do that too!
 `changetheme` allows you to change the colors and appearances of KIT.
 
-Description: Changes the theme of KIT to the required theme.
+Description: Changes the theme of KIT to the requested theme.
 
+##### Notice the above screenshot is of a default theme, and the one below is of a light theme.
 Format: `changetheme [THEMENAME]`
  >  <img src="images/changeThemeBefore.png" width="600">
  >  <img src="images/changeThemeAfter.png" width="600">
+
 
 > * After each successful `changetheme` command, you will have to restart KIT to view the changes.
 > * If THEMENAME is specified and correct, KIT will change its theme and after restart you will see the changed theme.
@@ -453,7 +474,7 @@ Format: `changetheme [THEMENAME]`
 
 ### 3.16 Using shortcuts
 
-#### Too lazy to type your commands? Use KIT's shortcuts.
+#### Feeling lazy to type the whole commands? Use KIT's shortcuts.
 
 In KIT, we provide shortcuts which are activated with different keyboard combinations.
 
@@ -464,33 +485,34 @@ This will fill the command box with "add ".
 
  >  <img src="images/shortcuts.png" width="600">
 
-> * Shortcuts do not work when you have clicked on google calendar as it is a separate browser.
+> * Shortcuts is temporary disabled when you are using google calendar as it is opened in a separate window. Click on KIT to use shortcuts again!
 
 ## 4. FAQ
 
-**Q**: Does KIT support Windows 10? <br>
+**Q**: _Does KIT support Windows 10? <br>_
 **A**: Yes! KIT works as long as you have Java version `1.8.0_60` or later.
 
-**Q**: Will my tasks be saved after I close the application?  <br>
-**A**: Yes. Your data is saved after every command, you can safely exit KIT when you are done.
+**Q**: _Will my tasks be saved after I close the application?  <br>_
+**A**: Yes. Your data is saved after every command, so you can safely exit KIT when you are done. There is not need to manually save your data.
 
-**Q**: Can I have two task with the same name?  <br>
+**Q**: _Can I have two tasks with the same name?  <br>_
 **A**: Sure, tasks with same names are allowed, as long as at least one of their fields is different. That being said, tasks with completely same details are not allowed. Completely same details refer to same name, location, start date, end date and remark.
 
-**Q**: I accidentally created two exact same tasks, how do I remove just one of them?  <br>
+**Q**: _I accidentally created two exact same tasks, how do I remove just one of them?  <br>_
 **A**: If you just added the task,meaning the most recent command is the add command, you can do so by typing undo. Otherwise, you can use [find](#391-finding-a-taskfind) or [list](#331-listing-of-task-list) to search for the duplicate tasks and [delete](#36-deleting-a-task-delete) one of them. The other task will remain in KIT. Instructions on these commands can be found in the respective section of the commands.
 
-**Q**: Can I manually edit the storage file?  <br>
-**A**: Yes, you can. It is a xml file called kit.xml. It can be found under data\kit.xml by default. Be careful in making changes to it if you are unfamiliar with XML, the program might not start properly if the file’s format is invalid.
+**Q**: _Can I manually edit the storage file?  <br>_
+**A**: Yes, you can. It is a xml file called kit.xml. It can be found under data\kit.xml by default. Be careful in making changes to it if you are unfamiliar with XML, KIT will not be able to read your data if the format is invalid and will start with an empty KIT.
 
-**Q**: I use two computers. Can I transfer my data between the two computers? <br>
+**Q**: _I use two computers. Can I transfer my data between the two computers? <br>_
 **A**: Yes, you can! Your data are saved in a file called kit.xml. Just copy this file to your computer and place in under data\kit.xml. You can change the file location later using the [save](#3132-saving-the-data) command.
 
-**Q**: It’s troublesome to constantly transfer my data between two computers, is there any way for it to synchronize automatically?  <br>
+**Q**: _It’s troublesome to constantly transfer my data between two computers, is there any way for it to synchronize automatically?  <br>_
 **A**: Sorry, we currently do not support automatical synchronization. However, if you are using Dropbox, you can specify folders that will automatically synchronize through Dropbox. This means that you can use the [save](#3132-saving-the-data) command to specify your save location in your Dropbox folder and thus get synchronization.
+
+
 
 ## 5. Command Summary
 
 <img src="images/Command Summary 1.png" width="600">
 <img src="images/Command Summary 2.PNG" width="600">
-<img src="images/Command Summary 3.PNG" width="600">
