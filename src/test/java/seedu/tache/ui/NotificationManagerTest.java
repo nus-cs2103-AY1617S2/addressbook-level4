@@ -32,9 +32,9 @@ public class NotificationManagerTest {
         testNotification.showSystemTrayNotification(event, 0);
         testNotification.showSystemTrayNotification(deadline, 1);
         assertNotSame(testNotification.getNotificationTimer().toString(), initialTimer.toString());
-        
+
         testNotification.stop();
         assertNotSame(testNotification.getNotificationTimer().toString(), initialTimer.toString());
-        
+
     }
 }
