@@ -7,9 +7,11 @@ import static seedu.onetwodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYE
 import org.junit.Test;
 
 import seedu.onetwodo.logic.commands.DoneCommand;
+import seedu.onetwodo.logic.commands.EditCommand;
 import seedu.onetwodo.logic.commands.ListCommand;
 import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
+import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
@@ -71,7 +73,7 @@ public class DoneCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void undone_nonRecurringTask_success() {
+    public void undone_nonRecurringTask_success() throws TaskNotFoundException {
         // try to undone an incompleted task
         commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
         assertResultMessage(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
@@ -82,14 +84,25 @@ public class DoneCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void undone_latestRecurringTask_success() {
-        // try to undone an incompleted task
-        commandBox.runCommand(UndoneCommand.COMMAND_WORD + " t1");
-        assertResultMessage(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
+    public void undone_latestRecurringTask_success() throws TaskNotFoundException {
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+        assertUndoneSuccess(TaskType.EVENT, "e1", currentList);
+    }
 
-        // done the same task, and try to undone it
-        assertDoneSuccess(TaskType.TODO, "t1", currentList);
-        assertUndoneSuccess(TaskType.TODO, "t1", currentList);
+    @Test
+    public void undone_nonLatestRecurringTask_success() throws TaskNotFoundException {
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+
+        assertUndoneSuccess(TaskType.EVENT, "e2", currentList);
+    }
+
+    @Test
+    public void undone_editedRecurringTask_success() throws TaskNotFoundException {
+        assertDoneSuccess(TaskType.EVENT, "e1", currentList);
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " e1 new task name");
+        assertUndoneSuccess(TaskType.EVENT, "e1", currentList);
     }
 
     //@@author A0135739W
@@ -139,17 +152,35 @@ public class DoneCommandTest extends ToDoListGuiTest {
      * Runs the undone command to complete the task at specified index and confirms the result is correct.
      * @param filteredTaskListIndex e.g. index e1 to complete the first task in the event list,
      * @param currentList A copy of the current list of tasks (before marking undone).
+     * @throws TaskNotFoundException
      */
-    private void assertUndoneSuccess(TaskType taskType, String filteredTaskListIndex, TestTask[] currentList) {
+    private void assertUndoneSuccess(TaskType taskType, String filteredTaskListIndex, TestTask[] currentList)
+            throws TaskNotFoundException {
         commandBox.runCommand(ListCommand.COMMAND_WORD + " done");
         commandBox.runCommand(UndoneCommand.COMMAND_WORD + " " + filteredTaskListIndex);
 
         TestTask[] filteredTaskList = TestUtil.getTasksByTaskType(currentList, taskType);
         int testTaskIndex = TestUtil.getFilteredIndexInt(filteredTaskListIndex);
         TestTask targetTask = filteredTaskList[testTaskIndex];
-        targetTask.setIsDone(false);
+        TestTask copiedTask = new TaskBuilder(targetTask).build();
+        copiedTask.updateTaskRecurDate(true);
+        copiedTask.setIsDone(false);
+        TestTask taskToCheck = copiedTask;
 
-        //Assert taskListPanel correctly shows tasks left undone
+        if (!targetTask.hasRecur()) {
+            targetTask.setIsDone(false);
+        } else if (TestUtil.containsTask(currentList, taskToCheck)) {
+            if(taskToCheck.getDoneStatus() == false) {
+                filteredTaskList = undoneLatestRecur(targetTask, taskToCheck, currentList);
+            } else {
+                undoneNonLatestRecur(targetTask);
+            }
+
+        } else {
+            undoneNonParentRecur(targetTask);
+        }
+
+        //Assert taskListPanel correctly shows tasks that are done
         TestTask[] filteredDoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, true);
         assertTrue(taskListPanel.isListMatching(taskType, filteredDoneList));
 
@@ -160,5 +191,21 @@ public class DoneCommandTest extends ToDoListGuiTest {
         commandBox.runCommand(ListCommand.COMMAND_WORD);
         TestTask[] filteredUndoneList = TestUtil.getTasksByDoneStatus(filteredTaskList, false);
         assertTrue(taskListPanel.isListMatching(taskType, filteredUndoneList));
+    }
+
+    private TestTask[] undoneLatestRecur(TestTask targetTask, TestTask taskToRevertBackward,
+                TestTask[] currentList) throws TaskNotFoundException {
+        TestTask[] newFilter = TestUtil.removeTasksFromList(currentList, targetTask);
+        taskToRevertBackward.updateTaskRecurDate(false);
+        return newFilter;
+    }
+
+    private void undoneNonLatestRecur(TestTask taskToUncomplete) {
+        undoneNonParentRecur(taskToUncomplete);
+    }
+
+    private void undoneNonParentRecur(TestTask taskToUncomplete) {
+        taskToUncomplete.removeRecur();
+        taskToUncomplete.setIsDone(false);
     }
 }

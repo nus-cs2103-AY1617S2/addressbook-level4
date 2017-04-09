@@ -2,6 +2,7 @@ package seedu.onetwodo.testutil;
 
 import java.time.LocalDateTime;
 
+import seedu.onetwodo.commons.exceptions.IllegalValueException;
 import seedu.onetwodo.logic.commands.AddCommand;
 import seedu.onetwodo.model.tag.UniqueTagList;
 import seedu.onetwodo.model.task.Description;
@@ -226,6 +227,15 @@ public class TestTask implements ReadOnlyTask {
             break;
         default:
             break;
+        }
+    }
+
+    public void removeRecur() {
+        try {
+            this.setRecur(new Recurring(""));
+        } catch (IllegalValueException e) {
+            System.err.println("Invalid value when creating Recurring");
+            e.printStackTrace();
         }
     }
 

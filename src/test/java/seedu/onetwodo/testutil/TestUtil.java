@@ -336,6 +336,15 @@ public class TestUtil {
         return tasks;
     }
 
+    public static boolean containsTask(TestTask[] list, TestTask target) {
+        for(int n = 0; n < list.length; n ++) {
+            if(list[n].equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @param tasks
      * @param type

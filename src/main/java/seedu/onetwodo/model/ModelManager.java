@@ -128,8 +128,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Undone a completed task. If it does not recur, undone it normally.
      *
-     * If undone a recurring task with its original task being edited, it will be added back as an individual
-     * non-recurring task (to keep all tasks info).
+     * If undone a recurring task with its original task being edited, it will have no parent.
+     * It will be added back as an individual non-recurring task (to keep all tasks info).
      *
      * If undone a non-latest completed recurring task, it will also be added back as an
      * individual non-recurring task.
