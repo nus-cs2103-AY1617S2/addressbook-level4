@@ -1,4 +1,4 @@
-package org.teamstbf.yats.model.person;
+package org.teamstbf.yats.model.event;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

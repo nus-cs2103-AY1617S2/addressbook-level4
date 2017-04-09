@@ -22,7 +22,6 @@ import org.teamstbf.yats.commons.events.model.TaskManagerChangedEvent;
 import org.teamstbf.yats.commons.events.ui.JumpToListRequestEvent;
 import org.teamstbf.yats.commons.events.ui.ShowHelpRequestEvent;
 import org.teamstbf.yats.logic.commands.AddCommand;
-import org.teamstbf.yats.logic.commands.ResetCommand;
 import org.teamstbf.yats.logic.commands.Command;
 import org.teamstbf.yats.logic.commands.CommandResult;
 import org.teamstbf.yats.logic.commands.DeleteCommand;
@@ -30,6 +29,7 @@ import org.teamstbf.yats.logic.commands.ExitCommand;
 import org.teamstbf.yats.logic.commands.FindCommand;
 import org.teamstbf.yats.logic.commands.HelpCommand;
 import org.teamstbf.yats.logic.commands.ListCommand;
+import org.teamstbf.yats.logic.commands.ResetCommand;
 import org.teamstbf.yats.logic.commands.SelectCommand;
 import org.teamstbf.yats.logic.commands.exceptions.CommandException;
 import org.teamstbf.yats.model.Model;
@@ -43,7 +43,6 @@ import org.teamstbf.yats.model.item.Location;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
-import org.teamstbf.yats.model.item.SimpleDate;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -315,11 +314,9 @@ public class LogicManagerTest {
 		assertCommandFailure("add", expectedMessage);
 	}
 
-	@Test
+	@Test // TO BE EDITED
 	public void execute_add_invalidEventData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
-		assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-				SimpleDate.MESSAGE_DEADLINE_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address", Schedule.MESSAGE_TIME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);
