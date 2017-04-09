@@ -5,22 +5,21 @@
  * user guide available at http://gradle.org/docs/2.2.1/userguide/tutorial_java_projects.html
  */
 
-allprojects {
-    version = 'V1.6.1ea'
+plugins {
+    id "com.github.kt3k.coveralls" version "2.4.0"
+    id "com.github.johnrengelman.shadow" version '1.2.3'
+    id 'application'
+}
 
+// Specifies the entry point of the application
+mainClassName = 'seedu.address.MainApp'
+
+allprojects {
     apply plugin: 'idea'
     apply plugin: 'java'
-    apply plugin: 'checkstyle'
-    checkstyle {
-        toolVersion = '6.19'
-        sourceSets = [project.sourceSets.main]
-    }
-    apply plugin: 'pmd'
-    apply plugin: 'findbugs'
     apply plugin: 'jacoco'
-    findbugs {
-        excludeFilter = file("${projectDir}/config/findbugs/excludeFilter.xml")
-    }
+    apply plugin: 'checkstyle'
+
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,14 +38,16 @@ allprojects {
         guavaVersion = '19.0'
         jacksonVersion = '2.7.0'
         jacksonDataTypeVersion = '2.7.4'
-        jKeyMasterVersion = '1.2'
         junitVersion = '4.12'
-        log4jVersion = '2.6'
-        testFxVersion = '3.1.0'
+        testFxVersion = '4.0.5-alpha'
         monocleVersion = '1.8.0_20'
-        slf4jSimpleVersion = '1.6.4'
+        checkstyleVersion = '7.1.2'
 
         libDir = 'lib'
+    }
+
+    checkstyle {
+        toolVersion = "$checkstyleVersion"
     }
 
     jacocoTestReport {
@@ -58,21 +59,39 @@ allprojects {
     }
 
     dependencies {
-        compile "org.apache.logging.log4j:log4j-api:$log4jVersion"
-        compile "org.apache.logging.log4j:log4j-core:$log4jVersion"
-        compile "org.slf4j:slf4j-simple:$slf4jSimpleVersion" // Required to suppress warning, for jkeymaster, see http://www.slf4j.org/codes.html#StaticLoggerBinder
         compile "org.controlsfx:controlsfx:$controlsFxVersion"
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
 
+        compile "com.joestelmach:natty:0.13"
+        compile group: 'org.antlr', name: 'antlr-runtime', version: '3.5.2'
+        compile group: 'org.mnode.ical4j', name: 'ical4j', version: '1.0.2'
+
         testCompile "junit:junit:$junitVersion"
-        testCompile "org.testfx:testfx-core:4.0.+"
-        testCompile "org.testfx:testfx-junit:4.0.+"
-        testCompile "org.testfx:testfx-legacy:4.0.+", {
+        testCompile "org.testfx:testfx-core:$testFxVersion"
+        testCompile "org.testfx:testfx-junit:$testFxVersion"
+        testCompile "org.testfx:testfx-legacy:$testFxVersion", {
             exclude group: "junit", module: "junit"
         }
         testCompile "org.testfx:openjfx-monocle:$monocleVersion"
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/resources'
+            }
+        }
+    }
+
+    shadowJar {
+        archiveName = "addressbook.jar"
+
+        destinationDir = file("${buildDir}/jar/")
     }
 }
 
@@ -95,20 +114,31 @@ task coverage(type: JacocoReport) {
     }
 }
 
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
+coveralls {
+    sourceDirs = allprojects.sourceSets.main.allSource.srcDirs.flatten()
+    jacocoReportPath = "${buildDir}/reports/jacoco/coverage/coverage.xml"
 }
 
-task checkStyle { // A dummy task to run a set of tasks
+tasks.coveralls {
+    dependsOn coverage
+    onlyIf { System.env.'CI' }
 }
 
 class AddressBookTest extends Test {
     public AddressBookTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
+
+        /*
+         * Prints the currently running test's name in the CI's build log,
+         * so that we can check if tests are being silently skipped or
+         * stalling the build.
+         */
+        if (System.env.'CI') {
+            beforeTest { descriptor ->
+                logger.lifecycle('Running test: ' + descriptor)
+            }
+        }
     }
 
     public void setHeadless() {
@@ -128,16 +158,9 @@ task guiTests(type: AddressBookTest) {
     }
 }
 
-task guiUnitTests(type: AddressBookTest) {
-    include 'guiunittests/**'
 
-    jacoco {
-        destinationFile = new File("${buildDir}/jacoco/test.exec")
-    }
-}
-
-task unitTests(type: AddressBookTest) {
-    include 'address/**'
+task nonGuiTests(type: AddressBookTest) {
+    include 'seedu/address/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -154,26 +177,13 @@ task allTests(type: AddressBookTest) {
 task headless << {
     println "Setting headless mode properties."
     guiTests.setHeadless()
-    guiUnitTests.setHeadless()
-    unitTests.setHeadless()
+    nonGuiTests.setHeadless()
     allTests.setHeadless()
 }
 
-
-
 // Makes sure that headless properties are set before running tests
-unitTests.mustRunAfter headless
-guiUnitTests.mustRunAfter headless
+nonGuiTests.mustRunAfter headless
 guiTests.mustRunAfter headless
 allTests.mustRunAfter headless
-
-headless.shouldRunAfter checkStyle
-unitTests.shouldRunAfter checkStyle
-guiUnitTests.shouldRunAfter checkStyle
-guiTests.shouldRunAfter checkStyle
-allTests.shouldRunAfter checkStyle
-
-checkStyle.shouldRunAfter clean
-checkStyle.dependsOn checkstyleMain, checkstyleTest, findbugsMain, findbugsTest, pmdMain, pmdTest
 
 defaultTasks 'clean', 'headless', 'allTests', 'coverage'

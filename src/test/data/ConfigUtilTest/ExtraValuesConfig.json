@@ -1,0 +1,8 @@
+{
+  "appTitle" : "Watodo",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "C:\\preferences.json",
+  "watodoFilePath" : "data/watodo.xml",
+  "watodoName" : "My Tasks",
+  "extra" : "extra value"
+}

@@ -1,10 +1,11 @@
 package guitests.guihandles;
 
-import seedu.address.TestApp;
-import guitests.GuiRobot;
-import javafx.stage.Stage;
-
 import java.util.Arrays;
+
+import guitests.GuiRobot;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import seedu.watodo.TestApp;
 
 /**
  * Provides a handle to the main menu of the app.
@@ -17,5 +18,20 @@ public class MainMenuHandle extends GuiHandle {
     public GuiHandle clickOn(String... menuText) {
         Arrays.stream(menuText).forEach((menuItem) -> guiRobot.clickOn(menuItem));
         return this;
+    }
+
+    public HelpWindowHandle openHelpWindowUsingMenu() {
+        clickOn("Help", "F1");
+        return new HelpWindowHandle(guiRobot, primaryStage);
+    }
+
+    public HelpWindowHandle openHelpWindowUsingAccelerator() {
+        useF1Accelerator();
+        return new HelpWindowHandle(guiRobot, primaryStage);
+    }
+
+    private void useF1Accelerator() {
+        guiRobot.push(KeyCode.F1);
+        guiRobot.sleep(500);
     }
 }

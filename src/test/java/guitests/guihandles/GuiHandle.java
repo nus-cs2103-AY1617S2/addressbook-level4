@@ -1,9 +1,8 @@
 package guitests.guihandles;
 
-import seedu.address.TestApp;
-import seedu.address.model.datatypes.person.Person;
-import seedu.address.util.AppLogger;
-import seedu.address.util.LoggerManager;
+import java.util.Optional;
+import java.util.logging.Logger;
+
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -11,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
-import java.lang.reflect.Constructor;
+import seedu.watodo.TestApp;
+import seedu.watodo.commons.core.LogsCenter;
 
 /**
  * Base class for all GUI Handles used in testing.
@@ -20,9 +19,13 @@ import java.lang.reflect.Constructor;
 public class GuiHandle {
     protected final GuiRobot guiRobot;
     protected final Stage primaryStage;
+    /**
+     * An optional stage that exists in the App other than the primaryStage, could be a alert dialog, popup window, etc.
+     */
+    protected Optional<Stage> intermediateStage = Optional.empty();
     protected final String stageTitle;
 
-    private final AppLogger logger = LoggerManager.getLogger(this.getClass());
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     public GuiHandle(GuiRobot guiRobot, Stage primaryStage, String stageTitle) {
         this.guiRobot = guiRobot;
@@ -31,119 +34,40 @@ public class GuiHandle {
         focusOnSelf();
     }
 
-    /**
-     * Creates an object of the specified GuiHandle child class.
-     */
-    public <T> T as(Class<? extends GuiHandle> clazz) {
-        try {
-            Constructor<?> ctor = clazz.getConstructor(GuiRobot.class, Stage.class);
-            Object object = ctor.newInstance(new Object[] { guiRobot, primaryStage});
-            return (T) object;
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot create gui handle of type " + clazz.getName(), e);
-        }
-    }
-
-    public void write(String textToWrite) {
-        guiRobot.write(textToWrite);
-    }
-
     public void focusOnWindow(String stageTitle) {
-        logger.info("Focusing {}", stageTitle);
-        java.util.Optional<Window> window = guiRobot.listTargetWindows()
+        logger.info("Focusing " + stageTitle);
+        Optional<Window> window = guiRobot.listTargetWindows()
                 .stream()
                 .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
 
         if (!window.isPresent()) {
-            logger.warn("Can't find stage {}, Therefore, aborting focusing", stageTitle);
+            logger.warning("Can't find stage " + stageTitle + ", Therefore, aborting focusing");
             return;
         }
-
+        intermediateStage = Optional.ofNullable((Stage) window.get());
         guiRobot.targetWindow(window.get());
         guiRobot.interact(() -> window.get().requestFocus());
-        logger.info("Finishing focus {}", stageTitle);
+        logger.info("Finishing focus " + stageTitle);
     }
 
-    protected Node getNode(String query) {
-        return guiRobot.lookup(query).tryQuery().get();
+    protected <T extends Node> T getNode(String query) {
+        return guiRobot.lookup(query).query();
     }
 
     protected String getTextFieldText(String filedName) {
-        return ((TextField) getNode(filedName)).getText();
+        TextField textField = getNode(filedName);
+        return textField.getText();
     }
 
-    public void moveCursor(Person person) {
-        guiRobot.moveTo(person.getFirstName());
-    }
-
-    /**
-     * Sets the specified text field directly (as opposed to simulating the user typing).
-     * @param textFieldId
-     * @param newText
-     */
     protected void setTextField(String textFieldId, String newText) {
-        TextField textField = (TextField) getNode(textFieldId);
-        textField.setText(newText);
-    }
-
-    /**
-     * Simulates the user typing text in the given text field
-     * @param textFieldId
-     * @param newText
-     */
-    protected void typeTextField(String textFieldId, String newText) {
         guiRobot.clickOn(textFieldId);
-        guiRobot.push(KeyCode.SHORTCUT, KeyCode.A).eraseText(1)
-                .write(newText);
+        TextField textField = getNode(textFieldId);
+        textField.setText(newText);
+        guiRobot.sleep(500); // so that the texts stays visible on the GUI for a short period
     }
 
     public void pressEnter() {
         guiRobot.type(KeyCode.ENTER).sleep(500);
-    }
-
-    public void pressTab() {
-        guiRobot.push(KeyCode.TAB).sleep(500);
-    }
-
-    protected void pressEsc() {
-        guiRobot.push(KeyCode.ESCAPE);
-    }
-
-    /**
-     * Presses the button with the name 'Cancel' on it.
-     */
-    public void clickCancel() {
-        guiRobot.clickOn("Cancel");
-    }
-
-    /**
-     * Presses the button named 'OK'.
-     */
-    public void clickOk() {
-        guiRobot.clickOn("OK");
-    }
-
-    public GuiHandle clickOn(String id) {
-        guiRobot.clickOn(id);
-        return this;
-    }
-
-    public GuiHandle rightClickOn(String id) {
-        guiRobot.rightClickOn(id);
-        return this;
-    }
-
-    /**
-     * Dismisses the dialog by pressing Esc
-     */
-    public void dismiss() {
-        pressEsc();
-    }
-
-    public void dismissErrorMessage(String errorDialogTitle) {
-        focusOnWindow(errorDialogTitle);
-        clickOk();
-        focusOnSelf();
     }
 
     protected String getTextFromLabel(String fieldId, Node parentNode) {
@@ -158,5 +82,19 @@ public class GuiHandle {
 
     public void focusOnMainApp() {
         this.focusOnWindow(TestApp.APP_TITLE);
+    }
+
+    public void closeWindow() {
+        Optional<Window> window = guiRobot.listTargetWindows()
+                .stream()
+                .filter(w -> w instanceof Stage && ((Stage) w).getTitle().equals(stageTitle)).findAny();
+
+        if (!window.isPresent()) {
+            return;
+        }
+
+        guiRobot.targetWindow(window.get());
+        guiRobot.interact(() -> ((Stage) window.get()).close());
+        focusOnMainApp();
     }
 }
