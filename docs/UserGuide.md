@@ -248,6 +248,7 @@ Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
 > Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark`
+> Undoing 'delete' will replace the deleted task at the bottom of the list
 
 ### 2.10. Redoing previous step : `redo`
 
@@ -255,6 +256,7 @@ Redo the previous command and restore the data to one step before. <br>
 Fromat: `redo`
 
 > Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark`
+> Redoing an add undo will add back the task to the bottom of the list
 
 ### 2.11. Clearing all entries : `clear`
 
