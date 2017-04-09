@@ -3,7 +3,9 @@ package seedu.geekeep.logic.commands;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.geekeep.commons.core.EventsCenter;
 import seedu.geekeep.commons.core.Messages;
+import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.commons.util.CollectionUtil;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
@@ -49,6 +51,7 @@ public class UpdateCommand extends UndoableCommand {
         this.updateTaskDescriptor = new UpdateTaskDescriptor(updateTaskDescriptor);
     }
 
+    //@@author A0139438W
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
@@ -72,8 +75,20 @@ public class UpdateCommand extends UndoableCommand {
         } catch (IllegalValueException ive) {
             throw new CommandException(ive.getMessage());
         }
-        model.updateFilteredListToShowAll();
+
+        int targetIndex = getTaskInternalIndex(updatedTask);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex, updatedTask));
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
+    }
+ 
+    private int getTaskInternalIndex(Task updatedTask) {
+        int targetIndex = model.getFilteredTaskList().indexOf(updatedTask);
+        if (updatedTask.isFloatingTask()) {
+            targetIndex -= model.getNumberOfEvents();
+        } else if (updatedTask.isDeadline()) {
+            targetIndex -= (model.getNumberOfEvents() + model.getNumberOfFloatingTasks());
+        }
+        return targetIndex;
     }
 
     //@@author A0139438W

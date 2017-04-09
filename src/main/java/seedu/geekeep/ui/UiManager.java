@@ -112,11 +112,19 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleHelp();
     }
 
+    //@@author A0139438W
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex);
+        if (event.targetTask.isFloatingTask()) {
+            mainWindow.getFloatingTaskListPanel().scrollTo(event.targetIndex);
+        } else if (event.targetTask.isDeadline()) {
+            mainWindow.getDeadlineListPanel().scrollTo(event.targetIndex);
+        } else {
+            mainWindow.getEventListPanel().scrollTo(event.targetIndex);
+        }
     }
+    //@@author
 
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
