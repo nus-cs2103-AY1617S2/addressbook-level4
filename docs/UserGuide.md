@@ -11,7 +11,8 @@ This product is a tool to accept natural language commands via keyboards to mana
     * [find](#find-a-task-find)
     * [list](#list-tasks-list)
     * [edit](#edit-a-task-edit)
-    * [undo/redo](#undo-redo-a-task-undo-redo)
+    * [undo](#undo-a-task-undo)
+    * [redo](#redo-a-task-redo)
     * [exit](#exit-the-program-exit)
     * [save](#save-the-data)
 
@@ -98,12 +99,15 @@ Example:
 * `edit index/1 desc/"The venue has been changed"`
 * `edit index/2 start/02-04-17 17:20`
 
-### Undo/Redo a task: `undo` `redo`
+### Undo a task: `undo`
 Undo is the command word to erase the last change done
-Format : `undo` `redo`
-
+Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
+
+### Redo a task: `redo`
+Redo is the command
+Format : `redo`
 
 ### Exit the program: `exit`
 Exits the program.
