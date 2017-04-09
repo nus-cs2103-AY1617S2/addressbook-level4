@@ -182,9 +182,9 @@ You can start keeping track of your task by adding to ToLuist.<br>
 `add` allows you to add a task to the system.<br>
 Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
-> * Both 'startdate' and 'enddate' use the same datetime format.
-> * 'startdate' requires a valid 'enddate' to be used in the same command.
-> * The values entered for 'startdate' and 'enddate' are very flexible:<br>
+> * Both `startdate` and `enddate` use the same datetime format.
+> * `startdate` requires a valid `enddate` to be used in the same command.
+> * The values entered for `startdate` and `enddate` are very flexible:<br>
     Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
     Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
     Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
@@ -259,7 +259,7 @@ Format: `sort CATEGORY(priority/enddate/startdate/description/overdue/default)..
 
 > * The category entered will be given higher preference for sorting.
 > * By default, the sorted order is: overdue -> priority -> enddate -> startdate -> description
-> * Using 'default' as the category will revert the sorting order to the above mentioned default.
+> * Using `default` as the category will revert the sorting order to the above mentioned default.
 > * Multiple categories can be used. The list will be sorted in order based on which category was entered first.
 
 Examples:
