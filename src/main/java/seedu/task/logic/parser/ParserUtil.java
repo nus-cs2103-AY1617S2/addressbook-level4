@@ -87,6 +87,9 @@ public class ParserUtil {
      */
     public static Optional<Deadline> parseDeadline(Optional<String> deadline) throws IllegalValueException {
         assert deadline != null;
+        if (deadline.get().equals("")) {
+            return deadline.isPresent() ? Optional.of(new Deadline("")) : Optional.empty();
+        }
         Parser parser = new Parser();
         String fromDate = new String("");
         String fromTime = null;
