@@ -33,8 +33,7 @@ public class ShortcutCommandParser {
             return new ShortcutCommand(matcher.group("Operation"), matcher.group("CommandWord"),
                     matcher.group("ShortcutKey"));
         } catch (IllegalValueException e) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage()));
+            return new IncorrectCommand(e.getMessage());
         }
     }
 
