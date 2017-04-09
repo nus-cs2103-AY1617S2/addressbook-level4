@@ -13,7 +13,7 @@
     </tasks>
     <tasks>
         <name>study at home</name>
-        <startDate>2018-03-10 09:45</startDate>
+        <startDate>2018-03-10 18:19</startDate>
         <endDate>2018-03-13 23:59</endDate>
         <recur>weekly</recur>
         <priority>LOW</priority>
@@ -55,7 +55,7 @@
     <tasks>
         <name>finish assignments</name>
         <startDate></startDate>
-        <endDate>2017-04-09 23:00</endDate>
+        <endDate>2017-04-16 23:00</endDate>
         <recur>monthly</recur>
         <priority>LOW</priority>
         <description></description>

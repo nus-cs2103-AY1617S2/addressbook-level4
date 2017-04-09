@@ -18,7 +18,7 @@ public class TypicalTestTasks {
         try {
             // Event with all info
             taskA = new TaskBuilder().withName("guard duty")
-                    .withStartDate("15/12/2018 7am").withEndDate("16/12/2018 11pm")
+                    .withStartDate("15 dec 2018 7am").withEndDate("16 dec 2018 11pm")
                     .withRecurring("monthly")
                     .withDescription("bring weapon")
                     .withTags("army", "work")
