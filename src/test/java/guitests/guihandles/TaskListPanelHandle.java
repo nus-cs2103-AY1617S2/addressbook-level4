@@ -38,7 +38,7 @@ public class TaskListPanelHandle extends GuiHandle {
     public ListView<ReadOnlyTask> getListView() {
         return getNode(TASK_LIST_VIEW_ID);
     }
-
+    
     /**
      * Returns true if the list is showing the task details correctly and in correct order.
      *
