@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -54,6 +55,7 @@
             <RowConstraints />
          </rowConstraints>
         </GridPane>
+      <Pane prefHeight="80.0" prefWidth="54.0" />
       <StackPane prefHeight="25.0" prefWidth="35.0">
          <children>
               <Circle fx:id="priority_shape" fill="#ffffff00" radius="20.0" stroke="#000000" strokeType="INSIDE" strokeWidth="4.0" StackPane.alignment="CENTER">
