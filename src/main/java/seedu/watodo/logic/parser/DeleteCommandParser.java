@@ -62,8 +62,9 @@ public class DeleteCommandParser {
     private void checkValidIndices() throws IllegalValueException {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
-                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
-                        DeleteCommand.MESSAGE_USAGE);
+                throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                // + '\n' +
+                        //DeleteCommand.MESSAGE_USAGE);
             }
         }
     }
