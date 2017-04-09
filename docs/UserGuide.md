@@ -17,13 +17,13 @@ This product is a tool to accept natural language commands via keyboards to mana
     * [redo](#redo-a-task-redo)
     * [set](#set-an-account-set)
     * [display](#display-google-calendar-display)
+    * [path](#path-of-taskbook-path)
     * [exit](#exit-the-program-exit)
-    * [save](#save-the-data)
 
 * [Command Summary](#command-summary)
 
 ## First-time user experience
-* For first-time configuration, make sure file named _calendar-java-quickstart_ in  `User/[home]/.credentials` does not exist or has been deleted. 
+* For first-time configuration, make sure file named _calendar-java-quickstart_ in  `User/home/.credentials` does not exist or has been deleted. 
 
 ## Start the program
 
@@ -107,6 +107,7 @@ Example:
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
 Format : `undo`
+
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
@@ -118,6 +119,7 @@ Format : `redo`
 Set in the command to save an account which will be used for the Google Calendar display.
 Format : `set email/EMAIL pwd/PASSWORD`
 1. If email and password are invalid, user would not be able to sign into Google Calendar, but it would not produce an error.
+
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
 
@@ -126,6 +128,16 @@ Display is the command to enable the Google Calendar function for JOBS.
 Format : `display`
 1. Command will redirect user to an internet browser (Google Chrome, Safari, etc.) to request for authorization for Google Calendar API, as shown below.
 
+### Path of taskbook: `path`
+Path is the command to change the saving directory of the taskbook and automatically create the .xml file.
+Format : `path PATH`
+1. **PATH** will have to be a valid directory followed by [name of file].xml.
+2. Restriction for MAC includes directory preceded by /.
+3. [name of file].xml without specification of directory will automatically save document in the project directory.
+
+Example:
+* for MAC `path /users/home/desktop/taskbook.xml`
+* for Windows `path users/home/desktop/taskbook.xml`
 
 ### Exit the program: `exit`
 Exits the program.
@@ -149,4 +161,5 @@ undo | `undo`
 redo | `redo`
 set | `set email/EMAIL pwd/PASSWORD`
 display | `display`
+path | `path PATH`
 exit | `exit`
