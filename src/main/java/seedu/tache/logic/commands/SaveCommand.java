@@ -14,7 +14,7 @@ import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.util.SampleDataUtil;
 
 /**
- * Adds a task to the task manager.
+ * Saves the data file to the specified directory.
  */
 public class SaveCommand extends Command implements Undoable {
 

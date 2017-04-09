@@ -14,7 +14,7 @@ import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.util.SampleDataUtil;
 
 /**
- * Adds a task to the task manager.
+ * Loads the data file from the specified file path.
  */
 public class LoadCommand extends Command implements Undoable {
 
@@ -32,7 +32,7 @@ public class LoadCommand extends Command implements Undoable {
     private boolean commandSuccess;
 
     /**
-     * Creates a SaveCommand using the directory entered by the user.
+     * Creates a LoadCommand using the directory entered by the user.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
