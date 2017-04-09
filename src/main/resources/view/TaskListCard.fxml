@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- @@author A0140887W -->
+
+<BorderPane id="cardPane" fx:id="cardPane" maxWidth="Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+       <center>
+        <GridPane fx:id="grid" maxWidth="Infinity" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="40.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="150.0" />
+            </columnConstraints>
+            <children>
+            <VBox fx:id="sideBox" maxWidth="10.0" prefHeight="100.0" prefWidth="10.0">
+               <children>
+                  <CheckBox fx:id="checkbox" mnemonicParsing="false">
+                     <padding>
+                        <Insets bottom="10.0" left="5.0" />
+                     </padding>
+                  </CheckBox>
+                  <ImageView fx:id="star1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/star.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="star2" fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/star.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox fx:id="taskBox" maxWidth="Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <children>
+                  <FlowPane maxWidth="Infinity" rowValignment="TOP">
+                     <children>
+                        <HBox>
+                           <children>
+                                   <Label fx:id="id" styleClass="cell_big_label" text="asdasdadasdasdasdasdasdasdadasdasdasdasdasdasdadasdasdasdasdasdasdadasdasdasdasdasdasdadasdasdasdasd" />
+                                   <Label fx:id="desc" maxWidth="Infinity" styleClass="cell_big_label" text="\$first" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+                        <FlowPane fx:id="tags" alignment="CENTER_LEFT" />
+                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
+                        <Label fx:id="startTime" styleClass="cell_small_label" text="\$startTime" />
+                        <Label fx:id="endTime" styleClass="cell_small_label" text="\$endTime" />
+               </children>
+            </VBox>
+            </children>
+         <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" />
+         </rowConstraints>
+        </GridPane>
+         </center>
+</BorderPane>

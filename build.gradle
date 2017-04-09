@@ -12,7 +12,7 @@ plugins {
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.doist.MainApp'
 
 allprojects {
     apply plugin: 'idea'
@@ -39,7 +39,7 @@ allprojects {
         jacksonVersion = '2.7.0'
         jacksonDataTypeVersion = '2.7.4'
         junitVersion = '4.12'
-        testFxVersion = '4.0.+'
+        testFxVersion = '4.0.5-alpha'
         monocleVersion = '1.8.0_20'
         checkstyleVersion = '7.1.2'
 
@@ -63,6 +63,9 @@ allprojects {
         compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonDataTypeVersion"
         compile "com.google.guava:guava:$guavaVersion"
+		compile group: 'com.joestelmach', name: 'natty', version: '0.12'  // for time parser
+		compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'  // for highlight feature
+		compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
 
         testCompile "junit:junit:$junitVersion"
         testCompile "org.testfx:testfx-core:$testFxVersion"
@@ -85,7 +88,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveName = "addressbook.jar"
+        archiveName = "doist.jar"
 
         destinationDir = file("${buildDir}/jar/")
     }
@@ -120,8 +123,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class AddressBookTest extends Test {
-    public AddressBookTest() {
+class DoistTest extends Test {
+    public DoistTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
 
@@ -146,7 +149,7 @@ class AddressBookTest extends Test {
     }
 }
 
-task guiTests(type: AddressBookTest) {
+task guiTests(type: DoistTest) {
     include 'guitests/**'
 
     jacoco {
@@ -155,8 +158,8 @@ task guiTests(type: AddressBookTest) {
 }
 
 
-task nonGuiTests(type: AddressBookTest) {
-    include 'seedu/address/**'
+task nonGuiTests(type: DoistTest) {
+    include 'seedu/doist/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -164,7 +167,7 @@ task nonGuiTests(type: AddressBookTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: AddressBookTest) {
+task allTests(type: DoistTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }
