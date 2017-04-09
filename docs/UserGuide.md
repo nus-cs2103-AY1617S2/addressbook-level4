@@ -318,6 +318,19 @@ Example:
 Clears all tasks from TaskManager <br>
 Format: `reset`
 
+### GUI
+
+## 2.20 Done List View
+
+The Done List View displays all the done tasks the user has marked done
+
+## 2.21 Calendar View
+
+The Calendar List View displays all undone tasks on the selected day and does not display
+deadline tasks. 
+The selected day is scrollable using the the 2 arrow buttons, and can be reset to current day
+by pressing on the `Today` button.
+
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer? <br>

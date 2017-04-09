@@ -260,7 +260,7 @@ public class ScheduleCommand extends Command {
             return dayOne.getTimeInMillis();
         }
     }
-    
+
     private int convertToHoursMinutes(long longTiming, Calendar calendar) {
         calendar.setTimeInMillis(longTiming);
         int hourMinuteRep = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
