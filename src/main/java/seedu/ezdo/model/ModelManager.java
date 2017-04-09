@@ -371,11 +371,11 @@ public class ModelManager extends ComponentManager implements Model {
          * {@code String}
          */
         private Set<String> convertToTagStringSet(Set<Tag> tags) {
-            Object[] tagArray = tags.toArray();
+            Tag[] tagArray = tags.toArray(new Tag[tags.size()]);
             Set<String> tagSet = new HashSet<String>();
 
             for (int i = 0; i < tags.size(); i++) {
-                tagSet.add(((Tag) tagArray[i]).tagName);
+                tagSet.add((tagArray[i]).tagName);
             }
 
             return tagSet;
