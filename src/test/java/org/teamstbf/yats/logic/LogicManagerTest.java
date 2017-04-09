@@ -332,7 +332,7 @@ public class LogicManagerTest {
 		expectedAB.addEvent(toBeAdded);
 
 		// execute command and verify result
-		assertCommandSuccess("add sleep -l bed -s 26 june 2017 12:00AM -e 27 june 2017 11:00AM -d finals finally over -t rest -t moreRest",
+		assertCommandSuccess("add sleep -l bed -s 26 june 2017 12:00AM -e 27 june 2017 11:00AM -d finals finally over -T rest -T moreRest",
 				String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
 
 	}

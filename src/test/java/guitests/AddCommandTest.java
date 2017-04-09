@@ -42,10 +42,10 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
 	private void assertAddSuccess(TestEvent eventToAdd, TestEvent... currentList) {
 		if (eventToAdd == td.cower) {
-			commandBox.runCommand("add Act like a craven -l The Wall -s 8 april 2017 11:59PM -e 8 april 2017 11:59PM -d fighting the wildings, but extremely scared -t LordCommanderJonSnow");
+			commandBox.runCommand("add Act like a craven -l The Wall -s 8 april 2017 11:59PM -e 8 april 2017 11:59PM -d fighting the wildings, but extremely scared -T LordCommanderJonSnow");
 		}
 		if (eventToAdd == td.duck) {
-			commandBox.runCommand("add ahhhh -by 8 april 2017 11:59pm -l AHHH -d AHHHHHHHHH -t AHHHHHHHHHHHHHH");
+			commandBox.runCommand("add ahhhh -by 8 april 2017 11:59pm -l AHHH -d AHHHHHHHHH -T AHHHHHHHHHHHHHH");
 		}
 		// confirm the new card contains the right data
 		EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);

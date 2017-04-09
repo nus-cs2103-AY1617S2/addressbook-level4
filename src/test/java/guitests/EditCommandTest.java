@@ -52,7 +52,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 	@Test
 	public void edit_allFieldsSpecified_success() throws Exception {
 		String detailsToEdit = "Usorp the throne -s 5 june 2017 5:45am -e 5 june 2017 11:59pm -l Ruvenheigen City"
-				+ "-d Down to all traitors! Down to all non-believers! -t Betrayal -t KingGeorgeVI";
+				+ "-d Down to all traitors! Down to all non-believers! -T Betrayal -T KingGeorgeVI";
 		int taskManagerIndex = 1;
 
 		TestEvent editedPerson = new EventBuilder().withTitle("Usorp the throne").withLocation("Ruvenheigen City")
@@ -65,7 +65,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_clearTags_success() throws Exception {
-		String detailsToEdit = "-t reaper";
+		String detailsToEdit = "-T";
 		int taskManagerIndex = 2;
 
 		TestEvent taskToEdit = expectedTaskList[taskManagerIndex - 1];
@@ -114,7 +114,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 		// commandBox.runCommand("edit 1 a/");
 		// assertResultMessage(Description.MESSAGE_ADDRESS_CONSTRAINTS);
 
-		commandBox.runCommand("edit 1 something -t *&");
+		commandBox.runCommand("edit 1 something -T *&");
 		assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 	}
 
@@ -132,7 +132,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_notAllFieldsSpecified_success() throws Exception {
-		String detailsToEdit = "-t sweetie -t bestie -t reaper";
+		String detailsToEdit = "-T sweetie -T bestie -T reaper";
 		int taskManagerIndex = 2;
 
 		TestEvent eventToEdit = expectedTaskList[taskManagerIndex - 1];
