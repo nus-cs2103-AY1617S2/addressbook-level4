@@ -22,7 +22,7 @@ public class Group {
     public final String value;
 
     /**
-     * Validates given address.
+     * Validates given group.
      *
      * @throws IllegalValueException if given group string is invalid.
      */
