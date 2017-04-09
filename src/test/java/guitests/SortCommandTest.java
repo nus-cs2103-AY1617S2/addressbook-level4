@@ -29,7 +29,7 @@ public class SortCommandTest extends TaskManagerGuiTest {
         for (int i = 0; i < taskListPanel.getNumberOfTasks() - 1; i++) {
             assertTrue((taskListPanel.getTask(i).getTaskDate() == null
                     || taskListPanel.getTask(i + 1).getTaskDate() == null)
-                    ||taskListPanel.getTask(i).getTaskDate()
+                    || taskListPanel.getTask(i).getTaskDate()
                     .compareTo(taskListPanel.getTask(i + 1).getTaskDate()) >= 0);
         }
         commandBox.runCommand("showcase 75");
