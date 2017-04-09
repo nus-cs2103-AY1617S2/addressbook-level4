@@ -27,10 +27,10 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 3. Double-click the file to start the app. The graphical user interface (GUI) should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
-   The GUI has four main components: `Main Panel`, `Side Panel`, `Command Bar` and `Feedback Panel`. 
+   The GUI has four main components: `Main Panel`, `Side Panel`, `Command Bar` and `Feedback Panel`.
 
-   - `Main Panel` displays a list of all existing tasks sorted in a way that incomplete tasks will appear before the completed tasks. 
-   - `Side Panel` displays a list of incomplete tasks that you need to complete within the current week. 
+   - `Main Panel` displays a list of all existing tasks sorted in a way that incomplete tasks will appear before the completed tasks.
+   - `Side Panel` displays a list of incomplete tasks that you need to complete within the current week.
    - `Command Bar` allows you to type the commands to perform actions that you desire.
    - `Feedback Panel` displays the result of the executed command. If it is an invalid command, it will display an error message together with the correct command format that you are supposed to input.
 
@@ -223,7 +223,7 @@ Enable or disable automatic data synchronisation to Google Task.<br>
 Format: `sync OPTION`
 > Use `on` or `off` as parameters for `OPTION` to enable or disable data synchronisation'.
 
-With Release v0.5, Opus comes with a one way data synchronisation feature to Google Task. Upon activating `sync`, Opus will prompt you for access to your Google account by opening an authorization page in your default browser.  Accept the authorization request to allow Opus to start synchronising data to Google Task. Synchronisation is done automatically in the background while you manage tasks in Opus. 
+With Release v0.5, Opus comes with a one way data synchronisation feature to Google Task. Upon activating `sync`, Opus will prompt you for access to your Google account by opening an authorization page in your default browser.  Accept the authorization request to allow Opus to start synchronising data to Google Task. Synchronisation is done automatically in the background while you manage tasks in Opus.
 
 Currently, `sync` supports floating tasks and tasks with an `ENDTIME` only. Future support for events will be made available in subsequent release.
 
@@ -269,7 +269,7 @@ Autocomplete the any command that you have entered in the command box. This appl
 * `redo`
 * `save`
 * `schedule`
-* `sort` 
+* `sort`
 * `undo`
 
 > * Example:
