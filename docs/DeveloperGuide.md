@@ -615,6 +615,8 @@ Use case ends.
 > 2a1. `Tache` shows that it has nothing to undo <br>
 Use case ends
 
+Author: Brandon Tan Jian Sin
+
 ### Use case: Edit task
 
 **MSS**
