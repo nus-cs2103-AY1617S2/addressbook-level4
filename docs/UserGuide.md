@@ -110,7 +110,7 @@ Example:
 * `edit index/1 desc/The venue has been changed`
 * `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
 
-<img src="images/Edit1_JOBS.png" width="420">      <img src="images/Edit2_JOBS.png" width="420">
+<img src="images/Edit1_JOBS.png" width="420">   <img src="images/Edit2_JOBS.png" width="420">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
@@ -119,7 +119,11 @@ Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-<img src="images/Undo1_JOBS.png" width="250">      <img src="images/Undo2_JOBS.png" width="250">      <img src="images/Undo3_JOBS.png" width="250">
+<img src="images/Undo1_JOBS.png" width="400"><br>
+_after_ `delete 1`
+<img src="images/Undo2_JOBS.png" width="400"><br>    
+_after_ `undo`
+<img src="images/Undo3_JOBS.png" width="400"><br>
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
