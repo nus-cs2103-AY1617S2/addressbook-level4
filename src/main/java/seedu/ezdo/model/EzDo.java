@@ -177,6 +177,9 @@ public class EzDo implements ReadOnlyEzDo {
     }
 
     //@@author A0139177W
+    /**
+     * Toggles the tasks select status in {@code p}.
+     */
     public void toggleTasksSelect(ArrayList<Task> p) {
         for (int i = 0; i < p.size(); i++) {
             Task task = p.get(i);
@@ -184,49 +187,78 @@ public class EzDo implements ReadOnlyEzDo {
         }
     }
 
+    /**
+     * Removes recurring status of the completed task.
+     * Set the completed task as done.
+     */
     private void moveCurrentTaskToDone(Task task) {
+        String optionalRecur = "";
         try {
-            task.setRecur(new Recur(""));
+            task.setRecur(new Recur(optionalRecur));
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
         task.toggleDone();
     }
 
+    /**
+     * Updates the start and due dates according to the recurring status.
+     * Do nothing if there is no recurring status.
+     * @param task    Task to have its start and due dates updated.
+     * @throws IllegalValueException    The date is optional and cannot be parsed
+     *                                  as Date object.
+     */
     private void updateRecurringDates(Task task) {
 
         if (task.getRecur().isRecur()) {
             try {
                 String recurIntervalInString = task.getRecur().toString().trim();
                 int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
-
+                
+                // Update start date
                 String startDateInString = task.getStartDate().value;
-                String dueDateInString = task.getDueDate().value;
-
                 String startDate = updateDate(recurringInterval, startDateInString);
+                
+                // Update due date
+                String dueDateInString = task.getDueDate().value;
                 String dueDate = updateDate(recurringInterval, dueDateInString);
-
+                
+                // Add updated task to UniqueTaskList.
                 tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
                         new DueDate(dueDate), task.getRecur(), task.getTags()));
 
             } catch (IllegalValueException ive) {
-                // Do nothing as the date is optional
-                // and cannot be parsed as Date object
                 ive.printStackTrace();
             }
         }
     }
 
+    /**
+     * Updates a given date according to the recurring status (type).
+     * Do nothing if there is no recurring status.
+     * @param type              The recurring status.
+     * @param originalDate      The date to be updated.
+     * @throws ParseException   The date is optional and cannot be parsed as Date object.
+     */
     private String updateDate(int type, String originalDate) {
         try {
             int recurIntervalIncrement = 1;
+
+            // get current date and time.
             Calendar c = Calendar.getInstance();
+
+            // set given date and time.
             c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
-            c.add(type, recurIntervalIncrement);
-            return DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
+
+            // update date according to recurring status.
+            c.add(type, recurIntervalIncrement); 
+
+            // Format the date according to user's input.
+            String updatedDate = DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());
+
+            return updatedDate;
+
         } catch (ParseException pe) {
-            // Do nothing as the date is optional
-            // and cannot be parsed as Date object
             pe.printStackTrace();
         }
         return originalDate;
