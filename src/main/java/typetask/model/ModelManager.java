@@ -330,7 +330,7 @@ public class ModelManager extends ComponentManager implements Model {
                     if (keywordDate.before(taskEndDate) && keywordDate.after(taskStartDate)) {
                         result = true;
                     }
-                    if (keywordDate.equals(taskStartDate)) {
+                    if (keywordDate.equals(taskStartDate) || keywordDate.equals(taskEndDate)) {
                         result = true;
                     }
                 }
