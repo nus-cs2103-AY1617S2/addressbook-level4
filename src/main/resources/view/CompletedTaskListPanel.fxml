@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <!-- @@author A0144315N -->
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@Extensions.css">
+
+<AnchorPane stylesheets="@Extensions.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="completedTaskListView" opacity="0.0" prefHeight="0.0" prefWidth="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TitledPane fx:id="completedTaskListTitle" animated="false" prefWidth="550.0" text="Completed" visible="false">
+         <content>
+            <ListView fx:id="completedTaskListView" opacity="0.0" prefHeight="0.0" prefWidth="450.0" />
+         </content>
+      </TitledPane>
    </children>
 </AnchorPane>

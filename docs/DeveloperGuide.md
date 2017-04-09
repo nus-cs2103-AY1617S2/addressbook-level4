@@ -97,7 +97,7 @@ _Figure 3.1.1 : Architecture Diagram_
 
 The **_Architecture Diagram_** given above explains the high-level design of the App. We provide a quick overview of each component below.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java) which ...
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/today/MainApp.java) which ...
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -130,13 +130,13 @@ We elaborate more about the individual components below.
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/UiClassDiagram.png" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/today/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
-For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+For example, the layout of the [`MainWindow`](../src/main/java/seedu/today/ui/MainWindow.java) is specified in  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component passes user commands using the `Logic` component, auto-update when data in the `Model` changes, and responds to events raised from various parts of the App and updates the interface accordingly.
 
@@ -144,7 +144,7 @@ The `UI` component passes user commands using the `Logic` component, auto-update
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerLogicClassDiagram.png" width="800">
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/today/logic/Logic.java)
 
 The **Logic** component of the software handles the input from the **UI** and calls methods from the **Model**, **Config**, and **Storage** to perform the appropriate changes.
 
@@ -154,25 +154,44 @@ When a command is entered, the `Parser` processes the text and selects the appro
 
 > `CommandParser` may return an `IncorrectCommand` in the case when the arguments are not of the suitable format
 
+**Command Parsers**
+
+Command parsers are designed to facilitate logic manager to understand certain user commands. They break the input string down based on the keywords in the commands, and generating instances like dates and names that the logic manager will understand. 
+
+All the parsers are extending from CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java. For certain commands, like `add` and `edit` commands, which have flexible input styles, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will find the tag information first. After that, the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads, instead it will only check whether the index exist and pass the UI index string to the logic manager untouched. The parsers will not modify the model directly. 
+
+The parsers will generate Command instances, based on the type of commands they received. The Command instance will include all the fields the parser identified. 
+
+In the event the parser encounters input errors, for example the input contains invalid characters or the index typed is unknown, an IncorrectCommand instance will be returned to the handler, containing the error information.
+
 ### 3.4. Model
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerModelClassDiagram.png" width="800"><br>
 _Figure 3.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/today/model/Model.java)
 
-`Model` consists of `UserPref`, `TaskManager` and `UnmodifiableObservableList`.
+**Task**
 
-The`UserPref` object manages the user's preferences (e.g. window size) while the `TaskManager` object manages the user's tasks. All CRUD commands, such as adding and deleting tasks, are all handled by the `TaskManager` object.
+Task class is the fundamental block of the whole task manager. Each Task instance holds the specifications of one task.
 
-Lastly, the `UnmodfiableObservableList<ReadOnlyTask>` is bound to the UI. Whenever this list is updated, the UI will be updated to reflected the new set of tasks.
+Task is an abstract class, and it has three subclasses, namely FloatingTask (task with no date time), DeadlineTask (task with a deadline), and EventTask (task with a starting time and an ending time). Each subclass has a unique constructor which will initiate the name and tag information of one task with the given information. The constructor also needs date time information based on the type of the task. For EventTask, the constructor will check whether the ending time is after the starting time. If not, an IllegalValueException will be thrown.
+
+**Filter**
+
+All tasks are stored in an ObservableList inside model. In order to fetch a list of tasks which meet some certain criteria, filters can be applied to the ObservableList. The filters are written as Predicate instances.
+
+**History**
+
+The command history and previous states of the task manager are also saved in the model, in order to make `undo` and `redo` user commands possible. 
+
 
 ### 3.5. Storage
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/StorageClassDiagram.png" width="800"><br>
 _Figure 3.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/today/storage/Storage.java)
 
 Similar to the `Model`, `Storage` contains the `UserPrefsStorage` object and the `TaskManagerStorage` object.
 
@@ -187,7 +206,7 @@ Because there are many different components that may be affected by a single com
 The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 2` causes a change in the model which is the command's primary task.
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerSequenceDiagram.png" width="800"><br>
-_Figure 3.6.1_ : Component interactions for `delete 2` command_
+_Figure 3.6.1 : Component interactions for `delete 2` command_
 
 Only after the task is complete, is an `Event` raised to modify the storage and UI components in step 1.1.1.3.
 
@@ -217,6 +236,97 @@ FINE    : No errors detected. The application is reporting minor details that ma
 Certain properties of the application can be controlled (e.g app name, logging level) through the configuration file
 (default: `config.json`).
 
+### 4.3. UI Implementation Details
+#### 4.3.1 Splitting of Task List
+In Model, all tasks to be shown on the UI are maintained in a single `filteredTaskList`. In order for tasks to be displayed under correct category(i.e. today, future and completed), it is necessary to split them into three sublists every time before refreshing the UI.
+
+In our UI implementation, tasks are stored in three `ObservableList<ReadOnlyTask>` which are `taskListToday`, `taskListFuture` and `taskListCompleted`. The reason we chose `ObservableList` is because it helps to automatically refresh the UI view when updating task list, saving the trouble of reinventing the wheel. The three lists are initialised in `MainWindow`'s fillInnerPart() function during instantiation.
+
+Whenever the UI receives a `TaskManagerChangedEvent`, it calls `MainWindow` to prepare the splitted task lists(Step 2.1). `MainWindow` further calls `logic.prepareTaskList()` while passing `taskListToday`, `taskListFuture` and `taskListCompleted`'s references as well. Logic then calls Model to do the dirty job.
+
+Model does the splitting work in the following steps:
+
+1. It creates three temporary ArrayLists for today, future and completed tasks. These duplicated lists are used for the later splitting and sorting process. We did not use the three `ObservableList` from the parameters because adding and sorting on these lists will result in multiple UI refreshes, which is both undesirable for performance and may result in potential synchronisation issues.
+
+2. In `splitTaskList`, tasks are copied from `filteredTaskList` to their corresponding temporary lists. They are then sorted by task type first followed by deadlines. Floating tasks will always appear at the beginning of the list while event/deadline tasks with earlier deadlines will come first. Lastly, `assignUiIndex()` will assign a relative ID to individual tasks for UI display(See section 4.3.2 for more details).
+
+3. The three temporary lists are copied to the corresponding `ObservableList`, forcing the UI to refresh.
+
+![ui-splitting-of-task-list](images/ui-splitting-of-task-list.jpg)
+_Figure 4.2.1: Sequence diagram of the process of splitting task lists_ 
+
+
+#### 4.3.2 Mapping between UI index(task ID) and absolute index
+As you may have noticed, task IDs in the UI all begin with "T/F/C". It is a design decision made to improve the usability of commands. Originally, all tasks shared a same set of index and there were "hops" between to adjacent tasks. For example, two adjacent tasks in the list **Future** may have indexes of "1" and "5" respectively because task "2", "3" and "4" are in **Today**, which did not seem to be intuitive.
+
+Thus, we decided to adopt the current numbering scheme while hoping to retain the original implementation based on the absolute index. That is where the index mapping came from. We used a HashMap in ModelManager to store the mapping from relative to absolute index. Every time after splitting the task list, `assignUiIndex()` is called to refresh the task ID.
+ 
+#### 4.3.3 Autocomplete
+The autocomplete feature of CommandBox utilises `Textfields.bindAutoCompletion()` from the ControlsFX Library. To extend the list of candidates, simply add new commands inside `bindAutoCompletion()` from the constructor of `MainWindow.java`. 
+
+> Notice: In GUI testing, "Enter" is now pressed **twice** in `runCommand(String command)` in `CommandBoxHandle` so as to ensure that the autocomplete windows is dismissed before executing any command. You may want to take notice of this when debugging.
+
+#### 4.3.4 Snack Bar Notification
+To display a snack bar message, simply raise an `UpdateStatusBarEvent`.
+
+#### 4.3.5 Error Message
+In **Today**, the error message is displayed directly under the command box. It is trigger by the `CommandValidator` of the command box.
+
+To show/hide an error message, call `CommandValidator`'s `showErrorMessage()/hideErrorMessage()` followed by calling `commandTextField.validate()`. 
+
+> Notice: `validate()` should be called explicitly so as to trigger the UI control to refresh.
+
+#### 4.3.6 UI Animation
+##### 4.3.6.1 Slide Animation of CompletedTaskListPanel
+
+**prefHeight Setting**
+
+The panel of completed tasks is hidden by default. It only shows up when called by `listcompleted` command. Implementation-wise, this panel is anchored at the bottom of the centre position of `MainWindow` with preHeight set to 0. The actual height is written as a constant variable `completedPanelHeight` in `CompletedTaskListPanel.java`.
+
+![mainwindow-layout](images/mainwindow-layout.jpg)
+
+_Figure 4.3.6.1: Control Layout of MainWindow_
+
+##### 4.3.6.2 Command Execution Animation
+In **Today**, there are two types of command animation, namely **pre-execute** and **post-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise, the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them. 
+
+In general, both animations comprise of two stages: **displaying a progress bar under the task** and **scrolling the ListView to select it**.
+
+![command-animation](images/command-animation.png)
+
+_Figure 4.3.6.2: Effect of `add` command animation_
+
+
+**Pre-execute Animation (Add/Edit/Today)**
+
+UI relies on the `isAnimatated` flag in `Task` to trigger the pre-execute animation. It is checked when initilising the `TaskCard` view for a task. 
+
+There should be only one task at a time in the entire list that carries the flag since each command execution modifies at most one task. **Take notice that `isAnimated` is an `int` instead of a `boolean`.** You may refer to the following table when setting its value:
+
+`isAnimated` Value | Play Animation? | Remark
+-------- | :-------- | :--------- 
+0 | No | Default value
+1 | Yes| Animation trigger
+2 | No | Initial value when add/edit/today a task
+> 2 | No | Not used by the current version
+
+_Table 4.3.6.2 'isAnimated' values_
+
+It might appear to be somewhat bewildering. In fact, `isAnimated` acts more like a counter/semaphore by its nature. In the current implementation, it decreases by 1 every time when UI constructs the `TaskCard`. It triggers animation only when the value hits 1. This counter-like design prevents the flag from getting lost since ObservableList updates the UI multiple times when preparing the backing list for ListView.
+
+**Post-execute Animation (Future Plan)**
+
+_Note: This feature has not been implemented in the v0.5 release. You are welcomed to implement it in your own fork if needed._
+
+The post-execute animation will be implemented as a dummy command. It takes over before the actual ommand is executed and only calls logic to continue execution when the animation has finished. The sequence is changed as follows:
+
+e.g. When deleting a task:
+
+1. User enters "delete [task ID]".
+2. Logic calls `DeleteAnimationCommand` instead of `DeleteCommand`.
+3. `DeleteAnimationCommand` set `isAnimated` for the target task and let UI play the animation.
+4. Logic calls `DeleteCommand` to continue. 
+
 
 ## 5. Testing
 
@@ -239,12 +349,12 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.today.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.today.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.today.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,

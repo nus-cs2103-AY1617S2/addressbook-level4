@@ -3,8 +3,8 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import seedu.address.TestApp;
-import seedu.address.model.task.ReadOnlyTask;
+import seedu.today.TestApp;
+import seedu.today.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle for the Future panel containing the task list.
