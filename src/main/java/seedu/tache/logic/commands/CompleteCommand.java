@@ -69,8 +69,12 @@ public class CompleteCommand extends Command implements Undoable {
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
     }
 
+    /**
+     * Checks that all indexes given in the input is valid.
+     * @throws CommandException, if any of the indexes is detected as invalid
+     * @param {@code lastShownList}, is used to determine the max size;
+     */
     private void checkAllIndexValid(List<ReadOnlyTask> lastShownList) throws CommandException {
-      //Check all indexes are valid before proceeding
         for (int i = 0; i < indexList.size(); i++) {
             if (indexList.get(i) >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -78,6 +82,13 @@ public class CompleteCommand extends Command implements Undoable {
         }
     }
 
+    /**
+     * Processes all non-recurring tasks, marking them as completed
+     * @throws CommandException, if duplicates are detected
+     * @param {@code lastShownList}, is used get the corresponding task object;
+     * @param {@code tasksToEdit}, stores all original uncompleted tasks in this process;
+     * @param {@code completedTasks}, stores all modified completed tasks in this process;
+     */
     private boolean processNonRecurringTask(List<ReadOnlyTask> lastShownList,
                                             ArrayList<ReadOnlyTask> tasksToEdit,
                                             ArrayList<ReadOnlyTask> completedTasks) throws CommandException {
@@ -102,6 +113,13 @@ public class CompleteCommand extends Command implements Undoable {
         return true;
     }
 
+    /**
+     * Processes all recurring tasks, marking them as completed
+     * @throws CommandException, if duplicates are detected
+     * @param {@code lastShownList}, is used get the corresponding task object;
+     * @param {@code tasksToEdit}, stores all original uncompleted tasks in this process;
+     * @param {@code completedTasks}, stores all modified completed tasks in this process;
+     */
     private boolean processRecurringTask(List<ReadOnlyTask> lastShownList,
                                         ArrayList<ReadOnlyTask> tasksToEdit,
                                         ArrayList<ReadOnlyTask> completedTasks) throws CommandException {
