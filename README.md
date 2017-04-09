@@ -12,11 +12,11 @@
   a CLI (Command Line Interface) so that your hands don't have to leave the keyboard.
 
 ### Features of Doist
-* See pending and overdue tasks.
+* See pending, overdue and finished tasks.
 * Organise your tasks with tags.
 * Prioritise your tasks and sort them!
-* Be reminded when you want to be!
 * Best of all, finish your tasks and feel the satisfaction!
+* Experience our auto-complete feature, navigation mode and power search!
 * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
 
 
