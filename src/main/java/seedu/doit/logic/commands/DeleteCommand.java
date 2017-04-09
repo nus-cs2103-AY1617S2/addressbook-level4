@@ -1,5 +1,7 @@
 package seedu.doit.logic.commands;
 
+import static seedu.doit.logic.commands.CommandResult.tasksToString;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -8,7 +10,6 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0146809W
 /**
@@ -26,7 +27,7 @@ public class DeleteCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s): %1$s";
 
     private Set<Integer> targetIndexes;
     private HashSet<ReadOnlyTask> tasksToDeleteSet = new HashSet<>();
@@ -51,21 +52,17 @@ public class DeleteCommand extends Command {
             this.tasksToDeleteSet.add(taskToBeDeleted);
         }
 
-        try {
-            this.model.deleteTasks(this.tasksToDeleteSet);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
-        }
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, this.tasksToDeleteSet.iterator().next()));
+        this.model.deleteTasks(this.tasksToDeleteSet);
 
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
+            tasksToString(tasksToDeleteSet, targetIndexes)));
     }
     /**
      *
      * Checks if any index is invalid
      */
     private boolean isAnyInvalidIndex(UnmodifiableObservableList<ReadOnlyTask> lastShownTaskList) {
-        boolean test = this.targetIndexes.stream().anyMatch(index -> index < 0 || index > lastShownTaskList.size());
-        return test;
+        return this.targetIndexes.stream().anyMatch(index -> index < 0 || index > lastShownTaskList.size());
     }
 
     public static String getName() {

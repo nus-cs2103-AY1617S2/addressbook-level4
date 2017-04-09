@@ -4,6 +4,7 @@ package seedu.doit.model.item;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,9 +64,6 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         taskToUpdate.resetData(editedTask);
-        // TODO: The code below is just a workaround to notify observers of the updated task.
-        // The right way is to implement observable properties in the Task class.
-        // Then, TaskCard should then bind its text labels to those observable properties.
         internalList.set(index, taskToUpdate);
         internalList.sort(taskComparator);
     }
@@ -103,12 +101,21 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
-        }
+        internalList.sort(taskComparator);
+        return taskFoundAndDeleted;
+    }
+
+    /**
+     * Removes the equivalent tasks from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean remove(Set<ReadOnlyTask> tasksToRemove) {
+        assert tasksToRemove != null;
+        final boolean taskFoundAndDeleted = internalList.removeAll(tasksToRemove);
         internalList.sort(taskComparator);
         return taskFoundAndDeleted;
     }
@@ -126,6 +133,10 @@ public class UniqueTaskList implements Iterable<Task> {
         setTasks(replacement);
     }
 
+
+    /**
+     * Sets the comparator by which tasks from the list will be sorted by.
+     */
     public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
         this.taskComparator = taskComparator;
         internalList.sort(taskComparator);

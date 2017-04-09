@@ -341,130 +341,59 @@ public class CommandSettings implements Serializable {
             return false;
         }
         CommandSettings other = (CommandSettings) obj;
-        if (this.add == null) {
-            if (other.add != null) {
-                return false;
-            }
-        } else if (!this.add.equals(other.add)) {
+
+        if (!this.add.equals(other.add)) {
             return false;
         }
-        if (this.clear == null) {
-            if (other.clear != null) {
-                return false;
-            }
-        } else if (!this.clear.equals(other.clear)) {
+        if (!this.clear.equals(other.clear)) {
             return false;
         }
-        if (this.delete == null) {
-            if (other.delete != null) {
-                return false;
-            }
-        } else if (!this.delete.equals(other.delete)) {
+        if (!this.delete.equals(other.delete)) {
             return false;
         }
-        if (this.done == null) {
-            if (other.done != null) {
-                return false;
-            }
-        } else if (!this.done.equals(other.done)) {
+        if (!this.done.equals(other.done)) {
             return false;
         }
-        if (this.edit == null) {
-            if (other.edit != null) {
-                return false;
-            }
-        } else if (!this.edit.equals(other.edit)) {
+        if (!this.edit.equals(other.edit)) {
             return false;
         }
-        if (this.exit == null) {
-            if (other.exit != null) {
-                return false;
-            }
-        } else if (!this.exit.equals(other.exit)) {
+        if (!this.exit.equals(other.exit)) {
             return false;
         }
-        if (this.find == null) {
-            if (other.find != null) {
-                return false;
-            }
-        } else if (!this.find.equals(other.find)) {
+        if (!this.find.equals(other.find)) {
             return false;
         }
-        if (this.help == null) {
-            if (other.help != null) {
-                return false;
-            }
-        } else if (!this.help.equals(other.help)) {
+        if (!this.help.equals(other.help)) {
             return false;
         }
-        if (this.list == null) {
-            if (other.list != null) {
-                return false;
-            }
-        } else if (!this.list.equals(other.list)) {
+        if (!this.list.equals(other.list)) {
             return false;
         }
-        if (this.load == null) {
-            if (other.load != null) {
-                return false;
-            }
-        } else if (!this.load.equals(other.load)) {
+        if (!this.load.equals(other.load)) {
             return false;
         }
-        if (this.mark == null) {
-            if (other.mark != null) {
-                return false;
-            }
-        } else if (!this.mark.equals(other.mark)) {
+        if (!this.mark.equals(other.mark)) {
             return false;
         }
-        if (this.redo == null) {
-            if (other.redo != null) {
-                return false;
-            }
-        } else if (!this.redo.equals(other.redo)) {
+        if (!this.redo.equals(other.redo)) {
             return false;
         }
-        if (this.save == null) {
-            if (other.save != null) {
-                return false;
-            }
-        } else if (!this.save.equals(other.save)) {
+        if (!this.save.equals(other.save)) {
             return false;
         }
-        if (this.select == null) {
-            if (other.select != null) {
-                return false;
-            }
-        } else if (!this.select.equals(other.select)) {
+        if (!this.select.equals(other.select)) {
             return false;
         }
-        if (this.set == null) {
-            if (other.set != null) {
-                return false;
-            }
-        } else if (!this.set.equals(other.set)) {
+        if (!this.set.equals(other.set)) {
             return false;
         }
-        if (this.sort == null) {
-            if (other.sort != null) {
-                return false;
-            }
-        } else if (!this.sort.equals(other.sort)) {
+        if (!this.sort.equals(other.sort)) {
             return false;
         }
-        if (this.undo == null) {
-            if (other.undo != null) {
-                return false;
-            }
-        } else if (!this.undo.equals(other.undo)) {
+        if (!this.undo.equals(other.undo)) {
             return false;
         }
-        if (this.unmark == null) {
-            if (other.unmark != null) {
-                return false;
-            }
-        } else if (!this.unmark.equals(other.unmark)) {
+        if (!this.unmark.equals(other.unmark)) {
             return false;
         }
         return true;

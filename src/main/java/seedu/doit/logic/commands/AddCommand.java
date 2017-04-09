@@ -26,16 +26,16 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_RESULT = "Adds a task to the Task manager. ";
     public static final String COMMAND_PARAMETER = "TASK NAME p/PRIORITY  e/END DATE  d/ADDITIONAL "
-            + "DESCRIPTION [t/TAG]...";
+        + "DESCRIPTION [t/TAG]...";
     public static final String COMMAND_EXAMPLE = "add finishCS3230Lab s/01-Mar-17 e/01-Mar-17 p/med t/CS3230\n"
         + "add completeUserGuide d/28-Feb-2017 2400 p/high t/Important\n"
         + "add reachDiamondRank p/low t/Overwatch";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_RESULT + "Parameters: " + COMMAND_PARAMETER
-            + "\nExample: " + COMMAND_EXAMPLE;
+        + "\nExample: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
-    public static final String MESSAGE_INVALID_START_TIME = "Start Time not earlier then End Time!";
+    public static final String MESSAGE_INVALID_START_TIME = "Start Time cannot be earlier then End Time!";
 
     private final Task toAdd;
 
@@ -67,9 +67,27 @@ public class AddCommand extends Command {
             endTime = new EndTime(dueDate), new Description(text), new UniqueTagList(tagSet));
 
         if (startTime.getDateTimeObject() != null && endTime.getDateTimeObject() != null &&
-                !isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
+            !isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
             throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
         }
+    }
+
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 
     @Override
@@ -77,8 +95,10 @@ public class AddCommand extends Command {
         assert this.model != null;
         try {
             this.model.addTask(this.toAdd);
+
             EventsCenter.getInstance().post(new JumpToListRequestEvent(
                 this.model.getFilteredTaskList().indexOf(this.toAdd)));
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -94,22 +114,6 @@ public class AddCommand extends Command {
      */
     private boolean isStartTimeEarlier(LocalDateTime startTime, LocalDateTime endTime) {
         return startTime.isBefore(endTime);
-    }
-
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
 }

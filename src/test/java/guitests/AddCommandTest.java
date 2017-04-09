@@ -37,6 +37,18 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
+        // missing description
+        taskToAdd = TypicalTestTasks.getDeadlineTestTaskWithNoDescription();
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertAllPanelsMatch(currentList);
+
+        // add floating task with duplicate tags
+        taskToAdd = TypicalTestTasks.getFloatingTestTaskWithDuplicateTags();
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertAllPanelsMatch(currentList);
+
         // add duplicate floating task
         this.commandBox.runCommand(TypicalTestTasks.getFloatingTestTask().getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
@@ -63,16 +75,15 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // invalid start time
         this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid2 s/kjsdf e/today p/high d/sss");
         assertResultMessage(MESSAGE_STARTTIME_CONSTRAINTS);
+        // start time later than end time
+        this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid2 s/tomorrow e/today p/high d/sss");
+        assertResultMessage(AddCommand.MESSAGE_INVALID_START_TIME);
         // invalid end time
         this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid3 e/kjdgf p/high d/sss");
         assertResultMessage(MESSAGE_ENDTIME_CONSTRAINTS);
         // invalid priority
         this.commandBox.runCommand(AddCommand.COMMAND_WORD + " invalid4 p/dfjkhd d/sss");
         assertResultMessage(MESSAGE_PRIORITY_CONSTRAINTS);
-        // missing description
-        // this.commandBox.runCommand("add invalid5 e/today p/high");
-        // assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-        // AddCommand.MESSAGE_USAGE));
     }
     // @@author
 
