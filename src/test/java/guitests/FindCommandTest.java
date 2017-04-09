@@ -65,22 +65,22 @@ public class FindCommandTest extends GeeKeepGuiTest {
 
     private String getDetailedSuccessMsg(String keyword, String earliestTime,
             String latestTime, String tag) {
-        String successMsg = " GeeKeep is showing all the tasks which:\n";
+        String successMsg = "\nGeeKeep is showing all the tasks which:\n";
         if (!keyword.isEmpty()) {
-            successMsg += "Contains any of keywords in [" + keyword + "] in title;\n";
+            successMsg += "Contains the keyword(s) [" + keyword + "] in title\n";
         }
         if (!earliestTime.isEmpty()) {
-            successMsg += "Has starting time[event] or deadline[deadline] after "
+            successMsg += "Happens after "
                            + earliestTime
-                           + ";\n";
+                           + "\n";
         }
         if (!latestTime.isEmpty()) {
-            successMsg += "Has starting time[event] or deadline[deadline] before "
+            successMsg += "Happens before "
                     + latestTime
-                    + ";\n";
+                    + "\n";
         }
         if (!tag.isEmpty()) {
-            successMsg += "Has any of tags in [" + tag + "];\n";
+            successMsg += "Contains the tags [" + tag + "]\n";
         }
         return successMsg;
     }

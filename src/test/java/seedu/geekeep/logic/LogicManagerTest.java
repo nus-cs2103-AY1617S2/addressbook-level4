@@ -72,7 +72,8 @@ public class LogicManagerTest {
      */
     class TestDataHelper {
 
-        public Task event() throws Exception {
+        //@@author A0139438W
+        public Task getTestEvent() throws Exception {
             Title title = new Title("Event");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             DateTime startDateTime = new DateTime("01-04-17 1630");
@@ -83,8 +84,7 @@ public class LogicManagerTest {
             return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
-        //@@author A0139438W
-        public Task deadline() throws Exception {
+        public Task getTestDeadline() throws Exception {
             Title title = new Title("Deadline");
             DateTime endDateTime = new DateTime("01-05-17 1630");
             Description description = new Description("222, beta street");
@@ -94,7 +94,7 @@ public class LogicManagerTest {
             return new Task(title, null, endDateTime, description, tags, false);
         }
 
-        public Task eventWithoutTime() throws Exception {
+        public Task getTestEventWithoutTime() throws Exception {
             Title title = new Title("Event Without Time");
             DateTime endDateTime = new DateTime("01-05-17");
             DateTime startDateTime = new DateTime("01-04-17");
@@ -105,7 +105,7 @@ public class LogicManagerTest {
             return new Task(title, startDateTime, endDateTime, description, tags, false);
         }
 
-        public Task floatingTask() throws Exception {
+        public Task getTestFloatingTask() throws Exception {
             Title title = new Title("Floating Task");
             Description description = new Description("333, charlie street");
             Tag tag1 = new Tag("tag1");
@@ -243,22 +243,22 @@ public class LogicManagerTest {
          */
         public String generateDetailedSuccessMsg(String keyword, String earliestTime,
                 String latestTime, String tag) {
-            String successMsg = " GeeKeep is showing all the tasks which:\n";
+            String successMsg = "\nGeeKeep is showing all the tasks which:\n";
             if (!keyword.isEmpty()) {
-                successMsg += "Contains any of keywords in [" + keyword + "] in title;\n";
+                successMsg += "Contains the keyword(s) [" + keyword + "] in title\n";
             }
             if (!earliestTime.isEmpty()) {
-                successMsg += "Has starting time[event] or deadline[deadline] after "
+                successMsg += "Happens after "
                                + earliestTime
-                               + ";\n";
+                               + "\n";
             }
             if (!latestTime.isEmpty()) {
-                successMsg += "Has starting time[event] or deadline[deadline] before "
+                successMsg += "Happens before "
                         + latestTime
-                        + ";\n";
+                        + "\n";
             }
             if (!tag.isEmpty()) {
-                successMsg += "Has any of tags in [" + tag + "];\n";
+                successMsg += "Contains the tags [" + tag + "]\n";
             }
             return successMsg;
         }
@@ -385,7 +385,7 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
 
         // add a new event
-        Task toBeAdded = helper.event();
+        Task toBeAdded = helper.getTestEvent();
         GeeKeep expectedAB = new GeeKeep();
         expectedAB.addTask(toBeAdded);
 
@@ -396,7 +396,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
 
         // add a new event without time field
-        toBeAdded = helper.eventWithoutTime();
+        toBeAdded = helper.getTestEventWithoutTime();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -406,7 +406,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
 
         // add a new deadline
-        toBeAdded = helper.deadline();
+        toBeAdded = helper.getTestDeadline();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -416,7 +416,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
 
         // add a new floating task
-        toBeAdded = helper.floatingTask();
+        toBeAdded = helper.getTestFloatingTask();
         expectedAB.addTask(toBeAdded);
 
         // execute command and verify result
@@ -430,7 +430,7 @@ public class LogicManagerTest {
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.event();
+        Task toBeAdded = helper.getTestEvent();
 
         // setup starting state
         model.addTask(toBeAdded); // task already in internal geekeep
@@ -477,7 +477,7 @@ public class LogicManagerTest {
         assertIncorrectIndexFormatBehaviorForCommand("delete", expectedMessage);
     }
 
-    //@@author A0147622H
+    //@@author A0139438W
     @Test
     public void execute_undo_redo_errorMessageShown() throws Exception {
         String expectedMessage = String.format(UndoCommand.MESSAGE_NOTHING_TO_UNDO);
@@ -518,7 +518,6 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
 
-    //@@author A0139438W
     @Test
     public void execute_done_undone_CorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();

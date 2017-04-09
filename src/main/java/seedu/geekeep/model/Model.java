@@ -96,5 +96,24 @@ public interface Model {
 
     void setGeekeepFilePath(String filePath);
 
+    //@@author A0139438W
+    /**
+     * Retrieves number of event tasks currently in the internal filtered task list
+     * @return number of events
+     */
+    int getNumberOfEvents();
+
+    /**
+     * Retrieves number of floating tasks currently in the internal filtered task list
+     * @return number of floating tasks
+     */
+    int getNumberOfFloatingTasks();
+
+    /**
+     * Retrieves number of deadline tasks currently in the internal filtered task list
+     * @return number of deadlines
+     */
+    int getNumberOfDeadlines();
+
 }
 
