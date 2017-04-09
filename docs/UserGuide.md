@@ -38,7 +38,7 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order (except for the ShortCut Command).
+> * Parameters can be in any order (except for the Shortcut Command).
 
 > **DATETIME Format**
 >
@@ -58,12 +58,12 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > * `noon` <br>
 For a full list of acceptable formats, please refer to http://natty.joestelmach.com/doc.jsp
 
-> * Important notes:
-> * if only the date/day is provided, the time will be default set as 11.59 pm
-> * if only the time is provided, the date/day will be default set as the current date/day
-> * when inputing in date format, ONLY mm/dd is allowed and not dd/mm, and range for dd and mm must be valid
+> Important notes:
+> * If only the date/day is provided, the time will be default set as 11.59 pm
+> * If only the time is provided, the date/day will be default set as the current date/day
+> * When inputing in date format, ONLY mm/dd is allowed and not dd/mm, and range for dd and mm must be valid
 (Exception is when you type dd month where month is in words, eg. `5 may`, but the dd must be valid ie. cannot be `32`
-> * if multiple dates are given, only the first date will be captured
+> * If multiple dates are given, only the first date will be captured
 > * Watodo captures time to the precision of minutes
 
 ### 2.1. Viewing help : `help`
@@ -202,8 +202,8 @@ EDIT DATETIME FORMAT
 
 Examples:
 
-* `list`
-* `edit 5 meeting at board room`<br>
+* `list` <br>
+  `edit 5 meeting at board room`<br>
   Edits the task description of the 5th task today to be `meeting at board room`.
 
 * `edit 2 by/ mon `<br>
@@ -254,9 +254,9 @@ Examples:
 Unmarks the task identified by the index number used in the marked task or list all listing.<br>
 Format: `unmark INDEX [MORE_INDICES]...`
 
-> Unmarks a previously marked task and restores it back into its original location and view.
+> Unmarks a previously marked task and restores it back into its original location and view. <br>
 > The index refers to the index number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> The index **must be a positive integer** 1, 2, 3, ...<br>
 
 Examples:
 
@@ -323,11 +323,11 @@ You can add and delete your own personal shortcut keys to the various commands. 
 Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WORD feature) <br>
         `shortcut - COMMAND_WORD SHORTCUT_KEY` (deletes the existing SHORTCUT_KEY) <br>
 
-> SHORTCUT_KEY can be any character except whitespace.
-> Unfortunately, special keys (e.g. F1, SHIFT, CTRL etc) are not supported. :( <br>
-> You cannot delete any of the default command words. <br>
-> Shortcut keys must be unique. E.g. `a` cannot be a shortcut for both `add` and `edit`. <br>
-> Flexible ordering of parameters does not apply to this feature. <br>
+> * SHORTCUT_KEY can be any character except whitespace.
+> * Unfortunately, special keys (e.g. F1, SHIFT, CTRL etc) are not supported. :( <br>
+> * You cannot delete any of the default command words. <br>
+> * Shortcut keys must be unique. E.g. `a` cannot be a shortcut for both `add` and `edit`. <br>
+> * Flexible ordering of parameters does not apply to this feature. <br>
 
 Examples:
 * `shortcut + add @@`
@@ -359,15 +359,13 @@ There is no need to save manually.
 
 Command | Format
 --------| :-----
-Add | 
-* `add TASK [#TAG]...` <br>
+Add | * `add TASK [#TAG]...` <br>
 * `add TASK by/ DATETIME [#TAG]...`
 * `add TASK on/ DATETIME [#TAG]...`
 * `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
 * `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
 
-List |
-* `list`<br>
+List | * `list`<br>
 * `list all`<br>
 * `list float`<br>
 * `list deadline`<br>
