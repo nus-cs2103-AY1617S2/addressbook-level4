@@ -12,7 +12,7 @@ public class DeleteCalendar extends BasicCommandCalendar {
 //com.google.api.services.calendar.Calendar service;
 
     public DeleteCalendar(ReadOnlyTask target,
-            om.google.api.services.calendar.Calendar inputCalendar) throws IllegalTimeException {
+            com.google.api.services.calendar.Calendar inputCalendar) throws IllegalTimeException {
         Task targetTask = new Task(target);
         service = inputCalendar;
         this.targetEvent = new EventCalendar(targetTask);
