@@ -46,7 +46,6 @@ Responsibilities:
 * Other major contributions: <br>
     * Designed the task card in GUI
     * Did initial refactoring of majority of tests from AddressBook to TaskIt
-    * Set up of organisation, repo, Travis, Coveralls and Codacy
+    * Set up of organisation, repo, Travis, Coveralls and Codacy
     * Wrote Test Script
-
  -----
