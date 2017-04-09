@@ -44,7 +44,6 @@ import seedu.opus.logic.commands.RedoCommand;
 import seedu.opus.logic.commands.SaveCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
-import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
 import seedu.opus.logic.commands.exceptions.CommandException;
 import seedu.opus.model.Model;
@@ -807,27 +806,6 @@ public class LogicManagerTest {
         model.resetToPreviousState();
         model.resetToNextState();
         assertCommandFailure("redo", TaskManagerStateHistory.MESSAGE_INVALID_REDO);
-    }
-
-    /*
-    @Test
-    public void executeSyncCommandWithValidOnArgumentSuccess() {
-        assertCommandSuccess("sync on", SyncCommand.MESSAGE_SYNC_ON_SUCCESS,
-                             new TaskManager(), Collections.emptyList());
-    }
-    */
-
-
-    @Test
-    public void executeSyncCommandWithValidOffArgumentSuccess() {
-        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS,
-                             new TaskManager(), Collections.emptyList());
-    }
-
-    @Test
-    public void executeSyncCommandWithInvalidArgumentException() {
-        assertCommandFailure("sync invalid", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                           SyncCommand.MESSAGE_USAGE));
     }
     //@@author
 

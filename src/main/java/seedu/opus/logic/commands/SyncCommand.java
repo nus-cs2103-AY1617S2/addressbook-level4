@@ -1,6 +1,7 @@
 package seedu.opus.logic.commands;
 
 import seedu.opus.logic.commands.exceptions.CommandException;
+import seedu.opus.sync.exceptions.SyncException;
 
 //@@author A0148087W
 /**
@@ -26,8 +27,12 @@ public class SyncCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         if (shouldActivateSync) {
-            model.startSync();
-            return new CommandResult(MESSAGE_SYNC_ON_SUCCESS);
+            try {
+                model.startSync();
+                return new CommandResult(MESSAGE_SYNC_ON_SUCCESS);
+            } catch (SyncException e) {
+                throw new CommandException(e.getMessage());
+            }
         } else {
             model.stopSync();
             return new CommandResult(MESSAGE_SYNC_OFF_SUCCESS);

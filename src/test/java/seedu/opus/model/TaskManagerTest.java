@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.opus.model.tag.Tag;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
+import seedu.opus.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.opus.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -69,6 +70,20 @@ public class TaskManagerTest {
         thrown.expect(AssertionError.class);
         taskManager.resetData(newData);
     }
+
+    //@@author A0148087W
+    @Test
+    public void getNonEventTaskListFromTaskManagerWithEventTasksSuccessful() throws DuplicateTaskException {
+        TypicalTestTasks td = new TypicalTestTasks();
+        List<Task> testTasks = Arrays.asList(new Task(td.laundry), new Task(td.taskWithoutDeadline),
+                new Task(td.taskWithoutStartTime));
+        List<Task> expectedTasks = Arrays.asList(new Task(td.taskWithoutDeadline), new Task(td.taskWithoutStartTime));
+        TaskManager taskManager = new TaskManager();
+        taskManager.setTasks(testTasks);
+
+        assertEquals(taskManager.getNonEventTaskList(), expectedTasks);
+    }
+    //@@author
 
     /**
      * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
