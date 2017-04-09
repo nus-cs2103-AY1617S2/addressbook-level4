@@ -39,6 +39,8 @@ public class CompleteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the tag list";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_NULL_TIMING =
+            "Both the start and end timings must be specified for a recurring task";
 
     public final int targetIndex;
     public final EditTaskDescriptor completeTaskDescriptor;
@@ -91,6 +93,8 @@ public class CompleteCommand extends Command {
             }
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_NULL_TIMING);
         }
     }
     //@@author
@@ -114,8 +118,13 @@ public class CompleteCommand extends Command {
         updatedStartDate.setTiming(updatedStartDate.toString());
         updatedEndDate.setTiming(updatedEndDate.toString());
 
-        Task ret = new Task(updatedDescription, updatedPriority, updatedStartDate,
-                updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        Task ret;
+        try {
+            ret = new Task(updatedDescription, updatedPriority, updatedStartDate,
+                    updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_NULL_TIMING);
+        }
         ret.setComplete();
         return ret;
     }
