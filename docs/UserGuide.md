@@ -74,7 +74,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > The search is not case sensitive, the order of the keywords does not matter, as only the name is searched. Tasks matching at least one keyword will be returned (i.e. `OR` search).
 
 Example:
-* `find juice`
+`find juice`
 <img src="images/find.png" width="600">
 
 ## Deleting a Task : `delete`
