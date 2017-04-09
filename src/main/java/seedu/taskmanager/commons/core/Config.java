@@ -16,7 +16,7 @@ public class Config {
     private String appTitle = "ProcrastiNomore - Task Manager Application";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String taskManagerFilePath = "data\taskmanager.xml";
+    private String taskManagerFilePath = "data/taskmanager.xml";
     private String taskManagerName = "MyTaskManager";
 
     public String getAppTitle() {
