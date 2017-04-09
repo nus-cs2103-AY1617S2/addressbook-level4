@@ -14,11 +14,11 @@ import seedu.onetwodo.testutil.TaskBuilder;
 import seedu.onetwodo.testutil.TestTask;
 import seedu.onetwodo.testutil.TestUtil;
 
-//@@author A0135739W
 public class DoneCommandTest extends ToDoListGuiTest {
 
     TestTask[] currentList = td.getTypicalTasks();
 
+    //@@author A0135739W
     @Test
     public void done_emptyParameter_failure() {
         commandBox.runCommand(DoneCommand.COMMAND_WORD);
