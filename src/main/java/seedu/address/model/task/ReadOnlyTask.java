@@ -36,11 +36,7 @@ public interface ReadOnlyTask {
                                 && other.getStartDate().equals(this.getStartDate())))
                 && ((other.getEndDate() == null && this.getEndDate() == null)
                         || ((other.getEndDate() != null && this.getEndDate() != null)
-                                && other.getEndDate().equals(this.getEndDate())))
-                && ((other.getGroup() == null && this.getGroup() == null)
-                        || ((other.getGroup() != null && this.getGroup() != null)
-                                && other.getGroup().equals(this.getGroup())))
-                );
+                                && other.getEndDate().equals(this.getEndDate()))));
     }
 
     /**

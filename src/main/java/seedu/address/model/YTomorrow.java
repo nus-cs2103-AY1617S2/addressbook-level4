@@ -64,7 +64,7 @@ public class YTomorrow implements ReadOnlyTaskManager {
         try {
             setPersons(newData.getPersonList());
         } catch (UniqueTaskList.DuplicatePersonException e) {
-            assert false : "AddressBooks should not have duplicate tasks";
+            assert false : "AddressBooks should not have duplicate persons";
         }
         try {
             setTags(newData.getTagList());
