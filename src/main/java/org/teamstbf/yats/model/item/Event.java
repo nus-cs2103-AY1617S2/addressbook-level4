@@ -3,14 +3,11 @@ package org.teamstbf.yats.model.item;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-
-import com.joestelmach.natty.generated.DateParser.hours_return;
 
 public class Event implements ReadOnlyEvent {
 
@@ -340,7 +337,7 @@ public class Event implements ReadOnlyEvent {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean hasStartOrEndTime() {
 		if (this.startTime.toString().equals("") && this.endTime.toString().equals("")) {
@@ -348,7 +345,7 @@ public class Event implements ReadOnlyEvent {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean isRecurring() {
 		return this.isRecurring;

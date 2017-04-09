@@ -75,7 +75,7 @@ public interface Model {
 	/**
 	 * Updates the filter of the Calendar filtered event list to show specified
 	 * start time
-	 * 
+	 *
 	 * @param today
 	 */
 	void updateCalendarFilteredListToShowStartTime(LocalDate today);
