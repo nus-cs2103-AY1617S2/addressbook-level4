@@ -21,5 +21,6 @@ public class RedoCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, commandText));
     }
+
 }
 // @@author
