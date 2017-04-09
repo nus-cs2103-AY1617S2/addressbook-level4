@@ -104,7 +104,7 @@ All the features of the application can be accessed through the use of a keyboar
 > * Items in `[SQUARE_BRACKETS]` are optional.
 > * Items with `...` after them can have multiple instances.
 > * Parameters can be in any order.
-> * Options with '/' allow either word to be used.
+> * Options with `/` allow either word to be used (For example, high/low for task priority).
 
 ### 3.1. Viewing help : `help`
 
