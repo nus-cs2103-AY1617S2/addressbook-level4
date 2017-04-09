@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void undoneTask(ReadOnlyTask taskToUncomplete) throws IllegalValueException {
         if (taskToUncomplete.getDoneStatus() == false) {
-            throw new IllegalValueException("This task has not been done");
+            throw new IllegalValueException(UndoneCommand.MESSAGE_UNDONE_UNDONE_TASK);
         }
         if (taskToUncomplete.hasRecur()) {
             throw new IllegalValueException("Recurring tasks cannot be undone");

@@ -16,7 +16,7 @@ public class UndoneCommand extends Command {
             + ": Marks the task identified by the index number as uncompleted.\n"
             + "Parameters: PREFIX_INDEX (must be a prefix positive integer)\n"
             + "Example: " + COMMAND_WORD + " e1";
-
+    public static final String MESSAGE_UNDONE_UNDONE_TASK = "This task has not been done";
     public static final String MESSAGE_UNDONE_TASK_SUCCESS = "Uncomplete %1$s.";
 
     public final TaskType taskType;
