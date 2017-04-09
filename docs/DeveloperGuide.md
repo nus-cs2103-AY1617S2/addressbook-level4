@@ -179,7 +179,7 @@ Here are some of the key files in the `Logic` component:
 - `Parser.java`: contains a `class` that is in charge of parsing commands.
 - `Command.java`: contains a `class` that represents each command defined in Doist.
 
-**Design Decisions**/
+**Design Decisions**
 - `Command.java` and its sub-classes implement the Command Pattern.
 
 <br>
