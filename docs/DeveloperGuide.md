@@ -32,8 +32,7 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
 * [Appendix A: User Stories](#appendix-a--user-stories)
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix D : Product Survey](#appendix-d--product-survey)
 
 
 ## 1. Introduction
@@ -168,11 +167,11 @@ When a command is entered, the `Parser` processes the text and selects the appro
 
 **Command Parsers**
 
-Command parsers are designed to facilitate logic manager to understand certain user commands. They break the input string down based on the keywords in the commands, and generating instances like dates and names that the logic manager will understand. 
+Command parsers are designed to facilitate logic manager to understand certain user commands. They break the input string down based on the keywords in the commands, and generating instances like dates and names that the logic manager will understand.
 
-All the parsers are extending from CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java. For certain commands, like `add` and `edit` commands, which have flexible input styles, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will find the tag information first. After that, the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads, instead it will only check whether the index exist and pass the UI index string to the logic manager untouched. The parsers will not modify the model directly. 
+All the parsers are extending from CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java. For certain commands, like `add` and `edit` commands, which have flexible input styles, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will find the tag information first. After that, the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads, instead it will only check whether the index exist and pass the UI index string to the logic manager untouched. The parsers will not modify the model directly.
 
-The parsers will generate Command instances, based on the type of commands they received. The Command instance will include all the fields the parser identified. 
+The parsers will generate Command instances, based on the type of commands they received. The Command instance will include all the fields the parser identified.
 
 In the event the parser encounters input errors, for example the input contains invalid characters or the index typed is unknown, an IncorrectCommand instance will be returned to the handler, containing the error information.
 
@@ -195,7 +194,7 @@ All tasks are stored in an ObservableList inside model. In order to fetch a list
 
 **History**
 
-The command history and previous states of the task manager are also saved in the model, in order to make `undo` and `redo` user commands possible. 
+The command history and previous states of the task manager are also saved in the model, in order to make `undo` and `redo` user commands possible.
 
 
 ### 3.5. Storage
@@ -265,16 +264,16 @@ Model does the splitting work in the following steps:
 3. The three temporary lists are copied to the corresponding `ObservableList`, forcing the UI to refresh.
 
 ![ui-splitting-of-task-list](images/ui-splitting-of-task-list.jpg)
-_Figure 4.2.1: Sequence diagram of the process of splitting task lists_ 
+_Figure 4.2.1: Sequence diagram of the process of splitting task lists_
 
 
 #### 4.3.2 Mapping between UI index(task ID) and absolute index
 As you may have noticed, task IDs in the UI all begin with "T/F/C". It is a design decision made to improve the usability of commands. Originally, all tasks shared a same set of index and there were "hops" between to adjacent tasks. For example, two adjacent tasks in the list **Future** may have indexes of "1" and "5" respectively because task "2", "3" and "4" are in **Today**, which did not seem to be intuitive.
 
 Thus, we decided to adopt the current numbering scheme while hoping to retain the original implementation based on the absolute index. That is where the index mapping came from. We used a HashMap in ModelManager to store the mapping from relative to absolute index. Every time after splitting the task list, `assignUiIndex()` is called to refresh the task ID.
- 
+
 #### 4.3.3 Autocomplete
-The autocomplete feature of CommandBox utilises `Textfields.bindAutoCompletion()` from the ControlsFX Library. To extend the list of candidates, simply add new commands inside `bindAutoCompletion()` from the constructor of `MainWindow.java`. 
+The autocomplete feature of CommandBox utilises `Textfields.bindAutoCompletion()` from the ControlsFX Library. To extend the list of candidates, simply add new commands inside `bindAutoCompletion()` from the constructor of `MainWindow.java`.
 
 > Notice: In GUI testing, "Enter" is now pressed **twice** in `runCommand(String command)` in `CommandBoxHandle` so as to ensure that the autocomplete windows is dismissed before executing any command. You may want to take notice of this when debugging.
 
@@ -284,7 +283,7 @@ To display a snack bar message, simply raise an `UpdateStatusBarEvent`.
 #### 4.3.5 Error Message
 In **Today**, the error message is displayed directly under the command box. It is trigger by the `CommandValidator` of the command box.
 
-To show/hide an error message, call `CommandValidator`'s `showErrorMessage()/hideErrorMessage()` followed by calling `commandTextField.validate()`. 
+To show/hide an error message, call `CommandValidator`'s `showErrorMessage()/hideErrorMessage()` followed by calling `commandTextField.validate()`.
 
 > Notice: `validate()` should be called explicitly so as to trigger the UI control to refresh.
 
@@ -300,7 +299,7 @@ The panel of completed tasks is hidden by default. It only shows up when called 
 _Figure 4.3.6.1: Control Layout of MainWindow_
 
 ##### 4.3.6.2 Command Execution Animation
-In **Today**, there are two types of command animation, namely **pre-execute** and **post-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise, the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them. 
+In **Today**, there are two types of command animation, namely **pre-execute** and **post-execute**. The first is for commands such as `delete` or `done` which has to be played before the command takes effect. Otherwise, the deleted/hidden task will not be visible to the user. The second is for commands such as `add` or `edit` which the added/edited task will remain in the UI after command execution. This section explains the different approaches taken when implementing them.
 
 In general, both animations comprise of two stages: **displaying a progress bar under the task** and **scrolling the ListView to select it**.
 
@@ -311,12 +310,12 @@ _Figure 4.3.6.2: Effect of `add` command animation_
 
 **Pre-execute Animation (Add/Edit/Today)**
 
-UI relies on the `isAnimatated` flag in `Task` to trigger the pre-execute animation. It is checked when initilising the `TaskCard` view for a task. 
+UI relies on the `isAnimatated` flag in `Task` to trigger the pre-execute animation. It is checked when initilising the `TaskCard` view for a task.
 
 There should be only one task at a time in the entire list that carries the flag since each command execution modifies at most one task. **Take notice that `isAnimated` is an `int` instead of a `boolean`.** You may refer to the following table when setting its value:
 
 `isAnimated` Value | Play Animation? | Remark
--------- | :-------- | :--------- 
+-------- | :-------- | :---------
 0 | No | Default value
 1 | Yes| Animation trigger
 2 | No | Initial value when add/edit/today a task
@@ -337,12 +336,12 @@ e.g. When deleting a task:
 1. User enters "delete [task ID]".
 2. Logic calls `DeleteAnimationCommand` instead of `DeleteCommand`.
 3. `DeleteAnimationCommand` set `isAnimated` for the target task and let UI play the animation.
-4. Logic calls `DeleteCommand` to continue. 
+4. Logic calls `DeleteCommand` to continue.
 
 
 ## 5. Testing
 
-Tests can be found in the `./src/test/java` folder.
+Tests can be found in the `./src/test/java` folder. For all tests involving tasks, remember to use the tasks in `TypicalTasks.java`. It will aid you in your creation of test cases, making it as painless as possible. Refer to the other test cases for examples on how to build your tests.
 
 **In Eclipse**:
 
@@ -608,7 +607,7 @@ Use case ends
   * do not require any installation by the user of your software.
   * do not violate other constraints.
 
-## Appendix D : Glossary
+## Appendix D : Product Survey
 
 ### Any . Do
 

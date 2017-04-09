@@ -69,8 +69,8 @@ Responsibilities: Logic, code quality, integration dfs
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/collated/main/A0093999Y.md)][[test code](https://github.com/CS2103JAN2017-T09-B1/main/tree/master/collated/test/A0093999Y.md)]
 
 * Other major contributions:
-  * Bug fixing
-  * Refactoring
+  * Testing
+  * Cleaning Code
 -----
 
 #### [Cao Wei](https://github.com/LoneGunman001)
