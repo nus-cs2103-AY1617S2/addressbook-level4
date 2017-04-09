@@ -176,7 +176,7 @@ public class AddCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSEDDATE : "");
             return new CommandResult(String.format(message, toAdd));
         } catch (UniqueTaskList.DuplicatePersonException e) {
