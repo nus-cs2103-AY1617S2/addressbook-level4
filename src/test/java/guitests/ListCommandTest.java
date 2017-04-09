@@ -21,17 +21,16 @@ public class ListCommandTest extends AddressBookGuiTest {
     @Test
     public void list_doneTasks_Success() {
 		commandBox.runCommand("mark 6 done");
-		commandBox.runCommand("mark 6 done");
 		commandBox.runCommand("list done");
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "done"));
-		assertListResult(td.cleaning,td.gymming);
+		assertListResult(td.cleaning);
     }
 
     @Test
     public void list_undoneTasks_Success() {
 		commandBox.runCommand("list undone");
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "undone"));
-		assertListResult(td.hw1,td.hw2,td.lunch,td.interview,td.shopping);
+		assertListResult(td.getUndoneTypicalTasks());
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ListCommandTest extends AddressBookGuiTest {
     public void list_overdueTasks_Success() {
 		commandBox.runCommand("add task3 by 04/04/17");
 		commandBox.runCommand("list overdue");
-		assertListSize(2); //because task1 has just been overdue.
+		assertListSize(1);
 		assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "overdue"));
     }//@@author
 
@@ -60,7 +59,7 @@ public class ListCommandTest extends AddressBookGuiTest {
     @Test
     public void list_floatingTasks_Success() {
         commandBox.runCommand("list floating");
-        assertListSize(10);
+        assertListResult(td.getFloatingTypicalTasks());
         assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "floating"));
     }
 
@@ -74,17 +73,18 @@ public class ListCommandTest extends AddressBookGuiTest {
 
     @Test
     public void list_deadlineTasks_Success() {
+        commandBox.runCommand("add task4 by tomorrow 4pm");
         commandBox.runCommand("list deadline");
-        assertListSize(3);
+        assertListSize(1);
         assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "deadline"));
     }
 
     @Test
     public void list_alias_Success() {
-        commandBox.runCommand("l deadline");
-        assertListSize(3);
-        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "deadline"));
-    }
+        commandBox.runCommand("l floating");
+        assertListResult(td.getFloatingTypicalTasks());
+        assertResultMessage(String.format(ListCommand.MESSAGE_SUCCESS_SPECIFIC, "floating"));
+    }//@@author
 
 	private void assertListResult(TestTask... expectedHits) {
         assertListSize(expectedHits.length);

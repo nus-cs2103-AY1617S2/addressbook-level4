@@ -7,16 +7,17 @@ import seedu.taskit.commons.exceptions.NoValidStateException;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTaskManager getAddressBook();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -35,6 +36,12 @@ public interface Model {
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException;
 
+    /** mark the task status to done or undone
+     * @throws UniqueTaskList.DuplicateMarkingException
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+    */
+    void markTask(ReadOnlyTask taskToMark, String parameter) throws UniqueTaskList.DuplicateMarkingException;
+
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<Task>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -44,7 +51,6 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //@@author A0141872E
     /** Updates the filter of the filtered task list to filter by the given parameter*/
     int updateFilteredTaskList(String parameter);
 
@@ -58,4 +64,5 @@ public interface Model {
 
     /** Records the current state of the model */
     void save();
+
 }

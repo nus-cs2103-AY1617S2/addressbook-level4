@@ -9,10 +9,17 @@ import seedu.taskit.logic.commands.Command;
 import seedu.taskit.logic.commands.IncorrectCommand;
 import seedu.taskit.logic.commands.MarkCommand;
 
+import static seedu.taskit.logic.parser.CliSyntax.DONE;
+import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
+
+//@@author A0141872E
+/**
+ * Parses input arguments and creates a new MarkCommand object
+ */
 public class MarkCommandParser {
 
     public Command parse(String args) {
-        List<Optional<String>> markInformation = ParserUtil.splitPreamble(args.trim(),2);
+        List<Optional<String>> markInformation = ParserUtil.splitPreamble(args.trim().toLowerCase(),2);
 
         Optional<Integer> index = markInformation.get(0).flatMap(ParserUtil::parseIndex);
         if (!index.isPresent()) {
@@ -24,7 +31,7 @@ public class MarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_NOT_MARKED));
         }
 
-        if(parameter.get().equals("done")||parameter.get().equals("undone")){
+        if(parameter.get().equals(DONE)||parameter.get().equals(UNDONE)){
             return new MarkCommand (index.get(), parameter.get());
         } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));

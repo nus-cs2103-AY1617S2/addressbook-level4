@@ -1,9 +1,9 @@
 package seedu.taskit.logic.parser;
 
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.taskit.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.taskit.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.taskit.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.taskit.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.taskit.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.taskit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.taskit.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -32,7 +32,7 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TITLE, PREFIX_START, PREFIX_END, PREFIX_PRIORITY, PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_TITLE, PREFIX_FROM, PREFIX_TO, PREFIX_PRIORITY, PREFIX_TAG);
         argsTokenizer.tokenize(args);
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
@@ -44,8 +44,8 @@ public class EditCommandParser {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         try {
                 editTaskDescriptor.setTitle(ParserUtil.parseTitle(argsTokenizer.getValue(PREFIX_TITLE)));
-                editTaskDescriptor.setStart(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_START)));
-                editTaskDescriptor.setEnd(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_END)));
+                editTaskDescriptor.setStart(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_FROM)));
+                editTaskDescriptor.setEnd(ParserUtil.parseDate(argsTokenizer.getValue(PREFIX_TO)));
                 editTaskDescriptor.setPriority(ParserUtil.parsePriority(argsTokenizer.getValue(PREFIX_PRIORITY)));
                 editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         }catch (IllegalValueException ive) {

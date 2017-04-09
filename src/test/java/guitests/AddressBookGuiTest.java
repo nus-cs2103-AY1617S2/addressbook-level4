@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import seedu.taskit.TestApp;
 import seedu.taskit.commons.core.EventsCenter;
 import seedu.taskit.commons.events.BaseEvent;
-import seedu.taskit.model.AddressBook;
+import seedu.taskit.model.TaskManager;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.testutil.TestUtil;
 import seedu.taskit.testutil.TypicalTestTasks;
@@ -86,8 +86,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected AddressBook getInitialData() {
-        AddressBook ab = new AddressBook();
+    protected TaskManager getInitialData() {
+        TaskManager ab = new TaskManager();
         TypicalTestTasks.loadAddressBookWithSampleData(ab);
         return ab;
     }

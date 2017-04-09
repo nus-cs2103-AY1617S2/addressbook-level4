@@ -3,13 +3,14 @@
 package seedu.taskit.testutil;
 
 import seedu.taskit.commons.exceptions.IllegalValueException;
-import seedu.taskit.model.AddressBook;
+import seedu.taskit.model.TaskManager;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
 import seedu.taskit.model.task.Date;
 
 public class TypicalTestTasks {
-    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning, gymming, golfing;
+    public TestTask hw1, hw2, lunch, interview, meeting, shopping, assignment, cleaning,
+    gymming, golfing, today, to, from, date,deadline, internship;
 
     public TypicalTestTasks() {
         try {
@@ -47,6 +48,24 @@ public class TypicalTestTasks {
             golfing = new TaskBuilder().withTitle("Golf with Cher")
                     .withPriority("medium")
                     .withTags("school").withEnd(new Date("today")).build();
+            today = new TaskBuilder().withTitle("today movie night")
+                    .withPriority("low")
+                    .withTags("leisure").build();
+            to = new TaskBuilder().withTitle("to")
+                    .withPriority("low")
+                    .withTags("testing").build();
+            from = new TaskBuilder().withTitle("from")
+                    .withPriority("low").withEnd("3pm")
+                    .withTags("testing").build();
+            date = new TaskBuilder().withTitle("date")
+                    .withPriority("low").withStart("3pm")
+                    .withEnd("6pm").build();
+            deadline = new TaskBuilder().withTitle("project deadline")
+                    .withPriority("low")
+                    .withEnd("11pm").build();
+            internship = new TaskBuilder().withTitle("internship")
+                    .withPriority("low")
+                    .withEnd("May 30").build();
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -54,7 +73,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab) {
         for (TestTask task : new TypicalTestTasks().getTypicalTasks()) {
             try {
                 ab.addTask(new Task(task));
@@ -70,8 +89,17 @@ public class TypicalTestTasks {
     }
     //@@author
 
-    public AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    //@@author A0141872E
+    public TestTask[] getUndoneTypicalTasks(){
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
+    }
+
+    public TestTask[] getFloatingTypicalTasks(){
+        return new TestTask[]{hw1, hw2, lunch, interview, shopping, cleaning, gymming};
+    }//@@author
+
+    public TaskManager getTypicalAddressBook() {
+        TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

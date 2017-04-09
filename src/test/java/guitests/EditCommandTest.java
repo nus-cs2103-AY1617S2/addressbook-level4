@@ -28,39 +28,54 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     public void sortTasksList() {
         Arrays.sort(expectedTasksList);
-    }
+    }//@@author
 
     //@@author A0141872E
 
     @Test
-    public void edit_allFieldsSpecified_success() throws Exception {
+    public void edit_title_success() throws Exception {
         sortTasksList();
         String detailsToEdit = "title Do Homework";
         int addressBookIndex = 3;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withPriority("medium").withTags("school").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Do Homework").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
+    }
+
+    @Test
+    public void edit_tag_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "tag school";
+        int addressBookIndex = 3;
+
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("school").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
     public void edit_multipleFields_Success() throws Exception {
-        String detailsToEdit = "title Do Homework start 4pm end 6pm priority low tag assignment";
+        String detailsToEdit = "title Do Homework from 4pm to 6pm priority low tag assignment";
         int addressBookIndex = 3;
 
         TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withStart("4pm").withEnd("6pm").withPriority("low").withTags("assignment").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
-    public void edit_multipleTags_Success() throws Exception {
-        String detailsToEdit = "tag assignment tag school tag work";
+    public void edit_multiTags_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "tag school tag work tag assignment";
         int addressBookIndex = 3;
 
-        TestTask editedTask = new TaskBuilder().withTitle("Do Homework").withPriority("medium").withTags("assignment","school","work").build();
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("school","work","assignment").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
@@ -72,7 +87,19 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withTags().build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
+    }
+
+    @Test
+    public void edit_alias_success() throws Exception {
+        sortTasksList();
+        String detailsToEdit = "title Do Homework";
+        int addressBookIndex = 3;
+
+        TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Do Homework").build();
+
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,true);
     }
 
     //@@author A0163996J
@@ -84,32 +111,32 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withPriority("high").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
     public void edit_dateTime_success() throws Exception {
         sortTasksList();
-        String detailsToEdit = "end 4 pm";
+        String detailsToEdit = "to 4 pm";
         int addressBookIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withEnd("4pm").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
     public void edit_dateToday_success() throws Exception {
         sortTasksList();
-        String detailsToEdit = "end today";
+        String detailsToEdit = "to today";
         int addressBookIndex = 4;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
         TestTask editedTask = new TaskBuilder(taskToEdit).withEnd("today").build();
 
-        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask);
-    }
+        assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit, editedTask,false);
+    }//@@author
 
     //@@author A0141872E
     @Test
@@ -117,14 +144,14 @@ public class EditCommandTest extends AddressBookGuiTest {
         sortTasksList();
         commandBox.runCommand("find Do HW 1");
 
-        String detailsToEdit = "title Homework due";
+        String detailsToEdit = "tag Homework";
         int filteredTaskListIndex = 1;
         int addressBookIndex = 2;
 
         TestTask taskToEdit = expectedTasksList[addressBookIndex - 1];
-        TestTask editedTask = new TaskBuilder(taskToEdit).withTitle("Homework due").build();
+        TestTask editedTask = new TaskBuilder(taskToEdit).withTags("Homework").build();
 
-        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask);
+        assertEditSuccess(filteredTaskListIndex, addressBookIndex, detailsToEdit, editedTask,false);
     }
 
     @Test
@@ -164,13 +191,13 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("edit 1 tag *&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        commandBox.runCommand("edit 1 start day");
+        commandBox.runCommand("edit 1 from day");
         assertResultMessage(Date.MESSAGE_DATE_FAIL);
 
-        commandBox.runCommand("edit 1 end day");
+        commandBox.runCommand("edit 1 to day");
         assertResultMessage(Date.MESSAGE_DATE_FAIL);
 
-        commandBox.runCommand("edit 1 priority very high");
+        commandBox.runCommand("edit 1 priority important");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
     }
 
@@ -191,8 +218,12 @@ public class EditCommandTest extends AddressBookGuiTest {
      * @param editedTask the expected task after editing the task's details
      */
     private void assertEditSuccess(int filteredTaskListIndex, int addressBookIndex,
-                                    String detailsToEdit, TestTask editedTask) {
+                                    String detailsToEdit, TestTask editedTask, boolean isAlias) {
+        if(isAlias) {
+            commandBox.runCommand("e " + filteredTaskListIndex + " " + detailsToEdit);
+        } else {
         commandBox.runCommand("edit " + filteredTaskListIndex + " " + detailsToEdit);
+        }
         // confirm the new card contains the right data
         TaskCardHandle editedCard = taskListPanel.navigateToTask(editedTask.getTitle().title);
         assertMatching(editedTask, editedCard);

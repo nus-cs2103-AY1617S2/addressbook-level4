@@ -134,7 +134,10 @@ public class TestTask implements ReadOnlyTask, Comparable<TestTask> {
     }
 
     private boolean checkOverdue() {
-        return this.end.isEndTimePassCurrentTime()== true && isDone == false;
+        if (this.end == null) {
+            return false;
+        }
+        return this.end.isEndTimePassCurrentTime() == true && isDone == false;
     }
 
     @Override

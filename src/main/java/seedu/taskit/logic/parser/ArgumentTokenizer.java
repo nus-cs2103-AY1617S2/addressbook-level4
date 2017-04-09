@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
  *     e.g. {@code some preamble text /t 11.00/dToday /t 12.00 /k /m July}  where prefixes are {@code /t /d /k /m}.<br>
@@ -23,6 +25,9 @@ public class ArgumentTokenizer {
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
 
+    /** For adding a title in quotes **/
+    private String titleQuotes = "";
+
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -30,11 +35,19 @@ public class ArgumentTokenizer {
         this.prefixes = Arrays.asList(prefixes);
     }
 
+    //@@ author A0163996J
     /**
      * @param argsString arguments string of the form: preamble <prefix>value <prefix>value ...
      */
     public void tokenize(String argsString) {
         resetTokenizerState();
+        String[] valuesInQuotes = StringUtils.substringsBetween(argsString , "\"", "\"");
+        if (valuesInQuotes != null && valuesInQuotes.length == 1) {
+            String titleQuotes = valuesInQuotes[0];
+            this.titleQuotes = titleQuotes;
+            argsString = argsString.replace("\"" + titleQuotes + "\"", "");
+        }
+
         List<PrefixPosition> positions = findAllPrefixPositions(argsString);
         extractArguments(argsString, positions);
     }
@@ -43,8 +56,16 @@ public class ArgumentTokenizer {
      * Returns last value of given prefix.
      */
     public Optional<String> getValue(Prefix prefix) {
+        if (prefix.getPrefix().equals("title")) {
+            if (!this.titleQuotes.isEmpty()) {
+                Optional<String> title = Optional.of(this.titleQuotes);
+                return title;
+            }
+        }
         return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
     }
+
+    //@@ author
 
     /**
      * Returns all values of given prefix.
@@ -57,6 +78,7 @@ public class ArgumentTokenizer {
         return Optional.of(values);
     }
 
+    //@@ author A0163996J
     /**
      * Returns the preamble (text before the first valid prefix), if any. Leading/trailing spaces will be trimmed.
      *     If the string before the first prefix is empty, Optional.empty() will be returned.
@@ -68,10 +90,17 @@ public class ArgumentTokenizer {
         /* An empty preamble is considered 'no preamble present' */
         if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
             return storedPreamble;
-        } else {
+        }
+        else if (!this.titleQuotes.isEmpty()) {
+            Optional<String> preamble = Optional.of(this.titleQuotes);
+            return preamble;
+        }
+        else {
             return Optional.empty();
         }
     }
+
+    //@@ author
 
     private void resetTokenizerState() {
         this.tokenizedArguments.clear();

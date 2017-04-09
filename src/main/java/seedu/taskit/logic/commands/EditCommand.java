@@ -1,6 +1,5 @@
 package seedu.taskit.logic.commands;
 
-//@@author A0141872E
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,7 @@ import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.Title;
 import seedu.taskit.model.task.UniqueTaskList;
 
+//@@author A0141872E
 /**
  * Edits an existing task in TaskIt.
  */
@@ -30,7 +30,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [title|deadline|tag|priority] NEW.\n"
+            + "Parameters: INDEX (must be a positive integer) [title|from|to|tag|priority] NEW.\n"
             + "Example: " + COMMAND_WORD + " or" + COMMAND_WORD_ALIAS + " 2 title finish SWE HW";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task:  %1$s";

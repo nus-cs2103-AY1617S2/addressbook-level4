@@ -1,7 +1,7 @@
 package seedu.taskit.model;
 
 import static seedu.taskit.logic.parser.CliSyntax.LIST_DEADLINE;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_DONE;
+import static seedu.taskit.logic.parser.CliSyntax.DONE;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_EVENT;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_FLOATING;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_OVERDUE;
@@ -9,7 +9,7 @@ import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_HIGH;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_LOW;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_PRIORITY_MEDIUM;
 import static seedu.taskit.logic.parser.CliSyntax.LIST_TODAY;
-import static seedu.taskit.logic.parser.CliSyntax.LIST_UNDONE;
+import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -31,6 +31,7 @@ import seedu.taskit.model.task.Date;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
 import seedu.taskit.model.task.UniqueTaskList;
+import seedu.taskit.model.task.UniqueTaskList.DuplicateMarkingException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -39,7 +40,7 @@ import seedu.taskit.model.task.UniqueTaskList;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TaskManager taskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     //@A0141011J
@@ -50,57 +51,63 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager addressBook, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        this.taskManager = new TaskManager(addressBook);
+        filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskManager(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+    public void resetData(ReadOnlyTaskManager newData) {
+        taskManager.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskManager getAddressBook() {
+        return taskManager;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new TaskManagerChangedEvent(addressBook));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException {
-        addressBook.removeTask(target);
+        taskManager.removeTask(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
+    //@@author A0141872E
     public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        int addressBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
-        addressBook.updateTask(addressBookIndex, editedTask);
+        int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskManager.updateTask(taskManagerIndex, editedTask);
         indicateAddressBookChanged();
     }
+
+    public void markTask(ReadOnlyTask taskToMark, String parameter) throws DuplicateMarkingException {
+        taskManager.markTask(taskToMark, parameter);
+        indicateAddressBookChanged();
+    }//@@author
 
 //=========== Filtered Task List Accessors =============================================================
 
@@ -238,10 +245,10 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             switch (parameter){
-                case LIST_DONE:
+                case DONE:
                     return task.isDone();
 
-                case LIST_UNDONE:
+                case UNDONE:
                     return !task.isDone();
 
                 case LIST_OVERDUE:
@@ -256,13 +263,13 @@ public class ModelManager extends ComponentManager implements Model {
                     return !task.isDone() && task.getEnd().isDateEqualCurrentDate();
 
                 case LIST_FLOATING:
-                    return task.isFloating();
+                    return !task.isDone() && task.isFloating();
 
                 case LIST_EVENT:
-                    return task.isEvent();
+                    return !task.isDone() && task.isEvent();
 
                 case LIST_DEADLINE:
-                    return task.isDeadline();
+                    return !task.isDone() && task.isDeadline();
 
                 default:
                     return false;
@@ -281,11 +288,11 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/functions used for filtering =================================================
 
     private static class State {
-        final ReadOnlyAddressBook data;
+        final ReadOnlyTaskManager data;
         final Predicate<? super ReadOnlyTask> filterPredicate;
 
         public State(ModelManager mm) {
-            data = new AddressBook(mm.getAddressBook());
+            data = new TaskManager(mm.getAddressBook());
             filterPredicate = mm.filteredTasks.getPredicate();
         }
     }

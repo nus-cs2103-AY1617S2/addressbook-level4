@@ -4,16 +4,34 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import seedu.taskit.logic.commands.SelectCommand;
+import seedu.taskit.commons.core.Messages;
 import seedu.taskit.model.task.ReadOnlyTask;
 
+//@@author A0141011J
 public class SelectCommandTest extends AddressBookGuiTest {
 
 
     @Test
-    public void selectTask_nonEmptyList() {
-
-        assertSelectionInvalid(10); // invalid index
+    public void selectTask_invalidIndex() {
+        assertSelectionInvalid(100); // invalid index
         assertNoTaskSelected();
+
+        commandBox.runCommand("select -1"); // negative index
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertNoTaskSelected();
+    }
+
+    @Test
+    public void selectTask_incorrectCommand() {
+        //Invalid command input
+        commandBox.runCommand("select hw");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,SelectCommand.MESSAGE_USAGE));
+        assertNoTaskSelected();
+    }
+
+    @Test
+    public void selectTask_nonEmptyList_success() {
 
         assertSelectionSuccess(1); // first task in the list
         int taskCount = td.getTypicalTasks().length;
@@ -36,12 +54,14 @@ public class SelectCommandTest extends AddressBookGuiTest {
 
     private void assertSelectionInvalid(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     private void assertSelectionSuccess(int index) {
         commandBox.runCommand("select " + index);
-        assertResultMessage("Selected Task: " + index);
+        ReadOnlyTask task = taskListPanel.getTask(index - 1);
+        String expectedMsg = String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, task.getTitle());
+        assertResultMessage(expectedMsg);
         assertTaskSelected(index);
     }
 
@@ -49,7 +69,6 @@ public class SelectCommandTest extends AddressBookGuiTest {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
         ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedTask);
-        //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {

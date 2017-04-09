@@ -11,6 +11,9 @@ import seedu.taskit.commons.exceptions.DuplicateDataException;
 import seedu.taskit.commons.util.CollectionUtil;
 import seedu.taskit.model.task.Task;
 
+import static seedu.taskit.logic.parser.CliSyntax.DONE;
+import static seedu.taskit.logic.parser.CliSyntax.UNDONE;
+
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
  *
@@ -70,6 +73,30 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
         sortTasks();
     }
+
+    //@@author A0141872E
+    /**
+     * Mark the task in the list {@code taskToMark} with {@code parameter}.
+     *
+     * @throws DuplicateMarkingException if task is already be marked as done or undone
+     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
+     */
+    public void markTask(ReadOnlyTask taskToMark,String parameter)
+            throws UniqueTaskList.DuplicateMarkingException {
+        assert taskToMark != null;
+
+        int index = internalList.indexOf(taskToMark);
+        Task targetTask = internalList.get(index);
+
+        if((taskToMark.isDone() == true && parameter.equals(DONE))
+                ||(taskToMark.isDone() == false && parameter.equals(UNDONE))) {
+            throw new DuplicateMarkingException();
+        }
+
+        targetTask.setDone(parameter);
+        internalList.set(index, targetTask);
+        sortTasks();
+    }//@@author
 
  // @@author A0163996J
 
@@ -137,6 +164,15 @@ public class UniqueTaskList implements Iterable<Task> {
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
             super("Operation would result in duplicate tasks");
+        }
+    }
+
+    /**
+     * Signals that an mark operation want to mark an done task as done or undone task as undone.
+     */
+    public static class DuplicateMarkingException extends DuplicateDataException {
+        protected DuplicateMarkingException() {
+            super("This task is alreadly marked");
         }
     }
 

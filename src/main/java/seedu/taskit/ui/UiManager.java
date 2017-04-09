@@ -27,7 +27,7 @@ import seedu.taskit.model.UserPrefs;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/taskit_icon.png";
+    private static final String ICON_APPLICATION = "/images/taskIt_icon.png";
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private Logic logic;

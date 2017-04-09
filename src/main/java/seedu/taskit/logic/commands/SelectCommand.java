@@ -27,6 +27,7 @@ public class SelectCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    //@@author A0141011J
     @Override
     public CommandResult execute() throws CommandException {
 
@@ -37,9 +38,8 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex - 1));
-        ReadOnlyTask selected = lastShownList.get(targetIndex);
+        ReadOnlyTask selected = lastShownList.get(targetIndex - 1);
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, selected.getTitle()));
-
     }
 
 }

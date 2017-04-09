@@ -8,6 +8,7 @@ import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.Date;
 import static seedu.taskit.commons.core.Messages.MESSAGE_INVALID_START_DATE;
+import static seedu.taskit.logic.parser.CliSyntax.DONE;
 
 public class Task implements ReadOnlyTask, Comparable<Task>{
 
@@ -185,7 +186,7 @@ public class Task implements ReadOnlyTask, Comparable<Task>{
     }
 
     public void setDone(String status) {
-        if(status.equals("done")) {
+        if(status.equals(DONE)) {
             isDone = true;
         } else {
             isDone = false;

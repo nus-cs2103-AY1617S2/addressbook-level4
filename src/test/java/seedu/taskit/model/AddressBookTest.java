@@ -14,8 +14,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.taskit.model.AddressBook;
-import seedu.taskit.model.ReadOnlyAddressBook;
+import seedu.taskit.model.TaskManager;
+import seedu.taskit.model.ReadOnlyTaskManager;
 import seedu.taskit.model.tag.Tag;
 import seedu.taskit.model.task.ReadOnlyTask;
 import seedu.taskit.model.task.Task;
@@ -26,7 +26,7 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TaskManager addressBook = new TaskManager();
 
     @Test
     public void constructor() {
@@ -42,7 +42,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager newData = new TypicalTestTasks().getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -61,7 +61,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateTags_throwsAssertionError() {
-        AddressBook typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
+        TaskManager typicalAddressBook = new TypicalTestTasks().getTypicalAddressBook();
         List<ReadOnlyTask> newTasks = typicalAddressBook.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalAddressBook.getTagList());
         // Repeat the first tag twice
@@ -75,7 +75,7 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose tasks and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 

@@ -22,10 +22,10 @@ import seedu.taskit.commons.util.ConfigUtil;
 import seedu.taskit.commons.util.StringUtil;
 import seedu.taskit.logic.Logic;
 import seedu.taskit.logic.LogicManager;
-import seedu.taskit.model.AddressBook;
+import seedu.taskit.model.TaskManager;
 import seedu.taskit.model.Model;
 import seedu.taskit.model.ModelManager;
-import seedu.taskit.model.ReadOnlyAddressBook;
+import seedu.taskit.model.ReadOnlyTaskManager;
 import seedu.taskit.model.UserPrefs;
 import seedu.taskit.model.util.SampleDataUtil;
 import seedu.taskit.storage.Storage;
@@ -76,8 +76,8 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
+        ReadOnlyTaskManager initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -86,10 +86,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new TaskManager();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -199,7 +199,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
 
-            ReadOnlyAddressBook currentTaskManager = model.getAddressBook();
+            ReadOnlyTaskManager currentTaskManager = model.getAddressBook();
 
             //reset the storage object to the new file path and save the current task manager into it
             storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());

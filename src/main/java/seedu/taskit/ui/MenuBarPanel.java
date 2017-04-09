@@ -20,26 +20,26 @@ public class MenuBarPanel extends UiPart<Region> {
     private static final String FXML = "MenuBarPanel.fxml";
 
     public static final String MENU_HOME = "Home";
+    public static final String MENU_TODAY_TASK = "Today";
+    public static final String MENU_OVERDUE_TASK = "Overdue";
     public static final String MENU_FLOATING_TASK = "Simple Tasks";
     public static final String MENU_EVENT_TASK = "Event";
     public static final String MENU_DEADLINE_TASK = "Deadline";
-    public static final String MENU_TODAY_TASK = "Today";
-    public static final String MENU_OVERDUE_TASK = "Overdue";
 
     private static final String HOME_ICON_PATH = "/images/home_icon.png";
+    private static final String TODAY_TASK_ICON_PATH = "/images/today_icon.png";
+    private static final String OVERDUE_TASK_ICON_PATH = "/images/overdue_icon.png";
     private static final String FLOATING_TASK_ICON_PATH = "/images/floatingtask_icon.png";
     private static final String EVENT_TASK_ICON_PATH = "/images/event_icon.png";
     private static final String DEADLINE_TASK_ICON_PATH = "/images/deadline_icon.png";
-    private static final String TODAY_TASK_ICON_PATH = "/images/today_icon.png";
-    private static final String TODAY_OVERDUE_ICON_PATH = "/images/overdue_icon.png";
 
     @FXML
     private ListView<String> menuBarView;
 
-    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_HOME,MENU_FLOATING_TASK,
-            MENU_EVENT_TASK, MENU_DEADLINE_TASK, MENU_TODAY_TASK,MENU_OVERDUE_TASK);
-    private final String[] iconPaths = {HOME_ICON_PATH,FLOATING_TASK_ICON_PATH,EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH,
-            TODAY_TASK_ICON_PATH,TODAY_OVERDUE_ICON_PATH};
+    private final ObservableList<String> menuBarItems = FXCollections.observableArrayList(MENU_HOME, MENU_TODAY_TASK,
+            MENU_OVERDUE_TASK, MENU_FLOATING_TASK, MENU_EVENT_TASK, MENU_DEADLINE_TASK);
+    private final String[] iconPaths = {HOME_ICON_PATH, TODAY_TASK_ICON_PATH, OVERDUE_TASK_ICON_PATH,
+            FLOATING_TASK_ICON_PATH, EVENT_TASK_ICON_PATH, DEADLINE_TASK_ICON_PATH};
 
     public MenuBarPanel(AnchorPane menuBarPanelPlaceholder) {
         super(FXML);
