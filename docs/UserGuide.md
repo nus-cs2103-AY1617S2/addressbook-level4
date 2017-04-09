@@ -117,13 +117,15 @@ Undo is the command word to erase the last change done. The system supports up t
 Format : `undo`
 
 Example:
-* `delete 1` >> `undo` (to retrieve the previously deleted task)
+* _initial taskbook_
 
 <img src="images/Undo1_JOBS.png" width="450"><br>
-_after_ `delete 1`
+
+* _after_ `delete 1`
 
 <img src="images/Undo2_JOBS.png" width="450"><br>    
-_after_ `undo`
+
+* _after_ `undo` _it will reverse the change_
 
 <img src="images/Undo3_JOBS.png" width="450"><br>
 
