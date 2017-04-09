@@ -153,11 +153,9 @@ public class AddCommand extends Command {
     private CommandResult addingEvent() throws DuplicateEventException {
         model.addEvent(toAddEvent);
 
-        //@@authour A0148038A
         UnmodifiableObservableList<ReadOnlyEvent> lastShownList = model.getFilteredEventList();
         EventsCenter.getInstance().post(new JumpToEventListRequestEvent(lastShownList.indexOf(toAddEvent)));
 
-        //@@author A0110491U
         if (!toAddEvent.isOver()) {
             EventsCenter.getInstance().post(new JumpToCalendarEventEvent(toAddEvent));
         }

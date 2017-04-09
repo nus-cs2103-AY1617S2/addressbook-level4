@@ -19,7 +19,9 @@ public class StringUtil {
     public static final String TIME_FORMAT_CONSTRAINTS = "Time arguments can only be in this format: "
                             + "HHMM format, e.g. 1200";
     public static final String DATE_FORMAT_CONSTRAINTS = "Date arguments can take only 6 digits, "
-                            + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417";
+                            + "and it should be in DDMMYY format (Day-Month-Year), e.g. 060417\n"
+                            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also acceptable\n"
+                            + "Example: next fri\n";
     public static final int YEAR_CONVERSION_INDEX = 2000;
 
     public static final String DATE_VALIDATION_REGEX = "([0123][\\d])([01][\\d])([\\d][\\d])";

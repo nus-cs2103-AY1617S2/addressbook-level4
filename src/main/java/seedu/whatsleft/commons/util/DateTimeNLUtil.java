@@ -16,8 +16,8 @@ import seedu.whatsleft.commons.exceptions.IllegalValueException;
 public class DateTimeNLUtil {
 
     public static final String MESSAGE_DATELANG_CONSTRAINTS = "natural language function only supports"
-            + "modifiers like next, following as well as relative days like today, tmr as well as absolute"
-            + "days like mon, tue, wed, thu, fri, sat, sun";
+            + " modifiers like next, following as well as relative days like today, tmr as well as absolute"
+            + " days like mon, tue, wed, thu, fri, sat, sun and their full length versions";
     LocalDate today;
     EnumMap<Modifier, Integer> modmap = new EnumMap<Modifier, Integer>(Modifier.class);
     EnumMap<RelativeDay, Integer> relativedaymap = new EnumMap<RelativeDay, Integer>(RelativeDay.class);

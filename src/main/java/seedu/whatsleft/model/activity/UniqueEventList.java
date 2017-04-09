@@ -42,7 +42,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     //@@author A0110491U
     /**
-     *
+     * Checks whether there is a clashing event
      * @param toCheck
      * @return true if the list contains an event that clashes in time with the given argument
      */

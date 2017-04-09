@@ -16,7 +16,7 @@ public class ByDate {
 
     public static final String MESSAGE_BYDATE_CONSTRAINTS =
             "Task ByDate can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)\n"
-            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also accecptable\n"
+            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also acceptable\n"
             + "Example: next fri\n"
             + "Example: 250317\n";
 
@@ -63,7 +63,6 @@ public class ByDate {
      * @param a by date string to be checked
      * @returns a boolean variable, true if it is valid, false otherwise
      */
-    //@@author A0110491U
     public static boolean isValidByDate(String args) {
         try {
             StringUtil.parseStringToDate(args);

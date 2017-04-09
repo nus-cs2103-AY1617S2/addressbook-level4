@@ -55,7 +55,8 @@ public class ClearCommand extends Command {
             //store for undo operation
             model.storePreviousCommand("clear");
             return new CommandResult(CLEAR_TASKS_SUCCESS);
-        } else { //clear all events and tasks if no type is specified
+        } else {
+            //clear all events and tasks if no type is specified
             logger.info("-------[Executing ClearAllCommand] " + this.toString());
             assert model != null;
             ReadOnlyWhatsLeft currState = model.getWhatsLeft();

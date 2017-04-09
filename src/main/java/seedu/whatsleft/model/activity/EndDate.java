@@ -16,7 +16,7 @@ public class EndDate {
 
     public static final String MESSAGE_ENDDATE_CONSTRAINTS =
             "Event End Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)\n"
-            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also accecptable\n"
+            + "today, tmr, mon, tue, wed, thur, fri, sat, sun, next, following are also acceptable\n"
             + "Example: next fri\n"
             + "Example: 250317\n";
 
