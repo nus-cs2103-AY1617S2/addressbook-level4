@@ -15,7 +15,7 @@ import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.AliasListMap;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
-//@@author A0140887W
+//@@author A0140887W-reused
 public class XmlAliasListMapStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAliasListMapStorageTest/");
 
