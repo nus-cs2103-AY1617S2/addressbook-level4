@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.tache.logic.parser.CliSyntax;
 import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
@@ -101,6 +102,21 @@ public class TestTask implements ReadOnlyTask {
         if (this.getEndDateTime().isPresent()) {
             sb.append(" to " + sdf.format(this.getEndDateTime().get().getDate()));
         }
+        switch (this.getRecurState().getRecurInterval()) {
+        case DAY:
+            sb.append(" " + CliSyntax.RECURRENCE_IDENTIFIER_DAILY[0]);
+            break;
+        case WEEK:
+            sb.append(" " + CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY[0]);
+            break;
+        case MONTH:
+            sb.append(" " + CliSyntax.RECURRENCE_IDENTIFIER_MONTHLY[0]);
+            break;
+        case YEAR:
+            sb.append(" " + CliSyntax.RECURRENCE_IDENTIFIER_YEARLY[0]);
+            break;
+        default:
+        }
         if (this.getTags().iterator().hasNext()) {
             sb.append(" t/ ");
         }
@@ -146,6 +162,7 @@ public class TestTask implements ReadOnlyTask {
         }
 
     };
+
     //@@author A0139925U
     @Override
     public RecurState getRecurState() {

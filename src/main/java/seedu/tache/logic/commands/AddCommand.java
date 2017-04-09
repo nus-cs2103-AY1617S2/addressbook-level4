@@ -69,7 +69,7 @@ public class AddCommand extends Command implements Undoable {
 
         UniqueTagList tagList = new UniqueTagList(tagSet);
         this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true,
-                                    RecurInterval.NONE, new ArrayList<Date>());
+                                    recurInterval.orElse(RecurInterval.NONE), new ArrayList<Date>());
         commandSuccess = false;
     }
 
