@@ -306,6 +306,25 @@ Examples:
 * `load` task_manager_old.xml
 * `load` data/saved_task_manager.xml
 
+### 2.13. Revert the previous change : `undo`
+
+Undo the previous change made to the task manager.
+Format: `undo`
+> * The undo command is able to undo all changes made after the application is opened.
+> * When there is nothing to undo, an error message will be shown.
+
+Examples:
+* `undo`
+
+### 2.14. Revert the previous undo change: `redo`
+
+Revert the previous undo change to the task manager.
+Format: `redo`
+> * The redo command is able to redo multiple undos.
+
+Examples:
+* `redo`
+
 ## 3. Notes on Recurring Tasks
 
 Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports
