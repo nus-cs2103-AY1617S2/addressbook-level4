@@ -31,13 +31,13 @@
 
 * The original source of this code comes from the SE-EDU initiative at https://github.com/se-edu/.
 
-* The project requires the use of some 3rd party open-source libraries, listed below:
-	*[PrettyTime](http://www.ocpsoft.org/prettytime/)
-	*[PrettyTime-NLP](http://ocpsoft.org/prettytime/nlp/)
-	*[JKeyMaster](https://github.com/tulskiy/jkeymaster)
-	*[Natty](https://github.com/joestelmach/natty)
-	*[Guava](https://github.com/google/guava)
-	*[Jackson](https://github.com/FasterXML/jackson),  which is used for JSON parsing
-	*[ControlsFX](http://fxexperience.com/controlsfx/)
+* The project requires the use of some 3rd party open-source libraries, listed below:<br>
+	* [PrettyTime](http://www.ocpsoft.org/prettytime/)<br>
+	* [PrettyTime-NLP](http://ocpsoft.org/prettytime/nlp/)<br>
+	* [JKeyMaster](https://github.com/tulskiy/jkeymaster)<br>
+	* [Natty](https://github.com/joestelmach/natty)<br>
+	* [Guava](https://github.com/google/guava)<br>
+	* [Jackson](https://github.com/FasterXML/jackson)<br>
+	* [ControlsFX](http://fxexperience.com/controlsfx/)<br>
 
 #### Licence : [MIT](LICENSE)
