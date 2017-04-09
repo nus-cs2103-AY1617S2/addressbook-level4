@@ -374,7 +374,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | delete date/time on task | remove timings on a certain task I no longer need
 `* *` | user | clear all tasks | easily remove all tasks
 `*` | user | change storage location of all tasks | flexibly organise my task storage
-`*` | user with many tasks | see graphical overview of tasks | plan better
 
 ## Appendix B : Use Cases
 
@@ -507,7 +506,7 @@ Use case ends.
 **MSS**
 
 1. User requests to find task to do today
-2. TaskManager shows a list of tasks with deadlines/reminder scheduled today
+2. TaskManager shows a list of tasks with deadlines scheduled today
 3. User selects a task to view in detail
 4. TaskManager shows details of the selected task. <br>
 Use case ends.
@@ -573,7 +572,32 @@ Use case ends.
 
 1a. The input is not valid
 
-> The TaskManager asks for the correct input <br>
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+1b. The given keyword is not valid
+
+> The TaskManager alerts the invlad keyword and shows a sorted list of tasks according to their end dates by default <br>
+  Use case ends
+
+#### Use case: UC09 - List all done tasks
+
+**MSS**
+
+1. User requests to list tasks that are marked as done
+2. TaskManager shows a list of tasks marked as done in the Done Tab <br>
+Use case ends.
+
+**Extensions**
+
+1a. The input is not valid
+
+> The TaskManager ask for the correct input <br>
+  Use case resumes at step 1
+
+1b. The given keyword is not valid
+
+> The TaskManager alerts the invlad keyword and list all tasks in the current tab <br>
   Use case resumes at step 1
 
 ## Appendix C : Non Functional Requirements
@@ -588,6 +612,7 @@ Use case ends.
 6. Commands should be processed within one second.
 7. User should always receive a feedback when a command is typed, even for invalid commands and unsuccessful processes.
 8. All functional methods should be documented properly.
+9. Should be wroking directly upon download without any installation process.
 
 ## Appendix D : Glossary
 
