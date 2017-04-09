@@ -13,6 +13,7 @@ Role: Developer <br>
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0164061N.md)]
    * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0164061N.md)]
+   * [[unused code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/unused/A0164061N.md)]
 * Other major contributions:
    * Wrote majority of User Guide
    * Was in charge of team scheduling and tracking
@@ -36,7 +37,7 @@ Role: Developer <br>
    * [Redo Command](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/docs/UserGuide.md)
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
-   * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0163845X.md)]
+   * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0163845X.md)]
 * Other major contributions:
    * Set up back end for file manipulation
    
@@ -51,6 +52,7 @@ Role: Developer <br>
 * Code written:
    * [[functional code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/main/A0146757R.md)]
    * [[test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0146757R.md)]
+   * [[reused test code](https://github.com/CS2103JAN2017-F11-B2/main/blob/master/collated/test/A0146757R-reused.md)]
 * Other major contributions:
    * Did the initial refactoring from AddressBook to Fast Task
    * Set up Travis and Coverage
