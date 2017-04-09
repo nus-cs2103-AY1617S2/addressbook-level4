@@ -48,6 +48,19 @@ Responsibilities: Storage, GitHub
 <img src="images/whycaiji.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Logic and Scheduling and Tracking
+* Component in Charge of: [Logic](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#23-logic-component)<br>
+* Features implemented:
+    * [Adding floating task](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#22-adding-a-task-add)
+    * [Complete Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#27-complete-a-task--complete)
+    * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#28-allocate-priority-to-a-task-prioritize)
+    * [Undo Command]()
+    * [Redo Command]()
+* Code written: [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0113795Y.md)[Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0113795Y.md)
+* Other major contributions:
+    * Refactored commands class files to align with Task Manager context
+    * Wrote test cases for GUI tests
+    * Implemented edit and delete command on single occurrence of a recurring task
+    * Modified ModelManager.java to align with features
 
 -----
 
