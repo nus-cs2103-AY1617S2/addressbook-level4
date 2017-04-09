@@ -71,9 +71,7 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-            int index = lastShownList.lastIndexOf(toAdd);
-            EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+            scrollTo();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
@@ -84,4 +82,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Scrolls to the newly added task.
+     */
+    private void scrollTo() {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+        int index = lastShownList.lastIndexOf(toAdd);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    }
 }

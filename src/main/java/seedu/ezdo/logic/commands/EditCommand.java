@@ -78,9 +78,16 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_RECUR_FAILURE);
         }
         model.updateFilteredListToShowAll();
-        lastShownList = model.getFilteredTaskList(); // to scroll to edited task
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(lastShownList.lastIndexOf(editedTask)));
+        lastShownList = model.getFilteredTaskList();
+        scrollTo(editedTask, lastShownList);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+    }
+
+    /**
+     * Scrolls to the newly edited task
+     */
+    private void scrollTo(Task editedTask, List<ReadOnlyTask> lastShownList) {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(lastShownList.lastIndexOf(editedTask)));
     }
     //@@author
     /**
