@@ -110,7 +110,7 @@ public abstract class TaskManagerGuiTest {
 	 */
 	protected TaskManager getInitialData() {
 		TaskManager ab = new TaskManager();
-		TypicalTestEvents.loadAddressBookWithSampleData(ab);
+		TypicalTestEvents.loadTaskManagerWithSampleData(ab);
 		return ab;
 	}
 

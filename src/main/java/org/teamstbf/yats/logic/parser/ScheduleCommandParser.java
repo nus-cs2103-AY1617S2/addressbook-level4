@@ -37,8 +37,8 @@ public class ScheduleCommandParser {
 	 * AddCommand and returns an AddCommand object for execution.
 	 */
 	public Command parse(String args) {
-		ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_NLP_TIME, PREFIX_NLP_LOCATION, PREFIX_NLP_TAG,
-				PREFIX_NLP_DESCRIPTION, PREFIX_HOURS, PREFIX_MINUTES);
+		ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_LOCATION, PREFIX_TAG,
+				PREFIX_DESCRIPTION, PREFIX_HOURS, PREFIX_MINUTES);
 		argsTokenizer.tokenize(args);
 		try {
 			HashMap<String, Object> addParam = new HashMap<>();
@@ -46,7 +46,6 @@ public class ScheduleCommandParser {
 			addParam.put("location", argsTokenizer.getValue(PREFIX_LOCATION).orElse(null));
 			addParam.put("description", argsTokenizer.getValue(PREFIX_DESCRIPTION).orElse(null));
 			addParam.put("tag", ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG)));
-			addParam.put("recurrence", argsTokenizer.getValue(PREFIX_RECURRENCE).orElse(null));
 			addParam.put("hours", argsTokenizer.getValue(PREFIX_HOURS).orElse(null));
 			addParam.put("minutes", argsTokenizer.getValue(PREFIX_MINUTES).orElse(null));
 			return new ScheduleCommand(addParam);

@@ -24,7 +24,9 @@ public class TestEvent implements ReadOnlyEvent {
 	private UniqueTagList tags;
 	private boolean isRecurring;
 	private Recurrence recurrence;
-
+	private String hours;
+	private String minutes;
+	
 	public TestEvent() {
 		tags = new UniqueTagList();
 	}
@@ -45,14 +47,33 @@ public class TestEvent implements ReadOnlyEvent {
 
 	public String getAddCommand() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("add " + this.getTitle().fullName + ", ");
+		sb.append("add " + this.getTitle().fullName + " ");
 		sb.append("-s " + this.getStartTime().toString() + " ");
 		sb.append("-e " + this.getEndTime().toString() + " ");
-		sb.append("" + this.getDeadline().toString() + "");
+		sb.append("-by " + this.getDeadline().toString() + "");
 		sb.append("-l " + this.getLocation().value + " ");
 		sb.append("-d " + this.getDescription().value + " ");
 		this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
 		return sb.toString();
+	}
+	
+	public String getScheduleCommand() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("schedule " + this.getTitle().fullName + " ");
+		sb.append("-l " + this.getLocation().value + " ");
+		sb.append("-d " + this.getDescription().value + " ");
+		sb.append("-h " + this.getHours() + " ");
+		sb.append("-m " + this.getMinutes() + " ");
+		this.getTags().asObservableList().stream().forEach(s -> sb.append("-t " + s.tagName + " "));
+		return sb.toString();
+	}
+
+	private String getMinutes() {
+		return this.hours;
+	}
+
+	private String getHours() {
+		return this.minutes;
 	}
 
 	@Override
@@ -173,5 +194,13 @@ public class TestEvent implements ReadOnlyEvent {
 	@Override
 	public boolean isRecurring() {
 		return this.isRecurring;
+	}
+
+	public void setHours(String myHours) {
+		this.hours = myHours;
+	}
+	
+	public void setMinutes(String myMinutes) {
+		this.minutes = myMinutes;
 	}
 }

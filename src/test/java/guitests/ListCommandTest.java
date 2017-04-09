@@ -14,7 +14,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 	@Test
 	public void list_nonEmptyList() {
 		/** lists all tasks in the list */
-		assertListAllResult("list", td.abdicate, td.boop, td.oxygen, td.cower, td.duck);
+		assertListAllResult("list", td.abdicate, td.boop, td.oxygen, td.cower, td.scheduleChecker);
 
 		/** lists all done tasks in the list */
 		assertListResult("list done");
@@ -22,13 +22,13 @@ public class ListCommandTest extends TaskManagerGuiTest {
 		/**
 		 * lists all tasks in the primary list that starts on 9th April
 		 */
-		assertListResult("list by start 08/04/2017", td.abdicate, td.oxygen, td.cower);
+		assertListResult("list by start 08/04/2017", td.abdicate, td.oxygen, td.cower, td.scheduleChecker);
 
 		/** lists all tasks in the primary list that ends on 8th April */
 		assertListResult("list by end 08/04/2017", td.abdicate, td.oxygen, td.cower);
 
 		/** lists all tasks in the primary list that has deadline 8th April */
-		assertListResult("list by deadline 08/04/2017", td.boop, td.duck);
+		assertListResult("list by deadline 08/04/2017", td.boop);
 
 		/** lists all tasks in the primary list that has the location NUS */
 		assertListResult("list by location The Wall", td.cower);

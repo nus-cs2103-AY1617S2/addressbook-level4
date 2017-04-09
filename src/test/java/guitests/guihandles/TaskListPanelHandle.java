@@ -50,6 +50,59 @@ public class TaskListPanelHandle extends GuiHandle {
 	public boolean isListMatching(ReadOnlyEvent... events) {
 		return this.isListMatching(0, events);
 	}
+	
+	/**
+	 * Returns true if the list is showing the person details correctly without order.
+	 *
+	 * @param expectedList
+	 *            A list of person in the correct order.
+	 */
+	public boolean isListMatchingWithoutOrder(ReadOnlyEvent... events) {
+		return this.isListMatchingWithoutOrder(0, events);
+	}
+	
+	/**
+	 * Returns true if the list is showing the person details correctly without order.
+	 *
+	 * @param expectedList
+	 *            A list of person in the correct order.
+	 */
+	public boolean isListMatchingWithoutOrder(int startPosition, ReadOnlyEvent... events) {
+		if (events.length + startPosition != getListView().getItems().size()) {
+			throw new IllegalArgumentException(
+					"List size mismatched\n" + "Expected " + (getListView().getItems().size() - 1) + " events");
+		}
+		assertTrue(this.contains(startPosition, events));
+		for (int i = 0; i < events.length; i++) {
+			final int scrollTo = i + startPosition;
+			guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+			guiRobot.sleep(200);
+			if (!TestUtil.compareCardAndEvent(getEventCardHandle(startPosition + i), events[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Returns true if the {@code persons} appear as the sub list in any order.
+	 */
+	private boolean contains(int startPosition, ReadOnlyEvent[] events) {
+		List<ReadOnlyEvent> eventsInList = getListView().getItems();
+		boolean found;
+		for (int i = 0; i < events.length; i++) {
+			found = false;
+			for (int j = 0; j < eventsInList.size(); j++) {
+				if (eventsInList.get(startPosition + i).getTitle().fullName.equals(events[j].getTitle().fullName)) {
+					found = true;
+				}
+			}
+			if (!found) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Returns true if the list is showing the person details correctly and in

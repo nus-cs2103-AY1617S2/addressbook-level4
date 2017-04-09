@@ -79,4 +79,14 @@ public class EventBuilder {
 		this.task.setRecurrence(recur);
 		return this;
 	}
+	
+	public EventBuilder withHours(String hours) {
+		this.task.setHours(hours);
+		return this;
+	}
+	
+	public EventBuilder withMinutes(String minutes) {
+		this.task.setMinutes(minutes);
+		return this;
+	}
 }
