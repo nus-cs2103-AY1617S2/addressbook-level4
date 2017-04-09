@@ -20,63 +20,6 @@ public class ListCommandParser extends CommandParser {
         updateFilteredTaskList(new PredicateExpression(new DoneQualifier(value)));
     }
 ```
-###### /java/seedu/task/model/ModelManager.java
-``` java
-    // @Override
-    // public void updateFilteredTaskList(Date date) {
-    // updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-    // }
-
-    @Override
-    public void updateFilteredTaskList(Set<String> keywords, Date date, boolean isexact) {
-        // TODO Auto-generated method stub
-        updateFilteredTaskList(new PredicateExpression(new StringAndDateQualifier(keywords, date)));
-    }
-
-    private void updateFilteredTaskList(Expression expression) {
-        filteredTasks.setPredicate(expression::satisfies);
-    }
-
-    public UserPrefs getUserPrefs() {
-        return userPrefs;
-    }
-
-    // ========== Inner classes/interfaces used for filtering =================================================
-
-    interface Expression {
-        boolean satisfies(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-    private class PredicateExpression implements Expression {
-
-        private final Qualifier qualifier;
-
-        PredicateExpression(Qualifier qualifier) {
-            this.qualifier = qualifier;
-        }
-
-        @Override
-        public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(task);
-        }
-
-        @Override
-        public String toString() {
-            return qualifier.toString();
-        }
-    }
-
-    interface Qualifier {
-        boolean run(ReadOnlyTask task);
-
-        @Override
-        String toString();
-    }
-
-```
 ###### /java/seedu/task/ui/TaskListPanel.java
 ``` java
         @Override

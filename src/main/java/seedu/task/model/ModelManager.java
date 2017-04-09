@@ -211,12 +211,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    //@@author A0139975J
     @Override
     public void updateFilteredTaskListFloat() {
         updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
     }
-
+    //@@author
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
         updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, isExact)));
