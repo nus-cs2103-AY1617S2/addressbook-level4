@@ -4,14 +4,51 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import seedu.opus.logic.commands.AddCommand;
+import seedu.opus.logic.commands.ClearCommand;
+import seedu.opus.logic.commands.DeleteCommand;
+import seedu.opus.logic.commands.EditCommand;
+import seedu.opus.logic.commands.ExitCommand;
+import seedu.opus.logic.commands.FindCommand;
+import seedu.opus.logic.commands.HelpCommand;
+import seedu.opus.logic.commands.ListCommand;
+import seedu.opus.logic.commands.MarkCommand;
+import seedu.opus.logic.commands.RedoCommand;
+import seedu.opus.logic.commands.SaveCommand;
+import seedu.opus.logic.commands.ScheduleCommand;
+import seedu.opus.logic.commands.SortCommand;
+import seedu.opus.logic.commands.SyncCommand;
+import seedu.opus.logic.commands.UndoCommand;
+
 //@@author A0124368A
 public class AutocompleteTest extends TaskManagerGuiTest {
 
-    private static final String[] COMMANDS_ONE_TAB = { "add", "delete", "edit", "mark", "save", "list",
-        "help", "find", "undo", "redo", "clear" };
-    private static final String[] COMMANDS_TWO_TAB = { "schedule", "exit" };
-    private static final String[] COMMANDS_THREE_TAB = { "sync" };
-    private static final String[] COMMANDS_FOUR_TAB = { "sort" };
+    private static final String[] COMMANDS_ONE_TAB = {
+        AddCommand.COMMAND_WORD,
+        DeleteCommand.COMMAND_WORD,
+        EditCommand.COMMAND_WORD,
+        MarkCommand.COMMAND_WORD,
+        SaveCommand.COMMAND_WORD,
+        ListCommand.COMMAND_WORD,
+        HelpCommand.COMMAND_WORD,
+        FindCommand.COMMAND_WORD,
+        UndoCommand.COMMAND_WORD,
+        RedoCommand.COMMAND_WORD,
+        ClearCommand.COMMAND_WORD
+    };
+
+    private static final String[] COMMANDS_TWO_TAB = {
+        ScheduleCommand.COMMAND_WORD,
+        ExitCommand.COMMAND_WORD
+    };
+
+    private static final String[] COMMANDS_THREE_TAB = {
+        SyncCommand.COMMAND_WORD
+    };
+
+    private static final String[] COMMANDS_FOUR_TAB = {
+        SortCommand.COMMAND_WORD
+    };
 
     @Test
     public void testAutocompleteEmptyCommand() {
