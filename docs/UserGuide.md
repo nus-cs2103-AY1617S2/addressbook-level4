@@ -102,6 +102,8 @@ Take note of some general information for our commands : <br>
 
 - Command History: Use <kbd>↑</kbd> and <kbd>↓</kbd> to scroll through previously typed commands. You won't have to remember what you have previously typed! <br>
 
+- Quick Navigation: Use <kbd>Esc</kbd> to enter navigation mode. In navigation mode, you can use <kbd>j</kbd> and <kbd>k</kbd> to scroll through the tasks up and down respectively. To exit navigation mode and to resume normal typing, press <kbd>Esc</kbd> again.
+
 
 ### 3.1 Viewing help : `help`
 
