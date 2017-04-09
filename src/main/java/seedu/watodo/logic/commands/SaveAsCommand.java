@@ -12,6 +12,7 @@ import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.exceptions.DataConversionException;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.ConfigUtil;
+import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.storage.XmlTaskListStorage;
 
 //@@author A0141077L
@@ -25,7 +26,7 @@ public class SaveAsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a copy of the current task list "
             + "to the new specified file path and uses that file path.\n"
             + "File path must end with .xml\n"
-            + "Parameters: FILE_PATH.xml\n"
+            + "Parameters: FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " data/watodo2.xml";
 
     public static final String MESSAGE_DUPLICATE_FILE_PATH = "New storage file location must be "
@@ -57,7 +58,7 @@ public class SaveAsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         try {
             checkFilePaths();
             copyFileData();
@@ -65,7 +66,7 @@ public class SaveAsCommand extends Command {
             logSuccess();
         } catch (IllegalValueException | IOException e) {
             e.printStackTrace();
-            return new CommandResult (e.getMessage());
+            throw new CommandException (e.getMessage());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newFilePath));
     }
