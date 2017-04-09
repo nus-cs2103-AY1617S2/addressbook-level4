@@ -19,7 +19,8 @@ public class AddCalendar extends BasicCommandCalendar {
         toAdd = new EventCalendar(inputTask);
         service = inputCalendar;
         try {
-            this.execute();
+            if (!isExist(toAdd))
+            	this.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,5 +50,11 @@ public class AddCalendar extends BasicCommandCalendar {
 
         String calendarId = "primary";
         event = service.events().insert(calendarId, event).execute();
+    }
+    
+    public boolean isExist (EventCalendar toAdd) throws IOException {
+    	if (retrieveID(toAdd).equals(""))
+    		return false;
+    	return true;
     }
 }

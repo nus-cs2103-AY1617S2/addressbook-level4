@@ -12,13 +12,13 @@ public class EventCalendar {
     public EventCalendar(Task task) {
     	setSummary(task.getName().toString());
     	
-    	if(task.getStartTime().toString()=="") {
+    	if(task.getStartTime().toString().equals("")) {
     		setStartTime(new TimeCalendar(task.getEndTime()));
         } else {
         	setStartTime(new TimeCalendar(task.getStartTime()));
         }
 		
-		if(task.getEndTime().toString()=="") {
+		if(task.getEndTime().toString().equals("")) {
 			setEndTime(new TimeCalendar(task.getStartTime()));
         } else {
         	setEndTime(new TimeCalendar(task.getEndTime()));

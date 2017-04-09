@@ -30,9 +30,7 @@ allprojects {
 		jcenter()
 		mavenCentral()
         maven { url "https://repo.eclipse.org/content/repositories/egit-releases/" }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-
-        
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }   
     }
 
     // This part is similar to global variables
@@ -63,7 +61,6 @@ allprojects {
     }
 
     dependencies {     
-        compile "com.google.guava:guava:$guavaVersion"
         compile 'com.google.api-client:google-api-client:1.22.0'
 		compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
     	compile 'com.google.apis:google-api-services-calendar:v3-rev240-1.22.0'

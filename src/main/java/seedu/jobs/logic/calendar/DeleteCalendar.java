@@ -25,6 +25,7 @@ public class DeleteCalendar extends BasicCommandCalendar {
     
 	public void execute() throws IOException {
 		String id = retrieveID(targetEvent);
-		service.events().delete("primary", id).execute();
+		if (!(id.equals("")))
+				service.events().delete("primary", id).execute();
 	}
 }

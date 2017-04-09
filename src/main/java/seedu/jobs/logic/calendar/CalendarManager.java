@@ -18,6 +18,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 
+import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
@@ -125,6 +126,10 @@ public class CalendarManager {
 
     public void DeleteTask(ReadOnlyTask task) throws IllegalTimeException {
         new DeleteCalendar(task, service);
+    }
+    
+    public void LoadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
+    	new LoadCalendar(service, list);
     }
 
     public void EditTask(ReadOnlyTask initialTask, Task newTask) throws IllegalTimeException {
