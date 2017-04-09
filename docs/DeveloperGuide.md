@@ -25,7 +25,8 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
     2. [Branching and Workflow](#62-branching-and-workflow)
     3. [Commit Messages](#63-commit-messages)
 
-<br/>
+---
+
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
 * [Appendix B: Glossary](#appendix-b--glossary)
 * [Appendix C : Product Survey](#appendix-c--product-survey)
@@ -121,8 +122,8 @@ More information about using Gradle can be found [here](https://github.com/CS210
 <img src="images/Architecture.png" width="600"><br>
 _Figure 2.1.1 : Architecture Diagram_
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
-Given below is a quick overview of each component.
+The **_Architecture Diagram_** above explains the high-level design of the App.
+Below is a quick overview of each component.
 
 > Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
 > To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
@@ -130,8 +131,8 @@ Given below is a quick overview of each component.
 #### Main
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* Initializing the components in the correct sequence at app launch, and connects them up with each other.
+* Shutting down the components and invokes cleanup method where necessary on exit.
 
 #### Commons
 [**`Commons`**](#26-common-classes) represents a collection of classes used by multiple other components.
@@ -139,19 +140,19 @@ Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
   is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file for debugging and communication between developers.
+* `LogsCenter` : This class is used by many other classes to write log messages to the App's log file for debugging and communication between developers.
 
 #### User Interface (UI)
-The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program such as display the task lists.
+The [**`UI`**](#22-ui-component) represents graphical views and handles interactions between the user and the program.
 
 #### Logic
-The [**`Logic`**](#23-logic-component) accepts commands sent from the user pass it to the model to process.
+The [**`Logic`**](#23-logic-component) accepts commands sent from the user passes it to the model for processing.
 
 #### Model
-The [**`Model`**](#24-model-component) holds the data of the App in-memory and manage and update it accordingly to the commands received.
+The [**`Model`**](#24-model-component) holds the data of the App in-memory to manage and edit it accordingly to the commands received.
 
 #### Storage
-The [**`Storage`**](#25-storage-component) Reads data from and writes data to, the hard disk.
+The [**`Storage`**](#25-storage-component) Reads and write data to the hard disk.
 
 Each of the four components, [**`UI`**](#22-ui-component), [**`Logic`**](#23-logic-component),
 [**`Model`**](#24-model-component) and [**`Storage`**](#25-storage-component)
@@ -166,15 +167,14 @@ _Figure 2.1.2 : Class Diagram of the Logic Component_
 
 #### Events-Driven Architecture
 
-Event-driven architecture (EDA) consists of event emitters and receivers that allow loosely coupled components to communicate each other. The affected components react only when they receive events and process accordingly.
-The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 1`.
+Event-driven architecture (EDA) consists of event emitters and receivers that allow loosely coupled components to communicate with each other. The affected components react only when they receive events.
+The _Sequence Diagram_ below shows how the components interact when the user inputs the command `delete 1`.
 
 <img src="images/SDforDeleteTask.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `delete 1` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the TaskManager data are changed,
- instead of asking the `Storage` to save the updates to the hard disk.
+>Note how `Model` simply raises a `TaskManagerChangedEvent` when the TaskManager data is modified,
+ instead of asking `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
@@ -182,10 +182,10 @@ being saved to the hard disk and the status bar of the UI being updated to refle
 _Figure 2.1.3b : Component interactions for `delete 1` command (part 2)_
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
-  to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
+  to be coupled to either of them. This is an example of how Event Driven approach helps us reduce direct
   coupling between components.
 
-The sections below give more details of each component.
+The sections below give more details about each component.
 
 ### 2.2. UI component
 
@@ -209,9 +209,9 @@ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 | `SidePanel`       | Displays tasks that are due, or events that are starting in the current week |
 | `StatusBarFooter` | Displays the time when the app has be last updated and the storage file path |
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/opus/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component:
@@ -224,9 +224,9 @@ The `UI` component:
 
 Author: [Lam Guang Jun](http://github.com/gjlam95)
 
-The `Logic` component process all the business logic and incoming requests.
-It manipulates data based on the `Model` component and communicates with the `UI` component
-to display the final output.
+Logic provides APIs for the UI to execute the commands given by the user. The API of the logic component can be found at Logic.java.
+
+The class diagram of the Logic Component is given below. `LogicManager` implements the Logic interface and has exactly one `Parser`. `Parser` is responsible for processing the user command and creating instances of Command objects (eg. AddCommand). These will then be executed by the `LogicManager`. New command classes must implement the `Command` class. Each `Command` class produces exactly one `CommandResult`.
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
@@ -240,12 +240,23 @@ This section will elaborate on the functions of the `Logic` component; i.e how a
 4. The command execution will interact with the `Model` component (eg. adding a task), to create a new task.
 4. The result of the command execution is encapsulated as a `CommandResult` object which will be handed back to the `Ui` component and display the relevant results to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/DeleteTasksForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 In this diagram, the `Logic Manager` receives an event to delete the task from index 1 and parses into a `DeleteCommand` that communicates with the Model to perform the deletion. The result is passed back to the `UI` component through `CommandResult`.
+
+### 2.3.1 Sort implementation
+
+The sorting feature in Opus is designed using different attributes comparators implemented from `Comparators<ReadOnlyTask>`. This command allows users to perform their desired sorting according to the parameters given provided by them. The default sorting is given by the command `sort all`.
+
+Below is the Sequence Diagram for interactions within the `Logic` component for the `execute("sort all")`
+ API call.<br>
+<img src="images/SortTasksForLogic.png" width="800"><br>
+_Figure 2.3.2 : Interactions Inside the Logic Component for the `sort all` Command_
+
+In this diagram, the `Logic Manager` receives an event to sort the tasks according to firstly status, start date, end date, and finally priority and parses into a `DeleteCommand` that communicates with the Model to perform the sorting. The result is passed back to the `UI` component through `CommandResult`.
 
 ### 2.4. Model component
 
@@ -264,7 +275,7 @@ The `Model` component does not depend on other three components and consists of 
 
 The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
-#### 2.4.1 Undo/Redo implementation
+#### 2.4.1 Undo/Redo Implementation
 
 The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `originator` the component that generates the `momento` object and the `momento collector`.
 
@@ -273,13 +284,31 @@ Whenever the data object is modified, the `originator` sends a copy of the curre
 In Opus, we have:
 * `ModelManager` as the `originator`.
 * `TaskManagers` as `momento` objects.
-* `History` as the `momento collector`.
+* `TaskManagerStateHistory` as the `momento collector`.
 
 `History` contains two lists of `TaskManager`, one for the backwards `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `TaskManagerStateHistory`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
 
 Furthermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
+
+### 2.4.2. Sync/Google Task Implementation
+
+The `Sync` component is responsible for handling all sync operations in Opus.
+
+<img src="images/SyncClassDiagram.png" width="400"><br>
+_Figure 2.4.2 : Structure of the Sync Component_
+
+The `Sync` component is comprised of two main parts - the individual `SyncService` integration classes and `SyncManager` class. The `SyncManager` class manages all `SyncService` classes as well as delegating sync requests from Model to the corresponding `SyncService`.
+
+All sync integration is required to implement the `SyncService` interface to handle sync requests. This allows for easy extention of other sync integration into Opus without much changes to other components. 
+
+Presently, only Google Task integration is implemented as of *Release v0.5*. However, this implementation has the following limitaions:
+1. Supports one way synchronisation from Opus to Google Task.<br>
+>Google Task API rejects request calls to insert `Task` with an user-defined `Id`. This makes tracking of individual `Tasks` between Opus and Google Task difficult with the use of an unique identifer.<br>
+
+2. Supports floating tasks and tasks with `EndTime` only.<br>
+>Google Task does not include a `StartTime` field as part of their implementation of `Task`. Google Calendar, which supports events, can be considered as a solution in future release.<br>
 
 ### 2.5. Storage component
 
@@ -293,20 +322,26 @@ _Figure 2.5.1 : Structure of the Storage Component_
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component listens the `TaskManagerChangedEvent` and
-whenever there is a change to the task manager data, the component updates the storage files accordingly. It
+whenever there is a change to the task manager data, the component updates the storage files accordingly. The `Storage` has the following operations:
 
-* saves `UserPref` objects in JSON format and read it back.
-* saves the Task Manager data in XML format and read it back.
+* Saves `UserPref` objects in JSON format and read it back.
+* Saves the Task Manager data in XML format and read it back.
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.opus.commons` package.
+Classes used by multiple components can be found in the `seedu.opus.commons` package.
+
+### 2.7. Activity Diagram
+
+Below is the activity diagram to model Opus' workflow.
+
+<img src="images/activity_diagram.png" width="800"/><br/>
 
 ## 3. Implementation
 
 ### 3.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+We are using the default `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file
@@ -318,14 +353,14 @@ and logging destinations.
 **Logging Levels**
 
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `WARNING` : Application can still continue to run, but proceed with caution
+* `INFO` : Information showing noteworthy actions by the App
+* `FINE` : Details that are not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
 ### 3.2. Configuration
 
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
+Certain properties of the application can be cofigured (e.g App name, logging level) through the configuration file
 (default: `config.json`).
 
 
@@ -333,11 +368,13 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 ### 4.1. Code Quality
 
-In Opus, we aspire to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
+In Opus, we aspire to attain high quality coding standards by stricting following the Java coding standard and applying the principles of defensive programming. Maintaining a good coding standard enhances readability of the code and allows other developers to quickly grasp and understand Opus' implementation. The Java coding standard can be found [here](https://oss-generic.github.io/process/codingStandards/CodingStandard-Java.html).
+
+Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
 * Using Assertions to check validity of arguments before passing them into functions.
 * Throwing Excpetions when encountering unexpected events.
 * Enforcing 1-to-1 associations
-A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf)
+A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf).
 
 ### 4.2. Testing
 
@@ -361,13 +398,13 @@ We have two types of tests:
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.opus.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.opus.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.opus.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -395,10 +432,9 @@ Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
 
 ### 4.4. Troubleshooting tests
 
-#### 4.4.1. Tests fail because NullPointException when AssertionError is expected**
-    This is because Assertions are not enabled for JUnit tests.
-<br>1. Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
+#### 4.4.1. Tests fail because NullPointException when AssertionError is expected
+This is because Assertions are not enabled for JUnit tests.<br>
+1. Enable assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option).
 2. Delete run configurations created when you ran tests earlier.
 
 ## 5. Dev Ops
@@ -419,26 +455,22 @@ project site.
 
 ### 5.4. Making a Release
 
-Here are the steps to create a new release.
-
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
+ 3. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
     and upload the JAR file you created.
 
 ### 5.5. Converting Documentation to PDF format
 
-We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) for converting documentation to PDF format,
+We use [Google Chrome](https://www.google.com/chrome/browser/desktop/) to convert documentation into PDF format,
 as Chrome's PDF engine preserves hyperlinks used in webpages.
 
-Here are the steps to convert the project documentation files to PDF format.
-
  1. Make sure you have set up GitHub Pages as described in [UsingGithubPages.md](UsingGithubPages.md#setting-up).
- 1. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
+ 2. Using Chrome, go to the [GitHub Pages version](UsingGithubPages.md#viewing-the-project-site) of the
     documentation file. <br>
     e.g. For [UserGuide.md](UserGuide.md), the URL will be `https://<your-username-or-organization-name>.github.io/addressbook-level4/docs/UserGuide.html`.
- 1. Click on the `Print` option in Chrome's menu.
- 1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
+ 3. Click on the `Print` option in Chrome's menu.
+ 4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
     For best results, use the settings indicated in the screenshot below. <br>
     <img src="images/chrome_save_as_pdf.png" width="300"><br>
     _Figure 5.4.1 : Saving documentation as PDF files in Chrome_
@@ -450,8 +482,11 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 * [Guava](https://github.com/google/guava) `19.0`
 * [Jackson](https://github.com/FasterXML/jackson) `2.7.0`
 * [jUnit](http://junit.org/junit4/) `4.12`
-* [TestFx](https://github.com/TestFX/TestFX) `4.0`
+* [TestFx](https://github.com/TestFX/TestFX) `4.0.5-alpha`
 * [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
+* [Natty Date Parser](http://natty.joestelmach.com/) `0.6`
+* [Google Tasks API](https://developers.google.com/google-apps/tasks/) `1.22.0`
+* [Mockito](http://site.mockito.org/) `2.7.22`
 
 ## 6. Version Control
 
@@ -503,11 +538,18 @@ Please follow these strictly when writing commit messages, it makes life easier 
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
 2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should allow a user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+    to accomplish tasks faster using commands than using the mouse.
 4. Should include well-written guides for users and developers
 5. Should follow OOP principles
 6. Should come with automated tests
+7. Should handle exceptions gracefully
+8. Should not require any other external software to work
+9. Should be open source
+10. Should be easily extented by another developer
+11. Should be easily maintained by another developer
+12. Should contain sufficient documentation for any developer to take over the development
+13. Should only use open-source, free-to-use external libraries
 
 ## Appendix B : Glossary
 
