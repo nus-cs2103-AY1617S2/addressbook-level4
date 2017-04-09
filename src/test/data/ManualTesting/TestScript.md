@@ -25,7 +25,7 @@ Feedback shows:
 
 ### 2. Add a task with deadline
 
-`add Submit Assignment e/01/31/2018 23:59`.
+`add Submit Assignment e/01/31/2018 23:59`
 
 #### Result
 
@@ -127,7 +127,7 @@ To sort the list of tasks, start command with the keyword `save`.
 
 Feedback shows:
 
-> Sorted by priority!
+> Sorted all tasks by priority
 
 The list of tasks is sorted according to priority, with the 'hi' priority at the top followed by 'mid' and 'low'.
 
