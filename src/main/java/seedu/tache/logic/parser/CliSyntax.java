@@ -25,6 +25,8 @@ public class CliSyntax {
     public static final String[] PARAMETER_START_TIME = {"start_time", "starttime", "st"};
     public static final String[] PARAMETER_END_TIME = {"end_time", "endtime", "et"};
     public static final String[] PARAMETER_TAG = {"tag", "t"};
+    public static final String[] PARAMETER_RECUR_INTERVAL = {"recur_interval", "recurinterval", "ri"};
+    public static final String[] PARAMETER_RECUR_STATUS = {"recur_status", "recurstatus", "rs"};
 
     /* List filter definitions */
     public static final String FILTER_COMPLETED = "completed";

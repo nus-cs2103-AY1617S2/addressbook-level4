@@ -43,15 +43,14 @@ public class Task implements ReadOnlyTask {
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
-                    UniqueTagList tags, boolean isActive, boolean isRecurring,
-                    RecurInterval interval, List<Date> recurCompletedList) {
+                    UniqueTagList tags, boolean isActive, RecurInterval interval, List<Date> recurCompletedList) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.isActive = isActive;
-        this.recurState = new RecurState(isRecurring, interval, recurCompletedList);
+        this.recurState = new RecurState(interval, recurCompletedList);
     }
 
     /**
@@ -59,8 +58,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
-                    source.getActiveStatus(), source.getRecurState().isRecurring(),
-                    source.getRecurState().getRecurInterval(), source.getRecurState().getRecurCompletedList());
+                    source.getActiveStatus(), source.getRecurState().getRecurInterval(),
+                    source.getRecurState().getRecurCompletedList());
     }
 
     @Override

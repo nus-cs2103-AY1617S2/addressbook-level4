@@ -92,7 +92,7 @@ public class XmlAdaptedTask {
         final boolean isActive = this.isActive;
         final RecurState recurState = this.recurState;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDateTime, endDateTime, tags, isActive, recurState.isRecurring(),
+        return new Task(name, startDateTime, endDateTime, tags, isActive,
                             recurState.getRecurInterval(), recurState.getRecurCompletedList());
     }
 }

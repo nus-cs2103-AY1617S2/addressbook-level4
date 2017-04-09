@@ -3,6 +3,8 @@ package seedu.tache.logic.parser;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_INTERVAL;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
@@ -82,7 +84,8 @@ public class ParserUtil {
      */
     public static boolean isValidParameter(String input) {
         return ParserUtil.isFoundIn(input, PARAMETER_NAME, PARAMETER_START_DATE, PARAMETER_END_DATE,
-                PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG);
+                PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG,
+                PARAMETER_RECUR_INTERVAL, PARAMETER_RECUR_STATUS);
     }
     //@@author
     /**

@@ -45,11 +45,6 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withRecurringStatus(boolean isRecurring) throws IllegalValueException {
-        this.task.getRecurState().setRecurringStatus(isRecurring);
-        return this;
-    }
-
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
         for (String tag: tags) {

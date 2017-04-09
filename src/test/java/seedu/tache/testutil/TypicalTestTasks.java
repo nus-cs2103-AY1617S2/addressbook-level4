@@ -47,13 +47,11 @@ public class TypicalTestTasks {
             recurringMacdonalds = new TaskBuilder().withName("Macdonald Breakfast")
                     .withStartDateTime("16:00:00 next week")
                     .withEndDateTime("19:00:00 two weeks later")
-                    .withRecurringInterval(RecurInterval.WEEK)
-                    .withRecurringStatus(true).build();
+                    .withRecurringInterval(RecurInterval.WEEK).build();
             recurringKFC = new TaskBuilder().withName("KFC Dinner")
                     .withStartDateTime("16:00:00 next week")
                     .withEndDateTime("19:00:00 10 months later")
-                    .withRecurringInterval(RecurInterval.MONTH)
-                    .withRecurringStatus(true).build();
+                    .withRecurringInterval(RecurInterval.MONTH).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
