@@ -38,7 +38,7 @@ public class TypicalTestTasks {
             police = new TaskBuilder().withTaskName("change address").withTaskDate("020217")
                     .withTaskStartTime("0800").withTaskEndTime("1000")
                     .withTaskDescription("change the address to your new house").build();
-            jog = new TaskBuilder().withTaskName("do jogging").withTaskDate("020217")
+            jog = new TaskBuilder().withTaskName("change and go jogging").withTaskDate("020217")
                     .withTaskStartTime("0800").withTaskEndTime("1000")
                     .withTaskDescription("I hate IPPT").build();
 
