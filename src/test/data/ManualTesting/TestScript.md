@@ -67,7 +67,24 @@ Feedback shows:
 
 Task with index 1 is deleted.
 
+## Edit command
+
+To edit a specific, start command with the keyword `edit`.
+
+`edit 1 p/hi b/04/28/2017 22:00 e/04/28/2017 22:30`
+
+#### Result
+
+Feedback shows:
+
+> Edited Task: Buy dinner<br/>
+> Priority: hi<br/>
+> Status: incomplete<br/>
+> Start Time: 28 Apr 17 10:00PM<br/>
+> End Time: 28 Apr 17 10:30PM
+
 ## List command
+
 To see the whole list of tasks, enter command `list`.
 
 #### Result
@@ -101,3 +118,13 @@ Feedback shows:
 > Sorted by priority!
 
 The list of tasks is sorted according to priority, with the 'hi' priority at the top followed by 'mid' and 'low'.
+
+## Sync command
+To sync your tasks in Opus into Google calendar, start command with the keyword `sync`.
+
+`sync on` to turn syncing on
+`sync off` to turn syncing off
+
+####Result
+1. After the first step, Opus will direct you to the Google Tasks authorization page in your browser. Once authorized with your Google account, there will be a pop-up window telling you that sync has been turned on, and you may now close the authorization page and go back to Opus. After the authorization, all the tasks you added will sync to your Google Calendar.
+2. After the second step, sync to Google Calendar will be turned off.
