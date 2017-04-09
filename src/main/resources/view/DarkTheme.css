@@ -111,7 +111,7 @@
 }
 
 .list-cell:empty {
-	-fx-background-color: #e7f5f7;
+	-fx-background-color: white;
 }
 
 /*
