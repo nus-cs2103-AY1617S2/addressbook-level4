@@ -28,6 +28,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Undo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#211-undo--undo)
    * [Redo command](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/docs/UserGuide.md#212-redo--redo)
+   * Browse user inputs
+   * Google Task integration
 * Code written: [[functional code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148087W.md)][[test code](https://github.com/CS2103JAN2017-W15-B3/main/blob/master/collated/main/A0148087W.md)]
 * Other major contributions:
   * Did the initial refactoring from AddressBook to TaskManager
