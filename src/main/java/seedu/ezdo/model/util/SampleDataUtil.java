@@ -65,6 +65,7 @@ public class SampleDataUtil {
         }
     }
 
+    /** Retrieves sample ezDo **/
     public static ReadOnlyEzDo getSampleEzDo() {
         try {
             EzDo sampleEzDo = new EzDo();
@@ -74,7 +75,8 @@ public class SampleDataUtil {
             throw new AssertionError(MESSAGE_DUPLICATE_TASKS, e);
         }
     }
-
+    
+    /** Adds sample tasks in sample ezDo **/
     private static void addTasksInSampleEzDo(EzDo sampleEzDo) throws DuplicateTaskException {
         for (Task sampleTask : getSampleTasks()) {
             sampleEzDo.addTask(sampleTask);
