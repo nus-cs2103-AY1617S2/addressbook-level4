@@ -4,7 +4,7 @@ import org.junit.Test;
 //import static org.junit.Assert.assertTrue;
 
 import guitests.guihandles.TaskCardHandle;
-//import seedu.task.logic.commands.AddCommand;
+import seedu.task.logic.commands.AddCommand;
 import seedu.task.commons.core.Messages;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
@@ -14,6 +14,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
     @Test
     public void add() {
         commandBox.runCommand("clear");
+
         // add one person
         TestTask[] currentList = td.getTypicalTasks();
         TestTask TaskToAdd = td.zoo;
@@ -32,6 +33,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         // invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        // invalid add command
+        commandBox.runCommand("add");
+        assertResultMessage(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {

@@ -1,6 +1,6 @@
 # Fast Task - Developer Guide
 
-By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -73,7 +73,7 @@ Author: Jacob Levy
 <img src="images\SDForEditTask2.png" width="800"><br>
 _Figure 2.1.3a : Component interactions for `edit 1 [KEYWORDS]` command (part 1)_
 
->Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Task manager data are changed,
+>Note how the `Model` simply raises a `TaskManagerChangedEvent` when the Fast Task data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 Author: Daniel Mullen
@@ -143,14 +143,14 @@ _Figure 2.4.1 : Structure of the Model Component_
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
+* stores the Fast Task data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### 2.5. Storage component
 
-Author: Yunchun
+Author: Yun-Chun Liu
 
 <img src="images/TaskStorage.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
@@ -160,7 +160,7 @@ _Figure 2.5.1 : Structure of the Storage Component_
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Task Manager data in xml format and read it back.
+* can save the Fast Task data in xml format and read it back.
 
 ### 2.6. Common classes
 
@@ -283,7 +283,7 @@ Here are the steps to convert the project documentation files to PDF format.
 
 ### 5.6. Managing Dependencies
 
-A project often depends on third-party libraries. For example, Task Manager depends on the
+A project often depends on third-party libraries. For example, Fast Task depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -305,19 +305,19 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | update the status of a task | view completed or pending tasks.
 `* * *` | user | see upcoming tasks | see what needs to be done soon.
 `* * *` | user | can undo last command | to fix mistakes.
-`* * *` | user | chnage where I save my data | organize my information
+`* * *` | user | can redo last command | to fix mistakes.
+`* * *` | user | change where I save my data | organize my information
+`* * *` | user | change where I load my data | organize my information
 `* *`   | user | categorize a task | organize the tasks.
 `* *`   | user | favorite tasks | keep track of important tasks.
 `* *`   | user | see alerts on upcoming tasks | complete time sensitive tasks.
 `* *`   | user | quickly add predefined tasks | to save time defining tasks
 `* *`   | user | be notified if two tasks have a time conflict | be aware of schedule conflicts
-`* *`   | user | can use multiple devices | have more opportunity to check task manager
+`* *`   | user | can use multiple devices | have more opportunity to check Fast Task
 `* *`   | user | can undo last command | to fix mistakes.
-`*`     | user | send copy of task manager | share my schedule easily
+`*`     | user | send copy of Fast Task | share my schedule easily
 `*`     | user | have a shared group calendar | to coordinate with team members
 `*`     | user | google | search things all in one window
-
-{More to be added}
 
 ## Appendix B : Use Cases
 
@@ -329,33 +329,35 @@ Priority | As a ... | I want to ... | So that I can...
 
 1. User requests to add a task in the command line.
 2. Task shows up in list.<br>
-Use case ends.
+
+> Use case ends.
 
 **Extensions**
 
 3a. The task created is in invalid format
 
-> 3a1. Task manager shows an error message <br>
+> 3a1. Fast Task shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Search for existing task
+#### Use case: Search for an existing task
 
 **MSS**
 
 1. User requests to search for a task in the command line with search parameters.
 2. Requested task shows up in list.<br>
-Use case ends.
+
+> Use case ends.
 
 **Extensions**
 
 3a. The task is not in list
 
-> 3a1. Task manager shows an error message <br>
+> 3a1. Fast Task shows an error message <br>
   Use case resumes at step 2
 
 3b. Search parameters entered could not be found
 
-> 3b1. Task manager shows an error message <br>
+> 3b1. Fast Task shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Edit an existing task
@@ -364,18 +366,19 @@ Use case ends.
 
 1. User requests to edit an existing task in the command line with edit details.
 3. Task is updated and shows up in list.<br>
-Use case ends.
+
+> Use case ends.
 
 **Extensions**
 
 3a. The tasks is in invalid format
 
-> 3a1. Task manager shows an error message <br>
+> 3a1. Fast Task shows an error message <br>
   Use case resumes at step 2
 
 3b. The task name is empty.
 
-> 3b1. Task manager shows an error message <br>
+> 3b1. Fask Task shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Delete a task
@@ -396,10 +399,48 @@ Use case ends.
 
 3a. The given task name is invalid
 
-> 3a1. Task manager shows an error message <br>
+> 3a1. Fask Task shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Mark a task as completed
+
+**MSS**
+
+1. User requests to mark a task as completed in the command line.
+2. Task is marked as completed in the list.<br>
+
+> Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The user requests to mark an invalid task as completed
+
+> 3a1. Fask Task shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Sort the tasks
+
+**MSS**
+
+1. User requests to sort the tasks in a specified order
+2. Tasks are sorted based on the users criteria.<br>
+
+> Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The user requests to sort the list with invalid criteria
+
+> 3a1. Fask Task shows an error message <br>
+  Use case resumes at step 2
 
 ## Appendix C : Non Functional Requirements
 

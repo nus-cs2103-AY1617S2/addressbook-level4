@@ -9,8 +9,8 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager. Guarantees: details are present and
- * not null, field values are validated.
+ * Represents a Task in the task manager. Guarantees: details are present and not null, field values
+ * are validated.
  */
 public class Task implements ReadOnlyTask {
 
@@ -79,8 +79,8 @@ public class Task implements ReadOnlyTask {
 
     // @@author A0163845X
     public Task(TaskName parseTaskName, Optional<TaskDate> parseDate, Optional<TaskTime> parseTime,
-            Optional<TaskTime> parseTime2, Optional<String> parseString, Optional<TaskStatus> parseTaskStatus,
-            UniqueTagList tags) throws IllegalValueException {
+            Optional<TaskTime> parseTime2, Optional<String> parseString,
+            Optional<TaskStatus> parseTaskStatus, UniqueTagList tags) throws IllegalValueException {
         this.taskName = parseTaskName;
         if (parseDate.isPresent()) {
             this.taskDate = parseDate.get();
@@ -109,7 +109,8 @@ public class Task implements ReadOnlyTask {
 
     public Task(TaskName taskName, TaskDate taskDate, TaskTime taskStartTime, TaskTime taskEndTime,
             String taskDescription, TaskStatus taskStatus) {
-        this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, new UniqueTagList());
+        this(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus,
+                new UniqueTagList());
 
     }
 
@@ -117,8 +118,9 @@ public class Task implements ReadOnlyTask {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(), source.getTaskEndTime(),
-                source.getTaskDescription(), source.getTaskStatus(), source.getTags());
+        this(source.getTaskName(), source.getTaskDate(), source.getTaskStartTime(),
+                source.getTaskEndTime(), source.getTaskDescription(), source.getTaskStatus(),
+                source.getTags());
         this.setLocalDate(source.getLocalDate());
         this.setLocalTime(source.getLocalTime());
     }
@@ -179,8 +181,8 @@ public class Task implements ReadOnlyTask {
         }
         if ((otherTask.getTaskStartTime() == null && this.getTaskStartTime() != null)
                 || (otherTask.getTaskStartTime() != null && this.getTaskStartTime() == null)
-                || (otherTask.getTaskStartTime() != this.getTaskStartTime())
-                        && !(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
+                || (otherTask.getTaskStartTime() != this.getTaskStartTime()) && !(otherTask
+                        .getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
             System.out.println("start times arent equal");
             return false;
         }
@@ -206,7 +208,8 @@ public class Task implements ReadOnlyTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing
         // your own
-        return Objects.hash(taskName, taskDate, taskStartTime, taskEndTime, taskDescription, taskStatus, tags);
+        return Objects.hash(taskName, taskDate, taskStartTime, taskEndTime, taskDescription,
+                taskStatus, tags);
     }
 
     @Override
