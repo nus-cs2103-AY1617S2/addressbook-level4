@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [LEUNG Cheuk Ting](https://github.com/ctleungac) <br>
 <img src="images/ctleungac.png" width="150"><br>
-Roles and Responsibilities: In charge of GUI <br>
+Roles and Responsibilities: In charge of GUI, JavaFX Expert <br>
 * Components in charge of: [UI]()
 * Aspects/tools in charge of:
 * Other major contributions:
@@ -16,7 +16,7 @@ Roles and Responsibilities: In charge of GUI <br>
 
 #### [Hsieh Hsin Han](https://github.com/Tony-Hsieh)
 <img src="images/tony-hsieh.png" width="150"><br>
-Roles and Responsibilities: In charge of Logic and Testing <br>
+Roles and Responsibilities: In charge of Logic and Testing, <br>
 * Components in charge of: [Logic]()
 * Aspects/tools in charge of:
 * Other major contributions:
@@ -38,7 +38,7 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
   * Review pull requests and open issues (assigning appropriate team member to each issue)
   * Set up Travis, Codacy, and Coveralls [[#18](https://github.com/CS2103JAN2017-F11-B3/main/pull/18)]
   * In charge of code cleanup (i.e. deleting trailing whitespace, converting \r\n\ to \n)
-  * Install necessary JARs to build path [[#110](https://github.com/CS2103JAN2017-F11-B3/main/pull/110)]
+  * Install necessary JARs (JUnit, JSon, Google Guava, JavaFX, etc.) to build path [[#110](https://github.com/CS2103JAN2017-F11-B3/main/pull/110)]
   * Testing and dogfooding on Windows and macOS
   
 -----
