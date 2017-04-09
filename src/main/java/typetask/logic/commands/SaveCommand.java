@@ -40,13 +40,9 @@ public class SaveCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
-  //@@author A0144902L
+    //@@author A0144902L
     public boolean isInvalidPath() {
-        if (path.contains(SYMBOL_PLUS) || path.contains (SYMBOL_HASH) ||
-                path.contains (SYMBOL_CARET) || path.contains (SYMBOL_ASTERISK)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (path.contains(SYMBOL_PLUS) || path.contains (SYMBOL_HASH) ||
+                path.contains (SYMBOL_CARET) || path.contains (SYMBOL_ASTERISK));
     }
 }
