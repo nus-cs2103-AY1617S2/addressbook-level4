@@ -59,6 +59,8 @@ public class UndoCommand extends Command {
             EditCommand editCommand = (EditCommand) new EditCommandParser().parse(arguments);
             highlightByIndex(Integer.toString(editCommand.getFilteredSelectedTaskListIndex() + 1));
             break;
+        default:
+            // no highlighting behavior
         }
     }
 

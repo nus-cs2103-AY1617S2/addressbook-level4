@@ -48,6 +48,8 @@ public class RedoCommand extends Command {
             AddCommand addCommand = (AddCommand) new AddCommandParser().parse(arguments);
             addCommand.pseudoExecute(this.model);
             break;
+        default:
+            // no highlighting behavior
         }
     }
     // @@author
