@@ -12,8 +12,7 @@ import seedu.tache.storage.XmlSerializableTaskManager;
 import seedu.tache.testutil.TestUtil;
 
 /**
- * This class is meant to override some properties of MainApp so that it will be suited for
- * testing
+ * This class is meant to override some properties of MainApp so that it will be suited for testing.
  */
 public class TestApp extends MainApp {
 

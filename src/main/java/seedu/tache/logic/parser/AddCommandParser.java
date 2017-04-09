@@ -14,7 +14,6 @@ import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.parser.ParserUtil.DateTimeType;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
-import seedu.tache.model.recurstate.RecurState.RecurInterval;
 
 //@@author A0150120H
 /**
@@ -53,7 +52,7 @@ public class AddCommandParser {
                 startDateTime = current;
             }
         }
-        
+
         if (endDateTime == null && startDateTime != null) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else if (endDateTime == null && startDateTime == null) {
