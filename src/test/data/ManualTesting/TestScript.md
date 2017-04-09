@@ -33,20 +33,6 @@ To delete a task, start command with keyword `delete`.
 
 `delete 1`
 
-#### Result
-
-Feedback shows:
-
-> Deleted Task: Buy dinner<br/>
-> Priority: low<br/>
-> Status: incomplete<br/>
-> Note:<br/>
-> Start Time: 28 Apr 17 09:21PM<br/>
-> End Time:<br/>
-> Tags:
-
-Task with index 1 is deleted.
-
 ## List command
 To see the whole list of tasks, enter command `list`.
 
@@ -61,10 +47,8 @@ To change the default data save location, start command with the keyword `save`.
 
 Type `> save src/test/data/ManualTesting/Test/newTaskManager.xml`
 
-#### Result
+> New task added: Buy fruits<br/>
+> Status: incomplete
 
-Feedback shows:
+Newly added task should be at index #22 without any attributes below it.
 
-> New save location: src/test/data/ManualTesting/Test/newTaskManager.xml
-
-The storage file is saved at the specified path.
