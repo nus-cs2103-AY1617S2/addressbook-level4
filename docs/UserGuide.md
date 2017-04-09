@@ -359,43 +359,43 @@ There is no need to save manually.
 
 Command | Format
 --------| :-----
-**Add** | `add TASK [#TAG]...` <br>
-Add | `add TASK by/ DATETIME [#TAG]...`
-Add | `add TASK on/ DATETIME [#TAG]...`
-Add | `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
-Add | `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
-**List** | `list`<br>
-List | `list all`<br>
-List | `list float`<br>
-List | `list deadline`<br>
-List | `list event`<br>
-List | `list #TAG`<br>
-List | `list undone`<br>
-List | `list done`<br>
-List | `list by/ DATETIME`<br>
-List | `list on/ DATETIME`<br>
-List | `list from/ START_DATETIME to/ END_DATETIME`<br>
-List | `list on/ START_DATETIME to/ END_DATETIME`<br>
-**Find** | `find KEYWORD [MORE_KEYWORDS]...` <br>
-**Edit** | `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
-**Delete** | `delete INDEX [MORE_INDICES]...` <br>
-**Mark** | `mark INDEX [MORE_INDICES]...` <br>
-**Unmark** | `unmark INDEX [MORE_INDICES]...` <br>
-**Undo** | `undo` <br>
-**Redo** | `redo` <br>
-**Clear** | `clear` <br>
-**View File** | `viewfile` <br>
-**Save As** | `saveas FILE_PATH` <br>
-**Help** | `help` <br>
-* **Alternative Commands** |add: `a`
-Alternative Commands| edit: `e`
-Alternative Commands| list: `l`
-Alternative Commands| delete: `d`
-Alternative Commands| mark: `m`, `check`
-Alternative Commands| unmark: `um`, `uncheck`
-Alternative Commands| find: `f`, `search`
-**Customize Alternative Commands** | `shortcut + COMMAND_WORD SHORTCUT_KEY`
-Customize Alternative Commands | `shortcut - COMMAND_WORD SHORTCUT_KEY`
+Add | `add TASK [#TAG]...` <br>
+| `add TASK by/ DATETIME [#TAG]...`
+| `add TASK on/ DATETIME [#TAG]...`
+| `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
+| `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
+List | `list`<br>
+| `list all`<br>
+| `list float`<br>
+| `list deadline`<br>
+| `list event`<br>
+| `list #TAG`<br>
+| `list undone`<br>
+| `list done`<br>
+| `list by/ DATETIME`<br>
+| `list on/ DATETIME`<br>
+| `list from/ START_DATETIME to/ END_DATETIME`<br>
+| `list on/ START_DATETIME to/ END_DATETIME`<br>
+Find | `find KEYWORD [MORE_KEYWORDS]...` <br>
+Edit | `edit INDEX [TASK] [by DATETIME] [from START_DATETIME to END_DATETIME] [#TAG]...` <br>
+Delete | `delete INDEX [MORE_INDICES]...` <br>
+Mark | `mark INDEX [MORE_INDICES]...` <br>
+Unmark | `unmark INDEX [MORE_INDICES]...` <br>
+Undo | `undo` <br>
+Redo | `redo` <br>
+Clear | `clear` <br>
+View File | `viewfile` <br>
+Save As | `saveas FILE_PATH` <br>
+Help | `help` <br>
+Alternative Commands |add: `a`
+| edit: `e`
+| list: `l`
+| delete: `d`
+| mark: `m`, `check`
+| unmark: `um`, `uncheck`
+| find: `f`, `search`
+Customize Alternative Commands | `shortcut + COMMAND_WORD SHORTCUT_KEY`
+| `shortcut - COMMAND_WORD SHORTCUT_KEY`
 
 
 * **Add**
