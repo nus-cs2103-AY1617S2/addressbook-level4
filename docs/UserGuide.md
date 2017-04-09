@@ -495,7 +495,7 @@ ToLuist data are saved in the hard disk automatically after any command that cha
 the data is saved `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
 There is no need to save manually.
 
-### 3.20. Specifying new storage location to save data to: `save`
+### 3.20. Specifying a new storage location to save data to: `save`
 
 Occasionally, you may want to change the save location of the application, such as if you are 
 moving it to a Dropbox folder.<br>
@@ -512,7 +512,7 @@ Example:
 * `save data/savefile.txt` <br>
   Sets the save storage location to `data/savefile.txt`.
 
-### 3.21. Specifying ne storage location to load data from: `load`
+### 3.21. Specifying a new storage location to load data from: `load`
 
 Occasionally, you may want to load the data from a different location, such as when you want
  to load the data from a file in Dropbox.<br>
