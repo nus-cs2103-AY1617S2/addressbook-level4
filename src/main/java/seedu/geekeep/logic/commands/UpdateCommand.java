@@ -80,7 +80,7 @@ public class UpdateCommand extends UndoableCommand {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex, updatedTask));
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
- 
+
     private int getTaskInternalIndex(Task updatedTask) {
         int targetIndex = model.getFilteredTaskList().indexOf(updatedTask);
         if (updatedTask.isFloatingTask()) {
