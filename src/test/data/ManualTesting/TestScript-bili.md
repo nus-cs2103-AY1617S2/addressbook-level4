@@ -72,18 +72,6 @@ Feedback shows:
 
 Newly added event should appear in the task panel.
 
-## Sync command
-
-### Sync Opus with Google Tasks
-
-`sync on`
-
-#### Result
-
-1. Your web browser will open prompting to login to Google and give permission to Opus
-2. After logging in, the tasks from Opus will be synced to your Google Task list, under `Opus` (Note: you have to open the correct task list, there is a dropdown arrow to open it)
-3. The tasks should show in the Google Tasks list
-
 ## Undo/Redo command
 
 ### Undo the previous command
