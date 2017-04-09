@@ -14,8 +14,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 	@Test
 	public void list_nonEmptyList() {
 		/** lists all tasks in the list */
-		assertListAllResult("list", td.abdicate, td.boop, td.oxygen, td.cower, td.duck);
-
+		assertListAllResult("list", td.abdicate, td.boop, td.oxygen, td.scheduleChecker, td.cower, td.duck);
 		/** lists all done tasks in the list */
 		assertListResult("list done");
 
@@ -23,7 +22,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 		 * lists all tasks in the primary list that starts on 9th April
 		 */
 		commandBox.runCommand("list");
-		assertListResult("list by start 08/04/2017", td.abdicate, td.oxygen, td.cower);
+		assertListResult("list by start 08/04/2017",  td.abdicate, td.oxygen, td.cower, td.scheduleChecker);
 
 		/** lists all tasks in the primary list that ends on 8th April */
 		commandBox.runCommand("list");
@@ -43,15 +42,15 @@ public class ListCommandTest extends TaskManagerGuiTest {
 
 		/** lists all tasks in the primary list and sorts it by start date */
 		commandBox.runCommand("list");
-		assertListResult("list by start", td.abdicate, td.oxygen, td.cower, td.boop, td.duck);
+		assertListResult("list by start", td.scheduleChecker, td.abdicate, td.oxygen, td.cower,td.duck, td.boop);
 
 		/** lists all tasks in the primary list and sorts it by end date */
 		commandBox.runCommand("list");
-		assertListResult("list by end", td.abdicate, td.oxygen, td.cower, td.boop, td.duck);
+		assertListResult("list by end", td.abdicate, td.oxygen, td.cower, td.scheduleChecker, td.boop, td.duck);
 
 		/** lists all tasks in the primary list and sorts it by deadline */
 		commandBox.runCommand("list");
-		assertListResult("list by deadline", td.boop, td.duck, td.abdicate, td.oxygen, td.cower);
+		assertListResult("list by deadline", td.boop, td.duck, td.scheduleChecker, td.cower, td.oxygen, td.abdicate);
 	}
 
 	@Test
