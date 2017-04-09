@@ -66,10 +66,9 @@ Format: `HELP`
 You can use this command to add different types of task in ProcrastiNomore. <br>
 There are 3 forms of task that ProcrastiNomore supports:
 > [Events](#321-events)
-> * One Day Events
-> * Multiple Days Events <br />
->
-> [Deadlines](#322-deadlines) 
+> * [Same Day Events](3211-same-day-events)
+> * [Multiple Days Events](3212-Multiple-days-events) <br>
+> [Deadlines](#322-deadlines) <br>
 > [Basic Tasks](#323-basic-task)
 
 #### 3.2.1. Events
@@ -94,9 +93,10 @@ Format: `ADD` task `ON` date/day time `TO` time <br />
 > Without a specified end time, it will be automatically assigned as:
 > * End Time   : +1hr buffer from start time <br /> 
 > eg. Start time 1200hrs, end time will be 1300hrs 
+> If one hour buffer goes into the next day, End date will be changed to next day and time will be changed accordingly.
 
 
-##### 3.2.1.1. Multiple Day Events
+##### 3.2.1.1. Multiple Days Events
 Format: `ADD` task `FROM` date/day time `TO` date/day time <br />
 > Same start and end date cannot be used for this format. If a same day event is required, use one day event format. <br>
 > Without specified start or end time, start and/or end time will be automatically assigned as:
@@ -153,17 +153,16 @@ Other examples:
 
 While adding/updating tasks it is possible to tag categories to the task to better identify the tasks.<br>
 
-Format : `ADD` task `ON` date `CATEGORY` categoryName
+Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `CATEGORY` categoryName
 
-Categories added can be identified by the small grey box at the bottom of the task as seen in image below. 
-
+>Categories added can be identified by the small grey box at the bottom of the task as seen in image below. 
 > <img src="images/ProcrastiNomore_Categories_Normal.PNG" width="1000">
 
-> If user wants more than one category tagged to the task, for example two categories:<br>
-> `ADD` task `FROM` date `TO` date `CATEGORY` categoryOne `CATEGORY` categoryTwo
+ If user wants more than one category tagged to the task, for example two categories:<br>
+ `ADD` task `FROM` date `TO` date `CATEGORY` categoryOne `CATEGORY` categoryTwo
 
- Special Categories : High, Medium, Low
+ #####Special Categories : High, Medium, Low
 
  These categories are to show priority and will have a different colour box as compared to normal categories.<br> 
  Priority(Colour): High(Red), Medium(Yellow), Low(Blue)
@@ -194,8 +193,10 @@ Command words used work similarly as during adding (ON, FROM, TO, BY)
 Some general formats include the following:
 
 General Format: `UPDATE` `Task Index` `New Task Name` - Changes existing task's name to new task name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time - Changes existing task to event with specified start and end date/time<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time - Changes existing task to deadline with newly specified date/time
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time - Changes existing task to event with<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified start and end date/time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time - Changes existing task to deadline with newly specified<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date/time
 
 Sample Update task name:
 > Type the following command `UPDATE 36 Buy a horse` into the command Box and press <kbd>Enter</kbd>
@@ -209,10 +210,12 @@ Some more specific cases include:
 Format: `UPDATE` `Task Index` `FROM` date /date time - Changes existing deadline to event starting from specified date/time to current due time<br>
 
 ##### Existing event
-Format: `UPDATE` `Task Index` `FROM` date / time / date time - Changes existing event start date/time to specified date/time without changing other fields<br>
-*When only a date is provided, automatically assign Start Time to be 0000hrs
-Format:`UPDATE` `Task Index` `TO` date / time / date time - Changes existing event end date/time to specified date/time without changing other fields<br>
-*When only a date is provided, automatically assign End Time to be 2359hrs 
+Format: `UPDATE` `Task Index` `FROM` date / time / date time<br>
+> Changes existing event start date/time to specified date/time without changing other fields<br>
+> * When only a date is provided, automatically assign Start Time to be 0000hrs
+Format:`UPDATE` `Task Index` `TO` date / time / date time<br>
+> Changes existing event end date/time to specified date/time without changing other fields<br>
+> * When only a date is provided, automatically assign End Time to be 2359hrs 
 
 
 Sample Update event task time:
@@ -234,9 +237,9 @@ Format: `DELETE` `Task Index` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE` `Task name` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE` `Date`
 
-> In the event of `DELETE` `Task name`/`Date`, ProcrastiNomore will delete all tasks with the
+> * In the event of `DELETE` `Task name`/`Date`, ProcrastiNomore will delete all tasks with the
 > Task name/Date specified in the command.<br>
-> Only tasks with the same exact task name will be deleted. Tasks names with only a segment matching will not be deleted.
+> * Only tasks with the same exact task name will be deleted. Tasks names with only a segment matching will not be deleted.
 
 Examples:
 * `DELETE` breakfast <br />
@@ -267,7 +270,7 @@ Examples:
 
 ### 3.7. To mark tasks as completed: `MARK`
 
-You can use this command to identify tasks that you have accomplished and completed.
+You can use this command to identify and mark tasks that you have accomplished as completed.
 
 Format: `MARK` `Task Index` <br>
 
@@ -281,8 +284,7 @@ Tasks identified as completed will no longer be displayed in the uncompleted lis
 
 ### 3.8. To mark tasks as uncompleted: `UNMARK`
 
-You can use this command to identify tasks that you have already previously identified that you have
- accomplished as uncompleted.
+You can use this command to identify and unmark tasks that you have already previously marked as complete to incomplete
 
 Format: `UNMARK` `Task Index` <br>
 
