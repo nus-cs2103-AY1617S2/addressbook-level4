@@ -22,7 +22,7 @@ public class SaveAsCommandParser {
 
         try {
             checkFilePathExists(newFilePath);
-            checkCorrectFileFormat(newFilePath);
+            checkCorrectFileExtension(newFilePath);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -36,7 +36,7 @@ public class SaveAsCommandParser {
         }
     }
 
-    private void checkCorrectFileFormat(String newFilePath) throws IllegalValueException {
+    private void checkCorrectFileExtension(String newFilePath) throws IllegalValueException {
         if (!newFilePath.endsWith(".xml")) {
             throw new IllegalValueException(SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
         }
