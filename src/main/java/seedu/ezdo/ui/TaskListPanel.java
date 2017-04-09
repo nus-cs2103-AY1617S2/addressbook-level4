@@ -18,6 +18,8 @@ import seedu.ezdo.model.todo.ReadOnlyTask;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
+    private static final String MESSAGE_END = "'";
+    private static final String MESSAGE_CHANGED_SELECTION = "Selection in task list panel changed to : '";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
     private static final String FXML = "TaskListPanel.fxml";
 
@@ -45,7 +47,7 @@ public class TaskListPanel extends UiPart<Region> {
         taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                        logger.fine(MESSAGE_CHANGED_SELECTION + newValue + MESSAGE_END);
                         raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
