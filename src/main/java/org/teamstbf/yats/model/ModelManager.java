@@ -309,39 +309,39 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void updateFilteredListToShowSortedStart() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByStart();
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 	}
 
 	@Override
 	public void updateFilteredListToShowSortedEnd() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByEnd();
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 	}
 
 	@Override
 	public void updateFilteredListToShowDeadline() {
 		FilteredList<ReadOnlyEvent> tempEvents = getSortedEventListByDeadline();
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByEnd() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByEndDate());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByStart() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByStartDate());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 		return tempEvents;
 	}
 
 	private FilteredList<ReadOnlyEvent> getSortedEventListByDeadline() {
 		SortedList<ReadOnlyEvent> sortedEvents = filteredEvents.sorted(new ReadOnlyEventComparatorByDeadline());
 		FilteredList<ReadOnlyEvent> tempEvents = sortedEvents.filtered(null);
-		taskManager.setPersons(tempEvents);
+		taskManager.setTasks(tempEvents);
 		return tempEvents;
 	}
 
