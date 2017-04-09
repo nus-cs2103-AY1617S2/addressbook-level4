@@ -128,9 +128,7 @@ Your manager emails you that there will be an important lunch meeting from 1-3pm
 Refer to the [Command Format](#command-format) section below if you do not understand the command format.
 
 > - `s/` refers to the starting date / time.
-> 
 > - `e/` refers to the ending date / time.
-> 
 > - `r/` refers to the recurring period of the task. It can be `daily`, `weekly`, `monthly` or `yearly`
 > - `d/` refers to the description of the task.
 > - `p/` refers to the priority level of the task. It can be `high` (`h`), `medium` (`m`) or `low` (`l`).
@@ -197,6 +195,7 @@ All your completed tasks are listed! You may feel a sense of satisfaction after 
 
 Refer to the [Command Format](#command-format) section below if you do not understand the command format.
 
+> - `DONE_STATUS` can be `ALL`, `UNDONE`, or `ALL`.
 > - `o/` refers to order that the tasks are sorted by. 
 > - You can sort by `priority`, `alphanumeric` and `dateTime`.
 > - You can also filter and sort your tasks with multiple parameters. Only tasks that  satisfy the filtering criteria will be shown.
