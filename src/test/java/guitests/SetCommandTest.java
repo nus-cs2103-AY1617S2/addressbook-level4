@@ -62,8 +62,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
 
         // set add
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD + " " + NEW_ADD);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, AddCommand.COMMAND_WORD + " into " + NEW_ADD));
+        assertResultMessage(setSuccessMessage(AddCommand.COMMAND_WORD, NEW_ADD));
         this.commandBox.runCommand(NEW_ADD);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
@@ -72,8 +71,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Clear_Success() {
         // set clear
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + ClearCommand.COMMAND_WORD + " " + NEW_CLEAR);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, ClearCommand.COMMAND_WORD + " into " + NEW_CLEAR));
+        assertResultMessage(setSuccessMessage(ClearCommand.COMMAND_WORD, NEW_CLEAR));
         assertClearCommandSuccess();
         this.commandBox.runCommand(UndoCommand.COMMAND_WORD);
     }
@@ -82,8 +80,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Delete_Success() {
         // set delete
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD + " " + NEW_DELETE);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, DeleteCommand.COMMAND_WORD + " into " + NEW_DELETE));
+        assertResultMessage(setSuccessMessage(DeleteCommand.COMMAND_WORD, NEW_DELETE));
         this.commandBox.runCommand(NEW_DELETE);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
@@ -92,8 +89,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Done_Success() throws IllegalValueException {
         // set done
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + DoneCommand.COMMAND_WORD + " " + NEW_DONE);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, DoneCommand.COMMAND_WORD + " into " + NEW_DONE));
+        assertResultMessage(setSuccessMessage(DoneCommand.COMMAND_WORD, NEW_DONE));
         assertDoneSuccess(NEW_DONE);
     }
 
@@ -101,8 +97,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Edit_Success() {
         // set edit
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD + " " + NEW_EDIT);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, EditCommand.COMMAND_WORD + " into " + NEW_EDIT));
+        assertResultMessage(setSuccessMessage(EditCommand.COMMAND_WORD, NEW_EDIT));
         this.commandBox.runCommand(NEW_EDIT);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
@@ -112,8 +107,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Find_Success() {
         // set find
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + FindCommand.COMMAND_WORD + " " + NEW_FIND);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, FindCommand.COMMAND_WORD + " into " + NEW_FIND));
+        assertResultMessage(setSuccessMessage(FindCommand.COMMAND_WORD, NEW_FIND));
         this.commandBox.runCommand(NEW_FIND);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
@@ -122,8 +116,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Help_Success() {
         // set help
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + HelpCommand.COMMAND_WORD + " " + NEW_HELP);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, HelpCommand.COMMAND_WORD + " into " + NEW_HELP));
+        assertResultMessage(setSuccessMessage(HelpCommand.COMMAND_WORD, NEW_HELP));
         assertHelpWindowOpen(this.commandBox.runNewHelpCommand(NEW_HELP));
     }
 
@@ -131,8 +124,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_List_Success() throws IllegalValueException {
         // set list
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD + " " + NEW_LIST);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, ListCommand.COMMAND_WORD + " into " + NEW_LIST));
+        assertResultMessage(setSuccessMessage(ListCommand.COMMAND_WORD, NEW_LIST));
         assertListSuccess(NEW_LIST);
     }
 
@@ -140,8 +132,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Load_Success() {
         // set load
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + LoadCommand.COMMAND_WORD + " " + NEW_LOAD);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, LoadCommand.COMMAND_WORD + " into " + NEW_LOAD));
+        assertResultMessage(setSuccessMessage(LoadCommand.COMMAND_WORD, NEW_LOAD));
         this.commandBox.runCommand(NEW_LOAD);
         assertResultMessage(LoadCommand.MESSAGE_INVALID_FILE_NAME);
     }
@@ -150,8 +141,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Mark_Success() {
         // set mark
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + MarkCommand.COMMAND_WORD + " " + NEW_MARK);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, MarkCommand.COMMAND_WORD + " into " + NEW_MARK));
+        assertResultMessage(setSuccessMessage(MarkCommand.COMMAND_WORD, NEW_MARK));
         this.commandBox.runCommand(NEW_MARK);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
@@ -160,8 +150,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Redo_Success() throws Exception {
         // set redo
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + RedoCommand.COMMAND_WORD + " " + NEW_REDO);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, RedoCommand.COMMAND_WORD + " into " + NEW_REDO));
+        assertResultMessage(setSuccessMessage(RedoCommand.COMMAND_WORD, NEW_REDO));
         redo_add_success(NEW_REDO);
     }
 
@@ -169,8 +158,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Save_Success() {
         // set save
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SaveCommand.COMMAND_WORD + " " + NEW_SAVE);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, SaveCommand.COMMAND_WORD + " into " + NEW_SAVE));
+        assertResultMessage(setSuccessMessage(SaveCommand.COMMAND_WORD, NEW_SAVE));
         this.commandBox.runCommand(NEW_SAVE);
         assertResultMessage(SaveCommand.MESSAGE_NOT_XML_FILE);
     }
@@ -179,8 +167,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Select_Success() {
         // set select
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SelectCommand.COMMAND_WORD + " " + NEW_SELECT);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, SelectCommand.COMMAND_WORD + " into " + NEW_SELECT));
+        assertResultMessage(setSuccessMessage(SelectCommand.COMMAND_WORD, NEW_SELECT));
         this.commandBox.runCommand(NEW_SELECT);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
     }
@@ -189,8 +176,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Set_Success() {
         // set set
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + NEW_SET);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, SetCommand.COMMAND_WORD + " into " + NEW_SET));
+        assertResultMessage(setSuccessMessage(SetCommand.COMMAND_WORD, NEW_SET));
         this.commandBox.runCommand(NEW_SET);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
     }
@@ -199,8 +185,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Sort_Success() {
         // set sort
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SortCommand.COMMAND_WORD + " " + NEW_SORT);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, SortCommand.COMMAND_WORD + " into " + NEW_SORT));
+        assertResultMessage(setSuccessMessage(SortCommand.COMMAND_WORD, NEW_SORT));
         this.commandBox.runCommand(NEW_SORT);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
@@ -209,8 +194,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Undo_Success() throws Exception {
         // set undo
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + UndoCommand.COMMAND_WORD + " " + NEW_UNDO);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, UndoCommand.COMMAND_WORD + " into " + NEW_UNDO));
+        assertResultMessage(setSuccessMessage(UndoCommand.COMMAND_WORD, NEW_UNDO));
         undo_add_success(NEW_UNDO);
     }
 
@@ -218,8 +202,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Unmark_Success() {
         // set unmark
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + UnmarkCommand.COMMAND_WORD + " " + NEW_UNMARK);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, UnmarkCommand.COMMAND_WORD + " into " + NEW_UNMARK));
+        assertResultMessage(setSuccessMessage(UnmarkCommand.COMMAND_WORD, NEW_UNMARK));
         this.commandBox.runCommand(NEW_UNMARK);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
     }
@@ -228,8 +211,7 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Exit_Success() {
         // set exit
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + ExitCommand.COMMAND_WORD + " " + NEW_EXIT);
-        assertResultMessage(
-                String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS, ExitCommand.COMMAND_WORD + " into " + NEW_EXIT));
+        assertResultMessage(setSuccessMessage(ExitCommand.COMMAND_WORD, NEW_EXIT));
     }
 
     @Test
@@ -256,6 +238,14 @@ public class SetCommandTest extends TaskManagerGuiTest {
     public void set_Fail_No_Such_Command() {
         this.commandBox.runCommand(SetCommand.COMMAND_WORD + INVALID_COMMAND_CHANGE);
         assertResultMessage(SetCommand.NO_SUCH_COMMAND_TO_CHANGE);
+    }
+
+    @Test
+    public void set_caseInsensitive_Fail_Command_Exist_In_CommandSettings() {
+        this.commandBox.runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + NEW_SET);
+        this.commandBox
+                .runCommand(SetCommand.COMMAND_WORD + " " + SetCommand.COMMAND_WORD + " " + NEW_SET.toUpperCase());
+        assertResultMessage(SetCommand.COMMAND_ALREADY_EXISTS);
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
@@ -345,5 +335,17 @@ public class SetCommandTest extends TaskManagerGuiTest {
         // confirm the list now contains all previous tasks plus the task with
         assertAllPanelsMatch(this.currentList);
         assertResultMessage(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_SUCCESS, unmarkedTask));
+    }
+
+    /**
+     * @param startCommandWord
+     *            TODO
+     * @param newCommandWord
+     *            TODO
+     * @return the Success message of set command
+     */
+    public String setSuccessMessage(String startCommandWord, String newCommandWord) {
+        return String.format(SetCommand.MESSAGE_SET_TASK_SUCCESS,
+                startCommandWord.toLowerCase() + " into " + newCommandWord.toLowerCase());
     }
 }

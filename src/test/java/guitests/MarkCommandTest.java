@@ -38,13 +38,16 @@ public class MarkCommandTest extends TaskManagerGuiTest {
     @Test
     public void mark_task_no_index_failure() throws Exception {
         this.commandBox.runCommand(MESSAGE_MARK_COMMAND);
+
+
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void mark_task_invalid_index_failure() throws Exception {
         this.commandBox.runCommand(MESSAGE_MARK_COMMAND + INDEX_MARK_INVALID);
-        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+        assertResultMessage(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
     }
 
     @Test
