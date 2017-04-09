@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.ui.Ui;
+import seedu.task.ui.Ui;
 
 public class CommandBoxTest extends AddressBookGuiTest {
 

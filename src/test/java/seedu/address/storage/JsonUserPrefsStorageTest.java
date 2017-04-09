@@ -12,10 +12,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.Theme;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.model.UserPrefs;
+import seedu.task.storage.JsonUserPrefsStorage;
+import seedu.task.ui.Theme;
 
 public class JsonUserPrefsStorageTest {
 

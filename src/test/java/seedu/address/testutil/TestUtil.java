@@ -26,19 +26,19 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.YTomorrow;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.EndDate;
-import seedu.address.model.task.Group;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.StartDate;
-import seedu.address.model.task.Task;
-import seedu.address.storage.XmlSerializableTaskManager;
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.commons.util.XmlUtil;
+import seedu.task.model.YTomorrow;
+import seedu.task.model.tag.Tag;
+import seedu.task.model.tag.UniqueTagList;
+import seedu.task.model.task.EndDate;
+import seedu.task.model.task.Group;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.StartDate;
+import seedu.task.model.task.Task;
+import seedu.task.storage.XmlSerializableTaskManager;
 
 /**
  * A utility class for test cases.

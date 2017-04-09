@@ -10,12 +10,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.YTomorrow;
-import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalTestPersons;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.FileUtil;
+import seedu.task.model.ReadOnlyTaskManager;
+import seedu.task.model.YTomorrow;
+import seedu.task.model.task.Task;
+import seedu.task.storage.XmlAddressBookStorage;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -33,7 +34,7 @@ public class XmlAddressBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlAddressBookStorage(filePath).readTaskManager(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -67,14 +68,14 @@ public class XmlAddressBookStorageTest {
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyTaskManager readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        ReadOnlyTaskManager readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
         assertEquals(original, new YTomorrow(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(new Task(td.hoon));
         original.removePerson(new Task(td.alice));
         xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        readBack = xmlAddressBookStorage.readTaskManager(filePath).get();
         assertEquals(original, new YTomorrow(readBack));
 
         //Save and read without specifying file path
