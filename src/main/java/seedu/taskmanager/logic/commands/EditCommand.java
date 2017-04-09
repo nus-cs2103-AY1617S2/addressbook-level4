@@ -29,7 +29,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)"
-            + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [r/REPEAT] [#TAG]...\n" + "Example: " + COMMAND_WORD
+            + "[TITLE] [s/STARTDATE] [e/ENDDATE] [d/DESCRIPTION ] [r/REPEAT] [t/TAG]...\n" + "Example: " + COMMAND_WORD
             + " or " + ALTERNATIVE_COMMAND_WORD + " 1 s/23/05/2017 d/Go to John's house instead";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
