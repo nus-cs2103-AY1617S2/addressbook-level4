@@ -20,7 +20,7 @@
     * [Clearing KIT](#311-clearing-all-task-clear)
     * [Exiting KIT](#312-exiting-the-program-exit)
     * [Saving Data](#3132-saving-the-data)
-    * [Loading Date](#314-loading-your-own-data)
+    * [Loading Data](#314-loading-your-own-data)
     * [Changing theme](#315-changing-the-appearance-of-kit)
     * [Using Shortcuts](#316-using-shortcuts)
 4. [FAQ](#4-faq)
@@ -447,7 +447,7 @@ In KIT, you data are saved automatically after a change has been made. There is 
 ### 3.14 Loading your own data
 
 #### Transferring you data? KIT's got you covered.
-`load` function can load your date from a specified location.
+`load` function can load your data from a specified location.
 
 Description: Loads a file from the specified location.
 
