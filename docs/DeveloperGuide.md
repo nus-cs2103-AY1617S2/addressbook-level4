@@ -611,7 +611,6 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-
 **Google Calendar**
 
 Author: Jay Kabra
@@ -644,3 +643,32 @@ Cons:
 * cannot change the color of tasks based on priority
 * alert would not pop out automatically
 * everytime I boot up my computer, I have to open the app manually
+
+**Wunderlist**
+
+Author: Tyler Rocha
+
+Pros:
+* Allows collaboration with friends and family
+* Supports due dates and reminders
+* Accessible from phone, tablet and laptop
+
+Cons:
+* Free account has limited options
+* Needs to be downloaded
+* Paying for more features is expensive
+
+**Hitask**
+
+Author: Wu Heyang
+
+Pros:
+* Focus on team collaboration
+* Clean user interface
+* Calendar syncs with Google
+
+Cons:
+* Free trial only
+* Premium is expensive and a monthly expense
+* Lots of features can be overwhelming
+
