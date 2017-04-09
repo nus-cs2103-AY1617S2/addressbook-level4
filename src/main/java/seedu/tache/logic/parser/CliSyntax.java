@@ -48,6 +48,7 @@ public class CliSyntax {
     //@@author A0150120H
     public static final String[] DATE_IDENTIFIER_START = {"from"};
     public static final String[] DATE_IDENTIFIER_END = {"to", "on", "by", "before"};
+    public static final String RECURRENCE_IDENTIFIER_PREFIX = "every";
     public static final String[] RECURRENCE_IDENTIFIER_DAILY = {"daily", "every day", "everyday"};
     public static final String[] RECURRENCE_IDENTIFIER_WEEKLY = {"weekly", "every week"};
     public static final String[] RECURRENCE_IDENTIFIER_MONTHLY = {"monthly", "every month"};
