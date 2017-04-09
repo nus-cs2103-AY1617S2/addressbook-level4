@@ -98,7 +98,6 @@ public class ScheduleCommand extends Command {
             model.saveImageOfCurrentTaskManager();
             long checkedHours = (long) (Double.parseDouble(this.hours) * MILLISECONDS_PER_HOUR);
             checkedHours = checkedHours + (long) (Double.parseDouble(this.minutes) * MILLISECONDS_PER_MINUTE);
-            System.out.println(checkedHours);
             if (checkedHours < MINIMUM_EVENT_LENGTH || checkedHours > MAXIMUM_EVENT_LENGTH) {
                 throw new IllegalArgumentException();
             }
@@ -107,7 +106,6 @@ public class ScheduleCommand extends Command {
             Collections.sort(filteredTaskLists, new ReadOnlyEventComparatorByStartDate());
             model.addEvent(toSchedule);
             model.updateFilteredListToShowSortedStart();
-            System.out.println(count);
             EventsCenter.getInstance().post(new JumpToListRequestEvent(count));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toSchedule));
         } catch (NumberFormatException e) {
@@ -148,7 +146,7 @@ public class ScheduleCommand extends Command {
             if (curr > max) {
                 if ((curr - max) >= checkedHours) {
                     getStartTime = findStartTime(max, checkedHours, curr, startBound, endBound);
-                    if (getStartTime != INVALID_START_VALUE) {
+                    if (getStartTime != INVALID_START_VALUE && isCorrectDay(getStartTime)) {
                         start = getStartTime;
                         break;
                     }
@@ -166,6 +164,17 @@ public class ScheduleCommand extends Command {
         return myList;
     }
 
+    private boolean isCorrectDay(long getStartTime) {
+        Calendar checkDay = Calendar.getInstance();
+        checkDay.setTimeInMillis(getStartTime);
+        System.out.println(checkDay.get(Calendar.DAY_OF_WEEK));
+        if (checkDay.get(Calendar.DAY_OF_WEEK) == 6 || checkDay.DAY_OF_WEEK == 7) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private long findStartTime(long start, long checkedHours, long end, int startBound, int endBound) {
         int hoursMin = (int) (checkedHours / 60000L);
         Calendar dayOne = Calendar.getInstance();
@@ -174,7 +183,6 @@ public class ScheduleCommand extends Command {
         int endTime = convertToHoursMinutes(end, dayTwo);
         startBound = startBound * 60;
         endBound = endBound * 60;
-        System.out.println(end - start);
         if (end - start <= 28800000L) {
             startTime = Math.max(startTime, startBound);
             if (endTime >= startTime) {
@@ -182,17 +190,11 @@ public class ScheduleCommand extends Command {
             } else {
                 endTime = Math.max(endTime, endBound);
             }
-            System.out.println("less than 8 hours case");
-            System.out.println("startTime is" + startTime);
-            System.out.println("endTime is" + endTime);
-            System.out.println("hoursTime is" + hoursMin);
             if ((endTime - startTime) >= hoursMin) {
                 dayOne.set(Calendar.HOUR_OF_DAY, startTime / 60);
                 dayOne.set(Calendar.MINUTE, startTime % 60);
-                System.out.println("match found");
                 return dayOne.getTimeInMillis();
             }
-            System.out.println("match not found");
         } else if (end - start >= 122400000L) {
             startTime = Math.max(startTime, startBound);
             if ((endBound - startTime) >= hoursMin) {
@@ -242,17 +244,23 @@ public class ScheduleCommand extends Command {
         startTime = Math.max(startTime, startBound);
         int finishedTime = startTime + hoursMin;
         if (finishedTime <= endBound && startTime >= startBound) {
+            while (dayOne.get(Calendar.DAY_OF_WEEK) == 6 || dayOne.get(Calendar.DAY_OF_WEEK) == 7) {
+                dayOne.add(Calendar.DATE, 1);
+            }
             dayOne.set(Calendar.HOUR_OF_DAY, startTime / 60);
             dayOne.set(Calendar.MINUTE, startTime % 60);
             return dayOne.getTimeInMillis();
         } else {
+            while (dayOne.get(Calendar.DAY_OF_WEEK) == 6 || dayOne.get(Calendar.DAY_OF_WEEK) == 7) {
+                dayOne.add(Calendar.DATE, 1);
+            }
+            dayOne.add(Calendar.DATE, 1);
             dayOne.set(Calendar.HOUR_OF_DAY, 8);
             dayOne.set(Calendar.MINUTE, 0);
-            dayOne.add(Calendar.DATE, 1);
             return dayOne.getTimeInMillis();
         }
     }
-
+    
     private int convertToHoursMinutes(long longTiming, Calendar calendar) {
         calendar.setTimeInMillis(longTiming);
         int hourMinuteRep = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
