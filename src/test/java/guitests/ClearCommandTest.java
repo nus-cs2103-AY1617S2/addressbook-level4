@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ClearCommand;
-
 public class ClearCommandTest extends AddressBookGuiTest {
 
     @Test
@@ -26,8 +24,8 @@ public class ClearCommandTest extends AddressBookGuiTest {
     }
 
     private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear all");
+        commandBox.runCommand("clear");
         assertListSize(0);
-        assertResultMessage(ClearCommand.MESSAGE_SUCCESS_ALL);
+        assertResultMessage("All the tasks have been cleared!");
     }
 }

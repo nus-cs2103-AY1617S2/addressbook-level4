@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.YTomorrow;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -13,57 +12,51 @@ public class TypicalTestPersons {
 
     public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
-    //@@author A0164032U
+    //@@author A0164889E
     public TypicalTestPersons() {
         try {
             alice = new PersonBuilder()
                     .withName("Alice Paul")
                     .withGroup("group1")
                     .withStartDate("01.01")
-                    .withEndDate("tomorrow")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withEndDate("12.12")
+                    .withTags("complete")
                     .build();
             benson = new PersonBuilder()
                     .withName("Benson Meier")
                     .withGroup("311")
-                    .withStartDate("01.01")
                     .withEndDate("12.11")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("incomplete")
                     .build();
             carl = new PersonBuilder()
                     .withName("Carl Kurz")
                     .withGroup("wall street")
-                    .withStartDate("01.01")
                     .withEndDate("10.01")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("complete")
                     .build();
             daniel = new PersonBuilder()
                     .withName("Daniel Meier")
                     .withGroup("street")
-                    .withStartDate("01.01")
                     .withEndDate("11.11")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("incomplete")
                     .build();
             elle = new PersonBuilder()
                     .withName("Elle Meyer")
                     .withGroup("michegan")
-                    .withStartDate("01.01")
                     .withEndDate("05.05")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("incomplete")
                     .build();
             fiona = new PersonBuilder()
                     .withName("Fiona Kunz")
                     .withGroup("little tokyo")
-                    .withStartDate("01.01")
                     .withEndDate("07.07")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("incomplete")
                     .build();
             george = new PersonBuilder()
                     .withName("George Best")
-                    .withStartDate("01.01")
                     .withEndDate("04.12")
                     .withGroup("street")
-                    .withTags(Tag.TAG_INCOMPLETE)
+                    .withTags("incomplete")
                     .build();
 
             // Manually added
