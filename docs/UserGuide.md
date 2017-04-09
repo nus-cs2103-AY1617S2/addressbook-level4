@@ -72,7 +72,7 @@ Format: `help`
 
 > A help window will be opened showing the user guide.
 > Help for each individual command is also shown when you type the command word only
- or when the argument format is invalid. 
+ or when the argument format is invalid.
 
 ### 2.2. Adding a task : `add`
 
@@ -172,7 +172,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Examples:
 
 * `find write test case`<br>
-  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`, 
+  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`,
   `write case`, and any combination of the individual words as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
