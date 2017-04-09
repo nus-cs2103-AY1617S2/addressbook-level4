@@ -6,7 +6,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Jay Gajendra Kabra](https://github.com/jay500s)
 <img src="images/jay500s.PNG" width="150"><br>
-*Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#2.4) <br>
+* Components in Charge of: [Model](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#2.4) <br>
 * Aspects/tools in charge of: Code Quality
 * Features implemented:
     * [Recurring Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#3) - Full stack implementation
@@ -33,7 +33,7 @@ Responsibilities: Storage, GitHub
     * [Comparable Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.3.1)
     * [Save Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.11)
     * [Load Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.12)
-* Code written: [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0163559U.md)][Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0163559U.md)
+* Code written: [[Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0163559U.md)][Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0163559U.md)]
 * Other major contributions:
     * Maintained storage, comparable, save/load, logic manager and XMLUtil tests
     * Updated testutil files, e.g. TestTask and TaskBuilder

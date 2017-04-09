@@ -94,7 +94,7 @@ Example:
 
 ### 2.3.1 Natural ordering of tasks
 
-> Sorting occurs automatically in Task Manager after every action. First, completed tasks will be sent to the bottom of the list. Then, tasks are sorted by priority, with highest priority tasks at the top of the list. Afterwards, tasks are sorted by their end time, then start time, then alphabetized by description.
+Sorting occurs automatically in Task Manager after every action. First, completed tasks will be sent to the bottom of the list. Then, tasks are sorted by priority, with highest priority tasks at the top of the list. Afterwards, tasks are sorted by their end time, then start time, then alphabetized by description.
 
 ### 2.4. Editing a task : `edit`
 
