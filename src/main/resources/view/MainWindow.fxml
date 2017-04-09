@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -40,9 +41,14 @@
 						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 					</padding>
 					<children>
-						<AnchorPane fx:id="todayTaskListPanelPlaceholder" prefHeight="184.0" prefWidth="320.0" VBox.vgrow="ALWAYS" />
-                  		<AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="249.0">
-                  		</AnchorPane>
+						<AnchorPane fx:id="todayTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="239.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Overdue Task" />
+                     </children></AnchorPane>
+                  		<AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Task Due Today" />
+                     </children></AnchorPane>
 					</children>
 				</VBox>
 				<!-- @@author -->

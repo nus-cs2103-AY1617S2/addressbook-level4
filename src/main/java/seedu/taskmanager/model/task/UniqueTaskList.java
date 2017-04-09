@@ -202,7 +202,7 @@ public class UniqueTaskList implements Iterable<Task> {
     
     // @@author A0114523U
     /**
-     * Filters task list based on enddate (overdue or due today).
+     * Filters task list based on end date (overdue or due today).
      */
     public ObservableList<Task> getTaskListByDate(Date endDate){
     	if (endDate.before(EndDate.today)) {
