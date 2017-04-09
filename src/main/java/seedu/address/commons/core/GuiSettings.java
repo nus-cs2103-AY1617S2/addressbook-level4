@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
-import seedu.address.ui.ThemeWindow;
+import seedu.address.ui.Theme;
 
 /**
  * A Serializable class that contains the GUI settings.
@@ -25,7 +25,7 @@ public class GuiSettings implements Serializable {
         this.windowWidth = DEFAULT_WIDTH;
         this.windowHeight = DEFAULT_HEIGHT;
         this.windowCoordinates = null; // null represent no coordinates
-        this.styleSheet = ThemeWindow.DEFAULT_STYLESHEET;
+        this.styleSheet = Theme.DEFAULT_STYLESHEET;
         this.lastLoadedYTomorrow = null;
     }
 

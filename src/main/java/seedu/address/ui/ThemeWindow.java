@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -9,7 +7,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import seedu.address.MainApp;
 import seedu.address.commons.util.FxViewUtil;
 
 //@@author A0163848R
@@ -19,11 +16,6 @@ import seedu.address.commons.util.FxViewUtil;
  * The chosen configuration option is saved.
  */
 public class ThemeWindow extends Window {
-
-    public static final String DEFAULT_STYLESHEET = "LimeTheme";
-    public static final String STYLESHEET_EXTENSION = ".css";
-    public static final String THEME_FILE_FOLDER = "/themes/";
-    public static final String EXTENSIONS_STYLESHEET = "/view/Extensions.css";
 
     protected static final String ICON = "/images/theme_icon.png";
     protected static final String FXML = "ThemeWindow.fxml";
@@ -36,7 +28,7 @@ public class ThemeWindow extends Window {
     private Parent fxmlToApply;
 
     @FXML
-    private ListView<String> themeListView;
+    public ListView<String> themeListView;
 
     public ThemeWindow(Parent fxmlToApply) {
         super(FXML);
@@ -45,7 +37,7 @@ public class ThemeWindow extends Window {
         FxViewUtil.setStageIcon(stage, ICON);
         this.fxmlToApply = fxmlToApply;
 
-        setConnections(ThemeWindow.THEME_FILE_FOLDER);
+        setConnections(Theme.THEME_FILE_FOLDER);
         setEventHandlerForSelectionChangeEvent();
         setAccelerators();
     }
@@ -53,6 +45,7 @@ public class ThemeWindow extends Window {
     private void setAccelerators() {
         themeListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
+            @Override
             public void handle(final KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     handleExit();
@@ -67,26 +60,8 @@ public class ThemeWindow extends Window {
         getStage().close();
     }
 
-    /**
-     *
-     * @param Parent to set theme of.
-     * @param Theme filename (without path or extension) to be applied.
-     */
-    public static void changeTheme(Parent root, String theme) {
-
-        root.getStylesheets().clear();
-
-        root.getStylesheets().add(MainApp.class.getResource(
-               THEME_FILE_FOLDER
-               + theme
-               + STYLESHEET_EXTENSION)
-               .toString());
-
-        root.getStylesheets().add(MainApp.class.getResource(EXTENSIONS_STYLESHEET).toString());
-    }
-
     private void setConnections(String path) {
-        themeListView.setItems(getThemes());
+        themeListView.setItems(Theme.THEMES);
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
@@ -94,20 +69,8 @@ public class ThemeWindow extends Window {
                .addListener((observable, oldValue, newValue) -> {
                    if (newValue != null) {
                        LOGGER.fine("Theme has changed to : '" + newValue + "'");
-                       changeTheme(fxmlToApply, newValue);
+                       Theme.changeTheme(fxmlToApply, newValue);
                    }
                });
     }
-
-    /**
-     * @return Prewritten list of acceptable theme filenames (without path or extension).
-     */
-    private ObservableList<String> getThemes() {
-        ObservableList<String> items = FXCollections.observableArrayList(
-               "BlandTheme",
-               "DarkTheme",
-               "LimeTheme");
-        return items;
-    }
-
 }
