@@ -109,7 +109,8 @@ Format : `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESC
 Example:
 * `edit index/1 desc/The venue has been changed`
 * `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
-<img src="images/Edit1_JOBS.png" width="300"><img src="images/Edit2_JOBS.png" width="300">
+
+<img src="images/Edit1_JOBS.png" width="300">   <img src="images/Edit2_JOBS.png" width="300">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
@@ -118,7 +119,7 @@ Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-<img src="images/Undo1_JOBS.png" width="200"><img src="images/Undo2_JOBS.png" width="200"><img src="images/Undo3_JOBS.png" width="200">
+<img src="images/Undo1_JOBS.png" width="200">   <img src="images/Undo2_JOBS.png" width="200">   <img src="images/Undo3_JOBS.png" width="200">
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
@@ -131,7 +132,7 @@ Format : `set email/EMAIL pwd/PASSWORD`
 
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
-<img src="images/Set_JOBS.png" width="600"><br>
+<img src="images/set_JOBS.png" width="600"><br>
 
 ### Display Google Calendar: `display`
 Display is the command to enable the Google Calendar function for JOBS.
