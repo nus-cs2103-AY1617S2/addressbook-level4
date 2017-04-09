@@ -50,12 +50,12 @@ public class RedoCommandTest extends TaskBookGuiTest {
 	}
 	private void assertRedoSuccess(TestTask[] currentList)
 			throws IllegalArgumentException, IllegalTimeException, EmptyStackException {
-		TestTask taskToBeRedone = testStack.pop();
-		TestTask[] expectedResult = TestUtil.addTasksToList(currentList, taskToBeRedone);
+    TestTask taskToBeRedone = testStack.pop();
+    TestTask[] expectedResult = TestUtil.addTasksToList(currentList, taskToBeRedone);
 		commandBox.runCommand("redo");
 		// confirm the resultant list after redoing matches the original
 		assertTrue(taskListPanel.isListMatching(expectedResult));
-		// confirm that the result message is correct
-        assertResultMessage(String.format(MESSAGE_SUCCESS, taskToBeRedone));
-	}
+    // confirm that the result message is correct
+    assertResultMessage(String.format(MESSAGE_SUCCESS, taskToBeRedone));
+  }
 }
