@@ -43,14 +43,18 @@ public class CommandBox extends UiPart<Region> {
 
     private void addHistoryEventHandler() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (!(event.getCode().equals(KeyCode.UP) || event.getCode().equals(KeyCode.DOWN))) {
-                currentPrefix = Optional.empty();
+            KeyCode keyCode = event.getCode();
+            if (!(keyCode.equals(KeyCode.UP) || keyCode.equals(KeyCode.DOWN))) {
+                if (keyCode.equals(KeyCode.ENTER)) {
+                    currentPrefix = Optional.empty();
+                }
                 return;
             }
             String commandText = commandTextField.getText();
             int caretPosition = commandTextField.getCaretPosition();
             String prefix = commandText.substring(0, caretPosition);
-            if (!currentPrefix.equals(Optional.of(prefix))) {
+            if (!(currentPrefix.equals(Optional.of(prefix))
+                    && matchingCommands.get(matchingCommandIndex).equals(commandText))) {
                 currentPrefix = Optional.of(prefix);
                 commandHistoryIndex = getCommandHistory().size() - 1;
                 matchingCommands.clear();
@@ -58,7 +62,7 @@ public class CommandBox extends UiPart<Region> {
                 matchingCommandIndex = 0;
             }
             Optional<String> matchingCommand;
-            if (event.getCode().equals(KeyCode.UP)) {
+            if (keyCode.equals(KeyCode.UP)) {
                 matchingCommand = findPreviousMatchingCommand(prefix, commandText);
             } else {
                 matchingCommand = findNextMatchingCommand(prefix);
