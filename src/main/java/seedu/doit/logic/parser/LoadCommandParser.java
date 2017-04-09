@@ -8,6 +8,7 @@ import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.LoadCommand;
 
 public class LoadCommandParser implements CommandParser {
+    private static final String ARGUMENT_FOR_LOAD_IS = "Argument for load is ";
     private static final Logger logger = LogsCenter.getLogger(LoadCommandParser.class);
 
     /**
@@ -18,7 +19,7 @@ public class LoadCommandParser implements CommandParser {
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();
-        logger.info("Argument for load is " + filePath);
+        logger.info(ARGUMENT_FOR_LOAD_IS + filePath);
         return new LoadCommand(filePath);
 
     }

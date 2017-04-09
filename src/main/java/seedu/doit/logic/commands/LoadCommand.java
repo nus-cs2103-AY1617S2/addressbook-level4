@@ -11,7 +11,7 @@ import seedu.doit.commons.events.storage.TaskManagerLoadChangedEvent;
 import seedu.doit.commons.exceptions.DataConversionException;
 import seedu.doit.commons.util.FileUtil;
 import seedu.doit.logic.commands.exceptions.CommandException;
-import seedu.doit.model.ReadOnlyItemManager;
+import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.util.SampleDataUtil;
 
 public class LoadCommand extends Command {
@@ -44,7 +44,7 @@ public class LoadCommand extends Command {
     public CommandResult execute() throws CommandException {
         assert this.model != null;
         File file = new File(this.loadFilePath);
-        Optional<ReadOnlyItemManager> newData;
+        Optional<ReadOnlyTaskManager> newData;
         try {
             newData = this.storage.readTaskManager(this.loadFilePath);
             logger.info("IN LOADCOMMAND loading from : " + this.loadFilePath);

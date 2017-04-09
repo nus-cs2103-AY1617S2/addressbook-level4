@@ -227,6 +227,14 @@ public class CommandSettings implements Serializable {
         this.undo = undo;
     }
 
+    /**
+     * Changes the old alias command into a new one
+     *
+     * @param oldCommand
+     * @param newCommand
+     * @throws NoSuchCommandException
+     * @throws CommandExistedException
+     */
     public void setCommand(String oldCommand, String newCommand)
             throws NoSuchCommandException, CommandExistedException {
         if (doesCommandExist(newCommand)) {
@@ -272,6 +280,13 @@ public class CommandSettings implements Serializable {
         }
     }
 
+    /**
+     * Checks if the command word exists in both default command and alias
+     * command
+     * 
+     * @param command
+     * @return true if command word exist else false
+     */
     public boolean doesCommandExist(String command) {
         if (doesCommandExistInDefault(command)) {
             return true;
