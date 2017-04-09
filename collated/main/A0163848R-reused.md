@@ -1,58 +1,5 @@
 # A0163848R-reused
-###### \java\seedu\address\commons\events\ui\LoadRequestEvent.java
-``` java
-/**
-* Represents a request to retrieve the file at the stored path.
-*/
-public class LoadRequestEvent extends BaseEvent {
-
-    private File target;
-    
-    public LoadRequestEvent(File target) {
-        this.target = target;
-    }
-    
-    public File getTargetFile() {
-        return target;
-    }
-
-    @Override
-    public String toString() {
-        return "Imported YTomorrow: " + target.toString();
-    }
-}
-```
-###### \java\seedu\address\commons\events\ui\LoadResultAvailableEvent.java
-``` java
-/**
- * Indicates that a new result is available.
- */
-public class LoadResultAvailableEvent extends BaseEvent {
-
-    private final Optional<ReadOnlyTaskManager> imported;
-    private final File origin;
-
-    public LoadResultAvailableEvent(Optional<ReadOnlyTaskManager> imported, File origin) {
-        this.imported = imported;
-        this.origin = origin;
-    }
-
-    public Optional<ReadOnlyTaskManager> getImported() {
-        return imported;
-    }
-    
-    public File getFile() {
-        return origin;
-    }
-    
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
-
-}
-```
-###### \java\seedu\address\logic\commands\ThemeCommand.java
+###### /java/seedu/task/logic/commands/ThemeCommand.java
 ``` java
 /**
  * Format full help instructions for every command for display.
@@ -73,7 +20,63 @@ public class ThemeCommand extends Command {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\UndoCommand.java
+###### /java/seedu/task/logic/commands/AddCommand.java
+``` java
+    /**
+     * Extracts group from keywords
+     * @param keywords to search
+     * @return group if found
+     */
+    private static Optional<Group> getGroup(List<String> keywords) {
+        if (keywords.contains(GROUP_KEYWORD)) {
+            String inner = StringUtil.extract(keywords, keywords.lastIndexOf(GROUP_KEYWORD) + 1, SPECIAL_KEYWORDS);
+            if (!inner.isEmpty()) {
+                try {
+                    return Optional.of(new Group(inner));
+                } catch (IllegalValueException e) {
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Extracts start date from keywords
+     * @param keywords to search
+     * @return start date if found
+     */
+    private static Optional<StartDate> getStartDate(List<String> keywords) {
+        if (keywords.contains(STARTDATE_KEYWORD)) {
+            String inner = StringUtil.extract(keywords, keywords.lastIndexOf(STARTDATE_KEYWORD) + 1, SPECIAL_KEYWORDS);
+            if (!inner.isEmpty()) {
+                try {
+                    return Optional.of(new StartDate(inner));
+                } catch (IllegalValueException e) {
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Extracts end date from keywords
+     * @param keywords to search
+     * @return end date if found
+     */
+    private static Optional<EndDate> getEndDate(List<String> keywords) {
+        if (keywords.contains(ENDDATE_KEYWORD)) {
+            String inner = StringUtil.extract(keywords, keywords.lastIndexOf(ENDDATE_KEYWORD) + 1, SPECIAL_KEYWORDS);
+            if (!inner.isEmpty()) {
+                try {
+                    return Optional.of(new EndDate(inner));
+                } catch (IllegalValueException e) {
+                }
+            }
+        }
+        return Optional.empty();
+    }
+```
+###### /java/seedu/task/logic/commands/UndoCommand.java
 ``` java
 /**
  * Command that undoes changes caused by the last command.
@@ -98,7 +101,7 @@ public class UndoCommand extends Command {
 
 }
 ```
-###### \java\seedu\address\logic\commands\UnmarkCommand.java
+###### /java/seedu/task/logic/commands/UnmarkCommand.java
 ``` java
 /**
  * Command that marks task as incomplete
@@ -112,4 +115,57 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+```
+###### /java/seedu/task/commons/events/ui/LoadRequestEvent.java
+``` java
+/**
+* Represents a request to retrieve the file at the stored path.
+*/
+public class LoadRequestEvent extends BaseEvent {
+
+    private File target;
+
+    public LoadRequestEvent(File target) {
+        this.target = target;
+    }
+
+    public File getTargetFile() {
+        return target;
+    }
+
+    @Override
+    public String toString() {
+        return "Imported YTomorrow: " + target.toString();
+    }
+}
+```
+###### /java/seedu/task/commons/events/ui/LoadResultAvailableEvent.java
+``` java
+/**
+ * Indicates that a new result is available.
+ */
+public class LoadResultAvailableEvent extends BaseEvent {
+
+    private final Optional<ReadOnlyTaskManager> imported;
+    private final File origin;
+
+    public LoadResultAvailableEvent(Optional<ReadOnlyTaskManager> imported, File origin) {
+        this.imported = imported;
+        this.origin = origin;
+    }
+
+    public Optional<ReadOnlyTaskManager> getImported() {
+        return imported;
+    }
+
+    public File getFile() {
+        return origin;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+}
 ```
