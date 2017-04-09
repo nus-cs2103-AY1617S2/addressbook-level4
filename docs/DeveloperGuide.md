@@ -484,8 +484,6 @@ Use case ends.
 5. All commands should be completed within 200ms.
 6. 80% test coverage.
 
-{More to be added}
-
 ## Appendix D : Glossary
 
 ##### Mainstream OS
@@ -645,16 +643,4 @@ Cons:
 * It alerts user 10 minutes prior. Then you snooze for 15 minutes.
 * Needs alarm to be ringing for long time at least 2 minutes.
 * Can't repeat reminders daily.
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
