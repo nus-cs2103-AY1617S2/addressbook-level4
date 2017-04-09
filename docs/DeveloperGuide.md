@@ -203,8 +203,9 @@ The `Model`,
 * holds history of all data changes done within run-time.
 
 #### Undo and Redo changes in task manager
-`undoTaskManager` is a stack that stores instances of `TaskManager` whenever changes are made to the data of the application. These changes can be undone if programme is still running within the same session. Instances of `TaskManager` is only stored in runtime and Undo actions can only be called for actions done within the same session. 
-This supports multiple undos. 
+`undoTaskManager` is a stack that stores instances of `TaskManager` whenever changes are made to the data of the application.
+These changes can be undone if programme is still running within the same session. Instances of `TaskManager` is only stored in runtime and Undo actions can only be called for actions done within the same session. 
+This supports multiple undos.
 `redoTaskManager` is a stack that stores instances of `TaskManager` whenever the undo function is called. This allows for undone actions to be reloaded again, allowing for data to be reloaded again multiple times if no new changes are made after actions has been undone.
 
 A new `TaskManager` is created based on the instance saved within these stacks and replaces the current `TaskManager` to load previous versions of data.
