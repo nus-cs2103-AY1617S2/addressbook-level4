@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.teamstbf.yats.commons.core.Messages;
+import org.teamstbf.yats.logic.commands.ListCommand;
 import org.teamstbf.yats.testutil.TestEvent;
 
 //@@author A0138952W
@@ -13,7 +14,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 	@Test
 	public void list_nonEmptyList() {
 		/** lists all tasks in the list */
-		assertListResult("list", td.abdicate, td.boop, td.oxygen, td.cower, td.duck);
+		assertListAllResult("list", td.abdicate, td.boop, td.oxygen, td.cower, td.duck);
 
 		/** lists all done tasks in the list */
 		assertListResult("list done");
@@ -39,7 +40,7 @@ public class ListCommandTest extends TaskManagerGuiTest {
 	@Test
 	public void list_emptyList() {
 		commandBox.runCommand("reset");
-		assertListResult("list"); // no result
+		assertListAllResult("list"); // no result
 	}
 
 	@Test
@@ -53,5 +54,11 @@ public class ListCommandTest extends TaskManagerGuiTest {
 		assertListSize(expectedHits.length);
 		assertResultMessage(expectedHits.length + " tasks listed!");
 		assertTrue(taskListPanel.isListMatching(expectedHits));
+	}
+
+	private void assertListAllResult(String command, TestEvent... expectedHits) {
+		commandBox.runCommand(command);
+		assertListSize(expectedHits.length);
+		assertResultMessage(ListCommand.MESSAGE_SUCCESS);
 	}
 }
