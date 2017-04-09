@@ -57,7 +57,7 @@ public class TaskListPanel extends UiPart<Region> {
         setConnections(filteredList, finishedListView);
         setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
-        selectTab(UPCOMING_TAB);
+        selectTab(ALL_TAB);
     }
 
     private static String getFxmlFromType(String type) {
@@ -101,11 +101,12 @@ public class TaskListPanel extends UiPart<Region> {
         });
     }
 
+    public void clearSelection() {
+        currentListView.getSelectionModel().clearSelection();
+    }
 
     public void switchListView(TaskCategory category) {
         switch (category) {
-        case NOCHANGE:
-            break;
         case ALL:
             selectTab(ALL_TAB);
             currentListView = allListView;
@@ -120,9 +121,7 @@ public class TaskListPanel extends UiPart<Region> {
             currentListView = upcomingListView;
             break;
         }
-        if (category != TaskCategory.NOCHANGE) {
-            logger.info("Switched to " + category + " in " + type);
-        }
+        logger.info("Switched to " + category + " in " + type);
     }
 
     public void selectTab(int tab) {

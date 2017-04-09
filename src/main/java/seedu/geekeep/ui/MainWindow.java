@@ -138,13 +138,6 @@ public class MainWindow extends UiPart<Region> {
         new CommandBox(getCommandBoxPlaceholder(), logic);
     }
 
-    /**
-     * Sets the default view of main window to show the undone tasks.
-     */
-    public void setDefaultView() {
-        logic.setFilteredTaskListToShowUndone();
-    }
-
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }
@@ -243,6 +236,12 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getDeadlineListPanel() {
         return this.deadlineListPanel;
+    }
+
+    public void clearSelectionInAllPanels() {
+        floatingTaskListPanel.clearSelection();
+        eventListPanel.clearSelection();
+        deadlineListPanel.clearSelection();
     }
 
     @Subscribe
