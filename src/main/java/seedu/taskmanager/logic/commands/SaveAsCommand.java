@@ -41,7 +41,10 @@ public class SaveAsCommand extends Command {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         File forPermissionTest = new File(this.newPath);
-        if (!forPermissionTest.canWrite()) {
+        try {
+            forPermissionTest.createNewFile();
+            forPermissionTest.delete();
+        } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_IO);
         }
 
