@@ -4,7 +4,7 @@ import java.util.Set;
 
 //@@author A0164889E
 /**
- * Finds and lists all persons in address book whose group contains any of the argument keywords.
+ * Finds and lists all tasks in task manager whose group contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class GroupCommand extends Command {
@@ -24,8 +24,8 @@ public class GroupCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredPersonListGroup(keywords);
-        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+        model.updateFilteredTaskListGroup(keywords);
+        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
 
 }

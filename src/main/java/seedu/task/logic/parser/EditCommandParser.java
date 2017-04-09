@@ -12,7 +12,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.task.logic.commands.EditCommand.EditTaskDescriptor;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -34,7 +34,7 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
         try {
             editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
             editPersonDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE)));

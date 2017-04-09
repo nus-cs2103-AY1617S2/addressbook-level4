@@ -25,52 +25,52 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task complete: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task is already complete.";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task complete: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task is already complete.";
 
-    private final int filteredPersonListIndex;
+    private final int filteredTaskListIndex;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor details to edit the task with
      */
-    public MarkCommand(int filteredPersonListIndex) {
-        assert filteredPersonListIndex > 0;
+    public MarkCommand(int filteredTaskListIndex) {
+        assert filteredTaskListIndex > 0;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
+        if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        ReadOnlyTask editedPerson = createMarkedPerson(personToEdit);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask editedTask = createMarkedTask(taskToEdit);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniqueTaskList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            model.updateTask(filteredTaskListIndex, editedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));
     }
 
     //@@author A0164466X
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited to be complete.
      */
-    private static ReadOnlyTask createMarkedPerson(ReadOnlyTask personToEdit) {
-        assert personToEdit != null;
+    private static ReadOnlyTask createMarkedTask(ReadOnlyTask taskToEdit) {
+        assert taskToEdit != null;
 
         UniqueTagList updatedTags =
-                personToEdit
+                taskToEdit
                 .getTags()
                 .except(UniqueTagList.build(
                                 Tag.TAG_COMPLETE,
@@ -84,7 +84,7 @@ public class MarkCommand extends Command {
             e.printStackTrace();
         }
 
-        return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
+        return new Task(taskToEdit.getName(),
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getGroup(), updatedTags);
     }
 }

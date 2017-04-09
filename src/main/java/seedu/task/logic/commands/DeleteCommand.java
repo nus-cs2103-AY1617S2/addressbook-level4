@@ -6,7 +6,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
 import seedu.task.model.task.ReadOnlyTask;
 
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Deletes a task identified using it's last displayed index from the task manager.
  */
 public class DeleteCommand extends Command {
 
@@ -36,31 +36,31 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         //@@author A0163848R
         if (targetIndex != null && lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToDelete = null;
-        if (targetIndex != null) personToDelete = lastShownList.get(targetIndex - 1);
-        if (targetName != null) personToDelete = getPersonByName(lastShownList, targetName);
+        ReadOnlyTask taskToDelete = null;
+        if (targetIndex != null) taskToDelete = lastShownList.get(targetIndex - 1);
+        if (targetName != null) taskToDelete = getTaskByName(lastShownList, targetName);
         //@@author
 
         try {
-            model.deletePerson(personToDelete);
+            model.deleteTask(taskToDelete);
         } catch (Exception pnfe) {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
-    private ReadOnlyTask getPersonByName(UnmodifiableObservableList<ReadOnlyTask> list, String name) {
-        for (ReadOnlyTask person : list) {
-            if (person.getName().toString().equals(name)) {
-                return person;
+    private ReadOnlyTask getTaskByName(UnmodifiableObservableList<ReadOnlyTask> list, String name) {
+        for (ReadOnlyTask task : list) {
+            if (task.getName().toString().equals(name)) {
+                return task;
             }
         }
         return null;

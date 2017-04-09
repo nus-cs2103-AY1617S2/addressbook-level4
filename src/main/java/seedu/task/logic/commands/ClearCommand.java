@@ -8,11 +8,11 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.YTomorrow;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.ReadOnlyTask;
-import seedu.task.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0163848R
 /**
- * Clears the address book.
+ * Clears the task manager.
  */
 public class ClearCommand extends Command {
 
@@ -59,7 +59,7 @@ public class ClearCommand extends Command {
         if (keywords.contains(KEYWORD_COMPLETE)) {
 
             List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
-            for (ReadOnlyTask task : model.getAddressBook().getPersonList()) {
+            for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
                 try {
                     if (!task.getTags().contains(new Tag(Tag.TAG_COMPLETE))) {
                         filtered.add(task);
@@ -70,8 +70,8 @@ public class ClearCommand extends Command {
             }
             YTomorrow filteredYTomorrow = new YTomorrow();
             try {
-                filteredYTomorrow.setPersons(filtered);
-            } catch (DuplicatePersonException e) {
+                filteredYTomorrow.setTasks(filtered);
+            } catch (DuplicateTaskException e) {
                 e.printStackTrace();
             }
             model.resetData(filteredYTomorrow);
@@ -82,15 +82,15 @@ public class ClearCommand extends Command {
         if (keywords.contains(KEYWORD_PASSED)) {
 
             List<ReadOnlyTask> filtered = new ArrayList<ReadOnlyTask>();
-            for (ReadOnlyTask task : model.getAddressBook().getPersonList()) {
+            for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
                 if (!task.hasPassed()) {
                     filtered.add(task);
                 }
             }
             YTomorrow filteredYTomorrow = new YTomorrow();
             try {
-                filteredYTomorrow.setPersons(filtered);
-            } catch (DuplicatePersonException e) {
+                filteredYTomorrow.setTasks(filtered);
+            } catch (DuplicateTaskException e) {
                 e.printStackTrace();
             }
             model.resetData(filteredYTomorrow);
