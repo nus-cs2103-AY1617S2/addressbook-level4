@@ -64,7 +64,6 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TodoList(), new UserPrefs());
     }
 
-    //@@author A0147980U
     //=========== TodoList =============================================================
 
     @Override
@@ -214,6 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(qualifiers));
     }
 
+    //@@author A0147980U
     @Override
     public void updateFilteredTaskList(TaskType type, UniqueTagList tags, TaskDate dates) {
         ArrayList<Qualifier> qualifiers = new ArrayList<Qualifier>();
@@ -228,6 +228,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         updateFilteredTaskList(new PredicateExpression(qualifiers.toArray(new Qualifier[qualifiers.size()])));
     }
+    //@@author
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -240,6 +241,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    //@@author A0147980U
     private class PredicateExpression implements Expression {
 
         private final Qualifier[] qualifiers;
@@ -262,6 +264,7 @@ public class ModelManager extends ComponentManager implements Model {
             return qualifiers.toString();
         }
     }
+    //@@author
 
     interface Qualifier {
         boolean run(ReadOnlyTask task);

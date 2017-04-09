@@ -24,6 +24,7 @@ public class ListCommand extends Command {
         OVERDUE,
         ALL
     }
+
     //@@author A0140887W
     public static final String DEFAULT_COMMAND_WORD = "list";
 
@@ -40,7 +41,6 @@ public class ListCommand extends Command {
     public static final String MESSAGE_OVERDUE = String.format(MESSAGE_SUCCESS, "overdue");
     public static final String MESSAGE_ALL = String.format(MESSAGE_SUCCESS, "all");
 
-    //@@author A0147980U
     private UniqueTagList tagList = new UniqueTagList();
     private TaskType type = null;
     private TaskDate dates = null;

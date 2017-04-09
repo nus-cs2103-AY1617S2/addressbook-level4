@@ -14,6 +14,7 @@ public class CommandResult {
         isMutating = false;
     }
 
+    //@@author A0147980U
     public CommandResult(String feedbackToUser, boolean isMutating) {
         this(feedbackToUser);
         this.isMutating = isMutating;

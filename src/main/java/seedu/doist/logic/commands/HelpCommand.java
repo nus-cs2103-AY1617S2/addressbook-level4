@@ -10,9 +10,11 @@ public class HelpCommand extends Command {
 
     public static final String DEFAULT_COMMAND_WORD = "help";
 
+    //@@author A0147980U
     public static final String MESSAGE_USAGE = DEFAULT_COMMAND_WORD
             + ": Shows program usage instructions.\n"
             + "Example: " + DEFAULT_COMMAND_WORD;
+    //@@author
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 

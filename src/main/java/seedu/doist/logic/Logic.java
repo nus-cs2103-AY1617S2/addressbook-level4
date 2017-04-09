@@ -20,10 +20,10 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException;
 
+    //@@author A0147980U
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
-    //@@author A0147980U
     /**
      * This method is used for auto completion in UI component
      * It is defined in Logic component rather than in Model component to

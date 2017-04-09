@@ -45,18 +45,19 @@ public class AliasListMapManager extends ComponentManager implements AliasListMa
         indicateAliasListMapChanged();
     }
 
-    @Override
-    public void removeAlias(String alias) {
-        aliasListMap.removeAlias(alias);
-        indicateAliasListMapChanged();
-    }
-
     /** Returns a list of aliases for the specified command word */
     @Override
     public List<String> getAliasList(String defaultCommandWord) {
         return aliasListMap.getAliasList(defaultCommandWord);
     }
 
+    @Override
+    public void removeAlias(String alias) {
+        aliasListMap.removeAlias(alias);
+        indicateAliasListMapChanged();
+    }
+
+    //@@author A0147980U
     @Override
     public List<String> getValidCommandList(String defaultCommandWord) {
         List<String> list = new ArrayList<String>(aliasListMap.getAliasList(defaultCommandWord));

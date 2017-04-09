@@ -14,7 +14,7 @@ import seedu.doist.logic.commands.Command;
 import seedu.doist.logic.commands.IncorrectCommand;
 import seedu.doist.logic.commands.ListCommand;
 
-//@@author A0147980U-reused
+//@@author A0147980U
 public class ListCommandParser {
     private static final Pattern LIST_COMMAND_REGEX = Pattern.compile("(?<preamble>[^\\\\]*)" +
                                                                       "(?<parameters>((\\\\)(\\S+)(\\s+)([^\\\\]*))*)");
