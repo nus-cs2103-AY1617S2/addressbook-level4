@@ -36,7 +36,7 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 ## 2. User Interface
 #### Menu Bar : update the task list to display all relevant tasks based on the selection for fast search <br>
 Home will display all tasks inside, other buttons will only display incompleted tasks with the specified type.
-For example, click on deadline, only incompleted tasks with deadline will be displayed:
+For example, click on deadline, only incompleted tasks with deadline will be displayed:<br>
 <img src="images/menubar.png" width="300">
 <br>
 
@@ -47,11 +47,11 @@ An incompleted task card is shown with a white color bar:
 A completed task card is shown with a green color bar:
 <img src="images/completed_task.png" width="500"> 
 <br>
-A overdued task card is shown with a white red bar:
+A overdued task card is shown with a red red bar:<br>
 <img src="images/overdued_task.png" width="500"> 
 <br>
-There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:
-<img src="images/pri_high.png" width="100"> <img src="images/pri_medium.png" width="100"> <img src="images/pri_low.png" width="100"> 
+There are three priorities associated with task, and they are highlighted using red, orange and yellow circles at the end of the task card:<br>
+<img src="images/pri_high.png" height="50" width="100"> <img src="images/pri_medium.png" height="50",width="100"> <img src="images/pri_low.png" height="50",width="100"> 
 <br>
 
 ## 3. Features
