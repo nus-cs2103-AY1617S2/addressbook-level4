@@ -218,11 +218,11 @@ public class EzDo implements ReadOnlyEzDo {
                 // Update start date
                 String startDateInString = task.getStartDate().value;
                 String startDate = updateDate(recurringInterval, startDateInString);
-                
+
                 // Update due date
                 String dueDateInString = task.getDueDate().value;
                 String dueDate = updateDate(recurringInterval, dueDateInString);
-                
+
                 // Add updated task to UniqueTaskList.
                 tasks.add(new Task(task.getName(), task.getPriority(), new StartDate(startDate),
                         new DueDate(dueDate), task.getRecur(), task.getTags()));
