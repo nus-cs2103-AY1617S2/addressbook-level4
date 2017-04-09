@@ -233,8 +233,8 @@ Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default the name and tag is searched.
-> * Adding 'tag/' will search by only tag.
-> * Adding 'name/' will search by only name.
+> * Adding '/tag' will search by only tag.
+> * Adding '/name' will search by only name.
 > * If no keyword is entered, the list of all tasks is displayed.
 > * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
