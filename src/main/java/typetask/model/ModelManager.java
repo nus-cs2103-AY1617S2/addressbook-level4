@@ -189,10 +189,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
     //@@author A0144902L
+    /** Filters to find tasks that are completed */
     @Override
     public void updateFilteredTaskList(boolean showComplete) {
         updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(showComplete)));
     }
+    /** Filters to find tasks that have high priority */
     @Override
     public void updateFilteredTaskList(Priority priority) {
         updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(priority)));
@@ -347,7 +349,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (task.getPriority().value == "High");
+            return (task.getPriority().value == "High" && task.getIsCompleted() == false);
         }
 
         @Override
@@ -391,7 +393,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
 
-            return (isTaskDueToday || isEventDueToday);
+            return ((isTaskDueToday || isEventDueToday) && task.getIsCompleted() == false);
         }
 
         @Override
