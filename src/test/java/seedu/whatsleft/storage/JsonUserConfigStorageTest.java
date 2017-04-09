@@ -28,7 +28,7 @@ public class JsonUserConfigStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readUserConfigNullFilePathAssertionFailure() throws DataConversionException {
+    public void readUserConfig_nullFilePath_assertionFailure() throws DataConversionException {
         thrown.expect(AssertionError.class);
         readUserConfig(null);
     }
@@ -39,7 +39,7 @@ public class JsonUserConfigStorageTest {
     }
 
     @Test
-    public void readUserConfigMissingFileEmptyResult() throws DataConversionException {
+    public void readUserConfig_missingFile_emptyResult() throws DataConversionException {
         assertFalse(readUserConfig("NonExistentFile.json").isPresent());
     }
 
@@ -50,7 +50,7 @@ public class JsonUserConfigStorageTest {
     }
 
     @Test
-    public void readUserConfigFileInOrderSuccessfullyRead() throws DataConversionException {
+    public void readUserConfig_fileInOrder_successfullyRead() throws DataConversionException {
         Config expected = new Config();
         expected.setAppTitle("TestApp");
         expected.setWhatsLeftName("myTestWhatsLeft");
@@ -59,7 +59,7 @@ public class JsonUserConfigStorageTest {
     }
 
     @Test
-    public void readUserConfigExtraValuesInFileExtraValuesIgnored() throws DataConversionException {
+    public void readUserConfig_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         Config expected = new Config();
         expected.setAppTitle("TestApp");
         expected.setWhatsLeftName("myTestWhatsLeft");
@@ -69,13 +69,13 @@ public class JsonUserConfigStorageTest {
     }
 
     @Test
-    public void saveConfigNullConfigAssertionFailure() throws IOException {
+    public void saveConfig_nullConfig_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveUserConfig(null, "SomeFile.json");
     }
 
     @Test
-    public void saveUserConfigNullFilePathAssertionFailure() throws IOException {
+    public void saveUserConfig_nullFilePath_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveUserConfig(new Config(), null);
     }
@@ -86,7 +86,7 @@ public class JsonUserConfigStorageTest {
     }
 
     @Test
-    public void saveUserConfigAllInOrderSuccess() throws DataConversionException, IOException {
+    public void saveUserConfig_allInOrder_success() throws DataConversionException, IOException {
 
         Config original = new Config();
         original.setAppTitle("TestApp");

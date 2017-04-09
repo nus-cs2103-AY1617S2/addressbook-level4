@@ -16,7 +16,7 @@ import seedu.whatsleft.testutil.TestUtil;
 //@@author A0121668A
 public class SaveCommandTest extends WhatsLeftGuiTest {
     @Test
-    public void saveWhatsLeftSuccess() {
+    public void saveCommand_validFilePath_saveSuccessful() {
 
         TestEvent[] currentEventList = te.getTypicalEvents();
         currentEventList = TestUtil.getFilteredTestEvents(currentEventList);
@@ -24,15 +24,15 @@ public class SaveCommandTest extends WhatsLeftGuiTest {
         currentTaskList = TestUtil.getFilteredTestTasks(currentTaskList);
 
         /** Save a file from the designated filepath */
-        assertSaveWhatsLeftSuccess("./src/test/data/SaveCommandTest/TypicalWhatsLeft.xml", currentTaskList,
-                currentEventList);
+        assertSaveWhatsLeftSuccessful("./src/test/data/SaveCommandTest/TypicalWhatsLeft.xml",
+                currentTaskList, currentEventList);
     }
 
     @Test
-    public void saveWhatsLeftFailure() {
-        assertInvalidCommandFormatFailure(""); // no filename
-        assertInvalidCommandFormatFailure("./Data"); // filename without .xml
-        assertInvalidCommandFormatFailure("./Data/^%&^.xml"); // invalid //
+    public void saveCommand_invalidFilePath_invalidCommandMessageShown() {
+        assertInvalidSaveCommandMessageShown(""); // no filename
+        assertInvalidSaveCommandMessageShown("./Data"); // filename without .xml
+        assertInvalidSaveCommandMessageShown("./Data/^%&^.xml"); // invalid //
                                                               // filename
     }
 
@@ -41,7 +41,7 @@ public class SaveCommandTest extends WhatsLeftGuiTest {
      *
      * @param filePath
      */
-    private void assertInvalidCommandFormatFailure(String filePath) {
+    private void assertInvalidSaveCommandMessageShown(String filePath) {
         commandBox.runCommand("save " + filePath);
         String expected = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
         ;
@@ -56,7 +56,7 @@ public class SaveCommandTest extends WhatsLeftGuiTest {
      * @param currentTaskList
      * @param currentEventList
      */
-    private void assertSaveWhatsLeftSuccess(String filePathToSave, TestTask[] currentTaskList,
+    private void assertSaveWhatsLeftSuccessful(String filePathToSave, TestTask[] currentTaskList,
             TestEvent[] currentEventList) {
         commandBox.runCommand("save " + filePathToSave);
         commandBox.runCommand("read " + filePathToSave);
