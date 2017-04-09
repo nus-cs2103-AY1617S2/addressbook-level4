@@ -205,33 +205,37 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Find** : `find KEYWORD [MORE_KEYWORDS]` <br>
-  e.g. `find groceries`
+* **Filter** : `filter [FILTER_TYPE] [FILTER_ARGUMENTS]` <br>
+  Supported FILTER_TYPES are "name", "desc", "status", "before", "after"
+  "name", "desc", and "status" find tasks that contain the substring specified by FILTER_ARGUMENTS
+  "before", "after" find tasks before and after a certain date specified by FILTER_ARGUMENTS
+  e.g. `find status completed`
+  e.g. 'find after today'
 
 * **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
   e.g. `edit 2 m/Go to Guardian`
 
-* **List** : `list` <br>
+* **List** : `list` <br> shows all tasks, removes filtering
 
 * **Clear** : `clear`
 
-* **Undo** : `undo` <br>
+* **Undo** : `undo` <br> Undos previous undoable change to the Task list. Doesn't undo filtering as filtering can be undone by using list. Can undo up to the last 10 undoable changes.
 
-* **Redo** : `redo` <br>
+* **Redo** : `redo` <br> Redos previous undo, can redo consecutive undos.
 
-* **Done** : `done INDEX [MORE INDECIES]` <br>
+* **Done** : `done INDEX [MORE INDECIES]` <br> marks the Status of the index as done.
  e.g. `done 3`
 
 * **Filter** : `filter` <br>
  e.g.`filter ongoing` or `filter completed`
 
 * **Sort** : `sort`<br>
- e.g.`sort time` or `sort name`
+ e.g.`sort time`, `sort name`, 'sort cd', 'sort status'
 
-* **Path** : `path PATHNAME` <br>
+* **Path** : `path PATHNAME` <br> saves a new copy of the TaskManager to a new file location and changes savepath.
  e.g. `path C:\Desktop\MyTasks.xml`
 
- * **Load** : `load PATHNAME` <br>
+ * **Load** : `load PATHNAME` <br> Loads a copy of TaskManager and changes savepath, does not overwrite the loaded file.
  e.g. `load C:\Desktop\MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
