@@ -1,49 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <YATS>
     <tasks>
-        <title>Vascular Medicine Research</title>
-        <location>Hospital</location>
-        <startTime>04:05PM 07/04/2017</startTime>
-        <endTime>05:05PM 07/04/2017</endTime>
-        <deadline></deadline>
-        <description>Research to be extended and continued to alleviate carcinogenic vascularity</description>
-        <completed>No</completed>
-        <isRecurring>No</isRecurring>
-        <recurrenceStart>03/12/292269055</recurrenceStart>
-        <recurrencePeriodicity>none</recurrencePeriodicity>
-        <recurrenceDoneList></recurrenceDoneList>
-        <tagged>research</tagged>
-    </tasks>
-    <tasks>
-        <title>Grocery Shopping</title>
-        <location>FoodCourt</location>
-        <startTime>08:05PM 07/04/2017</startTime>
-        <endTime>09:05PM 07/04/2017</endTime>
-        <deadline></deadline>
-        <description>Buy some food</description>
-        <completed>No</completed>
-        <isRecurring>No</isRecurring>
-        <recurrenceStart>03/12/292269055</recurrenceStart>
-        <recurrencePeriodicity>none</recurrencePeriodicity>
-        <recurrenceDoneList></recurrenceDoneList>
-        <tagged>necessitires</tagged>
-    </tasks>
-    <tasks>
-        <title>Vscan Access Mid Term</title>
-        <location>School</location>
-        <startTime></startTime>
-        <endTime></endTime>
-        <deadline></deadline>
-        <description>To revise on p value mathematical induction</description>
-        <completed>No</completed>
-        <isRecurring>No</isRecurring>
-        <recurrenceStart>03/12/292269055</recurrenceStart>
-        <recurrencePeriodicity>none</recurrencePeriodicity>
-        <recurrenceDoneList></recurrenceDoneList>
-        <tagged>school</tagged>
-        <tagged>learn</tagged>
-    </tasks>
-    <tasks>
         <title>Project Milestone Documentation</title>
         <location>School</location>
         <startTime></startTime>
@@ -80,7 +37,7 @@
         <endTime></endTime>
         <deadline>10:20AM 10/01/2019</deadline>
         <description>Have to finish reading this book by 10th January in preparation for Armaggedon.</description>
-        <completed>Yes</completed>
+        <completed>No</completed>
         <isRecurring>No</isRecurring>
         <recurrenceStart>03/12/292269055</recurrenceStart>
         <recurrencePeriodicity>none</recurrencePeriodicity>
@@ -112,7 +69,7 @@
         <endTime>09:00PM 30/03/2025</endTime>
         <deadline></deadline>
         <description>The great war between the 2 colours have begun. The crusade is upon us!</description>
-        <completed>Yes</completed>
+        <completed>No</completed>
         <isRecurring>No</isRecurring>
         <recurrenceStart>03/12/292269055</recurrenceStart>
         <recurrencePeriodicity>none</recurrencePeriodicity>
@@ -142,7 +99,7 @@
         <endTime></endTime>
         <deadline></deadline>
         <description>Why cut yourself when you can have access to this subreddit!</description>
-        <completed>Yes</completed>
+        <completed>No</completed>
         <isRecurring>No</isRecurring>
         <recurrenceStart>03/12/292269055</recurrenceStart>
         <recurrencePeriodicity>none</recurrencePeriodicity>
@@ -220,7 +177,7 @@
         <endTime>05:55PM 01/03/2019</endTime>
         <deadline></deadline>
         <description>DOTA2 is getting too hard and too toxic, it's time to uninstall, see you at the next game.</description>
-        <completed>Yes</completed>
+        <completed>No</completed>
         <isRecurring>No</isRecurring>
         <recurrenceStart>03/12/292269055</recurrenceStart>
         <recurrencePeriodicity>none</recurrencePeriodicity>
@@ -768,19 +725,6 @@
         <tagged>tag5</tagged>
         <tagged>tag2</tagged>
         <tagged>tag3</tagged>
-    </tasks>
-    <tasks>
-        <title>test</title>
-        <location></location>
-        <startTime>08:00PM 10/04/2017</startTime>
-        <endTime>10:00PM 10/04/2017</endTime>
-        <deadline></deadline>
-        <description> </description>
-        <completed>No</completed>
-        <isRecurring>No</isRecurring>
-        <recurrenceStart>03/12/292269055</recurrenceStart>
-        <recurrencePeriodicity>none</recurrencePeriodicity>
-        <recurrenceDoneList></recurrenceDoneList>
     </tasks>
     <tags>research</tags>
     <tags>necessitires</tags>
