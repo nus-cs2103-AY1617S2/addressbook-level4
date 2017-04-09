@@ -70,11 +70,11 @@ There are 5 different tabs that can be selected:
    * COMPLETED: Displays tasks that are completed.
    * ALL: Displays all tasks.
     
-Note that in the label for each tab, there are some statistics describing the amount of current tasks, and 
-how many of these tasks satisfy that the's condition. For example, in the figure above, `INCOMPLETE` tab's 
-label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of all 6 current tasks.
+Note that in the label for each tab, there are statistics describing the amount of tasks, and 
+how many of these tasks satisfy the tab's description. For example, in the figure above (Figure 2.3), `INCOMPLETE`'s tab 
+label is `INCOMPLETE (5/6)`, indicating that there are 5 incomplete tasks out of 6 tasks in total.
 
-The **Command Box** is where you type in your commands. Feedback to your command is displayed in the 
+The **Command Box** is where you type in your commands. Feedback for your command is displayed in the 
 **Result Display**.
 
 Finally, the **Status Bar** is at the bottom of the app. It indicates where your app data is currently 
@@ -89,7 +89,7 @@ Type out these command in the command box and press <kbd>Enter</kbd> to execute 
    * **`add`**` Try Out Todo List` :
      adds a task named `Try Out Todo List` to the todo list.
    * **`delete`**` 1` : deletes the 1st task shown in the current list.
-   * **`exit`** : exits the app.
+   * **`exit`** : exits the app.<br>
 3 Refer to the [Features](#features) section below for details of each command.<br>
 
 [comment]: # (@@author A0162011A)
