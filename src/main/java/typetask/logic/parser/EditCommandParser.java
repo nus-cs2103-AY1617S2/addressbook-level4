@@ -46,6 +46,11 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
+        return updateEditTaskDescriptor(argsTokenizer, preambleFields, index);
+    }
+
+    private Command updateEditTaskDescriptor(ArgumentTokenizer argsTokenizer, List<Optional<String>> preambleFields,
+            Optional<Integer> index) {
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         List<Date> endDateList;
         List<Date> startDateList;
@@ -59,10 +64,7 @@ public class EditCommandParser {
                 if (!DateParser.isValidDateFormat(dateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
                 }
-                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
-                Optional<String> emptyString = Optional.of("");
-                editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
-                editTaskDescriptor.setDate(ParserUtil.parseDate(emptyString));
+                setDeadlineWithDate(argsTokenizer, editTaskDescriptor);
             }
             //Checks for valid deadline. If valid, store new deadline for editing
             if (argsTokenizer.getValue(PREFIX_TIME).isPresent()) {
@@ -70,10 +72,7 @@ public class EditCommandParser {
                 if (!DateParser.isValidDateFormat(timeList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
                 }
-                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));
-                Optional<String> emptyString = Optional.of("");
-                editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
-                editTaskDescriptor.setDate(ParserUtil.parseDate(emptyString));
+                setDeadlineWithTime(argsTokenizer, editTaskDescriptor);
             }
             //Checks for valid start date. If valid, store new start date for editing
             if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent()) {
@@ -81,8 +80,7 @@ public class EditCommandParser {
                 if (!DateParser.isValidDateFormat(startDateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE);
                 }
-                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
-                editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
+                setStartDate(argsTokenizer, editTaskDescriptor);
             }
             //Checks for valid end date. If valid, store new end date for editing
             if (argsTokenizer.getValue(PREFIX_END_DATE).isPresent()) {
@@ -90,8 +88,7 @@ public class EditCommandParser {
                 if (!DateParser.isValidDateFormat(endDateList)) {
                     return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_END_DATE);
                 }
-                Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_END_DATE).get()));
-                editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
+                setEndDate(argsTokenizer, editTaskDescriptor);
             }
             //Checks for valid schedule
             if (argsTokenizer.getValue(PREFIX_START_DATE).isPresent() &&
@@ -114,6 +111,34 @@ public class EditCommandParser {
         }
 
         return new EditCommand(index.get(), editTaskDescriptor);
+    }
+
+    private void setEndDate(ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_END_DATE).get()));
+        editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
+    }
+
+    private void setStartDate(ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_START_DATE).get()));
+        editTaskDescriptor.setDate(ParserUtil.parseDate(parseDate));
+    }
+
+    private void setDeadlineWithTime(ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_TIME).get()));
+        Optional<String> emptyString = Optional.of("");
+        editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
+        editTaskDescriptor.setDate(ParserUtil.parseDate(emptyString));
+    }
+
+    private void setDeadlineWithDate(ArgumentTokenizer argsTokenizer, EditTaskDescriptor editTaskDescriptor)
+            throws IllegalValueException {
+        Optional<String> parseDate = Optional.of(getDate(argsTokenizer.getValue(PREFIX_DATE).get()));
+        Optional<String> emptyString = Optional.of("");
+        editTaskDescriptor.setEndDate(ParserUtil.parseDate(parseDate));
+        editTaskDescriptor.setDate(ParserUtil.parseDate(emptyString));
     }
 
   //@@author A0139926R
