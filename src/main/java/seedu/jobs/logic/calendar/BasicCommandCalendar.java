@@ -10,12 +10,11 @@ import java.io.IOException;
 import java.util.List;
 
 public abstract class BasicCommandCalendar {
-    
-    protected static com.google.api.services.calendar.Calendar service;
 
+    protected static com.google.api.services.calendar.Calendar service;
     public abstract void execute() throws IOException, IllegalTimeException;	
-    
-    public String retrieveID (EventCalendar target) throws IOException {
+
+    public String retrieveID(EventCalendar target) throws IOException {
     	String id = "";
     	String pageToken = null;
     	do {
@@ -32,12 +31,12 @@ public abstract class BasicCommandCalendar {
     	} while (pageToken != null);
     	return id;
     }
-    
+
     public boolean isEqualStartTime (Event event, EventCalendar target) {
     	return event.getStart().getDateTime().toString().substring(0, 19).equals
     			(target.getStartTime().toString().toString().substring(0, 19));
     }
-    
+
     public boolean isEqualEndTime (Event event, EventCalendar target) {
     	return event.getEnd().getDateTime().toString().substring(0, 19).equals
     			(target.getEndTime().toString().toString().substring(0, 19));

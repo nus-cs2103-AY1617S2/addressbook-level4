@@ -127,7 +127,7 @@ public class CalendarManager {
     public void DeleteTask(ReadOnlyTask task) throws IllegalTimeException {
         new DeleteCalendar(task, service);
     }
-    
+
     public void LoadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
     	System.out.println("loadTask");
     	new LoadCalendar(service, list);

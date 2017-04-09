@@ -57,7 +57,7 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing JOBS ]===========================");
         super.init();
-        
+
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(),
                 config.getLoginInfoFilePath());
@@ -68,7 +68,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        
+
         calendarManager = new CalendarManager();
 
         logic = new LogicManager(model, storage, calendarManager);

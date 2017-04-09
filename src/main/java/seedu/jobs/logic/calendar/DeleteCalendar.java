@@ -9,7 +9,6 @@ import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 
 public class DeleteCalendar extends BasicCommandCalendar {
 	public final EventCalendar targetEvent;
-//	com.google.api.services.calendar.Calendar service;
 
     public DeleteCalendar(ReadOnlyTask target, 
     		com.google.api.services.calendar.Calendar inputCalendar) throws IllegalTimeException {
@@ -22,7 +21,7 @@ public class DeleteCalendar extends BasicCommandCalendar {
 			e.printStackTrace();
 		}
     }
-    
+
 	public void execute() throws IOException {
 		String id = retrieveID(targetEvent);
 		if (!(id.equals("")))

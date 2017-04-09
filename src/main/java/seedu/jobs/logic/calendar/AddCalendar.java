@@ -13,7 +13,6 @@ import seedu.jobs.model.task.Task;
 public class AddCalendar extends BasicCommandCalendar {
     private EventCalendar toAdd;
 
-
     public AddCalendar (Task inputTask,
             com.google.api.services.calendar.Calendar inputCalendar) {
         toAdd = new EventCalendar(inputTask);
@@ -42,7 +41,7 @@ public class AddCalendar extends BasicCommandCalendar {
                 .setDateTime(endDateTime)
                 .setTimeZone("Singapore");
         event.setEnd(end);
-        
+
         if (!(toAdd.getPeriod().equals("0"))) {
         	String[] recurrence = new String[] {"RRULE:FREQ=WEEKLY;COUNT=" + toAdd.getPeriod()};
             event.setRecurrence(Arrays.asList(recurrence));
@@ -51,7 +50,7 @@ public class AddCalendar extends BasicCommandCalendar {
         String calendarId = "primary";
         event = service.events().insert(calendarId, event).execute();
     }
-    
+
     public boolean isExist (EventCalendar toAdd) throws IOException {
     	if (retrieveID(toAdd).equals(""))
     		return false;
