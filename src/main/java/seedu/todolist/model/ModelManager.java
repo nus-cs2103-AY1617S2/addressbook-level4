@@ -152,8 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
             Todo todo = todoList.getTodo(todoListIndex);
             indicateTodoListChanged(todo);
         } catch (TodoNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            assert false : "Invalid index given.";
         }
     }
     //@@author
