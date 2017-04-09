@@ -11,7 +11,7 @@
 ------
 > **Instructions:**
 - 1. Create a folder called `data` at the same directory as `TaskIt.jar` executable.
-- 2. Copy and paste `SampleData.xml` into that folder.
+- 2. Copy and paste `SampleData.xml` into that folder and rename as `taskmanager.xml`.
 - 3. Run `TaskIt.jar`.
 
 ------
