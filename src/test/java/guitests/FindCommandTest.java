@@ -9,6 +9,7 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.logic.commands.ClearCommand;
 import seedu.doit.logic.commands.DeleteCommand;
 import seedu.doit.logic.commands.FindCommand;
+import seedu.doit.logic.parser.FindCommandParser;
 import seedu.doit.testutil.TestTask;
 
 public class FindCommandTest extends TaskManagerGuiTest {
@@ -84,6 +85,18 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         this.commandBox.runCommand(MESSAGE_TEST_INVALID_PARAMETERS);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "p/");
+        assertResultMessage(FindCommandParser.NO_PRIORITY_AFTER_PREFIX);
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "n/");
+        assertResultMessage(FindCommandParser.NO_NAME_AFTER_PREFIX);
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "s/");
+        assertResultMessage(FindCommandParser.NO_STARTTIME_AFTER_PREFIX);
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "e/");
+        assertResultMessage(FindCommandParser.NO_ENDTIME_AFTER_PREFIX);
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "t/");
+        assertResultMessage(FindCommandParser.NO_TAGS_AFTER_PREFIX);
+        this.commandBox.runCommand(MESSAGE_FIND_COMMAND + "p/ aa");
+        assertResultMessage(FindCommandParser.NO_PRIORITY_AFTER_PREFIX);
     }
 
     // @@author A0139399J
