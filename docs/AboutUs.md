@@ -37,6 +37,7 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
   * Set up Travis, Codacy, and Coveralls [[#18](https://github.com/CS2103JAN2017-F11-B3/main/pull/18)]
   * In charge of code cleanup (i.e. deleting trailing whitespace, converting \r\n\ to \n)
   * Install necessary JARs to build path [[#110](https://github.com/CS2103JAN2017-F11-B3/main/pull/110)]
+  * Testing and dogfooding on Windows and macOS
   
 -----
 
