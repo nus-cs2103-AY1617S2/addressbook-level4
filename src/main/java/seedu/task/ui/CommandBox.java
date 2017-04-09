@@ -50,7 +50,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             //@@author A0163935X
-            updateCalender(this.mainwindow , logic.getFilteredPersonList() , 0 , 0 , 0);
+            updateCalender(this.mainwindow , logic.getFilteredTaskList() , 0 , 0 , 0);
             //@@author
             // process result of the command
             setStyleToIndicateCommandSuccess();

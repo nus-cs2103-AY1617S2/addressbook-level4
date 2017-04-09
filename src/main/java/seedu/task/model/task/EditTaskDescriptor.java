@@ -6,8 +6,8 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Stores the details to edit the person with. Each non-empty field value will replace the
- * corresponding field value of the person.
+ * Stores the details to edit the task with. Each non-empty field value will replace the
+ * corresponding field value of the task.
  */
 
 public class EditTaskDescriptor {

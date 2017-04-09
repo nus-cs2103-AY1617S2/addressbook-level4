@@ -12,7 +12,7 @@ import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the ToDo List. Guarantees: details are present and not
+ * Represents a Task in the Task Manager. Guarantees: details are present and not
  * null, field values are validated.
  */
 public class Task implements ReadOnlyTask, Comparable<Task> {

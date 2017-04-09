@@ -4,7 +4,7 @@ package seedu.task.model.task;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's priority number in the address book.
+ * Represents a Task's priority number in the Task Manager.
  * A smaller priority number indicates a higher priority.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
@@ -19,7 +19,7 @@ public class Priority implements Comparable<Priority> {
     /**
      * Validates given priority number.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given priority string is invalid.
      */
     public Priority(String priority) throws IllegalValueException {
         if (priority != null) {

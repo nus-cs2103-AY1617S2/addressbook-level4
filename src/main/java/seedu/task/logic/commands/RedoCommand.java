@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
- * Redo the previous change undone
+ * Redo the previous change undone to the Task Manager
  */
 public class RedoCommand extends Command {
 

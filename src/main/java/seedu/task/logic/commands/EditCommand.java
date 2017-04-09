@@ -18,7 +18,7 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
 
@@ -41,14 +41,14 @@ public class EditCommand extends Command {
     private boolean isSpecific;
 
     /**
-     * @param filteredTaskListIndex the index of the task in the filtered person list to edit
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor, boolean isSpecific) {
         assert filteredTaskListIndex > 0;
         assert editTaskDescriptor != null;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
+        // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
         this.isSpecific = isSpecific;

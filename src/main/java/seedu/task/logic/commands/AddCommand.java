@@ -19,7 +19,7 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 /**
- * Adds a task to the task list.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
 

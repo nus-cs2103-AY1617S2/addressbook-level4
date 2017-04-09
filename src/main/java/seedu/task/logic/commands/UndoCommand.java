@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
- * Undo the previous change to the TaskList
+ * Undo the previous change to the Task Manager
  */
 public class UndoCommand extends Command {
 
