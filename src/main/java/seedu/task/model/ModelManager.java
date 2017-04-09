@@ -186,16 +186,19 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged("");
     }
 
+    //@@author A0142939W
     @Override
     public void changeFilePath(String newPath) {
         indicateFilePathChanged(newPath);
         indicateTaskManagerChanged("");
     }
 
+    //@@author A0142939W
     @Override
     public void loadFromLocation(String loadPath) {
         indicateFilePathChanged(loadPath);
     }
+    //@@author
 
     // =========== Filtered Task List Accessors =============================================================
 
