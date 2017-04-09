@@ -1,7 +1,5 @@
 # TaskIt - Developer Guide
 
-By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
-
 ---
 
 1. [Setting Up](#1-setting-up)
@@ -191,7 +189,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
-//@@author A0141011J
+<!-- @@author A0141011J -->
 ### 2.4. Model component
 
 Author: Zhou Fanyi
@@ -230,7 +228,7 @@ Model then exposes indirect access to these states through the `undo` and `redo`
 Upon executing `undo`, the most recent previous state will be restored by popping out a state from the stack keeping track of previous states. At the same time, the current state is stored in another stack keeping track of 'future states' for reverting back to the current state.
 Similarly, upon executing `redo`, the the most recent state before undone will be restored by popping out a state from the stack keeping track of 'future states'.
 
-//@@author
+<!-- @@author  -->
 
 ### 2.5. Storage component
 
