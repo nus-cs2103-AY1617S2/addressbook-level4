@@ -94,7 +94,7 @@ public class TestUtil {
             return null;
         }
     }
-  //@@author A0139177W
+  //@@author
 
     private static Tag[] getSampleTagData() {
         try {
