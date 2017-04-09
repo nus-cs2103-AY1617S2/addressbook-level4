@@ -71,7 +71,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private AnchorPane todayTaskListPanelPlaceholder;
     // @@author
-    
+
     // @@author A0131278H
     @FXML
     private AnchorPane toDoTaskListPanelPlaceholder;
@@ -204,7 +204,7 @@ public class MainWindow extends UiPart<Region> {
     }
     
     public TaskListPanel getTodayTaskListPanel() {
-    	return this.todayTaskListPanel;
+        return this.todayTaskListPanel;
     }
     // @@author
 
