@@ -22,10 +22,12 @@ import seedu.doit.commons.events.ui.ExitAppRequestEvent;
 import seedu.doit.commons.events.ui.NewResultAvailableEvent;
 import seedu.doit.commons.util.FxViewUtil;
 import seedu.doit.logic.Logic;
+import seedu.doit.logic.commands.ListCommand;
 import seedu.doit.logic.commands.RedoCommand;
 import seedu.doit.logic.commands.UndoCommand;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.UserPrefs;
+
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -37,6 +39,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String FXML = "MainWindow.fxml";
     private static final String UNDO_COMMAND = UndoCommand.COMMAND_WORD;
     private static final String REDO_COMMAND = RedoCommand.COMMAND_WORD;
+    private static final String LIST_COMMAND = ListCommand.COMMAND_WORD;
     private static final int MIN_HEIGHT = 650;
     private static final int MIN_WIDTH = 1100;
 
@@ -88,6 +91,7 @@ public class MainWindow extends UiPart<Region> {
         this.scene = new Scene(getRoot());
         primaryStage.setScene(this.scene);
         setAccelerators();
+        handleKeyEvents();
     }
 
     public Stage getPrimaryStage() {
@@ -96,14 +100,19 @@ public class MainWindow extends UiPart<Region> {
 
     private void setAccelerators() {
         setAccelerator(this.helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    public void handleKeyEvents() {
         this.scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             KeyCombination undo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+            KeyCombination undoMac = new KeyCodeCombination(KeyCode.Z, KeyCombination.META_DOWN);
             KeyCombination redo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+            KeyCombination redoMac = new KeyCodeCombination(KeyCode.Y, KeyCombination.META_DOWN);
 
             @Override
-            public void handle(KeyEvent evt) {
+            public void handle(KeyEvent event) {
                 Boolean hasCommandException = false;
-                if (this.undo.match(evt)) {
+                if (this.undo.match(event) || this.undoMac.match(event)) {
                     // handle command failure
                     try {
                         MainWindow.this.logic.execute(UNDO_COMMAND);
@@ -116,7 +125,7 @@ public class MainWindow extends UiPart<Region> {
                         raise(new NewResultAvailableEvent(UndoCommand.MESSAGE_SUCCESS));
                     }
                 }
-                if (this.redo.match(evt)) {
+                if (this.redo.match(event) || this.redoMac.match(event)) {
                     // handle command failure
                     try {
                         MainWindow.this.logic.execute(REDO_COMMAND);
@@ -127,6 +136,15 @@ public class MainWindow extends UiPart<Region> {
                     }
                     if (!hasCommandException) {
                         raise(new NewResultAvailableEvent(RedoCommand.MESSAGE_SUCCESS));
+                    }
+                }
+                if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    try {
+                        MainWindow.this.logic.execute(LIST_COMMAND);
+                    } catch (CommandException e) {
+                    }
+                    if (!hasCommandException) {
+                        raise(new NewResultAvailableEvent(ListCommand.MESSAGE_SUCCESS));
                     }
                 }
             }
@@ -158,7 +176,7 @@ public class MainWindow extends UiPart<Region> {
          * is in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if ((event.getTarget() instanceof TextInputControl) && keyCombination.match(event)) {
+            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
@@ -287,10 +305,10 @@ public class MainWindow extends UiPart<Region> {
             this.taskListPanel.scrollTo(index);
             this.eventListPanel.clearSelection();
             this.fListPanel.clearSelection();
-        } else if (index < (this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
+        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime() && task.hasEndTime())
                 .size()
                 + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                        && task.hasEndTime() /* && !task.getIsDone() */).size())) {
+                        && task.hasEndTime() /* && !task.getIsDone() */).size()) {
             this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
                     && task.hasEndTime() /* && !task.getIsDone() */).size());
             this.taskListPanel.clearSelection();
