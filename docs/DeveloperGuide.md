@@ -201,7 +201,7 @@ The `Model`,
 * stores a history of executed commands
 * can undo and redo actions
 * can merge entries from another TaskManager list
-* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes an `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
