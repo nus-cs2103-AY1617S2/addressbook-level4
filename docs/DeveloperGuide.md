@@ -464,7 +464,7 @@ You can follow the following steps to convert the project documentation files to
     documentation file. <br>
 
     > E.g. For [UserGuide.md](UserGuide.md), the URL will be
-    `https://<your-username-or-organization-name>.github.io/main/docs/UserGuide.html`.
+    `https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html`.
 
  3. Click on the `Print` option in Chrome's menu.
  4. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
