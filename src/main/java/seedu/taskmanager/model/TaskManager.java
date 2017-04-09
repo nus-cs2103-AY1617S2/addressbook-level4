@@ -1,6 +1,7 @@
 package seedu.taskmanager.model;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.EndDate;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
@@ -188,6 +190,16 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
+
+    // @@author A0114523U
+    public ObservableList<ReadOnlyTask> getOverdueTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getOverdueTaskList(new Date()));
+    }
+
+    public ObservableList<ReadOnlyTask> getTodayTaskList() {
+        return new UnmodifiableObservableList<>(tasks.getTodayTaskList(new Date()));
+    }
+    // @@author
 
     public ObservableList<ReadOnlyTask> getToDoTaskList() {
         return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_NOT_DONE));

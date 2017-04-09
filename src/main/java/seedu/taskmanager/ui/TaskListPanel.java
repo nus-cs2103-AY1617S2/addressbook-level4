@@ -25,17 +25,25 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private ListView<ReadOnlyTask> taskListView;
 
-    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList) {
+    public TaskListPanel(AnchorPane taskListPlaceholder, ObservableList<ReadOnlyTask> taskList, boolean isSummary) {
         super(FXML);
-        setConnections(taskList);
+        setConnections(taskList, isSummary);
         addToPlaceholder(taskListPlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> taskList) {
+    // @@author A0140032E
+    private void setConnections(ObservableList<ReadOnlyTask> taskList, boolean isSummary) {
         taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        if (isSummary) {
+
+            // taskListView.setCellFactory(listView -> new TaskListViewCell());
+            taskListView.setCellFactory(listView -> new TaskListSummaryViewCell());
+        } else {
+            taskListView.setCellFactory(listView -> new TaskListViewCell());
+            setEventHandlerForSelectionChangeEvent();
+        }
     }
+    // @@author
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
@@ -44,13 +52,12 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        taskListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-                        raise(new TaskPanelSelectionChangedEvent(newValue));
-                    }
-                });
+        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logger.fine("Selection in task list panel changed to : '" + newValue + "'");
+                raise(new TaskPanelSelectionChangedEvent(newValue));
+            }
+        });
     }
 
     public void scrollTo(int index) {
@@ -75,4 +82,20 @@ public class TaskListPanel extends UiPart<Region> {
         }
     }
 
+    // @@author A0140032E
+    class TaskListSummaryViewCell extends ListCell<ReadOnlyTask> {
+
+        @Override
+        protected void updateItem(ReadOnlyTask task, boolean empty) {
+            super.updateItem(task, empty);
+
+            if (empty || task == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new TaskSummaryCard(task).getRoot());
+            }
+        }
+    }
+    // @@author
 }
