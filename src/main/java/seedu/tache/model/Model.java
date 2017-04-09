@@ -1,5 +1,6 @@
 package seedu.tache.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -29,13 +30,24 @@ public interface Model {
     void addTask(int index, Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates {@code taskToEdit} to {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+
+    /**
+     * Updates all tasks in {@code tasksToEdit} to their corresponding task in {@code editedTasks}.
+     *
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     * @return Array of tasks that have been successfully updated
+     */
+    List<ReadOnlyTask> updateMultipleTasks(ReadOnlyTask[] tasksToEdit, ReadOnlyTask[] editedTasks)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */

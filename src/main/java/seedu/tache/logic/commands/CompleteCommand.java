@@ -64,20 +64,26 @@ public class CompleteCommand extends Command implements Undoable {
             }
         }
 
+        ArrayList<ReadOnlyTask> tasksToEdit = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> completedTasks = new ArrayList<ReadOnlyTask>();
+
         for (int i = 0; i < indexList.size(); i++) {
             ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
-            Task completedTask = createCompletedTask(taskToEdit);
-            try {
-                if (taskToEdit.getRecurState().isRecurring()) {
-                    model.updateTask(createMasterRecurringTask(taskToEdit), completedTask);
-                } else {
-                    model.updateTask(taskToEdit, completedTask);
-                }
-            } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                commandSuccess = false;
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            if (taskToEdit.getRecurState().isRecurring()) {
+                taskToEdit = createMasterRecurringTask(taskToEdit);
             }
-            completedList.add(completedTask);
+            tasksToEdit.add(taskToEdit);
+            Task completedTask = createCompletedTask(taskToEdit);
+            completedTasks.add(completedTask);
+        }
+        ReadOnlyTask[] arrayListMould = new ReadOnlyTask[0];
+        try {
+            completedList = model.updateMultipleTasks(
+                    tasksToEdit.toArray(arrayListMould), completedTasks.toArray(arrayListMould));
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            assert false: "There shouldn't be a duplicate task";
+            commandSuccess = false;
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         commandSuccess = true;
         undoHistory.push(this);

@@ -124,6 +124,18 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(index, task);
         indicateTaskManagerChanged();
     }
+
+    public List<ReadOnlyTask> updateMultipleTasks(ReadOnlyTask[] tasksToUpdate, ReadOnlyTask[] editedTasks)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert tasksToUpdate.length == editedTasks.length;
+        ArrayList<ReadOnlyTask> updatedTasks = new ArrayList<ReadOnlyTask>();
+        for (int i = 0; i < tasksToUpdate.length; i++) {
+            taskManager.updateTask(tasksToUpdate[i], editedTasks[i]);
+            updatedTasks.add(tasksToUpdate[i]);
+        }
+        indicateTaskManagerChanged();
+        return updatedTasks;
+    }
     //@@author
 
     @Override
