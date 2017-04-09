@@ -23,7 +23,8 @@ By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbs
 	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
 	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
 	3.14. [Hotkey Toggling](#314-hotkey-toggling) <br>
-	3.15. [Exiting](#315-exit-the-program--exit)
+	3.15. [System Tray Notification](#315-system-tray-notification) <br>
+	3.16. [Exiting](#316-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 
@@ -388,7 +389,7 @@ _Figure 3.14.1. Load Command_
 
 ### 3.14. Hotkey toggling
 
-Toggles tache window into/out of view using a hotkey <br>
+Toggles tache window into/out of view using a hotkey. <br>
 
 Here is a reason why you might want to _toggle tache window_:
 
@@ -398,7 +399,17 @@ Here is a reason why you might want to _toggle tache window_:
 
 Hotkey: **`CTRL + ALT + D`** <br>
 
-### 3.15. Exit the program : `exit`
+### 3.15. System tray notification
+
+An inbuilt function that automatically triggers a system tray notification should you have a task starting or due in 2 hours time. <br>
+
+Here is a reason why you might need _system tray notification_:
+
+* **While focusing on your current task on hand, you forgotten that a meeting is scheduled to begin in 2 hours time** <br>
+
+  > Luckily, Tache triggers the system tray notification, informing you of the meeting, so that you won't be late for it. <br>
+
+### 3.16. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
@@ -449,3 +460,6 @@ Here are some questions that you might want to ask me:
 **Q**: Is there any way I can _type my commands faster_? <br>
 **A**: Yes, I _autocomplete_ all commands. Every command can also be replaced with the first letter of
 its name. For example, you can replace "add" with just "a".
+
+**Q**: How do I get reminded of my tasks? <br>
+**A**: Tache automatically triggers a system tray notification when a task is starting or due in 2 hours.
