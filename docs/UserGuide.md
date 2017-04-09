@@ -53,7 +53,7 @@ TypeTask is especially good for you if you want: <br>
 
 Fig 1. TypeTask’s User Interface <br>
 
-5. TypeTask automatically assigns your tasks certain colours to help you differentiate them easily.
+5. TypeTask automatically assigns your tasks certain colours to help you differentiate them easily. <br>
    `Red`: this uncompleted task’s deadline has passed! Better get on to it. <br>
    `Green`: this uncompleted task has a deadline but is not due yet. Phew! <br>
    `Exclamation Mark`: this uncompleted task was labelled as a priority. <br>
@@ -332,7 +332,7 @@ Format:<br>
 
 
 ### 3.8.4. Listing Completed Tasks : `listdone`
-To review what you have done (and feel better about yourself!), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
+To review what you have done, you may want to look at all your completed tasks. You can do that by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
 Format:<br>
 `listdone`<br>
