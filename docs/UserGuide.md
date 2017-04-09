@@ -17,15 +17,15 @@ By : `Team SE-EDU`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jun 2016`  &nbsp;&nbsp;&nbs
    > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `doTomorrow.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your TODO list.
+2. Copy the file to the folder you want to use as the home folder for your task list.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all TODOs
-   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`list`** : lists all tasks
+   * **`add`** : `Email manager due/08/01/2017 0900`: adds a task "Email manager" to the task list and set the due date to January 8th at 9am.
    * **`complete`** `2` : marks the 2nd task as completed
    * **`delete`** `3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -207,7 +207,16 @@ Format: `setstorage PATH`
 
 Example:
 
-* `setstorage /Users/Jim/Documents` will store the to-do list file to `/Users/Jim/Documents`
+* `setstorage /Users/Jim/Documents` will store the task list file to `/Users/Jim/Documents`
+
+### 2.15. Load an existing storage file: `loadstorage`
+
+Loads an existing tasklist.xml storage file from user specifed path and change storage path to it<br>
+Format: `loadstorage PATH`
+
+Example:
+
+* `loadstorage /Users/Jim/Documents` will load the task list file at `/Users/Jim/Documents` and change the storage path to it
 
 ## 3. FAQ
 
@@ -270,6 +279,9 @@ Example:
 
 * **Set storage path**: `setstorage PATH` <br>
   e.g. `setstorage /Users/Jim/Documents`
+
+* **Load storage path**: `loadstorage PATH` <br>
+  e.g. `loadstorage /Users/Jim/Documents`
 
 * **Exit**: `exit` <br>
   e.g. `exit`
