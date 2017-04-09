@@ -33,7 +33,10 @@ public class StartTimeTest {
     @Test
     public void isInvalid_StartTime() {
         // invalid startTime
-        assertFalse(StartTime.isValidStartTime("99/99/99 10:21");
+        assertFalse(StartTime.isValidStartTime("99/09/16 10:21")); //date out of range
+        assertFalse(StartTime.isValidStartTime("09/99/16 10:21")); //month out of range
+        assertFalse(StartTime.isValidStartTime("28/03/16 24:00")); //boundary value of time
+        assertFalse(StartTime.isValidStartTime("30/02/16 12:00")); //30th february does not exist
     }
 
     @Test
