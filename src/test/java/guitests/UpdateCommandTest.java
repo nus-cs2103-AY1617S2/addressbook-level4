@@ -12,7 +12,6 @@ import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.logic.parser.UpdateCommandParser;
-import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
 import seedu.taskmanager.testutil.TaskBuilder;
 import seedu.taskmanager.testutil.TestTask;
@@ -150,9 +149,9 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     @Test
     public void update_correctOnDateWrongToInputFailure() throws Exception {
         commandBox.runCommand("UPDATE 1 ON 01/01/14 1100 TO 02/01/14 1110");
-        assertResultMessage("Incorrect input after TO prefix.\n"
-                + "Example of Allowed Format: ADD task ON thursday 1200 TO 1400\n"
-                + "Type HELP for user guide with detailed explanations of all commands");
+        assertResultMessage(
+                "Incorrect input after TO prefix.\n" + "Example of Allowed Format: ADD task ON thursday 1200 TO 1400\n"
+                        + "Type HELP for user guide with detailed explanations of all commands");
     }
 
     @Test
