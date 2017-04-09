@@ -73,7 +73,8 @@ There are 3 forms of task that ProcrastiNomore supports:
 Format: `ADD TASK ON DATE/DAY` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
-> <img src="images/ProcrastiNomore_Add_Event.PNG" width="800">
+> <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="800">
+> <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="800">
 
 #### 3.2.2. Deadlines
 

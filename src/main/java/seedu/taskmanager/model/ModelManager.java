@@ -27,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     private Stack<TaskManager> undoTaskManager;
     private Stack<TaskManager> redoTaskManager;
     private final FilteredList<ReadOnlyTask> filteredTasks;
+    private Task recurringTask;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -160,6 +161,39 @@ public class ModelManager extends ComponentManager implements Model {
         return addIndex;
     }
 
+    //
+    // @Override
+    // public synchronized int addRecurringDeadlineTask(ReadOnlyTask
+    // taskToRecur, int recurring, String type) throws
+    // UniqueTaskList.DuplicateTaskException {
+    // saveInstance();
+    // for (int loop = 1; loop <= recurring; loop++) {
+    //
+    // try {
+    // recurringTask = new Task(taskToRecur.getTaskName(),
+    // taskToRecur.getStartDate(),
+    // taskToRecur.getStartTime(),
+    // new EndDate(DateTimeUtil.getFutureDate(loop, type,
+    // taskToRecur.getEndDate().toString())),
+    // taskToRecur.getEndTime(), false, taskToRecur.getCategories());
+    // } catch (IllegalValueException ive) {
+    // throw new CommandException("Wrong format for deadline!");
+    // }
+    //
+    // if (DateTimeUtil.isValidDate(recurringTask.getEndDate().toString())) {
+    // try {
+    // addTask(recurringTask);
+    // } catch (DuplicateTaskException dte) {
+    // throw new CommandException(MESSAGE_DUPLICATE_TASK);
+    // }
+    // }
+    // }
+    //
+    // @Override
+    // public synchronized int addRecurringEventTask(ReadOnlyTask taskToRecur,
+    // int recurring, String type) throws UniqueTaskList.DuplicateTaskException
+    // {
+    //
     // @@author A0139520L
     @Override
     public int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
