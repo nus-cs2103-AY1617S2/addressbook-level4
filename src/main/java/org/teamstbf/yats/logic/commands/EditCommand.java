@@ -19,12 +19,10 @@ import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Event;
 import org.teamstbf.yats.model.item.IsDone;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
 import org.teamstbf.yats.model.item.ReadOnlyEvent;
 import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Schedule;
 import org.teamstbf.yats.model.item.Title;
-import org.teamstbf.yats.model.item.UniqueEventList;
 import org.teamstbf.yats.model.tag.UniqueTagList;
 
 //@@author A0116219L
@@ -86,7 +84,7 @@ public class EditCommand extends Command {
 	/**
 	 * Creates and returns a {@code Task} with the details of {@code taskToEdit}
 	 * edited with {@code editTaskDescriptor}.
-	 * 
+	 *
 	 * @throws IllegalValueException
 	 */
 	protected static Event createEditedTask(ReadOnlyEvent taskToEdit, EditTaskDescriptor editTaskDescriptor)
@@ -99,8 +97,8 @@ public class EditCommand extends Command {
 				throw new CommandException(MESSAGE_ILLEGAL_EDIT_RECURRING_TASK);
 			}
 		}
-	
-		
+
+
 		if (editTaskDescriptor.getRecurrence().isPresent()) {
 			throw new CommandException(MESSAGE_ILLEGAL_EDIT_RECURRENCE);
 		}
@@ -115,21 +113,21 @@ public class EditCommand extends Command {
 		if (editTaskDescriptor.tags.isPresent() && updatedTags.isTagPresent()) {
 			updatedTags.removeAndMerge(taskToEdit.getTags());
 		}
-		
+
 		IsDone isDone = taskToEdit.getIsDone();
 		// these fields are not editable therefore unchanged
 		boolean isRecurring = taskToEdit.isRecurring();
 		Recurrence recurrence = taskToEdit.getRecurrence();
-		
+
 		if ((editTaskDescriptor.getStartTime().isPresent() && editTaskDescriptor.getDeadline().isPresent())
 				|| (editTaskDescriptor.getEndTime().isPresent() && editTaskDescriptor.getDeadline().isPresent())) {
 			throw new CommandException(MESSAGE_ILLEGAL_DEADLINE_AND_EVENT_OBJECT);
 		}
-		
+
 		if (editTaskDescriptor.getStartTime().isPresent() || editTaskDescriptor.getEndTime().isPresent()) {
 			updatedDeadline = new Schedule("");
 		}
-		
+
 		if (editTaskDescriptor.getDeadline().isPresent()) {
 			updatedStartTime = new Schedule("");
 			updatedEndTime = new Schedule("");
@@ -150,7 +148,6 @@ public class EditCommand extends Command {
 		private Optional<Schedule> startTime = Optional.empty();
 		private Optional<Schedule> endTime = Optional.empty();
 		private Optional<Description> description = Optional.empty();
-		private Optional<Periodic> periodic = Optional.empty();
 		Optional<UniqueTagList> tags = Optional.empty();
 		private Optional<String> recurrence = Optional.empty();
 		private IsDone isDone = new IsDone();
@@ -166,7 +163,6 @@ public class EditCommand extends Command {
 			this.endTime = toCopy.getEndTime();
 			this.recurrence = toCopy.getRecurrence();
 			this.description = toCopy.getDescription();
-			this.periodic = toCopy.getPeriodic();
 			this.tags = toCopy.getTags();
 			this.isDone = toCopy.getIsDone();
 		}
@@ -175,8 +171,7 @@ public class EditCommand extends Command {
 		 * Returns true if at least one field is edited.
 		 */
 		public boolean isAnyFieldEdited() {
-			return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.endTime, this.deadline, this.description,
-					this.periodic, this.tags, this.recurrence);
+			return CollectionUtil.isAnyPresent(this.name, this.location, this.startTime, this.endTime, this.deadline, this.description, this.tags, this.recurrence);
 		}
 
 		public void setName(Optional<Title> name) {
@@ -271,15 +266,6 @@ public class EditCommand extends Command {
 
 		public Optional<Schedule> getEndTime() {
 			return endTime;
-		}
-
-		public void setPeriodic(Optional<Periodic> periodic) {
-			assert periodic != null;
-			this.periodic = periodic;
-		}
-
-		public Optional<Periodic> getPeriodic() {
-			return periodic;
 		}
 
 		public void setDescription(Optional<Description> description) {

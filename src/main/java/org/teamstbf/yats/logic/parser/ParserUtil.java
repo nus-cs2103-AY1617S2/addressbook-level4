@@ -17,8 +17,6 @@ import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.StringUtil;
 import org.teamstbf.yats.model.item.Description;
 import org.teamstbf.yats.model.item.Location;
-import org.teamstbf.yats.model.item.Periodic;
-import org.teamstbf.yats.model.item.Recurrence;
 import org.teamstbf.yats.model.item.Title;
 import org.teamstbf.yats.model.tag.Tag;
 import org.teamstbf.yats.model.tag.UniqueTagList;
@@ -91,15 +89,6 @@ public class ParserUtil {
 	public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
 		assert location != null;
 		return location.isPresent() ? Optional.of(new Location(location.get())) : Optional.empty();
-	}
-
-	/**
-	 * Parses a {@code Optional<String> periodic} into an
-	 * {@code Optional<Periodic>} if {@code periodic} is present.
-	 */
-	public static Optional<Periodic> parsePeriodic(Optional<String> periodic) throws IllegalValueException {
-		assert periodic != null;
-		return periodic.isPresent() ? Optional.of(new Periodic(periodic.get())) : Optional.empty();
 	}
 
 	/**
