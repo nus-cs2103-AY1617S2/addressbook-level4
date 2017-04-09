@@ -124,7 +124,7 @@ public class TaskCard extends UiPart<Region> {
                 startDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            // Do nothing as the date is optional 
+            // Do nothing as the date is optional
             // and cannot be parsed as Date object.
         }
     }
@@ -163,7 +163,7 @@ public class TaskCard extends UiPart<Region> {
                 dueDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            // Do nothing as the date is optional 
+            // Do nothing as the date is optional
             // and cannot be parsed as Date object.
         }
     }
@@ -183,7 +183,7 @@ public class TaskCard extends UiPart<Region> {
                 dueDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            // Do nothing as the date is optional 
+            // Do nothing as the date is optional
             // and cannot be parsed as Date object.
         }
     }
