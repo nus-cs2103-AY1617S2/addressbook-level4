@@ -28,60 +28,60 @@
 | 8 | add task with tag | Buy airtickets to maldives t/holiday | tash with holiday tag is added |
 | 9 | add task with start date after end date | Finish CS2103 revision s/today e/yesterday | Error message for date constraint will be shown |
 | 10 | add new task when in `Done` tab | Band rehearsal d/gigs are awesome | Auto-switch to `To Do` tab, showing new task added |
-|		|		|		|
-| **edit task** <br><br>editted task will be automatically selected in the list after successful edit| | |
-| edit title in task:`Write english essay` | edit `index` Write chinese essay | task is editted |
-| edit end date in task:`Prepare for maths test` | edit `index` e/next month | task is editted |
-| edit multiple fields in task `Buy airtickets to maldives` | edit `index` d/with alice t/work | task description and tag is editted |
-|		|		|		|
-| **done task** | | tasks that are done will be moved from `to do` tab to `done` tab |
-| mark task `Write chinese essay` as done | done `index` | task is marked done |
-| mark recurring task `Buy Lunch` as done | done `index` | a copy of task marked as done is created while the repeating task's start date advances by one day and is still a to do task |
-| mark last occurence of recurring task `Cut hair` as done | done `index` | task is marked done and there are no more recurrences of the task |
-|		|		|		|
-| **undone task**<br><br>tasks that are undone will be moved from `done` tab to `to do` tab | | |
-| mark task `Write chinese essay` as undone in `Done` tab | list done | selected view tab is now `Done` |
-| | undone `index` | task is marked undone |
-| mark task `Cut hair` as undone | undone `index` | task is marked undone, does not add back the recurrence pattern it used to have |
-|		|		|		|
-| **select task** | | list will automatically scroll to and highlight the selected task |
-| select `Buy Lunch` | select `index` | task is selected |
-| select `Write chinese essay` in `To Do` tab | list todo | selected view tab is now `To Do` |
-| | select `index` | task is selected |
-|		|		|		|
-| **delete task ** | | |
-| delete task `Write chinese essay` | delete `index` | task is deleted |
-|		|		|		|
-| **sort tasks**<br><br>Sorted order preference will maintain throughout the session, i.e. new tasks added will be inserted according to the sort order | | |
-| sort by start date | sort s/ | tasks are sorted according to earliest start dates first, tasks without start dates will be listed after tasks with start dates |
-| sort by end date | sort e/ | tasks are sorted according to earliest end dates first, tasks without end dates will be listed after tasks with end dates |
-|		|		|		|
-| **undo a command**<br><br>Can only undo actions that changes data, i.e. add, edit, delete.<br><br>Undo history is only maintained for that session, e.g. cannot undo all commands listed above after exiting FunTaskTic and opening it again | | |
-| add a task, edit it, then undo | add Go NTUC d/buy apples | task is added |
-| | edit `index` d/buy oranges | task description is edited |
-| | undo | task description is restored to `buy apples` |
-| | undo | task is un-added, i.e. removed from list |
-|		|		|		|
-| **redo a command**<br><br>Can only redo actions if the last command was `undo`| | |
-| restore the task `Go NTUC d/buy apples` | redo | task is added back |
-| restore edit description| redo | task becomes `go NTUC d/buy oranges`|
-| check anything else to redo | redo | error given, nothing else to redo |
-|		|		|		|
-| **find**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
-| find tasks with keyword `school` | find school | shows tasks with `school` |
-| | list | clears the filter and shows all tasks |
-| find tasks with keyword `school` or `home` | find school home | show tasks with `school` or `home` |
-| | list | clears the filter and shows all tasks |
-|		|		|		|
-| **find by date**<br><br> Search for tasks that contain the specified date point or date range | | |
-| find tasks on 10 april 2017 | findbydate 10 apr 2017 | tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
-| | list | clears the filter and shows all tasks |
-| find tasks from 10-11 april 2017 | findbydate 10 apr 2017 to 11 apr 2017 | tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
-| | list | clears the filter and shows all tasks |
-|		|		|		|
-| **save data to another file location** | | |
-| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | data saved in specified location |
-|		|		|		|
-| **clear data in FunTaskTic** | clear | list is cleared |
-|		|		|		|
-| **exit FunTaskTic** | exit | closes FunTaskTic |
+|		|		|		| |
+|| **edit task** <br><br>editted task will be automatically selected in the list after successful edit| | |
+|| edit title in task:`Write english essay` | edit `index` Write chinese essay | task is editted |
+|| edit end date in task:`Prepare for maths test` | edit `index` e/next month | task is editted |
+|| edit multiple fields in task `Buy airtickets to maldives` | edit `index` d/with alice t/work | task description and tag is editted |
+||		|		|		|
+|| **done task** | | tasks that are done will be moved from `to do` tab to `done` tab |
+|| mark task `Write chinese essay` as done | done `index` | task is marked done |
+|| mark recurring task `Buy Lunch` as done | done `index` | a copy of task marked as done is created while the repeating task's start date advances by one day and is still a to do task |
+|| mark last occurence of recurring task `Cut hair` as done | done `index` | task is marked done and there are no more recurrences of the task |
+||		|		|		|
+|| **undone task**<br><br>tasks that are undone will be moved from `done` tab to `to do` tab | | |
+|| mark task `Write chinese essay` as undone in `Done` tab | list done | selected view tab is now `Done` |
+|| | undone `index` | task is marked undone |
+|| mark task `Cut hair` as undone | undone `index` | task is marked undone, does not add back the recurrence pattern it used to have |
+||		|		|		|
+|| **select task** | | list will automatically scroll to and highlight the selected task |
+|| select `Buy Lunch` | select `index` | task is selected |
+|| select `Write chinese essay` in `To Do` tab | list todo | selected view tab is now `To Do` |
+|| | select `index` | task is selected |
+||		|		|		|
+|| **delete task ** | | |
+|| delete task `Write chinese essay` | delete `index` | task is deleted |
+||		|		|		|
+|| **sort tasks**<br><br>Sorted order preference will maintain throughout the session, i.e. new tasks added will be inserted according to the sort order | | |
+|| sort by start date | sort s/ | tasks are sorted according to earliest start dates first, tasks without start dates will be listed after tasks with start dates |
+|| sort by end date | sort e/ | tasks are sorted according to earliest end dates first, tasks without end dates will be listed after tasks with end dates |
+||		|		|		|
+|| **undo a command**<br><br>Can only undo actions that changes data, i.e. add, edit, delete.<br><br>Undo history is only maintained for that session, e.g. cannot undo all commands listed above after exiting FunTaskTic and opening it again | | |
+|| add a task, edit it, then undo | add Go NTUC d/buy apples | task is added |
+|| | edit `index` d/buy oranges | task description is edited |
+|| | undo | task description is restored to `buy apples` |
+|| | undo | task is un-added, i.e. removed from list |
+|	|	|		|		|
+|| **redo a command**<br><br>Can only redo actions if the last command was `undo`| | |
+|| restore the task `Go NTUC d/buy apples` | redo | task is added back |
+|| restore edit description| redo | task becomes `go NTUC d/buy oranges`|
+|| check anything else to redo | redo | error given, nothing else to redo |
+||		|		|		|
+|| **find**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
+|| find tasks with keyword `school` | find school | shows tasks with `school` |
+|| | list | clears the filter and shows all tasks |
+|| find tasks with keyword `school` or `home` | find school home | show tasks with `school` or `home` |
+|| | list | clears the filter and shows all tasks |
+||		|		|		|
+|| **find by date**<br><br> Search for tasks that contain the specified date point or date range | | |
+|| find tasks on 10 april 2017 | findbydate 10 apr 2017 | tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
+|| | list | clears the filter and shows all tasks |
+|| find tasks from 10-11 april 2017 | findbydate 10 apr 2017 to 11 apr 2017 | tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
+|| | list | clears the filter and shows all tasks |
+||		|		|		|
+|| **save data to another file location** | | |
+|| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | data saved in specified location |
+||		|		|		|
+|| **clear data in FunTaskTic** | clear | list is cleared |
+||		|		|		|
+|| **exit FunTaskTic** | exit | closes FunTaskTic |
