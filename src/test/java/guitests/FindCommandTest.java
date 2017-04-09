@@ -44,7 +44,8 @@ public class FindCommandTest extends EzDoGuiTest {
         TestTask[] allTask = td.getTypicalTasks();
         ArrayList<TestTask> resultList = new ArrayList<TestTask>();
         resultList.addAll(Arrays.asList(allTask));
-        resultList.remove(1); //remove task without priority
+        int firstIndex = 1;
+        resultList.remove(firstIndex); //remove task without priority
         TestTask[] resultArray = resultList.toArray(new TestTask[resultList.size()]);
         assertFindResult("find p/", resultArray);
 
@@ -102,6 +103,9 @@ public class FindCommandTest extends EzDoGuiTest {
         assertResultMessage(TaskDate.MESSAGE_FIND_DATE_CONSTRAINTS);
     }
 
+    /*
+     * compare the resultant task list after a command with expected hits
+     */
     private void assertFindResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

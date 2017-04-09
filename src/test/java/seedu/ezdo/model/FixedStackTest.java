@@ -35,11 +35,10 @@ public class FixedStackTest {
     }
 
     @Test
-    public void push_success_notEmpty() {
+    public void push_isEmpty_false() {
         stack = new FixedStack<String>(ModelManager.STACK_CAPACITY);
         stack.push("MEOWR");
         assertFalse(stack.isEmpty());
-        assertTrue("MEOWR".equals(stack.pop()));
     }
 
     @Test

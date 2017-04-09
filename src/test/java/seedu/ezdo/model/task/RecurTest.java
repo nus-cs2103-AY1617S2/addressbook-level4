@@ -67,7 +67,7 @@ public class RecurTest {
 
     //@@author A0139248X
     @Test
-    public void constructor_isValidRecur_throwsIVE() throws IllegalValueException {
+    public void constructor_isValidRecurFalse_throwsIVE() throws IllegalValueException {
         thrown.expect(IllegalValueException.class);
         new Expectations(Recur.class) {
             {
