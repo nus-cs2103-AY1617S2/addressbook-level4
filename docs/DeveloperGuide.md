@@ -308,21 +308,39 @@ _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 ### 3.4. Model component
 
-<img src="images/ModelClassDiagram2.png" width="800"><br>
+**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+
+As stated above, the `Model` component manages and stores TypeTask's user's preferences and data. It also reveals an UnmodifiableObservableList<ReadOnlyTask>, which can be 'observed' by different components, such as the `UI`. The `UI` bounds to the list and gets updated automatically when the data gets modified.
+
+Also, from the Observer Pattern design, the application will not depend on other components such as Storage. Instead, it will interact by triggering events.
+
+The `Model` class is the interface of the `Model` component. It provides a variety of *APIs* for the `UI` and `Logic` components to retrieve and update TypeTask’s data.
+
+The relationship and structure of the classes in the `Model` component are illustrated in the diagram below.
+
+<img src="images/ModelClassDiagram.png" width="800"><br>
 
 _Figure 3.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+`ModelManager` implements the `Model` Interface. It contains a `UserPref` Object which represents the user’s preference.
 
-```
-Function of `Model`
+Moreover, `ModelManager` contains a TaskManager object. The `TaskManager` object is a duplicate that is indirectly mentioned by the `Storage` and `UI`. 
 
-* The 'Model' component stores a `UserPref` object that represents the user's preferences.
-* The 'Model' component stores the Task Manager data.
-* The 'Model' component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' 
-   e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* The 'Model' component does not depend on any of the other three components.
-```
+Each `TaskManager` object has a single `TaskList` object. A `TaskList` can contain multiple Task objects.
+
+The `ReadOnlyTask` and `ReadOnlyTaskManager` interfaces allow other components and classes, such as the `UI`, to access without altering the tasks and their details.
+
+In this design, each `Task` has a compulsory `Name`. It is optional for a `Task` to have a deadline, start/end time from `DueDate`, priority, and a completed status which is represented by a boolean.
+
+To display lists of different categorized tasks, TypeTask uses Filtered Task List Accessors, which filters through the tasks and gets what is required indicated by the user. These actions make use of the `Qualifier` interface. If the condition is met, the predicate will be set to true, and the list gets filtered depending on the user’s preference.
+
+Using the same example as above, if the `Logic` component requests `Model` to delete a task the following interactions between objects can be described by the sequence diagram below.
+
+<img src="images/InteractionModelDelete.png" width="800"><br>
+
+In this interaction, the given task is removed from the task list. The `ModelManager` triggers a `TaskManagerChangedEvent` to save the current list in storage.
+
+
 
 ### 3.5. Storage component
 
