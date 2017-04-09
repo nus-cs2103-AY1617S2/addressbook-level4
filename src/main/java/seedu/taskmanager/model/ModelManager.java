@@ -227,8 +227,6 @@ public class ModelManager extends ComponentManager implements Model {
         // @@author A0131278H
         filteredToDoTasks.setPredicate(expression::satisfies);
         filteredDoneTasks.setPredicate(expression::satisfies);
-        filteredTodayTasks.setPredicate(expression::satisfies);
-        filteredOverdueTasks.setPredicate(expression::satisfies);
     }
     // @@author
 
