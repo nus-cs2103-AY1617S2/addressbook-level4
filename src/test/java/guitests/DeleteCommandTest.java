@@ -35,6 +35,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
     }
 
+    // @@author A0142418L
     /**
      * Runs the delete command to delete the task at specified index and
      * confirms the result is correct.

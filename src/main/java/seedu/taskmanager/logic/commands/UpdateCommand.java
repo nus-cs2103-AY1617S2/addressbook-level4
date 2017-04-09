@@ -39,7 +39,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to"
+    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, event start time has to"
             + " be earlier than end time.";
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
@@ -69,8 +69,6 @@ public class UpdateCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        // UpdateTaskDescriptor newUpdateTaskDescriptor = new
-        // UpdateTaskDescriptor();
 
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 

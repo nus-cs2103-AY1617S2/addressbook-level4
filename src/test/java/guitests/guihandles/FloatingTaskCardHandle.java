@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import seedu.taskmanager.model.category.UniqueCategoryList;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 
+// @@author A0142418L
 /**
  * Provides a handle to a task card in the task list panel.
  */

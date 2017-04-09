@@ -10,6 +10,7 @@ import guitests.guihandles.EventTaskCardHandle;
 import guitests.guihandles.FloatingTaskCardHandle;
 import javafx.util.Pair;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.UpdateCommand;
 import seedu.taskmanager.model.task.EndTime;
 import seedu.taskmanager.model.task.StartDate;
@@ -87,12 +88,6 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
-    // @Test
-    // public void update_noFieldsSpecified_failure() {
-    // commandBox.runCommand("UPDATE 1");
-    // assertResultMessage(UpdateCommand.MESSAGE_NOT_UPDATED);
-    // }
-
     @Test
     public void update_invalidValues_failure() {
         // commandBox.runCommand("UPDATE 1 *&");
@@ -115,6 +110,98 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
     public void update_duplicateTask_failure() {
         commandBox.runCommand("UPDATE 3 Eat lunch at techno BY 04/03/17 1400");
         assertResultMessage(UpdateCommand.MESSAGE_DUPLICATE_TASK);
+    }
+
+    // @@author A0142418L
+    @Test
+    public void update_noFieldsSpecified_success() throws Exception {
+        String detailsToUpdate = "";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("EMPTY_FIELD").withStartTime("EMPTY_FIELD")
+                .withEndDate("EMPTY_FIELD").withEndTime("EMPTY_FIELD").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_timeOnly_success() throws Exception {
+        String detailsToUpdate = "FROM 0010 TO 0020";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartTime("0010").withEndTime("0020").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_correctOnDateWrongTimeFailure() throws Exception {
+        commandBox.runCommand("UPDATE 1 ON 01/01/14 1171 TO 1172");
+        assertResultMessage("Invalid input for time\nTime must be between 0000 and 2359");
+    }
+
+    @Test
+    public void update_correctOnDateTimeNoEndTimeSucess() throws Exception {
+        String detailsToUpdate = "ON 01/01/14 2350";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("01/01/14").withStartTime("2350")
+                .withEndDate("02/01/14").withEndTime("0050").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_correctOnDateWrongToInputFailure() throws Exception {
+        commandBox.runCommand("UPDATE 1 ON 01/01/14 1100 TO 02/01/14 1110");
+        assertResultMessage("Incorrect input after TO prefix.\n"
+                + "Example of Allowed Format: ADD task ON thursday 1200 TO 1400\n"
+                + "Type HELP for user guide with detailed explanations of all commands");
+    }
+
+    @Test
+    public void update_changeTimeOnlyForEventsSuccess() throws Exception {
+        String detailsToUpdate = "FROM 1100 TO 1110";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("03/03/17").withStartTime("1100")
+                .withEndDate("03/03/17").withEndTime("1110").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_changeStartTimeOnlyForEventsSuccess() throws Exception {
+        String detailsToUpdate = "FROM 0900";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("03/03/17").withStartTime("0900")
+                .withEndDate("03/03/17").withEndTime("1100").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_changeEndTimeOnlyForEventsSuccess() throws Exception {
+        String detailsToUpdate = "TO 1200";
+        int taskManagerIndex = 1;
+
+        TestTask taskToUpdate = expectedTasksList[taskManagerIndex - 1];
+        TestTask updatedTask = new TaskBuilder(taskToUpdate).withStartDate("03/03/17").withStartTime("1000")
+                .withEndDate("03/03/17").withEndTime("1200").build();
+
+        assertUpdateSuccess(taskManagerIndex, taskManagerIndex, detailsToUpdate, updatedTask);
+    }
+
+    @Test
+    public void update_changeTimeOnlyForNotEventFailure() throws Exception {
+        commandBox.runCommand("UPDATE 7 FROM 1100 TO 1110");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
     }
 
     // @@author A0139520L
@@ -171,6 +258,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
 
     }
 
+    // @@author A0142418L
     /**
      * Checks whether the updated task has the correct updated details.
      *
@@ -221,6 +309,7 @@ public class UpdateCommandTest extends TaskManagerGuiTest {
                 + "Task updated to index: " + Integer.toString(updateIndex + 1));
     }
 
+    // @@author A0139520L
     private void assertUpdateClashSuccess(int filteredTaskListIndex, int taskManagerIndex, String detailsToUpdate,
             TestTask updatedTask) {
         commandBox.runCommand("UPDATE " + filteredTaskListIndex + " " + detailsToUpdate);
