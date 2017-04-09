@@ -110,7 +110,7 @@ Example:
 * `edit index/1 desc/The venue has been changed`
 * `edit 3 start/10/04/2017 08:00 end/10/04/2017 12:00 tag/meeting`
 
-<img src="images/Edit1_JOBS.png" width="500">      <img src="images/Edit2_JOBS.png" width="500">
+<img src="images/Edit1_JOBS.png" width="450">      <img src="images/Edit2_JOBS.png" width="450">
 
 ### Undo a task: `undo`
 Undo is the command word to erase the last change done. The system supports up to 10 undo.
@@ -119,7 +119,7 @@ Format : `undo`
 Example:
 * `delete 1` >> `undo` (to retrieve the previously deleted task)
 
-<img src="images/Undo1_JOBS.png" width="300">      <img src="images/Undo2_JOBS.png" width="300">      <img src="images/Undo3_JOBS.png" width="300">
+<img src="images/Undo1_JOBS.png" width="250">      <img src="images/Undo2_JOBS.png" width="250">      <img src="images/Undo3_JOBS.png" width="250">
 
 ### Redo a task: `redo`
 Redo is the command to cancel the changes made through undo. The system supports up to 10 redo.
@@ -132,14 +132,14 @@ Format : `set email/EMAIL pwd/PASSWORD`
 
 Example:
 * `set email/cs2103rocks@gmail.com pwd/abcdefgh123456`
-<img src="images/set_JOBS.png" width="800"><br>
+<img src="images/set_JOBS.png" width="700"><br>
 
 ### Display Google Calendar: `display`
 Display is the command to enable the Google Calendar function for JOBS.
 Format : `display`
 1. Command will redirect user to an internet browser (Google Chrome, Safari, etc.) to request for authorization for Google Calendar API, as shown below. Ensure that during authorization, user is logged into their intended Google account.
 
-<img src="images/Authorize_JOBS.png" width="600"><br>
+<img src="images/Authorize_JOBS.png" width="500"><br>
 
 ### Path of taskbook: `path`
 Path is the command to change the saving directory of the taskbook and automatically create the .xml file.
