@@ -219,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         //@@author A0164212U
         /**
-         * @param task
+         * @param ReadOnlyTask
          * internally sets task.occurrenceIndexList for occurrences that match given keywords for task
          * @return true if keywords are present in the given task
          */
@@ -229,33 +229,38 @@ public class ModelManager extends ComponentManager implements Model {
             ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
             for (int i = 0; i < task.getOccurrences().size(); i++) {
                 final int finalIndex = i;
-                if (
-                        (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                                        task.getDescription().description, keyword))
-                                .findAny()
-                                .isPresent()) ||
-                        (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                                        task.getPriority().value, keyword))
-                                .findAny()
-                                .isPresent()) ||
-                        (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                                        task.getOccurrences().get(finalIndex).getStartTiming().value, keyword))
-                                .findAny()
-                                .isPresent()) ||
-                        (nameKeyWords.stream()
-                                .filter(keyword -> StringUtil.containsWordIgnoreCase(
-                                        task.getOccurrences().get(finalIndex).getEndTiming().value, keyword))
-                                .findAny()
-                                .isPresent())) {
+                if (filterMultiple(task.getDescription().description, task.getPriority().value,
+                        task.getOccurrences().get(finalIndex).getStartTiming().value,
+                        task.getOccurrences().get(finalIndex).getEndTiming().value)) {
                     occurrenceIndexList.add(i);
                     isValid = true;
                 }
             }
             task.setOccurrenceIndexList(occurrenceIndexList);
             return isValid;
+        }
+
+        /**
+         * @param string variable number of strings
+         * @return true is any one of the strings is present in executed command
+         */
+        public boolean filterMultiple(String...strings) {
+            boolean isValid = false;
+            for (String s : strings) {
+                isValid = isValid || filter(s);
+            }
+            return isValid;
+        }
+
+        /**
+         * @param string
+         * @return true if string exists in keywords provided by command
+         */
+        public boolean filter(String s) {
+            return  (nameKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(s, keyword))
+                    .findAny()
+                    .isPresent());
         }
         //@@author
 
