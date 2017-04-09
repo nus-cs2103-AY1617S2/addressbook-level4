@@ -12,59 +12,51 @@ import seedu.task.testutil.TestUtil;
 
 public class DeleteCommandTest extends TaskManagerGuiTest {
 
-     @Test
-     public void delete() {
-         try {
-             setup();
- 	 } catch (Exception e) {
- 	     // TODO Auto-generated catch block
-             e.printStackTrace();
- 	 }
+    @Test
+    public void delete() {
+        try {
+            setup();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
+        // delete the first in the list
+        TestTask[] currentList = td.getTypicalTasks();
+        /*
+         * commandBox.runCommand("clear"); String toAdd; for (TestTask t :
+         * currentList) { toAdd = "add "; toAdd += t.getTaskName().fullTaskName;
+         * if (t.getTaskDate() != null) { toAdd += " d/" +
+         * t.getTaskDate().toString(); } if (t.getTaskStartTime() != null) {
+         * toAdd += " s/" + t.getTaskStartTime().toString(); } if
+         * (t.getTaskEndTime() != null) { toAdd += " e/" +
+         * t.getTaskEndTime().toString(); } if (t.getTaskDescription() != null)
+         * { toAdd += " m/" + t.getTaskDescription(); }
+         * commandBox.runCommand(toAdd); }
+         */
+        int targetIndex = 1;
+        assertDeleteSuccess(targetIndex, currentList);
 
-     // delete the first in the list
-     TestTask[] currentList = td.getTypicalTasks();
-     /*commandBox.runCommand("clear");
-     String toAdd;
-     for (TestTask t : currentList) {
-    	 toAdd = "add ";
-    	 toAdd += t.getTaskName().fullTaskName;
-    	 if (t.getTaskDate() != null) {
-    	      toAdd += " d/" + t.getTaskDate().toString();
-    	 }
-    	 if (t.getTaskStartTime() != null) {
-              toAdd += " s/" + t.getTaskStartTime().toString();
-    	 }
-    	 if (t.getTaskEndTime() != null) {
-              toAdd += " e/" + t.getTaskEndTime().toString();
-    	 }
-    	 if (t.getTaskDescription() != null) {
-    		 toAdd += " m/" + t.getTaskDescription();
-    	 }
-    	 commandBox.runCommand(toAdd);
-     }*/
-     int targetIndex = 1;
-     assertDeleteSuccess(targetIndex, currentList);
+        // delete the last in the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        targetIndex = currentList.length;
+        assertDeleteSuccess(targetIndex, currentList);
 
-     // delete the last in the list
-     currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-     targetIndex = currentList.length;
-     assertDeleteSuccess(targetIndex, currentList);
+        // delete from the middle of the list
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
+        targetIndex = currentList.length / 2;
+        assertDeleteSuccess(targetIndex, currentList);
 
-     // delete from the middle of the list
-     currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
-     targetIndex = currentList.length / 2;
-     assertDeleteSuccess(targetIndex, currentList);
+        // invalid index
+        commandBox.runCommand("delete " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
 
-     // invalid index
-     commandBox.runCommand("delete " + currentList.length + 1);
-     assertResultMessage("The task index provided is invalid");
-
-     }
+    }
 
     /**
-     * Runs the delete command to delete the task at specified index and confirms the result is
-     * correct.
+     * Runs the delete command to delete the task at specified index and
+     * confirms the result is correct.
+     * 
      * @param targetIndexOneIndexed
      *            e.g. index 1 to delete the first task in the list,
      * @param currentList
@@ -76,8 +68,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         // uses
         // zero
         // indexing
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
-                targetIndexOneIndexed);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
