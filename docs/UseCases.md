@@ -69,12 +69,12 @@ Use case ends
 > 1c1. Opus shows an error message<br>
 > 1c2. Use case ends
 
-#### Use case: Mark task as complete
+#### Use case: Mark a task as complete
 
 **MSS**
 
-1. User requests to mark a specific task in the list as complete
-2. Opus marks the task as complete
+1. User requests to mark task as complete
+2. Opus displays request to mark task as complete
 
 Use case ends
 
@@ -84,6 +84,12 @@ Use case ends
 
 > 1a1. Opus shows an error message<br>
 > 1a2. Use case ends
+
+1b. The task is already complete
+
+> 1b1. Opus marks task as incomplete and shows message
+
+> Use case ends
 
 #### Use case: Undo the previous action
 
@@ -164,3 +170,23 @@ Use case ends
 4a. No internet connection<br>
 > 4a1. Opus shows an error message that there is no internet access to Google Tasks<br>
 > 4a2. Use case ends
+
+#### Use case: Autocompletion
+
+**MSS**
+
+1. User types in first few letters of a command and press Tab
+2. Opus displays the completed command in the CommandBox
+
+Use case ends
+
+**Extensions**
+
+1a. There are no matching commands
+
+> 1a1. Nothing happens
+
+1b. There are multiple matching commands
+
+> 1b1. User tabs multiple times to cycle through commands
+
