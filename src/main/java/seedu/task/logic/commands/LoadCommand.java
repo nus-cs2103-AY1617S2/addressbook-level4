@@ -68,7 +68,7 @@ public class LoadCommand extends Command {
         logger.info("Executing load command with " + toLoad.toString());
 
         try {
-            Optional<ReadOnlyTaskList> newTaskList = storage.loadTaskListFromNewLocation(model.getTaskList(), toLoad);
+            Optional<ReadOnlyTaskList> newTaskList = storage.loadTaskListFromNewLocation(toLoad);
             if (newTaskList.isPresent()) {
                 model.resetData(newTaskList.get());
             }

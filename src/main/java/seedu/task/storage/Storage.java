@@ -50,14 +50,13 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
 
     /**
      * Attempts to load Task Manager data from specified file location
-     * @param taskList
      * @param loadFile
      * @return
      * @throws DataConversionException
      * @throws FileNotFoundException
      */
     @Override
-    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(File loadFile)
             throws FileNotFoundException, DataConversionException;
 
     //@@author
