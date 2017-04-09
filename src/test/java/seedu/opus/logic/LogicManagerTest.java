@@ -506,16 +506,22 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithStatus("incomplete");
         List<Task> oneTask = helper.generateTaskList(p1);
-
-        TaskManager expectedTaskManager = helper.generateTaskManager(oneTask);
-        Task editedTask = oneTask.get(0);
-        editedTask.setStatus(new Status("complete"));
-
-        expectedTaskManager.updateTask(0, editedTask);
         helper.addToModel(model, oneTask);
 
+        Task editedTask = helper.generateTaskWithStatus("complete");
+        TaskManager expectedTaskManager = helper.generateTaskManager(helper.generateTaskList(editedTask));
+
+        // first mark should toggle status to complete
         assertCommandSuccess("mark 1",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, oneTask.get(0)),
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask),
+                expectedTaskManager,
+                expectedTaskManager.getTaskList());
+
+        // second mark should toggle status to incomplete
+        editedTask = helper.generateTaskWithStatus("incomplete");
+        expectedTaskManager = helper.generateTaskManager(helper.generateTaskList(editedTask));
+        assertCommandSuccess("mark 1",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask),
                 expectedTaskManager,
                 expectedTaskManager.getTaskList());
     }
