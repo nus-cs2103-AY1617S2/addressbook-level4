@@ -73,7 +73,7 @@ public class MainApp extends Application {
     }
 
     private String getApplicationParameter(String parameterName) {
-    	if (getParameters() != null) {
+        if (getParameters() != null) {
             Map<String, String> applicationParameters = getParameters().getNamed();
     	    return applicationParameters.get(parameterName);
     	} else {
