@@ -2,9 +2,7 @@ package seedu.taskmanager.logic.parser;
 
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,12 +129,19 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
-    public static void parseWithoutExecution(String commandText) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
-        assert matcher.matches();
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-
-    }
+//    // @@author A0131278H
+//    /**
+//     * Parses user input into command without execution.
+//     *
+//     * @param commandText
+//     *            full command text
+//     */
+//    public static void parseWithoutExecution(String commandText) {
+//        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
+//        assert matcher.matches();
+//        final String commandWord = matcher.group("commandWord");
+//        final String arguments = matcher.group("arguments");
+//
+//    }
+//    // @@author
 }

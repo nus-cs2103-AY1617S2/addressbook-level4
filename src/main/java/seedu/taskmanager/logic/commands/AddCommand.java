@@ -103,4 +103,9 @@ public class AddCommand extends Command {
 
     }
 
+    public void pseudoExecute() {
+        EventsCenter.getInstance().post(new TabSelectionChangedEvent(TAB_TO_DO_INDEX));
+        model.highlightTask(toAdd);
+    }
+
 }

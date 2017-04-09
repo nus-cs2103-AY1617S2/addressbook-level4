@@ -1,6 +1,12 @@
 
 .error {
-    -fx-background-color: #EA4858;
+    -fx-background-color: #ffa59d;
+    -fx-border-color: #555555;
+}
+
+.clear {
+	-fx-background-color: white;
+	-fx-border-color: #555555;
 }
 
 .tag-selector {
@@ -17,24 +23,28 @@
 /*
  * @@author A0131278H
  */
+.menu {
+	-fx-background-color: #e7f5f7;
+}
+
 .menu:hover, .menu-item:hover {
-	-fx-background-color: #9ec9cf;
+	-fx-background-color: #d7eff2;
 }
 
 .menu:selected:focused:showing, .menu-item:selected:focused {
-	-fx-background-color: #8cb3b8;
+	-fx-background-color: -fx-focus-color;
 }
 
 .menu-item:focused {
-	-fx-background-color: #8cb3b8;
+	-fx-background-color: -fx-focus-color;
 }
 
 .menu:showing {
-	-fx-background-color: #8cb3b8;
+	-fx-background-color: -fx-focus-color;
 }
 
 .split-pane-divider {
-    -fx-padding: 1;
+    -fx-padding: 0.5;
 }
 
 .tab-header-background {

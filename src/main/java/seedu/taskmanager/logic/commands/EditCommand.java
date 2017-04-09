@@ -135,6 +135,18 @@ public class EditCommand extends Command {
                 updatedStatus, updatedTags);
     }
 
+    public int getFilteredSelectedTaskListIndex() {
+        return this.filteredSelectedTaskListIndex;
+    }
+    
+    public void pseudoExecute() {
+        List<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
+        assert filteredSelectedTaskListIndex < lastShownList.size();
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredSelectedTaskListIndex);
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+        model.highlightTask(editedTask);
+    }
+
     /**
      * Stores the details to edit the task with. Each non-empty field value will
      * replace the corresponding field value of the task.
