@@ -32,11 +32,13 @@ public class CommandResult {
 
         List<ReadOnlyTask> tasksList = new ArrayList<>(tasksSet);
 
+        //from 1st task to 2nd last task
         for (int i = 0; i < tasksList.size() - 1; i++) {
             builder.append(tasksList.get(i).getName());
             builder.append(", ");
         }
 
+        //last task
         builder.append(tasksList.get(tasksList.size() - 1).getName());
 
         return builder.toString();

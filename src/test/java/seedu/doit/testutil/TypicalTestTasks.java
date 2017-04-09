@@ -1,4 +1,3 @@
-//@@author A0146809W
 package seedu.doit.testutil;
 
 import seedu.doit.commons.exceptions.IllegalValueException;

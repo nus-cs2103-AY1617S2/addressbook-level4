@@ -411,6 +411,7 @@ public class LogicManagerTest {
                 String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, tasksAsString), expectedTM,
                 expectedTM.getTaskList());
     }
+    // @@author
 
     @Test
     public void execute_find_invalidArgsFormat() {

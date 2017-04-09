@@ -77,7 +77,6 @@ public class AddCommand extends Command {
         return COMMAND_WORD;
     }
 
-
     public static String getParameter() {
         return COMMAND_PARAMETER;
     }
