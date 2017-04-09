@@ -13,6 +13,24 @@ import seedu.tache.testutil.TestUtil;
 public class DeleteCommandTest extends TaskManagerGuiTest {
 
     @Test
+    public void edit_recurringTask_failure() {
+        commandBox.runCommand("clear");
+        commandBox.runCommand("add test from 9 april to 16 april every day");
+
+        commandBox.runCommand("delete 1");
+        assertResultMessage(DeleteCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("delete 2");
+        assertResultMessage(DeleteCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("delete 3");
+        assertResultMessage(DeleteCommand.MESSAGE_PART_OF_RECURRING_TASK);
+
+        commandBox.runCommand("delete 7");
+        assertResultMessage(DeleteCommand.MESSAGE_PART_OF_RECURRING_TASK);
+    }
+
+    @Test
     public void delete() {
 
         //delete the first in the list
