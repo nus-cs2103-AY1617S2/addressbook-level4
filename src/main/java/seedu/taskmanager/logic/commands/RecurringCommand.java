@@ -60,6 +60,14 @@ public class RecurringCommand extends Command {
         }
 
         if (taskToRecur.isDeadlineTask()) {
+
+            // try {
+            // model.addRecurringDeadlineTask(taskToRecur, numberOfRecurrence,
+            // typeOfRecurrence);
+            // } catch (DuplicateTaskException dte) {
+            // throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            // }
+            //
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
 
                 try {
