@@ -27,12 +27,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
      TestTask taskToAdd = td.zoo;
      assertAddSuccess(taskToAdd, currentList);
      currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-    
+
      // add another person
      taskToAdd = td.yam;
      assertAddSuccess(taskToAdd, currentList);
      currentList = TestUtil.addTasksToList(currentList, taskToAdd);
-    
+
      // invalid command
      commandBox.runCommand("adds Johnny");
      assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
