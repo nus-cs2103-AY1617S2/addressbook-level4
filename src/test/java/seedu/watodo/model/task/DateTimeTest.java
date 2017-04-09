@@ -15,8 +15,9 @@ public class DateTimeTest {
         //invalid dateTime
         assertFalse(DateTime.isValidDateTime("")); // empty string
         assertFalse(DateTime.isValidDateTime(" ")); // spaces only
-        assertFalse(DateTime.isValidDateTime("Wed or Thurs")); // more than one date
-        assertFalse(DateTime.isValidDateTime("may 6 and may 8 and jul 30 or jul 4"));
+        //TODO Add in user guide that datetime must be one valid, multiple datetime will give
+        //assertFalse(DateTime.isValidDateTime("Wed or Thurs")); // more than one date
+        //assertFalse(DateTime.isValidDateTime("may 6 and may 8 and jul 30 or jul 4"));
         assertFalse(DateTime.isValidDateTime("thrs")); // wrong spelling, should be thurs
         //assertFalse(DateTime.isValidDateTime("31/4")); // dd/mm instead of mm/dd
 
