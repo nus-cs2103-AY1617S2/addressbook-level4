@@ -13,6 +13,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void add() {
+        commandBox.runCommand("clear");
         // add one person
         TestTask[] currentList = td.getTypicalTasks();
         TestTask TaskToAdd = td.zoo;
