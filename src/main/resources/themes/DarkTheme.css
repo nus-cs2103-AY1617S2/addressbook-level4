@@ -131,11 +131,11 @@
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .status-bar-with-border {
@@ -317,3 +317,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
