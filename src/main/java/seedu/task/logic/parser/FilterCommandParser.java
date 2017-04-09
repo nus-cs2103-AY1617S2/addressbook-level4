@@ -56,7 +56,7 @@ public class FilterCommandParser {
             }
             return new FilterCommand(pred);
         } catch (StringIndexOutOfBoundsException e) {
-            return new IncorrectCommand(MESSAGE_INCORRECT_FORMAT +MESSAGE_USAGE);
+            return new IncorrectCommand(MESSAGE_INCORRECT_FORMAT + MESSAGE_USAGE);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand("Invalid argument");
         }
