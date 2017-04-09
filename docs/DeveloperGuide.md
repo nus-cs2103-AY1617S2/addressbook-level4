@@ -116,7 +116,7 @@ Two of those classes play important roles at the architecture level.
 
 [`Storage`](#35-storage) represents a collection of classes that ensure the in-memory data is stored and saved on disk upon changes in data. This allows tasks to be restored from the disk when you close and reopen the application.
 
-UI, Logic, Model and Storage are key components that
+UI, Logic, Model and Storage are key components that:
 
 * Define their _API_ in interfaces with the same names as the Components.
 * Expose their functionality using `{Component Name}Manager` classes.
@@ -137,7 +137,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 
 For example, the layout of the [`MainWindow`](../src/main/java/seedu/today/ui/MainWindow.java) is specified in  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
-The `UI` component passes user commands using the `Logic` component, auto-update when data in the `Model` changes, and responds to events raised from various parts of the App and updates the interface accordingly.
+The `UI` component passes user commands using the `Logic` component, auto-updates when data in the `Model` changes, and responds to events raised from various parts of the App and updates the interface accordingly.
 
 ### 3.3. Logic
 
@@ -147,21 +147,23 @@ The `UI` component passes user commands using the `Logic` component, auto-update
 
 The **Logic** component of the software handles the input from the **UI** and calls methods from the **Model**, **Config**, and **Storage** to perform the appropriate changes.
 
-When a command is entered, the `Parser` processes the text and selects the appropriate `CommandParser` based on the first word in the text to parse the arguments as well. Its respective `Command` is then initialized which calls the relevant methods from other components, and returns a `CommandResult` to the UI to make the relevant changes.
+When a command is entered, the `Parser` processes the text and selects the appropriate `CommandParser` based on the first word in the text. The `CommandParser` will then initialize its respective `Command`, which calls the relevant methods from other components and returns a `CommandResult` to the UI to make the relevant changes.
 
-> `Parser` makes use of classes such as `ArgumentTokenizer`, `ParserUtil`, and `CliSyntax` for certain repetitive parsing tasks
+> `Parser` makes use of classes such as `ArgumentTokenizer`, `ParserUtil`, and `CliSyntax` for certain repetitive parsing tasks.
 
-> `CommandParser` may return an `IncorrectCommand` in the case when the arguments are not of the suitable format
+> `CommandParser` may return an `IncorrectCommand` if arguments are not in the correct format.
 
 **Command Parsers**
 
-Command parsers are designed to facilitate logic manager to understand certain user commands. They break the input string down based on the keywords in the commands, and generating instances like dates and names that the logic manager will understand.
+Command parsers are designed to help LogicManager understand certain user commands. They break the input string down based on the keywords in the commands to generate objects like dates and names that the logic manager can understand.
 
-All the parsers are extending from CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java. For certain commands, like `add` and `edit` commands, which have flexible input styles, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will find the tag information first. After that, the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads, instead it will only check whether the index exist and pass the UI index string to the logic manager untouched. The parsers will not modify the model directly.
+All parsers are extended from the CommandParser abstract class, and they all have a parse() method which accepts a user input string as parameter. Usually, the parser breaks down the user input through regex patterns, which are included in the CliSyntax.java.
+
+Due to the flexible nature of certain commands, such as the `add` and `edit` commands, the parsers need to process the input strings progressively. For example, to process an `add` command, the parser will first find the tag information, then the date time information, and finally, the title of the task. The parsers will not process the relative UI index it reads. Instead, it only checks whether the index exists before passing the UI index string to the LogicManager untouched. The parsers will not modify the model directly.
 
 The parsers will generate Command instances, based on the type of commands they received. The Command instance will include all the fields the parser identified.
 
-In the event the parser encounters input errors, for example the input contains invalid characters or the index typed is unknown, an IncorrectCommand instance will be returned to the handler, containing the error information.
+In the event the parser encounters input errors, such as invalid characters or unknown indexes, an IncorrectCommand instance will be returned to the handler, containing the error information.
 
 ### 3.4. Model
 
@@ -172,9 +174,9 @@ _Figure 3.4.1 : Structure of the Model Component_
 
 **Task**
 
-Task class is the fundamental block of the whole task manager. Each Task instance holds the specifications of one task.
+The Task class is the fundamental block of the task manager. Each Task instance holds the specifications of one task.
 
-Task is an abstract class, and it has three subclasses, namely FloatingTask (task with no date time), DeadlineTask (task with a deadline), and EventTask (task with a starting time and an ending time). Each subclass has a unique constructor which will initiate the name and tag information of one task with the given information. The constructor also needs date time information based on the type of the task. For EventTask, the constructor will check whether the ending time is after the starting time. If not, an IllegalValueException will be thrown.
+Task is an abstract class, and it has three subclasses, namely FloatingTask (task with no datetime information), DeadlineTask (task with a deadline), and EventTask (task with a starting time and an ending time). Each subclass has a unique constructor which will initiate the name and tag information of one task with the given information. The constructor also needs date time information based on the type of the task. For EventTask, the constructor will check whether the ending time is after the starting time. If not, an IllegalValueException will be thrown.
 
 **Filter**
 
@@ -200,12 +202,12 @@ Similar to the `Model`, `Storage` contains the `UserPrefsStorage` object and the
 
 ### 3.6. Event-Driven Design
 
-Because there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
+As there are many different components that may be affected by a single command, we use events to simplify method calling. In our code, after a command has successfully executed its primary functionality like making a change to the **Model**, it raises an `Event` which is then picked up by **Storage**, and **UI** which then calls the relevant methods to make the appropriate changes.
 
-The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `delete 2` causes a change in the model which is the command's primary task.
+The _Sequence Diagram_ below exemplifies this process. In the figure below, you can see that entering `undo` causes a change in the model which is the command's primary task.
 
 <img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/TaskManagerSequenceDiagram.png" width="800"><br>
-_Figure 3.6.1 : Component interactions for `delete 2` command_
+_Figure 3.6.1 : Component interactions for `undo` command_
 
 Only after the task is complete, is an `Event` raised to modify the storage and UI components in step 1.1.1.3.
 
@@ -223,12 +225,10 @@ The `LogsCenter` class manages logging levels and logging destinations.
 
 **Logging Levels**
 
-`
-SEVERE  : A critical problem is detected. The application is likely to be terminated.
-WARNING : A minor problem is detected. The application will continue running, but errors may be surfacing in the User Interface or the data.
-INFO    : No errors detected. The application is reporting routine actions taken while carrying out user commands.
-FINE    : No errors detected. The application is reporting minor details that may be useful in debugging.
-`
+- `SEVERE` : A critical problem is detected. The application is likely to be terminated.
+- `WARNING` : A minor problem is detected. The application will continue running, but errors may be surfacing in the User Interface or the data.
+- `INFO` : No errors detected. The application is reporting routine actions taken while carrying out user commands.
+- `FINE` : No errors detected. The application is reporting minor details that may be useful in debugging.
 
 ### 4.2. Configuration
 
@@ -356,21 +356,15 @@ We have two types of tests:
       e.g. `seedu.today.logic.LogicManagerTest`
 
 #### Headless GUI Testing
-Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
- our GUI tests can be run in the _headless_ mode.
- In the headless mode, GUI tests do not show up on the screen.
- That means youthe developer can do other things on the Computer while the tests are running.<br>
- See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
+Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use, our GUI tests can be run in the _headless_ mode. In the headless mode, GUI tests do not show up on the screen. That means you, the developer, can do other things on your computer while the tests are running.<br>
+See [UsingGradle.md](UsingGradle.md#running-tests) to learn how to run tests in headless mode.
 
 ### 5.1. Troubleshooting tests
 
  **Problem: Tests fail because NullPointException occurs when AssertionError is expected**
 
- * Reason: Assertions are not enabled for JUnit tests.
-   This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later).
- * Solution: Enable assertions in JUnit tests as described
-   [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option). <br>
-   Delete run configurations created when you ran tests earlier.
+ * Reason: Assertions are not enabled for JUnit tests. This can happen if you are not using a recent Eclipse version (i.e. _Neon_ or later).
+ * Solution: Fix this by first enabling assertions in JUnit tests as described [here](http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option), then deleting the run configurations created from the tests you ran earlier.
 
 ## 6. Dev Ops
 
@@ -394,14 +388,12 @@ Here are the steps to create a new release.
 
  1. Generate a JAR file [using Gradle](UsingGradle.md#creating-the-jar-file).
  2. Tag the repo with the version number. e.g. `v0.1`
- 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/)
-    and upload the JAR file you created.
+ 2. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/) and upload the JAR file you created.
 
 ### 6.5. Managing Dependencies
 
 A project often depends on third-party libraries. For example, **Today** depends on the
-[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
-can be automated using Gradle.
+[Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_ can be automated using Gradle.
 
 ## Appendix A : User Stories
 
@@ -412,7 +404,7 @@ Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
  `* * *` | New User | Know all the commands that are available | Know how to use the Task Manager effectively
  `* * *` | User | Add a task | Keep track of my tasks
- `* * *` | User | Specify a start date for a task | Keep track of when I intend to start on my task
+ `* * *` | User | Specify a start and end date for an event | Keep track of my events
  `* * *` | User | Specify a deadline for a task | Keep track of when my tasks are due
  `* * *` | User | Update an existing task | Correct a mistake or indicate a change in the task
  `* * *` | User | Delete a task | Indicate a change in the task
@@ -430,12 +422,8 @@ Priority | As a ... | I want to ... | So that I can...
  `* * *` | User | Specify a storage file to open | Access a task list from another computer
  `* * *` | User | Enter commands using natural language and in an intuitive manner | Easily use the task manager without having to memorize command formats
  `* * *` | User | Exit the task manager | Have a peace of mind that the program exits safely
- `* *` | User | See if the commands that I typed are valid while I am typing them | Check that my command is valid before I press enter
  `* *` | User | Export all tasks to an external file | Backup the list of tasks
  `* *` | User | Restore tasks from an external file | Access tasks from one computer on another computer
- `*` | User | Add recurring tasks | Avoid duplicate work and adding daily/weekly/monthly tasks multiple times
- `*` | Team leader | Push the team event schedule to every team member | Notify the whole team about the team schedule
- `*` | Advanced User | Use hotkeys to bring the Task Manager from the background to the foreground | Make adding tasks faster
 
 ## Appendix B : Use Cases
 
