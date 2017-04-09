@@ -12,7 +12,7 @@ Follow this script to perform the following manual tests for Opus.
 
 To add a task, start command with keyword `add`.
 
-### Add a floating task
+### 1. Add a floating task
 
 `add Buy fruits`
 
@@ -23,7 +23,30 @@ Feedback shows:
 > New task added: Buy fruits<br/>
 > Status: incomplete
 
-Newly added task should be at index #22 without any attributes below it.
+### 2. Add a task with deadline
+
+`add Submit Assignment e/01/31/2018 23:59`.
+
+#### Result
+
+Feedback shows:
+
+> New task added: Submit Assignment<br/>
+> Status: incomplete<br/>
+> End Time: 31 Jan 18 11:59PM
+
+### 3. Add a task with event time
+
+`add School Camp b/02/01/2018 10:00 e/02/10/2018 19:00`
+
+#### Result
+
+Feedback shows:
+
+> New task added: School Camp<br/>
+> Status: incomplete<br/>
+> Start Time: 01 Feb 18 10:00AM<br/>
+> End Time: 10 Feb 18 07:00PM
 
 ## Delete command
 
@@ -40,10 +63,7 @@ Feedback shows:
 > Deleted Task: Buy dinner<br/>
 > Priority: low<br/>
 > Status: incomplete<br/>
-> Note:<br/>
 > Start Time: 28 Apr 17 09:21PM<br/>
-> End Time:<br/>
-> Tags:
 
 Task with index 1 is deleted.
 
