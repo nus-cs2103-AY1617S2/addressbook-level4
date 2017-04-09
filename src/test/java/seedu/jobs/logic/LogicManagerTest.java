@@ -20,12 +20,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.google.api.services.calendar.Calendar;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
+import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.logic.commands.ClearCommand;
 import seedu.jobs.logic.commands.Command;
@@ -90,7 +92,9 @@ public class LogicManagerTest {
         String tempTaskBookFile = saveFolder.getRoot().getPath() + "TempAddressBook.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         String tempLoginInfoFile = saveFolder.getRoot().getPath() + "TempLoginInfo.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskBookFile, tempPreferencesFile, tempLoginInfoFile));
+        CalendarManager calendarManager = new CalendarManager();
+        logic = new LogicManager(model,
+                new StorageManager(tempTaskBookFile, tempPreferencesFile, tempLoginInfoFile), calendarManager);
         EventsCenter.getInstance().registerHandler(this);
 
         latestTaskAddressBook = new TaskBook(model.getTaskBook()); // last saved assumed to be up to date

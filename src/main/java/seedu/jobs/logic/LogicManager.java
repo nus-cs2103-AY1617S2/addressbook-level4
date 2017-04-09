@@ -14,7 +14,6 @@ import seedu.jobs.logic.parser.Parser;
 import seedu.jobs.model.Model;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.storage.Storage;
-import seedu.jobs.storage.StorageManager;
 
 /**
  * The main LogicManager of the app.
@@ -30,11 +29,6 @@ public class LogicManager extends ComponentManager implements Logic {
         this.model = model;
         this.parser = new Parser();
         this.calendar = calendar;
-    }
-
-    public LogicManager(Model model, StorageManager storageManager) {
-        this.model = model;
-        this.parser = new Parser();
     }
 
     @Override
