@@ -24,7 +24,7 @@ public class ArgumentTokenizer {
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
-    
+
     /** For adding a title in quotes **/
     private String titleQuotes = "";
 
@@ -64,7 +64,7 @@ public class ArgumentTokenizer {
         }
         return getAllValues(prefix).flatMap((values) -> Optional.of(values.get(values.size() - 1)));
     }
-    
+
     //@@ author
 
     /**
@@ -90,7 +90,7 @@ public class ArgumentTokenizer {
         /* An empty preamble is considered 'no preamble present' */
         if (storedPreamble.isPresent() && !storedPreamble.get().isEmpty()) {
             return storedPreamble;
-        } 
+        }
         else if (!this.titleQuotes.isEmpty()) {
             Optional<String> preamble = Optional.of(this.titleQuotes);
             return preamble;

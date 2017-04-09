@@ -37,7 +37,7 @@ public class ListCommandParser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
-        String parameter = parameters.get().trim();
+        String parameter = parameters.get().trim().toLowerCase();
         if(!isValidParameter(parameter)){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
