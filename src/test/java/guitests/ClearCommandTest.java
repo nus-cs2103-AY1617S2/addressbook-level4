@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class ClearCommandTest extends TaskManagerGuiTest {
 
+	// @@author A0139448U
 	@Test
 	public void clear() {
 
@@ -14,7 +15,7 @@ public class ClearCommandTest extends TaskManagerGuiTest {
 		assertClearCommandSuccess();
 
 		// verify other commands can work after a clear command
-		commandBox.runCommand("add Act like a craven"); // td.cower.getAddCommand()
+		commandBox.runCommand("add Act like a craven");
 		assertTrue(taskListPanel.isListMatching(td.cower));
 		commandBox.runCommand("delete 1");
 		assertListSize(0);
