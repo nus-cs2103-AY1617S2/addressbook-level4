@@ -16,3 +16,4 @@ environment:
 # Files/folders to preserve between builds to speed them up
 cache:
     - C:\Users\appveyor\.gradle
+

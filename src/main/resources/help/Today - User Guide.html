@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Today - User Guide</title>
+    <meta name="description" content="A minimalistic task manager aims to be the simplest way to organize your day.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link href="./Today - User Guide_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./Today - User Guide_files/style.css">
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">main</h1>
+      <h2 class="project-tagline">A minimalistic task manager aims to be the simplest way to organize your day.</h2>
+
+        <a href="https://github.com/CS2103JAN2017-T09-B1/main" class="btn">View on GitHub</a>
+
+
+    </section>
+
+    <section class="main-content">
+      <h1 id="today---user-guide">Today - User Guide</h1>
+
+<p>By : <code class="highlighter-rouge">T09B1</code>  &nbsp;&nbsp;&nbsp;&nbsp; Since: <code class="highlighter-rouge">Mar 2017</code></p>
+
+<hr>
+
+<ol>
+  <li><a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#1-introduction">Introduction</a></li>
+  <li><a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#2-quick-start">Quick Start</a></li>
+  <li><a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#3-features">Features</a><br>
+ 3.1. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#31-adding-tasks">Adding Tasks</a><br>
+ 3.2. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#32-viewing-tasks">Viewing Tasks</a><br>
+ 3.3. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#33-managing-tasks">Managing Tasks</a><br>
+ 3.4. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#34-managing-tags">Managing Tags</a><br>
+ 3.5. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#35-undoredo-commands">Undo/Redo Commands</a><br>
+ 3.6. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#36-advanced-usage">Advanced Usage</a><br>
+ 3.7. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#37-hotkeys">Hotkeys</a><br>
+ 3.8. <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#38-miscellaneous">Miscellaneous</a></li>
+  <li><a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#4-faq">FAQ</a></li>
+  <li><a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#5-command-summary">Command Summary</a></li>
+</ol>
+
+<h2 id="1-introduction">1. Introduction</h2>
+<p><strong>Today</strong> is a minimalistic task manager that aims to be the simplest way to organize your day.</p>
+
+<p>In our far too hectic lives, there’s just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, <strong>Today</strong> helps you focus on the things that you <em>can</em> control - the tasks you’re going to tackle today.</p>
+
+<p>This user guide is here to guide you through the <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#21-installation-instructions">installation</a> of our application and give you a walkthrough of our <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#3-features">basic features</a>. We’ve also provided a <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#5-command-summary">cheatsheet</a> with a summary of all our commands available.</p>
+
+<h2 id="2-quick-start">2. Quick Start</h2>
+
+<p>Let’s get you up and running.</p>
+
+<h3 id="21-installation-instructions">2.1. Installation Instructions</h3>
+
+<ol>
+  <li>Install the latest Java <a href="https://java.com/en/download/">here</a>. This will be required to run the application.</li>
+  <li>Download <code class="highlighter-rouge">today.jar</code> from the <a href="https://cs2103jan2017-t09-b1.github.io/releases">releases</a> tab.</li>
+  <li>Copy the file to the folder you want to use as the home folder for your task manager.</li>
+  <li>Double-click the file to start the app and you should see an interface like the image below.</li>
+</ol>
+
+<p><img src="./Today - User Guide_files/211defaultview.PNG" height="400"></p>
+
+<p><em>Fig 2.1.1. Default view of the task manager</em></p>
+
+<h3 id="22-how-to-get-started">2.2. How to get started</h3>
+
+<p>As you get used to the features, you can use <strong>Today</strong> any way you like. But for starters, this is what we recommend.</p>
+
+<ol>
+  <li>At the start of every working day, go through your inbox and <code class="highlighter-rouge">add</code> new tasks to your tasklist.</li>
+</ol>
+
+<p><img style="display: block; margin: auto" src="./Today - User Guide_files/221addtask.PNG"></p>
+
+<ol>
+  <li>Once you’re done, review your list and mark out the tasks you want to focus on <code class="highlighter-rouge">today</code>.</li>
+</ol>
+
+<p><img style="display: block; margin: auto" src="./Today - User Guide_files/222today.PNG"></p>
+
+<ol>
+  <li>Whenever you’re <code class="highlighter-rouge">done</code> with a task, it’s shifted out of sight, allowing you to focus on the remaining tasks on hand.</li>
+</ol>
+
+<p><img style="display: block; margin: auto" src="./Today - User Guide_files/223done.PNG"></p>
+
+<p>Rinse and repeat until you have no more tasks left!</p>
+
+<p><img style="display: block; margin: auto" src="./Today - User Guide_files/224result.PNG"></p>
+
+<h2 id="3-features">3. Features</h2>
+
+<blockquote>
+  <p><strong><span style="font-size:20px">What These Symbols Represent</span></strong><br></p>
+  <ul>
+    <li>normal text denotes command keywords</li>
+    <li><code class="highlighter-rouge">&lt; &gt;</code> denotes parameters</li>
+    <li><code class="highlighter-rouge">[ ]</code> denotes that the parameter is optional</li>
+  </ul>
+
+  <p><strong><span style="font-size:20px">DateTime Inputs</span></strong></p>
+
+  <p><strong>Today</strong> supports datetime inputs in natural language. This means that you are free to specify the deadline using words like today, tomorrow, next week and so on. You can also use a dd/mm/yyyy format if you wish. If only time is provided, we assume you mean today. If only date is provided, we assume you mean 11:59pm.</p>
+</blockquote>
+
+<h3 id="31-adding-tasks">3.1. Adding Tasks</h3>
+
+<h4 id="311-adding-a-task">3.1.1. Adding a task</h4>
+
+<p>The first step to organizing your tasks is to make sure you have all of them in one place. <strong>Today</strong> makes it easy for you to add new tasks, with the option to specify a deadline or add tags to the task, making it easier for you to manage as your list gets longer.</p>
+
+<h5 id="format-add-task_name-due-deadline-tag1-tag2-">Format: <code class="highlighter-rouge">add &lt;task_name&gt; [due &lt;deadline&gt;] [#&lt;tag1&gt; #&lt;tag2&gt; ...&gt;]</code></h5>
+
+<h5 id="parameters">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>task_name                : Name of your task
+
+deadline (optional)      : Deadline of your task
+
+tag1 tag2 ... (optional) : Tags of this task
+</code></pre>
+</div>
+
+<h5 id="examples">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">add Study for CS2106</code></li>
+  <li><code class="highlighter-rouge">add Study for CS2106 due today</code></li>
+  <li><code class="highlighter-rouge">add Study for CS2106 due 20/03/17 3pm #lab #cs2106</code></li>
+</ul>
+
+<h4 id="312-adding-a-new-event">3.1.2. Adding a new event</h4>
+
+<p>Task management is all about fitting tasks into your busy schedule. The only way to do that is to have a handle on the events you have planned on any given day. <strong>Today</strong> understands that, and allows you to add events as well.</p>
+
+<h5 id="format-add-event_name-from-starting_date_time-to-end_date_time-tag1-tag2-">Format: <code class="highlighter-rouge">add &lt;event_name&gt; from &lt;starting_date_time&gt; to &lt;end_date_time&gt; [#&lt;tag1&gt; #&lt;tag2&gt; ...&gt;]</code></h5>
+
+<h5 id="parameters-1">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>event_name                 : Name of the event
+
+starting_date_time         : Starting date and time of the event
+
+end_date_time              : Date and time of end of the event.
+                             Note that if date is provided in end_date_time but not in
+                             starting_date_time, we assume that you mean to use the same
+                             date for both start and end date times.
+                             i.e. 2pm to 3pm Friday --&gt; 2pm Friday to 3pm Friday
+
+tag1 tag2 ... (optional)   : Tags of this event
+</code></pre>
+</div>
+
+<h5 id="examples-1">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">add dinner from 5pm to 5.30pm</code></li>
+  <li><code class="highlighter-rouge">add meeting from 10am to 24th March 11am #work</code></li>
+</ul>
+
+<h3 id="32-viewing-tasks">3.2. Viewing Tasks</h3>
+
+<h4 id="321-finding-tasks-by-keyword">3.2.1. Finding tasks by keyword</h4>
+
+<p>Most of us have plenty of things to do, which means plenty of tasks on our tasklist. Manually looking through the list to find something would be like looking for a needle in a haystack. <strong>Today</strong> saves you the trouble of doing that with a <code class="highlighter-rouge">find</code> command, showing you all the tasks related to any of the keywords you provide.</p>
+
+<p>Note that <strong>Today</strong> returns everything related to any of the specified keywords. For example, <code class="highlighter-rouge">find math science</code> returns tasks or events that contain math or science in its title or tags.</p>
+
+<p><img src="./Today - User Guide_files/322taskfound.PNG"></p>
+
+<h5 id="format-find-keyword1-keyword2-">Format: <code class="highlighter-rouge">find &lt;keyword1 keyword2 ...&gt;</code></h5>
+
+<h5 id="parameters-2">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>keyword1 keyword2 ...  : All the parameters you want in the search
+</code></pre>
+</div>
+
+<h5 id="examples-2">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">find schoolwork</code></li>
+  <li><code class="highlighter-rouge">find math science</code></li>
+</ul>
+
+<h4 id="322-finding-tasks-by-deadline">3.2.2. Finding tasks by deadline</h4>
+
+<p>Your favourite band is coming to town and you want to get tickets for their concert. How would you know if you’re free to watch that concert three Saturdays from now? Using <strong>Today</strong>’s <code class="highlighter-rouge">find due</code> command, you’ll be able to find out for yourself if you have anything due that day. If you do, maybe it’s time to start working on it first!</p>
+
+<h5 id="format-find-due-date">Format: <code class="highlighter-rouge">find due &lt;date&gt;</code></h5>
+
+<h5 id="parameters-3">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>date : Due date of your task in dd/mm/yyyy or in natural language
+</code></pre>
+</div>
+
+<h5 id="examples-3">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">find due 21/04/17</code></li>
+  <li><code class="highlighter-rouge">find due tomorrow</code></li>
+</ul>
+
+<h4 id="323-listing-all-uncompleted-tasks">3.2.3. Listing all uncompleted tasks</h4>
+
+<p>By default, <strong>Today</strong> already displays all your uncompleted tasks. However, if you’ve just used a <code class="highlighter-rouge">find</code> command, <strong>Today</strong> would have hidden all tasks irrelevant to your query. Don’t worry! You can get back your full tasklist by using this command.</p>
+
+<h5 id="format-list">Format: <code class="highlighter-rouge">list</code></h5>
+
+<h4 id="324-listing-all-completed-tasks">3.2.4. Listing all Completed Tasks</h4>
+
+<p>There may be times when you would wish to review the tasks you have already completed. You can easily view all your completed task through <strong>Today</strong>’s <code class="highlighter-rouge">listcompleted</code> command. This will bring up a list that will display all the tasks you have completed. Use the previously mentioned <code class="highlighter-rouge">list</code> command to hide this list again.</p>
+
+<h5 id="format-listcompleted">Format: <code class="highlighter-rouge">listcompleted</code></h5>
+
+<p><img src="./Today - User Guide_files/324completed.PNG" height="300"></p>
+
+<h3 id="33-managing-tasks">3.3. Managing Tasks</h3>
+
+<h4 id="331-marking-a-task-as-today">3.3.1. Marking a task as today</h4>
+
+<p>As suggested in the <a href="https://cs2103jan2017-t09-b1.github.io/main/docs/UserGuide.html#22-how-to-get-started">quick-start guide</a>, we recommend that users compile a list of tasks to focus on, regardless of deadline. The <code class="highlighter-rouge">today</code> command shifts tasks from your future list to your list of today’s tasks.</p>
+
+<p>In the screenshot below, we use the command <code class="highlighter-rouge">today F4</code> to shift a task initially due tomorrow to today’s task list.</p>
+
+<p><img src="./Today - User Guide_files/331today.PNG"></p>
+
+<h5 id="format-today-id">Format: <code class="highlighter-rouge">today &lt;id&gt;</code></h5>
+
+<h5 id="parameters-4">Parameters</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>id : Displayed task id
+</code></pre>
+</div>
+
+<h5 id="examples-4">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">today F4</code></li>
+</ul>
+
+<h4 id="332-marking-a-task-as-not-today">3.3.2. Marking a task as not today</h4>
+
+<p>If you’ve added a task to the today list, but later decide that you already have enough on your plate, feel free to shift it back to the future list using the <code class="highlighter-rouge">nottoday</code> command. Note that if a task is already due today, using <code class="highlighter-rouge">nottoday</code> will not shift it to the future list.</p>
+
+<h5 id="format-nottoday-id">Format: <code class="highlighter-rouge">nottoday &lt;id&gt;</code></h5>
+
+<h5 id="parameters-5">Parameters</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>id : Displayed task id
+</code></pre>
+</div>
+
+<h5 id="examples-5">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">nottoday F4</code></li>
+</ul>
+
+<h4 id="333-marking-a-task-as-done">3.3.3. Marking a task as done</h4>
+
+<p>Once you’re done with a task, mark it as <code class="highlighter-rouge">done</code> and we’ll archive it for you. Do this often enough, and you’ll have a great sense of satisfaction watching your tasklist get shorter.</p>
+
+<h5 id="format-done-id">Format: <code class="highlighter-rouge">done &lt;id&gt;</code></h5>
+
+<h5 id="parameters-6">Parameters</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>id : Displayed task id
+</code></pre>
+</div>
+
+<h5 id="examples-6">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">done T3</code></li>
+</ul>
+
+<h4 id="334-marking-a-task-as-not-done">3.3.4. Marking a task as not done</h4>
+
+<p>Be honest. If you know you didn’t do that task properly, and you want to come back to it, use the <code class="highlighter-rouge">notdone</code> function to bring it back from the completed list.</p>
+
+<h5 id="format-notdone-id">Format: <code class="highlighter-rouge">notdone &lt;id&gt;</code></h5>
+<h5 id="parameters-7">Parameters</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>id : Displayed task id
+</code></pre>
+</div>
+
+<h5 id="examples-7">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">notdone C3</code></li>
+</ul>
+
+<h4 id="335-editing-a-task">3.3.5. Editing a task</h4>
+
+<p>We make mistakes all the time. When you’ve entered a wrong task name, or even a wrong deadline, correct it using the <code class="highlighter-rouge">edit</code> command.</p>
+
+<h5 id="format-edit-id-new_task_name-due-new_date_time-tag1-tag2--or-edit-id-new_task_name-from-new_date_time-to-new_date_time-tag1-tag2-">Format: <code class="highlighter-rouge">edit &lt;id&gt; [&lt;new_task_name&gt;] [due &lt;new_date_time&gt;] [#&lt;tag1&gt; #&lt;tag2&gt; ...]</code><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR <code class="highlighter-rouge">edit &lt;id&gt; [&lt;new_task_name&gt;] [from &lt;new_date_time&gt; to &lt;new_date_time&gt;] [#&lt;tag1&gt; #&lt;tag2&gt; ...]</code></h5>
+
+<h5 id="parameters-8">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id                       : Displayed task id
+
+new_task_name (optional) : New name to replace the old task name
+
+new_date_time (optional) : New deadline of your task
+
+tag1 tag2 ... (optional) : Tags that replace ALL the current tags.
+</code></pre>
+</div>
+
+<h5 id="examples-8">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">edit T7 clean house</code></li>
+  <li><code class="highlighter-rouge">edit T7 from 4pm to 6pm</code></li>
+  <li><code class="highlighter-rouge">edit T7 #schoolwork #CS2103</code></li>
+  <li><code class="highlighter-rouge">edit T7 clean house due 04/05/17 6pm #schoolwork #CS2103</code></li>
+</ul>
+
+<h4 id="336-deleting-a-task">3.3.6. Deleting a task</h4>
+
+<p>Some tasks don’t get <code class="highlighter-rouge">done</code>. We put them aside and after several eons, we discover that we don’t have to actually do them anymore. If you’re feeling too guilty to mark the task as <code class="highlighter-rouge">done</code>, that’s the perfect time to <code class="highlighter-rouge">delete</code> it.</p>
+
+<h5 id="format-delete-id">Format: <code class="highlighter-rouge">delete &lt;id&gt;</code></h5>
+
+<h5 id="parameters-9">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>id : displayed task id
+</code></pre>
+</div>
+
+<h5 id="examples-9">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">delete F3</code></li>
+  <li><code class="highlighter-rouge">delete T3</code></li>
+</ul>
+
+<h3 id="34-managing-tags">3.4. Managing Tags</h3>
+
+<h4 id="341-renaming-tag">3.4.1. Renaming tag</h4>
+
+<p>You’ve been tagging a bunch of tasks as <code class="highlighter-rouge">work</code>. Now that you’re quitting your current workplace, you might want to mark them as <code class="highlighter-rouge">oldwork</code> instead. Instead of going through your tasks one by one, all of the tasks can be instantly retagged with <code class="highlighter-rouge">oldwork</code> with this function.</p>
+
+<p>Becareful, tag names are case sensitive!</p>
+
+<h5 id="format-renametag-tag_name-new_tag_name">Format: <code class="highlighter-rouge">renametag &lt;tag_name&gt; &lt;new_tag_name&gt;</code></h5>
+
+<h5 id="parameters-10">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tag_name     : Existing tag name
+
+new_tag_name : New tag name
+</code></pre>
+</div>
+
+<h5 id="examples-10">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">renametag work oldwork</code></li>
+  <li><code class="highlighter-rouge">renametag girlfriend ex-gf</code></li>
+</ul>
+
+<h4 id="342-deleting-tag">3.4.2. Deleting tag</h4>
+
+<p>When you reorganize your tasks into different tags, from say “work” vs “family” to something more specific like “boss jim”, “boss sarah”, “annoying wife jeanie”, “daughter Samantha”, you can delete your former tags “work” and “family”, and retag your tasks.</p>
+
+<h5 id="format-deletetag-tag_name">Format: <code class="highlighter-rouge">deletetag &lt;tag_name&gt;</code></h5>
+
+<h5 id="parameters-11">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tag_name : Existing tag name
+</code></pre>
+</div>
+
+<h5 id="examples-11">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">deletetag work</code></li>
+  <li><code class="highlighter-rouge">deletetag family</code></li>
+</ul>
+
+<h3 id="35-undoredo-commands">3.5. Undo/Redo Commands</h3>
+
+<h4 id="351-undo-command">3.5.1. Undo Command</h4>
+
+<p>You accidentally marked an undone task as <code class="highlighter-rouge">done</code>. You can quickly <code class="highlighter-rouge">undo</code> what you’ve done and get the task back by using this command. Note that you can undo all commands you’ve run since you opened the application. Once you close the application, all undo data is lost and you won’t be able to undo previous commands upon restarting the application.</p>
+
+<h5 id="format-undo">Format: <code class="highlighter-rouge">undo</code></h5>
+
+<h4 id="352-redo-command">3.5.2. Redo Command</h4>
+
+<p>You used <code class="highlighter-rouge">undo</code> without meaning to, or you’ve used <code class="highlighter-rouge">undo</code> one too many times. Using <code class="highlighter-rouge">redo</code> will undo your last <code class="highlighter-rouge">undo</code> command.</p>
+
+<h5 id="format-redo">Format: <code class="highlighter-rouge">redo</code></h5>
+
+<h3 id="36-advanced-usage">3.6. Advanced Usage</h3>
+
+<h4 id="361-change-storage-location">3.6.1. Change storage location</h4>
+
+<p>Some of you power-users want to keep your tasks synced between devices. Using this function, you can get <strong>Today</strong> on different devices to point at the same synced file (using a service like Dropbox. This ensures that your tasks will be kept synced when a change is performed on any of your linked devices.</p>
+
+<h5 id="format-saveto-dir_location">Format: <code class="highlighter-rouge">saveto &lt;dir_location&gt;</code></h5>
+
+<h5 id="parameters-12">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dir_location : Path to folder of new savefile location
+</code></pre>
+</div>
+
+<h5 id="examples-12">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">saveto C:\Users\&lt;YourName&gt;\Desktop</code></li>
+  <li><code class="highlighter-rouge">saveto ..\mySecretFolder</code></li>
+</ul>
+
+<h4 id="362-load-different-data-file">3.6.2. Load different data file</h4>
+
+<p>Once you have saved your file to your Dropbox folder, your other computer will need to be told where this file is. Use the usethis command to load the tasks from this data file. Any changes you make to this file will also be reflected in your original file.</p>
+
+<h5 id="format-usethis-dir_location">Format: <code class="highlighter-rouge">usethis &lt;dir_location&gt;</code></h5>
+
+<h5 id="examples-13">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">usethis C:\Users\&lt;YourName&gt;\Desktop</code></li>
+  <li><code class="highlighter-rouge">usethis ..\mySecretFolder</code></li>
+</ul>
+
+<h5 id="parameters-13">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dir_location : Path to folder of existing savefile location
+</code></pre>
+</div>
+
+<h4 id="363-export-file">3.6.3. Export file</h4>
+
+<p>Don’t worry if you don’t have the luxury of a syncing service. If you want to transfer tasks from one computer to the next, you can <code class="highlighter-rouge">export</code> your tasks, and transfer the output file using a USB stick.</p>
+
+<h5 id="format-export-dir_location">Format: <code class="highlighter-rouge">export &lt;dir_location&gt;</code></h5>
+
+<h5 id="parameters-14">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dir_location : Path of the folder to be used to store exported file
+</code></pre>
+</div>
+
+<h5 id="examples-14">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">export C:\Users\&lt;YourName&gt;\Desktop</code></li>
+  <li><code class="highlighter-rouge">export .\mySecretFolder</code></li>
+</ul>
+
+<h4 id="364-import-file">3.6.4. Import file</h4>
+
+<p>In your second computer, plug in the USB stick and get the file path of the previously exported file. Tell <strong>Today</strong> to <code class="highlighter-rouge">import</code> this file and it will add these tasks to your current tasklist.</p>
+
+<h5 id="format-import-dir_location">Format: <code class="highlighter-rouge">import &lt;dir_location&gt;</code></h5>
+
+<h5 id="parameters-15">Parameters</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>dir_location : Path to folder of file to be imported
+</code></pre>
+</div>
+
+<h5 id="examples-15">Examples</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">import C:\Users\&lt;YourName&gt;\Desktop</code></li>
+  <li><code class="highlighter-rouge">import ..\mySecretFolder</code></li>
+</ul>
+
+<h3 id="37-hotkeys">3.7 Hotkeys</h3>
+
+<h4 id="371-expanding-and-minimizing-task-lists">3.7.1. Expanding and minimizing task lists</h4>
+
+<p>You might find it useful to get your today or future task list out of the way. To do so, press <kbd>Ctrl</kbd> + <kbd>1</kbd> or <kbd>Ctrl</kbd> + <kbd>2</kbd> to expand or close your today and future task lists respectively.</p>
+
+<h4 id="372-scrolling-through-your-tasks">3.7.2. Scrolling through your tasks</h4>
+
+<p>As you start getting more and more tasks, you might need to start scrolling to look at your complete list of tasks. You can either do this with your mouse, or by using <kbd>Ctrl</kbd> + <kbd>↑</kbd> and <kbd>Ctrl</kbd> + <kbd>↓</kbd> to scroll up and down respectively.</p>
+
+<h3 id="38-miscellaneous">3.8. Miscellaneous</h3>
+
+<h4 id="381-getting-help">3.8.1. Getting help</h4>
+
+<p>To view this user guide you’re currently viewing, you can use the <code class="highlighter-rouge">help</code> command.</p>
+
+<h5 id="format-help">Format: <code class="highlighter-rouge">help</code></h5>
+
+<h3 id="382-exit">3.8.2. Exit</h3>
+
+<p>At the end of a long day, you deserve some time away from your task manager. You can <code class="highlighter-rouge">exit</code> <strong>Today</strong> and enjoy the rest of your day!</p>
+
+<h5 id="format-exit">Format: <code class="highlighter-rouge">exit</code></h5>
+
+<h2 id="4-faq">4. FAQ</h2>
+
+<p>Q1. How do I remove all tags from a task or event?
+A1. You can do this by editing the task/event! Use the following command <code class="highlighter-rouge">edit &lt;index of task/event&gt; #</code> by using a single <code class="highlighter-rouge">#</code> sign with nothing following it deletes all tags for that task.</p>
+
+<p>Q2. If I use the saveto command and specify a folder with an existing data file, what happens?
+A2. We will overwrite the file at the specified location with the latest data in your task manager. If you want to use data from that file, consider the <code class="highlighter-rouge">import</code> function instead. If you want changes to be saved to that file, consider the <code class="highlighter-rouge">usethis</code> function.</p>
+
+<h2 id="5-command-summary">5. Command Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Command</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Add Task</strong></td>
+      <td><code class="highlighter-rouge">add &lt;task_name&gt; [due &lt;deadline&gt;] [#&lt;tag&gt; #&lt;tag&gt; ...]</code></td>
+      <td><code class="highlighter-rouge">add Study for CS2106 due 20/03/17 3pm #lab #cs2106</code></td>
+    </tr>
+    <tr>
+      <td><strong>Add Event</strong></td>
+      <td><code class="highlighter-rouge">add &lt;event_name&gt; from &lt;starting_date_time&gt; to &lt;end_date_time&gt; [#&lt;tag1&gt; #&lt;tag2&gt; ...&gt;]</code></td>
+      <td><code class="highlighter-rouge">add meeting from 10am to 24th March 11am #work</code></td>
+    </tr>
+    <tr>
+      <td><strong>Find Task</strong></td>
+      <td><code class="highlighter-rouge">find &lt;keyword1 keyword2 ...&gt;</code></td>
+      <td><code class="highlighter-rouge">find math science</code></td>
+    </tr>
+    <tr>
+      <td><strong>Find Task by Deadline</strong></td>
+      <td><code class="highlighter-rouge">find due &lt;deadline&gt;</code></td>
+      <td><code class="highlighter-rouge">find due tomorrow</code></td>
+    </tr>
+    <tr>
+      <td><strong>View All Tasks</strong></td>
+      <td><code class="highlighter-rouge">list</code></td>
+      <td><code class="highlighter-rouge">list</code></td>
+    </tr>
+    <tr>
+      <td><strong>View Completed Tasks</strong></td>
+      <td><code class="highlighter-rouge">listcompleted</code></td>
+      <td><code class="highlighter-rouge">listcompleted</code></td>
+    </tr>
+    <tr>
+      <td><strong>Set tasks as today</strong></td>
+      <td><code class="highlighter-rouge">today &lt;id&gt;</code></td>
+      <td><code class="highlighter-rouge">today F2</code></td>
+    </tr>
+    <tr>
+      <td><strong>Set tasks as not today</strong></td>
+      <td><code class="highlighter-rouge">nottoday &lt;id&gt;</code></td>
+      <td><code class="highlighter-rouge">nottoday T2</code></td>
+    </tr>
+    <tr>
+      <td><strong>Complete Task</strong></td>
+      <td><code class="highlighter-rouge">done &lt;id&gt;</code></td>
+      <td><code class="highlighter-rouge">done T1</code></td>
+    </tr>
+    <tr>
+      <td><strong>Un-complete Task</strong></td>
+      <td><code class="highlighter-rouge">notdone &lt;id&gt;</code></td>
+      <td><code class="highlighter-rouge">notdone T1</code></td>
+    </tr>
+    <tr>
+      <td><strong>Update Task</strong></td>
+      <td><code class="highlighter-rouge">update &lt;id&gt; [&lt;new_task_name&gt;] [due &lt;new_date&gt; at &lt;new_time&gt;] [#&lt;tag1&gt; #&lt;tag2&gt; ...]</code></td>
+      <td><code class="highlighter-rouge">edit T7 clean house due 04/05/17 6pm #schoolwork #CS2103</code></td>
+    </tr>
+    <tr>
+      <td><strong>Delete Task</strong></td>
+      <td><code class="highlighter-rouge">delete &lt;id&gt;</code></td>
+      <td><code class="highlighter-rouge">delete T2</code></td>
+    </tr>
+    <tr>
+      <td><strong>Rename Tag</strong></td>
+      <td><code class="highlighter-rouge">renametag &lt;tag_name&gt; &lt;new_tag_name&gt;</code></td>
+      <td><code class="highlighter-rouge">renametag work oldwork</code></td>
+    </tr>
+    <tr>
+      <td><strong>Delete Tag</strong></td>
+      <td><code class="highlighter-rouge">deletetag &lt;tag_name&gt;</code></td>
+      <td><code class="highlighter-rouge">deletetag math</code></td>
+    </tr>
+    <tr>
+      <td><strong>Undo</strong></td>
+      <td><code class="highlighter-rouge">undo</code></td>
+      <td><code class="highlighter-rouge">undo</code></td>
+    </tr>
+    <tr>
+      <td><strong>Redo</strong></td>
+      <td><code class="highlighter-rouge">redo</code></td>
+      <td><code class="highlighter-rouge">redo</code></td>
+    </tr>
+    <tr>
+      <td><strong>Change Storage Location</strong></td>
+      <td><code class="highlighter-rouge">saveto &lt;dir_location&gt;</code></td>
+      <td><code class="highlighter-rouge">saveto ../mySecretFolder</code></td>
+    </tr>
+    <tr>
+      <td><strong>Use Existing Storage File</strong></td>
+      <td><code class="highlighter-rouge">usethis &lt;dir_location&gt;</code></td>
+      <td><code class="highlighter-rouge">usethis ../mySecretFolder</code></td>
+    </tr>
+    <tr>
+      <td><strong>Export</strong></td>
+      <td><code class="highlighter-rouge">export &lt;dir_location&gt;</code></td>
+      <td><code class="highlighter-rouge">export ../mySecretFolder</code></td>
+    </tr>
+    <tr>
+      <td><strong>Import</strong></td>
+      <td><code class="highlighter-rouge">import &lt;dir_location&gt;</code></td>
+      <td><code class="highlighter-rouge">import ../mySecretFolder</code></td>
+    </tr>
+    <tr>
+      <td><strong>Help</strong></td>
+      <td><code class="highlighter-rouge">help</code></td>
+      <td><code class="highlighter-rouge">help</code></td>
+    </tr>
+    <tr>
+      <td><strong>Exit</strong></td>
+      <td><code class="highlighter-rouge">exit</code></td>
+      <td><code class="highlighter-rouge">exit</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+      <footer class="site-footer">
+
+          <span class="site-footer-owner"><a href="https://github.com/CS2103JAN2017-T09-B1/main">main</a> is maintained by <a href="https://github.com/CS2103JAN2017-T09-B1">CS2103JAN2017-T09-B1</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+
+
+
+</body></html>

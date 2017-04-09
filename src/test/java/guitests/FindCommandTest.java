@@ -1,28 +1,32 @@
 package guitests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestPerson;
+import seedu.today.commons.core.Messages;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.model.task.Task;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); // no results
-        assertFindResult("find Meier", td.benson, td.daniel); // multiple results
+    public void find_nonEmptyList() throws IllegalArgumentException, IllegalValueException {
+        // No results
+        assertFindResult("find dragon", emptyTaskList, emptyTaskList, emptyTaskList);
 
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find Meier", td.daniel);
+        // Multiple Results
+        assertFindResult("find assignment", new Task[] { td.todayListOverdue },
+                new Task[] { td.futureListDeadline, td.futureListEvent }, new Task[] { td.completedListFloat });
+
+        // find after deleting one result
+        commandBox.runCommand("delete T1");
+        assertFindResult("find assignment", emptyTaskList, new Task[] { td.futureListDeadline, td.futureListEvent },
+                new Task[] { td.completedListFloat });
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList() throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); // no results
+        assertFindResult("find Jean", emptyTaskList, emptyTaskList, emptyTaskList);
     }
 
     @Test
@@ -31,10 +35,14 @@ public class FindCommandTest extends AddressBookGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits) {
+    private void assertFindResult(String command, Task[] expectedTodayList, Task[] expectedFutureList,
+            Task[] expectedCompletedList) throws IllegalArgumentException, IllegalValueException {
         commandBox.runCommand(command);
-        assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+
+        int expectedHits = expectedTodayList.length + expectedFutureList.length;
+        assertResultMessage(expectedHits + " tasks listed!");
+
+        assertAllListsMatching(expectedTodayList, expectedFutureList, expectedCompletedList);
+
     }
 }

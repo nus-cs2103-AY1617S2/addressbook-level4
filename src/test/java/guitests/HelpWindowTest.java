@@ -7,25 +7,16 @@ import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
 
-public class HelpWindowTest extends AddressBookGuiTest {
+public class HelpWindowTest extends TaskManagerGuiTest {
 
     @Test
-    public void openHelpWindow() {
+    public void openHelpWindow() throws InterruptedException {
         //use accelerator
         commandBox.clickOnTextField();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
+        assertHelpWindowOpen(commandBox.runHelpCommand());
 
-        resultDisplay.clickOnTextArea();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        personListPanel.clickOnListView();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        browserPanel.clickOnWebView();
-        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        //use menu button
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingMenu());
+        futureTaskListPanel.clickOnListView();
+        assertHelpWindowOpen(commandBox.runHelpCommand());
 
         //use command
         assertHelpWindowOpen(commandBox.runHelpCommand());

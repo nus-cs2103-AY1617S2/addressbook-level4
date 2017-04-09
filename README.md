@@ -1,22 +1,23 @@
-# Address Book (Level 4)
+# Today
 
-[![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
-[![Build status](https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true)](https://ci.appveyor.com/project/damithc/addressbook-level4)
-[![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a)](https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level4&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/CS2103JAN2017-T09-B1/main.svg?branch=master)](https://travis-ci.org/CS2103JAN2017-T09-B1/main)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103JAN2017-T09-B1/main/badge.svg?branch=develop)](https://coveralls.io/github/CS2103JAN2017-T09-B1/main?branch=develop)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0aa12c839f2041b79c00112847b33551)](https://www.codacy.com/app/senyuuri/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103JAN2017-T09-B1/main&amp;utm_campaign=Badge_Grade)
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/ui.png" width="600"><br>
+**Today** is a minimalistic task manager that aims to be the simplest way to organize your day.
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+In our far too hectic lives, there's just so much to keep track of. Trying to manage everything is a tiring and stressful affair. Instead of overwhelming you with a neverending task list, **Today** helps you focus on the things that you *can* control - the tasks you're going to tackle today.
+
+This user guide is here to guide you through the [installation](#installation-instructions) of our application and give you a walkthrough of our [basic features](#features). We've also provided a [cheatsheet](#command-summary) with a summary of all our commands available.
+
+### Quick Start
+Let's get you up and running.
+
+1. Install the latest Java [here](https://java.com/en/download/). This will be required to run the application.
+2. Download `today.jar` from the [releases](https://github.com/CS2103JAN2017-T09-B1/main/releases) tab.
+3. Copy the file to the folder you want to use as the home folder for your task manager.
+4. Double-click the file to start the app and you are ready to go.
 
 
 #### Site Map
@@ -28,6 +29,9 @@
 
 
 #### Acknowledgements
+
+* The project is developed based on FOSS's Software Engineering Education Resource.
+  [se-edu-taskmanager-level4](https://github.com/se-edu/taskmanager-level4)
 
 * Some parts of this sample application were inspired by the excellent
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.

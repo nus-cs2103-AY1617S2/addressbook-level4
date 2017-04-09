@@ -4,51 +4,65 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
+import guitests.guihandles.TaskCardHandle;
+import seedu.today.commons.core.Messages;
+import seedu.today.commons.exceptions.IllegalValueException;
+import seedu.today.logic.commands.AddCommand;
+import seedu.today.model.task.Task;
+import seedu.today.testutil.TestUtil;
 
-public class AddCommandTest extends AddressBookGuiTest {
+public class AddCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void add() {
-        //add one person
-        TestPerson[] currentList = td.getTypicalPersons();
-        TestPerson personToAdd = td.hoon;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+    public void add() throws IllegalArgumentException, IllegalValueException {
+        // add one task
+        Task taskToAdd = td.extraFloat;
+        futureList = TestUtil.addTasksToList(futureList, taskToAdd, 1);
+        assertFutureAddSuccess(taskToAdd, todayList, futureList);
 
-        //add another person
-        personToAdd = td.ida;
-        assertAddSuccess(personToAdd, currentList);
-        currentList = TestUtil.addPersonsToList(currentList, personToAdd);
+        // add another task
+        taskToAdd = td.extraDeadline;
+        todayList = TestUtil.addTasksToList(todayList, taskToAdd, 3);
+        assertTodayAddSuccess(taskToAdd, todayList, futureList);
 
-        //add duplicate person
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertTrue(personListPanel.isListMatching(currentList));
+        // add duplicate task
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
+        assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
+        assertTrue(futureTaskListPanel.isListMatching(futureList));
 
-        //add to empty list
+        // add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
+        assertTodayAddSuccess(taskToAdd, new Task[] { taskToAdd }, emptyTaskList);
 
-        //invalid command
+        // invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertAddSuccess(TestPerson personToAdd, TestPerson... currentList) {
-        commandBox.runCommand(personToAdd.getAddCommand());
+    // ----- Helper -----
+    private void assertFutureAddSuccess(Task taskToAdd, Task[] expectedTodayList, Task[] expectedFutureList)
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
 
-        //confirm the new card contains the right data
-        PersonCardHandle addedCard = personListPanel.navigateToPerson(personToAdd.getName().fullName);
-        assertMatching(personToAdd, addedCard);
+        // confirm the new card contains the right data
+        TaskCardHandle addedCard = futureTaskListPanel.navigateToTask(taskToAdd.getName().toString());
+        assertMatching(taskToAdd, addedCard);
 
-        //confirm the list now contains all previous persons plus the new person
-        TestPerson[] expectedList = TestUtil.addPersonsToList(currentList, personToAdd);
-        assertTrue(personListPanel.isListMatching(expectedList));
+        // confirm the list now contains all previous tasks plus the new task
+        assertTodayFutureListsMatching(expectedTodayList, expectedFutureList);
+    }
+
+    private void assertTodayAddSuccess(Task taskToAdd, Task[] expectedTodayList, Task[] expectedFutureList)
+            throws IllegalArgumentException, IllegalValueException {
+        commandBox.runCommand(TestUtil.makeAddCommandString(taskToAdd));
+
+        // confirm the new card contains the right data
+        TaskCardHandle addedCard = todayTaskListPanel.navigateToTask(taskToAdd.getName().toString());
+        assertMatching(taskToAdd, addedCard);
+
+        // confirm the list now contains all previous tasks plus the new task
+        assertTodayFutureListsMatching(expectedTodayList, expectedFutureList);
     }
 
 }

@@ -1,0 +1,37 @@
+<!-- @@author A0144315N -->
+.list-cell{
+	-fx-accent: #C1F0F6;
+	-fx-focus-color: #C1F0F6;
+}
+
+
+.list-cell:empty {
+    -fx-opacity: 0;
+}
+
+.jfx-snackbar-content {
+	-fx-background-color:#7194B2;
+}
+
+.jfx-snackbar-toast {
+	-fx-text-fill:#ffffff;
+}
+
+.jfx-progress-bar{
+	-fx-progress-color: #CE2345;
+	-fx-stroke-width:3;
+}
+
+.jfx-text-field:error{
+	-jfx-focus-color: #D34336;
+	-jfx-unfocus-color: #D34336;
+}
+
+.jfx-text-field .error-label{
+	-fx-text-fill : #D34336;
+	-fx-font-size: 0.75em;
+}
+.jfx-text-field .error-icon{
+	-fx-text-fill : #D34336;
+	-fx-font-size: 1em;
+}

@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import com.jfoenix.controls.JFXTextField;
+
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -36,16 +38,24 @@ public class CommandBoxHandle extends GuiHandle {
     public void runCommand(String command) {
         enterCommand(command);
         pressEnter();
-        guiRobot.sleep(200); //Give time for the command to take effect
+        // If autocomplete, ensures that command is still entered
+        pressEnter();
+        guiRobot.sleep(100); // Give time for the command to take effect
     }
 
     public HelpWindowHandle runHelpCommand() {
         enterCommand("help");
+        pressEnter();
+        // If autocomplete, ensures that command is still entered
         pressEnter();
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
     public ObservableList<String> getStyleClass() {
         return getNode(COMMAND_INPUT_FIELD_ID).getStyleClass();
+    }
+
+    public JFXTextField getCommandBoxInstance() {
+        return getNode(COMMAND_INPUT_FIELD_ID);
     }
 }
