@@ -6,7 +6,7 @@ import seedu.doist.logic.commands.exceptions.CommandException;
 
 //@@author A0147980U
 /**
- * Adds an alias for an existing command
+ * Remove the specified alias, if it exists
  */
 public class RemoveAliasCommand extends Command {
     public static final String DEFAULT_COMMAND_WORD = "remove_alias";
