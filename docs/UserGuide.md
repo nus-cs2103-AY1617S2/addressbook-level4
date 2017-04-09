@@ -548,7 +548,7 @@ For your convenience, the parameters for every command available in ezDo are sum
 
 |Command|Parameters                                               |
 |:-----:|---------------------------------------------------------|
-|[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [f/FREQUENCY] [t/TAGNAME...]`**             |
+|[add / a](#31-adding-a-task-add--a)             |**`add TASKNAME [p/PRIORITY] [s/STARTDATE] [d/DUEDATE] [f/NEWFREQUENCY] [t/TAGNAME...]`**             |
 ||**`add Buy fruits p/1 s/tomorrow`**             |
 |[edit / e](#32-editing-a-task-edit--e)         |**`edit INDEX [NEWTASKNAME] [p/NEWPRIORITY] [s/NEWSTARTDATE] [d/NEWDUEDATE] [f/FREQUENCY] [t/NEWTAGNAME...]`**            |
 ||**`edit 1 p/2 s/next week`**             |
