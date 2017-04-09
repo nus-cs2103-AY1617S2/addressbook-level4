@@ -24,7 +24,10 @@ public interface Logic {
 	/** Returns the filtered list of tasks */
 	ObservableList<ReadOnlyEvent> getFilteredTaskList();
 
-	/** Returns the filtered list of done tasks */
+	/** Returns the filtered list of done tasks for done task view */
 	ObservableList<ReadOnlyEvent> getTaskFilteredTaskList();
+
+	/** Returns the filtered list of tasks used for calendar view */
+	ObservableList<ReadOnlyEvent> getCalendarFilteredTaskList();
 
 }

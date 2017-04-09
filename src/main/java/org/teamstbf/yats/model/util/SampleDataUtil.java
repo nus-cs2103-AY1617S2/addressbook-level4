@@ -217,8 +217,9 @@ public class SampleDataUtil {
 							new Schedule("4:23PM 23/3/2017"), new Schedule(""),
 							new Description("Test drive initiating.."), new UniqueTagList("system"), new IsDone(),
 							false, new Recurrence()),
-					new Event(new Title("Test event 2"), new Location("TestDrive"), new Schedule(""), new Schedule(""),
-							new Schedule(""), new Description("Locating title within application's database."),
+					new Event(new Title("Test event 2"), new Location("TestDrive"), new Schedule("9:00AM 09/04/2017"),
+							new Schedule("5:00PM 09/04/2017"), new Schedule(""),
+							new Description("Locating title within application's database."),
 							new UniqueTagList("tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7"), new IsDone(),
 							false, new Recurrence()) };
 		} catch (IllegalValueException e) {

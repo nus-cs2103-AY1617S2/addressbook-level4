@@ -35,7 +35,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+	private static final String FXMLPERSON = "PersonListCard.fxml";
 
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private ObservableList<ReadOnlyEvent> calendarList;
@@ -59,7 +59,8 @@ public class MultiViewPanel extends UiPart<Region> {
 	@FXML
 	private Label date;
 
-	private static LocalDate today = LocalDate.now();
+	private static LocalDate today;
+	private static DateTimeFormatter formatter;
 
 	private static final int TASK_DETAILS = 4;
 	private static final int TASK_TITLE = 0;
@@ -72,13 +73,15 @@ public class MultiViewPanel extends UiPart<Region> {
 	 *
 	 * @param placeholder
 	 */
-	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableList, Model model) {
+	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableTaskList, Model model) {
 		super(FXML);
 		this.model = model;
 		datepicker = new DatePicker(today);
 		calendar = new DatePickerSkin(datepicker);
+		today = LocalDate.now();
+		formatter = DateTimeFormatter.ofPattern("d MMMM");
 		setConnectionsCalendarView();
-		setConnectionsDoneView(observableList);
+		setConnectionsDoneView(observableTaskList);
 		addToPlaceholder(placeholder);
 	}
 
@@ -86,11 +89,14 @@ public class MultiViewPanel extends UiPart<Region> {
 		Node popupContent = calendar.getPopupContent();
 		calendarRoot.setCenter(popupContent);
 		updateCurrentDay(today);
-		createFullDayTime();
+		updateCalendarList(today);
+		timeTasks.setItems(timeData);
+		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+		setEventHandlerForSelectionChangeEvent();
 	}
 
-	private void setConnectionsDoneView(ObservableList<ReadOnlyEvent> observableList) {
-		taskListView.setItems(observableList);
+	private void setConnectionsDoneView(ObservableList<ReadOnlyEvent> observableTaskList) {
+		taskListView.setItems(observableTaskList);
 		taskListView.setCellFactory(listView -> new TaskListViewCell());
 		setEventHandlerForSelectionChangeEvent();
 	}
@@ -144,7 +150,7 @@ public class MultiViewPanel extends UiPart<Region> {
 				setText(null);
 			} else {
 				if (task.getIsDone().getValue().equals("Yes")) {
-					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSONDONE).getRoot());
+					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSON).getRoot());
 				}
 			}
 		}
@@ -152,47 +158,48 @@ public class MultiViewPanel extends UiPart<Region> {
 
 	// ================== Inner Methods for Calendar View ==================
 
-	private void createFullDayTime() {
-		updateCalendarList(today);
-		timeTasks.setItems(timeData);
-		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-	}
-
 	private void updateCalendarList(LocalDate day) {
 		String[] data = new String[TASK_DETAILS];
 		model.updateCalendarFilteredListToShowStartTime(day);
 		calendarList = model.getCalendarFilteredTaskList();
-		for (int i = 0; i < calendarList.size(); i++) {
-			ReadOnlyEvent event = calendarList.get(i);
-			data[TASK_TITLE] = event.getTitle().toString();
-			data[TASK_START] = event.getStartTime().toString();
-			data[TASK_END] = event.getEndTime().toString();
-			data[TASK_LOCATION] = event.getLocation().toString();
-			timeData.add(data);
+		if (calendarList.size() == 0) {
+			timeData.clear();
+		} else {
+			timeData.clear();
+			for (int i = 0; i < calendarList.size(); i++) {
+				ReadOnlyEvent event = calendarList.get(i);
+				data[TASK_TITLE] = event.getTitle().toString();
+				data[TASK_START] = event.getStartTime().toString();
+				data[TASK_END] = event.getEndTime().toString();
+				data[TASK_LOCATION] = event.getLocation().toString();
+				timeData.add(data);
+			}
 		}
 	}
 
 	public void prevDay() {
 		MultiViewPanel.today = today.minusDays(1);
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
 	public void nextDay() {
 		MultiViewPanel.today = today.plusDays(1);
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
 	public void resetDay() {
 		MultiViewPanel.today = LocalDate.now();
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
 	public void updateCurrentDay(LocalDate day) {
 		MultiViewPanel.today = day;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM");
 		date.setText(today.format(formatter));
 	}
 
