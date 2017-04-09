@@ -198,7 +198,7 @@ As shown in Figure 6,
 
 * The result of the command execution is encapsulated as a `CommandResult` object which is passed back to **`UI`**.
 
-* In some Parser classes such as FindCommandParser, due to the huge amount of search parameters supported by ezDo's power search function (see `Find` in UserGuide), a `SearchParameter` Object is created with the Builder pattern to contain all the search parameters. This allows future developers to introduce more parameters by changing the `SearchParameter` Class instead of changing the `Model Interface` and methods in `ModelManager`.
+* In some Parser classes such as FindCommandParser, due to the huge amount of search parameters supported by ezDo's power search function (see `Find` in UserGuide), a `SearchParameter` Object is created with the Builder pattern to contain all the search parameters. This allows future developers to introduce more parameters by changing the `SearchParameter` Class instead of changing the `Model` Interface and methods in `ModelManager` Class.
  
 <br>
 
