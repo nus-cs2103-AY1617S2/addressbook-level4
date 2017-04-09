@@ -142,7 +142,7 @@ public class MainWindow extends UiPart<Region> {
      * Sets the default view of main window to show the undone tasks.
      */
     public void setDefaultView() {
-       logic.setFilteredTaskListToShowUndone();
+        logic.setFilteredTaskListToShowUndone();
     }
 
     private AnchorPane getCommandBoxPlaceholder() {
