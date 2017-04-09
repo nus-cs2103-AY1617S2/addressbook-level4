@@ -164,14 +164,15 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0139177W
     @Override
     public boolean toggleTasksSelect(ArrayList<Task> tasksToToggle) {
+        int firstElement = 0;
         ezDo.toggleTasksSelect(tasksToToggle);
-        final boolean isSetToSelect = tasksToToggle.get(0).getStarted();
+        final boolean isSetToSelect = tasksToToggle.get(firstElement).getStarted();
         updateFilteredListToShowAll();
         ezDo.sortTasks(currentSortCriteria, currentIsSortedAscending);
         indicateEzDoChanged();
         return isSetToSelect;
     }
-    // @@author A0139177W
+    // @@author
 
     /**
      * Updates an existing task in ezDo.
