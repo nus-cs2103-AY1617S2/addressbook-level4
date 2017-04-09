@@ -3,9 +3,9 @@
 
 ## Table of contents
 
-1. [Introduction](#intoduction)  <br>
-2. [Setting Up](#setting-up)  <br>
-    2.1. [Prerequisites]() <br>
+1. [Introduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#1-introduction)<br>
+2. [Setting Up](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#2-setting_up) <br>
+    2.1. [Prerequisites](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#2-Prerequisites) <br>
     2.2. [Importing the project into Eclipse]()  <br>
     2.3. [Configuring Checkstyle]()  <br>
     2.4. [Troubleshooting Project Setup]()  <br>
@@ -310,11 +310,11 @@ _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-As stated above, the `Model` component manages and stores TypeTask's user's preferences and data. It also reveals an UnmodifiableObservableList<ReadOnlyTask>, which can be 'observed' by different components, such as the `UI`. The `UI` bounds to the list and gets updated automatically when the data gets modified.
+As stated above, the `Model` component manages and stores TypeTask's user's preferences and data. It also reveals an `UnmodifiableObservableList<ReadOnlyTask>`, which can be 'observed' by different components, such as the `UI`. The `UI` bounds to the list and gets updated automatically when the data gets modified.
 
-Also, from the Observer Pattern design, the application will not depend on other components such as Storage. Instead, it will interact by triggering events.
+Also, from the Observer Pattern design, the application will not depend on other components such as `Storage`. Instead, it will interact by triggering events.
 
-The `Model` class is the interface of the `Model` component. It provides a variety of *APIs* for the `UI` and `Logic` components to retrieve and update TypeTask’s data.
+The `Model` class is the interface of the `Model` component. It provides a variety of **APIs** for the `UI` and `Logic` components to retrieve and update TypeTask’s data.
 
 The relationship and structure of the classes in the `Model` component are illustrated in the diagram below.
 
@@ -336,7 +336,7 @@ To display lists of different categorized tasks, TypeTask uses Filtered Task Lis
 
 Using the same example as above, if the `Logic` component requests `Model` to delete a task the following interactions between objects can be described by the sequence diagram below.
 
-<img src="images/InteractionModelDelete.png" width="800"><br>
+<img src="images/SDforDeleteTasInModel.png" width="800"><br>
 
 In this interaction, the given task is removed from the task list. The `ModelManager` triggers a `TaskManagerChangedEvent` to save the current list in storage.
 
