@@ -202,14 +202,6 @@ public class CommandSettings implements Serializable {
         this.undo = undo;
     }
 
-    /**
-     * Changes the old alias command into a new one
-     *
-     * @param oldCommand
-     * @param newCommand
-     * @throws NoSuchCommandException
-     * @throws CommandExistedException
-     */
     public void setCommand(String oldCommand, String newCommand)
             throws NoSuchCommandException, CommandExistedException {
         if (doesCommandExist(newCommand)) {
@@ -255,13 +247,6 @@ public class CommandSettings implements Serializable {
         }
     }
 
-    /**
-     * Checks if the command word exists in both default command and alias
-     * command
-     *
-     * @param command
-     * @return true if command word exist else false
-     */
     public boolean doesCommandExist(String command) {
         if (doesCommandExistInDefault(command)) {
             return true;
@@ -331,59 +316,130 @@ public class CommandSettings implements Serializable {
             return false;
         }
         CommandSettings other = (CommandSettings) obj;
-
-        if (!this.add.equals(other.add)) {
+        if (this.add == null) {
+            if (other.add != null) {
+                return false;
+            }
+        } else if (!this.add.equals(other.add)) {
             return false;
         }
-        if (!this.clear.equals(other.clear)) {
+        if (this.clear == null) {
+            if (other.clear != null) {
+                return false;
+            }
+        } else if (!this.clear.equals(other.clear)) {
             return false;
         }
-        if (!this.delete.equals(other.delete)) {
+        if (this.delete == null) {
+            if (other.delete != null) {
+                return false;
+            }
+        } else if (!this.delete.equals(other.delete)) {
             return false;
         }
-        if (!this.done.equals(other.done)) {
+        if (this.done == null) {
+            if (other.done != null) {
+                return false;
+            }
+        } else if (!this.done.equals(other.done)) {
             return false;
         }
-        if (!this.edit.equals(other.edit)) {
+        if (this.edit == null) {
+            if (other.edit != null) {
+                return false;
+            }
+        } else if (!this.edit.equals(other.edit)) {
             return false;
         }
-        if (!this.exit.equals(other.exit)) {
+        if (this.exit == null) {
+            if (other.exit != null) {
+                return false;
+            }
+        } else if (!this.exit.equals(other.exit)) {
             return false;
         }
-        if (!this.find.equals(other.find)) {
+        if (this.find == null) {
+            if (other.find != null) {
+                return false;
+            }
+        } else if (!this.find.equals(other.find)) {
             return false;
         }
-        if (!this.help.equals(other.help)) {
+        if (this.help == null) {
+            if (other.help != null) {
+                return false;
+            }
+        } else if (!this.help.equals(other.help)) {
             return false;
         }
-        if (!this.list.equals(other.list)) {
+        if (this.list == null) {
+            if (other.list != null) {
+                return false;
+            }
+        } else if (!this.list.equals(other.list)) {
             return false;
         }
-        if (!this.load.equals(other.load)) {
+        if (this.load == null) {
+            if (other.load != null) {
+                return false;
+            }
+        } else if (!this.load.equals(other.load)) {
             return false;
         }
-        if (!this.mark.equals(other.mark)) {
+        if (this.mark == null) {
+            if (other.mark != null) {
+                return false;
+            }
+        } else if (!this.mark.equals(other.mark)) {
             return false;
         }
-        if (!this.redo.equals(other.redo)) {
+        if (this.redo == null) {
+            if (other.redo != null) {
+                return false;
+            }
+        } else if (!this.redo.equals(other.redo)) {
             return false;
         }
-        if (!this.save.equals(other.save)) {
+        if (this.save == null) {
+            if (other.save != null) {
+                return false;
+            }
+        } else if (!this.save.equals(other.save)) {
             return false;
         }
-        if (!this.select.equals(other.select)) {
+        if (this.select == null) {
+            if (other.select != null) {
+                return false;
+            }
+        } else if (!this.select.equals(other.select)) {
             return false;
         }
-        if (!this.set.equals(other.set)) {
+        if (this.set == null) {
+            if (other.set != null) {
+                return false;
+            }
+        } else if (!this.set.equals(other.set)) {
             return false;
         }
-        if (!this.sort.equals(other.sort)) {
+        if (this.sort == null) {
+            if (other.sort != null) {
+                return false;
+            }
+        } else if (!this.sort.equals(other.sort)) {
             return false;
         }
-        if (!this.undo.equals(other.undo)) {
+        if (this.undo == null) {
+            if (other.undo != null) {
+                return false;
+            }
+        } else if (!this.undo.equals(other.undo)) {
             return false;
         }
-        if (!this.unmark.equals(other.unmark)) {
+        if (this.unmark == null) {
+            if (other.unmark != null) {
+                return false;
+            }
+        } else if (!this.unmark.equals(other.unmark)) {
             return false;
         }
         return true;
@@ -443,11 +499,10 @@ import seedu.doit.commons.events.BaseEvent;
 import seedu.doit.model.ReadOnlyTaskManager;
 
 public class TaskManagerLoadChangedEvent extends BaseEvent {
-    private static final String LOADED_DATA_FROM = "Loaded data from: ";
-    private Optional<ReadOnlyTaskManager> data;
+    private Optional<ReadOnlyItemManager> data;
     private String filePath;
 
-    public TaskManagerLoadChangedEvent(Optional<ReadOnlyTaskManager> newData, String filePath) {
+    public TaskManagerLoadChangedEvent(Optional<ReadOnlyItemManager> newData, String filePath) {
         this.data = newData;
         this.filePath = filePath;
     }
@@ -456,24 +511,23 @@ public class TaskManagerLoadChangedEvent extends BaseEvent {
         return this.filePath;
     }
 
-    public Optional<ReadOnlyTaskManager> getData() {
+    public Optional<ReadOnlyItemManager> getData() {
         return this.data;
     }
 
     @Override
     public String toString() {
-        return LOADED_DATA_FROM + this.filePath;
+        return "Loaded data from: " + this.filePath;
     }
 }
 ```
 ###### /java/seedu/doit/commons/events/storage/TaskManagerSaveChangedEvent.java
 ``` java
 public class TaskManagerSaveChangedEvent extends BaseEvent {
-    private static final String NEW_SAVE_LOCATION = "New save location: ";
-    private ReadOnlyTaskManager data;
+    private ReadOnlyItemManager data;
     private String filePath;
 
-    public TaskManagerSaveChangedEvent(ReadOnlyTaskManager data, String filePath) {
+    public TaskManagerSaveChangedEvent(ReadOnlyItemManager data, String filePath) {
         this.data = data;
         this.filePath = filePath;
     }
@@ -482,13 +536,13 @@ public class TaskManagerSaveChangedEvent extends BaseEvent {
         return this.filePath;
     }
 
-    public ReadOnlyTaskManager getData() {
+    public ReadOnlyItemManager getData() {
         return this.data;
     }
 
     @Override
     public String toString() {
-        return NEW_SAVE_LOCATION + this.filePath;
+        return "New save location: " + this.filePath;
     }
 }
 ```
@@ -511,9 +565,6 @@ public class EmptyTaskManagerStackException extends Exception {
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String COMMAND_PARAMETER = "";
-    public static final String COMMAND_RESULT = "Deletes all tasks from DoIt";
-    public static final String COMMAND_EXAMPLE = "clear";
     public static final String MESSAGE_SUCCESS = "All tasks has been cleared!";
 
     @Override
@@ -521,22 +572,6 @@ public class ClearCommand extends Command {
         assert this.model != null;
         this.model.clearData();
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
     }
 }
 ```
@@ -561,13 +596,13 @@ public class NoSuchCommandException extends Exception {
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-    public static final String COMMAND_PARAMETER = "";
-    public static final String COMMAND_RESULT = "Redo previously undone command";
-    public static final String COMMAND_EXAMPLE = "redo";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Task redone.";
     public static final String MESSAGE_FAILURE = "Unable to redo. There is nothing to redo. ";
+
+    // public static Command toRedo;
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -579,7 +614,6 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
     }
-
 }
 ```
 ###### /java/seedu/doit/logic/commands/SaveCommand.java
@@ -589,24 +623,10 @@ public class RedoCommand extends Command {
  */
 public class SaveCommand extends Command {
 
-    private static final String LOGGER_HANDLED_EVENT = "HANDLED event : ";
-
-    private static final String LOGGER_CREATED_EVENT = "Created event : ";
-
-    private static final String LOGGER_DUPLICATE_FILE_PATH = "Duplicate file path: ";
-
-    private static final String LOGGER_FILE_NOT_OF_TYPE_XML = "File not of type xml: ";
-
-    private static final String LOGGER_INVALID_FILE_NAME = "Invalid File Name: ";
-
-    private static final String LOGGER_IS_CURRENT_FILE_PATH = "is current file path. Do not need to save.";
-
     public static final String XML_FILE_TYPE = ".xml";
 
     public static final String COMMAND_WORD = "save";
-    public static final String COMMAND_PARAMETER = "FILE_PATH/FILE_NAME.xml";
-    public static final String COMMAND_RESULT = "Saves DoIt's data at specified location and in specified file";
-    public static final String COMMAND_EXAMPLE = "save folder1/savefile.xml\n" + "save C:/Users/USER/savefile.xml";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks to a new file location and name. "
             + "Parameters: FILE_PATH_IN_DOIT_FILE/FILE_NAME.xml\n" + "Example: " + COMMAND_WORD
             + " save/xml/in/this/file/as/name.xml";
@@ -636,19 +656,19 @@ public class SaveCommand extends Command {
         assert this.model != null;
         File file = new File(this.saveFilePath);
         if (this.saveFilePath.equals(this.storage.getTaskManagerFilePath())) {
-            logger.info(this.saveFilePath + LOGGER_IS_CURRENT_FILE_PATH);
+            logger.info(this.saveFilePath + "is current file path. Do not need to save.");
             throw new CommandException(this.saveFilePath + MESSAGE_USING_SAME_FILE);
         }
         if (!FileUtil.isValidPath(this.saveFilePath)) {
-            logger.info(LOGGER_INVALID_FILE_NAME + this.saveFilePath);
+            logger.info("Invalid File Name: " + this.saveFilePath);
             throw new CommandException(MESSAGE_INVALID_FILE_NAME);
         }
         if (!this.saveFilePath.endsWith(XML_FILE_TYPE)) {
-            logger.info(LOGGER_FILE_NOT_OF_TYPE_XML + this.saveFilePath);
+            logger.info("File not of type xml: " + this.saveFilePath);
             throw new CommandException(MESSAGE_NOT_XML_FILE);
         }
         if (file.exists()) {
-            logger.info(LOGGER_DUPLICATE_FILE_PATH + this.saveFilePath);
+            logger.info("Duplicate file path: " + this.saveFilePath);
             throw new CommandException(MESSAGE_DUPLICATE_FILE);
         }
         try {
@@ -658,28 +678,12 @@ public class SaveCommand extends Command {
         }
         TaskManagerSaveChangedEvent event = new TaskManagerSaveChangedEvent(this.model.getTaskManager(),
                 this.saveFilePath);
-        logger.info(LOGGER_CREATED_EVENT + event.toString());
+        logger.info("Created event : " + event.toString());
         EventsCenter.getInstance().post(event);
         this.storage.handleTaskManagerSaveChangedEvent(event);
-        logger.info(LOGGER_HANDLED_EVENT + event.toString());
+        logger.info("---------------------------------------HANDLED event : " + event.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.saveFilePath));
 
-    }
-
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
 }
@@ -690,9 +694,6 @@ public class SetCommand extends Command {
     public static final String COMMAND_ALREADY_EXISTS = "Cannot change into a command that already exists!";
     public static final String NO_SUCH_COMMAND_TO_CHANGE = "There exists no such command to change!";
     public static final String COMMAND_WORD = "set";
-    public static final String COMMAND_PARAMETER = "OLD_COMMAND NEW_COMMAND";
-    public static final String COMMAND_RESULT = "Customizes command words";
-    public static final String COMMAND_EXAMPLE = "set delete del\n" + "set del -";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the command identified by the default command word to a new command word\n"
             + "Parameters: OLD/DEFAULT_COMMAND_WORD NEW_COMMAND_WORD\n" + "Example: " + COMMAND_WORD + " add adding";
@@ -720,23 +721,6 @@ public class SetCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SET_TASK_SUCCESS, this.oldCommand + " into " + this.newCommand));
 
     }
-
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
-    }
-
 }
 ```
 ###### /java/seedu/doit/logic/commands/UndoCommand.java
@@ -744,14 +728,14 @@ public class SetCommand extends Command {
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String COMMAND_PARAMETER = "";
-    public static final String COMMAND_RESULT = "Undo previous command";
-    public static final String COMMAND_EXAMPLE = "undo";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + "\n" + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Task undone.";
     public static final String MESSAGE_FAILURE = "Unable to undo. There is nothing to undo.\n"
             + "You cannot undo a save, load, find, set and list";
+
+    // public static Command toUndo;
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -763,7 +747,6 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
     }
-
 }
 ```
 ###### /java/seedu/doit/logic/LogicManager.java
@@ -785,7 +768,6 @@ import seedu.doit.logic.commands.Command;
 import seedu.doit.logic.commands.LoadCommand;
 
 public class LoadCommandParser implements CommandParser {
-    private static final String ARGUMENT_FOR_LOAD_IS = "Argument for load is ";
     private static final Logger logger = LogsCenter.getLogger(LoadCommandParser.class);
 
     /**
@@ -796,7 +778,7 @@ public class LoadCommandParser implements CommandParser {
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();
-        logger.info(ARGUMENT_FOR_LOAD_IS + filePath);
+        logger.info("Argument for load is " + filePath);
         return new LoadCommand(filePath);
 
     }
@@ -805,48 +787,6 @@ public class LoadCommandParser implements CommandParser {
 ```
 ###### /java/seedu/doit/logic/parser/Parser.java
 ``` java
-package seedu.doit.logic.parser;
-
-import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import seedu.doit.commons.core.CommandSettings;
-import seedu.doit.logic.commands.AddCommand;
-import seedu.doit.logic.commands.ClearCommand;
-import seedu.doit.logic.commands.Command;
-import seedu.doit.logic.commands.DeleteCommand;
-import seedu.doit.logic.commands.DoneCommand;
-import seedu.doit.logic.commands.EditCommand;
-import seedu.doit.logic.commands.ExitCommand;
-import seedu.doit.logic.commands.FindCommand;
-import seedu.doit.logic.commands.HelpCommand;
-import seedu.doit.logic.commands.IncorrectCommand;
-import seedu.doit.logic.commands.ListCommand;
-import seedu.doit.logic.commands.LoadCommand;
-import seedu.doit.logic.commands.MarkCommand;
-import seedu.doit.logic.commands.RedoCommand;
-import seedu.doit.logic.commands.SaveCommand;
-import seedu.doit.logic.commands.SelectCommand;
-import seedu.doit.logic.commands.SetCommand;
-import seedu.doit.logic.commands.SortCommand;
-import seedu.doit.logic.commands.UndoCommand;
-import seedu.doit.logic.commands.UnmarkCommand;
-
-/**
- * Parses user input.
- */
-public class Parser {
-
-    private static final String ARGUMENTS_MATCHER = "arguments";
-    private static final String COMMAND_WORD_MATCHER = "commandWord";
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
     /**
      * Parses user input into command for execution.
      *
@@ -860,8 +800,8 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group(COMMAND_WORD_MATCHER);
-        final String arguments = matcher.group(ARGUMENTS_MATCHER);
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
         final CommandSettings commandSettings = CommandSettings.getInstance();
 
         if (isAddCommandWord(commandWord, commandSettings)) {
@@ -901,242 +841,171 @@ public class Parser {
         } else if (isSetCommandWord(commandWord, commandSettings)) {
             return new SetCommandParser().parse(arguments);
         } else {
+            logger.info(commandWord + " add command in command settings is: " + commandSettings.toString());
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     /**
-     * Checks if commandWord is a valid set command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is set command else false
+     * @return
      */
     public boolean isSetCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SetCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getSet().equalsIgnoreCase(commandWord);
+        return SetCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSet().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid redo command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is redo command else false
+     * @return
      */
     public boolean isRedoCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return RedoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getRedo().equalsIgnoreCase(commandWord);
+        return RedoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getRedo().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid undo command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is undo command else false
+     * @return
      */
     public boolean isUndoCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return UndoCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getUndo().equalsIgnoreCase(commandWord);
+        return UndoCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUndo().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid load command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is load command else false
+     * @return
      */
     public boolean isLoadCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return LoadCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getLoad().equalsIgnoreCase(commandWord);
+        return LoadCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getLoad().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid save command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is save command else false
+     * @return
      */
     public boolean isSaveCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SaveCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getSave().equalsIgnoreCase(commandWord);
+        return SaveCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSave().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid help command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is help command else false
+     * @return
      */
     public boolean isHelpCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return HelpCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getHelp().equalsIgnoreCase(commandWord);
+        return HelpCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getHelp().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid exit command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is exit command else false
+     * @return
      */
     public boolean isExitCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ExitCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getExit().equalsIgnoreCase(commandWord);
+        return ExitCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getExit().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid list command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is list command else false
+     * @return
      */
     public boolean isListCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ListCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getList().equalsIgnoreCase(commandWord);
+        return ListCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getList().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid find command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is find command else false
+     * @return
      */
     public boolean isFindCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return FindCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getFind().equalsIgnoreCase(commandWord);
+        return FindCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getFind().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid clear command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is clear command else false
+     * @return
      */
     public boolean isClearCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return ClearCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getClear().equalsIgnoreCase(commandWord);
+        return ClearCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getClear().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid delete command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is delete command else false
+     * @return
      */
     public boolean isDeleteCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return DeleteCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getDelete().equalsIgnoreCase(commandWord);
+        return DeleteCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDelete().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid sort command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is sort command else false
+     * @return
      */
     public boolean isSortCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SortCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getSort().equalsIgnoreCase(commandWord);
+        return SortCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSort().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid unmark command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is unmark command else false
+     * @return
      */
     public boolean isUnmarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return UnmarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getUnmark().equalsIgnoreCase(commandWord);
+        return UnmarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getUnmark().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid mark command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is mark command else false
+     * @return
      */
     public boolean isMarkCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return MarkCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getMark().equalsIgnoreCase(commandWord);
+        return MarkCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getMark().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid done command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is done command else false
+     * @return
      */
     public boolean isDoneCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return DoneCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getDone().equalsIgnoreCase(commandWord);
+        return DoneCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getDone().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid select command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is select command else false
+     * @return
      */
     public boolean inSelectCommandWord(final String commandWord, final CommandSettings commandSettings) {
-        return SelectCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getSelect().equalsIgnoreCase(commandWord);
+        return SelectCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getSelect().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid edit command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is edit command else false
+     * @return
      */
     public boolean isEditCommandWord(final String commandWord, CommandSettings commandSettings) {
-        return EditCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getEdit().equalsIgnoreCase(commandWord);
+        return EditCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getEdit().equals(commandWord);
     }
 
     /**
-     * Checks if commandWord is a valid add command word in alias or default
-     * Command words are case-insensitive hence we use equalsIgnoreCase method
-     *
      * @param commandWord
      * @param commandSettings
-     * @return true if it is add command else false
+     * @return
      */
     public boolean isAddCommandWord(final String commandWord, CommandSettings commandSettings) {
-        return AddCommand.COMMAND_WORD.equalsIgnoreCase(commandWord)
-                || commandSettings.getAdd().equalsIgnoreCase(commandWord);
+        return AddCommand.COMMAND_WORD.equals(commandWord) || commandSettings.getAdd().equals(commandWord);
     }
 
 }
@@ -1147,7 +1016,6 @@ public class Parser {
  * Parses input arguments and creates a new AddCommand object
  */
 public class SaveCommandParser implements CommandParser {
-    private static final String ARGUMENT_FOR_SAVE_IS = "Argument for save is ";
     private static final Logger logger = LogsCenter.getLogger(SaveCommandParser.class);
 
     /**
@@ -1158,7 +1026,7 @@ public class SaveCommandParser implements CommandParser {
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();
-        logger.info(ARGUMENT_FOR_SAVE_IS + filePath);
+        logger.info("Argument for save is " + filePath);
         return new SaveCommand(filePath);
 
     }
@@ -1175,34 +1043,34 @@ public class SetCommandParser {
      * SetCommand and returns an SetCommand object for execution.
      */
     public Command parse(String args) {
-        String[] split = args.trim().split("\\s+");
+        String[] splited = args.trim().split("\\s+");
 
-        if (split.length != MAX_STRING_WORDS) {
+        if (splited.length != MAX_STRING_WORDS) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
         }
 
-        return new SetCommand(split[0].toLowerCase(), split[1].toLowerCase());
+        return new SetCommand(splited[0], splited[1]);
     }
 }
 ```
 ###### /java/seedu/doit/MainApp.java
 ``` java
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagereOptional;
-        ReadOnlyTaskManager initialTaskManagerData;
+        Optional<ReadOnlyItemManager> taskManagereOptional;
+        ReadOnlyItemManager initialTaskManagerData;
 
         try {
             taskManagereOptional = storage.readTaskManager();
             if (!taskManagereOptional.isPresent()) {
-                logger.info(LOGGER_DATA_FILE_NOT_FOUND);
+                logger.info("Data file not found. Will be starting with a sample TaskManager");
             }
             initialTaskManagerData = taskManagereOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
             storage.saveTaskManager(initialTaskManagerData);
         } catch (DataConversionException e) {
-            logger.warning(LOGGER_DATA_FILE_NOT_IN_THE_CORRECT_FORMAT);
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialTaskManagerData = new TaskManager();
         } catch (IOException e) {
-            logger.warning(LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE);
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
             initialTaskManagerData = new TaskManager();
         }
 
@@ -1219,11 +1087,6 @@ import java.util.logging.Logger;
 import seedu.doit.commons.core.LogsCenter;
 
 public class InputStack {
-    private static final String LOGGER_DOWN_DOWN_STACK_IS_EMPTY = "DOWN down stack is empty";
-    private static final String LOGGER_UP_UP_STACK_IS_EMPTY = "UP up stack is empty";
-    private static final String LOGGER_UP_DOWN_STACK_IS_EMPTY = "UP down stack is empty";
-    private static final String LOGGER_UP_MAIN_STACK_IS_EMPTY = "UP main stack is empty";
-    private static final String LOGGER_DOWNSTACK_CLEARED = "downstack cleared";
     public static final String EMPTY_STRING = "";
     private static final Stack<String> mainStack = new Stack<String>();
     private static Stack<String> upStack = new Stack<String>();
@@ -1241,59 +1104,37 @@ public class InputStack {
         return instance;
     }
 
-    /**
-     * Adds a input string into the upStack
-     *
-     * @param input
-     */
-
     public void addToUpStack(String input) {
         upStack.push(input);
     }
 
-    /**
-     * Adds a input string into the downStack
-     *
-     * @param input
-     */
     public void addToDownStack(String input) {
         downStack.push(input);
     }
 
-    /**
-     * Adds a input string into the main stack This is used whenever a input is
-     * parsed
-     *
-     * @param input
-     */
     public void addToMainStack(String input) {
         if (!input.trim().isEmpty()) {
             mainStack.push(input);
-            logger.info(LOGGER_DOWNSTACK_CLEARED);
+            logger.info("downstack cleared");
             clearDownStack();
         }
     }
 
     /**
-     * When up is pressed in command box if the main stack is empty means that
-     * it just started and down stack is also empty if the down stack is empty
-     * but main stack is not means that UP key is not triggered after an input
-     * is parsed so we need to clone main stack into upstack for the possible
-     * DOWN key when upstack is empty but main stack is not means that the user
-     * have pressed up until all inputs have been pushed to down stack
+     * When up is pressed in command box
      *
      * @return new input if stack is not empty else return the same input
      */
     public String pressedUp(String input) {
         if (mainStack.isEmpty()) {
-            logger.info(LOGGER_UP_MAIN_STACK_IS_EMPTY);
+            logger.info("UP main stack is empty");
             return input;
         } else if (downStack.isEmpty()) {
-            logger.info(LOGGER_UP_DOWN_STACK_IS_EMPTY);
+            logger.info("UP down stack is empty");
             upStack = (Stack<String>) mainStack.clone();
         }
         if (upStack.isEmpty()) {
-            logger.info(LOGGER_UP_UP_STACK_IS_EMPTY);
+            logger.info("UP up stack is empty");
             return input;
         }
         logger.info("UP adding (" + input + ") to downstack");
@@ -1305,15 +1146,13 @@ public class InputStack {
     }
 
     /**
-     * When down is pressed in command box when down stack is empty means that
-     * the user have pressed down until all inputs have been pushed to up stack
+     * When down is pressed in command box
      *
-     * @return new input if stack is not empty else return an empty string to
-     *         allow user to type their new input
+     * @return new input if stack is not empty else return the same input
      */
     public String pressedDown(String input) {
         if (downStack.isEmpty()) {
-            logger.info(LOGGER_DOWN_DOWN_STACK_IS_EMPTY);
+            logger.info("DOWN down stack is empty");
             return EMPTY_STRING;
         }
         logger.info("DOWN adding (" + input + ") to upstack");
@@ -1377,13 +1216,13 @@ public class InputStack {
      * Clears existing backing model and replaces with the provided new data
      * without saving.
      */
-    void resetDataWithoutSaving(ReadOnlyTaskManager newData);
+    void resetDataWithoutSaving(ReadOnlyItemManager newData);
 
     /**
      * Clears existing backing model and replaces with the provided new data
      * without saving for loading and updates the redo and undo stack.
      */
-    void loadData(ReadOnlyTaskManager newData);
+    void loadData(ReadOnlyItemManager newData);
 
 ```
 ###### /java/seedu/doit/model/ModelManager.java
@@ -1435,10 +1274,11 @@ public class InputStack {
 public class TaskManagerStack {
     public static final String NOTHING_TO_REDO = "There is nothing to redo!";
     public static final String NOTHING_TO_UNDO = "There is nothing to undo!";
-    private static final Stack<ReadOnlyTaskManager> undoStack = new Stack<ReadOnlyTaskManager>();
-    private static final Stack<ReadOnlyTaskManager> redoStack = new Stack<ReadOnlyTaskManager>();
+    private static final Stack<ReadOnlyItemManager> undoStack = new Stack<ReadOnlyItemManager>();
+    private static final Stack<ReadOnlyItemManager> redoStack = new Stack<ReadOnlyItemManager>();
     private static final Logger logger = LogsCenter.getLogger(TaskManagerStack.class);
     private static TaskManagerStack instance = null;
+    // private static final int STACK_SIZE = 10;
 
     protected TaskManagerStack() {
     }
@@ -1450,13 +1290,8 @@ public class TaskManagerStack {
         return instance;
     }
 
-    /**
-     * Adds another copy of the ReadOnlyTaskManager to the undostack
-     *
-     * @param readOnlyTaskManager
-     */
-    public void addToUndoStack(ReadOnlyTaskManager readOnlyTaskManager) {
-        ReadOnlyTaskManager oldReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
+    public void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
+        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
         undoStack.push(oldReadOnlyTaskManager);
     }
 
@@ -1467,15 +1302,15 @@ public class TaskManagerStack {
      * @throws EmptyTaskManagerStackException
      *             if there is an empty undostack
      */
-    public ReadOnlyTaskManager loadOlderTaskManager(ReadOnlyTaskManager readOnlyTaskManager)
+    public ReadOnlyItemManager loadOlderTaskManager(ReadOnlyItemManager readOnlyItemManager)
             throws EmptyTaskManagerStackException {
         if (undoStack.isEmpty()) {
             logger.info(NOTHING_TO_UNDO);
             throw new EmptyTaskManagerStackException(NOTHING_TO_UNDO);
         }
-        ReadOnlyTaskManager newReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
+        ReadOnlyItemManager newReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
         redoStack.push(newReadOnlyTaskManager);
-        ReadOnlyTaskManager undidTaskManager = undoStack.pop();
+        ReadOnlyItemManager undidTaskManager = undoStack.pop();
         return undidTaskManager;
     }
 
@@ -1486,15 +1321,15 @@ public class TaskManagerStack {
      * @throws EmptyTaskManagerStackException
      *             if there is an empty redostack
      */
-    public ReadOnlyTaskManager loadNewerTaskManager(ReadOnlyTaskManager readOnlyTaskManager)
+    public ReadOnlyItemManager loadNewerTaskManager(ReadOnlyItemManager readOnlyItemManager)
             throws EmptyTaskManagerStackException {
         if (redoStack.isEmpty()) {
             logger.info(NOTHING_TO_REDO);
             throw new EmptyTaskManagerStackException(NOTHING_TO_REDO);
         }
-        ReadOnlyTaskManager oldReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
+        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
         undoStack.push(oldReadOnlyTaskManager);
-        ReadOnlyTaskManager redidTaskManager = redoStack.pop();
+        ReadOnlyItemManager redidTaskManager = redoStack.pop();
         return redidTaskManager;
     }
 
@@ -1656,7 +1491,7 @@ public class TaskManagerStack {
     void setTaskManagerFilePath(String filePath);
 
     /**
-     * Returns TaskManager data as a {@link ReadOnlyTaskManager}. Returns
+     * Returns TaskManager data as a {@link ReadOnlyItemManager}. Returns
      * {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataConversionException
@@ -1664,27 +1499,27 @@ public class TaskManagerStack {
      * @throws IOException
      *             if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
+    Optional<ReadOnlyItemManager> readTaskManager() throws DataConversionException, IOException;
 
     /**
      * @see #getTaskManagerFilePath()
      */
-    Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyItemManager> readTaskManager(String filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyTaskManager} to the storage.
+     * Saves the given {@link ReadOnlyItemManager} to the storage.
      *
      * @param taskManager
      *            cannot be null.
      * @throws IOException
      *             if there was any problem writing to the file.
      */
-    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
+    void saveTaskManager(ReadOnlyItemManager taskManager) throws IOException;
 
     /**
-     * @see #saveTaskManager(ReadOnlyTaskManager)
+     * @see #saveTaskManager(ReadOnlyItemManager)
      */
-    void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
+    void saveTaskManager(ReadOnlyItemManager taskManager, String filePath) throws IOException;
 
 ```
 ###### /java/seedu/doit/storage/TaskManagerStorage.java
@@ -1701,12 +1536,12 @@ public class TaskManagerStack {
 ```
 ###### /java/seedu/doit/storage/XmlAdaptedTask.java
 ``` java
-
     /**
      * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created
-     *               XmlAdaptedTask
+     * @param source
+     *            future changes to this will not affect the created
+     *            XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         this.name = source.getName().fullName;
@@ -1733,22 +1568,15 @@ public class TaskManagerStack {
      * Converts this jaxb-friendly adapted task object into the model's Task
      * object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted
-     *                               task
+     * @throws IllegalValueException
+     *             if there were any data constraints violated in the adapted
+     *             task
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
         for (XmlAdaptedTag tag : this.tagged) {
             taskTags.add(tag.toModelType());
         }
-        if (this.startTime == null) {
-            this.startTime = "";
-        }
-
-        if (this.deadline == null) {
-            this.deadline = "";
-        }
-
         final Name name = new Name(this.name);
         final Priority priority = new Priority(this.priority);
         final StartTime startTime = new StartTime(this.startTime);
@@ -1793,42 +1621,6 @@ public class TaskManagerStack {
             setCommandBoxText("");
             this.logger.info("Invalid command: " + this.commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
-        }
-    }
-
-```
-###### /java/seedu/doit/ui/CommandBox.java
-``` java
-    /**
-     * sets the text in the command box
-     */
-    public void setCommandBoxText(String text) {
-        this.commandTextField.setText(text);
-    }
-
-    //
-    @FXML
-    /**
-     * Listens to keyEvents when command Box is focused
-     */
-    public void handleKeyPress(KeyEvent event) {
-        this.commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
-        this.commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-        switch (event.getCode()) {
-        case UP:
-            // up arrow
-            this.output = this.inputs.pressedUp(this.output);
-            setCommandBoxText(this.output);
-            this.logger.info("UP pressed");
-            break;
-        case DOWN:
-            // down arrow
-            this.output = this.inputs.pressedDown(this.output);
-            setCommandBoxText(this.output);
-            this.logger.info("DOWN pressed");
-            break;
-        default:
-            break;
         }
     }
 

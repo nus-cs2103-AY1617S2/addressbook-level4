@@ -79,12 +79,15 @@ public class ArgumentTokenizer {
      * Returns all values of given prefix after the prefix.
      */
     public Optional<List<String>> getAllValuesAfterPrefixAndSpaces(Prefix prefix) {
+        final int FIRST_INDEX = 0;
+        final String EMPTY_STRING = "";
+        final String WHITE_SPACE_STRING = " ";
         if (!this.tokenizedArguments.containsKey(prefix)) {
             return Optional.empty();
         }
         List<String> values = new ArrayList<>(this.tokenizedArguments.get(prefix));
-        values.set(0, values.get(0).replaceFirst(prefix.toString(), ""));
-        String[] allArguments = values.remove(0).split(" ");
+        values.set(FIRST_INDEX, values.get(FIRST_INDEX).replaceFirst(prefix.toString(), EMPTY_STRING));
+        String[] allArguments = values.remove(FIRST_INDEX).split(WHITE_SPACE_STRING);
         for (int i = 0; i < allArguments.length; i++) {
             values.add(allArguments[i]);
         }

@@ -64,6 +64,15 @@ public class RedoCommandTest extends TaskManagerGuiTest {
         assertClearCommandSuccess();
     }
 
+    // @@author A0146809W
+    @Test
+    public void redo_clear_success_ControlY() throws Exception {
+        this.commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
+        executeUndoThenCtrlY();
+        assertClearCommandSuccess();
+    }
+
+    // @@author A0139399J
     @Test
     public void redo_emptyStack_failure() {
         this.commandBox.runCommand(MESSAGE_REDO_COMMAND);
@@ -71,6 +80,13 @@ public class RedoCommandTest extends TaskManagerGuiTest {
 
     }
 
+    // @@author A0146809W
+    private void executeUndoThenCtrlY() {
+        this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
+        this.mainMenu.useCTRLYAccelerator();
+    }
+
+    // @@author A0139399J
     private void executeUndoThenRedo() {
         this.commandBox.runCommand(MESSAGE_TEST_UNDO_COMMAND);
         this.commandBox.runCommand(MESSAGE_REDO_COMMAND);

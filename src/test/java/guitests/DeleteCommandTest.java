@@ -34,16 +34,20 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
-        //@@author
+        // @@author
         // @@author A0146809W
 
         //delete from outside list
-        commandBox.runCommand("delete " + currentList.length + 1);
+        commandBox.runCommand("delete " + (currentList.length + 1));
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         //invalid format
         commandBox.runCommand("delete " + "1-");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+        //delete from outside range
+        commandBox.runCommand("delete 1-" + (currentList.length + 1));
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
 
@@ -63,14 +67,11 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         //confirm the list now contains all previous tasks except the deleted task
         assertAllPanelsMatch(expectedRemainder);
 
-        HashSet<Integer> deletedTaskIndexes = new HashSet<>();
-        deletedTaskIndexes.add(targetIndexOneIndexed);
         HashSet<ReadOnlyTask> tasksToDelete = new HashSet<>();
         tasksToDelete.add(taskToDelete);
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete,
-            deletedTaskIndexes)));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete)));
     }
-
+    // @@author
 }

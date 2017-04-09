@@ -10,11 +10,10 @@ import seedu.doit.commons.exceptions.EmptyTaskManagerStackException;
 public class TaskManagerStack {
     public static final String NOTHING_TO_REDO = "There is nothing to redo!";
     public static final String NOTHING_TO_UNDO = "There is nothing to undo!";
-    private static final Stack<ReadOnlyItemManager> undoStack = new Stack<ReadOnlyItemManager>();
-    private static final Stack<ReadOnlyItemManager> redoStack = new Stack<ReadOnlyItemManager>();
+    private static final Stack<ReadOnlyTaskManager> undoStack = new Stack<ReadOnlyTaskManager>();
+    private static final Stack<ReadOnlyTaskManager> redoStack = new Stack<ReadOnlyTaskManager>();
     private static final Logger logger = LogsCenter.getLogger(TaskManagerStack.class);
     private static TaskManagerStack instance = null;
-    // private static final int STACK_SIZE = 10;
 
     protected TaskManagerStack() {
     }
@@ -26,8 +25,13 @@ public class TaskManagerStack {
         return instance;
     }
 
-    public void addToUndoStack(ReadOnlyItemManager readOnlyItemManager) {
-        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
+    /**
+     * Adds another copy of the ReadOnlyTaskManager to the undostack
+     *
+     * @param readOnlyTaskManager
+     */
+    public void addToUndoStack(ReadOnlyTaskManager readOnlyTaskManager) {
+        ReadOnlyTaskManager oldReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
         undoStack.push(oldReadOnlyTaskManager);
     }
 
@@ -38,15 +42,15 @@ public class TaskManagerStack {
      * @throws EmptyTaskManagerStackException
      *             if there is an empty undostack
      */
-    public ReadOnlyItemManager loadOlderTaskManager(ReadOnlyItemManager readOnlyItemManager)
+    public ReadOnlyTaskManager loadOlderTaskManager(ReadOnlyTaskManager readOnlyTaskManager)
             throws EmptyTaskManagerStackException {
         if (undoStack.isEmpty()) {
             logger.info(NOTHING_TO_UNDO);
             throw new EmptyTaskManagerStackException(NOTHING_TO_UNDO);
         }
-        ReadOnlyItemManager newReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
+        ReadOnlyTaskManager newReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
         redoStack.push(newReadOnlyTaskManager);
-        ReadOnlyItemManager undidTaskManager = undoStack.pop();
+        ReadOnlyTaskManager undidTaskManager = undoStack.pop();
         return undidTaskManager;
     }
 
@@ -57,15 +61,15 @@ public class TaskManagerStack {
      * @throws EmptyTaskManagerStackException
      *             if there is an empty redostack
      */
-    public ReadOnlyItemManager loadNewerTaskManager(ReadOnlyItemManager readOnlyItemManager)
+    public ReadOnlyTaskManager loadNewerTaskManager(ReadOnlyTaskManager readOnlyTaskManager)
             throws EmptyTaskManagerStackException {
         if (redoStack.isEmpty()) {
             logger.info(NOTHING_TO_REDO);
             throw new EmptyTaskManagerStackException(NOTHING_TO_REDO);
         }
-        ReadOnlyItemManager oldReadOnlyTaskManager = new TaskManager(readOnlyItemManager);
+        ReadOnlyTaskManager oldReadOnlyTaskManager = new TaskManager(readOnlyTaskManager);
         undoStack.push(oldReadOnlyTaskManager);
-        ReadOnlyItemManager redidTaskManager = redoStack.pop();
+        ReadOnlyTaskManager redidTaskManager = redoStack.pop();
         return redidTaskManager;
     }
 

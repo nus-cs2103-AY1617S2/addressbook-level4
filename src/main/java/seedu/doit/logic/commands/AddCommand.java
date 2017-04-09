@@ -35,7 +35,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
-    public static final String MESSAGE_INVALID_START_TIME = "Start Time not earlier then End Time!";
+    public static final String MESSAGE_INVALID_START_TIME = "Start Time cannot be earlier then End Time!";
 
     private final Task toAdd;
 
@@ -72,6 +72,7 @@ public class AddCommand extends Command {
         }
     }
 
+
     public static String getName() {
         return COMMAND_WORD;
     }
@@ -93,8 +94,10 @@ public class AddCommand extends Command {
         assert this.model != null;
         try {
             this.model.addTask(this.toAdd);
+
             EventsCenter.getInstance().post(new JumpToListRequestEvent(
                 this.model.getFilteredTaskList().indexOf(this.toAdd)));
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

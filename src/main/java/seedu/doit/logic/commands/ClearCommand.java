@@ -8,7 +8,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String COMMAND_PARAMETER = "";
-    public static final String COMMAND_RESULT = "Deletes all tasks from DoIT";
+    public static final String COMMAND_RESULT = "Deletes all tasks from DoIt";
     public static final String COMMAND_EXAMPLE = "clear";
     public static final String MESSAGE_SUCCESS = "All tasks has been cleared!";
 

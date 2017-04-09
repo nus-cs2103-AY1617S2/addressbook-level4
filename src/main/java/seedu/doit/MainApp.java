@@ -22,7 +22,7 @@ import seedu.doit.logic.Logic;
 import seedu.doit.logic.LogicManager;
 import seedu.doit.model.Model;
 import seedu.doit.model.ModelManager;
-import seedu.doit.model.ReadOnlyItemManager;
+import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.TaskManager;
 import seedu.doit.model.UserPrefs;
 import seedu.doit.model.util.SampleDataUtil;
@@ -35,6 +35,12 @@ import seedu.doit.ui.UiManager;
  * The main entry point to the application.
  */
 public class MainApp extends Application {
+    private static final String LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE = "Problem while reading "
+            + "from the file. Will be starting with an empty TaskManager";
+    private static final String LOGGER_DATA_FILE_NOT_IN_THE_CORRECT_FORMAT = "Data file not in "
+            + "the correct format. Will be starting with an empty TaskManager";
+    private static final String LOGGER_DATA_FILE_NOT_FOUND = "Data file not found. "
+            + "Will be starting with a sample TaskManager";
     public static final Version VERSION = new Version(1, 0, 0, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     protected Ui ui;
@@ -76,21 +82,21 @@ public class MainApp extends Application {
 
     // @@author A0138909R
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyItemManager> taskManagereOptional;
-        ReadOnlyItemManager initialTaskManagerData;
+        Optional<ReadOnlyTaskManager> taskManagereOptional;
+        ReadOnlyTaskManager initialTaskManagerData;
 
         try {
             taskManagereOptional = storage.readTaskManager();
             if (!taskManagereOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskManager");
+                logger.info(LOGGER_DATA_FILE_NOT_FOUND);
             }
             initialTaskManagerData = taskManagereOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
             storage.saveTaskManager(initialTaskManagerData);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
+            logger.warning(LOGGER_DATA_FILE_NOT_IN_THE_CORRECT_FORMAT);
             initialTaskManagerData = new TaskManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning(LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE);
             initialTaskManagerData = new TaskManager();
         }
 
@@ -149,7 +155,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskManager");
+            logger.warning(LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE);
             initializedPrefs = new UserPrefs();
         }
 

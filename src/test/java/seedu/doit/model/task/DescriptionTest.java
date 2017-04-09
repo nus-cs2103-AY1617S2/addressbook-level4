@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import seedu.doit.commons.exceptions.IllegalValueException;
 import seedu.doit.model.item.Description;
 
+//@@ author A0146809W
 public class DescriptionTest {
 
     @Rule
@@ -19,9 +20,9 @@ public class DescriptionTest {
         // valid tasks
         assertTrue(Description.isValidDescription("")); // empty string
         assertTrue(Description.isValidDescription(" ")); // spaces only
-        assertTrue(Description.isValidDescription("Task is extremely hard" + ""));
         assertTrue(Description.isValidDescription("-")); // one character
         assertTrue(Description.isValidDescription("Task is very easy"));
+        assertTrue(Description.isValidDescription("Task is extremely hard" + ""));
     }
 
     @Test

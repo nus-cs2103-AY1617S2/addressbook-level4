@@ -15,8 +15,6 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Task redone.";
     public static final String MESSAGE_FAILURE = "Unable to redo. There is nothing to redo. ";
 
-    // public static Command toRedo;
-
     @Override
     public CommandResult execute() throws CommandException {
         assert this.model != null;
@@ -28,19 +26,4 @@ public class RedoCommand extends Command {
         }
     }
 
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
-    }
 }

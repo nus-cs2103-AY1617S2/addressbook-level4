@@ -80,14 +80,15 @@ public class CommandBox extends UiPart<Region> {
         this.commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
         this.commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-    // @@author
-    // @@A0138909R
+
+    // @@author A0138909R
     /**
      * sets the text in the command box
      */
     public void setCommandBoxText(String text) {
         this.commandTextField.setText(text);
     }
+
     //
     @FXML
     /**

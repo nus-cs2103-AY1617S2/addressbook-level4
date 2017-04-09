@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyItemManager taskManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
@@ -74,18 +74,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyItemManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         this.taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public void resetDataWithoutSaving(ReadOnlyItemManager newData) {
+    public void resetDataWithoutSaving(ReadOnlyTaskManager newData) {
         this.taskManager.resetData(newData);
     }
 
     @Override
-    public void loadData(ReadOnlyItemManager newData) {
+    public void loadData(ReadOnlyTaskManager newData) {
         this.resetDataWithoutSaving(newData);
         taskManagerStack.clearRedoStack();
         taskManagerStack.clearUndoStack();
@@ -103,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0139399J
     @Override
-    public ReadOnlyItemManager getTaskManager() {
+    public ReadOnlyTaskManager getTaskManager() {
         return this.taskManager;
     }
 
@@ -114,29 +114,28 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(this.taskManager));
     }
 
+    /**
+     * Removes the equivalent task from the task list.
+     *
+     * @throws TaskNotFoundException
+     *             if no such task could be found in the task list.
+     */
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        logger.info("delete task in model manager");
-        taskManagerStack.addToUndoStack(this.getTaskManager());
-        taskManagerStack.clearRedoStack();
-        this.taskManager.removeTask(target);
-        updateFilteredListToShowAll();
-        indicateTaskManagerChanged();
-
-    }
-
-    @Override
-    public synchronized void deleteTasks(Set<ReadOnlyTask> targets) throws TaskNotFoundException {
+    public synchronized void deleteTasks(Set<ReadOnlyTask> targets) {
         logger.info("delete task(s) in model manager");
         taskManagerStack.addToUndoStack(this.getTaskManager());
         taskManagerStack.clearRedoStack();
-        for (ReadOnlyTask target: targets) {
-            this.taskManager.removeTask(target);
-        }
+        this.taskManager.removeTask(targets);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
+    /**
+     * Removes the equivalent tasks from the task list.
+     *
+     * @throws TaskNotFoundException
+     *             if a task could be found in the task list.
+     */
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
         logger.info("add task in model manager");

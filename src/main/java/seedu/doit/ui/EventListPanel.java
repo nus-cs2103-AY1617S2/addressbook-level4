@@ -21,6 +21,7 @@ import seedu.doit.model.item.ReadOnlyTask;
 public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
+    private static final double BOUNDARY_PARAMETER = 0.0;
 
     private static ObservableList<ReadOnlyTask> mainTaskList;
     @FXML
@@ -42,7 +43,8 @@ public class EventListPanel extends UiPart<Region> {
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
-        FxViewUtil.applyAnchorBoundaryParameters(getRoot(), 0.0, 0.0, 0.0, 0.0);
+        FxViewUtil.applyAnchorBoundaryParameters(getRoot(),
+                BOUNDARY_PARAMETER, BOUNDARY_PARAMETER, BOUNDARY_PARAMETER, BOUNDARY_PARAMETER);
         placeHolderPane.getChildren().add(getRoot());
     }
 

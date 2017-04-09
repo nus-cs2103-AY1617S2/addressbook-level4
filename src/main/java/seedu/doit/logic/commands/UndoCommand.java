@@ -16,8 +16,6 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_FAILURE = "Unable to undo. There is nothing to undo.\n"
             + "You cannot undo a save, load, find, set and list";
 
-    // public static Command toUndo;
-
     @Override
     public CommandResult execute() throws CommandException {
         assert this.model != null;
@@ -29,19 +27,4 @@ public class UndoCommand extends Command {
         }
     }
 
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
-    }
 }

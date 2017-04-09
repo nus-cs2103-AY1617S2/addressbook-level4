@@ -1,4 +1,3 @@
-//@@author A0146809W
 package seedu.doit.testutil;
 
 import seedu.doit.commons.exceptions.IllegalValueException;
@@ -14,10 +13,8 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            this.alice = new TaskBuilder().withName("Alice Pauline")
-                .withDescription("123, Jurong West Ave 6, #08-111").withDeadline("friday")
-                .withPriority("low")
-                .withTags("friends").build();
+            this.alice = new TaskBuilder().withName("Alice Pauline").withDescription("123, Jurong West Ave 6, #08-111")
+                    .withDeadline("friday").withPriority("low").withTags("friends").build();
             this.benson = new TaskBuilder().withName("Benson Meier").withDescription("311, Clementi Ave 2, #02-25")
                 .withDeadline("thursday").withPriority("med")
                 .withTags("owesMoney", "friends").build();
@@ -30,7 +27,7 @@ public class TypicalTestTasks {
             this.fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("med")
                 .withDeadline("sunday").withDescription("little tokyo").build();
             this.george = new TaskBuilder().withName("George Best").withPriority("high")
-                .withDeadline("3/20/17").withDescription("4th street").build();
+                .withDeadline("20/03/17").withDescription("4th street").build();
             this.aF = new TaskBuilder().withName("AAAAAFloating").withPriority("med")
                  .withDescription("l").build();
             this.bF = new TaskBuilder().withName("BBBBBFloating").withPriority("med")
@@ -38,14 +35,14 @@ public class TypicalTestTasks {
             this.cF = new TaskBuilder().withName("CCCCCFloating").withPriority("med")
                  .withDescription("l").build();
             this.aE = new TaskBuilder().withName("AAAAAEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             this.bE = new TaskBuilder().withName("BBBBBEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             this.cE = new TaskBuilder().withName("CCCCCEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             // Manually added
             this.hoon = new TaskBuilder().withName("Hoon Meier").withPriority("low")
-                .withDeadline("3/14/18").withDescription("little india").build();
+                .withDeadline("14/03/18").withDescription("little india").build();
             this.ida = new TaskBuilder().withName("Ida Mueller").withPriority("med")
                 .withDeadline("04/04/17").withDescription("chicago ave").build();
         } catch (IllegalValueException e) {
@@ -65,34 +62,34 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[] {this.alice, this.benson, this.carl, this.daniel,
-            this.elle, this.fiona, this.george, this.aE, this.bE, this.cE, this.aF, this.bF, this.cF};
+        return new TestTask[] { this.alice, this.benson, this.carl, this.daniel, this.elle, this.fiona, this.george,
+            this.aE, this.bE, this.cE, this.aF, this.bF, this.cF };
     }
 
     public static TestTask getEventTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("meeting")
-                                     .withStartTime("yesterday")
-                                     .withDescription("event")
-                                     .withPriority("high")
-                                     .withDeadline("tomorrow")
-                                     .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("meeting").withStartTime("yesterday").withDescription("event")
+                .withPriority("high").withDeadline("tomorrow").withTags("tttttttttag").build();
     }
 
     public static TestTask getDeadlineTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("due soon")
-                                        .withDescription("task")
-                                        .withPriority("high")
-                                        .withDeadline("tomorrow")
-                                        .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("due soon").withDescription("task").withPriority("high")
+                .withDeadline("tomorrow").withTags("tttttttttag").build();
     }
 
     public static TestTask getFloatingTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("anytime")
-                                        .withDescription("fTask")
-                                        .withPriority("high")
-                                        .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("anytime").withDescription("fTask").withPriority("high")
+                .withTags("tttttttttag").build();
     }
 
+    public static TestTask getDeadlineTestTaskWithNoDescription() throws IllegalValueException {
+        return new TaskBuilder().withName("noDescription").withDescription("").withPriority("high")
+                .withDeadline("next week").withTags("tagme").build();
+    }
+
+    public static TestTask getFloatingTestTaskWithDuplicateTags() throws IllegalValueException {
+        return new TaskBuilder().withName("Duplicate tag").withDescription("duplicate tag success").withPriority("med")
+                .withTags("same").withTags("same").build();
+    }
 
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();

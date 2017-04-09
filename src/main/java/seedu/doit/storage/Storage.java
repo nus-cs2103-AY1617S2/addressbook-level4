@@ -8,7 +8,7 @@ import seedu.doit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.doit.commons.events.storage.TaskManagerLoadChangedEvent;
 import seedu.doit.commons.events.storage.TaskManagerSaveChangedEvent;
 import seedu.doit.commons.exceptions.DataConversionException;
-import seedu.doit.model.ReadOnlyItemManager;
+import seedu.doit.model.ReadOnlyTaskManager;
 import seedu.doit.model.UserPrefs;
 
 /**
@@ -26,10 +26,10 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     String getTaskManagerFilePath();
 
     @Override
-    Optional<ReadOnlyItemManager> readTaskManager() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskManager(ReadOnlyItemManager taskManager) throws IOException;
+    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
 
     /**
      * Saves the current version of the Task Manager to the hard disk. Creates
