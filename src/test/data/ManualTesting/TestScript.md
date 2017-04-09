@@ -4,24 +4,30 @@
 3. Run FunTaskTic and ensure that current tab is in `To Do`
 
 ## Test Script
-|	Intention	|	Input command	|	Expected result	|
+|	Step	|	Intention	|	Input command	|	Expected result	|
 |	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| **load sample data** | load data/SampleData.xml | task manager is refreshed with the data from supplied file with 50 tasks |
-|		|		|		|
-| **show help** | help | the user guide is displayed in a new window |
-|		|		|		|
-| **go to** `Done` **tab** | list done | selected view tab is now `Done` |
-| **go to** `To Do` **tab** | list todo | selected view tab is now `To Do` |
-|		|		|		|
-| **add a task** <br><br>all newly added task should be automatically selected in the list| |  |
-| add floating task | add Write english essay | floating task is added |
-| add task | add Prepare for maths test e/next week | task with end date is added |
-| add repeating daily task | add Buy Lunch s/today 12pm r/day | that that repeats every day is added |
-| add repeating weekly task | add Buy 4D s/today 4pm e/next month r/week | task that repeats every week is added |
-| add repeating monthly task | add Cut hair s/today e/tomorrow r/year | task that repeats every month is added |
-| add repeating yearly task | add Buy textbooks s/1 december e/2 years from now r/year | task that repeats every year is added |
-| add task with description | add Get car keys from dad d/go to changi | task with description is added |
-| add task with tag | Buy airtickets to maldives t/holiday | tash with holiday tag is added |
+|	Help |		|		|   |
+|	1	| **show help** | help | the user guide is displayed in a new window |
+|	Load	|		|		|   |
+| 1 | **load invalid sample data** | load data/invalid.xml | Error message will be shown |
+| 2 | **load sample data** | load data/SampleData.xml | task manager is refreshed with the data from supplied file with 50 tasks |
+|	List	|		|		|   |
+| 1 | **go to** `Done` **tab** | list done | selected view tab is now `Done` |
+| 2 | **go to** `To Do` **tab** | list todo | selected view tab is now `To Do` |
+| 3 | **list all tasks in current tab** | list | All tasks will be listed without switching tab |
+| 4 | **list with invalid keyword** | list invalid | Alert for invalid keyword is shown. By default, all tasks will be listed in the current tab |
+|	Add	|		|		|   |
+| | **add a task** <br><br>Every newly added task should be automatically highlighted in the list| |  |
+| 1 | add floating task | add Write english essay | floating task is added |
+| 2 | add task | add Prepare for maths test e/next week | task with end date is added |
+| 3 | add repeating daily task | add Buy Lunch s/today 12pm r/day | that that repeats every day is added |
+| 4 | add repeating weekly task | add Buy 4D s/today 4pm e/next month r/week | task that repeats every week is added |
+| 5 | add repeating monthly task | add Cut hair s/today e/tomorrow r/year | task that repeats every month is added |
+| 6 | add repeating yearly task | add Buy textbooks s/1 december e/2 years from now r/year | task that repeats every year is added |
+| 7 | add task with description | add Get car keys from dad d/go to changi | task with description is added |
+| 8 | add task with tag | Buy airtickets to maldives t/holiday | tash with holiday tag is added |
+| 9 | add task with start date after end date | Finish CS2103 revision s/today e/yesterday | Error message for date constraint will be shown |
+| 10 | add new task when in `Done` tab | Band rehearsal d/gigs are awesome | Auto-switch to `To Do` tab, showing new task added |
 |		|		|		|
 | **edit task** <br><br>editted task will be automatically selected in the list after successful edit| | |
 | edit title in task:`Write english essay` | edit `index` Write chinese essay | task is editted |
