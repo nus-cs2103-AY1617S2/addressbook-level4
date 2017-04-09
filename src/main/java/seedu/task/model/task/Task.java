@@ -167,24 +167,33 @@ public class Task implements ReadOnlyTask {
             return true;
         Task otherTask = (Task) other;
         if (!otherTask.getTaskName().fullTaskName.equals(this.getTaskName().fullTaskName)) {
-        	System.out.println("names arent equal");
-        	return false;
+            System.out.println("names arent equal");
+            return false;
         }
-        if (!(otherTask.getTaskDate().compareTo(this.getTaskDate()) == 0)) {
-        	System.out.println("dates arent equal");
-        	return false;
+        if ((otherTask.getTaskDate() == null && this.getTaskDate() != null)
+                || (otherTask.getTaskDate() != null && this.getTaskDate() == null)
+                || (otherTask.getTaskDate() != this.getTaskDate())
+                && !(otherTask.getTaskDate().compareTo(this.getTaskDate()) == 0)) {
+            System.out.println("dates arent equal");
+            return false;
         }
-        if (!(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
-        	System.out.println("start times arent equal");
-        	return false;
+        if ((otherTask.getTaskStartTime() == null && this.getTaskStartTime() != null)
+                || (otherTask.getTaskStartTime() != null && this.getTaskStartTime() == null)
+                || (otherTask.getTaskDate() != this.getTaskDate())
+                && !(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
+            System.out.println("start times arent equal");
+            return false;
         }
-        if (!(otherTask.getTaskEndTime().compareTo(this.getTaskEndTime()) == 0)) {
-        	System.out.println("end times arent equal");
-        	return false;
+        if ((otherTask.getTaskEndTime() == null && this.getTaskEndTime() != null)
+                || (otherTask.getTaskEndTime() != null && this.getTaskEndTime() == null)
+                || (otherTask.getTaskEndTime() != this.getTaskEndTime())
+                && !(otherTask.getTaskEndTime().compareTo(this.getTaskEndTime()) == 0)) {
+            System.out.println("end times arent equal");
+            return false;
         }
         if (!(otherTask.getTaskDescription().trim().equals(this.getTaskDescription().trim()))) {
-        	System.out.println("descriptions arent equal");
-        	return false;
+            System.out.println("descriptions arent equal");
+            return false;
         }
         return true;
 

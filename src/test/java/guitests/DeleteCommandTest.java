@@ -14,6 +14,12 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
      @Test
      public void delete() {
+         try {
+             setup();
+ 	 } catch (Exception e) {
+ 	     // TODO Auto-generated catch block
+             e.printStackTrace();
+ 	 }
 
 
      // delete the first in the list
@@ -24,13 +30,13 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     	 toAdd = "add ";
     	 toAdd += t.getTaskName().fullTaskName;
     	 if (t.getTaskDate() != null) {
-    		 toAdd += " d/" + t.getTaskDate().toString();
+    	      toAdd += " d/" + t.getTaskDate().toString();
     	 }
     	 if (t.getTaskStartTime() != null) {
-    		 toAdd += " s/" + t.getTaskStartTime().toString();
+              toAdd += " s/" + t.getTaskStartTime().toString();
     	 }
     	 if (t.getTaskEndTime() != null) {
-    		 toAdd += " e/" + t.getTaskEndTime().toString();
+              toAdd += " e/" + t.getTaskEndTime().toString();
     	 }
     	 if (t.getTaskDescription() != null) {
     		 toAdd += " m/" + t.getTaskDescription();

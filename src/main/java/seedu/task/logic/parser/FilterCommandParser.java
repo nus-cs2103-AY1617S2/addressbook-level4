@@ -15,6 +15,8 @@ import seedu.task.model.task.TaskStatusPredicate;
 //@@author A0163845X
 public class FilterCommandParser {
 
+    public static final String MESSAGE_INCORRECT_FORMAT = "Invalid format for filter. filter [type] [arguments]";
+
     public Command parse(String arguments) {
         try {
             arguments = arguments.toLowerCase();
@@ -48,7 +50,7 @@ public class FilterCommandParser {
             }
             return new FilterCommand(pred);
         } catch (StringIndexOutOfBoundsException e) {
-            return new IncorrectCommand("Invalid format for filter. filter [type] [arguments]");
+            return new IncorrectCommand(MESSAGE_INCORRECT_FORMAT);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand("Invalid argument");
         }
