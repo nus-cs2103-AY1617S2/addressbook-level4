@@ -11,7 +11,7 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
     2.2 [Launch](#22-launch)<br>
     2.3 [Get used to the interface](#23-get-used-to-the-interface)<br>
     2.4 [Try out some commands](#24-try-out-some-commands)
-3. [Features](#3-features)
+3. [Features](#3-features)<br>
 	3.1 [Viewing help: `help`](#31-Viewing-help:-`help`)<br>
 	3.2 [Getting keyword suggestions smartly](#32-Getting-keyword-suggestions-smartly)<br>
 	3.3 [Switching to a different tab: `switch`](#33-Switching-to-a-different-tab:-`switch`)<br>
@@ -26,8 +26,8 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 	3.12 [Clearing all entries: `clear`](#312-Clearing-all-entries:-`clear`)<br>
 	3.13 [Undoing a command: `undo`](#313-Undoing-a-command:-`undo`)<br>
 	3.14 [Redoing a command: `redo`](#314-Redoing-a-command:-`redo`)<br>
-	3.15 [Viewing previous commands: `history`](#315-Viewing-previous-commands:-`history`)<br>
-	3.16 [Adding an alias for any phrase: `alias`](#316-Adding-an-alias-for-any-phrase:-`alias`)<br>
+	3.15 [Viewing previous commands: `history`](#315-Viewing-previous-commands:-history)<br>
+	3.16 [Adding an alias for any phrase: `alias`](#316-Adding-an-alias-for-any-phrase:-alias)<br>
 	3.17 [Removing an alias: `unalias`](#317-Removing-an-alias:-`unalias`)<br>
 	3.18 [Viewing aliases: `viewalias`](#318-Viewing-aliases:-`viewalias`)<br>
 	3.19 [Saving the data](#319-Saving-the-data)<br>
