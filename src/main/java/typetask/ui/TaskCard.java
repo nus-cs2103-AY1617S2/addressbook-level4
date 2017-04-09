@@ -75,9 +75,9 @@ public class TaskCard extends UiPart<Region> {
             } else {
                 setStyleToIndicatePending();
             }
-            if (task.getIsCompleted()) {
-                setStyleToIndicateCompleted(task);
-            }
+        }
+        if (task.getIsCompleted()) {
+            setStyleToIndicateCompleted(task);
         }
     }
 
