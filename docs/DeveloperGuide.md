@@ -217,22 +217,22 @@ Any updates to the data will require a change in the UI to reflect the changes. 
 
 When data is modified, we will also save it into a file for persistent memory. This is handled by the Storage component. Instead of Model directly interacting with Storage, we use the event-driven approach as mentioned [before](#211-events-driven-nature-of-the-design) and raises an event instead.
 
-With the help of the above mentioned designs, **Model does not depend on any other component.** This keeps the design of Model simple and greatly reduces the coupling between components.
+With the help of the two above mentioned designs, **Model does not depend on any other component.** This keeps the design of Model simple and greatly reduces the coupling between components.
 
 A high level class diagram to show the structure of the Model Component is illustrated in the following diagram.
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-The main class here is the `ModelManager`. It implements [`Model.java`](../src/main/java/seedu/task/model/Model.java), the interface of the Model component. It maintains all the tasks which is in a `TaskManager` object and user's preferences in the `UserPref` object.
+The main class is the `ModelManager`. It implements [`Model.java`](../src/main/java/seedu/task/model/Model.java), the interface of the Model component. It maintains all the tasks in a `TaskManager` object and user's preferences in a `UserPref` object.
 
-The `TaskManager` contains the current state of all task and their details. A TaskManager contains an `UniqueTaskList` and a `UniqueTagList`. As their name suggests, these lists asserts their list is unique.
+The `TaskManager` contains the current state of all task and their details. A TaskManager contains an `UniqueTaskList` and a `UniqueTagList`. As their name suggests, these lists gaurantees that their list is unique.
 
 The model component also protects it's data. Interfaces such as`ReadOnlyTaskManager` and `ReadOnlyTask` are measures to prevent other classes from modifying the data. Other components such as UI, are given the least amount of privilege they need to function, they can only read but not to write.
 
-More detailed explanation of the `Task` class can be found in the next [section](#241-task).
+More details of the `Task` class can be found in the next [section](#241-task).
 
-The Model class also uses the _facade pattern_. The complicated steps of modifying data are hidden from any callers. It's API can be found in [`Model.java`](../src/main/java/seedu/task/model/Model.java), which is the interface of the Model component. Any feature of KIT that needs to modify or access data will go through this interface. Callers only need to call the API to carry out their desires, instead of thinking the required steps to modify the data.
+The Model class also uses the _facade pattern_. The complicated steps of modifying data are hidden from any callers. It's API can be found in [`Model.java`](../src/main/java/seedu/task/model/Model.java). Any feature of KIT that needs to modify or access data will go through this interface. Callers only need to call the API to carry out their desires, without needing to think about the exact steps to modify the data.
 
 <img src="images/ModelAddTaskSeqDiagram.png" width="800"><br>
 _Figure 2.4.2 : Sequence Diagram of addTask method_
@@ -245,6 +245,7 @@ The steps required to just add a task is indeed complicated, but the caller do n
 ##### This section briefly describes the design of the task class.
 
 <img src="images/TaskClassDiagram.png"><br>
+_Figure 2.4.1.1 : Class Diagram of Task_
 
 The `Task` class represents a task in KIT. Each of its detail such as `Name` and `Date` are classes.
 
@@ -252,6 +253,7 @@ The clean design allows us to perform the verification of each field and specify
 
 * Constructor of `Task` only stipulates that startDate is before endDate and lets each individual class perform their respective verification.
 * The boolean `isDone` indicates if a task is completed. Due to its simplicity, no additional class was created to avoid unnessary objects.
+* Except for Name, the other details are optional.
 
 **Pretty Time**
 
@@ -339,8 +341,6 @@ After much consideration and research into other products, we decided that `Undo
 
 **Implementation Details**
 
-<img src="images/UndoSeqDiagram.png" width="800">
-
 A `History` class is used to support and maintain backup, undo and redo operations.
 * It is located in the common package along with other common classes.
 * It's main responsibility is to decide and provide the file path that commands should backup to and also the file path for undo and redo to load from.
@@ -353,6 +353,11 @@ A `History` class is used to support and maintain backup, undo and redo operatio
 2. Storage listens to this event, check if a backup is needed and carry out the saving to xml file. Commands that will not backup are command such as list and find commands etc.
 
 ##### Undo Command:
+
+<img src="images/UndoSeqDiagram.png" width="800">
+
+_Figure 3.3.1 : Sequence Diagram of Undo command_
+
 When an undo command is issued, its steps are as followed:
 1. Check undoCount is valid. (undoCount > 0)
 2. Get undoFilePath from `History`.
@@ -463,6 +468,10 @@ To allow the user to easily differentiate done and undone task, done tasks' titl
 * This command is one way, it will grab events but not post any events. To post events we provide another command and will be described in the next section.
 
 **Posting task to Google Calendar**
+
+<img src="images/PostGoogleActivityDiagram.png" width="800">
+
+_Figure 3.8.1 : Activity Diagram of PostGoogle command_
 
 * Users are able to post one or multiple task to their calendar.
     * Specifing one task posts the specified task.
