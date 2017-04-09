@@ -75,13 +75,14 @@ public class TaskDate {
             }
             if (dates.size() >= 1 && dates.get(0) != null) {
                 setDay(dates.get(0).getDate());
-                setMonth(dates.get(0).getMonth());
-                setYear(dates.get(0).getYear());
+                setMonth(dates.get(0).getMonth() + 1);
+                System.out.println(dates.get(0).getMonth() + 1);
+                setYear(dates.get(0).getYear() - 100);
             }
             if (dates.size() >= 2 && dates.get(1) != null) {
                 setSecondDay(dates.get(1).getDate());
-                setSecondMonth(dates.get(1).getMonth());
-                setSecondYear(dates.get(1).getYear());
+                setSecondMonth(dates.get(1).getMonth() + 1);
+                setSecondYear(dates.get(1).getYear() - 100);
             }
         }
     }
@@ -142,19 +143,11 @@ public class TaskDate {
     }
 
     public String toString() {
-        if (dates == null) {
-            if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
-                return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
-            }
-            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " "
-                    + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
-        } else {
-            if (dates.size() == 1)
-                return formatter.format(dates.get(0));
-            else
-                return formatter.format(dates.get(0)) + " - " + formatter.format(dates.get(1));
-
+        if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
+            return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
         }
+        return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " "
+                + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
     }
 
     public static int[] dateFormatConverter(String date) {
