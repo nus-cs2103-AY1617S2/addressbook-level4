@@ -118,6 +118,7 @@ public class CalendarManager {
         return service;
     }
 
+//@@author A0164039E
     public static com.google.api.services.calendar.Calendar getCalendar() {
         return service;
     }
