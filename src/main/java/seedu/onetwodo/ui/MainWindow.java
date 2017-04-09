@@ -92,6 +92,9 @@ public class MainWindow extends UiPart<Region> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem helpUGMenuItem;
+
+    @FXML
     private MenuItem undoMenuItem;
 
     @FXML
@@ -165,6 +168,7 @@ public class MainWindow extends UiPart<Region> {
     private void setAccelerators() {
         setAccelerator(exitMenuItem, KeyCombination.valueOf("Shortcut + E"));
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpUGMenuItem, KeyCombination.valueOf("F2"));
         setAccelerator(undoMenuItem, KeyCombination.valueOf("Shortcut + Z"));
         setAccelerator(redoMenuItem, KeyCombination.valueOf("Shortcut + R"));
         setAccelerator(listDoneMenuItem, KeyCombination.valueOf("Shortcut + Shift + D"));
@@ -281,15 +285,23 @@ public class MainWindow extends UiPart<Region> {
     //@@author A0141138N
     @FXML
     public void handleHelp() {
+        showHTML(HELPWINDOW_URL);
+    }
+
+    private void showHTML(String urlString) {
         JFXDialogLayout content = new JFXDialogLayout();
         browser = new WebView();
-        URL help = MainApp.class.getResource(HELPWINDOW_URL);
+        URL help = MainApp.class.getResource(urlString);
         browser.getEngine().load(help.toString());
         hideScrollBar(browser);
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         content.setBody(browser);
         closeDialog();
-        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE));
+        if (urlString.equals(HELPWINDOW_URL)) {
+            EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE));
+        } else if (urlString.equals(USERGUIDE_URL)) {
+            EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
+        }
         dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
         dialog.show();
         setBrowserCloseListener();
@@ -318,18 +330,7 @@ public class MainWindow extends UiPart<Region> {
     //@@author A0141138N
     @FXML
     public void handleHelpUG() {
-        JFXDialogLayout content = new JFXDialogLayout();
-        browser = new WebView();
-        URL help = MainApp.class.getResource(USERGUIDE_URL);
-        browser.getEngine().load(help.toString());
-        hideScrollBar(browser);
-        FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
-        content.setBody(browser);
-        closeDialog();
-        EventsCenter.getInstance().post(new NewResultAvailableEvent(HelpCommand.SHOWING_HELP_MESSAGE_USERGUIDE));
-        dialog = new JFXDialog(dialogStackPane, content, JFXDialog.DialogTransition.CENTER, true);
-        dialog.show();
-        setBrowserCloseListener();
+        showHTML(USERGUIDE_URL);
     }
 
     //@@author A0135739W
