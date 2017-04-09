@@ -53,7 +53,7 @@ public class CommandDispatcherTests {
 
     @Test
     public void getSuggestions_fullCommandWord() {
-        assertDispatcherSuggestions("add");
+        assertDispatcherSuggestions("find");
     }
 
     @Test

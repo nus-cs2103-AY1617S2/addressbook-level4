@@ -233,8 +233,10 @@ public class CommandDispatcher extends Dispatcher {
             return new TreeSet<>();
         }
 
-        Set<String> existingKeywords = new HashSet(Arrays.asList(bestFitController.tokenize(deAliasedCommand)
-                .get(FindController.PARAMETER_KEYWORDS).split(StringUtil.WHITE_SPACE)));
+        String keywordToken = bestFitController.tokenize(deAliasedCommand)
+                .get(FindController.PARAMETER_KEYWORDS);
+        keywordToken = keywordToken != null ? keywordToken : StringUtil.EMPTY_STRING;
+        Set<String> existingKeywords = new HashSet(Arrays.asList(keywordToken.split(StringUtil.WHITE_SPACE)));
 
         String lastComponentOfCommand = StringUtil.getLastComponent(deAliasedCommand);
         return tokenHistoryList.retrieveTokens(bestFitController.getClass(), FindController.PARAMETER_KEYWORDS)
