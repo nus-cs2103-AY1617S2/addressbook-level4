@@ -56,10 +56,10 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
-> To add floating tasks, simply do not specify the start and end timing paramters.<br>
-> To add tasks with deadlines, simply specify the end timing.<br>
-> To add recurring tasks, see section 2.2.1.<br>
-> Any of these 3 types of tasks can have 0 or more tags.<br>
+> * To add floating tasks, simply do not specify the start and end timing paramters.<br>
+> * To add tasks with deadlines, simply specify the end timing.<br>
+> * To add recurring tasks, see section 2.2.1.<br>
+> * Any of these 3 types of tasks can have 0 or more tags.<br>
 
 Examples:
 * `add Watch Friends season 2`
@@ -69,8 +69,8 @@ Examples:
 
   ### 2.2.1. Adding a recurring task
 
-  > Adds a recurring task to the task list<br>
-  > Format: same as 'add' but specifcy the frequency by r/#_
+  > * Adds a recurring task to the task list<br>
+  > * Format: same as 'add' but specifcy the frequency by r/#_
   > where '#' is an integer and '_' is either 'd' (day), 'm' (month), or 'y' (year)
 
   Examples:
@@ -95,13 +95,13 @@ Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
-> Edits the task at the specified `INDEX`.
+> * Edits the task at the specified `INDEX`.
   The index refers to the index number shown in the last task listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-> At least one of the optional fields must be provided.
-> Existing values will be updated to the input values.
-> When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> You can remove all the task's tags by typing `t/` without specifying any tags after it.
+  The index **must be a positive integer** 1, 2, 3, etc.
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -160,9 +160,9 @@ Examples:
 Deletes the specified task from the task list. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index  number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index  number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -178,12 +178,12 @@ Examples:
   Deletes the specific occurrence of the reccuring task from the list
   Format: `deletethis INDEX`
 
-  > Deletes the specific occurrence of a reccuring task at the specified INDEX
-  > The index refers to the index  number shown in the most recent listing.<br>
-  > The index **must be a positive integer** 1, 2, 3, ...
-  > Upon deleting an instance, the task list will be updated with the next recent occurrence.
+  > * Deletes the specific occurrence of a reccuring task at the specified INDEX
+  > * The index refers to the index  number shown in the most recent listing.<br>
+  > * The index **must be a positive integer** 1, 2, 3, ...
+  > * Upon deleting an instance, the task list will be updated with the next recent occurrence.
     If there is no more occurrences, then the entire reccuring task will be removed from the list.
-  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
+  > * **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
   calling `delete` on the same task.
 
   Example:
@@ -197,11 +197,11 @@ Examples:
 Marks the specified task as `Completed`. The task is automatically added with a `complete` tag.<br>
 Format: `complete INDEX`
 
-> Mark the task at the specified `INDEX` as `Completed`.
-> The index refers to the index number shown in the most recent listing.
-> The index **must be a positive integer** 1, 2, 3, ...
-> To complete a specific instance of a recurring task, follow the same syntax.
-> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.
+> * Mark the task at the specified `INDEX` as `Completed`.
+> * The index refers to the index number shown in the most recent listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * To complete a specific instance of a recurring task, follow the same syntax.
+> * **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.
 
 Examples:
 
@@ -217,11 +217,11 @@ Examples:
 Puts a priority level to a task.<br>
 Format: `prioritize INDEX PRIORITY_LEVEL`
 
-> Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
-> The index **must be a positive interger** 1, 2, 3,...
-> The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
-> Using `prioritize` on a recurring task will change the priority of ALL occurrences.
-> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
+> * Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
+> * The index **must be a positive interger** 1, 2, 3,...
+> * The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
+> * Using `prioritize` on a recurring task will change the priority of ALL occurrences.
+> * **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
 priority.
 
 Examples:
