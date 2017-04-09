@@ -82,17 +82,15 @@ Example:
 
 ### List tasks: `list`
 List is the command word to list down all the existing tasks.
-Format: `list * | complete | in-progress`
-1. \* will list all tasks
-2. Complete will list all completed tasks.
-3. In-progress will list all pending tasks.
+Format: `list | complete | in-progress`
+1. Complete will list all completed tasks.
+2. In-progress will list all pending tasks.
 
 
 Example:
-* `list *`
-* `list completed`
-* `list pending`
-* `list overdue`
+* `list`
+* `list complete`
+* `list in-progress`
 
 ### Edit a task: `edit`
 Edit is the command word to edit a specific task.
