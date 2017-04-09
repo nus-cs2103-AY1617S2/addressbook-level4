@@ -65,17 +65,17 @@ Format: `HELP`
 
 You can use this command to add different types of task in ProcrastiNomore. <br>
 There are 3 forms of task that ProcrastiNomore supports:
-> [Events](#321-events)
-> * [Same Day Events](3211-same-day-events)
-> * [Multiple Days Events](3212-Multiple-days-events) <br>
+> [Events](#321-events) <br>
+>> [Same Day Events](#3211-same-day-events) <br>
+>> [Multiple Days Events](#3212-Multiple-days-events) <br>
 > [Deadlines](#322-deadlines) <br>
-> [Basic Tasks](#323-basic-task)
+> [Basic Tasks](#323-basic-task) <br>
 
 #### 3.2.1. Events
 
 Events added into the task manager are sorted by their start time. Events with earlier start date and time will be located at the top and later start date and time at the bottom of the event tasks pane.
 
-##### 3.2.1.1. Same Day Events
+#### 3.2.1.1. Same Day Events
 These are events that end within the same day(duration of a day or lesser).<br> 
 
 There are two formats:
@@ -96,7 +96,7 @@ Format: `ADD` task `ON` date/day time `TO` time <br />
 > If one hour buffer goes into the next day, End date will be changed to next day and time will be changed accordingly.
 
 
-##### 3.2.1.1. Multiple Days Events
+#### 3.2.1.1. Multiple Days Events
 Format: `ADD` task `FROM` date/day time `TO` date/day time <br />
 > Same start and end date cannot be used for this format. If a same day event is required, use one day event format. <br>
 > Without specified start or end time, start and/or end time will be automatically assigned as:
@@ -162,7 +162,7 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
  If user wants more than one category tagged to the task, for example two categories:<br>
  `ADD` task `FROM` date `TO` date `CATEGORY` categoryOne `CATEGORY` categoryTwo
 
- ##### Special Categories : High, Medium, Low
+ #### Special Categories : High, Medium, Low
 
  These categories are to show priority and will have a different colour box as compared to normal categories.<br> 
  Priority(Colour): High(Red), Medium(Yellow), Low(Blue)
@@ -192,10 +192,10 @@ Command words used work similarly as during adding (ON, FROM, TO, BY)
 
 Some general formats include the following:
 
-General Format: `UPDATE` `Task Index` `New Task Name` - Changes existing task's name to new task name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time - Changes existing task to event with<br> 
+General Format: `UPDATE` `Task Index` `New Task Name` -> Changes existing task's name to new task name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `FROM` date /date time `TO` date /date time -> Changes existing task to event with<br> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified start and end date/time<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time - Changes existing task to deadline with newly specified<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `BY` date /date time -> Changes existing task to deadline with newly specified<br> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date/time
 
 Sample Update task name:
@@ -206,10 +206,11 @@ Sample Update task name:
 
 Some more specific cases include:
 
-##### Existing deadline
-Format: `UPDATE` `Task Index` `FROM` date /date time - Changes existing deadline to event starting from specified date/time to current due time<br>
+#### Existing deadline
+Format: `UPDATE` `Task Index` `FROM` date /date time -> Changes existing deadline to event starting from specified date/time to<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current due time<br>
 
-##### Existing event
+#### Existing event
 Format: `UPDATE` `Task Index` `FROM` date / time / date time<br>
 > Changes existing event start date/time to specified date/time without changing other fields<br>
 > * When only a date is provided, automatically assign Start Time to be 0000hrs
@@ -385,35 +386,60 @@ Format: `EXIT`
 
 * **View Help Window** : `HELP` <br>
 
-* **Add a new task**  `ADD (taskname) ...` <br>
-  &nbsp;e.g. `ADD eat food ON 03/03/17 0830 TO 1030`
+* **Add a new task**  
+  `ADD (taskname) ...` <br>
+  `ADD` task (Basic Task) <br>
+  `ADD` task `ON` date `CATEGORY` categoryName (Same Day Event with category)<br>
+  `ADD` task `ON` date/day time `TO` time (Same Day Event)<br>
+  `ADD` task `FROM` date/day time `TO` date/day time(Multiple Days Event) <br>
+  `ADD` task `BY` date/date time (Deadline)<br>
 
-* **Update an existing task**  `UPDATE TASKINDEX TASKNAME` <br>
+  &nbsp;e.g. `ADD eat food ON 03/03/17 0830 TO 1030 CATEGORY binge`
+
+* **Update an existing task**  <br>
+  `UPDATE TASKINDEX TASKNAME` <br>
+  `UPDATE` `Task Index` `FROM` date /date time `TO` date /date time<br>
+  `UPDATE` `Task Index` `BY` date /date time<br>
+  
   &nbsp;e.g. `UPDATE 1 Email boss`
 
-* **Delete an existing task** : `DELETE INDEX` <br>
+* **Delete an existing task**  <br>
+  `DELETE INDEX` <br>
+  `DELETE TASKNAME` <br>
    e.g. `DELETE 3`
 
-* **Clear all tasks in current list** : `CLEAR`
+* **Clear all tasks in current list**  <br>
+  `CLEAR`<br>
 
-* **Search for specified keywords** : `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
+* **Search for specified keywords** <br>
+  `SEARCH KEYWORD [MORE_KEYWORDS]` <br>
+  
   e.g. `SEARCH find more food`
 
-* **Indicate task is completed** : `MARK INDEX` <br>
+* **Indicate incomplete task as completed**  <br>
+  `MARK INDEX` <br>
    e.g. `MARK 3`
 
-* **Indicate task is uncompleted** : `UNMARK INDEX` <br>
+* **Indicate completed task as incomplete** <br>
+  `UNMARK INDEX` <br>
    e.g. `UNMARK 3`
 
-* **List all uncompleted task** : `LIST` <br>
+* **List all uncompleted task** <br>
+  `LIST` <br>
+  `LIST date/day` <br>
+  e.g. LIST thursday
 
-* **List all completed task** : `COMPLETED` <br>
+* **List all completed task** <br> 
+  `COMPLETED` <br>
 
-* **Recur an existing task** : `RECUR TASKINDEX NUMBEROFTIMES INTERVAL` <br>
+* **Recur an existing task** <br>
+  `RECUR TASKINDEX NUMBEROFTIMES INTERVAL` <br>
+e.g. `RECUR 1 3 weeks` (Recur task at index 1 every week for next 3 weeks)
 
 * **Undo a command** : `UNDO` <br>
 
 * **Redo a command** : `REDO` <br>
 
-* **Change the save location** : `SAVE [File Location]` <br>
+* **Change the save location** <br>
+  `SAVE [File Location]` <br>
   e.g.`SAVE C:\Users\<ACCOUNT NAME>\Desktop\`
