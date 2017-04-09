@@ -51,7 +51,10 @@ public class SelectCommandTest extends TaskListGuiTest {
         if (selectedIndex > lastIndex) {
             selectedIndex = lastIndex;
         }
-        assertResultMessage(String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, selectedIndex));
+        ReadOnlyTask task = taskListPanel.getSelectedTasks().get(0);
+
+        assertResultMessage(String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, selectedIndex,
+                getCompactFormattedTask(task)));
         assertTaskSelected(selectedIndex);
     }
 
@@ -63,6 +66,21 @@ public class SelectCommandTest extends TaskListGuiTest {
 
     private void assertNoTaskSelected() {
         assertEquals(taskListPanel.getSelectedTasks().size(), 0);
+    }
+
+    /**
+     * Returns the task with only the task name and tags.
+     */
+    private String getCompactFormattedTask(ReadOnlyTask task) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(task.getName());
+        sb.append(System.lineSeparator());
+
+        sb.append("Tags: ");
+        task.getTags().forEach(sb::append);
+
+        return sb.toString();
     }
 
 }

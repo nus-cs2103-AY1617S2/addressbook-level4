@@ -104,12 +104,12 @@ public abstract class ReadOnlyTask {
     private void buildTagsString(final StringBuilder builder) {
         builder.append("Tags: ");
         getTags().forEach(builder::append);
-        builder.append(System.lineSeparator());
     }
 
     //@@author A0135998H
     private void buildCompleteString(final StringBuilder builder) {
         if (isComplete()) {
+            builder.append(System.lineSeparator());
             builder.append("Status: Completed");
         }
     }

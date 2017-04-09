@@ -52,7 +52,6 @@ import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
 import onlythree.imanager.storage.StorageManager;
 
-
 public class LogicManagerTest {
 
     /**
@@ -293,8 +292,11 @@ public class LogicManagerTest {
             model.addTask(task);
         }
 
+        int selectedTaskNum = 2;
+
         assertCommandSuccess("select 3",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, selectedTaskNum,
+                        getCompactFormattedTask(twoTasks.get(selectedTaskNum - 1))),
                 expectedTaskList,
                 expectedTaskList.getTaskList());
     }
@@ -307,8 +309,11 @@ public class LogicManagerTest {
         TaskList expectedAB = helper.generateTaskList(threeTasks);
         helper.addToModel(model, threeTasks);
 
+        int selectedTaskNum = 2;
+
         assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
+                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, selectedTaskNum,
+                        getCompactFormattedTask(threeTasks.get(selectedTaskNum - 1))),
                 expectedAB,
                 expectedAB.getTaskList());
         assertEquals(1, targetedJumpIndex);
@@ -406,6 +411,20 @@ public class LogicManagerTest {
                 expectedList);
     }
 
+    /**
+     * Returns the task with only the task name and tags.
+     */
+    private String getCompactFormattedTask(ReadOnlyTask task) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(task.getName());
+        sb.append(System.lineSeparator());
+
+        sb.append("Tags: ");
+        task.getTags().forEach(sb::append);
+
+        return sb.toString();
+    }
 
     /**
      * A utility class to generate test data.
