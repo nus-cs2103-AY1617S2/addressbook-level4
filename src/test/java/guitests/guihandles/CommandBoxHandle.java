@@ -9,7 +9,7 @@ import guitests.GuiRobot;
 import javafx.collections.ObservableList;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import seedu.doist.ui.util.CommandAutoCompleteManager;
+import seedu.doist.ui.util.CommandAutoCompleteController;
 import seedu.doist.ui.util.ContentAssistPopupWindow;
 
 /**
@@ -60,7 +60,7 @@ public class CommandBoxHandle extends GuiHandle {
     //@@author A0147980U
     public ContentAssistPopupWindow getContentAssistWindow() {
         InlineCssTextArea inputBox = (InlineCssTextArea) getNode(COMMAND_INPUT_FIELD_ID);
-        CommandAutoCompleteManager.getInstance().attachSuggestionWindowIfNecessary(inputBox);
+        CommandAutoCompleteController.getInstance().attachSuggestionWindowIfNecessary(inputBox);
         ContentAssistPopupWindow contentAssistWindow = (ContentAssistPopupWindow) inputBox.getPopupWindow();
         return contentAssistWindow;
     }

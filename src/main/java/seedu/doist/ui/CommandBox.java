@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.SplitPane;
@@ -15,7 +16,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import seedu.doist.commons.core.EventsCenter;
 import seedu.doist.commons.core.LogsCenter;
+import seedu.doist.commons.events.ui.JumpToListRequestEvent;
 import seedu.doist.commons.events.ui.NewResultAvailableEvent;
 import seedu.doist.commons.util.FxViewUtil;
 import seedu.doist.commons.util.History;
@@ -24,8 +27,8 @@ import seedu.doist.logic.commands.CommandResult;
 import seedu.doist.logic.commands.RedoCommand;
 import seedu.doist.logic.commands.UndoCommand;
 import seedu.doist.logic.commands.exceptions.CommandException;
-import seedu.doist.ui.util.CommandAutoCompleteManager;
-import seedu.doist.ui.util.CommandHighlightManager;
+import seedu.doist.ui.util.CommandAutoCompleteController;
+import seedu.doist.ui.util.CommandHighlightController;
 
 public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
@@ -40,8 +43,19 @@ public class CommandBox extends UiPart<Region> {
     private final KeyCombination undoKeys = new KeyCodeCombination(KeyCode.Z, CONTROL_DOWN);
     private final KeyCombination redoKeys = new KeyCodeCombination(KeyCode.Y, CONTROL_DOWN);
 
-    private CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-    private CommandAutoCompleteManager autoCompleteManager = CommandAutoCompleteManager.getInstance();
+    private CommandHighlightController highlightManager = CommandHighlightController.getInstance();
+    private CommandAutoCompleteController autoCompleteManager = CommandAutoCompleteController.getInstance();
+
+    private boolean navigationMode = false;
+    private int currentIndex = -1;
+
+    private ChangeListener<? super String> highlightListener = (observable, oldValue, newValue)
+        -> highlightAndSuggestCompletion();
+    private ChangeListener<? super String> disableInputListener = (observable, oldValue, newValue)
+        -> removeInput();
+
+    public static final String NAVIGATION_MODE_MESSAGE = "quick navigation mode\n\nj: down\nk: up";
+    public static final String EDITING_MODE_MESSAGE = "editing mode";
 
     @FXML
     private InlineCssTextArea commandTextField;
@@ -51,14 +65,15 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         addToPlaceholder(commandBoxPlaceholder);
 
-        commandTextField.textProperty().addListener((observable, oldValue, newValue)
-            -> highlightAndSuggestCompletion());
+        commandTextField.textProperty().addListener(highlightListener);
     }
 
+    //@@author A0147980U
     private void highlightAndSuggestCompletion() {
         highlightManager.highlight(commandTextField);
         autoCompleteManager.suggestCompletion(commandTextField, logic);
     }
+    //@@author
 
     private void addToPlaceholder(AnchorPane placeHolderPane) {
         SplitPane.setResizableWithParent(placeHolderPane, false);
@@ -70,7 +85,36 @@ public class CommandBox extends UiPart<Region> {
     //@@author A0147620L
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
+        if (navigationMode) {
+            handleKeyPressedInNavigationMode(event);
+        } else {
+            handleKeyPressedInEditingMode(event);
+        }
+    }
+
+    //@@author A0147980U
+    private void handleKeyPressedInNavigationMode(KeyEvent event) {
+        event.consume();
+        if (event.getCode() == KeyCode.J) {
+            if (currentIndex + 1 < logic.getFilteredTaskList().size()) {
+                currentIndex++;
+            }
+        } else if (event.getCode() == KeyCode.K) {
+            if (currentIndex - 1 >= 0) {
+                currentIndex--;
+            }
+        } else if (event.getCode() == KeyCode.ESCAPE) {
+            currentIndex = -1;
+            turnOnEditingMode();
+        }
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(currentIndex));
+    }
+
+    private void handleKeyPressedInEditingMode(KeyEvent event) {
+        if (event.getCode() == KeyCode.ESCAPE) {
+            event.consume();
+            turnOnNavigationMode();
+        } else if (event.getCode() == KeyCode.ENTER) {
             event.consume();
             handleEnterKey();
         } else if (event.getCode() == KeyCode.UP) {
@@ -93,6 +137,27 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    private void turnOnNavigationMode() {
+        navigationMode = true;
+        commandTextField.textProperty().removeListener(highlightListener);
+        commandTextField.textProperty().addListener(disableInputListener);
+        logger.info("turn on navigation mode");
+        raise(new NewResultAvailableEvent(NAVIGATION_MODE_MESSAGE));
+    }
+
+    private void turnOnEditingMode() {
+        navigationMode = false;
+        commandTextField.textProperty().removeListener(disableInputListener);
+        commandTextField.textProperty().addListener(highlightListener);
+        logger.info("turn on editing mode");
+        raise(new NewResultAvailableEvent(EDITING_MODE_MESSAGE));
+    }
+
+    private void removeInput() {
+        commandTextField.clear();
+    }
+
+    //@@author A0147620L
     //Handles Down key press
     private void handleDownKey() {
         String userCommandText = commandHistory.getNextState();
@@ -137,7 +202,7 @@ public class CommandBox extends UiPart<Region> {
     //@@author
 
     //@@author A0147980U
-    //Handle Control + z key combination
+    //Handle Control + z key combination for undo operation
     private void handleCtrlZKeyCombination() {
         try {
             CommandResult commandResult  = logic.execute(UndoCommand.DEFAULT_COMMAND_WORD);
@@ -146,7 +211,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException e) { /* DEFAULT_COMMAND_WORD will not cause exception */ }
     }
 
-    //Handle Control + y key combination
+    //Handle Control + y key combination for re-do operation
     private void handleCtrlYKeyCombination() {
         try {
             CommandResult commandResult  = logic.execute(RedoCommand.DEFAULT_COMMAND_WORD);
