@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_UNDO_FAIL = "Could not undo delete due to duplicate."; //TODO merv to use
     public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
-    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully deleted.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks successfully deleted.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_DELETE_TASK_SUCCESSFUL = "Task #%1$d deleted: %2$s";
     public static final String MESSAGE_DELETE_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully deleted.";
@@ -75,7 +75,7 @@ public class DeleteCommand extends Command {
         }
 
         if (executionIncomplete) {
-            if (multipleExectutions(filteredTaskListIndices)) {
+            if (multipleExecutions(filteredTaskListIndices)) {
                 compiledExecutionMessage.insert(0, MESSAGE_INCOMPLETE_EXECUTION + '\n');
             }
             throw new CommandException(compiledExecutionMessage.toString());
@@ -88,7 +88,7 @@ public class DeleteCommand extends Command {
         this.taskToDelete = null;
     }
 
-    private boolean multipleExectutions(int[] filteredTaskListIndices) {
+    private boolean multipleExecutions(int[] filteredTaskListIndices) {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
