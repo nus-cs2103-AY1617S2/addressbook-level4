@@ -89,6 +89,11 @@ public class NotificationManager {
         return cal.getTime();
     }
 
+    /**
+     * Checks if the @param dateTime is due in more than two hours.
+     * @param dateTime: the object to check.
+     * @return true if it is due in more than two hours, otherwise, return false.
+     */
     private boolean isDueInMoreThanTwoHours(DateTime dateTime) {
         Date now = new Date();
         if (getTwoHoursBefore(dateTime).before(now)) {
@@ -152,8 +157,8 @@ public class NotificationManager {
     }
 
     /**
-     * Removes all existing scheduled notifications and reschedule them based on the new TaskList
-     * @param event: Contains the new TaskList modified due to an event
+     * Removes all existing scheduled notifications and reschedule them based on the new TaskList.
+     * @param event: Contains the new TaskList modified due to an event.
      */
     public void updateNotifications(TaskManagerChangedEvent event) {
         notificationTimer.cancel(); //remove old scheduled notifications
@@ -163,7 +168,7 @@ public class NotificationManager {
     }
 
     /**
-     * Initialized the scheduling of tasks
+     * Initialized the scheduling of tasks.
      */
     public void start() {
         initNotificationTimerWithTasks(logic.getFilteredTaskList());
@@ -177,7 +182,7 @@ public class NotificationManager {
     }
 
     /**
-     * Shows a notification from the javafx UI
+     * Shows a notification from the javafx UI.
      * @param task: The task that is being notified about.
      */
     /*private void showUpdateNotification(ReadOnlyTask task) {
