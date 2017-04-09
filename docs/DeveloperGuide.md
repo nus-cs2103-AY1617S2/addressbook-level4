@@ -25,7 +25,8 @@ By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbs
     2. [Branching and Workflow](#62-branching-and-workflow)
     3. [Commit Messages](#63-commit-messages)
 
-<br/>
+---
+
 * [Appendix A: Non Functional Requirements](#appendix-a--non-functional-requirements)
 * [Appendix B: Glossary](#appendix-b--glossary)
 * [Appendix C : Product Survey](#appendix-c--product-survey)
