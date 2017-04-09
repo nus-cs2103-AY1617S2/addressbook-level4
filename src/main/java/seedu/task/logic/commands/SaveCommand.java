@@ -7,10 +7,11 @@ import java.io.IOException;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
+import seedu.task.commons.util.FileUtil;
 import seedu.task.logic.commands.exceptions.CommandException;
 
 /**
- * Saves task data in the specified directory.
+ * Saves task data in the specified directory and updates the default save directory.
  */
 public class SaveCommand extends Command {
 
@@ -24,7 +25,8 @@ public class SaveCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Tasks saved in location: %1$s";
     public static final String MESSAGE_INVALID_SAVE_LOCATION = "This save location is invalid: %1$s";
-    public static final String MESSAGE_NULL_SAVE_LOCATION = "A save location must be specified.";
+    public static final String MESSAGE_NULL_SAVE_LOCATION = "A save location must be specified.\n" +
+            "Otherwise, saving occurs automatically in the current save location.";
     public static final String MESSAGE_DIRECTORY_SAVE_LOCATION = "A save location must also include the file name.";
     public static final String MESSAGE_SAVE_IO_EXCEPTION = "Failed to save file in location: %1$s";
 
@@ -46,15 +48,16 @@ public class SaveCommand extends Command {
         try {
             createSaveFile();
         } catch (IOException ioe) {
-            ioe.printStackTrace();
             throw new IllegalValueException(String.format(MESSAGE_INVALID_SAVE_LOCATION, fileAsString));
         }
 
     }
 
     private boolean createSaveFile() throws IOException {
-        boolean created = toSave.createNewFile();
-
+        boolean created = FileUtil.createFile(toSave);
+        if (!FileUtil.isFileExists(toSave) && !created) {
+            throw new IOException();
+        }
         return created;
     }
 
@@ -70,13 +73,16 @@ public class SaveCommand extends Command {
 
         System.out.println("Executing save command...");
         try {
+            //make sure the current save file is up to date.
+            //            storage.saveTaskList(model.getTaskList());
+
+            //write the data into new location
             storage.saveTaskListInNewLocation(model.getTaskList(), toSave);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_SAVE_IO_EXCEPTION, toSave.toString()));
-        }
-        config.setTaskManagerFilePath(toSave.toString());
-        try {
+
+            //update configuration to reflect new save location
+            config.setTaskManagerFilePath(toSave.toString());
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_SAVE_IO_EXCEPTION, toSave.toString()));
         }

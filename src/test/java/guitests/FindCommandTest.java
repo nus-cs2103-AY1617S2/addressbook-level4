@@ -2,12 +2,26 @@ package guitests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import seedu.task.TestApp;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.Messages;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.testutil.TestTask;
 
 public class FindCommandTest extends AddressBookGuiTest {
+
+    @Before
+    public void reset_config() throws IOException {
+        TestApp testApp = new TestApp();
+        Config config = testApp.initConfig(Config.DEFAULT_CONFIG_FILE);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        commandBox.runCommand("clear");
+    }
 
     @Test
     public void findNonEmptyList() {

@@ -4,15 +4,29 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 import static seedu.task.logic.commands.PrioritizeCommand.MESSAGE_PRIORITIZE_TASK_SUCCESS;
 
+import java.io.IOException;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.task.TestApp;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 
 public class PrioritizeCommandTest extends AddressBookGuiTest {
     TestTask[] currentList = td.getTypicalTasks();
+
+    @Before
+    public void reset_config() throws IOException {
+        TestApp testApp = new TestApp();
+        Config config = testApp.initConfig(Config.DEFAULT_CONFIG_FILE);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        commandBox.runCommand("clear");
+    }
 
     @Test
     public void prioritizeSuccess() throws IllegalValueException {
