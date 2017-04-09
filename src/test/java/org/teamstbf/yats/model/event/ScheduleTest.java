@@ -26,7 +26,7 @@ public class ScheduleTest {
 		assertFalse(Schedule.isValidSchedule("12:00PM 29/02/2017")); // Not leap year
 
 		// valid schedule
-		assertTrue(Schedule.isValidSchedule("12:00PM 29/02/2016"));
+		assertTrue(Schedule.isValidSchedule("12:00PM 29/02/2016")); // Leap Year
 		assertTrue(Schedule.isValidSchedule("12:00PM 05/05/2017"));
 		assertTrue(Schedule.isValidSchedule("12:00PM 05/05/2017"));
 		assertTrue(Schedule.isValidSchedule("12:59AM 05/05/2017"));
