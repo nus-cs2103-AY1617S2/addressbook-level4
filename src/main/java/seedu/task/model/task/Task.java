@@ -173,33 +173,21 @@ public class Task implements ReadOnlyTask {
         if ((otherTask.getTaskDate() == null && this.getTaskDate() != null)
                 || (otherTask.getTaskDate() != null && this.getTaskDate() == null)
                 || (otherTask.getTaskDate() != this.getTaskDate())
-<<<<<<< HEAD
                         && !(otherTask.getTaskDate().compareTo(this.getTaskDate()) == 0)) {
-=======
-                && !(otherTask.getTaskDate().compareTo(this.getTaskDate()) == 0)) {
->>>>>>> e54bcb29be4d73642b1a47616a67f7b2c2fb0c77
             System.out.println("dates arent equal");
             return false;
         }
         if ((otherTask.getTaskStartTime() == null && this.getTaskStartTime() != null)
                 || (otherTask.getTaskStartTime() != null && this.getTaskStartTime() == null)
                 || (otherTask.getTaskDate() != this.getTaskDate())
-<<<<<<< HEAD
                         && !(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
-=======
-                && !(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
->>>>>>> e54bcb29be4d73642b1a47616a67f7b2c2fb0c77
             System.out.println("start times arent equal");
             return false;
         }
         if ((otherTask.getTaskEndTime() == null && this.getTaskEndTime() != null)
                 || (otherTask.getTaskEndTime() != null && this.getTaskEndTime() == null)
                 || (otherTask.getTaskEndTime() != this.getTaskEndTime())
-<<<<<<< HEAD
                         && !(otherTask.getTaskEndTime().compareTo(this.getTaskEndTime()) == 0)) {
-=======
-                && !(otherTask.getTaskEndTime().compareTo(this.getTaskEndTime()) == 0)) {
->>>>>>> e54bcb29be4d73642b1a47616a67f7b2c2fb0c77
             System.out.println("end times arent equal");
             return false;
         }
