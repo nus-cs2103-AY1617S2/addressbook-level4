@@ -12,8 +12,8 @@ public class SyncCommand extends Command {
     public static final String COMMAND_WORD = "sync";
 
     public static final String MESSAGE_USAGE = "sync <on/off> to switch sync on/off ";
-    public static final String MESSAGE_SYNC_ON_SUCCESS = "Sync is switch on";
-    public static final String MESSAGE_SYNC_OFF_SUCCESS = "Sync is switch off";
+    public static final String MESSAGE_SYNC_ON_SUCCESS = "Sync is switched on";
+    public static final String MESSAGE_SYNC_OFF_SUCCESS = "Sync is switched off";
     public static final String SYNC_ON_ARGUMENT = "on";
     public static final String SYNC_OFF_ARGUMENT = "off";
 
