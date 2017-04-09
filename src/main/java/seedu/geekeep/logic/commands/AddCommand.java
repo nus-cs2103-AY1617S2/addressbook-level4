@@ -59,14 +59,9 @@ public class AddCommand extends UndoableCommand {
             desc = new Description(description.get());
         }
 
-        this.toAdd = new Task(
-                new Title(title),
-                start,
-                end,
-                desc,
-                new UniqueTagList(tagSet),
-                false
-        );
+        this.toAdd = new Task(new Title(title), start,
+                              end, desc,
+                              new UniqueTagList(tagSet), false);
     }
 
     @Override

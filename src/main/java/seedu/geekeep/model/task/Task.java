@@ -86,6 +86,32 @@ public class Task implements ReadOnlyTask  {
         return title;
     }
 
+    //@@author A0139438W
+    @Override
+    public String getTaskDisplayedDateString() {
+        String displayedDate = "";
+        if (this.getEndDateTime() != null && this.getStartDateTime() != null) {
+            displayedDate = "From: " + this.getStartDateTime() + " until " + this.getEndDateTime();
+        } else if (this.getEndDateTime() != null && this.getStartDateTime() == null) {
+            displayedDate = "By: " + this.getEndDateTime().value;
+        } else {
+            displayedDate = "-";
+        }
+        return displayedDate;
+    }
+
+    @Override
+    public String getTaskDisplayedDescriptionString() {
+        String displayedLocation = "";
+        if (this.getDescriptoin() == null || this.getDescriptoin().equals("")) {
+            displayedLocation = "Details: -";
+        } else {
+            displayedLocation = "Details: " + this.getDescriptoin().value;
+        }
+        return displayedLocation;
+    }
+    //@@author
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -110,13 +136,6 @@ public class Task implements ReadOnlyTask  {
     }
 
     //@@author A0139438W
-    @Override
-    /**
-     * Get the task's DateTime that is used to compare date time.
-     * For events, the startDateTime is used for comparison.
-     * For deadlines, the endDateTime is used for comparison.
-     * @return DateTime object
-     */
     public DateTime getReferenceDateTime() {
         if (isEvent()) {
             return this.startDateTime;
@@ -129,33 +148,17 @@ public class Task implements ReadOnlyTask  {
     }
 
     @Override
-    /**
-     * Compares this task's type priority with another.
-     * @param otherTask
-     * @return a comparator value, negative if less, positive if greater
-     */
     public int comparePriority(ReadOnlyTask otherTask) {
         return this.getPriority() - otherTask.getPriority();
     }
 
     @Override
-    /**
-     * Compares this task's reference datetime with another in chronological order.
-     * @param otherTask
-     * @return a comparator value, negative if less, positive if greater
-     */
     public int compareDate(ReadOnlyTask otherTask) {
         assert !isFloatingTask() && !otherTask.isFloatingTask();
         return this.getReferenceDateTime().dateTime.compareTo(otherTask.getReferenceDateTime().dateTime);
     }
 
     @Override
-    /**
-     * Compares this task's type priority and reference datetime with another.
-     * Compares this task's title with another in lexicographic order if both are floating tasks.
-     * @param otherTask
-     * @return a comparator value, negative if less, positive if greater
-     */
     public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask) {
         int comparePriorityResult = this.comparePriority(otherTask);
         if (comparePriorityResult != 0) {
@@ -168,14 +171,10 @@ public class Task implements ReadOnlyTask  {
     }
 
     @Override
-    /**
-     * Compares this task's title with another in lexicographic order.
-     * @param otherTask
-     * @return a comparator value, negative if less, positive if greater
-     */
     public int compareTitle(ReadOnlyTask otherTask) {
         return this.getTitle().toString().compareTo(otherTask.getTitle().toString());
     }
+    //@@author
 
     //@@author A0121658E
     @Override

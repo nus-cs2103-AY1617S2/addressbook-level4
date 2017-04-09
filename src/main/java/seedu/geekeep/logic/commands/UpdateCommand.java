@@ -87,19 +87,24 @@ public class UpdateCommand extends UndoableCommand {
         assert taskToUpdate != null;
 
         Title updatedTitle = updateTaskDescriptor.getTitle().orElseGet(taskToUpdate::getTitle);
+
         DateTime updatedEndDateTime = null;
         if (updateTaskDescriptor.getEndDateTime() != null) {
             updatedEndDateTime = updateTaskDescriptor.getEndDateTime().orElseGet(taskToUpdate::getEndDateTime);
         }
+
         DateTime updatedStartDateTime = null;
         if (updateTaskDescriptor.getStartDateTime() != null) {
             updatedStartDateTime = updateTaskDescriptor.getStartDateTime().orElseGet(taskToUpdate::getStartDateTime);
         }
+
         Description updatedDescription = updateTaskDescriptor.getDescription().orElseGet(taskToUpdate::getDescriptoin);
+
         UniqueTagList updatedTags = updateTaskDescriptor.getTags().orElseGet(taskToUpdate::getTags);
 
-        return new Task(updatedTitle, updatedStartDateTime, updatedEndDateTime, updatedDescription, updatedTags,
-                taskToUpdate.isDone());
+        return new Task(updatedTitle, updatedStartDateTime,
+                        updatedEndDateTime, updatedDescription,
+                        updatedTags, taskToUpdate.isDone());
     }
 
     /**
