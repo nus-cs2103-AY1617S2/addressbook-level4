@@ -366,7 +366,7 @@ Things To Note:
 ```
 
 ### 3.11. Saving the Data to Another Folder : `save`
-Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
+Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command. <br>
 
 Format:<br>
 `save <FILE_PATH>`<br>
