@@ -11,6 +11,7 @@ import seedu.ezdo.model.todo.UniqueTaskList;
  */
 public class TypicalTestTasks {
 
+    private static final String MESSAGE_NOT_POSSIBLE = "not possible";
     public TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida, jack, kappa, leroy, megan;
     public TestTask alice2, benson2, carl2, daniel2, elle2, fiona2, george2;
 
@@ -140,7 +141,7 @@ public class TypicalTestTasks {
 
         } catch (IllegalValueException e) {
             e.printStackTrace();
-            assert false : "not possible";
+            assert false : MESSAGE_NOT_POSSIBLE;
         }
     }
 
@@ -149,7 +150,7 @@ public class TypicalTestTasks {
             try {
                 ez.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
-                assert false : "not possible";
+                assert false : MESSAGE_NOT_POSSIBLE;
             }
         }
     }
@@ -159,7 +160,7 @@ public class TypicalTestTasks {
             try {
                 ez.addTask(new Task(task));
             } catch (UniqueTaskList.DuplicateTaskException e) {
-                assert false : "not possible";
+                assert false : MESSAGE_NOT_POSSIBLE;
             }
         }
     }
