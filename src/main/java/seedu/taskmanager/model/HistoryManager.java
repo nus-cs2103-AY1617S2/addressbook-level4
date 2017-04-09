@@ -21,9 +21,13 @@ import seedu.taskmanager.storage.StorageManager;
  */
 public class HistoryManager extends ComponentManager {
 
-    private Model model;
     private static HistoryManager instance = null;
+
+    private static final int OFFSET_ONE_INDEX = -1;
+    private static final int INVALID_INDEX = -1;
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+
+    private Model model;
     private ArrayList<HistoryNode> historyList;
     private ArrayList<HistoryNode> futureList;
     private ArrayList<String> historyCommands;
@@ -48,14 +52,14 @@ public class HistoryManager extends ComponentManager {
     public void init(Model model) {
         this.model = model;
         TaskManager taskManager = new TaskManager(model.getTaskManager());
-        historyList.add(new HistoryNode(taskManager, -1, -1));
+        historyList.add(new HistoryNode(taskManager, INVALID_INDEX, INVALID_INDEX));
     }
 
     @Subscribe
     public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
         TaskManager taskManager = new TaskManager(event.data);
         String commandText = new String(event.commandText);
-        historyList.add(new HistoryNode(taskManager, -1, parseIndex(commandText)));
+        historyList.add(new HistoryNode(taskManager, INVALID_INDEX, parseIndex(commandText)));
 
         if (!commandText.equals(RedoCommand.COMMAND_WORD) && !commandText.equals(UndoCommand.COMMAND_WORD)) {
             historyCommands.add(commandText);
@@ -135,11 +139,11 @@ public class HistoryManager extends ComponentManager {
         String[] splitted = args.split(" ");
         try {
             if (splitted[0].equals(AddCommand.COMMAND_WORD)) {
-                return -1;
+                return INVALID_INDEX;
             }
-            return Integer.parseInt(splitted[1]) - 1;
+            return Integer.parseInt(splitted[1]) + OFFSET_ONE_INDEX;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            return -1;
+            return INVALID_INDEX;
         }
     }
 }
