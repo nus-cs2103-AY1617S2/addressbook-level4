@@ -128,7 +128,7 @@ Display is the command to enable the Google Calendar function for JOBS.
 Format : `display`
 1. Command will redirect user to an internet browser (Google Chrome, Safari, etc.) to request for authorization for Google Calendar API, as shown below. Ensure that during authorization, user is logged into their intended Google account.
 
-<img src="images/Authorize_JOBS.png" width="600"><br>
+<img src="images/Authorize_JOBS.png" width="400"><br>
 
 ### Path of taskbook: `path`
 Path is the command to change the saving directory of the taskbook and automatically create the .xml file.
