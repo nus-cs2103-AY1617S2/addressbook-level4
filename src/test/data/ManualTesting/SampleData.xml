@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <taskName>Buy apple juice</taskName>
+        <taskDate>010117</taskDate>
+        <taskStartTime>0800</taskStartTime>
+        <taskEndTime>1000</taskEndTime>
+        <taskDescription>Look out for lucky draws.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy blueberry juice</taskName>
+        <taskDate>020117</taskDate>
+        <taskStartTime>0900</taskStartTime>
+        <taskEndTime>1001</taskEndTime>
+        <taskDescription>Look out for lucky dips.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy coke</taskName>
+        <taskDate>030117</taskDate>
+        <taskStartTime>0930</taskStartTime>
+        <taskEndTime>1002</taskEndTime>
+        <taskDescription>Look out for traffic.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy isotonic drinks</taskName>
+        <taskDate>040117</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskEndTime>1100</taskEndTime>
+        <taskDescription>Look out for promotions.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy orange juice</taskName>
+        <taskDate>050117</taskDate>
+        <taskStartTime>1010</taskStartTime>
+        <taskEndTime>1100</taskEndTime>
+        <taskDescription>Look out for sweets along the way.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Pick Jasmine from work</taskName>
+        <taskDate>050117</taskDate>
+        <taskStartTime>1800</taskStartTime>
+        <taskEndTime>1830</taskEndTime>
+        <taskDescription>Take note of traffic jams.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Pick James from school</taskName>
+        <taskDate>050117</taskDate>
+        <taskStartTime>1830</taskStartTime>
+        <taskEndTime>1900</taskEndTime>
+        <taskDescription>Take note of traffic jams and kids on the road.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Pick up takeaways from hawker centre</taskName>
+        <taskDate>050117</taskDate>
+        <taskStartTime>2000</taskStartTime>
+        <taskEndTime>2020</taskEndTime>
+        <taskDescription>Call in advance for food order.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy toiletries</taskName>
+        <taskDate>090117</taskDate>
+        <taskStartTime>1830</taskStartTime>
+        <taskEndTime>1900</taskEndTime>
+        <taskDescription>Check for ongoing promotions.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Send dad home from airport</taskName>
+        <taskDate>100117</taskDate>
+        <taskStartTime>2230</taskStartTime>
+        <taskEndTime>2350</taskEndTime>
+        <taskDescription>Take note of traffic jams and kids on the road.</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Jog around the block</taskName>
+        <taskDate>080816</taskDate>
+        <taskStartTime>0600</taskStartTime>
+        <taskEndTime>0700</taskEndTime>
+        <taskDescription>Drink Water!</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Hang out with Joe</taskName>
+        <taskDate>6/7/17</taskDate>
+        <taskStartTime>1300</taskStartTime>
+        <taskEndTime>1600</taskEndTime>
+        <taskDescription>Say hi to his mom</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to Jerrys</taskName>
+        <taskDate>6/8/17</taskDate>
+        <taskStartTime>1500</taskStartTime>
+        <taskEndTime>1900</taskEndTime>
+        <taskDescription>Pick up laundry</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Eat Leftovers</taskName>
+        <taskDate>10/10/17</taskDate>
+        <taskStartTime>1900</taskStartTime>
+        <taskEndTime>1930</taskEndTime>
+        <taskDescription>Eat it all</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Tie Shoes</taskName>
+        <taskDate>6/7/17 - 6/8/17</taskDate>
+        <taskStartTime>1300</taskStartTime>
+        <taskEndTime>1600</taskEndTime>
+        <taskDescription>Tie them quick</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Lounge Around the park</taskName>
+        <taskDate>6/7/17</taskDate>
+        <taskStartTime>8:00</taskStartTime>
+        <taskEndTime>9:00</taskEndTime>
+        <taskDescription>Find a bird</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Ask Sally Out on Date</taskName>
+        <taskDate>101016</taskDate>
+        <taskStartTime>17:00</taskStartTime>
+        <taskDescription>eat</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Dont be lazy</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Forget about your worries</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to class</taskName>
+        <taskDate>010117</taskDate>
+        <taskStartTime>9:00</taskStartTime>
+        <taskEndTime>9:45</taskEndTime>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Recursion</taskName>
+        <taskStartTime>0000</taskStartTime>
+        <taskEndTime>000</taskEndTime>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Study for Finals</taskName>
+        <taskDate>150517 - 210517</taskDate>
+        <taskStartTime>0800</taskStartTime>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to Ralphs</taskName>
+        <taskDescription>get fruit</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Find lost identity</taskName>
+        <taskDate>121212</taskDate>
+        <taskStartTime>1112</taskStartTime>
+        <taskEndTime>1212</taskEndTime>
+        <taskDescription>Who dun it?</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Dig up treasure map to Atlantis</taskName>
+        <taskStartTime>0922</taskStartTime>
+        <taskEndTime>1010</taskEndTime>
+        <taskDescription>Arrrrrr</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Time to get a watch</taskName>
+        <taskDate>130418</taskDate>
+        <taskStartTime>0800</taskStartTime>
+        <taskEndTime>1200</taskEndTime>
+        <taskDescription>Infinity</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Create Will to Children</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Make Test Cases</taskName>
+        <taskDescription>DO IT NOW</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Watch Walking Dead</taskName>
+        <taskDate>010117</taskDate>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Watch Game of Thrones</taskName>
+        <taskStartTime>0900</taskStartTime>
+        <taskDescription>Valar Morgulis</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Watch Curb Your Enthusiasm</taskName>
+        <taskDate>101010</taskDate>
+        <taskStartTime>1011</taskStartTime>
+        <taskEndTime>1030</taskEndTime>
+        <taskDescription>Pretty good</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Tell wife you love her</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Tell husband you love him</taskName>
+        <taskDescription>every day</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Cancel Netflix Sub</taskName>
+        <taskStartTime>1200</taskStartTime>
+        <taskEndTime>13:00</taskEndTime>
+        <taskDescription>I hate money</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to Maine</taskName>
+        <taskDate>111111</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskEndTime>2000</taskEndTime>
+        <taskDescription>Lobstah!</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Vote for president</taskName>
+        <taskDate>090916</taskDate>
+        <taskDescription>Go canidate</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Beleive in yourself</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Apply for jobs</taskName>
+        <taskDate>080814</taskDate>
+        <taskStartTime>1313</taskStartTime>
+        <taskEndTime>1616</taskEndTime>
+        <taskDescription>Money money money</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Practice Trumpet for recital</taskName>
+        <taskDate>101017</taskDate>
+        <taskStartTime>0700</taskStartTime>
+        <taskEndTime>0900</taskEndTime>
+        <taskDescription>Long tones</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Remeber to thank mom</taskName>
+        <taskDate>010116 010117</taskDate>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to the dentist</taskName>
+        <taskDate>010718</taskDate>
+        <taskStartTime>10:00</taskStartTime>
+        <taskEndTime>12:00</taskEndTime>
+        <taskDescription>Ask for floss</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Make doctors appt</taskName>
+        <taskDate>101015 101116</taskDate>
+        <taskStartTime>0900</taskStartTime>
+        <taskEndTime>1200</taskEndTime>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Buy bread at Market</taskName>
+        <taskDate>121112</taskDate>
+        <taskStartTime>1500</taskStartTime>
+        <taskDescription>Get wheat</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Return library books</taskName>
+        <taskDate>030317</taskDate>
+        <taskDescription>Get some renewed</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Finish Programming Robot</taskName>
+        <taskDate>050517</taskDate>
+        <taskStartTime>1000</taskStartTime>
+        <taskEndTime>2000</taskEndTime>
+        <taskDescription>Fix bugs</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Go to the Gym</taskName>
+        <taskDate>060717 090917</taskDate>
+        <taskStartTime>0600</taskStartTime>
+        <taskEndTime>0700</taskEndTime>
+        <taskDescription>Work those shoulders!</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Pickup packages from the mail</taskName>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Fly to Spain</taskName>
+        <taskDate>071215</taskDate>
+        <taskStartTime>0900</taskStartTime>
+        <taskEndTime>2200</taskEndTime>
+        <taskDescription>Bueno!</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Make lunch for kids</taskName>
+        <taskDate>010517 080517</taskDate>
+        <taskStartTime>0700</taskStartTime>
+        <taskEndTime>07:30</taskEndTime>
+        <taskDescription>Give them kisses</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+    <tasks>
+        <taskName>Read The Great Gatsby</taskName>
+        <taskDate>101017 201017</taskDate>
+        <taskStartTime>1300</taskStartTime>
+        <taskEndTime>1500</taskEndTime>
+        <taskDescription>The green light</taskDescription>
+        <taskStatus>Ongoing</taskStatus>
+    </tasks>
+</taskmanager>
