@@ -46,21 +46,21 @@ public interface TaskListStorage {
     //@@author A0163559U
     /**
      * Copies the current save state of the Task Manager into a new location
-     * @param taskList
-     * @param newFile
-     * @throws IOException
+     * @param taskList is the state to be copied
+     * @param newFile is the new save location
+     * @throws IOException if file operations fail
      */
     void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException;
 
     /**
      * Loads saved state of Task Manager from specified location
-     * @param taskList
-     * @param loadFile
-     * @return
-     * @throws DataConversionException
-     * @throws FileNotFoundException
+     * @param loadFile is the file to load state from
+     * @return new loaded task list, if successful
+     * @throws DataConversionException if data conversion fails
+     * @throws FileNotFoundException if file operation fails
      */
-    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(File loadFile)
             throws FileNotFoundException, DataConversionException;
     //@@author
+
 }
