@@ -23,39 +23,32 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
         // delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
-        /*
-         * commandBox.runCommand("clear"); String toAdd; for (TestTask t :
-         * currentList) { toAdd = "add "; toAdd += t.getTaskName().fullTaskName;
-         * if (t.getTaskDate() != null) { toAdd += " d/" +
-         * t.getTaskDate().toString(); } if (t.getTaskStartTime() != null) {
-         * toAdd += " s/" + t.getTaskStartTime().toString(); } if
-         * (t.getTaskEndTime() != null) { toAdd += " e/" +
-         * t.getTaskEndTime().toString(); } if (t.getTaskDescription() != null)
-         * { toAdd += " m/" + t.getTaskDescription(); }
-         * commandBox.runCommand(toAdd); }
-         */
         int targetIndex = 1;
-        //assertDeleteSuccess(targetIndex, currentList);
+        commandBox.runCommand("clear");
+        for (int i = 0; i < currentList.length; i++)
+            commandBox.runCommand(currentList[i].getAddCommand());
+
+        assertDeleteSuccess(targetIndex, currentList);
 
         // delete the last in the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length;
-        //assertDeleteSuccess(targetIndex, currentList);
+        assertDeleteSuccess(targetIndex, currentList);
 
         // delete from the middle of the list
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
-        //assertDeleteSuccess(targetIndex, currentList);
+        assertDeleteSuccess(targetIndex, currentList);
 
         // invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        //assertResultMessage("The task index provided is invalid");
+        assertResultMessage("The task index provided is invalid");
 
     }
 
     /**
-     * Runs the delete command to delete the task at specified index and
-     * confirms the result is correct.
+     * Runs the delete command to delete the task at specified index and confirms the result is
+     * correct.
      *
      * @param targetIndexOneIndexed
      *            e.g. index 1 to delete the first task in the list,
@@ -63,21 +56,18 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
      *            A copy of the current list of tasks (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1]; // -1 as
-        // array
-        // uses
-        // zero
-        // indexing
-        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
+        TestTask taskToDelete = currentList[targetIndexOneIndexed - 1];
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList,
+                targetIndexOneIndexed);
 
         commandBox.runCommand("delete " + targetIndexOneIndexed);
 
-        // confirm the list now contains all previous persons except the deleted
-        // person
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        // confirm the list now contains all previous persons except the deleted task
+        // assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         // confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS,
+                taskToDelete.getTaskName().fullTaskName + '\n'));
     }
 
 }

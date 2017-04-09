@@ -1,5 +1,12 @@
 package guitests.guihandles;
 
+import static org.junit.Assert.assertTrue;
+
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+//import java.util.stream.Stream;
 
 import guitests.GuiRobot;
 import javafx.geometry.Point2D;
@@ -7,16 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.task.TestApp;
-import seedu.task.model.task.Task;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Task;
 import seedu.task.testutil.TestUtil;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Provides a handle for the panel containing the person list.
@@ -40,7 +40,28 @@ public class TaskListPanelHandle extends GuiHandle {
     public ListView<ReadOnlyTask> getListView() {
         return (ListView<ReadOnlyTask>) getNode(TASK_LIST_VIEW_ID);
     }
-
+    /**
+     * Returns true if the list is showing the person details correctly and in correct order.
+     * @param startPosition The starting position of the sub list.
+     * @param tasks A list of person in the correct order.
+     */
+    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
+        List list = getListView().getItems();
+        if (tasks.length + startPosition != getListView().getItems().size()) {
+            throw new IllegalArgumentException("List size mismatched\n" +
+                    "Expected " + (getListView().getItems().size() - 1) + " persons");
+        }
+        assertTrue(this.containsInOrder(startPosition, tasks));
+        for (int i = 0; i < tasks.length; i++) {
+            final int scrollTo = i + startPosition;
+            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+            guiRobot.sleep(200);
+            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * Returns true if the list is showing the person details correctly and in correct order.
      * @param persons A list of person in the correct order.
@@ -64,43 +85,20 @@ public class TaskListPanelHandle extends GuiHandle {
         List<ReadOnlyTask> personsInList = getListView().getItems();
 
         // Return false if the list in panel is too short to contain the given list
-        if (startPosition + persons.length > personsInList.size()){
+        if (startPosition + persons.length > personsInList.size()) {
             return false;
         }
 
         // Return false if any of the persons doesn't match
         for (int i = 0; i < persons.length; i++) {
-            if (!personsInList.get(startPosition + i).getTaskName().fullTaskName.equals(persons[i].getTaskName().fullTaskName)) {
+            if (!personsInList.get(startPosition + i).getTaskName().fullTaskName
+                    .equals(persons[i].getTaskName().fullTaskName)) {
                 return false;
             }
         }
 
         return true;
     }
-
-    /**
-     * Returns true if the list is showing the person details correctly and in correct order.
-     * @param startPosition The starting position of the sub list.
-     * @param tasks A list of person in the correct order.
-     */
-    public boolean isListMatching(int startPosition, ReadOnlyTask... tasks) throws IllegalArgumentException {
-        List list = getListView().getItems();
-        if (tasks.length + startPosition != getListView().getItems().size()) {
-            throw new IllegalArgumentException("List size mismatched\n" +
-                    "Expected " + (getListView().getItems().size() - 1) + " persons");
-        }
-        assertTrue(this.containsInOrder(startPosition, tasks));
-        for (int i = 0; i < tasks.length; i++) {
-            final int scrollTo = i + startPosition;
-            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
-            guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndTask(getTaskCardHandle(startPosition + i), tasks[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     public TaskCardHandle navigateToTask(String name) {
         System.out.println(name);

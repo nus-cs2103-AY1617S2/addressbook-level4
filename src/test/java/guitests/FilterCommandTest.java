@@ -7,8 +7,7 @@ import org.junit.Test;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.TaskDate;
 
-//@@author A0163845X
-
+// @@author A0163845X
 public class FilterCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -21,14 +20,14 @@ public class FilterCommandTest extends TaskManagerGuiTest {
         }
         commandBox.runCommand("clear");
         commandBox.runCommand("showcase 75");
-        //filter name impossible
+        // filter name impossible
         commandBox.runCommand("filter name impossibleName");
         assertTrue(0 == taskListPanel.getNumberOfTasks());
 
         commandBox.runCommand("list");
         commandBox.runCommand("filter name ore");
         for (int i = 0; i < taskListPanel.getNumberOfTasks(); i++) {
-            //System.out.println(taskListPanel.getTask(i).getTaskName().fullTaskName);
+            // System.out.println(taskListPanel.getTask(i).getTaskName().fullTaskName);
             assertTrue(taskListPanel.getTask(i).getTaskName().fullTaskName.equals("Go to store"));
         }
         commandBox.runCommand("list");
@@ -52,5 +51,6 @@ public class FilterCommandTest extends TaskManagerGuiTest {
         for (int i = 0; i < taskListPanel.getNumberOfTasks(); i++) {
             assertTrue(taskListPanel.getTask(i).getTaskName().fullTaskName.equals("Go to store"));
         }
+        // @@author
     }
 }
