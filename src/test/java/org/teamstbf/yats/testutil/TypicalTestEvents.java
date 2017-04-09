@@ -35,7 +35,7 @@ public class TypicalTestEvents {
 					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
 					.withLocation("Klei Entertainment").withTags("ONN").withIsDone("No").withRecurrence(new Recurrence()).build();
 			scheduleChecker = new EventBuilder().withTitle("forScheduling").withDescription("nnn")
-					.withStartTime("11:59PM 08/04/2017").withEndTime("12:00PM 08/04/2023").withDeadline("")
+					.withStartTime("11:58PM 08/04/2017").withEndTime("12:00PM 08/04/2023").withDeadline("")
 					.withLocation("nnn").withIsDone("No").withRecurrence(new Recurrence()).build();
 			
 			// Manually added
@@ -75,6 +75,6 @@ public class TypicalTestEvents {
 	}
 
 	public TestEvent[] getTypicalTasks() {
-		return new TestEvent[] {abdicate, boop, oxygen, cower, scheduleChecker};
+		return new TestEvent[] {abdicate, boop, oxygen, cower, duck, scheduleChecker};
 	}
 }
