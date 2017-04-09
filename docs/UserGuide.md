@@ -1,6 +1,6 @@
 # Opus - User Guide
 
-By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team W15-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Apr 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
@@ -95,7 +95,7 @@ Format: `sort KEYWORD`
 > Keywords
 > * `start` : Sorts the list according to start dates, with the earlier start dates at the top.
 > * `end` : Sorts the list according to end dates, with the earlier end dates at the top.
-> * `priority` : Sorts the list according to priorities, with the highest priorities at the top
+> * `priority` : Sorts the list according to priorities, with the highest priorities at the top.
 > * `all` : Sorts the list firstly according to status, then start date, then end date, then priority.
 
 Examples:
@@ -126,7 +126,7 @@ Examples:
 
 ### 2.6. Mark task : `mark`
 
-Marks a task as complete or incomplete. This command generally toggles the status of the task<br>
+Marks a task as complete or incomplete. This command generally toggles the status of the task.<br>
 Format: `mark [INDEX]`
 
 > * Marks the task at the specified `INDEX` as complete or incomplete.
@@ -147,7 +147,7 @@ Format: `schedule INDEX [STARTTIME] to ENDTIME`
 > * Both `STARTTIME` and `ENDTIME` have to be in the US format of `mm/dd/yyyy hh:mm` or flexible expressions such as `next friday 11pm` or `tomorrow noon`.
     The index refers to the index number shown in the last task listing.<br>
     The index **must be a positive integer** 1, 2, 3, ...
-> * If only one datetime is specified, opus will automatically schedule for `ENDTIME`
+> * If only one datetime is specified, opus will automatically schedule for `ENDTIME`.
 > * If only the end time is specified, the prefix `to` can be ignored.
 
 Examples:
@@ -194,9 +194,9 @@ Format: `redo`
 Displays a list of tasks based on keywords keywords and/or attributes such as status, start time, end time and priority.<br>
 Format: `find [KEYWORD]... [s/STATUS] [b/STARTTIME] [e/ENDTIME] [p/PRIORITY]`
 
-> * Displays the list of tasks matching the search parameters
-> * `find` without parameters will display the help section for the command
-> * `find` requires minimal of one parameter
+> * Displays the list of tasks matching the search parameters.
+> * `find` without parameters will display the help section for the command.
+> * `find` requires minimal of one parameter.
 > * `KEYWORD` can be a text segment from either name, note or tags.
 > * Specifying `STARTTIME` will show the tasks before the specified time and specifying `ENDTIME` will perform the same behaviour as the `STARTTIME`.
 
@@ -207,8 +207,26 @@ Examples:
 
 * `find exam test p/hi e/03/04/2017`<br>
   Find highly prioritized tasks that contain either `exam` or `test` in either name, note or tags and due before `March 4, 2017`.
+  
+### 2.14. Sync data to Google Task : `sync`
 
-### 2.14. Saving and loading data
+Enable or disable automatic data synchronisation to Google Task.<br>
+Format: `sync OPTION`
+> Use `on` or `off` as parameters for `OPTION` to enable or disable data synchronisation'.
+
+With Release v0.5, Opus comes with a one way data synchronisation feature to Google Task. Upon activating `sync`, Opus will prompt you for access to your Google account by opening an authorization page in your default browser.  Accept the authorization request to allow Opus to start synchronising data to Google Task. Synchronisation is done automatically in the background while you manage tasks in Opus. 
+
+Currently, `sync` supports floating tasks and tasks with an `ENDTIME` only. Future support for events will be made available in subsequent release.
+
+Examples:
+
+* `sync on`<br>
+  Enable data synchronisation to Google Task.
+  
+* `sync off`<br>
+  Disable data synchronisation to Google Task.
+
+### 2.15. Saving and loading data
 
 Opus automatically saves all data that you have created. Every single change that you have made is tracked by Opus and you do not have to do anything to enable auto-saving. Your data will be loaded upon launching Opus, so you do not have to go through the saving-and-loading loop as with a normal text document.
 
@@ -216,7 +234,7 @@ By default, your user data is saved as `opus.xml` in the `/data` directory where
 
 Should you wish to, you can specify the directory of the saved data using the following command below.
 
-### 2.15. Specify data file directory : `save`
+### 2.16. Specify data file directory : `save`
 
 Saves all user data into a file in the specifed directory.
 Format: `save DIRECTORY`
@@ -226,7 +244,7 @@ Example:
 * `save C:/Users/Documents`
   Saves data into the specified directory.
 
-### 2.16. Autocomplete
+### 2.17. Autocomplete
 
 Autocomplete the user's command on the CLI. This applies to the following commands:
 
@@ -251,7 +269,7 @@ Autocomplete the user's command on the CLI. This applies to the following comman
 User enters `f` and presses `TAB`, `find` command will appear in the input box.
 ```
 
-### 2.17. Exit : `exit`
+### 2.18. Exit : `exit`
 
 Closes Opus.
 
@@ -259,7 +277,7 @@ Closes Opus.
 
 ## 3. FAQ
 
-**Q**: Where do I download the latest under development version of Opus?
+**Q**: Where do I download the latest under development version of Opus?<br>
 **A**: You may download the latest unstable release of our application [here](../../../releases), but we strongly recommend using the stable build for your own sanity.
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -303,5 +321,8 @@ Closes Opus.
 
 * **Sort** : `sort KEYWORD` <br>
   e.g. `sort priority`
+  
+* **Sync** : `sync OPTION` <br>
+  e.g. `sync on` or `sync off`
 
 * **Undo** : `undo` <br>
