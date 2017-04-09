@@ -17,7 +17,7 @@ public class SetStorageCommand extends Command {
     public static final String COMMAND_WORD = "setstorage";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Set the storage location for the data of this application.\n"
+            + ": Moves the data storage file of this application to another location.\n"
             + "Parameters: Storage file path"
             + "Example: " + COMMAND_WORD + " /Users/Josh/Documents/tasks/";
     public static final String MESSAGE_INVALID_DIRECTORY = "%1$s is an invalid directory";

@@ -14,6 +14,7 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Version;
+import seedu.task.commons.events.storage.TaskListStoragePathChangedEvent;
 import seedu.task.commons.events.ui.ExitAppRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
@@ -209,6 +210,12 @@ public class MainApp extends Application {
     public void setTaskListFilePath(String path) {
         config.setAddressBookFilePath(path);
         storage.setTaskListStorageFilePath(path);
+    }
+
+    @Subscribe
+    public void handleTaskListStoragePathChangedEvent(TaskListStoragePathChangedEvent event) {
+        model.resetData(initModelManager(storage, userPrefs).getTaskList());
+        model.updateFilteredListToShowAll();
     }
     //@@author
 }

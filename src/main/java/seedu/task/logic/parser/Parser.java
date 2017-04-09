@@ -16,6 +16,7 @@ import seedu.task.logic.commands.FindCommand;
 import seedu.task.logic.commands.HelpCommand;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.logic.commands.LoadStorageCommand;
 import seedu.task.logic.commands.RedoCommand;
 import seedu.task.logic.commands.SetStorageCommand;
 import seedu.task.logic.commands.UncompleteCommand;
@@ -81,7 +82,10 @@ public class Parser {
             return new RedoCommand();
 
         case SetStorageCommand.COMMAND_WORD:
-            return new SetStorageCommandParser().parse(arguments);
+            return new StorageCommandParser().parse(arguments, false);
+
+        case LoadStorageCommand.COMMAND_WORD:
+            return new StorageCommandParser().parse(arguments, true);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
