@@ -90,6 +90,7 @@ public class Priority implements Comparable<Priority> {
         return value.hashCode();
     }
 
+    //@@author
     @Override
     public int compareTo(Priority p) {
         if (!hasPriority()) {
