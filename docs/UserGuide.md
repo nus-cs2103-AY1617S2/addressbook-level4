@@ -68,6 +68,7 @@ There are 3 forms of task that ProcrastiNomore supports:
 > [Events](#321-events) <br>
 >> [Same Day Events](#3211-same-day-events) <br>
 >> [Multiple Days Events](#3212-Multiple-days-events) <br>
+>
 > [Deadlines](#322-deadlines) <br>
 > [Basic Tasks](#323-basic-task) <br>
 
