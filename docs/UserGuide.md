@@ -125,7 +125,7 @@ Example: `done 1`<br>
 <img src="images/done.png" width="600">
 
 ## Filtering the Tasks : `filter`
-Filters the list based off of specified flitering criteria. 
+Filters the list based off of specified flitering criteria.
 Format: `filter FILTER_TYPE FILTER_ARGUMENTS`  <br>
 `FILTER_TYPE` includes: `name, desc (description), status, before, after` <br>
 `FILTER_ARGUMENT` can include a date, a status, a task description, or the name of a task <br>
@@ -218,15 +218,15 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
   e.g. `edit 2 m/Go to Guardian`
 
-* **List** : `list` <br> 
+* **List** : `list` <br>
 
 * **Clear** : `clear`
 
-* **Undo** : `undo` <br> 
+* **Undo** : `undo` <br>
 
-* **Redo** : `redo` <br> 
+* **Redo** : `redo` <br>
 
-* **Done** : `done INDEX [MORE INDECIES]` <br> 
+* **Done** : `done INDEX [MORE INDECIES]` <br>
  e.g. `done 3`
 
 * **Filter** : `filter FILTER_TYPE FILTER_ARGUMENTS` <br>
@@ -238,11 +238,11 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
  e.g `sort name` <br>
  e.g `sort status`
 
-* **Path** : `path PATHNAME` <br> 
+* **Path** : `path PATHNAME` <br>
  e.g. `path C:\Desktop\MyTasks.xml` <br>
  e.g. `path /Users/name/Desktop/MyTasks.xml`
 
- * **Load** : `load PATHNAME` <br> 
+ * **Load** : `load PATHNAME` <br>
  e.g. `load C:\Desktop\MyTasks.xml` <br>
  e.g. `load /Users/name/Desktop/MyTasks.xml`
 

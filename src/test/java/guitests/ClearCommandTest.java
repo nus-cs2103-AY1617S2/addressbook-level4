@@ -12,7 +12,7 @@
 //        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
 //        assertClearCommandSuccess();
 //    }
-//    
+//
 //    public void assertClearCommandSuccess() {
 //        commandBox.runCommand("clear");
 //        assertListSize(0);
