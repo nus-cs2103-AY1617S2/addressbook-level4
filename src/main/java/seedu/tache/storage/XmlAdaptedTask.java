@@ -32,9 +32,6 @@ public class XmlAdaptedTask {
     @XmlElement(required = false)
     private boolean isActive;
 
-    @XmlElement(required = false)
-    private boolean isTimed;
-
     @XmlElement(required = true)
     private RecurState recurState;
 
@@ -62,7 +59,6 @@ public class XmlAdaptedTask {
             endDateTime = source.getEndDateTime().get().getAmericanDateTime();
         }
         isActive = source.getActiveStatus();
-        isTimed = source.getTimedStatus();
         recurState = source.getRecurState();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -94,10 +90,9 @@ public class XmlAdaptedTask {
             endDateTime = Optional.empty();
         }
         final boolean isActive = this.isActive;
-        final boolean isTimed = this.isTimed;
         final RecurState recurState = this.recurState;
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, startDateTime, endDateTime, tags, isTimed, isActive, recurState.isRecurring(),
+        return new Task(name, startDateTime, endDateTime, tags, isActive,
                             recurState.getRecurInterval(), recurState.getRecurCompletedList());
     }
 }

@@ -18,11 +18,11 @@ public class HotkeyManagerGuiTest extends TaskManagerGuiTest {
     }
 
     private void assertMainGuiOpen(MainGuiHandle mainGuiHandle) {
-        assertFalse(mainGuiHandle.getPrimaryStage().isIconified());
+        assertTrue(mainGuiHandle.getPrimaryStage().isFocused());
     }
 
     private void assertMainGuiHidden(MainGuiHandle mainGuiHandle) {
-        assertTrue(mainGuiHandle.getPrimaryStage().isIconified());
+        assertFalse(mainGuiHandle.getPrimaryStage().isFocused());
     }
 
 }

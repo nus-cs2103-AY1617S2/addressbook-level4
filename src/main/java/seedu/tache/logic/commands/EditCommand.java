@@ -1,7 +1,6 @@
 //@@author A0139925U
 package seedu.tache.logic.commands;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +36,12 @@ public class EditCommand extends Command implements Undoable {
             + "Example: " + COMMAND_WORD + " 1 change startdate to 10 nov and change starttime to 3.30pm";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: \n%1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "No valid parameter detected to edit.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Start date can not be before end date";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
+    public static final String MESSAGE_REQUIRE_BOTH_START_END = "Recurring tasks requires both start date and end date";
 
     public static final String SPECIAL_CASE_TIME_STRING = "23:59:59";
 
@@ -148,13 +148,17 @@ public class EditCommand extends Command implements Undoable {
                 updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndTime().get()));
             }
         }
-        boolean isTimed;
-        if (updatedStartDateTime.isPresent() || updatedEndDateTime.isPresent()) {
-            isTimed = true;
-        } else {
-            isTimed = false;
-        }
+
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        RecurInterval updatedRecurInterval = taskToEdit.getRecurState().getRecurInterval();
+        if (editTaskDescriptor.getRecurringInterval().isPresent()) {
+            if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
+                updatedRecurInterval = editTaskDescriptor.getRecurringInterval().get();
+            } else {
+                throw new IllegalValueException(MESSAGE_REQUIRE_BOTH_START_END);
+            }
+        }
 
         updatedEndDateTime = checkFloatingToNonFloatingCase(editTaskDescriptor, updatedStartDateTime,
                                                                 updatedEndDateTime);
@@ -162,7 +166,8 @@ public class EditCommand extends Command implements Undoable {
         checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
 
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, isTimed, true, false, RecurInterval.NONE, new ArrayList<Date>());
+                            updatedTags, true, updatedRecurInterval,
+                            taskToEdit.getRecurState().getRecurCompletedList());
 
     }
 
@@ -211,6 +216,8 @@ public class EditCommand extends Command implements Undoable {
         private Optional<String> startTime = Optional.empty();
         private Optional<String> endTime = Optional.empty();
         private Optional<UniqueTagList> tags = Optional.empty();
+        private Optional<RecurInterval> interval = Optional.empty();
+        private Optional<Boolean> recurringStatus = Optional.empty();
 
         public EditTaskDescriptor() {}
 
@@ -221,6 +228,8 @@ public class EditCommand extends Command implements Undoable {
             this.startTime = toCopy.getStartTime();
             this.endTime = toCopy.getEndTime();
             this.tags = toCopy.getTags();
+            this.interval = toCopy.getRecurringInterval();
+            this.recurringStatus = toCopy.getRecurringStatus();
         }
 
         /**
@@ -228,7 +237,8 @@ public class EditCommand extends Command implements Undoable {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate,
-                                               this.startTime, this.endTime, this.tags);
+                                               this.startTime, this.endTime, this.tags,
+                                               this.interval, this.recurringStatus);
         }
 
         public void setName(Optional<Name> name) {
@@ -284,6 +294,24 @@ public class EditCommand extends Command implements Undoable {
         public Optional<UniqueTagList> getTags() {
             return tags;
         }
+
+        public void setRecurringInterval(Optional<RecurInterval> interval) {
+            assert interval != null;
+            this.interval = interval;
+        }
+
+        public Optional<RecurInterval> getRecurringInterval() {
+            return interval;
+        }
+
+        public void setRecurringStatus(Optional<Boolean> recurringStatus) {
+            assert recurringStatus != null;
+            this.recurringStatus = recurringStatus;
+        }
+
+        public Optional<Boolean> getRecurringStatus() {
+            return recurringStatus;
+        }
     }
 
     private void cloneOriginalTask(ReadOnlyTask taskToEdit) {
@@ -302,8 +330,9 @@ public class EditCommand extends Command implements Undoable {
         }
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
-               taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(), taskToEdit.getRecurState().isRecurring(),
-               taskToEdit.getRecurState().getRecurInterval(), taskToEdit.getRecurState().getRecurCompletedList());
+                                        taskToEdit.getActiveStatus(),
+                                        taskToEdit.getRecurState().getRecurInterval(),
+                                        taskToEdit.getRecurState().getRecurCompletedList());
     }
 
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {

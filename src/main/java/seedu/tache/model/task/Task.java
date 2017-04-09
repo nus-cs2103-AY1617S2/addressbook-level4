@@ -27,7 +27,6 @@ public class Task implements ReadOnlyTask {
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
     private boolean isActive;
-    private boolean isTimed;
     private RecurState recurState;
 
     /**
@@ -40,25 +39,18 @@ public class Task implements ReadOnlyTask {
         this.endDateTime = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.isActive = true;
-        this.isTimed = false;
         this.recurState = new RecurState();
     }
 
     public Task(Name name, Optional<DateTime> startDateTime, Optional<DateTime> endDateTime,
-                    UniqueTagList tags, boolean isTimed, boolean isActive, boolean isRecurring,
-                    RecurInterval interval, List<Date> recurCompletedList) {
+                    UniqueTagList tags, boolean isActive, RecurInterval interval, List<Date> recurCompletedList) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.isActive = isActive;
-        if (startDateTime.isPresent() || endDateTime.isPresent()) {
-            this.isTimed = true;
-        } else {
-            this.isTimed = false;
-        }
-        this.recurState = new RecurState(isRecurring, interval, recurCompletedList);
+        this.recurState = new RecurState(interval, recurCompletedList);
     }
 
     /**
@@ -66,8 +58,8 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDateTime(), source.getEndDateTime(), source.getTags(),
-                    source.getTimedStatus(), source.getActiveStatus(), source.getRecurState().isRecurring(),
-                    source.getRecurState().getRecurInterval(), source.getRecurState().getRecurCompletedList());
+                    source.getActiveStatus(), source.getRecurState().getRecurInterval(),
+                    source.getRecurState().getRecurCompletedList());
     }
 
     @Override
@@ -137,11 +129,11 @@ public class Task implements ReadOnlyTask {
     //@@author A0142255M
     @Override
     public boolean getTimedStatus() {
-        return isTimed;
-    }
-
-    public void setTimedStatus(boolean isTimed) {
-        this.isTimed = isTimed;
+        if (startDateTime.isPresent() || endDateTime.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //@@author A0139961U
@@ -229,7 +221,6 @@ public class Task implements ReadOnlyTask {
         this.setStartDateTime(replacement.getStartDateTime());
         this.setEndDateTime(replacement.getEndDateTime());
         this.setTags(replacement.getTags());
-        this.setTimedStatus(replacement.getTimedStatus());
         this.setActiveStatus(replacement.getActiveStatus());
         this.setRecurState(replacement.getRecurState());
     }

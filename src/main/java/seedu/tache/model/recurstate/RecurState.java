@@ -8,47 +8,43 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.task.DateTime;
 
 public class RecurState {
+    public static final String MESSAGE_RECUR_INTERVAL_CONSTRAINTS = "Unknown recur interval format. "
+                                                            + "Valid values include: None, Day, Week, Month and Year";
+
     public enum RecurInterval { NONE, DAY, WEEK, MONTH, YEAR };
 
-    private boolean recurringStatus;
     private RecurInterval interval;
     private List<Date> recurCompletedList;
     private String recurDisplayDate;
 
     public RecurState() {
-        this.recurringStatus = false;
         this.interval = RecurInterval.NONE;
         this.recurCompletedList = new ArrayList<Date>();
         this.recurDisplayDate = "";
     }
 
-    public RecurState(boolean isRecurring, RecurInterval interval, List<Date> recurCompletedList) {
-        this.recurringStatus = isRecurring;
+    public RecurState(RecurInterval interval, List<Date> recurCompletedList) {
         this.interval = interval;
         this.recurCompletedList = recurCompletedList;
         this.recurDisplayDate = "";
     }
 
     public boolean isRecurring() {
-        return recurringStatus;
-    }
-
-    public boolean getRecurringStatus() {
-        return recurringStatus;
-    }
-
-    public void setRecurringStatus(boolean isRecurring) {
-        this.recurringStatus = isRecurring;
+        return !interval.equals(RecurInterval.NONE);
     }
 
     public RecurInterval getRecurInterval() {
         return interval;
     }
 
-    public void setRecurInterval(RecurInterval interval) {
+    public void setRecurInterval(RecurInterval interval) throws IllegalValueException {
+        if (interval == null) {
+            throw new IllegalValueException(MESSAGE_RECUR_INTERVAL_CONSTRAINTS);
+        }
         this.interval = interval;
     }
 
@@ -161,7 +157,6 @@ public class RecurState {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RecurState // instanceof handles nulls
-                && this.recurringStatus == ((RecurState) other).getRecurringStatus()
                 && this.interval.equals(((RecurState) other).getRecurInterval())
                 && this.recurCompletedList.equals(((RecurState) other).getRecurCompletedList())
                 && this.recurDisplayDate.equals(((RecurState) other).getRecurDisplayDate())); // state check

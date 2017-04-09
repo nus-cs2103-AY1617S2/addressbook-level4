@@ -10,6 +10,7 @@ import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_INTERVAL;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
@@ -105,6 +106,9 @@ public class EditCommandParser {
                 } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_TAG)) {
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(DELIMITER_EDIT_PARAMETER))));
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_RECUR_INTERVAL)) {
+                    editTaskDescriptor.setRecurringInterval(
+                                    Optional.of(ParserUtil.parseStringToRecurInterval(updateValue)));
                 } else {
                     throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
                 }
