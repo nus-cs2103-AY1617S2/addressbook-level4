@@ -225,7 +225,7 @@ public class LogicManagerTest {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
 
-        List<Task> tasksToBeAdded = helper.generateTaskList( //covers the partition 1, 2, and 5
+        List<Task> tasksToBeAdded = helper.generateTaskList(//covers the partition 1, 2, and 5
                 helper.floating(), helper.deadline(), helper.event());
         TaskManager expectedTM = new TaskManager();
         for (Task toBeAdded : tasksToBeAdded) {

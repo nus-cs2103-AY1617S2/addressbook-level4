@@ -17,14 +17,13 @@ public class ListDateCommand extends ListCommand {
     DateTime end = null;
 
     public ListDateCommand(Optional<String> startDate, Optional<String> endDate) throws IllegalValueException {
-        assert startDate != null || endDate != null;
-        if (startDate != null) {
+        assert endDate.isPresent();
+        if (startDate.isPresent()) {
             this.start = new DateTime(startDate.get());
         }
-        if (endDate != null) {
-            this.end = new DateTime(endDate.get());
-        }
-        if (startDate != null && endDate != null) {
+        this.end = new DateTime(endDate.get());
+
+        if (startDate.isPresent() && endDate.isPresent()) {
             if (start.isLater(end)) { //checks if the end time is later than start time
                 throw new IllegalValueException(DateTime.MESSAGE_DATETIME_START_LATER_THAN_END);
             }
