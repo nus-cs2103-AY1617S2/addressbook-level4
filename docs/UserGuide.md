@@ -223,7 +223,7 @@ Format: `save DIRECTORY`
 
 Example:
 
-* `save C:/Users/Documents`
+* `save C:/Users/Documents/mytaskmanager.xml`
   Saves data into the specified directory.
 
 ### 2.16. Autocomplete
