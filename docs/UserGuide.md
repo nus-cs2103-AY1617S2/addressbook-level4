@@ -43,14 +43,14 @@ latest version should be v0.5.
 2. The GUI should appear in a few seconds. Refer to the figure below to see how ToLuist should initially look like on your first launch.
    
    <img src="images/Ui-empty.png" width="600"><br>
-   **Figure 2.2**: Initial launch screen of ToLuist
+   **Figure 2.2**: Initial launch screen of ToLuist.
 
 ### 2.3. Get used to the interface
 
 With some tasks added in, the interface of ToLuist may look as follows.
 
    <img src="images/Ui-parts.png" width="600"/><br>
-    **Figure 2.3**: Different components in ToLuist's Ui
+    **Figure 2.3**: Different components in ToLuist's Ui.
     
 At the very top of the app, the **App Title** - which includes an app icon - will highlight that you are 
 using ToLuist.
@@ -113,43 +113,43 @@ If you are a new user of ToLuist, you may need assistance for inputting commands
 Format: `help [COMMAND]`
 
 
-> * The system will also prompt you to enter 'help' if you enter an incorrect command.
-> * If `help` followed by a command word is entered, detailed help for that command will be shown instead.
+> * The system will also prompt you to enter `help` if you enter an incorrect command.
+> * If `help` is entered, followed by a command word, detailed help for that command will be shown instead.
 
 Examples:
 
 * `help` <br>
   Shows general help information.
 * `help add` <br>
-  Shows detailed help information for 'add' command.
+  Shows detailed help information for `add` command.
   
 ### 3.2. Getting keyword suggestions smartly :
 
-We understand that it may take time for you to remember all the different command formats. Our smart command 
-suggestion feature automatically suggests to you how you can complete your command, based on what 
-you already put in the command box.
+You might find it hard to remember all the commands and their format.<br>
+ToLuist will automatically suggest to you how you can complete your command.<br>
+As you type, a list of suggested words will appear, up to a limit of 10.
   
 For example, ToLuist suggest to you the command words `add` and `alias` when you type `a`.
 
    <img src="images/smart-command-word.png" width="600"><br>
-   **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed
+   **Figure 3.2a**: `add` and `alias` are suggested as `a` is typed.
 
 ToLuist also shows you the parameters available for a command type.
 
    <img src="images/smart-command-parameter.png" width="600"><br>
-   **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task
+   **Figure 3.2b**: Parameters are suggested as ToLuist is aware that you are adding a task.
 
-If a command can have multiple options that follow one particular parameter, ToLuist shows you these too.
+ToLuist will also show you suggestions for parameters with specific options.
 
    <img src="images/smart-command-different-options.png" width="600"><br>
-   **Figure 3.2c**: `high` and `low` are suggested as options for task priority
+   **Figure 3.2c**: `high` and `low` are suggested as options for task priority.
 
 If only one suggestion is shown, you can press <kbd>Tab</kbd> to automatically replace the last word of your 
 command with the suggestion. If there are multiple suggestions available, you can press <kbd>Tab</kbd> to 
 cycle through the list of suggestions, and press <kbd>Enter</kbd> to select one of them.
  
    <img src="images/smart-command-multiple-suggestions.png" width="600"><br>
-   **Figure 3.2d**: Suggestions can be cycled through, with highlighting
+   **Figure 3.2d**: Suggestions can be cycled through The currently selected suggestion will be highlighted.
   
 
 ### 3.3. Switching to a different window : `switch`
