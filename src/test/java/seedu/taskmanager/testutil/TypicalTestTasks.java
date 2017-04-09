@@ -114,6 +114,10 @@ public class TypicalTestTasks {
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(true)
                     .withCategories("just", "friends").build(); // event
 
+<<<<<<< HEAD
+=======
+          // Recurring task
+>>>>>>> ce92908c1afb8c05667e8454efec856b83e570a7
             recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
@@ -162,6 +166,7 @@ public class TypicalTestTasks {
             recurTestYearThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("03/03/20").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

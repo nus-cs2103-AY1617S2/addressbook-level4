@@ -5,41 +5,53 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.testutil.TestTask;
 
 public class ListCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("SEARCH food"); // no results
-        assertFindResult("SEARCH with", td.eatBreakfast, td.eatDinner); // multiple
-                                                                        // results
-
-        // find after deleting one result
-        commandBox.runCommand("DELETE 1");
-        assertFindResult("SEARCH with", td.eatDinner);
+    public void listSpecificDateNonEmptyList() {
+        assertListResult("LIST 01/03/17"); // no results
+        assertListResult("LIST 03/03/17", td.eatBreakfast, td.doCS); // multiple
+                                                                     // results
     }
 
     @Test
-    public void find_emptyList() {
+    public void listTodayDateNonEmptyList() {
         commandBox.runCommand("CLEAR");
-        assertFindResult("SEARCH regret"); // no results
+        commandBox.runCommand("ADD testcase ON today");
+        commandBox.runCommand("ADD testcase ON tmr");
+        commandBox.runCommand("LIST today");
+        assertListSize(1);
     }
 
     @Test
-    public void find_invalidCommand_fail() {
-        commandBox.runCommand("SEARCHregret");
+    public void listInvalidCommandFailure() {
+        commandBox.runCommand("LIst");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+
+        commandBox.runCommand("LIST nonsense");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits) {
+    @Test
+    public void listCommand() {
+        commandBox.runCommand("LIST");
+        assertListSize(td.getTypicalTasks().length);
+        assertTrue(eventTaskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(deadlineTaskListPanel.isListMatching(td.getTypicalTasks()));
+        assertTrue(floatingTaskListPanel.isListMatching(td.getTypicalTasks()));
+    }
+
+    private void assertListResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
+        String[] trimmedCommand = command.trim().split("\\s+");
+        assertResultMessage("Listed all uncompleted tasks for [" + trimmedCommand[1] + "]");
         assertTrue(eventTaskListPanel.isListMatching(expectedHits));
         assertTrue(deadlineTaskListPanel.isListMatching(expectedHits));
         assertTrue(floatingTaskListPanel.isListMatching(expectedHits));
-
     }
 }

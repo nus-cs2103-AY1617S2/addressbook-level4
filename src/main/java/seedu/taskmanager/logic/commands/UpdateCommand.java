@@ -34,12 +34,13 @@ public class UpdateCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) [TASK] ON [DATE] FROM [STARTTIME] TO [ENDTIME]\n"
             + "Example: " + COMMAND_WORD + " 1 ON 04/03/17 FROM 1630 TO 1830";
 
-    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with another event";
+    public static final String MESSAGE_BLOCKED_OUT_TIME = "This task cannot be added as time clashes with "
+            + "another event";
     public static final String MESSAGE_UPDATE_TASK_SUCCESS = "Updated Task: %1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
-    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to be earlier"
-            + " than end time.";
+    public static final String MESSAGE_INVALID_EVENT_PERIOD = "Invalid input of time, start time has to"
+            + " be earlier than end time.";
 
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
 
@@ -143,14 +144,14 @@ public class UpdateCommand extends Command {
                     model.updateFilteredListToShowAll();
                     EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
                     return new CommandResult(clashFeedback + String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate)
-                    + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
+                            + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
                 }
             }
             int updateIndex = model.updateTask(filteredTaskListIndex, updatedTask) + 1;
             model.updateFilteredListToShowAll();
             EventsCenter.getInstance().post(new JumpToListRequestEvent(updateIndex - 1));
-            return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate)
-                    + "\n" + "Task updated to index: " + Integer.toString(updateIndex));
+            return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate) + "\n"
+                    + "Task updated to index: " + Integer.toString(updateIndex));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -176,11 +177,12 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if only the time field has been identified by user to be
-     * updated To ensure that user provides all the information that is required to update a task.
+     * Checks if only the time field has been identified by user to be updated
+     * To ensure that user provides all the information that is required to
+     * update a task.
      *
-     * For instance, user is only allowed to update only startTime and endTime if the task is an event
-     * and not a deadline or floating task.
+     * For instance, user is only allowed to update only startTime and endTime
+     * if the task is an event and not a deadline or floating task.
      *
      * @return true if only task name has been identified by user to be updated
      */

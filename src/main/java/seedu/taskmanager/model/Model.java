@@ -100,4 +100,7 @@ public interface Model {
 
     int isBlockedOutTime(Task t, int UpdateTaskIndex) throws DuplicateTaskException;
 
+    // int addRecurringDeadlineTask(ReadOnlyTask taskToRecur, int recurring,
+    // String type) throws DuplicateTaskException;
+
 }

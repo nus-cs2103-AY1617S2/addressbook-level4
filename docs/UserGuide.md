@@ -15,7 +15,7 @@ By : `Team ProcrastiNomore`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&
 This User Guide will aid you in understanding how ProcrastiNomore operates and what are
 the functionalities this application has.
 
-ProcrastinNomore is a single command line task-management application that is able to
+ProcrastiNomore is a single command line task-management application that is able to
 store new tasks and edit existing tasks. This application will aid you in organizing
 all your corresponding tasks and events.
 
@@ -29,19 +29,17 @@ all your corresponding tasks and events.
 2. Download the latest `ProcrastiNomore.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/ProcrastiNomore_Covershot.PNG" width="800">
+   > <img src="images/ProcrastiNomore_Covershot.PNG" width="1000">
 
 5. Using the application
 
-   >a. This application works by entering commands via the keyboard.<br>
-   >b. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   >c. There are also several keyboard shortcuts found at the bottom of the User Guide for
-   quick access of several functions.<br>
-   >d. typing **`help`** and pressing <kbd>Enter</kbd> in the command box and it will
+   >This application works by entering commands via the keyboard.<br>
+   >Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   >For example, typing **`HELP`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window. <br>
-   > <img src="images/ProcrastiNomore_Help.PNG" width="800">
+   > <img src="images/ProcrastiNomore_Help.PNG" width="1000">
 
-6. Refer to the [Features](#features) section below for more details on the various
+6. Refer to the [Features](#Features) section below for more details on the various
 commands you can use.<br>
 
 
@@ -49,10 +47,10 @@ commands you can use.<br>
 
 > **Command Format**
 >
-> * Words in `UPPER_CASE` are the parameters.
+> * Words in `UPPER_CASE` are the command words.
+> * Command words can be in any order.
 > * Items in `SQUARE_BRACKETS` are optional.
 > * Items with `...` after them can have multiple instances.
-> * Parameters can be in any order.
 
 ### 3.1. Viewing help : `HELP`
 
@@ -61,7 +59,7 @@ You can use this command to open a help window which will open this user guide p
 Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `ADD`
-> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="800">
+> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="1000">
 
 ### 3.2. Adding a new Task: `ADD`
 
@@ -70,29 +68,47 @@ There are 3 forms of task that ProcrastiNomore supports:
 
 #### 3.2.1. Events
 
-Format: `ADD TASK ON DATE/DAY` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK FROM STARTDATE STARTTIME TO ENDDATE ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD TASK ON DATE/DAY STARTTIME TO ENDTIME` <br />
-> <img src="images/ProcrastiNomore_Add_Event.PNG" width="800">
+Format: `ADD` task `ON` date/day <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `ON` date/day time `TO` time <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `FROM` date/day time `TO` date/day time <br />
+
+Sample Event:
+> Type the following command `ADD Stayover with Friends FROM 10/05/17 1400 TO 11/05/16 1800 CATEGORY Fun` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="1000">
+> The application will save the sample event in Events column 
+> <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="1000">
 
 #### 3.2.2. Deadlines
 
-Format: `ADD TASK BY DATE/TIME/DATE+TIME`
+Format: `ADD` task `BY` date/time/date time
 
-#### 3.2.3. Untimed
+Sample Deadline:
+> Type the following command `ADD finish project BY 05/05/17 1400` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Deadline.PNG" width="1000">
+> The application will save the sample deadline in the Deadlines column
+> <img src="images/ProcrastiNomore_After_Add_Deadline.PNG" width="1000">
 
-Format:	`ADD TASK`
 
-Examples:
+#### 3.2.3. Basic Task
 
-* `ADD eat breakfast ON 03/03/17`
-* `ADD eat lunch ON thursday`
-* `ADD eat dinner FROM today 1730 TO today 1930`
-* `ADD eat breakfast FROM tomorrow 0800 TO tomorrow 0830`
-* `ADD eat lunch ON 03/03/17 1400 TO 1500`
-* `ADD eat dinner BY 03/03/17 330`
-* `ADD eat breakfast BY 0730`
-* `ADD eat breakfast`
+Format:	`ADD` task
+
+Sample Basic Task:
+> Type the following command `ADD Eat fried chicken` into the command box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Floating_Task.PNG" width="1000">
+> The application will save the sample basic task into the Basic Tasks column
+> <img src="images/ProcrastiNomore_After_Add_Floating_Task.PNG" width="1000">
+
+Other examples:
+
+* `ADD` eat breakfast `ON` 03/03/17
+* `ADD` eat lunch `ON` thursday
+* `ADD` eat dinner `FROM` today 1730 `TO` today 1930
+* `ADD` eat breakfast `FROM` tomorrow 0800 `TO` tomorrow 0830
+* `ADD` eat lunch `ON` 03/03/17 1400 `TO` 1500
+* `ADD` eat dinner `BY` 03/03/17 330
+* `ADD` eat breakfast `BY` 0730
+* `ADD` eat breakfast
 
 > TIME input must be in 24hrs format <br>
 > If the function "ADD ... BY .." is used without stating the end time, the default end time will be 2359.
@@ -104,37 +120,47 @@ There are 2 types of updates that ProcrastiNomore supports:
 
 #### 3.3.1. Update task name
 
-Format: `UPDATE TASKINDEX TASKNAME`
+Format: `UPDATE` `Task Index` `New Task Name`
+
+Sample Update task name:
+> Type the following command `UPDATE 36 Buy a horse` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="1000">
+> The application will update the existing task with task index 36 and change the task name from "Buy a cat" to "Buy a horse"
+> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="1000">
 
 #### 3.3.2. Update task time/date
 
-Format: `UPDATE TASKINDEX TO STARTTIME ENDTIME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE TASKINDEX TO TIME`
+Format: `UPDATE` `Task Index` `FROM` Start time <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `TO` End time
+
+Sample Update task time:
+> Type the following command `UPDATE 1 TO 0230` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Update_Task_Time.PNG" width="1000">
+> The application will update the existing task with task index 1 and change the task end time from "0002" to "0230"
+> <img src="images/ProcrastiNomore_After_Update_Task_Time.PNG" width="1000">
 
 Examples:
-* `LIST`
-  `UPDATE 1 eat dinner`
-* `LIST`
-  `UPDATE 1 FROM thursday TO friday`
+* `UPDATE` `1` eat dinner
+* `UPDATE` `1` `FROM` thursday `TO` friday
 
-> Please note that by inputting UPDATE TASKINDEX with no additional information will result in
-> all timings to be removed.
+> Please note that by inputting `UPDATE` `TASKINDEX` with no additional information will result in
+> all existing timings to be removed.
 
 ### 3.4. Delete an existing task: `DELETE`
 
 You can use this command to delete existing task in ProcrastiNomore
 
-Format: `DELETE TASKNAME` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE TASKINDEX` <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE DATE`
+Format: `DELETE` `Task Index` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE` `Task name` <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DELETE` `Date`
 
-> In the event of DELETE TASKNAME/DATE, ProcrastiNomore will delete all tasks with the
-> TASKNAME/DATE specified in the command.
+> In the event of `DELETE` `Task name`/`Date`, ProcrastiNomore will delete all tasks with the
+> Task name/Date specified in the command.
 
 Examples:
-* `DELETE breakfast` <br />
-* `DELETE 1`
-* `DELETE 15/06/17` <br />
+* `DELETE` breakfast <br />
+* `DELETE` `1` <br />
+* `DELETE` 15/06/17 <br />
 
 ### 3.5. Remove all tasks: `CLEAR`
 
@@ -146,28 +172,28 @@ Format: `CLEAR`
 
 You can use this command to search through all existing task in ProcrastiNomore.
 
-Format: `SEARCH KEYWORD` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SEARCH DATE`
+Format: `SEARCH` `Keyword` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SEARCH` `Date`
 
 > In the event of non-unique KEYWORD, ProcrastiNomore will show a list of tasks
-> with the same KEYWORD
+> with the same Keyword/Date
 
 Examples:
-* `SEARCH breakfast` <br>
+* `SEARCH` breakfast <br>
   Returns any tasks with containing breakfast
-* `SEARCH 05/12/17` <br>
+* `SEARCH` 05/12/17 <br>
   Returns any tasks with dates containing 05/12/17
 
 ### 3.7. To mark tasks as completed: `MARK`
 
-You can use this command to identify tasks that you have accomplised and completed.
+You can use this command to identify tasks that you have accomplished and completed.
 
-Format: `MARK TASKINDEX` <br>
+Format: `MARK` `Task Index` <br>
 
 Examples:
-* `MARK 1` <br>
+* `MARK` `1` <br>
   Task number `1` in your to do list will be marked as completed.
-* `MARK 5` <br>
+* `MARK` `5` <br>
   Task number `5` in your to do list will be marked as completed.
 
 Tasks identified as completed will no longer be displayed in the uncompleted list of tasks.
@@ -177,23 +203,23 @@ Tasks identified as completed will no longer be displayed in the uncompleted lis
 You can use this command to identify tasks that you have already previously identified that you have
  accomplished as uncompleted.
 
-Format: `UNMARK TASKINDEX` <br>
+Format: `UNMARK` `Task Index` <br>
 
 Examples:
-* `UNMARK 1` <br>
+* `UNMARK` `1` <br>
   Task number `1` in your completed list will be marked as uncompleted and to be done.
-* `UNMARK 5` <br>
+* `UNMARK` `5` <br>
   Task number `5` in your completed list will be marked as uncompleted and to be done.
 
 ### 3.9. To sort through the list of task displayed: `LIST`
 
 You can use this command to view all the tasks that you have yet to finish doing.
 
-Format: `LIST`
+Format: `LIST` <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LIST date/day`
 
 Examples:
-* `LIST today` <br>
+* `LIST` today <br>
   All uncompleted tasks which contain the today's date will be shown.
 
 Using the list command on its own will show all existing task which are uncompleted.

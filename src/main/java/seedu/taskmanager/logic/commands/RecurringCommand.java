@@ -27,7 +27,8 @@ public class RecurringCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
     public static final String MESSAGE_RECURRING_TASK_SUCCESS = "Task has successfully recurred ";
-    public static final String MESSAGE_RECURRING_FLOATING_TASK_FAILURE = "Unable to create recurring task for floating task!";
+    public static final String MESSAGE_RECURRING_FLOATING_TASK_FAILURE = "Unable to create recurring "
+            + "task for floating task!";
     public static final String RECURRING_TASK_VALIDATION_REGEX = "\\d+\\s+\\d+\\s+[a-zA-Z]+";
     public static final String RECURRING_TASK_VALIDATION_REGEX2 = "[^\\s].*";
     public static final String EMPTY_FIELD = "EMPTY_FIELD";
@@ -59,6 +60,14 @@ public class RecurringCommand extends Command {
         }
 
         if (taskToRecur.isDeadlineTask()) {
+
+            // try {
+            // model.addRecurringDeadlineTask(taskToRecur, numberOfRecurrence,
+            // typeOfRecurrence);
+            // } catch (DuplicateTaskException dte) {
+            // throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            // }
+            //
             for (int loop = 1; loop <= numberOfRecurrence; loop++) {
 
                 try {
@@ -96,12 +105,14 @@ public class RecurringCommand extends Command {
                 }
 
                 if (DateTimeUtil.isValidDate(recurringTask.getStartDate().toString())
-                        && DateTimeUtil.isValidDate(recurringTask.getEndDate().toString()))
+                        && DateTimeUtil.isValidDate(recurringTask.getEndDate().toString())) {
                     try {
                         model.addTask(recurringTask);
                     } catch (DuplicateTaskException dte) {
                         throw new CommandException(MESSAGE_DUPLICATE_TASK);
                     }
+                }
+
             }
         }
 

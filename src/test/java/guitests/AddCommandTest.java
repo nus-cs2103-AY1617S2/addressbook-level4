@@ -65,6 +65,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
                 + "Task added at index: 4");
 
         commandBox.runCommand("UNDO");
+        currentList = TestUtil.removeTasksFromList(currentList, taskToAdd);
 
         // add clashing event between existing multiple day event
         taskToAdd = td.sampleClashBetweenMultipleDaysEvent;

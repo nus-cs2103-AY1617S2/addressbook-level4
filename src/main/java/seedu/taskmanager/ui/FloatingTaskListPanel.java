@@ -86,7 +86,7 @@ public class FloatingTaskListPanel extends UiPart<Region> {
         }
     }
 
-    public ListView<Pair<ReadOnlyTask,Integer>> getFloatingTaskListView() {
+    public ListView<Pair<ReadOnlyTask, Integer>> getFloatingTaskListView() {
         return this.floatingTaskListView;
     }
 }

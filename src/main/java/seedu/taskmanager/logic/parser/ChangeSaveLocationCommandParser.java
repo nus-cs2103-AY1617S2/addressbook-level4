@@ -23,15 +23,15 @@ public class ChangeSaveLocationCommandParser {
 
         // assert args != null;
 
-        String stringSaveLocation = args;
+        String stringSaveLocation = args.trim();
         File checkLocation = new File(args.trim());
 
-        if (("".equals(stringSaveLocation))) {
+        if (("".equals(args))) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeSaveLocationCommand.MESSAGE_USAGE));
         }
         if (!checkLocation.exists()) {
-            return new IncorrectCommand(String.format(ChangeSaveLocationCommand.MESSAGE_USAGE, INVALID_SAVE_LOCATION));
+            return new IncorrectCommand(INVALID_SAVE_LOCATION + "\n" + ChangeSaveLocationCommand.MESSAGE_USAGE);
         }
 
         if (!(stringSaveLocation.substring(stringSaveLocation.length() - 1).equals("/"))) {
@@ -39,6 +39,7 @@ public class ChangeSaveLocationCommandParser {
         }
 
         stringSaveLocation += "taskmanager.xml";
+
         File saveLocation = new File(stringSaveLocation.trim());
 
         return new ChangeSaveLocationCommand(saveLocation);
