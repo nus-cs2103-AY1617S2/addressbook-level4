@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import seedu.taskit.logic.commands.ChangePathCommand;
 import seedu.taskit.commons.core.Config;
 import seedu.taskit.commons.core.EventsCenter;
 import seedu.taskit.commons.core.LogsCenter;
@@ -22,6 +23,7 @@ import seedu.taskit.commons.util.ConfigUtil;
 import seedu.taskit.commons.util.StringUtil;
 import seedu.taskit.logic.Logic;
 import seedu.taskit.logic.LogicManager;
+import seedu.taskit.logic.commands.ChangePathCommand;
 import seedu.taskit.model.TaskManager;
 import seedu.taskit.model.Model;
 import seedu.taskit.model.ModelManager;
@@ -68,6 +70,9 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
+        ChangePathCommand.setConfig(config);
+        ChangePathCommand.setStorage(storage);
     }
 
     private String getApplicationParameter(String parameterName) {

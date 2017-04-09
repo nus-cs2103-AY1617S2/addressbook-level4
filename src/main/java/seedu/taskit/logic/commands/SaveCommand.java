@@ -21,7 +21,7 @@ public class SaveCommand extends Command{
             + "Parameters: FILEPATH (must be a string)\n"
             + "Example: " + COMMAND_WORD + " newFile.txt";
 
-    public static final String MESSAGE_SAVE_SUCCESS = "Saved to ";
+    public static final String MESSAGE_SAVE_SUCCESS = "Saved to";
 
     private String newFilePath;
 
