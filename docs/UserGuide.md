@@ -130,8 +130,9 @@ Where ATTRIBUTE can be location, start, end, deadline, tag
 Where KEYWORD can be the following:
 1. LOCATION and TAG can be any string
 2. START, END and DEADLINE can only be of the following format: 
-> 2.1 TIME: hh:MM in the 12 hour format, for example, 09:00PM, 10:00AM
-> 2.2 DATE: dd/MM/yyyy
+> 2.1 TIME: hh:MM in the 12 hour format, for example, 09:00PM, 10:00AM <br>
+> 2.2 DATE: dd/MM/yyyy <br>
+
 > * When typing an invalid attribute after `list by`, the application defaults to `list`
 > * The list search is not case sensitive. e.g `School` will match `school`
 > * The order of the keywords does not matter. e.g. `singapore Work` will match `Work singapore`

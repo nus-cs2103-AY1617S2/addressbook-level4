@@ -147,7 +147,8 @@ _Figure 2.2.1 : Structure of the UI Component_
 **API** : [`Ui.java`](../src/main/java/org/teamstbf/yats/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`StatusBarFooter`, `MultiViewPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The `MultiViewPanel` is made up of two tabs, which includes `Done Task View` and `Calendar View`. 
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -159,6 +160,12 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+* Elaborating on the `MultiViewPanel`: 
+* 1. `MultiViewPanel` shows a list of done tasks by allowing the internal `filteredEvents` list to be duplicated into two additional
+list: `calendarList` and `doneList`. Both of these list synchronize to `filteredEvents` list whenever there are changes to the primary
+list.
+* 2. However, a known issue that arises is when there are more than one tasks with the same name in the primary list and secondary list. When
+executing a `delete` command, the command deletes the task with the earliest end time regardless of status.
 
 ### 2.3. Logic component
 
