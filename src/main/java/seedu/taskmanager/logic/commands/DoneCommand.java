@@ -53,6 +53,7 @@ public class DoneCommand extends Command {
         }
 
         ReadOnlyTask taskToMarkDone = lastShownList.get(targetIndex - 1);
+        Task initialTask = new Task(taskToMarkDone);
         if (!taskToMarkDone.getStatus().value) {
             // Update a non-recurring task
             if (!taskToMarkDone.getRepeat().isPresent()) {
@@ -80,12 +81,12 @@ public class DoneCommand extends Command {
             }
             // @@author A0114269E
         } else {
-            return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, taskToMarkDone));
+            throw new CommandException(String.format(MESSAGE_MARK_DONE_TASK_FAILURE, initialTask));
         }
 
         model.updateFilteredListToShowAll();
-
-        return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, taskToMarkDone));
+        initialTask = createDoneTask(initialTask);
+        return new CommandResult(String.format(MESSAGE_MARK_DONE_TASK_SUCCESS, initialTask));
     }
 
     /**

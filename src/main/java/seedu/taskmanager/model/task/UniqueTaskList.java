@@ -50,9 +50,11 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
-        if (contains(toAdd)) {
+        // @@author A0114269E
+        if ((toAdd.getStatus().value == false) && contains(toAdd)) {
             throw new DuplicateTaskException();
         }
+        // @@author
         internalList.add(toAdd);
         // @@author A0131278H
         if (!sortCriterion.equals(KEYWORD_UNDEFINED)) {
@@ -78,9 +80,12 @@ public class UniqueTaskList implements Iterable<Task> {
         assert editedTask != null;
 
         Task taskToUpdate = internalList.get(index);
-        if (!taskToUpdate.equals(editedTask) && internalList.contains(editedTask)) {
+        // @@author A0114269E
+        if ((editedTask.getStatus().value == false) && !taskToUpdate.equals(editedTask)
+                && internalList.contains(editedTask)) {
             throw new DuplicateTaskException();
         }
+        // @@author
 
         taskToUpdate.resetData(editedTask);
         // TODO: The code below is just a workaround to notify observers of the

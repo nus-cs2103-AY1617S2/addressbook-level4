@@ -17,7 +17,7 @@ import seedu.taskmanager.model.HistoryManager;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_SUCCESS = "Undo successful: ";
+    public static final String MESSAGE_SUCCESS = "Undo successful: %1$s";
     public static final String MESSAGE_NO_MORE_UNDO = "No more actions available to undo";
 
     @Override
@@ -31,7 +31,7 @@ public class UndoCommand extends Command {
             e.printStackTrace();
             throw new CommandException(MESSAGE_NO_MORE_UNDO);
         }
-        return new CommandResult(MESSAGE_SUCCESS + commandText);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, commandText));
     }
 
     // @@author A0131278H

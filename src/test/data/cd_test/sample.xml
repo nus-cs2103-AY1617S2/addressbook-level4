@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <title>Visit Alex Yeoh</title>
+        <startDate>Wed Nov 01 00:00:00 SGT 2017</startDate>
+        <endDate>Thu Nov 02 00:00:00 SGT 2017</endDate>
+        <description>His address is Blk 30 Geylang Street 29, #06-40</description>
+        <repeat>DAY</repeat>
+        <status>Incomplete</status>
+        <tagged>social</tagged>
+    </tasks>
+    <tasks>
+        <title>Collect files from boss</title>
+        <startDate>Sun Nov 05 00:00:00 SGT 2017</startDate>
+        <endDate>Wed Nov 08 00:00:00 SGT 2017</endDate>
+        <description>Important business files</description>
+        <status>Incomplete</status>
+        <tagged>business</tagged>
+        <tagged>colleagues</tagged>
+    </tasks>
+    <tasks>
+        <title>Visit Charlotte Oliveiro</title>
+        <startDate>Wed Dec 20 00:00:00 SGT 2017</startDate>
+        <endDate>Wed Dec 20 00:00:00 SGT 2017</endDate>
+        <description>Her address is Blk 11 Ang Mo Kio Street 74, #11-04</description>
+        <repeat>MONTH</repeat>
+        <status>Incomplete</status>
+        <tagged>social</tagged>
+    </tasks>
+    <tasks>
+        <title>Call David Li</title>
+        <startDate>Tue Aug 08 00:00:00 SGT 2017</startDate>
+        <endDate>Thu Aug 10 00:00:00 SGT 2017</endDate>
+        <description>his number is 12345678</description>
+        <repeat>YEAR</repeat>
+        <status>Incomplete</status>
+        <tagged>schoolwork</tagged>
+    </tasks>
+    <tasks>
+        <title>Submit project report</title>
+        <startDate>Thu Jul 20 00:00:00 SGT 2017</startDate>
+        <endDate>Fri Jul 21 00:00:00 SGT 2017</endDate>
+        <description>Submit to tutor in class</description>
+        <status>Incomplete</status>
+        <tagged>schoolwork</tagged>
+    </tasks>
+    <tags>social</tags>
+    <tags>colleagues</tags>
+    <tags>business</tags>
+    <tags>schoolwork</tags>
+</taskmanager>

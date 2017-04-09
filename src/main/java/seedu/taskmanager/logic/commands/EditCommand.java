@@ -82,7 +82,8 @@ public class EditCommand extends Command {
                     editedTask.setEndDate(Optional.of(new EndDate(ed.toDateString() + TIME_OF_DAY_END)));
                 } else if (sd.after(ed) && sd.isTimeInferred()) {
                     editedTask.setStartDate(Optional.of(new StartDate(sd.toDateString() + TIME_OF_DAY_START)));
-                } else if (sd.after(ed)) {
+                }
+                if (editedTask.getStartDate().get().after(editedTask.getEndDate().get())) {
                     throw new CommandException(MESSAGE_DATE_ORDER_CONSTRAINTS);
                 }
             }

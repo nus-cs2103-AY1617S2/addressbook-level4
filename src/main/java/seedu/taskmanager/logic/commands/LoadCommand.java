@@ -76,7 +76,7 @@ public class LoadCommand extends Command {
         }
 
         if (!taskManagerOptional.isPresent()) {
-            return new CommandResult(String.format(MESSAGE_NEW_FILE, this.newPath));
+            throw new CommandException(String.format(MESSAGE_NEW_FILE, this.newPath));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newPath));
     }

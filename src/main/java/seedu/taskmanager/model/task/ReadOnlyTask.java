@@ -35,8 +35,7 @@ public interface ReadOnlyTask {
                 && other.getStartDate().equals(this.getStartDate())
                 && other.getEndDate().equals(this.getEndDate())
                 // @@author A0114269E
-                && ((other.getStatus().value || this.getStatus().value) ?
-                        false : other.getStatus().equals(this.getStatus()))
+                && other.getStatus().equals(this.getStatus())
                 // @@author A0140032E
                 && other.getDescription().equals(this.getDescription()))
                 && other.getRepeat().equals(this.getRepeat());
