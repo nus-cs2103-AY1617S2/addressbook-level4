@@ -52,16 +52,18 @@ Format: `help`
 ### 2.2. Adding a task: `add`
 
 Adds a task to the task list<br>
-Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
-Date Format: HH:mm dd/MM/yyyy
-Note: HH:MM is optional
+Format: `add TASK_NAME p/PRIORITY_LEVEL sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...`
 
-> * To add floating tasks, simply do not specify the start and end timing paramters.<br>
-> * To add tasks with deadlines, simply specify the end timing.<br>
-> * To add recurring tasks, see section 2.2.1.<br>
-> * Any of these 3 types of tasks can have 0 or more tags.<br>
+> * The TASK_NAME must be **2 or more characters** long. It can begin with any alphabet, number, or special character.
+> * The PRIORITY_LEVEL must be an integer between **1-3**. 1 is the HIGHEST priority level and 3 is the LOWEST (default) priority level.
+> * **TIMEDATE Format: HH:mm dd/MM/yyyy** (HH:MM is optional). The start/end timing parameters (sd/ed respectively) must be in the date > format specified above. Note that "sd/2:15 1/1/2017 is invalid; the correct format is "sd/02:15 01/01/2017".
+> * To add floating tasks, simply do not specify the start and end timing paramters.
+> * To add tasks with deadlines, simply specify the end timing.
+> * To add recurring tasks, see section 2.2.1.
+> * Any of these 3 types of tasks can have 0 or more tags.
 
 Examples:
+
 * `add Watch Friends season 2`
 * `add Submit assignment for MA1101R P/1 sd/09/04/2017 ed/16:00 13/04/2017`
 * `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
@@ -69,7 +71,7 @@ Examples:
 
   ### 2.2.1. Adding a recurring task
 
-  > * Adds a recurring task to the task list<br>
+  > * Adds a recurring task to the task list
   > * Format: same as 'add' but specifcy the frequency by r/#_
   > where '#' is an integer and '_' is either 'd' (day), 'm' (month), or 'y' (year)
 
@@ -93,12 +95,15 @@ Example:
 ### 2.4. Editing a task : `edit`
 
 Edits an existing task in the task list.<br>
-Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
+Format: `edit INDEX [TASKNAME] p/PRIORITY sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
+> * The TASK_NAME must be **2 or more characters** long. It can begin with any alphabet, number, or special character.
+> * The PRIORITY_LEVEL must be an integer between **1-3**. 1 is the HIGHEST priority level and 3 is the LOWEST (default) priority level.
+> * **TIMEDATE Format: HH:mm dd/MM/yyyy** (HH:MM is optional). The start/end timing parameters (sd/ed respectively) must be in the date > format specified above. Note that "sd/2:15 1/1/2017 is invalid; the correct format is "sd/02:15 01/01/2017".
 > * Edits the task at the specified `INDEX`.
-  The index refers to the index number shown in the last task listing.<br>
-  The index **must be a positive integer** 1, 2, 3, etc.
+> The index refers to the index number shown in the last task listing.<br>
+> The index **must be a positive integer** 1, 2, 3, etc.
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
@@ -165,7 +170,7 @@ Examples:
 
 ### 2.6. Deleting a task : `delete`
 
-Deletes the specified task from the task list. Irreversible.<br>
+Deletes the specified task from the task list.<br>
 Format: `delete INDEX`
 
 > * Deletes the task at the specified `INDEX`. <br>
@@ -230,7 +235,7 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 > * The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
 > * Using `prioritize` on a recurring task will change the priority of ALL occurrences.
 > * **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
-priority.
+> priority.
 
 Examples:
 
@@ -345,3 +350,9 @@ the implementation of such tasks. A few things to note about how to use this fea
 
 * **Save** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
+   
+* **Redo** : `redo` <br>
+   e.g. `redo`
+
+* **Undo** : `undo` <br>
+   e.g. `undo`
