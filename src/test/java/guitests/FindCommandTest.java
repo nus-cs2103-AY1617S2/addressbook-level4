@@ -26,7 +26,7 @@ public class FindCommandTest extends TypeTaskGuiTest {
     }
     //@@author A0139926R
     @Test
-    public void findValidDate_success() {
+    public void find_validDate_success() {
         int expectedListSize = 1;
         commandBox.runCommand("find Oct 10 1993");
         assertListSize(expectedListSize);

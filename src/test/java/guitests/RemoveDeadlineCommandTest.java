@@ -25,13 +25,13 @@ public class RemoveDeadlineCommandTest extends TypeTaskGuiTest {
         assertRemovedeadlineSuccess(editIndex);
     }
     @Test
-    public void removedeadlineWithNoIndex_fail() {
+    public void removedeadline_withNoIndex_fail() {
         commandBox.runCommand(REMOVEDEADLINE_COMMAND_SHORT);
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveDeadlineCommand.MESSAGE_USAGE));
     }
     @Test
-    public void removedeadlineWithInvalidIndex_fail() {
+    public void removedeadline_withInvalidIndex_fail() {
         commandBox.runCommand(REMOVEDEADLINE_COMMAND_SHORT + " 500");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }

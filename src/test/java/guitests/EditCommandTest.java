@@ -20,7 +20,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
     private TestTask[] expectedTasksList = td.getTypicalTasks();
 
     @Test
-    public void editAllFieldsSpecifiedSuccess() throws Exception {
+    public void edit_allFieldsSpecified_success() throws Exception {
         String detailsToEdit = "Bobby ";
         int typeTaskIndex = 1;
 
@@ -31,7 +31,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
     }
 
     @Test
-    public void editNotAllFieldsSpecifiedUsingDateAndPriorityPrefix_success() throws Exception {
+    public void edit_notAllFieldsSpecifiedUsingDateAndPriorityPrefix_success() throws Exception {
         String detailsToEdit = "by:10/10/1993 p/High";
         int typeTaskIndex = 2;
 
@@ -42,7 +42,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
         assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
     }
     @Test
-    public void editNotAllFieldsSpecifiedUsingPrefixForEvent_success() throws Exception {
+    public void edit_notAllFieldsSpecifiedUsingPrefixForEvent_success() throws Exception {
         String detailsToEdit = "from: 10 oct 1993 to: 12 oct 1993";
         int typeTaskIndex = 2;
 
@@ -54,47 +54,47 @@ public class EditCommandTest extends TypeTaskGuiTest {
         assertEditSuccess(typeTaskIndex, typeTaskIndex, detailsToEdit, editedTask);
     }
     @Test
-    public void editWithInvalidName_fail() {
+    public void edit_withInvalidName_fail() {
         commandBox.runCommand("edit 1 ^_^");
         assertResultMessage(Name.MESSAGE_NAME_CONSTRAINTS);
     }
     @Test
-    public void editFindThenEditInvalidSchedule_fail() {
+    public void findThenEdit_invalidSchedule_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 from: 12 Oct 1993 to: 10 Oct 1993";
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_START_AND_END_DATE);
     }
     @Test
-    public void editFindThenEditStartDateToInvalidSchedule_fail() {
+    public void findThenEdit_startDateToInvalidSchedule_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 from: 12 Oct 1993";
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(EditCommand.MESSAGE_INVALID_DATE);
     }
     @Test
-    public void editFindThenEditToInvalidDeadline_fail() {
+    public void findThenEdit_invalidDeadline_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 by: LOL";
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
     }
     @Test
-    public void editFindThenEditToInvalidDeadlineWithTimePrefix_fail() {
+    public void findThenEdit_invalidDeadlineWithTimePrefix_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 @ LOL";
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_DATE);
     }
     @Test
-    public void editFindThenEditToInvalidStartDate_fail() {
+    public void findThenEdit_invalidStartDate_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 from: LOL";
         commandBox.runCommand(detailsToEdit);
         assertResultMessage(Messages.MESSAGE_INVALID_DATE_FORMAT_FOR_START_DATE);
     }
     @Test
-    public void editFindThenEditToInvalidEndDate_fail() {
+    public void findThenEdit_invalidEndDate_fail() {
         commandBox.runCommand("find George");
         String detailsToEdit = "edit 1 to: LOL";
         commandBox.runCommand(detailsToEdit);
@@ -102,7 +102,7 @@ public class EditCommandTest extends TypeTaskGuiTest {
     }
 
     @Test
-    public void editFindThenEditSuccess() throws Exception {
+    public void edit_findThenEdit_success() throws Exception {
         commandBox.runCommand("find Elle");
 
         String detailsToEdit = "Belle @Oct 10 1993";
@@ -118,19 +118,19 @@ public class EditCommandTest extends TypeTaskGuiTest {
     }
 
     @Test
-    public void editMissingTaskIndexFailure() {
+    public void edit_missingTaskIndex_fail() {
         commandBox.runCommand("edit Bobby");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void editInvalidTaskIndexFailure() {
+    public void edit_invalidTaskIndex_fail() {
         commandBox.runCommand("edit 8 Bobby");
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
-    public void editNoFieldsSpecifiedFailure() {
+    public void edit_noFieldsSpecified_fail() {
         commandBox.runCommand("edit 1");
         assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
     }
