@@ -291,27 +291,27 @@ Examples:
 
 Command | Syntax | Example
 ------- | ------ | -------
-Help    | help
-Add     | add TASK | add submit report
-Add     | add TASK s/STARTING DATE | add submit report s/24/03/2017
-Add     | add TASK s/STARTING DATE e/ENDING DATE    | add submit report s/24/03/207 e/27/03/2017
-Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
-Add     | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
-List    | list
-List    | list KEYWORD                    | list todo
-Select  | select INDEX                    | select 3
-Edit    | edit INDEX COMPONENT            | edit 3 e/04/04/2017
-Find    | find KEYWORD(s)                 | find report assignment
-Find by Date | findbydate DATE | findbydate today
-Find by Date | findbydate DATE to DATE | findbydate today to next wednesday
-Delete  | delete INDEX                    | delete 3
-Sort    | sort KEYWORD                    | sort e/
-Undo    | undo
-Redo    | redo
-Done    | done INDEX                      | done 1
-Undone  | undone INDEX                    | undone 2
-Save as | saveas FILEPATH                 | saveas newtaskmanager.xml
-Load    | load FILEPATH                   | load /Users/admin/taskmanager.xml
-Clear   | clear
-Exit    | exit
+Help         | help
+Add          | add TASK                                                     | add submit report
+Add          | add TASK s/STARTING DATE                                     | add submit report s/24/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE                       | add submit report s/24/03/207 e/27/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description         | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
+List         | list
+List         | list KEYWORD                                                 | list todo
+Select       | select INDEX                                                 | select 3
+Edit         | edit INDEX COMPONENT                                         | edit 3 e/04/04/2017
+Find         | find KEYWORD(s)                                              | find report assignment
+Find by Date | findbydate DATE                                              | findbydate today
+Find by Date | findbydate DATE to DATE                                      | findbydate today to next wednesday
+Delete       | delete INDEX                                                 | delete 3
+Sort         | sort KEYWORD                                                 | sort e/
+Undo         | undo
+Redo         | redo
+Done         | done INDEX                                                   | done 1
+Undone       | undone INDEX                                                 | undone 2
+Save as      | saveas FILEPATH                                              | saveas newtaskmanager.xml
+Load         | load FILEPATH                                                | load /Users/admin/taskmanager.xml
+Clear        | clear
+Exit         | exit
 <br>
