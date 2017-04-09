@@ -10,7 +10,7 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_SUCCESS = "Results filtered";
     public static final String MESSAGE_FAILURE = "Failed to filter";
-    public static final String MESSAGE_USAGE = "Filter works like this";
+    public static final String MESSAGE_USAGE = "Invalid format for filter. filter [type] [arguments]";
 
     public FilterCommand(Predicate<Object> predicate) {
         this.predicate = predicate;
