@@ -1,14 +1,23 @@
 # Test Script for TypeTask
 
 **Command:**<br>
-(Pre-condition: src\test\data\ManualTest\taskManager.xml exists, rename given SampleData.xml to taskManager.xml)
+(Pre-condition: src/test/data/ManualTesting/SampleData.xml exists, rename given SampleData.xml to taskmanager.xml)
 
-    use src/test/data/ManualTest
+    use src/test/data/ManualTesting
 
 **Expected Result:**
 
 * "Task Manager is updated" will be displayed on the ResultDisplayBar.
-* Load tasks from taskManager.xml in src/test/data/ManualTest to myPotato.
+* Load tasks from taskManager.xml in src/test/data/ManualTesting to TypeTask.
+
+**Command:**
+
+    setting src/test/data/ManualTesting
+
+**Expected Result:**
+
+* Set your default file location to src/test/data/ManualTesting.
+* Saves any changes to this file(taskmanager.xml) in src/test/data/ManualTesting from now on.
 
 **Command:**
 
