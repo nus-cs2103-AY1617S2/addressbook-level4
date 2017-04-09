@@ -16,7 +16,7 @@ public class StartDate {
 
     public static final String MESSAGE_STARTDATE_CONSTRAINTS =
             "Event Start Date can take only 6 digits, and it should be in DDMMYY format (Day-Month-Year)\n"
-            + "today, tomorow/tmr, monday/mon, tue/tues/tuesday, wed/weds/wednesday, thu/thurs/thursday,"
+            + "today, tomorrow/tmr, monday/mon, tue/tues/tuesday, wed/weds/wednesday, thu/thurs/thursday,"
             + " fri/friday, sat/saturday, sun/sunday, next, following are also acceptable\n"
             + "Example: next fri\n"
             + "Example: 250317\n";
