@@ -19,6 +19,7 @@ import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.watodo.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.watodo.commons.util.StringUtil;
 import seedu.watodo.logic.Logic;
+import seedu.watodo.logic.commands.AlternativeCommandsLibrary;
 import seedu.watodo.model.UserPrefs;
 
 /**
@@ -63,6 +64,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
+        prefs.updateLastestAlternativeCommandsLib(AlternativeCommandsLibrary.altCommands);
         mainWindow.hide();
     }
 
