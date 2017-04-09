@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.doist.commons.events.config.AbsoluteStoragePathChangedEvent;
 import seedu.doist.commons.events.model.AliasListMapChangedEvent;
 import seedu.doist.commons.events.model.TodoListChangedEvent;
 import seedu.doist.commons.events.storage.DataSavingExceptionEvent;
@@ -114,6 +115,15 @@ public class StorageManagerTest {
     public void setTodoListFilePath() {
         storageManager.setTodoListFilePath("test/todolist.xml");
         assertEquals(storageManager.getTodoListFilePath(), "test/todolist.xml");
+    }
+
+    @Test
+    public void handleAbsoluteStoragePathChangedEvent_eventRaised() {
+        storageManager.handleAbsoluteStoragePathChangedEvent(new AbsoluteStoragePathChangedEvent("todo.xml",
+                "alias.xml", "pref.xml"));
+        assertEquals(storageManager.getTodoListFilePath(), "todo.xml");
+        assertEquals(storageManager.getUserPrefsFilePath(), "pref.xml");
+        assertEquals(storageManager.getAliasListMapFilePath(), "alias.xml");
     }
 
     //@@author
