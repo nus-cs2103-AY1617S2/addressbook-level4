@@ -20,7 +20,7 @@ To add a task, starting command with keyword `add`.
 
 Feedback shows:
 
-> New task added: Buy fruits
+> New task added: Buy fruits<br/>
 > Status: incomplete
 
 Newly added task should be at index #22 without any attributes below it.
