@@ -328,6 +328,8 @@ the implementation of such tasks. A few things to note about how to use this fea
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br>
 **Q**: How do I change the calendar to view a different month?<br>
 **A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.
+**Q**: How do I undo changes made in a previous session?
+**A**: Unfortunately, command history is cleared upon exiting Task Manager. So, you won't be able to undo those changes. Sorry!
 
 ## 5. Command Summary
 

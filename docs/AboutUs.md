@@ -27,8 +27,8 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Tyler Austin Rocha](https://github.com/tylerrocha)
 <img src="images/tylerrocha.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Storage, GitHub, dev tools
-* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>
+Responsibilities: Storage, GitHub
+* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>g
 * Features implemented:
     * [Comparable Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.3.1)
     * [Save Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.11)
