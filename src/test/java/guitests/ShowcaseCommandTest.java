@@ -19,10 +19,10 @@ public class ShowcaseCommandTest extends TaskManagerGuiTest {
 		}
 		Random rand = new Random();
 		for (int i = 0; i < 3; i++) {
-			int number = rand.nextInt(100);
+			int number = rand.nextInt(50);
 			commandBox.runCommand("showcase " + number);
 			System.out.println(number + " " + taskListPanel.getNumberOfPeople());
-			//assertTrue(number == taskListPanel.getNumberOfPeople());
+			assertTrue(number == taskListPanel.getNumberOfPeople());
 		}
 	}
 
