@@ -20,7 +20,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import com.google.api.services.calendar.Calendar;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.jobs.commons.core.EventsCenter;
