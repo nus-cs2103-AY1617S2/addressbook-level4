@@ -569,12 +569,12 @@ Use case ends.
 >2c1. Show all possible matches
 >Use case ends
 
-### Use Case: Change file storage location
+### Use Case: Change data storage location
 
 **MSS**
 
-1. User types in the command to change file storage location
-2. Doist shows the task, and displays a success message
+1. User types in the command to change data storage location to a certain folder
+2. Doist changes the storage location and displays a success message
 
 Use case ends.
 
@@ -590,7 +590,7 @@ Use case ends.
 > 2b1. Doist shows an appropriate message
 > Use case ends
 
-2c. There already exists a file (that is not a valid storage file) with the same name at that path
+2c. There already exists a file (not a folder) with the same name at that path
 
 > 2b1. Doist shows an appropriate message
 > Use case ends
@@ -615,7 +615,6 @@ Use case ends.
 - Commands should be easy to learn.
 - The data should be stored locally in the form of a human editable text file
 - The software should work without requiring an installer
-- Send reminders by pop-ups
 - Can have tasks across days, weeks, months, years, centuries...
 
 See the rest of the NFRs at:
@@ -631,8 +630,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     - `Priority`
     - `Start time` (optional)
     - `End time` (optional)
-    - `Reminder time` (optional)
-    - `Recurrence interval` (optional)
     - `isFinished` (default false)
     - `Tags` (can be empty)
 - About the properties
@@ -640,8 +637,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     There are three priorities: High, Medium, Low. By default, tasks are low priority.
     - `Tags`
     Tags are independent of tasks. Tags and tasks have a many-to-many relationship where zero or more tags can be added to a task and zero or more tasks can be listed under a tag
-    - `Recurrence interval`
-    Specifies the interval at which user wants to be reminded of a recurring task
 - Special Types
     - `Event`
     A task with different `start time` and `end time`. It represents tasks to be carried out over a period of time
@@ -655,8 +650,6 @@ http://www.comp.nus.edu.sg/~cs2103/AY1617S2/contents/handbook.html#handbook-proj
     Tasks that have `ended` but not been `finished`
     - `Finished tasks`
     Tasks that have been `finished`
-    - `Recurring task`
-    A task with a `recurrence interval` set. A new task will automatically be cloned from this task, with the recurrence interval added to the task's `start time`, `end time` and `reminder time` when a task is marked as `Finished` or becomes `Overdue`
 
 **R/W**
     Reading and Writing
