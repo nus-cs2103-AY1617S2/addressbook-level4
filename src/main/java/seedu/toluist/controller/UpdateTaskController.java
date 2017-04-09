@@ -49,26 +49,27 @@ public class UpdateTaskController extends Controller {
 
   //@@author A0162011A
     private static final String HELP_DETAILS = "Updates an existing task in the todo list.";
-    private static final String HELP_FORMAT = "update INDEX [NAME] [from/STARTDATE to/ENDDATE] "
-                                                        + "[by/ENDDATE] [repeat/PERIOD(daily/weekly/monthly)] "
-                                                        + "[priority/PRIORITY(high/low)] [tags/TAGS]";
+    private static final String HELP_FORMAT = "update INDEX [NAME] [/from STARTDATE /to ENDDATE] "
+                                                        + "[/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly)] "
+                                                        + "[/stoprepeat] [/priority PRIORITY(high/low)] "
+                                                        + "[/tags TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `add`, `delete`",
                                                     "Only fields entered will be updated.",
                                                     "When editing tags, the existing tags "
                                                         + "will be replaced with the new tags.",
-                                                    "Events can be changed to deadlines by using `by/`",
-                                                    "Deadlines can be changed to events by using `from/` and `to/`" };
+                                                    "Events can be changed to deadlines by using `/by`",
+                                                    "Deadlines can be changed to events by using `/from` and `/to`" };
     private static final String[] HELP_EXAMPLES = { "`update 1 new name`\nUpdates the name "
                                                         + "for the floating task at index 1 to `new name`.",
-                                                    "`update 2 from/today to/tomorrow`\n"
+                                                    "`update 2 /from today /to tomorrow`\n"
                                                         + "Updates the start and end time of the event at index 2.",
-                                                    "`update 3 by/sunday`\n"
+                                                    "`update 3 /by sunday`\n"
                                                         + "Updates the end time of the deadline at index 3.",
-                                                    "`update 4 repeat/daily by/9pm`\nUpdates the task "
+                                                    "`update 4 /repeat daily /by 9pm`\nUpdates the task "
                                                         + "at index 4 to repeat every day with a deadline of 9pm.",
-                                                    "`update 5 priority/high`\n"
+                                                    "`update 5 /priority high`\n"
                                                         + "Updates the priority of the task at index 5 to high.",
-                                                    "`update 6 tags/newtag`\n"
+                                                    "`update 6 /tags newtag`\n"
                                                         + "Updates the tags for the task at index 6 to `newtag`." };
 
     //@@author A0127545A
