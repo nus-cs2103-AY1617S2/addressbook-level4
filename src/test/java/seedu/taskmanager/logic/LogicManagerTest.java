@@ -941,6 +941,55 @@ public class LogicManagerTest {
     }
     // @@author
 
+    // @@author A0140032E
+    @Test
+    public void execute_done_recurring_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
+                Optional.of(new Repeat("DAY")), new UniqueTagList(new Tag("tag1")));
+        Task tExpected1 = new Task(new Title("Task A"), Optional.of(new StartDate("02/01/2017")),
+                Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
+                Optional.of(new Repeat("DAY")), new UniqueTagList(new Tag("tag1")));
+        Task tExpected2 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")), Optional.empty(),
+                new Status(true), new UniqueTagList(new Tag("tag1")));
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1);
+        List<Task> modifiedTasks = helper.generateTaskList(tExpected1, tExpected2);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
+        List<Task> expectedList = helper.generateTaskList(tExpected1, tExpected2);
+        helper.addToModel(model, initialTasks);
+
+        // execute command and verify result
+        assertCommandSuccess("done 1", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tExpected2),
+                expectedTM, expectedList);
+    }
+
+    @Test
+    public void execute_done_last_recurring_successful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+
+        Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
+                Optional.of(new Repeat("YEAR")), new UniqueTagList(new Tag("tag1")));
+        Task tExpected1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
+                Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")), Optional.empty(),
+                new Status(true), new UniqueTagList(new Tag("tag1")));
+
+        List<Task> initialTasks = helper.generateTaskList(tTarget1);
+        List<Task> modifiedTasks = helper.generateTaskList(tExpected1);
+        TaskManager expectedTM = helper.generateTaskManager(modifiedTasks);
+        List<Task> expectedList = helper.generateTaskList(tExpected1);
+        helper.addToModel(model, initialTasks);
+
+        // execute command and verify result
+        assertCommandSuccess("done 1", String.format(DoneCommand.MESSAGE_MARK_DONE_TASK_SUCCESS, tExpected1),
+                expectedTM, expectedList);
+    }
+    // @@author
+
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
