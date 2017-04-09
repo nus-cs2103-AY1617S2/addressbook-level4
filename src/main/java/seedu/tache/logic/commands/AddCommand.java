@@ -33,7 +33,7 @@ public class AddCommand extends Command implements Undoable {
     public static final String TAG_SEPARATOR = "t/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. \n"
-            + "Parameters: NAME [from <START DATE & TIME>] [to <END DATE & TIME>] [t/TAG1 TAG2...]\n"
+            + "Parameters: NAME [[[<INTERVAL>] from <START DATE & TIME>] to <END DATE & TIME>] [t/TAG1 TAG2...]\n"
             + "Example: " + COMMAND_WORD
             + " Orientation week camp from 25/7/16 0800 to 28/7/2016 0900 t/ HighPriority Events";
 
