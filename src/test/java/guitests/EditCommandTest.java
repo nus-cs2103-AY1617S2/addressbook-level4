@@ -65,7 +65,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
 
 	@Test
 	public void edit_clearTags_success() throws Exception {
-		String detailsToEdit = "-t";
+		String detailsToEdit = "-t reaper";
 		int taskManagerIndex = 2;
 
 		TestEvent taskToEdit = expectedTaskList[taskManagerIndex - 1];
