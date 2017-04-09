@@ -8,10 +8,9 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Date;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Date;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestPerson;
 
@@ -89,7 +88,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
         commandBox.runCommand("edit 1 s/ssse");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
-        
+
         commandBox.runCommand("edit 1 d/iiie");
         assertResultMessage(Date.MESSAGE_DATE_CONSTRAINTS);
 

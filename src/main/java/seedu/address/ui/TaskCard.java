@@ -10,7 +10,7 @@ import seedu.address.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -26,10 +26,10 @@ public class TaskCard extends UiPart<Region> {
 
     public TaskCard(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        
+
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        
+
         if (person.getEndDate() == null) {
             end.setVisible(false);
             end.setStyle("-fx-font-size: 0pt;");
@@ -43,13 +43,13 @@ public class TaskCard extends UiPart<Region> {
         } else {
             start.setText("Starts: " + person.getStartDate());
         }
-        
+
         group.setText(person.getGroup().value);
-        
+
         if (person.hasPassed()) {
             setStyleToIndicateEndDatePassed();
         }
-        
+
         cardPane.autosize();
     }
 

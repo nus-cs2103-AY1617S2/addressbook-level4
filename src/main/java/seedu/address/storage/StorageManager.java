@@ -93,7 +93,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-    
+
     //@@author A0163848R
     @Override
     @Subscribe
@@ -104,33 +104,33 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-    
+
     @Override
     @Subscribe
     public void handleLoadRequestEvent(LoadRequestEvent ire) {
         Optional<ReadOnlyTaskManager> loaded = null;
-        
+
         try {
             loaded = readAddressBook(ire.getTargetFile().getPath());
         } catch (DataConversionException | IOException e) {
         }
-        
+
         raise(new LoadResultAvailableEvent(loaded, ire.getTargetFile()));
     }
-    
+
     @Override
     @Subscribe
     public void handleImportRequestEvent(ImportRequestEvent ire) {
         Optional<ReadOnlyTaskManager> loaded = null;
-        
+
         try {
             loaded = readAddressBook(ire.getTargetFile().getPath());
         } catch (DataConversionException | IOException e) {
         }
-        
+
         raise(new ImportResultAvailableEvent(loaded));
     }
-    
+
     @Override
     @Subscribe
     public void handleTargetFileRequestEvent(TargetFileRequestEvent tfre) {

@@ -1,11 +1,8 @@
 package seedu.address.ui;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
@@ -21,7 +18,7 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
-    
+
     private String lastCommand = null;
 
     public CommandBox(AnchorPane commandBoxPlaceholder, Logic logic) {
@@ -30,7 +27,7 @@ public class CommandBox extends UiPart<Region> {
         addToPlaceholder(commandBoxPlaceholder);
         setAccelerators();
     }
-    
+
     //@@author A0163848R
     private void setAccelerators() {
         commandTextField.setOnKeyPressed(keyEvent -> {
@@ -65,13 +62,13 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandSuccess();
             commandTextField.setText("");
             LOGGER.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser,false));
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser, false));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
             LOGGER.info("Invalid command: " + commandTextField.getText());
-            raise(new NewResultAvailableEvent(e.getMessage(),true));
+            raise(new NewResultAvailableEvent(e.getMessage(), true));
         }
         //@@author
     }
@@ -90,14 +87,14 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(Ui.ERROR_STYLE_CLASS);
     }
-    
+
     //@@author A0163848R
     private void handleLast() {
         if (lastCommand != null) {
             commandTextField.setText(lastCommand);
         }
     }
-    
+
     private void handleClear() {
         commandTextField.clear();
     }

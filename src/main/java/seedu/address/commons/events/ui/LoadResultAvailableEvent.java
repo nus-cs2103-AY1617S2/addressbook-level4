@@ -23,11 +23,11 @@ public class LoadResultAvailableEvent extends BaseEvent {
     public Optional<ReadOnlyTaskManager> getImported() {
         return imported;
     }
-    
+
     public File getFile() {
         return origin;
     }
-    
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName();

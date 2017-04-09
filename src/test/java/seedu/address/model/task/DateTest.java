@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.task.Date;
 //@@author A0164032U
 public class DateTest {
 
@@ -17,7 +16,7 @@ public class DateTest {
         assertFalse(Date.isValidDate("^")); // only non-alphanumeric characters
         assertFalse(Date.isValidDate("peter*")); // contains non-alphanumeric characters
         assertFalse(Date.isValidDate("testing")); // meaningless alphabets
-        
+
         // valid date
         assertTrue(Date.isValidDate("tomorrow")); // relative dates(relative to current date)
         assertTrue(Date.isValidDate("3 weeks ago")); // relative dates(relative to current date)

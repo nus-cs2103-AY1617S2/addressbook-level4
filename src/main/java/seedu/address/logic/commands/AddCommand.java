@@ -1,14 +1,10 @@
 package seedu.address.logic.commands;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.Date;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.FloatingTask;
@@ -65,7 +61,7 @@ public class AddCommand extends Command {
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
     }
-    
+
     //@@author A0164032U
     public AddCommand(String name, String start, String end, String group) throws IllegalValueException {
         this.toAdd = new Task(
@@ -76,14 +72,14 @@ public class AddCommand extends Command {
                 UniqueTagList.build(Tag.TAG_INCOMPLETE)
                 );
     }
-    
+
     //@@author A0164466X
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
         try {
             model.addTask(toAdd);
-            
+
             String message = MESSAGE_SUCCESS + (toAdd.hasPassed() ? "\n" + MESSAGE_PASSED : "");
             return new CommandResult(String.format(message, toAdd));
         } catch (UniqueTaskList.DuplicatePersonException e) {

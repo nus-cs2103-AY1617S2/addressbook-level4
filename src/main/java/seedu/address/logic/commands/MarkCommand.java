@@ -60,7 +60,7 @@ public class MarkCommand extends Command {
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, personToEdit));
     }
-    
+
     //@@author A0164466X
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
@@ -86,5 +86,5 @@ public class MarkCommand extends Command {
 
         return new Task(personToEdit.getName(),
                 personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
-}
+    }
 }

@@ -10,19 +10,19 @@ import seedu.address.model.ReadOnlyTaskManager;
  * Represents a request to export the stored YTomorrow.
  */
 public class ExportRequestEvent extends BaseEvent {
-    
+
     private ReadOnlyTaskManager toExport;
     private File target;
-    
+
     public ExportRequestEvent(ReadOnlyTaskManager toExport, File target) {
         this.toExport = toExport;
         this.target = target;
     }
-    
+
     public ReadOnlyTaskManager getYTomorrowToExport() {
         return toExport;
     }
-    
+
     public File getTargetFile() {
         return target;
     }

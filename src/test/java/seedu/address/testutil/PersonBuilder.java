@@ -51,7 +51,7 @@ public class PersonBuilder {
         this.person.setEndDate(new EndDate(date));
         return this;
     }
-    
+
     //@@author A0164032U
     public PersonBuilder withStartDate(String sdate) throws IllegalValueException {
         this.person.setStartDate(new StartDate(sdate));

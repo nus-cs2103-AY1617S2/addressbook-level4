@@ -75,11 +75,11 @@ public class MainApp extends Application {
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyTaskManager> addressBookOptional = null;
-        ReadOnlyTaskManager initialData ;
-        
+        ReadOnlyTaskManager initialData;
+
         try {
             String prefPath = userPrefs.getGuiSettings().getLastLoadedYTomorrow();
-            
+
             if (prefPath != null) {
                 addressBookOptional = storage.readAddressBook(prefPath);
             }

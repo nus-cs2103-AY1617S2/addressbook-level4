@@ -40,24 +40,24 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
-    
+
     //@@author A0164889E
     @Override
     public ObservableList<ReadOnlyTask> getFilteredPersonListComplete() {
         return model.getFilteredPersonListComplete();
     }
-    
+
     //@@author A0163848R
     @Override
     public ReadOnlyTaskManager getYTomorrow() {
         return model.getAddressBook();
     }
-    
+
     @Override
     public void setYTomorrow(ReadOnlyTaskManager set) {
         model.resetData(set);
     }
-    
+
     @Override
     public void importYTomorrow(ReadOnlyTaskManager add) {
         model.mergeYTomorrow(add);

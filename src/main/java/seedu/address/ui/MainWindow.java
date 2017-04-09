@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -19,12 +18,9 @@ import seedu.address.commons.events.ui.ImportRequestEvent;
 import seedu.address.commons.events.ui.LoadRequestEvent;
 import seedu.address.commons.events.ui.TargetFileRequestEvent;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.YTomorrow;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -64,22 +60,22 @@ public class MainWindow extends Window {
 
     @FXML
     private MenuItem saveMenuItem;
-    
+
     @FXML
     private MenuItem loadMenuItem;
-    
+
     @FXML
     private MenuItem exportMenuItem;
-    
+
     @FXML
     private MenuItem importMenuItem;
-    
+
     @FXML
     private MenuItem helpMenuItem;
-    
+
     @FXML
     private MenuItem themeMenuItem;
-    
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
 
@@ -111,7 +107,8 @@ public class MainWindow extends Window {
     void fillInnerParts() {
         personListPanel = new TaskListPanel(getPersonListPlaceholder(), logic.getFilteredPersonList());
         //@@author A0164889E
-        personListPanelComplete = new TaskListPanelComplete(getPersonListCompletePlaceholder(), logic.getFilteredPersonListComplete());
+        personListPanelComplete = new TaskListPanelComplete(getPersonListCompletePlaceholder(),
+                logic.getFilteredPersonListComplete());
         //@@author
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -151,7 +148,7 @@ public class MainWindow extends Window {
                 Paths.get(getRoot().getStylesheets().get(0)).getFileName().toString().replaceFirst("[.][^.]+$", ""),
                 prefs.getGuiSettings().getLastLoadedYTomorrow());
     }
-    
+
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
@@ -163,45 +160,45 @@ public class MainWindow extends Window {
     public void handleSave() {
         File selected = FileUtil.promptSaveFileDialog("Save and Use YTomorrow File", getStage(),
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
-        
+
         if (selected != null) {
             ReadOnlyTaskManager current = logic.getYTomorrow();
             raise(new ExportRequestEvent(current, selected));
             raise(new TargetFileRequestEvent(selected, prefs));
         }
     }
-    
+
     @FXML
     public void handleLoad() {
         File selected = FileUtil.promptOpenFileDialog("Load and Use YTomorrow File", getStage(),
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
-        
+
         if (selected != null) {
             raise(new LoadRequestEvent(selected));
         }
     }
-    
+
     @FXML
     public void handleExport() {
         File selected = FileUtil.promptSaveFileDialog("Export YTomorrow File", getStage(),
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
-        
+
         if (selected != null) {
             ReadOnlyTaskManager current = logic.getYTomorrow();
             raise(new ExportRequestEvent(current, selected));
         }
     }
-    
+
     @FXML
     public void handleImport() {
         File selected = FileUtil.promptOpenFileDialog("Import YTomorrow File", getStage(),
                 new ExtensionFilter("YTomorrow XML Files", "*.xml"));
-        
+
         if (selected != null) {
             raise(new ImportRequestEvent(selected));
         }
     }
-    
+
     @FXML
     public void handleTheme() {
         ThemeWindow themeWindow = new ThemeWindow(getRoot());

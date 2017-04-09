@@ -39,7 +39,7 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(TaskManagerChangedEvent abce);
-    
+
     //@@author A0163848R
     /**
      * Saves the current version of the Address Book to the hard disk at a specified path.
@@ -47,17 +47,17 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleExportRequestEvent(ExportRequestEvent ere);
-    
+
     /**
      * Retrieves an Address Book at the specified path.
      */
     void handleImportRequestEvent(ImportRequestEvent ire);
-    
+
     /**
      * Sets the file to which Address Book saving is done.
      */
     void handleTargetFileRequestEvent(TargetFileRequestEvent tfre);
 
     void handleLoadRequestEvent(LoadRequestEvent ire);
-    
+
 }

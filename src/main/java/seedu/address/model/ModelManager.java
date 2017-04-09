@@ -47,10 +47,10 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         //@@author A0164889E
         filteredPersonsComplete = new FilteredList<>(this.addressBook.getPersonList());
-  
+
         indicateCompleteListToChange();
         //@@author
-        
+
         //@@author A0163848R
         history.push(addressBook);
         //@@author
@@ -168,16 +168,16 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0164889E
     public void indicateCompleteListToChange() {
         UniqueTagList tags;
-            try {
-                tags = new UniqueTagList("complete");
-                updateFilteredPersonListTag(tags);
-            } catch (DuplicateTagException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IllegalValueException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        try {
+            tags = new UniqueTagList("complete");
+            updateFilteredPersonListTag(tags);
+        } catch (DuplicateTagException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     //@@author A0164466X
@@ -305,7 +305,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0164889E
     private class GroupQualifier implements Qualifier {
         private Set<String> groupKeyWords;
- 
+
         GroupQualifier(Set<String> groupKeyWords) {
             this.groupKeyWords = groupKeyWords;
         }
@@ -322,13 +322,13 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", groupKeyWords);
         }
-     }
+    }
 
     //@@author A0164466X
     private class TagQualifier implements Qualifier {
         private UniqueTagList tags;
 
-        TagQualifier(UniqueTagList tags){
+        TagQualifier(UniqueTagList tags) {
             this.tags = tags;
         }
 

@@ -8,11 +8,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.model.task.EndDate;
-import seedu.address.model.task.Group;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.StartDate;
-
 /**
  * Utility methods related to Collections
  */
@@ -51,7 +46,7 @@ public class CollectionUtil {
         }
         return true;
     }
-    
+
     //@@author A0163848R
     /**
      * Returns first occurrence of the given type in the array.
@@ -67,9 +62,9 @@ public class CollectionUtil {
         }
         return null;
     }
-    
+
     public static String getRandom(String[] strs, Random r) {
         return strs[r.nextInt(strs.length)];
     }
-    
+
 }

@@ -10,14 +10,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Date;
-import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.EndDate;
-import seedu.address.model.task.FloatingTask;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartDate;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyTask;
 
 /**
  * JAXB-friendly version of the Person.
@@ -55,11 +53,11 @@ public class XmlAdaptedTask {
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
-        
+
         if (source.getEndDate() != null) {
             end = source.getEndDate().inputValue;
         }
-        
+
         if (source.getStartDate() != null) {
             start = source.getStartDate().inputValue;
         }
@@ -80,7 +78,7 @@ public class XmlAdaptedTask {
         final UniqueTagList tags = new UniqueTagList(personTags);
         final Date start = new StartDate(this.start);
         final Date end = new EndDate(this.end);
-        
+
         return Task.factory(name, start, end, group, tags);
     }
 }

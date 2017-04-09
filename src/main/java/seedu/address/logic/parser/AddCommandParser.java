@@ -27,28 +27,28 @@ public class AddCommandParser {
         argsTokenizer.tokenize(args);
         try {
             if (!argsTokenizer.getEmpty(PREFIX_START_DATE) && !argsTokenizer.getEmpty(PREFIX_END_DATE)) {
-                
+
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_START_DATE).get(),
                         argsTokenizer.getValue(PREFIX_END_DATE).get(),
                         argsTokenizer.getValue(PREFIX_GROUP).get()
                         );
-                
+
             } else if (!argsTokenizer.getEmpty(PREFIX_END_DATE)) {
-                
+
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_END_DATE).get(),
                         argsTokenizer.getValue(PREFIX_GROUP).get()
                         );
-                
+
             } else if (!argsTokenizer.getEmpty(PREFIX_START_DATE)) {
-                
+
                 throw new NoSuchElementException("");
-                
+
             } else {
-                
+
                 return new AddCommand(
                         argsTokenizer.getPreamble().get(),
                         argsTokenizer.getValue(PREFIX_GROUP).get()

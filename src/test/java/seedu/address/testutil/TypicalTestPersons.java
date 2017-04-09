@@ -11,7 +11,7 @@ import seedu.address.model.task.UniqueTaskList;
 public class TypicalTestPersons {
 
     public TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-    
+
     //@@author A0164889E
     public TypicalTestPersons() {
         try {

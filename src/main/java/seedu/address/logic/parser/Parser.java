@@ -77,7 +77,7 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        //@@author A0164466X     
+        //@@author A0164466X
         case ListCompleteCommand.COMMAND_WORD:
             return new ListCompleteCommand();
 

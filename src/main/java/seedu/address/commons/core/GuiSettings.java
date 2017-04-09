@@ -59,15 +59,15 @@ public class GuiSettings implements Serializable {
     public String getStyleSheet() {
         return styleSheet;
     }
-    
+
     public String getLastLoadedYTomorrow() {
         return lastLoadedYTomorrow;
     }
-    
+
     public void setStyleSheet(String path) {
         styleSheet = path;
     }
-    
+
     public void setLastLoadedYTomorrow(String path) {
         lastLoadedYTomorrow = path;
     }

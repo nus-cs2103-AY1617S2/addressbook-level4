@@ -1,11 +1,9 @@
 package seedu.address.model.task;
 
-import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -134,7 +132,7 @@ public class Task implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
-    
+
     //@@author A0164032U
     @Override
     public java.util.Date getStartTime() {
@@ -143,7 +141,7 @@ public class Task implements ReadOnlyTask {
         }
         return new java.util.Date(Long.MIN_VALUE);
     }
-    
+
     @Override
     public java.util.Date getEndTime() {
         if (end != null) {
@@ -151,9 +149,9 @@ public class Task implements ReadOnlyTask {
         }
         return new java.util.Date(Long.MAX_VALUE);
     }
-    
+
     //@@author A0164032U
-    public int compareTo(ReadOnlyTask o){
+    public int compareTo(ReadOnlyTask o) {
         return getEndTime().compareTo(o.getEndTime());
     }
 
@@ -164,11 +162,11 @@ public class Task implements ReadOnlyTask {
         UniqueTagList tags = CollectionUtil.firstOf(properties, UniqueTagList.class);
         StartDate start = CollectionUtil.firstOf(properties, StartDate.class);
         EndDate end = CollectionUtil.firstOf(properties, EndDate.class);
-        
+
         if (CollectionUtil.isAnyNull(name, group, tags)) {
             throw new IllegalValueException("Task Factory: new task requires a name, group, and tag list");
         }
-        
+
         if (start != null && end != null) {
             return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
@@ -176,7 +174,7 @@ public class Task implements ReadOnlyTask {
         } else if (start == null && end == null) {
             return new FloatingTask(name, group, tags);
         }
-        
+
         return null;
     }
 

@@ -44,8 +44,8 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
         //@@author A0164032U
         Comparator<Task> comparator = Comparator.comparing(Task::getEndTime);
-        FXCollections.sort(internalList,comparator);
-        //@@author 
+        FXCollections.sort(internalList, comparator);
+        //@@author
     }
 
     /**

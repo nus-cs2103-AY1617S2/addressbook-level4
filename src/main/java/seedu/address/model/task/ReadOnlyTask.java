@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -39,7 +37,7 @@ public interface ReadOnlyTask {
                 && ((other.getEndDate() == null && this.getEndDate() == null)
                         || ((other.getEndDate() != null && this.getEndDate() != null)
                                 && other.getEndDate().equals(this.getEndDate()))));
-        }
+    }
 
     /**
      * Formats the person as text, showing all contact details.
@@ -47,19 +45,19 @@ public interface ReadOnlyTask {
   //@@author A0164032U
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        
+
         boolean hasStartDate = getStartDate() != null;
         boolean hasEndDate = getEndDate() != null;
-        
+
         builder
-        .append(getName())
-        .append(hasStartDate ? " Start Date: " : "")
-        .append(hasStartDate ? getStartDate() : "")
-        .append(hasEndDate ? " End Date: " : "")
-        .append(hasEndDate ? getEndDate() : "")
-        .append(" Group: ")
-        .append(getGroup())
-        .append(" Status: ");
+            .append(getName())
+            .append(hasStartDate ? " Start Date: " : "")
+            .append(hasStartDate ? getStartDate() : "")
+            .append(hasEndDate ? " End Date: " : "")
+            .append(hasEndDate ? getEndDate() : "")
+            .append(" Group: ")
+            .append(getGroup())
+            .append(" Status: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

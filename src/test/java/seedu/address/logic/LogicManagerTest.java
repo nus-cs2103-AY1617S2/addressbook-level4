@@ -217,7 +217,8 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandSuccess(helper.generateAddCommand(toBeAdded),
-                String.format(AddCommand.MESSAGE_SUCCESS + (toBeAdded.hasPassed() ? "\n" + AddCommand.MESSAGE_PASSED : ""), toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS
+                        + (toBeAdded.hasPassed() ? "\n" + AddCommand.MESSAGE_PASSED : ""), toBeAdded),
                 expectedAB,
                 expectedAB.getPersonList());
 
@@ -420,7 +421,8 @@ public class LogicManagerTest {
             EndDate privateEndDate = new EndDate("12.11");
             StartDate privateStartDate = new StartDate("12.20");
             Group privateGroup = new Group("leisure time");
-            return new Task(name, privateStartDate, privateEndDate, privateGroup, UniqueTagList.build(Tag.TAG_INCOMPLETE));
+            return new Task(name, privateStartDate, privateEndDate,
+                    privateGroup, UniqueTagList.build(Tag.TAG_INCOMPLETE));
         }
 
         //@@author A0164889E

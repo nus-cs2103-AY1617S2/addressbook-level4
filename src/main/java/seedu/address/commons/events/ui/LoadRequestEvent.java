@@ -3,8 +3,6 @@ package seedu.address.commons.events.ui;
 import java.io.File;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.YTomorrow;
 
 //@@author A0163848R-reused
 /**
@@ -13,11 +11,11 @@ import seedu.address.model.YTomorrow;
 public class LoadRequestEvent extends BaseEvent {
 
     private File target;
-    
+
     public LoadRequestEvent(File target) {
         this.target = target;
     }
-    
+
     public File getTargetFile() {
         return target;
     }

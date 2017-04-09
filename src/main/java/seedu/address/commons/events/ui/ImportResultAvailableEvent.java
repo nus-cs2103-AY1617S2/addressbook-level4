@@ -20,7 +20,7 @@ public class ImportResultAvailableEvent extends BaseEvent {
     public Optional<ReadOnlyTaskManager> getImported() {
         return imported;
     }
-    
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName();

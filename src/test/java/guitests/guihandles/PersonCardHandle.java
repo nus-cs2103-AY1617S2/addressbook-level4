@@ -47,7 +47,7 @@ public class PersonCardHandle extends GuiHandle {
     public String getEndDate() {
         return getTextFromLabel(ENDDATE_FIELD_ID);
     }
-    
+
     public List<String> getTags() {
         return getTags(getTagsContainer());
     }

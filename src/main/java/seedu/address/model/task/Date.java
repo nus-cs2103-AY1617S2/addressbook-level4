@@ -1,10 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.List;
-
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 
@@ -27,14 +22,14 @@ public abstract class Date {
         assert date != null;
 
         inputValue = date;
-        
+
         if (date != null) {
             value = DateUtil.parse(date);
         } else {
             value = new java.util.Date();
         }
     }
-    
+
     public java.util.Date getTime() {
         return value;
     }
@@ -55,9 +50,9 @@ public abstract class Date {
                         && this.value.equals(((Date) other).value));
     }
     //@@author A0164032U
-   public static boolean isValidDate(String date){
-            return DateUtil.isValidDate(date);
-   }
+    public static boolean isValidDate(String date) {
+        return DateUtil.isValidDate(date);
+    }
 
     @Override
     public int hashCode() {
