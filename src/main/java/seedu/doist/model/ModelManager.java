@@ -64,7 +64,6 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TodoList(), new UserPrefs());
     }
 
-    //@@author A0147980U
     //=========== TodoList =============================================================
 
     @Override
