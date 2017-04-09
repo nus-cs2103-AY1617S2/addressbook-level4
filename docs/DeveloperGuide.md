@@ -18,16 +18,16 @@
     3.6. [Common Classes](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#36-common-classes) <br>
 4. [Implementation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#4-implementation) <br>
     4.1. [Logging](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#41-logging) <br>
-    4.2  [Configuration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#42-configuration) <br>
+    4.2.  [Configuration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#42-configuration) <br>
 5. [Testing](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#5-testing) <br>
-    5.1 [Troubleshooting tests](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#51-troubleshooting-tests) <br>
+    5.1. [Troubleshooting tests](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#51-troubleshooting-tests) <br>
 6. [Dev Ops](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-dev-ops) <br>
-    6.1 [Build Automation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-build automation) <br>
-    6.2 [Continuous Integration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-continuous-integration) <br>
-    6.3 [Publishing Documentation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-publishing-documentation) <br>
-    6.4 [Making a Release](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#64-making-a-release)  <br>
-    6.5 [Converting Documentation to PDF format](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#65-converting-documentation-to-pdf-format)  <br>
-    6.6 [Managing Dependencies](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#66-managing-dependencies)  <br>
+    6.1. [Build Automation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-build automation) <br>
+    6.2. [Continuous Integration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-continuous-integration) <br>
+    6.3. [Publishing Documentation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-publishing-documentation) <br>
+    6.4. [Making a Release](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#64-making-a-release)  <br>
+    6.5. [Converting Documentation to PDF format](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#65-converting-documentation-to-pdf-format)  <br>
+    6.6. [Managing Dependencies](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#66-managing-dependencies) <br>
 * [Appendix A: User Stories](#appendix-a--user-stories) <br>
 * [Appendix B: Use Cases](#appendix-b--use-cases) <br>
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements) <br>
