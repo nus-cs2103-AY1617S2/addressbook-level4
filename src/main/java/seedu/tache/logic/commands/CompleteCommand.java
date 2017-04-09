@@ -81,7 +81,7 @@ public class CompleteCommand extends Command implements Undoable {
             completedList = model.updateMultipleTasks(
                     tasksToEdit.toArray(arrayListMould), completedTasks.toArray(arrayListMould));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            assert false: "There shouldn't be a duplicate task";
+            assert false : "There shouldn't be a duplicate task";
             commandSuccess = false;
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
