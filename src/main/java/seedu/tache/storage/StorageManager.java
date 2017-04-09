@@ -51,9 +51,15 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ TaskManager methods ==============================
 
     //@@author A0142255M
+    /**
+     * Updates the default file path of the task manager.
+     * Raises a DataFileLocationChangedEvent to inform other components of this change.
+     */
     @Override
     public void setTaskManagerFilePath(String newPath) {
+        assert newPath != null;
         this.taskManagerStorage.setTaskManagerFilePath(newPath);
+        logger.fine("File path set as: " + newPath);
         raise(new DataFileLocationChangedEvent(newPath));
     }
     //@@author

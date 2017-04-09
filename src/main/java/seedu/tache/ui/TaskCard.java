@@ -20,19 +20,19 @@ import seedu.tache.model.task.ReadOnlyTask;
 public class TaskCard extends UiPart<Region> {
 
     //@@author A0142255M
-    private static final String START_DATE_INDICATOR = "Start Date: ";
-    private static final String START_TIME_INDICATOR = "Start Time: ";
-    private static final String END_DATE_INDICATOR = "End Date: ";
-    private static final String END_TIME_INDICATOR = "End Time: ";
+    private static final String INDICATOR_START_DATE = "Start Date: ";
+    private static final String INDICATOR_START_TIME = "Start Time: ";
+    private static final String INDICATOR_END_DATE = "End Date: ";
+    private static final String INDICATOR_END_TIME = "End Time: ";
     private static final String FXML = "TaskListCard.fxml";
 
-    private static final String COMPLETED_INDICATOR = "completed";
-    private static final String OVERDUE_INDICATOR = "overdue";
-    private static final String UNCOMPLETED_INDICATOR = "uncompleted";
+    private static final String INDICATOR_COMPLETED = "completed";
+    private static final String INDICATOR_OVERDUE = "overdue";
+    private static final String INDICATOR_UNCOMPLETED = "uncompleted";
 
     private final Logger logger = LogsCenter.getLogger(TaskCard.class);
 
-    private String statusOfTask = UNCOMPLETED_INDICATOR;
+    private String statusOfTask = INDICATOR_UNCOMPLETED;
     private boolean isMasterRecurring = false;
     //@@author
 
@@ -60,6 +60,7 @@ public class TaskCard extends UiPart<Region> {
         assert task != null;
         assert displayedIndex > 0;
         id.setText(Integer.toString(displayedIndex) + ". ");
+        id.setId("id"); // set property id for Label named id
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
         setStatusOfTask(task);
@@ -70,68 +71,89 @@ public class TaskCard extends UiPart<Region> {
         initTags(task);
     }
 
+    /**
+     * Sets task status as completed, overdue or uncompleted.
+     * Task status will be used to set border colour and symbol of task card later.
+     */
     private void setStatusOfTask(ReadOnlyTask task) {
+        assert task != null;
         if (task.getActiveStatus() == false) {
-            statusOfTask = COMPLETED_INDICATOR;
+            statusOfTask = INDICATOR_COMPLETED;
         } else if (task.getEndDateTime().isPresent()) {
             DateTime taskDate = task.getEndDateTime().get();
             if (taskDate.hasPassed()) {
-                statusOfTask = OVERDUE_INDICATOR;
+                statusOfTask = INDICATOR_OVERDUE;
             }
         }
     }
 
+    /**
+     * Checks if this task is the master task, if it is recurring.
+     * Sets value of isMasterRecurring as true or false.
+     */
     private void setIsMasterRecurring(ReadOnlyTask task) {
-        if (task.isMasterRecurring()) {
-            isMasterRecurring = true;
-        }
+        assert task != null;
+        isMasterRecurring = task.getRecurState().isMasterRecurring();
     }
 
+    /**
+     * Sets border colour of task card according to task status.
+     */
     private void setBorderColour() {
-        if (statusOfTask.equals(UNCOMPLETED_INDICATOR)) {
-            cardPane.setStyle("-fx-border-color: #5f77bd");
-        } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
-            cardPane.setStyle("-fx-border-color: #ef044b");
+        if (statusOfTask.equals(INDICATOR_UNCOMPLETED)) {
+            cardPane.setStyle("-fx-border-color: #5f77bd"); // blue
+        } else if (statusOfTask.equals(INDICATOR_OVERDUE)) {
+            cardPane.setStyle("-fx-border-color: #ef044b"); // red
+        } else {
+            cardPane.setStyle("-fx-border-color: #14b66c"); // green
         }
     }
 
+    /**
+     * Sets symbol of task card according to task status.
+     */
     private void setSymbol() {
         if (isMasterRecurring) {
             symbol.setImage(new Image(MainApp.class.getResource("/images/recurring.png").toExternalForm()));
         } else {
-            if (statusOfTask.equals(COMPLETED_INDICATOR)) {
+            if (statusOfTask.equals(INDICATOR_COMPLETED)) {
                 symbol.setImage(new Image(MainApp.class.getResource("/images/tick.png").toExternalForm()));
-            } else if (statusOfTask.equals(OVERDUE_INDICATOR)) {
+            } else if (statusOfTask.equals(INDICATOR_OVERDUE)) {
                 symbol.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
             }
         }
+        symbol.setId("symbol");
     }
 
+    /**
+     * Sets start datetime and end datetime of  task.
+     */
     private void initDatesAndTimes(ReadOnlyTask task) {
+        assert task != null;
         if (task.getStartDateTime().isPresent()) {
             DateTime start = task.getStartDateTime().get();
-            Label startDateLabel = new Label(START_DATE_INDICATOR + start.getDateOnly());
+            Label startDateLabel = new Label(INDICATOR_START_DATE + start.getDateOnly());
             startDateLabel.setId("startdate");
             datesAndTimes.getChildren().add(startDateLabel);
-            Label startTimeLabel = new Label(START_TIME_INDICATOR + start.getTimeOnly());
+            Label startTimeLabel = new Label(INDICATOR_START_TIME + start.getTimeOnly());
             startTimeLabel.setId("starttime");
             datesAndTimes.getChildren().add(startTimeLabel);
             logger.fine("Start date and time added in Labels for " + task.getName().toString());
         }
         if (task.getEndDateTime().isPresent()) {
             DateTime end = task.getEndDateTime().get();
-            Label endDateLabel = new Label(END_DATE_INDICATOR + end.getDateOnly());
+            Label endDateLabel = new Label(INDICATOR_END_DATE + end.getDateOnly());
             endDateLabel.setId("enddate");
             datesAndTimes.getChildren().add(endDateLabel);
-            Label endTimeLabel = new Label(END_TIME_INDICATOR + end.getTimeOnly());
+            Label endTimeLabel = new Label(INDICATOR_END_TIME + end.getTimeOnly());
             endTimeLabel.setId("endtime");
             datesAndTimes.getChildren().add(endTimeLabel);
             logger.fine("End date and time added in Labels for " + task.getName().toString());
         }
     }
-    //@@author
 
     private void initTags(ReadOnlyTask task) {
+        assert task != null;
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

@@ -112,26 +112,6 @@
 
 /* @@author */
 
-#commandTypeLabel {
-    -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
-}
-
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
-}
-
-.tag-selector {
-    -fx-border-width: 1;
-    -fx-border-color: white;
-    -fx-border-radius: 3;
-    -fx-background-radius: 3;
-}
-
-.tooltip-text {
-    -fx-text-fill: white;
-}
-
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira

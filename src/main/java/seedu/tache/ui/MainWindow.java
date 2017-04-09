@@ -16,7 +16,6 @@ import seedu.tache.commons.events.ui.ExitAppRequestEvent;
 import seedu.tache.commons.util.FxViewUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.UserPrefs;
-import seedu.tache.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -121,6 +120,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     //@@author A0142255M
+    /**
+     * Initializes all UI components using information from logic and config.
+     */
     void fillInnerParts() {
         calendarPanel = new CalendarPanel(getCalendarPlaceholder(), logic.getFullTaskList());
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
@@ -229,12 +231,6 @@ public class MainWindow extends UiPart<Region> {
     public CalendarPanel getCalendarPanel() {
         return this.calendarPanel;
     }
-
-    //@@author A0142255M
-    void viewTaskEvent(ReadOnlyTask task) {
-        //browserPanel.viewEvent(task);
-    }
-    //@@author
 
     void releaseResources() {
         calendarPanel.freeResources();

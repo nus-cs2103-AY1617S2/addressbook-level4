@@ -15,7 +15,7 @@ public class DateTimeTest {
 
     @Test(expected = IllegalValueException.class)
     public void testInvalidDateTime() throws IllegalValueException {
-        DateTime test = new DateTime("happy");
+        new DateTime("happy");
     }
 
     @Test
@@ -120,5 +120,4 @@ public class DateTimeTest {
         DateTime today = new DateTime("today 00:00AM");
         assertEquals(DateTime.removeTime(date), today.getDate());
     }
-    //@@author
 }

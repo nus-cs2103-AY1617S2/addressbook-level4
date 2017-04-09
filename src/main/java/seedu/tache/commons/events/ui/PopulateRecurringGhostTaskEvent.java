@@ -11,10 +11,13 @@ import seedu.tache.model.task.ReadOnlyTask;
 public class PopulateRecurringGhostTaskEvent extends BaseEvent {
 
 
-    private final ObservableList<ReadOnlyTask> allRecurringGhostTasks;
+    private final ObservableList<ReadOnlyTask> allUncompletedRecurringGhostTasks;
+    private final ObservableList<ReadOnlyTask> allCompletedRecurringGhostTasks;
 
-    public PopulateRecurringGhostTaskEvent(ObservableList<ReadOnlyTask> allRecurringGhostTasks) {
-        this.allRecurringGhostTasks = allRecurringGhostTasks;
+    public PopulateRecurringGhostTaskEvent(ObservableList<ReadOnlyTask> allUncompletedRecurringGhostTasks,
+                                    ObservableList<ReadOnlyTask> allCompletedRecurringGhostTasks) {
+        this.allUncompletedRecurringGhostTasks = allUncompletedRecurringGhostTasks;
+        this.allCompletedRecurringGhostTasks = allCompletedRecurringGhostTasks;
     }
 
     @Override
@@ -22,7 +25,11 @@ public class PopulateRecurringGhostTaskEvent extends BaseEvent {
         return this.getClass().getSimpleName();
     }
 
-    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
-        return allRecurringGhostTasks;
+    public ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks() {
+        return allUncompletedRecurringGhostTasks;
+    }
+
+    public ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks() {
+        return allCompletedRecurringGhostTasks;
     }
 }

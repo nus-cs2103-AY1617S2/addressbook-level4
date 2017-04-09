@@ -14,7 +14,7 @@ import com.joestelmach.natty.Parser;
 import seedu.tache.commons.exceptions.IllegalValueException;
 
 
-public class DateTime {
+public class DateTime implements Comparable {
 
     private static final String EXPLICIT_DATE_TREE_IDENTIFIER = "EXPLICIT_DATE";
     private static final String EXPLICIT_TIME_TREE_IDENTIFIER = "EXPLICIT_TIME";
@@ -50,6 +50,14 @@ public class DateTime {
                 this.date.setSeconds(0);
             }
         }
+    }
+
+    /**
+     * Creates a copy of the given DateTime.
+     * @throws IllegalValueException if source date string is invalid
+     */
+    public DateTime(DateTime source) throws IllegalValueException {
+        this(source.getAmericanDateTime());
     }
 
     @Override
@@ -103,7 +111,23 @@ public class DateTime {
         return sdf.format(date);
     }
 
+    @Override
+    public int compareTo(Object other) {
+        assert other instanceof DateTime;
+        if (this.equals(other)) {
+            return 0;
+        } else if (date.after(((DateTime) other).getDate())) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
     //@@author A0142255M
+    /**
+     * Returns a String which represents a moment to be parsed by FullCalendar.
+     * A moment (FullCalendar terminology) refers to a point in time.
+     */
     public String getDateTimeForFullCalendar() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         return sdf.format(date);
@@ -120,6 +144,9 @@ public class DateTime {
                 && this.date.equals(((DateTime) other).getDate())); // state check
     }
 
+    /**
+     * Returns true if the date is earlier than today.
+     */
     public boolean hasPassed() {
         Date today = new Date();
         return this.date.before(today);
@@ -195,6 +222,8 @@ public class DateTime {
         }
     }
     //@@author
+
+
 
     /*@Override
     public int hashCode() {

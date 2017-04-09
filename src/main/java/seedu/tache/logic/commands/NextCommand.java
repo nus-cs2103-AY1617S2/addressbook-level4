@@ -13,8 +13,7 @@ public class NextCommand extends Command {
     public static final String COMMAND_WORD = "next";
     public static final String SHORT_COMMAND_WORD = "n";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" +
-            "Displays the next day/week/month at the calendar.\n\t"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":Displays the next day/week/month at the calendar.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Next day/week/month displayed at the calendar.";

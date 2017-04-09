@@ -16,7 +16,7 @@ import seedu.tache.testutil.TestTask;
 public class CompleteCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void completeAllTasks() {
+    public void complete_allTasks_success() {
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1,2,3,4,5");
         TestTask[] completedHits = td.getTypicalTasks();
@@ -26,7 +26,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void completeOneTasks() {
+    public void complete_oneTask_success() {
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1");
         TestTask[] tempTasksList = td.getTypicalTasks();
@@ -39,7 +39,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void completeSomeTasks() {
+    public void complete_someTasks_success() {
         commandBox.runCommand("list");
         commandBox.runCommand("complete 1,3,5");
         TestTask[] tempTasksList = td.getTypicalTasks();
@@ -55,13 +55,13 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void completeNoTasks() {
+    public void complete_noTasks_failure() {
         commandBox.runCommand("complete ");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void completeInvalidIndex() {
+    public void complete_invalidIndex_failure() {
         commandBox.runCommand("complete a");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
 
@@ -73,11 +73,20 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void completeInvalidCommandFail() {
+    public void complete_invalidCommand_failure() {
         commandBox.runCommand("completekkjksjkds");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
+    //@@author A0142255M
+    @Test
+    public void complete_shortCommand_success() {
+        commandBox.runCommand(CompleteCommand.SHORT_COMMAND_WORD + " 1");
+        assertCompleteMessage(td.payDavid);
+        assertCompleteResult("list completed", td.payDavid);
+    }
+
+    //@@author A0139925U
     private void assertCompleteResult(String command, TestTask... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);

@@ -41,13 +41,18 @@ public class TaskCount extends UiPart<Region> {
         placeHolder.getChildren().add(getRoot());
     }
 
-    //@@author A0142255M
     private void setTimedTaskCount(ObservableList<ReadOnlyTask> taskList) {
         assert taskList != null;
         String count = getTimedTaskCount(taskList);
         this.timedTaskCount.setText(count);
     }
 
+    /**
+     * Returns a String representing the number of timed tasks.
+     *
+     * @param taskList    Filtered task list displayed at task list panel.
+     * @return    No. of timed tasks.
+     */
     private String getTimedTaskCount(ObservableList<ReadOnlyTask> taskList) {
         assert taskList != null;
         int count = 0;
@@ -65,6 +70,12 @@ public class TaskCount extends UiPart<Region> {
         this.floatingTaskCount.setText(count);
     }
 
+    /**
+     * Returns a String representing the number of floating tasks.
+     *
+     * @param taskList    Filtered task list displayed at task list panel.
+     * @return    No. of floating tasks.
+     */
     private String getFloatingTaskCount(ObservableList<ReadOnlyTask> taskList) {
         assert taskList != null;
         int count = 0;
@@ -76,9 +87,13 @@ public class TaskCount extends UiPart<Region> {
         return Integer.toString(count);
     }
 
+    /**
+     * Recalculates and sets the counts of timed and floating tasks.
+     *
+     * @param event    FilteredTaskListUpdatedEvent which contains updated task list.
+     */
     @Subscribe
     public void handleFilteredTaskListUpdatedEvent(FilteredTaskListUpdatedEvent event) {
-        assert event != null;
         ObservableList<ReadOnlyTask> taskList = event.getFilteredTaskList();
         String oldTimedCount = this.timedTaskCount.getText();
         String newTimedCount = getTimedTaskCount(taskList);

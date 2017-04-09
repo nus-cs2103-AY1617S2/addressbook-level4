@@ -1,7 +1,7 @@
 package seedu.tache.logic.parser;
 
 import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tache.logic.parser.CliSyntax.PARAMETER_DELIMITER;
+import static seedu.tache.logic.parser.CliSyntax.DELIMITER_PARAMETER;
 
 import java.util.Deque;
 import java.util.HashSet;
@@ -14,6 +14,7 @@ import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.IncorrectCommand;
 import seedu.tache.logic.parser.ParserUtil.DateTimeType;
 import seedu.tache.logic.parser.ParserUtil.PossibleDateTime;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 
 //@@author A0150120H
 /**
@@ -52,11 +53,12 @@ public class AddCommandParser {
                 startDateTime = current;
             }
         }
+        
         if (endDateTime == null && startDateTime != null) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } else if (endDateTime == null && startDateTime == null) {
             try {
-                return new AddCommand(taskWithoutTags, Optional.empty(), Optional.empty(), tagSet);
+                return new AddCommand(taskWithoutTags, Optional.empty(), Optional.empty(), tagSet, Optional.empty());
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
             }
@@ -79,7 +81,7 @@ public class AddCommandParser {
                 startDateTimeStr = Optional.empty();
             }
             try {
-                return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet);
+                return new AddCommand(taskName, startDateTimeStr, endDateTimeStr, tagSet, Optional.empty());
             } catch (IllegalValueException ex) {
                 return new IncorrectCommand(ex.getMessage());
             }
@@ -87,7 +89,7 @@ public class AddCommandParser {
     }
 
     public Command parseStructured(String args) {
-        String[] taskFields = args.split(PARAMETER_DELIMITER);
+        String[] taskFields = args.split(DELIMITER_PARAMETER);
         Set<String> tagSet = new HashSet<String>();
         if (taskFields.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -112,7 +114,7 @@ public class AddCommandParser {
                 }
             }
             try {
-                return new AddCommand(name, startDateTime, endDateTime, tagSet);
+                return new AddCommand(name, startDateTime, endDateTime, tagSet, Optional.empty());
             } catch (IllegalValueException e) {
                 // TODO Auto-generated catch block
                 return new IncorrectCommand(e.getMessage());

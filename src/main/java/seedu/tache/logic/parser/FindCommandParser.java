@@ -4,7 +4,7 @@ import static seedu.tache.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tache.logic.parser.CliSyntax.KEYWORDS_ARGS_FORMAT;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -30,7 +30,7 @@ public class FindCommandParser {
         //@@author A0139925U
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        final Set<String> keywordSet = new LinkedHashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
 

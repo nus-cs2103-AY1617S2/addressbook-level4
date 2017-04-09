@@ -169,6 +169,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 //// util methods
 
     //@@author A0142255M
+    /**
+     * Returns a string showing all tasks and their details.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

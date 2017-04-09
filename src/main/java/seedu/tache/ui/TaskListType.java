@@ -14,7 +14,7 @@ import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
 
 /**
- * Panel containing: type of tasks shown in task list, no. of detailed tasks and no. of floating tasks.
+ * A UI containing the type of tasks shown in task list.
  */
 public class TaskListType extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListType.class);
@@ -35,6 +35,11 @@ public class TaskListType extends UiPart<Region> {
         placeHolder.getChildren().add(getRoot());
     }
 
+    /**
+     * Updates task list type.
+     *
+     * @param event    TaskListTypeChangedEvent which contains new task list type.
+     */
     @Subscribe
     public void handleTaskListTypeChangedEvent(TaskListTypeChangedEvent event) {
         String oldTaskListType = this.taskListType.getText();

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.tache.model.tag.UniqueTagList;
@@ -16,14 +17,16 @@ import seedu.tache.model.task.ReadOnlyTask;
  * Provides a handle to a task card in the task list panel.
  */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
     //@@author A0142255M
-    private static final String START_DATE_FIELD_ID = "#startdate";
-    private static final String START_TIME_FIELD_ID = "#starttime";
-    private static final String END_DATE_FIELD_ID = "#enddate";
-    private static final String END_TIME_FIELD_ID = "#endtime";
+    private static final String FIELD_ID_NAME = "#name";
+    private static final String FIELD_ID_START_DATE = "#startdate";
+    private static final String FIELD_ID_START_TIME = "#starttime";
+    private static final String FIELD_ID_END_DATE = "#enddate";
+    private static final String FIELD_ID_END_TIME = "#endtime";
+    private static final String FIELD_ID_SYMBOL = "#symbol";
+    private static final String FIELD_ID_ID = "#id";
+    private static final String FIELD_ID_TAGS = "#tags";
     //@@author
-    private static final String TAGS_FIELD_ID = "#tags";
 
     private Node node;
 
@@ -37,26 +40,31 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+        return getTextFromLabel(FIELD_ID_NAME);
     }
+
     //@@author A0142255M
+    public String getId() {
+        return getTextFromLabel(FIELD_ID_ID);
+    }
+
     public String getStartDate() {
-        String displayed = getTextFromLabel(START_DATE_FIELD_ID);
+        String displayed = getTextFromLabel(FIELD_ID_START_DATE);
         return displayed.substring(12);
     }
 
     public String getStartTime() {
-        String displayed = getTextFromLabel(START_TIME_FIELD_ID);
+        String displayed = getTextFromLabel(FIELD_ID_START_TIME);
         return displayed.substring(12);
     }
 
     public String getEndDate() {
-        String displayed = getTextFromLabel(END_DATE_FIELD_ID);
+        String displayed = getTextFromLabel(FIELD_ID_END_DATE);
         return displayed.substring(10);
     }
 
     public String getEndTime() {
-        String displayed = getTextFromLabel(END_TIME_FIELD_ID);
+        String displayed = getTextFromLabel(FIELD_ID_END_TIME);
         return displayed.substring(10);
     }
 
@@ -95,6 +103,14 @@ public class TaskCardHandle extends GuiHandle {
             return false;
         }
     }
+
+    protected Image getImageFromImageView(String fieldId) {
+        return getImageFromImageView(fieldId, node);
+    }
+
+    public Image getSymbol() {
+        return getImageFromImageView(FIELD_ID_SYMBOL);
+    }
     //@@author
 
     public List<String> getTags() {
@@ -118,7 +134,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     private Region getTagsContainer() {
-        return guiRobot.from(node).lookup(TAGS_FIELD_ID).query();
+        return guiRobot.from(node).lookup(FIELD_ID_TAGS).query();
     }
 
     //@@author A0142255M

@@ -14,7 +14,7 @@ import seedu.tache.TestApp;
 public class StatusBarFooterHandle extends GuiHandle {
 
     public static final String SYNC_STATUS_ID = "#syncStatus";
-    public static final String SAVE_LOCATION_STATUS_ID = "saveLocationStatus";
+    public static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
 
     public StatusBarFooterHandle(GuiRobot guiRobot, Stage primaryStage) {
         super(guiRobot, primaryStage, TestApp.APP_TITLE);

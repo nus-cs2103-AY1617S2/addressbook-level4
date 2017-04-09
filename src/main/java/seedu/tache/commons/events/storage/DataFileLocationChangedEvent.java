@@ -5,7 +5,7 @@ package seedu.tache.commons.events.storage;
 import seedu.tache.commons.events.BaseEvent;
 
 /**
- * Indicates that the directory of the data file has been changed
+ * Indicates that the directory of the data file has been changed.
  */
 public class DataFileLocationChangedEvent extends BaseEvent {
 

@@ -15,7 +15,7 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     private static final String COMMAND_THAT_SUCCEEDS = "select 3";
     private static final String COMMAND_THAT_FAILS = "invalid command";
     //@@author A0142255M
-    private static final String EMPTY_COMMAND = "";
+    private static final String COMMAND_EMPTY = "";
     //@@author
 
     private ArrayList<String> defaultStyleOfCommandBox;
@@ -33,68 +33,90 @@ public class CommandBoxTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void commandBoxCommandSucceedsTextClearedAndStyleClassRemainsTheSame() {
-        commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
-
-        assertEquals("", commandBox.getCommandInput());
-        assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
+    public void commandBox_startingWithSuccessfulCommand_success() {
+        assertBehaviorForSuccessfulCommand();
+        assertBehaviorForFailedCommand();
     }
 
     @Test
-    public void commandBoxCommandFailsTextStaysAndErrorStyleClassAdded() {
+    public void commandBox_startingWithFailedCommand_success() {
+        assertBehaviorForFailedCommand();
+        assertBehaviorForSuccessfulCommand();
+
+        // verify that style is changed correctly even after multiple consecutive successful/failed commands
+        assertBehaviorForSuccessfulCommand();
+        assertBehaviorForFailedCommand();
+        assertBehaviorForFailedCommand();
+        assertBehaviorForSuccessfulCommand();
+    }
+
+    /**
+     * Runs a command that fails, then verifies that text remains
+     * and that command box has only one ERROR_STYLE_CLASS, with other style classes untouched.
+     */
+    private void assertBehaviorForFailedCommand() {
         commandBox.runCommand(COMMAND_THAT_FAILS);
 
         assertEquals(COMMAND_THAT_FAILS, commandBox.getCommandInput());
         assertEquals(errorStyleOfCommandBox, commandBox.getStyleClass());
     }
 
-    @Test
-    public void commandBoxCommandSucceedsAfterFailedCommandTextClearedAndErrorStyleClassRemoved() {
-        // add error style to simulate a failed command
-        commandBox.getStyleClass().add(CommandBox.ERROR_STYLE_CLASS);
-
+    /**
+     * Runs a command that succeeds, then verifies that text is cleared
+     * and that command box does not have any ERROR_STYLE_CLASS, with style classes the same as default.
+     */
+    private void assertBehaviorForSuccessfulCommand() {
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
 
-        assertEquals("", commandBox.getCommandInput());
+        assertEquals(COMMAND_EMPTY, commandBox.getCommandInput());
         assertEquals(defaultStyleOfCommandBox, commandBox.getStyleClass());
     }
 
     //@@author A0142255M
     @Test
-    public void commandAutocompletesWithEnterKey() {
+    public void commandBox_autocompleteWithEnterKey_success() {
         commandBox.enterCommand("del");
         commandBox.pressEnter();
-        assertEquals(commandBox.getCommandInput(), "delete ");
+        assertCommandInput("delete ");
     }
 
     @Test
-    public void commandAutocompletesLexicographicallySmallerCommand() {
+    public void commandBox_autocompleteLexicographicallySmallerCommand_success() {
         commandBox.enterCommand("e"); // autocomplete options: edit or exit
         commandBox.pressEnter();
-        assertEquals(commandBox.getCommandInput(), "edit ");
+        assertCommandInput("edit ");
     }
 
     @Test
-    public void commandGoesToPreviousCommandWithUpKey() {
+    public void commandBox_goToPreviousCommandWithUpKey_success() {
         // succeeded command
         commandBox.runCommand(COMMAND_THAT_SUCCEEDS);
         commandBox.pressUp();
-        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_SUCCEEDS);
+        assertCommandInput(COMMAND_THAT_SUCCEEDS);
 
         // failed command
         commandBox.runCommand(COMMAND_THAT_FAILS);
         commandBox.pressUp();
-        assertEquals(commandBox.getCommandInput(), COMMAND_THAT_FAILS);
+        assertCommandInput(COMMAND_THAT_FAILS);
     }
 
     @Test
-    public void commandGoesToNextCommandWithDownKey() {
+    public void commandBox_goToNextCommandWithDownKey_success() {
         commandBox.runCommand("list completed");
         commandBox.runCommand("list uncompleted");
         commandBox.pressUp(); // "list uncompleted"
         commandBox.pressUp(); // "list completed"
         commandBox.pressDown();
-        assertEquals(commandBox.getCommandInput(), "list uncompleted");
+        assertCommandInput("list uncompleted");
+    }
+
+    /**
+     * Verifies that text in command box is correct.
+     *
+     * @param input    expected text
+     */
+    private void assertCommandInput(String input) {
+        assertEquals(commandBox.getCommandInput(), input);
     }
 
 }

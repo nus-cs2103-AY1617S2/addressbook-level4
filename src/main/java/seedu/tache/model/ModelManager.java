@@ -21,6 +21,7 @@ import seedu.tache.commons.events.ui.TaskListTypeChangedEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
 import seedu.tache.commons.util.CollectionUtil;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.tag.Tag;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
@@ -36,17 +37,17 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139925U
     public static final int MARGIN_OF_ERROR = 1;
     //@@author A0142255M
-    public static final String ALL_TASK_LIST_TYPE = "All Tasks";
-    public static final String COMPLETED_TASK_LIST_TYPE = "Completed Tasks";
-    public static final String UNCOMPLETED_TASK_LIST_TYPE = "Uncompleted Tasks";
-    public static final String TIMED_TASK_LIST_TYPE = "Timed Tasks";
-    public static final String FLOATING_TASK_LIST_TYPE = "Floating Tasks";
-  //@@author A0139925U
-    public static final String FOUND_TASK_LIST_TYPE = "Found Tasks";
+    public static final String TASK_LIST_TYPE_ALL = "All Tasks";
+    public static final String TASK_LIST_TYPE_COMPLETED = "Completed Tasks";
+    public static final String TASK_LIST_TYPE_UNCOMPLETED = "Uncompleted Tasks";
+    public static final String TASK_LIST_TYPE_TIMED = "Timed Tasks";
+    public static final String TASK_LIST_TYPE_FLOATING = "Floating Tasks";
+    //@@author A0139925U
+    public static final String TASK_LIST_TYPE_FOUND = "Found Tasks";
     //@@author A0139961U
-    public static final String DUE_TODAY_TASK_LIST_TYPE = "Tasks Due Today";
-    public static final String DUE_THIS_WEEK_TASK_LIST_TYPE = "Tasks Due This Week";
-    public static final String OVERDUE_TASK_LIST_TYPE = "Overdue Tasks";
+    public static final String TASK_LIST_TYPE_DUE_TODAY = "Tasks Due Today";
+    public static final String TASK_LIST_TYPE_DUE_THIS_WEEK = "Tasks Due This Week";
+    public static final String TASK_LIST_TYPE_OVERDUE = "Overdue Tasks";
     //@@author
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     //@@author A0139925U
@@ -54,9 +55,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<ReadOnlyTask> filteredTasks;
 
     private Set<String> latestKeywords;
-    //@@author
     //@@author A0142255M
-    private String filteredTaskListType = ALL_TASK_LIST_TYPE;
+    private String filteredTaskListType = TASK_LIST_TYPE_ALL;
     //@@author
 
     /**
@@ -79,9 +79,10 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
+        assert newData != null;
         taskManager.resetData(newData);
         updateFilteredListToShowAll();
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_ALL);
         indicateTaskManagerChanged();
     }
     //@@author
@@ -92,11 +93,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author A0142255M
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises events to indicate that the model has changed.
+     */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
-        raise(new PopulateRecurringGhostTaskEvent(getAllRecurringGhostTasks()));
+        raise(new PopulateRecurringGhostTaskEvent(getAllUncompletedRecurringGhostTasks(),
+                                getAllCompletedRecurringGhostTasks()));
     }
     //@@author
 
@@ -109,16 +113,28 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0142255M
     @Override
     public synchronized void addTask(Task task) throws DuplicateTaskException {
+        assert task != null;
         taskManager.addTask(task);
         indicateTaskManagerChanged();
     }
-    //@@author
 
     //@@author A0150120H
     @Override
     public synchronized void addTask(int index, Task task) throws DuplicateTaskException {
         taskManager.addTask(index, task);
         indicateTaskManagerChanged();
+    }
+
+    public List<ReadOnlyTask> updateMultipleTasks(ReadOnlyTask[] tasksToUpdate, ReadOnlyTask[] editedTasks)
+            throws UniqueTaskList.DuplicateTaskException {
+        assert tasksToUpdate.length == editedTasks.length;
+        ArrayList<ReadOnlyTask> updatedTasks = new ArrayList<ReadOnlyTask>();
+        for (int i = 0; i < tasksToUpdate.length; i++) {
+            taskManager.updateTask(tasksToUpdate[i], editedTasks[i]);
+            updatedTasks.add(tasksToUpdate[i]);
+        }
+        indicateTaskManagerChanged();
+        return updatedTasks;
     }
     //@@author
 
@@ -131,10 +147,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
-
+    //@@author A0139925U
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
-        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateUncompletedRecurringDatesAsTask();
+        ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateRecurringDatesAsTask();
         raise(new TaskPanelConnectionChangedEvent(filteredTasksWithRecurringTasks));
         return new UnmodifiableObservableList<>(filteredTasksWithRecurringTasks);
     }
@@ -143,52 +159,50 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
+        updateFilteredTaskListType(TASK_LIST_TYPE_ALL);
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
-        updateFilteredTaskListType(ALL_TASK_LIST_TYPE);
     }
-    //@@author
 
     //@@author A0139925U
     @Override
     public void updateFilteredListToShowUncompleted() {
+        updateFilteredTaskListType(TASK_LIST_TYPE_UNCOMPLETED);
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(true)));
-        updateFilteredTaskListType(UNCOMPLETED_TASK_LIST_TYPE);
-
     }
 
     @Override
     public void updateFilteredListToShowCompleted() {
+        updateFilteredTaskListType(TASK_LIST_TYPE_COMPLETED);
         updateFilteredTaskList(new PredicateExpression(new ActiveQualifier(false)));
-        updateFilteredTaskListType(COMPLETED_TASK_LIST_TYPE);
     }
 
     //@@author A0142255M
     @Override
     public void updateFilteredListToShowTimed() {
+        updateFilteredTaskListType(TASK_LIST_TYPE_TIMED);
         updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(true)));
-        updateFilteredTaskListType(TIMED_TASK_LIST_TYPE);
     }
 
     @Override
     public void updateFilteredListToShowFloating() {
+        updateFilteredTaskListType(TASK_LIST_TYPE_FLOATING);
         updateFilteredTaskList(new PredicateExpression(new ActiveTimedQualifier(false)));
-        updateFilteredTaskListType(FLOATING_TASK_LIST_TYPE);
     }
 
     //@@author A0139961U
     @Override
     public void updateFilteredListToShowDueToday() {
-        updateFilteredTaskListType(DUE_TODAY_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_DUE_TODAY);
         updateFilteredTaskList(new PredicateExpression(new DueTodayQualifier(true)));
     }
 
     public void updateFilteredListToShowDueThisWeek() {
-        updateFilteredTaskListType(DUE_THIS_WEEK_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_DUE_THIS_WEEK);
         updateFilteredTaskList(new PredicateExpression(new DueThisWeekQualifier(true)));
     }
 
     public void updateFilteredListToShowOverdueTasks() {
-        updateFilteredTaskListType(OVERDUE_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_OVERDUE);
         updateFilteredTaskList(new PredicateExpression(new OverdueQualifier()));
     }
 
@@ -199,14 +213,15 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
+        assert keywords != null;
         updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
-        ArrayList<String> keywordsList = new ArrayList<String>(keywords);
-        updateFilteredTaskListType(FOUND_TASK_LIST_TYPE);
+        updateFilteredTaskListType(TASK_LIST_TYPE_FOUND);
         retainLatestKeywords(keywords);
-        raise(new TaskListTypeChangedEvent("Find \"" + keywordsList.get(0) + "\""));
+        raise(new TaskListTypeChangedEvent("Find \"" + StringUtil.generateStringFromKeywords(keywords) + "\""));
     }
 
     private void updateFilteredTaskList(Expression expression) {
+        assert expression != null;
         filteredTasks.setPredicate(expression::satisfies);
         raise(new FilteredTaskListUpdatedEvent(getFilteredTaskList()));
     }
@@ -217,45 +232,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private void updateFilteredTaskListType(String newFilteredTaskListType) {
+        assert newFilteredTaskListType != null;
+        assert !newFilteredTaskListType.equals("");
         if (!filteredTaskListType.equals(newFilteredTaskListType)) {
             raise(new TaskListTypeChangedEvent(newFilteredTaskListType));
         }
         filteredTaskListType = newFilteredTaskListType;
     }
-    //@@author
+
     //@@author A0139925U
     private void retainLatestKeywords(Set<String> keywords) {
         latestKeywords = keywords;
-    }
-
-    public void updateCurrentFilteredList() {
-        switch(filteredTaskListType) {
-        case ALL_TASK_LIST_TYPE:
-            updateFilteredListToShowAll();
-            break;
-        case COMPLETED_TASK_LIST_TYPE:
-            updateFilteredListToShowCompleted();
-            break;
-        case UNCOMPLETED_TASK_LIST_TYPE:
-            updateFilteredListToShowUncompleted();
-            break;
-        case TIMED_TASK_LIST_TYPE:
-            updateFilteredListToShowTimed();
-            break;
-        case FLOATING_TASK_LIST_TYPE:
-            updateFilteredListToShowFloating();
-            break;
-        case FOUND_TASK_LIST_TYPE:
-            updateFilteredTaskList(latestKeywords);
-            break;
-        case DUE_TODAY_TASK_LIST_TYPE:
-            updateFilteredListToShowDueToday();
-            break;
-        case DUE_THIS_WEEK_TASK_LIST_TYPE:
-            updateFilteredListToShowDueThisWeek();
-            break;
-        default:
-        }
     }
     //@@author
 
@@ -289,22 +276,23 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-
+    //@@author A0139925U
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
         NameQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
-        //@@author A0139925U
+
         @Override
         public boolean run(ReadOnlyTask task) {
             String[] nameElements = task.getName().fullName.split(" ");
             boolean partialMatch = false;
-            String trimmedNameKeyWords = nameKeyWords.toString()
+            //Remove square brackets
+            String trimmedNameKeywords = nameKeyWords.toString()
                                          .substring(1, nameKeyWords.toString().length() - 1).toLowerCase();
             for (int i = 0; i < nameElements.length; i++) {
-                if (computeLevenshteinDistance(trimmedNameKeyWords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
+                if (computeLevenshteinDistance(trimmedNameKeywords, nameElements[i].toLowerCase()) <= MARGIN_OF_ERROR) {
                     partialMatch = true;
                     break;
                 }
@@ -315,13 +303,13 @@ public class ModelManager extends ComponentManager implements Model {
                     .isPresent()
                     || partialMatch;
         }
-        //@@author
+
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
+    //@@author
     //@@author A0142255M
     private class TimedQualifier implements Qualifier {
         private boolean isTimed;
@@ -332,6 +320,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
+            assert task != null;
             if (isTimed) {
                 return task.getTimedStatus();
             } else {
@@ -367,7 +356,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "active=" + isActive;
         }
     }
-    //@@author
 
     //@@author A0139961U
     private class DueTodayQualifier implements Qualifier {
@@ -433,7 +421,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "dueThisWeek=true";
         }
     }
-    //@@author
 
     //@@author A0139925U
     private class DateTimeQualifier implements Qualifier {
@@ -476,17 +463,20 @@ public class ModelManager extends ComponentManager implements Model {
         private NameQualifier nameQualifier;
         private DateTimeQualifier dateTimeQualifier;
         private ActiveQualifier activeQualifier;
+        private TagQualifier tagQualifier;
 
         MultiQualifier(Set<String> multiKeyWords) {
             this.multiKeyWords = multiKeyWords;
             nameQualifier = new NameQualifier(multiKeyWords);
             dateTimeQualifier = new DateTimeQualifier(multiKeyWords);
             activeQualifier = new ActiveQualifier(true);
+            tagQualifier = new TagQualifier(multiKeyWords);
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (nameQualifier.run(task) || dateTimeQualifier.run(task)) && activeQualifier.run(task);
+            return (nameQualifier.run(task) || dateTimeQualifier.run(task)
+                        || tagQualifier.run(task)) && activeQualifier.run(task);
         }
 
         @Override
@@ -494,6 +484,39 @@ public class ModelManager extends ComponentManager implements Model {
             return "multi=" + String.join(", ", multiKeyWords);
         }
 
+    }
+
+    private class TagQualifier implements Qualifier {
+        private Set<String> tagKeywords;
+
+        TagQualifier(Set<String> tagKeywords) {
+            this.tagKeywords = tagKeywords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if (task.getTags().toSet().size() != 0) {
+                Set<Tag> tagElements = (Set<Tag>) task.getTags().toSet();
+                boolean validMatch = false;
+                //Remove square brackets
+                String trimmedTagKeywords = tagKeywords.toString()
+                                             .substring(1, tagKeywords.toString().length() - 1).toLowerCase();
+                for (Tag tag: tagElements) {
+                    if (computeLevenshteinDistance(trimmedTagKeywords, tag.tagName.toLowerCase())
+                                    <= MARGIN_OF_ERROR) {
+                        validMatch = true;
+                        break;
+                    }
+                }
+                return validMatch;
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return "tag=" + String.join(", ", tagKeywords);
+        }
     }
 
     private class ActiveTimedQualifier implements Qualifier {
@@ -543,42 +566,72 @@ public class ModelManager extends ComponentManager implements Model {
         return Math.min(Math.min(a, b), c);
     }
 
-    private ObservableList<ReadOnlyTask> populateUncompletedRecurringDatesAsTask() {
+    private ObservableList<ReadOnlyTask> populateRecurringDatesAsTask() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < filteredTasks.size(); i++) {
-            if (filteredTasks.get(i).getRecurringStatus()) {
-                if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+            if (filteredTasks.get(i).getRecurState().isRecurring()) {
+                if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_TODAY)) {
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(new Date()).toArray());
-                } else if (filteredTaskListType.equals(DUE_TODAY_TASK_LIST_TYPE)) {
+                } else if (filteredTaskListType.equals(TASK_LIST_TYPE_DUE_THIS_WEEK)) {
                     Calendar dateThisWeek = Calendar.getInstance();
                     dateThisWeek.setTime(new Date());
                     dateThisWeek.add(Calendar.WEEK_OF_YEAR, 1);
                     Collections.addAll(concatenated, filteredTasks.get(i)
                                                 .getUncompletedRecurList(dateThisWeek.getTime()).toArray());
                 } else {
-                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList(null).toArray());
+                    Collections.addAll(concatenated, filteredTasks.get(i).getUncompletedRecurList().toArray());
+                }
+            }
+        }
+        if (filteredTaskListType.equals(TASK_LIST_TYPE_COMPLETED)) {
+            for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+                if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
+                    if (taskManager.getTaskList().get(i).getActiveStatus()) {
+                        Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                                .getCompletedRecurList().toArray());
+                    } else {
+                        Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                .getCompletedRecurList().toArray());
+                    }
                 }
             }
         }
         Collections.addAll(concatenated, filteredTasks.toArray());
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
 
-    public ObservableList<ReadOnlyTask> getAllRecurringGhostTasks() {
+    public ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         for (int i = 0; i < taskManager.getTaskList().size(); i++) {
-            if (taskManager.getTaskList().get(i).getRecurringStatus()) {
+            if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
                 Collections.addAll(concatenated, taskManager.getTaskList().get(i)
-                                            .getUncompletedRecurList(null).toArray());
+                                            .getUncompletedRecurList().toArray());
             }
         }
-        return FXCollections.observableList(concatenated);
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
+    }
+
+    public ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks() {
+        List<ReadOnlyTask> concatenated = new ArrayList<>();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (taskManager.getTaskList().get(i).getRecurState().isRecurring()) {
+                Collections.addAll(concatenated, taskManager.getTaskList().get(i)
+                                            .getCompletedRecurList().toArray());
+            }
+        }
+        ObservableList<ReadOnlyTask> concatenatedList = FXCollections.observableList(concatenated);
+        concatenatedList.sort(ReadOnlyTask.READONLYTASK_DATE_COMPARATOR);
+        return concatenatedList;
     }
     //@@author A0150120H
     @Override
     public int getFilteredTaskListIndex(ReadOnlyTask targetTask) {
         return getFilteredTaskList().indexOf(targetTask);
     }
-    //@@author
+
 }

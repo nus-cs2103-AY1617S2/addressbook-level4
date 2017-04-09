@@ -23,6 +23,7 @@ import seedu.tache.logic.commands.PrevCommand;
 import seedu.tache.logic.commands.SaveCommand;
 import seedu.tache.logic.commands.SelectCommand;
 import seedu.tache.logic.commands.UndoCommand;
+import seedu.tache.logic.commands.ViewCommand;
 
 /**
  * Parses user input.
@@ -105,6 +106,10 @@ public class Parser {
         case NextCommand.COMMAND_WORD:
         case NextCommand.SHORT_COMMAND_WORD:
             return new NextCommand();
+
+        case ViewCommand.COMMAND_WORD:
+        case ViewCommand.SHORT_COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

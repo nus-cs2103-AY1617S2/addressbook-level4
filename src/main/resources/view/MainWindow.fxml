@@ -71,7 +71,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <AnchorPane fx:id="calendarPlaceholder" minWidth="380.0" prefWidth="380.0">
+            <AnchorPane fx:id="calendarPlaceholder" minWidth="380.0" prefWidth="380.0" VBox.vgrow="NEVER">
             <!-- @@author -->
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />

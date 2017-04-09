@@ -62,7 +62,8 @@ public class LogicManager extends ComponentManager implements Logic {
     public ObservableList<ReadOnlyTask> getFullTaskList() {
         List<ReadOnlyTask> concatenated = new ArrayList<>();
         Collections.addAll(concatenated, model.getTaskManager().getTaskList().toArray());
-        Collections.addAll(concatenated, model.getAllRecurringGhostTasks().toArray());
+        Collections.addAll(concatenated, model.getAllCompletedRecurringGhostTasks().toArray());
+        Collections.addAll(concatenated, model.getAllUncompletedRecurringGhostTasks().toArray());
         return FXCollections.observableList(concatenated);
     }
 

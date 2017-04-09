@@ -16,7 +16,7 @@ import seedu.tache.commons.events.storage.DataFileLocationChangedEvent;
 import seedu.tache.commons.util.FxViewUtil;
 
 /**
- * A ui for the status bar that is displayed at the footer of the application.
+ * A UI for the status bar that is displayed at the footer of the application.
  */
 public class StatusBarFooter extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
@@ -67,11 +67,16 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     //@@author A0142255M
+    /**
+     * Updates the save location status bar when the data file location is changed.
+     *
+     * @param event    Event which contains the new data file path.
+     */
     @Subscribe
-    public void handleDataFileLocationChangedEvent(DataFileLocationChangedEvent abce) {
-        assert abce != null;
-        String newLocation = abce.toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting new data file location to" + newLocation));
+    public void handleDataFileLocationChangedEvent(DataFileLocationChangedEvent event) {
+        assert event != null;
+        String newLocation = event.toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting new data file location to" + newLocation));
         setSaveLocation("New Location: " + newLocation);
     }
 }

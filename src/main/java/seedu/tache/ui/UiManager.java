@@ -24,7 +24,6 @@ import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.events.ui.PopulateRecurringGhostTaskEvent;
 import seedu.tache.commons.events.ui.ShowHelpRequestEvent;
 import seedu.tache.commons.events.ui.TaskPanelConnectionChangedEvent;
-import seedu.tache.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.tache.commons.util.StringUtil;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.UserPrefs;
@@ -136,12 +135,6 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
-    @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.viewTaskEvent(event.getNewSelection());
-    }
-
     //@@author A0139925U
     @Subscribe
     private void handleTaskPanelConnectionChangedEvent(TaskPanelConnectionChangedEvent event) {
@@ -155,7 +148,8 @@ public class UiManager extends ComponentManager implements Ui {
     private void handlePopulateRecurringGhostTaskEvent(PopulateRecurringGhostTaskEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (mainWindow.getTaskListPanel() != null) {
-            mainWindow.getCalendarPanel().addAllEvents(event.getAllRecurringGhostTasks());;
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllCompletedRecurringGhostTasks());
+            mainWindow.getCalendarPanel().addAllEvents(event.getAllUncompletedRecurringGhostTasks());
         }
     }
 

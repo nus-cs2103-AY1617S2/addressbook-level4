@@ -7,6 +7,8 @@ import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -77,6 +79,9 @@ public class GuiHandle {
 
     public void pressDown() {
         guiRobot.type(KeyCode.DOWN).sleep(500);
+    }
+    protected Image getImageFromImageView(String fieldId, Node parentNode) {
+        return ((ImageView) guiRobot.from(parentNode).lookup(fieldId).tryQuery().get()).getImage();
     }
     //@@author
 
