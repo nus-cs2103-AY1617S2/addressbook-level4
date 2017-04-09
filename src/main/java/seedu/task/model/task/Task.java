@@ -181,9 +181,6 @@ public class Task implements ReadOnlyTask {
         }
 
         if (start != null && end != null) {
-            if (0 > end.getTime().compareTo(start.getTime())) {
-                throw new IllegalValueException(FACTORY_ERROR_TIME);
-            }
             return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
             return new DeadlineTask(name, end, group, tags);
@@ -191,7 +188,7 @@ public class Task implements ReadOnlyTask {
             return new FloatingTask(name, group, tags);
         }
 
-        throw new IllegalValueException(FACTORY_ERROR_NOEND);
+        return null;
     }
 
 
