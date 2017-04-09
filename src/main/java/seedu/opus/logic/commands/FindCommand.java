@@ -24,12 +24,12 @@ public class FindCommand extends Command {
     public FindCommand(List<Qualifier> qualifiers) {
         this.qualifiers = qualifiers;
     }
-    //@@author
 
     @Override
     public CommandResult execute() {
         model.updateFilteredTaskList(qualifiers);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
     }
+    //@@author
 
 }

@@ -1,4 +1,3 @@
-//@@author A0148087W
 package seedu.opus.ui;
 
 import java.util.LinkedList;
@@ -47,7 +46,7 @@ public class UserInputHistory {
 
     /**
      * Returns the previous user input relative to current history iteration
-     * @return Previous user input Optional<String> if available, null otherwise
+     * @return Previous user input if available, null otherwise
      */
     public Optional<String> getPreviousUserInput() {
         assert iterator != null;
@@ -69,20 +68,20 @@ public class UserInputHistory {
     }
 
     /**
-     * Returns the preceding user input relative to current history iteration
-     * @return Preceding user input Optional<String> if available, null otherwise
+     * Returns the next user input relative to current history iteration
+     * @return Preceding user input if available, null otherwise
      */
-    public Optional<String> getPrecedingUserInput() {
+    public Optional<String> getNextUserInput() {
         assert iterator != null;
         if (!iterator.hasPrevious()) {
             current = null;
             return Optional.empty();
         }
 
-        String precedingInput = iterator.previous();
+        String nextInput = iterator.previous();
 
-        if (!precedingInput.equals(current)) {
-            current = precedingInput;
+        if (!nextInput.equals(current)) {
+            current = nextInput;
         } else if (iterator.hasPrevious()) {
             current = iterator.previous();
         } else {

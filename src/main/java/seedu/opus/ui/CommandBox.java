@@ -201,7 +201,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void browseToPrecedingCommand() {
-        String input  = history.getPrecedingUserInput().orElse(EMPTY_STRING);
+        String input  = history.getNextUserInput().orElse(EMPTY_STRING);
         commandTextField.setText(input);
         commandTextField.end();
     }
