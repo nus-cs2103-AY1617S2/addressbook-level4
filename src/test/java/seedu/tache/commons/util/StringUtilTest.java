@@ -12,9 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.tache.commons.exceptions.IllegalValueException;
-import seedu.tache.model.task.DateTime;
-
 public class StringUtilTest {
 
     @Rule
@@ -152,23 +149,22 @@ public class StringUtilTest {
         StringUtil.getDetails(null);
         fail();
     }
-    
+
     //@@author A0142255M
-    
     @Test(expected = NullPointerException.class)
     public void stringUtilHasSpecialCharacters_null_failure() throws NullPointerException {
         StringUtil.hasSpecialCharacters(null);
     }
-    
+
     @Test
     public void stringUtilHasSpecialCharacters_invalidString_failure() {
         assertFalse(StringUtil.hasSpecialCharacters("0"));
         assertFalse(StringUtil.hasSpecialCharacters(""));
-        
+
         // untrimmed
         assertFalse(StringUtil.hasSpecialCharacters(" "));
         assertFalse(StringUtil.hasSpecialCharacters(" 78"));
-        
+
         // contains whitespace
         assertFalse(StringUtil.hasSpecialCharacters(" 89 865 "));
     }

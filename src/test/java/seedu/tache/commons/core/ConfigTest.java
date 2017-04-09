@@ -23,13 +23,13 @@ public class ConfigTest {
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
-    
+
     //@@author A0142255M
     @Test
     public void config_getTaskManagerName_success() {
         assertEquals("Tache", new Config().getTaskManagerName());
     }
-    
+
     @Test
     public void config_equalsNullValue_failure() {
         assertFalse(new Config() == null);

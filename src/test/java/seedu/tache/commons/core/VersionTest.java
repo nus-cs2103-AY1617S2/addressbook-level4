@@ -131,7 +131,7 @@ public class VersionTest {
         another = new  Version(100, 191, 275, true);
         assertTrue(one.equals(another));
     }
-    
+
     //@@author A0142255M
     @Test
     public void version_compareToNonVersion_equalIsWrong() {

@@ -15,9 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.tag.Tag;
-import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
@@ -76,7 +74,7 @@ public class TaskManagerTest {
         taskManager.resetData(newData);
         fail();
     }
-    
+
     //@@author A0142255M
     @Test(expected = TaskNotFoundException.class)
     public void taskManagerRemoveTask_noSuchTask_failure() throws TaskNotFoundException {
