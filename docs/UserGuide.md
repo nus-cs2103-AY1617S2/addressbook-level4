@@ -56,26 +56,26 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
-> To add floating tasks, simply do not specify the start and end timing paramters.
-> To add tasks with deadlines, simply specify the end timing.
-> To add recurring tasks, see section 2.2.1.
-> Tasks can have any number of tags (including 0).
+> To add floating tasks, simply do not specify the start and end timing paramters.<br>
+> To add tasks with deadlines, simply specify the end timing.<br>
+> To add recurring tasks, see section 2.2.1.<br>
+> Tasks can have any number of tags (including 0).<br>
 
 Examples:
 
 * `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
 * `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 
-### 2.2.1. Adding a recurring task
+  ### 2.2.1. Adding a recurring task
 
-Adds a recurring task to the task list<br>
-Format: same as 'add' but specifcy the frequency by r/#_
-where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
+  > Adds a recurring task to the task list<br>
+  > Format: same as 'add' but specifcy the frequency by r/#_
+  > where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
 
-Examples:
+  Examples:
 
-* `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
-* `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
+  * `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
+  * `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
 
 ### 2.3. Listing tasks : `list`
 
@@ -94,13 +94,13 @@ Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
-> * Edits the task at the specified `INDEX`.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> Edits the task at the specified `INDEX`.
+  The index refers to the index number shown in the last task listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
+> At least one of the optional fields must be provided.
+> Existing values will be updated to the input values.
+> When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
