@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.geekeep.commons.core.EventsCenter;
+import seedu.geekeep.commons.events.ui.JumpToListRequestEvent;
 import seedu.geekeep.commons.exceptions.IllegalValueException;
 import seedu.geekeep.logic.commands.exceptions.CommandException;
 import seedu.geekeep.model.tag.Tag;
@@ -69,11 +71,23 @@ public class AddCommand extends UndoableCommand {
         assert model != null;
         try {
             model.addTask(toAdd);
+            int targetIndex = getTaskInternalIndex();
+            EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex, toAdd));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    private int getTaskInternalIndex() {
+        int targetIndex = model.getFilteredTaskList().indexOf(toAdd);
+        if (toAdd.isFloatingTask()) {
+            targetIndex -= model.getNumberOfEvents();
+        } else if (toAdd.isDeadline()) {
+            targetIndex -= (model.getNumberOfEvents() + model.getNumberOfFloatingTasks());
+        }
+        return targetIndex;
     }
 
 }
