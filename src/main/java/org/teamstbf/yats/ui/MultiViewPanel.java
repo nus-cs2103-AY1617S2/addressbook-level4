@@ -35,7 +35,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String FXMLPERSON = "PersonListCard.fxml";
+	private static final String FXMLPERSON = "PersonListCardDone.fxml";
 
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private ObservableList<ReadOnlyEvent> calendarList;
@@ -173,6 +173,12 @@ public class MultiViewPanel extends UiPart<Region> {
 				data[TASK_END] = event.getEndTime().toString();
 				data[TASK_LOCATION] = event.getLocation().toString();
 				timeData.add(data);
+				String[] data1 = timeData.get(i);
+				int j = 0;
+				while (j != 4) {
+					System.out.println(data1[j]);
+					j++;
+				}
 			}
 		}
 	}

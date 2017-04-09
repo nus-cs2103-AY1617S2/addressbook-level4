@@ -3,28 +3,28 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
+    -fx-font-size: 0pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
+    -fx-font-size: 0pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 0pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 0pt;
     -fx-font-family: "Segoe UI Semibold";
 }
 
@@ -64,7 +64,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 0pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -93,17 +93,23 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #228B22;
+    -fx-text-fill: #010504;
+}
+
+.cell_no_label {
+    -fx-font-size: 0.0001px;
+    -fx-text-fill: #010504;
+
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
 
 }
 
 .cell_small_label {
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
     -fx-text-fill: #010504;
 }
 
