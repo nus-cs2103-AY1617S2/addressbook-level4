@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " fishing";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_FAILURE = "Task does not exist!";
 
     private Integer targetIndex = null;
     private String targetName = null;
@@ -54,7 +55,11 @@ public class DeleteCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        if (taskToDelete != null) {
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        } else {
+            throw new CommandException(MESSAGE_DELETE_TASK_FAILURE);
+        }
     }
 
     private ReadOnlyTask getTaskByName(UnmodifiableObservableList<ReadOnlyTask> list, String name) {
