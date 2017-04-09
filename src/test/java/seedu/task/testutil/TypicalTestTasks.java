@@ -8,7 +8,15 @@ import seedu.task.model.task.UniqueTaskList;
 //@@author A0146757R
 public class TypicalTestTasks {
 
-    public TestTask apples, cereals, homework, report, lab, police, jog, yam, zoo;
+    public static TestTask apples;
+    public static TestTask cereals;
+    public TestTask homework;
+    public TestTask report;
+    public TestTask lab;
+    public TestTask police;
+    public TestTask jog;
+    public static TestTask yam;
+    public static TestTask zoo;
 
     public TypicalTestTasks() {
         try {
@@ -38,14 +46,6 @@ public class TypicalTestTasks {
             yam = new TaskBuilder().withTaskName("Grow yam").withTaskDate("100217").withTaskStartTime("0700")
                     .withTaskEndTime("1700").withTaskDescription("Buy fertilizers").withTaskStatus("Ongoing").build();
             zoo = new TaskBuilder().withTaskName("Visit zoo").withTaskDate("030217").withTaskStartTime("0800")
-                    .withTaskEndTime("1700").withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
-            yam2 = new TaskBuilder().withTaskName("Grow yam2").withTaskDate("100217").withTaskStartTime("0700")
-                    .withTaskEndTime("1700").withTaskDescription("Buy fertilizers").withTaskStatus("Ongoing").build();
-            zoo2 = new TaskBuilder().withTaskName("Visit zoo2").withTaskDate("030217").withTaskStartTime("0800")
-                    .withTaskEndTime("1700").withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
-            yam3 = new TaskBuilder().withTaskName("Grow yam3").withTaskDate("100217").withTaskStartTime("0700")
-                    .withTaskEndTime("1700").withTaskDescription("Buy fertilizers").withTaskStatus("Ongoing").build();
-            zoo3 = new TaskBuilder().withTaskName("Visit zoo3").withTaskDate("030217").withTaskStartTime("0800")
                     .withTaskEndTime("1700").withTaskDescription("Bring Jesse along").withTaskStatus("Ongoing").build();
 
         } catch (IllegalValueException e) {
