@@ -16,7 +16,7 @@ By : `W13-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nb
   3.7. [Deleting a task](#37-deleting-a-task--delete)  
   3.8. [Marking tasks as finished](#38-marking-tasks-as-finished--finish)  
   3.9. [Undoing previous commands](#39-undoing-previous-commands--undo-redo)  
-  3.10. [Setting an alias for a command word](#310-setting-an-alias-for-a-command-word--alias-view_alias)  
+  3.10. [Setting an alias for a command word](#310-setting-an-alias-for-a-command-word--alias-view_alias-remove_alias-reset_alias)  
   3.11. [Loading an external data file](#311-loading-an-external-data-file--load)  
   3.12. [Changing the storage location](#312-changing-the-storage-location--save_at)  
   3.13  [Changing themes](#313-changing-themes)  
@@ -86,7 +86,7 @@ Refer to the [Features](#features) section below for details of each command.<br
 
 Take note of some general information for our commands : <br>
 <img src="images/commandformat.png" width="500"> <br>
-*Figure 2.3: General command format*
+*Figure 3.1: General command format*
 
 > * All parameters start with the backslash `\`. <br>
 > *e.g.* `\from`, `\to`
@@ -184,8 +184,8 @@ Format: `[\as PRIORITY]`
 > - `Priority` can be `normal`, `important`, `very important`
 
 <br>
-<img src="images/priority.png" width="230"> <br>
-*Figure 3.2.1: Important and very important tasks have stars next to them* <br>
+<img src="images/priority.png" width="230">
+*Figure 3.2.1: Important and very important tasks have stars next to them*
 
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
@@ -386,9 +386,20 @@ Format: `alias ALIAS \for COMMAND_WORD`
 > - If you are unable to set an alias, your alias is an existing command word.
 > - If you try to set the same alias to two different command words, the alias will only be set for the second command word.
 
-There are already some default aliases set for you. For example, `do` can be used in place of `add` and `ls` can be used in place of `list`. You can use `view_alias` to view the current list of aliases! <br>
+**Viewing aliases** <br>
+You can use `view_alias` to view the current list of aliases! There are already some default aliases set for you. For example, `do` can be used in place of `add` and `ls` can be used in place of `list`. <br>
 <br>
 Format: `view_alias`
+
+**Removing an alias** <br>
+To remove an existing alias for a command word, simply use `remove_alias`!<br>
+<br>
+Format: `remove_alias ALIAS`
+
+**Resetting aliases** <br>
+To remove all the aliases you have set and reset to the default aliases that was set for you, use the `reset_alias` command. <br>
+<br>
+Format: `reset_alias`
 
 ### 3.11 Loading an external data file : `load`
 
