@@ -56,7 +56,7 @@ public class MainWindow extends UiPart<Region> {
     private static final String FONT_AVENIR = "/fonts/avenir-light.ttf";
     private static final String DONE_STYLESHEET = "view/Strikethrough.css";
     private static final String HELPWINDOW_URL = "/view/help.html";
-    private static final String USERGUIDE_URL = "https://cs2103jan2017-f14-b1.github.io/main/UserGuide.html";
+    private static final String USERGUIDE_URL = "/view/UserGuide.html";
     private static final String ICON_IMG = "/images/onetwodo_icon2.png";
 
 
@@ -320,7 +320,8 @@ public class MainWindow extends UiPart<Region> {
     public void handleHelpUG() {
         JFXDialogLayout content = new JFXDialogLayout();
         browser = new WebView();
-        browser.getEngine().load(USERGUIDE_URL);
+        URL help = MainApp.class.getResource(USERGUIDE_URL);
+        browser.getEngine().load(help.toString());
         hideScrollBar(browser);
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         content.setBody(browser);
