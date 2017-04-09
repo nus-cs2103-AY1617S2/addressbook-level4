@@ -257,7 +257,7 @@ following methods:
 
 **Common Commands**
 
-`Add Command` - It is able to add task.
+1) `Add Command` - It is able to add task.
 This function is flexible with dates by using the natty libraries. When `AddCommand` is used, user's input will be checked in the 
 `AddCommandParser`. In the `AddCommandParser`, it will check for the type of task. There are three types of task and they are floating 
 task(no date, no time), deadline task(date/time present), event task(start and end date present). There are three `addCommand` methods 
@@ -270,7 +270,7 @@ Given below is the Activity Diagram when the information reached `AddCommandPars
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
 
-`Delete Command` - It is able to delete a task using Index.
+2) `Delete Command` - It is able to delete a task using Index.
 This function can only work if the given index is valid.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -280,36 +280,36 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 
-`Edit Command` - It is able to edit a task using Index.
+3) `Edit Command` - It is able to edit a task using Index.
 This function make use of the Optional class to update the task. It calls `storeTaskManager()` and `updateTask()` from the `Model` when editing the task. It also calls `updateFilteredTaskList()` from the `Model` to show the updated task list after editing.
 
-`Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
+4) `Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
 
-`Find Command` - It is able to find a task with the specified name or date
+5) `Find Command` - It is able to find a task with the specified name or date
 This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
 keywords are related to dates or not. If dates are found, the search result will show the related dates. If not, the search result will 
 show the related keywords. This function calls `updateFilteredTaskList()` from the `Model` to display the search results.
 
-`List Command` - It is able to list all tasks excluding completed tasks. This function calls `updateFilteredTaskList()` from the `Model`.
+6) `List Command` - It is able to list all tasks excluding completed tasks. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListDone Command` - It is able to list all completed tasks only. This function calls `updateFilteredTaskList()` from the `Model`.
+7) `ListDone Command` - It is able to list all completed tasks only. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListPriority Command` - It is able to list all tasks that have "High" priority. This function calls `updateFilteredTaskList()` from the `Model`.
+8) `ListPriority Command` - It is able to list all tasks that have "High" priority. This function calls `updateFilteredTaskList()` from the `Model`.
 
-`ListToday Command` - It is able to list all tasks that are overdue today and events that include today's date. This function calls `updateFilteredTaskList()` from the `Model`.
+9) `ListToday Command` - It is able to list all tasks that are overdue today and events that include today's date. This function calls `updateFilteredTaskList()` from the `Model`.
 
 **Additional Commands**
 
-`Redo Command` - It is able to redo only if an `Undo Command` has been executed before.
+1) `Redo Command` - It is able to redo only if an `Undo Command` has been executed before.
 This function is done by using stack. When an `Undo Command` is executed, taskManager is "push" into the stack before `Undo Command's` 
 function is carried out. By doing this way, the previous state is saved inside the stack. When `Redo Command` is executed, the stack 
 will "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in 
 ModelManager under Model component.
 
-`RemoveDeadline Command` - It is able to remove all dates in a task.
+2) `RemoveDeadline Command` - It is able to remove all dates in a task.
 It checks for valid index and set all the dates for the task to an empty string.
 
-`Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. 
+3) `Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. 
 This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action 
 command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed,
 the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside 
