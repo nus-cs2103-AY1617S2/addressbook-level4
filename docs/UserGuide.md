@@ -242,8 +242,7 @@ Autocomplete the user's command on the CLI. This applies to the following comman
 * `redo`
 * `save`
 * `schedule`
-* `sort`
-* `sync` 
+* `sort` 
 * `undo`
 
 > * Example:
