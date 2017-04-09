@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -55,4 +56,47 @@ public class StringUtil {
     public static boolean isUnsignedInteger(String s) {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
+
+    //@@author A0163848R
+    /**
+     * Extracts space-concatenated string until end or the first of the last instances of the passed haltAt keywords
+     * @param Keywords to parse
+     * @param Index to start at
+     * @param Keywords to stop at once the first of the set of last instances is met
+     * @return Concatenated string of all keywords between start and index specified by the keywords parameter
+     */
+    public static String extract(List<String> keywords, int start, List<String> haltAt) {
+        return StringUtil.concat(keywords.subList(
+                start,
+                start + CollectionUtil.firstLastIndexOfAny(keywords.subList(start, keywords.size()), haltAt)));
+    }
+
+    /**
+     * Concatenates Strings with the space character
+     * @param Strings to concatenate
+     * @return Concatenated String
+     */
+    public static String concat(List<String> strs) {
+        return StringUtil.concat(strs, " ");
+    }
+
+    /**
+     * Concatenates Strings with the specified character
+     * @param Strings to concatenate
+     * @param String to repeat between strs
+     * @return Concatenated String
+     */
+    public static String concat(List<String> strs, String between) {
+        String cat = "";
+        for (int i = 0; i < strs.size(); i++) {
+            if (i == 0) {
+                cat = strs.get(i);
+                continue;
+            }
+
+            cat += between + strs.get(i);
+        }
+        return cat;
+    }
+  //@@author
 }

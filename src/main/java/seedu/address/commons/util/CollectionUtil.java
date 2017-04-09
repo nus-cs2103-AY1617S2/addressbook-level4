@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
@@ -63,8 +64,31 @@ public class CollectionUtil {
         return null;
     }
 
-    public static String getRandom(String[] strs, Random r) {
-        return strs[r.nextInt(strs.length)];
+    /**
+     * Returns a random element from the given array
+     * @param Array to retrieve from
+     * @param Random object to use
+     * @return Randomly-chosen element from array
+     */
+    public static <T> T getRandom(T[] arr, Random r) {
+        return arr[r.nextInt(arr.length)];
     }
 
+    /**
+     * Finds the first in the list of the set of last indices of any in the searched list
+     * @param List to search
+     * @param Elements to find last indices of
+     * @return First in the list of the set of last indices of any in the searched list
+     */
+    public static <T> int firstLastIndexOfAny(List<T> list, List<T> any) {
+        int i = list.size();
+        for (T a : any) {
+            int t = list.lastIndexOf(a);
+            if (t != -1 && t < i) {
+                i = t;
+            }
+        }
+        return i;
+    }
+    //@@author
 }
