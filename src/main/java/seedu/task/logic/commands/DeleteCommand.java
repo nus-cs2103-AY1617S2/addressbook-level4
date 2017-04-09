@@ -22,6 +22,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_MISSING_TASK = "The target task cannot be missing";
 
     public final int targetIndex;
     public final boolean isSpecific;
@@ -53,13 +54,13 @@ public class DeleteCommand extends Command {
             } catch (DuplicateTaskException e) {
                 throw new CommandException(AddCommand.MESSAGE_DUPLICATE_TASK);
             } catch (TaskNotFoundException tnfe) {
-                assert false : "The target task cannot be missing";
+                assert false : MESSAGE_MISSING_TASK;
             }
         } else {
             try {
                 model.deleteTask(taskToDelete);
             } catch (TaskNotFoundException tnfe) {
-                assert false : "The target task cannot be missing";
+                assert false : MESSAGE_MISSING_TASK;
             }
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
