@@ -48,49 +48,80 @@ public class CompleteCommand extends Command implements Undoable {
             this.indexList.set(i, indexList.get(i) - 1);
         }
         Collections.reverse(indexList);
+        completedList = new ArrayList<ReadOnlyTask>();
         commandSuccess = false;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         List<ReadOnlyTask> lastShownList = new ArrayList<ReadOnlyTask>(model.getFilteredTaskList());
-        completedList = new ArrayList<ReadOnlyTask>();
-
-        //Check all indexes are valid before proceeding
-        for (int i = 0; i < indexList.size(); i++) {
-            if (indexList.get(i) >= lastShownList.size()) {
-                commandSuccess = false;
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-        }
 
         ArrayList<ReadOnlyTask> tasksToEdit = new ArrayList<ReadOnlyTask>();
         ArrayList<ReadOnlyTask> completedTasks = new ArrayList<ReadOnlyTask>();
 
+        checkAllIndexValid(lastShownList);
+
+        commandSuccess = processNonRecurringTask(lastShownList, tasksToEdit, completedTasks)
+                        && processRecurringTask(lastShownList, tasksToEdit, completedTasks);
+
+        undoHistory.push(this);
+
+        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
+    }
+
+    private void checkAllIndexValid(List<ReadOnlyTask> lastShownList) throws CommandException {
+      //Check all indexes are valid before proceeding
+        for (int i = 0; i < indexList.size(); i++) {
+            if (indexList.get(i) >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+        }
+    }
+
+    private boolean processNonRecurringTask(List<ReadOnlyTask> lastShownList,
+                                            ArrayList<ReadOnlyTask> tasksToEdit,
+                                            ArrayList<ReadOnlyTask> completedTasks) throws CommandException {
         for (int i = 0; i < indexList.size(); i++) {
             ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
             if (taskToEdit.getRecurState().isRecurring()) {
-                taskToEdit = createMasterRecurringTask(taskToEdit);
+                continue;
+            } else {
+                Task completedTask = createCompletedTask(taskToEdit);
+                completedTasks.add(completedTask);
+                tasksToEdit.add(taskToEdit);
             }
-            tasksToEdit.add(taskToEdit);
-            Task completedTask = createCompletedTask(taskToEdit);
-            completedTasks.add(completedTask);
         }
         ReadOnlyTask[] arrayListMould = new ReadOnlyTask[0];
         try {
             completedList = model.updateMultipleTasks(
                     tasksToEdit.toArray(arrayListMould), completedTasks.toArray(arrayListMould));
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
-            assert false: "There shouldn't be a duplicate task";
-            commandSuccess = false;
+            assert false : "There shouldn't be a duplicate task";
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        commandSuccess = true;
-        undoHistory.push(this);
-        //model.updateCurrentFilteredList();
-        //model.getFilteredTaskList();
+        return true;
+    }
 
-        return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
+    private boolean processRecurringTask(List<ReadOnlyTask> lastShownList,
+                                        ArrayList<ReadOnlyTask> tasksToEdit,
+                                        ArrayList<ReadOnlyTask> completedTasks) throws CommandException {
+        for (int i = 0; i < indexList.size(); i++) {
+            ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
+            Task completedTask = createCompletedTask(taskToEdit);
+            try {
+                if (taskToEdit.getRecurState().isRecurring()) {
+                    if (taskToEdit.getRecurState().isRecurring()) {
+                        model.updateTask(createMasterRecurringTask(taskToEdit), completedTask);
+                    } else {
+                        model.updateTask(taskToEdit, completedTask);
+                    }
+                    completedList.add(completedTask);
+                }
+            } catch (UniqueTaskList.DuplicateTaskException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            }
+        }
+        return true;
     }
 
     /**
