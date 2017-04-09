@@ -4,35 +4,35 @@
 ## Table of contents
 
 1. [Introduction](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#1-introduction)<br>
-2. [Setting Up](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#2-setting_up) <br>
-    2.1. [Prerequisites](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#2-Prerequisites) <br>
-    2.2. [Importing the project into Eclipse]()  <br>
-    2.3. [Configuring Checkstyle]()  <br>
-    2.4. [Troubleshooting Project Setup]()  <br>
-3. [Design](#design) <br>
-    3.1. [Architecture]() <br>
-    3.2. [UI Component]() <br>
-    3.3. [Logic Component]() <br>
-    3.4. [Model Component]() <br>
-    3.5. [Storage Component]() <br>
-    3.6. [Common Classes]() <br>
-4. [Implementation](#implementation) <br>
-    4.1. [Logging]() <br>
-    4.2  [Configuration]() <br>
-5. [Testing](#testing) <br>
-    5.1 [Troubleshooting tests]() <br>
-6. [Dev Ops](#dev-ops) <br>
-    6.1 [Build Automation]() <br>
-    6.2 [Continuous Integration]() <br>
-    6.3 [Publishing Documentation]() <br>
-    6.4 [Making a Release]() <br>
-    6.5 [Converting Documentation to PDF format]() <br>
-    6.6 [Managing Dependencies]() <br>
-7. [Appendix A: User Stories](#appendix-a--user-stories) <br>
-8. [Appendix B: Use Cases](#appendix-b--use-cases) <br>
-9. [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements) <br>
-10. [Appendix D: Glossary](#appendix-d--glossary) <br>
-11. [Appendix E : Product Survey](#appendix-e--product-survey) <br>
+2. [Setting Up](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#2-setting-up) <br>
+    2.1. [Prerequisites](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#21-prerequisites) <br>
+    2.2. [Importing the project into Eclipse](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#22-importing-the-project-into-eclipse) <br>
+    2.3. [Configuring Checkstyle](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#23-configuring-checkstyle)<br>
+    2.4. [Troubleshooting Project Setup](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#24-troubleshooting-project-setup) <br>
+3. [Design](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#3-design)<br>
+    3.1. [Architecture](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#31-architecture) <br>
+    3.2. [UI Component](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#32-ui-component)<br>
+    3.3. [Logic Component](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component) <br>
+    3.4. [Model Component](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#34-model-component)<br>
+    3.5. [Storage Component](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#35-storage-component)<br>
+    3.6. [Common Classes](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#36-common-classes) <br>
+4. [Implementation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#4-implementation) <br>
+    4.1. [Logging](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#41-logging) <br>
+    4.2  [Configuration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#42-configuration) <br>
+5. [Testing](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#5-testing) <br>
+    5.1 [Troubleshooting tests](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#51-troubleshooting-tests) <br>
+6. [Dev Ops](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-dev-ops) <br>
+    6.1 [Build Automation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-build automation) <br>
+    6.2 [Continuous Integration](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-continuous-integration) <br>
+    6.3 [Publishing Documentation](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#6-publishing-documentation) <br>
+    6.4 [Making a Release](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#64-making-a-release)  <br>
+    6.5 [Converting Documentation to PDF format](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#65-converting-documentation-to-pdf-format)  <br>
+    6.6 [Managing Dependencies](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#66-managing-dependencies)  <br>
+* [Appendix A: User Stories](#appendix-a--user-stories) <br>
+* [Appendix B: Use Cases](#appendix-b--use-cases) <br>
+* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements) <br>
+* [Appendix D: Glossary](#appendix-d--glossary) <br>
+* [Appendix E : Product Survey](#appendix-e--product-survey) <br>
 &nbsp;
 
 ## 1. Introduction
