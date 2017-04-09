@@ -37,12 +37,14 @@ public class ModelManager extends ComponentManager implements Model {
     private final TaskManager taskManager;
     // @@author A0131278H
     private final FilteredList<ReadOnlyTask> filteredTasks;
-
-    // @@author A0114523U
-    private final FilteredList<ReadOnlyTask> filteredOverdueTasks;
     private final FilteredList<ReadOnlyTask> filteredToDoTasks;
     private final FilteredList<ReadOnlyTask> filteredDoneTasks;
     private String selectedTab;
+    // @@author
+
+    // @@author A0114523U
+    private final FilteredList<ReadOnlyTask> filteredOverdueTasks;
+    private final FilteredList<ReadOnlyTask> filteredTodayTasks;
     // @@author
 
     /**
@@ -59,6 +61,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // @@author A0114523U
         filteredOverdueTasks = new FilteredList<>(this.taskManager.getTaskList());
+        filteredTodayTasks = new FilteredList<>(this.taskManager.getTaskList());
+        // @@author
 
         // @@author A0131278H
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
@@ -158,6 +162,10 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0114523U
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
         return new UnmodifiableObservableList<>(filteredOverdueTasks);
+    }
+    
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTodayTaskList() {
+        return new UnmodifiableObservableList<>(filteredTodayTasks);
     }
     // @@author
 

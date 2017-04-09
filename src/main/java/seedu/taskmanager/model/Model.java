@@ -62,6 +62,13 @@ public interface Model {
      * {@code UnmodifiableObservableList<ReadOnlyTask>}
      */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+    
+    /**
+     * Returns the list of today's task as an
+     * {@code UnmodifiableObservableList<ReadOnlyTask>}
+     */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredTodayTaskList();
+    // @@author
 
     // @@author A0131278H
 

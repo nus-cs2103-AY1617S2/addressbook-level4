@@ -188,6 +188,16 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getTaskList() {
         return new UnmodifiableObservableList<>(tasks.asObservableList());
     }
+    
+    // @@author A0114523U
+    public ObservableList<ReadOnlyTask> getOverdueTaskList() {
+    	return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+    
+    public ObservableList<ReadOnlyTask> getTodayTaskList() {
+    	return new UnmodifiableObservableList<>(tasks.asObservableList());
+    }
+    // @@author
 
     public ObservableList<ReadOnlyTask> getToDoTaskList() {
         return new UnmodifiableObservableList<>(tasks.getTaskListByStatus(Status.STATUS_NOT_DONE));
