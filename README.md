@@ -26,7 +26,7 @@ A CLI-based todo list app for Jim.
 * The project also made us of some open-source libraries, listed below:
   * [Natty](https://github.com/joestelmach/natty), which is used for parsing natural date formats
   * [Jackson](https://github.com/FasterXML/jackson), which is used for JSON parsing
-  * [Guava](https://github.com/google/guava), which comes bundled with EventBus that is used to Event-Driven Programming
+  * [Guava](https://github.com/google/guava), which comes bundled with EventBus that is used for Event-Driven Programming
   * [Evo Inflector](https://github.com/atteo/evo-inflector), which provides pluralization of English words
   * [JUnit](https://github.com/junit-team/junit4), which is the most popular testing framework for Java
   * [TestFX](https://github.com/TestFX/TestFX), which allows GUI testing of JavaFX components
