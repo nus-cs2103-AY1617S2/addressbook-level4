@@ -1,6 +1,7 @@
 package seedu.tache.commons.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,6 +23,18 @@ public class ConfigTest {
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
+
+    //@@author A0142255M
+    @Test
+    public void config_getTaskManagerName_success() {
+        assertEquals("Tache", new Config().getTaskManagerName());
+    }
+
+    @Test
+    public void config_equalsNullValue_failure() {
+        assertFalse(new Config() == null);
+    }
+    //@@author
 
     @Test
     public void equalsMethod() {

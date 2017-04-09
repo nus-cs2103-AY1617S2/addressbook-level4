@@ -228,8 +228,8 @@ public class ParserUtil {
         String[] inputs = input.split(" ");
         int currentIndex = 0;
         Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
-        PossibleDateTime current = new PossibleDateTime(new String(),
-                PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX,
+                                                        DateTimeType.UNKNOWN);
         for (int i = 0; i < inputs.length; i++) {
             String word = inputs[i];
             if (isStartDateIdentifier(word)) {

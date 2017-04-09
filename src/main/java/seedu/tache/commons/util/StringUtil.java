@@ -65,7 +65,7 @@ public class StringUtil {
      * null, empty string, "-1", "0", "+1", and " 2 " (untrimmed) "3 0" (contains whitespace).
      * @param s Should be trimmed.
      */
-    public static boolean hasSpecialCharactes(String s) {
+    public static boolean hasSpecialCharacters(String s) {
 
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(s);

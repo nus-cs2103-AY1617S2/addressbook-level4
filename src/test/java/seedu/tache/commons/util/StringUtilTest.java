@@ -150,4 +150,23 @@ public class StringUtilTest {
         fail();
     }
 
+    //@@author A0142255M
+    @Test(expected = NullPointerException.class)
+    public void stringUtilHasSpecialCharacters_null_failure() throws NullPointerException {
+        StringUtil.hasSpecialCharacters(null);
+    }
+
+    @Test
+    public void stringUtilHasSpecialCharacters_invalidString_failure() {
+        assertFalse(StringUtil.hasSpecialCharacters("0"));
+        assertFalse(StringUtil.hasSpecialCharacters(""));
+
+        // untrimmed
+        assertFalse(StringUtil.hasSpecialCharacters(" "));
+        assertFalse(StringUtil.hasSpecialCharacters(" 78"));
+
+        // contains whitespace
+        assertFalse(StringUtil.hasSpecialCharacters(" 89 865 "));
+    }
+
 }

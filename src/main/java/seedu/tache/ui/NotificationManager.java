@@ -13,10 +13,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
 import javafx.collections.ObservableList;
+import seedu.tache.commons.core.LogsCenter;
 import seedu.tache.commons.events.model.TaskManagerChangedEvent;
 import seedu.tache.logic.Logic;
 import seedu.tache.model.task.DateTime;
@@ -28,6 +30,7 @@ import seedu.tache.model.task.ReadOnlyTask;
  */
 public class NotificationManager {
 
+    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     public static final int EVENT_TYPE = 0;
     public static final int DEADLINE_TYPE = 1;
     public static final int REMOVE_SECONDS_OFFSET = 3;
@@ -40,6 +43,8 @@ public class NotificationManager {
     public static final String START_TIME_WITHOUT_NAME_TEXT = "This task is starting in 2Hrs";
     public static final String FULL_STOP_TEXT = ".";
     public static final String AT_TEXT = " at ";
+    public static final String SYSTEM_TRAY_NOT_SUPPORTED_MESSAGE = "Your environment"
+            + "does not support system tray notification";
 
     private Logic logic;
     private Timer notificationTimer;
@@ -116,52 +121,56 @@ public class NotificationManager {
      * @param task: The task that is being notified about.
      */
     void showSystemTrayNotification(ReadOnlyTask task, int type) {
-        SystemTray tray = SystemTray.getSystemTray();
-        ImageIcon icon = new ImageIcon(getClass().getResource(IMAGE_ICON_PATH));
-        java.awt.Image image = icon.getImage();
-        TrayIcon trayIcon = new TrayIcon(image, NOTIFICATION_TEXT);
-        trayIcon.setImageAutoSize(true);
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            ImageIcon icon = new ImageIcon(getClass().getResource(IMAGE_ICON_PATH));
+            java.awt.Image image = icon.getImage();
+            TrayIcon trayIcon = new TrayIcon(image, NOTIFICATION_TEXT);
+            trayIcon.setImageAutoSize(true);
 
-        String displayMsg = "";
-        if (type == DEADLINE_TYPE) {
-            trayIcon.setToolTip(task.getName().fullName + DUE_TIME_WITH_NAME_TEXT);
-            displayMsg += DUE_TIME_WITHOUT_NAME_TEXT;
-            if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
-                String time = task.getEndDateTime().get().getTimeOnly();
-                displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
-            } else {
-                displayMsg += FULL_STOP_TEXT;
+            String displayMsg = "";
+            if (type == DEADLINE_TYPE) {
+                trayIcon.setToolTip(task.getName().fullName + DUE_TIME_WITH_NAME_TEXT);
+                displayMsg += DUE_TIME_WITHOUT_NAME_TEXT;
+                if (!task.getEndDateTime().get().getTimeOnly().isEmpty()) {
+                    String time = task.getEndDateTime().get().getTimeOnly();
+                    displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
+                } else {
+                    displayMsg += FULL_STOP_TEXT;
+                }
             }
-        }
-        if (type == EVENT_TYPE) {
-            trayIcon.setToolTip(task.getName().fullName + START_TIME_WITH_NAME_TEXT);
-            displayMsg += START_TIME_WITHOUT_NAME_TEXT;
-            if (!task.getStartDateTime().get().getTimeOnly().isEmpty()) {
-                String time = task.getStartDateTime().get().getTimeOnly();
-                displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
-            } else {
-                displayMsg += FULL_STOP_TEXT;
+            if (type == EVENT_TYPE) {
+                trayIcon.setToolTip(task.getName().fullName + START_TIME_WITH_NAME_TEXT);
+                displayMsg += START_TIME_WITHOUT_NAME_TEXT;
+                if (!task.getStartDateTime().get().getTimeOnly().isEmpty()) {
+                    String time = task.getStartDateTime().get().getTimeOnly();
+                    displayMsg += AT_TEXT + time.substring(0, time.length() - REMOVE_SECONDS_OFFSET) + FULL_STOP_TEXT;
+                } else {
+                    displayMsg += FULL_STOP_TEXT;
+                }
             }
-        }
 
-        MenuItem dismissMenuItem = new MenuItem(DISMISS_TEXT);
-        dismissMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tray.remove(trayIcon);
+            MenuItem dismissMenuItem = new MenuItem(DISMISS_TEXT);
+            dismissMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tray.remove(trayIcon);
+                }
+            });
+
+            PopupMenu popupMenu = new PopupMenu();
+            popupMenu.add(dismissMenuItem);
+
+            trayIcon.setPopupMenu(popupMenu);
+            try {
+                tray.add(trayIcon);
+            } catch (AWTException ex) {
+                ex.printStackTrace();
             }
-        });
-
-        PopupMenu popupMenu = new PopupMenu();
-        popupMenu.add(dismissMenuItem);
-
-        trayIcon.setPopupMenu(popupMenu);
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException ex) {
-            ex.printStackTrace();
+            trayIcon.displayMessage(task.getName().fullName, displayMsg, MessageType.INFO);
+        } else {
+            logger.info(SYSTEM_TRAY_NOT_SUPPORTED_MESSAGE);
         }
-        trayIcon.displayMessage(task.getName().fullName, displayMsg, MessageType.INFO);
     }
 
     /**

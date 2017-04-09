@@ -69,13 +69,15 @@ public class JsonUserPrefsStorageTest {
     }
 
     @Test
-    public void readUserPrefsValuesMissingFromFileDefaultValuesUsed() throws DataConversionException {
+    public void jsonUserPrefsStorageReadUserPrefs_valuesMissing_defaultValuesUsed()
+            throws DataConversionException {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
     }
 
     @Test
-    public void readUserPrefsExtraValuesInFileExtraValuesIgnored() throws DataConversionException {
+    public void jsonUserPrefsStorageReadUserPrefs_extraValues_extraValuesIgnored()
+            throws DataConversionException {
         UserPrefs expected = new UserPrefs();
         expected.setGuiSettings(1000, 500, 300, 100);
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();

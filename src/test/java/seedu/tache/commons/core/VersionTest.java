@@ -1,6 +1,7 @@
 package seedu.tache.commons.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
@@ -129,6 +130,13 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new  Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+    }
+
+    //@@author A0142255M
+    @Test
+    public void version_compareToNonVersion_equalIsWrong() {
+        assertFalse(new Version(50, 0, 23, true).equals(null));
+        assertFalse(new Version(5, 6, 1, false).equals(""));
     }
 
 }

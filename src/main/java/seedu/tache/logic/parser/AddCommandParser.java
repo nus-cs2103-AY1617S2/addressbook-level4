@@ -52,7 +52,7 @@ public class AddCommandParser {
             } else if (current.type == DateTimeType.RECURRENCE_PREFIX && recurInterval == null) {
                 try {
                     current.recurInterval = ParserUtil.parseStringToRecurInterval(
-                            current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
+                                            current.data.replaceFirst(RECURRENCE_IDENTIFIER_PREFIX, ""));
                     recurInterval = current;
                 } catch (IllegalValueException ex) {
                     continue;

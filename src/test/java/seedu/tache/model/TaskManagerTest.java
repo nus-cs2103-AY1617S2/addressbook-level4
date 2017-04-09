@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.tache.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -73,6 +74,15 @@ public class TaskManagerTest {
         taskManager.resetData(newData);
         fail();
     }
+
+    //@@author A0142255M
+    @Test(expected = TaskNotFoundException.class)
+    public void taskManagerRemoveTask_noSuchTask_failure() throws TaskNotFoundException {
+        TypicalTestTasks td = new TypicalTestTasks();
+        TaskManager taskManager = td.getTypicalTaskManager();
+        taskManager.removeTask(new Task(td.getFit));
+    }
+    //@@author
 
     /**
      * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.

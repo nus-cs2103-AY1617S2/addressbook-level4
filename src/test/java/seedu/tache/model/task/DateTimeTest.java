@@ -120,4 +120,17 @@ public class DateTimeTest {
         DateTime today = new DateTime("today 00:00AM");
         assertEquals(DateTime.removeTime(date), today.getDate());
     }
+
+    //@@author A0142255M
+    @Test
+    public void dateTime_compareTo() throws IllegalValueException {
+        DateTime yesterday = new DateTime("yesterday 3pm");
+        DateTime alsoYesterday = new DateTime("yesterday 3pm");
+        DateTime today = new DateTime("today");
+
+        assertEquals(0, yesterday.compareTo(alsoYesterday));
+        assertEquals(1, today.compareTo(yesterday));
+        assertEquals(-1, yesterday.compareTo(today));
+    }
+
 }
