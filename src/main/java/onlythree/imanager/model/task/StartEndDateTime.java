@@ -3,6 +3,7 @@ package onlythree.imanager.model.task;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
 import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
@@ -77,7 +78,8 @@ public class StartEndDateTime {
 
     @Override
     public String toString() {
-        return "Start Date: " + startDateTime.toString() + " End Date: " + endDateTime.toString();
+        return "Start: " + startDateTime.format(DateTimeFormats.CLI_FORMAT)
+            + " End: " + endDateTime.format(DateTimeFormats.CLI_FORMAT);
     }
 
     @Override

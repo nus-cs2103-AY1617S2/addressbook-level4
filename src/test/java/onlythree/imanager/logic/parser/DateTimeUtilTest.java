@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.chrono.ChronoZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
@@ -18,7 +19,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
+import onlythree.imanager.logic.DateTimeUtil;
 
 //@@author A0140023E
 // TODO improve test and naming
@@ -52,7 +55,7 @@ public class DateTimeUtilTest {
 
         // Random explicit date
         assertEqualsIgnoresMilliAndBelow(
-                ZonedDateTime.of(LocalDate.of(2016, 5, 2), LocalTime.now(), DateTimeUtil.TIME_ZONE),
+                ZonedDateTime.of(LocalDate.of(2016, 5, 2), LocalTime.now(), DateTimeFormats.SYSTEM_TIME_ZONE),
                 DateTimeUtil.parseDateTimeString("2016-05-02"));
     }
 
@@ -200,10 +203,7 @@ public class DateTimeUtilTest {
         ChronoUnit truncationUnit = ChronoUnit.SECONDS;
         ZonedDateTime expectedTruncated = expected.truncatedTo(truncationUnit);
         ZonedDateTime actualTruncated = actual.truncatedTo(truncationUnit);
-        System.out.println(expectedTruncated);
-        System.out.println(actualTruncated);
-        // converting to Instant so we compare without caring about timezones
-        assertEquals(expectedTruncated.toInstant(), actualTruncated.toInstant());
+        assertIsEqual(expectedTruncated, actualTruncated);
     }
 
     /**
@@ -213,7 +213,22 @@ public class DateTimeUtilTest {
         ChronoUnit truncationUnit = ChronoUnit.SECONDS;
         ZonedDateTime expectedTruncated = expected.truncatedTo(truncationUnit);
         ZonedDateTime actualTruncated = actual.truncatedTo(truncationUnit);
-        // converting to Instant so we compare without caring about timezones
-        assertNotEquals(expectedTruncated.toInstant(), actualTruncated.toInstant());
+        assertIsNotEqual(expectedTruncated, actualTruncated);
+    }
+
+    /**
+     * Assert that the instant of the ZonedDateTimes are equal instead of comparing component by component.
+     * @see ChronoZonedDateTime#isEqual(ChronoZonedDateTime)
+     */
+    private void assertIsEqual(ZonedDateTime expected, ZonedDateTime actual) {
+        assertEquals(expected.toInstant(), actual.toInstant());
+    }
+
+    /**
+     * Assert that the instant of the ZonedDateTimes are not equal instead of comparing component by component.
+     * @see ChronoZonedDateTime#isEqual(ChronoZonedDateTime)
+     */
+    private void assertIsNotEqual(ZonedDateTime expected, ZonedDateTime actual) {
+        assertNotEquals(expected.toInstant(), actual.toInstant());
     }
 }

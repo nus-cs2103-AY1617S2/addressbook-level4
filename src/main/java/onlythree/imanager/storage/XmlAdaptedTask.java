@@ -1,14 +1,15 @@
 package onlythree.imanager.storage;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
-import onlythree.imanager.logic.parser.DateTimeUtil;
 import onlythree.imanager.model.tag.Tag;
 import onlythree.imanager.model.tag.UniqueTagList;
 import onlythree.imanager.model.tag.UniqueTagList.DuplicateTagException;
@@ -81,7 +82,7 @@ public class XmlAdaptedTask {
     private void setDeadlineElementIfPresent(Optional<Deadline> sourceDeadline) {
         if (sourceDeadline.isPresent()) {
             Deadline deadline = sourceDeadline.get();
-            deadlineElement = deadline.getDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
+            deadlineElement = deadline.getDateTime().format(DateTimeFormats.STORAGE_FORMAT);
         }
     }
 
@@ -91,8 +92,8 @@ public class XmlAdaptedTask {
     private void setStartEndDateElementsIfPresent(Optional<StartEndDateTime> sourceStartEndDateTime) {
         if (sourceStartEndDateTime.isPresent()) {
             StartEndDateTime startEndDateTime = sourceStartEndDateTime.get();
-            startDateTimeElement = startEndDateTime.getStartDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
-            endDateTimeElement = startEndDateTime.getEndDateTime().format(DateTimeUtil.DATE_TIME_FORMAT);
+            startDateTimeElement = startEndDateTime.getStartDateTime().format(DateTimeFormats.STORAGE_FORMAT);
+            endDateTimeElement = startEndDateTime.getEndDateTime().format(DateTimeFormats.STORAGE_FORMAT);
         }
     }
 
@@ -151,8 +152,10 @@ public class XmlAdaptedTask {
         try {
             // construct Deadline with allowPastDateTime set to true because this is loaded from storage
             Deadline deadline =
-                    new Deadline(ZonedDateTime.parse(deadlineElement, DateTimeUtil.DATE_TIME_FORMAT), true);
+                    new Deadline(ZonedDateTime.parse(deadlineElement, DateTimeFormats.STORAGE_FORMAT), true);
             return Optional.of(deadline);
+        } catch (DateTimeParseException e) {
+            return Optional.empty();
         } catch (PastDateTimeException e) {
             throw new AssertionError("Deadline constructed from storage should never throw a PastDateTimeException");
         }
@@ -170,13 +173,15 @@ public class XmlAdaptedTask {
         if (startDateTimeElement == null || endDateTimeElement == null) {
             return Optional.empty();
         }
-        ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
-        ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, DateTimeUtil.DATE_TIME_FORMAT);
 
         try {
+            ZonedDateTime startDateTime = ZonedDateTime.parse(startDateTimeElement, DateTimeFormats.STORAGE_FORMAT);
+            ZonedDateTime endDateTime = ZonedDateTime.parse(endDateTimeElement, DateTimeFormats.STORAGE_FORMAT);
             // construct StartEndDateTime with allowPastDateTime set to true because this is loaded from storage
             StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime, true);
             return Optional.of(startEndDateTime);
+        } catch (DateTimeParseException e) {
+            return Optional.empty();
         } catch (PastDateTimeException e) {
             throw new AssertionError("StartEndDateTime constructed from storage should never throw"
                                    + "a PastDateTimeException");
