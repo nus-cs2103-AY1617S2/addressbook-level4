@@ -265,12 +265,17 @@ Examples:
 * **Find** : `find KEYWORD [MORE_KEYWORDS] [s/STARTTIME] [e/ENDTIME] [c/COMPLETETIME] [ty/TYPE] [t/TAG] [t/MORE TAGS]` <br>
   e.g. `find Dog`
   e.g. `find c/tomorrow`
+  e.g. `find s/today`
+  e.g. `find e/yesterday`
+  e.g. `find c/`
+  e.g. `find c/not`
   e.g. `find ty/floating`
   e.g. `find ty/deadline`
   e.g. `find ty/event`
 
 * **Complete** : `complete INDEX [COMPLETETIME]` <br>
   e.g. `complete 1 17-03-17T8:00`
+  e.g. `complete 2`
 
 * **Uncomplete** : `uncomplete INDEX` <br>
   e.g. `uncomplete 1`

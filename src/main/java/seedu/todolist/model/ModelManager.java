@@ -68,6 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Raises an event to indicate the model has changed
      * Takes the modified ReadOnlyTodo as an optional parameter
      * */
+    //@@author A0163720M
     private void indicateTodoListChanged(ReadOnlyTodo todo) {
         if (todo != null) {
             int todoListIndex = filteredTodos.indexOf(todo);
@@ -76,6 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         raise(new TodoListChangedEvent(todoList));
     }
+    //@@author
 
     //@@author A0163786N
     /** Helper function to handle storing previous state */
@@ -108,7 +110,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTodo(Todo todo) throws UniqueTodoList.DuplicateTodoException {
-        String todolist = todoList.toString();
         TodoList tempTodoList = new TodoList(todoList);
         todoList.addTodo(todo);
         handleStateChange(tempTodoList);
@@ -133,12 +134,12 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.completeTodo(todoListIndex, completeTime);
+        //@@author A0163720M
         try {
             Todo todo = todoList.getTodo(todoListIndex);
             indicateTodoListChanged(todo);
         } catch (TodoNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            assert false: "Invalid index given.";
         }
     }
     //@@author
@@ -148,6 +149,7 @@ public class ModelManager extends ComponentManager implements Model {
         handleStateChange(new TodoList(todoList));
         int todoListIndex = filteredTodos.getSourceIndex(filteredTodoListIndex);
         todoList.uncompleteTodo(todoListIndex);
+        //@@author A0163720M 
         try {
             Todo todo = todoList.getTodo(todoListIndex);
             indicateTodoListChanged(todo);
