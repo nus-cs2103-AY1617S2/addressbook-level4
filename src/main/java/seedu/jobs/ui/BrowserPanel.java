@@ -30,6 +30,7 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
+
         String email = loginInfo.getEmail();
         String password = loginInfo.getPassword();
         ChangeListener<State> emailListener = new ChangeListener<State>() {
@@ -47,6 +48,7 @@ public class BrowserPanel extends UiPart<Region> {
         };
         browser.getEngine().getLoadWorker().stateProperty().addListener(emailListener);
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
+
     }
 
     /**
@@ -54,24 +56,6 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void freeResources() {
         browser = null;
-    }
-
-    public void inputPassword() {
-        String password = "kite0912";
-//        browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
-//                            + "document.getElementById('signIn').click();");
-        ChangeListener<State> passwordListener = new ChangeListener<State>() {
-            @Override
-            public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
-                if (newValue == State.SUCCEEDED) {
-                    browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
-                    browser.getEngine().executeScript("document.getElementById('Passwd').value = \"" + password + "\";"
-                            + "document.getElementById('signIn').click();");
-                }
-            }
-        };
-        browser.getEngine().getLoadWorker().stateProperty().addListener(passwordListener);
-
     }
 
 }

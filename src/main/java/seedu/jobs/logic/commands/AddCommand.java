@@ -64,6 +64,10 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
+            //to update the calendar
+            if(!(toAdd.getEndTime().toString()=="" && toAdd.getStartTime().toString()=="")) {
+            	calendar.AddTask(toAdd);
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

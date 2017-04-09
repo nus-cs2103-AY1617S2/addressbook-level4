@@ -16,6 +16,7 @@ public class ClearCommand extends Command {
     public CommandResult execute() throws IllegalTimeException {
         assert model != null;
         model.resetData(new TaskBook());
+        calendar.ClearTask();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

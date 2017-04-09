@@ -119,6 +119,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() throws InterruptedException {
+
         browserPanel = new BrowserPanel(browserPlaceholder, loginInfo);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());

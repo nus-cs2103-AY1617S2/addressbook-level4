@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
+import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.CommandResult;
 import seedu.jobs.logic.commands.exceptions.CommandException;
@@ -22,10 +23,12 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
+    private final CalendarManager calendar;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, CalendarManager calendar) {
         this.model = model;
         this.parser = new Parser();
+        this.calendar = calendar;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
+        command.setCalendar(calendar);
         return command.execute();
     }
 

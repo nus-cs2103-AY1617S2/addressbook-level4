@@ -3,6 +3,7 @@ package seedu.jobs.logic.commands;
 import java.io.IOException;
 
 import seedu.jobs.commons.core.Messages;
+import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.logic.commands.exceptions.CommandException;
 import seedu.jobs.model.Model;
 
@@ -11,6 +12,7 @@ import seedu.jobs.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected CalendarManager calendar;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
@@ -38,5 +40,8 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+    public void setCalendar(CalendarManager calendar) {
+    	this.calendar = calendar;
     }
 }

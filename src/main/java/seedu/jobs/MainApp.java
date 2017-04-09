@@ -20,7 +20,11 @@ import seedu.jobs.commons.util.ConfigUtil;
 import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.logic.LogicManager;
+<<<<<<< HEAD
 import seedu.jobs.model.LoginInfo;
+=======
+import seedu.jobs.logic.calendar.CalendarManager;
+>>>>>>> refs/heads/calanderPanel_cindra
 import seedu.jobs.model.Model;
 import seedu.jobs.model.ModelManager;
 import seedu.jobs.model.ReadOnlyTaskBook;
@@ -48,6 +52,9 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
     protected LoginInfo loginInfo;
+    protected CalendarManager calendarManager;
+
+
 
     @Override
     public void init() throws Exception {
@@ -64,8 +71,10 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        
+        calendarManager = new CalendarManager();
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, calendarManager);
 
         ui = new UiManager(logic, config, userPrefs, loginInfo);
 
