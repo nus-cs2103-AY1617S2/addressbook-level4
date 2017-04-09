@@ -12,7 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Recurring Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#3) - Full stack implementation
     * [Find on any parameter](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.5)
     * [Prioritize Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#Allocate) - Worked with Heyang to implement logic and model functionality
-* Code written: 
+* Code written:
     * [Functional code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/main/A0164212U.md)
     * [Test code](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/collated/test/A0164212U.md)
 * Other major contributions:
@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * Created Description, Priority, and Timing classes and added respective functionality to validate respective parameters
     * Colored Priorities for better UI experience
     * Debugged test code classes when testing recurring tasks
-    * Significant contributions to User Guide for almost all commands, descriptions, and examples  
+    * Significant contributions to User Guide for almost all commands, descriptions, and examples
 
 -----
 
@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/tylerrocha.jpg" width="150"><br>
 Role: Developer <br>
 Responsibilities: Storage, GitHub
-* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>g
+* Components in Charge of: [Storage](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/DeveloperGuide.md#storage-component) <br>
 * Features implemented:
     * [Comparable Tasks](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.3.1)
     * [Save Command](https://github.com/CS2103JAN2017-T11-B3/main/blob/master/docs/UserGuide.md#2.11)
