@@ -43,7 +43,7 @@ public class CommandBox extends UiPart<Region> {
 
   //@@author A0139177W
     @FXML
-    private void handleCommandInputChanged() {
+    public void handleCommandInputChanged() {
         // reset command text field color if it is changed.
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
