@@ -18,6 +18,7 @@ import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.opus.sync.SyncManager;
 import seedu.opus.sync.SyncServiceGtask;
+import seedu.opus.sync.exceptions.SyncException;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -135,7 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void startSync() {
+    public void startSync() throws SyncException {
         this.isSyncOn = true;
         this.syncManager.startSync();
         syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
