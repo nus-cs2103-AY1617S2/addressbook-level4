@@ -352,6 +352,7 @@ Function of `Storage`
 
 * The `Storage` component can save `UserPref` objects in json format and read it back.
 * The `Storage` component can save the Task Manager data in xml format and read it back.
+* The `Storage` component can s ave `config` objects in json format and read it back. 
 ```
 
 ### 3.6. Common classes
