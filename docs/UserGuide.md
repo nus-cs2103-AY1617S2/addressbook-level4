@@ -59,7 +59,7 @@ Examples:
 
 * **Normal task**: `add CS2103 assignment from Feb 3 to Apr 6 in study`
 * **Task with deadline**: `add CS2013 assignment to tomorrow in study`
-* **Task with deadline**: `add CS2013 assignment from Monday in study'
+* **Task with deadline**: `add CS2013 assignment from Monday in study`
 * **Floating task**: `add CS2013 assignment in study`
 
 ### 2.3. Listing all tasks : `list`
@@ -190,7 +190,7 @@ Format: `redo`
 ### 2.14. Exiting the program : `exit`
 
 Exits the program.<br>
-Format: `exit`, `ctrl+Q`
+Format: `exit`, `CTRL+Q`
 
 ### 2.15. Saving the data
 Yesterday's Tomorrow data are saved in the hard disk automatically after any command that changes the data.<br>
@@ -217,12 +217,19 @@ There is no need to save manually.
   e.g. `help`
 
 * **Add**  `add TASK_NAME [s/START TIME] [d/END TIME] e/EMAIL g/GROUP`
-  e.g. `add CS2103 assignment s/Feb 3 d/Apr 6 e/example@gmail.com g/study` <br> 
-       `add CS2103 assignment d/Apr 6 e/example@gmail.com g/study` <br>
-       `add CS2103 assignment e/example@gmail.com g/study` <br>
+  e.g. `add CS2103 assignment from Feb 3 to Apr 6 in study` <br>
+       `add CS2013 assignment to tomorrow in study` <br>
+       `add CS2013 assignment from Monday in study` <br>
+       `add CS2013 assignment in study` <br>
 	   
 * **List All**: `list` <br>
   e.g. `list`
+  
+* **List Complete**: `lc` <br>
+  e.g. `lc`
+  
+* **List Incomplete**: `li` <br>
+  e.g. `li`
 
 * **Edit**: `edit INDEX PARAMETER NEW_VALUE` <br>
   e.g. `edit 2 g/learning`
@@ -246,4 +253,4 @@ There is no need to save manually.
   e.g. `redo`
   
 * **Exit**: `exit` <br>
-  e.g. `exit`
+  e.g. `exit`, `CTRL+Q`
