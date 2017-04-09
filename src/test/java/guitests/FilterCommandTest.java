@@ -20,14 +20,14 @@ public class FilterCommandTest extends TaskManagerGuiTest {
         }
         commandBox.runCommand("clear");
         commandBox.runCommand("showcase 75");
-        //filter name impossible
+        // filter name impossible
         commandBox.runCommand("filter name impossibleName");
         assertTrue(0 == taskListPanel.getNumberOfTasks());
 
         commandBox.runCommand("list");
         commandBox.runCommand("filter name ore");
         for (int i = 0; i < taskListPanel.getNumberOfTasks(); i++) {
-            //System.out.println(taskListPanel.getTask(i).getTaskName().fullTaskName);
+            // System.out.println(taskListPanel.getTask(i).getTaskName().fullTaskName);
             assertTrue(taskListPanel.getTask(i).getTaskName().fullTaskName.equals("Go to store"));
         }
         commandBox.runCommand("list");
