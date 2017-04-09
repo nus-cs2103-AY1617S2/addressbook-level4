@@ -16,14 +16,15 @@ public class AddCommandTest extends TaskManagerGuiTest {
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.play;
+        /*TestTask taskToAdd = td.play;
+        TestTask taskToAdd = td.demo;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTaskToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.shop;
+        taskToAdd = td.drum;
         assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTaskToList(currentList, taskToAdd);
+        currentList = TestUtil.addTaskToList(currentList, taskToAdd);*/
 
         //add duplicate task
         commandBox.runCommand(td.play.getAddCommand());
@@ -32,10 +33,10 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.sleep);
+        assertAddSuccess(td.dance);
 
         //invalid command
-        commandBox.runCommand("adds Johnny");
+        commandBox.runCommand("adds gym Pokemon");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
@@ -48,6 +49,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         //confirm the list now contains all previous tasks plus the new task
         TestTask[] expectedList = TestUtil.addTaskToList(currentList, taskToAdd);
+
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
