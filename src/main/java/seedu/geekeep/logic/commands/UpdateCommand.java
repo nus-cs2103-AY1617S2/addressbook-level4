@@ -78,6 +78,7 @@ public class UpdateCommand extends UndoableCommand {
 
         int targetIndex = getTaskInternalIndex(updatedTask);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex, updatedTask));
+
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, taskToUpdate));
     }
 
