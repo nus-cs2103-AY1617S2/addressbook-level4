@@ -155,11 +155,6 @@ public class Task implements ReadOnlyTask {
 
     private static final String FACTORY_ERROR_NULL =
             "Task Factory: new task requires a name, group, and tag list.";
-    private static final String FACTORY_ERROR_TIME =
-            "Task Factory: new task's end time is before the start time.";
-    private static final String FACTORY_ERROR_NOEND =
-            "Task Factory: new task requires an end date if given a start date.";
-
     //@@author A0163848R
     /**
      * Factory method to build a Task or Task-inheriting class from a given unordered array of properties.
@@ -178,6 +173,7 @@ public class Task implements ReadOnlyTask {
             throw new IllegalValueException(FACTORY_ERROR_NULL);
         }
 
+        //@@author A0164466X
         if (start != null && end != null) {
             return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
@@ -185,7 +181,9 @@ public class Task implements ReadOnlyTask {
         } else if (start == null && end == null) {
             return new FloatingTask(name, group, tags);
         }
+        //@@author
 
+        //@@author A0163848R
         return null;
     }
 
