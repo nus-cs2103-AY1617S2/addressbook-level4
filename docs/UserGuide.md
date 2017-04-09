@@ -180,11 +180,11 @@ Example:
 
 You can start keeping track of your task by adding to ToLuist.<br>
 `add` allows you to add a task to the system.<br>
-Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
-> * Both 'startdate' and 'enddate' use the same datetime format.
-> * 'startdate' requires a valid 'enddate' to be used in the same command.
-> * The values entered for 'startdate' and 'enddate' are very flexible:<br>
+> * Both `startdate` and `enddate` use the same datetime format.
+> * `startdate` requires a valid `enddate` to be used in the same command.
+> * The values entered for `startdate` and `enddate` are very flexible:<br>
     Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
     Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
     Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
@@ -207,7 +207,7 @@ Examples:
 
 Sometimes, you may need to update or fix a previously entered task.<br>
 `update` allows you to update an existing task in the list.<br>
-Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.
@@ -233,8 +233,8 @@ Format: `filter/list/find [KEYWORDS] [/tag] [/name]`
 > * The search is case insensitive. e.g `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * By default the name and tag is searched.
-> * Adding 'tag/' will search by only tag.
-> * Adding 'name/' will search by only name.
+> * Adding '/tag' will search by only tag.
+> * Adding '/name' will search by only name.
 > * If no keyword is entered, the list of all tasks is displayed.
 > * Partial words will be matched. e.g. `Han` will match `Hans`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
@@ -259,7 +259,7 @@ Format: `sort CATEGORY(priority/enddate/startdate/description/overdue/default)..
 
 > * The category entered will be given higher preference for sorting.
 > * By default, the sorted order is: overdue -> priority -> enddate -> startdate -> description
-> * Using 'default' as the category will revert the sorting order to the above mentioned default.
+> * Using `default` as the category will revert the sorting order to the above mentioned default.
 > * Multiple categories can be used. The list will be sorted in order based on which category was entered first.
 
 Examples:
@@ -548,10 +548,10 @@ Delete | `delete INDEX(ES)` | `delete 3`
 Delete Alias | `unalias ALIAS` | `unalias hs`
 Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
-Help | `help [COMMAND]` | 'help add'
+Help | `help [COMMAND]` | `help add`
 History | `history`
 Mark a Task Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
-Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | 'sort priority'
+Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
 Switch Display Task Window | `switch WINDOWIDENTIFIER` | `switch 2` <br> `switch T`
 Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
 Update | `update INDEX [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
