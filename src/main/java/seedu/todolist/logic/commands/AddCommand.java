@@ -55,7 +55,7 @@ public class AddCommand extends Command {
             for (String tagName : tags) {
                 tagSet.add(new Tag(tagName));
             }
-            
+
             //@@author A0165043M
             // Check for existence of each of the fields
             Name name = (todo != null) ? new Name(todo) : null;
