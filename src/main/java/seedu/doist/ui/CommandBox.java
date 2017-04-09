@@ -54,7 +54,7 @@ public class CommandBox extends UiPart<Region> {
     private ChangeListener<? super String> disableInputListener = (observable, oldValue, newValue)
         -> removeInput();
 
-    private static final String NAVIGATION_MODE_MESSAGE = "quick navigation mode\n\nj: down\nk: up";
+    public static final String NAVIGATION_MODE_MESSAGE = "quick navigation mode\n\nj: down\nk: up";
     private static final String EDITING_MODE_MESSAGE = "editing mode";
 
     @FXML
