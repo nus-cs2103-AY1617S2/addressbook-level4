@@ -1,10 +1,14 @@
 package guitests;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
+import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.ui.CommandBox;
 
+//@@author A0147980U
 public class ModeTest extends DoistGUITest {
 
     @Test
@@ -19,7 +23,7 @@ public class ModeTest extends DoistGUITest {
     }
 
     @Test
-    public void testTurnOnEditingMode() {
+    public void testTurnOnNavigationModeThenTurnOnEditingMode() {
         typeEsc();
         assertInNavigationMode();
 
@@ -28,20 +32,42 @@ public class ModeTest extends DoistGUITest {
         assertInEditingMode();
     }
 
-    private void typeEsc() {
-        GuiRobot bot = new GuiRobot();
-        bot.press(KeyCode.ESCAPE);
-        bot.release(KeyCode.ESCAPE);
+    @Test
+    public void testStartingFromIndexZero() {
+        typeEsc();  // turn on navigation mode
+        typeJ();
+        assertTaskSelected(1);
     }
 
-    private String getInputBoxContent() {
-        return commandBox.getCommandInput();
+    @Test
+    public void testPressJToScrollDown() {
+        typeEsc();
+        int count = taskListPanel.getNumberOfTasks();
+        for (int i = 0; i < count; i++) {
+            typeJ();
+            assertTaskSelected(i + 1);
+        }
+
+        // scroll to the bottom
+        typeJ();
+        assertTaskSelected(count);
     }
 
-    private String getMessageBoxContent() {
-        return resultDisplay.getText();
+    @Test
+    public void testPressKToScrollUp() {
+        testPressJToScrollDown();
+        int count = taskListPanel.getNumberOfTasks();
+        for (int i = count - 1; i >= 1; i--) {
+            typeK();
+            assertTaskSelected(i);
+        }
+
+        // scroll to the top
+        typeK();
+        assertTaskSelected(1);
     }
 
+    // helper method for testing
     private void assertInNavigationMode() {
         assert getMessageBoxContent().equals(CommandBox.NAVIGATION_MODE_MESSAGE);
         commandBox.enterCommand("some random input");
@@ -54,6 +80,38 @@ public class ModeTest extends DoistGUITest {
         String input = "some randome input";
         commandBox.enterCommand(input);
         assert getInputBoxContent().equals(input);
+    }
+
+    private String getInputBoxContent() {
+        return commandBox.getCommandInput();
+    }
+
+    private String getMessageBoxContent() {
+        return resultDisplay.getText();
+    }
+
+    private void typeEsc() {
+        GuiRobot bot = new GuiRobot();
+        bot.press(KeyCode.ESCAPE);
+        bot.release(KeyCode.ESCAPE);
+    }
+
+    private void typeJ() {
+        GuiRobot bot = new GuiRobot();
+        bot.press(KeyCode.J);
+        bot.release(KeyCode.J);
+    }
+
+    private void typeK() {
+        GuiRobot bot = new GuiRobot();
+        bot.press(KeyCode.K);
+        bot.release(KeyCode.K);
+    }
+
+    private void assertTaskSelected(int index) {
+        assertEquals(taskListPanel.getSelectedTasks().size(), 1);
+        ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
+        assertEquals(taskListPanel.getTask(index - 1), selectedTask);
     }
 }
 
