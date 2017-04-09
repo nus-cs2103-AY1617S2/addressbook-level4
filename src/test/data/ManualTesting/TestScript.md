@@ -9,8 +9,9 @@
 |	Help |		|		|   |
 |	1	| **show help** | help | the user guide is displayed in a new window |
 |	Load	|		|		|   |
-| 1 | **load invalid sample data** | load data/invalid.xml | Error message will be shown |
-| 2 | **load sample data** | load data/SampleData.xml | Task manager is refreshed with the data from supplied file with 50 tasks |
+| 1 | **load nonexistent sample data** | load data/new.xml | Warning is shown and new xml with given file name is created |
+| 2 | **load invalid sample data** | load invalid | Error message will be shown |
+| 3 | **load sample data** | load data/sampledata.xml | Task manager is refreshed with the data from supplied file with 50 tasks |
 |	List	|		|		|   |
 | 1 | **go to** `Done` **tab** | list done | Selected view tab is now `Done` |
 | 2 | **go to** `To Do` **tab** | list todo | Selected view tab is now `To Do` |
@@ -19,7 +20,7 @@
 |	Add	|		|		|   |
 | | **add a task** <br><br>Every newly added task should be automatically highlighted in the list| |  |
 | 1 | add floating task | add Write english essay | Floating task is added |
-| 2 | add task | add Prepare for maths test e/next week | Task with end date is added |
+| 2 | add task | add Prepare for maths test e/today | Task with end date is added |
 | 3 | add repeating daily task | add Buy Lunch s/today 12pm r/day | Task that repeats every day is added |
 | 4 | add repeating weekly task | add Buy 4D s/today 4pm e/next month r/week | Task that repeats every week is added |
 | 5 | add repeating monthly task | add Cut hair s/today e/tomorrow r/year | Task that repeats every month is added |
