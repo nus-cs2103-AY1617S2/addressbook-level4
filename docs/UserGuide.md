@@ -29,7 +29,7 @@ all your corresponding tasks and events.
 2. Download the latest `ProcrastiNomore.jar` from the [releases](../../../releases) tab.
 3. Copy the file to the folder you want to use as the home folder for your Task Manager.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/ProcrastiNomore_Covershot.PNG" width="600">
+   > <img src="images/ProcrastiNomore_Covershot.PNG" width="1000">
 
 5. Using the application
 
@@ -37,8 +37,7 @@ all your corresponding tasks and events.
    >Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    >For example, typing **`HELP`** and pressing <kbd>Enter</kbd> in the command box and it will
    open the help window. <br>
-   
-   > <img src="images/ProcrastiNomore_Help.PNG" width="600">
+   > <img src="images/ProcrastiNomore_Help.PNG" width="1000">
 
 6. Refer to the [Features](#Features) section below for more details on the various
 commands you can use.<br>
@@ -60,7 +59,7 @@ You can use this command to open a help window which will open this user guide p
 Format: `HELP`
 
 > Help is also shown if you enter an incorrect command e.g. `ADD`
-> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="600">
+> <img src="images/ProcrastiNomore_Help_Shown.PNG" width="1000">
 
 ### 3.2. Adding a new Task: `ADD`
 
@@ -72,23 +71,35 @@ There are 3 forms of task that ProcrastiNomore supports:
 Format: `ADD` task `ON` date/day <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `ON` date/day time `TO` time <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `FROM` date/day time `TO` date/day time <br />
-> <img src="images/ProcrastiNomore_Before_Add_Event_Task.PNG" width="600">
-> <img src="images/ProcrastiNomore_After_Add_Event_Task.PNG" width="600">
+
+Sample Event:
+> Type the following command `ADD Stayover with Friends FROM 10/05/17 1400 TO 11/05/16 1800 CATEGORY Fun` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="1000">
+> The application will save the sample event in Events column 
+> <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="1000">
 
 #### 3.2.2. Deadlines
 
 Format: `ADD` task `BY` date/time/date time
-> <img src="images/ProcrastiNomore_Before_Add_Deadline.PNG" width="600">
-> <img src="images/ProcrastiNomore_After_Add_Deadline.PNG" width="600">
+
+Sample Deadline:
+> Type the following command `ADD finish project BY 05/05/17 1400` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Deadline.PNG" width="1000">
+> The application will save the sample deadline in the Deadlines column
+> <img src="images/ProcrastiNomore_After_Add_Deadline.PNG" width="1000">
 
 
-#### 3.2.3. Basic
+#### 3.2.3. Basic Task
 
 Format:	`ADD` task
-> <img src="images/ProcrastiNomore_Before_Add_Floating_Task.PNG" width="600">
-> <img src="images/ProcrastiNomore_After_Add_Floating_Task.PNG" width="600">
 
-Examples:
+Sample Basic Task:
+> Type the following command `ADD Eat fried chicken` into the command box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Add_Floating_Task.PNG" width="1000">
+> The application will save the sample basic task into the Basic Tasks column
+> <img src="images/ProcrastiNomore_After_Add_Floating_Task.PNG" width="1000">
+
+Other examples:
 
 * `ADD` eat breakfast `ON` 03/03/17
 * `ADD` eat lunch `ON` thursday
@@ -110,15 +121,23 @@ There are 2 types of updates that ProcrastiNomore supports:
 #### 3.3.1. Update task name
 
 Format: `UPDATE` `Task Index` `New Task Name`
-> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="600">
-> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="600">
+
+Sample Update task name:
+> Type the following command `UPDATE 36 Buy a horse` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Update_Task_Name.PNG" width="1000">
+> The application will update the existing task with task index 36 and change the task name from "Buy a cat" to "Buy a horse"
+> <img src="images/ProcrastiNomore_After_Update_Task_Name.PNG" width="1000">
 
 #### 3.3.2. Update task time/date
 
 Format: `UPDATE` `Task Index` `FROM` Start time <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UPDATE` `Task Index` `TO` End time
-> <img src="images/ProcrastiNomore_Before_Update_Task_Time.PNG" width="600">
-> <img src="images/ProcrastiNomore_After_Update_Task_Time.PNG" width="600">
+
+Sample Update task time:
+> Type the following command `UPDATE 1 TO 0230` into the command Box and press <kbd>Enter</kbd>
+> <img src="images/ProcrastiNomore_Before_Update_Task_Time.PNG" width="1000">
+> The application will update the existing task with task index 1 and change the task end time from "0002" to "0230"
+> <img src="images/ProcrastiNomore_After_Update_Task_Time.PNG" width="1000">
 
 Examples:
 * `UPDATE` `1` eat dinner
@@ -196,7 +215,7 @@ Examples:
 
 You can use this command to view all the tasks that you have yet to finish doing.
 
-Format: `LIST`
+Format: `LIST` <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LIST date/day`
 
 Examples:
