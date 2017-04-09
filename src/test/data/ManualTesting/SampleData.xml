@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<geekeep>
+    <tasks>
+        <title>Dinner with friends</title>
+        <startDateTime>16-03-17 2000</startDateTime>
+        <endDateTime>16-03-17 2200</endDateTime>
+        <description>Clark Quay</description>
+        <tagged>Friends</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2103 Lecture</title>
+        <startDateTime>17-03-17 1600</startDateTime>
+        <endDateTime>17-03-17 1800</endDateTime>
+        <description>ICUBE</description>
+        <tagged>CS2103</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Birthday Celebration</title>
+        <startDateTime>18-03-17 1800</startDateTime>
+        <endDateTime>18-03-17 2359</endDateTime>
+        <description>Marina Bay Sands</description>
+        <tagged>Friends</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Hall DnD</title>
+        <startDateTime>19-03-17 1900</startDateTime>
+        <endDateTime>19-03-17 2000</endDateTime>
+        <description>Raffles Hall</description>
+        <tagged>Hall</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Swimming Lesson</title>
+        <startDateTime>20-03-17 0900</startDateTime>
+        <endDateTime>20-03-17 1100</endDateTime>
+        <description>Clementi Swimming Pool</description>
+        <tagged>CS2103</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2101 Tutorial</title>
+        <startDateTime>21-03-17 1000</startDateTime>
+        <endDateTime>21-03-17 1200</endDateTime>
+        <description>COM2-0108</description>
+        <tagged>CS2101</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS3230 Lecture</title>
+        <startDateTime>22-03-17 1200</startDateTime>
+        <endDateTime>22-03-17 1400</endDateTime>
+        <description>LT19</description>
+        <tagged>CS3230</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2103 Tutorial</title>
+        <startDateTime>22-03-17 1500</startDateTime>
+        <endDateTime>22-03-17 1600</endDateTime>
+        <description>COM1-B108</description>
+        <tagged>CS2103</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2103 Lecture</title>
+        <startDateTime>24-03-17 1600</startDateTime>
+        <endDateTime>24-03-17 1800</endDateTime>
+        <description>ICUBE</description>
+        <tagged>CS2103</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Meeting for project</title>
+        <startDateTime>05-04-17 1000</startDateTime>
+        <endDateTime>05-04-17 1200</endDateTime>
+        <description>Biz Lib</description>
+        <tagged>school</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Meeting for another project</title>
+        <startDateTime>05-04-17 1200</startDateTime>
+        <endDateTime>05-04-17 1400</endDateTime>
+        <description>Com2</description>
+        <tagged>school</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Internship Interview</title>
+        <startDateTime>09-04-17 1400</startDateTime>
+        <endDateTime>09-04-17 1600</endDateTime>
+        <description>Fusionopolis</description>
+        <tagged>work</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Sleep</title>
+        <startDateTime>12-04-17 0000</startDateTime>
+        <endDateTime>12-04-27 2359</endDateTime>
+        <description>Bed</description>
+        <tagged>health</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>STEPS</title>
+        <startDateTime>20-04-17 1300</startDateTime>
+        <endDateTime>20-04-17 2200</endDateTime>
+        <description>Com1</description>
+        <tagged>school</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>GeeKeep Demo</title>
+        <startDateTime>21-04-17 1630</startDateTime>
+        <endDateTime>21-04-17 1830</endDateTime>
+        <description>Blk 30 Geylang Street 29, #06-40</description>
+        <tagged>CS2101</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>GeeKeep Release</title>
+        <startDateTime>22-04-17 1630</startDateTime>
+        <endDateTime>22-04-17 1830</endDateTime>
+        <description>Blk 30 Lorong 3 Serangoon Gardens, #07-18</description>
+        <tagged>CS2103T</tagged>
+        <tagged>friends</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Summar Vacation</title>
+        <startDateTime>27-04-17 0000</startDateTime>
+        <endDateTime>28-04-17 2359</endDateTime>
+        <description>Mars</description>
+        <tagged>holiday</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Internship</title>
+        <startDateTime>02-05-17 0000</startDateTime>
+        <endDateTime>08-05-17 2359</endDateTime>
+        <description>Blk 47 Tampines Street 20, #17-35</description>
+        <tagged>work</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Google Internship</title>
+        <startDateTime>02-05-17 0000</startDateTime>
+        <endDateTime>08-08-17 2359</endDateTime>
+        <description>Google Headquater</description>
+        <tagged>work</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Career Talk</title>
+        <startDateTime>03-05-17 1300</startDateTime>
+        <endDateTime>03-05-17 1500</endDateTime>
+        <description>Cerebro</description>
+        <tagged>school</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Hangout with friends</title>
+        <startDateTime>08-05-17 1300</startDateTime>
+        <endDateTime>08-05-17 1800</endDateTime>
+        <description>ION</description>
+        <tagged>leisure</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Watch Movie Spiderman</title>
+        <startDateTime>08-05-17 1900</startDateTime>
+        <endDateTime>08-05-17 2100</endDateTime>
+        <description>JCube</description>
+        <tagged>leisure</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Labor Day</title>
+        <startDateTime>21-05-17 0000</startDateTime>
+        <endDateTime>21-05-17 2359</endDateTime>
+        <description>Earth</description>
+        <tagged>holiday</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy Coffee</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Nespresso</description>
+        <tagged>Shopping</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy Pants</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>H&amp;M</description>
+        <tagged>Shopping</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy Pens</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>FairPrice</description>
+        <tagged>Shopping</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy Shirts</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>G2000</description>
+        <tagged>Shopping</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy Socks</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Uniqlo</description>
+        <tagged>Shopping</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy new caps</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Online</description>
+        <tagged>Shopping</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy new drinking bottle</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Fairprice</description>
+        <tagged>Shopping</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Buy new shoes</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Onlinel</description>
+        <tagged>Shopping</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Catchup with friends</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Wherever</description>
+        <tagged>Friends</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Landray</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Home</description>
+        <tagged>trivial</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Learn Spanish</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description></description>
+        <tagged>Life</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Make cheatsheet</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Wherever</description>
+        <tagged>School</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Owe Ziyang money</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Wherever</description>
+        <tagged>Friends</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Packing</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Home</description>
+        <tagged>trivial</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Research on Exchange Program</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Online</description>
+        <tagged>School</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Verify ISIS particulars</title>
+        <startDateTime></startDateTime>
+        <endDateTime></endDateTime>
+        <description>Online</description>
+        <tagged>School</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>GeeKeep V02</title>
+        <startDateTime></startDateTime>
+        <endDateTime>15-03-17 1500</endDateTime>
+        <description>NUS COM1-B103</description>
+        <tagged>CS2103T</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2010 Problem Set</title>
+        <startDateTime></startDateTime>
+        <endDateTime>17-03-17 2359</endDateTime>
+        <description>NUS COM1-SR1</description>
+        <tagged>CS2010</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Finalise DevGuide</title>
+        <startDateTime></startDateTime>
+        <endDateTime>20-03-17 2359</endDateTime>
+        <description></description>
+        <tagged>CS2103T</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2101 Draft Manual Meeting</title>
+        <startDateTime></startDateTime>
+        <endDateTime>21-03-17 1000</endDateTime>
+        <description>CELC 03</description>
+        <tagged>CS2101</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>GeeKeep V03</title>
+        <startDateTime></startDateTime>
+        <endDateTime>22-03-17 1500</endDateTime>
+        <description>NUS COM1-B103</description>
+        <tagged>CS2103T</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Apply for TA</title>
+        <startDateTime></startDateTime>
+        <endDateTime>25-03-17 2359</endDateTime>
+        <description>Online</description>
+        <tagged>CS1101S</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>Complete CV</title>
+        <startDateTime></startDateTime>
+        <endDateTime>27-03-17 0000</endDateTime>
+        <description>Online</description>
+        <tagged>Internship</tagged>
+        <isDone>True</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2101 OP2 Draft</title>
+        <startDateTime></startDateTime>
+        <endDateTime>28-03-17 1000</endDateTime>
+        <description>COM2-0108</description>
+        <tagged>CS2101</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2101 OP2</title>
+        <startDateTime></startDateTime>
+        <endDateTime>01-04-17 2359</endDateTime>
+        <description>com2-0108</description>
+        <tagged>school</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>CS2103T final</title>
+        <startDateTime></startDateTime>
+        <endDateTime>25-04-17 1300</endDateTime>
+        <description>MPSH</description>
+        <tagged>finals</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>CS3230 final</title>
+        <startDateTime></startDateTime>
+        <endDateTime>26-04-17 1300</endDateTime>
+        <description>MPSH</description>
+        <tagged>finals</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>CS3247 finals</title>
+        <startDateTime></startDateTime>
+        <endDateTime>26-04-17 1700</endDateTime>
+        <description>MPSH</description>
+        <tagged>finals</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>CS3218 final</title>
+        <startDateTime></startDateTime>
+        <endDateTime>03-05-17 0900</endDateTime>
+        <description>MPSH</description>
+        <tagged>finals</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Flight to NYC</title>
+        <startDateTime></startDateTime>
+        <endDateTime>08-08-17 2359</endDateTime>
+        <description>Changi Airport</description>
+        <tagged>travel</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Flight to Singapore</title>
+        <startDateTime></startDateTime>
+        <endDateTime>20-08-17 2359</endDateTime>
+        <description>JFK Airport</description>
+        <tagged>travel</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tasks>
+        <title>Flight to Santigo</title>
+        <startDateTime></startDateTime>
+        <endDateTime>10-09-17 1300</endDateTime>
+        <description>Changi Airport</description>
+        <tagged>travel</tagged>
+        <isDone>False</isDone>
+    </tasks>
+    <tags>CS1101S</tags>
+    <tags>CS2010</tags>
+    <tags>CS2101</tags>
+    <tags>CS2103</tags>
+    <tags>CS2103T</tags>
+    <tags>CS3230</tags>
+    <tags>finals</tags>
+    <tags>friends</tags>
+    <tags>Friends</tags>
+    <tags>Hall</tags>
+    <tags>health</tags>
+    <tags>holiday</tags>
+    <tags>Internship</tags>
+    <tags>leisure</tags>
+    <tags>Life</tags>
+    <tags>school</tags>
+    <tags>School</tags>
+    <tags>Shopping</tags>
+    <tags>travel</tags>
+    <tags>trivial</tags>
+    <tags>work</tags>
+</geekeep>
