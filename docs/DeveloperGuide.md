@@ -484,6 +484,9 @@ In Opus, Gradle is used to managed all dependencies and external libraries. The 
 * [jUnit](http://junit.org/junit4/) `4.12`
 * [TestFx](https://github.com/TestFX/TestFX) `4.0.5-alpha`
 * [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle) `1.8.0_20`
+* [Natty Date Parser](http://natty.joestelmach.com/) `0.6`
+* [Google Tasks API](https://developers.google.com/google-apps/tasks/) `1.22.0`
+* [Mockito](http://site.mockito.org/) `2.7.22`
 
 ## 6. Version Control
 

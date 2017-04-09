@@ -9,17 +9,9 @@ Latin for *work*.
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using
-  a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-  the main programming language.
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+#### Introduction
 
+Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users. Why spend that extra 1 second to move your hand to the mouse, when you could do everything with the keyboard? Opus is developed with the mission to make command line interfaces less intimidating. Our mission is for you to stay happy while keeping track of your tasks with your trusty keyboard. \*clickity clackity tack\*
 
 #### Site Map
 * [User Guide](docs/UserGuide.md)
@@ -31,8 +23,17 @@ Latin for *work*.
 
 #### Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent
-  [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*.
+This app is developed from AddressBook Level 4 found [here](https://github.com/nus-cs2103-AY1617S2/addressbook-level4). In addition, we made use of the following external libraries in Opus:
+* [ControlsFx](http://fxexperience.com/controlsfx/)
+* [Guava](https://github.com/google/guava)
+* [Jackson](https://github.com/FasterXML/jackson)
+* [jUnit](http://junit.org/junit4/)
+* [TestFx](https://github.com/TestFX/TestFX)
+* [Monocle](https://wiki.openjdk.java.net/display/OpenJFX/Monocle)
+* [Natty Date Parser](http://natty.joestelmach.com/)
+* [Google Tasks API](https://developers.google.com/google-apps/tasks/)
+* [Mockito](http://site.mockito.org/)
 
+We will like to thank the [CS2103 Teaching Staff](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/) for their valuable inputs for this project.
 
 #### Licence : [MIT](LICENSE)
