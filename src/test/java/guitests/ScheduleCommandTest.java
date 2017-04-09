@@ -11,58 +11,57 @@ import guitests.guihandles.EventCardHandle;
 
 public class ScheduleCommandTest extends TaskManagerGuiTest {
 
-	@Test
-	public void schedule() {
-		// schedule one event
-		TestEvent[] currentList = td.getTypicalTasks();
-		currentList = td.getTypicalTasks();
-		assertScheduleTimingSuccess(td.sameDayScheduleChecker, currentList);
-		currentList = TestUtil.addEventsToList(currentList, td.sameDayScheduleChecker);
-		
-		assertScheduleTimingSuccess(td.nextDayScheduleChecker, currentList);
-		currentList = TestUtil.addEventsToList(currentList, td.nextDayScheduleChecker);
-		
-		TestEvent eventToAdd = td.fish;
-		assertScheduleSuccess(eventToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
+    @Test
+    public void schedule() {
+        // schedule one event
+        TestEvent[] currentList = td.getTypicalTasks();
+        currentList = td.getTypicalTasks();
+        assertScheduleTimingSuccess(td.sameDayScheduleChecker, currentList);
+        currentList = TestUtil.addEventsToList(currentList, td.sameDayScheduleChecker);
 
-		// schedule another event
-		eventToAdd = td.goon;
-		assertScheduleSuccess(eventToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
+        assertScheduleTimingSuccess(td.nextDayScheduleChecker, currentList);
+        currentList = TestUtil.addEventsToList(currentList, td.nextDayScheduleChecker);
 
-		// schedule to empty list
-		commandBox.runCommand("reset");
-		assertScheduleSuccess(td.fish);
+        TestEvent eventToAdd = td.fish;
+        assertScheduleSuccess(eventToAdd, currentList);
+        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
-		// invalid command
-		commandBox.runCommand("scheduled you");
-		assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
-	}
+        // schedule another event
+        eventToAdd = td.goon;
+        assertScheduleSuccess(eventToAdd, currentList);
+        currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
-	private void assertScheduleSuccess(TestEvent eventToAdd, TestEvent... currentList) {
-		commandBox.runCommand(eventToAdd.getScheduleCommand());
-		
-		// confirm the new card contains the right data
-		EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);
-		assertMatching(eventToAdd, addedCard);
-		// confirm the list now contains all previous persons plus the new
-		// person
-		TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
-		assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
-	}
-	
-	private void assertScheduleTimingSuccess(TestEvent eventToAdd, TestEvent... currentList) {
-		commandBox.runCommand(eventToAdd.getScheduleCommand());
-		eventToAdd.setHours("");
-		eventToAdd.setMinutes("");
-		// confirm the new card contains the right data
-		EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().toString());
-		assertMatching(eventToAdd, addedCard);
-		// confirm the list now contains all previous persons plus the new
-		// person
-		TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
-		assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
-	}
+        // schedule to empty list
+        commandBox.runCommand("reset");
+        assertScheduleSuccess(td.fish);
+
+        // invalid command
+        commandBox.runCommand("scheduled you");
+        assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    private void assertScheduleSuccess(TestEvent eventToAdd, TestEvent... currentList) {
+        commandBox.runCommand(eventToAdd.getScheduleCommand());
+
+        // confirm the new card contains the right data
+        EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);
+        assertMatching(eventToAdd, addedCard);
+        // confirm the list now contains all previous persons plus the new
+        // person
+        TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
+        assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
+    }
+
+    private void assertScheduleTimingSuccess(TestEvent eventToAdd, TestEvent... currentList) {
+        commandBox.runCommand(eventToAdd.getScheduleCommand());
+        eventToAdd.setHours("");
+        eventToAdd.setMinutes("");
+        // confirm the new card contains the right data
+        EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().toString());
+        assertMatching(eventToAdd, addedCard);
+        // confirm the list now contains all previous persons plus the new
+        // person
+        TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
+        assertTrue(taskListPanel.isListMatchingWithoutOrder(expectedList));
+    }
 }
-
