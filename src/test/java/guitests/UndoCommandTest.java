@@ -37,7 +37,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(taskToAdd.getTaskType(), currentList));
 
         String feedbackMessage = String.format(DeleteCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), taskToAdd);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
 
         String feedbackMessage = String.format(AddCommand.COMMAND_WORD.concat(COMMAND_FORMATTER), td.taskB);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
 
         String feedbackMessage = String.format("Restore Task".concat(COMMAND_FORMATTER), td.taskA);
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + feedbackMessage);
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + feedbackMessage);
     }
 
     @Test
@@ -113,6 +113,6 @@ public class UndoCommandTest extends ToDoListGuiTest {
         assertTrue(taskListPanel.isListMatching(TaskType.EVENT, currentList));
         assertTrue(taskListPanel.isListMatching(TaskType.DEADLINE, currentList));
         assertTrue(taskListPanel.isListMatching(TaskType.TODO, currentList));
-        assertResultMessage(UndoCommand.COMMAND_WORD + " successfully.\n" + "Restore OneTwoDo");
+        assertResultMessage(UndoCommand.RESULT_SUCCESS + ClearCommand.MESSAGE_UNDO_CLEAR_ALL_SUCCESS);
     }
 }
