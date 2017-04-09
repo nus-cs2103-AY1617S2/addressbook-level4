@@ -86,19 +86,19 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("list");
 
         commandBox.runCommand("complete 1");
-        assertTaskListHits(8);
+        assertEqualTaskListHits(8);
 
         commandBox.runCommand("complete 1,2,3");
-        assertTaskListHits(5);
+        assertEqualTaskListHits(5);
 
         commandBox.runCommand("complete 3,4");
-        assertTaskListHits(3);
+        assertEqualTaskListHits(3);
 
         commandBox.runCommand("complete 3");
-        assertTaskListHits(0);
+        assertEqualTaskListHits(0);
 
         commandBox.runCommand("list completed");
-        assertTaskListHits(9);
+        assertEqualTaskListHits(9);
     }
 
     //@@author A0142255M
@@ -128,7 +128,7 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     /**
      * Checks whether the number of tasks in taskListPanel is same as {@code expectedHits}
      */
-    private void assertTaskListHits(int expectedHits) {
+    private void assertEqualTaskListHits(int expectedHits) {
         assertEquals(taskListPanel.getNumberOfTasks(), expectedHits);
     }
 }
