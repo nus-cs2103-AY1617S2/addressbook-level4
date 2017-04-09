@@ -9,6 +9,7 @@ import java.util.Optional;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 //@@author A0146809W
+
 /**
  * Parses date & time using natty Parser
  */
@@ -21,9 +22,17 @@ public class DateTimeParser {
      * @param input naturally typed date/time with reference to current date
      * @return Optional type of LocalDateTime object, returns optional type of empty if  unable to parse
      */
+
+    private static final String EMPTY_STRING = "";
+
     public static Optional<LocalDateTime> parseDateTime(String input) {
         Date date = new Date(); //get current date
         Parser dateTimeParser = new Parser();
+
+        if (input.equals(EMPTY_STRING)) {
+            return Optional.empty();
+        }
+
         List<DateGroup> groupsOfDateGroup = dateTimeParser.parse(input, date);
 
         if (groupsOfDateGroup.isEmpty()) {

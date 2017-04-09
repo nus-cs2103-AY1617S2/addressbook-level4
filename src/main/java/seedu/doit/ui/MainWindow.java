@@ -234,6 +234,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
+        helpWindow.configure();
         helpWindow.show();
     }
 
@@ -265,22 +266,20 @@ public class MainWindow extends UiPart<Region> {
      * Handle scrollTo in different lists
      */
     public void scrollTo(int index) {
-        if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
+        if (index < this.logic.getFilteredTaskList().filtered(task -> task.isTask()).size()) {
             this.taskListPanel.scrollTo(index);
             this.eventListPanel.clearSelection();
             this.fListPanel.clearSelection();
-        } else if (index < this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                && task.hasEndTime()).size() + this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                && task.hasEndTime() /*&& !task.getIsDone()*/).size()) {
-            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                    && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+        } else if (index < this.logic.getFilteredTaskList().filtered(task -> task.isTask()).size()
+                + this.logic.getFilteredTaskList().filtered(task -> task.isEvent()
+                ).size()) {
+            this.eventListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task ->
+                task.isTask()).size());
             this.taskListPanel.clearSelection();
             this.fListPanel.clearSelection();
         } else {
-            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task -> !task.hasStartTime()
-                    && task.hasEndTime()).size() - this.logic.getFilteredTaskList().filtered(task -> task.hasStartTime()
-                            && task.hasEndTime() /*&& !task.getIsDone()*/).size());
+            this.fListPanel.scrollTo(index - this.logic.getFilteredTaskList().filtered(task ->
+                task.isTask()).size() - this.logic.getFilteredTaskList().filtered(task -> task.isEvent()).size());
             this.eventListPanel.clearSelection();
             this.taskListPanel.clearSelection();
         }

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.doit.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.doit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.doit.logic.commands.CommandResult.tasksToString;
+import static seedu.doit.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 import static seedu.doit.model.item.EndTime.MESSAGE_ENDTIME_CONSTRAINTS;
 import static seedu.doit.model.item.Priority.MESSAGE_PRIORITY_CONSTRAINTS;
 import static seedu.doit.model.item.StartTime.MESSAGE_STARTTIME_CONSTRAINTS;
@@ -14,6 +16,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.After;
@@ -207,13 +210,10 @@ public class LogicManagerTest {
 
         assertCommandSuccess("clear", ClearCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
-
+    // @@author A0146809W
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args s/gg" + "", expectedMessage);
-        assertCommandFailure("add Valid Name 5 s/valid,deadline.butNoPriorityPrefix d/valid,description",
-                expectedMessage);
         assertCommandFailure("add d/valid", expectedMessage);
         assertCommandFailure("add e/valid", expectedMessage);
         assertCommandFailure("add Valid Task p/1", MESSAGE_PRIORITY_CONSTRAINTS);
@@ -358,8 +358,17 @@ public class LogicManagerTest {
         expectedAB.removeTask(threeTasks.get(1));
         helper.addToModel(this.model, threeTasks);
 
-        assertCommandSuccess("delete 2", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
-                expectedAB, expectedAB.getTaskList());
+        HashSet<Integer> indexToDelete = new HashSet<>();
+        int intToDelete = 2;
+        indexToDelete.add(intToDelete);
+
+        HashSet<ReadOnlyTask> tasksToDelete = new HashSet<>();
+        tasksToDelete.add(threeTasks.get(1));
+
+        String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete,
+            indexToDelete));
+
+        assertCommandSuccess("delete 2", resultMessage, expectedAB, expectedAB.getTaskList());
     }
 
     @Test

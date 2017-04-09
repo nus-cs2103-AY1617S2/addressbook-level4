@@ -14,6 +14,9 @@ public class SetCommand extends Command {
     public static final String COMMAND_ALREADY_EXISTS = "Cannot change into a command that already exists!";
     public static final String NO_SUCH_COMMAND_TO_CHANGE = "There exists no such command to change!";
     public static final String COMMAND_WORD = "set";
+    public static final String COMMAND_PARAMETER = "OLD_COMMAND NEW_COMMAND";
+    public static final String COMMAND_RESULT = "Customizes command words";
+    public static final String COMMAND_EXAMPLE = "set delete del\n" + "set del -";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the command identified by the default command word to a new command word\n"
             + "Parameters: OLD/DEFAULT_COMMAND_WORD NEW_COMMAND_WORD\n" + "Example: " + COMMAND_WORD + " add adding";
@@ -40,5 +43,21 @@ public class SetCommand extends Command {
         EventsCenter.getInstance().post(new SetCommandEvent(this.oldCommand, this.newCommand));
         return new CommandResult(String.format(MESSAGE_SET_TASK_SUCCESS, this.oldCommand + " into " + this.newCommand));
 
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 }

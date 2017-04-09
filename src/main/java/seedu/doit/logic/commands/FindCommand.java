@@ -10,11 +10,13 @@ import java.util.Set;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
+    public static final String COMMAND_PARAMETER = "KEYWORD [MORE_KEYWORDS]";
+    public static final String COMMAND_RESULT = "Display tasks that match the keywords";
+    public static final String COMMAND_EXAMPLE = "find n/MA1101R assignment p/med";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
         + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " Task A Project 3 Print 10 pages";
+        + "Parameters: " + COMMAND_PARAMETER
+        + "\nExample: " + COMMAND_EXAMPLE;
 
     private final Set<String> namekeywords;
     private final Set<String> startTimekeywords;
@@ -35,9 +37,24 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredTaskList(namekeywords, prioritykeywords, desckeywords, tagskeywords, startTimekeywords,
-                endTimekeywords);
-        return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+        this.model.updateFilteredTaskList(this.namekeywords,
+                this.prioritykeywords, this.desckeywords, this.tagskeywords, this.startTimekeywords,
+                this.endTimekeywords);
+        return new CommandResult(getMessageForTaskListShownSummary(this.model.getFilteredTaskList().size()));
+    }
+    public static String getName() {
+        return COMMAND_WORD;
     }
 
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
+    }
 }
