@@ -29,27 +29,27 @@ public class TaskManagerTest {
     private final TaskManager taskManager = new TaskManager();
 
     @Test
-    public void constructor() {
+    public void taskManager_constructor_success() {
         assertEquals(Collections.emptyList(), taskManager.getTaskList());
         assertEquals(Collections.emptyList(), taskManager.getTagList());
     }
 
     @Test
-    public void resetDataNullThrowsAssertionError() {
+    public void taskManagerResetData_null_assertionError() {
         thrown.expect(AssertionError.class);
         taskManager.resetData(null);
         fail();
     }
 
     @Test
-    public void resetDataWithValidReadOnlyTaskManagerReplacesData() {
+    public void taskManagerResetData_validReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
 
     @Test
-    public void resetDataWithDuplicateTasksThrowsAssertionError() {
+    public void taskManagerResetData_duplicateTasks_assertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.eggsAndBread twice
         List<Task> newTasks = Arrays.asList(new Task(td.eggsAndBread), new Task(td.eggsAndBread));
@@ -62,7 +62,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetDataWithDuplicateTagsThrowsAssertionError() {
+    public void taskManagerResetData_duplicateTags_assertionError() {
         TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());

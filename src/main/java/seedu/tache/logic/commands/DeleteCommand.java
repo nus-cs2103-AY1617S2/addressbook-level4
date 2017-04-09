@@ -24,7 +24,7 @@ public class DeleteCommand extends Command implements Undoable {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: \n%1$s";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
-            "This task is part of a recurring task and cannot be edited.";
+            "This task is part of a recurring task and cannot be deleted.";
     //@@author A0150120H
     public static final String MESSAGE_DUPLICATE_TASK = "%1$s already exists in the task manager.";
     //@@author
