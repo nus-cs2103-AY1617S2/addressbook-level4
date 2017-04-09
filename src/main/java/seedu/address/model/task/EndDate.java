@@ -9,5 +9,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class EndDate extends Date {
     public EndDate(String date) throws IllegalValueException {
         super(date);
+
+        if (date == null) {
+            inputValue = null;
+            value = new java.util.Date(Long.MAX_VALUE);
+        }
     }
 }

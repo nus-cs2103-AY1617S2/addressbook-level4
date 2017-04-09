@@ -55,11 +55,11 @@ public class XmlAdaptedTask {
         }
 
         if (source.getEndDate() != null) {
-            end = source.getEndDate().inputValue;
+            end = source.getEndDate().getInputValue();
         }
 
         if (source.getStartDate() != null) {
-            start = source.getStartDate().inputValue;
+            start = source.getStartDate().getInputValue();
         }
     }
 

@@ -35,10 +35,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_PASSEDDATE = "The end date of the new task has passed!";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the todo list";
 
-    public static final String MESSAGE_NONAME = "No name given!";
-    public static final String MESSAGE_NOGROUP = "No group given!";
-    public static final String MESSAGE_ILLEGAL_TIME_PARAMS = "Cannot have a start date without an end date!";
-    public static final String MESSAGE_ILLEGAL_TIME_INTERVAL = "End date is before the start date!";
+    public static final String MESSAGE_NONAME = "No name given!\n";
+    public static final String MESSAGE_NOGROUP = "No group given!\n";
+    public static final String MESSAGE_ILLEGAL_TIME_PARAMS = "Cannot have a start date without an end date!\n";
+    public static final String MESSAGE_ILLEGAL_TIME_INTERVAL = "End date is before the start date!\n";
 
     private static final String STARTDATE_KEYWORD = "from";
     private static final String ENDDATE_KEYWORD = "to";

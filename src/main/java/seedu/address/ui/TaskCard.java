@@ -30,16 +30,14 @@ public class TaskCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
 
-        if (person.getEndDate() == null) {
+        if (person.getEndDate() == null || person.getEndDate().getInputValue() == null) {
             end.setVisible(false);
-            end.setStyle("-fx-font-size: 0pt;");
         } else {
             end.setText("Ends:   " + person.getEndDate());
         }
 
-        if (person.getStartDate() == null) {
+        if (person.getStartDate() == null || person.getStartDate().getInputValue() == null) {
             start.setVisible(false);
-            start.setStyle("-fx-font-size: 0pt;");
         } else {
             start.setText("Starts: " + person.getStartDate());
         }
