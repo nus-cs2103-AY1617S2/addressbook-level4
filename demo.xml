@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <name>Complete CS3230 Assignment 3</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>04/13/17 23:11</deadline>
+        <tagged>Assignment</tagged>
+        <tagged>CS3230</tagged>
+    </tasks>
+    <tasks>
+        <name>Update Developer Guide</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>04/10/17 23:09</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Update User Guide</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline>04/10/17 23:10</deadline>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Army Reservist</name>
+        <priority>med</priority>
+        <description>:(</description>
+        <isDone>false</isDone>
+        <startTime>07/17/17 23:18</startTime>
+        <deadline>07/28/17 23:18</deadline>
+        <tagged>Army</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2101 Reflection Test</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>04/10/17 12:00</startTime>
+        <deadline>04/10/17 14:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2101</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103T Software Demo</name>
+        <priority>high</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>04/13/17 12:00</startTime>
+        <deadline>04/13/17 14:00</deadline>
+        <tagged>Test</tagged>
+        <tagged>CS2103T</tagged>
+    </tasks>
+    <tasks>
+        <name>Good Friday</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime>04/14/17 00:00</startTime>
+        <deadline>04/14/17 23:17</deadline>
+        <tagged>Holiday</tagged>
+    </tasks>
+    <tasks>
+        <name>Buy Milk</name>
+        <priority>med</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Groceries</tagged>
+    </tasks>
+    <tasks>
+        <name>Learn Blender</name>
+        <priority>low</priority>
+        <description></description>
+        <isDone>false</isDone>
+        <startTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <deadline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <tagged>Education</tagged>
+    </tasks>
+    <tags>Groceries</tags>
+    <tags>Assignment</tags>
+    <tags>CS3230</tags>
+    <tags>CS2103T</tags>
+    <tags>Test</tags>
+    <tags>CS2101</tags>
+    <tags>Education</tags>
+    <tags>Holiday</tags>
+    <tags>Army</tags>
+</taskmanager>
