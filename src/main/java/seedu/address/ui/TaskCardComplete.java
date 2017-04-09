@@ -2,16 +2,15 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
-//@@author A0164032U
-public class PersonCard extends UiPart<Region> {
+//@@author A0164889E
+public class TaskCardComplete extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
-    
+    private static final String FXML = "PersonListCardComplete.fxml";
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -25,12 +24,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label group;
 
-    public PersonCard(ReadOnlyPerson person, int displayedIndex) {
+    public TaskCardComplete(ReadOnlyTask person, int displayedIndex) {
         super(FXML);
-        
+
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        
+
         if (person.getEndDate() == null) {
             end.setVisible(false);
             end.setStyle("-fx-font-size: 0pt;");
@@ -44,13 +43,13 @@ public class PersonCard extends UiPart<Region> {
         } else {
             start.setText("Starts: " + person.getStartDate());
         }
-        
+
         group.setText(person.getGroup().value);
-        
+
         if (person.hasPassed()) {
             setStyleToIndicateEndDatePassed();
         }
-        
+
         cardPane.autosize();
     }
 

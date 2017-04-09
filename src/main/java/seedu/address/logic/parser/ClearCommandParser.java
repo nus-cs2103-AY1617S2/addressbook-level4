@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
 //@@author A0163848R

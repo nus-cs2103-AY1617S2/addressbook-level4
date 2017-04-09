@@ -2,12 +2,13 @@ package seedu.address.ui;
 
 import javafx.beans.DefaultProperty;
 
+//@@author A0164466X
 /**
  * A test object which can be constructed via an FXML file.
  * Unlike other JavaFX classes, this class can be constructed without the JavaFX toolkit being initialized.
  */
 @DefaultProperty("text")
-public class TestFxmlObject {
+public class TestFxmlObject extends javafx.scene.Parent {
 
     private String text;
 

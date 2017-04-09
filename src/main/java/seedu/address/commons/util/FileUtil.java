@@ -88,7 +88,7 @@ public class FileUtil {
         assert pathWithForwardSlash.contains("/");
         return pathWithForwardSlash.replace("/", File.separator);
     }
-    
+
     //@@author A0163848R
     /**
      * Creates a localized window to create a file for saving.
@@ -99,12 +99,13 @@ public class FileUtil {
     public static File promptSaveFileDialog(String title, Stage stage, ExtensionFilter ...extensionFilters) {
         FileChooser prompt =  getFileChooser(title, extensionFilters);
         File saved = prompt.showSaveDialog(stage);
-        if(!saved.getName().contains(".")) {
-          saved = new File(saved.getAbsolutePath() + prompt.getSelectedExtensionFilter().getExtensions().get(0).substring(1));
+        if (!saved.getName().contains(".")) {
+            saved = new File(saved.getAbsolutePath()
+                  + prompt.getSelectedExtensionFilter().getExtensions().get(0).substring(1));
         }
         return saved;
     }
-    
+
     /**
      * Creates a localized window to select a file for loading.
      * @param Window title
@@ -117,10 +118,10 @@ public class FileUtil {
 
     private static FileChooser getFileChooser(String title, ExtensionFilter ...extensionFilters) {
         FileChooser fileChooser = new FileChooser();
-        
+
         fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(extensionFilters);
-        
+
         return fileChooser;
     }
 }

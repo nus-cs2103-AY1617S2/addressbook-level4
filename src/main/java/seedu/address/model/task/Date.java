@@ -1,10 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.List;
-
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 
@@ -19,22 +14,22 @@ public abstract class Date {
     public final java.util.Date value;
 
     /**
-     * Validates given phone number.
+     * Validates given date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
     public Date(String date) throws IllegalValueException {
         assert date != null;
 
         inputValue = date;
-        
+
         if (date != null) {
             value = DateUtil.parse(date);
         } else {
             value = new java.util.Date();
         }
     }
-    
+
     public java.util.Date getTime() {
         return value;
     }
@@ -53,6 +48,10 @@ public abstract class Date {
         return other == this
                 || (other instanceof Date
                         && this.value.equals(((Date) other).value));
+    }
+    //@@author A0164032U
+    public static boolean isValidDate(String date) {
+        return DateUtil.isValidDate(date);
     }
 
     @Override

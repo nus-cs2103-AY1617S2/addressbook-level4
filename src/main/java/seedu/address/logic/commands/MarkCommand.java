@@ -8,9 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniquePersonList;
+import seedu.address.model.task.UniqueTaskList;
 
 //@@author A0163848R
 /**
@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task complete: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This task is already complete.";
 
     private final int filteredPersonListIndex;
@@ -43,29 +43,30 @@ public class MarkCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        ReadOnlyPerson editedPerson = createMarkedPerson(personToEdit);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        ReadOnlyTask editedPerson = createMarkedPerson(personToEdit);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, personToEdit));
     }
 
+    //@@author A0164466X
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited to be complete.
      */
-    private static ReadOnlyPerson createMarkedPerson(ReadOnlyPerson personToEdit) {
+    private static ReadOnlyTask createMarkedPerson(ReadOnlyTask personToEdit) {
         assert personToEdit != null;
 
         UniqueTagList updatedTags =
@@ -85,5 +86,5 @@ public class MarkCommand extends Command {
 
         return new Task(personToEdit.getName(),
                 personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
-}
+    }
 }

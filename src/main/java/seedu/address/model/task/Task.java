@@ -1,18 +1,16 @@
 package seedu.address.model.task;
 
-import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and
  * not null, field values are validated.
  */
-public class Task implements ReadOnlyPerson {
+public class Task implements ReadOnlyTask {
 
     private Name name;
     private EndDate end;
@@ -41,7 +39,7 @@ public class Task implements ReadOnlyPerson {
      * Creates a copy of the given ReadOnlyPerson.
      */
 
-    public Task(ReadOnlyPerson source) {
+    public Task(ReadOnlyTask source) {
         this(
             source.getName(),
             source.getStartDate(),
@@ -106,7 +104,7 @@ public class Task implements ReadOnlyPerson {
     /**
      * Updates this person with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyPerson replacement) {
+    public void resetData(ReadOnlyTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
@@ -119,8 +117,8 @@ public class Task implements ReadOnlyPerson {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                        && this.isSameStateAs((ReadOnlyPerson) other));
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                        && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
@@ -134,7 +132,7 @@ public class Task implements ReadOnlyPerson {
     public String toString() {
         return getAsText();
     }
-    
+
     //@@author A0164032U
     @Override
     public java.util.Date getStartTime() {
@@ -143,7 +141,7 @@ public class Task implements ReadOnlyPerson {
         }
         return new java.util.Date(Long.MIN_VALUE);
     }
-    
+
     @Override
     public java.util.Date getEndTime() {
         if (end != null) {
@@ -151,9 +149,9 @@ public class Task implements ReadOnlyPerson {
         }
         return new java.util.Date(Long.MAX_VALUE);
     }
-    
+
     //@@author A0164032U
-    public int compareTo(ReadOnlyPerson o){
+    public int compareTo(ReadOnlyTask o) {
         return getEndTime().compareTo(o.getEndTime());
     }
 
@@ -164,11 +162,11 @@ public class Task implements ReadOnlyPerson {
         UniqueTagList tags = CollectionUtil.firstOf(properties, UniqueTagList.class);
         StartDate start = CollectionUtil.firstOf(properties, StartDate.class);
         EndDate end = CollectionUtil.firstOf(properties, EndDate.class);
-        
+
         if (CollectionUtil.isAnyNull(name, group, tags)) {
             throw new IllegalValueException("Task Factory: new task requires a name, group, and tag list");
         }
-        
+
         if (start != null && end != null) {
             return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
@@ -176,7 +174,7 @@ public class Task implements ReadOnlyPerson {
         } else if (start == null && end == null) {
             return new FloatingTask(name, group, tags);
         }
-        
+
         return null;
     }
 

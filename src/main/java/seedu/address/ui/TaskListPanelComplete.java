@@ -8,28 +8,29 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 
+//@@author A0164889E
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of complete tasks.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+public class TaskListPanelComplete extends UiPart<Region> {
+    private static final String FXML = "PersonListPanelComplete.fxml";
 
     @FXML
-    private ListView<ReadOnlyPerson> personListView;
+    private ListView<ReadOnlyTask> personListViewComplete;
 
-    public PersonListPanel(AnchorPane personListPlaceholder, ObservableList<ReadOnlyPerson> personList) {
+    public TaskListPanelComplete(AnchorPane personListCompletePlaceholder, ObservableList<ReadOnlyTask> personList) {
         super(FXML);
         setConnections(personList);
-        addToPlaceholder(personListPlaceholder);
+        addToPlaceholder(personListCompletePlaceholder);
     }
 
-    private void setConnections(ObservableList<ReadOnlyPerson> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+    private void setConnections(ObservableList<ReadOnlyTask> personList) {
+        personListViewComplete.setItems(personList);
+        personListViewComplete.setCellFactory(listView -> new PersonListViewCellComplete());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -40,33 +41,33 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        personListViewComplete.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         LOGGER.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new TaskPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            personListViewComplete.scrollTo(index);
+            personListViewComplete.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class PersonListViewCell extends ListCell<ReadOnlyPerson> {
+    class PersonListViewCellComplete extends ListCell<ReadOnlyTask> {
 
         @Override
-        protected void updateItem(ReadOnlyPerson person, boolean empty) {
+        protected void updateItem(ReadOnlyTask person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TaskCardComplete(person, getIndex() + 1).getRoot());
             }
         }
     }

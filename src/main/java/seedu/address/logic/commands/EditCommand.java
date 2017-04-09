@@ -6,16 +6,14 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.task.Date;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.EndDate;
 import seedu.address.model.task.Group;
 import seedu.address.model.task.Name;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.ReadOnlyPerson;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.StartDate;
-import seedu.address.model.task.UniquePersonList;
-
-import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -55,18 +53,18 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
 
         if (filteredPersonListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson personToEdit = lastShownList.get(filteredPersonListIndex);
-        ReadOnlyPerson editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
+        ReadOnlyTask editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         try {
             model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
+        } catch (UniqueTaskList.DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.updateFilteredListToShowAll();
@@ -78,7 +76,7 @@ public class EditCommand extends Command {
      * {@code personToEdit} edited with {@code editPersonDescriptor}.
      */
 
-    private static ReadOnlyPerson createEditedPerson(ReadOnlyPerson personToEdit,
+    private static ReadOnlyTask createEditedPerson(ReadOnlyTask personToEdit,
                                              EditPersonDescriptor editPersonDescriptor) {
 
         assert personToEdit != null;
@@ -138,12 +136,12 @@ public class EditCommand extends Command {
         public Optional<StartDate> getStartDate() {
             return start;
         }
-        
+
         public void setEndDate(Optional<EndDate> date) {
             assert date != null;
             this.end = date;
         }
-        
+
         public Optional<EndDate> getEndDate() {
             return end;
         }
@@ -157,5 +155,5 @@ public class EditCommand extends Command {
             return group;
         }
     }
-  
+
 }

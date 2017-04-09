@@ -3,26 +3,26 @@ package seedu.address.commons.events.ui;
 import java.io.File;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 
 //@@author A0163848R
 /**
  * Represents a request to export the stored YTomorrow.
  */
 public class ExportRequestEvent extends BaseEvent {
-    
-    private ReadOnlyAddressBook toExport;
+
+    private ReadOnlyTaskManager toExport;
     private File target;
-    
-    public ExportRequestEvent(ReadOnlyAddressBook toExport, File target) {
+
+    public ExportRequestEvent(ReadOnlyTaskManager toExport, File target) {
         this.toExport = toExport;
         this.target = target;
     }
-    
-    public ReadOnlyAddressBook getYTomorrowToExport() {
+
+    public ReadOnlyTaskManager getYTomorrowToExport() {
         return toExport;
     }
-    
+
     public File getTargetFile() {
         return target;
     }

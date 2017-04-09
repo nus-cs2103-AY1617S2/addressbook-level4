@@ -13,20 +13,20 @@ public class TargetFileRequestEvent extends BaseEvent {
 
     File target;
     UserPrefs prefs;
-    
+
     public TargetFileRequestEvent(File target, UserPrefs prefs) {
         this.target = target;
         this.prefs = prefs;
     }
-    
+
     public File getTargetFile() {
         return target;
     }
-    
+
     public UserPrefs getUserPrefs() {
         return prefs;
     }
-    
+
     @Override
     public String toString() {
         return "Targeting new YTomorrow file: " + target.toString();

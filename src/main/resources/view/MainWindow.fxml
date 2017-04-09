@@ -64,11 +64,15 @@
 							VBox.vgrow="ALWAYS" />
 					</children>
 				</VBox>
-				<AnchorPane fx:id="browserPlaceholder" prefWidth="340">
+				<VBox fx:id="personListComplete" minWidth="340" prefWidth="340">
 					<padding>
-						<Insets top="10" bottom="10" left="10" right="10" />
+						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 					</padding>
-				</AnchorPane>
+					<children>
+						<AnchorPane fx:id="personListPanelCompletePlaceholder"
+							VBox.vgrow="ALWAYS" />
+					</children>
+				</VBox>
 			</items>
 		</SplitPane>
 		<AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

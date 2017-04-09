@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.DateUtil;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -9,8 +7,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field
  * values are validated.
  */
-//@@ author A0164032U
-public interface ReadOnlyPerson {
+public interface ReadOnlyTask {
 
     Name getName();
 
@@ -30,7 +27,7 @@ public interface ReadOnlyPerson {
      * Returns true if both have the same state. (interfaces cannot override
      * .equals)
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
+    default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName())
@@ -40,26 +37,27 @@ public interface ReadOnlyPerson {
                 && ((other.getEndDate() == null && this.getEndDate() == null)
                         || ((other.getEndDate() != null && this.getEndDate() != null)
                                 && other.getEndDate().equals(this.getEndDate()))));
-        }
+    }
 
     /**
      * Formats the person as text, showing all contact details.
      */
+  //@@author A0164032U
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-        
+
         boolean hasStartDate = getStartDate() != null;
         boolean hasEndDate = getEndDate() != null;
-        
+
         builder
-        .append(getName())
-        .append(hasStartDate ? " Start Date: " : "")
-        .append(hasStartDate ? getStartDate() : "")
-        .append(hasEndDate ? " End Date: " : "")
-        .append(hasEndDate ? getEndDate() : "")
-        .append(" Group: ")
-        .append(getGroup())
-        .append(" Status: ");
+            .append(getName())
+            .append(hasStartDate ? " Start Date: " : "")
+            .append(hasStartDate ? getStartDate() : "")
+            .append(hasEndDate ? " End Date: " : "")
+            .append(hasEndDate ? getEndDate() : "")
+            .append(" Group: ")
+            .append(getGroup())
+            .append(" Status: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
