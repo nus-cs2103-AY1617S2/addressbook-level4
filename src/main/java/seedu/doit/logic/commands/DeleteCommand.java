@@ -55,7 +55,7 @@ public class DeleteCommand extends Command {
         this.model.deleteTasks(this.tasksToDeleteSet);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
-            tasksToString(tasksToDeleteSet, targetIndexes)));
+            tasksToString(tasksToDeleteSet)));
     }
     /**
      *
