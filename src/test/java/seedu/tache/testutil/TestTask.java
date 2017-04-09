@@ -24,7 +24,6 @@ public class TestTask implements ReadOnlyTask {
     private Optional<DateTime> startDateTime;
     private Optional<DateTime> endDateTime;
     private UniqueTagList tags;
-    private boolean isTimed;
     private boolean isActive;
     private RecurState recurState;
 
@@ -32,7 +31,6 @@ public class TestTask implements ReadOnlyTask {
         tags = new UniqueTagList();
         this.startDateTime = Optional.empty();
         this.endDateTime = Optional.empty();
-        this.isTimed = false;
         this.isActive = true;
         this.recurState = new RecurState();
     }
@@ -46,7 +44,6 @@ public class TestTask implements ReadOnlyTask {
         this.tags = taskToCopy.getTags();
         this.startDateTime = taskToCopy.getStartDateTime();
         this.endDateTime = taskToCopy.getEndDateTime();
-        this.isTimed = taskToCopy.getTimedStatus();
         this.isActive = taskToCopy.getActiveStatus();
         this.recurState = taskToCopy.getRecurState();
     }
@@ -113,7 +110,7 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public boolean getTimedStatus() {
-        return isTimed;
+        return startDateTime.isPresent() || endDateTime.isPresent();
     }
 
     //@@author
