@@ -54,13 +54,6 @@ public class UniqueTaskList implements Iterable<Task> {
         //@@author
     }
 
-    private void pushUndoStack() {
-        ObservableList<Task> stackList = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            stackList.add(0, t);
-        }
-        undoStack.push(stackList);
-    }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedPerson}.
@@ -140,19 +133,38 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement);
     }
 
-    private void pushRedoStack() {
-        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
-        for (Task t : internalList) {
-            redoTemp.add(t);
-        }
-        redoStack.push(redoTemp);
-    }
-
     public void redo() throws EmptyStackException {
         ObservableList<Task> replacement = redoStack.pop();
         pushUndoStack();
         this.internalList.setAll(replacement);
     }
+
+    private void pushUndoStack() {
+        ObservableList<Task> stackList = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            try {
+                Task temp = new Task(t);
+                stackList.add(temp);
+            } catch (IllegalTimeException e) {
+                e.printStackTrace();
+            }
+        }
+        undoStack.push(stackList);
+    }
+
+    private void pushRedoStack() {
+        ObservableList<Task> redoTemp = FXCollections.observableArrayList();
+        for (Task t : internalList) {
+            try {
+                Task temp = new Task(t);
+                redoTemp.add(temp);
+            } catch (IllegalTimeException e) {
+                e.printStackTrace();
+            }
+        }
+        redoStack.push(redoTemp);
+    }
+
   //@@author
     public void setTasks(UniqueTaskList replacement) {
 
