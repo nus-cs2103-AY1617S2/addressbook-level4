@@ -128,29 +128,29 @@ public class TypicalTestTasks {
                     .withCategories("just", "friends").build(); // event
 
             // Recurring task
-            recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("30/03/17")
-                    .withStartTime("1000").withEndDate("30/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("30/12/17")
+                    .withStartTime("1000").withEndDate("30/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestDayOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("31/03/17")
-                    .withStartTime("1000").withEndDate("31/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDayOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("31/12/17")
+                    .withStartTime("1000").withEndDate("31/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestDayTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("01/04/17")
-                    .withStartTime("1000").withEndDate("01/04/17").withEndTime("1100").withCompletion(false)
+            recurTestDayTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("01/01/18")
+                    .withStartTime("1000").withEndDate("01/01/18").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestDayThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("02/04/17")
-                    .withStartTime("1000").withEndDate("02/04/17").withEndTime("1100").withCompletion(false)
+            recurTestDayThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("02/01/18")
+                    .withStartTime("1000").withEndDate("02/01/18").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestWeek = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
-                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+            recurTestWeek = new TaskBuilder().withTaskName("I'm recurring").withStartDate("17/12/17")
+                    .withStartTime("1000").withEndDate("17/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestWeekOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("10/03/17")
-                    .withStartTime("1000").withEndDate("10/03/17").withEndTime("1100").withCompletion(false)
+            recurTestWeekOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("24/12/17")
+                    .withStartTime("1000").withEndDate("24/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestWeekTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("17/03/17")
-                    .withStartTime("1000").withEndDate("17/03/17").withEndTime("1100").withCompletion(false)
+            recurTestWeekTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("31/12/17")
+                    .withStartTime("1000").withEndDate("31/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
-            recurTestWeekThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("21/03/17")
-                    .withStartTime("1000").withEndDate("21/03/17").withEndTime("1100").withCompletion(false)
+            recurTestWeekThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("07/01/18")
+                    .withStartTime("1000").withEndDate("07/01/17").withEndTime("1100").withCompletion(false)
                     .withCategories("Test").build();
             recurTestMonth = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("03/11/17").withEndTime("1100").withCompletion(false)
