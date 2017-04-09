@@ -466,18 +466,6 @@ Steps 3a1-3a2 are repeated until the time period of event entered is valid
 2. TaskList displays tasks that are due within the timeline specified by the filter <br>
   Use case ends.
 
-#### Use case: Change UI layout
-
-**MSS**
-
-1. User requests to change UI layout
-2. TaskList shows UI layout features that can be customised
-3. User edits UI layout features
-4. TaskList shows a preview and asks for confirmation
-5. User confirms changes to UI layout
-6. TaskList returns to user’s previous screen <br>
-Use case ends.
-
 #### Use case: Add default keywords
 
 **MSS**
