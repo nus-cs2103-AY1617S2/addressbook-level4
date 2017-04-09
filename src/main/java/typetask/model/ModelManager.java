@@ -349,7 +349,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return (task.getPriority().value == "High" && task.getIsCompleted() == false);
+            return (task.getPriority().value.equals("High") && !task.getIsCompleted());
         }
 
         @Override
@@ -393,7 +393,7 @@ public class ModelManager extends ComponentManager implements Model {
                 }
             }
 
-            return ((isTaskDueToday || isEventDueToday) && task.getIsCompleted() == false);
+            return ((isTaskDueToday || isEventDueToday) && !task.getIsCompleted());
         }
 
         @Override
