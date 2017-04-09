@@ -95,17 +95,17 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyPressedInNavigationMode(KeyEvent event) {
         event.consume();
         if (event.getCode() == KeyCode.J) {
-        	// press J to move down by one
+            // press J to move down by one
             if (currentIndex + 1 < logic.getFilteredTaskList().size()) {
                 currentIndex++;
             }
         } else if (event.getCode() == KeyCode.K) {
-        	// press K to move up by one
+            // press K to move up by one
             if (currentIndex - 1 >= 0) {
                 currentIndex--;
             }
         } else if (event.getCode() == KeyCode.ESCAPE) {
-        	// press ESCAPE to toggle to EDITING mode and remove highlight
+            // press ESCAPE to toggle to EDITING mode and remove highlight
             currentIndex = -1;
             turnOnEditingMode();
         }
