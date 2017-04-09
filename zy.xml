@@ -202,7 +202,7 @@
         <endDate>4/4/2017 6:00 PM, 5 days ago</endDate>
         <remark>Need cover page</remark>
         <location>AS6-02 Office Tan Kai En Pigeonhole</location>
-        <done>true</done>
+        <done>false</done>
         <tagged>project</tagged>
         <tagged>NM3217</tagged>
     </tasks>
@@ -212,7 +212,7 @@
         <endDate>4/7/2017 1:45 PM, 2 days ago</endDate>
         <remark>Closed-book</remark>
         <location>LT14</location>
-        <done>true</done>
+        <done>false</done>
         <eventId></eventId>
         <tagged>exam</tagged>
         <tagged>NM3217</tagged>
@@ -283,7 +283,7 @@
     <tasks>
         <name>NM3217 Website Submission</name>
         <startDate>4/4/2017 6:00 PM, 5 days ago</startDate>
-        <endDate>4/9/2017 6:00 PM, 4 hours ago</endDate>
+        <endDate>4/9/2017 6:00 PM, 5 hours ago</endDate>
         <remark>Include justification</remark>
         <location>AS6-02 Office Tan Kai End Pigeonhole</location>
         <done>false</done>
@@ -292,8 +292,8 @@
     </tasks>
     <tasks>
         <name>Amanda's birthday</name>
-        <startDate>4/9/2017 7:00 PM, 3 hours ago</startDate>
-        <endDate>4/9/2017 11:00 PM, 39 minutes from now</endDate>
+        <startDate>4/9/2017 7:00 PM, 4 hours ago</startDate>
+        <endDate>4/9/2017 11:00 PM, 4 minutes ago</endDate>
         <remark>wrap 1Q84 book</remark>
         <location>Villa C Changi Civil Service Club</location>
         <done>false</done>
@@ -303,7 +303,7 @@
     <tasks>
         <name>CS2103T Final Submission</name>
         <startDate></startDate>
-        <endDate>4/10/2017 11:59 AM, 14 hours from now</endDate>
+        <endDate>4/10/2017 11:59 AM, 13 hours from now</endDate>
         <remark>Zip files according to format</remark>
         <location>IVLE</location>
         <done>false</done>
@@ -313,7 +313,7 @@
     </tasks>
     <tasks>
         <name>CS2102 Project Demo</name>
-        <startDate>4/11/2017 10:40 AM, 2 days from now</startDate>
+        <startDate>4/11/2017 10:40 AM, 1 day from now</startDate>
         <endDate>4/11/2017 11:20 AM, 2 days from now</endDate>
         <remark>Bring own laptop</remark>
         <location>i-Cube</location>
@@ -390,7 +390,7 @@
     </tasks>
     <tasks>
         <name>CS2102 Gradience assignment 3</name>
-        <startDate>4/10/2017 12:00 PM, 14 hours from now</startDate>
+        <startDate>4/10/2017 12:00 PM, 13 hours from now</startDate>
         <endDate>4/15/2017 5:00 PM, 6 days from now</endDate>
         <remark>On functional dependencies</remark>
         <location>NUS</location>
