@@ -59,7 +59,7 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing JOBS ]===========================");
         super.init();
-        
+
         config = initConfig(getApplicationParameter("config"));
         storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath(),
                 config.getLoginInfoFilePath());
@@ -70,7 +70,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-    
+
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic, config, userPrefs, loginInfo);
@@ -225,19 +225,19 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
     }
-    
+
     @Subscribe
-    public void handleCalendarDisplayEvent(CalendarDisplayEvent event){
+    public void handleCalendarDisplayEvent(CalendarDisplayEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.calendarManager = new CalendarManager();
     }
-    
+
     @Subscribe
-    public void handleSaveLoginInfoEvent(SaveLoginInfoEvent event) throws IOException{
+    public void handleSaveLoginInfoEvent(SaveLoginInfoEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         storage.saveLoginInfo(loginInfo);
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
