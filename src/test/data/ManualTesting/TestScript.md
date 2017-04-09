@@ -9,8 +9,9 @@
 |	Help |		|		|   |
 |	1	| **show help** | help | the user guide is displayed in a new window |
 |	Load	|		|		|   |
-| 1 | **load invalid sample data** | load data/invalid.xml | Error message will be shown |
-| 2 | **load sample data** | load data/SampleData.xml | Task manager is refreshed with the data from supplied file with 50 tasks |
+| 1 | **load nonexistent sample data** | load data/new.xml | Warning is shown and new xml with given file name is created |
+| 2 | **load invalid sample data** | load invalid | Error message will be shown |
+| 3 | **load sample data** | load data/sampledata.xml | Task manager is refreshed with the data from supplied file with 50 tasks |
 |	List	|		|		|   |
 | 1 | **go to** `Done` **tab** | list done | Selected view tab is now `Done` |
 | 2 | **go to** `To Do` **tab** | list todo | Selected view tab is now `To Do` |
