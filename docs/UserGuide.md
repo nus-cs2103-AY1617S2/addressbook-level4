@@ -117,7 +117,7 @@ Examples:
 
 * `mark 1`<br>
   Marks the 1st task as completed.
-  
+
 ### 2.9. Marking a task as incomplete : `unmark`
 
 Marks a task in current task list as incomplete.
@@ -147,7 +147,7 @@ Examples:
 * `find milk`<br>
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
-  
+
 ### 2.11. Clear all tasks : `clear`
 
 Clear all tasks or only completed task in the list. <br>
@@ -216,7 +216,7 @@ Hotkey: `CTRL+E`
 
 ### 2.16. Importing data
 
-Prompts a new window to select a file to import data from. 
+Prompts a new window to select a file to import data from.
 This adds any new tasks to the current file, and updates any with the same name.
 Hotkey: `CTRL+I`
 
@@ -240,12 +240,13 @@ Upon saving, loading, or modifying the data, the program saves the file location
 YTomorrow has a built in theme manager that displays choosable css themes for the program and sets the selected one.
 Hotkey: `CTRL+T`
 
-### 2.20 Clearing Data 
+### 2.20 Clearing Data
 
 Command clears all tasks that are either:
 * `clear all`: all tasks
 * `clear passed`: all tasks past deadline
-* `clear complete`: all completed tasks
+* `clear complete`: all complete tasks
+* `clear incomplete`: all incomplete tasks
 Format: `clear [all/complete/passed]`
 
 ### 2.21 Completion Indication
@@ -273,7 +274,7 @@ A task's deadline has passed when the task's background is red.
 
 * **Help**: `help` <br>
   e.g. `help`, `CTRL+H`
-  
+
   **Theme**: `theme` <br>
   e.g. `theme`, `CTRL+T`
 
@@ -282,13 +283,13 @@ A task's deadline has passed when the task's background is red.
        `add CS2013 assignment to tomorrow in study` <br>
        `add CS2013 assignment from Monday in study` <br>
        `add CS2013 assignment in study` <br>
-	   
+
 * **List All**: `list` <br>
   e.g. `list`
-  
+
 * **List Complete**: `lc` <br>
   e.g. `lc`
-  
+
 * **List Incomplete**: `li` <br>
   e.g. `li`
 
@@ -296,14 +297,17 @@ A task's deadline has passed when the task's background is red.
   e.g. `clear all`
   
 * **Clear Complete**: `clear complete` <br>
-  e.g. `clear all`
-  
+  e.g. `clear complete`
+
+* **Clear Incomplete**: `clear incomplete` <br>
+  e.g. `clear incomplete`
+
 * **Clear Passed**: `clear passed` <br>
   e.g. `clear passed`
 
 * **Edit**: `edit INDEX PARAMETER NEW_VALUE` <br>
   e.g. `edit 2 g/learning`
-  
+
 * **Mark**: `mark INDEX` <br>
   e.g. `mark 1`
 
@@ -321,6 +325,6 @@ A task's deadline has passed when the task's background is red.
 
 * **Redo**: `redo` <br>
   e.g. `redo`
-  
+
 * **Exit**: `exit` <br>
   e.g. `exit`, `CTRL+Q`

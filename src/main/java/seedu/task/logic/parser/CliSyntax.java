@@ -8,7 +8,7 @@ import seedu.task.logic.parser.ArgumentTokenizer.Prefix;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
-    
+
     //@@author A0164466X-reused
     /* Prefix definitions */
     public static final Prefix PREFIX_GROUP = new Prefix("g/");

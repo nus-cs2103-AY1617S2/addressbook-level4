@@ -144,7 +144,7 @@ The sections below give more details of each component.
 
 ### 2.2. UI component
 
-Author: LEUNG Cheuk Ting 
+Author: LEUNG Cheuk Ting
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_

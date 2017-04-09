@@ -25,12 +25,12 @@ public class StartDate {
      */
     public StartDate(String sdate) throws IllegalValueException {
         assert sdate != null;
-        
+
         if (sdate == null) {
             this.value = BAD_DATE;
         } else {
             this.value = parse(sdate);
-        }   
+        }
     }
 
     private String parse(String rawDate) throws IllegalValueException {
