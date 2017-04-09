@@ -27,7 +27,9 @@ public class CommandAutoCompleteController {
         return instance;
     }
 
-    // get the list of suggestions according to the input then display it
+    /**
+     * get the list of suggestions according to the input then display it
+     */
     public void suggestCompletion(InlineCssTextArea commandTextField, Logic logic) {
         attachSuggestionWindowIfNecessary(commandTextField);
 
@@ -91,7 +93,7 @@ public class CommandAutoCompleteController {
      * Method to provide auto-complete suggestions for search
      * @param words
      * @param logic
-     * @return list of strings that represent possible autocomplete matches
+     * @return list of strings that represent possible auto-complete matches
      */
     private ArrayList<String> getSuggestionsForSearch(String[] words, Logic logic) {
         int count = 0;

@@ -46,21 +46,45 @@ public class ContentAssistTests extends DoistGUITest {
     }
 
     @Test
-    public void testCompleteByTappingTab() {
+    public void testCompleteCommandWordByTappingTab() {
         String input = "view_alia";
-        commandBox.enterCommand(input);
-        bot.type(KeyCode.TAB);
+        typeTabAfterInput(input);
         assertTrue("view_alias".equals(commandBox.getCommandInput()));
     }
 
     @Test
     public void testCompleteKeyByTappingTab() {
         String input = "do task \\unde";
-        commandBox.enterCommand(input);
-        bot.type(KeyCode.TAB);
+        typeTabAfterInput(input);
         assertTrue("do task \\under".equals(commandBox.getCommandInput()));
     }
 
+    @Test
+    public void testCompleteUnexistedCommandword() {
+        String input = "z";  // there is no command word starting with the letter 'z'
+        typeTabAfterInput(input);
+        assertTrue("z".equals(commandBox.getCommandInput()));
+    }
+
+    @Test
+    public void testCompleteUnexistedKey() {
+        String input = "do test \\z";  // there is no parameter key starting with the letter 'z'
+        typeTabAfterInput(input);
+        assertTrue("do test \\z".equals(commandBox.getCommandInput()));
+    }
+
+    @Test
+    public void testCompleteSingleBackslash() {
+        String input = "do test \\";
+        typeTabAfterInput(input);
+        String content = commandBox.getCommandInput();
+        assertTrue(content.charAt(content.length() - 1) != '\\');
+    }
+
+    private void typeTabAfterInput(String input) {
+        commandBox.enterCommand(input);
+        bot.type(KeyCode.TAB);
+    }
     private void correctSuggestionsDisplayedWhenEnter(String input, String lastWord) {
         commandBox.enterCommand(input);
         assertCorrectSuggestions(lastWord);
