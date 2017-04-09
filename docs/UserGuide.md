@@ -127,5 +127,6 @@ clear | `clear`
 find | `find NAME`
 list | `list | completed | in-progress`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-undo/redo | `undo` `redo`
+undo | `undo` 
+redo | `redo`
 exit | `exit`
