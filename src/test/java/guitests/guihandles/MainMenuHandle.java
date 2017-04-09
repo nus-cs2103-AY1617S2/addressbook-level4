@@ -36,12 +36,12 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     // @@author A0138909R
-    private void useCTRLZAccelerator() {
+    public void useCTRLZAccelerator() {
         this.guiRobot.push(KeyCode.CONTROL, KeyCode.Z);
         this.guiRobot.sleep(500);
     }
 
-    private void useCTRLYAccelerator() {
+    public void useCTRLYAccelerator() {
         this.guiRobot.push(KeyCode.CONTROL, KeyCode.Y);
         this.guiRobot.sleep(500);
     }

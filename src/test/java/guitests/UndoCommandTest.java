@@ -26,30 +26,35 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         TestTask taskToAdd = TypicalTestTasks.getFloatingTestTask();
         this.commandBox.runCommand(taskToAdd.getAddCommand());
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertUndoSuccess();
     }
 
     @Test
     public void undo_delete_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_DELETE_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertUndoSuccess();
     }
 
     @Test
     public void undo_edit_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_EDIT_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertUndoSuccess();
     }
 
     @Test
     public void undo_mark_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_MARK_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertUndoSuccess();
     }
 
     @Test
     public void undo_clear_success() throws Exception {
         this.commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
         this.commandBox.runCommand(MESSAGE_UNDO_COMMAND);
+        assertUndoSuccess();
     }
 
     @Test
@@ -59,6 +64,15 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertResultMessage(UndoCommand.MESSAGE_FAILURE);
     }
 
+    // @@author A0146809W
+    @Test
+    public void undo_clear_success_ControlZ() throws Exception {
+        this.commandBox.runCommand(MESSAGE_TEST_CLEAR_COMMAND);
+        this.mainMenu.useCTRLZAccelerator();
+        assertUndoSuccess();
+    }
+
+    // @@author A0139399J
     private void assertUndoSuccess() {
         // confirm the list now contains all previous tasks plus the new task
         assertAllPanelsMatch(this.expectedTasksList);
