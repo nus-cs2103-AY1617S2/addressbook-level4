@@ -72,7 +72,7 @@
 **Expected result:**
 
 * Task number 52 in the current list will be removed from the task list.
-* "Completed? Yes" will be displayed on the ResultDisplayBar.
+* "Task Completed!" will be displayed on the ResultDisplayBar.
 * This task is added to the completed task list.
 
 **Command:**
