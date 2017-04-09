@@ -21,7 +21,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Matt Ye](https://github.com/yefenyi)
 <img src="images/yefenyi.png" width="200"><br>
-Roles: Documentationem, Git Expert, Eclipse Expert<br>
+Roles: Documentation, Git Expert, Eclipse Expert<br>
 Responsibilities: Responsible for the quality of various project documents. Expert in Git and Eclipse.
 
  -----
