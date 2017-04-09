@@ -164,7 +164,7 @@ The sections below give more details on each component.
 
 **`UI`** consists of a `MainWindow` that consists of several parts (as shown in Figure 5). _For example: `CommandBox`, `ResultDisplay`, `TaskListPanel`, `StatusBarFooter` and `TaskCardHeader`._ All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-**`UI`** uses the `JavaFX UI` framework. The layout of these **`UI`** parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
+**`UI`** uses the `JavaFX UI` framework. The layout of **`UI`** parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/ezdo/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
  <br>
@@ -178,12 +178,12 @@ The sections below give more details on each component.
 * Responds to events raised from various parts of ezDo and updates **`UI`** accordingly.
 
 #### Design Choices
-**`UI`** component is designed in such as way that adding/removing a new part is simple, by adding/removing the `java` part with its corresponding `.fxml` file as well as updating the `MainWindow` class. Doing this will not affect the other parts of the **`UI`** component.
+**`UI`** is designed in such as way that adding/removing a new part is simple, by adding/removing the `java` part with its corresponding `.fxml` file as well as updating the `MainWindow` class. Doing this will not affect the other parts of **`UI`**.
 
 The Model-View-Controller pattern can be observed in ezDo.
-* Model: **` Model`** component stores and maintains all the data in ezDo.
-* View: The `.fxml` files are responsible for interacting with the user and displaying ezDo's data. **`UI`** component recieves data updates from **`Model`** component through events.
-* Controller: `CommandBox` act as 'Controllers' for **`UI`**. When the `CommandBox` recieves command input from the user, it requests **`Logic`** component to execute the command, which may cause changes in **`Model`** component.
+* Model: **` Model`** stores and maintains all the data in ezDo.
+* View: The `.fxml` files are responsible for interacting with the user and displaying ezDo's data. **`UI`** receives data updates from **`Model`** through events.
+* Controller: `CommandBox` act as 'Controllers' for **`UI`**. When the `CommandBox` recieves command input from the user, it requests **`Logic`** to execute the command, which may cause changes in **`Model`**.
 
 An Observer pattern can be observed in the `StatusBarFooter` class, for instance retrieving the latest ezDo storage file path and the last updated time.
 <br><br>
