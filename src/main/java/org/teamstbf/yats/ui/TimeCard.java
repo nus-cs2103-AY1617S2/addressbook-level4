@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+//@@author A0138952W
+
 public class TimeCard extends UiPart<Region> {
 
 	private static final String FXML = "TimeCard.fxml";

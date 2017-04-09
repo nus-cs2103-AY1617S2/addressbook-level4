@@ -27,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 
 //@@author A0138952W
+
 @SuppressWarnings("restriction")
 public class MultiViewPanel extends UiPart<Region> {
 
@@ -37,7 +38,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	private static final String FXML = "CalendarView.fxml";
 	private static final String FXMLPERSON = "PersonListCardDone.fxml";
 
-	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
+	private ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private ObservableList<ReadOnlyEvent> calendarList;
 
 	private final DatePickerSkin calendar;
@@ -56,6 +57,8 @@ public class MultiViewPanel extends UiPart<Region> {
 	private Button prevDate;
 	@FXML
 	private Button nextDate;
+	@FXML
+	private Button resetDate;
 	@FXML
 	private Label date;
 
@@ -159,7 +162,6 @@ public class MultiViewPanel extends UiPart<Region> {
 	// ================== Inner Methods for Calendar View ==================
 
 	private void updateCalendarList(LocalDate day) {
-		String[] data = new String[TASK_DETAILS];
 		model.updateCalendarFilteredListToShowStartTime(day);
 		calendarList = model.getCalendarFilteredTaskList();
 		if (calendarList.size() == 0) {
@@ -167,19 +169,28 @@ public class MultiViewPanel extends UiPart<Region> {
 		} else {
 			timeData.clear();
 			for (int i = 0; i < calendarList.size(); i++) {
-				ReadOnlyEvent event = calendarList.get(i);
-				data[TASK_TITLE] = event.getTitle().toString();
-				data[TASK_START] = event.getStartTime().toString();
-				data[TASK_END] = event.getEndTime().toString();
-				data[TASK_LOCATION] = event.getLocation().toString();
-				timeData.add(data);
-				String[] data1 = timeData.get(i);
-				int j = 0;
-				while (j != 4) {
-					System.out.println(data1[j]);
-					j++;
-				}
+				String[] data = new String[TASK_DETAILS];
+				updateTimeCard(data, i);
+				debugCalendarCell(i);
 			}
+		}
+	}
+
+	private void updateTimeCard(String[] data, int index) {
+		ReadOnlyEvent event = calendarList.get(index);
+		data[TASK_TITLE] = event.getTitle().toString();
+		data[TASK_START] = event.getStartTime().toString();
+		data[TASK_END] = event.getEndTime().toString();
+		data[TASK_LOCATION] = event.getLocation().toString();
+		timeData.add(index, data);
+	}
+
+	private void debugCalendarCell(int index) {
+		String[] data1 = timeData.get(index);
+		int j = 0;
+		while (j != 4) {
+			System.out.println(data1[j]);
+			j++;
 		}
 	}
 
