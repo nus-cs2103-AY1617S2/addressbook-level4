@@ -16,23 +16,24 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         TestEvent[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
 
         // delete the last in the list
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length;
         assertDeleteSuccess(targetIndex, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
 
         // delete from the middle of the list
-        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
 
         // invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
         // delete consecutive multiple from first
-        assertDeleteMultipleSuccess("delete 1 2", currentList);
+        assertDeleteMultipleSuccess("delete 1 2", currentList, td.cower);
     }
 
     /**
@@ -66,9 +67,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
     private void assertDeleteMultipleSuccess(String command, final TestEvent[] currentList, TestEvent... expectedHits) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        System.out.println(currentList.length);
-        System.out.println(expectedHits.length);
-        assertResultMessage("Deleted " + (currentList.length - expectedHits.length - 1) + " Tasks");
+        assertResultMessage("Deleted " + (currentList.length - expectedHits.length) + " Tasks");
     }
 
 }
