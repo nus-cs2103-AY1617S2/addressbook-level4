@@ -57,7 +57,7 @@ Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
 > To add floating tasks, simply do not specify the start and end timing paramters.
-> To add tasks with deadlines, simply specify the end timing. 
+> To add tasks with deadlines, simply specify the end timing.
 > To add recurring tasks, see section 2.2.1.
 > Tasks can have any number of tags (including 0).
 
@@ -114,7 +114,7 @@ Examples:
   Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
 
   > * Edits a specific instance of a recurring task
-  > * After editing this instance, the edited task will no longer be a part of the recurring sequence 
+  > * After editing this instance, the edited task will no longer be a part of the recurring sequence
 
 
   Examples:
@@ -182,7 +182,7 @@ Examples:
   > The index **must be a positive integer** 1, 2, 3, ...
   > Upon deleting an instance, the task list will be updated with the next recent occurrence.
     If there is no more occurrences, then the entire reccuring task will be removed from the list.
-  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to 
+  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
   calling `delete` on the same task.
 
   Example:
@@ -200,7 +200,7 @@ Format: `complete INDEX`
 > The index refers to the index number shown in the most recent listing.
 > The index **must be a positive integer** 1, 2, 3, ...
 > To complete a specific instance of a recurring task, follow the same syntax.
-> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.   
+> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.
 
 Examples:
 
@@ -219,9 +219,9 @@ Format: `prioritize INDEX PRIORITY_LEVEL`
 > Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
 > The index **must be a positive interger** 1, 2, 3,...
 > The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
-> Using `prioritize` on a recurring task will change the priority of ALL occurrences.  
-> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited 
-priority. 
+> Using `prioritize` on a recurring task will change the priority of ALL occurrences.
+> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
+priority.
 
 Examples:
 * `list`<br>
@@ -256,18 +256,18 @@ Format: `load PATH/TO/LOAD_LOCATION`
 
 ## 3. Notes on Recurring Tasks
 
-Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports 
-the implementation of such tasks. A few things to note about how to use this feature: 
+Recurring tasks are those that are meant to repeat after a specified amount of time. This application supports
+the implementation of such tasks. A few things to note about how to use this feature:
 
-* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters 
-as the start and end timings of when the overall recurring pattern should start/end respectively. 
+* The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters
+as the start and end timings of when the overall recurring pattern should start/end respectively.
   * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
-  every week from 11am - 12pm, the syntax of the respective command would be as follows: 
+  every week from 11am - 12pm, the syntax of the respective command would be as follows:
   `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
   * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
   * If this task ends before 60 days, then you can execute `delete INDEX` where INDEX specifies the index of the recurring task on
   the User Interface.
-  * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it 
+  * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
 
 ## 4. FAQ

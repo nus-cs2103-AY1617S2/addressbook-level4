@@ -57,6 +57,7 @@ public class CompleteCommand extends Command {
             e.printStackTrace();
         }
     }
+    //@@author
 
     //@@author A0164212U
     @Override
@@ -92,6 +93,7 @@ public class CompleteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
     }
+    //@@author
     //@@author A0113795Y
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToComplete}
@@ -112,8 +114,10 @@ public class CompleteCommand extends Command {
         updatedStartDate.setTiming(updatedStartDate.toString());
         updatedEndDate.setTiming(updatedEndDate.toString());
 
-        return new Task(updatedDescription, updatedPriority, updatedStartDate,
+        Task ret = new Task(updatedDescription, updatedPriority, updatedStartDate,
                 updatedEndDate, updatedTags, updatedRecurring, updatedFrequency);
+        ret.setComplete();
+        return ret;
     }
 
     /**

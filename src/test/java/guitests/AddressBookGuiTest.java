@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CalenderPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainGuiHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -26,6 +26,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.TaskList;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.storage.Storage;
 import seedu.task.testutil.TestUtil;
 import seedu.task.testutil.TypicalTestTasks;
 
@@ -54,8 +55,9 @@ public abstract class AddressBookGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
-    protected BrowserPanelHandle browserPanel;
+    protected CalenderPanelHandle calenderPanel;
     private Stage stage;
+    protected Storage storage;
 
     @BeforeClass
     public static void setupSpec() {
@@ -75,11 +77,12 @@ public abstract class AddressBookGuiTest {
             taskListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
-            browserPanel = mainGui.getBrowserPanel();
+            calenderPanel = mainGui.getCalenderPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
         testApp = (TestApp) FxToolkit.setupApplication(() -> new TestApp(this::getInitialData, getDataFileLocation()));
+        this.storage = testApp.getStorage();
         FxToolkit.showStage();
         while (!stage.isShowing())
             ;
@@ -111,8 +114,8 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask person, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndPerson(card, person));
+    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, task));
     }
 
     /**

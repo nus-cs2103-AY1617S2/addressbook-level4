@@ -3,17 +3,32 @@ package guitests;
 
 import static seedu.task.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
+import java.io.IOException;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import seedu.task.TestApp;
+import seedu.task.commons.core.Config;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
 public class DeleteCommandTest extends AddressBookGuiTest {
 
+    @Before
+    public void reset_config() throws IOException {
+        TestApp testApp = new TestApp();
+        Config config = testApp.initConfig(Config.DEFAULT_CONFIG_FILE);
+        ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+        commandBox.runCommand("clear");
+    }
+
     @Test
     public void delete() {
         //  valid-partition: Boundary value just above the boundary
         //  delete the first in the list
+        commandBox.runCommand("clear");
         TestTask[] currentList = {td.fiona , td.ida};
         for (int i = 0; i < currentList.length; i++) commandBox.runCommand(currentList[i].getAddCommand());
 

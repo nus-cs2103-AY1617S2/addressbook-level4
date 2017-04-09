@@ -1,64 +1,95 @@
-//package guitests;
-//import static org.junit.Assert.assertTrue;
-//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//
-//import org.junit.Test;
-//
-//import guitests.guihandles.PersonCardHandle;
-//import seedu.address.commons.core.Messages;
-//import seedu.address.logic.commands.EditCommand;
-//import seedu.address.model.person.Address;
+package guitests;
+import static org.junit.Assert.assertTrue;
+//import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+//import guitests.guihandles.TaskCardHandle;
+
+import guitests.guihandles.TaskCardHandle;
+//import seedu.task.commons.core.Messages;
+import seedu.task.logic.commands.EditCommand;
+import seedu.task.model.task.RecurringTaskOccurrence;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.Timing;
 //import seedu.task.model.task.Description;
-//import seedu.address.model.person.Name;
-//import seedu.address.model.person.Phone;
-//import seedu.address.model.tag.Tag;
-//import seedu.address.testutil.PersonBuilder;
-//import seedu.address.testutil.TestPerson;
-//// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
-//public class EditCommandTest extends AddressBookGuiTest {
-//
-//     // The list of persons in the person list panel is expected to match this list.
-//     // This list is updated with every successful call to assertEditSuccess().
-//     TestTask[] expectedPersonsList = td.getTypicalTasks();
-//
-//     @Test
-//     public void edit_allFieldsSpecified_success() throws Exception {
-//     String detailsToEdit = "Bobby p/91234567 e/bobby@gmail.com a/Block 123,
-//     Bobby Street 3 t/husband";
-//     int addressBookIndex = 1;
-//
-//     TestPerson editedPerson = new
-//     PersonBuilder().withName("Bobby").withPhone("91234567")
-//     .withEmail("bobby@gmail.com").withTags("husband").build();
-//
-//     assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
-//     editedPerson);
-//     }
-//
+//import seedu.task.model.tag.Tag;
+import seedu.task.testutil.TaskBuilder;
+import seedu.task.testutil.TestTask;
+
+// TODO: reduce GUI tests by transferring some tests to be covered by lower level tests.
+public class EditCommandTest extends AddressBookGuiTest {
+
+    @Test
+     public void editAllFieldsSpecifiedSuccessForNormalTask() throws Exception {
+        TestTask[] expectedTasksList = td.getTypicalTasks();
+        String detailsToEdit = "Bobby p/2 sd/08/04/2017 ed/09/04/2017 t/date";
+        int taskListIndex = 1;
+
+        commandBox.runCommand("clear");
+        commandBox.runCommand(expectedTasksList[0].getAddCommand());
+        TestTask editedTask = new
+                 TaskBuilder().withDescription("Bobby")
+                 .withPriority("2")
+                 .withOccurrences(new ArrayList<RecurringTaskOccurrence>())
+                 .withFrequency(null)
+                 .withStartTiming("08/04/2017")
+                 .withEndTiming("09/04/2017")
+                 .withTags("date")
+                 .build();
+
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit,
+                 editedTask, expectedTasksList);
+    }
+
+    @Test
+    public void editAllFieldsSepcifiedSuccessForRecurringTask() throws Exception {
+        String detailsToEdit = "Bobby p/2 sd/08/04/2017 ed/09/04/2017 t/date";
+        int taskListIndex = 1;
+        TestTask taskToEdit = td.recMonth;
+        commandBox.runCommand("clear");
+        commandBox.runCommand(taskToEdit.getAddCommand());
+        commandBox.runCommand("editthis 1 " + detailsToEdit);
+        Task task = new Task(taskToEdit.getDescription(), taskToEdit.getPriority(),
+                taskToEdit.getStartTiming(), taskToEdit.getEndTiming(), taskToEdit.getTags(),
+                taskToEdit.isRecurring(), taskToEdit.getFrequency());
+        ArrayList<RecurringTaskOccurrence> hardCoded = new ArrayList<RecurringTaskOccurrence>();
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/03/2017"), new Timing("05/03/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/05/2017"), new Timing("05/05/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/07/2017"), new Timing("05/07/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/09/2017"), new Timing("05/09/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/11/2017"), new Timing("05/11/2017")));
+        hardCoded.add(new RecurringTaskOccurrence(new Timing("01/01/2018"), new Timing("05/01/2018")));
+        task.getOccurrences().remove(0);
+        assertOccurrenceSame(hardCoded, task.getOccurrences());
+    }
+
 //     @Test
 //     public void edit_notAllFieldsSpecified_success() throws Exception {
-//     String detailsToEdit = "t/sweetie t/bestie";
-//     int addressBookIndex = 2;
+//         String detailsToEdit = "t/sweetie t/bestie";
+//         int addressBookIndex = 2;
 //
-//     TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-//     TestPerson editedPerson = new
-//     PersonBuilder(personToEdit).withTags("sweetie", "bestie").build();
+//         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+//         TestTask editedPerson = new
+//                 TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
 //
-//     assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
-//     editedPerson);
+//         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
+//                 editedPerson);
 //     }
 //
 //     @Test
 //     public void edit_clearTags_success() throws Exception {
-//     String detailsToEdit = "t/";
-//     int addressBookIndex = 2;
+//         String detailsToEdit = "t/";
+//         int addressBookIndex = 2;
 //
-//     TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-//     TestPerson editedPerson = new
-//     PersonBuilder(personToEdit).withTags().build();
+//         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+//         TestTask editedPerson = new
+//                 TaskBuilder(personToEdit).withTags().build();
 //
-//     assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
-//     editedPerson);
+//         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
+//                 editedPerson);
 //     }
 //
 //     @Test
@@ -69,9 +100,9 @@
 //     int filteredPersonListIndex = 1;
 //     int addressBookIndex = 5;
 //
-//     TestPerson personToEdit = expectedPersonsList[addressBookIndex - 1];
-//     TestPerson editedPerson = new
-//     PersonBuilder(personToEdit).withName("Belle").build();
+//     TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
+//     TestTask editedPerson = new
+//     TaskBuilder(personToEdit).withDescription("Belle").build();
 //
 //     assertEditSuccess(filteredPersonListIndex, addressBookIndex,
 //     detailsToEdit, editedPerson);
@@ -79,9 +110,9 @@
 //
 //     @Test
 //     public void edit_missingPersonIndex_failure() {
-//     commandBox.runCommand("edit Bobby");
-//     assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//     EditCommand.MESSAGE_USAGE));
+//         commandBox.runCommand("edit Bobby");
+//         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+//                 EditCommand.MESSAGE_USAGE));
 //     }
 //
 //     @Test
@@ -118,35 +149,42 @@
 //     + "a/123, Jurong West Ave 6, #08-111 t/friends");
 //     assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
 //     }
-//
-//     /**
-//     * Checks whether the edited person has the correct updated details.
-//     *
-//     * @param filteredPersonListIndex index of person to edit in filtered list
-//     * @param addressBookIndex index of person to edit in the address book.
-//     * Must refer to the same person as {@code filteredPersonListIndex}
-//     * @param detailsToEdit details to edit the person with as input to the
-//     edit command
-//     * @param editedPerson the expected person after editing the person's
-//     details
-//     */
-//     private void assertEditSuccess(int filteredPersonListIndex, int
-//     addressBookIndex,
-//     String detailsToEdit, TestPerson editedPerson) {
-//     commandBox.runCommand("edit " + filteredPersonListIndex + " " +
-//     detailsToEdit);
-//
-//     // confirm the new card contains the right data
-//     PersonCardHandle editedCard =
-//     personListPanel.navigateToPerson(editedPerson.getDescription().description);
-//     assertMatching(editedPerson, editedCard);
-//
-//     // confirm the list now contains all previous persons plus the person
-//     with updated details
-//     expectedPersonsList[addressBookIndex - 1] = editedPerson;
-//     assertTrue(personListPanel.isListMatching(expectedPersonsList));
-//     assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS,
-//     editedPerson));
-//     }
-//
-//}
+
+    /**
+    * Checks whether the edited person has the correct updated details.
+    *
+    * @param filteredTaskListIndex index of person to edit in filtered list
+    * @param taskListIndex index of person to edit in the address book.
+    * Must refer to the same person as {@code filteredPersonListIndex}
+    * @param detailsToEdit details to edit the person with as input to the
+    edit command
+    * @param editedPerson the expected person after editing the person's
+    details
+    */
+    private void assertEditSuccess(int filteredTaskListIndex, int
+             taskListIndex, String detailsToEdit, TestTask editedTask,
+             TestTask[] expectedTasksList) {
+        commandBox.runCommand("edit " + filteredTaskListIndex + " " +
+                 detailsToEdit);
+
+        // confirm the new card contains the right data
+        TaskCardHandle editedCard =
+                 taskListPanel.navigateToTask(editedTask.getDescription().description);
+        assertMatching(editedTask, editedCard);
+
+        // confirm the list now contains all previous persons plus the person
+        //with updated details
+        expectedTasksList[taskListIndex - 1] = editedTask;
+        assertTrue(taskListPanel.isListMatching(expectedTasksList));
+        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS,
+                 editedTask));
+    }
+
+    private void assertOccurrenceSame(ArrayList<RecurringTaskOccurrence> hardCoded
+            , ArrayList<RecurringTaskOccurrence> taskOccurrences) {
+        assertTrue(hardCoded.size() == taskOccurrences.size());
+        for (int i = 0; i < hardCoded.size(); i++) {
+            assertTrue(hardCoded.get(i).equals(taskOccurrences.get(i)));
+        }
+    }
+}

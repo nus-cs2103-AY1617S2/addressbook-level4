@@ -12,10 +12,12 @@ import seedu.task.commons.exceptions.DataConversionException;
 public class ConfigUtil {
 
     public static Optional<Config> readConfig(String configFilePath) throws DataConversionException {
+        System.out.println("reading " + configFilePath);
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
 
     public static void saveConfig(Config config, String configFilePath) throws IOException {
+        System.out.println("saving " + configFilePath);
         JsonUtil.saveJsonFile(config, configFilePath);
     }
 

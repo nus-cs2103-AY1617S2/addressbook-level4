@@ -43,6 +43,7 @@ public interface ReadOnlyTask {
 
     public void removeOccurrence(int i);
 
+    public void setOccurrences(ArrayList<RecurringTaskOccurrence> occurrences);
 
 
     /**
@@ -62,7 +63,8 @@ public interface ReadOnlyTask {
                 && other.getPriority().equals(this.getPriority())
                 && other.isComplete() == this.isComplete()
                 && other.getStartTiming().equals(this.getStartTiming())
-                && other.getEndTiming().equals(this.getEndTiming()));
+                && other.getEndTiming().equals(this.getEndTiming()))
+                && other.getOccurrenceIndexList().equals(this.getOccurrenceIndexList());
     }
 
     /**

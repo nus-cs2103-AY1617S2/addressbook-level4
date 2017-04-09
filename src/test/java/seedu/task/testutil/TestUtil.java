@@ -35,9 +35,11 @@ import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.Description;
 import seedu.task.model.task.Priority;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.RecurringFrequency;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.Timing;
-import seedu.task.storage.XmlSerializableAddressBook;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.storage.XmlSerializableTaskList;
 
 /**
  * A utility class for test cases.
@@ -70,27 +72,34 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
+    //@@author A0163559U
     private static Task[] getSampleTaskData() {
         try {
-            //CHECKSTYLE.OFF: LineLength
             return new Task[]{
-                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"),  new UniqueTagList(), false, null),
-                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("George Best"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null),
-                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"), new Timing("02/02/2017"), new UniqueTagList(), false, null)
+                new Task(new Description("Ali Muster"), new Priority("1"), new Timing("02/02/2017"),
+                        new Timing("02/02/2017"),  new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Boris Mueller"), new Priority("2"), new Timing("02/03/2017"),
+                        new Timing("02/03/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Carl Kurz"), new Priority("3"), new Timing("02/04/2017"),
+                        new Timing("02/04/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Daniel Meier"), new Priority("1"), new Timing("02/05/2017"),
+                        new Timing("02/05/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Elle Meyer"), new Priority("2"), new Timing("02/06/2017"),
+                        new Timing("02/06/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Fiona Kunz"), new Priority("2"), new Timing("02/07/2017"),
+                        new Timing("02/07/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("George Best"), new Priority("2"), new Timing("02/08/2017"),
+                        new Timing("02/08/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Hoon Meier"), new Priority("2"), new Timing("02/09/2017"),
+                        new Timing("02/09/2017"), new UniqueTagList(), false, new RecurringFrequency(null)),
+                new Task(new Description("Ida Mueller"), new Priority("2"), new Timing("02/02/2017"),
+                        new Timing("02/02/2017"), new UniqueTagList(), false, new RecurringFrequency(null))
             };
-            //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
-            assert false;
-            // not possible
             return null;
         }
     }
+    //@@author
 
 
     private static Tag[] getSampleTagData() {
@@ -126,7 +135,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -142,10 +151,36 @@ public class TestUtil {
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
-
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(new TaskList());
+    //@@author A0163559U
+    public static XmlSerializableTaskList generateSampleStorageTaskManager() {
+        TaskList tl = new TaskList();
+        for (Task t : SAMPLE_TASK_DATA) {
+            try {
+                tl.addTask(t);
+            } catch (DuplicateTaskException e) {
+                //continue
+            }
+        }
+        return new XmlSerializableTaskList(tl);
     }
+
+    //assists with load command test
+    public static XmlSerializableTaskList generateSampleStorageTaskManager(ArrayList<Task> tasks) {
+        TaskList tl = new TaskList();
+        for (Task t : tasks) {
+            try {
+                tl.addTask(t);
+            } catch (DuplicateTaskException e) {
+                //continue
+            }
+        }
+        return new XmlSerializableTaskList(tl);
+
+    // public static XmlSerializableTaskList generateSampleStorageAddressBook() {
+    //     return new XmlSerializableTaskList(new TaskList());
+    // possible test problem??!?
+    }
+    //@@author
 
     /**
      * Tweaks the {@code keyCodeCombination} to resolve the {@code KeyCode.SHORTCUT} to their
@@ -279,20 +314,20 @@ public class TestUtil {
     }
 
     /**
-     * Removes a subset from the list of persons.
-     * @param persons The list of persons
-     * @param personsToRemove The subset of persons.
-     * @return The modified persons after removal of the subset from persons.
+     * Removes a subset from the list of tasks.
+     * @param tasks The list of tasks
+     * @param tasksToRemove The subset of tasks.
+     * @return The modified tasks after removal of the subset from tasks.
      */
-    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... personsToRemove) {
+    public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
         List<TestTask> listOfTasks = asList(tasks);
-        listOfTasks.removeAll(asList(personsToRemove));
+        listOfTasks.removeAll(asList(tasksToRemove));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
 
     /**
-     * Returns a copy of the list with the person at specified index removed.
+     * Returns a copy of the list with the task at specified index removed.
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
@@ -301,26 +336,26 @@ public class TestUtil {
     }
 
     /**
-     * Replaces persons[i] with a person.
-     * @param persons The array of persons.
-     * @param person The replacement person
-     * @param index The index of the person to be replaced.
+     * Replaces tasks[i] with a task.
+     * @param tasks The array of tasks.
+     * @param task The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
-    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
-        persons[index] = person;
-        return persons;
+    public static TestTask[] replacePersonFromList(TestTask[] tasks, TestTask task, int index) {
+        tasks[index] = task;
+        return tasks;
     }
 
     /**
-     * Appends persons to the array of persons.
-     * @param persons A array of persons.
-     * @param personsToAdd The persons that are to be appended behind the original array.
-     * @return The modified array of persons.
+     * Appends tasks to the array of tasks.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
      */
-    public static TestTask[] addTasksToList(final TestTask[] persons, TestTask... personsToAdd) {
-        List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.addAll(asList(personsToAdd));
+    public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
+        List<TestTask> listOfPersons = asList(tasks);
+        listOfPersons.addAll(asList(tasksToAdd));
         return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
@@ -332,8 +367,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask person) {
-        return card.isSameTask(person);
+    public static boolean compareCardAndPerson(TaskCardHandle card, ReadOnlyTask task) {
+        return card.isSameTask(task);
     }
 
     public static Tag[] getTagList(String tags) {
