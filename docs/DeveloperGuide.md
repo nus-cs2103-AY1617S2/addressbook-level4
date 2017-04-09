@@ -401,11 +401,24 @@ Use case ends.
 
 **Extensions**
 
-1a. User adds time period for event which overlaps with time period of existing event
+1a. User adds time period for event with a starting time later than the ending time
 
 > 1a1. TaskList shows an error message and prompts user to edit time period of event
 > 1a2. User inputs task details <br>
 Steps 1a1-1a2 are repeated until the time period of event entered is valid
+  Use case resumes at step 2
+  
+1b. User adds a task with the same details as an existing task
+
+> 1b1. TaskList shows an error message and prompts user to edit details of the task
+> 1b2. User inputs task detail <br>
+Steps 1b1-1b2 are repeated until the details of the task entered is not a duplicate of an existing task
+  Use case resumes at step 2
+
+1c. User adds a task with an invalid tag that is not alphanumeric
+> 1c1. TaskList shows an error message and prompts user to edit the tags of the task
+> 1c2. User inputs task detail <br>
+Steps 1c1-1c2 are repeated until the tags entered are alphanumeric.
   Use case resumes at step 2
 
 #### Use case: Delete task
@@ -413,15 +426,8 @@ Steps 1a1-1a2 are repeated until the time period of event entered is valid
 **MSS**
 
 1. User selects task to delete
-2. TaskList asks for user confirmation
-3. User confirms deletion
-4. TaskList deletes task and shows updated task list <br>
+2. TaskList deletes task and shows updated task list <br>
 Use case ends.
-
-**Extensions**
-
-3a. User cancels deletion
-> Use case ends
 
 #### Use case: Mark task
 
@@ -450,12 +456,18 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-
-3a. New time period of event added overlaps with time period of existing event
+3a. Time period added for event has a starting time later than the ending time
 
 > 3a1. TaskList shows an error message and prompts user to edit time period of event
 > 3a2. User inputs task details <br>
 Steps 3a1-3a2 are repeated until the time period of event entered is valid
+  Use case resumes at step 4
+
+3b. Tags entered has an invalid tag that is not alphanumeric
+
+> 3b1. TaskList shows an error message and prompts user to edit the tags of the task
+> 3b2. User inputs task details <br>
+Steps 3b1-3b2 are repeated until the tags entered are alphanumeric.
   Use case resumes at step 4
 
 #### Use case: View by deadlines
@@ -463,20 +475,17 @@ Steps 3a1-3a2 are repeated until the time period of event entered is valid
 **MSS**
 
 1. User selects time filter to filter the deadlines of the task list by
-2. TaskList displays tasks that are due within the timeline specified by the filter <br>
+2. TaskList displays tasks that are due within the time line specified by the filter <br>
   Use case ends.
 
-#### Use case: Change UI layout
+**Extensions**
 
-**MSS**
+1a. User adds time period for event with a starting time later than the ending time
 
-1. User requests to change UI layout
-2. TaskList shows UI layout features that can be customised
-3. User edits UI layout features
-4. TaskList shows a preview and asks for confirmation
-5. User confirms changes to UI layout
-6. TaskList returns to user’s previous screen <br>
-Use case ends.
+> 1a1. TaskList shows an error message and prompts user to edit time period of event
+> 1a2. User inputs task details <br>
+Steps 1a1-1a2 are repeated until the time period of event entered is valid
+  Use case resumes at step 2
 
 #### Use case: Add default keywords
 
@@ -502,7 +511,7 @@ Steps 5a1-5a2 are repeated until the keyword entered is valid
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be portable and not require any installer to work 
+2. Should be portable and not require any installer to work
 3. Should be desktop app that does not require any Internet connection to use
 4. Should not require a login username and password but can be launched conveniently
 5. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.

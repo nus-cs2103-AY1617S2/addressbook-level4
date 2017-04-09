@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# Watodo - User Guide
 
 By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -19,7 +19,7 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 1. Download the latest `taskmanager.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
-   > <img src="images/UiPrototype.png" width="600">
+   > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
@@ -43,18 +43,28 @@ By : `CS2103JAN2017-T16-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &nbsp;&
 > **DATETIME Format**
 >
 > Watodo uses the external library Natty Date Parser to parse date and time options.
+> The general format is DAY/DATE and/or time
+
 > Some examples of the acceptable formats are:
 > * `2017-02-23` (yyyy-mm-dd) <br>
 > * `04/05` (mm/dd) <br>
+> * `monday` <br>
+> * `tues` <br>
 > * `today` <br>
 > * `tomorrow` or `tmr` <br>
 > * `next tues` <br>
 > * `3 weeks from now` <br>
 > * `9pm` or `21:00` <br>
 > * `noon` <br>
+For a full list of acceptable formats, please refer to http://natty.joestelmach.com/doc.jsp
 
-> * if only the date/day is provided, the time will be default set as to 11.59 pm
+> * Important notes:
+> * if only the date/day is provided, the time will be default set as 11.59 pm
 > * if only the time is provided, the date/day will be default set as the current date/day
+> * when inputing in date format, ONLY mm/dd is allowed and not dd/mm, and range for dd and mm must be valid
+(Exception is when you type dd month where month is in words, eg. `5 may`, but the dd must be valid ie. cannot be `32`
+> * if multiple dates are given, only the first date will be captured
+> * Watodo captures time to the precision of minutes
 
 ### 2.1. Viewing help : `help`
 
@@ -62,7 +72,7 @@ Format: `help`
 
 > A help window will be opened showing the user guide.
 > Help for each individual command is also shown when you type the command word only
- or when the argument format is invalid. 
+ or when the argument format is invalid.
 
 ### 2.2. Adding a task : `add`
 
@@ -80,7 +90,7 @@ Format: `add DESCRIPTION [#TAG]...`
 Examples:
 
 * `add read Lord of The Rings #personal`
-* `add #noTime cut hair
+* `add #noTime #noMoney cut hair`
 
 ### b) Deadline task
 
@@ -91,6 +101,8 @@ Examples:
 
 * `add prepare meeting slides by/ tomorrow 9am #impt #work`
 * `add send budget proposal on/ Thurs noon to boss #project`
+* `add #CS demo on/13 apr 4pm #shag for v0.5`
+* `add by/10pm eat dinner #yum`
 
 ### c) Event task
 
@@ -101,6 +113,7 @@ Examples:
 
 * `add  from/next mon to/ 05/16 attend skills upgrading workshop`
 * `add meeting at board room 4 from/ 10am to/ 11am #project #meetings`
+* `add #mug #school reading week from/next mon to/next fri catch up with webcasts`
 
 ### 2.3. Listing tasks by type : `list LIST_TYPE`
 
@@ -119,19 +132,30 @@ Shows a list of all tasks with deadlines.<br>
 Format: `list event`<br>
 Shows a list of all events.<br>
 
+Format: `list #TAG`<br>
+Shows a list of tasks labeled with the given TAG.<br>
+
+Format: `list undone`<br>
+Shows a list of all tasks that have been not been completed.<br>
+
+Format: `list done`<br>
+Shows a list of all tasks that have been marked as completed.<br>
+
+Format: `list by/ DATETIME` <br>
+     OR `list on/ DATETIME`
+Shows a list of tasks scheduled before the specified dates.<br>
+
+Examples:
+* `list by/ Sunday`
+* `list on/ 5/4`
+
 Format: `list from/ START_DATETIME to/ END_DATETIME` <br>
-     OR `list by/ DATETIME`
+     OR `list on/ DATETIME to/ END_DATETIME`
 Shows a list of tasks scheduled within the specified range of dates.<br>
 
 Examples:
 * `list from/ tomorrow to/ Sunday`
-* `list by/ Sunday`
-
-Format: `list #TAG`<br>
-Shows a list of tasks labeled with the given TAG.<br>
-
-Format: `list done`<br>
-Shows a list of all tasks that have been marked as completed.<br>
+* `list on/ Sunday to/ 05/16`
 
 ### 2.4. Finding all tasks containing any keyword in their description: `find`
 
@@ -148,7 +172,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Examples:
 
 * `find write test case`<br>
-  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`, 
+  Returns any tasks with `write`, `test`, `case`, `testing`, `cases`,
   `write case`, and any combination of the individual words as part of its description (case insensitive)
 
 ### 2.5. Editing a task : `edit`
@@ -247,6 +271,7 @@ Undo the previous command and restore the data to one step before.<br>
 Format: `undo`
 
 > Supported commands to undo: `add` `clear` `delete` `edit` `mark` `unmark`
+> Undoing 'delete' will replace the deleted task at the bottom of the list
 
 ### 2.10. Redoing previous step : `redo`
 
@@ -254,6 +279,7 @@ Redo the previous command and restore the data to one step before. <br>
 Fromat: `redo`
 
 > Supported commands to redo: `add` `clear` `delete` `edit` `mark` `unmark`
+> Redoing an add undo will add back the task to the bottom of the list
 
 ### 2.11. Clearing all entries : `clear`
 
@@ -296,6 +322,9 @@ Below is a list of shortcut keys for some of the above commands:
 > * mark: `m`, `check`
 > * unmark: `um`, `uncheck`
 > * find: `f`, `search`
+> * undo: `u`
+> * redo: `r`
+> * select: `s`
 
 ### 2.16 Customize alternative commands: `shortcut`
 
@@ -305,11 +334,13 @@ Format: `shortcut + COMMAND_WORD SHORTCUT_KEY` (adds SHORTCUT_KEY for COMMARD_WO
 
 > SHORTCUT_KEY can be any character except whitespace.
 > Unfortunately, special keys (eg. F1, SHIFT, CTRL etc) are not supported. :(
+> You cannot delete any of the default command words.
+> Shortcut keys must be unique. Eg. `a` cannot be a shortcut for both `add` and `edit`
 
 Examples:
-* shortcut + add @@
-* shortcut + undo z
-* shortcut - undo z
+* `shortcut + add @@`
+* `shortcut + undo z`
+* `shortcut - undo z`
 
 ### 2.17 Viewing all the shortcut keys: `viewshortcuts`
 
@@ -347,11 +378,13 @@ There is no need to save manually.
 > * `list float`<br>
 > * `list deadline`<br>
 > * `list event`<br>
-> * `list day`<br>
-> * `list week`<br>
-> * `list month`<br>
 > * `list #TAG`<br>
+> * `list undone`<br>
 > * `list done`<br>
+> * `list by/ DATETIME`<br>
+> * `list on/ DATETIME`<br>
+> * `list from/ START_DATETIME to/ END_DATETIME`<br>
+> * `list on/ START_DATETIME to/ END_DATETIME`<br>
 
 * **Find** : `find KEYWORD [MORE_KEYWORDS]...` <br>
 

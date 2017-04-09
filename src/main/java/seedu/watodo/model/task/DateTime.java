@@ -51,8 +51,7 @@ public class DateTime {
 
     /**
      * Converts the given string into a standard Date format of year, month, date, hour, minutes and seconds.
-     * Precondition: the String dat
-     * eTime has already been checked to be valid
+     * Precondition: the String dateTime has already been checked to be valid
      */
     private Calendar convertToCalendarFormat(String dateString) {
         List<DateGroup> parsedDateGroups = DATE_TIME_PARSER.parse(dateString);
@@ -77,6 +76,12 @@ public class DateTime {
     /* Checks if the current DateTime is at a later date than another given DateTime */
     public boolean isLater(DateTime other) {
         return this.dateTime.after(other.dateTime);
+    }
+
+
+    /* Checks if the current DateTime is at a later date than another given Date */
+    public boolean isLater(Date currDate) {
+        return this.dateTime.getTime().after(currDate);
     }
 
     @Override

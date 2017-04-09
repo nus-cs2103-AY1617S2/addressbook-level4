@@ -170,15 +170,13 @@ public class ListCommandParser {
  */
 public class ListDateCommandParser {
 
-    private DateTimeParser dateTimeParser;
-
     /**
      * Parses the given {@code String} of arguments in the context of the
      * ListDateCommand and returns a ListDateCommand object for execution.
      */
     public Command parse(String args) {
         try {
-            dateTimeParser = new DateTimeParser();
+            DateTimeParser dateTimeParser = new DateTimeParser();
             dateTimeParser.parse(args);
             return new ListDateCommand(dateTimeParser.getStartDate(), dateTimeParser.getEndDate());
         } catch (NoSuchElementException nsee) {

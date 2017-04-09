@@ -71,6 +71,8 @@ public interface Model {
 
     UnmodifiableObservableList<ReadOnlyTask> getImportantTaskList();
 
-    //@@author
+    //@@author A0143076J
+    /** Updates each of the tasks' status to Overdue if current Date is later than their endDates */
+    void updateTasksStatus();
 
 }

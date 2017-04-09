@@ -15,11 +15,13 @@ public class DateTimeTest {
         //invalid dateTime
         assertFalse(DateTime.isValidDateTime("")); // empty string
         assertFalse(DateTime.isValidDateTime(" ")); // spaces only
-        //TODO Add in user guide that datetime must be one valid, multiple datetime will give
+        assertFalse(DateTime.isValidDateTime("thrs")); // wrong spelling, should be thurs
+        //natty accepts this and gives a weird date, going to put it in the user guide
+        //assertFalse(DateTime.isValidDateTime("31/4")); // dd/mm instead of mm/dd
+
+        //natty accepts multiple datetimes as valid, but watodo will only takethe first date as input
         //assertFalse(DateTime.isValidDateTime("Wed or Thurs")); // more than one date
         //assertFalse(DateTime.isValidDateTime("may 6 and may 8 and jul 30 or jul 4"));
-        assertFalse(DateTime.isValidDateTime("thrs")); // wrong spelling, should be thurs
-        //assertFalse(DateTime.isValidDateTime("31/4")); // dd/mm instead of mm/dd
 
         // valid dateTime
         //days of the week
@@ -43,7 +45,6 @@ public class DateTimeTest {
         assertTrue(DateTime.isValidDateTime("3/4/17"));
         assertTrue(DateTime.isValidDateTime("may 30"));
         assertTrue(DateTime.isValidDateTime("may 31")); //boundary value analysis
-        //assertFalse(DateTime.isValidDateTime("may 32"));
 
         //relative dates
         assertTrue(DateTime.isValidDateTime("today"));
