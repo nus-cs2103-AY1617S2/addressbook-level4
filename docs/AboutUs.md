@@ -49,7 +49,7 @@ We are a team based in the [School of Computing, National University of Singapor
         * [RemoveDeadline Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#35-removing-deadline-from-a-task-removedeadline-rd) <br>
         * [Undo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-undoing-the-latest-command--undo-u) <br>
         * [Redo Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-redoing-the-latest-command--redo-r) <br>
-        * [Find Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#33-finding-a-task-find-f-search)
+        * [Find Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#33-finding-a-task-find-f-search)<br>
         * [Flexibility in Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md)  <br>
 * Code written: [[functional code](../collated/main/A0139926R.md)][[test code](../collated/test/A0139926R.md)]  <br>
 * Other major contributions:<br>
