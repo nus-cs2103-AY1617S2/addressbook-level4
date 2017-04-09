@@ -61,10 +61,6 @@ public class DateTimeParser {
         //checks if natty parses all the input, if it does not, it means there is invalid input after the valid time
         //or another date/time
         if (!dateGroup.getFullText().equals(dateGroup.getText())) {
-
-            System.out.println("Start" + dateGroup.getFullText() + "End");
-            System.out.println("Start" + dateGroup.getText() + "End");
-
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }
 
@@ -82,9 +78,9 @@ public class DateTimeParser {
     private static String switchDayToMonth(String input) {
         Pattern dayMonthSwitchPattern = Pattern.compile(DAY_MONTH_SWITCH_REGEX);
         Matcher matcher = dayMonthSwitchPattern.matcher(input);
-        matcher.matches();
+
+        matcher.matches(); //to ensure output for matcher.group()
 
         return matcher.group(2) + matcher.group(1) + matcher.group(3);
-
     }
 }
