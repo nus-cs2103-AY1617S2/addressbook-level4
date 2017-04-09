@@ -81,6 +81,7 @@ public class LogicManagerTest {
     private Model model;
     private Logic logic;
     private HistoryManager history;
+    private TestDataHelper helper;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -119,7 +120,7 @@ public class LogicManagerTest {
         logic.init(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         // @@author
         EventsCenter.getInstance().registerHandler(this);
-
+        helper = new TestDataHelper();
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
                                                                           // saved
                                                                           // assumed
@@ -259,7 +260,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t1();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -274,7 +274,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful_with_inferred_end_time() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t2();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -288,7 +287,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful_with_inferred_start_time() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t3();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -303,7 +301,6 @@ public class LogicManagerTest {
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t1();
 
         // setup starting state
@@ -317,7 +314,6 @@ public class LogicManagerTest {
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
         TaskManager expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
@@ -384,8 +380,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
+    public void execute_select_jumpsToCorrectTask() throws Exception {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -434,7 +429,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -459,7 +453,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeRemoveRemovesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -483,7 +476,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditDuplicateTaskMessageShown() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithStartDate("01/03/2017");
         Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
         Task tTarget3 = helper.generateTaskWithStartDate("03/03/2017");
