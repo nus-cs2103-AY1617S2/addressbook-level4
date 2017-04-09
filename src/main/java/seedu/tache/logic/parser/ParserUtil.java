@@ -8,6 +8,9 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
+import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
 
 import java.util.Collection;
 import java.util.Deque;
@@ -25,12 +28,6 @@ import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
-
-
-import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_START;
-import static seedu.tache.logic.parser.CliSyntax.DATE_IDENTIFIER_END;
-import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_WEEKLY;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
