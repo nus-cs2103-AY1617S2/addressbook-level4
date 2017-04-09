@@ -13,7 +13,7 @@ import seedu.task.model.task.Group;
 import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.UniqueTaskList.DuplicatePersonException;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
 //@@author A0163848R
 public class SampleDataUtil {
@@ -61,7 +61,7 @@ public class SampleDataUtil {
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             try {
                 sampleAB.addPerson(generateRandomTask());
-            } catch (DuplicatePersonException e) {
+            } catch (DuplicateTaskException e) {
                 i--;
                 e.printStackTrace();
             }

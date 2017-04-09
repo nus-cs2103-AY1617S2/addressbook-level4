@@ -26,52 +26,52 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     //@@author A0164466X
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked task as incomplete: %1$s";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task as incomplete: %1$s";
     //@@author
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task is already incomplete.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task is already incomplete.";
 
-    private final int filteredPersonListIndex;
+    private final int filteredTaskListIndex;
 
     /**
-     * @param filteredPersonListIndex the index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param filteredTaskListIndex the index of the task in the filtered task list to edit
+     * @param editTaskDescriptor details to edit the task with
      */
-    public UnmarkCommand(int filteredPersonListIndex) {
-        assert filteredPersonListIndex > 0;
+    public UnmarkCommand(int filteredTaskListIndex) {
+        assert filteredTaskListIndex > 0;
 
-        // converts filteredPersonListIndex from one-based to zero-based.
-        this.filteredPersonListIndex = filteredPersonListIndex - 1;
+        // converts filteredTaskListIndex from one-based to zero-based.
+        this.filteredTaskListIndex = filteredTaskListIndex - 1;
     }
 
     @Override
     public CommandResult execute() throws CommandException {
-        List<ReadOnlyTask> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (filteredPersonListIndex >= lastShownList.size()) {
+        if (filteredTaskListIndex >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask personToEdit = lastShownList.get(filteredPersonListIndex);
-        ReadOnlyTask editedPerson = createUnmarkedPerson(personToEdit);
+        ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
+        ReadOnlyTask editedTask = createUnmarkedTask(taskToEdit);
 
         try {
-            model.updatePerson(filteredPersonListIndex, editedPerson);
-        } catch (UniqueTaskList.DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            model.updateTask(filteredTaskListIndex, editedTask);
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.updateFilteredListToShowAll();
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToEdit));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited to be complete.
      */
-    private static ReadOnlyTask createUnmarkedPerson(ReadOnlyTask personToEdit) {
-        assert personToEdit != null;
+    private static ReadOnlyTask createUnmarkedTask(ReadOnlyTask taskToEdit) {
+        assert taskToEdit != null;
 
         UniqueTagList updatedTags =
-                personToEdit
+                taskToEdit
                 .getTags()
                 .except(UniqueTagList.build(
                         Tag.TAG_COMPLETE,
@@ -85,7 +85,7 @@ public class UnmarkCommand extends Command {
             e.printStackTrace();
         }
 
-        return new Task(personToEdit.getName(),
-                personToEdit.getStartDate(), personToEdit.getEndDate(), personToEdit.getGroup(), updatedTags);
+        return new Task(taskToEdit.getName(),
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getGroup(), updatedTags);
     }
 }
