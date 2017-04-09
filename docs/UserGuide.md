@@ -197,8 +197,8 @@ For advanced users: **`l`** `<filter>` <br>
 
 Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.<br>
-> Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`. 
+Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
 
 > **`find`** can also be used to look for dates, time and tags<br>
 
@@ -235,15 +235,14 @@ An example of a task you might want to _edit_: <br>
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br><br>
 Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
-You can edit more task details for your task concurrently using the following format:<br>
+You can edit more task details for your task concurrently using the above format.<br>
 E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 
-~~~
-**Special Note**
-'<task_detail>' can be used interchangeably with no special characters or initials for better convenience 
-E.g. 'start_date' can be replaced with 'startdate' or 'sd'
-'recur_interval' can be replaced with 'recurinterval' or 'ri'
-~~~
+>**Special Note**<br>
+>`<task_detail>` can be used interchangeably with no special characters or initials for better convenience <br>
+>E.g. `start_date` can be replaced with `startdate` or `sd`<br>
+>`recur_interval` can be replaced with `recurinterval` or `ri`<br>
+
 
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
