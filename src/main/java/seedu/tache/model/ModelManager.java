@@ -135,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Filtered Task List Accessors =============================================================
-    //@@author A0133925U
+    //@@author A0139925U
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         ObservableList<ReadOnlyTask> filteredTasksWithRecurringTasks = populateRecurringDatesAsTask();
