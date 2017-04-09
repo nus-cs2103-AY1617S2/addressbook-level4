@@ -41,7 +41,7 @@ public class AddCommand extends Command {
 
     private final Todo toAdd;
 
-    //@@author A0163720M, A0165043M
+    //@@author A0163720M
     /**
      * Creates an AddCommand using raw values to create a todo with start time and end time (event)
      *
@@ -56,6 +56,7 @@ public class AddCommand extends Command {
                 tagSet.add(new Tag(tagName));
             }
 
+            //@@author A0165043M
             // Check for existence of each of the fields
             Name name = (todo != null) ? new Name(todo) : null;
             Date start;
@@ -118,6 +119,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TODO);
         }
     }
+    //@@author
 
     public Date getTodayMidnightPlusDays(int days) {
         Date dt = new Date();
