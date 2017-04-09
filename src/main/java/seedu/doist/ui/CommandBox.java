@@ -95,14 +95,17 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyPressedInNavigationMode(KeyEvent event) {
         event.consume();
         if (event.getCode() == KeyCode.J) {
+        	// press J to move down by one
             if (currentIndex + 1 < logic.getFilteredTaskList().size()) {
                 currentIndex++;
             }
         } else if (event.getCode() == KeyCode.K) {
+        	// press K to move up by one
             if (currentIndex - 1 >= 0) {
                 currentIndex--;
             }
         } else if (event.getCode() == KeyCode.ESCAPE) {
+        	// press ESCAPE to toggle to EDITING mode and remove highlight
             currentIndex = -1;
             turnOnEditingMode();
         }
@@ -127,10 +130,10 @@ public class CommandBox extends UiPart<Region> {
         } else if (event.getCode() == KeyCode.TAB) {  // auto complete
             event.consume();
             completeWithSelectedSuggestion();
-        } else if (undoKeys.match(event)) {  // use control+z and control+y to execute undo and re-do operation
+        } else if (undoKeys.match(event)) {  // use control+z to execute undo operation
             event.consume();
             handleCtrlZKeyCombination();
-        } else if (redoKeys.match(event)) {
+        } else if (redoKeys.match(event)) {  // use control+y to execute re-do operaton
             event.consume();
             handleCtrlYKeyCombination();
         }
