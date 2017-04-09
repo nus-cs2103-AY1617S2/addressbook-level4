@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.ReadOnlyTask;
 
 //@@author A0164032U
@@ -48,6 +50,15 @@ public class TaskCard extends UiPart<Region> {
             setStyleToIndicateEndDatePassed();
         }
 
+        try {
+            if (person.getTags().contains(new Tag(Tag.TAG_COMPLETE))) {
+                setStyleToIndicateComplete();
+            } else {
+                setStyleToIndicateIncomplete();
+            }
+        } catch (IllegalValueException e) {
+        }
+
         cardPane.autosize();
     }
 
@@ -56,5 +67,13 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setStyleToIndicateEndDatePassed() {
         cardPane.getStyleClass().add(Ui.ERROR_STYLE_CLASS);
+    }
+
+    private void setStyleToIndicateComplete() {
+        cardPane.getStyleClass().add(Ui.COMPLETE_STYLE_CLASS);
+    }
+
+    private void setStyleToIndicateIncomplete() {
+        cardPane.getStyleClass().add(Ui.INCOMPLETE_STYLE_CLASS);
     }
 }
