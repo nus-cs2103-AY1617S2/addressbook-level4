@@ -23,7 +23,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 #### Acknowledgements
 
-This app is developed from AddressBook Level 4 found [here](https://github.com/nus-cs2103-AY1617S2/addressbook-level4). In addition, we made use of the following external libraries in Opus:
+This app is developed from AddressBook Level 4 found [here](https://github.com/nus-cs2103-AY1617S2/addressbook-level4) and the SE-EDU development team page [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/). In addition, we made use of the following external libraries in Opus:
 * [ControlsFx](http://fxexperience.com/controlsfx/)
 * [Guava](https://github.com/google/guava)
 * [Jackson](https://github.com/FasterXML/jackson)
