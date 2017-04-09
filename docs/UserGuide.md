@@ -7,25 +7,22 @@
 2. [Quick Start](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#2-quick-start) <br>
 3. [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) <br>
    3.1.  [Viewing Help](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#31-viewing-help--help) <br>
-   3.2.  [Adding a Floating Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#32-adding-a-floating-task-add)  <br>
-   3.3.  [Adding a Deadline Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#33-adding-a-deadline-task-add) <br>
-   3.4.  [Adding an Event Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#34-adding-an-event-task-add)<br>
-   3.5.  [Adding a Priority Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#35-adding-a-priority-taskevent--add) <br>
-   3.6.  [Finding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#36-finding-a-task-find)  <br>
-   3.7.  [Editing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#37-editing-a-task-edit) <br>
-   3.8.  [Deleting a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-deleting-a-task--delete) <br>
-   3.9.  [Completing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-completing-a-task--done) <br>
-   3.10. [Listing All Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-listing-all-tasks--list) <br>
-   3.11. [Listing Today’s Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#311-listing-today-tasks--listday)<br>
-   3.12. [Listing Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#312-listing-proirity-tasks--list)<br>
-   3.13. [Listing Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#313-listing-completed-tasks--listdone) <br>
-   3.14. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#314-undoing-the-latest-command--undo)<br>
-   3.15. [Redoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-undoing-the-latest-command--redo)<br>
-   3.16. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-saving-the-data-to-another-folder--save)<br>
-   3.17. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-changing-the-default-storage-folder--setting)<br>
-   3.18. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-using-data-from-another-folder--use)<br>
-   3.19. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-clearing-all-entries--clear)<br>
-   3.20. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#320-exiting-the-program--exit)<br>
+   3.2.  [Adding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#32-adding-a-task-add-a-)  <br>
+   3.3.  [Finding a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#36-finding-a-task-find-f-search)  <br>
+   3.4.  [Editing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#37-editing-a-task-edit) <br>
+   3.5.  [Deleting a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#38-deleting-a-task--delete) <br>
+   3.6.  [Completing a Task](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#39-completing-a-task--done) <br>
+   3.7. [Listing All Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#310-listing-all-tasks--list) <br>
+   3.8. [Listing Today’s Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#311-listing-today-tasks--listtoday)<br>
+   3.9. [Listing Priority Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#312-listing-proirity-tasks--list)<br>
+   3.10. [Listing Completed Tasks](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#313-listing-completed-tasks--listdone) <br>
+   3.11. [Undoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#314-undoing-the-latest-command--undo-u)<br>
+   3.12. [Redoing the Latest Command](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#315-redoing-the-latest-command--redo-r)<br>
+   3.13. [Saving Data to Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#316-saving-the-data-to-another-folder--save)<br>
+   3.14. [Changing Default Storage Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#317-changing-the-default-storage-folder--setting)<br>
+   3.15. [Using Data from Another Folder](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#318-using-data-from-another-folder--use)<br>
+   3.16. [Clearing all Entries](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#319-clearing-all-entries--clear)<br>
+   3.17. [Exiting the Program](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#320-exiting-the-program--exit)<br>
 4. [FAQ](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#4-faq)<br>
 5. [Command Summary](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#5-command-summary)<br>
 &nbsp;
@@ -192,7 +189,7 @@ Examples:
 * `add Open House from:5 Nov 11:00am to: 6 Nov 11:00pm p/low`
 
 
-### 3.6 Finding a Task: `find`, `f`, `search`
+### 3.3. Finding a Task: `find`, `f`, `search`
 You may not want to search through your entire list just to find a certain task. You can easily do so by using the find command, then put in any details about your task.
 
 Format:<br>
@@ -219,7 +216,7 @@ Examples:
 * `find tmr`
 
 
-### 3.7 Editing a Task: `edit`
+### 3.4. Editing a Task: `edit`
 Sometimes you may want to change the details of a certain task you have. No need to worry! You can modify a certain task by typing the edit command.
 
 Format:<br>
@@ -254,7 +251,22 @@ What it does: Edit your task schedule start date to next week
 What it does: Edit your task schedule end date to next month
 
 
-### 3.8 Deleting a Task : `delete`
+### 3.4. Removing Deadline from a Task: `removedeadline`, `rd`
+What happens when there is changes to your deadline/schedule but still unsure of the confirmed date? You can remove the 
+deadline/schedule by using the removedeadline command.
+
+Format:<br>
+`removedeadline <INDEX>`
+
+```
+Things To Note:
+> The task at the specified INDEX will have its deadline/schedule removed.
+> The index refers to the index number shown in the most recent listing.
+```
+
+
+
+### 3.5. Deleting a Task : `delete`, `d`, `-`
 There are some tasks that will never be completed and are irrelevant to keep. You can delete these tasks from your list by using the delete command.
 
 Format:<br>
@@ -270,7 +282,7 @@ Examples:
 * `delete 1`
 
 
-### 3.9 Completing a Task : `done`
+### 3.6. Completing a Task : `done`
 Completed a task? Good for you! You can mark the task as done by typing in the done command. This will move the task to your completed list.
 
 Format:<br>
@@ -289,7 +301,7 @@ Examples:
 * `done 2`
 
 
-### 3.10. Listing all Tasks : `list`
+### 3.7. Listing all Tasks : `list`
 Want to view a list of all your tasks? Use the command list to view all your tasks in TypeTask. <br>
 
 Format:<br>
@@ -302,7 +314,7 @@ Things To Note:
 > This list will be sorted by Priority, Date and Time.
 ```
 
-### 3.11. Listing Today Tasks : `listtoday`
+### 3.8. Listing Today Tasks : `listtoday`
 By default, you will have a view of all of today’s tasks when the application first starts. However, other commands may have changed the list you’re seeing. To return to the list of today’s tasks, use the  listday command.
 
 Format:<br>
@@ -316,7 +328,7 @@ add a new floating task or task that is due today.
 ```
 
 
-### 3.12. Listing Proirity Tasks : `list*`
+### 3.9. Listing Proirity Tasks : `list*`
 Want to focus on your urgent tasks only? You can use the command list* to see a list of all your important tasks.
 
 Format:<br>
@@ -330,14 +342,14 @@ when you add a new task or event with priority.
 ```
 
 
-### 3.13. Listing Completed Tasks : `listdone`
+### 3.10. Listing Completed Tasks : `listdone`
 To review what you have done (and feel better about yourself!), you may want to look at all your completed tasks. You can do so by using the command listdone to show all of your completed tasks in TypeTask.<br>
 
 Format:<br>
 `listdone`<br>
 
 
-### 3.14. Undoing the Latest Command : `undo`, `u`
+### 3.11. Undoing the Latest Command : `undo`, `u`
 Typed in the wrong command and submitted an operation you do not want? Fret not! You can use the undo command to save the hassle of modifying your recent operation. <br>
 
 Format:<br>
@@ -351,7 +363,7 @@ Things To Note:
    e.g You used 10 action commands. You can undo 10 times.
 ```
 
-### 3.15. Redoing the Latest Command : `redo`, `r`
+### 3.12. Redoing the Latest Command : `redo`, `r`
 Typed in the undo command wrongly? Fret not! You can use the redo command to save the hassle of modifying your recent operation. <br>
 
 Format:<br>
@@ -364,7 +376,7 @@ Things To Note:
    e.g. You undo 10 times. You can redo 10 times.
 ```
 
-### 3.16. Saving the Data to Another Folder : `save`
+### 3.13. Saving the Data to Another Folder : `save`
 Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command . <br>
 
 Format:<br>
@@ -380,7 +392,7 @@ Examples:
 * `save C:/Desktop/myTask`
 
 
-### 3.17. Changing the Default Storage Folder : `setting`
+### 3.14. Changing the Default Storage Folder : `setting`
 Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
 Format:<br>
@@ -396,7 +408,7 @@ Examples:
 * `setting C:/Desktop/myOtherTask`<br>
 
 
-### 3.18. Using Data from Another Folder : `use`
+### 3.15. Using Data from Another Folder : `use`
 After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
 
 Format:<br>
@@ -412,7 +424,7 @@ Examples:
 * `use C:/Desktop/myTask`<br>
 
 
-### 3.19. Clearing all Entries : `clear`
+### 3.16. Clearing all Entries : `clear`
 Want to have a fresh start? TypeTask offers a clear command to delete all entries from the Task Manager. <br>
 `WARNING` you will lose all your data after this command. Thus, use it wisely. <br>
 
@@ -420,7 +432,7 @@ Format:<br>
 `clear`<br>
 
 
-### 3.20. Exiting the Program : `exit`
+### 3.17. Exiting the Program : `exit`
 Have you completed to schedule your tasks? Good job! To exit the program you can type the command exit. <br>
 
 Format:<br>
