@@ -74,12 +74,12 @@ public class TaskDate {
                 throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
             }
             if (dates.size() >= 1 && dates.get(0) != null) {
-                setDay(dates.get(0).getDay());
+                setDay(dates.get(0).getDate());
                 setMonth(dates.get(0).getMonth());
                 setYear(dates.get(0).getYear());
             }
             if (dates.size() >= 2 && dates.get(1) != null) {
-                setSecondDay(dates.get(1).getDay());
+                setSecondDay(dates.get(1).getDate());
                 setSecondMonth(dates.get(1).getMonth());
                 setSecondYear(dates.get(1).getYear());
             }
