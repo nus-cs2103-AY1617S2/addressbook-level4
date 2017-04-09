@@ -12,6 +12,33 @@ import seedu.doit.storage.Storage;
 public abstract class Command {
     protected Model model;
     protected Storage storage;
+    /**
+     * Return the name of this command.
+     */
+    public static String getName() {
+        return null;
+    }
+
+    /**
+     * Return the parameter of this command.
+     */
+    public static String getParameter() {
+        return null;
+    }
+
+    /**
+     * Return the description of this command.
+     */
+    public static String getResult() {
+        return null;
+    }
+
+    /**
+     * Return the example of this command.
+     */
+    public static String getExample() {
+        return null;
+    }
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a

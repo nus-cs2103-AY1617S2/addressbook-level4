@@ -234,6 +234,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     public void handleHelp() {
         HelpWindow helpWindow = new HelpWindow();
+        helpWindow.configure();
         helpWindow.show();
     }
 

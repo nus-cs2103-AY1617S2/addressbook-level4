@@ -11,6 +11,9 @@ import seedu.doit.model.item.UniqueTaskList;
 
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_PARAMETER = "INDEX";
+    public static final String COMMAND_RESULT = "Marks task at specified index as uncompleted";
+    public static final String COMMAND_EXAMPLE = "unmark 6";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Changes the task identified by the index number used in the last task list to uncompleted.\n"
@@ -48,5 +51,21 @@ public class UnmarkCommand extends Command {
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 }

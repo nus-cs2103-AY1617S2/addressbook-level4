@@ -19,7 +19,10 @@ public class SaveCommand extends Command {
     public static final String XML_FILE_TYPE = ".xml";
 
     public static final String COMMAND_WORD = "save";
-
+    public static final String COMMAND_PARAMETER = "FILE_PATH/FILE_NAME.xml";
+    public static final String COMMAND_RESULT = "Saves DoIt's data at specified location and in specified file";
+    public static final String COMMAND_EXAMPLE = "save folder1/savefile.xml\n"
+            + "save C:/Users/USER/savefile.xml";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves all tasks to a new file location and name. "
             + "Parameters: FILE_PATH_IN_DOIT_FILE/FILE_NAME.xml\n" + "Example: " + COMMAND_WORD
             + " save/xml/in/this/file/as/name.xml";
@@ -77,6 +80,22 @@ public class SaveCommand extends Command {
         logger.info("---------------------------------------HANDLED event : " + event.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.saveFilePath));
 
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 
 }

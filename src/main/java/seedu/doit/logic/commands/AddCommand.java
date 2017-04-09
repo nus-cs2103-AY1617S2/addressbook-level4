@@ -24,12 +24,14 @@ import seedu.doit.model.tag.UniqueTagList;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Task manager. "
-        + "Parameters: TASK NAME p/PRIORITY  e/END DATE  d/ADDITIONAL DESCRIPTION [t/TAG]...\n" + "Example: "
-        + COMMAND_WORD + " CS3230 Assignment1 p/high e/tomorrow 23:59 d/Prove bubble sort A t/CS3230\n"
-        + "add Hackathon p/med s/next monday 9am e/next tuesday d/create chatbot  t/hackathon\n"
-        + "add Food p/low d/for myself t/secret";
+    public static final String COMMAND_RESULT = "Adds a task to the Task manager. ";
+    public static final String COMMAND_PARAMETER = "TASK NAME p/PRIORITY  e/END DATE  d/ADDITIONAL "
+            + "DESCRIPTION [t/TAG]...";
+    public static final String COMMAND_EXAMPLE = "add finishCS3230Lab s/01-Mar-17 e/01-Mar-17 p/med t/CS3230\n"
+        + "add completeUserGuide d/28-Feb-2017 2400 p/high t/Important\n"
+        + "add reachDiamondRank p/low t/Overwatch";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_RESULT + "Parameters: " + COMMAND_PARAMETER
+            + "\nExample: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Task Manager";
@@ -93,6 +95,22 @@ public class AddCommand extends Command {
      */
     private boolean isStartTimeEarlier(LocalDateTime startTime, LocalDateTime endTime) {
         return startTime.isBefore(endTime);
+    }
+
+    public static String getName() {
+        return COMMAND_WORD;
+    }
+
+    public static String getParameter() {
+        return COMMAND_PARAMETER;
+    }
+
+    public static String getResult() {
+        return COMMAND_RESULT;
+    }
+
+    public static String getExample() {
+        return COMMAND_EXAMPLE;
     }
 
 }
