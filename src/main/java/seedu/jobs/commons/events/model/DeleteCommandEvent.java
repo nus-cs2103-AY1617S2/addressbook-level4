@@ -17,8 +17,6 @@ public class DeleteCommandEvent extends BaseEvent {
 
     @Override
     public String toString() {
-
         return "Deleting task";
     }
-
 }

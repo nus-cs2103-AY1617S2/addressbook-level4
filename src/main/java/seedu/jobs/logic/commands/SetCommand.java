@@ -9,15 +9,15 @@ public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
 
     //@@author A0130979U
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
-            + "Set email and password to login to the Google Calendar. "
-            + "Parameters: set email/EMAIL pwd/PASSWORD \n"
-            + "Example: " + COMMAND_WORD
-            + " set email/cs2103rocks@gmail.com pwd/abcdefgh123456";
+            + "Set email and password to login to the Google Calendar. ";
 
     public static final String MESSAGE_SUCCESS = "Email and Password has been successfully added \n";
-    public static final String MESSAGE_INVALID_EMAIL = "Emails should be 2 "
-            + "alphanumeric/period strings separated by '@'";
+
+    public static final String MESSAGE_INVALID_EMAIL = "Emails should be 2 alphanumeric"
+            + "/period strings separated by '@'";
+
     public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public String email;

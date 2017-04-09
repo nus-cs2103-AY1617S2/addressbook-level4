@@ -6,7 +6,6 @@ public class BrowserDisplayEvent extends BaseEvent {
 
     @Override
     public String toString() {
-
         return "Activating Browser";
     }
 
