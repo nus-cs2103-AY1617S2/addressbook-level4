@@ -151,6 +151,14 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.forEach(this::syncMasterTagListWith);
     }
 
+    //@@author A0135739W
+    /**
+     * clears tags what are not used by any other tasks when a task is removed
+     */
+    private void shrinkTagList(Tag tag) {
+        return;
+    }
+
     public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;

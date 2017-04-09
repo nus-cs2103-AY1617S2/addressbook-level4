@@ -200,4 +200,7 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         return sb.toString().trim();
     }
+
+    public void shrinkTagList (Tag tag) {
+    }
 }
