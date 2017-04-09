@@ -21,7 +21,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String SHORT_COMMAND_WORD = "ls";
     public static final String MESSAGE_LIST_DONE_SUCCESS = "Listed completed tasks";
-    public static final String MESSAGE_LIST_UNDONE_SUCCESS = "Listed incompleted tasks";
+    public static final String MESSAGE_LIST_UNDONE_SUCCESS = "Listed uncompleted tasks";
     public static final String MESSAGE_LIST_ALL_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List tasks by done status"
             + "\nParameters: [DONE_STATUS] [DATE] [p/PRIORITY] [t/TAG]...\n";
