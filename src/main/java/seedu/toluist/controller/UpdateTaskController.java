@@ -49,9 +49,10 @@ public class UpdateTaskController extends Controller {
 
   //@@author A0162011A
     private static final String HELP_DETAILS = "Updates an existing task in the todo list.";
-    private static final String HELP_FORMAT = "update INDEX [NAME] [/from STARTDATE /to ENDDATE] "
-                                                        + "[/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly)] "
-                                                        + "[/repeatuntil REPEATDATE] [/stoprepeat] "
+    private static final String HELP_FORMAT = "update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] "
+                                                        + "[/by ENDDATE] [/floating] "
+                                                        + "[/repeat PERIOD(daily/weekly/monthly)] "
+                                                        + "[/repeatuntil REPEATDATE] [/stoprepeating] "
                                                         + "[/priority PRIORITY(high/low)] [/tags TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `add`, `delete`",
                                                     "Only fields entered will be updated.",
@@ -59,7 +60,7 @@ public class UpdateTaskController extends Controller {
                                                         + "will be replaced with the new tags.",
                                                     "Events can be changed to deadlines by using `/by`",
                                                     "Deadlines can be changed to events by using `/from` and `/to`" };
-    private static final String[] HELP_EXAMPLES = { "`update 1 new name`\nUpdates the name "
+    private static final String[] HELP_EXAMPLES = { "`update 1 new name`\nUpdates the description "
                                                         + "for the floating task at index 1 to `new name`.",
                                                     "`update 2 /from today /to tomorrow`\n"
                                                         + "Updates the start and end time of the event at index 2.",

@@ -11,7 +11,29 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
     2.2 [Launch](#22-launch)<br>
     2.3 [Get used to the interface](#23-get-used-to-the-interface)<br>
     2.4 [Try out some commands](#24-try-out-some-commands)
-3. [Features](#3-features)
+3. [Features](#3-features)<br>
+	3.1 [Viewing help: `help`](#31-viewing-help-help)<br>
+	3.2 [Getting keyword suggestions smartly](#32-getting-keyword-suggestions-smartly)<br>
+	3.3 [Switching to a different tab: `switch`](#33-switching-to-a-different-tab-switch)<br>
+	3.4 [Adding a task: `add`](#34-adding-a-task-add)<br>
+	3.5 [Updating a task: `update`](#35-updating-a-task-update)<br>
+	3.6 [Filtering all tasks for a given keyword: `filter`](#36-filtering-all-tasks-for-a-given-keyword-filter)<br>
+	3.7 [Sorting all tasks in a given order: `sort`](#37-sorting-all-tasks-in-a-given-order-sort)<br>
+	3.8 [Deleting a task: `delete`](#38-deleting-a-task-delete)<br>
+	3.9 [Marking a task as complete or incomplete: `mark`](#39-marking-a-task-as-complete-or-incomplete-mark)<br>
+	3.10 [Adding a tag to a task: `tag`](#310-adding-a-tag-to-a-task-tag)<br>
+	3.11 [Removing a tag from a Task: `untag`](#311-removing-a-tag-from-a-task-untag)<br>
+	3.12 [Clearing all entries: `clear`](#312-clearing-all-entries-clear)<br>
+	3.13 [Undoing a command: `undo`](#313-undoing-a-command-undo)<br>
+	3.14 [Redoing a command: `redo`](#314-redoing-a-command-redo)<br>
+	3.15 [Viewing previous commands: `history`](#315-viewing-previous-commands-history)<br>
+	3.16 [Adding an alias for any phrase: `alias`](#316-adding-an-alias-for-any-phrase-alias)<br>
+	3.17 [Removing an alias: `unalias`](#317-removing-an-alias-unalias)<br>
+	3.18 [Viewing aliases: `viewalias`](#318-viewing-aliases-viewalias)<br>
+	3.19 [Saving the data](#319-saving-the-data)<br>
+	3.20 [Specifying a new storage location to save data to: `save`](#320-specifying-a-new-storage-location-to-save-data-to-save)<br>
+	3.21 [Specifying a new storage location to load data from: `load`](#321-specifying-a-new-storage-location-to-load-data-from-load)<br>
+	3.22 [Exiting the program: `exit`](#322-exiting-the-program-exit)<br>
 4. [Command Summary](#4-command-summary)
 
 ## 1. Introduction
@@ -294,7 +316,7 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.9. Marking a Task as Complete or Incomplete: `mark`
+### 3.9. Marking a task as complete or incomplete: `mark`
 
 After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
 a completed task as incomplete if you feel that it still needs more work.<br>
@@ -321,7 +343,7 @@ Example:
   Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
 [comment]: # (@@author A0162011A)
-### 3.10. Adding a Tag to a Task: `tag`
+### 3.10. Adding a tag to a task: `tag`
 
 You may want to group your tasks by categories.<br>
 `tag` allows you to add a tag or multiple tags to an existing task. <br>
@@ -333,7 +355,7 @@ Example:
 * `tag 2 work home` <br>
   Adds the tags `work` and `home` to task 2.
 
-### 3.11. Removing a Tag from a Task: `untag`
+### 3.11. Removing a tag from a task: `untag`
 
 You may decide to remove a category from a task.<br>
 `untag` allows you to remove a tag or multiple tags from an existing task. <br>
@@ -528,22 +550,22 @@ Format: `exit/quit`
 **Command** | **Format** | **Examples**
 -------- | :-------- | :---------
 Add | `add DESCRIPTION [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `add Assigment 1 /by Friday /tags school`
-Add a Tag to a Task | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
-Add Alias | `alias ALIAS PHRASE` | `alias hs history`
-Change Load Storage Location | `load NEWFILELOCATION` | `load data/savefile.txt`
-Change Save Storage Location | `save NEWFILELOCATION` | `save data/savefile.txt`
+Alias | `alias ALIAS PHRASE` | `alias hs history`
 Clear | `clear`
 Delete | `delete INDEX(ES)` | `delete 3`
-Delete Alias | `unalias ALIAS` | `unalias hs`
 Exit | `exit/quit`
 Filter | `filter/list/find [KEYWORDS] [/tag] [/name]` | `find school tag/`
 Help | `help [COMMAND]` | `help add`
 History | `history`
-Mark a Task as Complete or Incomplete | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
-Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
-Switch Display Task Tab | `switch TABIDENTIFIER` | `switch 2` <br> `switch T`
-Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
-Update | `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/floating] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/stoprepeating] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
-Remove a Tag from a Task | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
+Load | `load NEWFILELOCATION` | `load data/savefile.txt`
+Mark | `mark [complete/incomplete] INDEX(ES)` | `mark complete 1` <br> `mark incomplete 2` <br> `mark 3`
 Redo | `redo [NUMBER]` | `redo 5` <br> `redo`
-View Aliases | `viewalias`
+Save | `save NEWFILELOCATION` | `save data/savefile.txt`
+Sort | `sort CATEGORY(priority/enddate/startdate/overdue/description/default)...` | `sort priority`
+Switch | `switch TABIDENTIFIER` | `switch 2` <br> `switch T`
+Tag | `tag INDEX TAG...` | `tag 1 school` <br> `tag 3 work home`
+Unalias | `unalias ALIAS` | `unalias hs`
+Undo | `undo [NUMBER]` | `undo 5` <br> `undo`
+Untag | `untag INDEX TAG...` | `untag 1 school` <br> `untag 3 work home`
+Update | `update INDEX [DESCRIPTION] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/floating] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/stoprepeating] [/priority PRIORITY(high/low)] [/tags TAGS]` | `update 1 /by 11/12/2011`
+Viewalias | `viewalias`

@@ -42,7 +42,7 @@ public class AddTaskController extends Controller {
 
     //@@author A0162011A
     private static final String HELP_DETAILS = "Adds a task to the todo list.";
-    private static final String HELP_FORMAT = "add NAME [/from STARTDATE /to ENDDATE] "
+    private static final String HELP_FORMAT = "add DESCRIPTION [/from STARTDATE /to ENDDATE] "
                                                   + "[/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] "
                                                   + "[/repeatuntil REPEATDATE]"
                                                   + "[/priority PRIORITY(high/low)] [/tags TAGS]";
