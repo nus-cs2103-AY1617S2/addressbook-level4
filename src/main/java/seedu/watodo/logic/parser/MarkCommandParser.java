@@ -1,5 +1,6 @@
 package seedu.watodo.logic.parser;
 
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import java.util.Comparator;
@@ -21,7 +22,7 @@ import seedu.watodo.logic.commands.MarkCommand;
  * Parses input arguments and creates a new MarkCommand object
  */
 public class MarkCommandParser {
-    private static final Integer NEGATIVE_NUMBER = -1;
+    private static final Integer INVALID_NUMBER = -1;
     int[] filteredTaskListIndices;
 
     /**
@@ -30,6 +31,7 @@ public class MarkCommandParser {
      */
     public Command parse(String args) {
         try {
+            checkIndexFound(args);
             getOptionalIntArrayFromString(args);
             checkValidIndices();
             checkForDuplicateIndices();
@@ -40,26 +42,33 @@ public class MarkCommandParser {
         return new MarkCommand(filteredTaskListIndices);
     }
 
+    private void checkIndexFound(String args) throws IllegalValueException {
+        if (args.isEmpty()) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+        }
+    }
+
     private void getOptionalIntArrayFromString(String args) {
         String[] indicesInStringArray = args.split("\\s+");
         this.filteredTaskListIndices = new int[indicesInStringArray.length];
 
-        //Sets index as NEGATIVE_NUMBER if it is not a positive unsigned integer
+        //Sets index as INVALID_NUMBER if it is not a positive unsigned integer
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
             Optional<Integer> optionalIndex = ParserUtil.parseIndex(indicesInStringArray[i]);
-            filteredTaskListIndices[i] = optionalIndex.orElse(NEGATIVE_NUMBER);
+            filteredTaskListIndices[i] = optionalIndex.orElse(INVALID_NUMBER);
         }
     }
 
     private void checkValidIndices() throws IllegalValueException {
         for (int i = 0; i < filteredTaskListIndices.length; i++) {
-            if (filteredTaskListIndices[i] == NEGATIVE_NUMBER) {
+            if (filteredTaskListIndices[i] == INVALID_NUMBER) {
                 throw new IllegalValueException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX + '\n' +
                         MarkCommand.MESSAGE_USAGE);
             }
         }
     }
 
+    /** Ensures that there are no duplicate indices parsed */
     private void checkForDuplicateIndices() throws IllegalValueException {
         List<Integer> indicesAsInteger = Ints.asList(filteredTaskListIndices);
         Set<Integer> indicesHashSet = new HashSet<Integer>();

@@ -27,7 +27,7 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DUPLICATE_INDICES = "Duplicate indices are not allowed.";
-    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks sucessfully marked.";
+    public static final String MESSAGE_INCOMPLETE_EXECUTION = "Not all tasks successfully marked.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The task index provided is out of bounds.";
     public static final String MESSAGE_MARK_TASK_SUCCESSFUL = "Task #%1$d completed: %2$s";
     public static final String MESSAGE_MARK_TASK_UNSUCCESSFUL = "Task #%1$d unsuccessfully marked as complete.";
@@ -79,7 +79,7 @@ public class MarkCommand extends Command {
         }
 
         if (executionIncomplete) {
-            if (multipleExectutions(filteredTaskListIndices)) {
+            if (multipleExecutions(filteredTaskListIndices)) {
                 compiledExecutionMessage.insert(0, MESSAGE_INCOMPLETE_EXECUTION + '\n');
             }
             throw new CommandException(compiledExecutionMessage.toString());
@@ -93,7 +93,7 @@ public class MarkCommand extends Command {
         this.markedTask = null;
     }
 
-    private boolean multipleExectutions(int[] filteredTaskListIndices) {
+    private boolean multipleExecutions(int[] filteredTaskListIndices) {
         return (filteredTaskListIndices.length > 1) ? true : false;
     }
 
@@ -108,8 +108,8 @@ public class MarkCommand extends Command {
             throws CommandException, UniqueTaskList.DuplicateTaskException {
         this.taskToMark = getTaskToMark(currIndex, lastShownList);
         this.markedTask = createMarkedCopyOfTask(this.taskToMark);
-        updateTaskListAtIndex(currIndex, markedTask);
-        storeTasksForUndo(taskToMark, markedTask);
+        updateTaskListAtIndex(currIndex, this.markedTask);
+        storeTasksForUndo(this.taskToMark, this.markedTask);
     }
 
     private ReadOnlyTask getTaskToMark(int currIndex, UnmodifiableObservableList<ReadOnlyTask> lastShownList) {
