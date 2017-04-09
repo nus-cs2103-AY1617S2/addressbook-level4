@@ -6,11 +6,12 @@ public class LoginInfo {
 
     private String email;
     private String password;
+    private String credentialFilePath;
 
-
-    public LoginInfo(String email, String password) {
+    public LoginInfo(String email, String password, String credentialFilePath) {
         this.email = email;
         this.password = password;
+        this.credentialFilePath = credentialFilePath;
     }
 
     public LoginInfo(){
@@ -25,12 +26,20 @@ public class LoginInfo {
         return this.password;
     }
 
+    public String getCredentialFilePath() {
+        return this.credentialFilePath;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCredentialFilePath(String credentialFilePath) {
+        this.credentialFilePath = credentialFilePath;
     }
 
     @Override

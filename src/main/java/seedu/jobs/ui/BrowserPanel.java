@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.ui.CalendarDisplayEvent;
 import seedu.jobs.commons.util.FxViewUtil;
 import seedu.jobs.model.LoginInfo;
 
@@ -42,11 +43,22 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void login(String email, String password) {
+        ChangeListener<State> calendarListener = new ChangeListener<State>() {
+            @Override
+            public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
+                if (newValue == State.SUCCEEDED) {
+                    browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
+                    raise(new CalendarDisplayEvent());
+                }
+            }
+        };
+
         ChangeListener<State> emailListener = new ChangeListener<State>() {
             @Override
             public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
                 if (newValue == State.SUCCEEDED) {
                     browser.getEngine().getLoadWorker().stateProperty().removeListener(this);
+                    browser.getEngine().getLoadWorker().stateProperty().addListener(calendarListener);
                     browser.getEngine().executeScript("function fillInPassword() {document.getElementById('Passwd')"
                             + ".value = \"" + password + "\";" + "document.getElementById('signIn').click();}");
                     browser.getEngine().executeScript("document.getElementById('Email').value = \"" + email + "\";");

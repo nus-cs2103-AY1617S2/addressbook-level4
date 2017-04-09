@@ -1,5 +1,6 @@
 package seedu.jobs.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -11,6 +12,7 @@ import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
+import seedu.jobs.commons.events.storage.DeleteCredentialEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEventException;
 import seedu.jobs.commons.exceptions.DataConversionException;
@@ -122,4 +124,18 @@ public class StorageManager extends ComponentManager implements Storage {
     public void setFilePath(String filePath) {
         taskBookStorage.setFilePath(filePath);
     }
+
+ // ================ Google Calendar Credentials ==============================
+
+    @Subscribe
+    public void deleteCredential(DeleteCredentialEvent event) {
+        String filepath = event.getCredentialFilePath();
+        if (filepath != null) {
+            File file = new File(filepath);
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+    }
+
 }

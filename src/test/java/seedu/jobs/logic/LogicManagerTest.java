@@ -156,7 +156,8 @@ public class LogicManagerTest {
             assertTrue("CommandException not expected but was thrown.", isCommandExceptionExpected);
             assertEquals(expectedMessage, e.getMessage());
         }
-
+        System.out.println(model.getFilteredTaskList());
+        System.out.println(expectedShownList);
         //Confirm the ui display elements should contain the right data
         assertEquals(expectedShownList, model.getFilteredTaskList());
 

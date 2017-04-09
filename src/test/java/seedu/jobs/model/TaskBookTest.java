@@ -43,6 +43,8 @@ public class TaskBookTest {
     public void resetData_withValidReadOnlyAddressBook_replacesData() throws IllegalTimeException {
         TaskBook newData = new TypicalTestTasks().getTypicalTaskBook();
         taskBook.resetData(newData);
+        System.out.println(newData);
+        System.out.println(taskBook);
         assertEquals(newData, taskBook);
     }
 
