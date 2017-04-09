@@ -647,40 +647,40 @@ public class LogicManagerTest {
         Task testTask1 = helper.generateTaskWithName("Task1");
 
         //Adding task to empty task manager and undo it
-        model.resetData(new TaskManager());     
+        model.resetData(new TaskManager());
         model.addTask(testTask1);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
     }
-    
+
     @Test
     public void executeUndoPreviousAddTaskCommandWithExistingTasksSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         Task testTask2 = helper.generateTaskWithName("Task2");
         Task testTask3 = helper.generateTaskWithName("Task3");
-        List<Task> existingTasks = helper.generateTaskList(testTask1, testTask2);        
+        List<Task> existingTasks = helper.generateTaskList(testTask1, testTask2);
         TaskManager existingTaskManager = helper.generateTaskManager(existingTasks);
-        
-        //Undo adding task when there are existing tasks        
+
+        //Undo adding task when there are existing tasks
         model.resetData(existingTaskManager);
         model.addTask(testTask3);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, existingTaskManager, existingTasks);
     }
-    
+
     @Test
     public void executeUndoPreviousDeleteCommandSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         List<Task> oneTasks = helper.generateTaskList(testTask1);
         TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
-        
+
         //Undo Deletion
         model.resetData(new TaskManager());
         model.addTask(testTask1);
         model.deleteTask(testTask1);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
     }
-    
+
     @Test
     public void executeUndoPreviousEditCommandSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -689,7 +689,7 @@ public class LogicManagerTest {
         List<Task> oneTasks = helper.generateTaskList(testTask1);
         TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
         Task testTask1Copy = helper.generateTaskWithName("Task1");
-        
+
         //Undo Edit
         model.resetData(new TaskManager());
         model.addTask(testTask1Copy);
