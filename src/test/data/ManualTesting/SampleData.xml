@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Take photos with Tony in NUS</name>
+        <group>ES</group>
+        <end>4 days after tuesday</end>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames with Bill in Yishun</name>
+        <group>Vacation</group>
+        <end>15 days after last saturday</end>
+        <start>last saturday</start>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Study with Mohsin in japanese restaurant</name>
+        <group>ES</group>
+        <end>18 days after next sunday</end>
+        <start>next sunday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Eat in Techno Edge</name>
+        <group>Plans</group>
+        <end>26 days after next sunday</end>
+        <start>next sunday</start>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Study with Ellie in Raffles Place</name>
+        <group>Plans</group>
+        <end>43 days after last saturday</end>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames with Tony</name>
+        <group>Vacation</group>
+        <end>50 days after next sunday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Do calligraphy</name>
+        <group>Vacation</group>
+        <end>86 days after tuesday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Eat in MBS</name>
+        <group>ES</group>
+        <end>93 days after tuesday</end>
+        <start>tuesday</start>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Take test in Raffles Place</name>
+        <group>ES</group>
+        <end>98 days after yesterday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Exercise</name>
+        <group>ES</group>
+        <end>99 days after friday</end>
+        <start>friday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Cram study</name>
+        <group>Family</group>
+        <end>132 days after friday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Figure out travel plans with Jake in Techno Edge</name>
+        <group>ES</group>
+        <end>161 days after last sunday</end>
+        <start>last sunday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Talk</name>
+        <group>Family</group>
+        <end>154 days after friday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Figure out travel plans with Layla in Changi Airport</name>
+        <group>ES</group>
+        <end>178 days after next sunday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Meet with Cristina</name>
+        <group>ES</group>
+        <end>179 days after next sunday</end>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Draw art with Cheuk Ting</name>
+        <group>Vacation</group>
+        <end>189 days after yesterday</end>
+        <start>yesterday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Do calligraphy with Cheuk Ting in MBS</name>
+        <group>Family</group>
+        <end>205 days after last sunday</end>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Chat with John in Woodys</name>
+        <group>ES</group>
+        <end>200 days after next monday</end>
+        <start>next monday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Cram study with Hannah in hotpot restaurant</name>
+        <group>Family</group>
+        <end>238 days after last saturday</end>
+        <start>last saturday</start>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Hike with Mars in Tech Tower</name>
+        <group>ES</group>
+        <end>253 days after friday</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Figure out travel plans with Jake in Raffles Place</name>
+        <group>ES</group>
+        <end>129 days after 05-02-2199</end>
+        <start>05-02-2199</start>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Cram study with Chris in Yishun</name>
+        <group>Vacation</group>
+        <end>225 days after 05-02-2199</end>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Figure out travel plans in Tech Tower</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Take test with Jon in PGP</name>
+        <group>Hobbies</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Study with Jaden in japanese restaurant</name>
+        <group>ES</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Play Minecraft with fam in Changi Airport</name>
+        <group>Family</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Hike with project group in NUH</name>
+        <group>Plans</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Meet in NUS</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames with John in Sentosa</name>
+        <group>ES</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Take test with Husain in japanese restaurant</name>
+        <group>Hobbies</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Parkour with Elon Musk in Techno Edge</name>
+        <group>Vacation</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames with John</name>
+        <group>ES</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames in NUS</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Meet with Bill</name>
+        <group>Family</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Chat with Layla</name>
+        <group>ES</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Take photos with Layla in Woodys</name>
+        <group>Plans</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Draw art with Rabab in Central Library</name>
+        <group>School</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Shop with Elon Musk in Raffles Place</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Talk with Cheuk Ting in hawker centre</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Exercise with Hannah in Changi Airport</name>
+        <group>School</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Study with Rabab</name>
+        <group>ES</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Play Minecraft with Tony in Changi Airport</name>
+        <group>ES</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Walk with class in MBS</name>
+        <group>Hobbies</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Study with Rabab in Raffles Place</name>
+        <group>ES</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Shop with Chris</name>
+        <group>School</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Figure out travel plans with Mars in Techno Edge</name>
+        <group>Vacation</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Take photos with fam in Raffles Place</name>
+        <group>School</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Makan</name>
+        <group>ES</group>
+        <tagged>complete</tagged>
+    </persons>
+    <persons>
+        <name>Play videogames with Jaden</name>
+        <group>Vacation</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <persons>
+        <name>Shop in Tech Tower</name>
+        <group>ES</group>
+        <tagged>incomplete</tagged>
+    </persons>
+    <tags>incomplete</tags>
+    <tags>complete</tags>
+</addressbook>
