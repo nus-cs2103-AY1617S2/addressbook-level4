@@ -165,10 +165,28 @@ public class Task implements ReadOnlyTask {
             return false;
         if (other == this)
             return true;
-        if (other.toString().equals(this.toString()))
-            return true;
-
-        return false;
+        Task otherTask = (Task) other;
+        if (!otherTask.getTaskName().fullTaskName.equals(this.getTaskName().fullTaskName)) {
+        	System.out.println("names arent equal");
+        	return false;
+        }
+        if (!(otherTask.getTaskDate().compareTo(this.getTaskDate()) == 0)) {
+        	System.out.println("dates arent equal");
+        	return false;
+        }
+        if (!(otherTask.getTaskStartTime().compareTo(this.getTaskStartTime()) == 0)) {
+        	System.out.println("start times arent equal");
+        	return false;
+        }
+        if (!(otherTask.getTaskEndTime().compareTo(this.getTaskEndTime()) == 0)) {
+        	System.out.println("end times arent equal");
+        	return false;
+        }
+        if (!(otherTask.getTaskDescription().trim().equals(this.getTaskDescription().trim()))) {
+        	System.out.println("descriptions arent equal");
+        	return false;
+        }
+        return true;
 
     }
 
