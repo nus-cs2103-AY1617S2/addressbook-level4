@@ -11,6 +11,7 @@ import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
+import seedu.jobs.commons.events.storage.SaveLoginInfoEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEventException;
 import seedu.jobs.commons.exceptions.DataConversionException;
@@ -107,6 +108,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
  // ================ LoginInfo methods ==============================
 //@Author A0130979U
+        
     @Override
     public Optional<LoginInfo> readLoginInfo() throws DataConversionException, IOException {
         return loginInfoStorage.readLoginInfo();

@@ -67,4 +67,6 @@ public interface Model {
 
     void changePath(String path) throws IOException;
 
+    void set(String email, String password);
+
 }

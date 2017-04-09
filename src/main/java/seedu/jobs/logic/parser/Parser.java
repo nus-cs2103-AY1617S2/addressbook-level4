@@ -20,6 +20,7 @@ import seedu.jobs.logic.commands.ListCommand;
 import seedu.jobs.logic.commands.PathCommand;
 import seedu.jobs.logic.commands.RedoCommand;
 import seedu.jobs.logic.commands.SelectCommand;
+import seedu.jobs.logic.commands.SetCommand;
 import seedu.jobs.logic.commands.UndoCommand;
 
 /**
@@ -86,6 +87,9 @@ public class Parser {
 
         case PathCommand.COMMAND_WORD:
             return new PathCommandParser().parse(arguments);
+        
+        case SetCommand.COMMAND_WORD:
+            return new SetCommandParser().parse(arguments);
 
 
         default:

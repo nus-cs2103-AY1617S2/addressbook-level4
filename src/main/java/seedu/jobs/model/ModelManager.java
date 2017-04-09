@@ -5,8 +5,6 @@ import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.controlsfx.control.RangeSlider;
-
 import javafx.collections.transformation.FilteredList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
@@ -16,6 +14,7 @@ import seedu.jobs.commons.events.model.ClearCommandEvent;
 import seedu.jobs.commons.events.model.DeleteCommandEvent;
 import seedu.jobs.commons.events.model.EditCommandEvent;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
+import seedu.jobs.commons.events.storage.LoginInfoChangeEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
 import seedu.jobs.model.task.ReadOnlyTask;
@@ -120,6 +119,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEdit(taskToEdit, editedTask);
         indicateTaskBookChanged();
     }
+    
+    @Override
+    public void set(String email, String password) {
+        raise(new LoginInfoChangeEvent(email,password));      
+    }
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -219,7 +223,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
-
 
 }

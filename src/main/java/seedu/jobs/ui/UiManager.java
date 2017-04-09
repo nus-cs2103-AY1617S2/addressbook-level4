@@ -16,6 +16,8 @@ import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.events.storage.ConfigChangeSavePathEvent;
 import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
+import seedu.jobs.commons.events.storage.LoginInfoChangeEvent;
+import seedu.jobs.commons.events.storage.SaveLoginInfoEvent;
 import seedu.jobs.commons.events.ui.BrowserDisplayEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
@@ -25,6 +27,7 @@ import seedu.jobs.commons.util.StringUtil;
 import seedu.jobs.logic.Logic;
 import seedu.jobs.model.LoginInfo;
 import seedu.jobs.model.UserPrefs;
+import seedu.jobs.storage.StorageManager;
 
 /**
  * The manager of the UI component.
@@ -139,11 +142,20 @@ public class UiManager extends ComponentManager implements Ui {
         config.setTaskBookFilePath(event.getPath());
         ConfigUtil.saveConfig(config, config.DEFAULT_CONFIG_FILE);
     }
-    
+
     @Subscribe
     public void handleBrowserDisplayEvent(BrowserDisplayEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.activateBrowser();
     }
+    
+    @Subscribe
+    public void handleLoginInfoChangeEvent(LoginInfoChangeEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.loginInfo.setEmail(event.getEmail());
+        this.loginInfo.setPassword(event.getPassword());
+        raise(new SaveLoginInfoEvent());
+    }
+    
   //@@author
 }
