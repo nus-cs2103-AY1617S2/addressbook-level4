@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<YATS/>
+<YATS>
+    <tasks>
+        <title>Ali Muster</title>
+        <location>School</location>
+        <startTime>11:59PM 08/04/2017</startTime>
+        <endTime>11:59PM 08/04/2017</endTime>
+        <deadline></deadline>
+        <description>lame</description>
+        <completed>No</completed>
+        <isRecurring>No</isRecurring>
+        <recurrenceStart>03/12/292269055</recurrenceStart>
+        <recurrencePeriodicity>none</recurrencePeriodicity>
+        <recurrenceDoneList></recurrenceDoneList>
+    </tasks>
+    <tags>Friends</tags>
+</YATS>
