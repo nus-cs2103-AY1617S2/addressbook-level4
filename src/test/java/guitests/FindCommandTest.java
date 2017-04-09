@@ -24,8 +24,8 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public static final String MESSAGE_TEST_FIND_PRIORITY = "find p/high";
     public static final String MESSAGE_TEST_FIND_DESCRIPTION = "find d/l";
     public static final String MESSAGE_TEST_FIND_TAG = "find t/owesMoney";
-    public static final String MESSAGE_TEST_FIND_STARTTIME = "find s/03/19/17";
-    public static final String MESSAGE_TEST_FIND_ENDTIME = "find e/03/20/17";
+    public static final String MESSAGE_TEST_FIND_STARTTIME = "find s/19/03/17";
+    public static final String MESSAGE_TEST_FIND_ENDTIME = "find e/20/03/17";
     public static final String MESSAGE_TEST_FIND_INVALID = "findn/george";
     public static final String MESSAGE_TEST_INVALID_PARAMETERS = MESSAGE_FIND_COMMAND + "aaa";
 

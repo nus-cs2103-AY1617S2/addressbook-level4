@@ -491,7 +491,7 @@ public class LogicManagerTest {
          *            used to generate the task data field values
          */
         private Task generateTask(int seed) throws Exception {
-            return new Task(new Name("Task " + seed), new Priority("high"), new EndTime(seed + "2359"),
+            return new Task(new Name("Task " + seed), new Priority("high"), new EndTime("today " + "2359"),
                     new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }

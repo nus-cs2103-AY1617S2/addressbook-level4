@@ -61,6 +61,10 @@ public class DateTimeParser {
         //checks if natty parses all the input, if it does not, it means there is invalid input after the valid time
         //or another date/time
         if (!dateGroup.getFullText().equals(dateGroup.getText())) {
+
+            System.out.println("Start" + dateGroup.getFullText() + "End");
+            System.out.println("Start" + dateGroup.getText() + "End");
+
             throw new IllegalValueException(MESSAGE_TIME_CONSTRAINTS);
         }
 

@@ -30,7 +30,7 @@ public class TypicalTestTasks {
             this.fiona = new TaskBuilder().withName("Fiona Kunz").withPriority("med")
                 .withDeadline("sunday").withDescription("little tokyo").build();
             this.george = new TaskBuilder().withName("George Best").withPriority("high")
-                .withDeadline("3/20/17").withDescription("4th street").build();
+                .withDeadline("20/03/17").withDescription("4th street").build();
             this.aF = new TaskBuilder().withName("AAAAAFloating").withPriority("med")
                  .withDescription("l").build();
             this.bF = new TaskBuilder().withName("BBBBBFloating").withPriority("med")
@@ -38,14 +38,14 @@ public class TypicalTestTasks {
             this.cF = new TaskBuilder().withName("CCCCCFloating").withPriority("med")
                  .withDescription("l").build();
             this.aE = new TaskBuilder().withName("AAAAAEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             this.bE = new TaskBuilder().withName("BBBBBEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             this.cE = new TaskBuilder().withName("CCCCCEvent").withPriority("med")
-                    .withDeadline("3/20/17").withStartTime("3/19/17").withDescription("l").build();
+                    .withDeadline("20/03/17").withStartTime("19/03/17").withDescription("l").build();
             // Manually added
             this.hoon = new TaskBuilder().withName("Hoon Meier").withPriority("low")
-                .withDeadline("3/14/18").withDescription("little india").build();
+                .withDeadline("14/03/18").withDescription("little india").build();
             this.ida = new TaskBuilder().withName("Ida Mueller").withPriority("med")
                 .withDeadline("04/04/17").withDescription("chicago ave").build();
         } catch (IllegalValueException e) {
