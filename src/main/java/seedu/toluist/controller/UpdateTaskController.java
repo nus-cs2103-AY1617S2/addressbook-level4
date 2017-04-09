@@ -51,8 +51,8 @@ public class UpdateTaskController extends Controller {
     private static final String HELP_DETAILS = "Updates an existing task in the todo list.";
     private static final String HELP_FORMAT = "update INDEX [NAME] [/from STARTDATE /to ENDDATE] "
                                                         + "[/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly)] "
-                                                        + "[/stoprepeat] [/priority PRIORITY(high/low)] "
-                                                        + "[/tags TAGS]";
+                                                        + "[/repeatuntil REPEATDATE] [/stoprepeat] "
+                                                        + "[/priority PRIORITY(high/low)] [/tags TAGS]";
     private static final String[] HELP_COMMENTS = { "Related commands: `add`, `delete`",
                                                     "Only fields entered will be updated.",
                                                     "When editing tags, the existing tags "

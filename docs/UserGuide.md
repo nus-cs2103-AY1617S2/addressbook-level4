@@ -180,7 +180,7 @@ Example:
 
 You can start keeping track of your task by adding to ToLuist.<br>
 `add` allows you to add a task to the system.<br>
-Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Both 'startdate' and 'enddate' use the same datetime format.
 > * 'startdate' requires a valid 'enddate' to be used in the same command.
@@ -207,7 +207,7 @@ Examples:
 
 Sometimes, you may need to update or fix a previously entered task.<br>
 `update` allows you to update an existing task in the list.<br>
-Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.
