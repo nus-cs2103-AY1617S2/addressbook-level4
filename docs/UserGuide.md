@@ -23,8 +23,6 @@ This product is a tool to accept natural language commands via keyboards to mana
 
 Double click the JOBS.jar file to start the program.
 
-<<<<<<< HEAD
-=======
 <img src="images/DIsplay_JOBS.png" width="600"><br>
 
 1. User input/command bar: Enter your to-dos here easily using the given Command Tags.
@@ -33,7 +31,6 @@ Double click the JOBS.jar file to start the program.
 4. Calendar display: This displays Google Calendar extension based on existing tasks.
 5. Exit button: Click to exit the program. Alternatively, type exit in the command bar to exit.
 
->>>>>>> refs/heads/master
 ## Feature details
 
 ### View help : `help`
@@ -92,19 +89,10 @@ Example:
 * `list overdue`
 
 ### Edit a task: `edit`
-<<<<<<< HEAD
 Edit is the command word to edit a specific task
 Format : `edit index/INDEX [name/NAME start/START   end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-=======
-Edit is the command word to edit a specific tasks
-Format : `update index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
->>>>>>> refs/heads/master
 1. The commands inside square bracket are optional.
-<<<<<<< HEAD
 >User edits a specific task by specifying the new entry they wish to be reflected on the existing task list
-=======
->User editss a specific task by specifying the new entry they wish to be reflected on the existing task list
->>>>>>> refs/heads/master
 
 Example:
 * `edit index/1 desc/"The venue has been changed"`
