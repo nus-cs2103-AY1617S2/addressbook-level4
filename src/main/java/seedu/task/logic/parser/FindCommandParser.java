@@ -19,8 +19,6 @@ import seedu.task.model.task.Date;
  */
 public class FindCommandParser extends CommandParser {
 
-//    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
-
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -39,7 +37,6 @@ public class FindCommandParser extends CommandParser {
         // if a targetDate is successfully extracted, the used words in the keywords are removed
         targetDate = DateUtil.extractValidDate(keywords);
         final Set<String> keywordSet = new HashSet<>(StringUtil.asListWithoutEmptyString(keywords));
-//        System.out.println(StringUtil.asListWithoutEmptyString(keywords));
         return targetDate.isNull() ? new FindCommand(keywordSet) : new FindCommand(keywordSet, targetDate);
     }
 
