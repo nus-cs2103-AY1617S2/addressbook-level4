@@ -37,12 +37,13 @@ public class TaskBuilder {
         this.task.setDuration(new Duration(startDate, endDate));
         return this;
     }
-    //@@author
 
+    //@@author A0164103W
     public TaskBuilder withDueDate(String dueDate) throws IllegalValueException {
         this.task.setDueDate(new DueDate(dueDate));
         return this;
     }
+    //@@author
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         task.setTags(new UniqueTagList());
@@ -52,10 +53,12 @@ public class TaskBuilder {
         return this;
     }
 
+    //@@author A0164103W
     public TaskBuilder withTaskId(long id) throws IllegalValueException {
         this.task.setTaskId(new TaskId(id));
         return this;
     }
+    //@@author
 
     public TestTask build() {
         return this.task;
