@@ -11,9 +11,9 @@ copy the content from the SampleData.xml file over.
 Run the MainApp.java file as a Java application. This will prompt the application to run and the ProcrastiNomore
 UI will appear.
 
-If the sample data will copied over correctly, the task manager will have a total of 51 tasks inside.
-Index 1 - 19 will be in the Events column.
-Index 20 - 35 will be in the Deadlines column.
+If the sample data will copied over correctly, the task manager will have a total of 51 tasks inside. <br>
+Index 1 - 19 will be in the Events column. <br>
+Index 20 - 35 will be in the Deadlines column. <br>
 Index 36 - 51 will be in the Basic Task column.
 
 ## Testing the HELP function:
