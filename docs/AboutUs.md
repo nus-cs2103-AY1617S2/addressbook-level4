@@ -56,6 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
            * Did the initial refactoring from AddressBook to TaskManager in main <br>
            * Did refractoring from Person to Task in main <br>
            * Wrote a method for checking overdue task in TaskCard <br>
+           * Create most of the test case to increase Coverall <br>
 
 -----
 
