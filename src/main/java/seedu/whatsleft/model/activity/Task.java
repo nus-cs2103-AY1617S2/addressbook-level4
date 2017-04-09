@@ -48,7 +48,7 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
-    //@@author
+    //@@author A0121668A
     /**
      * Creates a copy of the given ReadOnlyTask.
      */
@@ -61,7 +61,7 @@ public class Task implements ReadOnlyTask {
         assert description != null; //description must be present
         this.description = description;
     }
-
+    //@@authorA0121668A
     @Override
     public Description getDescription() {
         return description;

@@ -182,7 +182,7 @@ public class TestUtil {
         }
     }
 
-    // @@author A0121668A
+    //@@author A0121668A
     /**
      * Takes in a list of events and returns the expected filtered and sorted
      * list of events in event panel
@@ -240,7 +240,7 @@ public class TestUtil {
         return filteredTestEvents;
     }
 
-    // @@author A0148038A
+    //@@author A0148038A
     /**
      * Filters all future test tasks from an array of test tasks, then sort the
      * test events in filtered array in time order.
@@ -452,7 +452,7 @@ public class TestUtil {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
     }
 
-    // @@author Li Chengcheng
+    //@@author A0121668A
     /**
      * Returns a copy of the list with tasks at multiple positions removed.
      *
@@ -492,7 +492,7 @@ public class TestUtil {
             return taskList;
         }
     }
-    // @@author
+    //@@author
 
     /**
      * Replaces events[i] with an event.

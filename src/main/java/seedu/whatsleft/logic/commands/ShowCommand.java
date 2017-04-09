@@ -48,12 +48,9 @@ public class ShowCommand extends Command {
         }
         model.setDisplayStatus(preference);
         model.updateFilteredListToShowAll();
-        //@@author A0148038A
         EventsCenter.getInstance().post(new JumpToEventListRequestEvent(0));
         EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(0));
         EventsCenter.getInstance().post(new ShowStatusChangedEvent(model.getDisplayStatus()));
         return new CommandResult(String.format(MESSAGE_DISPLAY_PREFERENCE_SUCCESS, preference));
     }
-
-    // @@author
 }

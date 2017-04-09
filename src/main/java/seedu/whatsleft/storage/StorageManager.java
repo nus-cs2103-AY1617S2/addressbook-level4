@@ -50,7 +50,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
+    //@@author A0121668A
     // ================ WhatsLeft methods ==============================
 
     @Override
@@ -62,7 +62,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void setWhatsLeftFilePath(String filepath) {
         whatsLeftStorage.setWhatsLeftFilePath(filepath);
     }
-
+    //@@author
     @Override
     public Optional<ReadOnlyWhatsLeft> readWhatsLeft() throws DataConversionException, IOException {
         return readWhatsLeft(whatsLeftStorage.getWhatsLeftFilePath());

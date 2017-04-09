@@ -48,7 +48,6 @@ public class RedoCommand extends Command {
             assert false : "The target task cannot be missing";
         }
 
-        //@@author A0148038A
         if (model.getDisplayStatus() == "ALL") {
             EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(filteredActivityListIndex - 1));
         }
