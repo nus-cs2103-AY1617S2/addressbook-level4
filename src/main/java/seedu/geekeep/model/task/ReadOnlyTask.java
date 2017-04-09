@@ -52,6 +52,20 @@ public interface ReadOnlyTask {
      */
     Title getTitle();
 
+    //@@author A0139438W
+    /**
+     * Formats the date time of the Task as text in a reader friendly format.
+     * @return display string of datetime
+     */
+    public String getTaskDisplayedDateString();
+
+    /**
+     * Formats the description of the Task as text in a reader friendly format.
+     * @return display string of datetime
+     */
+    public String getTaskDisplayedDescriptionString();
+    //@@author
+
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
@@ -79,15 +93,44 @@ public interface ReadOnlyTask {
 
     //@@author A0148037E
     public int getPriority();
+    //@@author
 
+    //@@author A0148037E
+    /**
+     * Get the task's DateTime that is used to compare date time.
+     * For events, the startDateTime is used for comparison.
+     * For deadlines, the endDateTime is used for comparison.
+     * @return DateTime object
+     */
     DateTime getReferenceDateTime();
 
+    /**
+     * Compares this task's type priority with another.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int comparePriority(ReadOnlyTask otherTask);
 
+    /**
+     * Compares this task's reference datetime with another in chronological order.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     int compareDate(ReadOnlyTask otherTask);
 
+    /**
+     * Compares this task's type priority and reference datetime with another.
+     * Compares this task's title with another in lexicographic order if both are floating tasks.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int comparePriorityAndDatetimeAndTitle(ReadOnlyTask otherTask);
 
+    /**
+     * Compares this task's title with another in lexicographic order.
+     * @param otherTask
+     * @return a comparator value, negative if less, positive if greater
+     */
     public int compareTitle(ReadOnlyTask otherTask);
     //@@author
 
