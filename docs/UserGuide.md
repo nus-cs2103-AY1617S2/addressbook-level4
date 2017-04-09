@@ -125,24 +125,34 @@ Example: `done 1`<br>
 <img src="images/done.png" width="600">
 
 ## Filtering the Tasks : `filter`
-Filters the list of tasks to only see `Ongoing` or `Completed` tasks.<br>
-Format: `filter ongoing` or `filter completed`
-> Filters the tasks by either `Ongoing` or `Completed` task status. `filter ongoing` shows all completed tasks and `filter completed` shows all ongoing tasks.
-> To return to the unsorted list of tasks, type and enter `list`.
+Filters the list based off of specified flitering criteria.
+Format: `filter FILTER_TYPE FILTER_ARGUMENTS`  <br>
+`FILTER_TYPE` includes: `name, desc (description), status, before, after` <br>
+`FILTER_ARGUMENT` can include a date, a status, a task description, or the name of a task <br>
+`name`, `desc`, and `status` find tasks that contain the substring specified by `FILTER_ARGUMENTS` <br>
+`before`, `after` find tasks before and after a certain date specified by `FILTER_ARGUMENTS`
 
-Examples: <br>
-`filter ongoing`<br>
+> Filter commands can stack. To return to the unsorted list of tasks, type and enter `list`. <br>
 
-<img src="images/filter ongoing.png" width="600"> <br>
+Examples:
+ * `filter status completed`
+ * `filter after today`
+ * `filter before 12/12/12`
+ * `filter name Go to Store`
+ * `filter desc Look out for snacks` <br>
 
-`filter completed`<br>
+`filter status ongoing` (shows only ongoing tasks)
+
+<img src="images/filter ongoing.png" width="600">
+
+`filter status completed` (shows only completed tasks) <br>
 
 <img src="images/filter completed.png" width="600">
 
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet.
-Format: `sort name` or `sort time`
-> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date.
+Format: `sort name`,`sort time`, `sort status`
+> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. `sort status` will sort the tasks by `Ongoing` or `Completed`.
 > To return to the unsorted list of tasks, type and enter `list`.
 
 Examples:<br>
@@ -162,20 +172,20 @@ Example: `google 2` <br>
 <img src="images/google.png" width="600">
 
 ## Changing the Save Path: `path`
-Changes the save path for Fast Task data. Must specify the name of the save file and mark it as a .xml file.<br>
+Saves a new copy of the Fast Task data to a new file location and changes savepath. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `path PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
-Example for Mac: `path /Users/jlevy/Desktop/MyTasks.xml`
+Example for Mac: `path /Users/name/Desktop/MyTasks.xml`
 
 After entering a save path, this confirmation message will appear.
 
 <img src="images/path.png" width="600">
 
 ## Loading Fast Task Data: `load`
-Loads a save file for Fast Task data. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file.<br>
+Loads a copy of Fast Task and changes savepath, but does not overwrite the loaded file. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file. <br>
 Format: `load PATHNAME`<br>
 Example for Windows: `load C:\Desktop\MyTasks.xml`<br>
-Example for Mac: `load /Users/jlevy/Desktop/MyTasks.xml`
+Example for Mac: `load /Users/name/Desktop/MyTasks.xml`
 
 After entering a load path, this confirmation message will appear.
 
@@ -205,38 +215,36 @@ Fast Task data are saved in a file called `TasksManagerData.xml` in the project 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
 
-* **Filter** : `filter [FILTER_TYPE] [FILTER_ARGUMENTS]` <br>
-  Supported FILTER_TYPES are "name", "desc", "status", "before", "after"
-  "name", "desc", and "status" find tasks that contain the substring specified by FILTER_ARGUMENTS
-  "before", "after" find tasks before and after a certain date specified by FILTER_ARGUMENTS
-  e.g. `find status completed`
-  e.g. 'find after today'
-
 * **Edit** : ``edit INDEX [TASKNAME] [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`` <br>
   e.g. `edit 2 m/Go to Guardian`
 
-* **List** : `list` <br> shows all tasks, removes filtering
+* **List** : `list` <br>
 
 * **Clear** : `clear`
 
-* **Undo** : `undo` <br> Undos previous undoable change to the Task list. Doesn't undo filtering as filtering can be undone by using list. Can undo up to the last 10 undoable changes.
+* **Undo** : `undo` <br>
 
-* **Redo** : `redo` <br> Redos previous undo, can redo consecutive undos.
+* **Redo** : `redo` <br>
 
-* **Done** : `done INDEX [MORE INDECIES]` <br> marks the Status of the index as done.
+* **Done** : `done INDEX [MORE INDECIES]` <br>
  e.g. `done 3`
 
-* **Filter** : `filter` <br>
- e.g.`filter ongoing` or `filter completed`
+* **Filter** : `filter FILTER_TYPE FILTER_ARGUMENTS` <br>
+ e.g. `find status completed` <br>
+ e.g. `find after today`
 
 * **Sort** : `sort`<br>
- e.g.`sort time`, `sort name`, 'sort cd', 'sort status'
+ e.g.`sort time` <br>
+ e.g `sort name` <br>
+ e.g `sort status`
 
-* **Path** : `path PATHNAME` <br> saves a new copy of the TaskManager to a new file location and changes savepath.
- e.g. `path C:\Desktop\MyTasks.xml`
+* **Path** : `path PATHNAME` <br>
+ e.g. `path C:\Desktop\MyTasks.xml` <br>
+ e.g. `path /Users/name/Desktop/MyTasks.xml`
 
- * **Load** : `load PATHNAME` <br> Loads a copy of TaskManager and changes savepath, does not overwrite the loaded file.
- e.g. `load C:\Desktop\MyTasks.xml`
+ * **Load** : `load PATHNAME` <br>
+ e.g. `load C:\Desktop\MyTasks.xml` <br>
+ e.g. `load /Users/name/Desktop/MyTasks.xml`
 
 * **Google** : `google INDEX` <br>
   e.g.`google 2`
