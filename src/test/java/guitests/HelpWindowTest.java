@@ -6,22 +6,23 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.HelpWindowHandle;
-
+//@@author A0164032U
 public class HelpWindowTest extends AddressBookGuiTest {
 
     @Test
     public void openHelpWindow() {
         //use accelerator
+    	
+    	// Help window will not open if click on TextField
         commandBox.clickOnTextField();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
+        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+        
+        // Help window will not open if click on TextArea
         resultDisplay.clickOnTextArea();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
+        assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
+        
+        // Help window will not open if click on List View
         personListPanel.clickOnListView();
-        assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
-
-        browserPanel.clickOnWebView();
         assertHelpWindowNotOpen(mainMenu.openHelpWindowUsingAccelerator());
 
         //use menu button

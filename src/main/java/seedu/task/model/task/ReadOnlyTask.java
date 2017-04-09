@@ -52,15 +52,16 @@ public interface ReadOnlyTask {
 
         boolean hasStartDate = getStartDate() != null;
         boolean hasEndDate = getEndDate() != null;
+        boolean hasGroup = !getGroup().value.equals(Group.GROUP_ID_HIDDEN);
 
         builder
-            .append(getName())
+            .append(getName() + ":")
             .append(hasStartDate ? " Start Date: " : "")
-            .append(hasStartDate ? getStartDate() : "")
-            .append(hasEndDate ? " End Date: " : "")
-            .append(hasEndDate ? getEndDate() : "")
-            .append(" Group: ")
-            .append(getGroup())
+            .append(hasStartDate ? "[" + getStartDate() + "]" : "")
+            .append(hasEndDate ? " End Date: " + "]" : "")
+            .append(hasEndDate ? "[" + getEndDate() + "]" : "")
+            .append(hasGroup ? " Group: " : "")
+            .append(hasGroup ? "[" + getGroup() + "]" : "")
             .append(" Status: ");
         getTags().forEach(builder::append);
         return builder.toString();
