@@ -33,7 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: Deliverables and deadline<br>
 * Features implemented:<br>
   * Implemented a calendar in UI
-  * Allowed immediate update and feedback from user input for calendar 
+  * Allowed immediate update and feedback from user input for calendar
   * [Next command to change calendar view](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#213-changing-calendar-week-next)
   * [Refresh command to reset calendar view](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#214-refreshing-the-calendar-refresh)
   * Urgency badges for event and task
@@ -60,7 +60,9 @@ We are a team based in the [School of Computing, National University of Singapor
   * [Undo previous command](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#211-undoing-the-latest-command--undo)
   * Natural language parsing
   * Recur command
-* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0110491U.md), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0110491U.md)
+* Code written:
+  * [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0110491U.md)
+  * [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0110491U.md)
 * Other major contributions:
   * Travis setting up
   * Fixed GUI testing
@@ -77,7 +79,9 @@ We are a team based in the [School of Computing, National University of Singapor
   * [Show completed/pending/all tasks](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#210-task-display-preference-show)
   * [Save WhatsLeft to designated location](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#2121-save-whatsleft-to-new-location-save)
   * [Read WhatsLeft from designated location](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#2122-read-whatsleft-from-new-location)
-* Code written: [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0121668A.md#a0121668a), [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0121668A.md#a0121668a)
+* Code written:
+  * [functional code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/main/A0121668A.md#a0121668a)
+  * [test code](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/collated/test/A0121668A.md#a0121668a)
 * Other major contributions:
   * Fixed GUI testing
   * Added start-end constraint for Event
