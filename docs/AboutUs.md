@@ -35,13 +35,13 @@ Responsibilities:
 
 #### [Zhou Fanyi](https://github.com/fanyiii)
 <img src="images/fanyi.jpg" width="150"><br>
-* Components in charge of: [Model]<br> (https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/DeveloperGuide.md#model-component)
+* Components in charge of: [Model](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/DeveloperGuide.md#24-model-component)<br> 
 * Features implemented: <br>
-        * [Delete the task](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#deleting-a-task-delete) <br>
-        * [Save data](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#saving-data-save) <br>
-        * [Change storage file path](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#change-storage-file-path-path) <br>
-        * [Undo](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#undo-previous-action-undo) <br>
-        * [Redo](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#redo-previous-action-redo) <br>
+        * [Delete the task](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#37-deleting-a-task--delete) <br>
+        * [Save data](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#312-saving-data-save) <br>
+        * [Change storage file path](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#313-change-storage-file-path-path) <br>
+        * [Undo](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#310-undo-previous-action-undo) <br>
+        * [Redo](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/docs/UserGuide.md#311-redo-previous-undo-redo) <br>
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/main/A0141011J.md)][[test code](https://github.com/CS2103JAN2017-T15-B4/main/blob/master/collated/test/A0141011J.md)]
 * Other major contributions: <br>
     * Designed the task card in GUI
