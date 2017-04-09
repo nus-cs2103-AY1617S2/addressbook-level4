@@ -1,16 +1,10 @@
 package guitests;
 
 import org.junit.Test;
-
-import seedu.taskit.logic.commands.Command;
-import seedu.taskit.logic.commands.UndoCommand.*;
-import seedu.taskit.model.task.ReadOnlyTask;
-import seedu.taskit.testutil.TaskBuilder;
 import seedu.taskit.testutil.TestTask;
-import static seedu.taskit.logic.commands.UndoCommand.MESSAGE_NO_PREVIOUS_STATE;
-import static seedu.taskit.logic.commands.UndoCommand.MESSAGE_UNDO_SUCCESS;
 
-import static org.junit.Assert.assertEquals;
+import static seedu.taskit.logic.commands.UndoCommand.MESSAGE_NO_PREVIOUS_STATE;
+
 import static org.junit.Assert.assertTrue;
 
 //@@author A0141011J

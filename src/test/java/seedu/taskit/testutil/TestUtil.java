@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
+import seedu.task.testutil.TestTask;
 import seedu.taskit.TestApp;
 import seedu.taskit.commons.exceptions.IllegalValueException;
 import seedu.taskit.commons.util.FileUtil;
@@ -316,6 +317,18 @@ public class TestUtil {
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
         List<TestTask> listOfTasks = asList(tasks);
         listOfTasks.addAll(asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
+
+    /**
+     * Appends tasks to the array of tasks at certain index.
+     * @param tasks A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
+     * @return The modified array of tasks.
+     */
+    public static TestTask[] addTasksToListAtIndex(final TestTask[] tasks,int index, TestTask... tasksToAdd) {
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(index,asList(tasksToAdd));
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
