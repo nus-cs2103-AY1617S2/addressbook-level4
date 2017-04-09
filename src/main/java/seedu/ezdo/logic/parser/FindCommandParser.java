@@ -216,28 +216,30 @@ public class FindCommandParser implements CommandParser {
 
     private Optional<String> setOptionalStartDate(Optional<String> optionalStartDate) {
 
+        Optional<String> optionalSetDate = optionalStartDate;
         if (isFindBefore(optionalStartDate)) {
-            optionalStartDate = parseFindBefore(optionalStartDate);
+            optionalSetDate = parseFindBefore(optionalStartDate);
         }
 
         if (isFindAfter(optionalStartDate)) {
-            optionalStartDate = parseFindAfter(optionalStartDate);
+            optionalSetDate = parseFindAfter(optionalStartDate);
         }
 
-        return optionalStartDate;
+        return optionalSetDate;
     }
 
     private Optional<String> setOptionalDueDate(Optional<String> optionalDueDate) {
 
+        Optional<String> optionalSetDate = optionalDueDate;
         if (isFindBefore(optionalDueDate)) {
-            optionalDueDate = parseFindBefore(optionalDueDate);
+            optionalSetDate = parseFindBefore(optionalDueDate);
         }
 
         if (isFindAfter(optionalDueDate)) {
-            optionalDueDate = parseFindAfter(optionalDueDate);
+            optionalSetDate = parseFindAfter(optionalDueDate);
         }
 
-        return optionalDueDate;
+        return optionalSetDate;
     }
 
     /**
