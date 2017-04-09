@@ -16,15 +16,15 @@ By : `Team CS2103JAN2017-F11-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Jan 2017`  &n
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `ytomorrow.jar` from the [releases](../../../releases) tab.
-2. Copy the file to the folder you want to use as the home folder for your TODO list.
+1. Download the latest `YTomorrow.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your task list.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all TODOs
-   * **`add`**` Email manager due 2017/01/08 0900 : adds a task "Email manager" to the TODO list and set the due date to January 8th at 9am.
+   * **`list`** : lists all tasks
+   * **`add`**` Econ hw d/2017/05/22 0700 : adds a task "Econ hw" to the task list and set the due date to May 22nd at 7am.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
