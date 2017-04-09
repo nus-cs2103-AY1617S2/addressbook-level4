@@ -35,9 +35,4 @@ public class ChangePathCommand extends Command {
         EventsCenter.getInstance().post(new StorageFilePathChangedEvent(newFilePath));
         return new CommandResult(String.format(MESSAGE_SUCCESS + Paths.get(newFilePath).toAbsolutePath()));
     }
-
-    @Override
-    public boolean isUndoable() {
-        return true;
-    }
 }
