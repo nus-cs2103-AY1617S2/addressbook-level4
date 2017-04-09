@@ -41,7 +41,7 @@ TypeTask is especially good for you if you want to: <br>
 1. Ensure that you have Java version [1.8.0_60](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html) or later installed in your Computer.<br>
 
    ```
-   > Note that Simply having Java 8 is not enough.
+   > Note that simply having Java 8 is not enough.
      TypeTask will not work with the earlier versions of Java 8.
    ```
 
