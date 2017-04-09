@@ -142,7 +142,7 @@ public class XmlEzDoStorageTest {
     @Test
     public void moveEzDo_invalid_exception() throws IOException {
         PowerMockito.mockStatic(Files.class);
-        BDDMockito.given(Files.move(Paths.get("lolasdf"), Paths.get("omg"), StandardCopyOption.REPLACE_EXISTING))
+        BDDMockito.given(Files.move(Paths.get("lol"), Paths.get("omg"), StandardCopyOption.REPLACE_EXISTING))
                 .willThrow(new IOException("Error moving file to new directory"));
         thrown.expect(IOException.class);
         moveEzDo("lol", "omg");
