@@ -255,13 +255,12 @@ public class ModelManager extends ComponentManager implements Model {
         private DateTime end = null;
 
         DateQualifier(DateTime start, DateTime end) {
-            assert start != null || end != null;
+            assert end != null;
             if (start != null) {
                 this.start = start;
             }
-            if (end != null) {
-                this.end = end;
-            }
+            this.end = end;
+
         }
 
         @Override
@@ -271,13 +270,16 @@ public class ModelManager extends ComponentManager implements Model {
                 if (task.getEndDate() == null) {
                     return true;
                 }
-                if (start == null) {
-                    return end.isLater(task.getEndDate());
+                if (task.getStartDate() == null && task.getEndDate() != null) {
+                    return end.isLater(task.getEndDate()) || end.equals(task.getEndDate());
                 }
-                if (end == null) {
-                    task.getStartDate().isLater(start);
+                if (task.getStartDate() != null && task.getEndDate() != null) {
+                    if (start != null) {
+                        return (end.isLater(task.getEndDate()) || end.equals(task.getEndDate()))
+                            && (task.getStartDate().isLater(start) || task.getStartDate().equals(start));
+                    }
+                    return end.isLater(task.getEndDate()) || end.equals(task.getEndDate());
                 }
-                return end.isLater(task.getEndDate()) && task.getStartDate().isLater(start);
             }
             return false;
         }
