@@ -157,7 +157,7 @@ add | `add name/TASK_NAME [start/START_TIME end/END_TIME recur/PERIOD desc/DESCR
 delete | `delete INDEX`
 clear | `clear`
 find | `find NAME`
-list | `list | completed | in-progress`
+list | `list`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
 undo | `undo` 
 redo | `redo`
