@@ -8,8 +8,7 @@ import seedu.watodo.logic.commands.exceptions.CommandException;
 
 //@@author A01403076J
 /**
- * 
- *
+ * Shows user a list of all the command words for each of the standard commands.
  */
 public class ViewShortcutsCommand extends Command {
 
@@ -31,10 +30,7 @@ public class ViewShortcutsCommand extends Command {
         return new CommandResult(String.format(VIEW_SHORTCUT_MESSAGE, sb.toString()));
     }
 
-    /**
-     * 
-     * @return
-     */
+    /** Collects all the shortcut keys and alternative command words for each of the standard command words */
     private LinkedHashMap<String, ArrayList<String>> collateShortcutkeys() {
         AlternativeCommandsLibrary.altCommands.values().removeIf(Objects::isNull);
         LinkedHashMap<String, ArrayList<String>> commandShortcuts = new LinkedHashMap<String, ArrayList<String>>();
@@ -44,11 +40,7 @@ public class ViewShortcutsCommand extends Command {
         return commandShortcuts;
     }
 
-    /**
-     * 
-     * @param commandShortcuts
-     * @return
-     */
+    /** Formats the list of shortcuts and alternative command words for displaying to the user  */
     private StringBuilder formatForView(LinkedHashMap<String, ArrayList<String>> commandShortcuts) {
         StringBuilder sb = new StringBuilder();
         AlternativeCommandsLibrary.altCommands.forEach((shortcut, cmdWord)
