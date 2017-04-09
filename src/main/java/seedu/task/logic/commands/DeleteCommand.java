@@ -25,13 +25,11 @@ public class DeleteCommand extends Command {
     private String targetName = null;
 
     public DeleteCommand(String token) {
-        //@@author A0163848R
         try {
             this.targetIndex = Integer.parseUnsignedInt(token);
         } catch (NumberFormatException e) {
             this.targetName = token;
         }
-        //@@author
     }
 
     @Override
@@ -39,7 +37,6 @@ public class DeleteCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        //@@author A0163848R
         if (targetIndex != null && lastShownList.size() < targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
@@ -47,7 +44,6 @@ public class DeleteCommand extends Command {
         ReadOnlyTask taskToDelete = null;
         if (targetIndex != null) taskToDelete = lastShownList.get(targetIndex - 1);
         if (targetName != null) taskToDelete = getTaskByName(lastShownList, targetName);
-        //@@author
 
         try {
             model.deleteTask(taskToDelete);

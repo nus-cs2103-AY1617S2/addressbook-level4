@@ -156,6 +156,12 @@ public class Task implements ReadOnlyTask {
     }
 
     //@@author A0163848R
+    /**
+     * Factory method to build a Task or Task-inheriting class from a given unordered array of properties.
+     * @param Properties to build Task with
+     * @return New Task with given properties
+     * @throws IllegalValueException Insufficient/invalid properties given
+     */
     public static Task factory(Object ...properties) throws IllegalValueException {
         Name name = CollectionUtil.firstOf(properties, Name.class);
         Group group = CollectionUtil.firstOf(properties, Group.class);
@@ -177,6 +183,7 @@ public class Task implements ReadOnlyTask {
 
         return null;
     }
+
 
     @Override
     public boolean hasPassed() {

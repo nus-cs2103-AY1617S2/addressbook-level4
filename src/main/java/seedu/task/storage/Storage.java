@@ -5,10 +5,10 @@ import java.util.Optional;
 
 import seedu.task.commons.events.model.TaskManagerChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
-import seedu.task.commons.events.ui.ExportRequestEvent;
-import seedu.task.commons.events.ui.ImportRequestEvent;
-import seedu.task.commons.events.ui.LoadRequestEvent;
-import seedu.task.commons.events.ui.TargetFileRequestEvent;
+import seedu.task.commons.events.storage.ExportRequestEvent;
+import seedu.task.commons.events.storage.ImportRequestEvent;
+import seedu.task.commons.events.storage.LoadRequestEvent;
+import seedu.task.commons.events.storage.TargetFileRequestEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
@@ -59,5 +59,5 @@ public interface Storage extends TaskManagerStorage, UserPrefsStorage {
     void handleTargetFileRequestEvent(TargetFileRequestEvent tfre);
 
     void handleLoadRequestEvent(LoadRequestEvent ire);
-
+    //@@author
 }

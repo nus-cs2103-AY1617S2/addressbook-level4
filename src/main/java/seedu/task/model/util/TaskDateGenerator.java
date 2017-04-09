@@ -8,6 +8,9 @@ import seedu.task.model.task.EndDate;
 import seedu.task.model.task.StartDate;
 
 //@@author A0163848R
+/**
+ * Random generator for Task start and end dates
+ */
 public class TaskDateGenerator {
 
     private static final int MAX_DAYS_TO_ADD = 255;
@@ -57,6 +60,10 @@ public class TaskDateGenerator {
 
     private static StartDate lastStartDate;
 
+    /**
+     * @param Random to use
+     * @return Randomly-generated start date
+     */
     public static StartDate getStartDate(Random r) {
         TaskDateGenerator.r = r;
 
@@ -69,6 +76,10 @@ public class TaskDateGenerator {
         return lastStartDate;
     }
 
+    /**
+     * @param Random to use
+     * @return Randomly generated end date
+     */
     public static EndDate getEndDate(Random r) {
         if (lastStartDate == null) {
             getStartDate(r);

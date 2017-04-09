@@ -22,6 +22,10 @@ public class SampleDataUtil {
 
     Random r;
 
+    /**
+     * @param Number of tasks to generate
+     * @return Array of randonly-generated tasks
+     */
     public static ReadOnlyTask[] getSampleTasks(int n) {
         Set<Task> generated = new HashSet<Task>();
         for (int i = 0; i < n; i++) {

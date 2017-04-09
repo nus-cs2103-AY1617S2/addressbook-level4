@@ -1,4 +1,4 @@
-package seedu.task.commons.events.ui;
+package seedu.task.commons.events.storage;
 
 import java.io.File;
 
@@ -19,10 +19,18 @@ public class TargetFileRequestEvent extends BaseEvent {
         this.prefs = prefs;
     }
 
+    /**
+     * Get file path to redirect all further edits to
+     * @return File path to redirect all further edits to
+     */
     public File getTargetFile() {
         return target;
     }
 
+    /**
+     * Get user preferences to modify with target file path
+     * @return User preferences to modify
+     */
     public UserPrefs getUserPrefs() {
         return prefs;
     }

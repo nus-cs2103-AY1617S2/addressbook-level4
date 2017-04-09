@@ -42,5 +42,5 @@ public interface Logic {
      * @param YTomorrow to add entries from
      */
     void importYTomorrow(ReadOnlyTaskManager add);
-
+    //@@author
 }

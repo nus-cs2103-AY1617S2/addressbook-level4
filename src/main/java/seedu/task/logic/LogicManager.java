@@ -62,4 +62,5 @@ public class LogicManager extends ComponentManager implements Logic {
     public void importYTomorrow(ReadOnlyTaskManager add) {
         model.mergeYTomorrow(add);
     }
+    //@@author
 }

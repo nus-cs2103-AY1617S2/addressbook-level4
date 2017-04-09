@@ -11,7 +11,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.MarkCommand;
 import seedu.task.logic.commands.UnmarkCommand;
 
-//@@author A0163848R
+//@@author A0163848R-reused
 /**
  * Parses input arguments and creates a new UnmarkCommand object
  */
@@ -32,7 +32,6 @@ public class UnmarkCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
-        //@@author A0163848R
         return new UnmarkCommand(index.get());
     }
 }

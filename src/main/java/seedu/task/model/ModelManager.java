@@ -51,9 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompleteListToChange();
         //@@author
 
-        //@@author A0163848R
         history.push(taskManager);
-        //@@author
     }
 
     public ModelManager() {

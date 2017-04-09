@@ -37,11 +37,15 @@ public class ThemeWindow extends Window {
         FxViewUtil.setStageIcon(stage, ICON);
         this.fxmlToApply = fxmlToApply;
 
-        setConnections(Theme.THEME_FILE_FOLDER);
+        setConnections();
         setEventHandlerForSelectionChangeEvent();
         setAccelerators();
     }
 
+    /**
+     * Sets hot-keys for this window:
+     * Enter - Closes window
+     */
     private void setAccelerators() {
         themeListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -55,15 +59,24 @@ public class ThemeWindow extends Window {
         });
     }
 
+    /**
+     * Closes window
+     */
     @FXML
     public void handleExit() {
         getStage().close();
     }
 
-    private void setConnections(String path) {
+    /**
+     * Connects the list to the list of allowable themes
+     */
+    private void setConnections() {
         themeListView.setItems(Theme.THEMES);
     }
 
+    /**
+     * Sets handler for changing the selected theme for MainWindow on new selection
+     */
     private void setEventHandlerForSelectionChangeEvent() {
         themeListView.getSelectionModel().selectedItemProperty()
                .addListener((observable, oldValue, newValue) -> {
