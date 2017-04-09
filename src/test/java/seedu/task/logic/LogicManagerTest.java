@@ -85,7 +85,7 @@ public class LogicManagerTest {
         model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile), null);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskList(model.getTaskList()); // last saved assumed to be up to date
