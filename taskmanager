@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <tasks>
+        <description>Say so long to Fiona Kunz</description>
+        <priority>1</priority>
+        <recurring>false</recurring>
+        <frequency>0</frequency>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+        <occurrences>
+            <complete>false</complete>
+            <endTiming>
+                <value>02/03/2100</value>
+                <timing>2100-03-02T00:00:00+08:00</timing>
+            </endTiming>
+            <startTiming>
+                <value>01/02/2017</value>
+                <timing>2017-02-01T00:00:00+08:00</timing>
+            </startTiming>
+        </occurrences>
+    </tasks>
+    <tags>owesMoney</tags>
+    <tags>friends</tags>
+</tasklist>
