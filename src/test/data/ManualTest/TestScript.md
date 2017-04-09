@@ -3,6 +3,7 @@
 **Command:**<br>
 (Pre-condition: src\test\data\ManualTest\taskManager.xml exists)
 
+    use src/test/data/ManualTest
     setting src/test/data/ManualTest
 
 **Expected Result:**
