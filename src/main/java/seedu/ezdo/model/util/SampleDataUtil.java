@@ -75,7 +75,7 @@ public class SampleDataUtil {
             throw new AssertionError(MESSAGE_DUPLICATE_TASKS, e);
         }
     }
-    
+
     /** Adds sample tasks in sample ezDo **/
     private static void addTasksInSampleEzDo(EzDo sampleEzDo) throws DuplicateTaskException {
         for (Task sampleTask : getSampleTasks()) {
