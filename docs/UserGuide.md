@@ -158,8 +158,8 @@ E.g. **`add`** `sushi restaurant promotion from 25 apr 10am to 28 apr 9pm`<br>
 A recurring task is a task that has both start date and end date and has a specified recur interval<br>
 Recurring tasks are _auto populated based on the specified recur interval_. <br>
 
-Format: TODO <br>
-E.g. TODO<br>
+Format: **`add`** `<task_name> from <start date and time> to <end date and time> <interval>` <br>
+E.g. **`add`** `go to school from 9am to 5pm everyday`<br>
 
 <img src="images/UiAddCommand.png" width="600"><br>
 _Figure 3.2.1. Add Command_

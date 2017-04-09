@@ -25,7 +25,6 @@ import seedu.tache.model.ModelManager;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.TaskManager;
 import seedu.tache.model.UserPrefs;
-import seedu.tache.model.util.SampleDataUtil;
 import seedu.tache.storage.Storage;
 import seedu.tache.storage.StorageManager;
 import seedu.tache.ui.Ui;
@@ -79,9 +78,9 @@ public class MainApp extends Application {
         try {
             taskManagerOptional = storage.readTaskManager();
             if (!taskManagerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskManager");
+                logger.info("Data file not found. Will be starting with an empty TaskManager");
             }
-            initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
+            initialData = new TaskManager();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();

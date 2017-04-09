@@ -147,16 +147,16 @@ public class EditCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("add test from 9 april to 16 april daily");
 
         commandBox.runCommand("edit 1 change recurinterval to day");
-        assertTaskListHits(9);
+        assertEqualTaskListHits(9);
 
         commandBox.runCommand("edit 9 change recurinterval to week");
-        assertTaskListHits(3);
+        assertEqualTaskListHits(3);
 
         commandBox.runCommand("edit 3 change recurinterval to month");
-        assertTaskListHits(2);
+        assertEqualTaskListHits(2);
 
         commandBox.runCommand("edit 2 change recurinterval to year");
-        assertTaskListHits(2);
+        assertEqualTaskListHits(2);
     }
 
     @Test
@@ -232,7 +232,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     /**
      * Checks whether the number of tasks in taskListPanel is same as {@code expectedHits}
      */
-    private void assertTaskListHits(int expectedHits) {
+    private void assertEqualTaskListHits(int expectedHits) {
         assertEquals(taskListPanel.getNumberOfTasks(), expectedHits);
     }
     //@@author
