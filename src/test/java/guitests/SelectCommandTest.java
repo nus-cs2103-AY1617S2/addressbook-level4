@@ -61,18 +61,19 @@ public class SelectCommandTest extends TaskManagerGuiTest {
                 assertNoEventTaskSelected();
                 assertNoFloatingTaskSelected();
                 ReadOnlyTask selectedTask = deadlineTaskListPanel.getSelectedTasks().get(0).getKey();
-                assertEquals(deadlineTaskListPanel.getDeadlineTask(index - eventTaskListPanel.getNumberOfTask() - 1)
-                        , selectedTask);
+                assertEquals(deadlineTaskListPanel.getDeadlineTask(index - eventTaskListPanel.getNumberOfTask()
+                        - 1), selectedTask);
 
             } else {
                 assertEquals(floatingTaskListPanel.getSelectedTasks().size(), 1);
                 assertNoDeadlineTaskSelected();
                 assertNoEventTaskSelected();
                 ReadOnlyTask selectedTask = floatingTaskListPanel.getSelectedTasks().get(0).getKey();
-                assertEquals(floatingTaskListPanel.getFloatingTask(index - eventTaskListPanel.getNumberOfTask()
-                        - deadlineTaskListPanel.getNumberOfTask() - 1), selectedTask);
+                assertEquals(floatingTaskListPanel.getFloatingTask(
+                        index - eventTaskListPanel.getNumberOfTask() - deadlineTaskListPanel.getNumberOfTask()
+                        - 1), selectedTask);
             }
-        }        
+        }
     }
 
     private void assertNoTaskSelected() {

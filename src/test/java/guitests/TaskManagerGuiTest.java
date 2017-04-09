@@ -15,13 +15,13 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DeadlineTaskCardHandle;
 import guitests.guihandles.DeadlineTaskListPanelHandle;
-import guitests.guihandles.MainGuiHandle;
-import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.EventTaskCardHandle;
 import guitests.guihandles.EventTaskListPanelHandle;
 import guitests.guihandles.FloatingTaskCardHandle;
 import guitests.guihandles.FloatingTaskListPanelHandle;
+import guitests.guihandles.MainGuiHandle;
+import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.ResultDisplayHandle;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import seedu.taskmanager.TestApp;
@@ -140,7 +140,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected void assertListSize(int size) {
         int numberOfTask = eventTaskListPanel.getNumberOfTask() + deadlineTaskListPanel.getNumberOfTask()
-        + floatingTaskListPanel.getNumberOfTask();
+                + floatingTaskListPanel.getNumberOfTask();
         assertEquals(size, numberOfTask);
     }
 

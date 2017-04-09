@@ -224,12 +224,13 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.travis();
         TaskManager expectedAB = new TaskManager();
-        expectedAB.addTask(toBeAdded);
+        int addIndex = expectedAB.addTask(toBeAdded) + 1;
 
         // execute command and verify result
-        assertCommandSuccess(helper.generateAddCommand(toBeAdded), String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+        assertCommandSuccess(helper.generateAddCommand(toBeAdded)
+                , String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded) + "\n"
+                + "Task added at index: " + Integer.toString(addIndex),
                 expectedAB, expectedAB.getTaskList());
-
     }
 
     @Test

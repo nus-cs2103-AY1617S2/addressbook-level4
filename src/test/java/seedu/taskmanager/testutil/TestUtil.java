@@ -80,36 +80,36 @@ public class TestUtil {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
-                            new EndDate("03/03/17"), new EndTime("1100"), Boolean.FALSE,
-                            new UniqueCategoryList("just", "friends")),
-                    new Task(new TaskName("Start on the CS2103 project"), new StartDate("03/03/17"),
-                            new StartTime("1400"), new EndDate("03/04/17"), new EndTime("1800"), Boolean.TRUE,
-                            new UniqueCategoryList("work")),
-                    new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
-                            new StartTime("1800"), new EndDate("09/03/17"), new EndTime("2000"), Boolean.TRUE,
-                            new UniqueCategoryList()),
-                    new Task(new TaskName("Try harder for CS2103"), new StartDate("05/04/17"), new StartTime("1500"),
-                            new EndDate("05/05/17"), new EndTime("1600"), Boolean.FALSE,
-                            new UniqueCategoryList("work")),
-                    new Task(new TaskName("Try even harder for CS2103 project"), new StartDate("04/04/17"),
-                            new StartTime("1400"), new EndDate("05/04/17"), new EndTime("1500"), Boolean.FALSE,
-                            new UniqueCategoryList("lepak")),
-                    new Task(new TaskName("Eat lunch at techno"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("EMPTY_FIELD"), new EndDate("04/03/17"), new EndTime("1400"), Boolean.FALSE,
-                            new UniqueCategoryList("no", "friends")),
-                    new Task(new TaskName("Run 2.4km in 10 mins"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
-                            Boolean.FALSE, new UniqueCategoryList("lepak")),
-                    new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"),
-                            new EndDate("06/05/17"), new EndTime("1800"), Boolean.FALSE,
-                            new UniqueCategoryList("lepak")),
-                    new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"),
-                            new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
-                            Boolean.FALSE, new UniqueCategoryList("work")),
-                    new Task(new TaskName("Get it done"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
-                            new EndDate("06/05/17"), new EndTime("1700"), Boolean.TRUE,
-                            new UniqueCategoryList("work")) };
+                new Task(new TaskName("Eat breakfast with mom"), new StartDate("03/03/17"), new StartTime("1000"),
+                        new EndDate("03/03/17"), new EndTime("1100"), Boolean.FALSE,
+                        new UniqueCategoryList("just", "friends")),
+                new Task(new TaskName("Start on the CS2103 project"), new StartDate("03/03/17"),
+                        new StartTime("1400"), new EndDate("03/04/17"), new EndTime("1800"), Boolean.TRUE,
+                        new UniqueCategoryList("work")),
+                new Task(new TaskName("Eat dinner with my only 2 friends"), new StartDate("09/03/17"),
+                        new StartTime("1800"), new EndDate("09/03/17"), new EndTime("2000"), Boolean.TRUE,
+                        new UniqueCategoryList()),
+                new Task(new TaskName("Try harder for CS2103"), new StartDate("05/04/17"), new StartTime("1500"),
+                        new EndDate("05/05/17"), new EndTime("1600"), Boolean.FALSE,
+                        new UniqueCategoryList("work")),
+                new Task(new TaskName("Try even harder for CS2103 project"), new StartDate("04/04/17"),
+                        new StartTime("1400"), new EndDate("05/04/17"), new EndTime("1500"), Boolean.FALSE,
+                        new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Eat lunch at techno"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("04/03/17"), new EndTime("1400"), Boolean.FALSE,
+                        new UniqueCategoryList("no", "friends")),
+                new Task(new TaskName("Run 2.4km in 10 mins"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
+                        Boolean.FALSE, new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Time to relax a little"), new StartDate("06/05/17"), new StartTime("1400"),
+                        new EndDate("06/05/17"), new EndTime("1800"), Boolean.FALSE,
+                        new UniqueCategoryList("lepak")),
+                new Task(new TaskName("Chiong all day everyday"), new StartDate("EMPTY_FIELD"),
+                        new StartTime("EMPTY_FIELD"), new EndDate("EMPTY_FIELD"), new EndTime("EMPTY_FIELD"),
+                        Boolean.FALSE, new UniqueCategoryList("work")),
+                new Task(new TaskName("Get it done"), new StartDate("EMPTY_FIELD"), new StartTime("EMPTY_FIELD"),
+                        new EndDate("06/05/17"), new EndTime("1700"), Boolean.TRUE,
+                        new UniqueCategoryList("work")) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -360,7 +360,7 @@ public class TestUtil {
         List<TestTask> listOfTasks = asList(tasks);
         int addIndex = findSortedPositionToAdd(taskToAdd, listOfTasks);
         listOfTasks.add(addIndex, taskToAdd);
-        return new Pair<TestTask[],Integer>(listOfTasks.toArray(new TestTask[listOfTasks.size()]), addIndex);
+        return new Pair<TestTask[], Integer>(listOfTasks.toArray(new TestTask[listOfTasks.size()]), addIndex);
     }
 
     private static <T> List<T> asList(T[] objs) {
