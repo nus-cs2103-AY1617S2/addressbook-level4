@@ -28,3 +28,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | advanced user | exit Opus by typing a command | no need to use the mouse at all
 `*` | advanced user | add recurring events | add events that occurs regularly
 `*` | advanced user | search tasks and events by date and/or time | quickly check if I have any tasks or events on that specific timing
+`*` | advanced user | sort tasks based on tags | review my tasks sorted based on my categorisation
+`*` | advanced user | search tasks based on tags | view all my tasks under the same category
+`*` | advanced user | browse my previously entered commands | save time and effort in retyping certain commands again
