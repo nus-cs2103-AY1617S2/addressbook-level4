@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 //import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
@@ -130,48 +131,25 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("find 01/01/2018");
         assertResultMessage("1 tasks listed!");
     }
-//     @Test
-//     public void edit_notAllFieldsSpecified_success() throws Exception {
-//         String detailsToEdit = "t/sweetie t/bestie";
-//         int addressBookIndex = 2;
-//
-//         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//         TestTask editedPerson = new
-//                 TaskBuilder(personToEdit).withTags("sweetie", "bestie").build();
-//
-//         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
-//                 editedPerson);
-//     }
-//
-//     @Test
-//     public void edit_clearTags_success() throws Exception {
-//         String detailsToEdit = "t/";
-//         int addressBookIndex = 2;
-//
-//         TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//         TestTask editedPerson = new
-//                 TaskBuilder(personToEdit).withTags().build();
-//
-//         assertEditSuccess(addressBookIndex, addressBookIndex, detailsToEdit,
-//                 editedPerson);
-//     }
-//
-//     @Test
-//     public void edit_findThenEdit_success() throws Exception {
-//     commandBox.runCommand("find Elle");
-//
-//     String detailsToEdit = "Belle";
-//     int filteredPersonListIndex = 1;
-//     int addressBookIndex = 5;
-//
-//     TestTask personToEdit = expectedPersonsList[addressBookIndex - 1];
-//     TestTask editedPerson = new
-//     TaskBuilder(personToEdit).withDescription("Belle").build();
-//
-//     assertEditSuccess(filteredPersonListIndex, addressBookIndex,
-//     detailsToEdit, editedPerson);
-//     }
-//
+
+    @Test
+    public void edit_clearTags_success() throws Exception {
+        String detailsToEdit = "t/";
+        int taskListIndex = 1;
+
+        commandBox.runCommand("clear");
+        TestTask[] expectedTasksList = td.getTypicalTasks();
+        for (int i = 0; i < expectedTasksList.length; i++) {
+            commandBox.runCommand(expectedTasksList[i].getAddCommand());
+        }
+        TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
+        TestTask editedTask = new
+                 TaskBuilder(taskToEdit).withTags().build();
+
+        assertEditSuccess(taskListIndex, taskListIndex, detailsToEdit,
+                 editedTask, expectedTasksList);
+    }
+
     @Test
      public void edit_missingPersonIndex_failure() {
         commandBox.runCommand("clear");
@@ -181,41 +159,18 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                  EditCommand.MESSAGE_USAGE));
     }
-//
-//     @Test
-//     public void edit_invalidPersonIndex_failure() {
-//     commandBox.runCommand("edit 8 Bobby");
-//     assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-//     }
-//
-//     @Test
-//     public void edit_noFieldsSpecified_failure() {
-//     commandBox.runCommand("edit 1");
-//     assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
-//     }
-//
-//     @Test
-//     public void edit_invalidValues_failure() {
-//     commandBox.runCommand("edit 1 *&");
-//     assertResultMessage(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-//
-//     commandBox.runCommand("edit 1 p/abcd");
-//     assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-//
-//     commandBox.runCommand("edit 1 e/yahoo!!!");
-//     assertResultMessage(Timing.MESSAGE_TIMING_CONSTRAINTS);
-//
-//     commandBox.runCommand("edit 1 t/*&");
-//     assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-//     }
-//
-//     @Test
-//     public void edit_duplicatePerson_failure() {
-//     commandBox.runCommand("edit 3 Alice Pauline p/85355255 e/alice@gmail.com
-//     "
-//     + "a/123, Jurong West Ave 6, #08-111 t/friends");
-//     assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
-//     }
+
+    @Test
+    public void edit_invalidPersonIndex_failure() {
+        commandBox.runCommand("edit 8 Bobby");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void edit_noFieldsSpecified_failure() {
+        commandBox.runCommand("edit 1");
+        assertResultMessage(EditCommand.MESSAGE_NOT_EDITED);
+    }
 
     /**
     * Checks whether the edited person has the correct updated details.
