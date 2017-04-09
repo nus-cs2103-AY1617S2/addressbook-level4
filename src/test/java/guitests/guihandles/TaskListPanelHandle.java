@@ -59,6 +59,7 @@ public class TaskListPanelHandle extends GuiHandle {
      */
     public boolean isListMatching(int startPosition, ReadOnlyTask... tasks)
             throws IllegalArgumentException {
+        List list = getListView().getItems();
         if (tasks.length + startPosition != getListView().getItems().size()) {
             throw new IllegalArgumentException("List size mismatched\n" + "Expected "
                     + (getListView().getItems().size() - 1) + " tasks");
