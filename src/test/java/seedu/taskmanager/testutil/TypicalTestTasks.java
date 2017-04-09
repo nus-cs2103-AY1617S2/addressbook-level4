@@ -115,7 +115,7 @@ public class TypicalTestTasks {
                     .withCategories("just", "friends").build(); // event
 
           // Recurring task
-                      recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
+            recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestDayOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("04/03/17")
