@@ -23,8 +23,8 @@ public class SaveAsCommand extends Command {
 
     public static final String COMMAND_WORD = "saveas";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a copy of the current task list "
-            + "to the new specified file path and uses that file path.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves the task list data to the "
+            + "new specified file path and loads task list from that location in the future.\n"
             + "File path must end with .xml\n"
             + "Parameters: FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " data/watodo2.xml";
