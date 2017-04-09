@@ -30,7 +30,7 @@ ezDo is now sorted alphabetically in ascending order.
 Input:
 ****add zebra sightseeing****
 
-Description Box response: 
+Description Box response:
 ****"New task added: zebra sightseeing"****
 
 - 'zebra sightseeing' is now added as index 51 as ezDo will sort added tasks according to your last sort criteria. ezDo will scroll to the newly added task.
@@ -95,7 +95,7 @@ Input:
 Description Box response:
 ****New task added: buy phone | Priority: 1****
 
-- Added at index 32 
+- Added at index 32
 
 
 <br>
@@ -107,7 +107,7 @@ Input:
 Description Box response:
 ****New task added: buy camera | Priority: 2****
 
-- Added at index 16 
+- Added at index 16
 
 
 
@@ -252,7 +252,7 @@ Input:
 Description Box response:
 ****Edited Task: zap bugs****
 
-- Scrolls to the task's index at 62. 
+- Scrolls to the task's index at 62.
 
 Input:
 ****edit 60 eat mcdonalds****
@@ -437,7 +437,7 @@ Input:
 Description Box response:
 ****Undone task: [alice's housewarming | Priority: 1, buy camera | Priority: 2, buy capsicums | Priority: 2 | StartDate: 07/04/2017 23:25 | Tags: [shopping]]****
 
-- Tasks 1, 2 and 3 are marked as undone. Done list is now empty. 
+- Tasks 1, 2 and 3 are marked as undone. Done list is now empty.
 
 <br>
 
@@ -566,7 +566,6 @@ Input:
 Description Box response:
 ****26 tasks listed!****
 
-- 
 - 26 tasks with due date on and after 07/04/2017 are shown.
 
 <br>
@@ -647,7 +646,7 @@ Input:
 Description Box response:
 ****15 tasks listed!****
 
-- 15 tasks with priority 1 are shown. 
+- 15 tasks with priority 1 are shown.
 
 <br>
 
@@ -954,7 +953,7 @@ Input:
 Description Box response:
 ****Sorted all tasks.****
 
-- Tasks are sorted by priority in ascending order. 
+- Tasks are sorted by priority in ascending order.
 
 <br>
 
@@ -979,7 +978,7 @@ Input:
 Description Box response:
 ****Sorted all tasks.****
 
-- The tasks are sorted by start date in ascending order. 
+- The tasks are sorted by start date in ascending order.
 
 <br>
 
@@ -1003,7 +1002,7 @@ Input:
 Description Box response:
 ****Sorted all tasks.****
 
-- The tasks are sorted by due date in descending order. 
+- The tasks are sorted by due date in descending order.
 
 <br>
 
@@ -1065,7 +1064,7 @@ Input:
 Description Box response:
 ****Successfully reset aliases****
 
-- All aliases are removed. 
+- All aliases are removed.
 
 
 <br>
