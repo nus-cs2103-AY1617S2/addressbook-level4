@@ -61,7 +61,9 @@ public interface Model {
 	 */
 	void updateFilteredEventList(Set<String> keywords);
 
-	/** Updates the filter of the filtered event list to show all events */
+	/**
+	 * Updates the filter of the filtered event list to show all undone events
+	 */
 	void updateFilteredListToShowAll();
 
 	// @@author A0139448U

@@ -171,7 +171,6 @@ public class MultiViewPanel extends UiPart<Region> {
 			for (int i = 0; i < calendarList.size(); i++) {
 				String[] data = new String[TASK_DETAILS];
 				updateTimeCard(data, i);
-				debugCalendarCell(i);
 			}
 		}
 	}
@@ -183,15 +182,6 @@ public class MultiViewPanel extends UiPart<Region> {
 		data[TASK_END] = event.getEndTime().toString();
 		data[TASK_LOCATION] = event.getLocation().toString();
 		timeData.add(index, data);
-	}
-
-	private void debugCalendarCell(int index) {
-		String[] data1 = timeData.get(index);
-		int j = 0;
-		while (j != 4) {
-			System.out.println(data1[j]);
-			j++;
-		}
 	}
 
 	public void prevDay() {
