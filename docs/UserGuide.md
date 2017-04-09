@@ -74,7 +74,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > The search is not case sensitive, the order of the keywords does not matter, as only the name is searched. Tasks matching at least one keyword will be returned (i.e. `OR` search).
 
 Example:
-* `find juice`
+`find juice` <br>
 <img src="images/find.png" width="600">
 
 ## Deleting a Task : `delete`
@@ -86,7 +86,7 @@ Format: `delete INDEX [MORE INDECIES]`
   `INDEX` must be an exact match in order for the function to work.
 
 Example:
-* `delete 2`<br>
+`delete 2`<br>
 <img src="images/delete.png" width="600">
 
 ## Editing a Task : `edit`

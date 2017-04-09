@@ -1,9 +1,12 @@
 package seedu.task.model.task;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import seedu.task.commons.exceptions.IllegalValueException;
 
 public class TaskNameTest {
 
@@ -24,5 +27,20 @@ public class TaskNameTest {
         // characters
         assertTrue(TaskName.isValidTaskName("Throw Phone")); // with capital
         // letters
+
+        TaskName name1 = null;
+        TaskName name2 = null;
+        TaskName name3 = null;
+        try {
+            name1 = new TaskName("This is a name");
+            name2 = new TaskName("This is a name");
+            name3 = new TaskName("This name is longer");
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(name1.equals(name2));
+        assertEquals(1, name3.compareTo(name1));
+
     }
 }

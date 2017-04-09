@@ -149,8 +149,9 @@ public class TaskDate {
         if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
             return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year;
         }
-        return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " " + DATE_DELIMITER_DASH + " "
-                + dayTwo + DATE_DELIMITER_SLASH + monthTwo + DATE_DELIMITER_SLASH + yearTwo;
+        return day + DATE_DELIMITER_SLASH + month + DATE_DELIMITER_SLASH + year + " "
+                + DATE_DELIMITER_DASH + " " + dayTwo + DATE_DELIMITER_SLASH + monthTwo
+                + DATE_DELIMITER_SLASH + yearTwo;
     }
 
     

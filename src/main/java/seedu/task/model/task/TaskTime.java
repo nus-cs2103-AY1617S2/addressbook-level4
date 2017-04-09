@@ -52,6 +52,8 @@ public class TaskTime {
     public TaskTime(int hour, int minute) throws IllegalValueException {
         setHour(hour);
         setMinute(minute);
+        hourStr = String.valueOf(hour);
+        minuteStr = String.valueOf(minute);
         value = this.toString();
     }
 
@@ -110,22 +112,5 @@ public class TaskTime {
 
     public int compareTo(TaskTime other) {
         return ((this.hour * 60 + this.minute) - (other.hour * 60 + other.minute));
-    }
-
-    public static void main(String[] args) {
-        try {
-            TaskTime t = new TaskTime("0204");
-            System.out.println(t);
-            t = new TaskTime("305");
-            System.out.println(t);
-            t = new TaskTime("4:10");
-            System.out.println(t);
-            t = new TaskTime("12:30");
-            System.out.println(t);
-            t = new TaskTime("0:01");
-            System.out.println(t);
-        } catch (IllegalValueException ive) {
-
-        }
     }
 }

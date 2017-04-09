@@ -342,7 +342,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_filter_invalidArgsFormat() {
-        String expectedMessage = String.format(FilterCommandParser.MESSAGE_INCORRECT_FORMAT);
+        String expectedMessage = String.format(FilterCommandParser.MESSAGE_INCORRECT_FORMAT
+                    + FilterCommandParser.MESSAGE_USAGE);
         assertCommandFailure("filter ", expectedMessage);
     }
 
