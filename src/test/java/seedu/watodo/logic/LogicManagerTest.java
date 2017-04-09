@@ -463,7 +463,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_deleteSingleIndexOutOfBounds_errorMessageShown() throws Exception {
+    public void execute_deleteIndexOutOfBounds_errorMessageShown() throws Exception {
         final StringBuilder expectedMessage = new StringBuilder();
         expectedMessage.append(String.format(DeleteCommand.MESSAGE_DELETE_TASK_UNSUCCESSFUL, 4) + '\n'
                 + DeleteCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
@@ -545,7 +545,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_markSingleIndexOutOfBounds_errorMessageShown() throws Exception {
+    public void execute_markIndexOutOfBounds_errorMessageShown() throws Exception {
         final StringBuilder expectedMessage = new StringBuilder();
         expectedMessage.append(String.format(MarkCommand.MESSAGE_MARK_TASK_UNSUCCESSFUL, 4) + '\n'
                 + MarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
@@ -614,7 +614,7 @@ public class LogicManagerTest {
 
     // ================ For Unmark Command ==============================
 
-    //@@author A0141077L - reused
+    //@@author A0141077L-reused
     @Test
     public void execute_unmarkIndexMissing_errorMessageShown() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -632,7 +632,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_unmarkSingleIndexOutOfBounds_errorMessageShown() throws Exception {
+    public void execute_unmarkIndexOutOfBounds_errorMessageShown() throws Exception {
         final StringBuilder expectedMessage = new StringBuilder();
         expectedMessage.append(String.format(UnmarkCommand.MESSAGE_UNMARK_TASK_UNSUCCESSFUL, 4) + '\n'
                 + UnmarkCommand.MESSAGE_INDEX_OUT_OF_BOUNDS + '\n');
