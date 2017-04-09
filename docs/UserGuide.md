@@ -1,4 +1,4 @@
-# Task Manager - User Guide
+# FunTaskTic - User Guide
 
 By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
@@ -22,11 +22,11 @@ By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
    <img src="images/uiv0.5rc.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the user guide.
 5. Some example commands you can try:
    * **`help`** : list all the command can use
    * **`list`** : list all tasks
-   * **`add submit report by Friday`** : add a task to the task manager
+   * **`add submit report e/Friday`** : add a task to the task manager
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
@@ -37,14 +37,12 @@ By : `F12-B3`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&nb
 
 Format: `help`
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
-
-A command guide will be shown in the window
+A user guide with command listed will be shown in the window
 
 ### 2.2. Adding a task : `add`
 
 Adds a task to the task manager.<br>
-Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description #tags`
+Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description t/tags`
 
 > Only Task title is a compulsory field.<br>
 > Tasks can have any number of tags (including none).<br>
@@ -54,9 +52,9 @@ Format: `add TASK s/STARTING_DATE_TIME e/ENDING_DATE_TIME d/Description #tags`
 
 Examples:
 
-* `add submit report e/29/07/2017 3pm d/Assignment 1 #academic`
-* `add read Harry Potter s/12 March 2017 1300 e/15 December 2017 d/chapter 5 #personal`
-* `add do homework s/today e/tmr #urgent`
+* `add submit report e/29/07/2017 3pm d/Assignment 1 t/academic`
+* `add read Harry Potter s/12 March 2017 1300 e/15 December 2017 d/chapter 5 t/personal`
+* `add do homework s/today e/tmr t/urgent`
 * `add buy groceries`
 
 ### 2.3. Listing tasks : `list`
@@ -104,7 +102,7 @@ Examples:
 
 * `edit 3 e/24/06/2017`<br>
   Changes the ENDING DATE of task 3 to 24/06/2017
-* `edit 2 s/21/01/2017 e/24/06/2017 #school`<br>
+* `edit 2 s/21/01/2017 e/24/06/2017 t/school`<br>
   Changes task 3 STARTING DATE to 21/01/2017, ENDING DATE to 24/06/2017, tags to school
 
 ### 2.6. Finding all tasks containing any keyword in their task title / description / tags: `find`
@@ -118,11 +116,11 @@ Examples:
 * `find report`<br>
   Returns `submit report`  `print report` `t/report` etc. in the column
 * `find schoolwork sports`<br>
-  Returns `do schoolwork`  `play sports` `d/schoolwork` `d/sports` `t/schoolwork` `t/sports` etc. in the column
+  Returns `do schoolwork`  `play sports` `t/schoolwork` `t/sports` etc. in the column
 * `find work`<br>
-  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
+  Returns `do schoolwork`  `do homework` `t/schoolwork` `t/workfile` etc. in the column
 * `find werk`<br>
-  Returns `do schoolwork`  `do homework` `d/schoolwork` `d/workfile` `t/schoolwork` `t/workfile` etc. in the column
+  Returns `do schoolwork`  `do homework` `t/schoolwork` `t/workfile` etc. in the column
 
 ### 2.7. Deleting a task : `delete` or `remove`
 
@@ -189,19 +187,19 @@ Examples:
 * `open data/new/cloudsync.xml`<br>
   Changes the Storage Directory to ./data/new/cloudsync.xml
 
-### 2.13. Saving the task manager to a specified directory: `save` or  `saveas`
+### 2.13. Saving the task manager to a specified directory: `saveas` or  `save`
 
 Save Task Manager data to specified file path and continue using that directory for operations.<br>
 If existing file with the same name exists, it will be overwritten with current Task Manager data.<br>
 Default file path is at data/taskmanager.xml.<br>
-Format: `save FILEPATH` `saveas FILEPATH`
+Format: `saveas FILEPATH` `save FILEPATH`
 
 Examples:
 
 * `save /Users/admin/taskmanager.xml`<br>
   Moves the Storage Directory to /Users/admin/taskmanager.xml in UNIX/MAC system
 * `saveas data/new/cloudsync.xml`<br>
-  Moves the Storage Directory to ./data/new/cloudsync.xml
+  Moves the Storage Directory to /data/new/cloudsync.xml
 
 ### 2.14. Undoing the last user command that changes data: `undo`
 
@@ -292,26 +290,32 @@ Examples:
 Command | Syntax | Example
 ------- | ------ | -------
 Help         | help
-Add          | add TASK                                                     | add submit report
-Add          | add TASK s/STARTING DATE                                     | add submit report s/24/03/2017
-Add          | add TASK s/STARTING DATE e/ENDING DATE                       | add submit report s/24/03/207 e/27/03/2017
-Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description         | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
-Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description #tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 #school
+Add          | add TASK                                                      | add submit report
+Add          | add TASK s/STARTING DATE                                      | add submit report s/24/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE                        | add submit report s/24/03/207 e/27/03/2017
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description          | add submit report s/24/03/207 e/27/03/2017 d/assignment 1
+Add          | add TASK s/STARTING DATE e/ENDING DATE d/Description t/tags   | add submit report s/24/03/207 e/27/03/2017 d/assignment 1 t/school
 List         | list
-List         | list KEYWORD                                                 | list todo
-Select       | select INDEX                                                 | select 3
-Edit         | edit INDEX COMPONENT(s)                                      | edit 3 e/04/04/2017
-Find         | find KEYWORD(s)                                              | find report assignment
-Find by Date | findbydate DATE                                              | findbydate today
-Find by Date | findbydate DATE to DATE                                      | findbydate today to next wednesday
-Delete       | delete INDEX                                                 | delete 3
-Sort         | sort KEYWORD                                                 | sort e/
+List         | list KEYWORD                                                  | list todo
+Select       | select INDEX                                                  | select 3
+Edit         | edit INDEX COMPONENT                                          | edit 3 e/04/04/2017
+Find         | find KEYWORD(s)                                               | find report assignment
+Find by Date | findbydate DATE                                               | findbydate today
+Find by Date | findbydate DATE to DATE                                       | findbydate today to next wednesday
+Delete       | delete INDEX                                                  | delete 3
+remove       | remove INDEX                                                  | remove 4
+Sort         | sort KEYWORD                                                  | sort e/
 Undo         | undo
 Redo         | redo
-Done         | done INDEX                                                   | done 1
-Undone       | undone INDEX                                                 | undone 2
-Save as      | saveas FILEPATH                                              | saveas newtaskmanager.xml
-Load         | load FILEPATH                                                | load /Users/admin/taskmanager.xml
+Done         | done INDEX                                                    | done 1
+Finish       | finish INDEX                                                  | finish 2
+Complete     | complete INDEX                                                | complete 3
+Undone       | undone INDEX                                                  | undone 2
+Revert       | revert INDEX                                                  | revert 4
+Save as      | saveas FILEPATH                                               | saveas newtaskmanager.xml
+Save         | save FILEPATH                                                 | save taskmanager2.xml
+Load         | load FILEPATH                                                 | load /Users/admin/taskmanager.xml
+Open         | open FILEPATH                                                 | open data/taskmanager.xml
 Clear        | clear
 Exit         | exit
 <br>
