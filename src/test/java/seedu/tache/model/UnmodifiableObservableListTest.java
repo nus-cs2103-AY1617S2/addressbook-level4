@@ -33,13 +33,13 @@ public class UnmodifiableObservableListTest {
     }
 
     @Test
-    public void transformationListGeneratorsCorrectBackingList() {
+    public void unmodifiableObservableList_transformationListGenerators_correctBackingList() {
         assertSame(list.sorted().getSource(), list);
         assertSame(list.filtered(i -> true).getSource(), list);
     }
 
     @Test
-    public void mutatingMethodsDisabled() {
+    public void unmodifiableObservableList_mutatingMethods_disabled() {
 
         final Class<UnsupportedOperationException> ex = UnsupportedOperationException.class;
 

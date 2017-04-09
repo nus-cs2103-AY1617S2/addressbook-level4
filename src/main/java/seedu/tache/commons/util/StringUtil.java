@@ -59,13 +59,14 @@ public class StringUtil {
         return s != null && s.matches("^0*[1-9]\\d*$");
     }
 
+    //@@author A0142255M
     /**
      * Returns true if s represents an unsigned integer e.g. 1, 2, 3, ... <br>
      * Will return false if the string is:
-     * null, empty string, "-1", "0", "+1", and " 2 " (untrimmed) "3 0" (contains whitespace).
+     * empty string, "-1", "0", "+1", and " 2 " (untrimmed) "3 0" (contains whitespace).
      * @param s Should be trimmed.
      */
-    public static boolean hasSpecialCharactes(String s) {
+    public static boolean hasSpecialCharacters(String s) throws NullPointerException {
 
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(s);
@@ -73,6 +74,7 @@ public class StringUtil {
 
         return b;
     }
+    //@@author
 
     public static String capitalizeFirstCharacter(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1);

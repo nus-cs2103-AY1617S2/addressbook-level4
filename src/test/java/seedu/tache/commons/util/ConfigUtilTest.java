@@ -28,18 +28,18 @@ public class ConfigUtilTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readNullAssertionFailure() throws DataConversionException {
+    public void configUtil_readNull_assertionFailure() throws DataConversionException {
         thrown.expect(AssertionError.class);
         read(null);
     }
 
     @Test
-    public void readMissingFileEmptyResult() throws DataConversionException {
+    public void configUtil_readMissingFile_emptyResult() throws DataConversionException {
         assertFalse(read("NonExistentFile.json").isPresent());
     }
 
     @Test
-    public void readNotJsonFormatExceptionThrown() throws DataConversionException {
+    public void configUtil_readNotJsonFormat_exceptionThrown() throws DataConversionException {
 
         thrown.expect(DataConversionException.class);
         read("NotJsonFormatConfig.json");
@@ -50,7 +50,7 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void readFileInOrderSuccessfullyRead() throws DataConversionException {
+    public void configUtil_readFileInOrder_successfullyRead() throws DataConversionException {
 
         Config expected = getTypicalConfig();
 
@@ -59,13 +59,13 @@ public class ConfigUtilTest {
     }
 
     @Test
-    public void readValuesMissingFromFileDefaultValuesUsed() throws DataConversionException {
+    public void configUtil_readValuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
         Config actual = read("EmptyConfig.json").get();
         assertEquals(new Config(), actual);
     }
 
     @Test
-    public void readExtraValuesInFileExtraValuesIgnored() throws DataConversionException {
+    public void configUtil_readExtraValuesInFile_extraValuesIgnored() throws DataConversionException {
         Config expected = getTypicalConfig();
         Config actual = read("ExtraValuesConfig.json").get();
 

@@ -15,9 +15,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.tag.Tag;
+import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.ReadOnlyTask;
 import seedu.tache.model.task.Task;
+import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.tache.testutil.TypicalTestTasks;
 
 public class TaskManagerTest {
@@ -28,27 +31,27 @@ public class TaskManagerTest {
     private final TaskManager taskManager = new TaskManager();
 
     @Test
-    public void constructor() {
+    public void taskManager_constructor_success() {
         assertEquals(Collections.emptyList(), taskManager.getTaskList());
         assertEquals(Collections.emptyList(), taskManager.getTagList());
     }
 
     @Test
-    public void resetDataNullThrowsAssertionError() {
+    public void taskManagerResetData_null_assertionError() {
         thrown.expect(AssertionError.class);
         taskManager.resetData(null);
         fail();
     }
 
     @Test
-    public void resetDataWithValidReadOnlyTaskManagerReplacesData() {
+    public void taskManagerResetData_validReadOnlyTaskManager_replacesData() {
         TaskManager newData = new TypicalTestTasks().getTypicalTaskManager();
         taskManager.resetData(newData);
         assertEquals(newData, taskManager);
     }
 
     @Test
-    public void resetDataWithDuplicateTasksThrowsAssertionError() {
+    public void taskManagerResetData_duplicateTasks_assertionError() {
         TypicalTestTasks td = new TypicalTestTasks();
         // Repeat td.eggsAndBread twice
         List<Task> newTasks = Arrays.asList(new Task(td.eggsAndBread), new Task(td.eggsAndBread));
@@ -61,7 +64,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void resetDataWithDuplicateTagsThrowsAssertionError() {
+    public void taskManagerResetData_duplicateTags_assertionError() {
         TaskManager typicalTaskManager = new TypicalTestTasks().getTypicalTaskManager();
         List<ReadOnlyTask> newTasks = typicalTaskManager.getTaskList();
         List<Tag> newTags = new ArrayList<>(typicalTaskManager.getTagList());
@@ -73,6 +76,15 @@ public class TaskManagerTest {
         taskManager.resetData(newData);
         fail();
     }
+    
+    //@@author A0142255M
+    @Test(expected = TaskNotFoundException.class)
+    public void taskManagerRemoveTask_noSuchTask_failure() throws TaskNotFoundException {
+        TypicalTestTasks td = new TypicalTestTasks();
+        TaskManager taskManager = td.getTypicalTaskManager();
+        taskManager.removeTask(new Task(td.getFit));
+    }
+    //@@author
 
     /**
      * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.

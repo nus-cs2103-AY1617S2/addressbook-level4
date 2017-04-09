@@ -1,6 +1,7 @@
 package seedu.tache.commons.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -13,7 +14,7 @@ public class ConfigTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toStringDefaultObjectStringReturned() {
+    public void config_toStringDefaultObject_stringReturned() {
         String defaultConfigAsString = "App title : Tache\n"
                 + "Current log level : INFO\n"
                 + "Preference file Location : preferences.json\n"
@@ -22,6 +23,18 @@ public class ConfigTest {
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
+    
+    //@@author A0142255M
+    @Test
+    public void config_getTaskManagerName_success() {
+        assertEquals("Tache", new Config().getTaskManagerName());
+    }
+    
+    @Test
+    public void config_equalsNullValue_failure() {
+        assertFalse(new Config() == null);
+    }
+    //@@author
 
     @Test
     public void equalsMethod() {
