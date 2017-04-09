@@ -15,7 +15,13 @@ import seedu.task.model.task.TaskStatusPredicate;
 //@@author A0163845X
 public class FilterCommandParser {
 
-    public static final String MESSAGE_INCORRECT_FORMAT = "Invalid format for filter. filter [type] [arguments]";
+    public static final String MESSAGE_INCORRECT_FORMAT = "Invalid format for filter.";
+    public static final String MESSAGE_USAGE =
+              "\nFormat: filter [FILTER_TYPE] [FILTER_ARGUMENT] "
+            + "\n[FILTER_TYPE] can be name, desc (description), status, before, after."
+            + "\n[FILTER_ARGUMENT] can include a date, a status, a task description, or the name of a task."
+            + "\nExample: filter after today / filter status completed";
+
 
     public Command parse(String arguments) {
         try {
@@ -50,7 +56,7 @@ public class FilterCommandParser {
             }
             return new FilterCommand(pred);
         } catch (StringIndexOutOfBoundsException e) {
-            return new IncorrectCommand(MESSAGE_INCORRECT_FORMAT);
+            return new IncorrectCommand(MESSAGE_INCORRECT_FORMAT +MESSAGE_USAGE);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand("Invalid argument");
         }
