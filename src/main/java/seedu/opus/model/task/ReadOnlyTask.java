@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import seedu.opus.model.tag.UniqueTagList;
 
-//@@author A0126345J
+
 /**
  * A read-only immutable interface for a Task in the task manager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
 
+    //@@author A0126345J
     Name getName();
     Optional<Priority> getPriority();
     Status getStatus();
@@ -37,6 +38,7 @@ public interface ReadOnlyTask {
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime()));
     }
+    //@@author
 
     /**
      * Formats the task as text, showing all task's details.

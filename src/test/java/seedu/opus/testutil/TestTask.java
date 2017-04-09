@@ -10,12 +10,13 @@ import seedu.opus.model.task.Priority;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Status;
 
-//@@author A0126345J
+
 /**
  * A mutable task object. For testing only.
  */
 public class TestTask implements ReadOnlyTask {
 
+    //@@author A0126345J
     private Name name;
     private Note note;
     private Status status;
@@ -23,6 +24,7 @@ public class TestTask implements ReadOnlyTask {
     private DateTime startTime;
     private DateTime endTime;
     private UniqueTagList tags;
+    //@@author
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -43,6 +45,7 @@ public class TestTask implements ReadOnlyTask {
         //@@author A0124368A
     }
 
+    //@@author A0126345J
     public void setName(Name name) {
         this.name = name;
     }
@@ -75,6 +78,7 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
+    //@@author
 
     //@@author A0124368A
     @Override

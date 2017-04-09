@@ -230,6 +230,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author A0126345J
     @Test
     public void executeAddInvalidEventNotAllowed() throws Exception {
         // setup expectations
@@ -245,6 +246,7 @@ public class LogicManagerTest {
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_INVALID_EVENT);
 
     }
+    //@@author
 
 
     @Test
