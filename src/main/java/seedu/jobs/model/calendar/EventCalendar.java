@@ -2,6 +2,7 @@ package seedu.jobs.model.calendar;
 
 import seedu.jobs.model.task.Task;
 
+//@@author A0164039E
 public class EventCalendar {
     private String summary;
     private TimeCalendar startTime;

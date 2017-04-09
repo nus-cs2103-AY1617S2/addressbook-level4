@@ -90,17 +90,17 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateClear() {
         raise(new ClearCommandEvent());
     }
-    
+
     /** Raises an event to indicate that undo command has been invoked */
-    private void indicateUndo(){
+    private void indicateUndo() {
         raise(new UndoCommandEvent(getFilteredTaskList()));
     }
-    
+
     /** Raises an event to indicate that redo command has been invoked */
-    private void indicateRedo(){
+    private void indicateRedo() {
         raise(new UndoCommandEvent(getFilteredTaskList()));
     }
-    
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.removeTask(target);

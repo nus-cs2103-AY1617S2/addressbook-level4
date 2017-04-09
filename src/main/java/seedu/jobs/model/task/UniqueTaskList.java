@@ -146,7 +146,7 @@ public class UniqueTaskList implements Iterable<Task> {
             redoTemp.add(t);
         }
         redoStack.push(redoTemp);
-}
+    }
 
     public void redo() throws EmptyStackException {
         ObservableList<Task> replacement = redoStack.pop();

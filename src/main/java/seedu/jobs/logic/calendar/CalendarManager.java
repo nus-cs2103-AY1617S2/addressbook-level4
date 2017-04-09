@@ -18,15 +18,15 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.common.eventbus.Subscribe;
+
 import seedu.jobs.commons.core.EventsCenter;
+import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.commons.events.model.AddCommandEvent;
 import seedu.jobs.commons.events.model.ClearCommandEvent;
 import seedu.jobs.commons.events.model.DeleteCommandEvent;
 import seedu.jobs.commons.events.model.EditCommandEvent;
 import seedu.jobs.commons.events.model.RedoCommandEvent;
 import seedu.jobs.commons.events.model.UndoCommandEvent;
-import seedu.jobs.logic.commands.RedoCommand;
-import seedu.jobs.commons.core.UnmodifiableObservableList;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
@@ -121,6 +121,7 @@ public class CalendarManager {
         return service;
     }
 
+//@@author A0164039E
     public static com.google.api.services.calendar.Calendar getCalendar() {
         return service;
     }
@@ -150,7 +151,7 @@ public class CalendarManager {
 
         ReadOnlyTask initialTask = event.getTaskToEdit();
         Task newTask = event.getEditedTask();
-        
+
         if (!(initialTask.getEndTime().toString().equals("") && initialTask.getStartTime().toString().equals(""))) {
             new DeleteCalendar(initialTask, service);
         }
@@ -162,15 +163,15 @@ public class CalendarManager {
     public void loadTask(UnmodifiableObservableList<ReadOnlyTask> list) throws IllegalTimeException {
         new LoadCalendar(service, list);
     }
-    
+
     @Subscribe
-    public void redoTask(RedoCommandEvent event) throws IllegalTimeException{
+    public void redoTask(RedoCommandEvent event) throws IllegalTimeException {
         clearCalendar();
         loadTask(event.getFilteredTaskList());
     }
-    
+
     @Subscribe
-    public void undoTask(UndoCommandEvent event) throws IllegalTimeException{
+    public void undoTask(UndoCommandEvent event) throws IllegalTimeException {
         clearCalendar();
         loadTask(event.getFilteredTaskList());
     }

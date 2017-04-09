@@ -2,6 +2,7 @@ package seedu.jobs.logic.calendar;
 
 import java.io.IOException;
 
+//@@author A0164039E
 public class ClearCalendar extends BasicCommandCalendar {
 
     public ClearCalendar(com.google.api.services.calendar.Calendar inputCalendar) {

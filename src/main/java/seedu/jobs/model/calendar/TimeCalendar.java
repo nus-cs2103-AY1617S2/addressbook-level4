@@ -2,6 +2,7 @@ package seedu.jobs.model.calendar;
 
 import seedu.jobs.model.task.Time;
 
+//@@author A0164039E
 public class TimeCalendar {
     private Time toConvert;
 
