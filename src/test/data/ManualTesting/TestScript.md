@@ -43,6 +43,9 @@
 | select `Write chinese essay` in `To Do` tab | list todo | selected view tab is now `To Do` |
 | | select `index` | task is selected |
 |		|		|		|
+| **delete task ** | | |
+| delete task `Write chinese essay` | delete `index` | task is deleted |
+|		|		|		|
 | **sort tasks**<br><br>Sorted order preference will maintain throughout the session, i.e. new tasks added will be inserted according to the sort order | | |
 | sort by start date | sort s/ | tasks are sorted according to earliest start dates first, tasks without start dates will be listed after tasks with start dates |
 | sort by end date | sort e/ | tasks are sorted according to earliest end dates first, tasks without end dates will be listed after tasks with end dates |
@@ -58,8 +61,21 @@
 | restore edit description| redo | task becomes `go NTUC d/buy oranges`|
 | check anything else to redo | redo | error given, nothing else to redo |
 |		|		|		|
-| **find command**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
+| **find**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
 | find tasks with keyword `school` | find school | shows tasks with `school` |
 | | list | clears the filter and shows all tasks |
 | find tasks with keyword `school` or `home` | find school home | show tasks with `school` or `home` |
 | | list | clears the filter and shows all tasks |
+|		|		|		|
+| **find by date**<br><br> Search for tasks that contain the specified date point or date range | | |
+| find tasks on 10 april 2017 | findbydate 10 apr 2017 | tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
+| | list | clears the filter and shows all tasks |
+| find tasks from 10-11 april 2017 | findbydate 10 apr 2017 to 11 apr 2017 | tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
+| | list | clears the filter and shows all tasks |
+|		|		|		|
+| **save data to another file location** | | |
+| save current FunTaskTic data to data/subfolder/newdata.xml | saveas data/subfolder/newdata.xml | data saved in specified location |
+|		|		|		|
+| **clear data in FunTaskTic** | clear | list is cleared |
+|		|		|		|
+| **exit FunTaskTic** | exit | closes FunTaskTic |
