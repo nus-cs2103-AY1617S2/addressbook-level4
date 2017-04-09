@@ -55,11 +55,7 @@ public class CommandBox extends UiPart<Region> {
             String prefix = commandText.substring(0, caretPosition);
             if (!(currentPrefix.equals(Optional.of(prefix))
                     && matchingCommands.get(matchingCommandIndex).equals(commandText))) {
-                currentPrefix = Optional.of(prefix);
-                commandHistoryIndex = getCommandHistory().size() - 1;
-                matchingCommands.clear();
-                matchingCommands.add(commandText);
-                matchingCommandIndex = 0;
+                resetMatchingCommands(prefix, commandText);
             }
             Optional<String> matchingCommand;
             if (keyCode.equals(KeyCode.UP)) {
@@ -73,6 +69,14 @@ public class CommandBox extends UiPart<Region> {
             }
             event.consume();
         });
+    }
+
+    private void resetMatchingCommands(String prefix, String commandText) {
+        currentPrefix = Optional.of(prefix);
+        commandHistoryIndex = getCommandHistory().size() - 1;
+        matchingCommands.clear();
+        matchingCommands.add(commandText);
+        matchingCommandIndex = 0;
     }
 
     private Optional<String> findPreviousMatchingCommand(String prefix, String commandText) {
