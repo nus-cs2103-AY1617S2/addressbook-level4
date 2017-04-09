@@ -25,10 +25,12 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = false)
     private String dueDate;
+    //@@author A0163744B
     @XmlElement(required = false)
     private String start;
     @XmlElement(required = false)
     private String end;
+    //@@author
     @XmlElement(required = true)
     private String complete;
     @XmlElement(required = true)

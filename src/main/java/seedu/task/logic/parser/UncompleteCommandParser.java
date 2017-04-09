@@ -1,3 +1,4 @@
+//@@author A0163744B
 package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -8,6 +9,9 @@ import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
 import seedu.task.logic.commands.UncompleteCommand;
 
+/**
+ * Parses input arguments for the uncomplete command and creates a new UncompleteCommand object
+ */
 public class UncompleteCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the UncompleteCommand
