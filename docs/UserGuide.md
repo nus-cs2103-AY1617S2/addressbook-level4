@@ -366,7 +366,7 @@ Things To Note:
 ```
 
 ### 3.11. Saving the Data to Another Folder : `save`
-Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, you may consider saving TypeTask’s data files into another folder of your choice. To do that, you can use the save command. <br>
+Your data is saved to the default storage folder in the hard disk automatically after any command that changes the data. There is no need to save manually! However, if you want to make a backup copy of the current set of data, or if you want to save it to a thumb drive to share it with your friends, you are able to by using the save command. <br>
 
 Format:<br>
 `save <FILE_PATH>`<br>
@@ -374,15 +374,18 @@ Format:<br>
 ```
 Things To Note:
 > The file path provided must be valid.
+> If there exists a file there, it will be overwritten!
+> You can use either relative or absolute file path. (See examples)
 ```
 
 Examples:
 
-* `save C:/Desktop/myTask`
+* `save C:/Desktop/myTask` <br>
+* `save Data/Backup` <br>
 
 
 ### 3.12. Changing the Default Storage Folder : `setting`
-Want to set your default storage folder to another folder? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
+Want to set your default storage folder to another folder? Want to set your default storage folder to be at Google Drive / Dropbox, so you can cloud your data? You can do that by typing in the setting command to set the TypeTask folder into a folder of your choice . <br>
 
 Format:<br>
 `setting <FILE_PATH>`<br>
@@ -390,15 +393,18 @@ Format:<br>
 ```
 Things To Note:
 > The file path provided must be valid.
+> If there exists a file there, it will be overwritten!
+> You can use either relative or absolute file path. (See examples)
 ```
 
 Examples:
 
 * `setting C:/Desktop/myOtherTask`<br>
+* `setting Data/Backup` <br>
 
 
 ### 3.13. Using Data from Another Folder : `use`
-After changing TypeTask’s data files, you want to use them from your reallocated folder. You can use the use command to load the data from the specified folder.  <br>
+What if you use a previous set of data? What if you want to check out what your friends have in their TypeTask file? You can use the `use` command to do it.  <br>
 
 Format:<br>
 `use <FILE_PATH>`<br>
@@ -406,11 +412,13 @@ Format:<br>
 ```
 Things To Note:
 > The file path provided must be valid.
+> You can use either relative or absolute file path. (See examples)
 ```
 
 Examples:
 
 * `use C:/Desktop/myTask`<br>
+* `use Data/Backup` <br>
 
 
 ### 3.14. Clearing all Entries : `clear`
