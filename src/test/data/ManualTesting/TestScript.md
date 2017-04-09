@@ -101,7 +101,7 @@ Undoes the delete command. The floating task should reappear.
 
 #### Result
 
-Updates the task with the new specified start and end datetime, description as well as tag
+Updates the task with the new specified start and end datetime, description as well as tag.
 
 > Updated Task: Meeting 1 Starting from: 01-04-17 1200 until 01-04-17 1800 Details: Anywhere Tags: [Work]
 
@@ -121,7 +121,7 @@ Updates the task with the new specified task name
 
 #### Result
 
-Updates the task with the new specified end datetime
+Updates the task with the new specified end datetime.
 
 > Updated Task: Example Assignment Due by: 10-03-17 0000
 
@@ -131,7 +131,7 @@ Updates the task with the new specified end datetime
 
 #### Result
 
-Remove starting datetime for the event, changing it into a deadline
+Remove starting datetime for the event, changing it into a deadline.
 
 > Updated Task: Meeting 1 Due by: 01-04-17 1800 Details: Anywhere Tags: [Work]
 
@@ -141,7 +141,7 @@ Remove starting datetime for the event, changing it into a deadline
 
 #### Result
 
-Remove ending datetime for the deadline, changing it into a floating task
+Remove ending datetime for the deadline, changing it into a floating task.
 
 > Updated Task: Meeting 1 Details: Anywhere Tags: [Work]
 
@@ -151,7 +151,7 @@ Remove ending datetime for the deadline, changing it into a floating task
 
 #### Result
 
-Add new starting and ending datetime for the floating task, changing it into an event
+Add new starting and ending datetime for the floating task, changing it into an event.
 
 > Updated Task: Meeting 1 Starting from: 01-04-17 1200 until 01-04-17 Details: Anywhere Tags: [Work]
 
@@ -235,7 +235,7 @@ All tasks with assignment in their title are listed.
 
 #### Result
 
-All tasks with the specified tag are listed
+All tasks with the specified tag are listed.
 
 > 3 tasks listed!
 > GeeKeep is showing all the tasks which:
@@ -274,16 +274,16 @@ Save file should now be located at `src/test/data/newTaskManager.xml`
 
 ## Command History
 
-`a` + Tab
+Up and down Arrow key
 
 #### Result
 
-`add` command should autocomplete in the command box.
+The previously entered commands can now cycled through in the order which is most recent.
 
-## Command History
+## Exit Command
 
-`a` + Tab
+`Exit`
 
 #### Result
 
-`add` command should autocomplete in the command box.
+Quits Geekeep.
