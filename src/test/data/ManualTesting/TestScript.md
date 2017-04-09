@@ -140,3 +140,49 @@ To sync your tasks in Opus into Google calendar, start command with the keyword 
 #### Result
 1. After the first step, Opus will direct you to the Google Tasks authorization page in your browser. Once authorized with your Google account, there will be a pop-up window telling you that sync has been turned on, and you may now close the authorization page and go back to Opus. After the authorization, all the tasks you added will sync to your Google Calendar.
 2. After the second step, sync to Google Calendar will be turned off.
+
+## Undo/Redo command
+
+### Undo the previous command
+
+`add Dummy task`
+
+`undo`
+
+#### Result
+
+Dummy task should be removed from the task list.
+
+### Redo the previous undo
+
+`redo`
+
+#### Result
+
+Dummy task should be back in the task list.
+
+### Undo again
+
+`undo`
+
+#### Result
+
+Dummy task should be gone again.
+
+## Autocompletion
+
+`a` + Tab
+
+#### Result
+
+`add` command should autocomplete in the command box.
+
+
+## Command history
+
+`addd blah`
+
+#### Result
+
+The command box should flash due to incorrect error. Press the up arrow key. The same command should appear again.
+
