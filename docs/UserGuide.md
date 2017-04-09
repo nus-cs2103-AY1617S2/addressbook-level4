@@ -162,7 +162,7 @@ Format : `ADD` task `ON` date `CATEGORY` categoryName<br>
  If user wants more than one category tagged to the task, for example two categories:<br>
  `ADD` task `FROM` date `TO` date `CATEGORY` categoryOne `CATEGORY` categoryTwo
 
- #####Special Categories : High, Medium, Low
+ ##### Special Categories : High, Medium, Low
 
  These categories are to show priority and will have a different colour box as compared to normal categories.<br> 
  Priority(Colour): High(Red), Medium(Yellow), Low(Blue)
