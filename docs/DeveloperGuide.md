@@ -275,7 +275,7 @@ The `Model` component does not depend on other three components and consists of 
 
 The `Model` component exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
-#### 2.4.1 Undo/Redo implementation
+#### 2.4.1 Undo/Redo Implementation
 
 The `undo/redo` feature in Opus is designed based on the momento command pattern. This command pattern design comprises of three components - `momento`, the data object which the rollback operation will be executed upon, `originator` the component that generates the `momento` object and the `momento collector`.
 
@@ -284,13 +284,31 @@ Whenever the data object is modified, the `originator` sends a copy of the curre
 In Opus, we have:
 * `ModelManager` as the `originator`.
 * `TaskManagers` as `momento` objects.
-* `History` as the `momento collector`.
+* `TaskManagerStateHistory` as the `momento collector`.
 
 `History` contains two lists of `TaskManager`, one for the backwards `undo` operation and another for the forward `redo` operation.
 
-Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `History`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
+Using the entire `TaskManager` as the `momento` object rather than the individual `Task` attributes simplifies overall design and implementation of this feature. Whenever the `TaskManager` is mutated, `ModelManager` will push a copy of `TaskManager` to `TaskManagerStateHistory`. This approach is robust and resistant to data inconsistency when multiple changes are made by a single command.
 
 Furthermore, this reduces overall coupling and complexity of Opus and improves extensibility. New features or `Task` attributes can be added without having to modify any part of the Undo/Redo implementation. This is possible as that the entire `TaskManager` is captured as a single snapshot, which includes any attribute that is newly added to the `Task` or `Tag` implementation.
+
+### 2.4.2. Sync/Google Task Implementation
+
+The `Sync` component is responsible for handling all sync operations in Opus.
+
+<img src="images/SyncClassDiagram.png" width="400"><br>
+_Figure 2.4.2 : Structure of the Sync Component_
+
+The `Sync` component is comprised of two main parts - the individual `SyncService` integration classes and `SyncManager` class. The `SyncManager` class manages all `SyncService` classes as well as delegating sync requests from Model to the corresponding `SyncService`.
+
+All sync integration is required to implement the `SyncService` interface to handle sync requests. This allows for easy extention of other sync integration into Opus without much changes to other components. 
+
+Presently, only Google Task integration is implemented as of *Release v0.5*. However, this implementation has the following limitaions:
+1. Supports one way synchronisation from Opus to Google Task.<br>
+>Google Task API rejects request calls to insert `Task` with an user-defined `Id`. This makes tracking of individual `Tasks` between Opus and Google Task difficult with the use of an unique identifer.<br>
+
+2. Supports floating tasks and tasks with `EndTime` only.<br>
+>Google Task does not include a `StartTime` field as part of their implementation of `Task`. Google Calendar, which supports events, can be considered as a solution in future release.<br>
 
 ### 2.5. Storage component
 
@@ -304,10 +322,10 @@ _Figure 2.5.1 : Structure of the Storage Component_
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component listens the `TaskManagerChangedEvent` and
-whenever there is a change to the task manager data, the component updates the storage files accordingly. It
+whenever there is a change to the task manager data, the component updates the storage files accordingly. The `Storage` has the following operations:
 
-* saves `UserPref` objects in JSON format and read it back.
-* saves the Task Manager data in XML format and read it back.
+* Saves `UserPref` objects in JSON format and read it back.
+* Saves the Task Manager data in XML format and read it back.
 
 ### 2.6. Common classes
 
@@ -350,11 +368,13 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 ### 4.1. Code Quality
 
-In Opus, we aspire to attain high quality coding standards by applying the principles of defensive programming. Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
+In Opus, we aspire to attain high quality coding standards by stricting following the Java coding standard and applying the principles of defensive programming. Maintaining a good coding standard enhances readability of the code and allows other developers to quickly grasp and understand Opus' implementation. The Java coding standard can be found [here](https://oss-generic.github.io/process/codingStandards/CodingStandard-Java.html).
+
+Defensive prgramming principles and techniques enable the developer to handle unexpected situations that may cause a program or a routine to stop working. Some examples of defensive programming are:
 * Using Assertions to check validity of arguments before passing them into functions.
 * Throwing Excpetions when encountering unexpected events.
 * Enforcing 1-to-1 associations
-A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf)
+A good write up on defensive programming can be found [here](http://www.comp.nus.edu.sg/~cs2103/AY1617S2/files/handouts/%5bL7P2%5d%20Putting%20up%20defenses%20to%20protect%20our%20code.pdf).
 
 ### 4.2. Testing
 
