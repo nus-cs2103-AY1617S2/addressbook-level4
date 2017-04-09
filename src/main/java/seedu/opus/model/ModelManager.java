@@ -9,13 +9,13 @@ import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.opus.model.util.InvalidUndoException;
 import seedu.opus.sync.SyncManager;
 import seedu.opus.sync.SyncServiceGtask;
 
@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
-    private History history;
+    private TaskManagerStateHistory history;
     private final SyncManager syncManager;
     private boolean isSyncOn;
 
@@ -44,7 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        this.history = new History();
+        this.history = new TaskManagerStateHistory();
         this.syncManager = new SyncManager(new SyncServiceGtask());
         this.isSyncOn = false;
     }
@@ -127,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetToPrecedingState() throws InvalidUndoException {
-        this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
+        this.taskManager.resetData(this.history.getNextState(this.taskManager));
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
             syncManager.updateTaskList(this.taskManager.getNonEventTaskList());

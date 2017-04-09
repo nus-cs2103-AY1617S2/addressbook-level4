@@ -1,7 +1,7 @@
 package seedu.opus.logic.commands;
 
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.logic.commands.exceptions.CommandException;
+import seedu.opus.model.util.InvalidUndoException;
 
 //@@author A0148087W
 /**

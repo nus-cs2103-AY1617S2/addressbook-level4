@@ -3,12 +3,12 @@ package seedu.opus.model;
 import java.util.List;
 
 import seedu.opus.commons.core.UnmodifiableObservableList;
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.opus.model.util.InvalidUndoException;
 
 /**
  * The API of the Model component.
