@@ -14,7 +14,7 @@ public class ConfigTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void config_toStringDefaultObject_stringReturned() {
+    public void toStringDefaultObjectStringReturned() {
         String defaultConfigAsString = "App title : Tache\n"
                 + "Current log level : INFO\n"
                 + "Preference file Location : preferences.json\n"

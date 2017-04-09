@@ -28,7 +28,7 @@ public class XmlTaskManagerStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void xmlTaskManagerStorageReadtaskManager_nullFilePath_assertionFailure() throws Exception {
+    public void readTaskManagerNullFilePathAssertionFailure() throws Exception {
         thrown.expect(AssertionError.class);
         readTaskManager(null);
         fail();
@@ -45,12 +45,12 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void xmlTaskManagerStorageRead_missingFile_emptyResult() throws Exception {
+    public void readMissingFileEmptyResult() throws Exception {
         assertFalse(readTaskManager("NonExistentFile.xml").isPresent());
     }
 
     @Test
-    public void xmlTaskManagerStorageRead_notXmlFormat_exceptionThrown() throws Exception {
+    public void readNotXmlFormatExceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
         readTaskManager("NotXmlFormatTaskManager.xml");
@@ -61,7 +61,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void xmlTaskManagerStorageReadAndSaveTaskManager_allInOrder_success() throws Exception {
+    public void readAndSaveTaskManagerAllInOrderSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
@@ -88,7 +88,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void xmlTaskManagerStorageRSveTaskManager_nullTaskManager_assertionFailure() throws IOException {
+    public void saveTaskManagerNullTaskManagerAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(null, "SomeFile.xml");
         fail();
@@ -99,7 +99,7 @@ public class XmlTaskManagerStorageTest {
     }
 
     @Test
-    public void xmlTaskManagerStorageSaveTaskManager_nullFilePath_assertionFailure() throws IOException {
+    public void saveTaskManagerNullFilePathAssertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskManager(new TaskManager(), null);
         fail();

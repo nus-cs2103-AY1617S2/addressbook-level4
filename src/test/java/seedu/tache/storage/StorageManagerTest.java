@@ -39,7 +39,7 @@ public class StorageManagerTest {
 
 
     @Test
-    public void storageManager_prefsReadSave_success() throws Exception {
+    public void prefsReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonUserPrefsStorage} class.
@@ -53,7 +53,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void storageManager_taskManagerReadSave_success() throws Exception {
+    public void taskManagerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlTaskManagerStorage} class.
@@ -71,7 +71,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void storageManager_handleTaskManagerChangedEvent_exceptionThrownEventRaised() throws IOException {
+    public void handleTaskManagerChangedEventExceptionThrownEventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskManagerStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));

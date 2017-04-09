@@ -10,7 +10,6 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
-
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_DAILY;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_MONTHLY;
 import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_IDENTIFIER_PREFIX;
@@ -229,8 +228,8 @@ public class ParserUtil {
         String[] inputs = input.split(" ");
         int currentIndex = 0;
         Deque<PossibleDateTime> result = new LinkedList<PossibleDateTime>();
-        PossibleDateTime current = new PossibleDateTime(new String(),
-                                PossibleDateTime.INVALID_INDEX, DateTimeType.UNKNOWN);
+        PossibleDateTime current = new PossibleDateTime(new String(), PossibleDateTime.INVALID_INDEX,
+                                                        DateTimeType.UNKNOWN);
         for (int i = 0; i < inputs.length; i++) {
             String word = inputs[i];
             if (isStartDateIdentifier(word)) {

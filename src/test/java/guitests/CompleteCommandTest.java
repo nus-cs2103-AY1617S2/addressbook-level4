@@ -82,7 +82,8 @@ public class CompleteCommandTest extends TaskManagerGuiTest {
     @Test
     public void complete_recurringTask_success() {
         commandBox.runCommand("clear");
-        commandBox.runCommand("add test from 9 april to 16 april every day");
+        commandBox.runCommand("add test from 9 april to 16 april");
+        commandBox.runCommand("edit 1 change recurinterval to day");
         commandBox.runCommand("list");
 
         commandBox.runCommand("complete 1");

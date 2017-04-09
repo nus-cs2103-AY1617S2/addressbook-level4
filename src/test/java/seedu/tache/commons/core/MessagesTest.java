@@ -8,7 +8,7 @@ import org.junit.Test;
 public class MessagesTest {
 
     @Test
-    public void messages_initMessageNotNull_success() {
+    public void initMessageNotNull() {
         Messages msg = new Messages();
         assertNotNull(msg);
     }

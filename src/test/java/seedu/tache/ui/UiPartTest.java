@@ -28,14 +28,14 @@ public class UiPartTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void uiPartConstructor_nullFileUrl_throwsAssertionError() {
+    public void constructorNullFileUrlThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>((URL) null);
         fail();
     }
 
     @Test
-    public void uiPartConstructor_missingFileUrl_throwsAssertionError() throws Exception {
+    public void constructorMissingFileUrlThrowsAssertionError() throws Exception {
         URL missingFileUrl = new URL(testFolder.getRoot().toURI().toURL(), MISSING_FILE_PATH);
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(missingFileUrl);
@@ -43,7 +43,7 @@ public class UiPartTest {
     }
 
     @Test
-    public void uiPartConstructor_invalidFileUrl_throwsAssertionError() {
+    public void constructorInvalidFileUrlThrowsAssertionError() {
         URL invalidFileUrl = getTestFileUrl(INVALID_FILE_PATH);
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(invalidFileUrl);
@@ -51,27 +51,27 @@ public class UiPartTest {
     }
 
     @Test
-    public void uiPartConstructor_validFileUrl_loadsFile() {
+    public void constructorValidFileUrlLoadsFile() {
         URL validFileUrl = getTestFileUrl(VALID_FILE_PATH);
         assertEquals(VALID_FILE_ROOT, new TestUiPart<TestFxmlObject>(validFileUrl).getRoot());
     }
 
     @Test
-    public void uiPartConstructor_nullFileName_throwsAssertionError() {
+    public void constructorNullFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>((String) null);
         fail();
     }
 
     @Test
-    public void uiPartConstructor_missingFileName_throwsAssertionError() {
+    public void constructorMissingFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(MISSING_FILE_PATH);
         fail();
     }
 
     @Test
-    public void uiPartConstructor_invalidFileName_throwsAssertionError() {
+    public void constructorInvalidFileNameThrowsAssertionError() {
         thrown.expect(AssertionError.class);
         new TestUiPart<Object>(INVALID_FILE_PATH);
         fail();
