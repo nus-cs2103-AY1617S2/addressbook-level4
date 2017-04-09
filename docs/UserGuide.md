@@ -99,11 +99,13 @@ You are currently reading my user guide, which has been written to help you with
   > * Name <br>
   `Name must only contain alphanumeric characters.`
   > * Start Date <br>
-  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
   > * Start Time <br>
   `All time formats are supported.`
   > * End Date <br>
-  `MM/DD/YYYY, MM-DD-YYY format or english natural language e.g. 6 april 2017`
+  `MM/DD/YYYY, MM-DD-YYY format`<br>
+  `or english natural language e.g. 6 april 2017`
   > * End Time <br>
   `All time formats are supported.`
   > * Tag <br>
@@ -195,8 +197,8 @@ For advanced users: **`l`** `<filter>` <br>
 
 Finds uncompleted and overdue task(s) whose details(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.<br>
-> Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`. 
+Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
 
 > **`find`** can also be used to look for dates, time and tags<br>
 
@@ -233,21 +235,20 @@ An example of a task you might want to _edit_: <br>
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br><br>
 Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
-You can edit more task details for your task concurrently using the following format:<br>
 E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
+You can edit more task details for your task concurrently using the above format.<br>
 
-~~~
-**Special Note**
-'<task_detail>' can be used interchangeably with no special characters or initials for better convenience 
-E.g. 'start_date' can be replaced with 'startdate' or 'sd'
-'recur_interval' can be replaced with 'recurinterval' or 'ri'
-~~~
+>**Special Note**<br>
+>`<task_detail>` can be used interchangeably with no special characters or initials for better convenience <br>
+>E.g. `start_date` can be replaced with `startdate` or `sd`<br>
+>`recur_interval` can be replaced with `recurinterval` or `ri`<br>
+
 
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
 
-For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
-For advanced users: **`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
+For advanced users:<br>**`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br><br>
+For advanced users:<br>**`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
 
 ### 3.6. Delete a task : `delete`
 
@@ -293,10 +294,10 @@ A reason why you might want to _complete_ a task:
   > I will keep your completed tasks hidden from your default list view until you need to refer to them again. <br>
 
 Format: **`complete`** `<task_index>`<br>
-E.g. **`complete`** `1` <br>
+E.g. **`complete`** `1` <br><br>
 Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
-You can complete multiple tasks simultaneously using the following format:<br>
 E.g. **`complete`** `1,2,3,4` <br>
+You can complete multiple tasks simultaneously using the above format.<br>
 
 <img src="images/UiCompleteCommand.png" width="600"><br>
 _Figure 3.8.1. Complete Command_
@@ -414,8 +415,8 @@ Your wish is my command!
 |:-----------:|:-------------------------------------------------------------:|:---------------------------------------------------:|
 |Add          |**`add`** `<task_name> by <due date and time>`                 |**`add`** `project proposal by 13 apr 2pm`           |
 |List         |**`list`** `<optional filter>`                                 |**`list`** `uncompleted`                             |
-|Find         |**`find`** `<keyword>`                                         |**`find`** `prject`                                  |
-|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread`      |
+|Find         |**`find`** `<keyword>`                                         |**`find`** `project`                                  |
+|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1 change name to buy white bread`      |
 |Delete       |**`delete`** `<task_index>`                                    |**`delete`** `1`                                     |
 |Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
 |Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
