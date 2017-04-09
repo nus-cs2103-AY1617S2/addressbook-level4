@@ -53,10 +53,13 @@
 | | undo | task description is restored to `buy apples` |
 | | undo | task is un-added, i.e. removed from list |
 |		|		|		|
-| **redo a command**<br><br>Can Only redo actions if the last command was `undo`| | |
+| **redo a command**<br><br>Can only redo actions if the last command was `undo`| | |
 | restore the task `Go NTUC d/buy apples` | redo | task is added back |
 | restore edit description| redo | task becomes `go NTUC d/buy oranges`|
 | check anything else to redo | redo | error given, nothing else to redo |
 |		|		|		|
-
-
+| **find command**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
+| find tasks with keyword `school` | find school | shows tasks with `school` |
+| | list | clears the filter and shows all tasks |
+| find tasks with keyword `school` or `home` | find school home | show tasks with `school` or `home` |
+| | list | clears the filter and shows all tasks |
