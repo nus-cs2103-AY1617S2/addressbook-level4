@@ -92,7 +92,7 @@ The rest of the App consists four components.
 * [**`Logic`**](#logic-component) : The command executor.
 * [**`Model`**](#model-component) : Holds the data of the App in-memory.
 * [**`Storage`**](#storage-component) : Reads data from, and writes data to, the hard disk.
-* [**`Calendar`**] : Manage interaction with Google Calendar display.
+* **`Calendar`** : Manage interaction with Google Calendar display.
 
 Each of the five components
 * Defines its _API_ in an `interface` with the same name as the Component.
