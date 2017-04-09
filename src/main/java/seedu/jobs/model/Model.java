@@ -37,13 +37,14 @@ public interface Model {
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
+     * @param editedTask 
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws IllegalTimeException
      * @throws IndexOutOfBoundsException if {@code filteredPersonListIndex} < 0 or >= the size of the filtered list.
      */
-    void updateTask(int filteredPersonListIndex, ReadOnlyTask editedTask)
+    void updateTask(int filteredPersonListIndex, ReadOnlyTask taskToEdit, Task editedTask)
          throws UniqueTaskList.DuplicateTaskException, IllegalTimeException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */

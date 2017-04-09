@@ -1,5 +1,7 @@
 package seedu.jobs.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -120,7 +122,6 @@ public class MainWindow extends UiPart<Region> {
 
     void fillInnerParts() throws InterruptedException {
 
-        browserPanel = new BrowserPanel(browserPlaceholder, loginInfo);
         taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskBookFilePath());
@@ -207,7 +208,14 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        browserPanel.freeResources();
+        if(browserPanel!=null){
+            browserPanel.freeResources(); 
+        }
     }
-
+    
+  //@@author A0130979U
+    public void activateBrowser(){
+        this.browserPanel = new BrowserPanel(browserPlaceholder, loginInfo);
+    }
+  //@@author
 }

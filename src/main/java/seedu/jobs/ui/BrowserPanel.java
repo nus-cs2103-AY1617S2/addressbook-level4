@@ -1,5 +1,7 @@
 package seedu.jobs.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -8,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+import seedu.jobs.commons.core.EventsCenter;
+import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.util.FxViewUtil;
 import seedu.jobs.model.LoginInfo;
 
@@ -30,9 +34,14 @@ public class BrowserPanel extends UiPart<Region> {
                                                      // loaded Web page.
         FxViewUtil.applyAnchorBoundaryParameters(browser, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(browser);
-
+        EventsCenter.getInstance().registerHandler(this);
         String email = loginInfo.getEmail();
         String password = loginInfo.getPassword();
+        login(email, password);
+
+    }
+
+    private void login(String email, String password) {
         ChangeListener<State> emailListener = new ChangeListener<State>() {
             @Override
             public void changed(ObservableValue<? extends State> observable, State oldValue, State newValue) {
@@ -48,7 +57,7 @@ public class BrowserPanel extends UiPart<Region> {
         };
         browser.getEngine().getLoadWorker().stateProperty().addListener(emailListener);
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
-
+        
     }
 
     /**
@@ -56,6 +65,11 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void freeResources() {
         browser = null;
+    }
+    
+    @Subscribe
+    public void reload(TaskBookChangedEvent event){
+        browser.getEngine().reload();
     }
     
 }

@@ -17,7 +17,13 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
+import com.google.common.eventbus.Subscribe;
 
+import seedu.jobs.commons.core.EventsCenter;
+import seedu.jobs.commons.events.model.AddCommandEvent;
+import seedu.jobs.commons.events.model.ClearCommandEvent;
+import seedu.jobs.commons.events.model.DeleteCommandEvent;
+import seedu.jobs.commons.events.model.EditCommandEvent;
 import seedu.jobs.model.task.ReadOnlyTask;
 import seedu.jobs.model.task.Task;
 import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
@@ -52,6 +58,7 @@ public class CalendarManager {
     protected static com.google.api.services.calendar.Calendar service;
 
     public CalendarManager() {
+        EventsCenter.getInstance().registerHandler(this);
         try {
             authorize();
             getCalendarService();
@@ -114,20 +121,29 @@ public class CalendarManager {
     public static com.google.api.services.calendar.Calendar getCalendar() {
         return service;
     }
-
-    public void AddTask(Task task) {
-        new AddCalendar(task, service);
+    
+    @Subscribe
+    public void AddTask(AddCommandEvent event) {
+        new AddCalendar(event.getTask(), service);
     }
-
-    public void ClearTask() {
+    
+    @Subscribe
+    public void ClearTask(ClearCommandEvent event) {
         new ClearCalendar(service);
     }
-
-    public void DeleteTask(ReadOnlyTask task) throws IllegalTimeException {
-        new DeleteCalendar(task, service);
+    
+    @Subscribe
+    public void DeleteTask(DeleteCommandEvent event) throws IllegalTimeException {
+        new DeleteCalendar(event.getTask(), service);
     }
 
-    public void EditTask(ReadOnlyTask initialTask, Task newTask) throws IllegalTimeException {
+    
+    @Subscribe
+    public void EditTask(EditCommandEvent event) throws IllegalTimeException {
+        
+        ReadOnlyTask initialTask = event.getTaskToEdit();
+        Task newTask = event.getEditedTask();
+        
         if (!(initialTask.getEndTime().toString().equals("") && initialTask.getStartTime().toString().equals(""))) {
             new DeleteCalendar(initialTask, service);
         }

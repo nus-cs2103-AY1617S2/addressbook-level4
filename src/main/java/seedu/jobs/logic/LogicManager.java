@@ -23,12 +23,10 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final Parser parser;
-    private final CalendarManager calendar;
 
-    public LogicManager(Model model, Storage storage, CalendarManager calendar) {
+    public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.parser = new Parser();
-        this.calendar = calendar;
     }
 
     @Override
@@ -36,7 +34,6 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        command.setCalendar(calendar);
         return command.execute();
     }
 

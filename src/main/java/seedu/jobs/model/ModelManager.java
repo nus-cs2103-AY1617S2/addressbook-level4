@@ -5,10 +5,16 @@ import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.controlsfx.control.RangeSlider;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.core.UnmodifiableObservableList;
+import seedu.jobs.commons.events.model.AddCommandEvent;
+import seedu.jobs.commons.events.model.ClearCommandEvent;
+import seedu.jobs.commons.events.model.DeleteCommandEvent;
+import seedu.jobs.commons.events.model.EditCommandEvent;
 import seedu.jobs.commons.events.model.TaskBookChangedEvent;
 import seedu.jobs.commons.events.storage.SavePathChangedEvent;
 import seedu.jobs.commons.util.CollectionUtil;
@@ -49,6 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskBook newData) throws IllegalTimeException {
         taskBook.resetData(newData);
+        indicateClear();
         indicateTaskBookChanged();
     }
 
@@ -61,10 +68,31 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
-
+    
+    /** Raises an event to indicate that add command has been invoked */
+    private void indicateAdd(Task target){
+        raise(new AddCommandEvent(target));
+    }
+    
+    /** Raises an event to indicate that delete command has been invoked */
+    private void indicateDelete(ReadOnlyTask target){
+        raise(new DeleteCommandEvent(target));
+    }
+    
+    /** Raises an event to indicate that edit command has been invoked */
+    private void indicateEdit(ReadOnlyTask taskToEdit,Task editedTask){
+        raise(new EditCommandEvent(taskToEdit, editedTask));
+    }
+    
+    /** Raises an event to indicate that clear command has been invoked */
+    private void indicateClear(){
+        raise(new ClearCommandEvent());
+    }
+    
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.removeTask(target);
+        indicateDelete(target);
         indicateTaskBookChanged();
     }
 
@@ -75,19 +103,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskBook.addTask(task);
+    public synchronized void addTask(Task target) throws UniqueTaskList.DuplicateTaskException {
+        taskBook.addTask(target);
         updateFilteredListToShowAll();
+        indicateAdd(target);
         indicateTaskBookChanged();
     }
 
     @Override
-    public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
+    public void updateTask(int filteredTaskListIndex, ReadOnlyTask taskToEdit, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException, IllegalTimeException {
         assert editedTask != null;
 
         int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskBook.updateTask(taskBookIndex, editedTask);
+        indicateEdit(taskToEdit, editedTask);
         indicateTaskBookChanged();
     }
 

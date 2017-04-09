@@ -14,6 +14,7 @@ import seedu.jobs.commons.core.Config;
 import seedu.jobs.commons.core.EventsCenter;
 import seedu.jobs.commons.core.LogsCenter;
 import seedu.jobs.commons.core.Version;
+import seedu.jobs.commons.events.ui.CalendarDisplayEvent;
 import seedu.jobs.commons.events.ui.ExitAppRequestEvent;
 import seedu.jobs.commons.exceptions.DataConversionException;
 import seedu.jobs.commons.util.ConfigUtil;
@@ -68,10 +69,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        
-        calendarManager = new CalendarManager();
-
-        logic = new LogicManager(model, storage, calendarManager);
+           
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic, config, userPrefs, loginInfo);
 
@@ -224,6 +223,12 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+    
+    @Subscribe
+    public void handleCalendarDisplayEvent(CalendarDisplayEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        this.calendarManager = new CalendarManager();
     }
 
     public static void main(String[] args) {
