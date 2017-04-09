@@ -39,7 +39,7 @@ latest version should be v0.5.
 
 ### 2.2. Launch
 
-1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Installing](#21-installing). 
+1. To launch the app, double-click on the file `toluist.jar` you downloaded in [Install](#21-install). 
 2. The GUI should appear in a few seconds. Refer to the figure below to see how ToLuist should initially look like on your first launch.
    
    <img src="images/Ui.png" width="600"><br>
