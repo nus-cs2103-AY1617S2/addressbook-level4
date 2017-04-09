@@ -209,7 +209,7 @@ public class UniqueTaskList implements Iterable<Task> {
             return internalList.filtered(DatePredicate.isOverdue());
         } else if (endDate.equals(EndDate.today)) {
             return internalList.filtered(DatePredicate.isToday());
-    	} else {
+        } else {
     	    return internalList;
     	}
     }
