@@ -242,6 +242,9 @@ public class ModelManager extends ComponentManager implements Model {
     // =========== Filtered List Accessors
 
     // @@author A0148038A
+    /**
+     * get a sorted list of events
+     */
     @Override
     public UnmodifiableObservableList<ReadOnlyEvent> getFilteredEventList() {
         SortedList<ReadOnlyEvent> sortedEvents = new SortedList<ReadOnlyEvent>(filteredEvents);
@@ -249,6 +252,9 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<ReadOnlyEvent>(sortedEvents);
     }
 
+    /**
+     * get a sorte list of tasks
+     */
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         SortedList<ReadOnlyTask> sortedTasks = new SortedList<ReadOnlyTask>(filteredTasks);

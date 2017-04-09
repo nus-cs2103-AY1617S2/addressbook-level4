@@ -92,8 +92,8 @@ public class TypicalTestTasks {
     }
 
     public WhatsLeft getTypicalWhatsLeft() {
-        WhatsLeft ab = new WhatsLeft();
-        loadWhatsLeftWithSampleData(ab);
-        return ab;
+        WhatsLeft wl = new WhatsLeft();
+        loadWhatsLeftWithSampleData(wl);
+        return wl;
     }
 }

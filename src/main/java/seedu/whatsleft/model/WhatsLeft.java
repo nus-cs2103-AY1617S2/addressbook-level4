@@ -56,16 +56,14 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         resetData(toBeCopied);
     }
 
-//// list overwrite operations
+    public void setEvents(List<? extends ReadOnlyEvent> events)
+            throws IllegalValueException {
+        this.events.setEvents(events);
+    }
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
             throws UniqueTaskList.DuplicateTaskException {
         this.tasks.setTasks(tasks);
-    }
-
-    public void setEvents(List<? extends ReadOnlyEvent> events)
-            throws IllegalValueException {
-        this.events.setEvents(events);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -104,20 +102,6 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         tasks.clearAll();
     }
 
-//// activity-level operations
-
-    /**
-     * Adds a task to WhatsLeft.
-     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the task to point to those in {@link #tags}.
-     *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
-     */
-    public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
-        syncMasterTagListWith(t);
-        tasks.add(t);
-    }
-
     /**
      * Adds a event to WhatsLeft.
      * Also checks the new event's tags and updates {@link #tags} with any new tags found,
@@ -131,6 +115,18 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
         events.add(e);
     }
 
+    /**
+     * Adds a task to WhatsLeft.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     */
+    public void addTask(Task t) throws UniqueTaskList.DuplicateTaskException {
+        syncMasterTagListWith(t);
+        tasks.add(t);
+    }
+
     //@@author A0148038A
     /**
      * Updates the event in the list at position {@code index} with {@code editedReadOnlyEvent}.
@@ -139,8 +135,6 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      *
      * @throws DuplicateEventException if updating the event's details causes the event to be equivalent to
      *      another existing event in the list.
-     * @throws DuplicateTimeClashException if the updating event clashes with another event
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateEvent(Event eventToEdit, Event editedEvent)
             throws UniqueEventList.DuplicateEventException {
@@ -160,7 +154,6 @@ public class WhatsLeft implements ReadOnlyWhatsLeft {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
-     * @throws IndexOutOfBoundsException if {@code index} < 0 or >= the size of the list.
      */
     public void updateTask(Task taskToEdit, Task editedTask)
             throws UniqueTaskList.DuplicateTaskException {

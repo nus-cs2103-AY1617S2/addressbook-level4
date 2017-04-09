@@ -55,7 +55,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Updates(edits) a task in WhatsLeft.
      *
-     * @param a task to edit and an edit task
+     * @param a task to edit and an edited task
      * @throws DuplicateTaskException if the edited task is a duplicate of an existing task in the list.
      */
     public void updateTask(Task taskToEdit, Task editedTask) throws UniqueTaskList.DuplicateTaskException {

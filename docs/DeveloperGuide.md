@@ -143,11 +143,11 @@ _Figure 2.1.3c : Component interactions for `show com` command_
 #### Activity Diagrams for some workflow
 
 The Activity Diagram below shows the workflow of a user saving/reading the xml data file at/from another location
-<img src="images\ActivityDiagramSaveFile.png" width="800"><br>
-_Figure 2.1.4a : Activity Diagram for Saving File
+<img src="images\SaveFileActivityDiagram.png" width="200"><br>
+_Figure 2.1.4a : Activity Diagram for Saving File_
 
-<img src="images\ActivityDiagramReadFile.png" width="800"><br>
-_Figure 2.1.4b : Activity Diagram for Reading File
+<img src="images\ReadFileActivityDiagram.png" width="200"><br>
+_Figure 2.1.4b : Activity Diagram for Reading File_
 
 The sections below give more details of each component.
 
@@ -158,7 +158,7 @@ Author: Goh Yue Quan
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/whatsleft/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BrowserPanel`, `EventListPanel`, `TaskListPanel`
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
@@ -183,10 +183,10 @@ _Figure 2.3.1 : Structure of the Logic Component_
 
 **API** : [`Logic.java`](../src/main/java/seedu/whatsleft/logic/Logic.java)
 
-1. `Logic` uses the `Parser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+* `Logic` uses the `Parser` class to parse the user command.
+* This results in a `Command` object which is executed by the `LogicManager`.
+* The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+* The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete ev 1")`
  API call.<br>
@@ -202,11 +202,11 @@ _Figure 2.4.1 : Structure of the Model Component_
 
 **API** : [`Model.java`](../src/main/java/seedu/whatsleft/model/Model.java)
 
-The `Model`,
+The `Model` component,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the WhatsLeft data.
-* exposes a `UnmodifiableObservableList<ReadOnlyActivity>` that can be 'observed' e.g. the UI can be bound to this list
+* exposes `UnmodifiableObservableList<ReadOnlyEvent>` and `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to the two lists
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -227,7 +227,7 @@ The `Storage` component,
 
 ### 2.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.whatsleft.commons` package.
 
 ## 3. Implementation
 
@@ -273,18 +273,18 @@ Tests can be found in the `./src/test/java` folder.
 
 We have two types of tests:
 
-1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the GUI.
+1. **GUI Tests** - These are _System Tests_ that test the entire App by simulating user actions on the [GUI](#GUI).
    These are in the `guitests` package.
 
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.whatsleft.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.whatsleft.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.whatsleft.logic.LogicManagerTest`
 
 #### Headless GUI Testing
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -356,95 +356,77 @@ b. Require developers to download those libraries manually (this creates extra w
 
 ## Appendix A : User Stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
+Priorities:
+* High (must have) - `* * *`
+* Medium (nice to have)  - `* *`
+* Low (unlikely to have) - `*`
 
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | view all available commands | refer to them when I do not know how to use the App
-`* * *` | user | add a new event/deadline/task | keep track of it
-`* * *` | user | edit chosen event/deadline/task | update relevant details
-`* * *` | user | delete chosen event/deadline/task | mark it as cancelled
-`* * *` | user | view a list of events/deadlines/tasks | know what is left
-`* * *` | user | mark event/deadline/task as completed | archive the completed event/deadline/task
-`* * *` | user | sort the list of deadlines by due date | know what is due first
-`* * *` | user | sort the list of tasks by priority level | know what task to do first
-`* * *` | user | select the storage folder/file | store them on a local file controlled by a cloud syncing service
+`* * *` | user | add a new [event](#Event)/[task](#Task) | keep track of it
+`* * *` | user | edit chosen event/task | update relevant details
+`* * *` | user | delete chosen event/task | mark it as cancelled
+`* * *` | user | delete all events/tasks | reset my WhatsLeft
+`* * *` | user | view a sorted all list of events/tasks | know all activities saved in WhatsLeft
+`* * *` | user | view all finished events/tasks | keep track of my progress in event/task completion
+`* * *` | user | view all pending events/tasks | keep track of all incoming activities
+`* * *` | user | mark a task as completed | archive the completed task
 `* * *` | user | undo my last [mutating operation](#mutating-operation) | reverse any mistake made
 `* * *` | user | let passed events automatically archive themselves | save time checking them off
-`* * *` | user | view all finished event/deadline/task | keep track of my progress in task completion
-`* * *` | user | save the storage file to designated folder, e.g. dropbox sync folder | access my task manager from multiple devices
-`* * *` | user | load WhatsLeft content from designated folder, e.g. dropbox sync folder | access my task manager from multiple devices
-`* *` | user | search for event/deadline/task by attribute | find out details on specific event/deadline/task
-`* *` | user | set up recurring event/deadline/task | save time setting them up every day/month/year
-`* *` | user | sync my events/deadlines/tasks with google calendar/tasks | access them online through other applications and devices (mobile)
-`* *` | user | receive an email reminder for events and deadlines | be prompt on the incoming events and deadlines
-`* *` | user | customise the reminder myself | choose how and when to be notified
-`* *` | user | block multiple slots for unconfirmed events | ensure no other events will clash
-`* *` | user | confirm an event to release blocked timeslots | maximise the use of my time
-`* *` | user | pin/star an event/deadline/task | see it at the top of my list all the time
-`* *` | user | add comments to my event/deadline/task | put in details that I might want to remember
-`* *` | user | see the overview of events and deadlines in calendar format | see how busy the month will be for me
-`*` | Advanced user | use shorter version of commands | type them easily and quickly
-`*` | user | schedule events based on day ("this wed, next tues") without knowing the date | add events quickly
-`*` | user | view a list of uncompleted events/deadlines/tasks of same nature (events, deadlines, floating tasks) | see things that are important to me
-`*` | user | send reminders to other people involved in certain event or deadline | notify collaborators
-`*` | Advanced user | color code the events/deadlines/tasks myself | see the importance of events/deadlines/tasks without opening them up
-`*` | user | view list of deleted events/deadlines/tasks | check details of deleted events/deadlines/tasks
-`*` | user | view list of finished/pending/all events/deadlines/tasks | check details of finished events/deadlines/tasks
-`*` | user | change the status of a task from completed back to pending | improve/redo the task
-`*` | user | move an event/deadline/task from deleted list to [active list](#active-list) | add the event/deadline/task without re-creating it entirely
-`*` | user | copy an event/deadline/task from the archived list to the active list | add the same event/deadline/task without re-creating it entirely
-
-{More to be added}
+`* * *` | user | save the storage file to designated folder, e.g. dropbox sync folder | access WhatsLeft from multiple devices
+`* * *` | user | load WhatsLeft content from designated folder, e.g. dropbox sync folder | access my WhatsLeft from multiple devices
+`* * *` | user | search for event/task by keywords in description | find out details on specific event/task
+`* *` | user | set up recurring event | save time setting them up every day/week/month
+`* *` | user | get a warning message when adding a clashing event | get aware of all possible clashes
+`* *` | user | add tags to my event/task | put in details that I might want to remember
+`*` | user | see the overview of events and deadlines in calendar format | see how busy the month will be for me
+`*` | user | schedule events/tasks based on day ("this wed, next tue") without knowing the date | add events quickly
+`*` | user | change the status of a task from completed back to pending | redo the task
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `WhatsLeft` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add an event/deadline/task
+#### Use case: Add an event/task
 
 **MSS**
 
-1. User requests to add an event/deadline/task
-2. WhatsLeft adds specified event/deadline/task <br>
+1. User requests to add an event/task
+2. WhatsLeft adds specified event/task <br>
 Use case ends.
 
 **Extensions**
 
 1a. The command entered is not in the correct format
 
-> 1a1. WhatsLeft shows error message and suggests correct format <br>
+> WhatsLeft shows error message and suggests correct format <br>
   Use case ends
 
-#### Use case: Delete an event/deadline/task
-**MSS**
+1b. There is a same [activity](#Activity) in WhatsLeft already.
 
-1. User requests to list all events/deadlines/tasks
-2. WhatsLeft shows user the list of all events/deadlines/tasks
-3. User requests to delete a specific event/deadline/task
-4. WhatsLeft deletes the specified event/deadline/task
-Use case ends.
+> WhatsLeft shows an error message of duplicate activities <br>
+    Use case ends
 
-**Extensions**
+1c. The end date/time of the event is earlier than the start date/time
 
-2a. The list is empty
+> WhatsLeft shows an error message of invalid end date/time <br>
+    Use case ends
 
-> Use case ends
+1d. This event has clash against an existing event in WhatsLeft
 
-3a. The given index is invalid
-
-> 3a1. WhatsLeft shows an error message <br>
-  Use case resumes at step 2
+> WhatsLeft shows a warning message of possible clash<br>
+    Use case resumes at step 2
 
 #### Use case: Edit an existing event/deadline/task
 
 **MSS**
 
-1. User requests to list all events/deadlines/tasks
-2. WhatsLeft shows user the list of all events/deadlines/tasks
-3. User requests to edit a specific event/deadline/task
-4. WhatsLeft updates the specified event/deadline/task
+1. User requests to list all events/tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to edit a specific event/task
+4. WhatsLeft updates the specified event/task
 Use case ends.
 
 **Extensions**
@@ -455,17 +437,16 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Finish an event/deadline/task
-
+#### Use case: Delete an event/task
 **MSS**
 
-1. User requests to list all events/deadlines/tasks
-2. WhatsLeft shows user the list of all events/deadlines/tasks
-3. User requests to finish a specific event/deadline/task
-4. WhatsLeft archives the specified event/deadline/task
+1. User requests to list all events/tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to delete a specific event/task
+4. WhatsLeft deletes the specified event/task
 Use case ends.
 
 **Extensions**
@@ -476,17 +457,18 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: View an event/deadline/task
+#### Use case: Finish a task
 
 **MSS**
 
-1. User requests to list all events/deadlines/tasks
-2. WhatsLeft shows user the list of all events/deadlines/tasks
-3. User requests to view a specific event/deadline/task
-4. WhatsLeft shows all Information of the specific event/deadline/task
+1. User requests to list all tasks
+2. WhatsLeft shows user the list of all tasks
+3. User requests to finish a specific task
+4. WhatsLeft archives the specified task
+Use case ends.
 
 **Extensions**
 
@@ -494,9 +476,34 @@ Use case ends.
 
 > Use case ends
 
-3a. The given parameter is invalid
+3a. The given task index is invalid
 
-> 3a1. WhatsLeft shows an error message <br>
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+#### Use case: Select an event/task
+
+**MSS**
+
+1. User requests to list all events and tasks
+2. WhatsLeft shows user the list of all events/tasks
+3. User requests to select a specific event/task
+4. WhatsLeft shows all Information of the specific event/task
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given type is invalid
+
+> WhatsLeft shows an error message <br>
+  Use case resumes at step 2
+
+3b. The give index is invalide
+
+> WhatsLeft shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Undo last [mutating operation](#mutating-operation)
@@ -512,22 +519,6 @@ Use case ends.
 2a. There was no previous [mutating operation](#mutating-operation)
 
 > Use case ends
-
-#### Use case: Redo previous undo operation
-
-**MSS**
-
-1. User requests to redo last undo operation
-2. WhatsLeft redoes last operation
-Use case ends.
-
-**Extensions**
-
-2a. There was no previous undo operation
-
-> Use case ends
-
-{More to be added}
 
 ## Appendix C : Non Functional Requirements
 
@@ -545,32 +536,30 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Active list
+##### GUI
 
-> List of all unfinished events/deadlines/tasks.
+> Graphical User Interface
+
+##### Activity
+
+> An event, a deadline or a floating task.
 
 ##### Event
 
-> An activity that has a start date/time (and end date/time).
-
-##### Deadline
-
-> An activity with end date/time.
+> An activity that has a start date/time and end date/time.
 
 ##### Task
 
-> An floating task with no specified date or time.
+> A floating task with no specified date or time or a deadline with specifies due date and time.
 
 ##### Mutating Operation
 
-> Refers to the following operations: add, edit, delete, finish, clear. These commands mutate the event/deadline/task list.
+> Refers to the following operations: `add`, `edit`, `delete`, `finish`, `redo` and `clear`. These commands mutate the event/task list.
 
 
 ## Appendix E : Product Survey
 
 **Trello**
-
-Author: Fog Creek
 
 Pros:
 
@@ -587,8 +576,6 @@ Cons:
 
 **Wunderlist**
 
-Author: 6Wunderkinder
-
 Pros:
 
 * Archives completed tasks automatically
@@ -603,8 +590,6 @@ Cons:
 
 **Microsoft Outlook**
 
-Author: Microsoft
-
 Pros:
 
 * Syncs events from all connected accounts to calendar automatically, including birthdays, Facebook events
@@ -617,8 +602,6 @@ Cons:
 * No integrated free-floating task list
 
 **HiTask**
-
-Author: Human Computer LLC
 
 Pros:
 
@@ -633,8 +616,6 @@ Cons:
 * Steep learning curve due to many features
 
 **Remember the milk**
-
-Author: Emily Boyd, Omar Kilani
 
 Pros:
 
