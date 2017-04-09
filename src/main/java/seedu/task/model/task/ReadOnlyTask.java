@@ -3,7 +3,7 @@ package seedu.task.model.task;
 import seedu.task.model.tag.UniqueTagList;
 
 /**
- * A read-only immutable interface for a Task in the task manager.
+ * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field
  * values are validated.
  */
@@ -19,7 +19,7 @@ public interface ReadOnlyTask {
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
-     * the returned list will not affect the task's internal tags.
+     * the returned list will not affect the person's internal tags.
      */
     UniqueTagList getTags();
 
@@ -44,7 +44,7 @@ public interface ReadOnlyTask {
     }
 
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the person as text, showing all contact details.
      */
   //@@author A0164032U
     default String getAsText() {

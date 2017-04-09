@@ -13,20 +13,19 @@ import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskManager;
 
 /**
- * A class to access TaskManager data stored as an xml file on the hard disk.
+ * A class to access AddressBook data stored as an xml file on the hard disk.
  */
-public class XmlTaskManagerStorage implements TaskManagerStorage {
+public class XmlAddressBookStorage implements TaskManagerStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlTaskManagerStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
     private String filePath;
 
-    public XmlTaskManagerStorage(String filePath) {
+    public XmlAddressBookStorage(String filePath) {
         this.filePath = filePath;
     }
 
-    @Override
-    public String getTaskManagerFilePath() {
+    public String getAddressBookFilePath() {
         return filePath;
     }
 
@@ -40,44 +39,43 @@ public class XmlTaskManagerStorage implements TaskManagerStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    @Override
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         assert filePath != null;
 
-        File taskManagerFile = new File(filePath);
+        File addressBookFile = new File(filePath);
 
-        if (!taskManagerFile.exists()) {
-            logger.info("TaskManager file "  + taskManagerFile + " not found");
+        if (!addressBookFile.exists()) {
+            logger.info("AddressBook file "  + addressBookFile + " not found");
             return Optional.empty();
         }
 
-        ReadOnlyTaskManager taskManagerOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskManager addressBookOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
-        return Optional.of(taskManagerOptional);
+        return Optional.of(addressBookOptional);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        saveTaskManager(taskManager, filePath);
+    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
+        saveAddressBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveTaskManager(ReadOnlyTaskManager)}
+     * Similar to {@link #saveAddressBook(ReadOnlyTaskManager)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
-        assert taskManager != null;
+    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
+        assert addressBook != null;
         assert filePath != null;
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(taskManager));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskManager(addressBook));
     }
 
     //@@author A0163848R
     @Override
-    public void setTaskManagerFilePath(String path) {
+    public void setAddressBookFilePath(String path) {
         this.filePath = path;
     }
 

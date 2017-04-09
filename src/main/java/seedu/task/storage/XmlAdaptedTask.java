@@ -17,7 +17,7 @@ import seedu.task.model.task.StartDate;
 import seedu.task.model.task.Task;
 
 /**
- * JAXB-friendly version of the Task.
+ * JAXB-friendly version of the Person.
  */
 public class XmlAdaptedTask {
 
@@ -41,7 +41,7 @@ public class XmlAdaptedTask {
 
 
     /**
-     * Converts a given Task into this class for JAXB use.
+     * Converts a given Person into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
@@ -63,18 +63,18 @@ public class XmlAdaptedTask {
     }
 
     /**
-     * Converts this jaxb-friendly adapted task object into the model's Task object.
+     * Converts this jaxb-friendly adapted person object into the model's Person object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted task
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Task toModelType() throws IllegalValueException {
-        final List<Tag> taskTags = new ArrayList<>();
+        final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            taskTags.add(tag.toModelType());
+            personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
         final Group group = new Group(this.group);
-        final UniqueTagList tags = new UniqueTagList(taskTags);
+        final UniqueTagList tags = new UniqueTagList(personTags);
         final Date start = new StartDate(this.start);
         final Date end = new EndDate(this.end);
 

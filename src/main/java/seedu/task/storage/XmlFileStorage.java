@@ -9,23 +9,23 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.XmlUtil;
 
 /**
- * Stores taskmanager data in an XML file
+ * Stores addressbook data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given taskmanager data to the specified file.
+     * Saves the given addressbook data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableTaskManager taskManager)
+    public static void saveDataToFile(File file, XmlSerializableTaskManager addressBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, taskManager);
+            XmlUtil.saveDataToFile(file, addressBook);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }
     }
 
     /**
-     * Returns task manager in the file or an empty task manager
+     * Returns address book in the file or an empty address book
      */
     public static XmlSerializableTaskManager loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {

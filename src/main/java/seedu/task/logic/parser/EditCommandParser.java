@@ -34,21 +34,21 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        EditTaskDescriptor editPersonDescriptor = new EditTaskDescriptor();
         try {
-            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
-            editTaskDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE)));
-            editTaskDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE)));
-            editTaskDescriptor.setGroup(ParserUtil.parseGroup(argsTokenizer.getValue(PREFIX_GROUP)));
+            editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editPersonDescriptor.setEndDate(ParserUtil.parseEndDate(argsTokenizer.getValue(PREFIX_END_DATE)));
+            editPersonDescriptor.setStartDate(ParserUtil.parseStartDate(argsTokenizer.getValue(PREFIX_START_DATE)));
+            editPersonDescriptor.setGroup(ParserUtil.parseGroup(argsTokenizer.getValue(PREFIX_GROUP)));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
 
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
             return new IncorrectCommand(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index.get(), editTaskDescriptor);
+        return new EditCommand(index.get(), editPersonDescriptor);
     }
 
     /**

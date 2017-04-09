@@ -21,23 +21,23 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.UserPrefs;
 
 /**
- * Manages storage of TaskManager data in local storage.
+ * Manages storage of AddressBook data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TaskManagerStorage taskManagerStorage;
+    private TaskManagerStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskManagerStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.taskManagerStorage = taskManagerStorage;
+        this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(String taskManagerFilePath, String userPrefsFilePath) {
-        this(new XmlTaskManagerStorage(taskManagerFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
+    public StorageManager(String addressBookFilePath, String userPrefsFilePath) {
+        this(new XmlAddressBookStorage(addressBookFilePath), new JsonUserPrefsStorage(userPrefsFilePath));
     }
 
     // ================ UserPrefs methods ==============================
@@ -53,42 +53,42 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ TaskManager methods ==============================
+    // ================ AddressBook methods ==============================
 
     @Override
-    public String getTaskManagerFilePath() {
-        return taskManagerStorage.getTaskManagerFilePath();
+    public String getAddressBookFilePath() {
+        return addressBookStorage.getAddressBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException {
-        return readTaskManager(taskManagerStorage.getTaskManagerFilePath());
+        return readTaskManager(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return taskManagerStorage.readTaskManager(filePath);
+        return addressBookStorage.readTaskManager(filePath);
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
+    public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
+        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskManagerStorage.saveTaskManager(taskManager, filePath);
+        addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent event) {
+    public void handleAddressBookChangedEvent(TaskManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveTaskManager(event.data);
+            saveAddressBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
@@ -99,7 +99,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleExportRequestEvent(ExportRequestEvent ere) {
         try {
-            saveTaskManager(ere.getYTomorrowToExport(), ere.getTargetFile().getPath());
+            saveAddressBook(ere.getYTomorrowToExport(), ere.getTargetFile().getPath());
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
@@ -134,13 +134,13 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTargetFileRequestEvent(TargetFileRequestEvent tfre) {
-        taskManagerStorage.setTaskManagerFilePath(tfre.getTargetFile().getPath());
+        addressBookStorage.setAddressBookFilePath(tfre.getTargetFile().getPath());
         tfre.getUserPrefs().getGuiSettings().setLastLoadedYTomorrow(tfre.getTargetFile().getPath());
     }
 
     @Override
-    public void setTaskManagerFilePath(String path) {
-        taskManagerStorage.setTaskManagerFilePath(path);
+    public void setAddressBookFilePath(String path) {
+        addressBookStorage.setAddressBookFilePath(path);
     }
 
 }

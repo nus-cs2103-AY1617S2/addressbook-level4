@@ -14,7 +14,7 @@ public interface TaskManagerStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getTaskManagerFilePath();
+    String getAddressBookFilePath();
 
     /**
      * Returns Task Manager data as a {@link ReadOnlyTaskManager}.
@@ -25,24 +25,24 @@ public interface TaskManagerStorage {
     Optional<ReadOnlyTaskManager> readTaskManager() throws DataConversionException, IOException;
 
     /**
-     * @see #getTaskManagerFilePath()
+     * @see #getAddressBookFilePath()
      */
     Optional<ReadOnlyTaskManager> readTaskManager(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTaskManager} to the storage.
-     * @param taskManager cannot be null.
+     * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException;
+    void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException;
 
     /**
-     * @see #saveTaskManager(ReadOnlyTaskManager)
+     * @see #saveAddressBook(ReadOnlyTaskManager)
      */
-    void saveTaskManager(ReadOnlyTaskManager taskManager, String filePath) throws IOException;
+    void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException;
 
     //@@author A0163848R
-    /** Sets the Task Manager file path */
-    void setTaskManagerFilePath(String path);
+    /** Sets the Address Book file path */
+    void setAddressBookFilePath(String path);
 
 }
