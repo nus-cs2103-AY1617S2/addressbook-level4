@@ -167,14 +167,13 @@ Format: `edit INDEX <[DESCRIPTION] [EDIT DATETIME FORMAT] [#TAG]...>`
 EDIT DATETIME FORMAT
 > * Task can be changed from one task type to any other task type
 > * DATETIME FORMAT must be one of the following four:
->   a. by/ DATETIME
->   b. on/ DATETIME
->   c. from/ DATETIME to/ DATETIME
->   d. on/ DATETIME to/ DATETIME
+>   a. `by/` DATETIME
+>   b. `on/` DATETIME
+>   c. `from/` DATETIME `to/` DATETIME
+>   d. `on/` DATETIME `to/` DATETIME
+>   e. `REMOVEDATES`
 > * All existing DATETIME of the task to be edited will be removed.
-
-> * To remove DATETIMEs of a task, the format is:
-`edit INDEX REMOVEDATES`
+> * REMOVEDATES removes all existing dates of a task and changes it to a floating task.
 > * No other field is allowed
 
 Examples:
@@ -312,12 +311,17 @@ Examples:
 * shortcut + undo z
 * shortcut - undo z
 
-### 2.17. Exiting the program : `exit`
+### 2.17 Viewing all the shortcut keys: `viewshortcuts`
+
+Shows a list of all the shortcut commands by default and those customized by the user.
+Format: `viewshortcuts`
+
+### 2.18. Exiting the program : `exit`
 
 Exits the program.<br>
 Format: `exit`
 
-### 2.18. Saving the data
+### 2.19. Saving the data
 
 Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
