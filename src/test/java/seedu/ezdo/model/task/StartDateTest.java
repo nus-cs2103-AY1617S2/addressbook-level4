@@ -14,7 +14,7 @@ import seedu.ezdo.model.todo.StartDate;
 public class StartDateTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
+    //@@author A0139177W
     @Test
     public void isValidStartDate() {
         // invalid dates
@@ -34,7 +34,7 @@ public class StartDateTest {
                                                                    // 30 days
         assertTrue(StartDate.isValidTaskDate("29/02/2003 20:21")); // leap year
     }
-
+    //@@author
     @Test
     public void hashCode_equals() throws Exception {
         StartDate one = new StartDate("05.10.1977");

@@ -124,7 +124,8 @@ public class TaskCard extends UiPart<Region> {
                 startDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            pe.printStackTrace();
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object.
         }
     }
 
@@ -162,7 +163,8 @@ public class TaskCard extends UiPart<Region> {
                 dueDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            pe.printStackTrace();
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object.
         }
     }
 
@@ -181,7 +183,8 @@ public class TaskCard extends UiPart<Region> {
                 dueDate.setStyle(cssColor);
             }
         } catch (ParseException pe) {
-            pe.printStackTrace();
+            // Do nothing as the date is optional
+            // and cannot be parsed as Date object.
         }
     }
 
@@ -242,4 +245,4 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
-//@@author A0139177W
+//@@author
