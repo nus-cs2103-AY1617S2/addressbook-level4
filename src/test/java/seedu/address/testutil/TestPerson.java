@@ -41,6 +41,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     public void setGroup(Group group) {
+        assert group != null;
         this.group = group;
     }
 
@@ -80,7 +81,7 @@ public class TestPerson implements ReadOnlyTask {
 
     @Override
     public UniqueTagList getTags() {
-        return tags;
+    	return new UniqueTagList(tags);
     }
 
     @Override
@@ -94,19 +95,21 @@ public class TestPerson implements ReadOnlyTask {
         sb.append("s/" + this.getStartDate().inputValue + " ");
         sb.append("d/" + this.getEndDate().inputValue + " ");
         sb.append("g/" + this.getGroup().value + " ");
-        //this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 
-    public boolean hasPassed() {
+    @Override
+	public boolean hasPassed() {
         return false;
     }
 
-    public java.util.Date getEndTime() {
+    @Override
+	public java.util.Date getEndTime() {
         return null;
     }
 
-    public java.util.Date getStartTime() {
+    @Override
+	public java.util.Date getStartTime() {
         return null;
     }
 }
