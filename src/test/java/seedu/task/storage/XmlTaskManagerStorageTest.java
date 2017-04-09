@@ -12,7 +12,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.TaskManager;
-import seedu.task.storage.XmlTaskManagerStorage;
 
 public class XmlTaskManagerStorageTest {
     private static String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlTaskManagerStorageTest/");
