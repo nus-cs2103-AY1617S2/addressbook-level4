@@ -49,13 +49,14 @@ public class DateParserTest {
      */
     @Test
     public void checkFormatParsing() throws Exception {
-        dateParser = new DateParser("31/12/2017 11:00");
-        assertEquals(dateParser.value, "31/12/2017 11:00");
-
-        dateParser = new DateParser("1/1/2016 12:00");
-        assertEquals(dateParser.value, "01/01/2016 12:00");
-
-        dateParser = new DateParser("15/01/2016 00:00");
-        assertEquals(dateParser.value, "15/01/2016 00:00");
+        assertDateParseSuccess("31/12/2017 11:00", "31/12/2017 11:00");
+        assertDateParseSuccess("1/1/2016 12:00", "01/01/2016 12:00");
+        assertDateParseSuccess("15/01/2016 00:00", "15/01/2016 00:00");
     }
+
+    private void assertDateParseSuccess(String input, String expectedOutput) {
+        dateParser = new DateParser(input);
+        assertEquals(dateParser.value, expectedOutput);
+    }
+
 }
