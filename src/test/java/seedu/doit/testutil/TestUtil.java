@@ -56,7 +56,7 @@ public class TestUtil {
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
     public static final String XMLTASKMANAGERSTORAGETEST_FOLDER = FileUtil
-            .getPath("./src/test/data/XmlTaskManagerStorageTest/");
+        .getPath("./src/test/data/XmlTaskManagerStorageTest/");
 
     public static final Task[] SAMPLE_TASK_DATA = getSampleTaskData();
 
@@ -70,46 +70,46 @@ public class TestUtil {
                 return;
             }
             String message = String.format("Expected thrown: %s, actual: %s", expected.getName(),
-                    actualException.getClass().getName());
+                actualException.getClass().getName());
             throw new AssertionFailedError(message);
         }
         throw new AssertionFailedError(
-                String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
+            String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
             return new Task[] {
-                    new Task(new Name("Ali Muster"), new Priority("low"), new EndTime("next friday"),
-                            new Description("4th street"), new UniqueTagList()),
-                    new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("05/05/17"),
-                            new Description("81th street"), new UniqueTagList()),
-                    new Task(new Name("Carl Kurz"), new Priority("high"), new EndTime("friday"),
-                            new Description("wall street"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new Priority("high"), new EndTime("next monday"),
-                            new Description("10th street"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"),
-                            new Description("michegan ave"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
-                            new Description("little tokyo"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new Priority("high"), new EndTime("12/12/17"),
-                            new Description("4th street"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
-                            new Description("little tokyo"), new UniqueTagList()),
-                    new Task(new Name("AAAAAFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("BBBBBFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("CCCCCFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("03/03/17"),
-                            new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("03/03/17"),
-                            new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("03/03/17"),
-                            new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"),
-                            new Description("little india"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"),
-                            new Description("chicago ave"), new UniqueTagList()) };
+                new Task(new Name("Ali Muster"), new Priority("low"), new EndTime("next friday"),
+                    new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("05/05/17"),
+                    new Description("81th street"), new UniqueTagList()),
+                new Task(new Name("Carl Kurz"), new Priority("high"), new EndTime("friday"),
+                    new Description("wall street"), new UniqueTagList()),
+                new Task(new Name("Daniel Meier"), new Priority("high"), new EndTime("next monday"),
+                    new Description("10th street"), new UniqueTagList()),
+                new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"),
+                    new Description("michegan ave"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
+                    new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Priority("high"), new EndTime("12/12/17"),
+                    new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"),
+                    new Description("little tokyo"), new UniqueTagList()),
+                new Task(new Name("AAAAAFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("03/03/17"),
+                    new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"),
+                    new Description("little india"), new UniqueTagList()),
+                new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"),
+                    new Description("chicago ave"), new UniqueTagList())};
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;
@@ -120,7 +120,7 @@ public class TestUtil {
 
     private static Tag[] getSampleTagData() {
         try {
-            return new Tag[] { new Tag("relatives"), new Tag("friends") };
+            return new Tag[] {new Tag("relatives"), new Tag("friends")};
         } catch (IllegalValueException e) {
             assert false;
             return null;
@@ -208,11 +208,11 @@ public class TestUtil {
 
     public static String descOnFail(Object... comparedObjects) {
         return "Comparison failed \n"
-                + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
+            + Arrays.asList(comparedObjects).stream().map(Object::toString).collect(Collectors.joining("\n"));
     }
 
     public static void setFinalStatic(Field field, Object newValue)
-            throws NoSuchFieldException, IllegalAccessException {
+        throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         // remove final modifier from field
         Field modifiersField = Field.class.getDeclaredField("modifiers");
@@ -307,10 +307,8 @@ public class TestUtil {
     /**
      * Removes a subset from the list of tasks.
      *
-     * @param tasks
-     *            The list of tasks
-     * @param tasksToRemove
-     *            The subset of tasks.
+     * @param tasks         The list of tasks
+     * @param tasksToRemove The subset of tasks.
      * @return The modified tasks after removal of the subset from tasks.
      */
     public static TestTask[] removeTasksFromList(final TestTask[] tasks, TestTask... tasksToRemove) {
@@ -322,10 +320,8 @@ public class TestUtil {
     /**
      * Returns a copy of the list with the task at specified index removed.
      *
-     * @param list
-     *            original list to copy from
-     * @param targetIndexInOneIndexedFormat
-     *            e.g. index 1 if the first element is to be removed
+     * @param list                          original list to copy from
+     * @param targetIndexInOneIndexedFormat e.g. index 1 if the first element is to be removed
      */
     public static TestTask[] removeTaskFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removeTasksFromList(list, list[targetIndexInOneIndexedFormat - 1]);
@@ -334,12 +330,9 @@ public class TestUtil {
     /**
      * Replaces tasks[i] with a task.
      *
-     * @param tasks
-     *            The array of tasks.
-     * @param task
-     *            The replacement task
-     * @param index
-     *            The index of the task to be replaced.
+     * @param tasks The array of tasks.
+     * @param task  The replacement task
+     * @param index The index of the task to be replaced.
      * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
@@ -350,10 +343,8 @@ public class TestUtil {
     /**
      * Appends tasks to the array of tasks.
      *
-     * @param tasks
-     *            A array of tasks.
-     * @param tasksToAdd
-     *            The tasks that are to be appended behind the original array.
+     * @param tasks      A array of tasks.
+     * @param tasksToAdd The tasks that are to be appended behind the original array.
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, TestTask... tasksToAdd) {
