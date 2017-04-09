@@ -9,6 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Component in charge of: [Model](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/DeveloperGuide.md#24-model-component)<br>
 * Aspects/tools in charge of: Code Quality, Documentation<br>
 * Features implemented:<br>
+  * [Help](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#21-viewing-help--help)
   * [Add an event or task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#22-adding-an-eventtask--add)
   * [Edit an event or task](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#24-editing-an-eventtask--edit)
   * [Clear tasks and events](https://github.com/CS2103JAN2017-W10-B4/main/blob/master/docs/UserGuide.md#28-clearing-all-entries--clear)
