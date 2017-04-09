@@ -19,7 +19,7 @@
 |	Add	|		|		|   |
 | | **add a task** <br><br>Every newly added task should be automatically highlighted in the list| |  |
 | 1 | add floating task | add Write english essay | Floating task is added |
-| 2 | add task | add Prepare for maths test e/next week | Task with end date is added |
+| 2 | add task | add Prepare for maths test e/today | Task with end date is added |
 | 3 | add repeating daily task | add Buy Lunch s/today 12pm r/day | Task that repeats every day is added |
 | 4 | add repeating weekly task | add Buy 4D s/today 4pm e/next month r/week | Task that repeats every week is added |
 | 5 | add repeating monthly task | add Cut hair s/today e/tomorrow r/year | Task that repeats every month is added |
