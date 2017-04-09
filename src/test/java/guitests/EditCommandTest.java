@@ -160,6 +160,13 @@ public class EditCommandTest extends EzDoGuiTest {
         assertResultMessage(EditCommand.MESSAGE_DUPLICATE_TASK);
     }
 
+    //@@author A0139177W
+    @Test
+    public void edit_EmptyDatesWithRecur_failure() {
+        commandBox.runCommand("edit 1 s/ d/");
+        assertResultMessage(Messages.MESSAGE_RECUR_FAILURE);
+    }
+    //@@author
     /**
      * Checks whether the edited task has the correct updated details.
      *
