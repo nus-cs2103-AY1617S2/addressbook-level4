@@ -29,7 +29,8 @@ public class ShortcutCommand extends Command {
     public static final String MESSAGE_SUCCESS_ADDED = "New shortcut key added: %1$s";
     public static final String MESSAGE_SUCCESSS_DELETED = "Existing shortcut key deleted: %1$s";
     public static final String MESSAGE_DUPLICATE_SHORTCUT_KEY = "This shortcut key already exists!";
-    public static final String MESSAGE_DELETE_INVALID_SHORTCUT_KEY = "This shortcut key does not exists!";
+    public static final String MESSAGE_DELETE_INVALID_SHORTCUT_KEY = "This shortcut-command pair does not exist!";
+    public static final String MESSAGE_DELETE_NOT_ALLOWED = "Standard command words cannot be deleted!";
 
     /**
      * Constructs a Shortcut command object from the given args. Checks that the args are valid.
@@ -49,15 +50,15 @@ public class ShortcutCommand extends Command {
      */
     private boolean isArgsValid(String operation, String commandWord) {
         return (operation.equals(SHORTCUT_ADD_OPERATION) || operation.equals(SHORTCUT_DEL_OPERATION)) &&
-               AlternativeCommandLibrary.COMMANDS_WORDS.contains(commandWord);
+               AlternativeCommandsLibrary.COMMANDS_WORDS.contains(commandWord);
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         if (operation.equals(SHORTCUT_ADD_OPERATION)) {
-            return executeAdd();
+            return executeAddShortcut();
         } else {
-            return executeDel();
+            return executeDelShortcut();
         }
     }
 
@@ -66,11 +67,11 @@ public class ShortcutCommand extends Command {
      *
      * @throws CommandException if the shortcutKey already exists in the task manager
      */
-    private CommandResult executeAdd() throws CommandException {
-        if (AlternativeCommandLibrary.isAlternative(shortcutKey)) {
+    private CommandResult executeAddShortcut() throws CommandException {
+        if (AlternativeCommandsLibrary.isAlternative(shortcutKey)) {
             throw new CommandException(MESSAGE_DUPLICATE_SHORTCUT_KEY);
         }
-        AlternativeCommandLibrary.addAlternative(shortcutKey, commandWord);
+        AlternativeCommandsLibrary.addAlternative(shortcutKey, commandWord);
         return new CommandResult(String.format(MESSAGE_SUCCESS_ADDED, shortcutKey + "->" + commandWord));
     }
 
@@ -79,18 +80,19 @@ public class ShortcutCommand extends Command {
      *
      * @throws CommandException if the shortcutKey, commandWord pair does not exist in the task manager
      */
-    private CommandResult executeDel() throws CommandException {
-        if (!AlternativeCommandLibrary.isAlternative(shortcutKey)) {
+    private CommandResult executeDelShortcut() throws CommandException {
+        if (!AlternativeCommandsLibrary.isAlternative(shortcutKey)) {
             throw new CommandException(MESSAGE_DELETE_INVALID_SHORTCUT_KEY);
         }
         if (shortcutKey.equals(commandWord)) {
-            throw new CommandException("");
+            throw new CommandException(MESSAGE_DELETE_NOT_ALLOWED);
         }
-        if (AlternativeCommandLibrary.deleteAlternative(shortcutKey, commandWord)) {
+        try {
+            AlternativeCommandsLibrary.deleteAlternative(shortcutKey, commandWord);
             return new CommandResult(String.format(MESSAGE_SUCCESSS_DELETED, shortcutKey + "->" + commandWord));
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
         }
-        throw new CommandException(MESSAGE_DELETE_INVALID_SHORTCUT_KEY); //shortcut key exists but is mapped to
-                                                                        //a comandWord different from that given by user
     }
 
     @Override
