@@ -186,13 +186,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskListToShowDone() {
         filteredTasks.setPredicate(t -> t.isDone());
-        raise(new SwitchTaskCategoryEvent(TaskCategory.DONE));
+        raise(new SwitchTaskCategoryEvent(TaskCategory.FINISHED));
     }
 
     @Override
     public void updateFilteredTaskListToShowUndone() {
         filteredTasks.setPredicate(t -> !t.isDone());
-        raise(new SwitchTaskCategoryEvent(TaskCategory.UNDONE));
+        raise(new SwitchTaskCategoryEvent(TaskCategory.UPCOMING));
     }
 
     //@@author A0147622H

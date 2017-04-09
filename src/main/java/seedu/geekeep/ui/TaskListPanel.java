@@ -107,11 +107,11 @@ public class TaskListPanel extends UiPart<Region> {
         case ALL:
             selectTab(ALL_TAB);
             break;
-        case DONE:
+        case FINISHED:
             selectTab(FINISHED_TAB);
             break;
         default:
-            assert category == TaskCategory.UNDONE;
+            assert category == TaskCategory.UPCOMING;
             selectTab(UPCOMING_TAB);
             break;
         }
