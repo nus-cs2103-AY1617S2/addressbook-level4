@@ -1,3 +1,4 @@
+//@@author A0135739W
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -16,7 +17,6 @@ import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.TaskType;
 import seedu.onetwodo.testutil.TestTask;
 
-//@@author A0135739W
 public class UndoCommandTest extends ToDoListGuiTest {
 
     TestTask[] currentList = td.getTypicalTasks();

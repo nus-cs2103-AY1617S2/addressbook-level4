@@ -122,11 +122,11 @@ public interface Model {
 
     String redo() throws EmptyHistoryException;
 
-    void clear();
+    void clear() throws IllegalValueException;
 
-    void clearDone();
+    void clearDone() throws IllegalValueException;
 
-    void clearUndone();
+    void clearUndone() throws IllegalValueException;
 
     void displayTags();
 

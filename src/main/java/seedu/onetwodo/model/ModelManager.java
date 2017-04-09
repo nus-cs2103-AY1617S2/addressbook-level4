@@ -255,27 +255,35 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author A0135739W
     @Override
-    public void clear() {
+    public void clear() throws IllegalValueException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_ALL, copiedCurrentToDoList);
+        if (this.toDoList.isEmpty()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_TASK);
+        }
         resetData(new ToDoList());
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_ALL, copiedCurrentToDoList);
     }
 
     //@@author A0135739W
     @Override
-    public void clearDone() {
+    public void clearDone() throws IllegalValueException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.clearDone();
+        if (!toDoList.clearDone()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_DONE_TASK);
+        }
         history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_DONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
     //@@author A0135739W
     @Override
-    public void clearUndone() {
+    public void clearUndone() throws IllegalValueException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        toDoList.clearUndone();
+        if (!toDoList.clearUndone()) {
+            throw new IllegalValueException (ClearCommand.MESSAGE_NO_MORE_UNDONE_TASK);
+        }
         history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_UNDONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }

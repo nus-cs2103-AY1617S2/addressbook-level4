@@ -127,13 +127,16 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      *
      */
-    public void clearDone() {
+    public boolean clearDone() {
+        boolean hasDoneTask = false;
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getDoneStatus() == true) {
+                hasDoneTask = true;
                 internalList.remove(internalList.get(i));
                 i--;
             }
         }
+        return hasDoneTask;
     }
 
     //@@author A0135739W
@@ -142,13 +145,16 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      *
      */
-    public void clearUndone() {
+    public boolean clearUndone() {
+        boolean hasUndone = false;
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getDoneStatus() == false) {
+                hasUndone = true;
                 internalList.remove(internalList.get(i));
                 i--;
             }
         }
+        return hasUndone;
     }
 
     //@@author A0141138N
@@ -212,6 +218,10 @@ public class UniqueTaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
+    }
+
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     @Override

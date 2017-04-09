@@ -154,6 +154,10 @@ public class UniqueTagList implements Iterable<Tag> {
         return new UnmodifiableObservableList<>(internalList);
     }
 
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -74,6 +74,11 @@ public class ToDoList implements ReadOnlyToDoList {
         syncMasterTagListWith(tasks);
     }
 
+    //@@author A0135739W
+    public boolean isEmpty() {
+        return tasks.isEmpty() && tags.isEmpty();
+    }
+
     //// task-level operations
 
     /**
@@ -158,13 +163,13 @@ public class ToDoList implements ReadOnlyToDoList {
     }
 
     //@@author A0135739W
-    public void clearDone() {
-        tasks.clearDone();
+    public boolean  clearDone() {
+        return tasks.clearDone();
     }
 
     //@@author A0135739W
-    public void clearUndone() {
-        tasks.clearUndone();
+    public boolean clearUndone() {
+        return tasks.clearUndone();
     }
 
     //@@author A0141138N
