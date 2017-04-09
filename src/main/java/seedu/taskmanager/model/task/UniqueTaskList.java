@@ -217,7 +217,7 @@ public class UniqueTaskList implements Iterable<Task> {
     static class DatePredicate {
         public static Predicate<Task> isOverdue() {
             return p -> p.getEndDate().equals(EndDate.today);
-    	}
+        }
 
         public static Predicate<Task> isToday() {
             return p -> p.getEndDate().equals(EndDate.today);
