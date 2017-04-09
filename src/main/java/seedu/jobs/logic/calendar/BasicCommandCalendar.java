@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class BasicCommandCalendar {
 
     protected static com.google.api.services.calendar.Calendar service;
-    public abstract void execute() throws IOException, IllegalTimeException;	
+    public abstract void execute() throws IOException, IllegalTimeException;
 
     public String retrieveID(EventCalendar target) throws IOException {
     	String id = "";

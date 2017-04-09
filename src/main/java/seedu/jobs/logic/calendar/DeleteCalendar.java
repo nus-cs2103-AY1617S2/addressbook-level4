@@ -10,7 +10,7 @@ import seedu.jobs.model.task.UniqueTaskList.IllegalTimeException;
 public class DeleteCalendar extends BasicCommandCalendar {
 	public final EventCalendar targetEvent;
 
-    public DeleteCalendar(ReadOnlyTask target, 
+    public DeleteCalendar(ReadOnlyTask target,
     		com.google.api.services.calendar.Calendar inputCalendar) throws IllegalTimeException {
     	Task targetTask = new Task(target);
     	service = inputCalendar;
