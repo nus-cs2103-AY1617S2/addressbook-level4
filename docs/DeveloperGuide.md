@@ -2,7 +2,7 @@
 
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
-   * 2.1. [Prerequisites](#21-Prerequisites)
+   * 2.1. [Prerequisites](#21-prerequisites)
    * 2.2. [Importing the project into Eclipse](#22-Importing-the-project-into-Eclipse)
    * 2.3. [Configuring Checkstyle](#23-Configuring-Checkstyle)
    * 2.4. [Troubleshooting project setup](#24-Troubleshooting-project-setup)
