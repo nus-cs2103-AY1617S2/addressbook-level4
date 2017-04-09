@@ -143,19 +143,19 @@ Two of those classes play important roles at the architecture level.
 
 
 #### `UI`
-The [**`UI`**](#ui-component) component interacts with the user by receiving commands and revealing information. <br>
+The [**`UI`**](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#32-ui-component) component interacts with the user by receiving commands and revealing information. <br>
 
 
 #### `Logic`
-The [**`Logic`**](#logic-component) component processes and executes the user's commands. <br>
+The [**`Logic`**](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#33-logic-component) component processes and executes the user's commands. <br>
 
 
 #### `Model`
-The [**`Model`**](#model-component) component signifies and holds TypeTask's information. <br>
+The [**`Model`**](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#34-model-component) component signifies and holds TypeTask's information. <br>
 
 
 #### `Storage`
-The [**`Storage`**](#storage-component) component component reads data from and writes data to the hard disk. <br>
+The [**`Storage`**](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/DeveloperGuide.md#35-storage-component) component component reads data from and writes data to the hard disk. <br>
 
 
 Each of the `UI`, `Logic`, `Model` and `Storage` components:
@@ -190,7 +190,7 @@ _Figure 3.1.1b : Component interactions for `delete 1` command (part 2)_
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct
   coupling between components.
 
-The sections below will give more details of each single component.
+The sections below will give more details about each single component.
 
 
 ### 3.2. UI component
@@ -203,7 +203,7 @@ _Figure 3.2.1 : Structure of the UI Component_
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
@@ -239,13 +239,13 @@ Function of `Logic`
 
 **Purpose of `CliSyntax`**
 
-The `CliSyntax` class stores the prefix that is used to detect input and differentiate it from different details. The prefix used are
-"by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in add
-and edit commands.
+The `CliSyntax` class stores the prefixs that are used to detect input and differentiate it from different details. The prefixes used are
+"by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in `add`
+and `edit` commands.
 
 **Purpose of `DateParser`**
 
-The main purpose of `DateParser` class is to use the natty libraries to convert inputs to dates. `DateParser` class consists of the
+The main purpose of the `DateParser` class is to use the natty libraries to convert inputs to dates. `DateParser` class consists of the
 following methods:
 
 * parse()             : returns a list of potential dates
@@ -261,13 +261,13 @@ following methods:
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
 
-2) `Delete Command` - It is able to delete a task using index. This function can only work if the given index is valid. It calls `storeTaskManager()` and `deleteTask()` from `Model` when deleting the task. <br><br>Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+2) `Delete Command` - It is able to delete a task using the task's index. This function can only work if the given index is valid. It calls `storeTaskManager()` and `deleteTask()` from `Model` when deleting the task. <br><br>Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br><br> <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
 
-3) `Edit Command` - It is able to edit a task using Index.
-This function make use of the Optional class to update the task. It calls `storeTaskManager()` and `updateTask()` from the `Model` when editing the task. It also calls `updateFilteredTaskList()` from the `Model` to show the updated task list after editing.
+3) `Edit Command` - It is able to edit a task using the task's index.
+This function makes use of the Optional class to update the task. It calls `storeTaskManager()` and `updateTask()` from the `Model` when editing the task. It also calls `updateFilteredTaskList()` from `Model` to show the updated task list after editing.
 
 4) `Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list. `DoneCommand` calls `storeTaskManager()` and `completeTask()` from `Model` when it executes.
 
@@ -295,7 +295,7 @@ ModelManager under Model component.
 2) `RemoveDeadline Command` - It is able to remove all dates in a task.
 It checks for valid index and set all the dates for the task to an empty string.
 
-3) `Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. This function is done by using stack. When an action command is executed, taskManager is "push" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed, the stack will be "pop" and the taskManager will be replaced by the taskManager from the stack. The method that handle the stack reside in `ModelManager` under `Model` component. <br><br>Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")` API call. Notice the differences between the remove and undo commands.<br> <br><img src="images/undoCommand.PNG" width="800"><br>
+3) `Undo Command` - It is able to undo action commands: add, edit, delete, clear, redo commands. This function is done by using stack. When an action command is executed, taskManager is "pushed" into the stack before the action command's function is carried out. By doing this way, the previous state is saved inside the stack. When undo command is executed, the stack will be "popped" and the taskManager will be replaced by the taskManager from the stack. The method that handles the stack resides in `ModelManager` under the `Model` component. <br><br>Given below is another Sequence Diagram for interactions within the `Logic` component for the `execute("undo")` API call. Notice the differences between the remove and undo commands.<br> <br><img src="images/undoCommand.PNG" width="800"><br>
 _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 
@@ -304,7 +304,7 @@ _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
-As stated above, the `Model` component manages and stores TypeTask's user's preferences and data. It also reveals an `UnmodifiableObservableList<ReadOnlyTask>`, which can be 'observed' by different components, such as the `UI`. The `UI` bounds to the list and gets updated automatically when the data gets modified.
+As stated above, the `Model` component manages and stores TypeTask's user's preferences and data. It also reveals an `UnmodifiableObservableList<ReadOnlyTask>`, which can be 'observed' by different components, such as the `UI`. The `UI` binds to the list and gets updated automatically when the data gets modified.
 
 Also, from the Observer Pattern design, the application will not depend on other components such as `Storage`. Instead, it will interact by triggering events.
 
