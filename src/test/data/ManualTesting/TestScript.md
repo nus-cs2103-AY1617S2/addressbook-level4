@@ -2,6 +2,11 @@
 
 By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
+### Populating the app with sample data (save file command)
+
+Run `savefile ../../src/test/data/ManualTesting/SampleData.xml`
+The view will be populated with 50 tasks from SampleData.xml
+
 ### Undo
 
 Run `add todo`
@@ -46,6 +51,20 @@ You will see the second todo in the list again says `Completed at 12:11AM 09/04/
 Run `list` to show all todos
 Run `uncomplete 1`
 You will see the first todo in the list again says `Not Complete`
+
+### Find by tag
+
+Run `list` to show all todos
+Run `find t/petcare` to find all todos tagged with 'petcare'
+You will see the following events listed:
+
+1. Walk the dog
+2. Walk the cat
+3. Walk the ostrich
+4. Walk the iguana
+5. Walk the turtle
+6. Walk the python
+7. Walk the moose
 
 ### Find by Start Time
 
