@@ -393,7 +393,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             if (task.getEndDateTime().isPresent() && isDueThisWeek) {
-                return task.getEndDateTime().get().isSameWeek();
+                return task.getEndDateTime().get().isThisWeek();
             } else {
                 return false;
             }

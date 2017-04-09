@@ -6,7 +6,7 @@ import seedu.tache.commons.events.BaseEvent;
 import seedu.tache.model.task.ReadOnlyTask;
 
 /**
- * Represents a selection change in the Task List Panel
+ * Represents an event adding recurring 'Ghost' task into the Task List Panel
  */
 public class PopulateRecurringGhostTaskEvent extends BaseEvent {
 

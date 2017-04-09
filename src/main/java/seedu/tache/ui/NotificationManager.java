@@ -44,9 +44,17 @@ public class NotificationManager {
     private Logic logic;
     private Timer notificationTimer;
 
+    public NotificationManager() {
+        notificationTimer = new Timer();
+    }
+
     public NotificationManager(Logic logic) {
         this.logic = logic;
         notificationTimer = new Timer();
+    }
+
+    public Timer getNotificationTimer() {
+        return this.notificationTimer;
     }
 
     /**
@@ -89,6 +97,11 @@ public class NotificationManager {
         return cal.getTime();
     }
 
+    /**
+     * Checks if the @param dateTime is due in more than two hours.
+     * @param dateTime: the object to check.
+     * @return true if it is due in more than two hours, otherwise, return false.
+     */
     private boolean isDueInMoreThanTwoHours(DateTime dateTime) {
         Date now = new Date();
         if (getTwoHoursBefore(dateTime).before(now)) {
@@ -102,7 +115,7 @@ public class NotificationManager {
      * Shows a notification from the system tray.
      * @param task: The task that is being notified about.
      */
-    private void showSystemTrayNotification(ReadOnlyTask task, int type) {
+    void showSystemTrayNotification(ReadOnlyTask task, int type) {
         SystemTray tray = SystemTray.getSystemTray();
         ImageIcon icon = new ImageIcon(getClass().getResource(IMAGE_ICON_PATH));
         java.awt.Image image = icon.getImage();
@@ -152,8 +165,8 @@ public class NotificationManager {
     }
 
     /**
-     * Removes all existing scheduled notifications and reschedule them based on the new TaskList
-     * @param event: Contains the new TaskList modified due to an event
+     * Removes all existing scheduled notifications and reschedule them based on the new TaskList.
+     * @param event: Contains the new TaskList modified due to an event.
      */
     public void updateNotifications(TaskManagerChangedEvent event) {
         notificationTimer.cancel(); //remove old scheduled notifications
@@ -163,7 +176,7 @@ public class NotificationManager {
     }
 
     /**
-     * Initialized the scheduling of tasks
+     * Initialized the scheduling of tasks.
      */
     public void start() {
         initNotificationTimerWithTasks(logic.getFilteredTaskList());
@@ -177,7 +190,7 @@ public class NotificationManager {
     }
 
     /**
-     * Shows a notification from the javafx UI
+     * Shows a notification from the javafx UI.
      * @param task: The task that is being notified about.
      */
     /*private void showUpdateNotification(ReadOnlyTask task) {
