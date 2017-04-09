@@ -24,7 +24,6 @@ public class PathCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("load TaskManager1.xml");
         assertTrue(taskListPanel.getNumberOfTasks() == 50);
         commandBox.runCommand("load TaskManager.xml");
-        
         // @@author
     }
 }
