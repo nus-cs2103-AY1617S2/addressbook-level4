@@ -223,12 +223,7 @@ Format: `undo`
 Redo the prevous undone action.<br>
 Format: `redo`
 
-### 3.12. Exiting the program : `exit`
-
-Exits the program.<br>
-Format: `exit`
-
-### 3.13. Saving the data in specified file/folder: `save`
+### 3.12. Saving data: `save`
 
 Puts all TaskIt data to the file in the specified path.
 Format: `save FILEPATH`
@@ -237,14 +232,19 @@ Example:
 
 * `save myFolder/myFile.xml`<br>
 
-### 3.14. Change storage file path toa new location: `path`
+### 3.13. Change storage file path: `path`
 
 Change the storage folder to the specified folder.
 Format: `path FILEPATH`
 
 Example:
-
 * `path myFolder`<br>
+### 3.14. Exiting the program : `exit`
+
+Exits the program.<br>
+Format: `exit`
+
+
 
 <!-- @@author A0141872E -->
 ## 4. FAQ
