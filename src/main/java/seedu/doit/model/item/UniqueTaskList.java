@@ -101,12 +101,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
+    public boolean remove(ReadOnlyTask toRemove) {
         assert toRemove != null;
         final boolean taskFoundAndDeleted = internalList.remove(toRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
-        }
         internalList.sort(taskComparator);
         return taskFoundAndDeleted;
     }
@@ -116,12 +113,9 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public boolean remove(Set<ReadOnlyTask> tasksToRemove) throws TaskNotFoundException {
+    public boolean remove(Set<ReadOnlyTask> tasksToRemove) {
         assert tasksToRemove != null;
         final boolean taskFoundAndDeleted = internalList.removeAll(tasksToRemove);
-        if (!taskFoundAndDeleted) {
-            throw new TaskNotFoundException();
-        }
         internalList.sort(taskComparator);
         return taskFoundAndDeleted;
     }

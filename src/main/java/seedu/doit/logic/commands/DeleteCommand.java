@@ -10,7 +10,6 @@ import seedu.doit.commons.core.Messages;
 import seedu.doit.commons.core.UnmodifiableObservableList;
 import seedu.doit.logic.commands.exceptions.CommandException;
 import seedu.doit.model.item.ReadOnlyTask;
-import seedu.doit.model.item.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0146809W
 /**
@@ -53,11 +52,8 @@ public class DeleteCommand extends Command {
             this.tasksToDeleteSet.add(taskToBeDeleted);
         }
 
-        try {
-            this.model.deleteTasks(this.tasksToDeleteSet);
-        } catch (TaskNotFoundException pnfe) {
-            assert false : "The target task cannot be missing";
-        }
+        this.model.deleteTasks(this.tasksToDeleteSet);
+
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
             tasksToString(tasksToDeleteSet, targetIndexes)));
     }

@@ -34,16 +34,20 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         targetIndex = currentList.length / 2;
         assertDeleteSuccess(targetIndex, currentList);
 
-        //@@author
+        // @@author
         // @@author A0146809W
 
         //delete from outside list
-        commandBox.runCommand("delete " + currentList.length + 1);
+        commandBox.runCommand("delete " + (currentList.length + 1));
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         //invalid format
         commandBox.runCommand("delete " + "1-");
         assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+        //delete from outside range
+        commandBox.runCommand("delete 1-" + (currentList.length + 1));
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
 
