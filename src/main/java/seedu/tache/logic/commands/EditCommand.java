@@ -41,6 +41,7 @@ public class EditCommand extends Command implements Undoable {
     public static final String MESSAGE_INVALID_DATE_RANGE = "Start date can not be before end date";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
                         "This task is part of a recurring task and cannot be edited.";
+    public static final String MESSAGE_REQUIRE_BOTH_START_END = "Recurring tasks requires both start date and end date";
 
     public static final String SPECIAL_CASE_TIME_STRING = "23:59:59";
 
@@ -150,9 +151,14 @@ public class EditCommand extends Command implements Undoable {
 
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        RecurInterval updatedRecurInterval = editTaskDescriptor.getRecurringInterval()
-                                                    .orElseGet(taskToEdit.getRecurState()::getRecurInterval);
-
+        RecurInterval updatedRecurInterval = taskToEdit.getRecurState().getRecurInterval();
+        if (editTaskDescriptor.getRecurringInterval().isPresent()) {
+            if (updatedStartDateTime.isPresent() && updatedEndDateTime.isPresent()) {
+                updatedRecurInterval = editTaskDescriptor.getRecurringInterval().get();
+            } else {
+                throw new IllegalValueException(MESSAGE_REQUIRE_BOTH_START_END);
+            }
+        }
 
         updatedEndDateTime = checkFloatingToNonFloatingCase(editTaskDescriptor, updatedStartDateTime,
                                                                 updatedEndDateTime);

@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.recurstate.RecurState;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
@@ -86,6 +88,36 @@ public class ParserUtil {
         return ParserUtil.isFoundIn(input, PARAMETER_NAME, PARAMETER_START_DATE, PARAMETER_END_DATE,
                 PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG,
                 PARAMETER_RECUR_INTERVAL, PARAMETER_RECUR_STATUS);
+    }
+
+    /**
+     * Parses a string into a valid RecurInterval enum reference
+     * @param input String to parse
+     * @return valid RecurInterval enum reference if input is valid, throws IllegalValueException otherwise
+     */
+    public static RecurInterval parseStringToRecurInterval(String input) throws IllegalValueException {
+        RecurInterval stringToEnum = null;
+        switch (input.trim().toLowerCase()) {
+        case "none":
+            stringToEnum = RecurInterval.NONE;
+            break;
+        case "day":
+            stringToEnum = RecurInterval.DAY;
+            break;
+        case "week":
+            stringToEnum = RecurInterval.WEEK;
+            break;
+        case "month":
+            stringToEnum = RecurInterval.MONTH;
+            break;
+        case "year":
+            stringToEnum = RecurInterval.YEAR;
+            break;
+        }
+        if (stringToEnum == null) {
+            throw new IllegalValueException(RecurState.MESSAGE_RECUR_INTERVAL_CONSTRAINTS);
+        }
+        return stringToEnum;
     }
     //@@author
     /**

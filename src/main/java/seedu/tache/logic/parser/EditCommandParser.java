@@ -26,8 +26,6 @@ import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.tache.logic.commands.IncorrectCommand;
-import seedu.tache.model.recurstate.RecurState;
-import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Name;
 
@@ -109,28 +107,8 @@ public class EditCommandParser {
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(DELIMITER_EDIT_PARAMETER))));
                 } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_RECUR_INTERVAL)) {
-                    RecurInterval stringToEnum = null;
-                    switch (updateValue.toLowerCase()) {
-                    case "none":
-                        stringToEnum = RecurInterval.NONE;
-                        break;
-                    case "day":
-                        stringToEnum = RecurInterval.DAY;
-                        break;
-                    case "week":
-                        stringToEnum = RecurInterval.WEEK;
-                        break;
-                    case "month":
-                        stringToEnum = RecurInterval.MONTH;
-                        break;
-                    case "year":
-                        stringToEnum = RecurInterval.YEAR;
-                        break;
-                    }
-                    if (stringToEnum == null) {
-                        throw new IllegalValueException(RecurState.MESSAGE_RECUR_INTERVAL_CONSTRAINTS);
-                    }
-                    editTaskDescriptor.setRecurringInterval(Optional.of(stringToEnum));
+                    editTaskDescriptor.setRecurringInterval(
+                                    Optional.of(ParserUtil.parseStringToRecurInterval(updateValue)));
                 } else {
                     throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
                 }
