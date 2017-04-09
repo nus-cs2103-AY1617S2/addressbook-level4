@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Autocomplete function](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#5-faq-frequently-asked-questions)
     * [Calendar display](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#310-navigate-the-calendar)
     * [Retrieve previous commands](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#5-faq-frequently-asked-questions)
-* Code written: [[functional code](A0142255M.md)][[test code](A0142255M.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0142255M.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0142255M.md)]
 * Other major contributions:
 	* Did initial morph, formatting and restructuring of documentation from AddressBook to Tache
 	* Set up Travis CI, AppVeyor, GithubPages, Coveralls, Codacy and Collate
@@ -30,7 +30,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Add command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#32-add-a-task--add)
    * [Undo command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#312-undo-a-change--undo)
-* Code written: [[functional code](A0150120H.md)][[test code](A0150120H.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0150120H.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0150120H.md)]
 * Other major contributions:
   * Change Edit Command to edit based on Task object rather than index [[#104](https://github.com/CS2103JAN2017-T09-B4/main/pull/104)]
 -----
@@ -46,7 +46,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Save command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#310-change-data-file-location)
    * [Load command](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#311-load-data-file-from-location)
    * [System Tray Notification](https://github.com/CS2103JAN2017-T09-B4/main/commit/bdc4678b16830da871c7538488f55d0fa14f93b7)
-* Code written: [[functional code](A0139961U.md)][[test code](A0139961U.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0139961U.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0139961U.md)]
 * Other major contributions:
   * Did parts of refactoring from AddressBook to Taskmanager [[#65](https://github.com/CS2103JAN2017-T09-B4/main/pull/65)]
   * Refined code quality to improve Codacy from 'B' to 'A' [[commit](https://github.com/CS2103JAN2017-T09-B4/main/commit/72b13ca729c4f0c643ae5355e0490c41408d8ca1)]
@@ -67,7 +67,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Find tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#34-find-a-task--find)
    * [Complete tasks](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/docs/UserGuide.md#38-complete-a-task--complete)
    * [Toggle Hotkey](https://github.com/CS2103JAN2017-T09-B4/main/pull/94)
-* Code written: [[functional code](A0139925U.md)][[test code](A0139925U.md)]
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/main/A0139925U.md)][[test code](https://github.com/CS2103JAN2017-T09-B4/main/blob/master/collated/test/A0139925U.md)]
 * Other major contributions:
   * Did partial initial refactoring from AddressBook to Tache [[#10](https://github.com/CS2103JAN2017-T09-B4/main/pull/10) ]
   * Set up the foundation for the Calendar View + bug fixes occasionally [[#82](https://github.com/CS2103JAN2017-T09-B4/main/pull/82)]
