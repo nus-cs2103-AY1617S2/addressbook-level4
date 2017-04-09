@@ -10,6 +10,7 @@ import static seedu.tache.logic.parser.CliSyntax.KEYWORD_EDIT_PARAMETER_VALUE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_INTERVAL;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
@@ -25,6 +26,8 @@ import seedu.tache.logic.commands.Command;
 import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.tache.logic.commands.IncorrectCommand;
+import seedu.tache.model.recurstate.RecurState;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.Name;
 
@@ -105,6 +108,29 @@ public class EditCommandParser {
                 } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_TAG)) {
                     editTaskDescriptor.setTags(parseTagsForEdit(Arrays.asList(updateValue
                                                                               .split(DELIMITER_EDIT_PARAMETER))));
+                } else if (ParserUtil.isFoundIn(updateParameter, PARAMETER_RECUR_INTERVAL)) {
+                    RecurInterval stringToEnum = null;
+                    switch (updateValue.toLowerCase()) {
+                    case "none":
+                        stringToEnum = RecurInterval.NONE;
+                        break;
+                    case "day":
+                        stringToEnum = RecurInterval.DAY;
+                        break;
+                    case "week":
+                        stringToEnum = RecurInterval.WEEK;
+                        break;
+                    case "month":
+                        stringToEnum = RecurInterval.MONTH;
+                        break;
+                    case "year":
+                        stringToEnum = RecurInterval.YEAR;
+                        break;
+                    }
+                    if (stringToEnum == null) {
+                        throw new IllegalValueException(RecurState.MESSAGE_RECUR_INTERVAL_CONSTRAINTS);
+                    }
+                    editTaskDescriptor.setRecurringInterval(Optional.of(stringToEnum));
                 } else {
                     throw new IllegalValueException(MESSAGE_INVALID_PARAMETER);
                 }

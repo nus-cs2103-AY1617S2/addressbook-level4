@@ -1,7 +1,6 @@
 //@@author A0139925U
 package seedu.tache.logic.commands;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -148,7 +147,12 @@ public class EditCommand extends Command implements Undoable {
                 updatedEndDateTime = Optional.of(new DateTime(editTaskDescriptor.getEndTime().get()));
             }
         }
+
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        RecurInterval updatedRecurInterval = editTaskDescriptor.getRecurringInterval()
+                                                    .orElseGet(taskToEdit.getRecurState()::getRecurInterval);
+
 
         updatedEndDateTime = checkFloatingToNonFloatingCase(editTaskDescriptor, updatedStartDateTime,
                                                                 updatedEndDateTime);
@@ -156,7 +160,8 @@ public class EditCommand extends Command implements Undoable {
         checkSpecialCase(editTaskDescriptor, updatedEndDateTime);
 
         return new Task(updatedName, updatedStartDateTime, updatedEndDateTime,
-                            updatedTags, true, false, RecurInterval.NONE, new ArrayList<Date>());
+                            updatedTags, true, updatedRecurInterval,
+                            taskToEdit.getRecurState().getRecurCompletedList());
 
     }
 
@@ -226,7 +231,8 @@ public class EditCommand extends Command implements Undoable {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyPresent(this.name, this.startDate, this.endDate,
-                                               this.startTime, this.endTime, this.tags);
+                                               this.startTime, this.endTime, this.tags,
+                                               this.interval, this.recurringStatus);
         }
 
         public void setName(Optional<Name> name) {
@@ -318,7 +324,7 @@ public class EditCommand extends Command implements Undoable {
         }
         originalTask = new Task(taskToEdit.getName(), Optional.ofNullable(workAroundStartDateTime),
                                         Optional.ofNullable(workAroundEndDateTime), taskToEdit.getTags(),
-                                        taskToEdit.getActiveStatus(), taskToEdit.getRecurState().isRecurring(),
+                                        taskToEdit.getActiveStatus(),
                                         taskToEdit.getRecurState().getRecurInterval(),
                                         taskToEdit.getRecurState().getRecurCompletedList());
     }
