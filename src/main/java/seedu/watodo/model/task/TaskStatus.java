@@ -10,7 +10,7 @@ public enum TaskStatus {
 
     private final String status;
 
-    private TaskStatus (final String text) {
+    private TaskStatus (String text) {
         this.status = text;
     }
 

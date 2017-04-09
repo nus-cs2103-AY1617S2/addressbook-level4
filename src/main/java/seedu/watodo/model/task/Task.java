@@ -22,49 +22,44 @@ public class Task implements ReadOnlyTask {
     //@@author A0143076J
     /* Constructs a Floating Task object from a given description. */
     public Task(Description description, UniqueTagList tags) {
-        this(description, null, null, tags, TaskStatus.UNDONE);
-        this.taskType = TaskType.FLOAT;
+        this(description, null, null, tags, TaskStatus.UNDONE, TaskType.FLOAT);
     }
 
     /* Constructs a Deadline Task object from a given description. */
     public Task(Description description, DateTime deadline, UniqueTagList tags) {
-        this(description, null, deadline, tags, TaskStatus.UNDONE);
-        this.taskType = TaskType.DEADLINE;
+        this(description, null, deadline, tags, TaskStatus.UNDONE, TaskType.DEADLINE);
     }
 
     /* Constructs an Event Task object from a given description. */
     public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, tags);
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
-        this.taskType = TaskType.EVENT;
-        this.status = TaskStatus.UNDONE;
+        this(description, startDate, endDate, tags, TaskStatus.UNDONE, TaskType.EVENT);
     }
 
-    //@@author A0139845R
-    /* Constructs a Floating Task object from a given description. With Status */
-    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
-        this(description, null, null, tags, newStatus);
-        this.taskType = TaskType.FLOAT;
-    }
-
-    /* Constructs a Deadline Task object from a given description. With status. */
-    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
-        this(description, null, deadline, tags, newStatus);
-        this.taskType = TaskType.DEADLINE;
-    }
-
-    /* Constructs an Event Task object from a given description. With status */
-    public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags, TaskStatus status) {
+    public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags,
+            TaskStatus status, TaskType type) {
         assert !CollectionUtil.isAnyNull(description, tags);
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
         this.status = status;
-        this.taskType = TaskType.EVENT;
+        this.taskType = type;
+    }
+
+    //@@author A0139845R
+    /* Constructs a Floating Task object from a given description. With Status */
+    public Task(Description description, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, null, tags, newStatus, TaskType.FLOAT);
+    }
+
+    /* Constructs a Deadline Task object from a given description. With status. */
+    public Task(Description description, DateTime deadline, UniqueTagList tags, TaskStatus newStatus) {
+        this(description, null, deadline, tags, newStatus, TaskType.DEADLINE);
+    }
+
+    /* Constructs an Event Task object from a given description. With status */
+    public Task(Description description, DateTime startDate, DateTime endDate, UniqueTagList tags, TaskStatus status) {
+        this(description, startDate, endDate, tags, status, TaskType.EVENT);
     }
 
     //@@author
