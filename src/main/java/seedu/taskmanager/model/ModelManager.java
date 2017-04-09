@@ -42,6 +42,11 @@ public class ModelManager extends ComponentManager implements Model {
     private String selectedTab;
     // @@author
 
+    // @@author A0114523U
+    private final FilteredList<ReadOnlyTask> filteredOverdueTasks;
+    private final FilteredList<ReadOnlyTask> filteredTodayTasks;
+    // @@author
+
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
@@ -53,6 +58,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
+
+        // @@author A0114523U
+        filteredOverdueTasks = new FilteredList<>(this.taskManager.getOverdueTaskList());
+        filteredTodayTasks = new FilteredList<>(this.taskManager.getTodayTaskList());
+        // @@author
+
         // @@author A0131278H
         filteredToDoTasks = new FilteredList<>(this.taskManager.getToDoTaskList());
         filteredDoneTasks = new FilteredList<>(this.taskManager.getDoneTaskList());
@@ -148,6 +159,16 @@ public class ModelManager extends ComponentManager implements Model {
         return new UnmodifiableObservableList<>(filteredTasks);
     }
 
+    // @@author A0114523U
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredOverdueTaskList() {
+        return new UnmodifiableObservableList<>(filteredOverdueTasks);
+    }
+
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTodayTaskList() {
+        return new UnmodifiableObservableList<>(filteredTodayTasks);
+    }
+    // @@author
+
     // @@author A0131278H
 
     @Override
@@ -178,6 +199,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(null);
         filteredToDoTasks.setPredicate(null);
         filteredDoneTasks.setPredicate(null);
+        filteredTodayTasks.setPredicate(null);
+        filteredOverdueTasks.setPredicate(null);
     }
     // @@author
 
@@ -205,6 +228,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
         filteredToDoTasks.setPredicate(expression::satisfies);
         filteredDoneTasks.setPredicate(expression::satisfies);
+        filteredTodayTasks.setPredicate(expression::satisfies);
+        filteredOverdueTasks.setPredicate(expression::satisfies);
     }
     // @@author
 

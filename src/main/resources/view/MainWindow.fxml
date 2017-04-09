@@ -13,8 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- @@author A0114523U -->
-<VBox focusTraversable="true" xmlns="http://javafx.com/javafx/8.0.111"
-	xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox focusTraversable="true" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
 	<stylesheets>
 		<URL value="@DarkTheme.css" />
 		<URL value="@Extensions.css" />
@@ -24,36 +24,31 @@
 			<menus>
 				<Menu mnemonicParsing="false" text="File">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#handleExit"
-							text="Exit" />
+						<MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="User Guide">
 					<items>
-						<MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
-							onAction="#handleHelp" text="User Guide" />
+						<MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
 					</items>
 				</Menu>
 			</menus>
 		</MenuBar>
-		<SplitPane id="splitPane" fx:id="splitPane"
-			dividerPositions="0.382" VBox.vgrow="ALWAYS" maxHeight="Infinity">
+		<SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.382" maxHeight="Infinity" VBox.vgrow="ALWAYS">
 			<items>
 				<VBox fx:id="taskList" minWidth="200.0">
 					<padding>
 						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 					</padding>
 					<children>
-						<AnchorPane prefHeight="200.0" prefWidth="200.0">
-							<children>
-								<Label text="Overdue" />
-							</children>
-						</AnchorPane>
-						<AnchorPane prefHeight="200.0" prefWidth="200.0">
-							<children>
-								<Label text="Due Soon" />
-							</children>
-						</AnchorPane>
+						<AnchorPane fx:id="todayTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="239.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Overdue Task" />
+                     </children></AnchorPane>
+                  		<AnchorPane fx:id="overdueTaskListPanelPlaceholder" prefHeight="237.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Task Due Today" />
+                     </children></AnchorPane>
 					</children>
 				</VBox>
 				<!-- @@author -->
@@ -62,17 +57,14 @@
 					<padding>
 						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 					</padding>
-					<TabPane fx:id="taskListsTabPane" minWidth="340"
-						tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+					<TabPane fx:id="taskListsTabPane" minWidth="340" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
 						<tabs>
-							<Tab fx:id="toDoTaskTab" onSelectionChanged="#onSelectedTabChanged"
-								text="To Do">
+							<Tab fx:id="toDoTaskTab" onSelectionChanged="#onSelectedTabChanged" text="To Do">
 								<content>
 									<AnchorPane fx:id="toDoTaskListPanelPlaceholder" />
 								</content>
 							</Tab>
-							<Tab fx:id="doneTaskTab" onSelectionChanged="#onSelectedTabChanged"
-								text="Done">
+							<Tab fx:id="doneTaskTab" onSelectionChanged="#onSelectedTabChanged" text="Done">
 								<content>
 									<AnchorPane fx:id="doneTaskListPanelPlaceholder" />
 								</content>
@@ -84,20 +76,16 @@
 				<!-- @@author A0114523U -->
 			</items>
 		</SplitPane>
-		<AnchorPane fx:id="resultDisplayPlaceholder"
-			focusTraversable="true" maxHeight="80" minHeight="80.0" prefHeight="80.0"
-			styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+		<AnchorPane fx:id="resultDisplayPlaceholder" focusTraversable="true" maxHeight="80" minHeight="80.0" prefHeight="80.0" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
 			<padding>
 				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 			</padding>
 		</AnchorPane>
-		<AnchorPane fx:id="commandBoxPlaceholder" focusTraversable="true"
-			styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+		<AnchorPane fx:id="commandBoxPlaceholder" focusTraversable="true" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
 			<padding>
 				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 			</padding>
 		</AnchorPane>
-		<AnchorPane fx:id="statusbarPlaceholder" focusTraversable="true"
-			VBox.vgrow="NEVER" />
+		<AnchorPane fx:id="statusbarPlaceholder" focusTraversable="true" VBox.vgrow="NEVER" />
 	</children>
 </VBox>

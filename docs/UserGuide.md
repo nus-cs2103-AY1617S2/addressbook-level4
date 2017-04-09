@@ -249,7 +249,7 @@ Examples:
    Mark the task with index 2 in the Task Manager as done
 * `finish 3`<br>
    Mark the task with index 3 in the Task Manager as done
-   
+
 ### 2.18. Marking a task as TODO : `undone` or `revert`
 
 Marks the specified task from the task manager as TODO from being DONE initially.<br>

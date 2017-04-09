@@ -26,8 +26,8 @@ public class MainWindow extends UiPart<Region> {
 
     private static final String ICON = "/images/taskmanager.jpg";
     private static final String FXML = "MainWindow.fxml";
-    private static final int MIN_HEIGHT = 600;
-    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 800;
+    private static final int MIN_WIDTH = 600;
     public static final String TAB_TO_DO = "To Do";
     public static final String TAB_DONE = "Done";
     public static final int TAB_TO_DO_INDEX = 0;
@@ -37,10 +37,17 @@ public class MainWindow extends UiPart<Region> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+
+    // @@author A0114523U
+    private TaskListPanel todayTaskListPanel;
+    private TaskListPanel overdueTaskListPanel;
+    // @@author
+
     // @@author A0131278H
     private TaskListPanel toDoTaskListPanel;
     private TaskListPanel doneTaskListPanel;
     // @@author
+
     private Config config;
 
     @FXML
@@ -52,10 +59,20 @@ public class MainWindow extends UiPart<Region> {
     // @@author A0131278H
     @FXML
     private TabPane taskListsTabPane;
+    // @@author
 
     @FXML
     private AnchorPane taskListPanelPlaceholder;
 
+    // @@author A0114523U
+    @FXML
+    private AnchorPane overdueTaskListPanelPlaceholder;
+
+    @FXML
+    private AnchorPane todayTaskListPanelPlaceholder;
+    // @@author
+
+    // @@author A0131278H
     @FXML
     private AnchorPane toDoTaskListPanelPlaceholder;
 
@@ -129,6 +146,11 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
+        // @@author A0114523U
+        overdueTaskListPanel = new TaskListPanel(getOverdueTaskListPlaceholder(), logic.getFilteredOverdueTaskList());
+        todayTaskListPanel = new TaskListPanel(getTodayTaskListPlaceholder(), logic.getFilteredTodayTaskList());
+        // @@author
+
         // @@author A0131278H
         toDoTaskListPanel = new TaskListPanel(getToDoTaskListPlaceholder(), logic.getFilteredToDoTaskList());
         doneTaskListPanel = new TaskListPanel(getDoneTaskListPlaceholder(), logic.getFilteredDoneTaskList());
@@ -165,6 +187,24 @@ public class MainWindow extends UiPart<Region> {
 
     public TaskListPanel getDoneTaskListPanel() {
         return this.doneTaskListPanel;
+    }
+    // @@author
+
+    // @@author A0114523U
+    private AnchorPane getOverdueTaskListPlaceholder() {
+        return overdueTaskListPanelPlaceholder;
+    }
+
+    private AnchorPane getTodayTaskListPlaceholder() {
+        return todayTaskListPanelPlaceholder;
+    }
+
+    public TaskListPanel getOverdueTaskListPanel() {
+        return this.overdueTaskListPanel;
+    }
+
+    public TaskListPanel getTodayTaskListPanel() {
+        return this.todayTaskListPanel;
     }
     // @@author
 
