@@ -74,7 +74,7 @@ public class EditCommand extends Command {
         Task editedTask;
 
         try {
-            if (isSpecific) {
+            if (isSpecific && taskToEdit.isRecurring()) {
                 newTask = Task.extractOccurrence(taskToEdit);
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
