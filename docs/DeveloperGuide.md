@@ -401,7 +401,7 @@ Use case ends.
 
 > 3a1. Fask Task shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Mark a task as completed
 
 **MSS**
@@ -421,7 +421,7 @@ Use case ends.
 
 > 3a1. Fask Task shows an error message <br>
   Use case resumes at step 2
-  
+
 #### Use case: Sort the tasks
 
 **MSS**
