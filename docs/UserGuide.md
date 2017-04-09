@@ -124,13 +124,13 @@ Examples:
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
 
 * `edit 4 ed/floating`<br>
-   Clears the end timing parameters for task 4.
+   Removes the end timing for task 4.
   
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
-  Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
+  Format: `editthis INDEX [TASK_NAME] [p/PRIORITY] [sd/START_TIMEDATE] [ed/END_TIMEDATE]...`
 
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
@@ -145,7 +145,7 @@ Examples:
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
-Finds tasks whose names contain any of the given keywords or tag names.<br>
+Finds tasks whose TASK_NAME, PRIORITY, START_TIMEDATE, or END_TIMEDATE contain any of the given keywords.<br>
 Format 1: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case insensitive. e.g `assignment` will match `AssIGNmEnt`
@@ -153,11 +153,18 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `assignemnt` will match `do algorightm assignment`
+> * Note: `find` does not search on Tags a given task may contain.
 
 Examples:
 
 * `find midterm`<br>
   Returns `Study for midterm`
+
+  * `find 11/01/2017`<br>
+  Returns all tasks with start or end timings on January 11, 2017. 
+
+  * `find 1`<br>
+  Returns tasks with a priority of 1 (i.e. a HIGH priority).
 
 ### 2.5.1. Finding an instance of a reccuring task
   > * Execute 'find' with the same syntax as above
@@ -187,6 +194,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task list.
+  
 * `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
