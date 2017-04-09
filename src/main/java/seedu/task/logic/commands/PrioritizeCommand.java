@@ -2,7 +2,9 @@
 package seedu.task.logic.commands;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -18,6 +20,7 @@ import seedu.task.model.task.Timing;
 import seedu.task.model.task.UniqueTaskList;
 
 public class PrioritizeCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(PrioritizeCommand.class);
     public static final String COMMAND_WORD = "prioritize";
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should be between 1-3";
 
@@ -49,6 +52,7 @@ public class PrioritizeCommand extends Command {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         if (lastShownList.size() <= targetIndex) {
+            logger.info(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -58,10 +62,12 @@ public class PrioritizeCommand extends Command {
         try {
             model.updateTask(targetIndex, completedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            logger.info(MESSAGE_DUPLICATE_TASK);
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         model.updateFilteredListToShowAll();
+        logger.info(String.format(MESSAGE_PRIORITIZE_TASK_SUCCESS, taskToComplete));
         return new CommandResult(String.format(MESSAGE_PRIORITIZE_TASK_SUCCESS, taskToComplete));
     }
 

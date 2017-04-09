@@ -10,7 +10,6 @@ import org.junit.Test;
 import guitests.guihandles.TaskCardHandle;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
-//import seedu.task.commons.core.Messages;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
@@ -195,7 +194,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertMatching(editedTask, editedCard);
 
         // confirm the list now contains all previous persons plus the person
-        //with updated details
+        // with updated details
         expectedTasksList[taskListIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS,

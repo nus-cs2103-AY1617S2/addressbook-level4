@@ -58,6 +58,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         assertResultMessage("The task index provided is invalid");
     }
 
+    //@@author A0113795Y
     public void deletethis() {
         commandBox.runCommand("clear");
         TestTask taskToDelete = td.recMonth;
@@ -93,6 +94,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("find 01/01/2018");
         assertResultMessage("1 tasks listed!");
     }
+    //@@author
 
     /**
      * Runs the delete command to delete the person at specified index and

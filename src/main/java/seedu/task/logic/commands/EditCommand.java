@@ -1,9 +1,12 @@
+//@@authro A0113795Y
 package seedu.task.logic.commands;
 
 import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -22,7 +25,7 @@ import seedu.task.model.task.UniqueTaskList;
  * Edits the details of an existing task in the task manager.
  */
 public class EditCommand extends Command {
-
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_REC = "editthis";
 
@@ -56,7 +59,7 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
         this.isSpecific = isSpecific;
     }
-
+    //@@author
     //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
@@ -89,6 +92,7 @@ public class EditCommand extends Command {
         }
 
         model.updateFilteredListToShowAll();
+        logger.info(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }
     //@@author

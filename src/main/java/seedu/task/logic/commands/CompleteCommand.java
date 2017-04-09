@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -27,7 +29,7 @@ import seedu.task.model.task.UniqueTaskList;
  */
 
 public class CompleteCommand extends Command {
-
+    private static final Logger logger = LogsCenter.getLogger(CompleteCommand.class);
     public static final String COMMAND_WORD = "complete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Mark the task identified by the index number."
@@ -64,7 +66,6 @@ public class CompleteCommand extends Command {
     //@@author A0164212U
     @Override
     public CommandResult execute() throws CommandException {
-
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
         if (lastShownList.size() <= targetIndex) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -83,12 +84,14 @@ public class CompleteCommand extends Command {
                 completedTask.setComplete();
                 model.updateTask(newIndex, completedTask);
                 model.updateFilteredListToShowAll();
+                logger.info(MESSAGE_COMPLETE_TASK_SUCCESS);
                 return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, newTask));
             } else {
                 completedTask = createCompletedTask(taskToComplete, completeTaskDescriptor);
                 completedTask.setComplete();
                 model.updateTask(targetIndex, completedTask);
                 model.updateFilteredListToShowAll();
+                logger.info(MESSAGE_COMPLETE_TASK_SUCCESS);
                 return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
             }
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
