@@ -374,7 +374,7 @@ Format:<br>
 ```
 Things To Note:
 > The file path provided must be valid.
-> If there exists a file there, it will be overwritten!
+> If there is an exisiting file already in that location, this command will overwrite it.
 > You can use either relative or absolute file path. (See examples)
 ```
 
@@ -393,7 +393,7 @@ Format:<br>
 ```
 Things To Note:
 > The file path provided must be valid.
-> If there exists a file there, it will be overwritten!
+> If there is an exisiting file already in that location, this command will overwrite it.
 > You can use either relative or absolute file path. (See examples)
 ```
 
