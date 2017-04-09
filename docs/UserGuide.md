@@ -106,7 +106,7 @@ All the features of the application can be accessed through the use of a keyboar
 > * Parameters can be in any order.
 > * Options with `/` allow either word to be used. (E.g. high/low for task priority)
 
-### 3.1. Viewing help : `help`
+### 3.1. Viewing help: `help`
 
 If you are a new user of ToLuist, you may need assistance for inputting commands.<br>
 `help` shows you all the commands which are available in the system.<br>
@@ -123,11 +123,11 @@ Examples:
 * `help add` <br>
   Shows detailed help information for `add` command.
   
-### 3.2. Getting keyword suggestions smartly :
+### 3.2. Getting keyword suggestions smartly
 
 You might find it hard to remember all the commands and their format.<br>
 ToLuist will automatically suggest to you how you can complete your command.<br>
-As you type, a list of suggested words will appear, up to a limit of 10.
+As you type, a list of suggestions (up to 10) will appear.
   
 For example, ToLuist suggest to you the command words `add` and `alias` when you type `a`.
 
@@ -149,17 +149,17 @@ command with the suggestion. If there are multiple suggestions available, you ca
 cycle through the list of suggestions, and press <kbd>Enter</kbd> to select one of them.
  
    <img src="images/smart-command-multiple-suggestions.png" width="600"><br>
-   **Figure 3.2d**: Suggestions can be cycled through The currently selected suggestion will be highlighted.
+   **Figure 3.2d**: Suggestions can be cycled through. The currently selected suggestion will be highlighted.
   
 
-### 3.3. Switching to a different window : `switch`
+### 3.3. Switching to a different tab: `switch`
 
-When using ToLuist, you may want to switch between different tabs / windows to zoom in on the tasks most important to
+When using ToLuist, you may want to switch between different tabs to zoom in on the tasks most important to
  you.<br>
 `switch` allows you to view a different subset of the currently displayed tasks.<br>
-Format: `switch WINDOWIDENTIFIER`
+Format: `switch TABIDENTIFIER`
 
-> * If a number is given for window identifier, that will be the number of the tab from the left which is selected.
+> * If a number is given for tab identifier, that will be the number of the tab from the left which is selected.
 > * If a letter is given, it will be the underlined letter in the window list name.
 > * If a word is given, it will be the word with the underlined letter in the window list name.
 > * You can also use key combination <kbd>Ctrl</kbd> with a number to switch between different tabs.
@@ -176,13 +176,12 @@ Example:
 [comment]: # (@@author A0127545A)
 ### 3.4. Adding a task: `add`
 
-You can start keeping track of your task by adding to ToLuist.<br>
+You can start keeping track of your tasks by adding them to ToLuist.<br>
 `add` allows you to add a task to the system.<br>
-Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `add DESCRIPTION [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
-> * Both `startdate` and `enddate` use the same datetime format.
-> * `startdate` requires a valid `enddate` to be used in the same command.
-> * The values entered for `startdate` and `enddate` are very flexible:<br>
+> * `/from` and `/to` must be used together.
+> * The values entered for `STARTDATE` and `ENDDATE` are very flexible:<br>
     Standard dates are parsed, with the month being before the day. i.e. `MM/DD/YY`, `MM/DD/YYYY`, `YYYY/MM/DD`, `YYYY/MM/DD`<br>
     Relaxed dates are parsed as logically as possible. i.e. `Jan 21, '97`, `Sun, Nov 21`, `The 31st of April in the year 2017`<br>
     Relative dates are also allowed. i.e. `Yesterday`, `Today`, `Next Sunday`, `3 Days from now`<br>
@@ -190,6 +189,8 @@ Format: `add NAME [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(da
     Similar to dates, relative times are also allowed. i.e. `5 minutes from now`, `in 10 minutes`, `5 hours ago`<br>
     For more details, please visit http://natty.joestelmach.com/doc.jsp.
 > * ToLuist will auto scroll to the newly added task.
+
+#### 3.4.1. Adding a 
 
 Examples:
 
@@ -201,11 +202,11 @@ Examples:
   Adds a task called `Check Email`, and sets the deadline to be today's date.
 
 [comment]: # (@@author A0127545A)
-### 3.5. Updating a task : `update`
+### 3.5. Updating a task: `update`
 
 Sometimes, you may need to update or fix a previously entered task.<br>
 `update` allows you to update an existing task in the list.<br>
-Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(day/week/month)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
+Format: `update INDEX [NAME] [/from STARTDATE /to ENDDATE] [/by ENDDATE] [/repeat PERIOD(daily/weekly/monthly/yearly)] [/repeatuntil REPEATDATE] [/stoprepeat] [/priority PRIORITY(high/low)] [/tags TAGS]`
 
 > * Updates the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the last task listing.
@@ -270,7 +271,7 @@ Examples:
   Changes the sorting order to the default sort.
 
 [comment]: # (@@author A0127545A)
-### 3.8. Deleting a task : `delete`
+### 3.8. Deleting a task: `delete`
 
 Assuming you have been using ToLuist for a long while, you may want to remove some of your older tasks.<br>
 `delete` allows you to delete a task or multiple tasks from the todo list.<br>
@@ -294,7 +295,7 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.9. Completing or Making Incomplete a Task : `mark`
+### 3.9. Completing or Making Incomplete a Task: `mark`
 
 After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
 a completed task as incomplete if you feel that it still needs more work.<br>
@@ -321,7 +322,7 @@ Example:
   Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
 [comment]: # (@@author A0162011A)
-### 3.10. Adding a Tag to a Task : `tag`
+### 3.10. Adding a Tag to a Task: `tag`
 
 You may want to differentiate your tasks by categories.<br>
 `tag` allows you to add a tag or multiple tags to an existing task. <br>
@@ -336,7 +337,7 @@ Example:
 * `tag 2 work home` <br>
   Adds the tags 'work' and 'home' to task 2.
 
-### 3.11. Removing a Tag from a Task : `untag`
+### 3.11. Removing a Tag from a Task: `untag`
 
 You may change your mind and decide to remove a category from a task.<br>
 `untag` allows you to remove a tag or multiple tags from an existing task. <br>
@@ -351,14 +352,14 @@ Example:
 * `untag 2 work home` <br>
   Removes the tags 'work' and 'home' from task 2.
 
-### 3.12. Clearing all entries : `clear`
+### 3.12. Clearing all entries: `clear`
 
 Occasionally, the stress may get to you, and you want to start from a clean slate.<br>
 `clear` allows you to clear all entries from the todo list.<br>
 Format: `clear`
 
 [comment]: # (@@author A0131125Y)
-### 3.13. Undoing a command : `undo`
+### 3.13. Undoing a command: `undo`
 
 As human, we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
 the result of your command.<br>
@@ -394,7 +395,7 @@ Examples:
   Press <kbd>Ctrl</kbd> + <kbd>Z</kbd> <br>
   Undo adding Test to the todo list.
 
-### 3.14. Redoing a command : `redo`
+### 3.14. Redoing a command: `redo`
 
 After undoing a command, you want to re-apply it.<br>
 `redo` allows you to redo previously undone commands.<br>
@@ -423,7 +424,7 @@ Examples:
   Redo adding Test to the todo list.
 
 [comment]: # (@@author A0162011A)
-### 3.15. Viewing previous commands and accessing them : `history`
+### 3.15. Viewing previous commands and accessing them: `history`
 
 You may want to check what you have previously entered.<br>
 `history` shows you your previous commands entered in the current session. <br>
@@ -526,7 +527,7 @@ Example:
 * `load data/savefile.txt` <br>
   Sets the load storage location to `data/savefile.txt`.
 
-### 3.22. Exiting the program : `exit`
+### 3.22. Exiting the program: `exit`
 
 After you are done organizing your todo list, you may want to close the application.<br>
 `exit` allows you to exit the program.<br>
