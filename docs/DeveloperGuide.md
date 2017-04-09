@@ -144,14 +144,14 @@ Author: Peng Chong
 <img src="images/UiClassDiagram.png" width="800"><br>
 _Figure 2.2.1 : Structure of the UI Component_
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/taskit/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,`MenuBarPanel`,
 `MenuCard`,`StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/taskit/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -163,9 +163,9 @@ The `UI` component,
 
 `UI` design
 
-* Priority - Prority will be highlighted in circle with letter L for low, M for medium and H for High. 
+* Priority - Prority will be highlighted in circle with letter L for low, M for medium and H for High.
 * The circle will also be coloured in red, orange and green to differentiate low, medium and high priority respectively.
-* Status of task will be marked using different colour bar in task list: 
+* Status of task will be marked using different colour bar in task list:
 * white for incompleted task, green for completed task and red for overdued task.
 * Events - Events such as clicking trigger the listener to select a TaskCard, highlighting the background to show selection.
 * Other Events such as clicking the menubar trigger the listener to select a menubar item, filtering the tasklists accordingly.
@@ -179,7 +179,7 @@ Author: Amro Shohoud
 <img src="images/LogicClassDiagram.png" width="800"><br>
 _Figure 2.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/taskit/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -191,6 +191,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+//@@author A0141011J
 ### 2.4. Model component
 
 Author: Zhou Fanyi
@@ -198,7 +199,7 @@ Author: Zhou Fanyi
 <img src="images/ModelClassDiagram.png" width="800"><br>
 _Figure 2.4.1 : Structure of the Model Component_
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/taskit/model/Model.java)
 
 The `Model`,
 
@@ -208,6 +209,29 @@ The `Model`,
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+#### Task
+<img src="images/Task.png" width="800"><br>
+
+**API** : [`Task.java`](../src/main/java/seedu/taskit/model/Task/Task.java)
+
+A `Task` must have a title and isDone status, but may not have a `start`, `end`, `priority` or `tag`. To represent a `Task` without a `start`, `end`, the fields are set to null by default.
+
+A `Task` is defined as one of the following:
+* floating task: a `task` which do not have `start` and `end`
+* deadline task: a `task` whose `end` is valid, and whose `start` is null
+* event task: a `task` whose `start` and `end` are both valid
+
+#### Model State
+**API** : [`Model.java`](../src/main/java/seedu/taskit/model/ModelManager.java)
+
+A state consists of a `ReadOnlyTaskManager`, as well as the predicate of the current filtered task list. Every time a mutating command (as specified by the `isUndoable()`) is called, the data of the previous model is stored in a ModelState as a stack.
+
+Model then exposes indirect access to these states through the `undo` and `redo` API.
+Upon executing `undo`, the most recent previous state will be restored by popping out a state from the stack keeping track of previous states. At the same time, the current state is stored in another stack keeping track of 'future states' for reverting back to the current state.
+Similarly, upon executing `redo`, the the most recent state before undone will be restored by popping out a state from the stack keeping track of 'future states'.
+
+//@@author
+
 ### 2.5. Storage component
 
 Author: Foo Chuan Wen
@@ -215,7 +239,7 @@ Author: Foo Chuan Wen
 <img src="images/StorageClassDiagram.png" width="800"><br>
 _Figure 2.5.1 : Structure of the Storage Component_
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/taskit/storage/Storage.java)
 
 The `Storage` component,
 
