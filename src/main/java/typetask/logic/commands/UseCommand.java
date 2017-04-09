@@ -13,10 +13,6 @@ import typetask.storage.XmlFileStorage;
 //@@author A0140010M
 public class UseCommand extends Command {
 
-    public static final String SYMBOL_ASTERISK = "*";
-    public static final String SYMBOL_CARET = "^";
-    public static final String SYMBOL_HASH = "#";
-    public static final String SYMBOL_PLUS = "+";
     public static final String COMMAND_WORD = "use";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
             + ": Uses the taskManager from another location\n"
@@ -32,22 +28,10 @@ public class UseCommand extends Command {
     }
     @Override
     public CommandResult execute() throws CommandException, IOException, DataConversionException {
-        if (isInvalidPath()) {
-            return new CommandResult(Messages.MESSAGE_INVALID_PATH);
-        }
         File file = new File(this.path);
         ReadOnlyTaskManager taskManager = XmlFileStorage.loadDataFromSaveFile(file);
         model.resetData(taskManager);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
-    }
-    //@@author A0144902L
-    public boolean isInvalidPath() {
-        if (path.contains(SYMBOL_PLUS) || path.contains (SYMBOL_HASH) ||
-                path.contains (SYMBOL_CARET) || path.contains (SYMBOL_ASTERISK)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
