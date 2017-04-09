@@ -426,8 +426,7 @@ Use case ends
 
 2a. Program detects the description is empty.
 
-> 2a1. Program shows an error message stating the description is empty. <br>
-  2a2. Program requests for re-input. <br>
+> 2a1. Program shows an error message stating the description is empty and requests for re-input. <br>
   Use case resumes at step 3
 
 2b. User chooses to add tags(UC02).
@@ -459,48 +458,42 @@ Use case ends
 
 **MSS**
 
-1. User chooses to add a floating task.
-2. User inputs task details(UC01).
-3. Program adds the task to the list of tasks.
+1. User chooses to add a floating task and inputs task details(UC01).
+2. Program adds the task to the list of tasks.
 Use case ends
 
 #### Use case: Create an event
 
 **MSS**
 
-1. User chooses to add an event.
-2. User inputs task details(UC01).
-3. Program requests for start date.
-4. User inputs start date.
-5. Program requests for end date.
-6. User inputs end date.
-7. Program adds the task to the list of tasks.
+1. User chooses to add an event and inputs task details(UC01).
+2. Program requests for start date.
+3. User inputs start date.
+4. Program requests for end date.
+5. User inputs end date.
+6. Program adds the task to the list of tasks.
 Use case ends
 
 **Extensions**
 
-4a. Program detects the start date is empty.
+3a. Program detects the start date is empty.
 
-> 4a1. Program shows an error message stating the start date is empty. <br>
-  4a2. Program requests for re-input. <br>
+> 3a1. Program shows an error message stating the start date is empty and requests for re-input. <br>
   Use case resumes at step 4
 
-4b. Program detects the start date is invalid.
+3b. Program detects the start date is invalid.
 
-> 4b1. Program shows an error message stating the start date is invalid. <br>
-  4b2. Program requests for re-input. <br>
+> 3b1. Program shows an error message stating the start date is invalid and requests for re-input. <br>
   Use case resumes at step 4
 
-6a. Program detects the end date is empty.
+5a. Program detects the end date is empty.
 
-> 6a1. Program shows an error message stating the end date is empty. <br>
-  6a2. Program requests for re-input. <br>
+> 5a1. Program shows an error message stating the end date is empty and requests for re-input. <br>
   Use case resumes at step 6
 
-6b. Program detects the end date is invalid.
+5b. Program detects the end date is invalid.
 
-> 6b1. Program shows an error message stating the end date is invalid. <br>
-  6b2. Program requests for re-input. <br>
+> 5b1. Program shows an error message stating the end date is invalid and requests for re-input. <br>
   Use case resumes at step 6
 
 
@@ -508,25 +501,24 @@ Use case ends
 
 **MSS**
 
-1. User chooses to add a task with deadline.
-2. User inputs task details(UC01).
-3. Program requests for deadline.
-4. User inputs deadline.
-5. Program adds the task to the list of tasks.
+1. User chooses to add a task with deadline and inputs task details(UC01).
+2. Program requests for deadline.
+3. User inputs deadline.
+4. Program adds the task to the list of tasks.
 Use case ends
 
 **Extensions**
 
-4a. Program detects the deadline is empty.
+3a. Program detects the deadline is empty.
 
-> 4a1. Program shows an error message stating the deadline is empty. <br>
-  4a2. Program requests for re-input. <br>
+> 3a1. Program shows an error message stating the deadline is empty. <br>
+  3a2. Program requests for re-input. <br>
   Use case resumes at step 4
 
-4b. Program detects the deadline is invalid.
+3b. Program detects the deadline is invalid.
 
-> 4b1. Program shows an error message stating the deadline is invalid. <br>
-  4b2. Program requests for re-input. <br>
+> 3b1. Program shows an error message stating the deadline is invalid. <br>
+  3b2. Program requests for re-input. <br>
   Use case resumes at step 4
 
 #### Use case: Update a task
@@ -543,23 +535,10 @@ Use case ends
 
 **Extensions**
 
-3a. Program detects that there are multiple tasks with the same words specified by user.
+3a. Program detects the specified task is not valid.
 
-> 3a1. Program requests user to specify the exact task. <br>
-  3a2. User specifies the exact task to be updated. <br>
-  3a3. Program deletes the task. <br>
-  Use case ends
-
-3b. Program detects the specified task is not valid.
-
-> 3b1. Program returns an error message. <br>
-  3b2. Program requests for re-input. <br>
+> 3a1. Program returns an error message and requests for re-input. <br>
   Use case resumes at step 3
-
-3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
-
-> Use case resumes at step 3a1
-
 
 #### Use case: Delete a task
 
@@ -573,22 +552,10 @@ Use case ends
 
 **Extensions**
 
-3a. Program detects that there are multiple tasks with the same words specified by the user.
+3a. Program detects the specified task is not valid.
 
-> 3a1. Program requests user to specify the exact task. <br>
-  3a2. User specifies the exact task to be deleted. <br>
-  3a3. Program deletes the task. <br>
-  Use case ends
-
-3b. Program detects the specified task is not valid.
-
-> 3b1. Program shows an error message. <br>
-  3b2. Program requests for re-input. <br>
+> 3a1. Program shows an error message and requests for re-input. <br>
   Use case resumes at step 3
-
-3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
-
-> Use case resumes at step 3a1
 
 #### Use case: Mark a task as complete
 
@@ -602,22 +569,10 @@ Use case ends
 
 **Extensions**
 
-3a. Program detects that there are multiple tasks with the same words specified by the user.
+3a. Program detects the specified task is not valid.
 
-> 3a1. Program marks all the tasks with the same words as complete.
-  3a2. Program informs user that multiple tasks are marked as complete.
-  Use case ends
-
-3b. Program detects the specified task is not valid.
-
-> 3b1. Program shows an error message.
-  3b2. Program requests for re-input.
+> 3a1. Program shows an error message and requests for re-input.
   Use case resumes at step 3
-
-3a2a. Program detects that there are still multiple tasks with the same words specified by the user.
-
-> Use case resumes at step 3a1
-
 
 #### Use case: Undo operations
 
