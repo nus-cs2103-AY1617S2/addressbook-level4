@@ -194,9 +194,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     public ObservableList<ReadOnlyTask> getOverdueTaskList() {
         return new UnmodifiableObservableList<>(tasks.getTaskListByDate(EndDate.today));
     }
-    
+
     public ObservableList<ReadOnlyTask> getTodayTaskList() {
-    	return new UnmodifiableObservableList<>(tasks.getTaskListByDate(EndDate.today));
+        return new UnmodifiableObservableList<>(tasks.getTaskListByDate(EndDate.today));
     }
     // @@author
 
