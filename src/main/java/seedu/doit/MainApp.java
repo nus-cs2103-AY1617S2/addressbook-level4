@@ -35,9 +35,12 @@ import seedu.doit.ui.UiManager;
  * The main entry point to the application.
  */
 public class MainApp extends Application {
-    private static final String LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE = "Problem while reading from the file. Will be starting with an empty TaskManager";
-    private static final String LOGGER_DATA_FILE_NOT_IN_THE_CORRECT_FORMAT = "Data file not in the correct format. Will be starting with an empty TaskManager";
-    private static final String LOGGER_DATA_FILE_NOT_FOUND = "Data file not found. Will be starting with a sample TaskManager";
+    private static final String LOGGER_PROBLEM_WHILE_READING_FROM_THE_FILE = "Problem while reading "
+            + "from the file. Will be starting with an empty TaskManager";
+    private static final String LOGGER_DATA_FILE_NOT_IN_THE_CORRECT_FORMAT = "Data file not in "
+            + "the correct format. Will be starting with an empty TaskManager";
+    private static final String LOGGER_DATA_FILE_NOT_FOUND = "Data file not found. "
+            + "Will be starting with a sample TaskManager";
     public static final Version VERSION = new Version(1, 0, 0, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     protected Ui ui;
