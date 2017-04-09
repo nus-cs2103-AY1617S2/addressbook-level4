@@ -120,7 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateGeekeepHistory(originalGeekeepClone);
         int taskListIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         geeKeep.updateTask(taskListIndex, updatedTask);
-
+        updateFilteredListToShowAll(TaskCategory.NOCHANGE);
         indicateGeeKeepChanged();
     }
     //@@author
@@ -133,8 +133,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredListToShowAll() {
+        updateFilteredListToShowAll(TaskCategory.ALL);
+    }
+
+    public void updateFilteredListToShowAll(TaskCategory category) {
         filteredTasks.setPredicate(null);
-        raise(new SwitchTaskCategoryEvent(TaskCategory.ALL));
+        raise(new SwitchTaskCategoryEvent(category));
     }
 
     //@@author A0148037E

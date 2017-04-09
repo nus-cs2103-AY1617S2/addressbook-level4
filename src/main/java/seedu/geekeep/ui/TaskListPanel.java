@@ -104,6 +104,8 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void switchListView(TaskCategory category) {
         switch (category) {
+        case NOCHANGE:
+            break;
         case ALL:
             selectTab(ALL_TAB);
             break;
@@ -115,7 +117,9 @@ public class TaskListPanel extends UiPart<Region> {
             selectTab(UPCOMING_TAB);
             break;
         }
-        logger.info("Switched to " + category + " in " + type);
+        if (category != TaskCategory.NOCHANGE) {
+            logger.info("Switched to " + category + " in " + type);
+        }
     }
 
     public void selectTab(int tab) {
