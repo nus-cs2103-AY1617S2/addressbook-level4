@@ -125,7 +125,7 @@ Examples:
 * `help add` <br>
   Shows detailed help information for 'add' command.
   
-### 3.2. Smart command suggestion :
+### 3.2. Getting keyword suggestions smartly :
 
 We understand that it may take time for you to remember all the different command formats. Our smart command 
 suggestion feature automatically suggests to you how you can complete your command, based on what 
@@ -154,9 +154,9 @@ cycle through the list of suggestions, and press <kbd>Enter</kbd> to select one 
    **Figure 3.2d**: Suggestions can be cycled through, with highlighting
   
 
-### 3.3. Switching to a different tab : `switch`
+### 3.3. Switching to a different window : `switch`
 
-When using ToLuist, you may want to switch between different tabs to zoom in on the tasks most important to
+When using ToLuist, you may want to switch between different tabs / windows to zoom in on the tasks most important to
  you.<br>
 `switch` allows you to view a different subset of the currently displayed tasks.<br>
 Format: `switch WINDOWIDENTIFIER`
@@ -223,7 +223,7 @@ Examples:
   Updates the start date and end date of the 3rd task to today and tomorrow respectively.
 
 [comment]: # (@@author A0162011A)
-### 3.6. Filter all tasks for a given keyword: `filter`
+### 3.6. Filtering all tasks for a given keyword: `filter`
 
 As you list of tasks grows, you may find the need to filter your todo list to locate a particularly 
 important task.
@@ -250,7 +250,7 @@ Examples:
 * `find school /tag` <br>
   Returns any task with the word 'school' in the tag name.
 
-### 3.7. Sort all tasks in a given order: `sort`
+### 3.7. Sorting all tasks in a given order: `sort`
 
 You may feel the need to sort your tasks in some order, so that the tasks that require your immediate 
 attention stand out at the top.<br>
@@ -296,10 +296,10 @@ Examples:
   Deletes from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list.
 
 [comment]: # (@@author A0131125Y)
-### 3.9. Complete or Make Incomplete a Task : `mark`
+### 3.9. Completing or Making Incomplete a Task : `mark`
 
 After you completed a task, you may want to indicate this in ToLuist. Alternatively, you may want to mark 
-a completed task as incomplete if you feel that it still needs more work.
+a completed task as incomplete if you feel that it still needs more work.<br>
 `mark` allow you to set the completion status for a task or multiple tasks.<br>
 Format: `mark [complete/incomplete] INDEX(ES)`
 
@@ -323,7 +323,7 @@ Example:
   Marks tasks from 1st to 3rd, 5th, 7th, 8th, 10th, and from 12th to last task in the todo list as complete.
 
 [comment]: # (@@author A0162011A)
-### 3.10. Add a Tag to a Task : `tag`
+### 3.10. Adding a Tag to a Task : `tag`
 
 You may want to differentiate your tasks by categories.<br>
 `tag` allows you to add a tag or multiple tags to an existing task. <br>
@@ -338,7 +338,7 @@ Example:
 * `tag 2 work home` <br>
   Adds the tags 'work' and 'home' to task 2.
 
-### 3.11. Remove a Tag from a Task : `untag`
+### 3.11. Removing a Tag from a Task : `untag`
 
 You may change your mind and decide to remove a category from a task.<br>
 `untag` allows you to remove a tag or multiple tags from an existing task. <br>
@@ -360,7 +360,7 @@ Occasionally, the stress may get to you, and you want to start from a clean slat
 Format: `clear`
 
 [comment]: # (@@author A0131125Y)
-### 3.13. Undo a command : `undo`
+### 3.13. Undoing a command : `undo`
 
 As human, we make mistakes, perhaps by entering a wrong command. In these cases, you may wish to reverse 
 the result of your command.<br>
@@ -396,7 +396,7 @@ Examples:
   Press <kbd>Ctrl</kbd> + <kbd>Z</kbd> <br>
   Undo adding Test to the todo list.
 
-### 3.14. Redo a command : `redo`
+### 3.14. Redoing a command : `redo`
 
 After undoing a command, you want to re-apply it.<br>
 `redo` allows you to redo previously undone commands.<br>
@@ -442,7 +442,7 @@ Examples:
   Press on the <kbd>up</kbd> arrow key. <br>
   Shows `add Test` in your input text field.
 
-### 3.16. Add alias for any phrase: `alias`
+### 3.16. Adding alias for any phrase: `alias`
 
 For long commands like `mark complete`, you may want to have a shortcut for it.<br>
 `alias` allows you to add an alias for a phrase. <br>
@@ -463,7 +463,7 @@ Example:
   `addTaskNamedTest` <br>
   Performs the command `add Test` which will add a new task called 'Test'.
 
-### 3.17. Delete alias for commands: `unalias`
+### 3.17. Removing an alias: `unalias`
 
 You may an alias no longer suitable, and want to remove it from ToLuist.<br>
 `unalias` allows you to remove an alias for a phrase.<br>
@@ -474,7 +474,7 @@ Example:
   `unalias hs` <br>
   Removes the alias 'hs'.
 
-### 3.18. View aliases for commands: `viewalias`
+### 3.18. Viewing aliases: `viewalias`
 
 You may get forgetful and forget the aliases you set in ToLuist.<br>
 `viewalias` shows you all the aliases currently set in the system. <br>
@@ -495,7 +495,7 @@ ToLuist data are saved in the hard disk automatically after any command that cha
 the data is saved `data/toluist.json`, relative to the `toluist.jar` executable file.<br>
 There is no need to save manually.
 
-### 3.20. Change storage location for save data: `save`
+### 3.20. Specifying new storage location to save data to: `save`
 
 Occasionally, you may want to change the save location of the application, such as if you are 
 moving it to a Dropbox folder.<br>
@@ -512,7 +512,7 @@ Example:
 * `save data/savefile.txt` <br>
   Sets the save storage location to `data/savefile.txt`.
 
-### 3.21. Change storage location for load data: `load`
+### 3.21. Specifying ne storage location to load data from: `load`
 
 Occasionally, you may want to load the data from a different location, such as when you want
  to load the data from a file in Dropbox.<br>
