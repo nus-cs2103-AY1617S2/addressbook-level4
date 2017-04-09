@@ -57,4 +57,18 @@ public class MarkCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(filteredTaskListIndex));
         return new CommandResult(String.format(MESSAGE_SUCCESS_ALL, parameter));
     }
+
+    public Boolean checkDuplicateMarking(ReadOnlyTask taskToMark) {
+        if(parameter.equals("done") && taskToMark.isDone() == true){
+            return true;
+        } else if(parameter.equals("undone") && taskToMark.isDone() == false){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isUndoable() {
+        return true;
+    }
 }

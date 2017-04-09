@@ -13,6 +13,7 @@ import seedu.taskit.model.tag.TagColor;
 import seedu.taskit.model.tag.UniqueTagList;
 import seedu.taskit.model.task.ReadOnlyTask;
 
+//@@author A0141011J
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
