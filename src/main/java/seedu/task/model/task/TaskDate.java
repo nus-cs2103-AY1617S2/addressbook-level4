@@ -142,8 +142,7 @@ public class TaskDate {
             throw new IllegalArgumentException("Invalid year");
         }
     }
-
-  
+    //
     @Override
     public String toString() {
         if (dayTwo == 0 && monthTwo == 0 && yearTwo == 0) {
@@ -153,8 +152,7 @@ public class TaskDate {
                 + DATE_DELIMITER_DASH + " " + dayTwo + DATE_DELIMITER_SLASH + monthTwo
                 + DATE_DELIMITER_SLASH + yearTwo;
     }
-
-    
+    //
     public static int[] dateFormatConverter(String date) {
         if (date.length() == 6) {
             int day = Integer.parseInt(date.substring(DAY_START_INDEX, DAY_END_INDEX));
