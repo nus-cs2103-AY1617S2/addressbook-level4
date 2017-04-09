@@ -194,15 +194,15 @@ public class MainWindow extends UiPart<Region> {
     private AnchorPane getOverdueTaskListPlaceholder() {
         return overdueTaskListPanelPlaceholder;
     }
-    
+
     private AnchorPane getTodayTaskListPlaceholder() {
         return todayTaskListPanelPlaceholder;
     }
-    
+
     public TaskListPanel getOverdueTaskListPanel() {
         return this.overdueTaskListPanel;
     }
-    
+
     public TaskListPanel getTodayTaskListPanel() {
         return this.todayTaskListPanel;
     }
