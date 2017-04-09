@@ -16,7 +16,7 @@
 						<MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#handleSave"
 							text="Save As" />
 						<MenuItem fx:id="loadMenuItem" mnemonicParsing="false" onAction="#handleLoad"
-							text="Load" />
+							text="Open" />
 						<MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#handleExport"
 							text="Export" />
 						<MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#handleImport"
