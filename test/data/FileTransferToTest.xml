@@ -13,7 +13,7 @@
     </tasks>
     <tasks>
         <name>study at home</name>
-        <startDate>2018-03-10 01:26</startDate>
+        <startDate>2018-03-10 09:45</startDate>
         <endDate>2018-03-13 23:59</endDate>
         <recur>weekly</recur>
         <priority>LOW</priority>
@@ -26,7 +26,7 @@
         <name>meet boss</name>
         <startDate>2018-03-10 08:00</startDate>
         <endDate>2018-03-10 12:00</endDate>
-        <recur></recur>
+        <recur>yearly</recur>
         <priority>HIGH</priority>
         <description></description>
         <isDone>false</isDone>
@@ -93,6 +93,16 @@
         <priority>LOW</priority>
         <description></description>
         <isDone>false</isDone>
+    </tasks>
+    <tasks>
+        <name>Do pushup everyday</name>
+        <startDate></startDate>
+        <endDate>2017-04-09 11:59</endDate>
+        <recur>daily</recur>
+        <priority>MEDIUM</priority>
+        <description>Do 20</description>
+        <isDone>false</isDone>
+        <tagged>favourite</tagged>
     </tasks>
     <tags>army</tags>
     <tags>favourite</tags>

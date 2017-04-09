@@ -57,7 +57,7 @@ public class TypicalTestTasks {
                     .build();
             // Deadline with many missing info
             taskF = new TaskBuilder().withName("finish assignments")
-                    .withStartDate("").withEndDate("11pm")
+                    .withStartDate("").withEndDate("next week 11pm")
                     .withRecurring("monthly")
                     .withDescription("")
                     .withPriority('l')

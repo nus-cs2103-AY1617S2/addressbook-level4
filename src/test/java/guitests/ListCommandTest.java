@@ -45,7 +45,7 @@ public class ListCommandTest extends ToDoListGuiTest {
 
     //@@author A0139343E
     @Test
-    public void list_orderAlphanumeic_inoder() {
+    public void list_orderAlphanumeic_inorder() {
         TestTask[] deadlineExpected = new TestTask[]{td.taskJ, td.taskE, td.taskF, td.taskD};
         TestTask[] eventExpected = new TestTask[]{td.taskA, td.taskC, td.taskB};
         TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskI, td.taskH};
@@ -53,7 +53,7 @@ public class ListCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void list_orderPriority_inoder() {
+    public void list_orderPriority_inorder() {
         TestTask[] deadlineExpected = new TestTask[]{td.taskJ, td.taskD, td.taskE, td.taskF};
         TestTask[] eventExpected = new TestTask[]{td.taskC, td.taskA, td.taskB};
         TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskH, td.taskI};
@@ -61,8 +61,8 @@ public class ListCommandTest extends ToDoListGuiTest {
     }
 
     @Test
-    public void list_orderDateTime_inoder() {
-        TestTask[] deadlineExpected = new TestTask[]{td.taskD, td.taskJ, td.taskF, td.taskE};
+    public void list_orderDateTime_inorder() {
+        TestTask[] deadlineExpected = new TestTask[]{td.taskD, td.taskJ, td.taskE, td.taskF};
         TestTask[] eventExpected = new TestTask[]{td.taskA, td.taskC, td.taskB};
         TestTask[] todoExpected = new TestTask[]{td.taskG, td.taskH, td.taskI};
         assertListInOrder(" o/datetime", deadlineExpected, eventExpected, todoExpected);
