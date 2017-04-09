@@ -138,10 +138,10 @@ Examples:
   Examples:
   
   * `edithis 2 sd/01/01/2017`<br>
-  Edits the start date of task 2 (which is reccuring)
+  Edits the start date of task 2 (which is recurring)
 
   * `edithis 2 Go to 2103 Lecture`<br>
-  Edits the description of task 2 (which is reccuring)
+  Edits the description of task 2 (which is recurring)
 
 ### 2.5. Finding all tasks containing any keyword in their name: `find`
 
@@ -166,7 +166,7 @@ Examples:
   * `find 1`<br>
   Returns tasks with a priority of 1 (i.e. a HIGH priority).
 
-### 2.5.1. Finding an instance of a reccuring task
+### 2.5.1. Finding an instance of a recurring task
   > * Execute 'find' with the same syntax as above
   > * However, only one instance will show up in the list after executing 'list'
   > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
@@ -194,21 +194,21 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task list.
-  
+
 * `find tutorial`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-  ### 2.6.1. Deleting a specific instance of a reccuring task : `deletethis`
+  ### 2.6.1. Deleting a specific instance of a recurring task : `deletethis`
 
-  Deletes the specific occurrence of the reccuring task from the list
+  Deletes the specific occurrence of the recurring task from the list
   Format: `deletethis INDEX`
 
-  > * Deletes the specific occurrence of a reccuring task at the specified INDEX
+  > * Deletes the specific occurrence of a recurring task at the specified INDEX
   > * The index refers to the index  number shown in the most recent listing.<br>
   > * The index **must be a positive integer** 1, 2, 3, ...
   > * Upon deleting an instance, the task list will be updated with the next recent occurrence.
-    If there is no more occurrences, then the entire reccuring task will be removed from the list.
+    If there is no more occurrences, then the entire recurring task will be removed from the list.
   > * **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
   calling `delete` on the same task.
 
