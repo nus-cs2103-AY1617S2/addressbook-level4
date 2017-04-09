@@ -1,0 +1,19 @@
+{
+  "appTitle" : "ToLuist App",
+  "logLevel" : "INFO",
+  "aliasTable" : {
+    "aliasMapping" : {
+      "a" : "add"
+    },
+    "reservedKeywords" : [ ]
+  },
+  "todoListFilePath" : "data/b.json",
+  "guiSettings" : {
+    "windowWidth" : 600.0,
+    "windowHeight" : 600.0,
+    "windowCoordinates" : {
+      "x" : 400,
+      "y" : 60
+    }
+  }
+}

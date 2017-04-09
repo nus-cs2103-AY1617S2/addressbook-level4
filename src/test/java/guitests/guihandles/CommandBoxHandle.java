@@ -22,6 +22,10 @@ public class CommandBoxHandle extends GuiHandle {
         guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
     }
 
+    public void focus() {
+        guiRobot.clickOn(COMMAND_INPUT_FIELD_ID);
+    }
+
     public void enterCommand(String command) {
         setTextField(COMMAND_INPUT_FIELD_ID, command);
     }
@@ -39,10 +43,10 @@ public class CommandBoxHandle extends GuiHandle {
         guiRobot.sleep(200); //Give time for the command to take effect
     }
 
-    public HelpWindowHandle runHelpCommand() {
+    public HelpHandle runHelpCommand() {
         enterCommand("help");
         pressEnter();
-        return new HelpWindowHandle(guiRobot, primaryStage);
+        return new HelpHandle(guiRobot, primaryStage);
     }
 
     public ObservableList<String> getStyleClass() {

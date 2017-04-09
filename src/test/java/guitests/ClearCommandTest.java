@@ -1,31 +1,36 @@
+//@@author A0162011A
 package guitests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends AddressBookGuiTest {
+import seedu.toluist.model.Task;
+
+/**
+ * Gui tests for clear command
+ */
+public class ClearCommandTest extends ToLuistGuiTest {
 
     @Test
-    public void clear() {
+    public void clearCurrentTasks() {
+        String command = "clear";
+        commandBox.runCommand(command);
+        assertTrue(getTasksShown().isEmpty());
 
-        //verify a non-empty list can be cleared
-        assertTrue(personListPanel.isListMatching(td.getTypicalPersons()));
-        assertClearCommandSuccess();
-
-        //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
-        commandBox.runCommand("delete 1");
-        assertListSize(0);
-
-        //verify clear command works when the list is empty
-        assertClearCommandSuccess();
     }
 
-    private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
-        assertListSize(0);
-        assertResultMessage("Address book has been cleared!");
+    @Test
+    public void addAndRemoveATask() {
+        String taskDescription = "drink Koi after school";
+        String command = "add " + taskDescription;
+        String command2 = "clear";
+
+        commandBox.runCommand(command);
+        commandBox.runCommand(command2);
+
+        Task task = new Task(taskDescription);
+        assertFalse(isTaskShown(task));
     }
 }
