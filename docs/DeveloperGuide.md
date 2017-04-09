@@ -138,8 +138,8 @@ The **`Main`** has only one class called [`MainApp`](../src/main/java/seedu/addr
 Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using [Google's Event Bus library](https://github.com/google/guava/wiki/EventBusExplained))
-  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+  is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design).
+* `LogsCenter` : This class is used by many classes to write log messages to the App's log file.
 
 
 #### `UI`
@@ -224,7 +224,7 @@ Function of `UI`
 
 _Figure 3.3.1 : Structure of the Logic Component_
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/typetask/logic/Logic.java)
 
 ```
 Function of `Logic`
@@ -994,11 +994,11 @@ Pros:
 * Supports capturing of tasks to be done before a certain date, i.e. ‘due date’
 * Supports task repetition
 * Supports the ‘one shot’ approach through “Smart Add” feature. User is able to use each feature with the respective commands all in a single command
-* Support categorisation of tasks through “List” feature, making organisation simpler
+* Supports categorisation of tasks through “List” feature, making organisation simpler
 * Supports offline use
 * Supports prioritising of tasks
 * Supports checking off completed tasks
-* Support multi-platform use: Android, iOS, BlackBerry
+* Supports multi-platform use: Android, iOS, BlackBerry
 
 Cons:
 
