@@ -75,7 +75,7 @@ Fig 1. TypeTask’s User Interface <br>
    * **`delete`**` 1` : deletes the task shown with index 1
    * **`exit`** : exits the app
 
-7. Refer to the [Features](#features) section below for details about each command.<br>
+7. Refer to the [Features](https://github.com/CS2103JAN2017-T09-B2/main/blob/master/docs/UserGuide.md#3-features) section below for details about each command.<br>
 &nbsp;
 
 ## 3. Features
@@ -125,6 +125,7 @@ Format:<br>
 Things To Note:
 > TypeTask supports a wide range of formats for dates.
    e.g. "1/4/2001", "apr 2", "next weekend"
+> TypeTask follows the USA date format (MM/DD/YYYY)
 > Space must be used between words for dates.
    e.g "15 Oct", "next monday"
 > Time is optional.
@@ -153,6 +154,7 @@ Things To Note:
 > Start Date/Time (Date/Time entered after "from:" and End Date/Time (Date/Time entered after "to:") are compulsory.
 > Start Date must be before End Date.
 > TypeTask supports a wide range of formats for dates.
+> TypeTask follows the USA date format (MM/DD/YYYY)
 > Space must be used between words for Date. 
    e.g "15 Oct", "next monday"
 > Time is optional.
@@ -241,6 +243,7 @@ Things To Note:
 > The optional fields are <TASK NAME>, <DATE>, <TIME>, <PRIORITY>.
 > The requirement is the presence of one of the optional fields.
 > The existing field(s) will be updated with the input fields.
+> TypeTask follows the USA date format (MM/DD/YYYY)
 ```
 
 Examples:
