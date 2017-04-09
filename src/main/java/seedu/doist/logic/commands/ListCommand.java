@@ -137,7 +137,7 @@ public class ListCommand extends Command {
     public static String getSuccessMessageListUnder(String messageSuccess, UniqueTagList tagList) {
         String message = messageSuccess + " under: ";
         for (Tag tag : tagList) {
-            message += tag.tagName + " ";
+            message = message + tag.tagName + " ";
         }
         message = message.trim();
         return message;

@@ -29,8 +29,10 @@ public class AliasCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         if (!aliasModel.getDefaultCommandWordSet().contains(defaultCommandWord)) {
+            // the target command word does not exist
             throw new CommandException(String.format(MESSAGE_COMMAND_WORD_NOT_EXIST, defaultCommandWord));
         } else if (aliasModel.getDefaultCommandWordSet().contains(alias)) {
+            // the alias is a default command word
             throw new CommandException(String.format(MESSAGE_ALIAS_IS_DEFAULT_COMMAND_WORD, alias));
         } else {
             aliasModel.setAlias(alias, defaultCommandWord);

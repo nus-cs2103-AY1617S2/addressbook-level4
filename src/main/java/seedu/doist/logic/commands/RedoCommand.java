@@ -16,11 +16,11 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        int i = 0;
-        while (i < numSteps && model.recoverNextTodoList()) {
-            i++;
+        int redoCount = 0;
+        while (redoCount < numSteps && model.recoverNextTodoList()) {
+            redoCount++;
         }
-        return new CommandResult(String.format(MESSAGE_REDO_SUCCESS, i));
+        return new CommandResult(String.format(MESSAGE_REDO_SUCCESS, redoCount));
     }
 
     public RedoCommand(int numSteps) {

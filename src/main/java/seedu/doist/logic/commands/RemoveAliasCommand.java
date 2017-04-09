@@ -1,6 +1,7 @@
 package seedu.doist.logic.commands;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import seedu.doist.logic.commands.exceptions.CommandException;
 
@@ -26,7 +27,8 @@ public class RemoveAliasCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        for (ArrayList<String> aliasList : aliasModel.getAliasListMap().getAliasListMapping().values()) {
+        Collection<ArrayList<String>> allAliasLists = aliasModel.getAliasListMap().getAliasListMapping().values();
+        for (ArrayList<String> aliasList : allAliasLists) {
             if (aliasList.contains(alias)) {
                 aliasModel.removeAlias(alias);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, alias));

@@ -16,11 +16,11 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        int i = 0;
-        while (i < numSteps && model.recoverPreviousTodoList()) {
-            i++;
+        int undoCount = 0;
+        while (undoCount < numSteps && model.recoverPreviousTodoList()) {
+            undoCount++;
         }
-        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, i));
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, undoCount));
     }
 
     public UndoCommand(int numSteps) {

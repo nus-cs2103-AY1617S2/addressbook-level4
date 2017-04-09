@@ -62,7 +62,13 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        return constructCommand(commandWord, arguments);
+    }
 
+    /**
+     * Construct and return a command according to the specified command word and arguments.
+     */
+    private Command constructCommand(String commandWord, String arguments) {
         if (doesTriggerSameCommand(commandWord, AddCommand.DEFAULT_COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
         } else if (doesTriggerSameCommand(commandWord, EditCommand.DEFAULT_COMMAND_WORD)) {

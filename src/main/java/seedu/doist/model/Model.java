@@ -81,8 +81,15 @@ public interface Model {
     /** Returns a list of task descriptions */
     ArrayList<String> getAllNames();
 
-    //========== handle undo and redo operation =================================================
+    //@@author A0147980U
+    //========== handle undo and re-do operation =================================================
     void saveCurrentToHistory();
+
+    /** Set the current displayed task list to the previous one stored in the history */
     boolean recoverPreviousTodoList();
+
+    /** Set the current displayed task list to the next one stored in the history */
     boolean recoverNextTodoList();
 }
+
+

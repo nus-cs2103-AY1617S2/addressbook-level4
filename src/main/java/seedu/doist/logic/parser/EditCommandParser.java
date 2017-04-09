@@ -110,7 +110,8 @@ public class EditCommandParser {
         editTaskDescriptor.setDates(Optional.of(new TaskDate(startDate, endDate)));
         return editTaskDescriptor;
     }
-  //@@author
+    //@@author
+
     /**
      * Parses {@code Collection<String> tags} into an {@code Optional<UniqueTagList>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
