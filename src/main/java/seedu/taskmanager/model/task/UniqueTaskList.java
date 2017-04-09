@@ -92,14 +92,16 @@ public class UniqueTaskList implements Iterable<Task> {
 
     // @@author A0139520L
     /**
-     * Updates the task in the list at position {@code index} with
-     * {@code editedTask}.
+     * Marks the task in the list at position {@code index} as
+     * {@code isComplete}.
      *
      * @throws DuplicateTaskException
      *             if updating the task's details causes the task to be
      *             equivalent to another existing task in the list.
      * @throws IndexOutOfBoundsException
      *             if {@code index} < 0 or >= the size of the list.
+     * @throws NoSuchElementException
+     *             if {@code isComplete} equals to task isMarkedAsComplete
      */
     public void markTask(int index, boolean isComplete) throws DuplicateTaskException {
         if (isComplete != internalList.get(index).getIsMarkedAsComplete()) {
@@ -306,11 +308,12 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Finds the sorted position to add new task to the existing list of task.
-     * List of tasks is sorted firstly based on type of task and then by chronological order of the task
+     * List of tasks is sorted firstly based on type of task and then by
+     * chronological order of the task
      *
-     * Event tasks sorted by startDate startTime.
-     * Deadline tasks sorted by endDate endTime.
-     * Floating tasks are just added to the bottom of the list as there is no time element within a floating task.
+     * Event tasks sorted by startDate startTime. Deadline tasks sorted by
+     * endDate endTime. Floating tasks are just added to the bottom of the list
+     * as there is no time element within a floating task.
      *
      * @return The sorted position index to add the new task in the sorted list
      *         of tasks.

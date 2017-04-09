@@ -65,12 +65,39 @@ Format: `HELP`
 
 You can use this command to add different types of task in ProcrastiNomore. <br>
 There are 3 forms of task that ProcrastiNomore supports:
+> [Events](#321-events)
+> * One Day Events
+> * Multiple Days Events
+> [Deadlines](#322-deadlines)
+> [Basic Tasks](#323-basic-task)
 
 #### 3.2.1. Events
 
+##### 3.2.1.1. Same Day Events
+These are events that end within the same day(duration of a day or lesser).<br> 
+There are two formats:
+
 Format: `ADD` task `ON` date/day <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `ON` date/day time `TO` time <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ADD` task `FROM` date/day time `TO` date/day time <br />
+> In this format where only a date/day is provided, start and end time will be automatically assigned as:
+> * Start Time : 0000hrs
+> * End Time   : 2359 hrs 
+
+Format: `ADD` task `ON` date/day time `TO` time <br />
+> In this format, start or end time can be omitted and the fields will be automatically assigned.
+> Without specified start time, it will be automatically assigned as:
+> * Start Time : 0000hrs
+>
+> Without a specified end time, it will be automatically assigned as:
+> * End Time   : +1hr buffer from start time
+> eg. Start time 1200hrs, end time will be 1300hrs 
+
+
+##### 3.2.1.1. Multiple Day Events
+Format: `ADD` task `FROM` date/day time `TO` date/day time <br />
+> Same start and end date cannot be used for this format. If a same day event is required, use one day event format.
+> Without specified start or end time, start and/or end time will be automatically assigned as:
+> * Start Time : 0000hrs
+> * End Time   : 2359 hrs 
 
 Sample Event:
 > Type the following command `ADD Stayover with Friends FROM 10/05/17 1400 TO 11/05/16 1800 CATEGORY Fun` into the command Box and press <kbd>Enter</kbd>
@@ -80,7 +107,9 @@ Sample Event:
 
 #### 3.2.2. Deadlines
 
-Format: `ADD` task `BY` date/time/date time
+Format: `ADD` task `BY` date/date time
+> Without specified end time, end time will be automatically assigned as:
+> * End Time   : 2359 hrs 
 
 Sample Deadline:
 > Type the following command `ADD finish project BY 05/05/17 1400` into the command Box and press <kbd>Enter</kbd>

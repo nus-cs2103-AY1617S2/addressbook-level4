@@ -194,6 +194,15 @@ public class ModelManager extends ComponentManager implements Model {
     // {
     //
     // @@author A0139520L
+
+    /**
+     * Checks if added task clashes with another existing task in the task
+     * manager and returns an integer.
+     * 
+     * @return index of clashing task in filteredTaskList if clashing task
+     *         exisits
+     * @return -1 if otherwise
+     */
     @Override
     public int isBlockedOutTime(Task t) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
@@ -210,6 +219,14 @@ public class ModelManager extends ComponentManager implements Model {
         return -1;
     }
 
+    /**
+     * Checks if updated task clashes with another existing task in the task
+     * manager and returns an integer.
+     * 
+     * @return index of clashing task in filteredTaskList if clashing task
+     *         exisits
+     * @return -1 if otherwise
+     */
     @Override
     public int isBlockedOutTime(Task t, int UpdateTaskIndex) throws UniqueTaskList.DuplicateTaskException {
         int index = 0;
@@ -248,6 +265,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0139520L
+    /**
+     * Marks task with the given index in the filteredTaskList.
+     */
     @Override
     public void markTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
@@ -256,6 +276,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    // @@author A0139520L
+    /**
+     * Unmarks task with the given index in the filteredTaskList.
+     */
     @Override
     public void unmarkTask(int filteredTaskListIndex) throws UniqueTaskList.DuplicateTaskException {
         saveInstance();
