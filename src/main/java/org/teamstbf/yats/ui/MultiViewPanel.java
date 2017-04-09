@@ -73,24 +73,23 @@ public class MultiViewPanel extends UiPart<Region> {
 	 *
 	 * @param placeholder
 	 */
-	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableTaskList,
-			ObservableList<ReadOnlyEvent> observableCalendarList, Model model) {
+	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableTaskList, Model model) {
 		super(FXML);
 		this.model = model;
 		datepicker = new DatePicker(today);
 		calendar = new DatePickerSkin(datepicker);
 		today = LocalDate.now();
 		formatter = DateTimeFormatter.ofPattern("d MMMM");
-		setConnectionsCalendarView(observableCalendarList);
+		setConnectionsCalendarView();
 		setConnectionsDoneView(observableTaskList);
 		addToPlaceholder(placeholder);
 	}
 
-	private void setConnectionsCalendarView(ObservableList<ReadOnlyEvent> observableCalendarList) {
+	private void setConnectionsCalendarView() {
 		Node popupContent = calendar.getPopupContent();
 		calendarRoot.setCenter(popupContent);
 		updateCurrentDay(today);
-		updateCalendarList(today, observableCalendarList);
+		updateCalendarList(today);
 		timeTasks.setItems(timeData);
 		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
 		setEventHandlerForSelectionChangeEvent();
@@ -159,35 +158,43 @@ public class MultiViewPanel extends UiPart<Region> {
 
 	// ================== Inner Methods for Calendar View ==================
 
-	private void updateCalendarList(LocalDate day, ObservableList<ReadOnlyEvent> observableCalendarList) {
+	private void updateCalendarList(LocalDate day) {
 		String[] data = new String[TASK_DETAILS];
 		model.updateCalendarFilteredListToShowStartTime(day);
 		calendarList = model.getCalendarFilteredTaskList();
-		for (int i = 0; i < calendarList.size(); i++) {
-			ReadOnlyEvent event = calendarList.get(i);
-			data[TASK_TITLE] = event.getTitle().toString();
-			data[TASK_START] = event.getStartTime().toString();
-			data[TASK_END] = event.getEndTime().toString();
-			data[TASK_LOCATION] = event.getLocation().toString();
-			timeData.add(data);
+		if (calendarList.size() == 0) {
+			timeData.clear();
+		} else {
+			timeData.clear();
+			for (int i = 0; i < calendarList.size(); i++) {
+				ReadOnlyEvent event = calendarList.get(i);
+				data[TASK_TITLE] = event.getTitle().toString();
+				data[TASK_START] = event.getStartTime().toString();
+				data[TASK_END] = event.getEndTime().toString();
+				data[TASK_LOCATION] = event.getLocation().toString();
+				timeData.add(data);
+			}
 		}
 	}
 
 	public void prevDay() {
 		MultiViewPanel.today = today.minusDays(1);
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
 	public void nextDay() {
 		MultiViewPanel.today = today.plusDays(1);
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
 	public void resetDay() {
 		MultiViewPanel.today = LocalDate.now();
 		datepicker.setValue(today);
+		updateCalendarList(today);
 		updateCurrentDay(today);
 	}
 
