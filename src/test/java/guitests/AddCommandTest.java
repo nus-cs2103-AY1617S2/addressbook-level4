@@ -51,13 +51,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         ReadOnlyTask temp = taskListPanel.getTask(taskListPanel.getNumberOfTasks() - 1);
         Task t2 = new Task(temp);
         assertTrue(t1.equals(t2));
-        // assertMatching(taskToAdd, addedCard);
 
-        // confirm the list now contains all previous persons plus the new
-        // task
-        // TestTask[] expectedList = TestUtil.addTasksToList(currentList,
-        // taskToAdd);
-        // assertTrue(taskListPanel.isListMatching(expectedList));
     }
 
 }
