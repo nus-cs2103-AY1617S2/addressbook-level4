@@ -49,7 +49,7 @@
 > Note to click on the `files from packages` text after ticking in order to enable the `Change...` button
 
 #### Turning on the Google Calendar API
-1. Use this [wizard](https://console.developers.google.com/start/api?id=calendar] to create or select a project in the Google Developers Console and automatically turn on the API. Click **Continue**, then Go to **credentials**.
+1. Use this [wizard](https://console.developers.google.com/start/api?id=calendar) to create or select a project in the Google Developers Console and automatically turn on the API. Click **Continue**, then Go to **credentials**.
 2. On the **Add credentials to your project** page, click the **Cancel** button.
 3. At the top of the page, select the **OAuth consent screen** tab. Select an **Email address**, enter a **Product name** if not already set, and click the **Save** button.
 4. Select the **Credentials** tab, click the **Create credentials** button and select **OAuth client ID**.
