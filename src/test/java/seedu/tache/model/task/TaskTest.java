@@ -20,11 +20,11 @@ public class TaskTest {
     public void isWithinDate_validWithinDate_success() throws IllegalValueException {
         Date today = new Date();
         Task task1 = new Task(new Name("TestTask1"), Optional.of(new DateTime("yesterday")),
-                Optional.of(new DateTime("tomorrow")), new UniqueTagList("TestTag"), true, true, false,
+                Optional.of(new DateTime("tomorrow")), new UniqueTagList("TestTag"), true,
                 RecurInterval.NONE, new ArrayList<Date>());
         assertTrue(task1.isWithinDate(today));
         Task task2 = new Task(new Name("TestTask2"), Optional.of(new DateTime("today 000000")),
-                Optional.of(new DateTime("today 235959")), new UniqueTagList("TestTag"), true, true, false,
+                Optional.of(new DateTime("today 235959")), new UniqueTagList("TestTag"), true,
                 RecurInterval.NONE, new ArrayList<Date>());
         assertTrue(task2.isWithinDate(today));
     }
@@ -33,11 +33,11 @@ public class TaskTest {
     public void isWithinDate_validWithinDate_failure() throws IllegalValueException {
         Date today = new Date();
         Task task1 = new Task(new Name("TestTask1"), Optional.of(new DateTime("yesterday 0000")),
-                Optional.of(new DateTime("yesterday 2359")), new UniqueTagList("TestTag"), true, true, false,
+                Optional.of(new DateTime("yesterday 2359")), new UniqueTagList("TestTag"), true,
                 RecurInterval.NONE, new ArrayList<Date>());
         assertFalse(task1.isWithinDate(today));
         Task task2 = new Task(new Name("TestTask2"), Optional.of(new DateTime("tomorrow 0000")),
-                Optional.of(new DateTime("tomorrow 2359")), new UniqueTagList("TestTag"), true, true, false,
+                Optional.of(new DateTime("tomorrow 2359")), new UniqueTagList("TestTag"), true,
                 RecurInterval.NONE, new ArrayList<Date>());
         assertFalse(task2.isWithinDate(today));
     }
