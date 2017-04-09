@@ -662,7 +662,7 @@ public class LogicManagerTest {
             return new HashSet<>(Arrays.asList(tasks));
         }
 
-        private HashSet<Integer> generateNumberSet(Integer... numbers){
+        private HashSet<Integer> generateNumberSet(Integer... numbers) {
             return new HashSet<>(Arrays.asList(numbers));
         }
     }
