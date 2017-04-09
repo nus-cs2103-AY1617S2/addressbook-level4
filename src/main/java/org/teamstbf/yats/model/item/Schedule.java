@@ -108,7 +108,7 @@ public class Schedule {
 		if (day > 30 && (month.equals("11") || month.equals("04") || month .equals("06") || month.equals("09"))) {
 			return false; // only 1, 3, 5, 7, 8, 10, 12 have 31 days
 		} else if (month.equals("02")) {
-			if (year % 4 == 0) {
+			if ((year % 4 == 0 && year % 100 != 0) || (year % 4 == 0 && year % 1000 == 0)) { // leap year
 				if (day > 29) {
 					return false;
 				} else {
