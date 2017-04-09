@@ -589,18 +589,15 @@ Use case ends.
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be open source.
 5. Should open the app in less than 5 sec.
-6. The GUI should not be overcrowded.
-7. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
-8. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
-9. The level of security will be minimal for this product since it is only accessed by a single user.
-10. To extend the software, proper security measures can be put into place in <100 hours.
-11. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
-12. Should be scalable so that a user can change the layout of the GUI based on personal preference.
-13. Should not overload the CPU so that other running process start to lag.
-14. Should not have seperate administrative functions as there is one user who is the Admin by default.
-15. Support tasks that recur after a specified number of years for 4 years.
-16. Support tasks that recur after a specified number of months for 12 months (1 year).
-17. Support tasks that recur after a specified number of days for 60 days (2 months).
+6. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
+7. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+8. To extend the software, proper security measures can be put into place in <100 hours.
+9. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+10. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+11. CPU usage should not exceed 10%.
+12. Support tasks that recur after a specified number of years for 4 years.
+13. Support tasks that recur after a specified number of months for 12 months (1 year).
+14. Support tasks that recur after a specified number of days for 60 days (2 months).
 
 ## Appendix D : Glossary
 
