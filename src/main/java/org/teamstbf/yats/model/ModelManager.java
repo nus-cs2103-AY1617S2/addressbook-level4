@@ -267,10 +267,10 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
-	public void updateCalendarFilteredListToShowDone() {
-		Set<String> doneTaskIdentifier = new HashSet<String>();
-		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
-		updateCalendarFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
+	public void updateCalendarFilteredListToShowUndone() {
+		Set<String> undoneTaskIdentifier = new HashSet<String>();
+		undoneTaskIdentifier.add(TASK_UNDONE_IDENTIFIER);
+		updateCalendarFilteredEventList(new PredicateExpression(new DoneQualifier(undoneTaskIdentifier)));
 	}
 
 	// ============== Methods used for filtering in Done task list
