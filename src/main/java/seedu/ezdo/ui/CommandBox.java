@@ -15,7 +15,13 @@ import seedu.ezdo.logic.Logic;
 import seedu.ezdo.logic.commands.CommandResult;
 import seedu.ezdo.logic.commands.exceptions.CommandException;
 
+/**
+ * For the user to input commands.
+ */
 public class CommandBox extends UiPart<Region> {
+    private static final String MESSAGE_INVALID_COMMAND = "Invalid command: ";
+    private static final String MESSAGE_RESULT = "Result: ";
+    private static final String TEXT_NO_COMMAND_INPUT = "";
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private static final String FXML = "CommandBox.fxml";
     public static final String ERROR_STYLE_CLASS = "error";
@@ -45,28 +51,34 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     public void handleCommandInputChanged() {
         // reset command text field color if it is changed.
-        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-            commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
-        });
+        resetCommandFieldListener();
 
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
 
             // process result of the command
-            commandTextField.setText("");
+            commandTextField.setText(TEXT_NO_COMMAND_INPUT);
             setStyleToIndicateCommandSuccess();
-            logger.info("Result: " + commandResult.feedbackToUser);
+            logger.info(MESSAGE_RESULT + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException e) {
             // handle command failure
             setStyleToIndicateCommandFailure();
-            logger.info("Invalid command: " + commandTextField.getText());
+            logger.info(MESSAGE_INVALID_COMMAND + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
-  //@@author A0139177W
+
+    /**
+     * Add command field listener to reset command text field color if it is changed.
+     */
+    private void resetCommandFieldListener() {
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+            commandTextField.getStyleClass().remove(SUCCESS_STYLE_CLASS);
+        });
+    }
 
     /**
      * Sets the command box style to indicate a successful command.
@@ -81,5 +93,6 @@ public class CommandBox extends UiPart<Region> {
     private void setStyleToIndicateCommandFailure() {
         commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
     }
-
+  //@@author
 }
+
