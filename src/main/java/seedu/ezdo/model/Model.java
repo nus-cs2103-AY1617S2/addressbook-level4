@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 
 import seedu.ezdo.commons.core.UnmodifiableObservableList;
 import seedu.ezdo.commons.exceptions.DateException;
+import seedu.ezdo.commons.exceptions.RecurException;
 import seedu.ezdo.commons.util.SearchParameters;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 import seedu.ezdo.model.todo.Task;
@@ -40,8 +41,9 @@ public interface Model {
      *
      * @throws DuplicateTaskException if the same task (all attributes and fields same) is already in ezDo
      * @throws DateException if the start date is after the due date
+     * @throws RecurException if a floating task is found with a recurring status.
      */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException;
+    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException, DateException, RecurException;
 
     /**
      * Checks the task and makes sure the dates are logical.
@@ -79,10 +81,11 @@ public interface Model {
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
+     * @throws RecurException if a floating task is found with a recurring status.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask)
-            throws UniqueTaskList.DuplicateTaskException, DateException;
+            throws UniqueTaskList.DuplicateTaskException, DateException, RecurException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
