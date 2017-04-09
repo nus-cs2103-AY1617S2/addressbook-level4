@@ -4,7 +4,6 @@ import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;

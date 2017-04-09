@@ -1,24 +1,16 @@
 package seedu.taskmanager.logic.commands;
 
 import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
-import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
-import static seedu.taskmanager.ui.MainWindow.TAB_TO_DO;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
-//import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.AddCommandParser;
-//import seedu.taskmanager.logic.parser.EditCommandParser;
 import seedu.taskmanager.logic.parser.ParserUtil;
-//import seedu.taskmanager.logic.parser.AddCommandParser;
-//import seedu.taskmanager.logic.parser.EditCommandParser;
-//import seedu.taskmanager.logic.parser.ParserUtil;
 import seedu.taskmanager.model.HistoryManager;
-import seedu.taskmanager.model.Model;
 
 // @@author A0140032E
 public class RedoCommand extends Command {
@@ -61,14 +53,6 @@ public class RedoCommand extends Command {
             addCommand.pseudoExecute(this.model);
             break;
         }
-    }
-
-    /**
-     * Highlights the task by index according to {@code indexString} parsed in
-     */
-    private void highlightByIndex(String indexString) {
-        Optional<Integer> index = ParserUtil.parseIndex(indexString);
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index.get() - 1));
     }
     // @@author
 }
