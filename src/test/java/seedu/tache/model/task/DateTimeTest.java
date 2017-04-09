@@ -14,12 +14,12 @@ import seedu.tache.commons.exceptions.IllegalValueException;
 public class DateTimeTest {
 
     @Test(expected = IllegalValueException.class)
-    public void testInvalidDateTime() throws IllegalValueException {
+    public void dateTime_invalidDateTime_failure() throws IllegalValueException {
         new DateTime("happy");
     }
 
     @Test
-    public void testCorrectDateParsing() throws IllegalValueException {
+    public void dateTime_correctDateParsing_success() throws IllegalValueException {
         DateTime test = new DateTime("02/07/19");
         assertEquals(test.getAmericanDateOnly(), "02/07/2019");
         assertEquals(test.getDateOnly(), "07/02/2019");
@@ -29,13 +29,13 @@ public class DateTimeTest {
     }
 
     @Test
-    public void testCorrectTimeParsing() throws IllegalValueException {
+    public void dateTime_correctTimeParsing_success() throws IllegalValueException {
         DateTime test = new DateTime("3pm");
         assertEquals(test.getTimeOnly(), "15:00:00");
     }
 
     @Test
-    public void testCorrectDateTimeParsing() throws IllegalValueException {
+    public void dateTime_correctDateTimeParsing_success() throws IllegalValueException {
         DateTime test = new DateTime("02/07/19 3pm");
         assertEquals(test.getAmericanDateOnly(), "02/07/2019");
         assertEquals(test.getDateOnly(), "07/02/2019");
@@ -60,7 +60,7 @@ public class DateTimeTest {
 
     //@@author A0139961U
     @Test
-    public void isSameDateSuccess() throws IllegalValueException {
+    public void dateTime_isSameDate_success() throws IllegalValueException {
         Date now = new Date();
         DateTime test = new DateTime(now.toString());
         Date date = new Date();
@@ -68,7 +68,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isSameDateFailure() throws IllegalValueException {
+    public void dateTime_isSameDate_failure() throws IllegalValueException {
         Date now = new Date();
         DateTime test = new DateTime(now.toString());
         Date date = new Date(0);
@@ -76,14 +76,14 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isTodaySuccess() throws IllegalValueException {
+    public void dateTime_isToday_success() throws IllegalValueException {
         Date today = new Date();
         DateTime test = new DateTime(today.toString());
         assertTrue(test.isToday());
     }
 
     @Test
-    public void isTodayFailure() throws IllegalValueException {
+    public void dateTime_isToday_failure() throws IllegalValueException {
         Date past = new Date(0);
         DateTime testPast = new DateTime(past.toString());
         assertFalse(testPast.isToday());
@@ -100,13 +100,13 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isThisWeekSuccess() throws IllegalValueException {
+    public void dateTime_isThisWeek_success() throws IllegalValueException {
         DateTime thisWeek = new DateTime("this week");
         assertTrue(thisWeek.isThisWeek());
     }
 
     @Test
-    public void isThisWeekFailure() throws IllegalValueException {
+    public void dateTime_isThisWeek_failure() throws IllegalValueException {
         DateTime lastWeek = new DateTime("last week");
         assertFalse(lastWeek.isThisWeek());
 
@@ -115,7 +115,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void removeTimeSuccess() throws IllegalValueException {
+    public void dateTime_removeTime_success() throws IllegalValueException {
         Date date = new Date();
         DateTime today = new DateTime("today 00:00AM");
         assertEquals(DateTime.removeTime(date), today.getDate());

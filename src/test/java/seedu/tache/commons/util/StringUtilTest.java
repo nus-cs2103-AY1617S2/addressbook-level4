@@ -20,7 +20,7 @@ public class StringUtilTest {
     //---------------- Tests for isUnsignedPositiveInteger --------------------------------------
 
     @Test
-    public void isUnsignedPositiveInteger() {
+    public void stringUtil_isUnsignedPositiveInteger() {
 
         // Equivalence partition: null
         assertFalse(StringUtil.isUnsignedInteger(null));
@@ -59,7 +59,7 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCaseNullWordExceptionThrown() {
+    public void stringUtil_containsWordIgnoreCaseNullWord_exceptionThrown() {
         assertExceptionThrown("typical sentence", null, "Word parameter cannot be null");
     }
 
@@ -70,17 +70,17 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsWordIgnoreCaseEmptyWordExceptionThrown() {
+    public void stringUtil_ContainsWordIgnoreCase_emptyWord_exceptionThrown() {
         assertExceptionThrown("typical sentence", "  ", "Word parameter cannot be empty");
     }
 
     @Test
-    public void containsWordIgnoreCaseMultipleWordsExceptionThrown() {
+    public void stringUtil_ContainsWordIgnoreCase_multipleWords_exceptionThrown() {
         assertExceptionThrown("typical sentence", "aaa BBB", "Word parameter should be a single word");
     }
 
     @Test
-    public void containsWordIgnoreCaseNullSentenceExceptionThrown() {
+    public void stringUtil_ContainsWordIgnoreCase_nullSentence_exceptionThrown() {
         assertExceptionThrown(null, "abc", "Sentence parameter cannot be null");
     }
 
@@ -110,7 +110,7 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCaseValidInputsCorrectResult() {
+    public void stringUtil_ContainsWordIgnoreCase_validInputs_correctResult() {
 
         // Empty sentence
         assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary case
@@ -138,13 +138,13 @@ public class StringUtilTest {
      */
 
     @Test
-    public void getDetailsExceptionGiven() {
+    public void stringUtil_GetDetails_exceptionGiven() {
         assertThat(StringUtil.getDetails(new FileNotFoundException("file not found")),
                    containsString("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
-    public void getDetailsNullGivenAssertionError() {
+    public void stringUtil_GetDetails_nullGiven_assertionError() {
         thrown.expect(AssertionError.class);
         StringUtil.getDetails(null);
         fail();
