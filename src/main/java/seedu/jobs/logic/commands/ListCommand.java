@@ -18,11 +18,11 @@ public class ListCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final Set<String> keywords;
-    
+
     public ListCommand() {
         this.keywords = null;
     }
-    
+
     public ListCommand(Set<String> keywords) {
         this.keywords = keywords;
     }
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
     //@@author A0164440M
     @Override
     public CommandResult execute() {
-        if(keywords == null) {
+        if (keywords == null) {
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {

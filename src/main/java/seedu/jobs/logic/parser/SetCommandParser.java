@@ -7,13 +7,12 @@ import static seedu.jobs.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import java.util.NoSuchElementException;
 
 import seedu.jobs.commons.exceptions.IllegalValueException;
-import seedu.jobs.logic.commands.AddCommand;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.IncorrectCommand;
 import seedu.jobs.logic.commands.SetCommand;
 
 public class SetCommandParser extends Parser {
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.

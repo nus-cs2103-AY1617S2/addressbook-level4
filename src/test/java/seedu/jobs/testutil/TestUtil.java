@@ -344,9 +344,9 @@ public class TestUtil {
      * @return The modified array of tasks.
      */
     public static TestTask[] addTasksToList(final TestTask[] tasks, int index, TestTask... tasksToAdd) {
-      List<TestTask> listOfTasks = asList(tasks);
-      listOfTasks.addAll(index, asList(tasksToAdd));
-      return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+        List<TestTask> listOfTasks = asList(tasks);
+        listOfTasks.addAll(index, asList(tasksToAdd));
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
     //@@author
 

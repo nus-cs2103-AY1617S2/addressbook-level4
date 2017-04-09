@@ -37,7 +37,7 @@ public interface Model {
 
     /**
      * Updates the person located at {@code filteredPersonListIndex} with {@code editedPerson}.
-     * @param editedTask 
+     * @param editedTask
      *
      * @throws DuplicateTaskException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
@@ -49,15 +49,15 @@ public interface Model {
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-    
+
     /** Updates the filter of the filtered tasks list to show all tasks */
     void updateFilteredListToShowAll();
-    
+
   //@@author A0164440M
     /** Updates the filter of the filtered tasks list to show all tasks based on arguments */
     void updateFilteredListToShowAll(Set<String> keywords);
   //@@author
-    
+
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 

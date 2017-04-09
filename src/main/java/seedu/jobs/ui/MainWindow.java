@@ -1,7 +1,5 @@
 package seedu.jobs.ui;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -208,13 +206,13 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        if(browserPanel!=null){
-            browserPanel.freeResources(); 
+        if (browserPanel != null) {
+            browserPanel.freeResources();
         }
     }
-    
+
   //@@author A0130979U
-    public void activateBrowser(){
+    public void activateBrowser() {
         this.browserPanel = new BrowserPanel(browserPlaceholder, loginInfo);
     }
   //@@author

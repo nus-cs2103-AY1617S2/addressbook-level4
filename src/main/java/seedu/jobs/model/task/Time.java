@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,12 +51,11 @@ public class Time implements Comparable<Time> {
      * Returns true if a given string is in valid time format
      */
     public static boolean isValidTime(String test) {
-        
-        try{
+
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm");
             LocalDateTime testDate = LocalDateTime.parse(test, formatter);
-        }
-        catch (DateTimeParseException dtpe) {
+        } catch (DateTimeParseException dtpe) {
             return false;
         }
         return true;
