@@ -22,15 +22,15 @@ import org.teamstbf.yats.logic.commands.ListCommandTag;
 // @@author A0138952W
 public class ListCommandParser {
 
-    private final int LIST_COMMAND_SUFFIX = 2;
-    private final String COMMAND_EXTENSION_END = "by end";
-    private final String COMMAND_EXTENSION_START = "by start";
-    private final String COMMAND_EXTENSION_DEADLINE = "by deadline";
-    private final String COMMAND_EXTENSION_LOCATION = "by location";
-    private final String COMMAND_EXTENSION_DONE = "done";
-    private final String COMMAND_EXTENSION_TAG = "by tag";
-    private final String KEYWORD_DONE = "Yes";
-    private final String KEYWORD_PERIOD = " ";
+    private static final int LIST_COMMAND_SUFFIX = 2;
+    private static final String COMMAND_EXTENSION_END = "by end";
+    private static final String COMMAND_EXTENSION_START = "by start";
+    private static final String COMMAND_EXTENSION_DEADLINE = "by deadline";
+    private static final String COMMAND_EXTENSION_LOCATION = "by location";
+    private static final String COMMAND_EXTENSION_DONE = "done";
+    private static final String COMMAND_EXTENSION_TAG = "by tag";
+    private static final String KEYWORD_DONE = "Yes";
+    private static final String KEYWORD_PERIOD = " ";
 
     /**
      * Parses the given {@code String} of arguments in the context of the

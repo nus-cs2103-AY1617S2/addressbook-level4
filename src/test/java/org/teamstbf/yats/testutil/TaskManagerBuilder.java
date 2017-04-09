@@ -8,7 +8,8 @@ import org.teamstbf.yats.model.tag.Tag;
 /**
  * A utility class to help with building TaskManager objects. Example usage:
  * <br>
- * {@code TaskManager tb = new TaskManagerBuilder().withEvent("Abdicate the throne", "Usorp the throne").withTag("Betrayal").build();}
+ * {@code TaskManager tb = new TaskManagerBuilder().withEvent("Abdicate the throne",
+ * "Usorp the throne").withTag("Betrayal").build();}
  */
 public class TaskManagerBuilder {
 

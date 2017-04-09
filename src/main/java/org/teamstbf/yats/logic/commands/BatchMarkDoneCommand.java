@@ -51,6 +51,7 @@ public class BatchMarkDoneCommand extends Command {
             if (markedTask.getIsDone().getValue().equals(IsDone.ISDONE_DONE)) {
                 return new CommandResult(MESSAGE_ALR_MARKED);
             }
+
             markedTask.getIsDone().markDone();
             model.updateEvent(targetIndexes.pop(), markedTask);
             model.updateDoneTaskList();

@@ -33,8 +33,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public TaskCard(ReadOnlyEvent task, int displayedIndex, String FXML) {
-        super(FXML);
+    public TaskCard(ReadOnlyEvent task, int displayedIndex, String fxml) {
+        super(fxml);
         id.setText(displayedIndex + ". ");
         loc.setText(task.getLocation().value);
         description.setText(task.getDescription().value);
