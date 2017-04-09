@@ -252,8 +252,8 @@ What it does: Edit your task schedule end date to next month
 
 
 ### 3.5. Removing Deadline from a Task: `removedeadline`, `rd`
-What happens when there is changes to your deadline/schedule but still unsure of the confirmed date? You can remove the 
-deadline/schedule by using the removedeadline command.
+What happens when there is a change to your deadline/schedule but still unsure of the date? You can remove the 
+deadline or schedule by using the removedeadline command.
 
 Format:<br>
 `removedeadline <INDEX>`
