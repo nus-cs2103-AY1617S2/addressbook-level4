@@ -157,6 +157,12 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
+* uses `Singleton` pattern as its design pattern. Since we do not want the user interface to look complex, for each UI object such as
+  commandbox,resultbox,tasklistview and Calender, our UI just has one copy for each of them.
+<br><br><img src="images/UiDraft.png" width="600"><br>
+This is the initial draft for the calender
+<br><br><img src="images/Ui.png" width="600"><br>
+This is the final implementation for the calender
 
 ### 2.3. Logic component
 

@@ -1,10 +1,11 @@
+//@@author A0163935X
 package guitests;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 
 import org.junit.Test;
-//@@author A0163935X
+
 public class CalenderCommandTest extends AddressBookGuiTest  {
     @Test
     public void checkToday() {
