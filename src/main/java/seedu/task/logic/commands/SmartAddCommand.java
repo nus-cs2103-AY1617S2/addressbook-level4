@@ -3,11 +3,13 @@ package seedu.task.logic.commands;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import com.google.api.services.calendar.model.Event;
 
 import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.GoogleCalendar;
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.logic.commands.exceptions.CommandException;
@@ -33,6 +35,7 @@ public class SmartAddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
 
     private final Task toAdd;
 
@@ -73,7 +76,6 @@ public class SmartAddCommand extends Command {
     private Task googleQuickAdd(String description) throws IOException, IllegalValueException {
         com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
         Event createdEvent = service.events().quickAdd(GoogleCalendar.CALENDAR_ID, description).execute();
-        service.events().delete(GoogleCalendar.CALENDAR_ID, createdEvent.getId()).execute();
 
         return LogicHelper.createTaskFromEvent(createdEvent);
     }
@@ -87,9 +89,24 @@ public class SmartAddCommand extends Command {
             EventsCenter.getInstance().post(new JumpToListRequestEvent(0));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            try {
+                deleteGoogleEvent();
+            } catch (IOException ioe) {
+                logger.warning("Unable to delete possible duplicate in google calendar.");
+            }
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+    }
+
+    /**
+     * This deletes the event that failed to add to KIT in Google Calendar.
+     *
+     * @throws IOException  If connection failed.
+     */
+    private void deleteGoogleEvent() throws IOException {
+        com.google.api.services.calendar.Calendar service = GoogleCalendar.getCalendarService();
+        service.events().delete(GoogleCalendar.CALENDAR_ID, toAdd.getEventId()).execute();
     }
 
 }
