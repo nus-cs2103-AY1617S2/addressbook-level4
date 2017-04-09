@@ -203,14 +203,24 @@ _Figure 3.2.1 : Structure of the UI Component_
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
-`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class. The `MainWindow` holds all of the parts of the UI.
+
+`CommandBox` handles input command from the user and hands it over to `Logic` to continue.
+
+`HelpWindow` displays information about TypeTask's commands using an ImageView object.
+
+`ResultDisplay` displays relevant feedback for user after each command.
+
+`StatusBarFooter` reflects the time when TypeTask is updates, and also the saving path the application is currently using.
+
+`TaskCard` displays information of each task in Labels, Panes, or ImageView objects.
+
+`TaskListPanel` holds the different TaskCards.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
  
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
- [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
+ For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 ```
 Function of `UI`
 
@@ -364,7 +374,7 @@ Classes used by multiple components are in the `typetask.commons` package.
 
 ### 4.1. Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
+We use `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels
 and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file.
@@ -378,7 +388,7 @@ and logging destinations.
 * `SEVERE` : Critical problem detected which may possibly cause the termination of the application
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging
+* `FINE` : Details that are not usually noteworthy but may be useful in debugging
   e.g. print the actual list instead of just its size
 
 ### 4.2. Configuration
@@ -480,7 +490,6 @@ Here are the steps to convert the project documentation files to PDF format.
  1. Click on the `Print` option in Chrome's menu.
  
  1. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. <br>
-    For best results, use the settings indicated in the screenshot below. <br>
     
 ### 6.6. Managing Dependencies
 
