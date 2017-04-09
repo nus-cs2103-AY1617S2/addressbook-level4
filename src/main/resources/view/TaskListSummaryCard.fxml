@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- @@author A0140032E -->
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<stylesheets>
+		<URL value="@DarkTheme.css" />
+		<URL value="@Extensions.css" />
+	</stylesheets>
+	<children>
+
+		<VBox alignment="CENTER_LEFT" minWidth="200.0" minHeight="30.0" HBox.hgrow="ALWAYS">
+
+			<padding>
+				<Insets bottom="5" left="10" right="5" top="5" />
+			</padding>
+
+			<children>
+				<HBox alignment="CENTER_LEFT" spacing="5">
+					<children>
+						<HBox>
+							<Label fx:id="title" styleClass="cell_big_label" text="\$first"
+								wrapText="true" />
+						</HBox>
+					</children>
+				</HBox>
+				<Label fx:id="description" styleClass="cell_small_label" text="\$description"
+					wrapText="true" />
+			</children>
+		</VBox>
+
+	</children>
+</HBox>
+<!-- @@author -->

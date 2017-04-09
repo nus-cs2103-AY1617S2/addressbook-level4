@@ -1,13 +1,11 @@
 package seedu.taskmanager.logic.commands;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.util.ConfigUtil;
-import seedu.taskmanager.commons.util.StringUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
@@ -32,7 +30,7 @@ public class LoadCommand extends Command {
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load.";
-    public static final String MESSAGE_ERROR_IO_TASKMANAGER = "Failed to read/write TaskManager.";
+    public static final String MESSAGE_ERROR_IO = "Failed to read/write TaskManager.";
 
     private final String newPath;
 
@@ -46,11 +44,6 @@ public class LoadCommand extends Command {
         String configFilePathUsed;
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
-        File forPermissionTest = new File(this.newPath);
-        if (!forPermissionTest.canWrite()) {
-            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
-        }
-
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             newConfig = configOptional.orElse(new Config());
@@ -60,28 +53,31 @@ public class LoadCommand extends Command {
 
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager newTaskManager;
+        String oldStorageDirectory = storage.getTaskManagerFilePath();
 
         try {
             taskManagerOptional = storage.readTaskManager(this.newPath);
             newTaskManager = taskManagerOptional.orElse(new TaskManager());
-            storage.saveTaskManager(newTaskManager);
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_INVALID_DATA);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
+            throw new CommandException(MESSAGE_ERROR_IO);
         }
 
         newConfig.setTaskManagerFilePath(this.newPath);
         storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
-        model.resetData(newTaskManager);
-        model.updateFilteredListToShowAll();
 
         try {
+            storage.saveTaskManager(newTaskManager);
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_SAVECONFIG + StringUtil.getDetails(e));
+            newConfig.setTaskManagerFilePath(oldStorageDirectory);
+            storage.updateTaskManagerStorageDirectory(oldStorageDirectory, newConfig);
+            throw new CommandException(MESSAGE_ERROR_IO);
         }
 
+        model.resetData(newTaskManager);
+        model.updateFilteredListToShowAll();
         if (!taskManagerOptional.isPresent()) {
             return new CommandResult(String.format(MESSAGE_NEW_FILE, this.newPath));
         }

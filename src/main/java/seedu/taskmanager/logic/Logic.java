@@ -25,6 +25,14 @@ public interface Logic {
     /** Returns the filtered list of tasks */
     ObservableList<ReadOnlyTask> getFilteredTaskList();
 
+    // @@author A0114523U
+    /** Returns the list of overdue tasks */
+    ObservableList<ReadOnlyTask> getFilteredOverdueTaskList();
+
+    /** Returns the list of today's tasks */
+    ObservableList<ReadOnlyTask> getFilteredTodayTaskList();
+    // @@author
+
     // @@author A0131278H
     /** Returns the filtered list of incomplete tasks */
     ObservableList<ReadOnlyTask> getFilteredToDoTaskList();

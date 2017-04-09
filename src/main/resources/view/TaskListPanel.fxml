@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
 <!-- @@author A0114523U-->
+<!-- @@author -->
 
 <VBox xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
@@ -16,4 +16,3 @@
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
-<!-- @@author -->

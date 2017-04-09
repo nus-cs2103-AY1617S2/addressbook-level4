@@ -45,54 +45,63 @@
 |5| | 2. edit 1 t/random | The first task's tag in `Done` tab is edited |
 |6| edit task `Buy airtickets to maldives` using alias command | change `index` d/with boss | task description and tag are removed |
 |Done|		|		|		|
-|1| **done task** | | Tasks that are done will be moved from `To Do` tab to `Done` tab |
-|2| mark task `Write chinese essay` as done | done `index` | Task is marked done |
-|3| mark recurring task `Buy Lunch` as done | done `index` | A copy of task marked as done is created while the repeating task's start date advances by one day and is still a to do task |
-|4| mark last occurence of recurring task `Cut hair` as done | done `index` | Task is marked done and there are no more recurrences of the task |
-|5| mark done with an invalid index | done 1000 | Error message will be shown |
-|6| mark a done task as done | 1. list done | Selected view tab is now `Done` |
-|6| | 2. done `any index` | Error message will be shown |
+|| **done task** | | Tasks that are done will be moved from `To Do` tab to `Done` tab |
+|1| mark task `Write chinese essay` as done | done `index` | Task is marked done |
+|2| mark recurring task `Buy Lunch` as done | done `index` | A copy of task marked as done is created while the repeating task's start date advances by one day and is still a to do task |
+|3| mark last occurence of recurring task `Cut hair` as done | done `index` | Task is marked done and there are no more recurrences of the task |
+|4| mark done with an invalid index | done 1000 | Error message will be shown |
+|5| mark a done task as done | 1. list done | Selected view tab is now `Done` |
+|5| | 2. done `any index` | Error message will be shown |
 |Undone|		|		|		|
-|1| **undone task**<br><br>Tasks that are undone will be moved from `Done` tab to `To Do` tab | | |
-|2| mark task `Write chinese essay` as undone in `Done` tab | undone `index of desired task` | Task is marked incomplete|
-|3| mark task `Cut hair` as undone | undone `index of desired task` | task is marked undone, does not add back the recurrence pattern it used to have |
-|4| mark an incomplete task as undone | 1. list todo | Selected view tab is now `Done` |
+|| **undone task**<br><br>Tasks that are undone will be moved from `Done` tab to `To Do` tab | | |
+|1| mark task `Write chinese essay` as undone in `Done` tab | undone `index of desired task` | Task is marked incomplete|
+|2| mark task `Cut hair` as undone | undone `index of desired task` | task is marked undone, does not add back the recurrence pattern it used to have |
+|3| mark undone with an invalid index | undone 1000 | Error message will be shown |
+|4| mark an incomplete task as undone | 1. list todo | Selected view tab is now `To Do` |
 |4| | 2. undone `any index` | Error message will be shown |
-||		|		|		|
+|Select|		|		|		|
 || **select task** | | list will automatically scroll to and highlight the selected task |
-|| select `Buy Lunch` | select `index` | task is selected |
-|| select `Write chinese essay` in `To Do` tab | list todo | selected view tab is now `To Do` |
-|| | select `index` | task is selected |
+|1| select `Buy Lunch` | select `index` | Task with given index is selected |
+|2| select invalid index | select 1000 | Error message will be shown |
 ||		|		|		|
 || **delete task ** | | |
-|| delete task `Write chinese essay` | delete `index` | task is deleted |
-||		|		|		|
+|1| delete task `Write chinese essay` | delete `index` | Task is deleted |
+|2| delete task with invlaid index | delete 1000 | Error message will be shown |
+|3| delete task with alias command remove | remove `index` | Task is deleted |
+|Undo|		|		|		|
 || **undo a command**<br><br>Can only undo actions that changes data, i.e. add, edit, delete.<br><br>Undo history is only maintained for that session, e.g. cannot undo all commands listed above after exiting FunTaskTic and opening it again | | |
-|| add a task, edit it, then undo | add Go NTUC d/buy apples | task is added |
-|| | edit `index` d/buy oranges | task description is edited |
-|| | undo | task description is restored to `buy apples` |
-|| | undo | task is un-added, i.e. removed from list |
-|	|	|		|		|
+|1| undo previous delete | undo | Deleted task is restored |
+|2| add a task, edit it, then undo | 1. add Go to NTUC d/buy apples | Task is added |
+|2| | 2. edit `index` d/buy oranges | Task description is edited |
+|2| | 3. undo | Task description is restored to `buy apples` |
+|2| | 4. undo | Task is un-added, i.e. removed from list |
+|	Redo|	|		|		|
 || **redo a command**<br><br>Can only redo actions if the last command was `undo`| | |
-|| restore the task `Go NTUC d/buy apples` | redo | task is added back |
-|| restore edit description| redo | task becomes `go NTUC d/buy oranges`|
-|| check anything else to redo | redo | error given, nothing else to redo |
-||		|		|		|
+|1| restore the task `Go NTUC d/buy apples` | redo | Task is added back |
+|2| restore edit description| redo | Task becomes `go NTUC d/buy oranges`|
+|3| check for anything else to redo | redo | Error message will be shown as there is nothing else to redo |
+|Find|		|		|		|
 || **find**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
-|| find tasks with keyword `school` | find school | shows tasks with `school` |
-|| | list | clears the filter and shows all tasks |
-|| find tasks with keyword `school` or `home` | find school home | show tasks with `school` or `home` |
-|| | list | clears the filter and shows all tasks |
+|1| find tasks with keyword `school` | 1. find school | Shows tasks with `school` |
+|1| | 2. list | Clears the filter and shows all tasks |
+|2| find tasks with keyword `school` or `home` | 1. find school home | Shows tasks with `school` or `home` |
+|2| | 2. list | Clears the filter and shows all tasks |
+|3| find tasks with partial keyword `sch` | 1. find sch | Show tasks with `school`|
+|3| | 2. list | Clears the filter and shows all tasks |
+|4| find tasks with typo in keyword | 1. find prisentation | Shows tasks with `presentation` |
+|4| | 2. list | Clears the filter and shows all tasks |
 ||		|		|		|
 || **find by date**<br><br> Search for tasks that contain the specified date point or date range | | |
-|| find tasks on 10 april 2017 | findbydate 10 apr 2017 | tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
-|| | list | clears the filter and shows all tasks |
-|| find tasks from 10-11 april 2017 | findbydate 10 apr 2017 to 11 apr 2017 | tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
-|| | list | clears the filter and shows all tasks |
-||		|		|		|
+|1| find tasks on 10 april 2017 | 1. findbydate 10 apr 2017 | Tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
+|1| | 2. list | Clears the filter and shows all tasks |
+|2| find tasks from 10-11 april 2017 | 1. findbydate 10 apr 2017 to 11 apr 2017 | Tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
+|2| | 2. list | Clears the filter and shows all tasks |
+|Save|		|		|		|
 || **save data to another file location** | | |
-|| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | data saved in specified location |
-||		|		|		|
+|1| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | Data saved in specified location |
+|2| save current FunTaskTic data to an invalid location | save invalid/newdata.xml | Error message will be shown |
+|3| save current FunTaskTic data to an data/subfolder/newdata2.xml using alias command saveas | saveas data/subfolder/newdata2.xml | Data saved in specified location |
+|Clear|		|		|		|
 || **clear data in FunTaskTic** | clear | list is cleared |
-||		|		|		|
+|Exit|		|		|		|
 || **exit FunTaskTic** | exit | closes FunTaskTic |
