@@ -1,13 +1,11 @@
 package guitests;
 
-import static org.junit.Assert.assertEquals;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import org.junit.Test;
 
 import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.ChangeSaveLocationCommand;
-import seedu.taskmanager.storage.XmlTaskManagerStorage;
 
 public class ChangeSaveLocationCommandTest extends TaskManagerGuiTest {
 
