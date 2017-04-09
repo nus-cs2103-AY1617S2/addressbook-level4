@@ -34,11 +34,11 @@ Format: `help`
 > Typing `help` will create a pop up of this User Guide on the user's computer. Internet connection is required.
 
 ## Listing All Tasks : `list`
-Shows a list of all active tasks.<br>
+Shows a list of all tasks.<br>
 Format: `list`
 
 ## Adding a Task : `add`
-Adds a task to the task manager<br>
+Adds a task to Fast Task<br>
 Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 
 > Words in `UPPER_CASE` are the parameters, items in `[SQUARE_BRACKETS]` are optional.
@@ -64,22 +64,21 @@ Format: `add TASKNAME [d/DATE1 [DATE2]] [s/STARTTIME] [e/ENDTIME] [m/MESSAGE]`
 * tomorrow
 
 Example:
-* `add Buy apple juice d/010117 s/08:00 e/10:00 m/Lok out for snacks`
+* `add Buy apple juice d/010117 s/08:00 e/10:00 m/Look out for snacks`
 <img src="images/add.png" width="600">
 
 ## Finding a Task: `find`
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> The search is not case sensitive, the order of the keywords does not matter, only the name is searched,
-and tasks matching at least one keyword will be returned (i.e. `OR` search).
+> The search is not case sensitive, the order of the keywords does not matter, as only the name is searched. Tasks matching at least one keyword will be returned (i.e. `OR` search).
 
 Example:
 * `find juice`
 <img src="images/find.png" width="600">
 
 ## Deleting a Task : `delete`
-Deletes a specified task or tasks from the task manager. Irreversible.<br>
+Deletes a specified task or tasks from the task manager.<br>
 Format: `delete INDEX [MORE INDECIES]`
 
 > Deletes the tasks at the specified `INDEX` or indecies.
@@ -112,7 +111,7 @@ Format: `undo`<br>
 <img src="images/undo.png" width="600">
 
 ## Redoing an Action : `redo`
-Redos the most recent action up to 10 times.
+Redos the most recent action as many times as undo has been called.
 Format: `redo`<br>
 <img src="images/redo.png" width="600">
 
@@ -152,7 +151,7 @@ Examples:
 ## Sorting the Tasks : `sort`
 Sorts the tasks by date or by alphabet.
 Format: `sort name`,`sort time`, `sort status`
-> Sorts tasks in either alphabetical order or by upcoming tasks. `sort time` will sort the tasks by the date that is closest to the current date. `sort status` will sort the tasks by `Ongoing` or `Completed`.
+> `sort name` sorts tasks in alphabetical order. `sort time` will sort the tasks by the date that is closest to the current date. `sort status` will sort the tasks by `Ongoing` or `Completed`.
 > To return to the unsorted list of tasks, type and enter `list`.
 
 Examples:<br>
@@ -172,7 +171,7 @@ Example: `google 2` <br>
 <img src="images/google.png" width="600">
 
 ## Changing the Save Path: `path`
-Saves a new copy of the Fast Task data to a new file location and changes savepath. Must specify the name of the save file and mark it as a .xml file.<br>
+Saves a new copy of the Fast Task data to a new file location and changes the savepath. Must specify the name of the save file and mark it as a .xml file.<br>
 Format: `path PATHNAME`<br>
 Example for Windows: `path C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `path /Users/name/Desktop/MyTasks.xml`
@@ -182,7 +181,7 @@ After entering a save path, this confirmation message will appear.
 <img src="images/path.png" width="600">
 
 ## Loading Fast Task Data: `load`
-Loads a copy of Fast Task and changes savepath, but does not overwrite the loaded file. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file. <br>
+Loads a copy of Fast Task data and changes the savepath, but does not overwrite the loaded file. Can be used for loading different sets of task data. Must specify the name of the save file and mark it as a .xml file. <br>
 Format: `load PATHNAME`<br>
 Example for Windows: `load C:\Desktop\MyTasks.xml`<br>
 Example for Mac: `load /Users/name/Desktop/MyTasks.xml`
@@ -199,11 +198,11 @@ Exits the program.<br>
 Format: `exit`
 
 ## Saving the Data
-Tasks manager data are saved in the hard disk automatically after any command that changes the data.<br>
+Fast Task data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## Save Location
-Fast Task data are saved in a file called `TasksManagerData.xml` in the project root folder.
+Fast Task data are saved in a default file called `TasksManagerData.xml` in the project root folder.
 
 ## 4. Command Summary
 
