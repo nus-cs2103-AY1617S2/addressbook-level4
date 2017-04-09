@@ -33,8 +33,8 @@ public class TaskCard extends UiPart<Region> {
         title.setText(task.getTitle().value);
         id.setText(displayedIndex + ". ");
         // @@author A0140032E
-        startDate.setText(task.getStartDate().isPresent() ? "Starts on " + task.getStartDate().get() : "");
-        endDate.setText(task.getEndDate().isPresent() ? "Ends on " + task.getEndDate().get() : "");
+        startDate.setText(task.getStartDate().isPresent() ? "Starts: " + task.getStartDate().get() : "");
+        endDate.setText(task.getEndDate().isPresent() ? "Ends: " + task.getEndDate().get() : "");
         description.setText(task.getDescription().isPresent() ? task.getDescription().get().value : "");
         repeat.setText(task.getRepeat().isPresent() ? "Repeats: " + task.getRepeat().get() : "");
         // @@author

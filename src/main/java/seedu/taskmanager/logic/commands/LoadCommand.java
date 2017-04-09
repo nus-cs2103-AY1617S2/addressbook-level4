@@ -1,5 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -13,18 +14,17 @@ import seedu.taskmanager.model.TaskManager;
 
 // @@author A0114269E
 /**
- * Loads Task Manager from user-specified path XML file and changes the directory to that file path.
- * If no XML is found, starting a new Task Manager with new XML file at given file path
- * Path matching is case sensitive.
+ * Loads Task Manager from user-specified path XML file and changes the
+ * directory to that file path. If no XML is found, starting a new Task Manager
+ * with new XML file at given file path Path matching is case sensitive.
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String ALTERNATIVE_COMMAND_WORD = "open";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the directory of the taskmanager."
-            + "xml file to allow user to sync with cloud services\n"
-            + "Parameters: PATH...\n"
-            + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
+            + "xml file to allow user to sync with cloud services\n" + "Parameters: PATH...\n" + "Example: "
+            + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
     public static final String MESSAGE_SUCCESS = "TaskManager successfully loaded : %1$s";
     public static final String MESSAGE_NEW_FILE = "WARNING! No XML file is found\n"
@@ -32,7 +32,7 @@ public class LoadCommand extends Command {
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load.";
-    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager. Please retry.";
+    public static final String MESSAGE_ERROR_IO_TASKMANAGER = "Failed to read/write TaskManager.";
 
     private final String newPath;
 
@@ -46,6 +46,11 @@ public class LoadCommand extends Command {
         String configFilePathUsed;
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
+        File forPermissionTest = new File(this.newPath);
+        if (!forPermissionTest.canWrite()) {
+            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
+        }
+
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             newConfig = configOptional.orElse(new Config());
@@ -53,21 +58,23 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_BUILDCONFIG);
         }
 
-        newConfig.setTaskManagerFilePath(this.newPath);
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager newTaskManager;
 
         try {
             taskManagerOptional = storage.readTaskManager(this.newPath);
             newTaskManager = taskManagerOptional.orElse(new TaskManager());
-            storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
-            model.resetData(newTaskManager);
-            model.updateFilteredListToShowAll();
+            storage.saveTaskManager(newTaskManager);
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_INVALID_DATA);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_READ_TASKMANAGER);
+            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
         }
+
+        newConfig.setTaskManagerFilePath(this.newPath);
+        storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
+        model.resetData(newTaskManager);
+        model.updateFilteredListToShowAll();
 
         try {
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
@@ -76,7 +83,7 @@ public class LoadCommand extends Command {
         }
 
         if (!taskManagerOptional.isPresent()) {
-            throw new CommandException(String.format(MESSAGE_NEW_FILE, this.newPath));
+            return new CommandResult(String.format(MESSAGE_NEW_FILE, this.newPath));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newPath));
     }

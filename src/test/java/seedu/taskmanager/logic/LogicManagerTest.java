@@ -8,6 +8,8 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPL
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,12 +26,17 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
+import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
+import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
@@ -67,6 +74,7 @@ import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.util.SampleDataUtil;
+import seedu.taskmanager.storage.Storage;
 import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.ui.MainWindow;
 
@@ -79,8 +87,12 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    // @@author A0114269E
+    private Storage storage;
+    // @@author
     private Logic logic;
     private HistoryManager history;
+    private TestDataHelper helper;
 
     // These are for checking the correctness of the events raised
     private ReadOnlyTaskManager latestSavedTaskManager;
@@ -109,17 +121,19 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
+        model = new ModelManager();
+        // @@author A0114269E
+        storage = new StorageManager(tempTaskManagerFile, tempPreferencesFile);
         // @@author A0140032E
         history = HistoryManager.getInstance();
         history.init(model);
         logic = LogicManager.getInstance();
-        logic.init(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        logic.init(model, storage);
         // @@author
         EventsCenter.getInstance().registerHandler(this);
-
+        helper = new TestDataHelper();
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last
                                                                           // saved
                                                                           // assumed
@@ -200,6 +214,43 @@ public class LogicManagerTest {
         assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
 
+    // @@author A0114269E
+    /**
+     * Executes the command, confirms that a CommandException is not thrown and
+     * that the result message is correct. Also confirms that both the 'task
+     * manager' and the 'last shown list' are as specified.
+     *
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
+     */
+    private void assertDirectoryChanged(String newFilePath, Config config) {
+        boolean isFileExist = new File(newFilePath).exists();
+        assertTrue("New file at given directory was not created.", isFileExist);
+
+        String configFilePath = config.getTaskManagerFilePath();
+        assertEquals(newFilePath, configFilePath);
+
+        Optional<ReadOnlyTaskManager> taskManagerOptional = null;
+        try {
+            taskManagerOptional = storage.readTaskManager(newFilePath);
+            assertFalse("CommandException expected but was not thrown.", false);
+        } catch (DataConversionException e) {
+            assertTrue("CommandException not expected but was thrown.", false);
+        } catch (IOException e) {
+            assertTrue("CommandException not expected but was thrown.", false);
+        }
+
+        if (!taskManagerOptional.isPresent()) {
+            assertTrue("No Task Manager exists in the new directory", false);
+        }
+
+        ObservableList<ReadOnlyTask> fromStorage = taskManagerOptional.get().getTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> fromModel = model.getFilteredTaskList();
+
+        assertEquals(fromModel, fromStorage);
+    }
+    // @@author
+
     @Test
     public void execute_unknownCommandWord() {
         String unknownCommand = "uicfhmowqewca";
@@ -220,7 +271,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_clear() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         model.addTask(helper.generateTask(1));
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
@@ -259,7 +309,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t1();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -274,7 +323,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful_with_inferred_end_time() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t2();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -288,7 +336,6 @@ public class LogicManagerTest {
     @Test
     public void execute_add_successful_with_inferred_start_time() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t3();
         TaskManager expectedTM = new TaskManager();
         expectedTM.addTask(toBeAdded);
@@ -303,7 +350,6 @@ public class LogicManagerTest {
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
-        TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.t1();
 
         // setup starting state
@@ -317,7 +363,6 @@ public class LogicManagerTest {
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
-        TestDataHelper helper = new TestDataHelper();
         TaskManager expectedAB = helper.generateTaskManager(2);
         List<? extends ReadOnlyTask> expectedList = expectedAB.getTaskList();
 
@@ -360,7 +405,6 @@ public class LogicManagerTest {
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-        TestDataHelper helper = new TestDataHelper();
         List<Task> taskList = helper.generateTaskList(2);
 
         // set AB state to 2 persons
@@ -384,8 +428,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_select_jumpsToCorrectPerson() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
+    public void execute_select_jumpsToCorrectTask() throws Exception {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -434,7 +477,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -459,7 +501,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeRemoveRemovesCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskManager expectedAB = helper.generateTaskManager(threeTasks);
@@ -483,7 +524,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditDuplicateTaskMessageShown() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithStartDate("01/03/2017");
         Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
         Task tTarget3 = helper.generateTaskWithStartDate("03/03/2017");
@@ -496,7 +536,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditSuccessful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithTitle("a");
         Task tTarget2 = helper.generateTaskWithTitle("b");
         Task tTarget3 = helper.generateTaskWithTitle("c");
@@ -515,7 +554,6 @@ public class LogicManagerTest {
     // @@author A0140032E
     @Test
     public void executeEditStartDateSuccessful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithStartDate("4 may 2016 3pm");
         Task tTarget2 = helper.generateTaskWithStartDate("6 may 2016 5pm");
 
@@ -531,7 +569,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditStartDateAfterWorkingHoursSuccessful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("today")),
                 Optional.of(new EndDate("today")), Optional.of(new Description("Some text")), Optional.ofNullable(null),
                 new UniqueTagList(new Tag("tag1")));
@@ -552,7 +589,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditEndDateSuccessful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithEndDate("1 june 2017 3am");
         Task tTarget2 = helper.generateTaskWithEndDate("3 june 2019 5am");
 
@@ -568,7 +604,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditMultipleFieldsSuccessful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
                 Optional.of(new EndDate("02/01/2017")), Optional.of(new Description("Some text")),
                 Optional.ofNullable(null), new UniqueTagList(new Tag("tag1")));
@@ -611,7 +646,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeEditIllegalValues() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.t1();
         model.addTask(tTarget1);
         assertCommandFailure("edit 1 s/no date", StartDate.MESSAGE_STARTDATE_CONSTRAINTS);
@@ -819,6 +853,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_load_successful() throws Exception {
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
         String sampleFilepath = "src/test/data/cd_test/sample.xml";
         TestDataHelper helper = new TestDataHelper();
 
@@ -827,24 +863,72 @@ public class LogicManagerTest {
 
         assertCommandSuccess("load " + sampleFilepath, String.format(LoadCommand.MESSAGE_SUCCESS, sampleFilepath),
                 expectedTM, expectedTasks);
+        assertDirectoryChanged(sampleFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
     }
 
     @Test
     public void execute_load_nonExistentFile() throws Exception {
         String newFilepath = "src/test/data/cd_test/new.xml";
-        assertCommandFailure("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath));
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        TestDataHelper helper = new TestDataHelper();
+
+        File f = new File(newFilepath);
+        if (f.exists() && !f.isDirectory()) {
+            f.delete();
+        }
+
+        List<Task> expectedTasks = helper.generateTaskList();
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+        assertCommandSuccess("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath),
+                expectedTM, expectedTasks);
+        assertDirectoryChanged(newFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
+        f.delete();
     }
 
     @Test
-    public void execute_save_invalidFilePath() throws Exception {
-        assertCommandFailure("save !asdwie34$2.xml",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
-        assertCommandFailure("saveas data/taskmanager",
-                String.format(Messages.MESSAGE_INVALID_XML_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+    public void execute_saveas_successful() throws Exception {
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        String saveasFilepath = "src/test/data/cd_test/saveas.xml";
+        String saveFilepath = "src/test/data/cd_test/save.xml";
+        TestDataHelper helper = new TestDataHelper();
+
+        List<Task> expectedTasks = helper.generateTaskList(5);
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+        helper.addToModel(model, expectedTasks);
+
+        assertCommandSuccess("saveas " + saveasFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveasFilepath),
+                expectedTM, expectedTasks);
+        assertDirectoryChanged(saveasFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        Task tTarget6 = helper.generateTask(6);
+        Task tTarget7 = helper.generateTask(7);
+        List<Task> addedTasks = helper.generateTaskList(tTarget6, tTarget7);
+        List<Task> newExpectedTasks = helper.generateTaskList(7);
+        TaskManager newExpectedTM = helper.generateTaskManager(newExpectedTasks);
+        helper.addToModel(model, addedTasks);
+        assertCommandSuccess("save " + saveFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveFilepath),
+                newExpectedTM, newExpectedTasks);
+        assertDirectoryChanged(saveFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        assertCommandSuccess("save " + saveasFilepath, String.format(SaveAsCommand.MESSAGE_SUCCESS, saveasFilepath),
+                newExpectedTM, newExpectedTasks);
+        assertDirectoryChanged(saveasFilepath, ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get());
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
+        File f1 = new File(saveasFilepath);
+        File f2 = new File(saveFilepath);
+        f1.delete();
+        f2.delete();
     }
 
     @Test
-    public void execute_save_successful() throws Exception {
+    public void execute_saveas_invalidFilePath() throws Exception {
         assertCommandFailure("save !asdwie34$2.xml",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
         assertCommandFailure("saveas data/taskmanager",
@@ -853,8 +937,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = helper.generateTaskWithStatus(1, false);
         Task tTarget2 = helper.generateTaskWithStatus(2, false);
         Task tTarget3 = helper.generateTaskWithStatus(3, false);
@@ -873,8 +955,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_alreadyDoneFailure() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = helper.generateTaskWithStatus(1, false);
         Task tTarget2 = helper.generateTaskWithStatus(2, true);
         Task tTarget3 = helper.generateTaskWithStatus(3, true);
@@ -889,8 +969,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_undone_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = helper.generateTaskWithStatus(1, false);
         Task tTarget2 = helper.generateTaskWithStatus(2, true);
         Task tTarget3 = helper.generateTaskWithStatus(3, true);
@@ -910,8 +988,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_undone_alreadyUndoneFailure() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = helper.generateTaskWithStatus(1, false);
         Task tTarget2 = helper.generateTaskWithStatus(2, false);
         Task tTarget3 = helper.generateTaskWithStatus(3, false);
@@ -925,8 +1001,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_undone_duplicateFailure() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = helper.generateTaskWithStatus(1, false);
         Task tTarget2 = helper.generateTaskWithStatus(2, false);
         Task tTarget3 = helper.generateTaskWithStatus(3, false);
@@ -944,8 +1018,6 @@ public class LogicManagerTest {
     // @@author A0140032E
     @Test
     public void execute_done_recurring_day_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
                 Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
                 Optional.of(new Repeat("DAY")), new UniqueTagList(new Tag("tag1")));
@@ -969,8 +1041,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_recurring_week_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
                 Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
                 Optional.of(new Repeat("WEEK")), new UniqueTagList(new Tag("tag1")));
@@ -994,8 +1064,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_recurring_month_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
                 Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
                 Optional.of(new Repeat("MONTH")), new UniqueTagList(new Tag("tag1")));
@@ -1019,8 +1087,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_done_last_recurring_successful() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-
         Task tTarget1 = new Task(new Title("Task A"), Optional.of(new StartDate("01/01/2017")),
                 Optional.of(new EndDate("02/03/2017")), Optional.of(new Description("Some text")),
                 Optional.of(new Repeat("YEAR")), new UniqueTagList(new Tag("tag1")));
@@ -1042,7 +1108,6 @@ public class LogicManagerTest {
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithTitle("bla bla KEY bla");
         Task tTarget2 = helper.generateTaskWithTitle("bla rAnDoM bla bceofeia");
         Task tTarget3 = helper.generateTaskWithTitle("key key");
@@ -1060,7 +1125,6 @@ public class LogicManagerTest {
     // @@author A0131278H
     @Test
     public void executeSortByStartDateCorrectOrderofTasks() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithStartDate("03/03/2017");
         Task tTarget2 = helper.generateTaskWithStartDate("02/03/2017");
         Task tTarget3 = helper.generateTaskWithStartDate("01/03/2017");
@@ -1082,7 +1146,6 @@ public class LogicManagerTest {
 
     @Test
     public void executeSortByEndDateCorrectOrderofTasks() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
         Task tTarget1 = helper.generateTaskWithEndDate("04/04/2017");
         Task tTarget2 = helper.generateTaskWithEndDate("03/04/2017");
         Task tTarget3 = helper.generateTaskWithEndDate("02/04/2017");

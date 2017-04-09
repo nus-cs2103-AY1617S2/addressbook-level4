@@ -16,6 +16,7 @@ public class UndoCommand extends Command {
         String commandText;
         try {
             commandText = historyManager.undo();
+            //highlightChanges(commandText);
         } catch (Exception e) {
             throw new CommandException(MESSAGE_NO_MORE_UNDO);
         }
