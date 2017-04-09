@@ -72,8 +72,7 @@ public interface ReadOnlyTask {
         if (getTaskEndTime() != null) {
             builder.append(" End Time: ").append(getTaskEndTime());
         }
-        builder.append(" Description: " + getTaskDescription()).append(" Status: ")
-                .append(getTaskStatus());
+        builder.append(" Description: " + getTaskDescription());
 
         getTags().forEach(builder::append);
         return builder.toString();
