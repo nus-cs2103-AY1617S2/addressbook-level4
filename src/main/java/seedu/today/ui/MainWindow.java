@@ -70,6 +70,10 @@ public class MainWindow extends UiPart<Region> {
     private ObservableList<ReadOnlyTask> taskListFuture;
     private ObservableList<ReadOnlyTask> taskListCompleted;
 
+    // Default window size
+    private static double windowWidth = 570;
+    private static double windowHeight = 750;
+
     @FXML
     private Label titleDate;
 
@@ -135,6 +139,8 @@ public class MainWindow extends UiPart<Region> {
             primaryStage.initStyle(StageStyle.UNDECORATED);
         }
         primaryStage.setResizable(false);
+        primaryStage.setWidth(windowWidth);
+        primaryStage.setHeight(windowHeight);
         registerAsAnEventHandler(this);
 
         // Allows dragging the undecorated window around
