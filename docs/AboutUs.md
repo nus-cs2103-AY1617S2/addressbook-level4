@@ -26,8 +26,24 @@ Code Written: [[functional code](./collated/main/A0147622H.md)][[test code](./co
 #### [Goh Yi Rui](http://github.com/yirui94)
 <img src="images/yirui94.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Logic, 
-                  Integration
+Responsibilities: Logic
+
+* Integration
+* Scheduling & deadlines
+* Assigning tasks
+* Facilitate discussions
+
+Contributions:
+
+* Did initial refactoring
+* Set up Travis, Coveralls, Appveyor
+* Wrote the UserGuide
+
+Features:
+
+* Autosorting
+* TaskCard Display
+* Autoscrolling
 
 Code Written: [[functional code](./collated/main/A0139438W.md)][[test code](./collated/test/A0139438W.md)]
 
