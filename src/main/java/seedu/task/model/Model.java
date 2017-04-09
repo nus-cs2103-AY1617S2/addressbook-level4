@@ -59,7 +59,6 @@ public interface Model {
     void updateFilteredListToShowIncomplete();
 
     //@@author A0163848R
-
     /** Undoes the last modification made to the TaskManager. Returns if there is anything to undo. */
     boolean undoLastModification();
 

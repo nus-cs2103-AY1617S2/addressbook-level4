@@ -43,7 +43,6 @@ import seedu.task.model.ReadOnlyTaskManager;
 import seedu.task.model.YTomorrow;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.Date;
 import seedu.task.model.task.EndDate;
 import seedu.task.model.task.Group;
 import seedu.task.model.task.Name;
@@ -444,7 +443,7 @@ public class LogicManagerTest {
         }
 
         //@@author A0164032U
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(ReadOnlyTask p) {
             StringBuffer cmd = new StringBuffer();
 
@@ -458,6 +457,37 @@ public class LogicManagerTest {
             return cmd.toString();
         }
         //@@author
+
+        //@@author A0164466X
+        /** Generates the complete list */
+        String generateListCompleteCommand() {
+            return "lc ";
+        }
+
+        /** Generates the incomplete list */
+        String generateListIncompleteCommand(ReadOnlyTask p) {
+            return "li";
+        }
+
+        /** Generates the correct mark command based on the index given */
+        String generateMarkCommand(int index) {
+            StringBuffer cmd = new StringBuffer();
+
+            cmd.append("mark ");
+            cmd.append(index);
+
+            return cmd.toString();
+        }
+
+        /** Generates the correct unmark command based on the index given */
+        String generateUnmarkCommand(int index) {
+            StringBuffer cmd = new StringBuffer();
+
+            cmd.append("unmark ");
+            cmd.append(index);
+
+            return cmd.toString();
+        }
 
         /**
          * Generates an AddressBook with auto-generated persons.
