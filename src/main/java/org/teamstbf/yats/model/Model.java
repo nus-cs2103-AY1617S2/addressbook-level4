@@ -83,11 +83,6 @@ public interface Model {
     void updateCalendarFilteredListToShowStartTime(LocalDate today);
 
     /**
-     * Updates the filter of the Calendar filtered event list to show done tasks
-     */
-    void updateCalendarFilteredListToShowUndone();
-
-    /**
      * Updates the filter of the Done task filtered event list to show done task
      */
     void updateDoneTaskList();

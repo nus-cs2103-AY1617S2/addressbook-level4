@@ -4,11 +4,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ClearCommandTest extends TaskManagerGuiTest {
+public class ResetCommandTest extends TaskManagerGuiTest {
 
 	// @@author A0139448U
 	@Test
-	public void clear() {
+	public void reset() {
 
 		// verify a non-empty list can be cleared
 		assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
