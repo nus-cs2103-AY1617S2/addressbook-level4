@@ -214,10 +214,8 @@ public class Task implements ReadOnlyTask, Comparable<ReadOnlyTask> {
         return getAsText();
     }
 
-    //@@author A0142487Y
     @Override
     public int compareTo(ReadOnlyTask o) {
-        //Same end date then compare according to names lexicographically
         if ((this.getEndDate() == null && o.getEndDate() == null)
                 || (this.getEndDate().equals(o.getEndDate()))) {
             return this.getName().fullName.compareTo(o.getName().fullName);

@@ -56,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      * Resets data of taskManager.
      */
@@ -66,7 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      * Load data into taskManager. Used by Undo/Redo Command.
      */
@@ -76,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      *
      * @return taskManager of model.
@@ -86,18 +86,19 @@ public class ModelManager extends ComponentManager implements Model {
         return taskManager;
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      * Raises an event to indicate the model has changed.
      *
-     * @param backupFilePath    File path to back up into.
+     * @param backupFilePath
+     *            File path to back up into.
      */
     private void indicateTaskManagerChanged(String backupFilePath) {
         history.handleTaskManagerChanged(backupFilePath);
         raise(new TaskManagerChangedEvent(taskManager, backupFilePath));
     }
 
-    //@@author
+    // @@author
     /** Raises an event to indicate the file path has changed */
     private void indicateFilePathChanged(String newPath) {
         raise(new FilePathChangedEvent(newPath, taskManager));
@@ -125,11 +126,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      *
-     * @param target    Target task to change.
-     * @param eventId   Event id to change into.
+     * @param target
+     *            Target task to change.
+     * @param eventId
+     *            Event id to change into.
      */
     @Override
     public void setTaskEventId(ReadOnlyTask target, String eventId)
@@ -146,11 +149,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged(history.getBackupFilePath());
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      * This method adds every task in tasks to model.
      *
-     * @param tasks     ArrayList of task to add.
+     * @param tasks
+     *            ArrayList of task to add.
      */
     @Override
     public void addMultipleTasks(ArrayList<Task> tasks) {
@@ -209,10 +213,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListFloat() {
         updateFilteredTaskList(new PredicateExpression(new FloatDateQualifier()));
     }
-    // @Override
-    // public void updateFilteredTaskList(Set<String> keywords) {
-    // updateFilteredTaskList(new PredicateExpression(new StringQualifier(keywords, false)));
-    // }
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords, boolean isExact) {
@@ -286,8 +286,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0142487Y
     /**
-     * This qualifier is specifically for strings,including name, location,remark and tags. Returns true if there is any
-     * match.
+     * This qualifier is specifically for strings,including name, location,remark and tags.
      *
      * @author Xu
      *
@@ -357,8 +356,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return this.dateQualifier.date.isNull() ? this.stringQualifier.run(task)
-                        : (this.stringQualifier.run(task)
-                                && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
+                    : (this.stringQualifier.run(task)
+                            && (this.dateQualifier.run(task) || this.dateAsStringQualifier.run(task)));
         }
     }
     // @@author
@@ -378,6 +377,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
+    // @@author
 
     // @@author A0139975J
     private class DateQualifier implements Qualifier {

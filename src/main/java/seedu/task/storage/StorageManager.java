@@ -57,7 +57,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-    // @@author A0142487Y
     @Override
     public void setThemeTo(String themeName) {
         Optional<UserPrefs> optionalUserPrefs = null;
@@ -68,6 +67,7 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Theme of KIT will not be changed");
         }
+        // @@author A0142487Y
         UserPrefs userPrefs = optionalUserPrefs.get();
         userPrefs.setTheme(themeName);
         try {
@@ -78,7 +78,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
 
     }
-  //@@author
+    // @@author
 
     // ================ TaskManager methods ==============================
 
@@ -116,13 +116,16 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveTaskManager(taskManager, filePath);
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
      * Saves backup into given backupFilePath.
      *
-     * @param backupFilePath            File path to back up into.
-     * @throws IOException              If input/output error.
-     * @throws FileNotFoundException    If file is not found.
+     * @param backupFilePath
+     *            File path to back up into.
+     * @throws IOException
+     *             If input/output error.
+     * @throws FileNotFoundException
+     *             If file is not found.
      */
     @Override
     public void saveBackup(String backupFilePath) throws IOException, FileNotFoundException {
@@ -130,7 +133,7 @@ public class StorageManager extends ComponentManager implements Storage {
         taskManagerStorage.saveBackup(backupFilePath);
     }
 
-    //@@author A0142939W
+    // @@author A0142939W
     @Override
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
@@ -144,12 +147,12 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    //@@author A0140063X
+    // @@author A0140063X
     /**
-     * Triggers whenever a command that modifies data is executed.
-     * Backup if required. Save data into file either way.
+     * Triggers whenever a command that modifies data is executed. Backup if required. Save data into file either way.
      *
-     * @param event     The event that represents taskmanager is changed.
+     * @param event
+     *            The event that represents taskmanager is changed.
      */
     @Override
     @Subscribe
@@ -165,6 +168,6 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    //@@author
+    // @@author
 
 }

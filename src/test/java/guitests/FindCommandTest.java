@@ -7,16 +7,17 @@ import org.junit.Test;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.testutil.TestTask;
+
 //@@author A0142487Y
 public class FindCommandTest extends TaskManagerGuiTest {
 
     @Test
     public void find_nonEmptyList_success() {
 
-        //find full name
+        // find full name
         assertFindResult("find dinner", td.eat, td.decide); // multiple results
 
-        //find substring
+        // find substring
         assertFindResult("find din", td.eat, td.decide); // multiple results
 
         // find after deleting one result
@@ -37,36 +38,21 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_nonEmptyList_byLocation_success() {
-        try {
-            commandBox.runCommand(new TestTask(td.jump).getAddCommand());
-        } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void find_nonEmptyList_byLocation_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.jump).getAddCommand());
         assertFindResult("find ERC field", td.jump);
 
     }
 
     @Test
-    public void find_nonEmptyList_byRemark_success() {
-        try {
-            commandBox.runCommand(new TestTask(td.neglect).getAddCommand());
-        } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void find_nonEmptyList_byRemark_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.neglect).getAddCommand());
         assertFindResult("find remark", td.neglect);
     }
 
     @Test
-    public void find_nonEmptyList_byDate_success() {
-        try {
-            commandBox.runCommand(new TestTask(td.look).getAddCommand());
-        } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void find_nonEmptyList_byDate_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.look).getAddCommand());
         assertFindResult("find Feb 27 2112", td.look);
     }
 
@@ -78,15 +64,10 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_nonEmptyList_ConfusingNameAndDate_success() {
-        try {
-            commandBox.runCommand(new TestTask(td.open).getAddCommand());
-            commandBox.runCommand(new TestTask(td.practice).getAddCommand());
-            commandBox.runCommand(new TestTask(td.queue).getAddCommand());
-        } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void find_nonEmptyList_ConfusingNameAndDate_success() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.open).getAddCommand());
+        commandBox.runCommand(new TestTask(td.practice).getAddCommand());
+        commandBox.runCommand(new TestTask(td.queue).getAddCommand());
         assertFindResult("find June 4 2018", td.open);
         assertFindResult("find new year", td.practice);
         assertFindResult("find 1/2/2018", td.practice);
@@ -94,17 +75,12 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_nonEmptyList_ConfusingNameAndDate_fail() {
-        try {
-            commandBox.runCommand(new TestTask(td.open).getAddCommand());
-            commandBox.runCommand(new TestTask(td.practice).getAddCommand());
-            commandBox.runCommand(new TestTask(td.queue).getAddCommand());
-        } catch (IllegalValueException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void find_nonEmptyList_ConfusingNameAndDate_fail() throws IllegalValueException {
+        commandBox.runCommand(new TestTask(td.open).getAddCommand());
+        commandBox.runCommand(new TestTask(td.practice).getAddCommand());
+        commandBox.runCommand(new TestTask(td.queue).getAddCommand());
         assertFindResult("find June 4 2017");
-     // Jan 2 forms an object with the current year:2017,so this test case will succeed next year
+        // Jan 2 forms an object with the current year:2017,so this test case will succeed next year
         assertFindResult("find Jan 2");
         assertFindResult("find 12/25/2017");
 

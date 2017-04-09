@@ -1,5 +1,6 @@
 package seedu.task.model;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ModelManagerTest {
             taskList.add(0, task);
         }
 
-        //duplicate a task
+        // duplicate a task
         taskList.add(0, generatedTasks.get(0));
 
         model.addMultipleTasks(taskList);
@@ -109,9 +110,17 @@ public class ModelManagerTest {
 
         String validEventId = "sampleventid123";
 
-        //testTask was not added to model
+        // testTask was not added to model
         exception.expect(TaskNotFoundException.class);
         model.setTaskEventId(testTask, validEventId);
 
     }
+    // @@author
+
+    @Test
+    public void getUserPrefs_success() {
+        ModelManager model = new ModelManager();
+        assertFalse(model.getUserPrefs().equals(null));
+    }
+
 }

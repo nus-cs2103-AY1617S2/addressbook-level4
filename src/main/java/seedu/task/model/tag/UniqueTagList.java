@@ -190,7 +190,7 @@ public class UniqueTagList implements Iterable<Tag> {
 
     //@@author A0142487Y
     /**
-     * Returns a string formed by tagNames, separated by a space in between
+     * Returns a {@code string} connected by tagNames, separated by a space in between
      */
     @Override
     public String toString() {

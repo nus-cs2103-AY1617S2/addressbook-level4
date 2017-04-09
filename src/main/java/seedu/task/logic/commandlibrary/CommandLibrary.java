@@ -184,10 +184,7 @@ public class CommandLibrary {
     }
 
     /**
-     *
-     * @param commandWord
-     * @param arguments
-     * @return Returns the correct command with the correct arguments
+     * Returns the correct {@code Command} with the correct {@code arguments}
      */
     public Command getCorrectCommand(String commandWord, String arguments) {
         if (!commandTable.containsKey(commandWord)) {
@@ -197,9 +194,7 @@ public class CommandLibrary {
     }
 
     /**
-     * @param commandWord
-     *            is the keyword of the command queried
-     * @return Returns the command Usage for the commadn queried
+     * Returns the {@code commandUsage} for the queried command that matches the {@code commandWord}
      */
     public String getCommandUsage(String commandWord) {
         if (!commandTable.containsKey(commandWord)) {
@@ -208,7 +203,16 @@ public class CommandLibrary {
         }
         return commandTable.get(commandWord).getCommandUsage();
     }
+    /** Returns the {@code commandTable} */
+    public static HashMap<String, CommandInstance> getCommandTable() {
+        return commandTable;
+    }
 
+    /**
+     * An auxiliary class that represents an instance in the {@code CommandLibrary}
+     * @author Xu
+     *
+     */
     public static class CommandInstance {
         private String commandKey;
         private String commandUsage;
@@ -232,9 +236,5 @@ public class CommandLibrary {
             return this.commandUsage;
         }
 
-    }
-
-    public static HashMap<String, CommandInstance> getCommandTable() {
-        return commandTable;
     }
 }
