@@ -139,7 +139,7 @@ public class EditCommand extends Command {
     public int getFilteredSelectedTaskListIndex() {
         return this.filteredSelectedTaskListIndex;
     }
-    
+
     public void pseudoExecute() {
         List<ReadOnlyTask> lastShownList = model.getSelectedTaskList();
         assert filteredSelectedTaskListIndex < lastShownList.size();

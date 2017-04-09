@@ -98,14 +98,14 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             EventsCenter.getInstance().post(new TabSelectionChangedEvent(TAB_TO_DO_INDEX));
-            model.highlightTask(toAdd);  
+            model.highlightTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
     }
-    
+
     public void pseudoExecute() {
         EventsCenter.getInstance().post(new TabSelectionChangedEvent(TAB_TO_DO_INDEX));
         model.highlightTask(toAdd);

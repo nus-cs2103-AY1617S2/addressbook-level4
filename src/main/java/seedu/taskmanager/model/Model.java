@@ -32,7 +32,7 @@ public interface Model {
      * Sorts task list based on keywords (startdate or enddate).
      */
     void sortTasks(String keyword);
-    
+
     /**
      * highlights changed task in task list.
      */

@@ -2,223 +2,223 @@
 <taskmanager>
     <tasks>
         <title>tell me</title>
-        <startDate>Thu Aug 07 15:00:00 CST 2014</startDate>
-        <endDate>Mon Sep 05 15:00:00 CST 2016</endDate>
+        <startDate>Fri Aug 08 17:00:00 CST 2014</startDate>
+        <endDate>Tue Sep 06 17:00:00 CST 2016</endDate>
         <description>Buy souveniors for friends and relatives</description>
         <status>Completed</status>
         <tagged>family</tagged>
     </tasks>
     <tasks>
         <title>Finish software engineering</title>
-        <endDate>Fri Apr 28 01:00:00 CST 2017</endDate>
+        <endDate>Sat Apr 29 03:00:00 CST 2017</endDate>
         <status>Completed</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Barbecue with Jia Qi</title>
-        <startDate>Tue May 02 21:00:00 CST 2017</startDate>
-        <endDate>Wed May 03 00:00:00 CST 2017</endDate>
+        <startDate>Wed May 03 23:00:00 CST 2017</startDate>
+        <endDate>Thu May 04 02:00:00 CST 2017</endDate>
         <description>Bugis Junction barbecue store</description>
         <status>Completed</status>
         <tagged>entertainment</tagged>
     </tasks>
     <tasks>
         <title>Present in class</title>
-        <endDate>Wed May 03 11:41:12 CST 2017</endDate>
+        <endDate>Thu May 04 13:41:12 CST 2017</endDate>
         <status>Completed</status>
     </tasks>
     <tasks>
         <title>Consultation with doctor</title>
-        <startDate>Sun May 07 12:00:00 CST 2017</startDate>
-        <endDate>Sun May 07 13:00:00 CST 2017</endDate>
+        <startDate>Mon May 08 14:00:00 CST 2017</startDate>
+        <endDate>Mon May 08 15:00:00 CST 2017</endDate>
         <description>Fast the day before meeting with the doctor</description>
         <status>Completed</status>
         <tagged>health</tagged>
     </tasks>
     <tasks>
         <title>Clean up the room</title>
-        <startDate>Wed Apr 26 15:00:00 CST 2017</startDate>
-        <endDate>Sun May 07 15:00:00 CST 2017</endDate>
+        <startDate>Thu Apr 27 17:00:00 CST 2017</startDate>
+        <endDate>Mon May 08 17:00:00 CST 2017</endDate>
         <status>Incomplete</status>
         <tagged>life</tagged>
     </tasks>
     <tasks>
         <title>FYP final presentation</title>
-        <startDate>Sun May 07 17:00:00 CST 2017</startDate>
-        <endDate>Sun May 07 18:00:00 CST 2017</endDate>
+        <startDate>Mon May 08 19:00:00 CST 2017</startDate>
+        <endDate>Mon May 08 20:00:00 CST 2017</endDate>
         <description>Prepare the slides</description>
         <status>Incomplete</status>
         <tagged>school</tagged>
     </tasks>
     <tasks>
         <title>Finish bus stop model</title>
-        <endDate>Mon May 08 15:00:00 CST 2017</endDate>
+        <endDate>Tue May 09 17:00:00 CST 2017</endDate>
         <description>Finish project 3D model for CS2030</description>
         <status>Incomplete</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Attend interview with WcDonalds</title>
-        <startDate>Tue May 09 16:00:00 CST 2017</startDate>
-        <endDate>Tue May 09 17:00:00 CST 2017</endDate>
+        <startDate>Wed May 10 18:00:00 CST 2017</startDate>
+        <endDate>Wed May 10 19:00:00 CST 2017</endDate>
         <description>999 WcDonald's Street, Singapore 123654</description>
         <status>Incomplete</status>
         <tagged>business</tagged>
     </tasks>
     <tasks>
         <title>Date Susan</title>
-        <startDate>Wed May 10 21:00:00 CST 2017</startDate>
-        <endDate>Thu May 11 01:00:00 CST 2017</endDate>
+        <startDate>Thu May 11 23:00:00 CST 2017</startDate>
+        <endDate>Fri May 12 03:00:00 CST 2017</endDate>
         <description>Eat Haidilao</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Date Lily</title>
-        <startDate>Thu May 11 21:00:00 CST 2017</startDate>
-        <endDate>Fri May 12 01:00:00 CST 2017</endDate>
+        <startDate>Fri May 12 23:00:00 CST 2017</startDate>
+        <endDate>Sat May 13 03:00:00 CST 2017</endDate>
         <description>Eat Itacho Sushi</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Date Marry</title>
-        <startDate>Fri May 12 21:00:00 CST 2017</startDate>
-        <endDate>Sat May 13 01:00:00 CST 2017</endDate>
+        <startDate>Sat May 13 23:00:00 CST 2017</startDate>
+        <endDate>Sun May 14 03:00:00 CST 2017</endDate>
         <description>Eat Paulaner</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Date Monica</title>
-        <startDate>Sat May 13 21:00:00 CST 2017</startDate>
-        <endDate>Sun May 14 01:00:00 CST 2017</endDate>
+        <startDate>Sun May 14 23:00:00 CST 2017</startDate>
+        <endDate>Mon May 15 03:00:00 CST 2017</endDate>
         <description>Eat Kim Chi</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Date Jessica</title>
-        <startDate>Sun May 14 21:00:00 CST 2017</startDate>
-        <endDate>Mon May 15 01:00:00 CST 2017</endDate>
+        <startDate>Mon May 15 23:00:00 CST 2017</startDate>
+        <endDate>Tue May 16 03:00:00 CST 2017</endDate>
         <description>Bingo!</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Sip whiskey neat</title>
-        <endDate>Mon May 15 13:00:00 CST 2017</endDate>
+        <endDate>Tue May 16 15:00:00 CST 2017</endDate>
         <status>Incomplete</status>
     </tasks>
     <tasks>
         <title>Final exam</title>
-        <startDate>Wed May 17 15:00:00 CST 2017</startDate>
-        <endDate>Wed May 17 15:00:00 CST 2017</endDate>
+        <startDate>Thu May 18 17:00:00 CST 2017</startDate>
+        <endDate>Thu May 18 17:00:00 CST 2017</endDate>
         <status>Incomplete</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Watch Genocide Organ</title>
-        <startDate>Sun May 07 15:00:00 CST 2017</startDate>
-        <endDate>Wed May 17 15:00:00 CST 2017</endDate>
+        <startDate>Mon May 08 17:00:00 CST 2017</startDate>
+        <endDate>Thu May 18 17:00:00 CST 2017</endDate>
         <status>Incomplete</status>
         <tagged>entertainment</tagged>
     </tasks>
     <tasks>
         <title>Attend Uncle Lam funeral</title>
-        <startDate>Sat May 27 12:00:00 CST 2017</startDate>
-        <endDate>Sat May 27 14:00:00 CST 2017</endDate>
+        <startDate>Sun May 28 14:00:00 CST 2017</startDate>
+        <endDate>Sun May 28 16:00:00 CST 2017</endDate>
         <description>Remember to wear smart casual</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
     </tasks>
     <tasks>
         <title>Visit Hong Kong</title>
-        <startDate>Fri May 26 15:00:00 CST 2017</startDate>
-        <endDate>Thu Jun 08 15:00:00 CST 2017</endDate>
+        <startDate>Sat May 27 17:00:00 CST 2017</startDate>
+        <endDate>Fri Jun 09 17:00:00 CST 2017</endDate>
         <status>Incomplete</status>
         <tagged>entertainment</tagged>
     </tasks>
     <tasks>
         <title>Looking for a new house</title>
-        <endDate>Fri Jul 07 15:00:00 CST 2017</endDate>
+        <endDate>Sat Jul 08 17:00:00 CST 2017</endDate>
         <description>Find a new place before the termination of current contract</description>
         <status>Incomplete</status>
         <tagged>life</tagged>
     </tasks>
     <tasks>
         <title>Pick up Sammy at airport</title>
-        <startDate>Fri Jul 07 22:00:00 CST 2017</startDate>
-        <endDate>Fri Jul 07 23:00:00 CST 2017</endDate>
+        <startDate>Sun Jul 09 00:00:00 CST 2017</startDate>
+        <endDate>Sun Jul 09 01:00:00 CST 2017</endDate>
         <description>Changi Airport terminal 3</description>
         <status>Incomplete</status>
     </tasks>
     <tasks>
         <title>Submit FYP report</title>
-        <endDate>Mon Jul 24 21:00:00 CST 2017</endDate>
+        <endDate>Tue Jul 25 23:00:00 CST 2017</endDate>
         <description>Submit to box outside department office</description>
         <status>Incomplete</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Trip to Germany</title>
-        <startDate>Sat Jul 08 15:00:00 CST 2017</startDate>
-        <endDate>Sun Jul 30 15:00:00 CST 2017</endDate>
+        <startDate>Sun Jul 09 17:00:00 CST 2017</startDate>
+        <endDate>Mon Jul 31 17:00:00 CST 2017</endDate>
         <description>Remember to prepare all the things before departure</description>
         <status>Incomplete</status>
         <tagged>business</tagged>
     </tasks>
     <tasks>
         <title>Submit project report</title>
-        <startDate>Wed Aug 16 15:00:00 CST 2017</startDate>
-        <endDate>Thu Aug 17 15:00:00 CST 2017</endDate>
+        <startDate>Thu Aug 17 17:00:00 CST 2017</startDate>
+        <endDate>Fri Aug 18 17:00:00 CST 2017</endDate>
         <description>Submit to tutor in class</description>
         <status>Incomplete</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Call David Li</title>
-        <startDate>Mon Sep 04 15:00:00 CST 2017</startDate>
-        <endDate>Wed Sep 06 15:00:00 CST 2017</endDate>
+        <startDate>Tue Sep 05 17:00:00 CST 2017</startDate>
+        <endDate>Thu Sep 07 17:00:00 CST 2017</endDate>
         <description>his number is 12345678</description>
         <status>Incomplete</status>
         <tagged>schoolwork</tagged>
     </tasks>
     <tasks>
         <title>Trip to Antarctic</title>
-        <startDate>Tue Sep 26 15:00:00 CST 2017</startDate>
-        <endDate>Fri Oct 27 15:00:00 CST 2017</endDate>
+        <startDate>Wed Sep 27 17:00:00 CST 2017</startDate>
+        <endDate>Sat Oct 28 17:00:00 CST 2017</endDate>
         <description>I love penguins!</description>
         <status>Incomplete</status>
         <tagged>entertainment</tagged>
     </tasks>
     <tasks>
         <title>Read the self enrichment guide of a programmer</title>
-        <startDate>Thu Oct 12 15:00:00 CST 2017</startDate>
-        <endDate>Fri Oct 27 15:00:00 CST 2017</endDate>
+        <startDate>Fri Oct 13 17:00:00 CST 2017</startDate>
+        <endDate>Sat Oct 28 17:00:00 CST 2017</endDate>
         <status>Incomplete</status>
         <tagged>enrichment</tagged>
     </tasks>
     <tasks>
         <title>Visit Alex Yeoh</title>
-        <startDate>Thu Nov 30 10:00:00 CST 2017</startDate>
-        <endDate>Fri Dec 01 12:00:00 CST 2017</endDate>
+        <startDate>Fri Dec 01 14:00:00 CST 2017</startDate>
+        <endDate>Sat Dec 02 16:00:00 CST 2017</endDate>
         <description>His address is Blk 30 Geylang Street 29, #06-40</description>
         <status>Incomplete</status>
         <tagged>done</tagged>
     </tasks>
     <tasks>
         <title>Collect files from boss</title>
-        <startDate>Mon Dec 04 17:00:00 CST 2017</startDate>
-        <endDate>Thu Dec 07 17:00:00 CST 2017</endDate>
+        <startDate>Tue Dec 05 21:00:00 CST 2017</startDate>
+        <endDate>Fri Dec 08 21:00:00 CST 2017</endDate>
         <description>Important business files</description>
         <status>Incomplete</status>
         <tagged>done</tagged>
     </tasks>
     <tasks>
         <title>Visit Charlotte Oliveiro</title>
-        <startDate>Thu Jan 18 19:00:00 CST 2007</startDate>
-        <endDate>Fri Jan 19 00:00:00 CST 2007</endDate>
+        <startDate>Fri Jan 19 23:00:00 CST 2007</startDate>
+        <endDate>Sat Jan 20 04:00:00 CST 2007</endDate>
         <description>Her address is Blk 11 Ang Mo Kio Street 74, #11-04</description>
         <status>Incomplete</status>
         <tagged>social</tagged>
@@ -231,7 +231,7 @@
     </tasks>
     <tasks>
         <title>Stop eating spicy food</title>
-        <startDate>Tue Feb 28 17:00:00 CST 2017</startDate>
+        <startDate>Wed Mar 01 21:00:00 CST 2017</startDate>
         <status>Incomplete</status>
         <tagged>health</tagged>
     </tasks>
@@ -243,31 +243,31 @@
     </tasks>
     <tasks>
         <title>Read books 30 minutes everyday</title>
-        <startDate>Sun May 28 15:00:00 CST 2017</startDate>
+        <startDate>Mon May 29 17:00:00 CST 2017</startDate>
         <status>Incomplete</status>
     </tasks>
     <tasks>
         <title>Learn Korean</title>
-        <startDate>Tue Feb 28 23:00:00 CST 2017</startDate>
+        <startDate>Thu Mar 02 03:00:00 CST 2017</startDate>
         <description>Korean is so cool!</description>
         <status>Incomplete</status>
         <tagged>life</tagged>
     </tasks>
     <tasks>
         <title>Learn to play guitar</title>
-        <startDate>Wed Apr 26 12:00:00 CST 2017</startDate>
+        <startDate>Thu Apr 27 14:00:00 CST 2017</startDate>
         <status>Incomplete</status>
         <tagged>life</tagged>
     </tasks>
     <tasks>
         <title>Drink more water</title>
-        <startDate>Wed Feb 08 14:00:00 CST 2017</startDate>
+        <startDate>Thu Feb 09 18:00:00 CST 2017</startDate>
         <status>Incomplete</status>
         <tagged>health</tagged>
     </tasks>
     <tasks>
         <title>Stop drining alcohol</title>
-        <startDate>Wed Feb 08 14:00:00 CST 2017</startDate>
+        <startDate>Thu Feb 09 18:00:00 CST 2017</startDate>
         <status>Incomplete</status>
         <tagged>health</tagged>
     </tasks>
@@ -277,7 +277,7 @@
     </tasks>
     <tasks>
         <title>Read news</title>
-        <startDate>Wed Feb 08 14:00:00 CST 2017</startDate>
+        <startDate>Thu Feb 09 18:00:00 CST 2017</startDate>
         <description>8am every morning</description>
         <status>Incomplete</status>
         <tagged>enrichment</tagged>
@@ -345,13 +345,17 @@
     </tasks>
     <tasks>
         <title>repeat</title>
-        <startDate>Sun Apr 09 22:00:00 CST 2017</startDate>
-        <endDate>Mon Apr 17 07:00:00 CST 2017</endDate>
+        <startDate>Tue Apr 11 00:00:00 CST 2017</startDate>
+        <endDate>Tue Apr 18 09:00:00 CST 2017</endDate>
         <repeat>WEEK</repeat>
         <status>Incomplete</status>
     </tasks>
     <tasks>
         <title>a very long title aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</title>
+        <status>Incomplete</status>
+    </tasks>
+    <tasks>
+        <title>something new</title>
         <status>Incomplete</status>
     </tasks>
     <tags>social</tags>
