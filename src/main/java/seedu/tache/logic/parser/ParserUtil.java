@@ -1,5 +1,6 @@
 package seedu.tache.logic.parser;
 
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_IDENTIFIER;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
@@ -9,8 +10,6 @@ import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
 import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
 import static seedu.tache.logic.parser.CliSyntax.START_DATE_IDENTIFIER;
-import static seedu.tache.logic.parser.CliSyntax.END_DATE_IDENTIFIER;
-import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_PREFIX_IDENTIFIER;
 
 import java.util.Collection;
 import java.util.Deque;
