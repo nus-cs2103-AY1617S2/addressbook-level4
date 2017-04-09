@@ -86,12 +86,21 @@ public class EditCommand extends Command {
 
         Description updatedDescription = editTaskDescriptor.getDescription().orElseGet(taskToEdit::getDescription);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
-        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
+        DueDate updatedDueDate = getUpdatedDueDate(editTaskDescriptor, taskToEdit);
+        Duration updatedDuration = getUpdatedDuration(editTaskDescriptor, taskToEdit);
+        Complete updatedComplete = taskToEdit.getComplete();
+        TaskId originalId = taskToEdit.getTaskId();
+
+        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, updatedComplete, originalId);
+    }
+
+    // helper method to get the appropriate updated duration
+    private static Duration getUpdatedDuration(EditTaskDescriptor editTaskDescriptor,
+            ReadOnlyTask taskToEdit) throws CommandException {
+
         String updatedDurationStart = editTaskDescriptor.getDurationStart().orElseGet(taskToEdit::getDurationStart);
         String updatedDurationEnd = editTaskDescriptor.getDurationEnd().orElseGet(taskToEdit::getDurationEnd);
         Duration updatedDuration = taskToEdit.getDuration();
-        Complete updatedComplete = taskToEdit.getComplete();
-        TaskId originalId = taskToEdit.getTaskId();
 
         try {
             // ensure that there must be start and end date if editing a non existing duration
@@ -106,17 +115,24 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        // delete due date from task
-        if (editTaskDescriptor.deleteDueDate) {
-            updatedDueDate = null;
-        }
-
         // delete duration from task
         if (editTaskDescriptor.deleteDuration) {
             updatedDuration = null;
         }
 
-        return new Task(updatedDescription, updatedDueDate, updatedDuration, updatedTags, updatedComplete, originalId);
+        return updatedDuration;
+    }
+
+    // helper method to get the appropriate updated due date
+    private static DueDate getUpdatedDueDate(EditTaskDescriptor editTaskDescriptor, ReadOnlyTask taskToEdit) {
+        DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElseGet(taskToEdit::getDueDate);
+
+        // delete due date from task
+        if (editTaskDescriptor.deleteDueDate) {
+            updatedDueDate = null;
+        }
+
+        return updatedDueDate;
     }
     //@@author
 
