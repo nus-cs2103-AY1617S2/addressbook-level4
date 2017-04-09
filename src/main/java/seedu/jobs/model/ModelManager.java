@@ -69,27 +69,27 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
-    
+
     /** Raises an event to indicate that add command has been invoked */
-    private void indicateAdd(Task target){
+    private void indicateAdd(Task target) {
         raise(new AddCommandEvent(target));
     }
-    
+
     /** Raises an event to indicate that delete command has been invoked */
-    private void indicateDelete(ReadOnlyTask target){
+    private void indicateDelete(ReadOnlyTask target) {
         raise(new DeleteCommandEvent(target));
     }
-    
+
     /** Raises an event to indicate that edit command has been invoked */
-    private void indicateEdit(ReadOnlyTask taskToEdit,Task editedTask){
+    private void indicateEdit(ReadOnlyTask taskToEdit, Task editedTask) {
         raise(new EditCommandEvent(taskToEdit, editedTask));
     }
-    
+
     /** Raises an event to indicate that clear command has been invoked */
-    private void indicateClear(){
+    private void indicateClear() {
         raise(new ClearCommandEvent());
     }
-    
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.removeTask(target);
@@ -98,8 +98,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void completeTask(int index, ReadOnlyTask target) throws TaskNotFoundException {
-        taskBook.completeTask(index, target);
+    public synchronized void completeTask(int filteredTaskListIndex, ReadOnlyTask target) throws TaskNotFoundException {
+        int taskBookIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
+        taskBook.completeTask(taskBookIndex, target);
         indicateTaskBookChanged();
     }
 
@@ -121,10 +122,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateEdit(taskToEdit, editedTask);
         indicateTaskBookChanged();
     }
-    
+
     @Override
     public void set(String email, String password) {
-        raise(new LoginInfoChangeEvent(email,password));      
+        raise(new LoginInfoChangeEvent(email, password));
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -137,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-    
+
   //@@author A0164440M
     @Override
     public void updateFilteredListToShowAll(Set<String> keywords) {
@@ -208,7 +209,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
-        
+
       //@@author A0164440M
         //Reuse the function to implement filtered list
         private String commandWord;
@@ -228,8 +229,8 @@ public class ModelManager extends ComponentManager implements Model {
             }
             if (commandWord.equals(ListCommand.COMMAND_WORD)) {
                 //Enable to list completed tasks or in-progress tasks
-                if(nameKeyWords.size() == 1 && (nameKeyWords.contains("complete") ||
-                        nameKeyWords.contains("in-progress") )) {
+                if (nameKeyWords.size() == 1 && (nameKeyWords.contains("complete") ||
+                        nameKeyWords.contains("in-progress"))) {
                     taskInfo = task.isCompleted() ? "complete" : "in-progress";
                 }
               //@@author

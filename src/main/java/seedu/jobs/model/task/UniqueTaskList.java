@@ -130,6 +130,7 @@ public class UniqueTaskList implements Iterable<Task> {
         undoStack.push(stackList);
         Task taskToComplete = internalList.get(index);
         taskToComplete.markComplete();
+        taskToComplete.resetData(taskToComplete);
         internalList.set(index, taskToComplete);
         return true;
     }
