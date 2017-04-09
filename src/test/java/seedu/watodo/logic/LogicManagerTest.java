@@ -16,15 +16,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
-import seedu.watodo.commons.core.Config;
 import seedu.watodo.commons.core.EventsCenter;
 import seedu.watodo.commons.events.model.TaskListChangedEvent;
-import seedu.watodo.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.watodo.commons.events.ui.JumpToListRequestEvent;
 import seedu.watodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.watodo.commons.exceptions.IllegalValueException;
@@ -38,7 +35,6 @@ import seedu.watodo.logic.commands.ExitCommand;
 import seedu.watodo.logic.commands.FindCommand;
 import seedu.watodo.logic.commands.HelpCommand;
 import seedu.watodo.logic.commands.ListCommand;
-import seedu.watodo.logic.commands.SaveAsCommand;
 import seedu.watodo.logic.commands.SelectCommand;
 import seedu.watodo.logic.commands.exceptions.CommandException;
 import seedu.watodo.logic.parser.DateTimeParser;
@@ -53,12 +49,8 @@ import seedu.watodo.model.task.Description;
 import seedu.watodo.model.task.ReadOnlyTask;
 import seedu.watodo.model.task.Task;
 import seedu.watodo.storage.StorageManager;
-import seedu.watodo.testutil.EventsCollector;
 
 public class LogicManagerTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none(); //TODO check later
 
     /**
      * See https://github.com/junit-team/junit4/wiki/rules#temporaryfolder-rule
@@ -233,7 +225,7 @@ public class LogicManagerTest {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
 
-        List<Task> tasksToBeAdded = helper.generateTaskList(//covers the partition 1, 2, and 5
+        List<Task> tasksToBeAdded = helper.generateTaskList( //covers the partition 1, 2, and 5
                 helper.floating(), helper.deadline(), helper.event());
         TaskManager expectedTM = new TaskManager();
         for (Task toBeAdded : tasksToBeAdded) {
@@ -268,7 +260,7 @@ public class LogicManagerTest {
     public void execute_addflexibleArgsFormat_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithDescriptionAndStartEndDates(
-                "watch webcasts", "next tues", "4/14", "BackLog");
+                "watch webcast", "next tues", "next fri", "BackLog");
         Task testTask2 = helper.generateTaskWithDescriptionAndStartEndDates(
                 "study for finals", "today", "may 5", "letgo");
         Task testTask3 = new Task(new Description("ie2150 project"), new DateTime("11 apr 12pm"),
@@ -276,7 +268,7 @@ public class LogicManagerTest {
         TaskManager expectedTM = new TaskManager();
 
         expectedTM.addTask(testTask1);
-        String command = "add from/ next tues to/4/14 watch webcasts #BackLog";
+        String command = "add from/next tues to/next fri watch webcast #BackLog";
         assertCommandSuccess(command, String.format(AddCommand.MESSAGE_SUCCESS, testTask1),
                 expectedTM, expectedTM.getTaskList());
 
@@ -447,8 +439,7 @@ public class LogicManagerTest {
         helper.addToModel(model, threeTasks);
 
         assertCommandSuccess("delete 1", String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESSFUL,
-
-                threeTasks.get(0)), expectedTM, expectedTM.getTaskList());
+                1, threeTasks.get(0) + "\n"), expectedTM, expectedTM.getTaskList());
     }
 
     // ================ For Find Command ==============================
@@ -510,87 +501,6 @@ public class LogicManagerTest {
         assertCommandSuccess("find key random", Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB, expectedList);
     }
-
-    // ================ For SaveAs Command ==============================
-    //@@author A0141077L
-
-    @Test
-    public void execute_saveasFilePathNotFound_errorMessageShown() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE);
-        assertCommandFailure("saveas", expectedMessage);
-    }
-
-    @Test
-    public void execute_saveas_nullFilePath_assertionFailure() {
-        thrown.expect(AssertionError.class);
-        parseSaveAsCommand(null);
-    }
-
-    @Test
-    public void execute_saveas_notXmlFormat_invalidCommand() {
-        assertCommandFailure("saveas filePathWithoutXmlExtension", SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
-        assertCommandFailure("saveas filePath.WithOtherExtension", SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
-    }
-
-    @Test
-    public void execute_saveToSameFilePath_exceptionThrown() throws CommandException {
-        thrown.expect(CommandException.class);
-        saveToSameFilePath();
-    }
-
-    @Test
-    public void execute_saveToSameFilePath_errorMessageShown() {
-        Config config = new Config();
-        String oldFilePath = config.getWatodoFilePath();
-        assertCommandFailure("saveas " + oldFilePath, SaveAsCommand.MESSAGE_DUPLICATE_FILE_PATH);
-    }
-
-    private void saveToSameFilePath() throws CommandException {
-        Config config = new Config();
-        String oldFilePath = config.getWatodoFilePath();
-        executeSaveAsCommand(oldFilePath);
-    }
-
-    private void parseSaveAsCommand(String newFilePath) {
-        new SaveAsCommand(newFilePath);
-    }
-
-    private void executeSaveAsCommand(String newFilePath) throws CommandException {
-        new SaveAsCommand(newFilePath).execute();
-    }
-
-
-    @Test
-    public void execute_saveas_handleStorageFilePathChangedEvent_eventRaised() throws CommandException {
-        EventsCollector eventCollector = new EventsCollector();
-        executeSaveAsCommand("newFilePath.xml");
-        assertTrue(eventCollector.get(0) instanceof StorageFilePathChangedEvent);
-    }
-
-
-    /*
-    //TO DO: Copy over to logic test
-    @Test
-    public void handleStorageFilePathChangedEvent_eventRaised() {
-        String taskListFilePath = getTempFilePath("tasks");
-        String prefsFilePath = getTempFilePath("prefs");
-        String tempFilePath = getTempFilePath("temp");
-        Storage storage = new StorageManager(new XmlTaskListStorage(taskListFilePath),
-                new JsonUserPrefsStorage(prefsFilePath));
-        EventsCollector eventCollector = new EventsCollector();
-        storage.handleStorageFilePathChangedEvent(new StorageFilePathChangedEvent(tempFilePath));
-        assertTrue(eventCollector.get(0) instanceof StorageFilePathChangedEvent);
-    }
-     */
-
-    //_Success
-    //assertCommandSuccess("help", HelpCommand.SHOWING_HELP_MESSAGE, new TaskManager(), Collections.emptyList());
-    @Test
-    public void execute_saveas_copyFileData_success() {
-
-    }
-
-    //@@author
 
     // ================ To generate test data ==============================
 

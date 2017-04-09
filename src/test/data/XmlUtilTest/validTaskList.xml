@@ -1,57 +1,362 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
-</addressbook>
+<tasklist>
+    <tasks>
+        <name>Undone floating task</name>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone floating task 2</name>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Done floating task</name>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Done floating task 2</name>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task</name>
+        <endDate>Thu 16 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task</name>
+        <endDate>Sat 18 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 2</name>
+        <endDate>Mon 20 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 2</name>
+        <endDate>Wed 22 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 3</name>
+        <endDate>Fri 24 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 3</name>
+        <endDate>Sun 26 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 4</name>
+        <endDate>Tue 28 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 4</name>
+        <endDate>Thu 30 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 5</name>
+        <endDate>Sat 1 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 5</name>
+        <endDate>Mon 3 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 6</name>
+        <endDate>Wed 5 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 6</name>
+        <endDate>Fri 7 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone deadline task 7</name>
+        <endDate>Sun 9 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Done deadline task 7</name>
+        <endDate>Tue 11 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event</name>
+        <startDate>Thu 16 Mar, 11.59PM</startDate>
+        <endDate>Fri 17 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event</name>
+        <startDate>Sat 18 Mar, 11.59PM</startDate>
+        <endDate>Sun 19 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 2</name>
+        <startDate>Mon 20 Mar, 11.59PM</startDate>
+        <endDate>Tue 21 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 2</name>
+        <startDate>Wed 22 Mar, 11.59PM</startDate>
+        <endDate>Thu 23 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 3</name>
+        <startDate>Fri 24 Mar, 11.59PM</startDate>
+        <endDate>Sat 25 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 3</name>
+        <startDate>Sun 26 Mar, 11.59PM</startDate>
+        <endDate>Mon 27 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 4</name>
+        <startDate>Tue 28 Mar, 11.59PM</startDate>
+        <endDate>Wed 29 Mar, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 4</name>
+        <startDate>Thu 30 Mar, 11.59PM</startDate>
+        <endDate>Fri 31 Mar, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 5</name>
+        <startDate>Sat 1 Apr, 11.59PM</startDate>
+        <endDate>Sun 2 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>dance</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 5</name>
+        <startDate>Mon 3 Apr, 11.59PM</startDate>
+        <endDate>Tue 4 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>gamedesign</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 6</name>
+        <startDate>Wed 5 Apr, 11.59PM</startDate>
+        <endDate>Thu 6 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 6</name>
+        <startDate>Fri 7 Apr, 11.59PM</startDate>
+        <endDate>Sat 8 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>Undone event 7</name>
+        <startDate>Sun 9 Apr, 11.59PM</startDate>
+        <endDate>Mon 10 Apr, 11.59PM</endDate>
+        <status>Undone</status>
+        <tagged>reading</tagged>
+    </tasks>
+    <tasks>
+        <name>Done event 7</name>
+        <startDate>Tue 11 Apr, 11.59PM</startDate>
+        <endDate>Wed 12 Apr, 11.59PM</endDate>
+        <status>Done</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Mon 27 Mar, 10.00AM</startDate>
+        <endDate>Mon 27 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT27</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lecture</name>
+        <startDate>Mon 27 Mar, 4.00PM</startDate>
+        <endDate>Mon 27 Mar, 6.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT19</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lab</name>
+        <startDate>Tue 28 Mar, 9.00AM</startDate>
+        <endDate>Tue 28 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>DigELab</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Tutorial</name>
+        <startDate>Tue 28 Mar, 12.00PM</startDate>
+        <endDate>Tue 28 Mar, 1.00PM</endDate>
+        <status>Done</status>
+        <tagged>COM10217</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Lecture</name>
+        <startDate>Tue 28 Mar, 2.00PM</startDate>
+        <endDate>Tue 28 Mar, 4.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT6</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Tue 28 Mar, 4.00PM</startDate>
+        <endDate>Tue 28 Mar, 6.00PM</endDate>
+        <status>Done</status>
+        <tagged>E30601</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Tutorial</name>
+        <startDate>Wed 29 Mar, 10.00AM</startDate>
+        <endDate>Wed 29 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>S160437</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2271 Lab</name>
+        <startDate>Wed 29 Mar, 12.00PM</startDate>
+        <endDate>Wed 29 Mar, 2.00PM</endDate>
+        <status>Done</status>
+        <tagged>COM10114</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Lecture</name>
+        <startDate>Thu 30 Mar, 10.00AM</startDate>
+        <endDate>Thu 30 Mar, 12.00PM</endDate>
+        <status>Done</status>
+        <tagged>LT27</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lecture</name>
+        <startDate>Thu 30 Mar, 2.00PM</startDate>
+        <endDate>Thu 30 Mar, 4.00PM</endDate>
+        <status>Done</status>
+        <tagged>E30601</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Tutorial</name>
+        <startDate>Thu 30 Mar, 4.00PM</startDate>
+        <endDate>Thu 30 Mar, 5.00PM</endDate>
+        <status>Undone</status>
+        <tagged>COM1B103</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024</name>
+        <startDate>Thu 30 Mar, 5.00PM</startDate>
+        <endDate>Thu 30 Mar, 6.00PM</endDate>
+        <status>Undone</status>
+        <tagged>LT6</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Lab</name>
+        <startDate>Fri 31 Mar, 9.00AM</startDate>
+        <endDate>Fri 31 Mar, 12.00PM</endDate>
+        <status>Undone</status>
+        <tagged>SignalLab</tagged>
+    </tasks>
+    <tasks>
+        <name>EE2024 Tutorial</name>
+        <startDate>Fri 31 Mar, 2.00PM</startDate>
+        <endDate>Fri 31 Mar, 3.00PM</endDate>
+        <status>Undone</status>
+        <tagged>E30612</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Lecture</name>
+        <startDate>Fri 31 Mar, 4.00PM</startDate>
+        <endDate>Fri 31 Mar, 6.00PM</endDate>
+        <status>Undone</status>
+        <tagged>i3Aud</tagged>
+    </tasks>
+    <tasks>
+        <name>CS2103 Online Quiz</name>
+        <endDate>Mon 3 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>ST2334 Online Quiz</name>
+        <endDate>Sun 2 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>CG2023 Report</name>
+        <endDate>Sun 2 Apr, 11.00PM</endDate>
+        <status>Undone</status>
+        <tagged>school</tagged>
+        <tagged>homework</tagged>
+    </tasks>
+    <tasks>
+        <name>hahaha</name>
+        <status>Undone</status>
+    </tasks>
+    <tags>dance</tags>
+    <tags>school</tags>
+    <tags>homework</tags>
+    <tags>gamedesign</tags>
+    <tags>reading</tags>
+    <tags>LT27</tags>
+    <tags>LT19</tags>
+    <tags>DigELab</tags>
+    <tags>COM10217</tags>
+    <tags>LT6</tags>
+    <tags>E30601</tags>
+    <tags>S160437</tags>
+    <tags>COM10114</tags>
+    <tags>COM1B103</tags>
+    <tags>SignalLab</tags>
+    <tags>E30612</tags>
+    <tags>i3Aud</tags>
+</tasklist>

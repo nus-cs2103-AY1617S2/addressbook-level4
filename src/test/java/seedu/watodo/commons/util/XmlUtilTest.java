@@ -22,7 +22,7 @@ public class XmlUtilTest {
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validTaskList.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempTaskList.xml"));
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -54,8 +54,8 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         XmlSerializableTaskList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTaskList.class);
-        assertEquals(9, dataFromFile.getTaskList().size());
-        assertEquals(0, dataFromFile.getTagList().size());
+        assertEquals(51, dataFromFile.getTaskList().size());
+        assertEquals(17, dataFromFile.getTagList().size());
     }
 
     @Test
