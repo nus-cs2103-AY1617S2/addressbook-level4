@@ -214,8 +214,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
         assert keywords != null;
-        updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
         updateFilteredTaskListType(TASK_LIST_TYPE_FOUND);
+        updateFilteredTaskList(new PredicateExpression(new MultiQualifier(keywords)));
         retainLatestKeywords(keywords);
         raise(new TaskListTypeChangedEvent("Find \"" + StringUtil.generateStringFromKeywords(keywords) + "\""));
     }
