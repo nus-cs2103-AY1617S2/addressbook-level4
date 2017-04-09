@@ -360,10 +360,10 @@ There is no need to save manually.
 Command | Format
 --------| :-----
 Add | `add TASK [#TAG]...` <br>
-| `add TASK by/ DATETIME [#TAG]...`
-| `add TASK on/ DATETIME [#TAG]...`
-| `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
-| `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
+ | `add TASK by/ DATETIME [#TAG]...`
+ | `add TASK on/ DATETIME [#TAG]...`
+ | `add TASK from/ START_DATETIME to/ END_DATETIME [#TAG]...`
+ | `add TASK on/ START_DATETIME to/ END_DATETIME [#TAG]...`
 List | `list`<br>
 | `list all`<br>
 | `list float`<br>
