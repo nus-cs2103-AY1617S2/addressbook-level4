@@ -25,11 +25,17 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private RecurringFrequency frequency;
     private ArrayList<Integer> occurrenceIndexList = new ArrayList<Integer>();
 
+    public static final String MESSAGE_MISSING_TIMING =
+            "Both the start and end timings must be specified for a recurring task";
+    public static final String MESSAGE_ILLEGAL_TIMING_VALUES = "Illegal Value for timings";
+    public static final String MESSAGE_ILLEGAL_FREQUENCY_VALUES = "Illegal Value for frequency";
+
     /**
      * Every field must be present and not null.
+     * @throws IllegalValueException
      */
     public Task(Description description, Priority priority, Timing startTiming, Timing endTiming,
-            UniqueTagList tags, boolean recurring, RecurringFrequency frequency) {
+            UniqueTagList tags, boolean recurring, RecurringFrequency frequency) throws IllegalValueException {
         assert !CollectionUtil.isAnyNull(description, priority, startTiming, tags);
         this.description = description;
         this.priority = priority;
@@ -245,10 +251,14 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * If frequency is in months - support up to 12 months
      * @param startTime
      * @param endTime
+     * @throws IllegalValueException
      */
-    public void setOccurrences(Timing initialStartTime, Timing initialEndTime) {
+    public void setOccurrences(Timing initialStartTime, Timing initialEndTime) throws IllegalValueException {
         this.occurrences.add(new RecurringTaskOccurrence(initialStartTime, initialEndTime));
         if (isRecurring()) {
+            if (initialStartTime.timing == null || initialEndTime.timing == null) {
+                throw new IllegalValueException(MESSAGE_MISSING_TIMING);
+            }
             String freqCharacter = frequency.getFrequencyCharacter();
             switch (freqCharacter) {
             case "d":
@@ -301,7 +311,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
                 tempStart = new Timing(tempStartTime);
                 tempEnd = new Timing(tempEndTime);
             } catch (IllegalValueException e) {
-                assert false : "Illegal Value for timings";
+                assert false : MESSAGE_ILLEGAL_TIMING_VALUES;
             }
             occurrenceToAdd = new RecurringTaskOccurrence(tempStart, tempEnd);
             occurrences.add(occurrenceToAdd);
@@ -312,8 +322,9 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * @param taskToModify ReadOnlyTask object
      * @return new Task instance with only one occurrence;
      * modifies the parameter by removing the respective occurrence for additional functionality
+     * @throws IllegalValueException
      */
-    public static Task extractOccurrence(ReadOnlyTask taskToModify) {
+    public static Task extractOccurrence(ReadOnlyTask taskToModify) throws IllegalValueException {
         Task newTask = null;
         if (taskToModify.getOccurrenceIndexList().size() == 0) {
             taskToModify.getOccurrenceIndexList().add(0);
@@ -323,7 +334,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         try {
             freq = new RecurringFrequency(RecurringFrequency.NULL_FREQUENCY);
         } catch (IllegalValueException e1) {
-            assert false : "Illegal value for frequency";
+            assert false : MESSAGE_ILLEGAL_FREQUENCY_VALUES;
         }
         newTask = new Task(
                 taskToModify.getDescription(),

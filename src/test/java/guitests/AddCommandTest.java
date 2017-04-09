@@ -144,6 +144,14 @@ public class AddCommandTest extends AddressBookGuiTest {
                 taskToAdd.getStartTiming(), taskToAdd.getEndTiming(), taskToAdd.getTags(),
                 taskToAdd.isRecurring(), taskToAdd.getFrequency());
         assertOccurrenceSame(hardCodedYear, taskYear.getOccurrences());
+
+        // //invalid add command for recurring task
+        //missing end time
+        commandBox.runCommand("add inValidRecTask sd/01/01/2017 r/2m");
+        assertResultMessage(Task.MESSAGE_MISSING_TIMING);
+        //missing start time
+        commandBox.runCommand("add inValidRecTask ed/05/11/2018 r/1y");
+        assertResultMessage(Task.MESSAGE_MISSING_TIMING);
         //@@author
     }
 

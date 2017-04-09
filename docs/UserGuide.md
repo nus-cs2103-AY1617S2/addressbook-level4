@@ -56,26 +56,27 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
-> To add floating tasks, simply do not specify the start and end timing paramters.
-> To add tasks with deadlines, simply specify the end timing.
-> To add recurring tasks, see section 2.2.1.
-> Tasks can have any number of tags (including 0).
+> To add floating tasks, simply do not specify the start and end timing paramters.<br>
+> To add tasks with deadlines, simply specify the end timing.<br>
+> To add recurring tasks, see section 2.2.1.<br>
+> Any of these 3 types of tasks can have 0 or more tags.<br>
 
 Examples:
-
+* `add Watch Friends season 2`
+* `add Submit assignment for MA1101R P/1 sd/09/04/2017 ed/16:00 13/04/2017`
 * `add Study for midterm p/1 ed/04/03/2017 t/study t/midterm`
 * `add Attend CS2103 tutorial p/1 ed/02/03/2017 t/lesson t/school t/tutorial`
 
-### 2.2.1. Adding a recurring task
+  ### 2.2.1. Adding a recurring task
 
-Adds a recurring task to the task list<br>
-Format: same as 'add' but specifcy the frequency by r/#_
-where '#' is an integer and '_' is either 'h' (hour), 'd' (day), or 'm' (month)
+  > Adds a recurring task to the task list<br>
+  > Format: same as 'add' but specifcy the frequency by r/#_
+  > where '#' is an integer and '_' is either 'd' (day), 'm' (month), or 'y' (year)
 
-Examples:
+  Examples:
 
-* `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
-* `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
+  * `add Attend CS2103 tutorial p/1 sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`
+  * `add Clean fish tank p/2 sd/01/01/2017 ed/03/01/2017 r/2m`
 
 ### 2.3. Listing tasks : `list`
 
@@ -84,7 +85,7 @@ Format: `list`<br>
 
 > The list of tasks will be sorted accoding to priority level from 1 to 3
 
-Examples:
+Example:
 * `list`<br>
   Shows a list of all tasks in the task list.
 
@@ -94,18 +95,18 @@ Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
-> * Edits the task at the specified `INDEX`.
-    The index refers to the index number shown in the last task listing.<br>
-    The index **must be a positive integer** 1, 2, 3, ...
-> * At least one of the optional fields must be provided.
-> * Existing values will be updated to the input values.
-> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> Edits the task at the specified `INDEX`.
+  The index refers to the index number shown in the last task listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
+> At least one of the optional fields must be provided.
+> Existing values will be updated to the input values.
+> When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> You can remove all the task's tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
 * `edit 1 sd/03/03/17` <br>
-  Edits the start date of task 1 as 03/03/17.
+  Edits the start date of task 1 to 03/03/17.
 
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
@@ -260,14 +261,14 @@ Recurring tasks are those that are meant to repeat after a specified amount of t
 the implementation of such tasks. A few things to note about how to use this feature:
 
 * The start/end timings should be those of one occurrence. A common misconception is specifiying these paramters
-as the start and end timings of when the overall recurring pattern should start/end respectively.
-  * So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
+  as the start and end timings of when the overall recurring pattern should start/end respectively.
+* So for example, if the recurring task you want to add is "Attend 2103 Tutorial" which begins on January 19, 2017 and occurs
   every week from 11am - 12pm, the syntax of the respective command would be as follows:
   `add Attend 2103 Tutorial sd/11:00 19/01/2017 ed/12:00 19/01/2017 r/7d`.
-  * The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
-  * If this task ends before 60 days, then you can execute `delete INDEX` where INDEX specifies the index of the recurring task on
-  the User Interface.
-  * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
+* The task would then automatically be generated for the next 60 days (refer to non-functional requirements).
+* If this task ends before 60 days, then you can execute `delete INDEX` where INDEX specifies the index of the recurring task on
+  the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
+* If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
 
 ## 4. FAQ
@@ -317,4 +318,3 @@ as the start and end timings of when the overall recurring pattern should start/
 
 * **Save ** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
->>>>>>> 04f6f9c98b7537c17ec3539b02857921a1ffd5b7
