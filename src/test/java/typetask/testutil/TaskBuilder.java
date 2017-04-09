@@ -40,10 +40,12 @@ public class TaskBuilder {
         this.task.setEndDate(new DueDate(date));
         return this;
     }
+    //@@author A0144902L
     public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
         return this;
     }
+  //@@author
     public TestTask build() {
         return this.task;
     }

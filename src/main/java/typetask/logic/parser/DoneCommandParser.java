@@ -8,9 +8,9 @@ import typetask.logic.commands.Command;
 import typetask.logic.commands.DoneCommand;
 import typetask.logic.commands.IncorrectCommand;
 
+//@@author: A0144902L
 /**
  * Parses input arguments and creates a new DoneCommand object
- * @@author: A0144902L
  */
 public class DoneCommandParser {
     /**

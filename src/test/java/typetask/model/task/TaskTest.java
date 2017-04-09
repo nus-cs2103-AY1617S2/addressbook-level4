@@ -75,6 +75,7 @@ public class TaskTest {
         sampleTaskForTest.setIsCompleted(true);
         assertEquals(sampleTaskForTest, expectedTask);
     }
+    //@@author A0144902L
     @Test
     public void setPriority_success() throws IllegalValueException {
         createSampleTask();
@@ -83,6 +84,7 @@ public class TaskTest {
         sampleTaskForTest.setPriority(new Priority("High"));
         assertEquals(sampleTaskForTest, expectedTask);
     }
+  //@@author
     @Test
     public void getName_success() throws IllegalValueException {
         createSampleTask();
@@ -111,6 +113,7 @@ public class TaskTest {
         boolean testIsCompleted = sampleTaskForTest.getIsCompleted();
         assertEquals(testIsCompleted, expectedIsCompleted);
     }
+    //@@author A0144902L
     @Test
     public void getPriority_success() throws IllegalValueException {
         createSampleTask();

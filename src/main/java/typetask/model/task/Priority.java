@@ -14,7 +14,7 @@ public class Priority {
 
     public static final String HIGH_PRIORITY = "High";
     public static final String LOW_PRIORITY = "Low";
-    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|High|Low|h|l)$";
+    public static final String PRIORITY_REGEX = "^(?:Yes|No|yes|YES|NO|no|y|n|Y|N|High|Low|h|l|high|low)$";
     public final String value;
 
     /**
