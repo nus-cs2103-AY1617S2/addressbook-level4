@@ -121,29 +121,29 @@ public class CalendarManager {
     public static com.google.api.services.calendar.Calendar getCalendar() {
         return service;
     }
-    
+
     @Subscribe
     public void AddTask(AddCommandEvent event) {
         new AddCalendar(event.getTask(), service);
     }
-    
+
     @Subscribe
     public void ClearTask(ClearCommandEvent event) {
         new ClearCalendar(service);
     }
-    
+
     @Subscribe
     public void DeleteTask(DeleteCommandEvent event) throws IllegalTimeException {
         new DeleteCalendar(event.getTask(), service);
     }
 
-    
+
     @Subscribe
     public void EditTask(EditCommandEvent event) throws IllegalTimeException {
-        
+
         ReadOnlyTask initialTask = event.getTaskToEdit();
         Task newTask = event.getEditedTask();
-        
+
         if (!(initialTask.getEndTime().toString().equals("") && initialTask.getStartTime().toString().equals(""))) {
             new DeleteCalendar(initialTask, service);
         }

@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.jobs.commons.core.ComponentManager;
 import seedu.jobs.commons.core.LogsCenter;
-import seedu.jobs.logic.calendar.CalendarManager;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.CommandResult;
 import seedu.jobs.logic.commands.exceptions.CommandException;

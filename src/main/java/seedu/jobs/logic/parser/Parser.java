@@ -71,9 +71,6 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -85,15 +82,25 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case DisplayCommand.COMMAND_WORD:
             return new DisplayCommand();
 
         case PathCommand.COMMAND_WORD:
             return new PathCommandParser().parse(arguments);
-        
+
         case SetCommand.COMMAND_WORD:
             return new SetCommandParser().parse(arguments);
+        //@@author A0164440M
+        // Let 'list' accept both no argument and with arguments
+        case ListCommand.COMMAND_WORD:
+            if (arguments.trim().length() > 0) {
+                return new ListCommandParser().parse(arguments);
+            } else {
+                return new ListCommand();
+            }
+        //@@author A0164440M
+
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

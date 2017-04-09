@@ -49,10 +49,15 @@ public interface Model {
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
-
-    /** Updates the filter of the filtered person list to show all persons */
+    
+    /** Updates the filter of the filtered tasks list to show all tasks */
     void updateFilteredListToShowAll();
-
+    
+  //@@author A0164440M
+    /** Updates the filter of the filtered tasks list to show all tasks based on arguments */
+    void updateFilteredListToShowAll(Set<String> keywords);
+  //@@author
+    
     /** Updates the filter of the filtered person list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 

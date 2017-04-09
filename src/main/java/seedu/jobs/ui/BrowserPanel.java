@@ -57,7 +57,7 @@ public class BrowserPanel extends UiPart<Region> {
         };
         browser.getEngine().getLoadWorker().stateProperty().addListener(emailListener);
         browser.getEngine().load("https://calendar.google.com/calendar/render#main_7%7Cmonth");
-        
+
     }
 
     /**
@@ -66,10 +66,10 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         browser = null;
     }
-    
+
     @Subscribe
-    public void reload(TaskBookChangedEvent event){
+    public void reload(TaskBookChangedEvent event) {
         browser.getEngine().reload();
     }
-    
+
 }
