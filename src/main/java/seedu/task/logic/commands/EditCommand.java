@@ -3,7 +3,9 @@ package seedu.task.logic.commands;
 import static seedu.task.commons.core.Messages.MESSSAGE_INVALID_TIMING_ORDER;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.exceptions.IllegalTimingOrderException;
 import seedu.task.commons.exceptions.IllegalValueException;
@@ -22,6 +24,7 @@ import seedu.task.model.task.UniqueTaskList;
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_REC = "editthis";
@@ -77,6 +80,7 @@ public class EditCommand extends Command {
                 ReadOnlyTask copyRecurTask = new Task(taskToEdit);
                 editedTask = createEditedTask(newTask, editTaskDescriptor);
                 model.updateThisTask(filteredTaskListIndex, copyRecurTask, editedTask);
+                logger.info("Editing a specific occurrence of a recurring task");
             } else {
                 editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
                 model.updateTask(filteredTaskListIndex, editedTask);
