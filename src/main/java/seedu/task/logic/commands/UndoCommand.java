@@ -37,7 +37,7 @@ public class UndoCommand extends Command {
 
         try {
             ReadOnlyTaskManager backupData = readTaskManager(history.getUndoFilePath());
-            model.loadData(backupData);
+            model.undoData(backupData);
         } catch (IOException io) {
             history.resetUndoCount();
             return new CommandResult(MESSAGE_FAIL_NOT_FOUND);

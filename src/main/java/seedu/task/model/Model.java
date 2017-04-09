@@ -22,7 +22,7 @@ public interface Model {
 
     /** Undo last command.
      * @throws IllegalValueException */
-    void loadData(ReadOnlyTaskManager newData) throws IllegalValueException;
+    void undoData(ReadOnlyTaskManager newData) throws IllegalValueException;
 
     /** Load data without saving.
      * @throws IllegalValueException */
