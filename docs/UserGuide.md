@@ -21,12 +21,22 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
       > This app will not work with earlier versions of Java 8.
 
 1. Download the latest `opus.jar` from the [releases](../../../releases) tab.
+
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
-3. Double-click the file to start the app. The GUI should appear in a few seconds.
+
+3. Double-click the file to start the app. The graphical user interface (GUI) should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
+
+   The GUI has four main components: `Main Panel`, `Side Panel`, `Command Bar` and `Feedback Panel`. 
+
+   - `Main Panel` displays a list of all existing tasks sorted in a way that incomplete tasks will appear before the completed tasks. 
+   - `Side Panel` displays a list of incomplete tasks that you need to complete within the current week. 
+   - `Command Bar` allows you to type the commands to perform actions that you desire.
+   - `Feedback Panel` displays the result of the executed command. If it is an invalid command, it will display an error message together with the correct command format that you are supposed to input.
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
+
 5. Let's have a look at how Jim, an avid Opus fan, utilises the task manager:
    * **`add`**` Do laundry p/low b/12/31/2017 12:00` : Jim wants to do laundry at noon, so he adds it to the task manager.
    * **`list`** : Jim wants to get back to the overview of his list of tasks.
@@ -36,6 +46,7 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
    * **`find`**` laundry` : Jim gets a call from his mum that the laundry must be completed by 3pm so he does a search for it.
    * **`edit`**` 1 p/hi` : Jim updates the priority of the found laundry task to high.
    * **`exit`** : Jim is done for the day so he decides to exit the application!
+
 6. Refer to the [Features](#2-features) section below for details of each command.<br>
 
 
@@ -205,7 +216,7 @@ Examples:
 
 * `find exam test p/hi e/03/04/2017`<br>
   Find highly prioritized tasks that contain either `exam` or `test` in either name, note or tags and due before `March 4, 2017`.
-  
+
 ### 2.14. Sync data to Google Task : `sync`
 
 Enable or disable automatic data synchronisation to Google Task.<br>
@@ -220,7 +231,7 @@ Examples:
 
 * `sync on`<br>
   Enable data synchronisation to Google Task.
-  
+
 * `sync off`<br>
   Disable data synchronisation to Google Task.
 
@@ -321,7 +332,7 @@ Closes Opus.
 
 * **Sort** : `sort KEYWORD` <br>
   e.g. `sort priority`
-  
+
 * **Sync** : `sync OPTION` <br>
   e.g. `sync on` or `sync off`
 
