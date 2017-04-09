@@ -34,7 +34,7 @@ public class Parser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -129,5 +129,19 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
+//    // @@author A0131278H
+//    /**
+//     * Parses user input into command without execution.
+//     *
+//     * @param commandText
+//     *            full command text
+//     */
+//    public static void parseWithoutExecution(String commandText) {
+//        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(commandText.trim());
+//        assert matcher.matches();
+//        final String commandWord = matcher.group("commandWord");
+//        final String arguments = matcher.group("arguments");
+//
+//    }
+//    // @@author
 }

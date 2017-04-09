@@ -17,7 +17,7 @@ By : `[F12-B3]`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbsp;&
 * [Appendix E : Product Survey](#appendix-e--product-survey)
 
 
-## 1. Setting up
+
 
 ### 1.1. Prerequisites
 
