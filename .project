@@ -24,10 +24,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
-<<<<<<< HEAD
-=======
-		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
->>>>>>> refs/heads/undo-redo-test
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 	</natures>
 </projectDescription>

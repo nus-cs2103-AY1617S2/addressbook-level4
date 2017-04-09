@@ -106,6 +106,11 @@ public class CalendarManager {
         return credential;
     }
 
+    public void initCalendar(UnmodifiableObservableList<ReadOnlyTask> filteredTaskList) throws IllegalTimeException {
+        clearCalendar();
+        loadTask(filteredTaskList);
+    }
+
     /**
      * Build and return an authorized Calendar client service.
      * @return an authorized Calendar client service
@@ -127,12 +132,12 @@ public class CalendarManager {
     }
 
     @Subscribe
-    public void AddTask(AddCommandEvent event) {
+    public void addTask(AddCommandEvent event) {
         new AddCalendar(event.getTask(), service);
     }
 
     @Subscribe
-    public void ClearTask(ClearCommandEvent event) {
+    public void clearTask(ClearCommandEvent event) {
         clearCalendar();
     }
 
@@ -141,13 +146,13 @@ public class CalendarManager {
     }
 
     @Subscribe
-    public void DeleteTask(DeleteCommandEvent event) throws IllegalTimeException {
+    public void deleteTask(DeleteCommandEvent event) throws IllegalTimeException {
         new DeleteCalendar(event.getTask(), service);
 
     }
 
     @Subscribe
-    public void EditTask(EditCommandEvent event) throws IllegalTimeException {
+    public void editTask(EditCommandEvent event) throws IllegalTimeException {
 
         ReadOnlyTask initialTask = event.getTaskToEdit();
         Task newTask = event.getEditedTask();

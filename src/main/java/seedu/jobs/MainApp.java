@@ -227,9 +227,10 @@ public class MainApp extends Application {
     }
 
     @Subscribe
-    public void handleCalendarDisplayEvent(CalendarDisplayEvent event) {
+    public void handleCalendarDisplayEvent(CalendarDisplayEvent event) throws IllegalTimeException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.calendarManager = new CalendarManager();
+        calendarManager.initCalendar(model.getFilteredTaskList());
     }
 
     @Subscribe
