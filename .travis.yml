@@ -5,7 +5,7 @@ matrix:
 
 script: >-
     ./config/travis/run-checks.sh &&
-    travis_retry ./gradlew clean headless coverage coveralls
+    travis_retry ./gradlew clean headless alltests coverage coveralls
 
 before_install:
           - "export DISPLAY=:99.0"
