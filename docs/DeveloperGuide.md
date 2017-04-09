@@ -1,6 +1,6 @@
 # Fast Task - Developer Guide
 
-By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2016`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
+By : `Team CS2103JAN2017-F11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nbsp;&nbsp; Licence: `MIT`
 
 ---
 
