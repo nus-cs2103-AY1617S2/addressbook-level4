@@ -1,4 +1,4 @@
-package seedu.opus.commons.exceptions;
+package seedu.opus.model.util;
 
 /**
  * Signals that the current undo/redo action is invalid

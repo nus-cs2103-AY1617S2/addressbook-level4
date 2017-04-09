@@ -1,7 +1,7 @@
 package seedu.opus.logic.commands;
 
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.logic.commands.exceptions.CommandException;
+import seedu.opus.model.util.InvalidUndoException;
 
 //@@author A0148087W
 /**
@@ -16,7 +16,7 @@ public class RedoCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             assert model != null;
-            model.resetToPrecedingState();
+            model.resetToNextState();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (InvalidUndoException e) {
             throw new CommandException(e.getMessage());

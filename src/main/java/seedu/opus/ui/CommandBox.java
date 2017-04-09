@@ -178,6 +178,11 @@ public class CommandBox extends UiPart<Region> {
         });
     }
 
+    /**
+     * Process the Up and Down Key inputs for browsing through user input history
+     * @param key
+     * @return
+     */
     private boolean handleCursorKeyEvent(KeyCode key) {
         if (key.equals(KeyCode.UP)) {
             browseToPreviousCommand();
