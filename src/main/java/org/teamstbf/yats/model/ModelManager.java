@@ -223,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
 		int taskManagerIndex = filteredEvents.getSourceIndex(filteredEventListIndex);
 		taskManager.updateEvent(taskManagerIndex, editedEvent);
 		indicateTaskManagerChanged();
-		EventsCenter.getInstance().post(new JumpToListRequestEvent(taskManagerIndex));
+		EventsCenter.getInstance().post(new JumpToListRequestEvent(taskManagerIndex - 1));
 	}
 
 	private void updateFilteredEventList(Expression expression) {
@@ -240,7 +240,6 @@ public class ModelManager extends ComponentManager implements Model {
 		Set<String> undoneTaskIdentifier = new HashSet<String>();
 		undoneTaskIdentifier.add(TASK_UNDONE_IDENTIFIER);
 		updateFilteredListToShowDone(undoneTaskIdentifier);
-		// filteredEvents.setPredicate(null);
 	}
 
 	// @@author A0138952W
@@ -253,6 +252,9 @@ public class ModelManager extends ComponentManager implements Model {
 		taskList.setPredicate(expression::satisfies);
 	}
 
+	// ============== Methods used for filtering in Calendar list
+	// ===================
+
 	@Override
 	public void updateCalendarFilteredListToShowStartTime(LocalDate day) {
 		calendarList.setPredicate(null);
@@ -263,11 +265,23 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 
 	@Override
+	public void updateCalendarFilteredListToShowDone() {
+		Set<String> doneTaskIdentifier = new HashSet<String>();
+		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
+		updateCalendarFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
+	}
+
+	// ============== Methods used for filtering in Done task list
+	// ====================
+	@Override
 	public void updateDoneTaskList() {
 		Set<String> doneTaskIdentifier = new HashSet<String>();
 		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
 		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
 	}
+
+	// ============== Methods used for filtering in Primary list
+	// ======================
 
 	@Override
 	public void updateFilteredListToShowLocation(Set<String> keywords) {
@@ -345,14 +359,8 @@ public class ModelManager extends ComponentManager implements Model {
 		return tempEvents;
 	}
 
-	@Override
-	public void updateFilteredListToShowDone() {
-		Set<String> doneTaskIdentifier = new HashSet<String>();
-		doneTaskIdentifier.add(TASK_DONE_IDENTIFIER);
-		updateTaskFilteredEventList(new PredicateExpression(new DoneQualifier(doneTaskIdentifier)));
-	}
+	// ================ Inner classes for FilteredList ==================
 
-	// Inner class used for Searching //
 	interface Qualifier {
 		boolean run(ReadOnlyEvent event);
 

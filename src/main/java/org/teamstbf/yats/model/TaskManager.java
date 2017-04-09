@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
 //@@author A0102778B
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by
+ * Wraps all data at the task manager level Duplicates are not allowed (by
  * .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
@@ -45,7 +45,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 	}
 
 	/**
-	 * Creates an AddressBook using the Persons and Tags in the
+	 * Creates an TaskManager using the Persons and Tags in the
 	 * {@code toBeCopied}
 	 */
 	public TaskManager(ReadOnlyTaskManager toBeCopied) {
@@ -55,8 +55,8 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 	//// list overwrite operations
 
-	public void setPersons(List<? extends ReadOnlyEvent> persons) {
-		this.events.setEvents(persons);
+	public void setPersons(List<? extends ReadOnlyEvent> tasks) {
+		this.events.setEvents(tasks);
 	}
 
 	public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
@@ -78,9 +78,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 	//// person-level operations
 
 	/**
-	 * Adds a person to the address book. Also checks the new person's tags and
+	 * Adds a task to the task manager. Also checks the new task's tags and
 	 * updates {@link #tags} with any new tags found, and updates the Tag
-	 * objects in the person to point to those in {@link #tags}.
+	 * objects in the task to point to those in {@link #tags}.
 	 *
 	 * @throws UniqueEventList.DuplicateEventException
 	 *             if an equivalent person already exists.
@@ -99,9 +99,9 @@ public class TaskManager implements ReadOnlyTaskManager {
 	}
 
 	/**
-	 * Updates the person in the list at position {@code index} with
-	 * {@code editedReadOnlyPerson}. {@code AddressBook}'s tag list will be
-	 * updated with the tags of {@code editedReadOnlyPerson}.
+	 * Updates the task in the list at position {@code index} with
+	 * {@code editedReadOnlyEvent}. {@code TaskManager}'s tag list will be
+	 * updated with the tags of {@code editedReadOnlyEvent}.
 	 *
 	 * @see #syncMasterTagListWith(Task)
 	 *
@@ -122,33 +122,33 @@ public class TaskManager implements ReadOnlyTaskManager {
 	}
 
 	/**
-	 * Ensures that every tag in this person: - exists in the master list
+	 * Ensures that every tag in this task: - exists in the master list
 	 * {@link #tags} - points to a Tag object in the master list
 	 */
 	private void syncMasterTagListWith(Event p) {
-		final UniqueTagList personTags = p.getTags();
-		tags.mergeFrom(personTags);
+		final UniqueTagList taskTags = p.getTags();
+		tags.mergeFrom(taskTags);
 
 		// Create map with values = tag object references in the master list
 		// used for checking person tag references
 		final Map<Tag, Tag> masterTagObjects = new HashMap<>();
 		tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-		// Rebuild the list of person tags to point to the relevant tags in the
+		// Rebuild the list of task tags to point to the relevant tags in the
 		// master tag list.
 		final Set<Tag> correctTagReferences = new HashSet<>();
-		personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+		taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 		p.setTags(new UniqueTagList(correctTagReferences));
 	}
 
 	/**
-	 * Ensures that every tag in these persons: - exists in the master list
+	 * Ensures that every tag in these tasks: - exists in the master list
 	 * {@link #tags} - points to a Tag object in the master list
 	 *
 	 * @see #syncMasterTagListWith(Task)
 	 */
-	private void syncMasterTagListWith(UniqueEventList persons) {
-		persons.forEach(this::syncMasterTagListWith);
+	private void syncMasterTagListWith(UniqueEventList tasks) {
+		tasks.forEach(this::syncMasterTagListWith);
 	}
 
 	public boolean removeEvent(ReadOnlyEvent key) throws UniqueEventList.EventNotFoundException {
@@ -165,7 +165,7 @@ public class TaskManager implements ReadOnlyTaskManager {
 		tags.add(t);
 	}
 
-	//// util methods
+	//// utility methods
 
 	@Override
 	public String toString() {

@@ -1,5 +1,6 @@
 package org.teamstbf.yats.logic;
 
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import org.teamstbf.yats.commons.core.ComponentManager;
@@ -44,11 +45,13 @@ public class LogicManager extends ComponentManager implements Logic {
 
 	@Override
 	public ObservableList<ReadOnlyEvent> getTaskFilteredTaskList() {
+		model.updateDoneTaskList();
 		return model.getTaskFilteredTaskList();
 	}
 
 	@Override
 	public ObservableList<ReadOnlyEvent> getCalendarFilteredTaskList() {
+		model.updateCalendarFilteredListToShowStartTime(LocalDate.now());
 		return model.getCalendarFilteredTaskList();
 	}
 }

@@ -15,14 +15,14 @@ public class AddCommandTest extends TaskManagerGuiTest {
 	public void add() {
 		// add one event
 		TestEvent[] currentList = td.getTypicalTasks();
-		TestEvent personToAdd = td.cower;
-		assertAddSuccess(personToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, personToAdd);
+		TestEvent eventToAdd = td.cower;
+		assertAddSuccess(eventToAdd, currentList);
+		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
 		// add another event
-		personToAdd = td.cower;
-		assertAddSuccess(personToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, personToAdd);
+		eventToAdd = td.cower;
+		assertAddSuccess(eventToAdd, currentList);
+		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
 		// add duplicate person
 		/*
@@ -40,16 +40,20 @@ public class AddCommandTest extends TaskManagerGuiTest {
 		assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 	}
 
-	private void assertAddSuccess(TestEvent personToAdd, TestEvent... currentList) {
-		commandBox.runCommand(personToAdd.getAddCommand());
-
+	private void assertAddSuccess(TestEvent eventToAdd, TestEvent... currentList) {
+		if (eventToAdd == td.cower) {
+			commandBox.runCommand("add Act like a craven -l The Wall -s 8 april 2017 11:59PM -e 8 april 2017 11:59PM -d fighting the wildings, but extremely scared -t LordCommanderJonSnow");
+		}
+		if (eventToAdd == td.duck) {
+			commandBox.runCommand("add ahhhh -by 8 april 2017 11:59pm -l AHHH -d AHHHHHHHHH -t AHHHHHHHHHHHHHH");
+		}
 		// confirm the new card contains the right data
-		EventCardHandle addedCard = taskListPanel.navigateToEvent(personToAdd.getTitle().fullName);
-		assertMatching(personToAdd, addedCard);
+		EventCardHandle addedCard = taskListPanel.navigateToEvent(eventToAdd.getTitle().fullName);
+		assertMatching(eventToAdd, addedCard);
 
 		// confirm the list now contains all previous persons plus the new
 		// person
-		TestEvent[] expectedList = TestUtil.addEventsToList(currentList, personToAdd);
+		TestEvent[] expectedList = TestUtil.addEventsToList(currentList, eventToAdd);
 		assertTrue(taskListPanel.isListMatching(expectedList));
 	}
 }

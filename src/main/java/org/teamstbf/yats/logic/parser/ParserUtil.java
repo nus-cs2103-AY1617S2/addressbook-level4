@@ -32,6 +32,11 @@ public class ParserUtil {
 	private static final Pattern INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 	private static final int NUMBER_SINGLE = 1;
 	private static final String MESSAGE_WRONG_DATE_NUMBER = "One field should contain one and only one date/time.";
+    public static final int SIZE_DEADLINE_TASK = 1;
+    public static final int SIZE_EVENT_TASK = 2;
+    public static final int SIZE_FLOATING_TASK = 0;
+    public static final int INDEX_FIRST_DATE = 0;
+    public static final int INDEX_SECOND_DATE = 1;
 
 	/**
 	 * Returns the specified index in the {@code command} if it is a positive

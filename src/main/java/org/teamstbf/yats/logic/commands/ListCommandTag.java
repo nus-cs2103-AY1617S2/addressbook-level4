@@ -16,4 +16,5 @@ public class ListCommandTag extends ListCommand {
 		model.updateFilteredListToShowTags(keywords);
 		return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredTaskList().size()));
 	}
+
 }

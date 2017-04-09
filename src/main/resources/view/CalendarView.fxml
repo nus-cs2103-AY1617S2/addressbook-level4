@@ -59,7 +59,7 @@
                                                   <buttons>
                                                     <Button fx:id="prevDate" maxWidth="10.0" mnemonicParsing="false" onMouseClicked="#prevDay" text="&lt;" />
                                                       <Button fx:id="nextDate" maxWidth="10.0" mnemonicParsing="false" onMouseClicked="#nextDay" text="&gt;" />
-                                                      <Button fx:id="resetDay" mnemonicParsing="false" styleClass="cell_small_label" stylesheets="@DarkTheme.css" text="Today">
+                                                      <Button fx:id="resetDate" mnemonicParsing="false" onMouseClicked="#resetDay" styleClass="cell_small_label" stylesheets="@DarkTheme.css" text="Today">
                                                          <font>
                                                             <Font size="10.0" />
                                                          </font>

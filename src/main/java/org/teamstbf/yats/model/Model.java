@@ -61,10 +61,13 @@ public interface Model {
 	 */
 	void updateFilteredEventList(Set<String> keywords);
 
-	/** Updates the filter of the filtered event list to show all events */
+	/**
+	 * Updates the filter of the filtered event list to show all undone events
+	 */
 	void updateFilteredListToShowAll();
 
 	// @@author A0139448U
+
 	/*
 	 * force saves the current state of the taskmanager for use in changing save
 	 * location to create a file in new location
@@ -72,13 +75,17 @@ public interface Model {
 	void saveTaskManager();
 
 	// @@author A0138952W
+
 	/**
 	 * Updates the filter of the Calendar filtered event list to show specified
 	 * start time
-	 * 
-	 * @param today
 	 */
 	void updateCalendarFilteredListToShowStartTime(LocalDate today);
+
+	/**
+	 * Updates the filter of the Calendar filtered event list to show done tasks
+	 */
+	void updateCalendarFilteredListToShowDone();
 
 	/**
 	 * Updates the filter of the Done task filtered event list to show done task
@@ -159,7 +166,5 @@ public interface Model {
 	void updateFilteredListToShowSortedEnd();
 
 	void updateFilteredListToShowDeadline();
-
-	void updateFilteredListToShowDone();
 
 }

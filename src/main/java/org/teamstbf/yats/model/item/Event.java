@@ -3,14 +3,11 @@ package org.teamstbf.yats.model.item;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.commons.util.CollectionUtil;
 import org.teamstbf.yats.model.tag.UniqueTagList;
-
-import com.joestelmach.natty.generated.DateParser.hours_return;
 
 public class Event implements ReadOnlyEvent {
 
@@ -18,11 +15,6 @@ public class Event implements ReadOnlyEvent {
 	public static final String MESSAGE_RECURRENCE_TIME_ERROR = "Recurring task should contain at least one and only one date.";
 	public static final String MESSAGE_INVALID_TIME = "Invalid time slots.";
 	public static final int SIZE_RECURRENCE_DATE = 1;
-	public static final int SIZE_DEADLINE_TASK = 1;
-	public static final int SIZE_EVENT_TASK = 2;
-	public static final int SIZE_FLOATING_TASK = 0;
-	public static final int INDEX_FIRST_DATE = 0;
-	public static final int INDEX_SECOND_DATE = 1;
 	public static final int INITIALPRIORITY = 1;
 	public static final int STEP_START_TIME = -2;
 	public static final int STEP_END_TIME = 2;
@@ -345,7 +337,7 @@ public class Event implements ReadOnlyEvent {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean hasStartOrEndTime() {
 		if (this.startTime.toString().equals("") && this.endTime.toString().equals("")) {
@@ -353,7 +345,7 @@ public class Event implements ReadOnlyEvent {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean isRecurring() {
 		return this.isRecurring;
