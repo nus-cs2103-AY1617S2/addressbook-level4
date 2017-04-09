@@ -38,34 +38,46 @@ public class ClearCommand extends Command {
     public CommandResult execute() throws CommandException {
         logger.info("-------[Executing ClearCommand] " + this.toString());
         if (typeToClear.equals("ev")) {
-            logger.info("-------[Executing ClearEventCommand] " + this.toString());
-            assert model != null;
-            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-            ModelManager.setPreviousState(currState);
-            model.resetEvent();
-            //store for undo operation
-            model.storePreviousCommand("clear");
+            executeClearEvent();
             return new CommandResult(CLEAR_EVENTS_SUCCESS);
         } else if (typeToClear.equals("ts")) {
-            logger.info("-------[Executing ClearTaskCommand] " + this.toString());
-            assert model != null;
-            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-            ModelManager.setPreviousState(currState);
-            model.resetTask();
-            //store for undo operation
-            model.storePreviousCommand("clear");
+            executeClearTask();
             return new CommandResult(CLEAR_TASKS_SUCCESS);
         } else {
             //clear all events and tasks if no type is specified
-            logger.info("-------[Executing ClearAllCommand] " + this.toString());
-            assert model != null;
-            ReadOnlyWhatsLeft currState = model.getWhatsLeft();
-            ModelManager.setPreviousState(currState);
-            model.resetData(new WhatsLeft());
-            //store for undo operation
-            model.storePreviousCommand("clear");
+            executeClearAll();
             return new CommandResult(MESSAGE_SUCCESS);
         }
 
+    }
+
+    public void executeClearEvent() {
+        logger.info("-------[Executing ClearEventCommand] " + this.toString());
+        assert model != null;
+        ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+        ModelManager.setPreviousState(currState);
+        model.resetEvent();
+        //store for undo operation
+        model.storePreviousCommand("clear");
+    }
+
+    public void executeClearTask() {
+        logger.info("-------[Executing ClearTaskCommand] " + this.toString());
+        assert model != null;
+        ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+        ModelManager.setPreviousState(currState);
+        model.resetTask();
+        //store for undo operation
+        model.storePreviousCommand("clear");
+    }
+
+    public void executeClearAll() {
+        logger.info("-------[Executing ClearAllCommand] " + this.toString());
+        assert model != null;
+        ReadOnlyWhatsLeft currState = model.getWhatsLeft();
+        ModelManager.setPreviousState(currState);
+        model.resetData(new WhatsLeft());
+        //store for undo operation
+        model.storePreviousCommand("clear");
     }
 }

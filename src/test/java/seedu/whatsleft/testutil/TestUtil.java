@@ -240,7 +240,6 @@ public class TestUtil {
         return filteredTestEvents;
     }
 
-    //@@author A0148038A
     /**
      * Filters all future test tasks from an array of test tasks, then sort the
      * test events in filtered array in time order.
@@ -255,6 +254,7 @@ public class TestUtil {
         TestTask[] filteredTestTasks = taskList.toArray(new TestTask[taskList.size()]);
         return filteredTestTasks;
     }
+    //@@author
 
     public static void main(String... s) {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
