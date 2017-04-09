@@ -161,6 +161,10 @@ public class TestEvent implements ReadOnlyEvent {
 		this.deadline = schedule;
 	}
 
+	public void setRecurrence(Recurrence recur) {
+		this.recurrence = recur;
+	}
+
 	@Override
 	public Recurrence getRecurrence() {
 		return this.recurrence;

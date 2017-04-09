@@ -1,9 +1,11 @@
 package org.teamstbf.yats.testutil;
 
+import java.util.Date;
+
 import org.teamstbf.yats.commons.exceptions.IllegalValueException;
 import org.teamstbf.yats.model.TaskManager;
 import org.teamstbf.yats.model.item.Event;
-import org.teamstbf.yats.model.item.UniqueEventList;
+import org.teamstbf.yats.model.item.Recurrence;
 
 /**
  *
@@ -18,27 +20,29 @@ public class TypicalTestEvents {
 
 	public TestEvent abdicate, boop, oxygen, cower, duck;
 
+	Date date = new Date();
+
 	public TypicalTestEvents() {
 		try {
 			abdicate = new EventBuilder().withTitle("Abdicate the British Throne")
 					.withDescription("caught having a mistress").withStartTime("11:59PM 08/04/2017")
 					.withEndTime("11:59PM 08/04/2017").withDeadline("").withLocation("Buckingham Palace")
-					.withTags("KingGeorgeVI").withIsDone("No").build();
+					.withTags("KingGeorgeVI").withIsDone("No").withRecurrence(new Recurrence()).build();
 			boop = new EventBuilder().withTitle("Boop with the Act").withDescription("Boop that nose").withStartTime("")
 					.withEndTime("").withDeadline("11:59PM 08/04/2017").withLocation("King's Row").withTags("reaper")
-					.withIsDone("No").build();
+					.withIsDone("No").withRecurrence(new Recurrence()).build();
 			oxygen = new EventBuilder().withTitle("Oxygen not Included").withDescription("Don't starve together")
 					.withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017").withDeadline("")
-					.withLocation("Klei Entertainment").withTags("ONN").withIsDone("No").build();
+					.withLocation("Klei Entertainment").withTags("ONN").withIsDone("No").withRecurrence(new Recurrence()).build();
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
 					.withDescription("fighting the wildings, but extremely scared").withStartTime("").withEndTime("")
-					.withDeadline("").withLocation("The Wall").withTags("LordCommanderJonSnow").withIsDone("No")
+					.withDeadline("").withLocation("The Wall").withTags("LordCommanderJonSnow").withIsDone("No").withRecurrence(new Recurrence())
 					.build();
 			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("").withEndTime("")
 					.withDeadline("11:59PM 08/04/2017").withLocation("AHHH").withTags("AHHHHHHHHHHHHHH")
-					.withIsDone("No").build();
+					.withIsDone("No").withRecurrence(new Recurrence()).build();
 
 		} catch (IllegalValueException e) {
 			e.printStackTrace();

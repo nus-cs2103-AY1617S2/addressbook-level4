@@ -78,6 +78,11 @@ public class Schedule {
 		return this.scheduleDate;
 	}
 
+	// @@author A0139448U
+	/*
+	 * Checks to make sure time matches 12 hour clock format with capital AM/PM
+	 * Checks date given exist according to calendar including leap years
+	 */
 	public static boolean isValidSchedule(String timeDate) {
 		String[] date = timeDate.split("\\s+");
 		/*if (date.length != 2 ) {
@@ -86,6 +91,9 @@ public class Schedule {
 		return (date[0].trim().matches(TIME_VALIDATION_REGEX) && validateDate(date[1]));
 	}
 
+	/*
+	 * Checks date given exist according to calendar including leap years
+	 */
 	public static boolean validateDate(String date) {
 
 		String[] splitDate = date.split("/");

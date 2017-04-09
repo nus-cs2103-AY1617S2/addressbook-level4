@@ -60,14 +60,14 @@ public class LogicManagerTest {
 		Event testEvent() throws Exception {
 			Title name = new Title("sleep");
 			Location location = new Location("bed");
-			Schedule startTime = new Schedule("");
-			Schedule endTime = new Schedule("");
+			Schedule startTime = new Schedule("12:00AM 26/06/2017");
+			Schedule endTime = new Schedule("11:00AM 27/06/2017");
 			Schedule deadline = new Schedule("");
-			Description description = new Description("oh no can't sleep i'm tired");
-			Tag tag1 = new Tag("tag1");
-			Tag tag2 = new Tag("longertag2");
+			Description description = new Description("finals finally over");
+			Tag tag1 = new Tag("rest");
+			Tag tag2 = new Tag("moreRest");
 			UniqueTagList tags = new UniqueTagList(tag1, tag2);
-			IsDone isDone = new IsDone("Yes");
+			IsDone isDone = new IsDone("No");
 			boolean isRecurring = false;
 			Recurrence recurrence = new Recurrence();
 			return new Event(name, location, startTime, endTime, deadline, description, tags, isDone, isRecurring,
@@ -163,7 +163,7 @@ public class LogicManagerTest {
 			return new Event(new Title("person" + seed), new Location("bed" + seed), new Schedule("11:59PM 08/04/2017"),
 					new Schedule("11:59PM 08/04/2017"), new Schedule(""),
 					new Description("oh no can't sleep i'm tired" + seed),
-					new UniqueTagList(new Tag("tag" + Math.abs(seed))), new IsDone("Yes"), false, new Recurrence());
+					new UniqueTagList(new Tag("tag" + Math.abs(seed))), new IsDone("No"), false, new Recurrence());
 		}
 
 		List<Event> generateEventList(Event... events) {
@@ -317,7 +317,7 @@ public class LogicManagerTest {
 	@Test // TO BE EDITED
 	public void execute_add_invalidEventData() {
 		assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address", Title.MESSAGE_NAME_CONSTRAINTS);
-		assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address", Schedule.MESSAGE_TIME_CONSTRAINTS);
+		assertCommandFailure("add Valid Name -s 13:00AM 05/05/2017 -e 14:00 34/08/2343", Schedule.MESSAGE_TIME_CONSTRAINTS);
 		assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
 				Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -332,7 +332,7 @@ public class LogicManagerTest {
 		expectedAB.addEvent(toBeAdded);
 
 		// execute command and verify result
-		assertCommandSuccess("add sleep @bed //oh no can't sleep i'm tired #tag1 #longertag2",
+		assertCommandSuccess("add sleep -l bed -s 12:00AM 26/06/2017 -e 11:00AM 27/06/2017 -d finals finally over -t rest -t moreRest",
 				String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded), expectedAB, expectedAB.getTaskList());
 
 	}
@@ -438,7 +438,7 @@ public class LogicManagerTest {
 		Event pTarget1 = helper.generateEventWithName("bla bla KEY bla");
 		Event pTarget2 = helper.generateEventWithName("bla KEY bla bceofeia");
 		Event p1 = helper.generateEventWithName("KE Y");
-		Event p2 = helper.generateEventWithName("KEYKEYKEY sduauo");
+		Event p2 = helper.generateEventWithName("KE YKE YKE Y sduauo");
 
 		List<Event> fourEvents = helper.generateEventList(p1, pTarget1, p2, pTarget2);
 		TaskManager expectedAB = helper.generateTaskManager(fourEvents);
@@ -482,7 +482,7 @@ public class LogicManagerTest {
 		TaskManager expectedAB = helper.generateTaskManager(threeEvents);
 		helper.addToModel(model, threeEvents);
 
-		assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, 2), expectedAB,
+		assertCommandSuccess("select 2", String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, threeEvents.get(1)), expectedAB,
 				expectedAB.getTaskList());
 		assertEquals(2, targetedJumpIndex + 1);
 		assertEquals(model.getFilteredTaskList().get(0), threeEvents.get(0));
