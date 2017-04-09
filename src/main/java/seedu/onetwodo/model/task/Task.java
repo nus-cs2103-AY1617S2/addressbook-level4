@@ -25,12 +25,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
     private boolean isDone;
     private boolean isToday;
 
-    // @@author A0141138N
+    //@@author A0141138N
     /**
      * Every field must be present and not null. Event
      */
-    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
-            Priority priority, Description description, UniqueTagList tags) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur, Priority priority,
+            Description description, UniqueTagList tags) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -44,7 +44,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         isToday(startDate, endDate);
     }
 
-    // @@ author A0141138N
+    //@@ author A0141138N
     private void checkTaskType(StartDate startDate, EndDate endDate) {
         if (!startDate.hasDate() && !endDate.hasDate()) {
             this.type = TaskType.TODO;
@@ -57,7 +57,7 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         }
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     private void isToday(StartDate startDate, EndDate endDate) {
         LocalDate dateEnd = LocalDate.MIN;
         LocalDate dateStart = LocalDate.MAX;
@@ -86,12 +86,12 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRecur(),
-                source.getPriority(), source.getDescription(), source.getTags(), source.getDoneStatus());
+        this(source.getName(), source.getStartDate(), source.getEndDate(), source.getRecur(), source.getPriority(),
+                source.getDescription(), source.getTags(), source.getDoneStatus());
     }
 
-    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur,
-            Priority priority, Description description, UniqueTagList tags, boolean isDone) {
+    public Task(Name name, StartDate startDate, EndDate endDate, Recurring recur, Priority priority,
+            Description description, UniqueTagList tags, boolean isDone) {
         this(name, startDate, endDate, recur, priority, description, tags);
         this.isDone = isDone;
     }
@@ -135,16 +135,19 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         return isDone;
     }
 
+    //@@author A0141138N
     @Override
     public boolean getTodayStatus() {
         return isToday;
     }
 
+    //@@author A01411138N
     @Override
     public TaskType getTaskType() {
         return type;
     }
 
+    //@@author
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -180,11 +183,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         isDone = false;
     }
 
+    //@@author A0141138N
     public void setToday() {
         assert isToday == false;
         isToday = true;
     }
 
+    //@@author A0141138N
     public void setTaskType(TaskType type) {
         this.type = type;
     }
@@ -196,14 +201,13 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         tags.setTags(replacement);
     }
 
-
     //@@author A0139343E
     public void updateTaskRecurDate(boolean isForward) {
         assert this.getTaskType() != TaskType.TODO;
         int valueToAdd = isForward ? 1 : -1;
         StartDate tempStartDate;
         EndDate tempEndDate = getEndDate();
-        switch(this.recur.getRecur()) {
+        switch (this.recur.getRecur()) {
         case DAILY:
             this.setEndDate(new EndDate(tempEndDate.localDateTime.get().plusDays(valueToAdd)));
             if (this.hasStartDate()) {
@@ -279,7 +283,8 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         case DEADLINE:
         case EVENT:
             return endDate.getLocalDateTime().compareTo(taskB.endDate.getLocalDateTime());
-        default: return 0;
+        default:
+            return 0;
         }
     }
 

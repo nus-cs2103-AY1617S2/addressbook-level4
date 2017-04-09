@@ -12,6 +12,7 @@ import seedu.onetwodo.model.task.UniqueTaskList.TaskNotFoundException;
 public class UndoneCommand extends Command {
 
     public static final String COMMAND_WORD = "undone";
+    public static final String COMMAND_WORD_CAP = "Undone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task identified by the index number as uncompleted.\n"

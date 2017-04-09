@@ -7,6 +7,7 @@ import seedu.onetwodo.logic.commands.ClearCommand;
 import seedu.onetwodo.logic.commands.DeleteCommand;
 import seedu.onetwodo.logic.commands.DoneCommand;
 import seedu.onetwodo.logic.commands.EditCommand;
+import seedu.onetwodo.logic.commands.UndoneCommand;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
 //@@author A0135739W
@@ -39,8 +40,18 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
     @Override
     public String getFeedbackMessage() {
         if (entry.size() == 1) {
-            assert entry.get(0).equals(ClearCommand.COMMAND_WORD);
-            return ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS;
+            switch (entry.get(0)) {
+
+            case ClearCommand.COMMAND_CLEAR_DONE:
+                return ClearCommand.MESSAGE_CLEAR_DONE_SUCCESS;
+
+            case ClearCommand.COMMAND_CLEAR_UNDONE:
+                return ClearCommand.MESSAGE_CLEAR_UNDONE_SUCCESS;
+
+            case ClearCommand.COMMAND_CLEAR_ALL:
+            default:
+                return ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS;
+            }
         } else if (entry.size() == 2) {
             return entry.get(0).concat(entry.get(1));
         } else {
@@ -70,10 +81,19 @@ public class CommandHistoryEntry implements CommandHistoryEntryInterface {
             return "Restore Task";
 
         case DoneCommand.COMMAND_WORD:
-            return "Undone";
+            return UndoneCommand.COMMAND_WORD_CAP;
 
-        case ClearCommand.COMMAND_WORD:
-            return "Restore OneTwoDo";
+        case UndoneCommand.COMMAND_WORD:
+            return DoneCommand.COMMAND_WORD;
+
+        case ClearCommand.COMMAND_CLEAR_ALL:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_ALL_SUCCESS;
+
+        case ClearCommand.COMMAND_CLEAR_DONE:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_DONE_SUCCESS;
+
+        case ClearCommand.COMMAND_CLEAR_UNDONE:
+            return ClearCommand.MESSAGE_UNDO_CLEAR_UNDONE_SUCCESS;
 
         default:
             return new String();

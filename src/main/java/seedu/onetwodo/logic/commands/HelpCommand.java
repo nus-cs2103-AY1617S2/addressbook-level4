@@ -1,10 +1,10 @@
-//@@author A0141138N
 package seedu.onetwodo.logic.commands;
 
 import seedu.onetwodo.commons.core.EventsCenter;
 import seedu.onetwodo.commons.events.ui.ShowHelpRequestEvent;
 import seedu.onetwodo.commons.events.ui.ShowHelpUGRequestEvent;
 
+//@@author A0141138N
 /**
  * Format full help instructions for every command for display.
  */

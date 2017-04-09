@@ -15,7 +15,7 @@ import seedu.onetwodo.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
 
-    // @@author A0141138N
+    //@@author A0141138N
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
@@ -51,6 +51,7 @@ public class SampleDataUtil {
         }
     }
 
+    //@@author
     public static ReadOnlyToDoList getSampleToDoList() {
         try {
             ToDoList sampleAB = new ToDoList();

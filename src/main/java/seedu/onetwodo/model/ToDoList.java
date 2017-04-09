@@ -167,7 +167,7 @@ public class ToDoList implements ReadOnlyToDoList {
         tasks.clearUndone();
     }
 
-    //@@author
+    //@@author A0141138N
     public void todayTask(ReadOnlyTask taskForToday) {
         tasks.today(taskForToday);
     }
@@ -176,6 +176,37 @@ public class ToDoList implements ReadOnlyToDoList {
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
+    }
+
+    //@@author A0135739W
+    /**
+     * clears tags that are not used by any other tasks when a task is removed
+     */
+    void shrinkTagList(ReadOnlyTask target) {
+        for (Tag tag : target.getTags()) {
+            if (isUniqueTag(tag)) {
+                tags.remove(tag);
+            }
+        }
+    }
+
+    //@@author A0135739W
+    /**
+     * checks if a tag is only used in one task only
+     */
+    private boolean isUniqueTag(Tag tagToCheck) {
+        int occurrenceCount = 0;
+        for (Task task : this.tasks) {
+            for (Tag tagInTask : task.getTags()) {
+                if (tagToCheck.equals(tagInTask)) {
+                    occurrenceCount++;
+                    if (occurrenceCount > 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     //// util methods

@@ -98,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
+        toDoList.shrinkTagList(target);
         toDoList.removeTask(target);
         history.saveUndoInformationAndClearRedoHistory(DeleteCommand.COMMAND_WORD, target, copiedCurrentToDoList);
         indicateToDoListChanged();
@@ -245,21 +246,25 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void clear() {
         ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
-        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_WORD, copiedCurrentToDoList);
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_ALL, copiedCurrentToDoList);
         resetData(new ToDoList());
     }
 
     //@@author A0135739W
     @Override
     public void clearDone() {
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.clearDone();
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_DONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
     //@@author A0135739W
     @Override
     public void clearUndone() {
+        ToDoList copiedCurrentToDoList = new ToDoList(this.toDoList);
         toDoList.clearUndone();
+        history.saveUndoInformationAndClearRedoHistory(ClearCommand.COMMAND_CLEAR_UNDONE, copiedCurrentToDoList);
         indicateToDoListChanged();
     }
 
@@ -310,16 +315,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(p -> p.getDoneStatus() == true));
     }
 
+    //@@author A0141138N
     @Override
     public void updateFilteredTodayTaskList() {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTodayStatus() == true));
     }
 
+    //@@author A0141138N
     @Override
     public void updateByTaskType(TaskType taskType) {
         updateFilteredTaskList(new PredicateExpression(p -> p.getTaskType() == taskType));
     }
 
+    //@@author
     @Override
     public void updateByDoneDatePriorityTags(EndDate before, StartDate after, Priority priority, Set<Tag> tags) {
         boolean hasBefore = before.hasDate();
@@ -338,10 +346,12 @@ public class ModelManager extends ComponentManager implements Model {
         return tagsRemoved.size() != task.getTags().toSet().size();
     }
 
+    //@@author A0141138N
     private boolean isPrioritySame(ReadOnlyTask task, Priority p) {
         return task.getPriority().value.equals(p.value);
     }
 
+    //@@author
     private boolean isTaskSameDoneStatus(ReadOnlyTask task, DoneStatus doneStatus) {
         switch (doneStatus) {
         case DONE:

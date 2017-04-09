@@ -109,7 +109,7 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait("Could not save data", "Could not save data to file", event.exception);
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -123,14 +123,14 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.handleTags(event.getTagsString());
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @Subscribe
     private void handleShowHelpUGEvent(ShowHelpUGRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.handleHelpUG();
     }
 
-    // @@author A0143029M
+    //@@author A0143029M
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         // Scroll when testing
