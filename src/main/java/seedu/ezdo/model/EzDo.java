@@ -214,7 +214,7 @@ public class EzDo implements ReadOnlyEzDo {
             try {
                 String recurIntervalInString = task.getRecur().toString().trim();
                 int recurringInterval = Recur.RECUR_INTERVALS.get(recurIntervalInString);
-                
+
                 // Update start date
                 String startDateInString = task.getStartDate().value;
                 String startDate = updateDate(recurringInterval, startDateInString);
@@ -251,7 +251,7 @@ public class EzDo implements ReadOnlyEzDo {
             c.setTime(DateParser.USER_OUTPUT_DATE_FORMAT.parse(originalDate));
 
             // update date according to recurring status.
-            c.add(type, recurIntervalIncrement); 
+            c.add(type, recurIntervalIncrement);
 
             // Format the date according to user's input.
             String updatedDate = DateParser.USER_OUTPUT_DATE_FORMAT.format(c.getTime());

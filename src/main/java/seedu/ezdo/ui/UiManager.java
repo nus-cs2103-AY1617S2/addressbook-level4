@@ -55,7 +55,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info(MESSAGE_UI_STARTING);
-        
+
         // Set the application title
         String appTitle = config.getAppTitle();
         primaryStage.setTitle(appTitle);

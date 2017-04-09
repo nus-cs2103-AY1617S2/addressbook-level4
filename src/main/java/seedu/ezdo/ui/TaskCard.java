@@ -18,8 +18,8 @@ import seedu.ezdo.logic.parser.DateParser;
 import seedu.ezdo.model.todo.ReadOnlyTask;
 
 //@@author A0139177W
-/** 
- * The task card for the UI. 
+/**
+ * The task card for the UI.
  */
 public class TaskCard extends UiPart<Region> {
 
