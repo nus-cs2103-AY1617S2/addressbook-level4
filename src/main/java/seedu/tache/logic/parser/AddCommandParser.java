@@ -170,6 +170,12 @@ public class AddCommandParser {
         }
     }
 
+    /**
+     * Filters all possible date/time strings into just 1 of each type. This method selects PossibleDateTimes that
+     * can be parsed and appears last in the String
+     * @param input String to parse
+     * @return A DateTimeProperties object encapsulating the PossibleDateTime objects filtered
+     */
     private static DateTimeProperties filterPossibleDateTime(Stack<PossibleDateTime> dateTimeStack) {
         PossibleDateTime recurInterval = null;
         PossibleDateTime startDateTime = null;
