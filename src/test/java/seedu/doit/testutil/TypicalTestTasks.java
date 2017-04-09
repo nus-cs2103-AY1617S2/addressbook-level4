@@ -14,10 +14,8 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            this.alice = new TaskBuilder().withName("Alice Pauline")
-                .withDescription("123, Jurong West Ave 6, #08-111").withDeadline("friday")
-                .withPriority("low")
-                .withTags("friends").build();
+            this.alice = new TaskBuilder().withName("Alice Pauline").withDescription("123, Jurong West Ave 6, #08-111")
+                    .withDeadline("friday").withPriority("low").withTags("friends").build();
             this.benson = new TaskBuilder().withName("Benson Meier").withDescription("311, Clementi Ave 2, #02-25")
                 .withDeadline("thursday").withPriority("med")
                 .withTags("owesMoney", "friends").build();
@@ -65,34 +63,34 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[] {this.alice, this.benson, this.carl, this.daniel,
-            this.elle, this.fiona, this.george, this.aE, this.bE, this.cE, this.aF, this.bF, this.cF};
+        return new TestTask[] { this.alice, this.benson, this.carl, this.daniel, this.elle, this.fiona, this.george,
+            this.aE, this.bE, this.cE, this.aF, this.bF, this.cF };
     }
 
     public static TestTask getEventTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("meeting")
-                                     .withStartTime("yesterday")
-                                     .withDescription("event")
-                                     .withPriority("high")
-                                     .withDeadline("tomorrow")
-                                     .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("meeting").withStartTime("yesterday").withDescription("event")
+                .withPriority("high").withDeadline("tomorrow").withTags("tttttttttag").build();
     }
 
     public static TestTask getDeadlineTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("due soon")
-                                        .withDescription("task")
-                                        .withPriority("high")
-                                        .withDeadline("tomorrow")
-                                        .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("due soon").withDescription("task").withPriority("high")
+                .withDeadline("tomorrow").withTags("tttttttttag").build();
     }
 
     public static TestTask getFloatingTestTask() throws IllegalValueException {
-        return new TaskBuilder().withName("anytime")
-                                        .withDescription("fTask")
-                                        .withPriority("high")
-                                        .withTags("tttttttttag").build();
+        return new TaskBuilder().withName("anytime").withDescription("fTask").withPriority("high")
+                .withTags("tttttttttag").build();
     }
 
+    public static TestTask getDeadlineTestTaskWithNoDescription() throws IllegalValueException {
+        return new TaskBuilder().withName("noDescription").withDescription("").withPriority("high")
+                .withDeadline("next week").withTags("tagme").build();
+    }
+
+    public static TestTask getFloatingTestTaskWithDuplicateTags() throws IllegalValueException {
+        return new TaskBuilder().withName("Duplicate tag").withDescription("duplicate tag success").withPriority("med")
+                .withTags("same").withTags("same").build();
+    }
 
     public TaskManager getTypicalTaskManager() {
         TaskManager ab = new TaskManager();
