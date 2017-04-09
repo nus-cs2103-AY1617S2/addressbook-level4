@@ -278,7 +278,7 @@ public class MainWindow extends UiPart<Region> {
                 (int) primaryStage.getY());
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @FXML
     public void handleHelp() {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -315,7 +315,7 @@ public class MainWindow extends UiPart<Region> {
                 .forEach((node) -> node.setVisible(false)));
     }
 
-    // @@author A0141138N
+    //@@author A0141138N
     @FXML
     public void handleHelpUG() {
         JFXDialogLayout content = new JFXDialogLayout();
@@ -346,7 +346,7 @@ public class MainWindow extends UiPart<Region> {
         closeDialogOnNextKeyPress();
     }
 
-    // @@author
+    //@@author
     @FXML
     public void handleUndo() {
         commandBox.handleCommands(UndoCommand.COMMAND_WORD);

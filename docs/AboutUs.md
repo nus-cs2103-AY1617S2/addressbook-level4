@@ -13,8 +13,11 @@ We are a team based in the [School of Computing, National University of Singapor
 	* [Task priority]
 	* [Task types]
 	* [Welcome window]
-* Code written: [[functional code](../collated/main/A0141138N.md)][[test code](../collated/main/A0141138N.md)]
+	* [Command Summary Window]
+	* [Help window for User Guide]
+* Code written: [[functional code](../collated/main/A0141138N.md)][[test code](../collated/test/A0141138N.md)]
 * Other major contributions:
+	* Worked on improving user guide with Yu Feng
 
 -----
 

@@ -1,4 +1,3 @@
-//@@author A0141138N
 package seedu.onetwodo.ui;
 
 import java.util.logging.Logger;
@@ -16,6 +15,7 @@ import seedu.onetwodo.commons.core.LogsCenter;
 import seedu.onetwodo.commons.util.FxViewUtil;
 import seedu.onetwodo.model.task.ReadOnlyTask;
 
+//@@author A0141138N
 public class TodayTaskList extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TodayTaskList.class);
     private static final String FXML = "TaskListPanel.fxml";

@@ -125,7 +125,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
-    //@@author
+    //@@author A0141138N
     /**
      * Marks the equivalent task as task for today.
      *
@@ -138,7 +138,8 @@ public class UniqueTaskList implements Iterable<Task> {
         targetTask.setToday();
         internalList.set(index, targetTask);
     }
-
+    
+    //@@author
     public void sortTasks(SortOrder sortOrder, boolean isReversed) {
         switch (sortOrder) {
         case ALPHANUMERIC:

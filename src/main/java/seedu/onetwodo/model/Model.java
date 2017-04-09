@@ -90,13 +90,15 @@ public interface Model {
      * Updates the filter of the filtered task list to display all done tasks
      */
     void updateFilteredDoneTaskList();
-
+    
+    //@@author A0141138N
     /**
      * Updates the filter of the filtered task list to display all tasks for
      * today
      */
     void updateFilteredTodayTaskList();
-
+    
+    //@@author
     /** Return the done status of particular task */
     DoneStatus getDoneStatus();
 
