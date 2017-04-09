@@ -66,10 +66,9 @@ public class AddCommand extends Command {
         this.toAdd = new Task(new Name(name), new Priority(priority), startTime = new StartTime(startDate),
             endTime = new EndTime(dueDate), new Description(text), new UniqueTagList(tagSet));
 
-        if (startTime.getDateTimeObject() != null && endTime.getDateTimeObject() != null) {
-            if (!isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
-                throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
-            }
+        if (startTime.getDateTimeObject() != null && endTime.getDateTimeObject() != null &&
+                !isStartTimeEarlier(startTime.getDateTimeObject(), endTime.getDateTimeObject())) {
+            throw new IllegalValueException(MESSAGE_INVALID_START_TIME);
         }
     }
 
