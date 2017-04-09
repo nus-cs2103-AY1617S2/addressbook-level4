@@ -13,7 +13,7 @@
 | **go to** `Done` **tab** | list done | selected view tab is now `Done` |
 | **go to** `To Do` **tab** | list todo | selected view tab is now `To Do` |
 |		|		|		|
-| **add a task** <br><br>all newly added task should be automatically selected in the list| |  | 
+| **add a task** <br><br>all newly added task should be automatically selected in the list| |  |
 | add floating task | add Write english essay | floating task is added |
 | add task | add Prepare for maths test e/next week | task with end date is added |
 | add repeating daily task | add Buy Lunch s/today 12pm r/day | that that repeats every day is added |

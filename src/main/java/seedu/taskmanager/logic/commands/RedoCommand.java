@@ -2,14 +2,10 @@ package seedu.taskmanager.logic.commands;
 
 import static seedu.taskmanager.logic.parser.Parser.BASIC_COMMAND_FORMAT;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 
-import seedu.taskmanager.commons.core.EventsCenter;
-import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.AddCommandParser;
-import seedu.taskmanager.logic.parser.ParserUtil;
 import seedu.taskmanager.model.HistoryManager;
 
 // @@author A0140032E
