@@ -349,10 +349,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new task with description only | remember what I have to do
-`* * *` | user | add a new task with description and deadline | remember what I have to do before stipulated date/time
-`* * *` | user | add a new task with description and reminder | remember what I have to do and be reminded at specified date/time
-`* * *` | user | add a new task with description and on selective execution dates | remember what I have to do that happens over non-consecutive days
+`* * *` | user | add a new task with title only | remember what I have to do
+`* * *` | user | add a new task with title and deadline | remember what I have to do before stipulated date/time
+`* * *` | user | add a new task with title and description | remember what I have to do and its relevant details
+`* * *` | user | add a new task with description and start and end dates | remember what I have to do that happens over a period of time
 `* * *` | user | add a new recurring task | remember what I have to do that happens repeatedly
 `* * *` | user | tag a task | organise my tasks into different group (tags)
 `* * *` | user | delete a task | remove tasks that I no longer need
@@ -361,24 +361,19 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | edit task timings | edit tasks timings I need to change
 `* * *` | user | edit the tag of a task | modify the tags of my tasks
 `* * *` | user | find a task to do today | locate details of tasks to do today without having to go through the entire list
+`* * *` | user | find a task to do in a specifc period | locate details of tasks within a specific period without having to go through the entire list
 `* * *` | user | find a specific task by keyword | locate details of tasks to do by searching for keywords
 `* * *` | user | find a specific task by tags | locate details of tasks to do by searching for tags
 `* * *` | user | mark a task as done | mark tasks as done and become part of history
+`* * *` | user | mark a task as not done | move tasks initially marked as done back to my to do list when I mistakenly mark them as done
+`* * *` | user | see all the tasks already done | keep track of my progress so far
 `* * *` | user | undo an action | undo action if I made a mistake in making an entry
+`* * *` | user | redo an action | redo action if I made a mistake in making an undo action
 `* *` | user | rank tasks by deadlines | prioritise tasks I need to do
 `* *` | user | rank tasks by start dates | schedule tasks accordingly
-`* *` | user | see a walkthorough | know the features and how to use the App
-`* *` | user | create clickable links in tasks | Access important links quickly from task description
-`* *` | user | delete date/time on multiple-timings task | remove one or more timings on a certain task I no longer need
-`* *` | user | clear all tasks on period of time | easily remove tasks on holiday
-`* *` | busy user | set an alarm for task with deadlines | be reminded regarding deadlines ahead and not miss it
-`*` | migrating user from Google Tasks | Import tasks from Google Tasks | import automatically and not have to key in manually
-`*` | user with Google Calendar | Import tasks from Google Calendar events | import tasks stored in Google Calendar and add on to that
-`*` | user | create group tasks | share group task with fellow users
-`*` | user | attach documents | be more versatile with my task description
-`*` | advanced user | import and export tasks | have backup and transfer my lists of tasks
-`*` | advanced user | create subtasks within a task | break down complicated tasks into smaller ones
-`*` | user | find tasks in relation to collaborators | find tasks related to a person and possibly combine a few tasks in a meeting
+`* *` | user | delete date/time on task | remove timings on a certain task I no longer need
+`* *` | user | clear all tasks | easily remove all tasks
+`*` | user | change storage location of all tasks | flexibly organise my task storage
 `*` | user with many tasks | see graphical overview of tasks | plan better
 
 ## Appendix B : Use Cases
@@ -584,14 +579,15 @@ Use case ends.
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance (5 seconds lag for
+2. Should be able to hold up to 500 tasks without a noticeable sluggishness in performance (5 seconds lag for
    most modern PCs) for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The instructions for command format should be concise and intuitive enough for a new user to pick up.
-5. Commands should be processed within one second.
-6. User should always receive a feedback when a command is typed, even for invalid commands and unsuccessful processes.
-7. All functional methods should be documented properly.
+5. The commands should allow some natural and intuitive command variations, especially for date and time.
+6. Commands should be processed within one second.
+7. User should always receive a feedback when a command is typed, even for invalid commands and unsuccessful processes.
+8. All functional methods should be documented properly.
 
 ## Appendix D : Glossary
 
