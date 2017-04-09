@@ -229,11 +229,8 @@ Format: `list [TYPE]` where TYPE can be `pending`, `overdue` or `finished`
 If you want to list tasks occurring during a time period, just use the `\from` and `\to` parameters. <br>
 <br>
 Format: `[\from TIME] [\to TIME] `
-You can also use the `\in` key for tasks occurring `today`, `this week`, `this month` and so on.
-`[\in TIME_INTERVAL]`
 > **Examples:** <br>
 > - `list \from 3pm \to 5pm` <br>
-> - `list \in this week` <br>
 
 > **Remarks:** <br>
 > - See Figure 3.2.1 for acceptable date and time formats <br>
@@ -247,8 +244,7 @@ Format: `[\under TAG]`
 
 **Sample Commmands**
 * `list pending \under school_work` <br>
-* `list pending \in today` <br>
-* `list \in this week` <br>
+* `list pending \from today \to tomorrow` <br>
 * `list finished \from 1st March \to 20th March \under internship` <br>
 
 ### 3.4 Sorting tasks : `sort`
@@ -310,7 +306,7 @@ Format: `edit INDEX [TASK_DESCRIPTION] [\by TIME] [\as PRIORITY] [\under TAG...]
 
 **Sample Commands**
 * `list`<br>
-  `edit 1 \desc watch NBA \from tuesday 7pm \to tuesday 9pm`<br>
+  `edit 1 watch NBA \from tuesday 7pm \to tuesday 9pm`<br>
   Suppose that the description of this task is originally `watch nba`,
   the new description will be changed to `watch NBA`.
   The 'from' and 'to' times will also be updated.
