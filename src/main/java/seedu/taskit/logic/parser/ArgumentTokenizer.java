@@ -56,7 +56,7 @@ public class ArgumentTokenizer {
      * Returns last value of given prefix.
      */
     public Optional<String> getValue(Prefix prefix) {
-        if (prefix.getPrefix().equals("title")) {
+        if (prefix.getPrefix().equals(" title ")) {
             if (!this.titleQuotes.isEmpty()) {
                 Optional<String> title = Optional.of(this.titleQuotes);
                 return title;
