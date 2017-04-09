@@ -23,7 +23,7 @@ This product is a tool to accept natural language commands via keyboards to mana
 * [Command Summary](#command-summary)
 
 ## First-time user experience
-* For first-time configuration, make sure file named _calendar-java-quickstart_ in `User/home/.credentials` does not exist or has been deleted. 
+* For first-time configuration, make sure file named _calendar-java-quickstart_ in `User/home/.credentials` does not exist or has been deleted.
 
 ## Start the program
 
@@ -176,7 +176,7 @@ clear | `clear`
 find | `find NAME`
 list | `list`
 edit | `edit index/INDEX [name/NAME start/START end/END recur/PERIOD desc/DESCRIPTION tag/TAG]`
-undo | `undo` 
+undo | `undo`
 redo | `redo`
 set | `set email/EMAIL pwd/PASSWORD`
 display | `display`
