@@ -43,7 +43,7 @@ public class XmlTaskListStorage implements TaskListStorage {
      */
     @Override
     public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException,
-    FileNotFoundException {
+        FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
