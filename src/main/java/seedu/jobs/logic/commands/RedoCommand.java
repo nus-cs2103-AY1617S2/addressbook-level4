@@ -21,6 +21,10 @@ public class RedoCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             model.redoCommand();
+            calendar.clearTask();
+            System.out.println("cleared");
+            calendar.loadTask(model.getFilteredTaskList());
+            System.out.println("loaded");
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyStackException e) {
             throw new CommandException(MESSAGE_FAILUIRE);

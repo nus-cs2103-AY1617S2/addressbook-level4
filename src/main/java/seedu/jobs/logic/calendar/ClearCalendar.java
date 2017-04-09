@@ -4,7 +4,6 @@ import java.io.IOException;
 
 public class ClearCalendar extends BasicCommandCalendar {
 
-
     public ClearCalendar(com.google.api.services.calendar.Calendar inputCalendar) {
         service = inputCalendar;
         try {

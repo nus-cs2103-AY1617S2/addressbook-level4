@@ -65,7 +65,6 @@ public class EditCommand extends Command {
 
         try {
             model.updateTask(filteredTaskListIndex, taskToEdit, editedTask);
-
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }

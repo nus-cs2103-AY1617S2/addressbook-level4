@@ -93,7 +93,7 @@
 }
 
 .cell_big_label {
-    -fx-font-size: 16px;
+    -fx-font-size: 15px;
     -fx-text-fill: #010504;
 }
 
@@ -351,11 +351,11 @@
 }
 
 #status .label {
-    -fx-text-fill: white;
-    -fx-background-color: #800000;
+
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
 /* @@author */
