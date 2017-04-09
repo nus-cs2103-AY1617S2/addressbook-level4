@@ -1,4 +1,4 @@
-<!---@@author A0141011J->
+<!-- @@author A0141011J -->
 ------
 # Testscript
 ------
@@ -108,19 +108,24 @@ Add an event with tag and priority
 ### 2.6 List tasks due today
 > **Command:** `list today`<br>
 > **Result:**<br>
-- Task list panel list all deadlines due today and events ending today
+- Task list panel lists all deadlines due today and events ending today
 - Tasks are sorted based on priority
 
 ### 2.7 List all overdue tasks
 > **Command:** `list overdue`<br>
 > **Result:**<br>
-- Task list panel list all tasks and events past due and not completed yet
+- Task list panel lists all tasks and events past due and not completed yet
 - Tasks are sorted based on priority
 
 ### 2.8 List by priority
 > **Command:** `list high`<br>
 > **Result:**<br>
-- Task list panel list all tasks and events with high priority
+- Task list panel lists all tasks and events with high priority
+
+### 2.9 List tasks from GUI
+> **Action:** Click buttons on left menu bar<br>
+> **Result:**<br>
+- Task list panel lists tasks or/and events according description on the menu bar
 
 ------
 ## 3. Edit Command
@@ -238,148 +243,78 @@ The result is the same as `1`
 
 3.
 - Result display panel posts message:<br>
-`Undid the most recent action.`
-- TaskList panel displays 3 task cards, including the task card `cs2103 lecture 11.11.2016 to 11.11.2016`
+`Previous action undone..`
+- Task list panel add back the previously delete task
+
+> 4.
+- Result display panel posts message:<br>
+`Previous action undone.`
+- Task list panel remove the newly added task with title 'cs2103'
 
 > 5.
 - Result display panel posts message:<br>
-`Undid the most recent action.`
-- TaskList panel displays 2 task cards, without the task card `cs2103 testing`
+`Action redone.`<br>
+- Task list panel readd the task task card `cs2103 presentation`
 
 > 6.
 - Result display panel posts message:<br>
-`Redid the most recent action that is undone.`<br>
-`New task added: cs2103 testing Deadline: 07.11.2016-20 Priority Level: 3`
-- TaskList panel displays 3 task cards, including the task card `cs2103 testing`
+`Action redone.`<br>
+- Task list panel re-delete the first task
 
-> 7.
-- Result display panel posts message:<br>
-`Redid the most recent action that is undone.`<br>
-`Deleted Event: cs2103 lecture Event Date: 11.11.2016 to 11.11.2016 recurring weekly Priority Level: 1`
-- TaskList panel displays 2 task cards, without the task card `cs2103 lecture 11.11.2016 to 11.11.2016`
-
-
-
-------
-## 9. Find Command
-------
-### 9.1 Find by name
-> **Command:** `find project meet`<br>
-> **Result:**
-- Result display panel posts message:<br>
-`10 events and tasks listed!`
-- TaskList panel lists all events and tasks whose name contains project, meet or meeting (whose stem word is meet)<br>
-
-### 9.2 Find by name and `AND` parameter
-> **Command:** `find project AND meet`<br>
-> **Result:**
-- Result display panel posts message:<br>
-`2 events and tasks listed!`
-- TaskList panel lists all events and tasks whose name contains project and meet or meeting (whose stem word is meet)<br>
-
-### 9.3 Find by name and `exact!` parameter
-> **Command:** `find meet exact!`<br>
-> **Result:**
-- Result display panel posts message:<br>
-`0 events and tasks listed!`
-- TaskList panel lists all events and tasks whose name contains the exact form of `meet`<br>
-
-------
-## 10. Filter Command
-------
-### 10.1 Filter in filter panel
+### 7.3 Undo/Redo edit command
 > **Command:** <br>
-1. `s`<br>
-2. `22.04.2016`<br>
-> **Result:**<br>
-> 1.
-- Result display panel post message:<br>
-`Enter start date:`
-- The start date text field in filter panel is focused
-
-> 2.
-- Result display panel posts message:<br>
-`Filter the todoList`
-- TaskList panel shows one event `earth day cca event` whose start day is on 22.04.2016
-- Enter `d`, `s`, `e`, `r`, `t` and `p` in command box to jump to deadline, start date, end date, recurring, tag and priority text fields/choice box respectively. Press enter in those text fields/choice box to jump back to command box.
-
-### 10.2 Filter by deadline and recurring
-> **Command:** `filter d/Nov 11 2016 r/weekly`<br>
-> **Result:**<br>
-- Result display panel posts message:<br>
-`2 events and tasks listed!`
-- TaskList panel lists all events and tasks whose deadline is on 11.11.2016 and recurring frequency is weekly
-- The deadline text field in filter panel shows `11.11.2016`
-
-### 10.3 Filter by start date and end date
-> **Command:** `filter s/08.3.2016 e/08.3.2016`<br>
-> **Result:**<br>
-- Result display panel posts message:<br>
-`1 events and tasks listed!`
-- TaskList panel lists all events whose start date and end date are on 08.03.2016
-- The start date and end date text fields in filter panel shows `08.03.2016`
+1. `edit 1 from now to tomorrow now`<br>
+2. `undo` <br>
+3. `redo` <br>
 
 ------
-## 11. Change Directory Command
+## 8. Find Command
 ------
-### 11.1 Changes the default storage location of the app
-> **Command:** `change data/newFile.xml`<br>
+### 8.1 Find by keyword
+> **Command:** `find new pillow`<br>
+> **Result:**
+- Task list panel lists all events and tasks whose title contains `new` or `clothes`
+
+### 8.2 Find by group of words
+> **Command:** `find "new clothes"`<br>
+> **Result:**
+- Task list panel lists all events and tasks whose title contains `new clothes`
+
+### 8.3 Find by substring
+> **Command:** `find cloth`<br>
+> **Result:**
+- TaskList panel lists all events and tasks whose title contains `cloth` as a substring<br>
+
+------
+## 9. Change Path Command
+------
+### 9.1 Changes the default storage location of the app
+> **Command:** `path newFolder`<br>
 > **Result:**
 - Result display panel posts message:<br>
-`Storage location changed: data/newFile.xml`
+`File path changed to newFolder/taskit.xml`
 - Status Foot Bar updates to show the new location.
-- Open the data folder and the `SampleData.xml` and `newFile.xml` should be there.
-- Note: If key in invalid path, result display will post `The file path provided is invalid. It must end with the file type extension, .xml`.
-
-### 11.2 Changes the default storage location of the app and deletes the previous storage file
-> **Command:** `change data/toDoList.xml clear`<br>
-> **Result:**
-- Result display panel posts message:<br>
-`Storage location changed: data/toDoList.xml`
-- Status Foot Bar updates to show the new location.
-- Open the data folder and `toDoList.xml` should be there. `newFile.xml` should not be there.
+- Open the new folder and the `taskit.xml` should be there.
+- Note: If key in invalid path such as `path \`, result display will post `The new file path specified is invalid`.
 
 ------
-## 12. Undo/Redo change Directory Command
+## 10. Save Command
 ------
-### 12.1 Undo changes the default storage location of the app
-> **Command:** `undochange`<br>
+### 10.1 Save the current task manager data to a file
+> **Command:** `save newFoler/newFile.xml`<br>
 > **Result:**
 - Result display panel posts message:<br>
-`Storage location changed back.`
-- Status Foot Bar updates to show `data/newFile.xml`
-- Open the data folder and the `toDoList.xml` and `newFile.xml` should be there.
-
-### 12.2 Undo changes the default storage location of the app and deletes the new storage file
-> **Command:** `undochange clear`<br>
-> **Result:**
-- Result display panel posts message:<br>
-`Storage location changed back.`
-- Status Foot Bar updates to show the `data/SampleData.xml`
-- Open the data folder and `SampleData.xml` should be there and `newFile.xml` should not be there.
-
-### 12.3 Redo change the default storage location of the app
-> **Command:** 1. `redochange` 2. `redochange` (enter twice)<br>
-> **Result:**<br>
-- Result display panel posts message:<br>
-`Storage location changed.`
-- Status Foot Bar updates to show the `toDoList.xml`
-- Open the data folder and `toDoList.xml` should be there. `newFile.xml` should not be there.(It should be in the same status as 11.2)
-- Reboot the app, it will load the file under the path `data/toDoList.xml`
-
-### 12.4 Changes the default storage location back to SampleData.xml
-> **Command:** `change data/SampleData.xml clear`<br>
-> **Result:**<br>
-- Result display panell posts message:<br>
-`Storage location changed: data/SampleData.xml`
+`Saved to  newFolder/file`
+- `newFile.xml` should be at the specified location in the project folder.
+- Note: this command only save a new copy of the task manager, but does not modify the storage file path of the application.
 
 ------
-## 13. Exit Command
+## 11. Exit Command
 ------
 ### 14.1 Exit the app
 > **Command:** `exit`<br>
 > **Result:**<br>
-- toDoList closes and quits.
+- TaskIt closes and quits.
 
 ------
 ## End
