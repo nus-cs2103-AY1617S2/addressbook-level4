@@ -20,13 +20,18 @@ public class RecurUtil {
         assert task != null;
         String taskStartDate = task.getStartDate().toString();
         String taskDueDate = task.getDueDate().toString();
+
         final boolean isStartDateMissing = taskStartDate.isEmpty();
         final boolean isDueDateMissing = taskDueDate.isEmpty();
-        if (isStartDateMissing && isDueDateMissing) {
+        final boolean isBothDatesMissing = isStartDateMissing && isDueDateMissing;
+        
+        final boolean isRecurring = task.getRecur().isRecur();
+
+        if (isBothDatesMissing && isRecurring) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
 }
