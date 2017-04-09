@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.doit.commons.core.LogsCenter;
@@ -39,9 +38,6 @@ public class HelpWindow extends UiPart<Region> {
     private enum CommandColumns {
         COMMAND, PARAMETER, RESULT, EXAMPLE
     }
-
-    @FXML
-    private AnchorPane helpWindowRoot;
 
     @FXML
     private TableView<Map<CommandColumns, String>> commandTable;
@@ -118,7 +114,7 @@ public class HelpWindow extends UiPart<Region> {
                 // Suppress this exception are we expect some Commands to not conform to these methods
             } catch (Exception e) {
                 logger.severe("Java reflection for Command class failed");
-                throw new RuntimeException();
+                return null;
             }
         })
         .filter(p -> p != null) // remove nulls

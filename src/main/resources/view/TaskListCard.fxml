@@ -46,7 +46,7 @@
                                              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
                                          </children>
                                       </HBox>
-                                    <Label fx:id="description" minWidth="180.0" prefHeight="30.0" styleClass="cell_small_label" text="\$description" />
+                                    <ImageView fx:id="descriptionSign" fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true"/>
                                     <FlowPane fx:id="tags" maxHeight="20.0" minWidth="180.0" />
                                 </children>
                             </VBox>
