@@ -4,7 +4,6 @@ TestScript
 () brackets consists of usage keyboard shortcuts or other instructions
 [] brackets consists of suggestions for efficiency
 
-
 load \src\test\data\ManualTesting\SampleData.xml
 > You should see the program loaded with 50 tasks 
 > Note the footer of the app showing the filepath of the loaded file
@@ -160,8 +159,7 @@ redo
 
 
 save \src\test\data\ManualTesting\SampleData.xml
-> Note that there will be an error saying it is currently on the file, it will be auto saved 
-
+> Note that there will be an error saying it is currently on the file, it will be auto saved
 save data/testdata1.xml
 > Note that there will be an error saying the file exists
 
