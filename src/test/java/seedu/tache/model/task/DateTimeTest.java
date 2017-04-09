@@ -100,18 +100,18 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isSameWeekSuccess() throws IllegalValueException {
+    public void isThisWeekSuccess() throws IllegalValueException {
         DateTime thisWeek = new DateTime("this week");
-        assertTrue(thisWeek.isSameWeek());
+        assertTrue(thisWeek.isThisWeek());
     }
 
     @Test
-    public void isSameWeekFailure() throws IllegalValueException {
+    public void isThisWeekFailure() throws IllegalValueException {
         DateTime lastWeek = new DateTime("last week");
-        assertFalse(lastWeek.isSameWeek());
+        assertFalse(lastWeek.isThisWeek());
 
         DateTime nextWeek = new DateTime("next week");
-        assertFalse(nextWeek.isSameWeek());
+        assertFalse(nextWeek.isThisWeek());
     }
 
     @Test

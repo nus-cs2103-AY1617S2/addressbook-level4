@@ -153,18 +153,31 @@ public class DateTime implements Comparable {
     }
 
     //@@author A0139961U
+    /**
+     * Checks if the @param date is same as this object's date.
+     * @param date: The date to check against this object's date.
+     * @return true if the dates are the same, else, return false.
+     */
     public boolean isSameDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(date).equals(sdf.format(this.date));
     }
 
+    /**
+     * Checks if this object's date is today.
+     * @return true if the date is today, else, return false.
+     */
     public boolean isToday() {
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(today).equals(sdf.format(this.date));
     }
 
-    public boolean isSameWeek() {
+    /**
+     * Checks if this object's date falls within this week.
+     * @return true if the date is within this week, else, return false.
+     */
+    public boolean isThisWeek() {
         Date today = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(today);
@@ -173,6 +186,11 @@ public class DateTime implements Comparable {
         return (thisWeekNo == cal.get(Calendar.WEEK_OF_YEAR));
     }
 
+    /**
+     * Removes the time portion in date by setting Hour/Minute/Second/Millisecond to zero.
+     * @param date: The object whose time will be remove.
+     * @return the date with time removed.
+     */
     public static Date removeTime(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -182,6 +200,7 @@ public class DateTime implements Comparable {
         cal.set(Calendar.MILLISECOND, 0);
         return cal.getTime();
     }
+
     //@@author A0150120H
     /**
      * Returns if the parser can find any date and/or time text
