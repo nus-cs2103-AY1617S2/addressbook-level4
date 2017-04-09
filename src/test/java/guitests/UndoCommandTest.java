@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.tache.commons.core.Messages;
+import seedu.tache.logic.commands.DeleteCommand;
+import seedu.tache.logic.commands.EditCommand;
 import seedu.tache.logic.commands.UndoCommand;
 import seedu.tache.testutil.TestTask;
 
@@ -13,19 +15,37 @@ import seedu.tache.testutil.TestTask;
 public class UndoCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void undo() {
-        //nothing to undo
-        commandBox.runCommand("clear");
-        commandBox.runCommand(UndoCommand.COMMAND_WORD);
-        assertResultMessage(UndoCommand.MESSAGE_EMPTY_HISTORY);
-
+    public void undo_addCommand_success() {
         //add one task
-        TestTask[] currentList = new TestTask[0];
+        TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.getFit;
         commandBox.runCommand(taskToAdd.getAddCommand());
         assertUndoSuccess(currentList);
 
         //TODO: Add undo cases for other commands
+    }
+
+    @Test
+    public void undo_deleteCommand_success() {
+        //add one task
+        TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand(DeleteCommand.COMMAND_WORD + " 1");
+        assertUndoSuccess(currentList);
+    }
+
+    @Test
+    public void undo_editCommand_success() {
+        //add one task
+        TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand(EditCommand.COMMAND_WORD + " 5 change ed to 5th November");
+        assertUndoSuccess(currentList);
+    }
+
+    @Test
+    public void undo_emptyHistory_failure() {
+        //nothing to undo
+        commandBox.runCommand(UndoCommand.COMMAND_WORD);
+        assertResultMessage(UndoCommand.MESSAGE_EMPTY_HISTORY);
     }
 
     //@@author A0142255M
