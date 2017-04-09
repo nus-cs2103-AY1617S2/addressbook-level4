@@ -13,7 +13,7 @@
     * [Marking a task as done](#34-marking-a-task-as-done-done)
     * [Marking a task as undone](#35-marking-a-task-as-undone-undone)
     * [Deleting a task](#36-deleting-a-task-delete)
-    * [Undoing/Redoing a command](#371-undo-undo)
+    * [Undoing/Redoing a command](#371-undoing-a-command-undo)
     * [Editing a task](#38-editing-a-task-edit)
     * [Finding a task](#391-finding-a-taskfind)
     * [Using Google Calendar](#310-google-calendar)
@@ -22,6 +22,7 @@
     * [Saving Data](#3132-saving-the-data)
     * [Loading Date](#314-loading-your-own-data)
     * [Changing theme](#315-changing-the-appearance-of-kit)
+    * [Using Shortcuts](#316-using-shortcuts)
 4. [FAQ](#4-faq)
 5. [Command Summary](#5-command-summary)
 
