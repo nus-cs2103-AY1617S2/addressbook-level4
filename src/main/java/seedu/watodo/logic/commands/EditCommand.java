@@ -112,6 +112,7 @@ public class EditCommand extends Command {
         }
     }
 
+    //@@author A0139872R
     /**
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
@@ -154,6 +155,7 @@ public class EditCommand extends Command {
         return new Task(updatedName, startDate, endDate, updatedTags, updatedStatus);
     }
 
+    //@@author
     /**
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.

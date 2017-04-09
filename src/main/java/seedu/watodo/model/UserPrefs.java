@@ -1,8 +1,10 @@
 package seedu.watodo.model;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import seedu.watodo.commons.core.GuiSettings;
+import seedu.watodo.logic.commands.AlternativeCommandsLibrary;
 
 /**
  * Represents User's preferences.
@@ -10,7 +12,18 @@ import seedu.watodo.commons.core.GuiSettings;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
+    public HashMap<String, String> alternativeCommands;
 
+    //@@author A0143076J
+    public HashMap<String, String> getAlternativeCommands() {
+        return alternativeCommands == null ? AlternativeCommandsLibrary.altCommands : alternativeCommands;
+    }
+
+    public void updateLastestAlternativeCommandsLib(HashMap<String, String> alternativeCommands) {
+        this.alternativeCommands = alternativeCommands;
+    }
+
+    //@@author
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
@@ -21,6 +34,7 @@ public class UserPrefs {
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
+        this.alternativeCommands = AlternativeCommandsLibrary.altCommands;
     }
 
     public void setGuiSettings(double width, double height, int x, int y) {

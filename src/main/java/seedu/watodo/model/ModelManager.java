@@ -1,5 +1,6 @@
 package seedu.watodo.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -14,6 +15,7 @@ import seedu.watodo.commons.events.model.TaskListChangedEvent;
 import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.commons.util.CollectionUtil;
 import seedu.watodo.commons.util.StringUtil;
+import seedu.watodo.logic.commands.AlternativeCommandsLibrary;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.ListDeadlineCommand;
 import seedu.watodo.logic.commands.ListDoneCommand;
@@ -34,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
+    private HashMap<String, String> alternativeCommands;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final FilteredList<ReadOnlyTask> importantTasks;
     private Stack< Command > commandHistory;
@@ -53,8 +56,16 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         importantTasks = new FilteredList<>(this.taskManager.getTaskList());
+        this.alternativeCommands = userPrefs.getAlternativeCommands();
+        loadAlternativeComamnds(alternativeCommands);
     }
 
+    //@@author A0143076J
+    private void loadAlternativeComamnds(HashMap<String, String> alternativeCommands) {
+        AlternativeCommandsLibrary.altCommands = alternativeCommands;
+    }
+
+    ///@@author
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
     }
@@ -255,13 +266,12 @@ public class ModelManager extends ComponentManager implements Model {
         private DateTime end = null;
 
         DateQualifier(DateTime start, DateTime end) {
-            assert start != null || end != null;
+            assert end != null;
             if (start != null) {
                 this.start = start;
             }
-            if (end != null) {
-                this.end = end;
-            }
+            this.end = end;
+
         }
 
         @Override
@@ -271,13 +281,16 @@ public class ModelManager extends ComponentManager implements Model {
                 if (task.getEndDate() == null) {
                     return true;
                 }
-                if (start == null) {
-                    return end.isLater(task.getEndDate());
+                if (task.getStartDate() == null && task.getEndDate() != null) {
+                    return end.isLater(task.getEndDate()) || end.equals(task.getEndDate());
                 }
-                if (end == null) {
-                    task.getStartDate().isLater(start);
+                if (task.getStartDate() != null && task.getEndDate() != null) {
+                    if (start != null) {
+                        return (end.isLater(task.getEndDate()) || end.equals(task.getEndDate()))
+                            && (task.getStartDate().isLater(start) || task.getStartDate().equals(start));
+                    }
+                    return end.isLater(task.getEndDate()) || end.equals(task.getEndDate());
                 }
-                return end.isLater(task.getEndDate()) && task.getStartDate().isLater(start);
             }
             return false;
         }

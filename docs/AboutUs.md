@@ -67,6 +67,12 @@ We are a team based in the [School of Computing, National University of Singapor
 -----
 
 # Other Major Contributors
+
+#### [Joel Tan](http://github.com/JoelT-92)
+Role: Tutor <br>
+
+-----
+
 #### [Henry Chia](http://github.com/hwkchia)
 Role: Lecturer <br>
 
@@ -83,11 +89,6 @@ Role: Tutor <br>
 -----
 
 #### [Brandon Yeo](http://github.com/brandonyeoxg)
-Role: Tutor <br>
-
------
-
-#### [Joel Tan](http://github.com/JoelT-92)
 Role: Tutor <br>
 
 -----
