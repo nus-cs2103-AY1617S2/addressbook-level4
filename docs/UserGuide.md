@@ -16,7 +16,7 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
    > Having any Java 8 version is not enough. <br>
    > This app will not work with earlier versions of Java 8.
 
-1. Download the latest `TaskSceduler.jar` from the [releases](../../../releases) tab.
+1. Download the latest `YATS.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Scheduler.
 3. Double-click the file to start the app. The GUI should appear in a few seconds.
    > <img src="images/Ui.png" width="600">
@@ -24,8 +24,8 @@ By : `Team T16-B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Feb 2017`  &nbsp;&nbsp;&nbs
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.
 5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add task`**` My task -d July 23 -t 2300` :
+   * **`list`** : lists all tasks that have not been completed
+   * **`add`**` My task -d July 23 -t 2300` :
      adds a task named `My Task` to the Task Scheduler.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
@@ -126,11 +126,13 @@ Format: `edit INDEX [b/DEADLINE s/TIME e/TIME d/DESCRIPTION t/TAGS]`
 > * At least one of the optional fields must be provided.
 > * Existing values will be updated to the input values.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> * You can add on the the tags by specifying new tags.
+> * You can remove specific tags of a task by re-inputing it by `t/`TAG.
 
 Examples:
 
 * `edit 1 b/02-02-2017 t/school`<br>
-  Edits the deadline and tag of the 1st task to be 02-02-2017 and school respectively.
+  Edits the deadline of the 1st task to be 02-02-2017 and adds on the tag "school".
 
 * `edit 2 Math Homework t/`<br>
   Edits the name of the 2nd task to be Math Homework and clears all existing tags.
@@ -144,15 +146,19 @@ Format: `delete INDEX`
 > The index refers to the index number shown in the most recent listing.<br>
 > The index **must be a positive integer** 1, 2, 3, ...
 > The index must be within the specified list of indexes available
+> Can be performed in batches by specifing more than one valid integer separated by spaces
 
 Examples:
 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd task in the task scheduler.
+  Deletes the 2nd task in the undone list of the task scheduler.
 * `list Task2`<br>
   `delete 1`<br>
   Deletes the 1st task in the results of the `list` command.
+* `list`<br>
+  `delete 1 2 3`<br>
+  Deletes the 1st, 2nd and 3rd tasks in the undone list of the task scheduler.
 
 ### 2.9. Mark task as done : `mark`
 
@@ -160,14 +166,18 @@ Marks the specified task from the task scheduler as done.
 Format: `mark INDEX`
 
 > Marks the task at the specified `INDEX` as done. <br>
-> The index refers to the index number shown in the most recent listing.<br>
+> The index refers to the index number shown in the undone tasks listing.<br>
 > The index **must be a positive interger** 1, 2, 3, ...
 > The index must be within the specified list of indexes available
+> Can be performed in batches by specifing more than one valid integer separated by spaces
 
 Examples:
 
 * `mark 1`<br>
   Marks the 1st task in the task scheduler as done.
+  
+* `mark 1 2 3`<br>
+  Marks the 1st, 2nd and 3rd tasks in the done task list of the task scheduler as done.
 
 ### 2.10. Mark task as not done : `unmark`
 
@@ -175,14 +185,18 @@ Marks the specified task from the task scheduler as done.
 Format: `unmark INDEX`
 
 > Marks the task at the specified `INDEX` as not done. <br>
-> The index refers to the index number shown in the most recent listing.<br>
+> The index refers to the index number shown in the most done tasks listing.<br>
 > The index **must be a positive interger** 1, 2, 3, ...
 > The index must be within the specified list of indexes available
+> Can be performed in batches by specifing more than one valid integer separated by spaces
 
 Examples:
 
 * `unmark 1`<br>
-  Marks the 1st task in the task scheduler as not done.
+  Marks the 1st task in the done task list of the task scheduler as not done.
+  
+* `unmark 1 2 3`<br>
+  Marks the 1st, 2nd and 3rd tasks in the done task list of the task scheduler as not done.
 
 ### 2.11. Clearing all done tasks : `clear`
 
@@ -262,15 +276,18 @@ Example:
 
 * **Mark as Done** : `mark INDEX` <br>
    e.g. `mark 1`
+   e.g. `mark 1 4 6`
 
 * **Mark as Not Done** : `unmark INDEX` <br>
    e.g. `unmark 1`
+   e.g. `unmark 2 3 4`
 
 * **Clear Done Task** : `clear` <br>
    e.g. `clear`
 
 * **Delete** : `delete INDEX` <br>
    e.g. `delete 3`
+   e.g. `delete 2 4 6`
 
 * **Find** : `list ATTRIBUTE KEYWORD [MORE_KEYWORDS]` <br>
    e.g. `list by tag homework`
