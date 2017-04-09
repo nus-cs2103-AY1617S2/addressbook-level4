@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.tag.Tag;
+import seedu.task.model.task.Group;
 import seedu.task.model.task.ReadOnlyTask;
 
 //@@author A0164032U
@@ -44,7 +45,11 @@ public class TaskCard extends UiPart<Region> {
             start.setText("Starts: " + person.getStartDate());
         }
 
-        group.setText(person.getGroup().value);
+        if (!person.getGroup().value.equals(Group.GROUP_ID_HIDDEN)) {
+            group.setText(person.getGroup().value);
+        } else {
+            group.setVisible(false);
+        }
 
         if (person.hasPassed()) {
             setStyleToIndicateEndDatePassed();

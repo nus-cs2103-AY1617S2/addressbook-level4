@@ -9,6 +9,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
  */
 public class Group {
 
+    public static final String GROUP_ID_HIDDEN = "__NO_GROUP__";
     public static final String MESSAGE_GROUP_CONSTRAINTS =
             "Task group can take any values, and it should not be blank";
 
