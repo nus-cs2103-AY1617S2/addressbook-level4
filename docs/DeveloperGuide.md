@@ -83,9 +83,6 @@ _Figure 2.1.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -214,7 +211,7 @@ The `Model`,
 * Exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * Does not depend on any of the other three components.
-* Defines reccuring tasks in the following way:
+* Defines recurring tasks in the following way:
   * Class `RecurringTaskOccurrence` encapsulates 2 Timing objects (start & end times) and a boolean to indicate if
   the occurrence is complete.
   * Class `Task` encapsulates a list of `RecurringTaskOccurrence` objects. In addition, it also encapsulates a
@@ -242,11 +239,11 @@ The `Storage` component,
 * can save Task List data from any properly formatted file.
 * can load Task List data from any properly formatted file.
 <br>
-The storage component is an example of the singleton design principle because there is only one instance of Storage, accessible through the MainApp class.
+> The storage component is an example of the singleton design principle because there is only one instance of Storage, accessible through the MainApp class.
 
-The storage component interacts with the logic component during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command, the logic component makes a save requeset to the storage component. The storage component replies with a notice of either success or failure, since sometimes file operations will fail.
+> The storage component interacts with the logic component during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command, the logic component makes a save requeset to the storage component. The storage component replies with a notice of either success or failure, since sometimes file operations will fail.
 
-Adding functionality which allows for saving task data in a new location exemplifies the Open Close principle, because its implementation only added new functions to meet this need, instead of changing existing ones. The Open Close principle states that software should be open to extensions but closed to modifications.
+> Adding functionality which allows for saving task data in a new location exemplifies the Open Close principle, because its implementation only added new functions to meet this need, instead of changing existing ones. The Open Close principle states that software should be open to extensions but closed to modifications.
 
 ### 2.6. Common classes
 
@@ -281,11 +278,11 @@ Certain properties of the application can be controlled (e.g App name, logging l
 (default: `config.json`):
 
 The config.json file contains several attributes:
-> `appTitle` is the name of the application
-> `logLevel` is the default level for the logger
-> `userPrefsFilePath` is the file path to the user preferences file
-> `taskManagerFilePath` is the file path to the task manager save data
-> `taskManagerName` is the name of the task manager application
+* `appTitle` is the name of the application
+* `logLevel` is the default level for the logger
+* `userPrefsFilePath` is the file path to the user preferences file
+* `taskManagerFilePath` is the file path to the task manager save data
+* `taskManagerName` is the name of the task manager application
 
 `taskManagerFilePath` is manipulated automatically when a successful `save` or `load` command is executed. When this occurs, `taskManagerFilePath` is updated to the user-specified file location, and this location becomes the default for future Task Manager sessions.
 
