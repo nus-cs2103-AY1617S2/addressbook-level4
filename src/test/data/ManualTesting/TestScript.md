@@ -72,8 +72,8 @@ Example: add John owes money s/02-03-2017 e/03-03-2017 r/john owes me $100 l/joh
 | Day of the week | Wed, Wednesday       |
 | Relative date   | today, tomorrow, next wed |
 
-> * If no year is specified, it is assumed to be the current year.
-> * The day of the week refers to the following week. For example, today is Sunday (30 Oct). will interpret Wednesday and Sunday as 2 Nov and 6 Nov respectively (a week from now).
+* If no year is specified, it is assumed to be the current year.
+* The day of the week refers to the following week. For example, today is Sunday (30 Oct). will interpret Wednesday and Sunday as 2 Nov and 6 Nov respectively (a week from now).
 
 
 <br>
@@ -84,11 +84,11 @@ Example: add John owes money s/02-03-2017 e/03-03-2017 r/john owes me $100 l/joh
 | Hour:Minute     | 10:30                                   |
 | Relative time   | this morning, this afternoon, tonight, am, pm   |
 
-> Tasks can be entered without a time input.
->
-> KIT will assume that task that are entered without time will take the time when the task was being added to KIT.
->
-**Date the are shown in KIT are all represented in mm/dd/yyyy.**
+* Tasks can be entered without a time input.
+
+* KIT will assume that task that are entered without time will take the time when the task was being added to KIT.
+
+* **Date the are shown in KIT are all represented in mm/dd/yyyy.**
 
 
 ## Select
