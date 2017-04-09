@@ -194,6 +194,7 @@ The sections below will give more details of each single component.
 
 
 ### 3.2. UI component
+**Author:** Wong Jun Wei
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
@@ -219,6 +220,7 @@ Function of `UI`
 ```
 
 ### 3.3. Logic component
+**Author:** Francis Cheng
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
@@ -240,6 +242,18 @@ Function of `Logic`
 The `CliSyntax` class stores the prefix that is used to detect input and differentiate it from different details. The prefix used are
 "by:", "from:", "to:", "@", "p/". They represent deadline, start date, end date, time and priority respectively and are used in add
 and edit commands.
+
+**Purpose of `DateParser`**
+
+The main purpose of `DateParser` class is to use the natty libraries to convert inputs to dates. `DateParser` class consists of the
+following methods:
+
+* parse()             : returns a list of potential dates
+* resetTime()         : sets time to 23:59:59 by default if no time is indicated
+* getDateString()     : returns the correct format for date to be displayed in the application
+* isValidSchedule()   : checks if start and end date is correct
+* isValidDateFormat() : checks if the input is representative of a date
+
 
 **Common Commands**
 
@@ -309,6 +323,7 @@ _Figure 3.3.4 : Interactions Inside the Logic Component for the `undo` Command_
 
 
 ### 3.4. Model component
+**Author:** Dana Baghabrah
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
@@ -347,6 +362,7 @@ In this interaction, the given task is removed from the task list. The `ModelMan
 
 
 ### 3.5. Storage component
+**Author:** Leong Wei Wen
 
 <img src="images/StorageClassDiagram.png" width="800"><br>
 
