@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
-    private TaskManagerStateHistory history;
+    private TaskManagerStateHistory taskManagerHistory;
     private final SyncManager syncManager;
     private boolean isSyncOn;
 
@@ -44,7 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        this.history = new TaskManagerStateHistory();
+        this.taskManagerHistory = new TaskManagerStateHistory();
         this.syncManager = new SyncManager(new SyncServiceGtask());
         this.isSyncOn = false;
     }
@@ -55,7 +55,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
@@ -82,7 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
@@ -92,7 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
@@ -106,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
@@ -118,7 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0148087W
     @Override
     public void resetToPreviousState() throws InvalidUndoException {
-        this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
+        this.taskManager.resetData(this.taskManagerHistory.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
             syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
@@ -127,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetToNextState() throws InvalidUndoException {
-        this.taskManager.resetData(this.history.getNextState(this.taskManager));
+        this.taskManager.resetData(this.taskManagerHistory.getNextState(this.taskManager));
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
             syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
