@@ -486,7 +486,7 @@ public class ModelManager extends ComponentManager implements Model {
          * returns true if task's {@code StartDate} comes before given
          * {@code StartDate} returns true if task's {@code StartDate} comes
          * before given {@code StartDate}
-         * 
+         *
          */
         private boolean compareBeforeStart(TaskDate taskStartDate) {
             assert taskStartDate != null;
@@ -535,7 +535,7 @@ public class ModelManager extends ComponentManager implements Model {
         /**
          * returns true if task's {@code DueDate} comes after given
          * {@code DueDate}
-         * 
+         *
          */
         private boolean compareAfterDue(TaskDate taskDueDate) {
             assert taskDueDate != null;
