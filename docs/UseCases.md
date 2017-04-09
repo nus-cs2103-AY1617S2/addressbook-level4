@@ -119,7 +119,7 @@ Use case ends
 
 **MSS**
 
-1. User requests to find tasks based on the attributes
+1. User requests to find tasks based on keywords and/or attributes
 2. Opus shows a list of tasks
 
 Use case ends
