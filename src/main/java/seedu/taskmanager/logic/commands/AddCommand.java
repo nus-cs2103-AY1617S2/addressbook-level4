@@ -10,7 +10,6 @@ import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.ui.TabSelectionChangedEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
-import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Description;
@@ -105,12 +104,6 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-    }
-
-    public void pseudoExecute(Model model) {
-        assert model != null;
-        EventsCenter.getInstance().post(new TabSelectionChangedEvent(TAB_TO_DO_INDEX));
-        model.highlightTask(this.toAdd);
     }
 
     // @@author A0140032E

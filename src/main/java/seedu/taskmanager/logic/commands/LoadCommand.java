@@ -14,18 +14,17 @@ import seedu.taskmanager.model.TaskManager;
 
 // @@author A0114269E
 /**
- * Loads Task Manager from user-specified path XML file and changes the directory to that file path.
- * If no XML is found, starting a new Task Manager with new XML file at given file path
- * Path matching is case sensitive.
+ * Loads Task Manager from user-specified path XML file and changes the
+ * directory to that file path. If no XML is found, starting a new Task Manager
+ * with new XML file at given file path Path matching is case sensitive.
  */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String ALTERNATIVE_COMMAND_WORD = "open";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the directory of the taskmanager."
-            + "xml file to allow user to sync with cloud services\n"
-            + "Parameters: PATH...\n"
-            + "Example: " + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
+            + "xml file to allow user to sync with cloud services\n" + "Parameters: PATH...\n" + "Example: "
+            + COMMAND_WORD + " /User/admin/Documents/taskmanager.xml";
 
     public static final String MESSAGE_SUCCESS = "TaskManager successfully loaded : %1$s";
     public static final String MESSAGE_NEW_FILE = "WARNING! No XML file is found\n"
@@ -48,9 +47,9 @@ public class LoadCommand extends Command {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         File forPermissionTest = new File(this.newPath);
-        if(!forPermissionTest.canWrite()){
+        if (!forPermissionTest.canWrite()) {
             throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
-          }
+        }
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);

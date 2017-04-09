@@ -95,8 +95,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0131278H
     /** Raises an event to indicate an automatic selection */
-    private void indicateJumpToListRequestEvent(int index) {
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    public void indicateJumpToListRequestEvent(int index) {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index, false));
     }
     // @@author
 

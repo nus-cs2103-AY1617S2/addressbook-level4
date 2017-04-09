@@ -104,5 +104,8 @@ public interface Model {
     // @@author A0131278H
     /** Sets the currently selected tab in model */
     void setSelectedTab(String selectedTab);
+
+    /** Raises an event to indicate the model has changed */
+    public void indicateJumpToListRequestEvent(int index);
     // @@author
 }
