@@ -101,7 +101,8 @@ public class Parser {
             return new UpdateCommandParser().parse(arguments);
 
         default:
-            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+            return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND + "Type HELP for user guide with "
+                    + "detailed explanations of all commands");
         }
     }
 
