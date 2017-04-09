@@ -19,9 +19,9 @@
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Circle fill="#0076dd" radius="5.0" stroke="BLACK" strokeType="INSIDE" translateX="352.0" translateY="49.0" />
+      <Circle fill="#0076dd" radius="5.0" stroke="BLACK" strokeType="INSIDE" translateX="362.0" translateY="49.0" />
       <Circle fill="#0076dd" radius="5.0" stroke="BLACK" strokeType="INSIDE" translateX="35.0" translateY="47.5" />
-      <Circle fill="#0076dd" radius="5.0" stroke="BLACK" strokeType="INSIDE" translateX="180.0" translateY="48.0" />
+      <Circle fill="#0076dd" radius="5.0" stroke="BLACK" strokeType="INSIDE" translateX="192.0" translateY="48.0" />
         <GridPane prefHeight="105.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
@@ -49,8 +49,8 @@
                         </HBox>
                         <FlowPane fx:id="tags" />
                         <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" translateX="15.0" translateY="10.0" />
-                        <Label fx:id="taskTime" styleClass="cell_small_label" text="\$taskTime" translateX="170.0" translateY="-3.0" />
-                        <Label fx:id="taskDescription" styleClass="cell_small_label" text="\$taskDescription" translateX="320.0" translateY="-16.0" wrapText="true" />
+                        <Label fx:id="taskTime" styleClass="cell_small_label" text="\$taskTime" translateX="180.0" translateY="-3.0" />
+                        <Label fx:id="taskDescription" styleClass="cell_small_label" text="\$taskDescription" translateX="330.0" translateY="-16.0" wrapText="true" />
                         <Label fx:id="taskStatus" styleClass="cell_small_label" text="\$taskStatus" translateY="-5.0" />
                     </children>
                 </VBox>
