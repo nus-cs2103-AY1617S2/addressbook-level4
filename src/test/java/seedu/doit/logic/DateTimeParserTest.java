@@ -28,12 +28,12 @@ public class DateTimeParserTest {
 
     @Test
     public void check_ifDateParsedCorrectly() throws Exception {
-        Optional<LocalDateTime> t = DateTimeParser.parseDateTime("03/20/17");
+        Optional<LocalDateTime> t = DateTimeParser.parseDateTime("20/3/17");
         assertSameDate(t.get(), LocalDateTime.of(2017, 3, 20, 0, 0));
     }
 
     @Test
-    public void parseEmptyString() {
+    public void parseEmptyString() throws Exception {
         Optional<LocalDateTime> dateParsed = DateTimeParser.parseDateTime("");
         assertFalse(dateParsed.isPresent());
     }
@@ -45,7 +45,7 @@ public class DateTimeParserTest {
     }
 
     @Test
-    public void parseRubbishString() {
+    public void parseRubbishString() throws Exception {
         Optional<LocalDateTime> dateParsed = DateTimeParser.parseDateTime("jsadf");
         assertFalse(dateParsed.isPresent());
     }

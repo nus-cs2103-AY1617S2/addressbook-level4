@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -20,6 +21,7 @@ public class TaskCard extends UiPart<Region> {
     private static final String tickSource = "/images/tick.png";
     private static final String highSource = "/images/high.png";
     private static final String medSource = "/images/med.png";
+    private static final String descriptionSource = "/images/descriptionSign.png";
 
     @FXML
     private HBox cardPane;
@@ -28,7 +30,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label description;
+    private ImageView descriptionSign;
     @FXML
     private Label deadline;
     @FXML
@@ -40,9 +42,11 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Circle labelBullet;
 
+
     private Image tick;
     private Image high;
     private Image med;
+    private Image description;
 
   //@@author: A0160076L
     public TaskCard(ReadOnlyTask task, int displayedIndex) {
@@ -50,19 +54,36 @@ public class TaskCard extends UiPart<Region> {
         this.name.setText(task.getName().fullName);
         this.id.setText(displayedIndex + ". ");
         setStartTimeEndTime(task);
-        setOverdue(task);
+        setTimeColor(task);
         setLabelBullet(task);
-        this.description.setText(task.getDescription().value);
+        setDescriptionSign(task);
         initTags(task);
     }
 
     public boolean isOverdue(String dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         LocalDateTime dateTimeToCompare = LocalDateTime.parse(dateTime, formatter);
         return !currentDateTime.isBefore(dateTimeToCompare);
     }
 
+    public boolean isDueSoon(String dateTime) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        LocalDateTime dateTimeToCompare = LocalDateTime.parse(dateTime, formatter);
+        return !currentDateTime.isBefore(dateTimeToCompare.minusDays(3));
+    }
+
+    private void setDescriptionSign(ReadOnlyTask task) {
+        this.description = new Image(descriptionSource);
+        this.descriptionSign.setImage(this.description);
+
+        if (task.getDescription() != null && !task.getDescription().toString().equals("")) {
+            this.descriptionSign.setVisible(true);
+        } else {
+            this.descriptionSign.setVisible(false);
+        }
+    }
     private void initTags(ReadOnlyTask task) {
         task.getTags().forEach(tag -> this.tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -83,17 +104,31 @@ public class TaskCard extends UiPart<Region> {
         }
     }
 
-    private void setOverdue(ReadOnlyTask task) {
+    private void setTimeColor(ReadOnlyTask task) {
         if (task.hasEndTime() && isOverdue(task.getDeadline().value)) {
-            this.startTime.setStyle("-fx-text-fill:red");
-            this.deadline.setStyle("-fx-text-fill:red");
-            this.to.setStyle("-fx-text-fill:red");
+            setOverdue(task);
+        } else if (task.hasEndTime() && isDueSoon(task.getDeadline().value)) {
+            setDueSoon(task);
         } else {
-            this.startTime.setStyle("-fx-text-fill:white");
-            this.deadline.setStyle("-fx-text-fill:white");
-            this.to.setStyle("-fx-text-fill:white");
+            setNormalColor(task);
         }
+    }
+    private void setOverdue(ReadOnlyTask task) {
+        this.startTime.setStyle("-fx-text-fill:red");
+        this.deadline.setStyle("-fx-text-fill:red");
+        this.to.setStyle("-fx-text-fill:red");
+    }
 
+    private void setNormalColor(ReadOnlyTask task) {
+        this.startTime.setStyle("-fx-text-fill:white");
+        this.deadline.setStyle("-fx-text-fill:white");
+        this.to.setStyle("-fx-text-fill:white");
+    }
+
+    private void setDueSoon(ReadOnlyTask task) {
+        this.startTime.setStyle("-fx-text-fill: #FFFF66");
+        this.deadline.setStyle("-fx-text-fill:  #FFFF66");
+        this.to.setStyle("-fx-text-fill:#FFFF66");
     }
     private void setStartTimeEndTime(ReadOnlyTask task) {
         if (task.hasStartTime() && task.hasEndTime()) {

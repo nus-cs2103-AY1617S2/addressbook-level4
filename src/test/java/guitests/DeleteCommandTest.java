@@ -67,14 +67,11 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         //confirm the list now contains all previous tasks except the deleted task
         assertAllPanelsMatch(expectedRemainder);
 
-        HashSet<Integer> deletedTaskIndexes = new HashSet<>();
-        deletedTaskIndexes.add(targetIndexOneIndexed);
         HashSet<ReadOnlyTask> tasksToDelete = new HashSet<>();
         tasksToDelete.add(taskToDelete);
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete,
-            deletedTaskIndexes)));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete)));
     }
 
 }

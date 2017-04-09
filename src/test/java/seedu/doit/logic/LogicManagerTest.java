@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -109,14 +108,8 @@ public class LogicManagerTest {
         this.logic = new LogicManager(this.model, this.storage);
         EventsCenter.getInstance().registerHandler(this);
 
-        this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager()); // last
-                                                                                    // saved
-                                                                                    // assumed
-                                                                                    // to
-                                                                                    // be
-                                                                                    // up
-                                                                                    // to
-                                                                                    // date
+        this.latestSavedTaskManager = new TaskManager(this.model.getTaskManager());
+        // last saved assumed to be up to date
         this.helpShown = false;
         this.targetedJumpIndex = -1; // non yet
     }
@@ -372,14 +365,10 @@ public class LogicManagerTest {
         expectedTM.removeTask(threeTasks.get(1));
         helper.addToModel(this.model, threeTasks);
 
-        HashSet<Integer> indexToDelete = new HashSet<>();
-        int intToDelete = 2;
-        indexToDelete.add(intToDelete);
-
         HashSet<ReadOnlyTask> tasksToDelete = new HashSet<>();
         tasksToDelete.add(threeTasks.get(1));
 
-        String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete, indexToDelete));
+        String resultMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, tasksToString(tasksToDelete));
 
         assertCommandSuccess("delete 2", resultMessage, expectedTM, expectedTM.getTaskList());
     }
@@ -397,10 +386,9 @@ public class LogicManagerTest {
 
         helper.addToModel(this.model, fourTasks);
 
-        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 2, 3, 4);
         HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(1),
-                fourTasks.get(2), fourTasks.get(3));
-        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+            fourTasks.get(2), fourTasks.get(3));
+        String tasksAsString = CommandResult.tasksToString(deletedTasks);
 
         // Delete all tasks ranging from 1 to 4
         // Then checks if the task manager have no tasks left
@@ -420,9 +408,8 @@ public class LogicManagerTest {
 
         helper.addToModel(this.model, fourTasks);
 
-        Set<Integer> taskIndexesToDelete = helper.generateNumberSet(1, 4);
         HashSet<ReadOnlyTask> deletedTasks = helper.generateTaskSet(fourTasks.get(0), fourTasks.get(3));
-        String tasksAsString = CommandResult.tasksToString(deletedTasks, taskIndexesToDelete);
+        String tasksAsString = CommandResult.tasksToString(deletedTasks);
 
         // Delete tasks 1 and 4
         // Then checks if the task manager have no tasks left
@@ -558,7 +545,7 @@ public class LogicManagerTest {
          *            used to generate the task data field values
          */
         private Task generateTask(int seed) throws Exception {
-            return new Task(new Name("Task " + seed), new Priority("high"), new EndTime(seed + "2359"),
+            return new Task(new Name("Task " + seed), new Priority("high"), new EndTime("today " + "2359"),
                     new Description("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
@@ -666,10 +653,6 @@ public class LogicManagerTest {
 
         private HashSet<ReadOnlyTask> generateTaskSet(ReadOnlyTask... tasks) {
             return new HashSet<>(Arrays.asList(tasks));
-        }
-
-        private HashSet<Integer> generateNumberSet(Integer... numbers) {
-            return new HashSet<>(Arrays.asList(numbers));
         }
     }
 }

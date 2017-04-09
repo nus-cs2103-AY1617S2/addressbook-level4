@@ -79,19 +79,19 @@ public class TestUtil {
             //CHECKSTYLE.OFF: LineLength
             return new Task[] {
                 new Task(new Name("Ali Muster"), new Priority("low"), new EndTime("next friday"), new Description("4th street"), new UniqueTagList()),
-                new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("29/5/17"), new Description("81th street"), new UniqueTagList()),
+                new Task(new Name("Boris Mueller"), new Priority("med"), new EndTime("05/05/17"), new Description("81th street"), new UniqueTagList()),
                 new Task(new Name("Carl Kurz"), new Priority("high"), new EndTime("friday"), new Description("wall street"), new UniqueTagList()),
                 new Task(new Name("Daniel Meier"), new Priority("high"), new EndTime("next monday"), new Description("10th street"), new UniqueTagList()),
                 new Task(new Name("Elle Meyer"), new Priority("med"), new EndTime("next monday"), new Description("michegan ave"), new UniqueTagList()),
                 new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
-                new Task(new Name("George Best"), new Priority("high"), new EndTime("22/12/17"), new Description("4th street"), new UniqueTagList()),
+                new Task(new Name("George Best"), new Priority("high"), new EndTime("12/12/17"), new Description("4th street"), new UniqueTagList()),
                 new Task(new Name("Fiona Kunz"), new Priority("low"), new EndTime("sunday"), new Description("little tokyo"), new UniqueTagList()),
                 new Task(new Name("AAAAAFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("BBBBBFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("CCCCCFloating"), new Priority("med"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
-                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("3/19/17"), new EndTime("3/20/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("AAAAAEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("BBBBBEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
+                new Task(new Name("CCCCCEvent"), new Priority("med"), new StartTime("03/03/17"), new EndTime("03/03/17"), new Description("l"), new UniqueTagList()),
                 new Task(new Name("Hoon Meier"), new Priority("med"), new EndTime("9pm"), new Description("little india"), new UniqueTagList()),
                 new Task(new Name("Ida Mueller"), new Priority("low"), new EndTime("tomorrow 5pm"), new Description("chicago ave"), new UniqueTagList())
             };
