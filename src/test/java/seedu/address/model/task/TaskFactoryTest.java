@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -71,8 +70,21 @@ public class TaskFactoryTest {
                     UniqueTagList.build());
         } catch (IllegalValueException e) {
             e.printStackTrace();
+            assertTrue(false);
         }
-        assertFalse(task != null);
+
+     // Test: End date before start date
+        try {
+            task = Task.factory(
+                    new Name("Go to the beach"),
+                    new Group("Vacation"),
+                    new StartDate("tomorrow"),
+                    new EndDate("today"),
+                    UniqueTagList.build());
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assertTrue(false);
+        }
 
         // Test: without required field (UniqueTagList)
         try {

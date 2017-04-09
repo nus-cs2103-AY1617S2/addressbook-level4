@@ -155,6 +155,13 @@ public class Task implements ReadOnlyTask {
         return getEndTime().compareTo(o.getEndTime());
     }
 
+    private static final String FACTORY_ERROR_NULL =
+            "Task Factory: new task requires a name, group, and tag list.";
+    private static final String FACTORY_ERROR_TIME =
+            "Task Factory: new task's end time is before the start time.";
+    private static final String FACTORY_ERROR_NOEND =
+            "Task Factory: new task requires an end date if given a start date.";
+
     //@@author A0163848R
     /**
      * Factory method to build a Task or Task-inheriting class from a given unordered array of properties.
@@ -170,10 +177,13 @@ public class Task implements ReadOnlyTask {
         EndDate end = CollectionUtil.firstOf(properties, EndDate.class);
 
         if (CollectionUtil.isAnyNull(name, group, tags)) {
-            throw new IllegalValueException("Task Factory: new task requires a name, group, and tag list");
+            throw new IllegalValueException(FACTORY_ERROR_NULL);
         }
 
         if (start != null && end != null) {
+            if (0 > end.getTime().compareTo(start.getTime())) {
+                throw new IllegalValueException(FACTORY_ERROR_TIME);
+            }
             return new Task(name, start, end, group, tags);
         } else if (start == null && end != null) {
             return new DeadlineTask(name, end, group, tags);
@@ -181,7 +191,7 @@ public class Task implements ReadOnlyTask {
             return new FloatingTask(name, group, tags);
         }
 
-        return null;
+        throw new IllegalValueException(FACTORY_ERROR_NOEND);
     }
 
 
