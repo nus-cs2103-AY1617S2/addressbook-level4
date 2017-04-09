@@ -42,7 +42,7 @@ public class MainMenuHandle extends GuiHandle {
     }
 
     private void useCTRLYAccelerator() {
-        this.guiRobot.push(KeyCode.CONTROL, KeyCode.Z);
+        this.guiRobot.push(KeyCode.CONTROL, KeyCode.Y);
         this.guiRobot.sleep(500);
     }
     // @@author
