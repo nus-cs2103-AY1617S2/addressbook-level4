@@ -13,6 +13,8 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Task count](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
     * [List timed/floating tasks](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#35-list-all-tasks--list)
     * [Autocomplete function](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#5-faq-frequently-asked-questions)
+    * [Calendar display](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#310-navigate-the-calendar)
+    * [Retrieve previous commands](https://cs2103jan2017-t09-b4.github.io/main/docs/UserGuide.html#5-faq-frequently-asked-questions)
 * Code written: [[functional code](A0142255M.md)][[test code](A0142255M.md)]
 * Other major contributions:
 	* Did initial morph, formatting and restructuring of documentation from AddressBook to Tache
@@ -51,7 +53,7 @@ We are a team based in the [School of Computing, National University of Singapor
   * Enhanced `list` command with `list today`, `list this week` and `list overdue` functions [[link1](https://github.com/CS2103JAN2017-T09-B4/main/pull/150)] [[link2](https://github.com/CS2103JAN2017-T09-B4/main/commit/d823324a9ee20a8fef22b5ba78ea0dc2db851f3e)]
   * Implemented sorting of tasks by chronological order [[link](https://github.com/CS2103JAN2017-T09-B4/main/pull/214)]
   * Implemented shorter commands so that advanced user can type faster [[link](https://github.com/CS2103JAN2017-T09-B4/main/pull/216)]
-  
+
 -----
 
 #### [Brandon Tan Jian Sin](http://github.com/BrandonTJS)

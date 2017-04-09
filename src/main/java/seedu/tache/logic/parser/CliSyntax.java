@@ -14,28 +14,19 @@ public class CliSyntax {
     public static final String DELIMITER_EDIT_PARAMETER = new String(" ");
 
     /* Natural Language Processing definitions */
-    public static final String KEYWORD_EDIT_PARAMETER = " change ";
-    public static final String KEYWORD_EDIT_PARAMETER_VALUE = " to ";
-    public static final String KEYWORD_EDIT_MULTI_PARAMETER = " and ";
-    public static final String KEYWORDS_EDIT_MULTI_PARAMETER = " and change ";
+    public static final String KEYWORD_EDIT_PARAMETER_VALUE = "to";
+    public static final String KEYWORD_EDIT_PARAMETER = "change";
+    public static final String KEYWORD_EDIT_MULTI_PARAMETER = "and";
 
     /* Parameter names definitions */
-    public static final String PARAMETER_NAME = "name";
-    public static final String PARAMETER_NAME_2 = "n";
-    public static final String PARAMETER_START_DATE = "start_date";
-    public static final String PARAMETER_START_DATE_2 = "startdate";
-    public static final String PARAMETER_START_DATE_3 = "sd";
-    public static final String PARAMETER_END_DATE = "end_date";
-    public static final String PARAMETER_END_DATE_2 = "enddate";
-    public static final String PARAMETER_END_DATE_3 = "ed";
-    public static final String PARAMETER_START_TIME = "start_time";
-    public static final String PARAMETER_START_TIME_2 = "starttime";
-    public static final String PARAMETER_START_TIME_3 = "st";
-    public static final String PARAMETER_END_TIME = "end_time";
-    public static final String PARAMETER_END_TIME_2 = "endtime";
-    public static final String PARAMETER_END_TIME_3 = "et";
-    public static final String PARAMETER_TAG = "tag";
-    public static final String PARAMETER_TAG_2 = "t";
+    public static final String[] PARAMETER_NAME = {"name", "n"};
+    public static final String[] PARAMETER_START_DATE = {"start_date", "startdate", "sd"};
+    public static final String[] PARAMETER_END_DATE = {"end_date", "enddate", "ed"};
+    public static final String[] PARAMETER_START_TIME = {"start_time", "starttime", "st"};
+    public static final String[] PARAMETER_END_TIME = {"end_time", "endtime", "et"};
+    public static final String[] PARAMETER_TAG = {"tag", "t"};
+    public static final String[] PARAMETER_RECUR_INTERVAL = {"recur_interval", "recurinterval", "ri"};
+    public static final String[] PARAMETER_RECUR_STATUS = {"recur_status", "recurstatus", "rs"};
 
     /* List filter definitions */
     public static final String FILTER_COMPLETED = "completed";
@@ -44,11 +35,16 @@ public class CliSyntax {
     //@@author A0142255M
     public static final String FILTER_TIMED = "timed";
     public static final String FILTER_FLOATING = "floating";
-    //@@author
     //@@author A0139961U
     public static final String FILTER_DUE_TODAY = "today";
     public static final String FILTER_DUE_THIS_WEEK = "this week";
     public static final String FILTER_OVERDUE = "overdue";
+
+    //@@author A0142255M
+    /* Calendar show view options */
+    public static final String VIEW_DAY = "day";
+    public static final String VIEW_WEEK = "week";
+    public static final String VIEW_MONTH = "month";
     //@@author
   //@@author A0150120H
     public static final String[] START_DATE_IDENTIFIER = {"from"};

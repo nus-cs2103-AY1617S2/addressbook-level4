@@ -26,7 +26,7 @@ public class CompleteCommand extends Command implements Undoable {
             + "Parameters: INDEX1 (must be a positive integer), INDEX2, INDEX3, ... \n"
             + "Example: " + COMMAND_WORD + " 1, 2, 6, 8";
 
-    public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task: \n%1$s";
+    public static final String MESSAGE_COMPLETED_TASK_SUCCESS = "Completed Task(s): \n%1$s";
     public static final String MESSAGE_NOT_COMPLETED = "At least one task's index must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
 
@@ -64,25 +64,31 @@ public class CompleteCommand extends Command implements Undoable {
             }
         }
 
+        ArrayList<ReadOnlyTask> tasksToEdit = new ArrayList<ReadOnlyTask>();
+        ArrayList<ReadOnlyTask> completedTasks = new ArrayList<ReadOnlyTask>();
+
         for (int i = 0; i < indexList.size(); i++) {
             ReadOnlyTask taskToEdit = lastShownList.get(indexList.get(i));
-            Task completedTask = createCompletedTask(taskToEdit);
-            try {
-                if (taskToEdit.getRecurringStatus()) {
-                    model.updateTask(createOriginalRecurringTask(taskToEdit), completedTask);
-                } else {
-                    model.updateTask(taskToEdit, completedTask);
-                }
-            } catch (UniqueTaskList.DuplicateTaskException dpe) {
-                commandSuccess = false;
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+            if (taskToEdit.getRecurState().isRecurring()) {
+                taskToEdit = createMasterRecurringTask(taskToEdit);
             }
-            completedList.add(completedTask);
+            tasksToEdit.add(taskToEdit);
+            Task completedTask = createCompletedTask(taskToEdit);
+            completedTasks.add(completedTask);
+        }
+        ReadOnlyTask[] arrayListMould = new ReadOnlyTask[0];
+        try {
+            completedList = model.updateMultipleTasks(
+                    tasksToEdit.toArray(arrayListMould), completedTasks.toArray(arrayListMould));
+        } catch (UniqueTaskList.DuplicateTaskException dpe) {
+            assert false: "There shouldn't be a duplicate task";
+            commandSuccess = false;
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         commandSuccess = true;
         undoHistory.push(this);
-        model.updateCurrentFilteredList();
-        model.getFilteredTaskList();
+        //model.updateCurrentFilteredList();
+        //model.getFilteredTaskList();
 
         return new CommandResult(String.format(MESSAGE_COMPLETED_TASK_SUCCESS, getSuccessMessage(completedList)));
     }
@@ -93,17 +99,18 @@ public class CompleteCommand extends Command implements Undoable {
      */
     private static Task createCompletedTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
-            List<Date> tempList = (ArrayList<Date>) ((ArrayList<Date>) taskToEdit.getRecurCompletedList()).clone();
-            tempList.add(new Date(taskToEdit.getRecurDisplayDate()));
-            ((Task) taskToEdit).setRecurDisplayDate("");
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
+            List<Date> tempList = taskToEdit.getRecurState().getRecurCompletedList();
+            tempList.add(new Date(taskToEdit.getRecurState().getRecurDisplayDate()));
+            ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                    taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                    taskToEdit.getRecurringStatus(), taskToEdit.getRecurInterval(), tempList);
+                            taskToEdit.getTags(), taskToEdit.getActiveStatus(),
+                            taskToEdit.getRecurState().getRecurInterval(), tempList);
         } else {
             return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), false, taskToEdit.getRecurringStatus(),
-                            taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+                            taskToEdit.getTags(), false,
+                            taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getRecurState().getRecurCompletedList());
         }
     }
 
@@ -114,9 +121,18 @@ public class CompleteCommand extends Command implements Undoable {
     private static Task createUncompletedTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
 
-        return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), true, taskToEdit.getRecurringStatus(),
-                                taskToEdit.getRecurInterval(), taskToEdit.getRecurCompletedList());
+        if (taskToEdit.getRecurState().isMasterRecurring()) {
+            List<Date> tempList = taskToEdit.getRecurState().getRecurCompletedList();
+            tempList.remove(tempList.size() - 1);
+            return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
+                                taskToEdit.getTags(), true,
+                                taskToEdit.getRecurState().getRecurInterval(), tempList);
+        } else {
+            return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
+                                taskToEdit.getTags(), true,
+                                taskToEdit.getRecurState().getRecurInterval(),
+                                taskToEdit.getRecurState().getRecurCompletedList());
+        }
 
     }
 
@@ -124,13 +140,13 @@ public class CompleteCommand extends Command implements Undoable {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createOriginalRecurringTask(ReadOnlyTask taskToEdit) {
+    private static Task createMasterRecurringTask(ReadOnlyTask taskToEdit) {
         assert taskToEdit != null;
-        ((Task) taskToEdit).setRecurDisplayDate("");
+        ((Task) taskToEdit).getRecurState().setRecurDisplayDate("");
         return new Task(taskToEdit.getName(), taskToEdit.getStartDateTime(), taskToEdit.getEndDateTime(),
-                            taskToEdit.getTags(), taskToEdit.getTimedStatus(), taskToEdit.getActiveStatus(),
-                            taskToEdit.getRecurringStatus(), taskToEdit.getRecurInterval(),
-                            taskToEdit.getRecurCompletedList());
+                            taskToEdit.getTags(), taskToEdit.getActiveStatus(),
+                            taskToEdit.getRecurState().getRecurInterval(),
+                            taskToEdit.getRecurState().getRecurCompletedList());
 
     }
 
@@ -141,7 +157,7 @@ public class CompleteCommand extends Command implements Undoable {
         assert completedList != null;
         String successMessage = "";
         for (int i = 0; i < completedList.size(); i++) {
-            successMessage += completedList.get(i).toString();
+            successMessage += completedList.get(i).getAsText();
         }
         return successMessage;
     }

@@ -24,11 +24,11 @@ public class DeleteCommand extends Command implements Undoable {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: \n%1$s";
     public static final String MESSAGE_PART_OF_RECURRING_TASK =
             "This task is part of a recurring task and cannot be edited.";
     //@@author A0150120H
-    public static final String MESSAGE_DUPLICATE_TASK = "%1$s already exists in the task manager";
+    public static final String MESSAGE_DUPLICATE_TASK = "%1$s already exists in the task manager.";
     //@@author
 
     public final int targetIndex;
@@ -79,7 +79,7 @@ public class DeleteCommand extends Command implements Undoable {
     }
     //@@author A0139925U
     private void checkPartOfRecurringTask(ReadOnlyTask taskToEdit) throws IllegalValueException {
-        if (taskToEdit.getRecurringStatus() && !taskToEdit.getRecurDisplayDate().equals("")) {
+        if (taskToEdit.getRecurState().isGhostRecurring()) {
             throw new IllegalValueException(MESSAGE_PART_OF_RECURRING_TASK);
         }
     }

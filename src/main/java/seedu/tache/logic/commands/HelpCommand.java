@@ -11,12 +11,12 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String SHORT_COMMAND_WORD = "h";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions "
-            + "for a specific command.\n"
-            + "Example: " + COMMAND_WORD + " add\n"
-            + "Will display instructions on how to use the add command.\n"
-            + "Example: " + COMMAND_WORD + "\n"
-            + "Will display the help window.\n";
+    //@@author A0142255M
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows usage instructions of specific commands. "
+            + "Help window will be displayed if no command is specified.\n"
+            + "Parameters (Optional): add, clear, complete, delete, edit etc.\n"
+            + "Example: " + COMMAND_WORD + " add";
+    //@@author
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
     //@@author A0139961U
@@ -59,6 +59,12 @@ public class HelpCommand extends Command {
             return new CommandResult(SelectCommand.MESSAGE_USAGE);
         case UndoCommand.COMMAND_WORD:
             return new CommandResult(UndoCommand.MESSAGE_USAGE);
+        case PrevCommand.COMMAND_WORD:
+            return new CommandResult(PrevCommand.MESSAGE_USAGE);
+        case NextCommand.COMMAND_WORD:
+            return new CommandResult(NextCommand.MESSAGE_USAGE);
+        case ViewCommand.COMMAND_WORD:
+            return new CommandResult(ViewCommand.MESSAGE_USAGE);
         default:
             EventsCenter.getInstance().post(new ShowHelpRequestEvent());
             return new CommandResult(SHOWING_HELP_MESSAGE);

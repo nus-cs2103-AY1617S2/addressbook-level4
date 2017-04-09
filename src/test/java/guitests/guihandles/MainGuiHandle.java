@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.tache.TestApp;
 
@@ -44,6 +45,32 @@ public class MainGuiHandle extends GuiHandle {
 
     public StatusBarFooterHandle getStatusBarFooter() {
         return new StatusBarFooterHandle(guiRobot, primaryStage);
+    }
+    //@@author
+
+    //@@author A0139925U
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public MainGuiHandle toggleMainGuiUsingCtrlAltDAccelerator() {
+        useCtrlAltDAccelerator();
+        return new MainGuiHandle(guiRobot, primaryStage);
+    }
+
+    public MainGuiHandle toggleMainGuiUsingCtrlQAccelerator() {
+        useCtrlQAccelerator();
+        return new MainGuiHandle(guiRobot, primaryStage);
+    }
+
+    private void useCtrlAltDAccelerator() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.ALT, KeyCode.D);
+        guiRobot.sleep(500);
+    }
+
+    private void useCtrlQAccelerator() {
+        guiRobot.push(KeyCode.CONTROL, KeyCode.Q);
+        guiRobot.sleep(500);
     }
     //@@author
 

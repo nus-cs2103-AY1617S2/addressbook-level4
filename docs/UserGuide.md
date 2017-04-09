@@ -18,10 +18,11 @@ By : `T09-B4` [Github](https://github.com/CS2103JAN2017-T09-B4/main)  &nbsp;&nbs
     3.7. [Selecting Tasks](#37-select-a-task--select) <br>
     3.8. [Completing Tasks](#38-complete-a-task--complete) <br>
 	3.9. [Undoing a Change](#39-undo-a-change--undo) <br>
-	3.10. [Getting Help](#310-get-help--help) <br>
-	3.11. [Changing Data File Location](#311-change-data-file-location) <br>
-	3.12. [Loading Data File From Location](#312-load-data-file-from-location) <br>
-	3.13. [Exiting](#313-exit-the-program--exit)
+	3.10. [Navigating the Calendar](#310-navigate-the-calendar) <br>
+	3.11. [Getting Help](#311-get-help--help) <br>
+	3.12. [Changing Data File Location](#312-change-data-file-location) <br>
+	3.13. [Loading Data File From Location](#313-load-data-file-from-location) <br>
+	3.14. [Exiting](#314-exit-the-program--exit)
 4. [Command Summary](#4-command-summary)
 5. [FAQ](#5-faq-frequently-asked-questions)
 
@@ -99,6 +100,7 @@ You are currently reading my user guide, which has been written to help you with
   > * Start Time
   > * End Date
   > * End Time
+  > * Tag
 
 #### Task Filters:
 
@@ -172,7 +174,7 @@ Format: **`list`** <br>
 This lists all your uncompleted tasks. <br>
 
 Format: **`list`** `<filter>`<br>
-E.g. **`list`** `completed`, **`list`** `all`, **`list`** `floating`, **`list`** `timed` <br>
+E.g. **`list`** `completed`, **`list`** `all`, **`list`** `floating`, **`list`** `timed`, **`list`** `overdue`, **`list`** `today`, **`list`** `this week`<br>
 
 <img src="images/UiListCommand.png" width="600"><br>
 _Figure 3.3.2. List Command_
@@ -181,9 +183,10 @@ For advanced users: **`l`** `<filter>` <br>
 
 ### 3.4. Find a task : `find`
 
-Finds task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
+Finds uncompleted and overdue task(s) whose name(s) contain `<keyword>` with one margin of error. <br>
 
-> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`. <br>
+> For example, **`find`** `<homwork>` can help you search for a task named `do probability homework`.
+> Similarly, a task named `programming hoework` (notice the spelling error), will also be found.<br>
 
 A reason why you might want to _find_ a task:
 
@@ -217,14 +220,16 @@ An example of a task you might want to _edit_: <br>
 
 Format: **`edit`** `<task_index> change <task_detail> to <new_value>` <br>
 This command will direct me to make the specified update to a task with `<task_index>`. <br>
-Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and change <task_detail_2> to <new_value2> and ...`<br>
+Format: **`edit`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...`<br>
 You can edit more task details for your task concurrently using the following format:<br>
-E.g. **`edit`** `3 change start_date to 26 apr and change end_date to 29 apr` <br>
+E.g. **`edit`** `4 change start_date to 24 apr and end_date to 27 apr` <br>
 
 <img src="images/UiEditCommand.png" width="600"><br>
 _Figure 3.5.1. Edit Command_
 
-For advanced users: **`e`** `<task_index>` <br>
+For advanced users: **`e`** `<task_index> change <task_detail_1> to <new_value1> and <task_detail_2> to <new_value2> and ...` <br>
+alternatively <br>
+For advanced users: **`e`** `<task_index>; <task_detail_1> <new_value_1>; <task_detail_2> <new_value_2>; ...` <br>
 
 ### 3.6. Delete a task : `delete`
 
@@ -273,7 +278,7 @@ Format: **`complete`** `<task_index>`<br>
 E.g. **`complete`** `1` <br>
 Format: **`complete`** `<task_index1>,<task_index2>,<task_index3>,...`<br>
 You can complete multiple tasks simultaneously using the following format:<br>
-E.g. **`complete`** `1,2,3` <br>
+E.g. **`complete`** `1,2,3,4` <br>
 
 <img src="images/UiCompleteCommand.png" width="600"><br>
 _Figure 3.8.1. Complete Command_
@@ -295,9 +300,24 @@ Format: **`undo`** <br>
 <img src="images/UiUndoCommand.png" width="600"><br>
 _Figure 3.9.1. Undo Command_
 
-For advanced users: **`u`** `<task_index>` <br>
+For advanced users: **`u`** <br>
 
-### 3.10. Get help : `help`
+### 3.10. Navigate the Calendar:
+
+Replaces navigation buttons on the calendar with user commands. <br>
+
+<img src="images/UiCalendar.png" width="600"><br>
+_Figure 3.10.1. Calendar_
+
+* _< button_ : **`prev`** <br>
+* _> button_ : **`next`** <br>
+* _day button_: **`show day`** <br>
+* _week button_: **`show week`** <br>
+* _month button_: **`show month`** <br>
+
+For advanced users: **`p`**, **`n`**, **`s`** `<view>` <br>
+
+### 3.12. Get help : `help`
 
 Shows a list of all commands I can execute and their usage instructions. <br>
 
@@ -308,11 +328,11 @@ Format: **`help`** `<command>` <br>
 This command will instruct me to provide you specific information on how to use `<command>`.
 
 <img src="images/UiHelpCommand.png" width="600"><br>
-_Figure 3.10.1. Help Command_
+_Figure 3.12.1. Help Command_
 
-For advanced users: **`h`** `<task_index>` <br>
+For advanced users: **`h`** `<command>` <br>
 
-### 3.11. Change data file location
+### 3.13. Change data file location
 
 Modifies the file path of my data file. <br>
 Future modifications of my task list will be saved at this new location. <br>
@@ -329,9 +349,9 @@ This command directs me to set my new data file in a `<new_save_location_directo
 then save all my data in that file.
 
 <img src="images/UiSaveCommand.png" width="600"><br>
-_Figure 3.11.1. Save Command_
+_Figure 3.13.1. Save Command_
 
-### 3.12. Load data file from location
+### 3.14. Load data file from location
 
 Loads the specified data file. <br>
 
@@ -345,9 +365,9 @@ Format: **`load`** `<file_path>` <br>
 This command loads the data from the specified file in the `<file_path>`.
 
 <img src="images/UiLoadCommand.png" width="600"><br>
-_Figure 3.12.1. Load Command_
+_Figure 3.14.1. Load Command_
 
-### 3.13. Exit the program : `exit`
+### 3.15. Exit the program : `exit`
 
 Saves all data and exits the program. <br>
 Time for you to actually perform your tasks!
@@ -365,12 +385,15 @@ Your wish is my command!
 |Add          |**`add`** `<task_name> by <due date and time>`                 |**`add`** `project proposal by 13 apr 2pm`           |
 |List         |**`list`** `<optional filter>`                                 |**`list`** `uncompleted`                             |
 |Find         |**`find`** `<keyword>`                                         |**`find`** `prject`                                  |
-|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread;`      |
+|Edit         |**`edit`** `<task_index> change <task_detail> to <new_value>;` |**`edit`** `1; change name to buy white bread`      |
 |Delete       |**`delete`** `<task_index>`                                    |**`delete`** `1`                                     |
 |Select       |**`select`** `<task_index>`                                    |**`select`** `2`                                     |
 |Complete     |**`complete`** `<task_index>`                                  |**`complete`** `1`                                   |
 |Undo         |**`undo`**                                                     |                                                     |
-|Help         |**`help`**                                                     |                                                     |
+|Prev         |**`prev`**                                                     |                                                     |
+|Next         |**`next`**                                                     |                                                     |
+|View         |**`view`**                                                     |**`view`** `day`                                     |
+|Help         |**`help`**                                                     |**`help`** `find`                                    |
 |Save         |**`save`** `<directory>`                                       |**`save`** `C:\Users\Jim\Desktop`                    |
 |Load         |**`load`** `<file_path>`                                       |**`load`** `C:\Users\Jim\Desktop\taskmanager.xml`    |
 |Exit         |**`exit`**                                                     |                                                     |
@@ -390,7 +413,7 @@ Here are some questions that you might want to ask me:
 [here](#32-add-a-task--add).
 
 **Q**: How do I retrieve my _previous commands_? <br>
-**A**: Use the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to get the previous commands you gave me.
+**A**: Use the arrow keys <kbd>Up</kbd> and <kbd>Down</kbd> to get your previous commands.
 
 **Q**: Is there any way I can _type my commands faster_? <br>
 **A**: Yes, I _autocomplete_ all commands. Every command can also be replaced with the first letter of

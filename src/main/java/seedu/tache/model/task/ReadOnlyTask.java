@@ -1,12 +1,13 @@
 //@@author A0139961U
 package seedu.tache.model.task;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.tache.model.recurstate.RecurState;
 import seedu.tache.model.tag.UniqueTagList;
-import seedu.tache.model.task.Task.RecurInterval;
 
 /**
  * A read-only immutable interface for a Task in the task manager.
@@ -19,13 +20,11 @@ public interface ReadOnlyTask {
     Optional<DateTime> getEndDateTime();
     boolean getActiveStatus();
     boolean getTimedStatus();
-    boolean getRecurringStatus();
-    RecurInterval getRecurInterval();
     boolean isWithinDate(Date date);
-    List<Date> getRecurCompletedList();
-    List<Task> getUncompletedRecurList(Date endingRangeDate);
-    String getRecurDisplayDate();
-    boolean isMasterRecurring();
+    RecurState getRecurState();
+    List<Task> getCompletedRecurList();
+    List<Task> getUncompletedRecurList();
+    List<Task> getUncompletedRecurList(Date filterEndDate);
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -54,10 +53,7 @@ public interface ReadOnlyTask {
                 && start && end
                 && (other.getActiveStatus() == this.getActiveStatus())
                 && (other.getTimedStatus() == this.getTimedStatus())
-                && (other.getRecurringStatus() == this.getRecurringStatus())
-                && other.getRecurInterval().equals(this.getRecurInterval())
-                && other.getRecurDisplayDate().equals(this.getRecurDisplayDate())
-                && other.isMasterRecurring() == this.isMasterRecurring());
+                && (other.getRecurState().equals(this.getRecurState())));
     }
     //@@author
 
@@ -66,6 +62,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ");
         builder.append("\"" + getName() + "\"");
         if (getStartDateTime().isPresent()) {
             builder.append(" Start Date and Time: \"" + getStartDateTime().get().toString() + "\"");
@@ -79,4 +76,29 @@ public interface ReadOnlyTask {
         return builder.toString();
     }
 
+    //@@author A0139925U
+    /**
+     * Comparator use to sort readonlytask based on endDate
+     */
+    public static Comparator<ReadOnlyTask> READONLYTASK_DATE_COMPARATOR = new Comparator<ReadOnlyTask>() {
+
+        public int compare(ReadOnlyTask task1, ReadOnlyTask task2) {
+            Date lastComparableDate = new Date(0);
+            int result = 0;
+            //ascending order
+            if (!task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                result = lastComparableDate.compareTo(task2.getEndDateTime().get().getDate());
+                lastComparableDate = task2.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && !task2.getEndDateTime().isPresent()) {
+                result = task1.getEndDateTime().get().getDate().compareTo(lastComparableDate);
+                lastComparableDate = task1.getEndDateTime().get().getDate();
+            }
+            if (task1.getEndDateTime().isPresent() && task2.getEndDateTime().isPresent()) {
+                return task1.getEndDateTime().get().getDate().compareTo(task2.getEndDateTime().get().getDate());
+            }
+            return (result);
+        }
+
+    };
 }

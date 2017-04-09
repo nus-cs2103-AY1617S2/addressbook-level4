@@ -9,13 +9,17 @@ import java.util.Set;
 import seedu.tache.commons.core.EventsCenter;
 import seedu.tache.commons.events.ui.JumpToListRequestEvent;
 import seedu.tache.commons.exceptions.IllegalValueException;
+
 import seedu.tache.logic.commands.exceptions.CommandException;
+
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
+
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
+
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList;
 import seedu.tache.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -28,14 +32,14 @@ public class AddCommand extends Command implements Undoable {
     public static final String SHORT_COMMAND_WORD = "a";
     public static final String TAG_SEPARATOR = "t/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. \n"
             + "Parameters: NAME [from <START DATE & TIME>] [to <END DATE & TIME>] [t/TAG1 TAG2...]\n"
             + "Example: " + COMMAND_WORD
             + " Orientation week camp from 25/7/16 0800 to 28/7/2016 0900 t/ HighPriority Events";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-    public static final String MESSAGE_TASK_NOT_FOUND = "%1$s no longer exists in the task manager";
+    public static final String MESSAGE_SUCCESS = "New task added: \n%1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_TASK_NOT_FOUND = "%1$s no longer exists in the task manager.";
 
     private final Task toAdd;
     private boolean commandSuccess;
@@ -64,8 +68,8 @@ public class AddCommand extends Command implements Undoable {
         }
 
         UniqueTagList tagList = new UniqueTagList(tagSet);
-        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true, true, recurInterval.isPresent(),
-                                    recurInterval.orElse(RecurInterval.NONE), new ArrayList<Date>());
+        this.toAdd = new Task(name, startDateTime, endDateTime, tagList, true,
+                                    RecurInterval.NONE, new ArrayList<Date>());
         commandSuccess = false;
     }
 

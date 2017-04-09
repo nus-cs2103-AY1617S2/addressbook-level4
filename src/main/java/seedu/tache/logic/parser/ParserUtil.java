@@ -1,24 +1,31 @@
 package seedu.tache.logic.parser;
 
-import java.util.Arrays;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_END_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_NAME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_INTERVAL;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_RECUR_STATUS;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_DATE;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_START_TIME;
+import static seedu.tache.logic.parser.CliSyntax.PARAMETER_TAG;
+
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.commons.util.StringUtil;
+import seedu.tache.model.recurstate.RecurState;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.Tag;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
-import seedu.tache.model.task.Name;
+
 
 import static seedu.tache.logic.parser.CliSyntax.START_DATE_IDENTIFIER;
 import static seedu.tache.logic.parser.CliSyntax.END_DATE_IDENTIFIER;
@@ -32,7 +39,6 @@ public class ParserUtil {
     //@@author A0139925U
     private static final Pattern FORMAT_INDEX_ARGS = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern FORMAT_NAME = Pattern.compile("^\".+\"");
     private static final Pattern FORMAT_DATE = Pattern.compile("^[0-3]?[0-9]/[0-1]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]?[0-9]-[0-1]?[0-9]-(?:[0-9]{2})?[0-9]{2}$"
                                                                + "|^[0-3]{1}[0-9]{1}[0-1]{1}[0-9]{1}"
@@ -40,6 +46,7 @@ public class ParserUtil {
     private static final Pattern FORMAT_TIME = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
     private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
+
     //@@author A0150120H
     static enum DateTimeType { START, END, UNKNOWN, RECURRENCE };
     //@@author
@@ -62,35 +69,6 @@ public class ParserUtil {
     }
 
     /**
-     * Returns a new Set populated by all elements in the given list of strings
-     * Returns an empty set if the given {@code Optional} is empty,
-     * or if the list contained in the {@code Optional} is empty
-     */
-    public static Set<String> toSet(Optional<List<String>> list) {
-        List<String> elements = list.orElse(Collections.emptyList());
-        return new HashSet<>(elements);
-    }
-
-    /**
-    * Splits a preamble string into ordered fields.
-    * @return A list of size {@code numFields} where the ith element is the ith field value if specified in
-    *         the input, {@code Optional.empty()} otherwise.
-    */
-    public static List<Optional<String>> splitPreamble(String preamble, int numFields) {
-        return Arrays.stream(Arrays.copyOf(preamble.split("\\s+", numFields), numFields))
-                .map(Optional::ofNullable)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Parses a {@code Optional<String> name} into an {@code Optional<Name>} if {@code name} is present.
-     */
-    public static Optional<Name> parseName(Optional<String> name) throws IllegalValueException {
-        assert name != null;
-        return name.isPresent() ? Optional.of(new Name(name.get())) : Optional.empty();
-    }
-
-    /**
      * Parses {@code Collection<String> tags} into an {@code UniqueTagList}.
      */
     public static UniqueTagList parseTags(Collection<String> tags) throws IllegalValueException {
@@ -103,39 +81,43 @@ public class ParserUtil {
     }
     //@@author A0139925U
     /**
-     * Returns True if input is a valid date
+     * Returns True if input is a valid parameter
      * Returns False otherwise.
      */
-    public static boolean isValidDate(String input) {
-        final Matcher matcher = FORMAT_DATE.matcher(input.trim());
-        return matcher.matches();
+    public static boolean isValidParameter(String input) {
+        return ParserUtil.isFoundIn(input, PARAMETER_NAME, PARAMETER_START_DATE, PARAMETER_END_DATE,
+                PARAMETER_START_TIME, PARAMETER_END_TIME, PARAMETER_TAG,
+                PARAMETER_RECUR_INTERVAL, PARAMETER_RECUR_STATUS);
     }
 
     /**
-     * Returns True if input is a valid time
-     * Returns False otherwise.
+     * Parses a string into a valid RecurInterval enum reference
+     * @param input String to parse
+     * @return valid RecurInterval enum reference if input is valid, throws IllegalValueException otherwise
      */
-    public static boolean isValidTime(String input) {
-        final Matcher matcher = FORMAT_TIME.matcher(input.trim());
-        return matcher.matches();
-    }
-
-    /**
-     * Returns True if input is a valid duration
-     * Returns False otherwise.
-     */
-    public static boolean isValidDuration(String input) {
-        final Matcher matcher = FORMAT_DURATION.matcher(input.trim());
-        return matcher.matches();
-    }
-
-    /**
-     * Returns True if input is a valid name
-     * Returns False otherwise.
-     */
-    public static boolean isValidName(String input) {
-        final Matcher matcher = FORMAT_NAME.matcher(input.trim());
-        return matcher.matches();
+    public static RecurInterval parseStringToRecurInterval(String input) throws IllegalValueException {
+        RecurInterval stringToEnum = null;
+        switch (input.trim().toLowerCase()) {
+        case "none":
+            stringToEnum = RecurInterval.NONE;
+            break;
+        case "day":
+            stringToEnum = RecurInterval.DAY;
+            break;
+        case "week":
+            stringToEnum = RecurInterval.WEEK;
+            break;
+        case "month":
+            stringToEnum = RecurInterval.MONTH;
+            break;
+        case "year":
+            stringToEnum = RecurInterval.YEAR;
+            break;
+        }
+        if (stringToEnum == null) {
+            throw new IllegalValueException(RecurState.MESSAGE_RECUR_INTERVAL_CONSTRAINTS);
+        }
+        return stringToEnum;
     }
     //@@author
     /**
@@ -196,12 +178,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isStartDateIdentifier(String s) {
-        for (String identifier: START_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, START_DATE_IDENTIFIER);
     }
 
     /**
@@ -210,12 +187,7 @@ public class ParserUtil {
      * @return true if it's a start date identifier, false otherwise
      */
     public static boolean isEndDateIdentifier(String s) {
-        for (String identifier: END_DATE_IDENTIFIER) {
-            if (s.equalsIgnoreCase(identifier)) {
-                return true;
-            }
-        }
-        return false;
+        return isFoundIn(s, END_DATE_IDENTIFIER);
     }
 
     /**
@@ -278,6 +250,22 @@ public class ParserUtil {
 
     public static boolean isDate(String s) {
         return DateTime.isDate(s);
+    }
+    /**
+     * Checks if the given string exists in any of the arrays in strArrays. Check is case insensitive
+     * @param s String to check
+     * @param strArrays Arrays of Strings to check against
+     * @return true if s is in strArray, false otherwise
+     */
+    public static boolean isFoundIn(String s, String[]... strArrays) {
+        for (String[] strArray: strArrays) {
+            for (String str: strArray) {
+                if (s.equalsIgnoreCase(str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -7,11 +7,11 @@ import java.util.Optional;
 import seedu.tache.commons.exceptions.IllegalValueException;
 import seedu.tache.model.ReadOnlyTaskManager;
 import seedu.tache.model.TaskManager;
+import seedu.tache.model.recurstate.RecurState.RecurInterval;
 import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 import seedu.tache.model.task.Name;
 import seedu.tache.model.task.Task;
-import seedu.tache.model.task.Task.RecurInterval;
 import seedu.tache.model.task.UniqueTaskList.DuplicateTaskException;
 
 public class SampleDataUtil {
@@ -36,13 +36,13 @@ public class SampleDataUtil {
                 new Task(new Name("Find a girlfriend"), new UniqueTagList("LowPriority")),
                 new Task(new Name("Walk the Dog"), Optional.of(new DateTime("14 April 2017")),
                             Optional.of(new DateTime("14 April 2017")), new UniqueTagList("MediumPriority"),
-                                true, true, false, RecurInterval.NONE, new ArrayList<Date>()),
+                            true, RecurInterval.NONE, new ArrayList<Date>()),
                 new Task(new Name("Buy Medicine"), Optional.of(new DateTime("15 April 2017")),
-                            Optional.empty(), new UniqueTagList("LowPriority"), true, true, false,
+                            Optional.empty(), new UniqueTagList("LowPriority"), true,
                             RecurInterval.NONE, new ArrayList<Date>()),
                 new Task(new Name("Submit Project Proposal"), Optional.empty(),
                             Optional.of(new DateTime("17 April 2017")), new UniqueTagList("HighPriority"),
-                                true, true, false, RecurInterval.NONE, new ArrayList<Date>()),
+                            true, RecurInterval.NONE, new ArrayList<Date>()),
             };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);

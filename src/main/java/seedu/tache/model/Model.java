@@ -1,5 +1,6 @@
 package seedu.tache.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -29,13 +30,24 @@ public interface Model {
     void addTask(int index, Task task) throws UniqueTaskList.DuplicateTaskException;
 
     /**
-     * Updates the task located at {@code filteredTaskListIndex} with {@code editedTask}.
+     * Updates {@code taskToEdit} to {@code editedTask}.
      *
      * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
      *      another existing task in the list.
      * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
      */
     void updateTask(ReadOnlyTask taskToEdit, ReadOnlyTask editedTask)
+            throws UniqueTaskList.DuplicateTaskException;
+
+    /**
+     * Updates all tasks in {@code tasksToEdit} to their corresponding task in {@code editedTasks}.
+     *
+     * @throws DuplicateTaskException if updating the task's details causes the task to be equivalent to
+     *      another existing task in the list.
+     * @throws IndexOutOfBoundsException if {@code filteredTaskListIndex} < 0 or >= the size of the filtered list.
+     * @return Array of tasks that have been successfully updated
+     */
+    List<ReadOnlyTask> updateMultipleTasks(ReadOnlyTask[] tasksToEdit, ReadOnlyTask[] editedTasks)
             throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
@@ -50,22 +62,26 @@ public interface Model {
     int getFilteredTaskListIndex(ReadOnlyTask targetTask);
     //@@author
 
-    /** Returns the all recurring ghost (not an actual task but will still be displayed to the user) tasks
-     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    ObservableList<ReadOnlyTask> getAllRecurringGhostTasks();
-
+    //@@author A0139925U
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    //@@author A0139925U
     /** Updates the filter of the filtered task list to show all uncompleted tasks */
     void updateFilteredListToShowUncompleted();
 
     /** Updates the filter of the filtered task list to show all completed tasks */
     void updateFilteredListToShowCompleted();
+
+    /** Returns the all completed recurring ghost (not an actual task but will still be displayed to the user) tasks
+     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getAllCompletedRecurringGhostTasks();
+
+    /** Returns the all uncompleted recurring ghost (not an actual task but will still be displayed to the user) tasks
+     * as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    ObservableList<ReadOnlyTask> getAllUncompletedRecurringGhostTasks();
 
     //@@author A0142255M
     /** Updates the filter of the filtered task list to show all timed tasks */
@@ -87,8 +103,4 @@ public interface Model {
 
     /** Returns the filtered task list type as a {@code String} */
     String getFilteredTaskListType();
-
-    //@@author A0139925U
-    /** Updates the filter of the current filtered task list to reflect changes */
-    void updateCurrentFilteredList();
 }

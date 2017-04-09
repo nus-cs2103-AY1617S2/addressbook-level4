@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.tache.logic.commands.ClearCommand;
+
 public class ClearCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -23,9 +25,21 @@ public class ClearCommandTest extends TaskManagerGuiTest {
         assertClearCommandSuccess();
     }
 
+    //@@author A0142255M
+    public void clear_invalidCommand_failure() {
+        commandBox.runCommand("clearrrrrrr");
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+    }
+
+    public void clear_additionalParameters_success() {
+        commandBox.runCommand(ClearCommand.COMMAND_WORD + " my entire task list");
+        assertClearCommandSuccess();
+    }
+    //@@author
+
     private void assertClearCommandSuccess() {
-        commandBox.runCommand("clear");
+        commandBox.runCommand(ClearCommand.COMMAND_WORD);
         assertListSize(0);
-        assertResultMessage("All tasks has been cleared!");
+        assertResultMessage(ClearCommand.MESSAGE_SUCCESS);
     }
 }

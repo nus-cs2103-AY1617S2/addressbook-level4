@@ -24,7 +24,7 @@ public class SampleDataTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void taskManagerDataFileDoesNotExistLoadSampleData() throws Exception {
+    public void taskManager_dataFileDoesNotExist_loadSampleData() throws Exception {
         Task[] expectedList = SampleDataUtil.getSampleTasks();
         Arrays.sort(expectedList, Task.taskDateComparator);
         assertTrue(taskListPanel.isListMatching(expectedList));

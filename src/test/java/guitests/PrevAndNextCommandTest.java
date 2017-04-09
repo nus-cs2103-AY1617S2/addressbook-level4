@@ -10,26 +10,35 @@ import seedu.tache.logic.commands.PrevCommand;
 public class PrevAndNextCommandTest extends TaskManagerGuiTest {
 
     @Test
-    public void showPrevView() {
-        commandBox.runCommand("prev");
+    public void prev() {
+        commandBox.runCommand(PrevCommand.COMMAND_WORD);
         assertResultMessage(PrevCommand.MESSAGE_SUCCESS);
 
-        commandBox.runCommand("p");
+        commandBox.runCommand(PrevCommand.SHORT_COMMAND_WORD);
         assertResultMessage(PrevCommand.MESSAGE_SUCCESS);
     }
 
     @Test
-    public void showNextView() {
-        commandBox.runCommand("next");
+    public void next() {
+        commandBox.runCommand(NextCommand.COMMAND_WORD);
         assertResultMessage(NextCommand.MESSAGE_SUCCESS);
 
-        commandBox.runCommand("n");
+        commandBox.runCommand(NextCommand.SHORT_COMMAND_WORD);
         assertResultMessage(NextCommand.MESSAGE_SUCCESS);
     }
 
     @Test
-    public void prevAndNextInvalidCommandFail() {
-        commandBox.runCommand("prv");
+    public void prevAndNext_additionalParameters_success() {
+        commandBox.runCommand(PrevCommand.COMMAND_WORD + " month");
+        assertResultMessage(PrevCommand.MESSAGE_SUCCESS);
+
+        commandBox.runCommand(NextCommand.COMMAND_WORD + " prev next next");
+        assertResultMessage(NextCommand.MESSAGE_SUCCESS);
+    }
+
+    @Test
+    public void prevAndNext_invalidCommand_failure() {
+        commandBox.runCommand("previous");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
 
         commandBox.runCommand("ne");

@@ -2,7 +2,6 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -30,13 +29,6 @@ public class CommandBoxHandle extends GuiHandle {
     public String getCommandInput() {
         return getTextFieldText(COMMAND_INPUT_FIELD_ID);
     }
-
-    //@@author A0142255M
-    public int getCaretPosition() {
-        TextField textField = getNode(COMMAND_INPUT_FIELD_ID);
-        return textField.getCaretPosition();
-    }
-    //@@author
 
     /**
      * Enters the given command in the Command Box and presses enter.

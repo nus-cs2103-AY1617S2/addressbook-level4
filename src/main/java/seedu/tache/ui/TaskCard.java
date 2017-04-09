@@ -60,6 +60,7 @@ public class TaskCard extends UiPart<Region> {
         assert task != null;
         assert displayedIndex > 0;
         id.setText(Integer.toString(displayedIndex) + ". ");
+        id.setId("id"); // set property id for Label named id
         name.setText(task.getName().toString());
         name.setWrapText(true); // spill over to next line if task name is too long
         setStatusOfTask(task);
@@ -92,7 +93,7 @@ public class TaskCard extends UiPart<Region> {
      */
     private void setIsMasterRecurring(ReadOnlyTask task) {
         assert task != null;
-        isMasterRecurring = task.isMasterRecurring();
+        isMasterRecurring = task.getRecurState().isMasterRecurring();
     }
 
     /**
@@ -121,6 +122,7 @@ public class TaskCard extends UiPart<Region> {
                 symbol.setImage(new Image(MainApp.class.getResource("/images/cross.png").toExternalForm()));
             }
         }
+        symbol.setId("symbol");
     }
 
     /**
