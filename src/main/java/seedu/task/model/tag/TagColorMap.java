@@ -20,6 +20,7 @@ public class TagColorMap {
         int r = rand.nextInt(205);
         int g = rand.nextInt(205);
         int b = rand.nextInt(205);
+        //Converts RGB into hex coded color
         String hex = String.format("#%02x%02x%02x", r, g, b);
         tagColorMap.put(tag, hex);
     }
