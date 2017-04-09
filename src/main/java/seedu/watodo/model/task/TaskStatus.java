@@ -6,11 +6,11 @@ package seedu.watodo.model.task;
  * TaskStatus can be either Undone, Ongoing, Done or Overdue.
  */
 public enum TaskStatus {
-    UNDONE("Undone"), ONGOING("Ongoing"), DONE("Done"), OVERDUE("Overdue");
+    UNDONE("Undone"), ONGOING("Ongoing"), DONE("Done"), OVERDUE("OVERDUE");
 
     private final String status;
 
-    private TaskStatus (final String text) {
+    private TaskStatus (String text) {
         this.status = text;
     }
 
