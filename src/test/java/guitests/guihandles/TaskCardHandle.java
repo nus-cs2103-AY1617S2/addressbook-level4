@@ -135,7 +135,7 @@ public class TaskCardHandle extends GuiHandle {
     @Override
     public String toString() {
         String space = " ";
-        return getFullName() + SPACE + getStartDate();
+        return getFullName() + space + getStartDate();
     }
 }
 //@@author
