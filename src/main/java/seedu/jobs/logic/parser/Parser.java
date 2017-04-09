@@ -11,6 +11,7 @@ import seedu.jobs.logic.commands.ClearCommand;
 import seedu.jobs.logic.commands.Command;
 import seedu.jobs.logic.commands.CompleteCommand;
 import seedu.jobs.logic.commands.DeleteCommand;
+import seedu.jobs.logic.commands.DisplayCommand;
 import seedu.jobs.logic.commands.EditCommand;
 import seedu.jobs.logic.commands.ExitCommand;
 import seedu.jobs.logic.commands.FindCommand;
@@ -84,13 +85,15 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+            
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayCommand();
 
         case PathCommand.COMMAND_WORD:
             return new PathCommandParser().parse(arguments);
         
         case SetCommand.COMMAND_WORD:
             return new SetCommandParser().parse(arguments);
-
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

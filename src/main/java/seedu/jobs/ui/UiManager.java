@@ -19,6 +19,7 @@ import seedu.jobs.commons.events.storage.DataSavingExceptionEvent;
 import seedu.jobs.commons.events.storage.LoginInfoChangeEvent;
 import seedu.jobs.commons.events.storage.SaveLoginInfoEvent;
 import seedu.jobs.commons.events.ui.BrowserDisplayEvent;
+import seedu.jobs.commons.events.ui.CalendarDisplayEvent;
 import seedu.jobs.commons.events.ui.JumpToListRequestEvent;
 import seedu.jobs.commons.events.ui.ShowHelpRequestEvent;
 import seedu.jobs.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -147,6 +148,7 @@ public class UiManager extends ComponentManager implements Ui {
     public void handleBrowserDisplayEvent(BrowserDisplayEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.activateBrowser();
+        raise(new CalendarDisplayEvent());
     }
     
     @Subscribe
