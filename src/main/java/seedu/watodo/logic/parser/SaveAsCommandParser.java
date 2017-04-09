@@ -1,5 +1,8 @@
 package seedu.watodo.logic.parser;
 
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.watodo.commons.exceptions.IllegalValueException;
 import seedu.watodo.logic.commands.Command;
 import seedu.watodo.logic.commands.IncorrectCommand;
 import seedu.watodo.logic.commands.SaveAsCommand;
@@ -16,14 +19,27 @@ public class SaveAsCommandParser {
      */
     public Command parse(String newFilePath) {
         newFilePath.trim();
-        if (!checkCorrectFileExtension(newFilePath)) {
-            return new IncorrectCommand(SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
+
+        try {
+            checkFilePathExists(newFilePath);
+            checkCorrectFileExtension(newFilePath);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
         }
+
         return new SaveAsCommand(newFilePath);
     }
 
-    private boolean checkCorrectFileExtension(String newFilePath) {
-        return (newFilePath.endsWith(".xml")) ? true : false;
+    private void checkFilePathExists(String newFilePath) throws IllegalValueException {
+        if (newFilePath.isEmpty()) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveAsCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private void checkCorrectFileExtension(String newFilePath) throws IllegalValueException {
+        if (!newFilePath.endsWith(".xml")) {
+            throw new IllegalValueException(SaveAsCommand.MESSAGE_INVALID_FILE_PATH_EXTENSION);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package seedu.watodo.logic.parser;
 
+import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.watodo.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import java.util.Comparator;
@@ -30,6 +31,7 @@ public class MarkCommandParser {
      */
     public Command parse(String args) {
         try {
+            checkIndexFound(args);
             getOptionalIntArrayFromString(args);
             checkValidIndices();
             checkForDuplicateIndices();
@@ -38,6 +40,13 @@ public class MarkCommandParser {
             return new IncorrectCommand(ive.getMessage());
         }
         return new MarkCommand(filteredTaskListIndices);
+    }
+
+
+    private void checkIndexFound(String args) throws IllegalValueException {
+        if (args.isEmpty()) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+        }
     }
 
     private void getOptionalIntArrayFromString(String args) {
