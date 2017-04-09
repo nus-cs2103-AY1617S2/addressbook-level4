@@ -8,8 +8,6 @@ Opus is the ideal task manager for the keyboard loving *(hint: Vim/Emacs)* users
 
 ## Table of Contents
 
----
-
 1. [Quick Start](#1-quick-start)
 2. [Features](#2-features)
 3. [FAQ](#3-faq)
