@@ -9,7 +9,7 @@
 |	Help |		|		|   |
 |	1	| **show help** | help | the user guide is displayed in a new window |
 |	Load	|		|		|   |
-| 1 | **load nonexistent sample data** | load data/new.xml | Warning is shown and new xml with given file name is created |
+| 1 | **load nonexistent sample data** | load data/new.xml | Alert is shown for nonexistent data and new xml with given file name is created |
 | 2 | **load invalid sample data** | load invalid | Error message will be shown |
 | 3 | **load sample data** | load data/sampledata.xml | Task manager is refreshed with the data from supplied file with 50 tasks |
 |	List	|		|		|   |
@@ -28,8 +28,8 @@
 | 7 | add task with description | add Get car keys from dad d/go to changi | Task with description is added |
 | 8 | add task with tag | add Buy airtickets to maldives t/holiday | Task with holiday tag is added |
 | 9 | add task with start date after end date | add Finish CS2103 revision s/today e/yesterday | Error message for date constraint will be shown |
-| 10 | add new task when in `Done` tab | 1. list done | Selected view is now `Done` |
-| 10 | | 2. add Band rehearsal d/gigs are awesome | Auto-switch to `To Do` tab, showing new task added |
+| 10 | add new task when in `Done` tab | list done | Selected view is now `Done` |
+| 10 | | add Band rehearsal d/gigs are awesome | Auto-switch to `To Do` tab, showing new task added |
 | Sort |		|		|		|
 || **sort tasks**<br><br>Sorted order preference will maintain throughout the session, i.e. new tasks added will be inserted according to the sort order | | |
 |1 | sort by start date | sort s/ | Tasks are sorted according to earliest start dates first. Tasks without start dates will be listed after tasks with start dates |
@@ -51,15 +51,15 @@
 |2| mark recurring task `Buy Lunch` as done | done `index` | A copy of task marked as done is created while the repeating task's start date advances by one day and is still a to do task |
 |3| mark last occurence of recurring task `Cut hair` as done | done `index` | Task is marked done and there are no more recurrences of the task |
 |4| mark done with an invalid index | done 1000 | Error message will be shown |
-|5| mark a done task as done | 1. list done | Selected view tab is now `Done` |
-|5| | 2. done `any index` | Error message will be shown |
+|5| mark a done task as done | list done | Selected view tab is now `Done` |
+|5| | done `any index` | Error message will be shown |
 |Undone|		|		|		|
 || **undone task**<br><br>Tasks that are undone will be moved from `Done` tab to `To Do` tab | | |
 |1| mark task `Write chinese essay` as undone in `Done` tab | undone `index of desired task` | Task is marked incomplete|
 |2| mark task `Cut hair` as undone | undone `index of desired task` | task is marked undone, does not add back the recurrence pattern it used to have |
 |3| mark undone with an invalid index | undone 1000 | Error message will be shown |
-|4| mark an incomplete task as undone | 1. list todo | Selected view tab is now `To Do` |
-|4| | 2. undone `any index` | Error message will be shown |
+|4| mark an incomplete task as undone | list todo | Selected view tab is now `To Do` |
+|4| | undone `any index` | Error message will be shown |
 |Select|		|		|		|
 || **select task** | | list will automatically scroll to and highlight the selected task |
 |1| select `Buy Lunch` | select `index` | Task with given index is selected |
@@ -72,10 +72,10 @@
 |Undo|		|		|		|
 || **undo a command**<br><br>Can only undo actions that changes data, i.e. add, edit, delete.<br><br>Undo history is only maintained for that session, e.g. cannot undo all commands listed above after exiting FunTaskTic and opening it again | | |
 |1| undo previous delete | undo | Deleted task is restored |
-|2| add a task, edit it, then undo | 1. add Go to NTUC d/buy apples | Task is added |
-|2| | 2. edit `index` d/buy oranges | Task description is edited |
-|2| | 3. undo | Task description is restored to `buy apples` |
-|2| | 4. undo | Task is un-added, i.e. removed from list |
+|2| add a task, edit it, then undo | add Go to NTUC d/buy apples | Task is added |
+|2| | edit `index` d/buy oranges | Task description is edited |
+|2| | undo | Task description is restored to `buy apples` |
+|2| | undo | Task is un-added, i.e. removed from list |
 |	Redo|	|		|		|
 || **redo a command**<br><br>Can only redo actions if the last command was `undo`| | |
 |1| restore the task `Go NTUC d/buy apples` | redo | Task is added back |
@@ -83,20 +83,20 @@
 |3| check for anything else to redo | redo | Error message will be shown as there is nothing else to redo |
 |Find|		|		|		|
 || **find**<br><br>Search for tasks for the given keyword (non case sensitive), allows partial matching and tolerates some spelling mistakes. Search includes titles, descriptions and tags. | | |
-|1| find tasks with keyword `school` | 1. find school | Shows tasks with `school` |
-|1| | 2. list | Clears the filter and shows all tasks |
+|1| find tasks with keyword `school` | find school | Shows tasks with `school` |
+|1| | list | Clears the filter and shows all tasks |
 |2| find tasks with keyword `school` or `home` | 1. find school home | Shows tasks with `school` or `home` |
-|2| | 2. list | Clears the filter and shows all tasks |
+|2| | list | Clears the filter and shows all tasks |
 |3| find tasks with partial keyword `sch` | 1. find sch | Show tasks with `school`|
-|3| | 2. list | Clears the filter and shows all tasks |
+|3| | list | Clears the filter and shows all tasks |
 |4| find tasks with typo in keyword | 1. find prisentation | Shows tasks with `presentation` |
-|4| | 2. list | Clears the filter and shows all tasks |
+|4| | list | Clears the filter and shows all tasks |
 ||		|		|		|
 || **find by date**<br><br> Search for tasks that contain the specified date point or date range | | |
-|1| find tasks on 10 april 2017 | 1. findbydate 10 apr 2017 | Tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
-|1| | 2. list | Clears the filter and shows all tasks |
-|2| find tasks from 10-11 april 2017 | 1. findbydate 10 apr 2017 to 11 apr 2017 | Tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
-|2| | 2. list | Clears the filter and shows all tasks |
+|1| find tasks on 10 april 2017 | findbydate 10 apr 2017 | Tasks listed have start dates <= 10 apr 2017 or end dates >= 10 apr 2017 |
+|1| | list | Clears the filter and shows all tasks |
+|2| find tasks from 10-11 april 2017 | findbydate 10 apr 2017 to 11 apr 2017 | Tasks listed have start dates <= 10 apr 2017 and end dates >= 11 apr 2017 |
+|2| | list | Clears the filter and shows all tasks |
 |Save|		|		|		|
 || **save data to another file location** | | |
 |1| save current FunTaskTic data to data/subfolder/newdata.xml | save data/subfolder/newdata.xml | Data saved in specified location |
