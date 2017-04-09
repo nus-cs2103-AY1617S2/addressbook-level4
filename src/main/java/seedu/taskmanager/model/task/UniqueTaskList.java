@@ -211,7 +211,7 @@ public class UniqueTaskList implements Iterable<Task> {
             return internalList.filtered(DatePredicate.isToday());
         } else {
             return internalList;
-    	}
+        }
     }
 
     static class DatePredicate {
