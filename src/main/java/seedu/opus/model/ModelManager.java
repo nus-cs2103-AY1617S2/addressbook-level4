@@ -9,15 +9,16 @@ import seedu.opus.commons.core.LogsCenter;
 import seedu.opus.commons.core.UnmodifiableObservableList;
 import seedu.opus.commons.events.model.ChangeSaveLocationEvent;
 import seedu.opus.commons.events.model.TaskManagerChangedEvent;
-import seedu.opus.commons.exceptions.InvalidUndoException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.model.qualifier.Qualifier;
 import seedu.opus.model.task.ReadOnlyTask;
 import seedu.opus.model.task.Task;
 import seedu.opus.model.task.UniqueTaskList;
 import seedu.opus.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.opus.model.util.InvalidUndoException;
 import seedu.opus.sync.SyncManager;
 import seedu.opus.sync.SyncServiceGtask;
+import seedu.opus.sync.exceptions.SyncException;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -28,10 +29,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final TaskManager taskManager;
     private FilteredList<ReadOnlyTask> filteredTasks;
-
-    private History history;
-
+    private TaskManagerStateHistory taskManagerHistory;
     private final SyncManager syncManager;
+    private boolean isSyncOn;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -45,9 +45,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
-        history = new History();
-
-        syncManager = new SyncManager(new SyncServiceGtask());
+        this.taskManagerHistory = new TaskManagerStateHistory();
+        this.syncManager = new SyncManager(new SyncServiceGtask());
+        this.isSyncOn = false;
     }
 
     public ModelManager() {
@@ -56,10 +56,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyTaskManager newData) {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.resetData(newData);
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     @Override
@@ -81,19 +83,23 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.removeTask(target);
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     @Override
@@ -101,35 +107,44 @@ public class ModelManager extends ComponentManager implements Model {
             throws UniqueTaskList.DuplicateTaskException {
         assert editedTask != null;
 
-        history.backupCurrentState(this.taskManager);
+        taskManagerHistory.backupCurrentState(this.taskManager);
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     //@@author A0148087W
     @Override
     public void resetToPreviousState() throws InvalidUndoException {
-        this.taskManager.resetData(this.history.getPreviousState(this.taskManager));
+        this.taskManager.resetData(this.taskManagerHistory.getPreviousState(this.taskManager));
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     @Override
-    public void resetToPrecedingState() throws InvalidUndoException {
-        this.taskManager.resetData(this.history.getPrecedingState(this.taskManager));
+    public void resetToNextState() throws InvalidUndoException {
+        this.taskManager.resetData(this.taskManagerHistory.getNextState(this.taskManager));
         indicateTaskManagerChanged();
-        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        if (this.isSyncOn) {
+            syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
+        }
     }
 
     @Override
-    public void startSync() {
+    public void startSync() throws SyncException {
+        this.isSyncOn = true;
         this.syncManager.startSync();
+        syncManager.updateTaskList(this.taskManager.getNonEventTaskList());
     }
 
     @Override
     public void stopSync() {
+        this.isSyncOn = false;
         this.syncManager.stopSync();
     }
 

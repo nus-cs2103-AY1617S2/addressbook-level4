@@ -2,19 +2,22 @@ package seedu.opus.sync;
 
 import java.util.List;
 
+import seedu.opus.commons.core.ComponentManager;
+import seedu.opus.commons.events.ui.NewResultAvailableEvent;
 import seedu.opus.model.task.Task;
+import seedu.opus.sync.exceptions.SyncException;
 
 //@@author A0148087W
 /**
  * Manage all available sync services and push/pull requests from Model
- *
  */
-public class SyncManager implements Sync {
+public class SyncManager extends ComponentManager implements Sync {
 
     private SyncService service;
 
     public SyncManager(SyncService service) {
         this.service = service;
+        this.service.setSyncManager(this);
     }
 
     @Override
@@ -23,7 +26,7 @@ public class SyncManager implements Sync {
     }
 
     @Override
-    public void startSync() {
+    public void startSync() throws SyncException {
         this.service.start();
     }
 
@@ -32,4 +35,8 @@ public class SyncManager implements Sync {
         this.service.stop();
     }
 
+    @Override
+    public void raiseSyncEvent(SyncException exception) {
+        raise(new NewResultAvailableEvent(exception.getMessage()));
+    }
 }

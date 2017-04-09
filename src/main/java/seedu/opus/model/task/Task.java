@@ -8,13 +8,13 @@ import seedu.opus.commons.exceptions.IllegalValueException;
 import seedu.opus.commons.util.CollectionUtil;
 import seedu.opus.model.tag.UniqueTagList;
 
-//@@author A0126345J
 /**
  * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Task implements ReadOnlyTask {
 
+    //@@author A0126345J
     private Name name;
     private Priority priority;
     private Status status;
@@ -23,6 +23,7 @@ public class Task implements ReadOnlyTask {
     private DateTime endTime;
 
     private UniqueTagList tags;
+    //@@author
 
     /**
      * Accepts null values for priority, note and deadline only.
@@ -107,6 +108,9 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public Optional<DateTime> getStartTime() {
+        if (startTime != null && startTime.dateTime == null) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(startTime);
     }
     //@@author
@@ -118,6 +122,9 @@ public class Task implements ReadOnlyTask {
     //@@author A0124368A
     @Override
     public Optional<DateTime> getEndTime() {
+        if (endTime != null && endTime.dateTime == null) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(endTime);
     }
     //@@author
@@ -153,6 +160,7 @@ public class Task implements ReadOnlyTask {
         this.setTags(replacement.getTags());
     }
 
+    //@@author A0126345J
     /**
      * Returns true if the end time is later than both the start time and the current time
      */
@@ -181,6 +189,7 @@ public class Task implements ReadOnlyTask {
 
         return false;
     }
+    //@@author
 
     //@@author A0148087W
     /**

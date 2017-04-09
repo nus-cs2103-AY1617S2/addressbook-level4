@@ -76,3 +76,9 @@
             );
         }
 ```
+###### /java/seedu/opus/testutil/TypicalTestTasks.java
+``` java
+    public TestTask[] getSortedByPriorityTasks() {
+        return new TestTask[]{laundry, quiz, reflection, payment, dishes, consultation, grocery};
+    }
+```

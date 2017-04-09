@@ -44,14 +44,13 @@ import seedu.opus.logic.commands.RedoCommand;
 import seedu.opus.logic.commands.SaveCommand;
 import seedu.opus.logic.commands.SelectCommand;
 import seedu.opus.logic.commands.SortCommand;
-import seedu.opus.logic.commands.SyncCommand;
 import seedu.opus.logic.commands.UndoCommand;
 import seedu.opus.logic.commands.exceptions.CommandException;
-import seedu.opus.model.History;
 import seedu.opus.model.Model;
 import seedu.opus.model.ModelManager;
 import seedu.opus.model.ReadOnlyTaskManager;
 import seedu.opus.model.TaskManager;
+import seedu.opus.model.TaskManagerStateHistory;
 import seedu.opus.model.tag.Tag;
 import seedu.opus.model.tag.UniqueTagList;
 import seedu.opus.model.task.DateTime;
@@ -231,6 +230,7 @@ public class LogicManagerTest {
 
     }
 
+    //@@author A0126345J
     @Test
     public void executeAddInvalidEventNotAllowed() throws Exception {
         // setup expectations
@@ -246,6 +246,7 @@ public class LogicManagerTest {
         assertCommandFailure(helper.generateAddCommand(toBeAdded),  AddCommand.MESSAGE_INVALID_EVENT);
 
     }
+    //@@author
 
 
     @Test
@@ -506,16 +507,22 @@ public class LogicManagerTest {
         TestDataHelper helper = new TestDataHelper();
         Task p1 = helper.generateTaskWithStatus("incomplete");
         List<Task> oneTask = helper.generateTaskList(p1);
-
-        TaskManager expectedTaskManager = helper.generateTaskManager(oneTask);
-        Task editedTask = oneTask.get(0);
-        editedTask.setStatus(new Status("complete"));
-
-        expectedTaskManager.updateTask(0, editedTask);
         helper.addToModel(model, oneTask);
 
+        Task editedTask = helper.generateTaskWithStatus("complete");
+        TaskManager expectedTaskManager = helper.generateTaskManager(helper.generateTaskList(editedTask));
+
+        // first mark should toggle status to complete
         assertCommandSuccess("mark 1",
-                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, oneTask.get(0)),
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask),
+                expectedTaskManager,
+                expectedTaskManager.getTaskList());
+
+        // second mark should toggle status to incomplete
+        editedTask = helper.generateTaskWithStatus("incomplete");
+        expectedTaskManager = helper.generateTaskManager(helper.generateTaskList(editedTask));
+        assertCommandSuccess("mark 1",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask),
                 expectedTaskManager,
                 expectedTaskManager.getTaskList());
     }
@@ -636,7 +643,46 @@ public class LogicManagerTest {
 
     //@@author A0148087W
     @Test
-    public void executeUndoResetToPreviousState() throws Exception {
+    public void executeUndoPreviousAddTaskCommandWithEmptyTaskListSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+
+        //Adding task to empty task manager and undo it
+        model.resetData(new TaskManager());
+        model.addTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+    }
+
+    @Test
+    public void executeUndoPreviousAddTaskCommandWithExistingTasksSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        Task testTask2 = helper.generateTaskWithName("Task2");
+        Task testTask3 = helper.generateTaskWithName("Task3");
+        List<Task> existingTasks = helper.generateTaskList(testTask1, testTask2);
+        TaskManager existingTaskManager = helper.generateTaskManager(existingTasks);
+
+        //Undo adding task when there are existing tasks
+        model.resetData(existingTaskManager);
+        model.addTask(testTask3);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, existingTaskManager, existingTasks);
+    }
+
+    @Test
+    public void executeUndoPreviousDeleteCommandSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        List<Task> oneTasks = helper.generateTaskList(testTask1);
+        TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
+
+        //Undo Deletion
+        model.addTask(testTask1);
+        model.deleteTask(testTask1);
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
+    }
+
+    @Test
+    public void executeUndoPreviousEditCommandSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         Task testTask2 = helper.generateTaskWithName("Task2");
@@ -644,125 +690,124 @@ public class LogicManagerTest {
         TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
         Task testTask1Copy = helper.generateTaskWithName("Task1");
 
-        //Undo adding one task
-        model.addTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
-
-        //Undo adding task when there is 1 existing task
-        model.resetData(new TaskManager());
-        model.addTask(testTask1);
-        model.addTask(testTask2);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
-
-        //Undo Deletion
-        model.resetData(new TaskManager());
-        model.addTask(testTask1);
-        model.deleteTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
-
         //Undo Edit
-        model.resetData(new TaskManager());
         model.addTask(testTask1Copy);
         model.updateTask(0, testTask2);
         assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
     }
 
     @Test
-    public void executeRedoResetToPrecedingState() throws Exception {
-        TaskManager tempTaskManager;
+    public void executeUndoMultipleCommandsSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        Task testTask2 = helper.generateTaskWithName("Task2");
+        Task testTask3 = helper.generateTaskWithName("Task3");
+        Task testTask1Copy = helper.generateTaskWithName("Task1");
+
+        model.addTask(testTask1Copy);
+        model.updateTask(0, testTask2);
+        model.addTask(testTask3);
+        model.deleteTask(testTask3);
+        model.addTask(testTask1);
+
+        //Undo all previous commands
+        model.resetToPreviousState();
+        model.resetToPreviousState();
+        model.resetToPreviousState();
+        model.resetToPreviousState();
+        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+    }
+
+    @Test
+    public void assertUndoExceptionWithNoPreviousCommandExecuted() {
+        assertCommandFailure("undo", TaskManagerStateHistory.MESSAGE_INVALID_UNDO);
+    }
+
+    @Test
+    public void assertUndoExceptionAfterUndoingSomeCommandWithNoUndoAvailable() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+
+        //Adding task to empty task manager and undo it
+        model.addTask(testTask1);
+        model.resetToPreviousState();
+        assertCommandFailure("undo", TaskManagerStateHistory.MESSAGE_INVALID_UNDO);
+    }
+
+    @Test
+    public void executeRedoPreviousUndoAddCommandSuccesful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+        List<Task> oneTasks = helper.generateTaskList(testTask1);
+        TaskManager expectedTaskManagerWithOneTask = helper.generateTaskManager(oneTasks);
+
+        //Redo adding one task
+        model.addTask(testTask1);
+        model.resetToPreviousState();   //undo
+        assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
+    }
+
+    @Test
+    public void executeRedoMultipleUndoAddCommandSuccessful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
         Task testTask2 = helper.generateTaskWithName("Task2");
         List<Task> oneTasks = helper.generateTaskList(testTask1);
         List<Task> twoTasks = helper.generateTaskList(testTask1, testTask2);
-        List<Task> taskTwoOnly = helper.generateTaskList(testTask2);
         TaskManager expectedTaskManagerWithOneTask = helper.generateTaskManager(oneTasks);
         TaskManager expectedTaskManagerWithTwoTask = helper.generateTaskManager(twoTasks);
-        Task testTask1Copy = helper.generateTaskWithName("Task1");
-
-        //Redo adding one task
-        model.addTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
-        assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
 
         //Redo adding two task
-        model.resetData(new TaskManager());
         model.addTask(testTask1);
         model.addTask(testTask2);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
+        model.resetToPreviousState();   //undo
+        model.resetToPreviousState();   //undo
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithTwoTask, twoTasks);
+    }
 
-        //Redo Deletion
-        model.resetData(new TaskManager());
+    @Test
+    public void executeRedoPreviousUndoDeleteCommandSuccessful() throws Exception {
+        TaskManager tempTaskManager;
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask1 = helper.generateTaskWithName("Task1");
+
         model.addTask(testTask1);
         model.deleteTask(testTask1);
         tempTaskManager = new TaskManager(model.getTaskManager());
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
+        model.resetToPreviousState();   //undo
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, tempTaskManager, Collections.emptyList());
+    }
 
-        //Redo Edit
-        model.resetData(new TaskManager());
+    @Test
+    public void executeRedoPreviousUndoEditCommandSuccessful() throws Exception {
+        TaskManager tempTaskManager;
+        TestDataHelper helper = new TestDataHelper();
+        Task testTask2 = helper.generateTaskWithName("Task2");
+        List<Task> taskTwoOnly = helper.generateTaskList(testTask2);
+        Task testTask1Copy = helper.generateTaskWithName("Task1");
+
         model.addTask(testTask1Copy);
         model.updateTask(0, testTask2);
         tempTaskManager = new TaskManager(model.getTaskManager());
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, expectedTaskManagerWithOneTask, oneTasks);
+        model.resetToPreviousState();   //undo
         assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, tempTaskManager, taskTwoOnly);
     }
 
     @Test
-    public void assertUndoException() {
-        assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
+    public void assertUndoExceptionWithNoPreviousUndoCommandExecuted() {
+        assertCommandFailure("redo", TaskManagerStateHistory.MESSAGE_INVALID_REDO);
     }
 
     @Test
-    public void assertRedoException() {
-        assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
-    }
-
-    @Test
-    public void executeUndoFailure() throws Exception {
+    public void assertRedoExceptionAfterRedoingSomeUndoCommandsWithNoRedoAvailable() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task testTask1 = helper.generateTaskWithName("Task1");
 
         model.addTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
-        assertCommandFailure("undo", History.MESSAGE_INVALID_UNDO);
-    }
-
-    @Test
-    public void executeRedoFailure() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        Task testTask1 = helper.generateTaskWithName("Task1");
-        List<Task> oneTasks = helper.generateTaskList(testTask1);
-        TaskManager expectedTaskManager = helper.generateTaskManager(oneTasks);
-
-        model.addTask(testTask1);
-        assertCommandSuccess("undo", UndoCommand.MESSAGE_SUCCESS, new TaskManager(), Collections.emptyList());
-        assertCommandSuccess("redo", RedoCommand.MESSAGE_SUCCESS, expectedTaskManager, oneTasks);
-        assertCommandFailure("redo", History.MESSAGE_INVALID_REDO);
-    }
-
-    /*
-    @Test
-    public void executeSyncCommandWithValidOnArgumentSuccess() {
-        assertCommandSuccess("sync on", SyncCommand.MESSAGE_SYNC_ON_SUCCESS,
-                             new TaskManager(), Collections.emptyList());
-    }
-    */
-
-
-    @Test
-    public void executeSyncCommandWithValidOffArgumentSuccess() {
-        assertCommandSuccess("sync off", SyncCommand.MESSAGE_SYNC_OFF_SUCCESS,
-                             new TaskManager(), Collections.emptyList());
-    }
-
-    @Test
-    public void executeSyncCommandWithInvalidArgumentException() {
-        assertCommandFailure("sync invalid", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                           SyncCommand.MESSAGE_USAGE));
+        model.resetToPreviousState();
+        model.resetToNextState();
+        assertCommandFailure("redo", TaskManagerStateHistory.MESSAGE_INVALID_REDO);
     }
     //@@author
 
