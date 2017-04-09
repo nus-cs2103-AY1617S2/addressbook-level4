@@ -185,7 +185,8 @@ Format: `[\as PRIORITY]`
 
 <br>
 <img src="images/priority.png" width="230">
-*Figure 3.2.1: Important and very important tasks have stars next to them*
+
+*Figure 3.2.2: Important and very important tasks have stars next to them*
 
 **Tags** <br>
 Add a task with tags with the `\under` key. Separate multiple tags with spaces.<br>
