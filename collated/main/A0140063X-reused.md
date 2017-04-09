@@ -1,6 +1,10 @@
 # A0140063X-reused
 ###### /java/seedu/task/commons/core/GoogleCalendar.java
 ``` java
+/**
+ * Checks and obtains credentials to connects to Google Calendar service.
+ * Provides communication to Google Calendar.
+ */
 public class GoogleCalendar {
     public static final String CALENDAR_ID = "primary";
     public static final String CONNECTION_FAIL_MESSAGE = "Unable to connect to Google.";
