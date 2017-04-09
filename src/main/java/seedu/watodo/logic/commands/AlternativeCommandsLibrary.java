@@ -1,42 +1,43 @@
 package seedu.watodo.logic.commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+import seedu.watodo.commons.exceptions.IllegalValueException;
 
 //@@author A0143076J
 /**
  * Stores a map of alternatives command words, and their corresponding default
  * command word. Also stores a list of all the default command words of Watodo.
  */
-public class AlternativeCommandLibrary {
+public class AlternativeCommandsLibrary {
 
-    public static final Set<String> COMMANDS_WORDS = new HashSet<String>() {
+    public static final List<String> COMMANDS_WORDS = new ArrayList<String>() {
         {
             add(AddCommand.COMMAND_WORD);
-            add(ClearCommand.COMMAND_WORD);
-            add(DeleteCommand.COMMAND_WORD);
             add(EditCommand.COMMAND_WORD);
-            add(ExitCommand.COMMAND_WORD);
-            add(FindCommand.COMMAND_WORD);
-            add(HelpCommand.COMMAND_WORD);
-            add(ListCommand.COMMAND_WORD);
-            add(ListCommand.COMMAND_WORD + " " + ListAllCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListDateCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListDeadlineCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListDoneCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListEventCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListFloatCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListTagCommand.ARGUMENT);
-            add(ListCommand.COMMAND_WORD + " " + ListUndoneCommand.ARGUMENT);
+            add(DeleteCommand.COMMAND_WORD);
             add(MarkCommand.COMMAND_WORD);
             add(UnmarkCommand.COMMAND_WORD);
+            add(ListCommand.COMMAND_WORD);
+            add(ListCommand.COMMAND_WORD + " " + ListAllCommand.ARGUMENT);
+            add(ListCommand.COMMAND_WORD + " " + ListDeadlineCommand.ARGUMENT);
+            add(ListCommand.COMMAND_WORD + " " + ListEventCommand.ARGUMENT);
+            add(ListCommand.COMMAND_WORD + " " + ListFloatCommand.ARGUMENT);
+            add(ListCommand.COMMAND_WORD + " " + ListDoneCommand.ARGUMENT);
+            add(ListCommand.COMMAND_WORD + " " + ListUndoneCommand.ARGUMENT);
+            add(FindCommand.COMMAND_WORD);
             add(UndoCommand.COMMAND_WORD);
             add(RedoCommand.COMMAND_WORD);
             add(SelectCommand.COMMAND_WORD);
             add(ShortcutCommand.COMMAND_WORD);
             add(SaveAsCommand.COMMAND_WORD);
             add(ViewFileCommand.COMMAND_WORD);
+            add(ViewShortcutsCommand.COMMAND_WORD);
+            add(ClearCommand.COMMAND_WORD);
+            add(HelpCommand.COMMAND_WORD);
+            add(ExitCommand.COMMAND_WORD);
         }
     };
 
@@ -57,29 +58,36 @@ public class AlternativeCommandLibrary {
             put("u", UndoCommand.COMMAND_WORD);
             put("s", SelectCommand.COMMAND_WORD);
 
-            for (String commandWord : AlternativeCommandLibrary.COMMANDS_WORDS) {
+            for (String commandWord : AlternativeCommandsLibrary.COMMANDS_WORDS) {
                 put(commandWord, commandWord);
             }
         }
     };
 
-    /** Returns true if the given commandWord is an alternative command word. */
-    public static boolean isAlternative(String commandWord) {
-        return altCommands.containsKey(commandWord);
+    /** Returns true if the given shortcutKey is an alternative command word. */
+    public static boolean isAlternative(String shortcutKey) {
+        assert shortcutKey != null;
+        return altCommands.containsKey(shortcutKey) && altCommands.get(shortcutKey) != null;
     }
 
-    /** Returns the standard CommandWord for the given alternative word. */
-    public static String getStandardCommandWord(String commandWord) {
-        return altCommands.get(commandWord);
+    /** Returns the standard CommandWord for the given shortcutKey. */
+    public static String getStandardCommandWord(String shortcutKey) {
+        assert shortcutKey != null && isAlternative(shortcutKey);
+        return altCommands.get(shortcutKey);
     }
 
     /** Adds a new alternativeCommand format to the hashMap */
     public static void addAlternative(String shortcutKey, String commandWord) {
+        assert shortcutKey != null && !isAlternative(shortcutKey);
         altCommands.put(shortcutKey, commandWord);
     }
 
-    /** Deletes the given shortcut key only if its corresponding standard commandWord matches what is given */
-    public static boolean deleteAlternative(String shortcutKey, String commandWord) {
-        return altCommands.remove(shortcutKey, commandWord);
+    /** Deletes the given shortcut key only if its corresponding standard commandWord matches what is given  */
+    public static void deleteAlternative(String shortcutKey, String commandWord) throws IllegalValueException {
+        assert shortcutKey != null && isAlternative(shortcutKey);
+        boolean isDelSuccess = altCommands.remove(shortcutKey, commandWord);
+        if (!isDelSuccess) {
+            throw new IllegalValueException(ShortcutCommand.MESSAGE_DELETE_INVALID_SHORTCUT_KEY);
+        }
     }
 }
