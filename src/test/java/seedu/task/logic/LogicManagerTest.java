@@ -427,8 +427,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" e/").append(p.getStartTiming());
-            cmd.append(" p/").append(p.getPriority());
+            cmd.append(" sd/").append(p.getStartTiming().toString());
+            cmd.append(" ed/").append(p.getEndTiming().toString());
+            cmd.append(" p/").append(p.getPriority().toString());
 
             UniqueTagList tags = p.getTags();
             for (Tag t: tags) {
