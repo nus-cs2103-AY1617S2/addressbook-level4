@@ -27,6 +27,11 @@ import seedu.tache.model.tag.UniqueTagList;
 import seedu.tache.model.task.DateTime;
 
 
+import static seedu.tache.logic.parser.CliSyntax.START_DATE_IDENTIFIER;
+import static seedu.tache.logic.parser.CliSyntax.END_DATE_IDENTIFIER;
+import static seedu.tache.logic.parser.CliSyntax.RECURRENCE_PREFIX_IDENTIFIER;
+
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes
  */
@@ -40,14 +45,11 @@ public class ParserUtil {
                                                                + "(?:[0-9]{2})?[0-9]{2}$");
     private static final Pattern FORMAT_TIME = Pattern.compile("^[0-2][0-9][0-5][0-9]|^([0-1][0-2]|[0-9])"
                                                                + "([.][0-5][0-9])?\\s?(am|pm){1}");
-    //@@author
+    private static final Pattern FORMAT_DURATION = Pattern.compile("^\\d+\\s?((h|hr|hrs)|(m|min|mins))");
 
     //@@author A0150120H
-    static enum DateTimeType { START, END, UNKNOWN };
-    public static final String[] START_DATE_IDENTIFIER = {"from"};
-    public static final String[] END_DATE_IDENTIFIER = {"to", "on", "by", "before"};
+    static enum DateTimeType { START, END, UNKNOWN, RECURRENCE };
     //@@author
-
     /**
      * Returns the specified index in the {@code command} if it is a positive unsigned integer
      * Returns an {@code Optional.empty()} otherwise.
