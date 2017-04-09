@@ -37,7 +37,7 @@ public class TypicalTestEvents {
 
 			// Manually added
 			cower = new EventBuilder().withTitle("Act like a craven")
-					.withDescription("fighting the wildings, but extremely scared").withStartTime("").withEndTime("")
+					.withDescription("fighting the wildings, but extremely scared").withStartTime("11:59PM 08/04/2017").withEndTime("11:59PM 08/04/2017")
 					.withDeadline("").withLocation("The Wall").withTags("LordCommanderJonSnow").withIsDone("No").withRecurrence(new Recurrence())
 					.build();
 			duck = new EventBuilder().withTitle("ahhhh").withDescription("AHHHHHHHHH").withStartTime("").withEndTime("")
@@ -57,6 +57,6 @@ public class TypicalTestEvents {
 	}
 
 	public TestEvent[] getTypicalTasks() {
-		return new TestEvent[] { abdicate, boop, oxygen, cower, duck };
+		return new TestEvent[] { abdicate, boop, oxygen, cower, duck};
 	}
 }

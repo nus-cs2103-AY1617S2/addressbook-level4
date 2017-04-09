@@ -15,14 +15,14 @@ public class AddCommandTest extends TaskManagerGuiTest {
 	public void add() {
 		// add one event
 		TestEvent[] currentList = td.getTypicalTasks();
-		TestEvent personToAdd = td.cower;
-		assertAddSuccess(personToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, personToAdd);
+		TestEvent eventToAdd = td.cower;
+		assertAddSuccess(eventToAdd, currentList);
+		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
 		// add another event
-		personToAdd = td.cower;
-		assertAddSuccess(personToAdd, currentList);
-		currentList = TestUtil.addEventsToList(currentList, personToAdd);
+		eventToAdd = td.cower;
+		assertAddSuccess(eventToAdd, currentList);
+		currentList = TestUtil.addEventsToList(currentList, eventToAdd);
 
 		// add duplicate person
 		/*
