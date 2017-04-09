@@ -8,6 +8,7 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_TASK_DISPL
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -832,7 +833,16 @@ public class LogicManagerTest {
     @Test
     public void execute_load_nonExistentFile() throws Exception {
         String newFilepath = "src/test/data/cd_test/new.xml";
-        assertCommandFailure("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath));
+        TestDataHelper helper = new TestDataHelper();
+        File f = new File(newFilepath);
+        if(f.exists() && !f.isDirectory()) { 
+            f.delete();
+        }
+        List<Task> expectedTasks = helper.generateTaskList();
+        TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
+        assertCommandSuccess("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath),
+                expectedTM, expectedTasks);
+        f.delete();
     }
 
     @Test
