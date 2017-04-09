@@ -305,10 +305,10 @@ Examples:
 
 ### 2.12. Save/Read WhatsLeft to/from new location: `save`
 #### 2.12.1. Save WhatsLeft to new location: `save`
-Saves WhatsLeft data file to new location and updates the default storage location to new directory.<br>
-Format: `save DIRECTORY`
+Saves WhatsLeft data file to new location and updates the default storage location to new filepath.<br>
+Format: `save FILEPATH`
 
-> * Valid `DIRECTORY` should be entered.
+> * Valid `FILEPATH` should be entered.
 > * WhatsLeft application will automatically load from the new storage location when started in the future.
 
 Examples:
@@ -317,12 +317,12 @@ Examples:
   Saves the current WhatsLeft content to /User/Andy/Documents.
 
 #### 2.12.2. Read WhatsLeft from new location
-Loads WhatsLeft data file from new location and updates the default storage location to new directory.<br>
-Format: `read DIRECTORY`
+Loads WhatsLeft data file from new location and updates the default storage location to new filepath.<br>
+Format: `read FILEPATH`
 
-> * Valid `DIRECTORY` should be entered.
+> * Valid `FILEPATH` should be entered.
 > * WhatsLeft application will automatically load from the new storage location when started in the future.
-> * If no WhatsLeft storage file is found in the designated directory, a blank task book will be created and loaded.
+> * If no WhatsLeft storage file is found in the designated filepath, a blank task book will be created and loaded.
 
 Examples:
 
@@ -381,8 +381,8 @@ Finish a task | `finish TASK_INDEX` | `finish 3`
 Redo a task | `redo TASK_INDEX` | `show com`<br>`redo 1`
 Change status preference | `show [DISPLAY_PREFERENCE]` | `show com`
 Undo last operation | `undo` | `undo`
-Change storage file location | `save DIRECTORY` | `save Desktop/Data`
-Read data from location | `read DIRECTORY` | `read Desktop/MyData`
+Change storage file location | `save FILEPATH` | `save Desktop/Data`
+Read data from location | `read FILEPATH` | `read Desktop/MyData`
 Changes week in calendar | `next [WEEKS_AHEAD]` | `next 2`
 Refresh calendar | `refresh` | `refresh`
 Exit WhatsLeft | `exit` | `exit`
