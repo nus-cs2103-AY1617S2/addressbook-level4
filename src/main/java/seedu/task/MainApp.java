@@ -51,13 +51,11 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info(
-                "=============================[ Initializing Task Manager ]===========================");
+        logger.info("=============================[ Initializing Task Manager ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskManagerFilePath(),
-                config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -75,10 +73,10 @@ public class MainApp extends Application {
     private String getApplicationParameter(String parameterName) {
         if (getParameters() != null) {
             Map<String, String> applicationParameters = getParameters().getNamed();
-    	    return applicationParameters.get(parameterName);
-    	} else {
-    	    return null;
-    	}
+            return applicationParameters.get(parameterName);
+        } else {
+            return null;
+        }
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
@@ -91,12 +89,10 @@ public class MainApp extends Application {
             }
             initialData = taskManagerOptional.orElseGet(SampleDataUtil::getSampleTaskManager);
         } catch (DataConversionException e) {
-            logger.warning(
-                    "Data file not in the correct format. Will be starting with an empty Task Manager");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Task Manager");
             initialData = new TaskManager();
         } catch (IOException e) {
-            logger.warning(
-                    "Problem while reading from the file. Will be starting with an empty Task Manager");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
             initialData = new TaskManager();
         }
 
@@ -124,8 +120,8 @@ public class MainApp extends Application {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
-            logger.warning("Config file at " + configFilePathUsed
-                    + " is not in the correct format. " + "Using default config properties");
+            logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
+                    + "Using default config properties");
             initializedConfig = new Config();
         }
 
@@ -154,8 +150,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning(
-                    "Problem while reading from the file. Will be starting with an empty Task Manager");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Task Manager");
             initializedPrefs = new UserPrefs();
         }
 
@@ -182,8 +177,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info(
-                "============================ [ Stopping Task Manager ] =============================");
+        logger.info("============================ [ Stopping Task Manager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
@@ -223,8 +217,7 @@ public class MainApp extends Application {
         System.out.println("working lde");
         for (int i = 0; i < 4; i++) {
             try {
-                StorageManager temp = new StorageManager(event.getPathName(),
-                        config.getUserPrefsFilePath());
+                StorageManager temp = new StorageManager(event.getPathName(), config.getUserPrefsFilePath());
                 System.out.println(temp.equals(storage));
                 if (!temp.readTaskManager().isPresent()) {
                     throw new Exception();
