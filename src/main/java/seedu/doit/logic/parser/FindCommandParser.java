@@ -37,10 +37,16 @@ public class FindCommandParser implements CommandParser {
             "There must be at least a valid end time or date present after e/ in a MM/DD/YYYY HH:MM format.\n"
                     + "Examples:\nfind e/23:59\nfind e/04/31/2020\nfind e/04/31/2020 23:59");
 
+    private static final String EMPTY_STRING = "";
+    private static final String PRIORITY_LOW = "low";
+    private static final String PRIORITY_MED = "med";
+    private static final String PRIORITY_HIGH = "high";
+
     /**
      * Parses the given {@code String} of arguments in the context of the
      * FindCommand and returns an FindCommand object for execution.
      */
+
 
     @Override
     public Command parse(String args) {
@@ -72,19 +78,19 @@ public class FindCommandParser implements CommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (nameKeyWords.contains("")) {
+        if (nameKeyWords.contains(EMPTY_STRING)) {
             return new IncorrectCommand(NO_NAME_AFTER_PREFIX);
         }
         if (!isValidPriorityKeyWordsPresent(priorityKeyWords, priorityKeyWordSet)) {
             return new IncorrectCommand(NO_PRIORITY_AFTER_PREFIX);
         }
-        if (startTimeKeyWords.contains("")) {
+        if (startTimeKeyWords.contains(EMPTY_STRING)) {
             return new IncorrectCommand(NO_STARTTIME_AFTER_PREFIX);
         }
-        if (endTimeKeyWords.contains("")) {
+        if (endTimeKeyWords.contains(EMPTY_STRING)) {
             return new IncorrectCommand(NO_ENDTIME_AFTER_PREFIX);
         }
-        if (tagsKeyWords.contains("")) {
+        if (tagsKeyWords.contains(EMPTY_STRING)) {
             return new IncorrectCommand(NO_TAGS_AFTER_PREFIX);
         }
 
@@ -106,10 +112,10 @@ public class FindCommandParser implements CommandParser {
         if (priorityKeyWordSet.isEmpty()) {
             return true;
         }
-        if (priorityKeyWords.contains("")) {
+        if (priorityKeyWords.contains(EMPTY_STRING)) {
             return false;
-        } else if (priorityKeyWords.contains("high") || priorityKeyWords.contains("med")
-                || priorityKeyWords.contains("low")) {
+        } else if (priorityKeyWords.contains(PRIORITY_HIGH) || priorityKeyWords.contains(PRIORITY_MED)
+                || priorityKeyWords.contains(PRIORITY_LOW)) {
             return true;
         }
         return false;
