@@ -343,6 +343,7 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
+    // @@author A0141102H
     private class TaskQualifier implements Qualifier {
         private Set<String> taskKeyWords;
 
@@ -406,13 +407,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         public boolean run(ReadOnlyTask task) {
-            return (task.getIsMarkedAsComplete().equals(isComplete))
-                    && (taskKeyWords.stream()
-                            .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword))
-                            .findAny().isPresent())
-                    || (taskKeyWords.stream()
+            return (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getStartDate().value, keyword)).findAny()
+                    .isPresent()))
+                    || (task.getIsMarkedAsComplete().equals(isComplete) && (taskKeyWords.stream()
                             .filter(keyword -> StringUtil.containsWordIgnoreCase(task.getEndDate().value, keyword))
-                            .findAny().isPresent());
+                            .findAny().isPresent()));
         }
 
         @Override

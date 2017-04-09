@@ -346,7 +346,7 @@ public class DateTimeUtil {
 
         YearMonth yearMonthObject = YearMonth.of(2000 + year, month);
 
-        if (typeOfRecurrence.equalsIgnoreCase("days")) {
+        if (typeOfRecurrence.equalsIgnoreCase("days") || typeOfRecurrence.equalsIgnoreCase("day")) {
             day = day + loops;
             while (day > yearMonthObject.lengthOfMonth()) {
                 day = day - yearMonthObject.lengthOfMonth();
@@ -359,7 +359,7 @@ public class DateTimeUtil {
             }
         }
 
-        if (typeOfRecurrence.equalsIgnoreCase("weeks")) {
+        if (typeOfRecurrence.equalsIgnoreCase("weeks") || typeOfRecurrence.equalsIgnoreCase("week")) {
             day = day + loops * 7;
             while (day > yearMonthObject.lengthOfMonth()) {
                 day = day - yearMonthObject.lengthOfMonth();
@@ -372,7 +372,7 @@ public class DateTimeUtil {
             }
         }
 
-        if (typeOfRecurrence.equalsIgnoreCase("months")) {
+        if (typeOfRecurrence.equalsIgnoreCase("months") || typeOfRecurrence.equalsIgnoreCase("month")) {
             month = month + loops;
             while (month > 12) {
                 month = month - 12;
@@ -380,7 +380,7 @@ public class DateTimeUtil {
             }
         }
 
-        if (typeOfRecurrence.equalsIgnoreCase("years")) {
+        if (typeOfRecurrence.equalsIgnoreCase("years") || typeOfRecurrence.equalsIgnoreCase("year")) {
             year = year + loops;
         }
 
