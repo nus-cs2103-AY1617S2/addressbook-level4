@@ -37,12 +37,12 @@ To delete a task, start command with keyword `delete`.
 
 Feedback shows:
 
-> Deleted Task: Buy dinner
-> Priority: low
-> Status: incomplete
-> Note:
-> Start Time: 28 Apr 17 09:21PM
-> End Time:
+> Deleted Task: Buy dinner<br/>
+> Priority: low<br/>
+> Status: incomplete<br/>
+> Note:<br/>
+> Start Time: 28 Apr 17 09:21PM<br/>
+> End Time:<br/>
 > Tags:
 
 Task with index 1 is deleted.
