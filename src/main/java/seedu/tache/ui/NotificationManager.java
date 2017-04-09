@@ -121,7 +121,7 @@ public class NotificationManager {
      * @param task: The task that is being notified about.
      */
     void showSystemTrayNotification(ReadOnlyTask task, int type) {
-        if (SystemTray.isSupported()) {
+        if (SystemTray.isSupported()) { //Checks if the current environment supports System Tray
             SystemTray tray = SystemTray.getSystemTray();
             ImageIcon icon = new ImageIcon(getClass().getResource(IMAGE_ICON_PATH));
             java.awt.Image image = icon.getImage();
