@@ -26,8 +26,8 @@ import seedu.doit.model.tag.UniqueTagList;
  */
 public class TaskManager implements ReadOnlyItemManager {
 
-    private final UniqueTaskList tasks;
-    private final UniqueTagList tags;
+    private final UniqueTaskList taskList;
+    private final UniqueTagList tagList;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -36,8 +36,8 @@ public class TaskManager implements ReadOnlyItemManager {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */ {
-        tasks = new UniqueTaskList();
-        tags = new UniqueTagList();
+        taskList = new UniqueTaskList();
+        tagList = new UniqueTagList();
     }
 
     public TaskManager() {
@@ -55,11 +55,11 @@ public class TaskManager implements ReadOnlyItemManager {
 
     public void setTasks(List<? extends ReadOnlyTask> tasks)
         throws UniqueTaskList.DuplicateTaskException {
-        this.tasks.setTasks(tasks);
+        this.taskList.setTasks(tasks);
     }
 
     public void setTags(Collection<Tag> tags) throws UniqueTagList.DuplicateTagException {
-        this.tags.setTags(tags);
+        this.tagList.setTags(tags);
     }
 
     public void resetData(ReadOnlyItemManager newData) {
@@ -67,37 +67,37 @@ public class TaskManager implements ReadOnlyItemManager {
         try {
             setTasks(newData.getTaskList());
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            assert false : "Task Manager should not have duplicate tasks";
+            assert false : "Task Manager should not have duplicate taskList";
         }
         try {
             setTags(newData.getTagList());
         } catch (UniqueTagList.DuplicateTagException e) {
-            assert false : "Task Manager should not have duplicate tags";
+            assert false : "Task Manager should not have duplicate tagList";
         }
-        syncMasterTagListWith(tasks);
+        syncMasterTagListWith(taskList);
     }
 
     public void setTaskComparator(Comparator<ReadOnlyTask> taskComparator) {
-        tasks.setTaskComparator(taskComparator);
+        taskList.setTaskComparator(taskComparator);
     }
 
 //// task-level operations
 
     /**
      * Adds a task to the task manager.
-     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     * Also checks the new task's tagList and updates {@link #tagList} with any new tagList found,
+     * and updates the Tag objects in the task to point to those in {@link #tagList}.
      *
      * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncMasterTagListWith(p);
-        tasks.add(p);
+        taskList.add(p);
     }
 
     /**
      * Updates the task in the list at position {@code index} with {@code editedReadOnlyTask}.
-     * {@code TaskManager}'s tag list will be updated with the tags of {@code editedReadOnlyTask}.
+     * {@code TaskManager}'s tag list will be updated with the tagList of {@code editedReadOnlyTask}.
      *
      * @throws DuplicateTaskException    if updating the task's details causes the task to be equivalent to
      *                                   another existing task in the list.
@@ -110,10 +110,10 @@ public class TaskManager implements ReadOnlyItemManager {
 
         Task editedTask = new Task(editedReadOnlyTask);
         syncMasterTagListWith(editedTask);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any task
+        // TODO: the tagList master list will be updated even though the below line fails.
+        // This can cause the tagList master list to have additional tagList that are not tagged to any task
         // in the task list.
-        tasks.updateTask(index, editedTask);
+        taskList.updateTask(index, editedTask);
     }
 
     /**
@@ -124,7 +124,7 @@ public class TaskManager implements ReadOnlyItemManager {
      */
     public void markTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
-        tasks.mark(taskIndex, taskToDone);
+        taskList.mark(taskIndex, taskToDone);
     }
 
 
@@ -136,32 +136,32 @@ public class TaskManager implements ReadOnlyItemManager {
      */
     public void unmarkTask(int taskIndex, ReadOnlyTask taskToDone)
             throws UniqueTaskList.TaskNotFoundException, DuplicateTaskException {
-        tasks.unmark(taskIndex, taskToDone);
+        taskList.unmark(taskIndex, taskToDone);
     }
 
     /**
      * Ensures that every tag in this task:
-     * - exists in the master list {@link #tags}
+     * - exists in the master list {@link #tagList}
      * - points to a Tag object in the master list
      */
     private void syncMasterTagListWith(Task task) {
         final UniqueTagList taskTags = task.getTags();
-        tags.mergeFrom(taskTags);
+        tagList.mergeFrom(taskTags);
 
         // Create map with values = tag object references in the master list
         // used for checking task tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+        tagList.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of task tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of task tagList to point to the relevant tagList in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         taskTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         task.setTags(new UniqueTagList(correctTagReferences));
     }
 
     /**
-     * Ensures that every tag in these tasks:
-     * - exists in the master list {@link #tags}
+     * Ensures that every tag in these taskList:
+     * - exists in the master list {@link #tagList}
      * - points to a Tag object in the master list
      *
      * @see #syncMasterTagListWith(Task)
@@ -173,58 +173,54 @@ public class TaskManager implements ReadOnlyItemManager {
     /**
      * Removes the equivalent task from the UniqueTaskList.
      *
-     * @throws TaskNotFoundException
-     *             if no such task could be found in the UniqueTaskList.
      */
-    public void removeTask(ReadOnlyTask key) {
-        tasks.remove(key);
+    public void removeTask(ReadOnlyTask task) {
+        taskList.remove(task);
     }
 
     /**
-     * Removes the equivalent tasks from the UniqueTaskList.
+     * Removes the equivalent taskList from the UniqueTaskList.
      *
-     * @throws TaskNotFoundException
-     *             if no such task could be found in the UniqueTaskList.
      */
-    public void removeTask(Set<ReadOnlyTask> keys) {
-        tasks.remove(keys);
+    public void removeTask(Set<ReadOnlyTask> tasks) {
+        taskList.remove(tasks);
     }
 
     //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
+        tagList.add(t);
     }
 
 //// util methods
 
     @Override
     public String toString() {
-        return tasks.asObservableList().size() + " tasks, " + tags.asObservableList().size() + " tags";
+        return taskList.asObservableList().size() + " taskList, " + tagList.asObservableList().size() + " tagList";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<ReadOnlyTask> getTaskList() {
-        return new UnmodifiableObservableList<>(tasks.asObservableList());
+        return new UnmodifiableObservableList<>(taskList.asObservableList());
     }
 
     @Override
     public ObservableList<Tag> getTagList() {
-        return new UnmodifiableObservableList<>(tags.asObservableList());
+        return new UnmodifiableObservableList<>(tagList.asObservableList());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof TaskManager // instanceof handles nulls
-            && this.tasks.equals(((TaskManager) other).tasks)
-            && this.tags.equalsOrderInsensitive(((TaskManager) other).tags));
+            && this.taskList.equals(((TaskManager) other).taskList)
+            && this.tagList.equalsOrderInsensitive(((TaskManager) other).tagList));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tasks, tags);
+        return Objects.hash(taskList, tagList);
     }
 }
