@@ -30,13 +30,13 @@ Roles and Responsibilities: Team Co-Lead, Documentation, Scheduling and tracking
 * Components in charge of: [Model]()
 * Aspects/tools in charge of: Git
 * Features implemented:
-   * [List complete tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#listing-all-persons--list)
-   * [List incomplete tasks](https://github.com/se-edu/addressbook-level4/blob/master/docs/UserGuide.md#deleting-a-person--delete)
+   * [List complete tasks](https://github.com/CS2103JAN2017-F11-B3/main/blob/master/docs/UserGuide.md#24-listing-complete-tasks--lc)
+   * [List incomplete tasks](https://github.com/CS2103JAN2017-F11-B3/main/blob/master/docs/UserGuide.md#25-listing-incomplete-tasks--li)
 * Other major contributions:
-  * Did the refactoring from AddressBook to yTomorrow/Task Manager [[#133](https://github.com/se-edu/addressbook-level4/pull/152) ]
-  * Set up Travis, Codacy, and Coveralls
+  * Did the refactoring from AddressBook to yTomorrow/Task Manager [[#118, #119, #123, #131](https://github.com/CS2103JAN2017-F11-B3/main/pull/118) ]
+  * Set up Travis, Codacy, and Coveralls [[#18](https://github.com/CS2103JAN2017-F11-B3/main/pull/18)]
   * In charge of code cleanup (i.e. deleting trailing whitespace, converting \r\n\ to \n)
-  * Install necessary JARs to build path
+  * Install necessary JARs to build path [[#110](https://github.com/CS2103JAN2017-F11-B3/main/pull/110)]
   
 -----
 
