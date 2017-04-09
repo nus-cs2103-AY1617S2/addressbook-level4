@@ -25,38 +25,60 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_TASK_SUCCESS = "Selected Task: %1$s";
     private final ArrayList<Integer> targetIndexes;
-    private final ArrayList<Task> tasksToToggle;
+    private final ArrayList<Task> tasksToToggle = new ArrayList<Task>();
 
+
+    /**
+     * Creates an arraylist of targetIndexes based on the total indexes quantity.
+     * @param indexes
+     */
     public SelectCommand(ArrayList<Integer> indexes) {
         this.targetIndexes = new ArrayList<Integer>(indexes);
-        this.tasksToToggle = new ArrayList<Task>();
     }
 
+    /**
+     * Executes the Select command.
+     */
     @Override
     public CommandResult execute() throws CommandException {
 
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (!MultipleIndexCommandUtil.isIndexValid(lastShownList, targetIndexes)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        }
-
-        if (!MultipleIndexCommandUtil.isDone(lastShownList, targetIndexes)) {
-            throw new CommandException(Messages.MESSAGE_TASK_DONE);
-        }
+        checkValidIndexes(lastShownList);
+        checkTasksDone(lastShownList);
 
         MultipleIndexCommandUtil.addTasksToList(tasksToToggle, lastShownList, targetIndexes);
         model.toggleTasksSelect(tasksToToggle);
 
+        scrollToFinalTask();
+
+        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndexes));
+
+    }
+
+    /** Scroll to the last task which was updated. **/
+    private void scrollToFinalTask() {
         int offset = 1;
         int lastIndex = targetIndexes.size() - offset;
         int lastElementInTargetIndexes = targetIndexes.get(lastIndex);
 
         JumpToListRequestEvent scrollToTask = new JumpToListRequestEvent(lastElementInTargetIndexes - offset);
         EventsCenter.getInstance().post(scrollToTask);
+    }
 
-        return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndexes));
+    /** checks if the tasks with the indexes specified are marked as done */
+    private void checkTasksDone(UnmodifiableObservableList<ReadOnlyTask> lastShownList) throws CommandException {
+        if (!MultipleIndexCommandUtil.isDone(lastShownList, targetIndexes)) {
+            throw new CommandException(Messages.MESSAGE_TASK_DONE);
+        }
+    }
 
+    /** checks if the indexes specified are all smaller than the size of the list and not 0 i.e. valid */
+    private void checkValidIndexes(UnmodifiableObservableList<ReadOnlyTask> lastShownList) throws CommandException {
+        if (!MultipleIndexCommandUtil.isIndexValid(lastShownList, targetIndexes)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
     }
 
 }
+//@@author
