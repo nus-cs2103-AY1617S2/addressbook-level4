@@ -25,13 +25,23 @@ public class MainMenuHandle extends GuiHandle {
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
+    public HelpUGWindowHandle openHelpUGWindowUsingMenu() {
+        clickOn("Help", "Help", "F2");
+        return new HelpUGWindowHandle(guiRobot, primaryStage);
+    }
+
     public HelpWindowHandle openHelpWindowUsingAccelerator() {
-        useF1Accelerator();
+        useAccelerator(KeyCode.F1);
         return new HelpWindowHandle(guiRobot, primaryStage);
     }
 
-    private void useF1Accelerator() {
-        guiRobot.push(KeyCode.F1);
+    public HelpUGWindowHandle openHelpUGWindowUsingAccelerator() {
+        useAccelerator(KeyCode.F2);
+        return new HelpUGWindowHandle(guiRobot, primaryStage);
+    }
+
+    private void useAccelerator(KeyCode code) {
+        guiRobot.push(code);
         guiRobot.sleep(500);
     }
 }
