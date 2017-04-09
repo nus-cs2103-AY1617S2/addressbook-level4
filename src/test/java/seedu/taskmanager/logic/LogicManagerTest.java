@@ -9,6 +9,7 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.taskmanager.ui.MainWindow.TAB_DONE;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,12 +26,17 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
+import seedu.taskmanager.commons.core.Config;
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskmanager.commons.exceptions.DataConversionException;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
+import seedu.taskmanager.commons.util.ConfigUtil;
 import seedu.taskmanager.logic.commands.AddCommand;
 import seedu.taskmanager.logic.commands.ClearCommand;
 import seedu.taskmanager.logic.commands.Command;
@@ -68,6 +74,7 @@ import seedu.taskmanager.model.task.Status;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.Title;
 import seedu.taskmanager.model.util.SampleDataUtil;
+import seedu.taskmanager.storage.Storage;
 import seedu.taskmanager.storage.StorageManager;
 import seedu.taskmanager.ui.MainWindow;
 
@@ -80,6 +87,9 @@ public class LogicManagerTest {
     public TemporaryFolder saveFolder = new TemporaryFolder();
 
     private Model model;
+    // @@author A0114269E
+    private Storage storage;
+    // @@author
     private Logic logic;
     private HistoryManager history;
 
@@ -110,14 +120,16 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager();
         String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
+        model = new ModelManager();
+        // @@author A0114269E
+        storage = new StorageManager(tempTaskManagerFile, tempPreferencesFile);
         // @@author A0140032E
         history = HistoryManager.getInstance();
         history.init(model);
         logic = LogicManager.getInstance();
-        logic.init(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        logic.init(model, storage);
         // @@author
         EventsCenter.getInstance().registerHandler(this);
 
@@ -200,6 +212,43 @@ public class LogicManagerTest {
         assertEquals(expectedTaskManager, model.getTaskManager());
         assertEquals(expectedTaskManager, latestSavedTaskManager);
     }
+
+    // @@author A0114269E
+    /**
+     * Executes the command, confirms that a CommandException is not thrown and
+     * that the result message is correct. Also confirms that both the 'task
+     * manager' and the 'last shown list' are as specified.
+     *
+     * @see #assertCommandBehavior(boolean, String, String, ReadOnlyTaskManager,
+     *      List)
+     */
+    private void assertDirectoryChanged(String newFilePath, Config config) {
+        boolean isFileExist = new File(newFilePath).exists();
+        assertTrue("New file at given directory was not created.", isFileExist);
+
+        String configFilePath = config.getTaskManagerFilePath();
+        assertEquals(newFilePath, configFilePath);
+
+        Optional<ReadOnlyTaskManager> taskManagerOptional = null;
+        try {
+            taskManagerOptional = storage.readTaskManager(newFilePath);
+            assertFalse("CommandException expected but was not thrown.", false);
+        } catch (DataConversionException e) {
+            assertTrue("CommandException not expected but was thrown.", false);
+        } catch (IOException e) {
+            assertTrue("CommandException not expected but was thrown.", false);
+        }
+        
+        if (!taskManagerOptional.isPresent()) {
+            assertTrue("No Task Manager exists in the new directory", false);
+        }
+        
+        ObservableList<ReadOnlyTask> fromStorage = taskManagerOptional.get().getTaskList();
+        UnmodifiableObservableList<ReadOnlyTask> fromModel = model.getFilteredTaskList();
+        
+        assertEquals(fromModel, fromStorage);
+    }
+    // @@author
 
     @Test
     public void execute_unknownCommandWord() {
@@ -820,6 +869,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_load_successful() throws Exception {
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
         String sampleFilepath = "src/test/data/cd_test/sample.xml";
         TestDataHelper helper = new TestDataHelper();
 
@@ -828,20 +879,34 @@ public class LogicManagerTest {
 
         assertCommandSuccess("load " + sampleFilepath, String.format(LoadCommand.MESSAGE_SUCCESS, sampleFilepath),
                 expectedTM, expectedTasks);
+        Config modifiedStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        assertDirectoryChanged(sampleFilepath, modifiedStorageConfig);
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
     }
 
     @Test
     public void execute_load_nonExistentFile() throws Exception {
         String newFilepath = "src/test/data/cd_test/new.xml";
+        Config originalStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
         TestDataHelper helper = new TestDataHelper();
+
         File f = new File(newFilepath);
         if(f.exists() && !f.isDirectory()) { 
             f.delete();
         }
+
         List<Task> expectedTasks = helper.generateTaskList();
         TaskManager expectedTM = helper.generateTaskManager(expectedTasks);
         assertCommandSuccess("load " + newFilepath, String.format(LoadCommand.MESSAGE_NEW_FILE, newFilepath),
                 expectedTM, expectedTasks);
+        Config modifiedStorageConfig =
+                ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE).get();
+        assertDirectoryChanged(newFilepath, modifiedStorageConfig);
+
+        ConfigUtil.saveConfig(originalStorageConfig, Config.DEFAULT_CONFIG_FILE);
         f.delete();
     }
 

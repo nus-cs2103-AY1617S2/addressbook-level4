@@ -53,21 +53,23 @@ public class LoadCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_BUILDCONFIG);
         }
 
-        newConfig.setTaskManagerFilePath(this.newPath);
         Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager newTaskManager;
 
         try {
             taskManagerOptional = storage.readTaskManager(this.newPath);
             newTaskManager = taskManagerOptional.orElse(new TaskManager());
-            storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
-            model.resetData(newTaskManager);
-            model.updateFilteredListToShowAll();
+            storage.saveTaskManager(newTaskManager);
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_INVALID_DATA);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_READ_TASKMANAGER);
         }
+
+        newConfig.setTaskManagerFilePath(this.newPath);
+        storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
+        model.resetData(newTaskManager);
+        model.updateFilteredListToShowAll();
 
         try {
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
