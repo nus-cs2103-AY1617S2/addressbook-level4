@@ -39,6 +39,7 @@ import seedu.task.logic.commands.PathCommand;
 import seedu.task.logic.commands.SelectCommand;
 import seedu.task.logic.commands.SortCommand;
 import seedu.task.logic.commands.exceptions.CommandException;
+import seedu.task.logic.parser.FilterCommandParser;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
 import seedu.task.model.ReadOnlyTaskManager;
@@ -356,8 +357,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_filter_invalidArgsFormat() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FilterCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(FilterCommandParser.MESSAGE_INCORRECT_FORMAT);
         assertCommandFailure("filter ", expectedMessage);
     }
 
