@@ -37,12 +37,12 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand(td.eggsAndBread.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
-        
+
         //invalid command
         commandBox.runCommand("adds Read Newspaper");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
-    
+
     @Test
     public void add_timedTask_success() {
         //add task with end date only
@@ -54,14 +54,14 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //add task with both start and end date
         assertAddSuccess(td.visitFriend, currentList);
     }
-    
+
     @Test
     public void add_timedTask_failure() {
         //Invalid format: Start date only
         commandBox.runCommand(td.startDateOnly.getAddCommand());
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
-    
+
     @Test
     public void add_recurringTask_success() throws IllegalValueException {
         TestTask taskToAdd = new TaskBuilder().withName("Go to school").withStartDateTime("9am")
