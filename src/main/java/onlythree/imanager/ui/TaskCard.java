@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import onlythree.imanager.logic.parser.DateTimeUtil;
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
@@ -42,8 +42,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().value);
         id.setText(displayedIndex + ". ");
 
-        // TODO change date format
-        DateTimeFormatter dateFormat = DateTimeUtil.DISPLAY_FORMAT_TODO;
+        DateTimeFormatter dateFormat = DateTimeFormats.LOCALIZED_FORMAT;
         StartEndDateTime taskStartEndDateTime = getStartEndDateTime(task);
         Deadline taskDeadline = getDeadline(task);
         if (taskStartEndDateTime != null) {

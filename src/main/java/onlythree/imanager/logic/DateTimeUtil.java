@@ -1,10 +1,7 @@
-package onlythree.imanager.logic.parser;
+package onlythree.imanager.logic;
 
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -14,6 +11,7 @@ import org.antlr.runtime.tree.Tree;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
 
 //@@author A0140023E
@@ -22,26 +20,7 @@ import onlythree.imanager.commons.exceptions.IllegalValueException;
  */
 public class DateTimeUtil {
 
-    private static Parser dateTimeParser = new Parser(TimeZone.getDefault()); // use the system default timezone
-    // TODO decide if this is the right class
-    // TODO move the format to formatter class
-    public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ISO_DATE_TIME;
-    //public static final DateTimeFormatter DISPLAY_FORMAT_TODO = DateTimeFormatter.ofPattern("yyyy MMM dd hh:mm a");
-//    public static final DateTimeFormatter DISPLAY_FORMAT_TODO = new DateTimeFormatterBuilder()
-//            .appendPattern("yyyy-MM-dd h")
-//            .optionalStart()
-//            .append(DateTimeFormatter.ofPattern(":"))
-//            //.appendOptional(DateTimeFormatter.ofPattern("[:]"))
-//            .appendFraction(ChronoField.MINUTE_OF_HOUR, 0, 2, false)
-//            //.appendFraction(ChronoField.SECOND_OF_MINUTE, 0, 2, false)
-//            .optionalEnd()
-//            .append(DateTimeFormatter.ofPattern("a"))
-//            .toFormatter();
-    public static final DateTimeFormatter DISPLAY_FORMAT_TODO =
-            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-    // TODO create format for XmlAdaptedTask only
-    // TODO create test format for LogicManagerTest
-    public static final ZoneId TIME_ZONE = ZoneId.systemDefault();
+    private static Parser dateTimeParser = new Parser(TimeZone.getTimeZone(DateTimeFormats.SYSTEM_TIME_ZONE));
 
     private static final String NATTY_TOKEN_DATE_TIME_ALTERNATIVE = "DATE_TIME_ALTERNATIVE";
     private static final String NATTY_TOKEN_DATE_TIME = "DATE_TIME";
@@ -73,7 +52,7 @@ public class DateTimeUtil {
 
         final Date date = dateGroup.getDates().get(0);
         // Convert the old java.util.Date class to the much better new classes in java.time package
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), DateTimeUtil.TIME_ZONE);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), DateTimeFormats.SYSTEM_TIME_ZONE);
         return zonedDateTime;
     }
 
@@ -93,7 +72,6 @@ public class DateTimeUtil {
             // Relative date should be parsed relative to the current date, which has been parsed previously
             // special cases such as 2 days after 25 Apr also works
             // but cases such as 2 hours after 25 Apr 8pm does not work
-            // Neither does cases such as 2 hours after 25 Apr 8pm
             newDate = date;
         } else if (hasDateAndTimeSpecified(dateGroup)) {
             // date and time already clearly specified so no need to parse relative to previous date-time
@@ -102,7 +80,7 @@ public class DateTimeUtil {
             newDate = parseDateTimeUsingPrevious(dateGroup, previousDateTime);
         }
         // Convert the old java.util.Date class to the much better new classes in java.time package
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(newDate.toInstant(), DateTimeUtil.TIME_ZONE);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(newDate.toInstant(), DateTimeFormats.SYSTEM_TIME_ZONE);
         return zonedDateTime;
     }
 

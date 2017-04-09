@@ -88,7 +88,6 @@ public abstract class ReadOnlyTask {
     }
 
     private void buildDeadlineString(final StringBuilder builder) {
-        // TODO don't include milliseconds in toString output
         if (getDeadline().isPresent()) {
             builder.append(getDeadline().get().toString());
             builder.append(System.lineSeparator());
@@ -96,7 +95,6 @@ public abstract class ReadOnlyTask {
     }
 
     private void buildStartEndDateTimeString(final StringBuilder builder) {
-        // TODO don't include milliseconds in toString output
         if (getStartEndDateTime().isPresent()) {
             builder.append(getStartEndDateTime().get().toString());
             builder.append(System.lineSeparator());

@@ -2,7 +2,7 @@ package onlythree.imanager.testutil;
 
 import java.util.Optional;
 
-import onlythree.imanager.logic.parser.DateTimeUtil;
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.model.tag.UniqueTagList;
 import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.Name;
@@ -101,17 +101,15 @@ public class TestTask extends ReadOnlyTask {
 
         if (getDeadline().isPresent()) {
             sb.append(" by ");
-            // TODO change the format
-            sb.append(getDeadline().get().getDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+            sb.append(getDeadline().get().getDateTime().format(DateTimeFormats.TEST_FORMAT));
         }
 
         if (getStartEndDateTime().isPresent()) {
-            // TODO change the format
             StartEndDateTime startEndDateTime = getStartEndDateTime().get();
             sb.append(" from ");
-            sb.append(startEndDateTime.getStartDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+            sb.append(startEndDateTime.getStartDateTime().format(DateTimeFormats.TEST_FORMAT));
             sb.append(" to ");
-            sb.append(startEndDateTime.getEndDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+            sb.append(startEndDateTime.getEndDateTime().format(DateTimeFormats.TEST_FORMAT));
         }
 
         getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

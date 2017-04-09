@@ -23,6 +23,7 @@ import org.junit.rules.TemporaryFolder;
 
 import com.google.common.eventbus.Subscribe;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.commons.core.EventsCenter;
 import onlythree.imanager.commons.events.model.TaskListChangedEvent;
 import onlythree.imanager.commons.events.ui.JumpToListRequestEvent;
@@ -38,7 +39,6 @@ import onlythree.imanager.logic.commands.HelpCommand;
 import onlythree.imanager.logic.commands.SelectCommand;
 import onlythree.imanager.logic.commands.ViewCommand;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
-import onlythree.imanager.logic.parser.DateTimeUtil;
 import onlythree.imanager.model.Model;
 import onlythree.imanager.model.ModelManager;
 import onlythree.imanager.model.ReadOnlyTaskList;
@@ -452,7 +452,6 @@ public class LogicManagerTest {
         /** Generates the correct add command based on the task given */
         private String generateAddCommand(Task task) {
             // The date-times are transformed into a format that Natty can parse
-            // TODO use a human format
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
@@ -461,17 +460,15 @@ public class LogicManagerTest {
 
             if (task.getDeadline().isPresent()) {
                 cmd.append(" by ");
-                // TODO change the format
-                cmd.append(task.getDeadline().get().getDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+                cmd.append(task.getDeadline().get().getDateTime().format(DateTimeFormats.TEST_FORMAT));
             }
 
             if (task.getStartEndDateTime().isPresent()) {
-                // TODO change the format
                 StartEndDateTime startEndDateTime = task.getStartEndDateTime().get();
                 cmd.append(" from ");
-                cmd.append(startEndDateTime.getStartDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+                cmd.append(startEndDateTime.getStartDateTime().format(DateTimeFormats.TEST_FORMAT));
                 cmd.append(" to ");
-                cmd.append(startEndDateTime.getEndDateTime().format(DateTimeUtil.DATE_TIME_FORMAT));
+                cmd.append(startEndDateTime.getEndDateTime().format(DateTimeFormats.TEST_FORMAT));
             }
 
             UniqueTagList tags = task.getTags();

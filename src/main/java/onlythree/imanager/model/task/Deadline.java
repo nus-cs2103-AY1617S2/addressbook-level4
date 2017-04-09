@@ -3,6 +3,7 @@ package onlythree.imanager.model.task;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import onlythree.imanager.commons.core.DateTimeFormats;
 import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
 //@@author A0140023E
@@ -49,7 +50,7 @@ public class Deadline {
 
     @Override
     public String toString() {
-        return dateTime.toString();
+        return dateTime.format(DateTimeFormats.CLI_FORMAT);
     }
 
     @Override
