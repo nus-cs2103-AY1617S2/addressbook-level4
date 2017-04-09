@@ -14,13 +14,18 @@ Responsibilities: deliverables, deadlines, UI and Event
    * [Event](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/docs/DeveloperGuide.md#36-event-driven-design)
 
 * Features implemented:
-   * [UI Layout]
-   * [Autocomplete]
-   * [Task Sorting]
-
-* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/collated/main/A0144315N.md)][[test code](https://github.com/CS2103JAN2017-T09-B1/main/tree/master/collated/test)]
+   * UI Layout
+   * [Splitting of Task List](https://github.com/CS2103JAN2017-T09-B1/main/blob/develop/docs/DeveloperGuide.md#431-splitting-of-task-list)
+   * [UI Index Mapping](https://github.com/CS2103JAN2017-T09-B1/main/blob/develop/docs/DeveloperGuide.md#432-mapping-between-ui-indextask-id-and-absolute-index)
+   * [Autocomplete](https://github.com/CS2103JAN2017-T09-B1/main/blob/develop/docs/DeveloperGuide.md#433-autocomplete)
+   * [Snack Bar Notification](https://github.com/CS2103JAN2017-T09-B1/main/blob/develop/docs/DeveloperGuide.md#434-snack-bar-notification)
+   * [UI Animation](https://github.com/CS2103JAN2017-T09-B1/main/blob/develop/docs/DeveloperGuide.md#436-ui-animation)
+   
+* Code written: [[functional code](https://github.com/CS2103JAN2017-T09-B1/main/blob/master/collated/main/A0144315N.md)][[test code](https://github.com/CS2103JAN2017-T09-B1/main/tree/master/collated/test/A0144315N.md)]
 * Other major contributions:
   * Set up Travis and Coveralls
+  * Bug fixing
+  * Refactoring
 
 -----
 

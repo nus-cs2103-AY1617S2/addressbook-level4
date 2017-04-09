@@ -13,7 +13,19 @@ By : `T09B1`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`
     3.4. [Model](#34-model)<br>
     3.5. [Storage](#35-storage)<br>
     3.6. [Event-Driven Design](#36-event-driven-design)
-4. [Implementation](#4-implementation)
+4. [Implementation](#4-implementation)<br>
+    4.1. [Logging](#41-logging)<br>
+    4.2. [Configuration](#42-configuration)<br>
+    4.3. [UI Implementation Details](#43-ui-implementation-details)<br>
+    - 4.3.1. [Splitting of Task List](#431-splitting-of-task-list)
+    - 4.3.2. [Mapping between UI index(task ID) and absolute index](#432-mapping-between-ui-indextask-id-and-absolute-index)
+    - 4.3.3. [Autocomplete](#433-autocomplete)
+    - 4.3.4. [Snack Bar Notification](#434-snack-bar-notification)
+    - 4.3.5. [Error Message](#435-error-message)
+    - 4.3.6. [UI Animation](#436-ui-animation)
+    - 4.3.6.1. [Slide Animation of CompletedTaskListPanel](#4361-slide-animation-of-completedtasklistpanel)
+    - 4.3.6.2. [Command Execution Animation](#4362-command-execution-animation)
+
 5. [Testing](#5-testing)
 6. [Dev Ops](#6-dev-ops)
 
@@ -127,7 +139,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 We elaborate more about the individual components below.
 
 ### 3.2. UI
-<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/UiClassDiagram.png" width="800"><br>
+<img src="https://github.com/CS2103JAN2017-T09-B1/main/raw/develop/docs/images/UiClassDiagram.jpg" width="800"><br>
 _Figure 3.2.1 : Structure of the UI Component_
 
 **API** : [`Ui.java`](../src/main/java/seedu/today/ui/Ui.java)
