@@ -151,13 +151,10 @@ public class StringUtilTest {
 
     //@@author A0140023E
     //---------------- Tests for replace --------------------------------------
-    // TODO EP
     @Test
     public void replace_startIndexNegative_exceptionThrown() {
         assertOutOfBoundsExceptionThrown("01234", -1, 1, "Valid replacement");
     }
-
-    // assertOutOfBoundsExceptionThrown("01234", 0, -1, "Valid replacement"); // negative end index
 
     @Test
     public void replace_startIndexLargerThanEndIndex_exceptionThrown() {

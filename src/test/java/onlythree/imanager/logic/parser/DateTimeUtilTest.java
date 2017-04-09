@@ -1,8 +1,8 @@
 package onlythree.imanager.logic.parser;
 
-import static org.junit.Assert.assertEquals;
+import static onlythree.imanager.testutil.TestDateTimeHelper.assertEqualsIgnoresUnitBelow;
+import static onlythree.imanager.testutil.TestDateTimeHelper.assertNotEqualsIgnoresUnitBelow;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.DayOfWeek;
@@ -11,7 +11,6 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
@@ -24,15 +23,38 @@ import onlythree.imanager.commons.exceptions.IllegalValueException;
 import onlythree.imanager.logic.DateTimeUtil;
 
 //@@author A0140023E
-// TODO improve test and naming
 public class DateTimeUtilTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
-    @Test
-    public void parseDateTimeString_validDateTimes_noExceptionThrown() throws IllegalValueException {
-        //org.apache.log4j.Logger.getRootLogger().setLevel(Level.INFO);
+    private ZoneId someZoneId = ZoneId.of("Asia/Tokyo");
+    private ZonedDateTime someDateTime = ZonedDateTime.of(2015, 4, 1, 3, 4, 5, 2, someZoneId);
 
+    @Test
+    public void isSingleDateTimeString() {
+        // Not dates
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Hello World"));
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Not a date"));
+        assertFalse(DateTimeUtil.isSingleDateTimeString("We.d"));
+
+        // multiple date groups separated by unknown tokens
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed ~ Thursday"));
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed ` Thursday"));
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed plus Thursday"));
+
+        // recurring dates
+        assertFalse(DateTimeUtil.isSingleDateTimeString("every Friday"));
+
+        // multiple date alternatives
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed or Thur"));
+        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed and Thur"));
+
+        // valid single dates
+        assertTrue(DateTimeUtil.isSingleDateTimeString("Sat"));
+    }
+
+    @Test
+    public void parseDateTimeString_validDateTimeString_dateTimeReturned() throws IllegalValueException {
         // Random days of the week
         assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)),
                 DateTimeUtil.parseDateTimeString("Sat"));
@@ -61,78 +83,29 @@ public class DateTimeUtilTest {
 
     @Test
     public void parseDateTimeString_invalidDateTime_throwsException() throws IllegalValueException {
-        assertInvalidDateTime("Not a date");
+        testInvalidDateTime("Not a date");
     }
     @Test
     public void parseDateTimeString_invalidDateTimeWithSymbols_throwsException() throws IllegalValueException {
-        assertInvalidDateTime("We.d");
+        testInvalidDateTime("We.d");
     }
 
     @Test
     public void parseDateTimeString_multipleDateTimes_throwsException() throws IllegalValueException {
-        assertMultipleDateTimesFound("Wed ~ Thur");
+        testMultipleDateTimesFound("Wed ~ Thur");
     }
 
     @Test
     public void parseDateTimeString_multipleDateTimeAlternatives_throwsException() throws IllegalValueException {
-        assertMultipleDateTimeAlternativesFound("Wed or Thur");
+        testMultipleDateTimeAlternativesFound("Wed or Thur");
     }
     @Test
     public void parseDateTimeString_recurringDateTime_throwsException() throws IllegalValueException {
-        assertRecurringDateTimesFound("every Friday");
-    }
-
-    public void assertInvalidDateTime(String dateTime) throws IllegalValueException {
-        exception.expect(IllegalValueException.class);
-        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_NOT_VALID_DATE_TIME, dateTime));
-        DateTimeUtil.parseDateTimeString(dateTime);
-    }
-
-    public void assertMultipleDateTimesFound(String dateTime) throws IllegalValueException {
-        exception.expect(IllegalValueException.class);
-        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_MULTIPLE_DATE_TIMES_FOUND, dateTime));
-        DateTimeUtil.parseDateTimeString(dateTime);
-    }
-
-    public void assertMultipleDateTimeAlternativesFound(String dateTime) throws IllegalValueException {
-        exception.expect(IllegalValueException.class);
-        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_MULTIPLE_DATE_TIME_ALTERNATIVES_FOUND, dateTime));
-        DateTimeUtil.parseDateTimeString(dateTime);
-    }
-
-    public void assertRecurringDateTimesFound(String dateTime) throws IllegalValueException {
-        exception.expect(IllegalValueException.class);
-        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_RECURRING_DATE_TIME_FOUND, dateTime));
-        DateTimeUtil.parseDateTimeString(dateTime);
+        testRecurringDateTimesFound("every Friday");
     }
 
     @Test
-    public void isSingleDateTimeString() {
-        // Not dates
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Hello World"));
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Not a date"));
-        assertFalse(DateTimeUtil.isSingleDateTimeString("We.d"));
-
-        // multiple date groups separated by unknown tokens
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed ~ Thursday"));
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed ` Thursday"));
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed plus Thursday"));
-
-        // recurring dates
-        assertFalse(DateTimeUtil.isSingleDateTimeString("every Friday"));
-
-        // multiple date alternatives
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed or Thur"));
-        assertFalse(DateTimeUtil.isSingleDateTimeString("Wed and Thur"));
-
-
-        // valid single dates
-        assertTrue(DateTimeUtil.isSingleDateTimeString("Sat"));
-    }
-
-    // TODO all these also
-    @Test
-    public void testingOnly() throws IllegalValueException {
+    public void parseDateTimeString_unrecognizedNaturalLanguage_expectStrangeOutput() throws IllegalValueException {
         assertNotEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.now().withMonth(4).withDayOfMonth(25).withHour(20).withMinute(0).withSecond(0)
                         .plusDays(2),
@@ -146,26 +119,23 @@ public class DateTimeUtilTest {
     }
 
     @Test
-    public void parseEditedDateTimeString() throws IllegalValueException {
-        ZoneId fixedRandomZoneId = ZoneId.of("Asia/Tokyo");
-        ZonedDateTime fixedRandomDateTime = ZonedDateTime.of(2015, 4, 1, 3, 4, 5, 2, fixedRandomZoneId);
-
+    public void parseEditedDateTimeString_relativeDateTime_expectCorrectOutput() throws IllegalValueException {
         // relative date
         assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().plusDays(2),
-                DateTimeUtil.parseEditedDateTimeString("2 days later", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("2 days later", someDateTime));
         // relative time
         assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().plusHours(24),
-                DateTimeUtil.parseEditedDateTimeString("24 hours later", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("24 hours later", someDateTime));
 
         // relative date respective to another date
         assertEqualsIgnoresMilliAndBelow(ZonedDateTime.now().withMonth(4).withDayOfMonth(25).plusDays(2),
-                DateTimeUtil.parseEditedDateTimeString("2 days after 25 Apr", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("2 days after 25 Apr", someDateTime));
 
         // relative date respective to another date-time
         assertEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.now().withMonth(4).withDayOfMonth(25).withHour(20).withMinute(0).withSecond(0)
                         .plusDays(2),
-                DateTimeUtil.parseEditedDateTimeString("2 days after 25 Apr 8pm", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("2 days after 25 Apr 8pm", someDateTime));
 
         // relative date respective to another date-time with time-zone
         // PST and America/Los_Angeles is equivalent but Natty supports only certain time-zone suffixes
@@ -173,62 +143,54 @@ public class DateTimeUtilTest {
         assertEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.of(Year.now().getValue(), 4, 25, 20, 0, 0, 0, ZoneId.of("America/Los_Angeles"))
                         .plusDays(5),
-                DateTimeUtil.parseEditedDateTimeString("5 days after 25 Apr 8pm PST", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("5 days after 25 Apr 8pm PST", someDateTime));
 
         // relative date respective to another date-time with time-zone offset
         assertEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.of(Year.now().getValue(), 4, 25, 20, 0, 0, 0, ZoneId.of("+1000"))
                         .plusDays(3),
-                DateTimeUtil.parseEditedDateTimeString("3 days after 25 Apr 8pm +1000", fixedRandomDateTime));
-
+                DateTimeUtil.parseEditedDateTimeString("3 days after 25 Apr 8pm +1000", someDateTime));
 
         // relative date respective to another date with time
         // note that this does not work because Natty is not working correctly
         assertNotEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.now().withMonth(4).withDayOfMonth(25).withHour(20).withMinute(0).withSecond(0)
                         .plusHours(2),
-                DateTimeUtil.parseEditedDateTimeString("2 hours after 25 Apr 8pm", fixedRandomDateTime));
-        // TODO
+                DateTimeUtil.parseEditedDateTimeString("2 hours after 25 Apr 8pm", someDateTime));
         assertNotEqualsIgnoresMilliAndBelow(
                 ZonedDateTime.of(Year.now().getValue(), 4, 25, 20, 0, 0, 0, ZoneId.of("America/Los_Angeles"))
                         .plusDays(5),
-                DateTimeUtil.parseEditedDateTimeString("5 days after 8pm PST 25 Apr", fixedRandomDateTime));
+                DateTimeUtil.parseEditedDateTimeString("5 days after 8pm PST 25 Apr", someDateTime));
     }
 
-    // Extract this for use in other tests
-    /**
-     * Asserts that two zoned date-times are equal ignoring milliseconds and below.
-     */
+    private void testInvalidDateTime(String dateTime) throws IllegalValueException {
+        exception.expect(IllegalValueException.class);
+        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_NOT_VALID_DATE_TIME, dateTime));
+        DateTimeUtil.parseDateTimeString(dateTime);
+    }
+
+    private void testMultipleDateTimesFound(String dateTime) throws IllegalValueException {
+        exception.expect(IllegalValueException.class);
+        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_MULTIPLE_DATE_TIMES_FOUND, dateTime));
+        DateTimeUtil.parseDateTimeString(dateTime);
+    }
+
+    private void testMultipleDateTimeAlternativesFound(String dateTime) throws IllegalValueException {
+        exception.expect(IllegalValueException.class);
+        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_MULTIPLE_DATE_TIME_ALTERNATIVES_FOUND, dateTime));
+        DateTimeUtil.parseDateTimeString(dateTime);
+    }
+
+    private void testRecurringDateTimesFound(String dateTime) throws IllegalValueException {
+        exception.expect(IllegalValueException.class);
+        exception.expectMessage(String.format(DateTimeUtil.MESSAGE_RECURRING_DATE_TIME_FOUND, dateTime));
+        DateTimeUtil.parseDateTimeString(dateTime);
+    }
+
     private void assertEqualsIgnoresMilliAndBelow(ZonedDateTime expected, ZonedDateTime actual) {
-        ChronoUnit truncationUnit = ChronoUnit.SECONDS;
-        ZonedDateTime expectedTruncated = expected.truncatedTo(truncationUnit);
-        ZonedDateTime actualTruncated = actual.truncatedTo(truncationUnit);
-        assertIsEqual(expectedTruncated, actualTruncated);
+        assertEqualsIgnoresUnitBelow(expected, actual, ChronoUnit.SECONDS);
     }
-
-    /**
-     * Asserts that two zoned date-times are not equal ignoring milliseconds and below.
-     */
     private void assertNotEqualsIgnoresMilliAndBelow(ZonedDateTime expected, ZonedDateTime actual) {
-        ChronoUnit truncationUnit = ChronoUnit.SECONDS;
-        ZonedDateTime expectedTruncated = expected.truncatedTo(truncationUnit);
-        ZonedDateTime actualTruncated = actual.truncatedTo(truncationUnit);
-        assertIsNotEqual(expectedTruncated, actualTruncated);
-    }
-
-    /**
-     * Assert that the instant of the ZonedDateTimes are equal instead of comparing component by component.
-     * @see ChronoZonedDateTime#isEqual(ChronoZonedDateTime)
-     */
-    private void assertIsEqual(ZonedDateTime expected, ZonedDateTime actual) {
-        assertEquals(expected.toInstant(), actual.toInstant());
-    }
-
-    /**
-     * Assert that the instant of the ZonedDateTimes are not equal instead of comparing component by component.
-     * @see ChronoZonedDateTime#isEqual(ChronoZonedDateTime)
-     */
-    private void assertIsNotEqual(ZonedDateTime expected, ZonedDateTime actual) {
-        assertNotEquals(expected.toInstant(), actual.toInstant());
+        assertNotEqualsIgnoresUnitBelow(expected, actual, ChronoUnit.SECONDS);
     }
 }

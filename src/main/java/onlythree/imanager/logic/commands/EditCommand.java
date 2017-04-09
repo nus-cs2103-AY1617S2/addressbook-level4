@@ -31,7 +31,7 @@ public class EditCommand extends Command {
             + "by the index number used in the last task listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) [NAME] [by DEADLINE] "
-            + "[from STARTDATE] [to ENDDATE] [t/TAG]...\n"
+            + "[from START_DATE_TIME] [to END_DATE_TIME] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 by the day after tomorrow";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

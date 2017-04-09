@@ -227,9 +227,6 @@ public class DateTimeExtractor {
         processRawDeadline();
 
         if (!isProcessedAndPresent(rawDeadline)) {
-            // TODO
-            // This means what comes after by is not a date. Thus we stop here as no Deadline is found.
-            // e.g. add Download song stand by me
             return;
         }
 

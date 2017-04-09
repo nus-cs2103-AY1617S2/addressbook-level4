@@ -1,26 +1,25 @@
 package onlythree.imanager.logic.parser;
 
+import static onlythree.imanager.testutil.TestDateTimeHelper.assertEqualsTaskIgnoreDeadlineSeconds;
+import static onlythree.imanager.testutil.TestDateTimeHelper.assertEqualsTaskIgnoreStartEndDateTimeSeconds;
 import static org.junit.Assert.assertEquals;
 
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import onlythree.imanager.commons.core.Messages;
 import onlythree.imanager.commons.exceptions.IllegalValueException;
+import onlythree.imanager.logic.commands.AddCommand;
 import onlythree.imanager.logic.commands.Command;
-import onlythree.imanager.logic.commands.CommandResult;
-import onlythree.imanager.logic.commands.EditCommand;
 import onlythree.imanager.logic.commands.exceptions.CommandException;
-import onlythree.imanager.model.Model;
 import onlythree.imanager.model.ModelManager;
 import onlythree.imanager.model.tag.UniqueTagList;
 import onlythree.imanager.model.task.Deadline;
 import onlythree.imanager.model.task.Name;
-import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 import onlythree.imanager.model.task.Task;
 import onlythree.imanager.model.task.exceptions.InvalidDurationException;
@@ -28,166 +27,80 @@ import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
 //@@author A0140023E
 public class AddCommandParserTest {
-    // TODO make logicmanagertest test some simple add and edit
-    // TODO fixed dates like 25 Apr can fail if it is in the past
-    // TODO see who else is using ExpectedException
-    // TODO fuzzy equals
-
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     private static Task actualTask;
 
-    //TODO
     @Test
-    public void testAdd() throws PastDateTimeException, IllegalValueException, CommandException {
+    public void parse_withRequiredFieldsOnly_expectCorrectTask()
+            throws PastDateTimeException, IllegalValueException, CommandException {
+        Name name = new Name("only name");
+        Task expectedTask = new Task(name, Optional.empty(), Optional.empty(), new UniqueTagList());
+
+        parseAndExecute("only name");
+
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
+    public void parse_withTags_expectCorrectTask()
+            throws PastDateTimeException, IllegalValueException, CommandException {
+        Name name = new Name("fill me up");
+        Task expectedTask = new Task(name, Optional.empty(), Optional.empty(), new UniqueTagList("tag1", "tag2"));
+
+        parseAndExecute(" fill me up t/tag1 t/tag2");
+
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
+    public void parse_withDeadline_expectCorrectTask()
+            throws PastDateTimeException, IllegalValueException, CommandException {
         Name name = new Name("stand by me");
-        Deadline deadline = new Deadline(ZonedDateTime.now().plusDays(1).truncatedTo(ChronoUnit.MINUTES));
+        Deadline deadline = new Deadline(ZonedDateTime.now().plusDays(1));
         Task expectedTask = new Task(name, Optional.of(deadline), Optional.empty(), new UniqueTagList());
 
-        Command command = new AddCommandParser().parse("stand by me by tmr");
-        command.setData(new ModelManagerMock());
-        CommandResult result = command.execute();
-        actualTask.setDeadline(new Deadline(
-                actualTask.getDeadline().get().getDateTime().truncatedTo(ChronoUnit.MINUTES)));
-        assertEquals(expectedTask, actualTask);
-        System.out.println(actualTask);
-        System.out.println(result.feedbackToUser);
-    }
+        parseAndExecute(" stand by me by tmr");
 
-
-    @Test
-    public void testEdit() throws PastDateTimeException, IllegalValueException, CommandException {
-        Model model = new ModelManagerMock();
-
-        addSampleTaskWithDeadline(model);
-
-        editTaskCommand(model, "1 by 2 days later");
-
-        Deadline deadline = new Deadline(ZonedDateTime.now().plusDays(2).truncatedTo(ChronoUnit.MINUTES));
-        Task expectedTask = new Task(new Name("stand by me"), Optional.of(deadline), Optional.empty(),
-                new UniqueTagList());
-        actualTask.setDeadline(new Deadline(
-                actualTask.getDeadline().get().getDateTime().truncatedTo(ChronoUnit.MINUTES)));
-
-        assertEquals(expectedTask, actualTask);
+        assertEqualsTaskIgnoreDeadlineSeconds(expectedTask, actualTask);
     }
 
     @Test
-    public void testEdit2() throws PastDateTimeException, IllegalValueException, CommandException {
-        Model model = new ModelManagerMock();
-        addSampleTaskWithDeadline(model);
+    public void parse_withStartEndDateTime_expectCorrectTask()
+            throws PastDateTimeException, IllegalValueException, CommandException, InvalidDurationException {
+        Name name = new Name("vacation");
+        StartEndDateTime startEndDateTime =
+                new StartEndDateTime(ZonedDateTime.now().plusDays(3), ZonedDateTime.now().plusDays(7));
+        Task expectedTask = new Task(name, Optional.empty(), Optional.of(startEndDateTime), new UniqueTagList());
 
-        editTaskCommand(model, "1 Pass rose from Uncle to Jane by 5 days later");
+        parseAndExecute(" vacation from 3 days after to 7 days after");
 
-        Deadline deadline = new Deadline(ZonedDateTime.now().plusDays(5).truncatedTo(ChronoUnit.MINUTES));
-        Task expectedTask = new Task(new Name("Pass rose from Uncle to Jane"), Optional.of(deadline), Optional.empty(),
-                new UniqueTagList());
-        actualTask.setDeadline(new Deadline(
-                actualTask.getDeadline().get().getDateTime().truncatedTo(ChronoUnit.MINUTES)));
+        assertEqualsTaskIgnoreStartEndDateTimeSeconds(expectedTask, actualTask);
 
-        assertEquals(expectedTask, actualTask);
     }
 
     @Test
-    public void testEdit3() throws PastDateTimeException, IllegalValueException, CommandException {
-        Model model = new ModelManagerMock();
-
-        addSampleTaskWithDeadline(model);
-
-        editTaskCommand(model, "1 by 8 days from 25 Apr");
-
-        Deadline deadline = new Deadline(ZonedDateTime.now().withMonth(4).withDayOfMonth(25).plusDays(8)
-                .truncatedTo(ChronoUnit.MINUTES));
-        Task expectedTask = new Task(new Name("stand by me"), Optional.of(deadline), Optional.empty(),
-                new UniqueTagList());
-        actualTask.setDeadline(new Deadline(
-                actualTask.getDeadline().get().getDateTime().truncatedTo(ChronoUnit.MINUTES)));
-
-        assertEquals(expectedTask, actualTask);
-    }
-
-
-    @Test
-    public void testEditSpecial1() throws PastDateTimeException, IllegalValueException, CommandException {
-        Model model = new ModelManagerMock();
-
-        addSampleTaskWithDeadline(model);
-
+    public void parse_withDeadlineAndStartEndDateTime_expectsException()
+            throws PastDateTimeException, IllegalValueException, CommandException, InvalidDurationException {
         exception.expect(CommandException.class);
-        exception.expectMessage(EditCommand.EditTaskDescriptor.MESSAGE_NEED_START_END_DATE_TIME);
+        exception.expectMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        editTaskCommand(model, "1 by 8 days later from 25 Apr");
-
-        Deadline deadline = new Deadline(ZonedDateTime.now().withMonth(4).withDayOfMonth(25).plusDays(8)
-                .truncatedTo(ChronoUnit.MINUTES));
-        Task expectedTask = new Task(new Name("stand by me"), Optional.of(deadline), Optional.empty(),
-                new UniqueTagList());
-        actualTask.setDeadline(new Deadline(
-                actualTask.getDeadline().get().getDateTime().truncatedTo(ChronoUnit.MINUTES)));
-
-        assertEquals(expectedTask, actualTask);
+        parseAndExecute(" by tmr from 3 days after to 7 days after");
     }
 
-    @Test
-    public void testEditSpecial2()
-            throws PastDateTimeException, InvalidDurationException, IllegalValueException, CommandException {
-        Model model = new ModelManagerMock();
-
-        addSampleTaskWithStartEndDateTime(model);
-
-        editTaskCommand(model, "1 by 8 days later from 25 Apr");
-
-        ZonedDateTime startDateTime =
-                ZonedDateTime.now().withMonth(4).withDayOfMonth(25).truncatedTo(ChronoUnit.MINUTES);
-        ZonedDateTime endDateTime =
-                ZonedDateTime.now().withMonth(4).withDayOfMonth(28).truncatedTo(ChronoUnit.MINUTES);
-        StartEndDateTime startEndDateTime = new StartEndDateTime(startDateTime, endDateTime);
-        Task expectedTask = new Task(new Name("by 8 days later"), Optional.empty(), Optional.of(startEndDateTime),
-                new UniqueTagList());
-
-        StartEndDateTime actualStartEndDateTime = actualTask.getStartEndDateTime().get();
-        actualTask.setStartEndDateTime(new StartEndDateTime(
-                actualStartEndDateTime.getStartDateTime().truncatedTo(ChronoUnit.MINUTES),
-                actualStartEndDateTime.getEndDateTime().truncatedTo(ChronoUnit.MINUTES)));
-
-        assertEquals(expectedTask, actualTask);
-    }
-
-    private void addSampleTaskWithDeadline(Model model) throws CommandException {
-        Command command = new AddCommandParser().parse("stand by me by tmr");
-        command.setData(model);
+    private void parseAndExecute(String args) throws CommandException {
+        Command command = new AddCommandParser().parse(args);
+        command.setData(new ModelManagerMock());
         command.execute();
     }
 
-    private void addSampleTaskWithStartEndDateTime(Model model) throws CommandException {
-        Command command = new AddCommandParser().parse("stand by me from 23 Apr to 28 Apr");
-        command.setData(model);
-        command.execute();
-    }
-
-    private void editTaskCommand(Model model, String args) throws CommandException {
-        Command command = new EditCommandParser().parse(args);
-        command.setData(model);
-        command.execute();
-    }
 
     private class ModelManagerMock extends ModelManager {
         @Override
         public synchronized void addTask(Task task) {
             AddCommandParserTest.actualTask = task;
             super.addTask(task);
-        }
-
-        // TODO move this to EditCommandParserTest
-        @Override
-        public void updateTask(int filteredTaskListIndex, ReadOnlyTask editedTask) {
-            try {
-                AddCommandParserTest.actualTask = new Task(editedTask);
-            } catch (IllegalValueException e) {
-                throw new AssertionError("Copying a valid task should always result in a valid task");
-            }
-            super.updateTask(filteredTaskListIndex, editedTask);
         }
     }
 
