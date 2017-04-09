@@ -641,4 +641,3 @@ Cons:
 * cannot change the color of tasks based on priority
 * alert would not pop out automatically
 * everytime I boot up my computer, I have to open the app manually
-
