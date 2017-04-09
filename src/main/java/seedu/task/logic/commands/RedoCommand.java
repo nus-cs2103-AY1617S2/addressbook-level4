@@ -35,7 +35,7 @@ public class RedoCommand extends Command {
 
         try {
             ReadOnlyTaskManager backupData = readTaskManager(history.getRedoFilePath());
-            model.loadData(backupData);
+            model.undoData(backupData);
         } catch (IOException io) {
             history.resetRedoCount();
             return new CommandResult(MESSAGE_FAIL_NOT_FOUND);

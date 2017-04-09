@@ -71,7 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Load data into taskManager. Used by Undo/Redo Command.
      */
     @Override
-    public void loadData(ReadOnlyTaskManager newData) throws IllegalValueException {
+    public void undoData(ReadOnlyTaskManager newData) throws IllegalValueException {
         taskManager.resetData(newData);
         raise(new TaskManagerChangedEvent(taskManager, history.getBackupFilePath()));
     }
