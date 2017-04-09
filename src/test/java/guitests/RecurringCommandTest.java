@@ -58,18 +58,15 @@ public class RecurringCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("CLEAR");
         commandBox.runCommand(td.recurTestMonth.getAddCommand());
         commandBox.runCommand("RECUR " + targetIndex + " 3 months");
-        assertTrue(eventTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForMonths()));
+        assertTrue(deadlineTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForMonths()));
 
         // for years
         commandBox.runCommand("CLEAR");
         commandBox.runCommand(td.recurTestYear.getAddCommand());
         commandBox.runCommand("RECUR " + targetIndex + " 3 years");
-        assertTrue(eventTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForYears()));
+        assertTrue(deadlineTaskListPanel.isListMatching(td.getTypicalRecurringDeadlineTasksForYears()));
 
         // duplicate task
-        commandBox.runCommand("CLEAR");
-        commandBox.runCommand(td.recurTestYear.getAddCommand());
-        commandBox.runCommand("RECUR " + targetIndex + " 3 years");
         commandBox.runCommand("RECUR 1 1 years");
         assertResultMessage(RecurringCommand.MESSAGE_DUPLICATE_TASK);
     }
