@@ -42,7 +42,7 @@ public class AddCommandTest extends TaskManagerGuiTest {
         assertMatching(taskToAdd, addedCard);
 
         //confirm the list now contains all previous persons plus the new person
-        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        //TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
         //assertTrue(taskListPanel.isListMatching(expectedList));
     }
 

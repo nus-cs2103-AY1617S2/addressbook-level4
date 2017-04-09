@@ -173,7 +173,7 @@ public class TaskListPanelHandle extends GuiHandle {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
     }
 
-    public int getNumberOfTasks() {
+    public int getNumberOfPeople() {
         return getListView().getItems().size();
     }
 }
