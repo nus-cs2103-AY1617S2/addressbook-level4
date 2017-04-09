@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.task.commons.core.Config;
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
@@ -17,6 +19,7 @@ import seedu.task.model.ReadOnlyTaskList;
  * Loads task data from the specified directory and file.
  */
 public class LoadCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(LoadCommand.class);
 
     public static final String COMMAND_WORD = "load";
 
@@ -54,20 +57,23 @@ public class LoadCommand extends Command {
             throw new IllegalValueException(MESSAGE_DIRECTORY_LOAD_LOCATION);
         }
 
+        assert toLoad.exists();
+
     }
 
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-
-        System.out.println("Executing load command...");
+        assert config != null;
+        logger.info("Executing load command with " + toLoad.toString());
 
         try {
-            Optional<ReadOnlyTaskList> newTaskList = storage.loadTaskListFromNewLocation(model.getTaskList(), toLoad);
+            Optional<ReadOnlyTaskList> newTaskList = storage.loadTaskListFromNewLocation(toLoad);
             if (newTaskList.isPresent()) {
                 model.resetData(newTaskList.get());
             }
         } catch (FileNotFoundException | DataConversionException e1) {
+            logger.warning("Failed to execute load.");
             throw new CommandException(MESSAGE_LOAD_IO_EXCEPTION);
         }
 
@@ -76,9 +82,10 @@ public class LoadCommand extends Command {
         try {
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
         } catch (IOException e) {
+            logger.warning("Failed to execute load.");
             throw new CommandException(String.format(MESSAGE_LOAD_IO_EXCEPTION, toLoad.toString()));
         }
-
+        logger.info("Execute load succeeded");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLoad.toString()));
 
     }

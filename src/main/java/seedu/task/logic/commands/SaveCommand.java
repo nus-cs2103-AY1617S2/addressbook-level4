@@ -3,8 +3,10 @@ package seedu.task.logic.commands;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import seedu.task.commons.core.Config;
+import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.FileUtil;
@@ -14,6 +16,7 @@ import seedu.task.logic.commands.exceptions.CommandException;
  * Saves task data in the specified directory and updates the default save directory.
  */
 public class SaveCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(SaveCommand.class);
 
     public static final String COMMAND_WORD = "save";
 
@@ -50,6 +53,7 @@ public class SaveCommand extends Command {
         } catch (IOException ioe) {
             throw new IllegalValueException(String.format(MESSAGE_INVALID_SAVE_LOCATION, fileAsString));
         }
+        assert toSave.exists();
 
     }
 
@@ -64,28 +68,24 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         assert model != null;
-        //        try {
-        //            model.addTask(toAdd);
-        //            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        //        } catch (UniqueTaskList.DuplicateTaskException e) {
-        //            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        //        }
+        assert config != null;
+        logger.info("Executing load command with " + toSave.toString());
 
-        System.out.println("Executing save command...");
         try {
-            //make sure the current save file is up to date.
-            //            storage.saveTaskList(model.getTaskList());
 
-            //write the data into new location
             storage.saveTaskListInNewLocation(model.getTaskList(), toSave);
 
             //update configuration to reflect new save location
             config.setTaskManagerFilePath(toSave.toString());
+
             ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
 
         } catch (IOException e) {
+            logger.warning("Failed to execute save.");
+
             throw new CommandException(String.format(MESSAGE_SAVE_IO_EXCEPTION, toSave.toString()));
         }
+        logger.info("Execute save succeeded");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSave.toString()));
 
     }

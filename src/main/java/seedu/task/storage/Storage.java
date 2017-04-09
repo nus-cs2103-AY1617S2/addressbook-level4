@@ -41,23 +41,22 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
     //@@author A0163559U
     /**
      * Attempts to save current version of the Task Manager to new file location
-     * @param taskList
-     * @param saveFile
-     * @throws IOException
+     * @param taskList is the Task Manager data to be saved
+     * @param saveFile is the save location
+     * @throws IOException if file operation fails
      */
     @Override
     void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File saveFile) throws IOException;
 
     /**
      * Attempts to load Task Manager data from specified file location
-     * @param taskList
-     * @param loadFile
+     * @param loadFile is the file to load Task Manager data from
      * @return
-     * @throws DataConversionException
-     * @throws FileNotFoundException
+     * @throws DataConversionException if data conversion fails
+     * @throws FileNotFoundException if the file is not found
      */
     @Override
-    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+    Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(File loadFile)
             throws FileNotFoundException, DataConversionException;
 
     //@@author

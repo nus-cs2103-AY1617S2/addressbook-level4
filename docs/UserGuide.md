@@ -61,6 +61,7 @@ Format: `add TASK_NAME [p/PRIORITY_LEVEL] [sd/START_TIMEDATE] [ed/END_TIMEDATE] 
 > * To add tasks with deadlines, simply specify the end timing.
 > * To add recurring tasks, see section 2.2.1.
 > * Any of these 3 types of tasks can have 0 or more tags.
+> * All fields are optional, except for description.
 
 Examples:
 
@@ -85,12 +86,15 @@ Examples:
 Shows a list of all tasks in the task list.<br>
 Format: `list`<br>
 
-> The list of tasks will be sorted accoding to priority level from 1 to 3
+> All tasks will appear in the task list, and tasks will appear in the calendar as well.
 
 Example:
-
 * `list`<br>
   Shows a list of all tasks in the task list.
+
+### 2.3.1 Natural ordering of tasks
+
+Sorting occurs automatically in Task Manager after every action. First, completed tasks will be sent to the bottom of the list. Then, tasks are sorted by priority, with highest priority tasks at the top of the list. Afterwards, tasks are sorted by their end time, then start time, then alphabetized by description.
 
 ### 2.4. Editing a task : `edit`
 
@@ -108,12 +112,12 @@ Editing a recurring task in this way will edit all instances
 > * Existing values will be updated to the input values.
 > * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 > * You can remove all the task's tags by typing `t/` without specifying any tags after it.
-> * If you want to clear the START_TIMEDATE or END_TIMEDATE of a task, use `sd/floating` and `ed/floating` respectively 
+> * If you want to clear the START_TIMEDATE or END_TIMEDATE of a task, use `sd/floating` and `ed/floating` respectively
 > in the edit command (see example below).
 > * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
 > according to the frequency specified.
 > * Once a non-recurring task is created, it cannot be `edit`ed and made into a recurring task. You must create a new task using
-> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
+> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one.
 
 Examples:
 
@@ -125,18 +129,19 @@ Examples:
 
 * `edit 4 ed/floating`<br>
    Removes the end timing for task 4.
-  
+
 * `edit 1 r/1y` <br>
   Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
-  Format: `editthis INDEX [TASK_NAME] [p/PRIORITY] [sd/START_TIMEDATE] [ed/END_TIMEDATE]...`
+
+  Format: `editthis INDEX [NAME] p/PRIORITY sd/START_TIMEDATE ed/END_TIMEDATE...`
 
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
 
   Examples:
-  
+
   * `edithis 2 sd/01/01/2017`<br>
   Edits the start date of task 2 (which is recurring)
 
@@ -152,8 +157,7 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `do assignment to` will match `assignment to do`
 > * Only full words will be matched e.g. `assign` will not match `assignment`
 > * Task matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `assignemnt` will match `do algorightm assignment`
-> * Note: `find` does not search on a task's tags.
+> * Note: `find` does not search on a task's tags. e.g. `assignment` will match `do algorithm assignment`
 
 Examples:
 
@@ -161,7 +165,7 @@ Examples:
   Returns `Study for midterm`
 
   * `find 11/01/2017`<br>
-  Returns all tasks with start or end timings on January 11, 2017. 
+  Returns all tasks with start or end timings on January 11, 2017.
 
   * `find 1`<br>
   Returns tasks with a priority of 1 (i.e. a HIGH priority).
@@ -172,7 +176,7 @@ Examples:
   > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
 
   Examples:
-  
+
   * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
     The task is displayed in the list with the above parameters
   * `find 11/05/2017`<br>
@@ -270,7 +274,7 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
-Example: 
+Example:
 
 * `exit`<br>
 The application will shut down.
@@ -279,23 +283,47 @@ The application will shut down.
 
 Saves task manager data in specified file location.
 Format: `save PATH/TO/SAVE_LOCATION`
-> * Task list data is saved in the hard disk automatically after any command that changes the data.<br>
-> * There is no need to save manually.
+
+* Task list data is saved in the hard disk automatically after any command that changes the data.<br>
+* As a result, there is no need to save manually.
+* The exception is when you want to save data to a new location.
 
 Examples:
 
-* `save`
-* `save` 
+* `save` task_manager_back_up.xml
+* `save` data/taskmanager.xml
 
 ### 2.12. Loading the data : `load`
 
 Loads task manager data from specified file location
 Format: `load PATH/TO/LOAD_LOCATION`
 
+* Loading occurs automatically when Task Manager opens.
+* As a result, the load command is only necessary when Task data should be loaded from a new location.
+
 Examples:
 
-* `load`
-* `load`
+* `load` task_manager_old.xml
+* `load` data/saved_task_manager.xml
+
+### 2.13. Revert the previous change : `undo`
+
+Undo the previous change made to the task manager.
+Format: `undo`
+> * The undo command is able to undo all changes made after the application is opened.
+> * When there is nothing to undo, an error message will be shown.
+
+Examples:
+* `undo`
+
+### 2.14. Revert the previous undo change: `redo`
+
+Revert the previous undo change to the task manager.
+Format: `redo`
+> * The redo command is able to redo multiple undos.
+
+Examples:
+* `redo`
 
 ## 3. Notes on Recurring Tasks
 
@@ -312,7 +340,7 @@ the implementation of such tasks. A few things to note about how to use this fea
   the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
 * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
-* Both start and end time parameters must be specified for initiating a recurring task. 
+* Both start and end time parameters must be specified for initiating a recurring task.
 
 ## 4. FAQ
 
@@ -320,10 +348,12 @@ the implementation of such tasks. A few things to note about how to use this fea
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br>
 **Q**: How do I change the calendar to view a different month?<br>
 **A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.
+**Q**: How do I undo changes made in a previous session?
+**A**: Unfortunately, command history is cleared upon exiting Task Manager. So, you won't be able to undo those changes. Sorry!
 
 ## 5. Command Summary
 
-* **Add**  `add TASK_NAME p/1 sd/START_DATE ed/DUE_DATE [t/TAG]...` <br>
+* **Add**  `add TASK_NAME p/1 sd/START_TIMEDATE ed/END_TIMEDATE [t/TAG]...` <br>
    e.g. `add Study for midterm p/1 sd/04/03/2017 ed/04/04/2017 t/study t/midterm`
 
 * **Clear** : `clear`
@@ -363,7 +393,7 @@ the implementation of such tasks. A few things to note about how to use this fea
 
 * **Save** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
-   
+
 * **Redo** : `redo` <br>
    e.g. `redo`
 

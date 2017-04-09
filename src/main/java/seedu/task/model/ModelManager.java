@@ -52,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTaskList newData) {
         taskList.resetData(newData);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateTaskListChanged() {
         raise(new TaskListChangedEvent(taskList));
     }
 
@@ -74,7 +74,7 @@ public class ModelManager extends ComponentManager implements Model {
             redoStack.pop();
         }
         this.taskList.removeTask(target);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.taskList.removeTask(targetToAdd);
         this.taskList.addTask((Task) targetToDelete);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         this.taskList.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override
@@ -117,7 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
             redoStack.pop();
         }
         this.taskList.updateTask(addressBookIndex, editedTask);
-        indicateAddressBookChanged();
+        indicateTaskListChanged();
     }
 
     @Override

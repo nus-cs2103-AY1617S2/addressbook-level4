@@ -83,9 +83,6 @@ _Figure 2.1.1 : Architecture Diagram_
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-> Tip: The `.pptx` files used to create diagrams in this document can be found in the [diagrams](diagrams/) folder.
-> To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
 `Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -239,6 +236,14 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Task List data in xml format and read it back.
+* can save Task List data from any properly formatted file.
+* can load Task List data from any properly formatted file.
+<br>
+> The storage component is an example of the singleton design principle because there is only one instance of Storage, accessible through the MainApp class.
+
+> The storage component interacts with the logic component during the load and save command. Here, the load or save command attempts to update the save location for internal storage. In the case of a load command, the logic component makes a save requeset to the storage component. The storage component replies with a notice of either success or failure, since sometimes file operations will fail.
+
+> Adding functionality which allows for saving task data in a new location exemplifies the Open Close principle, because its implementation only added new functions to meet this need, instead of changing existing ones. The Open Close principle states that software should be open to extensions but closed to modifications.
 
 ### 2.6. Common classes
 
@@ -267,9 +272,19 @@ and logging destinations.
 
 ### 3.2. Configuration
 
+Author: Tyler Rocha
+
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file
 (default: `config.json`):
 
+The config.json file contains several attributes:
+* `appTitle` is the name of the application
+* `logLevel` is the default level for the logger
+* `userPrefsFilePath` is the file path to the user preferences file
+* `taskManagerFilePath` is the file path to the task manager save data
+* `taskManagerName` is the name of the task manager application
+
+`taskManagerFilePath` is manipulated automatically when a successful `save` or `load` command is executed. When this occurs, `taskManagerFilePath` is updated to the user-specified file location, and this location becomes the default for future Task Manager sessions.
 
 ## 4. Testing
 
@@ -425,7 +440,7 @@ Use case ends.
 
 **Extensions**
 
-2a. The taske with the name given by the user already exist
+2a. The task with the name given by the user already exists
 > Use case ends
 
 #### Use case: Delete task
@@ -453,11 +468,10 @@ Use case ends.
 
 **MSS**
 
-1. User requests to search for a task with a given name
+1. User searches for a task with a given name
 2. Task Manager shows the task
-3. User type in the change
-4. User requests to update/edit the task
-5. Task Manager change the content of the task <br>
+3. User requests to update/edit the task
+4. Task Manager changes the content of the task <br>
 Use case ends.
 
 **Extensions**
@@ -468,7 +482,7 @@ Use case ends.
 
 4a. The given index is invalid
 
-> 3a1. TaskList shows an error message <br>
+> 4a1. TaskList shows an error message <br>
   Use case resumes at step 3
 
 #### Use case: Read task
@@ -492,7 +506,6 @@ Use case ends.
 1. User requests to search for a task with a given name
 2. Task Manager shows the task
 3. User type in the index of the task he/she wants to mark as complete
-3. User request to complete a task
 4. Task Manager marks the task as completed <br>
 Use case ends.
 
@@ -515,19 +528,12 @@ Use case ends.
 2. Task Manager shows all the tasks <br>
 Use case ends.
 
-**Extensions**
-
-2a. no tasks exist
-> 2a1. Task Manager shows an error message
-> Use case ends
-
 #### Use case: List a task
 
 **MSS**
 
 1. User type in the index of the task
-2. User request to see the content of the task
-3. Task Manager shows the content of the task <br>
+2. Task Manager shows the content of the task <br>
 Use case ends.
 
 **Extensions**
@@ -541,9 +547,7 @@ Use case ends.
 **MSS**
 
 1. User types file location
-2. Task Manager verifies file location
-3. Task Manager saves tasks in specified save file
-4. Task Manager sets this save file as default <br>
+2. Task Manager saves tasks in specified save file <br>
 Use case ends.
 
 **Extensions**
@@ -552,8 +556,8 @@ Use case ends.
 > 2a1. Task Manager shows an error message
 > Use case ends.
 
-3a. The file path does not end with a file name
-> 3a1. Task Manager shows an error message
+2b. The file path does not end with a file name
+> 2b1. Task Manager shows an error message
 > Use case ends.
 
 #### Use case: Load tasks from file
@@ -561,9 +565,7 @@ Use case ends.
 **MSS**
 
 1. User types file location
-2. Task Manager verifies file location
-3. Task Manager loads task data from load file
-4. Task Manager sets this load file as default <br>
+2. Task Manager loads task data from load file <br>
 Use case ends.
 
 **Extensions**
@@ -576,8 +578,8 @@ Use case ends.
 > 2b1. Task Manager shows an error message
 > Use case ends.
 
-3a. The load file has an invalid format.
-> 3a1. Task Manager shows an error message
+3c. The load file has an invalid format.
+> 3c1. Task Manager shows an error message
 > Use case ends.
 
 
@@ -589,18 +591,15 @@ Use case ends.
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be open source.
 5. Should open the app in less than 5 sec.
-6. The GUI should not be overcrowded.
-7. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
-8. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
-9. The level of security will be minimal for this product since it is only accessed by a single user.
-10. To extend the software, proper security measures can be put into place in <100 hours.
-11. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
-12. Should be scalable so that a user can change the layout of the GUI based on personal preference.
-13. Should not overload the CPU so that other running process start to lag.
-14. Should not have seperate administrative functions as there is one user who is the Admin by default.
-15. Support tasks that recur after a specified number of years for 4 years.
-16. Support tasks that recur after a specified number of months for 12 months (1 year).
-17. Support tasks that recur after a specified number of days for 60 days (2 months).
+6. If the input data's format changes, the developers should be able to make needed adjustments in <20 hours.
+7. A user can install and operate the program without assistance of any kind (except consulting the User Guide Documentation).
+8. To extend the software, proper security measures can be put into place in <100 hours.
+9. Aesthetics of the calendar GUI should be sleek and appealing to 90% of users.
+10. Should be scalable so that a user can change the layout of the GUI based on personal preference.
+11. CPU usage should not exceed 10%.
+12. Support tasks that recur after a specified number of years for 4 years.
+13. Support tasks that recur after a specified number of months for 12 months (1 year).
+14. Support tasks that recur after a specified number of days for 60 days (2 months).
 
 ## Appendix D : Glossary
 
@@ -613,7 +612,6 @@ Use case ends.
 > A contact detail that is not meant to be shared with others
 
 ## Appendix E : Product Survey
-
 
 **Google Calendar**
 
@@ -647,3 +645,32 @@ Cons:
 * cannot change the color of tasks based on priority
 * alert would not pop out automatically
 * everytime I boot up my computer, I have to open the app manually
+
+**Wunderlist**
+
+Author: Tyler Rocha
+
+Pros:
+* Allows collaboration with friends and family
+* Supports due dates and reminders
+* Accessible from phone, tablet and laptop
+
+Cons:
+* Free account has limited options
+* Needs to be downloaded
+* Paying for more features is expensive
+
+**Hitask**
+
+Author: Wu Heyang
+
+Pros:
+* Focus on team collaboration
+* Clean user interface
+* Calendar syncs with Google
+
+Cons:
+* Free trial only
+* Premium is expensive and a monthly expense
+* Lots of features can be overwhelming
+

@@ -82,27 +82,19 @@ public class XmlTaskListStorage implements TaskListStorage {
     //@@author A0163559U
     @Override
     public void saveTaskListInNewLocation(ReadOnlyTaskList taskList, File newFile) throws IOException {
-        //System.out.println("file is " + newFile.toString());
-        //System.out.println("file path is " + newFile.toPath().toString());
-        //System.out.println("saved file is " + savedFile.toString());
-        //System.out.println("saved file path is " + savedFile.toPath().toString());
-        System.out.println("FILEPATH:::" + filePath);
+        logger.info("Attempting to save taskList in file" + newFile);
         saveTaskList(taskList, filePath);
         try {
-
-            //newFile.delete(); //we are about to overwrite it
-            //Files.copy(savedFile.toPath(), newFile.toPath());
             String taskData = FileUtil.readFromFile(savedFile);
             System.out.println(taskData);
             FileUtil.writeToFile(newFile, taskData);
 
         } catch (FileAlreadyExistsException faee) {
-            System.out.println("FileAlreadyExistsException in saveTaskListInNewLocation");
-
+            logger.warning("FileAlreadyExistsException in saveTaskListInNewLocation");
+            return; //abort updating state
         } catch (IOException ioe) {
-            System.out.println("IO Exception in saveTaskListInNewLocation");
-            ioe.printStackTrace();
-
+            logger.warning("IO Exception in saveTaskListInNewLocation");
+            return; //abort updating state
         }
         updateState(newFile);
     }
@@ -113,7 +105,7 @@ public class XmlTaskListStorage implements TaskListStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(ReadOnlyTaskList taskList, File loadFile)
+    public Optional<ReadOnlyTaskList> loadTaskListFromNewLocation(File loadFile)
             throws FileNotFoundException, DataConversionException {
         Optional<ReadOnlyTaskList> newTaskList = readTaskList(loadFile.toString());
         if (newTaskList.isPresent()) {
