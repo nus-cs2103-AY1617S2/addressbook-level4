@@ -32,12 +32,12 @@ We are a team based in the [School of Computing, National University of Singapor
     * [Undo/Redo](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/DeveloperGuide.md#24-model-component)
     * Find command
     * Add command
-    * Complete command
+    * Complete/Uncomplete command
 * Aspects/tools in charge of: Testing, Travis, Coveralls, Codecy
 * Features implemented:
     * [Complete/Uncomplete](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#27-mark-todo-as-completed--complete)
     * [Undo/Redo](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#29-undo-last-command--undo)
-    * [Find todos by complete time](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#25-finding-all-todos-by-multiple-search-parameters-find)
+    * [Find todos by start time, end time, complete time](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#25-finding-all-todos-by-multiple-search-parameters-find)
     * [Filtering todos by completed/uncompleted](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#25-finding-all-todos-by-multiple-search-parameters-find)
     * [Multi-parameter search](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/docs/UserGuide.md#25-finding-all-todos-by-multiple-search-parameters-find)
 * Code written: [[functional code](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/collated/main/A0163786N.md)][[testcode](https://github.com/CS2103JAN2017-T11-B2/main/blob/master/collated/test/A0163786N.md)]
