@@ -7,8 +7,7 @@ import org.junit.Test;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.TaskDate;
 
-//@@author A0163845X
-
+// @@author A0163845X
 public class FilterCommandTest extends TaskManagerGuiTest {
 
     @Test
@@ -52,5 +51,6 @@ public class FilterCommandTest extends TaskManagerGuiTest {
         for (int i = 0; i < taskListPanel.getNumberOfTasks(); i++) {
             assertTrue(taskListPanel.getTask(i).getTaskName().fullTaskName.equals("Go to store"));
         }
+        // @@author
     }
 }
