@@ -4,7 +4,7 @@ To find tasks, start the command with the keyword `find`.
 
 > Find command accepts keywords and attributes. For keywords, the program searches through name, note and tags content and return tasks that contain either of the keywords specified. 
 
-### Find a task with a keyword
+### 1. Find a task with a keyword
 
 `find swimming`
 
@@ -16,7 +16,19 @@ Feedback shows:
 
 The task with the name `Go swimming` is listed.
 
-### Find a task with keywords and attributes
+### 2. Find a task an attribute
+
+`find p/hi`
+
+#### Result
+
+Feedback shows:
+
+> 13 tasks listed!
+
+The tasks with high priorities are listed.
+
+### 3. Find a task with keywords and attributes
 
 `find study consultation e/04/20/2017`
 
@@ -32,7 +44,7 @@ The tasks that contain either of the keywords `study` or `consultation` and end 
 
 To schedule an existing task, start the command with the keyword `schedule`.
 
-### Schedule an event
+### 1. Schedule an event
 
 `schedule 18 thursday 6pm to thursday 9pm`
 
@@ -47,7 +59,7 @@ Feedback shows:
 
 The floating task at index 18 is scheduled for Thursday of the current week from 6pm to 9pm.
 
-### Schedule a deadline
+### 2. Schedule a deadline
 
 `schedule 19 thursday 9pm`
 
@@ -73,7 +85,7 @@ The help window that contains the user guide appears.
 
 To toggle the status of the task to either `complete` or `incomplete`, start the command with the keyword `mark`.
 
-### Mark a task as complete
+### 1. Mark a task as complete
 
 `mark 1`
 
@@ -91,7 +103,7 @@ Feedback shows:
 
 The status of the incomplete task at the index 1 is changed to `complete`. 
 
-### Mark a task as incomplete
+### 2. Mark a task as incomplete
 
 `mark 54`
 
