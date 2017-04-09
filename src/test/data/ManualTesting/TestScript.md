@@ -7,50 +7,58 @@ By : `T11-B2`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `Mar 2017`  &nbsp;&nbsp;&nbsp;&nb
 Run `savefile ../../src/test/data/ManualTesting/SampleData.xml`
 The view will be populated with 50 tasks from SampleData.xml
 
-### Undo
+### Add a Floating Todo with Tags
 
-Run `add todo`
-You will see a new todo called `todo` added at the bottom of the list
+Run `add add test t/tag1 t/tag2`
 
-Run `undo`
-You will see the new todo disappear
+You will see that there is a new todo `51. add test` with two tags `tag1` and `tag2`.
 
-### Redo
 
-Run `redo`
-You will see the new todo reappear
+### Add a deadline Todo
 
-### Complete
+Run `add add deadline test e/11:00AM 11/11/17 t/tag1`
 
-> * Complete with default time
+You will see that there is a new todo `52. add deadline test` with `11:00AM 11/11/17` as end time and `tag1` as tag.
 
-Run `list` to show all todos
-Run `complete 1`
-You will see the first todo in the list now says `Completed at {current time}`
 
-Run `undo`
-You will see the first todo in the list now says `Not Complete`
+### Add a deadline Todo with Default Date and Time
 
-Run `redo`
-You will see the first todo in the list is once again completed with the time the complete command was run
+Run `add add deadline with default test e/ t/tag1`
 
-> * Complete with specified time
+You will see that there is a new todo `53. add deadline test with default` with tomorrow's midnight as end time and `tag1` as tag.
 
-Run `list` to show all todos
-Run `complete 2 12:11AM 09/04/17`
-You will see the second todo in the list now says `Completed at 12:11AM 09/04/17`
 
-Run `undo`
-You will see the second todo in the list now says `Not Complete`
+### Add a deadline Todo with Default Date and Time
 
-Run `redo`
-You will see the second todo in the list again says `Completed at 12:11AM 09/04/17`
+Run `add add deadline with default date only test e/11/11/17 t/tag1`
 
-### Uncomplete
+You will see that there is a new todo `54. add deadline test with default date only` with `12:00AM 11/11/17` as end time and `tag1` as tag.
 
-Run `list` to show all todos
-Run `uncomplete 1`
-You will see the first todo in the list again says `Not Complete`
+### Add a Event Todo
+
+Run `add add event test s/10:00AM 11/11/17 e/11:00AM 11/11/17 t/tag1`
+
+You will see that there is a new todo `55. add event test` with `10:00AM 11/11/17` as start time and `11:00AM 11/11/17` as end time and `tag1` as tag.
+
+### Add a deadline Todo with Default Date and Time
+
+Run `add add event default test s/ e/ t/tag1`
+
+You will see that there is a new todo `56. add event test with default test` with today's midnight as start time and tomorrow's midnight as end time and `tag1` as tag.
+
+
+### Add a deadline Todo with Default Date and Time
+
+Run `add add event with default date only test s/10/11/17 e/11/11/17 t/tag1`
+
+You will see that there is a new todo `57. add event test with default date only` with `12:00AM 10/11/17` as start time and `12:00AM 11/11/17` as end time and `tag1` as tag.
+
+### Delete a Todo
+
+Run `delete 57`
+You will see that the 57th todo is gone.
+
+Pleas delete todos from number 51 to nuumber 56 to continue the latter test cases.
 
 ### Find by tag
 
@@ -200,52 +208,6 @@ Run `find c/not`
 You will see 36 todos listed. These are all todos in the list that are not yet completed.
 Notice there were 14 todos listed when `find c/` run. 36 + 14 = 50, which is the total number of todos in the sample data for manual testing.
 
-### Add a Floating Todo with Tags
-
-Run `add add test t/tag1 t/tag2`
-
-You will see that there is a new todo `51. add test` with two tags `tag1` and `tag2`.
-
-
-### Add a deadline Todo
-
-Run `add add deadline test e/11:00AM 11/11/17 t/tag1`
-
-You will see that there is a new todo `52. add deadline test` with `11:00AM 11/11/17` as end time and `tag1` as tag.
-
-
-### Add a deadline Todo with Default Date and Time
-
-Run `add add deadline with default test e/ t/tag1`
-
-You will see that there is a new todo `53. add deadline test with default` with tomorrow's midnight as end time and `tag1` as tag.
-
-
-### Add a deadline Todo with Default Date and Time
-
-Run `add add deadline with default date only test e/11/11/17 t/tag1`
-
-You will see that there is a new todo `54. add deadline test with default date only` with `12:00AM 11/11/17` as end time and `tag1` as tag.
-
-### Add a Event Todo
-
-Run `add add event test s/10:00AM 11/11/17 e/11:00AM 11/11/17 t/tag1`
-
-You will see that there is a new todo `55. add event test` with `10:00AM 11/11/17` as start time and `11:00AM 11/11/17` as end time and `tag1` as tag.
-
-### Add a deadline Todo with Default Date and Time
-
-Run `add add event default test s/ e/ t/tag1`
-
-You will see that there is a new todo `56. add event test with default test` with today's midnight as start time and tomorrow's midnight as end time and `tag1` as tag.
-
-
-### Add a deadline Todo with Default Date and Time
-
-Run `add add event with default date only test s/10/11/17 e/11/11/17 t/tag1`
-
-You will see that there is a new todo `57. add event test with default date only` with `12:00AM 10/11/17` as start time and `12:00AM 11/11/17` as end time and `tag1` as tag.
-
 ### Edit a Todo with Name and Tags
 
 Run `list` to show all todos.
@@ -323,14 +285,54 @@ This todo is now changed into a event todo.
 
 All edit command will change a complete todo back to a uncomplete todo.
 
-### Delete a Todo
-
-Run `delete 57`
-You will see that the 57th todo is gone.
-
 ### Clear the List
 
 Run `clear`
 You will see that the Todo list has no any todo now.
 
 Please run `undo` to continue the latter test cases.
+
+### Undo
+
+Run `add todo`
+You will see a new todo called `todo` added at the bottom of the list
+
+Run `undo`
+You will see the new todo disappear
+
+### Redo
+
+Run `redo`
+You will see the new todo reappear
+
+### Complete
+
+> * Complete with default time
+
+Run `list` to show all todos
+Run `complete 1`
+You will see the first todo in the list now says `Completed at {current time}`
+
+Run `undo`
+You will see the first todo in the list now says `Not Complete`
+
+Run `redo`
+You will see the first todo in the list is once again completed with the time the complete command was run
+
+> * Complete with specified time
+
+Run `list` to show all todos
+Run `complete 2 12:11AM 09/04/17`
+You will see the second todo in the list now says `Completed at 12:11AM 09/04/17`
+
+Run `undo`
+You will see the second todo in the list now says `Not Complete`
+
+Run `redo`
+You will see the second todo in the list again says `Completed at 12:11AM 09/04/17`
+
+### Uncomplete
+
+Run `list` to show all todos
+Run `uncomplete 1`
+You will see the first todo in the list again says `Not Complete`
