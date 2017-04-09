@@ -20,12 +20,12 @@ public interface Model {
     /**
      * Clears existing backing model and replaces with the provided new data.
      */
-    void resetData(ReadOnlyItemManager newData);
+    void resetData(ReadOnlyTaskManager newData);
 
     /**
      * Returns the TaskManager
      */
-    ReadOnlyItemManager getTaskManager();
+    ReadOnlyTaskManager getTaskManager();
 
     /**
      * Deletes the given task.
@@ -133,13 +133,13 @@ public interface Model {
      * Clears existing backing model and replaces with the provided new data
      * without saving.
      */
-    void resetDataWithoutSaving(ReadOnlyItemManager newData);
+    void resetDataWithoutSaving(ReadOnlyTaskManager newData);
 
     /**
      * Clears existing backing model and replaces with the provided new data
      * without saving for loading and updates the redo and undo stack.
      */
-    void loadData(ReadOnlyItemManager newData);
+    void loadData(ReadOnlyTaskManager newData);
 
     // @@author
 

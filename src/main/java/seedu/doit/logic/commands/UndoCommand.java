@@ -27,19 +27,4 @@ public class UndoCommand extends Command {
         }
     }
 
-    public static String getName() {
-        return COMMAND_WORD;
-    }
-
-    public static String getParameter() {
-        return COMMAND_PARAMETER;
-    }
-
-    public static String getResult() {
-        return COMMAND_RESULT;
-    }
-
-    public static String getExample() {
-        return COMMAND_EXAMPLE;
-    }
 }

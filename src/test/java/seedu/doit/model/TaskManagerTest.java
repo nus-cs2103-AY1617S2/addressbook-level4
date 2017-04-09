@@ -70,9 +70,9 @@ public class TaskManagerTest {
     }
 
     /**
-     * A stub ReadOnlyItemManager whose tasks and tags lists can violate interface constraints.
+     * A stub ReadOnlyTaskManager whose tasks and tags lists can violate interface constraints.
      */
-    private static class TaskManagerStub implements ReadOnlyItemManager {
+    private static class TaskManagerStub implements ReadOnlyTaskManager {
         private final ObservableList<ReadOnlyTask> tasks = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 

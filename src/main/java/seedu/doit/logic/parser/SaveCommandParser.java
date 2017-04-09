@@ -11,6 +11,7 @@ import seedu.doit.logic.commands.SaveCommand;
  * Parses input arguments and creates a new AddCommand object
  */
 public class SaveCommandParser implements CommandParser {
+    private static final String ARGUMENT_FOR_SAVE_IS = "Argument for save is ";
     private static final Logger logger = LogsCenter.getLogger(SaveCommandParser.class);
 
     /**
@@ -21,7 +22,7 @@ public class SaveCommandParser implements CommandParser {
     public Command parse(String args) {
         assert args != null;
         String filePath = args.trim();
-        logger.info("Argument for save is " + filePath);
+        logger.info(ARGUMENT_FOR_SAVE_IS + filePath);
         return new SaveCommand(filePath);
 
     }

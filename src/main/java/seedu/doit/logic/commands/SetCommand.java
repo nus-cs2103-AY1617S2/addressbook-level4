@@ -60,4 +60,5 @@ public class SetCommand extends Command {
     public static String getExample() {
         return COMMAND_EXAMPLE;
     }
+
 }

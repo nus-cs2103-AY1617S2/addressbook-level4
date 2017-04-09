@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
      */
-    public ModelManager(ReadOnlyItemManager taskManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskManager taskManager, UserPrefs userPrefs) {
         super();
         assert !CollectionUtil.isAnyNull(taskManager, userPrefs);
 
@@ -74,18 +74,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetData(ReadOnlyItemManager newData) {
+    public void resetData(ReadOnlyTaskManager newData) {
         this.taskManager.resetData(newData);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public void resetDataWithoutSaving(ReadOnlyItemManager newData) {
+    public void resetDataWithoutSaving(ReadOnlyTaskManager newData) {
         this.taskManager.resetData(newData);
     }
 
     @Override
-    public void loadData(ReadOnlyItemManager newData) {
+    public void loadData(ReadOnlyTaskManager newData) {
         this.resetDataWithoutSaving(newData);
         taskManagerStack.clearRedoStack();
         taskManagerStack.clearUndoStack();
@@ -103,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0139399J
     @Override
-    public ReadOnlyItemManager getTaskManager() {
+    public ReadOnlyTaskManager getTaskManager() {
         return this.taskManager;
     }
 

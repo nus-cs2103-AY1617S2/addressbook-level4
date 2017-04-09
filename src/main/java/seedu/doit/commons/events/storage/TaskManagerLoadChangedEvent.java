@@ -4,13 +4,14 @@ package seedu.doit.commons.events.storage;
 import java.util.Optional;
 
 import seedu.doit.commons.events.BaseEvent;
-import seedu.doit.model.ReadOnlyItemManager;
+import seedu.doit.model.ReadOnlyTaskManager;
 
 public class TaskManagerLoadChangedEvent extends BaseEvent {
-    private Optional<ReadOnlyItemManager> data;
+    private static final String LOADED_DATA_FROM = "Loaded data from: ";
+    private Optional<ReadOnlyTaskManager> data;
     private String filePath;
 
-    public TaskManagerLoadChangedEvent(Optional<ReadOnlyItemManager> newData, String filePath) {
+    public TaskManagerLoadChangedEvent(Optional<ReadOnlyTaskManager> newData, String filePath) {
         this.data = newData;
         this.filePath = filePath;
     }
@@ -19,12 +20,12 @@ public class TaskManagerLoadChangedEvent extends BaseEvent {
         return this.filePath;
     }
 
-    public Optional<ReadOnlyItemManager> getData() {
+    public Optional<ReadOnlyTaskManager> getData() {
         return this.data;
     }
 
     @Override
     public String toString() {
-        return "Loaded data from: " + this.filePath;
+        return LOADED_DATA_FROM + this.filePath;
     }
 }
