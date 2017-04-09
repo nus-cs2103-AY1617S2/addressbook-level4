@@ -136,13 +136,14 @@ public class LogicManagerTest {
         assertCommandBehavior(true, inputCommand, expectedMessage, expectedTodoList, expectedShownList);
     }
 
+    //@@author A0140887W
     /**
      * Executes the command, confirms that the result message is correct
      * and that a CommandException is thrown if expected
      * and also confirms that the following three parts of the LogicManager object's state are as expected:<br>
      *      - the internal todo list data are same as those in the {@code expectedTodoList} <br>
      *      - the backing list shown by UI matches the {@code shownList} <br>
-     *      - {@code expectedTodoList} was saved to the storage file. <br>
+     *      - {@code expectedTodoList} was saved to the storage file. (Does not check this if its a find command)<br>
      */
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
                                        ReadOnlyTodoList expectedTodoList,
@@ -168,6 +169,7 @@ public class LogicManagerTest {
         }
     }
 
+    //@@author
     private void assertCommandBehavior(boolean isCommandExceptionExpected, String inputCommand, String expectedMessage,
             ReadOnlyTodoList expectedAddressBook,
             List<? extends ReadOnlyTask> expectedShownList) {
@@ -211,18 +213,6 @@ public class LogicManagerTest {
         assertCommandFailure("add Valid Name but empty argument \\under  ", expectedMessage);
         assertCommandFailure("add Valid Name \\from345 Invalid Prefix", expectedMessage);
         assertCommandFailure("add Valid Name \\from 1500 \\to 1600 \\ ", expectedMessage);
-    }
-
-    @Test
-    public void execute_add_invalidPersonData() {
-        //assertCommandFailure("add []\\[;] p/12345 e/valid@e.mail a/valid, address",
-              //  Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/not_numbers e/valid@e.mail a/valid, address",
-                //Phone.MESSAGE_PHONE_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/12345 e/notAnEmail a/valid, address",
-                //Email.MESSAGE_EMAIL_CONSTRAINTS);
-        //assertCommandFailure("add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag",
-              //  Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
@@ -370,6 +360,7 @@ public class LogicManagerTest {
         assertCommandFailure("find ", expectedMessage);
     }
 
+    //@@author A0147620L
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
@@ -436,7 +427,7 @@ public class LogicManagerTest {
                 expectedList, true);
     }
 
-
+    //@@author
     /**
      * A utility class to generate test data.
      */
@@ -444,9 +435,6 @@ public class LogicManagerTest {
 
         protected Task doLaundry() throws Exception {
             Description name = new Description("Do Laundry");
-            //Phone privatePhone = new Phone("111111");
-            //Email email = new Email("adam@gmail.com");
-            //Address privateAddress = new Address("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -460,8 +448,6 @@ public class LogicManagerTest {
          *
          * @param seed used to generate the task data field values
          */
-
-        // TODO: MAKE IT EASIER TO GENERATE RANDOM DATES
         protected Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Task " + seed),
@@ -557,7 +543,6 @@ public class LogicManagerTest {
         /**
          * Generates a Task object with given description. Other fields will have some dummy values.
          */
-        // TODO: REFACTOR THIS
         protected Task generateTaskWithDescription(String name) throws Exception {
             return new Task(
                     new Description(name),

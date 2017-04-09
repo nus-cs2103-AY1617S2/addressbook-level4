@@ -138,7 +138,7 @@ public class StorageManagerTest {
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 
-    //@@author A0140887W-reused
+    //@@author A0140887W
     @Test
     public void handleAliasListMapChangedEvent_exceptionThrown_eventRaised() throws IOException {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
@@ -166,7 +166,7 @@ public class StorageManagerTest {
         }
     }
 
-    //@@author A0140887W-reused
+    //@@author A0140887W
     /**
      * A Stub class to throw an exception when the save method for alias list map is called
      */

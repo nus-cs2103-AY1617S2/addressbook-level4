@@ -1,5 +1,6 @@
 package guitests.guihandles;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,9 +91,64 @@ public class TaskCardHandle extends GuiHandle {
         return getDesc().equals(task.getDescription().desc)
                 && getPriority().equals(task.getPriority().toString())
                 && getFinishStatus() == task.getFinishedStatus().getIsFinished()
-                //&& getStartTime().equals(task.getStartDate().toString())
-                //&& getEndTime().equals(task.getEndDate().toString())
+                && hasEqualTime(task)
                 && cardTags.equals(taskTags);
+    }
+
+    /**
+     * Returns true if the task has the same times as this taskcard
+     * @param task the task to compare this task card to
+     */
+    private boolean hasEqualTime(ReadOnlyTask task) {
+        final String startTimeText = "Start: ";
+        final String endTimeText = "End: ";
+        final String byTimeText = "By: ";
+
+        if (task.getDates().isDeadline()) {
+            return (getStartTime().equals(byTimeText + prettyDate(task.getDates().getStartDate()))
+                    && getEndTime().equals(""));
+        } else if (task.getDates().isEvent()) {
+            return (getStartTime().equals(startTimeText + prettyDate(task.getDates().getStartDate()))
+                    && getEndTime().equals(endTimeText + prettyDate(task.getDates().getEndDate())));
+        } else {
+            // floating task
+            return (getStartTime().equals("") && getEndTime().equals(""));
+        }
+    }
+
+    //@@author A0140887W-reused
+    private String prettyDate (Date date) {
+        StringBuilder prettydate = new StringBuilder();
+        prettydate.append(prettyMonth (date.getMonth() + 1));
+        prettydate.append(" " + date.getDate() + ", ");
+        prettydate.append((date.getYear() + 1900) + " at ");
+        prettydate.append(prettyTime(date.getHours(), date.getMinutes()));
+        return prettydate.toString();
+    }
+
+    private String prettyMonth (int month) {
+        switch (month) {
+        case 1 : return "January";
+        case 2 : return "February";
+        case 3 : return "March";
+        case 4 : return "April";
+        case 5 : return "May";
+        case 6 : return "June";
+        case 7 : return "July";
+        case 8 : return "August";
+        case 9 : return "September";
+        case 10 : return "October";
+        case 11 : return "November";
+        case 12 : return "December";
+        default : return null;
+        }
+    }
+
+    private String prettyTime (int hours, int minutes) {
+        String suffix = (hours <= 12) ? "am" : "pm";
+        String hour = (hours <= 12) ? Integer.toString(hours) : Integer.toString(hours - 12);
+        String minute = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
+        return hour + ":" + minute + suffix;
     }
 
     //@@author

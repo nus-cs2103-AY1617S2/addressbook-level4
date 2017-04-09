@@ -55,7 +55,6 @@ public class LoadCommandTest extends DoistGUITest {
 
     private void assertLoadSuccess(String path, ReadOnlyTodoList loadedList) {
         commandBox.runCommand("load " + path);
-
         //confirm the list now contains the loaded tasks
         ReadOnlyTask[] expectedList = loadedList.getTaskList()
                 .toArray(new ReadOnlyTask[loadedList.getTaskList().size()]);

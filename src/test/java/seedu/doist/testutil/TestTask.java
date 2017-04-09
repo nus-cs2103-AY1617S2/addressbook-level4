@@ -9,6 +9,7 @@ import seedu.doist.model.task.Priority;
 import seedu.doist.model.task.ReadOnlyTask;
 import seedu.doist.model.task.TaskDate;
 
+//@@author A0140887W
 /**
  * A mutable task object. For testing only.
  */
@@ -88,6 +89,7 @@ public class TestTask implements ReadOnlyTask {
         return getAsText();
     }
 
+    //@@author A0147620L
     /**Function that returns true if this task is overdue i.e, not finished and past it's deadline **/
     public boolean isOverdue() {
         if (this.getFinishedStatus().getIsFinished()) {
@@ -104,8 +106,6 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().desc + " ");
         sb.append("\\as " + this.getPriority().toString());
-        //TODO: add dates to getAddCommand
-        //if (!this.getEndDate().)
         if (!this.getTags().isEmpty()) {
             sb.append("\\under");
             this.getTags().asObservableList().stream().forEach(s -> sb.append(" " + s.tagName));

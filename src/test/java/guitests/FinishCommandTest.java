@@ -13,7 +13,6 @@ import guitests.guihandles.TaskCardHandle;
 import seedu.doist.logic.commands.FinishCommand;
 import seedu.doist.testutil.TestTask;
 
-//@@author A0140887W
 public class FinishCommandTest extends DoistGUITest {
 
     //@@author A0147980U

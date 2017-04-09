@@ -14,9 +14,7 @@ import seedu.doist.model.task.FinishedStatus;
 import seedu.doist.model.task.Task;
 import seedu.doist.model.task.UniqueTaskList;
 
-/**
- *
- */
+//@@author A0147620L
 public class TypicalTestTasks {
 
     public TestTask laundry, homework, chores, work, school, groceries, shopping, email, exercise, meeting, movie;
@@ -94,6 +92,7 @@ public class TypicalTestTasks {
         return ab;
     }
 
+    //@@author A0140887W
     /**
      * Parse the string to Date
      * @param dateString

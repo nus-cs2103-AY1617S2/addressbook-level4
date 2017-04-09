@@ -49,7 +49,6 @@ public class SelectCommandTest extends DoistGUITest {
         assertEquals(taskListPanel.getSelectedTasks().size(), 1);
         ReadOnlyTask selectedTask = taskListPanel.getSelectedTasks().get(0);
         assertEquals(taskListPanel.getTask(index - 1), selectedTask);
-        //TODO: confirm the correct page is loaded in the Browser Panel
     }
 
     private void assertNoTaskSelected() {

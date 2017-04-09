@@ -15,6 +15,7 @@ import seedu.doist.commons.util.FileUtil;
 import seedu.doist.model.AliasListMap;
 import seedu.doist.model.ReadOnlyAliasListMap;
 
+//@@author A0140887W
 public class XmlAliasListMapStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAliasListMapStorageTest/");
 
@@ -74,7 +75,6 @@ public class XmlAliasListMapStorageTest {
         xmlAliasListMapStorage.saveAliasListMap(original); //file path not specified
         readBack = xmlAliasListMapStorage.readAliasListMap().get(); //file path not specified
         assertEquals(original, new AliasListMap(readBack));
-
     }
 
     @Test
@@ -92,6 +92,4 @@ public class XmlAliasListMapStorageTest {
         thrown.expect(AssertionError.class);
         saveAliasListMap(new AliasListMap(), null);
     }
-
-
 }

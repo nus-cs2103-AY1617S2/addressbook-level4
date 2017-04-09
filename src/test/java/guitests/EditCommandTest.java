@@ -142,8 +142,8 @@ public class EditCommandTest extends DoistGUITest {
         commandBox.runCommand("edit 3 \\as invalidPriority");
         assertResultMessage(Priority.MESSAGE_PRIORITY_CONSTRAINTS);
     }
-    //@@author
 
+    //@@author A0140887W
     /**
      * Checks whether the edited task has the correct updated details.
      *
@@ -177,7 +177,7 @@ public class EditCommandTest extends DoistGUITest {
             }
         }
     }
-
+    //@@author
     private void assertEditSuccess(int filteredTaskListIndex, int todoListIndex,
             String detailsToEdit, TestTask editedTask) {
         assertEditSuccess(filteredTaskListIndex, todoListIndex, detailsToEdit, editedTask, false);

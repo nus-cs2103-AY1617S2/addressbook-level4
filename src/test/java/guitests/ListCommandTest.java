@@ -201,8 +201,8 @@ public class ListCommandTest extends DoistGUITest {
             assertTrue(!task.getFinishedStatus().getIsFinished() && !task.getDates().isPast());
         }
     }
-    //@@author
 
+    //@@author A0140887W
     private void assertListOverdue() {
         List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
@@ -210,6 +210,7 @@ public class ListCommandTest extends DoistGUITest {
         }
     }
 
+    //@@author A0147620L
     private void assertListDate(Date startDate, Date endDate) {
         List<ReadOnlyTask> displayedList = taskListPanel.getListView().getItems();
         for (ReadOnlyTask task : displayedList) {
@@ -232,6 +233,7 @@ public class ListCommandTest extends DoistGUITest {
         }
     }
 
+    //@@author A0147620L-reused
     public Date stringToDate(DateFormat format, String dateString) throws IllegalValueException {
         try {
             Date date = format.parse(dateString);
