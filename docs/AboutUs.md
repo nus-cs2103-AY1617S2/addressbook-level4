@@ -40,10 +40,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Components in charge of: Logic, Model
 * Aspects/tools in charge of: JavaFX, Natty, Apache Commons
 * Features implemented:
-    * Add task with time
-    * Reschedule a task
+    * [Add task with time](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#32-adding-a-new-task--add)
+    * [Reschedule a task](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#37-editing-an-existing-task--edit)
     * Command History
-    * Power Search
+    * [Power Search](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/docs/UserGuide.md#34-finding-a-task--find)
 
 * Code written: [functional code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/main/A0147620L.md)   [test code](https://github.com/CS2103JAN2017-W13-B4/main/blob/master/collated/test/A0147620L.md)  
 * Other major contributions:
