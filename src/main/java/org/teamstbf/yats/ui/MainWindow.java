@@ -113,7 +113,8 @@ public class MainWindow extends UiPart<Region> {
 	}
 
 	void fillInnerParts() {
-		calendarViewPanel = new MultiViewPanel(getCalendarViewPlaceholder(), logic.getTaskFilteredTaskList(), model);
+		calendarViewPanel = new MultiViewPanel(getCalendarViewPlaceholder(), logic.getTaskFilteredTaskList(),
+				logic.getCalendarFilteredTaskList(), model);
 		taskListPanel = new TaskListPanel(getTaskListPlaceholder(), logic.getFilteredTaskList());
 		new ResultDisplay(getResultDisplayPlaceholder());
 		new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());

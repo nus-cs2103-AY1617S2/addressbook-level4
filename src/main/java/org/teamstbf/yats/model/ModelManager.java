@@ -255,6 +255,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 	@Override
 	public void updateCalendarFilteredListToShowStartTime(LocalDate day) {
+		calendarList.setPredicate(null);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		Set<String> keywordSet = new HashSet<String>();
 		keywordSet.add(day.format(formatter));

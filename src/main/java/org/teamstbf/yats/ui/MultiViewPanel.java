@@ -35,7 +35,7 @@ public class MultiViewPanel extends UiPart<Region> {
 	private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
 	private static final String FXML = "CalendarView.fxml";
-	private static final String FXMLPERSONDONE = "PersonListCardDone.fxml";
+	private static final String FXMLPERSON = "PersonListCard.fxml";
 
 	private static ObservableList<String[]> timeData = FXCollections.observableArrayList();
 	private ObservableList<ReadOnlyEvent> calendarList;
@@ -59,7 +59,8 @@ public class MultiViewPanel extends UiPart<Region> {
 	@FXML
 	private Label date;
 
-	private static LocalDate today = LocalDate.now();
+	private static LocalDate today;
+	private static DateTimeFormatter formatter;
 
 	private static final int TASK_DETAILS = 4;
 	private static final int TASK_TITLE = 0;
@@ -72,25 +73,31 @@ public class MultiViewPanel extends UiPart<Region> {
 	 *
 	 * @param placeholder
 	 */
-	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableList, Model model) {
+	public MultiViewPanel(AnchorPane placeholder, ObservableList<ReadOnlyEvent> observableTaskList,
+			ObservableList<ReadOnlyEvent> observableCalendarList, Model model) {
 		super(FXML);
 		this.model = model;
 		datepicker = new DatePicker(today);
 		calendar = new DatePickerSkin(datepicker);
-		setConnectionsCalendarView();
-		setConnectionsDoneView(observableList);
+		today = LocalDate.now();
+		formatter = DateTimeFormatter.ofPattern("d MMMM");
+		setConnectionsCalendarView(observableCalendarList);
+		setConnectionsDoneView(observableTaskList);
 		addToPlaceholder(placeholder);
 	}
 
-	private void setConnectionsCalendarView() {
+	private void setConnectionsCalendarView(ObservableList<ReadOnlyEvent> observableCalendarList) {
 		Node popupContent = calendar.getPopupContent();
 		calendarRoot.setCenter(popupContent);
 		updateCurrentDay(today);
-		createFullDayTime();
+		updateCalendarList(today, observableCalendarList);
+		timeTasks.setItems(timeData);
+		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
+		setEventHandlerForSelectionChangeEvent();
 	}
 
-	private void setConnectionsDoneView(ObservableList<ReadOnlyEvent> observableList) {
-		taskListView.setItems(observableList);
+	private void setConnectionsDoneView(ObservableList<ReadOnlyEvent> observableTaskList) {
+		taskListView.setItems(observableTaskList);
 		taskListView.setCellFactory(listView -> new TaskListViewCell());
 		setEventHandlerForSelectionChangeEvent();
 	}
@@ -144,7 +151,7 @@ public class MultiViewPanel extends UiPart<Region> {
 				setText(null);
 			} else {
 				if (task.getIsDone().getValue().equals("Yes")) {
-					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSONDONE).getRoot());
+					setGraphic(new TaskCard(task, getIndex() + 1, FXMLPERSON).getRoot());
 				}
 			}
 		}
@@ -152,13 +159,7 @@ public class MultiViewPanel extends UiPart<Region> {
 
 	// ================== Inner Methods for Calendar View ==================
 
-	private void createFullDayTime() {
-		updateCalendarList(today);
-		timeTasks.setItems(timeData);
-		timeTasks.setCellFactory(listView -> new TimeSlotListViewCell());
-	}
-
-	private void updateCalendarList(LocalDate day) {
+	private void updateCalendarList(LocalDate day, ObservableList<ReadOnlyEvent> observableCalendarList) {
 		String[] data = new String[TASK_DETAILS];
 		model.updateCalendarFilteredListToShowStartTime(day);
 		calendarList = model.getCalendarFilteredTaskList();
@@ -192,7 +193,6 @@ public class MultiViewPanel extends UiPart<Region> {
 
 	public void updateCurrentDay(LocalDate day) {
 		MultiViewPanel.today = day;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM");
 		date.setText(today.format(formatter));
 	}
 
