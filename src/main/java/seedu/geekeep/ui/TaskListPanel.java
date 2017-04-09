@@ -27,6 +27,12 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String EVENT_FXML = "EventListPanel.fxml";
     private static final String FLOATING_TASK_FXML = "FloatingTaskListPanel.fxml";
     private static final String DEADLINE_FXML = "DeadlineListPanel.fxml";
+
+    //Corresponding tab indices in the TabPane for different tabs.
+    private static final int ALL_TAB = 0;
+    private static final int UPCOMING_TAB = 1;
+    private static final int FINISHED_TAB = 2;
+
     private ListView<ReadOnlyTask> currentListView;
     private String type;
 
@@ -51,7 +57,7 @@ public class TaskListPanel extends UiPart<Region> {
         setConnections(filteredList, finishedListView);
         setConnections(filteredList, upcomingListView);
         addToPlaceholder(taskListPlaceholder);
-        selectTab(0);
+        selectTab(UPCOMING_TAB);
     }
 
     private static String getFxmlFromType(String type) {
@@ -98,14 +104,15 @@ public class TaskListPanel extends UiPart<Region> {
 
     public void switchListView(TaskCategory category) {
         switch (category) {
-        case UNDONE:
-            selectTab(1);
+        case ALL:
+            selectTab(ALL_TAB);
             break;
         case DONE:
-            selectTab(2);
+            selectTab(FINISHED_TAB);
             break;
         default:
-            selectTab(0);
+            assert category == TaskCategory.UNDONE;
+            selectTab(UPCOMING_TAB);
             break;
         }
         logger.info("Switched to " + category + " in " + type);
