@@ -161,8 +161,7 @@ public class AddCommandParser {
             return new IncorrectCommand(ive.getMessage());
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             return new IncorrectCommand(
-                    "Invalid command input!\nExample of Allowed Format: ADD e-mail John BY thursday 1400\n"
-                            + "Type HELP for user guide with detailed explanations of all commands");
+                    "Invalid command input!\n" + "Type HELP for user guide with detailed explanations of all commands");
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

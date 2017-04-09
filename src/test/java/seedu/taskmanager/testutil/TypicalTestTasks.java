@@ -20,7 +20,8 @@ public class TypicalTestTasks {
             recurTestYearOnce, recurTestYearTwice, recurTestYearThrice, eventTestMon, eventTestTuesThurs,
             eventTestThurs, eventTestFriSat, updateEventFromIndexBeforeToAfter, updateEventFromIndexBeforeToBefore,
             updateEventFromIndexAfterToBefore, updateEventFromIndexAfterToAfter, updateEventFromClashToNoClash,
-            completedEatBreakfast;
+            completedEatBreakfast, fromToEventWithoutTime, onToEventWithEndTime, byDeadlineWithoutTime,
+            byDeadlineWithTime;
 
     public TypicalTestTasks() {
         try {
@@ -56,6 +57,18 @@ public class TypicalTestTasks {
             sampleDeadline = new TaskBuilder().withTaskName("Get it done").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("06/05/17").withEndTime("1700").withCompletion(false)
                     .withCategories("work").build();
+            fromToEventWithoutTime = new TaskBuilder().withTaskName("Hell week").withStartDate("08/04/17")
+                    .withStartTime("0000").withEndDate("11/04/17").withEndTime("2359").withCompletion(false)
+                    .withCategories("rekt").build();
+            onToEventWithEndTime = new TaskBuilder().withTaskName("Hell week").withStartDate("08/04/17")
+                    .withStartTime("0000").withEndDate("08/04/17").withEndTime("1200").withCompletion(false)
+                    .withCategories("rekt").build();
+            byDeadlineWithoutTime = new TaskBuilder().withTaskName("Deadline").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("08/04/17").withEndTime("2359").withCompletion(false)
+                    .withCategories("rekt").build();
+            byDeadlineWithTime = new TaskBuilder().withTaskName("DedLine").withStartDate("EMPTY_FIELD")
+                    .withStartTime("EMPTY_FIELD").withEndDate("08/04/17").withEndTime("1200").withCompletion(false)
+                    .withCategories("rekt").build();
 
             // blocking time slots test tasks
             sampleClashBetweenOneDayEvent = new TaskBuilder().withTaskName("Escape Reality").withStartDate("13/04/17")
@@ -114,10 +127,8 @@ public class TypicalTestTasks {
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(true)
                     .withCategories("just", "friends").build(); // event
 
-<<<<<<< HEAD
-=======
-          // Recurring task
->>>>>>> ce92908c1afb8c05667e8454efec856b83e570a7
+            // Recurring task
+
             recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
