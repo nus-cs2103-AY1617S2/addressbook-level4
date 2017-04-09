@@ -192,19 +192,17 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidArgsFormat() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandFailure("add wrong args wrong args", expectedMessage);
-        assertCommandFailure("add Valid Name s/12.12 g/onlyStartTime", expectedMessage);
-        assertCommandFailure("add Valid Name butNoGroupPrefix valid s/12:12 d/23:59", expectedMessage);
+        assertCommandFailure("add wrong args wrong args", AddCommand.MESSAGE_NOGROUP+expectedMessage); // missing group
+        assertCommandFailure("add in learning", AddCommand.MESSAGE_NONAME+expectedMessage); // missing name
+        assertCommandFailure("add Valid Name from 12.12 in onlyStartTime", AddCommand.MESSAGE_ILLEGAL_TIME_PARAMS+expectedMessage); // missing endDate
     }
     //@@author
 
-    //@@author A0164889E
+    //@@author A0164032U
     @Test
     public void execute_add_invalidPersonData() {
-        assertCommandFailure("add Valid Name d/not_numbers g/valid, group",
-                Date.MESSAGE_DATE_CONSTRAINTS);
-        assertCommandFailure("add []\\[;] d/12.12 g/valid, group",
-                Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure("add ??? in valid group",
+                AddCommand.MESSAGE_NONAME + String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
     }
 
@@ -421,7 +419,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Name name = new Name("Adm Brown");
             EndDate privateEndDate = new EndDate("12.11");
-            StartDate privateStartDate = new StartDate("12.20");
+            StartDate privateStartDate = new StartDate("12.00");
             Group privateGroup = new Group("leisure time");
             return new Task(name, privateStartDate, privateEndDate,
                     privateGroup, UniqueTagList.build(Tag.TAG_INCOMPLETE));
@@ -453,9 +451,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" s/").append(p.getStartDate());
-            cmd.append(" d/").append(p.getEndDate());
-            cmd.append(" g/").append(p.getGroup());
+            cmd.append(" from ").append(p.getStartDate());
+            cmd.append(" to ").append(p.getEndDate());
+            cmd.append(" in ").append(p.getGroup());
 
             return cmd.toString();
         }
