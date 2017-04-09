@@ -5,10 +5,11 @@ import java.io.File;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyTaskManager;
 
-//@@author A0163848R
+//@@author A0164466X
 /**
- * Represents a request to export the stored YTomorrow.
+ * Represents a request to export the stored YTomorrow task file.
  */
+//@@author A0163848R
 public class ExportRequestEvent extends BaseEvent {
 
     private ReadOnlyTaskManager toExport;

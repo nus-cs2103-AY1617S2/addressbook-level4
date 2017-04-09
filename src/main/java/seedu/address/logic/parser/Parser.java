@@ -84,9 +84,6 @@ public class Parser {
         case ListIncompleteCommand.COMMAND_WORD:
             return new ListIncompleteCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
@@ -104,6 +101,9 @@ public class Parser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
