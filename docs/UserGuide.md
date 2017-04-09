@@ -6,9 +6,9 @@ By : `Team B4`  &nbsp;&nbsp;&nbsp;&nbsp; Since: `February 2017`  &nbsp;&nbsp;&nb
 
 1. [Quick Start](#1-quick-start)
 2. [User Interface] (#2-user-interface)
-2. [Features](#3-features)
-3. [FAQ](#4-faq)
-4. [Command Summary](#5-command-summary)
+3. [Features](#3-features)
+4. [FAQ](#4-faq)
+5. [Command Summary](#5-command-summary)
 
 ## 1. Quick Start
 
