@@ -66,7 +66,7 @@ public class StorageManagerTest {
          */
         YTomorrow original = new TypicalTestPersons().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyTaskManager retrieved = storageManager.readAddressBook().get();
+        ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
         assertEquals(original, new YTomorrow(retrieved));
     }
 
