@@ -40,14 +40,6 @@ public class SaveAsCommand extends Command {
         String configFilePathUsed;
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
-        File forPermissionTest = new File(this.newPath);
-        try {
-            forPermissionTest.createNewFile();
-            forPermissionTest.delete();
-        } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_IO);
-        }
-
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             newConfig = configOptional.orElse(new Config());
@@ -58,11 +50,14 @@ public class SaveAsCommand extends Command {
         newConfig.setTaskManagerFilePath(this.newPath);
         storage.updateTaskManagerStorageDirectory(this.newPath, newConfig);
         ReadOnlyTaskManager newTaskManager = model.getTaskManager();
+        String oldStorageDirectory = storage.getTaskManagerFilePath();
 
         try {
             storage.saveTaskManager(newTaskManager);
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
         } catch (IOException e) {
+            newConfig.setTaskManagerFilePath(oldStorageDirectory);
+            storage.updateTaskManagerStorageDirectory(oldStorageDirectory, newConfig);
             throw new CommandException(MESSAGE_ERROR_IO);
         }
 

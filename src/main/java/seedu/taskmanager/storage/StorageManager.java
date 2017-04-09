@@ -73,14 +73,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveTaskManager(ReadOnlyTaskManager taskManager) throws IOException {
-        // @@author A0114269E
-        try {
-            saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-            throw new IOException(e);
-        }
-        // @@author
+        saveTaskManager(taskManager, taskManagerStorage.getTaskManagerFilePath());
     }
 
     @Override
@@ -121,6 +114,7 @@ public class StorageManager extends ComponentManager implements Storage {
             saveTaskManager(event.data);
         } catch (IOException e) {
             // @@author A0114269E
+            raise(new DataSavingExceptionEvent(e));
             logger.warning("IOException: Problem saving to given directory!" +
                     StringUtil.getDetails(e));
             // @@author
