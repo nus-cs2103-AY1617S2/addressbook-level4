@@ -179,6 +179,11 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/DeleteTaskSdForLogic.png" width="800"><br>
 _Figure 2.3.1 : Interactions Inside the Logic Component for the `delete 1` Command_
 
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("findbydate today")`
+ API call.<br>
+<img src="images/SDforFindByDate.png" width="800"><br>
+_Figure 2.3.2 : Interactions Inside the Logic Component for the `findbydate today` Command_
+
 ### 2.4. Model component
 
 Author: Maggie
