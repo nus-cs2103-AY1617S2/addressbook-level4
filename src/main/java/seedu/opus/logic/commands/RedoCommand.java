@@ -16,7 +16,7 @@ public class RedoCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             assert model != null;
-            model.resetToPrecedingState();
+            model.resetToNextState();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (InvalidUndoException e) {
             throw new CommandException(e.getMessage());

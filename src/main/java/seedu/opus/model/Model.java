@@ -51,17 +51,18 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given qualifiers*/
     void updateFilteredTaskList(List<Qualifier> qualifiers);
 
+    //@@author A0148087W
     /**
-     * Reset current data to the previous state to undo changes
+     * Reset current TaskManager to the previous state to undo data changes by user
      * @throws InvalidUndoException
      */
     void resetToPreviousState() throws InvalidUndoException;
 
     /**
-     * Reset current data to preceding state to rollback changes due to previous undo operation
+     * Reset current TaskManager to the next forward state to rollback changes made by the most recent undo operation
      * @throws InvalidUndoException
      */
-    void resetToPrecedingState() throws InvalidUndoException;
+    void resetToNextState() throws InvalidUndoException;
 
     /**
      * Set Model to start syncing with sync service
@@ -72,6 +73,7 @@ public interface Model {
      * Set Model to stop syncing with sync service
      */
     void stopSync();
+    //@@author
 
     /** Change the data storage location */
     void changeSaveLocation(String location);

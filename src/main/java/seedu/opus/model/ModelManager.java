@@ -126,7 +126,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetToPrecedingState() throws InvalidUndoException {
+    public void resetToNextState() throws InvalidUndoException {
         this.taskManager.resetData(this.history.getNextState(this.taskManager));
         indicateTaskManagerChanged();
         if (this.isSyncOn) {
