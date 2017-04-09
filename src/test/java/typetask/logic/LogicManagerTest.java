@@ -36,7 +36,6 @@ import typetask.logic.commands.ExitCommand;
 import typetask.logic.commands.FindCommand;
 import typetask.logic.commands.HelpCommand;
 import typetask.logic.commands.ListCommand;
-import typetask.logic.commands.SelectCommand;
 import typetask.logic.commands.exceptions.CommandException;
 import typetask.model.Model;
 import typetask.model.ModelManager;
@@ -284,34 +283,6 @@ public class LogicManagerTest {
 
         assertCommandFailure(commandWord + " 3", expectedMessage);
     }
-
-    @Test
-    public void executeSelectInvalidArgsFormatErrorMessageShown() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE);
-        assertIncorrectIndexFormatBehaviorForCommand("select", expectedMessage);
-    }
-
-    @Test
-    public void executeSelectIndexNotFoundErrorMessageShown() throws Exception {
-        assertIndexNotFoundBehaviorForCommand("select");
-    }
-
-    @Test
-    public void executeSelectJumpsToCorrectTask() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        List<Task> threeTasks = helper.generateTaskList(3);
-
-        TaskManager expectedAB = helper.generateTaskManager(threeTasks);
-        helper.addToModel(model, threeTasks);
-
-        assertCommandSuccess("select 2",
-                String.format(SelectCommand.MESSAGE_SELECT_TASK_SUCCESS, 2),
-                expectedAB,
-                expectedAB.getTaskList());
-        assertEquals(1, targetedJumpIndex);
-        assertEquals(model.getFilteredTaskList().get(1), threeTasks.get(1));
-    }
-
 
     @Test
     public void executeDeleteInvalidArgsFormatErrorMessageShown() throws Exception {

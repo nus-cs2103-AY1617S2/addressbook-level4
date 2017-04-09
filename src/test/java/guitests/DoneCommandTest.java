@@ -78,17 +78,14 @@ public class DoneCommandTest extends TypeTaskGuiTest {
 
     /*
      * EP: Check if successfully marked done a command after performing a find command,
-     * Should change task boolean isCompleted to true.
-     * Should return true.
      */
 
-//    @Test
-//    public void findThenDoneSuccess() throws Exception {
-//        TestTask[] currentList = td.getTypicalTasks();
-//        commandBox.runCommand("find Carl");
-//        commandBox.runCommand("done 1");
-//        assertTrue(currentList[1].getIsCompleted());
-//    }
+    @Test
+    public void findThenDoneSuccess() throws Exception {
+        commandBox.runCommand("find Carl");
+        commandBox.runCommand("done 1");
+        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, "complete"));
+    }
 
 
     //---------------- End of test cases --------------------------------------

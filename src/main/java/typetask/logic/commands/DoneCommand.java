@@ -19,14 +19,13 @@ public class DoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed? Yes";
+    public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Task Completed!";
 
     public final int targetIndex;
 
     public DoneCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
-
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -44,7 +43,7 @@ public class DoneCommand extends Command {
             model.completeTask(targetIndex - 1, taskToComplete);
             //Need to do: Add the completed task to the completed task list
         } catch (TaskNotFoundException tnfe) {
-            assert false : "The target task cannot be missing";
+            throw new CommandException(Messages.MESSAGE_TASK_NOT_FOUND);
         }
 
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));

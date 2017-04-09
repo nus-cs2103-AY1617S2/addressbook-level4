@@ -78,8 +78,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
+    //@@author A0144902L
     /**
-     * @@author A0144902L
      * Marks a task in TypeTask as complete.
      */
     public boolean completeTask(ReadOnlyTask target) throws TaskList.TaskNotFoundException {
@@ -93,7 +93,7 @@ public class TaskManager implements ReadOnlyTaskManager {
                 filtered(p -> !p.getIsCompleted()));
         return new UnmodifiableObservableList<>(incompleteList);
     }
-
+  //@@author
 //// util methods
 
     @Override

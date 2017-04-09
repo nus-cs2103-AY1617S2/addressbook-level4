@@ -59,8 +59,8 @@ public class TaskList implements Iterable<Task> {
         internalList.set(index, taskToUpdate);
     }
 
+    //@@author A0144902L
     /**
-     * @@author A0144902L
      * Marks the equivalent task as completed.
      *
      * @throws taskNotFoundException if no such task could be found in the list.
@@ -86,7 +86,7 @@ public class TaskList implements Iterable<Task> {
         }
         return -1;
     }
-
+  //@@author
     /**
      * Removes the equivalent task from the list.
      *

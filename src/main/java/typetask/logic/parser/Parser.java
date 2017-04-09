@@ -23,7 +23,6 @@ import typetask.logic.commands.ListTodayCommand;
 import typetask.logic.commands.RedoCommand;
 import typetask.logic.commands.RemoveDeadlineCommand;
 import typetask.logic.commands.SaveCommand;
-import typetask.logic.commands.SelectCommand;
 import typetask.logic.commands.SettingCommand;
 import typetask.logic.commands.UndoCommand;
 import typetask.logic.commands.UseCommand;
@@ -63,9 +62,6 @@ public class Parser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
