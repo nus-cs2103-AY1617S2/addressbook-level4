@@ -1,5 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class LoadCommand extends Command {
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
     public static final String MESSAGE_ERROR_SAVECONFIG = "Failed to save config file : '%1$s'";
     public static final String MESSAGE_INVALID_DATA = "Invalid XML file: Unable to load.";
-    public static final String MESSAGE_ERROR_READ_TASKMANAGER = "Failed to read TaskManager. Please retry.";
+    public static final String MESSAGE_ERROR_IO_TASKMANAGER = "Failed to read/write TaskManager.";
 
     private final String newPath;
 
@@ -45,6 +46,11 @@ public class LoadCommand extends Command {
         Config newConfig;
         String configFilePathUsed;
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+
+        File forPermissionTest = new File(this.newPath);
+        if(!forPermissionTest.canWrite()){
+            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
+          }
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
@@ -63,7 +69,7 @@ public class LoadCommand extends Command {
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_INVALID_DATA);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_READ_TASKMANAGER);
+            throw new CommandException(MESSAGE_ERROR_IO_TASKMANAGER);
         }
 
         newConfig.setTaskManagerFilePath(this.newPath);

@@ -1,5 +1,6 @@
 package seedu.taskmanager.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class SaveAsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "TaskManager directory saved to : %1$s";
     public static final String MESSAGE_ERROR_BUILDCONFIG = "Failed to build new config";
-    public static final String MESSAGE_ERROR_SAVE = "Failed to save TaskManager : '%1$s'";
+    public static final String MESSAGE_ERROR_IO = "Failed to save TaskManager.";
 
     private final String newPath;
 
@@ -40,6 +41,11 @@ public class SaveAsCommand extends Command {
         Config newConfig;
         String configFilePathUsed;
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
+
+        File forPermissionTest = new File(this.newPath);
+        if(!forPermissionTest.canWrite()){
+            throw new CommandException(MESSAGE_ERROR_IO);
+          }
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
@@ -56,7 +62,7 @@ public class SaveAsCommand extends Command {
             storage.saveTaskManager(newTaskManager);
             ConfigUtil.saveConfig(newConfig, configFilePathUsed);
         } catch (IOException e) {
-            throw new CommandException(MESSAGE_ERROR_SAVE + StringUtil.getDetails(e));
+            throw new CommandException(MESSAGE_ERROR_IO);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.newPath));
