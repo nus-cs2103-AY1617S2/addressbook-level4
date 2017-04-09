@@ -53,7 +53,7 @@ public class SelectCommandTest extends EzDoGuiTest {
         commandBox.runCommand("list");
         commandBox.runCommand("done 1 3");
         commandBox.runCommand("done");
-        commandBox.runCommand("select " + 987);
+        commandBox.runCommand("select 987");
         assertResultMessage("The task index provided is invalid.");
 
         /*
@@ -80,7 +80,7 @@ public class SelectCommandTest extends EzDoGuiTest {
         commandBox.runCommand("list");
         commandBox.runCommand("done 1 3");
         commandBox.runCommand("done");
-        commandBox.runCommand("select " + 987);
+        commandBox.runCommand("select 987");
         assertResultMessage("The task index provided is invalid.");
 
         /*
