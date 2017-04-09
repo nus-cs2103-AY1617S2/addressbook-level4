@@ -56,10 +56,10 @@ Format: `add TASK_NAME p/PRIORITY_LEVEL sd/DATETIME ed/DATETIME [t/TAG]...`
 Date Format: HH:mm dd/MM/yyyy
 Note: HH:MM is optional
 
-> To add floating tasks, simply do not specify the start and end timing paramters.<br>
-> To add tasks with deadlines, simply specify the end timing.<br>
-> To add recurring tasks, see section 2.2.1.<br>
-> Any of these 3 types of tasks can have 0 or more tags.<br>
+> * To add floating tasks, simply do not specify the start and end timing paramters.<br>
+> * To add tasks with deadlines, simply specify the end timing.<br>
+> * To add recurring tasks, see section 2.2.1.<br>
+> * Any of these 3 types of tasks can have 0 or more tags.<br>
 
 Examples:
 * `add Watch Friends season 2`
@@ -69,8 +69,8 @@ Examples:
 
   ### 2.2.1. Adding a recurring task
 
-  > Adds a recurring task to the task list<br>
-  > Format: same as 'add' but specifcy the frequency by r/#_
+  > * Adds a recurring task to the task list<br>
+  > * Format: same as 'add' but specifcy the frequency by r/#_
   > where '#' is an integer and '_' is either 'd' (day), 'm' (month), or 'y' (year)
 
   Examples:
@@ -86,6 +86,7 @@ Format: `list`<br>
 > The list of tasks will be sorted accoding to priority level from 1 to 3
 
 Example:
+
 * `list`<br>
   Shows a list of all tasks in the task list.
 
@@ -95,13 +96,17 @@ Edits an existing task in the task list.<br>
 Format: `edit INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE [t/TAG]...`
 Editing a recurring task in this way will edit all instances
 
-> Edits the task at the specified `INDEX`.
+> * Edits the task at the specified `INDEX`.
   The index refers to the index number shown in the last task listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-> At least one of the optional fields must be provided.
-> Existing values will be updated to the input values.
-> When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-> You can remove all the task's tags by typing `t/` without specifying any tags after it.
+  The index **must be a positive integer** 1, 2, 3, etc.
+> * At least one of the optional fields must be provided.
+> * Existing values will be updated to the input values.
+> * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+> * You can remove all the task's tags by typing `t/` without specifying any tags after it.
+> * You can edit the frequency of a recurring task following the same syntax. Note that all occurrences will be changed
+> according to the frequency specified.
+> * Once a non-recurring task is created, it cannot be * `edit`ed and made into a recurring task. You must create a new task using
+> * `add` and specifiy a frequency with `r/` if you want to make a non-recurring task into a recurring one. 
 
 Examples:
 
@@ -110,6 +115,9 @@ Examples:
 
 * `edit 2 Do Algorithm Assignment t/`<br>
   Edits the name of the 2nd task to be `Do Algorithm Assignment` and clears all existing tags.
+  
+* `edit 1 r/1y` <br>
+  Edits the frequency of task 1 (assuming it is a recurring task) and changes it to 1 year.
 
   ### 2.4.1. Editing a specific instance of a recurring task : `editthis`
   Format: `editthis INDEX [NAME] p/PRIORITY sd/START_DATE ed/END_DATE...`
@@ -117,9 +125,8 @@ Examples:
   > * Edits a specific instance of a recurring task
   > * After editing this instance, the edited task will no longer be a part of the recurring sequence
 
-
   Examples:
-
+  
   * `edithis 2 sd/01/01/2017`<br>
   Edits the start date of task 2 (which is reccuring)
 
@@ -147,7 +154,8 @@ Examples:
   > * However, only one instance will show up in the list after executing 'list'
   > * The instance in 'list' will be updated to match the parameters after executing a valid 'find'
 
-  Example:
+  Examples:
+  
   * `add feed cat sd/10/05/2017 ed/10/05/2017 r/1d`<br>
     The task is displayed in the list with the above parameters
   * `find 11/05/2017`<br>
@@ -160,9 +168,9 @@ Examples:
 Deletes the specified task from the task list. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-> The index refers to the index  number shown in the most recent listing.<br>
-> The index **must be a positive integer** 1, 2, 3, ...
+> * Deletes the task at the specified `INDEX`. <br>
+> * The index refers to the index  number shown in the most recent listing.<br>
+> * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 
@@ -178,12 +186,12 @@ Examples:
   Deletes the specific occurrence of the reccuring task from the list
   Format: `deletethis INDEX`
 
-  > Deletes the specific occurrence of a reccuring task at the specified INDEX
-  > The index refers to the index  number shown in the most recent listing.<br>
-  > The index **must be a positive integer** 1, 2, 3, ...
-  > Upon deleting an instance, the task list will be updated with the next recent occurrence.
+  > * Deletes the specific occurrence of a reccuring task at the specified INDEX
+  > * The index refers to the index  number shown in the most recent listing.<br>
+  > * The index **must be a positive integer** 1, 2, 3, ...
+  > * Upon deleting an instance, the task list will be updated with the next recent occurrence.
     If there is no more occurrences, then the entire reccuring task will be removed from the list.
-  > **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
+  > * **Note:** Calling `deletethis` on a non-recurring task is supported - functionality is equivalent to
   calling `delete` on the same task.
 
   Example:
@@ -197,11 +205,11 @@ Examples:
 Marks the specified task as `Completed`. The task is automatically added with a `complete` tag.<br>
 Format: `complete INDEX`
 
-> Mark the task at the specified `INDEX` as `Completed`.
-> The index refers to the index number shown in the most recent listing.
-> The index **must be a positive integer** 1, 2, 3, ...
-> To complete a specific instance of a recurring task, follow the same syntax.
-> **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.
+> * Mark the task at the specified `INDEX` as `Completed`.
+> * The index refers to the index number shown in the most recent listing.
+> * The index **must be a positive integer** 1, 2, 3, ...
+> * To complete a specific instance of a recurring task, follow the same syntax.
+> * **Note:** `complete` ALL instances of a recurring task is not a practical application of this command and thus is not supported.
 
 Examples:
 
@@ -217,14 +225,15 @@ Examples:
 Puts a priority level to a task.<br>
 Format: `prioritize INDEX PRIORITY_LEVEL`
 
-> Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
-> The index **must be a positive interger** 1, 2, 3,...
-> The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
-> Using `prioritize` on a recurring task will change the priority of ALL occurrences.
-> **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
+> * Allocates a priority leve of `PRIORITY_LEVEL` to the task at the specified `INDEX`.
+> * The index **must be a positive interger** 1, 2, 3,...
+> * The priority level **must be a positive integer from 1 to 3**, 1 being the highest priority and 3 being the least.
+> * Using `prioritize` on a recurring task will change the priority of ALL occurrences.
+> * **Note:** To prioritize a specific instance of a recrring task, use `editthis INDEX p/#` where '#' represents the edited
 priority.
 
 Examples:
+
 * `list`<br>
   `prioritize 2 3`<br>
   Puts a priority level of 3 to the 2nd task in the task list. If the 2nd task is recurring, then all occurrences will have priority 3.
@@ -243,17 +252,32 @@ Format: `clear`
 Exits the program.<br>
 Format: `exit`
 
+Example: 
+
+* `exit`<br>
+The application will shut down.
+
 ### 2.11. Saving the data : `save`
 
 Saves task manager data in specified file location.
 Format: `save PATH/TO/SAVE_LOCATION`
-Task list data is saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
+> * Task list data is saved in the hard disk automatically after any command that changes the data.<br>
+> * There is no need to save manually.
 
-###2.12. Loading the data : `load`
+Examples:
+
+* `save`
+* `save` 
+
+### 2.12. Loading the data : `load`
 
 Loads task manager data from specified file location
 Format: `load PATH/TO/LOAD_LOCATION`
+
+Examples:
+
+* `load`
+* `load`
 
 ## 3. Notes on Recurring Tasks
 
@@ -270,11 +294,14 @@ the implementation of such tasks. A few things to note about how to use this fea
   the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
 * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
+* Both start and end time parameters must be specified for initiating a recurring task. 
 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br>
+**Q**: How do I change the calendar to view a different month?<br>
+**A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.
 
 ## 5. Command Summary
 
@@ -310,11 +337,11 @@ the implementation of such tasks. A few things to note about how to use this fea
 * **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
    e.g. `priority 2 3`
 
-* **Exit ** : `exit` <br>
+* **Exit** : `exit` <br>
    e.g. `exit`
 
-* **Load ** : `load PATH/TO/LOAD_FILE` <br>
+* **Load** : `load PATH/TO/LOAD_FILE` <br>
    e.g. `load /Documents/task/tasklist.xml`
 
-* **Save ** : `save PATH/TO/SAVE_FILE` <br>
+* **Save** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
