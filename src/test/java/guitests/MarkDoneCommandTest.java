@@ -79,4 +79,10 @@ public class MarkDoneCommandTest extends TaskManagerGuiTest {
 		assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MarkUndoneCommand.MESSAGE_USAGE));
 	}
 
+	@Test
+	public void invalidCommand_failure() {
+		commandBox.runCommand("markr 1");
+		assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+	}
+
 }
