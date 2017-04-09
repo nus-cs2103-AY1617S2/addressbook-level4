@@ -144,7 +144,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_recurringTask_success() {
         commandBox.runCommand("clear");
-        commandBox.runCommand("add test from 9 april to 16 april");
+        commandBox.runCommand("add test from 9 april to 16 april daily");
 
         commandBox.runCommand("edit 1 change recurinterval to day");
         assertTaskListHits(9);
@@ -162,8 +162,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
     @Test
     public void edit_recurringTask_failure() {
         commandBox.runCommand("clear");
-        commandBox.runCommand("add test from 9 april to 16 april");
-        commandBox.runCommand("edit 1 change recurinterval to day");
+        commandBox.runCommand("add test from 9 april to 16 april every day");
 
         commandBox.runCommand("edit 1 change name to something");
         assertResultMessage(EditCommand.MESSAGE_PART_OF_RECURRING_TASK);
