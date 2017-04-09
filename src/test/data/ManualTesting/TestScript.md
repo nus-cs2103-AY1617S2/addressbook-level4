@@ -80,13 +80,13 @@ Task updated to index: 20"
 ### 1. Search by task name
 Input `SEARCH work`
 
-Result: "5 tasks listed!"
+Result: "5 tasks listed!" <br>
 The task whose task name and categories contain the word "work" will be shown.
 
 ### 2. Search by date
 Input `SEARCH 03/03/17`
 
-Result: "2 tasks listed!'
+Result: "2 tasks listed!' <br>
 The task whose start date or end date contain the date "03/03/17" will be shown.
 
 ## Testing out the CLEAR function:
@@ -121,7 +121,7 @@ Result: <br>
 1. "New task added: recurring task Start Date: 03/03/17 Start Time: 1400 
 End Date: 03/03/17 End Time: 1500 <br>
 Task added at index: 1"
-2. "Task has successfully recurred"
+2. "Task has successfully recurred" <br>
 The event recurring task has been recurred 3 more times, everyday for 3 days.
 
 ### 2. Recur Deadlines
@@ -132,7 +132,7 @@ Input <br>
 Result: <br>
 1. "New task added: recurring deadline End Date: 05/05/17 End Time: 1400 <br>
 Task added at index: 5"
-2. "Task has successfully recurred"
+2. "Task has successfully recurred" <br>
 The deadline recurring deadline has been recurred 4 more times, on the 5th of every month.
 
 ## Testing out the MARK function:
@@ -180,7 +180,7 @@ Input <br>
 Result: <br>
 1. Event task added.
 2. Deadline task added.
-3. "Listed all uncompleted tasks for [05/05/17]"
+3. "Listed all uncompleted tasks for [05/05/17]" <br>
 There will be 3 uncompleted tasks listed
 4. One of the deadline task is marked as completed.
 5. There will be 2 uncompleted tasks listed now.
@@ -212,7 +212,7 @@ Result <br>
 Input `UPDATE 10 ON 10/04/17 1200`
 
 Result: "Updated Task: task Start Date: 10/04/17 Start Time: 1200 End Date: 10/04/17 End Time: 1300 Categories: [low] <br>
-Task updated to index: 5???????????????"
+Task updated to index: 5???????????????" <br>
 Notice the shift from Basic Tasks to the Events column.
 
 ### Change event to floating task
@@ -220,7 +220,7 @@ Notice the shift from Basic Tasks to the Events column.
 Input `UPDATE 4`
 
 Result: "Updated Task: task Categories: [low] <br>
-Task updated to index: 12????????????"
+Task updated to index: 12????????????" <br>
 Notice the shift from Events to Basic Tasks column.
 
 ### Change event to deadline
