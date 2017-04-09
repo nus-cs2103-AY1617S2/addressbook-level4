@@ -338,8 +338,8 @@ public class TestUtil {
 
     //@@author A0139343E
     public static boolean containsTask(TestTask[] list, TestTask target) {
-        for(int n = 0; n < list.length; n ++) {
-            if(list[n].isSameStateAs(target)) {
+        for (int n = 0; n < list.length; n++) {
+            if (list[n].isSameStateAs(target)) {
                 return true;
             }
         }
