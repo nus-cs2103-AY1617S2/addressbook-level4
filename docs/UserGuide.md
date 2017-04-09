@@ -270,11 +270,14 @@ the implementation of such tasks. A few things to note about how to use this fea
   the User Interface. This will remove all occurrences of the recursive task from the Task Manager.
 * If this task runs longer then 60 days, then you will have to re-add the task following the same syntax for `add` so that it
   recurrs for another 60 days.
+* Both start and end time parameters must be specified for initiating a recurring task. 
 
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous task list folder.<br>
+**Q**: How do I change the calendar to view a different month?<br>
+**A**: Enter a date in the text field and click enter. The calendar will be updated with the new view.
 
 ## 5. Command Summary
 
@@ -310,11 +313,11 @@ the implementation of such tasks. A few things to note about how to use this fea
 * **Prioritze** : `prioritize INDEX PRIORITY_LEVEL` <br>
    e.g. `priority 2 3`
 
-* **Exit ** : `exit` <br>
+* **Exit** : `exit` <br>
    e.g. `exit`
 
-* **Load ** : `load PATH/TO/LOAD_FILE` <br>
+* **Load** : `load PATH/TO/LOAD_FILE` <br>
    e.g. `load /Documents/task/tasklist.xml`
 
-* **Save ** : `save PATH/TO/SAVE_FILE` <br>
+* **Save** : `save PATH/TO/SAVE_FILE` <br>
    e.g. `save /Documents/task/tasklist.xml`
