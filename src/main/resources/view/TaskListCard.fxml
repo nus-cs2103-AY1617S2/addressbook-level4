@@ -32,7 +32,7 @@
 						<HBox alignment="CENTER_LEFT" spacing="5">
 							<children>
 								<HBox>
-									<Label fx:id="id" minWidth="30.0" styleClass="cell_big_label" />
+									<Label fx:id="id" minWidth="35.0" styleClass="cell_big_label" />
 									<Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
 								</HBox>
 							</children>
