@@ -3,7 +3,6 @@ package onlythree.imanager.ui;
 import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -14,6 +13,9 @@ import onlythree.imanager.model.task.ReadOnlyTask;
 import onlythree.imanager.model.task.StartEndDateTime;
 
 //@@author A0135998H
+/**
+ * A ui container that stores a task's information displayed in the task list panel.
+ */
 public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
@@ -24,8 +26,10 @@ public class TaskCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    /* a UI container storing the startDate and endDate labels */
     @FXML
     private HBox startEndDateContainer;
+    /* a UI container storing the deadline label */
     @FXML
     private HBox deadlineContainer;
     @FXML
