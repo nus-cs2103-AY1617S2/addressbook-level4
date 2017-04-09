@@ -26,8 +26,8 @@ By : `Team ToLuist`  &nbsp;&nbsp;&nbsp;&nbsp;
 	3.12 [Clearing all entries: `clear`](#312-Clearing-all-entries:-`clear`)<br>
 	3.13 [Undoing a command: `undo`](#313-Undoing-a-command:-`undo`)<br>
 	3.14 [Redoing a command: `redo`](#314-Redoing-a-command:-`redo`)<br>
-	3.15 [Viewing previous commands: `history`](#315-Viewing-previous-commands-history)<br>
-	3.16 [Adding an alias for any phrase: `alias`](#316-Adding-an-alias-for-any-phrase-alias)<br>
+	3.15 [Viewing previous commands: `history`](#315-viewing-previous-commands-history)<br>
+	3.16 [Adding an alias for any phrase: `alias`](#316-adding-an-alias-for-any-phrase-alias)<br>
 	3.17 [Removing an alias: `unalias`](#317-Removing-an-alias:-`unalias`)<br>
 	3.18 [Viewing aliases: `viewalias`](#318-Viewing-aliases:-`viewalias`)<br>
 	3.19 [Saving the data](#319-saving-the-data)<br>
