@@ -195,11 +195,11 @@ public class LogicManagerTest {
         assertCommandFailure("add valid name by yesterday t/validTag",
                 Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         assertCommandFailure("add valid name from yesterday to tmr t/validTag",
-                StartEndDateTime.MESSAGE_STARTDATETIME_CONSTRAINTS);
+                StartEndDateTime.MESSAGE_PAST_START_DATETIME_CONSTRAINTS);
         assertCommandFailure("add valid name from tmr to yesterday t/validTag",
-                StartEndDateTime.MESSAGE_ENDDATETIME_CONSTRAINTS);
+                StartEndDateTime.MESSAGE_PAST_END_DATETIME_CONSTRAINTS);
         assertCommandFailure("add valid name from 3 days later to 2 days later t/validTag",
-                StartEndDateTime.MESSAGE_STARTENDDATETIME_CONSTRAINTS);
+                StartEndDateTime.MESSAGE_INVALID_DURATION_CONSTRAINTS);
         assertCommandFailure("add Valid Name from 2 days later to 3 days later t/invalid_-[.tag",
                 Tag.MESSAGE_TAG_CONSTRAINTS);
     }

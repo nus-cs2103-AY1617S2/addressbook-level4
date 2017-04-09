@@ -9,9 +9,9 @@ import onlythree.imanager.model.task.exceptions.PastDateTimeException;
 
 //@@author A0140023E
 public class StartEndDateTime {
-    public static final String MESSAGE_STARTDATETIME_CONSTRAINTS = "Start Date/Time should not be in the past";
-    public static final String MESSAGE_ENDDATETIME_CONSTRAINTS = "End Date/Time should not be in the past";
-    public static final String MESSAGE_STARTENDDATETIME_CONSTRAINTS = "End Date/Time must be after Start Date/Time";
+    public static final String MESSAGE_PAST_START_DATETIME_CONSTRAINTS = "Start Date/Time should not be in the past";
+    public static final String MESSAGE_PAST_END_DATETIME_CONSTRAINTS = "End Date/Time should not be in the past";
+    public static final String MESSAGE_INVALID_DURATION_CONSTRAINTS = "End Date/Time must be after Start Date/Time";
 
     private ZonedDateTime startDateTime;
     private ZonedDateTime endDateTime;
@@ -51,17 +51,17 @@ public class StartEndDateTime {
             ZonedDateTime currentDateTime = ZonedDateTime.now();
 
             if (startDateTime.isBefore(currentDateTime)) {
-                throw new PastDateTimeException(MESSAGE_STARTDATETIME_CONSTRAINTS);
+                throw new PastDateTimeException(MESSAGE_PAST_START_DATETIME_CONSTRAINTS);
             }
 
             if (endDateTime.isBefore(currentDateTime)) {
-                throw new PastDateTimeException(MESSAGE_ENDDATETIME_CONSTRAINTS);
+                throw new PastDateTimeException(MESSAGE_PAST_END_DATETIME_CONSTRAINTS);
             }
         }
 
         // The end date time must be after the start date time, but not same or before
         if (!endDateTime.isAfter(startDateTime)) {
-            throw new InvalidDurationException(MESSAGE_STARTENDDATETIME_CONSTRAINTS);
+            throw new InvalidDurationException(MESSAGE_INVALID_DURATION_CONSTRAINTS);
         }
 
         this.startDateTime = startDateTime;

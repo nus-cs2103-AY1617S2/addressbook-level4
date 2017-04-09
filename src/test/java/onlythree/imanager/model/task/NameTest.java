@@ -9,8 +9,7 @@ public class NameTest {
 
     //@@author A0140023E
     @Test
-    public void isValidName() {
-        // invalid name
+    public void isValidName_invalidName_falseReturned() {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // space only (0x20)
         assertFalse(Name.isValidName("\t")); // tab only
@@ -20,8 +19,10 @@ public class NameTest {
         assertFalse(Name.isValidName("\r")); // carriage return only
         assertFalse(Name.isValidName("//")); // only slashes
         assertFalse(Name.isValidName("fetch colleague/boss")); // contains forward slashes
+    }
 
-        // valid name
+    @Test
+    public void isValidName_validName_trueReturned() {
         assertTrue(Name.isValidName("assignment")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("2nd draft")); // alphanumeric characters

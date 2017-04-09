@@ -26,12 +26,9 @@ public class EditCommandTest extends TaskListGuiTest {
     TestTask[] expectedTasksList = td.getTypicalTasks();
 
     //author A0140023E
-    //TODO not all fields are specified because they cannot
-    // GUI tests are slow, so just check StartEndDateTime here and check Deadline and floating task elsewhere
     /**
      * This method tests if editing all fields will be successful. However, StartEndDateTime
      * cannot exist with Deadline, so Deadline cannot be edited here
-     * @throws Exception
      */
     @Test
     public void edit_allFieldsSpecifiedWithStartEndDateTime_success() throws Exception {
@@ -56,7 +53,7 @@ public class EditCommandTest extends TaskListGuiTest {
 
     @Test
     public void edit_notAllFieldsSpecifiedWithTagsOnly_success() throws Exception {
-        // TODO notice how tags have to be in alphabetical order because of the way tags are added
+        // notice how tags have to be in alphabetical order because of the way tags are added
         // and compared. See TestUtil::compareCardAndTask using list compare instead of set compare
         String detailsToEdit = "t/fail t/lose";
         int taskListIndex = 2;
@@ -84,7 +81,7 @@ public class EditCommandTest extends TaskListGuiTest {
         commandBox.runCommand("find Elephant");
 
         String detailsToEdit = "Bellyphant";
-        int filteredTaskListIndex = 1; // TODO notice the bad naming here again
+        int filteredTaskListIndex = 1;
         int taskListIndex = 5;
 
         TestTask taskToEdit = expectedTasksList[taskListIndex - 1];
@@ -122,13 +119,13 @@ public class EditCommandTest extends TaskListGuiTest {
         assertResultMessage(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 from yesterday to tmr");
-        assertResultMessage(StartEndDateTime.MESSAGE_STARTDATETIME_CONSTRAINTS);
+        assertResultMessage(StartEndDateTime.MESSAGE_PAST_START_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 from tmr to yesterday");
-        assertResultMessage(StartEndDateTime.MESSAGE_ENDDATETIME_CONSTRAINTS);
+        assertResultMessage(StartEndDateTime.MESSAGE_PAST_END_DATETIME_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 from 2 days later to 1 day later");
-        assertResultMessage(StartEndDateTime.MESSAGE_STARTENDDATETIME_CONSTRAINTS);
+        assertResultMessage(StartEndDateTime.MESSAGE_INVALID_DURATION_CONSTRAINTS);
 
         commandBox.runCommand("edit 1 t/*&");
         assertResultMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
