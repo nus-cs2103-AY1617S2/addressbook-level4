@@ -54,9 +54,9 @@ Add a simple deadline
 - Task list panel navigates to and displays newly added task card.
 
 Add a deadline with tag and priority
-> **Command:** `add submit project by tomorrow noon priority high tag school` <br>
+> **Command:** `add submit project by tomorrow noon priority medium tag school` <br>
 > **Result:** <br>
-- Added a deadlie named 'submit project' due at tomorrow noon with tag 'school' and high priority
+- Added a deadlie named 'submit project' due at tomorrow noon with tag 'school' and medium priority
 - Task list panel navigates to and displays newly added task card.
 
 ### 1.3 Add an event
@@ -67,9 +67,17 @@ Add a simple event
 - TaskList panel navigates to and displays newly added task card.
 
 Add an event with tag and priority
-> **Command:** `add cs3223 exam from 25th April 9am to 25th Apr 11am prioroity high`<br>
+> **Command:** `add cs3223 exam from 25th April 9am to 25th Apr 11am priority is high`<br>
 > **Result:**<br>
 - Added an event named 'cs3223 exam' starting from 25th April 9AM and ending at 25th April 11AM with high priority
+- TaskList panel navigates to and displays newly added task card.
+
+
+### 1.4 Add a task with keyword in title
+Add a simple event
+> **Command:** `add "change priority to high for all my tasks" priority medium by friday`<br>
+> **Result:**<br>
+- Added an event named 'change priority to high for all my tasks' by friday
 - TaskList panel navigates to and displays newly added task card.
 
 ------
@@ -81,48 +89,55 @@ Add an event with tag and priority
 - Task list panel list all tasks and events in TaskIt
 - Tasks are sorted based on priority
 
-### 2.2 List all deadlines
+
+### 2.2 List all floating tasks
+> **Command:** `list floating`<br>
+> **Result:**<br>
+- Task list panel list all floating in TaskIt
+- Tasks are sorted based on priority
+
+### 2.3 List all deadlines
 > **Command:** `list deadline`<br>
 > **Result:**<br>
 - Task list panel list all deadlines in TaskIt
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.3 List all events
+### 2.4 List all events
 > **Command:** `list event`<br>
 > **Result:**<br>
 - Task list panel list all events in TaskIt
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.4 List all completed tasks
+### 2.5 List all completed tasks
 > **Command:** `list done`<br>
 > **Result:**<br>
 - Task list panel list all finished tasks and events in TaskIt
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.5 List all uncompleted tasks
+### 2.6 List all uncompleted tasks
 > **Command:** `list undone`<br>
 > **Result:**<br>
 - Task list panel list all undone tasks and events in TaskIt
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.6 List tasks due today
+### 2.7 List tasks due today
 > **Command:** `list today`<br>
 > **Result:**<br>
 - Task list panel lists all deadlines due today and events ending today
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.7 List all overdue tasks
+### 2.8 List all overdue tasks
 > **Command:** `list overdue`<br>
 > **Result:**<br>
 - Task list panel lists all tasks and events past due and not completed yet
-- Tasks are sorted based on priority
+- Tasks are sorted based on priority and date
 
-### 2.8 List by priority
+### 2.9 List by priority
 > **Command:** `list high`<br>
 > **Result:**<br>
 - Task list panel lists all tasks and events with high priority
 
-### 2.9 List tasks from GUI
+### 2.10 List tasks from GUI
 > **Action:** Click buttons on left menu bar<br>
 > **Result:**<br>
 - Task list panel lists tasks or/and events according description on the menu bar
@@ -159,6 +174,12 @@ Add an event with tag and priority
 > **Result:**<br>
 - Newly edited task assigned low priority.
 - Task list panel shows the newly edited task card with priority level changed.
+
+#### 3.6 Edit title with keyword
+> **Command:** `edit 1 title "get hw from friend"`<br>
+> **Result:**<br>
+- Newly edited task given title with 'from' keyword in it.
+- Task list panel shows the newly edited task card with title properly changed.
 
 ------
 ## 4. Mark Command
