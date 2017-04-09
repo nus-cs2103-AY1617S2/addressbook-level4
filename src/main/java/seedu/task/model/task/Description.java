@@ -5,7 +5,7 @@ import java.util.Comparator;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's frequency in the ToDo list.
+ * Represents a Task's description in the Task Manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description implements Comparable<Description> {
@@ -24,9 +24,9 @@ public class Description implements Comparable<Description> {
     public final String description;
 
     /**
-     * Validates given frequency.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given frequency string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
     public Description(String description) throws IllegalValueException {
         assert description != null;
@@ -38,7 +38,7 @@ public class Description implements Comparable<Description> {
     }
 
     /**
-     * Returns true if a given string is a valid frequency.
+     * Returns true if a given string is a valid description.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);
@@ -67,7 +67,7 @@ public class Description implements Comparable<Description> {
         return this.description.compareTo(other.description);
     }
 
-    public static Comparator<Description> DescriptionComparator = new Comparator<Description>() {
+    public static Comparator<Description> descriptionComparator = new Comparator<Description>() {
 
         @Override
         public int compare(Description description1, Description description2) {

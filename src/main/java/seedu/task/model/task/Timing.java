@@ -10,7 +10,7 @@ import java.util.Date;
 import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's timing in the address book. Guarantees: immutable; is valid
+ * Represents a Task's timing in the Task Manager. Guarantees: immutable; is valid
  * as declared in {@link #isValidTiming(String)}
  */
 public class Timing implements Comparable<Timing> {

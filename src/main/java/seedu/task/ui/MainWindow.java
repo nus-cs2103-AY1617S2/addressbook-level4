@@ -122,8 +122,8 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void fillInnerParts() {
-        calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredPersonList() , 0 , 0 , 0);
-        personListPanel = new PersonListPanel(getPersonListPlaceholder() , logic.getFilteredPersonList());
+        calenderPanel = new CalenderPanel(calenderPlaceholder, logic.getFilteredTaskList() , 0 , 0 , 0);
+        personListPanel = new PersonListPanel(getPersonListPlaceholder() , logic.getFilteredTaskList());
         new ResultDisplay(getResultDisplayPlaceholder());
         new StatusBarFooter(getStatusbarPlaceholder(), config.getTaskManagerFilePath());
         new CommandBox(getCommandBoxPlaceholder(), logic , this);
