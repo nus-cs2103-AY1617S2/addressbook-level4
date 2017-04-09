@@ -90,17 +90,17 @@ public class TypicalTestTasks {
             eventTestFriSat = new TaskBuilder().withTaskName("Weekend").withStartDate("14/04/17").withStartTime("1230")
                     .withEndDate("15/04/17").withEndTime("1900").withCompletion(false).withCategories("still", "coding")
                     .build();
-            recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
-                    .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDay = new TaskBuilder().withTaskName("I'm recurring").withStartDate("30/03/17")
+                    .withStartTime("1000").withEndDate("30/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestDayOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("04/03/17")
-                    .withStartTime("1000").withEndDate("04/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDayOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("31/03/17")
+                    .withStartTime("1000").withEndDate("31/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestDayTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("05/03/17")
-                    .withStartTime("1000").withEndDate("05/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDayTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("01/04/17")
+                    .withStartTime("1000").withEndDate("01/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
-            recurTestDayThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("06/03/17")
-                    .withStartTime("1000").withEndDate("06/03/17").withEndTime("1100").withCompletion(false)
+            recurTestDayThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("02/04/17")
+                    .withStartTime("1000").withEndDate("06/04/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestWeek = new TaskBuilder().withTaskName("I'm recurring").withStartDate("03/03/17")
                     .withStartTime("1000").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
@@ -115,16 +115,16 @@ public class TypicalTestTasks {
                     .withStartTime("1000").withEndDate("21/03/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestMonth = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
-                    .withStartTime("EMPTY_FIELD").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/11/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestMonthOnce = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
-                    .withStartTime("EMPTY_FIELD").withEndDate("03/04/17").withEndTime("1100").withCompletion(false)
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/12/17").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestMonthTwice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
-                    .withStartTime("EMPTY_FIELD").withEndDate("03/05/17").withEndTime("1100").withCompletion(false)
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/01/18").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestMonthThrice = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
-                    .withStartTime("EMPTY_FIELD").withEndDate("03/06/17").withEndTime("1100").withCompletion(false)
+                    .withStartTime("EMPTY_FIELD").withEndDate("03/02/18").withEndTime("1100").withCompletion(false)
                     .withCategories("just", "friends").build();
             recurTestYear = new TaskBuilder().withTaskName("I'm recurring").withStartDate("EMPTY_FIELD")
                     .withStartTime("EMPTY_FIELD").withEndDate("03/03/17").withEndTime("1100").withCompletion(false)

@@ -5,6 +5,7 @@ import static seedu.taskmanager.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK
 
 import org.junit.Test;
 
+import seedu.taskmanager.logic.commands.DeleteCommand;
 import seedu.taskmanager.testutil.TestTask;
 import seedu.taskmanager.testutil.TestUtil;
 
@@ -12,7 +13,7 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
 
     // @@author A0141102H
     @Test
-    public void delete() {
+    public void deleteByIndex() {
 
         // delete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
@@ -33,6 +34,34 @@ public class DeleteCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("DELETE " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
+    }
+
+    @Test
+    public void deleteByWord() {
+        TestTask[] expectedList = td.getTypicalTasks();
+        commandBox.runCommand("DELETE Eat breakfast with mom");
+        expectedList = TestUtil.removeTaskFromList(expectedList, 1);
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+
+        // No task name exists
+        commandBox.runCommand("DELETE aosfasoif");
+        assertResultMessage(DeleteCommand.MESSAGE_INVALID_TASK_NAME);
+    }
+
+    @Test
+    public void deleteByDate() {
+        TestTask[] expectedList = td.getTypicalTasks();
+        commandBox.runCommand("DELETE 04/04/17");
+        expectedList = TestUtil.removeTaskFromList(expectedList, 4);
+        assertTrue(eventTaskListPanel.isListMatching(expectedList));
+        assertTrue(deadlineTaskListPanel.isListMatching(expectedList));
+        assertTrue(floatingTaskListPanel.isListMatching(expectedList));
+
+        // No task date exists
+        commandBox.runCommand("DELETE 09/09/99");
+        assertResultMessage(DeleteCommand.MESSAGE_INVALID_TASK_DATE);
     }
 
     /**

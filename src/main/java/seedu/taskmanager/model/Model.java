@@ -80,6 +80,11 @@ public interface Model {
      */
     void updateFilteredTaskList(Set<String> keywords);
 
+    // @@author A0141102H
+    /**
+     * Updates the filter of the filtered task list to filter by the given
+     * keywords and uncompleted tasks
+     */
     void updateFilteredTaskListForListCommand(Set<String> keywords, boolean isComplete);
 
     // @@author A0139520L
@@ -99,8 +104,4 @@ public interface Model {
     int isBlockedOutTime(Task task) throws DuplicateTaskException;
 
     int isBlockedOutTime(Task t, int UpdateTaskIndex) throws DuplicateTaskException;
-
-    // int addRecurringDeadlineTask(ReadOnlyTask taskToRecur, int recurring,
-    // String type) throws DuplicateTaskException;
-
 }
