@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tasklist>
+    <tasks>
+        <description>Buy milk and eggs</description>
+        <dueDate>09/08/2017 1400</dueDate>
+        <start>08/08/2017 1000</start>
+        <end>08/08/2017 1200</end>
+        <complete>false</complete>
+        <id>1490677936548</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Get haircut</description>
+        <dueDate>20/08/2017 1000</dueDate>
+        <start>15/08/2017 1600</start>
+        <end>15/08/2017 1700</end>
+        <complete>false</complete>
+        <id>1490678074112</id>
+        <tagged>daily</tagged>
+    </tasks>
+    <tasks>
+        <description>Finish assignment</description>
+        <dueDate>20/04/2017 2309</dueDate>
+        <start>27/03/2017 0000</start>
+        <end>15/04/2017 2309</end>
+        <complete>false</complete>
+        <id>1490685771082</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Meet friends</description>
+        <start>05/04/2017 1800</start>
+        <end>05/04/2017 2200</end>
+        <complete>false</complete>
+        <id>1490685839288</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>April Pranks</description>
+        <start>01/04/2017 0000</start>
+        <end>01/04/2017 2309</end>
+        <complete>false</complete>
+        <id>1490685898734</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>Hiking</description>
+        <start>01/05/2017 0600</start>
+        <end>03/05/2017 2000</end>
+        <complete>false</complete>
+        <id>1490686042042</id>
+        <tagged>club</tagged>
+    </tasks>
+    <tasks>
+        <description>Project Meeting</description>
+        <start>20/04/2017 1300</start>
+        <end>20/04/2017 1600</end>
+        <complete>false</complete>
+        <id>1490686160526</id>
+        <tagged>internship</tagged>
+    </tasks>
+    <tasks>
+        <description>Read SE Papers</description>
+        <dueDate>18/04/2017 2309</dueDate>
+        <start>10/04/2017 0000</start>
+        <end>12/04/2017 2309</end>
+        <complete>false</complete>
+        <id>1490686280508</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Go Shopping</description>
+        <dueDate>03/04/2017 2309</dueDate>
+        <start>03/04/2017 1800</start>
+        <end>03/04/2017 2200</end>
+        <complete>false</complete>
+        <id>1490687677257</id>
+        <tagged>daily</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Go Shopping</description>
+        <dueDate>04/05/2017 2309</dueDate>
+        <start>04/05/2017 1800</start>
+        <end>04/05/2017 2200</end>
+        <complete>false</complete>
+        <id>1490687705800</id>
+        <tagged>daily</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Go Shopping</description>
+        <dueDate>10/06/2017 2309</dueDate>
+        <start>10/06/2017 1800</start>
+        <end>10/06/2017 2200</end>
+        <complete>false</complete>
+        <id>1490687740575</id>
+        <tagged>daily</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Go Shopping</description>
+        <dueDate>08/07/2017 2309</dueDate>
+        <start>08/07/2017 1800</start>
+        <end>08/07/2017 2200</end>
+        <complete>false</complete>
+        <id>1490687793829</id>
+        <tagged>daily</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Summer Break</description>
+        <start>20/05/2017 1800</start>
+        <end>31/08/2017 2309</end>
+        <complete>false</complete>
+        <id>1490688154964</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>Winter Break</description>
+        <start>27/12/2017 1000</start>
+        <end>01/03/2018 0000</end>
+        <complete>false</complete>
+        <id>1490688843978</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>labour Day</description>
+        <start>01/05/2017 0000</start>
+        <end>01/05/2017 2309</end>
+        <complete>false</complete>
+        <id>1490690157656</id>
+        <tagged>holiday</tagged>
+    </tasks>
+    <tasks>
+        <description>Computing Final</description>
+        <dueDate>08/05/2017 1400</dueDate>
+        <start>08/05/2017 1200</start>
+        <end>08/05/2017 1400</end>
+        <complete>false</complete>
+        <id>1490690286084</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Wash Clothes</description>
+        <dueDate>04/05/2017 2309</dueDate>
+        <start>04/05/2017 1700</start>
+        <end>04/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690510160</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Buy New Table</description>
+        <dueDate>05/05/2017 2309</dueDate>
+        <start>05/05/2017 1700</start>
+        <end>05/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690554452</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Mop The Floor</description>
+        <dueDate>07/05/2017 2309</dueDate>
+        <start>07/05/2017 1700</start>
+        <end>07/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690582571</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Change Light Bulb</description>
+        <dueDate>09/05/2017 2309</dueDate>
+        <start>09/05/2017 1700</start>
+        <end>09/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690620891</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Repair Water Tub</description>
+        <dueDate>17/05/2017 2309</dueDate>
+        <start>17/05/2017 1700</start>
+        <end>17/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690674449</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Buy Some Flowers</description>
+        <dueDate>18/05/2017 2309</dueDate>
+        <start>18/05/2017 1700</start>
+        <end>18/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690714616</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Clean The Room</description>
+        <dueDate>19/05/2017 2309</dueDate>
+        <start>19/05/2017 1700</start>
+        <end>19/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690814733</id>
+        <tagged>important</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Water The Garden</description>
+        <dueDate>20/05/2017 2309</dueDate>
+        <start>20/05/2017 1700</start>
+        <end>20/05/2017 1900</end>
+        <complete>false</complete>
+        <id>1490690858524</id>
+        <tagged>fun</tagged>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Print Documents</description>
+        <dueDate>11/04/2017 2309</dueDate>
+        <start>11/04/2017 0800</start>
+        <end>11/04/2017 0900</end>
+        <complete>false</complete>
+        <id>1490690951282</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Lunch With Tom</description>
+        <start>11/04/2017 1200</start>
+        <end>11/04/2017 1300</end>
+        <complete>false</complete>
+        <id>1490690994641</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>SE Group Meeting</description>
+        <start>11/04/2017 1400</start>
+        <end>11/04/2017 1500</end>
+        <complete>false</complete>
+        <id>1490691036439</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Dinner With Parents</description>
+        <start>11/04/2017 1800</start>
+        <end>11/04/2017 1900</end>
+        <complete>false</complete>
+        <id>1490691090014</id>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>EMail Professor</description>
+        <dueDate>11/04/2017 2309</dueDate>
+        <start>11/04/2017 1700</start>
+        <end>11/04/2017 1900</end>
+        <complete>false</complete>
+        <id>1490691188435</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Do Painting</description>
+        <start>11/04/2017 2200</start>
+        <end>11/04/2017 2300</end>
+        <complete>false</complete>
+        <id>1490691256042</id>
+        <tagged>fun</tagged>
+        <tagged>hobby</tagged>
+    </tasks>
+    <tasks>
+        <description>Make Breakfast</description>
+        <dueDate>12/04/2017 0600</dueDate>
+        <start>11/04/2017 0500</start>
+        <end>11/04/2017 0600</end>
+        <complete>false</complete>
+        <id>1490691331385</id>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Take Computing Lecture</description>
+        <start>12/04/2017 0800</start>
+        <end>12/04/2017 1000</end>
+        <complete>false</complete>
+        <id>1490691412789</id>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Lunch With Jack</description>
+        <start>12/04/2017 1200</start>
+        <end>12/04/2017 1300</end>
+        <complete>false</complete>
+        <id>1490691480579</id>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Art Lecture</description>
+        <start>12/04/2017 1400</start>
+        <end>12/04/2017 1600</end>
+        <complete>false</complete>
+        <id>1490691544490</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Dinner with Alice</description>
+        <start>12/04/2017 1800</start>
+        <end>12/04/2017 1900</end>
+        <complete>false</complete>
+        <id>1490691634239</id>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>Read Paper</description>
+        <dueDate>12/04/2017 2309</dueDate>
+        <start>12/04/2017 2000</start>
+        <end>12/04/2017 2300</end>
+        <complete>false</complete>
+        <id>1490691698622</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Go To early Meeting</description>
+        <start>13/04/2017 0700</start>
+        <end>13/04/2017 0800</end>
+        <complete>false</complete>
+        <id>1490691760436</id>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Engineering Lecture</description>
+        <start>13/04/2017 0900</start>
+        <end>13/04/2017 1100</end>
+        <complete>false</complete>
+        <id>1490691863012</id>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Lunch With John</description>
+        <start>13/04/2017 1200</start>
+        <end>13/04/2017 1400</end>
+        <complete>false</complete>
+        <id>1490691943751</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>Computing Lab</description>
+        <start>13/04/2017 1400</start>
+        <end>13/04/2017 1600</end>
+        <complete>false</complete>
+        <id>1490692016413</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Computing Tutorial</description>
+        <start>13/04/2017 1800</start>
+        <end>13/04/2017 2000</end>
+        <complete>false</complete>
+        <id>1490692079683</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Night Meeting With Tom</description>
+        <start>13/04/2017 2100</start>
+        <end>13/04/2017 2300</end>
+        <complete>false</complete>
+        <id>1490692143298</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Return Books</description>
+        <dueDate>14/04/2017 1200</dueDate>
+        <start>14/04/2017 0900</start>
+        <end>14/04/2017 1100</end>
+        <complete>false</complete>
+        <id>1490692210384</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Dinner With Sam</description>
+        <start>14/04/2017 1200</start>
+        <end>14/04/2017 1300</end>
+        <complete>false</complete>
+        <id>1490692355940</id>
+        <tagged>school</tagged>
+        <tagged>fun</tagged>
+    </tasks>
+    <tasks>
+        <description>Computing Lecture</description>
+        <start>14/04/2017 1400</start>
+        <end>14/04/2017 1600</end>
+        <complete>false</complete>
+        <id>1490692412226</id>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Buy Gift For Alice</description>
+        <start>14/04/2017 1700</start>
+        <end>14/04/2017 1900</end>
+        <complete>false</complete>
+        <id>1490692515400</id>
+        <tagged>home</tagged>
+    </tasks>
+    <tasks>
+        <description>Write Paper</description>
+        <dueDate>14/04/2017 2309</dueDate>
+        <start>14/04/2017 2100</start>
+        <end>14/04/2017 2309</end>
+        <complete>false</complete>
+        <id>1490692567478</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Meet Professor</description>
+        <start>15/04/2017 0900</start>
+        <end>15/04/2017 1100</end>
+        <complete>false</complete>
+        <id>1490692631989</id>
+        <tagged>important</tagged>
+        <tagged>school</tagged>
+    </tasks>
+    <tasks>
+        <description>Job Interview</description>
+        <start>15/04/2017 1400</start>
+        <end>15/04/2017 1600</end>
+        <complete>false</complete>
+        <id>1490692672723</id>
+        <tagged>work</tagged>
+    </tasks>
+    <tasks>
+        <description>Have Dinner With Parents</description>
+        <start>15/04/2017 1800</start>
+        <end>15/04/2017 1900</end>
+        <complete>false</complete>
+        <id>1490692716578</id>
+        <tagged>home</tagged>
+    </tasks>
+    <tags>important</tags>
+    <tags>home</tags>
+    <tags>daily</tags>
+    <tags>school</tags>
+    <tags>fun</tags>
+    <tags>club</tags>
+    <tags>internship</tags>
+    <tags>holiday</tags>
+    <tags>hobby</tags>
+    <tags>work</tags>
+</tasklist>
