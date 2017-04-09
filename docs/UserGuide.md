@@ -74,9 +74,9 @@ Format: `ADD` task `ON` date/day <br />
 
 Sample Event:
 > Type the following command `ADD Stayover with Friends FROM 10/05/17 1400 TO 11/05/16 1800 CATEGORY Fun` into the command Box and press <kbd>Enter</kbd>
-> <img src="images/ProcrastiNomore_Before_Add_Event_Task.PNG" width="1000">
+> <img src="images/ProcrastiNomore_Before_Add_Event.PNG" width="1000">
 > The application will save the sample event in Events column 
-> <img src="images/ProcrastiNomore_After_Add_Event_Task.PNG" width="1000">
+> <img src="images/ProcrastiNomore_After_Add_Event.PNG" width="1000">
 
 #### 3.2.2. Deadlines
 
