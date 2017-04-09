@@ -261,7 +261,7 @@ following methods:
 _Figure 3.3.2 : Actions taken within `AddCommandParser`_
 
 
-2) `Delete Command` - It is able to delete a task using Index. This function can only work if the given index is valid. <br><br>Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+2) `Delete Command` - It is able to delete a task using index. This function can only work if the given index is valid. It calls `storeTaskManager()` and `deleteTask()` from `Model` when deleting the task. <br><br>Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.`storeTaskManager()` is a requirement for `undo` Command to work.<br><br> <img src="images/deleteCommand.PNG" width="800"><br>
 _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Command_
 
@@ -269,7 +269,7 @@ _Figure 3.3.3 : Interactions Inside the Logic Component for the `delete 1` Comma
 3) `Edit Command` - It is able to edit a task using Index.
 This function make use of the Optional class to update the task. It calls `storeTaskManager()` and `updateTask()` from the `Model` when editing the task. It also calls `updateFilteredTaskList()` from the `Model` to show the updated task list after editing.
 
-4) `Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list.
+4) `Done Command` - It is able to indicate a task to be completed and move it from the task list to the completed task list. `DoneCommand` calls `storeTaskManager()` and `completeTask()` from `Model` when it executes.
 
 5) `Find Command` - It is able to find a task with the specified name or date
 This function is flexible with dates by using the natty libraries. When `Find Command` is used, using natty, it will check if the 
